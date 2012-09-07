@@ -1,0 +1,34 @@
+<table>
+    <tr>
+        <td align="center" colspan="2">
+            <img src="{{ baseDir }}{{ headerImg }}" height="216px" width="344px"/>
+        </td>
+    </tr>
+    <tr><td align="center"><span>Select an instance to edit:</span></td></tr>
+    <tr><td align="center">
+        <table class="tableGrid">
+            <tr class="tableGrid">
+                <th class="tableGrid">Last Save Date</th>
+                <th class="tableGrid">Instance Name</th>
+                <th class="tableGrid">Version</th>
+                <th class="tableGrid">Finalized</th>
+                <th class="tableGrid"></th>
+            </tr>
+            {{#each instances}}
+                <tr class="tableGrid">
+                    <td class="tableGrid"><span>{{last_saved_timestamp}}</span></td>
+                    <td class="tableGrid">
+                        <button id="{{instance_id}}" class="whiteButton openInstance">{{instanceName}}</button>
+                    </td>
+                    <td class="tableGrid"><span>{{version}}</span></td>
+                    <td class="tableGrid"><span>{{saved_status}}</span></td>
+                    <td class="tableGrid">
+                        <button id="{{instance_id}}" class="whiteButton deleteInstance">delete</button>
+                    </td></tr>
+                </tr>
+            {{else}}
+                <span>Unexpected absence of records</span>
+            {{/each}}
+        </table>
+    </td></tr>
+</table>

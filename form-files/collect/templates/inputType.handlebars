@@ -1,0 +1,12 @@
+<ul>
+    <li><label>{{label}}</label></li>
+    <li><input type="text" value="{{value}}"
+        {{#if disabled}}
+            disabled="true"
+        {{/if}}
+        />
+        {{#if invalid}}
+            <p>invalid</p>
+        {{/if}}
+    </li>
+</ul>

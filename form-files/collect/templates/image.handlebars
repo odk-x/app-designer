@@ -1,0 +1,12 @@
+<ul>
+    <li><label for="{{name}}">{{label}}</label></li>
+    <li>
+        <input type="text" name="{{name}}" value="{{mediaPath}}" disabled="true" />
+    </li>
+    <li><button class="whiteButton">Take Picture</button></li>
+    <li><div class="mediaContainer">
+        {{#if uriValue}}
+            <img width="200" src="{{uriValue}}"></img>
+        {{/if}}
+    </div></li>
+</ul>

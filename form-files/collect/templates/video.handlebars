@@ -1,0 +1,13 @@
+<ul>
+    <li><label for="{{name}}">{{label}}</label></li>
+    <li>
+        <input type="text" name="{{name}}" value="{{mediaPath}}" disabled="true" />
+    </li>
+    <li><button class="whiteButton">Take Video</button></li>
+    <li><div class="mediaContainer">
+        {{#if uriValue}}
+            <video poster="{{videoPoster}}" src="{{uriValue}}" width="200" controls="controls" onclick="this.play()">
+            </video>
+        {{/if}}
+    </div></li>
+</ul>

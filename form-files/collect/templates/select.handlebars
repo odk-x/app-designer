@@ -1,0 +1,42 @@
+<form>
+    <label>{{label}}</label>
+    <ul>        
+        {{#each choices}}
+            <li>
+                <input
+                    {{#if ../selectOne}}
+                        type="radio"
+                    {{else}}
+                        type="checkbox"
+                    {{/if}}
+                    {{#if selected}}
+                        checked
+                    {{/if}}
+                    name="{{../name}}"
+                    value="{{value}}" />
+                {{label}}
+            </li>
+        {{/each}}
+        {{#if orOther}}
+            <li>
+                <input
+                    {{#if selectOne}}
+                        type="radio"
+                    {{else}}
+                        type="checkbox"
+                    {{/if}}
+                    {{#if other}}
+                        checked
+                    {{/if}}
+                    name="{{name}}"
+                    value="{{otherValue}}" />
+                <input
+                    name="{{name}}OtherValue"
+                    value="{{otherValue}}" 
+                    {{#unless other.selected}}
+                        disabled="true"
+                    {{/unless}} />
+            </li>
+        {{/if}}
+    </ul>
+</form>
