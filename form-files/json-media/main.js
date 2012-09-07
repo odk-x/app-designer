@@ -1,5 +1,5 @@
 requirejs.config({
-	baseUrl: '../collect/js',
+    baseUrl: '../collect/js',
 	paths: {
 		templates : '../templates',
 		},
@@ -39,11 +39,16 @@ requirejs.config({
         },
 		'templates/compiledTemplates': {
 			deps: ['handlebars'],
+		},
+		'collect': {
+		    deps: [],
+			exports: 'collect'
 		}
 	}
 });
+var collect; // = JavaInterface; // loaded by WebKit...
 
-requirejs(['opendatakit', 'database','parsequery'], function(opendatakit, database, parsequery) {
+requirejs(['opendatakit', 'collect', 'database','parsequery'], function(opendatakit, collect, database, parsequery) {
 	parsequery.parseQueryParameters('lgform', null, 
 		'en_us', 'Simple Test Form', function() {
 		
@@ -61,7 +66,7 @@ builder.buildSurvey(/* json start delimiter */{
         {
             "type": "goto", 
             "param": "test"
-        }, 
+        },
         {
             "prompts": [
                 {
@@ -90,13 +95,21 @@ builder.buildSurvey(/* json start delimiter */{
                     }
                 }
             ], 
-            "type": "x", 
-            "name": "asdf"
+            "type": "screen", 
+            "name": "testScreen"
         }, 
         {
             "type": "label", 
             "param": "test"
-        }, 
+        },
+        {
+            "name": "rep",
+            "type": "repeat", 
+            "param": "test", 
+            "label": {
+                "english": "Repeat"
+            }
+        },
         {
             "type": "audio", 
             "name": "aud", 

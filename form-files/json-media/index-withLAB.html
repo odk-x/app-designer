@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Collect</title>
+	<noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
+    <script type="text/javascript" src="../collect/js/LAB.src.js"></script>
+	<link rel="stylesheet" type="text/css" href="../collect/css/apple.css">
+	<link rel="stylesheet" type="text/css" href="../collect/css/odk-boilerplate.css">
+</head>
+<body id="jqt">
+<div id="base" class="survey-container">Javascript must be enabled. Requires WebKit or Chrome Browser.</div>
+<script type='text/javascript' defer="defer">//<![CDATA[
+//Load all the necessary JavaScript:
+var collect; // = JavaInterface; // loaded by WebKit...
+$LAB.
+script("../collect/js/zepto-1.0rc1-dt.js").
+wait().
+script("../collect/js/underscore.js").
+wait(function() {
+	$LAB.sandbox().
+queueScript("../collect/js/backbone.js").
+queueWait().
+queueScript("../collect/js/backbone-websql.js").
+queueWait().
+queueScript("../collect/js/formLoader.js").
+queueWait().
+queueScript("../collect/js/collect.js").
+queueWait().
+queueScript("../collect/js/handlebars.runtime.js").
+queueWait(function() {
+	$LAB.sandbox().
+queueScript("../collect/templates/compiledTemplates.js").
+queueWait(function() {
+	$LAB.sandbox().
+queueScript("../collect/js/prompts.js").
+queueScript("../collect/js/odk-boilerplate.js").
+queueWait(function(){
+//jQT = new $.jQTouch({});
+//drop down w/ 30+ entries
+//and radiobuttons?
+//and text entry
+
+//loadForm
+loadForm({
+    survey: [{
+        type: "opening",
+        name: "opening",
+        label: "opening page",
+        nextPromptName: "page1"
+    }, {
+        type: "calculate",
+        name: "greeting",
+        modelEvents: {'change' : 'evalute'},
+        formula: function(){
+            return 'Hello ' + dataValues.get('page1').get('value');
+        }
+    }, {
+        type: "text",
+        name: "page1",
+        label: "page1 Enter your name:",
+        nextPromptName: "bornCountry",
+        //validate:'{{page1}}==="2"'
+        validate: function() {
+            return true;
+        }
+    }, {
+        type: "dropdownSelect",
+        name: "bornCountry",
+        label: "Where were you born?",
+        nextPromptName: "bornState",
+        afterInitialize: function() {
+            var that = this;
+            var query = "select * from geo.countries where place='North America'";
+            var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query);
+            var syncQuery = $.ajax({
+                type: 'GET',
+                url: yql,
+                dataType: 'json',
+                data: {},
+                async: false
+            });
+            //At first I was using the responce property which apparently doesn't work on android.
+            that.choices = JSON.parse(syncQuery.responseText).query.results.place;
+        },
+        choices: ['red', 'green', 'blue']
+    }, {
+        type: "select",
+        name: "bornState",
+        label: "Where were you born?",
+        nextPromptName: "page3",
+        onView: function() {
+            var that = this;
+            var query = "select * from geo.states where place='" + dataValues.get('bornCountry').get('value') + "'";
+            var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query);
+            var syncQuery = $.ajax({
+                type: 'GET',
+                url: yql,
+                dataType: 'json',
+                data: {},
+                async: false
+            });
+            console.log(syncQuery);
+            that.choices = JSON.parse(syncQuery.responseText).query.results.place;
+        },
+        choices: ['red', 'green', 'blue']
+    }, {
+        type: "testWidget",
+        name: "page2",
+        label: "page2 Enter your name:",
+        nextPromptName: "page3"
+    }, {
+        type: "group",
+        name: "page3",
+        label: "I'm a group",
+
+        prompts: [{
+            type: "text",
+            name: "page4",
+            label: "Do you want to answer the next question?:",
+            isNo: function() {
+                return (this.model.get('value') !== 'yes');
+            },
+            disabled: function() {
+                var that = this;
+                currentScreen.prompts['page5'].model.on('change', function() {
+                    that.render();
+                });
+                return currentScreen.prompts['page5'].isNo();
+            },
+            nextPromptName: "page5"
+        }, {
+            type: "text",
+            name: "page5",
+            label: "Do you want to answer the previous question?:",
+            isNo: function() {
+                return (this.model.get('value') !== 'yes');
+            },
+            disabled: function() {
+                var that = this;
+                currentScreen.prompts['page4'].model.on('change', function() {
+                    that.render();
+                });
+                return currentScreen.prompts['page4'].isNo();
+            },
+        'default':
+            'yes',
+            //TODO: Change to non-reserved word.
+            nextPromptName: "page6"
+        }],
+        nextPromptName: "page6"
+    }, {
+        type: "text",
+        name: "page6",
+        label: "page6 Enter your name:",
+        nextPromptName: "page7"
+    }, {
+        type: "text",
+        name: "page199",
+        label: "page199 Enter your name:",
+        nextPromptName: "finalizer"
+    }, {
+        type: "text",
+        name: "finalizer",
+        label: "Final page",
+        nextPromptName: "finalizer"
+    }],
+    widgets: [{
+        type: "text",
+        name: "testWidget",
+        label: "Test widget"
+    }]
+});
+}).
+runQueue();
+}).
+runQueue();
+}).
+runQueue();
+});
+//]]>
+</script>
+</body>
+</html>

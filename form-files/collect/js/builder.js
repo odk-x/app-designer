@@ -47,7 +47,7 @@ return {
             
         });
         return initializedPrompts;
-	},
+    },
 	buildSurvey:function(surveyJson){
 		var that = this;
 		var settings = {
@@ -79,9 +79,17 @@ return {
 			column_types: column_types
 		};
         form.prompts = ([
-            {type:"opening", name:"_opening", label:"opening page"},
+            {
+                "type": "goto", 
+                "param": "begin"
+            },
 			{type:"instances", name:"_instances", label:"Saved Instances"},
 			{type:"json", name:"_json", label:"JSON formatted survey answers"},
+            {
+                "type": "label", 
+                "param": "begin"
+            },
+            {type:"opening", name:"_opening", label:"opening page"}
         ]).concat(form.prompts);
         
 		console.log('initializing');

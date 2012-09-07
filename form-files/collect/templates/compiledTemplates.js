@@ -282,6 +282,51 @@ templates['opening'] = template(function (Handlebars,depth0,helpers,partials,dat
   else { stack1 = depth0.advanceImg; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   buffer += escapeExpression(stack1) + "\" height=\"81px\" width=\"145px\"/>\n            </td>\n        </tr>\n        <tr>\n            <td align=\"left\">back to previous prompt</td>\n            <td align=\"right\">forward to next prompt</td>\n        </tr>\n        <tr>\n            <td align=\"center\" colspan=\"2\">\n                <button class=\"whiteButton editInstances\">Edit Saved Instances</button>\n            </td>\n        </tr>\n    </table>\n</div>";
   return buffer;});
+templates['repeat'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, foundHelper;
+  buffer += "\r\n                <tr class=\"tableGrid\">\r\n                    <td class=\"tableGrid\"><span>";
+  foundHelper = helpers.last_saved_timestamp;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.last_saved_timestamp; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</span></td>\r\n                    <td class=\"tableGrid\">\r\n                        <button id=\"";
+  foundHelper = helpers.instance_id;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.instance_id; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" class=\"whiteButton openInstance\">";
+  foundHelper = helpers.instanceName;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.instanceName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</button>\r\n                    </td>\r\n                    <td class=\"tableGrid\"><span>";
+  foundHelper = helpers.version;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.version; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</span></td>\r\n                    <td class=\"tableGrid\"><span>";
+  foundHelper = helpers.saved_status;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.saved_status; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</span></td>\r\n                    <td class=\"tableGrid\">\r\n                        <button id=\"";
+  foundHelper = helpers.instance_id;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.instance_id; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" class=\"whiteButton deleteInstance\">delete</button>\r\n                    </td></tr>\r\n                </tr>\r\n            ";
+  return buffer;}
+
+function program3(depth0,data) {
+  
+  
+  return "\r\n                <span>No instances</span>\r\n            ";}
+
+  buffer += "<table>\r\n    <tr><td align=\"center\">\r\n        <table class=\"tableGrid\">\r\n            <tr class=\"tableGrid\">\r\n                <th class=\"tableGrid\">Last Save Date</th>\r\n                <th class=\"tableGrid\">Instance Name</th>\r\n                <th class=\"tableGrid\">Version</th>\r\n                <th class=\"tableGrid\">Finalized</th>\r\n                <th class=\"tableGrid\"></th>\r\n            </tr>\r\n            ";
+  stack1 = depth0.instances;
+  stack1 = helpers.each.call(depth0, stack1, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n            <button class=\"whiteButton addInstance\">Add an instance</button>\r\n        </table>\r\n    </td></tr>\r\n</table>";
+  return buffer;});
 templates['screen'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
@@ -299,7 +344,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\r\n        <div class=\"info\">\r\n            <button class=\"prev-btn\">backward</button>\r\n            <span>Powered by OpenDataKit</span>\r\n            <button class=\"next-btn\">forward</button>\r\n        </div>\r\n    ";}
+  return "\r\n        <div class=\"info\">\r\n            <button class=\"whiteButton prev-btn\">backward</button>\r\n            <span>Powered by OpenDataKit</span>\r\n            <button class=\"whiteButton next-btn\">forward</button>\r\n        </div>\r\n    ";}
 
   buffer += "<div class=\"current\" data-role=\"page\">\r\n    ";
   stack1 = depth0.showHeader;

@@ -1,7 +1,7 @@
 'use strict';
 
-define(['database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
-function(database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
+define(['database','opendatakit','collect','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
+function(database, opendatakit, collect, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
 promptTypes.base = Backbone.View.extend({
     className: "current",
     type: "base",
@@ -247,6 +247,44 @@ promptTypes.instances = promptTypes.base.extend({
 		database.delete_all(opendatakit.getFormId(), $(evt.target).attr('id'), function() {
             that.onActivate(function(){that.render();});
 		});
+    }
+});
+promptTypes.repeat = promptTypes.base.extend({
+    type: "repeat",
+    valid: true,
+    template: Handlebars.templates.repeat,
+    events: {
+        "click .openInstance": "openInstance",
+        "click .deleteInstance": "deleteInstance",
+        "click .addInstance": "addInstance"
+    },
+    onActivate: function(readyToRenderCallback) {
+        var that = this;
+        var subsurveyType = this.param;
+        database.withDb(function(transaction) {
+            //TODO: Make statement to get all subsurveys with this survey as parent.
+            var ss = database.getAllFormInstancesStmt();
+            transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
+                that.renderContext.instances = [];
+                console.log('test');
+                for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
+                    that.renderContext.instances.push(result.rows.item(i));
+                }
+            });
+        }, function(error) {
+            console.log("populateInstanceList: failed");
+        }, function() {
+            readyToRenderCallback();
+        });
+    },
+    openInstance: function(evt) {
+        var instanceId = $(evt.target).attr('id');
+    },
+    deleteInstance: function(evt) {
+        var instanceId = $(evt.target).attr('id');
+    },
+    addInstance: function(evt) {
+        //TODO: Launch new instance of collect
     }
 });
 promptTypes.select = promptTypes.base.extend({
