@@ -2,6 +2,26 @@
 
 define(['database','opendatakit','collect','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
 function(database, opendatakit, collect, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
+
+Handlebars.registerHelper('localize', function(textOrLangMap) {
+    if(_.isUndefined(textOrLangMap)) {
+        return 'undefined';
+    }
+    if(_.isString(textOrLangMap)) {
+        return new Handlebars.SafeString(textOrLangMap);
+    }
+    var locale = opendatakit.getFormLocale();
+    if( locale in textOrLangMap ){
+        return new Handlebars.SafeString(textOrLangMap[locale]);
+    } else if( 'default' in textOrLangMap ){
+        return new Handlebars.SafeString(textOrLangMap['default']);
+    } else {
+        alert("Could not localize object. See console:");
+        console.error("Non localizable object:");
+        console.error(textOrLangMap);
+    }
+});
+
 promptTypes.base = Backbone.View.extend({
     className: "current",
     type: "base",

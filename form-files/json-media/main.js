@@ -75,7 +75,7 @@ builder.buildSurvey(/* json start delimiter */{
                     "type": "text", 
                     "param": null, 
                     "label": {
-                        "english": "Enter your name:"
+                        "en_us": "Enter your name:"
                     }
                 }, 
                 {
@@ -83,7 +83,7 @@ builder.buildSurvey(/* json start delimiter */{
                     "name": "age", 
                     "param": null, 
                     "label": {
-                        "english": "Enter your age:"
+                        "en_us": "Enter your age:"
                     }
                 }, 
                 {
@@ -91,7 +91,7 @@ builder.buildSurvey(/* json start delimiter */{
                     "type": "text", 
                     "param": null, 
                     "label": {
-                        "english": "Enter your gender:"
+                        "en_us": "Enter your gender:"
                     }
                 }
             ], 
@@ -107,7 +107,7 @@ builder.buildSurvey(/* json start delimiter */{
             "type": "repeat", 
             "param": "test", 
             "label": {
-                "english": "Repeat"
+                "en_us": "Repeat"
             }
         },
         {
