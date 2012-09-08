@@ -1,0 +1,15 @@
+<table>
+    <tr><td align="center">
+        <ol>
+            {{#each prompts}}
+                {{#unless hideInHierarchy}}
+                    <li>
+                        <a href="#{{name}}">{{localize label}}</a>
+                    </li>
+                {{/unless}}
+            {{else}}
+                <li><span>No prompts</span></li>
+            {{/each}}
+        </ol>
+    </td></tr>
+</table>

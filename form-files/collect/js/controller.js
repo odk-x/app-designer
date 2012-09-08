@@ -79,7 +79,7 @@ return {
                 return prompts[i];
             }
         }
-    	alert("Unable to find label: " + name);
+        alert("Unable to find label: " + name);
 		return null;
     },
     setPrompt: function(prompt, termList){
@@ -88,7 +88,7 @@ return {
         this.screenManager.setPrompt(prompt);
     },
 	hasPromptHistory: function() {
-		return (this.previousScreenNames.length != 0);
+		return (this.previousScreenNames.length !== 0);
 	},
 	clearPromptHistory: function() {
 		this.previousScreenNames.length = 0;

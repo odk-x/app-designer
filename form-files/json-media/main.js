@@ -1,5 +1,5 @@
 requirejs.config({
-	baseUrl: '../collect/js',
+    baseUrl: '../collect/js',
 	paths: {
 		templates : '../templates',
 		},
@@ -39,7 +39,6 @@ requirejs.config({
         },
 		'templates/compiledTemplates': {
 			deps: ['handlebars'],
-		}
 	}
 });
 
@@ -63,7 +62,7 @@ builder.buildSurvey(/* json start delimiter */
         {
             "type": "goto", 
             "param": "test"
-        }, 
+        },
         {
             "prompts": [
                 {
@@ -72,7 +71,7 @@ builder.buildSurvey(/* json start delimiter */
                     "type": "text", 
                     "param": null, 
                     "label": {
-                        "english": "Enter your name:"
+                        "en_us": "Enter your name:"
                     }
                 }, 
                 {
@@ -80,7 +79,7 @@ builder.buildSurvey(/* json start delimiter */
                     "name": "age", 
                     "param": null, 
                     "label": {
-                        "english": "Enter your age:"
+                        "en_us": "Enter your age:"
                     }
                 }, 
                 {
@@ -88,17 +87,32 @@ builder.buildSurvey(/* json start delimiter */
                     "type": "text", 
                     "param": null, 
                     "label": {
-                        "english": "Enter your gender:"
+                        "en_us": "Enter your gender:"
                     }
                 }
             ], 
-            "type": "x", 
-            "name": "grp"
+            "type": "screen", 
+            "name": "testScreen",
+            "label": "Screen group"
         }, 
         {
             "type": "label", 
             "param": "test"
-        }, 
+        },
+        {
+            "type": "select", 
+            "name": "sel",
+            "label": "Select genders:",
+            "param": "gender"
+        },
+        {
+            "name": "rep",
+            "type": "repeat", 
+            "param": "test", 
+            "label": {
+                "en_us": "Repeat"
+            }
+        },
         {
             "type": "audio", 
             "name": "aud", 

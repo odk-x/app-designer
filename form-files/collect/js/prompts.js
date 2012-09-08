@@ -2,6 +2,26 @@
 
 define(['database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
 function(database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
+
+Handlebars.registerHelper('localize', function(textOrLangMap) {
+    if(_.isUndefined(textOrLangMap)) {
+        return 'undefined';
+    }
+    if(_.isString(textOrLangMap)) {
+        return new Handlebars.SafeString(textOrLangMap);
+    }
+    var locale = opendatakit.getFormLocale();
+    if( locale in textOrLangMap ){
+        return new Handlebars.SafeString(textOrLangMap[locale]);
+    } else if( 'default' in textOrLangMap ){
+        return new Handlebars.SafeString(textOrLangMap['default']);
+    } else {
+        alert("Could not localize object. See console:");
+        console.error("Non localizable object:");
+        console.error(textOrLangMap);
+    }
+});
+
 promptTypes.base = Backbone.View.extend({
     className: "current",
     type: "base",
@@ -190,6 +210,7 @@ promptTypes.base = Backbone.View.extend({
 });
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
+    hideInHierarchy: true,
     template: Handlebars.templates.opening,
 	templatePath: "templates/opening.handlebars",
     events: {
@@ -208,6 +229,7 @@ promptTypes.opening = promptTypes.base.extend({
 });
 promptTypes.json = promptTypes.base.extend({
     type:"json",
+    hideInHierarchy: true,
 	valid: true,
 	templatePath: "templates/json.handlebars",
 	onActivate: function(readyToRenderCallback) {
@@ -224,6 +246,7 @@ promptTypes.json = promptTypes.base.extend({
 });
 promptTypes.finalize = promptTypes.base.extend({
     type:"finalize",
+    hideInHierarchy: true,
 	valid: true,
 	templatePath: "templates/finalize.handlebars",
 	events: {
@@ -255,6 +278,7 @@ promptTypes.finalize = promptTypes.base.extend({
 });
 promptTypes.instances = promptTypes.base.extend({
 	type:"instances",
+    hideInHierarchy: true,
 	valid: true,
     template: Handlebars.templates.instances,
 	templatePath: "templates/instances.handlebars",
@@ -289,6 +313,56 @@ promptTypes.instances = promptTypes.base.extend({
 		});
     }
 });
+promptTypes.hierarchy = promptTypes.base.extend({
+    type:"hierarchy",
+    hideInHierarchy: true,
+	valid: true,
+    template: Handlebars.templates.hierarchy,
+    events: {
+    },
+    onActivate: function(readyToRenderCallback) {
+        this.renderContext.prompts = controller.prompts;
+        readyToRenderCallback({showHeader: false, showFooter: false});
+    }
+});
+promptTypes.repeat = promptTypes.base.extend({
+    type: "repeat",
+    valid: true,
+    template: Handlebars.templates.repeat,
+    events: {
+        "click .openInstance": "openInstance",
+        "click .deleteInstance": "deleteInstance",
+        "click .addInstance": "addInstance"
+    },
+    onActivate: function(readyToRenderCallback) {
+        var that = this;
+        var subsurveyType = this.param;
+        database.withDb(function(transaction) {
+            //TODO: Make statement to get all subsurveys with this survey as parent.
+            var ss = database.getAllFormInstancesStmt();
+            transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
+                that.renderContext.instances = [];
+                console.log('test');
+                for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
+                    that.renderContext.instances.push(result.rows.item(i));
+                }
+            });
+        }, function(error) {
+            console.log("populateInstanceList: failed");
+        }, function() {
+            readyToRenderCallback();
+        });
+    },
+    openInstance: function(evt) {
+        var instanceId = $(evt.target).attr('id');
+    },
+    deleteInstance: function(evt) {
+        var instanceId = $(evt.target).attr('id');
+    },
+    addInstance: function(evt) {
+        //TODO: Launch new instance of collect
+    }
+});
 promptTypes.select = promptTypes.base.extend({
     type: "select",
     template: Handlebars.templates.select,
@@ -298,39 +372,33 @@ promptTypes.select = promptTypes.base.extend({
     },
     modification: function(evt) {
         console.log("select modification");
-        this.model.set('value', this.$('form').serializeArray());
+        console.log(this.$('form').serializeArray());
+        var renderContext = this.renderContext;
+        renderContext.value = this.$('form').serializeArray();
+        renderContext.choices = _.map(renderContext.choices, function(choice) {
+            var matchingValue = _.find(renderContext.value, function(value){
+                return choice.name === value.name;
+            });
+            if(matchingValue){
+                return _.extend(choice, matchingValue);
+            }
+            delete choice.value
+            return choice;
+        })
         this.render();
     },
-    render: function() {
-        var that = this;
-        var value = this.model.get('value');
-        var selectedChoices = _.pluck(_.filter(value, function(item) {
-            return item.name === that.name;
-        }), 'value');
-        var context = {
-            name: this.name,
-            label: this.label,
-            selectOne: false,
-            choices: _.map(this.choices, function(choice) {
-                if (_.isString(choice)) {
-                    choice = {
-                        label: choice,
-                        value: choice
-                    };
-                }
-                else {
-                    if (!('label' in choice)) {
-                        choice.label = choice.name;
-                    }
-                }
-                choice.value = choice.name;
-                return $.extend({
-                    selected: _.include(selectedChoices, choice.name)
-                }, choice);
-            })
-        };
-        this.$el.html(this.template(context));
-        return this;
+    onActivate: function(readyToRenderCallback) {
+        var renderContext = this.renderContext;
+        if(this.param in this.form.choices){
+            renderContext.choices = this.form.choices[this.param];
+        }
+        readyToRenderCallback();
+        /*
+        this.getValue(function(value) {
+            renderContext.value = value;
+            readyToRenderCallback();
+        });
+        */
     }
 });
 promptTypes.dropdownSelect = promptTypes.base.extend({
@@ -582,9 +650,13 @@ promptTypes.group = promptTypes.base.extend({
 });
 promptTypes.calculate = promptTypes.base.extend({
     type: "calculate",
+    hideInHierarchy: true,
     isInitializeComplete: function() {
 		return true;
 	},
+    onActivate: function(readyToRenderCallback){
+        controller.gotoNextScreen();
+    }
 	evaluate: function() {
         this.model.set('value', this.formula());
     }
@@ -600,6 +672,7 @@ promptTypes.label = promptTypes.base.extend({
 });
 promptTypes.goto = promptTypes.base.extend({
     type: "goto",
+        hideInHierarchy: true,
 	isInitializeComplete: function() {
 		return true;
 	},
