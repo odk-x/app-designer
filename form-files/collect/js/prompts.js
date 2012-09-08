@@ -187,6 +187,7 @@ promptTypes.base = Backbone.View.extend({
 });
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
+    hideInHierarchy: true,
     template: Handlebars.templates.opening,
     events: {
         "click .editInstances": "editInstances"
@@ -203,6 +204,7 @@ promptTypes.opening = promptTypes.base.extend({
 });
 promptTypes.json = promptTypes.base.extend({
     type:"json",
+    hideInHierarchy: true,
 	valid: true,
 	render: function(){
 		var that = this;
@@ -216,6 +218,7 @@ promptTypes.json = promptTypes.base.extend({
 });
 promptTypes.instances = promptTypes.base.extend({
 	type:"instances",
+    hideInHierarchy: true,
 	valid: true,
     template: Handlebars.templates.instances,
     events: {
@@ -247,6 +250,18 @@ promptTypes.instances = promptTypes.base.extend({
 		database.delete_all(opendatakit.getFormId(), $(evt.target).attr('id'), function() {
             that.onActivate(function(){that.render();});
 		});
+    }
+});
+promptTypes.hierarchy = promptTypes.base.extend({
+    type:"hierarchy",
+    hideInHierarchy: true,
+	valid: true,
+    template: Handlebars.templates.hierarchy,
+    events: {
+    },
+    onActivate: function(readyToRenderCallback) {
+        this.renderContext.prompts = controller.prompts;
+        readyToRenderCallback({showHeader: false, showFooter: false});
     }
 });
 promptTypes.repeat = promptTypes.base.extend({
@@ -566,6 +581,7 @@ promptTypes.group = promptTypes.base.extend({
 });
 promptTypes.calculate = promptTypes.base.extend({
     type: "calculate",
+    hideInHierarchy: true,
     evaluate: function() {
         this.model.set('value', this.formula());
     }
@@ -578,6 +594,7 @@ promptTypes.label = promptTypes.base.extend({
 });
 promptTypes.goto = promptTypes.base.extend({
     type: "goto",
+    hideInHierarchy: true,
     onActivate: function() {
         controller.gotoLabel(this.param);
     }

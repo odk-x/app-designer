@@ -91,6 +91,10 @@ return {
             },
             {type:"opening", name:"_opening", label:"opening page"}
         ]).concat(form.prompts);
+        form.prompts.push({
+            "type": "hierarchy",
+            name: "_hierarchy"
+        });
         
 		console.log('initializing');
 		form.initialize();
