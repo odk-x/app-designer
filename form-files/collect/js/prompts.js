@@ -330,39 +330,33 @@ promptTypes.select = promptTypes.base.extend({
     },
     modification: function(evt) {
         console.log("select modification");
-        this.model.set('value', this.$('form').serializeArray());
+        console.log(this.$('form').serializeArray());
+        var renderContext = this.renderContext;
+        renderContext.value = this.$('form').serializeArray();
+        renderContext.choices = _.map(renderContext.choices, function(choice) {
+            var matchingValue = _.find(renderContext.value, function(value){
+                return choice.name === value.name;
+            });
+            if(matchingValue){
+                return _.extend(choice, matchingValue);
+            }
+            delete choice.value
+            return choice;
+        })
         this.render();
     },
-    render: function() {
-        var that = this;
-        var value = this.model.get('value');
-        var selectedChoices = _.pluck(_.filter(value, function(item) {
-            return item.name === that.name;
-        }), 'value');
-        var context = {
-            name: this.name,
-            label: this.label,
-            selectOne: false,
-            choices: _.map(this.choices, function(choice) {
-                if (_.isString(choice)) {
-                    choice = {
-                        label: choice,
-                        value: choice
-                    };
-                }
-                else {
-                    if (!('label' in choice)) {
-                        choice.label = choice.name;
-                    }
-                }
-                choice.value = choice.name;
-                return $.extend({
-                    selected: _.include(selectedChoices, choice.name)
-                }, choice);
-            })
-        };
-        this.$el.html(this.template(context));
-        return this;
+    onActivate: function(readyToRenderCallback) {
+        var renderContext = this.renderContext;
+        if(this.param in this.form.choices){
+            renderContext.choices = this.form.choices[this.param];
+        }
+        readyToRenderCallback();
+        /*
+        this.getValue(function(value) {
+            renderContext.value = value;
+            readyToRenderCallback();
+        });
+        */
     }
 });
 promptTypes.dropdownSelect = promptTypes.base.extend({

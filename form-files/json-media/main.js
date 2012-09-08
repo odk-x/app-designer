@@ -96,11 +96,18 @@ builder.buildSurvey(/* json start delimiter */{
                 }
             ], 
             "type": "screen", 
-            "name": "testScreen"
+            "name": "testScreen",
+            "label": "Screen group"
         }, 
         {
             "type": "label", 
             "param": "test"
+        },
+        {
+            "type": "select", 
+            "name": "sel",
+            "label": "Select genders:",
+            "param": "gender"
         },
         {
             "name": "rep",

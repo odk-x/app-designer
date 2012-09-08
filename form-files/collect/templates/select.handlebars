@@ -1,5 +1,5 @@
 <form>
-    <label>{{label}}</label>
+    <label>{{localize label}}</label>
     <ul>        
         {{#each choices}}
             <li>
@@ -9,12 +9,12 @@
                     {{else}}
                         type="checkbox"
                     {{/if}}
-                    {{#if selected}}
+                    {{#if value}}
                         checked
                     {{/if}}
-                    name="{{../name}}"
-                    value="{{value}}" />
-                {{label}}
+                    name="{{name}}"
+                    value="x" />
+                {{localize label}}
             </li>
         {{/each}}
         {{#if orOther}}

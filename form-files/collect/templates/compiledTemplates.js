@@ -396,7 +396,7 @@ function program3(depth0,data) {
   return buffer;});
 templates['select'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, foundHelper, self=this, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, foundHelper, self=this, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data,depth1) {
   
@@ -406,20 +406,17 @@ function program1(depth0,data,depth1) {
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n                    ";
-  stack1 = depth0.selected;
+  stack1 = depth0.value;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(6, program6, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n                    name=\"";
-  stack1 = depth1.name;
-  stack1 = typeof stack1 === functionType ? stack1() : stack1;
-  buffer += escapeExpression(stack1) + "\"\r\n                    value=\"";
-  foundHelper = helpers.value;
+  foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.value; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\" />\r\n                ";
-  foundHelper = helpers.label;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.label; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\"\r\n                    value=\"x\" />\r\n                ";
+  stack1 = depth0.label;
+  foundHelper = helpers.localize;
+  stack1 = foundHelper ? foundHelper.call(depth0, stack1, {hash:{}}) : helperMissing.call(depth0, "localize", stack1, {hash:{}});
   buffer += escapeExpression(stack1) + "\r\n            </li>\r\n        ";
   return buffer;}
 function program2(depth0,data) {
@@ -492,9 +489,9 @@ function program15(depth0,data) {
   return "\r\n                        disabled=\"true\"\r\n                    ";}
 
   buffer += "<form>\r\n    <label>";
-  foundHelper = helpers.label;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.label; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  stack1 = depth0.label;
+  foundHelper = helpers.localize;
+  stack1 = foundHelper ? foundHelper.call(depth0, stack1, {hash:{}}) : helperMissing.call(depth0, "localize", stack1, {hash:{}});
   buffer += escapeExpression(stack1) + "</label>\r\n    <ul>        \r\n        ";
   stack1 = depth0.choices;
   stack1 = helpers.each.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0)});
