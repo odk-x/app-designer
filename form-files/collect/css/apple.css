@@ -1302,7 +1302,6 @@ body {
   z-index: 10;
   position: relative;
   padding: 10px;
-  height: 44px;
 }
 /* line 52, ../scss/include/_skeleton.scss */
 #jqt .toolbar > h1 {
@@ -1434,7 +1433,7 @@ body {
   text-shadow: #1a63c5 0 -1px 0;
 }
 /* line 170, ../scss/include/_skeleton.scss */
-#jqt .whiteButton, #jqt .grayButton, #jqt .redButton, #jqt .blueButton, #jqt .greenButton {
+#jqt .whiteButton, #jqt .grayButton, #jqt .redButton, #jqt .blueButton, #jqt .greenButton #jqt.hiddenButton {
   display: block;
   font-size: 20px;
   font-weight: bold;
@@ -1466,6 +1465,19 @@ body {
   background-image: linear-gradient(top, #ffffff, #fbfbfb 50%, #eeeeee 51%, #e1e1e1);
   color: #151515;
   text-shadow: white 0 1px 0;
+}
+#jqt .hiddenButton {
+  visibility: hidden;
+}
+/* line 191, ../scss/include/_skeleton.scss */
+#jqt .whiteButton:disabled {
+  background-image: none;
+  background-color: #444444;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6a6a6a), color-stop(50%, #515151), color-stop(51%, #444444), color-stop(100%, #373737));
+  background-image: -webkit-linear-gradient(top, #6a6a6a, #515151 50%, #444444 51%, #373737);
+  background-image: linear-gradient(top, #6a6a6a, #515151 50%, #444444 51%, #373737);
+  color: white;
+  text-shadow: #2b2b2b 0 -1px 0;
 }
 /* line 195, ../scss/include/_skeleton.scss */
 #jqt .grayButton {
@@ -1624,7 +1636,7 @@ body {
   text-shadow: #e8ebee 0 1px 0;
   background: transparent url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
   border: 0;
-  font: normal 17px "Helvetica Neue", Helvetica;
+  font: normal 20px "Helvetica Neue", Helvetica;
   padding: 0;
   display: inline-block;
   margin-left: 0px;

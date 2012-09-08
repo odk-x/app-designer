@@ -1,13 +1,24 @@
-<div class="current" data-role="page">
+<div class="current {{#if enableForwardNavigation}}swipeForwardEnabled{{/if}} {{#if enableBackNavigation}}swipeBackEnabled{{/if}}">
     {{#if showHeader}}
-        <div class="toolbar">{{name}}</div>
+    <div class="toolbar">{{name}}</div>
     {{/if}}
     <div class="scroll"></div>
     {{#if showFooter}}
-        <div class="info">
-            <button class="whiteButton prev-btn">backward</button>
-            <span>Powered by OpenDataKit</span>
-            <button class="whiteButton next-btn">forward</button>
-        </div>
+    <div class="info">
+		<table class="tableEven">
+		<tr>
+		{{#if enableBackNavigation}}
+        <td align="left"><button class="whiteButton prev-btn">backward</button></td>
+		{{else}}
+        <td align="left"><button class="hiddenButton">backward</button></td>
+		{{/if}}
+		<td align="center"><span>Powered by OpenDataKit</span></td>
+		{{#if enableForwardNavigation}}
+		<td align="right"><button class="whiteButton next-btn">forward</button></td>
+		{{else}}
+        <td align="right"><button class="hiddenButton">forward</button></td>
+		{{/if}}
+		</td>
+		</table>
     {{/if}}
 </div>

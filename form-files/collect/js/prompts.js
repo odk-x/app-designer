@@ -22,6 +22,9 @@ promptTypes.base = Backbone.View.extend({
             });
         }
     },
+	isInitializeComplete: function() {
+		return (this.template != null);
+	},
     initializeRenderContext: function() {
         //We don't want to modify the top level render context.
         this.renderContext = Object.create(this.renderContext);
@@ -101,7 +104,7 @@ promptTypes.base = Backbone.View.extend({
     },
     template: Handlebars.templates.text, //Make "Override me" template
     render: function() {
-        console.log(this.renderContext);
+        console.log(this.renderContext); 
         this.$el.html(this.template(this.renderContext));
         return this;
     },
@@ -188,6 +191,7 @@ promptTypes.base = Backbone.View.extend({
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
     template: Handlebars.templates.opening,
+	templatePath: "templates/opening.handlebars",
     events: {
         "click .editInstances": "editInstances"
     },
@@ -196,6 +200,7 @@ promptTypes.opening = promptTypes.base.extend({
     },
     renderContext: {
         baseDir: collect.baseDir,
+		formName: opendatakit.getFormName(),
         headerImg: 'img/form_logo.png',
         backupImg: 'img/backup.png',
         advanceImg: 'img/advance.png'
@@ -204,20 +209,55 @@ promptTypes.opening = promptTypes.base.extend({
 promptTypes.json = promptTypes.base.extend({
     type:"json",
 	valid: true,
-	render: function(){
+	templatePath: "templates/json.handlebars",
+	onActivate: function(readyToRenderCallback) {
 		var that = this;
 		database.getAllData(function(tlo) {
-            var $container = $('<pre>JSON: </pre>');
-            $container.append(JSON.stringify(tlo));
-			that.$el.html($container);
+			if ( window.JSON != null ) {
+				that.renderContext.value = window.JSON.stringify(tlo);
+			} else {
+				that.renderContext.value = "JSON Unavailable";
+			}
+			readyToRenderCallback({enableNavigation: false});
 		});
-		return this;
+	}
+});
+promptTypes.finalize = promptTypes.base.extend({
+    type:"finalize",
+	valid: true,
+	templatePath: "templates/finalize.handlebars",
+	events: {
+		"click .save-btn": "saveIncomplete",
+		"click .final-btn": "saveFinal"
+	},
+    renderContext: {
+        baseDir: collect.baseDir,
+		formName: opendatakit.getFormName(),
+        headerImg: 'img/form_logo.png',
+    },
+	onActivate: function(readyToRenderCallback) {
+		var that = this;
+		database.getAllData(function(tlo) {
+			readyToRenderCallback({enableForwardNavigation: false});
+		});
+	},
+	saveIncomplete: function(evt) {
+		database.save_all_changes(false, function() {
+			// TODO: call up to Collect to report completion
+		});
+	},
+	saveFinal: function(evt) {
+		database.save_all_changes(true, function() {
+			// TODO: call up to Collect to report completion
+		});
+		
 	}
 });
 promptTypes.instances = promptTypes.base.extend({
 	type:"instances",
 	valid: true,
     template: Handlebars.templates.instances,
+	templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
         "click .deleteInstance": "deleteInstance"
@@ -236,7 +276,7 @@ promptTypes.instances = promptTypes.base.extend({
         }, function(error) {
             console.log("populateInstanceList: failed");
         }, function() {
-            readyToRenderCallback({showHeader: false});
+            readyToRenderCallback({showHeader: false, enableNavigation:false});
         });
     },
     openInstance: function(evt) {
@@ -252,6 +292,7 @@ promptTypes.instances = promptTypes.base.extend({
 promptTypes.select = promptTypes.base.extend({
     type: "select",
     template: Handlebars.templates.select,
+	templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification"
     },
@@ -295,6 +336,7 @@ promptTypes.select = promptTypes.base.extend({
 promptTypes.dropdownSelect = promptTypes.base.extend({
     type: "dropdownSelect",
     template: Handlebars.templates.dropdownSelect,
+	templatePath: "templates/dropdownSelect.handlebars",
     events: {
         "change select": "modification"
     },
@@ -335,6 +377,7 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     type: "text",
     datatype: "text",
     template: Handlebars.templates.inputType,
+	templatePath: "templates/inputType.handlebars",
     events: {
         "change input": "modification"
     },
@@ -430,6 +473,7 @@ promptTypes.image = promptTypes.media.extend({
     datatype: "image",
     label: 'Take your photo:',
     template: Handlebars.templates.image,
+	templatePath: "templates/image.handlebars",
     onActivate: function(readyToRenderCallback) {
         var that = this;
         this.getValue(function(value) {
@@ -458,6 +502,7 @@ promptTypes.video = promptTypes.media.extend({
     type: "video",
     label: 'Take your video:',
     template: Handlebars.templates.video,
+	templatePath: "templates/video.handlebars",
     onActivate: function(readyToRenderCallback) {
         var that = this;
         this.getValue(function(value) {
@@ -487,6 +532,7 @@ promptTypes.audio = promptTypes.base.extend({
     type: "audio",
     datatype: "audio",
     template: Handlebars.templates.audio,
+	templatePath: "templates/audio.handlebars",
     label: 'Take your audio:',
     capture: function() {
         if (collect.getPlatformInfo !== 'Android') {
@@ -514,6 +560,14 @@ promptTypes.group = promptTypes.base.extend({
         this.initializePropertyTypes();
         console.log('group test');
     },
+	isInitializeComplete: function() {
+		var i;
+		for ( i = 0 ; i < prompts.length; ++i ) {
+			var p = prompts[i];
+			if ( !p.isInitializeComplete() ) return false;
+		}
+		return true;
+	},
     render: function(){
         this.$el.html('<div class="prompts"></div>');
         var $prompts = this.$('.prompts');
@@ -528,19 +582,28 @@ promptTypes.group = promptTypes.base.extend({
 });
 promptTypes.calculate = promptTypes.base.extend({
     type: "calculate",
-    evaluate: function() {
+    isInitializeComplete: function() {
+		return true;
+	},
+	evaluate: function() {
         this.model.set('value', this.formula());
     }
 });
 promptTypes.label = promptTypes.base.extend({
     type: "label",
-    onActivate: function(){
+	isInitializeComplete: function() {
+		return true;
+	},
+    onActivate: function(readyToRenderCallback){
         controller.gotoNextScreen();
     }
 });
 promptTypes.goto = promptTypes.base.extend({
     type: "goto",
-    onActivate: function() {
+	isInitializeComplete: function() {
+		return true;
+	},
+    onActivate: function(readyToRenderCallback) {
         controller.gotoLabel(this.param);
     }
 });

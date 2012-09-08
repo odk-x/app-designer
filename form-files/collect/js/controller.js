@@ -18,26 +18,14 @@ return {
 		var screenManager = this.screenManager;
 		screenManager.validate(true, {
 			success: function() {
-				screenManager.computePreviousPrompt(function(previousPrompt){
-					if (previousPrompt === undefined ) {
-						alert(screenManager.noPreviousPageMessage);
-						console.log("gotoPreviousPrompt: preventPreviousPage ms: " + (+new Date()) + " page: " + screenManager.getName());
-						return;
-					} else if (previousPrompt === null) {
-						if (that.previousScreenNames.length === 0) {
-							alert(screenManager.noPreviousPageMessage);
-							console.log("gotoPreviousPrompt: noPreviousPage ms: " + (+new Date()) + " page: " + screenManager.getName());
-							return;
-						} else {
-							console.log("gotoPreviousPrompt: poppreviousScreenNames ms: " + (+new Date()) + " page: " + screenManager.getName());
-							that.setPrompt(that.getPromptByName(that.previousScreenNames.pop()), []);
-						}
-					} else {
-						console.log("gotoPreviousPrompt: gotoPreviousPrompt ms: " + (+new Date()) + " page: " + screenManager.getName());
-						// TODO: confirm: do not remember current prompt if we are going backward.
-						that.gotoPrompt(previousPrompt, [], false);
-					}
-				});
+				if (!that.hasPromptHistory()) {
+					alert("I've forgotten what the previous page was!");
+					console.log("gotoPreviousPrompt: noPreviousPage ms: " + (+new Date()) + " page: " + screenManager.getName());
+					return;
+				} else {
+					console.log("gotoPreviousPrompt: poppreviousScreenNames ms: " + (+new Date()) + " page: " + screenManager.getName());
+					that.setPrompt(that.getPromptByName(that.previousScreenNames.pop()), []);
+				}
 			},
 			failure: function(missingValue) {
                 console.log("gotoPreviousPrompt: validationFailed ms: " + (+new Date()) + " page: " + screenManager.getName());
@@ -109,7 +97,11 @@ return {
         var that = this;
         that.screenManager.beforeMove(function(){
             if (!omitPushOnReturnStack) {
-                that.previousScreenNames.push(that.screenManager.getName());
+				// push this prompt onto the return stack only if it has a name...
+				var name = that.screenManager.getName();
+				if ( name != null ) {
+					that.previousScreenNames.push(name);
+				}
             }
             that.setPrompt(prompt, termList);
         });

@@ -1,13 +1,21 @@
-define(['opendatakit','controller','zepto','handlebars','templates/compiledTemplates','text'], function(opendatakit, controller, $, Handlebars) {
+// depends upon -- opendatakit, Backbone, $, Handlebars
+//
+// plus all compiled templates being loaded (which requires 'text' module in requirejs)
+//
+// plus 'controller' -- to avoid a circular dependency, 'controller' is passed 
+// in during initialize() and stored in a member variable.
+//
+define(['opendatakit','backbone','zepto','handlebars','templates/compiledTemplates','text'], 
+function(opendatakit, Backbone, $, Handlebars) {
 return Backbone.View.extend({
     el: "body",
     className: "current",
     instance_id:123,
-    template: function(){
+    incompleteTemplate: function(){
         var that = this;
-        setTimeout(function(){that.render();}, 1000);
-        return Handlebars.compile("please wait...");
-    },
+        setTimeout(function(){that.render();}, 100);
+        return Handlebars.compile('<div class="current hvmiddle"><div class="hvcenter">Please wait...</div></div>');
+    },	
     renderContext:{},
     initialize: function(controller){
         this.controller = controller;
@@ -28,12 +36,30 @@ return Backbone.View.extend({
         this.prompt = prompt;
         this.renderContext = {
             showHeader: true,
-            showFooter: true
+            showFooter: true,
+			// enableNavigation -- defaults to true; false to disable everything...
+			// enableForwardNavigation -- forward swipe and button
+			// enableBackNavigation -- backward swipe and button
+			//
+			// the absence of page history disabled backward swipe and button.
         };
         this.prompt.onActivate(function(renderContext){
             if(renderContext){
                 $.extend(that.renderContext, renderContext);
             }
+			// work through setting the forward/backward enable flags
+			if ( that.renderContext.enableNavigation === undefined ) {
+				that.renderContext.enableNavigation = true;
+			}
+			if ( that.renderContext.enableForwardNavigation === undefined ) {
+				that.renderContext.enableForwardNavigation = 
+					that.renderContext.enableNavigation;
+			}
+			if ( that.renderContext.enableBackNavigation === undefined ) {
+				that.renderContext.enableBackNavigation = 
+					that.renderContext.enableNavigation &&
+					that.controller.hasPromptHistory();
+			}
             that.render();
         });
     },
@@ -64,17 +90,21 @@ return Backbone.View.extend({
     events: {
         "click .next-btn": "gotoNextScreen",
         "click .prev-btn": "gotoPreviousScreen",
-		"swipeLeft .current": "gotoNextScreen",
-		"swipeRight .current": "gotoPreviousScreen"
+		"swipeLeft .swipeForwardEnabled": "gotoNextScreen",
+		"swipeRight .swipeBackEnabled": "gotoPreviousScreen"
     },
     render: function() {
-        this.$el.html(this.template(this.renderContext));
-		var $contentArea = this.$('.scroll');
-        var $promptEl = $('<div>');
-		$contentArea.append($promptEl);
-		this.prompt.setElement($promptEl.get(0));
-		this.prompt.render();
-        return this;
+		if ( this.prompt.isInitializeComplete() && this.template != null ) {
+			this.$el.html(this.template(this.renderContext));
+			var $contentArea = this.$('.scroll');
+			var $promptEl = $('<div>');
+			$contentArea.append($promptEl);
+			this.prompt.setElement($promptEl.get(0));
+			this.prompt.render();
+			return this;
+		} else {
+			this.$el.html(this.incompleteTemplate(this.renderContext));
+		}
     },
     validate: function(flag, context){
         console.log(context);
@@ -82,9 +112,6 @@ return Backbone.View.extend({
     },
     computeNextPrompt: function(continuation){
         this.prompt.computeNextPrompt(continuation);
-    },
-    computePreviousPrompt: function(continuation){
-        continuation();
     },
     beforeMove: function(continuation) {
         continuation();

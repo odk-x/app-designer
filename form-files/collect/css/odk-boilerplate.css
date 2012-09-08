@@ -6,22 +6,34 @@
 	text-align: right;
 	padding-right: 10em;
 }
-.info {
-    margin-left: auto;
-    margin-right: auto;
-    width: 20em;
+#jqt .noflow {
+	float: none;
 }
-.current {
-    background: white;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30em;
+#jqt .flowing {
+	float: right;
 }
-.scroll {
-    min-height: 20em;
+#jqt .tableGrid {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 30px;
 }
-label {
-    font-weight: bold;
-    padding: 1em;
-    display: block;
+#jqt .tableGrid  > th {
+	text-align: center;
+	font-weight: bold;
+}
+#jqt .tableEven {
+	width: 100%;
+}
+#jqt .tableEven td{
+	width: 33%;
+}
+#jqt .hvmiddle {
+	float: none;
+	display: table;
+	height: 100%;
+}
+#jqt .hvcenter {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
 }

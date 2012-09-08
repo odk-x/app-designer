@@ -2,7 +2,7 @@
 // depends upon: controller, zepto, promptTypes
 define(['controller','zepto','promptTypes'],function(controller, $, promptTypes) {
 return {
-    initializePrompts: function(form, prompts) {
+    initializePrompts: function(form, continuation) {
         function findObjectWithPair(objectArray, searchKey, searchValue) {
             for (obby in objectArray) {
                 if (searchKey in obby) {
@@ -14,7 +14,7 @@ return {
             return null;
         }
         var initializedPrompts = [];
-        $.each(prompts, function(idx, item) {
+        $.each(form.prompts, function(idx, item) {
             var PromptType;
     
             if (!('type' in item)) {
@@ -41,14 +41,13 @@ return {
                 promptIdx: idx
             }, item));
             
-            initializedPrompts.push(new PromptClass({
-                model: {}//TODO: Do we want to keep track of the model on the prompts?
-            }));
+            initializedPrompts.push(new PromptClass());
             
         });
-        return initializedPrompts;
+		form.prompts = initializedPrompts;
+        continuation();
 	},
-	buildSurvey:function(surveyJson){
+	buildSurvey:function(surveyJson, continuation){
 		var that = this;
 		var settings = {
 		};
@@ -70,9 +69,6 @@ return {
 			$.extend(column_types, surveyJson.column_types);
 		}
 		var form = {
-			initialize: function(){
-				this.prompts = that.initializePrompts(this, this.prompts);
-			},
 			prompts: surveyJson.survey,
 			settings: settings,
 			widgets: widgets,
@@ -80,15 +76,20 @@ return {
 		};
         form.prompts = ([
             {type:"opening", name:"_opening", label:"opening page"},
+			{type:"goto", param:"_first"},
 			{type:"instances", name:"_instances", label:"Saved Instances"},
+			{type:"label", param:"_output"},
 			{type:"json", name:"_json", label:"JSON formatted survey answers"},
-        ]).concat(form.prompts);
+			{type:"label", param:"_first"},
+        ]).concat(form.prompts).concat(
+			[{type:"finalize", name:"_finalize", label:"Save Form"}]);
         
 		console.log('initializing');
-		form.initialize();
-		console.log('starting');
-		controller.prompts = form.prompts;
-		return form;
+		this.initializePrompts(form, function() {
+			controller.prompts = form.prompts;
+			console.log('starting');
+			continuation();
+		});
 	}
 };
 });
