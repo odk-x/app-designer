@@ -1361,54 +1361,54 @@ window.Zepto = Zepto
   }
 
   function dumpTouchEvent(type, event){
-	var i
-	var idxE = 0
-	while (event) {
-		console.log(type + " event nesting[" + idxE + "]...")
-		if (event.touches) {
-			for (i = 0 ; i < event.touches.length ; ++i) {
-				console.log(type + " touches[" + i + "] X: " +
-					event.touches[i].pageX + " Y: " +
-					event.touches[i].pageY )
-			}
-		}
-		if (event.changedTouches) {
-			for (i = 0 ; i < event.changedTouches.length ; ++i) {
-				console.log(type + " changedTouches[" + i + "] X: " +
-					event.changedTouches[i].pageX + " Y: " +
-					event.changedTouches[i].pageY )
-			}
-		}
-		if (event.targetTouches) {
-			for (i = 0 ; i < event.targetTouches.length ; ++i) {
-				console.log(type + " targetTouches[" + i + "] X: " +
-					event.targetTouches[i].pageX + " Y: " +
-					event.targetTouches[i].pageY )
-			}
-		}
-		event = event.originalEvent
-		idxE++
-	}
+    var i
+    var idxE = 0
+    while (event) {
+        console.log(type + " event nesting[" + idxE + "]...")
+        if (event.touches) {
+            for (i = 0 ; i < event.touches.length ; ++i) {
+                console.log(type + " touches[" + i + "] X: " +
+                    event.touches[i].pageX + " Y: " +
+                    event.touches[i].pageY )
+            }
+        }
+        if (event.changedTouches) {
+            for (i = 0 ; i < event.changedTouches.length ; ++i) {
+                console.log(type + " changedTouches[" + i + "] X: " +
+                    event.changedTouches[i].pageX + " Y: " +
+                    event.changedTouches[i].pageY )
+            }
+        }
+        if (event.targetTouches) {
+            for (i = 0 ; i < event.targetTouches.length ; ++i) {
+                console.log(type + " targetTouches[" + i + "] X: " +
+                    event.targetTouches[i].pageX + " Y: " +
+                    event.targetTouches[i].pageY )
+            }
+        }
+        event = event.originalEvent
+        idxE++
+    }
   }
 
   function dumpMouseEvent(type, event){
-	var i
-	var idxE = 0
-	while (event) {
-		console.log(type + " event nesting[" + idxE + "]...")
-		console.log(type + " client X: " +
-					event.clientX + " Y: " +
-					event.clientY )
-		event = event.originalEvent
-		idxE++
-	}
+    var i
+    var idxE = 0
+    while (event) {
+        console.log(type + " event nesting[" + idxE + "]...")
+        console.log(type + " client X: " +
+                    event.clientX + " Y: " +
+                    event.clientY )
+        event = event.originalEvent
+        idxE++
+    }
   }
 
   $(document).ready(function(){
     var now, delta
 
     $(document.body).bind('touchstart', function(e){
-	  dumpTouchEvent("touchstart", e)
+      dumpTouchEvent("touchstart", e)
       now = Date.now()
       delta = now - (touch.last || now)
       touch.el = $(parentIfText(e.changedTouches[0].target))
@@ -1419,7 +1419,7 @@ window.Zepto = Zepto
       touch.last = now
       longTapTimeout = setTimeout(longTap, longTapDelay)
     }).bind('touchenter', function(e){
-	  dumpTouchEvent("touchenter", e)
+      dumpTouchEvent("touchenter", e)
       now = Date.now()
       delta = now - (touch.last || now)
       touch.el = $(parentIfText(e.changedTouches[0].target))
@@ -1435,12 +1435,12 @@ window.Zepto = Zepto
       touch.x2 = e.changedTouches[0].pageX
       touch.y2 = e.changedTouches[0].pageY
     }).bind('touchend', function(e){
-	  dumpTouchEvent("touchend", e)
+      dumpTouchEvent("touchend", e)
       cancelLongTap()
-	  // capture finger-up position...
+      // capture finger-up position...
       touch.x2 = e.changedTouches[0].pageX
       touch.y2 = e.changedTouches[0].pageY
-	  
+      
       // double tap (tapped twice within 250ms)
       if (touch.isDoubleTap) {
         touch.el.trigger('doubleTap')
@@ -1467,9 +1467,9 @@ window.Zepto = Zepto
         }, 250)
       }
      }).bind('touchleave', function(e){
-	  dumpTouchEvent("touchleave", e)
+      dumpTouchEvent("touchleave", e)
       cancelLongTap()
-	  // capture finger-up position...
+      // capture finger-up position...
       touch.x2 = e.changedTouches[0].pageX
       touch.y2 = e.changedTouches[0].pageY
 
@@ -1504,7 +1504,7 @@ window.Zepto = Zepto
       longTapTimeout = touchTimeout = null
       touch = {}
     }).bind('mousedown', function(e){  // MOUSE EVENTS....
-	  dumpMouseEvent("mousedown", e)
+      dumpMouseEvent("mousedown", e)
       now = Date.now()
       delta = now - (touch.last || now)
       touch.el = $(parentIfText(e.target))
@@ -1519,9 +1519,9 @@ window.Zepto = Zepto
       touch.x2 = e.clientX
       touch.y2 = e.clientY
     }).bind('mouseup', function(e){
-	  dumpMouseEvent("mouseup", e)
+      dumpMouseEvent("mouseup", e)
       cancelLongTap()
-	  // capture mouse-up location
+      // capture mouse-up location
       touch.x2 = e.clientX
       touch.y2 = e.clientY
 
@@ -1551,9 +1551,9 @@ window.Zepto = Zepto
         }, 250)
       }
      }).bind('mouseout', function(e){
-	  dumpMouseEvent("mouseout", e)
+      dumpMouseEvent("mouseout", e)
       cancelLongTap()
-	  // capture mouse-up location
+      // capture mouse-up location
       touch.x2 = e.clientX
       touch.y2 = e.clientY
 

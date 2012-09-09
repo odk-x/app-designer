@@ -15,51 +15,51 @@ return Backbone.View.extend({
         var that = this;
         setTimeout(function(){that.render();}, 100);
         return Handlebars.compile('<div class="current hvmiddle"><div class="hvcenter">Please wait...</div></div>');
-    },	
+    },    
     renderContext:{},
     initialize: function(controller){
         this.controller = controller;
         var that = this;
         requirejs(['text!templates/screen.handlebars'],function(source) {
-			that.template = Handlebars.compile(source);
-		});
+            that.template = Handlebars.compile(source);
+        });
     },
-	getName: function(){
-		if ( this.prompt != null ) {
-			return this.prompt.name;
-		} else {
-			console.log("no prompt showing on this screen!");
-		}
-	},
+    getName: function(){
+        if ( this.prompt != null ) {
+            return this.prompt.name;
+        } else {
+            console.log("no prompt showing on this screen!");
+        }
+    },
     setPrompt: function(prompt){
         var that = this;
         this.prompt = prompt;
         this.renderContext = {
             showHeader: true,
             showFooter: true,
-			// enableNavigation -- defaults to true; false to disable everything...
-			// enableForwardNavigation -- forward swipe and button
-			// enableBackNavigation -- backward swipe and button
-			//
-			// the absence of page history disabled backward swipe and button.
+            // enableNavigation -- defaults to true; false to disable everything...
+            // enableForwardNavigation -- forward swipe and button
+            // enableBackNavigation -- backward swipe and button
+            //
+            // the absence of page history disabled backward swipe and button.
         };
         this.prompt.onActivate(function(renderContext){
             if(renderContext){
                 $.extend(that.renderContext, renderContext);
             }
-			// work through setting the forward/backward enable flags
-			if ( that.renderContext.enableNavigation === undefined ) {
-				that.renderContext.enableNavigation = true;
-			}
-			if ( that.renderContext.enableForwardNavigation === undefined ) {
-				that.renderContext.enableForwardNavigation = 
-					that.renderContext.enableNavigation;
-			}
-			if ( that.renderContext.enableBackNavigation === undefined ) {
-				that.renderContext.enableBackNavigation = 
-					that.renderContext.enableNavigation &&
-					that.controller.hasPromptHistory();
-			}
+            // work through setting the forward/backward enable flags
+            if ( that.renderContext.enableNavigation === undefined ) {
+                that.renderContext.enableNavigation = true;
+            }
+            if ( that.renderContext.enableForwardNavigation === undefined ) {
+                that.renderContext.enableForwardNavigation = 
+                    that.renderContext.enableNavigation;
+            }
+            if ( that.renderContext.enableBackNavigation === undefined ) {
+                that.renderContext.enableBackNavigation = 
+                    that.renderContext.enableNavigation &&
+                    that.controller.hasPromptHistory();
+            }
             that.render();
         });
     },
@@ -90,21 +90,21 @@ return Backbone.View.extend({
     events: {
         "click .next-btn": "gotoNextScreen",
         "click .prev-btn": "gotoPreviousScreen",
-		"swipeLeft .swipeForwardEnabled": "gotoNextScreen",
-		"swipeRight .swipeBackEnabled": "gotoPreviousScreen"
+        "swipeLeft .swipeForwardEnabled": "gotoNextScreen",
+        "swipeRight .swipeBackEnabled": "gotoPreviousScreen"
     },
     render: function() {
-		if ( this.prompt.isInitializeComplete() && this.template != null ) {
-			this.$el.html(this.template(this.renderContext));
-			var $contentArea = this.$('.scroll');
-			var $promptEl = $('<div>');
-			$contentArea.append($promptEl);
-			this.prompt.setElement($promptEl.get(0));
-			this.prompt.render();
-			return this;
-		} else {
-			this.$el.html(this.incompleteTemplate(this.renderContext));
-		}
+        if ( this.prompt.isInitializeComplete() && this.template != null ) {
+            this.$el.html(this.template(this.renderContext));
+            var $contentArea = this.$('.scroll');
+            var $promptEl = $('<div>');
+            $contentArea.append($promptEl);
+            this.prompt.setElement($promptEl.get(0));
+            this.prompt.render();
+            return this;
+        } else {
+            this.$el.html(this.incompleteTemplate(this.renderContext));
+        }
     },
     validate: function(flag, context){
         console.log(context);

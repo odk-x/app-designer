@@ -3,7 +3,7 @@
 define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTypes) {
     return {
     initializePrompts: function(prompts) {
-		var that = this;
+        var that = this;
             function findObjectWithPair(objectArray, searchKey, searchValue) {
                 for (var obby in objectArray) {
                     if (searchKey in obby) {
@@ -42,9 +42,9 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
                 }, item));
             initializedPrompts.push(new PromptClass());
             });
-		return initializedPrompts;
+        return initializedPrompts;
     },
-	buildSurvey:function(surveyJson, continuation){
+    buildSurvey:function(surveyJson, continuation){
             var that = this;
             var settings = {};
             if ('settings' in surveyJson) {
@@ -98,14 +98,14 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
             }, {
                 type: "hierarchy",
                 name: "_hierarchy",
-				label: "Hierarchy View"
+                label: "Hierarchy View"
             }]);
 
             console.log('initializing');
-			that.form.prompts = this.initializePrompts(prompts );
-			controller.prompts = that.form.prompts;
-			console.log('starting');
-			continuation();
-		}
+            that.form.prompts = this.initializePrompts(prompts );
+            controller.prompts = that.form.prompts;
+            console.log('starting');
+            continuation();
+        }
     };
 });

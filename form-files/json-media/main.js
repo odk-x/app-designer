@@ -1,11 +1,11 @@
 requirejs.config({
     baseUrl: '../collect/js',
-	paths: {
-		templates : '../templates',
-		},
+    paths: {
+        templates : '../templates',
+        },
     shim: {
         'zepto': {
-			// Slimmer drop-in replacement for jquery
+            // Slimmer drop-in replacement for jquery
             //These script dependencies should be loaded before loading
             //zepto.js
             deps: [],
@@ -29,7 +29,7 @@ requirejs.config({
             //module value.
             exports: 'Backbone'
         },
-		'handlebars': {
+        'handlebars': {
             //These script dependencies should be loaded before loading
             //handlebars.js
             deps: ['zepto'],
@@ -37,28 +37,28 @@ requirejs.config({
             //module value.
             exports: 'Handlebars'
         },
-		'templates/compiledTemplates': {
-			deps: ['handlebars'],
-		}
-	}
+        'templates/compiledTemplates': {
+            deps: ['handlebars'],
+        }
+    }
 });
 
 requirejs(['opendatakit', 'database','parsequery'], function(opendatakit, database, parsequery) {
-	parsequery.parseQueryParameters('lgform', null, 
-		'en_us', 'Simple Test Form', function() {
-		
+    parsequery.parseQueryParameters('lgform', null, 
+        'en_us', 'Simple Test Form', function() {
+        
 requirejs(['zepto','builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
 function($,builder,controller,prompts) {
-	console.log('scripts loaded');
-	// build the survey and place it in the controller...
+    console.log('scripts loaded');
+    // build the survey and place it in the controller...
 builder.buildSurvey(/* json start delimiter */
 {
     "settings": [{
-		formId : 'lgform', // must match arg to parseQueryParameters
-		formVersion : null, // must match arg to parseQueryParameters
-		formLocale : 'en_us', // must match arg to parseQueryParameters
-		formName : 'Simple Test Form' // must match arg to parseQueryParameters
-	}],
+        formId : 'lgform', // must match arg to parseQueryParameters
+        formVersion : null, // must match arg to parseQueryParameters
+        formLocale : 'en_us', // must match arg to parseQueryParameters
+        formName : 'Simple Test Form' // must match arg to parseQueryParameters
+    }],
     "survey": [
        {
             "prompts": [
@@ -92,11 +92,11 @@ builder.buildSurvey(/* json start delimiter */
             "name": "testScreen",
             "label": "Screen group"
         }, 
-		{
+        {
             "type": "goto", 
             "param": "test"
         },
-		{
+        {
             "type": "label", 
             "param": "test"
         },
@@ -161,16 +161,16 @@ builder.buildSurvey(/* json start delimiter */
     }
 }
 /* json end delimiter */, function() {
-	// we have saved all query parameters into the metaData table
-	// and re-normalized the query string to remove them.
-	//
-	// register to handle manual #hash changes
-	$(window).bind('hashchange', function(evt) {
-		controller.odkHashChangeHandler();
-	});
+    // we have saved all query parameters into the metaData table
+    // and re-normalized the query string to remove them.
+    //
+    // register to handle manual #hash changes
+    $(window).bind('hashchange', function(evt) {
+        controller.odkHashChangeHandler();
+    });
 
-	// fire the controller to render the first page.
-	controller.start($('#jqt'));
+    // fire the controller to render the first page.
+    controller.start($('#jqt'));
 }
 );
 
