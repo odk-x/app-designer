@@ -35,6 +35,7 @@ promptTypes.base = Backbone.View.extend({
         this.afterInitialize();
     },
     initializeTemplate: function() {
+		//if (this.template != null) return;
         var that = this;
         if(this.templatePath){
             requirejs(['text!'+this.templatePath], function(source) {

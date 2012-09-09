@@ -1,5 +1,5 @@
 <form>
-    <label>{{label}}</label>
+    <label>{{localize label}}</label>
     <select name="{{name}}">        
         {{#each choices}}
             <option 
@@ -7,7 +7,7 @@
                     selected
                 {{/if}}
                 value="{{value}}">
-                {{label}}
+                {{localize label}}
             </option>
         {{/each}}
     </select>
