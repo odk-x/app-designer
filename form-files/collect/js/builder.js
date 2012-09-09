@@ -2,7 +2,8 @@
 // depends upon: controller, zepto, promptTypes
 define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTypes) {
     return {
-    initializePrompts: function(form, continuation) {
+    initializePrompts: function(prompts) {
+		var that = this;
             function findObjectWithPair(objectArray, searchKey, searchValue) {
                 for (var obby in objectArray) {
                     if (searchKey in obby) {
@@ -13,8 +14,8 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
                 }
                 return null;
             }
-            var initializedPrompts = [];
-        $.each(form.prompts, function(idx, item) {
+        var initializedPrompts = [];
+        $.each(prompts, function(idx, item) {
                 var PromptType;
 
                 if (!('type' in item)) {
@@ -22,7 +23,7 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
                     console.log(item);
                     return;
                 }
-                var widget = findObjectWithPair(form.widgets, 'type', item.type);
+                var widget = findObjectWithPair(that.form.widgets, 'type', item.type);
                 if (widget) {
                     item = $.extend({}, widget, item);
                     item.type = widget.parentType;
@@ -36,14 +37,13 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
                     PromptType = promptTypes['text'];
                 }
                 var PromptClass = PromptType.extend($.extend({
-                    form: form,
+                    form: that.form,
                     promptIdx: idx
                 }, item));
             initializedPrompts.push(new PromptClass());
             });
-		form.prompts = initializedPrompts;
-        continuation();
-        },
+		return initializedPrompts;
+    },
 	buildSurvey:function(surveyJson, continuation){
             var that = this;
             var settings = {};
@@ -64,14 +64,13 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
             if ('column_types' in surveyJson) {
                 $.extend(column_types, surveyJson.column_types);
             }
-            var form = {
-                prompts: surveyJson.survey,
+            that.form = {
                 choices: surveyJson.choices,
                 settings: settings,
                 widgets: widgets,
                 column_types: column_types
             };
-            form.prompts = ([{
+            var prompts = ([{
                 "type": "goto",
                 "param": "_begin"
             }, {
@@ -92,21 +91,21 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
                 type: "opening",
                 name: "_opening",
                 label: "opening page"
-            }]).concat(form.prompts).concat([{
+            }]).concat(surveyJson.survey).concat([{
                 type: "finalize",
                 name: "_finalize",
                 label: "Save Form"
             }, {
                 type: "hierarchy",
-                name: "_hierarchy"
+                name: "_hierarchy",
+				label: "Hierarchy View"
             }]);
 
             console.log('initializing');
-	    this.initializePrompts(form, function() {
-			controller.prompts = form.prompts;
+			that.form.prompts = this.initializePrompts(prompts );
+			controller.prompts = that.form.prompts;
 			console.log('starting');
 			continuation();
-		});
-        }
+		}
     };
 });

@@ -39,6 +39,7 @@ requirejs.config({
         },
 		'templates/compiledTemplates': {
 			deps: ['handlebars'],
+		}
 	}
 });
 
@@ -59,11 +60,7 @@ builder.buildSurvey(/* json start delimiter */
 		formName : 'Simple Test Form' // must match arg to parseQueryParameters
 	}],
     "survey": [
-        {
-            "type": "goto", 
-            "param": "test"
-        },
-        {
+       {
             "prompts": [
                 {
                     "name": "name", 
@@ -95,7 +92,11 @@ builder.buildSurvey(/* json start delimiter */
             "name": "testScreen",
             "label": "Screen group"
         }, 
-        {
+		{
+            "type": "goto", 
+            "param": "test"
+        },
+		{
             "type": "label", 
             "param": "test"
         },

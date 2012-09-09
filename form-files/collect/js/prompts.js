@@ -63,6 +63,9 @@ promptTypes.base = Backbone.View.extend({
         //functions for parsing the various property types.
         var propertyParsers = {
             formula: function(content) {
+				if ( content === true || content === false ) {
+					return function() { return content; }
+				}
                 var variablesRefrenced = [];
                 var variableRegex = /\{\{.+?\}\}/g
 
@@ -618,20 +621,21 @@ promptTypes.audio = promptTypes.base.extend({
     }
 
 });
-promptTypes.group = promptTypes.base.extend({
-    type: "group",
+promptTypes.screen = promptTypes.base.extend({
+    type: "screen",
     prompts: [],
     initialize: function() {
-        console.log('group test');
-        //TODO: We should probably try to put this in some sort of object heiarchy.
-        this.prompts = builder.initializePrompts(this.form, this.prompts, this);
+		var prompts = this.prompts;
+        this.prompts = builder.initializePrompts(prompts);
         this.initializePropertyTypes();
-        console.log('group test');
+        this.initializeTemplate();
+        this.initializeRenderContext();
+        this.afterInitialize();
     },
 	isInitializeComplete: function() {
 		var i;
-		for ( i = 0 ; i < prompts.length; ++i ) {
-			var p = prompts[i];
+		for ( i = 0 ; i < this.prompts.length; ++i ) {
+			var p = this.prompts[i];
 			if ( !p.isInitializeComplete() ) return false;
 		}
 		return true;
@@ -656,7 +660,7 @@ promptTypes.calculate = promptTypes.base.extend({
 	},
     onActivate: function(readyToRenderCallback){
         controller.gotoNextScreen();
-    }
+    },
 	evaluate: function() {
         this.model.set('value', this.formula());
     }
