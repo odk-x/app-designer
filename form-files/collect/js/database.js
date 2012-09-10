@@ -220,7 +220,7 @@ putDataKeyTypeValueMap:function(ktvlist, onSuccessfulSave) {
 constructJsonDataClosureHelper:function(continuation) {
     return function(transaction, result) {
         var tlo;
-		var len = result.rows.length;
+        var len = result.rows.length;
         if (len == 0 ) {
             tlo = null;                            
         } else {
@@ -255,7 +255,7 @@ constructJsonDataClosureHelper:function(continuation) {
                 e[term] = elem;
             }
         }
-		continuation(tlo);
+        continuation(tlo);
     };
 },
 getAllData:function(action) {
@@ -433,14 +433,14 @@ ignore_all_changes:function(continuation) {
         });
 },
 initializeTables:function(datafields, continuation) {
-	var that = this;
-	var formId = opendatakit.queryParameters.formId;
-	var formVersion = opendatakit.queryParameters.formVersion;
-	
-	// opendatakit has all the query parameters loaded
-	// datafields describes the data fields
-	// formId and formVersion identify the table name
-	that.cacheAllData(continuation);
+    var that = this;
+    var formId = opendatakit.queryParameters.formId;
+    var formVersion = opendatakit.queryParameters.formVersion;
+    
+    // opendatakit has all the query parameters loaded
+    // datafields describes the data fields
+    // formId and formVersion identify the table name
+    that.cacheAllData(continuation);
 }
 };
 });

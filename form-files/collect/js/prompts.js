@@ -663,24 +663,24 @@ promptTypes.screen = promptTypes.base.extend({
         }
         return true;
     },
-	onActivateHelper: function(idx, readyToRenderCallback) {
-		var that = this;
-	    return function() {
-			if ( that.prompts.length > idx ) {
-			    var prompt = that.prompts[idx];
-			    prompt.onActivate(that.onActivateHelper(idx+1,readyToRenderCallback));
-			} else {
-				readyToRenderCallback();
-			}
-		}
-	},
+    onActivateHelper: function(idx, readyToRenderCallback) {
+        var that = this;
+        return function() {
+            if ( that.prompts.length > idx ) {
+                var prompt = that.prompts[idx];
+                prompt.onActivate(that.onActivateHelper(idx+1,readyToRenderCallback));
+            } else {
+                readyToRenderCallback();
+            }
+        }
+    },
     onActivate: function(readyToRenderCallback) {
-		if ( this.prompts.length == 0 ) {
-			readyToRenderCallback();
-		} else {
-			var prompt = this.prompts[0];
-			prompt.onActivate(this.onActivateHelper(1, readyToRenderCallback));
-		}
+        if ( this.prompts.length == 0 ) {
+            readyToRenderCallback();
+        } else {
+            var prompt = this.prompts[0];
+            prompt.onActivate(this.onActivateHelper(1, readyToRenderCallback));
+        }
     },
     render: function(){
         this.$el.html('<div class="prompts"></div>');

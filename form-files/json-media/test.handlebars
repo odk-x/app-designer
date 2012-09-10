@@ -1,0 +1,16 @@
+<ul>
+    <style type="text/css">
+    .test {color:red;}
+    </style>
+    <h3 class="test">test</h3>
+    <li><label>{{localize label}}</label></li>
+    <li><input type="text" value="{{value}}"
+        {{#if disabled}}
+            disabled="true"
+        {{/if}}
+        />
+        {{#if invalid}}
+            <p>invalid</p>
+        {{/if}}
+    </li>
+</ul>

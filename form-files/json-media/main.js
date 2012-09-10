@@ -1,7 +1,21 @@
 requirejs.config({
-    baseUrl: '../collect/js',
+    //baseUrl: '../collect/js',
     paths: {
-        templates : '../templates',
+        collect : '../collect',
+        database : '../collect/js/database',
+        opendatakit : '../collect/js/opendatakit',
+        parsequery : '../collect/js/parsequery',
+        zepto : '../collect/js/zepto',
+        underscore : '../collect/js/underscore',
+        backbone : '../collect/js/backbone',
+        prompts : '../collect/js/prompts',
+        controller : '../collect/js/controller',
+        builder : '../collect/js/builder',
+        handlebars : '../collect/js/handlebars',
+        promptTypes : '../collect/js/promptTypes',
+        text : '../collect/js/text',
+        screenManager : '../collect/js/screenManager',
+        templates : '../collect/templates'
         },
     shim: {
         'zepto': {
@@ -45,32 +59,40 @@ requirejs.config({
 
 requirejs(['opendatakit', 'database','parsequery'], function(opendatakit, database, parsequery) {
 var formDef = /* json start delimiter */{
-    "settings": [{
-		name: "formId",
-		param: "lgform"
-		},
-		{
-		name: "formVersion",
-		param: "20120901"
-		},
-		{
-		name: "formLocale",
-		param: "en_us"
-		},
-		{
-		name: "formName",
-		param: {
-			"en_us": 'Simple Test Form'
-			}
-		}
+    "settings": [
+        {
+            name: "formId",
+            param: "lgform"
+        },
+        {
+            name: "formVersion",
+            param: "20120901"
+        },
+        {
+            name: "formLocale",
+            param: "en_us"
+        },
+        {
+            name: "formName",
+            param: {
+                "en_us": 'Simple Test Form'
+                }
+        }
     ],
     "survey": [
-       {
+        {
+            "type": "goto", 
+            "param": "test"
+        },
+        {
+            "type": "label", 
+            "param": "test"
+        }, 
+        {
             "prompts": [
                 {
-                    "name": "name", 
-                    "validate": true, 
                     "type": "text", 
+                    "name": "name", 
                     "param": null, 
                     "label": {
                         "en_us": "Enter your name:"
@@ -91,11 +113,11 @@ var formDef = /* json start delimiter */{
                     "label": {
                         "en_us": "Enter your bmi:"
                     }
-                }, 
+                },
                 {
-                    "name": "gender",
-                    "type": "text", 
-                    "param": null, 
+                    "type": "select", 
+                    "name": "gender", 
+                    "param": "gender", 
                     "label": {
                         "en_us": "Enter your gender:"
                     }
@@ -103,87 +125,95 @@ var formDef = /* json start delimiter */{
             ], 
             "type": "screen", 
             "name": "testScreen",
-            "label": "Screen group"
+            "label":  {
+                "en_us": "Screen Group"
+            }
         }, 
         {
             "type": "goto", 
-            "param": "test"
+            "param": "test2"
         },
         {
             "type": "label", 
-            "param": "test"
-        },
-		{
-			"name": "name", 
-			"validate": true, 
-			"type": "text", 
-			"param": null, 
-			"label": {
-				"en_us": "Enter your name:"
-			}
-		}, 
-		{
-			"type": "integer", 
-			"name": "age", 
-			"param": null, 
-			"label": {
-				"en_us": "Enter your age:"
-			}
-		}, 
-		{
-			"type": "decimal", 
-			"name": "bmi", 
-			"param": null, 
-			"label": {
-				"en_us": "Enter your bmi:"
-			}
-		}, 
-		{
-			"name": "gender",
-			"type": "text", 
-			"param": null, 
-			"label": {
-				"en_us": "Enter your gender:"
-			}
-		},
-        {
-            "type": "select", 
-            "name": "sel",
-            "label": "Select genders:",
-            "param": "gender"
+            "param": "test2"
         },
         {
-            "name": "rep",
-            "type": "repeat", 
-            "param": "test", 
+            "name": "name", 
+            "validate": true, 
+            "type": "text", 
+            "param": null, 
             "label": {
-                "en_us": "Repeat"
+                "en_us": "Enter your name:"
             }
-        },
+        }, 
         {
             "type": "audio", 
-            "name": "aud", 
-            "param": null
+            "name": "audio_test", 
+            "param": null, 
+            "label": {
+                "en_us": "Audio test"
+            }
         }, 
         {
             "type": "video", 
-            "name": "vid", 
-            "param": null
+            "name": "video_test", 
+            "param": null, 
+            "label": {
+                "en_us": "Video test"
+            }
         }, 
         {
             "type": "image", 
-            "name": "img", 
-            "param": null
+            "name": "image_test", 
+            "param": null, 
+            "label": {
+                "en_us": "Image test"
+            }
+        }, 
+        {
+            "qp": {
+                "param": "foo"
+            }, 
+            "type": "repeat", 
+            "param": "subform.html"
+        }, 
+        {
+            "name": "specialTemplateTest", 
+            "label": {
+                "en_us": "Custom template test:"
+            }, 
+            "type": "text", 
+            "param": null, 
+            "templatePath": "test.handlebars"
+        },
+        {
+            "type": "integer", 
+            "name": "age", 
+            "param": null, 
+            "label": {
+                "en_us": "Enter your age:"
+            }
+        }, 
+        {
+            "type": "decimal", 
+            "name": "bmi", 
+            "param": null, 
+            "label": {
+                "en_us": "Enter your bmi:"
+            }
+        }, 
+        {
+            "type": "select", 
+            "name": "sel",
+            "label": "Select all genders:",
+            "param": "gender"
         }
     ], 
     "datafields": {
-        "gender": {
+        "name": {
             "type": "string"
         }, 
-        "img": {
-            "type": "image/*"
-        }, 
-        "name": {
+        "specialTemplateTest": {
             "type": "string"
         }, 
         "age": {
@@ -195,11 +225,14 @@ var formDef = /* json start delimiter */{
         "sel": {
             "type": "multiselect"
         }, 
-        "vid": {
-            "type": "video/*"
+        "image_test": {
+            "type": "image/*"
         }, 
-        "aud": {
+        "audio_test": {
             "type": "audio/*"
+        }, 
+        "video_test": {
+            "type": "video/*"
         }
     }, 
     "choices": {
@@ -217,10 +250,10 @@ var formDef = /* json start delimiter */{
 }/* json end delimiter */;
     parsequery.parseQueryParameters(formDef, function() {
     // we have saved all query parameters into the metaData table
-	// created the data table and its table descriptors
+    // created the data table and its table descriptors
     // re-normalized the query string to just have the instanceId
-	// read all the form data and metaData into value caches
-	// under database.model and opendatakit.queryParameters (respectively).
+    // read all the form data and metaData into value caches
+    // under database.model and opendatakit.queryParameters (respectively).
         
 requirejs(['zepto','builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
 function($,builder,controller,prompts) {
