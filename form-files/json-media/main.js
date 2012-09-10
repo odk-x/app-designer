@@ -1,7 +1,21 @@
 requirejs.config({
-    baseUrl: '../collect/js',
+    //baseUrl: '../collect/js',
     paths: {
-        templates : '../templates',
+        collect : '../collect',
+        database : '../collect/js/database',
+        opendatakit : '../collect/js/opendatakit',
+        parsequery : '../collect/js/parsequery',
+        zepto : '../collect/js/zepto',
+        underscore : '../collect/js/underscore',
+        backbone : '../collect/js/backbone',
+        prompts : '../collect/js/prompts',
+        controller : '../collect/js/controller',
+        builder : '../collect/js/builder',
+        handlebars : '../collect/js/handlebars',
+        promptTypes : '../collect/js/promptTypes',
+        text : '../collect/js/text',
+        screenManager : '../collect/js/screenManager',
+        templates : '../collect/templates'
         },
     shim: {
         'zepto': {
@@ -53,19 +67,38 @@ function($,builder,controller,prompts) {
     // build the survey and place it in the controller...
 builder.buildSurvey(/* json start delimiter */
 {
-    "settings": [{
-        formId : 'lgform', // must match arg to parseQueryParameters
-        formVersion : null, // must match arg to parseQueryParameters
-        formLocale : 'en_us', // must match arg to parseQueryParameters
-        formName : 'Simple Test Form' // must match arg to parseQueryParameters
-    }],
+    "settings": [
+        {
+            "setting": "formId", 
+            "value": "testForm"
+        }, 
+        {
+            "setting": "formVersion", 
+            "value": 1
+        }, 
+        {
+            "setting": "formLocale", 
+            "value": "en_us"
+        }, 
+        {
+            "setting": "formName", 
+            "value": "Test Form"
+        }
+    ], 
     "survey": [
-       {
+        {
+            "type": "goto", 
+            "param": "test"
+        },
+        {
+            "type": "label", 
+            "param": "test"
+        }, 
+        {
             "prompts": [
                 {
-                    "name": "name", 
-                    "validate": true, 
                     "type": "text", 
+                    "name": "name", 
                     "param": null, 
                     "label": {
                         "en_us": "Enter your name:"
@@ -80,79 +113,87 @@ builder.buildSurvey(/* json start delimiter */
                     }
                 }, 
                 {
-                    "type": "decimal", 
-                    "name": "bmi", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "Enter your bmi:"
-                    }
-                }, 
-                {
-                    "name": "gender",
-                    "type": "text", 
-                    "param": null, 
+                    "type": "select", 
+                    "name": "gender", 
+                    "param": "gender", 
                     "label": {
                         "en_us": "Enter your gender:"
                     }
                 }
             ], 
             "type": "screen", 
-            "name": "testScreen",
-            "label": "Screen group"
+            "name": "asdf"
         }, 
         {
-            "type": "goto", 
-            "param": "test"
-        },
-        {
-            "type": "label", 
-            "param": "test"
-        },
-        {
-            "type": "select", 
-            "name": "sel",
-            "label": "Select genders:",
-            "param": "gender"
-        },
-        {
-            "name": "rep",
-            "type": "repeat", 
-            "param": "test", 
-            "label": {
-                "en_us": "Repeat"
-            }
-        },
-        {
             "type": "audio", 
-            "name": "aud", 
-            "param": null
+            "name": "audio_test", 
+            "param": null, 
+            "label": {
+                "english": "Audio test"
+            }
         }, 
         {
             "type": "video", 
-            "name": "vid", 
-            "param": null
+            "name": "video_test", 
+            "param": null, 
+            "label": {
+                "en_us": "Video test"
+            }
         }, 
         {
             "type": "image", 
-            "name": "img", 
-            "param": null
+            "name": "image_test", 
+            "param": null, 
+            "label": {
+                "en_us": "Image test"
+            }
+        }, 
+        {
+            "qp": {
+                "param": "foo"
+            }, 
+            "type": "repeat", 
+            "param": "subform.html"
+        }, 
+        {
+            "type": "decimal", 
+            "name": "bmi", 
+            "param": null, 
+            "label": {
+                "en_us": "Enter your bmi:"
+            }
+        }, 
+        {
+            "name": "specialTemplateTest", 
+            "label": {
+                "en_us": "Custom template test:"
+            }, 
+            "type": "text", 
+            "param": null, 
+            "templatePath": "test.handlebars"
         }
     ], 
     "datafields": {
-        "gender": {
-            "type": "string"
-        }, 
-        "img": {
-            "type": "image/*"
-        }, 
         "name": {
             "type": "string"
         }, 
-        "vid": {
-            "type": "video/*"
+        "specialTemplateTest": {
+            "type": "string"
         }, 
-        "aud": {
+        "age": {
+            "type": "integer"
+        }, 
+        "bmi": {
+            "type": "number"
+        }, 
+        "image_test": {
+            "type": "image/*"
+        }, 
+        "audio_test": {
             "type": "audio/*"
+        }, 
+        "video_test": {
+            "type": "video/*"
         }
     }, 
     "choices": {
@@ -167,8 +208,7 @@ builder.buildSurvey(/* json start delimiter */
             }
         ]
     }
-}
-/* json end delimiter */, function() {
+}/* json end delimiter */, function() {
     // we have saved all query parameters into the metaData table
     // and re-normalized the query string to remove them.
     //

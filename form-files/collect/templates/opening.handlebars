@@ -2,7 +2,9 @@
     <table>
         <tr>
             <td align="center" colspan="2">
-                <img src="{{ baseDir }}{{ headerImg }}" height="216px" width="344px"/>
+                <img src="{{ headerImg }}"
+                    onerror='this.onerror = null; this.src="{{ baseDir }}{{ headerImg }}"'
+                    width="344px"/>
             </td>
         </tr>
         <tr>
