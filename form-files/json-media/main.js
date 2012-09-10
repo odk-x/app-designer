@@ -72,11 +72,19 @@ builder.buildSurvey(/* json start delimiter */
                     }
                 }, 
                 {
-                    "type": "int", 
+                    "type": "integer", 
                     "name": "age", 
                     "param": null, 
                     "label": {
                         "en_us": "Enter your age:"
+                    }
+                }, 
+                {
+                    "type": "decimal", 
+                    "name": "bmi", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "Enter your bmi:"
                     }
                 }, 
                 {

@@ -239,8 +239,8 @@ promptTypes.json = promptTypes.base.extend({
     onActivate: function(readyToRenderCallback) {
         var that = this;
         database.getAllData(function(tlo) {
-            if ( window.JSON != null ) {
-                that.renderContext.value = window.JSON.stringify(tlo);
+            if ( JSON != null ) {
+                that.renderContext.value = JSON.stringify(tlo,null,2);
             } else {
                 that.renderContext.value = "JSON Unavailable";
             }
@@ -369,40 +369,60 @@ promptTypes.repeat = promptTypes.base.extend({
 });
 promptTypes.select = promptTypes.base.extend({
     type: "select",
+	datatype: "text",
     template: Handlebars.templates.select,
     templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification"
     },
+	// TODO: choices should be cloned and allow calculations in the choices
+	// perhaps a null 'name' would drop the value from the list of choices...
+	// could also allow calculations in the 'checked' and 'value' fields.
     modification: function(evt) {
+		var that = this;
         console.log("select modification");
         console.log(this.$('form').serializeArray());
-        var renderContext = this.renderContext;
-        renderContext.value = this.$('form').serializeArray();
-        renderContext.choices = _.map(renderContext.choices, function(choice) {
-            var matchingValue = _.find(renderContext.value, function(value){
-                return choice.name === value.name;
-            });
-            if(matchingValue){
-                return _.extend(choice, matchingValue);
-            }
-            delete choice.value
-            return choice;
-        })
-        this.render();
+        var value = this.$('form').serializeArray();
+		var saveValue = (value == null) ? null : JSON.stringify(value);
+		// TODO: broken for multiselect -- pretty sure we don't want to serialize array to db	
+		this.setValue(saveValue, function() {
+			that.renderContext.value = value;
+			that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
+				if ( value != null ) {
+				    // NOTE: for multi-select
+					var matchingValue = _.find(that.renderContext.value, function(value){
+						return choice.name === value.name;
+					});
+					choice.checked = (matchingValue != null);
+				} else {
+					choice.checked = false;
+				}
+				return choice;
+			})
+			that.render();
+		});
     },
     onActivate: function(readyToRenderCallback) {
-        var renderContext = this.renderContext;
+		var that = this;
         if(this.param in this.form.choices){
-            renderContext.choices = this.form.choices[this.param];
+            that.renderContext.choices = this.form.choices[this.param];
         }
-        readyToRenderCallback();
-        /*
-        this.getValue(function(value) {
-            renderContext.value = value;
-            readyToRenderCallback();
-        });
-        */
+		this.getValue(function(saveValue) {
+			that.renderContext.value = (saveValue == null) ? null : JSON.parse(saveValue);
+			for (var i = 0 ; i < that.renderContext.choices.length ; ++i ) {
+				var choice = that.renderContext.choices[i];
+				if ( that.renderContext.value != null ) {
+				    // NOTE: for multi-select
+					var matchingValue = _.find(that.renderContext.value, function(value){
+						return choice.name === value.name;
+					});
+					that.renderContext.choices[i].checked = (matchingValue != null);
+				} else {
+					that.renderContext.choices[i].checked = false;
+				}
+			}
+			readyToRenderCallback();
+		});
     }
 });
 promptTypes.dropdownSelect = promptTypes.base.extend({
@@ -414,35 +434,37 @@ promptTypes.dropdownSelect = promptTypes.base.extend({
     },
     modification: function(evt) {
         console.log("select modification");
-        this.model.set('value', this.$('select').val());
-        this.render();
+		var that = this;
+		database.putData(this.name, "string", that.$('select').val(), function() {
+			that.render();
+		});
     },
     render: function() {
-        var value = this.model.get('value');
-        console.log(value);
-        var context = {
-            name: this.name,
-            label: this.label,
-            choices: _.map(this.choices, function(choice) {
-                if (_.isString(choice)) {
-                    choice = {
-                        label: choice,
-                        value: choice
-                    };
-                }
-                else {
-                    if (!('label' in choice)) {
-                        choice.label = choice.name;
-                    }
-                }
-                choice.value = choice.name;
-                return $.extend({
-                    selected: (choice.value === value)
-                }, choice);
-            })
-        };
-        this.$el.html(this.template(context));
-        return this;
+		this.getValue(function(value) {
+			console.log(value);
+			var context = {
+				name: this.name,
+				label: this.label,
+				choices: _.map(this.choices, function(choice) {
+					if (_.isString(choice)) {
+						choice = {
+							label: choice,
+							value: choice
+						};
+					}
+					else {
+						if (!('label' in choice)) {
+							choice.label = choice.name;
+						}
+					}
+					choice.value = choice.name;
+					return $.extend({
+						selected: (choice.value === value)
+					}, choice);
+				})
+			};
+			this.$el.html(this.template(context));
+		});
     }
 });
 promptTypes.inputType = promptTypes.text = promptTypes.base.extend({

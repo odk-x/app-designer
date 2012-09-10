@@ -9,11 +9,11 @@
                     {{else}}
                         type="checkbox"
                     {{/if}}
-                    {{#if value}}
+                    {{#if checked}}
                         checked
                     {{/if}}
                     name="{{name}}"
-                    value="x" />
+                    value="{{value}}" />
                 {{localize label}}
             </li>
         {{/each}}
@@ -25,7 +25,7 @@
                     {{else}}
                         type="checkbox"
                     {{/if}}
-                    {{#if other}}
+                    {{#if checked}}
                         checked
                     {{/if}}
                     name="{{name}}"
