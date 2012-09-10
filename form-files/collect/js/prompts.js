@@ -1,7 +1,7 @@
 'use strict';
 
-define(['database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
-function(database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
+define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
+function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
 
 Handlebars.registerHelper('localize', function(textOrLangMap) {
     if(_.isUndefined(textOrLangMap)) {
@@ -10,7 +10,7 @@ Handlebars.registerHelper('localize', function(textOrLangMap) {
     if(_.isString(textOrLangMap)) {
         return new Handlebars.SafeString(textOrLangMap);
     }
-    var locale = opendatakit.getFormLocale();
+    var locale = mdl.qp.formLocale.value;
     if( locale in textOrLangMap ){
         return new Handlebars.SafeString(textOrLangMap[locale]);
     } else if( 'default' in textOrLangMap ){
@@ -73,15 +73,12 @@ promptTypes.base = Backbone.View.extend({
                     function replaceCallback(match) {
                         var variableName = match.slice(2, - 2);
                         variablesRefrenced.push(variableName);
-                        return variableName;
+                        return "database.getDataValue('" + variableName + "')";
                     }
                 content = content.replace(variableRegex, replaceCallback);
 
                 var result = 'if(' + content + '){that.baseValidate(context);} else {context.failure()}';
                 result = 'console.log("test");' + result;
-                $.each(variablesRefrenced, function(idx, variable) {
-                    result = 'controller.getPromptByName("' + variable + '").getValue(function(' + variable + '){' + result + '});';
-                });
 
                 //How best to refrence current value?
                 result = '(function(context){var that = this; ' + result + '})';
@@ -159,21 +156,19 @@ promptTypes.base = Backbone.View.extend({
             callback(context.newValue);
         }
         else {
-            this.getValue(function(value) {
-                callback(value);
-            });
+            callback(that.getValue());
         }
     },
     validate: function(isMoveBackward, context) {
         this.baseValidate(isMoveBackward, context);
     },
-    setValue: function(value, onSuccessfulSave) {
-        var that = this;
-        // TODO: should this validate? Or is validation called before setValue?
-        database.putData(that.name, that.datatype, value, onSuccessfulSave);
+    getValue: function() {
+        return database.getDataValue(this.name);
     },
-    getValue: function(callback) {
-        database.getData(this.name, callback);
+    setValue: function(value, onSuccessfulSave) {
+        // NOTE: data IS NOT updated synchronously. Use callback!
+        var that = this;
+        database.setData(that.name, that.datatype, value, onSuccessfulSave);
     },
     beforeMove: function(continuation) {
         continuation();
@@ -225,7 +220,8 @@ promptTypes.opening = promptTypes.base.extend({
     },
     renderContext: {
         baseDir: collect.baseDir,
-        formName: opendatakit.getFormName(),
+        formName: mdl.qp.formName.value,
+        instanceName: mdl.qp.instanceName.value,
         headerImg: 'img/form_logo.png',
         backupImg: 'img/backup.png',
         advanceImg: 'img/advance.png'
@@ -259,7 +255,8 @@ promptTypes.finalize = promptTypes.base.extend({
     },
     renderContext: {
         baseDir: collect.baseDir,
-        formName: opendatakit.getFormName(),
+        formName: mdl.qp.formName.value,
+        instanceName: mdl.qp.instanceName.value,
         headerImg: 'img/form_logo.png',
     },
     onActivate: function(readyToRenderCallback) {
@@ -312,7 +309,7 @@ promptTypes.instances = promptTypes.base.extend({
     },
     deleteInstance: function(evt){
         var that = this;
-        database.delete_all(opendatakit.getFormId(), $(evt.target).attr('id'), function() {
+        database.delete_all(mdl.qp.formId.value, $(evt.target).attr('id'), function() {
             that.onActivate(function(){that.render();});
         });
     }
@@ -407,22 +404,21 @@ promptTypes.select = promptTypes.base.extend({
         if(this.param in this.form.choices){
             that.renderContext.choices = this.form.choices[this.param];
         }
-        this.getValue(function(saveValue) {
-            that.renderContext.value = (saveValue == null) ? null : JSON.parse(saveValue);
-            for (var i = 0 ; i < that.renderContext.choices.length ; ++i ) {
-                var choice = that.renderContext.choices[i];
-                if ( that.renderContext.value != null ) {
-                    // NOTE: for multi-select
-                    var matchingValue = _.find(that.renderContext.value, function(value){
-                        return choice.name === value.name;
-                    });
-                    that.renderContext.choices[i].checked = (matchingValue != null);
-                } else {
-                    that.renderContext.choices[i].checked = false;
-                }
+        var saveValue = that.getValue();
+        that.renderContext.value = (saveValue == null) ? null : JSON.parse(saveValue);
+        for (var i = 0 ; i < that.renderContext.choices.length ; ++i ) {
+            var choice = that.renderContext.choices[i];
+            if ( that.renderContext.value != null ) {
+                // NOTE: for multi-select
+                var matchingValue = _.find(that.renderContext.value, function(value){
+                    return choice.name === value.name;
+                });
+                that.renderContext.choices[i].checked = (matchingValue != null);
+            } else {
+                that.renderContext.choices[i].checked = false;
             }
-            readyToRenderCallback();
-        });
+        }
+        readyToRenderCallback();
     }
 });
 promptTypes.dropdownSelect = promptTypes.base.extend({
@@ -440,31 +436,30 @@ promptTypes.dropdownSelect = promptTypes.base.extend({
         });
     },
     render: function() {
-        this.getValue(function(value) {
-            console.log(value);
-            var context = {
-                name: this.name,
-                label: this.label,
-                choices: _.map(this.choices, function(choice) {
-                    if (_.isString(choice)) {
-                        choice = {
-                            label: choice,
-                            value: choice
-                        };
+        var value = this.getValue();
+        console.log(value);
+        var context = {
+            name: this.name,
+            label: this.label,
+            choices: _.map(this.choices, function(choice) {
+                if (_.isString(choice)) {
+                    choice = {
+                        label: choice,
+                        value: choice
+                    };
+                }
+                else {
+                    if (!('label' in choice)) {
+                        choice.label = choice.name;
                     }
-                    else {
-                        if (!('label' in choice)) {
-                            choice.label = choice.name;
-                        }
-                    }
-                    choice.value = choice.name;
-                    return $.extend({
-                        selected: (choice.value === value)
-                    }, choice);
-                })
-            };
-            this.$el.html(this.template(context));
-        });
+                }
+                choice.value = choice.name;
+                return $.extend({
+                    selected: (choice.value === value)
+                }, choice);
+            })
+        };
+        this.$el.html(this.template(context));
     }
 });
 promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
@@ -496,10 +491,9 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     },
     onActivate: function(readyToRenderCallback) {
         var renderContext = this.renderContext;
-        this.getValue(function(value) {
-            renderContext.value = value;
-            readyToRenderCallback();
-        });
+        var value = this.getValue();
+        renderContext.value = value;
+        readyToRenderCallback();
     },
     beforeMove: function(continuation) {
         var that = this;
@@ -570,10 +564,9 @@ promptTypes.image = promptTypes.media.extend({
     templatePath: "templates/image.handlebars",
     onActivate: function(readyToRenderCallback) {
         var that = this;
-        this.getValue(function(value) {
-            that.renderContext.mediaPath = value;
-            that.renderContext.uriValue = opendatakit.asUri(value, 'img');
-        });
+        var value = that.getValue();
+        that.renderContext.mediaPath = value;
+        that.renderContext.uriValue = opendatakit.asUri(value, 'img');
         readyToRenderCallback();
     },
     capture: function() {
@@ -599,13 +592,12 @@ promptTypes.video = promptTypes.media.extend({
     templatePath: "templates/video.handlebars",
     onActivate: function(readyToRenderCallback) {
         var that = this;
-        this.getValue(function(value) {
-            if (value !== null && value.length !== 0) {
-                that.renderContext.uriValue = opendatakit.asUri(value, 'video', 'src');
-                that.renderContext.videoPoster = opendatakit.asUri(opendatakit.baseDir + "img/play.png", 'video', 'poster');
-            }
-            readyToRenderCallback();
-        });
+        var value = that.getValue();
+        if (value != null && value.length != 0) {
+            that.renderContext.uriValue = opendatakit.asUri(value, 'video', 'src');
+            that.renderContext.videoPoster = opendatakit.asUri(opendatakit.baseDir + "img/play.png", 'video', 'poster');
+        }
+        readyToRenderCallback();
     },
     capture: function() {
         if (collect.getPlatformInfo !== 'Android') {

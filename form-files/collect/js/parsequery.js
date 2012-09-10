@@ -1,6 +1,6 @@
 'use strict';
 // Cdependency upon: opendatakit, database 
-define(['opendatakit','database'],function(opendatakit,database) {
+define(['mdl','opendatakit','database'],function(mdl,opendatakit,database) {
 return {
 
     parseQueryHelper:function(dataKeyValueList, key, value) {
@@ -23,7 +23,7 @@ return {
                     // construct a friendly name for this new form...
                     var date = new Date();
                     var dateStr = date.toISOString();
-                    var fnvalue = opendatakit.getFormName() + "_" + dateStr; // .replace(/\W/g, "_")
+                    var fnvalue = mdl.qp.formName.value + "_" + dateStr; // .replace(/\W/g, "_")
                     database.putMetaData('instanceName', 'string', fnvalue, function() {
                         var qpl = '?instanceId=' + escape(instanceId);
                         if ( qpl != window.location.search ) {
@@ -32,19 +32,8 @@ return {
                             // page reload happens...
                         } else {
                             // pull everything for synchronous read access
-                            database.getAllMetaData(function(tlo) {
-							    if ( tlo == null ) {
-								    tlo = {};
-								}
-								// these values come from the current webpage
-								tlo.formId = opendatakit.getFormId();
-								tlo.formVersion = opendatakit.getFormVersion();
-								tlo.formLocale = opendatakit.getFormLocale();
-								tlo.formName = opendatakit.getFormName();
-								tlo.instanceId = opendatakit.getInstanceId();
-								// update qp
-                                opendatakit.queryParameters = tlo;
-								database.initializeTables(datafields, continuation);
+                            database.cacheAllMetaData(function() {
+                                database.initializeTables(datafields, continuation);
                             });
                         }
                     });
@@ -56,51 +45,40 @@ return {
                         // page reload happens...
                     } else {
                         // pull everything for synchronous read access
-                        database.getAllMetaData(function(tlo) {
-							if ( tlo == null ) {
-								tlo = {};
-							}
-							// these values come from the current webpage
-							tlo.formId = opendatakit.getFormId();
-							tlo.formVersion = opendatakit.getFormVersion();
-							tlo.formLocale = opendatakit.getFormLocale();
-							tlo.formName = opendatakit.getFormName();
-							tlo.instanceId = opendatakit.getInstanceId();
-							// update qp
-                            opendatakit.queryParameters = tlo;
-							database.initializeTables(datafields, continuation);
+                        database.cacheAllMetaData(function() {
+                            database.initializeTables(datafields, continuation);
                         });
                     }
                 }
             });
         };
     },
-	findParam:function(formDef, key) {
-		for (var i = 0 ; i < formDef.settings.length ; ++i ) {
-			var e = formDef.settings[i];
-			if ( e.name == key ) {
-				return e;
-			}
-		}
-		return null;
-	},
+    findParam:function(formDef, key) {
+        for (var i = 0 ; i < formDef.settings.length ; ++i ) {
+            var e = formDef.settings[i];
+            if ( e.name == key ) {
+                return e;
+            }
+        }
+        return null;
+    },
     parseQueryParameters:function(formDef, continuation ) {
         var that = this;
         var result = {};
-		
-		var formId = this.findParam(formDef, 'formId').param;
-		var formVersion = this.findParam(formDef, 'formVersion').param;
-		var formLocale = this.findParam(formDef, 'formLocale').param;
-		var formName = this.findParam(formDef, 'formName').param[formLocale];
+        
+        var formId = this.findParam(formDef, 'formId').param;
+        var formVersion = this.findParam(formDef, 'formVersion').param;
+        var formLocale = this.findParam(formDef, 'formLocale').param;
+        var formName = this.findParam(formDef, 'formName').param[formLocale];
         
         // only these values plus instanceId are immediate -- everything else is in metadata table.
-        result.formId = formId;
-        result.formVersion = formVersion;
-        result.formLocale = formLocale;
-        result.formName = formName;
+        result.formId = { "type" : "string", "value": formId };
+        result.formVersion = { "type" : "string", "value": formVersion };
+        result.formLocale = { "type" : "string", "value": formLocale };
+        result.formName = { "type" : "string", "value": formName };
         
-        // update the queryParameters value within opendatakit object...
-        opendatakit.queryParameters = result;
+        // update the qp object...
+        mdl.qp = result;
         
         var instanceId = null;
         var dataKeyValueList = [];
@@ -130,10 +108,10 @@ return {
             console.log("ALERT! defining a UUID  because one wasn't specified");
             instanceId = opendatakit.genUUID();
             // save in immediate query parameter...
-            result.instanceId = instanceId;
+            result.instanceId = { "type" : "string", "value": instanceId };
         } else {
             // save in immediate query parameter...
-            result.instanceId = instanceId;
+            result.instanceId = { "type" : "string", "value": instanceId };
         }
         
         // there are always 4 entries (formId, formName, formVersion, formLocale)

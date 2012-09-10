@@ -1,6 +1,6 @@
 'use strict';
 // depends upon: opendatakit 
-define(['opendatakit'], function(opendatakit) {
+define(['mdl','opendatakit'], function(mdl,opendatakit) {
     return {
   submissionDb:false,
 
@@ -47,13 +47,13 @@ define(['opendatakit'], function(opendatakit) {
 selectStmt:function(name) {
     return {
             stmt : 'select tbl.t1 type, tbl.v1 val from (select val v1, type t1, name, timestamp from attr_values where form_id=? and instance_id=? and name=? group by name having timestamp = max(timestamp)) tbl;',
-            bind : [opendatakit.getFormId(), opendatakit.getInstanceId(), name]    
+            bind : [mdl.qp.formId.value, mdl.qp.instanceId.value, name]    
         };
 },
 selectAllStmt:function() {
     return {
             stmt : 'select tbl.name name, tbl.t1 type, tbl.v1 val from (select val v1, type t1, name, timestamp from attr_values where form_id=? and instance_id=? group by name having timestamp = max(timestamp)) tbl;',
-            bind : [opendatakit.getFormId(), opendatakit.getInstanceId()]    
+            bind : [mdl.qp.formId.value, mdl.qp.instanceId.value]    
         };
 },
 // save the given value under that name
@@ -62,31 +62,31 @@ insertStmt:function(name, type, value) {
     if (value == null) {
         return {
             stmt : 'insert into attr_values (timestamp,form_id,instance_id,name,type,val) VALUES (?,?,?,?,?,null);',
-            bind : [now, opendatakit.getFormId(), opendatakit.getInstanceId(), name, type]
+            bind : [now, mdl.qp.formId.value, mdl.qp.instanceId.value, name, type]
         };
     } else {
         return {
             stmt : 'insert into attr_values (timestamp,form_id,instance_id,name,type,val) VALUES (?,?,?,?,?,?);',
-            bind : [now, opendatakit.getFormId(), opendatakit.getInstanceId(), name, type, value]
+            bind : [now, mdl.qp.formId.value, mdl.qp.instanceId.value, name, type, value]
         };
     }
 },
 markCurrentStateAsSavedStmt:function(status) {
     return {
         stmt : 'update attr_values set saved = case when id in ( select tbl.id_key from ( select id id_key, instance_id, name, timestamp from attr_values where form_id = ? and instance_id = ? group by instance_id, name having timestamp = max(timestamp)) tbl ) then ? else null end where form_id = ? and instance_id = ?;',
-        bind : [opendatakit.getFormId(), opendatakit.getInstanceId(), status, opendatakit.getFormId(), opendatakit.getInstanceId()]
+        bind : [mdl.qp.formId.value, mdl.qp.instanceId.value, status, mdl.qp.formId.value, mdl.qp.instanceId.value]
     };
 },
 deletePriorChangesStmt:function() {
     return {
         stmt : 'delete from attr_values where id in (select tbl.id_key from ( select id id_key, instance_id, name, timestamp from attr_values where form_id = ? and instance_id = ? group by instance_id, name having timestamp < max(timestamp)) tbl );',
-        bind : [opendatakit.getFormId(), opendatakit.getInstanceId()]
+        bind : [mdl.qp.formId.value, mdl.qp.instanceId.value]
     };
 },
 deleteUnsavedChangesStmt:function() {
     return {
         stmt : 'delete from attr_values where form_id = ? and instance_id = ? and saved is null;',
-        bind : [opendatakit.getFormId(), opendatakit.getInstanceId()]
+        bind : [mdl.qp.formId.value, mdl.qp.instanceId.value]
     };
 },
 deleteStmt:function(formid, instanceid) {
@@ -99,13 +99,13 @@ deleteStmt:function(formid, instanceid) {
 selectMetaDataStmt:function(name) {
     return {
             stmt : 'select tbl.v1 val, tbl.t1 type from (select val v1, type t1, name, timestamp from instance_info where form_id=? and instance_id=? and name=? group by name having timestamp = max(timestamp)) tbl;',
-            bind : [opendatakit.getFormId(), opendatakit.getInstanceId(), name]    
+            bind : [mdl.qp.formId.value, mdl.qp.instanceId.value, name]    
         };
 },
 selectAllMetaDataStmt:function() {
     return {
             stmt : 'select tbl.name name, tbl.t1 type, tbl.v1 val from (select val v1, type t1, name, timestamp from instance_info where form_id=? and instance_id=? group by name having timestamp = max(timestamp)) tbl;',
-            bind : [opendatakit.getFormId(), opendatakit.getInstanceId()]    
+            bind : [mdl.qp.formId.value, mdl.qp.instanceId.value]    
         };
 },
 // save the given value under that name
@@ -114,12 +114,12 @@ insertMetaDataStmt:function(name, type, value) {
     if (value == null) {
         return {
             stmt : 'insert into instance_info (timestamp,form_id,instance_id,name,type,val) VALUES (?,?,?,?,?,null);',
-            bind : [now, opendatakit.getFormId(), opendatakit.getInstanceId(), name, type]
+            bind : [now, mdl.qp.formId.value, mdl.qp.instanceId.value, name, type]
         };
     } else {
         return {
             stmt : 'insert into instance_info (timestamp,form_id,instance_id,name,type,val) VALUES (?,?,?,?,?,?);',
-            bind : [now, opendatakit.getFormId(), opendatakit.getInstanceId(), name, type, value]
+            bind : [now, mdl.qp.formId.value, mdl.qp.instanceId.value, name, type, value]
         };
     }
 },
@@ -132,25 +132,25 @@ getAllFormInstancesStmt:function() {
                             '(select form_id, instance_id, timestamp, saved, name, val v1 from instance_info ' + 
                                 'where form_id=? group by instance_id, name having timestamp = max(timestamp))) ' + 
                      'group by instance_id order by timestamp desc;',
-            bind : [opendatakit.getFormId()]
+            bind : [mdl.qp.formId.value]
             };
 },
 markCurrentMetaDataStateAsSavedStmt:function(status) {
     return {
         stmt : 'update instance_info set saved = case when id in ( select tbl.id_key from ( select id id_key, instance_id, name, timestamp from instance_info where form_id = ? and instance_id = ? group by instance_id, name having timestamp = max(timestamp)) tbl ) then ? else null end where form_id = ? and instance_id = ?;',
-        bind : [opendatakit.getFormId(), opendatakit.getInstanceId(), status, opendatakit.getFormId(), opendatakit.getInstanceId()]
+        bind : [mdl.qp.formId.value, mdl.qp.instanceId.value, status, mdl.qp.formId.value, mdl.qp.instanceId.value]
     };
 },
 deletePriorMetaDataChangesStmt:function() {
     return {
         stmt : 'delete from instance_info where id in (select tbl.id_key from ( select id id_key, instance_id, name, timestamp from instance_info where form_id = ? and instance_id = ? group by instance_id, name having timestamp < max(timestamp)) tbl );',
-        bind : [opendatakit.getFormId(), opendatakit.getInstanceId()]
+        bind : [mdl.qp.formId.value, mdl.qp.instanceId.value]
     };
 },
 deleteUnsavedMetaDataChangesStmt:function() {
     return {
         stmt : 'delete from instance_info where form_id = ? and instance_id = ? and saved is null;',
-        bind : [opendatakit.getFormId(), opendatakit.getInstanceId()]
+        bind : [mdl.qp.formId.value, mdl.qp.instanceId.value]
     };
 },
 deleteMetaDataStmt:function(formid, instanceid) {
@@ -273,7 +273,7 @@ getAllData:function(action) {
 cacheAllData:function(action) {
     var that = this;
     this.getAllData(function(tlo) {
-        that.model = tlo;
+        mdl.data = (tlo == null) ? {} : tlo;
         action();
     });
 },
@@ -347,6 +347,24 @@ getAllMetaData:function(action) {
         action(tlo);
       });
 },
+cacheAllMetaData:function(action) {
+    var that = this;
+    // pull everything for synchronous read access
+    that.getAllMetaData(function(tlo) {
+        if ( tlo == null ) {
+            tlo = {};
+        }
+        // these values come from the current webpage
+        tlo.formId = mdl.qp.formId;
+        tlo.formVersion = mdl.qp.formVersion;
+        tlo.formLocale = mdl.qp.formLocale;
+        tlo.formName = mdl.qp.formName;
+        tlo.instanceId = mdl.qp.instanceId;
+        // update qp
+        mdl.qp = tlo;
+        action();
+    });
+},
 save_all_changes:function(asComplete, continuation) {
       var that = this;
     // TODO: ensure that all data on the current page is saved...
@@ -362,7 +380,8 @@ save_all_changes:function(asComplete, continuation) {
         }, function(error) {
             console.log("save_all_changes: failed preliminary save");
         }, function() {
-            console.log("save_all_changes: successful markCurrentStateAsSavedStmt('false'): " + opendatakit.getFormId() + " instanceId: " + opendatakit.getInstanceId());
+            console.log("save_all_changes: successful markCurrentStateAsSavedStmt('false'): " +
+                        mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value);
             if ( asComplete ) {
                 // TODO: traverse all elements evaluating their constraints (validating their contents)
                 // TODO: show error boxes for any violated constraints...
@@ -384,8 +403,10 @@ save_all_changes:function(asComplete, continuation) {
                     }, function(error) {
                         console.log("save_all_changes: failed final save");
                     }, function() {
-                        console.log("save_all_changes: successful markCurrentStateAsSavedStmt('true'): " + opendatakit.getFormId() + " instanceId: " + opendatakit.getInstanceId());
-                        console.log("save_all_changes: successful deletePriorChangesStmt(): " + opendatakit.getFormId() + " instanceId: " + opendatakit.getInstanceId());
+                        console.log("save_all_changes: successful markCurrentStateAsSavedStmt('true'): " + 
+                                    mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value);
+                        console.log("save_all_changes: successful deletePriorChangesStmt(): " + 
+                                    mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value);
                         if ( continuation != null ) {
                             continuation();
                         }
@@ -409,7 +430,8 @@ ignore_all_changes:function(continuation) {
         }, function(error) {
             console.log("ignore_all_changes: failed delete unsaved changes");
         }, function() {
-            console.log("ignore_all_changes: successful deleteUnsavedChangesStmt: " + opendatakit.getFormId() + " instanceId: " + opendatakit.getInstanceId());
+            console.log("ignore_all_changes: successful deleteUnsavedChangesStmt: " + 
+                        mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value);
             if ( continuation != null ) {
                 continuation();
             }
@@ -434,13 +456,43 @@ ignore_all_changes:function(continuation) {
 },
 initializeTables:function(datafields, continuation) {
     var that = this;
-    var formId = opendatakit.queryParameters.formId;
-    var formVersion = opendatakit.queryParameters.formVersion;
+    var formId = mdl.qp.formId.value;
+    var formVersion = mdl.qp.formVersion.value;
     
-    // opendatakit has all the query parameters loaded
+    // mdl.qp has all the query parameters loaded
     // datafields describes the data fields
     // formId and formVersion identify the table name
     that.cacheAllData(continuation);
+},
+getDataValue:function(name) {
+    var path = name.split('.');
+    var v = mdl.data;
+    for ( var i = 0 ; i < path.length ; ++i ) {
+        v = v[path[i]];
+        if ( v == null ) return v;
+    }
+    return v.value;
+},
+setData:function(name, datatype, value, onSuccess) {
+    var that = this;
+    that.putData(name, datatype, value, function() {
+        that.cacheAllData(onSuccess);
+    });
+},
+getMetaDataValue:function(name) {
+    var path = name.split('.');
+    var v = mdl.qp;
+    for ( var i = 0 ; i < path.length ; ++i ) {
+        v = v[path[i]];
+        if ( v == null ) return v;
+    }
+    return v.value;
+},
+setMetaData:function(name, datatype, value, onSuccess) {
+    var that = this;
+    that.putMetaData(name, datatype, value, function() {
+        that.cacheAllMetaData(onSuccess);
+    });
 }
 };
 });

@@ -2,6 +2,7 @@ requirejs.config({
     //baseUrl: '../collect/js',
     paths: {
         collect : '../collect',
+        mdl : '../collect/js/mdl',
         database : '../collect/js/database',
         opendatakit : '../collect/js/opendatakit',
         parsequery : '../collect/js/parsequery',
@@ -253,7 +254,7 @@ var formDef = /* json start delimiter */{
     // created the data table and its table descriptors
     // re-normalized the query string to just have the instanceId
     // read all the form data and metaData into value caches
-    // under database.model and opendatakit.queryParameters (respectively).
+    // under mdl.data and mdl.qp (respectively).
         
 requirejs(['zepto','builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
 function($,builder,controller,prompts) {

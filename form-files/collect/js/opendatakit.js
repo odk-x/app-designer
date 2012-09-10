@@ -1,6 +1,7 @@
 'use strict';
 // depends upon: --
-define({
+define(['mdl'],function(mdl) {
+return {
     baseDir: '../collect/',
     databaseSettings: null,
     platformInfo: null,
@@ -81,10 +82,6 @@ define({
         return true;
     },
 
-    // From: http://geekswithblogs.net/PhubarBaz/archive/2011/11/21/getting-query-parameters-in-javascript.aspx
-    queryParameters:{
-    },
-    
     genUUID:function() {
         // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
         var id = "uuid:" + 
@@ -98,33 +95,14 @@ define({
     openNewInstanceId:function(id, friendlyName) {
         console.log("ALERT! setNewInstanceId - setting new UUID");
         if (id == null) {
-            this.queryParameters.instanceId = this.genUUID();
+            mdl.qp.instanceId.value = this.genUUID();
         } else {
-            this.queryParameters.instanceId = id;
+            mdl.qp.instanceId.value = id;
         }
-        var qpl = '?instanceId=' + escape(this.queryParameters.instanceId) +
+        var qpl = '?instanceId=' + escape(mdl.qp.instanceId.value) +
             ((friendlyName != null) ? '&instanceName=' + escape(friendlyName) : '');
         // apply the change to the URL...
         window.location.search = qpl;
     },
-
-    getInstanceId:function() {
-        return this.queryParameters.instanceId;
-    },
-
-    getFormId:function() {
-        return this.queryParameters.formId;
-    },
-
-    getFormVersion:function() {
-        return this.queryParameters.formVersion;
-    },
-
-    getFormLocale:function() {
-        return this.queryParameters.formLocale;
-    },
-
-    getFormName:function() {
-        return this.queryParameters.formName;
-    },
+};
 });
