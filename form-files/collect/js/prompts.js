@@ -1,7 +1,7 @@
 'use strict';
 
-define(['database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
-function(database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
+define(['database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates', 'collect'],
+function(database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _, collect) {
 
 Handlebars.registerHelper('localize', function(textOrLangMap) {
     if(_.isUndefined(textOrLangMap)) {
@@ -44,7 +44,7 @@ promptTypes.base = Backbone.View.extend({
         }
     },
     isInitializeComplete: function() {
-        return (this.template != null);
+        return (this.template !== null);
     },
     initializeRenderContext: function() {
         //We don't want to modify the top level render context.
@@ -224,11 +224,10 @@ promptTypes.opening = promptTypes.base.extend({
         controller.gotoPromptName('_instances', [], true);
     },
     renderContext: {
-        baseDir: collect.baseDir,
         formName: opendatakit.getFormName(),
-        headerImg: 'img/form_logo.png',
-        backupImg: 'img/backup.png',
-        advanceImg: 'img/advance.png'
+        headerImg: collect.baseDir + 'img/form_logo.png',
+        backupImg: collect.baseDir + 'img/backup.png',
+        advanceImg: collect.baseDir + 'img/advance.png'
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -258,9 +257,8 @@ promptTypes.finalize = promptTypes.base.extend({
         "click .final-btn": "saveFinal"
     },
     renderContext: {
-        baseDir: collect.baseDir,
         formName: opendatakit.getFormName(),
-        headerImg: 'img/form_logo.png',
+        headerImg: collect.baseDir + 'img/form_logo.png'
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;
@@ -369,60 +367,60 @@ promptTypes.repeat = promptTypes.base.extend({
 });
 promptTypes.select = promptTypes.base.extend({
     type: "select",
-    datatype: "text",
+	datatype: "text",
     template: Handlebars.templates.select,
     templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification"
     },
-    // TODO: choices should be cloned and allow calculations in the choices
-    // perhaps a null 'name' would drop the value from the list of choices...
-    // could also allow calculations in the 'checked' and 'value' fields.
+	// TODO: choices should be cloned and allow calculations in the choices
+	// perhaps a null 'name' would drop the value from the list of choices...
+	// could also allow calculations in the 'checked' and 'value' fields.
     modification: function(evt) {
-        var that = this;
+		var that = this;
         console.log("select modification");
         console.log(this.$('form').serializeArray());
         var value = this.$('form').serializeArray();
-        var saveValue = (value == null) ? null : JSON.stringify(value);
-        // TODO: broken for multiselect -- pretty sure we don't want to serialize array to db    
-        this.setValue(saveValue, function() {
-            that.renderContext.value = value;
-            that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
-                if ( value != null ) {
+		var saveValue = (value === null) ? null : JSON.stringify(value);
+		// TODO: broken for multiselect -- pretty sure we don't want to serialize array to db	
+		this.setValue(saveValue, function() {
+			that.renderContext.value = value;
+			that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
+				if ( value !== null ) {
                     // NOTE: for multi-select
-                    var matchingValue = _.find(that.renderContext.value, function(value){
-                        return choice.name === value.name;
-                    });
-                    choice.checked = (matchingValue != null);
-                } else {
-                    choice.checked = false;
-                }
-                return choice;
-            })
-            that.render();
-        });
+					var matchingValue = _.find(that.renderContext.value, function(value){
+						return choice.name === value.name;
+					});
+					choice.checked = (matchingValue !== null);
+				} else {
+					choice.checked = false;
+				}
+				return choice;
+			});
+			that.render();
+		});
     },
     onActivate: function(readyToRenderCallback) {
-        var that = this;
+		var that = this;
         if(this.param in this.form.choices){
             that.renderContext.choices = this.form.choices[this.param];
         }
-        this.getValue(function(saveValue) {
-            that.renderContext.value = (saveValue == null) ? null : JSON.parse(saveValue);
-            for (var i = 0 ; i < that.renderContext.choices.length ; ++i ) {
-                var choice = that.renderContext.choices[i];
-                if ( that.renderContext.value != null ) {
-                    // NOTE: for multi-select
-                    var matchingValue = _.find(that.renderContext.value, function(value){
-                        return choice.name === value.name;
-                    });
-                    that.renderContext.choices[i].checked = (matchingValue != null);
-                } else {
-                    that.renderContext.choices[i].checked = false;
-                }
-            }
-            readyToRenderCallback();
-        });
+		this.getValue(function(saveValue) {
+			that.renderContext.value = (saveValue === null) ? null : JSON.parse(saveValue);
+			for (var i = 0 ; i < that.renderContext.choices.length ; ++i ) {
+				var choice = that.renderContext.choices[i];
+				if ( that.renderContext.value !== null ) {
+				    // NOTE: for multi-select
+					var matchingValue = _.find(that.renderContext.value, function(value){
+						return choice.name === value.name;
+					});
+					that.renderContext.choices[i].checked = (matchingValue !== null);
+				} else {
+					that.renderContext.choices[i].checked = false;
+				}
+			}
+			readyToRenderCallback();
+		});
     }
 });
 promptTypes.dropdownSelect = promptTypes.base.extend({
@@ -434,37 +432,37 @@ promptTypes.dropdownSelect = promptTypes.base.extend({
     },
     modification: function(evt) {
         console.log("select modification");
-        var that = this;
-        database.putData(this.name, "string", that.$('select').val(), function() {
-            that.render();
-        });
+		var that = this;
+		database.putData(this.name, "string", that.$('select').val(), function() {
+			that.render();
+		});
     },
     render: function() {
-        this.getValue(function(value) {
-            console.log(value);
-            var context = {
-                name: this.name,
-                label: this.label,
-                choices: _.map(this.choices, function(choice) {
-                    if (_.isString(choice)) {
-                        choice = {
-                            label: choice,
-                            value: choice
-                        };
-                    }
-                    else {
-                        if (!('label' in choice)) {
-                            choice.label = choice.name;
-                        }
-                    }
-                    choice.value = choice.name;
-                    return $.extend({
-                        selected: (choice.value === value)
-                    }, choice);
-                })
-            };
-            this.$el.html(this.template(context));
-        });
+		this.getValue(function(value) {
+			console.log(value);
+			var context = {
+				name: this.name,
+				label: this.label,
+				choices: _.map(this.choices, function(choice) {
+					if (_.isString(choice)) {
+						choice = {
+							label: choice,
+							value: choice
+						};
+					}
+					else {
+						if (!('label' in choice)) {
+							choice.label = choice.name;
+						}
+					}
+					choice.value = choice.name;
+					return $.extend({
+						selected: (choice.value === value)
+					}, choice);
+				})
+			};
+			this.$el.html(this.template(context));
+		});
     }
 });
 promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
@@ -663,25 +661,6 @@ promptTypes.screen = promptTypes.base.extend({
         }
         return true;
     },
-    onActivateHelper: function(idx, readyToRenderCallback) {
-        var that = this;
-        return function() {
-            if ( that.prompts.length > idx ) {
-                var prompt = that.prompts[idx];
-                prompt.onActivate(that.onActivateHelper(idx+1,readyToRenderCallback));
-            } else {
-                readyToRenderCallback();
-            }
-        }
-    },
-    onActivate: function(readyToRenderCallback) {
-        if ( this.prompts.length == 0 ) {
-            readyToRenderCallback();
-        } else {
-            var prompt = this.prompts[0];
-            prompt.onActivate(this.onActivateHelper(1, readyToRenderCallback));
-        }
-    },
     render: function(){
         this.$el.html('<div class="prompts"></div>');
         var $prompts = this.$('.prompts');
@@ -690,6 +669,7 @@ promptTypes.screen = promptTypes.base.extend({
             $prompts.append($promptEl);
             prompt.setElement($promptEl.get(0));
             prompt.render();
+        
         });
     }
 });
@@ -717,12 +697,29 @@ promptTypes.label = promptTypes.base.extend({
 });
 promptTypes.goto = promptTypes.base.extend({
     type: "goto",
-        hideInHierarchy: true,
+    hideInHierarchy: true,
     isInitializeComplete: function() {
         return true;
     },
     onActivate: function(readyToRenderCallback) {
         controller.gotoLabel(this.param);
+    }
+});
+promptTypes.conditional_goto = promptTypes.base.extend({
+    type: "goto_if",
+    condition: function(){
+        return false;
+    },
+    hideInHierarchy: true,
+    isInitializeComplete: function() {
+        return true;
+    },
+    onActivate: function(readyToRenderCallback) {
+        if(this.condition()){
+            controller.gotoLabel(this.param);
+        } else {
+            controller.gotoNextScreen();
+        }
     }
 });
 });

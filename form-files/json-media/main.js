@@ -58,36 +58,41 @@ requirejs.config({
 });
 
 requirejs(['opendatakit', 'database','parsequery'], function(opendatakit, database, parsequery) {
-var formDef = /* json start delimiter */{
+    parsequery.parseQueryParameters('lgform', null, 
+        'en_us', 'Simple Test Form', function() {
+        
+requirejs(['zepto','builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
+function($,builder,controller,prompts) {
+    console.log('scripts loaded');
+    // build the survey and place it in the controller...
+builder.buildSurvey(/* json start delimiter */
+{
     "settings": [
         {
-            name: "formId",
-            param: "lgform"
-        },
+            "setting": "formId", 
+            "value": "testForm"
+        }, 
         {
-            name: "formVersion",
-            param: "20120901"
-        },
+            "setting": "formVersion", 
+            "value": 1
+        }, 
         {
-            name: "formLocale",
-            param: "en_us"
-        },
+            "setting": "formLocale", 
+            "value": "en_us"
+        }, 
         {
-            name: "formName",
-            param: {
-                "en_us": 'Simple Test Form'
-                }
+            "setting": "formName", 
+            "value": "Test Form"
         }
-    ],
+    ], 
     "survey": [
         {
-            "type": "goto", 
+            "type": "goto_if",
+            "condition": function(){
+                return 1 === 1;
+            },
             "param": "test"
         },
-        {
-            "type": "label", 
-            "param": "test"
-        }, 
         {
             "prompts": [
                 {
@@ -107,14 +112,6 @@ var formDef = /* json start delimiter */{
                     }
                 }, 
                 {
-                    "type": "decimal", 
-                    "name": "bmi", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "Enter your bmi:"
-                    }
-                },
-                {
                     "type": "select", 
                     "name": "gender", 
                     "param": "gender", 
@@ -124,34 +121,18 @@ var formDef = /* json start delimiter */{
                 }
             ], 
             "type": "screen", 
-            "name": "testScreen",
-            "label":  {
-                "en_us": "Screen Group"
-            }
+            "name": "asdf"
         }, 
         {
-            "type": "goto", 
-            "param": "test2"
-        },
-        {
             "type": "label", 
-            "param": "test2"
-        },
-        {
-            "name": "name", 
-            "validate": true, 
-            "type": "text", 
-            "param": null, 
-            "label": {
-                "en_us": "Enter your name:"
-            }
+            "param": "test"
         }, 
         {
             "type": "audio", 
             "name": "audio_test", 
             "param": null, 
             "label": {
-                "en_us": "Audio test"
+                "english": "Audio test"
             }
         }, 
         {
@@ -178,23 +159,6 @@ var formDef = /* json start delimiter */{
             "param": "subform.html"
         }, 
         {
-            "name": "specialTemplateTest", 
-            "label": {
-                "en_us": "Custom template test:"
-            }, 
-            "type": "text", 
-            "param": null, 
-            "templatePath": "test.handlebars"
-        },
-        {
-            "type": "integer", 
-            "name": "age", 
-            "param": null, 
-            "label": {
-                "en_us": "Enter your age:"
-            }
-        }, 
-        {
             "type": "decimal", 
             "name": "bmi", 
             "param": null, 
@@ -203,10 +167,13 @@ var formDef = /* json start delimiter */{
             }
         }, 
         {
-            "type": "select", 
-            "name": "sel",
-            "label": "Select all genders:",
-            "param": "gender"
+            "name": "specialTemplateTest", 
+            "label": {
+                "en_us": "Custom template test:"
+            }, 
+            "type": "text", 
+            "param": null, 
+            "templatePath": "test.handlebars"
         }
     ], 
     "datafields": {
@@ -220,10 +187,7 @@ var formDef = /* json start delimiter */{
             "type": "integer"
         }, 
         "bmi": {
-            "type": "decimal"
-        }, 
-        "sel": {
-            "type": "multiselect"
+            "type": "number"
         }, 
         "image_test": {
             "type": "image/*"
@@ -247,19 +211,9 @@ var formDef = /* json start delimiter */{
             }
         ]
     }
-}/* json end delimiter */;
-    parsequery.parseQueryParameters(formDef, function() {
+}/* json end delimiter */, function() {
     // we have saved all query parameters into the metaData table
-    // created the data table and its table descriptors
-    // re-normalized the query string to just have the instanceId
-    // read all the form data and metaData into value caches
-    // under database.model and opendatakit.queryParameters (respectively).
-        
-requirejs(['zepto','builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
-function($,builder,controller,prompts) {
-    console.log('scripts loaded');
-    // build the survey and place it in the controller...
-builder.buildSurvey(formDef, function() {
+    // and re-normalized the query string to remove them.
     //
     // register to handle manual #hash changes
     $(window).bind('hashchange', function(evt) {
