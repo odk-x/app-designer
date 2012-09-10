@@ -475,7 +475,12 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     template: Handlebars.templates.inputType,
     templatePath: "templates/inputType.handlebars",
     events: {
-        "change input": "modification"
+        "change input": "modification",
+        "swipeLeft input": "disableSwipingOnInput",
+        "swipeRight input": "disableSwipingOnInput"
+    },
+    disableSwipingOnInput: function(evt){
+        evt.stopPropagation();
     },
     modification: function(evt) {
         var that = this;
