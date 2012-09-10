@@ -212,6 +212,15 @@ promptTypes.opening = promptTypes.base.extend({
     hideInHierarchy: true,
     template: Handlebars.templates.opening,
     templatePath: "templates/opening.handlebars",
+    onActivate: function(readyToRenderCallback) {
+        var formLogo = _.find(this.form.settings, function(setting){
+            return setting.name==='formLogo'
+        });
+        if(formLogo){
+            this.renderContext.headerImg = formLogo.param;
+        }
+        readyToRenderCallback();
+    },
     events: {
         "click .editInstances": "editInstances"
     },
@@ -219,12 +228,11 @@ promptTypes.opening = promptTypes.base.extend({
         controller.gotoPromptName('_instances', [], true);
     },
     renderContext: {
-        baseDir: collect.baseDir,
         formName: mdl.qp.formName.value,
         instanceName: mdl.qp.instanceName.value,
-        headerImg: 'img/form_logo.png',
-        backupImg: 'img/backup.png',
-        advanceImg: 'img/advance.png'
+        headerImg: collect.baseDir + 'img/form_logo.png',
+        backupImg: collect.baseDir + 'img/backup.png',
+        advanceImg: collect.baseDir + 'img/advance.png'
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -254,10 +262,9 @@ promptTypes.finalize = promptTypes.base.extend({
         "click .final-btn": "saveFinal"
     },
     renderContext: {
-        baseDir: collect.baseDir,
         formName: mdl.qp.formName.value,
         instanceName: mdl.qp.instanceName.value,
-        headerImg: 'img/form_logo.png',
+        headerImg: collect.baseDir + 'img/form_logo.png',
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;

@@ -78,6 +78,10 @@ var formDef = /* json start delimiter */{
             param: {
                 "en_us": 'Simple Test Form'
                 }
+        },
+        {
+            name: "formLogo",
+            param: "img/form_logo.png"
         }
     ],
     "survey": [

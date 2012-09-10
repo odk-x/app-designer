@@ -46,10 +46,7 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
     },
     buildSurvey:function(surveyJson, continuation){
             var that = this;
-            var settings = {};
-            if ('settings' in surveyJson) {
-                $.extend(settings, surveyJson.settings[0]);
-            }
+
             var widgets = {};
 
             //Load scripts specified in settings somewhere after this point
@@ -66,7 +63,7 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
             }
             that.form = {
                 choices: surveyJson.choices,
-                settings: settings,
+                settings: surveyJson.settings,
                 widgets: widgets,
                 column_types: column_types
             };
