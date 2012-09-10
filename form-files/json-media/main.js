@@ -82,14 +82,6 @@ var formDef = /* json start delimiter */{
     ],
     "survey": [
         {
-            "type": "goto", 
-            "param": "test"
-        },
-        {
-            "type": "label", 
-            "param": "test"
-        }, 
-        {
             "prompts": [
                 {
                     "type": "text", 
@@ -131,12 +123,12 @@ var formDef = /* json start delimiter */{
             }
         }, 
         {
-            "type": "goto", 
-            "param": "test2"
-        },
-        {
-            "type": "label", 
-            "param": "test2"
+            "type": "goto_if",
+            "param": "test2",
+            "condition": function(){
+                console.log(database.getDataValue("name"));
+                return database.getDataValue("name") !== "";
+            }
         },
         {
             "name": "name", 
@@ -147,6 +139,10 @@ var formDef = /* json start delimiter */{
                 "en_us": "Enter your name:"
             }
         }, 
+        {
+            "type": "label", 
+            "param": "test2"
+        },
         {
             "type": "audio", 
             "name": "audio_test", 

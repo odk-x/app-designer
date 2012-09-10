@@ -709,12 +709,29 @@ promptTypes.label = promptTypes.base.extend({
 });
 promptTypes.goto = promptTypes.base.extend({
     type: "goto",
-        hideInHierarchy: true,
+    hideInHierarchy: true,
     isInitializeComplete: function() {
         return true;
     },
     onActivate: function(readyToRenderCallback) {
         controller.gotoLabel(this.param);
+    }
+});
+promptTypes.goto_if = promptTypes.base.extend({
+    type: "goto_if",
+    hideInHierarchy: true,
+    isInitializeComplete: function() {
+        return true;
+    },
+    condition: function(){
+        return false;
+    },
+    onActivate: function(readyToRenderCallback) {
+        if(this.condition()){
+            controller.gotoLabel(this.param);
+        } else {
+            controller.gotoNextScreen();
+        }
     }
 });
 });
