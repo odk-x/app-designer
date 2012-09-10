@@ -217,9 +217,10 @@ putDataKeyTypeValueMap:function(ktvlist, onSuccessfulSave) {
             console.log("putDataKeyValueMap: failed transaction for " + ktvlist.length );
         }, onSuccessfulSave );
 },
-constructJsonDataClosureHelper:function(tlo) {
+constructJsonDataClosureHelper:function(continuation) {
     return function(transaction, result) {
-        var len = result.rows.length;
+        var tlo;
+		var len = result.rows.length;
         if (len == 0 ) {
             tlo = null;                            
         } else {
@@ -254,6 +255,7 @@ constructJsonDataClosureHelper:function(tlo) {
                 e[term] = elem;
             }
         }
+		continuation(tlo);
     };
 },
 getAllData:function(action) {
@@ -261,12 +263,19 @@ getAllData:function(action) {
       var tlo;
       that.withDb( function(transaction) {
         var ss = that.selectAllStmt();
-        transaction.executeSql(ss.stmt, ss.bind, that.constructJsonDataClosureHelper(tlo));
+        transaction.executeSql(ss.stmt, ss.bind, that.constructJsonDataClosureHelper(function(arg) { tlo = arg;}));
       }, function(error) {
         console.log("getAllData: failed");
       }, function() {
         action(tlo);
       });
+},
+cacheAllData:function(action) {
+    var that = this;
+    this.getAllData(function(tlo) {
+        that.model = tlo;
+        action();
+    });
 },
 getMetaData:function(name, action) {
       var that = this;
@@ -331,7 +340,7 @@ getAllMetaData:function(action) {
       var tlo;
       that.withDb( function(transaction) {
         var ss = that.selectAllMetaDataStmt();
-        transaction.executeSql(ss.stmt, ss.bind, that.constructJsonDataClosureHelper(tlo));
+        transaction.executeSql(ss.stmt, ss.bind, that.constructJsonDataClosureHelper(function(arg) { tlo = arg;}));
       }, function(error) {
         console.log("getAllMetaData: failed");
       }, function() {
@@ -422,6 +431,16 @@ ignore_all_changes:function(continuation) {
                 continuation();
             }
         });
+},
+initializeTables:function(datafields, continuation) {
+	var that = this;
+	var formId = opendatakit.queryParameters.formId;
+	var formVersion = opendatakit.queryParameters.formVersion;
+	
+	// opendatakit has all the query parameters loaded
+	// datafields describes the data fields
+	// formId and formVersion identify the table name
+	that.cacheAllData(continuation);
 }
 };
 });

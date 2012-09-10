@@ -44,21 +44,26 @@ requirejs.config({
 });
 
 requirejs(['opendatakit', 'database','parsequery'], function(opendatakit, database, parsequery) {
-    parsequery.parseQueryParameters('lgform', null, 
-        'en_us', 'Simple Test Form', function() {
-        
-requirejs(['zepto','builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
-function($,builder,controller,prompts) {
-    console.log('scripts loaded');
-    // build the survey and place it in the controller...
-builder.buildSurvey(/* json start delimiter */
-{
+var formDef = /* json start delimiter */{
     "settings": [{
-        formId : 'lgform', // must match arg to parseQueryParameters
-        formVersion : null, // must match arg to parseQueryParameters
-        formLocale : 'en_us', // must match arg to parseQueryParameters
-        formName : 'Simple Test Form' // must match arg to parseQueryParameters
-    }],
+		name: "formId",
+		param: "lgform"
+		},
+		{
+		name: "formVersion",
+		param: "20120901"
+		},
+		{
+		name: "formLocale",
+		param: "en_us"
+		},
+		{
+		name: "formName",
+		param: {
+			"en_us": 'Simple Test Form'
+			}
+		}
+    ],
     "survey": [
        {
             "prompts": [
@@ -108,6 +113,39 @@ builder.buildSurvey(/* json start delimiter */
             "type": "label", 
             "param": "test"
         },
+		{
+			"name": "name", 
+			"validate": true, 
+			"type": "text", 
+			"param": null, 
+			"label": {
+				"en_us": "Enter your name:"
+			}
+		}, 
+		{
+			"type": "integer", 
+			"name": "age", 
+			"param": null, 
+			"label": {
+				"en_us": "Enter your age:"
+			}
+		}, 
+		{
+			"type": "decimal", 
+			"name": "bmi", 
+			"param": null, 
+			"label": {
+				"en_us": "Enter your bmi:"
+			}
+		}, 
+		{
+			"name": "gender",
+			"type": "text", 
+			"param": null, 
+			"label": {
+				"en_us": "Enter your gender:"
+			}
+		},
         {
             "type": "select", 
             "name": "sel",
@@ -148,6 +186,15 @@ builder.buildSurvey(/* json start delimiter */
         "name": {
             "type": "string"
         }, 
+        "age": {
+            "type": "integer"
+        }, 
+        "bmi": {
+            "type": "decimal"
+        }, 
+        "sel": {
+            "type": "multiselect"
+        }, 
         "vid": {
             "type": "video/*"
         }, 
@@ -167,10 +214,19 @@ builder.buildSurvey(/* json start delimiter */
             }
         ]
     }
-}
-/* json end delimiter */, function() {
+}/* json end delimiter */;
+    parsequery.parseQueryParameters(formDef, function() {
     // we have saved all query parameters into the metaData table
-    // and re-normalized the query string to remove them.
+	// created the data table and its table descriptors
+    // re-normalized the query string to just have the instanceId
+	// read all the form data and metaData into value caches
+	// under database.model and opendatakit.queryParameters (respectively).
+        
+requirejs(['zepto','builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
+function($,builder,controller,prompts) {
+    console.log('scripts loaded');
+    // build the survey and place it in the controller...
+builder.buildSurvey(formDef, function() {
     //
     // register to handle manual #hash changes
     $(window).bind('hashchange', function(evt) {

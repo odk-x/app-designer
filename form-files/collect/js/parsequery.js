@@ -16,7 +16,7 @@ return {
         dataKeyValueList[dataKeyValueList.length] = { key: key, type: 'string', value: value };
     },
     
-    parseQueryParameterContinuation:function(instanceId, continuation) {
+    parseQueryParameterContinuation:function(datafields, instanceId, continuation) {
         return function() {
             database.getMetaData('instanceName', function(value) {
                 if (value == null) {
@@ -31,7 +31,21 @@ return {
                             window.location.search = qpl;
                             // page reload happens...
                         } else {
-                            continuation();
+                            // pull everything for synchronous read access
+                            database.getAllMetaData(function(tlo) {
+							    if ( tlo == null ) {
+								    tlo = {};
+								}
+								// these values come from the current webpage
+								tlo.formId = opendatakit.getFormId();
+								tlo.formVersion = opendatakit.getFormVersion();
+								tlo.formLocale = opendatakit.getFormLocale();
+								tlo.formName = opendatakit.getFormName();
+								tlo.instanceId = opendatakit.getInstanceId();
+								// update qp
+                                opendatakit.queryParameters = tlo;
+								database.initializeTables(datafields, continuation);
+                            });
                         }
                     });
                 } else {
@@ -41,15 +55,43 @@ return {
                         window.location.search = qpl;
                         // page reload happens...
                     } else {
-                        continuation();
+                        // pull everything for synchronous read access
+                        database.getAllMetaData(function(tlo) {
+							if ( tlo == null ) {
+								tlo = {};
+							}
+							// these values come from the current webpage
+							tlo.formId = opendatakit.getFormId();
+							tlo.formVersion = opendatakit.getFormVersion();
+							tlo.formLocale = opendatakit.getFormLocale();
+							tlo.formName = opendatakit.getFormName();
+							tlo.instanceId = opendatakit.getInstanceId();
+							// update qp
+                            opendatakit.queryParameters = tlo;
+							database.initializeTables(datafields, continuation);
+                        });
                     }
                 }
             });
         };
     },
-    parseQueryParameters:function(formId, formVersion, formLocale, formName, continuation ) {
+	findParam:function(formDef, key) {
+		for (var i = 0 ; i < formDef.settings.length ; ++i ) {
+			var e = formDef.settings[i];
+			if ( e.name == key ) {
+				return e;
+			}
+		}
+		return null;
+	},
+    parseQueryParameters:function(formDef, continuation ) {
         var that = this;
         var result = {};
+		
+		var formId = this.findParam(formDef, 'formId').param;
+		var formVersion = this.findParam(formDef, 'formVersion').param;
+		var formLocale = this.findParam(formDef, 'formLocale').param;
+		var formName = this.findParam(formDef, 'formName').param[formLocale];
         
         // only these values plus instanceId are immediate -- everything else is in metadata table.
         result.formId = formId;
@@ -99,9 +141,9 @@ return {
         if ( dataKeyValueList.length > 4 ) {
             // save all query parameters to metaData queue
             database.putMetaDataKeyTypeValueMap(dataKeyValueList, 
-                that.parseQueryParameterContinuation(instanceId, continuation));
+                that.parseQueryParameterContinuation(formDef.datafields, instanceId, continuation));
         } else {
-            (that.parseQueryParameterContinuation(instanceId, continuation))();
+            (that.parseQueryParameterContinuation(formDef.datafields, instanceId, continuation))();
         }
     }
 };
