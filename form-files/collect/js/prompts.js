@@ -3,7 +3,7 @@
 define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
 function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
 
-Handlebars.registerHelper('localize', function(textOrLangMap) {
+Handlebars.registerHelper('localize', function(textOrLangMap, options) {
     if(_.isUndefined(textOrLangMap)) {
         return 'undefined';
     }
@@ -20,6 +20,14 @@ Handlebars.registerHelper('localize', function(textOrLangMap) {
         console.error("Non localizable object:");
         console.error(textOrLangMap);
     }
+});
+
+/**
+ * Helper function for replacing variable refrences
+ **/
+Handlebars.registerHelper('substitute', function(options) {
+    var template = Handlebars.compile(options.fn(this));
+    return template(database.mdl.data);
 });
 
 promptTypes.base = Backbone.View.extend({
@@ -52,6 +60,9 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.label = this.label;
         this.renderContext.name = this.name;
         this.renderContext.disabled = this.disabled;
+        this.renderContext.image = this.image;
+        this.renderContext.audio = this.audio;
+        this.renderContext.video = this.video;
     },
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {

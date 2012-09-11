@@ -3,7 +3,7 @@
 define(['mdl','opendatakit'], function(mdl,opendatakit) {
     return {
   submissionDb:false,
-
+  mdl:mdl,
   withDb:function(continuation, failureHandler, completionAction) {
     var that = this;
     if ( failureHandler == null ) {

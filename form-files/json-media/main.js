@@ -91,9 +91,10 @@ var formDef = /* json start delimiter */{
                     "type": "text", 
                     "disabled": true,
                     "name": "name", 
+                    "image": "img/test.gif",
                     "param": null, 
                     "label": {
-                        "en_us": "Enter your name:"
+                        "en_us": "Enter your name {{name.value}}:"
                     }
                 }, 
                 {
@@ -130,7 +131,7 @@ var formDef = /* json start delimiter */{
         {
             "type": "goto_if",
             "param": "test2",
-            "condition": "{{name}} !== ''"
+            "condition": "{{name}}"
         },
         {
             "name": "name", 

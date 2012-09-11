@@ -1,6 +1,25 @@
 <ul>
-    <li><label>{{localize label}}</label></li>
-    <li><input type="text" value="{{value}}"
+    {{#if label}}
+        <li><label for="{{name}}">{{#substitute}}{{localize label}}{{/substitute}}</label></li>
+    {{/if}}
+    {{#if image}}
+        <li><label for="{{name}}">
+            <img width="100%" src="{{localize image}}"></img>
+        </label></li>
+    {{/if}}
+    {{#if audio}}
+        <li><label for="{{name}}">
+            <img src="{{localize audio}}"></img>
+        </label></li>
+    {{/if}}
+    {{#if video}}
+        <li><label for="{{name}}">
+            <img src="{{localize video}}"></img>
+        </label></li>
+    {{/if}}
+    <li><input type="text" 
+        name="{{name}}"
+        value="{{value}}"
         {{#if disabled}}
             style="background-color:lightgray;"
             disabled="true"
