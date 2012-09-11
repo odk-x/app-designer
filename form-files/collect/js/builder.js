@@ -18,10 +18,8 @@ define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTyp
                     return "this.database.getDataValue('" + variableName + "')";
                 }
             content = content.replace(variableRegex, replaceCallback);
-
             //var result = 'if(' + content + '){that.baseValidate(context);} else {context.failure()}';
             //result = 'console.log("test");' + result;
-
             //How best to refrence current value?
             var result = '(function(context){return ' + content + '})';
             console.log(result);

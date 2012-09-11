@@ -51,6 +51,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext = Object.create(this.renderContext);
         this.renderContext.label = this.label;
         this.renderContext.name = this.name;
+        this.renderContext.disabled = this.disabled;
     },
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {
@@ -458,10 +459,10 @@ promptTypes.integer = promptTypes.inputType.extend({
         return !isNaN(parseInt(value));
     }
 });
-promptTypes.decimal = promptTypes.inputType.extend({
-    type: "decimal",
-    datatype: "decimal",
-    invalidMessage: "Decimal value expected",
+promptTypes.number = promptTypes.inputType.extend({
+    type: "number",
+    datatype: "number",
+    invalidMessage: "Numeric value expected",
     validateValue: function(value) {
         return !isNaN(parseFloat(value));
     }

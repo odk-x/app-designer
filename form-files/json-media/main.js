@@ -89,6 +89,7 @@ var formDef = /* json start delimiter */{
             "prompts": [
                 {
                     "type": "text", 
+                    "disabled": true,
                     "name": "name", 
                     "param": null, 
                     "label": {
@@ -104,7 +105,7 @@ var formDef = /* json start delimiter */{
                     }
                 }, 
                 {
-                    "type": "decimal", 
+                    "type": "number", 
                     "name": "bmi", 
                     "param": null, 
                     "label": {
@@ -133,7 +134,7 @@ var formDef = /* json start delimiter */{
         },
         {
             "name": "name", 
-            "validate": true, 
+            "validate": true,
             "type": "text", 
             "param": null, 
             "label": {
@@ -193,7 +194,7 @@ var formDef = /* json start delimiter */{
             }
         }, 
         {
-            "type": "decimal", 
+            "type": "number", 
             "name": "bmi", 
             "param": null, 
             "label": {
@@ -218,7 +219,7 @@ var formDef = /* json start delimiter */{
             "type": "integer"
         }, 
         "bmi": {
-            "type": "decimal"
+            "type": "number"
         }, 
         "sel": {
             "type": "multiselect"
