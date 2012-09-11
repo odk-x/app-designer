@@ -129,10 +129,7 @@ var formDef = /* json start delimiter */{
         {
             "type": "goto_if",
             "param": "test2",
-            "condition": function(){
-                console.log(database.getDataValue("name"));
-                return database.getDataValue("name") !== "";
-            }
+            "condition": "{{name}} !== ''"
         },
         {
             "name": "name", 

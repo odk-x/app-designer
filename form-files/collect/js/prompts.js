@@ -26,10 +26,10 @@ promptTypes.base = Backbone.View.extend({
     className: "current",
     type: "base",
     required: false,
+    database: database,
     //renderContext is a dynamic object to be passed into the render function.
     renderContext: {},
     initialize: function() {
-        this.initializePropertyTypes();
         this.initializeTemplate();
         this.initializeRenderContext();
         this.afterInitialize();
@@ -55,73 +55,6 @@ promptTypes.base = Backbone.View.extend({
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {
         readyToRenderCallback();
-    },
-    //TODO: I think initialize property types should be done in the builder before
-    //initialization. It should only affect property type overrides, and it will enable
-    //overriding of initialization functions.
-    initializePropertyTypes: function() {
-        var that = this;
-        //functions for parsing the various property types.
-        var propertyParsers = {
-            formula: function(content) {
-                if ( content === true || content === false ) {
-                    return function() { return content; }
-                }
-                var variablesRefrenced = [];
-                var variableRegex = /\{\{.+?\}\}/g
-
-                    function replaceCallback(match) {
-                        var variableName = match.slice(2, - 2);
-                        variablesRefrenced.push(variableName);
-                        return "database.getDataValue('" + variableName + "')";
-                    }
-                content = content.replace(variableRegex, replaceCallback);
-
-                var result = 'if(' + content + '){that.baseValidate(context);} else {context.failure()}';
-                result = 'console.log("test");' + result;
-
-                //How best to refrence current value?
-                result = '(function(context){var that = this; ' + result + '})';
-                console.log(result);
-                return eval(result);
-            }
-        };
-        $.each(this, function(key, property) {
-            var propertyType, propertyContent;
-            if (key in that) { //that.hasOwnProperty(key)) {
-                if (typeof property === 'function') {
-                    return;
-                }
-                if ($.isPlainObject(property) && ('cell_type' in property)) {
-                    propertyType = property.cell_type;
-                    propertyContent = property['default'];
-                }
-                else if ($.isArray(property)) {
-                    //This probably just happens for nested prompts
-                    //so we don't want to do anything here.
-                    return;
-                }
-                else {
-                    if (key in that.form.column_types) {
-                        propertyType = that.form.column_types[key];
-                        propertyContent = property;
-                    }
-                    else {
-                        //Leave the type as a string/int/bool
-                        return;
-                    }
-                }
-                if (propertyType in propertyParsers) {
-                    var propertyParser = propertyParsers[propertyType];
-                    console.log('Parsing:');
-                    console.log(property);
-                    that[key] = propertyParser(propertyContent);
-                }
-                else {
-                    console.log('Unknown property type: ' + propertyType);
-                }
-            }
-        });
     },
     template: Handlebars.templates.text, //Make "Override me" template
     render: function() {
@@ -654,7 +587,6 @@ promptTypes.screen = promptTypes.base.extend({
     initialize: function() {
         var prompts = this.prompts;
         this.prompts = builder.initializePrompts(prompts);
-        this.initializePropertyTypes();
         this.initializeTemplate();
         this.initializeRenderContext();
         this.afterInitialize();
