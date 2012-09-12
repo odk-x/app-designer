@@ -1,5 +1,5 @@
-<ul>
-    <li><label for="{{name}}">{{localize label}}</label></li>
+<ul class="odk">
+    {{> labelHint}}
     <li><input type="text" name="{{name}}" value="{{value}}"
         {{#if disabled}}
             disabled="true"

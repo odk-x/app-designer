@@ -1,32 +1,21 @@
 <div>
-    <table>
-        <tr>
-            <td align="center" colspan="2">
-                <img src="{{ headerImg }}"
-                    width="344px"/>
-            </td>
-        </tr>
-        <tr>
-            <td align="center" colspan="2">
-                <span>You are at the start of "{{formName}}". Swipe the screen as shown below to begin.</span>
-            </td>
-        </tr>
-        <tr>
-            <td align="left">
-                <img src="{{ backupImg }}" height="81px" width="145px"/>
-            </td>
-            <td align="right">
-                <img src="{{ advanceImg }}" height="81px" width="145px"/>
-            </td>
-        </tr>
-        <tr>
-            <td align="left">back to previous prompt</td>
-            <td align="right">forward to next prompt</td>
-        </tr>
-        <tr>
-            <td align="center" colspan="2">
-                <button class="whiteButton editInstances">Edit Saved Instances</button>
-            </td>
-        </tr>
-    </table>
+    <center>
+        <img src="{{ headerImg }}" width="50%"/>
+        <p>You are at the start of "{{formName}}". Swipe the screen as shown below to begin.</p>
+        <div>
+            <span style="float:left;">
+                <img src="{{ backupImg }}"/>
+                <p>previous prompt</p>
+            </span>
+            <span style="float:right;">
+                <img src="{{ advanceImg }}"/>
+                <p>next prompt</p>
+            </span>
+        </div>
+        <div style="clear:both;">
+            <label for="instanceName">Enter instance name:</label>
+            <input class="odk" name="instanceName" value="{{instanceName}}"></input>
+        </div>
+        <button class="odk-big-btn editInstances">Edit Saved Instances</button>
+    </center>
 </div>

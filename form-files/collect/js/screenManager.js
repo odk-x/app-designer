@@ -80,23 +80,24 @@ return Backbone.View.extend({
             });
         });
     },*/
-    gotoNextScreen: function(){
+    gotoNextScreen: function(e){
         console.log("gotoNextScreen");
+        console.log(e);
         this.controller.gotoNextScreen();
     },
     gotoPreviousScreen: function(){
         this.controller.gotoPreviousScreen();
     },
     events: {
-        "click .next-btn": "gotoNextScreen",
-        "click .prev-btn": "gotoPreviousScreen",
+        "click .odk-next-btn": "gotoNextScreen",
+        "click .odk-prev-btn": "gotoPreviousScreen",
         "swipeLeft .swipeForwardEnabled": "gotoNextScreen",
         "swipeRight .swipeBackEnabled": "gotoPreviousScreen"
     },
     render: function() {
         if ( this.prompt.isInitializeComplete() && this.template != null ) {
             this.$el.html(this.template(this.renderContext));
-            var $contentArea = this.$('.scroll');
+            var $contentArea = this.$('.odk-scroll');
             var $promptEl = $('<div>');
             $contentArea.append($promptEl);
             this.prompt.setElement($promptEl.get(0));

@@ -1,29 +1,8 @@
-<ul class="{{#if hide}}odk-hidden{{/if}}">
-    {{#if label}}
-        <li><label for="{{name}}">{{#substitute}}{{localize label}}{{/substitute}}</label></li>
-    {{/if}}
-    {{#if image}}
-        <li><label for="{{name}}">
-            <img width="100%" src="{{localize image}}"></img>
-        </label></li>
-    {{/if}}
-    {{#if audio}}
-        <li><label for="{{name}}">
-            <audio controls="controls">
-                <source src="{{localize audio}}" type="audio/ogg" />
-                Your browser does not support the audio element.
-            </audio>
-        </label></li>
-    {{/if}}
-    {{#if video}}
-        <li><label for="{{name}}">
-            <video controls="controls">
-                <source src="{{localize video}}" type="video/ogg" />
-                Your browser does not support the video element.
-            </video>
-        </label></li>
-    {{/if}}
-    <li><input type="text" 
+<ul class="odk {{#if hide}}odk-hidden{{/if}}">
+    {{> labelHint}}
+    <li><input
+        class="odk"
+        type="text" 
         name="{{name}}"
         value="{{value}}"
         {{#if disabled}}

@@ -1,17 +1,13 @@
-<table>
-	<tr>
-		<td align="center" colspan="2">
-            <img src="{{ headerImg }}"
-                width="344px"/>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<span>You have completed "{{formName}}".</span>
-		</td>
-	</tr>
-	<tr>
-		<td align="left"><button class="whiteButton save-btn">Save as Incomplete</button></td>
-		<td align="right"><button class="whiteButton final-btn">Finalize</button></td>
-	</tr>
-</table>
+<div>
+	<center>
+        <img src="{{ headerImg }}"
+            width="50%"/>
+		<div>You have completed "{{formName}}".</div>
+        <div>
+            <label for="instanceName">Enter instance name:</label>
+            <input class="odk" name="instanceName" value="{{instanceName}}"></input>
+        </div>
+		<button class="odk-big-btn" style="width: 80%">Save as Incomplete</button>
+		<button class="odk-big-btn" style="width: 80%">Finalize</button>
+	</center>
+</div>

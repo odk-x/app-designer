@@ -97,7 +97,8 @@ var formDef = /* json start delimiter */{
                     "param": null, 
                     "label": {
                         "en_us": "Enter your name {{name.value}}:"
-                    }
+                    },
+                    "hint": "hi"
                 }, 
                 {
                     "type": "integer", 

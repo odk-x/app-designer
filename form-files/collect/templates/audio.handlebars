@@ -1,7 +1,7 @@
-<ul>
-    <li><label for="{{name}}">{{localize label}}</label></li>
+<ul class="odk">
+    {{> labelHint}}
     <li>
-        <input type="text" name="{{name}}" value="{{mediaPath}}" disabled="true" />
+        <input class="odk" type="text" name="{{name}}" value="{{mediaPath}}" disabled="true" />
     </li>
     <li><button class="whiteButton">Capture Audio</button></li>
     <li><div class="mediaContainer">

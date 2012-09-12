@@ -1,7 +1,7 @@
 'use strict';
 
-define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore','text','templates/compiledTemplates'],
-function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _) {
+define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore', 'text!templates/labelHint.handlebars'],
+function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _, labelHintPartial) {
 
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
     if(_.isUndefined(textOrLangMap)) {
@@ -21,6 +21,9 @@ Handlebars.registerHelper('localize', function(textOrLangMap, options) {
         console.error(textOrLangMap);
     }
 });
+console.log('x');
+console.log(labelHintPartial);
+Handlebars.registerPartial('labelHint', labelHintPartial);
 
 /**
  * Helper function for replacing variable refrences
@@ -64,6 +67,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.audio = this.audio;
         this.renderContext.video = this.video;
         this.renderContext.hide = this.hide;
+        this.renderContext.hint = this.hint;
     },
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {
@@ -632,10 +636,10 @@ promptTypes.screen = promptTypes.base.extend({
         }
     },
     render: function(){
-        this.$el.html('<div class="prompts"></div>');
-        var $prompts = this.$('.prompts');
+        this.$el.html('<ul class="odk odk-prompts">');
+        var $prompts = this.$('.odk-prompts');
         $.each(this.prompts, function(idx, prompt){
-            var $promptEl = $('<div>');
+            var $promptEl = $('<li>');
             $prompts.append($promptEl);
             prompt.setElement($promptEl.get(0));
             prompt.render();
