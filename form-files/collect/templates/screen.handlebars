@@ -4,6 +4,7 @@
     {{/if}}
     <div class="scroll"></div>
     {{#if showFooter}}
+    <!--
     <div class="info">
 		<table class="tableEven">
 		<tr>
@@ -20,5 +21,15 @@
 		{{/if}}
 		</td>
 		</table>
+    </div>
+    -->
+    <div class="info">
+        {{#if enableBackNavigation}}
+        <td align="left"><button class="whiteButton prev-btn">backward</button>
+        {{/if}}
+        {{#if enableForwardNavigation}}
+        <button class="whiteButton next-btn">forward</button>
+        {{/if}}
+    </div>
     {{/if}}
 </div>

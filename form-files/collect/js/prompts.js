@@ -63,6 +63,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.image = this.image;
         this.renderContext.audio = this.audio;
         this.renderContext.video = this.video;
+        this.renderContext.hide = this.hide;
     },
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {
