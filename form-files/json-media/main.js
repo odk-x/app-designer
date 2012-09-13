@@ -7,6 +7,7 @@ requirejs.config({
         opendatakit : '../collect/js/opendatakit',
         parsequery : '../collect/js/parsequery',
         zepto : '../collect/js/zepto',
+        jqmobile : '../collect/js/jquery.mobile-1.1.1',
         underscore : '../collect/js/underscore',
         backbone : '../collect/js/backbone',
         prompts : '../collect/js/prompts',
@@ -27,6 +28,15 @@ requirejs.config({
             //Once loaded, use the global '$' as the
             //module value.
             exports: '$'
+        },
+        'jqmobile': {
+            // Slimmer drop-in replacement for jquery
+            //These script dependencies should be loaded before loading
+            //zepto.js
+            deps: ['zepto'],
+            //Once loaded, use the global '$' as the
+            //module value.
+            exports: 'm'
         },
         'underscore': {
             //These script dependencies should be loaded before loading
