@@ -5,7 +5,7 @@
 // plus 'controller' -- to avoid a circular dependency, 'controller' is passed 
 // in during initialize() and stored in a member variable.
 //
-define(['opendatakit','backbone','zepto','handlebars','templates/compiledTemplates','text'], 
+define(['opendatakit','backbone','jquery','handlebars','templates/compiledTemplates','text'], 
 function(opendatakit, Backbone, $, Handlebars) {
 return Backbone.View.extend({
     el: "body",
@@ -91,8 +91,8 @@ return Backbone.View.extend({
     events: {
         "click .odk-next-btn": "gotoNextScreen",
         "click .odk-prev-btn": "gotoPreviousScreen",
-        "swipeLeft .swipeForwardEnabled": "gotoNextScreen",
-        "swipeRight .swipeBackEnabled": "gotoPreviousScreen"
+        "swipeleft .swipeForwardEnabled": "gotoNextScreen",
+        "swiperight .swipeBackEnabled": "gotoPreviousScreen"
     },
     render: function() {
         if ( this.prompt.isInitializeComplete() && this.template != null ) {
