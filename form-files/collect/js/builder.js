@@ -2,7 +2,7 @@
 // depends upon: controller, jquery, promptTypes
 define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTypes) {
     return {
-    column_types : {
+    column_types: {
         condition: 'formula'
     },
     propertyParsers: {
@@ -132,10 +132,17 @@ define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTy
                 settings: surveyJson.settings,
                 widgets: widgets
             };
-            var prompts = ([/*{
-                "type": "goto",
+            var prompts = ([{
+                "type": "goto_if",
+                "condition": function() {
+                    if('instanceId' in this.mdl.qp && this.mdl.qp.instanceId.value){
+                        console.log('test');
+                        console.log(this.mdl.qp.instanceId);
+                    }
+                    return ('instanceId' in this.mdl.qp);
+                },
                 "param": "_begin"
-            }, */{
+            }, {
                 type: "instances",
                 name: "_instances",
                 label: "Saved Instances"

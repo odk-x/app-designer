@@ -5,9 +5,9 @@ define(['screenManager'], function(ScreenManager) {
 return {
     screenManager : null,
     previousScreenNames : [],
-    start: function($container){
+    start: function(){
         this.screenManager = new ScreenManager(this);
-        if ( location.hash != null && location.hash.length != 0 ) {
+        if ( location.hash !== null && location.hash.length !== 0 ) {
             this.odkHashChangeHandler();
         } else {
             this.setPrompt(this.prompts[0]);
@@ -156,7 +156,7 @@ return {
             hlist.shift(); // the empty string
             hleading = '_' + hlist.shift();
         }
-        if ( this.screenManager == null || this.screenManager.getName() != hleading ) {
+        if ( this.screenManager === null || this.screenManager.getName() != hleading ) {
             this.gotoPromptName(hleading, hlist, false);
         }
     }

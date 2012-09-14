@@ -36,6 +36,7 @@ promptTypes.base = Backbone.View.extend({
     type: "base",
     required: false,
     database: database,
+    mdl: mdl,
     //renderContext is a dynamic object to be passed into the render function.
     renderContext: {},
     initialize: function() {
@@ -66,6 +67,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.video = this.video;
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
+        this.renderContext.formName = mdl.qp.formName.value;
     },
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {
@@ -169,6 +171,7 @@ promptTypes.opening = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo.param;
         }
+        this.renderContext.instanceName = mdl.qp.instanceName.value;
         readyToRenderCallback();
     },
     events: {
@@ -178,8 +181,6 @@ promptTypes.opening = promptTypes.base.extend({
         controller.gotoPromptName('_instances', [], true);
     },
     renderContext: {
-        formName: mdl.qp.formName.value,
-        instanceName: mdl.qp.instanceName.value,
         headerImg: collect.baseDir + 'img/form_logo.png',
         backupImg: collect.baseDir + 'img/backup.png',
         advanceImg: collect.baseDir + 'img/advance.png'
@@ -212,9 +213,7 @@ promptTypes.finalize = promptTypes.base.extend({
         "click .final-btn": "saveFinal"
     },
     renderContext: {
-        formName: mdl.qp.formName.value,
-        instanceName: mdl.qp.instanceName.value,
-        headerImg: collect.baseDir + 'img/form_logo.png',
+        headerImg: collect.baseDir + 'img/form_logo.png'
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;
@@ -275,7 +274,7 @@ promptTypes.instances = promptTypes.base.extend({
         });
     },
     createInstance: function(evt){
-        opendatakit.openNewInstanceId('TODO_generate_id_here');
+        opendatakit.openNewInstanceId(null);
     },
     openInstance: function(evt) {
         opendatakit.openNewInstanceId($(evt.target).attr('id'));

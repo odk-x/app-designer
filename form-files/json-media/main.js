@@ -82,9 +82,7 @@ var formDef = /* json start delimiter */{
         },
         {
             name: "formName",
-            param: {
-                "en_us": 'Simple Test Form'
-                }
+            param: 'Simple Test Form'
         },
         {
             name: "formLogo",
@@ -277,7 +275,7 @@ builder.buildSurvey(formDef, function() {
     });
 
     // fire the controller to render the first page.
-    controller.start($('#jqt'));
+    controller.start();
 }
 );
 

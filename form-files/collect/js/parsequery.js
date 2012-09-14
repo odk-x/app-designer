@@ -104,12 +104,13 @@ return {
         that.parseQueryHelper(dataKeyValueList, 'formLocale', formLocale );
         that.parseQueryHelper(dataKeyValueList, 'formName', formName );
 
-        if ( instanceId == null || instanceId == "" ) {
-            console.log("ALERT! defining a UUID  because one wasn't specified");
-            instanceId = opendatakit.genUUID();
+        if ( instanceId !== null && instanceId !== "" ) {
             // save in immediate query parameter...
             result.instanceId = { "type" : "string", "value": instanceId };
+
         } else {
+            console.log("ALERT! defining a UUID  because one wasn't specified");
+            instanceId = opendatakit.genUUID();
             // save in immediate query parameter...
             result.instanceId = { "type" : "string", "value": instanceId };
         }
