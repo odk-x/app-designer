@@ -75,6 +75,8 @@ promptTypes.base = Backbone.View.extend({
     render: function() {
         console.log(this.renderContext); 
         this.$el.html(this.template(this.renderContext));
+        //Triggering create seems to prevent some issues where jQm styles are not applied.
+        this.$el.trigger('create');
         return this;
     },
     //Stuff to be added
@@ -240,7 +242,8 @@ promptTypes.instances = promptTypes.base.extend({
     templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
-        "click .deleteInstance": "deleteInstance"
+        "click .deleteInstance": "deleteInstance",
+        "click .createInstance": "createInstance"
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;
@@ -250,14 +253,29 @@ promptTypes.instances = promptTypes.base.extend({
                 that.renderContext.instances = [];
                 console.log('test');
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
-                    that.renderContext.instances.push(result.rows.item(i));
+                    var instance = result.rows.item(i);
+                    that.renderContext.instances.push({
+                        instanceName: instance.instanceName,
+                        last_saved_timestamp: new Date(instance.last_saved_timestamp),
+                        saved_status: instance.saved_status
+                    });
                 }
             });
         }, function(error) {
             console.log("populateInstanceList: failed");
         }, function() {
-            readyToRenderCallback({showHeader: false, enableNavigation:false});
+            $.extend(that.renderContext, {
+                formName: mdl.qp.formName.value,
+                headerImg: collect.baseDir + 'img/form_logo.png'
+            });
+            readyToRenderCallback({
+                showHeader: false,
+                enableNavigation:false
+            });
         });
+    },
+    createInstance: function(evt){
+        opendatakit.openNewInstanceId('TODO_generate_id_here');
     },
     openInstance: function(evt) {
         opendatakit.openNewInstanceId($(evt.target).attr('id'));

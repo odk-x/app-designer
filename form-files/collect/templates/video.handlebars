@@ -1,9 +1,8 @@
 <div>
     {{> labelHint}}
     <input type="text" name="{{name}}" value="{{mediaPath}}"
-        {{#if disabled}}
-            disabled="true"
-        {{/if}}
+        style="background-color:lightgray;"
+        disabled="true"
         />
     {{#if invalid}}
         <p>invalid</p>

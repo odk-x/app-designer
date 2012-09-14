@@ -6,19 +6,24 @@ templates['audio'] = template(function (Handlebars,depth0,helpers,partials,data)
 
 function program1(depth0,data) {
   
+  
+  return "\r\n        <p>invalid</p>\r\n    ";}
+
+function program3(depth0,data) {
+  
   var buffer = "", stack1, foundHelper;
-  buffer += "\r\n            <img width=\"200\" src=\"";
+  buffer += "\r\n            <audio src=\"";
   foundHelper = helpers.uriValue;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.uriValue; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\"></img>\r\n        ";
+  buffer += escapeExpression(stack1) + "\"></audio>\r\n        ";
   return buffer;}
 
-  buffer += "<ul class=\"odk\">\r\n    ";
+  buffer += "<div>\r\n    ";
   stack1 = depth0;
   stack1 = self.invokePartial(partials.labelHint, 'labelHint', stack1, helpers, partials);;
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    <li>\r\n        <input class=\"odk\" type=\"text\" name=\"";
+  buffer += "\r\n    <input type=\"text\" name=\"";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -26,11 +31,15 @@ function program1(depth0,data) {
   foundHelper = helpers.mediaPath;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.mediaPath; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\" disabled=\"true\" />\r\n    </li>\r\n    <li><button class=\"whiteButton\">Capture Audio</button></li>\r\n    <li><div class=\"mediaContainer\">\r\n        ";
-  stack1 = depth0.uriValue;
+  buffer += escapeExpression(stack1) + "\"\r\n            style=\"background-color:lightgray;\"\r\n            disabled=\"true\"\r\n        />\r\n    ";
+  stack1 = depth0.invalid;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    </div></li>\r\n</ul>";
+  buffer += "\r\n    <button>Capture Audio</button>\r\n    <div class=\"mediaContainer\">\r\n        ";
+  stack1 = depth0.uriValue;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(3, program3, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n    </div>\r\n<div>";
   return buffer;});
 templates['dropdownSelect'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -135,6 +144,11 @@ templates['image'] = template(function (Handlebars,depth0,helpers,partials,data)
 
 function program1(depth0,data) {
   
+  
+  return "\r\n        <p>invalid</p>\r\n    ";}
+
+function program3(depth0,data) {
+  
   var buffer = "", stack1, foundHelper;
   buffer += "\r\n            <img width=\"200\" src=\"";
   foundHelper = helpers.uriValue;
@@ -143,11 +157,11 @@ function program1(depth0,data) {
   buffer += escapeExpression(stack1) + "\"></img>\r\n        ";
   return buffer;}
 
-  buffer += "<ul class=\"odk\">\r\n    ";
+  buffer += "<div>\r\n    ";
   stack1 = depth0;
   stack1 = self.invokePartial(partials.labelHint, 'labelHint', stack1, helpers, partials);;
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    <li>\r\n        <input class=\"odk\" type=\"text\" name=\"";
+  buffer += "\r\n    <input type=\"text\" name=\"";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -155,11 +169,15 @@ function program1(depth0,data) {
   foundHelper = helpers.mediaPath;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.mediaPath; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\" disabled=\"true\" />\r\n    </li>\r\n    <li><button class=\"whiteButton\">Take Picture</button></li>\r\n    <li><div class=\"mediaContainer\">\r\n        ";
-  stack1 = depth0.uriValue;
+  buffer += escapeExpression(stack1) + "\"\r\n            style=\"background-color:lightgray;\"\r\n            disabled=\"true\"\r\n        />\r\n    ";
+  stack1 = depth0.invalid;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    </div></li>\r\n</ul>";
+  buffer += "\r\n    <button>Take Picture</button>\r\n    <div class=\"mediaContainer\">\r\n        ";
+  stack1 = depth0.uriValue;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(3, program3, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n    </div>\r\n<div>";
   return buffer;});
 templates['inputType'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials;
@@ -208,42 +226,68 @@ function program5(depth0,data) {
   return buffer;});
 templates['instances'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
   var buffer = "", stack1, foundHelper;
-  buffer += "\r\n        <li class=\"inline separated\">\r\n            <ul class=\"odk\">\r\n                <li><b>Instance Name:</b> ";
+  buffer += "\r\n        ";
+  stack1 = depth0.dateDivider;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(2, program2, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n        <li>\r\n            <h3>";
   foundHelper = helpers.instanceName;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.instanceName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "</li>\r\n                <li><b>Last Save Date:</b> ";
+  buffer += escapeExpression(stack1) + "</h3>\r\n            <p><strong>Last Save Date:</strong></p>\r\n            <p>";
   foundHelper = helpers.last_saved_timestamp;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.last_saved_timestamp; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "</li>\r\n                <li><b>Finalized:</b> ";
-  foundHelper = helpers.saved_status;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.saved_status; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "</li>\r\n            </ul>\r\n            <div class=\"odk btn-group\">\r\n                <button id=\"";
+  buffer += escapeExpression(stack1) + "</p>\r\n            ";
+  stack1 = depth0.saved_status;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(4, program4, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n			<fieldset class=\"ui-grid-a\">\r\n					<div class=\"ui-block-a\"><button id=\"";
   foundHelper = helpers.instance_id;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.instance_id; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\" class=\"odk openInstance\">edit</button>\r\n                <button id=\"";
+  buffer += escapeExpression(stack1) + "\" class=\"odk openInstance\">edit</button></div>\r\n					<div class=\"ui-block-b\"><button id=\"";
   foundHelper = helpers.instance_id;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.instance_id; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\" class=\"odk deleteInstance\">delete</button>\r\n            </div>\r\n        </li>\r\n    ";
+  buffer += escapeExpression(stack1) + "\" class=\"odk deleteInstance\">delete</button></div>\r\n		    </fieldset>\r\n        </li>\r\n    ";
+  return buffer;}
+function program2(depth0,data) {
+  
+  var buffer = "", stack1, foundHelper;
+  buffer += "\r\n            <li data-role=\"list-divider\">";
+  foundHelper = helpers.dateDivider;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.dateDivider; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</li>\r\n        ";
   return buffer;}
 
-function program3(depth0,data) {
+function program4(depth0,data) {
+  
+  
+  return "<p>finalized</p>";}
+
+function program6(depth0,data) {
   
   
   return "\r\n        <li>Unexpected absence of records.</li>\r\n    ";}
 
-  buffer += "<ul class=\"odk\">\r\n    ";
+  buffer += "<div>\r\n    <h1>";
+  foundHelper = helpers.formName;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.formName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</h1>\r\n    <center><img src=\"";
+  foundHelper = helpers.headerImg;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.headerImg; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" width=\"50%\"/></center>\r\n    <a class=\"createInstance\" data-role=\"button\" data-icon=\"new\" data-iconpos=\"top\">Create new instance</a>\r\n</div>\r\n<h3>Previous instances:</h3>\r\n<ul data-role=\"listview\" data-theme=\"d\" data-divider-theme=\"d\">\r\n    ";
   stack1 = depth0.instances;
-  stack1 = helpers.each.call(depth0, stack1, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data)});
+  stack1 = helpers.each.call(depth0, stack1, {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n</ul>";
   return buffer;});
@@ -265,13 +309,13 @@ templates['labelHint'] = template(function (Handlebars,depth0,helpers,partials,d
 function program1(depth0,data) {
   
   var buffer = "", stack1, foundHelper;
-  buffer += "\r\n    <div>\r\n        ";
+  buffer += "\r\n    <big><p>\r\n        ";
   foundHelper = helpers.substitute;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},inverse:self.noop,fn:self.program(2, program2, data)}); }
   else { stack1 = depth0.substitute; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   if (!helpers.substitute) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(2, program2, data)}); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    </div>\r\n";
+  buffer += "\r\n    </p></big>\r\n";
   return buffer;}
 function program2(depth0,data) {
   
@@ -314,13 +358,13 @@ function program8(depth0,data) {
 function program10(depth0,data) {
   
   var buffer = "", stack1, foundHelper;
-  buffer += "\r\n    <p class=\"odk-hint\">";
+  buffer += "\r\n    <i><p class=\"odk-hint\">";
   foundHelper = helpers.substitute;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},inverse:self.noop,fn:self.program(11, program11, data)}); }
   else { stack1 = depth0.substitute; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   if (!helpers.substitute) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(11, program11, data)}); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</p>\r\n";
+  buffer += "</p></i>\r\n";
   return buffer;}
 function program11(depth0,data) {
   
@@ -413,11 +457,11 @@ templates['opening'] = template(function (Handlebars,depth0,helpers,partials,dat
   foundHelper = helpers.formName;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.formName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\". Swipe the screen as shown below to begin.</p>\n        <div>\n            <span style=\"float:left;\">\n                <img src=\"";
+  buffer += escapeExpression(stack1) + "\". Swipe the screen as shown below to begin.</p>\n        <div>\n            <span style=\"width:0;float:left;\">\n                <img src=\"";
   foundHelper = helpers.backupImg;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.backupImg; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\"/>\n                <p>previous prompt</p>\n            </span>\n            <span style=\"float:right;\">\n                <img src=\"";
+  buffer += escapeExpression(stack1) + "\"/>\n                <p style=\"white-space: nowrap;\">previous prompt</p>\n            </span>\n            <span style=\"float:right;\">\n                <img src=\"";
   foundHelper = helpers.advanceImg;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.advanceImg; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -508,25 +552,34 @@ function program7(depth0,data) {
 function program9(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n    <div data-role=\"footer\" class=\"odk-nav ui-state-persist\" data-theme=\"d\"><!--class=\"odk-nav\" -->\r\n        <div data-role=\"navbar\" class=\"ui-state-persist\">\r\n            <ul>\r\n            ";
-  stack1 = depth0.enableBackNavigation;
+  buffer += "\r\n    <div data-role=\"footer\" class=\"odk-nav ui-state-persist\" data-theme=\"d\">\r\n        ";
+  stack1 = depth0.enableNavigation;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(10, program10, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n            ";
-  stack1 = depth0.enableForwardNavigation;
-  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(12, program12, data)});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n            </ul>\r\n        </div>\r\n    </div>\r\n    ";
+  buffer += "\r\n    </div>\r\n    ";
   return buffer;}
 function program10(depth0,data) {
   
+  var buffer = "", stack1;
+  buffer += "\r\n            <div data-role=\"navbar\" class=\"ui-state-persist\">\r\n                <ul>\r\n                ";
+  stack1 = depth0.enableBackNavigation;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(11, program11, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n                ";
+  stack1 = depth0.enableForwardNavigation;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(13, program13, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n                </ul>\r\n            </div>\r\n        ";
+  return buffer;}
+function program11(depth0,data) {
   
-  return "\r\n                <li><a href=\"#\" class=\"odk-prev-btn\" data-iconpos=\"top\" data-icon=\"arrow-l\">back</a></li>\r\n            ";}
+  
+  return "\r\n                    <li><a href=\"#\" class=\"odk-prev-btn\" data-iconpos=\"top\" data-icon=\"arrow-l\">back</a></li>\r\n                ";}
 
-function program12(depth0,data) {
+function program13(depth0,data) {
   
   
-  return "\r\n                <li><a href=\"#\" class=\"odk-next-btn\" data-iconpos=\"top\" data-icon=\"arrow-r\">next</a></li>\r\n            ";}
+  return "\r\n                    <li><a href=\"#\" class=\"odk-next-btn\" data-iconpos=\"top\" data-icon=\"arrow-r\">next</a></li>\r\n                ";}
 
   buffer += "<div class=\"odk-screen ";
   stack1 = depth0.enableForwardNavigation;
@@ -677,14 +730,9 @@ templates['video'] = template(function (Handlebars,depth0,helpers,partials,data)
 function program1(depth0,data) {
   
   
-  return "\r\n            disabled=\"true\"\r\n        ";}
-
-function program3(depth0,data) {
-  
-  
   return "\r\n        <p>invalid</p>\r\n    ";}
 
-function program5(depth0,data) {
+function program3(depth0,data) {
   
   var buffer = "", stack1, foundHelper;
   buffer += "\r\n            <video src=\"";
@@ -706,17 +754,13 @@ function program5(depth0,data) {
   foundHelper = helpers.mediaPath;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.mediaPath; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\"\r\n        ";
-  stack1 = depth0.disabled;
-  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        />\r\n    ";
+  buffer += escapeExpression(stack1) + "\"\r\n        style=\"background-color:lightgray;\"\r\n        disabled=\"true\"\r\n        />\r\n    ";
   stack1 = depth0.invalid;
-  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(3, program3, data)});
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n    <button>Take Video</button>\r\n    <div class=\"mediaContainer\">\r\n        ";
   stack1 = depth0.uriValue;
-  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(5, program5, data)});
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(3, program3, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n    </div>\r\n<div>";
   return buffer;});

@@ -37,11 +37,13 @@ return Backbone.View.extend({
             jqmAttrs = {};
         }
         var that = this;
-        this.previousPrompt = this.prompt;
         this.prompt = prompt;
         this.renderContext = {
             showHeader: true,
-            showFooter: true
+            showFooter: true,
+            enableForwardNavigation: true,
+            enableBackNavigation: true,
+            enableNavigation: true
             // enableNavigation -- defaults to true; false to disable everything...
             // enableForwardNavigation -- forward swipe and button
             // enableBackNavigation -- backward swipe and button
@@ -52,6 +54,14 @@ return Backbone.View.extend({
             if(renderContext){
                 $.extend(that.renderContext, renderContext);
             }
+            if( !that.renderContext.enableBackNavigation &&
+            !that.renderContext.enableForwardNavigation ){
+                //If we try to render a jqm nav without buttons we get an error
+                //so this flag automatically disables nav in that case.
+                that.renderContext.enableNavigation = false;
+            }
+            console.log(that.renderContext);
+            /*
             // work through setting the forward/backward enable flags
             if ( that.renderContext.enableNavigation === undefined ) {
                 that.renderContext.enableNavigation = true;
@@ -65,9 +75,11 @@ return Backbone.View.extend({
                     that.renderContext.enableNavigation &&
                     that.controller.hasPromptHistory();
             }
-            var newPage = that.renderPage(prompt);
-            that.$el.append(newPage);
-            $.mobile.changePage(newPage, $.extend({changeHash:false, transition: 'slide'}, jqmAttrs));
+            */
+            that.previousPageEl = that.currentPageEl;
+            that.currentPageEl = that.renderPage(prompt);
+            that.$el.append(that.currentPageEl);
+            $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: 'slide'}, jqmAttrs));
         });
     },
     gotoNextScreen: function(e){
@@ -81,8 +93,8 @@ return Backbone.View.extend({
     handlePagechange: function(evt){
         console.log(evt);
         console.log('Page change');
-        if(this.previousPrompt){
-            this.previousPrompt.$el.remove();
+        if(this.previousPageEl){
+            this.previousPageEl.remove();
         }
     },
     events: {
@@ -98,11 +110,9 @@ return Backbone.View.extend({
         $page.attr('data-theme', "d");
         $page.attr('data-content-theme', "d");
         $page.html(this.template(this.renderContext));
-        if('prompt' in this){
-            var $contentArea = $page.find('.odk-container');
-            $contentArea.append(prompt.$el);
-            prompt.render();
-        }
+        var $contentArea = $page.find('.odk-container');
+        $contentArea.append(prompt.$el);
+        prompt.render();
         return $page;
     },
     /*
@@ -121,7 +131,7 @@ return Backbone.View.extend({
     computeNextPrompt: function(continuation){
         this.prompt.computeNextPrompt(continuation);
     },
-    beforeMove: function(continuation) {
+    beforeMove: function(continuation){
         continuation();
     }
 });

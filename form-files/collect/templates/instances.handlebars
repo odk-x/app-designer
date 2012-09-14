@@ -1,15 +1,23 @@
-<ul class="odk">
+<div>
+    <h1>{{formName}}</h1>
+    <center><img src="{{ headerImg }}" width="50%"/></center>
+    <a class="createInstance" data-role="button" data-icon="new" data-iconpos="top">Create new instance</a>
+</div>
+<h3>Previous instances:</h3>
+<ul data-role="listview" data-theme="d" data-divider-theme="d">
     {{#each instances}}
-        <li class="inline separated">
-            <ul class="odk">
-                <li><b>Instance Name:</b> {{instanceName}}</li>
-                <li><b>Last Save Date:</b> {{last_saved_timestamp}}</li>
-                <li><b>Finalized:</b> {{saved_status}}</li>
-            </ul>
-            <div class="odk btn-group">
-                <button id="{{instance_id}}" class="odk openInstance">edit</button>
-                <button id="{{instance_id}}" class="odk deleteInstance">delete</button>
-            </div>
+        {{#if dateDivider}}
+            <li data-role="list-divider">{{dateDivider}}</li>
+        {{/if}}
+        <li>
+            <h3>{{instanceName}}</h3>
+            <p><strong>Last Save Date:</strong></p>
+            <p>{{last_saved_timestamp}}</p>
+            {{#if saved_status}}<p>finalized</p>{{/if}}
+			<fieldset class="ui-grid-a">
+					<div class="ui-block-a"><button id="{{instance_id}}" class="odk openInstance">edit</button></div>
+					<div class="ui-block-b"><button id="{{instance_id}}" class="odk deleteInstance">delete</button></div>
+		    </fieldset>
         </li>
     {{else}}
         <li>Unexpected absence of records.</li>

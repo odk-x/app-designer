@@ -132,10 +132,10 @@ define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTy
                 settings: surveyJson.settings,
                 widgets: widgets
             };
-            var prompts = ([{
+            var prompts = ([/*{
                 "type": "goto",
                 "param": "_begin"
-            }, {
+            }, */{
                 type: "instances",
                 name: "_instances",
                 label: "Saved Instances"

@@ -1,7 +1,7 @@
 {{#if label}}
-    <div>
+    <big><p>
         {{#substitute}}{{localize label}}{{/substitute}}
-    </div>
+    </p></big>
 {{/if}}
 {{#if image}}
     <div>
@@ -25,5 +25,5 @@
     </div>
 {{/if}}
 {{#if hint}}
-    <p class="odk-hint">{{#substitute}}{{localize hint}}{{/substitute}}</p>
+    <i><p class="odk-hint">{{#substitute}}{{localize hint}}{{/substitute}}</p></i>
 {{/if}}
