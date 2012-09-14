@@ -1,23 +1,35 @@
-.odk-container {
-    padding: 1em;
-}
 body {
     height:100%;
 }
+[data-role=page] {
+    height: 100%;
+}
 .odk-screen {
-    min-height:100%;
-    /* bottom padding keeps the screen element from going under the nav bar */
     padding-bottom: 2em;
+    height:100%;
+}
+.odk-scroll {
+    min-height:100%;
+}
+.odk-container {
+    padding: 1em;
 }
 .odk-nav {
+    /*
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
+    */
 }
-.odk-prev-btn {
-    width: 49%;
+/*
+.ui-shadow-inset {
+    box-shadow: inset 0px 1px 5px rgba(255, 194, 0, 0.5);
+    -webkit-box-shadow:inset 0px 1px 5px rgba(255, 194, 0, 0.5);
 }
-.odk-next-btn {
-    width: 49%;
+*/
+.ui-input-text.ui-focus, .ui-input-search.ui-focus {
+    -moz-box-shadow: 0px 0px 12px 			rgb(255, 194, 0);
+	-webkit-box-shadow: 0px 0px 12px 		rgb(255, 194, 0);
+	box-shadow: 0px 0px 12px 				rgb(255, 194, 0);
 }

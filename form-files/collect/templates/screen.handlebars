@@ -1,20 +1,24 @@
 <div class="odk-screen {{#if enableForwardNavigation}}swipeForwardEnabled{{/if}} {{#if enableBackNavigation}}swipeBackEnabled{{/if}}">
     {{#if showHeader}}
-        <div class="odk-toolbar">{{name}}</div>
+        <div data-role="header" class="odk-toolbar">{{name}}</div>
     {{/if}}
-    <div class="odk-scroll odk-container">
+    <div data-role="content" class="odk-scroll odk-container">
     {{#if loading}}
         <div data-role="page">Please wait...</div>
     {{/if}}
     </div>
     {{#if showFooter}}
-    <div class="odk-nav" data-role="controlgroup" data-type="horizontal">
-        {{#if enableBackNavigation}}
-            <a class="odk-prev-btn" data-role="button">◄ back</a>
-        {{/if}}
-        {{#if enableForwardNavigation}}
-            <a class="odk-next-btn" data-role="button">next ►</a>
-        {{/if}}
+    <div data-role="footer" class="odk-nav ui-state-persist" data-theme="d"><!--class="odk-nav" -->
+        <div data-role="navbar" class="ui-state-persist">
+            <ul>
+            {{#if enableBackNavigation}}
+                <li><a href="#" class="odk-prev-btn" data-iconpos="top" data-icon="arrow-l">back</a></li>
+            {{/if}}
+            {{#if enableForwardNavigation}}
+                <li><a href="#" class="odk-next-btn" data-iconpos="top" data-icon="arrow-r">next</a></li>
+            {{/if}}
+            </ul>
+        </div>
     </div>
     {{/if}}
 </div>
