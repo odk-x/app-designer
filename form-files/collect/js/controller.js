@@ -24,7 +24,7 @@ return {
                     return;
                 } else {
                     console.log("gotoPreviousPrompt: poppreviousScreenNames ms: " + (+new Date()) + " page: " + screenManager.getName());
-                    that.setPrompt(that.getPromptByName(that.previousScreenNames.pop()), []);
+                    that.setPrompt(that.getPromptByName(that.previousScreenNames.pop()), {reverse:true});
                 }
             },
             failure: function(missingValue) {
@@ -82,10 +82,10 @@ return {
         alert("Unable to find label: " + name);
         return null;
     },
-    setPrompt: function(prompt, termList){
+    setPrompt: function(prompt, jqmAttrs){
         console.log('setPrompt');
         console.log(prompt);
-        this.screenManager.setPrompt(prompt);
+        this.screenManager.setPrompt(prompt, jqmAttrs);
     },
     hasPromptHistory: function() {
         return (this.previousScreenNames.length !== 0);
@@ -103,7 +103,7 @@ return {
                     that.previousScreenNames.push(name);
                 }
             }
-            that.setPrompt(prompt, termList);
+            that.setPrompt(prompt);
         });
     },
     gotoLabel: function(name){

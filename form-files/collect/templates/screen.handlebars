@@ -1,8 +1,12 @@
-<div class="odk current {{#if enableForwardNavigation}}swipeForwardEnabled{{/if}} {{#if enableBackNavigation}}swipeBackEnabled{{/if}}">
+<div class="odk-screen {{#if enableForwardNavigation}}swipeForwardEnabled{{/if}} {{#if enableBackNavigation}}swipeBackEnabled{{/if}}">
     {{#if showHeader}}
     <div class="odk-toolbar">{{name}}</div>
     {{/if}}
-    <div class="odk-scroll"></div>
+    <div class="odk-scroll odk-container">
+    {{#if loading}}
+        <div data-role="page">Please wait...</div>
+    {{/if}}
+    </div>
     {{#if showFooter}}
     <div class="odk-nav">
         {{#if enableBackNavigation}}

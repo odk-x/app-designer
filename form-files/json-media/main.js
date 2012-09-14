@@ -6,7 +6,7 @@ requirejs.config({
         database : '../collect/js/database',
         opendatakit : '../collect/js/opendatakit',
         parsequery : '../collect/js/parsequery',
-        zepto : '../collect/js/zepto',
+        //zepto : '../collect/js/zepto',
         underscore : '../collect/js/underscore',
         backbone : '../collect/js/backbone',
         prompts : '../collect/js/prompts',
@@ -16,7 +16,9 @@ requirejs.config({
         promptTypes : '../collect/js/promptTypes',
         text : '../collect/js/text',
         screenManager : '../collect/js/screenManager',
-        templates : '../collect/templates'
+        templates : '../collect/templates',
+        zepto : '../collect/js/jquery-1.8.1.min',
+        jqm : '../collect/jqm/jquery.mobile-1.1.1'
         },
     shim: {
         'zepto': {
@@ -53,7 +55,10 @@ requirejs.config({
             exports: 'Handlebars'
         },
         'templates/compiledTemplates': {
-            deps: ['handlebars'],
+            deps: ['handlebars']
+        },
+        'jqm': {
+            deps: ['zepto']
         }
     }
 });

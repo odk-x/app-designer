@@ -1,3 +1,4 @@
+'use strict';
 // depends upon -- opendatakit, Backbone, $, Handlebars
 //
 // plus all compiled templates being loaded (which requires 'text' module in requirejs)
@@ -5,38 +6,42 @@
 // plus 'controller' -- to avoid a circular dependency, 'controller' is passed 
 // in during initialize() and stored in a member variable.
 //
-define(['opendatakit','backbone','zepto','handlebars','templates/compiledTemplates','text'], 
-function(opendatakit, Backbone, $, Handlebars) {
+define(['opendatakit','backbone','zepto','handlebars', 'jqm', 'templates/compiledTemplates', 'text'], 
+function(opendatakit, Backbone, $, Handlebars, jqm) {
+
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.hashListeningEnabled = false;
+    $.mobile.pushStateEnabled = false;
+});
+    
 return Backbone.View.extend({
     el: "body",
     className: "current",
     instance_id:123,
-    incompleteTemplate: function(){
-        var that = this;
-        setTimeout(function(){that.render();}, 100);
-        return Handlebars.compile('<div class="current hvmiddle"><div class="hvcenter">Please wait...</div></div>');
-    },    
+    template: Handlebars.templates.screen,
     renderContext:{},
     initialize: function(controller){
         this.controller = controller;
-        var that = this;
-        requirejs(['text!templates/screen.handlebars'],function(source) {
-            that.template = Handlebars.compile(source);
-        });
     },
     getName: function(){
-        if ( this.prompt != null ) {
+        if ( this.prompt !== null ) {
             return this.prompt.name;
         } else {
             console.log("no prompt showing on this screen!");
         }
     },
-    setPrompt: function(prompt){
+    setPrompt: function(prompt, jqmAttrs){
+        if(!jqmAttrs){
+            jqmAttrs = {};
+        }
         var that = this;
+        this.previousPrompt = this.prompt;
         this.prompt = prompt;
         this.renderContext = {
             showHeader: true,
-            showFooter: true,
+            showFooter: true
             // enableNavigation -- defaults to true; false to disable everything...
             // enableForwardNavigation -- forward swipe and button
             // enableBackNavigation -- backward swipe and button
@@ -60,26 +65,11 @@ return Backbone.View.extend({
                     that.renderContext.enableNavigation &&
                     that.controller.hasPromptHistory();
             }
-            that.render();
+            var newPage = that.renderPage(prompt);
+            that.$el.append(newPage);
+            $.mobile.changePage(newPage, $.extend({changeHash:false, transition: 'slide'}, jqmAttrs));
         });
     },
-    /*
-    savePrompts: function(callback){
-        var that = this;
-        var counter = this.prompts.length;
-        $.each(this.prompts, function(idx, prompt){
-            prompt.model.save({}, {
-                error:function(){console.log('error');},
-                success:function(){
-                    console.log('saved prompt');
-                    counter--;
-                    if(counter === 0){
-                        callback();
-                    }
-                }
-            });
-        });
-    },*/
     gotoNextScreen: function(e){
         console.log("gotoNextScreen");
         console.log(e);
@@ -88,25 +78,41 @@ return Backbone.View.extend({
     gotoPreviousScreen: function(){
         this.controller.gotoPreviousScreen();
     },
+    handlePagechange: function(evt){
+        console.log(evt);
+        console.log('Page change');
+        if(this.previousPrompt){
+            this.previousPrompt.$el.remove();
+        }
+    },
     events: {
         "click .odk-next-btn": "gotoNextScreen",
         "click .odk-prev-btn": "gotoPreviousScreen",
-        "swipeLeft .swipeForwardEnabled": "gotoNextScreen",
-        "swipeRight .swipeBackEnabled": "gotoPreviousScreen"
+        "swipeleft .swipeForwardEnabled": "gotoNextScreen",
+        "swiperight .swipeBackEnabled": "gotoPreviousScreen",
+        "pagechange" : "handlePagechange"
     },
-    render: function() {
-        if ( this.prompt.isInitializeComplete() && this.template != null ) {
-            this.$el.html(this.template(this.renderContext));
-            var $contentArea = this.$('.odk-scroll');
-            var $promptEl = $('<div>');
-            $contentArea.append($promptEl);
-            this.prompt.setElement($promptEl.get(0));
-            this.prompt.render();
-            return this;
-        } else {
-            this.$el.html(this.incompleteTemplate(this.renderContext));
+    renderPage: function(prompt){
+        var $page = $('<div>');
+        $page.attr('data-role', 'page');
+        $page.html(this.template(this.renderContext));
+        if('prompt' in this){
+            var $contentArea = $page.find('.odk-container');
+            $contentArea.append(prompt.$el);
+            prompt.render();
         }
+        $.mobile.initializePage();
+        return $page;
     },
+    /*
+    //Rerendering jqm stuff seems difficult
+    render: function() {
+        //this.$el.empty();
+        var newPage = this.renderPage(this.prompt);
+        this.$el.append(newPage);
+        return this;
+    },
+    */
     validate: function(flag, context){
         console.log(context);
         context.success();
