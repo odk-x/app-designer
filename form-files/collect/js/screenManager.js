@@ -95,13 +95,14 @@ return Backbone.View.extend({
     renderPage: function(prompt){
         var $page = $('<div>');
         $page.attr('data-role', 'page');
+        $page.attr('data-theme', "d");
+        $page.attr('data-content-theme', "d");
         $page.html(this.template(this.renderContext));
         if('prompt' in this){
             var $contentArea = $page.find('.odk-container');
             $contentArea.append(prompt.$el);
             prompt.render();
         }
-        $.mobile.initializePage();
         return $page;
     },
     /*

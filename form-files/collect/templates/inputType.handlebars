@@ -1,6 +1,6 @@
-<ul class="odk {{#if hide}}odk-hidden{{/if}}">
+<div class="{{#if hide}}odk-hidden{{/if}}">
     {{> labelHint}}
-    <li><input
+    <input
         class="odk"
         type="text" 
         name="{{name}}"
@@ -13,5 +13,4 @@
         {{#if invalid}}
             <p>invalid</p>
         {{/if}}
-    </li>
-</ul>
+</div>

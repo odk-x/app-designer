@@ -634,13 +634,10 @@ promptTypes.screen = promptTypes.base.extend({
         }
     },
     render: function(){
-        this.$el.html('<ul class="odk odk-prompts">');
+        this.$el.html('<div class="odk odk-prompts">');
         var $prompts = this.$('.odk-prompts');
         $.each(this.prompts, function(idx, prompt){
-            var $promptEl = $('<li>');
-            $prompts.append($promptEl);
-            prompt.setElement($promptEl.get(0));
-            prompt.render();
+            $prompts.append(prompt.render().$el);
         });
     }
 });

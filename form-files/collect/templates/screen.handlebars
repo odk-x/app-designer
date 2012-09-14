@@ -1,6 +1,6 @@
 <div class="odk-screen {{#if enableForwardNavigation}}swipeForwardEnabled{{/if}} {{#if enableBackNavigation}}swipeBackEnabled{{/if}}">
     {{#if showHeader}}
-    <div class="odk-toolbar">{{name}}</div>
+        <div class="odk-toolbar">{{name}}</div>
     {{/if}}
     <div class="odk-scroll odk-container">
     {{#if loading}}
@@ -8,12 +8,12 @@
     {{/if}}
     </div>
     {{#if showFooter}}
-    <div class="odk-nav">
+    <div class="odk-nav" data-role="controlgroup" data-type="horizontal">
         {{#if enableBackNavigation}}
-            <a class="odk-prev-btn">◄ back</a>
+            <a class="odk-prev-btn" data-role="button">◄ back</a>
         {{/if}}
         {{#if enableForwardNavigation}}
-            <a class="odk-next-btn">next ►</a>
+            <a class="odk-next-btn" data-role="button">next ►</a>
         {{/if}}
     </div>
     {{/if}}

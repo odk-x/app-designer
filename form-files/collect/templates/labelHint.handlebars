@@ -1,27 +1,29 @@
 {{#if label}}
-    <li><label class="odk" for="{{name}}">{{#substitute}}{{localize label}}{{/substitute}}</label></li>
+    <div>
+        {{#substitute}}{{localize label}}{{/substitute}}
+    </div>
 {{/if}}
 {{#if image}}
-    <li><label class="odk" for="{{name}}">
+    <div>
         <img width="100%" src="{{localize image}}"></img>
-    </label></li>
+    </div>
 {{/if}}
 {{#if audio}}
-    <li><label class="odk" for="{{name}}">
+    <div>
         <audio controls="controls">
             <source src="{{localize audio}}" type="audio/ogg" />
             Your browser does not support the audio element.
         </audio>
-    </label></li>
+    </div>
 {{/if}}
 {{#if video}}
-    <li><label class="odk" for="{{name}}">
+    <div>
         <video controls="controls">
             <source src="{{localize video}}" type="video/ogg" />
             Your browser does not support the video element.
         </video>
-    </label></li>
+    </div>
 {{/if}}
 {{#if hint}}
-    <li class="odk-hint">{{#substitute}}{{localize hint}}{{/substitute}}</li>
+    <p class="odk-hint">{{#substitute}}{{localize hint}}{{/substitute}}</p>
 {{/if}}

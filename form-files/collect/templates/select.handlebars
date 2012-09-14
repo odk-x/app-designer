@@ -1,24 +1,24 @@
 <form>
-    <ul class="odk">
-        {{> labelHint}}
+    <fieldset>
+        <legend>{{> labelHint}}</legend>
         {{#each choices}}
-            <li>
-                <input
-                    {{#if ../selectOne}}
-                        type="radio"
-                    {{else}}
-                        type="checkbox"
-                    {{/if}}
-                    {{#if checked}}
-                        checked
-                    {{/if}}
-                    name="{{name}}"
-                    value="{{value}}" />
-                {{localize label}}
-            </li>
+            <input
+                {{#if ../selectOne}}
+                    type="radio"
+                {{else}}
+                    type="checkbox"
+                {{/if}}
+                {{#if checked}}
+                    checked
+                {{/if}}
+                name="{{name}}"
+                id="{{name}}"
+                value="{{value}}" />
+            <label for="{{name}}">{{localize label}}</label>
+            
         {{/each}}
         {{#if orOther}}
-            <li>
+
                 <input
                     {{#if selectOne}}
                         type="radio"
@@ -36,7 +36,7 @@
                     {{#unless other.selected}}
                         disabled="true"
                     {{/unless}} />
-            </li>
+
         {{/if}}
-    </ul>
+    </fieldset>
 </form>

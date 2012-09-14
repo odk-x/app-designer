@@ -1,0 +1,23 @@
+.odk-container {
+    padding: 1em;
+}
+body {
+    height:100%;
+}
+.odk-screen {
+    min-height:100%;
+    /* bottom padding keeps the screen element from going under the nav bar */
+    padding-bottom: 2em;
+}
+.odk-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.odk-prev-btn {
+    width: 49%;
+}
+.odk-next-btn {
+    width: 49%;
+}

@@ -1,18 +1,17 @@
-<ul class="odk">
+<div>
     {{> labelHint}}
-    <li><input type="text" name="{{name}}" value="{{value}}"
+    <input type="text" name="{{name}}" value="{{value}}"
         {{#if disabled}}
             disabled="true"
         {{/if}}
         />
-        {{#if invalid}}
-            <p>invalid</p>
-        {{/if}}
-    </li>
-    <li><button class="whiteButton">Take Picture</button></li>
-    <li><div class="mediaContainer">
+    {{#if invalid}}
+        <p>invalid</p>
+    {{/if}}
+    <button>Take Picture</button>
+    <div class="mediaContainer">
         {{#if uriValue}}
             <img width="200" src="{{uriValue}}"></img>
         {{/if}}
-    </div></li>
-</ul>
+    </div>
+<div>
