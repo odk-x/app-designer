@@ -6,7 +6,7 @@
 // plus 'controller' -- to avoid a circular dependency, 'controller' is passed 
 // in during initialize() and stored in a member variable.
 //
-define(['opendatakit','backbone','zepto','handlebars', 'jqm', 'templates/compiledTemplates', 'text'], 
+define(['opendatakit','backbone','jquery','handlebars','templates/compiledTemplates','text'], 
 function(opendatakit, Backbone, $, Handlebars, jqm) {
 
 $(document).bind("mobileinit", function () {
@@ -15,7 +15,7 @@ $(document).bind("mobileinit", function () {
     $.mobile.hashListeningEnabled = false;
     $.mobile.pushStateEnabled = false;
 });
-    
+
 return Backbone.View.extend({
     el: "body",
     className: "current",

@@ -1,6 +1,6 @@
 'use strict';
 
-define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','zepto','underscore', 'text!templates/labelHint.handlebars'],
+define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'text!templates/labelHint.handlebars'],
 function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _, labelHintPartial) {
 
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
@@ -21,8 +21,6 @@ Handlebars.registerHelper('localize', function(textOrLangMap, options) {
         console.error(textOrLangMap);
     }
 });
-console.log('x');
-console.log(labelHintPartial);
 Handlebars.registerPartial('labelHint', labelHintPartial);
 
 /**

@@ -1,6 +1,6 @@
 'use strict';
-// depends upon: controller, zepto, promptTypes
-define(['controller', 'zepto', 'promptTypes'], function(controller, $, promptTypes) {
+// depends upon: controller, jquery, promptTypes
+define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTypes) {
     return {
     column_types : {
         condition: 'formula'

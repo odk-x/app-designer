@@ -6,7 +6,8 @@ requirejs.config({
         database : '../collect/js/database',
         opendatakit : '../collect/js/opendatakit',
         parsequery : '../collect/js/parsequery',
-        //zepto : '../collect/js/zepto',
+        jquery : '../collect/js/jquery',
+        jqmobile : '../collect/libs/jquery.mobile-1.1.1/jquery.mobile-1.1.1',
         underscore : '../collect/js/underscore',
         backbone : '../collect/js/backbone',
         prompts : '../collect/js/prompts',
@@ -16,12 +17,10 @@ requirejs.config({
         promptTypes : '../collect/js/promptTypes',
         text : '../collect/js/text',
         screenManager : '../collect/js/screenManager',
-        templates : '../collect/templates',
-        zepto : '../collect/js/jquery-1.8.1.min',
-        jqm : '../collect/jqm/jquery.mobile-1.1.1'
+        templates : '../collect/templates'
         },
     shim: {
-        'zepto': {
+        'jquery': {
             // Slimmer drop-in replacement for jquery
             //These script dependencies should be loaded before loading
             //zepto.js
@@ -29,6 +28,12 @@ requirejs.config({
             //Once loaded, use the global '$' as the
             //module value.
             exports: '$'
+        },
+        'jqmobile': {
+            // Slimmer drop-in replacement for jquery
+            //These script dependencies should be loaded before loading
+            //jqmobile.js
+            deps: ['jquery']
         },
         'underscore': {
             //These script dependencies should be loaded before loading
@@ -41,7 +46,7 @@ requirejs.config({
         'backbone': {
             //These script dependencies should be loaded before loading
             //backbone.js
-            deps: ['underscore', 'zepto'],
+            deps: ['underscore', 'jquery'],
             //Once loaded, use the global 'Backbone' as the
             //module value.
             exports: 'Backbone'
@@ -49,16 +54,13 @@ requirejs.config({
         'handlebars': {
             //These script dependencies should be loaded before loading
             //handlebars.js
-            deps: ['zepto'],
+            deps: ['jquery'],
             //Once loaded, use the global 'Handlebars' as the
             //module value.
             exports: 'Handlebars'
         },
         'templates/compiledTemplates': {
             deps: ['handlebars']
-        },
-        'jqm': {
-            deps: ['zepto']
         }
     }
 });
@@ -263,8 +265,8 @@ var formDef = /* json start delimiter */{
     // read all the form data and metaData into value caches
     // under mdl.data and mdl.qp (respectively).
         
-requirejs(['zepto','builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
-function($,builder,controller,prompts) {
+requirejs(['jquery', 'jqmobile', 'builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
+function($,m,builder,controller,prompts) {
     console.log('scripts loaded');
     // build the survey and place it in the controller...
 builder.buildSurvey(formDef, function() {
