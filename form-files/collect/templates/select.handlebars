@@ -1,24 +1,23 @@
 <form>
-    <fieldset>
+    <fieldset data-role="controlgroup">
         <legend>{{> labelHint}}</legend>
         {{#each choices}}
             <input
-                {{#if ../selectOne}}
+                {{#if ../select_one}}
                     type="radio"
                 {{else}}
                     type="checkbox"
                 {{/if}}
                 {{#if checked}}
-                    checked
+                    checked="checked"
                 {{/if}}
-                name="{{name}}"
+                {{! the name attribue has to be the same for all the options}}
+                name="{{../name}}"
                 id="{{name}}"
-                value="{{value}}" />
+                value="{{name}}" />
             <label for="{{name}}">{{localize label}}</label>
-            
         {{/each}}
-        {{#if orOther}}
-
+        {{#if or_other}}
                 <input
                     {{#if selectOne}}
                         type="radio"

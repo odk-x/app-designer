@@ -127,7 +127,7 @@ var formDef = /* json start delimiter */{
                     }
                 },
                 {
-                    "type": "select", 
+                    "type": "select_one", 
                     "name": "gender", 
                     "param": "gender", 
                     "label": {

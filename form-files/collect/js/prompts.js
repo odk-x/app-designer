@@ -355,18 +355,15 @@ promptTypes.select = promptTypes.base.extend({
         var that = this;
         console.log("select modification");
         console.log(this.$('form').serializeArray());
-        var value = this.$('form').serializeArray();
-        var saveValue = (value == null) ? null : JSON.stringify(value);
-        // TODO: broken for multiselect -- pretty sure we don't want to serialize array to db    
+        var formValue = (this.$('form').serializeArray());
+        var saveValue = (formValue == null) ? null : JSON.stringify(formValue);
         this.setValue(saveValue, function() {
-            that.renderContext.value = value;
+            that.renderContext.value = formValue;
             that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
-                if ( value != null ) {
-                    // NOTE: for multi-select
-                    var matchingValue = _.find(that.renderContext.value, function(value){
-                        return choice.name === value.name;
+                if ( formValue != null ) {
+                    choice.checked = _.any(that.renderContext.value, function(valueObject){
+                        return choice.name === valueObject.value;
                     });
-                    choice.checked = (matchingValue != null);
                 } else {
                     choice.checked = false;
                 }
@@ -395,6 +392,22 @@ promptTypes.select = promptTypes.base.extend({
             }
         }
         readyToRenderCallback();
+    }
+});
+promptTypes.select_one = promptTypes.select.extend({
+    renderContext: {
+        select_one: true
+    }
+});
+promptTypes.select_one_or_other = promptTypes.select.extend({
+    renderContext: {
+        select_one: true,
+        or_other: true
+    }
+});
+promptTypes.select_or_other = promptTypes.base.extend({
+    renderContext: {
+        or_other: true
     }
 });
 promptTypes.dropdownSelect = promptTypes.base.extend({
