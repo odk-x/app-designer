@@ -119,6 +119,11 @@ var formDef = /* json start delimiter */{
                     "param": null, 
                     "label": {
                         "en_us": "Enter your bmi:"
+                    },
+                    "templateContext" : {
+                        "type": "range",
+                        "min": 0,
+                        "max": 60
                     }
                 },
                 {

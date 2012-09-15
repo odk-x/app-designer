@@ -1,9 +1,11 @@
 <div class="{{#if hide}}odk-hidden{{/if}}">
     {{> labelHint}}
+    <div class="input-container">{{! used to prevent swiping on sliders}}
     <input
         class="odk"
-        type="text" 
+        type="{{type}}" 
         name="{{name}}"
+        min="{{min}}" max="{{max}}"
         value="{{value}}"
         {{#if disabled}}
             style="background-color:lightgray;"
@@ -13,4 +15,5 @@
         {{#if invalid}}
             <p>invalid</p>
         {{/if}}
+    </div>
 </div>

@@ -38,7 +38,10 @@ promptTypes.base = Backbone.View.extend({
     database: database,
     mdl: mdl,
     //renderContext is a dynamic object to be passed into the render function.
+    //renderContext is meant to be private.
     renderContext: {},
+    //Template context is an user specified object that overrides the render context.
+    templateContext: {},
     initialize: function() {
         this.initializeTemplate();
         this.initializeRenderContext();
@@ -68,6 +71,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
         this.renderContext.formName = mdl.qp.formName.value;
+        $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {
@@ -439,16 +443,23 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     datatype: "text",
     template: Handlebars.templates.inputType,
     templatePath: "templates/inputType.handlebars",
+    renderContext: {
+        "type": "text"
+    },
     events: {
         "change input": "modification",
-        "swipeLeft input": "disableSwipingOnInput",
-        "swipeRight input": "disableSwipingOnInput"
+        "swipeleft .input-container": "disableSwipingOnInput",
+        "swiperight .input-container": "disableSwipingOnInput"
     },
     disableSwipingOnInput: function(evt){
         evt.stopPropagation();
     },
-    modification: function(evt) {
-        var that = this;
+    debouncedModification: _.debounce(function(that, evt) {
+        //a debounced function will postpone execution until after wait (parameter 2)
+        //milliseconds have elapsed since the last time it was invoked.
+        //Useful for sliders
+        console.log(that);
+        console.log("this is that");
         var renderContext = this.renderContext;
         var value = this.$('input').val();
         this.setValue(value, function() {
@@ -465,6 +476,9 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
                 }
             });
         });
+    }, 600),
+    modification: function(evt) {
+        this.debouncedModification(this, evt);
     },
     onActivate: function(readyToRenderCallback) {
         var renderContext = this.renderContext;
