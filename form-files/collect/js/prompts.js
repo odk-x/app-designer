@@ -78,8 +78,7 @@ promptTypes.base = Backbone.View.extend({
         readyToRenderCallback();
     },
     template: Handlebars.templates.text, //Make "Override me" template
-    render: function() {
-        console.log(this.renderContext); 
+    render: function() { 
         this.$el.html(this.template(this.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         this.$el.trigger('create');
@@ -470,7 +469,9 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     debouncedModification: _.debounce(function(that, evt) {
         //a debounced function will postpone execution until after wait (parameter 2)
         //milliseconds have elapsed since the last time it was invoked.
-        //Useful for sliders
+        //Useful for sliders.
+        //It might be better to listen for the jQm event for when a slider is released.
+        //This could cause problems since the debounced function could fire after a page change.
         console.log(that);
         console.log("this is that");
         var renderContext = this.renderContext;

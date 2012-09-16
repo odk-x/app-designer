@@ -21,9 +21,11 @@ return Backbone.View.extend({
     className: "current",
     instance_id:123,
     template: Handlebars.templates.screen,
+    swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
     renderContext:{},
     initialize: function(controller){
         this.controller = controller;
+        this.currentPageEl = $('.init-page');
     },
     getName: function(){
         if ( this.prompt !== null ) {
@@ -38,6 +40,7 @@ return Backbone.View.extend({
         }
         var that = this;
         this.prompt = prompt;
+        this.swipeEnabled = false;
         this.renderContext = {
             showHeader: true,
             showFooter: true,
@@ -50,7 +53,14 @@ return Backbone.View.extend({
             //
             // the absence of page history disabled backward swipe and button.
         };
+        //A better way to do this might be to pass a controller interface object to 
+        //onActivate that can trigger screen refreshes, as well as goto other prompts.
+        //(We would not allow prompts to access the controller directly).
+        //When the prompt changes, we could disconnect the interface to prevent the old
+        //prompts from messing with the current screen.
         this.prompt.onActivate(function(renderContext){
+            var isFirstPrompt = !('previousPageEl' in that);
+            var transition = isFirstPrompt ? 'fade' : 'slide';
             if(renderContext){
                 $.extend(that.renderContext, renderContext);
             }
@@ -60,8 +70,8 @@ return Backbone.View.extend({
                 //so this flag automatically disables nav in that case.
                 that.renderContext.enableNavigation = false;
             }
-            console.log(that.renderContext);
             /*
+            console.log(that.renderContext);
             // work through setting the forward/backward enable flags
             if ( that.renderContext.enableNavigation === undefined ) {
                 that.renderContext.enableNavigation = true;
@@ -79,20 +89,20 @@ return Backbone.View.extend({
             that.previousPageEl = that.currentPageEl;
             that.currentPageEl = that.renderPage(prompt);
             that.$el.append(that.currentPageEl);
-            $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: 'slide'}, jqmAttrs));
+            $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
         });
     },
-    gotoNextScreen: function(e){
-        console.log("gotoNextScreen");
-        console.log(e);
-        this.controller.gotoNextScreen();
+    gotoNextScreen: function(evt){
+        if(!this.swipeEnabled) return;
+        this.controller.gotoNextScreen(); 
     },
-    gotoPreviousScreen: function(){
+    gotoPreviousScreen: function(evt){
+        if(!this.swipeEnabled) return;
         this.controller.gotoPreviousScreen();
     },
     handlePagechange: function(evt){
-        console.log(evt);
         console.log('Page change');
+        this.swipeEnabled = true;
         if(this.previousPageEl){
             this.previousPageEl.remove();
         }
@@ -102,7 +112,7 @@ return Backbone.View.extend({
         "click .odk-prev-btn": "gotoPreviousScreen",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
-        "pagechange" : "handlePagechange"
+        "pagechange": "handlePagechange"
     },
     renderPage: function(prompt){
         var $page = $('<div>');
