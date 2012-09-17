@@ -1,26 +1,26 @@
-define(/* json start delimiter */{
+{
     "settings": [
         {
-            name: "formId",
-            param: "json-media"
+            "name": "formId",
+            "param": "lgform"
         },
         {
-            name: "formVersion",
-            param: "20120901"
+            "name": "formVersion",
+            "param": "20120901"
         },
         {
-            name: "formLocale",
-            param: "en_us"
+            "name": "formLocale",
+            "param": "en_us"
         },
         {
-            name: "formName",
-            param: {
-                "en_us": 'Simple Test Form'
+            "name": "formName",
+            "param": {
+                "en_us": "Simple Test Form"
                 }
         },
         {
-            name: "formLogo",
-            param: "img/form_logo.png"
+            "name": "formLogo",
+            "param": "img/form_logo.png"
         }
     ],
     "survey": [
@@ -189,4 +189,4 @@ define(/* json start delimiter */{
             }
         ]
     }
-}/* json end delimiter */);
+}

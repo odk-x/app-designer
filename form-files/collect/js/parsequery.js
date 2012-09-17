@@ -144,8 +144,13 @@ return {
     }, 
 };
 		if ( formId != null ) {
-			requirejs(['../' + formId + '/formDef.js'], function(formDef) {
-				that.fetchContinueParsing(formDef, formId, instanceId, pageRef, dataKeyValueList, continuation);
+			requirejs(['text!../' + formId + '/formDef.json'], function(formDefTxt) {
+				if ( formDefTxt == null || formDefTxt.length == 0 ) {
+					alert('Unable to find file: ' + formId + '/formDef.json');
+				} else {
+					formDef = JSON.parse(formDefTxt);
+					that.fetchContinueParsing(formDef, formId, instanceId, pageRef, dataKeyValueList, continuation);
+				}
 			});
 		} else {
 			this.fetchContinueParsing(formDef, formId, instanceId, pageRef, dataKeyValueList, continuation);
