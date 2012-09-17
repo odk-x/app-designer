@@ -91,6 +91,11 @@ var formDef = /* json start delimiter */{
     ],
     "survey": [
         {
+            "type": "acknowledge",
+            "name": "continue",
+            "label": "Do you want to continue?"
+        },
+        {
             "prompts": [
                 {
                     "type": "text", 

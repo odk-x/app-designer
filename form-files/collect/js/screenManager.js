@@ -127,7 +127,7 @@ return Backbone.View.extend({
         return $page;
     },
     /*
-    //Rerendering jqm stuff seems difficult
+    //We need to render the next screen in advance so this approach won't work.
     render: function() {
         //this.$el.empty();
         var newPage = this.renderPage(this.prompt);

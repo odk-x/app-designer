@@ -60,7 +60,7 @@ promptTypes.base = Backbone.View.extend({
         return (this.template != null);
     },
     initializeRenderContext: function() {
-        //We don't want to modify the top level render context.
+        //Object.create is used because we don't want to modify the class's render context.
         this.renderContext = Object.create(this.renderContext);
         this.renderContext.label = this.label;
         this.renderContext.name = this.name;
@@ -688,6 +688,7 @@ promptTypes.screen = promptTypes.base.extend({
         });
     }
 });
+//TODO
 promptTypes.calculate = promptTypes.base.extend({
     type: "calculate",
     hideInHierarchy: true,
@@ -737,4 +738,66 @@ promptTypes.goto_if = promptTypes.base.extend({
         }
     }
 });
+promptTypes.note = promptTypes.base.extend({
+    type: "note",
+    template: Handlebars.templates.note,
+    templatePath: "templates/note.handlebars"
+});
+promptTypes.acknowledge = promptTypes.select.extend({
+    type: "acknowledge",
+    modify: function(evt) {
+        controller.gotoNextScreen();
+    },
+    modification: function(evt) {
+        var that = this;
+        var acknowledged = $('#acknowledge').is(':checked');
+        this.setValue(acknowledged, function() {
+            that.renderContext.choices = [{
+                "name": "acknowledge",
+                "label": "acknowledge",
+                "checked": acknowledged
+            }];
+            that.readyToRenderCallback({
+                enableForwardNavigation : acknowledged
+            });
+        });
+    },
+    onActivate: function(readyToRenderCallback) {
+        var that = this;
+        this.readyToRenderCallback = readyToRenderCallback;
+        
+        var acknowledged = that.getValue();
+
+        that.renderContext.choices = [{
+            "name": "acknowledge",
+            "label": "acknowledge",
+            "checked": acknowledged
+        }];
+        readyToRenderCallback({
+            enableForwardNavigation : acknowledged
+        });
+    }
+});
+/*
+promptTypes.acknowledge = promptTypes.base.extend({
+    type: "acknowledge",
+    template: Handlebars.templates.acknowledge,
+    templatePath: "templates/acknowledge.handlebars",
+    renderContext: {
+        acknowledgeText: "acknowledge"
+    },
+    events: {
+        "modify .acknowledge": "acknowledge"
+    },
+    acknowledge: function(evt) {
+        controller.gotoNextScreen();
+    },
+    onActivate: function(readyToRenderCallback) {
+        var that = this;
+        readyToRenderCallback({
+            enableForwardNavigation : false
+        });
+    }
+});
+*/
 });

@@ -1,5 +1,32 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['acknowledge'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials;
+  var buffer = "", stack1, foundHelper, self=this, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  
+  return "odk-hidden";}
+
+  buffer += "<div class=\"";
+  stack1 = depth0.hide;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">\r\n    ";
+  stack1 = depth0;
+  stack1 = self.invokePartial(partials.labelHint, 'labelHint', stack1, helpers, partials);;
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n    <label>\r\n        <input type=\"checkbox\" name=\"";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" class=\"acknowledge\" />\r\n        ";
+  stack1 = depth0.acknowledgeText;
+  foundHelper = helpers.localize;
+  stack1 = foundHelper ? foundHelper.call(depth0, stack1, {hash:{}}) : helperMissing.call(depth0, "localize", stack1, {hash:{}});
+  buffer += escapeExpression(stack1) + "\r\n    </label>\r\n</div>";
+  return buffer;});
 templates['audio'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials;
   var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
@@ -90,11 +117,11 @@ templates['finalize'] = template(function (Handlebars,depth0,helpers,partials,da
   foundHelper = helpers.headerImg;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.headerImg; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\"\n            width=\"50%\"/>\n		<div>You have completed \"";
+  buffer += escapeExpression(stack1) + "\"\n            width=\"50%\"/>\n		<p>You are at the end of:</p>\n        <p>\"";
   foundHelper = helpers.formName;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.formName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\".</div>\n        <div>\n            <label for=\"instanceName\">Enter instance name:</label>\n            <input class=\"odk\" name=\"instanceName\" value=\"";
+  buffer += escapeExpression(stack1) + "\"</p>\n        <div>\n            <label for=\"instanceName\">Name this form:</label>\n            <input class=\"odk\" name=\"instanceName\" value=\"";
   foundHelper = helpers.instanceName;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.instanceName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -206,10 +233,23 @@ function program5(depth0,data) {
   stack1 = depth0;
   stack1 = self.invokePartial(partials.labelHint, 'labelHint', stack1, helpers, partials);;
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    <input\r\n        class=\"odk\"\r\n        type=\"text\" \r\n        name=\"";
+  buffer += "\r\n    <div class=\"input-container\">";
+  buffer += "\r\n    <input\r\n        class=\"odk\"\r\n        type=\"";
+  foundHelper = helpers.type;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.type; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" \r\n        name=\"";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\"\r\n        min=\"";
+  foundHelper = helpers.min;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.min; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" max=\"";
+  foundHelper = helpers.max;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.max; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   buffer += escapeExpression(stack1) + "\"\r\n        value=\"";
   foundHelper = helpers.value;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
@@ -222,7 +262,7 @@ function program5(depth0,data) {
   stack1 = depth0.invalid;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(5, program5, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</div>";
+  buffer += "\r\n    </div>\r\n</div>";
   return buffer;});
 templates['instances'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -444,6 +484,25 @@ function program5(depth0,data) {
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n    </div>\r\n<div>";
   return buffer;});
+templates['note'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials;
+  var buffer = "", stack1, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "odk-hidden";}
+
+  buffer += "<div class=\"";
+  stack1 = depth0.hide;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">\r\n    ";
+  stack1 = depth0;
+  stack1 = self.invokePartial(partials.labelHint, 'labelHint', stack1, helpers, partials);;
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n</div>";
+  return buffer;});
 templates['opening'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
@@ -547,7 +606,7 @@ function program5(depth0,data) {
 function program7(depth0,data) {
   
   
-  return "\r\n        <div data-role=\"page\">Please wait...</div>\r\n    ";}
+  return "\r\n        <div>Please wait...</div>\r\n    ";}
 
 function program9(depth0,data) {
   
@@ -611,25 +670,25 @@ function program1(depth0,data,depth1) {
   
   var buffer = "", stack1, foundHelper;
   buffer += "\r\n            <input\r\n                ";
-  stack1 = depth1.selectOne;
+  stack1 = depth1.select_one;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n                ";
   stack1 = depth0.checked;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(6, program6, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n                ";
   buffer += "\r\n                name=\"";
-  foundHelper = helpers.name;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  stack1 = depth1.name;
+  stack1 = typeof stack1 === functionType ? stack1() : stack1;
   buffer += escapeExpression(stack1) + "\"\r\n                id=\"";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   buffer += escapeExpression(stack1) + "\"\r\n                value=\"";
-  foundHelper = helpers.value;
+  foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.value; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   buffer += escapeExpression(stack1) + "\" />\r\n            <label for=\"";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
@@ -638,7 +697,7 @@ function program1(depth0,data,depth1) {
   stack1 = depth0.label;
   foundHelper = helpers.localize;
   stack1 = foundHelper ? foundHelper.call(depth0, stack1, {hash:{}}) : helperMissing.call(depth0, "localize", stack1, {hash:{}});
-  buffer += escapeExpression(stack1) + "</label>\r\n            \r\n        ";
+  buffer += escapeExpression(stack1) + "</label>\r\n        ";
   return buffer;}
 function program2(depth0,data) {
   
@@ -653,12 +712,12 @@ function program4(depth0,data) {
 function program6(depth0,data) {
   
   
-  return "\r\n                    checked\r\n                ";}
+  return "\r\n                    checked=\"checked\"\r\n                ";}
 
 function program8(depth0,data) {
   
   var buffer = "", stack1, foundHelper;
-  buffer += "\r\n\r\n                <input\r\n                    ";
+  buffer += "\r\n                <input\r\n                    ";
   stack1 = depth0.selectOne;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
@@ -709,7 +768,7 @@ function program15(depth0,data) {
   
   return "\r\n                        disabled=\"true\"\r\n                    ";}
 
-  buffer += "<form>\r\n    <fieldset>\r\n        <legend>";
+  buffer += "<form>\r\n    <fieldset data-role=\"controlgroup\">\r\n        <legend>";
   stack1 = depth0;
   stack1 = self.invokePartial(partials.labelHint, 'labelHint', stack1, helpers, partials);;
   if(stack1 || stack1 === 0) { buffer += stack1; }
@@ -718,7 +777,7 @@ function program15(depth0,data) {
   stack1 = helpers.each.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n        ";
-  stack1 = depth0.orOther;
+  stack1 = depth0.or_other;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(8, program8, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n    </fieldset>\r\n</form>";
