@@ -144,7 +144,7 @@ return {
     }, 
 };
 		if ( formId != null ) {
-			requirejs(['text!../' + formId + '/formDef.json'], function(formDefTxt) {
+			requirejs(['text!' + opendatakit.getCurrentFormDirectory(formId) +  'formDef.json'], function(formDefTxt) {
 				if ( formDefTxt == null || formDefTxt.length == 0 ) {
 					alert('Unable to find file: ' + formId + '/formDef.json');
 				} else {

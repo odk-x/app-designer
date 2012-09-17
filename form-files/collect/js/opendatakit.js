@@ -99,6 +99,16 @@ return {
 		return qpl;
 	},
 
+	getCurrentFormDirectory:function(formId, formVersion) {
+		if ( formId == null ) {
+			formId = mdl.qp.formId.value;
+		}
+		if ( formVersion == null ) {
+			formVersion = (mdl.qp.formVersion != null) ? mdl.qp.formVersion.value : null;
+		}
+		return "../" + formId + ((formVersion == null) ? '' : ('-' + formVersion)) + '/';
+	},
+	
     openNewInstanceId:function(id, friendlyName) {
         console.log("ALERT! setNewInstanceId - setting new UUID");
         if (id == null) {
