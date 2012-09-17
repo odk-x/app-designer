@@ -65,233 +65,78 @@ requirejs.config({
     }
 });
 
-requirejs(['opendatakit', 'database','parsequery'], function(opendatakit, database, parsequery) {
-var formDef = /* json start delimiter */{
-    "settings": [
-        {
-            name: "formId",
-            param: "lgform"
-        },
-        {
-            name: "formVersion",
-            param: "20120901"
-        },
-        {
-            name: "formLocale",
-            param: "en_us"
-        },
-        {
-            name: "formName",
-            param: 'Simple Test Form'
-        },
-        {
-            name: "formLogo",
-            param: "img/form_logo.png"
-        }
-    ],
-    "survey": [
-        {
-            "type": "acknowledge",
-            "name": "continue",
-            "label": "Do you want to continue?"
-        },
-        {
-            "prompts": [
-                {
-                    "type": "text", 
-                    //"disabled": true,
-                    "name": "name", 
-                    "image": "img/test.gif",
-                    "audio": "http://upload.wikimedia.org/wikipedia/commons/b/ba/Ru-audio_template-Wikipedia.ogg",
-                    //"video": "http://upload.wikimedia.org/wikipedia/commons/2/27/Lasercutting-video.ogg",
-                    "param": null, 
-                    "label": {
-                        "en_us": "Enter your name {{name.value}}:"
-                    },
-                    "hint": "hi"
-                }, 
-                {
-                    "type": "integer", 
-                    "name": "age", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "Enter your age:"
-                    }
-                }, 
-                {
-                    "type": "number", 
-                    "name": "bmi", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "Enter your bmi:"
-                    },
-                    "templateContext" : {
-                        "type": "range",
-                        "min": 0,
-                        "max": 60
-                    }
-                },
-                {
-                    "type": "select_one", 
-                    "name": "gender", 
-                    "param": "gender", 
-                    "label": {
-                        "en_us": "Enter your gender:"
-                    }
-                }
-            ], 
-            "type": "screen", 
-            "name": "testScreen",
-            "label":  {
-                "en_us": "Screen Group"
-            }
-        }, 
-        {
-            "type": "goto_if",
-            "param": "test2",
-            "condition": "{{name}}"
-        },
-        {
-            "name": "name", 
-            "validate": true,
-            "type": "text", 
-            "param": null, 
-            "label": {
-                "en_us": "Enter your name:"
-            }
-        }, 
-        {
-            "type": "label", 
-            "param": "test2"
-        },
-        {
-            "type": "audio", 
-            "name": "audio_test", 
-            "param": null, 
-            "label": {
-                "en_us": "Audio test"
-            }
-        }, 
-        {
-            "type": "video", 
-            "name": "video_test", 
-            "param": null, 
-            "label": {
-                "en_us": "Video test"
-            }
-        }, 
-        {
-            "type": "image", 
-            "name": "image_test", 
-            "param": null, 
-            "label": {
-                "en_us": "Image test"
-            }
-        }, 
-        {
-            "qp": {
-                "param": "foo"
-            }, 
-            "type": "repeat", 
-            "param": "subform.html"
-        }, 
-        {
-            "name": "specialTemplateTest", 
-            "label": {
-                "en_us": "Custom template test:"
-            }, 
-            "type": "text", 
-            "param": null, 
-            "templatePath": "test.handlebars"
-        },
-        {
-            "type": "integer", 
-            "name": "age", 
-            "param": null, 
-            "label": {
-                "en_us": "Enter your age:"
-            }
-        }, 
-        {
-            "type": "number", 
-            "name": "bmi", 
-            "param": null, 
-            "label": {
-                "en_us": "Enter your bmi:"
-            }
-        }, 
-        {
-            "type": "select", 
-            "name": "sel",
-            "label": "Select all genders:",
-            "param": "gender"
-        }
-    ], 
-    "datafields": {
-        "name": {
-            "type": "string"
-        }, 
-        "specialTemplateTest": {
-            "type": "string"
-        }, 
-        "age": {
-            "type": "integer"
-        }, 
-        "bmi": {
-            "type": "number"
-        }, 
-        "sel": {
-            "type": "multiselect"
-        }, 
-        "image_test": {
-            "type": "image/*"
-        }, 
-        "audio_test": {
-            "type": "audio/*"
-        }, 
-        "video_test": {
-            "type": "video/*"
-        }
-    }, 
-    "choices": {
-        "gender": [
-            {
-                "name": "male", 
-                "label": "male"
-            }, 
-            {
-                "name": "female", 
-                "label": "female"
-            }
-        ]
-    }
-}/* json end delimiter */;
-    parsequery.parseQueryParameters(formDef, function() {
-    // we have saved all query parameters into the metaData table
-    // created the data table and its table descriptors
-    // re-normalized the query string to just have the instanceId
-    // read all the form data and metaData into value caches
-    // under mdl.data and mdl.qp (respectively).
+requirejs(['mdl','opendatakit', 'database','parsequery',
+                        'jquery', 'jqmobile', 'builder', 'controller',
+                        'prompts'/* mix-in additional prompts and support libs here */], 
+        function(mdl,opendatakit,database,parsequery,$,m,builder,controller,prompts) {
+
+    $.mobile.ajaxEnabled = false;
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.hashListeningEnabled = false;
+    $.mobile.pushStateEnabled = false;
         
-requirejs(['jquery', 'jqmobile', 'builder', 'controller','prompts'/* mix-in additional prompts and support libs here */],
-function($,m,builder,controller,prompts) {
-    console.log('scripts loaded');
-    // build the survey and place it in the controller...
-builder.buildSurvey(formDef, function() {
-    //
-    // register to handle manual #hash changes
-    $(window).bind('hashchange', function(evt) {
-        controller.odkHashChangeHandler();
-    });
+        window.updateScreen = function(formDef, formId, instanceId, pageRef) {
+                // we have saved all query parameters into the metaData table
+                // created the data table and its table descriptors
+                // re-normalized the query string to just have the instanceId
+                // read all the form data and metaData into value caches
+                // under mdl.data and mdl.qp (respectively).
+                console.log('scripts loaded');
+                
+                var sameForm = (mdl.qp.formId == formId);
+                var sameInstance = (mdl.qp.instanceId == instanceId);
+                var qpl = opendatakit.getHashString(formId, instanceId, pageRef);
 
-    // fire the controller to render the first page.
-    controller.start();
-}
-);
+                // pull metadata for synchronous read access
+                database.cacheAllMetaData(function() {
+                        // metadata is OK...
+                        database.initializeTables(formDef, function() {
+                                // instance data is OK...
+                                if ( !sameForm ) {
+                                        // build the survey and place it in the controller...
+                                        builder.buildSurvey(formDef, function() {
+                                                // controller OK
+                                                // new form -- no 'back' history
+                                                controller.clearPromptHistory();
+                                                //
+                                                // register to handle manual #hash changes
+                                                $(window).bind('hashchange', function(evt) {
+                                                        controller.odkHashChangeHandler();
+                                                });
 
+                                                if ( qpl != window.location.hash ) {
+                                                        // apply the change to the URL...
+                                                        window.location.hash = qpl;
+                                                        // triggers hash-change listener...
+                                                } else {
+                                                        // fire the controller to render the first page.
+                                                        controller.start(pageRef);
+                                                }
+                                        });
+                                } else {
+                                        // controller prompts OK
+                                        if ( !sameInstance ) {
+                                                // switching instance -- no 'back' history...
+                                                controller.clearPromptHistory();
+                                        }
+                                        //
+                                        // register to handle manual #hash changes
+                                        $(window).bind('hashchange', function(evt) {
+                                                controller.odkHashChangeHandler();
+                                        });
+
+                                        if ( qpl != window.location.hash ) {
+                                                // apply the change to the URL...
+                                                window.location.hash = qpl;
+                                                // triggers hash-change listener...
+                                        } else {
+                                                // fire the controller to render the first page.
+                                                controller.start(pageRef);
+                                        }
+                                }
+                        }
+                        );
+                });
+        };
+    parsequery.parseQueryParameters( window.updateScreen );
 });
-
-});
-
-});
-

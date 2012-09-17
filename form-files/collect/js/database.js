@@ -123,6 +123,27 @@ insertMetaDataStmt:function(name, type, value) {
         };
     }
 },
+// get the most recent value for the given name
+selectCrossTableMetaDataStmt:function(formId, instanceId, name) {
+    return {
+            stmt : 'select tbl.v1 val, tbl.t1 type from (select val v1, type t1, name, timestamp from instance_info where form_id=? and instance_id=? and name=? group by name having timestamp = max(timestamp)) tbl;',
+            bind : [formId, instanceId, name]    
+        };
+},
+insertCrossTableMetaDataStmt:function(formId, instanceId, name, type, value) {
+    var now = new Date().getTime();
+    if (value == null) {
+        return {
+            stmt : 'insert into instance_info (timestamp,form_id,instance_id,name,type,val) VALUES (?,?,?,?,?,null);',
+            bind : [now, formId, instanceId, name, type]
+        };
+    } else {
+        return {
+            stmt : 'insert into instance_info (timestamp,form_id,instance_id,name,type,val) VALUES (?,?,?,?,?,?);',
+            bind : [now, formId, instanceId, name, type, value]
+        };
+    }
+},
 getAllFormInstancesStmt:function() {
     return {
             stmt : 'select group_concat(case when name=\'instanceName\' then val else null end) instanceName, ' +
@@ -364,6 +385,66 @@ cacheAllMetaData:function(action) {
         mdl.qp = tlo;
         action();
     });
+},
+getCrossTableMetaData:function(formId, instanceId, name, action) {
+      var that = this;
+      var dbType;
+      var dbValue;
+      that.withDb( function(transaction) {
+        var ss = that.selectCrossTableMetaDataStmt(formId, instanceId, name);
+        transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
+            if (result.rows.length == 0 ) {
+                dbValue = null;                            
+            } else {
+                if(result.rows.length != 1) {
+                    throw new Error("getCrossTableMetaData: multiple rows! " +
+						formId + ", " + instanceId + ", " + name + " count: " + result.rows.length);
+                }
+                var row = result.rows.item(0);
+                dbValue = row['val'];
+                dbType = row['type'];
+            }
+        });
+      }, function(error) {
+        console.log("getCrossTableMetaData: failed to get " + formId + ", " + instanceId + ", " + name);
+      }, function() {
+        action(dbValue,dbType);
+      });
+},
+putCrossTableMetaData:function(formId, instanceId, name, type, value, onSuccessfulSave) {
+      var that = this;
+      that.withDb( function(transaction) {
+            var is = that.insertCrossTableMetaDataStmt(formId, instanceId, name, type, value);
+            transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
+                console.log("putCrossTableMetaData: successful insert: " + formId + ", " + instanceId + ", " + name);
+            });
+        }, function(error) {
+        console.log("putCrossTableMetaData: failed to put " +
+			formId + ", " + instanceId + ", " + name + " type: " + type + " value: " + value);
+      }, onSuccessfulSave );
+},
+putCrossTableMetaDataKeyTypeValueMapHelper:function(formId, instanceId, idx, that, ktvlist) {
+    return function(transaction) {
+        // base case...
+        if ( idx >= ktvlist.length ) {
+            console.log("putCrossTableMetaDataKeyTypeValueMapHelper: successful insert: " + ktvlist.length);
+            return;
+        }
+        var key = ktvlist[idx].key;
+        var type = ktvlist[idx].type;
+        var value = ktvlist[idx].value; // may be null...
+        var is = that.insertCrossTableMetaDataStmt(formId, instanceId, key, type, value);
+        transaction.executeSql(is.stmt, is.bind, that.putMetaDataKeyTypeValueMapHelper(formId, instanceId, idx+1, that, ktvlist));
+    };
+},
+/**
+ * ktvlist is: [ { key: 'keyname', type: 'typename', value: 'val' }, ...]
+ */
+putCrossTableMetaDataKeyTypeValueMap:function(formId, instanceId, ktvlist, onSuccessfulSave) {
+      var that = this;
+      that.withDb( that.putCrossTableMetaDataKeyTypeValueMapHelper(formId, instanceId, 0, that, ktvlist), function(error) {
+            console.log("putCrossTableMetaDataKeyTypeValueMap: failed transaction for " + ktvlist.length );
+        }, onSuccessfulSave );
 },
 save_all_changes:function(asComplete, continuation) {
       var that = this;

@@ -91,7 +91,24 @@ return {
         });
         return id;
     },
+	
+	getHashString:function(formId, instanceId, pageRef) {
+        var qpl = '#instanceId=' + escape(instanceId) +
+		    '&formId=' + escape(formId) +
+			'&pageRef=' + escape((pageRef == null) ? '_opening' : pageRef);
+		return qpl;
+	},
 
+	getCurrentFormDirectory:function(formId, formVersion) {
+		if ( formId == null ) {
+			formId = mdl.qp.formId.value;
+		}
+		if ( formVersion == null ) {
+			formVersion = (mdl.qp.formVersion != null) ? mdl.qp.formVersion.value : null;
+		}
+		return "../" + formId + ((formVersion == null) ? '' : ('-' + formVersion)) + '/';
+	},
+	
     openNewInstanceId:function(id, friendlyName) {
         console.log("ALERT! setNewInstanceId - setting new UUID");
         if (id == null) {
@@ -99,10 +116,10 @@ return {
         } else {
             mdl.qp.instanceId.value = id;
         }
-        var qpl = '?instanceId=' + escape(mdl.qp.instanceId.value) +
+        var qpl = this.getHashString(mdl.qp.formId.value, mdl.qp.instanceId.value, '_opening') +
             ((friendlyName != null) ? '&instanceName=' + escape(friendlyName) : '');
         // apply the change to the URL...
-        window.location.search = qpl;
+        window.location.hash = qpl;
     },
 };
 });
