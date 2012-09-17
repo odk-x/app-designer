@@ -28,7 +28,7 @@ return Backbone.View.extend({
         this.currentPageEl = $('.init-page');
     },
     getName: function(){
-        if ( this.prompt !== null ) {
+        if ( this.prompt != null ) {
             return this.prompt.name;
         } else {
             console.log("no prompt showing on this screen!");

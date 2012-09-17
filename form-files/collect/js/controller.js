@@ -1,14 +1,18 @@
 'use strict';
 // depends upon: --
 // NOTE: builder.js sets controller.prompts property.
-define(['screenManager'], function(ScreenManager) {
+define(['screenManager','opendatakit','parsequery','mdl'], function(ScreenManager,opendatakit,parsequery,mdl) {
 return {
     screenManager : null,
     previousScreenNames : [],
-    start: function(){
-        this.screenManager = new ScreenManager(this);
-        if ( location.hash !== null && location.hash.length !== 0 ) {
-            this.odkHashChangeHandler();
+    start: function(pageRef){
+		var firstPage = false;
+        if ( this.screenManager == null ) {
+			this.screenManager = new ScreenManager(this);
+			firstPage = true;
+		}
+        if ( pageRef !== null && pageRef.length !== 0 ) {
+            this.changePageRef(pageRef, firstPage);
         } else {
             this.setPrompt(this.prompts[0]);
         }
@@ -86,6 +90,13 @@ return {
         console.log('setPrompt');
         console.log(prompt);
         this.screenManager.setPrompt(prompt, jqmAttrs);
+		var name = this.screenManager.getName();
+		if ( name != null ) {
+			var newhash = opendatakit.getHashString(mdl.qp.formId.value, mdl.qp.instanceId.value, name);
+			if ( newhash != window.location.hash ) {
+				window.location.hash = newhash;
+			}
+		}
     },
     hasPromptHistory: function() {
         return (this.previousScreenNames.length !== 0);
@@ -141,24 +152,51 @@ return {
         }
     },
     /*
-     * location.hash is an underscore-separated concatenation of ids.
+     * window.location.hash is an underscore-separated concatenation of ids.
+	 * 
      * If the leading character is an underscore, it is interpreted as 
      * part of the leading id in the list. I.e., '#_opening_foo' is 
      * interpreted as ['_opening', 'foo'] while '#page1_bar' is 
      * interpreted as ['page1', 'bar'].
     */
     odkHashChangeHandler:function(e) {
-        var hash = location.hash.replace(/^#/,'');
-        var hlist = hash.split('_');
+		var params = window.location.hash.slice(1).split("&");
+		var instanceId = null;
+		var pageRef = null;
+		var formId = null;
+		for (var i = 0; i < params.length; i++)
+		{
+			var tmp = params[i].split("=");
+			var key = tmp[0];
+			var value = unescape(tmp[1]);
+			if ( key == 'formId' ) {
+				formId = value;
+			} else if ( key == 'instanceId' ) {
+				instanceId = value;
+			} else if ( key == 'pageRef' ) {
+				pageRef = value;
+			}
+		}
+		if ( formId != mdl.qp.formId.value || instanceId != mdl.qp.instanceId.value ) {
+			// this should trigger a hash-change action
+			parsequery.parseQueryParameters(window.updateScreen);
+			return;
+		}
+
+		if ( this.screenManager == null || pageRef != this.screenManager.getName() ) {
+			this.start(pageRef);
+		}
+    },
+	changePageRef: function(pageRef, omitPushOnReturnStack) {
+		// process the pageRef...
+        var hlist = pageRef.split('_');
         var hleading = hlist[0];
         if ( hlist.length > 1 && hleading == '' ) {
             // this is one of the system screens - they begin with '_'.
             hlist.shift(); // the empty string
             hleading = '_' + hlist.shift();
         }
-        if ( this.screenManager === null || this.screenManager.getName() != hleading ) {
-            this.gotoPromptName(hleading, hlist, false);
-        }
-    }
+        this.gotoPromptName(hleading, hlist, omitPushOnReturnStack);
+	}
 }
 });

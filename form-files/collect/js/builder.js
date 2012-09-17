@@ -114,6 +114,14 @@ define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTy
         return initializedPrompts;
     },
     buildSurvey:function(surveyJson, continuation){
+			// if we have no survey object, we are bootstrapping
+			// just run the continuation (which will register a
+			// hash change processor).
+			if (surveyJson == null) {
+				continuation();
+				return;
+			}
+			
             var that = this;
 
             var widgets = {};
