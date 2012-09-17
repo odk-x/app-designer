@@ -1,16 +1,43 @@
-<ul>
-    <style type="text/css">
-    .test {color:red;}
-    </style>
-    <h3 class="test">test</h3>
-    <li><label>{{localize label}}</label></li>
-    <li><input type="text" value="{{value}}"
+<style type="text/css">
+p {color:red;}
+</style>
+<div class="{{#if hide}}odk-hidden{{/if}}">
+    {{> labelHint}}
+    <div id="viz"></div>
+    <div class="input-container">{{! used to prevent swiping on sliders}}
+    <input
+        class="odk"
+        type="{{type}}" 
+        name="{{name}}"
+        min="{{min}}" max="{{max}}"
+        value="{{value}}"
         {{#if disabled}}
+            style="background-color:lightgray;"
             disabled="true"
         {{/if}}
         />
         {{#if invalid}}
             <p>invalid</p>
         {{/if}}
-    </li>
-</ul>
+    </div>
+</div>
+<script type="text/javascript">
+require(["d3.v2.js"], function(){
+    //Delay is a hack, ideally we will have an event that fires one the template is loaded.
+    _.delay(function() {
+    var sampleSVG = d3.select("#viz")
+        .append("svg")
+        .attr("width", 100)
+        .attr("height", 100);    
+    
+    sampleSVG.append("circle")
+        .style("stroke", "gray")
+        .style("fill", "white")
+        .attr("r", 40)
+        .attr("cx", 50)
+        .attr("cy", 50)
+        .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+        .on("mouseout", function(){d3.select(this).style("fill", "white");});
+    }, 1000);
+});
+</script>

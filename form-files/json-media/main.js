@@ -94,11 +94,11 @@ var formDef = /* json start delimiter */{
             "prompts": [
                 {
                     "type": "text", 
-                    "disabled": true,
+                    //"disabled": true,
                     "name": "name", 
                     "image": "img/test.gif",
                     "audio": "http://upload.wikimedia.org/wikipedia/commons/b/ba/Ru-audio_template-Wikipedia.ogg",
-                    "video": "http://upload.wikimedia.org/wikipedia/commons/2/27/Lasercutting-video.ogg",
+                    //"video": "http://upload.wikimedia.org/wikipedia/commons/2/27/Lasercutting-video.ogg",
                     "param": null, 
                     "label": {
                         "en_us": "Enter your name {{name.value}}:"

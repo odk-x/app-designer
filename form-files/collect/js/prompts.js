@@ -464,6 +464,7 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         "swiperight .input-container": "disableSwipingOnInput"
     },
     disableSwipingOnInput: function(evt){
+        //console.log("Event stopped"); console.log(evt);
         evt.stopPropagation();
     },
     debouncedModification: _.debounce(function(that, evt) {
@@ -683,6 +684,7 @@ promptTypes.screen = promptTypes.base.extend({
         var $prompts = this.$('.odk-prompts');
         $.each(this.prompts, function(idx, prompt){
             $prompts.append(prompt.render().$el);
+            prompt.delegateEvents();
         });
     }
 });

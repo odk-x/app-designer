@@ -121,8 +121,9 @@ return Backbone.View.extend({
         $page.attr('data-content-theme', "d");
         $page.html(this.template(this.renderContext));
         var $contentArea = $page.find('.odk-container');
-        $contentArea.append(prompt.$el);
         prompt.render();
+        $contentArea.append(prompt.$el);
+        prompt.delegateEvents();
         return $page;
     },
     /*
