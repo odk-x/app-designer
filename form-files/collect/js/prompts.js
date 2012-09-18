@@ -730,7 +730,9 @@ promptTypes.label = promptTypes.base.extend({
         return true;
     },
     onActivate: function(readyToRenderCallback){
-        controller.gotoNextScreen();
+        controller.gotoNextScreen({
+            omitPushOnReturnStack : true
+        });
     }
 });
 promptTypes.goto = promptTypes.base.extend({
@@ -740,7 +742,9 @@ promptTypes.goto = promptTypes.base.extend({
         return true;
     },
     onActivate: function(readyToRenderCallback) {
-        controller.gotoLabel(this.param);
+        controller.gotoLabel(this.param, {
+            omitPushOnReturnStack : true
+        });
     }
 });
 promptTypes.goto_if = promptTypes.base.extend({
@@ -754,9 +758,13 @@ promptTypes.goto_if = promptTypes.base.extend({
     },
     onActivate: function(readyToRenderCallback) {
         if(this.condition()){
-            controller.gotoLabel(this.param);
+            controller.gotoLabel(this.param, {
+                omitPushOnReturnStack : true
+            });
         } else {
-            controller.gotoNextScreen();
+            controller.gotoNextScreen({
+                omitPushOnReturnStack : true
+            });
         }
     }
 });

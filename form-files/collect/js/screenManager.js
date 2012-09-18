@@ -105,12 +105,12 @@ return Backbone.View.extend({
 		f();
     },
     gotoNextScreen: function(evt){
-		evt.stopPropagation(true);
+		evt.stopPropagation();
         if(!this.swipeEnabled) return;
         this.controller.gotoNextScreen(); 
     },
     gotoPreviousScreen: function(evt){
-		evt.stopPropagation(true);
+		evt.stopPropagation();
         if(!this.swipeEnabled) return;
         this.controller.gotoPreviousScreen();
     },
