@@ -233,6 +233,9 @@ return {
 		if (  this.screenManager == null || prmpt !== this.screenManager.prompt ) {
 			this.gotoPrompt(prmpt, { hlist : hlist });
 		}
-    }
+    },
+	destroyScreenManager:function() {
+		this.screenManager = null;
+	}
 }
 });

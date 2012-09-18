@@ -67,7 +67,7 @@ return Backbone.View.extend({
 				//prompts from messing with the current screen.
 				that.prompt.onActivate(function(renderContext){
 					var isFirstPrompt = !('previousPageEl' in that);
-					var transition = isFirstPrompt ? 'fade' : 'slide';
+					var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
 					if(renderContext){
 						$.extend(that.renderContext, renderContext);
 					}
@@ -149,15 +149,25 @@ return Backbone.View.extend({
         return this;
     },
     */
-    validate: function(flag, context){
-        console.log(context);
-        context.success();
+    validate: function(isMoveBackward, context){
+		context.success();
+		/*
+		if ( this.prompt ) {
+			this.prompt.validate(isMoveBackward, context);
+		} else {
+			context.success();
+		}
+		*/
     },
     computeNextPrompt: function(continuation){
         this.prompt.computeNextPrompt(continuation);
     },
     beforeMove: function(continuation){
-        continuation();
+		if ( this.prompt ) {
+			this.prompt.beforeMove(continuation);
+		} else {
+			continuation();
+		}
     }
 });
 });

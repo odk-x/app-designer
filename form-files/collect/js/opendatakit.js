@@ -2,7 +2,7 @@
 // depends upon: --
 define(['mdl'],function(mdl) {
 return {
-    baseDir: '../collect/',
+    baseDir: '',
     databaseSettings: null,
     platformInfo: null,
     
@@ -16,6 +16,9 @@ return {
             var jsonString = collect.getPlatformInfo();
             console.log('getPlatformInfo: ' + jsonString);
             this.platformInfo = JSON.parse(jsonString);
+			console.log('getPlatformInfo: container=' + this.platformInfo.container);
+			console.log('getPlatformInfo: version=' + this.platformInfo.version);
+			console.log('getPlatformInfo: appPath=' + this.platformInfo.appPath);
         }
         return this.platformInfo;
     },

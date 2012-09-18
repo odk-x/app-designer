@@ -101,12 +101,13 @@ return {
 
 		if ( formPath == null ) {
 			// do the prompts and widget warmup form...
-			formPath = "../../collect/";
+			formPath = "../collect/";
 			instanceId = null;
 			pageRef = null;
 		}
 
-		var filename = opendatakit.getCurrentFormDirectory(formPath) + 'formDef.json';
+		// path is one deeper because requirejs base is in the js directory...
+		var filename = '../' + opendatakit.getCurrentFormDirectory(formPath) + 'formDef.json';
 		requirejs(['text!' + filename], 
 			function(formDefTxt) {
 				if ( formDefTxt == null || formDefTxt.length == 0 ) {

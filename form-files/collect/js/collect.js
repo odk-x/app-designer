@@ -1,5 +1,4 @@
 collect = {
-    baseDir: '../collect/',
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.

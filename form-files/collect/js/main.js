@@ -17,7 +17,9 @@ requirejs.config({
         promptTypes : 'promptTypes',
         text : 'text',
         screenManager : 'screenManager',
-        templates : '../templates'
+		img : '../img',
+        templates : '../templates',
+		app : '..'
         },
     shim: {
         'jquery': {
@@ -99,7 +101,7 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 							database.initializeTables(formDef, function() {
 									// instance data is OK...
 									if ( !sameForm ) {
-											controller.screenManager = null;
+											controller.destroyScreenManager();
 											
 											// build the survey and place it in the controller...
 											builder.buildSurvey(formDef, function() {
@@ -124,9 +126,9 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 									} else {
 											// controller prompts OK
 											if ( !sameInstance ) {
-													controller.screenManager = null;
-													// switching instance -- no 'back' history...
-													controller.clearPromptHistory();
+												controller.destroyScreenManager();
+												// switching instance -- no 'back' history...
+												controller.clearPromptHistory();
 											}
 											//
 											// register to handle manual #hash changes

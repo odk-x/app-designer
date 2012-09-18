@@ -111,7 +111,10 @@ promptTypes.base = Backbone.View.extend({
                 context.failure();
             }
         }
-        if ('newValue' in context) {
+		if ( this.name == null ) {
+			// no data validation if no persistence...
+			context.success();
+		} else if ('newValue' in context) {
             callback(context.newValue);
         }
         else {
@@ -188,9 +191,9 @@ promptTypes.opening = promptTypes.base.extend({
         readyToRenderCallback({enableBackwardNavigation: false});
     },
     renderContext: {
-        headerImg: collect.baseDir + 'img/form_logo.png',
-        backupImg: collect.baseDir + 'img/backup.png',
-        advanceImg: collect.baseDir + 'img/advance.png'
+        headerImg: opendatakit.baseDir + 'img/form_logo.png',
+        backupImg: opendatakit.baseDir + 'img/backup.png',
+        advanceImg: opendatakit.baseDir + 'img/advance.png'
     },
     //Events copied from inputType, should probably refactor.
     events: {
@@ -204,7 +207,10 @@ promptTypes.opening = promptTypes.base.extend({
     modification: function(evt) {
         database.setMetaData('instanceName', 'string', this.$('input').val(), function(){
         });
-    }
+    },
+	beforeMove: function(continuation) {
+        database.setMetaData('instanceName', 'string', this.$('input').val(), continuation);
+	}
 });
 promptTypes.finalize = promptTypes.base.extend({
     type:"finalize",
@@ -216,7 +222,7 @@ promptTypes.finalize = promptTypes.base.extend({
         "click .final-btn": "saveFinal"
     },
     renderContext: {
-        headerImg: collect.baseDir + 'img/form_logo.png'
+        headerImg: opendatakit.baseDir + 'img/form_logo.png'
     },
     onActivate: function(readyToRenderCallback) {
         var formLogo = false;//TODO: Need way to access form settings.
@@ -292,7 +298,7 @@ promptTypes.instances = promptTypes.base.extend({
         }, function() {
             $.extend(that.renderContext, {
                 formName: database.getMetaDataValue('formName'),
-                headerImg: collect.baseDir + 'img/form_logo.png'
+                headerImg: opendatakit.baseDir + 'img/form_logo.png'
             });
             readyToRenderCallback({
                 showHeader: false,
@@ -555,7 +561,7 @@ promptTypes.number = promptTypes.inputType.extend({
 promptTypes.media = promptTypes.base.extend({
     type: "media",
     events: {
-        "click .whiteButton": "capture"
+        "click .captureAction": "capture"
     },
     getCallback: function(bypath, byaction) {
         var that = this;
@@ -598,10 +604,10 @@ promptTypes.image = promptTypes.media.extend({
         readyToRenderCallback();
     },
     capture: function() {
-
-        if (collect.getPlatformInfo !== 'Android') {
+		var platInfo = opendatakit.getPlatformInfo();
+        if (platInfo.container == 'Android') {
             // TODO: is this the right sequence?
-            var outcome = collect.doAction(this.name, 'takePicture', 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity', null);
+            var outcome = collect.doAction('' + this.promptIdx, 'takePicture', 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity', null);
             console.log("button click outcome is " + outcome);
             if (outcome === null || outcome !== "OK") {
                 alert("Should be OK got >" + outcome + "<");
@@ -628,9 +634,10 @@ promptTypes.video = promptTypes.media.extend({
         readyToRenderCallback();
     },
     capture: function() {
-        if (collect.getPlatformInfo !== 'Android') {
+		var platInfo = opendatakit.getPlatformInfo();
+        if (platInfo.container == 'Android') {
             // TODO: is this the right sequence?
-            var outcome = collect.doAction(this.name, 'takeVideo', 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity', null);
+            var outcome = collect.doAction('' + this.promptIdx, 'takeVideo', 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity', null);
             console.log("button click outcome is " + outcome);
             if (outcome === null || outcome !== "OK") {
                 alert("Should be OK got >" + outcome + "<");
@@ -642,16 +649,17 @@ promptTypes.video = promptTypes.media.extend({
         }
     }
 });
-promptTypes.audio = promptTypes.base.extend({
+promptTypes.audio = promptTypes.media.extend({
     type: "audio",
     datatype: "audio",
     template: Handlebars.templates.audio,
     templatePath: "templates/audio.handlebars",
     label: 'Take your audio:',
     capture: function() {
-        if (collect.getPlatformInfo !== 'Android') {
+		var platInfo = opendatakit.getPlatformInfo();
+        if (platInfo.container == 'Android') {
             // TODO: is this the right sequence?
-            var outcome = collect.doAction(this.name, 'takeAudio', 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity', null);
+            var outcome = collect.doAction('' + this.promptIdx, 'takeAudio', 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity', null);
             console.log("button click outcome is " + outcome);
             if (outcome === null || outcome !== "OK") {
                 alert("Should be OK got >" + outcome + "<");
