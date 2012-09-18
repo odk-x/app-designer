@@ -96,8 +96,7 @@ return {
         this.screenManager.setPrompt(prompt, jqmAttrs);
 		// goto_if, goto, and label statements may change the prompt!
 		var idx = this.screenManager.prompt.promptIdx;
-		var newhash = opendatakit.getHashString(database.getMetaDataValue('formId'), 
-					database.getMetaDataValue('formVersion'),
+		var newhash = opendatakit.getHashString(database.getMetaDataValue('formPath'),
 					database.getMetaDataValue('instanceId'), ''+idx);
 		if ( newhash != window.location.hash ) {
 			window.location.hash = newhash;
@@ -156,11 +155,20 @@ return {
         }
     },
     /*
-     * window.location.hash is an slash-separated concatenation of ids.
+     * window.location.hash is an ampersand-separated list of 
+	 * key=value pairs. The key and value are escaped.
+	 * The main values are:
+	 *    formPath=relative path from the collect/index.html to 
+	 *             the form definition directory (formPath/formDef.json).
+	 *             The name of the directory containing the formDef.json 
+	 *             is the formId-formVersion of this form.
+	 *
+	 *    instanceId=unique id for this filled-in form instance.
+	 *
+	 *    pathRef=concatenation of promptIdx and other data used
+	 *            when rendering a screen.
 	 * 
-     * i.e., '_opening/foo' is interpreted as ['_opening', 'foo'] 
-	 * while 'page1/bar' is interpreted as ['page1', 'bar'].
-    */
+     */
     odkHashChangeHandler:function(e) {
 		if ( window.location.hash == '#' ) {
 			// this is bogus transition due to jquery mobile widgets
@@ -168,26 +176,23 @@ return {
 			return;
 		}
 		var params = window.location.hash.slice(1).split("&");
+		var formPath = null;
 		var instanceId = null;
 		var pageRef = null;
-		var formId = null;
-		var formVersion = null;
 		for (var i = 0; i < params.length; i++)
 		{
 			var tmp = params[i].split("=");
 			var key = tmp[0];
 			var value = unescape(tmp[1]);
-			if ( key == 'formId' ) {
-				formId = value;
-			} else if ( key == 'formVersion' ) {
-				formVersion = value;
+			if ( key == 'formPath' ) {
+				formPath = value;
 			} else if ( key == 'instanceId' ) {
 				instanceId = value;
 			} else if ( key == 'pageRef' ) {
 				pageRef = value;
 			}
 		}
-		if ( formId != database.getMetaDataValue('formId') || instanceId != database.getMetaDataValue('instanceId') ) {
+		if ( formPath != database.getMetaDataValue('formPath') || instanceId != database.getMetaDataValue('instanceId') ) {
 			// this should trigger a hash-change action
 			parsequery.parseQueryParameters(window.updateScreen);
 			return;

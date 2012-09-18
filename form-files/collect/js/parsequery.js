@@ -4,6 +4,7 @@ define(['mdl','opendatakit','database'],function(mdl,opendatakit,database) {
 return {
 
     parseQueryHelper:function(dataKeyValueList, key, value) {
+        if ( key == 'formPath' ) return;
         if ( key == 'instanceId' ) return;
 		if ( key == 'pageRef' ) return;
         for (var i = 0 ; i < dataKeyValueList.length ; ++i ) {
@@ -17,25 +18,25 @@ return {
         dataKeyValueList[dataKeyValueList.length] = { key: key, type: 'string', value: value };
     },
     
-    parseQueryParameterContinuation:function(formDef, formId, formVersion, instanceId, pageRef, formName, continuation) {
+    parseQueryParameterContinuation:function(formDef, formPath, 
+				formId, formVersion, formLocale, formName, instanceId, pageRef, continuation) {
 		var that = this;
         return function() {
-			if ( instanceId == null ) {
-				var result = {};
-				// only these values plus instanceId are immediate -- everything else is in metadata table.
-				var formLocale = that.getSetting(formDef, 'formLocale');
-				var formName = that.getSetting(formDef, 'formName');
+			var result = {};
+			// set up the minimal qp keys...
+			result.formPath = { "type" : "string", "value": formPath };
+			result.formId = { "type" : "string", "value": formId };
+			result.formVersion = { "type" : "string", "value": formVersion };
+			result.formLocale = { "type" : "string", "value": formLocale };
+			result.formName = { "type" : "string", "value": formName };
+			result.instanceId = { "type" : "string", "value": instanceId };
 
-				result.formId = { "type" : "string", "value": formId };
-				result.instanceId = { "type" : "string", "value": instanceId };
-				result.formVersion = { "type" : "string", "value": formVersion };
-				result.formLocale = { "type" : "string", "value": formLocale };
-				result.formName = { "type" : "string", "value": formName };
-				
-				var sameForm = (database.getMetaDataValue('formId') == formId);
-				var sameInstance = sameForm && (database.getMetaDataValue('instanceId') == instanceId);
+			var sameForm = (database.getMetaDataValue('formId') == formId);
+			var sameInstance = sameForm && (database.getMetaDataValue('instanceId') == instanceId);
+
+			if ( instanceId == null ) {
 				mdl.qp = result;
-				continuation(formDef, formId, formVersion, instanceId, pageRef, sameForm, sameInstance);
+				continuation(formDef, formPath, instanceId, pageRef, sameForm, sameInstance);
 				return;
 			}
             database.getCrossTableMetaData(formId, instanceId, 'instanceName', function(value) {
@@ -45,39 +46,14 @@ return {
                     var dateStr = date.toISOString();
                     var fnvalue = formName + "_" + dateStr; // .replace(/\W/g, "_")
                     database.putCrossTableMetaData(formId, instanceId, 'instanceName', 'string', fnvalue, function() {
-						var result = {};
-					    // only these values plus instanceId are immediate -- everything else is in metadata table.
-						var formLocale = that.getSetting(formDef, 'formLocale');
-						var formName = that.getSetting(formDef, 'formName');
-
-						result.formId = { "type" : "string", "value": formId };
-						result.instanceId = { "type" : "string", "value": instanceId };
-						result.formVersion = { "type" : "string", "value": formVersion };
-						result.formLocale = { "type" : "string", "value": formLocale };
-						result.formName = { "type" : "string", "value": formName };
-
-						var sameForm = (database.getMetaDataValue('formId') == formId);
-						var sameInstance = sameForm && (database.getMetaDataValue('instanceId') == instanceId);
 						mdl.qp = result;
-						continuation(formDef, formId, formVersion, instanceId, pageRef, sameForm, sameInstance);
+						// pull everything for synchronous read access
+						continuation(formDef, formPath, instanceId, pageRef, sameForm, sameInstance);
                     });
                 } else {
-					var result = {};
-					// only these values plus instanceId are immediate -- everything else is in metadata table.
-					var formLocale = that.getSetting(formDef, 'formLocale');
-					var formName = that.getSetting(formDef, 'formName');
-
-					result.formId = { "type" : "string", "value": formId };
-					result.instanceId = { "type" : "string", "value": instanceId };
-					result.formVersion = { "type" : "string", "value": formVersion };
-					result.formLocale = { "type" : "string", "value": formLocale };
-					result.formName = { "type" : "string", "value": formName };
-
-					var sameForm = (database.getMetaDataValue('formId') == formId);
-					var sameInstance = sameForm && (database.getMetaDataValue('instanceId') == instanceId);
 					mdl.qp = result;
 					// pull everything for synchronous read access
-					continuation(formDef, formId, formVersion, instanceId, pageRef, sameForm, sameInstance);
+					continuation(formDef, formPath, instanceId, pageRef, sameForm, sameInstance);
                 }
             });
         };
@@ -94,14 +70,12 @@ return {
     parseQueryParameters:function( continuation ) {
         var that = this;
         
-		var formId = null;
-		var formVersion = null;
+		var formPath = null;
         var instanceId = null;
 		var pageRef = null;
 		
         var dataKeyValueList = [];
-        if (window.location.hash)
-        {
+        if (window.location.hash) {
             // split up the query string and store in an associative array
             var params = window.location.hash.slice(1).split("&");
             for (var i = 0; i < params.length; i++)
@@ -109,10 +83,8 @@ return {
                 var tmp = params[i].split("=");
                 var key = tmp[0];
                 var value = unescape(tmp[1]);
-				if ( key == 'formId' ) {
-					formId = value;
-				} else if ( key == 'formVersion' ) {
-					formVersion = value;
+				if ( key == 'formPath' ) {
+					formPath = value;
 				} else if ( key == 'instanceId' ) {
                     instanceId = value;
                 } else if ( key == 'pageRef' ) {
@@ -121,70 +93,43 @@ return {
                     that.parseQueryHelper(dataKeyValueList, key, value);
                 }
             }
+			
+			if ( formPath != null && formPath[formPath.length-1] != '/' ) {
+				formPath[formPath.length] = '/';
+			}
         }
 
-/**
-        if ( instanceId == null || instanceId == "" ) {
-            console.log("ALERT! defining a UUID  because one wasn't specified");
-            instanceId = opendatakit.genUUID();
-			collect.setInstanceId(instanceId);
-        }
- */
-
-		var formDef = {
-    "settings": [
-        {
-            setting: "formId",
-            value: "collect"
-        },
-        {
-            setting: "formVersion"
-        },
-        {
-            setting: "formLocale",
-            value: "en_us"
-        },
-        {
-            setting: "formName",
-            value: {
-                "en_us": 'Warmup Form'
-                }
-        }
-    ],
-    "survey": [
-    ], 
-    "datafields": {
-    }, 
-};
-		if ( formId != null ) {
-			var filename = opendatakit.getCurrentFormDirectory(formId, formVersion) + 'formDef.json';
-			requirejs(['text!' + filename], 
-				function(formDefTxt) {
-					if ( formDefTxt == null || formDefTxt.length == 0 ) {
-						alert('Unable to find file: ' + filename);
-					} else {
-						formDef = JSON.parse(formDefTxt);
-						that.fetchContinueParsing(formDef, formId, formVersion, 
-													instanceId, pageRef, dataKeyValueList, continuation);
-					}
-				}
-			);
-		} else {
-			this.fetchContinueParsing(formDef, formId, formVersion, 
-													instanceId, pageRef, dataKeyValueList, continuation);
+		if ( formPath == null ) {
+			// do the prompts and widget warmup form...
+			formPath = "../../collect/";
+			instanceId = null;
+			pageRef = null;
 		}
+
+		var filename = opendatakit.getCurrentFormDirectory(formPath) + 'formDef.json';
+		requirejs(['text!' + filename], 
+			function(formDefTxt) {
+				if ( formDefTxt == null || formDefTxt.length == 0 ) {
+					alert('Unable to find file: ' + filename);
+				} else {
+					var formDef = JSON.parse(formDefTxt);
+					that.fetchContinueParsing(formDef, formPath, 
+												instanceId, pageRef, dataKeyValueList, continuation);
+				}
+			}
+		);
 	},
-	fetchContinueParsing: function(formDef, formId, formVersion, instanceId, pageRef, dataKeyValueList, continuation) {
+	fetchContinueParsing: function(formDef, formPath, instanceId, pageRef, dataKeyValueList, continuation) {
 		var that = this;
 		var settings = formDef.settings;
 		
+		var formId = this.getSetting(formDef, 'formId');
+		var formVersion = this.getSetting(formDef, 'formVersion');
 		var formLocale = this.getSetting(formDef, 'formLocale');
 		var formName = this.getSetting(formDef, 'formName');
-		
-        var result = {};
         
         that.parseQueryHelper(dataKeyValueList, 'formId', formId );
-        that.parseQueryHelper(dataKeyValueList, 'formVersion', this.getSetting(formDef, 'formVersion') );
+        that.parseQueryHelper(dataKeyValueList, 'formVersion', formVersion );
         that.parseQueryHelper(dataKeyValueList, 'formLocale', formLocale );
         that.parseQueryHelper(dataKeyValueList, 'formName', formName );
         
@@ -193,9 +138,9 @@ return {
         if ( instanceId != null && dataKeyValueList.length > 4 ) {
             // save all query parameters to metaData queue
             database.putCrossTableMetaDataKeyTypeValueMap(formId, instanceId, dataKeyValueList, 
-                that.parseQueryParameterContinuation(formDef, formId, formVersion, instanceId, pageRef, formName, continuation));
+                that.parseQueryParameterContinuation(formDef, formPath, formId, formVersion, formLocale, formName, instanceId, pageRef, continuation));
         } else {
-            (that.parseQueryParameterContinuation(formDef, formId, formVersion, instanceId, pageRef, formName, continuation))();
+            (that.parseQueryParameterContinuation(formDef, formPath, formId, formVersion, formLocale, formName, instanceId, pageRef, continuation))();
         }
     }
 };

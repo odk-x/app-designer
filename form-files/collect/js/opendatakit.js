@@ -92,24 +92,20 @@ return {
         return id;
     },
 	
-	getHashString:function(formId, formVersion, instanceId, pageRef) {
-		if ( formId == null ) return "";
+	getHashString:function(formPath, instanceId, pageRef) {
+		if ( formPath == null ) return '#formPath=' + escape('../../collect');
         var qpl =
-		    '#formId=' + escape(formId) +
-			((formVersion == null) ? '' : ('&formVersion=' + escape(formVersion))) +
+		    '#formPath=' + escape(formPath) +
 			((instanceId == null) ? '' : ('&instanceId=' + escape(instanceId))) +
 			'&pageRef=' + escape((pageRef == null) ? '0' : pageRef);
 		return qpl;
 	},
 
-	getCurrentFormDirectory:function(formId, formVersion) {
-		if ( formId == null ) {
-			formId = mdl.qp.formId.value;
+	getCurrentFormDirectory:function(formPath) {
+		if ( formPath == null ) {
+			formPath = mdl.qp.formPath.value;
 		}
-		if ( formVersion == null ) {
-			formVersion = (mdl.qp.formVersion != null) ? mdl.qp.formVersion.value : null;
-		}
-		return "../../" + formId + ((formVersion == null) ? '' : ('-' + formVersion)) + '/';
+		return formPath;
 	},
 	
     openNewInstanceId:function(id, friendlyName) {
@@ -122,8 +118,7 @@ return {
             mdl.qp.instanceId.value = id;
         }
 		// NOTE: reference mdl directly to avoid circular reference to 'database'
-        var qpl = this.getHashString(mdl.qp.formId.value, 
-						mdl.qp.formVersion.value,
+        var qpl = this.getHashString(mdl.qp.formPath.value,
 						mdl.qp.instanceId.value,
 						0) +
             ((friendlyName != null) ? '&instanceName=' + escape(friendlyName) : '');

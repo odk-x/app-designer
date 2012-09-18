@@ -376,6 +376,7 @@ cacheAllMetaData:function(action) {
             tlo = {};
         }
         // these values come from the current webpage
+		tlo.formPath = mdl.qp.formPath;
         tlo.formId = mdl.qp.formId;
         tlo.formVersion = mdl.qp.formVersion;
         tlo.formLocale = mdl.qp.formLocale;
