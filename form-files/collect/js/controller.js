@@ -1,22 +1,10 @@
 'use strict';
 // depends upon: --
 // NOTE: builder.js sets controller.prompts property.
-define(['screenManager','opendatakit','parsequery','mdl'], function(ScreenManager,opendatakit,parsequery,mdl) {
+define(['screenManager','opendatakit','parsequery','database'], function(ScreenManager,opendatakit,parsequery,database) {
 return {
     screenManager : null,
-    previousScreenNames : [],
-    start: function(pageRef){
-		var firstPage = false;
-        if ( this.screenManager == null ) {
-			this.screenManager = new ScreenManager(this);
-			firstPage = true;
-		}
-        if ( pageRef !== null && pageRef.length !== 0 ) {
-            this.changePageRef(pageRef, firstPage);
-        } else {
-            this.setPrompt(this.prompts[0]);
-        }
-    },
+    previousScreenIndices : [],
     gotoPreviousScreen: function(){
         var that = this;
         var screenManager = this.screenManager;
@@ -28,7 +16,7 @@ return {
                     return;
                 } else {
                     console.log("gotoPreviousPrompt: poppreviousScreenNames ms: " + (+new Date()) + " page: " + screenManager.getName());
-                    that.setPrompt(that.getPromptByName(that.previousScreenNames.pop()), {reverse:true});
+                    that.setPrompt(that.getPromptByName(that.previousScreenIndices.pop()), {reverse:true});
                 }
             },
             failure: function(missingValue) {
@@ -49,27 +37,36 @@ return {
             success: function(){
                 screenManager.computeNextPrompt(function(nextPrompt){
                     if(nextPrompt){
-                        console.log("gotoNextPrompt: nextPrompt ms: " + (+new Date()) + " page: " + screenManager.getName());
-                        that.gotoPrompt(nextPrompt);
+                        console.log("gotoNextPrompt: nextPrompt ms: " + (+new Date()) + 
+						" page: " +	screenManager.prompt.promptIdx);
+                        that.gotoPromptName(nextPrompt);
                     } else {
                         alert(screenManager.noNextPageMessage);
-                        console.log("gotoNextPrompt: noNextPage ms: " + (+new Date()) + " page: " + screenManager.getName());
+                        console.log("gotoNextPrompt: noNextPage ms: " + (+new Date()) +
+						" page: " + screenManager.prompt.promptIdx);
                     }
                 });
             },
             failure: function(){
                 screenManager.validationFailedAction();
-                console.log("gotoNextPrompt: validationFailed ms: " + (+new Date()) + " page: " + screenManager.getName());
+                console.log("gotoNextPrompt: validationFailed ms: " + (+new Date()) +
+					" page: " + screenManager.prompt.promptIdx);
                 return;
             }
         });
     },
     getPromptByName: function(name){
-        var prompts = this.prompts;
-        for(var i = 0; i < prompts.length; i++){
-            var promptName = prompts[i].name;
+		if ( name == null ) return null;
+		if ( ('' + name).match(/^\d+$/g) ) {
+			var idx = Number(name);
+			if(idx >= 0 && idx < this.prompts.length){
+				return this.prompts[idx];
+			}
+    	}
+        for(var i = 0; i < this.prompts.length; i++){
+            var promptName = this.prompts[i].name;
             if(promptName == name){
-                return prompts[i];
+                return this.prompts[i];
             }
         }
         alert("Unable to find screen: " + name);
@@ -92,26 +89,37 @@ return {
         this.screenManager.setPrompt(prompt, jqmAttrs);
 		var name = this.screenManager.getName();
 		if ( name != null ) {
-			var newhash = opendatakit.getHashString(mdl.qp.formId.value, mdl.qp.instanceId.value, name);
+			var newhash = opendatakit.getHashString(database.getMetaDataValue('formId'), 
+							database.getMetaDataValue('formVersion'),
+							database.getMetaDataValue('instanceId'), name);
 			if ( newhash != window.location.hash ) {
 				window.location.hash = newhash;
 			}
 		}
     },
     hasPromptHistory: function() {
-        return (this.previousScreenNames.length !== 0);
+        return (this.previousScreenIndices.length !== 0);
     },
     clearPromptHistory: function() {
-        this.previousScreenNames.length = 0;
+        this.previousScreenIndices.length = 0;
     },
     gotoPrompt: function(prompt, termList, omitPushOnReturnStack){
         var that = this;
+        if ( this.screenManager == null ) {
+			this.screenManager = new ScreenManager(this);
+		}
         that.screenManager.beforeMove(function(){
             if (!omitPushOnReturnStack) {
                 // push this prompt onto the return stack only if it has a name...
-                var name = that.screenManager.getName();
+				var prmpt = that.screenManager.prompt;
+                var name = (prmpt != null) ? prmpt.name : null;
                 if ( name != null ) {
-                    that.previousScreenNames.push(name);
+					for ( var idx = 0 ; idx < that.prompts.length ; ++idx ) {
+						if ( that.prompts[idx] === prompt ) {
+							that.previousScreenIndices.push(idx);
+							break;
+						}
+					}
                 }
             }
             that.setPrompt(prompt);
@@ -127,12 +135,7 @@ return {
         } else {
             this.gotoPrompt(prompt, termList, omitPushOnReturnStack);
         }
-    },/*
-    gotoPromptIdx: function(idx, omitPushOnReturnStack){
-        if(idx >= 0 && idx < this.prompts.length){
-            this.gotoPrompt(this.prompts[idx], [], omitPushOnReturnStack);
-        }
-    },*/       
+    },
     /*
      * Callback interface from ODK Collect into javascript.
      * Handles all dispatching back into javascript from external intents
@@ -160,10 +163,16 @@ return {
      * interpreted as ['page1', 'bar'].
     */
     odkHashChangeHandler:function(e) {
+		if ( window.location.hash == '#' ) {
+			// this is bogus transition due to jquery mobile widgets
+			e.stopPropagation();
+			return;
+		}
 		var params = window.location.hash.slice(1).split("&");
 		var instanceId = null;
 		var pageRef = null;
 		var formId = null;
+		var formVersion = null;
 		for (var i = 0; i < params.length; i++)
 		{
 			var tmp = params[i].split("=");
@@ -171,32 +180,45 @@ return {
 			var value = unescape(tmp[1]);
 			if ( key == 'formId' ) {
 				formId = value;
+			} else if ( key == 'formVersion' ) {
+				formVersion = value;
 			} else if ( key == 'instanceId' ) {
 				instanceId = value;
 			} else if ( key == 'pageRef' ) {
 				pageRef = value;
 			}
 		}
-		if ( formId != mdl.qp.formId.value || instanceId != mdl.qp.instanceId.value ) {
+		if ( formId != database.getMetaDataValue('formId') || instanceId != database.getMetaDataValue('instanceId') ) {
 			// this should trigger a hash-change action
 			parsequery.parseQueryParameters(window.updateScreen);
 			return;
 		}
-
-		if ( this.screenManager == null || pageRef != this.screenManager.getName() ) {
-			this.start(pageRef);
+		
+		this.gotoRef(pageRef);
+	},
+	gotoRef:function(pageRef) {
+		if ( pageRef == null ) {
+			pageRef = '0';
 		}
-    },
-	changePageRef: function(pageRef, omitPushOnReturnStack) {
-		// process the pageRef...
-        var hlist = pageRef.split('_');
+		// process the pageRef... -- each part is separated by slashes
+        var hlist = pageRef.split('/');
         var hleading = hlist[0];
-        if ( hlist.length > 1 && hleading == '' ) {
-            // this is one of the system screens - they begin with '_'.
-            hlist.shift(); // the empty string
-            hleading = '_' + hlist.shift();
-        }
-        this.gotoPromptName(hleading, hlist, omitPushOnReturnStack);
-	}
+
+		var prmpt; 
+		if ( hleading != null ) {
+			prmpt = this.getPromptByName(hleading);
+			if ( prmpt == null ) {
+				prmpt = this.prompts[0];
+				hlist = [];
+			}
+		} else {
+			prmpt = this.prompts[0];
+			hlist = [];
+		}
+
+		if (  this.screenManager == null || prmpt != this.screenManager.prompt ) {
+			this.gotoPrompt(prmpt, hlist, false);
+		}
+    }
 }
 });

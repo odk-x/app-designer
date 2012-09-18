@@ -557,7 +557,22 @@ getDataValue:function(name) {
 setData:function(name, datatype, value, onSuccess) {
     var that = this;
     that.putData(name, datatype, value, function() {
-        that.cacheAllData(onSuccess);
+/*
+	    var path = name.split('.');
+		var v = mdl.data;
+		for ( var i = 0 ; i < path.length ; ++i ) {
+			var newv = v[path[i]];
+			if ( newv == null ) {
+				v[path[i]] = {};
+				newv = v[path[i]];
+			}
+			v = newv;
+		}
+		v.type = datatype;
+		v.value = value;
+        onSuccess();
+*/
+		that.cacheAllData(onSuccess);
     });
 },
 getMetaDataValue:function(name) {
@@ -572,6 +587,21 @@ getMetaDataValue:function(name) {
 setMetaData:function(name, datatype, value, onSuccess) {
     var that = this;
     that.putMetaData(name, datatype, value, function() {
+/*
+	    var path = name.split('.');
+		var v = mdl.qp;
+		for ( var i = 0 ; i < path.length ; ++i ) {
+			var newv = v[path[i]];
+			if ( newv == null ) {
+				v[path[i]] = {};
+				newv = v[path[i]];
+			}
+			v = newv;
+		}
+		v.type = datatype;
+		v.value = value;
+        onSuccess();
+*/
         that.cacheAllMetaData(onSuccess);
     });
 }

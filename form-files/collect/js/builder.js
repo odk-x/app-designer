@@ -1,6 +1,6 @@
 'use strict';
 // depends upon: controller, jquery, promptTypes
-define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTypes) {
+define(['controller', 'database', 'jquery', 'promptTypes'], function(controller, database, $, promptTypes) {
     var evalInEnvironment = (function() {
         //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
         //It's still possible to really mess things up from there though.
@@ -159,11 +159,7 @@ define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTy
             var prompts = ([{
                 "type": "goto_if",
                 "condition": function() {
-                    if('instanceId' in this.mdl.qp && this.mdl.qp.instanceId.value){
-                        console.log('test');
-                        console.log(this.mdl.qp.instanceId);
-                    }
-                    return ('instanceId' in this.mdl.qp);
+                    return (database.getMetaDataValue('instanceId') != null);
                 },
                 "param": "_begin"
             }, {

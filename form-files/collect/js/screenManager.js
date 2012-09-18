@@ -20,12 +20,16 @@ return Backbone.View.extend({
     el: "body",
     className: "current",
     instance_id:123,
-    template: Handlebars.templates.screen,
+    template: null,
     swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
     renderContext:{},
     initialize: function(controller){
         this.controller = controller;
         this.currentPageEl = $('.init-page');
+        var that = this;
+        requirejs(['text!templates/screen.handlebars'],function(source) {
+            that.template = Handlebars.compile(source);
+        });
     },
     getName: function(){
         if ( this.prompt != null ) {
@@ -53,50 +57,60 @@ return Backbone.View.extend({
             //
             // the absence of page history disabled backward swipe and button.
         };
-        //A better way to do this might be to pass a controller interface object to 
-        //onActivate that can trigger screen refreshes, as well as goto other prompts.
-        //(We would not allow prompts to access the controller directly).
-        //When the prompt changes, we could disconnect the interface to prevent the old
-        //prompts from messing with the current screen.
-        this.prompt.onActivate(function(renderContext){
-            var isFirstPrompt = !('previousPageEl' in that);
-            var transition = isFirstPrompt ? 'fade' : 'slide';
-            if(renderContext){
-                $.extend(that.renderContext, renderContext);
-            }
-            if( !that.renderContext.enableBackNavigation &&
-            !that.renderContext.enableForwardNavigation ){
-                //If we try to render a jqm nav without buttons we get an error
-                //so this flag automatically disables nav in that case.
-                that.renderContext.enableNavigation = false;
-            }
-            /*
-            console.log(that.renderContext);
-            // work through setting the forward/backward enable flags
-            if ( that.renderContext.enableNavigation === undefined ) {
-                that.renderContext.enableNavigation = true;
-            }
-            if ( that.renderContext.enableForwardNavigation === undefined ) {
-                that.renderContext.enableForwardNavigation = 
-                    that.renderContext.enableNavigation;
-            }
-            if ( that.renderContext.enableBackNavigation === undefined ) {
-                that.renderContext.enableBackNavigation = 
-                    that.renderContext.enableNavigation &&
-                    that.controller.hasPromptHistory();
-            }
-            */
-            that.previousPageEl = that.currentPageEl;
-            that.currentPageEl = that.renderPage(prompt);
-            that.$el.append(that.currentPageEl);
-            $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
-        });
+		var that = this;
+		var f = function() {
+			if ( that.template ) {
+				//A better way to do this might be to pass a controller interface object to 
+				//onActivate that can trigger screen refreshes, as well as goto other prompts.
+				//(We would not allow prompts to access the controller directly).
+				//When the prompt changes, we could disconnect the interface to prevent the old
+				//prompts from messing with the current screen.
+				that.prompt.onActivate(function(renderContext){
+					var isFirstPrompt = !('previousPageEl' in that);
+					var transition = isFirstPrompt ? 'fade' : 'slide';
+					if(renderContext){
+						$.extend(that.renderContext, renderContext);
+					}
+					if( !that.renderContext.enableBackNavigation &&
+					!that.renderContext.enableForwardNavigation ){
+						//If we try to render a jqm nav without buttons we get an error
+						//so this flag automatically disables nav in that case.
+						that.renderContext.enableNavigation = false;
+					}
+					/*
+					console.log(that.renderContext);
+					// work through setting the forward/backward enable flags
+					if ( that.renderContext.enableNavigation === undefined ) {
+						that.renderContext.enableNavigation = true;
+					}
+					if ( that.renderContext.enableForwardNavigation === undefined ) {
+						that.renderContext.enableForwardNavigation = 
+							that.renderContext.enableNavigation;
+					}
+					if ( that.renderContext.enableBackNavigation === undefined ) {
+						that.renderContext.enableBackNavigation = 
+							that.renderContext.enableNavigation &&
+							that.controller.hasPromptHistory();
+					}
+					*/
+					that.previousPageEl = that.currentPageEl;
+					that.currentPageEl = that.renderPage(prompt);
+					that.$el.append(that.currentPageEl);
+					$.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
+				});
+			} else {
+				setTimeout( f, 100);
+			}
+		};
+		f();
     },
     gotoNextScreen: function(evt){
+		evt.stopPropagation(true);
         if(!this.swipeEnabled) return;
         this.controller.gotoNextScreen(); 
     },
     gotoPreviousScreen: function(evt){
+		evt.stopPropagation(true);
         if(!this.swipeEnabled) return;
         this.controller.gotoPreviousScreen();
     },

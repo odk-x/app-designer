@@ -1,5 +1,6 @@
 rmdir /s /q C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\collect"
 rmdir /s /q C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\json-media"
+rmdir /s /q C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\lgform"
 xcopy . "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs" /E /I /R /Y
 del "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\copy.bat"
 del "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\copyMnt.bat"

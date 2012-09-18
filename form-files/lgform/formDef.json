@@ -1,25 +1,25 @@
 {
     "settings": [
         {
-            "name": "formId",
-            "param": "lgform"
+            "setting": "formId",
+            "value": "lgform"
         },
         {
-            "name": "formVersion"
+            "setting": "formVersion"
         },
         {
-            "name": "formLocale",
-            "param": "en_us"
+            "setting": "formLocale",
+            "value": "en_us"
         },
         {
-            "name": "formName",
-            "param": {
+            "setting": "formName",
+            "value": {
                 "en_us": "Simple Test Form"
                 }
         },
         {
-            "name": "formLogo",
-            "param": "img/form_logo.png"
+            "setting": "formLogo",
+            "value": "img/form_logo.png"
         }
     ],
     "survey": [

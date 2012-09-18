@@ -92,10 +92,12 @@ return {
         return id;
     },
 	
-	getHashString:function(formId, instanceId, pageRef) {
-        var qpl = '#instanceId=' + escape(instanceId) +
-		    '&formId=' + escape(formId) +
-			'&pageRef=' + escape((pageRef == null) ? '_opening' : pageRef);
+	getHashString:function(formId, formVersion, instanceId, pageRef) {
+        var qpl =
+		    '#formId=' + escape(formId) +
+			((formVersion == null) ? '' : ('&formVersion=' + escape(formVersion))) +
+			((instanceId == null) ? '' : ('&instanceId=' + escape(instanceId))) +
+			'&pageRef=' + escape((pageRef == null) ? '0' : pageRef);
 		return qpl;
 	},
 
@@ -112,11 +114,17 @@ return {
     openNewInstanceId:function(id, friendlyName) {
         console.log("ALERT! setNewInstanceId - setting new UUID");
         if (id == null) {
+			mdl.qp.instanceId.type = "string";
             mdl.qp.instanceId.value = this.genUUID();
         } else {
+			mdl.qp.instanceId.type = "string";
             mdl.qp.instanceId.value = id;
         }
-        var qpl = this.getHashString(mdl.qp.formId.value, mdl.qp.instanceId.value, '_opening') +
+		// NOTE: reference mdl directly to avoid circular reference to 'database'
+        var qpl = this.getHashString(mdl.qp.formId.value, 
+						mdl.qp.formVersion.value,
+						mdl.qp.instanceId.value,
+						'_opening') +
             ((friendlyName != null) ? '&instanceName=' + escape(friendlyName) : '');
         // apply the change to the URL...
         window.location.hash = qpl;

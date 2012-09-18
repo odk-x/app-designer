@@ -1,25 +1,26 @@
 {
     "settings": [
         {
-            "name": "formId",
-            "param": "json-media"
+            "setting": "formId",
+            "value": "json"
         },
         {
-            "name": "formVersion"
+            "setting": "formVersion",
+			"value": "media"
         },
         {
-            "name": "formLocale",
-            "param": "en_us"
+            "setting": "formLocale",
+            "value": "en_us"
         },
         {
-            "name": "formName",
-            "param": {
+            "setting": "formName",
+            "value": {
                 "en_us": "JSON Test Form"
                 }
         },
         {
-            "name": "formLogo",
-            "param": "img/form_logo.png"
+            "setting": "formLogo",
+            "value": "img/form_logo.png"
         }
     ],
     "survey": [

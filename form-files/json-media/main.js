@@ -65,78 +65,91 @@ requirejs.config({
     }
 });
 
+requirejs(['jquery'], function($) {
+
+$(document).bind("mobileinit", function () {
+	$.mobile.ajaxEnabled = false;
+	$.mobile.linkBindingEnabled = false;
+	$.mobile.hashListeningEnabled = false;
+	$.mobile.pushStateEnabled = false;
+});
+
 requirejs(['mdl','opendatakit', 'database','parsequery',
-                        'jquery', 'jqmobile', 'builder', 'controller',
+                        'jqmobile', 'builder', 'controller',
                         'prompts'/* mix-in additional prompts and support libs here */], 
-        function(mdl,opendatakit,database,parsequery,$,m,builder,controller,prompts) {
+        function(mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
+			
+			window.updateScreen = function(formDef, formId, formVersion, instanceId, pageRef, sameForm, sameInstance) {
+					// we have saved all query parameters into the metaData table
+					// created the data table and its table descriptors
+					// re-normalized the query string to just have the instanceId
+					// read all the form data and metaData into value caches
+					// under mdl.data and mdl.qp (respectively).
+					console.log('scripts loaded');
+					
+					var qpl = opendatakit.getHashString(formId, formVersion, instanceId, pageRef);
+					
+					// pull metadata for synchronous read access
+					database.cacheAllMetaData(function() {
+							// metadata is OK...
+							database.initializeTables(formDef, function() {
+									// instance data is OK...
+									if ( !sameForm ) {
+											// build the survey and place it in the controller...
+											builder.buildSurvey(formDef, function() {
+													// controller OK
+													// new form -- no 'back' history
+													controller.clearPromptHistory();
+													//
+													// register to handle manual #hash changes
+													$(window).bind('hashchange', function(evt) {
+															controller.odkHashChangeHandler();
+													});
 
-    $.mobile.ajaxEnabled = false;
-    $.mobile.linkBindingEnabled = false;
-    $.mobile.hashListeningEnabled = false;
-    $.mobile.pushStateEnabled = false;
-        
-        window.updateScreen = function(formDef, formId, instanceId, pageRef) {
-                // we have saved all query parameters into the metaData table
-                // created the data table and its table descriptors
-                // re-normalized the query string to just have the instanceId
-                // read all the form data and metaData into value caches
-                // under mdl.data and mdl.qp (respectively).
-                console.log('scripts loaded');
-                
-                var sameForm = (mdl.qp.formId == formId);
-                var sameInstance = (mdl.qp.instanceId == instanceId);
-                var qpl = opendatakit.getHashString(formId, instanceId, pageRef);
+													if ( qpl != window.location.hash ) {
+															// apply the change to the URL...
+															window.location.hash = qpl;
+															// triggers hash-change listener...
+													} else {
+															// fire the controller to render the first page.
+															controller.gotoRef(pageRef);
+													}
+											});
+									} else {
+											// controller prompts OK
+											if ( !sameInstance ) {
+													// switching instance -- no 'back' history...
+													controller.clearPromptHistory();
+											}
+											//
+											// register to handle manual #hash changes
+											$(window).bind('hashchange', function(evt) {
+													controller.odkHashChangeHandler();
+											});
 
-                // pull metadata for synchronous read access
-                database.cacheAllMetaData(function() {
-                        // metadata is OK...
-                        database.initializeTables(formDef, function() {
-                                // instance data is OK...
-                                if ( !sameForm ) {
-                                        // build the survey and place it in the controller...
-                                        builder.buildSurvey(formDef, function() {
-                                                // controller OK
-                                                // new form -- no 'back' history
-                                                controller.clearPromptHistory();
-                                                //
-                                                // register to handle manual #hash changes
-                                                $(window).bind('hashchange', function(evt) {
-                                                        controller.odkHashChangeHandler();
-                                                });
+											if ( qpl != window.location.hash ) {
+													// apply the change to the URL...
+													window.location.hash = qpl;
+													// triggers hash-change listener...
+											} else {
+													// fire the controller to render the first page.
+													controller.gotoRef(pageRef);
+											}
+									}
+							}
+							);
+					});
+			};
 
-                                                if ( qpl != window.location.hash ) {
-                                                        // apply the change to the URL...
-                                                        window.location.hash = qpl;
-                                                        // triggers hash-change listener...
-                                                } else {
-                                                        // fire the controller to render the first page.
-                                                        controller.start(pageRef);
-                                                }
-                                        });
-                                } else {
-                                        // controller prompts OK
-                                        if ( !sameInstance ) {
-                                                // switching instance -- no 'back' history...
-                                                controller.clearPromptHistory();
-                                        }
-                                        //
-                                        // register to handle manual #hash changes
-                                        $(window).bind('hashchange', function(evt) {
-                                                controller.odkHashChangeHandler();
-                                        });
-
-                                        if ( qpl != window.location.hash ) {
-                                                // apply the change to the URL...
-                                                window.location.hash = qpl;
-                                                // triggers hash-change listener...
-                                        } else {
-                                                // fire the controller to render the first page.
-                                                controller.start(pageRef);
-                                        }
-                                }
-                        }
-                        );
-                });
-        };
-    parsequery.parseQueryParameters( window.updateScreen );
+		var f = function() {
+			if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
+				parsequery.parseQueryParameters( window.updateScreen );
+			} else {
+				setTimeout(f, 200);
+			}
+		};
+		
+		f();
+		
+	});
 });

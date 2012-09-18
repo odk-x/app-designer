@@ -1,5 +1,5 @@
 <div>
-    <h1>{{formName}}</h1>
+    <h1>{{localize formName}}</h1>
     <center><img src="{{ headerImg }}" width="50%"/></center>
     <a class="createInstance" data-role="button" data-icon="new" data-iconpos="top">Create new instance</a>
 </div>
@@ -20,6 +20,6 @@
 		    </fieldset>
         </li>
     {{else}}
-        <li>Unexpected absence of records.</li>
+        <li>No saved instances.</li>
     {{/each}}
 </ul>

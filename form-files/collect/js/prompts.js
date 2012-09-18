@@ -3,14 +3,14 @@
 define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'text!templates/labelHint.handlebars'],
 function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _, labelHintPartial) {
 
-Handlebars.registerHelper('localize', function(textOrLangMap, options) {
+function localize(textOrLangMap) {
     if(_.isUndefined(textOrLangMap)) {
         return 'undefined';
     }
     if(_.isString(textOrLangMap)) {
         return new Handlebars.SafeString(textOrLangMap);
     }
-    var locale = mdl.qp.formLocale.value;
+    var locale = database.getMetaDataValue('formLocale');
     if( locale in textOrLangMap ){
         return new Handlebars.SafeString(textOrLangMap[locale]);
     } else if( 'default' in textOrLangMap ){
@@ -20,6 +20,10 @@ Handlebars.registerHelper('localize', function(textOrLangMap, options) {
         console.error("Non localizable object:");
         console.error(textOrLangMap);
     }
+};
+
+Handlebars.registerHelper('localize', function(textOrLangMap, options) {
+	return localize(textOrLangMap);
 });
 Handlebars.registerPartial('labelHint', labelHintPartial);
 
@@ -70,7 +74,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.video = this.video;
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
-        this.renderContext.formName = mdl.qp.formName.value;
+        this.renderContext.formName = database.getMetaDataValue('formName');
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
@@ -135,10 +139,10 @@ promptTypes.base = Backbone.View.extend({
         //console.log("computeNextPrompt: beginning ms: " + (+new Date()) + " page: " + this.name);
         var that = this;
         if ('nextPromptName' in this) {
-            continuation(controller.getPromptByName(that.nextPromptName));
+            continuation(that.nextPromptName);
         }
         else if (this.promptIdx + 1 < controller.prompts.length) {
-            continuation(controller.prompts[this.promptIdx + 1]);
+            continuation(this.promptIdx + 1);
         }
         else {
             continuation(null);
@@ -172,7 +176,15 @@ promptTypes.opening = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        this.renderContext.instanceName = mdl.qp.instanceName.value;
+		var instanceName = database.getMetaDataValue('instanceName');
+		if ( instanceName == null ) {
+			// construct a friendly name for this new form...
+			var date = new Date();
+			var dateStr = date.toISOString();
+			var formName = localize(database.getMetaDataValue('formName'));
+			instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
+		}
+        this.renderContext.instanceName = instanceName;
         readyToRenderCallback({enableBackwardNavigation: false});
     },
     renderContext: {
@@ -211,7 +223,7 @@ promptTypes.finalize = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        this.renderContext.instanceName = mdl.qp.instanceName.value;
+        this.renderContext.instanceName = database.getMetaDataValue('instanceName');
         readyToRenderCallback({enableForwardNavigation: false});
         /*
         database.getAllData(function(tlo) {
@@ -279,7 +291,7 @@ promptTypes.instances = promptTypes.base.extend({
             console.log("populateInstanceList: failed");
         }, function() {
             $.extend(that.renderContext, {
-                formName: mdl.qp.formName.value,
+                formName: database.getMetaDataValue('formName'),
                 headerImg: collect.baseDir + 'img/form_logo.png'
             });
             readyToRenderCallback({
@@ -289,14 +301,16 @@ promptTypes.instances = promptTypes.base.extend({
         });
     },
     createInstance: function(evt){
+		evt.stopPropagation(true);
         opendatakit.openNewInstanceId(null);
     },
     openInstance: function(evt) {
+		evt.stopPropagation(true);
         opendatakit.openNewInstanceId($(evt.target).attr('id'));
     },
     deleteInstance: function(evt){
         var that = this;
-        database.delete_all(mdl.qp.formId.value, $(evt.target).attr('id'), function() {
+        database.delete_all(database.getMetaDataValue('formId'), $(evt.target).attr('id'), function() {
             that.onActivate(function(){that.render();});
         });
     }
