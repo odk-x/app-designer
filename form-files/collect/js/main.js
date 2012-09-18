@@ -103,6 +103,8 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 							database.initializeTables(formDef, function() {
 									// instance data is OK...
 									if ( !sameForm ) {
+											controller.screenManager = null;
+											
 											// build the survey and place it in the controller...
 											builder.buildSurvey(formDef, function() {
 													// controller OK
@@ -111,7 +113,7 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 													//
 													// register to handle manual #hash changes
 													$(window).bind('hashchange', function(evt) {
-															controller.odkHashChangeHandler();
+															controller.odkHashChangeHandler(evt);
 													});
 
 													if ( qpl != window.location.hash ) {
@@ -126,13 +128,14 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 									} else {
 											// controller prompts OK
 											if ( !sameInstance ) {
+													controller.screenManager = null;
 													// switching instance -- no 'back' history...
 													controller.clearPromptHistory();
 											}
 											//
 											// register to handle manual #hash changes
 											$(window).bind('hashchange', function(evt) {
-													controller.odkHashChangeHandler();
+													controller.odkHashChangeHandler(evt);
 											});
 
 											if ( qpl != window.location.hash ) {

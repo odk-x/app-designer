@@ -10,17 +10,24 @@ return {
         var screenManager = this.screenManager;
         screenManager.validate(true, {
             success: function() {
-                if (!that.hasPromptHistory()) {
-                    alert("I've forgotten what the previous page was!");
-                    console.log("gotoPreviousPrompt: noPreviousPage ms: " + (+new Date()) + " page: " + screenManager.getName());
-                    return;
-                } else {
-                    console.log("gotoPreviousPrompt: poppreviousScreenNames ms: " + (+new Date()) + " page: " + screenManager.getName());
-                    that.setPrompt(that.getPromptByName(that.previousScreenIndices.pop()), {reverse:true});
+                while (that.hasPromptHistory()) {
+                    console.log("gotoPreviousPrompt: poppreviousScreenNames ms: " + (+new Date()) + 
+								" page: " + screenManager.prompt.promptIdx);
+					var prmpt = that.getPromptByName(that.previousScreenIndices.pop());
+					var t = prmpt.type;
+					if (!( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" )) {
+						that.setPrompt(that.getPromptByName(that.previousScreenIndices.pop()), {reverse:true});
+						return;
+					}
                 }
+
+				alert("I've forgotten what the previous page was!");
+				console.log("gotoPreviousPrompt: noPreviousPage ms: " + (+new Date()) + 
+							" page: " + screenManager.prompt.promptIdx);
             },
             failure: function(missingValue) {
-                console.log("gotoPreviousPrompt: validationFailed ms: " + (+new Date()) + " page: " + screenManager.getName());
+                console.log("gotoPreviousPrompt: validationFailed ms: " + (+new Date()) +
+							" page: " + screenManager.prompt.promptIdx);
                 if ( missingValue ) {
                     screenManager.requiredFieldMissingAction();
                 } else {
@@ -87,14 +94,13 @@ return {
         console.log('setPrompt');
         console.log(prompt);
         this.screenManager.setPrompt(prompt, jqmAttrs);
-		var name = this.screenManager.getName();
-		if ( name != null ) {
-			var newhash = opendatakit.getHashString(database.getMetaDataValue('formId'), 
-							database.getMetaDataValue('formVersion'),
-							database.getMetaDataValue('instanceId'), name);
-			if ( newhash != window.location.hash ) {
-				window.location.hash = newhash;
-			}
+		// goto_if, goto, and label statements may change the prompt!
+		var idx = this.screenManager.prompt.promptIdx;
+		var newhash = opendatakit.getHashString(database.getMetaDataValue('formId'), 
+					database.getMetaDataValue('formVersion'),
+					database.getMetaDataValue('instanceId'), ''+idx);
+		if ( newhash != window.location.hash ) {
+			window.location.hash = newhash;
 		}
     },
     hasPromptHistory: function() {
@@ -112,14 +118,9 @@ return {
             if (!omitPushOnReturnStack) {
                 // push this prompt onto the return stack only if it has a name...
 				var prmpt = that.screenManager.prompt;
-                var name = (prmpt != null) ? prmpt.name : null;
-                if ( name != null ) {
-					for ( var idx = 0 ; idx < that.prompts.length ; ++idx ) {
-						if ( that.prompts[idx] === prompt ) {
-							that.previousScreenIndices.push(idx);
-							break;
-						}
-					}
+                var idx = (prmpt != null) ? prmpt.promptIdx : null;
+                if ( idx != null ) {
+					that.previousScreenIndices.push(idx);
                 }
             }
             that.setPrompt(prompt);
@@ -155,12 +156,10 @@ return {
         }
     },
     /*
-     * window.location.hash is an underscore-separated concatenation of ids.
+     * window.location.hash is an slash-separated concatenation of ids.
 	 * 
-     * If the leading character is an underscore, it is interpreted as 
-     * part of the leading id in the list. I.e., '#_opening_foo' is 
-     * interpreted as ['_opening', 'foo'] while '#page1_bar' is 
-     * interpreted as ['page1', 'bar'].
+     * i.e., '_opening/foo' is interpreted as ['_opening', 'foo'] 
+	 * while 'page1/bar' is interpreted as ['page1', 'bar'].
     */
     odkHashChangeHandler:function(e) {
 		if ( window.location.hash == '#' ) {
@@ -216,7 +215,7 @@ return {
 			hlist = [];
 		}
 
-		if (  this.screenManager == null || prmpt != this.screenManager.prompt ) {
+		if (  this.screenManager == null || prmpt !== this.screenManager.prompt ) {
 			this.gotoPrompt(prmpt, hlist, false);
 		}
     }

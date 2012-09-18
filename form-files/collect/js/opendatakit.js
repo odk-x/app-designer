@@ -125,7 +125,7 @@ return {
         var qpl = this.getHashString(mdl.qp.formId.value, 
 						mdl.qp.formVersion.value,
 						mdl.qp.instanceId.value,
-						'_opening') +
+						0) +
             ((friendlyName != null) ? '&instanceName=' + escape(friendlyName) : '');
         // apply the change to the URL...
         window.location.hash = qpl;
