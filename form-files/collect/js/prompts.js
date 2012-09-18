@@ -775,9 +775,7 @@ promptTypes.note = promptTypes.base.extend({
 });
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
-    modify: function(evt) {
-        controller.gotoNextScreen();
-    },
+    autoAdvance: "false",
     modification: function(evt) {
         var that = this;
         var acknowledged = $('#acknowledge').is(':checked');
@@ -787,25 +785,20 @@ promptTypes.acknowledge = promptTypes.select.extend({
                 "label": "acknowledge",
                 "checked": acknowledged
             }];
-            that.readyToRenderCallback({
-                enableForwardNavigation : acknowledged
-            });
+            if(acknowledged && this.autoAdvance) {
+                controller.gotoNextScreen();
+            }
         });
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;
-        this.readyToRenderCallback = readyToRenderCallback;
-        
         var acknowledged = that.getValue();
-
         that.renderContext.choices = [{
             "name": "acknowledge",
             "label": "acknowledge",
             "checked": acknowledged
         }];
-        readyToRenderCallback({
-            enableForwardNavigation : acknowledged
-        });
+        readyToRenderCallback();
     }
 });
 /*
