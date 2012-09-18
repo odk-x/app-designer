@@ -235,6 +235,9 @@ return {
 		}
     },
 	destroyScreenManager:function() {
+		if ( this.screenManager != null ) {
+			this.screenManager.cleanUpScreenManager();
+		}
 		this.screenManager = null;
 	}
 }
