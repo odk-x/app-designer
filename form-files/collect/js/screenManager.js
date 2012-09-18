@@ -34,7 +34,13 @@ return Backbone.View.extend({
     cleanUpScreenManager: function(){
         this.undelegateEvents();
         this.swipeEnabled = false;
-		$('.content .init-page').html('Please wait...');
+		var $e;
+		$e = $('.current');
+		$e.html('<span>Please wait...</span>');
+		$e = $('.odk-toolbar');
+		$e.html('');
+		$e = $('.odk-nav');
+		$e.html('');
     },
     getName: function(){
         if ( this.prompt != null ) {

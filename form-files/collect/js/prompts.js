@@ -6,7 +6,7 @@ function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTyp
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
     var locale = database.getMetaDataValue('formLocale');
 	var str = opendatakit.localize(textOrLangMap,locale);
-	return new Handlebars.SafeString(textOrLangMap);
+	return new Handlebars.SafeString(str);
 });
 
 Handlebars.registerHelper('formDirectory', function(options) {

@@ -21,7 +21,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
     column_types: {
         condition: 'formula',
 		validate: 'formula',
-		templatePath: 'app_path',
+		templatePath: 'requirejs_path',
 		image: 'app_path_localized',
 		audio: 'app_path_localized',
 		video: 'app_path_localized'
@@ -46,8 +46,8 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
             console.log(result);
             return evalInEnvironment(result);
         },
-		app_path : function(content) {
-			return opendatakit.getCurrentFormDirectory() + content;
+		requirejs_path : function(content) {
+			return "../" + opendatakit.getCurrentFormDirectory() + content;
 		},
 		app_path_localized : function(content) {
 			var fd = opendatakit.getCurrentFormDirectory();
