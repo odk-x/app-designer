@@ -1,7 +1,6 @@
 requirejs.config({
     baseUrl: '../collect',
     paths: {
-        collect : '',
         mdl : 'js/mdl',
         database : 'js/database',
         opendatakit : 'js/opendatakit',
