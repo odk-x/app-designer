@@ -86,6 +86,14 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 					// read all the form data and metaData into value caches
 					// under mdl.data and mdl.qp (respectively).
 					console.log('scripts loaded');
+					if ( formId == null ) {
+						// preload to exercise all the widgets...
+						formId = parsequery.getSetting(formDef, 'formId');
+						formVersion = parsequery.getSetting(formDef, 'formVersion');
+						instanceId = opendatakit.genUUID();
+						sameForm = false;
+						sameInstance = false;
+					}
 					
 					var qpl = opendatakit.getHashString(formId, formVersion, instanceId, pageRef);
 					

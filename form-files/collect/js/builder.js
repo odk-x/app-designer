@@ -20,6 +20,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
     return {
     column_types: {
         condition: 'formula',
+		validate: 'formula',
 		templatePath: 'app_path',
 		image: 'app_path_localized',
 		audio: 'app_path_localized',
@@ -56,11 +57,19 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
 				var newcontent = {};
 				for ( var key in content ) {
 					var val = content[key];
-					newcontent[key] = fd + val;
+					if ( val.indexOf('/') == 0 || val.indexOf('http:') == 0 || val.indexOf('https:') == 0 ) {
+						newcontent[key] = val;
+					} else {
+						newcontent[key] = fd + val;
+					}
 				}
 				return newcontent;
 			} else {
-				return fd + content;
+				if ( content.indexOf('/') == 0 || content.indexOf('http:') == 0 || content.indexOf('https:') == 0 ) {
+					return content;
+				} else {
+					return fd + content;
+				}
 			}
 		}
     },

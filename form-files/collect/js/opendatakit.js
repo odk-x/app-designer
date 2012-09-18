@@ -93,6 +93,7 @@ return {
     },
 	
 	getHashString:function(formId, formVersion, instanceId, pageRef) {
+		if ( formId == null ) return "";
         var qpl =
 		    '#formId=' + escape(formId) +
 			((formVersion == null) ? '' : ('&formVersion=' + escape(formVersion))) +

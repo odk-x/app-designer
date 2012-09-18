@@ -135,11 +135,10 @@ return {
     "settings": [
         {
             setting: "formId",
-            value: "placeholder"
+            value: "collect"
         },
         {
-            setting: "formVersion",
-            value: "20120901"
+            setting: "formVersion"
         },
         {
             setting: "formLocale",
@@ -148,29 +147,13 @@ return {
         {
             setting: "formName",
             value: {
-                "en_us": 'Placeholder Form'
+                "en_us": 'Warmup Form'
                 }
-        },
-        {
-            setting: "formLogo",
-            value: "img/form_logo.png"
         }
     ],
     "survey": [
-        {
-            "name": "none", 
-            "validate": true,
-            "type": "text", 
-            "param": null, 
-            "label": {
-                "en_us": "Choose a form:"
-            }
-        }, 
     ], 
     "datafields": {
-        "none": {
-            "type": "string"
-        }, 
     }, 
 };
 		if ( formId != null ) {
