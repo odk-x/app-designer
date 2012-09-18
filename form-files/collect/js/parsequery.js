@@ -102,7 +102,7 @@ return {
 
 		if ( formPath == null ) {
 			// do the prompts and widget warmup form...
-			formPath = "../collect/";
+			formPath = "collect/";
 			instanceId = null;
 			pageRef = null;
 		}

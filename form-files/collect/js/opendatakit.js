@@ -96,7 +96,7 @@ return {
     },
 	
 	getHashString:function(formPath, instanceId, pageRef) {
-		if ( formPath == null ) return '#formPath=' + escape('../');
+		if ( formPath == null ) return '#formPath=' + escape('collect/');
         var qpl =
 		    '#formPath=' + escape(formPath) +
 			((instanceId == null) ? '' : ('&instanceId=' + escape(instanceId))) +
