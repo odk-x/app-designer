@@ -26,6 +26,7 @@
     "survey": [
         {
             "type": "acknowledge",
+            "autoAdvance": true,
             "name": "acknowledgeTest", 
             "label": "Acknowledge test"
         },

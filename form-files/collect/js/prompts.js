@@ -178,11 +178,12 @@ promptTypes.opening = promptTypes.base.extend({
         }
 		var instanceName = database.getMetaDataValue('instanceName');
 		if ( instanceName == null ) {
-			// construct a friendly name for this new form...
+    		// construct a friendly name for this new form...
 			var date = new Date();
 			var dateStr = date.toISOString();
 			var formName = localize(database.getMetaDataValue('formName'));
 			instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
+            database.setMetaData('instanceName', 'string', instanceName, function(){});
 		}
         this.renderContext.instanceName = instanceName;
         readyToRenderCallback({enableBackwardNavigation: false});
@@ -785,14 +786,14 @@ promptTypes.acknowledge = promptTypes.select.extend({
                 "label": "acknowledge",
                 "checked": acknowledged
             }];
-            if(acknowledged && this.autoAdvance) {
+            if(acknowledged && that.autoAdvance) {
                 controller.gotoNextScreen();
             }
         });
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;
-        var acknowledged = that.getValue();
+        var acknowledged = JSON.parse(that.getValue());
         that.renderContext.choices = [{
             "name": "acknowledge",
             "label": "acknowledge",
