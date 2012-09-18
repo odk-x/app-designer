@@ -29,12 +29,12 @@ return {
                     database.putCrossTableMetaData(formId, instanceId, 'instanceName', 'string', fnvalue, function() {
 						var result = {};
 					    // only these values plus instanceId are immediate -- everything else is in metadata table.
-						var formLocale = that.findParam(formDef, 'formLocale').param;
-						var formName = that.findParam(formDef, 'formName').param[formLocale];
+						var formLocale = that.getSetting(formDef, 'formLocale');
+						var formName = that.getSetting(formDef, 'formName');
 
 						result.formId = { "type" : "string", "value": formId };
 						result.instanceId = { "type" : "string", "value": instanceId };
-						result.formVersion = { "type" : "string", "value": that.findParam(formDef, 'formVersion').param };
+						result.formVersion = { "type" : "string", "value": that.getSetting(formDef, 'formVersion') };
 						result.formLocale = { "type" : "string", "value": formLocale };
 						result.formName = { "type" : "string", "value": formName };
 						mdl.qp = result;
@@ -43,12 +43,12 @@ return {
                 } else {
 					var result = {};
 					// only these values plus instanceId are immediate -- everything else is in metadata table.
-					var formLocale = that.findParam(formDef, 'formLocale').param;
-					var formName = that.findParam(formDef, 'formName').param[formLocale];
+					var formLocale = that.getSetting(formDef, 'formLocale');
+					var formName = that.getSetting(formDef, 'formName');
 
 					result.formId = { "type" : "string", "value": formId };
 					result.instanceId = { "type" : "string", "value": instanceId };
-					result.formVersion = { "type" : "string", "value": that.findParam(formDef, 'formVersion').param };
+					result.formVersion = { "type" : "string", "value": that.getSetting(formDef, 'formVersion') };
 					result.formLocale = { "type" : "string", "value": formLocale };
 					result.formName = { "type" : "string", "value": formName };
 					mdl.qp = result;
@@ -58,11 +58,11 @@ return {
             });
         };
     },
-    findParam:function(formDef, key) {
+    getSetting:function(formDef, key) {
         for (var i = 0 ; i < formDef.settings.length ; ++i ) {
             var e = formDef.settings[i];
-            if ( e.name == key ) {
-                return e;
+            if ( e.setting == key ) {
+                return e.value;
             }
         }
         return null;
@@ -160,13 +160,13 @@ return {
 		var that = this;
 		var settings = formDef.settings;
 		
-		var formLocale = this.findParam(formDef, 'formLocale').param;
-		var formName = this.findParam(formDef, 'formName').param[formLocale];
+		var formLocale = this.getSetting(formDef, 'formLocale');
+		var formName = this.getSetting(formDef, 'formName');
 		
         var result = {};
         
         that.parseQueryHelper(dataKeyValueList, 'formId', formId );
-        that.parseQueryHelper(dataKeyValueList, 'formVersion', this.findParam(formDef, 'formVersion').param );
+        that.parseQueryHelper(dataKeyValueList, 'formVersion', this.getSetting(formDef, 'formVersion') );
         that.parseQueryHelper(dataKeyValueList, 'formLocale', formLocale );
         that.parseQueryHelper(dataKeyValueList, 'formName', formName );
         

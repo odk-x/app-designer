@@ -1,0 +1,206 @@
+{
+    "settings": [
+        {
+            "setting": "formId", 
+            "value": "exampleForm"
+        }, 
+        {
+            "setting": "formVersion", 
+            "value": 1
+        }, 
+        {
+            "setting": "formLocale", 
+            "value": "en_us"
+        }, 
+        {
+            "setting": "formName", 
+            "value": "Example Form"
+        }
+    ], 
+    "survey": [
+        {
+            "name": "name", 
+            "hint": "Please use your full name", 
+            "type": "text", 
+            "param": null, 
+            "label": {
+                "en_us": "Enter your name"
+            }
+        }, 
+        {
+            "type": "note", 
+            "param": null, 
+            "label": {
+                "en_us": "Hello {{name.value}}"
+            }
+        }, 
+        {
+            "type": "select_one", 
+            "name": "skip_to_end", 
+            "param": "yesno", 
+            "label": {
+                "en_us": "Would you like to skip to the end of the survey?"
+            }
+        }, 
+        {
+            "type": "goto_if", 
+            "param": "end", 
+            "condition": "{{skip_to_end}}==='yes'"
+        }, 
+        {
+            "prompts": [
+                {
+                    "type": "integer", 
+                    "name": "age", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "Enter your age:"
+                    }
+                }, 
+                {
+                    "type": "select_one", 
+                    "name": "gender", 
+                    "param": "gender", 
+                    "label": {
+                        "en_us": "Enter your gender:"
+                    }
+                }
+            ], 
+            "type": "screen", 
+            "name": "screen_example"
+        }, 
+        {
+            "type": "select", 
+            "name": "visited_continents", 
+            "param": "continents", 
+            "label": {
+                "en_us": "Which continents have you visited?"
+            }
+        }, 
+        {
+            "type": "audio", 
+            "name": "audio_test", 
+            "param": null, 
+            "label": {
+                "en_us": "Audio test"
+            }
+        }, 
+        {
+            "type": "video", 
+            "name": "video_test", 
+            "param": null, 
+            "label": {
+                "en_us": "Video test"
+            }
+        }, 
+        {
+            "type": "image", 
+            "name": "image_test", 
+            "param": null, 
+            "label": {
+                "en_us": "Image test"
+            }
+        }, 
+        {
+            "name": "specialTemplateTest", 
+            "templatePath": "test.handlebars", 
+            "type": "text", 
+            "param": null, 
+            "label": {
+                "en_us": "Custom template test:"
+            }
+        }, 
+        {
+            "type": "label", 
+            "param": "end"
+        }, 
+        {
+            "name": "rating", 
+            "templateContext": {
+                "max": 10, 
+                "type": "range", 
+                "min": 1
+            }, 
+            "type": "integer", 
+            "param": null, 
+            "label": {
+                "en_us": "How would you rate this survey?"
+            }
+        }
+    ], 
+    "datafields": {
+        "rating": {
+            "type": "integer"
+        }, 
+        "name": {
+            "type": "string"
+        }, 
+        "specialTemplateTest": {
+            "type": "string"
+        }, 
+        "age": {
+            "type": "integer"
+        }, 
+        "image_test": {
+            "type": "image/*"
+        }, 
+        "audio_test": {
+            "type": "audio/*"
+        }, 
+        "video_test": {
+            "type": "video/*"
+        }
+    }, 
+    "choices": {
+        "gender": [
+            {
+                "name": "male", 
+                "label": "male"
+            }, 
+            {
+                "name": "female", 
+                "label": "female"
+            }
+        ], 
+        "yesno": [
+            {
+                "name": "yes", 
+                "label": "yes"
+            }, 
+            {
+                "name": "no", 
+                "label": "no"
+            }
+        ], 
+        "continents": [
+            {
+                "name": "NorthAmerica", 
+                "label": "North America"
+            }, 
+            {
+                "name": "SouthAmerica", 
+                "label": "South America"
+            }, 
+            {
+                "name": "Euroupe", 
+                "label": "Euroupe"
+            }, 
+            {
+                "name": "Africa", 
+                "label": "Africa"
+            }, 
+            {
+                "name": "Asia", 
+                "label": "Asia"
+            }, 
+            {
+                "name": "Australia", 
+                "label": "Australia"
+            }, 
+            {
+                "name": "Antarctica", 
+                "label": "Antarctica"
+            }
+        ]
+    }
+}

@@ -168,11 +168,9 @@ promptTypes.opening = promptTypes.base.extend({
     template: Handlebars.templates.opening,
     templatePath: "templates/opening.handlebars",
     onActivate: function(readyToRenderCallback) {
-        var formLogo = _.find(this.form.settings, function(setting){
-            return setting.name==='formLogo'
-        });
+        var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
-            this.renderContext.headerImg = formLogo.param;
+            this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = mdl.qp.instanceName.value;
         readyToRenderCallback();

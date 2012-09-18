@@ -1,19 +1,21 @@
 <div>
     <center>
         <img src="{{ headerImg }}" width="50%"/>
-        <p>You are at the start of "{{formName}}". Swipe the screen as shown below to begin.</p>
+        <p>You are at the start of:</p>
+        <p>"{{formName}}".</p>
+        <p>Swipe the screen as shown below to begin.</p>
         <div>
             <span style="width:0;float:left;">
                 <img src="{{ backupImg }}"/>
-                <p style="white-space: nowrap;">previous prompt</p>
+                <p style="white-space: nowrap;">Previous prompt</p>
             </span>
             <span style="float:right;">
                 <img src="{{ advanceImg }}"/>
-                <p>next prompt</p>
+                <p>Next prompt</p>
             </span>
         </div>
         <div style="clear:both;">
-            <label for="instanceName">Enter instance name:</label>
+            <label for="instanceName">Name this instance:</label>
             <input class="odk" name="instanceName" value="{{instanceName}}"></input>
         </div>
         <button class="odk-big-btn editInstances">Edit Saved Instances</button>
