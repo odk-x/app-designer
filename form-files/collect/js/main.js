@@ -79,23 +79,19 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
                         'prompts'/* mix-in additional prompts and support libs here */], 
         function(mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
 			
-			window.updateScreen = function(formDef, formId, formVersion, instanceId, pageRef, sameForm, sameInstance) {
+			window.updateScreen = function(formDef, formPath, instanceId, pageRef, sameForm, sameInstance) {
 					// we have saved all query parameters into the metaData table
 					// created the data table and its table descriptors
 					// re-normalized the query string to just have the instanceId
 					// read all the form data and metaData into value caches
 					// under mdl.data and mdl.qp (respectively).
 					console.log('scripts loaded');
-					if ( formId == null ) {
-						// preload to exercise all the widgets...
-						formId = parsequery.getSetting(formDef, 'formId');
-						formVersion = parsequery.getSetting(formDef, 'formVersion');
-						instanceId = opendatakit.genUUID();
-						sameForm = false;
-						sameInstance = false;
+					if ( formPath == null ) {
+						alert("Unexpected null formPath");
+						return;
 					}
 					
-					var qpl = opendatakit.getHashString(formId, formVersion, instanceId, pageRef);
+					var qpl = opendatakit.getHashString(formPath, instanceId, pageRef);
 					
 					// pull metadata for synchronous read access
 					database.cacheAllMetaData(function() {
