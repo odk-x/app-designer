@@ -45,7 +45,7 @@
         {
             "type": "goto_if", 
             "param": "end", 
-            "condition": "{{skip_to_end}}==='yes'"
+            "condition": "selected({{skip_to_end}}, 'yes')"
         }, 
         {
             "prompts": [
@@ -135,7 +135,13 @@
         "name": {
             "type": "string"
         }, 
+        "skip_to_end": {
+            "type": "string"
+        }, 
         "specialTemplateTest": {
+            "type": "string"
+        }, 
+        "gender": {
             "type": "string"
         }, 
         "age": {
@@ -149,6 +155,9 @@
         }, 
         "video_test": {
             "type": "video/*"
+        }, 
+        "visited_continents": {
+            "type": "string"
         }
     }, 
     "choices": {

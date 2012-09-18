@@ -365,7 +365,7 @@ promptTypes.select = promptTypes.base.extend({
                     choice.checked = false;
                 }
                 return choice;
-            })
+            });
             that.render();
         });
     },
@@ -376,18 +376,16 @@ promptTypes.select = promptTypes.base.extend({
         }
         var saveValue = that.getValue();
         that.renderContext.value = (saveValue == null) ? null : JSON.parse(saveValue);
-        for (var i = 0 ; i < that.renderContext.choices.length ; ++i ) {
-            var choice = that.renderContext.choices[i];
+        that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
             if ( that.renderContext.value != null ) {
-                // NOTE: for multi-select
-                var matchingValue = _.find(that.renderContext.value, function(value){
-                    return choice.name === value.name;
+                choice.checked = _.any(that.renderContext.value, function(valueObject){
+                    return choice.name === valueObject.value;
                 });
-                that.renderContext.choices[i].checked = (matchingValue != null);
             } else {
-                that.renderContext.choices[i].checked = false;
+                choice.checked = false;
             }
-        }
+            return choice;
+        });
         readyToRenderCallback();
     }
 });

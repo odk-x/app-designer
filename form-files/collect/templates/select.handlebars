@@ -1,5 +1,9 @@
 <form>
-    <fieldset data-role="controlgroup">
+    <fieldset data-role="controlgroup"
+        {{#each htmlAttribute}}
+            {{attr}}="{{value}}"
+        {{/each}}
+        >
         <legend>{{> labelHint}}</legend>
         {{#each choices}}
             <input

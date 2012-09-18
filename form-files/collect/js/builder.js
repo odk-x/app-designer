@@ -1,6 +1,22 @@
 'use strict';
 // depends upon: controller, jquery, promptTypes
 define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTypes) {
+    var evalInEnvironment = (function() {
+        //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
+        //It's still possible to really mess things up from there though.
+        function selected(promptValue, qValue){
+            //TODO: Store parsed JSON?
+            if(promptValue) {
+                return _.include(_.pluck(JSON.parse(promptValue), 'value'), qValue);
+            } else {
+                return false;
+            }
+        }
+        return function(code){
+            return eval(code);
+        };
+    })();
+    
     return {
     column_types: {
         condition: 'formula'
@@ -23,7 +39,7 @@ define(['controller', 'jquery', 'promptTypes'], function(controller, $, promptTy
             //How best to refrence current value?
             var result = '(function(context){return ' + content + '})';
             console.log(result);
-            return eval(result);
+            return evalInEnvironment(result);
         }
     },
     /**
