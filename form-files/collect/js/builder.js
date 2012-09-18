@@ -3,7 +3,8 @@
 define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], function(controller, opendatakit, database, $, promptTypes) {
     var evalInEnvironment = (function() {
         //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
-        //It's still possible to really mess things up from there though.
+        //It's still possible to really mess things up from here though because the
+        //top-level environment is still accessable.
         function selected(promptValue, qValue){
             //TODO: Store parsed JSON?
             if(promptValue) {
