@@ -101,13 +101,14 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 							database.initializeTables(formDef, function() {
 									// instance data is OK...
 									if ( !sameForm ) {
+											controller.clearPromptHistory();
 											controller.destroyScreenManager();
+											// new form -- no 'back' history
+											collect.setInstanceId(instanceId);
 											
 											// build the survey and place it in the controller...
 											builder.buildSurvey(formDef, function() {
 													// controller OK
-													// new form -- no 'back' history
-													controller.clearPromptHistory();
 													//
 													// register to handle manual #hash changes
 													$(window).bind('hashchange', function(evt) {
@@ -126,9 +127,10 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 									} else {
 											// controller prompts OK
 											if ( !sameInstance ) {
+												controller.clearPromptHistory();
 												controller.destroyScreenManager();
 												// switching instance -- no 'back' history...
-												controller.clearPromptHistory();
+												collect.setInstanceId(instanceId);
 											}
 											//
 											// register to handle manual #hash changes
