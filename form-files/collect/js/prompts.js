@@ -25,6 +25,21 @@ function localize(textOrLangMap) {
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
 	return localize(textOrLangMap);
 });
+
+Handlebars.registerHelper('formDirectory', function(options) {
+    return opendatakit.getCurrentFormDirectory();
+});
+
+Handlebars.registerHelper('eachProperty', function(context, options) {
+    var output = "";
+    if($.isPlainObject(context)){
+        $.each(context, function(property, value){
+            output += options.fn({property:property,value:value});
+        });
+    }
+    return output;
+});
+
 Handlebars.registerPartial('labelHint', labelHintPartial);
 
 /**
@@ -74,7 +89,9 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.video = this.video;
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
+        //It's probably not good to get data like this in initialize
         this.renderContext.formName = database.getMetaDataValue('formName');
+        this.renderContext.htmlAttributes = this.htmlAttributes;
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
@@ -793,7 +810,12 @@ promptTypes.acknowledge = promptTypes.select.extend({
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;
-        var acknowledged = JSON.parse(that.getValue());
+         var acknowledged;
+        try{
+            acknowledged = JSON.parse(that.getValue());
+        } catch(e) {
+            acknowledged = false;
+        }
         that.renderContext.choices = [{
             "name": "acknowledge",
             "label": "acknowledge",
@@ -802,26 +824,4 @@ promptTypes.acknowledge = promptTypes.select.extend({
         readyToRenderCallback();
     }
 });
-/*
-promptTypes.acknowledge = promptTypes.base.extend({
-    type: "acknowledge",
-    template: Handlebars.templates.acknowledge,
-    templatePath: "templates/acknowledge.handlebars",
-    renderContext: {
-        acknowledgeText: "acknowledge"
-    },
-    events: {
-        "modify .acknowledge": "acknowledge"
-    },
-    acknowledge: function(evt) {
-        controller.gotoNextScreen();
-    },
-    onActivate: function(readyToRenderCallback) {
-        var that = this;
-        readyToRenderCallback({
-            enableForwardNavigation : false
-        });
-    }
-});
-*/
 });

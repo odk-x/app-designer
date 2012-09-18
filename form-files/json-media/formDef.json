@@ -26,9 +26,9 @@
     "survey": [
         {
             "type": "acknowledge",
-            "autoAdvance": true,
             "name": "acknowledgeTest", 
-            "label": "Acknowledge test"
+            "label": "Acknowledge test",
+            "autoAdvance": true
         },
         {
             "prompts": [
@@ -63,7 +63,10 @@
                 {
                     "type": "select_one", 
                     "name": "gender", 
-                    "param": "gender", 
+                    "param": "gender",
+                    "htmlAttributes": {
+                        "data-type": "horizontal"
+                    },
                     "label": {
                         "en_us": "Enter your gender:"
                     }
