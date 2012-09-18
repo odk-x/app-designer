@@ -3,10 +3,11 @@
     <div class="input-container">{{! used to prevent swiping on sliders}}
     <input
         class="odk"
-        type="{{type}}" 
         name="{{name}}"
-        min="{{min}}" max="{{max}}"
         value="{{value}}"
+        {{#eachProperty htmlAttributes}}
+            {{property}}="{{value}}"
+        {{/eachProperty}}
         {{#if disabled}}
             style="background-color:lightgray;"
             disabled="true"

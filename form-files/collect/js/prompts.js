@@ -25,6 +25,21 @@ function localize(textOrLangMap) {
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
 	return localize(textOrLangMap);
 });
+
+Handlebars.registerHelper('formDirectory', function(options) {
+    return opendatakit.getCurrentFormDirectory();
+});
+
+Handlebars.registerHelper('eachProperty', function(context, options) {
+    var output = "";
+    if($.isPlainObject(context)){
+        $.each(context, function(property, value){
+            output += options.fn({property:property,value:value});
+        });
+    }
+    return output;
+});
+
 Handlebars.registerPartial('labelHint', labelHintPartial);
 
 /**
@@ -74,7 +89,9 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.video = this.video;
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
+        //It's probably not good to get data like this in initialize
         this.renderContext.formName = database.getMetaDataValue('formName');
+        this.renderContext.htmlAttributes = this.htmlAttributes;
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
@@ -181,11 +198,12 @@ promptTypes.opening = promptTypes.base.extend({
         }
 		var instanceName = database.getMetaDataValue('instanceName');
 		if ( instanceName == null ) {
-			// construct a friendly name for this new form...
+    		// construct a friendly name for this new form...
 			var date = new Date();
 			var dateStr = date.toISOString();
 			var formName = localize(database.getMetaDataValue('formName'));
 			instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
+            database.setMetaData('instanceName', 'string', instanceName, function(){});
 		}
         this.renderContext.instanceName = instanceName;
         readyToRenderCallback({enableBackwardNavigation: false});
@@ -783,9 +801,7 @@ promptTypes.note = promptTypes.base.extend({
 });
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
-    modify: function(evt) {
-        controller.gotoNextScreen();
-    },
+    autoAdvance: "false",
     modification: function(evt) {
         var that = this;
         var acknowledged = $('#acknowledge').is(':checked');
@@ -795,47 +811,25 @@ promptTypes.acknowledge = promptTypes.select.extend({
                 "label": "acknowledge",
                 "checked": acknowledged
             }];
-            that.readyToRenderCallback({
-                enableForwardNavigation : acknowledged
-            });
+            if(acknowledged && that.autoAdvance) {
+                controller.gotoNextScreen();
+            }
         });
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;
-        this.readyToRenderCallback = readyToRenderCallback;
-        
-        var acknowledged = that.getValue();
-
+         var acknowledged;
+        try{
+            acknowledged = JSON.parse(that.getValue());
+        } catch(e) {
+            acknowledged = false;
+        }
         that.renderContext.choices = [{
             "name": "acknowledge",
             "label": "acknowledge",
             "checked": acknowledged
         }];
-        readyToRenderCallback({
-            enableForwardNavigation : acknowledged
-        });
+        readyToRenderCallback();
     }
 });
-/*
-promptTypes.acknowledge = promptTypes.base.extend({
-    type: "acknowledge",
-    template: Handlebars.templates.acknowledge,
-    templatePath: "templates/acknowledge.handlebars",
-    renderContext: {
-        acknowledgeText: "acknowledge"
-    },
-    events: {
-        "modify .acknowledge": "acknowledge"
-    },
-    acknowledge: function(evt) {
-        controller.gotoNextScreen();
-    },
-    onActivate: function(readyToRenderCallback) {
-        var that = this;
-        readyToRenderCallback({
-            enableForwardNavigation : false
-        });
-    }
-});
-*/
 });

@@ -25,11 +25,18 @@ return Backbone.View.extend({
     renderContext:{},
     initialize: function(controller){
         this.controller = controller;
-        this.currentPageEl = $('.init-page');
+        this.currentPageEl = $('[data-role=page]')
         var that = this;
         requirejs(['text!templates/screen.handlebars'],function(source) {
             that.template = Handlebars.compile(source);
         });
+    },
+    cleanUpScreenManager: function(){
+        this.undelegateEvents();
+        this.swipeEnabled = false;
+        //Resets the body html to it's initial html.
+        //jQuery mobile might have issues with this.
+        $('body').html('<div class="init-page" data-role="page" data-theme="d"><div data-role="content">Please wait...</div></div>');
     },
     getName: function(){
         if ( this.prompt != null ) {

@@ -22,13 +22,13 @@ p {color:red;}
     </div>
 </div>
 <script type="text/javascript">
-require(["d3.v2.js"], function(){
+require(["{{formDirectory}}d3.v2.js"], function(){
     //Delay is a hack, ideally we will have an event that fires one the template is loaded.
     _.delay(function() {
     var sampleSVG = d3.select("#viz")
         .append("svg")
         .attr("width", 100)
-        .attr("height", 100);    
+        .attr("height", 100);
     
     sampleSVG.append("circle")
         .style("stroke", "gray")

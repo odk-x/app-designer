@@ -25,6 +25,12 @@
     ],
     "survey": [
         {
+            "type": "acknowledge",
+            "name": "acknowledgeTest", 
+            "label": "Acknowledge test",
+            "autoAdvance": true
+        },
+        {
             "prompts": [
                 {
                     "type": "text", 
@@ -32,7 +38,6 @@
                     "name": "name", 
                     "image": "img/test.gif",
                     "audio": "http://upload.wikimedia.org/wikipedia/commons/b/ba/Ru-audio_template-Wikipedia.ogg",
-                    "video": "http://upload.wikimedia.org/wikipedia/commons/2/27/Lasercutting-video.ogg",
                     "param": null, 
                     "label": {
                         "en_us": "Enter your name {{name.value}}:"
@@ -58,7 +63,10 @@
                 {
                     "type": "select_one", 
                     "name": "gender", 
-                    "param": "gender", 
+                    "param": "gender",
+                    "htmlAttributes": {
+                        "data-type": "horizontal"
+                    },
                     "label": {
                         "en_us": "Enter your gender:"
                     }
@@ -152,6 +160,9 @@
         }
     ], 
     "datafields": {
+        "acknowledgeTest": {
+            "type": "string"
+        },
         "name": {
             "type": "string"
         }, 

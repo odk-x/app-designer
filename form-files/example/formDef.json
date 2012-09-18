@@ -45,7 +45,7 @@
         {
             "type": "goto_if", 
             "param": "end", 
-            "condition": "selected({{skip_to_end}}, 'yes')"
+            "condition": "selected({{skip_to_end}},'yes')"
         }, 
         {
             "prompts": [
@@ -58,8 +58,11 @@
                     }
                 }, 
                 {
-                    "type": "select_one", 
+                    "htmlAttributes": {
+                        "data-type": "horizontal"
+                    }, 
                     "name": "gender", 
+                    "type": "select_one", 
                     "param": "gender", 
                     "label": {
                         "en_us": "Enter your gender:"
@@ -115,12 +118,12 @@
             "param": "end"
         }, 
         {
-            "name": "rating", 
-            "templateContext": {
+            "htmlAttributes": {
                 "max": 10, 
                 "type": "range", 
                 "min": 1
             }, 
+            "name": "rating", 
             "type": "integer", 
             "param": null, 
             "label": {
