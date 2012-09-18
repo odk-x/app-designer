@@ -13,12 +13,14 @@ return {
                 while (that.hasPromptHistory()) {
                     console.log("gotoPreviousPrompt: poppreviousScreenNames ms: " + (+new Date()) + 
 								" page: " + screenManager.prompt.promptIdx);
-					var prmpt = that.getPromptByName(that.previousScreenIndices.pop());
+					var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
 					var t = prmpt.type;
-					if (!( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" )) {
-						that.setPrompt(that.getPromptByName(that.previousScreenIndices.pop()), {reverse:true});
-						return;
+					if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
+                        console.error("Invalid previous prompt type");
+                        console.log(prmpt);
 					}
+					that.setPrompt(prmpt, {reverse:true});
+					return;
                 }
 
 				alert("I've forgotten what the previous page was!");
@@ -37,7 +39,7 @@ return {
             }
         });
     },
-    gotoNextScreen: function(){
+    gotoNextScreen: function(options){
         var that = this;
         var screenManager = this.screenManager;
         screenManager.validate(false, {
@@ -46,7 +48,7 @@ return {
                     if(nextPrompt){
                         console.log("gotoNextPrompt: nextPrompt ms: " + (+new Date()) + 
 						" page: " +	screenManager.prompt.promptIdx);
-                        that.gotoPromptName(nextPrompt);
+                        that.gotoPromptName(nextPrompt, options);
                     } else {
                         alert(screenManager.noNextPageMessage);
                         console.log("gotoNextPrompt: noNextPage ms: " + (+new Date()) +
@@ -69,7 +71,7 @@ return {
 			if(idx >= 0 && idx < this.prompts.length){
 				return this.prompts[idx];
 			}
-    	}
+        }
         for(var i = 0; i < this.prompts.length; i++){
             var promptName = this.prompts[i].name;
             if(promptName == name){
@@ -108,32 +110,40 @@ return {
     clearPromptHistory: function() {
         this.previousScreenIndices.length = 0;
     },
-    gotoPrompt: function(prompt, termList, omitPushOnReturnStack){
+    gotoPrompt: function(prompt, passedInOptions){
+        var options = {
+            omitPushOnReturnStack : false
+        };
+        if(passedInOptions){
+            $.extend(options, passedInOptions);
+        }
         var that = this;
         if ( this.screenManager == null ) {
 			this.screenManager = new ScreenManager(this);
 		}
         that.screenManager.beforeMove(function(){
-            if (!omitPushOnReturnStack) {
+            if (options.omitPushOnReturnStack) {
+                that.setPrompt(prompt);
+            } else {
                 // push this prompt onto the return stack only if it has a name...
 				var prmpt = that.screenManager.prompt;
                 var idx = (prmpt != null) ? prmpt.promptIdx : null;
                 if ( idx != null ) {
 					that.previousScreenIndices.push(idx);
                 }
+                that.setPrompt(prompt);
             }
-            that.setPrompt(prompt);
         });
     },
-    gotoLabel: function(name){
-        this.gotoPrompt(this.getLabel(name), null, true);
+    gotoLabel: function(name, options){
+        this.gotoPrompt(this.getLabel(name), options);
     },
-    gotoPromptName: function(name, termList, omitPushOnReturnStack){
+    gotoPromptName: function(name, options){
         var prompt = this.getPromptByName(name);
         if ( prompt == null ) {
-            this.gotoPrompt(this.prompts[0], null, omitPushOnReturnStack);
+            this.gotoPrompt(this.prompts[0], options);
         } else {
-            this.gotoPrompt(prompt, termList, omitPushOnReturnStack);
+            this.gotoPrompt(prompt, options);
         }
     },
     /*
@@ -221,7 +231,7 @@ return {
 		}
 
 		if (  this.screenManager == null || prmpt !== this.screenManager.prompt ) {
-			this.gotoPrompt(prmpt, hlist, false);
+			this.gotoPrompt(prmpt, { hlist : hlist });
 		}
     }
 }
