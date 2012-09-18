@@ -1,6 +1,6 @@
 'use strict';
 // depends upon: controller, jquery, promptTypes
-define(['controller', 'database', 'jquery', 'promptTypes'], function(controller, database, $, promptTypes) {
+define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], function(controller, opendatakit, database, $, promptTypes) {
     var evalInEnvironment = (function() {
         //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
         //It's still possible to really mess things up from there though.
@@ -19,7 +19,11 @@ define(['controller', 'database', 'jquery', 'promptTypes'], function(controller,
     
     return {
     column_types: {
-        condition: 'formula'
+        condition: 'formula',
+		templatePath: 'app_path',
+		image: 'app_path_localized',
+		audio: 'app_path_localized',
+		video: 'app_path_localized'
     },
     propertyParsers: {
         formula: function(content) {
@@ -40,7 +44,25 @@ define(['controller', 'database', 'jquery', 'promptTypes'], function(controller,
             var result = '(function(context){return ' + content + '})';
             console.log(result);
             return evalInEnvironment(result);
-        }
+        },
+		app_path : function(content) {
+			return opendatakit.getCurrentFormDirectory() + content;
+		},
+		app_path_localized : function(content) {
+			var fd = opendatakit.getCurrentFormDirectory();
+			if ( content == null ) {
+				return content;
+			} else if ( $.isPlainObject(content) ) {
+				var newcontent = {};
+				for ( var key in content ) {
+					var val = content[key];
+					newcontent[key] = fd + val;
+				}
+				return newcontent;
+			} else {
+				return fd + content;
+			}
+		}
     },
     /**
      * 

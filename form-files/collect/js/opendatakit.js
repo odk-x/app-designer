@@ -108,7 +108,7 @@ return {
 		if ( formVersion == null ) {
 			formVersion = (mdl.qp.formVersion != null) ? mdl.qp.formVersion.value : null;
 		}
-		return "../" + formId + ((formVersion == null) ? '' : ('-' + formVersion)) + '/';
+		return "../../" + formId + ((formVersion == null) ? '' : ('-' + formVersion)) + '/';
 	},
 	
     openNewInstanceId:function(id, friendlyName) {

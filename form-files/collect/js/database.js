@@ -434,7 +434,7 @@ putCrossTableMetaDataKeyTypeValueMapHelper:function(formId, instanceId, idx, tha
         var type = ktvlist[idx].type;
         var value = ktvlist[idx].value; // may be null...
         var is = that.insertCrossTableMetaDataStmt(formId, instanceId, key, type, value);
-        transaction.executeSql(is.stmt, is.bind, that.putMetaDataKeyTypeValueMapHelper(formId, instanceId, idx+1, that, ktvlist));
+        transaction.executeSql(is.stmt, is.bind, that.putCrossTableMetaDataKeyTypeValueMapHelper(formId, instanceId, idx+1, that, ktvlist));
     };
 },
 /**
