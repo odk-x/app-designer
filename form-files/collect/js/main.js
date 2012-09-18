@@ -102,6 +102,7 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
 									// instance data is OK...
 									if ( !sameForm ) {
 											controller.clearPromptHistory();
+											controller.prompts = null;
 											controller.destroyScreenManager();
 											// new form -- no 'back' history
 											collect.setInstanceId(instanceId);

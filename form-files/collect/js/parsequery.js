@@ -44,7 +44,8 @@ return {
                     // construct a friendly name for this new form...
                     var date = new Date();
                     var dateStr = date.toISOString();
-                    var fnvalue = formName + "_" + dateStr; // .replace(/\W/g, "_")
+					var localizedFormName = opendatakit.localize(formName,formLocale);
+                    var fnvalue = localizedFormName + "_" + dateStr; // .replace(/\W/g, "_")
                     database.putCrossTableMetaData(formId, instanceId, 'instanceName', 'string', fnvalue, function() {
 						mdl.qp = result;
 						// pull everything for synchronous read access

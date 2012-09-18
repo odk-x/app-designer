@@ -149,9 +149,8 @@ getAllFormInstancesStmt:function() {
             stmt : 'select group_concat(case when name=\'instanceName\' then val else null end) instanceName, ' +
                           'group_concat(case when name=\'version\' then val else null end) version, ' + 
                           'max(timestamp) last_saved_timestamp, max(saved) saved_status, instance_id from ' + 
-                      '(select form_id, instance_id, timestamp, saved, name, v1 val from ' + 
-                            '(select form_id, instance_id, timestamp, saved, name, val v1 from instance_info ' + 
-                                'where form_id=? group by instance_id, name having timestamp = max(timestamp))) ' + 
+                      '(select form_id, instance_id, timestamp, saved, name, val from instance_info ' + 
+                                'where form_id=? group by instance_id, name having timestamp = max(timestamp)) ' + 
                      'group by instance_id order by timestamp desc;',
             bind : [mdl.qp.formId.value]
             };

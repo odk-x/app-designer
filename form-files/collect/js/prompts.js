@@ -3,27 +3,10 @@
 define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'text!templates/labelHint.handlebars'],
 function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _, labelHintPartial) {
 
-function localize(textOrLangMap) {
-    if(_.isUndefined(textOrLangMap)) {
-        return 'undefined';
-    }
-    if(_.isString(textOrLangMap)) {
-        return new Handlebars.SafeString(textOrLangMap);
-    }
-    var locale = database.getMetaDataValue('formLocale');
-    if( locale in textOrLangMap ){
-        return new Handlebars.SafeString(textOrLangMap[locale]);
-    } else if( 'default' in textOrLangMap ){
-        return new Handlebars.SafeString(textOrLangMap['default']);
-    } else {
-        alert("Could not localize object. See console:");
-        console.error("Non localizable object:");
-        console.error(textOrLangMap);
-    }
-};
-
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
-	return localize(textOrLangMap);
+    var locale = database.getMetaDataValue('formLocale');
+	var str = opendatakit.localize(textOrLangMap,locale);
+	return new Handlebars.SafeString(textOrLangMap);
 });
 
 Handlebars.registerHelper('formDirectory', function(options) {
@@ -201,7 +184,8 @@ promptTypes.opening = promptTypes.base.extend({
     		// construct a friendly name for this new form...
 			var date = new Date();
 			var dateStr = date.toISOString();
-			var formName = localize(database.getMetaDataValue('formName'));
+			var locale = database.getMetaDataValue('formLocale');
+			var formName = opendatakit.localize(database.getMetaDataValue('formName'),locale);
 			instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
             database.setMetaData('instanceName', 'string', instanceName, function(){});
 		}
@@ -306,6 +290,7 @@ promptTypes.instances = promptTypes.base.extend({
                     var instance = result.rows.item(i);
                     that.renderContext.instances.push({
                         instanceName: instance.instanceName,
+						instance_id: instance.instance_id,
                         last_saved_timestamp: new Date(instance.last_saved_timestamp),
                         saved_status: instance.saved_status
                     });

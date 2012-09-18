@@ -114,19 +114,35 @@ return {
     openNewInstanceId:function(id, friendlyName) {
         console.log("ALERT! setNewInstanceId - setting new UUID");
         if (id == null) {
-			mdl.qp.instanceId.type = "string";
-            mdl.qp.instanceId.value = this.genUUID();
-        } else {
-			mdl.qp.instanceId.type = "string";
-            mdl.qp.instanceId.value = id;
+			id = this.genUUID();
         }
+		
 		// NOTE: reference mdl directly to avoid circular reference to 'database'
         var qpl = this.getHashString(mdl.qp.formPath.value,
-						mdl.qp.instanceId.value,
+						id,
 						0) +
             ((friendlyName != null) ? '&instanceName=' + escape(friendlyName) : '');
         // apply the change to the URL...
         window.location.hash = qpl;
     },
+
+	localize:function(textOrLangMap, locale) {
+		if(_.isUndefined(textOrLangMap)) {
+			return 'undefined';
+		}
+		if(_.isString(textOrLangMap)) {
+			return textOrLangMap;
+		}
+		if( locale in textOrLangMap ){
+			return textOrLangMap[locale];
+		} else if( 'default' in textOrLangMap ){
+			return textOrLangMap['default'];
+		} else {
+			alert("Could not localize object. See console:");
+			console.error("Non localizable object:");
+			console.error(textOrLangMap);
+			return 'invalidOjbect';
+		}
+	}
 };
 });
