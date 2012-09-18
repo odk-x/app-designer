@@ -173,18 +173,62 @@ promptTypes.opening = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = mdl.qp.instanceName.value;
-        readyToRenderCallback();
-    },
-    events: {
-        "click .editInstances": "editInstances"
-    },
-    editInstances: function(){
-        controller.gotoPromptName('_instances', [], true);
+        readyToRenderCallback({enableBackwardNavigation: false});
     },
     renderContext: {
         headerImg: collect.baseDir + 'img/form_logo.png',
         backupImg: collect.baseDir + 'img/backup.png',
         advanceImg: collect.baseDir + 'img/advance.png'
+    },
+    //Events copied from inputType, should probably refactor.
+    events: {
+        "change input": "modification",
+        "swipeleft input": "disableSwipingOnInput",
+        "swiperight input": "disableSwipingOnInput"
+    },
+    disableSwipingOnInput: function(evt){
+        evt.stopPropagation();
+    },
+    modification: function(evt) {
+        database.setMetaData('instanceName', 'string', this.$('input').val(), function(){
+        });
+    }
+});
+promptTypes.finalize = promptTypes.base.extend({
+    type:"finalize",
+    hideInHierarchy: true,
+    valid: true,
+    templatePath: "templates/finalize.handlebars",
+    events: {
+        "click .save-btn": "saveIncomplete",
+        "click .final-btn": "saveFinal"
+    },
+    renderContext: {
+        headerImg: collect.baseDir + 'img/form_logo.png'
+    },
+    onActivate: function(readyToRenderCallback) {
+        var formLogo = false;//TODO: Need way to access form settings.
+        if(formLogo){
+            this.renderContext.headerImg = formLogo;
+        }
+        this.renderContext.instanceName = mdl.qp.instanceName.value;
+        readyToRenderCallback({enableForwardNavigation: false});
+        /*
+        database.getAllData(function(tlo) {
+            readyToRenderCallback({enableForwardNavigation: false});
+        });
+        */
+    },
+    saveIncomplete: function(evt) {
+        database.save_all_changes(false, function() {
+            // TODO: call up to Collect to report completion
+        });
+    },
+    saveFinal: function(evt) {
+        database.save_all_changes(true, function() {
+            // TODO: call up to Collect to report completion
+        });
+        
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -202,36 +246,6 @@ promptTypes.json = promptTypes.base.extend({
             }
             readyToRenderCallback({enableNavigation: false});
         });
-    }
-});
-promptTypes.finalize = promptTypes.base.extend({
-    type:"finalize",
-    hideInHierarchy: true,
-    valid: true,
-    templatePath: "templates/finalize.handlebars",
-    events: {
-        "click .save-btn": "saveIncomplete",
-        "click .final-btn": "saveFinal"
-    },
-    renderContext: {
-        headerImg: collect.baseDir + 'img/form_logo.png'
-    },
-    onActivate: function(readyToRenderCallback) {
-        var that = this;
-        database.getAllData(function(tlo) {
-            readyToRenderCallback({enableForwardNavigation: false});
-        });
-    },
-    saveIncomplete: function(evt) {
-        database.save_all_changes(false, function() {
-            // TODO: call up to Collect to report completion
-        });
-    },
-    saveFinal: function(evt) {
-        database.save_all_changes(true, function() {
-            // TODO: call up to Collect to report completion
-        });
-        
     }
 });
 promptTypes.instances = promptTypes.base.extend({
@@ -469,8 +483,6 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         //Useful for sliders.
         //It might be better to listen for the jQm event for when a slider is released.
         //This could cause problems since the debounced function could fire after a page change.
-        console.log(that);
-        console.log("this is that");
         var renderContext = this.renderContext;
         var value = this.$('input').val();
         this.setValue(value, function() {
