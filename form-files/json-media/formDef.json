@@ -5,8 +5,7 @@
             "param": "json-media"
         },
         {
-            "name": "formVersion",
-            "param": "20120901"
+            "name": "formVersion"
         },
         {
             "name": "formLocale",
