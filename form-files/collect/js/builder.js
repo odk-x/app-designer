@@ -48,7 +48,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
             return evalInEnvironment(result);
         },
 		requirejs_path : function(content) {
-			return "../" + opendatakit.getCurrentFormDirectory() + content;
+			return opendatakit.getCurrentFormDirectory() + content;
 		},
 		app_path_localized : function(content) {
 			var fd = opendatakit.getCurrentFormDirectory();
