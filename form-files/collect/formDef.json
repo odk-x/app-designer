@@ -115,15 +115,6 @@
             "param": "subform.html"
         }, 
         {
-            "name": "specialTemplateTest", 
-            "label": {
-                "en_us": "Custom template test:"
-            }, 
-            "type": "text", 
-            "param": null, 
-            "templatePath": "test.handlebars"
-        },
-        {
             "type": "integer", 
             "name": "age", 
             "param": null, 
@@ -148,9 +139,6 @@
     ], 
     "datafields": {
         "name": {
-            "type": "string"
-        }, 
-        "specialTemplateTest": {
             "type": "string"
         }, 
         "age": {
