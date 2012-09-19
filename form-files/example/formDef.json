@@ -19,7 +19,7 @@
     ], 
     "survey": [
         {
-            "name": "name", 
+            "name": "name", "image":"test.gif",
             "hint": "Please use your full name", 
             "type": "text", 
             "param": null, 
