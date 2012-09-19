@@ -170,7 +170,7 @@
         {
             "type": "label", 
             "param": "formend"
-        },
+        }
     ], 
     "datafields": {
         "acknowledgeTest": {
