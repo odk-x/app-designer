@@ -34,6 +34,8 @@ return {
     },
 
     asUri:function(mediaPath,widget,attribute) {
+		if ( mediaPath == null ) return null;
+		
         var info = this.getPlatformInfo();
         if ( info.container != 'Android' ) return mediaPath;
         
