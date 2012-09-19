@@ -20,7 +20,7 @@ requirejs.config({
 		img : 'img',
         templates : 'templates',
 		app : '..'
-        },
+    },
     shim: {
         'jquery': {
             // Slimmer drop-in replacement for jquery
