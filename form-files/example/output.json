@@ -1,0 +1,30 @@
+{
+  "age": {
+    "type": "integer",
+    "value": "24"
+  },
+  "gender": {
+    "type": "text",
+    "value": "[{\"name\":\"gender\",\"value\":\"male\"}]"
+  },
+  "name": {
+    "type": "text",
+    "value": "Nathan"
+  },
+  "rating": {
+    "type": "integer",
+    "value": "10"
+  },
+  "skip_to_end": {
+    "type": "text",
+    "value": "[{\"name\":\"skip_to_end\",\"value\":\"no\"}]"
+  },
+  "specialTemplateTest": {
+    "type": "text",
+    "value": "test"
+  },
+  "visited_continents": {
+    "type": "text",
+    "value": "[{\"name\":\"visited_continents\",\"value\":\"NorthAmerica\"},{\"name\":\"visited_continents\",\"value\":\"SouthAmerica\"},{\"name\":\"visited_continents\",\"value\":\"Euroupe\"},{\"name\":\"visited_continents\",\"value\":\"Africa\"}]"
+  }
+}

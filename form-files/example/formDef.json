@@ -19,7 +19,7 @@
     ], 
     "survey": [
         {
-            "name": "name", "image":"test.gif",
+            "name": "name", 
             "hint": "Please use your full name", 
             "type": "text", 
             "param": null, 
@@ -111,6 +111,15 @@
             "param": null, 
             "label": {
                 "en_us": "Custom template test:"
+            }
+        }, 
+        {
+            "image": "img/dolphin.png", 
+            "audio": "audio/carrioncrow.mp3", 
+            "type": "note", 
+            "param": null, 
+            "label": {
+                "en_us": "Media in label test:"
             }
         }, 
         {
