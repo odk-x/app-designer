@@ -1,20 +1,11 @@
 'use strict';
-// depends upon -- opendatakit, Backbone, $, Handlebars
+// depends upon -- opendatakit, Backbone, $, Handlebars, jQueryMobile, text (a requirejs plugin).
 //
-// plus all compiled templates being loaded (which requires 'text' module in requirejs)
-//
-// plus 'controller' -- to avoid a circular dependency, 'controller' is passed 
+// also depends upon: 'controller' -- to avoid a circular dependency, 'controller' is passed 
 // in during initialize() and stored in a member variable.
 //
-define(['opendatakit','backbone','jquery','handlebars','templates/compiledTemplates','text'], 
-function(opendatakit, Backbone, $, Handlebars, jqm) {
-
-$(document).bind("mobileinit", function () {
-    $.mobile.ajaxEnabled = false;
-    $.mobile.linkBindingEnabled = false;
-    $.mobile.hashListeningEnabled = false;
-    $.mobile.pushStateEnabled = false;
-});
+define(['opendatakit','backbone','jquery','handlebars','jqmobile','text'], 
+function(opendatakit, Backbone, $, Handlebars) {
 
 return Backbone.View.extend({
     el: "body",

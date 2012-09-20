@@ -164,52 +164,6 @@ return {
             return;
         }
     },
-    /*
-     * window.location.hash is an ampersand-separated list of 
-	 * key=value pairs. The key and value are escaped.
-	 * The main values are:
-	 *    formPath=relative path from the collect/index.html to 
-	 *             the form definition directory (formPath/formDef.json).
-	 *             The name of the directory containing the formDef.json 
-	 *             is the formId-formVersion of this form.
-	 *
-	 *    instanceId=unique id for this filled-in form instance.
-	 *
-	 *    pathRef=concatenation of promptIdx and other data used
-	 *            when rendering a screen.
-	 * 
-     */
-    odkHashChangeHandler:function(e) {
-		if ( window.location.hash == '#' ) {
-			// this is bogus transition due to jquery mobile widgets
-			e.stopPropagation();
-			return;
-		}
-		var params = window.location.hash.slice(1).split("&");
-		var formPath = null;
-		var instanceId = null;
-		var pageRef = null;
-		for (var i = 0; i < params.length; i++)
-		{
-			var tmp = params[i].split("=");
-			var key = tmp[0];
-			var value = unescape(tmp[1]);
-			if ( key == 'formPath' ) {
-				formPath = value;
-			} else if ( key == 'instanceId' ) {
-				instanceId = value;
-			} else if ( key == 'pageRef' ) {
-				pageRef = value;
-			}
-		}
-		if ( formPath != database.getMetaDataValue('formPath') || instanceId != database.getMetaDataValue('instanceId') ) {
-			// this should trigger a hash-change action
-			parsequery.parseQueryParameters(window.updateScreen);
-			return;
-		}
-		
-		this.gotoRef(pageRef);
-	},
 	gotoRef:function(pageRef) {
 		if ( pageRef == null ) {
 			pageRef = '0';

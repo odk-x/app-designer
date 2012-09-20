@@ -145,6 +145,22 @@ return {
 			console.error(textOrLangMap);
 			return 'invalidOjbect';
 		}
-	}
+	},
+	
+	/**
+	 * Retrieve the value of a setting from the form definition file.
+	 * 
+	 * Immediate.
+ 	 */
+    getSetting:function(formDef, key) {
+        for (var i = 0 ; i < formDef.settings.length ; ++i ) {
+            var e = formDef.settings[i];
+            if ( e.setting == key ) {
+                return e.value;
+            }
+        }
+        return null;
+    }
+
 };
 });

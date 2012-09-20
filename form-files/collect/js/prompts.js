@@ -38,6 +38,7 @@ promptTypes.base = Backbone.View.extend({
     type: "base",
     required: false,
     database: database,
+	template: null,
     mdl: mdl,
     //renderContext is a dynamic object to be passed into the render function.
     //renderContext is meant to be private.
@@ -81,7 +82,6 @@ promptTypes.base = Backbone.View.extend({
     onActivate: function(readyToRenderCallback) {
         readyToRenderCallback();
     },
-    template: Handlebars.templates.text, //Make "Override me" template
     render: function() { 
         this.$el.html(this.template(this.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
@@ -172,7 +172,6 @@ promptTypes.base = Backbone.View.extend({
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
     hideInHierarchy: true,
-    template: Handlebars.templates.opening,
     templatePath: "templates/opening.handlebars",
     onActivate: function(readyToRenderCallback) {
         var formLogo = false;//TODO: Need way to access form settings.
@@ -272,7 +271,6 @@ promptTypes.instances = promptTypes.base.extend({
     type:"instances",
     hideInHierarchy: true,
     valid: true,
-    template: Handlebars.templates.instances,
     templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
@@ -328,7 +326,7 @@ promptTypes.hierarchy = promptTypes.base.extend({
     type:"hierarchy",
     hideInHierarchy: true,
     valid: true,
-    template: Handlebars.templates.hierarchy,
+    templatePath: 'templates/hierarchy.handlebars',
     events: {
     },
     onActivate: function(readyToRenderCallback) {
@@ -339,7 +337,7 @@ promptTypes.hierarchy = promptTypes.base.extend({
 promptTypes.repeat = promptTypes.base.extend({
     type: "repeat",
     valid: true,
-    template: Handlebars.templates.repeat,
+    templatePath: 'templates/repeat.handlebars',
     events: {
         "click .openInstance": "openInstance",
         "click .deleteInstance": "deleteInstance",
@@ -377,7 +375,6 @@ promptTypes.repeat = promptTypes.base.extend({
 promptTypes.select = promptTypes.base.extend({
     type: "select",
     datatype: "text",
-    template: Handlebars.templates.select,
     templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification"
@@ -444,7 +441,6 @@ promptTypes.select_or_other = promptTypes.base.extend({
 });
 promptTypes.dropdownSelect = promptTypes.base.extend({
     type: "dropdownSelect",
-    template: Handlebars.templates.dropdownSelect,
     templatePath: "templates/dropdownSelect.handlebars",
     events: {
         "change select": "modification"
@@ -486,7 +482,6 @@ promptTypes.dropdownSelect = promptTypes.base.extend({
 promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     type: "text",
     datatype: "text",
-    template: Handlebars.templates.inputType,
     templatePath: "templates/inputType.handlebars",
     renderContext: {
         "type": "text"
@@ -597,7 +592,6 @@ promptTypes.image = promptTypes.media.extend({
     type: "image",
     datatype: "image",
     label: 'Take your photo:',
-    template: Handlebars.templates.image,
     templatePath: "templates/image.handlebars",
     onActivate: function(readyToRenderCallback) {
         var that = this;
@@ -625,7 +619,6 @@ promptTypes.image = promptTypes.media.extend({
 promptTypes.video = promptTypes.media.extend({
     type: "video",
     label: 'Take your video:',
-    template: Handlebars.templates.video,
     templatePath: "templates/video.handlebars",
     onActivate: function(readyToRenderCallback) {
         var that = this;
@@ -655,7 +648,6 @@ promptTypes.video = promptTypes.media.extend({
 promptTypes.audio = promptTypes.media.extend({
     type: "audio",
     datatype: "audio",
-    template: Handlebars.templates.audio,
     templatePath: "templates/audio.handlebars",
     label: 'Take your audio:',
     capture: function() {
@@ -781,7 +773,6 @@ promptTypes.goto_if = promptTypes.base.extend({
 });
 promptTypes.note = promptTypes.base.extend({
     type: "note",
-    template: Handlebars.templates.note,
     templatePath: "templates/note.handlebars"
 });
 promptTypes.acknowledge = promptTypes.select.extend({
