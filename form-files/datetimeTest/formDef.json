@@ -1,0 +1,58 @@
+{
+    "choices": {}, 
+    "survey": [
+        {
+            "type": "date", 
+            "name": "born", 
+            "param": null, 
+            "label": {
+                "en_us": "When were you born?"
+            }
+        }, 
+        {
+            "type": "time", 
+            "name": "time", 
+            "param": null, 
+            "label": {
+                "en_us": "What time is it?"
+            }
+        }, 
+        {
+            "type": "datetime", 
+            "name": "datetime", 
+            "param": null, 
+            "label": {
+                "en_us": "When will you be available for a follow up survey?"
+            }
+        }
+    ], 
+    "datafields": {
+        "born": {
+            "type": "string"
+        }, 
+        "datetime": {
+            "type": "string"
+        }, 
+        "time": {
+            "type": "string"
+        }
+    }, 
+    "settings": [
+        {
+            "setting": "formId", 
+            "value": "datetimeTest"
+        }, 
+        {
+            "setting": "formVersion", 
+            "value": 1
+        }, 
+        {
+            "setting": "formLocale", 
+            "value": "en_us"
+        }, 
+        {
+            "setting": "formName", 
+            "value": "Datetime Test"
+        }
+    ]
+}
