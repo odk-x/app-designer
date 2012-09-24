@@ -9,7 +9,7 @@ body {
 }
 .odk-scroll {
     min-height: 100%;
-    padding-bottom: 120px;
+    padding-bottom: 120px;/* TODO: I'm not sure if this has an effect */
 }
 .odk-container {
     padding: 0;
@@ -21,7 +21,7 @@ body {
 }
 .odk-nav {
     position: relative;
-    bottom: 57px;
+    bottom: 59px;
 }
 /*
 This prevents the nav bar from overlapping
