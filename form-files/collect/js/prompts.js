@@ -5,8 +5,38 @@ function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTyp
 
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
     var locale = database.getMetaDataValue('formLocale');
-	var str = opendatakit.localize(textOrLangMap,locale);
-	return new Handlebars.SafeString(str);
+    var str = opendatakit.localize(textOrLangMap,locale);
+    return new Handlebars.SafeString(str);
+});
+
+Handlebars.registerHelper('metadata', function(value, options) {
+    var val = database.getMetaDataValue( options ? options : value );
+    return new Handlebars.SafeString( (val != null) ? val : "" );
+});
+
+Handlebars.registerHelper('setting', function(value, options) {
+    var val = database.getSettingValue( options ? options : value );
+    return new Handlebars.SafeString( (val != null) ? val : "" );
+});
+
+Handlebars.registerHelper('toFixed', function(value, options) {
+    return new Handlebars.SafeString( (value != null) ? (+value).toFixed(options) : "" );
+});
+    
+Handlebars.registerHelper('toExponential', function(value, options) {
+    return new Handlebars.SafeString( (value != null) ? (+value).toExponential(options) : "" );
+});
+    
+Handlebars.registerHelper('toPrecision', function(value, options) {
+    return new Handlebars.SafeString( (value != null) ? (+value).toPrecision(options) : "" );
+});
+    
+Handlebars.registerHelper('toString', function(value, options) {
+    return new Handlebars.SafeString( (value != null) ? (+value).toString(options) : "" );
+});
+    
+Handlebars.registerHelper('stringify', function(value, options) {
+    return new Handlebars.SafeString( JSON.stringify(value,null,options) );
 });
 
 Handlebars.registerHelper('formDirectory', function(options) {
@@ -38,7 +68,6 @@ promptTypes.base = Backbone.View.extend({
     type: "base",
     required: false,
     database: database,
-	template: null,
     mdl: mdl,
     //renderContext is a dynamic object to be passed into the render function.
     //renderContext is meant to be private.
@@ -53,11 +82,18 @@ promptTypes.base = Backbone.View.extend({
     initializeTemplate: function() {
         //if (this.template != null) return;
         var that = this;
-        if(this.templatePath){
-            requirejs(['text!'+this.templatePath], function(source) {
-                that.template = Handlebars.compile(source);
-            });
-        }
+        var f = function() {
+            if(that.templatePath){
+                requirejs(['text!'+that.templatePath], function(source) {
+                    that.template = Handlebars.compile(source);
+                }, function(err) {
+                    if ( err.requireType == "timeout" ) {
+                        setTimeout( f, 100);
+                    }
+                });
+            }
+        };
+        f();
     },
     isInitializeComplete: function() {
         return (this.template != null);
@@ -111,10 +147,10 @@ promptTypes.base = Backbone.View.extend({
                 context.failure();
             }
         }
-		if ( this.name == null ) {
-			// no data validation if no persistence...
-			context.success();
-		} else if ('newValue' in context) {
+        if ( this.name == null ) {
+            // no data validation if no persistence...
+            context.success();
+        } else if ('newValue' in context) {
             callback(context.newValue);
         }
         else {
@@ -127,29 +163,13 @@ promptTypes.base = Backbone.View.extend({
     getValue: function() {
         return database.getDataValue(this.name);
     },
-    setValue: function(value, onSuccessfulSave) {
+    setValue: function(value, onSuccessfulSave, onFailure) {
         // NOTE: data IS NOT updated synchronously. Use callback!
         var that = this;
-        database.setData(that.name, that.datatype, value, onSuccessfulSave);
+        database.setData(that.name, that.datatype, value, onSuccessfulSave, onFailure);
     },
-    beforeMove: function(continuation) {
-        continuation();
-    },
-    computePreviousPrompt: function(continuation) {
-        continuation(null);
-    },
-    computeNextPrompt: function(continuation) { // TODO: do we need omitPushOnReturnStack flag here?
-        //console.log("computeNextPrompt: beginning ms: " + (+new Date()) + " page: " + this.name);
-        var that = this;
-        if ('nextPromptName' in this) {
-            continuation(that.nextPromptName);
-        }
-        else if (this.promptIdx + 1 < controller.prompts.length) {
-            continuation(this.promptIdx + 1);
-        }
-        else {
-            continuation(null);
-        }
+    beforeMove: function(context) {
+        context.success();
     },
     getCallback: function(actionPath) {
         alert('getCallback: Unimplemented: ' + actionPath);
@@ -178,16 +198,16 @@ promptTypes.opening = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-		var instanceName = database.getMetaDataValue('instanceName');
-		if ( instanceName == null ) {
-    		// construct a friendly name for this new form...
-			var date = new Date();
-			var dateStr = date.toISOString();
-			var locale = database.getMetaDataValue('formLocale');
-			var formName = opendatakit.localize(database.getMetaDataValue('formName'),locale);
-			instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
+        var instanceName = database.getMetaDataValue('instanceName');
+        if ( instanceName == null ) {
+            // construct a friendly name for this new form...
+            var date = new Date();
+            var dateStr = date.toISOString();
+            var locale = database.getMetaDataValue('formLocale');
+            var formName = opendatakit.localize(database.getMetaDataValue('formName'),locale);
+            instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
             database.setMetaData('instanceName', 'string', instanceName, function(){});
-		}
+        }
         this.renderContext.instanceName = instanceName;
         readyToRenderCallback({enableBackwardNavigation: false});
     },
@@ -206,12 +226,11 @@ promptTypes.opening = promptTypes.base.extend({
         evt.stopPropagation();
     },
     modification: function(evt) {
-        database.setMetaData('instanceName', 'string', this.$('input').val(), function(){
-        });
+        database.setMetaData('instanceName', 'string', this.$('input').val(), function(){});
     },
-	beforeMove: function(continuation) {
-        database.setMetaData('instanceName', 'string', this.$('input').val(), continuation);
-	}
+    beforeMove: function(context) {
+        database.setMetaData('instanceName', 'string', this.$('input').val(), context.success, context.failure);
+    }
 });
 promptTypes.finalize = promptTypes.base.extend({
     type:"finalize",
@@ -288,7 +307,7 @@ promptTypes.instances = promptTypes.base.extend({
                     var instance = result.rows.item(i);
                     that.renderContext.instances.push({
                         instanceName: instance.instanceName,
-						instance_id: instance.instance_id,
+                        instance_id: instance.instance_id,
                         last_saved_timestamp: new Date(instance.last_saved_timestamp),
                         saved_status: instance.saved_status
                     });
@@ -308,11 +327,11 @@ promptTypes.instances = promptTypes.base.extend({
         });
     },
     createInstance: function(evt){
-		evt.stopPropagation(true);
+        evt.stopPropagation(true);
         opendatakit.openNewInstanceId(null);
     },
     openInstance: function(evt) {
-		evt.stopPropagation(true);
+        evt.stopPropagation(true);
         opendatakit.openNewInstanceId($(evt.target).attr('id'));
     },
     deleteInstance: function(evt){
@@ -527,11 +546,9 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         renderContext.value = value;
         readyToRenderCallback();
     },
-    beforeMove: function(continuation) {
+    beforeMove: function(context) {
         var that = this;
-        that.setValue(this.$('input').val(), function() {
-            continuation();
-        });
+        that.setValue(this.$('input').val(), context.success, context.failure );
     },
     validateValue: function(value) {
         return true;
@@ -601,7 +618,7 @@ promptTypes.image = promptTypes.media.extend({
         readyToRenderCallback();
     },
     capture: function() {
-		var platInfo = opendatakit.getPlatformInfo();
+        var platInfo = opendatakit.getPlatformInfo();
         if (platInfo.container == 'Android') {
             // TODO: is this the right sequence?
             var outcome = collect.doAction('' + this.promptIdx, 'takePicture', 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity', null);
@@ -630,7 +647,7 @@ promptTypes.video = promptTypes.media.extend({
         readyToRenderCallback();
     },
     capture: function() {
-		var platInfo = opendatakit.getPlatformInfo();
+        var platInfo = opendatakit.getPlatformInfo();
         if (platInfo.container == 'Android') {
             // TODO: is this the right sequence?
             var outcome = collect.doAction('' + this.promptIdx, 'takeVideo', 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity', null);
@@ -651,7 +668,7 @@ promptTypes.audio = promptTypes.media.extend({
     templatePath: "templates/audio.handlebars",
     label: 'Take your audio:',
     capture: function() {
-		var platInfo = opendatakit.getPlatformInfo();
+        var platInfo = opendatakit.getPlatformInfo();
         if (platInfo.container == 'Android') {
             // TODO: is this the right sequence?
             var outcome = collect.doAction('' + this.promptIdx, 'takeAudio', 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity', null);
@@ -721,10 +738,10 @@ promptTypes.calculate = promptTypes.base.extend({
         return true;
     },
     onActivate: function(readyToRenderCallback){
-        controller.gotoNextScreen();
+        alert("calculate.onActivate: Should never be called!");
     },
     evaluate: function() {
-        this.model.set('value', this.formula());
+        return this.formula();
     }
 });
 promptTypes.label = promptTypes.base.extend({
@@ -733,9 +750,7 @@ promptTypes.label = promptTypes.base.extend({
         return true;
     },
     onActivate: function(readyToRenderCallback){
-        controller.gotoNextScreen({
-            omitPushOnReturnStack : true
-        });
+        alert("label.onActivate: Should never be called!");
     }
 });
 promptTypes.goto = promptTypes.base.extend({
@@ -745,9 +760,7 @@ promptTypes.goto = promptTypes.base.extend({
         return true;
     },
     onActivate: function(readyToRenderCallback) {
-        controller.gotoLabel(this.param, {
-            omitPushOnReturnStack : true
-        });
+        alert("goto.onActivate: Should never be called!");
     }
 });
 promptTypes.goto_if = promptTypes.base.extend({
@@ -760,15 +773,7 @@ promptTypes.goto_if = promptTypes.base.extend({
         return false;
     },
     onActivate: function(readyToRenderCallback) {
-        if(this.condition()){
-            controller.gotoLabel(this.param, {
-                omitPushOnReturnStack : true
-            });
-        } else {
-            controller.gotoNextScreen({
-                omitPushOnReturnStack : true
-            });
-        }
+        alert("goto_if.onActivate: Should never be called!");
     }
 });
 promptTypes.note = promptTypes.base.extend({

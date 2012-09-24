@@ -1,5 +1,5 @@
 collect = {
-	instanceId: null,
+    instanceId: null,
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.
@@ -11,12 +11,12 @@ collect = {
         // maxSize is in bytes
         return '{"shortName":"odk","version":"1","displayName":"ODK Instances Database","maxSize":65536}';
     },
-	setInstanceId: function(instanceId) {
-		// report the new instanceId to ODK Collect...
-		// needed so that callbacks, etc. can properly track the instanceId 
-		// currently being worked on.
-		this.instanceId = instanceId;
-	},
+    setInstanceId: function(instanceId) {
+        // report the new instanceId to ODK Collect...
+        // needed so that callbacks, etc. can properly track the instanceId 
+        // currently being worked on.
+        this.instanceId = instanceId;
+    },
     doAction: function( page, path, action, jsonObj ) {
         if ( action == 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
