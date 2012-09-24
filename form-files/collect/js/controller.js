@@ -1,76 +1,198 @@
 'use strict';
 // depends upon: --
 // NOTE: builder.js sets controller.prompts property.
-define(['screenManager','opendatakit','parsequery','database'], function(ScreenManager,opendatakit,parsequery,database) {
+define(['screenManager','opendatakit','database'], function(ScreenManager,opendatakit,database) {
 return {
     screenManager : null,
+    currentPromptIdx : -1,
+    prompts : [],
+    calcs: [],
     previousScreenIndices : [],
+    beforeMove: function(context){
+        var that = this;
+        var prompt = null;
+        if ( this.currentPromptIdx != -1 ) {
+            prompt = this.prompts[this.currentPromptIdx];
+        }
+        try {
+            if ( prompt ) {
+                prompt.beforeMove(context);
+            } else {
+                context.success();
+            }
+        } catch(ex) {
+            context.failure(function() {
+                if ( that.screenManager != null ) {
+                    that.screenManager.unexpectedError("beforeMove", ex);
+                }
+            });
+        }
+    },
+    validate: function(isMoveBackward, context){
+        var that = this;
+        var prompt = null;
+        if ( this.currentPromptIdx != -1 ) {
+            prompt = this.prompts[this.currentPromptIdx];
+        }
+        try {
+            if ( prompt ) {
+                prompt.validate(isMoveBackward, context);
+            } else {
+                context.success();
+            }
+        } catch(ex) {
+            context.failure(function() {
+                if ( that.screenManager != null ) {
+                    that.screenManager.unexpectedError("validate", ex);
+                }
+            });
+        }
+    },
     gotoPreviousScreen: function(){
         var that = this;
-        var screenManager = this.screenManager;
-        screenManager.validate(true, {
+        that.beforeMove({
             success: function() {
-                while (that.hasPromptHistory()) {
-                    console.log("gotoPreviousPrompt: poppreviousScreenNames ms: " + (+new Date()) + 
-								" page: " + screenManager.prompt.promptIdx);
-					var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
-					var t = prmpt.type;
-					if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
-                        console.error("Invalid previous prompt type");
-                        console.log(prmpt);
-					}
-					that.setPrompt(prmpt, {reverse:true});
-					return;
-                }
+                console.log("gotoPreviousScreen: beforeMove success ms: " + (+new Date()) + 
+                            " page: " + that.currentPromptIdx);
+                // we are ready for move -- validate...
+                that.validate(true, {
+                    success: function() {
+                        console.log("gotoPreviousScreen: validate success ms: " + (+new Date()) + 
+                            " page: " + that.currentPromptIdx);
 
-				alert("I've forgotten what the previous page was!");
-				console.log("gotoPreviousPrompt: noPreviousPage ms: " + (+new Date()) + 
-							" page: " + screenManager.prompt.promptIdx);
-            },
-            failure: function(missingValue) {
-                console.log("gotoPreviousPrompt: validationFailed ms: " + (+new Date()) +
-							" page: " + screenManager.prompt.promptIdx);
-                if ( missingValue ) {
-                    screenManager.requiredFieldMissingAction();
-                } else {
-                    screenManager.validationFailedAction();
-                }
-                return;
-            }
-        });
-    },
-    gotoNextScreen: function(options){
-        var that = this;
-        var screenManager = this.screenManager;
-        screenManager.validate(false, {
-            success: function(){
-                screenManager.computeNextPrompt(function(nextPrompt){
-                    if(nextPrompt){
-                        console.log("gotoNextPrompt: nextPrompt ms: " + (+new Date()) + 
-						" page: " +	screenManager.prompt.promptIdx);
-                        that.gotoPromptName(nextPrompt, options);
-                    } else {
-                        alert(screenManager.noNextPageMessage);
-                        console.log("gotoNextPrompt: noNextPage ms: " + (+new Date()) +
-						" page: " + screenManager.prompt.promptIdx);
+                        while (that.hasPromptHistory()) {
+                            console.log("gotoPreviousScreen: poppreviousScreenNames ms: " + (+new Date()) + 
+                                        " page: " + that.currentPromptIdx);
+                            var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
+                            var t = prmpt.type;
+                            if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
+                                console.error("Invalid previous prompt type");
+                                console.log(prmpt);
+                            }
+                            // todo -- change to use hash?
+                            that.setPrompt(prmpt, {omitPushOnReturnStack:true, reverse:true});
+                            return;
+                        }
+                        console.log("gotoPreviousScreen: noPreviousPage ms: " + (+new Date()) + 
+                                    " page: " + that.currentPromptIdx);
+                        that.screenManager.noPreviousPage(function() {
+                            that.gotoRef("0");
+                        });
+                    },
+                    failure: function(validationFailAction) {
+                        console.log("gotoPreviousScreen: validate failure ms: " + (+new Date()) + 
+                            " page: " + that.currentPromptIdx);
+                        if ( validationFailAction != null ) {
+                            validationFailAction();
+                        }
                     }
                 });
             },
-            failure: function(){
-                screenManager.validationFailedAction();
-                console.log("gotoNextPrompt: validationFailed ms: " + (+new Date()) +
-					" page: " + screenManager.prompt.promptIdx);
-                return;
+            failure: function(stayAction) {
+                console.log("gotoPreviousScreen: beforeMove failure ms: " + (+new Date()) + 
+                            " page: " + that.currentPromptIdx);
+                // should stay on this screen...
+                if ( stayAction != null ) {
+                    stayAction();
+                }
+            }
+        });
+    },
+    /**
+     * If 'prompt' is a label, goto or goto_if, advance through the 
+     * business logic until it is resolved to a renderable screen prompt.
+     *
+     * return that renderable screen prompt.
+     */
+    advanceToScreenPrompt: function(prompt) {
+        var that = this;
+        var oldprompt = null;
+        do {
+            oldprompt = prompt;
+            if ( prompt.type == "label" ) {
+                prompt = that.getPromptByName(prompt.promptIdx + 1);
+            } else if ( prompt.type == "goto" ) {
+                prompt = that.getPromptByLabel(prompt.param);
+            } else if ( prompt.type == "goto_if" ) {
+                try {
+                    if ( prompt.condition() ) {
+                        prompt = that.getPromptByLabel(prompt.param);
+                    } else {
+                        prompt = that.getPromptByName(prompt.promptIdx + 1);
+                    }
+                } catch (ex) {
+                    prompt = that.getPromptByName(prompt.promptIdx + 1);
+                }
+            }
+        } while ( prompt && oldprompt != prompt );
+        return prompt;
+    },
+    gotoNextScreen: function(options){
+        var that = this;
+        that.beforeMove({
+            success: function() {
+                console.log("gotoNextScreen: beforeMove success ms: " + (+new Date()) + 
+                            " page: " + that.currentPromptIdx);
+                // we are ready for move -- validate...
+                that.validate(false, {
+                    success: function() {
+                        // navigate through all gotos, goto_ifs and labels.
+                        var prompt = null;
+                        if ( that.currentPromptIdx >= 0 ) {
+                            prompt = that.getPromptByName(that.currentPromptIdx + 1);
+                        } else {
+                            prompt = that.prompts[0];
+                        }
+
+                        // abort and display error if we don't have any prompts...
+                        if ( prompt == null ) {
+                            that.screenManager.noNextPage(function() {
+                                that.gotoRef("0");
+                            });
+                            return;
+                        }
+                        
+                        prompt = that.advanceToScreenPrompt(prompt);
+                        
+                        if(prompt) {
+                            console.log("gotoNextScreen: nextPrompt: " + prompt.promptIdx + " ms: " + (+new Date()) + 
+                            " page: " +    that.currentPromptIdx);
+                            // todo -- change to use hash?
+                            that.setPrompt(prompt, options);
+                        } else {
+                            console.log("gotoNextScreen: noNextPage ms: " + (+new Date()) +
+                            " page: " + that.currentPromptIdx);
+                            that.screenManager.noNextPage(function() {
+                                that.gotoRef("0");
+                            });
+                        }
+                    },
+                    failure: function(validationFailAction) {
+                        console.log("gotoNextScreen: validate failure ms: " + (+new Date()) + 
+                            " page: " + that.currentPromptIdx);
+                        if ( validationFailAction != null ) {
+                            validationFailAction();
+                        }
+                    }
+                });
+            },
+            failure: function(stayAction) {
+                console.log("gotoNextScreen: beforeMove failure ms: " + (+new Date()) + 
+                            " page: " + that.currentPromptIdx);
+                // should stay on this screen...
+                if ( stayAction != null ) {
+                    stayAction();
+                }
             }
         });
     },
     getPromptByName: function(name){
-		if ( name == null ) return null;
-		if ( ('' + name).match(/^\d+$/g) ) {
-			var idx = Number(name);
-			if(idx >= 0 && idx < this.prompts.length){
-				return this.prompts[idx];
-			}
+        if ( name == null ) return null;
+        if ( ('' + name).match(/^\d+$/g) ) {
+            var idx = Number(name);
+            if(idx >= 0 && idx < this.prompts.length){
+                return this.prompts[idx];
+            }
         }
         for(var i = 0; i < this.prompts.length; i++){
             var promptName = this.prompts[i].name;
@@ -81,7 +203,7 @@ return {
         alert("Unable to find screen: " + name);
         return null;
     },
-    getLabel: function(name){
+    getPromptByLabel: function(name){
         var prompts = this.prompts;
         for(var i = 0; i < prompts.length; i++){
             if(prompts[i].type !== 'label') continue;
@@ -92,58 +214,37 @@ return {
         alert("Unable to find label: " + name);
         return null;
     },
-    setPrompt: function(prompt, jqmAttrs){
-        console.log('setPrompt');
-        console.log(prompt);
-        this.screenManager.setPrompt(prompt, jqmAttrs);
-		// goto_if, goto, and label statements may change the prompt!
-		var idx = this.screenManager.prompt.promptIdx;
-		var newhash = opendatakit.getHashString(database.getMetaDataValue('formPath'),
-					database.getMetaDataValue('instanceId'), ''+idx);
-		if ( newhash != window.location.hash ) {
-			window.location.hash = newhash;
-		}
-    },
-    hasPromptHistory: function() {
-        return (this.previousScreenIndices.length !== 0);
-    },
-    clearPromptHistory: function() {
-        this.previousScreenIndices.length = 0;
-    },
-    gotoPrompt: function(prompt, passedInOptions){
+    setPrompt: function(prompt, passedInOptions){
+        if ( this.currentPromptIdx == prompt.promptIdx ) {
+            console.log('setPrompt: ignored: ' + prompt.promptIdx);
+            return;
+        }
+        console.log('setPrompt: ' + prompt.promptIdx);
+
         var options = {
             omitPushOnReturnStack : false
         };
+        
         if(passedInOptions){
             $.extend(options, passedInOptions);
         }
-        var that = this;
-        if ( this.screenManager == null ) {
-			this.screenManager = new ScreenManager(this);
-		}
-        that.screenManager.beforeMove(function(){
-            if (options.omitPushOnReturnStack) {
-                that.setPrompt(prompt);
-            } else {
-                // push this prompt onto the return stack only if it has a name...
-				var prmpt = that.screenManager.prompt;
-                var idx = (prmpt != null) ? prmpt.promptIdx : null;
-                if ( idx != null ) {
-					that.previousScreenIndices.push(idx);
-                }
-                that.setPrompt(prompt);
+        if (!options.omitPushOnReturnStack) {
+            if ( this.currentPromptIdx >= 0 && this.currentPromptIdx < this.prompts.length ) {
+                this.previousScreenIndices.push(this.currentPromptIdx);
             }
-        });
-    },
-    gotoLabel: function(name, options){
-        this.gotoPrompt(this.getLabel(name), options);
-    },
-    gotoPromptName: function(name, options){
-        var prompt = this.getPromptByName(name);
-        if ( prompt == null ) {
-            this.gotoPrompt(this.prompts[0], options);
-        } else {
-            this.gotoPrompt(prompt, options);
+        }
+        this.currentPromptIdx = prompt.promptIdx;
+        this.screenManager.setPrompt(prompt, options);
+        // the prompt should never be changed at this point!!!
+        if ( this.currentPromptIdx != prompt.promptIdx ) {
+            console.error("controller.setPrompt: prompt index changed -- assumption violation!!!");
+            alert("controller.setPrompt: should never get here");
+        }
+        var idx = this.currentPromptIdx;
+        var newhash = opendatakit.getHashString(database.getMetaDataValue('formPath'),
+                    database.getMetaDataValue('instanceId'), ''+idx);
+        if ( newhash != window.location.hash ) {
+            window.location.hash = newhash;
         }
     },
     /*
@@ -164,35 +265,63 @@ return {
             return;
         }
     },
-	gotoRef:function(pageRef) {
-		if ( pageRef == null ) {
-			pageRef = '0';
-		}
-		// process the pageRef... -- each part is separated by slashes
+    gotoRef:function(pageRef) {
+        if ( this.prompts.length == 0 ) {
+            console.error("controller.gotoRef: No prompts registered in controller!");
+            alert("controller.gotoRef: No prompts registered in controller!");
+            return;
+        }
+        if ( pageRef == null ) {
+            pageRef = '0';
+        }
+        // process the pageRef... -- each part is separated by slashes
         var hlist = pageRef.split('/');
         var hleading = hlist[0];
 
-		var prmpt; 
-		if ( hleading != null ) {
-			prmpt = this.getPromptByName(hleading);
-			if ( prmpt == null ) {
-				prmpt = this.prompts[0];
-				hlist = [];
-			}
-		} else {
-			prmpt = this.prompts[0];
-			hlist = [];
-		}
+        var prmpt; 
+        if ( hleading != null ) {
+            prmpt = this.getPromptByName(hleading);
+            if ( prmpt == null ) {
+                prmpt = this.prompts[0];
+                hlist = [];
+            }
+        } else {
+            prmpt = this.prompts[0];
+            hlist = [];
+        }
+        
+        if ( prmpt == null ) {
+            alert("controller.gotoRef: null prompt after resolution!");
+            return;
+        }
+        
+        prmpt = this.advanceToScreenPrompt(prmpt);
+        
+        if ( prmpt == null ) {
+            alert("controller.gotoRef: null prompt after advanceToScreenPrompt!");
+            return;
+        }
 
-		if (  this.screenManager == null || prmpt !== this.screenManager.prompt ) {
-			this.gotoPrompt(prmpt, { hlist : hlist });
-		}
+        this.setPrompt(prmpt, { hlist : hlist });
     },
-	destroyScreenManager:function() {
-		if ( this.screenManager != null ) {
-			this.screenManager.cleanUpScreenManager();
-		}
-		this.screenManager = null;
-	}
+    hasPromptHistory: function() {
+        return (this.previousScreenIndices.length !== 0);
+    },
+    clearPromptHistory: function() {
+        this.previousScreenIndices.length = 0;
+    },
+    reset: function(sameForm) {
+        this.clearPromptHistory();
+        if ( this.screenManager != null ) {
+            this.screenManager.cleanUpScreenManager();
+        } else {
+            this.screenManager = new ScreenManager({controller: this});
+        }
+        this.currentPromptIdx = -1;
+        if ( !sameForm ) {
+            this.prompts = [];
+            this.calcs = [];
+        }
+    }
 }
 });

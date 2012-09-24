@@ -1,7 +1,7 @@
 requirejs.config({
     baseUrl: '../collect',
     paths: {
-		// third-party libraries we depend upon 
+        // third-party libraries we depend upon 
         jqmobile : 'libs/jquery.mobile-1.1.1/jquery.mobile-1.1.1',
         //jqmobile : 'libs/jquery.mobile-1.2.0-rc.2/jquery.mobile-1.2.0-rc.2',
         jquery : 'libs/jquery.1.8.1',
@@ -10,14 +10,14 @@ requirejs.config({
         underscore : 'libs/underscore.1.3.3',
         text : 'libs/text.2.0.3',
         mobiscroll : 'libs/mobiscroll/js/mobiscroll-2.0.3.custom.min',
-		// directory paths for resources
-		img : 'img',
+        // directory paths for resources
+        img : 'img',
         templates : 'templates',
-		// top-level objects
+        // top-level objects
         mdl : 'js/mdl',
         promptTypes : 'js/promptTypes',
-		// collect.js -- stub directly loaded
-		// functionality
+        // collect.js -- stub directly loaded
+        // functionality
         prompts : 'js/prompts',
         database : 'js/database',
         controller : 'js/controller',
@@ -75,37 +75,37 @@ requirejs.config({
 requirejs(['jquery'], function($) {
 
 $(document).bind("mobileinit", function () {
-	$.mobile.ajaxEnabled = false;
-	$.mobile.linkBindingEnabled = false;
-	$.mobile.hashListeningEnabled = false;
-	$.mobile.pushStateEnabled = false;
+    $.mobile.ajaxEnabled = false;
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.hashListeningEnabled = false;
+    $.mobile.pushStateEnabled = false;
 });
 
 requirejs(['mdl','opendatakit', 'database','parsequery',
                         'jqmobile', 'builder', 'controller',
                         'prompts'/* mix-in additional prompts and support libs here */], 
         function(mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
-			parsequery.initialize(controller,builder);
+            parsequery.initialize(controller,builder);
 
-			//
-			// register to handle manual #hash changes
-			$(window).bind('hashchange', function(evt) {
-					parsequery.hashChangeHandler(evt);
-			});
-			
-			//
-			// define a function that waits until jquery mobile is initialized
-			// then calls parseParameters() to trigger loading and processing of
-			// the requested form.
-			var f = function() {
-				if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
-					parsequery.parseParameters();
-				} else {
-					setTimeout(f, 200);
-				}
-			};
-		
-			f();
-		
-		});
+            //
+            // register to handle manual #hash changes
+            $(window).bind('hashchange', function(evt) {
+                    parsequery.hashChangeHandler(evt);
+            });
+            
+            //
+            // define a function that waits until jquery mobile is initialized
+            // then calls parseParameters() to trigger loading and processing of
+            // the requested form.
+            var f = function() {
+                if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
+                    parsequery.parseParameters();
+                } else {
+                    setTimeout(f, 200);
+                }
+            };
+        
+            f();
+        
+        });
 });

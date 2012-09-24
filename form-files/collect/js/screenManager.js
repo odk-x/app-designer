@@ -13,39 +13,55 @@ return Backbone.View.extend({
     instance_id:123,
     template: null,
     swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
+    noPreviousPage: function(continuation) {
+        alert("I've forgotten what the previous page was!");
+        continuation();
+    },
+    noNextPage: function(continuation) {
+        alert("No next page!");
+        continuation();
+    },
+    unexpectedError: function(action, ex) {
+        try {
+            alert("Unexpected error: " + action + " Reason: " + ex );
+        } catch (e) {
+        }
+    },
     renderContext:{},
-    initialize: function(controller){
-        this.controller = controller;
+    initialize: function(){
+        this.controller = this.options.controller;
         this.currentPageEl = $('[data-role=page]');
         var that = this;
-        requirejs(['text!templates/screen.handlebars'],function(source) {
-            that.template = Handlebars.compile(source);
-        });
+        var f = function() {
+            requirejs(['text!templates/screen.handlebars'], function(source) {
+                    that.template = Handlebars.compile(source);
+            }, function(err) {
+                if ( err.requireType == "timeout" ) {
+                    setTimeout( f, 100);
+                }
+            });
+        };
+        f();
     },
     cleanUpScreenManager: function(){
         this.undelegateEvents();
         this.swipeEnabled = false;
-		var $e;
-		$e = $('.current');
-		$e.html('<span>Please wait...</span>');
-		$e = $('.odk-toolbar');
-		$e.html('');
-		$e = $('.odk-nav');
-		$e.html('');
-    },
-    getName: function(){
-        if ( this.prompt != null ) {
-            return this.prompt.name;
-        } else {
-            console.log("no prompt showing on this screen!");
-        }
+        var $e;
+        $e = $('.current');
+        $e.html('<span>Please wait...</span>');
+        $e = $('.odk-toolbar');
+        $e.html('');
+        $e = $('.odk-nav');
+        $e.html('');
     },
     setPrompt: function(prompt, jqmAttrs){
         if(!jqmAttrs){
             jqmAttrs = {};
         }
         var that = this;
+        // TODO: tell existing prompt it is inactive (e.g,. semaphore)...
         this.prompt = prompt;
+        this.undelegateEvents();
         this.swipeEnabled = false;
         this.renderContext = {
             showHeader: true,
@@ -59,60 +75,61 @@ return Backbone.View.extend({
             //
             // the absence of page history disabled backward swipe and button.
         };
-		var that = this;
-		var f = function() {
-			if ( that.template ) {
-				//A better way to do this might be to pass a controller interface object to 
-				//onActivate that can trigger screen refreshes, as well as goto other prompts.
-				//(We would not allow prompts to access the controller directly).
-				//When the prompt changes, we could disconnect the interface to prevent the old
-				//prompts from messing with the current screen.
-				that.prompt.onActivate(function(renderContext){
-					var isFirstPrompt = !('previousPageEl' in that);
-					var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
-					if(renderContext){
-						$.extend(that.renderContext, renderContext);
-					}
-					if( !that.renderContext.enableBackNavigation &&
-					!that.renderContext.enableForwardNavigation ){
-						//If we try to render a jqm nav without buttons we get an error
-						//so this flag automatically disables nav in that case.
-						that.renderContext.enableNavigation = false;
-					}
-					/*
-					console.log(that.renderContext);
-					// work through setting the forward/backward enable flags
-					if ( that.renderContext.enableNavigation === undefined ) {
-						that.renderContext.enableNavigation = true;
-					}
-					if ( that.renderContext.enableForwardNavigation === undefined ) {
-						that.renderContext.enableForwardNavigation = 
-							that.renderContext.enableNavigation;
-					}
-					if ( that.renderContext.enableBackNavigation === undefined ) {
-						that.renderContext.enableBackNavigation = 
-							that.renderContext.enableNavigation &&
-							that.controller.hasPromptHistory();
-					}
-					*/
-					that.previousPageEl = that.currentPageEl;
-					that.currentPageEl = that.renderPage(prompt);
-					that.$el.append(that.currentPageEl);
-					$.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
-				});
-			} else {
-				setTimeout( f, 100);
-			}
-		};
-		f();
+        var that = this;
+        var f = function() {
+            if ( that.template && prompt.isInitializeComplete() ) {
+                //A better way to do this might be to pass a controller interface object to 
+                //onActivate that can trigger screen refreshes, as well as goto other prompts.
+                //(We would not allow prompts to access the controller directly).
+                //When the prompt changes, we could disconnect the interface to prevent the old
+                //prompts from messing with the current screen.
+                that.prompt.onActivate(function(renderContext){
+                    var isFirstPrompt = !('previousPageEl' in that);
+                    var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
+                    if(renderContext){
+                        $.extend(that.renderContext, renderContext);
+                    }
+                    if( !that.renderContext.enableBackNavigation &&
+                    !that.renderContext.enableForwardNavigation ){
+                        //If we try to render a jqm nav without buttons we get an error
+                        //so this flag automatically disables nav in that case.
+                        that.renderContext.enableNavigation = false;
+                    }
+                    /*
+                    console.log(that.renderContext);
+                    // work through setting the forward/backward enable flags
+                    if ( that.renderContext.enableNavigation === undefined ) {
+                        that.renderContext.enableNavigation = true;
+                    }
+                    if ( that.renderContext.enableForwardNavigation === undefined ) {
+                        that.renderContext.enableForwardNavigation = 
+                            that.renderContext.enableNavigation;
+                    }
+                    if ( that.renderContext.enableBackNavigation === undefined ) {
+                        that.renderContext.enableBackNavigation = 
+                            that.renderContext.enableNavigation &&
+                            that.controller.hasPromptHistory();
+                    }
+                    */
+                    that.previousPageEl = that.currentPageEl;
+                    that.currentPageEl = that.renderPage(prompt);
+                    that.$el.append(that.currentPageEl);
+                    $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
+                });
+            } else {
+                that.cleanUpScreenManager();
+                setTimeout( f, 100);
+            }
+        };
+        f();
     },
     gotoNextScreen: function(evt){
-		evt.stopPropagation();
+        evt.stopPropagation();
         if(!this.swipeEnabled) return;
         this.controller.gotoNextScreen(); 
     },
     gotoPreviousScreen: function(evt){
-		evt.stopPropagation();
+        evt.stopPropagation();
         if(!this.swipeEnabled) return;
         this.controller.gotoPreviousScreen();
     },
@@ -140,36 +157,8 @@ return Backbone.View.extend({
         prompt.render();
         $contentArea.append(prompt.$el);
         prompt.delegateEvents();
+        this.delegateEvents();
         return $page;
-    },
-    /*
-    //We need to render the next screen in advance so this approach won't work.
-    render: function() {
-        //this.$el.empty();
-        var newPage = this.renderPage(this.prompt);
-        this.$el.append(newPage);
-        return this;
-    },
-    */
-    validate: function(isMoveBackward, context){
-		context.success();
-		/*
-		if ( this.prompt ) {
-			this.prompt.validate(isMoveBackward, context);
-		} else {
-			context.success();
-		}
-		*/
-    },
-    computeNextPrompt: function(continuation){
-        this.prompt.computeNextPrompt(continuation);
-    },
-    beforeMove: function(continuation){
-		if ( this.prompt ) {
-			this.prompt.beforeMove(continuation);
-		} else {
-			continuation();
-		}
     }
 });
 });
