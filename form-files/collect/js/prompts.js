@@ -74,6 +74,9 @@ promptTypes.base = Backbone.View.extend({
     renderContext: {},
     //Template context is an user specified object that overrides the render context.
     templateContext: {},
+    //base html attributes shouldn't be overridden by the user.
+    //they should use htmlAttributes for that.
+    baseHtmlAttributes: {},
     initialize: function() {
         this.initializeTemplate();
         this.initializeRenderContext();
@@ -111,12 +114,18 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hint = this.hint;
         //It's probably not good to get data like this in initialize
         this.renderContext.formName = database.getMetaDataValue('formName');
-        this.renderContext.htmlAttributes = this.htmlAttributes;
+        this.renderContext.htmlAttributes = $.extend(Object.create(this.baseHtmlAttributes), this.htmlAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {
         readyToRenderCallback();
+    },
+    /**
+     * stopPropagation is used in the events map to disable swiping on various elements
+     **/
+    stopPropagation: function(evt){
+        evt.stopPropagation();
     },
     render: function() { 
         this.$el.html(this.template(this.renderContext));
@@ -219,11 +228,8 @@ promptTypes.opening = promptTypes.base.extend({
     //Events copied from inputType, should probably refactor.
     events: {
         "change input": "modification",
-        "swipeleft input": "disableSwipingOnInput",
-        "swiperight input": "disableSwipingOnInput"
-    },
-    disableSwipingOnInput: function(evt){
-        evt.stopPropagation();
+        "swipeleft input": "stopPropagation",
+        "swiperight input": "stopPropagation"
     },
     modification: function(evt) {
         database.setMetaData('instanceName', 'string', this.$('input').val(), function(){});
@@ -458,6 +464,7 @@ promptTypes.select_or_other = promptTypes.base.extend({
         or_other: true
     }
 });
+/*
 promptTypes.dropdownSelect = promptTypes.base.extend({
     type: "dropdownSelect",
     templatePath: "templates/dropdownSelect.handlebars",
@@ -498,6 +505,7 @@ promptTypes.dropdownSelect = promptTypes.base.extend({
         this.$el.html(this.template(context));
     }
 });
+*/
 promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     type: "text",
     datatype: "text",
@@ -507,12 +515,8 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     },
     events: {
         "change input": "modification",
-        "swipeleft .input-container": "disableSwipingOnInput",
-        "swiperight .input-container": "disableSwipingOnInput"
-    },
-    disableSwipingOnInput: function(evt){
-        //console.log("Event stopped"); console.log(evt);
-        evt.stopPropagation();
+        "swipeleft .input-container": "stopPropagation",
+        "swiperight .input-container": "stopPropagation"
     },
     debouncedModification: _.debounce(function(that, evt) {
         //a debounced function will postpone execution until after wait (parameter 2)
@@ -557,6 +561,9 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
 promptTypes.integer = promptTypes.inputType.extend({
     type: "integer",
     datatype: "integer",
+    baseHtmlAttributes: {
+        'type':'number'
+    },
     invalidMessage: "Integer value expected",
     validateValue: function(value) {
         return !isNaN(parseInt(value));
@@ -565,9 +572,71 @@ promptTypes.integer = promptTypes.inputType.extend({
 promptTypes.number = promptTypes.inputType.extend({
     type: "number",
     datatype: "number",
+    baseHtmlAttributes: {
+        'type':'number'
+    },
     invalidMessage: "Numeric value expected",
     validateValue: function(value) {
         return !isNaN(parseFloat(value));
+    }
+});
+promptTypes.datetime = promptTypes.inputType.extend({
+    type: "date",
+    datatype: "string",
+    baseHtmlAttributes: {
+        'type':'date'
+    },
+    scrollerAttributes: {
+        preset: 'datetime',
+        theme: 'jqm'
+        //Avoiding inline because there
+        //can be some debouncing issues
+        //display: 'inline',
+        //Warning: mixed/clickpick mode doesn't work on galaxy nexus
+        //mode: 'scroll'
+    },
+    events: {
+        "change input": "modification",
+        "swipeleft input": "stopPropagation",
+        "swiperight input": "stopPropagation"
+    },
+    render: _.debounce(function() {
+        var that = this;
+        require(["mobiscroll"], function() {
+            $.scroller.themes.jqm.defaults = {
+                jqmBody: 'd',
+                jqmHeader:'d',
+                jqmWheel: 'd',
+                jqmClickPick: 'd',
+                jqmSet: 'd',
+                jqmCancel: 'd'
+            };
+            that.$el.html(that.template(that.renderContext));
+            //Triggering create seems to prevent some issues where jQm styles are not applied.
+            that.$el.trigger('create');
+            that.$('input').scroller(that.scrollerAttributes);
+        });
+        return this;
+    }, 100)
+});
+promptTypes.date = promptTypes.datetime.extend({
+    type: "time",
+    baseHtmlAttributes: {
+        'type':'date'
+    },
+    scrollerAttributes: {
+        preset: 'date',
+        theme: 'jqm'
+    }
+});
+promptTypes.time = promptTypes.datetime.extend({
+    type: "string",
+    baseHtmlAttributes: {
+        'type':'time'
+    },
+    scrollerAttributes: {
+        preset: 'time',
+        theme: 'jqm'
     }
 });
 /**

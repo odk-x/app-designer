@@ -11,19 +11,21 @@
     {{/if}}
     </div>
     {{#if showFooter}}
-    <div data-role="footer" class="odk-nav ui-state-persist" data-theme="d">
+    <div class="odk-nav">
+    <div data-role="footer" class="ui-state-persist" data-theme="d">
         {{#if enableNavigation}}
             <div data-role="navbar" class="ui-state-persist">
                 <ul>
                 {{#if enableBackNavigation}}
-                    <li><a class="odk-prev-btn" data-iconpos="top" data-icon="arrow-l">back</a></li>
+                    <li><a class="odk-prev-btn" data-icon="arrow-l" data-iconpos="left">back</a></li>
                 {{/if}}
                 {{#if enableForwardNavigation}}
-                    <li><a class="odk-next-btn" data-iconpos="top" data-icon="arrow-r">next</a></li>
+                    <li><a class="odk-next-btn" data-icon="arrow-r" data-iconpos="right">next</a></li>
                 {{/if}}
                 </ul>
             </div>
         {{/if}}
+    </div>
     </div>
     {{/if}}
 </div>

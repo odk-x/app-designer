@@ -8,6 +8,7 @@ requirejs.config({
         handlebars : 'libs/handlebars.1.0.0.beta.6',
         underscore : 'libs/underscore.1.3.3',
         text : 'libs/text.2.0.3',
+        mobiscroll : 'libs/mobiscroll/js/mobiscroll-2.0.3.custom.min',
         // directory paths for resources
         img : 'img',
         templates : 'templates',
@@ -63,6 +64,9 @@ requirejs.config({
             //Once loaded, use the global 'Handlebars' as the
             //module value.
             exports: 'Handlebars'
+        },
+        'mobiscroll': {
+            deps: ['jquery']
         }
     }
 });

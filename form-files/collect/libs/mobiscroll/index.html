@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <title>Mobiscroll</title>
+
+    <script src="../jquery.1.8.1.js"></script>
+    <script src="../jquery.mobile-1.1.1/jquery.mobile-1.1.1.min.js"></script>
+    <link rel="stylesheet" href="../jquery.mobile-1.1.1/jquery.mobile-1.1.1.min.css" />
+
+    <!--Includes-->
+	<link href="css/mobiscroll-2.0.3.custom.min.css" rel="stylesheet" type="text/css" />
+	<script src="js/mobiscroll-2.0.3.custom.min.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        body {
+            font-family: arial, verdana, sans-serif;
+            font-size: 12px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            var curr = new Date().getFullYear();
+            var opt = {
+
+            }
+                opt.date = {preset : 'date'};
+	opt.datetime = { preset : 'datetime', minDate: new Date(2012,3,10,9,22), maxDate: new Date(2014,7,30,15,44), stepMinute: 5  };
+	opt.time = {preset : 'time'};
+	<!--Script-->
+
+            $('select.changes').bind('change', function() {
+                var demo = $('#demo').val();
+                $(".demos").hide();
+                if (!($("#demo_"+demo).length))
+                    demo = 'default';
+
+                $("#demo_" + demo).show();
+                $('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt[$('#demo').val()], { theme: $('#theme').val(), mode: $('#mode').val(), display: $('#display').val(), lang: $('#language').val() }));
+            });
+
+            $('#demo').trigger('change');
+        });
+    </script>
+</head>
+
+<body>
+    <div data-role="page" data-theme="b">
+        <div data-role="header" data-theme="a">
+            <h1>Mobiscroll</h1>
+        </div>
+
+        <div data-role="content" data-theme="d">
+            <form id="testform">
+                <div data-role="fieldcontain">
+                    <label for="theme">Theme</label>
+                    <select name="theme" id="theme" class="changes">
+                        <option value="default">Default</option>
+    <option value="jqm">Jquery Mobile</option>
+	<!--Themes-->
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="mode">Mode</label>
+                    <select name="mode" id="mode" class="changes">
+                        <option value="scroller">Scroller</option>
+                        <option value="clickpick">Clickpick</option>
+                        <option value="mixed">Mixed</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="demo">Demo</label>
+                    <select name="demo" id="demo" class="changes">
+                        <option value="date" selected>Date</option>
+	<option value="datetime" >Datetime</option>
+	<option value="time" >Time</option>
+	<!--Demos-->
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="display">Display</label>
+                    <select name="display" id="display" class="changes">
+                        <option value="modal">Modal</option>
+                        <option value="inline">Inline</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="language">Language</label>
+                    <select name="language" id="language" class="changes">
+                        <option value="">English</option>
+                        <!--Lang-->
+                    </select>
+                </div>
+
+                <div data-role="fieldcontain">
+                    <div id="demo_default" class="demos">
+                        <label for="test_default">Click here to try</label>
+                        <input type="text" name="test_default" id="test_default" />
+                    </div>
+                    <!--Html-->
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
