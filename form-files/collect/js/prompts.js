@@ -66,7 +66,6 @@ Handlebars.registerHelper('substitute', function(options) {
 promptTypes.base = Backbone.View.extend({
     className: "current",
     type: "base",
-    required: false,
     database: database,
     mdl: mdl,
     // track how many times we've tried to retrieve and compile the 
@@ -168,9 +167,13 @@ promptTypes.base = Backbone.View.extend({
             
             if ( isRequired && (that.getValue() == null) ) {
                 that.valid = false;
+            } else if ( that.getValue() == null || that.getValue().length == 0) {
+                that.valid = true;
             } else if ( that.validateValue || that.validate ) {
                 if ( that.validateValue ) {
                     that.valid = that.validateValue();
+                } else {
+                    that.valid = true;
                 }
                 if ( that.valid && that.validate ) {
                     that.valid = that.validate();
@@ -546,7 +549,7 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         //This could cause problems since the debounced function could fire after a page change.
         var renderContext = this.renderContext;
         var value = this.$('input').val();
-        this.setValue(value, function() {
+        this.setValue((value.length == 0 ? null : value), function() {
             renderContext.value = value;
             renderContext.invalid = !that.validateValue();
             that.render();
