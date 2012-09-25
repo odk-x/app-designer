@@ -114,6 +114,7 @@ return Backbone.View.extend({
                     that.previousPageEl = that.currentPageEl;
                     that.currentPageEl = that.renderPage(prompt);
                     that.$el.append(that.currentPageEl);
+                    that.delegateEvents();
                     $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
                 });
             } else {
@@ -135,6 +136,7 @@ return Backbone.View.extend({
     },
     handlePagechange: function(evt){
         console.log('Page change');
+        this.prompt.delegateEvents();
         this.swipeEnabled = true;
         if(this.previousPageEl){
             this.previousPageEl.remove();
@@ -156,8 +158,6 @@ return Backbone.View.extend({
         var $contentArea = $page.find('.odk-container');
         prompt.render();
         $contentArea.append(prompt.$el);
-        prompt.delegateEvents();
-        this.delegateEvents();
         return $page;
     }
 });
