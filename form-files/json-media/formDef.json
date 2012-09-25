@@ -85,7 +85,7 @@
         },
         {
             "name": "name", 
-            "validate": true,
+            "validate": "{{name}}.length > 4",
             "type": "text", 
             "param": null, 
             "label": {

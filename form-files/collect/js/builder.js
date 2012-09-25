@@ -21,7 +21,9 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
     return {
     column_types: {
         condition: 'formula',
+        required: 'formula',
         validate: 'formula',
+        calculate: 'formula',
         templatePath: 'requirejs_path',
         image: 'app_path_localized',
         audio: 'app_path_localized',
@@ -40,9 +42,6 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                     return "this.database.getDataValue('" + variableName + "')";
                 }
             content = content.replace(variableRegex, replaceCallback);
-            //var result = 'if(' + content + '){that.baseValidate(context);} else {context.failure()}';
-            //result = 'console.log("test");' + result;
-            //How best to refrence current value?
             var result = '(function(context){return ' + content + '})';
             console.log(result);
             return evalInEnvironment(result);

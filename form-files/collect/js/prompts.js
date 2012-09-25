@@ -69,6 +69,11 @@ promptTypes.base = Backbone.View.extend({
     required: false,
     database: database,
     mdl: mdl,
+    // track how many times we've tried to retrieve and compile the 
+    // handlebars template for this prompt.
+    initializeTemplateMaxTryCount: 4,
+    initializeTemplateTryCount: 0,
+    initializeTemplateFailed: false,
     //renderContext is a dynamic object to be passed into the render function.
     //renderContext is meant to be private.
     renderContext: {},
@@ -87,11 +92,19 @@ promptTypes.base = Backbone.View.extend({
         var that = this;
         var f = function() {
             if(that.templatePath){
+                that.initializeTemplateTryCount++;
                 requirejs(['text!'+that.templatePath], function(source) {
                     that.template = Handlebars.compile(source);
                 }, function(err) {
                     if ( err.requireType == "timeout" ) {
-                        setTimeout( f, 100);
+                        if ( that.initializeTemplateTryCount >
+                                that.initializeTemplateMaxTryCount ) {
+                            that.initializeTemplateFailed = true;
+                        } else {
+                            setTimeout( f, 100);
+                        }
+                    } else {
+                        that.initializeTemplateFailed = true;
                     }
                 });
             }
@@ -99,7 +112,7 @@ promptTypes.base = Backbone.View.extend({
         f();
     },
     isInitializeComplete: function() {
-        return (this.template != null);
+        return (this.templatePath == null || this.template != null);
     },
     initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
@@ -141,33 +154,40 @@ promptTypes.base = Backbone.View.extend({
             failure: function() {}
         };
         context = $.extend(defaultContext, context);
-
-        function callback(value) {
-            if (that.required) {
-                that.valid = value !== '';
+        
+        if ( that.name == null ) {
+            // no data validation if no persistence...
+            that.valid = true;
+        } else {
+            var isRequired;
+            if ( that.required ) {
+                isRequired = that.required();
+            } else {
+                isRequired = false;
             }
-            else {
+            
+            if ( isRequired && (that.getValue() == null) ) {
+                that.valid = false;
+            } else if ( that.validateValue || that.validate ) {
+                if ( that.validateValue ) {
+                    that.valid = that.validateValue();
+                }
+                if ( that.valid && that.validate ) {
+                    that.valid = that.validate();
+                }
+            } else {
                 that.valid = true;
             }
-            if (that.valid) {
-                context.success();
-            }
-            else {
-                context.failure();
-            }
         }
-        if ( this.name == null ) {
-            // no data validation if no persistence...
+            
+        if (that.valid) {
             context.success();
-        } else if ('newValue' in context) {
-            callback(context.newValue);
-        }
-        else {
-            callback(that.getValue());
+        } else {
+            context.failure();
         }
     },
-    validate: function(isMoveBackward, context) {
-        this.baseValidate(isMoveBackward, context);
+    validate: function() {
+        return true;
     },
     getValue: function() {
         return database.getDataValue(this.name);
@@ -528,17 +548,8 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         var value = this.$('input').val();
         this.setValue(value, function() {
             renderContext.value = value;
-
-            that.validate(false, {
-                success: function() {
-                    renderContext.invalid = !that.validateValue(value);
-                    that.render();
-                },
-                failure: function() {
-                    renderContext.invalid = true;
-                    that.render();
-                }
-            });
+            renderContext.invalid = !that.validateValue();
+            that.render();
         });
     }, 600),
     modification: function(evt) {
@@ -554,7 +565,7 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         var that = this;
         that.setValue(this.$('input').val(), context.success, context.failure );
     },
-    validateValue: function(value) {
+    validateValue: function() {
         return true;
     }
 });
@@ -565,8 +576,8 @@ promptTypes.integer = promptTypes.inputType.extend({
         'type':'number'
     },
     invalidMessage: "Integer value expected",
-    validateValue: function(value) {
-        return !isNaN(parseInt(value));
+    validateValue: function() {
+        return !isNaN(parseInt(this.getValue()));
     }
 });
 promptTypes.number = promptTypes.inputType.extend({
@@ -576,8 +587,8 @@ promptTypes.number = promptTypes.inputType.extend({
         'type':'number'
     },
     invalidMessage: "Numeric value expected",
-    validateValue: function(value) {
-        return !isNaN(parseFloat(value));
+    validateValue: function() {
+        return !isNaN(parseFloat(this.getValue()));
     }
 });
 promptTypes.datetime = promptTypes.inputType.extend({
@@ -810,7 +821,7 @@ promptTypes.calculate = promptTypes.base.extend({
         alert("calculate.onActivate: Should never be called!");
     },
     evaluate: function() {
-        return this.formula();
+        return this.calculate();
     }
 });
 promptTypes.label = promptTypes.base.extend({
@@ -851,7 +862,7 @@ promptTypes.note = promptTypes.base.extend({
 });
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
-    autoAdvance: "false",
+    autoAdvance: false,
     modification: function(evt) {
         var that = this;
         var acknowledged = $('#acknowledge').is(':checked');

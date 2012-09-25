@@ -36,7 +36,7 @@ return {
         }
         try {
             if ( prompt ) {
-                prompt.validate(isMoveBackward, context);
+                prompt.baseValidate(isMoveBackward, context);
             } else {
                 context.success();
             }
