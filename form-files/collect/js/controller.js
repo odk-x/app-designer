@@ -311,6 +311,7 @@ return {
         this.previousScreenIndices.length = 0;
     },
     reset: function(sameForm) {
+        console.log("Controller Reset");
         this.clearPromptHistory();
         if ( this.screenManager != null ) {
             this.screenManager.cleanUpScreenManager();

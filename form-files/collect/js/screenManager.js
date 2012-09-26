@@ -124,11 +124,20 @@ return Backbone.View.extend({
         };
         f();
     },
-    gotoNextScreen: function(evt){
+    gotoNextScreen: _.debounce(function(evt){
+        /*
+        This debounce is a total hack.
+        The bug it is trying to solve is the issue
+        where the first page of the survey is skipped. 
+        The problem stems from swipe events being registered twice.
+        Only the opening prompt has problems because it does some unique things
+        in it's beforeMove function.
+        */
+        console.log('next');
         evt.stopPropagation();
         if(!this.swipeEnabled) return;
         this.controller.gotoNextScreen(); 
-    },
+    }, 100),
     gotoPreviousScreen: function(evt){
         evt.stopPropagation();
         if(!this.swipeEnabled) return;

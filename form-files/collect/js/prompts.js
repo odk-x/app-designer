@@ -258,7 +258,9 @@ promptTypes.opening = promptTypes.base.extend({
         database.setMetaData('instanceName', 'string', this.$('input').val(), function(){});
     },
     beforeMove: function(context) {
-        database.setMetaData('instanceName', 'string', this.$('input').val(), context.success, context.failure);
+        database.setMetaData('instanceName', 'string', this.$('input').val(),
+            context.success,
+            context.failure);
     }
 });
 promptTypes.finalize = promptTypes.base.extend({
