@@ -1,10 +1,10 @@
 <form>
+    {{> labelHint}}
     <fieldset data-role="controlgroup"
         {{#eachProperty htmlAttributes}}
             {{property}}="{{value}}"
         {{/eachProperty}}
         >
-        <legend>{{> labelHint}}</legend>
         {{#each choices}}
             <input
                 {{#if ../select_one}}
@@ -39,7 +39,9 @@
                     {{#unless other.selected}}
                         disabled="true"
                     {{/unless}} />
-
+        {{/if}}
+        {{#if select_one}}
+            <button type="button" class="deselect">Deselect</button>
         {{/if}}
     </fieldset>
 </form>

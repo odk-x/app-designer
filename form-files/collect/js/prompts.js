@@ -139,7 +139,7 @@ promptTypes.base = Backbone.View.extend({
     stopPropagation: function(evt){
         evt.stopPropagation();
     },
-    render: function() { 
+    render: function() {
         this.$el.html(this.template(this.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         this.$el.trigger('create');
@@ -193,6 +193,10 @@ promptTypes.base = Backbone.View.extend({
         return true;
     },
     getValue: function() {
+        if(!this.name) {
+            console.error(this);
+            throw "Cannot get value of prompt with no name.";
+        }
         return database.getDataValue(this.name);
     },
     setValue: function(value, onSuccessfulSave, onFailure) {
@@ -422,12 +426,28 @@ promptTypes.repeat = promptTypes.base.extend({
         //TODO: Launch new instance of collect
     }
 });
-promptTypes.select = promptTypes.base.extend({
+promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     type: "select",
     datatype: "text",
     templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification"
+    },
+    updateRenderValue: function(formValue) {
+        console.error(formValue);
+        var that = this;
+        that.renderContext.value = formValue;
+        that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
+            if ( formValue != null ) {
+                choice.checked = _.any(formValue, function(valueObject) {
+                    return choice.name === valueObject.value;
+                });
+            } else {
+                choice.checked = false;
+            }
+            return choice;
+        });
+        that.render();
     },
     // TODO: choices should be cloned and allow calculations in the choices
     // perhaps a null 'name' would drop the value from the list of choices...
@@ -437,28 +457,21 @@ promptTypes.select = promptTypes.base.extend({
         console.log("select modification");
         console.log(this.$('form').serializeArray());
         var formValue = (this.$('form').serializeArray());
-        var saveValue = (formValue == null) ? null : JSON.stringify(formValue);
+        var saveValue = formValue ? JSON.stringify(formValue) : null;
         this.setValue(saveValue, function() {
-            that.renderContext.value = formValue;
-            that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
-                if ( formValue != null ) {
-                    choice.checked = _.any(that.renderContext.value, function(valueObject){
-                        return choice.name === valueObject.value;
-                    });
-                } else {
-                    choice.checked = false;
-                }
-                return choice;
-            });
-            that.render();
+            that.updateRenderValue(formValue);
         });
     },
     onActivate: function(readyToRenderCallback) {
         var that = this;
-        if(this.param in this.form.choices){
-            that.renderContext.choices = this.form.choices[this.param];
+        if(this.param in this.form.choices) {
+            //Very important.
+            //We need to clone the choices so their values are unique to the prompt.
+            that.renderContext.choices = _.map(this.form.choices[this.param], _.clone);
         }
         var saveValue = that.getValue();
+        that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
+        /*
         that.renderContext.value = (saveValue == null) ? null : JSON.parse(saveValue);
         that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
             if ( that.renderContext.value != null ) {
@@ -470,21 +483,32 @@ promptTypes.select = promptTypes.base.extend({
             }
             return choice;
         });
+        */
         readyToRenderCallback();
     }
 });
 promptTypes.select_one = promptTypes.select.extend({
     renderContext: {
         select_one: true
+    },
+    events: {
+        "change input": "modification",
+        "click .deselect": "deselect"
+    },
+    deselect: function(evt) {
+        var that = this;
+        this.setValue(null, function() {
+            that.updateRenderValue(null);
+        });
     }
 });
-promptTypes.select_one_or_other = promptTypes.select.extend({
+promptTypes.select_one_or_other = promptTypes.select_one.extend({
     renderContext: {
         select_one: true,
         or_other: true
     }
 });
-promptTypes.select_or_other = promptTypes.base.extend({
+promptTypes.select_or_other = promptTypes.select.extend({
     renderContext: {
         or_other: true
     }
@@ -787,6 +811,20 @@ promptTypes.screen = promptTypes.base.extend({
         }
         return true;
     },
+    baseValidate: function(isMoveBackward, context) {
+        var that = this;
+        var defaultContext = {
+            success: function() {},
+            failure: function() {}
+        };
+        var subPromptContext = {
+            success: _.after(this.prompts.length, context.success),
+            failure: _.once(context.failure)
+        }
+        $.each(this.prompts, function(idx, prompt){
+            prompt.baseValidate(isMoveBackward, subPromptContext);
+        });
+    },
     onActivateHelper: function(idx, readyToRenderCallback) {
         var that = this;
         return function() {
@@ -874,7 +912,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         this.setValue(acknowledged, function() {
             that.renderContext.choices = [{
                 "name": "acknowledge",
-                "label": "acknowledge",
+                "label": "Acknowledge",
                 "checked": acknowledged
             }];
             if(acknowledged && that.autoAdvance) {
@@ -893,7 +931,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         
         that.renderContext.choices = [{
             "name": "acknowledge",
-            "label": "acknowledge",
+            "label": "Acknowledge",
             "checked": acknowledged
         }];
         readyToRenderCallback();

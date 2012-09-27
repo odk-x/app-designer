@@ -43,6 +43,7 @@ return {
         } catch(ex) {
             context.failure(function() {
                 if ( that.screenManager != null ) {
+                    console.error(prompt);
                     that.screenManager.unexpectedError("validate", ex);
                 }
             });
@@ -109,6 +110,15 @@ return {
         var oldprompt = null;
         do {
             oldprompt = prompt;
+            
+            //Skip prompts that have a condition that evals to false.
+            if('condition' in prompt) {
+                if ( !prompt.condition() ) {
+                    prompt = that.getPromptByName(prompt.promptIdx + 1);
+                    continue;
+                }
+            }
+            
             if ( prompt.type == "label" ) {
                 prompt = that.getPromptByName(prompt.promptIdx + 1);
             } else if ( prompt.type == "goto" ) {

@@ -138,11 +138,11 @@ return Backbone.View.extend({
         if(!this.swipeEnabled) return;
         this.controller.gotoNextScreen(); 
     }, 100),
-    gotoPreviousScreen: function(evt){
+    gotoPreviousScreen: _.debounce(function(evt){
         evt.stopPropagation();
         if(!this.swipeEnabled) return;
         this.controller.gotoPreviousScreen();
-    },
+    }, 100),
     handlePagechange: function(evt){
         console.log('Page change');
         this.prompt.delegateEvents();
