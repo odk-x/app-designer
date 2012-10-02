@@ -137,7 +137,9 @@ promptTypes.base = Backbone.View.extend({
      * stopPropagation is used in the events map to disable swiping on various elements
      **/
     stopPropagation: function(evt){
-        evt.stopPropagation();
+        console.log('stopProp');
+        console.log(evt);
+        evt.stopImmediatePropagation();
     },
     render: function() {
         this.$el.html(this.template(this.renderContext));
@@ -154,7 +156,7 @@ promptTypes.base = Backbone.View.extend({
         };
         context = $.extend(defaultContext, context);
         
-        if ( that.name == null ) {
+        if ( !('name' in that) ) {
             // no data validation if no persistence...
             that.valid = true;
         } else {

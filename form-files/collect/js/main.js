@@ -24,7 +24,7 @@ requirejs.config({
         builder : 'js/builder',
         screenManager : 'js/screenManager',
         parsequery : 'js/parsequery',
-        opendatakit : 'js/opendatakit',
+        opendatakit : 'js/opendatakit'
     },
     shim: {
         'jquery': {

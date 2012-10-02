@@ -60,8 +60,11 @@ return Backbone.View.extend({
         }
         var that = this;
         // TODO: tell existing prompt it is inactive (e.g,. semaphore)...
-        this.prompt = prompt;
+        if(this.prompt) {
+            this.prompt.undelegateEvents();
+        }
         this.undelegateEvents();
+        this.prompt = prompt;
         this.swipeEnabled = false;
         this.renderContext = {
             showHeader: true,
@@ -165,8 +168,9 @@ return Backbone.View.extend({
         $page.attr('data-content-theme', "d");
         $page.html(this.template(this.renderContext));
         var $contentArea = $page.find('.odk-container');
+        prompt.setElement($contentArea);
         prompt.render();
-        $contentArea.append(prompt.$el);
+        //$contentArea.append(prompt.$el);
         return $page;
     }
 });
