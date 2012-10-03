@@ -13,6 +13,12 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                 return false;
             }
         }
+        //v gets a value by name and parses it.
+        //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
+        function V(valueName) {
+            console.error(database.getDataValue(valueName));
+            return JSON.parse(database.getDataValue(valueName));
+        }
         return function(code){
             return eval(code);
         };

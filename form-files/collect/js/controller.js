@@ -105,6 +105,7 @@ return {
      *
      * return that renderable screen prompt.
      */
+    /*
     advanceToScreenPrompt: function(prompt) {
         var that = this;
         var oldprompt = null;
@@ -140,6 +141,42 @@ return {
         } while ( prompt && oldprompt != prompt );
         return prompt;
     },
+    */
+    advanceToScreenPrompt: function(prompt, callback) {
+        var nextPrompt;
+        var that = this;
+
+
+        if('condition' in prompt) {
+            if ( !prompt.condition() ) {
+                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+            }
+        }
+        if ( prompt.type == "label" ) {
+            nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+        } else if ( prompt.type == "calculate" ) {
+            prompt.evaluate(function(){
+                nextPrompt = that.getPromptByName(prompt.promptIdx + 1)
+                that.advanceToScreenPrompt(nextPrompt, callback);
+            });
+            return;
+        } else if ( prompt.type == "goto" ||  prompt.type == "goto_if") {
+            try {
+                if ( prompt.condition() ) {
+                    nextPrompt = that.getPromptByLabel(prompt.param);
+                } else {
+                    nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+                }
+            } catch (ex) {
+                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+            }
+        }
+        if(nextPrompt) {
+            that.advanceToScreenPrompt(nextPrompt, callback);
+        } else {
+            callback(prompt);
+        }
+    },
     gotoNextScreen: function(options){
         var that = this;
         that.beforeMove({
@@ -165,20 +202,20 @@ return {
                             return;
                         }
                         
-                        prompt = that.advanceToScreenPrompt(prompt);
-                        
-                        if(prompt) {
-                            console.log("gotoNextScreen: nextPrompt: " + prompt.promptIdx + " ms: " + (+new Date()) + 
-                            " page: " +    that.currentPromptIdx);
-                            // todo -- change to use hash?
-                            that.setPrompt(prompt, options);
-                        } else {
-                            console.log("gotoNextScreen: noNextPage ms: " + (+new Date()) +
-                            " page: " + that.currentPromptIdx);
-                            that.screenManager.noNextPage(function() {
-                                that.gotoRef("0");
-                            });
-                        }
+                        that.advanceToScreenPrompt(prompt, function(prompt){
+                            if(prompt) {
+                                console.log("gotoNextScreen: nextPrompt: " + prompt.promptIdx + " ms: " + (+new Date()) + 
+                                " page: " +    that.currentPromptIdx);
+                                // todo -- change to use hash?
+                                that.setPrompt(prompt, options);
+                            } else {
+                                console.log("gotoNextScreen: noNextPage ms: " + (+new Date()) +
+                                " page: " + that.currentPromptIdx);
+                                that.screenManager.noNextPage(function() {
+                                    that.gotoRef("0");
+                                });
+                            }
+                        });
                     },
                     failure: function(validationFailAction) {
                         console.log("gotoNextScreen: validate failure ms: " + (+new Date()) + 
@@ -279,6 +316,7 @@ return {
         }
     },
     gotoRef:function(pageRef) {
+        var that = this;
         if ( this.prompts.length == 0 ) {
             console.error("controller.gotoRef: No prompts registered in controller!");
             alert("controller.gotoRef: No prompts registered in controller!");
@@ -308,14 +346,15 @@ return {
             return;
         }
         
-        prmpt = this.advanceToScreenPrompt(prmpt);
+        this.advanceToScreenPrompt(prmpt, function(prompt){
+            if ( prompt == null ) {
+                alert("controller.gotoRef: null prompt after advanceToScreenPrompt!");
+                return;
+            }
+    
+            that.setPrompt(prompt, { hlist : hlist });    
+        });
         
-        if ( prmpt == null ) {
-            alert("controller.gotoRef: null prompt after advanceToScreenPrompt!");
-            return;
-        }
-
-        this.setPrompt(prmpt, { hlist : hlist });
     },
     hasPromptHistory: function() {
         return (this.previousScreenIndices.length !== 0);

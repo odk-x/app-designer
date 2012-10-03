@@ -19,18 +19,12 @@
     ], 
     "survey": [
         {
-            "calculation": "2+2", 
-            "type": "calculate", 
-            "name": "calculatedValue", 
-            "param": null
-        }, 
-        {
             "name": "name", 
             "hint": "Please use your full name", 
             "type": "text", 
             "param": null, 
             "label": {
-                "en_us": "Enter your name {{calculatedValue.value}}"
+                "en_us": "Enter your name"
             }
         }, 
         {
@@ -84,6 +78,21 @@
             "param": "continents", 
             "label": {
                 "en_us": "Which continents have you visited?"
+            }
+        }, 
+        {
+            "calculation": "selected({{visited_continents}}, 'NorthAmerica')", 
+            "type": "calculate", 
+            "name": "ask_about_seattle", 
+            "param": null
+        }, 
+        {
+            "name": "visited_seattle", 
+            "param": "yesno", 
+            "type": "select_one", 
+            "condition": "V('ask_about_seattle')", 
+            "label": {
+                "en_us": "Have you visited Seattle?"
             }
         }, 
         {
@@ -150,7 +159,7 @@
         "rating": {
             "type": "integer"
         }, 
-        "calculatedValue": {
+        "visited_seattle": {
             "type": "string"
         }, 
         "name": {
@@ -173,6 +182,9 @@
         }, 
         "audio_test": {
             "type": "audio/*"
+        }, 
+        "ask_about_seattle": {
+            "type": "string"
         }, 
         "video_test": {
             "type": "video/*"

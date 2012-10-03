@@ -878,10 +878,8 @@ promptTypes.calculate = promptTypes.base.extend({
     },
     calculation: function() {
     },
-    evaluate: function() {
-        var returnValue = this.calculation();
-        this.setValue(returnValue, function(){});
-        return returnValue;
+    evaluate: function(callback) {
+        this.setValue(this.calculation(), callback);
     }
 });
 promptTypes.label = promptTypes.base.extend({
