@@ -815,15 +815,18 @@ promptTypes.screen = promptTypes.base.extend({
     },
     baseValidate: function(isMoveBackward, context) {
         var that = this;
-        var defaultContext = {
-            success: function() {},
-            failure: function() {}
-        };
-        var subPromptContext = {
-            success: _.after(this.prompts.length, context.success),
+        var subPrompts, subPromptContext;
+        subPrompts = _.filter(this.prompts, function(prompt) {
+            if('condition' in prompt) {
+                return prompt.condition();
+            }
+            return true;
+        });
+        subPromptContext = {
+            success: _.after(subPrompts.length, context.success),
             failure: _.once(context.failure)
         }
-        $.each(this.prompts, function(idx, prompt){
+        $.each(subPrompts, function(idx, prompt){
             prompt.baseValidate(isMoveBackward, subPromptContext);
         });
     },
@@ -838,6 +841,7 @@ promptTypes.screen = promptTypes.base.extend({
             }
         }
     },
+    //TODO: Think about how to handle condition functions in onActivate
     onActivate: function(readyToRenderCallback) {
         if ( this.prompts.length == 0 ) {
             readyToRenderCallback();
@@ -847,9 +851,15 @@ promptTypes.screen = promptTypes.base.extend({
         }
     },
     render: function(){
+        var subPrompts = _.filter(this.prompts, function(prompt) {
+            if('condition' in prompt) {
+                return prompt.condition();
+            }
+            return true;
+        });
         this.$el.html('<div class="odk odk-prompts">');
         var $prompts = this.$('.odk-prompts');
-        $.each(this.prompts, function(idx, prompt){
+        $.each(subPrompts, function(idx, prompt){
             $prompts.append(prompt.render().$el);
             prompt.delegateEvents();
         });
