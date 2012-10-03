@@ -23,7 +23,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
         condition: 'formula',
         required: 'formula',
         validate: 'formula',
-        calculate: 'formula',
+        calculation: 'formula',
         templatePath: 'requirejs_path',
         image: 'app_path_localized',
         audio: 'app_path_localized',
@@ -42,7 +42,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                     return "this.database.getDataValue('" + variableName + "')";
                 }
             content = content.replace(variableRegex, replaceCallback);
-            var result = '(function(context){return ' + content + '})';
+            var result = '(function(context){return (' + content + ');})';
             console.log(result);
             return evalInEnvironment(result);
         },
@@ -187,6 +187,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                 settings: surveyJson.settings,
                 widgets: widgets
             };
+            /*
             var calcs = [];
             var navs = [];
             for ( var i = 0 ; i < surveyJson.survey.length ; ++i ) {
@@ -197,6 +198,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                     navs[navs.length] = e;
                 }
             }
+            */
             var prompts = ([{
                 "type": "goto_if",
                 "condition": function() {
@@ -221,7 +223,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                 type: "opening",
                 name: "_opening",
                 label: "opening page"
-            }]).concat(navs).concat([{
+            }]).concat(surveyJson.survey).concat([{
                 type: "finalize",
                 name: "_finalize",
                 label: "Save Form"
@@ -233,7 +235,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
 
             console.log('initializing');
             that.form.prompts = this.initializePrompts(prompts);
-            that.form.calcs = this.initializePrompts(calcs);
+            //that.form.calcs = this.initializePrompts(calcs);
             controller.prompts = that.form.prompts;
             controller.calcs = that.form.calcs;
             console.log('starting');

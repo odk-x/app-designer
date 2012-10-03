@@ -121,6 +121,9 @@ return {
             
             if ( prompt.type == "label" ) {
                 prompt = that.getPromptByName(prompt.promptIdx + 1);
+            } else if ( prompt.type == "calculate" ) {
+                prompt.evaluate();
+                prompt = that.getPromptByName(prompt.promptIdx + 1);
             } else if ( prompt.type == "goto" ) {
                 prompt = that.getPromptByLabel(prompt.param);
             } else if ( prompt.type == "goto_if" ) {

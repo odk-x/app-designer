@@ -19,12 +19,18 @@
     ], 
     "survey": [
         {
+            "calculation": "2+2", 
+            "type": "calculate", 
+            "name": "calculatedValue", 
+            "param": null
+        }, 
+        {
             "name": "name", 
             "hint": "Please use your full name", 
             "type": "text", 
             "param": null, 
             "label": {
-                "en_us": "Enter your name"
+                "en_us": "Enter your name {{calculatedValue.value}}"
             }
         }, 
         {
@@ -143,6 +149,9 @@
     "datafields": {
         "rating": {
             "type": "integer"
+        }, 
+        "calculatedValue": {
+            "type": "string"
         }, 
         "name": {
             "type": "string"

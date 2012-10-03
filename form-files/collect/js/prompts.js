@@ -865,7 +865,8 @@ promptTypes.screen = promptTypes.base.extend({
         });
     }
 });
-//TODO
+// Calculates are evaluated as they are encountered in the survey control flow.
+// If you think of a survey as a procedural program, they are essentially variable assignment.
 promptTypes.calculate = promptTypes.base.extend({
     type: "calculate",
     hideInHierarchy: true,
@@ -875,8 +876,12 @@ promptTypes.calculate = promptTypes.base.extend({
     onActivate: function(readyToRenderCallback){
         alert("calculate.onActivate: Should never be called!");
     },
+    calculation: function() {
+    },
     evaluate: function() {
-        return this.calculate();
+        var returnValue = this.calculation();
+        this.setValue(returnValue, function(){});
+        return returnValue;
     }
 });
 promptTypes.label = promptTypes.base.extend({
