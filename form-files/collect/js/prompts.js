@@ -865,6 +865,7 @@ promptTypes.screen = promptTypes.base.extend({
         });
     }
 });
+/*
 // Calculates are evaluated as they are encountered in the survey control flow.
 // If you think of a survey as a procedural program, they are essentially variable assignment.
 promptTypes.calculate = promptTypes.base.extend({
@@ -882,6 +883,7 @@ promptTypes.calculate = promptTypes.base.extend({
         this.setValue(this.calculation(), callback);
     }
 });
+*/
 promptTypes.label = promptTypes.base.extend({
     type: "label",
     isInitializeComplete: function() {

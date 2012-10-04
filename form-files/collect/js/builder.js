@@ -1,6 +1,7 @@
 'use strict';
 // depends upon: controller, jquery, promptTypes
 define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], function(controller, opendatakit, database, $, promptTypes) {
+    var calculates = [];
     var evalInEnvironment = (function() {
         //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
         //It's still possible to really mess things up from here though because the
@@ -13,10 +14,21 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                 return false;
             }
         }
-        //v gets a value by name and parses it.
+        //V gets a value by name and parses it.
         //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
         function V(valueName) {
-            console.error(database.getDataValue(valueName));
+            var calculate = _.find(calculates, function(calculate){
+               return calculate.name === valueName;  
+            });
+            if( calculate ){
+                if('calculation' in calculate) {
+                    return calculate.calculation();
+                } else {
+                    alert("Calculate with no calculation. See console for details.");
+                    console.error(calculate);
+                }
+            }
+            //console.error(database.getDataValue(valueName));
             return JSON.parse(database.getDataValue(valueName));
         }
         return function(code){
@@ -193,18 +205,16 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                 settings: surveyJson.settings,
                 widgets: widgets
             };
-            /*
-            var calcs = [];
+
             var navs = [];
             for ( var i = 0 ; i < surveyJson.survey.length ; ++i ) {
-                var e = surveyJson.survey[i];
-                if ( e.type == "calculate" ) {
-                    calcs[calcs.length] = e;
+                var surveyItem = surveyJson.survey[i];
+                if ( surveyItem.type == "calculate" ) {
+                    calculates.push(surveyItem);
                 } else {
-                    navs[navs.length] = e;
+                    navs.push(surveyItem);
                 }
             }
-            */
             var prompts = ([{
                 "type": "goto_if",
                 "condition": function() {
@@ -229,7 +239,7 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                 type: "opening",
                 name: "_opening",
                 label: "opening page"
-            }]).concat(surveyJson.survey).concat([{
+            }]).concat(navs).concat([{
                 type: "finalize",
                 name: "_finalize",
                 label: "Save Form"
@@ -241,9 +251,9 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
 
             console.log('initializing');
             that.form.prompts = this.initializePrompts(prompts);
-            //that.form.calcs = this.initializePrompts(calcs);
+            calculates = this.initializePrompts(calculates);
             controller.prompts = that.form.prompts;
-            controller.calcs = that.form.calcs;
+            //controller.calcs = that.form.calcs;
             console.log('starting');
             continuation();
         }

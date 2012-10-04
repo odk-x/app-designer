@@ -145,8 +145,6 @@ return {
     advanceToScreenPrompt: function(prompt, callback) {
         var nextPrompt;
         var that = this;
-
-
         if('condition' in prompt) {
             if ( !prompt.condition() ) {
                 nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
@@ -154,12 +152,14 @@ return {
         }
         if ( prompt.type == "label" ) {
             nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+        /*
         } else if ( prompt.type == "calculate" ) {
             prompt.evaluate(function(){
                 nextPrompt = that.getPromptByName(prompt.promptIdx + 1)
                 that.advanceToScreenPrompt(nextPrompt, callback);
             });
             return;
+        */
         } else if ( prompt.type == "goto" ||  prompt.type == "goto_if") {
             try {
                 if ( prompt.condition() ) {
