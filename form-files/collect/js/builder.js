@@ -1,12 +1,14 @@
 'use strict';
 // depends upon: controller, jquery, promptTypes
-define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], function(controller, opendatakit, database, $, promptTypes) {
+define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'],
+function(controller, opendatakit, database, $, promptTypes) {
     var calculates = [];
     var evalInEnvironment = (function() {
         //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
         //It's still possible to really mess things up from here though because the
         //top-level environment is still accessable.
-        function selected(promptValue, qValue){
+        
+        function selected(promptValue, qValue) {
             //TODO: Store parsed JSON?
             if(promptValue) {
                 return _.include(_.pluck(JSON.parse(promptValue), 'value'), qValue);
@@ -14,6 +16,14 @@ define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'], funct
                 return false;
             }
         }
+        
+        //Check if the prompts have equivalent values.
+        function eqivalent() {
+            return _.all(arguments, function(arguement){
+                return _.isEqual(arguement, arguments[0]);
+            });
+        }
+        
         //V gets a value by name and parses it.
         //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
         function V(valueName) {
