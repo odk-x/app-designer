@@ -42,3 +42,6 @@ Eventually we should make a jqm theme for this.
 	-webkit-box-shadow: 0px 0px 12px 		rgb(255, 194, 0);
 	box-shadow: 0px 0px 12px 				rgb(255, 194, 0);
 }
+#screenPopup > .message {
+    font-weight: bold;
+}

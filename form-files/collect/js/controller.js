@@ -245,6 +245,23 @@ return {
                     failure: function(validationFailAction) {
                         console.log("gotoNextScreen: validate failure ms: " + (+new Date()) + 
                             " page: " + that.currentPromptIdx);
+                        /*
+                        //Crude implementation of validation toasts.
+                        //The prompt needs more control over this so the constraint_message is only shown
+                        //for constraint violations, and other messages are used for required fields etc.
+                        $.mobile.loading( 'show' , {
+                            text: that.getPromptByName(that.currentPromptIdx).constraint_message,
+                            textVisible: true,
+                            textonly: true,
+                        	theme: 'a'
+                        });
+                        //Fading might be a bad idea. I don't know how it will perform in general.
+                        $('.ui-loader').fadeIn(200, function(){
+                            $('.ui-loader').delay(500).fadeOut(200, function(){
+                                $.mobile.loading( 'hide' );
+                            });
+                        });
+                        */
                         if ( validationFailAction != null ) {
                             validationFailAction();
                         }

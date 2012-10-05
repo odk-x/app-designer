@@ -2,8 +2,8 @@ requirejs.config({
     baseUrl: '../collect',
     paths: {
         // third-party libraries we depend upon 
-        jqmobile : 'libs/jquery.mobile-1.1.1/jquery.mobile-1.1.1',
-        //jqmobile : 'libs/jquery.mobile-1.2.0-rc.2/jquery.mobile-1.2.0-rc.2',
+        //jqmobile : 'libs/jquery.mobile-1.1.1/jquery.mobile-1.1.1',
+        jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
         jquery : 'libs/jquery.1.8.1',
         backbone : 'libs/backbone.0.9.2',
         handlebars : 'libs/handlebars.1.0.0.beta.6',

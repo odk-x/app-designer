@@ -228,6 +228,8 @@ promptTypes.base = Backbone.View.extend({
             console.log(that.constraint)
             if ( !that.constraint() ) {
                 that.valid = false;
+                $( "#screenPopup" ).find('.message').text(that.constraint_message);
+                $( "#screenPopup" ).popup( "open" );
                 context.failure();
                 return;
             }
