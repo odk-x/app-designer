@@ -1,7 +1,8 @@
 'use strict';
 // depends upon: --
 // NOTE: builder.js sets controller.prompts property.
-define(['screenManager','opendatakit','database'], function(ScreenManager,opendatakit,database) {
+define(['screenManager','opendatakit','database'],
+function(ScreenManager,  opendatakit,  database) {
 return {
     screenManager : null,
     currentPromptIdx : -1,
@@ -28,6 +29,7 @@ return {
             });
         }
     },
+    /*
     validate: function(isMoveBackward, context){
         var that = this;
         var prompt = null;
@@ -49,12 +51,51 @@ return {
             });
         }
     },
+    */
+    validate: function(context){
+        var that = this;
+        var prompt;
+        if ( this.currentPromptIdx != -1 ) {
+            prompt = this.prompts[this.currentPromptIdx];
+        }
+        try {
+            if ( prompt ) {
+                prompt.validate(context);
+            } else {
+                context.success();
+            }
+        } catch(ex) {
+            context.failure(function() {
+                if ( that.screenManager != null ) {
+                    console.error(prompt);
+                    that.screenManager.unexpectedError("validate", ex);
+                }
+            });
+        }
+    },
     gotoPreviousScreen: function(){
         var that = this;
         that.beforeMove({
             success: function() {
                 console.log("gotoPreviousScreen: beforeMove success ms: " + (+new Date()) + 
                             " page: " + that.currentPromptIdx);
+
+                while (that.hasPromptHistory()) {
+                    console.log("gotoPreviousScreen: poppreviousScreenNames ms: " + (+new Date()) + 
+                                " page: " + that.currentPromptIdx);
+                    var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
+                    var t = prmpt.type;
+                    if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
+                        console.error("Invalid previous prompt type");
+                        console.log(prmpt);
+                    }
+                    // todo -- change to use hash?
+                    that.setPrompt(prmpt, {omitPushOnReturnStack:true, reverse:true});
+                    return;
+                }
+                console.log("gotoPreviousScreen: noPreviousPage ms: " + (+new Date()) + 
+                            " page: " + that.currentPromptIdx);            
+                /*
                 // we are ready for move -- validate...
                 that.validate(true, {
                     success: function() {
@@ -88,6 +129,7 @@ return {
                         }
                     }
                 });
+                */
             },
             failure: function(stayAction) {
                 console.log("gotoPreviousScreen: beforeMove failure ms: " + (+new Date()) + 
@@ -167,7 +209,7 @@ return {
                 console.log("gotoNextScreen: beforeMove success ms: " + (+new Date()) + 
                             " page: " + that.currentPromptIdx);
                 // we are ready for move -- validate...
-                that.validate(false, {
+                that.validate({
                     success: function() {
                         // navigate through all gotos, goto_ifs and labels.
                         var prompt = null;

@@ -10,8 +10,11 @@ function(controller, opendatakit, database, $, promptTypes) {
         
         function selected(promptValue, qValue) {
             //TODO: Store parsed JSON?
+            if(_.isString(promptValue)){
+                promptValue = JSON.parse(promptValue);
+            }
             if(promptValue) {
-                return _.include(_.pluck(JSON.parse(promptValue), 'value'), qValue);
+                return _.include(_.pluck(promptValue, 'value'), qValue);
             } else {
                 return false;
             }
@@ -38,7 +41,6 @@ function(controller, opendatakit, database, $, promptTypes) {
                     console.error(calculate);
                 }
             }
-            //console.error(database.getDataValue(valueName));
             return JSON.parse(database.getDataValue(valueName));
         }
         return function(code){
@@ -49,6 +51,7 @@ function(controller, opendatakit, database, $, promptTypes) {
     return {
     column_types: {
         condition: 'formula',
+        constraint: 'formula',
         required: 'formula',
         validate: 'formula',
         calculation: 'formula',

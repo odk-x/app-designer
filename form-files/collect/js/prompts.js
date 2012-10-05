@@ -148,6 +148,7 @@ promptTypes.base = Backbone.View.extend({
         return this;
     },
     //Stuff to be added
+    /*
     baseValidate: function(isMoveBackward, context) {
         var that = this;
         var defaultContext = {
@@ -191,8 +192,50 @@ promptTypes.base = Backbone.View.extend({
             context.failure();
         }
     },
-    validate: function() {
-        return true;
+    */
+    //baseValidate isn't meant to be overidden or called externally.
+    //It does validation that will be common to most prompts.
+    //Validate is menat be overridden and publicly called. 
+    //It is validate's responsibility to call baseValidate.
+    baseValidate: function(context) {
+        var that = this;
+        var isRequired = ('required' in that) ? that.required() : false;
+        var defaultContext = {
+            success: function() {},
+            failure: function() {}
+        };
+        context = $.extend(defaultContext, context);
+        that.valid = true;
+        if ( !('name' in that) ) {
+            // no data validation if no persistence...
+            context.success();
+            return;
+        } 
+        if ( that.getValue() == null || that.getValue().length == 0 ) {
+            if ( isRequired ) {
+                that.valid = false;
+                context.failure();
+                return;
+            }
+        } else if ( 'validateValue' in that ) {
+            if ( !that.validateValue() ) {
+                that.valid = false;
+                context.failure();
+                return;
+            }
+        } 
+        if ( 'constraint' in that ) {
+            console.log(that.constraint)
+            if ( !that.constraint() ) {
+                that.valid = false;
+                context.failure();
+                return;
+            }
+        }
+        context.success();
+    },
+    validate: function(context) {
+        return this.baseValidate(context);
     },
     getValue: function() {
         if(!this.name) {
@@ -813,7 +856,7 @@ promptTypes.screen = promptTypes.base.extend({
         }
         return true;
     },
-    baseValidate: function(isMoveBackward, context) {
+    validate: function(context) {
         var that = this;
         var subPrompts, subPromptContext;
         subPrompts = _.filter(this.prompts, function(prompt) {
@@ -827,7 +870,7 @@ promptTypes.screen = promptTypes.base.extend({
             failure: _.once(context.failure)
         }
         $.each(subPrompts, function(idx, prompt){
-            prompt.baseValidate(isMoveBackward, subPromptContext);
+            prompt.validate(subPromptContext);
         });
     },
     onActivateHelper: function(idx, readyToRenderCallback) {
