@@ -21,10 +21,22 @@ function(controller, opendatakit, database, $, promptTypes) {
         }
         
         //Check if the prompts have equivalent values.
-        function eqivalent() {
-            return _.all(arguments, function(arguement){
-                return _.isEqual(arguement, arguments[0]);
-            });
+        function equivalent() {
+            var parsedArgs = _.map(arguments, JSON.parse);
+            if(_.all(parsedArgs, _.isArray)) {
+                //We are probably dealing with a select. values is an array of the selected values.
+                var values = _.map(parsedArgs, function(arguement){
+                    return _.pluck(arguement, 'value');
+                });
+                return _.all(values.slice(1), function(value){
+                    return _.union(_.difference(value, values[0]), _.difference(values[0], value)).length == 0;
+                });
+            } else {
+                var arg0 = parsedArgs[0];
+                return _.all(parsedArgs, function(arguement) {
+                    return _.isEqual(arg0, arguement);
+                });
+            }
         }
         
         //V gets a value by name and parses it.

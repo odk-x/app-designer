@@ -82,6 +82,7 @@ promptTypes.base = Backbone.View.extend({
     //base html attributes shouldn't be overridden by the user.
     //they should use htmlAttributes for that.
     baseHtmlAttributes: {},
+    htmlAttributes: {},
     initialize: function() {
         this.initializeTemplate();
         this.initializeRenderContext();
@@ -127,7 +128,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hint = this.hint;
         //It's probably not good to get data like this in initialize
         this.renderContext.formName = database.getMetaDataValue('formName');
-        this.renderContext.htmlAttributes = $.extend(Object.create(this.baseHtmlAttributes), this.htmlAttributes);
+        this.renderContext.htmlAttributes = $.extend({}, this.baseHtmlAttributes, this.htmlAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
@@ -245,7 +246,7 @@ promptTypes.base = Backbone.View.extend({
         return this.baseValidate(context);
     },
     getValue: function() {
-        if(!this.name) {
+        if (!this.name) {
             console.error(this);
             throw "Cannot get value of prompt with no name.";
         }
@@ -664,6 +665,7 @@ promptTypes.integer = promptTypes.inputType.extend({
 promptTypes.number = promptTypes.inputType.extend({
     type: "number",
     datatype: "number",
+    //TODO: This doesn't seem to be working.
     baseHtmlAttributes: {
         'type':'number'
     },
