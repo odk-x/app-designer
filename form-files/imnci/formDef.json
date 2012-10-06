@@ -260,7 +260,6 @@
         {
             "prompts": [
                 {
-                    "name": "possible_serious_bacterial_infection_agree", 
                     "hint": "SIGNS:\n<ul>\n<li>Convulsions or</li>\n<li>Fast breathing (60 breaths per minute or more) or</li>\n<li>Severe chest indrawing or</li>\n<li>Nasal flaring or</li>\n<li>Grunting or</li>\n<li>10 or more skin pustules or a big boil or</li>\n<li>If axillary temperature 37.5°C or above (or feels hot to touch) or temperature less than 35.5°C (or feels cold to touch) or</li>\n<li>Lethargic or unconscious or</li>\n<li>Less than normal movements</li>\n</ul>", 
                     "type": "note", 
                     "param": null, 
@@ -861,8 +860,9 @@
             "param": "check_immunization_status"
         }, 
         {
-            "name": "needed_vaccinations", 
             "param": "needed_vaccinations", 
+            "name": "needed_vaccinations", 
+            "choiceFilter": "context.age_months || 0 < V('age_months')", 
             "type": "select_multiple", 
             "comments": " PROBLEMS:\nWe want a way to filter the choices by age.\nIt would be nice to have a way to get the compliment of a selected set.\n", 
             "label": "Which vaccinations has the child NOT received?"
@@ -1012,23 +1012,23 @@
         ], 
         "needed_vaccinations": [
             {
-                "monthsAge": 0, 
                 "name": "bcg", 
+                "age_months": 0, 
                 "label": "BCG"
             }, 
             {
-                "monthsAge": 0, 
                 "name": "opv0", 
+                "age_months": 0, 
                 "label": "OPV-0"
             }, 
             {
-                "monthsAge": 1.5, 
                 "name": "dpt1", 
+                "age_months": 1.5, 
                 "label": "DPT-1"
             }, 
             {
-                "monthsAge": 1.5, 
                 "name": "opv1hepatitusb1", 
+                "age_months": 1.5, 
                 "label": "OPV-1 + Hepatitis B-1"
             }
         ], 

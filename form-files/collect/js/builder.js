@@ -42,6 +42,7 @@ function(controller, opendatakit, database, $, promptTypes) {
         //V gets a value by name and parses it.
         //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
         function V(valueName) {
+            var datavalue;
             var calculate = _.find(calculates, function(calculate){
                return calculate.name === valueName;  
             });
@@ -53,7 +54,18 @@ function(controller, opendatakit, database, $, promptTypes) {
                     console.error(calculate);
                 }
             }
-            return JSON.parse(database.getDataValue(valueName));
+            datavalue = database.getDataValue(valueName);
+            try {
+                if(datavalue){
+                    return JSON.parse(datavalue);
+                }
+            } catch(e) {
+                //I think we can remove this.
+                //If the database stores parsed JSON we definately can.
+                alert("Could not parse JSON. See console for details.");
+                console.error(String(e));
+                console.error(valueName + ':' + datavalue);
+            }
         }
         return function(code){
             return eval(code);
@@ -67,6 +79,11 @@ function(controller, opendatakit, database, $, promptTypes) {
         required: 'formula',
         validate: 'formula',
         calculation: 'formula',
+        //TODO: Choice filter has some syntax issues to consider.
+        //      It would be nice to have a "choice" variable we can refer to directly.
+        //      One idea is to define variables in a context object that gets passed into the generated function.
+        //      The generated function would then add the object's keys to the namespace.
+        choiceFilter: 'formula',
         templatePath: 'requirejs_path',
         image: 'app_path_localized',
         audio: 'app_path_localized',

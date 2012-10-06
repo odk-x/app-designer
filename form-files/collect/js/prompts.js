@@ -486,11 +486,16 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     events: {
         "change input": "modification"
     },
+    choiceFilter: function(){ return true; },
     updateRenderValue: function(formValue) {
         console.error(formValue);
         var that = this;
         that.renderContext.value = formValue;
-        that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
+        var filteredChoices = _.filter(that.renderContext.choices, function(choice){
+            console.log(choice);
+            return that.choiceFilter(choice);
+        });
+        that.renderContext.choices = _.map(filteredChoices, function(choice) {
             if ( formValue != null ) {
                 choice.checked = _.any(formValue, function(valueObject) {
                     return choice.name === valueObject.value;
@@ -524,19 +529,6 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
         var saveValue = that.getValue();
         that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
-        /*
-        that.renderContext.value = (saveValue == null) ? null : JSON.parse(saveValue);
-        that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
-            if ( that.renderContext.value != null ) {
-                choice.checked = _.any(that.renderContext.value, function(valueObject){
-                    return choice.name === valueObject.value;
-                });
-            } else {
-                choice.checked = false;
-            }
-            return choice;
-        });
-        */
         readyToRenderCallback();
     }
 });
