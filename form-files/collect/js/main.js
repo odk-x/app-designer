@@ -24,7 +24,10 @@ requirejs.config({
         builder : 'js/builder',
         screenManager : 'js/screenManager',
         parsequery : 'js/parsequery',
-        opendatakit : 'js/opendatakit'
+        opendatakit : 'js/opendatakit',
+        jqmConfig : 'js/jqmConfig',
+        handlebarsHelpers : 'js/handlebarsHelpers',
+        formulaFunctions : 'js/formulaFunctions'
     },
     shim: {
         'jquery': {
@@ -40,7 +43,7 @@ requirejs.config({
             // Slimmer drop-in replacement for jquery
             //These script dependencies should be loaded before loading
             //jqmobile.js
-            deps: ['jquery']
+            deps: ['jquery', 'jqmConfig']
         },
         'underscore': {
             //These script dependencies should be loaded before loading
@@ -72,19 +75,10 @@ requirejs.config({
     }
 });
 
-requirejs(['jquery'], function($) {
-
-$(document).bind("mobileinit", function () {
-    $.mobile.ajaxEnabled = false;
-    $.mobile.linkBindingEnabled = false;
-    $.mobile.hashListeningEnabled = false;
-    $.mobile.pushStateEnabled = false;
-});
-
-requirejs(['mdl','opendatakit', 'database','parsequery',
+requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                         'jqmobile', 'builder', 'controller',
                         'prompts'/* mix-in additional prompts and support libs here */], 
-        function(mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
+        function($, mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
             parsequery.initialize(controller,builder);
 
             //
@@ -106,6 +100,5 @@ requirejs(['mdl','opendatakit', 'database','parsequery',
             };
         
             f();
-        
-        });
+
 });
