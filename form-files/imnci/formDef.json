@@ -862,7 +862,7 @@
         {
             "param": "needed_vaccinations", 
             "name": "needed_vaccinations", 
-            "choiceFilter": "context.age_months || 0 < V('age_months')", 
+            "choiceFilter": "context.age_months < V('age_months')", 
             "type": "select_multiple", 
             "comments": " PROBLEMS:\nWe want a way to filter the choices by age.\nIt would be nice to have a way to get the compliment of a selected set.\n", 
             "label": "Which vaccinations has the child NOT received?"
@@ -876,6 +876,12 @@
         }
     ], 
     "datafields": {
+        "give_oral_cotrimoxazole": {
+            "type": "boolean"
+        }, 
+        "teach_mother_to_apply_gv_paint": {
+            "type": "boolean"
+        }, 
         "restless": {
             "type": "string"
         }, 
@@ -887,6 +893,9 @@
         }, 
         "skin_elasticity": {
             "type": "string"
+        }, 
+        "increase_frequency_of_feeding": {
+            "type": "boolean"
         }, 
         "sucking_effectiveness": {
             "type": "string"
@@ -903,11 +912,17 @@
         "skin_pustules": {
             "type": "string"
         }, 
+        "teach_correct_positioning": {
+            "type": "boolean"
+        }, 
         "engorged_breasts_or_abscess": {
             "type": "string"
         }, 
         "ulcers_thrush": {
             "type": "string"
+        }, 
+        "give_first_dose_of_cotrimoxazole": {
+            "type": "boolean"
         }, 
         "breath_count": {
             "type": "integer"
@@ -942,6 +957,15 @@
         "lethargic": {
             "type": "string"
         }, 
+        "dehydration_treatment": {
+            "type": "boolean"
+        }, 
+        "warm_infant_skin_to_skin": {
+            "type": "boolean"
+        }, 
+        "give_oral_cotrimoxazole_5_days": {
+            "type": "boolean"
+        }, 
         "other_foods": {
             "type": "string"
         }, 
@@ -954,8 +978,17 @@
         "low_body_temperature": {
             "type": "string"
         }, 
+        "refer_urgently_to_hospital_w_ORS": {
+            "type": "boolean"
+        }, 
+        "give_oral_cotrimoxazole_if_able": {
+            "type": "boolean"
+        }, 
         "has_diarrhoea": {
             "type": "string"
+        }, 
+        "parse_mother_for_feeding": {
+            "type": "boolean"
         }, 
         "sunken_eyes": {
             "type": "string"
@@ -965,6 +998,18 @@
         }, 
         "chest_indrawing": {
             "type": "string"
+        }, 
+        "advise_home_care": {
+            "type": "boolean"
+        }, 
+        "refer_urgently_to_hospital": {
+            "type": "boolean"
+        }, 
+        "observe_breastfeed": {
+            "type": "boolean"
+        }, 
+        "follow_up_2_days": {
+            "type": "boolean"
         }, 
         "able_to_attach": {
             "type": "string"
@@ -978,11 +1023,20 @@
         "other_problems": {
             "type": "string"
         }, 
+        "advise_continue_breastfeeding": {
+            "type": "boolean"
+        }, 
+        "advise_keep_infant_warm": {
+            "type": "boolean"
+        }, 
         "fever_present": {
             "type": "string"
         }, 
         "blood_in_stool": {
             "type": "string"
+        }, 
+        "warm_skin_to_skin": {
+            "type": "boolean"
         }, 
         "age_weeks": {
             "type": "integer"

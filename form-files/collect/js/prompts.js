@@ -969,7 +969,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
     autoAdvance: false,
     modification: function(evt) {
         var that = this;
-        var acknowledged = $('#acknowledge').is(':checked');
+        var acknowledged = this.$('#acknowledge').is(':checked');
         this.setValue(acknowledged, function() {
             that.renderContext.choices = [{
                 "name": "acknowledge",
