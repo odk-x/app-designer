@@ -13,9 +13,12 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         for(var funcName in formulaFunctions){
             eval('var ' + funcName + ' = formulaFunctions.funcName;');
         }
-        //The function consturctor might be worth looking into for this purpose.
+        //A better way might be to use a "with" block around the eval,
+        //but that also suffers from the usestrict problem.
+        
+        //The Function consturctor might avoid the usestrict problem.
         //However, I don't know if it works with webkit.
-        //return (new Function).apply(_.keys(formulaFunctions).concat('eval(code)'));
+        //return (new Function).apply(_.keys(formulaFunctions).concat('function(code){eval(code)}'))(_.values(formulaFunctions));
         */
         //This is the way I'm setting up bindings for now, but it's suboptimal from a DRY perspective.
         var selected = formulaFunctions.selected;

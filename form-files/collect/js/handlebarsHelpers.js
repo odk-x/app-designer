@@ -62,7 +62,7 @@ Handlebars.registerHelper('substitute', function(options) {
     return template(database.mdl.data);
 });
 
-Handlebars.registerHelper('selected', function(prompt, value, options) {    
+Handlebars.registerHelper('selected', function(prompt, value, options) {
     if(formulaFunctions.selected(prompt, value)) {
         return options.fn(this);
     } else {

@@ -1,5 +1,9 @@
 <div>
-    <h1>{{localize formName}}</h1>
+    <h1 style="float:left;">{{localize formName}}</h1>
+    {{#if formVersion}}
+        <p style="float:left;">version:{{formVersion}}</p>
+    {{/if}}
+    <div style="clear:both"></div>
     <center><img src="{{ headerImg }}" width="50%"/></center>
     <a class="createInstance" data-role="button" data-icon="new" data-iconpos="top">Create new instance</a>
 </div>

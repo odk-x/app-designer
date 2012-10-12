@@ -1,9 +1,7 @@
 'use strict';
 
 define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'handlebarsHelpers'],
-function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _, labelHintPartial) {
-
-
+function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _) {
 
 promptTypes.base = Backbone.View.extend({
     className: "current",
@@ -69,7 +67,10 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
         //It's probably not good to get data like this in initialize
+        //Maybe it would be better to use handlebars helpers to get metadata?
         this.renderContext.formName = database.getMetaDataValue('formName');
+        this.renderContext.formVersion = database.getMetaDataValue('formVersion');
+        
         this.renderContext.htmlAttributes = $.extend({}, this.baseHtmlAttributes, this.htmlAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
@@ -352,7 +353,8 @@ promptTypes.instances = promptTypes.base.extend({
             });
             readyToRenderCallback({
                 showHeader: false,
-                enableNavigation:false
+                enableNavigation:false,
+                showFooter:false
             });
         });
     },
@@ -608,6 +610,8 @@ promptTypes.number = promptTypes.inputType.extend({
         return !isNaN(parseFloat(this.getValue()));
     }
 });
+//TODO: datetime doesn't work inside a screen group.
+//I think it's probably because of the render function.
 promptTypes.datetime = promptTypes.inputType.extend({
     type: "date",
     datatype: "string",

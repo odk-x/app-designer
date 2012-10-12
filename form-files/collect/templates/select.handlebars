@@ -6,24 +6,25 @@
         {{/eachProperty}}
         >
         {{#each choices}}
-            <input
-                {{#if ../select_one}}
-                    type="radio"
-                {{else}}
-                    type="checkbox"
-                {{/if}}
-                {{#if checked}}
-                    checked="checked"
-                {{/if}}
-                {{! the name attribue has to be the same for all the options}}
-                name="{{../name}}"
-                id="{{name}}"
-                value="{{name}}" />
-            <label for="{{name}}">{{localize label}}</label>
+            <label>
+                <input
+                    {{#if ../select_one}}
+                        type="radio"
+                    {{else}}
+                        type="checkbox"
+                    {{/if}}
+                    {{#if checked}}
+                        checked="checked"
+                    {{/if}}
+                    {{! the name attribue has to be the same for all the options}}
+                    name="{{../name}}"
+                    value="{{name}}" />
+            {{localize label}}
+            </label>
         {{/each}}
         {{#if or_other}}
                 <input
-                    {{#if selectOne}}
+                    {{#if select_one}}
                         type="radio"
                     {{else}}
                         type="checkbox"
@@ -32,13 +33,18 @@
                         checked
                     {{/if}}
                     name="{{name}}"
-                    value="{{otherValue}}" />
-                <input
-                    name="{{name}}OtherValue"
-                    value="{{otherValue}}" 
-                    {{#unless other.selected}}
-                        disabled="true"
-                    {{/unless}} />
+                    id="other"
+                    value="other" />
+                <label for="other">
+                    Other:
+                    <div><input
+                        name="otherValue"
+                        value="{{otherValue}}"
+                        style="height:36px;position:initial;"
+                        {{#unless other.selected}}
+                            disabled="true"
+                        {{/unless}} /></div>
+                </label>
         {{/if}}
         {{#if select_one}}
             <button type="button" class="deselect">Deselect</button>

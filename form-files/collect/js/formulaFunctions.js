@@ -27,6 +27,12 @@ function(database,   _) {
             if(_.isString(promptValue)){
                 promptValue = JSON.parse(promptValue);
             }
+            if(!_.isArray(promptValue)){
+                alert("Selected function expects an array. See console for details.");
+                console.error(promptValue);
+                console.error(qValue);
+                return false;
+            }
             if(promptValue) {
                 return _.include(_.pluck(promptValue, 'value'), qValue);
             } else {
