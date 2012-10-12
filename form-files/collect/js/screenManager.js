@@ -154,12 +154,16 @@ return Backbone.View.extend({
             this.previousPageEl.remove();
         }
     },
+    disableImageDrag: function(evt){
+        evt.preventDefault();
+    },
     events: {
         "click .odk-next-btn": "gotoNextScreen",
         "click .odk-prev-btn": "gotoPreviousScreen",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
-        "pagechange": "handlePagechange"
+        "pagechange": "handlePagechange",
+        "dragstart img": "disableImageDrag"
     },
     renderPage: function(prompt){
         var $page = $('<div>');
