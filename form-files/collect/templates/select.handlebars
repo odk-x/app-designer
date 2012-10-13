@@ -29,19 +29,19 @@
                     {{else}}
                         type="checkbox"
                     {{/if}}
-                    {{#if checked}}
+                    {{#if other.checked}}
                         checked
                     {{/if}}
-                    name="{{name}}"
+                    name="{{name}}Other"
                     id="other"
                     value="other" />
                 <label for="other">
                     Other:
                     <div><input
-                        name="otherValue"
-                        value="{{otherValue}}"
+                        name="{{name}}OtherValue"
+                        value="{{other.value}}"
                         style="height:36px;position:initial;"
-                        {{#unless other.selected}}
+                        {{#unless other.checked}}
                             disabled="true"
                         {{/unless}} /></div>
                 </label>

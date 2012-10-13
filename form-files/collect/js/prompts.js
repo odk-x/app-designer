@@ -432,23 +432,37 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     },
     choiceFilter: function(){ return true; },
     updateRenderValue: function(formValue) {
-        console.error(formValue);
         var that = this;
-        that.renderContext.value = formValue;
+        console.error(formValue);
+        //that.renderContext.value = formValue;
         var filteredChoices = _.filter(that.renderContext.choices, function(choice){
-            console.log(choice);
             return that.choiceFilter(choice);
         });
-        that.renderContext.choices = _.map(filteredChoices, function(choice) {
-            if ( formValue != null ) {
-                choice.checked = _.any(formValue, function(valueObject) {
-                    return choice.name === valueObject.value;
-                });
-            } else {
+        if ( !formValue ) {
+            /*
+            that.renderContext.choices = .map(filteredChoices, function(choice) {
                 choice.checked = false;
-            }
+                return choice;
+            });
+            */
+            return;
+        }
+        that.renderContext.choices = _.map(filteredChoices, function(choice) {
+            choice.checked = _.any(formValue, function(valueObject) {
+                return choice.name === valueObject.value;
+            });
             return choice;
         });
+        var otherObject = _.find(formValue, function(valueObject) {
+            return (that.name + 'OtherValue' === valueObject.value);
+        })
+        that.renderContext.other = {
+            value: otherObject ? otherObject.value : '',
+            checked: _.any(formValue, function(valueObject) {
+                return (that.name + 'Other' === valueObject.name);
+            })
+        };
+        console.log(that.renderContext);
         that.render();
     },
     // TODO: choices should be cloned and allow calculations in the choices
@@ -610,8 +624,6 @@ promptTypes.number = promptTypes.inputType.extend({
         return !isNaN(parseFloat(this.getValue()));
     }
 });
-//TODO: datetime doesn't work inside a screen group.
-//I think it's probably because of the render function.
 promptTypes.datetime = promptTypes.inputType.extend({
     type: "date",
     datatype: "string",
@@ -632,8 +644,10 @@ promptTypes.datetime = promptTypes.inputType.extend({
         "swipeleft input": "stopPropagation",
         "swiperight input": "stopPropagation"
     },
-    render: _.debounce(function() {
-        var that = this;
+    onActivate: function(readyToRenderCallback) {
+        var renderContext = this.renderContext;
+        var value = this.getValue();
+        renderContext.value = value;
         require(["mobiscroll"], function() {
             $.scroller.themes.jqm.defaults = {
                 jqmBody: 'd',
@@ -643,13 +657,17 @@ promptTypes.datetime = promptTypes.inputType.extend({
                 jqmSet: 'd',
                 jqmCancel: 'd'
             };
-            that.$el.html(that.template(that.renderContext));
-            //Triggering create seems to prevent some issues where jQm styles are not applied.
-            that.$el.trigger('create');
-            that.$('input').scroller(that.scrollerAttributes);
+            readyToRenderCallback();
         });
+    },
+    render: function() {
+        var that = this;
+        that.$el.html(that.template(that.renderContext));
+        //Triggering create seems to prevent some issues where jQm styles are not applied.
+        that.$el.trigger('create');
+        that.$('input').scroller(that.scrollerAttributes);
         return this;
-    }, 100)
+    }
 });
 promptTypes.date = promptTypes.datetime.extend({
     type: "time",
@@ -850,7 +868,13 @@ promptTypes.screen = promptTypes.base.extend({
         this.$el.html('<div class="odk odk-prompts">');
         var $prompts = this.$('.odk-prompts');
         $.each(subPrompts, function(idx, prompt){
-            $prompts.append(prompt.render().$el);
+            prompt.render();
+            if(!prompt.$el){
+                alert("Sub-prompt has not been rendered. See console for details.");
+                console.error("Prompts must have synchronous render functions. Don't debounce them or launch async calls before el is set.");
+                console.error(prompt);
+            }
+            $prompts.append(prompt.$el);
             prompt.delegateEvents();
         });
     }
