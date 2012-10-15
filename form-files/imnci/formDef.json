@@ -1,4 +1,132 @@
 {
+    "datafields": {
+        "drinking_eagerly": {
+            "type": "string"
+        }, 
+        "restless": {
+            "type": "string"
+        }, 
+        "wasting": {
+            "type": "string"
+        }, 
+        "able_to_drink": {
+            "type": "string"
+        }, 
+        "acknowledge_urgent_attention": {
+            "type": "string"
+        }, 
+        "acknowledge_advise_home_care": {
+            "type": "string"
+        }, 
+        "fever": {
+            "type": "string"
+        }, 
+        "vomit_everything": {
+            "type": "string"
+        }, 
+        "fever_present_every_day": {
+            "type": "string"
+        }, 
+        "diarrhoea_14_days_or_more": {
+            "type": "string"
+        }, 
+        "temperature": {
+            "type": "integer"
+        }, 
+        "initial_visit": {
+            "type": "string"
+        }, 
+        "oedema": {
+            "type": "string"
+        }, 
+        "difficulty_breathing": {
+            "type": "string"
+        }, 
+        "some_dehydration_treatment": {
+            "type": "string"
+        }, 
+        "give_cotrimoxazole": {
+            "type": "string"
+        }, 
+        "stiff_neck": {
+            "type": "string"
+        }, 
+        "convulsions": {
+            "type": "string"
+        }, 
+        "follow_up_visit": {
+            "type": "string"
+        }, 
+        "acknowledge_give_first_dose_of_cotrimoxazole": {
+            "type": "string"
+        }, 
+        "fever_length": {
+            "type": "integer"
+        }, 
+        "anaemia_check": {
+            "type": "string"
+        }, 
+        "refer_urgently_to_hospital_w_ORS": {
+            "type": "string"
+        }, 
+        "skin_elasticity": {
+            "type": "string"
+        }, 
+        "acknowledge_give_cotrimoxazole": {
+            "type": "string"
+        }, 
+        "other_problems": {
+            "type": "string"
+        }, 
+        "sunken_eyes": {
+            "type": "string"
+        }, 
+        "chest_indrawing": {
+            "type": "string"
+        }, 
+        "follow_up_2_days": {
+            "type": "string"
+        }, 
+        "how_long_difficulty_breathing": {
+            "type": "integer"
+        }, 
+        "name": {
+            "type": "string"
+        }, 
+        "drinking_poorly": {
+            "type": "string"
+        }, 
+        "acknowledge_refer_for_assessment": {
+            "type": "string"
+        }, 
+        "age": {
+            "type": "string"
+        }, 
+        "no_dehydration_treatment": {
+            "type": "string"
+        }, 
+        "refer_to_hospital": {
+            "type": "string"
+        }, 
+        "lethargic": {
+            "type": "string"
+        }, 
+        "acknowledge_follow_up_2_days": {
+            "type": "string"
+        }, 
+        "blood_in_stool": {
+            "type": "string"
+        }, 
+        "count_breath": {
+            "type": "integer"
+        }, 
+        "diarrhoea": {
+            "type": "string"
+        }, 
+        "acknowledge_refer_urgently_to_hospital": {
+            "type": "string"
+        }
+    }, 
     "settings": [
         {
             "setting": "formId", 
@@ -89,12 +217,11 @@
         {
             "prompts": [
                 {
-                    "label": {
-                        "en_us": "<strong>DANGER SIGNS:</strong>{{#selected lethargic.value \"yes\"}}lethargic{{/selected}}"
-                    }, 
                     "type": "note", 
                     "param": null, 
-                    "hint": "{{#selected lethargic.value \"yes\"}}lethargic{{/selected}}"
+                    "label": {
+                        "en_us": "<strong>DANGER SIGNS:</strong>"
+                    }
                 }, 
                 {
                     "type": "note", 
@@ -109,7 +236,7 @@
                     "param": null, 
                     "condition": "selected({{vomit_everything}}, 'yes')", 
                     "label": {
-                        "en_us": "Vomits everything"
+                        "en_us": "<li>Vomits everything</li>"
                     }
                 }, 
                 {
@@ -117,7 +244,7 @@
                     "param": null, 
                     "condition": "selected({{convulsions}}, 'yes')", 
                     "label": {
-                        "en_us": "Convulsions"
+                        "en_us": "<li>Convulsions</li>"
                     }
                 }, 
                 {
@@ -125,12 +252,12 @@
                     "param": null, 
                     "condition": "selected({{lethargic}}, 'yes')", 
                     "label": {
-                        "en_us": "Lethargic or unconscious"
+                        "en_us": "<li>Lethargic or unconscious</li>"
                     }
                 }, 
                 {
                     "type": "acknowledge", 
-                    "name": "acknowledged_urgent_attention", 
+                    "name": "acknowledge_urgent_attention", 
                     "param": null, 
                     "label": {
                         "en_us": "This child needs <strong>URGENT</strong> attention; complete the assessment and any pre-referral treatment immediately so referral is not delayed"
@@ -146,13 +273,177 @@
             "name": "difficulty_breathing", 
             "param": "yes_no", 
             "label": {
-                "en_us": "Does the child have difficulty breathing?"
+                "en_us": "Does the child have cough or difficult breathing?"
             }
         }, 
         {
-            "type": "goto_if", 
-            "param": "breath", 
-            "condition": "selected({{difficulty_breathing}}, 'yes')"
+            "param": "diarrhoea_sec", 
+            "type": "goto", 
+            "condition": "selected({{difficulty_breathing}}, 'no')", 
+            "comments": "Add danger signs to condition? Display notice if there is no respiratory problem?"
+        }, 
+        {
+            "param": null, 
+            "name": "how_long_difficulty_breathing", 
+            "comments": "I hope to combine this with the previous question on the same screen but I think some code changes will be needed to make it dynamically appear/disapper. If that doesn't work I'll rephrase it. Also, units?", 
+            "type": "integer", 
+            "condition": "selected({{difficulty_breathing}}, 'yes')", 
+            "label": {
+                "en_us": "For how long?"
+            }
+        }, 
+        {
+            "name": "count_breath", 
+            "hint": "CHILD MUST BE CALM", 
+            "templatePath": "breathCounter.handlebars", 
+            "type": "integer", 
+            "param": null, 
+            "label": {
+                "en_us": "Count the breaths in one minute."
+            }
+        }, 
+        {
+            "name": "chest_indrawing", 
+            "hint": "CHILD MUST BE CALM", 
+            "type": "select_one", 
+            "param": "present", 
+            "label": {
+                "en_us": "Look for chest indrawing."
+            }
+        }, 
+        {
+            "type": "goto", 
+            "param": "severe_pneumonia", 
+            "condition": "selected({{chest_indrawing}}, 'present')"
+        }, 
+        {
+            "param": "pneumonia", 
+            "type": "goto", 
+            "condition": "{{fast_breathing}}", 
+            "comments": "Need calculated \"fast breathing\" value"
+        }, 
+        {
+            "type": "goto", 
+            "param": "cough_or_cold"
+        }, 
+        {
+            "type": "label", 
+            "param": "severe_pneumonia"
+        }, 
+        {
+            "prompts": [
+                {
+                    "label": {
+                        "en_us": "CLASSIFICATION: <strong>SEVERE PNEUMONIA OR VERY SEVERE DISEASE</strong>"
+                    }, 
+                    "type": "note", 
+                    "param": null, 
+                    "hint": "<hr/>\nSIGNS:\n<ul>\n<li\n{{#selected chest_indrawing.value \"not_present\"}}\nclass=\"strikethrough\"\n{{/selected}}\n>\nChest indrawing.\n</li>\n</ul>"
+                }, 
+                {
+                    "name": "acknowledge_give_first_dose_of_cotrimoxazole", 
+                    "param": null, 
+                    "type": "acknowledge", 
+                    "comments": "Should dosage differ by age?", 
+                    "label": {
+                        "en_us": "Give first dose of cotrimoxazole"
+                    }
+                }, 
+                {
+                    "type": "acknowledge", 
+                    "name": "acknowledge_refer_urgently_to_hospital", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "Refer URGENTLY to hospital."
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "goto", 
+            "param": "diarrhoea_sec"
+        }, 
+        {
+            "type": "label", 
+            "param": "pneumonia"
+        }, 
+        {
+            "prompts": [
+                {
+                    "label": {
+                        "en_us": "CLASSIFICATION: PNEUMONIA"
+                    }, 
+                    "type": "note", 
+                    "param": null, 
+                    "hint": "SIGNS:\n<ul>\n<li>Fast breathing</li>\n</ul>"
+                }, 
+                {
+                    "name": "acknowledge_give_cotrimoxazole", 
+                    "param": null, 
+                    "type": "acknowledge", 
+                    "comments": "TODO: Infer dosage by age", 
+                    "label": {
+                        "en_us": "Give first dose of cotrimoxazole for 5 days. (2 Pediatric tablets twice daily for a child up to 12 months and 3 tablets twice daily for a child 12 months up to 5 years."
+                    }
+                }, 
+                {
+                    "type": "acknowledge", 
+                    "name": "acknowledge_follow_up_2_days", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "<strong>Follow up in 2 days.</strong>"
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "goto", 
+            "param": "diarrhoea_sec"
+        }, 
+        {
+            "type": "label", 
+            "param": "cough_or_cold"
+        }, 
+        {
+            "prompts": [
+                {
+                    "label": {
+                        "en_us": "CLASSIFICATION: COUGH OR COLD"
+                    }, 
+                    "type": "note", 
+                    "param": null, 
+                    "hint": "SIGNS:\n<ul>\n<li>Fast breathing</li>\n</ul>"
+                }, 
+                {
+                    "name": "acknowledge_advise_home_care", 
+                    "param": null, 
+                    "type": "acknowledge", 
+                    "comments": "TODO: Infer dosage by age", 
+                    "label": {
+                        "en_us": "Advise home care for cough or cold."
+                    }
+                }, 
+                {
+                    "name": "acknowledge_refer_for_assessment", 
+                    "param": null, 
+                    "type": "acknowledge", 
+                    "comments": "TODO: Infer", 
+                    "label": {
+                        "en_us": "If coughing for more than 30 days, refer for assessment."
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "goto", 
+            "param": "diarrhoea_sec"
+        }, 
+        {
+            "type": "label", 
+            "param": "diarrhoea_sec"
         }, 
         {
             "type": "select_one", 
@@ -163,82 +454,115 @@
             }
         }, 
         {
-            "type": "goto_if", 
-            "param": "diarrhoea_sec", 
-            "condition": "selected({{diarrhoea}}, 'yes')"
+            "type": "goto", 
+            "param": "fever_section", 
+            "condition": "selected({{diarrhoea}}, 'no')"
+        }, 
+        {
+            "prompts": [
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "ASK:"
+                    }
+                }, 
+                {
+                    "type": "select_one", 
+                    "name": "diarrhoea_14_days_or_more", 
+                    "param": "yes_no", 
+                    "label": {
+                        "en_us": "Has the child had diarrhoea for 14 days or more?"
+                    }
+                }, 
+                {
+                    "type": "select_one", 
+                    "name": "blood_in_stool", 
+                    "param": "yes_no", 
+                    "label": {
+                        "en_us": "Is there blood in the stool?"
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "param": "severe_persistent_diarrhoea", 
+            "type": "goto", 
+            "condition": "selected({{diarrhoea_14_days_or_more}}, 'yes')", 
+            "comments": "TODO: check up on this"
+        }, 
+        {
+            "type": "goto", 
+            "param": "dysentery", 
+            "condition": "selected({{blood_in_stool}}, 'yes')"
+        }, 
+        {
+            "prompts": [
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "Assess the child's general condition:"
+                    }
+                }, 
+                {
+                    "name": "lethargic", 
+                    "param": "yes_no", 
+                    "type": "select_one", 
+                    "comments": "TODO: Copy approach to general condition question from other sheet. Not sure how to do it yet.", 
+                    "label": {
+                        "en_us": "Is the child lethargic or unconscious?"
+                    }
+                }, 
+                {
+                    "type": "select_one", 
+                    "name": "restless", 
+                    "param": "yes_no", 
+                    "label": {
+                        "en_us": "Is the child restless and irritable?"
+                    }
+                }
+            ], 
+            "type": "screen"
         }, 
         {
             "type": "select_one", 
-            "name": "fever", 
+            "name": "sunken_eyes", 
             "param": "yes_no", 
             "label": {
-                "en_us": "Does the child have fever?"
+                "en_us": "LOOK: Does the child have sunken eyes."
             }
         }, 
         {
-            "type": "goto_if", 
-            "param": "fever_sec", 
-            "condition": "selected({{fever}}, 'yes')"
-        }, 
-        {
-            "type": "label", 
-            "param": "diarrhoea_sec"
-        }, 
-        {
-            "type": "integer", 
-            "name": "how_long_difficulty_breathing", 
-            "param": null, 
-            "label": {
-                "en_us": "For how long?"
-            }
-        }, 
-        {
-            "type": "select_one", 
-            "name": "blood_in_stool", 
-            "param": "yes_no", 
-            "label": {
-                "en_us": "Is there blood in the stool?"
-            }
-        }, 
-        {
-            "type": "select_one", 
-            "name": "lethargic", 
-            "param": "yes_no", 
-            "label": {
-                "en_us": "Is the child lethargic or unconscious?"
-            }
-        }, 
-        {
-            "type": "select_one", 
-            "name": "restless", 
-            "param": "yes_no", 
-            "label": {
-                "en_us": "Restless and irritable?"
-            }
-        }, 
-        {
-            "type": "select_one", 
-            "name": "drink", 
-            "param": "yes_no", 
-            "label": {
-                "en_us": "Is the child able to drink or drink poorly?"
-            }
-        }, 
-        {
-            "type": "select_one", 
-            "name": "drink_eager", 
-            "param": "yes_no", 
-            "label": {
-                "en_us": "Is the child drinking eagerly?"
-            }
-        }, 
-        {
-            "type": "select_one", 
-            "name": "drink_thristy", 
-            "param": "yes_no", 
-            "label": {
-                "en_us": "Is the child thirsty?"
-            }
+            "prompts": [
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "Offer the child fluid to drink."
+                    }
+                }, 
+                {
+                    "type": "select_one", 
+                    "name": "drinking_poorly", 
+                    "param": "yes_no", 
+                    "label": {
+                        "en_us": "Is the child not able to drink or drinking poorly?"
+                    }
+                }, 
+                {
+                    "param": "yes_no", 
+                    "name": "drinking_eagerly", 
+                    "comments": "TODO: Can a child drink both eagerly and poorly?", 
+                    "type": "select_one", 
+                    "condition": "selected({{drinking_poorly}}, 'no')", 
+                    "label": {
+                        "en_us": "Is the child drinking eagerly, thirsty?"
+                    }
+                }
+            ], 
+            "type": "screen"
         }, 
         {
             "name": "skin_elasticity", 
@@ -250,113 +574,533 @@
             }
         }, 
         {
-            "type": "goto_if", 
-            "param": "skin_elastic", 
-            "condition": "selected({{skin_elasticity}}, 'yes')"
+            "type": "goto", 
+            "param": "severe_dehydration", 
+            "condition": "selected({{lethargic}},'yes') + selected({{skin_elasticity}}, 'very_slow') + selected({{sunken_eyes}}, 'yes') + selected({{drinking_poorly}}, 'yes')  >= 2"
+        }, 
+        {
+            "type": "goto", 
+            "param": "some_dehydration", 
+            "condition": "selected({{restless}}, 'yes') + (selected({{skin_elasticity}}, 'slow') || selected({{skin_elasticity}}, 'very_slow')) + selected({{sunken_eyes}}, 'yes') + selected({{drinking_eagerly}}, 'yes') >= 2"
+        }, 
+        {
+            "type": "goto", 
+            "param": "no_dehydration"
         }, 
         {
             "type": "label", 
-            "param": "breath"
+            "param": "severe_dehydration"
+        }, 
+        {
+            "prompts": [
+                {
+                    "param": null, 
+                    "hint": "SIGNS:", 
+                    "type": "note", 
+                    "condition": "selected({{lethargic}},'yes') + selected({{skin_elasticity}}, 'very_slow') + selected({{sunken_eyes}}, 'yes') >= 2", 
+                    "label": {
+                        "en_us": "CLASSIFICATION: <strong>SEVERE DEHYDRATION</strong>"
+                    }
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected({{lethargic}}, 'yes')", 
+                    "hint": "<li>Lethargic or unconscious.</li> "
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected({{sunken_eyes}}, 'yes')", 
+                    "hint": "<li>Sunken eyes.</li>"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected({{drinking_poorly}}, 'yes')", 
+                    "hint": "<li>Not able to drink or drinking poorly.</li>"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected({{skin_elasticity}}, 'very_slow')", 
+                    "hint": "<li>Skin pinch goes back very slowly.</li>"
+                }, 
+                {
+                    "type": "acknowledge", 
+                    "name": "refer_urgently_to_hospital_w_ORS", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "Refer URGENTLY to hospital \nwith mother giving frequent sips \nof ORS on the way."
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "goto", 
+            "param": "diarrhoea_section_end"
+        }, 
+        {
+            "type": "label", 
+            "param": "some_dehydration"
+        }, 
+        {
+            "prompts": [
+                {
+                    "label": {
+                        "en_us": "CLASSIFICATION: SOME DEHYDRATION"
+                    }, 
+                    "type": "note", 
+                    "param": null, 
+                    "hint": "SIGNS:"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected({{restless}}, 'yes')", 
+                    "hint": "<li>Restless, irritable.</li> "
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected({{sunken_eyes}}, 'yes')", 
+                    "hint": "<li>Sunken eyes.</li>"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected({{drinking_eagerly}}, 'yes')", 
+                    "hint": "<li>Drinks eagerly, thirsty.</li>"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "(selected({{skin_elasticity}}, 'slow') || selected({{skin_elasticity}}, 'very_slow'))", 
+                    "hint": "<li>Skin pinch goes back slowly.</li>"
+                }, 
+                {
+                    "type": "acknowledge", 
+                    "name": "some_dehydration_treatment", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "<ol><li>Give fluid and food for some dehydration (Plan B)</li>\n<li>Follow up in 2 days if not improving.</li></ol>"
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "goto", 
+            "param": "diarrhoea_section_end"
+        }, 
+        {
+            "type": "label", 
+            "param": "no_dehydration"
+        }, 
+        {
+            "label": {
+                "en_us": "CLASSIFICATION: NO DEHYDRATION"
+            }, 
+            "type": "note", 
+            "param": null, 
+            "hint": "Not enough signs to classify as    \n  some or severe dehydration.   "
+        }, 
+        {
+            "type": "acknowledge", 
+            "name": "no_dehydration_treatment", 
+            "param": null, 
+            "label": {
+                "en_us": "<ol><li>Give fluids to treat diarrhea at home (Plan A)</li>\n<li>Follow up in 2 days if not improving.</li></ol>"
+            }
+        }, 
+        {
+            "type": "goto", 
+            "param": "diarrhoea_section_end"
+        }, 
+        {
+            "type": "label", 
+            "param": "severe_persistent_diarrhoea"
+        }, 
+        {
+            "prompts": [
+                {
+                    "label": {
+                        "en_us": "CLASSIFICATION: SEVERE PERSISTENT DIARRHOEA"
+                    }, 
+                    "type": "note", 
+                    "param": null, 
+                    "hint": "Signs:\n<li>Diarrhoea for 14 days or more.</li>"
+                }, 
+                {
+                    "type": "acknowledge", 
+                    "name": "refer_to_hospital", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "Refer to hospital."
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "goto", 
+            "param": "diarrhoea_section_end"
+        }, 
+        {
+            "type": "label", 
+            "param": "dysentery"
+        }, 
+        {
+            "prompts": [
+                {
+                    "label": {
+                        "en_us": "CLASSIFICATION: DYSENTERY"
+                    }, 
+                    "type": "note", 
+                    "param": null, 
+                    "hint": "Signs:\n<li>Blood  in the stool</li>"
+                }, 
+                {
+                    "name": "give_cotrimoxazole", 
+                    "hint": "2 Pediatric tablets twice daily for a child 2 up to 12 months and 3 tablets twice dialy for a child 12 months up to 5 years.", 
+                    "param": null, 
+                    "type": "acknowledge", 
+                    "comments": "should this have the dosage specifics mentioned above", 
+                    "label": {
+                        "en_us": "Give first dose of oral cotrimoxazole for 5 days."
+                    }
+                }, 
+                {
+                    "type": "acknowledge", 
+                    "name": "follow_up_2_days", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "Follow-up in 2 days."
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "label", 
+            "param": "diarrhoea_section_end"
+        }, 
+        {
+            "type": "label", 
+            "param": "fever_section"
+        }, 
+        {
+            "name": "fever", 
+            "param": "yes_no", 
+            "type": "select_one", 
+            "comments": "TODO: Infer this from temp using calculate", 
+            "label": {
+                "en_us": "Does the child have fever?"
+            }
+        }, 
+        {
+            "type": "goto", 
+            "param": "malnutrition_section", 
+            "condition": "selected({{fever}}, 'no')"
+        }, 
+        {
+            "type": "note", 
+            "param": null, 
+            "label": {
+                "en_us": "ASK"
+            }
         }, 
         {
             "type": "integer", 
-            "name": "how_long_difficulty_breathing", 
+            "name": "fever_length", 
             "param": null, 
             "label": {
-                "en_us": "For how long?"
+                "en_us": "Fever for how long?"
             }
         }, 
         {
-            "type": "breath_counter", 
-            "name": "count_breath", 
-            "param": null, 
+            "name": "fever_present_every_day", 
+            "param": "yes_no", 
+            "type": "select_one", 
+            "condition": "{{fever_length}} > 7", 
             "label": {
-                "en_us": "Count the breaths in one minute"
+                "en_us": "Has fever been present every day?"
             }
         }, 
         {
             "type": "select_one", 
-            "name": "chest_indrawing", 
-            "param": "present", 
+            "name": "stiff_neck", 
+            "param": "yes_no", 
             "label": {
-                "en_us": "Look for Chest Indrawing"
+                "en_us": "LOOK or FEEL: Does the child have a stiff neck."
+            }
+        }, 
+        {
+            "param": "very_severe_febrile_disease", 
+            "type": "goto", 
+            "condition": "selected({{stiff_neck}}, 'yes')", 
+            "comments": "TODO: Make calculate for general danger signs"
+        }, 
+        {
+            "type": "goto", 
+            "param": "malaria", 
+            "comments": "TODO: Fever formula"
+        }, 
+        {
+            "type": "label", 
+            "param": "very_severe_febrile_disease"
+        }, 
+        {
+            "type": "note", 
+            "param": null, 
+            "label": {
+                "en_us": "<strong>DANGER SIGNS</strong>     "
+            }
+        }, 
+        {
+            "type": "note", 
+            "param": null, 
+            "comments": "TODO", 
+            "label": {
+                "en_us": "<li>Fever (by history hot or temperature 37.5 deg C or above)</li>"
+            }
+        }, 
+        {
+            "type": "goto", 
+            "param": "malnutrition_section"
+        }, 
+        {
+            "type": "label", 
+            "param": "malaria"
+        }, 
+        {
+            "type": "label", 
+            "param": "malnutrition_section"
+        }, 
+        {
+            "prompts": [
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "LOOK and Feel"
+                    }
+                }, 
+                {
+                    "type": "select_one", 
+                    "name": "wasting", 
+                    "param": "present", 
+                    "label": {
+                        "en_us": "Look for visible severe wasting"
+                    }
+                }, 
+                {
+                    "type": "select_one", 
+                    "name": "oedema", 
+                    "param": "present", 
+                    "label": {
+                        "en_us": "Look for oedema of both feet"
+                    }
+                }, 
+                {
+                    "type": "goto", 
+                    "param": "severe_malnutrtion", 
+                    "condition": "selected({{oedema}},'present')"
+                }, 
+                {
+                    "type": "goto", 
+                    "param": "severe_malnutrtion", 
+                    "condition": "selected({{wasting}},'present')"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "comments": "Template for plotting weight for age?", 
+                    "label": {
+                        "en_us": "Determine grade of malnutrition by plotting weight for age"
+                    }
+                }, 
+                {
+                    "type": "goto", 
+                    "param": "severe_wasting"
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "label", 
+            "param": "severe_wasting"
+        }, 
+        {
+            "prompts": [
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "CLASSIFICATION: Normal weight for age or Malnutrition grade1 if NOT VERY LOW WEIGHT"
+                    }
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "CLASSIFICATION: Malnutrition grade 2,3 or 4 if VERY LOW WEIGHT"
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "label", 
+            "param": "severe_malnutrition"
+        }, 
+        {
+            "prompts": [
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "en_us": "CLASSIFICATION: <strong>SEVERE MALNUTRITION</strong>"
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "label", 
+            "param": "anaemia"
+        }, 
+        {
+            "type": "select_one", 
+            "name": "anaemia_check", 
+            "param": "no_some_severe", 
+            "label": {
+                "en_us": "LOOK and FEEL for Palmar Pallor"
+            }
+        }, 
+        {
+            "type": "goto", 
+            "param": "no_palmar", 
+            "condition": "selected({{anaemia_check}},'none')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "some_palmar", 
+            "condition": "selected({{anaemia_check}},'some')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "severe_palmar", 
+            "condition": "selected({{anaemia_check}},'severe')"
+        }, 
+        {
+            "type": "label", 
+            "param": "no_palmar"
+        }, 
+        {
+            "type": "note", 
+            "param": null, 
+            "label": {
+                "en_us": "CLASSIFICATION: NO ANAEMIA"
             }
         }, 
         {
             "type": "label", 
-            "param": "skin_elastic"
+            "param": "some_palmar"
         }, 
         {
-            "type": "select_one", 
-            "name": "go_back", 
+            "type": "note", 
             "param": null, 
             "label": {
-                "en_us": "Does it go back"
+                "en_us": "CLASSIFICATION: ANAEMIA"
+            }
+        }, 
+        {
+            "type": "label", 
+            "param": "severe_palmar"
+        }, 
+        {
+            "type": "note", 
+            "param": null, 
+            "label": {
+                "en_us": "CLASSIFICATION: SEVERE ANAEMIA"
+            }
+        }, 
+        {
+            "required": true, 
+            "type": "label", 
+            "param": "check_immunization_status"
+        }, 
+        {
+            "type": "select_multiple", 
+            "name": "needed_vaccinations", 
+            "param": "needed_vaccinations", 
+            "label": {
+                "en_us": "Which vaccinations has the child NOT received?"
+            }
+        }, 
+        {
+            "name": "other_problems", 
+            "required": true, 
+            "type": "text", 
+            "param": null, 
+            "label": {
+                "en_us": "Assess other problems:"
+            }
+        }, 
+        {
+            "name": "age", 
+            "required": true, 
+            "type": "text", 
+            "param": null, 
+            "label": {
+                "en_us": "Age:"
+            }
+        }, 
+        {
+            "name": "weight", 
+            "required": true, 
+            "type": "number", 
+            "param": null, 
+            "label": {
+                "en_us": "Weight in kilograms:"
+            }
+        }, 
+        {
+            "name": "temperature", 
+            "required": true, 
+            "type": "number", 
+            "param": null, 
+            "label": {
+                "en_us": "Temperature in Celsius:"
+            }
+        }, 
+        {
+            "name": "initial_visit", 
+            "required": true, 
+            "type": "datetime", 
+            "param": null, 
+            "label": {
+                "en_us": "Initial Visit:"
+            }
+        }, 
+        {
+            "name": "follow_up_visit", 
+            "required": true, 
+            "type": "datetime", 
+            "param": null, 
+            "label": {
+                "en_us": "Follow-up Visit:"
             }
         }
     ], 
-    "datafields": {
-        "go_back": {
-            "type": "string"
-        }, 
-        "fever": {
-            "type": "string"
-        }, 
-        "name": {
-            "type": "string"
-        }, 
-        "drink_eager": {
-            "type": "string"
-        }, 
-        "age": {
-            "type": "integer"
-        }, 
-        "drink": {
-            "type": "string"
-        }, 
-        "skin_elasticity": {
-            "type": "string"
-        }, 
-        "diarrhoea": {
-            "type": "string"
-        }, 
-        "restless": {
-            "type": "string"
-        }, 
-        "difficulty_breathing": {
-            "type": "string"
-        }, 
-        "drink_thristy": {
-            "type": "string"
-        }, 
-        "how_long_difficulty_breathing": {
-            "type": "integer"
-        }, 
-        "acknowledged_urgent_attention": {
-            "type": "string"
-        }, 
-        "vomit_everything": {
-            "type": "string"
-        }, 
-        "blood_in_stool": {
-            "type": "string"
-        }, 
-        "convulsions": {
-            "type": "string"
-        }, 
-        "chest_indrawing": {
-            "type": "string"
-        }, 
-        "able_to_drink": {
-            "type": "string"
-        }, 
-        "lethargic": {
-            "type": "string"
-        }, 
-        "temperature": {
-            "type": "integer"
+    "calculates": [
+        {
+            "formula": "{{X}}", 
+            "name": "fast_breathing"
         }
-    }, 
+    ], 
     "choices": {
         "attachment_quality_sign": [
             {
@@ -410,6 +1154,12 @@
             {
                 "name": "cereal", 
                 "label": "Cereal"
+            }
+        ], 
+        "no_some_severe": [
+            {
+                "name": "none", 
+                "label": "none"
             }
         ], 
         "skin_elasticity": [

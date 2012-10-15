@@ -1,6 +1,8 @@
 define(['database', 'underscore'],
 function(database,   _) {
     return {
+        //calculates will be set by the builder
+        calculates: {},
         localize: function(textOrLangMap, locale) {
             if(_.isUndefined(textOrLangMap)) {
                 return 'undefined';
@@ -57,9 +59,9 @@ function(database,   _) {
                 });
             }
         },
-        //V gets a value by name and parses it.
+        //data gets a value by name and parses it.
         //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
-        V: function(valueName) {
+        data: function(valueName) {
             var datavalue;
             /*
             var calculate = _.find(calculates, function(calculate){

@@ -1,6 +1,7 @@
 'use strict';
 define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes', 'formulaFunctions', 'underscore'],
 function(controller,   opendatakit,   database,   $,        promptTypes,   formulaFunctions,   _) {
+    var calculates = {};
     var evalInEnvironment = (function() {
         //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
         //It's still possible to really mess things up from here though because the
@@ -22,7 +23,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         */
         //This is the way I'm setting up bindings for now, but it's suboptimal from a DRY perspective.
         var selected = formulaFunctions.selected;
-        var V = formulaFunctions.V;
+        var data = formulaFunctions.data;
         var localize = formulaFunctions.localize;
         var equivalent = formulaFunctions.equivalent;
         
@@ -216,6 +217,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 widgets: widgets
             };
 
+            /*
             var navs = [];
             var calculates = [];
             for ( var i = 0 ; i < surveyJson.survey.length ; ++i ) {
@@ -226,6 +228,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     navs.push(surveyItem);
                 }
             }
+            */
             var prompts = ([{
                 "type": "goto_if",
                 "condition": function() {
@@ -250,7 +253,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 type: "opening",
                 name: "_opening",
                 label: "opening page"
-            }]).concat(navs).concat([{
+            }]).concat(surveyJson.survey).concat([{
                 type: "finalize",
                 name: "_finalize",
                 label: "Save Form"
@@ -261,8 +264,13 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             }]);
 
             console.log('initializing');
+            //Transform the calculate sheet into an object with format {calculation_name:function}
+            calculates = _.object(_.map(surveyJson.calculates, function(calculate){
+                return [calculate.name, that.propertyParsers.formula(calculate.calculation)];
+            }));
+            formulaFunctions.calculates = calculates;
+            
             that.form.prompts = this.initializePrompts(prompts);
-            calculates = this.initializePrompts(calculates);
             controller.prompts = that.form.prompts;
             //controller.calcs = that.form.calcs;
             console.log('starting');

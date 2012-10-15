@@ -59,7 +59,9 @@ Handlebars.registerPartial('labelHint', labelHintPartial);
  **/
 Handlebars.registerHelper('substitute', function(options) {
     var template = Handlebars.compile(options.fn(this));
-    return template(database.mdl.data);
+    var context = database.mdl.data;
+    context.calculates = formulaFunctions.calculates;
+    return template(context);
 });
 
 Handlebars.registerHelper('selected', function(prompt, value, options) {
