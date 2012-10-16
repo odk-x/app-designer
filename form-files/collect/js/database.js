@@ -6,24 +6,24 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
   mdl:mdl,
   withDb:function(ctxt, transactionBody) {
     var inContinuation = false;
-	ctxt.append('database.withDb');
+    ctxt.append('database.withDb');
     var that = this;
     try {
         if ( that.submissionDb ) {
             that.submissionDb.transaction(transactionBody, function(error) {
-					ctxt.append("withDb.transaction.error", error.toString());
-					inContinuation = true;
-					ctxt.failure();
-					}, function() {
-						ctxt.append("withDb.transaction.success");
-						inContinuation = true;
-						ctxt.success();
-					});
+                    ctxt.append("withDb.transaction.error", error.toString());
+                    inContinuation = true;
+                    ctxt.failure();
+                    }, function() {
+                        ctxt.append("withDb.transaction.success");
+                        inContinuation = true;
+                        ctxt.success();
+                    });
         } else if(!window.openDatabase) {
-			ctxt.append('database.withDb.notSupported');
+            ctxt.append('database.withDb.notSupported');
             alert('not supported');
-			inContinuation = true;
-			ctxt.failure();
+            inContinuation = true;
+            ctxt.failure();
         } else {
             var settings = opendatakit.getDatabaseSettings(ctxt);
             var database = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
@@ -34,42 +34,42 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                         transaction.executeSql('CREATE TABLE IF NOT EXISTS instance_info(id INTEGER NOT NULL PRIMARY KEY, timestamp INTEGER NOT NULL, form_id TEXT NOT NULL, instance_id TEXT NOT NULL, saved NULL, name TEXT NOT NULL, type TEXT NOT NULL, val TEXT NULL);', []);
                     });
                 }, function(error) {
-					ctxt.append("withDb.createDb.transaction.error", error.toString());
-					inContinuation = true;
-					ctxt.failure();
-				}, function() {
+                    ctxt.append("withDb.createDb.transaction.error", error.toString());
+                    inContinuation = true;
+                    ctxt.failure();
+                }, function() {
                     // DB is created -- record the submissionDb and initiate the transaction...
                     that.submissionDb = database;
-					ctxt.append("withDb.createDb.transacton.success");
-					that.submissionDb.transaction(transactionBody, function(error) {
-								ctxt.append("withDb.transaction.error", error.toString());
-								inContinuation = true;
-								ctxt.failure();
-							}, function() {
-								ctxt.append("withDb.transaction.success");
-								inContinuation = true;
-								ctxt.success();
-							});
+                    ctxt.append("withDb.createDb.transacton.success");
+                    that.submissionDb.transaction(transactionBody, function(error) {
+                                ctxt.append("withDb.transaction.error", error.toString());
+                                inContinuation = true;
+                                ctxt.failure();
+                            }, function() {
+                                ctxt.append("withDb.transaction.success");
+                                inContinuation = true;
+                                ctxt.success();
+                            });
                 });
         }
     } catch(e) {
         // Error handling code goes here.
         if(e.INVALID_STATE_ERR) {
             // Version number mismatch.
-			ctxt.append('withDb.exception', 'invalid db version');
+            ctxt.append('withDb.exception', 'invalid db version');
             alert("Invalid database version.");
         } else {
-			ctxt.append('withDb.exception', 'unknown error: ' + e);
+            ctxt.append('withDb.exception', 'unknown error: ' + e);
             alert("Unknown error " + e + ".");
         }
-		if ( !inContinuation ) {
-			try {
-				ctxt.failure();
-			} catch(e) {
-				ctxt.append('withDb.ctxt.failure.exception', 'unknown error: ' + e);
-				alert("withDb.ctxt.failure.exception " + e);
-			}
-		}
+        if ( !inContinuation ) {
+            try {
+                ctxt.failure();
+            } catch(e) {
+                ctxt.append('withDb.ctxt.failure.exception', 'unknown error: ' + e);
+                alert("withDb.ctxt.failure.exception " + e);
+            }
+        }
         return;
     }
 },
@@ -211,7 +211,7 @@ deleteMetaDataStmt:function(formid, instanceid) {
 },
 putData:function(ctxt, name, type, value, onSuccessfulSave, onFailure) {
       var that = this;
-	  ctxt.append('putData', 'name: ' + name);
+      ctxt.append('putData', 'name: ' + name);
       that.withDb( ctxt, function(transaction) {
             var is = that.insertStmt(name, type, value);
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
@@ -238,7 +238,7 @@ putDataKeyTypeValueMapHelper:function(idx, that, ktvlist) {
  */
 putDataKeyTypeValueMap:function(ctxt, ktvlist) {
       var that = this;
-	  ctxt.append('database.putDataKeyTypeValueMap', ktvlist.length );
+      ctxt.append('database.putDataKeyTypeValueMap', ktvlist.length );
       that.withDb( ctxt, that.putDataKeyTypeValueMapHelper(0, that, ktvlist) );
 },
 constructJsonDataClosureHelper:function(continuation) {
@@ -286,8 +286,8 @@ getAllData:function(ctxt) {
       var that = this;
       var tlo;
       that.withDb( $.extend({},ctxt,{success:function() {
-				ctxt.append("getAllData.success");
-				ctxt.success(tlo)}}), function(transaction) {
+                ctxt.append("getAllData.success");
+                ctxt.success(tlo)}}), function(transaction) {
         var ss = that.selectAllStmt();
         transaction.executeSql(ss.stmt, ss.bind, that.constructJsonDataClosureHelper(function(arg) { tlo = arg;}));
       });
@@ -295,7 +295,7 @@ getAllData:function(ctxt) {
 cacheAllData:function(ctxt) {
     var that = this;
     this.getAllData($.extend({},ctxt,{success:function(tlo) {
-		ctxt.append("cacheAllData.success");
+        ctxt.append("cacheAllData.success");
         mdl.data = (tlo == null) ? {} : tlo;
         ctxt.success();
     }}));
@@ -327,7 +327,7 @@ putMetaDataKeyTypeValueMapHelper:function(idx, that, ktvlist) {
  * ktvlist is: [ { key: 'keyname', type: 'typename', value: 'val' }, ...]
  */
 putMetaDataKeyTypeValueMap:function(ctxt, ktvlist) {
-	  ctxt.append('database.putMetaDataKeyTypeValueMap', ktvlist.length);
+      ctxt.append('database.putMetaDataKeyTypeValueMap', ktvlist.length);
       var that = this;
       that.withDb( ctxt, that.putMetaDataKeyTypeValueMapHelper(0, that, ktvlist));
 },
@@ -335,9 +335,9 @@ getAllMetaData:function(ctxt) {
       var that = this;
       var tlo;
       that.withDb( $.extend({},ctxt,{success:function() {
-				ctxt.append('getAllMetaData.success');
-				ctxt.success(tlo);
-				}}), function(transaction) {
+                ctxt.append('getAllMetaData.success');
+                ctxt.success(tlo);
+                }}), function(transaction) {
         var ss = that.selectAllMetaDataStmt();
         transaction.executeSql(ss.stmt, ss.bind, that.constructJsonDataClosureHelper(function(arg) { tlo = arg;}));
       });
@@ -346,8 +346,8 @@ cacheAllMetaData:function(ctxt) {
     var that = this;
     // pull everything for synchronous read access
     that.getAllMetaData($.extend({},ctxt,{success:function(tlo) {
-		console.log('cacheAllMetaData.success');
-		ctxt.append('cacheAllMetaData.success');
+        console.log('cacheAllMetaData.success');
+        ctxt.append('cacheAllMetaData.success');
         if ( tlo == null ) {
             tlo = {};
         }
@@ -361,16 +361,16 @@ cacheAllMetaData:function(ctxt) {
         // update qp
         mdl.qp = tlo;
         ctxt.success();
-		}}));
+        }}));
 },
 getCrossTableMetaData:function(ctxt, formId, instanceId, name) {
       var that = this;
       var dbType;
       var dbValue;
       that.withDb( $.extend({},ctxt,{success:function() {
-			ctxt.append('getCrossTableMetaData.success');
-			ctxt.success(dbValue,dbType);
-			}}), function(transaction) {
+            ctxt.append('getCrossTableMetaData.success');
+            ctxt.success(dbValue,dbType);
+            }}), function(transaction) {
         var ss = that.selectCrossTableMetaDataStmt(formId, instanceId, name);
         transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
             if (result.rows.length == 0 ) {
@@ -389,7 +389,7 @@ getCrossTableMetaData:function(ctxt, formId, instanceId, name) {
 },
 putCrossTableMetaData:function(ctxt, formId, instanceId, name, type, value) {
       var that = this;
-	  ctxt.append('putCrossTableMetaData', name);
+      ctxt.append('putCrossTableMetaData', name);
       that.withDb( ctxt, function(transaction) {
             var is = that.insertCrossTableMetaDataStmt(formId, instanceId, name, type, value);
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
@@ -426,34 +426,34 @@ save_all_changes:function(ctxt, asComplete, continuation) {
     // TODO: for above -- where would the instance name come from???
     
       that.withDb( $.extend({}, ctxt, {success:function() {
-				ctxt.append('save_all_changes.markCurrentStateSaved.success', 
-				mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value + " asComplete: " + asComplete);
-				if ( asComplete ) {
-					// TODO: traverse all elements evaluating their constraints (validating their contents)
-					// TODO: show error boxes for any violated constraints...
-					// ONLY if successful, then:
-					  ctxt.append('save_all_changes.cleanup');
-					  that.withDb( ctxt, 
-							function(transaction) {
-							var cs = that.markCurrentStateAsSavedStmt('true');
-							transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-								// and now delete the change history...
-								var cs = that.deletePriorChangesStmt();
-								transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-									// and update the metadata too...
-									var cs = that.markCurrentMetaDataStateAsSavedStmt('true');
-									transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-										var cs = that.deletePriorMetaDataChangesStmt();
-										transaction.executeSql(cs.stmt, cs.bind);
-									});
-								});
-							});
-						});
-				} else {
-					ctxt.success();
-				}
-			}}), 
-			function(transaction) {
+                ctxt.append('save_all_changes.markCurrentStateSaved.success', 
+                mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value + " asComplete: " + asComplete);
+                if ( asComplete ) {
+                    // TODO: traverse all elements evaluating their constraints (validating their contents)
+                    // TODO: show error boxes for any violated constraints...
+                    // ONLY if successful, then:
+                      ctxt.append('save_all_changes.cleanup');
+                      that.withDb( ctxt, 
+                            function(transaction) {
+                            var cs = that.markCurrentStateAsSavedStmt('true');
+                            transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+                                // and now delete the change history...
+                                var cs = that.deletePriorChangesStmt();
+                                transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+                                    // and update the metadata too...
+                                    var cs = that.markCurrentMetaDataStateAsSavedStmt('true');
+                                    transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+                                        var cs = that.deletePriorMetaDataChangesStmt();
+                                        transaction.executeSql(cs.stmt, cs.bind);
+                                    });
+                                });
+                            });
+                        });
+                } else {
+                    ctxt.success();
+                }
+            }}), 
+            function(transaction) {
             var cs = that.markCurrentStateAsSavedStmt('false');
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
                 var cs = that.markCurrentMetaDataStateAsSavedStmt('false');
@@ -464,7 +464,7 @@ save_all_changes:function(ctxt, asComplete, continuation) {
 },
 ignore_all_changes:function(ctxt) {
       var that = this;
-	  ctxt.append('database.ignore_all_changes');
+      ctxt.append('database.ignore_all_changes');
       that.withDb( ctxt, function(transaction) {
             var cs = that.deleteUnsavedChangesStmt();
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
@@ -475,7 +475,7 @@ ignore_all_changes:function(ctxt) {
 },
  delete_all:function(ctxt, formid, instanceId) {
       var that = this;
-	  ctxt.append('delete_all');
+      ctxt.append('delete_all');
       that.withDb( ctxt, function(transaction) {
             var cs = that.deleteStmt(formid, instanceId);
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
@@ -505,10 +505,10 @@ getDataValue:function(name) {
 },
 setData:function(ctxt, name, datatype, value) {
     var that = this;
-	that.putData($.extend({}, ctxt, {success: function() {
-			// that.cacheAllData(ctxt);
-			ctxt.success();
-		}}), name, datatype, value);
+    that.putData($.extend({}, ctxt, {success: function() {
+            // that.cacheAllData(ctxt);
+            ctxt.success();
+        }}), name, datatype, value);
 },
 getMetaDataValue:function(name) {
     var path = name.split('.');
@@ -521,10 +521,10 @@ getMetaDataValue:function(name) {
 },
 setMetaData:function(ctxt, name, datatype, value) {
     var that = this;
-	that.putMetaData($.extend({}, ctxt, {success: function() {
-				// that.cacheAllMetaData(ctxt);
-				ctxt.success();
-			}}), name, datatype, value);
+    that.putMetaData($.extend({}, ctxt, {success: function() {
+                // that.cacheAllMetaData(ctxt);
+                ctxt.success();
+            }}), name, datatype, value);
 }
 };
 });

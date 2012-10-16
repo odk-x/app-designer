@@ -14,12 +14,12 @@ return Backbone.View.extend({
     template: null,
     swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
     noPreviousPage: function(ctxt) {
-		ctxt.append("screenManager.noPreviousPage");
+        ctxt.append("screenManager.noPreviousPage");
         alert("I've forgotten what the previous page was!");
         ctxt.success();
     },
     noNextPage: function(ctxt) {
-		ctxt.append("screenManager.noNextPage");
+        ctxt.append("screenManager.noNextPage");
         alert("No next page!");
         ctxt.success();
     },
@@ -28,7 +28,7 @@ return Backbone.View.extend({
             alert("Unexpected error: " + action + " Reason: " + ex );
         } catch (e) {
         }
-		ctxt.success();
+        ctxt.success();
     },
     renderContext:{},
     initialize: function(ctxt){
@@ -48,7 +48,7 @@ return Backbone.View.extend({
     },
     cleanUpScreenManager: function(ctxt){
         this.swipeEnabled = false;
-		this.savedCtxt = null;
+        this.savedCtxt = null;
         this.displayWaiting(ctxt);
     },
     displayWaiting: function(ctxt){
@@ -127,7 +127,7 @@ return Backbone.View.extend({
                     $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
                 }}));
             } else {
-				ctxt.append('screenManager.setPrompt.waiting');
+                ctxt.append('screenManager.setPrompt.waiting');
                 that.displayWaiting(ctxt);
                 setTimeout( f, 100);
             }
@@ -143,43 +143,43 @@ return Backbone.View.extend({
         Only the opening prompt has problems because it does some unique things
         in it's beforeMove function.
         */
-		var ctxt = this.controller.newContext(evt);
-		ctxt.append('screenManager.gotoNextScreen', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
+        var ctxt = this.controller.newContext(evt);
+        ctxt.append('screenManager.gotoNextScreen', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if(!this.swipeEnabled) return false;
-		this.swapEnabled = false;
+        this.swapEnabled = false;
         this.controller.gotoNextScreen($.extend({},ctxt,{success:function(){ this.swapEnabled = true; ctxt.success();},failure:function(){ this.swapEnabled = false; ctxt.failure();}}));
         return false;
     },
     gotoPreviousScreen: function(evt){
-		var ctxt = this.controller.newContext(evt);
-		ctxt.append('screenManager.gotoPreviousScreen', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
+        var ctxt = this.controller.newContext(evt);
+        ctxt.append('screenManager.gotoPreviousScreen', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if(!this.swipeEnabled) return false;
-		this.swapEnabled = false;
+        this.swapEnabled = false;
         this.controller.gotoPreviousScreen($.extend({},ctxt,{success:function(){ this.swapEnabled = true; ctxt.success();},failure:function(){ this.swapEnabled = false; ctxt.failure();}}));
         return false;
     },
     handlePagechange: function(evt){
-		var ctxt = this.savedCtxt;
-		this.savedCtxt = null;
-		
-		if ( ctxt != null ) {
-			ctxt.append('screenManager.handlePageChange.linked');
-			this.prompt.delegateEvents();
-			if(this.previousPageEl){
-				var pg = this.previousPageEl;
-				this.previousPageEl = null;
-				pg.remove();
-			}
-			this.swipeEnabled = true;
-			ctxt.success();
-		} else {
-			ctxt.append('screenManager.handlePageChange.error');
-			ctxt.failure();
-		}
+        var ctxt = this.savedCtxt;
+        this.savedCtxt = null;
+        
+        if ( ctxt != null ) {
+            ctxt.append('screenManager.handlePageChange.linked');
+            this.prompt.delegateEvents();
+            if(this.previousPageEl){
+                var pg = this.previousPageEl;
+                this.previousPageEl = null;
+                pg.remove();
+            }
+            this.swipeEnabled = true;
+            ctxt.success();
+        } else {
+            ctxt.append('screenManager.handlePageChange.error');
+            ctxt.failure();
+        }
     },
     disableImageDrag: function(evt){
         evt.preventDefault();

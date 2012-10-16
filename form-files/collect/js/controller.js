@@ -10,7 +10,7 @@ return {
     calcs: [],
     previousScreenIndices : [],
     beforeMove: function(ctxt){
-		ctxt.append('controller.beforeMove');
+        ctxt.append('controller.beforeMove');
         var that = this;
         var prompt = null;
         if ( this.currentPromptIdx != -1 ) {
@@ -23,14 +23,14 @@ return {
                 ctxt.success();
             }
         } catch(ex) {
-			var e = (ex != null) ? ex.message + " stack: " + ex.stack : "undef";
-			console.error("controller.beforeMove: Exception: " + e);
+            var e = (ex != null) ? ex.message + " stack: " + ex.stack : "undef";
+            console.error("controller.beforeMove: Exception: " + e);
             ctxt.append('controller.beforeMove.exception', e );
-			ctxt.failure();
+            ctxt.failure();
         }
     },
     validate: function(ctxt){
-		ctxt.append('controller.validate');
+        ctxt.append('controller.validate');
         var that = this;
         var prompt;
         if ( this.currentPromptIdx != -1 ) {
@@ -43,18 +43,18 @@ return {
                 ctxt.success();
             }
         } catch(ex) {
-			var e = (ex != null) ? ex.message  + " stack: " + ex.stack : "undef";
-			console.error("controller.validate: Exception: " + e );
+            var e = (ex != null) ? ex.message  + " stack: " + ex.stack : "undef";
+            console.error("controller.validate: Exception: " + e );
             ctxt.append('controller.validate.exception', e );
             ctxt.failure();
         }
     },
     gotoPreviousScreen: function(ctxt){
         var that = this;
-		ctxt.append('controller:gotPreviousScreen');
+        ctxt.append('controller:gotPreviousScreen');
         that.beforeMove($.extend({}, ctxt,{
             success: function() {
-				ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
+                ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
                 while (that.hasPromptHistory(ctxt)) {
                     console.log("gotoPreviousScreen: poppreviousScreenNames ms: " + (+new Date()) + 
                                 " page: " + that.currentPromptIdx);
@@ -68,22 +68,22 @@ return {
                     that.setPrompt(ctxt, prmpt, {omitPushOnReturnStack:true, reverse:true});
                     return;
                 }
-				ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
+                ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
                 that.screenManager.noPreviousPage($.extend({}, ctxt,{
-										success: function() {
-											// pop ctxt
-											ctxt.append("gotoPreviousScreen.noPrompts");
-											that.gotoRef($.extend({},ctxt,{success:function() { ctxt.failure();}}),"0");
-										}}));
+                                        success: function() {
+                                            // pop ctxt
+                                            ctxt.append("gotoPreviousScreen.noPrompts");
+                                            that.gotoRef($.extend({},ctxt,{success:function() { ctxt.failure();}}),"0");
+                                        }}));
             },
             failure: function() {
-				ctxt.append("gotoPreviousScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
+                ctxt.append("gotoPreviousScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
                 // should stay on this screen...
-				if ( that.screenManager != null ) {
-					that.screenManager.unexpectedError($.extend({},ctxt,{success:function() { ctxt.failure(); }}), "beforeMove");
-				} else {
-					ctxt.failure();
-				}
+                if ( that.screenManager != null ) {
+                    that.screenManager.unexpectedError($.extend({},ctxt,{success:function() { ctxt.failure(); }}), "beforeMove");
+                } else {
+                    ctxt.failure();
+                }
             }
         }));
     },
@@ -119,14 +119,14 @@ return {
     },
     gotoNextScreen: function(ctxt, options){
         var that = this;
-		ctxt.log('intermediate');
+        ctxt.log('intermediate');
         that.beforeMove($.extend({}, ctxt,
-			{ success: function() {
-				ctxt.append("gotoNextScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
+            { success: function() {
+                ctxt.append("gotoNextScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
                 // we are ready for move -- validate...
                 that.validate( $.extend({}, ctxt, {
                     success: function() {
-						ctxt.append("gotoNextScreen.validate.success", "px: " +  that.currentPromptIdx);
+                        ctxt.append("gotoNextScreen.validate.success", "px: " +  that.currentPromptIdx);
                         // navigate through all gotos, goto_ifs and labels.
                         var promptCandidate = null;
                         if ( that.currentPromptIdx >= 0 ) {
@@ -138,31 +138,31 @@ return {
                         // abort and display error if we don't have any prompts...
                         if ( promptCandidate == null ) {
                             that.screenManager.noNextPage($.extend({}, ctxt,{
-										success: function() {
-											ctxt.append("gotoNextScreen.noPrompts");
-											that.gotoRef($.extend({},ctxt,{success:function(){ctxt.failure();}}),"0");
-										}}));
+                                        success: function() {
+                                            ctxt.append("gotoNextScreen.noPrompts");
+                                            that.gotoRef($.extend({},ctxt,{success:function(){ctxt.failure();}}),"0");
+                                        }}));
                             return;
                         }
                         
                         that.advanceToScreenPrompt($.extend({}, ctxt, {
-							success: function(prompt){
-								if(prompt) {
-									ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + "nextPx: " + prompt.promptIdx);
-									// todo -- change to use hash?
-									that.setPrompt(ctxt, prompt, options);
-								} else {
-									ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + "nextPx: no prompt!");
-									that.screenManager.noNextPage($.extend({}, ctxt,{
-											success: function() {
-												ctxt.append("gotoNextScreen.noPrompts");
-												that.gotoRef(ctxt,"0");
-											}}));
-								}
+                            success: function(prompt){
+                                if(prompt) {
+                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + "nextPx: " + prompt.promptIdx);
+                                    // todo -- change to use hash?
+                                    that.setPrompt(ctxt, prompt, options);
+                                } else {
+                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + "nextPx: no prompt!");
+                                    that.screenManager.noNextPage($.extend({}, ctxt,{
+                                            success: function() {
+                                                ctxt.append("gotoNextScreen.noPrompts");
+                                                that.gotoRef(ctxt,"0");
+                                            }}));
+                                }
                         }}), promptCandidate);
                     },
                     failure: function() {
-						ctxt.append("gotoNextScreen.validate.failure", "px: " +  that.currentPromptIdx);
+                        ctxt.append("gotoNextScreen.validate.failure", "px: " +  that.currentPromptIdx);
 
                         /*
                         //Crude implementation of validation toasts.
@@ -172,7 +172,7 @@ return {
                             text: that.getPromptByName(that.currentPromptIdx).constraint_message,
                             textVisible: true,
                             textonly: true,
-                        	theme: 'a'
+                            theme: 'a'
                         });
                         //Fading might be a bad idea. I don't know how it will perform in general.
                         $('.ui-loader').fadeIn(200, function(){
@@ -181,17 +181,17 @@ return {
                             });
                         });
                         */
-						ctxt.failure();
+                        ctxt.failure();
                     }
                 }));
             },
             failure: function() {
-				ctxt.append("gotoNextScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
-				if ( that.screenManager != null ) {
-					that.screenManager.unexpectedError($.extend({},ctxt,{success:function() { ctxt.failure(); }}), "beforeMove");
-				} else {
-					ctxt.failure();
-				}
+                ctxt.append("gotoNextScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
+                if ( that.screenManager != null ) {
+                    that.screenManager.unexpectedError($.extend({},ctxt,{success:function() { ctxt.failure(); }}), "beforeMove");
+                } else {
+                    ctxt.failure();
+                }
             }
         }));
     },
@@ -246,7 +246,7 @@ return {
         this.screenManager.setPrompt(ctxt, prompt, options);
         // the prompt should never be changed at this point!!!
         if ( this.currentPromptIdx != prompt.promptIdx ) {
-			ctxt.log('assumption violation');
+            ctxt.log('assumption violation');
             console.error("controller.setPrompt: prompt index changed -- assumption violation!!!");
             alert("controller.setPrompt: should never get here");
         }
@@ -262,16 +262,16 @@ return {
      * Handles all dispatching back into javascript from external intents
     */
     opendatakitCallback:function(page, path, action, jsonString) {
-		var ctxt = this.newCallbackContext();
-		ctxt.append('controller.opendatakitCallback', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
-		
+        var ctxt = this.newCallbackContext();
+        ctxt.append('controller.opendatakitCallback', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
+        
         var selpage = this.getPromptByName(page);
         if ( selpage == null ) {
             ctxt.append('controller.opendatakitCallback.noMatchingPrompt', page);
-			console.log("opendatakitCallback: ERROR - PAGE NOT FOUND! " + page + " path: " + path + " action: " + action );
+            console.log("opendatakitCallback: ERROR - PAGE NOT FOUND! " + page + " path: " + path + " action: " + action );
             return;
         }
-		
+        
         var handler = selpage.getCallback(ctxt, path, action);
         if ( handler != null ) {
             handler( ctxt, path, action, jsonString );
@@ -314,9 +314,9 @@ return {
         
         this.advanceToScreenPrompt($.extend({}, ctxt, {success:function(prompt){
             if ( prompt == null ) {
-				ctxt.append('controller.gotoRef', "no prompt after advance");
+                ctxt.append('controller.gotoRef', "no prompt after advance");
                 alert("controller.gotoRef: null prompt after advanceToScreenPrompt!");
-				ctxt.failure();
+                ctxt.failure();
                 return;
             }
     
@@ -331,12 +331,12 @@ return {
         this.previousScreenIndices.length = 0;
     },
     reset: function(ctxt,sameForm) {
-		ctxt.append('controller.reset');
+        ctxt.append('controller.reset');
         this.clearPromptHistory(ctxt);
         if ( this.screenManager != null ) {
             this.screenManager.cleanUpScreenManager(ctxt);
         } else {
-			ctxt.append('controller.reset.newScreenManager');
+            ctxt.append('controller.reset.newScreenManager');
             this.screenManager = new ScreenManager({controller: this});
         }
         this.currentPromptIdx = -1;
@@ -345,40 +345,40 @@ return {
             this.calcs = [];
         }
     },
-	
-	baseContext : {
-		contextChain: [],
-		
-		append : function( method, detail ) {
-			this.contextChain.push( {method: method, detail: detail} );
-		},
-		
-		success: function(){
-			this.log('success!');
-		},
-		
-		failure: function() {
-			this.log('failure!');
-		},
-		
-		log: function( contextMsg ) {
-			var flattened;
-			$.each( this.contextChain, function(index,value) {
-				flattened += "\nmethod: " + value.method + ((value.detail != null) ? " detail: " + value.detail : "");
-			});
-			console.log(contextMsg + " execution_chain: " + flattened);
-		}
-	},
-	
-	newCallbackContext : function( actionHandlers ) {
-		var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
-		ctxt.append('callback');
-		return ctxt;
-	},
-	
-	newContext : function(evt, actionHandlers ) {
-		var detail =  "timestamp: " + evt.timestamp + " guid: " + evt.handleObj.guid +
-					  ('currentTarget' in evt) ? ((evt.currentTarget === window) ? ("curTgt: Window") 
+    
+    baseContext : {
+        contextChain: [],
+        
+        append : function( method, detail ) {
+            this.contextChain.push( {method: method, detail: detail} );
+        },
+        
+        success: function(){
+            this.log('success!');
+        },
+        
+        failure: function() {
+            this.log('failure!');
+        },
+        
+        log: function( contextMsg ) {
+            var flattened;
+            $.each( this.contextChain, function(index,value) {
+                flattened += "\nmethod: " + value.method + ((value.detail != null) ? " detail: " + value.detail : "");
+            });
+            console.log(contextMsg + " execution_chain: " + flattened);
+        }
+    },
+    
+    newCallbackContext : function( actionHandlers ) {
+        var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
+        ctxt.append('callback');
+        return ctxt;
+    },
+    
+    newContext : function(evt, actionHandlers ) {
+        var detail =  "timestamp: " + evt.timestamp + " guid: " + evt.handleObj.guid +
+                      ('currentTarget' in evt) ? ((evt.currentTarget === window) ? ("curTgt: Window") 
                                                 : (" curTgt: " + (('innerHTML' in evt.currentTarget) ?
                                                         evt.currentTarget.innerHTML :
                                                         evt.currentTarget.activeElement.innerHTML )).replace(/\s+/g, ' ').substring(0,80)) 
@@ -386,9 +386,9 @@ return {
                                                 : (" tgt: " + (('innerHTML' in evt.target) ?
                                                         evt.target.innerHTML :
                                                         evt.target.activeElement.innerHTML )).replace(/\s+/g, ' ').substring(0,80));
-		var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
-		ctxt.append( evt.type, detail);
-		return ctxt;
-	}
+        var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
+        ctxt.append( evt.type, detail);
+        return ctxt;
+    }
 }
 });

@@ -10,35 +10,35 @@ return {
         console.log("logInitDone: doneInit ms: " + (+new Date()) + " page: " + pagename);
     },
 
-	/**
-	 * immediate return: platformInfo structure from ODK
-	 */
+    /**
+     * immediate return: platformInfo structure from ODK
+     */
     getPlatformInfo:function(ctxt) {
         // fetch these settings from ODK Collect if running under that context
         if ( this.platformInfo == null ) {
             var jsonString = collect.getPlatformInfo();
-			ctxt.append('opendatakit.getPlatformInfo', jsonString);
+            ctxt.append('opendatakit.getPlatformInfo', jsonString);
             this.platformInfo = JSON.parse(jsonString);
         }
         return this.platformInfo;
     },
     
-	/**
-	 * immediate return: databaseSettings structure from ODK
-	 */
+    /**
+     * immediate return: databaseSettings structure from ODK
+     */
     getDatabaseSettings:function(ctxt) {
         // fetch these settings from ODK Collect if running under that context
         if ( this.databaseSettings == null ) {
             var jsonString = collect.getDatabaseSettings();
-			ctxt.append('opendatakit.getDatabaseSettings', jsonString);
+            ctxt.append('opendatakit.getDatabaseSettings', jsonString);
             this.databaseSettings = JSON.parse(jsonString);
         }
         return this.databaseSettings;
     },
 
-	/**
-	 * immediate return: URI for this media file
-	 */
+    /**
+     * immediate return: URI for this media file
+     */
     asUri:function(ctxt,mediaPath,widget,attribute) {
         if ( mediaPath == null ) return null;
         
@@ -83,10 +83,10 @@ return {
         return formPath;
     },
     
-	/**
-	 * immediate return: undef
-	 * side effect: revise: window.location.hash
-	 */
+    /**
+     * immediate return: undef
+     * side effect: revise: window.location.hash
+     */
     openNewInstanceId:function(ctxt, id, friendlyName) {
         console.log("ALERT! setNewInstanceId - setting new UUID");
         if (id == null) {

@@ -79,8 +79,8 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                         'jqmobile', 'builder', 'controller',
                         'prompts'/* mix-in additional prompts and support libs here */], 
         function($, mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
-			var ctxt = $.extend({}, controller.baseContext );
-			ctxt.append('startup');
+            var ctxt = $.extend({}, controller.baseContext );
+            ctxt.append('startup');
 
             parsequery.initialize(controller,builder);
 
@@ -98,7 +98,7 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                 if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
                     parsequery.parseParameters(ctxt);
                 } else {
-					ctxt.append('startup.delay');
+                    ctxt.append('startup.delay');
                     setTimeout(f, 200);
                 }
             };
