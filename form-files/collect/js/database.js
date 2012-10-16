@@ -506,8 +506,7 @@ getDataValue:function(name) {
 setData:function(ctxt, name, datatype, value) {
     var that = this;
     that.putData($.extend({}, ctxt, {success: function() {
-            // that.cacheAllData(ctxt);
-            ctxt.success();
+            that.cacheAllData(ctxt);
         }}), name, datatype, value);
 },
 getMetaDataValue:function(name) {
@@ -522,8 +521,7 @@ getMetaDataValue:function(name) {
 setMetaData:function(ctxt, name, datatype, value) {
     var that = this;
     that.putMetaData($.extend({}, ctxt, {success: function() {
-                // that.cacheAllMetaData(ctxt);
-                ctxt.success();
+                that.cacheAllMetaData(ctxt);
             }}), name, datatype, value);
 }
 };

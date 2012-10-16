@@ -119,7 +119,6 @@ return {
     },
     gotoNextScreen: function(ctxt, options){
         var that = this;
-        ctxt.log('intermediate');
         that.beforeMove($.extend({}, ctxt,
             { success: function() {
                 ctxt.append("gotoNextScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
@@ -377,15 +376,15 @@ return {
     },
     
     newContext : function(evt, actionHandlers ) {
-        var detail =  "timestamp: " + evt.timestamp + " guid: " + evt.handleObj.guid +
-                      ('currentTarget' in evt) ? ((evt.currentTarget === window) ? ("curTgt: Window") 
+        var detail =  "timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid +
+                      (('currentTarget' in evt) ? ((evt.currentTarget === window) ? ("curTgt: Window") 
                                                 : (" curTgt: " + (('innerHTML' in evt.currentTarget) ?
                                                         evt.currentTarget.innerHTML :
                                                         evt.currentTarget.activeElement.innerHTML )).replace(/\s+/g, ' ').substring(0,80)) 
-                    : ((evt.target === window) ? ("tgt: Window") 
+                      : ((evt.target === window) ? ("tgt: Window") 
                                                 : (" tgt: " + (('innerHTML' in evt.target) ?
                                                         evt.target.innerHTML :
-                                                        evt.target.activeElement.innerHTML )).replace(/\s+/g, ' ').substring(0,80));
+                                                        evt.target.activeElement.innerHTML )).replace(/\s+/g, ' ').substring(0,80)));
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;

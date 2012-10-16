@@ -338,7 +338,8 @@ promptTypes.instances = promptTypes.base.extend({
             });
             ctxt.success({
                 showHeader: false,
-                enableNavigation:false
+                enableNavigation:false,
+                showFooter:false
             });
         }}), function(transaction) {
             var ss = database.getAllFormInstancesStmt();
@@ -355,8 +356,6 @@ promptTypes.instances = promptTypes.base.extend({
                     });
                 }
             });
-                enableNavigation:false,
-                showFooter:false
         });
     },
     createInstance: function(evt){
@@ -488,10 +487,10 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        if(this.param in this.form.choices) {
+        if(that.param in that.form.choices) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
-            that.renderContext.choices = _.map(this.form.choices[this.param], _.clone);
+            that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
         }
         var saveValue = that.getValue();
         that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
@@ -543,12 +542,11 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         //Useful for sliders.
         //It might be better to listen for the jQm event for when a slider is released.
         //This could cause problems since the debounced function could fire after a page change.
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
-        var that = this;
-        var renderContext = this.renderContext;
-        var value = this.$('input').val();
-        this.setValue($.extend({}, ctxt, {success:function() {
+		var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
+        var renderContext = that.renderContext;
+        var value = that.$('input').val();
+        that.setValue($.extend({}, ctxt, {success:function() {
                                     renderContext.value = value;
                                     renderContext.invalid = !that.validateValue();
                                     that.render();
@@ -815,7 +813,7 @@ promptTypes.screen = promptTypes.base.extend({
     beforeMove: function(context) {
         var that = this;
         var subPrompts, subPromptContext;
-        subPrompts = _.filter(this.prompts, function(prompt) {
+        subPrompts = _.filter(that.prompts, function(prompt) {
             if('condition' in prompt) {
                 return prompt.condition();
             }

@@ -47,7 +47,7 @@ return Backbone.View.extend({
         f();
     },
     cleanUpScreenManager: function(ctxt){
-        this.swipeEnabled = false;
+        this.swipeEnabled = true;
         this.savedCtxt = null;
         this.displayWaiting(ctxt);
     },
@@ -123,7 +123,13 @@ return Backbone.View.extend({
                     */
                     that.currentPageEl = that.renderPage(prompt);
                     that.$el.append(that.currentPageEl);
-                    that.savedCtxt = ctxt;
+					// this might double-reset the swipeEnabled flag, but it does ensure it is reset
+                    that.savedCtxt = $.extend({},ctxt,{
+					success:function(){
+						that.swipeEnabled = true; ctxt.success();
+					},failure:function(){
+						that.swipeEnabled = true; ctxt.failure();
+					}});
                     $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
                 }}));
             } else {
@@ -134,34 +140,54 @@ return Backbone.View.extend({
         };
         f();
     },
-    gotoNextScreen: function(evt){
-        /*
-        This debounce is a total hack.
-        The bug it is trying to solve is the issue
-        where the first page of the survey is skipped. 
-        The problem stems from swipe events being registered twice.
-        Only the opening prompt has problems because it does some unique things
-        in it's beforeMove function.
-        */
-        var ctxt = this.controller.newContext(evt);
-        ctxt.append('screenManager.gotoNextScreen', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
-        evt.stopPropagation();
-        evt.stopImmediatePropagation();
-        if(!this.swipeEnabled) return false;
-        this.swapEnabled = false;
-        this.controller.gotoNextScreen($.extend({},ctxt,{success:function(){ this.swapEnabled = true; ctxt.success();},failure:function(){ this.swapEnabled = false; ctxt.failure();}}));
-        return false;
-    },
-    gotoPreviousScreen: function(evt){
-        var ctxt = this.controller.newContext(evt);
-        ctxt.append('screenManager.gotoPreviousScreen', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
-        evt.stopPropagation();
-        evt.stopImmediatePropagation();
-        if(!this.swipeEnabled) return false;
-        this.swapEnabled = false;
-        this.controller.gotoPreviousScreen($.extend({},ctxt,{success:function(){ this.swapEnabled = true; ctxt.success();},failure:function(){ this.swapEnabled = false; ctxt.failure();}}));
-        return false;
-    },
+    gotoNextScreen: function(evt) {
+		var that = this;
+		/*
+		This debounce is a total hack.
+		The bug it is trying to solve is the issue
+		where the first page of the survey is skipped. 
+		The problem stems from swipe events being registered twice.
+		Only the opening prompt has problems because it does some unique things
+		in it's beforeMove function.
+		*/
+		var ctxt = that.controller.newContext(evt);
+		ctxt.append('screenManager.gotoNextScreen', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
+		if(!that.swipeEnabled) {
+			ctxt.append('screenManager.gotoPreviousScreen.dedup');
+			ctxt.success();
+			return false;
+		}
+		that.swipeEnabled = false;
+		that.controller.gotoNextScreen($.extend({},ctxt,{
+				success:function(){
+					that.swipeEnabled = true; ctxt.success();
+				},failure:function(){
+					that.swipeEnabled = true; ctxt.failure();
+				}}));
+		return false;
+	},
+    gotoPreviousScreen: function(evt) {
+		var that = this;
+		var ctxt = that.controller.newContext(evt);
+		ctxt.append('screenManager.gotoPreviousScreen', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
+		if(!that.swipeEnabled) {
+			ctxt.append('screenManager.gotoPreviousScreen.dedup');
+			ctxt.success();
+			return false;
+		}
+		that.swipeEnabled = false;
+		that.controller.gotoPreviousScreen($.extend({},ctxt,{
+				success:function(){ 
+					that.swipeEnabled = true; ctxt.success();
+				},failure:function(){
+					that.swipeEnabled = true; ctxt.failure();
+				}}));
+		return false;
+	},
     handlePagechange: function(evt){
         var ctxt = this.savedCtxt;
         this.savedCtxt = null;
@@ -174,10 +200,11 @@ return Backbone.View.extend({
                 this.previousPageEl = null;
                 pg.remove();
             }
-            this.swipeEnabled = true;
             ctxt.success();
         } else {
+            ctxt = that.controller.newContext(evt);
             ctxt.append('screenManager.handlePageChange.error');
+			this.swipeEnabled = true;
             ctxt.failure();
         }
     },

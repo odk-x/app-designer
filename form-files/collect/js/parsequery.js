@@ -323,7 +323,7 @@ return {
             // this is bogus transition due to jquery mobile widgets
             ctxt.append('parsequery.hashChangeHandler.emptyHash');
             alert('Hash is invalid!');
-            return;
+            return false;
         }
         
         var params = window.location.hash.slice(1).split("&");
@@ -353,6 +353,7 @@ return {
             ctxt.append('parsequery.hashChangeHandler.gotoRef', "window.location.hash="+window.location.hash);
             that.controller.gotoRef(ctxt, pageRef);
         }
+        return false;
     }
 
 };
