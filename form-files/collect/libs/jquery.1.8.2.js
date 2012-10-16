@@ -2986,8 +2986,8 @@ jQuery.event = {
 
 		return event.result;
 	},
-
-	dispatch: function( event ) {
+	
+	logEvent: function( event ) {
         if ( event ) {
             var evt = event;
             console.log("jquery.dispatch(2992): " + evt.type +
@@ -3011,6 +3011,10 @@ jQuery.event = {
                                                         evt.target.innerHTML :
                                                         evt.target.activeElement.innerHTML ))) ) );
         }
+	},
+
+	dispatch: function( event ) {
+		// this.logEvent(event);
         
 		// Make a writable jQuery.Event from the native event object
 		event = jQuery.event.fix( event || window.event );
@@ -3083,7 +3087,7 @@ jQuery.event = {
 					event.handleObj = handleObj;
 
                     var fn = ( (jQuery.event.special[ handleObj.origType ] || {}).handle || handleObj.handler );
-                    console.log("jquery:dispatch(3063): " + fn.toString());
+                    //               console.log("jquery:dispatch(3090): " + fn.toString());
 					ret = fn.apply( matched.elem, args );
 
 					if ( ret !== undefined ) {

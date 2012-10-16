@@ -13,28 +13,32 @@ return Backbone.View.extend({
     instance_id:123,
     template: null,
     swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
-    noPreviousPage: function(continuation) {
+    noPreviousPage: function(ctxt) {
+		ctxt.append("screenManager.noPreviousPage");
         alert("I've forgotten what the previous page was!");
-        continuation();
+        ctxt.success();
     },
-    noNextPage: function(continuation) {
+    noNextPage: function(ctxt) {
+		ctxt.append("screenManager.noNextPage");
         alert("No next page!");
-        continuation();
+        ctxt.success();
     },
-    unexpectedError: function(action, ex) {
+    unexpectedError: function(ctxt, action, ex) {
         try {
             alert("Unexpected error: " + action + " Reason: " + ex );
         } catch (e) {
         }
+		ctxt.success();
     },
     renderContext:{},
-    initialize: function(){
+    initialize: function(ctxt){
         this.controller = this.options.controller;
         this.currentPageEl = $('[data-role=page]');
         var that = this;
         var f = function() {
             requirejs(['text!templates/screen.handlebars'], function(source) {
                     that.template = Handlebars.compile(source);
+					that.delegateEvents(that.eevents);
             }, function(err) {
                 if ( err.requireType == "timeout" ) {
                     setTimeout( f, 100);
@@ -43,9 +47,14 @@ return Backbone.View.extend({
         };
         f();
     },
-    cleanUpScreenManager: function(){
-        this.undelegateEvents();
+    cleanUpScreenManager: function(ctxt){
+        // this.undelegateEvents();
         this.swipeEnabled = false;
+		this.savedCtxt = null;
+        this.displayWaiting(ctxt);
+    },
+    displayWaiting: function(ctxt){
+        ctxt.append("screenManager.displayWaiting", (this.prompt == null) ? "promptIdx: null" : ("promptIdx: " + this.prompt.promptIdx));
         var $e;
         $e = $('.current');
         $e.html('<span>Please wait...</span>');
@@ -54,7 +63,7 @@ return Backbone.View.extend({
         $e = $('.odk-nav');
         $e.html('');
     },
-    setPrompt: function(prompt, jqmAttrs){
+    setPrompt: function(ctxt, prompt, jqmAttrs){
         if(!jqmAttrs){
             jqmAttrs = {};
         }
@@ -63,7 +72,8 @@ return Backbone.View.extend({
         if(this.prompt) {
             this.prompt.undelegateEvents();
         }
-        this.undelegateEvents();
+        // this.undelegateEvents();
+        this.previousPageEl = this.currentPageEl;
         this.prompt = prompt;
         this.swipeEnabled = false;
         this.renderContext = {
@@ -86,7 +96,7 @@ return Backbone.View.extend({
                 //(We would not allow prompts to access the controller directly).
                 //When the prompt changes, we could disconnect the interface to prevent the old
                 //prompts from messing with the current screen.
-                that.prompt.onActivate(function(renderContext){
+                that.prompt.onActivate($.extend({},ctxt,{success:function(renderContext){
                     var isFirstPrompt = !('previousPageEl' in that);
                     var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
                     if(renderContext){
@@ -111,23 +121,24 @@ return Backbone.View.extend({
                     if ( that.renderContext.enableBackNavigation === undefined ) {
                         that.renderContext.enableBackNavigation = 
                             that.renderContext.enableNavigation &&
-                            that.controller.hasPromptHistory();
+                            that.controller.hasPromptHistory(ctxt);
                     }
                     */
-                    that.previousPageEl = that.currentPageEl;
                     that.currentPageEl = that.renderPage(prompt);
                     that.$el.append(that.currentPageEl);
-                    that.delegateEvents();
+                    // that.delegateEvents();
+					that.savedCtxt = ctxt;
                     $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
-                });
+                }}));
             } else {
-                that.cleanUpScreenManager();
+				ctxt.append('screenManager.setPrompt.waiting');
+                that.displayWaiting(ctxt);
                 setTimeout( f, 100);
             }
         };
         f();
     },
-    gotoNextScreen: _.debounce(function(evt){
+    gotoNextScreen: function(evt){
         /*
         This debounce is a total hack.
         The bug it is trying to solve is the issue
@@ -136,29 +147,49 @@ return Backbone.View.extend({
         Only the opening prompt has problems because it does some unique things
         in it's beforeMove function.
         */
-        console.log('next');
+		var ctxt = this.controller.newContext(evt);
+		ctxt.append('screenManager.gotoNextScreen', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
         evt.stopPropagation();
-        if(!this.swipeEnabled) return;
-        this.controller.gotoNextScreen(); 
-    }, 100),
-    gotoPreviousScreen: _.debounce(function(evt){
-        evt.stopPropagation();
-        if(!this.swipeEnabled) return;
-        this.controller.gotoPreviousScreen();
-    }, 100),
-    handlePagechange: function(evt){
-        console.log('Page change');
-        this.prompt.delegateEvents();
-        this.swipeEnabled = true;
-        if(this.previousPageEl){
-            this.previousPageEl.remove();
-        }
+        evt.stopImmediatePropagation();
+        if(!this.swipeEnabled) return false;
+		this.swapEnabled = false;
+        this.controller.gotoNextScreen($.extend({},ctxt,{success:function(){ this.swapEnabled = true; ctxt.success();},failure:function(){ this.swapEnabled = false; ctxt.failure();}}));
+        return false;
     },
-    events: {
-        "click .odk-next-btn": "gotoNextScreen",
-        "click .odk-prev-btn": "gotoPreviousScreen",
-        "swipeleft .swipeForwardEnabled": "gotoNextScreen",
-        "swiperight .swipeBackEnabled": "gotoPreviousScreen",
+    gotoPreviousScreen: function(evt){
+		var ctxt = this.controller.newContext(evt);
+		ctxt.append('screenManager.gotoPreviousScreen', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
+        if(!this.swipeEnabled) return false;
+		this.swapEnabled = false;
+        this.controller.gotoPreviousScreen($.extend({},ctxt,{success:function(){ this.swapEnabled = true; ctxt.success();},failure:function(){ this.swapEnabled = false; ctxt.failure();}}));
+        return false;
+    },
+    handlePagechange: function(evt){
+		var ctxt = this.savedCtxt;
+		this.savedCtxt = null;
+		
+		if ( ctxt != null ) {
+			ctxt.append('screenManager.handlePageChange.linked');
+			this.prompt.delegateEvents();
+			if(this.previousPageEl){
+				var pg = this.previousPageEl;
+				this.previousPageEl = null;
+				pg.remove();
+			}
+			this.swipeEnabled = true;
+			ctxt.success();
+		} else {
+			ctxt.append('screenManager.handlePageChange.error');
+			ctxt.failure();
+		}
+    },
+    eevents: {
+        "click .ui-page-active .odk-next-btn": "gotoNextScreen",
+        "click .ui-page-active .odk-prev-btn": "gotoPreviousScreen",
+        "swipeleft .ui-page-active .swipeForwardEnabled": "gotoNextScreen",
+        "swiperight .ui-page-active .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange"
     },
     renderPage: function(prompt){

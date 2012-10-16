@@ -1,24 +1,31 @@
 'use strict';
 // depends upon: opendatakit 
-define(['mdl','opendatakit'], function(mdl,opendatakit) {
+define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
     return {
   submissionDb:false,
   mdl:mdl,
-  withDb:function(continuation, failureHandler, completionAction) {
+  withDb:function(ctxt, transactionBody) {
+    var inContinuation = false;
+	ctxt.append('database.withDb');
     var that = this;
-    if ( failureHandler == null ) {
-        failureHandler = function(error) {
-            console.log("withDb: transaction aborted");
-        };
-    }
     try {
-        console.log("withDb: " + document.domain);
         if ( that.submissionDb ) {
-            that.submissionDb.transaction(continuation, failureHandler, completionAction);
+            that.submissionDb.transaction(transactionBody, function(error) {
+					ctxt.append("withDb.transaction.error", error.toString());
+					inContinuation = true;
+					ctxt.failure();
+					}, function() {
+						ctxt.append("withDb.transaction.success");
+						inContinuation = true;
+						ctxt.success();
+					});
         } else if(!window.openDatabase) {
+			ctxt.append('database.withDb.notSupported');
             alert('not supported');
+			inContinuation = true;
+			ctxt.failure();
         } else {
-            var settings = opendatakit.getDatabaseSettings();
+            var settings = opendatakit.getDatabaseSettings(ctxt);
             var database = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
               // create the database...
             database.transaction(function(transaction) {
@@ -26,20 +33,43 @@ define(['mdl','opendatakit'], function(mdl,opendatakit) {
                                             function(transaction, result) {
                         transaction.executeSql('CREATE TABLE IF NOT EXISTS instance_info(id INTEGER NOT NULL PRIMARY KEY, timestamp INTEGER NOT NULL, form_id TEXT NOT NULL, instance_id TEXT NOT NULL, saved NULL, name TEXT NOT NULL, type TEXT NOT NULL, val TEXT NULL);', []);
                     });
-                }, failureHandler, function() {
+                }, function(error) {
+					ctxt.append("withDb.createDb.transaction.error", error.toString());
+					inContinuation = true;
+					ctxt.failure();
+				}, function() {
                     // DB is created -- record the submissionDb and initiate the transaction...
                     that.submissionDb = database;
-                    that.withDb(continuation, failureHandler, completionAction);
+					ctxt.append("withDb.createDb.transacton.success");
+					that.submissionDb.transaction(transactionBody, function(error) {
+								ctxt.append("withDb.transaction.error", error.toString());
+								inContinuation = true;
+								ctxt.failure();
+							}, function() {
+								ctxt.append("withDb.transaction.success");
+								inContinuation = true;
+								ctxt.success();
+							});
                 });
         }
     } catch(e) {
         // Error handling code goes here.
         if(e.INVALID_STATE_ERR) {
             // Version number mismatch.
+			ctxt.append('withDb.exception', 'invalid db version');
             alert("Invalid database version.");
         } else {
+			ctxt.append('withDb.exception', 'unknown error: ' + e);
             alert("Unknown error " + e + ".");
         }
+		if ( !inContinuation ) {
+			try {
+				ctxt.failure();
+			} catch(e) {
+				ctxt.append('withDb.ctxt.failure.exception', 'unknown error: ' + e);
+				alert("withDb.ctxt.failure.exception " + e);
+			}
+		}
         return;
     }
 },
@@ -179,43 +209,15 @@ deleteMetaDataStmt:function(formid, instanceid) {
         bind : [formid, instanceid]
     };
 },
-getData:function(name, action) {
+putData:function(ctxt, name, type, value, onSuccessfulSave, onFailure) {
       var that = this;
-      var dbValue;
-      var dbType;
-      that.withDb( function(transaction) {
-        var ss = that.selectStmt(name);
-        transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
-            if (result.rows.length == 0 ) {
-                dbValue = null;                            
-            } else {
-                if(result.rows.length != 1) {
-                    throw new Error("getData: multiple rows! " + name + " count: " + result.rows.length);
-                }
-                var row = result.rows.item(0);
-                dbValue = row['val'];
-                dbType = row['type'];
-            }
-        });
-      }, function(error) {
-        console.log("getData: failed to get " + name);
-      }, function() {
-        action(dbValue,dbType);
-      });
-},
-putData:function(name, type, value, onSuccessfulSave, onFailure) {
-      var that = this;
-      that.withDb( function(transaction) {
+	  ctxt.append('putData', 'name: ' + name);
+      that.withDb( ctxt, function(transaction) {
             var is = that.insertStmt(name, type, value);
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                 console.log("putData: successful insert: " + name);
             });
-        }, function(error) {
-        console.log("putData: failed to put " + name + " type: " + type + " value: " + value);
-        if ( onFailure != null ) {
-            onFailure();
-        }
-      }, onSuccessfulSave );
+        });
 },
 putDataKeyTypeValueMapHelper:function(idx, that, ktvlist) {
     return function(transaction) {
@@ -234,11 +236,10 @@ putDataKeyTypeValueMapHelper:function(idx, that, ktvlist) {
 /**
  * ktvlist is: [ { key: 'keyname', type: 'typename', value: 'val' }, ...]
  */
-putDataKeyTypeValueMap:function(ktvlist, onSuccessfulSave) {
+putDataKeyTypeValueMap:function(ctxt, ktvlist) {
       var that = this;
-      that.withDb( that.putDataKeyTypeValueMapHelper(0, that, ktvlist), function(error) {
-            console.log("putDataKeyValueMap: failed transaction for " + ktvlist.length );
-        }, onSuccessfulSave );
+	  ctxt.append('database.putDataKeyTypeValueMap', ktvlist.length );
+      that.withDb( ctxt, that.putDataKeyTypeValueMapHelper(0, that, ktvlist) );
 },
 constructJsonDataClosureHelper:function(continuation) {
     return function(transaction, result) {
@@ -281,62 +282,32 @@ constructJsonDataClosureHelper:function(continuation) {
         continuation(tlo);
     };
 },
-getAllData:function(action) {
+getAllData:function(ctxt) {
       var that = this;
       var tlo;
-      that.withDb( function(transaction) {
+      that.withDb( $.extend({},ctxt,{success:function() {
+				ctxt.append("getAllData.success");
+				ctxt.success(tlo)}}), function(transaction) {
         var ss = that.selectAllStmt();
         transaction.executeSql(ss.stmt, ss.bind, that.constructJsonDataClosureHelper(function(arg) { tlo = arg;}));
-      }, function(error) {
-        console.log("getAllData: failed");
-      }, function() {
-        action(tlo);
       });
 },
-cacheAllData:function(action) {
+cacheAllData:function(ctxt) {
     var that = this;
-    this.getAllData(function(tlo) {
+    this.getAllData($.extend({},ctxt,{success:function(tlo) {
+		ctxt.append("cacheAllData.success");
         mdl.data = (tlo == null) ? {} : tlo;
-        action();
-    });
+        ctxt.success();
+    }}));
 },
-getMetaData:function(name, action) {
+putMetaData:function(ctxt, name, type, value) {
       var that = this;
-      var dbType;
-      var dbValue;
-      that.withDb( function(transaction) {
-        var ss = that.selectMetaDataStmt(name);
-        transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
-            if (result.rows.length == 0 ) {
-                dbValue = null;                            
-            } else {
-                if(result.rows.length != 1) {
-                    throw new Error("getMetaData: multiple rows! " + name + " count: " + result.rows.length);
-                }
-                var row = result.rows.item(0);
-                dbValue = row['val'];
-                dbType = row['type'];
-            }
-        });
-      }, function(error) {
-        console.log("getMetaData: failed to get " + name);
-      }, function() {
-        action(dbValue,dbType);
-      });
-},
-putMetaData:function(name, type, value, onSuccessfulSave, onFailure) {
-      var that = this;
-      that.withDb( function(transaction) {
+      that.withDb( ctxt, function(transaction) {
             var is = that.insertMetaDataStmt(name, type, value);
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                 console.log("putMetaData: successful insert: " + name);
             });
-        }, function(error) {
-        console.log("putMetaData: failed to put " + name + " type: " + type + " value: " + value);
-        if ( onFailure != null ) {
-            onFailure();
-        }
-      }, onSuccessfulSave);
+        });
 },
 putMetaDataKeyTypeValueMapHelper:function(idx, that, ktvlist) {
     return function(transaction) {
@@ -355,28 +326,28 @@ putMetaDataKeyTypeValueMapHelper:function(idx, that, ktvlist) {
 /**
  * ktvlist is: [ { key: 'keyname', type: 'typename', value: 'val' }, ...]
  */
-putMetaDataKeyTypeValueMap:function(ktvlist, onSuccessfulSave) {
+putMetaDataKeyTypeValueMap:function(ctxt, ktvlist) {
+	  ctxt.append('database.putMetaDataKeyTypeValueMap', ktvlist.length);
       var that = this;
-      that.withDb( that.putMetaDataKeyTypeValueMapHelper(0, that, ktvlist), function(error) {
-            console.log("putMetaDataKeyValueMap: failed transaction for " + ktvlist.length );
-        }, onSuccessfulSave );
+      that.withDb( ctxt, that.putMetaDataKeyTypeValueMapHelper(0, that, ktvlist));
 },
-getAllMetaData:function(action) {
+getAllMetaData:function(ctxt) {
       var that = this;
       var tlo;
-      that.withDb( function(transaction) {
+      that.withDb( $.extend({},ctxt,{success:function() {
+				ctxt.append('getAllMetaData.success');
+				ctxt.success(tlo);
+				}}), function(transaction) {
         var ss = that.selectAllMetaDataStmt();
         transaction.executeSql(ss.stmt, ss.bind, that.constructJsonDataClosureHelper(function(arg) { tlo = arg;}));
-      }, function(error) {
-        console.log("getAllMetaData: failed");
-      }, function() {
-        action(tlo);
       });
 },
-cacheAllMetaData:function(action) {
+cacheAllMetaData:function(ctxt) {
     var that = this;
     // pull everything for synchronous read access
-    that.getAllMetaData(function(tlo) {
+    that.getAllMetaData($.extend({},ctxt,{success:function(tlo) {
+		console.log('cacheAllMetaData.success');
+		ctxt.append('cacheAllMetaData.success');
         if ( tlo == null ) {
             tlo = {};
         }
@@ -389,14 +360,17 @@ cacheAllMetaData:function(action) {
         tlo.instanceId = mdl.qp.instanceId;
         // update qp
         mdl.qp = tlo;
-        action();
-    });
+        ctxt.success();
+		}}));
 },
-getCrossTableMetaData:function(formId, instanceId, name, action) {
+getCrossTableMetaData:function(ctxt, formId, instanceId, name) {
       var that = this;
       var dbType;
       var dbValue;
-      that.withDb( function(transaction) {
+      that.withDb( $.extend({},ctxt,{success:function() {
+			ctxt.append('getCrossTableMetaData.success');
+			ctxt.success(dbValue,dbType);
+			}}), function(transaction) {
         var ss = that.selectCrossTableMetaDataStmt(formId, instanceId, name);
         transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
             if (result.rows.length == 0 ) {
@@ -411,23 +385,17 @@ getCrossTableMetaData:function(formId, instanceId, name, action) {
                 dbType = row['type'];
             }
         });
-      }, function(error) {
-        console.log("getCrossTableMetaData: failed to get " + formId + ", " + instanceId + ", " + name);
-      }, function() {
-        action(dbValue,dbType);
       });
 },
-putCrossTableMetaData:function(formId, instanceId, name, type, value, onSuccessfulSave) {
+putCrossTableMetaData:function(ctxt, formId, instanceId, name, type, value) {
       var that = this;
-      that.withDb( function(transaction) {
+	  ctxt.append('putCrossTableMetaData', name);
+      that.withDb( ctxt, function(transaction) {
             var is = that.insertCrossTableMetaDataStmt(formId, instanceId, name, type, value);
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                 console.log("putCrossTableMetaData: successful insert: " + formId + ", " + instanceId + ", " + name);
             });
-        }, function(error) {
-        console.log("putCrossTableMetaData: failed to put " +
-            formId + ", " + instanceId + ", " + name + " type: " + type + " value: " + value);
-      }, onSuccessfulSave );
+        });
 },
 putCrossTableMetaDataKeyTypeValueMapHelper:function(formId, instanceId, idx, that, ktvlist) {
     return function(transaction) {
@@ -446,102 +414,77 @@ putCrossTableMetaDataKeyTypeValueMapHelper:function(formId, instanceId, idx, tha
 /**
  * ktvlist is: [ { key: 'keyname', type: 'typename', value: 'val' }, ...]
  */
-putCrossTableMetaDataKeyTypeValueMap:function(formId, instanceId, ktvlist, onSuccessfulSave) {
+putCrossTableMetaDataKeyTypeValueMap:function(ctxt, formId, instanceId, ktvlist) {
       var that = this;
-      that.withDb( that.putCrossTableMetaDataKeyTypeValueMapHelper(formId, instanceId, 0, that, ktvlist), function(error) {
-            console.log("putCrossTableMetaDataKeyTypeValueMap: failed transaction for " + ktvlist.length );
-        }, onSuccessfulSave );
+      ctxt.append("putCrossTableMetaDataKeyTypeValueMap", ktvlist.length );
+      that.withDb( ctxt, that.putCrossTableMetaDataKeyTypeValueMapHelper(formId, instanceId, 0, that, ktvlist));
 },
-save_all_changes:function(asComplete, continuation) {
+save_all_changes:function(ctxt, asComplete, continuation) {
       var that = this;
     // TODO: ensure that all data on the current page is saved...
     // TODO: update list of instances available for editing (???)...
     // TODO: for above -- where would the instance name come from???
     
-      that.withDb( function(transaction) {
+      that.withDb( $.extend({}, ctxt, {success:function() {
+				ctxt.append('save_all_changes.markCurrentStateSaved.success', 
+				mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value + " asComplete: " + asComplete);
+				if ( asComplete ) {
+					// TODO: traverse all elements evaluating their constraints (validating their contents)
+					// TODO: show error boxes for any violated constraints...
+					// ONLY if successful, then:
+					  ctxt.append('save_all_changes.cleanup');
+					  that.withDb( ctxt, 
+							function(transaction) {
+							var cs = that.markCurrentStateAsSavedStmt('true');
+							transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+								// and now delete the change history...
+								var cs = that.deletePriorChangesStmt();
+								transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+									// and update the metadata too...
+									var cs = that.markCurrentMetaDataStateAsSavedStmt('true');
+									transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+										var cs = that.deletePriorMetaDataChangesStmt();
+										transaction.executeSql(cs.stmt, cs.bind);
+									});
+								});
+							});
+						});
+				} else {
+					ctxt.success();
+				}
+			}}), 
+			function(transaction) {
             var cs = that.markCurrentStateAsSavedStmt('false');
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
                 var cs = that.markCurrentMetaDataStateAsSavedStmt('false');
                 transaction.executeSql(cs.stmt, cs.bind);
             });
-        }, function(error) {
-            console.log("save_all_changes: failed preliminary save");
-        }, function() {
-            console.log("save_all_changes: successful markCurrentStateAsSavedStmt('false'): " +
-                        mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value);
-            if ( asComplete ) {
-                // TODO: traverse all elements evaluating their constraints (validating their contents)
-                // TODO: show error boxes for any violated constraints...
-                // ONLY if successful, then:
-                  that.withDb( function(transaction) {
-                        var cs = that.markCurrentStateAsSavedStmt('true');
-                        transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-                            // and now delete the change history...
-                            var cs = that.deletePriorChangesStmt();
-                            transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-                                // and update the metadata too...
-                                var cs = that.markCurrentMetaDataStateAsSavedStmt('true');
-                                transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-                                    var cs = that.deletePriorMetaDataChangesStmt();
-                                    transaction.executeSql(cs.stmt, cs.bind);
-                                });
-                            });
-                        });
-                    }, function(error) {
-                        console.log("save_all_changes: failed final save");
-                    }, function() {
-                        console.log("save_all_changes: successful markCurrentStateAsSavedStmt('true'): " + 
-                                    mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value);
-                        console.log("save_all_changes: successful deletePriorChangesStmt(): " + 
-                                    mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value);
-                        if ( continuation != null ) {
-                            continuation();
-                        }
-                    });
-            } else {
-                if ( continuation != null ) {
-                    continuation();
-                }
-            }
         });
     // TODO: should we have a failure callback in to ODK Collect?
 },
-ignore_all_changes:function(continuation) {
+ignore_all_changes:function(ctxt) {
       var that = this;
-      that.withDb( function(transaction) {
+	  ctxt.append('database.ignore_all_changes');
+      that.withDb( ctxt, function(transaction) {
             var cs = that.deleteUnsavedChangesStmt();
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
                 var cs = that.deleteUnsavedMetaDataChangesStmt();
                 transaction.executeSql(cs.stmt, cs.bind);
             });
-        }, function(error) {
-            console.log("ignore_all_changes: failed delete unsaved changes");
-        }, function() {
-            console.log("ignore_all_changes: successful deleteUnsavedChangesStmt: " + 
-                        mdl.qp.formId.value + " instanceId: " + mdl.qp.instanceId.value);
-            if ( continuation != null ) {
-                continuation();
-            }
         });
 },
- delete_all:function(formid, instanceId, continuation) {
+ delete_all:function(ctxt, formid, instanceId) {
       var that = this;
-      that.withDb( function(transaction) {
+	  ctxt.append('delete_all');
+      that.withDb( ctxt, function(transaction) {
             var cs = that.deleteStmt(formid, instanceId);
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
                 var cs = that.deleteMetaDataStmt(formid, instanceId);
                 transaction.executeSql(cs.stmt, cs.bind);
             });
-        }, function(error) {
-            console.log("delete_all: failed delete all");
-        }, function() {
-            console.log("delete_all: successful deleteStmt: " + formid + " instanceId: " + instanceId);
-            if ( continuation != null ) {
-                continuation();
-            }
         });
 },
-initializeTables:function(datafields, continuation) {
+initializeTables:function(ctxt, datafields) {
     var that = this;
     var formId = mdl.qp.formId.value;
     var formVersion = mdl.qp.formVersion.value;
@@ -549,7 +492,7 @@ initializeTables:function(datafields, continuation) {
     // mdl.qp has all the query parameters loaded
     // datafields describes the data fields
     // formId and formVersion identify the table name
-    that.cacheAllData(continuation);
+    that.cacheAllData(ctxt);
 },
 getDataValue:function(name) {
     var path = name.split('.');
@@ -560,26 +503,12 @@ getDataValue:function(name) {
     }
     return v.value;
 },
-setData:function(name, datatype, value, onSuccess, onFailure) {
+setData:function(ctxt, name, datatype, value) {
     var that = this;
-    that.putData(name, datatype, value, function() {
-/*
-        var path = name.split('.');
-        var v = mdl.data;
-        for ( var i = 0 ; i < path.length ; ++i ) {
-            var newv = v[path[i]];
-            if ( newv == null ) {
-                v[path[i]] = {};
-                newv = v[path[i]];
-            }
-            v = newv;
-        }
-        v.type = datatype;
-        v.value = value;
-        onSuccess();
-*/
-        that.cacheAllData(onSuccess);
-    }, onFailure);
+	that.putData($.extend({}, ctxt, {success: function() {
+			// that.cacheAllData(ctxt);
+			ctxt.success();
+		}}), name, datatype, value);
 },
 getMetaDataValue:function(name) {
     var path = name.split('.');
@@ -590,26 +519,12 @@ getMetaDataValue:function(name) {
     }
     return v.value;
 },
-setMetaData:function(name, datatype, value, onSuccess, onFailure) {
+setMetaData:function(ctxt, name, datatype, value) {
     var that = this;
-    that.putMetaData(name, datatype, value, function() {
-/*
-        var path = name.split('.');
-        var v = mdl.qp;
-        for ( var i = 0 ; i < path.length ; ++i ) {
-            var newv = v[path[i]];
-            if ( newv == null ) {
-                v[path[i]] = {};
-                newv = v[path[i]];
-            }
-            v = newv;
-        }
-        v.type = datatype;
-        v.value = value;
-        onSuccess();
-*/
-        that.cacheAllMetaData(onSuccess);
-    }, onFailure);
+	that.putMetaData($.extend({}, ctxt, {success: function() {
+				// that.cacheAllMetaData(ctxt);
+				ctxt.success();
+			}}), name, datatype, value);
 }
 };
 });
