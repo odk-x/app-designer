@@ -38,7 +38,6 @@ return Backbone.View.extend({
         var f = function() {
             requirejs(['text!templates/screen.handlebars'], function(source) {
                     that.template = Handlebars.compile(source);
-					that.delegateEvents(that.eevents);
             }, function(err) {
                 if ( err.requireType == "timeout" ) {
                     setTimeout( f, 100);
@@ -48,7 +47,6 @@ return Backbone.View.extend({
         f();
     },
     cleanUpScreenManager: function(ctxt){
-        // this.undelegateEvents();
         this.swipeEnabled = false;
 		this.savedCtxt = null;
         this.displayWaiting(ctxt);
@@ -72,12 +70,11 @@ return Backbone.View.extend({
         if(this.prompt) {
             this.prompt.undelegateEvents();
         }
-        // this.undelegateEvents();
         this.previousPageEl = this.currentPageEl;
         this.prompt = prompt;
         this.swipeEnabled = false;
         this.renderContext = {
-            showHeader: true,
+            showHeader: false,
             showFooter: true,
             enableForwardNavigation: true,
             enableBackNavigation: true,
@@ -126,8 +123,7 @@ return Backbone.View.extend({
                     */
                     that.currentPageEl = that.renderPage(prompt);
                     that.$el.append(that.currentPageEl);
-                    // that.delegateEvents();
-					that.savedCtxt = ctxt;
+                    that.savedCtxt = ctxt;
                     $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
                 }}));
             } else {
@@ -185,12 +181,16 @@ return Backbone.View.extend({
 			ctxt.failure();
 		}
     },
-    eevents: {
-        "click .ui-page-active .odk-next-btn": "gotoNextScreen",
-        "click .ui-page-active .odk-prev-btn": "gotoPreviousScreen",
-        "swipeleft .ui-page-active .swipeForwardEnabled": "gotoNextScreen",
-        "swiperight .ui-page-active .swipeBackEnabled": "gotoPreviousScreen",
-        "pagechange": "handlePagechange"
+    disableImageDrag: function(evt){
+        evt.preventDefault();
+    },
+    events: {
+        "click .odk-next-btn": "gotoNextScreen",
+        "click .odk-prev-btn": "gotoPreviousScreen",
+        "swipeleft .swipeForwardEnabled": "gotoNextScreen",
+        "swiperight .swipeBackEnabled": "gotoPreviousScreen",
+        "pagechange": "handlePagechange",
+        "dragstart img": "disableImageDrag"
     },
     renderPage: function(prompt){
         var $page = $('<div>');

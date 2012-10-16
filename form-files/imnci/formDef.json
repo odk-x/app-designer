@@ -2,7 +2,7 @@
     "settings": [
         {
             "setting": "formId", 
-            "value": "imnciUpTo2mo"
+            "value": "imnci"
         }, 
         {
             "setting": "formVersion", 
@@ -14,981 +14,347 @@
         }, 
         {
             "setting": "formName", 
-            "value": "IMNCI up to 2 months old"
+            "value": "IMNCI"
         }
     ], 
     "survey": [
         {
-            "name": "age_lt_2mo", 
-            "constraint_message": "Value must be yes, for now.", 
-            "constraint": "selected(V(this.name), 'yes')", 
-            "required": true, 
-            "comments": "Not sure the best way to ask age. Birthday would be simplest, but perhaps a bad idea in practice.", 
-            "label": "Is the child less than 2 months old?", 
-            "param": "yes_no", 
-            "type": "select_one"
+            "type": "text", 
+            "name": "name", 
+            "param": null, 
+            "label": {
+                "en_us": "Name"
+            }
+        }, 
+        {
+            "type": "integer", 
+            "name": "age", 
+            "param": null, 
+            "label": {
+                "en_us": "Age"
+            }
+        }, 
+        {
+            "type": "integer", 
+            "name": "temperature", 
+            "param": null, 
+            "label": {
+                "en_us": "Temperature"
+            }
         }, 
         {
             "prompts": [
                 {
                     "type": "note", 
                     "param": null, 
-                    "label": "How old is the child?"
+                    "label": {
+                        "en_us": "ASK:"
+                    }
                 }, 
                 {
-                    "param": null, 
-                    "name": "age_years", 
-                    "comments": "required might cause problems here", 
-                    "type": "integer", 
-                    "condition": "selected({{age_lt_2mo}}, 'no')", 
-                    "label": "Years"
+                    "type": "select_one", 
+                    "name": "able_to_drink", 
+                    "param": "yes_no", 
+                    "label": {
+                        "en_us": "Is the child able to drink or breastfeed?"
+                    }
                 }, 
                 {
-                    "type": "integer", 
-                    "name": "age_months", 
-                    "param": null, 
-                    "label": "Months"
+                    "type": "select_one", 
+                    "name": "vomit_everything", 
+                    "param": "yes_no", 
+                    "label": {
+                        "en_us": "Does the child vomit everything?"
+                    }
                 }, 
                 {
-                    "name": "age_weeks", 
-                    "param": null, 
-                    "type": "integer", 
-                    "condition": "selected({{age_lt_2mo}}, 'yes')", 
-                    "label": "Weeks"
+                    "type": "select_one", 
+                    "name": "convulsions", 
+                    "param": "yes_no", 
+                    "label": {
+                        "en_us": "Has the child had convulsions?"
+                    }
                 }
             ], 
             "type": "screen"
         }, 
         {
-            "type": "number", 
-            "name": "weight", 
-            "param": null, 
-            "label": "Weight in kilograms:"
-        }, 
-        {
-            "name": "initial_visit", 
-            "param": null, 
-            "type": "datetime", 
-            "comments": "Are these date questions meant to be dates or boolean indicators of what type of visit the current visit is?", 
-            "label": "Initial Visit:"
-        }, 
-        {
-            "type": "datetime", 
-            "name": "follow_up_visit", 
-            "param": null, 
-            "label": "Follow-up Visit:"
-        }, 
-        {
-            "name": "convulsions", 
-            "required": true, 
             "type": "select_one", 
-            "param": "yes_no", 
-            "label": "ASK: Has the child had convulsions?"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "selected({{convulsions}}, 'yes')"
-        }, 
-        {
-            "name": "breath_count", 
-            "required": true, 
-            "type": "integer", 
-            "label": "Count the breaths in one minute. Repeat the count if elevated.", 
-            "param": null, 
-            "templatePath": "breathCounter.handlebars"
-        }, 
-        {
-            "name": "chest_indrawing", 
-            "hint": "YOUNG INFANT MUST BE  CALM", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "present", 
-            "label": "Look for severe chest  indrawing."
-        }, 
-        {
-            "name": "nasal_flaring", 
-            "hint": "YOUNG INFANT MUST BE  CALM", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "present", 
-            "label": "Look for nasal flaring."
-        }, 
-        {
-            "name": "grunting", 
-            "hint": "YOUNG INFANT MUST BE  CALM", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "present", 
-            "label": "Look and listen for grunting."
-        }, 
-        {
-            "name": "axillary_temperature_possible", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "Is it possible to measure axillary temperature?"
-        }, 
-        {
-            "param": null, 
-            "name": "axillary_temperature", 
-            "required": true, 
-            "type": "number", 
-            "condition": "selected({{axillary_temperature_possible}}, 'yes')", 
-            "label": "Measure axillary temperature:"
-        }, 
-        {
-            "prompts": [
-                {
-                    "type": "select_one", 
-                    "name": "fever_present", 
-                    "param": "present", 
-                    "label": "Feel  for fever:"
-                }, 
-                {
-                    "name": "low_body_temperature", 
-                    "param": "present", 
-                    "type": "select_one", 
-                    "condition": "!selected({{fever_present}}, 'present')", 
-                    "label": "Feel for low body temperature:"
-                }
-            ], 
-            "type": "screen", 
-            "condition": "selected({{axillary_temperature_possible}}, 'no')"
-        }, 
-        {
             "name": "lethargic", 
-            "required": true, 
-            "type": "select_one", 
             "param": "yes_no", 
-            "label": "Is the young infant is lethargic or unconscious?"
-        }, 
-        {
-            "name": "abnormal_movements", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "Look at the young infant’s movements. Are they less than normal? "
-        }, 
-        {
-            "name": "gt_10_skin_pustules", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "Look for skin pustules. Are there 10 or more skin pustules or a big boil?"
-        }, 
-        {
-            "param": "psbi", 
-            "type": "goto_if", 
-            "condition": "{{breath_count}} >= 60", 
-            "comments": "Idea: Make conditional gotos display alerts that indicate which condition they were triggered by. This way we can explain to users why certain paths are chosen which will help ensure that it is the correct one."
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "selected({{chest_indrawing}}, 'yes')"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "selected({{nasal_flaring}}, 'yes')"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "selected({{grunting}}, 'yes')"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "{{axillary_temperature}} >= 37.5 || {{axillary_temperature}} < 35.5"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "selected({{hot_to_touch}}, 'yes')"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "selected({{lethargic}}, 'yes')"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "selected({{abnormal_movements}},'yes')"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "psbi", 
-            "condition": "selected({{gt_10_skin_pustules}}, 'yes')"
-        }, 
-        {
-            "param": "yes_no", 
-            "name": "umbilicus_draining_pus", 
-            "required": true, 
-            "type": "select_one", 
-            "comments": "I have reordered these two questions because they do not require urgent attention", 
-            "label": "Look at the  umbilicus. Is it red or draining pus? "
-        }, 
-        {
-            "param": "yes_no", 
-            "name": "skin_pustules", 
-            "required": true, 
-            "type": "select_one", 
-            "comments": "TODO: ask with above questions", 
-            "label": "Are there any skin pustules?"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "lbi", 
-            "condition": "selected({{umbilicus_draining_pus}}, 'yes')"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "lbi", 
-            "condition": "selected({{skin_pustules}}, 'yes')"
-        }, 
-        {
-            "type": "goto", 
-            "param": "diarrhoea_section"
-        }, 
-        {
-            "type": "label", 
-            "param": "psbi"
+            "label": {
+                "en_us": "LOOK: See if the child is lethargic or unconscious."
+            }
         }, 
         {
             "prompts": [
                 {
-                    "name": "possible_serious_bacterial_infection_agree", 
-                    "hint": "SIGNS:\n<ul>\n<li>Convulsions or</li>\n<li>Fast breathing (60 breaths per minute or more) or</li>\n<li>Severe chest indrawing or</li>\n<li>Nasal flaring or</li>\n<li>Grunting or</li>\n<li>10 or more skin pustules or a big boil or</li>\n<li>If axillary temperature 37.5°C or above (or feels hot to touch) or temperature less than 35.5°C (or feels cold to touch) or</li>\n<li>Lethargic or unconscious or</li>\n<li>Less than normal movements</li>\n</ul>", 
+                    "label": {
+                        "en_us": "<strong>DANGER SIGNS:</strong>{{#selected lethargic.value \"yes\"}}lethargic{{/selected}}"
+                    }, 
                     "type": "note", 
                     "param": null, 
-                    "label": "CLASSIFICATION: <strong>POSSIBLE SERIOUS BACTERIAL INFECTION</strong>"
+                    "hint": "{{#selected lethargic.value \"yes\"}}lethargic{{/selected}}"
                 }, 
                 {
                     "type": "note", 
                     "param": null, 
-                    "label": "<strong>This child needs URGENT attention, complete the assessment and pre-referral treatment immediately so referral is not delayed.</strong>"
+                    "condition": "selected({{able_to_drink}}, 'no')", 
+                    "label": {
+                        "en_us": "<li>Not able to drink or breastfeed</li>"
+                    }
                 }, 
                 {
+                    "type": "note", 
                     "param": null, 
-                    "name": "give_first_dose_of_cotrimoxazole", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "comments": "there are some charts for this and for consoling the mother, not sure if they should be used here.", 
-                    "label": "Give first dose of cotrimoxazole if able to take orally (½ Pediatric tablet for an infant up to 1 month and 1 tablet for an infant 1-2 months) "
+                    "condition": "selected({{vomit_everything}}, 'yes')", 
+                    "label": {
+                        "en_us": "Vomits everything"
+                    }
                 }, 
                 {
-                    "name": "advise_continue_breastfeeding", 
-                    "required": true, 
-                    "type": "acknowledge", 
+                    "type": "note", 
                     "param": null, 
-                    "label": "Advise mother to continue breastfeeding"
+                    "condition": "selected({{convulsions}}, 'yes')", 
+                    "label": {
+                        "en_us": "Convulsions"
+                    }
                 }, 
                 {
-                    "name": "warm_infant_skin_to_skin", 
-                    "required": true, 
-                    "type": "acknowledge", 
+                    "type": "note", 
                     "param": null, 
-                    "label": "Warm the young infant by Skin to Skin contact if feels cold to touch."
+                    "condition": "selected({{lethargic}}, 'yes')", 
+                    "label": {
+                        "en_us": "Lethargic or unconscious"
+                    }
                 }, 
                 {
-                    "name": "refer_urgently_to_hospital", 
-                    "required": true, 
                     "type": "acknowledge", 
+                    "name": "acknowledged_urgent_attention", 
                     "param": null, 
-                    "label": "Refer URGENTLY to hospital."
+                    "label": {
+                        "en_us": "This child needs <strong>URGENT</strong> attention; complete the assessment and any pre-referral treatment immediately so referral is not delayed"
+                    }
                 }
             ], 
             "type": "screen", 
-            "name": "possible_serious_bacterial_infection"
+            "condition": "selected({{able_to_drink}}, 'no') || selected({{vomit_everything}}, 'yes') ||  selected({{convulsions}}, 'yes') || selected({{lethargic}}, 'yes')", 
+            "comments": "Maybe have a begin condition_group construct where the group appears if any prompt inside it has a true condition."
         }, 
         {
-            "type": "goto", 
-            "param": "diarrhoea_section"
-        }, 
-        {
-            "required": true, 
-            "type": "label", 
-            "param": "lbi"
-        }, 
-        {
-            "prompts": [
-                {
-                    "name": "local_bacterial_infection_agree", 
-                    "hint": "SIGNS:\n<ul>\n<li>Umbilicus red or draining pus</li>\n<li>Skin pustules less than 10</li>\n</ul>", 
-                    "type": "note", 
-                    "param": null, 
-                    "label": "CLASSIFICATION: LOCAL BACTERIAL INFECTION"
-                }, 
-                {
-                    "param": null, 
-                    "name": "give_oral_cotrimoxazole_5_days", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "comments": "there are some charts for this and for consoling the mother, not sure if they should be used here.", 
-                    "label": "Give oral cotrimoxazole for 5 days. (½ Pediatric tablet twice daily for an infant upto 1 month and 1 tablet for an infant 1-2 months)"
-                }, 
-                {
-                    "name": "teach_mother_to_apply_gv_paint", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Teach mother to apply 0.5% Gentian Violet paint twice daily."
-                }, 
-                {
-                    "name": "follow_up_2_days", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Follow-up in 2 days."
-                }
-            ], 
-            "type": "screen", 
-            "name": "local_bacterial_infection"
-        }, 
-        {
-            "required": true, 
-            "type": "label", 
-            "param": "diarrhoea_section"
-        }, 
-        {
-            "name": "has_diarrhoea", 
-            "hint": "What is diarrhoea in a young infant? \nIf the stools have changed from usual \npattern and are many and watery (more \nwater than fecal matter). The normally \nfrequent or loose stools of a breastfed \nbaby are not diarrhoea. ", 
-            "required": true, 
             "type": "select_one", 
+            "name": "difficulty_breathing", 
             "param": "yes_no", 
-            "label": "Does the young infant have diarrhoea?"
+            "label": {
+                "en_us": "Does the child have difficulty breathing?"
+            }
         }, 
         {
-            "required": true, 
             "type": "goto_if", 
-            "param": "has_diarrhoea", 
-            "condition": "selected({{has_diarrhoea}}, 'yes')"
+            "param": "breath", 
+            "condition": "selected({{difficulty_breathing}}, 'yes')"
         }, 
         {
-            "required": true, 
-            "type": "goto", 
-            "param": "feeding_problem_check"
+            "type": "select_one", 
+            "name": "diarrhoea", 
+            "param": "yes_no", 
+            "label": {
+                "en_us": "Does the child have diarrhoea?"
+            }
         }, 
         {
-            "required": true, 
+            "type": "goto_if", 
+            "param": "diarrhoea_sec", 
+            "condition": "selected({{diarrhoea}}, 'yes')"
+        }, 
+        {
+            "type": "select_one", 
+            "name": "fever", 
+            "param": "yes_no", 
+            "label": {
+                "en_us": "Does the child have fever?"
+            }
+        }, 
+        {
+            "type": "goto_if", 
+            "param": "fever_sec", 
+            "condition": "selected({{fever}}, 'yes')"
+        }, 
+        {
             "type": "label", 
-            "param": "has_diarrhoea"
+            "param": "diarrhoea_sec"
         }, 
         {
+            "type": "integer", 
+            "name": "how_long_difficulty_breathing", 
+            "param": null, 
+            "label": {
+                "en_us": "For how long?"
+            }
+        }, 
+        {
+            "type": "select_one", 
             "name": "blood_in_stool", 
-            "required": true, 
-            "type": "select_one", 
             "param": "yes_no", 
-            "label": "ASK: Is there blood in the stool?"
+            "label": {
+                "en_us": "Is there blood in the stool?"
+            }
         }, 
         {
-            "required": true, 
-            "type": "goto_if", 
-            "param": "severe_dysentery", 
-            "condition": "selected({{blood_in_stool}}, 'yes')"
-        }, 
-        {
-            "prompts": [
-                {
-                    "param": null, 
-                    "required": true, 
-                    "type": "note", 
-                    "comments": "Maybe have select multiple symptoms list instead?", 
-                    "label": "Look at the young infant’s general condition. Is the infant:"
-                }, 
-                {
-                    "name": "lethargic_2", 
-                    "constraint": "equivalent({{lethargic}}, {{lethargic_2}})", 
-                    "required": true, 
-                    "type": "select_one", 
-                    "param": "yes_no", 
-                    "label": "Lethargic or unconscious? "
-                }, 
-                {
-                    "name": "restless", 
-                    "required": true, 
-                    "type": "select_one", 
-                    "param": "yes_no", 
-                    "label": "Restless and irritable?"
-                }
-            ], 
-            "required": true, 
-            "type": "screen", 
-            "name": "diarrhoea_symptoms"
-        }, 
-        {
-            "name": "sunken_eyes", 
-            "required": true, 
             "type": "select_one", 
+            "name": "lethargic", 
             "param": "yes_no", 
-            "label": "Does the infant have sunken eyes?"
+            "label": {
+                "en_us": "Is the child lethargic or unconscious?"
+            }
+        }, 
+        {
+            "type": "select_one", 
+            "name": "restless", 
+            "param": "yes_no", 
+            "label": {
+                "en_us": "Restless and irritable?"
+            }
+        }, 
+        {
+            "type": "select_one", 
+            "name": "drink", 
+            "param": "yes_no", 
+            "label": {
+                "en_us": "Is the child able to drink or drink poorly?"
+            }
+        }, 
+        {
+            "type": "select_one", 
+            "name": "drink_eager", 
+            "param": "yes_no", 
+            "label": {
+                "en_us": "Is the child drinking eagerly?"
+            }
+        }, 
+        {
+            "type": "select_one", 
+            "name": "drink_thristy", 
+            "param": "yes_no", 
+            "label": {
+                "en_us": "Is the child thirsty?"
+            }
         }, 
         {
             "name": "skin_elasticity", 
-            "required": true, 
+            "image": "./img/pinch-abdomen.jpg", 
             "type": "select_one", 
             "param": "skin_elasticity", 
-            "label": "Pinch the skin of the abdomen. Does it go back:"
+            "label": {
+                "en_us": "Pinch the skin of the abdomen. Does it go back:"
+            }
         }, 
         {
-            "required": true, 
             "type": "goto_if", 
-            "param": "dehydration", 
-            "condition": "selected({{lethargic}},'yes') + selected({{skin_elasticity}}, 'very_slow') + selected({{sunken_eyes}}, 'yes') >= 2"
+            "param": "skin_elastic", 
+            "condition": "selected({{skin_elasticity}}, 'yes')"
         }, 
         {
-            "required": true, 
-            "type": "goto_if", 
-            "param": "dehydration", 
-            "condition": "selected({{restless}}, 'yes') + (selected({{skin_elasticity}}, 'slow') || selected({{skin_elasticity}}, 'very_slow')) + selected({{sunken_eyes}}, 'yes') >= 2"
-        }, 
-        {
-            "required": true, 
-            "type": "goto", 
-            "param": "no_dehydration"
-        }, 
-        {
-            "required": true, 
             "type": "label", 
-            "param": "dehydration"
+            "param": "breath"
         }, 
         {
-            "prompts": [
-                {
-                    "param": null, 
-                    "hint": "Two of the following signs:\n<ul>\n<li>Lethargic or unconscious</li>\n<li>Sunken eyes</li>\n<li>Skin pinch goes back very slowly</li></ul>", 
-                    "required": true, 
-                    "type": "note", 
-                    "condition": "selected({{lethargic}},'yes') + selected({{skin_elasticity}}, 'very_slow') + selected({{sunken_eyes}}, 'yes') >= 2", 
-                    "label": "CLASSIFICATION: <strong>SEVERE DEHYDRATION</strong>"
-                }, 
-                {
-                    "hint": "Two of the following signs:\n<ul>\n<li>Restless, irritable.</li> \n<li>Sunken eyes.</li>\n<li>Skin pinch goes back slowly.</li></ul>", 
-                    "required": true, 
-                    "comments": "simplify this formula w/ a calculate", 
-                    "label": "CLASSIFICATION: SOME DEHYDRATION", 
-                    "param": null, 
-                    "type": "note", 
-                    "condition": "!(selected({{lethargic}},'yes') + selected({{skin_elasticity}}, 'very_slow') + selected({{sunken_eyes}}, 'yes') >= 2) && selected({{restless}}, 'yes') + (selected({{skin_elasticity}}, 'slow') || selected({{skin_elasticity}}, 'very_slow')) + selected({{sunken_eyes}}, 'yes') >= 2"
-                }, 
-                {
-                    "name": "give_oral_cotrimoxazole_if_able", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Give first dose of oral cotrimoxazole if able to take \norally (½ Pediatric tablet for an infant upto 1 month and 1 tablet for an infant 1-2 months)"
-                }, 
-                {
-                    "name": "refer_urgently_to_hospital_w_ORS", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Refer URGENTLY to hospital \nwith mother giving frequent sips \nof ORS on the way."
-                }, 
-                {
-                    "name": "advise_continue_breastfeeding", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Advise mother to continue \nbreastfeeding."
-                }, 
-                {
-                    "name": "advise_keep_infant_warm", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Advise to keep the young infant warm."
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "required": true, 
-            "type": "goto", 
-            "param": "feeding_problem_check"
-        }, 
-        {
-            "required": true, 
-            "type": "label", 
-            "param": "no_dehydration"
-        }, 
-        {
-            "hint": "Not enough signs to classify as    \n  some or severe dehydration.   ", 
-            "required": true, 
-            "type": "note", 
-            "param": null, 
-            "label": "CLASSIFICATION: NO DEHYDRATION"
-        }, 
-        {
-            "name": "dehydration_treatment", 
-            "required": true, 
-            "type": "acknowledge", 
-            "param": null, 
-            "label": "<ol><li>Give fluids to treat diarrhea at home (Plan A). </li>\n<li>Advise home care. </li>\n<li>Follow up in 2 days if not improving.</li></ol>"
-        }, 
-        {
-            "required": true, 
-            "type": "goto", 
-            "param": "feeding_problem_check"
-        }, 
-        {
-            "required": true, 
-            "type": "label", 
-            "param": "severe_dysentery"
-        }, 
-        {
-            "prompts": [
-                {
-                    "hint": "Signs:\n<p>Blood  in the stool</p>", 
-                    "required": true, 
-                    "type": "note", 
-                    "param": null, 
-                    "label": "CLASSIFICATION: SEVERE DYSENTERY"
-                }, 
-                {
-                    "name": "give_oral_cotrimoxazole", 
-                    "param": null, 
-                    "type": "acknowledge", 
-                    "comments": "should this have the dosage specifics mentioned above", 
-                    "label": "Give first dose of oral cotrimoxazole if able to take orally"
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "name": "refer_urgently_to_hospital", 
-                    "param": null, 
-                    "label": "Refer URGENTLY to hospital"
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "name": "advise_continue_breastfeeding", 
-                    "param": null, 
-                    "label": "Advise mother to continue breastfeeding."
-                }, 
-                {
-                    "param": null, 
-                    "name": "advise_keep_infant_warm", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "comments": "some keeping infant warm instructions are more specific", 
-                    "label": "Advise to keep the young infant warm."
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "required": true, 
-            "type": "goto", 
-            "param": "feeding_problem_check"
-        }, 
-        {
-            "required": true, 
-            "type": "label", 
-            "param": "feeding_problem_check"
-        }, 
-        {
-            "name": "difficulty_feeding", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "ASK: Is there any difficulty feeding?"
-        }, 
-        {
-            "name": "is_infant_breastfed", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "ASK: Is the infant breastfed?"
-        }, 
-        {
-            "name": "breastfeedings_per_day", 
-            "param": null, 
             "type": "integer", 
-            "condition": "selected({{is_infant_breastfed}}, 'yes')", 
-            "label": "ASK: How many times is the infant breastfed in 24 hours?"
-        }, 
-        {
-            "name": "other_foods", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "ASK: Does the infant usually receive any foods or drinks other than breastmilk?"
-        }, 
-        {
-            "name": "other_foods_frequency", 
+            "name": "how_long_difficulty_breathing", 
             "param": null, 
-            "type": "integer", 
-            "comments": "metric?", 
-            "label": "ASK: How often does the infant receive other foods or drinks?"
+            "label": {
+                "en_us": "For how long?"
+            }
         }, 
         {
-            "name": "use_to_feed", 
-            "param": "food", 
-            "type": "select_multiple", 
-            "comments": "I'm going with type of food for now because we ask about breastfeeding above", 
-            "label": "ASK: What do you use to feed the infant?"
-        }, 
-        {
-            "param": "yes_no", 
-            "name": "indication_for_urgent_referral", 
-            "required": true, 
-            "type": "select_one", 
-            "comments": "TODO: Infer yes?", 
-            "label": "Is there any indication for urgent referral?"
-        }, 
-        {
-            "type": "goto_if", 
-            "param": "after_feeding_assessment", 
-            "condition": "selected({{indication_for_urgent_referral}}, 'yes')"
-        }, 
-        {
+            "type": "breath_counter", 
+            "name": "count_breath", 
             "param": null, 
-            "name": "observe_breastfeed", 
-            "required": true, 
-            "type": "acknowledge", 
-            "comments": "Add timer widget?", 
-            "label": "Ask the mother to put her infant to the breast. Observe the breastfeed for 4 minutes."
+            "label": {
+                "en_us": "Count the breaths in one minute"
+            }
         }, 
         {
             "type": "select_one", 
-            "name": "able_to_attach", 
-            "param": "yes_no", 
-            "label": "Is the infant able to attach?"
-        }, 
-        {
-            "name": "attachment_quality_signs", 
-            "hint": "(All of these signs should be present if the \nattachment is good)", 
-            "param": "attachment_quality_sign", 
-            "type": "select_multiple", 
-            "comments": "TODO: Reword? Ask \"Is infant able to attach\" then assess quality automatically from signs", 
-            "label": "Look for the following signs to assess attachment:"
-        }, 
-        {
-            "name": "sucking_effectiveness", 
-            "hint": "Clear a blocked nose if it interferes with breastfeeding.", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "sucking_effectiveness", 
-            "label": "Is the infant suckling effectively (that is,  slow deep sucks, sometimes pausing)?"
-        }, 
-        {
-            "type": "label", 
-            "param": "after_feeding_assessment"
-        }, 
-        {
-            "name": "ulcers_thrush", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "Look for ulcers or white patches in the mouth (thrush). Are there any?"
-        }, 
-        {
-            "name": "breastfeeding_pain", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "ASK: Does the mother have pain while breastfeeding? "
-        }, 
-        {
-            "name": "sore_nipples", 
+            "name": "chest_indrawing", 
             "param": "present", 
+            "label": {
+                "en_us": "Look for Chest Indrawing"
+            }
+        }, 
+        {
+            "type": "label", 
+            "param": "skin_elastic"
+        }, 
+        {
             "type": "select_one", 
-            "condition": "selected({{breastfeeding_pain}}, 'yes')", 
-            "label": "Look and feel for sore nipples."
-        }, 
-        {
-            "param": "present", 
-            "name": "engorged_breasts_or_abscess", 
-            "comments": "and calculate for breast/nipple problems", 
-            "type": "select_one", 
-            "condition": "selected({{breastfeeding_pain}}, 'yes')", 
-            "label": "Look and feel for engorged breasts or breast abscess."
-        }, 
-        {
-            "param": "cannot_feed_psbi", 
-            "comments": "How do I determine able_to_feed? Is it different from able to attach?", 
-            "required": true, 
-            "type": "goto_if", 
-            "condition": "selected({{able_to_feed}},'no') || selected({{able_to_attach}},'no') || selected({{sucking_effectiveness}}, 'none')"
-        }, 
-        {
-            "required": true, 
-            "type": "goto_if", 
-            "param": "feeding_problem", 
-            "condition": "selected({{able_to_attach}},'no') || selected({{sucking_effectiveness}}, 'not_effective') || selected({{sucking_effectiveness}}, 'none') || {{breastfeedings_per_day}} < 8 || selected({{ulcers_thrush}}, 'yes') || selected({{sore_nipples}}, 'present') || selected({{engorged_breasts_or_abscess}}, 'present')"
-        }, 
-        {
-            "prompts": [
-                {
-                    "hint": "No signs of inadequate feeding.", 
-                    "required": true, 
-                    "type": "note", 
-                    "param": null, 
-                    "label": "CLASSIFICATION: NO FEEDING PROBLEM"
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "name": "advise_home_care", 
-                    "param": null, 
-                    "label": "Advise to give home care."
-                }, 
-                {
-                    "name": "parse_mother_for_feeding", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Praise the mother for feeding the infant well."
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "required": true, 
-            "type": "goto", 
-            "param": "check_immunization_status"
-        }, 
-        {
-            "required": true, 
-            "type": "label", 
-            "param": "feeding_problem"
-        }, 
-        {
-            "prompts": [
-                {
-                    "hint": "SIGNS:\n<p>Not well attached to \nbreast or Not suckling effectively</p>\n       or \n<p>Less than 8    \nbreastfeeds in \n24 hours</p>   \nor \n<p>Receives other \nfoods or drinks</p>   \nor \n<p>Thrush (ulcers or \nwhite patches in \nmouth).</p>\nor\n<p>Breast or nipple problems</p> ", 
-                    "required": true, 
-                    "type": "note", 
-                    "param": null, 
-                    "label": "CLASSIFICATION: FEEDING PROBLEM"
-                }, 
-                {
-                    "name": "teach_correct_positioning", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "If not well attached or not suckling effectively, teach correct positioning and attachment.  "
-                }, 
-                {
-                    "param": null, 
-                    "name": "increase_frequency_of_feeding", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "condition": "{{breastfeedings_per_day}} < 8", 
-                    "label": "If breastfeeding less than 8 times  in 24 hours, advise to increase frequency of feeding. "
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "If receiving other foods or \ndrinks, counsel mother about \nbreastfeeding more, reducing \nother foods or drinks, and using \na cup and spoon. "
-                }, 
-                {
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "If not breastfeeding at all, \nadvise mother about giving \nlocally appropriate animal milk \nand teach the mother to feed \nwith a cup and spoon."
-                }, 
-                {
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "If thrush, teach the mother to \napply 0.25% Gentian Violet \npaint twice daily "
-                }, 
-                {
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "If breast or nipple problem, \nteach the mother to treat breast \nor nipple problems. "
-                }, 
-                {
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Advise mother to give home \ncare  \n(Breastfeed infant exclusively, \nkeep infant warm, apply nothing \nto cord, ask mother to wash \nhands and explain danger signs \nin the infant)"
-                }, 
-                {
-                    "name": "follow_up_2_days", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Follow-up in 2 days."
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "goto", 
-            "param": "check_immunization_status"
-        }, 
-        {
-            "type": "label", 
-            "param": "cannot_feed_psbi"
-        }, 
-        {
-            "prompts": [
-                {
-                    "hint": "<p>SIGNS<p>\n<ul>\n<li>Not able to feed </li>\n          or \n<li>No attachment at all</li>\n          or \n<li>Not suckling at all </li>\n</ul>", 
-                    "type": "note", 
-                    "param": null, 
-                    "label": "CLASSIFICATION:\n<p>NOT ABLE TO FEED - \nPOSSIBLE SERIOUS BACTERIAL INFECTION</p>"
-                }, 
-                {
-                    "name": "warm_skin_to_skin", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Warm the young infant by Skin to Skin contact if feels cold to touch."
-                }, 
-                {
-                    "name": "refer_urgently_to_hospital", 
-                    "required": true, 
-                    "type": "acknowledge", 
-                    "param": null, 
-                    "label": "Refer URGENTLY to hospital"
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "required": true, 
-            "type": "goto", 
-            "param": "check_immunization_status"
-        }, 
-        {
-            "required": true, 
-            "type": "label", 
-            "param": "check_immunization_status"
-        }, 
-        {
-            "name": "needed_vaccinations", 
-            "param": "needed_vaccinations", 
-            "type": "select_multiple", 
-            "comments": " PROBLEMS:\nWe want a way to filter the choices by age.\nIt would be nice to have a way to get the compliment of a selected set.\n", 
-            "label": "Which vaccinations has the child NOT received?"
-        }, 
-        {
-            "name": "other_problems", 
-            "required": true, 
-            "type": "text", 
+            "name": "go_back", 
             "param": null, 
-            "label": "Assess other problems:"
+            "label": {
+                "en_us": "Does it go back"
+            }
         }
     ], 
     "datafields": {
-        "restless": {
+        "go_back": {
             "type": "string"
         }, 
-        "age_years": {
+        "fever": {
+            "type": "string"
+        }, 
+        "name": {
+            "type": "string"
+        }, 
+        "drink_eager": {
+            "type": "string"
+        }, 
+        "age": {
             "type": "integer"
         }, 
-        "sore_nipples": {
+        "drink": {
             "type": "string"
         }, 
         "skin_elasticity": {
             "type": "string"
         }, 
-        "sucking_effectiveness": {
+        "diarrhoea": {
             "type": "string"
         }, 
-        "breastfeeding_pain": {
+        "restless": {
             "type": "string"
         }, 
-        "is_infant_breastfed": {
+        "difficulty_breathing": {
             "type": "string"
         }, 
-        "lethargic_2": {
+        "drink_thristy": {
             "type": "string"
         }, 
-        "skin_pustules": {
-            "type": "string"
-        }, 
-        "engorged_breasts_or_abscess": {
-            "type": "string"
-        }, 
-        "ulcers_thrush": {
-            "type": "string"
-        }, 
-        "breath_count": {
+        "how_long_difficulty_breathing": {
             "type": "integer"
         }, 
-        "indication_for_urgent_referral": {
+        "acknowledged_urgent_attention": {
             "type": "string"
         }, 
-        "umbilicus_draining_pus": {
-            "type": "string"
-        }, 
-        "initial_visit": {
-            "type": "string"
-        }, 
-        "other_foods_frequency": {
-            "type": "integer"
-        }, 
-        "axillary_temperature_possible": {
-            "type": "string"
-        }, 
-        "nasal_flaring": {
-            "type": "string"
-        }, 
-        "difficulty_feeding": {
-            "type": "string"
-        }, 
-        "convulsions": {
-            "type": "string"
-        }, 
-        "grunting": {
-            "type": "string"
-        }, 
-        "lethargic": {
-            "type": "string"
-        }, 
-        "other_foods": {
-            "type": "string"
-        }, 
-        "gt_10_skin_pustules": {
-            "type": "string"
-        }, 
-        "breastfeedings_per_day": {
-            "type": "integer"
-        }, 
-        "low_body_temperature": {
-            "type": "string"
-        }, 
-        "has_diarrhoea": {
-            "type": "string"
-        }, 
-        "sunken_eyes": {
-            "type": "string"
-        }, 
-        "age_months": {
-            "type": "integer"
-        }, 
-        "chest_indrawing": {
-            "type": "string"
-        }, 
-        "able_to_attach": {
-            "type": "string"
-        }, 
-        "abnormal_movements": {
-            "type": "string"
-        }, 
-        "age_lt_2mo": {
-            "type": "string"
-        }, 
-        "other_problems": {
-            "type": "string"
-        }, 
-        "fever_present": {
+        "vomit_everything": {
             "type": "string"
         }, 
         "blood_in_stool": {
             "type": "string"
         }, 
-        "age_weeks": {
-            "type": "integer"
-        }, 
-        "follow_up_visit": {
+        "convulsions": {
             "type": "string"
+        }, 
+        "chest_indrawing": {
+            "type": "string"
+        }, 
+        "able_to_drink": {
+            "type": "string"
+        }, 
+        "lethargic": {
+            "type": "string"
+        }, 
+        "temperature": {
+            "type": "integer"
         }
     }, 
     "choices": {
@@ -1012,23 +378,23 @@
         ], 
         "needed_vaccinations": [
             {
-                "monthsAge": 0, 
                 "name": "bcg", 
+                "age_months": 0, 
                 "label": "BCG"
             }, 
             {
-                "monthsAge": 0, 
                 "name": "opv0", 
+                "age_months": 0, 
                 "label": "OPV-0"
             }, 
             {
-                "monthsAge": 1.5, 
                 "name": "dpt1", 
+                "age_months": 1.5, 
                 "label": "DPT-1"
             }, 
             {
-                "monthsAge": 1.5, 
                 "name": "opv1hepatitusb1", 
+                "age_months": 1.5, 
                 "label": "OPV-1 + Hepatitis B-1"
             }
         ], 

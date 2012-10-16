@@ -3,7 +3,13 @@
         {{#if enableBackNavigation}}swipeBackEnabled{{/if}}
     {{/if}}">
     {{#if showHeader}}
-        <div data-role="header" class="odk-toolbar">{{name}}</div>
+    {{! I'm having a terrible time getting the header to display like a float (i.e. take up no space in the layout)}}
+    {{! data-fullscreen="true" is a hack for this.}}
+    {{! Also, putting data-fullscreen on the footer and not the header seems to cause a bug.}}
+        <div class="odk-header" data-role="header" data-theme="e" data-position="fixed" data-fullscreen="true">
+            <a href="#heirarchy" data-icon="arrow-u">hierarchy</a>
+        	<h1>prev_prompt | current_prompt</h1>
+        </div>
     {{/if}}
     <div data-role="content" class="odk-scroll odk-container">
     {{#if loading}}
@@ -12,7 +18,7 @@
     </div>
     {{#if showFooter}}
     <div class="odk-nav">
-        <div data-role="footer" class="ui-state-persist" data-theme="d">
+        <div data-role="footer" data-theme="d">
             {{#if enableNavigation}}
                 <div data-role="navbar" class="ui-state-persist">
                     <ul>

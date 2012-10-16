@@ -1,67 +1,7 @@
 'use strict';
 
-define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'text!templates/labelHint.handlebars'],
-function(mdl, database, opendatakit, controller, Backbone, Handlebars, promptTypes, builder, $, _, labelHintPartial) {
-
-Handlebars.registerHelper('localize', function(textOrLangMap, options) {
-    var locale = database.getMetaDataValue('formLocale');
-    var str = opendatakit.localize(textOrLangMap,locale);
-    return new Handlebars.SafeString(str);
-});
-
-Handlebars.registerHelper('metadata', function(value, options) {
-    var val = database.getMetaDataValue( options ? options : value );
-    return new Handlebars.SafeString( (val != null) ? val : "" );
-});
-
-Handlebars.registerHelper('setting', function(value, options) {
-    var val = database.getSettingValue( options ? options : value );
-    return new Handlebars.SafeString( (val != null) ? val : "" );
-});
-
-Handlebars.registerHelper('toFixed', function(value, options) {
-    return new Handlebars.SafeString( (value != null) ? (+value).toFixed(options) : "" );
-});
-    
-Handlebars.registerHelper('toExponential', function(value, options) {
-    return new Handlebars.SafeString( (value != null) ? (+value).toExponential(options) : "" );
-});
-    
-Handlebars.registerHelper('toPrecision', function(value, options) {
-    return new Handlebars.SafeString( (value != null) ? (+value).toPrecision(options) : "" );
-});
-    
-Handlebars.registerHelper('toString', function(value, options) {
-    return new Handlebars.SafeString( (value != null) ? (+value).toString(options) : "" );
-});
-    
-Handlebars.registerHelper('stringify', function(value, options) {
-    return new Handlebars.SafeString( JSON.stringify(value,null,options) );
-});
-
-Handlebars.registerHelper('formDirectory', function(options) {
-    return opendatakit.getCurrentFormDirectory();
-});
-
-Handlebars.registerHelper('eachProperty', function(context, options) {
-    var output = "";
-    if($.isPlainObject(context)){
-        $.each(context, function(property, value){
-            output += options.fn({property:property,value:value});
-        });
-    }
-    return output;
-});
-
-Handlebars.registerPartial('labelHint', labelHintPartial);
-
-/**
- * Helper function for replacing variable refrences
- **/
-Handlebars.registerHelper('substitute', function(options) {
-    var template = Handlebars.compile(options.fn(this));
-    return template(database.mdl.data);
-});
+define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'handlebarsHelpers'],
+function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _) {
 
 promptTypes.base = Backbone.View.extend({
     className: "current",
@@ -82,6 +22,7 @@ promptTypes.base = Backbone.View.extend({
     //base html attributes shouldn't be overridden by the user.
     //they should use htmlAttributes for that.
     baseHtmlAttributes: {},
+    htmlAttributes: {},
     initialize: function() {
         this.initializeTemplate();
         this.initializeRenderContext();
@@ -126,8 +67,11 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
         //It's probably not good to get data like this in initialize
+        //Maybe it would be better to use handlebars helpers to get metadata?
         this.renderContext.formName = database.getMetaDataValue('formName');
-        this.renderContext.htmlAttributes = $.extend(Object.create(this.baseHtmlAttributes), this.htmlAttributes);
+        this.renderContext.formVersion = database.getMetaDataValue('formVersion');
+        
+        this.renderContext.htmlAttributes = $.extend({}, this.baseHtmlAttributes, this.htmlAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
@@ -245,7 +189,7 @@ promptTypes.base = Backbone.View.extend({
         return this.baseValidate(context);
     },
     getValue: function() {
-        if(!this.name) {
+        if (!this.name) {
             console.error(this);
             throw "Cannot get value of prompt with no name.";
         }
@@ -411,6 +355,8 @@ promptTypes.instances = promptTypes.base.extend({
                     });
                 }
             });
+                enableNavigation:false,
+                showFooter:false
         });
     },
     createInstance: function(evt){
@@ -490,20 +436,39 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     events: {
         "change input": "modification"
     },
+    choiceFilter: function(){ return true; },
     updateRenderValue: function(formValue) {
-        console.log("updateRenderValue: " + ((formValue != null) ? formValue : "no selection"));
         var that = this;
-        that.renderContext.value = formValue;
-        that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
-            if ( formValue != null ) {
-                choice.checked = _.any(formValue, function(valueObject) {
-                    return choice.name === valueObject.value;
-                });
-            } else {
+        console.error(formValue);
+        //that.renderContext.value = formValue;
+        var filteredChoices = _.filter(that.renderContext.choices, function(choice){
+            return that.choiceFilter(choice);
+        });
+        if ( !formValue ) {
+            /*
+            that.renderContext.choices = .map(filteredChoices, function(choice) {
                 choice.checked = false;
-            }
+                return choice;
+            });
+            */
+            return;
+        }
+        that.renderContext.choices = _.map(filteredChoices, function(choice) {
+            choice.checked = _.any(formValue, function(valueObject) {
+                return choice.name === valueObject.value;
+            });
             return choice;
         });
+        var otherObject = _.find(formValue, function(valueObject) {
+            return (that.name + 'OtherValue' === valueObject.value);
+        })
+        that.renderContext.other = {
+            value: otherObject ? otherObject.value : '',
+            checked: _.any(formValue, function(valueObject) {
+                return (that.name + 'Other' === valueObject.name);
+            })
+        };
+        console.log(that.renderContext);
         that.render();
     },
     // TODO: choices should be cloned and allow calculations in the choices
@@ -530,19 +495,6 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
         var saveValue = that.getValue();
         that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
-        /*
-        that.renderContext.value = (saveValue == null) ? null : JSON.parse(saveValue);
-        that.renderContext.choices = _.map(that.renderContext.choices, function(choice) {
-            if ( that.renderContext.value != null ) {
-                choice.checked = _.any(that.renderContext.value, function(valueObject){
-                    return choice.name === valueObject.value;
-                });
-            } else {
-                choice.checked = false;
-            }
-            return choice;
-        });
-        */
         ctxt.success();
     }
 });
@@ -634,6 +586,7 @@ promptTypes.integer = promptTypes.inputType.extend({
 promptTypes.number = promptTypes.inputType.extend({
     type: "number",
     datatype: "number",
+    //TODO: This doesn't seem to be working.
     baseHtmlAttributes: {
         'type':'number'
     },
@@ -662,8 +615,10 @@ promptTypes.datetime = promptTypes.inputType.extend({
         "swipeleft input": "stopPropagation",
         "swiperight input": "stopPropagation"
     },
-    render: _.debounce(function() {
-        var that = this;
+    onActivate: function(ctxt) {
+        var renderContext = this.renderContext;
+        var value = this.getValue();
+        renderContext.value = value;
         require(["mobiscroll"], function() {
             $.scroller.themes.jqm.defaults = {
                 jqmBody: 'd',
@@ -673,13 +628,17 @@ promptTypes.datetime = promptTypes.inputType.extend({
                 jqmSet: 'd',
                 jqmCancel: 'd'
             };
-            that.$el.html(that.template(that.renderContext));
-            //Triggering create seems to prevent some issues where jQm styles are not applied.
-            that.$el.trigger('create');
-            that.$('input').scroller(that.scrollerAttributes);
+            ctxt.success();
         });
+    },
+    render: function() {
+        var that = this;
+        that.$el.html(that.template(that.renderContext));
+        //Triggering create seems to prevent some issues where jQm styles are not applied.
+        that.$el.trigger('create');
+        that.$('input').scroller(that.scrollerAttributes);
         return this;
-    }, 100)
+    }
 });
 promptTypes.date = promptTypes.datetime.extend({
     type: "time",
@@ -912,7 +871,13 @@ promptTypes.screen = promptTypes.base.extend({
         this.$el.html('<div class="odk odk-prompts">');
         var $prompts = this.$('.odk-prompts');
         $.each(subPrompts, function(idx, prompt){
-            $prompts.append(prompt.render().$el);
+            prompt.render();
+            if(!prompt.$el){
+                alert("Sub-prompt has not been rendered. See console for details.");
+                console.error("Prompts must have synchronous render functions. Don't debounce them or launch async calls before el is set.");
+                console.error(prompt);
+            }
+            $prompts.append(prompt.$el);
             prompt.delegateEvents();
         });
     }
@@ -963,7 +928,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
 		var ctxt = controller.newContext(evt);
 		ctxt.append('acknowledge.modification', this.promptIdx);
         var that = this;
-        var acknowledged = $('#acknowledge').is(':checked');
+        var acknowledged = this.$('#acknowledge').is(':checked');
         this.setValue($.extend({},ctxt,{success:function(){
 								that.renderContext.choices = [{
 									"name": "acknowledge",

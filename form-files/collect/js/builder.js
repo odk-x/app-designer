@@ -1,60 +1,49 @@
 'use strict';
-// depends upon: controller, jquery, promptTypes
-define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes'],
-function(controller, opendatakit, database, $, promptTypes) {
-    var calculates = [];
+define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes', 'formulaFunctions', 'underscore'],
+function(controller,   opendatakit,   database,   $,        promptTypes,   formulaFunctions,   _) {
     var evalInEnvironment = (function() {
         //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
         //It's still possible to really mess things up from here though because the
         //top-level environment is still accessable.
-        
-        function selected(promptValue, qValue) {
-            //TODO: Store parsed JSON?
-            if(_.isString(promptValue)){
-                promptValue = JSON.parse(promptValue);
-            }
-            if(promptValue) {
-                return _.include(_.pluck(promptValue, 'value'), qValue);
-            } else {
-                return false;
-            }
+        //We can create some dummy variables to avoid that if need be.
+
+        /*
+        //I'm not sure if this is the best way to set up bindings in this closure/namespace.
+        //The problem is it doesn't work with use strict
+        for(var funcName in formulaFunctions){
+            eval('var ' + funcName + ' = formulaFunctions.funcName;');
         }
+        //A better way might be to use a "with" block around the eval,
+        //but that also suffers from the usestrict problem.
         
-        //Check if the prompts have equivalent values.
-        function eqivalent() {
-            return _.all(arguments, function(arguement){
-                return _.isEqual(arguement, arguments[0]);
-            });
-        }
+        //The Function consturctor might avoid the usestrict problem.
+        //However, I don't know if it works with webkit.
+        //return (new Function).apply(_.keys(formulaFunctions).concat('function(code){eval(code)}'))(_.values(formulaFunctions));
+        */
+        //This is the way I'm setting up bindings for now, but it's suboptimal from a DRY perspective.
+        var selected = formulaFunctions.selected;
+        var V = formulaFunctions.V;
+        var localize = formulaFunctions.localize;
+        var equivalent = formulaFunctions.equivalent;
         
-        //V gets a value by name and parses it.
-        //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
-        function V(valueName) {
-            var calculate = _.find(calculates, function(calculate){
-               return calculate.name === valueName;  
-            });
-            if( calculate ){
-                if('calculation' in calculate) {
-                    return calculate.calculation();
-                } else {
-                    alert("Calculate with no calculation. See console for details.");
-                    console.error(calculate);
-                }
-            }
-            return JSON.parse(database.getDataValue(valueName));
-        }
         return function(code){
             return eval(code);
         };
     })();
     
     return {
+    //TODO: I think column_types and property parsers can be made private (i.e. defined in the closure above.).
     column_types: {
         condition: 'formula',
         constraint: 'formula',
         required: 'formula',
         validate: 'formula',
         calculation: 'formula',
+        //TODO: Choice filter has some syntax issues to consider.
+        //      It would be nice to have a "choice" variable we can refer to directly.
+        //      One idea is to define variables in a context object that gets passed into the generated function.
+        //      The generated function would then add the object's keys to the namespace.
+        choiceFilter: 'formula',
         templatePath: 'requirejs_path',
         image: 'app_path_localized',
         audio: 'app_path_localized',
@@ -74,8 +63,16 @@ function(controller, opendatakit, database, $, promptTypes) {
                 }
             content = content.replace(variableRegex, replaceCallback);
             var result = '(function(context){return (' + content + ');})';
-            console.log(result);
-            return evalInEnvironment(result);
+            try {
+                return evalInEnvironment(result);
+            } catch (e) {
+                alert("Could not evaluate formula: " + content + '\nSee console for details.');
+                console.error(String(e));
+                console.error(result);
+                console.error(content);
+                console.error(variablesRefrenced);
+                return function(){};
+            }
         },
         requirejs_path : function(content) {
             return opendatakit.getCurrentFormDirectory() + content;
@@ -220,6 +217,7 @@ function(controller, opendatakit, database, $, promptTypes) {
             };
 
             var navs = [];
+            var calculates = [];
             for ( var i = 0 ; i < surveyJson.survey.length ; ++i ) {
                 var surveyItem = surveyJson.survey[i];
                 if ( surveyItem.type == "calculate" ) {
