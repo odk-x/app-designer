@@ -59,6 +59,9 @@ function(database,   _) {
                 });
             }
         },
+        not: function(conditional){
+            return !conditional;
+        },
         //data gets a value by name and parses it.
         //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
         data: function(valueName) {

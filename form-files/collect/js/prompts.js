@@ -807,8 +807,17 @@ promptTypes.screen = promptTypes.base.extend({
     type: "screen",
     prompts: [],
     initialize: function() {
-        var prompts = this.prompts;
-        this.prompts = builder.initializePrompts(prompts);
+        var that = this;
+        this.prompts = builder.initializePrompts(this.prompts);
+        //Wire up the prompts so that if any of them rerender the screen rerenders.
+        //TODO: Think about whether there is a better way of doing this.
+        //Maybe bind to database changes instead?
+        _.each(this.prompts, function(prompt){
+            prompt._screenRender = prompt.render;
+            prompt.render = function(){
+                that.render();
+            };
+        });
         this.initializeTemplate();
         this.initializeRenderContext();
         this.afterInitialize();
@@ -868,7 +877,8 @@ promptTypes.screen = promptTypes.base.extend({
         this.$el.html('<div class="odk odk-prompts">');
         var $prompts = this.$('.odk-prompts');
         $.each(subPrompts, function(idx, prompt){
-            prompt.render();
+            //prompt.render();
+            prompt._screenRender();
             if(!prompt.$el){
                 alert("Sub-prompt has not been rendered. See console for details.");
                 console.error("Prompts must have synchronous render functions. Don't debounce them or launch async calls before el is set.");
@@ -877,6 +887,7 @@ promptTypes.screen = promptTypes.base.extend({
             $prompts.append(prompt.$el);
             prompt.delegateEvents();
         });
+        this.$el.trigger('create');
     }
 });
 /*
