@@ -63,37 +63,17 @@ function(database,   _) {
             return !conditional;
         },
         //data gets a value by name and parses it.
-        //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
+        //TODO: When the model starts using objects we will need to get rid of the json parsing.
         data: function(valueName) {
-            var datavalue;
-            /*
-            var calculate = _.find(calculates, function(calculate){
-               return calculate.name === valueName;  
-            });
-            */
-            //TODO: Need to make calculates accessible
-            var calculate = false;
-            
-            if( calculate ){
-                if('calculation' in calculate) {
-                    return calculate.calculation();
-                } else {
-                    alert("Calculate with no calculation. See console for details.");
-                    console.error(calculate);
-                }
-            }
-            datavalue = database.getDataValue(valueName);
+            var datavalue = database.getDataValue(valueName);
             try {
                 if(datavalue){
                     return JSON.parse(datavalue);
                 }
             } catch(e) {
-                //I think we can remove this.
-                //If the database stores parsed JSON we definately can.
-                alert("Could not parse JSON. See console for details.");
-                console.error(String(e));
-                console.error(valueName + ':' + datavalue);
+                return datavalue;
             }
+            return datavalue;
         }
     }
 });

@@ -335,7 +335,7 @@ promptTypes.json = promptTypes.base.extend({
             } else {
                 that.renderContext.value = "JSON Unavailable";
             }
-            this.whenTemplateIsReady(function(){
+            that.whenTemplateIsReady(function(){
                 readyToRenderCallback({enableNavigation: false});
             });
         });
