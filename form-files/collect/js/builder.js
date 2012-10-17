@@ -14,14 +14,15 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         for(var funcName in formulaFunctions){
             eval('var ' + funcName + ' = formulaFunctions.funcName;');
         }
-        //A better way might be to use a "with" block around the eval,
-        //but that also suffers from the usestrict problem.
         
         //The Function consturctor might avoid the usestrict problem.
         //However, I don't know if it works with webkit.
+        //Here's a firs attempt at it, which doesn't work because
+        //applying a constructer returns undefined and the _.values function emits the prototype I think.
+        //I think this will require a lot of esoteric javascript to get right.
         //return (new Function).apply(_.keys(formulaFunctions).concat('function(code){eval(code)}'))(_.values(formulaFunctions));
-        */
-        //This is the way I'm setting up bindings for now, but it's suboptimal from a DRY perspective.
+
+        //This is the simplest way to set up bindings but it's suboptimal from a DRY perspective.
         var selected = formulaFunctions.selected;
         var data = formulaFunctions.data;
         var localize = formulaFunctions.localize;
@@ -30,6 +31,12 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         return function(code){
             return eval(code);
         };
+        */
+        return function(code){
+            //Now I'm trying to use a eval in a with block and doing it inside formulaFunctions
+            //to dodge the usestrict problem.
+            return formulaFunctions.evaluator(code);
+        }
     })();
     
     return {

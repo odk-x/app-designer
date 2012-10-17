@@ -491,7 +491,6 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             })
         };
         console.log(that.renderContext);
-        that.render();
     },
     // TODO: choices should be cloned and allow calculations in the choices
     // perhaps a null 'name' would drop the value from the list of choices...
@@ -532,6 +531,7 @@ promptTypes.select_one = promptTypes.select.extend({
         var that = this;
         this.setValue(null, function() {
             that.updateRenderValue(null);
+            that.render();
         });
     }
 });

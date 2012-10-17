@@ -1,3 +1,5 @@
+//Dont use usestring or the evaluator will break
+
 define(['database', 'underscore'],
 function(database,   _) {
     return {
@@ -35,15 +37,26 @@ function(database,   _) {
                 console.error(qValue);
                 return false;
             }
-            if(promptValue) {
-                return _.include(_.pluck(promptValue, 'value'), qValue);
-            } else {
+            return _.include(_.pluck(promptValue, 'value'), qValue);
+        },
+        countSelected: function(promptValue){
+            if(!promptValue){
+                return 0;
+            }
+            if(_.isString(promptValue)){
+                promptValue = JSON.parse(promptValue);
+            }
+            if(!_.isArray(promptValue)){
+                alert("Selected function expects an array. See console for details.");
+                console.error(promptValue);
+                console.error(qValue);
                 return false;
             }
+            return promptValue.length;
         },
         //Check if the prompts have equivalent values.
         equivalent: function() {
-            var parsedArgs = _.map(arguments, JSON.parse);
+            var parsedArgs = arguments;
             if(_.all(parsedArgs, _.isArray)) {
                 //We are probably dealing with a select. values is an array of the selected values.
                 var values = _.map(parsedArgs, function(arguement){
@@ -62,6 +75,9 @@ function(database,   _) {
         not: function(conditional){
             return !conditional;
         },
+        now: function(){
+            return new Date();
+        },
         //data gets a value by name and parses it.
         //TODO: When the model starts using objects we will need to get rid of the json parsing.
         data: function(valueName) {
@@ -74,6 +90,11 @@ function(database,   _) {
                 return datavalue;
             }
             return datavalue;
+        },
+        evaluator: function(code){
+            with(this){
+                return eval(code);
+            }
         }
     }
 });
