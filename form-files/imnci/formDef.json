@@ -42,7 +42,7 @@
         "teach_correct_positioning": {
             "type": "string"
         }, 
-        "other_problems": {
+        "needed_vaccinations": {
             "type": "string"
         }, 
         "breath_count_2": {
@@ -67,6 +67,9 @@
             "type": "string"
         }, 
         "teach_mother_to_apply_gv_paint": {
+            "type": "string"
+        }, 
+        "attachment_quality_signs": {
             "type": "string"
         }, 
         "other_foods_frequency": {
@@ -114,6 +117,9 @@
         "give_oral_cotrimoxazole_if_able": {
             "type": "string"
         }, 
+        "other_problems": {
+            "type": "string"
+        }, 
         "breast_problems": {
             "type": "string"
         }, 
@@ -127,6 +133,9 @@
             "type": "string"
         }, 
         "chest_indrawing": {
+            "type": "string"
+        }, 
+        "use_to_feed": {
             "type": "string"
         }, 
         "observe_breastfeed": {
@@ -1024,7 +1033,7 @@
             "param": "breast_problems", 
             "name": "breast_problems", 
             "comments": "Modified to include flat/inverted/cracked nipple based on correspondence with Manoj", 
-            "type": "select_one", 
+            "type": "select_multiple", 
             "condition": "selected(data('breastfeeding_pain'), 'yes')", 
             "label": "Look and feel for breast problems:"
         }, 
@@ -1039,7 +1048,7 @@
             "required": true, 
             "type": "goto", 
             "param": "feeding_problem", 
-            "condition": "selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'not_effective') || selected(data('sucking_effectiveness'), 'none') || data('breastfeedings_per_day') < 8 || selected(data('ulcers_thrush'), 'present') || countSelected(data('breast_problems')) > 0"
+            "condition": "selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'not_effective') || selected(data('sucking_effectiveness'), 'none') || Number(data('breastfeedings_per_day')) < 8 || selected(data('ulcers_thrush'), 'present') || countSelected(data('breast_problems')) > 0"
         }, 
         {
             "prompts": [
@@ -1092,7 +1101,7 @@
                     "label": "Infant is not well attached or not suckling effectively. Teach correct positioning and attachment.", 
                     "param": null, 
                     "type": "acknowledge", 
-                    "condition": "not(allSelected(data('attachment_quality_signs'))) || not(selected(data('sucking_effectiveness'), 'effective'))"
+                    "condition": "(countSelected(data('attachment_quality_signs')) < 4) || not(selected(data('sucking_effectiveness'), 'effective'))"
                 }, 
                 {
                     "param": null, 

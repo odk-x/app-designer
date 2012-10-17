@@ -112,52 +112,6 @@ promptTypes.base = Backbone.View.extend({
         this.$el.trigger('create');
         return this;
     },
-    //Stuff to be added
-    /*
-    baseValidate: function(isMoveBackward, context) {
-        var that = this;
-        var defaultContext = {
-            success: function() {},
-            failure: function() {}
-        };
-        context = $.extend(defaultContext, context);
-        
-        if ( !('name' in that) ) {
-            // no data validation if no persistence...
-            that.valid = true;
-        } else {
-            var isRequired;
-            if ( that.required ) {
-                isRequired = that.required();
-            } else {
-                isRequired = false;
-            }
-            
-            if ( isRequired && (that.getValue() == null) ) {
-                that.valid = false;
-            } else if ( that.getValue() == null || that.getValue().length == 0) {
-                that.valid = true;
-            } else if ( that.validateValue || that.validate ) {
-                if ( that.validateValue ) {
-                    that.valid = that.validateValue();
-                } else {
-                    that.valid = true;
-                }
-                if ( that.valid && that.validate ) {
-                    that.valid = that.validate();
-                }
-            } else {
-                that.valid = true;
-            }
-        }
-            
-        if (that.valid) {
-            context.success();
-        } else {
-            context.failure();
-        }
-    },
-    */
     //baseValidate isn't meant to be overidden or called externally.
     //It does validation that will be common to most prompts.
     //Validate is menat be overridden and publicly called. 
@@ -194,7 +148,6 @@ promptTypes.base = Backbone.View.extend({
             }
         } 
         if ( 'constraint' in that ) {
-            console.log(that.constraint)
             if ( !that.constraint() ) {
                 that.valid = false;
                 $( "#screenPopup" ).find('.message').text(that.constraint_message);
@@ -310,7 +263,9 @@ promptTypes.finalize = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getMetaDataValue('instanceName');
-        this.whenTemplateIsReady(ctxt.success({enableForwardNavigation: false}));
+        this.whenTemplateIsReady(function(){
+            ctxt.success({enableForwardNavigation: false})
+        });
     },
     saveIncomplete: function(evt) {
         var ctxt = controller.newContext(evt);

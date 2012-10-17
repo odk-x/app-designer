@@ -36,7 +36,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             //Now I'm trying to use a eval in a with block and doing it inside formulaFunctions
             //to dodge the usestrict problem.
             return formulaFunctions.evaluator(code);
-        }
+        };
     })();
     
     return {
@@ -70,7 +70,17 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     return "this.database.getDataValue('" + variableName + "')";
                 }
             content = content.replace(variableRegex, replaceCallback);
-            var result = '(function(context){return (' + content + ');})';
+            //TODO: It might be better to define a wrapper function with the try/catch
+            var result = '(function(context){'+
+                'try {' +
+                'return ('+ content + ');' +
+                "} catch(e) {" +
+                ' alert("Bad formula. See console for details.");' +
+                ' console.error("Bad Formula:");' +
+                ' console.error(this);' +
+                ' console.error(e);'+
+                ' console.error("'+content+'");'+
+                '}})';
             try {
                 return evalInEnvironment(result);
             } catch (e) {
