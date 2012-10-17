@@ -1,81 +1,126 @@
 {
     "datafields": {
-        "drinking_eagerly": {
+        "give_oral_cotrimoxazole": {
+            "type": "string"
+        }, 
+        "refer_for_other_problems": {
             "type": "string"
         }, 
         "restless": {
             "type": "string"
         }, 
-        "wasting": {
+        "visit_type": {
             "type": "string"
         }, 
-        "able_to_drink": {
-            "type": "string"
-        }, 
-        "acknowledge_urgent_attention": {
-            "type": "string"
-        }, 
-        "acknowledge_advise_home_care": {
-            "type": "string"
-        }, 
-        "fever": {
-            "type": "string"
-        }, 
-        "vomit_everything": {
-            "type": "string"
-        }, 
-        "fever_present_every_day": {
-            "type": "string"
-        }, 
-        "diarrhoea_14_days_or_more": {
-            "type": "string"
-        }, 
-        "temperature": {
-            "type": "integer"
-        }, 
-        "initial_visit": {
-            "type": "string"
-        }, 
-        "oedema": {
-            "type": "string"
-        }, 
-        "difficulty_breathing": {
-            "type": "string"
-        }, 
-        "some_dehydration_treatment": {
-            "type": "string"
-        }, 
-        "give_cotrimoxazole": {
-            "type": "string"
-        }, 
-        "stiff_neck": {
-            "type": "string"
-        }, 
-        "convulsions": {
-            "type": "string"
-        }, 
-        "follow_up_visit": {
-            "type": "string"
-        }, 
-        "acknowledge_give_first_dose_of_cotrimoxazole": {
-            "type": "string"
-        }, 
-        "fever_length": {
-            "type": "integer"
-        }, 
-        "anaemia_check": {
-            "type": "string"
-        }, 
-        "refer_urgently_to_hospital_w_ORS": {
+        "umbilicus_draining_pus": {
             "type": "string"
         }, 
         "skin_elasticity": {
             "type": "string"
         }, 
-        "acknowledge_give_cotrimoxazole": {
+        "increase_frequency_of_feeding": {
+            "type": "string"
+        }, 
+        "sucking_effectiveness": {
+            "type": "string"
+        }, 
+        "breastfeeding_pain": {
+            "type": "string"
+        }, 
+        "is_infant_breastfed": {
+            "type": "string"
+        }, 
+        "lethargic_2": {
+            "type": "string"
+        }, 
+        "skin_pustules": {
+            "type": "string"
+        }, 
+        "breastfed_recently": {
+            "type": "string"
+        }, 
+        "teach_correct_positioning": {
             "type": "string"
         }, 
         "other_problems": {
+            "type": "string"
+        }, 
+        "breath_count_2": {
+            "type": "integer"
+        }, 
+        "ulcers_thrush": {
+            "type": "string"
+        }, 
+        "low_body_temperature": {
+            "type": "string"
+        }, 
+        "give_first_dose_of_cotrimoxazole": {
+            "type": "string"
+        }, 
+        "breath_count": {
+            "type": "integer"
+        }, 
+        "gt_10_skin_pustules": {
+            "type": "string"
+        }, 
+        "indication_for_urgent_referral": {
+            "type": "string"
+        }, 
+        "teach_mother_to_apply_gv_paint": {
+            "type": "string"
+        }, 
+        "other_foods_frequency": {
+            "type": "integer"
+        }, 
+        "axillary_temperature_possible": {
+            "type": "string"
+        }, 
+        "nasal_flaring": {
+            "type": "string"
+        }, 
+        "difficulty_feeding": {
+            "type": "string"
+        }, 
+        "convulsions": {
+            "type": "string"
+        }, 
+        "grunting": {
+            "type": "string"
+        }, 
+        "lethargic": {
+            "type": "string"
+        }, 
+        "dehydration_treatment": {
+            "type": "string"
+        }, 
+        "give_oral_cotrimoxazole_5_days": {
+            "type": "string"
+        }, 
+        "other_foods": {
+            "type": "string"
+        }, 
+        "refer_urgently_to_hospital": {
+            "type": "string"
+        }, 
+        "breastfeedings_per_day": {
+            "type": "integer"
+        }, 
+        "warm_infant_skin_to_skin": {
+            "type": "string"
+        }, 
+        "refer_urgently_to_hospital_w_ORS": {
+            "type": "string"
+        }, 
+        "give_oral_cotrimoxazole_if_able": {
+            "type": "string"
+        }, 
+        "breast_problems": {
+            "type": "string"
+        }, 
+        "birthday": {
+            "type": "string"
+        }, 
+        "parse_mother_for_feeding": {
             "type": "string"
         }, 
         "sunken_eyes": {
@@ -84,53 +129,44 @@
         "chest_indrawing": {
             "type": "string"
         }, 
+        "observe_breastfeed": {
+            "type": "string"
+        }, 
         "follow_up_2_days": {
             "type": "string"
         }, 
-        "how_long_difficulty_breathing": {
-            "type": "integer"
-        }, 
-        "name": {
+        "able_to_attach": {
             "type": "string"
         }, 
-        "drinking_poorly": {
+        "abnormal_movements": {
             "type": "string"
         }, 
-        "acknowledge_refer_for_assessment": {
+        "warm_skin_to_skin": {
             "type": "string"
         }, 
-        "age": {
+        "has_diarrhoea": {
             "type": "string"
         }, 
-        "no_dehydration_treatment": {
+        "advise_continue_breastfeeding": {
             "type": "string"
         }, 
-        "refer_to_hospital": {
+        "advise_keep_infant_warm": {
             "type": "string"
         }, 
-        "lethargic": {
-            "type": "string"
-        }, 
-        "acknowledge_follow_up_2_days": {
+        "fever_present": {
             "type": "string"
         }, 
         "blood_in_stool": {
             "type": "string"
         }, 
-        "count_breath": {
-            "type": "integer"
-        }, 
-        "diarrhoea": {
-            "type": "string"
-        }, 
-        "acknowledge_refer_urgently_to_hospital": {
+        "advise_home_care": {
             "type": "string"
         }
     }, 
     "settings": [
         {
             "setting": "formId", 
-            "value": "imnci"
+            "value": "imnciUpTo2mo"
         }, 
         {
             "setting": "formVersion", 
@@ -138,894 +174,1036 @@
         }, 
         {
             "setting": "formLocale", 
-            "value": "en_us"
+            "value": "hindi"
         }, 
         {
             "setting": "formName", 
-            "value": "IMNCI"
+            "value": "IMNCI up to 2 months old"
         }
     ], 
     "survey": [
         {
-            "type": "text", 
-            "name": "name", 
+            "constraint": "new Date(this.getValue()) <= (new Date())", 
+            "name": "birthday", 
+            "hint": "If the exact date is unknown use an approximate date.", 
+            "constraint_message": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.", 
             "param": null, 
-            "label": {
-                "en_us": "Name"
-            }
+            "label": "When was the child born?", 
+            "type": "date"
         }, 
         {
-            "type": "integer", 
-            "name": "age", 
+            "type": "note", 
             "param": null, 
-            "label": {
-                "en_us": "Age"
-            }
+            "condition": "calculates.daysOld() > 2 * 30", 
+            "label": "More than 2 months old"
         }, 
         {
-            "type": "integer", 
-            "name": "temperature", 
+            "type": "number", 
+            "name": "weight", 
             "param": null, 
             "label": {
-                "en_us": "Temperature"
+                "default": "Weight in kilograms:", 
+                "en_us": "Weight in kilograms:", 
+                "hindi": "वज़न"
             }
-        }, 
-        {
-            "prompts": [
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "ASK:"
-                    }
-                }, 
-                {
-                    "type": "select_one", 
-                    "name": "able_to_drink", 
-                    "param": "yes_no", 
-                    "label": {
-                        "en_us": "Is the child able to drink or breastfeed?"
-                    }
-                }, 
-                {
-                    "type": "select_one", 
-                    "name": "vomit_everything", 
-                    "param": "yes_no", 
-                    "label": {
-                        "en_us": "Does the child vomit everything?"
-                    }
-                }, 
-                {
-                    "type": "select_one", 
-                    "name": "convulsions", 
-                    "param": "yes_no", 
-                    "label": {
-                        "en_us": "Has the child had convulsions?"
-                    }
-                }
-            ], 
-            "type": "screen"
         }, 
         {
             "type": "select_one", 
-            "name": "lethargic", 
-            "param": "yes_no", 
-            "label": {
-                "en_us": "LOOK: See if the child is lethargic or unconscious."
-            }
+            "name": "visit_type", 
+            "param": "visit_type", 
+            "label": "Is this an initial visit or follow-up?"
         }, 
         {
-            "prompts": [
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "<strong>DANGER SIGNS:</strong>"
-                    }
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{able_to_drink}}, 'no')", 
-                    "label": {
-                        "en_us": "<li>Not able to drink or breastfeed</li>"
-                    }
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{vomit_everything}}, 'yes')", 
-                    "label": {
-                        "en_us": "<li>Vomits everything</li>"
-                    }
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{convulsions}}, 'yes')", 
-                    "label": {
-                        "en_us": "<li>Convulsions</li>"
-                    }
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{lethargic}}, 'yes')", 
-                    "label": {
-                        "en_us": "<li>Lethargic or unconscious</li>"
-                    }
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "name": "acknowledge_urgent_attention", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "This child needs <strong>URGENT</strong> attention; complete the assessment and any pre-referral treatment immediately so referral is not delayed"
-                    }
-                }
-            ], 
-            "type": "screen", 
-            "condition": "selected({{able_to_drink}}, 'no') || selected({{vomit_everything}}, 'yes') ||  selected({{convulsions}}, 'yes') || selected({{lethargic}}, 'yes')", 
-            "comments": "Maybe have a begin condition_group construct where the group appears if any prompt inside it has a true condition."
-        }, 
-        {
+            "name": "convulsions", 
+            "required": true, 
             "type": "select_one", 
-            "name": "difficulty_breathing", 
             "param": "yes_no", 
             "label": {
-                "en_us": "Does the child have cough or difficult breathing?"
+                "default": "ASK: Has the child had convulsions?", 
+                "en_us": "Ask: Has the child had convulsions?", 
+                "hindi": "पूछे: क्या शिशु को दौरे पढ़े थे?"
             }
         }, 
         {
-            "param": "diarrhoea_sec", 
-            "type": "goto", 
-            "condition": "selected({{difficulty_breathing}}, 'no')", 
-            "comments": "Add danger signs to condition? Display notice if there is no respiratory problem?"
-        }, 
-        {
-            "param": null, 
-            "name": "how_long_difficulty_breathing", 
-            "comments": "I hope to combine this with the previous question on the same screen but I think some code changes will be needed to make it dynamically appear/disapper. If that doesn't work I'll rephrase it. Also, units?", 
-            "type": "integer", 
-            "condition": "selected({{difficulty_breathing}}, 'yes')", 
-            "label": {
-                "en_us": "For how long?"
-            }
-        }, 
-        {
-            "name": "count_breath", 
-            "hint": "CHILD MUST BE CALM", 
+            "name": "breath_count", 
             "templatePath": "breathCounter.handlebars", 
             "type": "integer", 
             "param": null, 
             "label": {
-                "en_us": "Count the breaths in one minute."
+                "default": "Count the breaths in one minute.", 
+                "hindi": "एक मिनिट के लिए साँस गिने यदि सास की संख्या अधिक है तो दोबारा गिने.", 
+                "en_us": "Count the breaths in one minute. Repeat the count if elevated."
             }
+        }, 
+        {
+            "name": "breath_count_2", 
+            "required": true, 
+            "param": null, 
+            "label": "Breath count is elevated. Repeat breath count.", 
+            "type": "integer", 
+            "condition": "data('breath_count') >= 60", 
+            "templatePath": "breathCounter.handlebars"
         }, 
         {
             "name": "chest_indrawing", 
-            "hint": "CHILD MUST BE CALM", 
+            "hint": "YOUNG INFANT MUST BE  CALM", 
+            "required": true, 
             "type": "select_one", 
             "param": "present", 
             "label": {
-                "en_us": "Look for chest indrawing."
+                "default": "Look for severe chest  indrawing.", 
+                "hindi": "पसली का अत्यधिक धन्सना देखें.", 
+                "en_us": "Look for severe chest  indrawing."
             }
         }, 
         {
-            "type": "goto", 
-            "param": "severe_pneumonia", 
-            "condition": "selected({{chest_indrawing}}, 'present')"
-        }, 
-        {
-            "param": "pneumonia", 
-            "type": "goto", 
-            "condition": "{{fast_breathing}}", 
-            "comments": "Need calculated \"fast breathing\" value"
-        }, 
-        {
-            "type": "goto", 
-            "param": "cough_or_cold"
-        }, 
-        {
-            "type": "label", 
-            "param": "severe_pneumonia"
-        }, 
-        {
-            "prompts": [
-                {
-                    "label": {
-                        "en_us": "CLASSIFICATION: <strong>SEVERE PNEUMONIA OR VERY SEVERE DISEASE</strong>"
-                    }, 
-                    "type": "note", 
-                    "param": null, 
-                    "hint": "<hr/>\nSIGNS:\n<ul>\n<li\n{{#selected chest_indrawing.value \"not_present\"}}\nclass=\"strikethrough\"\n{{/selected}}\n>\nChest indrawing.\n</li>\n</ul>"
-                }, 
-                {
-                    "name": "acknowledge_give_first_dose_of_cotrimoxazole", 
-                    "param": null, 
-                    "type": "acknowledge", 
-                    "comments": "Should dosage differ by age?", 
-                    "label": {
-                        "en_us": "Give first dose of cotrimoxazole"
-                    }
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "name": "acknowledge_refer_urgently_to_hospital", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "Refer URGENTLY to hospital."
-                    }
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "goto", 
-            "param": "diarrhoea_sec"
-        }, 
-        {
-            "type": "label", 
-            "param": "pneumonia"
-        }, 
-        {
-            "prompts": [
-                {
-                    "label": {
-                        "en_us": "CLASSIFICATION: PNEUMONIA"
-                    }, 
-                    "type": "note", 
-                    "param": null, 
-                    "hint": "SIGNS:\n<ul>\n<li>Fast breathing</li>\n</ul>"
-                }, 
-                {
-                    "name": "acknowledge_give_cotrimoxazole", 
-                    "param": null, 
-                    "type": "acknowledge", 
-                    "comments": "TODO: Infer dosage by age", 
-                    "label": {
-                        "en_us": "Give first dose of cotrimoxazole for 5 days. (2 Pediatric tablets twice daily for a child up to 12 months and 3 tablets twice daily for a child 12 months up to 5 years."
-                    }
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "name": "acknowledge_follow_up_2_days", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "<strong>Follow up in 2 days.</strong>"
-                    }
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "goto", 
-            "param": "diarrhoea_sec"
-        }, 
-        {
-            "type": "label", 
-            "param": "cough_or_cold"
-        }, 
-        {
-            "prompts": [
-                {
-                    "label": {
-                        "en_us": "CLASSIFICATION: COUGH OR COLD"
-                    }, 
-                    "type": "note", 
-                    "param": null, 
-                    "hint": "SIGNS:\n<ul>\n<li>Fast breathing</li>\n</ul>"
-                }, 
-                {
-                    "name": "acknowledge_advise_home_care", 
-                    "param": null, 
-                    "type": "acknowledge", 
-                    "comments": "TODO: Infer dosage by age", 
-                    "label": {
-                        "en_us": "Advise home care for cough or cold."
-                    }
-                }, 
-                {
-                    "name": "acknowledge_refer_for_assessment", 
-                    "param": null, 
-                    "type": "acknowledge", 
-                    "comments": "TODO: Infer", 
-                    "label": {
-                        "en_us": "If coughing for more than 30 days, refer for assessment."
-                    }
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "goto", 
-            "param": "diarrhoea_sec"
-        }, 
-        {
-            "type": "label", 
-            "param": "diarrhoea_sec"
-        }, 
-        {
+            "name": "nasal_flaring", 
+            "hint": "YOUNG INFANT MUST BE  CALM", 
+            "required": true, 
             "type": "select_one", 
-            "name": "diarrhoea", 
+            "param": "present", 
+            "label": {
+                "default": "Look for nasal flaring.", 
+                "hindi": "नाक जगमगाता हुआ के लिए देखें.", 
+                "en_us": "Look for nasal flaring."
+            }
+        }, 
+        {
+            "name": "grunting", 
+            "hint": "YOUNG INFANT MUST BE  CALM", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "present", 
+            "label": {
+                "default": "Look and listen for grunting.", 
+                "hindi": "कराहना सुने", 
+                "en_us": "Look and listen for grunting."
+            }
+        }, 
+        {
+            "name": "axillary_temperature_possible", 
+            "required": true, 
+            "type": "select_one", 
             "param": "yes_no", 
             "label": {
-                "en_us": "Does the child have diarrhoea?"
+                "default": "Is it possible to measure axillary temperature?", 
+                "en_us": "Is it possible to measure axillary temperature?", 
+                "hindi": "कक्षा तापमान को मापने के लिए संभव है?"
             }
         }, 
         {
-            "type": "goto", 
-            "param": "fever_section", 
-            "condition": "selected({{diarrhoea}}, 'no')"
+            "param": null, 
+            "name": "axillary_temperature", 
+            "required": true, 
+            "type": "number", 
+            "condition": "selected(data('axillary_temperature_possible'), 'yes')", 
+            "label": {
+                "default": "Measure axillary temperature:", 
+                "hindi": "बगल का तापमान नापे (यदि संभव ना हो तो छूकर महसूस करें )", 
+                "en_us": "Measure axillary temperature:"
+            }
         }, 
         {
             "prompts": [
                 {
+                    "type": "select_one", 
+                    "name": "fever_present", 
+                    "param": "present", 
+                    "label": {
+                        "default": "Feel  for fever:", 
+                        "en_us": "Feel  for fever:", 
+                        "hindi": "तापमान देखें"
+                    }
+                }, 
+                {
+                    "name": "low_body_temperature", 
+                    "param": "present", 
+                    "type": "select_one", 
+                    "condition": "not(selected(data('fever_present'), 'present'))", 
+                    "label": {
+                        "default": "Feel for low body temperature:", 
+                        "hindi": "तापमान कम होने के लिए महसूस करें", 
+                        "en_us": "Feel for low body temperature:"
+                    }
+                }
+            ], 
+            "type": "screen", 
+            "condition": "selected(data('axillary_temperature_possible'), 'no')", 
+            "comments": "test"
+        }, 
+        {
+            "name": "lethargic", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": {
+                "default": "Is the young infant is lethargic or unconscious?", 
+                "en_us": "Is the young infant is lethargic or unconscious?", 
+                "hindi": "देखें, क्या शिशु सुस्त या बेहोश है?"
+            }
+        }, 
+        {
+            "name": "abnormal_movements", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": {
+                "default": "Look at the young infant’s movements. Are they less than normal?", 
+                "en_us": "Look at the young infant’s movements. Are they less than normal?", 
+                "hindi": "शिशु का हिलना धुलना देखें, क्या वे सामान्य से कम है?"
+            }
+        }, 
+        {
+            "name": "gt_10_skin_pustules", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": {
+                "default": "Look for skin pustules. Are there 10 or more skin pustules or a big boil?", 
+                "en_us": "Look for skin pustules. Are there 10 or more skin pustules or a big boil?", 
+                "hindi": "त्वचा पर फोड़े / फुंसी देखें. क्या १० या ज़्यादा या एक बड़ा फोढा है?"
+            }
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "selected(data('convulsions'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "data('breath_count_2') >= 60"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "selected(data('chest_indrawing'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "selected(data('nasal_flaring'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "selected(data('grunting'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "data('axillary_temperature') >= 37.5 || data('axillary_temperature') < 35.5"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "selected(data('hot_to_touch'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "selected(data('lethargic'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "selected(data('abnormal_movements'),'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "possible_serious_bacterial_infection", 
+            "condition": "selected(data('gt_10_skin_pustules'), 'yes')"
+        }, 
+        {
+            "param": "yes_no", 
+            "name": "umbilicus_draining_pus", 
+            "required": true, 
+            "type": "select_one", 
+            "comments": "I have reordered these two questions because they do not require urgent attention", 
+            "label": {
+                "default": "Look at the  umbilicus. Is it red or draining pus?", 
+                "hindi": "नाभि देखें, क्या नाभि लाल है या पीप निकल रा है?", 
+                "en_us": "Look at the  umbilicus. Is it red or draining pus?"
+            }
+        }, 
+        {
+            "param": "yes_no", 
+            "name": "skin_pustules", 
+            "required": true, 
+            "type": "select_one", 
+            "comments": "TODO: ask with above questions", 
+            "label": {
+                "default": "Are there any skin pustules?", 
+                "hindi": "त्वचा पर फोड़े / फुंसी देखें. क्या १० या ज़्यादा या एक बड़ा फोढा है?", 
+                "en_us": "Are there any skin pustules?"
+            }
+        }, 
+        {
+            "type": "goto", 
+            "param": "local_bacterial_infection", 
+            "condition": "selected(data('umbilicus_draining_pus'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "local_bacterial_infection", 
+            "condition": "selected(data('skin_pustules'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "diarrhoea_section"
+        }, 
+        {
+            "type": "label", 
+            "param": "possible_serious_bacterial_infection"
+        }, 
+        {
+            "prompts": [
+                {
+                    "label": {
+                        "default": "CLASSIFICATION: <strong>POSSIBLE SERIOUS BACTERIAL INFECTION</strong>", 
+                        "en_us": "CLASSIFICATION: <strong>POSSIBLE SERIOUS BACTERIAL INFECTION</strong>", 
+                        "hindi": "संभावित: गंभीर जीवन संक्रमण (इन्फेक्षन)"
+                    }, 
+                    "type": "note", 
+                    "param": null, 
+                    "hint": "SIGNS:\n<ul>\n<li>Convulsions or</li>\n<li>Fast breathing (60 breaths per minute or more) or</li>\n<li>Severe chest indrawing or</li>\n<li>Nasal flaring or</li>\n<li>Grunting or</li>\n<li>10 or more skin pustules or a big boil or</li>\n<li>If axillary temperature 37.5°C or above (or feels hot to touch) or temperature less than 35.5°C (or feels cold to touch) or</li>\n<li>Lethargic or unconscious or</li>\n<li>Less than normal movements</li>\n</ul>"
+                }, 
+                {
                     "type": "note", 
                     "param": null, 
                     "label": {
-                        "en_us": "ASK:"
+                        "default": "<strong>This child needs URGENT attention, complete the assessment and pre-referral treatment immediately so referral is not delayed.</strong>", 
+                        "en_us": "This child needs URGENT attention, complete the assessment \nand pre-referral treatment immediately so referral is not delayed."
                     }
                 }, 
                 {
-                    "type": "select_one", 
-                    "name": "diarrhoea_14_days_or_more", 
-                    "param": "yes_no", 
+                    "param": null, 
+                    "name": "give_first_dose_of_cotrimoxazole", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "comments": "there are some charts for this and for consoling the mother, not sure if they should be used here.", 
                     "label": {
-                        "en_us": "Has the child had diarrhoea for 14 days or more?"
+                        "default": "Give first dose of cotrimoxazole if able to take orally (½ Pediatric tablet for an infant up to 1 month and 1 tablet for an infant 1-2 months)", 
+                        "hindi": "अगर मूह से ले सकता है तो कोटरिमोक्षज़ोल की पहली खुराक (एक महीने की उम्र तक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बचे वाली १ गोली) दे.", 
+                        "en_us": "Give first dose of cotrimoxazole if able to take orally (½ Pediatric tablet for an infant up to 1 month and 1 tablet for an infant 1-2 months)"
                     }
                 }, 
                 {
-                    "type": "select_one", 
-                    "name": "blood_in_stool", 
-                    "param": "yes_no", 
+                    "name": "advise_continue_breastfeeding", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
                     "label": {
-                        "en_us": "Is there blood in the stool?"
+                        "default": "Advise mother to continue breastfeeding", 
+                        "en_us": "Advise mother to continue breastfeeding", 
+                        "hindi": "स्तनपान जारी रखने की सलाह दे."
+                    }
+                }, 
+                {
+                    "name": "warm_infant_skin_to_skin", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": {
+                        "default": "Warm the young infant by Skin to Skin contact if feels cold to touch.", 
+                        "en_us": "Warm the young infant by Skin to Skin contact if feels cold to touch.", 
+                        "hindi": "अगर छूने पर ठंडा लगता है तो शिशु को 'त्वचा से त्वचा' लगा कर रखें."
+                    }
+                }, 
+                {
+                    "name": "refer_urgently_to_hospital", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": {
+                        "default": "Refer URGENTLY to hospital.", 
+                        "en_us": "Refer URGENTLY to hospital.", 
+                        "hindi": "तुरंत अस्पताल रेफर करें."
                     }
                 }
             ], 
             "type": "screen"
         }, 
         {
-            "param": "severe_persistent_diarrhoea", 
             "type": "goto", 
-            "condition": "selected({{diarrhoea_14_days_or_more}}, 'yes')", 
-            "comments": "TODO: check up on this"
+            "param": "diarrhoea_section"
         }, 
         {
+            "required": true, 
+            "type": "label", 
+            "param": "local_bacterial_infection"
+        }, 
+        {
+            "prompts": [
+                {
+                    "name": "local_bacterial_infection_agree", 
+                    "hint": "SIGNS:\n<ul>\n<li>Umbilicus red or draining pus</li>\n<li>Skin pustules less than 10</li>\n</ul>", 
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "default": "CLASSIFICATION: LOCAL BACTERIAL INFECTION", 
+                        "hindi": "स्थानीए जीवानू संक्रमण (लोकल इन्फेक्षन).", 
+                        "en_us": "CLASSIFICATION: LOCAL BACTERIAL INFECTION"
+                    }
+                }, 
+                {
+                    "param": null, 
+                    "name": "give_oral_cotrimoxazole_5_days", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "comments": "there are some charts for this and for consoling the mother, not sure if they should be used here.", 
+                    "label": {
+                        "default": "Give oral cotrimoxazole for 5 days. (½ Pediatric tablet twice daily for an infant upto 1 month and 1 tablet for an infant 1-2 months)", 
+                        "hindi": "कोटरिमोक्षज़ोल की खुराक (१ महीने की ऊम्र तक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बाकछे की १ गोली) ५ दिन तक दिन मैं दो बार दें.", 
+                        "en_us": "Give oral cotrimoxazole for 5 days. (½ Pediatric tablet twice daily for an infant upto 1 month and 1 tablet for an infant 1-2 months)"
+                    }
+                }, 
+                {
+                    "name": "teach_mother_to_apply_gv_paint", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": {
+                        "default": "Teach mother to apply 0.5% Gentian Violet paint twice daily.", 
+                        "en_us": "Teach mother to apply 0.5% Gentian Violet paint twice daily.", 
+                        "hindi": "मा को संगयाए. ०.५% जनशन वायलाट ( जी वी) दावा दिन मैं दो बार लगायें."
+                    }
+                }, 
+                {
+                    "name": "follow_up_2_days", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": {
+                        "default": "Follow-up in 2 days.", 
+                        "en_us": "Follow-up in 2 days.", 
+                        "hindi": "दो दिन बाद पुन: देखें ."
+                    }
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "required": true, 
+            "type": "label", 
+            "param": "diarrhoea_section"
+        }, 
+        {
+            "name": "has_diarrhoea", 
+            "hint": "What is diarrhoea in a young infant? \nIf the stools have changed from usual \npattern and are many and watery (more \nwater than fecal matter). The normally \nfrequent or loose stools of a breastfed \nbaby are not diarrhoea.", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": {
+                "default": "Does the young infant have diarrhoea?", 
+                "hindi": "पूछें क्या शिशु को दस्त हैं?", 
+                "en_us": "Does the young infant have diarrhoea?"
+            }
+        }, 
+        {
+            "required": true, 
             "type": "goto", 
-            "param": "dysentery", 
-            "condition": "selected({{blood_in_stool}}, 'yes')"
+            "param": "has_diarrhoea", 
+            "condition": "selected(data('has_diarrhoea'), 'yes')"
+        }, 
+        {
+            "required": true, 
+            "type": "goto", 
+            "param": "feeding_problem_check"
+        }, 
+        {
+            "required": true, 
+            "type": "label", 
+            "param": "has_diarrhoea"
+        }, 
+        {
+            "name": "blood_in_stool", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": {
+                "default": "ASK: Is there blood in the stool?", 
+                "en_us": "ASK: Is there blood in the stool?", 
+                "hindi": "पूछें क्या माल में खून आता है?"
+            }
+        }, 
+        {
+            "required": true, 
+            "type": "goto", 
+            "param": "severe_dysentery", 
+            "condition": "selected(data('blood_in_stool'), 'yes')"
         }, 
         {
             "prompts": [
                 {
                     "type": "note", 
                     "param": null, 
+                    "comments": "Maybe have select multiple symptoms list instead?", 
                     "label": {
-                        "en_us": "Assess the child's general condition:"
+                        "default": "Look at the young infant’s general condition. Is the infant:", 
+                        "en_us": "Look at the young infant’s general condition. Is the infant:", 
+                        "hindi": "शिशु की सामानया स्थिति देखें."
                     }
                 }, 
                 {
-                    "name": "lethargic", 
+                    "name": "lethargic_2", 
+                    "constraint": "equivalent(data('lethargic'), data('lethargic_2'))", 
+                    "required": true, 
+                    "type": "select_one", 
                     "param": "yes_no", 
-                    "type": "select_one", 
-                    "comments": "TODO: Copy approach to general condition question from other sheet. Not sure how to do it yet.", 
                     "label": {
-                        "en_us": "Is the child lethargic or unconscious?"
+                        "default": "Lethargic or unconscious?", 
+                        "en_us": "Lethargic or unconscious?", 
+                        "hindi": "सुस्त या बेहोश है?"
                     }
                 }, 
                 {
-                    "type": "select_one", 
                     "name": "restless", 
+                    "required": true, 
+                    "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
-                        "en_us": "Is the child restless and irritable?"
+                        "default": "Restless and irritable?", 
+                        "en_us": "Restless and irritable?", 
+                        "hindi": "बेचेन्न या चिढ़चिढ़ा  है?"
                     }
                 }
             ], 
+            "required": true, 
             "type": "screen"
         }, 
         {
-            "type": "select_one", 
             "name": "sunken_eyes", 
+            "required": true, 
+            "type": "select_one", 
             "param": "yes_no", 
             "label": {
-                "en_us": "LOOK: Does the child have sunken eyes."
+                "default": "Does the infant have sunken eyes?", 
+                "en_us": "Does the infant have sunken eyes?", 
+                "hindi": "धँसी हूई आखें के लिए देखें."
             }
-        }, 
-        {
-            "prompts": [
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "Offer the child fluid to drink."
-                    }
-                }, 
-                {
-                    "type": "select_one", 
-                    "name": "drinking_poorly", 
-                    "param": "yes_no", 
-                    "label": {
-                        "en_us": "Is the child not able to drink or drinking poorly?"
-                    }
-                }, 
-                {
-                    "param": "yes_no", 
-                    "name": "drinking_eagerly", 
-                    "comments": "TODO: Can a child drink both eagerly and poorly?", 
-                    "type": "select_one", 
-                    "condition": "selected({{drinking_poorly}}, 'no')", 
-                    "label": {
-                        "en_us": "Is the child drinking eagerly, thirsty?"
-                    }
-                }
-            ], 
-            "type": "screen"
         }, 
         {
             "name": "skin_elasticity", 
-            "image": "./img/pinch-abdomen.jpg", 
+            "required": true, 
             "type": "select_one", 
             "param": "skin_elasticity", 
             "label": {
-                "en_us": "Pinch the skin of the abdomen. Does it go back:"
+                "default": "Pinch the skin of the abdomen. Does it go back:", 
+                "en_us": "Pinch the skin of the abdomen. Does it go back:", 
+                "hindi": "पेट की त्वचा पर चिकोटी भरें, यह काए वापस जाता है?"
             }
         }, 
         {
+            "param": "dehydration", 
+            "comments": "severe dehydration", 
+            "required": true, 
             "type": "goto", 
-            "param": "severe_dehydration", 
-            "condition": "selected({{lethargic}},'yes') + selected({{skin_elasticity}}, 'very_slow') + selected({{sunken_eyes}}, 'yes') + selected({{drinking_poorly}}, 'yes')  >= 2"
+            "condition": "selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') >= 2"
         }, 
         {
+            "param": "dehydration", 
+            "comments": "some dehydration", 
+            "required": true, 
             "type": "goto", 
-            "param": "some_dehydration", 
-            "condition": "selected({{restless}}, 'yes') + (selected({{skin_elasticity}}, 'slow') || selected({{skin_elasticity}}, 'very_slow')) + selected({{sunken_eyes}}, 'yes') + selected({{drinking_eagerly}}, 'yes') >= 2"
+            "condition": "selected(data('restless'), 'yes') + (selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow')) + selected(data('sunken_eyes'), 'yes') >= 2"
         }, 
         {
+            "required": true, 
             "type": "goto", 
             "param": "no_dehydration"
         }, 
         {
+            "required": true, 
             "type": "label", 
-            "param": "severe_dehydration"
+            "param": "dehydration"
         }, 
         {
             "prompts": [
                 {
                     "param": null, 
-                    "hint": "SIGNS:", 
+                    "hint": "Two of the following signs:\n<ul>\n<li>Lethargic or unconscious</li>\n<li>Sunken eyes</li>\n<li>Skin pinch goes back very slowly</li></ul>", 
+                    "required": true, 
                     "type": "note", 
-                    "condition": "selected({{lethargic}},'yes') + selected({{skin_elasticity}}, 'very_slow') + selected({{sunken_eyes}}, 'yes') >= 2", 
+                    "condition": "selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') >= 2", 
                     "label": {
-                        "en_us": "CLASSIFICATION: <strong>SEVERE DEHYDRATION</strong>"
+                        "default": "CLASSIFICATION: <strong>SEVERE DEHYDRATION</strong>", 
+                        "hindi": "गंभीर निर्जलीकरण", 
+                        "en_us": "CLASSIFICATION: SEVERE DEHYDRATION"
                     }
                 }, 
                 {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{lethargic}}, 'yes')", 
-                    "hint": "<li>Lethargic or unconscious.</li> "
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{sunken_eyes}}, 'yes')", 
-                    "hint": "<li>Sunken eyes.</li>"
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{drinking_poorly}}, 'yes')", 
-                    "hint": "<li>Not able to drink or drinking poorly.</li>"
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{skin_elasticity}}, 'very_slow')", 
-                    "hint": "<li>Skin pinch goes back very slowly.</li>"
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "name": "refer_urgently_to_hospital_w_ORS", 
-                    "param": null, 
+                    "hint": "Two of the following signs:\n<ul>\n<li>Restless, irritable.</li> \n<li>Sunken eyes.</li>\n<li>Skin pinch goes back slowly.</li></ul>", 
+                    "required": true, 
+                    "comments": "simplify this formula w/ a calculate", 
                     "label": {
-                        "en_us": "Refer URGENTLY to hospital \nwith mother giving frequent sips \nof ORS on the way."
-                    }
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "goto", 
-            "param": "diarrhoea_section_end"
-        }, 
-        {
-            "type": "label", 
-            "param": "some_dehydration"
-        }, 
-        {
-            "prompts": [
-                {
-                    "label": {
+                        "default": "CLASSIFICATION: SOME DEHYDRATION", 
+                        "hindi": "कुछ निर्जलीकरण", 
                         "en_us": "CLASSIFICATION: SOME DEHYDRATION"
                     }, 
-                    "type": "note", 
                     "param": null, 
-                    "hint": "SIGNS:"
+                    "type": "note", 
+                    "condition": "!(selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') >= 2) && selected(data('restless'), 'yes') + (selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow')) + selected(data('sunken_eyes'), 'yes') >= 2"
                 }, 
                 {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{restless}}, 'yes')", 
-                    "hint": "<li>Restless, irritable.</li> "
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{sunken_eyes}}, 'yes')", 
-                    "hint": "<li>Sunken eyes.</li>"
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "selected({{drinking_eagerly}}, 'yes')", 
-                    "hint": "<li>Drinks eagerly, thirsty.</li>"
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "condition": "(selected({{skin_elasticity}}, 'slow') || selected({{skin_elasticity}}, 'very_slow'))", 
-                    "hint": "<li>Skin pinch goes back slowly.</li>"
-                }, 
-                {
+                    "name": "give_oral_cotrimoxazole_if_able", 
+                    "required": true, 
                     "type": "acknowledge", 
-                    "name": "some_dehydration_treatment", 
                     "param": null, 
                     "label": {
-                        "en_us": "<ol><li>Give fluid and food for some dehydration (Plan B)</li>\n<li>Follow up in 2 days if not improving.</li></ol>"
+                        "default": "Give first dose of oral cotrimoxazole if able to take \norally (½ Pediatric tablet for an infant upto 1 month and 1 tablet for an infant 1-2 months)", 
+                        "en_us": "Give first dose of oral cotrimoxazole if able to take \norally (½ Pediatric tablet for an infant upto 1 month and 1 tablet for an infant 1-2 months)", 
+                        "hindi": "अगर मूह से ले सकता है तो कोटरिमोक्षज़ोल की पहली खुराक (एक महीने की उम्र \nतक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बचे वाली\n १ गोली) दे."
+                    }
+                }, 
+                {
+                    "name": "refer_urgently_to_hospital_w_ORS", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": {
+                        "default": "Refer URGENTLY to hospital \nwith mother giving frequent sips \nof ORS on the way.", 
+                        "en_us": "Refer URGENTLY to hospital \nwith mother giving frequent sips \nof ORS on the way.", 
+                        "hindi": "तुरंत अस्पताल रेफर करें व रास्ते मैं शिशु को ओ. आर. एस देते रहें."
+                    }
+                }, 
+                {
+                    "name": "advise_continue_breastfeeding", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": {
+                        "default": "Advise mother to continue \nbreastfeeding.", 
+                        "en_us": "Advise mother to continue \nbreastfeeding.", 
+                        "hindi": "मा को स्तनपान जारी रखने की सलाह दे"
+                    }
+                }, 
+                {
+                    "name": "advise_keep_infant_warm", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": {
+                        "default": "Advise to keep the young infant warm.", 
+                        "en_us": "Advise to keep the young infant warm.", 
+                        "hindi": "शिशु को गर्म रखने की सलाह"
                     }
                 }
             ], 
             "type": "screen"
         }, 
         {
+            "required": true, 
             "type": "goto", 
-            "param": "diarrhoea_section_end"
+            "param": "feeding_problem_check"
         }, 
         {
+            "required": true, 
             "type": "label", 
             "param": "no_dehydration"
         }, 
         {
-            "label": {
-                "en_us": "CLASSIFICATION: NO DEHYDRATION"
-            }, 
+            "hint": "Not enough signs to classify as    \n  some or severe dehydration.", 
+            "required": true, 
             "type": "note", 
             "param": null, 
-            "hint": "Not enough signs to classify as    \n  some or severe dehydration.   "
-        }, 
-        {
-            "type": "acknowledge", 
-            "name": "no_dehydration_treatment", 
-            "param": null, 
             "label": {
-                "en_us": "<ol><li>Give fluids to treat diarrhea at home (Plan A)</li>\n<li>Follow up in 2 days if not improving.</li></ol>"
+                "default": "CLASSIFICATION: NO DEHYDRATION", 
+                "hindi": "निर्जलीकर्ण नही", 
+                "en_us": "CLASSIFICATION: NO DEHYDRATION"
             }
         }, 
         {
-            "type": "goto", 
-            "param": "diarrhoea_section_end"
+            "name": "dehydration_treatment", 
+            "required": true, 
+            "type": "acknowledge", 
+            "param": null, 
+            "label": {
+                "default": "<ol><li>Give fluids to treat diarrhea at home (Plan A). </li>\n<li>Advise home care. </li>\n<li>Follow up in 2 days if not improving.</li></ol>", 
+                "en_us": "<ol><li>Give fluids to treat diarrhea at home (Plan A). </li>\n<li>Advise home care. </li>\n<li>Follow up in 2 days if not improving.</li></ol>", 
+                "hindi": "घर पर दस्त के ऊपचार के लिए शिशु की तरल पधार्थ दें. (प्लान ए: घर पर देख भाल की सलाह दें, अगर सुधार न हो दो दिन बाद पुन देखें."
+            }
         }, 
         {
+            "required": true, 
+            "type": "goto", 
+            "param": "feeding_problem_check"
+        }, 
+        {
+            "required": true, 
             "type": "label", 
-            "param": "severe_persistent_diarrhoea"
+            "param": "severe_dysentery"
         }, 
         {
             "prompts": [
                 {
-                    "label": {
-                        "en_us": "CLASSIFICATION: SEVERE PERSISTENT DIARRHOEA"
-                    }, 
+                    "hint": "Signs:\n<p>Blood  in the stool</p>", 
+                    "required": true, 
                     "type": "note", 
                     "param": null, 
-                    "hint": "Signs:\n<li>Diarrhoea for 14 days or more.</li>"
-                }, 
-                {
-                    "type": "acknowledge", 
-                    "name": "refer_to_hospital", 
-                    "param": null, 
                     "label": {
-                        "en_us": "Refer to hospital."
+                        "default": "CLASSIFICATION: SEVERE DYSENTERY", 
+                        "hindi": "गंभीर पोचिश", 
+                        "en_us": "CLASSIFICATION: SEVERE DYSENTERY\nDo you agree?"
                     }
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "goto", 
-            "param": "diarrhoea_section_end"
-        }, 
-        {
-            "type": "label", 
-            "param": "dysentery"
-        }, 
-        {
-            "prompts": [
-                {
-                    "label": {
-                        "en_us": "CLASSIFICATION: DYSENTERY"
-                    }, 
-                    "type": "note", 
-                    "param": null, 
-                    "hint": "Signs:\n<li>Blood  in the stool</li>"
                 }, 
                 {
-                    "name": "give_cotrimoxazole", 
-                    "hint": "2 Pediatric tablets twice daily for a child 2 up to 12 months and 3 tablets twice dialy for a child 12 months up to 5 years.", 
+                    "name": "give_oral_cotrimoxazole", 
                     "param": null, 
                     "type": "acknowledge", 
                     "comments": "should this have the dosage specifics mentioned above", 
                     "label": {
-                        "en_us": "Give first dose of oral cotrimoxazole for 5 days."
+                        "default": "Give first dose of oral cotrimoxazole if able to take orally", 
+                        "hindi": "अगर मूह से ले सकता है तो कोटरिमोक्षज़ोल की पहली खुराक (एक महीने की उम्र \nतक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बचे वाली\n १ गोली) दे.", 
+                        "en_us": "Give first dose of oral \ncotrimoxazole if able to \ntake orally"
                     }
                 }, 
                 {
                     "type": "acknowledge", 
-                    "name": "follow_up_2_days", 
+                    "name": "refer_urgently_to_hospital", 
                     "param": null, 
                     "label": {
-                        "en_us": "Follow-up in 2 days."
+                        "default": "Refer URGENTLY to hospital", 
+                        "en_us": "Refer URGENTLY to hospital", 
+                        "hindi": "तुरंत अस्पताल रेफर करें व रास्ते मैं शिशु को ओ. आर. एस देते रहें."
+                    }
+                }, 
+                {
+                    "type": "acknowledge", 
+                    "name": "advise_continue_breastfeeding", 
+                    "param": null, 
+                    "label": {
+                        "default": "Advise mother to continue breastfeeding.", 
+                        "en_us": "Advise mother to continue breastfeeding.", 
+                        "hindi": "मा को स्तनपान जारी रखने की सलाह दे"
+                    }
+                }, 
+                {
+                    "param": null, 
+                    "name": "advise_keep_infant_warm", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "comments": "some keeping infant warm instructions are more specific", 
+                    "label": {
+                        "default": "Advise to keep the young infant warm.", 
+                        "hindi": "शिशु को गर्म रखने की सलाह", 
+                        "en_us": "Advise to keep the young infant warm."
                     }
                 }
             ], 
             "type": "screen"
         }, 
         {
-            "type": "label", 
-            "param": "diarrhoea_section_end"
-        }, 
-        {
-            "type": "label", 
-            "param": "fever_section"
-        }, 
-        {
-            "name": "fever", 
-            "param": "yes_no", 
-            "type": "select_one", 
-            "comments": "TODO: Infer this from temp using calculate", 
-            "label": {
-                "en_us": "Does the child have fever?"
-            }
-        }, 
-        {
+            "required": true, 
             "type": "goto", 
-            "param": "malnutrition_section", 
-            "condition": "selected({{fever}}, 'no')"
+            "param": "feeding_problem_check"
         }, 
         {
-            "type": "note", 
+            "required": true, 
+            "type": "label", 
+            "param": "feeding_problem_check"
+        }, 
+        {
+            "name": "difficulty_feeding", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": "ASK: Is there any difficulty feeding?"
+        }, 
+        {
+            "name": "is_infant_breastfed", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": "ASK: Is the infant breastfed?"
+        }, 
+        {
+            "name": "breastfeedings_per_day", 
             "param": null, 
-            "label": {
-                "en_us": "ASK"
-            }
-        }, 
-        {
             "type": "integer", 
-            "name": "fever_length", 
-            "param": null, 
-            "label": {
-                "en_us": "Fever for how long?"
-            }
+            "condition": "selected(data('is_infant_breastfed'), 'yes')", 
+            "label": "ASK: How many times is the infant breastfed in 24 hours?"
         }, 
         {
-            "name": "fever_present_every_day", 
+            "name": "other_foods", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": "ASK: Does the infant usually receive any foods or drinks other than breastmilk?"
+        }, 
+        {
+            "name": "other_foods_frequency", 
+            "param": null, 
+            "type": "integer", 
+            "comments": "metric?", 
+            "label": "ASK: How often does the infant receive other foods or drinks?"
+        }, 
+        {
+            "name": "use_to_feed", 
+            "param": "food", 
+            "type": "select_multiple", 
+            "comments": "I'm going with type of food for now because we ask about breastfeeding above", 
+            "label": "ASK: What do you use to feed the infant?"
+        }, 
+        {
+            "param": "yes_no", 
+            "name": "indication_for_urgent_referral", 
+            "required": true, 
+            "type": "select_one", 
+            "comments": "TODO: Infer yes?", 
+            "label": "Is there any indication for urgent referral?"
+        }, 
+        {
+            "name": "breastfed_recently", 
             "param": "yes_no", 
             "type": "select_one", 
-            "condition": "{{fever_length}} > 7", 
-            "label": {
-                "en_us": "Has fever been present every day?"
-            }
+            "comments": "Added back from original IMCNI chart based on correspondence with Amy/Manoj", 
+            "label": "ASK: Has the infant breastfed in the previous hour?"
+        }, 
+        {
+            "type": "goto", 
+            "param": "after_feeding_assessment", 
+            "condition": "selected(data('indication_for_urgent_referral'), 'yes')"
+        }, 
+        {
+            "type": "goto", 
+            "param": "after_feeding_assessment", 
+            "condition": "selected(data('breastfed_recently'), 'yes')"
+        }, 
+        {
+            "param": null, 
+            "name": "observe_breastfeed", 
+            "required": true, 
+            "type": "acknowledge", 
+            "comments": "Add timer widget?", 
+            "label": "Ask the mother to put her infant to the breast. Observe the breastfeed for 4 minutes."
         }, 
         {
             "type": "select_one", 
-            "name": "stiff_neck", 
+            "name": "able_to_attach", 
             "param": "yes_no", 
-            "label": {
-                "en_us": "LOOK or FEEL: Does the child have a stiff neck."
-            }
+            "label": "Is the infant able to attach?"
         }, 
         {
-            "param": "very_severe_febrile_disease", 
-            "type": "goto", 
-            "condition": "selected({{stiff_neck}}, 'yes')", 
-            "comments": "TODO: Make calculate for general danger signs"
+            "name": "attachment_quality_signs", 
+            "hint": "(All of these signs should be present if the \nattachment is good)", 
+            "comments": "TODO: Reword? Ask \"Is infant able to attach\" then assess quality automatically from signs", 
+            "label": "Look for the following signs to assess attachment:", 
+            "param": "attachment_quality_sign", 
+            "type": "select_multiple", 
+            "condition": "selected(data('able_to_attach'), 'yes')"
         }, 
         {
-            "type": "goto", 
-            "param": "malaria", 
-            "comments": "TODO: Fever formula"
-        }, 
-        {
-            "type": "label", 
-            "param": "very_severe_febrile_disease"
-        }, 
-        {
-            "type": "note", 
-            "param": null, 
-            "label": {
-                "en_us": "<strong>DANGER SIGNS</strong>     "
-            }
-        }, 
-        {
-            "type": "note", 
-            "param": null, 
-            "comments": "TODO", 
-            "label": {
-                "en_us": "<li>Fever (by history hot or temperature 37.5 deg C or above)</li>"
-            }
-        }, 
-        {
-            "type": "goto", 
-            "param": "malnutrition_section"
-        }, 
-        {
-            "type": "label", 
-            "param": "malaria"
-        }, 
-        {
-            "type": "label", 
-            "param": "malnutrition_section"
-        }, 
-        {
-            "prompts": [
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "LOOK and Feel"
-                    }
-                }, 
-                {
-                    "type": "select_one", 
-                    "name": "wasting", 
-                    "param": "present", 
-                    "label": {
-                        "en_us": "Look for visible severe wasting"
-                    }
-                }, 
-                {
-                    "type": "select_one", 
-                    "name": "oedema", 
-                    "param": "present", 
-                    "label": {
-                        "en_us": "Look for oedema of both feet"
-                    }
-                }, 
-                {
-                    "type": "goto", 
-                    "param": "severe_malnutrtion", 
-                    "condition": "selected({{oedema}},'present')"
-                }, 
-                {
-                    "type": "goto", 
-                    "param": "severe_malnutrtion", 
-                    "condition": "selected({{wasting}},'present')"
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "comments": "Template for plotting weight for age?", 
-                    "label": {
-                        "en_us": "Determine grade of malnutrition by plotting weight for age"
-                    }
-                }, 
-                {
-                    "type": "goto", 
-                    "param": "severe_wasting"
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "label", 
-            "param": "severe_wasting"
-        }, 
-        {
-            "prompts": [
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "CLASSIFICATION: Normal weight for age or Malnutrition grade1 if NOT VERY LOW WEIGHT"
-                    }
-                }, 
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "CLASSIFICATION: Malnutrition grade 2,3 or 4 if VERY LOW WEIGHT"
-                    }
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "label", 
-            "param": "severe_malnutrition"
-        }, 
-        {
-            "prompts": [
-                {
-                    "type": "note", 
-                    "param": null, 
-                    "label": {
-                        "en_us": "CLASSIFICATION: <strong>SEVERE MALNUTRITION</strong>"
-                    }
-                }
-            ], 
-            "type": "screen"
-        }, 
-        {
-            "type": "label", 
-            "param": "anaemia"
-        }, 
-        {
+            "name": "sucking_effectiveness", 
+            "hint": "Clear a blocked nose if it interferes with breastfeeding.", 
+            "required": true, 
             "type": "select_one", 
-            "name": "anaemia_check", 
-            "param": "no_some_severe", 
-            "label": {
-                "en_us": "LOOK and FEEL for Palmar Pallor"
-            }
-        }, 
-        {
-            "type": "goto", 
-            "param": "no_palmar", 
-            "condition": "selected({{anaemia_check}},'none')"
-        }, 
-        {
-            "type": "goto", 
-            "param": "some_palmar", 
-            "condition": "selected({{anaemia_check}},'some')"
-        }, 
-        {
-            "type": "goto", 
-            "param": "severe_palmar", 
-            "condition": "selected({{anaemia_check}},'severe')"
+            "param": "sucking_effectiveness", 
+            "label": "Is the infant suckling effectively (that is,  slow deep sucks, sometimes pausing)?"
         }, 
         {
             "type": "label", 
-            "param": "no_palmar"
+            "param": "after_feeding_assessment"
         }, 
         {
-            "type": "note", 
-            "param": null, 
-            "label": {
-                "en_us": "CLASSIFICATION: NO ANAEMIA"
-            }
+            "param": "present", 
+            "name": "ulcers_thrush", 
+            "required": true, 
+            "type": "select_one", 
+            "comments": "TODO: Add mouth wiping directions?", 
+            "label": "Look for ulcers or white patches in the mouth (thrush)."
+        }, 
+        {
+            "name": "breastfeeding_pain", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": "ASK: Does the mother have pain while breastfeeding?"
+        }, 
+        {
+            "param": "breast_problems", 
+            "name": "breast_problems", 
+            "comments": "Modified to include flat/inverted/cracked nipple based on correspondence with Manoj", 
+            "type": "select_one", 
+            "condition": "selected(data('breastfeeding_pain'), 'yes')", 
+            "label": "Look and feel for breast problems:"
+        }, 
+        {
+            "param": "cannot_feed_possible_serious_bacterial_infection", 
+            "comments": "How do I determine able_to_feed? Is it different from able to attach?", 
+            "required": true, 
+            "type": "goto", 
+            "condition": "selected(data('able_to_feed'),'no') || selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'none')"
+        }, 
+        {
+            "required": true, 
+            "type": "goto", 
+            "param": "feeding_problem", 
+            "condition": "selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'not_effective') || selected(data('sucking_effectiveness'), 'none') || data('breastfeedings_per_day') < 8 || selected(data('ulcers_thrush'), 'present') || countSelected(data('breast_problems')) > 0"
+        }, 
+        {
+            "prompts": [
+                {
+                    "hint": "No signs of inadequate feeding.", 
+                    "required": true, 
+                    "type": "note", 
+                    "param": null, 
+                    "label": "CLASSIFICATION: NO FEEDING PROBLEM"
+                }, 
+                {
+                    "type": "acknowledge", 
+                    "name": "advise_home_care", 
+                    "param": null, 
+                    "label": "Advise to give home care."
+                }, 
+                {
+                    "name": "parse_mother_for_feeding", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": "Praise the mother for feeding the infant well."
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "required": true, 
+            "type": "goto", 
+            "param": "check_immunization_status"
+        }, 
+        {
+            "required": true, 
+            "type": "label", 
+            "param": "feeding_problem"
+        }, 
+        {
+            "prompts": [
+                {
+                    "hint": "SIGNS:\n<p>Not well attached to \nbreast or Not suckling effectively</p>\n       or \n<p>Less than 8    \nbreastfeeds in \n24 hours</p>   \nor \n<p>Receives other \nfoods or drinks</p>   \nor \n<p>Thrush (ulcers or \nwhite patches in \nmouth).</p>\nor\n<p>Breast or nipple problems</p>", 
+                    "required": true, 
+                    "type": "note", 
+                    "param": null, 
+                    "label": "CLASSIFICATION: FEEDING PROBLEM"
+                }, 
+                {
+                    "name": "teach_correct_positioning", 
+                    "required": true, 
+                    "comments": "TODO: Link to information section on P.4", 
+                    "label": "Infant is not well attached or not suckling effectively. Teach correct positioning and attachment.", 
+                    "param": null, 
+                    "type": "acknowledge", 
+                    "condition": "not(allSelected(data('attachment_quality_signs'))) || not(selected(data('sucking_effectiveness'), 'effective'))"
+                }, 
+                {
+                    "param": null, 
+                    "name": "increase_frequency_of_feeding", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "condition": "data('breastfeedings_per_day') < 8", 
+                    "label": "If breastfeeding less than 8 times  in 24 hours, advise to increase frequency of feeding."
+                }, 
+                {
+                    "condition": "selected(data('other_foods'), 'yes')", 
+                    "param": null, 
+                    "type": "acknowledge", 
+                    "comments": "TODO: For conditional questions verify that phrasing can be changed to leave out the “if”.", 
+                    "label": "Infant is receiving other foods or drinks. Counsel mother about breastfeeding more, reducing other foods or drinks, and using a cup and spoon."
+                }, 
+                {
+                    "param": null, 
+                    "condition": "selected(data('is_infant_breastfed'), 'no')", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "comments": "TODO: Link to information", 
+                    "label": "If not breastfeeding at all, \nadvise mother about giving \nlocally appropriate animal milk \nand teach the mother to feed \nwith a cup and spoon."
+                }, 
+                {
+                    "param": null, 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "condition": "selected(data('ulcers_thrush'), 'present')", 
+                    "label": "If thrush, teach the mother to \napply 0.25% Gentian Violet \npaint twice daily"
+                }, 
+                {
+                    "param": null, 
+                    "condition": "countSelected(data('breast_problems')) > 0", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "comments": "TODO: Link to information section on P.4 Will need to ref breast_problems", 
+                    "label": "If breast or nipple problem, \nteach the mother to treat breast \nor nipple problems."
+                }, 
+                {
+                    "hint": "(Breastfeed infant exclusively, keep infant warm, apply nothing to cord, ask mother to wash hands and explain danger signs in the infant)", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": "Advise mother to give home \ncare"
+                }, 
+                {
+                    "name": "follow_up_2_days", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": "Follow-up in 2 days."
+                }
+            ], 
+            "type": "screen"
+        }, 
+        {
+            "type": "goto", 
+            "param": "check_immunization_status"
         }, 
         {
             "type": "label", 
-            "param": "some_palmar"
+            "param": "cannot_feed_possible_serious_bacterial_infection"
         }, 
         {
-            "type": "note", 
-            "param": null, 
-            "label": {
-                "en_us": "CLASSIFICATION: ANAEMIA"
-            }
+            "prompts": [
+                {
+                    "hint": "SIGNS:", 
+                    "type": "note", 
+                    "param": null, 
+                    "label": "CLASSIFICATION:\n<p>NOT ABLE TO FEED - \nPOSSIBLE SERIOUS BACTERIAL INFECTION</p>"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected(data('is_infant_breastfed'), 'no')", 
+                    "hint": "<li>Not able to feed </li>"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected(data('able_to_attach'),'no')", 
+                    "hint": "<li>No attachment at all</li>"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected(data('sucking_effectiveness'), 'none')", 
+                    "hint": "<li>Not suckling at all </li>"
+                }, 
+                {
+                    "name": "warm_skin_to_skin", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": "Warm the young infant by Skin to Skin contact if feels cold to touch."
+                }, 
+                {
+                    "name": "refer_urgently_to_hospital", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": "Refer URGENTLY to hospital"
+                }
+            ], 
+            "type": "screen"
         }, 
         {
-            "type": "label", 
-            "param": "severe_palmar"
-        }, 
-        {
-            "type": "note", 
-            "param": null, 
-            "label": {
-                "en_us": "CLASSIFICATION: SEVERE ANAEMIA"
-            }
+            "required": true, 
+            "type": "goto", 
+            "param": "check_immunization_status"
         }, 
         {
             "required": true, 
@@ -1033,72 +1211,34 @@
             "param": "check_immunization_status"
         }, 
         {
-            "type": "select_multiple", 
-            "name": "needed_vaccinations", 
             "param": "needed_vaccinations", 
-            "label": {
-                "en_us": "Which vaccinations has the child NOT received?"
-            }
+            "name": "needed_vaccinations", 
+            "choiceFilter": "context.age_months || 0 < data('age_months')", 
+            "type": "select_multiple", 
+            "comments": "PROBLEMS:\nWe want a way to filter the choices by age.\nIt would be nice to have a way to get the compliment of a selected set.", 
+            "label": "Which vaccinations has the child NOT received?"
         }, 
         {
+            "param": "yes_no", 
             "name": "other_problems", 
             "required": true, 
-            "type": "text", 
-            "param": null, 
-            "label": {
-                "en_us": "Assess other problems:"
-            }
+            "type": "select_one", 
+            "comments": "Added based on correspondence with Amy/Manoj", 
+            "label": "Does the child have any other problems?"
         }, 
         {
-            "name": "age", 
-            "required": true, 
-            "type": "text", 
             "param": null, 
-            "label": {
-                "en_us": "Age:"
-            }
-        }, 
-        {
-            "name": "weight", 
+            "name": "refer_for_other_problems", 
             "required": true, 
-            "type": "number", 
-            "param": null, 
-            "label": {
-                "en_us": "Weight in kilograms:"
-            }
-        }, 
-        {
-            "name": "temperature", 
-            "required": true, 
-            "type": "number", 
-            "param": null, 
-            "label": {
-                "en_us": "Temperature in Celsius:"
-            }
-        }, 
-        {
-            "name": "initial_visit", 
-            "required": true, 
-            "type": "datetime", 
-            "param": null, 
-            "label": {
-                "en_us": "Initial Visit:"
-            }
-        }, 
-        {
-            "name": "follow_up_visit", 
-            "required": true, 
-            "type": "datetime", 
-            "param": null, 
-            "label": {
-                "en_us": "Follow-up Visit:"
-            }
+            "type": "acknowledge", 
+            "condition": "selected(data('other_problems'), 'yes')", 
+            "label": "Refer the child to a doctor for detailed assessment."
         }
     ], 
     "calculates": [
         {
-            "formula": "{{X}}", 
-            "name": "fast_breathing"
+            "calculation": "((new Date()).getTime() - new Date(data('birthday')).getTime()) / (1000 * 60 * 60 * 24)", 
+            "name": "daysOld"
         }
     ], 
     "choices": {
@@ -1142,6 +1282,16 @@
                 "label": "OPV-1 + Hepatitis B-1"
             }
         ], 
+        "visit_type": [
+            {
+                "name": "initial_visit", 
+                "label": "Initial vist"
+            }, 
+            {
+                "name": "followup", 
+                "label": "Follow-up"
+            }
+        ], 
         "food": [
             {
                 "name": "water", 
@@ -1156,24 +1306,36 @@
                 "label": "Cereal"
             }
         ], 
-        "no_some_severe": [
-            {
-                "name": "none", 
-                "label": "none"
-            }
-        ], 
         "skin_elasticity": [
             {
                 "name": "very_slow", 
-                "label": "Very slowly (longer than 2 seconds)? "
+                "label": "Very slowly (longer than 2 seconds)?"
             }, 
             {
                 "name": "slow", 
-                "label": "     Slowly?"
+                "label": "Slowly?"
             }, 
             {
                 "name": "normal", 
                 "label": "Skin goes back normally."
+            }
+        ], 
+        "breast_problems": [
+            {
+                "name": "flat_nipple", 
+                "label": "Flat/inverted nipple"
+            }, 
+            {
+                "name": "sore_nipple", 
+                "label": "Sore/cracked nipple"
+            }, 
+            {
+                "name": "engorged_breasts", 
+                "label": "Engorged breasts"
+            }, 
+            {
+                "name": "breast_abscess", 
+                "label": "Breast abscess"
             }
         ], 
         "sex": [
