@@ -28,7 +28,24 @@ promptTypes.base = Backbone.View.extend({
         this.initializeRenderContext();
         this.afterInitialize();
     },
+    whenTemplateIsReady: function(callback){
+        var that = this;
+        if(this.template){
+            callback();
+        } else if(this.templatePath) {
+            requirejs(['text!'+this.templatePath], function(source) {
+                that.template = Handlebars.compile(source);
+                callback();
+            });
+        } else {
+            alert("No template for prompt: " + prompt.name);
+            console.error(this);
+        }
+    },
+
     initializeTemplate: function() {
+        return;
+        /*
         //if (this.template != null) return;
         var that = this;
         var f = function() {
@@ -51,7 +68,9 @@ promptTypes.base = Backbone.View.extend({
             }
         };
         f();
+        */
     },
+
     isInitializeComplete: function() {
         return (this.templatePath == null || this.template != null);
     },
@@ -76,7 +95,8 @@ promptTypes.base = Backbone.View.extend({
     },
     afterInitialize: function() {},
     onActivate: function(readyToRenderCallback) {
-        readyToRenderCallback();
+        var that;
+        this.whenTemplateIsReady(readyToRenderCallback);
     },
     /**
      * stopPropagation is used in the events map to disable swiping on various elements
@@ -241,7 +261,9 @@ promptTypes.opening = promptTypes.base.extend({
             database.setMetaData('instanceName', 'string', instanceName, function(){});
         }
         this.renderContext.instanceName = instanceName;
-        readyToRenderCallback({enableBackwardNavigation: false});
+        this.whenTemplateIsReady(function(){
+            readyToRenderCallback({enableBackwardNavigation: false});
+        });
     },
     renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png',
@@ -281,12 +303,12 @@ promptTypes.finalize = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getMetaDataValue('instanceName');
-        readyToRenderCallback({enableForwardNavigation: false});
-        /*
+        //readyToRenderCallback({enableForwardNavigation: false});
+        
         database.getAllData(function(tlo) {
             readyToRenderCallback({enableForwardNavigation: false});
         });
-        */
+        
     },
     saveIncomplete: function(evt) {
         database.save_all_changes(false, function() {
@@ -313,7 +335,9 @@ promptTypes.json = promptTypes.base.extend({
             } else {
                 that.renderContext.value = "JSON Unavailable";
             }
-            readyToRenderCallback({enableNavigation: false});
+            this.whenTemplateIsReady(function(){
+                readyToRenderCallback({enableNavigation: false});
+            });
         });
     }
 });
@@ -351,11 +375,13 @@ promptTypes.instances = promptTypes.base.extend({
                 formName: database.getMetaDataValue('formName'),
                 headerImg: opendatakit.baseDir + 'img/form_logo.png'
             });
-            readyToRenderCallback({
-                showHeader: false,
-                enableNavigation:false,
-                showFooter:false
-            });
+            that.whenTemplateIsReady(function(){
+                readyToRenderCallback({
+                    showHeader: false,
+                    enableNavigation:false,
+                    showFooter:false
+                });
+            })
         });
     },
     createInstance: function(evt){
@@ -382,7 +408,9 @@ promptTypes.hierarchy = promptTypes.base.extend({
     },
     onActivate: function(readyToRenderCallback) {
         this.renderContext.prompts = controller.prompts;
-        readyToRenderCallback({showHeader: false, showFooter: false});
+        this.whenTemplateIsReady(function(){
+            readyToRenderCallback({showHeader: false, showFooter: false});
+        });
     }
 });
 promptTypes.repeat = promptTypes.base.extend({
@@ -487,7 +515,9 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
         var saveValue = that.getValue();
         that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
-        readyToRenderCallback();
+        this.whenTemplateIsReady(function(){
+            readyToRenderCallback();
+        });
     }
 });
 promptTypes.select_one = promptTypes.select.extend({
@@ -591,7 +621,9 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         var renderContext = this.renderContext;
         var value = this.getValue();
         renderContext.value = value;
-        readyToRenderCallback();
+        this.whenTemplateIsReady(function(){
+            readyToRenderCallback();
+        });
     },
     beforeMove: function(context) {
         var that = this;
@@ -645,6 +677,7 @@ promptTypes.datetime = promptTypes.inputType.extend({
         "swiperight input": "stopPropagation"
     },
     onActivate: function(readyToRenderCallback) {
+        var that = this;
         var renderContext = this.renderContext;
         var value = this.getValue();
         renderContext.value = value;
@@ -657,7 +690,9 @@ promptTypes.datetime = promptTypes.inputType.extend({
                 jqmSet: 'd',
                 jqmCancel: 'd'
             };
-            readyToRenderCallback();
+            that.whenTemplateIsReady(function(){
+                readyToRenderCallback();
+            });
         });
     },
     render: function() {
@@ -734,7 +769,9 @@ promptTypes.image = promptTypes.media.extend({
         var value = that.getValue();
         that.renderContext.mediaPath = value;
         that.renderContext.uriValue = opendatakit.asUri(value, 'img');
-        readyToRenderCallback();
+        this.whenTemplateIsReady(function(){
+            readyToRenderCallback();
+        });
     },
     capture: function() {
         var platInfo = opendatakit.getPlatformInfo();
@@ -763,7 +800,9 @@ promptTypes.video = promptTypes.media.extend({
             that.renderContext.uriValue = opendatakit.asUri(value, 'video', 'src');
             that.renderContext.videoPoster = opendatakit.asUri(opendatakit.baseDir + "img/play.png", 'video', 'poster');
         }
-        readyToRenderCallback();
+        this.whenTemplateIsReady(function(){
+            readyToRenderCallback();
+        });
     },
     capture: function() {
         var platInfo = opendatakit.getPlatformInfo();
@@ -811,7 +850,7 @@ promptTypes.screen = promptTypes.base.extend({
         this.prompts = builder.initializePrompts(this.prompts);
         //Wire up the prompts so that if any of them rerender the screen rerenders.
         //TODO: Think about whether there is a better way of doing this.
-        //Maybe bind to database changes instead?
+        //Maybe bind this or subprompts to database change events instead?
         _.each(this.prompts, function(prompt){
             prompt._screenRender = prompt.render;
             prompt.render = function(){
@@ -847,25 +886,14 @@ promptTypes.screen = promptTypes.base.extend({
             prompt.validate(subPromptContext);
         });
     },
-    onActivateHelper: function(idx, readyToRenderCallback) {
-        var that = this;
-        return function() {
-            if ( that.prompts.length > idx ) {
-                var prompt = that.prompts[idx];
-                prompt.onActivate(that.onActivateHelper(idx+1,readyToRenderCallback));
-            } else {
-                readyToRenderCallback();
-            }
-        }
-    },
-    //TODO: Think about how to handle condition functions in onActivate
     onActivate: function(readyToRenderCallback) {
-        if ( this.prompts.length == 0 ) {
+        var that = this;
+        var subPromptsReady = _.after(this.prompts.length, function () {
             readyToRenderCallback();
-        } else {
-            var prompt = this.prompts[0];
-            prompt.onActivate(this.onActivateHelper(1, readyToRenderCallback));
-        }
+        });
+        _.each(this.prompts, function(prompt){
+            prompt.onActivate(subPromptsReady);
+        });
     },
     render: function(){
         var subPrompts = _.filter(this.prompts, function(prompt) {
@@ -890,25 +918,6 @@ promptTypes.screen = promptTypes.base.extend({
         this.$el.trigger('create');
     }
 });
-/*
-// Calculates are evaluated as they are encountered in the survey control flow.
-// If you think of a survey as a procedural program, they are essentially variable assignment.
-promptTypes.calculate = promptTypes.base.extend({
-    type: "calculate",
-    hideInHierarchy: true,
-    isInitializeComplete: function() {
-        return true;
-    },
-    onActivate: function(readyToRenderCallback){
-        alert("calculate.onActivate: Should never be called!");
-    },
-    calculation: function() {
-    },
-    evaluate: function(callback) {
-        this.setValue(this.calculation(), callback);
-    }
-});
-*/
 promptTypes.label = promptTypes.base.extend({
     type: "label",
     isInitializeComplete: function() {
@@ -928,6 +937,7 @@ promptTypes.goto = promptTypes.base.extend({
         alert("goto.onActivate: Should never be called!");
     }
 });
+//TODO: Remove
 promptTypes.goto_if = promptTypes.base.extend({
     type: "goto_if",
     hideInHierarchy: true,
@@ -976,7 +986,9 @@ promptTypes.acknowledge = promptTypes.select.extend({
             "label": "Acknowledge",
             "checked": acknowledged
         }];
-        readyToRenderCallback();
+        this.whenTemplateIsReady(function(){
+            readyToRenderCallback();
+        });
     }
 });
 });

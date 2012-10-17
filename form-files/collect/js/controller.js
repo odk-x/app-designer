@@ -393,7 +393,6 @@ return {
                 alert("controller.gotoRef: null prompt after advanceToScreenPrompt!");
                 return;
             }
-    
             that.setPrompt(prompt, { hlist : hlist });    
         });
         
