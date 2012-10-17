@@ -10,33 +10,39 @@ return {
         console.log("logInitDone: doneInit ms: " + (+new Date()) + " page: " + pagename);
     },
 
-    getPlatformInfo:function() {
+    /**
+     * immediate return: platformInfo structure from ODK
+     */
+    getPlatformInfo:function(ctxt) {
         // fetch these settings from ODK Collect if running under that context
         if ( this.platformInfo == null ) {
             var jsonString = collect.getPlatformInfo();
-            console.log('getPlatformInfo: ' + jsonString);
+            ctxt.append('opendatakit.getPlatformInfo', jsonString);
             this.platformInfo = JSON.parse(jsonString);
-            console.log('getPlatformInfo: container=' + this.platformInfo.container);
-            console.log('getPlatformInfo: version=' + this.platformInfo.version);
-            console.log('getPlatformInfo: appPath=' + this.platformInfo.appPath);
         }
         return this.platformInfo;
     },
     
-    getDatabaseSettings:function() {
+    /**
+     * immediate return: databaseSettings structure from ODK
+     */
+    getDatabaseSettings:function(ctxt) {
         // fetch these settings from ODK Collect if running under that context
         if ( this.databaseSettings == null ) {
             var jsonString = collect.getDatabaseSettings();
-            console.log('getDatabaseSettings: ' + jsonString);
+            ctxt.append('opendatakit.getDatabaseSettings', jsonString);
             this.databaseSettings = JSON.parse(jsonString);
         }
         return this.databaseSettings;
     },
 
-    asUri:function(mediaPath,widget,attribute) {
+    /**
+     * immediate return: URI for this media file
+     */
+    asUri:function(ctxt,mediaPath,widget,attribute) {
         if ( mediaPath == null ) return null;
         
-        var info = this.getPlatformInfo();
+        var info = this.getPlatformInfo(ctxt);
         if ( info.container != 'Android' ) return mediaPath;
         
         if ( mediaPath[0] == '.' ) {
@@ -49,42 +55,6 @@ return {
             }
         }
         return "file://127.0.0.1" + mediaPath;
-    },
-    
-    checkInteger:function(value, isRequired, alertMessage) {
-        if(value && value.length != 0) {
-            var n = Number(value);
-            if(isNaN(n) || Math.round(n) != n) {
-                if(alertMessage) {
-                    alert(alertMessage);
-                } else {
-                    alert("Integer expected!");
-                }
-                return false;
-            }
-        } else if(isRequired) {
-            alert("Required value! Please enter an integer value.");
-            return false;
-        }
-        return true;
-    },
-
-    checkNumeric:function(value, isRequired, alertMessage) {
-        if(value && value.length != 0) {
-            var n = Number(value);
-            if(isNaN(n)) {
-                if(alertMessage) {
-                    alert(alertMessage);
-                } else {
-                    alert("Numeric value expected!");
-                }
-                return false;
-            }
-        } else if(isRequired) {
-            alert("Required value! Please enter a numeric value.");
-            return false;
-        }
-        return true;
     },
 
     genUUID:function() {
@@ -113,16 +83,18 @@ return {
         return formPath;
     },
     
-    openNewInstanceId:function(id, friendlyName) {
+    /**
+     * immediate return: undef
+     * side effect: revise: window.location.hash
+     */
+    openNewInstanceId:function(ctxt, id, friendlyName) {
         console.log("ALERT! setNewInstanceId - setting new UUID");
         if (id == null) {
             id = this.genUUID();
         }
         
         // NOTE: reference mdl directly to avoid circular reference to 'database'
-        var qpl = this.getHashString(mdl.qp.formPath.value,
-                        id,
-                        0) +
+        var qpl = this.getHashString(mdl.qp.formPath.value, id, 0) +
             ((friendlyName != null) ? '&instanceName=' + escape(friendlyName) : '');
         // apply the change to the URL...
         window.location.hash = qpl;
@@ -161,6 +133,5 @@ return {
         }
         return null;
     }
-
 };
 });

@@ -1778,11 +1778,18 @@ if ( eventCaptureSupported ) {
 								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
 								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
 
-								start.origin.trigger( "swipe" )
-									.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
+								var isLeftSwipe = (start.coords[0] > stop.coords[ 0 ]);
+								var origin = start.origin;
+								
+								start = stop = undefined;
+								origin.trigger( "swipe" )
+									.trigger( isLeftSwipe ? "swipeleft" : "swiperight" );
+							} else {
+								start = stop = undefined;
 							}
+						} else {
+							start = stop = undefined;
 						}
-						start = stop = undefined;
 					});
 			});
 		}

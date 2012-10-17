@@ -13,22 +13,25 @@ return Backbone.View.extend({
     instance_id:123,
     template: Handlebars.compile(screenTemplate),
     swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
-    noPreviousPage: function(continuation) {
+    noPreviousPage: function(ctxt) {
+        ctxt.append("screenManager.noPreviousPage");
         alert("I've forgotten what the previous page was!");
-        continuation();
+        ctxt.success();
     },
-    noNextPage: function(continuation) {
+    noNextPage: function(ctxt) {
+        ctxt.append("screenManager.noNextPage");
         alert("No next page!");
-        continuation();
+        ctxt.success();
     },
-    unexpectedError: function(action, ex) {
+    unexpectedError: function(ctxt, action, ex) {
         try {
             alert("Unexpected error: " + action + " Reason: " + ex );
         } catch (e) {
         }
+        ctxt.success();
     },
     renderContext:{},
-    initialize: function(){
+    initialize: function(ctxt){
         this.controller = this.options.controller;
         this.currentPageEl = $('[data-role=page]');
         var that = this;
@@ -45,9 +48,13 @@ return Backbone.View.extend({
         f();
         */
     },
-    cleanUpScreenManager: function(){
-        this.undelegateEvents();
-        this.swipeEnabled = false;
+    cleanUpScreenManager: function(ctxt){
+        this.swipeEnabled = true;
+        this.savedCtxt = null;
+        this.displayWaiting(ctxt);
+    },
+    displayWaiting: function(ctxt){
+        ctxt.append("screenManager.displayWaiting", (this.prompt == null) ? "promptIdx: null" : ("promptIdx: " + this.prompt.promptIdx));
         var $e;
         $e = $('.current');
         $e.html('<span>Please wait...</span>');
@@ -56,7 +63,7 @@ return Backbone.View.extend({
         $e = $('.odk-nav');
         $e.html('');
     },
-    setPrompt: function(prompt, jqmAttrs){
+    setPrompt: function(ctxt, prompt, jqmAttrs){
         if(!jqmAttrs){
             jqmAttrs = {};
         }
@@ -65,7 +72,7 @@ return Backbone.View.extend({
         if(this.prompt) {
             this.prompt.undelegateEvents();
         }
-        this.undelegateEvents();
+        this.previousPageEl = this.currentPageEl;
         this.prompt = prompt;
         this.swipeEnabled = false;
         this.renderContext = {
@@ -87,66 +94,121 @@ return Backbone.View.extend({
         //(We would not allow prompts to access the controller directly).
         //When the prompt changes, we could disconnect the interface to prevent the old
         //prompts from messing with the current screen.
-        that.prompt.onActivate(function(renderContext){
-            var isFirstPrompt = !('previousPageEl' in that);
-            var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
-            if(renderContext){
-                $.extend(that.renderContext, renderContext);
+        that.prompt.onActivate($.extend({},ctxt,{
+            success:function(renderContext){
+                var isFirstPrompt = !('previousPageEl' in that);
+                var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
+                if(renderContext){
+                    $.extend(that.renderContext, renderContext);
+                }
+                if( !that.renderContext.enableBackNavigation &&
+                !that.renderContext.enableForwardNavigation ){
+                    //If we try to render a jqm nav without buttons we get an error
+                    //so this flag automatically disables nav in that case.
+                    that.renderContext.enableNavigation = false;
+                }
+                /*
+                console.log(that.renderContext);
+                // work through setting the forward/backward enable flags
+                if ( that.renderContext.enableNavigation === undefined ) {
+                    that.renderContext.enableNavigation = true;
+                }
+                if ( that.renderContext.enableForwardNavigation === undefined ) {
+                    that.renderContext.enableForwardNavigation = 
+                        that.renderContext.enableNavigation;
+                }
+                if ( that.renderContext.enableBackNavigation === undefined ) {
+                    that.renderContext.enableBackNavigation = 
+                        that.renderContext.enableNavigation &&
+                        that.controller.hasPromptHistory(ctxt);
+                }
+                */
+                that.currentPageEl = that.renderPage(prompt);
+                that.$el.append(that.currentPageEl);
+                // this might double-reset the swipeEnabled flag, but it does ensure it is reset
+                that.savedCtxt = $.extend({}, ctxt, {
+                    success: function() {
+                        that.swipeEnabled = true;
+                        ctxt.success();
+                    },
+                    failure: function() {
+                        that.swipeEnabled = true;
+                        ctxt.failure();
+                    }
+                });
+                $.mobile.changePage(that.currentPageEl, $.extend({
+                    changeHash: false,
+                    transition: transition
+                }, jqmAttrs));
             }
-            if( !that.renderContext.enableBackNavigation &&
-            !that.renderContext.enableForwardNavigation ){
-                //If we try to render a jqm nav without buttons we get an error
-                //so this flag automatically disables nav in that case.
-                that.renderContext.enableNavigation = false;
-            }
-            /*
-            console.log(that.renderContext);
-            // work through setting the forward/backward enable flags
-            if ( that.renderContext.enableNavigation === undefined ) {
-                that.renderContext.enableNavigation = true;
-            }
-            if ( that.renderContext.enableForwardNavigation === undefined ) {
-                that.renderContext.enableForwardNavigation = 
-                    that.renderContext.enableNavigation;
-            }
-            if ( that.renderContext.enableBackNavigation === undefined ) {
-                that.renderContext.enableBackNavigation = 
-                    that.renderContext.enableNavigation &&
-                    that.controller.hasPromptHistory();
-            }
-            */
-            that.previousPageEl = that.currentPageEl;
-            that.currentPageEl = that.renderPage(prompt);
-            that.$el.append(that.currentPageEl);
-            that.delegateEvents();
-            $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
-        });
+        }));
     },
-    gotoNextScreen: _.debounce(function(evt){
-        /*
-        This debounce is a total hack.
-        The bug it is trying to solve is the issue
-        where the first page of the survey is skipped. 
-        The problem stems from swipe events being registered twice.
-        Only the opening prompt has problems because it does some unique things
-        in it's beforeMove function.
-        */
-        console.log('next');
-        evt.stopPropagation();
-        if(!this.swipeEnabled) return;
-        this.controller.gotoNextScreen(); 
-    }, 100),
-    gotoPreviousScreen: _.debounce(function(evt){
-        evt.stopPropagation();
-        if(!this.swipeEnabled) return;
-        this.controller.gotoPreviousScreen();
-    }, 100),
+    gotoNextScreen: function(evt) {
+		var that = this;
+		/*
+		This debounce is a total hack.
+		The bug it is trying to solve is the issue
+		where the first page of the survey is skipped. 
+		The problem stems from swipe events being registered twice.
+		Only the opening prompt has problems because it does some unique things
+		in it's beforeMove function.
+		*/
+		var ctxt = that.controller.newContext(evt);
+		ctxt.append('screenManager.gotoNextScreen', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
+		if(!that.swipeEnabled) {
+			ctxt.append('screenManager.gotoPreviousScreen.dedup');
+			ctxt.success();
+			return false;
+		}
+		that.swipeEnabled = false;
+		that.controller.gotoNextScreen($.extend({},ctxt,{
+				success:function(){
+					that.swipeEnabled = true; ctxt.success();
+				},failure:function(){
+					that.swipeEnabled = true; ctxt.failure();
+				}}));
+		return false;
+	},
+    gotoPreviousScreen: function(evt) {
+		var that = this;
+		var ctxt = that.controller.newContext(evt);
+		ctxt.append('screenManager.gotoPreviousScreen', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
+		if(!that.swipeEnabled) {
+			ctxt.append('screenManager.gotoPreviousScreen.dedup');
+			ctxt.success();
+			return false;
+		}
+		that.swipeEnabled = false;
+		that.controller.gotoPreviousScreen($.extend({},ctxt,{
+				success:function(){ 
+					that.swipeEnabled = true; ctxt.success();
+				},failure:function(){
+					that.swipeEnabled = true; ctxt.failure();
+				}}));
+		return false;
+	},
     handlePagechange: function(evt){
-        console.log('Page change');
-        this.prompt.delegateEvents();
-        this.swipeEnabled = true;
-        if(this.previousPageEl){
-            this.previousPageEl.remove();
+        var ctxt = this.savedCtxt;
+        this.savedCtxt = null;
+        
+        if ( ctxt != null ) {
+            ctxt.append('screenManager.handlePageChange.linked');
+            this.prompt.delegateEvents();
+            if(this.previousPageEl){
+                var pg = this.previousPageEl;
+                this.previousPageEl = null;
+                pg.remove();
+            }
+            ctxt.success();
+        } else {
+            ctxt = that.controller.newContext(evt);
+            ctxt.append('screenManager.handlePageChange.error');
+			this.swipeEnabled = true;
+            ctxt.failure();
         }
     },
     disableImageDrag: function(evt){

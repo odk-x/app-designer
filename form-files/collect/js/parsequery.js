@@ -31,7 +31,7 @@ return {
      * 
      * Immediate.
      */
-    _parseQueryHelper:function(dataKeyValueList, key, value) {
+    _parseQueryHelper:function(ctxt, dataKeyValueList, key, value) {
         if ( key == 'formPath' ) return;
         if ( key == 'instanceId' ) return;
         if ( key == 'pageRef' ) return;
@@ -49,17 +49,19 @@ return {
      * Effect a change in the window.location.hash
      *
      */
-    _effectChange:function(formDef, formPath, instanceId, pageRef, sameForm, sameInstance) {
+    _effectChange:function(ctxt, formDef, formPath, instanceId, pageRef, sameForm, sameInstance) {
         // IMPLEMENTATION NOTE: formDef is only used in the case where sameForm is false.
         // THIS IS AN ASSUMPTION OF THE CALLING FUNCTION!!!!
         var that = this;
         
         if ( formPath == null ) {
+            ctxt.append("parsequery._effectChange.nullFormPath");
             alert("Unexpected null formPath");
             return;
         }
         
         if ( !sameForm && formDef == null ) {
+            ctxt.append("parsequery._effectChange.nullFormDef");
             alert("Unexpected null formDef when changing forms");
             return;
         }
@@ -84,11 +86,11 @@ return {
         //    b. collect.setInstanceId(newInstanceId); (if not null)
         //    c. ensure hash-change handler is established and update hash
         //
-        console.log('parsequery._effectChange: scripts loaded');
+        ctxt.append("parsequery._effectChange.scriptsLoaded");
 
         if ( !sameInstance ) {
             // reset controller to pristine state...
-            that.controller.reset(sameForm);
+            that.controller.reset(ctxt, sameForm);
             // switching instance -- no 'back' history...
             // signal that we have no instanceId...
             collect.setInstanceId(null);
@@ -97,10 +99,12 @@ return {
         var qpl = opendatakit.getHashString(formPath, instanceId, pageRef);
         
         // pull metadata for synchronous read access
-        database.cacheAllMetaData(function() {
+        database.cacheAllMetaData($.extend({},ctxt,{success:function() {
+                ctxt.append('parsequery._effectChange.cacheAllMetaData.success');
                 // metadata is OK...
                 if ( sameForm ) {
-                    database.cacheAllData(function() {
+                    database.cacheAllData($.extend({},ctxt,{success:function() {
+                            this.append("parsequery._effectChange.cacheAllData.success");
                             // instance data is OK...
                             // controller prompts OK
                             if ( !sameInstance && instanceId != null) {
@@ -115,11 +119,13 @@ return {
                             } else {
                                     // fire the controller to render the first page.
                                     console.log("parsequery._effectChange: sameForm gotoRef("+pageRef+") ms: " + (+new Date()));
-                                    that.controller.gotoRef(pageRef);
+                                    that.controller.gotoRef(ctxt, pageRef);
                             }
-                        });
+                        }, failure:function(){
+                            this.append("parsequery._effectChange.failure");
+                        }}));
                 } else {
-                    database.initializeTables(formDef, function() {
+                    database.initializeTables($.extend({},ctxt,{success:function() {
                             // build the survey and place it in the controller...
                             that.builder.buildSurvey(formDef, function() {
                                     // controller OK
@@ -130,18 +136,18 @@ return {
 
                                     if ( qpl != window.location.hash ) {
                                             // apply the change to the URL...
-                                            console.log("parsequery._effectChange: differentForm window.location.hash="+qpl+" ms: " + (+new Date()));
+                                            ctxt.append("parsequery._effectChange.differentForm", "window.location.hash="+qpl+" ms: " + (+new Date()));
                                             window.location.hash = qpl;
                                             // triggers hash-change listener...
                                     } else {
                                             // fire the controller to render the first page.
-                                            console.log("parsequery._effectChange: differentForm gotoRef("+pageRef+") ms: " + (+new Date()));
-                                            that.controller.gotoRef(pageRef);
+                                            ctxt.append("parsequery._effectChange.differentForm", "gotoRef("+pageRef+") ms: " + (+new Date()));
+                                            that.controller.gotoRef(ctxt, pageRef);
                                     }
                                 });
-                        });
+                        }}), formDef);
                 }
-        });
+        }}));
     },
     /**
      * Saves all passed-in parameter values into the MetaData table.
@@ -150,7 +156,7 @@ return {
      * 
      * Deferred: ... _parseQueryParameterContinuation ... _effectChange
      */
-    _fetchContinueParsing: function(formDef, formPath, instanceId, pageRef, dataKeyValueList) {
+    _fetchContinueParsing: function(ctxt, formDef, formPath, instanceId, pageRef, dataKeyValueList) {
         var that = this;
         var settings = formDef.settings;
         
@@ -159,19 +165,20 @@ return {
         var formLocale = opendatakit.getSetting(formDef, 'formLocale');
         var formName = opendatakit.getSetting(formDef, 'formName');
         
-        that._parseQueryHelper(dataKeyValueList, 'formId', formId );
-        that._parseQueryHelper(dataKeyValueList, 'formVersion', formVersion );
-        that._parseQueryHelper(dataKeyValueList, 'formLocale', formLocale );
-        that._parseQueryHelper(dataKeyValueList, 'formName', formName );
+        that._parseQueryHelper(ctxt, dataKeyValueList, 'formId', formId );
+        that._parseQueryHelper(ctxt, dataKeyValueList, 'formVersion', formVersion );
+        that._parseQueryHelper(ctxt, dataKeyValueList, 'formLocale', formLocale );
+        that._parseQueryHelper(ctxt, dataKeyValueList, 'formName', formName );
         
         // there are always 4 entries (formId, formVersion, formName, formLocale)
         // we don't need to save them if there are no other parameters to save.
         if ( instanceId != null && dataKeyValueList.length > 4 ) {
             // save all query parameters to metaData queue
-            database.putCrossTableMetaDataKeyTypeValueMap(formId, instanceId, dataKeyValueList, 
-                that._parseQueryParameterContinuation(formDef, formPath, formId, formVersion, formLocale, formName, instanceId, pageRef));
+            database.putCrossTableMetaDataKeyTypeValueMap($.extend({},ctxt,{success:
+                that._parseQueryParameterContinuation(ctxt, formDef, formPath, formId, formVersion, formLocale, formName, instanceId, pageRef)}),
+                    formId, instanceId, dataKeyValueList);
         } else {
-            (that._parseQueryParameterContinuation(formDef, formPath, formId, formVersion, formLocale, formName, instanceId, pageRef))();
+            (that._parseQueryParameterContinuation(ctxt, formDef, formPath, formId, formVersion, formLocale, formName, instanceId, pageRef))();
         }
     },
     /**
@@ -190,7 +197,7 @@ return {
      *
      * Immediate (constructs continuation object to do actions)
      */
-    _parseQueryParameterContinuation:function(formDef, formPath, 
+    _parseQueryParameterContinuation:function(ctxt, formDef, formPath, 
                 formId, formVersion, formLocale, formName, instanceId, pageRef) {
         var that = this;
         return function() {
@@ -208,27 +215,28 @@ return {
 
             if ( instanceId == null ) {
                 mdl.qp = result;
-                that._effectChange(formDef, formPath, instanceId, pageRef, sameForm, false);
+                that._effectChange(ctxt, formDef, formPath, instanceId, pageRef, sameForm, false);
                 return;
             }
-            database.getCrossTableMetaData(formId, instanceId, 'instanceName', function(value) {
+            database.getCrossTableMetaData($.extend({},ctxt,{success:function(value) {
                 if (value == null) {
                     // construct a friendly name for this new form...
                     var date = new Date();
                     var dateStr = date.toISOString();
                     var localizedFormName = opendatakit.localize(formName,formLocale);
                     var fnvalue = localizedFormName + "_" + dateStr; // .replace(/\W/g, "_")
-                    database.putCrossTableMetaData(formId, instanceId, 'instanceName', 'string', fnvalue, function() {
+                    database.putCrossTableMetaData($.extend({},ctxt,{success:function() {
+                        ctxt.append('parsequery._parseQueryParameterContinuation.putCrossTableMetaData.success');
                         mdl.qp = result;
                         // pull everything for synchronous read access
-                        that._effectChange(formDef, formPath, instanceId, pageRef, sameForm, sameInstance);
-                    });
+                        that._effectChange(ctxt, formDef, formPath, instanceId, pageRef, sameForm, sameInstance);
+                    }}), formId, instanceId, 'instanceName', 'string', fnvalue);
                 } else {
                     mdl.qp = result;
                     // pull everything for synchronous read access
-                    that._effectChange(formDef, formPath, instanceId, pageRef, sameForm, sameInstance);
+                    that._effectChange(ctxt, formDef, formPath, instanceId, pageRef, sameForm, sameInstance);
                 }
-            });
+            }}), formId, instanceId, 'instanceName');
         };
     },
     /**
@@ -236,8 +244,8 @@ return {
      *
      * Callers should ensure that this is ONLY called when the formPath or instanceId has changed.
      */
-    parseParameters:function() {
-        console.log("parsequery.parseParameters: start ms: " + (+new Date()));
+    parseParameters:function(ctxt) {
+        ctxt.append("parsequery.parseParameters");
         var that = this;
         
         var formPath = null;
@@ -260,7 +268,7 @@ return {
                 } else if ( key == 'pageRef' ) {
                     pageRef = value;
                 } else {
-                    that._parseQueryHelper(dataKeyValueList, key, value);
+                    that._parseQueryHelper(ctxt, dataKeyValueList, key, value);
                 }
             }
             
@@ -284,7 +292,7 @@ return {
                     alert('Unable to find file: ' + filename);
                 } else {
                     var formDef = JSON.parse(formDefTxt);
-                    that._fetchContinueParsing(formDef, formPath, 
+                    that._fetchContinueParsing(ctxt, formDef, formPath, 
                                                 instanceId, pageRef, dataKeyValueList);
                 }
             }
@@ -304,13 +312,18 @@ return {
      *    pathRef=concatenation of promptIdx (or name) and other data used
      *            when rendering a screen. If omitted, go to initial screen.
      */
-    hashChangeHandler:function(e) {
+    hashChangeHandler:function(evt) {
         var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append('parsequery.hashChangeHandler');
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
+        
         if ( window.location.hash == '#' ) {
             // this is bogus transition due to jquery mobile widgets
-            e.stopPropagation(true);
+            ctxt.append('parsequery.hashChangeHandler.emptyHash');
             alert('Hash is invalid!');
-            return;
+            return false;
         }
         
         var params = window.location.hash.slice(1).split("&");
@@ -333,13 +346,14 @@ return {
         
         if ( formPath != database.getMetaDataValue('formPath') || instanceId != database.getMetaDataValue('instanceId') ) {
             // this should trigger a hash-change action
-            console.log("parsequery.hashChangeHandler: parseParameters window.location.hash="+window.location.hash+" start ms: " + (+new Date()));
-            that.parseParameters();
+            ctxt.append('parsequery.hashChangeHandler', "window.location.hash="+window.location.hash);
+            that.parseParameters(ctxt);
             return;
         } else {
-            console.log("parsequery.hashChangeHandler: gotoRef window.location.hash="+window.location.hash+" start ms: " + (+new Date()));
-            that.controller.gotoRef(pageRef);
+            ctxt.append('parsequery.hashChangeHandler.gotoRef', "window.location.hash="+window.location.hash);
+            that.controller.gotoRef(ctxt, pageRef);
         }
+        return false;
     }
 
 };

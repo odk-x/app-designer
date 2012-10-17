@@ -94,9 +94,9 @@ promptTypes.base = Backbone.View.extend({
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that;
-        this.whenTemplateIsReady(readyToRenderCallback);
+        this.whenTemplateIsReady(ctxt.success);
     },
     /**
      * stopPropagation is used in the events map to disable swiping on various elements
@@ -215,16 +215,19 @@ promptTypes.base = Backbone.View.extend({
         }
         return database.getDataValue(this.name);
     },
-    setValue: function(value, onSuccessfulSave, onFailure) {
+    setValue: function(ctxt, value) {
         // NOTE: data IS NOT updated synchronously. Use callback!
         var that = this;
-        database.setData(that.name, that.datatype, value, onSuccessfulSave, onFailure);
+        database.setData(ctxt, that.name, that.datatype, value);
     },
-    beforeMove: function(context) {
-        context.success();
+    beforeMove: function(ctxt) {
+        ctxt.append("prompts." + this.type, "px: " + this.promptIdx);
+        ctxt.success();
     },
-    getCallback: function(actionPath) {
+    getCallback: function(ctxt, path, action) {
+        ctxt.append("prompts." + this.type, "px: " + this.promptIdx + " unimplemented: " + path + " action: " + action);
         alert('getCallback: Unimplemented: ' + actionPath);
+        ctxt.failure();
     },
     /*
     registerChangeHandlers: function() {
@@ -245,7 +248,7 @@ promptTypes.opening = promptTypes.base.extend({
     type: "opening",
     hideInHierarchy: true,
     templatePath: "templates/opening.handlebars",
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
             this.renderContext.headerImg = formLogo;
@@ -258,11 +261,13 @@ promptTypes.opening = promptTypes.base.extend({
             var locale = database.getMetaDataValue('formLocale');
             var formName = opendatakit.localize(database.getMetaDataValue('formName'),locale);
             instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
-            database.setMetaData('instanceName', 'string', instanceName, function(){});
+            this.renderContext.instanceName = instanceName;
+            database.setMetaData($.extend({}, ctxt, {success: function() { ctxt.success({enableBackNavigation: false}); }}),'instanceName', 'string', instanceName);
+            return;
         }
         this.renderContext.instanceName = instanceName;
         this.whenTemplateIsReady(function(){
-            readyToRenderCallback({enableBackwardNavigation: false});
+            ctxt.success({enableBackwardNavigation: false});
         });
     },
     renderContext: {
@@ -273,16 +278,18 @@ promptTypes.opening = promptTypes.base.extend({
     //Events copied from inputType, should probably refactor.
     events: {
         "change input": "modification",
-        "swipeleft input": "stopPropagation",
-        "swiperight input": "stopPropagation"
+        "swipeleft .input-container": "stopPropagation",
+        "swiperight .input-container": "stopPropagation"
     },
     modification: function(evt) {
-        database.setMetaData('instanceName', 'string', this.$('input').val(), function(){});
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
+        database.setMetaData(ctxt, 'instanceName', 'string', this.$('input').val());
     },
-    beforeMove: function(context) {
-        database.setMetaData('instanceName', 'string', this.$('input').val(),
-            context.success,
-            context.failure);
+    beforeMove: function(ctxt) {
+        ctxt.append("prompts." + this.type + ".beforeMove", "px: " + this.promptIdx);
+        database.setMetaData(ctxt, 'instanceName', 'string', this.$('input').val());
+        // ctxt.success();
     }
 });
 promptTypes.finalize = promptTypes.base.extend({
@@ -297,28 +304,25 @@ promptTypes.finalize = promptTypes.base.extend({
     renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png'
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getMetaDataValue('instanceName');
-        //readyToRenderCallback({enableForwardNavigation: false});
-        
-        database.getAllData(function(tlo) {
-            readyToRenderCallback({enableForwardNavigation: false});
-        });
-        
+        this.whenTemplateIsReady(ctxt.success({enableForwardNavigation: false}));
     },
     saveIncomplete: function(evt) {
-        database.save_all_changes(false, function() {
-            // TODO: call up to Collect to report completion
-        });
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
+        // TODO: call up to Collect to report completion
+        database.save_all_changes(ctxt, false);
     },
     saveFinal: function(evt) {
-        database.save_all_changes(true, function() {
-            // TODO: call up to Collect to report completion
-        });
+         var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
+        // TODO: call up to Collect to report completion
+        database.save_all_changes(ctxt, true);
         
     }
 });
@@ -327,17 +331,15 @@ promptTypes.json = promptTypes.base.extend({
     hideInHierarchy: true,
     valid: true,
     templatePath: "templates/json.handlebars",
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that = this;
-        database.getAllData(function(tlo) {
-            if ( JSON != null ) {
-                that.renderContext.value = JSON.stringify(tlo,null,2);
-            } else {
-                that.renderContext.value = "JSON Unavailable";
-            }
-            that.whenTemplateIsReady(function(){
-                readyToRenderCallback({enableNavigation: false});
-            });
+        if ( JSON != null ) {
+            that.renderContext.value = JSON.stringify(mdl.data,null,2);
+        } else {
+            that.renderContext.value = "JSON Unavailable";
+        }
+        that.whenTemplateIsReady(function(){
+            ctxt.success({enableNavigation: false});
         });
     }
 });
@@ -351,9 +353,21 @@ promptTypes.instances = promptTypes.base.extend({
         "click .deleteInstance": "deleteInstance",
         "click .createInstance": "createInstance"
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that = this;
-        database.withDb(function(transaction) {
+        database.withDb($.extend({},ctxt,{success:function() {
+            $.extend(that.renderContext, {
+                formName: database.getMetaDataValue('formName'),
+                headerImg: opendatakit.baseDir + 'img/form_logo.png'
+            });
+            that.whenTemplateIsReady(function(){
+                ctxt.success({
+                    showHeader: false,
+                    enableNavigation:false,
+                    showFooter:false
+                });
+            });
+        }}), function(transaction) {
             var ss = database.getAllFormInstancesStmt();
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 that.renderContext.instances = [];
@@ -368,35 +382,30 @@ promptTypes.instances = promptTypes.base.extend({
                     });
                 }
             });
-        }, function(error) {
-            console.log("populateInstanceList: failed");
-        }, function() {
-            $.extend(that.renderContext, {
-                formName: database.getMetaDataValue('formName'),
-                headerImg: opendatakit.baseDir + 'img/form_logo.png'
-            });
-            that.whenTemplateIsReady(function(){
-                readyToRenderCallback({
-                    showHeader: false,
-                    enableNavigation:false,
-                    showFooter:false
-                });
-            })
         });
     },
     createInstance: function(evt){
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
         evt.stopPropagation(true);
-        opendatakit.openNewInstanceId(null);
+        opendatakit.openNewInstanceId(ctxt, null);
     },
     openInstance: function(evt) {
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
         evt.stopPropagation(true);
-        opendatakit.openNewInstanceId($(evt.target).attr('id'));
+        opendatakit.openNewInstanceId(ctxt, $(evt.target).attr('id'));
     },
     deleteInstance: function(evt){
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".deleteInstance", "px: " + this.promptIdx);
         var that = this;
-        database.delete_all(database.getMetaDataValue('formId'), $(evt.target).attr('id'), function() {
-            that.onActivate(function(){that.render();});
-        });
+        database.delete_all($.extend({}, ctxt,{
+                    success:function() {
+                        that.onActivate($.extend({}, ctxt,{
+                            success:function(){that.render();ctxt.success();}}));
+                }}), 
+                database.getMetaDataValue('formId'), $(evt.target).attr('id'));
     }
 });
 promptTypes.hierarchy = promptTypes.base.extend({
@@ -406,10 +415,10 @@ promptTypes.hierarchy = promptTypes.base.extend({
     templatePath: 'templates/hierarchy.handlebars',
     events: {
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         this.renderContext.prompts = controller.prompts;
         this.whenTemplateIsReady(function(){
-            readyToRenderCallback({showHeader: false, showFooter: false});
+            ctxt.success({showHeader: false, showFooter: false});
         });
     }
 });
@@ -422,10 +431,10 @@ promptTypes.repeat = promptTypes.base.extend({
         "click .deleteInstance": "deleteInstance",
         "click .addInstance": "addInstance"
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that = this;
         var subsurveyType = this.param;
-        database.withDb(function(transaction) {
+        database.withDb(ctxt, function(transaction) {
             //TODO: Make statement to get all subsurveys with this survey as parent.
             var ss = database.getAllFormInstancesStmt();
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
@@ -435,10 +444,6 @@ promptTypes.repeat = promptTypes.base.extend({
                     that.renderContext.instances.push(result.rows.item(i));
                 }
             });
-        }, function(error) {
-            console.log("populateInstanceList: failed");
-        }, function() {
-            readyToRenderCallback();
         });
     },
     openInstance: function(evt) {
@@ -496,26 +501,28 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     // perhaps a null 'name' would drop the value from the list of choices...
     // could also allow calculations in the 'checked' and 'value' fields.
     modification: function(evt) {
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
         var that = this;
         console.log("select modification");
         console.log(this.$('form').serializeArray());
         var formValue = (this.$('form').serializeArray());
         var saveValue = formValue ? JSON.stringify(formValue) : null;
-        this.setValue(saveValue, function() {
-            that.updateRenderValue(formValue);
-        });
+        this.setValue($.extend({}, ctxt, {success:function() {
+                                    that.updateRenderValue(formValue); 
+                                    ctxt.success(); }}), saveValue);
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that = this;
-        if(this.param in this.form.choices) {
+        if(that.param in that.form.choices) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
-            that.renderContext.choices = _.map(this.form.choices[this.param], _.clone);
+            that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
         }
         var saveValue = that.getValue();
         that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
         this.whenTemplateIsReady(function(){
-            readyToRenderCallback();
+            ctxt.success();
         });
     }
 });
@@ -528,11 +535,16 @@ promptTypes.select_one = promptTypes.select.extend({
         "click .deselect": "deselect"
     },
     deselect: function(evt) {
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".deselect", "px: " + this.promptIdx);
         var that = this;
-        this.setValue(null, function() {
-            that.updateRenderValue(null);
-            that.render();
-        });
+        this.setValue($.extend({}, ctxt, {
+            success: function() {
+                that.updateRenderValue(null);
+                that.render();
+                ctxt.success();
+            }
+        }), null);
     }
 });
 promptTypes.select_one_or_other = promptTypes.select_one.extend({
@@ -546,48 +558,6 @@ promptTypes.select_or_other = promptTypes.select.extend({
         or_other: true
     }
 });
-/*
-promptTypes.dropdownSelect = promptTypes.base.extend({
-    type: "dropdownSelect",
-    templatePath: "templates/dropdownSelect.handlebars",
-    events: {
-        "change select": "modification"
-    },
-    modification: function(evt) {
-        console.log("select modification");
-        var that = this;
-        database.putData(this.name, "string", that.$('select').val(), function() {
-            that.render();
-        });
-    },
-    render: function() {
-        var value = this.getValue();
-        console.log(value);
-        var context = {
-            name: this.name,
-            label: this.label,
-            choices: _.map(this.choices, function(choice) {
-                if (_.isString(choice)) {
-                    choice = {
-                        label: choice,
-                        value: choice
-                    };
-                }
-                else {
-                    if (!('label' in choice)) {
-                        choice.label = choice.name;
-                    }
-                }
-                choice.value = choice.name;
-                return $.extend({
-                    selected: (choice.value === value)
-                }, choice);
-            })
-        };
-        this.$el.html(this.template(context));
-    }
-});
-*/
 promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     type: "text",
     datatype: "text",
@@ -606,28 +576,31 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         //Useful for sliders.
         //It might be better to listen for the jQm event for when a slider is released.
         //This could cause problems since the debounced function could fire after a page change.
-        var renderContext = this.renderContext;
-        var value = this.$('input').val();
-        this.setValue((value.length == 0 ? null : value), function() {
-            renderContext.value = value;
-            renderContext.invalid = !that.validateValue();
-            that.render();
-        });
+		var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
+        var renderContext = that.renderContext;
+        var value = that.$('input').val();
+        that.setValue($.extend({}, ctxt, {success:function() {
+                                    renderContext.value = value;
+                                    renderContext.invalid = !that.validateValue();
+                                    that.render();
+                                    ctxt.success(); }}),
+                        (value.length == 0 ? null : value));
     }, 600),
     modification: function(evt) {
         this.debouncedModification(this, evt);
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var renderContext = this.renderContext;
         var value = this.getValue();
         renderContext.value = value;
         this.whenTemplateIsReady(function(){
-            readyToRenderCallback();
+            ctxt.success();
         });
     },
-    beforeMove: function(context) {
+    beforeMove: function(ctxt) {
         var that = this;
-        that.setValue(this.$('input').val(), context.success, context.failure );
+        that.setValue(ctxt, this.$('input').val());
     },
     validateValue: function() {
         return true;
@@ -676,7 +649,8 @@ promptTypes.datetime = promptTypes.inputType.extend({
         "swipeleft input": "stopPropagation",
         "swiperight input": "stopPropagation"
     },
-    onActivate: function(readyToRenderCallback) {
+
+    onActivate: function(ctxt) {
         var that = this;
         var renderContext = this.renderContext;
         var value = this.getValue();
@@ -691,7 +665,7 @@ promptTypes.datetime = promptTypes.inputType.extend({
                 jqmCancel: 'd'
             };
             that.whenTemplateIsReady(function(){
-                readyToRenderCallback();
+                ctxt.success();
             });
         });
     },
@@ -732,29 +706,29 @@ promptTypes.media = promptTypes.base.extend({
     events: {
         "click .captureAction": "capture"
     },
-    getCallback: function(bypath, byaction) {
+    getCallback: function(ctxt, bypath, byaction) {
         var that = this;
-        return function(path, action, jsonString) {
+        return function(ctxt, path, action, jsonString) {
+            ctxt.append("prompts." + this.type + 'getCallback.actionFn', "px: " + this.promptIdx + " action: " + action);
             var jsonObject = JSON.parse(jsonString);
             if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
-                console.log("OK status returned");
+                ctxt.append("prompts." + this.type + 'getCallback.actionFn.resultOK', "px: " + this.promptIdx + " action: " + action);
                 var mediaPath = (jsonObject.result !== null) ? jsonObject.result.mediaPath : null;
                 if (mediaPath !== null) {
-                    database.getData(that.name, function(value) {
-                        console.log("found this path: " + value);
-                        if (mediaPath != value) {
-                            database.putData(that.name, "file", mediaPath, function() {
-                                // TODO: delete old??? Or leave until marked as finalized?
-                                // TODO: I'm not sure how the resuming works, but we'll need to make sure
-                                // onActivate get's called AFTER this happens.
-                            });
-                        }
-                    });
+                    var oldPath = database.getDataValue(that.name);
+                    if ( mediaPath != oldPath) {
+                        // TODO: delete old??? Or leave until marked as finalized?
+                        // TODO: I'm not sure how the resuming works, but we'll need to make sure
+                        // onActivate get's called AFTER this happens.
+                        database.setData( ctxt, that.name, "file", mediaPath);
+                    }
                 }
             }
             else {
+                ctxt.append("prompts." + this.type + 'getCallback.actionFn.failureOutcome', "px: " + this.promptIdx + " action: " + action);
                 console.log("failure returned");
                 alert(jsonObject.result);
+                ctxt.failure();
             }
         };
     }
@@ -764,28 +738,34 @@ promptTypes.image = promptTypes.media.extend({
     datatype: "image",
     label: 'Take your photo:',
     templatePath: "templates/image.handlebars",
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
         that.renderContext.mediaPath = value;
-        that.renderContext.uriValue = opendatakit.asUri(value, 'img');
+        that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'img');
         this.whenTemplateIsReady(function(){
-            readyToRenderCallback();
+            ctxt.success();
         });
     },
-    capture: function() {
-        var platInfo = opendatakit.getPlatformInfo();
+    capture: function(evt) {
+        var ctxt = controller.newContext(evt);
+        var platInfo = opendatakit.getPlatformInfo(ctxt);
         if (platInfo.container == 'Android') {
             // TODO: is this the right sequence?
             var outcome = collect.doAction('' + this.promptIdx, 'takePicture', 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity', null);
-            console.log("button click outcome is " + outcome);
+            ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
             if (outcome === null || outcome !== "OK") {
                 alert("Should be OK got >" + outcome + "<");
+                ctxt.failure();
+            } else {
+                ctxt.success();
             }
         }
         else {
+            ctxt.append('media.capture.disabled', platInfo.container);
             // TODO: enable file chooser???
             alert("Not running on Android -- disabled");
+            ctxt.failure();
         }
     }
 });
@@ -793,30 +773,37 @@ promptTypes.video = promptTypes.media.extend({
     type: "video",
     label: 'Take your video:',
     templatePath: "templates/video.handlebars",
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
         if (value != null && value.length != 0) {
-            that.renderContext.uriValue = opendatakit.asUri(value, 'video', 'src');
-            that.renderContext.videoPoster = opendatakit.asUri(opendatakit.baseDir + "img/play.png", 'video', 'poster');
+            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
+            that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
         }
         this.whenTemplateIsReady(function(){
-            readyToRenderCallback();
+            ctxt.success();
         });
     },
-    capture: function() {
-        var platInfo = opendatakit.getPlatformInfo();
+    capture: function(evt) {
+        var ctxt = controller.newContext(evt);
+        var platInfo = opendatakit.getPlatformInfo(ctxt);
         if (platInfo.container == 'Android') {
-            // TODO: is this the right sequence?
+         // TODO: is this the right sequence?
             var outcome = collect.doAction('' + this.promptIdx, 'takeVideo', 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity', null);
+            ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
             console.log("button click outcome is " + outcome);
             if (outcome === null || outcome !== "OK") {
                 alert("Should be OK got >" + outcome + "<");
+                ctxt.failure();
+            } else {
+                ctxt.success();
             }
         }
         else {
+            ctxt.append('media.capture.disabled', platInfo.container);
             // TODO: enable file chooser???
             alert("Not running on Android -- disabled");
+            ctxt.failure();
         }
     }
 });
@@ -825,19 +812,26 @@ promptTypes.audio = promptTypes.media.extend({
     datatype: "audio",
     templatePath: "templates/audio.handlebars",
     label: 'Take your audio:',
-    capture: function() {
-        var platInfo = opendatakit.getPlatformInfo();
+    capture: function(evt) {
+        var ctxt = controller.newContext(evt);
+        var platInfo = opendatakit.getPlatformInfo(ctxt);
         if (platInfo.container == 'Android') {
             // TODO: is this the right sequence?
             var outcome = collect.doAction('' + this.promptIdx, 'takeAudio', 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity', null);
+            ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
             console.log("button click outcome is " + outcome);
             if (outcome === null || outcome !== "OK") {
                 alert("Should be OK got >" + outcome + "<");
+                ctxt.failure();
+            } else {
+                ctxt.success();
             }
         }
         else {
+            ctxt.append('media.capture.disabled', platInfo.container);
             // TODO: enable file chooser???
             alert("Not running on Android -- disabled");
+            ctxt.failure();
         }
     }
 
@@ -869,6 +863,23 @@ promptTypes.screen = promptTypes.base.extend({
         }
         return true;
     },
+    beforeMove: function(context) {
+        var that = this;
+        var subPrompts, subPromptContext;
+        subPrompts = _.filter(that.prompts, function(prompt) {
+            if('condition' in prompt) {
+                return prompt.condition();
+            }
+            return true;
+        });
+        subPromptContext = $.extend({},context,{
+            success: _.after(subPrompts.length, context.success),
+            failure: _.once(context.failure)
+        });
+        $.each(subPrompts, function(idx, prompt){
+            prompt.beforeMove(subPromptContext);
+        });
+    },
     validate: function(context) {
         var that = this;
         var subPrompts, subPromptContext;
@@ -878,21 +889,25 @@ promptTypes.screen = promptTypes.base.extend({
             }
             return true;
         });
-        subPromptContext = {
+        subPromptContext = $.extend({},context,{
             success: _.after(subPrompts.length, context.success),
             failure: _.once(context.failure)
-        }
+        });
         $.each(subPrompts, function(idx, prompt){
             prompt.validate(subPromptContext);
         });
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that = this;
         var subPromptsReady = _.after(this.prompts.length, function () {
-            readyToRenderCallback();
+            ctxt.success();
         });
         _.each(this.prompts, function(prompt){
-            prompt.onActivate(subPromptsReady);
+            prompt.onActivate($.extend({}, ctxt, {
+                success:function() {
+                    subPromptsReady(ctxt);
+                }
+            }));
         });
     },
     render: function(){
@@ -923,8 +938,9 @@ promptTypes.label = promptTypes.base.extend({
     isInitializeComplete: function() {
         return true;
     },
-    onActivate: function(readyToRenderCallback){
+    onActivate: function(ctxt){
         alert("label.onActivate: Should never be called!");
+        ctxt.failure();
     }
 });
 promptTypes.goto = promptTypes.base.extend({
@@ -933,8 +949,9 @@ promptTypes.goto = promptTypes.base.extend({
     isInitializeComplete: function() {
         return true;
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         alert("goto.onActivate: Should never be called!");
+        ctxt.failure();
     }
 });
 //TODO: Remove
@@ -947,8 +964,9 @@ promptTypes.goto_if = promptTypes.base.extend({
     condition: function(){
         return false;
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         alert("goto_if.onActivate: Should never be called!");
+        ctxt.failure();
     }
 });
 promptTypes.note = promptTypes.base.extend({
@@ -959,20 +977,24 @@ promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
     autoAdvance: false,
     modification: function(evt) {
+        var ctxt = controller.newContext(evt);
+        ctxt.append('acknowledge.modification', this.promptIdx);
         var that = this;
         var acknowledged = this.$('#acknowledge').is(':checked');
-        this.setValue(acknowledged, function() {
-            that.renderContext.choices = [{
-                "name": "acknowledge",
-                "label": "Acknowledge",
-                "checked": acknowledged
-            }];
-            if(acknowledged && that.autoAdvance) {
-                controller.gotoNextScreen();
-            }
-        });
+        this.setValue($.extend({},ctxt,{success:function(){
+                                that.renderContext.choices = [{
+                                    "name": "acknowledge",
+                                    "label": "Acknowledge",
+                                    "checked": acknowledged
+                                }];
+                                if(acknowledged && that.autoAdvance) {
+                                    controller.gotoNextScreen(ctxt);
+                                } else {
+                                    ctxt.success();
+                                }
+                            }}), acknowledged);
     },
-    onActivate: function(readyToRenderCallback) {
+    onActivate: function(ctxt) {
         var that = this;
         var acknowledged;
         try{
@@ -980,14 +1002,13 @@ promptTypes.acknowledge = promptTypes.select.extend({
         } catch(e) {
             acknowledged = false;
         }
-        
         that.renderContext.choices = [{
             "name": "acknowledge",
             "label": "Acknowledge",
             "checked": acknowledged
         }];
         this.whenTemplateIsReady(function(){
-            readyToRenderCallback();
+            ctxt.success();
         });
     }
 });

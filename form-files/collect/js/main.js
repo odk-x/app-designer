@@ -3,7 +3,7 @@ requirejs.config({
     paths: {
         // third-party libraries we depend upon 
         jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
-        jquery : 'libs/jquery.1.8.1',
+        jquery : 'libs/jquery.1.8.2',
         backbone : 'libs/backbone.0.9.2',
         handlebars : 'libs/handlebars.1.0.0.beta.6',
         underscore : 'libs/underscore.1.4.2',
@@ -79,6 +79,9 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                         'jqmobile', 'builder', 'controller',
                         'prompts'/* mix-in additional prompts and support libs here */], 
         function($, mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
+            var ctxt = $.extend({}, controller.baseContext );
+            ctxt.append('startup');
+
             parsequery.initialize(controller,builder);
 
             //
@@ -93,8 +96,9 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
             // the requested form.
             var f = function() {
                 if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
-                    parsequery.parseParameters();
+                    parsequery.parseParameters(ctxt);
                 } else {
+                    ctxt.append('startup.delay');
                     setTimeout(f, 200);
                 }
             };
