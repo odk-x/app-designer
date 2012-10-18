@@ -427,12 +427,10 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             return that.choiceFilter(choice);
         });
         if ( !formValue ) {
-            /*
-            that.renderContext.choices = .map(filteredChoices, function(choice) {
+            that.renderContext.choices = _.map(filteredChoices, function(choice) {
                 choice.checked = false;
                 return choice;
             });
-            */
             return;
         }
         that.renderContext.choices = _.map(filteredChoices, function(choice) {
@@ -463,9 +461,13 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         console.log(this.$('form').serializeArray());
         var formValue = (this.$('form').serializeArray());
         var saveValue = formValue ? JSON.stringify(formValue) : null;
-        this.setValue($.extend({}, ctxt, {success:function() {
-                                    that.updateRenderValue(formValue); 
-                                    ctxt.success(); }}), saveValue);
+        this.setValue($.extend({}, ctxt, {
+            success: function() {
+                that.updateRenderValue(formValue);
+                that.render();
+                ctxt.success();
+            }
+        }), saveValue);
     },
     onActivate: function(ctxt) {
         var that = this;
