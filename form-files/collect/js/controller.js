@@ -3,7 +3,8 @@
 // NOTE: builder.js sets controller.prompts property.
 define(['screenManager','opendatakit','database', 'jquery'],
 function(ScreenManager,  opendatakit,  database, $) {
-return {
+window.controller = {
+    eventCount: 0,
     screenManager : null,
     currentPromptIdx : -1,
     prompts : [],
@@ -225,6 +226,7 @@ return {
     setPrompt: function(ctxt, prompt, passedInOptions){
         if ( this.currentPromptIdx == prompt.promptIdx ) {
             ctxt.append('controller.setPrompt:ignored', "nextPx: " + prompt.promptIdx);
+            ctxt.success();
             return;
         }
         ctxt.append('controller.setPrompt', "nextPx: " + prompt.promptIdx);
@@ -248,6 +250,8 @@ return {
             ctxt.log('assumption violation');
             console.error("controller.setPrompt: prompt index changed -- assumption violation!!!");
             alert("controller.setPrompt: should never get here");
+            ctxt.failure();
+            return;
         }
         var idx = this.currentPromptIdx;
         var newhash = opendatakit.getHashString(database.getMetaDataValue('formPath'),
@@ -277,6 +281,7 @@ return {
         } else {
             ctxt.append('controller.opendatakitCallback.noHandler', page);
             console.log("opendatakitCallback: ERROR - NO HANDLER ON PAGE! " + page + " path: " + path + " action: " + action );
+            ctxt.failure();
             return;
         }
     },
@@ -285,6 +290,7 @@ return {
         if ( this.prompts.length == 0 ) {
             console.error("controller.gotoRef: No prompts registered in controller!");
             alert("controller.gotoRef: No prompts registered in controller!");
+            ctxt.failure();
             return;
         }
         if ( pageRef == null ) {
@@ -308,6 +314,7 @@ return {
         
         if ( promptCandidate == null ) {
             alert("controller.gotoRef: null prompt after resolution!");
+            ctxt.failure();
             return;
         }
         
@@ -361,7 +368,7 @@ return {
         },
         
         log: function( contextMsg ) {
-            var flattened;
+            var flattened = "seqAtEnd: " + window.controller.eventCount;
             $.each( this.contextChain, function(index,value) {
                 flattened += "\nmethod: " + value.method + ((value.detail != null) ? " detail: " + value.detail : "");
             });
@@ -370,13 +377,27 @@ return {
     },
     
     newCallbackContext : function( actionHandlers ) {
+        this.eventCount = 1 + this.eventCount;
+        var count = this.eventCount;
+        var now = new Date().getTime();
+        var detail =  "seq: " + count + " timestamp: " + now;
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
-        ctxt.append('callback');
+        ctxt.append('callback', detail);
         return ctxt;
     },
-    
+    newStartContext: function( actionHandlers ) {
+        this.eventCount = 1 + this.eventCount;
+        var count = this.eventCount;
+        var now = new Date().getTime();
+        var detail =  "seq: " + count + " timestamp: " + now;
+        var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
+        ctxt.append('startup', detail);
+        return ctxt;
+    },
     newContext : function(evt, actionHandlers ) {
-        var detail =  "timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid +
+        this.eventCount = 1 + this.eventCount;
+        var count = this.eventCount;
+        var detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid +
                       (('currentTarget' in evt) ? ((evt.currentTarget === window) ? ("curTgt: Window") 
                                                 : (" curTgt: " + (('innerHTML' in evt.currentTarget) ?
                                                         evt.currentTarget.innerHTML :
@@ -389,5 +410,6 @@ return {
         ctxt.append( evt.type, detail);
         return ctxt;
     }
-}
+};
+return window.controller;
 });

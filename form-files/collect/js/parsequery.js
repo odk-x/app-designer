@@ -105,47 +105,42 @@ return {
                 if ( sameForm ) {
                     database.cacheAllData($.extend({},ctxt,{success:function() {
                             this.append("parsequery._effectChange.cacheAllData.success");
-                            // instance data is OK...
-                            // controller prompts OK
-                            if ( !sameInstance && instanceId != null) {
-                                collect.setInstanceId(instanceId);
-                            }
-
-                            if ( qpl != window.location.hash ) {
-                                    // apply the change to the URL...
-                                    console.log("parsequery._effectChange: sameForm window.location.hash="+qpl+" ms: " + (+new Date()));
-                                    window.location.hash = qpl;
-                                    // triggers hash-change listener...
-                            } else {
-                                    // fire the controller to render the first page.
-                                    console.log("parsequery._effectChange: sameForm gotoRef("+pageRef+") ms: " + (+new Date()));
-                                    that.controller.gotoRef(ctxt, pageRef);
-                            }
+                            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance );
                         }, failure:function(){
                             this.append("parsequery._effectChange.failure");
+                            ctxt.failure();
                         }}));
                 } else {
                     database.initializeTables($.extend({},ctxt,{success:function() {
                             // build the survey and place it in the controller...
                             that.builder.buildSurvey(formDef, function() {
-                                    // controller OK
-                                    // instance data is OK...
-                                    if ( instanceId != null) {
-                                        collect.setInstanceId(instanceId);
-                                    }
-
-                                    if ( qpl != window.location.hash ) {
-                                            // apply the change to the URL...
-                                            ctxt.append("parsequery._effectChange.differentForm", "window.location.hash="+qpl+" ms: " + (+new Date()));
-                                            window.location.hash = qpl;
-                                            // triggers hash-change listener...
-                                    } else {
-                                            // fire the controller to render the first page.
-                                            ctxt.append("parsequery._effectChange.differentForm", "gotoRef("+pageRef+") ms: " + (+new Date()));
-                                            that.controller.gotoRef(ctxt, pageRef);
-                                    }
+                                    that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance );
                                 });
                         }}), formDef);
+                }
+        }}));
+    },
+    _prepAndSwitchUI:function( ctxt, qpl, instanceId, pageRef, sameInstance ) {
+        var that = this;
+        // instance data is OK...
+        // controller prompts OK
+        if ( !sameInstance && instanceId != null) {
+            collect.setInstanceId(instanceId);
+        }
+        database.initializeInstance($.extend({},ctxt,{success:function() {
+                if ( qpl != window.location.hash ) {
+                        // apply the change to the URL...
+                        ctxt.append("parsequery._effectChange." + (sameInstance ? "sameForm" : "differentForm"),
+                                    "window.location.hash="+qpl+" ms: " + (+new Date()));
+						ctxt.log("prehashchange");
+                        window.location.hash = qpl;
+                        ctxt.success();
+                        // triggers hash-change listener...
+                } else {
+                        // fire the controller to render the first page.
+                        ctxt.append("parsequery._effectChange." + (sameInstance ? "sameForm" : "differentForm"),
+                                    "gotoRef("+pageRef+") ms: " + (+new Date()));
+                        that.controller.gotoRef(ctxt, pageRef);
                 }
         }}));
     },
@@ -323,6 +318,7 @@ return {
             // this is bogus transition due to jquery mobile widgets
             ctxt.append('parsequery.hashChangeHandler.emptyHash');
             alert('Hash is invalid!');
+			ctxt.failure();
             return false;
         }
         
@@ -348,7 +344,6 @@ return {
             // this should trigger a hash-change action
             ctxt.append('parsequery.hashChangeHandler', "window.location.hash="+window.location.hash);
             that.parseParameters(ctxt);
-            return;
         } else {
             ctxt.append('parsequery.hashChangeHandler.gotoRef', "window.location.hash="+window.location.hash);
             that.controller.gotoRef(ctxt, pageRef);

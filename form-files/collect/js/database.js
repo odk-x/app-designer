@@ -101,6 +101,121 @@ insertStmt:function(name, type, value) {
         };
     }
 },
+// save the given value under that name
+insertDbTableStmt:function(name, type, value) {
+
+// insert into mdl.dbTableName ( col1, ... colj ... coln ) 
+// select col1, ... ? as colj ... coln from mdl.dbTableName 
+//         where id=? group by id having timestamp = max(timestamp)) tbl;
+// [ value, instanceId ]
+// and colj is 'name'
+//
+/*
+    id TEXT NOT NULL, // row id (instance_id)
+    srcPhoneNum TEXT NULL, // row creator
+    // TODO: how to support WiFi-only devices (no ph#)
+    lastModTime TEXT NOT NULL, // as pretty date string
+    syncTag TEXT NULL, // "" sync...
+    syncState INTEGER NOT NULL, // 1 sync...
+    transactioning INTEGER NOT NULL, // 0 sync...
+    timestamp INTEGER NOT NULL, // (new) ODK Collect; modification tracker
+    saved TEXT NULL, // (new) ODK Collect; 'COMPLETE' == visible to ODK Tables
+    ... // user-defined columns from colProps where the field: isPersisted == true
+*/
+    var t = new Date();
+    var now = t.getTime();
+    var isoNow = t.toISOString();
+
+    var tableId = mdl.tableId;
+    var dbTableName = mdl.dbTableName;
+    var datafields = mdl.datafields;
+    
+    var stmt = "insert into " + dbTableName + " (id, srcPhoneNum, lastModTime, syncTag, syncState, transactioning, timestamp, saved";
+    for ( var f in datafields ) {
+        stmt += ", " + f;
+    }
+    stmt += ") select id, srcPhoneNum, ?, syncTag, syncState, transactioning, ?, null";
+    var found = false;
+    for ( var f in datafields ) {
+        if ( f == name ) {
+            found = true;
+            if (value == null) {
+                stmt += ", null";
+            } else {
+                stmt += ", ?";
+            }
+        } else {
+            stmt += ", " + f;
+        }
+    }
+    stmt += " from " + dbTableName + " where id=? group by id having timestamp = max(timestamp)"; 
+    if ( !found ) {
+        alert("did not find key: " + name);
+    }
+    if (found && value == null) {
+        return {
+            stmt : stmt,
+            bind : [isoNow, now, mdl.qp.instanceId.value]
+            };
+    } else {
+        return {
+            stmt : stmt,
+            bind : [isoNow, now, value, mdl.qp.instanceId.value]
+            };
+    }
+},
+selectDbTableStmt:function() {
+    var dbTableName = mdl.dbTableName;
+    var datafields = mdl.datafields;
+    
+    var stmt = "select count(*) as rowcount from " + dbTableName + " where id=?";
+    return {
+        stmt : stmt,
+        bind : [mdl.qp.instanceId.value]
+    };
+},
+insertNewDbTableStmt:function() {
+
+// insert into mdl.dbTableName ( col1, ... colj ... coln ) 
+// select col1, ... ? as colj ... coln from mdl.dbTableName 
+//         where id=? group by id having timestamp = max(timestamp)) tbl;
+// [ value, instanceId ]
+// and colj is 'name'
+//
+/*
+    id TEXT NOT NULL, // row id (instance_id)
+    srcPhoneNum TEXT NULL, // row creator
+    // TODO: how to support WiFi-only devices (no ph#)
+    lastModTime TEXT NOT NULL, // as pretty date string
+    syncTag TEXT NULL, // "" sync...
+    syncState INTEGER NOT NULL, // 1 sync...
+    transactioning INTEGER NOT NULL, // 0 sync...
+    timestamp INTEGER NOT NULL, // (new) ODK Collect; modification tracker
+    saved TEXT NULL, // (new) ODK Collect; 'COMPLETE' == visible to ODK Tables
+    ... // user-defined columns from colProps where the field: isPersisted == true
+*/
+    var t = new Date();
+    var now = t.getTime();
+    var isoNow = t.toISOString();
+
+    var tableId = mdl.tableId;
+    var dbTableName = mdl.dbTableName;
+    var datafields = mdl.datafields;
+    
+    var stmt = "insert into " + dbTableName + " (id, srcPhoneNum, lastModTime, syncTag, syncState, transactioning, timestamp, saved";
+    for ( var f in datafields ) {
+        stmt += ", " + f;
+    }
+    stmt += ") values (?,null,?,null,1,0,?,null";
+    for ( var f in datafields ) {
+        stmt += ", null";
+    }
+    stmt += ")"; 
+    return {
+        stmt : stmt,
+        bind : [mdl.qp.instanceId.value, isoNow, now]
+    };
+},
 markCurrentStateAsSavedStmt:function(status) {
     return {
         stmt : 'update attr_values set saved = case when id in ( select tbl.id_key from ( select id id_key, instance_id, name, timestamp from attr_values where form_id = ? and instance_id = ? group by instance_id, name having timestamp = max(timestamp)) tbl ) then ? else null end where form_id = ? and instance_id = ?;',
@@ -179,8 +294,9 @@ getAllFormInstancesStmt:function() {
             stmt : 'select group_concat(case when name=\'instanceName\' then val else null end) instanceName, ' +
                           'group_concat(case when name=\'version\' then val else null end) version, ' + 
                           'max(timestamp) last_saved_timestamp, max(saved) saved_status, instance_id from ' + 
-                      '(select form_id, instance_id, timestamp, saved, name, val from instance_info ' + 
-                                'where form_id=? group by instance_id, name having timestamp = max(timestamp)) ' + 
+                      '(select form_id, instance_id, timestamp, saved, name, v1 val from ' + 
+                            '(select form_id, instance_id, timestamp, saved, name, val v1 from instance_info ' + 
+                                'where form_id=? group by instance_id, name having timestamp = max(timestamp))) ' + 
                      'group by instance_id order by timestamp desc;',
             bind : [mdl.qp.formId.value]
             };
@@ -216,6 +332,10 @@ putData:function(ctxt, name, type, value, onSuccessfulSave, onFailure) {
             var is = that.insertStmt(name, type, value);
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                 console.log("putData: successful insert: " + name);
+                var is = that.insertDbTableStmt(name, type, value);
+                transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
+                    console.log("putData: successful dbTable insert: " + name);
+                });
             });
         });
 },
@@ -230,7 +350,11 @@ putDataKeyTypeValueMapHelper:function(idx, that, ktvlist) {
         var type = ktvlist[idx].type;
         var value = ktvlist[idx].value; // may be null...
         var is = that.insertStmt(key, type, value);
-        transaction.executeSql(is.stmt, is.bind, that.putDataKeyValueMapHelper(idx+1, that, ktvlist));
+        transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
+            console.log("putDataKeyTypeValueMapHelper: successful insert: " + key);
+            var is = that.insertDbTableStmt(key, type, value);
+            transaction.executeSql(is.stmt, is.bind, that.putDataKeyValueMapHelper(idx+1, that, ktvlist));
+        });
     };
 },
 /**
@@ -484,15 +608,239 @@ ignore_all_changes:function(ctxt) {
             });
         });
 },
-initializeTables:function(ctxt, datafields) {
+initializeInstance:function(ctxt) {
+    var that = this;
+    var instanceId = mdl.qp.instanceId.value;
+    if ( instanceId == null ) {
+        ctxt.append('initializeInstance.noInstance');
+        ctxt.success();
+    } else {
+        ctxt.append('initializeInstance.access', instanceId);
+        that.withDb( ctxt, function(transaction) {
+            var cs = that.selectDbTableStmt();
+            transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+                var count = 0;
+                if ( result.rows.length == 1 ) {
+                    var row = result.rows.item(0);
+                    count = row['rowcount'];
+                }
+                if ( count == null || count == 0) {
+                    ctxt.append('initializeInstance.insertEmptyInstance');
+                    var cs = that.insertNewDbTableStmt();
+                    transaction.executeSql(cs.stmt, cs.bind);
+                }
+            });
+        });
+    }
+},
+initializeTables:function(ctxt, formDef) {
     var that = this;
     var formId = mdl.qp.formId.value;
     var formVersion = mdl.qp.formVersion.value;
+    var formName = mdl.qp.formName.value; // TODO: support i18n format style
     
-    // mdl.qp has all the query parameters loaded
-    // datafields describes the data fields
-    // formId and formVersion identify the table name
-    that.cacheAllData(ctxt);
+    that.withDb($.extend({},ctxt,{success:function() {
+            that.cacheAllData(ctxt);
+            }}), function(transaction) {
+        transaction.executeSql('CREATE TABLE IF NOT EXISTS colProps('+
+        'tableId TEXT NOT NULL,'+
+        'elementKey TEXT NOT NULL,'+
+        'elementName TEXT NOT NULL,'+
+        'elementType TEXT NULL,'+
+        'listChildElementKeys TEXT NULL,'+
+        'isPersisted INTEGER NOT NULL,'+
+        'joinTableId TEXT NULL,'+
+        'joinElementKey TEXT NULL,'+
+        'displayVisible INTEGER NOT NULL,'+
+        'displayName TEXT NOT NULL,'+
+        'displayChoicesMap TEXT NULL,'+
+        'displayFormat TEXT NULL,'+
+        'smsIn INTEGER NOT NULL,'+
+        'smsOut INTEGER NOT NULL,'+
+        'smsLabel TEXT NULL,'+
+        'footerMode TEXT NOT NULL'+
+        ');', [],
+        function(transaction, result) {
+            transaction.executeSql('CREATE TABLE IF NOT EXISTS keyValueStoreActive('+
+            'TABLE_UUID TEXT NOT NULL,'+ 
+            '_KEY TEXT NOT NULL,'+
+            '_TYPE TEXT NOT NULL,'+
+            'VALUE TEXT NOT NULL'+
+            ');', [],
+        function(transaction, result) {
+            // now insert records into these tables...
+            var ss = that.getTablePropertiesStmt(formId);
+            transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
+                if (result.rows.length == 0 ) {
+                    that.insertTableAndColumnProperties(transaction, formId, formVersion, formName, formDef);
+                } else {
+                    if(result.rows.length != 1) {
+                        throw new Error("getMetaData: multiple rows! " + name + " count: " + result.rows.length);
+                    } else {
+                        // do nothing? or update?
+                        // TODO: check formVersion to see if it is newer or older.
+                        // If older, then update colProp entries. If same or newer, do not touch.
+                    }
+                }
+            });
+        });
+    });
+    });
+},
+// save the given value under that name
+getTablePropertiesStmt:function(formId) {
+    return {
+        stmt : 'select * from keyValueStoreActive where _KEY=? and VALUE=?',
+        bind : ['formId', formId]
+    };
+},
+insertTableAndColumnProperties:function(transaction, formId, formVersion, formName, formDef) {
+    var that = this;
+    var fullDef = {
+        keyValueStoreActive: [],
+        colProps: []
+        };
+
+    var tableId = opendatakit.genUUID();
+        
+    var displayColumnOrder = [];
+
+    var createTableCmd = 'CREATE TABLE IF NOT EXISTS ' + formId + '('+
+        'id TEXT NOT NULL,'+
+        'srcPhoneNum TEXT NULL,'+
+        'lastModTime TEXT NOT NULL,'+
+        'syncTag TEXT NULL,'+
+        'syncState INTEGER NOT NULL,'+
+        'transactioning INTEGER NOT NULL,'+
+        'timestamp INTEGER NOT NULL,'+
+        'saved TEXT NULL';
+
+    for ( var df in formDef.datafields ) {
+    
+        var collectElementName = df;
+        
+        displayColumnOrder.push(collectElementName);
+        
+        var collectDataTypeName;
+        
+        var defn = formDef.datafields[df];
+        var type = defn.type;
+        
+        if ( type == 'integer' ) {
+            collectDataTypeName = 'integer';
+            createTableCmd += ',' + collectElementName + ' INTEGER NULL';
+        } else if ( type == 'number' ) {
+            collectDataTypeName = 'number';
+            createTableCmd += ',' + collectElementName + ' REAL NULL';
+        } else if ( type == 'text' ) {
+            collectDataTypeName = 'text';
+            createTableCmd += ',' + collectElementName + ' TEXT NULL';
+        } else if ( type == 'image/*' ) {
+            collectDataTypeName = 'mimeUri';
+            createTableCmd += ',' + collectElementName + ' TEXT NULL';
+        } else if ( type == 'audio/*' ) {
+            collectDataTypeName = 'mimeUri';
+            createTableCmd += ',' + collectElementName + ' TEXT NULL';
+        } else if ( type == 'video/*' ) {
+            collectDataTypeName = 'mimeUri';
+            createTableCmd += ',' + collectElementName + ' TEXT NULL';
+        } else {
+            // TODO: handle composite types...
+            collectDataTypeName = 'text';
+            createTableCmd += ',' + collectElementName + ' TEXT NULL';
+        }
+        
+        // case: simple type
+        // TODO: case: geopoint -- expand to different persistence columns
+    
+        fullDef.colProps.push( {
+            tableId: tableId,
+            elementKey: collectElementName,
+            elementName: collectElementName,
+            elementType: collectDataTypeName,
+            listChildElementKeys: null,
+            isPersisted: 1,
+            joinTableId: null,
+            joinElementKey: null,
+            displayVisible: 1,
+            displayName: collectElementName,
+            displayChoicesMap: null,
+            displayFormat: null,
+            smsIn: 1,
+            smsOut: 1,
+            smsLabel: null,
+            footerMode: '0'
+        } );
+    }
+    createTableCmd += ');';
+    
+    // construct the kvPairs to insert into kvstore
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'dbTableName', _TYPE: 'text', VALUE: formId } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'displayName', _TYPE: 'text', VALUE: 'formName' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'type', _TYPE: 'integer', VALUE: '0' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'primeCols', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'sortCol', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'readAccessTid', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'writeAccessTid', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'syncTag', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'lastSyncTime', _TYPE: 'integer', VALUE: '-1' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'coViewSettings', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'detailViewFile', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'summaryDisplayFormat', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'syncState', _TYPE: 'integer', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'transactioning', _TYPE: 'integer', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'colOrder', _TYPE: 'text', VALUE: displayColumnOrder } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'ovViewSettings', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'formId', _TYPE: 'text', VALUE: formId } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'formVersion', _TYPE: 'text', VALUE: (formVersion == null) ? '' : formVersion } );
+
+    transaction.executeSql(createTableCmd, [], function(transaction, result) {
+        that.fullDefHelper(transaction, true, 0, fullDef, tableId, formId, formDef);
+    });
+},
+fullDefHelper:function(transaction, insertColProps, idx, fullDef, tableId, formId, formDef) {
+    var that = this;
+    var dbTableName = null;
+    var row = null;
+    if ( insertColProps ) {
+        if ( fullDef.colProps.length > idx ) {
+            row = fullDef.colProps[idx];
+            dbTableName = 'colProps';
+        }
+        if ( row == null ) {
+            insertColProps = false;
+            idx = 0;
+        }
+    }
+    if ( !insertColProps ) {
+        if ( fullDef.keyValueStoreActive.length > idx ) {
+            row = fullDef.keyValueStoreActive[idx];
+            dbTableName = 'keyValueStoreActive';
+        }
+    }
+    
+    // done if no row to process...
+    if ( row == null ) {
+        mdl.tableId = tableId;
+        mdl.dbTableName = formId;
+        mdl.datafields = formDef.datafields;
+        return;
+    }
+    
+    // assemble insert statement...
+    var insertStart = 'REPLACE INTO ' + dbTableName + ' (';
+    var insertMiddle = ') VALUES (';
+    var bindArray = [];
+    for ( var col in row ) {
+        insertStart += col + ',';
+        bindArray.push(row[col]);
+        insertMiddle += '?,';
+    }
+    var insertCmd = insertStart.substr(0,insertStart.length-1) + insertMiddle.substr(0,insertMiddle.length-1) + ');';
+    
+    transaction.executeSql(insertCmd, bindArray, function(transaction, result) {
+        that.fullDefHelper(transaction, insertColProps, idx+1, fullDef, tableId, formId, formDef);
+    });
 },
 getDataValue:function(name) {
     var path = name.split('.');
