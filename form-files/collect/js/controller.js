@@ -325,7 +325,6 @@ window.controller = {
                 ctxt.failure();
                 return;
             }
-    
             that.setPrompt(ctxt, prompt, { hlist : hlist });
         }}), promptCandidate);
         

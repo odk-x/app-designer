@@ -1,6 +1,7 @@
 'use strict';
 define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes', 'formulaFunctions', 'underscore'],
 function(controller,   opendatakit,   database,   $,        promptTypes,   formulaFunctions,   _) {
+    var calculates = {};
     var evalInEnvironment = (function() {
         //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
         //It's still possible to really mess things up from here though because the
@@ -13,21 +14,28 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         for(var funcName in formulaFunctions){
             eval('var ' + funcName + ' = formulaFunctions.funcName;');
         }
-        //A better way might be to use a "with" block around the eval,
-        //but that also suffers from the usestrict problem.
         
         //The Function consturctor might avoid the usestrict problem.
         //However, I don't know if it works with webkit.
+        //Here's a firs attempt at it, which doesn't work because
+        //applying a constructer returns undefined and the _.values function emits the prototype I think.
+        //I think this will require a lot of esoteric javascript to get right.
         //return (new Function).apply(_.keys(formulaFunctions).concat('function(code){eval(code)}'))(_.values(formulaFunctions));
-        */
-        //This is the way I'm setting up bindings for now, but it's suboptimal from a DRY perspective.
+
+        //This is the simplest way to set up bindings but it's suboptimal from a DRY perspective.
         var selected = formulaFunctions.selected;
-        var V = formulaFunctions.V;
+        var data = formulaFunctions.data;
         var localize = formulaFunctions.localize;
         var equivalent = formulaFunctions.equivalent;
         
         return function(code){
             return eval(code);
+        };
+        */
+        return function(code){
+            //Now I'm trying to use a eval in a with block and doing it inside formulaFunctions
+            //to dodge the usestrict problem.
+            return formulaFunctions.evaluator(code);
         };
     })();
     
@@ -62,7 +70,17 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     return "this.database.getDataValue('" + variableName + "')";
                 }
             content = content.replace(variableRegex, replaceCallback);
-            var result = '(function(context){return (' + content + ');})';
+            //TODO: It might be better to define a wrapper function with the try/catch
+            var result = '(function(context){'+
+                'try {' +
+                'return ('+ content + ');' +
+                "} catch(e) {" +
+                ' alert("Bad formula. See console for details.");' +
+                ' console.error("Bad Formula:");' +
+                ' console.error(this);' +
+                ' console.error(e);'+
+                ' console.error("'+content+'");'+
+                '}})';
             try {
                 return evalInEnvironment(result);
             } catch (e) {
@@ -216,6 +234,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 widgets: widgets
             };
 
+            /*
             var navs = [];
             var calculates = [];
             for ( var i = 0 ; i < surveyJson.survey.length ; ++i ) {
@@ -226,6 +245,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     navs.push(surveyItem);
                 }
             }
+            */
             var prompts = ([{
                 "type": "goto_if",
                 "condition": function() {
@@ -250,7 +270,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 type: "opening",
                 name: "_opening",
                 label: "opening page"
-            }]).concat(navs).concat([{
+            }]).concat(surveyJson.survey).concat([{
                 type: "finalize",
                 name: "_finalize",
                 label: "Save Form"
@@ -261,8 +281,13 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             }]);
 
             console.log('initializing');
+            //Transform the calculate sheet into an object with format {calculation_name:function}
+            calculates = _.object(_.map(surveyJson.calculates, function(calculate){
+                return [calculate.name, that.propertyParsers.formula(calculate.calculation)];
+            }));
+            formulaFunctions.calculates = calculates;
+            
             that.form.prompts = this.initializePrompts(prompts);
-            calculates = this.initializePrompts(calculates);
             controller.prompts = that.form.prompts;
             //controller.calcs = that.form.calcs;
             console.log('starting');

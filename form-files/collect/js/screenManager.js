@@ -4,14 +4,14 @@
 // also depends upon: 'controller' -- to avoid a circular dependency, 'controller' is passed 
 // in during initialize() and stored in a member variable.
 //
-define(['opendatakit','backbone','jquery','handlebars','jqmobile','text'], 
-function(opendatakit, Backbone, $, Handlebars) {
+define(['opendatakit','backbone','jquery','handlebars','text!templates/screen.handlebars' ,'jqmobile'], 
+function(opendatakit, Backbone, $, Handlebars, screenTemplate) {
 
 return Backbone.View.extend({
     el: "body",
     className: "current",
     instance_id:123,
-    template: null,
+    template: Handlebars.compile(screenTemplate),
     swipeTimeStamp: -1,
     swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
     noPreviousPage: function(ctxt) {
@@ -36,6 +36,7 @@ return Backbone.View.extend({
         this.controller = this.options.controller;
         this.currentPageEl = $('[data-role=page]');
         var that = this;
+        /*
         var f = function() {
             requirejs(['text!templates/screen.handlebars'], function(source) {
                     that.template = Handlebars.compile(source);
@@ -46,6 +47,7 @@ return Backbone.View.extend({
             });
         };
         f();
+        */
     },
     cleanUpScreenManager: function(ctxt){
         this.swipeEnabled = true;
@@ -87,59 +89,60 @@ return Backbone.View.extend({
             // the absence of page history disabled backward swipe and button.
         };
         var that = this;
-        var f = function() {
-            if ( that.template && prompt.isInitializeComplete() ) {
-                //A better way to do this might be to pass a controller interface object to 
-                //onActivate that can trigger screen refreshes, as well as goto other prompts.
-                //(We would not allow prompts to access the controller directly).
-                //When the prompt changes, we could disconnect the interface to prevent the old
-                //prompts from messing with the current screen.
-                that.prompt.onActivate($.extend({},ctxt,{success:function(renderContext){
-                    var isFirstPrompt = !('previousPageEl' in that);
-                    var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
-                    if(renderContext){
-                        $.extend(that.renderContext, renderContext);
+
+        //A better way to do this might be to pass a controller interface object to 
+        //onActivate that can trigger screen refreshes, as well as goto other prompts.
+        //(We would not allow prompts to access the controller directly).
+        //When the prompt changes, we could disconnect the interface to prevent the old
+        //prompts from messing with the current screen.
+        that.prompt.onActivate($.extend({},ctxt,{
+            success:function(renderContext){
+                var isFirstPrompt = !('previousPageEl' in that);
+                var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
+                if(renderContext){
+                    $.extend(that.renderContext, renderContext);
+                }
+                if( !that.renderContext.enableBackNavigation &&
+                !that.renderContext.enableForwardNavigation ){
+                    //If we try to render a jqm nav without buttons we get an error
+                    //so this flag automatically disables nav in that case.
+                    that.renderContext.enableNavigation = false;
+                }
+                /*
+                console.log(that.renderContext);
+                // work through setting the forward/backward enable flags
+                if ( that.renderContext.enableNavigation === undefined ) {
+                    that.renderContext.enableNavigation = true;
+                }
+                if ( that.renderContext.enableForwardNavigation === undefined ) {
+                    that.renderContext.enableForwardNavigation = 
+                        that.renderContext.enableNavigation;
+                }
+                if ( that.renderContext.enableBackNavigation === undefined ) {
+                    that.renderContext.enableBackNavigation = 
+                        that.renderContext.enableNavigation &&
+                        that.controller.hasPromptHistory(ctxt);
+                }
+                */
+                that.currentPageEl = that.renderPage(prompt);
+                that.$el.append(that.currentPageEl);
+                // this might double-reset the swipeEnabled flag, but it does ensure it is reset
+                that.savedCtxt = $.extend({}, ctxt, {
+                    success: function() {
+                        that.swipeEnabled = true;
+                        ctxt.success();
+                    },
+                    failure: function() {
+                        that.swipeEnabled = true;
+                        ctxt.failure();
                     }
-                    if( !that.renderContext.enableBackNavigation &&
-                    !that.renderContext.enableForwardNavigation ){
-                        //If we try to render a jqm nav without buttons we get an error
-                        //so this flag automatically disables nav in that case.
-                        that.renderContext.enableNavigation = false;
-                    }
-                    /*
-                    console.log(that.renderContext);
-                    // work through setting the forward/backward enable flags
-                    if ( that.renderContext.enableNavigation === undefined ) {
-                        that.renderContext.enableNavigation = true;
-                    }
-                    if ( that.renderContext.enableForwardNavigation === undefined ) {
-                        that.renderContext.enableForwardNavigation = 
-                            that.renderContext.enableNavigation;
-                    }
-                    if ( that.renderContext.enableBackNavigation === undefined ) {
-                        that.renderContext.enableBackNavigation = 
-                            that.renderContext.enableNavigation &&
-                            that.controller.hasPromptHistory(ctxt);
-                    }
-                    */
-                    that.currentPageEl = that.renderPage(prompt);
-                    that.$el.append(that.currentPageEl);
-                    // this might double-reset the swipeEnabled flag, but it does ensure it is reset
-                    that.savedCtxt = $.extend({},ctxt,{
-                    success:function(){
-                        that.swipeEnabled = true; ctxt.success();
-                    },failure:function(){
-                        that.swipeEnabled = true; ctxt.failure();
-                    }});
-                    $.mobile.changePage(that.currentPageEl, $.extend({changeHash:false, transition: transition}, jqmAttrs));
-                }}));
-            } else {
-                ctxt.append('screenManager.setPrompt.waiting');
-                that.displayWaiting(ctxt);
-                setTimeout( f, 100);
+                });
+                $.mobile.changePage(that.currentPageEl, $.extend({
+                    changeHash: false,
+                    transition: transition
+                }, jqmAttrs));
             }
-        };
-        f();
+        }));
     },
     gotoNextScreen: function(evt) {
         var that = this;
@@ -239,6 +242,7 @@ return Backbone.View.extend({
         var $contentArea = $page.find('.odk-container');
         prompt.setElement($contentArea);
         prompt.render();
+        prompt.undelegateEvents();
         //$contentArea.append(prompt.$el);
         return $page;
     }

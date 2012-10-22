@@ -1,6 +1,10 @@
+//Dont use usestring or the evaluator will break
+
 define(['database', 'underscore'],
 function(database,   _) {
     return {
+        //calculates will be set by the builder
+        calculates: {},
         localize: function(textOrLangMap, locale) {
             if(_.isUndefined(textOrLangMap)) {
                 return 'undefined';
@@ -33,15 +37,26 @@ function(database,   _) {
                 console.error(qValue);
                 return false;
             }
-            if(promptValue) {
-                return _.include(_.pluck(promptValue, 'value'), qValue);
-            } else {
+            return _.include(_.pluck(promptValue, 'value'), qValue);
+        },
+        countSelected: function(promptValue){
+            if(!promptValue){
+                return 0;
+            }
+            if(_.isString(promptValue)){
+                promptValue = JSON.parse(promptValue);
+            }
+            if(!_.isArray(promptValue)){
+                alert("Selected function expects an array. See console for details.");
+                console.error(promptValue);
+                console.error(qValue);
                 return false;
             }
+            return promptValue.length;
         },
         //Check if the prompts have equivalent values.
         equivalent: function() {
-            var parsedArgs = _.map(arguments, JSON.parse);
+            var parsedArgs = arguments;
             if(_.all(parsedArgs, _.isArray)) {
                 //We are probably dealing with a select. values is an array of the selected values.
                 var values = _.map(parsedArgs, function(arguement){
@@ -57,37 +72,28 @@ function(database,   _) {
                 });
             }
         },
-        //V gets a value by name and parses it.
-        //It can be used in place of {{}} which I think will be cofused with the handlebars syntax.
-        V: function(valueName) {
-            var datavalue;
-            /*
-            var calculate = _.find(calculates, function(calculate){
-               return calculate.name === valueName;  
-            });
-            */
-            //TODO: Need to make calculates accessible
-            var calculate = false;
-            
-            if( calculate ){
-                if('calculation' in calculate) {
-                    return calculate.calculation();
-                } else {
-                    alert("Calculate with no calculation. See console for details.");
-                    console.error(calculate);
-                }
-            }
-            datavalue = database.getDataValue(valueName);
+        not: function(conditional){
+            return !conditional;
+        },
+        now: function(){
+            return new Date();
+        },
+        //data gets a value by name and parses it.
+        //TODO: When the model starts using objects we will need to get rid of the json parsing.
+        data: function(valueName) {
+            var datavalue = database.getDataValue(valueName);
             try {
                 if(datavalue){
                     return JSON.parse(datavalue);
                 }
             } catch(e) {
-                //I think we can remove this.
-                //If the database stores parsed JSON we definately can.
-                alert("Could not parse JSON. See console for details.");
-                console.error(String(e));
-                console.error(valueName + ':' + datavalue);
+                return datavalue;
+            }
+            return datavalue;
+        },
+        evaluator: function(code){
+            with(this){
+                return eval(code);
             }
         }
     }
