@@ -634,7 +634,7 @@ promptTypes.datetime = promptTypes.inputType.extend({
                 jqmSet: 'd',
                 jqmCancel: 'd'
             };
-            that.baseActivate(ctxt.success);
+            that.baseActivate(ctxt);
         });
     },
     render: function() {
@@ -979,6 +979,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
 });
 promptTypes.withNext = promptTypes.base.extend({
     type: "withNext",
+    hideInHierarchy: true,
     assignToValue: function(ctxt){
         var that = this;
         that.setValue(ctxt, that.assign());

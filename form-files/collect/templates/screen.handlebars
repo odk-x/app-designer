@@ -6,10 +6,14 @@
     {{! I'm having a terrible time getting the header to display like a float (i.e. take up no space in the layout)}}
     {{! data-fullscreen="true" is a hack for this.}}
     {{! Also, putting data-fullscreen on the footer and not the header seems to cause a bug.}}
-        <div class="odk-header" data-role="header" data-theme="e" data-position="fixed" data-fullscreen="true">
-            <a href="#heirarchy" data-icon="arrow-u">hierarchy</a>
-        	<h1>prev_prompt | current_prompt</h1>
-        </div>
+    <div class="odk-header" data-role="header" data-theme="d" data-position="fixed">
+        <a data-icon="gear" data-role="button" data-iconpos="notext" data-mini="true" data-inline="true">Options</a>
+        <div style="float:right;" >
+            <a class="odk-prev-btn" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-mini="true" data-inline="true">back</a>
+            <a class="odk-next-btn" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-mini="true" data-inline="true">next</a>
+       </div>
+       <h1>{{formName}}</h1>
+    </div>
     {{/if}}
     <div data-role="content" class="odk-scroll odk-container">
     {{#if loading}}

@@ -76,8 +76,8 @@ return Backbone.View.extend({
         this.prompt = prompt;
         this.swipeEnabled = false;
         this.renderContext = {
-            showHeader: false,
-            showFooter: true,
+            showHeader: true,
+            showFooter: false,
             enableForwardNavigation: true,
             enableBackNavigation: true,
             enableNavigation: true

@@ -42,9 +42,10 @@ odk-container.
 .odk-container > *:last-child {
     margin-bottom: 100px;
 }
+/*
 .odk-header ~ .odk-container > *:first-child {
     margin-top: 50px;
-}
+}*/
 /*
 Orangy glow.
 Eventually we should make a jqm theme for this.
