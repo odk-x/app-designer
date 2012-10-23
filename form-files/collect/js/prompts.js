@@ -42,7 +42,6 @@ promptTypes.base = Backbone.View.extend({
             console.error(this);
         }
     },
-
     initializeTemplate: function() {
         return;
         /*
@@ -94,9 +93,17 @@ promptTypes.base = Backbone.View.extend({
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
+    baseActivate: function(ctxt) {
+        var that = this;
+        var additionalActivateComplete = _.after(that.additionalActivateFunctions.length, function(){
+            that.whenTemplateIsReady(ctxt.success);
+        });
+        _.each(that.additionalActivateFunctions, function(additionalActivateFunc){
+            additionalActivateFunc($.extend({}, ctxt, { success : additionalActivateComplete}));
+        });
+    },
     onActivate: function(ctxt) {
-        var that;
-        this.whenTemplateIsReady(ctxt.success);
+        this.baseActivate(ctxt);
     },
     /**
      * stopPropagation is used in the events map to disable swiping on various elements
@@ -219,9 +226,11 @@ promptTypes.opening = promptTypes.base.extend({
             return;
         }
         this.renderContext.instanceName = instanceName;
-        this.whenTemplateIsReady(function(){
-            ctxt.success({enableBackwardNavigation: false});
-        });
+        this.baseActivate($.extend({}, ctxt, {
+            success:function(){
+                ctxt.success({enableBackwardNavigation: false});
+            }
+        }));
     },
     renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png',
@@ -263,9 +272,11 @@ promptTypes.finalize = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getMetaDataValue('instanceName');
-        this.whenTemplateIsReady(function(){
-            ctxt.success({enableForwardNavigation: false})
-        });
+        this.baseActivate($.extend({}, ctxt, {
+            success:function(){
+                ctxt.success({enableForwardNavigation: false});
+            }
+        }));
     },
     saveIncomplete: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -293,9 +304,11 @@ promptTypes.json = promptTypes.base.extend({
         } else {
             that.renderContext.value = "JSON Unavailable";
         }
-        that.whenTemplateIsReady(function(){
-            ctxt.success({enableNavigation: false});
-        });
+        that.baseActivate($.extend({}, ctxt, {
+            success:function(){
+                ctxt.success({enableNavigation: false});
+            }
+        }));
     }
 });
 promptTypes.instances = promptTypes.base.extend({
@@ -315,13 +328,15 @@ promptTypes.instances = promptTypes.base.extend({
                 formName: database.getMetaDataValue('formName'),
                 headerImg: opendatakit.baseDir + 'img/form_logo.png'
             });
-            that.whenTemplateIsReady(function(){
-                ctxt.success({
-                    showHeader: false,
-                    enableNavigation:false,
-                    showFooter:false
-                });
-            });
+            that.baseActivate($.extend({}, ctxt, {
+                success:function(){
+                    ctxt.success({
+                        showHeader: false,
+                        enableNavigation:false,
+                        showFooter:false
+                    });
+                }
+            }));
         }}), function(transaction) {
             var ss = database.getAllFormInstancesStmt();
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
@@ -372,9 +387,11 @@ promptTypes.hierarchy = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         this.renderContext.prompts = controller.prompts;
-        this.whenTemplateIsReady(function(){
-            ctxt.success({showHeader: false, showFooter: false});
-        });
+        this.baseActivate($.extend({}, ctxt, {
+            success:function(){
+                ctxt.success({showHeader: false, showFooter: false});
+            }
+        }));
     }
 });
 promptTypes.repeat = promptTypes.base.extend({
@@ -478,9 +495,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
         var saveValue = that.getValue();
         that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
-        this.whenTemplateIsReady(function(){
-            ctxt.success();
-        });
+        this.baseActivate(ctxt);
     }
 });
 promptTypes.select_one = promptTypes.select.extend({
@@ -551,9 +566,7 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         var renderContext = this.renderContext;
         var value = this.getValue();
         renderContext.value = value;
-        this.whenTemplateIsReady(function(){
-            ctxt.success();
-        });
+        this.baseActivate(ctxt);
     },
     beforeMove: function(ctxt) {
         var that = this;
@@ -621,9 +634,7 @@ promptTypes.datetime = promptTypes.inputType.extend({
                 jqmSet: 'd',
                 jqmCancel: 'd'
             };
-            that.whenTemplateIsReady(function(){
-                ctxt.success();
-            });
+            that.baseActivate(ctxt.success);
         });
     },
     render: function() {
@@ -700,9 +711,7 @@ promptTypes.image = promptTypes.media.extend({
         var value = that.getValue();
         that.renderContext.mediaPath = value;
         that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'img');
-        this.whenTemplateIsReady(function(){
-            ctxt.success();
-        });
+        this.baseActivate(ctxt);
     },
     capture: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -737,9 +746,7 @@ promptTypes.video = promptTypes.media.extend({
             that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
             that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
         }
-        this.whenTemplateIsReady(function(){
-            ctxt.success();
-        });
+        this.baseActivate(ctxt);
     },
     capture: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -938,18 +945,21 @@ promptTypes.acknowledge = promptTypes.select.extend({
         ctxt.append('acknowledge.modification', this.promptIdx);
         var that = this;
         var acknowledged = this.$('#acknowledge').is(':checked');
-        this.setValue($.extend({},ctxt,{success:function(){
-                                that.renderContext.choices = [{
-                                    "name": "acknowledge",
-                                    "label": "Acknowledge",
-                                    "checked": acknowledged
-                                }];
-                                if(acknowledged && that.autoAdvance) {
-                                    controller.gotoNextScreen(ctxt);
-                                } else {
-                                    ctxt.success();
-                                }
-                            }}), acknowledged);
+        this.setValue($.extend({}, ctxt, {
+            success: function() {
+                that.renderContext.choices = [{
+                    "name": "acknowledge",
+                    "label": "Acknowledge",
+                    "checked": acknowledged
+                }];
+                if (acknowledged && that.autoAdvance) {
+                    controller.gotoNextScreen(ctxt);
+                }
+                else {
+                    ctxt.success();
+                }
+            }
+        }), acknowledged);
     },
     onActivate: function(ctxt) {
         var that = this;
@@ -964,9 +974,14 @@ promptTypes.acknowledge = promptTypes.select.extend({
             "label": "Acknowledge",
             "checked": acknowledged
         }];
-        this.whenTemplateIsReady(function(){
-            ctxt.success();
-        });
+        this.baseActivate(ctxt);
+    }
+});
+promptTypes.withNext = promptTypes.base.extend({
+    type: "withNext",
+    assignToValue: function(ctxt){
+        var that = this;
+        that.setValue(ctxt, that.assign());
     }
 });
 });
