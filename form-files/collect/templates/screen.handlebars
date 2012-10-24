@@ -1,10 +1,10 @@
 <div class="odk-screen">
     {{#if showHeader}}
         <div class="odk-header" data-role="header" data-theme="c" data-position="fixed">
-            <a data-icon="gear" data-role="button" data-iconpos="notext" data-mini="true" data-inline="true">Options</a>
+            <div style="float:left;"><a data-icon="gear" data-role="button" data-inline="true">options</a></div>
             <div class="headerNavBtns">
-                <a class="odk-prev-btn" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-mini="true" data-inline="true">back</a>
-                <a class="odk-next-btn" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-mini="true" data-inline="true">next</a>
+                <a class="odk-prev-btn" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">back</a>
+                <a class="odk-next-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">next</a>
            </div>
            <h1>{{formName}}</h1>
         </div>
