@@ -34,6 +34,7 @@ return Backbone.View.extend({
     initialize: function(ctxt){
         this.controller = this.options.controller;
         this.currentPageEl = $('[data-role=page]');
+        console.assert(this.currentPageEl.length === 1);
         var that = this;
         /*
         var f = function() {
@@ -227,6 +228,14 @@ return Backbone.View.extend({
         $page.attr('data-role', 'page');
         $page.attr('data-theme', "d");
         $page.attr('data-content-theme', "d");
+        if(this.renderContext.enableNavigation){
+            if(this.renderContext.enableForwardNavigation){
+                $page.addClass('swipeForwardEnabled');
+            }
+            if(this.renderContext.enableBackNavigation){
+                $page.addClass('swipeBackEnabled');
+            }
+        }
         $page.html(this.template(this.renderContext));
         var $contentArea = $page.find('.odk-container');
         prompt.setElement($contentArea);

@@ -9,19 +9,6 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
-[data-role=page] {
-    height: 100%;
-}
-.odk-screen {
-    height: 100%;
-}
-.odk-header {
-    /*position: relative;*/
-}
-.odk-scroll {
-    min-height: 100%;
-    padding-bottom: 120px;
-}
 .odk-nav {
     position: relative;
     bottom: 59px;
@@ -32,20 +19,13 @@ body {
     padding-left: 1em;
     padding-right: 1em;
 }
-/*
-This prevents the nav bar from overlapping
-elements in .odk-container.
-This approach might cause problems if
-it conflicts with a style on the last element in
-odk-container.
-*/
-.odk-container > *:last-child {
-    margin-bottom: 100px;
+.headerNavBtns {
+    float: right;
+    margin-right: 1em;
 }
-/*
-.odk-header ~ .odk-container > *:first-child {
-    margin-top: 50px;
-}*/
+.headerNavBtns > a {
+    margin-top:0;
+}
 /*
 Orangy glow.
 Eventually we should make a jqm theme for this.
