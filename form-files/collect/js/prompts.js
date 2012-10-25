@@ -614,8 +614,8 @@ promptTypes.integer = promptTypes.inputType.extend({
         return !isNaN(parseInt(this.getValue()));
     }
 });
-promptTypes.number = promptTypes.inputType.extend({
-    type: "number",
+promptTypes.decimal = promptTypes.inputType.extend({
+    type: "decimal",
     datatype: "number",
     //TODO: This doesn't seem to be working.
     baseHtmlAttributes: {
