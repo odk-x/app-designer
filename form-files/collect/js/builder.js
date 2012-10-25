@@ -47,6 +47,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         required: 'formula',
         validate: 'formula',
         calculation: 'formula',
+        assign: 'formula',
         //TODO: Choice filter has some syntax issues to consider.
         //      It would be nice to have a "choice" variable we can refer to directly.
         //      One idea is to define variables in a context object that gets passed into the generated function.
@@ -166,44 +167,56 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
     },
     initializePrompts: function(prompts) {
         var that = this;
-            function findObjectWithPair(objectArray, searchKey, searchValue) {
-                for (var obby in objectArray) {
-                    if (searchKey in obby) {
-                        if (obby[searchKey] === searchValue) {
-                            return obby;
-                        }
+        //withNext type prompts can use this to set a function that gets
+        //called inside the next prompt's onActivate.
+        var additionalActivateFunctions = [];
+        function findObjectWithPair(objectArray, searchKey, searchValue) {
+            for (var obby in objectArray) {
+                if (searchKey in obby) {
+                    if (obby[searchKey] === searchValue) {
+                        return obby;
                     }
                 }
-                return null;
             }
+            return null;
+        }
         var initializedPrompts = [];
-        $.each(prompts, function(idx, item) {
-                var PromptType;
+        _.each(prompts, function(item) {
+            var PromptType, PromptClass, PromptInstance;
 
-                if (!('type' in item)) {
-                    console.log('no type specified');
-                    console.log(item);
-                    return;
-                }
-                var widget = findObjectWithPair(that.form.widgets, 'type', item.type);
-                if (widget) {
-                    item = $.extend({}, widget, item);
-                    item.type = widget.parentType;
-                }
-                if (item.type in promptTypes) {
-                    PromptType = promptTypes[item.type];
-                }
-                else {
-                    console.log('unknown type');
-                    console.log(item);
-                    PromptType = promptTypes['text'];
-                }
-                var PromptClass = PromptType.extend($.extend({
-                    form: that.form,
-                    promptIdx: idx
-                }, that.initializeProperties(item)));
-            initializedPrompts.push(new PromptClass());
-            });
+            if (!('type' in item)) {
+                console.log('no type specified');
+                console.log(item);
+                return;
+            }
+            var widget = findObjectWithPair(that.form.widgets, 'type', item.type);
+            if (widget) {
+                item = $.extend({}, widget, item);
+                item.type = widget.parentType;
+            }
+            if (item.type in promptTypes) {
+                PromptType = promptTypes[item.type];
+            } else {
+                console.log('unknown type');
+                console.log(item);
+                PromptType = promptTypes['text'];
+            }
+            PromptClass = PromptType.extend($.extend({
+                form: that.form,
+                promptIdx: initializedPrompts.length,
+                additionalActivateFunctions: additionalActivateFunctions
+            }, that.initializeProperties(item)));
+            PromptInstance = new PromptClass();
+            if (item.type === 'withNext') {
+                additionalActivateFunctions.push(function(ctxt) {
+                    PromptInstance.assignToValue(ctxt);
+                });
+                return;
+            } else {
+                initializedPrompts.push(PromptInstance);
+                additionalActivateFunctions = [];
+            }
+        });
         return initializedPrompts;
     },
     buildSurvey:function(surveyJson, continuation){

@@ -1,4 +1,3 @@
-/* JQM header/footer positioning hacks */
 body {
     height: 100%;
     /* This is to disable accidental of highlighting survey text */
@@ -9,43 +8,30 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
-[data-role=page] {
-    height: 100%;
-}
-.odk-screen {
-    height: 100%;
-}
-.odk-header {
-    /*position: relative;*/
-}
 .odk-scroll {
-    min-height: 100%;
-    padding-bottom: 120px;
+    margin-bottom: 1em;
 }
+/*
 .odk-nav {
     position: relative;
     bottom: 59px;
 }
+*/
 /* The long selector is to make sure we clobber the jqm padding styles */
 .ui-page-header-fullscreen .ui-content, .ui-page-footer-fullscreen .ui-content, .odk-container {
     padding: 0;
     padding-left: 1em;
     padding-right: 1em;
 }
+.headerNavBtns {
+    float: right;
+    /* margin-right: 1em; */
+}
 /*
-This prevents the nav bar from overlapping
-elements in .odk-container.
-This approach might cause problems if
-it conflicts with a style on the last element in
-odk-container.
+.headerNavBtns > a {
+    margin-top:3px;
+}
 */
-.odk-container > *:last-child {
-    margin-bottom: 100px;
-}
-.odk-header ~ .odk-container > *:first-child {
-    margin-top: 50px;
-}
-/*
 Orangy glow.
 Eventually we should make a jqm theme for this.
 */

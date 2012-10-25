@@ -183,7 +183,7 @@
         }, 
         {
             "setting": "formLocale", 
-            "value": "hindi"
+            "value": "en_us"
         }, 
         {
             "setting": "formName", 
@@ -254,63 +254,73 @@
             "templatePath": "breathCounter.handlebars"
         }, 
         {
-            "name": "chest_indrawing", 
-            "hint": "YOUNG INFANT MUST BE  CALM", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "present", 
-            "label": {
-                "default": "Look for severe chest  indrawing.", 
-                "hindi": "पसली का अत्यधिक धन्सना देखें.", 
-                "en_us": "Look for severe chest  indrawing."
-            }
+            "prompts": [
+                {
+                    "name": "chest_indrawing", 
+                    "hint": "YOUNG INFANT MUST BE  CALM", 
+                    "required": true, 
+                    "type": "select_one", 
+                    "param": "present", 
+                    "label": {
+                        "default": "Look for severe chest  indrawing.", 
+                        "hindi": "पसली का अत्यधिक धन्सना देखें.", 
+                        "en_us": "Look for severe chest  indrawing."
+                    }
+                }, 
+                {
+                    "name": "nasal_flaring", 
+                    "hint": "YOUNG INFANT MUST BE  CALM", 
+                    "required": true, 
+                    "type": "select_one", 
+                    "param": "present", 
+                    "label": {
+                        "default": "Look for nasal flaring.", 
+                        "hindi": "नाक जगमगाता हुआ के लिए देखें.", 
+                        "en_us": "Look for nasal flaring."
+                    }
+                }, 
+                {
+                    "name": "grunting", 
+                    "hint": "YOUNG INFANT MUST BE  CALM", 
+                    "required": true, 
+                    "type": "select_one", 
+                    "param": "present", 
+                    "label": {
+                        "default": "Look and listen for grunting.", 
+                        "hindi": "कराहना सुने", 
+                        "en_us": "Look and listen for grunting."
+                    }
+                }
+            ], 
+            "type": "screen"
         }, 
         {
-            "name": "nasal_flaring", 
-            "hint": "YOUNG INFANT MUST BE  CALM", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "present", 
-            "label": {
-                "default": "Look for nasal flaring.", 
-                "hindi": "नाक जगमगाता हुआ के लिए देखें.", 
-                "en_us": "Look for nasal flaring."
-            }
-        }, 
-        {
-            "name": "grunting", 
-            "hint": "YOUNG INFANT MUST BE  CALM", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "present", 
-            "label": {
-                "default": "Look and listen for grunting.", 
-                "hindi": "कराहना सुने", 
-                "en_us": "Look and listen for grunting."
-            }
-        }, 
-        {
-            "name": "axillary_temperature_possible", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": {
-                "default": "Is it possible to measure axillary temperature?", 
-                "en_us": "Is it possible to measure axillary temperature?", 
-                "hindi": "कक्षा तापमान को मापने के लिए संभव है?"
-            }
-        }, 
-        {
-            "param": null, 
-            "name": "axillary_temperature", 
-            "required": true, 
-            "type": "number", 
-            "condition": "selected(data('axillary_temperature_possible'), 'yes')", 
-            "label": {
-                "default": "Measure axillary temperature:", 
-                "hindi": "बगल का तापमान नापे (यदि संभव ना हो तो छूकर महसूस करें )", 
-                "en_us": "Measure axillary temperature:"
-            }
+            "prompts": [
+                {
+                    "name": "axillary_temperature_possible", 
+                    "required": true, 
+                    "type": "select_one", 
+                    "param": "yes_no", 
+                    "label": {
+                        "default": "Is it possible to measure axillary temperature?", 
+                        "en_us": "Is it possible to measure axillary temperature?", 
+                        "hindi": "कक्षा तापमान को मापने के लिए संभव है?"
+                    }
+                }, 
+                {
+                    "param": null, 
+                    "name": "axillary_temperature", 
+                    "required": true, 
+                    "type": "number", 
+                    "condition": "selected(data('axillary_temperature_possible'), 'yes')", 
+                    "label": {
+                        "default": "Measure axillary temperature:", 
+                        "hindi": "बगल का तापमान नापे (यदि संभव ना हो तो छूकर महसूस करें )", 
+                        "en_us": "Measure axillary temperature:"
+                    }
+                }
+            ], 
+            "type": "screen"
         }, 
         {
             "prompts": [
@@ -337,8 +347,7 @@
                 }
             ], 
             "type": "screen", 
-            "condition": "selected(data('axillary_temperature_possible'), 'no')", 
-            "comments": "test"
+            "condition": "selected(data('axillary_temperature_possible'), 'no')"
         }, 
         {
             "name": "lethargic", 
