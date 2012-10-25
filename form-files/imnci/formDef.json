@@ -9,8 +9,8 @@
         "restless": {
             "type": "string"
         }, 
-        "visit_type": {
-            "type": "string"
+        "weight": {
+            "type": "number"
         }, 
         "umbilicus_draining_pus": {
             "type": "string"
@@ -54,19 +54,19 @@
         "low_body_temperature": {
             "type": "string"
         }, 
-        "give_first_dose_of_cotrimoxazole": {
+        "visit_type": {
             "type": "string"
         }, 
         "breath_count": {
             "type": "integer"
         }, 
-        "gt_10_skin_pustules": {
-            "type": "string"
-        }, 
         "indication_for_urgent_referral": {
             "type": "string"
         }, 
         "teach_mother_to_apply_gv_paint": {
+            "type": "string"
+        }, 
+        "warm_skin_to_skin": {
             "type": "string"
         }, 
         "attachment_quality_signs": {
@@ -102,7 +102,7 @@
         "other_foods": {
             "type": "string"
         }, 
-        "refer_urgently_to_hospital": {
+        "gt_10_skin_pustules": {
             "type": "string"
         }, 
         "breastfeedings_per_day": {
@@ -135,7 +135,13 @@
         "chest_indrawing": {
             "type": "string"
         }, 
+        "give_first_dose_of_cotrimoxazole": {
+            "type": "string"
+        }, 
         "use_to_feed": {
+            "type": "string"
+        }, 
+        "refer_urgently_to_hospital": {
             "type": "string"
         }, 
         "name": {
@@ -153,8 +159,8 @@
         "abnormal_movements": {
             "type": "string"
         }, 
-        "warm_skin_to_skin": {
-            "type": "string"
+        "axillary_temperature": {
+            "type": "number"
         }, 
         "has_diarrhoea": {
             "type": "string"
@@ -213,7 +219,7 @@
             "type": "date"
         }, 
         {
-            "type": "number", 
+            "type": "decimal", 
             "name": "weight", 
             "param": null, 
             "label": {
@@ -329,7 +335,7 @@
                     "param": null, 
                     "name": "axillary_temperature", 
                     "required": true, 
-                    "type": "number", 
+                    "type": "decimal", 
                     "condition": "selected(data('axillary_temperature_possible'), 'yes')", 
                     "label": {
                         "default": "Measure axillary temperature:", 
