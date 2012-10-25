@@ -109,7 +109,7 @@ return {
         }
 		
 		// defined by form definition's settings:
-        var tableId = opendatakit.getSetting(formDef, 'tableId');
+        var tableId = opendatakit.getSetting(formDef, 'formId');//TODO: opendatakit.getSetting(formDef, 'tableId');
         var formId = opendatakit.getSetting(formDef, 'formId');
         var formVersion = opendatakit.getSetting(formDef, 'formVersion');
         var formLocales = opendatakit.getFormLocales(formDef);

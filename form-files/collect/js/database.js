@@ -891,10 +891,8 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueList) {
 					// construct a friendly name for this new form...
 					var date = new Date();
 					var dateStr = date.toISOString();
-					var locales = opendatakit.getFormLocales(mdl.qp.formDef.value);
 					var locale = opendatakit.getDefaultFormLocale(mdl.qp.formDef.value);
-					var formTitle = opendatakit.localize(that.getTableMetaDataValue('formTitle'),locale);
-					var instanceName = formTitle + "_" + dateStr; // .replace(/\W/g, "_")
+					var instanceName = dateStr; // .replace(/\W/g, "_")
                     var cs = that.insertNewDbTableStmt(instanceId, instanceName, locale, JSON.stringify(instanceMetadataKeyValueList));
                     transaction.executeSql(cs.stmt, cs.bind);
                 }

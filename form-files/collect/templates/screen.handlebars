@@ -6,7 +6,7 @@
                 <a class="odk-prev-btn" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">back</a>
                 <a class="odk-next-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">next</a>
            </div>
-           <h1>{{localize formTitle}}</h1>
+           <h1>{{localize formTitle}}{{#if instanceName}} - {{localize instanceName}}{{/if}}</h1>
         </div>
     {{/if}}
     <div data-role="content" class="odk-scroll odk-container">

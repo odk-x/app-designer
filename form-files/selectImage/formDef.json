@@ -1,0 +1,90 @@
+{
+    "model": {
+        "bird": {
+            "type": "string"
+        }
+    }, 
+    "settings": [
+        {
+            "setting": "formId", 
+            "value": "selectImage"
+        }, 
+        {
+            "setting": "formVersion", 
+            "value": 1
+        }, 
+        {
+            "setting": "formTitle", 
+            "value": {
+                "default": "selectImage", 
+                "english": "Select image test."
+            }
+        }
+    ], 
+    "survey": [
+        {
+            "prompts": [
+                {
+                    "type": "select_one", 
+                    "name": "bird", 
+                    "param": "birds", 
+                    "label": "Choose a bird:"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected(data('bird'), 'blackbird')", 
+                    "label": "Blackbird selected"
+                }, 
+                {
+                    "type": "note", 
+                    "param": null, 
+                    "condition": "selected(data('bird'), 'blackbird') && now().getHours() < 2", 
+                    "label": "in the dead of night"
+                }
+            ], 
+            "type": "screen"
+        }
+    ], 
+    "calculates": [], 
+    "choices": {
+        "birds": [
+            {
+                "image": "media/blackbird.png", 
+                "name": "blackbird"
+            }, 
+            {
+                "image": "media/bluethroat.png", 
+                "name": "bluethroat"
+            }, 
+            {
+                "image": "media/crow.png", 
+                "name": "crow"
+            }, 
+            {
+                "image": "media/eagle.png", 
+                "name": "eagle"
+            }, 
+            {
+                "image": "media/egret.png", 
+                "name": "egret"
+            }, 
+            {
+                "image": "media/goose.png", 
+                "name": "goose"
+            }, 
+            {
+                "image": "media/gull.png", 
+                "name": "gull"
+            }, 
+            {
+                "image": "media/hawfinch.png", 
+                "name": "hawfinch"
+            }, 
+            {
+                "image": "media/jay.png", 
+                "name": "jay"
+            }
+        ]
+    }
+}
