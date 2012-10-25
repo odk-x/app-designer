@@ -1,10 +1,10 @@
 {
     "model": {
         "give_oral_cotrimoxazole": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "refer_for_other_problems": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "restless": {
             "type": "string"
@@ -19,7 +19,7 @@
             "type": "string"
         }, 
         "increase_frequency_of_feeding": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "sucking_effectiveness": {
             "type": "string"
@@ -40,7 +40,7 @@
             "type": "string"
         }, 
         "teach_correct_positioning": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "needed_vaccinations": {
             "type": "string"
@@ -64,10 +64,10 @@
             "type": "string"
         }, 
         "teach_mother_to_apply_gv_paint": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "warm_skin_to_skin": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "attachment_quality_signs": {
             "type": "string"
@@ -94,10 +94,10 @@
             "type": "string"
         }, 
         "dehydration_treatment": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "give_oral_cotrimoxazole_5_days": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "other_foods": {
             "type": "string"
@@ -109,13 +109,13 @@
             "type": "integer"
         }, 
         "warm_infant_skin_to_skin": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "refer_urgently_to_hospital_w_ORS": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "give_oral_cotrimoxazole_if_able": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "other_problems": {
             "type": "string"
@@ -127,7 +127,7 @@
             "type": "string"
         }, 
         "parse_mother_for_feeding": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "sunken_eyes": {
             "type": "string"
@@ -136,22 +136,22 @@
             "type": "string"
         }, 
         "give_first_dose_of_cotrimoxazole": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "use_to_feed": {
             "type": "string"
         }, 
         "refer_urgently_to_hospital": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "name": {
             "type": "string"
         }, 
         "observe_breastfeed": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "follow_up_2_days": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "able_to_attach": {
             "type": "string"
@@ -166,10 +166,10 @@
             "type": "string"
         }, 
         "advise_continue_breastfeeding": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "advise_keep_infant_warm": {
-            "type": "string"
+            "type": "boolean"
         }, 
         "fever_present": {
             "type": "string"
@@ -178,7 +178,7 @@
             "type": "string"
         }, 
         "advise_home_care": {
-            "type": "string"
+            "type": "boolean"
         }
     }, 
     "settings": [
@@ -407,6 +407,28 @@
             }
         }, 
         {
+            "name": "umbilicus_draining_pus", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": {
+                "default": "Look at the  umbilicus. Is it red or draining pus?", 
+                "en_us": "Look at the  umbilicus. Is it red or draining pus?", 
+                "hindi": "नाभि देखें, क्या नाभि लाल है या पीप निकल रा है?"
+            }
+        }, 
+        {
+            "name": "skin_pustules", 
+            "required": true, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": {
+                "default": "Are there any skin pustules?", 
+                "en_us": "Are there any skin pustules?", 
+                "hindi": "त्वचा पर फोड़े / फुंसी देखें. क्या १० या ज़्यादा या एक बड़ा फोढा है?"
+            }
+        }, 
+        {
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('convulsions'), 'yes')"
@@ -434,7 +456,7 @@
         {
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
-            "condition": "data('axillary_temperature') >= 37.5 || data('axillary_temperature') < 35.5"
+            "condition": "data('axillary_temperature') && (data('axillary_temperature') >= 37.5 || data('axillary_temperature') < 35.5)"
         }, 
         {
             "type": "goto", 
@@ -457,30 +479,6 @@
             "condition": "selected(data('gt_10_skin_pustules'), 'yes')"
         }, 
         {
-            "param": "yes_no", 
-            "name": "umbilicus_draining_pus", 
-            "required": true, 
-            "type": "select_one", 
-            "comments": "I have reordered these two questions because they do not require urgent attention", 
-            "label": {
-                "default": "Look at the  umbilicus. Is it red or draining pus?", 
-                "hindi": "नाभि देखें, क्या नाभि लाल है या पीप निकल रा है?", 
-                "en_us": "Look at the  umbilicus. Is it red or draining pus?"
-            }
-        }, 
-        {
-            "param": "yes_no", 
-            "name": "skin_pustules", 
-            "required": true, 
-            "type": "select_one", 
-            "comments": "TODO: ask with above questions", 
-            "label": {
-                "default": "Are there any skin pustules?", 
-                "hindi": "त्वचा पर फोड़े / फुंसी देखें. क्या १० या ज़्यादा या एक बड़ा फोढा है?", 
-                "en_us": "Are there any skin pustules?"
-            }
-        }, 
-        {
             "type": "goto", 
             "param": "local_bacterial_infection", 
             "condition": "selected(data('umbilicus_draining_pus'), 'yes')"
@@ -492,7 +490,7 @@
         }, 
         {
             "type": "goto", 
-            "param": "bacterial_infection_section_end"
+            "param": "no_bacterial_infection"
         }, 
         {
             "type": "label", 
@@ -501,14 +499,15 @@
         {
             "prompts": [
                 {
+                    "param": null, 
+                    "hint": "SIGNS:\n<ul>\n<li>Convulsions or</li>\n<li>Fast breathing (60 breaths per minute or more) or</li>\n<li>Severe chest indrawing or</li>\n<li>Nasal flaring or</li>\n<li>Grunting or</li>\n<li>10 or more skin pustules or a big boil or</li>\n<li>If axillary temperature 37.5°C or above (or feels hot to touch) or temperature less than 35.5°C (or feels cold to touch) or</li>\n<li>Lethargic or unconscious or</li>\n<li>Less than normal movements</li>\n</ul>", 
+                    "type": "note", 
+                    "comments": "TODO: break signs into separate prompts", 
                     "label": {
                         "default": "CLASSIFICATION: <strong>POSSIBLE SERIOUS BACTERIAL INFECTION</strong>", 
-                        "en_us": "CLASSIFICATION: <strong>POSSIBLE SERIOUS BACTERIAL INFECTION</strong>", 
-                        "hindi": "संभावित: गंभीर जीवन संक्रमण (इन्फेक्षन)"
-                    }, 
-                    "type": "note", 
-                    "param": null, 
-                    "hint": "SIGNS:\n<ul>\n<li>Convulsions or</li>\n<li>Fast breathing (60 breaths per minute or more) or</li>\n<li>Severe chest indrawing or</li>\n<li>Nasal flaring or</li>\n<li>Grunting or</li>\n<li>10 or more skin pustules or a big boil or</li>\n<li>If axillary temperature 37.5°C or above (or feels hot to touch) or temperature less than 35.5°C (or feels cold to touch) or</li>\n<li>Lethargic or unconscious or</li>\n<li>Less than normal movements</li>\n</ul>"
+                        "hindi": "संभावित: गंभीर जीवन संक्रमण (इन्फेक्षन)", 
+                        "en_us": "CLASSIFICATION: <strong>POSSIBLE SERIOUS BACTERIAL INFECTION</strong>"
+                    }
                 }, 
                 {
                     "type": "note", 
@@ -625,6 +624,27 @@
                 }
             ], 
             "type": "screen"
+        }, 
+        {
+            "type": "goto", 
+            "param": "bacterial_infection_section_end"
+        }, 
+        {
+            "type": "label", 
+            "param": "no_bacterial_infection", 
+            "comments": "Adding based on correspondence w/ amy"
+        }, 
+        {
+            "type": "note", 
+            "param": null, 
+            "label": {
+                "default": "CLASSIFICATION: NO SIGNS OF BACTERIAL INFECTION", 
+                "en_us": "CLASSIFICATION: NO SIGNS OF BACTERIAL INFECTION"
+            }
+        }, 
+        {
+            "type": "goto", 
+            "param": "bacterial_infection_section_end"
         }, 
         {
             "type": "label", 
@@ -980,11 +1000,11 @@
                 {
                     "param": null, 
                     "name": "other_foods_frequency", 
-                    "comments": "metric?", 
+                    "comments": "Adding per day", 
                     "type": "integer", 
                     "condition": "selected(data('other_foods'), 'yes')", 
                     "label": {
-                        "default": "ASK: How often does the infant receive other foods or drinks?", 
+                        "default": "ASK: How often does the infant receive other foods or drinks per day?", 
                         "hindi": "यदि हन तो कितनी बार?"
                     }
                 }
@@ -1013,10 +1033,11 @@
             }
         }, 
         {
-            "name": "breastfed_recently", 
             "param": "yes_no", 
+            "name": "breastfed_recently", 
+            "comments": "Added back from original IMCNI chart based on correspondence with Amy/Manoj, then disabled based on Lysander's comment.", 
             "type": "select_one", 
-            "comments": "Added back from original IMCNI chart based on correspondence with Amy/Manoj", 
+            "condition": false, 
             "label": {
                 "default": "ASK: Has the infant breastfed in the previous hour?", 
                 "hindi": "पूछें: क्या शिशु को पिछले घंटे मैं स्तनपान मिला है?"
@@ -1025,12 +1046,12 @@
         {
             "type": "goto", 
             "param": "after_feeding_assessment", 
-            "condition": "selected(data('indication_for_urgent_referral'), 'yes')"
+            "condition": "selected(data('breastfed_recently'), 'yes')"
         }, 
         {
             "type": "goto", 
             "param": "after_feeding_assessment", 
-            "condition": "selected(data('breastfed_recently'), 'yes')"
+            "condition": "selected(data('indication_for_urgent_referral'), 'yes')"
         }, 
         {
             "param": null, 
@@ -1117,10 +1138,10 @@
         }, 
         {
             "param": "cannot_feed_possible_serious_bacterial_infection", 
-            "comments": "TODO: How do I determine able_to_feed? Is it different from able to attach?", 
+            "comments": "Based on correspondence w/ amy using 'is_infant_breastfed' for \"Able to feed\"", 
             "required": true, 
             "type": "goto", 
-            "condition": "selected(data('able_to_feed'),'no') || selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'none')"
+            "condition": "selected(data('is_infant_breastfed'), 'yes') || selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'none')"
         }, 
         {
             "required": true, 
