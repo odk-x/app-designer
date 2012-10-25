@@ -24,6 +24,9 @@
                     <img src="{{formDirectory}}{{localize image}}"></img>
                 </div>
             {{/if}}
+            {{#if label}}
+                {{#substitute}}{{localize label}}{{/substitute}}
+            {{/if}}
             </label>
         {{/each}}
         {{#if or_other}}
