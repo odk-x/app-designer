@@ -5,13 +5,13 @@
 {{/if}}
 {{#if image}}
     <div>
-        <img width="100%" src="{{localize image}}"></img>
+        <img width="100%" src="{{formDirectory}}{{localize image}}"></img>
     </div>
 {{/if}}
 {{#if audio}}
     <div>
         <audio controls="controls">
-            <source src="{{localize audio}}" type="audio/ogg" />
+            <source src="{{formDirectory}}{{localize audio}}" type="audio/ogg" />
             Your browser does not support the audio element.
         </audio>
     </div>
@@ -19,7 +19,7 @@
 {{#if video}}
     <div>
         <video controls="controls">
-            <source src="{{localize video}}" type="video/ogg" />
+            <source src="{{formDirectory}}{{localize video}}" type="video/ogg" />
             Your browser does not support the video element.
         </video>
     </div>

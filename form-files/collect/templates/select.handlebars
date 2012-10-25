@@ -19,7 +19,11 @@
                     {{! the name attribue has to be the same for all the options}}
                     name="{{../name}}"
                     value="{{name}}" />
-            {{localize label}}
+            {{#if image}}
+                <div>
+                    <img src="{{formDirectory}}{{localize image}}"></img>
+                </div>
+            {{/if}}
             </label>
         {{/each}}
         {{#if or_other}}

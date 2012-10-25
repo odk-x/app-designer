@@ -114,10 +114,24 @@ promptTypes.base = Backbone.View.extend({
         evt.stopImmediatePropagation();
     },
     render: function() {
+        var that = this;
+        //The shadow element is creates so images can be loaded before the newly rendered screen is shown.
+        var $shadowEl = that.$el.clone();
+        $shadowEl.html(this.template(this.renderContext));
+        //We should probably use the image load events instead.
+        //However, that will require being careful about duplicate events.
+        _.delay(function(){
+            that.$el.empty();
+            that.$el.append($shadowEl.children());
+            that.$el.trigger('create');
+        }, 500);
+        return this;
+        /*
         this.$el.html(this.template(this.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         this.$el.trigger('create');
         return this;
+        */
     },
     //baseValidate isn't meant to be overidden or called externally.
     //It does validation that will be common to most prompts.
