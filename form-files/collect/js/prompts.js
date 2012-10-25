@@ -115,16 +115,26 @@ promptTypes.base = Backbone.View.extend({
     },
     render: function() {
         var that = this;
-        //The shadow element is creates so images can be loaded before the newly rendered screen is shown.
-        var $shadowEl = that.$el.clone();
-        $shadowEl.html(this.template(this.renderContext));
-        //We should probably use the image load events instead.
-        //However, that will require being careful about duplicate events.
-        _.delay(function(){
+        //The shadow element is created so images can be loaded before the newly rendered screen is shown.
+        var $shadowEl = $('<div>');
+        var $imagesToLoad;
+        var numImagesLoaded = 0;
+        function imagesLoaded(){
             that.$el.empty();
             that.$el.append($shadowEl.children());
             that.$el.trigger('create');
-        }, 500);
+        }
+        $shadowEl.html(this.template(this.renderContext));
+        $imagesToLoad = $shadowEl.find('img');
+        $imagesToLoad.load(function(){
+            numImagesLoaded++;
+            if(numImagesLoaded === $imagesToLoad.length) {
+                imagesLoaded();
+            }
+        });
+        if($imagesToLoad.length === 0) {
+            imagesLoaded();
+        }
         return this;
         /*
         this.$el.html(this.template(this.renderContext));
