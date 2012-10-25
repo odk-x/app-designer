@@ -1,5 +1,5 @@
 {
-    "datafields": {
+    "model": {
         "give_oral_cotrimoxazole": {
             "type": "string"
         }, 
@@ -138,6 +138,9 @@
         "use_to_feed": {
             "type": "string"
         }, 
+        "name": {
+            "type": "string"
+        }, 
         "observe_breastfeed": {
             "type": "string"
         }, 
@@ -192,19 +195,26 @@
     ], 
     "survey": [
         {
+            "type": "text", 
+            "name": "name", 
+            "param": null, 
+            "label": {
+                "default": "What is the child's name?", 
+                "en_us": "What is the child's name?", 
+                "hindi": "शिशु का नाम क्या है?"
+            }
+        }, 
+        {
             "constraint": "new Date(this.getValue()) <= (new Date())", 
             "name": "birthday", 
             "hint": "If the exact date is unknown use an approximate date.", 
             "constraint_message": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.", 
             "param": null, 
-            "label": "When was the child born?", 
+            "label": {
+                "default": "When was the child born?", 
+                "hindi": "शिशु कब पेड़ा हुआ था?"
+            }, 
             "type": "date"
-        }, 
-        {
-            "type": "note", 
-            "param": null, 
-            "condition": "calculates.daysOld() > 2 * 30", 
-            "label": "More than 2 months old"
         }, 
         {
             "type": "number", 
@@ -220,7 +230,19 @@
             "type": "select_one", 
             "name": "visit_type", 
             "param": "visit_type", 
-            "label": "Is this an initial visit or follow-up?"
+            "label": {
+                "default": "Is this an initial visit or follow-up?", 
+                "hindi": "क्या यह पहली विज़िट है ?"
+            }
+        }, 
+        {
+            "type": "note", 
+            "param": null, 
+            "condition": "calculates.daysOld() > 2 * 30", 
+            "label": {
+                "default": "More than 2 months old", 
+                "hindi": "क्या उमर २ महीने से उपर है ?"
+            }
         }, 
         {
             "name": "convulsions", 
@@ -468,7 +490,7 @@
         }, 
         {
             "type": "goto", 
-            "param": "diarrhoea_section"
+            "param": "bacterial_infection_section_end"
         }, 
         {
             "type": "label", 
@@ -499,7 +521,7 @@
                     "name": "give_first_dose_of_cotrimoxazole", 
                     "required": true, 
                     "type": "acknowledge", 
-                    "comments": "there are some charts for this and for consoling the mother, not sure if they should be used here.", 
+                    "comments": "TODO: Include P.3 cotrimoxazole dosage chart information", 
                     "label": {
                         "default": "Give first dose of cotrimoxazole if able to take orally (½ Pediatric tablet for an infant up to 1 month and 1 tablet for an infant 1-2 months)", 
                         "hindi": "अगर मूह से ले सकता है तो कोटरिमोक्षज़ोल की पहली खुराक (एक महीने की उम्र तक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बचे वाली १ गोली) दे.", 
@@ -544,7 +566,7 @@
         }, 
         {
             "type": "goto", 
-            "param": "diarrhoea_section"
+            "param": "bacterial_infection_section_end"
         }, 
         {
             "required": true, 
@@ -569,7 +591,7 @@
                     "name": "give_oral_cotrimoxazole_5_days", 
                     "required": true, 
                     "type": "acknowledge", 
-                    "comments": "there are some charts for this and for consoling the mother, not sure if they should be used here.", 
+                    "comments": "TODO: Include P.3 cotrimoxazole dosage chart information", 
                     "label": {
                         "default": "Give oral cotrimoxazole for 5 days. (½ Pediatric tablet twice daily for an infant upto 1 month and 1 tablet for an infant 1-2 months)", 
                         "hindi": "कोटरिमोक्षज़ोल की खुराक (१ महीने की ऊम्र तक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बाकछे की १ गोली) ५ दिन तक दिन मैं दो बार दें.", 
@@ -577,14 +599,15 @@
                     }
                 }, 
                 {
+                    "param": null, 
                     "name": "teach_mother_to_apply_gv_paint", 
                     "required": true, 
                     "type": "acknowledge", 
-                    "param": null, 
+                    "comments": "TODO: Use P.3 oral drug instructions?", 
                     "label": {
                         "default": "Teach mother to apply 0.5% Gentian Violet paint twice daily.", 
-                        "en_us": "Teach mother to apply 0.5% Gentian Violet paint twice daily.", 
-                        "hindi": "मा को संगयाए. ०.५% जनशन वायलाट ( जी वी) दावा दिन मैं दो बार लगायें."
+                        "hindi": "मा को संगयाए. ०.५% जनशन वायलाट ( जी वी) दावा दिन मैं दो बार लगायें.", 
+                        "en_us": "Teach mother to apply 0.5% Gentian Violet paint twice daily."
                     }
                 }, 
                 {
@@ -600,6 +623,10 @@
                 }
             ], 
             "type": "screen"
+        }, 
+        {
+            "type": "label", 
+            "param": "bacterial_infection_section_end"
         }, 
         {
             "required": true, 
@@ -621,13 +648,8 @@
         {
             "required": true, 
             "type": "goto", 
-            "param": "has_diarrhoea", 
-            "condition": "selected(data('has_diarrhoea'), 'yes')"
-        }, 
-        {
-            "required": true, 
-            "type": "goto", 
-            "param": "feeding_problem_check"
+            "param": "diarrhoea_section_end", 
+            "condition": "selected(data('has_diarrhoea'), 'no')"
         }, 
         {
             "required": true, 
@@ -646,17 +668,11 @@
             }
         }, 
         {
-            "required": true, 
-            "type": "goto", 
-            "param": "severe_dysentery", 
-            "condition": "selected(data('blood_in_stool'), 'yes')"
-        }, 
-        {
             "prompts": [
                 {
                     "type": "note", 
                     "param": null, 
-                    "comments": "Maybe have select multiple symptoms list instead?", 
+                    "comments": "TODO: Maybe have select multiple symptoms list instead?", 
                     "label": {
                         "default": "Look at the young infant’s general condition. Is the infant:", 
                         "en_us": "Look at the young infant’s general condition. Is the infant:", 
@@ -713,18 +729,10 @@
             }
         }, 
         {
-            "param": "dehydration", 
-            "comments": "severe dehydration", 
             "required": true, 
             "type": "goto", 
-            "condition": "selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') >= 2"
-        }, 
-        {
             "param": "dehydration", 
-            "comments": "some dehydration", 
-            "required": true, 
-            "type": "goto", 
-            "condition": "selected(data('restless'), 'yes') + (selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow')) + selected(data('sunken_eyes'), 'yes') >= 2"
+            "condition": "calculates.severeDehydration() || calculates.someDehydration()"
         }, 
         {
             "required": true, 
@@ -743,7 +751,7 @@
                     "hint": "Two of the following signs:\n<ul>\n<li>Lethargic or unconscious</li>\n<li>Sunken eyes</li>\n<li>Skin pinch goes back very slowly</li></ul>", 
                     "required": true, 
                     "type": "note", 
-                    "condition": "selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') >= 2", 
+                    "condition": "calculates.severeDehydration()", 
                     "label": {
                         "default": "CLASSIFICATION: <strong>SEVERE DEHYDRATION</strong>", 
                         "hindi": "गंभीर निर्जलीकरण", 
@@ -751,17 +759,16 @@
                     }
                 }, 
                 {
+                    "param": null, 
                     "hint": "Two of the following signs:\n<ul>\n<li>Restless, irritable.</li> \n<li>Sunken eyes.</li>\n<li>Skin pinch goes back slowly.</li></ul>", 
                     "required": true, 
-                    "comments": "simplify this formula w/ a calculate", 
+                    "type": "note", 
+                    "condition": "not(calculates.severeDehydration()) && calculates.someDehydration()", 
                     "label": {
                         "default": "CLASSIFICATION: SOME DEHYDRATION", 
                         "hindi": "कुछ निर्जलीकरण", 
                         "en_us": "CLASSIFICATION: SOME DEHYDRATION"
-                    }, 
-                    "param": null, 
-                    "type": "note", 
-                    "condition": "!(selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') >= 2) && selected(data('restless'), 'yes') + (selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow')) + selected(data('sunken_eyes'), 'yes') >= 2"
+                    }
                 }, 
                 {
                     "name": "give_oral_cotrimoxazole_if_able", 
@@ -813,7 +820,7 @@
         {
             "required": true, 
             "type": "goto", 
-            "param": "feeding_problem_check"
+            "param": "dehydration_end"
         }, 
         {
             "required": true, 
@@ -821,31 +828,36 @@
             "param": "no_dehydration"
         }, 
         {
-            "hint": "Not enough signs to classify as    \n  some or severe dehydration.", 
-            "required": true, 
-            "type": "note", 
-            "param": null, 
-            "label": {
-                "default": "CLASSIFICATION: NO DEHYDRATION", 
-                "hindi": "निर्जलीकर्ण नही", 
-                "en_us": "CLASSIFICATION: NO DEHYDRATION"
-            }
+            "prompts": [
+                {
+                    "hint": "Not enough signs to classify as    \n  some or severe dehydration.", 
+                    "required": true, 
+                    "type": "note", 
+                    "param": null, 
+                    "label": {
+                        "default": "CLASSIFICATION: NO DEHYDRATION", 
+                        "hindi": "निर्जलीकर्ण नही", 
+                        "en_us": "CLASSIFICATION: NO DEHYDRATION"
+                    }
+                }, 
+                {
+                    "name": "dehydration_treatment", 
+                    "required": true, 
+                    "type": "acknowledge", 
+                    "param": null, 
+                    "label": {
+                        "default": "<ol><li>Give fluids to treat diarrhea at home (Plan A). </li>\n<li>Advise home care. </li>\n<li>Follow up in 2 days if not improving.</li></ol>", 
+                        "en_us": "<ol><li>Give fluids to treat diarrhea at home (Plan A). </li>\n<li>Advise home care. </li>\n<li>Follow up in 2 days if not improving.</li></ol>", 
+                        "hindi": "घर पर दस्त के ऊपचार के लिए शिशु की तरल पधार्थ दें. (प्लान ए: घर पर देख भाल की सलाह दें, अगर सुधार न हो दो दिन बाद पुन देखें."
+                    }
+                }
+            ], 
+            "type": "screen"
         }, 
         {
-            "name": "dehydration_treatment", 
             "required": true, 
-            "type": "acknowledge", 
-            "param": null, 
-            "label": {
-                "default": "<ol><li>Give fluids to treat diarrhea at home (Plan A). </li>\n<li>Advise home care. </li>\n<li>Follow up in 2 days if not improving.</li></ol>", 
-                "en_us": "<ol><li>Give fluids to treat diarrhea at home (Plan A). </li>\n<li>Advise home care. </li>\n<li>Follow up in 2 days if not improving.</li></ol>", 
-                "hindi": "घर पर दस्त के ऊपचार के लिए शिशु की तरल पधार्थ दें. (प्लान ए: घर पर देख भाल की सलाह दें, अगर सुधार न हो दो दिन बाद पुन देखें."
-            }
-        }, 
-        {
-            "required": true, 
-            "type": "goto", 
-            "param": "feeding_problem_check"
+            "type": "label", 
+            "param": "dehydration_end"
         }, 
         {
             "required": true, 
@@ -869,7 +881,7 @@
                     "name": "give_oral_cotrimoxazole", 
                     "param": null, 
                     "type": "acknowledge", 
-                    "comments": "should this have the dosage specifics mentioned above", 
+                    "comments": "TODO: should this have the dosage specifics mentioned above", 
                     "label": {
                         "default": "Give first dose of oral cotrimoxazole if able to take orally", 
                         "hindi": "अगर मूह से ले सकता है तो कोटरिमोक्षज़ोल की पहली खुराक (एक महीने की उम्र \nतक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बचे वाली\n १ गोली) दे.", 
@@ -909,12 +921,12 @@
                     }
                 }
             ], 
-            "type": "screen"
+            "type": "screen", 
+            "condition": "selected(data('blood_in_stool'), 'yes')"
         }, 
         {
-            "required": true, 
-            "type": "goto", 
-            "param": "feeding_problem_check"
+            "type": "label", 
+            "param": "diarrhoea_section_end"
         }, 
         {
             "required": true, 
@@ -926,42 +938,66 @@
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
-            "label": "ASK: Is there any difficulty feeding?"
+            "label": {
+                "default": "ASK: Is there any difficulty feeding?", 
+                "hindi": "पूछें: क्या शिशु को दूध पीने मैं कोई कठिनाई है?"
+            }
         }, 
         {
             "name": "is_infant_breastfed", 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
-            "label": "ASK: Is the infant breastfed?"
+            "label": {
+                "default": "ASK: Is the infant breastfed?", 
+                "hindi": "पूछें: क्या शिशु को स्तनपान कराया जाता है?"
+            }
         }, 
         {
             "name": "breastfeedings_per_day", 
             "param": null, 
             "type": "integer", 
             "condition": "selected(data('is_infant_breastfed'), 'yes')", 
-            "label": "ASK: How many times is the infant breastfed in 24 hours?"
+            "label": {
+                "default": "ASK: How many times is the infant breastfed in 24 hours?", 
+                "hindi": "यदि हन तो २४ घंटो मैं कितनी बार?"
+            }
         }, 
         {
-            "name": "other_foods", 
-            "required": true, 
-            "type": "select_one", 
-            "param": "yes_no", 
-            "label": "ASK: Does the infant usually receive any foods or drinks other than breastmilk?"
-        }, 
-        {
-            "name": "other_foods_frequency", 
-            "param": null, 
-            "type": "integer", 
-            "comments": "metric?", 
-            "label": "ASK: How often does the infant receive other foods or drinks?"
+            "prompts": [
+                {
+                    "name": "other_foods", 
+                    "required": true, 
+                    "type": "select_one", 
+                    "param": "yes_no", 
+                    "label": {
+                        "default": "ASK: Does the infant usually receive any foods or drinks other than breastmilk?", 
+                        "hindi": "पूछें: क्या शिशु को और कुच्छ दिया जाता है?"
+                    }
+                }, 
+                {
+                    "param": null, 
+                    "name": "other_foods_frequency", 
+                    "comments": "metric?", 
+                    "type": "integer", 
+                    "condition": "selected(data('other_foods'), 'yes')", 
+                    "label": {
+                        "default": "ASK: How often does the infant receive other foods or drinks?", 
+                        "hindi": "यदि हन तो कितनी बार?"
+                    }
+                }
+            ], 
+            "type": "screen"
         }, 
         {
             "name": "use_to_feed", 
             "param": "food", 
             "type": "select_multiple", 
             "comments": "I'm going with type of food for now because we ask about breastfeeding above", 
-            "label": "ASK: What do you use to feed the infant?"
+            "label": {
+                "default": "ASK: What do you use to feed the infant?", 
+                "hindi": "पूछें: शिशु को पिलाने के लिए क्या प्रयोग करते हैं?"
+            }
         }, 
         {
             "param": "yes_no", 
@@ -969,14 +1005,20 @@
             "required": true, 
             "type": "select_one", 
             "comments": "TODO: Infer yes?", 
-            "label": "Is there any indication for urgent referral?"
+            "label": {
+                "default": "Is there any indication for urgent referral?", 
+                "hindi": "अगर तुरंत रेफरल की ज़रूरत न हो तो तभी स्तनपान का आकलन करें."
+            }
         }, 
         {
             "name": "breastfed_recently", 
             "param": "yes_no", 
             "type": "select_one", 
             "comments": "Added back from original IMCNI chart based on correspondence with Amy/Manoj", 
-            "label": "ASK: Has the infant breastfed in the previous hour?"
+            "label": {
+                "default": "ASK: Has the infant breastfed in the previous hour?", 
+                "hindi": "पूछें: क्या शिशु को पिछले घंटे मैं स्तनपान मिला है?"
+            }
         }, 
         {
             "type": "goto", 
@@ -994,22 +1036,35 @@
             "required": true, 
             "type": "acknowledge", 
             "comments": "Add timer widget?", 
-            "label": "Ask the mother to put her infant to the breast. Observe the breastfeed for 4 minutes."
+            "label": {
+                "default": "Ask the mother to put her infant to the breast. Observe the breastfeed for 4 minutes.", 
+                "hindi": "मा से कहें की शिशु को स्तन से लगाए. चार मिनिट तक स्तनपान कराते देखें?"
+            }
         }, 
         {
-            "type": "select_one", 
-            "name": "able_to_attach", 
-            "param": "yes_no", 
-            "label": "Is the infant able to attach?"
-        }, 
-        {
-            "name": "attachment_quality_signs", 
-            "hint": "(All of these signs should be present if the \nattachment is good)", 
-            "comments": "TODO: Reword? Ask \"Is infant able to attach\" then assess quality automatically from signs", 
-            "label": "Look for the following signs to assess attachment:", 
-            "param": "attachment_quality_sign", 
-            "type": "select_multiple", 
-            "condition": "selected(data('able_to_attach'), 'yes')"
+            "prompts": [
+                {
+                    "type": "select_one", 
+                    "name": "able_to_attach", 
+                    "param": "yes_no", 
+                    "label": {
+                        "default": "Is the infant able to attach?", 
+                        "hindi": "क्या शिशु का स्तन से लगाव अछा है?"
+                    }
+                }, 
+                {
+                    "name": "attachment_quality_signs", 
+                    "hint": "(All of these signs should be present if the \nattachment is good)", 
+                    "param": "attachment_quality_sign", 
+                    "type": "select_multiple", 
+                    "condition": "selected(data('able_to_attach'), 'yes')", 
+                    "label": {
+                        "default": "Look for the following signs to assess attachment:", 
+                        "hindi": "शिशु का स्तन से लगाव जाचने के लिए देखें?"
+                    }
+                }
+            ], 
+            "type": "screen"
         }, 
         {
             "name": "sucking_effectiveness", 
@@ -1017,7 +1072,10 @@
             "required": true, 
             "type": "select_one", 
             "param": "sucking_effectiveness", 
-            "label": "Is the infant suckling effectively (that is,  slow deep sucks, sometimes pausing)?"
+            "label": {
+                "default": "Is the infant suckling effectively (that is,  slow deep sucks, sometimes pausing)?", 
+                "hindi": "क्या शिशु प्रभावी डांग से स्तन चूस रहा है (जैसे, धीरे-धीरे गहरा चूसना और बीच-बीच मैं रूकना?)."
+            }
         }, 
         {
             "type": "label", 
@@ -1029,14 +1087,20 @@
             "required": true, 
             "type": "select_one", 
             "comments": "TODO: Add mouth wiping directions?", 
-            "label": "Look for ulcers or white patches in the mouth (thrush)."
+            "label": {
+                "default": "Look for ulcers or white patches in the mouth (thrush).", 
+                "hindi": "शिशु के मूँह मई छाला या सफेद दागो को देखें?"
+            }
         }, 
         {
             "name": "breastfeeding_pain", 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
-            "label": "ASK: Does the mother have pain while breastfeeding?"
+            "label": {
+                "default": "ASK: Does the mother have pain while breastfeeding?", 
+                "hindi": "क्या स्तनपान कराते समय मा को दर्द होता है?"
+            }
         }, 
         {
             "param": "breast_problems", 
@@ -1044,11 +1108,14 @@
             "comments": "Modified to include flat/inverted/cracked nipple based on correspondence with Manoj", 
             "type": "select_multiple", 
             "condition": "selected(data('breastfeeding_pain'), 'yes')", 
-            "label": "Look and feel for breast problems:"
+            "label": {
+                "default": "Look and feel for breast problems:", 
+                "hindi": "अगर हन तो देखें व महसूस करें दिकाट के लिए?"
+            }
         }, 
         {
             "param": "cannot_feed_possible_serious_bacterial_infection", 
-            "comments": "How do I determine able_to_feed? Is it different from able to attach?", 
+            "comments": "TODO: How do I determine able_to_feed? Is it different from able to attach?", 
             "required": true, 
             "type": "goto", 
             "condition": "selected(data('able_to_feed'),'no') || selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'none')"
@@ -1066,20 +1133,29 @@
                     "required": true, 
                     "type": "note", 
                     "param": null, 
-                    "label": "CLASSIFICATION: NO FEEDING PROBLEM"
+                    "label": {
+                        "default": "CLASSIFICATION: NO FEEDING PROBLEM", 
+                        "hindi": "दूध पिलाने सम्बन्धी समस्या नही?"
+                    }
                 }, 
                 {
                     "type": "acknowledge", 
                     "name": "advise_home_care", 
                     "param": null, 
-                    "label": "Advise to give home care."
+                    "label": {
+                        "default": "Advise to give home care.", 
+                        "hindi": "घर पर देखभाल करने की सलाह दे ?"
+                    }
                 }, 
                 {
                     "name": "parse_mother_for_feeding", 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
-                    "label": "Praise the mother for feeding the infant well."
+                    "label": {
+                        "default": "Praise the mother for feeding the infant well.", 
+                        "hindi": "अच्छी तरह से स्तनपान करने के लिए मा की प्रशंसा करे?"
+                    }
                 }
             ], 
             "type": "screen"
@@ -1101,13 +1177,19 @@
                     "required": true, 
                     "type": "note", 
                     "param": null, 
-                    "label": "CLASSIFICATION: FEEDING PROBLEM"
+                    "label": {
+                        "default": "CLASSIFICATION: FEEDING PROBLEM", 
+                        "hindi": "दूध पिलाने संबधी समस्या"
+                    }
                 }, 
                 {
                     "name": "teach_correct_positioning", 
                     "required": true, 
                     "comments": "TODO: Link to information section on P.4", 
-                    "label": "Infant is not well attached or not suckling effectively. Teach correct positioning and attachment.", 
+                    "label": {
+                        "default": "Infant is not well attached or not suckling effectively. Teach correct positioning and attachment.", 
+                        "hindi": "अगर शिशु का लगाव या चूसना ठीक न हो तो, सही स्तिति मैं लेना और स्तन से लगाना सिखाए."
+                    }, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "(countSelected(data('attachment_quality_signs')) < 4) || not(selected(data('sucking_effectiveness'), 'effective'))"
@@ -1118,14 +1200,19 @@
                     "required": true, 
                     "type": "acknowledge", 
                     "condition": "data('breastfeedings_per_day') < 8", 
-                    "label": "If breastfeeding less than 8 times  in 24 hours, advise to increase frequency of feeding."
+                    "label": {
+                        "default": "Breastfeeding less than 8 times in 24 hours. Advise to increase frequency of feeding.", 
+                        "hindi": "अगर २४ घंटे मे ८ बार से कम स्तनपान है तो मा को ज्यागा बार स्तनपान करने की सलाह दे."
+                    }
                 }, 
                 {
-                    "condition": "selected(data('other_foods'), 'yes')", 
-                    "param": null, 
                     "type": "acknowledge", 
-                    "comments": "TODO: For conditional questions verify that phrasing can be changed to leave out the “if”.", 
-                    "label": "Infant is receiving other foods or drinks. Counsel mother about breastfeeding more, reducing other foods or drinks, and using a cup and spoon."
+                    "param": null, 
+                    "condition": "selected(data('other_foods'), 'yes')", 
+                    "label": {
+                        "default": "Infant is receiving other foods or drinks. Counsel mother about breastfeeding more, reducing other foods or drinks, and using a cup and spoon.", 
+                        "hindi": "अगर शिशु दूसरा पेया पदार्थ लेता है? तो मा को समझाए की स्तनपान ज़्यादा कराए द धीरे-धीरे दूसरे पेया-पदार्थ को कम करें व कटोरी-चम्मच का प्रयोग करें."
+                    }
                 }, 
                 {
                     "param": null, 
@@ -1133,14 +1220,20 @@
                     "required": true, 
                     "type": "acknowledge", 
                     "comments": "TODO: Link to information", 
-                    "label": "If not breastfeeding at all, \nadvise mother about giving \nlocally appropriate animal milk \nand teach the mother to feed \nwith a cup and spoon."
+                    "label": {
+                        "default": "If not breastfeeding at all, advise mother about giving locally appropriate animal milk and teach the mother to feed with a cup and spoon.", 
+                        "hindi": "अगर शिशु दूसरा पेया पदार्थ लेता है? तो मा को समझाए की स्तनपान ज़्यादा कराए द धीरे-धीरे दूसरे पेया-पदार्थ को कम करें व कटोरी-चम्मच का प्रयोग करें."
+                    }
                 }, 
                 {
                     "param": null, 
                     "required": true, 
                     "type": "acknowledge", 
                     "condition": "selected(data('ulcers_thrush'), 'present')", 
-                    "label": "If thrush, teach the mother to \napply 0.25% Gentian Violet \npaint twice daily"
+                    "label": {
+                        "default": "If thrush, teach the mother to \napply 0.25% Gentian Violet \npaint twice daily", 
+                        "hindi": "अगर मूँह में छाले या सफेद दाग ज़ीवी द्वा (०.२५%) २ बार लगाय."
+                    }
                 }, 
                 {
                     "param": null, 
@@ -1148,21 +1241,30 @@
                     "required": true, 
                     "type": "acknowledge", 
                     "comments": "TODO: Link to information section on P.4 Will need to ref breast_problems", 
-                    "label": "If breast or nipple problem, \nteach the mother to treat breast \nor nipple problems."
+                    "label": {
+                        "default": "If breast or nipple problem, \nteach the mother to treat breast \nor nipple problems.", 
+                        "hindi": "अगर चूचक व स्तन की समस्या है तो उसका इलाज समझाए."
+                    }
                 }, 
                 {
                     "hint": "(Breastfeed infant exclusively, keep infant warm, apply nothing to cord, ask mother to wash hands and explain danger signs in the infant)", 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
-                    "label": "Advise mother to give home \ncare"
+                    "label": {
+                        "default": "Advise mother to give home \ncare", 
+                        "hindi": "घर पर देखभाल की विधि समझाए."
+                    }
                 }, 
                 {
                     "name": "follow_up_2_days", 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
-                    "label": "Follow-up in 2 days."
+                    "label": {
+                        "default": "Follow-up in 2 days.", 
+                        "hindi": "दो दिन बाद पुन: देखें."
+                    }
                 }
             ], 
             "type": "screen"
@@ -1181,7 +1283,10 @@
                     "hint": "SIGNS:", 
                     "type": "note", 
                     "param": null, 
-                    "label": "CLASSIFICATION:\n<p>NOT ABLE TO FEED - \nPOSSIBLE SERIOUS BACTERIAL INFECTION</p>"
+                    "label": {
+                        "default": "CLASSIFICATION:\n<p>NOT ABLE TO FEED - \nPOSSIBLE SERIOUS BACTERIAL INFECTION</p>", 
+                        "hindi": "बिल्कुल स्तनपान नही कर पाना संभावित गंभीर जीवाणु संक्रमण."
+                    }
                 }, 
                 {
                     "type": "note", 
@@ -1206,14 +1311,20 @@
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
-                    "label": "Warm the young infant by Skin to Skin contact if feels cold to touch."
+                    "label": {
+                        "default": "Warm the young infant by Skin to Skin contact if feels cold to touch.", 
+                        "hindi": "यदि शिशु ठंडा हो तो त्वचा से त्वचा लगा कर गर्म रखें."
+                    }
                 }, 
                 {
                     "name": "refer_urgently_to_hospital", 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
-                    "label": "Refer URGENTLY to hospital"
+                    "label": {
+                        "default": "Refer URGENTLY to hospital", 
+                        "hindi": "तुरंत अस्पताल रेफर करें."
+                    }
                 }
             ], 
             "type": "screen"
@@ -1234,7 +1345,10 @@
             "choiceFilter": "context.age_months || 0 < data('age_months')", 
             "type": "select_multiple", 
             "comments": "PROBLEMS:\nWe want a way to filter the choices by age.\nIt would be nice to have a way to get the compliment of a selected set.", 
-            "label": "Which vaccinations has the child NOT received?"
+            "label": {
+                "default": "Which vaccinations has the child NOT received?", 
+                "hindi": "शिशु को कौनसा टीका नही लगा है?"
+            }
         }, 
         {
             "param": "yes_no", 
@@ -1242,7 +1356,10 @@
             "required": true, 
             "type": "select_one", 
             "comments": "Added based on correspondence with Amy/Manoj", 
-            "label": "Does the child have any other problems?"
+            "label": {
+                "default": "Does the child have any other problems?", 
+                "hindi": "शिशु को कोई और दिकाट है?"
+            }
         }, 
         {
             "param": null, 
@@ -1250,13 +1367,32 @@
             "required": true, 
             "type": "acknowledge", 
             "condition": "selected(data('other_problems'), 'yes')", 
-            "label": "Refer the child to a doctor for detailed assessment."
+            "label": {
+                "default": "Refer the child to a doctor for detailed assessment.", 
+                "hindi": "शिशु को डॉक्टर के पास रेफर करें."
+            }
         }
     ], 
     "calculates": [
         {
             "calculation": "((new Date()).getTime() - new Date(data('birthday')).getTime()) / (1000 * 60 * 60 * 24)", 
             "name": "daysOld"
+        }, 
+        {
+            "calculation": "selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') >= 2", 
+            "name": "severeDehydration"
+        }, 
+        {
+            "calculation": "selected(data('restless'), 'yes') + (selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow')) + selected(data('sunken_eyes'), 'yes') >= 2", 
+            "name": "someDehydration"
+        }, 
+        {
+            "calculation": "selected(data('able_to_drink'), 'no') || selected(data('vomit_everything'), 'yes') ||  selected(data('convulsions'), 'yes') || selected(data('lethargic'), 'yes')", 
+            "name": "danger_signs_present"
+        }, 
+        {
+            "calculation": "/*data('weight') data('birthday')*/null", 
+            "name": "malnutrition_grade"
         }
     ], 
     "choices": {
@@ -1276,6 +1412,16 @@
             {
                 "name": "visible_areola", 
                 "label": "More areola visible above than below the \nmouth"
+            }
+        ], 
+        "katori_teaspoon": [
+            {
+                "name": "katori", 
+                "label": "Katori"
+            }, 
+            {
+                "name": "teaspoon", 
+                "label": "Teaspoon"
             }
         ], 
         "needed_vaccinations": [
@@ -1312,6 +1458,14 @@
         ], 
         "food": [
             {
+                "name": "milk", 
+                "label": "Milk"
+            }, 
+            {
+                "name": "juice", 
+                "label": "Juice"
+            }, 
+            {
                 "name": "water", 
                 "label": "Water"
             }, 
@@ -1322,6 +1476,44 @@
             {
                 "name": "cereal", 
                 "label": "Cereal"
+            }, 
+            {
+                "name": "milk_based_wheat/rice", 
+                "label": "Cooked wheat/rice based with undiluted milk and sugar"
+            }, 
+            {
+                "name": "water_based_wheat/rice", 
+                "label": "Cooked wheat/rice based with dal/lentil water"
+            }, 
+            {
+                "name": "khichri", 
+                "label": "Khichri (cooked rice+dal/lentil in thinned form)"
+            }, 
+            {
+                "name": "fruit", 
+                "label": "Mashed fruit"
+            }, 
+            {
+                "name": "vegetables", 
+                "label": "Boiled or cooked vegetables"
+            }, 
+            {
+                "name": "mixed_food", 
+                "label": "Normal mixed food as adults"
+            }
+        ], 
+        "no_some_severe": [
+            {
+                "name": "none", 
+                "label": "none"
+            }, 
+            {
+                "name": "some", 
+                "label": "some"
+            }, 
+            {
+                "name": "severe", 
+                "label": "severe"
             }
         ], 
         "skin_elasticity": [
