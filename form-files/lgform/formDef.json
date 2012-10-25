@@ -53,7 +53,7 @@
             }
         }
     ], 
-    "datafields": {
+    "model": {
         "age": {
             "type": "integer"
         }, 

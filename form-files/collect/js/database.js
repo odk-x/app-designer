@@ -114,7 +114,7 @@ selectAllDbTableStmt:function(instanceId) {
 
     var tableId = opendatakit.getCurrentTableId();
     var dbTableName = mdl.dbTableName;
-    var datafields = mdl.datafields;
+    var model = mdl.model;
     
 	// TODO: select * ... for cross-table referencing...
     var stmt = "select id";
@@ -122,7 +122,7 @@ selectAllDbTableStmt:function(instanceId) {
 		var f = this.dbTableMetadata[j];
 		stmt += ", " + f.key;
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
         stmt += ", " + f;
     }
     stmt += " from " + dbTableName + " where id=? group by id having timestamp = max(timestamp)"; 
@@ -146,7 +146,7 @@ insertDbTableStmt:function(name, type, value, isInstanceMetadata ) {
 
     var tableId = opendatakit.getCurrentTableId();
     var dbTableName = mdl.dbTableName;
-    var datafields = mdl.datafields;
+    var model = mdl.model;
     
 	var bindings = [];
 	
@@ -155,7 +155,7 @@ insertDbTableStmt:function(name, type, value, isInstanceMetadata ) {
 		var f = this.dbTableMetadata[j];
 		stmt += ", " + f.key;
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
         stmt += ", " + f;
     }
     stmt += ") select id";
@@ -182,7 +182,7 @@ insertDbTableStmt:function(name, type, value, isInstanceMetadata ) {
 			stmt += ", " + f.key;
 		}
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
         if ( f == name && !isInstanceMetadata ) {
             if (value == null) {
                 stmt += ", null";
@@ -212,7 +212,7 @@ getKtvmElement:function(ktvmList, name) {
 // ktvmList : [ { key: blah, type: "string", value: "foo name", isInstanceMetadata: false } ...]
 // able to set instance and instanceMetadata values
 //
-// Requires: mdl.dbTableName, mdl.datafields, opendatakit.getCurrentInstanceId()
+// Requires: mdl.dbTableName, mdl.model, opendatakit.getCurrentInstanceId()
 //
 insertKtvmListDbTableStmt:function(ktvmList) {
     var t = new Date();
@@ -220,7 +220,7 @@ insertKtvmListDbTableStmt:function(ktvmList) {
     var isoNow = t.toISOString();
 
     var dbTableName = mdl.dbTableName;
-    var datafields = mdl.datafields;
+    var model = mdl.model;
     
 	var bindings = [];
 	
@@ -229,7 +229,7 @@ insertKtvmListDbTableStmt:function(ktvmList) {
 		var f = this.dbTableMetadata[j];
 		stmt += ", " + f.key;
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
         stmt += ", " + f;
     }
     stmt += ") select id";
@@ -257,7 +257,7 @@ insertKtvmListDbTableStmt:function(ktvmList) {
 			stmt += ", " + f.key;
 		}
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
 		var ktvmElement = this.getKtvmElement(ktvmList, f);
         if ( ktvmElement != null && !ktvmElement.isInstanceMetadata ) {
             if (value == null) {
@@ -284,7 +284,7 @@ markCurrentStateAsSavedDbTableStmt:function(status) {
 
     var tableId = opendatakit.getCurrentTableId();
     var dbTableName = mdl.dbTableName;
-    var datafields = mdl.datafields;
+    var model = mdl.model;
     
 	var bindings = [];
 	
@@ -293,7 +293,7 @@ markCurrentStateAsSavedDbTableStmt:function(status) {
 		var f = this.dbTableMetadata[j];
 		stmt += ", " + f.key;
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
         stmt += ", " + f;
     }
     stmt += ") select id";
@@ -313,7 +313,7 @@ markCurrentStateAsSavedDbTableStmt:function(status) {
 			stmt += ", " + f.key;
 		}
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
 		stmt += ", " + f;
     }
     stmt += " from " + dbTableName + " where id=? group by id having timestamp = max(timestamp)"; 
@@ -325,7 +325,6 @@ markCurrentStateAsSavedDbTableStmt:function(status) {
 },
 selectDbTableCountStmt:function(instanceId) {
     var dbTableName = mdl.dbTableName;
-    var datafields = mdl.datafields;
     
     var stmt = "select count(*) as rowcount from " + dbTableName + " where id=?";
     return {
@@ -341,7 +340,7 @@ insertNewDbTableStmt:function(instanceId,instanceName,locale,instanceMetadataKey
 
     var tableId = opendatakit.getCurrentTableId();
     var dbTableName = mdl.dbTableName;
-    var datafields = mdl.datafields;
+    var model = mdl.model;
     
 	var bindings = [];
 	
@@ -350,7 +349,7 @@ insertNewDbTableStmt:function(instanceId,instanceName,locale,instanceMetadataKey
 		var f = this.dbTableMetadata[j];
 		stmt += ", " + f.key;
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
         stmt += ", " + f;
     }
     stmt += ") values (?";
@@ -379,7 +378,7 @@ insertNewDbTableStmt:function(instanceId,instanceName,locale,instanceMetadataKey
 			stmt += ", " + f.defaultValue
 		}
 	}
-    for ( var f in datafields ) {
+    for ( var f in model ) {
         stmt += ", null";
     }
     stmt += ")"; 
@@ -390,7 +389,6 @@ insertNewDbTableStmt:function(instanceId,instanceName,locale,instanceMetadataKey
 },
 deletePriorChangesDbTableStmt:function() {
     var dbTableName = mdl.dbTableName;
-    var datafields = mdl.datafields;
     
     var stmt = "delete from " + dbTableName + " where id=? and timestamp not in (select max(timestamp) from " + dbTableName + " where id=?);";
     return {
@@ -416,7 +414,7 @@ getAllFormInstancesStmt:function() {
     var dbTableName = mdl.dbTableName;
     return {
             stmt : 'select instanceName, timestamp, saved, locale, xmlPublishTimestamp, xmlPublishStatus, id from ' +
-					dbTableName + ' where instanceName is not null;',
+					dbTableName + ' where instanceName is not null group by id having timestamp = max(timestamp);',
             bind : []
             };
 },
@@ -623,7 +621,7 @@ getAllData:function(ctxt, instanceId) {
 				alert("not exactly one record in getAllData!");
 			} else {
                 var row = result.rows.item(0);
-				var datafields = mdl.datafields;
+				var model = mdl.model;
 
 				for (var i = 0 ; i < that.dbTableMetadata.length ; ++i) {
 					var f = that.dbTableMetadata[i];
@@ -662,7 +660,7 @@ getAllData:function(ctxt, instanceId) {
 					e[term] = elem;
 				}
 
-				for ( var f in mdl.datafields ) {
+				for ( var f in mdl.model ) {
 					var dbKey = f;
 					var dbValue = row[dbKey];
 					var dbType = f.type;
@@ -928,7 +926,7 @@ initializeTables:function(ctxt, formDef, tableId, protoTableMetadata, formPath) 
 							var rec = result.rows.item(0);
 							var dbTableName = rec['VALUE'];
 							mdl.dbTableName = dbTableName;
-							mdl.datafields = formDef.datafields;
+							mdl.model = formDef.model;
 							that.coreGetAllTableMetadata(transaction, tableId, tlo);
 						}
 					}
@@ -973,7 +971,7 @@ _insertTableAndColumnProperties:function(transaction, tableId, dbTableName, form
 		}
 	}
 
-    for ( var df in formDef.datafields ) {
+    for ( var df in formDef.model ) {
     
         var collectElementName = df;
         
@@ -981,7 +979,7 @@ _insertTableAndColumnProperties:function(transaction, tableId, dbTableName, form
         
         var collectDataTypeName;
         
-        var defn = $.extend({key: collectElementName},formDef.datafields[df]);
+        var defn = $.extend({key: collectElementName},formDef.model[df]);
 		var type = defn.type;
         if ( type == 'integer' ) {
             collectDataTypeName = 'integer';
@@ -1077,7 +1075,7 @@ fullDefHelper:function(transaction, insertColProps, idx, fullDef, tableId, dbTab
     // done if no row to process...
     if ( row == null ) {
         mdl.dbTableName = dbTableName;
-        mdl.datafields = formDef.datafields;
+        mdl.model = formDef.model;
 		that.coreGetAllTableMetadata(transaction, tableId, tlo);
         return;
     }

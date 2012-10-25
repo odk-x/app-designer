@@ -155,7 +155,7 @@
             }
         }
     ], 
-    "datafields": {
+    "model": {
         "rating": {
             "type": "integer"
         }, 

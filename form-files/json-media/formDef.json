@@ -172,7 +172,7 @@
             "param": "formend"
         }
     ], 
-    "datafields": {
+    "model": {
         "acknowledgeTest": {
             "type": "string"
         },
