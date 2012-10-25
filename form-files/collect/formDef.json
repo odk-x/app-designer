@@ -16,7 +16,7 @@
             "value": ["en_us"]
         },
         {
-            "setting": "formName",
+            "setting": "formTitle",
             "value": {
                 "en_us": "Default form"
             }

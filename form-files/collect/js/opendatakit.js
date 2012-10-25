@@ -152,6 +152,10 @@ return {
             }
         }
         return null;
-    }
+    },
+	
+	getFormLocales:function(formDef) {
+		return this.getSetting(formDef, 'formLocales');
+	}
 };
 });

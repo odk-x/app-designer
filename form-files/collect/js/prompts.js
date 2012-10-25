@@ -86,7 +86,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hint = this.hint;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
-        this.renderContext.formName = database.getTableMetaDataValue('formName');
+        this.renderContext.formTitle = database.getTableMetaDataValue('formTitle');
         this.renderContext.formVersion = database.getTableMetaDataValue('formVersion');
         
         this.renderContext.htmlAttributes = $.extend({}, this.baseHtmlAttributes, this.htmlAttributes);
@@ -219,8 +219,8 @@ promptTypes.opening = promptTypes.base.extend({
             var date = new Date();
             var dateStr = date.toISOString();
             var locale = database.getInstanceMetaDataValue('locale');
-            var formName = opendatakit.localize(database.getTableMetaDataValue('formName'),locale);
-            instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
+            var formTitle = opendatakit.localize(database.getTableMetaDataValue('formTitle'),locale);
+            instanceName = formTitle + "_" + dateStr; // .replace(/\W/g, "_")
             this.renderContext.instanceName = instanceName;
 			database.setInstanceMetaData($.extend({}, ctxt, {success: function() { ctxt.success({enableBackNavigation: false}); }}),
 										 'instanceName', 'string', instanceName);
@@ -327,7 +327,7 @@ promptTypes.instances = promptTypes.base.extend({
 		ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
         database.withDb($.extend({},ctxt,{success:function() {
             $.extend(that.renderContext, {
-                formName: database.getTableMetaDataValue('formName'),
+                formTitle: database.getTableMetaDataValue('formTitle'),
                 headerImg: opendatakit.baseDir + 'img/form_logo.png'
             });
             that.baseActivate($.extend({}, ctxt, {

@@ -810,7 +810,7 @@ cacheAllTableMetaData:function(ctxt) {
         tlo.formId = mdl.qp.formId;
         tlo.formVersion = mdl.qp.formVersion;
         tlo.formLocales = mdl.qp.formLocales;
-        tlo.formName = mdl.qp.formName;
+        tlo.formTitle = mdl.qp.formTitle;
         // update qp
         mdl.qp = tlo;
         ctxt.success();
@@ -892,8 +892,8 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueList) {
 					var dateStr = date.toISOString();
 					var locales = that.getTableMetaDataValue('formLocales');
 					var locale = (locales != null && locales.length > 0) ? locales[0] : "en_us";
-					var formName = opendatakit.localize(that.getTableMetaDataValue('formName'),locale);
-					var instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
+					var formTitle = opendatakit.localize(that.getTableMetaDataValue('formTitle'),locale);
+					var instanceName = formTitle + "_" + dateStr; // .replace(/\W/g, "_")
                     var cs = that.insertNewDbTableStmt(instanceId, instanceName, locale, JSON.stringify(instanceMetadataKeyValueList));
                     transaction.executeSql(cs.stmt, cs.bind);
                 }
@@ -912,7 +912,7 @@ initializeTables:function(ctxt, formDef, tableId, protoTableMetadata, formPath) 
 				tlo.formId = protoTableMetadata.formId;
 				tlo.formVersion = protoTableMetadata.formVersion;
 				tlo.formLocales = protoTableMetadata.formLocales;
-				tlo.formName = protoTableMetadata.formName;
+				tlo.formTitle = protoTableMetadata.formTitle;
 				// update tableId and qp
 				mdl.qp = tlo;
 				opendatakit.setCurrentTableId(tableId);
@@ -924,7 +924,7 @@ initializeTables:function(ctxt, formDef, tableId, protoTableMetadata, formPath) 
 				transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
 					if (result.rows.length == 0 ) {
 						// TODO: use something other than formId for the dbTableName...
-						that._insertTableAndColumnProperties(transaction, tableId, protoTableMetadata.formId.value, protoTableMetadata.formName, formDef, tlo);
+						that._insertTableAndColumnProperties(transaction, tableId, protoTableMetadata.formId.value, protoTableMetadata.formTitle, formDef, tlo);
 					} else {
 						if(result.rows.length != 1) {
 							throw new Error("getMetaData: multiple rows! " + name + " count: " + result.rows.length);
@@ -946,7 +946,7 @@ getDbTableNameStmt:function(tableId) {
         bind : [tableId, 'dbTableName']
     };
 },
-_insertTableAndColumnProperties:function(transaction, tableId, dbTableName, formName, formDef, tlo) {
+_insertTableAndColumnProperties:function(transaction, tableId, dbTableName, formTitle, formDef, tlo) {
     var that = this;
     var fullDef = {
         keyValueStoreActive: [],
@@ -1037,7 +1037,7 @@ _insertTableAndColumnProperties:function(transaction, tableId, dbTableName, form
     
     // construct the kvPairs to insert into kvstore
     fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'dbTableName', _TYPE: 'text', VALUE: dbTableName } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'displayName', _TYPE: 'text', VALUE: 'formName' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'displayName', _TYPE: 'text', VALUE: formTitle } );
     fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'type', _TYPE: 'integer', VALUE: '0' } );
     fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'primeCols', _TYPE: 'text', VALUE: '' } );
     fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'sortCol', _TYPE: 'text', VALUE: '' } );

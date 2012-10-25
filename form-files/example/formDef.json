@@ -17,7 +17,7 @@
             "value": ["en_us"]
         }, 
         {
-            "setting": "formName", 
+            "setting": "formTitle", 
             "value": "Example Form"
         }
     ], 

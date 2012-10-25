@@ -17,7 +17,7 @@
             "value": ["en_us"]
         },
         {
-            "setting": "formName",
+            "setting": "formTitle",
             "value": {
                 "en_us": "JSON Test Form"
                 }

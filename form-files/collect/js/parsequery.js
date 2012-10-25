@@ -112,8 +112,8 @@ return {
         var tableId = opendatakit.getSetting(formDef, 'tableId');
         var formId = opendatakit.getSetting(formDef, 'formId');
         var formVersion = opendatakit.getSetting(formDef, 'formVersion');
-        var formLocales = opendatakit.getSetting(formDef, 'formLocales');
-        var formName = opendatakit.getSetting(formDef, 'formName');
+        var formLocales = opendatakit.getFormLocales(formDef);
+        var formTitle = opendatakit.getSetting(formDef, 'formTitle');
         
 		if ( tableId == null ) {
 			alert("no tableId specified in Form Definition!");
@@ -133,7 +133,7 @@ return {
 		protoTableMetadata.formId = { "type" : "text", "value": formId };
 		protoTableMetadata.formVersion = { "type" : "text", "value": formVersion };
 		protoTableMetadata.formLocales = { "type" : "text", "value": formLocales };
-		protoTableMetadata.formName = { "type" : "text", "value": formName };
+		protoTableMetadata.formTitle = { "type" : "text", "value": formTitle };
 		
 		// TODO: locale of this form instance...
 
@@ -170,7 +170,7 @@ return {
 			mdl.qp.formId = protoTableMetadata.formId;
 			mdl.qp.formVersion = protoTableMetadata.formVersion;
 			mdl.qp.formLocales = protoTableMetadata.formLocales;
-			mdl.qp.formName = protoTableMetadata.formName;
+			mdl.qp.formTitle = protoTableMetadata.formTitle;
 			
 			opendatakit.setCurrentFormPath(formPath);
 			// currentInstanceId == null

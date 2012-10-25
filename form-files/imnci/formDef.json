@@ -182,11 +182,11 @@
             "value": 1
         }, 
         {
-            "setting": "formLocale", 
+            "setting": "formLocales", 
             "value": "en_us"
         }, 
         {
-            "setting": "formName", 
+            "setting": "formTitle", 
             "value": "IMNCI up to 2 months old"
         }
     ], 
