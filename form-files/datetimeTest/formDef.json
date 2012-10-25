@@ -47,10 +47,6 @@
             "value": 1
         }, 
         {
-            "setting": "formLocales", 
-            "value": "en_us"
-        }, 
-        {
             "setting": "formTitle", 
             "value": "Datetime Test"
         }

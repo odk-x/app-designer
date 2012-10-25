@@ -4,18 +4,18 @@
 define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
     return {
   submissionDb:false,
-  dbTableMetadata: [ { key: 'srcPhoneNum', type: 'text', isNullable: true },
-					 { key: 'lastModTime', type: 'text', isNullable: false },
-					 { key: 'syncTag', type: 'text', isNullable: true },
+  dbTableMetadata: [ { key: 'srcPhoneNum', type: 'string', isNullable: true },
+					 { key: 'lastModTime', type: 'string', isNullable: false },
+					 { key: 'syncTag', type: 'string', isNullable: true },
 					 { key: 'syncState', type: 'integer', isNullable: false, defaultValue: 0 },
 					 { key: 'transactioning', type: 'integer', isNullable: false, defaultValue: 1 },
 					 { key: 'timestamp', type: 'integer', isNullable: false },
-					 { key: 'saved', type: 'text', isNullable: true },
-					 { key: 'instanceName', type: 'text', isNullable: false },
-					 { key: 'locale', type: 'text', isNullable: true },
+					 { key: 'saved', type: 'string', isNullable: true },
+					 { key: 'instanceName', type: 'string', isNullable: false },
+					 { key: 'locale', type: 'string', isNullable: true },
 					 { key: 'instanceArguments', type: 'object', isNullable: true },
 					 { key: 'xmlPublishTimestamp', type: 'integer', isNullable: true },
-					 { key: 'xmlPublishStatus', type: 'text', isNullable: true } ],
+					 { key: 'xmlPublishStatus', type: 'string', isNullable: true } ],
   mdl:mdl,
   withDb:function(ctxt, transactionBody) {
     var inContinuation = false;
@@ -209,7 +209,7 @@ getKtvmElement:function(ktvmList, name) {
 	return null;
 },
 // save the given values under that name
-// ktvmList : [ { key: blah, type: "text", value: "foo name", isInstanceMetadata: false } ...]
+// ktvmList : [ { key: blah, type: "string", value: "foo name", isInstanceMetadata: false } ...]
 // able to set instance and instanceMetadata values
 //
 // Requires: mdl.dbTableName, mdl.datafields, opendatakit.getCurrentInstanceId()
@@ -510,11 +510,11 @@ putDataKeyTypeValueMap:function(ctxt, ktvmlist) {
 		});
 },
 asDbColumnDefinition:function(defn) {
-	// { key: 'syncTag', type: 'text', isNullable: true },
+	// { key: 'syncTag', type: 'string', isNullable: true },
 	var prefix = defn.key + " ";
 	var postfix = (defn.isNullable ? " NULL" : " NOT NULL");
 	var type = defn.type;
-	if ( type == 'text' ) {
+	if ( type == 'string' ) {
 		return prefix + "TEXT" + postfix;
 	} else if ( type == 'integer' ) {
 		return prefix + "INTEGER" + postfix;
@@ -555,7 +555,7 @@ convertToMdlFromDbDataType:function(defn, storageValue) {
 		return null;
 	}
 	var type = defn.type;
-	if ( type == 'text' ) {
+	if ( type == 'string' ) {
 		return storageValue;
 	} else if ( type == 'integer' ) {
 		if ( storageValue == "" ) {
@@ -591,7 +591,7 @@ convertToDbFromMdlDataType:function(defn, mdlValue) {
 		return null;
 	}
 	var type = defn.type;
-	if ( type == 'text' ) {
+	if ( type == 'string' ) {
 		return mdlValue;
 	} else if ( type == 'integer' ) {
 		return 0+mdlValue;
@@ -807,6 +807,7 @@ cacheAllTableMetaData:function(ctxt) {
             tlo = {};
         }
         // these values come from the current webpage
+		tlo.formDef = mdl.qp.formDef;
         tlo.formId = mdl.qp.formId;
         tlo.formVersion = mdl.qp.formVersion;
         tlo.formLocales = mdl.qp.formLocales;
@@ -890,8 +891,8 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueList) {
 					// construct a friendly name for this new form...
 					var date = new Date();
 					var dateStr = date.toISOString();
-					var locales = that.getTableMetaDataValue('formLocales');
-					var locale = (locales != null && locales.length > 0) ? locales[0] : "en_us";
+					var locales = opendatakit.getFormLocales(mdl.qp.formDef.value);
+					var locale = opendatakit.getDefaultFormLocale(mdl.qp.formDef.value);
 					var formTitle = opendatakit.localize(that.getTableMetaDataValue('formTitle'),locale);
 					var instanceName = formTitle + "_" + dateStr; // .replace(/\W/g, "_")
                     var cs = that.insertNewDbTableStmt(instanceId, instanceName, locale, JSON.stringify(instanceMetadataKeyValueList));
@@ -909,10 +910,7 @@ initializeTables:function(ctxt, formDef, tableId, protoTableMetadata, formPath) 
     that.withDb($.extend({},ctxt,{success:function() {
 				ctxt.append('getAllTableMetaData.success');
 				// these values come from the current webpage
-				tlo.formId = protoTableMetadata.formId;
-				tlo.formVersion = protoTableMetadata.formVersion;
-				tlo.formLocales = protoTableMetadata.formLocales;
-				tlo.formTitle = protoTableMetadata.formTitle;
+				tlo = $.extend(tlo, protoTableMetadata);
 				// update tableId and qp
 				mdl.qp = tlo;
 				opendatakit.setCurrentTableId(tableId);
@@ -960,7 +958,7 @@ _insertTableAndColumnProperties:function(transaction, tableId, dbTableName, form
 	for ( var j = 0 ; j < this.dbTableMetadata.length ; ++j ) {
 		var f = this.dbTableMetadata[j];
 		createTableCmd = createTableCmd + ',' + f.key + " ";
-		if ( f.type == "text" ) {
+		if ( f.type == "string" ) {
 			createTableCmd = createTableCmd + "TEXT" + (f.isNullable ? " NULL" : " NOT NULL");
 		} else if ( f.type == "integer" ) {
 			createTableCmd = createTableCmd + "INTEGER" + (f.isNullable ? " NULL" : " NOT NULL");
@@ -993,8 +991,8 @@ _insertTableAndColumnProperties:function(transaction, tableId, dbTableName, form
         } else if ( type == 'number' ) {
             collectDataTypeName = 'number';
             createTableCmd += ',' + collectElementName + ' REAL NULL';
-        } else if ( type == 'text' ) {
-            collectDataTypeName = 'text';
+        } else if ( type == 'string' ) {
+            collectDataTypeName = 'string';
             createTableCmd += ',' + collectElementName + ' TEXT NULL';
         } else if ( type == 'image/*' ) {
             collectDataTypeName = 'mimeUri';
@@ -1036,22 +1034,22 @@ _insertTableAndColumnProperties:function(transaction, tableId, dbTableName, form
     createTableCmd += ');';
     
     // construct the kvPairs to insert into kvstore
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'dbTableName', _TYPE: 'text', VALUE: dbTableName } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'displayName', _TYPE: 'text', VALUE: formTitle } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'dbTableName', _TYPE: 'string', VALUE: dbTableName } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'displayName', _TYPE: 'string', VALUE: formTitle } );
     fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'type', _TYPE: 'integer', VALUE: '0' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'primeCols', _TYPE: 'text', VALUE: '' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'sortCol', _TYPE: 'text', VALUE: '' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'readAccessTid', _TYPE: 'text', VALUE: '' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'writeAccessTid', _TYPE: 'text', VALUE: '' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'syncTag', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'primeCols', _TYPE: 'string', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'sortCol', _TYPE: 'string', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'readAccessTid', _TYPE: 'string', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'writeAccessTid', _TYPE: 'string', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'syncTag', _TYPE: 'string', VALUE: '' } );
     fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'lastSyncTime', _TYPE: 'integer', VALUE: '-1' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'coViewSettings', _TYPE: 'text', VALUE: '' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'detailViewFile', _TYPE: 'text', VALUE: '' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'summaryDisplayFormat', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'coViewSettings', _TYPE: 'string', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'detailViewFile', _TYPE: 'string', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'summaryDisplayFormat', _TYPE: 'string', VALUE: '' } );
     fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'syncState', _TYPE: 'integer', VALUE: '' } );
     fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'transactioning', _TYPE: 'integer', VALUE: '' } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'colOrder', _TYPE: 'text', VALUE: JSON.stringify(displayColumnOrder) } );
-    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'ovViewSettings', _TYPE: 'text', VALUE: '' } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'colOrder', _TYPE: 'string', VALUE: JSON.stringify(displayColumnOrder) } );
+    fullDef.keyValueStoreActive.push( { TABLE_UUID: tableId, _KEY: 'ovViewSettings', _TYPE: 'string', VALUE: '' } );
 
     transaction.executeSql(createTableCmd, [], function(transaction, result) {
         that.fullDefHelper(transaction, true, 0, fullDef, tableId, dbTableName, formDef, tlo);

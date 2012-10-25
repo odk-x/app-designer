@@ -130,10 +130,11 @@ return {
 		// we cannot write the instanceMetadata or the tableMetadata yet because the underlying tables may not yet exist.
 
 		// set up the minimal qp keys...
-		protoTableMetadata.formId = { "type" : "text", "value": formId };
-		protoTableMetadata.formVersion = { "type" : "text", "value": formVersion };
-		protoTableMetadata.formLocales = { "type" : "text", "value": formLocales };
-		protoTableMetadata.formTitle = { "type" : "text", "value": formTitle };
+		protoTableMetadata.formDef = { "type" : "object", "value": formDef };
+		protoTableMetadata.formId = { "type" : "string", "value": formId };
+		protoTableMetadata.formVersion = { "type" : "string", "value": formVersion };
+		protoTableMetadata.formLocales = { "type" : "string", "value": formLocales };
+		protoTableMetadata.formTitle = { "type" : "string", "value": formTitle };
 		
 		// TODO: locale of this form instance...
 
@@ -157,7 +158,7 @@ return {
 					that.builder.buildSurvey(formDef, function() {
 							// currentInstanceId == null
 							// TODO: load instance...
-							that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList );
+							that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList, formDef );
 						});
 				}}), formDef, tableId, protoTableMetadata, formPath);
 		} else if (!sameForm) {
@@ -167,10 +168,7 @@ return {
             that.controller.reset(ctxt, sameForm);
 
 			// preserve values from the Tables metadata but override form info...
-			mdl.qp.formId = protoTableMetadata.formId;
-			mdl.qp.formVersion = protoTableMetadata.formVersion;
-			mdl.qp.formLocales = protoTableMetadata.formLocales;
-			mdl.qp.formTitle = protoTableMetadata.formTitle;
+			mdl.qp = $.extend(mdl.qp, protoTableMetadata);
 			
 			opendatakit.setCurrentFormPath(formPath);
 			// currentInstanceId == null
@@ -183,7 +181,7 @@ return {
 			that.builder.buildSurvey(formDef, function() {
 						// currentInstanceId == null
 						// TODO: load instance...
-						that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList );
+						that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList, formDef );
 			});
 		} else  if (!sameInstance) {
 			opendatakit.setCurrentInstanceId(null);
@@ -196,14 +194,14 @@ return {
 
 			// currentInstanceId == null
 			// TODO: load instance...
-			that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList );
+			that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList, formDef );
 		} else {
 			// currentInstanceId == valid value
 			// data table already exists (since tableId is unchanged)
 			// form definitions already processed (since formPath and formId unchanged)
 			
 			// TODO: change pageRef (presumably)
-			that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList );
+			that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList, formDef );
 		}
     },
     /**

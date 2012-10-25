@@ -154,8 +154,64 @@ return {
         return null;
     },
 	
+	/**
+	 * use this if you know the formDef is valid within the mdl...
+	 */
+	getSettingValue:function(key) {
+		var formDef = mdl.qp.formDef.value;
+		return this.getSetting(formDef, key);
+	},
+	/*
+		Form locales are specified by the translations available on the 
+		form title.  These translation names are then looked up in the 
+		settings sheet to see if they have translations, and those are used
+		as the label for that translation code. Otherwise, the translation
+		name is used.  The returned list is of the form:
+		
+		[ { name: "en_us", label: { "en_us": "English", "fr": "Anglais"}},
+		   { name: "fr", label: {"en_us": "French", "fr": "Francais"}} ]
+	*/
 	getFormLocales:function(formDef) {
-		return this.getSetting(formDef, 'formLocales');
+		var locales = [];
+		// assume all the locales are specified by the title...
+		var formTitle = this.getSetting(formDef, 'formTitle');
+		if ( _.isUndefined(formTitle) || _.isString(formTitle) ) {
+			// no internationalization -- just default choice
+			return [ 'default' ];
+		}
+		// we have localization -- find all the tags
+		for ( var f in formTitle ) {
+			var translations = this.getSetting(formDef, f );
+			if ( translations == null ) {
+				translations = f;
+			}
+			locales.push( { label: translations, name: f } );
+		}
+		return locales;
+	},
+	
+	/*
+		The default locale is specified by the 'defaultLocale' setting.
+		If this is not present, the first locale in the formTitle array
+		is used (this likely does not have any bearing to the order 
+		of the translations in the XLSForm). Otherwise, if there are no
+		formTitle translations, then 'default' is returned.
+	 */
+	getDefaultFormLocale:function(formDef) {
+		var locale = this.getSetting(formDef, 'defaultLocale');
+		if ( locale != null ) return locale;
+		var locales = this.getFormLocales(formDef);
+		if ( locales.length > 0 ) {
+			return locales[0].name;
+		}
+		return "default";
+	},
+	/**
+	 use this when the formDef is known to be stored in the mdl
+	 */
+	getDefaultFormLocaleValue:function() {
+		var formDef = mdl.qp.formDef.value;
+		return this.getDefaultFormLocale(formDef);
 	}
 };
 });

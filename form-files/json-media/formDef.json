@@ -13,10 +13,6 @@
 			"value": "media"
         },
         {
-            "setting": "formLocales",
-            "value": ["en_us"]
-        },
-        {
             "setting": "formTitle",
             "value": {
                 "en_us": "JSON Test Form"

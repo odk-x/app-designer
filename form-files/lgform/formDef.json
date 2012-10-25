@@ -8,10 +8,6 @@
             "setting": "formVersion"
         },
         {
-            "setting": "formLocales",
-            "value": "en_us"
-        },
-        {
             "setting": "formTitle",
             "value": {
                 "en_us": "Short Test Form"

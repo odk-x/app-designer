@@ -13,12 +13,8 @@
             "value": 1
         }, 
         {
-            "setting": "formLocales", 
-            "value": ["en_us"]
-        }, 
-        {
             "setting": "formTitle", 
-            "value": "Example Form"
+            "value": { "en_us" : "Example Form" }
         }
     ], 
     "survey": [

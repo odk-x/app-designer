@@ -436,7 +436,7 @@ promptTypes.repeat = promptTypes.base.extend({
 });
 promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     type: "select",
-    datatype: "text",
+    datatype: "string",
     templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification"
@@ -537,7 +537,7 @@ promptTypes.select_or_other = promptTypes.select.extend({
 });
 promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     type: "text",
-    datatype: "text",
+    datatype: "string",
     templatePath: "templates/inputType.handlebars",
     renderContext: {
         "type": "text"
