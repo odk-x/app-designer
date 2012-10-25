@@ -94,10 +94,10 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             }
         },
         requirejs_path : function(content) {
-            return opendatakit.getCurrentFormDirectory() + content;
+            return opendatakit.getCurrentFormPath() + content;
         },
         app_path_localized : function(content) {
-            var fd = opendatakit.getCurrentFormDirectory();
+            var fd = opendatakit.getCurrentFormPath();
             if ( content == null ) {
                 return content;
             } else if ( $.isPlainObject(content) ) {
@@ -262,7 +262,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             var prompts = ([{
                 "type": "goto_if",
                 "condition": function() {
-                    return (database.getMetaDataValue('instanceId') != null);
+                    return (opendatakit.getCurrentInstanceId() != null);
                 },
                 "param": "_begin"
             }, {

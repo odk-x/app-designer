@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "setting": "tableId", 
+            "value": "example01"
+        }, 
+        {
             "setting": "formId", 
             "value": "exampleForm"
         }, 
@@ -9,12 +13,8 @@
             "value": 1
         }, 
         {
-            "setting": "formLocale", 
-            "value": "en_us"
-        }, 
-        {
-            "setting": "formName", 
-            "value": "Example Form"
+            "setting": "formTitle", 
+            "value": { "en_us" : "Example Form" }
         }
     ], 
     "survey": [

@@ -79,8 +79,7 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                         'jqmobile', 'builder', 'controller',
                         'prompts'/* mix-in additional prompts and support libs here */], 
         function($, mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
-            var ctxt = $.extend({}, controller.baseContext );
-            ctxt.append('startup');
+            var ctxt = controller.newStartContext();
 
             parsequery.initialize(controller,builder);
 

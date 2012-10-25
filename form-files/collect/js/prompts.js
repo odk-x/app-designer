@@ -86,8 +86,8 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hint = this.hint;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
-        this.renderContext.formName = database.getMetaDataValue('formName');
-        this.renderContext.formVersion = database.getMetaDataValue('formVersion');
+        this.renderContext.formTitle = database.getTableMetaDataValue('formTitle');
+        this.renderContext.formVersion = database.getTableMetaDataValue('formVersion');
         
         this.renderContext.htmlAttributes = $.extend({}, this.baseHtmlAttributes, this.htmlAttributes);
         $.extend(this.renderContext, this.templateContext);
@@ -227,16 +227,17 @@ promptTypes.opening = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        var instanceName = database.getMetaDataValue('instanceName');
+        var instanceName = database.getInstanceMetaDataValue('instanceName');
         if ( instanceName == null ) {
             // construct a friendly name for this new form...
             var date = new Date();
             var dateStr = date.toISOString();
-            var locale = database.getMetaDataValue('formLocale');
-            var formName = opendatakit.localize(database.getMetaDataValue('formName'),locale);
-            instanceName = formName + "_" + dateStr; // .replace(/\W/g, "_")
+            var locale = database.getInstanceMetaDataValue('locale');
+            var formTitle = opendatakit.localize(database.getTableMetaDataValue('formTitle'),locale);
+            instanceName = formTitle + "_" + dateStr; // .replace(/\W/g, "_")
             this.renderContext.instanceName = instanceName;
-            database.setMetaData($.extend({}, ctxt, {success: function() { ctxt.success({enableBackNavigation: false}); }}),'instanceName', 'string', instanceName);
+			database.setInstanceMetaData($.extend({}, ctxt, {success: function() { ctxt.success({enableBackNavigation: false}); }}),
+										 'instanceName', 'string', instanceName);
             return;
         }
         this.renderContext.instanceName = instanceName;
@@ -260,11 +261,11 @@ promptTypes.opening = promptTypes.base.extend({
     modification: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
-        database.setMetaData(ctxt, 'instanceName', 'string', this.$('input').val());
+		database.setInstanceMetaData(ctxt, 'instanceName', 'string', this.$('input').val());
     },
     beforeMove: function(ctxt) {
         ctxt.append("prompts." + this.type + ".beforeMove", "px: " + this.promptIdx);
-        database.setMetaData(ctxt, 'instanceName', 'string', this.$('input').val());
+		database.setInstanceMetaData(ctxt, 'instanceName', 'string', this.$('input').val());
         // ctxt.success();
     }
 });
@@ -274,8 +275,8 @@ promptTypes.finalize = promptTypes.base.extend({
     valid: true,
     templatePath: "templates/finalize.handlebars",
     events: {
-        "click .save-btn": "saveIncomplete",
-        "click .final-btn": "saveFinal"
+        "click .incomplete": "saveIncomplete",
+        "click .finalize": "saveFinal"
     },
     renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png'
@@ -285,7 +286,7 @@ promptTypes.finalize = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        this.renderContext.instanceName = database.getMetaDataValue('instanceName');
+        this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
         this.baseActivate($.extend({}, ctxt, {
             success:function(){
                 ctxt.success({enableForwardNavigation: false});
@@ -337,9 +338,10 @@ promptTypes.instances = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
+		ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
         database.withDb($.extend({},ctxt,{success:function() {
             $.extend(that.renderContext, {
-                formName: database.getMetaDataValue('formName'),
+                formTitle: database.getTableMetaDataValue('formTitle'),
                 headerImg: opendatakit.baseDir + 'img/form_logo.png'
             });
             that.baseActivate($.extend({}, ctxt, {
@@ -360,9 +362,12 @@ promptTypes.instances = promptTypes.base.extend({
                     var instance = result.rows.item(i);
                     that.renderContext.instances.push({
                         instanceName: instance.instanceName,
-                        instance_id: instance.instance_id,
-                        last_saved_timestamp: new Date(instance.last_saved_timestamp),
-                        saved_status: instance.saved_status
+                        instance_id: instance.id,
+                        last_saved_timestamp: new Date(instance.timestamp),
+                        saved_status: instance.saved,
+                        locale: instance.locale,
+                        xml_publish_status: instance.xmlPublishStatus,
+                        xml_publish_timestamp: instance.xmlPublishTimestamp
                     });
                 }
             });
@@ -389,7 +394,7 @@ promptTypes.instances = promptTypes.base.extend({
                         that.onActivate($.extend({}, ctxt,{
                             success:function(){that.render();ctxt.success();}}));
                 }}), 
-                database.getMetaDataValue('formId'), $(evt.target).attr('id'));
+                database.getTableMetaDataValue('formId'), $(evt.target).attr('id'));
     }
 });
 promptTypes.hierarchy = promptTypes.base.extend({
@@ -420,6 +425,7 @@ promptTypes.repeat = promptTypes.base.extend({
     onActivate: function(ctxt) {
         var that = this;
         var subsurveyType = this.param;
+        ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
         database.withDb(ctxt, function(transaction) {
             //TODO: Make statement to get all subsurveys with this survey as parent.
             var ss = database.getAllFormInstancesStmt();
@@ -444,7 +450,7 @@ promptTypes.repeat = promptTypes.base.extend({
 });
 promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     type: "select",
-    datatype: "text",
+    datatype: "string",
     templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification"
@@ -452,7 +458,6 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     choiceFilter: function(){ return true; },
     updateRenderValue: function(formValue) {
         var that = this;
-        console.error(formValue);
         //that.renderContext.value = formValue;
         var filteredChoices = _.filter(that.renderContext.choices, function(choice){
             return that.choiceFilter(choice);
@@ -546,7 +551,7 @@ promptTypes.select_or_other = promptTypes.select.extend({
 });
 promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
     type: "text",
-    datatype: "text",
+    datatype: "string",
     templatePath: "templates/inputType.handlebars",
     renderContext: {
         "type": "text"
@@ -562,7 +567,7 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         //Useful for sliders.
         //It might be better to listen for the jQm event for when a slider is released.
         //This could cause problems since the debounced function could fire after a page change.
-		var ctxt = controller.newContext(evt);
+        var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
         var value = that.$('input').val();
@@ -614,10 +619,10 @@ promptTypes.number = promptTypes.inputType.extend({
     }
 });
 promptTypes.datetime = promptTypes.inputType.extend({
-    type: "date",
+    type: "datetime",
     datatype: "string",
     baseHtmlAttributes: {
-        'type':'date'
+        'type':'datetime'
     },
     scrollerAttributes: {
         preset: 'datetime',
@@ -661,7 +666,7 @@ promptTypes.datetime = promptTypes.inputType.extend({
     }
 });
 promptTypes.date = promptTypes.datetime.extend({
-    type: "time",
+    type: "date",
     baseHtmlAttributes: {
         'type':'date'
     },
@@ -671,7 +676,7 @@ promptTypes.date = promptTypes.datetime.extend({
     }
 });
 promptTypes.time = promptTypes.datetime.extend({
-    type: "string",
+    type: "time",
     baseHtmlAttributes: {
         'type':'time'
     },

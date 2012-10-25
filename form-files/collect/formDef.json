@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "setting": "tableId",
+            "value": "collect01"
+        },
+        {
             "setting": "formId",
             "value": "collect"
         },
@@ -8,11 +12,11 @@
             "setting": "formVersion"
         },
         {
-            "setting": "formLocale",
-            "value": "en_us"
+            "setting": "formLocales",
+            "value": ["en_us"]
         },
         {
-            "setting": "formName",
+            "setting": "formTitle",
             "value": {
                 "en_us": "Default form"
             }

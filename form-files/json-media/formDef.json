@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "setting": "tableId",
+            "value": "json1245"
+        },
+        {
             "setting": "formId",
             "value": "json"
         },
@@ -9,11 +13,7 @@
 			"value": "media"
         },
         {
-            "setting": "formLocale",
-            "value": "en_us"
-        },
-        {
-            "setting": "formName",
+            "setting": "formTitle",
             "value": {
                 "en_us": "JSON Test Form"
                 }

@@ -76,28 +76,48 @@ return {
         return qpl;
     },
 
-    getCurrentFormDirectory:function(formPath) {
-        if ( formPath == null ) {
-            formPath = mdl.qp.formPath.value;
-        }
-        return formPath;
+	setCurrentFormPath:function(formPath) {
+        mdl.formPath = formPath;
+	},
+	
+    getCurrentFormPath:function() {
+        return mdl.formPath;
+    },
+	
+	setCurrentInstanceId:function(instanceId) {
+        mdl.instanceId = instanceId;
+	},
+	
+    getCurrentInstanceId:function() {
+        return mdl.instanceId;
+    },
+	
+	setCurrentTableId:function(tableId) {
+        mdl.tableId = tableId;
+	},
+	
+    getCurrentTableId:function() {
+        return mdl.tableId;
     },
     
     /**
      * immediate return: undef
      * side effect: revise: window.location.hash
      */
-    openNewInstanceId:function(ctxt, id, friendlyName) {
-        console.log("ALERT! setNewInstanceId - setting new UUID");
+    openNewInstanceId:function(ctxt, id) {
         if (id == null) {
             id = this.genUUID();
-        }
+			ctxt.append("openNewInstanceId.genUUID", id);
+        } else {
+			ctxt.append("openNewInstanceId.useInstanceId", id);
+		}
         
-        // NOTE: reference mdl directly to avoid circular reference to 'database'
-        var qpl = this.getHashString(mdl.qp.formPath.value, id, 0) +
-            ((friendlyName != null) ? '&instanceName=' + escape(friendlyName) : '');
+		// formPath is assumed to be unchanged...
+		// Do not set instanceId here -- do that in the hashChange handler...
+        var qpl = this.getHashString(this.getCurrentFormPath(), id, 0);
         // apply the change to the URL...
         window.location.hash = qpl;
+		ctxt.success();
     },
 
     localize:function(textOrLangMap, locale) {
@@ -132,6 +152,66 @@ return {
             }
         }
         return null;
-    }
+    },
+	
+	/**
+	 * use this if you know the formDef is valid within the mdl...
+	 */
+	getSettingValue:function(key) {
+		var formDef = mdl.qp.formDef.value;
+		return this.getSetting(formDef, key);
+	},
+	/*
+		Form locales are specified by the translations available on the 
+		form title.  These translation names are then looked up in the 
+		settings sheet to see if they have translations, and those are used
+		as the label for that translation code. Otherwise, the translation
+		name is used.  The returned list is of the form:
+		
+		[ { name: "en_us", label: { "en_us": "English", "fr": "Anglais"}},
+		   { name: "fr", label: {"en_us": "French", "fr": "Francais"}} ]
+	*/
+	getFormLocales:function(formDef) {
+		var locales = [];
+		// assume all the locales are specified by the title...
+		var formTitle = this.getSetting(formDef, 'formTitle');
+		if ( _.isUndefined(formTitle) || _.isString(formTitle) ) {
+			// no internationalization -- just default choice
+			return [ 'default' ];
+		}
+		// we have localization -- find all the tags
+		for ( var f in formTitle ) {
+			var translations = this.getSetting(formDef, f );
+			if ( translations == null ) {
+				translations = f;
+			}
+			locales.push( { label: translations, name: f } );
+		}
+		return locales;
+	},
+	
+	/*
+		The default locale is specified by the 'defaultLocale' setting.
+		If this is not present, the first locale in the formTitle array
+		is used (this likely does not have any bearing to the order 
+		of the translations in the XLSForm). Otherwise, if there are no
+		formTitle translations, then 'default' is returned.
+	 */
+	getDefaultFormLocale:function(formDef) {
+		var locale = this.getSetting(formDef, 'defaultLocale');
+		if ( locale != null ) return locale;
+		var locales = this.getFormLocales(formDef);
+		if ( locales.length > 0 ) {
+			return locales[0].name;
+		}
+		return "default";
+	},
+	/**
+	 use this when the formDef is known to be stored in the mdl
+	 */
+	getDefaultFormLocaleValue:function() {
+		var formDef = mdl.qp.formDef.value;
+		return this.getDefaultFormLocale(formDef);
+	}
 };
 });
