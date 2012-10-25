@@ -254,8 +254,7 @@ window.controller = {
             return;
         }
         var idx = this.currentPromptIdx;
-        var newhash = opendatakit.getHashString(database.getMetaDataValue('formPath'),
-                    database.getMetaDataValue('instanceId'), ''+idx);
+        var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), ''+idx);
         if ( newhash != window.location.hash ) {
             window.location.hash = newhash;
         }

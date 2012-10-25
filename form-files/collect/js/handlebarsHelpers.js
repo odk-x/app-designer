@@ -2,13 +2,13 @@ define(['mdl','database','opendatakit','handlebars','formulaFunctions', 'text!te
 function(mdl,  database,   opendatakit, Handlebars,  formulaFunctions,   labelHintPartial) {
 
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
-    var locale = database.getMetaDataValue('formLocale');
+    var locale = database.getInstanceMetaDataValue('locale');
     var str = formulaFunctions.localize(textOrLangMap,locale);
     return new Handlebars.SafeString(str);
 });
 
 Handlebars.registerHelper('metadata', function(value, options) {
-    var val = database.getMetaDataValue( options ? options : value );
+    var val = database.getInstanceMetaDataValue( options ? options : value );
     return new Handlebars.SafeString( (val != null) ? val : "" );
 });
 
@@ -39,7 +39,7 @@ Handlebars.registerHelper('stringify', function(value, options) {
 
 //Where does this get used?
 Handlebars.registerHelper('formDirectory', function(options) {
-    return opendatakit.getCurrentFormDirectory();
+    return opendatakit.getCurrentFormPath();
 });
 
 Handlebars.registerHelper('eachProperty', function(context, options) {
