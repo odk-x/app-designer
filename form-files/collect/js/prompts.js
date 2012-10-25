@@ -261,8 +261,8 @@ promptTypes.finalize = promptTypes.base.extend({
     valid: true,
     templatePath: "templates/finalize.handlebars",
     events: {
-        "click .save-btn": "saveIncomplete",
-        "click .final-btn": "saveFinal"
+        "click .incomplete": "saveIncomplete",
+        "click .finalize": "saveFinal"
     },
     renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png'
