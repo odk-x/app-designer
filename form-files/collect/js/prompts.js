@@ -215,12 +215,10 @@ promptTypes.opening = promptTypes.base.extend({
         }
         var instanceName = database.getInstanceMetaDataValue('instanceName');
         if ( instanceName == null ) {
-            // construct a friendly name for this new form...
+            // construct a friendly name for this form... use just the date, as the form name is well known
             var date = new Date();
             var dateStr = date.toISOString();
-            var locale = database.getInstanceMetaDataValue('locale');
-            var formTitle = opendatakit.localize(database.getTableMetaDataValue('formTitle'),locale);
-            instanceName = formTitle + "_" + dateStr; // .replace(/\W/g, "_")
+            instanceName = dateStr; // .replace(/\W/g, "_")
             this.renderContext.instanceName = instanceName;
 			database.setInstanceMetaData($.extend({}, ctxt, {success: function() { ctxt.success({enableBackNavigation: false}); }}),
 										 'instanceName', 'string', instanceName);

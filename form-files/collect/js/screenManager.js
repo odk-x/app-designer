@@ -78,6 +78,8 @@ return Backbone.View.extend({
         this.prompt = prompt;
         this.swipeEnabled = false;
         this.renderContext = {
+			formTitle: prompt.database.getTableMetaDataValue('formTitle'),
+			instanceName: prompt.database.getInstanceMetaDataValue('instanceName'),
             showHeader: true,
             showFooter: false,
             enableForwardNavigation: true,
