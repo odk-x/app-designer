@@ -98,19 +98,24 @@ window.controller = {
         var nextPrompt = null;
         var that = this;
 
-        // ***NOTE: goto_if is implemented as a 'condition' on the goto***
-        // ***The order of the else-if statements below is very important.***
-        // i.e., First test if the 'condition' is false, and skip to the next 
-        // question if it is; if the 'condition' is true or not present, then 
-        // execute the 'goto' I.e., the goto_if is equivalent to a goto with
-        // a condition.
-        if ( prompt.type == "label" ) {
-            nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-        } else if('condition' in prompt && !prompt.condition()) {
-            nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-        } else if ( prompt.type == "goto" || prompt.type == "goto_if" ) {
-            nextPrompt = that.getPromptByLabel(prompt.param);
-        }
+		try {
+			// ***NOTE: goto_if is implemented as a 'condition' on the goto***
+			// ***The order of the else-if statements below is very important.***
+			// i.e., First test if the 'condition' is false, and skip to the next 
+			// question if it is; if the 'condition' is true or not present, then 
+			// execute the 'goto' I.e., the goto_if is equivalent to a goto with
+			// a condition.
+			if ( prompt.type == "label" ) {
+				nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+			} else if('condition' in prompt && !prompt.condition()) {
+				nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+			} else if ( prompt.type == "goto" || prompt.type == "goto_if" ) {
+				nextPrompt = that.getPromptByLabel(prompt.param);
+			}
+		} catch (e) {
+			ctxt.append("controller.advanceToScreenPrompt.exception.ignored", e);
+			nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+		}
         
         if(nextPrompt != null) {
             that.advanceToScreenPrompt(ctxt, nextPrompt);
@@ -118,6 +123,49 @@ window.controller = {
             ctxt.success(prompt);
         }
     },
+	validateQuestionHelper: function(ctxt, promptCandidate) {
+		var that = this;
+		try {
+			promptCandidate.validate( $.extend({}, ctxt, {
+				success: function() {
+					var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
+					that.advanceToScreenPrompt($.extend({}, ctxt, {
+						success: function(prompt){
+							if(prompt) {
+								ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+								that.validateQuestionHelper(ctxt,prompt);
+							} else {
+								ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+								ctxt.success();
+							}
+						}}), nextPrompt);	
+				},
+				failure: function() {
+					ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
+					that.setPrompt( $.extend({}, ctxt, {success: function() {
+							var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
+							setTimeout(function() {
+								simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+								that.validate( simpleCtxt );
+								}, 500);
+						}, failure: ctxt.failure }), promptCandidate);
+				}}));
+		} catch(e) {
+			ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
+			that.setPrompt( $.extend({}, ctxt, {success: function() {
+					var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
+					setTimeout(function() {
+						simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+						that.validate(  );
+						}, 500);
+				}, failure: ctxt.failure }), promptCandidate);
+		}
+	},
+	validateAllQuestions: function(ctxt){
+		var that = this;
+		var promptCandidate = that.prompts[0];
+		that.validateQuestionHelper(ctxt,promptCandidate);
+	},
     gotoNextScreen: function(ctxt, options){
         var that = this;
         that.beforeMove($.extend({}, ctxt,
@@ -148,11 +196,11 @@ window.controller = {
                         that.advanceToScreenPrompt($.extend({}, ctxt, {
                             success: function(prompt){
                                 if(prompt) {
-                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + "nextPx: " + prompt.promptIdx);
+                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: " + prompt.promptIdx);
                                     // todo -- change to use hash?
                                     that.setPrompt(ctxt, prompt, options);
                                 } else {
-                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + "nextPx: no prompt!");
+                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: no prompt!");
                                     that.screenManager.noNextPage($.extend({}, ctxt,{
                                             success: function() {
                                                 ctxt.append("gotoNextScreen.noPrompts");
@@ -350,6 +398,8 @@ window.controller = {
         }
     },
     
+	///////////////////////////////////////////////////////
+	// Logging context
     baseContext : {
         contextChain: [],
         

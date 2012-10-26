@@ -28,18 +28,20 @@ promptTypes.base = Backbone.View.extend({
         this.initializeRenderContext();
         this.afterInitialize();
     },
-    whenTemplateIsReady: function(callback){
+    whenTemplateIsReady: function(ctxt){
         var that = this;
         if(this.template){
-            callback();
+            ctxt.success();
         } else if(this.templatePath) {
             requirejs(['text!'+this.templatePath], function(source) {
                 that.template = Handlebars.compile(source);
-                callback();
+                ctxt.success();
             });
         } else {
+			ctxt.append("prompts." + this.type + ".whenTemplateIsReady.noTemplate", "px: " + this.promptIdx);
             alert("No template for prompt: " + prompt.name);
             console.error(this);
+			ctxt.failure();
         }
     },
     initializeTemplate: function() {
@@ -96,7 +98,7 @@ promptTypes.base = Backbone.View.extend({
     baseActivate: function(ctxt) {
         var that = this;
         var additionalActivateComplete = _.after(that.additionalActivateFunctions.length, function(){
-            that.whenTemplateIsReady(ctxt.success);
+            that.whenTemplateIsReady(ctxt);
         });
         _.each(that.additionalActivateFunctions, function(additionalActivateFunc){
             additionalActivateFunc($.extend({}, ctxt, { success : additionalActivateComplete}));
@@ -149,19 +151,21 @@ promptTypes.base = Backbone.View.extend({
     //It is validate's responsibility to call baseValidate.
     baseValidate: function(context) {
         var that = this;
-        var isRequired = ('required' in that) ? that.required() : false;
-        var defaultContext = {
-            success: function() {},
-            failure: function() {}
-        };
-        context = $.extend(defaultContext, context);
+        var isRequired = false;
+		try {
+			isRequired = ('required' in that) ? that.required() : false;
+		} catch (e) {
+			context.append("prompts."+that.type+".baseValidate.required.exception", e);
+			isRequired = false;
+		}
         that.valid = true;
         if ( !('name' in that) ) {
             // no data validation if no persistence...
             context.success();
             return;
         } 
-        if ( that.getValue() == null || that.getValue().length == 0 ) {
+		var value = that.getValue();
+        if ( value == null || value == "" ) {
             if ( isRequired ) {
                 that.valid = false;
                 $( "#screenPopup" ).find('.message').text("Required value not provided.");
@@ -179,7 +183,14 @@ promptTypes.base = Backbone.View.extend({
             }
         } 
         if ( 'constraint' in that ) {
-            if ( !that.constraint() ) {
+			var outcome = false;
+			try {
+				outcome = that.constraint();
+			} catch (e) {
+				context.append("prompts."+that.type+"baseValidate.constraint.exception", e);
+				outcome = false;
+			}
+            if ( !outcome ) {
                 that.valid = false;
                 $( "#screenPopup" ).find('.message').text(that.constraint_message);
                 $( "#screenPopup" ).popup( "open" );
@@ -304,15 +315,23 @@ promptTypes.finalize = promptTypes.base.extend({
     saveIncomplete: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
-        // TODO: call up to Collect to report completion
-        database.save_all_changes(ctxt, false);
+        // TODO: call up to Collect to report completion?
+        database.save_all_changes($.extend({},ctxt,{success:function() {
+								collect.saveCompleted(false);
+								}}), false);
     },
     saveFinal: function(evt) {
          var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
-        // TODO: call up to Collect to report completion
-        database.save_all_changes(ctxt, true);
-        
+        database.save_all_changes($.extend({},ctxt,{
+				success:function(){
+					controller.validateAllQuestions($.extend({},ctxt,{
+						success:function(){
+							database.save_all_changes($.extend({},ctxt,{success:function() {
+								collect.saveCompleted(true);
+								}}), true);
+						}}));
+				}}), false);
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -569,25 +588,23 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         "swipeleft .input-container": "stopPropagation",
         "swiperight .input-container": "stopPropagation"
     },
-    debouncedModification: _.debounce(function(that, evt) {
-        //a debounced function will postpone execution until after wait (parameter 2)
-        //milliseconds have elapsed since the last time it was invoked.
-        //Useful for sliders.
-        //It might be better to listen for the jQm event for when a slider is released.
-        //This could cause problems since the debounced function could fire after a page change.
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
-        var renderContext = that.renderContext;
-        var value = that.$('input').val();
-        that.setValue($.extend({}, ctxt, {success:function() {
-                                    renderContext.value = value;
-                                    renderContext.invalid = !that.validateValue();
-                                    that.render();
-                                    ctxt.success(); }}),
-                        (value.length == 0 ? null : value));
-    }, 600),
     modification: function(evt) {
-        this.debouncedModification(this, evt);
+		var that = this;
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
+		var value = this.$('input').val();
+        that.setValue($.extend({}, ctxt, {success:function() {
+                                    that.renderContext.value = that.getValue();
+                                    that.renderContext.invalid = !that.validateValue();
+                                    that.render();
+                                    ctxt.success(); },
+									failure:function() {
+									that.renderContext.value = that.getValue();
+									that.renderContext.invalid = true;
+									that.render();
+									ctxt.failure();
+									}}),
+                        (value.length == 0 ? null : value));
     },
     onActivate: function(ctxt) {
         var renderContext = this.renderContext;
@@ -854,15 +871,30 @@ promptTypes.screen = promptTypes.base.extend({
         }
         return true;
     },
+	getActivePrompts: function(context) {
+        var that = this;
+        var subPrompts;
+        subPrompts = _.filter(that.prompts, function(prompt) {
+			try {
+				if('condition' in prompt) {
+					return prompt.condition();
+				}
+			} catch (e) {
+				if ( context ) {
+					context.append('prompts.screen.getActivePrompts.condition.exception', e);
+				} else {
+					console.error('prompts.screen.getActivePrompts.condition.exception: ' + e);
+				}
+				return false;
+			}
+            return true;
+        });
+		return subPrompts;
+	},
     beforeMove: function(context) {
         var that = this;
         var subPrompts, subPromptContext;
-        subPrompts = _.filter(that.prompts, function(prompt) {
-            if('condition' in prompt) {
-                return prompt.condition();
-            }
-            return true;
-        });
+        subPrompts = that.getActivePrompts(context);
         subPromptContext = $.extend({},context,{
             success: _.after(subPrompts.length, context.success),
             failure: _.once(context.failure)
@@ -874,12 +906,7 @@ promptTypes.screen = promptTypes.base.extend({
     validate: function(context) {
         var that = this;
         var subPrompts, subPromptContext;
-        subPrompts = _.filter(this.prompts, function(prompt) {
-            if('condition' in prompt) {
-                return prompt.condition();
-            }
-            return true;
-        });
+        subPrompts = that.getActivePrompts(context);
         subPromptContext = $.extend({},context,{
             success: _.after(subPrompts.length, context.success),
             failure: _.once(context.failure)
@@ -902,12 +929,8 @@ promptTypes.screen = promptTypes.base.extend({
         });
     },
     render: function(){
-        var subPrompts = _.filter(this.prompts, function(prompt) {
-            if('condition' in prompt) {
-                return prompt.condition();
-            }
-            return true;
-        });
+		var that = this;
+		var subPrompts = that.getActivePrompts();
         this.$el.html('<div class="odk odk-prompts">');
         var $prompts = this.$('.odk-prompts');
         $.each(subPrompts, function(idx, prompt){
@@ -1009,7 +1032,15 @@ promptTypes.withNext = promptTypes.base.extend({
     hideInHierarchy: true,
     assignToValue: function(ctxt){
         var that = this;
-        that.setValue(ctxt, that.assign());
+		var value;
+		try {
+			value = that.assign();
+		} catch (e) {
+			ctxt.append('prompts.'+that.type+'.assignToValue.assign.exception', e);
+			ctxt.failure();
+			return;
+		}
+		that.setValue(ctxt, value);
     }
 });
 });

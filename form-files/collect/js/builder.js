@@ -45,14 +45,14 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         condition: 'formula',
         constraint: 'formula',
         required: 'formula',
-        validate: 'formula',
+        validate: 'formula_with_context_arg', // calling context
         calculation: 'formula',
         assign: 'formula',
         //TODO: Choice filter has some syntax issues to consider.
         //      It would be nice to have a "choice" variable we can refer to directly.
         //      One idea is to define variables in a context object that gets passed into the generated function.
         //      The generated function would then add the object's keys to the namespace.
-        choiceFilter: 'formula',
+        choiceFilter: 'formula_with_context_arg', // choice being evaluated
         templatePath: 'requirejs_path',
         image: 'app_path_localized',
         audio: 'app_path_localized',
@@ -68,20 +68,45 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 function replaceCallback(match) {
                     var variableName = match.slice(2, - 2);
                     variablesRefrenced.push(variableName);
-                    return "this.database.getDataValue('" + variableName + "')";
+                    return "database.getDataValue('" + variableName + "')";
                 }
             content = content.replace(variableRegex, replaceCallback);
-            //TODO: It might be better to define a wrapper function with the try/catch
-            var result = '(function(context){'+
-                'try {' +
-                'return ('+ content + ');' +
-                "} catch(e) {" +
-                ' alert("Bad formula. See console for details.");' +
-                ' console.error("Bad Formula:");' +
-                ' console.error(this);' +
-                ' console.error(e);'+
-                ' console.error("'+content+'");'+
-                '}})';
+			var safeContent = content.replace(/'/g,'\\\'').replace(/"/g,'\\"');
+			// Callers are responsible for catching and handling exceptions.
+			// 'context' passed in may or may not be defined.  It may or may
+			// not be the calling context object.
+            var result = '(function(){\n'+
+                'return ('+ content + ');\n' +
+                '})';
+            try {
+                return evalInEnvironment(result);
+            } catch (e) {
+                alert("Could not evaluate formula: " + content + '\nSee console for details.');
+                console.error(String(e));
+                console.error(result);
+                console.error(content);
+                console.error(variablesRefrenced);
+                return function(){};
+            }
+        },
+        formula_with_context_arg: function(content) {
+            if ( content === true || content === false ) {
+                return function() { return content; }
+            }
+            var variablesRefrenced = [];
+            var variableRegex = /\{\{.+?\}\}/g
+                function replaceCallback(match) {
+                    var variableName = match.slice(2, - 2);
+                    variablesRefrenced.push(variableName);
+                    return "database.getDataValue('" + variableName + "')";
+                }
+            content = content.replace(variableRegex, replaceCallback);
+			var safeContent = content.replace(/'/g,'\\\'').replace(/"/g,'\\"');
+            // Callers are responsible for catching and handling exceptions.
+			// see column_types list for what the context argument is...
+			var result = '(function(context){\n'+
+                'return ('+ content + ');\n' +
+                '})';
             try {
                 return evalInEnvironment(result);
             } catch (e) {

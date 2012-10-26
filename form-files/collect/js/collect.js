@@ -39,5 +39,8 @@ collect = {
             }, 100);
             return "OK";
         }
-    }
+    },
+	saveCompleted: function(asComplete) {
+		alert("notify container that we have a " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + " save.");
+	}
 };
