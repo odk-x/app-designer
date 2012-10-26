@@ -75,4 +75,9 @@ Handlebars.registerHelper('selected', function(prompt, value, options) {
     }
 });
 
+Handlebars.registerHelper('promptLink', function(value, options) {
+    return new Handlebars.SafeString( opendatakit.getHashString( opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), value ));
+});
+
+
 });
