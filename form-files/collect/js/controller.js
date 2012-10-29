@@ -39,7 +39,9 @@ window.controller = {
         }
         try {
             if ( prompt ) {
-                prompt.validate(ctxt);
+                prompt.validate($.extend({},ctxt,{failure:function(msg) {
+						that.screenManager.showScreenPopup(msg);
+					}}) );
             } else {
                 ctxt.success();
             }
@@ -125,51 +127,63 @@ window.controller = {
     },
 	validateQuestionHelper: function(ctxt, promptCandidate) {
 		var that = this;
-		try {
-			promptCandidate.validate( $.extend({}, ctxt, {
-				success: function() {
-					if ( promptCandidate.type == 'finalize' ) {
-						ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-						ctxt.success();
-					} else {
-						var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
-						that.advanceToScreenPrompt($.extend({}, ctxt, {
-							success: function(prompt){
-								if(prompt) {
-									ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-									that.validateQuestionHelper(ctxt,prompt);
-								} else {
-									ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-									ctxt.success();
-								}
-							}}), nextPrompt);
-					}
-				},
-				failure: function() {
-					ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
-					that.setPrompt( $.extend({}, ctxt, {success: function() {
-							var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
-							setTimeout(function() {
-								simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-								that.validate( simpleCtxt );
-								}, 500);
-						}, failure: ctxt.failure }), promptCandidate);
-				}}));
-		} catch(e) {
-			ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
-			that.setPrompt( $.extend({}, ctxt, {success: function() {
-					var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
-					setTimeout(function() {
-						simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-						that.validate( simpleCtxt );
-						}, 500);
-				}, failure: ctxt.failure }), promptCandidate);
-		}
+		return function() {
+			try {
+				promptCandidate.validate( $.extend({}, ctxt, {
+					success: function() {
+						if ( promptCandidate.type == 'finalize' ) {
+							ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+							ctxt.success();
+						} else {
+							var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
+							that.advanceToScreenPrompt($.extend({}, ctxt, {
+								success: function(prompt){
+									if(prompt) {
+										ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+										var fn = that.validateQuestionHelper(ctxt,prompt);
+										(fn)();
+									} else {
+										ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+										ctxt.success();
+									}
+								}}), nextPrompt);
+						}
+					},
+					failure: function(msg) {
+						ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
+						that.setPrompt( $.extend({}, ctxt, {success: function() {
+								var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: function(msg) {
+										that.screenManager.showScreenPopup(msg); 
+										ctxt.failure();
+									}});
+								setTimeout(function() {
+									simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+									that.validate( simpleCtxt );
+									}, 500);
+							}, failure: ctxt.failure }), promptCandidate);
+					}}));
+			} catch(e) {
+				ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
+				that.setPrompt( $.extend({}, ctxt, {success: function() {
+						var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
+						setTimeout(function() {
+							simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+							that.validate( simpleCtxt );
+							}, 500);
+					}, failure: ctxt.failure }), promptCandidate);
+			}
+		};
 	},
 	validateAllQuestions: function(ctxt){
 		var that = this;
 		var promptCandidate = that.prompts[0];
-		that.validateQuestionHelper(ctxt,promptCandidate);
+		that.screenManager.showSpinnerOverlay({text:"Validating..."});
+		(that.validateQuestionHelper($.extend({},ctxt,{success: function() {
+				that.screenManager.hideSpinnerOverlay();
+			},
+			failure: function() {
+				that.screenManager.hideSpinnerOverlay();
+			}}),promptCandidate))();
 	},
     gotoNextScreen: function(ctxt, options){
         var that = this;

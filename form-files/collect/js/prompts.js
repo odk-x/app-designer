@@ -9,6 +9,8 @@ promptTypes.base = Backbone.View.extend({
     database: database,
     mdl: mdl,
     constraint_message: "Constraint violated.",
+	invalid_value_message: "Invalid value.",
+	required_message: "Required value not provided.",
     // track how many times we've tried to retrieve and compile the 
     // handlebars template for this prompt.
     initializeTemplateMaxTryCount: 4,
@@ -168,17 +170,13 @@ promptTypes.base = Backbone.View.extend({
         if ( value == null || value == "" ) {
             if ( isRequired ) {
                 that.valid = false;
-                $( "#screenPopup" ).find('.message').text("Required value not provided.");
-                $( "#screenPopup" ).popup( "open" );
-                context.failure();
+                context.failure({ message: that.required_message });
                 return;
             }
         } else if ( 'validateValue' in that ) {
             if ( !that.validateValue() ) {
                 that.valid = false;
-                $( "#screenPopup" ).find('.message').text("Invalid value.");
-                $( "#screenPopup" ).popup( "open" );
-                context.failure();
+                context.failure({ message: that.invalid_value_message });
                 return;
             }
         } 
@@ -192,9 +190,7 @@ promptTypes.base = Backbone.View.extend({
 			}
             if ( !outcome ) {
                 that.valid = false;
-                $( "#screenPopup" ).find('.message').text(that.constraint_message);
-                $( "#screenPopup" ).popup( "open" );
-                context.failure();
+                context.failure({ message: that.constraint_message });
                 return;
             }
         }

@@ -209,6 +209,19 @@ return Backbone.View.extend({
         $( "#optionsPopup" ).find('.message').text("Hi.");
         $( "#optionsPopup" ).popup( "open" );
     },
+	showScreenPopup: function(msg) {
+		$( "#screenPopup" ).find('.message').text(msg.message);
+        $( "#screenPopup" ).popup( "open" );
+    },
+	showSpinnerOverlay: function(msg) {
+		$.mobile.loading( 'show', {
+			text: msg.text,
+			textVisible: true
+		});
+	},
+	hideSpinnerOverlay: function() {
+		$.mobile.loading( 'hide' );
+	},
     handlePagechange: function(evt){
         var ctxt = this.savedCtxt;
         this.savedCtxt = null;
