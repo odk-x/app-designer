@@ -128,17 +128,22 @@ window.controller = {
 		try {
 			promptCandidate.validate( $.extend({}, ctxt, {
 				success: function() {
-					var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
-					that.advanceToScreenPrompt($.extend({}, ctxt, {
-						success: function(prompt){
-							if(prompt) {
-								ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-								that.validateQuestionHelper(ctxt,prompt);
-							} else {
-								ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-								ctxt.success();
-							}
-						}}), nextPrompt);	
+					if ( promptCandidate.type == 'finalize' ) {
+						ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+						ctxt.success();
+					} else {
+						var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
+						that.advanceToScreenPrompt($.extend({}, ctxt, {
+							success: function(prompt){
+								if(prompt) {
+									ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+									that.validateQuestionHelper(ctxt,prompt);
+								} else {
+									ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+									ctxt.success();
+								}
+							}}), nextPrompt);
+					}
 				},
 				failure: function() {
 					ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
@@ -156,7 +161,7 @@ window.controller = {
 					var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
 					setTimeout(function() {
 						simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-						that.validate(  );
+						that.validate( simpleCtxt );
 						}, 500);
 				}, failure: ctxt.failure }), promptCandidate);
 		}
@@ -332,6 +337,54 @@ window.controller = {
             return;
         }
     },
+	opendatakitIgnoreAllChanges:function() {
+		var ctxt = controller.newCallbackContext();
+		ctxt.append("controller.opendatakitIgnoreAllChanges", this.currentPromptIdx);
+		if ( opendatakit.getCurrentInstanceId() == null ) {
+			collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), null );
+		} else {
+			this.ignoreAllChanges($.extend({},ctxt,{success:function() {
+								collect.ignoreAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+							}, failure:function() {
+								collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+							}}));
+		}
+	},
+	ignoreAllChanges:function(ctxt) {
+		database.ignore_all_changes(ctxt);
+	},
+	opendatakitSaveAllChanges:function(asComplete) {
+		var ctxt = controller.newCallbackContext();
+		ctxt.append("controller.opendatakitSaveAllChanges", this.currentPromptIdx);
+		if ( opendatakit.getCurrentInstanceId() == null ) {
+			collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), null );
+		} else {
+			this.saveAllChanges($.extend({},ctxt,{failure:function() {
+								collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+							}}), asComplete);
+		}
+	},
+	saveAllChanges:function(ctxt, asComplete) {
+		var that = this;
+		// NOTE: only success is reported up to collect here.
+		// if there are any failures, the failure callback is only invoked if the save request
+		// was initiated from within collect (via controller.opendatakitSaveAllChanges(), above).
+		if ( asComplete ) {
+			database.save_all_changes($.extend({},ctxt,{
+				success:function(){
+					that.validateAllQuestions($.extend({},ctxt,{
+						success:function(){
+							database.save_all_changes($.extend({},ctxt,{success:function() {
+								collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), true);
+								}}), true);
+						}}));
+				}}), false);
+		} else {
+			database.save_all_changes($.extend({},ctxt,{success:function() {
+							collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), false);
+							}}), false);
+		}
+	},
     gotoRef:function(ctxt, pageRef) {
         var that = this;
         if ( this.prompts.length == 0 ) {

@@ -315,23 +315,12 @@ promptTypes.finalize = promptTypes.base.extend({
     saveIncomplete: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
-        // TODO: call up to Collect to report completion?
-        database.save_all_changes($.extend({},ctxt,{success:function() {
-								collect.saveCompleted(false);
-								}}), false);
+		controller.saveAllChanges(ctxt,false);
     },
     saveFinal: function(evt) {
          var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
-        database.save_all_changes($.extend({},ctxt,{
-				success:function(){
-					controller.validateAllQuestions($.extend({},ctxt,{
-						success:function(){
-							database.save_all_changes($.extend({},ctxt,{success:function() {
-								collect.saveCompleted(true);
-								}}), true);
-						}}));
-				}}), false);
+		controller.saveAllChanges(ctxt,true);
     }
 });
 promptTypes.json = promptTypes.base.extend({

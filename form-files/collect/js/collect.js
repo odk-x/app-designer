@@ -40,7 +40,16 @@ collect = {
             return "OK";
         }
     },
-	saveCompleted: function(asComplete) {
-		alert("notify container that we have a " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + " save.");
-	}
+	saveAllChangesCompleted: function( formId, instanceId, asComplete ) {
+		alert("notify container that we have a " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + " save completed OK.");
+	},
+	saveAllChangesFailed: function( formId, instanceId ) {
+		alert("notify container that " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + " save FAILED.");
+	},
+	ignoreAllChangesCompleted: function( formId, instanceId ) {
+		alert("notify container that ignore all changes OK.");
+	},
+	ignoreAllChangesFailed: function( formId, instanceId ) {
+		alert("notify container that ignore all changes FAILED.");
+	},
 };
