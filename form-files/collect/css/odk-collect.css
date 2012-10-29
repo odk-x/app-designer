@@ -27,6 +27,9 @@ body {
     float: right;
     /* margin-right: 1em; */
 }
+.odk-options-btn {
+    float: left;
+}
 /*
 .headerNavBtns > a {
     margin-top:3px;

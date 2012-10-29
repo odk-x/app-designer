@@ -1,7 +1,7 @@
 <div class="odk-screen">
     {{#if showHeader}}
         <div class="odk-header" data-role="header" data-theme="c" data-position="fixed">
-            <div style="float:left;"><a data-icon="gear" data-role="button" data-inline="true">options</a></div>
+            <div class="odk-options-btn"><a data-icon="gear" data-role="button" data-inline="true">options</a></div>
             <div class="headerNavBtns">
                 <a class="odk-prev-btn" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">back</a>
                 <a class="odk-next-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">next</a>
@@ -34,5 +34,12 @@
     {{/if}}
     <div data-role="popup" data-theme="a" data-overlay-theme="a" id="screenPopup">
         <p class="message"></p>
+    </div>
+    <div data-role="popup" data-theme="d" data-overlay-theme="d" id="optionsPopup">
+        <ul data-role="listview" data-inset="true" data-theme="d">
+			<li><a data-rel="popup">Language</a></li>
+			<li><a href="{{promptLink "_hierarchy"}}" data-rel="popup">Hierarchy</a></li>
+			<li><a data-rel="popup">Save + Exit</a></li>
+		</ul>
     </div>
 </div>

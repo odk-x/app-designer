@@ -205,6 +205,10 @@ return Backbone.View.extend({
                 }}));
         return false;
     },
+    openOptions: function(evt){
+        $( "#optionsPopup" ).find('.message').text("Hi.");
+        $( "#optionsPopup" ).popup( "open" );
+    },
     handlePagechange: function(evt){
         var ctxt = this.savedCtxt;
         this.savedCtxt = null;
@@ -231,6 +235,7 @@ return Backbone.View.extend({
     events: {
         "click .odk-next-btn": "gotoNextScreen",
         "click .odk-prev-btn": "gotoPreviousScreen",
+        "click .odk-options-btn": "openOptions",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
