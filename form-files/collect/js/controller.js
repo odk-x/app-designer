@@ -39,9 +39,7 @@ window.controller = {
         }
         try {
             if ( prompt ) {
-                prompt.validate($.extend({},ctxt,{failure:function(msg) {
-						that.screenManager.showScreenPopup(msg);
-					}}) );
+                prompt.validate(ctxt);
             } else {
                 ctxt.success();
             }
@@ -49,7 +47,7 @@ window.controller = {
             var e = (ex != null) ? ex.message  + " stack: " + ex.stack : "undef";
             console.error("controller.validate: Exception: " + e );
             ctxt.append('controller.validate.exception', e );
-            ctxt.failure();
+            ctxt.failure({message: "Exception occurred while evaluating constraints"});
         }
     },
     gotoPreviousScreen: function(ctxt){
@@ -129,39 +127,44 @@ window.controller = {
 		var that = this;
 		return function() {
 			try {
-				promptCandidate.validate( $.extend({}, ctxt, {
-					success: function() {
-						if ( promptCandidate.type == 'finalize' ) {
-							ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-							ctxt.success();
-						} else {
-							var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
-							that.advanceToScreenPrompt($.extend({}, ctxt, {
-								success: function(prompt){
-									if(prompt) {
-										ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-										var fn = that.validateQuestionHelper(ctxt,prompt);
-										(fn)();
-									} else {
-										ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-										ctxt.success();
-									}
-								}}), nextPrompt);
-						}
-					},
-					failure: function(msg) {
-						ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
-						that.setPrompt( $.extend({}, ctxt, {success: function() {
-								var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: function(msg) {
-										that.screenManager.showScreenPopup(msg); 
-										ctxt.failure();
-									}});
-								setTimeout(function() {
-									simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-									that.validate( simpleCtxt );
-									}, 500);
-							}, failure: ctxt.failure }), promptCandidate);
-					}}));
+				// pass in 'render':false to indicate that rendering will not occur.
+				// call onActivate() to ensure that we have values (assignTo) initialized for validate()
+				promptCandidate.onActivate( $.extend({render: false}, ctxt, {
+					success: function(renderContext) {
+						promptCandidate.validate( $.extend({}, ctxt, {
+							success: function() {
+								if ( promptCandidate.type == 'finalize' ) {
+									ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+									ctxt.success();
+								} else {
+									var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
+									that.advanceToScreenPrompt($.extend({}, ctxt, {
+										success: function(prompt){
+											if(prompt) {
+												ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+												var fn = that.validateQuestionHelper(ctxt,prompt);
+												(fn)();
+											} else {
+												ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+												ctxt.success();
+											}
+										}}), nextPrompt);
+								}
+							},
+							failure: function(msg) {
+								ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
+								that.setPrompt( $.extend({}, ctxt, {success: function() {
+										var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: function(msg) {
+												that.screenManager.showScreenPopup(msg); 
+												ctxt.failure();
+											}});
+										setTimeout(function() {
+											simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+											that.validate( simpleCtxt );
+											}, 500);
+									}, failure: ctxt.failure }), promptCandidate);
+							}}));
+					}}) );
 			} catch(e) {
 				ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
 				that.setPrompt( $.extend({}, ctxt, {success: function() {
@@ -177,13 +180,33 @@ window.controller = {
 	validateAllQuestions: function(ctxt){
 		var that = this;
 		var promptCandidate = that.prompts[0];
-		that.screenManager.showSpinnerOverlay({text:"Validating..."});
-		(that.validateQuestionHelper($.extend({},ctxt,{success: function() {
+		// ensure we drop the spinner overlay when we complete...
+		var newctxt = $.extend({},ctxt,{success: function() {
 				that.screenManager.hideSpinnerOverlay();
+				ctxt.success();
 			},
 			failure: function() {
 				that.screenManager.hideSpinnerOverlay();
-			}}),promptCandidate))();
+				ctxt.failure();
+			}});
+		that.screenManager.showSpinnerOverlay({text:"Validating..."});
+		
+		// call advanceToScreenPrompt, since prompt[0] is always a goto_if...
+		that.advanceToScreenPrompt($.extend({}, newctxt, {
+			success: function(prompt){
+				if(prompt) {
+					newctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+					var fn = that.validateQuestionHelper(newctxt,prompt);
+					(fn)();
+				} else {
+					newctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+					newctxt.success();
+				}
+			},
+			failure: function() {
+				that.screenManager.hideSpinnerOverlay();
+				newctxt.failure();
+			}}), promptCandidate);
 	},
     gotoNextScreen: function(ctxt, options){
         var that = this;
@@ -228,26 +251,9 @@ window.controller = {
                                 }
                         }}), promptCandidate);
                     },
-                    failure: function() {
+                    failure: function(msg) {
                         ctxt.append("gotoNextScreen.validate.failure", "px: " +  that.currentPromptIdx);
-
-                        /*
-                        //Crude implementation of validation toasts.
-                        //The prompt needs more control over this so the constraint_message is only shown
-                        //for constraint violations, and other messages are used for required fields etc.
-                        $.mobile.loading( 'show' , {
-                            text: that.getPromptByName(that.currentPromptIdx).constraint_message,
-                            textVisible: true,
-                            textonly: true,
-                            theme: 'a'
-                        });
-                        //Fading might be a bad idea. I don't know how it will perform in general.
-                        $('.ui-loader').fadeIn(200, function(){
-                            $('.ui-loader').delay(500).fadeOut(200, function(){
-                                $.mobile.loading( 'hide' );
-                            });
-                        });
-                        */
+						that.screenManager.showScreenPopup(msg); 
                         ctxt.failure();
                     }
                 }));

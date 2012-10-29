@@ -98,7 +98,10 @@ return Backbone.View.extend({
         //(We would not allow prompts to access the controller directly).
         //When the prompt changes, we could disconnect the interface to prevent the old
         //prompts from messing with the current screen.
-        that.prompt.onActivate($.extend({},ctxt,{
+		// 
+		// pass in 'render':true to indicate that we will be rendering upon successful
+		// completion.
+        that.prompt.onActivate($.extend({render:true},ctxt,{
             success:function(renderContext){
                 var isFirstPrompt = !('previousPageEl' in that);
                 var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
