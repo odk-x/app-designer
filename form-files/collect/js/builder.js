@@ -60,17 +60,11 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
     },
     propertyParsers: {
         formula: function(content) {
+            /*
             if ( content === true || content === false ) {
                 return function() { return content; }
             }
-            var variablesRefrenced = [];
-            var variableRegex = /\{\{.+?\}\}/g
-                function replaceCallback(match) {
-                    var variableName = match.slice(2, - 2);
-                    variablesRefrenced.push(variableName);
-                    return "this.database.getDataValue('" + variableName + "')";
-                }
-            content = content.replace(variableRegex, replaceCallback);
+            */
             //TODO: It might be better to define a wrapper function with the try/catch
             var result = '(function(context){'+
                 'try {' +
@@ -80,7 +74,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 ' console.error("Bad Formula:");' +
                 ' console.error(this);' +
                 ' console.error(e);'+
-                ' console.error("'+content+'");'+
+                ' console.error(' + JSON.stringify(content) + ');'+
                 '}})';
             try {
                 return evalInEnvironment(result);
@@ -207,7 +201,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 additionalActivateFunctions: additionalActivateFunctions
             }, that.initializeProperties(item)));
             PromptInstance = new PromptClass();
-            if (item.type === 'withNext') {
+            if (item.type === 'with_next') {
                 additionalActivateFunctions.push(function(ctxt) {
                     PromptInstance.assignToValue(ctxt);
                 });

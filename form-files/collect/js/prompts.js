@@ -260,7 +260,7 @@ promptTypes.opening = promptTypes.base.extend({
         backupImg: opendatakit.baseDir + 'img/backup.png',
         advanceImg: opendatakit.baseDir + 'img/advance.png'
     },
-    //Events copied from inputType, should probably refactor.
+    //Events copied from input_type, should probably refactor.
     events: {
         "change input": "modification",
         "swipeleft .input-container": "stopPropagation",
@@ -557,7 +557,7 @@ promptTypes.select_or_other = promptTypes.select.extend({
         or_other: true
     }
 });
-promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
+promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
     type: "text",
     datatype: "string",
     templatePath: "templates/inputType.handlebars",
@@ -569,25 +569,28 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         "swipeleft .input-container": "stopPropagation",
         "swiperight .input-container": "stopPropagation"
     },
-    debouncedModification: _.debounce(function(that, evt) {
-        //a debounced function will postpone execution until after wait (parameter 2)
-        //milliseconds have elapsed since the last time it was invoked.
-        //Useful for sliders.
-        //It might be better to listen for the jQm event for when a slider is released.
-        //This could cause problems since the debounced function could fire after a page change.
+    //a debounced function will postpone execution until after wait (parameter 2)
+    //milliseconds have elapsed since the last time it was invoked.
+    //Useful for sliders.
+    //It might be better to listen for the jQm event for when a slider is released.
+    //This could cause problems since the debounced function could fire after a page change.
+    debouncedRender: _.debounce(function() {
+        this.render();
+    }, 500),
+    modification: function(evt) {
+        var value = $(evt.target).val();
+        var that = this;
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
-        var value = that.$('input').val();
-        that.setValue($.extend({}, ctxt, {success:function() {
-                                    renderContext.value = value;
-                                    renderContext.invalid = !that.validateValue();
-                                    that.render();
-                                    ctxt.success(); }}),
-                        (value.length == 0 ? null : value));
-    }, 600),
-    modification: function(evt) {
-        this.debouncedModification(this, evt);
+        that.setValue($.extend({}, ctxt, {
+            success: function() {
+                renderContext.value = value;
+                renderContext.invalid = !that.validateValue();
+                that.debouncedRender();
+                ctxt.success();
+            }
+        }), (value.length === 0 ? null : value));
     },
     onActivate: function(ctxt) {
         var renderContext = this.renderContext;
@@ -603,7 +606,7 @@ promptTypes.inputType = promptTypes.text = promptTypes.base.extend({
         return true;
     }
 });
-promptTypes.integer = promptTypes.inputType.extend({
+promptTypes.integer = promptTypes.input_type.extend({
     type: "integer",
     datatype: "integer",
     baseHtmlAttributes: {
@@ -614,7 +617,7 @@ promptTypes.integer = promptTypes.inputType.extend({
         return !isNaN(parseInt(this.getValue()));
     }
 });
-promptTypes.decimal = promptTypes.inputType.extend({
+promptTypes.decimal = promptTypes.input_type.extend({
     type: "decimal",
     datatype: "number",
     //TODO: This doesn't seem to be working.
@@ -626,7 +629,7 @@ promptTypes.decimal = promptTypes.inputType.extend({
         return !isNaN(parseFloat(this.getValue()));
     }
 });
-promptTypes.datetime = promptTypes.inputType.extend({
+promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
     datatype: "string",
     baseHtmlAttributes: {
@@ -1004,12 +1007,20 @@ promptTypes.acknowledge = promptTypes.select.extend({
         this.baseActivate(ctxt);
     }
 });
-promptTypes.withNext = promptTypes.base.extend({
-    type: "withNext",
+promptTypes.with_next = promptTypes.base.extend({
+    type: "with_next",
     hideInHierarchy: true,
     assignToValue: function(ctxt){
         var that = this;
         that.setValue(ctxt, that.assign());
     }
 });
+
+//Ensure all prompt type names are lowercase.
+_.each(_.keys(promptTypes), function(promptTypeName){
+    if(promptTypeName !== promptTypeName.toLowerCase()) {
+        alert("Invalid prompt type name: " + promptTypeName);
+    }
+});
+
 });

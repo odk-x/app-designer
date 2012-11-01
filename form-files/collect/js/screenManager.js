@@ -205,11 +205,10 @@ return Backbone.View.extend({
                 }}));
         return false;
     },
-    openOptions: function(evt){
-        $( "#optionsPopup" ).find('.message').text("Hi.");
+    openOptions: function(evt) {
         $( "#optionsPopup" ).popup( "open" );
     },
-    handlePagechange: function(evt){
+    handlePagechange: function(evt) {
         var ctxt = this.savedCtxt;
         this.savedCtxt = null;
         
