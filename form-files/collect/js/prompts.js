@@ -843,6 +843,70 @@ promptTypes.audio = promptTypes.media.extend({
     }
 
 });
+promptTypes.geopoint = promptTypes.base.extend({
+    type: "geopoint",
+    datatype: "geopoint",
+    label: 'Capture geopoint:',
+    templatePath: "templates/geopoint.handlebars",
+    events: {
+        "click .captureAction": "capture"
+    },
+    onActivate: function(ctxt) {
+        var that = this;
+        var value = that.getValue();
+        that.renderContext.value = value;
+        this.baseActivate(ctxt);
+    },
+    capture: function(evt) {
+        var ctxt = controller.newContext(evt);
+        var platInfo = opendatakit.getPlatformInfo(ctxt);
+        if (true || platInfo.container == 'Android') {
+            // TODO: is this the right sequence?
+            var outcome = collect.doAction('' + this.promptIdx, 'captureGeopoint', 'org.opendatakit.collect.android.activities.GeoPointActivity', null);
+            ctxt.append('geopoint.capture', platInfo.container + " outcome is " + outcome);
+            if (outcome === null || outcome !== "OK") {
+                alert("Should be OK got >" + outcome + "<");
+                ctxt.failure();
+            } else {
+                ctxt.success();
+            }
+        } else {
+            ctxt.append('geopoint.capture.disabled', platInfo.container);
+            alert("Not running on Android -- disabled");
+            ctxt.failure();
+        }
+    },
+    getCallback: function(ctxt, bypath, byaction) {
+        var that = this;
+        return function(ctxt, path, action, jsonString) {
+            ctxt.append("prompts." + this.type + 'getCallback.actionFn', "px: " + this.promptIdx + " action: " + action);
+            try {
+                var jsonObject = JSON.parse(jsonString);
+            } catch (e) {
+                alert("Could not parse: " + jsonString);
+            }
+            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
+                ctxt.append("prompts." + this.type + 'getCallback.actionFn.resultOK', "px: " + this.promptIdx + " action: " + action);
+                var geopoint = (jsonObject.result !== null) ? jsonObject.result.mediaPath : null;
+                if (geopoint !== null) {
+                    var oldGeopoint = database.getDataValue(that.name);
+                    if ( geopoint != oldGeopoint) {
+                        // TODO: delete old??? Or leave until marked as finalized?
+                        // TODO: I'm not sure how the resuming works, but we'll need to make sure
+                        // onActivate get's called AFTER this happens.
+                        database.setData( ctxt, that.name, "file", geopoint);
+                    }
+                }
+            }
+            else {
+                ctxt.append("prompts." + this.type + 'getCallback.actionFn.failureOutcome', "px: " + this.promptIdx + " action: " + action);
+                console.log("failure returned");
+                alert(jsonObject.result);
+                ctxt.failure();
+            }
+        };
+    }
+});
 promptTypes.screen = promptTypes.base.extend({
     type: "screen",
     prompts: [],
