@@ -99,13 +99,25 @@ promptTypes.base = Backbone.View.extend({
     afterInitialize: function() {},
     baseActivate: function(ctxt) {
         var that = this;
+        function callFunctionsInSeries(functions){
+            if(functions.length > 0){
+                functions[0]($.extend({}, ctxt, { success : function(){callFunctionsInSeries(functions.slice(1));}}))
+            } else {
+                that.whenTemplateIsReady(ctxt);
+            }
+        }
+        callFunctionsInSeries(that.additionalActivateFunctions);
+    },
+    /*
+    baseActivate: function(ctxt) {
+        var that = this;
         var additionalActivateComplete = _.after(that.additionalActivateFunctions.length, function(){
             that.whenTemplateIsReady(ctxt);
         });
         _.each(that.additionalActivateFunctions, function(additionalActivateFunc){
             additionalActivateFunc($.extend({}, ctxt, { success : additionalActivateComplete}));
         });
-    },
+    },*/
     onActivate: function(ctxt) {
         this.baseActivate(ctxt);
     },
