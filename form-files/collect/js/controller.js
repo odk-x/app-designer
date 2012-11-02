@@ -47,7 +47,7 @@ window.controller = {
             var e = (ex != null) ? ex.message  + " stack: " + ex.stack : "undef";
             console.error("controller.validate: Exception: " + e );
             ctxt.append('controller.validate.exception', e );
-            ctxt.failure();
+            ctxt.failure({message: "Exception occurred while evaluating constraints"});
         }
     },
     gotoPreviousScreen: function(ctxt){
@@ -98,19 +98,24 @@ window.controller = {
         var nextPrompt = null;
         var that = this;
 
-        // ***NOTE: goto_if is implemented as a 'condition' on the goto***
-        // ***The order of the else-if statements below is very important.***
-        // i.e., First test if the 'condition' is false, and skip to the next 
-        // question if it is; if the 'condition' is true or not present, then 
-        // execute the 'goto' I.e., the goto_if is equivalent to a goto with
-        // a condition.
-        if ( prompt.type == "label" ) {
-            nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-        } else if('condition' in prompt && !prompt.condition()) {
-            nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-        } else if ( prompt.type == "goto" || prompt.type == "goto_if" ) {
-            nextPrompt = that.getPromptByLabel(prompt.param);
-        }
+		try {
+			// ***NOTE: goto_if is implemented as a 'condition' on the goto***
+			// ***The order of the else-if statements below is very important.***
+			// i.e., First test if the 'condition' is false, and skip to the next 
+			// question if it is; if the 'condition' is true or not present, then 
+			// execute the 'goto' I.e., the goto_if is equivalent to a goto with
+			// a condition.
+			if ( prompt.type == "label" ) {
+				nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+			} else if('condition' in prompt && !prompt.condition()) {
+				nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+			} else if ( prompt.type == "goto" || prompt.type == "goto_if" ) {
+				nextPrompt = that.getPromptByLabel(prompt.param);
+			}
+		} catch (e) {
+			ctxt.append("controller.advanceToScreenPrompt.exception.ignored", e);
+			nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+		}
         
         if(nextPrompt != null) {
             that.advanceToScreenPrompt(ctxt, nextPrompt);
@@ -118,6 +123,91 @@ window.controller = {
             ctxt.success(prompt);
         }
     },
+	validateQuestionHelper: function(ctxt, promptCandidate) {
+		var that = this;
+		return function() {
+			try {
+				// pass in 'render':false to indicate that rendering will not occur.
+				// call onActivate() to ensure that we have values (assignTo) initialized for validate()
+				promptCandidate.onActivate( $.extend({render: false}, ctxt, {
+					success: function(renderContext) {
+						promptCandidate.validate( $.extend({}, ctxt, {
+							success: function() {
+								if ( promptCandidate.type == 'finalize' ) {
+									ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+									ctxt.success();
+								} else {
+									var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
+									that.advanceToScreenPrompt($.extend({}, ctxt, {
+										success: function(prompt){
+											if(prompt) {
+												ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+												var fn = that.validateQuestionHelper(ctxt,prompt);
+												(fn)();
+											} else {
+												ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+												ctxt.success();
+											}
+										}}), nextPrompt);
+								}
+							},
+							failure: function(msg) {
+								ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
+								that.setPrompt( $.extend({}, ctxt, {success: function() {
+										var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: function(msg) {
+												that.screenManager.showScreenPopup(msg); 
+												ctxt.failure();
+											}});
+										setTimeout(function() {
+											simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+											that.validate( simpleCtxt );
+											}, 500);
+									}, failure: ctxt.failure }), promptCandidate);
+							}}));
+					}}) );
+			} catch(e) {
+				ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
+				that.setPrompt( $.extend({}, ctxt, {success: function() {
+						var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
+						setTimeout(function() {
+							simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+							that.validate( simpleCtxt );
+							}, 500);
+					}, failure: ctxt.failure }), promptCandidate);
+			}
+		};
+	},
+	validateAllQuestions: function(ctxt){
+		var that = this;
+		var promptCandidate = that.prompts[0];
+		// ensure we drop the spinner overlay when we complete...
+		var newctxt = $.extend({},ctxt,{success: function() {
+				that.screenManager.hideSpinnerOverlay();
+				ctxt.success();
+			},
+			failure: function() {
+				that.screenManager.hideSpinnerOverlay();
+				ctxt.failure();
+			}});
+		that.screenManager.showSpinnerOverlay({text:"Validating..."});
+		
+		// call advanceToScreenPrompt, since prompt[0] is always a goto_if...
+		that.advanceToScreenPrompt($.extend({}, newctxt, {
+			success: function(prompt){
+				if(prompt) {
+					newctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+					var fn = that.validateQuestionHelper(newctxt,prompt);
+					(fn)();
+				} else {
+					newctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+					newctxt.success();
+				}
+			},
+			failure: function() {
+				that.screenManager.hideSpinnerOverlay();
+				newctxt.failure();
+			}}), promptCandidate);
+	},
     gotoNextScreen: function(ctxt, options){
         var that = this;
         that.beforeMove($.extend({}, ctxt,
@@ -148,11 +238,11 @@ window.controller = {
                         that.advanceToScreenPrompt($.extend({}, ctxt, {
                             success: function(prompt){
                                 if(prompt) {
-                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + "nextPx: " + prompt.promptIdx);
+                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: " + prompt.promptIdx);
                                     // todo -- change to use hash?
                                     that.setPrompt(ctxt, prompt, options);
                                 } else {
-                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + "nextPx: no prompt!");
+                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: no prompt!");
                                     that.screenManager.noNextPage($.extend({}, ctxt,{
                                             success: function() {
                                                 ctxt.append("gotoNextScreen.noPrompts");
@@ -161,26 +251,9 @@ window.controller = {
                                 }
                         }}), promptCandidate);
                     },
-                    failure: function() {
+                    failure: function(msg) {
                         ctxt.append("gotoNextScreen.validate.failure", "px: " +  that.currentPromptIdx);
-
-                        /*
-                        //Crude implementation of validation toasts.
-                        //The prompt needs more control over this so the constraint_message is only shown
-                        //for constraint violations, and other messages are used for required fields etc.
-                        $.mobile.loading( 'show' , {
-                            text: that.getPromptByName(that.currentPromptIdx).constraint_message,
-                            textVisible: true,
-                            textonly: true,
-                            theme: 'a'
-                        });
-                        //Fading might be a bad idea. I don't know how it will perform in general.
-                        $('.ui-loader').fadeIn(200, function(){
-                            $('.ui-loader').delay(500).fadeOut(200, function(){
-                                $.mobile.loading( 'hide' );
-                            });
-                        });
-                        */
+						that.screenManager.showScreenPopup(msg); 
                         ctxt.failure();
                     }
                 }));
@@ -284,6 +357,54 @@ window.controller = {
             return;
         }
     },
+	opendatakitIgnoreAllChanges:function() {
+		var ctxt = controller.newCallbackContext();
+		ctxt.append("controller.opendatakitIgnoreAllChanges", this.currentPromptIdx);
+		if ( opendatakit.getCurrentInstanceId() == null ) {
+			collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), null );
+		} else {
+			this.ignoreAllChanges($.extend({},ctxt,{success:function() {
+								collect.ignoreAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+							}, failure:function() {
+								collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+							}}));
+		}
+	},
+	ignoreAllChanges:function(ctxt) {
+		database.ignore_all_changes(ctxt);
+	},
+	opendatakitSaveAllChanges:function(asComplete) {
+		var ctxt = controller.newCallbackContext();
+		ctxt.append("controller.opendatakitSaveAllChanges", this.currentPromptIdx);
+		if ( opendatakit.getCurrentInstanceId() == null ) {
+			collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), null );
+		} else {
+			this.saveAllChanges($.extend({},ctxt,{failure:function() {
+								collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+							}}), asComplete);
+		}
+	},
+	saveAllChanges:function(ctxt, asComplete) {
+		var that = this;
+		// NOTE: only success is reported up to collect here.
+		// if there are any failures, the failure callback is only invoked if the save request
+		// was initiated from within collect (via controller.opendatakitSaveAllChanges(), above).
+		if ( asComplete ) {
+			database.save_all_changes($.extend({},ctxt,{
+				success:function(){
+					that.validateAllQuestions($.extend({},ctxt,{
+						success:function(){
+							database.save_all_changes($.extend({},ctxt,{success:function() {
+								collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), true);
+								}}), true);
+						}}));
+				}}), false);
+		} else {
+			database.save_all_changes($.extend({},ctxt,{success:function() {
+							collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), false);
+							}}), false);
+		}
+	},
     gotoRef:function(ctxt, pageRef) {
         var that = this;
         if ( this.prompts.length == 0 ) {
@@ -350,6 +471,8 @@ window.controller = {
         }
     },
     
+	///////////////////////////////////////////////////////
+	// Logging context
     baseContext : {
         contextChain: [],
         

@@ -98,7 +98,10 @@ return Backbone.View.extend({
         //(We would not allow prompts to access the controller directly).
         //When the prompt changes, we could disconnect the interface to prevent the old
         //prompts from messing with the current screen.
-        that.prompt.onActivate($.extend({},ctxt,{
+		// 
+		// pass in 'render':true to indicate that we will be rendering upon successful
+		// completion.
+        that.prompt.onActivate($.extend({render:true},ctxt,{
             success:function(renderContext){
                 var isFirstPrompt = !('previousPageEl' in that);
                 var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
@@ -208,7 +211,20 @@ return Backbone.View.extend({
     openOptions: function(evt) {
         $( "#optionsPopup" ).popup( "open" );
     },
-    handlePagechange: function(evt) {
+	showScreenPopup: function(msg) {
+		$( "#screenPopup" ).find('.message').text(msg.message);
+        $( "#screenPopup" ).popup( "open" );
+    },
+	showSpinnerOverlay: function(msg) {
+		$.mobile.loading( 'show', {
+			text: msg.text,
+			textVisible: true
+		});
+	},
+	hideSpinnerOverlay: function() {
+		$.mobile.loading( 'hide' );
+	},
+    handlePagechange: function(evt){
         var ctxt = this.savedCtxt;
         this.savedCtxt = null;
         

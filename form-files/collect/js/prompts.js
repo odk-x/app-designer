@@ -9,6 +9,8 @@ promptTypes.base = Backbone.View.extend({
     database: database,
     mdl: mdl,
     constraint_message: "Constraint violated.",
+	invalid_value_message: "Invalid value.",
+	required_message: "Required value not provided.",
     // track how many times we've tried to retrieve and compile the 
     // handlebars template for this prompt.
     initializeTemplateMaxTryCount: 4,
@@ -28,18 +30,20 @@ promptTypes.base = Backbone.View.extend({
         this.initializeRenderContext();
         this.afterInitialize();
     },
-    whenTemplateIsReady: function(callback){
+    whenTemplateIsReady: function(ctxt){
         var that = this;
         if(this.template){
-            callback();
+            ctxt.success();
         } else if(this.templatePath) {
             requirejs(['text!'+this.templatePath], function(source) {
                 that.template = Handlebars.compile(source);
-                callback();
+                ctxt.success();
             });
         } else {
+			ctxt.append("prompts." + this.type + ".whenTemplateIsReady.noTemplate", "px: " + this.promptIdx);
             alert("No template for prompt: " + prompt.name);
             console.error(this);
+			ctxt.failure();
         }
     },
     initializeTemplate: function() {
@@ -96,7 +100,7 @@ promptTypes.base = Backbone.View.extend({
     baseActivate: function(ctxt) {
         var that = this;
         var additionalActivateComplete = _.after(that.additionalActivateFunctions.length, function(){
-            that.whenTemplateIsReady(ctxt.success);
+            that.whenTemplateIsReady(ctxt);
         });
         _.each(that.additionalActivateFunctions, function(additionalActivateFunc){
             additionalActivateFunc($.extend({}, ctxt, { success : additionalActivateComplete}));
@@ -149,43 +153,49 @@ promptTypes.base = Backbone.View.extend({
     //It is validate's responsibility to call baseValidate.
     baseValidate: function(context) {
         var that = this;
-        var isRequired = ('required' in that) ? that.required() : false;
-        var defaultContext = {
-            success: function() {},
-            failure: function() {}
-        };
-        context = $.extend(defaultContext, context);
+        var isRequired = false;
+		try {
+			isRequired = ('required' in that) ? that.required() : false;
+		} catch (e) {
+			context.append("prompts."+that.type+".baseValidate.required.exception", e);
+			isRequired = false;
+		}
         that.valid = true;
         if ( !('name' in that) ) {
             // no data validation if no persistence...
             context.success();
             return;
         } 
-        if ( that.getValue() == null || that.getValue().length == 0 ) {
+		var value = that.getValue();
+        if ( value == null || value == "" ) {
             if ( isRequired ) {
                 that.valid = false;
-                $( "#screenPopup" ).find('.message').text("Required value not provided.");
-                $( "#screenPopup" ).popup( "open" );
-                context.failure();
+                context.failure({ message: that.required_message });
                 return;
             }
         } else if ( 'validateValue' in that ) {
             if ( !that.validateValue() ) {
                 that.valid = false;
-                $( "#screenPopup" ).find('.message').text("Invalid value.");
-                $( "#screenPopup" ).popup( "open" );
-                context.failure();
+                context.failure({ message: that.invalid_value_message });
                 return;
             }
         } 
         if ( 'constraint' in that ) {
-            if ( !that.constraint() ) {
+			var outcome = false;
+			try {
+                outcome = that.constraint({"allowExceptions":true});
+                if ( !outcome ) {
+                    that.valid = false;
+                    context.failure({ message: that.constraint_message });
+                    return;
+                }
+			} catch (e) {
+				context.append("prompts."+that.type+"baseValidate.constraint.exception", e);
+				outcome = false;
                 that.valid = false;
-                $( "#screenPopup" ).find('.message').text(that.constraint_message);
-                $( "#screenPopup" ).popup( "open" );
-                context.failure();
+                context.failure({ message: "Exception in constraint." });
                 return;
-            }
+			}
         }
         context.success();
     },
@@ -304,15 +314,12 @@ promptTypes.finalize = promptTypes.base.extend({
     saveIncomplete: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
-        // TODO: call up to Collect to report completion
-        database.save_all_changes(ctxt, false);
+		controller.saveAllChanges(ctxt,false);
     },
     saveFinal: function(evt) {
          var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
-        // TODO: call up to Collect to report completion
-        database.save_all_changes(ctxt, true);
-        
+		controller.saveAllChanges(ctxt,true);
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -589,6 +596,12 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
                 renderContext.invalid = !that.validateValue();
                 that.debouncedRender();
                 ctxt.success();
+            },
+            failure: function() {
+                renderContext.value = value;
+                renderContext.invalid = true;
+                that.render();
+                ctxt.failure();
             }
         }), (value.length === 0 ? null : value));
     },
@@ -857,15 +870,30 @@ promptTypes.screen = promptTypes.base.extend({
         }
         return true;
     },
+	getActivePrompts: function(context) {
+        var that = this;
+        var subPrompts;
+        subPrompts = _.filter(that.prompts, function(prompt) {
+			try {
+				if('condition' in prompt) {
+					return prompt.condition();
+				}
+			} catch (e) {
+				if ( context ) {
+					context.append('prompts.screen.getActivePrompts.condition.exception', e);
+				} else {
+					console.error('prompts.screen.getActivePrompts.condition.exception: ' + e);
+				}
+				return false;
+			}
+            return true;
+        });
+		return subPrompts;
+	},
     beforeMove: function(context) {
         var that = this;
         var subPrompts, subPromptContext;
-        subPrompts = _.filter(that.prompts, function(prompt) {
-            if('condition' in prompt) {
-                return prompt.condition();
-            }
-            return true;
-        });
+        subPrompts = that.getActivePrompts(context);
         subPromptContext = $.extend({},context,{
             success: _.after(subPrompts.length, context.success),
             failure: _.once(context.failure)
@@ -877,12 +905,7 @@ promptTypes.screen = promptTypes.base.extend({
     validate: function(context) {
         var that = this;
         var subPrompts, subPromptContext;
-        subPrompts = _.filter(this.prompts, function(prompt) {
-            if('condition' in prompt) {
-                return prompt.condition();
-            }
-            return true;
-        });
+        subPrompts = that.getActivePrompts(context);
         subPromptContext = $.extend({},context,{
             success: _.after(subPrompts.length, context.success),
             failure: _.once(context.failure)
@@ -905,12 +928,8 @@ promptTypes.screen = promptTypes.base.extend({
         });
     },
     render: function(){
-        var subPrompts = _.filter(this.prompts, function(prompt) {
-            if('condition' in prompt) {
-                return prompt.condition();
-            }
-            return true;
-        });
+		var that = this;
+		var subPrompts = that.getActivePrompts();
         this.$el.html('<div class="odk odk-prompts">');
         var $prompts = this.$('.odk-prompts');
         $.each(subPrompts, function(idx, prompt){
@@ -1012,7 +1031,15 @@ promptTypes.with_next = promptTypes.base.extend({
     hideInHierarchy: true,
     assignToValue: function(ctxt){
         var that = this;
-        that.setValue(ctxt, that.assign());
+		var value;
+		try {
+			value = that.assign();
+		} catch (e) {
+			ctxt.append('prompts.'+that.type+'.assignToValue.assign.exception', e);
+			ctxt.failure();
+			return;
+		}
+		that.setValue(ctxt, value);
     }
 });
 

@@ -480,7 +480,7 @@ putData:function(ctxt, name, type, value) {
       that.withDb( ctxt, function(transaction) {
 			var is = that.insertDbTableStmt(name, type, value, false);
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-				ctxt.log("putData: successful insert: " + name);
+				ctxt.append("putData: successful insert: " + name);
             });
         });
 },
@@ -490,7 +490,7 @@ putInstanceMetaData:function(ctxt, name, type, value) {
       that.withDb( ctxt, function(transaction) {
 			var is = that.insertDbTableStmt(name, type, value, true);
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-				ctxt.log("putInstanceMetaData: successful insert: " + name);
+				ctxt.append("putInstanceMetaData: successful insert: " + name);
             });
         });
 },
@@ -503,7 +503,7 @@ putDataKeyTypeValueMap:function(ctxt, ktvmlist) {
       that.withDb( ctxt, function(transaction) {
 			var is = that.insertKtvmListDbTableStmt(ktvmlist);
 			transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-				ctxt.log("putDataKeyTypeValueMap: successful insert: " + ktvmlist.length);
+				ctxt.append("putDataKeyTypeValueMap: successful insert: " + ktvmlist.length);
 			});
 		});
 },
@@ -815,37 +815,27 @@ cacheAllTableMetaData:function(ctxt) {
         ctxt.success();
         }}), opendatakit.getCurrentTableId());
 },
-save_all_changes:function(ctxt, asComplete, continuation) {
+save_all_changes:function(ctxt, asComplete) {
       var that = this;
-    // TODO: ensure that all data on the current page is saved...
-    // TODO: update list of instances available for editing (???)...
-    // TODO: for above -- where would the instance name come from???
+    // TODO: if called from Java, ensure that all data on the current page is saved...
    	  ctxt.append('save_all_changes');
       that.withDb( $.extend({}, ctxt, {success:function() {
                 ctxt.append('save_all_changes.markCurrentStateSaved.success', 
                 mdl.qp.formId.value + " instanceId: " + opendatakit.getCurrentInstanceId() + " asComplete: " + asComplete);
-                if ( asComplete ) {
-                    // TODO: traverse all elements evaluating their constraints (validating their contents)
-                    // TODO: show error boxes for any violated constraints...
-                    // ONLY if successful, then:
-                      ctxt.append('save_all_changes.cleanup');
-                      that.withDb( ctxt, 
-                            function(transaction) {
-                            var cs = that.markCurrentStateAsSavedDbTableStmt('COMPLETE');
-                            transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-                                // and now delete the change history...
-                                var cs = that.deletePriorChangesDbTableStmt();
-                                transaction.executeSql(cs.stmt, cs.bind);
-                            });
-                        });
-                } else {
-                    ctxt.success();
-                }
+				ctxt.success();
             }}), 
             function(transaction) {
-            var cs = that.markCurrentStateAsSavedDbTableStmt('INCOMPLETE');
-            transaction.executeSql(cs.stmt, cs.bind);
-        });
+				var cs = that.markCurrentStateAsSavedDbTableStmt((asComplete ? 'COMPLETE' : 'INCOMPLETE'));
+				transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+					if ( asComplete ) {
+						ctxt.append('save_all_changes.cleanup');
+						// and now delete the change history...
+						var cs = that.deletePriorChangesDbTableStmt();
+						transaction.executeSql(cs.stmt, cs.bind);
+					}
+				});
+			}
+        );
     // TODO: should we have a failure callback in to ODK Collect?
 },
 ignore_all_changes:function(ctxt) {
