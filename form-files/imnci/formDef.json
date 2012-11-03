@@ -1,69 +1,4 @@
 {
-    "model": {
-        "acknowledge_give_2ml_vitamin_a": {
-            "type": "boolean"
-        }, 
-        "takes_other_foods": {
-            "type": "string"
-        }, 
-        "breastfed": {
-            "type": "string"
-        }, 
-        "weight": {
-            "type": "number"
-        }, 
-        "cotrimoxazole_type": {
-            "type": "string"
-        }, 
-        "avoid_cotrimoxazole_acknowledge": {
-            "type": "boolean"
-        }, 
-        "breastfeedings_per_day": {
-            "type": "integer"
-        }, 
-        "acknowledge_give_cotrimoxazole": {
-            "type": "boolean"
-        }, 
-        "leave_before_treatment_end": {
-            "type": "string"
-        }, 
-        "change_in_feeding": {
-            "type": "string"
-        }, 
-        "separate_serving": {
-            "type": "string"
-        }, 
-        "breastfed_at_night": {
-            "type": "string"
-        }, 
-        "change_in_feeding_how": {
-            "type": "string"
-        }, 
-        "acknowledge_give_1ml_vitamin_a": {
-            "type": "boolean"
-        }, 
-        "birthday": {
-            "type": "string"
-        }, 
-        "other_foods_per_day": {
-            "type": "integer"
-        }, 
-        "who_feeds_how": {
-            "type": "string"
-        }, 
-        "acknowledge_give_paracetamol": {
-            "type": "boolean"
-        }, 
-        "serving_unit": {
-            "type": "string"
-        }, 
-        "other_foods": {
-            "type": "string"
-        }, 
-        "premature_or_jaundiced": {
-            "type": "string"
-        }
-    }, 
     "settings": [
         {
             "rowNum": 2, 
@@ -84,13 +19,441 @@
             }
         }
     ], 
+    "choices": {
+        "attachment_quality_sign": [
+            {
+                "rowNum": 48, 
+                "name": "chin_touching_breast", 
+                "label": {
+                    "default": "Chin touching breast", 
+                    "hindi": "तोढी स्तन को चू रही है."
+                }
+            }, 
+            {
+                "rowNum": 49, 
+                "name": "mouth_wide_open", 
+                "label": {
+                    "default": "Mouth wide open", 
+                    "hindi": "मूँह पूरा खुला हुआ है."
+                }
+            }, 
+            {
+                "rowNum": 50, 
+                "name": "lower_lip_outward", 
+                "label": {
+                    "default": "Lower lip turned outward", 
+                    "hindi": "निचला होंठ बाहर की तरफ मूधा हुआ है."
+                }
+            }, 
+            {
+                "rowNum": 51, 
+                "name": "visible_areola", 
+                "label": {
+                    "default": "More areola visible above than below the \nmouth", 
+                    "hindi": "नीचे की अपेक्षा उपर एरियोला अधिक दिख रहा है."
+                }
+            }
+        ], 
+        "katori_teaspoon": [
+            {
+                "rowNum": 67, 
+                "name": "katori", 
+                "label": {
+                    "default": "Katori", 
+                    "hindi": "कटोरी"
+                }
+            }, 
+            {
+                "rowNum": 68, 
+                "name": "teaspoon", 
+                "label": {
+                    "default": "Teaspoon", 
+                    "hindi": "चम्मच"
+                }
+            }
+        ], 
+        "needed_vaccinations": [
+            {
+                "rowNum": 30, 
+                "name": "bcg", 
+                "age_months": 0, 
+                "label": {
+                    "default": "BCG", 
+                    "hindi": "बी. सी. गी"
+                }
+            }, 
+            {
+                "rowNum": 31, 
+                "name": "opv0", 
+                "age_months": 0, 
+                "label": {
+                    "default": "OPV-0", 
+                    "hindi": "ओ. पी. वी.-०"
+                }
+            }, 
+            {
+                "rowNum": 32, 
+                "name": "dpt1", 
+                "age_months": 1.5, 
+                "label": {
+                    "default": "DPT-1", 
+                    "hindi": "दी. पी. ती -१"
+                }
+            }, 
+            {
+                "rowNum": 33, 
+                "name": "opv1hepatitusb1", 
+                "age_months": 1.5, 
+                "label": {
+                    "default": "OPV-1 + Hepatitis B-1", 
+                    "hindi": "ओ. पी. वी.-१ + हेपतितस बी-१"
+                }
+            }
+        ], 
+        "visit_type": [
+            {
+                "rowNum": 54, 
+                "name": "initial_visit", 
+                "label": {
+                    "default": "Initial vist", 
+                    "hindi": "प्रथम भेट."
+                }
+            }, 
+            {
+                "rowNum": 55, 
+                "name": "followup", 
+                "label": {
+                    "default": "Follow-up", 
+                    "hindi": "पुन: भेट"
+                }
+            }
+        ], 
+        "cotrimoxazole_type": [
+            {
+                "rowNum": 70, 
+                "name": "adult", 
+                "label": {
+                    "default": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)", 
+                    "hindi": "अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)"
+                }
+            }, 
+            {
+                "rowNum": 71, 
+                "name": "pediatric", 
+                "label": {
+                    "default": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)", 
+                    "hindi": "बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)"
+                }
+            }
+        ], 
+        "food": [
+            {
+                "rowNum": 35, 
+                "name": "milk", 
+                "label": {
+                    "default": "Milk", 
+                    "hindi": "दूध"
+                }
+            }, 
+            {
+                "rowNum": 36, 
+                "name": "juice", 
+                "label": {
+                    "default": "Juice", 
+                    "hindi": "जूस"
+                }
+            }, 
+            {
+                "rowNum": 37, 
+                "name": "water", 
+                "label": {
+                    "default": "Water", 
+                    "hindi": "पानी"
+                }
+            }, 
+            {
+                "rowNum": 38, 
+                "name": "formula", 
+                "label": {
+                    "default": "Formula", 
+                    "hindi": "फ़ॉर्मूला"
+                }
+            }, 
+            {
+                "rowNum": 39, 
+                "name": "cereal", 
+                "label": {
+                    "default": "Cereal", 
+                    "hindi": "सेरल"
+                }
+            }, 
+            {
+                "rowNum": 40, 
+                "name": "milk_based_wheat/rice", 
+                "label": {
+                    "default": "Cooked wheat/rice based with undiluted milk and sugar", 
+                    "hindi": "पक्की हुई रोति / चावल शूध दूष और चीनी के साथ."
+                }
+            }, 
+            {
+                "rowNum": 41, 
+                "name": "water_based_wheat/rice", 
+                "label": {
+                    "default": "Cooked wheat/rice based with dal/lentil water", 
+                    "hindi": "पक्की हुई रोति / चावल डाल और पानी के साथ."
+                }
+            }, 
+            {
+                "rowNum": 42, 
+                "name": "khichri", 
+                "label": {
+                    "default": "Khichri (cooked rice+dal/lentil in thinned form)", 
+                    "hindi": "खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)"
+                }
+            }, 
+            {
+                "rowNum": 43, 
+                "name": "fruit", 
+                "label": {
+                    "default": "Mashed fruit", 
+                    "hindi": "पीसा हुए फल"
+                }
+            }, 
+            {
+                "rowNum": 44, 
+                "name": "vegetables", 
+                "label": {
+                    "default": "Boiled or cooked vegetables", 
+                    "hindi": "उबली या पक्की हुई सब्ज़ियाँ."
+                }
+            }, 
+            {
+                "rowNum": 45, 
+                "name": "mixed_food", 
+                "label": {
+                    "default": "Normal mixed food as adults", 
+                    "hindi": "बढ़ों जैसे सामान्य खाना."
+                }
+            }
+        ], 
+        "no_some_severe": [
+            {
+                "rowNum": 63, 
+                "name": "none", 
+                "label": {
+                    "default": "none", 
+                    "hindi": "कुच्छ"
+                }
+            }, 
+            {
+                "rowNum": 64, 
+                "name": "some", 
+                "label": {
+                    "default": "some", 
+                    "hindi": "तोढा"
+                }
+            }, 
+            {
+                "rowNum": 65, 
+                "name": "severe", 
+                "label": {
+                    "default": "severe", 
+                    "hindi": "बहुत"
+                }
+            }
+        ], 
+        "skin_elasticity": [
+            {
+                "rowNum": 15, 
+                "name": "very_slow", 
+                "label": {
+                    "default": "Very slowly (longer than 2 seconds)?", 
+                    "hindi": "बहुत धीरे (२ सेकेंड से ज़्यादा)"
+                }
+            }, 
+            {
+                "rowNum": 16, 
+                "name": "slow", 
+                "label": {
+                    "default": "Slowly?", 
+                    "hindi": "धीरे?"
+                }
+            }, 
+            {
+                "rowNum": 17, 
+                "name": "normal", 
+                "label": {
+                    "default": "Skin goes back normally.", 
+                    "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
+                }
+            }
+        ], 
+        "breast_problems": [
+            {
+                "rowNum": 58, 
+                "name": "flat_nipple", 
+                "label": {
+                    "default": "Flat/inverted nipple", 
+                    "hindi": "चुचक के घाव"
+                }
+            }, 
+            {
+                "rowNum": 59, 
+                "name": "sore_nipple", 
+                "label": {
+                    "default": "Sore/cracked nipple", 
+                    "hindi": "चुचक के घाव"
+                }
+            }, 
+            {
+                "rowNum": 60, 
+                "name": "engorged_breasts", 
+                "label": {
+                    "default": "Engorged breasts", 
+                    "hindi": "स्तानो मैं सूजन"
+                }
+            }, 
+            {
+                "rowNum": 61, 
+                "name": "breast_abscess", 
+                "label": {
+                    "default": "Breast abscess", 
+                    "hindi": "स्तानो मैं फोड़े"
+                }
+            }
+        ], 
+        "sex": [
+            {
+                "rowNum": 11, 
+                "name": "male", 
+                "label": {
+                    "default": "Male", 
+                    "hindi": "पुरुष"
+                }
+            }, 
+            {
+                "rowNum": 12, 
+                "name": "female", 
+                "label": {
+                    "default": "Female", 
+                    "hindi": "नारी"
+                }
+            }
+        ], 
+        "sucking_effectiveness": [
+            {
+                "rowNum": 25, 
+                "name": "none", 
+                "label": {
+                    "default": "Not suckling at all.", 
+                    "hindi": "स्तन को बिल्कुल नही चूसना"
+                }
+            }, 
+            {
+                "rowNum": 26, 
+                "name": "not_effective", 
+                "label": {
+                    "default": "Not suckling effectively.", 
+                    "hindi": "स्तन को प्रभावी डांग से नही चूसना"
+                }
+            }, 
+            {
+                "rowNum": 27, 
+                "name": "effective", 
+                "label": {
+                    "default": "Suckling effectively.", 
+                    "hindi": "स्तन को प्रभावी डांग से चूसना"
+                }
+            }
+        ], 
+        "attachment_quality": [
+            {
+                "rowNum": 20, 
+                "name": "none", 
+                "label": {
+                    "default": "No attachment at all.", 
+                    "hindi": "कोई लगाव नही"
+                }
+            }, 
+            {
+                "rowNum": 21, 
+                "name": "poor", 
+                "label": {
+                    "default": "Not well attached.", 
+                    "hindi": "लगाव ठीक से नही है"
+                }
+            }, 
+            {
+                "rowNum": 22, 
+                "name": "good", 
+                "label": {
+                    "default": "Good attachment.", 
+                    "hindi": "अच्छा लगाव"
+                }
+            }
+        ], 
+        "agree": [
+            {
+                "rowNum": 8, 
+                "name": "agree", 
+                "label": {
+                    "default": "Agree", 
+                    "hindi": "राज़ी"
+                }
+            }, 
+            {
+                "rowNum": 9, 
+                "name": "disagree", 
+                "label": {
+                    "default": "Disagree", 
+                    "hindi": "नही राज़ी"
+                }
+            }
+        ], 
+        "present": [
+            {
+                "rowNum": 5, 
+                "name": "present", 
+                "label": {
+                    "default": "Present", 
+                    "hindi": "है"
+                }
+            }, 
+            {
+                "rowNum": 6, 
+                "name": "not_present", 
+                "label": {
+                    "default": "Not present", 
+                    "hindi": "नही है"
+                }
+            }
+        ], 
+        "yes_no": [
+            {
+                "rowNum": 2, 
+                "name": "yes", 
+                "label": {
+                    "default": "Yes", 
+                    "hindi": "हाँ"
+                }
+            }, 
+            {
+                "rowNum": 3, 
+                "name": "no", 
+                "label": {
+                    "default": "No", 
+                    "hindi": "ना"
+                }
+            }
+        ]
+    }, 
     "survey": [
         {
-            "name": "geotest", 
+            "name": "cascading_select_test", 
             "rowNum": 2, 
-            "type": "geopoint", 
-            "param": null, 
-            "label": "geotest"
+            "type": "select_one", 
+            "param": "states", 
+            "label": "cs test"
         }, 
         {
             "name": "birthday", 
@@ -2404,6 +2767,82 @@
             "param": "feeding_rec_end"
         }
     ], 
+    "queries": [
+        {
+            "callback": "_.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n})", 
+            "rowNum": 2, 
+            "name": "states", 
+            "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")"
+        }
+    ], 
+    "model": {
+        "breastfed": {
+            "type": "string"
+        }, 
+        "weight": {
+            "type": "number"
+        }, 
+        "cotrimoxazole_type": {
+            "type": "string"
+        }, 
+        "breastfeedings_per_day": {
+            "type": "integer"
+        }, 
+        "acknowledge_give_cotrimoxazole": {
+            "type": "boolean"
+        }, 
+        "leave_before_treatment_end": {
+            "type": "string"
+        }, 
+        "separate_serving": {
+            "type": "string"
+        }, 
+        "change_in_feeding_how": {
+            "type": "string"
+        }, 
+        "change_in_feeding": {
+            "type": "string"
+        }, 
+        "birthday": {
+            "type": "string"
+        }, 
+        "acknowledge_give_paracetamol": {
+            "type": "boolean"
+        }, 
+        "serving_unit": {
+            "type": "string"
+        }, 
+        "premature_or_jaundiced": {
+            "type": "string"
+        }, 
+        "acknowledge_give_2ml_vitamin_a": {
+            "type": "boolean"
+        }, 
+        "takes_other_foods": {
+            "type": "string"
+        }, 
+        "breastfed_at_night": {
+            "type": "string"
+        }, 
+        "avoid_cotrimoxazole_acknowledge": {
+            "type": "boolean"
+        }, 
+        "other_foods": {
+            "type": "string"
+        }, 
+        "who_feeds_how": {
+            "type": "string"
+        }, 
+        "cascading_select_test": {
+            "type": "string"
+        }, 
+        "acknowledge_give_1ml_vitamin_a": {
+            "type": "boolean"
+        }, 
+        "other_foods_per_day": {
+            "type": "integer"
+        }
+    }, 
     "calculates": [
         {
             "calculation": "selected(data('able_to_drink'), 'no') || selected(data('vomit_everything'), 'yes') ||  selected(data('convulsions'), 'yes') || selected(data('lethargic'), 'yes')", 
@@ -2430,433 +2869,5 @@
             "rowNum": 6, 
             "name": "planBORSAmntCups"
         }
-    ], 
-    "choices": {
-        "attachment_quality_sign": [
-            {
-                "rowNum": 48, 
-                "name": "chin_touching_breast", 
-                "label": {
-                    "default": "Chin touching breast", 
-                    "hindi": "तोढी स्तन को चू रही है."
-                }
-            }, 
-            {
-                "rowNum": 49, 
-                "name": "mouth_wide_open", 
-                "label": {
-                    "default": "Mouth wide open", 
-                    "hindi": "मूँह पूरा खुला हुआ है."
-                }
-            }, 
-            {
-                "rowNum": 50, 
-                "name": "lower_lip_outward", 
-                "label": {
-                    "default": "Lower lip turned outward", 
-                    "hindi": "निचला होंठ बाहर की तरफ मूधा हुआ है."
-                }
-            }, 
-            {
-                "rowNum": 51, 
-                "name": "visible_areola", 
-                "label": {
-                    "default": "More areola visible above than below the \nmouth", 
-                    "hindi": "नीचे की अपेक्षा उपर एरियोला अधिक दिख रहा है."
-                }
-            }
-        ], 
-        "katori_teaspoon": [
-            {
-                "rowNum": 67, 
-                "name": "katori", 
-                "label": {
-                    "default": "Katori", 
-                    "hindi": "कटोरी"
-                }
-            }, 
-            {
-                "rowNum": 68, 
-                "name": "teaspoon", 
-                "label": {
-                    "default": "Teaspoon", 
-                    "hindi": "चम्मच"
-                }
-            }
-        ], 
-        "needed_vaccinations": [
-            {
-                "rowNum": 30, 
-                "name": "bcg", 
-                "age_months": 0, 
-                "label": {
-                    "default": "BCG", 
-                    "hindi": "बी. सी. गी"
-                }
-            }, 
-            {
-                "rowNum": 31, 
-                "name": "opv0", 
-                "age_months": 0, 
-                "label": {
-                    "default": "OPV-0", 
-                    "hindi": "ओ. पी. वी.-०"
-                }
-            }, 
-            {
-                "rowNum": 32, 
-                "name": "dpt1", 
-                "age_months": 1.5, 
-                "label": {
-                    "default": "DPT-1", 
-                    "hindi": "दी. पी. ती -१"
-                }
-            }, 
-            {
-                "rowNum": 33, 
-                "name": "opv1hepatitusb1", 
-                "age_months": 1.5, 
-                "label": {
-                    "default": "OPV-1 + Hepatitis B-1", 
-                    "hindi": "ओ. पी. वी.-१ + हेपतितस बी-१"
-                }
-            }
-        ], 
-        "visit_type": [
-            {
-                "rowNum": 54, 
-                "name": "initial_visit", 
-                "label": {
-                    "default": "Initial vist", 
-                    "hindi": "प्रथम भेट."
-                }
-            }, 
-            {
-                "rowNum": 55, 
-                "name": "followup", 
-                "label": {
-                    "default": "Follow-up", 
-                    "hindi": "पुन: भेट"
-                }
-            }
-        ], 
-        "cotrimoxazole_type": [
-            {
-                "rowNum": 70, 
-                "name": "adult", 
-                "label": {
-                    "default": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)", 
-                    "hindi": "अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)"
-                }
-            }, 
-            {
-                "rowNum": 71, 
-                "name": "pediatric", 
-                "label": {
-                    "default": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)", 
-                    "hindi": "बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)"
-                }
-            }
-        ], 
-        "food": [
-            {
-                "rowNum": 35, 
-                "name": "milk", 
-                "label": {
-                    "default": "Milk", 
-                    "hindi": "दूध"
-                }
-            }, 
-            {
-                "rowNum": 36, 
-                "name": "juice", 
-                "label": {
-                    "default": "Juice", 
-                    "hindi": "जूस"
-                }
-            }, 
-            {
-                "rowNum": 37, 
-                "name": "water", 
-                "label": {
-                    "default": "Water", 
-                    "hindi": "पानी"
-                }
-            }, 
-            {
-                "rowNum": 38, 
-                "name": "formula", 
-                "label": {
-                    "default": "Formula", 
-                    "hindi": "फ़ॉर्मूला"
-                }
-            }, 
-            {
-                "rowNum": 39, 
-                "name": "cereal", 
-                "label": {
-                    "default": "Cereal", 
-                    "hindi": "सेरल"
-                }
-            }, 
-            {
-                "rowNum": 40, 
-                "name": "milk_based_wheat/rice", 
-                "label": {
-                    "default": "Cooked wheat/rice based with undiluted milk and sugar", 
-                    "hindi": "पक्की हुई रोति / चावल शूध दूष और चीनी के साथ."
-                }
-            }, 
-            {
-                "rowNum": 41, 
-                "name": "water_based_wheat/rice", 
-                "label": {
-                    "default": "Cooked wheat/rice based with dal/lentil water", 
-                    "hindi": "पक्की हुई रोति / चावल डाल और पानी के साथ."
-                }
-            }, 
-            {
-                "rowNum": 42, 
-                "name": "khichri", 
-                "label": {
-                    "default": "Khichri (cooked rice+dal/lentil in thinned form)", 
-                    "hindi": "खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)"
-                }
-            }, 
-            {
-                "rowNum": 43, 
-                "name": "fruit", 
-                "label": {
-                    "default": "Mashed fruit", 
-                    "hindi": "पीसा हुए फल"
-                }
-            }, 
-            {
-                "rowNum": 44, 
-                "name": "vegetables", 
-                "label": {
-                    "default": "Boiled or cooked vegetables", 
-                    "hindi": "उबली या पक्की हुई सब्ज़ियाँ."
-                }
-            }, 
-            {
-                "rowNum": 45, 
-                "name": "mixed_food", 
-                "label": {
-                    "default": "Normal mixed food as adults", 
-                    "hindi": "बढ़ों जैसे सामान्य खाना."
-                }
-            }
-        ], 
-        "no_some_severe": [
-            {
-                "rowNum": 63, 
-                "name": "none", 
-                "label": {
-                    "default": "none", 
-                    "hindi": "कुच्छ"
-                }
-            }, 
-            {
-                "rowNum": 64, 
-                "name": "some", 
-                "label": {
-                    "default": "some", 
-                    "hindi": "तोढा"
-                }
-            }, 
-            {
-                "rowNum": 65, 
-                "name": "severe", 
-                "label": {
-                    "default": "severe", 
-                    "hindi": "बहुत"
-                }
-            }
-        ], 
-        "skin_elasticity": [
-            {
-                "rowNum": 15, 
-                "name": "very_slow", 
-                "label": {
-                    "default": "Very slowly (longer than 2 seconds)?", 
-                    "hindi": "बहुत धीरे (२ सेकेंड से ज़्यादा)"
-                }
-            }, 
-            {
-                "rowNum": 16, 
-                "name": "slow", 
-                "label": {
-                    "default": "Slowly?", 
-                    "hindi": "धीरे?"
-                }
-            }, 
-            {
-                "rowNum": 17, 
-                "name": "normal", 
-                "label": {
-                    "default": "Skin goes back normally.", 
-                    "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
-                }
-            }
-        ], 
-        "breast_problems": [
-            {
-                "rowNum": 58, 
-                "name": "flat_nipple", 
-                "label": {
-                    "default": "Flat/inverted nipple", 
-                    "hindi": "चुचक के घाव"
-                }
-            }, 
-            {
-                "rowNum": 59, 
-                "name": "sore_nipple", 
-                "label": {
-                    "default": "Sore/cracked nipple", 
-                    "hindi": "चुचक के घाव"
-                }
-            }, 
-            {
-                "rowNum": 60, 
-                "name": "engorged_breasts", 
-                "label": {
-                    "default": "Engorged breasts", 
-                    "hindi": "स्तानो मैं सूजन"
-                }
-            }, 
-            {
-                "rowNum": 61, 
-                "name": "breast_abscess", 
-                "label": {
-                    "default": "Breast abscess", 
-                    "hindi": "स्तानो मैं फोड़े"
-                }
-            }
-        ], 
-        "sex": [
-            {
-                "rowNum": 11, 
-                "name": "male", 
-                "label": {
-                    "default": "Male", 
-                    "hindi": "पुरुष"
-                }
-            }, 
-            {
-                "rowNum": 12, 
-                "name": "female", 
-                "label": {
-                    "default": "Female", 
-                    "hindi": "नारी"
-                }
-            }
-        ], 
-        "sucking_effectiveness": [
-            {
-                "rowNum": 25, 
-                "name": "none", 
-                "label": {
-                    "default": "Not suckling at all.", 
-                    "hindi": "स्तन को बिल्कुल नही चूसना"
-                }
-            }, 
-            {
-                "rowNum": 26, 
-                "name": "not_effective", 
-                "label": {
-                    "default": "Not suckling effectively.", 
-                    "hindi": "स्तन को प्रभावी डांग से नही चूसना"
-                }
-            }, 
-            {
-                "rowNum": 27, 
-                "name": "effective", 
-                "label": {
-                    "default": "Suckling effectively.", 
-                    "hindi": "स्तन को प्रभावी डांग से चूसना"
-                }
-            }
-        ], 
-        "attachment_quality": [
-            {
-                "rowNum": 20, 
-                "name": "none", 
-                "label": {
-                    "default": "No attachment at all.", 
-                    "hindi": "कोई लगाव नही"
-                }
-            }, 
-            {
-                "rowNum": 21, 
-                "name": "poor", 
-                "label": {
-                    "default": "Not well attached.", 
-                    "hindi": "लगाव ठीक से नही है"
-                }
-            }, 
-            {
-                "rowNum": 22, 
-                "name": "good", 
-                "label": {
-                    "default": "Good attachment.", 
-                    "hindi": "अच्छा लगाव"
-                }
-            }
-        ], 
-        "agree": [
-            {
-                "rowNum": 8, 
-                "name": "agree", 
-                "label": {
-                    "default": "Agree", 
-                    "hindi": "राज़ी"
-                }
-            }, 
-            {
-                "rowNum": 9, 
-                "name": "disagree", 
-                "label": {
-                    "default": "Disagree", 
-                    "hindi": "नही राज़ी"
-                }
-            }
-        ], 
-        "present": [
-            {
-                "rowNum": 5, 
-                "name": "present", 
-                "label": {
-                    "default": "Present", 
-                    "hindi": "है"
-                }
-            }, 
-            {
-                "rowNum": 6, 
-                "name": "not_present", 
-                "label": {
-                    "default": "Not present", 
-                    "hindi": "नही है"
-                }
-            }
-        ], 
-        "yes_no": [
-            {
-                "rowNum": 2, 
-                "name": "yes", 
-                "label": {
-                    "default": "Yes", 
-                    "hindi": "हाँ"
-                }
-            }, 
-            {
-                "rowNum": 3, 
-                "name": "no", 
-                "label": {
-                    "default": "No", 
-                    "hindi": "ना"
-                }
-            }
-        ]
-    }
+    ]
 }

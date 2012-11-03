@@ -534,12 +534,32 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        if(that.param in that.form.choices) {
+        var saveValue = that.getValue();
+        var query;
+        if(that.param in that.form.queries) {
+            query = that.form.queries[that.param];
+            //TODO: Come up with a tables uri and when we get that kind of uri do tables queries.
+            $.ajax({
+                "type": 'GET',
+                "url": query.uri(),
+                "dataType": 'json',
+                "data": {},
+                "success": function(result){
+                    that.renderContext.choices = query.callback(result);
+                    that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
+                    that.baseActivate(ctxt);
+                },
+                "error": function(e){
+                    console.error(e);
+                    alert('Could not get remote data');
+                }
+            });
+            return;
+        } else if (that.param in that.form.choices) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
             that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
         }
-        var saveValue = that.getValue();
         that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
         this.baseActivate(ctxt);
     }

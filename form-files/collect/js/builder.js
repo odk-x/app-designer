@@ -95,7 +95,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             var myFormula = this.formula(content);
             return function(context){
                 if(context){
-                    myFormula(context);
+                    return myFormula(context);
                 } else {
                     alert("Formula requires context arg.\nSee console for details.");
                     console.error(this);
@@ -310,6 +310,14 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 return [calculate.name, that.propertyParsers.formula(calculate.calculation)];
             }));
             formulaFunctions.calculates = calculates;
+            
+            that.form.queries = _.object(_.map(surveyJson.queries, function(query) {
+                return [
+                query.name, {
+                    "uri" : that.propertyParsers.formula(query.uri),
+                    "callback" : that.propertyParsers.formula(query.callback)
+                }];
+            }));
             
             that.form.prompts = this.initializePrompts(prompts);
             controller.prompts = that.form.prompts;
