@@ -39,6 +39,52 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         };
     })();
     
+    function formula(content) {
+        // If context.allowExceptions is true call is responsible for catching and handling exceptions.
+		// 'context' passed in may or may not be defined. 
+        // It may or may not be the calling context object.
+        var result = '(function(context){\n'+
+            'return ('+ content + ');\n' +
+            '})';
+        try {
+            var parsedFunction = evalInEnvironment(result);
+            return function(context){
+                try {
+                    return parsedFunction.call(this, context);
+                } catch (e) {
+                    console.error(String(e));
+                    console.error(result);
+                    console.error(this);
+                    if(context && context.allowExceptions === true){
+                        throw new Error("Exception in user formula.");
+                    } else {
+                        alert("Could not call formula.\nSee console for details.");
+                        //TODO: Stop the survey
+                    }
+                }
+            };
+        } catch (e) {
+            alert("Could not evaluate formula: " + content + '\nSee console for details.');
+            console.error(String(e));
+            console.error(result);
+            console.error(content);
+            return function(){};
+        }
+    }
+    function formula_with_context(content){
+        var myFormula = formula(content);
+        return function(context){
+            if(context){
+                return myFormula(context);
+            } else {
+                alert("Formula requires context arg.\nSee console for details.");
+                console.error(this);
+                console.error(content);
+                //TODO: Stop the survey
+            }
+        };
+    }
+    
     return {
     //TODO: I think column_types and property parsers can be made private (i.e. defined in the closure above.).
     column_types: {
@@ -59,51 +105,8 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         video: 'app_path_localized'
     },
     propertyParsers: {
-        formula: function(content) {
-            // If context.allowExceptions is true call is responsible for catching and handling exceptions.
-			// 'context' passed in may or may not be defined. 
-            // It may or may not be the calling context object.
-            var result = '(function(context){\n'+
-                'return ('+ content + ');\n' +
-                '})';
-            try {
-                var parsedFunction = evalInEnvironment(result);
-                return function(context){
-                    try {
-                        return parsedFunction.call(this, context);
-                    } catch (e) {
-                        console.error(String(e));
-                        console.error(result);
-                        console.error(this);
-                        if(context && context.allowExceptions === true){
-                            throw new Error("Exception in user formula.");
-                        } else {
-                            alert("Could not call formula.\nSee console for details.");
-                            //TODO: Stop the survey
-                        }
-                    }
-                };
-            } catch (e) {
-                alert("Could not evaluate formula: " + content + '\nSee console for details.');
-                console.error(String(e));
-                console.error(result);
-                console.error(content);
-                return function(){};
-            }
-        },
-        formula_with_context: function(content){
-            var myFormula = this.formula(content);
-            return function(context){
-                if(context){
-                    return myFormula(context);
-                } else {
-                    alert("Formula requires context arg.\nSee console for details.");
-                    console.error(this);
-                    console.error(content);
-                    //TODO: Stop the survey
-                }
-            };
-        },
+        formula: formula,
+        formula_with_context: formula_with_context,
         requirejs_path : function(content) {
             return opendatakit.getCurrentFormPath() + content;
         },

@@ -131,17 +131,27 @@ promptTypes.base = Backbone.View.extend({
     },
     render: function() {
         var that = this;
-        //The shadow element is created so images can be loaded before the newly rendered screen is shown.
-        var $shadowEl = $('<div>');
+        //A virtual element is created so images can be loaded before the newly rendered screen is shown.
+        //I think there is a better way to do this. meteor.js uses an approach were you add template markup to indicate
+        //which elements should not be rerendered.
+        //This is better because we don't have to wait for images to reload,
+        //and it has the additional benefit of making it so we don't loose focus on input fields.
+        var $virtualEl = $('<div>');
         var $imagesToLoad;
         var numImagesLoaded = 0;
         function imagesLoaded(){
             that.$el.empty();
-            that.$el.append($shadowEl.children());
+            that.$el.append($virtualEl.children());
             that.$el.trigger('create');
         }
-        $shadowEl.html(this.template(this.renderContext));
-        $imagesToLoad = $shadowEl.find('img');
+        try {
+            $virtualEl.html(this.template(this.renderContext));
+        } catch(e) {
+            alert("Error in template.");
+            console.error(e);
+            console.error(that);
+        }
+        $imagesToLoad = $virtualEl.find('img');
         $imagesToLoad.load(function(){
             numImagesLoaded++;
             if(numImagesLoaded === $imagesToLoad.length) {
@@ -151,6 +161,14 @@ promptTypes.base = Backbone.View.extend({
         if($imagesToLoad.length === 0) {
             imagesLoaded();
         }
+        //If the images don't load after 1 second render the template anyways.
+        setTimeout(function(){
+            if(numImagesLoaded < $imagesToLoad.length) {
+                imagesLoaded();
+                //prevent imagesLoaded from being triggered by late images.
+                numImagesLoaded = $imagesToLoad.length + 1;
+            }
+        },1000);
         return this;
         /*
         this.$el.html(this.template(this.renderContext));
@@ -539,7 +557,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        var saveValue = that.getValue();
+        var saveValue = that.parseSaveValue(that.getValue());
         var query;
         if(that.param in that.form.queries) {
             query = that.form.queries[that.param];
@@ -551,7 +569,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "data": {},
                 "success": function(result){
                     that.renderContext.choices = query.callback(result);
-                    that.updateRenderValue(that.parseSaveValue(saveValue));
+                    that.updateRenderValue(saveValue);
                     that.baseActivate(ctxt);
                 },
                 "error": function(e){
@@ -565,8 +583,8 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             //We need to clone the choices so their values are unique to the prompt.
             that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
         }
-        that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
-        this.baseActivate(ctxt);
+        that.updateRenderValue(saveValue);
+        that.baseActivate(ctxt);
     }
 });
 promptTypes.select_one = promptTypes.select.extend({
@@ -615,7 +633,7 @@ promptTypes.select_or_other = promptTypes.select.extend({
 promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
     type: "text",
     datatype: "string",
-    templatePath: "templates/inputType.handlebars",
+    templatePath: "templates/input_type.handlebars",
     renderContext: {
         "type": "text"
     },
@@ -731,6 +749,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
             that.baseActivate(ctxt);
         });
     },
+    //TODO: This will have problems with image labels.
     render: function() {
         var that = this;
         that.$el.html(that.template(that.renderContext));
