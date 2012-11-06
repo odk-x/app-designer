@@ -22,9 +22,9 @@ promptTypes.base = Backbone.View.extend({
     //Template context is an user specified object that overrides the render context.
     templateContext: {},
     //base html attributes shouldn't be overridden by the user.
-    //they should use htmlAttributes for that.
-    baseHtmlAttributes: {},
-    htmlAttributes: {},
+    //they should use inputAttributes for that.
+    baseInputAttributes: {},
+    inputAttributes: {},
     initialize: function() {
         this.initializeTemplate();
         this.initializeRenderContext();
@@ -93,7 +93,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.formTitle = database.getTableMetaDataValue('formTitle');
         this.renderContext.formVersion = database.getTableMetaDataValue('formVersion');
         
-        this.renderContext.htmlAttributes = $.extend({}, this.baseHtmlAttributes, this.htmlAttributes);
+        this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
     afterInitialize: function() {},
@@ -513,6 +513,12 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         };
         console.log(that.renderContext);
     },
+    generateSaveValue: function(jsonFormSerialization) {
+        return jsonFormSerialization ? JSON.stringify(jsonFormSerialization) : null;
+    },
+    parseSaveValue: function(savedValue){
+        return savedValue ? JSON.parse(savedValue) : null;
+    },
     // TODO: choices should be cloned and allow calculations in the choices
     // perhaps a null 'name' would drop the value from the list of choices...
     // could also allow calculations in the 'checked' and 'value' fields.
@@ -523,14 +529,13 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         console.log("select modification");
         console.log(this.$('form').serializeArray());
         var formValue = (this.$('form').serializeArray());
-        var saveValue = formValue ? JSON.stringify(formValue) : null;
         this.setValue($.extend({}, ctxt, {
             success: function() {
                 that.updateRenderValue(formValue);
                 that.render();
                 ctxt.success();
             }
-        }), saveValue);
+        }), this.generateSaveValue(formValue));
     },
     onActivate: function(ctxt) {
         var that = this;
@@ -546,7 +551,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "data": {},
                 "success": function(result){
                     that.renderContext.choices = query.callback(result);
-                    that.updateRenderValue(saveValue ? JSON.parse(saveValue) : null);
+                    that.updateRenderValue(that.parseSaveValue(saveValue));
                     that.baseActivate(ctxt);
                 },
                 "error": function(e){
@@ -583,6 +588,17 @@ promptTypes.select_one = promptTypes.select.extend({
                 ctxt.success();
             }
         }), null);
+    },
+    generateSaveValue: function(jsonFormSerialization) {
+        if(jsonFormSerialization){
+            if(jsonFormSerialization.length > 0){
+                return jsonFormSerialization[0].value;
+            }
+        }
+        return null;
+    },
+    parseSaveValue: function(savedValue){
+        return [{"name": this.name, "value": savedValue}];
     }
 });
 promptTypes.select_one_or_other = promptTypes.select_one.extend({
@@ -616,7 +632,10 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
     debouncedRender: _.debounce(function() {
         this.render();
     }, 500),
-    modification: function(evt) {
+    //This has to be debounced for the slider to work.
+    //However, debouncing might cause an event ordering problem in screen groups
+    //if a select is clicked to unfocus an input box.
+    modification: _.debounce(function(evt) {
         var value = $(evt.target).val();
         var that = this;
         var ctxt = controller.newContext(evt);
@@ -632,11 +651,11 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
             failure: function() {
                 renderContext.value = value;
                 renderContext.invalid = true;
-                that.render();
+                that.debouncedRender();
                 ctxt.failure();
             }
         }), (value.length === 0 ? null : value));
-    },
+    }, 500),
     onActivate: function(ctxt) {
         var renderContext = this.renderContext;
         var value = this.getValue();
@@ -654,7 +673,7 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
 promptTypes.integer = promptTypes.input_type.extend({
     type: "integer",
     datatype: "integer",
-    baseHtmlAttributes: {
+    baseInputAttributes: {
         'type':'number'
     },
     invalidMessage: "Integer value expected",
@@ -666,7 +685,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
     type: "decimal",
     datatype: "number",
     //TODO: This doesn't seem to be working.
-    baseHtmlAttributes: {
+    baseInputAttributes: {
         'type':'number'
     },
     invalidMessage: "Numeric value expected",
@@ -677,7 +696,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
     datatype: "string",
-    baseHtmlAttributes: {
+    baseInputAttributes: {
         'type':'datetime'
     },
     scrollerAttributes: {
@@ -723,7 +742,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
 });
 promptTypes.date = promptTypes.datetime.extend({
     type: "date",
-    baseHtmlAttributes: {
+    baseInputAttributes: {
         'type':'date'
     },
     scrollerAttributes: {
@@ -733,7 +752,7 @@ promptTypes.date = promptTypes.datetime.extend({
 });
 promptTypes.time = promptTypes.datetime.extend({
     type: "time",
-    baseHtmlAttributes: {
+    baseInputAttributes: {
         'type':'time'
     },
     scrollerAttributes: {

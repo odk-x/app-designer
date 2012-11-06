@@ -24,20 +24,23 @@ function(database,   _) {
             }
         },
         selected: function(promptValue, qValue) {
-            //TODO: Store parsed JSON?
             if(!promptValue){
                 return false;
             }
-            if(_.isString(promptValue)){
+            try {
+                //TODO: This parsing might change if the model stores JSON
                 promptValue = JSON.parse(promptValue);
+                if(!_.isArray(promptValue)){
+                    alert("Selected function expects an array. See console for details.");
+                    console.error(promptValue);
+                    console.error(qValue);
+                    return false;
+                }
+                return _.include(_.pluck(promptValue, 'value'), qValue);
+            } catch(e) {
+                //This is for select_ones
+                return promptValue === qValue;
             }
-            if(!_.isArray(promptValue)){
-                alert("Selected function expects an array. See console for details.");
-                console.error(promptValue);
-                console.error(qValue);
-                return false;
-            }
-            return _.include(_.pluck(promptValue, 'value'), qValue);
         },
         countSelected: function(promptValue){
             if(!promptValue){
