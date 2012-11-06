@@ -1,9 +1,7 @@
-<div>
+<div class="{{#if hide}}odk-hidden{{/if}}">
     {{> labelHint}}
     <button class="captureAction">Capture Geopoint</button>
-    <div class="mediaContainer">
-        {{#if value}}
-            <pre>{{value}}</pre>
-        {{/if}}
-    </div>
-<div>
+    <p class="status"></p>
+    <p>Latitude: {{value.coords.latitude}}</p>
+    <p>Longitude: {{value.coords.longitude}}</p>
+</div>
