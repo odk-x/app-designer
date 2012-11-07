@@ -1,13 +1,9 @@
 <div>
     {{> labelHint}}
-    <input type="text" name="{{name}}" value="{{mediaPath}}"
-            style="background-color:lightgray;"
-            disabled="true"
-        />
-    {{#if invalid}}
-        <p>invalid</p>
-    {{/if}}
-    <button class="captureAction">Take Picture</button>
+    <input type="text" name="{{name}}" value="{{value}}"
+        class="ui-disabled"
+    />
+    <button class="launch">{{buttonLabel}}</button>
     <div class="mediaContainer">
         {{#if uriValue}}
             <img width="200" src="{{uriValue}}"></img>

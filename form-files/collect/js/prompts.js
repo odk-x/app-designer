@@ -780,173 +780,52 @@ promptTypes.time = promptTypes.datetime.extend({
     }
 });
 /**
- * Media is an abstract object used as a base for image/audio/video
+ * launch_intent is an abstract prompt type used as a base for image/audio/video/barcode/etc.
+ * Ideally just the templates and intentStrings will need to be customized.
  */
-promptTypes.media = promptTypes.base.extend({
-    type: "media",
+promptTypes.launch_intent = promptTypes.base.extend({
+    type: "launch_intent",
+    buttonLabel: 'Launch intent',
+    templatePath: "templates/launch_intent.handlebars",
+    intentString: "",
+    intentParameters: null,//TODO: Allow this arguement to be an object {},
     events: {
-        "click .captureAction": "capture"
-    },
-    getCallback: function(ctxt, bypath, byaction) {
-        var that = this;
-        return function(ctxt, path, action, jsonString) {
-            ctxt.append("prompts." + this.type + 'getCallback.actionFn', "px: " + this.promptIdx + " action: " + action);
-            var jsonObject = JSON.parse(jsonString);
-            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
-                ctxt.append("prompts." + this.type + 'getCallback.actionFn.resultOK', "px: " + this.promptIdx + " action: " + action);
-                var mediaPath = (jsonObject.result !== null) ? jsonObject.result.mediaPath : null;
-                if (mediaPath !== null) {
-                    var oldPath = database.getDataValue(that.name);
-                    if ( mediaPath != oldPath) {
-                        // TODO: delete old??? Or leave until marked as finalized?
-                        // TODO: I'm not sure how the resuming works, but we'll need to make sure
-                        // onActivate get's called AFTER this happens.
-                        database.setData( ctxt, that.name, "file", mediaPath);
-                    }
-                }
-            }
-            else {
-                ctxt.append("prompts." + this.type + 'getCallback.actionFn.failureOutcome', "px: " + this.promptIdx + " action: " + action);
-                console.log("failure returned");
-                alert(jsonObject.result);
-                ctxt.failure();
-            }
-        };
-    }
-});
-promptTypes.image = promptTypes.media.extend({
-    type: "image",
-    datatype: "image",
-    label: 'Take your photo:',
-    templatePath: "templates/image.handlebars",
-    onActivate: function(ctxt) {
-        var that = this;
-        var value = that.getValue();
-        that.renderContext.mediaPath = value;
-        that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'img');
-        this.baseActivate(ctxt);
-    },
-    capture: function(evt) {
-        var ctxt = controller.newContext(evt);
-        var platInfo = opendatakit.getPlatformInfo(ctxt);
-        if (platInfo.container == 'Android') {
-            // TODO: is this the right sequence?
-            var outcome = collect.doAction('' + this.promptIdx, 'takePicture', 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity', null);
-            ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
-            if (outcome === null || outcome !== "OK") {
-                alert("Should be OK got >" + outcome + "<");
-                ctxt.failure();
-            } else {
-                ctxt.success();
-            }
-        }
-        else {
-            ctxt.append('media.capture.disabled', platInfo.container);
-            // TODO: enable file chooser???
-            alert("Not running on Android -- disabled");
-            ctxt.failure();
-        }
-    }
-});
-promptTypes.video = promptTypes.media.extend({
-    type: "video",
-    label: 'Take your video:',
-    templatePath: "templates/video.handlebars",
-    onActivate: function(ctxt) {
-        var that = this;
-        var value = that.getValue();
-        if (value != null && value.length != 0) {
-            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
-            that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
-        }
-        this.baseActivate(ctxt);
-    },
-    capture: function(evt) {
-        var ctxt = controller.newContext(evt);
-        var platInfo = opendatakit.getPlatformInfo(ctxt);
-        if (platInfo.container == 'Android') {
-         // TODO: is this the right sequence?
-            var outcome = collect.doAction('' + this.promptIdx, 'takeVideo', 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity', null);
-            ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
-            console.log("button click outcome is " + outcome);
-            if (outcome === null || outcome !== "OK") {
-                alert("Should be OK got >" + outcome + "<");
-                ctxt.failure();
-            } else {
-                ctxt.success();
-            }
-        }
-        else {
-            ctxt.append('media.capture.disabled', platInfo.container);
-            // TODO: enable file chooser???
-            alert("Not running on Android -- disabled");
-            ctxt.failure();
-        }
-    }
-});
-promptTypes.audio = promptTypes.media.extend({
-    type: "audio",
-    datatype: "audio",
-    templatePath: "templates/audio.handlebars",
-    label: 'Take your audio:',
-    capture: function(evt) {
-        var ctxt = controller.newContext(evt);
-        var platInfo = opendatakit.getPlatformInfo(ctxt);
-        if (platInfo.container == 'Android') {
-            // TODO: is this the right sequence?
-            var outcome = collect.doAction('' + this.promptIdx, 'takeAudio', 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity', null);
-            ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
-            console.log("button click outcome is " + outcome);
-            if (outcome === null || outcome !== "OK") {
-                alert("Should be OK got >" + outcome + "<");
-                ctxt.failure();
-            } else {
-                ctxt.success();
-            }
-        }
-        else {
-            ctxt.append('media.capture.disabled', platInfo.container);
-            // TODO: enable file chooser???
-            alert("Not running on Android -- disabled");
-            ctxt.failure();
-        }
-    }
-
-});
-/*
-promptTypes.geopoint = promptTypes.base.extend({
-    type: "geopoint",
-    datatype: "geopoint",
-    label: 'Capture geopoint:',
-    templatePath: "templates/geopoint.handlebars",
-    events: {
-        "click .captureAction": "capture"
+        "click .launch": "launch",
     },
     onActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
+        if(typeof value !== 'undefined'){
+            value = JSON.parse(value);
+        }
         that.renderContext.value = value;
+        that.renderContext.buttonLabel = that.buttonLabel;
         this.baseActivate(ctxt);
     },
-    capture: function(evt) {
+    launch: function(evt) {
         var ctxt = controller.newContext(evt);
         var platInfo = opendatakit.getPlatformInfo(ctxt);
-        if (true || platInfo.container == 'Android') {
-            // TODO: is this the right sequence?
-            var outcome = collect.doAction('' + this.promptIdx, 'captureGeopoint', 'org.opendatakit.collect.android.activities.GeoPointActivity', null);
-            ctxt.append('geopoint.capture', platInfo.container + " outcome is " + outcome);
-            if (outcome === null || outcome !== "OK") {
+        if (platInfo.container == 'Android') {
+            //We assume that the webkit could go away when an intent is launched,
+            //so this prompt's "address" is passed along with the intent.
+            var outcome = collect.doAction('' + this.promptIdx, this.name, this.intentString, this.intentParameters);
+            ctxt.append(this.intentString, platInfo.container + " outcome is " + outcome);
+            if (outcome && outcome === "OK") {
+                ctxt.success();
+            } else {
                 alert("Should be OK got >" + outcome + "<");
                 ctxt.failure();
-            } else {
-                ctxt.success();
             }
         } else {
-            ctxt.append('geopoint.capture.disabled', platInfo.container);
+            ctxt.append('launch.intent.disabled', platInfo.container);
             alert("Not running on Android -- disabled");
             ctxt.failure();
         }
     },
+    /**
+     * When the intent returns a result this factory function creates a callback to process it.
+     * The callback can't use any state set before the intent was launched because the page might have been reloaded.
+     */
     getCallback: function(ctxt, bypath, byaction) {
         var that = this;
         return function(ctxt, path, action, jsonString) {
@@ -958,28 +837,74 @@ promptTypes.geopoint = promptTypes.base.extend({
             }
             if (jsonObject.status == -1 ) { // Activity.RESULT_OK
                 ctxt.append("prompts." + this.type + 'getCallback.actionFn.resultOK', "px: " + this.promptIdx + " action: " + action);
-                var geopoint = (jsonObject.result !== null) ? jsonObject.result.mediaPath : null;
-                if (geopoint !== null) {
-                    var oldGeopoint = database.getDataValue(that.name);
-                    if ( geopoint != oldGeopoint) {
-                        // TODO: delete old??? Or leave until marked as finalized?
-                        // TODO: I'm not sure how the resuming works, but we'll need to make sure
-                        // onActivate get's called AFTER this happens.
-                        database.setData( ctxt, that.name, "file", geopoint);
-                    }
+                if (jsonObject.result !== null) {
+                    that.setValue($.extend({}, ctxt, {
+                        success: function() {
+                            that.renderContext.value = jsonObject.result;
+                            that.render();
+                            ctxt.success();
+                        }
+                    }), JSON.stringify(jsonObject.result));
                 }
-            }
-            else {
+            } else {
                 ctxt.append("prompts." + this.type + 'getCallback.actionFn.failureOutcome', "px: " + this.promptIdx + " action: " + action);
-                console.log("failure returned");
-                alert(jsonObject.result);
+                alert("failure returned");
+                console.error(jsonObject);
                 ctxt.failure();
             }
         };
     }
 });
+promptTypes.image = promptTypes.launch_intent.extend({
+    type: "image",
+    datatype: "image",
+    buttonLabel: 'Capture photograph',
+    //templatePath: "templates/image.handlebars"
+    intentString: 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity'
+});
+promptTypes.video = promptTypes.launch_intent.extend({
+    type: "video",
+    buttonLabel: 'Capture video',
+    //templatePath: "templates/video.handlebars",
+    intentString: 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity'
+    /*
+    onActivate: function(ctxt) {
+        var that = this;
+        var value = that.getValue();
+        if (value != null && value.length != 0) {
+            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
+            that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
+        }
+        this.baseActivate(ctxt);
+    }
+    */
+});
+promptTypes.audio = promptTypes.launch_intent.extend({
+    type: "audio",
+    datatype: "audio",
+    //templatePath: "templates/audio.handlebars",
+    buttonLabel: 'Capture audio',
+    intentString: 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity'
+});
+promptTypes.barcode = promptTypes.launch_intent.extend({
+    type: "barcode",
+    datatype: "barcode",
+    intentString: 'com.google.zxing.client.android.SCAN'
+});
+//TODO: Bundle this with a form.
+promptTypes.pulseox = promptTypes.launch_intent.extend({
+    type: "pulseox",
+    datatype: "pulseox",
+    intentString: 'org.opendatakit.collect.android.activities.PulseOxActivity'
+});
+/*
+promptTypes.geopoint = promptTypes.base.extend({
+    type: "geopoint",
+    datatype: "geopoint",
+    intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity'
+});
 */
-//TODO: How do we store geopoints?
+//HTML5 geopoints seem to work in the browser but not in the app.
 promptTypes.geopoint = promptTypes.input_type.extend({
     type: "geopoint",
     datatype: "geopoint",
@@ -1001,7 +926,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
             }), position);
         }
         function error(msg) {
-            that.$('.status').val(typeof msg == 'string' ? msg : "failed");
+            that.$('.status').text((typeof msg == 'string') ? msg : "failed");
             console.log(arguments);
         }
         if (navigator.geolocation) {
@@ -1017,71 +942,6 @@ promptTypes.geopoint = promptTypes.input_type.extend({
         var value = that.getValue();
         that.renderContext.value = value;
         this.baseActivate(ctxt);
-    }
-});
-//TODO: Bundle this with the form.
-promptTypes.pulseox = promptTypes.base.extend({
-    type: "pulseox",
-    datatype: "pulseox",
-    label: 'Capture pulseOx:',
-    templatePath: "templates/launchIntent.handlebars",
-    events: {
-        "click .captureAction": "capture"
-    },
-    onActivate: function(ctxt) {
-        var that = this;
-        var value = that.getValue();
-        that.renderContext.value = value;
-        this.baseActivate(ctxt);
-    },
-    capture: function(evt) {
-        var ctxt = controller.newContext(evt);
-        var platInfo = opendatakit.getPlatformInfo(ctxt);
-        if (true || platInfo.container == 'Android') {
-            // TODO: is this the right sequence?
-            var outcome = collect.doAction('' + this.promptIdx, 'capturePulseOx', 'org.opendatakit.collect.android.activities.PulseOxActivity', null);
-            ctxt.append('geopoint.capture', platInfo.container + " outcome is " + outcome);
-            if (outcome === null || outcome !== "OK") {
-                alert("Should be OK got >" + outcome + "<");
-                ctxt.failure();
-            } else {
-                ctxt.success();
-            }
-        } else {
-            ctxt.append('geopoint.capture.disabled', platInfo.container);
-            alert("Not running on Android -- disabled");
-            ctxt.failure();
-        }
-    },
-    getCallback: function(ctxt, bypath, byaction) {
-        var that = this;
-        return function(ctxt, path, action, jsonString) {
-            ctxt.append("prompts." + this.type + 'getCallback.actionFn', "px: " + this.promptIdx + " action: " + action);
-            try {
-                var jsonObject = JSON.parse(jsonString);
-            } catch (e) {
-                alert("Could not parse: " + jsonString);
-            }
-            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
-                ctxt.append("prompts." + this.type + 'getCallback.actionFn.resultOK', "px: " + this.promptIdx + " action: " + action);
-                var geopoint = (jsonObject.result !== null) ? jsonObject.result.mediaPath : null;
-                if (geopoint !== null) {
-                    var oldGeopoint = database.getDataValue(that.name);
-                    if ( geopoint != oldGeopoint) {
-                        // TODO: delete old??? Or leave until marked as finalized?
-                        // TODO: I'm not sure how the resuming works, but we'll need to make sure
-                        // onActivate get's called AFTER this happens.
-                        database.setData( ctxt, that.name, "file", geopoint);
-                    }
-                }
-            }
-            else {
-                ctxt.append("prompts." + this.type + 'getCallback.actionFn.failureOutcome', "px: " + this.promptIdx + " action: " + action);
-                console.log("failure returned");
-                alert(jsonObject.result);
-                ctxt.failure();
-            }
-        };
     }
 });
 promptTypes.screen = promptTypes.base.extend({
@@ -1168,7 +1028,7 @@ promptTypes.screen = promptTypes.base.extend({
             }));
         });
     },
-    render: function(){
+    render: function() {
 		var that = this;
 		var subPrompts = that.getActivePrompts();
         this.$el.html('<div class="odk odk-prompts">');
@@ -1205,21 +1065,6 @@ promptTypes.goto = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         alert("goto.onActivate: Should never be called!");
-        ctxt.failure();
-    }
-});
-//TODO: Remove
-promptTypes.goto_if = promptTypes.base.extend({
-    type: "goto_if",
-    hideInHierarchy: true,
-    isInitializeComplete: function() {
-        return true;
-    },
-    condition: function(){
-        return false;
-    },
-    onActivate: function(ctxt) {
-        alert("goto_if.onActivate: Should never be called!");
         ctxt.failure();
     }
 });
