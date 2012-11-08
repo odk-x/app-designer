@@ -297,16 +297,26 @@ window.controller = {
         return null;
     },
     setPrompt: function(ctxt, prompt, passedInOptions){
+        var options;
+        ctxt.append('controller.setPrompt', "nextPx: " + prompt.promptIdx);
+
         if ( this.currentPromptIdx == prompt.promptIdx ) {
+                    
+            //Commenting this out because we want to re-set the prompt
+            //when the language is changed so it updates.
+            /*
             ctxt.append('controller.setPrompt:ignored', "nextPx: " + prompt.promptIdx);
             ctxt.success();
             return;
+            */
+            options = {
+                omitPushOnReturnStack : true
+            };
+        } else {
+            options = {
+                omitPushOnReturnStack : false
+            };
         }
-        ctxt.append('controller.setPrompt', "nextPx: " + prompt.promptIdx);
-
-        var options = {
-            omitPushOnReturnStack : false
-        };
         
         if(passedInOptions){
             $.extend(options, passedInOptions);
@@ -531,12 +541,21 @@ window.controller = {
         ctxt.append( evt.type, detail);
         return ctxt;
     },
-    fatalError: function(){
+    fatalError: function() {
         //Stop the survey.
         //There might be better ways to do it than this.
         this.beforeMove = null;
         this.setPrompt = null;
         $('body').empty();
+    },
+    setLocale: function(evt, locale) {
+        database.setInstanceMetaData($.extend(this.newContext(evt), {
+            success: function() {
+                //Adding a hash param triggers a refresh so the prompt is updated
+                //with the new locale.
+                window.location.hash += "&refresh";
+            }
+        }), 'locale', 'string', locale);
     }
 };
 return window.controller;

@@ -43,11 +43,20 @@
     <div data-role="popup" data-theme="a" data-overlay-theme="a" id="screenPopup">
         <p class="message"></p>
     </div>
+    {{! I have some concerns over inefficiency from including all the popup html in this template since it gets rerendered on every page change.}}
+    {{! If it turns out to be a problem we can dynamically construct the popups when they are opened.}}
     <div data-role="popup" data-theme="d" data-overlay-theme="d" id="optionsPopup">
         <ul data-role="listview" data-inset="true" data-theme="d">
-			<li><a data-rel="popup">Language</a></li>
+			<li><a data-rel="popup" class="languageMenu">Language</a></li>
 			<li><a href="{{promptLink "_hierarchy"}}" data-rel="popup">Hierarchy</a></li>
-			<li><a data-rel="popup">Save + Exit</a></li>
+			<li><a href="{{promptLink "_instances"}}" data-rel="popup">Save + Exit</a></li>
+		</ul>
+    </div>
+    <div data-role="popup" data-theme="d" data-overlay-theme="d" id="languagePopup">
+        <ul data-role="listview" data-inset="true" data-theme="d">
+            {{#each locales}}
+        		<li><a id="{{label}}" class="language" data-rel="popup">{{label}}</a></li>
+            {{/each}}
 		</ul>
     </div>
 </div>

@@ -14,6 +14,18 @@ return Backbone.View.extend({
     template: Handlebars.compile(screenTemplate),
     swipeTimeStamp: -1,
     swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
+    renderContext:{},
+    events: {
+        "click .odk-next-btn": "gotoNextScreen",
+        "click .odk-prev-btn": "gotoPreviousScreen",
+        "click .odk-options-btn": "openOptions",
+        "click .languageMenu": "openLanguagePopup",
+        "click .language": "setLanguage",
+        "swipeleft .swipeForwardEnabled": "gotoNextScreen",
+        "swiperight .swipeBackEnabled": "gotoPreviousScreen",
+        "pagechange": "handlePagechange",
+        "dragstart img": "disableImageDrag"
+    },
     noPreviousPage: function(ctxt) {
         ctxt.append("screenManager.noPreviousPage");
         alert("I've forgotten what the previous page was!");
@@ -31,7 +43,6 @@ return Backbone.View.extend({
         }
         ctxt.success();
     },
-    renderContext:{},
     initialize: function(ctxt){
         this.controller = this.options.controller;
         this.currentPageEl = $('[data-role=page]');
@@ -70,16 +81,10 @@ return Backbone.View.extend({
             jqmAttrs = {};
         }
         var that = this;
-        // TODO: tell existing prompt it is inactive (e.g,. semaphore)...
-        if(this.prompt) {
-            this.prompt.undelegateEvents();
-        }
-        this.previousPageEl = this.currentPageEl;
-        this.prompt = prompt;
-        this.swipeEnabled = false;
         this.renderContext = {
 			formTitle: prompt.database.getTableMetaDataValue('formTitle'),
 			instanceName: prompt.database.getInstanceMetaDataValue('instanceName'),
+            locales: this.controller.locales,
             showHeader: true,
             showFooter: false,
             enableForwardNavigation: true,
@@ -91,7 +96,6 @@ return Backbone.View.extend({
             //
             // the absence of page history disabled backward swipe and button.
         };
-        var that = this;
 
         //A better way to do this might be to pass a controller interface object to 
         //onActivate that can trigger screen refreshes, as well as goto other prompts.
@@ -99,9 +103,9 @@ return Backbone.View.extend({
         //When the prompt changes, we could disconnect the interface to prevent the old
         //prompts from messing with the current screen.
 		// 
-		// pass in 'render':true to indicate that we will be rendering upon successful
+		// pass in 'render': true to indicate that we will be rendering upon successful
 		// completion.
-        that.prompt.onActivate($.extend({render:true},ctxt,{
+        prompt.onActivate($.extend({render:true},ctxt,{
             success:function(renderContext){
                 var isFirstPrompt = !('previousPageEl' in that);
                 var transition = 'none'; // isFirstPrompt ? 'fade' : 'slide';
@@ -130,6 +134,14 @@ return Backbone.View.extend({
                         that.controller.hasPromptHistory(ctxt);
                 }
                 */
+                // TODO: tell existing prompt it is inactive (e.g,. semaphore)...
+                if(that.prompt) {
+                    that.prompt.undelegateEvents();
+                }
+                that.swipeEnabled = false;
+                // swap the prompts:
+                that.prompt = prompt;
+                that.previousPageEl = that.currentPageEl;
                 that.currentPageEl = that.renderPage(prompt);
                 that.$el.append(that.currentPageEl);
                 // this might double-reset the swipeEnabled flag, but it does ensure it is reset
@@ -139,6 +151,7 @@ return Backbone.View.extend({
                         ctxt.success();
                     },
                     failure: function() {
+                        alert('Failure in screenManager.setPrompt');
                         that.swipeEnabled = true;
                         ctxt.failure();
                     }
@@ -152,14 +165,6 @@ return Backbone.View.extend({
     },
     gotoNextScreen: function(evt) {
         var that = this;
-        /*
-        This debounce is a total hack.
-        The bug it is trying to solve is the issue
-        where the first page of the survey is skipped. 
-        The problem stems from swipe events being registered twice.
-        Only the opening prompt has problems because it does some unique things
-        in it's beforeMove function.
-        */
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.gotoNextScreen', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
         evt.stopPropagation();
@@ -211,6 +216,16 @@ return Backbone.View.extend({
     openOptions: function(evt) {
         $( "#optionsPopup" ).popup( "open" );
     },
+    openLanguagePopup: function(evt) {
+        $( "#optionsPopup" ).popup( "close" );
+        $( "#languagePopup" ).popup( "open" );
+    },
+    setLanguage: function(evt) {
+        //Closing popups is important,
+        //they will not open in the future if one is not closed.
+        $( "#languagePopup" ).popup( "close" );
+        this.controller.setLocale(evt, $(evt.target).attr("id"));
+    },
 	showScreenPopup: function(msg) {
 		$( "#screenPopup" ).find('.message').text(msg.message);
         $( "#screenPopup" ).popup( "open" );
@@ -246,15 +261,6 @@ return Backbone.View.extend({
     },
     disableImageDrag: function(evt){
         evt.preventDefault();
-    },
-    events: {
-        "click .odk-next-btn": "gotoNextScreen",
-        "click .odk-prev-btn": "gotoPreviousScreen",
-        "click .odk-options-btn": "openOptions",
-        "swipeleft .swipeForwardEnabled": "gotoNextScreen",
-        "swiperight .swipeBackEnabled": "gotoPreviousScreen",
-        "pagechange": "handlePagechange",
-        "dragstart img": "disableImageDrag"
     },
     renderPage: function(prompt){
         var $page = $('<div>');

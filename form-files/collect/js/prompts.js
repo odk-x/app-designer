@@ -453,7 +453,7 @@ promptTypes.hierarchy = promptTypes.base.extend({
         this.renderContext.prompts = controller.prompts;
         this.baseActivate($.extend({}, ctxt, {
             success:function(){
-                ctxt.success({showHeader: false, showFooter: false});
+                ctxt.success({showHeader: true, showFooter: false});
             }
         }));
     }
@@ -1049,6 +1049,7 @@ promptTypes.screen = promptTypes.base.extend({
 });
 promptTypes.label = promptTypes.base.extend({
     type: "label",
+    hideInHierarchy: true,
     isInitializeComplete: function() {
         return true;
     },
@@ -1070,6 +1071,7 @@ promptTypes.goto = promptTypes.base.extend({
 });
 promptTypes.note = promptTypes.base.extend({
     type: "note",
+    hideInHierarchy: true,
     templatePath: "templates/note.handlebars"
 });
 promptTypes.acknowledge = promptTypes.select.extend({
