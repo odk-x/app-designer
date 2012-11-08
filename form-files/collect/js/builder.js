@@ -59,7 +59,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                         throw new Error("Exception in user formula.");
                     } else {
                         alert("Could not call formula.\nSee console for details.");
-                        //TODO: Stop the survey
+                        controller.fatalError();
                     }
                 }
             };
@@ -75,12 +75,12 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         var myFormula = formula(content);
         return function(context){
             if(context){
-                return myFormula(context);
+                return myFormula.call(this, context);
             } else {
                 alert("Formula requires context arg.\nSee console for details.");
                 console.error(this);
                 console.error(content);
-                //TODO: Stop the survey
+                controller.fatalError();
             }
         };
     }
@@ -98,7 +98,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         //      It would be nice to have a "choice" variable we can refer to directly.
         //      One idea is to define variables in a context object that gets passed into the generated function.
         //      The generated function would then add the object's keys to the namespace.
-        choiceFilter: 'formula_with_context', // expects "choice" context arg.
+        choice_filter: 'formula_with_context', // expects "choice" context arg.
         templatePath: 'requirejs_path',
         image: 'app_path_localized',
         audio: 'app_path_localized',

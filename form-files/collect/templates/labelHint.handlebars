@@ -1,8 +1,3 @@
-{{#if label}}
-    <big><p>
-        {{#substitute}}{{localize label}}{{/substitute}}
-    </p></big>
-{{/if}}
 {{#if image}}
     <div>
         <img width="100%" src="{{formDirectory}}{{localize image}}"></img>
@@ -23,6 +18,11 @@
             Your browser does not support the video element.
         </video>
     </div>
+{{/if}}
+{{#if label}}
+    <big><p>
+        {{#substitute}}{{localize label}}{{/substitute}}
+    </p></big>
 {{/if}}
 {{#if hint}}
     <i><p class="odk-hint">{{#substitute}}{{localize hint}}{{/substitute}}</p></i>

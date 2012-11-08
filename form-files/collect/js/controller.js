@@ -515,7 +515,7 @@ window.controller = {
         ctxt.append('startup', detail);
         return ctxt;
     },
-    newContext : function(evt, actionHandlers ) {
+    newContext: function( evt, actionHandlers ) {
         this.eventCount = 1 + this.eventCount;
         var count = this.eventCount;
         var detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid +
@@ -530,6 +530,13 @@ window.controller = {
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
+    },
+    fatalError: function(){
+        //Stop the survey.
+        //There might be better ways to do it than this.
+        this.beforeMove = null;
+        this.setPrompt = null;
+        $('body').empty();
     }
 };
 return window.controller;

@@ -500,12 +500,12 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     events: {
         "change input": "modification"
     },
-    choiceFilter: function(){ return true; },
+    choice_filter: function(){ return true; },
     updateRenderValue: function(formValue) {
         var that = this;
         //that.renderContext.value = formValue;
         var filteredChoices = _.filter(that.renderContext.choices, function(choice){
-            return that.choiceFilter(choice);
+            return that.choice_filter(choice);
         });
         if ( !formValue ) {
             that.renderContext.choices = _.map(filteredChoices, function(choice) {
