@@ -86,7 +86,7 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
             //
             // register to handle manual #hash changes
             $(window).bind('hashchange', function(evt) {
-                    parsequery.hashChangeHandler(evt);
+                parsequery.hashChangeHandler(evt);
             });
             
             //

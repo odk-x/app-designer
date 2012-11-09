@@ -1,4 +1,4 @@
-collect = {
+window.collect = window.collect || {
     instanceId: null,
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
@@ -51,5 +51,5 @@ collect = {
 	},
 	ignoreAllChangesFailed: function( formId, instanceId ) {
 		alert("notify container that ignore all changes FAILED.");
-	},
+	}
 };

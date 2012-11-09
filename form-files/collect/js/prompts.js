@@ -1,3 +1,4 @@
+/*jslint eqeq: true, evil: true, plusplus: true, todo: true, vars: true, white: true, devel: true */
 'use strict';
 
 define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'handlebarsHelpers'],
@@ -185,7 +186,7 @@ promptTypes.base = Backbone.View.extend({
         var that = this;
         var isRequired = false;
 		try {
-			isRequired = ('required' in that) ? that.required() : false;
+			isRequired = that.required ? that.required() : false;
 		} catch (e) {
 			context.append("prompts."+that.type+".baseValidate.required.exception", e);
 			isRequired = false;
@@ -250,7 +251,7 @@ promptTypes.base = Backbone.View.extend({
     },
     getCallback: function(ctxt, path, action) {
         ctxt.append("prompts." + this.type, "px: " + this.promptIdx + " unimplemented: " + path + " action: " + action);
-        alert('getCallback: Unimplemented: ' + actionPath);
+        alert('getCallback: Unimplemented: ' + action);
         ctxt.failure();
     },
     /*
@@ -522,7 +523,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         });
         var otherObject = _.find(formValue, function(valueObject) {
             return (that.name + 'OtherValue' === valueObject.value);
-        })
+        });
         that.renderContext.other = {
             value: otherObject ? otherObject.value : '',
             checked: _.any(formValue, function(valueObject) {
@@ -790,7 +791,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
     intentString: "",
     intentParameters: null,//TODO: Allow this arguement to be an object {},
     events: {
-        "click .launch": "launch",
+        "click .launch": "launch"
     },
     onActivate: function(ctxt) {
         var that = this;
@@ -829,15 +830,16 @@ promptTypes.launch_intent = promptTypes.base.extend({
     getCallback: function(ctxt, bypath, byaction) {
         var that = this;
         return function(ctxt, path, action, jsonString) {
+            var jsonObject;
             ctxt.append("prompts." + this.type + 'getCallback.actionFn', "px: " + this.promptIdx + " action: " + action);
             try {
-                var jsonObject = JSON.parse(jsonString);
+                jsonObject = JSON.parse(jsonString);
             } catch (e) {
                 alert("Could not parse: " + jsonString);
             }
             if (jsonObject.status == -1 ) { // Activity.RESULT_OK
                 ctxt.append("prompts." + this.type + 'getCallback.actionFn.resultOK', "px: " + this.promptIdx + " action: " + action);
-                if (jsonObject.result !== null) {
+                if (jsonObject.result != null) {
                     that.setValue($.extend({}, ctxt, {
                         success: function() {
                             that.renderContext.value = jsonObject.result;
@@ -1130,7 +1132,6 @@ promptTypes.with_next = promptTypes.base.extend({
 		that.setValue(ctxt, value);
     }
 });
-
 //Ensure all prompt type names are lowercase.
 _.each(_.keys(promptTypes), function(promptTypeName){
     if(promptTypeName !== promptTypeName.toLowerCase()) {
