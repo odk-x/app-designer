@@ -1,5 +1,5 @@
 requirejs.config({
-    baseUrl: '../collect',
+    baseUrl: collect.getBaseUrl(),
     paths: {
         // third-party libraries we depend upon 
         jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',

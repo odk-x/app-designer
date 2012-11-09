@@ -98,24 +98,24 @@ window.controller = {
         var nextPrompt = null;
         var that = this;
 
-		try {
-			// ***NOTE: goto_if is implemented as a 'condition' on the goto***
-			// ***The order of the else-if statements below is very important.***
-			// i.e., First test if the 'condition' is false, and skip to the next 
-			// question if it is; if the 'condition' is true or not present, then 
-			// execute the 'goto' I.e., the goto_if is equivalent to a goto with
-			// a condition.
-			if ( prompt.type == "label" ) {
-				nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-			} else if('condition' in prompt && !prompt.condition()) {
-				nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-			} else if ( prompt.type == "goto" || prompt.type == "goto_if" ) {
-				nextPrompt = that.getPromptByLabel(prompt.param);
-			}
-		} catch (e) {
-			ctxt.append("controller.advanceToScreenPrompt.exception.ignored", e);
-			nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-		}
+        try {
+            // ***NOTE: goto_if is implemented as a 'condition' on the goto***
+            // ***The order of the else-if statements below is very important.***
+            // i.e., First test if the 'condition' is false, and skip to the next 
+            // question if it is; if the 'condition' is true or not present, then 
+            // execute the 'goto' I.e., the goto_if is equivalent to a goto with
+            // a condition.
+            if ( prompt.type == "label" ) {
+                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+            } else if('condition' in prompt && !prompt.condition()) {
+                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+            } else if ( prompt.type == "goto" || prompt.type == "goto_if" ) {
+                nextPrompt = that.getPromptByLabel(prompt.param);
+            }
+        } catch (e) {
+            ctxt.append("controller.advanceToScreenPrompt.exception.ignored", e);
+            nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+        }
         
         if(nextPrompt != null) {
             that.advanceToScreenPrompt(ctxt, nextPrompt);
@@ -123,91 +123,91 @@ window.controller = {
             ctxt.success(prompt);
         }
     },
-	validateQuestionHelper: function(ctxt, promptCandidate) {
-		var that = this;
-		return function() {
-			try {
-				// pass in 'render':false to indicate that rendering will not occur.
-				// call onActivate() to ensure that we have values (assignTo) initialized for validate()
-				promptCandidate.onActivate( $.extend({render: false}, ctxt, {
-					success: function(renderContext) {
-						promptCandidate.validate( $.extend({}, ctxt, {
-							success: function() {
-								if ( promptCandidate.type == 'finalize' ) {
-									ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-									ctxt.success();
-								} else {
-									var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
-									that.advanceToScreenPrompt($.extend({}, ctxt, {
-										success: function(prompt){
-											if(prompt) {
-												ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-												var fn = that.validateQuestionHelper(ctxt,prompt);
-												(fn)();
-											} else {
-												ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-												ctxt.success();
-											}
-										}}), nextPrompt);
-								}
-							},
-							failure: function(msg) {
-								ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
-								that.setPrompt( $.extend({}, ctxt, {success: function() {
-										var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: function(msg) {
-												that.screenManager.showScreenPopup(msg); 
-												ctxt.failure();
-											}});
-										setTimeout(function() {
-											simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-											that.validate( simpleCtxt );
-											}, 500);
-									}, failure: ctxt.failure }), promptCandidate);
-							}}));
-					}}) );
-			} catch(e) {
-				ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
-				that.setPrompt( $.extend({}, ctxt, {success: function() {
-						var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
-						setTimeout(function() {
-							simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-							that.validate( simpleCtxt );
-							}, 500);
-					}, failure: ctxt.failure }), promptCandidate);
-			}
-		};
-	},
-	validateAllQuestions: function(ctxt){
-		var that = this;
-		var promptCandidate = that.prompts[0];
-		// ensure we drop the spinner overlay when we complete...
-		var newctxt = $.extend({},ctxt,{success: function() {
-				that.screenManager.hideSpinnerOverlay();
-				ctxt.success();
-			},
-			failure: function() {
-				that.screenManager.hideSpinnerOverlay();
-				ctxt.failure();
-			}});
-		that.screenManager.showSpinnerOverlay({text:"Validating..."});
-		
-		// call advanceToScreenPrompt, since prompt[0] is always a goto_if...
-		that.advanceToScreenPrompt($.extend({}, newctxt, {
-			success: function(prompt){
-				if(prompt) {
-					newctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-					var fn = that.validateQuestionHelper(newctxt,prompt);
-					(fn)();
-				} else {
-					newctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-					newctxt.success();
-				}
-			},
-			failure: function() {
-				that.screenManager.hideSpinnerOverlay();
-				newctxt.failure();
-			}}), promptCandidate);
-	},
+    validateQuestionHelper: function(ctxt, promptCandidate) {
+        var that = this;
+        return function() {
+            try {
+                // pass in 'render':false to indicate that rendering will not occur.
+                // call onActivate() to ensure that we have values (assignTo) initialized for validate()
+                promptCandidate.onActivate( $.extend({render: false}, ctxt, {
+                    success: function(renderContext) {
+                        promptCandidate.validate( $.extend({}, ctxt, {
+                            success: function() {
+                                if ( promptCandidate.type == 'finalize' ) {
+                                    ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                                    ctxt.success();
+                                } else {
+                                    var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
+                                    that.advanceToScreenPrompt($.extend({}, ctxt, {
+                                        success: function(prompt){
+                                            if(prompt) {
+                                                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+                                                var fn = that.validateQuestionHelper(ctxt,prompt);
+                                                (fn)();
+                                            } else {
+                                                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                                                ctxt.success();
+                                            }
+                                        }}), nextPrompt);
+                                }
+                            },
+                            failure: function(msg) {
+                                ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
+                                that.setPrompt( $.extend({}, ctxt, {success: function() {
+                                        var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: function(msg) {
+                                                that.screenManager.showScreenPopup(msg); 
+                                                ctxt.failure();
+                                            }});
+                                        setTimeout(function() {
+                                            simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+                                            that.validate( simpleCtxt );
+                                            }, 500);
+                                    }, failure: ctxt.failure }), promptCandidate);
+                            }}));
+                    }}) );
+            } catch(e) {
+                ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
+                that.setPrompt( $.extend({}, ctxt, {success: function() {
+                        var simpleCtxt = $.extend({}, ctxt, {success: ctxt.failure, failure: ctxt.failure});
+                        setTimeout(function() {
+                            simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+                            that.validate( simpleCtxt );
+                            }, 500);
+                    }, failure: ctxt.failure }), promptCandidate);
+            }
+        };
+    },
+    validateAllQuestions: function(ctxt){
+        var that = this;
+        var promptCandidate = that.prompts[0];
+        // ensure we drop the spinner overlay when we complete...
+        var newctxt = $.extend({},ctxt,{success: function() {
+                that.screenManager.hideSpinnerOverlay();
+                ctxt.success();
+            },
+            failure: function() {
+                that.screenManager.hideSpinnerOverlay();
+                ctxt.failure();
+            }});
+        that.screenManager.showSpinnerOverlay({text:"Validating..."});
+        
+        // call advanceToScreenPrompt, since prompt[0] is always a goto_if...
+        that.advanceToScreenPrompt($.extend({}, newctxt, {
+            success: function(prompt){
+                if(prompt) {
+                    newctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+                    var fn = that.validateQuestionHelper(newctxt,prompt);
+                    (fn)();
+                } else {
+                    newctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                    newctxt.success();
+                }
+            },
+            failure: function() {
+                that.screenManager.hideSpinnerOverlay();
+                newctxt.failure();
+            }}), promptCandidate);
+    },
     gotoNextScreen: function(ctxt, options){
         var that = this;
         that.beforeMove($.extend({}, ctxt,
@@ -253,7 +253,7 @@ window.controller = {
                     },
                     failure: function(msg) {
                         ctxt.append("gotoNextScreen.validate.failure", "px: " +  that.currentPromptIdx);
-						that.screenManager.showScreenPopup(msg); 
+                        that.screenManager.showScreenPopup(msg); 
                         ctxt.failure();
                     }
                 }));
@@ -301,17 +301,15 @@ window.controller = {
         ctxt.append('controller.setPrompt', "nextPx: " + prompt.promptIdx);
 
         if ( this.currentPromptIdx == prompt.promptIdx ) {
-                    
-            //Commenting this out because we want to re-set the prompt
-            //when the language is changed so it updates.
-            /*
-            ctxt.append('controller.setPrompt:ignored', "nextPx: " + prompt.promptIdx);
-            ctxt.success();
-            return;
-            */
-            options = {
-                omitPushOnReturnStack : true
-            };
+            if ( passedInOptions == null || !passedInOptions.changeLocale) {
+                ctxt.append('controller.setPrompt:ignored', "nextPx: " + prompt.promptIdx);
+                ctxt.success();
+                return;
+            } else {
+                options = {
+                    omitPushOnReturnStack : true
+                };
+            }
         } else {
             options = {
                 omitPushOnReturnStack : false
@@ -348,7 +346,7 @@ window.controller = {
     */
     opendatakitCallback:function(page, path, action, jsonString) {
         var ctxt = this.newCallbackContext();
-        ctxt.append('controller.opendatakitCallback', ((this.prompt != null) ? ("px: " + this.prompt.promptIdx) : "no current prompt"));
+        ctxt.append('controller.opendatakitCallback', ((this.currentPromptIdx != null) ? ("px: " + this.currentPromptIdx) : "no current prompt"));
         
         var selpage = this.getPromptByName(page);
         if ( selpage == null ) {
@@ -367,54 +365,59 @@ window.controller = {
             return;
         }
     },
-	opendatakitIgnoreAllChanges:function() {
-		var ctxt = controller.newCallbackContext();
-		ctxt.append("controller.opendatakitIgnoreAllChanges", this.currentPromptIdx);
-		if ( opendatakit.getCurrentInstanceId() == null ) {
-			collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), null );
-		} else {
-			this.ignoreAllChanges($.extend({},ctxt,{success:function() {
-								collect.ignoreAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
-							}, failure:function() {
-								collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
-							}}));
-		}
-	},
-	ignoreAllChanges:function(ctxt) {
-		database.ignore_all_changes(ctxt);
-	},
-	opendatakitSaveAllChanges:function(asComplete) {
-		var ctxt = controller.newCallbackContext();
-		ctxt.append("controller.opendatakitSaveAllChanges", this.currentPromptIdx);
-		if ( opendatakit.getCurrentInstanceId() == null ) {
-			collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), null );
-		} else {
-			this.saveAllChanges($.extend({},ctxt,{failure:function() {
-								collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
-							}}), asComplete);
-		}
-	},
-	saveAllChanges:function(ctxt, asComplete) {
-		var that = this;
-		// NOTE: only success is reported up to collect here.
-		// if there are any failures, the failure callback is only invoked if the save request
-		// was initiated from within collect (via controller.opendatakitSaveAllChanges(), above).
-		if ( asComplete ) {
-			database.save_all_changes($.extend({},ctxt,{
-				success:function(){
-					that.validateAllQuestions($.extend({},ctxt,{
-						success:function(){
-							database.save_all_changes($.extend({},ctxt,{success:function() {
-								collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), true);
-								}}), true);
-						}}));
-				}}), false);
-		} else {
-			database.save_all_changes($.extend({},ctxt,{success:function() {
-							collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), false);
-							}}), false);
-		}
-	},
+    opendatakitGotoPreviousScreen:function() {
+        var ctxt = controller.newCallbackContext();
+        ctxt.append("controller.opendatakitGotoPreviousScreen", this.currentPromptIdx);
+        this.screenManager.gotoPreviousScreenAction(ctxt);
+    },
+    opendatakitIgnoreAllChanges:function() {
+        var ctxt = controller.newCallbackContext();
+        ctxt.append("controller.opendatakitIgnoreAllChanges", this.currentPromptIdx);
+        if ( opendatakit.getCurrentInstanceId() == null ) {
+            collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), null );
+        } else {
+            this.ignoreAllChanges($.extend({},ctxt,{success:function() {
+                                collect.ignoreAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+                            }, failure:function() {
+                                collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+                            }}));
+        }
+    },
+    ignoreAllChanges:function(ctxt) {
+        database.ignore_all_changes(ctxt);
+    },
+    opendatakitSaveAllChanges:function(asComplete) {
+        var ctxt = controller.newCallbackContext();
+        ctxt.append("controller.opendatakitSaveAllChanges", this.currentPromptIdx);
+        if ( opendatakit.getCurrentInstanceId() == null ) {
+            collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), null );
+        } else {
+            this.saveAllChanges($.extend({},ctxt,{failure:function() {
+                                collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+                            }}), asComplete);
+        }
+    },
+    saveAllChanges:function(ctxt, asComplete) {
+        var that = this;
+        // NOTE: only success is reported up to collect here.
+        // if there are any failures, the failure callback is only invoked if the save request
+        // was initiated from within collect (via controller.opendatakitSaveAllChanges(), above).
+        if ( asComplete ) {
+            database.save_all_changes($.extend({},ctxt,{
+                success:function(){
+                    that.validateAllQuestions($.extend({},ctxt,{
+                        success:function(){
+                            database.save_all_changes($.extend({},ctxt,{success:function() {
+                                collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), true);
+                                }}), true);
+                        }}));
+                }}), false);
+        } else {
+            database.save_all_changes($.extend({},ctxt,{success:function() {
+                            collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), false);
+                            }}), false);
+        }
+    },
     gotoRef:function(ctxt, pageRef) {
         var that = this;
         if ( this.prompts.length == 0 ) {
@@ -480,9 +483,28 @@ window.controller = {
             this.calcs = [];
         }
     },
-    
-	///////////////////////////////////////////////////////
-	// Logging context
+    fatalError: function() {
+        //Stop the survey.
+        //There might be better ways to do it than this.
+        this.beforeMove = null;
+        this.setPrompt = null;
+        $('body').empty();
+    },
+    setLocale: function(ctxt, locale) {
+        var that = this;
+        database.setInstanceMetaData($.extend({}, ctxt, {
+            success: function() {
+                var prompt = that.getPromptByName(that.currentPromptIdx);
+                that.setPrompt(ctxt, prompt, {changeLocale: true} );
+            }
+        }), 'locale', 'string', locale);
+    },
+    getFormLocales: function() {
+        return opendatakit.getFormLocalesValue();
+    },
+  
+    ///////////////////////////////////////////////////////
+    // Logging context
     baseContext : {
         contextChain: [],
         
@@ -540,22 +562,6 @@ window.controller = {
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
-    },
-    fatalError: function() {
-        //Stop the survey.
-        //There might be better ways to do it than this.
-        this.beforeMove = null;
-        this.setPrompt = null;
-        $('body').empty();
-    },
-    setLocale: function(evt, locale) {
-        database.setInstanceMetaData($.extend(this.newContext(evt), {
-            success: function() {
-                //Adding a hash param triggers a refresh so the prompt is updated
-                //with the new locale.
-                window.location.hash += "&refresh";
-            }
-        }), 'locale', 'string', locale);
     }
 };
 return window.controller;

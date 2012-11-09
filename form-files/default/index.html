@@ -3,16 +3,14 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' />
-    <title>Collect</title>
+    <title>Default Form</title>
     <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
     <script src="js/collect.js"></script>
-    <script data-main="js/main" src="libs/require.2.0.6.js"></script>
     <link rel="stylesheet" type="text/css" href="libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0.css">
     <link rel="stylesheet" type="text/css" href="css/odk-collect.css">
     <link href="libs/mobiscroll/css/mobiscroll-2.0.3.custom.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
 <div class="init-page" data-role="page" data-theme="d">
     <div data-role="header" class="odk-toolbar"></div>
         <div data-role="content" class="odk-scroll">
@@ -20,6 +18,9 @@
         </div>
     <div data-role="footer" class="odk-nav"></div>
 </div>
+
+<!-- move load of main.js to body since it is now dependent on collect.js having been loaded -->
+<script data-main="js/main" src="libs/require.2.0.6.js"></script>
 
 </body>
 </html>
