@@ -81,10 +81,10 @@ return Backbone.View.extend({
             jqmAttrs = {};
         }
         var that = this;
-        this.renderContext = {
-			formTitle: prompt.database.getTableMetaDataValue('formTitle'),
-			instanceName: prompt.database.getInstanceMetaDataValue('instanceName'),
-            locales: this.controller.locales,
+        that.renderContext = {
+            formTitle: prompt.database.getTableMetaDataValue('formTitle'),
+            instanceName: prompt.database.getInstanceMetaDataValue('instanceName'),
+            locales: that.controller.getFormLocales(),
             showHeader: true,
             showFooter: false,
             enableForwardNavigation: true,
@@ -102,9 +102,9 @@ return Backbone.View.extend({
         //(We would not allow prompts to access the controller directly).
         //When the prompt changes, we could disconnect the interface to prevent the old
         //prompts from messing with the current screen.
-		// 
-		// pass in 'render': true to indicate that we will be rendering upon successful
-		// completion.
+        // 
+        // pass in 'render': true to indicate that we will be rendering upon successful
+        // completion.
         prompt.onActivate($.extend({render:true},ctxt,{
             success:function(renderContext){
                 var isFirstPrompt = !('previousPageEl' in that);
@@ -198,12 +198,17 @@ return Backbone.View.extend({
             ctxt.append('screenManager.gotoPreviousScreen.duplicateEvent');
             ctxt.success();
             return false;
-        } else if(!that.swipeEnabled) {
+        }
+        that.swipeTimeStamp = evt.timeStamp;
+        return that.gotoPreviousScreenAction(ctxt);
+    },
+    gotoPreviousScreenAction: function(ctxt) {
+        var that = this;
+        if(!that.swipeEnabled) {
             ctxt.append('screenManager.gotoPreviousScreen.ignoreDisabled');
             ctxt.success();
             return false;
         }
-        that.swipeTimeStamp = evt.timeStamp;
         that.swipeEnabled = false;
         that.controller.gotoPreviousScreen($.extend({},ctxt,{
                 success:function(){ 
@@ -221,24 +226,27 @@ return Backbone.View.extend({
         $( "#languagePopup" ).popup( "open" );
     },
     setLanguage: function(evt) {
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append('screenManager.setLanguage', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
         //Closing popups is important,
         //they will not open in the future if one is not closed.
         $( "#languagePopup" ).popup( "close" );
-        this.controller.setLocale(evt, $(evt.target).attr("id"));
+        this.controller.setLocale(ctxt, $(evt.target).attr("id"));
     },
-	showScreenPopup: function(msg) {
-		$( "#screenPopup" ).find('.message').text(msg.message);
+    showScreenPopup: function(msg) {
+        $( "#screenPopup" ).find('.message').text(msg.message);
         $( "#screenPopup" ).popup( "open" );
     },
-	showSpinnerOverlay: function(msg) {
-		$.mobile.loading( 'show', {
-			text: msg.text,
-			textVisible: true
-		});
-	},
-	hideSpinnerOverlay: function() {
-		$.mobile.loading( 'hide' );
-	},
+    showSpinnerOverlay: function(msg) {
+        $.mobile.loading( 'show', {
+            text: msg.text,
+            textVisible: true
+        });
+    },
+    hideSpinnerOverlay: function() {
+        $.mobile.loading( 'hide' );
+    },
     handlePagechange: function(evt){
         var ctxt = this.savedCtxt;
         this.savedCtxt = null;

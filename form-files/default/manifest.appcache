@@ -1,0 +1,30 @@
+CACHE MANIFEST
+# 2012-08-01 v1.2.9a
+css/odk-collect.css
+img/advance.png
+img/backup.png
+img/form_logo.png
+img/play.png
+js/builder.js
+js/collect.js
+js/controller.js
+js/formulaFunctions.js
+js/handlebarsHelpers.js
+js/jqmConfig.js
+js/main.js
+js/mdl.js
+js/opendatakit.js
+js/parsequery.js
+js/prompts.js
+js/promptTypes.js
+js/screenManager.js
+js/version.txt
+libs/backbone.0.9.2.js
+libs/handlebars.1.0.0.beta.6.js
+libs/jquery.1.8.2.js
+libs/require.2.0.6.js
+libs/text.2.0.3.js
+libs/underscore.1.4.2.js
+libs/mobiscroll
+libs/jquery.mobile-1.2.0
+

@@ -2,11 +2,11 @@
     "settings": [
         {
             "setting": "tableId",
-            "value": "collect01"
+            "value": "default01"
         },
         {
             "setting": "formId",
-            "value": "collect"
+            "value": "default"
         },
         {
             "setting": "formVersion"

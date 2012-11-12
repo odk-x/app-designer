@@ -41,7 +41,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
     
     function formula(content) {
         // If context.allowExceptions is true call is responsible for catching and handling exceptions.
-		// 'context' passed in may or may not be defined. 
+        // 'context' passed in may or may not be defined. 
         // It may or may not be the calling context object.
         var result = '(function(context){\n'+
             'return ('+ content + ');\n' +
@@ -55,6 +55,8 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     console.error(String(e));
                     console.error(result);
                     console.error(this);
+                    // TODO: rework this -- calling fatalError() will mess up ctxt reporting
+                    throw new Error("Exception in user formula.");
                     if(context && context.allowExceptions === true){
                         throw new Error("Exception in user formula.");
                     } else {
@@ -324,7 +326,6 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         
         that.form.prompts = this.initializePrompts(prompts);
         controller.prompts = that.form.prompts;
-        controller.locales = opendatakit.getFormLocales(surveyJson);
         //controller.calcs = that.form.calcs;
         console.log('starting');
         continuation();
