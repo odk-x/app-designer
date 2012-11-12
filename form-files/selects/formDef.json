@@ -13,13 +13,13 @@
     "queries": [
         {
             "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []", 
-            "rowNum": 2, 
+            "rowNum": 3, 
             "name": "states", 
             "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")"
         }, 
         {
             "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []", 
-            "rowNum": 3, 
+            "rowNum": 4, 
             "name": "cities", 
             "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('state') + \"'\")"
         }
@@ -27,7 +27,7 @@
     "survey": [
         {
             "name": "state", 
-            "rowNum": 2, 
+            "rowNum": 3, 
             "param": "states", 
             "type": "select_one", 
             "comments": "Cascading select using remote data", 
@@ -35,32 +35,32 @@
         }, 
         {
             "name": "city", 
-            "rowNum": 3, 
+            "rowNum": 4, 
             "type": "select_one", 
             "param": "cities", 
             "label": "Choose a city:"
         }, 
         {
-            "rowNum": 4, 
+            "rowNum": 5, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "bird", 
-                    "rowNum": 5, 
+                    "rowNum": 6, 
                     "type": "select_one", 
                     "param": "birds", 
                     "label": "Choose a bird:"
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 6, 
+                    "rowNum": 7, 
                     "type": "note", 
                     "condition": "selected(data('bird'), 'blackbird')", 
                     "label": "Blackbird selected"
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 7, 
+                    "rowNum": 8, 
                     "type": "note", 
                     "condition": "selected(data('bird'), 'blackbird') && now().getHours() < 2", 
                     "label": "in the dead of night"
@@ -71,17 +71,17 @@
     ], 
     "settings": [
         {
-            "rowNum": 2, 
+            "rowNum": 3, 
             "setting": "formId", 
             "value": "selects"
         }, 
         {
-            "rowNum": 3, 
+            "rowNum": 4, 
             "setting": "formVersion", 
             "value": 1
         }, 
         {
-            "rowNum": 4, 
+            "rowNum": 5, 
             "setting": "formTitle", 
             "value": "Select Examples"
         }
@@ -89,47 +89,47 @@
     "choices": {
         "birds": [
             {
-                "rowNum": 2, 
+                "rowNum": 3, 
                 "name": "blackbird", 
                 "image": "media/blackbird.png"
             }, 
             {
-                "rowNum": 3, 
+                "rowNum": 4, 
                 "name": "bluethroat", 
                 "image": "media/bluethroat.png"
             }, 
             {
-                "rowNum": 4, 
+                "rowNum": 5, 
                 "name": "crow", 
                 "image": "media/crow.png"
             }, 
             {
-                "rowNum": 5, 
+                "rowNum": 6, 
                 "name": "eagle", 
                 "image": "media/eagle.png"
             }, 
             {
-                "rowNum": 6, 
+                "rowNum": 7, 
                 "name": "egret", 
                 "image": "media/egret.png"
             }, 
             {
-                "rowNum": 7, 
+                "rowNum": 8, 
                 "name": "goose", 
                 "image": "media/goose.png"
             }, 
             {
-                "rowNum": 8, 
+                "rowNum": 9, 
                 "name": "gull", 
                 "image": "media/gull.png"
             }, 
             {
-                "rowNum": 9, 
+                "rowNum": 10, 
                 "name": "hawfinch", 
                 "image": "media/hawfinch.png"
             }, 
             {
-                "rowNum": 10, 
+                "rowNum": 11, 
                 "name": "jay", 
                 "image": "media/jay.png"
             }

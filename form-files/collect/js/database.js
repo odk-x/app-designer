@@ -23,8 +23,9 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
     var that = this;
     try {
         if ( that.submissionDb ) {
-            that.submissionDb.transaction(transactionBody, function(error) {
+            that.submissionDb.transaction(transactionBody, function(error,a) {
                     ctxt.append("withDb.transaction.error", error.message);
+                    console.error(error);
                     inContinuation = true;
                     ctxt.failure();
                     }, function() {
@@ -68,6 +69,8 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
 									');', []);
                 }, function(error) {
                     ctxt.append("withDb.createDb.transaction.error", error.message);
+                    console.error(error);
+                    console.error(transactionBody);
                     inContinuation = true;
                     ctxt.failure();
                 }, function() {
@@ -76,6 +79,8 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                     ctxt.append("withDb.createDb.transacton.success");
                     that.submissionDb.transaction(transactionBody, function(error) {
                                 ctxt.append("withDb.transaction.error", error.message);
+                                console.error(error);
+                                console.error(ctxt.sqlStatement);
                                 inContinuation = true;
                                 ctxt.failure();
                             }, function() {
@@ -891,9 +896,9 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueList) {
 initializeTables:function(ctxt, formDef, tableId, protoTableMetadata, formPath) {
     var that = this;
     var tlo = {};
-							
+	var ss = that.getDbTableNameStmt(tableId);	
 	ctxt.append('initializeTables');
-    that.withDb($.extend({},ctxt,{success:function() {
+    that.withDb($.extend({sqlStatement: ss},ctxt,{success:function() {
 				ctxt.append('getAllTableMetaData.success');
 				// these values come from the current webpage
 				tlo = $.extend(tlo, protoTableMetadata);
@@ -904,7 +909,7 @@ initializeTables:function(ctxt, formDef, tableId, protoTableMetadata, formPath) 
 				ctxt.success();
 			}}), function(transaction) {
 				// now insert records into these tables...
-				var ss = that.getDbTableNameStmt(tableId);
+				
 				transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
 					if (result.rows.length == 0 ) {
 						// TODO: use something other than formId for the dbTableName...

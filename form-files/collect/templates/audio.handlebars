@@ -1,12 +1,17 @@
 <div>
     {{> labelHint}}
-    <input type="text" name="{{name}}" value="{{value}}"
-        class="ui-disabled"
-    />
-    <button class="launch">{{buttonLabel}}</button>
+    <input type="text" name="{{name}}" value="{{mediaPath}}"
+            style="background-color:lightgray;"
+            disabled="true"
+        />
+    {{#if invalid}}
+        <p>invalid</p>
+    {{/if}}
+    <button class="captureAction">Capture Audio</button>
+    <button class="chooseAction">Choose Audio</button>
     <div class="mediaContainer">
         {{#if uriValue}}
-            <audio src="{{uriValue}}"></audio>
+            <audio src="{{uriValue}}" controls="true">audio control not supported</audio>
         {{/if}}
     </div>
 <div>

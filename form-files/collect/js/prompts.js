@@ -781,7 +781,160 @@ promptTypes.time = promptTypes.datetime.extend({
     }
 });
 /**
- * launch_intent is an abstract prompt type used as a base for image/audio/video/barcode/etc.
+ * Media is an abstract object used as a base for image/audio/video
+ */
+promptTypes.media = promptTypes.base.extend({
+    type: "media",
+    captureAction: null, // overridden by derived classes -- the intent to fire
+    chooseAction: null, // overridden by derived classes -- the intent to fire
+    events: {
+        "click .captureAction:enabled": "capture",
+        "click .chooseAction:enabled": "choose"
+    },
+	disableButtons: function() {
+		var that = this;
+		that.$('.captureAction').attr('disabled','true');
+		that.$('.chooseAction').attr('disabled','true');
+	},
+	enableButtons: function() {
+		var that = this;
+		that.$('.captureAction').removeAttr('disabled');
+		that.$('.chooseAction').removeAttr('disabled');
+	},
+    capture: function(evt) {
+		var that = this;
+        var ctxt = controller.newContext(evt);
+		that.disableButtons();
+        var platInfo = opendatakit.getPlatformInfo(ctxt);
+        // TODO: is this the right sequence?
+		var outcome = collect.doAction('' + that.promptIdx, 'take' + that.type, that.captureAction, null);
+		ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
+		if (outcome === null || outcome !== "OK") {
+			alert("Should be OK got >" + outcome + "<");
+			that.enableButtons();
+			ctxt.failure();
+		} else {
+			ctxt.success();
+		}
+    },
+    choose: function(evt) {
+		var that = this;
+        var ctxt = controller.newContext(evt);
+		that.disableButtons();
+        var platInfo = opendatakit.getPlatformInfo(ctxt);
+        // TODO: is this the right sequence?
+		var outcome = collect.doAction('' + that.promptIdx, 'take' + that.type, that.chooseAction, null);
+		ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
+		if (outcome === null || outcome !== "OK") {
+			alert("Should be OK got >" + outcome + "<");
+			that.enableButtons();
+			ctxt.failure();
+		} else {
+			ctxt.success();
+		}
+    },
+    getCallback: function(ctxt, bypath, byaction) {
+        var that = this;
+        return function(ctxt, path, action, jsonString) {
+            ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " action: " + action);
+            var jsonObject = JSON.parse(jsonString);
+            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " action: " + action);
+                var mediaPath = (jsonObject.result !== null) ? jsonObject.result.mediaPath : null;
+                if (mediaPath !== null) {
+					// TODO: write as MIMEURI type
+                    var oldPath = that.getValue();
+                    if ( mediaPath != oldPath) {
+                        // TODO: delete old??? Or leave until marked as finalized?
+                        // TODO: I'm not sure how the resuming works, but we'll need to make sure
+                        // onActivate get's called AFTER this happens.
+                        database.setData( $.extend({},ctxt,{success:function() {
+								that.enableButtons();
+								var mediaPath = that.getValue();
+								that.renderContext.mediaPath = mediaPath;
+								that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+								that.render();
+								ctxt.success();
+							},
+							failure:function() {
+								that.enableButtons();
+								var mediaPath = that.getValue();
+								that.renderContext.mediaPath = mediaPath;
+								that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+								that.render();
+								ctxt.failure();
+							}}), that.name, "file", mediaPath);
+                    }
+                }
+            }
+            else {
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " action: " + action);
+                console.log("failure returned");
+                alert(jsonObject.result);
+		
+				that.enableButtons();
+				var mediaPath = that.getValue();
+				that.renderContext.mediaPath = mediaPath;
+				that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+				that.render();
+                ctxt.failure();
+            }
+        };
+    }
+});
+promptTypes.image = promptTypes.media.extend({
+    type: "image",
+    datatype: "image",
+    label: 'Take your photo:',
+    templatePath: "templates/image.handlebars",
+	captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity',
+	chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseImageActivity',
+    onActivate: function(ctxt) {
+        var that = this;
+        var value = that.getValue();
+        if (value != null && value.length != 0) {
+			that.renderContext.mediaPath = value;
+			that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'img');
+		}
+        this.baseActivate(ctxt);
+    }
+});
+promptTypes.video = promptTypes.media.extend({
+    type: "video",
+    label: 'Take your video:',
+    templatePath: "templates/video.handlebars",
+	captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity',
+	chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseVideoActivity',
+    onActivate: function(ctxt) {
+        var that = this;
+        var value = that.getValue();
+        if (value != null && value.length != 0) {
+			that.renderContext.mediaPath = value;
+            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
+            that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
+        }
+        this.baseActivate(ctxt);
+    }
+});
+promptTypes.audio = promptTypes.media.extend({
+    type: "audio",
+    datatype: "audio",
+    templatePath: "templates/audio.handlebars",
+	captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity',
+	chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseAudioActivity',
+    label: 'Take your audio:',
+    onActivate: function(ctxt) {
+        var that = this;
+        var value = that.getValue();
+        if (value != null && value.length != 0) {
+			that.renderContext.mediaPath = value;
+            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'audio', 'src');
+        }
+        this.baseActivate(ctxt);
+    },
+});
+/**
+ * launch_intent is an abstract prompt type used as a base for single intent launching (e.g. barcodes)
  * Ideally just the templates and intentStrings will need to be customized.
  */
 promptTypes.launch_intent = promptTypes.base.extend({
@@ -856,37 +1009,6 @@ promptTypes.launch_intent = promptTypes.base.extend({
             }
         };
     }
-});
-promptTypes.image = promptTypes.launch_intent.extend({
-    type: "image",
-    datatype: "image",
-    buttonLabel: 'Capture photograph',
-    //templatePath: "templates/image.handlebars"
-    intentString: 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity'
-});
-promptTypes.video = promptTypes.launch_intent.extend({
-    type: "video",
-    buttonLabel: 'Capture video',
-    //templatePath: "templates/video.handlebars",
-    intentString: 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity'
-    /*
-    onActivate: function(ctxt) {
-        var that = this;
-        var value = that.getValue();
-        if (value != null && value.length != 0) {
-            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
-            that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
-        }
-        this.baseActivate(ctxt);
-    }
-    */
-});
-promptTypes.audio = promptTypes.launch_intent.extend({
-    type: "audio",
-    datatype: "audio",
-    //templatePath: "templates/audio.handlebars",
-    buttonLabel: 'Capture audio',
-    intentString: 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity'
 });
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
