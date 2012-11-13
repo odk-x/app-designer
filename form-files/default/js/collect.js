@@ -42,6 +42,13 @@ window.collect = window.collect || {
             }, 100);
             return "OK";
         }
+        if ( action == 'org.opendatakit.sensors.PULSEOX' ) {
+            setTimeout(function() {
+                controller.opendatakitCallback( page, path, action, 
+                    '{ "status": -1, "result": { "pulse": 100, "ox": 1.5 } }' );
+            }, 100);
+            return "OK";
+        }
     },
     saveAllChangesCompleted: function( formId, instanceId, asComplete ) {
         alert("notify container that we have a " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + " save completed OK.");

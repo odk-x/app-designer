@@ -51,8 +51,10 @@ Handlebars.registerHelper('eachProperty', function(context, options) {
         $.each(context, function(property, value){
             output += options.fn({property:property,value:value});
         });
+        return output;
+    } else {
+        return options.inverse(this);
     }
-    return output;
 });
 
 Handlebars.registerPartial('labelHint', labelHintPartial);

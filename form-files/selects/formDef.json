@@ -22,6 +22,14 @@
             "rowNum": 4, 
             "name": "cities", 
             "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('state') + \"'\")"
+        }, 
+        {
+            "rowNum": 5
+        }, 
+        {
+            "rowNum": 6, 
+            "name": "odk_values", 
+            "uri": "odkquery://table_id/elementKey1/elementKey5/?selection=encodeURIComponent('elementKey2=? and elementKey3>5')&selectionArgs=encodeURIComponent(JSON.stringify([data('state')])"
         }
     ], 
     "survey": [

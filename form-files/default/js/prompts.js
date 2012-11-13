@@ -959,22 +959,25 @@ promptTypes.launch_intent = promptTypes.base.extend({
     launch: function(evt) {
         var ctxt = controller.newContext(evt);
         var platInfo = opendatakit.getPlatformInfo(ctxt);
+        
+        //We assume that the webkit could go away when an intent is launched,
+        //so this prompt's "address" is passed along with the intent.
+        var outcome = collect.doAction('' + this.promptIdx, this.name, this.intentString, this.intentParameters);
+        ctxt.append(this.intentString, platInfo.container + " outcome is " + outcome);
+        if (outcome && outcome === "OK") {
+            ctxt.success();
+        } else {
+            alert("Should be OK got >" + outcome + "<");
+            ctxt.failure();
+        }
+        /*
         if (platInfo.container == 'Android') {
-            //We assume that the webkit could go away when an intent is launched,
-            //so this prompt's "address" is passed along with the intent.
-            var outcome = collect.doAction('' + this.promptIdx, this.name, this.intentString, this.intentParameters);
-            ctxt.append(this.intentString, platInfo.container + " outcome is " + outcome);
-            if (outcome && outcome === "OK") {
-                ctxt.success();
-            } else {
-                alert("Should be OK got >" + outcome + "<");
-                ctxt.failure();
-            }
         } else {
             ctxt.append('launch.intent.disabled', platInfo.container);
             alert("Not running on Android -- disabled");
             ctxt.failure();
         }
+        */
     },
     /**
      * When the intent returns a result this factory function creates a callback to process it.
@@ -984,14 +987,14 @@ promptTypes.launch_intent = promptTypes.base.extend({
         var that = this;
         return function(ctxt, path, action, jsonString) {
             var jsonObject;
-            ctxt.append("prompts." + this.type + 'getCallback.actionFn', "px: " + this.promptIdx + " action: " + action);
+            ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " action: " + action);
             try {
                 jsonObject = JSON.parse(jsonString);
             } catch (e) {
                 alert("Could not parse: " + jsonString);
             }
             if (jsonObject.status == -1 ) { // Activity.RESULT_OK
-                ctxt.append("prompts." + this.type + 'getCallback.actionFn.resultOK', "px: " + this.promptIdx + " action: " + action);
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " action: " + action);
                 if (jsonObject.result != null) {
                     that.setValue($.extend({}, ctxt, {
                         success: function() {
@@ -1002,7 +1005,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                     }), JSON.stringify(jsonObject.result));
                 }
             } else {
-                ctxt.append("prompts." + this.type + 'getCallback.actionFn.failureOutcome', "px: " + this.promptIdx + " action: " + action);
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " action: " + action);
                 alert("failure returned");
                 console.error(jsonObject);
                 ctxt.failure();
@@ -1019,7 +1022,8 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
 promptTypes.pulseox = promptTypes.launch_intent.extend({
     type: "pulseox",
     datatype: "pulseox",
-    intentString: 'org.opendatakit.collect.android.activities.PulseOxActivity'
+    //change.uw.android.BREATHCOUNT
+    intentString: 'org.opendatakit.sensors.PULSEOX'
 });
 /*
 promptTypes.geopoint = promptTypes.base.extend({
