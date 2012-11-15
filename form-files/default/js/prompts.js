@@ -14,11 +14,6 @@ promptTypes.base = Backbone.View.extend({
     constraint_message: "Constraint violated.",
 	invalid_value_message: "Invalid value.",
 	required_message: "Required value not provided.",
-    // track how many times we've tried to retrieve and compile the 
-    // handlebars template for this prompt.
-    initializeTemplateMaxTryCount: 4,
-    initializeTemplateTryCount: 0,
-    initializeTemplateFailed: false,
     //renderContext is a dynamic object to be passed into the render function.
     //renderContext is meant to be private.
     renderContext: {},
@@ -29,7 +24,7 @@ promptTypes.base = Backbone.View.extend({
     baseInputAttributes: {},
     inputAttributes: {},
     initialize: function() {
-        this.initializeTemplate();
+        //this.initializeTemplate();
         this.initializeRenderContext();
         this.afterInitialize();
     },
@@ -49,9 +44,15 @@ promptTypes.base = Backbone.View.extend({
 			ctxt.failure();
         }
     },
+    /*
+    // track how many times we've tried to retrieve and compile the 
+    // handlebars template for this prompt.
+    initializeTemplateMaxTryCount: 4,
+    initializeTemplateTryCount: 0,
+    initializeTemplateFailed: false,
     initializeTemplate: function() {
         return;
-        /*
+        
         //if (this.template != null) return;
         var that = this;
         var f = function() {
@@ -74,9 +75,10 @@ promptTypes.base = Backbone.View.extend({
             }
         };
         f();
-        */
+        
     },
-
+    */
+    //TODO: I think we can remove isInitializeComplete
     isInitializeComplete: function() {
         return (this.templatePath == null || this.template != null);
     },
@@ -99,7 +101,13 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
+    /**
+     * afterInitialize is user defined
+     **/
     afterInitialize: function() {},
+    /**
+     * prompt types that override onActivate are expected to call baseActivate
+     **/
     baseActivate: function(ctxt) {
         var that = this;
         function callFunctionsInSeries(functions){
@@ -111,16 +119,6 @@ promptTypes.base = Backbone.View.extend({
         }
         callFunctionsInSeries(that.additionalActivateFunctions);
     },
-    /*
-    baseActivate: function(ctxt) {
-        var that = this;
-        var additionalActivateComplete = _.after(that.additionalActivateFunctions.length, function(){
-            that.whenTemplateIsReady(ctxt);
-        });
-        _.each(that.additionalActivateFunctions, function(additionalActivateFunc){
-            additionalActivateFunc($.extend({}, ctxt, { success : additionalActivateComplete}));
-        });
-    },*/
     onActivate: function(ctxt) {
         this.baseActivate(ctxt);
     },
@@ -180,10 +178,12 @@ promptTypes.base = Backbone.View.extend({
         return this;
         */
     },
-    //baseValidate isn't meant to be overidden or called externally.
-    //It does validation that will be common to most prompts.
-    //Validate is menat be overridden and publicly called. 
-    //It is validate's responsibility to call baseValidate.
+    /**
+     * baseValidate isn't meant to be overidden or called externally.
+     * It does validation that will be common to most prompts.
+     * Validate is meant be overridden and publicly called. 
+     * It is validate's responsibility to call baseValidate.
+     **/
     baseValidate: function(context) {
         var that = this;
         var isRequired = false;
@@ -263,13 +263,15 @@ promptTypes.base = Backbone.View.extend({
         // a page (e.g., update calculated fields).
     },
     */
+    /*
+    //TODO: I can't find any refrences to these, so we should probably remove them.
     validationFailedAction: function(isMoveBackward) {
         alert(this.validationFailedMessage);
     },
     requiredFieldMissingAction: function(isMovingBackward) {
         alert(this.requiredFieldMissingMessage);
     }
-
+    */
 });
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
@@ -969,8 +971,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
     launch: function(evt) {
         var ctxt = controller.newContext(evt);
         var platInfo = opendatakit.getPlatformInfo(ctxt);
-        $('#block-ui').show();
-        $('#block-ui').on('swipeleft swiperight click', function(evt) {
+        $('#block-ui').show().on('swipeleft swiperight click', function(evt) {
             evt.stopPropagation();
         });
         //We assume that the webkit could go away when an intent is launched,
@@ -981,10 +982,12 @@ promptTypes.launch_intent = promptTypes.base.extend({
             ctxt.success();
         } else {
             alert("Should be OK got >" + outcome + "<");
-            $('#block-ui').hide();
+            $('#block-ui').hide().off();
             ctxt.failure();
         }
         /*
+        //Removing this because I want to simulate intents
+        //when not on android.
         if (platInfo.container == 'Android') {
         } else {
             ctxt.append('launch.intent.disabled', platInfo.container);
@@ -999,7 +1002,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
      */
     getCallback: function(ctxt, bypath, byaction) {
         var that = this;
-        $('#block-ui').hide();
+        $('#block-ui').hide().off();
         return function(ctxt, path, action, jsonString) {
             var jsonObject;
             ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " action: " + action);
@@ -1042,6 +1045,7 @@ promptTypes.pulseox = promptTypes.launch_intent.extend({
 promptTypes.breathcounter = promptTypes.launch_intent.extend({
     type: "breathcounter",
     datatype: "breathcounter",
+    buttonLabel: 'Launch breath counter',
     intentString: 'change.uw.android.BREATHCOUNT'
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
@@ -1106,7 +1110,7 @@ promptTypes.screen = promptTypes.base.extend({
                 that.render();
             };
         });
-        this.initializeTemplate();
+        //this.initializeTemplate();
         this.initializeRenderContext();
         this.afterInitialize();
     },
@@ -1278,6 +1282,7 @@ promptTypes.with_next = promptTypes.base.extend({
     }
 });
 //Ensure all prompt type names are lowercase.
+//TODO: Move this to builder so we can validate prompt types packaged with forms.
 _.each(_.keys(promptTypes), function(promptTypeName){
     if(promptTypeName !== promptTypeName.toLowerCase()) {
         alert("Invalid prompt type name: " + promptTypeName);
