@@ -240,7 +240,8 @@ return Backbone.View.extend({
         this.controller.setLocale(ctxt, $(evt.target).attr("id"));
     },
     showScreenPopup: function(msg) {
-        $( "#screenPopup" ).find('.message').text(msg.message);
+        var messageHtml = Handlebars.compile("{{#substitute}}{{localize message}}{{/substitute}}")(msg);
+        $( "#screenPopup" ).find('.message').html(messageHtml);
         $( "#screenPopup" ).popup( "open" );
     },
     showSpinnerOverlay: function(msg) {
