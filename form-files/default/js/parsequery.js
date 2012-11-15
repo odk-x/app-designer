@@ -1,8 +1,7 @@
 'use strict';
 /**
- dependency upon: mdl, opendatakit, database 
  non-requirejs dependency: collect
- circular dependency upon: controller, builder
+ circular dependency upon: controller, builder (set via initialize)
  
  3 public APIs:
  

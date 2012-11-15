@@ -1,6 +1,8 @@
 /*jslint eqeq: true, evil: true, plusplus: true, todo: true, vars: true, white: true, devel: true */
 'use strict';
-
+/**
+ * All  the standard prompts available to a form designer.
+ */
 define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'handlebarsHelpers'],
 function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _) {
 
