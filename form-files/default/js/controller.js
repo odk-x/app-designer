@@ -1,6 +1,14 @@
 'use strict';
-// depends upon: --
-// NOTE: builder.js sets controller.prompts property.
+/**
+ * NOTE: builder.js sets controller.prompts property.
+ *
+ * Manages the execution state and page history of the overall survey, 
+ * including form validation, saving and marking the form as 'complete'.
+ *
+ * Delegates the display of individual prompts to the screenManager. 
+ * Delegates the evaluation of individual constraints, etc. to the prompts.
+ *
+ */
 define(['screenManager','opendatakit','database', 'jquery'],
 function(ScreenManager,  opendatakit,  database, $) {
 window.controller = {

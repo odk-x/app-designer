@@ -1,5 +1,11 @@
 'use strict';
-// depends upon: --
+/**
+ * This is a random collection of methods that don't quite belong anywhere.
+ *
+ * A set of utilities, some of which wrap the Java interface (collect.js), and others
+ * provide useful parsing or interpretation of localization details.
+ *
+ */
 define(['mdl'],function(mdl) {
 return {
     baseDir: '',

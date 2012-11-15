@@ -1,9 +1,14 @@
 'use strict';
-// depends upon -- opendatakit, Backbone, $, Handlebars, jQueryMobile, text (a requirejs plugin).
-//
-// also depends upon: 'controller' -- to avoid a circular dependency, 'controller' is passed 
-// in during initialize() and stored in a member variable.
-//
+/**
+* circular dependency: 'controller' -- to avoid a circular dependency, 'controller' is passed 
+* in during initialize() and stored in a member variable.
+*
+* Responsibilities:
+*    Performs the actions necessary to make a prompt visible on the screen (setPrompt).
+*    Receives click and swipe events for navigating across pages.
+*    Displays pop-up dialogs and toasts.
+*    Displays the options dialog for changing languages and navigations.
+*/
 define(['opendatakit','backbone','jquery','handlebars','text!templates/screen.handlebars' ,'jqmobile'], 
 function(opendatakit, Backbone, $, Handlebars, screenTemplate) {
 

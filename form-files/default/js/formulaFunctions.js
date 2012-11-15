@@ -1,5 +1,8 @@
 //Dont use usestrict or the evaluator will break
-//TODO: These functions need unit testing.
+/**
+ * Common functions accessible to the user's Javascript eval environment (for use within their formulas).
+ */
+ //TODO: These functions need unit testing.
 define(['database', 'underscore'],
 function(database,   _) {
     return {

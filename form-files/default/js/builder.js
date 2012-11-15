@@ -1,4 +1,13 @@
 'use strict';
+/**
+ * Main entry point: buildSurvey
+ * 
+ * Given a form definition (formDef.json), constructs the calculations and prompts lists that are then 
+ * injected into the controller.
+ *
+ * Major task is to construct function()s for the calculates, constraints and other equations.
+ *
+ */
 define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes', 'formulaFunctions', 'underscore'],
 function(controller,   opendatakit,   database,   $,        promptTypes,   formulaFunctions,   _) {
     var calculates = {};

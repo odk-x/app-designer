@@ -1,3 +1,14 @@
+/**
+ * Simple boilerplate for defining the requirejs settings, 
+ * to initialize parsequery dependencies, and to establish
+ * the parsequery.hashChangeHandler for hash change events.
+ *
+ * Also sets up a timer polling for the completion of the
+ * jquery mobile platform. After it is initialized, the
+ * timer then triggers the processing of the hash of the 
+ * initial page load (which triggers the parsing and 
+ * interpretation of the formDef.json for the form).
+ */
 requirejs.config({
     baseUrl: collect.getBaseUrl(),
     paths: {

@@ -1,3 +1,9 @@
+/**
+ * Handlebars helper functions for use within handlebars templates.
+ *
+ * These are invoked via {{helperFunction arg1}} or {{helperFunction arg1 arg2}}
+ * within the handelbars templates.
+ */
 define(['mdl','database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars'],
 function(mdl,  database,   opendatakit, Handlebars,  formulaFunctions,   labelHintPartial) {
 
