@@ -141,9 +141,6 @@
         "very_low_weight": {
             "type": "string"
         }, 
-        "breaths_per_minute": {
-            "type": "integer"
-        }, 
         "sunken_eyes": {
             "type": "string"
         }, 
@@ -360,6 +357,9 @@
         "birthday": {
             "type": "string"
         }, 
+        "pulseox": {
+            "type": "string"
+        }, 
         "parse_mother_for_feeding": {
             "type": "boolean"
         }, 
@@ -448,6 +448,11 @@
                 "default": "IMNCI", 
                 "hindi": "IMNCI"
             }
+        }, 
+        {
+            "rowNum": 6, 
+            "setting": "tableId", 
+            "value": "test"
         }
     ], 
     "survey": [
@@ -463,7 +468,10 @@
         }, 
         {
             "name": "birthday", 
-            "constraint_message": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.", 
+            "constraint_message": {
+                "default": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.", 
+                "hindi": "आप भविष्य में एक जन्मदिन में प्रवेश किया. शायद अपने डिवाइस सही तारीख नहीं है"
+            }, 
             "hint": {
                 "default": "If the exact date is unknown use an approximate date.", 
                 "hindi": "अगर ठीक तारीक़ याद नही तो लगभग आस-पास की तारीक़ डालें."
@@ -499,14 +507,16 @@
             }
         }, 
         {
-            "param": null, 
             "rowNum": 7, 
-            "type": "note", 
-            "condition": "calculates.daysOld() > 2 * 30", 
-            "label": {
-                "default": "More than 2 months old", 
-                "hindi": "उमर २ महीने से उपर है"
-            }
+            "type": "goto", 
+            "param": "more_than_2mo", 
+            "condition": "calculates.daysOld() > 2 * 30"
+        }, 
+        {
+            "rowNum": 8, 
+            "type": "error", 
+            "param": null, 
+            "condition": "calculates.daysOld() > 2 * 30"
         }, 
         {
             "name": "convulsions", 
@@ -520,8 +530,15 @@
             }
         }, 
         {
-            "name": "breath_count", 
+            "name": "pulseox", 
             "rowNum": 10, 
+            "type": "pulseox", 
+            "param": null, 
+            "label": "Record pulse and blood oxygen level."
+        }, 
+        {
+            "name": "breath_count", 
+            "rowNum": 11, 
             "templatePath": "breathCounter.handlebars", 
             "type": "integer", 
             "param": null, 
@@ -538,13 +555,13 @@
                 "default": "Breath count is elevated. Repeat breath count.", 
                 "hindi": "सास की गिनती ज़्यादा है. एक बार और गिनिए."
             }, 
-            "rowNum": 11, 
+            "rowNum": 12, 
             "type": "integer", 
             "condition": "data('breath_count') >= 60", 
             "templatePath": "breathCounter.handlebars"
         }, 
         {
-            "rowNum": 12, 
+            "rowNum": 13, 
             "type": "screen", 
             "prompts": [
                 {
@@ -560,7 +577,7 @@
                         "default": "Look for severe chest  indrawing.", 
                         "hindi": "पसली का अत्यधिक धन्सना देखें."
                     }, 
-                    "rowNum": 13, 
+                    "rowNum": 14, 
                     "type": "select_one"
                 }, 
                 {
@@ -575,7 +592,7 @@
                         "default": "Look for nasal flaring.", 
                         "hindi": "नाक जगमगाता हुआ के लिए देखें."
                     }, 
-                    "rowNum": 14, 
+                    "rowNum": 15, 
                     "type": "select_one"
                 }, 
                 {
@@ -590,18 +607,18 @@
                         "default": "Look and listen for grunting.", 
                         "hindi": "कराहना सुने"
                     }, 
-                    "rowNum": 15, 
+                    "rowNum": 16, 
                     "type": "select_one"
                 }
             ]
         }, 
         {
-            "rowNum": 17, 
+            "rowNum": 18, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "axillary_temperature_possible", 
-                    "rowNum": 18, 
+                    "rowNum": 19, 
                     "required": true, 
                     "type": "select_one", 
                     "param": "yes_no", 
@@ -612,26 +629,29 @@
                 }, 
                 {
                     "name": "axillary_temperature", 
-                    "hint": "Use celsius", 
+                    "hint": {
+                        "default": "Use celsius", 
+                        "hindi": "सेल्सियस का प्रयोग करें"
+                    }, 
                     "required": true, 
                     "param": null, 
                     "label": {
                         "default": "Measure axillary temperature:", 
                         "hindi": "बगल का तापमान नापे (यदि संभव ना हो तो छूकर महसूस करें )"
                     }, 
-                    "rowNum": 19, 
+                    "rowNum": 20, 
                     "type": "decimal", 
                     "condition": "selected(data('axillary_temperature_possible'), 'yes')"
                 }
             ]
         }, 
         {
-            "rowNum": 21, 
+            "rowNum": 22, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "fever_present", 
-                    "rowNum": 22, 
+                    "rowNum": 23, 
                     "type": "select_one", 
                     "param": "present", 
                     "label": {
@@ -641,7 +661,7 @@
                 }, 
                 {
                     "name": "low_body_temperature", 
-                    "rowNum": 23, 
+                    "rowNum": 24, 
                     "param": "present", 
                     "type": "select_one", 
                     "condition": "not(selected(data('fever_present'), 'present'))", 
@@ -655,7 +675,7 @@
         }, 
         {
             "name": "lethargic", 
-            "rowNum": 25, 
+            "rowNum": 26, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -666,7 +686,7 @@
         }, 
         {
             "name": "abnormal_movements", 
-            "rowNum": 26, 
+            "rowNum": 27, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -677,7 +697,7 @@
         }, 
         {
             "name": "gt_10_skin_pustules", 
-            "rowNum": 27, 
+            "rowNum": 28, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -688,7 +708,7 @@
         }, 
         {
             "name": "umbilicus_draining_pus", 
-            "rowNum": 28, 
+            "rowNum": 29, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -699,7 +719,7 @@
         }, 
         {
             "name": "skin_pustules", 
-            "rowNum": 29, 
+            "rowNum": 30, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -709,102 +729,102 @@
             }
         }, 
         {
-            "rowNum": 30, 
+            "rowNum": 31, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('convulsions'), 'yes')"
         }, 
         {
-            "rowNum": 31, 
+            "rowNum": 32, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "data('breath_count_2') >= 60"
         }, 
         {
-            "rowNum": 32, 
+            "rowNum": 33, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('chest_indrawing'), 'present')"
         }, 
         {
-            "rowNum": 33, 
+            "rowNum": 34, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('nasal_flaring'), 'present')"
         }, 
         {
-            "rowNum": 34, 
+            "rowNum": 35, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('grunting'), 'present')"
         }, 
         {
-            "rowNum": 35, 
+            "rowNum": 36, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "data('axillary_temperature') && (data('axillary_temperature') >= 37.5 || data('axillary_temperature') < 35.5)"
         }, 
         {
-            "rowNum": 36, 
+            "rowNum": 37, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('fever_present'), 'present')"
         }, 
         {
-            "rowNum": 37, 
+            "rowNum": 38, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('low_body_temperature'), 'present')"
         }, 
         {
-            "rowNum": 38, 
+            "rowNum": 39, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('lethargic'), 'yes')"
         }, 
         {
-            "rowNum": 39, 
+            "rowNum": 40, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('abnormal_movements'),'yes')"
         }, 
         {
-            "rowNum": 40, 
+            "rowNum": 41, 
             "type": "goto", 
             "param": "possible_serious_bacterial_infection", 
             "condition": "selected(data('gt_10_skin_pustules'), 'yes')"
         }, 
         {
-            "rowNum": 41, 
+            "rowNum": 42, 
             "type": "goto", 
             "param": "local_bacterial_infection", 
             "condition": "selected(data('umbilicus_draining_pus'), 'yes')"
         }, 
         {
-            "rowNum": 42, 
+            "rowNum": 43, 
             "type": "goto", 
             "param": "local_bacterial_infection", 
             "condition": "selected(data('skin_pustules'), 'yes')"
         }, 
         {
-            "rowNum": 43, 
+            "rowNum": 44, 
             "type": "goto", 
             "param": "no_bacterial_infection"
         }, 
         {
-            "rowNum": 44, 
+            "rowNum": 45, 
             "type": "label", 
             "param": "possible_serious_bacterial_infection"
         }, 
         {
             "name": "possible_serious_bacterial_infection", 
-            "rowNum": 45, 
+            "rowNum": 46, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 46, 
+            "rowNum": 47, 
             "type": "screen", 
             "prompts": [
                 {
@@ -812,7 +832,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 47, 
+                    "rowNum": 48, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -826,7 +846,7 @@
                         "default": "<li>Convulsions</li>", 
                         "hindi": "<li>दौड़े</li>"
                     }, 
-                    "rowNum": 48, 
+                    "rowNum": 49, 
                     "type": "note", 
                     "condition": "selected(data('convulsions'), 'yes')"
                 }, 
@@ -836,7 +856,7 @@
                         "default": "<li>Fast breathing (60 breaths per minute or more)</li>", 
                         "hindi": "<li>तेज़ी से साँस लेना(एक मिनिट मैं ६० सांसो से ज़्यादा) </li>"
                     }, 
-                    "rowNum": 49, 
+                    "rowNum": 50, 
                     "type": "note", 
                     "condition": "data('breath_count_2') >= 60"
                 }, 
@@ -846,7 +866,7 @@
                         "default": "<li>Severe chest indrawing</li>", 
                         "hindi": "<li>पसली का अत्यधिक धसना</li>"
                     }, 
-                    "rowNum": 50, 
+                    "rowNum": 51, 
                     "type": "note", 
                     "condition": "selected(data('chest_indrawing'), 'yes')"
                 }, 
@@ -856,7 +876,7 @@
                         "default": "<li>Nasal flaring</li>", 
                         "hindi": "<li>नाक जगमगाता हुआ के लिए देखें.</li>"
                     }, 
-                    "rowNum": 51, 
+                    "rowNum": 52, 
                     "type": "note", 
                     "condition": "selected(data('nasal_flaring'), 'yes')"
                 }, 
@@ -866,7 +886,7 @@
                         "default": "<li>Grunting</li>", 
                         "hindi": "<li>कराहना </li>"
                     }, 
-                    "rowNum": 52, 
+                    "rowNum": 53, 
                     "type": "note", 
                     "condition": "selected(data('grunting'), 'yes')"
                 }, 
@@ -876,7 +896,7 @@
                         "default": "<li>10 or more skin pustules or a big boil</li>", 
                         "hindi": "<li>त्वचा पर फोड़े / फुंसी देखें. क्या १० या ज़्यादा या एक बड़ा फोढा है</li>"
                     }, 
-                    "rowNum": 53, 
+                    "rowNum": 54, 
                     "type": "note", 
                     "condition": "selected(data('gt_10_skin_pustules'), 'yes')"
                 }, 
@@ -886,7 +906,7 @@
                         "default": "<li>axillary temperature 37.5°C or above or temperature less than 35.5°C</li>", 
                         "hindi": "<li>बगल का तापमान ३७.५ डेग सी या ज़्यादा (या छूने से गर्म लगता हो) या तापमान २५.५ डेग सी से कम (या शून्े से ठंडा लगता हो) </li>"
                     }, 
-                    "rowNum": 54, 
+                    "rowNum": 55, 
                     "type": "note", 
                     "condition": "data('axillary_temperature') && (data('axillary_temperature') >= 37.5 || data('axillary_temperature') < 35.5)"
                 }, 
@@ -896,7 +916,7 @@
                         "default": "<li>feels hot to touch</li>", 
                         "hindi": "<li>छूने मैं गर्म </li>"
                     }, 
-                    "rowNum": 55, 
+                    "rowNum": 56, 
                     "type": "note", 
                     "condition": "selected(data('fever_present'), 'present')"
                 }, 
@@ -906,7 +926,7 @@
                         "default": "<li>feels cold to touch</li>", 
                         "hindi": "<li>छूने मैं ठंडा</li>"
                     }, 
-                    "rowNum": 56, 
+                    "rowNum": 57, 
                     "type": "note", 
                     "condition": "selected(data('low_body_temperature'), 'present')"
                 }, 
@@ -916,7 +936,7 @@
                         "default": "<li>Lethargic or unconscious</li>", 
                         "hindi": "<li>सुस्त या बेहोश </li>"
                     }, 
-                    "rowNum": 57, 
+                    "rowNum": 58, 
                     "type": "note", 
                     "condition": "selected(data('lethargic'), 'yes')"
                 }, 
@@ -926,12 +946,12 @@
                         "default": "<li>Less than normal movements</li>", 
                         "hindi": "<li>सामान्य से कम हिलना डुलना</li>"
                     }, 
-                    "rowNum": 58, 
+                    "rowNum": 59, 
                     "type": "note", 
                     "condition": "selected(data('abnormal_movements'),'yes')"
                 }, 
                 {
-                    "rowNum": 59, 
+                    "rowNum": 60, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -948,12 +968,12 @@
                         "hindi": "अगर मूह से ले सकता है तो कोटरिमोक्षज़ोल की पहली खुराक (एक महीने की उम्र तक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बचे वाली १ गोली) दे."
                     }, 
                     "param": null, 
-                    "rowNum": 60, 
+                    "rowNum": 61, 
                     "type": "acknowledge"
                 }, 
                 {
                     "name": "advise_continue_breastfeeding", 
-                    "rowNum": 61, 
+                    "rowNum": 62, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -964,7 +984,7 @@
                 }, 
                 {
                     "name": "warm_infant_skin_to_skin", 
-                    "rowNum": 62, 
+                    "rowNum": 63, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -975,7 +995,7 @@
                 }, 
                 {
                     "name": "refer_urgently_to_hospital", 
-                    "rowNum": 63, 
+                    "rowNum": 64, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -987,25 +1007,25 @@
             ]
         }, 
         {
-            "rowNum": 65, 
+            "rowNum": 66, 
             "type": "goto", 
             "param": "bacterial_infection_section_end"
         }, 
         {
-            "rowNum": 66, 
+            "rowNum": 67, 
             "required": true, 
             "type": "label", 
             "param": "local_bacterial_infection"
         }, 
         {
             "name": "local_bacterial_infection", 
-            "rowNum": 67, 
+            "rowNum": 68, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 68, 
+            "rowNum": 69, 
             "type": "screen", 
             "prompts": [
                 {
@@ -1014,7 +1034,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 69, 
+                    "rowNum": 70, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -1028,7 +1048,7 @@
                         "default": "<li>Umbilicus red or draining pus</li>", 
                         "hindi": "<li>नाभि देखें, क्या नाभि लाल है या पीप निकल रा है?</li>"
                     }, 
-                    "rowNum": 70, 
+                    "rowNum": 71, 
                     "type": "note", 
                     "condition": "selected(data('umbilicus_draining_pus'), 'yes')"
                 }, 
@@ -1038,7 +1058,7 @@
                         "default": "<li>Skin pustules less than 10</li>", 
                         "hindi": "<li>त्वचा पर फोड़े / फुंसी देखें. क्या १० या ज़्यादा या एक बड़ा फोढा है?</li>"
                     }, 
-                    "rowNum": 71, 
+                    "rowNum": 72, 
                     "type": "note", 
                     "condition": "selected(data('skin_pustules'), 'yes')"
                 }, 
@@ -1051,7 +1071,7 @@
                         "hindi": "कोटरिमोक्षज़ोल की खुराक (१ महीने की ऊम्र तक के शिशु को बाकछे वाली आधी गोली और १ से २ महीने तक के शिशु को बाकछे की १ गोली) ५ दिन तक दिन मैं दो बार दें."
                     }, 
                     "param": null, 
-                    "rowNum": 72, 
+                    "rowNum": 73, 
                     "type": "acknowledge"
                 }, 
                 {
@@ -1063,12 +1083,12 @@
                         "hindi": "मा को संगयाए. ०.५% जनशन वायलाट ( जी वी) दावा दिन मैं दो बार लगायें."
                     }, 
                     "param": null, 
-                    "rowNum": 73, 
+                    "rowNum": 74, 
                     "type": "acknowledge"
                 }, 
                 {
                     "name": "follow_up_2_days", 
-                    "rowNum": 74, 
+                    "rowNum": 75, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -1080,25 +1100,25 @@
             ]
         }, 
         {
-            "rowNum": 76, 
+            "rowNum": 77, 
             "type": "goto", 
             "param": "bacterial_infection_section_end"
         }, 
         {
-            "rowNum": 77, 
+            "rowNum": 78, 
             "type": "label", 
             "param": "no_bacterial_infection", 
             "comments": "Adding based on correspondence w/ amy"
         }, 
         {
             "name": "no_bacterial_infection", 
-            "rowNum": 78, 
+            "rowNum": 79, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 79, 
+            "rowNum": 80, 
             "type": "note", 
             "param": null, 
             "label": {
@@ -1107,17 +1127,17 @@
             }
         }, 
         {
-            "rowNum": 80, 
+            "rowNum": 81, 
             "type": "goto", 
             "param": "bacterial_infection_section_end"
         }, 
         {
-            "rowNum": 81, 
+            "rowNum": 82, 
             "type": "label", 
             "param": "bacterial_infection_section_end"
         }, 
         {
-            "rowNum": 82, 
+            "rowNum": 83, 
             "required": true, 
             "type": "label", 
             "param": "diarrhoea_section"
@@ -1134,26 +1154,26 @@
                 "default": "Does the young infant have diarrhoea?", 
                 "hindi": "पूछें क्या शिशु को दस्त हैं?"
             }, 
-            "rowNum": 83, 
+            "rowNum": 84, 
             "type": "select_one"
         }, 
         {
             "param": "diarrhoea_section_end", 
             "comments": "Disabling based off Manoj's comment that we should check all signs.", 
-            "rowNum": 84, 
+            "rowNum": 85, 
             "required": true, 
             "type": "goto", 
             "condition": "false && selected(data('has_diarrhoea'), 'no')"
         }, 
         {
-            "rowNum": 85, 
+            "rowNum": 86, 
             "required": true, 
             "type": "label", 
             "param": "has_diarrhoea"
         }, 
         {
             "name": "blood_in_stool", 
-            "rowNum": 86, 
+            "rowNum": 87, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -1163,12 +1183,12 @@
             }
         }, 
         {
-            "rowNum": 87, 
+            "rowNum": 88, 
             "required": true, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 88, 
+                    "rowNum": 89, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -1178,11 +1198,14 @@
                 }, 
                 {
                     "name": "lethargic_2", 
-                    "constraint_message": "You answered this question differently previously.", 
+                    "constraint_message": {
+                        "default": "You answered this question differently previously.", 
+                        "hindi": "आपने अलग ढंग से पहले इस सवाल का जवाब दे दिया."
+                    }, 
                     "required": true, 
                     "param": "yes_no", 
                     "constraint": "equivalent(data('lethargic'), data('lethargic_2'))", 
-                    "rowNum": 89, 
+                    "rowNum": 90, 
                     "label": {
                         "default": "Lethargic or unconscious?", 
                         "hindi": "सुस्त या बेहोश है?"
@@ -1191,7 +1214,7 @@
                 }, 
                 {
                     "name": "restless", 
-                    "rowNum": 90, 
+                    "rowNum": 91, 
                     "required": true, 
                     "type": "select_one", 
                     "param": "yes_no", 
@@ -1204,7 +1227,7 @@
         }, 
         {
             "name": "sunken_eyes", 
-            "rowNum": 92, 
+            "rowNum": 93, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -1222,12 +1245,12 @@
                 "default": "Pinch the skin of the abdomen. Does it go back:", 
                 "hindi": "पेट की त्वचा पर चिकोटी भरें, यह काए वापस जाता है?"
             }, 
-            "rowNum": 93, 
+            "rowNum": 94, 
             "type": "select_one"
         }, 
         {
             "param": "dehydration", 
-            "rowNum": 94, 
+            "rowNum": 95, 
             "required": true, 
             "type": "goto", 
             "condition": "calculates.severeDehydration() || calculates.someDehydration()"
@@ -1235,25 +1258,25 @@
         {
             "param": "no_dehydration", 
             "comments": "The no dehydration classification assumes the child has diarrhoea in its treatment. We might want to change that.", 
-            "rowNum": 95, 
+            "rowNum": 96, 
             "required": true, 
             "type": "goto", 
             "condition": "selected(data('has_diarrhoea'), 'yes')"
         }, 
         {
-            "rowNum": 96, 
+            "rowNum": 97, 
             "type": "goto", 
             "param": "diarrhoea_section_end"
         }, 
         {
-            "rowNum": 97, 
+            "rowNum": 98, 
             "required": true, 
             "type": "label", 
             "param": "dehydration"
         }, 
         {
             "name": "some_dehydration", 
-            "rowNum": 98, 
+            "rowNum": 99, 
             "type": "with_next", 
             "assign": true, 
             "param": null
@@ -1269,13 +1292,13 @@
                 "default": "CLASSIFICATION: SOME DEHYDRATION", 
                 "hindi": "वर्गीकरण: कुछ निर्जलीकरण"
             }, 
-            "rowNum": 99, 
+            "rowNum": 100, 
             "type": "note", 
             "condition": "not(calculates.severeDehydration()) && calculates.someDehydration()"
         }, 
         {
             "name": "severe_dehydration", 
-            "rowNum": 100, 
+            "rowNum": 101, 
             "type": "with_next", 
             "assign": true, 
             "param": null
@@ -1291,17 +1314,17 @@
                 "default": "CLASSIFICATION: <strong>SEVERE DEHYDRATION</strong>", 
                 "hindi": "वर्गीकरण <strong>गंभीर निर्जलीकरण</strong>"
             }, 
-            "rowNum": 101, 
+            "rowNum": 102, 
             "type": "note", 
             "condition": "calculates.severeDehydration()"
         }, 
         {
-            "rowNum": 102, 
+            "rowNum": 103, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "give_oral_cotrimoxazole_if_able", 
-                    "rowNum": 103, 
+                    "rowNum": 104, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -1312,7 +1335,7 @@
                 }, 
                 {
                     "name": "refer_urgently_to_hospital_w_ORS", 
-                    "rowNum": 104, 
+                    "rowNum": 105, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -1323,7 +1346,7 @@
                 }, 
                 {
                     "name": "advise_continue_breastfeeding", 
-                    "rowNum": 105, 
+                    "rowNum": 106, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -1334,7 +1357,7 @@
                 }, 
                 {
                     "name": "advise_keep_infant_warm", 
-                    "rowNum": 106, 
+                    "rowNum": 107, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -1346,26 +1369,26 @@
             ]
         }, 
         {
-            "rowNum": 108, 
+            "rowNum": 109, 
             "required": true, 
             "type": "goto", 
             "param": "dehydration_end"
         }, 
         {
-            "rowNum": 109, 
+            "rowNum": 110, 
             "required": true, 
             "type": "label", 
             "param": "no_dehydration"
         }, 
         {
             "name": "no_dehydration", 
-            "rowNum": 110, 
+            "rowNum": 111, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 111, 
+            "rowNum": 112, 
             "type": "screen", 
             "prompts": [
                 {
@@ -1373,7 +1396,7 @@
                         "default": "Not enough signs to classify as    \n  some or severe dehydration.", 
                         "hindi": "निर्जलीकरण के पयापत चिन्ह का न होना."
                     }, 
-                    "rowNum": 112, 
+                    "rowNum": 113, 
                     "required": true, 
                     "type": "note", 
                     "param": null, 
@@ -1384,7 +1407,7 @@
                 }, 
                 {
                     "name": "dehydration_treatment", 
-                    "rowNum": 113, 
+                    "rowNum": 114, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -1396,26 +1419,26 @@
             ]
         }, 
         {
-            "rowNum": 115, 
+            "rowNum": 116, 
             "required": true, 
             "type": "label", 
             "param": "dehydration_end"
         }, 
         {
-            "rowNum": 116, 
+            "rowNum": 117, 
             "required": true, 
             "type": "label", 
             "param": "severe_dysentery"
         }, 
         {
             "name": "severe_dysentery", 
-            "rowNum": 117, 
+            "rowNum": 118, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 118, 
+            "rowNum": 119, 
             "type": "screen", 
             "prompts": [
                 {
@@ -1423,7 +1446,7 @@
                         "default": "Signs:\n<p>Blood  in the stool</p>", 
                         "hindi": "चिन्ह <p>माल मैं खून</p>"
                     }, 
-                    "rowNum": 119, 
+                    "rowNum": 120, 
                     "required": true, 
                     "type": "note", 
                     "param": null, 
@@ -1434,7 +1457,7 @@
                 }, 
                 {
                     "name": "give_oral_cotrimoxazole", 
-                    "rowNum": 120, 
+                    "rowNum": 121, 
                     "param": null, 
                     "type": "acknowledge", 
                     "comments": "TODO: should this have the dosage specifics mentioned above", 
@@ -1445,7 +1468,7 @@
                 }, 
                 {
                     "name": "refer_urgently_to_hospital", 
-                    "rowNum": 121, 
+                    "rowNum": 122, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -1455,7 +1478,7 @@
                 }, 
                 {
                     "name": "advise_continue_breastfeeding", 
-                    "rowNum": 122, 
+                    "rowNum": 123, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -1472,26 +1495,26 @@
                         "hindi": "शिशु को गर्म रखने की सलाह"
                     }, 
                     "param": null, 
-                    "rowNum": 123, 
+                    "rowNum": 124, 
                     "type": "acknowledge"
                 }
             ], 
             "condition": "selected(data('blood_in_stool'), 'yes')"
         }, 
         {
-            "rowNum": 125, 
+            "rowNum": 126, 
             "type": "label", 
             "param": "diarrhoea_section_end"
         }, 
         {
-            "rowNum": 126, 
+            "rowNum": 127, 
             "required": true, 
             "type": "label", 
             "param": "feeding_problem_check"
         }, 
         {
             "name": "difficulty_feeding", 
-            "rowNum": 127, 
+            "rowNum": 128, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -1502,7 +1525,7 @@
         }, 
         {
             "name": "is_infant_breastfed", 
-            "rowNum": 128, 
+            "rowNum": 129, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -1513,7 +1536,7 @@
         }, 
         {
             "name": "breastfeedings_per_day", 
-            "rowNum": 129, 
+            "rowNum": 130, 
             "param": null, 
             "type": "integer", 
             "condition": "selected(data('is_infant_breastfed'), 'yes')", 
@@ -1523,12 +1546,12 @@
             }
         }, 
         {
-            "rowNum": 130, 
+            "rowNum": 131, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "other_foods", 
-                    "rowNum": 131, 
+                    "rowNum": 132, 
                     "required": true, 
                     "type": "select_one", 
                     "param": "yes_no", 
@@ -1542,10 +1565,10 @@
                     "comments": "Adding per 24 hours", 
                     "label": {
                         "default": "ASK: How often does the infant receive other foods or drinks per 24 hours?", 
-                        "hindi": "यदि हां तो कितनी बार?"
+                        "hindi": "पूछो: कितनी बार शिशु प्रति 24 घंटे अन्य खाद्य पदार्थ या पेय प्राप्त करता है?"
                     }, 
                     "param": null, 
-                    "rowNum": 132, 
+                    "rowNum": 133, 
                     "type": "integer", 
                     "condition": "selected(data('other_foods'), 'yes')"
                 }
@@ -1553,7 +1576,7 @@
         }, 
         {
             "name": "use_to_feed", 
-            "rowNum": 134, 
+            "rowNum": 135, 
             "param": "food", 
             "type": "select_multiple", 
             "comments": "I'm going with type of food for now because we ask about breastfeeding above", 
@@ -1571,7 +1594,7 @@
                 "hindi": "अगर तुरंत रेफरल की ज़रूरत न हो तो तभी स्तनपान का आकलन करें.?"
             }, 
             "param": "yes_no", 
-            "rowNum": 135, 
+            "rowNum": 136, 
             "type": "select_one"
         }, 
         {
@@ -1582,18 +1605,18 @@
                 "hindi": "पूछें: क्या शिशु को पिछले घंटे मैं स्तनपान मिला है?"
             }, 
             "param": "yes_no", 
-            "rowNum": 136, 
+            "rowNum": 137, 
             "type": "select_one", 
             "condition": false
         }, 
         {
-            "rowNum": 137, 
+            "rowNum": 138, 
             "type": "goto", 
             "param": "after_feeding_assessment", 
             "condition": "selected(data('breastfed_recently'), 'yes')"
         }, 
         {
-            "rowNum": 138, 
+            "rowNum": 139, 
             "type": "goto", 
             "param": "after_feeding_assessment", 
             "condition": "selected(data('indication_for_urgent_referral'), 'yes')"
@@ -1607,16 +1630,16 @@
                 "hindi": "मा से कहें की शिशु को स्तन से लगाए. चार मिनिट तक स्तनपान कराते देखें?"
             }, 
             "param": null, 
-            "rowNum": 139, 
+            "rowNum": 140, 
             "type": "acknowledge"
         }, 
         {
-            "rowNum": 140, 
+            "rowNum": 141, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "able_to_attach", 
-                    "rowNum": 141, 
+                    "rowNum": 142, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -1635,7 +1658,7 @@
                         "default": "Look for the following signs to assess attachment:", 
                         "hindi": "शिशु का स्तन से लगाव जाचने के लिए देखें"
                     }, 
-                    "rowNum": 142, 
+                    "rowNum": 143, 
                     "type": "select_multiple", 
                     "condition": "selected(data('able_to_attach'), 'yes')"
                 }
@@ -1653,11 +1676,11 @@
                 "default": "Is the infant suckling effectively (that is,  slow deep sucks, sometimes pausing)?", 
                 "hindi": "क्या शिशु प्रभावी डांग से स्तन चूस रहा है (जैसे, धीरे-धीरे गहरा चूसना और बीच-बीच मैं रूकना?)."
             }, 
-            "rowNum": 144, 
+            "rowNum": 145, 
             "type": "select_one"
         }, 
         {
-            "rowNum": 145, 
+            "rowNum": 146, 
             "type": "label", 
             "param": "after_feeding_assessment"
         }, 
@@ -1670,12 +1693,12 @@
                 "hindi": "शिशु के मूँह मई छाला या सफेद दागो को देखें"
             }, 
             "param": "present", 
-            "rowNum": 146, 
+            "rowNum": 147, 
             "type": "select_one"
         }, 
         {
             "name": "breastfeeding_pain", 
-            "rowNum": 147, 
+            "rowNum": 148, 
             "required": true, 
             "type": "select_one", 
             "param": "yes_no", 
@@ -1692,34 +1715,34 @@
                 "hindi": "देखें व महसूस करें दिकाट के लिए"
             }, 
             "param": "breast_problems", 
-            "rowNum": 148, 
+            "rowNum": 149, 
             "type": "select_multiple", 
             "condition": "selected(data('breastfeeding_pain'), 'yes')"
         }, 
         {
             "param": "cannot_feed_possible_serious_bacterial_infection", 
             "comments": "Based on correspondence w/ Amy using 'is_infant_breastfed' to determine \"Able to feed\"", 
-            "rowNum": 149, 
+            "rowNum": 150, 
             "required": true, 
             "type": "goto", 
             "condition": "selected(data('is_infant_breastfed'), 'yes') || selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'none')"
         }, 
         {
             "param": "feeding_problem", 
-            "rowNum": 150, 
+            "rowNum": 151, 
             "required": true, 
             "type": "goto", 
             "condition": "selected(data('other_foods'), 'yes') || selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'not_effective') || selected(data('sucking_effectiveness'), 'none') || Number(data('breastfeedings_per_day')) < 8 || selected(data('ulcers_thrush'), 'present') || countSelected(data('breast_problems')) > 0"
         }, 
         {
             "name": "no_feeding_problem", 
-            "rowNum": 151, 
+            "rowNum": 152, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 152, 
+            "rowNum": 153, 
             "type": "screen", 
             "prompts": [
                 {
@@ -1727,7 +1750,7 @@
                         "default": "No signs of inadequate feeding.", 
                         "hindi": "कम स्तनपान के कोई चिन्ह नही"
                     }, 
-                    "rowNum": 153, 
+                    "rowNum": 154, 
                     "required": true, 
                     "type": "note", 
                     "param": null, 
@@ -1738,7 +1761,7 @@
                 }, 
                 {
                     "name": "advise_home_care", 
-                    "rowNum": 154, 
+                    "rowNum": 155, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -1748,7 +1771,7 @@
                 }, 
                 {
                     "name": "parse_mother_for_feeding", 
-                    "rowNum": 155, 
+                    "rowNum": 156, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -1760,33 +1783,33 @@
             ]
         }, 
         {
-            "rowNum": 157, 
+            "rowNum": 158, 
             "required": true, 
             "type": "goto", 
             "param": "check_immunization_status"
         }, 
         {
-            "rowNum": 158, 
+            "rowNum": 159, 
             "required": true, 
             "type": "label", 
             "param": "feeding_problem"
         }, 
         {
             "name": "feeding_problem", 
-            "rowNum": 159, 
+            "rowNum": 160, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 160, 
+            "rowNum": 161, 
             "type": "screen", 
             "prompts": [
                 {
                     "image": "./img/attached.jpg", 
                     "required": true, 
                     "type": "note", 
-                    "rowNum": 161, 
+                    "rowNum": 162, 
                     "param": null, 
                     "label": {
                         "default": "CLASSIFICATION: FEEDING PROBLEM", 
@@ -1799,7 +1822,7 @@
                         "default": "<li>Not well attached to \nbreast or Not suckling effectively</li>", 
                         "hindi": "<li>लगाव अच्छा नही</li>"
                     }, 
-                    "rowNum": 162, 
+                    "rowNum": 163, 
                     "type": "note", 
                     "condition": "selected(data('able_to_attach'),'no') || selected(data('sucking_effectiveness'), 'not_effective')"
                 }, 
@@ -1809,7 +1832,7 @@
                         "default": "<li>Less than 8    \nbreastfeeds in \n24 hours</li>", 
                         "hindi": "<li>स्तनपान ८ बार से कम २४ घंटो मैं.</li>"
                     }, 
-                    "rowNum": 163, 
+                    "rowNum": 164, 
                     "type": "note", 
                     "condition": "Number(data('breastfeedings_per_day')) < 8"
                 }, 
@@ -1819,7 +1842,7 @@
                         "default": "<li>Receives other \nfoods or drinks</li>", 
                         "hindi": "<li>और कोई खाने या पीने की सुविधा</li>"
                     }, 
-                    "rowNum": 164, 
+                    "rowNum": 165, 
                     "type": "note", 
                     "condition": "selected(data('other_foods'), 'yes')"
                 }, 
@@ -1829,7 +1852,7 @@
                         "default": "<li>Thrush (ulcers or \nwhite patches in \nmouth).</li>", 
                         "hindi": "<li>मूह मैं छाले </li>"
                     }, 
-                    "rowNum": 165, 
+                    "rowNum": 166, 
                     "type": "note", 
                     "condition": "selected(data('ulcers_thrush'), 'present')"
                 }, 
@@ -1839,7 +1862,7 @@
                         "default": "<li>Breast or nipple problems</li>", 
                         "hindi": "<li>स्तन या चुचक मैं समस्या होना</li>"
                     }, 
-                    "rowNum": 166, 
+                    "rowNum": 167, 
                     "type": "note", 
                     "condition": "countSelected(data('breast_problems')) > 0"
                 }, 
@@ -1852,7 +1875,7 @@
                         "hindi": "अगर शिशु का लगाव या चूसना ठीक न हो तो, सही स्तिति मैं लेना और स्तन से लगाना सिखाए."
                     }, 
                     "param": null, 
-                    "rowNum": 167, 
+                    "rowNum": 168, 
                     "type": "acknowledge", 
                     "condition": "(countSelected(data('attachment_quality_signs')) < 4) || not(selected(data('sucking_effectiveness'), 'effective'))"
                 }, 
@@ -1864,13 +1887,13 @@
                         "default": "Breastfeeding less than 8 times in 24 hours. Advise to increase frequency of feeding.", 
                         "hindi": "अगर २४ घंटे मे ८ बार से कम स्तनपान है तो मा को ज्यागा बार स्तनपान करने की सलाह दे."
                     }, 
-                    "rowNum": 168, 
+                    "rowNum": 169, 
                     "type": "acknowledge", 
                     "condition": "data('breastfeedings_per_day') < 8"
                 }, 
                 {
                     "name": "infant_other_food", 
-                    "rowNum": 169, 
+                    "rowNum": 170, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "selected(data('other_foods'), 'yes')", 
@@ -1888,7 +1911,7 @@
                         "hindi": "अगर शिशु दूसरा पेया पदार्थ लेता है? तो मा को समझाए की स्तनपान ज़्यादा कराए द धीरे-धीरे दूसरे पेया-पदार्थ को कम करें व कटोरी-चम्मच का प्रयोग करें."
                     }, 
                     "param": null, 
-                    "rowNum": 170, 
+                    "rowNum": 171, 
                     "type": "acknowledge", 
                     "condition": "selected(data('is_infant_breastfed'), 'no')"
                 }, 
@@ -1900,7 +1923,7 @@
                         "default": "For thrush teach the mother to \napply 0.25% Gentian Violet \npaint twice daily", 
                         "hindi": "अगर मूँह में छाले या सफेद दाग ज़ीवी द्वा (०.२५%) २ बार लगाय."
                     }, 
-                    "rowNum": 171, 
+                    "rowNum": 172, 
                     "type": "acknowledge", 
                     "condition": "selected(data('ulcers_thrush'), 'present')"
                 }, 
@@ -1913,7 +1936,7 @@
                         "hindi": "अगर चूचक व स्तन की समस्या है तो उसका इलाज समझाए."
                     }, 
                     "param": null, 
-                    "rowNum": 172, 
+                    "rowNum": 173, 
                     "type": "acknowledge", 
                     "condition": "countSelected(data('breast_problems')) > 0"
                 }, 
@@ -1929,12 +1952,12 @@
                         "default": "Advise mother to give home \ncare", 
                         "hindi": "घर पर देखभाल की विधि समझाए."
                     }, 
-                    "rowNum": 173, 
+                    "rowNum": 174, 
                     "type": "acknowledge"
                 }, 
                 {
                     "name": "follow_up_2_days", 
-                    "rowNum": 174, 
+                    "rowNum": 175, 
                     "required": true, 
                     "type": "acknowledge", 
                     "param": null, 
@@ -1946,24 +1969,24 @@
             ]
         }, 
         {
-            "rowNum": 176, 
+            "rowNum": 177, 
             "type": "goto", 
             "param": "check_immunization_status"
         }, 
         {
-            "rowNum": 177, 
+            "rowNum": 178, 
             "type": "label", 
             "param": "cannot_feed_possible_serious_bacterial_infection"
         }, 
         {
             "name": "cannot_feed_possible_serious_bacterial_infection", 
-            "rowNum": 178, 
+            "rowNum": 179, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 179, 
+            "rowNum": 180, 
             "type": "screen", 
             "prompts": [
                 {
@@ -1971,7 +1994,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिन्ह"
                     }, 
-                    "rowNum": 180, 
+                    "rowNum": 181, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -1985,7 +2008,7 @@
                         "default": "<li>Not able to feed </li>", 
                         "hindi": "<li>लगाव बिल्कुल नही</li>"
                     }, 
-                    "rowNum": 181, 
+                    "rowNum": 182, 
                     "type": "note", 
                     "condition": "selected(data('is_infant_breastfed'), 'no')"
                 }, 
@@ -1995,7 +2018,7 @@
                         "default": "<li>No attachment at all</li>", 
                         "hindi": "<li>लगाव अच्छा नही है</li>"
                     }, 
-                    "rowNum": 182, 
+                    "rowNum": 183, 
                     "type": "note", 
                     "condition": "selected(data('able_to_attach'),'no')"
                 }, 
@@ -2005,13 +2028,13 @@
                         "default": "<li>Not suckling at all </li>", 
                         "hindi": "<li>लगाव नही </li>"
                     }, 
-                    "rowNum": 183, 
+                    "rowNum": 184, 
                     "type": "note", 
                     "condition": "selected(data('sucking_effectiveness'), 'none')"
                 }, 
                 {
                     "name": "warm_skin_to_skin", 
-                    "rowNum": 184, 
+                    "rowNum": 185, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2021,7 +2044,7 @@
                 }, 
                 {
                     "name": "refer_urgently_to_hospital", 
-                    "rowNum": 185, 
+                    "rowNum": 186, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2032,12 +2055,12 @@
             ]
         }, 
         {
-            "rowNum": 187, 
+            "rowNum": 188, 
             "type": "goto", 
             "param": "check_immunization_status"
         }, 
         {
-            "rowNum": 189, 
+            "rowNum": 190, 
             "type": "label", 
             "param": "check_immunization_status"
         }, 
@@ -2050,12 +2073,12 @@
                 "hindi": "शिशु को कौनसा टीका नही लगा है?"
             }, 
             "param": "needed_vaccinations", 
-            "rowNum": 190, 
+            "rowNum": 191, 
             "type": "select_multiple"
         }, 
         {
             "name": "other_problems", 
-            "rowNum": 192, 
+            "rowNum": 193, 
             "param": "yes_no", 
             "type": "select_one", 
             "comments": "Added based on correspondence with Amy/Manoj", 
@@ -2066,7 +2089,7 @@
         }, 
         {
             "name": "refer_for_other_problems", 
-            "rowNum": 193, 
+            "rowNum": 194, 
             "param": null, 
             "type": "acknowledge", 
             "condition": "selected(data('other_problems'), 'yes')", 
@@ -2076,13 +2099,22 @@
             }
         }, 
         {
-            "rowNum": 194, 
+            "rowNum": 195, 
             "type": "goto", 
             "param": "less_than_2mo_breakdowns"
         }, 
         {
+            "rowNum": 203, 
+            "type": "note", 
+            "param": null, 
+            "label": {
+                "default": "More than 2 months old", 
+                "hindi": "उमर २ महीने से उपर है"
+            }
+        }, 
+        {
             "name": "name", 
-            "rowNum": 201, 
+            "rowNum": 204, 
             "type": "text", 
             "param": null, 
             "label": {
@@ -2100,7 +2132,7 @@
             "required": true, 
             "param": null, 
             "constraint": "new Date(this.getValue()) <= now()", 
-            "rowNum": 202, 
+            "rowNum": 205, 
             "label": {
                 "default": "When was the child born?", 
                 "hindi": "शिशु कब पेड़ा हुआ था?"
@@ -2109,7 +2141,7 @@
         }, 
         {
             "name": "weight", 
-            "rowNum": 203, 
+            "rowNum": 206, 
             "type": "decimal", 
             "param": null, 
             "label": {
@@ -2119,7 +2151,7 @@
         }, 
         {
             "name": "visit_type", 
-            "rowNum": 204, 
+            "rowNum": 207, 
             "type": "select_one", 
             "param": "visit_type", 
             "label": {
@@ -2129,7 +2161,7 @@
         }, 
         {
             "param": null, 
-            "rowNum": 205, 
+            "rowNum": 208, 
             "type": "note", 
             "condition": "calculates.daysOld() > 2 * 30", 
             "label": {
@@ -2138,16 +2170,16 @@
             }
         }, 
         {
-            "rowNum": 206, 
+            "rowNum": 209, 
             "type": "label", 
             "param": "more_than_2mo"
         }, 
         {
-            "rowNum": 207, 
+            "rowNum": 210, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 208, 
+                    "rowNum": 211, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2157,7 +2189,7 @@
                 }, 
                 {
                     "name": "able_to_drink", 
-                    "rowNum": 209, 
+                    "rowNum": 212, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2167,7 +2199,7 @@
                 }, 
                 {
                     "name": "vomit_everything", 
-                    "rowNum": 210, 
+                    "rowNum": 213, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2177,7 +2209,7 @@
                 }, 
                 {
                     "name": "convulsions", 
-                    "rowNum": 211, 
+                    "rowNum": 214, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2189,7 +2221,7 @@
         }, 
         {
             "name": "lethargic", 
-            "rowNum": 213, 
+            "rowNum": 216, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": {
@@ -2198,11 +2230,11 @@
             }
         }, 
         {
-            "rowNum": 214, 
+            "rowNum": 217, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 215, 
+                    "rowNum": 218, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2212,7 +2244,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 216, 
+                    "rowNum": 219, 
                     "type": "note", 
                     "condition": "selected(data('able_to_drink'), 'no')", 
                     "label": {
@@ -2222,7 +2254,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 217, 
+                    "rowNum": 220, 
                     "type": "note", 
                     "condition": "selected(data('vomit_everything'), 'yes')", 
                     "label": {
@@ -2232,7 +2264,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 218, 
+                    "rowNum": 221, 
                     "type": "note", 
                     "condition": "selected(data('convulsions'), 'yes')", 
                     "label": {
@@ -2242,7 +2274,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 219, 
+                    "rowNum": 222, 
                     "type": "note", 
                     "condition": "selected(data('lethargic'), 'yes')", 
                     "label": {
@@ -2252,7 +2284,7 @@
                 }, 
                 {
                     "name": "acknowledge_urgent_attention", 
-                    "rowNum": 220, 
+                    "rowNum": 223, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2264,12 +2296,12 @@
             "condition": "calculates.danger_signs_present()"
         }, 
         {
-            "rowNum": 222, 
+            "rowNum": 225, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "difficulty_breathing", 
-                    "rowNum": 223, 
+                    "rowNum": 226, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2288,7 +2320,7 @@
                         "default": "For how long?", 
                         "hindi": "पूछें कब से?"
                     }, 
-                    "rowNum": 224, 
+                    "rowNum": 227, 
                     "type": "integer", 
                     "condition": "selected(data('difficulty_breathing'), 'yes')"
                 }
@@ -2296,24 +2328,40 @@
         }, 
         {
             "comments": "Disabling based off Manoj's comment that we should check all signs.", 
-            "rowNum": 226, 
+            "rowNum": 229, 
             "param": "above_2mo_diarrhoea_section", 
             "type": "goto", 
             "condition": "false && selected(data('difficulty_breathing'), 'no')"
         }, 
         {
-            "name": "breaths_per_minute", 
-            "hint": {
-                "default": "CHILD MUST BE CALM", 
-                "hindi": "शिशु शांत रहना चाहिए."
-            }, 
+            "name": "pulseox", 
+            "rowNum": 230, 
+            "type": "pulseox", 
+            "param": null, 
+            "label": "Record pulse and blood oxygen level."
+        }, 
+        {
+            "name": "breath_count", 
+            "rowNum": 231, 
+            "templatePath": "breathCounter.handlebars", 
+            "type": "integer", 
             "param": null, 
             "label": {
                 "default": "Count the breaths in one minute.", 
-                "hindi": "एक मिंन्ट मैं साँस की गिनती करे."
+                "hindi": "एक मिनिट के लिए साँस गिने."
+            }
+        }, 
+        {
+            "name": "breath_count_2", 
+            "required": true, 
+            "param": null, 
+            "label": {
+                "default": "Breath count is elevated. Repeat breath count.", 
+                "hindi": "सास की गिनती ज़्यादा है. एक बार और गिनिए."
             }, 
-            "rowNum": 227, 
+            "rowNum": 232, 
             "type": "integer", 
+            "condition": "data('breath_count') >= 60", 
             "templatePath": "breathCounter.handlebars"
         }, 
         {
@@ -2328,46 +2376,46 @@
                 "default": "Look for chest indrawing.", 
                 "hindi": "पसली का अत्यधिक धन्सना देखें."
             }, 
-            "rowNum": 228, 
+            "rowNum": 233, 
             "type": "select_one"
         }, 
         {
-            "rowNum": 229, 
+            "rowNum": 234, 
             "type": "goto", 
             "param": "above_2mo_severe_pneumonia", 
             "condition": "selected(data('chest_indrawing'), 'present')"
         }, 
         {
-            "rowNum": 230, 
+            "rowNum": 235, 
             "type": "goto", 
             "param": "above_2mo_pneumonia", 
             "condition": "calculates.fastBreathing()"
         }, 
         {
-            "rowNum": 231, 
+            "rowNum": 236, 
             "type": "goto", 
             "param": "above_2mo_cough_or_cold", 
             "condition": "selected(data('difficulty_breathing'), 'yes')"
         }, 
         {
-            "rowNum": 232, 
+            "rowNum": 237, 
             "type": "goto", 
             "param": "above_2mo_respiratory_section_end"
         }, 
         {
-            "rowNum": 233, 
+            "rowNum": 238, 
             "type": "label", 
             "param": "above_2mo_severe_pneumonia"
         }, 
         {
             "name": "severe_pneumonia", 
-            "rowNum": 234, 
+            "rowNum": 239, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 235, 
+            "rowNum": 240, 
             "type": "screen", 
             "prompts": [
                 {
@@ -2375,7 +2423,7 @@
                         "default": "SIGNS:\n<ul>\n<li>\nChest indrawing.\n</li>\n</ul>", 
                         "hindi": "चिन्ह <ul<li>पसली का अत्यधिक धसना </li><ul>"
                     }, 
-                    "rowNum": 236, 
+                    "rowNum": 241, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2385,7 +2433,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_first_dose_of_cotrimoxazole", 
-                    "rowNum": 237, 
+                    "rowNum": 242, 
                     "param": null, 
                     "type": "acknowledge", 
                     "comments": "TODO: Infer dosage by age. What if a adult and pediatric tablet is prescribed.", 
@@ -2396,7 +2444,7 @@
                 }, 
                 {
                     "name": "acknowledge_refer_urgently_to_hospital", 
-                    "rowNum": 238, 
+                    "rowNum": 243, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2407,24 +2455,24 @@
             ]
         }, 
         {
-            "rowNum": 240, 
+            "rowNum": 245, 
             "type": "goto", 
             "param": "above_2mo_respiratory_section_end"
         }, 
         {
-            "rowNum": 241, 
+            "rowNum": 246, 
             "type": "label", 
             "param": "above_2mo_pneumonia"
         }, 
         {
             "name": "pneumonia", 
-            "rowNum": 242, 
+            "rowNum": 247, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 243, 
+            "rowNum": 248, 
             "type": "screen", 
             "prompts": [
                 {
@@ -2432,7 +2480,7 @@
                         "default": "SIGNS:\n<ul>\n<li>Fast breathing</li>\n</ul>", 
                         "hindi": "चिन्ह <ul<li>तेज़ी से साँस लेना</li></ul>"
                     }, 
-                    "rowNum": 244, 
+                    "rowNum": 249, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2442,7 +2490,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 245, 
+                    "rowNum": 250, 
                     "param": null, 
                     "type": "acknowledge", 
                     "comments": "TODO: Infer dosage by age. What if a adult and pediatric tablet is prescribed.", 
@@ -2453,7 +2501,7 @@
                 }, 
                 {
                     "name": "acknowledge_follow_up_2_days", 
-                    "rowNum": 246, 
+                    "rowNum": 251, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2464,24 +2512,24 @@
             ]
         }, 
         {
-            "rowNum": 248, 
+            "rowNum": 253, 
             "type": "goto", 
             "param": "above_2mo_respiratory_section_end"
         }, 
         {
-            "rowNum": 249, 
+            "rowNum": 254, 
             "type": "label", 
             "param": "above_2mo_cough_or_cold"
         }, 
         {
             "name": "cough_or_cold", 
-            "rowNum": 250, 
+            "rowNum": 255, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 251, 
+            "rowNum": 256, 
             "type": "screen", 
             "prompts": [
                 {
@@ -2489,7 +2537,7 @@
                         "default": "SIGNS:\n<ul>\n<li>Fast breathing</li>\n</ul>", 
                         "hindi": "चिन्ह <ul<li>तेज़ी से साँस लेना</li></ul>"
                     }, 
-                    "rowNum": 252, 
+                    "rowNum": 257, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2499,7 +2547,7 @@
                 }, 
                 {
                     "name": "acknowledge_advise_home_care", 
-                    "rowNum": 253, 
+                    "rowNum": 258, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2518,25 +2566,25 @@
                         "default": "Refer for assessment.", 
                         "hindi": "अगर खाँसी ३० दिन से ज़्यादा की है तो जाच के लिए रेफर करें."
                     }, 
-                    "rowNum": 254, 
+                    "rowNum": 259, 
                     "type": "acknowledge", 
                     "condition": "data('how_long_difficulty_breathing') > 30"
                 }
             ]
         }, 
         {
-            "rowNum": 256, 
+            "rowNum": 261, 
             "type": "label", 
             "param": "above_2mo_respiratory_section_end"
         }, 
         {
-            "rowNum": 257, 
+            "rowNum": 262, 
             "type": "label", 
             "param": "above_2mo_diarrhoea_section"
         }, 
         {
             "name": "diarrhoea", 
-            "rowNum": 258, 
+            "rowNum": 263, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": {
@@ -2546,17 +2594,17 @@
         }, 
         {
             "comments": "Disabling based off Manoj's comment that we should check all signs.", 
-            "rowNum": 259, 
+            "rowNum": 264, 
             "param": "above_2mo_fever_section", 
             "type": "goto", 
             "condition": "false && selected(data('diarrhoea'), 'no')"
         }, 
         {
-            "rowNum": 260, 
+            "rowNum": 265, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 261, 
+                    "rowNum": 266, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2566,7 +2614,7 @@
                 }, 
                 {
                     "name": "diarrhoea_days", 
-                    "rowNum": 262, 
+                    "rowNum": 267, 
                     "type": "integer", 
                     "param": null, 
                     "label": {
@@ -2576,7 +2624,7 @@
                 }, 
                 {
                     "name": "blood_in_stool", 
-                    "rowNum": 263, 
+                    "rowNum": 268, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2588,11 +2636,11 @@
             "condition": "selected(data('diarrhoea'), 'yes')"
         }, 
         {
-            "rowNum": 265, 
+            "rowNum": 270, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 266, 
+                    "rowNum": 271, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2602,7 +2650,7 @@
                 }, 
                 {
                     "name": "lethargic", 
-                    "rowNum": 267, 
+                    "rowNum": 272, 
                     "param": "yes_no", 
                     "type": "select_one", 
                     "comments": "TODO: Copy approach to general condition question from other sheet. Not sure how to do it yet.", 
@@ -2613,7 +2661,7 @@
                 }, 
                 {
                     "name": "restless", 
-                    "rowNum": 268, 
+                    "rowNum": 273, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2625,7 +2673,7 @@
         }, 
         {
             "name": "sunken_eyes", 
-            "rowNum": 270, 
+            "rowNum": 275, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": {
@@ -2634,11 +2682,11 @@
             }
         }, 
         {
-            "rowNum": 271, 
+            "rowNum": 276, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 272, 
+                    "rowNum": 277, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2648,7 +2696,7 @@
                 }, 
                 {
                     "name": "drinking_poorly", 
-                    "rowNum": 273, 
+                    "rowNum": 278, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2658,7 +2706,7 @@
                 }, 
                 {
                     "name": "drinking_eagerly", 
-                    "rowNum": 274, 
+                    "rowNum": 279, 
                     "param": "yes_no", 
                     "type": "select_one", 
                     "comments": "This is probably mutex with drinking_poorly but I'm always showing it to be on the safe side.", 
@@ -2673,7 +2721,7 @@
             "name": "skin_elasticity", 
             "image": "./img/pinchskin.jpg", 
             "type": "select_one", 
-            "rowNum": 276, 
+            "rowNum": 281, 
             "param": "skin_elasticity", 
             "label": {
                 "default": "Pinch the skin of the abdomen. Does it go back:", 
@@ -2681,42 +2729,42 @@
             }
         }, 
         {
-            "rowNum": 277, 
+            "rowNum": 282, 
             "type": "goto", 
             "param": "above_2mo_severe_dehydration", 
             "condition": "selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') + selected(data('drinking_poorly'), 'yes')  >= 2"
         }, 
         {
-            "rowNum": 278, 
+            "rowNum": 283, 
             "type": "goto", 
             "param": "above_2mo_some_dehydration", 
             "condition": "selected(data('restless'), 'yes') + (selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow')) + selected(data('sunken_eyes'), 'yes') + selected(data('drinking_eagerly'), 'yes') >= 2"
         }, 
         {
-            "rowNum": 279, 
+            "rowNum": 284, 
             "type": "goto", 
             "param": "above_2mo_no_dehydration", 
             "condition": "selected(data('diarrhoea'), 'yes')"
         }, 
         {
-            "rowNum": 280, 
+            "rowNum": 285, 
             "type": "goto", 
             "param": "above_2mo_dehydration_end"
         }, 
         {
-            "rowNum": 281, 
+            "rowNum": 286, 
             "type": "label", 
             "param": "above_2mo_severe_dehydration"
         }, 
         {
             "name": "severe_dehydration", 
-            "rowNum": 282, 
+            "rowNum": 287, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 283, 
+            "rowNum": 288, 
             "type": "screen", 
             "prompts": [
                 {
@@ -2724,7 +2772,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 284, 
+                    "rowNum": 289, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2738,7 +2786,7 @@
                         "default": "<li>Lethargic or unconscious.</li>", 
                         "hindi": "<li>सुस्त या बेहोश</li>"
                     }, 
-                    "rowNum": 285, 
+                    "rowNum": 290, 
                     "type": "note", 
                     "condition": "selected(data('lethargic'), 'yes')"
                 }, 
@@ -2748,7 +2796,7 @@
                         "default": "<li>Sunken eyes.</li>", 
                         "hindi": "<li>धँसी हुई आँखें.</li>"
                     }, 
-                    "rowNum": 286, 
+                    "rowNum": 291, 
                     "type": "note", 
                     "condition": "selected(data('sunken_eyes'), 'yes')"
                 }, 
@@ -2758,7 +2806,7 @@
                         "default": "<li>Not able to drink or drinking poorly.</li>", 
                         "hindi": "<li>चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना.</li>"
                     }, 
-                    "rowNum": 287, 
+                    "rowNum": 292, 
                     "type": "note", 
                     "condition": "selected(data('drinking_poorly'), 'yes')"
                 }, 
@@ -2768,13 +2816,13 @@
                         "default": "<li>Skin pinch goes back very slowly.</li>", 
                         "hindi": "<li>चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना</li>"
                     }, 
-                    "rowNum": 288, 
+                    "rowNum": 293, 
                     "type": "note", 
                     "condition": "selected(data('skin_elasticity'), 'very_slow')"
                 }, 
                 {
                     "name": "refer_urgently_to_hospital_w_ORS", 
-                    "rowNum": 289, 
+                    "rowNum": 294, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2785,24 +2833,24 @@
             ]
         }, 
         {
-            "rowNum": 291, 
+            "rowNum": 296, 
             "type": "goto", 
             "param": "above_2mo_dehydration_end"
         }, 
         {
-            "rowNum": 292, 
+            "rowNum": 297, 
             "type": "label", 
             "param": "above_2mo_some_dehydration"
         }, 
         {
             "name": "some_dehydration", 
-            "rowNum": 293, 
+            "rowNum": 298, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 294, 
+            "rowNum": 299, 
             "type": "screen", 
             "prompts": [
                 {
@@ -2810,7 +2858,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 295, 
+                    "rowNum": 300, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2824,7 +2872,7 @@
                         "default": "<li>Restless, irritable.</li>", 
                         "hindi": "<li>बेचें व चिढ़चिढ़ा</li>"
                     }, 
-                    "rowNum": 296, 
+                    "rowNum": 301, 
                     "type": "note", 
                     "condition": "selected(data('restless'), 'yes')"
                 }, 
@@ -2834,7 +2882,7 @@
                         "default": "<li>Sunken eyes.</li>", 
                         "hindi": "<li>धँसी हुई आँखें.</li>"
                     }, 
-                    "rowNum": 297, 
+                    "rowNum": 302, 
                     "type": "note", 
                     "condition": "selected(data('sunken_eyes'), 'yes')"
                 }, 
@@ -2844,7 +2892,7 @@
                         "default": "<li>Drinks eagerly, thirsty.</li>", 
                         "hindi": "<li>प्यासा है</li>"
                     }, 
-                    "rowNum": 298, 
+                    "rowNum": 303, 
                     "type": "note", 
                     "condition": "selected(data('drinking_eagerly'), 'yes')"
                 }, 
@@ -2854,13 +2902,13 @@
                         "default": "<li>Skin pinch goes back slowly.</li>", 
                         "hindi": "<li>चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना</li>"
                     }, 
-                    "rowNum": 299, 
+                    "rowNum": 304, 
                     "type": "note", 
                     "condition": "(selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow'))"
                 }, 
                 {
                     "name": "some_dehydration_treatment", 
-                    "rowNum": 300, 
+                    "rowNum": 305, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2871,24 +2919,24 @@
             ]
         }, 
         {
-            "rowNum": 302, 
+            "rowNum": 307, 
             "type": "goto", 
             "param": "above_2mo_dehydration_end"
         }, 
         {
-            "rowNum": 303, 
+            "rowNum": 308, 
             "type": "label", 
             "param": "above_2mo_no_dehydration"
         }, 
         {
             "name": "no_dehydration", 
-            "rowNum": 304, 
+            "rowNum": 309, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 305, 
+            "rowNum": 310, 
             "type": "screen", 
             "prompts": [
                 {
@@ -2896,7 +2944,7 @@
                         "default": "Not enough signs to classify as    \n  some or severe dehydration.", 
                         "hindi": "निर्जलीकरण के पयापत चिन्ह का न होना."
                     }, 
-                    "rowNum": 306, 
+                    "rowNum": 311, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2906,7 +2954,7 @@
                 }, 
                 {
                     "name": "no_dehydration_treatment", 
-                    "rowNum": 307, 
+                    "rowNum": 312, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2917,24 +2965,24 @@
             ]
         }, 
         {
-            "rowNum": 309, 
+            "rowNum": 314, 
             "type": "label", 
             "param": "above_2mo_dehydration_end"
         }, 
         {
-            "rowNum": 312, 
+            "rowNum": 317, 
             "type": "label", 
             "param": "above_2mo_severe_persistent_diarrhoea"
         }, 
         {
             "name": "severe_persistent_diarrhoea", 
-            "rowNum": 313, 
+            "rowNum": 318, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 314, 
+            "rowNum": 319, 
             "type": "screen", 
             "prompts": [
                 {
@@ -2942,7 +2990,7 @@
                         "default": "Signs:\n<li>Diarrhoea for 14 days or more.</li>", 
                         "hindi": "चिन्ह:<li>१४ दिन से ज़्यादा दस्त</li>"
                     }, 
-                    "rowNum": 315, 
+                    "rowNum": 320, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2952,7 +3000,7 @@
                 }, 
                 {
                     "name": "refer_to_hospital", 
-                    "rowNum": 316, 
+                    "rowNum": 321, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -2964,19 +3012,19 @@
             "condition": "data('diarrhoea_days') >= 14"
         }, 
         {
-            "rowNum": 319, 
+            "rowNum": 324, 
             "type": "label", 
             "param": "above_2mo_dysentery"
         }, 
         {
             "name": "dysentery", 
-            "rowNum": 320, 
+            "rowNum": 325, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 321, 
+            "rowNum": 326, 
             "type": "screen", 
             "prompts": [
                 {
@@ -2984,7 +3032,7 @@
                         "default": "Signs:\n<li>Blood  in the stool</li>", 
                         "hindi": "चिन्ह<li> माल मैं खून</li>"
                     }, 
-                    "rowNum": 322, 
+                    "rowNum": 327, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2998,7 +3046,7 @@
                         "default": "2 Pediatric tablets twice daily for a child 2 up to 12 months and 3 tablets twice dialy for a child 12 months up to 5 years.", 
                         "hindi": "२ से १२ महीने तक के बच्चे को २ गोली व १२ महीने से ५ साल तक के बच्चे को बच्चो की ३ गोली दिन मैं दो बार दें."
                     }, 
-                    "rowNum": 323, 
+                    "rowNum": 328, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3008,7 +3056,7 @@
                 }, 
                 {
                     "name": "follow_up_2_days", 
-                    "rowNum": 324, 
+                    "rowNum": 329, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3020,22 +3068,22 @@
             "condition": "selected(data('blood_in_stool'), 'yes')"
         }, 
         {
-            "rowNum": 326, 
+            "rowNum": 331, 
             "type": "label", 
             "param": "above_2mo_diarrhoea_sectiontion_end"
         }, 
         {
-            "rowNum": 328, 
+            "rowNum": 333, 
             "type": "label", 
             "param": "above_2mo_fever_section"
         }, 
         {
-            "rowNum": 329, 
+            "rowNum": 334, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "axillary_temperature_possible", 
-                    "rowNum": 330, 
+                    "rowNum": 335, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -3045,7 +3093,7 @@
                 }, 
                 {
                     "name": "axillary_temperature", 
-                    "rowNum": 331, 
+                    "rowNum": 336, 
                     "param": null, 
                     "type": "decimal", 
                     "condition": "selected(data('axillary_temperature_possible'), 'yes')", 
@@ -3056,7 +3104,7 @@
                 }, 
                 {
                     "name": "feel_for_fever", 
-                    "rowNum": 332, 
+                    "rowNum": 337, 
                     "param": "present", 
                     "type": "select_one", 
                     "condition": "selected(data('axillary_temperature_possible'), 'no')", 
@@ -3067,7 +3115,7 @@
                 }, 
                 {
                     "name": "fever_by_history", 
-                    "rowNum": 333, 
+                    "rowNum": 338, 
                     "param": "yes_no", 
                     "type": "select_one", 
                     "condition": "selected(data('feel_for_fever'), 'not_present') && data('axillary_temperature') < 37.5", 
@@ -3079,16 +3127,16 @@
             ]
         }, 
         {
-            "rowNum": 335, 
+            "rowNum": 340, 
             "type": "label", 
             "param": "above_2mo_fever_assessment"
         }, 
         {
-            "rowNum": 336, 
+            "rowNum": 341, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 337, 
+                    "rowNum": 342, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3102,7 +3150,7 @@
                         "default": "(in days)", 
                         "hindi": "दीनो मैं"
                     }, 
-                    "rowNum": 338, 
+                    "rowNum": 343, 
                     "type": "integer", 
                     "param": null, 
                     "label": {
@@ -3119,7 +3167,7 @@
                         "hindi": "क्या बुखार रोज़ाना आता है?"
                     }, 
                     "param": "yes_no", 
-                    "rowNum": 339, 
+                    "rowNum": 344, 
                     "type": "select_one", 
                     "condition": "data('fever_days') > 7"
                 }
@@ -3127,13 +3175,13 @@
             "condition": "calculates.fever()"
         }, 
         {
-            "rowNum": 341, 
+            "rowNum": 346, 
             "type": "label", 
             "param": "above_2mo_fever_assessment_end"
         }, 
         {
             "name": "stiff_neck", 
-            "rowNum": 342, 
+            "rowNum": 347, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": {
@@ -3143,36 +3191,36 @@
         }, 
         {
             "comments": "test", 
-            "rowNum": 343, 
+            "rowNum": 348, 
             "param": "above_2mo_very_severe_febrile_disease", 
             "type": "goto", 
             "condition": "selected(data('stiff_neck'), 'yes') || calculates.danger_signs_present()"
         }, 
         {
-            "rowNum": 344, 
+            "rowNum": 349, 
             "type": "goto", 
             "param": "above_2mo_malaria", 
             "condition": "calculates.fever()"
         }, 
         {
-            "rowNum": 345, 
+            "rowNum": 350, 
             "type": "goto", 
             "param": "above_2mo_fever_section_end"
         }, 
         {
-            "rowNum": 346, 
+            "rowNum": 351, 
             "type": "label", 
             "param": "above_2mo_very_severe_febrile_disease"
         }, 
         {
             "name": "very_severe_febrile_disease", 
-            "rowNum": 347, 
+            "rowNum": 352, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 348, 
+            "rowNum": 353, 
             "type": "screen", 
             "prompts": [
                 {
@@ -3180,7 +3228,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 349, 
+                    "rowNum": 354, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3189,7 +3237,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 350, 
+                    "rowNum": 355, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -3203,7 +3251,7 @@
                         "default": "<li>Any general danger sign.</li>", 
                         "hindi": "<li>ख़तरा </li>"
                     }, 
-                    "rowNum": 351, 
+                    "rowNum": 356, 
                     "type": "note", 
                     "condition": "calculates.danger_signs_present()"
                 }, 
@@ -3213,13 +3261,13 @@
                         "default": "<li>Stiff neck</li>", 
                         "hindi": "<li>गर्दन की अकाड़ाहट</li>"
                     }, 
-                    "rowNum": 352, 
+                    "rowNum": 357, 
                     "type": "note", 
                     "condition": "data('stiff_neck')"
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 353, 
+                    "rowNum": 358, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3229,7 +3277,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_antimalarials", 
-                    "rowNum": 354, 
+                    "rowNum": 359, 
                     "param": null, 
                     "type": "acknowledge", 
                     "comments": "Include NAMP guidelines? Use links?", 
@@ -3240,7 +3288,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 355, 
+                    "rowNum": 360, 
                     "type": "acknowledge", 
                     "condition": "data('axillary_temperature') > 38.5", 
                     "label": {
@@ -3250,7 +3298,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 356, 
+                    "rowNum": 361, 
                     "type": "acknowledge", 
                     "comments": "I'm adding this because this is a red section", 
                     "label": {
@@ -3261,24 +3309,24 @@
             ]
         }, 
         {
-            "rowNum": 358, 
+            "rowNum": 363, 
             "type": "goto", 
             "param": "above_2mo_fever_section_end"
         }, 
         {
-            "rowNum": 359, 
+            "rowNum": 364, 
             "type": "label", 
             "param": "above_2mo_malaria"
         }, 
         {
             "name": "malaria", 
-            "rowNum": 360, 
+            "rowNum": 365, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 361, 
+            "rowNum": 366, 
             "type": "screen", 
             "prompts": [
                 {
@@ -3286,7 +3334,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 362, 
+                    "rowNum": 367, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3295,7 +3343,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 363, 
+                    "rowNum": 368, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -3305,7 +3353,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_antimalarials", 
-                    "rowNum": 364, 
+                    "rowNum": 369, 
                     "param": null, 
                     "type": "acknowledge", 
                     "comments": "Include NAMP guidelines? Use links?", 
@@ -3316,7 +3364,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_paracetamol", 
-                    "rowNum": 365, 
+                    "rowNum": 370, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "data('axillary_temperature') > 38.5", 
@@ -3327,7 +3375,7 @@
                 }, 
                 {
                     "name": "acknowledge_continue_feeding", 
-                    "rowNum": 366, 
+                    "rowNum": 371, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3337,7 +3385,7 @@
                 }, 
                 {
                     "name": "acknowledge_followup_2days", 
-                    "rowNum": 367, 
+                    "rowNum": 372, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "not(selected(data('fever_present_every_day'), 'yes') && data('fever_days') > 7)", 
@@ -3357,28 +3405,28 @@
                         "default": "Refer for assessment.", 
                         "hindi": "यदि ७ दिन से अधिक समय से रोजाना बुखार है तो आकलन के लिए रेफर करें."
                     }, 
-                    "rowNum": 368, 
+                    "rowNum": 373, 
                     "type": "acknowledge", 
                     "condition": "selected(data('fever_present_every_day'), 'yes') && data('fever_days') > 7"
                 }
             ]
         }, 
         {
-            "rowNum": 370, 
+            "rowNum": 375, 
             "type": "label", 
             "param": "above_2mo_fever_section_end"
         }, 
         {
-            "rowNum": 371, 
+            "rowNum": 376, 
             "type": "label", 
             "param": "above_2mo_malnutrition_section"
         }, 
         {
-            "rowNum": 372, 
+            "rowNum": 377, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 373, 
+                    "rowNum": 378, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3388,7 +3436,7 @@
                 }, 
                 {
                     "name": "wasting", 
-                    "rowNum": 374, 
+                    "rowNum": 379, 
                     "type": "select_one", 
                     "param": "present", 
                     "label": {
@@ -3398,7 +3446,7 @@
                 }, 
                 {
                     "name": "oedema", 
-                    "rowNum": 375, 
+                    "rowNum": 380, 
                     "type": "select_one", 
                     "param": "present", 
                     "label": {
@@ -3417,46 +3465,46 @@
                 "hindi": "वज़न को ग्रोत चार्ट पर दर्शा कर कुपोषण का ग्रेड निधारित करें."
             }, 
             "param": "malnutrition_grade", 
-            "rowNum": 377, 
+            "rowNum": 382, 
             "type": "select_one"
         }, 
         {
-            "rowNum": 378, 
+            "rowNum": 383, 
             "type": "goto", 
             "param": "above_2mo_severe_malnutrition", 
             "condition": "selected(data('oedema'),'present')"
         }, 
         {
-            "rowNum": 379, 
+            "rowNum": 384, 
             "type": "goto", 
             "param": "above_2mo_severe_malnutrition", 
             "condition": "selected(data('wasting'),'present')"
         }, 
         {
-            "rowNum": 380, 
+            "rowNum": 385, 
             "type": "goto", 
             "param": "above_2mo_very_low_weight", 
             "condition": "selected(data('malnutrition_grade'), 'grade2') || selected(data('malnutrition_grade'), 'grade3') || selected(data('malnutrition_grade'), 'grade4')"
         }, 
         {
-            "rowNum": 381, 
+            "rowNum": 386, 
             "type": "goto", 
             "param": "above_2mo_not_very_low_weight"
         }, 
         {
-            "rowNum": 382, 
+            "rowNum": 387, 
             "type": "label", 
             "param": "above_2mo_severe_malnutrition"
         }, 
         {
             "name": "severe_malnutrition", 
-            "rowNum": 383, 
+            "rowNum": 388, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 384, 
+            "rowNum": 389, 
             "type": "screen", 
             "prompts": [
                 {
@@ -3464,7 +3512,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 385, 
+                    "rowNum": 390, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3478,7 +3526,7 @@
                         "default": "Oedema of both feet", 
                         "hindi": "दोनो परो मैं सूजन"
                     }, 
-                    "rowNum": 386, 
+                    "rowNum": 391, 
                     "type": "note", 
                     "condition": "selected(data('oedema'),'present')"
                 }, 
@@ -3488,13 +3536,13 @@
                         "default": "Visible severe wasting", 
                         "hindi": "दिखने वाला गंभीर सुखापना."
                     }, 
-                    "rowNum": 387, 
+                    "rowNum": 392, 
                     "type": "note", 
                     "condition": "selected(data('wasting'),'present')"
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 388, 
+                    "rowNum": 393, 
                     "type": "acknowledge", 
                     "comments": "TODO: Link to dosage directions (after data collection?)", 
                     "label": {
@@ -3504,7 +3552,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 389, 
+                    "rowNum": 394, 
                     "type": "acknowledge", 
                     "comments": "Assuming tsf was meant to be tsp", 
                     "label": {
@@ -3513,7 +3561,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 390, 
+                    "rowNum": 395, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3522,7 +3570,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 391, 
+                    "rowNum": 396, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3533,24 +3581,24 @@
             ]
         }, 
         {
-            "rowNum": 393, 
+            "rowNum": 398, 
             "type": "goto", 
             "param": "above_2mo_anaemia"
         }, 
         {
-            "rowNum": 394, 
+            "rowNum": 399, 
             "type": "label", 
             "param": "above_2mo_very_low_weight"
         }, 
         {
             "name": "very_low_weight", 
-            "rowNum": 395, 
+            "rowNum": 400, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 396, 
+            "rowNum": 401, 
             "type": "screen", 
             "prompts": [
                 {
@@ -3558,7 +3606,7 @@
                         "default": "SIGNS:", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 397, 
+                    "rowNum": 402, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3567,14 +3615,17 @@
                     }
                 }, 
                 {
-                    "rowNum": 398, 
+                    "rowNum": 403, 
                     "type": "note", 
                     "param": null, 
-                    "hint": "Malnutrition {{stringify malnutrition_grade}}"
+                    "hint": {
+                        "default": "Malnutrition {{stringify malnutrition_grade}}", 
+                        "hindi": "कुपोषण {{stringify malnutrition_grade}}"
+                    }
                 }, 
                 {
                     "name": "acknowledge_assess_feeding", 
-                    "rowNum": 399, 
+                    "rowNum": 404, 
                     "param": null, 
                     "type": "acknowledge", 
                     "comments": "TODO: Link to feeding section or go to it at end?", 
@@ -3584,7 +3635,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 400, 
+                    "rowNum": 405, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3595,24 +3646,24 @@
             ]
         }, 
         {
-            "rowNum": 402, 
+            "rowNum": 407, 
             "type": "goto", 
             "param": "above_2mo_anaemia"
         }, 
         {
-            "rowNum": 403, 
+            "rowNum": 408, 
             "type": "label", 
             "param": "above_2mo_not_very_low_weight"
         }, 
         {
             "name": "not_very_low_weight", 
-            "rowNum": 404, 
+            "rowNum": 409, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 405, 
+            "rowNum": 410, 
             "type": "screen", 
             "prompts": [
                 {
@@ -3620,7 +3671,7 @@
                         "default": "SIGNS", 
                         "hindi": "चिह्न"
                     }, 
-                    "rowNum": 406, 
+                    "rowNum": 411, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3629,7 +3680,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 407, 
+                    "rowNum": 412, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -3645,13 +3696,13 @@
                         "hindi": "आकलन करें"
                     }, 
                     "param": null, 
-                    "rowNum": 408, 
+                    "rowNum": 413, 
                     "type": "acknowledge", 
                     "condition": "calculates.daysOld() < (365 * 2)"
                 }, 
                 {
                     "name": "acknowledge_follow_up_5_days", 
-                    "rowNum": 409, 
+                    "rowNum": 414, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3662,13 +3713,13 @@
             ]
         }, 
         {
-            "rowNum": 412, 
+            "rowNum": 417, 
             "type": "label", 
             "param": "above_2mo_anaemia"
         }, 
         {
             "name": "anaemia_check", 
-            "rowNum": 413, 
+            "rowNum": 418, 
             "required": true, 
             "type": "select_one", 
             "param": "no_some_severe", 
@@ -3678,37 +3729,37 @@
             }
         }, 
         {
-            "rowNum": 414, 
+            "rowNum": 419, 
             "type": "goto", 
             "param": "above_2mo_severe_anaemia", 
             "condition": "selected(data('anaemia_check'),'severe')"
         }, 
         {
-            "rowNum": 415, 
+            "rowNum": 420, 
             "type": "goto", 
             "param": "above_2mo_some_anaemia", 
             "condition": "selected(data('anaemia_check'),'some')"
         }, 
         {
-            "rowNum": 416, 
+            "rowNum": 421, 
             "type": "goto", 
             "param": "above_2mo_no_anaemia", 
             "condition": "selected(data('anaemia_check'),'none')"
         }, 
         {
-            "rowNum": 418, 
+            "rowNum": 423, 
             "type": "label", 
             "param": "above_2mo_severe_anaemia"
         }, 
         {
             "name": "severe_anaemia", 
-            "rowNum": 419, 
+            "rowNum": 424, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 420, 
+            "rowNum": 425, 
             "type": "screen", 
             "prompts": [
                 {
@@ -3716,7 +3767,7 @@
                         "default": "SIGNS:\n<p>Severe palmar pallor</p>", 
                         "hindi": "चिन्ह:  <p>हथेली का ज़्यादा फीकापन.</p>"
                     }, 
-                    "rowNum": 421, 
+                    "rowNum": 426, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3725,7 +3776,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 422, 
+                    "rowNum": 427, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3736,24 +3787,24 @@
             ]
         }, 
         {
-            "rowNum": 424, 
+            "rowNum": 429, 
             "type": "goto", 
             "param": "above_2mo_anaemia_end"
         }, 
         {
-            "rowNum": 425, 
+            "rowNum": 430, 
             "type": "label", 
             "param": "above_2mo_some_anaemia"
         }, 
         {
             "name": "some_anaemia", 
-            "rowNum": 426, 
+            "rowNum": 431, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 427, 
+            "rowNum": 432, 
             "type": "screen", 
             "prompts": [
                 {
@@ -3761,7 +3812,7 @@
                         "default": "SIGNS:\n<p>Some palmar pallor</p>", 
                         "hindi": "चिन्ह: <p>हथेली का ज़्यादा फीकापन.</p>"
                     }, 
-                    "rowNum": 428, 
+                    "rowNum": 433, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3770,7 +3821,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 429, 
+                    "rowNum": 434, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3780,7 +3831,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 430, 
+                    "rowNum": 435, 
                     "type": "acknowledge", 
                     "comments": "TODO: Link to feeding section or go to it at end?", 
                     "label": {
@@ -3791,24 +3842,24 @@
             ]
         }, 
         {
-            "rowNum": 432, 
+            "rowNum": 437, 
             "type": "goto", 
             "param": "above_2mo_anaemia_end"
         }, 
         {
-            "rowNum": 433, 
+            "rowNum": 438, 
             "type": "label", 
             "param": "above_2mo_no_anaemia"
         }, 
         {
             "name": "no_anaemia", 
-            "rowNum": 434, 
+            "rowNum": 439, 
             "type": "with_next", 
             "assign": true, 
             "param": null
         }, 
         {
-            "rowNum": 435, 
+            "rowNum": 440, 
             "type": "screen", 
             "prompts": [
                 {
@@ -3816,7 +3867,7 @@
                         "default": "SIGNS:\n<p>No palmar pallor</p>", 
                         "hindi": "चिन्ह: <p>हथेली का ज़्यादा फीकापन.</p>"
                     }, 
-                    "rowNum": 436, 
+                    "rowNum": 441, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -3826,7 +3877,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 437, 
+                    "rowNum": 442, 
                     "type": "acknowledge", 
                     "condition": "calculates.daysOld() > (30 * 6)", 
                     "label": {
@@ -3837,19 +3888,19 @@
             ]
         }, 
         {
-            "rowNum": 439, 
+            "rowNum": 444, 
             "type": "label", 
             "param": "above_2mo_anaemia_end"
         }, 
         {
-            "rowNum": 442, 
+            "rowNum": 447, 
             "type": "label", 
             "param": "above_2mo_check_immunization_status"
         }, 
         {
             "name": "needed_vaccinations", 
             "choice_filter": "context.age_weeks <= Math.round(calculates.daysOld() / 7)", 
-            "rowNum": 443, 
+            "rowNum": 448, 
             "type": "select_multiple", 
             "param": "needed_vaccinations", 
             "label": {
@@ -3858,76 +3909,103 @@
             }
         }, 
         {
-            "rowNum": 444, 
+            "rowNum": 449, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 445, 
+                    "rowNum": 450, 
                     "type": "note", 
                     "param": null, 
-                    "label": "Give the following vaccinations:\n<ul>{{#each needed_vaccinations}}\n<li>{{label}}</li>\n{{/each}}</ul>"
+                    "label": {
+                        "default": "Give the following vaccinations:\n<ul>{{#each needed_vaccinations}}\n<li>{{label}}</li>\n{{/each}}</ul>", 
+                        "hindi": "निम्नलिखित टीके दें: <ul>{{#each needed_vaccinations}}<li>{{label}}</li>{{/each}}</ul>"
+                    }
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 446, 
+                    "rowNum": 451, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (9 * 30)", 
-                    "label": "Give a single dose of prophylactic vitamin A:"
+                    "label": {
+                        "default": "Give a single dose of prophylactic vitamin A:", 
+                        "hindi": "प्रोफाइलॅक्टिक विटामिन ए की एक खुराक दें."
+                    }
                 }, 
                 {
                     "param": null, 
-                    "hint": "100,000 IU (1ml) at 9 months with measles immunization", 
-                    "rowNum": 447, 
+                    "hint": {
+                        "default": "100,000 IU (1ml) at 9 months with measles immunization", 
+                        "hindi": "१००,००० आई . यू (१ मिली) ९ महीने पर खसरा पर ख़तरा (माता जी) टीकाकरण के साथ."
+                    }, 
+                    "rowNum": 452, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (9 * 30) && calculates.daysOld() < (16 * 30)"
                 }, 
                 {
                     "param": null, 
-                    "hint": "200,000 IU (2ml) at 16-18 months with DPT Booster", 
-                    "rowNum": 448, 
+                    "hint": {
+                        "default": "200,000 IU (2ml) at 16-18 months with DPT Booster", 
+                        "hindi": "२००,००० आई. यू (२ मिली) १६-१८ महीने मैं दि.पी.ती बूस्टर के साथ"
+                    }, 
+                    "rowNum": 453, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (16 * 30) && calculates.daysOld() < (24 * 30)"
                 }, 
                 {
                     "param": null, 
-                    "hint": "200,000 IU (2ml) at 24 months", 
-                    "rowNum": 449, 
+                    "hint": {
+                        "default": "200,000 IU (2ml) at 24 months", 
+                        "hindi": "२००,००० आई. यू (२ मिली) २४ महीने पर"
+                    }, 
+                    "rowNum": 454, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (24 * 30) && calculates.daysOld() < (30 * 30)"
                 }, 
                 {
                     "param": null, 
-                    "hint": "200,000 IU (2ml) at 30 months", 
-                    "rowNum": 450, 
+                    "hint": {
+                        "default": "200,000 IU (2ml) at 30 months", 
+                        "hindi": "२००,००० आई. यू (२ मिली) ३० महीने पर"
+                    }, 
+                    "rowNum": 455, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (30 * 30) && calculates.daysOld() < (36 * 30)"
                 }, 
                 {
                     "param": null, 
-                    "hint": "200,000 IU (2ml) at 36 months", 
-                    "rowNum": 451, 
+                    "hint": {
+                        "default": "200,000 IU (2ml) at 36 months", 
+                        "hindi": "२००,००० आई. यू (२ मिली) ३६ महीने पर"
+                    }, 
+                    "rowNum": 456, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (36 * 30)"
                 }, 
                 {
-                    "rowNum": 452, 
+                    "rowNum": 457, 
                     "type": "acknowledge", 
                     "name": "acknowledge_give_vitamin_A", 
                     "param": null
                 }, 
                 {
                     "name": "acknowledge_give_ifa_tablet", 
-                    "hint": "<ul>\n<li>The child is 6 months of age or older, and</li>\n<li>Has not received Pediatric IFA Tablet for 100 days in last one year.</li>\n</ul>", 
-                    "rowNum": 453, 
+                    "hint": {
+                        "default": "<ul>\n<li>The child is 6 months of age or older, and</li>\n<li>Has not received Pediatric IFA Tablet for 100 days in last one year.</li>\n</ul>", 
+                        "hindi": "<ul><li>अगर बच्चे की उमर ६ महीने से उपर है और</li><li> एफ. ए की १०० दिन के लिए १ साल से नही मिली. .</li></ul>"
+                    }, 
+                    "rowNum": 458, 
                     "type": "acknowledge", 
                     "param": null, 
-                    "label": "Give one tablet of Pediatric IFA for a total of 100 days in a year after the child has recovered from acute illness if:"
+                    "label": {
+                        "default": "Give one tablet of Pediatric IFA for a total of 100 days in a year after the child has recovered from acute illness if:", 
+                        "hindi": "बीमारी से ठीक होने पर बच्चे को बच्चों की आई. एफ. ए की १ गोली रोज़ाना साल भर मैं १०० दिन तक दें अगर:"
+                    }
                 }
             ]
         }, 
         {
             "name": "other_problems", 
-            "rowNum": 455, 
+            "rowNum": 460, 
             "param": "yes_no", 
             "type": "select_one", 
             "comments": "Added based on correspondence with Amy/Manoj", 
@@ -3938,7 +4016,7 @@
         }, 
         {
             "name": "refer_for_other_problems", 
-            "rowNum": 456, 
+            "rowNum": 461, 
             "param": null, 
             "type": "acknowledge", 
             "condition": "selected(data('other_problems'), 'yes')", 
@@ -3948,7 +4026,7 @@
             }
         }, 
         {
-            "rowNum": 457, 
+            "rowNum": 462, 
             "type": "goto", 
             "param": "general_breakdowns"
         }, 
@@ -3965,12 +4043,12 @@
                 "default": "When was the child born?", 
                 "hindi": "शिशु कब पेड़ा हुआ था?"
             }, 
-            "rowNum": 468, 
+            "rowNum": 469, 
             "type": "date"
         }, 
         {
             "name": "weight", 
-            "rowNum": 469, 
+            "rowNum": 470, 
             "type": "decimal", 
             "param": null, 
             "label": {
@@ -3979,22 +4057,22 @@
             }
         }, 
         {
-            "rowNum": 471, 
+            "rowNum": 472, 
             "type": "label", 
             "param": "less_than_2mo_breakdowns"
         }, 
         {
-            "rowNum": 472, 
+            "rowNum": 473, 
             "type": "label", 
             "param": "teach_oral_drugs_at_home", 
             "comments": "TODO: Why is this only for young infants and only for oral drugs?"
         }, 
         {
-            "rowNum": 473, 
+            "rowNum": 474, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 474, 
+                    "rowNum": 475, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4004,7 +4082,7 @@
                 }, 
                 {
                     "condition": false, 
-                    "rowNum": 475, 
+                    "rowNum": 476, 
                     "param": null, 
                     "type": "note", 
                     "comments": "disabling this because it is computed.", 
@@ -4015,7 +4093,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 476, 
+                    "rowNum": 477, 
                     "type": "note", 
                     "comments": "Infer the reason and display it?", 
                     "label": {
@@ -4024,7 +4102,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 477, 
+                    "rowNum": 478, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4033,7 +4111,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 478, 
+                    "rowNum": 479, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4042,7 +4120,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 479, 
+                    "rowNum": 480, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4053,12 +4131,12 @@
             ]
         }, 
         {
-            "rowNum": 481, 
+            "rowNum": 482, 
             "type": "screen", 
             "prompts": [
                 {
                     "param": null, 
-                    "rowNum": 482, 
+                    "rowNum": 483, 
                     "type": "note", 
                     "comments": "Page 40 of IMNCI booklet has example.", 
                     "label": {
@@ -4068,7 +4146,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 483, 
+                    "rowNum": 484, 
                     "type": "note", 
                     "comments": "TODO: Infer", 
                     "label": {
@@ -4078,7 +4156,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 484, 
+                    "rowNum": 485, 
                     "type": "note", 
                     "comments": "grammatical issue.", 
                     "label": {
@@ -4088,7 +4166,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 485, 
+                    "rowNum": 486, 
                     "type": "note", 
                     "comments": "Page 37 of IMNCI booklet goes into more detail on how to do this.", 
                     "label": {
@@ -4099,16 +4177,16 @@
             ]
         }, 
         {
-            "rowNum": 488, 
+            "rowNum": 489, 
             "type": "label", 
             "param": "teach_keep_infant_warm"
         }, 
         {
-            "rowNum": 489, 
+            "rowNum": 490, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 490, 
+                    "rowNum": 491, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4117,7 +4195,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 491, 
+                    "rowNum": 492, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4126,7 +4204,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 492, 
+                    "rowNum": 493, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4135,7 +4213,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 493, 
+                    "rowNum": 494, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4144,7 +4222,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 494, 
+                    "rowNum": 495, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4153,7 +4231,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 495, 
+                    "rowNum": 496, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4162,7 +4240,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 496, 
+                    "rowNum": 497, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4171,7 +4249,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 497, 
+                    "rowNum": 498, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4180,7 +4258,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 498, 
+                    "rowNum": 499, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4189,7 +4267,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 499, 
+                    "rowNum": 500, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4200,12 +4278,12 @@
             ]
         }, 
         {
-            "rowNum": 501, 
+            "rowNum": 502, 
             "type": "screen", 
             "prompts": [
                 {
                     "param": null, 
-                    "rowNum": 502, 
+                    "rowNum": 503, 
                     "type": "note", 
                     "comments": "Ask if skin to skin contact is possible?", 
                     "label": {
@@ -4214,7 +4292,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 503, 
+                    "rowNum": 504, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4223,7 +4301,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 504, 
+                    "rowNum": 505, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4232,7 +4310,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 505, 
+                    "rowNum": 506, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4241,7 +4319,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 506, 
+                    "rowNum": 507, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4250,7 +4328,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 507, 
+                    "rowNum": 508, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4261,16 +4339,16 @@
             ]
         }, 
         {
-            "rowNum": 509, 
+            "rowNum": 510, 
             "type": "label", 
             "param": "teach_breastfeeding"
         }, 
         {
-            "rowNum": 510, 
+            "rowNum": 511, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 511, 
+                    "rowNum": 512, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4280,7 +4358,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 512, 
+                    "rowNum": 513, 
                     "type": "note", 
                     "comments": "TODO: Include illustrations from IMNCI booklet P. 43-44", 
                     "label": {
@@ -4289,7 +4367,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 513, 
+                    "rowNum": 514, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4298,7 +4376,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 514, 
+                    "rowNum": 515, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4307,7 +4385,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 515, 
+                    "rowNum": 516, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4316,7 +4394,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 516, 
+                    "rowNum": 517, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4327,11 +4405,11 @@
             ]
         }, 
         {
-            "rowNum": 518, 
+            "rowNum": 519, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 519, 
+                    "rowNum": 520, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4340,7 +4418,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 520, 
+                    "rowNum": 521, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4349,7 +4427,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 521, 
+                    "rowNum": 522, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4358,7 +4436,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 522, 
+                    "rowNum": 523, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4368,7 +4446,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 523, 
+                    "rowNum": 524, 
                     "type": "note", 
                     "comments": "TODO: use the breastfeeding assessment questions above?", 
                     "label": {
@@ -4379,12 +4457,12 @@
             ]
         }, 
         {
-            "rowNum": 525, 
+            "rowNum": 526, 
             "type": "screen", 
             "prompts": [
                 {
                     "param": null, 
-                    "rowNum": 526, 
+                    "rowNum": 527, 
                     "type": "note", 
                     "comments": "TODO: Include illustrations from IMNCI booklet P. 43-44", 
                     "label": {
@@ -4393,7 +4471,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 527, 
+                    "rowNum": 528, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4402,7 +4480,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 528, 
+                    "rowNum": 529, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4413,14 +4491,14 @@
             ]
         }, 
         {
-            "rowNum": 530, 
+            "rowNum": 531, 
             "type": "label", 
             "param": "breast_nipple_problems"
         }, 
         {
             "prompts": [
                 {
-                    "rowNum": 532, 
+                    "rowNum": 533, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4430,7 +4508,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 533, 
+                    "rowNum": 534, 
                     "type": "note", 
                     "condition": "selected(data('breast_problems'), 'sore_nipple')", 
                     "label": {
@@ -4440,7 +4518,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 534, 
+                    "rowNum": 535, 
                     "type": "note", 
                     "condition": "selected(data('breast_problems'), 'engorged_breasts')", 
                     "label": {
@@ -4450,7 +4528,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 535, 
+                    "rowNum": 536, 
                     "type": "note", 
                     "condition": "selected(data('breast_problems'), 'breast_abscess')", 
                     "label": {
@@ -4459,23 +4537,23 @@
                     }
                 }
             ], 
-            "rowNum": 531, 
+            "rowNum": 532, 
             "type": "screen", 
             "condition": "countSelected(data('breast_problems')) > 0", 
             "comments": "Is the to be inferred or always shown? I assume inferred."
         }, 
         {
-            "rowNum": 537, 
+            "rowNum": 538, 
             "type": "label", 
             "param": "advise_home_care", 
             "comments": "This is repeated on page 11 for some reason."
         }, 
         {
-            "rowNum": 538, 
+            "rowNum": 539, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 539, 
+                    "rowNum": 540, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4484,7 +4562,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 540, 
+                    "rowNum": 541, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4493,7 +4571,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 541, 
+                    "rowNum": 542, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4502,7 +4580,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 542, 
+                    "rowNum": 543, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4511,7 +4589,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 543, 
+                    "rowNum": 544, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4524,7 +4602,7 @@
                         "default": "<ul>\n<li>Breastfeeding or drinking poorly</li>\n<li>Becomes sicker</li>\n<li>Develops a fever or feels cold to touch</li>\n<li>Fast breathing</li>\n<li>Difficult breathing</li>\n<li>Blood in stools</li>\n</ul>", 
                         "hindi": "<li>बच्चा अधिक बीमार हो जाए</li><li> स्तनपान या अन्य तरल पदार्थ नही ले सके</li><li> तेज़ सास लेना</li><li> सास लेने मैं दिकाट</li> <li>मल मैं खून, बुखार हो जाए</li>"
                     }, 
-                    "rowNum": 544, 
+                    "rowNum": 545, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4535,18 +4613,18 @@
             ]
         }, 
         {
-            "rowNum": 547, 
+            "rowNum": 548, 
             "type": "label", 
             "param": "general_breakdowns"
         }, 
         {
-            "rowNum": 548, 
+            "rowNum": 549, 
             "type": "goto", 
             "param": "plan_B_end", 
             "condition": "not(data('give_plan_B'))"
         }, 
         {
-            "rowNum": 549, 
+            "rowNum": 550, 
             "type": "label", 
             "param": "plan_B"
         }, 
@@ -4555,7 +4633,7 @@
                 "default": "Give in clinic recommended amount of ORS over 4-hour period", 
                 "hindi": "ओ. आर. एस की मात्रा को निर्धारित कर स्वास्थ्य केन्द्रा मैं ४ घंटे मैं दे."
             }, 
-            "rowNum": 550, 
+            "rowNum": 551, 
             "type": "note", 
             "param": null, 
             "label": {
@@ -4564,11 +4642,11 @@
             }
         }, 
         {
-            "rowNum": 551, 
+            "rowNum": 552, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 552, 
+                    "rowNum": 553, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4577,7 +4655,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 553, 
+                    "rowNum": 554, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4591,18 +4669,18 @@
                         "default": "For infants under 6 months who are not breastfed, also give 100-200 ml clean water during this period.", 
                         "hindi": "स्तनपान नही करने वाले ६ महीने से कम उम्र के बच्चों को १००-२०० मि.लि सॉफ पानी भी दें."
                     }, 
-                    "rowNum": 554, 
+                    "rowNum": 555, 
                     "type": "note", 
                     "condition": "calculates.daysOld() < 6 * 30"
                 }
             ]
         }, 
         {
-            "rowNum": 556, 
+            "rowNum": 557, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 557, 
+                    "rowNum": 558, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4611,7 +4689,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 558, 
+                    "rowNum": 559, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4620,7 +4698,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 559, 
+                    "rowNum": 560, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4629,7 +4707,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 560, 
+                    "rowNum": 561, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4640,11 +4718,11 @@
             ]
         }, 
         {
-            "rowNum": 562, 
+            "rowNum": 563, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 563, 
+                    "rowNum": 564, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4653,7 +4731,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 564, 
+                    "rowNum": 565, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4662,7 +4740,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 565, 
+                    "rowNum": 566, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4671,7 +4749,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 566, 
+                    "rowNum": 567, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4681,7 +4759,7 @@
                 }, 
                 {
                     "name": "leave_before_treatment_end", 
-                    "rowNum": 567, 
+                    "rowNum": 568, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -4692,11 +4770,11 @@
             ]
         }, 
         {
-            "rowNum": 569, 
+            "rowNum": 570, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 570, 
+                    "rowNum": 571, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4709,7 +4787,7 @@
                         "default": "<p>Give {{calculates.planBORSAmntMl}} ml of ORS over 4 hour period</p>\n<p>({{calculates.planBORSAmntCups}} cups)</p>", 
                         "hindi": "<p>ओऽअर.एस की {{calculates \"planBORSAmntMl\"}} मि.लि ४ घंटे मैं दे. </p> <p> {{calculates \"planBORSAmntCups\"}} कप्स. </p>"
                     }, 
-                    "rowNum": 571, 
+                    "rowNum": 572, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4718,7 +4796,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 572, 
+                    "rowNum": 573, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4732,7 +4810,7 @@
                         "default": "<ol>\n<li>GIVE EXTRA FLUID</li>\n<li>CONTINUE FEEDING</li>\n<li>WHEN TO RETURN</li>\n</ol>", 
                         "hindi": "<ol><li>ज़्यादा पिलाए,<li><li> स्तनपान करते रहें</li>, <li>वापस कब आए.</li></ol>"
                     }, 
-                    "rowNum": 573, 
+                    "rowNum": 574, 
                     "type": "note", 
                     "comments": "TODO: Goto Plan A?", 
                     "label": {
@@ -4741,7 +4819,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 574, 
+                    "rowNum": 575, 
                     "type": "note", 
                     "param": null
                 }
@@ -4749,21 +4827,21 @@
             "condition": "selected(data('leave_before_treatment_end'), 'yes')"
         }, 
         {
-            "rowNum": 576, 
+            "rowNum": 577, 
             "type": "label", 
             "param": "plan_B_end"
         }, 
         {
-            "rowNum": 577, 
+            "rowNum": 578, 
             "type": "label", 
             "param": "advise_home_care_cold"
         }, 
         {
-            "rowNum": 578, 
+            "rowNum": 579, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 579, 
+                    "rowNum": 580, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4772,7 +4850,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 580, 
+                    "rowNum": 581, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4781,7 +4859,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 581, 
+                    "rowNum": 582, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4795,7 +4873,7 @@
                         "default": "<ul><li>Increase breast feeding.</li>\n<li>Offer the child extra to drink. (See home fluids)</li></ul>", 
                         "hindi": "<ul><li>बच्चे को ज़्यादा पीने के लिए दें.</li><li> घर पर देने वाले पेय की सूची देखें.</li>"
                     }, 
-                    "rowNum": 582, 
+                    "rowNum": 583, 
                     "type": "note", 
                     "comments": "See home fluids? These appear to be listed in Plan A", 
                     "label": {
@@ -4805,7 +4883,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 583, 
+                    "rowNum": 584, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 30 * 6", 
                     "label": {
@@ -4819,7 +4897,7 @@
                         "default": "Safe remedies to recommend:\n<li>Continue Breastfeeding</li>\n<li>Honey, tulsi, ginger, herbal teas and other safe local home remedies</li>", 
                         "hindi": "घर मैं काम आने वाली सुरक्षित चीज़े बताए. <li>स्तनपान जारी रखें</li><li> घर मैं शहदाए सौंठ</li><li> हरबल चाय या कोई अन्य सुरक्षित घरेलू इलाज</li>"
                     }, 
-                    "rowNum": 584, 
+                    "rowNum": 585, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 30 * 6"
                 }, 
@@ -4829,12 +4907,12 @@
                         "default": "Avoid cough syrups.", 
                         "hindi": "खाँसी की दावा न पिलाए."
                     }, 
-                    "rowNum": 585, 
+                    "rowNum": 586, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 30 * 6"
                 }, 
                 {
-                    "rowNum": 586, 
+                    "rowNum": 587, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4843,7 +4921,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 587, 
+                    "rowNum": 588, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4852,7 +4930,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 588, 
+                    "rowNum": 589, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4861,7 +4939,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 589, 
+                    "rowNum": 590, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -4875,7 +4953,7 @@
                         "default": "<li>Fast breathing</li>", 
                         "hindi": "<li>तेज़ सास लेना</li>"
                     }, 
-                    "rowNum": 590, 
+                    "rowNum": 591, 
                     "param": null, 
                     "type": "note", 
                     "comments": "In accordance with the note, fast/difficult breathing and fever only appear if the child doesn't already have them"
@@ -4886,7 +4964,7 @@
                         "default": "<li>Difficult breathing</li>", 
                         "hindi": "<li>सास लेने मैं दिकाट </li>"
                     }, 
-                    "rowNum": 591, 
+                    "rowNum": 592, 
                     "type": "note", 
                     "condition": "selected(data('difficulty_breathing'), 'yes')"
                 }, 
@@ -4896,7 +4974,7 @@
                         "default": "<li>Develops a fever</li>", 
                         "hindi": "<li>बुखार हो जाए. </li>"
                     }, 
-                    "rowNum": 592, 
+                    "rowNum": 593, 
                     "param": null, 
                     "type": "note", 
                     "comments": "Should this include cold to touch like the signs for home care?"
@@ -4907,7 +4985,7 @@
                         "default": "<li>Blood in stools</li>", 
                         "hindi": "<li>मल मैं खून. </li>"
                     }, 
-                    "rowNum": 593, 
+                    "rowNum": 594, 
                     "param": null, 
                     "type": "note", 
                     "comments": "TODO: See if we should add this one"
@@ -4915,22 +4993,22 @@
             ]
         }, 
         {
-            "rowNum": 595, 
+            "rowNum": 596, 
             "type": "goto", 
             "param": "plan_A_end", 
             "condition": "not(data('give_plan_A'))"
         }, 
         {
-            "rowNum": 596, 
+            "rowNum": 597, 
             "type": "label", 
             "param": "plan_A"
         }, 
         {
-            "rowNum": 597, 
+            "rowNum": 598, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 598, 
+                    "rowNum": 599, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4943,7 +5021,7 @@
                         "default": "Give Extra Fluid, Continue Feeding, When to Return", 
                         "hindi": "ज़्यादा पिलाए, स्तनपान करते रहें, वापस कब आए."
                     }, 
-                    "rowNum": 599, 
+                    "rowNum": 600, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4954,7 +5032,7 @@
             ]
         }, 
         {
-            "rowNum": 601, 
+            "rowNum": 602, 
             "type": "note", 
             "param": null, 
             "label": {
@@ -4963,11 +5041,11 @@
             }
         }, 
         {
-            "rowNum": 602, 
+            "rowNum": 603, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 603, 
+                    "rowNum": 604, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -4977,7 +5055,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 604, 
+                    "rowNum": 605, 
                     "type": "note", 
                     "comments": "TODO: We could infer this but it will have to come after the feeding section.", 
                     "label": {
@@ -4986,7 +5064,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 605, 
+                    "rowNum": 606, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5000,7 +5078,7 @@
                         "default": "<li>For less than 6 months age give ORS and clean, preferably boiled, water in addition to breast milk.</li>", 
                         "hindi": "<li>६ महीने से कम उम्र के बच्चे को स्तनपान के अलावा आफ पानी(उबला हुआ) मैं बनाया हुआ ओ. आर. एस दें. </li>"
                     }, 
-                    "rowNum": 606, 
+                    "rowNum": 607, 
                     "type": "note", 
                     "condition": "calculates.daysOld() < 2 * 30"
                 }, 
@@ -5010,13 +5088,13 @@
                         "default": "<li>If 6 months or older give one or more of the home fluids in addition to breast milk.</li>", 
                         "hindi": "<li>६ महीने से ज़्यादा के बच्चे को स्तनपान के अलावा घर के और तरल पदार्थ दें. </li>"
                     }, 
-                    "rowNum": 607, 
+                    "rowNum": 608, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 2 * 30"
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 608, 
+                    "rowNum": 609, 
                     "type": "note", 
                     "comments": "TODO: Use bullets?", 
                     "label": {
@@ -5025,7 +5103,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 609, 
+                    "rowNum": 610, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5034,7 +5112,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 610, 
+                    "rowNum": 611, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -5045,12 +5123,12 @@
             ]
         }, 
         {
-            "rowNum": 612, 
+            "rowNum": 613, 
             "type": "screen", 
             "prompts": [
                 {
                     "param": null, 
-                    "rowNum": 613, 
+                    "rowNum": 614, 
                     "type": "note", 
                     "comments": "TODO: This might require the dosage instructions from plan B", 
                     "label": {
@@ -5059,7 +5137,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 614, 
+                    "rowNum": 615, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5078,7 +5156,7 @@
                         "hindi": "पाँच चम्मच हर दस्त के बाद"
                     }, 
                     "param": null, 
-                    "rowNum": 615, 
+                    "rowNum": 616, 
                     "type": "note", 
                     "condition": "calculates.daysOld() < 2 * 30"
                 }, 
@@ -5088,7 +5166,7 @@
                         "default": "2 months up to 2 years", 
                         "hindi": "२ महीने से ३ साल तक"
                     }, 
-                    "rowNum": 616, 
+                    "rowNum": 617, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 2 * 30 && calculates.daysOld() < 2 * 12 * 30", 
                     "label": {
@@ -5102,7 +5180,7 @@
                         "default": "2 years or more", 
                         "hindi": "२ साल से ज़्यादा"
                     }, 
-                    "rowNum": 617, 
+                    "rowNum": 618, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 2 * 12 * 30", 
                     "label": {
@@ -5117,7 +5195,7 @@
                 "default": "<ol>\n<li>Give frequent small sips from a cup.</li>\n<li>If the child vomits, wait 10 minutes. Then continue but more slowly.</li>\n<li><u>Continue giving extra fluid until the diarrhoea stops.</u></li>\n</ol>", 
                 "hindi": "<ol>\n<li>कप से बच्चे को बार-बार छोटे-छोटे घूँट दें. </li>\n<li>अगर बच्चा उल्टी करता है तो १० मिनिट रूकें और धीरे-धीरे दें. </li>\n<li><u>बच्चे को पीने के लिए ज़्यादा देते रहें जब तब दस्त नही रुक जाते. .</u></li>\n</ol>"
             }, 
-            "rowNum": 619, 
+            "rowNum": 620, 
             "type": "note", 
             "param": null, 
             "label": {
@@ -5126,7 +5204,7 @@
             }
         }, 
         {
-            "rowNum": 620, 
+            "rowNum": 621, 
             "type": "note", 
             "param": null, 
             "label": {
@@ -5135,11 +5213,11 @@
             }
         }, 
         {
-            "rowNum": 621, 
+            "rowNum": 622, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 622, 
+                    "rowNum": 623, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5148,7 +5226,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 623, 
+                    "rowNum": 624, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -5157,7 +5235,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 624, 
+                    "rowNum": 625, 
                     "type": "note", 
                     "param": null, 
                     "hint": {
@@ -5171,7 +5249,7 @@
                         "default": "<li>Blood in stools</li>", 
                         "hindi": "मल मैं खून."
                     }, 
-                    "rowNum": 625, 
+                    "rowNum": 626, 
                     "param": null, 
                     "type": "note", 
                     "comments": "In accordance with the note, blood in stool and fever only appear if the child doesn't already have them"
@@ -5182,7 +5260,7 @@
                         "default": "<li>Drinking poorly</li>", 
                         "hindi": "बहुत कम पीना."
                     }, 
-                    "rowNum": 626, 
+                    "rowNum": 627, 
                     "type": "note", 
                     "comments": "This seems like a duplicate and should these lists always be different?"
                 }, 
@@ -5192,32 +5270,32 @@
                         "default": "<li>Develops a fever</li>", 
                         "hindi": "बुखार हो जाए."
                     }, 
-                    "rowNum": 627, 
+                    "rowNum": 628, 
                     "type": "note", 
                     "condition": "calculates.fever()"
                 }
             ]
         }, 
         {
-            "rowNum": 629, 
+            "rowNum": 630, 
             "type": "label", 
             "param": "plan_A_end"
         }, 
         {
-            "rowNum": 630, 
+            "rowNum": 631, 
             "type": "goto", 
             "param": "feeding_assessment_end", 
             "comments": "The feeding section for young infants is included in the diagnostic chart"
         }, 
         {
-            "rowNum": 631, 
+            "rowNum": 632, 
             "type": "label", 
             "param": "counsel_the_mother"
         }, 
         {
             "prompts": [
                 {
-                    "rowNum": 633, 
+                    "rowNum": 634, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5227,7 +5305,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 634, 
+                    "rowNum": 635, 
                     "type": "note", 
                     "comments": "TODO: Infer?Maybe this is a goto issue?", 
                     "label": {
@@ -5236,18 +5314,18 @@
                     }
                 }
             ], 
-            "rowNum": 632, 
+            "rowNum": 633, 
             "type": "screen", 
             "condition": false, 
             "comments": "TODO: Do we need this screen?"
         }, 
         {
-            "rowNum": 636, 
+            "rowNum": 637, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "breastfed", 
-                    "rowNum": 637, 
+                    "rowNum": 638, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -5257,7 +5335,7 @@
                 }, 
                 {
                     "name": "breastfeedings_per_day", 
-                    "rowNum": 638, 
+                    "rowNum": 639, 
                     "param": null, 
                     "type": "integer", 
                     "condition": "selected(data('breastfed'), 'yes')", 
@@ -5268,7 +5346,7 @@
                 }, 
                 {
                     "name": "breastfed_at_night", 
-                    "rowNum": 639, 
+                    "rowNum": 640, 
                     "param": "yes_no", 
                     "type": "select_one", 
                     "condition": "selected(data('breastfed'), 'yes')", 
@@ -5280,12 +5358,12 @@
             ]
         }, 
         {
-            "rowNum": 641, 
+            "rowNum": 642, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "takes_other_foods", 
-                    "rowNum": 642, 
+                    "rowNum": 643, 
                     "param": "yes_no", 
                     "type": "select_one", 
                     "comments": "Manoj says: this asks about offering food/liquid other than breastfeeding", 
@@ -5302,13 +5380,13 @@
                         "hindi": "क्या खाना?"
                     }, 
                     "param": "food", 
-                    "rowNum": 643, 
+                    "rowNum": 644, 
                     "type": "select_multiple", 
                     "condition": "selected(data('takes_other_foods'), 'yes')"
                 }, 
                 {
                     "name": "other_foods_per_day", 
-                    "rowNum": 644, 
+                    "rowNum": 645, 
                     "param": null, 
                     "type": "integer", 
                     "condition": "selected(data('takes_other_foods'), 'yes')", 
@@ -5319,7 +5397,7 @@
                 }, 
                 {
                     "name": "serving_size", 
-                    "rowNum": 645, 
+                    "rowNum": 646, 
                     "param": null, 
                     "type": "decimal", 
                     "condition": "selected(data('takes_other_foods'), 'yes')", 
@@ -5330,7 +5408,7 @@
                 }, 
                 {
                     "condition": "selected(data('takes_other_foods'), 'yes')", 
-                    "rowNum": 646, 
+                    "rowNum": 647, 
                     "param": "katori_teaspoon", 
                     "type": "select_one", 
                     "comments": "TODO: data-type horizontal", 
@@ -5338,7 +5416,7 @@
                 }, 
                 {
                     "name": "separate_serving", 
-                    "rowNum": 647, 
+                    "rowNum": 648, 
                     "param": "yes_no", 
                     "type": "select_one", 
                     "condition": "selected(data('takes_other_foods'), 'yes')", 
@@ -5355,19 +5433,19 @@
                         "hindi": "बच्चे को खाना कौन देता है और कैसे?"
                     }, 
                     "param": null, 
-                    "rowNum": 648, 
+                    "rowNum": 649, 
                     "type": "text", 
                     "condition": "selected(data('takes_other_foods'), 'yes')"
                 }
             ]
         }, 
         {
-            "rowNum": 650, 
+            "rowNum": 651, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "change_in_feeding", 
-                    "rowNum": 651, 
+                    "rowNum": 652, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -5383,46 +5461,46 @@
                         "hindi": "अगर हा  तो कैसे?"
                     }, 
                     "param": null, 
-                    "rowNum": 652, 
+                    "rowNum": 653, 
                     "type": "text", 
                     "condition": "selected(data('change_in_feeding'), 'yes')"
                 }
             ]
         }, 
         {
-            "rowNum": 654, 
+            "rowNum": 655, 
             "type": "goto", 
             "param": "up_to_6mo_feeding_rec", 
             "condition": "calculates.daysOld() < 6 * 30"
         }, 
         {
-            "rowNum": 655, 
+            "rowNum": 656, 
             "type": "goto", 
             "param": "6mo_12mo_feeding_rec", 
             "condition": "calculates.daysOld() < 12 * 30"
         }, 
         {
-            "rowNum": 656, 
+            "rowNum": 657, 
             "type": "goto", 
             "param": "1yo_2yo_feeding_rec", 
             "condition": "calculates.daysOld() < 2 * 12 * 30"
         }, 
         {
-            "rowNum": 657, 
+            "rowNum": 658, 
             "type": "goto", 
             "param": "above_2yo_feeding_rec"
         }, 
         {
-            "rowNum": 658, 
+            "rowNum": 659, 
             "type": "label", 
             "param": "up_to_6mo_feeding_rec"
         }, 
         {
-            "rowNum": 659, 
+            "rowNum": 660, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 660, 
+                    "rowNum": 661, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5432,7 +5510,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 661, 
+                    "rowNum": 662, 
                     "type": "note", 
                     "condition": "data('breastfeedings_per_day') >= 8", 
                     "label": {
@@ -5442,7 +5520,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 662, 
+                    "rowNum": 663, 
                     "type": "note", 
                     "condition": "selected(data('breastfed_at_night'), 'yes')", 
                     "label": {
@@ -5452,7 +5530,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 663, 
+                    "rowNum": 664, 
                     "type": "note", 
                     "condition": "selected(data('takes_other_foods'), 'no')", 
                     "label": {
@@ -5463,11 +5541,11 @@
             ]
         }, 
         {
-            "rowNum": 665, 
+            "rowNum": 666, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 666, 
+                    "rowNum": 667, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5476,14 +5554,14 @@
                     }
                 }, 
                 {
-                    "rowNum": 667, 
+                    "rowNum": 668, 
                     "type": "note", 
                     "param": null, 
                     "label": "Solutions:"
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 668, 
+                    "rowNum": 669, 
                     "type": "note", 
                     "condition": "not(data('breastfeedings_per_day') >= 8) || not(selected(data('breastfed_at_night'), 'yes'))", 
                     "label": {
@@ -5493,7 +5571,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 669, 
+                    "rowNum": 670, 
                     "type": "note", 
                     "condition": "not(selected(data('takes_other_foods'), 'no'))", 
                     "label": {
@@ -5508,7 +5586,7 @@
                 "default": "<ol>\n<li>Continue breastfeeding if the child is sick.</li>\n</ol>", 
                 "hindi": "<ol><li>स्तनपान जारी रखें अगर बच्चा बीमार रहे फिर भी.</li></ol>"
             }, 
-            "rowNum": 671, 
+            "rowNum": 672, 
             "type": "note", 
             "param": null, 
             "label": {
@@ -5517,19 +5595,19 @@
             }
         }, 
         {
-            "rowNum": 672, 
+            "rowNum": 673, 
             "type": "goto", 
             "param": "feeding_assessment_end"
         }, 
         {
-            "rowNum": 673, 
+            "rowNum": 674, 
             "type": "label", 
             "param": "6mo_12mo_feeding_rec"
         }, 
         {
             "prompts": [
                 {
-                    "rowNum": 675, 
+                    "rowNum": 676, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5538,7 +5616,7 @@
                     }
                 }
             ], 
-            "rowNum": 674, 
+            "rowNum": 675, 
             "type": "screen", 
             "condition": false, 
             "comments": "Do we need this section?"
@@ -5546,7 +5624,7 @@
         {
             "prompts": [
                 {
-                    "rowNum": 678, 
+                    "rowNum": 679, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5555,17 +5633,17 @@
                     }
                 }
             ], 
-            "rowNum": 677, 
+            "rowNum": 678, 
             "type": "screen", 
             "condition": false, 
             "comments": "Do we need this section?"
         }, 
         {
-            "rowNum": 680, 
+            "rowNum": 681, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 681, 
+                    "rowNum": 682, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5574,7 +5652,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 682, 
+                    "rowNum": 683, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5587,7 +5665,7 @@
                         "default": "<p>\n*3 times per day if breastfed\n</p>\n<p>\n*5 times per day if not breastfed.\n</p>", 
                         "hindi": "<p>\n*दिन मैं पाँच बार\n</p>\n<p>\n*दिन मैं तीन बार\n</p>"
                     }, 
-                    "rowNum": 683, 
+                    "rowNum": 684, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5596,7 +5674,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 684, 
+                    "rowNum": 685, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5605,7 +5683,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 685, 
+                    "rowNum": 686, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5614,7 +5692,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 686, 
+                    "rowNum": 687, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5623,7 +5701,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 687, 
+                    "rowNum": 688, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5638,7 +5716,7 @@
                 "default": "<ol>\n<li>Keep the child in your lap and feed with your own hands</li>\n<li>Wash your child's hands with soap and water every time before feeding</li>\n</ol>", 
                 "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
             }, 
-            "rowNum": 689, 
+            "rowNum": 690, 
             "type": "note", 
             "param": null, 
             "label": {
@@ -5647,35 +5725,35 @@
             }
         }, 
         {
-            "rowNum": 690, 
+            "rowNum": 691, 
             "type": "goto", 
             "param": "feeding_assessment_end"
         }, 
         {
-            "rowNum": 691, 
+            "rowNum": 692, 
             "type": "label", 
             "param": "1yo_2yo_feeding_rec"
         }, 
         {
             "prompts": [], 
-            "rowNum": 692, 
+            "rowNum": 693, 
             "type": "screen", 
             "condition": false, 
             "comments": "Do we need this section?"
         }, 
         {
             "prompts": [], 
-            "rowNum": 695, 
+            "rowNum": 696, 
             "type": "screen", 
             "condition": false, 
             "comments": "Do we need this section?"
         }, 
         {
-            "rowNum": 698, 
+            "rowNum": 699, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 699, 
+                    "rowNum": 700, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5684,7 +5762,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 700, 
+                    "rowNum": 701, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5693,7 +5771,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 701, 
+                    "rowNum": 702, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5706,7 +5784,7 @@
                         "default": "*5 times per day", 
                         "hindi": "दिन मैं पाँच बार"
                     }, 
-                    "rowNum": 702, 
+                    "rowNum": 703, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5715,7 +5793,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 703, 
+                    "rowNum": 704, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5724,7 +5802,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 704, 
+                    "rowNum": 705, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5733,7 +5811,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 705, 
+                    "rowNum": 706, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5742,7 +5820,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 706, 
+                    "rowNum": 707, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5755,7 +5833,7 @@
                         "default": "<ol>\n<li>Sit by the side of child and help him to finish the serving</li>\n<li>Wash your child's hands with soap and water every time before feeding</li>\n</ol>", 
                         "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
                     }, 
-                    "rowNum": 707, 
+                    "rowNum": 708, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5766,21 +5844,21 @@
             ]
         }, 
         {
-            "rowNum": 709, 
+            "rowNum": 710, 
             "type": "goto", 
             "param": "feeding_assessment_end"
         }, 
         {
-            "rowNum": 710, 
+            "rowNum": 711, 
             "type": "label", 
             "param": "above_2yo_feeding_rec"
         }, 
         {
-            "rowNum": 711, 
+            "rowNum": 712, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 712, 
+                    "rowNum": 713, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5789,7 +5867,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 713, 
+                    "rowNum": 714, 
                     "type": "note", 
                     "param": null, 
                     "label": "Giving family foods at 3 meals each day."
@@ -5798,11 +5876,11 @@
             "condition": "data('other_foods_per_day') >= 3"
         }, 
         {
-            "rowNum": 715, 
+            "rowNum": 716, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 716, 
+                    "rowNum": 717, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5811,13 +5889,13 @@
                     }
                 }, 
                 {
-                    "rowNum": 717, 
+                    "rowNum": 718, 
                     "type": "note", 
                     "param": null, 
                     "label": "Solutions:"
                 }, 
                 {
-                    "rowNum": 718, 
+                    "rowNum": 719, 
                     "type": "note", 
                     "param": null, 
                     "label": "Give family foods at 3 meals each day."
@@ -5826,11 +5904,11 @@
             "condition": "not(data('other_foods_per_day') >= 3)"
         }, 
         {
-            "rowNum": 720, 
+            "rowNum": 721, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 721, 
+                    "rowNum": 722, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5839,7 +5917,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 722, 
+                    "rowNum": 723, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5852,7 +5930,7 @@
                         "default": "<ol>\n<li>Ensure that the child finishes the serving</li>\n<li>Teach your child to wash hands with soap and water every time before feeding</li>\n</ol>", 
                         "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
                     }, 
-                    "rowNum": 723, 
+                    "rowNum": 724, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5863,17 +5941,17 @@
             ]
         }, 
         {
-            "rowNum": 725, 
+            "rowNum": 726, 
             "type": "label", 
             "param": "feeding_assessment_end"
         }, 
         {
-            "rowNum": 727, 
+            "rowNum": 728, 
             "type": "label", 
             "param": "give_iron_folic_acid"
         }, 
         {
-            "rowNum": 728, 
+            "rowNum": 729, 
             "type": "screen", 
             "prompts": [
                 {
@@ -5882,7 +5960,7 @@
                         "default": "Give one dose daily for 14 days.", 
                         "hindi": "१४ दिन के लिए रोज़ एक डोस."
                     }, 
-                    "rowNum": 729, 
+                    "rowNum": 730, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5891,7 +5969,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 730, 
+                    "rowNum": 731, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -5905,7 +5983,7 @@
                         "default": "No IFA dosage instructions for children under 4 months.", 
                         "hindi": "४ महीने की कम उम्र के बच्चों के लिए इ.एफ.ए के कोई निर्देशन नही है."
                     }, 
-                    "rowNum": 731, 
+                    "rowNum": 732, 
                     "type": "note", 
                     "condition": "calculates.daysOld() < 30 * 4"
                 }, 
@@ -5915,7 +5993,7 @@
                         "default": "Give 1 IFA pediatric tablet.", 
                         "hindi": "१ बच्चों वाली इ.एक.ए. टॅबलेट दें."
                     }, 
-                    "rowNum": 732, 
+                    "rowNum": 733, 
                     "param": null, 
                     "type": "note", 
                     "comments": "TODO: Mention age/weight in instructions."
@@ -5926,21 +6004,21 @@
                         "default": "Give 2 IFA pediatric tablets.", 
                         "hindi": "२ बच्चों वाली इ.एक.ए. टॅबलेट दें."
                     }, 
-                    "rowNum": 733, 
+                    "rowNum": 734, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 30 * 24"
                 }
             ]
         }, 
         {
-            "rowNum": 735, 
+            "rowNum": 736, 
             "type": "label", 
             "param": "give_vitamin_a", 
             "comments": "TODO: Vitamin A section does not specify anything about the dosage timing"
         }, 
         {
             "param": null, 
-            "rowNum": 736, 
+            "rowNum": 737, 
             "type": "note", 
             "condition": "calculates.daysOld() < 30 * 6", 
             "label": {
@@ -5950,7 +6028,7 @@
         }, 
         {
             "name": "acknowledge_give_1ml_vitamin_a", 
-            "rowNum": 737, 
+            "rowNum": 738, 
             "param": null, 
             "type": "acknowledge", 
             "condition": "calculates.daysOld() >= 30 * 6 && calculates.daysOld() < 30 * 12", 
@@ -5961,7 +6039,7 @@
         }, 
         {
             "name": "acknowledge_give_2ml_vitamin_a", 
-            "rowNum": 738, 
+            "rowNum": 739, 
             "param": null, 
             "type": "acknowledge", 
             "condition": "calculates.daysOld() >= 30 * 12", 
@@ -5971,12 +6049,12 @@
             }
         }, 
         {
-            "rowNum": 739, 
+            "rowNum": 740, 
             "type": "label", 
             "param": "give_paracetamol"
         }, 
         {
-            "rowNum": 740, 
+            "rowNum": 741, 
             "type": "screen", 
             "prompts": [
                 {
@@ -5985,7 +6063,7 @@
                         "default": "<ul>\n<li>Give a single dose of paracetamol in the clinic.</li>\n<li>Give 3 additional doses of paracetamol for use at home every 6 hours until high fever is gone.</li>\n</ul>", 
                         "hindi": "<ul><li>क्लिनिक मैं एक खुराक प्रेसेटमल की दें. </li><li>जब बुखार ठीक नही हो जाता हर ६ घंटें मैं घर पर देने के लिए तीन खुराक और दें. .</li></ul>"
                     }, 
-                    "rowNum": 741, 
+                    "rowNum": 742, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -5994,7 +6072,7 @@
                     }
                 }, 
                 {
-                    "rowNum": 742, 
+                    "rowNum": 743, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -6008,7 +6086,7 @@
                         "default": "No dosage instructions for children under 2 months.", 
                         "hindi": "२ महीन से कम उम्र के बच्चों के लिए कोई निर्देशन नही है."
                     }, 
-                    "rowNum": 743, 
+                    "rowNum": 744, 
                     "type": "note", 
                     "condition": "calculates.daysOld() < 30 * 2"
                 }, 
@@ -6018,7 +6096,7 @@
                         "default": "Give 1/4 500mg tablet", 
                         "hindi": "५०० मी ग्राम का १/४ टॅबलेट दें"
                     }, 
-                    "rowNum": 744, 
+                    "rowNum": 745, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 3 * 365"
                 }, 
@@ -6028,52 +6106,52 @@
                         "default": "Give 1/2 500mg tablet", 
                         "hindi": "५०० मी ग्राम का १/२ टॅबलेट दें"
                     }, 
-                    "rowNum": 745, 
+                    "rowNum": 746, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= 3 * 365"
                 }
             ]
         }, 
         {
-            "rowNum": 748, 
+            "rowNum": 749, 
             "type": "label", 
             "param": "give_cotrimoxazole", 
             "comments": "TODO: Use weight before age to determine dosage.\nI'm waiting to implement this because it sounds like we'll be switching to amox"
         }, 
         {
-            "rowNum": 749, 
+            "rowNum": 750, 
             "type": "goto", 
             "param": "give_cotrimoxazole_lt_1mo", 
             "condition": "calculates.daysOld() < 30"
         }, 
         {
-            "rowNum": 750, 
+            "rowNum": 751, 
             "type": "goto", 
             "param": "give_cotrimoxazole_1mo-2mo", 
             "condition": "calculates.daysOld() < 60"
         }, 
         {
-            "rowNum": 751, 
+            "rowNum": 752, 
             "type": "goto", 
             "param": "give_cotrimoxazole_2mo-12mo", 
             "condition": "calculates.daysOld() < 365"
         }, 
         {
-            "rowNum": 752, 
+            "rowNum": 753, 
             "type": "goto", 
             "param": "give_cotrimoxazole_12mo-5yo"
         }, 
         {
-            "rowNum": 754, 
+            "rowNum": 755, 
             "type": "label", 
             "param": "give_cotrimoxazole_lt_1mo"
         }, 
         {
-            "rowNum": 755, 
+            "rowNum": 756, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 756, 
+                    "rowNum": 757, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -6083,7 +6161,7 @@
                 }, 
                 {
                     "name": "premature_or_jaundiced", 
-                    "rowNum": 757, 
+                    "rowNum": 758, 
                     "required": true, 
                     "type": "select_one", 
                     "param": "yes_no", 
@@ -6100,13 +6178,13 @@
                         "default": "Avoid cotrimoxazole in infants less than 1 month of age who are premature or jaundiced.", 
                         "hindi": "कोटरिमोक्षज़ोल एक महीने से कम के शिशु को या पीलिया से पीढ़ीत का ना दे."
                     }, 
-                    "rowNum": 758, 
+                    "rowNum": 759, 
                     "type": "acknowledge", 
                     "condition": "selected(data('premature_or_jaundiced'), 'yes')"
                 }, 
                 {
                     "name": "cotrimoxazole_type", 
-                    "rowNum": 759, 
+                    "rowNum": 760, 
                     "param": "cotrimoxazole_type", 
                     "type": "select_one", 
                     "comments": "It would be best to infer this however, it sound like we'll be switching to amox, so it's a moot point", 
@@ -6117,7 +6195,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 760, 
+                    "rowNum": 761, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "selected(data('cotrimoxazole_type'), 'pediatric' )", 
@@ -6128,7 +6206,7 @@
                 }, 
                 {
                     "condition": "selected(data('cotrimoxazole_type'), 'adult' )", 
-                    "rowNum": 761, 
+                    "rowNum": 762, 
                     "param": null, 
                     "type": "note", 
                     "comments": "I added this label for the black square in the dosage grid.", 
@@ -6140,21 +6218,21 @@
             ]
         }, 
         {
-            "rowNum": 763, 
+            "rowNum": 764, 
             "type": "goto", 
             "param": "give_cotrimoxazole_end"
         }, 
         {
-            "rowNum": 764, 
+            "rowNum": 765, 
             "type": "label", 
             "param": "give_cotrimoxazole_1mo-2mo"
         }, 
         {
-            "rowNum": 765, 
+            "rowNum": 766, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 766, 
+                    "rowNum": 767, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -6164,7 +6242,7 @@
                 }, 
                 {
                     "name": "cotrimoxazole_type", 
-                    "rowNum": 767, 
+                    "rowNum": 768, 
                     "type": "select_one", 
                     "param": "cotrimoxazole_type", 
                     "label": {
@@ -6174,7 +6252,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 768, 
+                    "rowNum": 769, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "selected(data('cotrimoxazole_type'), 'pediatric' )", 
@@ -6185,7 +6263,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 769, 
+                    "rowNum": 770, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "selected(data('cotrimoxazole_type'), 'adult' )", 
@@ -6197,21 +6275,21 @@
             ]
         }, 
         {
-            "rowNum": 771, 
+            "rowNum": 772, 
             "type": "goto", 
             "param": "give_cotrimoxazole_end"
         }, 
         {
-            "rowNum": 772, 
+            "rowNum": 773, 
             "type": "label", 
             "param": "give_cotrimoxazole_2mo-12mo"
         }, 
         {
-            "rowNum": 773, 
+            "rowNum": 774, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 774, 
+                    "rowNum": 775, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -6221,7 +6299,7 @@
                 }, 
                 {
                     "name": "cotrimoxazole_type", 
-                    "rowNum": 775, 
+                    "rowNum": 776, 
                     "type": "select_one", 
                     "param": "cotrimoxazole_type", 
                     "label": {
@@ -6231,7 +6309,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 776, 
+                    "rowNum": 777, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "selected(data('cotrimoxazole_type'), 'pediatric' )", 
@@ -6242,7 +6320,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 777, 
+                    "rowNum": 778, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "selected(data('cotrimoxazole_type'), 'adult' )", 
@@ -6254,21 +6332,21 @@
             ]
         }, 
         {
-            "rowNum": 779, 
+            "rowNum": 780, 
             "type": "goto", 
             "param": "give_cotrimoxazole_end"
         }, 
         {
-            "rowNum": 780, 
+            "rowNum": 781, 
             "type": "label", 
             "param": "give_cotrimoxazole_12mo-5yo"
         }, 
         {
-            "rowNum": 781, 
+            "rowNum": 782, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 782, 
+                    "rowNum": 783, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -6278,7 +6356,7 @@
                 }, 
                 {
                     "name": "cotrimoxazole_type", 
-                    "rowNum": 783, 
+                    "rowNum": 784, 
                     "type": "select_one", 
                     "param": "cotrimoxazole_type", 
                     "label": {
@@ -6288,7 +6366,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 784, 
+                    "rowNum": 785, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "selected(data('cotrimoxazole_type'), 'pediatric' )", 
@@ -6299,7 +6377,7 @@
                 }, 
                 {
                     "name": "acknowledge_give_cotrimoxazole", 
-                    "rowNum": 785, 
+                    "rowNum": 786, 
                     "param": null, 
                     "type": "acknowledge", 
                     "condition": "selected(data('cotrimoxazole_type'), 'adult' )", 
@@ -6311,7 +6389,7 @@
             ]
         }, 
         {
-            "rowNum": 787, 
+            "rowNum": 788, 
             "type": "label", 
             "param": "give_cotrimoxazole_end"
         }
@@ -6454,58 +6532,85 @@
                 "name": "opv1hepatitusb1"
             }, 
             {
+                "label": {
+                    "default": "DPT-2", 
+                    "hindi": "डीपीटी-2"
+                }, 
                 "rowNum": 35, 
                 "age_weeks": 10, 
-                "name": "dpt2", 
-                "label": "DPT-2"
+                "name": "dpt2"
             }, 
             {
+                "label": {
+                    "default": "OPV-2 + Hepatitis B-2", 
+                    "hindi": "ओपीवी-2 + हेपेटाइटिस बी -2"
+                }, 
                 "rowNum": 36, 
                 "age_weeks": 10, 
-                "name": "opv2hepatitusb2", 
-                "label": "OPV-2 + Hepatitis B-2"
+                "name": "opv2hepatitusb2"
             }, 
             {
+                "label": {
+                    "default": "DPT-3", 
+                    "hindi": "डीपीटी-3"
+                }, 
                 "rowNum": 37, 
                 "age_weeks": 14, 
-                "name": "dpt3", 
-                "label": "DPT-3"
+                "name": "dpt3"
             }, 
             {
+                "label": {
+                    "default": "OPV-3 + Hepatitis B-3", 
+                    "hindi": "ओपीवी-3 + हेपेटाइटिस बी -3"
+                }, 
                 "rowNum": 38, 
                 "age_weeks": 14, 
-                "name": "opv3hepatitusb3", 
-                "label": "OPV-3 + Hepatitis B-3"
+                "name": "opv3hepatitusb3"
             }, 
             {
+                "label": {
+                    "default": "Measles", 
+                    "hindi": "खसरा"
+                }, 
                 "rowNum": 39, 
                 "age_weeks": 36, 
-                "name": "measles", 
-                "label": "Measles"
+                "name": "measles"
             }, 
             {
+                "label": {
+                    "default": "Vitamin A", 
+                    "hindi": "विटामिन ए"
+                }, 
                 "rowNum": 40, 
                 "age_weeks": 36, 
-                "name": "vitamin_a", 
-                "label": "Vitamin A"
+                "name": "vitamin_a"
             }, 
             {
+                "label": {
+                    "default": "DPT", 
+                    "hindi": "डीपीटी"
+                }, 
                 "rowNum": 41, 
                 "age_weeks": 64, 
-                "name": "dpt", 
-                "label": "DPT"
+                "name": "dpt"
             }, 
             {
+                "label": {
+                    "default": "OPV", 
+                    "hindi": "ओपीवी"
+                }, 
                 "rowNum": 42, 
                 "age_weeks": 64, 
-                "name": "opv", 
-                "label": "OPV"
+                "name": "opv"
             }, 
             {
+                "label": {
+                    "default": "DT", 
+                    "hindi": "डीटी"
+                }, 
                 "rowNum": 43, 
                 "age_weeks": 240, 
-                "name": "dt", 
-                "label": "DT"
+                "name": "dt"
             }
         ], 
         "visit_type": [
@@ -6794,27 +6899,42 @@
             {
                 "rowNum": 84, 
                 "name": "normal", 
-                "label": "Normal"
+                "label": {
+                    "default": "Normal", 
+                    "hindi": "नॉर्मल"
+                }
             }, 
             {
                 "rowNum": 85, 
                 "name": "grade1", 
-                "label": "Grade I"
+                "label": {
+                    "default": "Grade I", 
+                    "hindi": "ग्रेड १"
+                }
             }, 
             {
                 "rowNum": 86, 
                 "name": "grade2", 
-                "label": "Grade II"
+                "label": {
+                    "default": "Grade II", 
+                    "hindi": "ग्रेड २"
+                }
             }, 
             {
                 "rowNum": 87, 
                 "name": "grade3", 
-                "label": "Grade III"
+                "label": {
+                    "default": "Grade III", 
+                    "hindi": "ग्रेड ३"
+                }
             }, 
             {
                 "rowNum": 88, 
                 "name": "grade4", 
-                "label": "Grade IV"
+                "label": {
+                    "default": "Grade IV", 
+                    "hindi": "ग्रेड ४"
+                }
             }
         ], 
         "agree": [

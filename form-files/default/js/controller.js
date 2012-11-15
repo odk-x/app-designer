@@ -89,7 +89,7 @@ window.controller = {
         }));
     },
     /**
-     * If 'prompt' is a label, goto or goto_if, advance through the 
+     * If 'prompt' is a label or goto, advance through the 
      * business logic until it is resolved to a renderable screen prompt.
      *
      * return that renderable screen prompt.
@@ -99,18 +99,21 @@ window.controller = {
         var that = this;
 
         try {
-            // ***NOTE: goto_if is implemented as a 'condition' on the goto***
             // ***The order of the else-if statements below is very important.***
             // i.e., First test if the 'condition' is false, and skip to the next 
             // question if it is; if the 'condition' is true or not present, then 
-            // execute the 'goto' I.e., the goto_if is equivalent to a goto with
-            // a condition.
+            // execute the 'goto'
             if ( prompt.type == "label" ) {
                 nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
             } else if('condition' in prompt && !prompt.condition()) {
                 nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-            } else if ( prompt.type == "goto" || prompt.type == "goto_if" ) {
+            } else if ( prompt.type == "goto" ) {
                 nextPrompt = that.getPromptByLabel(prompt.param);
+            } else if( prompt.type == "error" ) {
+                if('condition' in prompt && prompt.condition()) {
+                    alert("Error prompt triggered.");
+                    that.fatalError();
+                }
             }
         } catch (e) {
             ctxt.append("controller.advanceToScreenPrompt.exception.ignored", e);

@@ -720,11 +720,10 @@ promptTypes.datetime = promptTypes.input_type.extend({
     },
     scrollerAttributes: {
         preset: 'datetime',
-        theme: 'jqm'
-        //Avoiding inline because there
-        //can be some debouncing issues
-        //display: 'inline',
-        //Warning: mixed/clickpick mode doesn't work on galaxy nexus
+        theme: 'jqm',
+        //Avoiding inline display because there
+        //can be some debouncing issues.
+        //Warning: mixed/clickpick mode doesn't work on galaxy nexus.
         //mode: 'scroll'
     },
     events: {
@@ -732,7 +731,6 @@ promptTypes.datetime = promptTypes.input_type.extend({
         "swipeleft input": "stopPropagation",
         "swiperight input": "stopPropagation"
     },
-
     onActivate: function(ctxt) {
         var that = this;
         var renderContext = this.renderContext;
@@ -747,6 +745,16 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 jqmSet: 'd',
                 jqmCancel: 'd'
             };
+            //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
+            //This is a problem because users may click twice while they wait for the date
+            //picker to open inadvertantly causing it to close.
+            var originalJqmInit = $.scroller.themes.jqm.init;
+            $.scroller.themes.jqm.init = function(elm, inst) {
+                originalJqmInit(elm, inst);
+                $('.dwo', elm).off('click');
+                $('.dwo').css("background-color", "white");
+                $('.dwo').css("opacity", ".5");
+            }
             that.baseActivate(ctxt);
         });
     },
@@ -959,7 +967,10 @@ promptTypes.launch_intent = promptTypes.base.extend({
     launch: function(evt) {
         var ctxt = controller.newContext(evt);
         var platInfo = opendatakit.getPlatformInfo(ctxt);
-        
+        $('#block-ui').show();
+        $('#block-ui').on('swipeleft swiperight click', function(evt) {
+            evt.stopPropagation();
+        });
         //We assume that the webkit could go away when an intent is launched,
         //so this prompt's "address" is passed along with the intent.
         var outcome = collect.doAction('' + this.promptIdx, this.name, this.intentString, this.intentParameters);
@@ -968,6 +979,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
             ctxt.success();
         } else {
             alert("Should be OK got >" + outcome + "<");
+            $('#block-ui').hide();
             ctxt.failure();
         }
         /*
@@ -985,6 +997,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
      */
     getCallback: function(ctxt, bypath, byaction) {
         var that = this;
+        $('#block-ui').hide();
         return function(ctxt, path, action, jsonString) {
             var jsonObject;
             ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " action: " + action);
@@ -1022,16 +1035,19 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
 promptTypes.pulseox = promptTypes.launch_intent.extend({
     type: "pulseox",
     datatype: "pulseox",
-    //change.uw.android.BREATHCOUNT
     intentString: 'org.opendatakit.sensors.PULSEOX'
 });
-/*
-promptTypes.geopoint = promptTypes.base.extend({
+promptTypes.breathcounter = promptTypes.launch_intent.extend({
+    type: "breathcounter",
+    datatype: "breathcounter",
+    intentString: 'change.uw.android.BREATHCOUNT'
+});
+promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
     datatype: "geopoint",
     intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity'
 });
-*/
+/*
 //HTML5 geopoints seem to work in the browser but not in the app.
 promptTypes.geopoint = promptTypes.input_type.extend({
     type: "geopoint",
@@ -1072,6 +1088,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
         this.baseActivate(ctxt);
     }
 });
+*/
 promptTypes.screen = promptTypes.base.extend({
     type: "screen",
     prompts: [],
