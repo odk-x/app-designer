@@ -187,10 +187,10 @@
             "label": "When were you born?"
         }, 
         {
-            "name": "data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
+            "param": null, 
             "rowNum": 21, 
             "type": "note", 
-            "param": null, 
+            "condition": "data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
             "label": "Happy Birthday!"
         }, 
         {
