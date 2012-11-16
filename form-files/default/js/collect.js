@@ -46,6 +46,27 @@ window.collect = window.collect || {
             }, 100);
             return "OK";
         }
+        if ( action == 'org.opendatakit.collect.android.activities.MediaChooseImageActivity' ) {
+            setTimeout(function() {
+                controller.opendatakitCallback( page, path, action, 
+                    '{ "status": -1, "result": { "mediaPath": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_bubble.jpg" } }' );
+            }, 100);
+            return "OK";
+        }
+        if ( action == 'org.opendatakit.collect.android.activities.MediaChooseVideoActivity' ) {
+            setTimeout(function() {
+                controller.opendatakitCallback( page, path, action, 
+                    '{ "status": -1, "result": { "mediaPath": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_bubble.3gpp" } }' );
+            }, 100);
+            return "OK";
+        }
+        if ( action == 'org.opendatakit.collect.android.activities.MediaChooseAudioActivity' ) {
+            setTimeout(function() {
+                controller.opendatakitCallback( page, path, action, 
+                    '{ "status": -1, "result": { "mediaPath": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_bubble.3gpp" } }' );
+            }, 100);
+            return "OK";
+        }
         if ( action == 'org.opendatakit.sensors.PULSEOX' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( page, path, action, 
@@ -62,15 +83,15 @@ window.collect = window.collect || {
         }
     },
     saveAllChangesCompleted: function( formId, instanceId, asComplete ) {
-        alert("notify container that we have a " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + " save completed OK.");
+        alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     saveAllChangesFailed: function( formId, instanceId ) {
-        alert("notify container that " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + " save FAILED.");
+        alert("notify container FAILED save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     ignoreAllChangesCompleted: function( formId, instanceId ) {
-        alert("notify container that ignore all changes OK.");
+        alert("notify container OK ignore all changes.");
     },
     ignoreAllChangesFailed: function( formId, instanceId ) {
-        alert("notify container that ignore all changes FAILED.");
+        alert("notify container FAILED ignore all changes.");
     }
 };

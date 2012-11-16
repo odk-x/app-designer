@@ -96,14 +96,14 @@ return {
         if ( formPath == null ) {
             ctxt.append("parsequery._effectChange.nullFormPath");
             alert("Unexpected null formPath");
-            ctxt.failure();
+            ctxt.failure({message: "No form specified."});
             return;
         }
         
         if ( formDef == null ) {
             ctxt.append("parsequery._effectChange.nullFormDef");
             alert("Unexpected null formDef when changing forms");
-            ctxt.failure();
+            ctxt.failure({message: "Form definition is empty."});
             return;
         }
         
@@ -116,7 +116,7 @@ return {
         
         if ( tableId == null ) {
             alert("no tableId specified in Form Definition!");
-            ctxt.failure();
+            ctxt.failure({message: "No tableId specified in form definition."});
             return;
         }
         
@@ -254,7 +254,7 @@ return {
             function(formDefTxt) {
                 if ( formDefTxt == null || formDefTxt.length == 0 ) {
                     alert('Unable to find file: ' + filename);
-                    ctxt.failure();
+                    ctxt.failure({message: "Form definition is empty."});
                 } else {
                     try {
                         var formDef = JSON.parse(formDefTxt);
@@ -262,12 +262,12 @@ return {
                                                 instanceId, pageRef, instanceMetadataKeyValueList);
                     } catch (ex) {
                         ctxt.append('parsequery.parseParameters.exception',  'unknown error: ' + ex);
-                        ctxt.failure();
+                        ctxt.failure({message: "Exception while processing form definition."});
                     }
                 }
             }, function(err) {
                 ctxt.append("parsequery.parseParameters.requirejs.failure", err.toString());
-                ctxt.failure();
+                ctxt.failure({message: "Failure while reading form definition."});
             }
         );
     },
@@ -299,7 +299,7 @@ return {
             var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.currentPromptIdx);
             ctxt.append('parsequery.hashChangeHandler.emptyHash.reset', qpl);
             window.location.hash = qpl;
-            ctxt.failure();
+            ctxt.failure({message: "Internal error: invalid hash (restoring)"});
             return false;
         }
         
@@ -332,7 +332,7 @@ return {
             ctxt.append('parsequery.hashChangeHandler.noPageRef.reset');
             var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.currentPromptIdx);
             window.location.hash = qpl;
-            ctxt.failure();
+            ctxt.failure({message: "Internal error: invalid hash (restoring)"});
         }
         return false;
     }
