@@ -15,6 +15,9 @@
         "specialTemplateTest": {
             "type": "string"
         }, 
+        "pulseox": {
+            "type": "string"
+        }, 
         "time": {
             "type": "string"
         }, 
@@ -48,8 +51,8 @@
         "visited_continents": {
             "type": "string"
         }, 
-        "pulseox": {
-            "type": "string"
+        "breathcount": {
+            "type": "integer"
         }
     }, 
     "settings": [

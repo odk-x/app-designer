@@ -1,6 +1,7 @@
-//Dont use usestrict or the evaluator will break
+//Dont use usestrict here or the evaluator will break
 /**
- * Common functions accessible to the user's Javascript eval environment (for use within their formulas).
+ * Common functions accessible from the user's Javascript eval environment
+ * (for use within their formulas).
  */
  //TODO: These functions need unit testing.
 define(['database', 'underscore'],
@@ -97,7 +98,22 @@ function(database,   _) {
             }
             return datavalue;
         },
+        /**
+         * evaluator takes a string of code and evaluates in an environment with
+         * all the formula functions.
+         * This is used for evaluating user specified constraints/calculates/etc.
+         * from formDef.json
+         **/
         evaluator: function(code){
+            //Both `with` and `eval` are cautioned against.
+            //The justification for using eval is that we need some way to evaluate
+            //user provided code. We are presuming that the survey creator is trusted
+            //by the survey user. If not, bundled templates and promptTypes
+            //are also security problems.
+            //`with` is used to avoid having to repeatedly define every formula function.
+            //formulaFuctions need to be available as module for use in our code
+            //and in the top level environment for user provided code.
+            //Be sure to NOT use strict in this module or `with` won't work.
             with(this){
                 return eval(code);
             }

@@ -49,14 +49,14 @@ window.collect = window.collect || {
         if ( action == 'org.opendatakit.sensors.PULSEOX' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "pulse": 100, "ox": 1.5 } }' );
+                    '{ "status": -1, "result": { "pulse": 100, "ox": 80 } }' );
             }, 1000);
             return "OK";
         }
         if ( action == 'change.uw.android.BREATHCOUNT' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "pulse": 100, "ox": 1.5 } }' );
+                    '{ "status": -1, "result": { "value": 63 } }' );
             }, 1000);
             return "OK";
         }

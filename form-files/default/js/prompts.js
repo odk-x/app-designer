@@ -958,11 +958,13 @@ promptTypes.launch_intent = promptTypes.base.extend({
     events: {
         "click .launch": "launch"
     },
+    parseValue: JSON.parse,
+    serializeValue: JSON.stringify,
     onActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
         if(typeof value !== 'undefined'){
-            value = JSON.parse(value);
+            value = that.parseValue(value);
         }
         that.renderContext.value = value;
         that.renderContext.buttonLabel = that.buttonLabel;
@@ -1020,7 +1022,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                             that.render();
                             ctxt.success();
                         }
-                    }), JSON.stringify(jsonObject.result));
+                    }), that.serializeValue(jsonObject.result));
                 }
             } else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " action: " + action);
@@ -1036,18 +1038,7 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
     datatype: "barcode",
     intentString: 'com.google.zxing.client.android.SCAN'
 });
-//TODO: Bundle this with a form.
-promptTypes.pulseox = promptTypes.launch_intent.extend({
-    type: "pulseox",
-    datatype: "pulseox",
-    intentString: 'org.opendatakit.sensors.PULSEOX'
-});
-promptTypes.breathcounter = promptTypes.launch_intent.extend({
-    type: "breathcounter",
-    datatype: "breathcounter",
-    buttonLabel: 'Launch breath counter',
-    intentString: 'change.uw.android.BREATHCOUNT'
-});
+
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
     datatype: "geopoint",
@@ -1100,7 +1091,7 @@ promptTypes.screen = promptTypes.base.extend({
     prompts: [],
     initialize: function() {
         var that = this;
-        this.prompts = builder.initializePrompts(this.prompts);
+        this.prompts = builder.initializePrompts(this.prompts, function(){});
         //Wire up the prompts so that if any of them rerender the screen rerenders.
         //TODO: Think about whether there is a better way of doing this.
         //Maybe bind this or subprompts to database change events instead?
@@ -1228,6 +1219,10 @@ promptTypes.note = promptTypes.base.extend({
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
     autoAdvance: false,
+    acknLabel: {
+        "default": "Acknowledge",
+        "hindi": "स्वीकार करना"
+    },
     modification: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append('acknowledge.modification', this.promptIdx);
@@ -1237,7 +1232,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
             success: function() {
                 that.renderContext.choices = [{
                     "name": "acknowledge",
-                    "label": "Acknowledge",
+                    "label": that.acknLabel,
                     "checked": acknowledged
                 }];
                 if (acknowledged && that.autoAdvance) {
@@ -1259,7 +1254,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         }
         that.renderContext.choices = [{
             "name": "acknowledge",
-            "label": "Acknowledge",
+            "label": that.acknLabel,
             "checked": acknowledged
         }];
         this.baseActivate(ctxt);
@@ -1282,7 +1277,7 @@ promptTypes.with_next = promptTypes.base.extend({
     }
 });
 //Ensure all prompt type names are lowercase.
-//TODO: Move this to builder so we can validate prompt types packaged with forms.
+//TODO: Move to a test suite.
 _.each(_.keys(promptTypes), function(promptTypeName){
     if(promptTypeName !== promptTypeName.toLowerCase()) {
         alert("Invalid prompt type name: " + promptTypeName);

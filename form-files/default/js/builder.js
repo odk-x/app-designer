@@ -10,53 +10,21 @@
  */
 define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes', 'formulaFunctions', 'underscore'],
 function(controller,   opendatakit,   database,   $,        promptTypes,   formulaFunctions,   _) {
-    var calculates = {};
-    var evalInEnvironment = (function() {
-        //This closure will define a bunch of functions in our DSL for constraints/calculates/etc. 
-        //It's still possible to really mess things up from here though because the
-        //top-level environment is still accessable.
-        //We can create some dummy variables to avoid that if need be.
-
-        /*
-        //I'm not sure if this is the best way to set up bindings in this closure/namespace.
-        //The problem is it doesn't work with use strict
-        for(var funcName in formulaFunctions){
-            eval('var ' + funcName + ' = formulaFunctions.funcName;');
-        }
-        
-        //The Function consturctor might avoid the usestrict problem.
-        //However, I don't know if it works with webkit.
-        //Here's a firs attempt at it, which doesn't work because
-        //applying a constructer returns undefined and the _.values function emits the prototype I think.
-        //I think this will require a lot of esoteric javascript to get right.
-        //return (new Function).apply(_.keys(formulaFunctions).concat('function(code){eval(code)}'))(_.values(formulaFunctions));
-
-        //This is the simplest way to set up bindings but it's suboptimal from a DRY perspective.
-        var selected = formulaFunctions.selected;
-        var data = formulaFunctions.data;
-        var localize = formulaFunctions.localize;
-        var equivalent = formulaFunctions.equivalent;
-        
-        return function(code){
-            return eval(code);
-        };
-        */
-        return function(code) {
-            //Now I'm trying to use a eval in a with block and doing it inside formulaFunctions
-            //to dodge the usestrict problem.
-            return formulaFunctions.evaluator(code);
-        };
-    })();
-    
+    /**
+     * formula is a function for creating JavaScript functions from user defined formulas.
+     * TODO: Link/copy formula documentation.
+     * TODO: How do exceptions work?
+     **/
     function formula(content) {
-        // If context.allowExceptions is true call is responsible for catching and handling exceptions.
-        // 'context' passed in may or may not be defined. 
+        // If context.allowExceptions is true call is responsible for catching
+        // and handling exceptions.
+        // The 'context' passed in may or may not be defined. 
         // It may or may not be the calling context object.
         var result = '(function(context){\n'+
             'return ('+ content + ');\n' +
             '})';
         try {
-            var parsedFunction = evalInEnvironment(result);
+            var parsedFunction = formulaFunctions.evaluator(result);
             return function(context){
                 try {
                     return parsedFunction.call(this, context);
@@ -82,6 +50,10 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             return function(){};
         }
     }
+    /**
+     * formula_with_context does the same thing as formula but checks to make
+     * sure a context arguement is provided when the generated function is called.
+     **/
     function formula_with_context(content){
         var myFormula = formula(content);
         return function(context){
@@ -95,10 +67,10 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             }
         };
     }
-    
-    return {
-    //TODO: I think column_types and property parsers can be made private (i.e. defined in the closure above.).
-    column_types: {
+    var currentPromptTypes;
+    var calculates = {};
+    //column_types maps each column to a property parser to use on its values.
+    var column_types = {
         condition: 'formula',
         constraint: 'formula',
         required: 'formula',
@@ -114,8 +86,12 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         image: 'app_path_localized',
         audio: 'app_path_localized',
         video: 'app_path_localized'
-    },
-    propertyParsers: {
+    };
+    //propertyParsers are functions for transforming property values into
+    //useful formats.
+    //For example, transformings all the constraint/condition/etc. 
+    //formula strings into JS functions.
+    var propertyParsers = {
         formula: formula,
         formula_with_context: formula_with_context,
         requirejs_path : function(content) {
@@ -144,18 +120,20 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 }
             }
         }
-    },
+    };
+    return {
     /**
-     * 
+     * Go through an object (usually representing a row in a spreadsheet) 
+     * and parse all its properties
      **/
     initializeProperties: function(prompt) {
-        var that = this;
         $.each(prompt, function(key, property) {
             var propertyType, propertyContent;
             if (key in prompt) {
                 if (typeof property === 'function') {
                     //Generally all properties will be plain JSON,
-                    //but being able to pass in function directly can be useful for debugging.
+                    //but being able to pass in function directly can be useful
+                    //for debugging.
                     return;
                 }
                 if ($.isArray(property)) {
@@ -166,8 +144,8 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     propertyContent = property['default'];
                 }
                 else {
-                    if (key in that.column_types) {
-                        propertyType = that.column_types[key];
+                    if (key in column_types) {
+                        propertyType = column_types[key];
                         propertyContent = property;
                     }
                     else {
@@ -175,8 +153,8 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                         return;
                     }
                 }
-                if (propertyType in that.propertyParsers) {
-                    var propertyParser = that.propertyParsers[propertyType];
+                if (propertyType in propertyParsers) {
+                    var propertyParser = propertyParsers[propertyType];
                     console.log('Parsing:');
                     console.log(property);
                     prompt[key] = propertyParser(propertyContent);
@@ -190,49 +168,39 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         });
         return prompt;
     },
+    /**
+     * Iterate over the given partial prompt objects and initialize them as
+     * instances of the prompt types defined in prompts.js
+     * (or as one of the user specified prompt types).
+     **/
     initializePrompts: function(prompts) {
         var that = this;
         //withNext type prompts can use this to set a function that gets
         //called inside the next prompt's onActivate.
         var additionalActivateFunctions = [];
-        function findObjectWithPair(objectArray, searchKey, searchValue) {
-            for (var obby in objectArray) {
-                if (searchKey in obby) {
-                    if (obby[searchKey] === searchValue) {
-                        return obby;
-                    }
-                }
-            }
-            return null;
-        }
         var initializedPrompts = [];
-        _.each(prompts, function(item) {
-            var PromptType, PromptClass, PromptInstance;
-
-            if (!('type' in item)) {
+        
+        _.each(prompts, function(prompt) {
+            var PromptType, ExtendedPromptType, PromptInstance;
+            if (!('type' in prompt)) {
                 console.log('no type specified');
-                console.log(item);
+                console.log(prompt);
                 return;
             }
-            var widget = findObjectWithPair(that.form.widgets, 'type', item.type);
-            if (widget) {
-                item = $.extend({}, widget, item);
-                item.type = widget.parentType;
-            }
-            if (item.type in promptTypes) {
-                PromptType = promptTypes[item.type];
+            if (prompt.type in currentPromptTypes) {
+                PromptType = currentPromptTypes[prompt.type];
             } else {
                 console.log('unknown type');
-                console.log(item);
-                PromptType = promptTypes['text'];
+                console.log(prompt);
+                PromptType = currentPromptTypes['text'];
             }
-            PromptClass = PromptType.extend($.extend({
+            ExtendedPromptType = PromptType.extend($.extend({
                 form: that.form,
                 promptIdx: initializedPrompts.length,
                 additionalActivateFunctions: additionalActivateFunctions
-            }, that.initializeProperties(item)));
-            PromptInstance = new PromptClass();
-            if (item.type === 'with_next') {
+            }, that.initializeProperties(prompt)));
+            PromptInstance = new ExtendedPromptType();
+            if (prompt.type === 'with_next') {
                 additionalActivateFunctions.push(function(ctxt) {
                     PromptInstance.assignToValue(ctxt);
                 });
@@ -254,36 +222,16 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         }
         
         var that = this;
+        
+        //currentPromptTypes set to a promptTypes subtype so user defined prompts
+        //don't clobber the base prompt types for other surveys.
+        currentPromptTypes = Object.create(promptTypes);
 
-        var widgets = {};
-
-        //Load scripts specified in settings somewhere after this point
-        if ('widgets' in surveyJson) {
-            //Transform and initialize widgets?
-            $.extend(widgets, surveyJson.widgets);
-        }
-        //Load scripts specified in settings somewhere after this point
-        if ('column_types' in surveyJson) {
-            $.extend(this.column_types, surveyJson.column_types);
-        }
         that.form = {
             choices: surveyJson.choices,
-            settings: surveyJson.settings,
-            widgets: widgets
+            settings: surveyJson.settings
         };
 
-        /*
-        var navs = [];
-        var calculates = [];
-        for ( var i = 0 ; i < surveyJson.survey.length ; ++i ) {
-            var surveyItem = surveyJson.survey[i];
-            if ( surveyItem.type == "calculate" ) {
-                calculates.push(surveyItem);
-            } else {
-                navs.push(surveyItem);
-            }
-        }
-        */
         var prompts = ([{
             "type": "goto",
             "condition": function() {
@@ -321,23 +269,47 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         console.log('initializing');
         //Transform the calculate sheet into an object with format {calculation_name:function}
         calculates = _.object(_.map(surveyJson.calculates, function(calculate){
-            return [calculate.name, that.propertyParsers.formula(calculate.calculation)];
+            return [calculate.name, propertyParsers.formula(calculate.calculation)];
         }));
         formulaFunctions.calculates = calculates;
         
         that.form.queries = _.object(_.map(surveyJson.queries, function(query) {
             return [
             query.name, {
-                "uri" : that.propertyParsers.formula(query.uri),
-                "callback" : that.propertyParsers.formula(query.callback)
+                "uri" : propertyParsers.formula(query.uri),
+                "callback" : propertyParsers.formula(query.callback)
             }];
         }));
-        
-        that.form.prompts = this.initializePrompts(prompts);
-        controller.prompts = that.form.prompts;
-        //controller.calcs = that.form.calcs;
-        console.log('starting');
-        continuation();
+        var afterCustomPromptsLoadAttempt = function(){
+            that.form.prompts = that.initializePrompts(prompts);
+            controller.prompts = that.form.prompts;
+            console.log('starting');
+            continuation();
+        };
+        //This tries to load any user defined prompt types provided in customPromptTypes.js.
+        //TODO: The approach to getting the current form path might need to change.
+        require([opendatakit.getCurrentFormPath() + 'customPromptTypes.js'], function (customPromptTypes) {
+            console.log("customPromptTypes found");
+            //Ensure all custom prompt type names are lowercase.
+            _.each(_.keys(customPromptTypes), function(promptTypeName){
+                if(promptTypeName !== promptTypeName.toLowerCase()) {
+                    alert("Invalid prompt type name: " + promptTypeName);
+                }
+            });
+            $.extend(currentPromptTypes, customPromptTypes);
+            afterCustomPromptsLoadAttempt();
+        }, function (err) {
+            //The errback, error callback
+            if(err.requireModules) {
+                //The error has a list of modules that failed
+                _.each(err.requireModules, function(failedId){
+                    //I'm using undef to clear internal knowledge of the given module.
+                    //I'm not sure if it is necessiary.
+                    window.requirejs.undef(failedId);
+                });
+            }
+            afterCustomPromptsLoadAttempt();
+        });
     }
 };
 });
