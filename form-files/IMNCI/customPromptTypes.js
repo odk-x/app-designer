@@ -4,7 +4,8 @@ function(promptTypes, $,       _) {
         "pulseox" : promptTypes.launch_intent.extend({
             type: "pulseox",
             datatype: "pulseox",
-            intentString: 'org.opendatakit.sensors.PULSEOX'
+            intentString: 'org.opendatakit.sensors.PULSEOX',
+            buttonLabel: 'Launch PulseOx'
         }),
         "breathcounter" : promptTypes.launch_intent.extend({
             type: "breathcounter",
