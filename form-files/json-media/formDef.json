@@ -40,7 +40,7 @@
                     "audio": "http://upload.wikimedia.org/wikipedia/commons/b/ba/Ru-audio_template-Wikipedia.ogg",
                     "param": null, 
                     "label": {
-                        "en_us": "A read-only field with image, audio and video prompts showing your name {{name.value}}:"
+                        "en_us": "A read-only field with image, audio and video prompts showing your name {{name}}:"
                     },
                     "hint": "This is a hint"
                 }, 

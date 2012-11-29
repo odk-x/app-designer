@@ -3,14 +3,13 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _) {
+define(['database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'handlebarsHelpers'],
+function(database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _) {
 
 promptTypes.base = Backbone.View.extend({
     className: "current",
     type: "base",
     database: database,
-    mdl: mdl,
     constraint_message: "Constraint violated.",
     invalid_value_message: "Invalid value.",
     required_message: "Required value not provided.",
@@ -105,8 +104,8 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hint = this.hint;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
-        this.renderContext.formTitle = database.getTableMetaDataValue('formTitle');
-        this.renderContext.formVersion = database.getTableMetaDataValue('formVersion');
+        this.renderContext.formTitle = opendatakit.getSettingValue('formTitle');
+        this.renderContext.formVersion = opendatakit.getSettingValue('formVersion');
         
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
@@ -263,7 +262,7 @@ promptTypes.base = Backbone.View.extend({
     setValue: function(ctxt, value) {
         // NOTE: data IS NOT updated synchronously. Use callback!
         var that = this;
-        database.setData(ctxt, that.name, that.datatype, value);
+        database.setData(ctxt, that.name, value);
     },
     beforeMove: function(ctxt) {
         ctxt.append("prompts." + this.type, "px: " + this.promptIdx);
@@ -313,7 +312,7 @@ promptTypes.opening = promptTypes.base.extend({
                                 ctxt.success({enableBackwardNavigation: false});
                             }
                         }));
-                }}), 'instanceName', 'string', instanceName);
+                }}), 'instanceName', instanceName);
             return;
         }
         that.renderContext.instanceName = instanceName;
@@ -337,11 +336,11 @@ promptTypes.opening = promptTypes.base.extend({
     modification: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
-        database.setInstanceMetaData(ctxt, 'instanceName', 'string', this.$('input').val());
+        database.setInstanceMetaData(ctxt, 'instanceName', this.$('input').val());
     },
     beforeMove: function(ctxt) {
         ctxt.append("prompts." + this.type + ".beforeMove", "px: " + this.promptIdx);
-        database.setInstanceMetaData(ctxt, 'instanceName', 'string', this.$('input').val());
+        database.setInstanceMetaData(ctxt, 'instanceName', this.$('input').val());
         // ctxt.success();
     }
 });
@@ -388,7 +387,7 @@ promptTypes.json = promptTypes.base.extend({
     onActivate: function(ctxt) {
         var that = this;
         if ( JSON != null ) {
-            that.renderContext.value = JSON.stringify(mdl.data,null,2);
+            that.renderContext.value = JSON.stringify(database.getAllDataValues(),null,2);
         } else {
             that.renderContext.value = "JSON Unavailable";
         }
@@ -412,37 +411,23 @@ promptTypes.instances = promptTypes.base.extend({
     onActivate: function(ctxt) {
         var that = this;
         ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
-        database.withDb($.extend({},ctxt,{success:function() {
-            $.extend(that.renderContext, {
-                formTitle: database.getTableMetaDataValue('formTitle'),
-                headerImg: opendatakit.baseDir + 'img/form_logo.png'
-            });
-            that.baseActivate($.extend({}, ctxt, {
-                success:function(){
-                    ctxt.success({
-                        showHeader: false,
-                        enableNavigation:false,
-                        showFooter:false
-                    });
-                }
-            }));
-        }}), function(transaction) {
-            var ss = database.getAllFormInstancesStmt();
-            transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
-                that.renderContext.instances = [];
-                console.log('test');
-                for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
-                    var instance = result.rows.item(i);
-                    that.renderContext.instances.push({
-                        instanceName: instance._instance_name,
-                        instance_id: instance._id,
-                        last_saved_timestamp: new Date(instance._timestamp),
-                        saved_status: instance._saved,
-                        locale: instance._locale
-                    });
-                }
-            });
-        });
+		database.get_all_instances($.extend({},ctxt,{
+			success:function(instanceList) {
+				that.renderContext.instances = instanceList;
+				$.extend(that.renderContext, {
+					formTitle: opendatakit.getSettingValue('formTitle'),
+					headerImg: opendatakit.baseDir + 'img/form_logo.png'
+				});
+				that.baseActivate($.extend({}, ctxt, {
+					success:function(){
+						ctxt.success({
+							showHeader: false,
+							enableNavigation:false,
+							showFooter:false
+						});
+					}
+				}));
+        }}));
     },
     createInstance: function(evt){
         var ctxt = controller.newContext(evt);
@@ -465,7 +450,7 @@ promptTypes.instances = promptTypes.base.extend({
                         that.onActivate($.extend({}, ctxt,{
                             success:function(){that.render();ctxt.success();}}));
                 }}), 
-                database.getTableMetaDataValue('formId'), $(evt.target).attr('id'));
+                $(evt.target).attr('id'));
     }
 });
 promptTypes.hierarchy = promptTypes.base.extend({
@@ -497,17 +482,19 @@ promptTypes.repeat = promptTypes.base.extend({
         var that = this;
         var subsurveyType = this.param;
         ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
-        database.withDb(ctxt, function(transaction) {
-            //TODO: Make statement to get all subsurveys with this survey as parent.
-            var ss = database.getAllFormInstancesStmt();
-            transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
-                that.renderContext.instances = [];
-                console.log('test');
-                for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
-                    that.renderContext.instances.push(result.rows.item(i));
-                }
-            });
-        });
+		database.get_all_instances($.extend({},ctxt,{
+			success:function(instanceList) {
+				that.renderContext.instances = instanceList;
+				that.baseActivate($.extend({}, ctxt, {
+					success:function(){
+						ctxt.success({
+							showHeader: false,
+							enableNavigation:false,
+							showFooter:false
+						});
+					}
+				}));
+        }}), subsurveyType);
     },
     openInstance: function(evt) {
         var instanceId = $(evt.target).attr('id');
@@ -521,7 +508,6 @@ promptTypes.repeat = promptTypes.base.extend({
 });
 promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     type: "select",
-    datatype: "string",
     templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification"
@@ -658,7 +644,6 @@ promptTypes.select_or_other = promptTypes.select.extend({
 });
 promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
     type: "text",
-    datatype: "string",
     templatePath: "templates/input_type.handlebars",
     renderContext: {
         "type": "text"
@@ -716,7 +701,6 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
 });
 promptTypes.integer = promptTypes.input_type.extend({
     type: "integer",
-    datatype: "integer",
     baseInputAttributes: {
         'type':'number'
     },
@@ -727,7 +711,6 @@ promptTypes.integer = promptTypes.input_type.extend({
 });
 promptTypes.decimal = promptTypes.input_type.extend({
     type: "decimal",
-    datatype: "number",
     //TODO: This doesn't seem to be working.
     baseInputAttributes: {
         'type':'number'
@@ -739,13 +722,13 @@ promptTypes.decimal = promptTypes.input_type.extend({
 });
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
-    datatype: "string",
     baseInputAttributes: {
         'type':'datetime'
     },
     scrollerAttributes: {
         preset: 'datetime',
         theme: 'jqm',
+		display: 'modal'
         //Avoiding inline display because there
         //can be some debouncing issues.
         //Warning: mixed/clickpick mode doesn't work on galaxy nexus.
@@ -759,9 +742,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     onActivate: function(ctxt) {
         var that = this;
         var renderContext = this.renderContext;
-        var value = this.getValue();
-        renderContext.value = value;
-        require(["mobiscroll"], function() {
+		require(["mobiscroll"], function() {
             $.scroller.themes.jqm.defaults = {
                 jqmBody: 'd',
                 jqmHeader:'d',
@@ -783,14 +764,56 @@ promptTypes.datetime = promptTypes.input_type.extend({
             that.baseActivate(ctxt);
         });
     },
+    modification: function(evt) {
+		var that = this;
+        var value = that.$('input').scroller('getDate');
+		var ref = that.getValue();
+		var rerender = ((ref == null || value == null) && (ref != value )) ||
+				(ref != null && value != null && ref.valueOf() != value.valueOf());
+		var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
+        var renderContext = that.renderContext;
+		if ( value == null ) {
+			renderContext.value = '';
+		} else {
+			renderContext.value = that.$('input').val();
+		}
+        that.setValue($.extend({}, ctxt, {
+            success: function() {
+                renderContext.invalid = !that.validateValue();
+				if ( rerender ) {
+					that.debouncedRender();
+				}
+                ctxt.success();
+            },
+            failure: function(m) {
+                renderContext.invalid = true;
+				if ( rerender ) {
+					that.debouncedRender();
+				}
+                ctxt.failure(m);
+            }
+        }), value);
+    },
     //TODO: This will have problems with image labels.
     render: function() {
         var that = this;
         that.$el.html(that.template(that.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
-        that.$('input').scroller(that.scrollerAttributes);
+		that.$('input').scroller(that.scrollerAttributes);
+		var value = that.getValue();
+		if ( value == null ) {
+			that.$('input').val
+			that.$('input').scroller('setDate',new Date(),false);
+		} else {
+			that.$('input').scroller('setDate',value, true);
+		}
         return this;
+    },
+    beforeMove: function(ctxt) {
+		// the spinner will have already saved the value
+        ctxt.success();
     }
 });
 promptTypes.date = promptTypes.datetime.extend({
@@ -800,7 +823,8 @@ promptTypes.date = promptTypes.datetime.extend({
     },
     scrollerAttributes: {
         preset: 'date',
-        theme: 'jqm'
+        theme: 'jqm',
+		display: 'modal'
     }
 });
 promptTypes.time = promptTypes.datetime.extend({
@@ -810,7 +834,8 @@ promptTypes.time = promptTypes.datetime.extend({
     },
     scrollerAttributes: {
         preset: 'time',
-        theme: 'jqm'
+        theme: 'jqm',
+		display: 'modal'
     }
 });
 /**
@@ -896,7 +921,7 @@ promptTypes.media = promptTypes.base.extend({
                                 that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
                                 that.render();
                                 ctxt.failure(m);
-                            }}), that.name, "file", mediaPath);
+                            }}), that.name, { uri : mediaPath, contentType: contentType } );
                     }
                 }
             }
@@ -917,7 +942,7 @@ promptTypes.media = promptTypes.base.extend({
 });
 promptTypes.image = promptTypes.media.extend({
     type: "image",
-    datatype: "image",
+	contentType: "image/*",
     label: 'Take your photo:',
     templatePath: "templates/image.handlebars",
     captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity',
@@ -934,6 +959,7 @@ promptTypes.image = promptTypes.media.extend({
 });
 promptTypes.video = promptTypes.media.extend({
     type: "video",
+	contentType: "video/*",
     label: 'Take your video:',
     templatePath: "templates/video.handlebars",
     captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity',
@@ -951,7 +977,7 @@ promptTypes.video = promptTypes.media.extend({
 });
 promptTypes.audio = promptTypes.media.extend({
     type: "audio",
-    datatype: "audio",
+	contentType: "audio/*",
     templatePath: "templates/audio.handlebars",
     captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity',
     chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseAudioActivity',
@@ -1045,30 +1071,25 @@ promptTypes.launch_intent = promptTypes.base.extend({
 });
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
-    datatype: "barcode",
     intentString: 'com.google.zxing.client.android.SCAN'
 });
 //TODO: Bundle this with a form.
 promptTypes.pulseox = promptTypes.launch_intent.extend({
     type: "pulseox",
-    datatype: "pulseox",
     intentString: 'org.opendatakit.sensors.PULSEOX'
 });
 promptTypes.breathcounter = promptTypes.launch_intent.extend({
     type: "breathcounter",
-    datatype: "breathcounter",
     intentString: 'change.uw.android.BREATHCOUNT'
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
-    datatype: "geopoint",
     intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity'
 });
 /*
 //HTML5 geopoints seem to work in the browser but not in the app.
 promptTypes.geopoint = promptTypes.input_type.extend({
     type: "geopoint",
-    datatype: "geopoint",
     label: 'Capture geopoint:',
     templatePath: "templates/geopoint.handlebars",
     events: {

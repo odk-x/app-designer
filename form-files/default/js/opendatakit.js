@@ -46,10 +46,14 @@ return {
      * immediate return: URI for this media file
      */
     asUri:function(ctxt,mediaPath,widget,attribute) {
-        if ( mediaPath == null ) return null;
+        if ( mediaPath == null ) {
+			return null;
+		}
         
         var info = this.getPlatformInfo(ctxt);
-        if ( info.container != 'Android' ) return mediaPath;
+        if ( info.container != 'Android' ) {
+			return mediaPath;
+		}
         
         if ( mediaPath[0] == '.' ) {
             mediaPath = info.appPath + mediaPath;
@@ -90,6 +94,14 @@ return {
         return qpl;
     },
 
+	setCurrentFormDef:function(formDef) {
+		mdl.formDef = formDef;
+	},
+	
+	getCurrentFormDef:function() {
+		return mdl.formDef;
+	},
+	
     setCurrentFormPath:function(formPath) {
         mdl.formPath = formPath;
     },
@@ -172,8 +184,7 @@ return {
      * use this if you know the formDef is valid within the mdl...
      */
     getSettingValue:function(key) {
-        var formDef = mdl.qp.formDef.value;
-        return this.getSetting(formDef, key);
+        return this.getSetting(this.getCurrentFormDef(), key);
     },
     /*
         Form locales are specified by the translations available on the 
@@ -213,7 +224,9 @@ return {
      */
     getDefaultFormLocale:function(formDef) {
         var locale = this.getSetting(formDef, 'defaultLocale');
-        if ( locale != null ) return locale;
+        if ( locale != null ) {
+			return locale;
+		}
         var locales = this.getFormLocales(formDef);
         if ( locales.length > 0 ) {
             return locales[0].name;
@@ -224,13 +237,11 @@ return {
      use this when the formDef is known to be stored in the mdl
      */
     getDefaultFormLocaleValue:function() {
-        var formDef = mdl.qp.formDef.value;
-        return this.getDefaultFormLocale(formDef);
+        return this.getDefaultFormLocale(this.getCurrentFormDef());
     },
     
     getFormLocalesValue:function() {
-        var formDef = mdl.qp.formDef.value;
-        return this.getFormLocales(formDef);
+        return this.getFormLocales(this.getCurrentFormDef());
     }
 };
 });

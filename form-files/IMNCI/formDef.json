@@ -3458,7 +3458,7 @@
         }, 
         {
             "name": "malnutrition_grade", 
-            "hint": "Weight: {{weight.value}}kg", 
+            "hint": "Weight: {{weight}}kg", 
             "comments": "TODO: Template for plotting weight for age? Or make this a calculated value.", 
             "label": {
                 "default": "Determine grade of malnutrition by plotting weight for age", 

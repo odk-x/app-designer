@@ -336,7 +336,9 @@ window.controller = {
         }));
     },
     getPromptByName: function(name){
-        if ( name == null ) return null;
+        if ( name == null ) {
+			return null;
+		}
         if ( ('' + name).match(/^\d+$/g) ) {
             var idx = Number(name);
             if(idx >= 0 && idx < this.prompts.length){
@@ -355,7 +357,9 @@ window.controller = {
     getPromptByLabel: function(name){
         var prompts = this.prompts;
         for(var i = 0; i < prompts.length; i++){
-            if(prompts[i].type !== 'label') continue;
+            if(prompts[i].type !== 'label') {
+				continue;
+			}
             if(prompts[i].param === name){
                 return prompts[i];
             }
@@ -442,14 +446,14 @@ window.controller = {
         var ctxt = controller.newCallbackContext();
         ctxt.append("controller.opendatakitIgnoreAllChanges", this.currentPromptIdx);
         if ( opendatakit.getCurrentInstanceId() == null ) {
-            collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), null );
+            collect.ignoreAllChangesFailed( opendatakit.getSettingValue('formId'), null );
             ctxt.failure({message: "No instance selected."});
         } else {
             this.ignoreAllChanges($.extend({},ctxt,{success:function() {
-                                collect.ignoreAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+                                collect.ignoreAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId());
                                 ctxt.success();
                             }, failure:function(m) {
-                                collect.ignoreAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId());
+                                collect.ignoreAllChangesFailed( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId());
                                 ctxt.failure(m);
                             }}));
         }
@@ -462,7 +466,7 @@ window.controller = {
         var ctxt = controller.newCallbackContext();
         ctxt.append("controller.opendatakitSaveAllChanges", this.currentPromptIdx);
         if ( opendatakit.getCurrentInstanceId() == null ) {
-            collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), null );
+            collect.saveAllChangesFailed( opendatakit.getSettingValue('formId'), null );
             ctxt.failure({message: "No instance selected."});
         } else {
             this.saveAllChanges(ctxt, asComplete);
@@ -480,11 +484,11 @@ window.controller = {
                         success:function(){
                             database.save_all_changes($.extend({},ctxt,{
                                 success:function() {
-                                    collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), true);
+                                    collect.saveAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), true);
                                     ctxt.success();
                                 },
                                 failure:function(m) {
-                                    collect.saveAllChangesFailed( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), true);
+                                    collect.saveAllChangesFailed( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), true);
                                     ctxt.failure(m);
                                 }}), true);
                         }}));
@@ -492,7 +496,7 @@ window.controller = {
         } else {
             database.save_all_changes($.extend({},ctxt,{
                 success:function() {
-                    collect.saveAllChangesCompleted( database.getTableMetaDataValue('formId'), opendatakit.getCurrentInstanceId(), false);
+                    collect.saveAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), false);
                     ctxt.success();
                 }}), false);
         }
@@ -577,7 +581,7 @@ window.controller = {
                 var prompt = that.getPromptByName(that.currentPromptIdx);
                 that.setPrompt(ctxt, prompt, {changeLocale: true} );
             }
-        }), 'locale', 'string', locale);
+        }), 'locale', locale);
     },
     getFormLocales: function() {
         return opendatakit.getFormLocalesValue();
@@ -630,15 +634,24 @@ window.controller = {
     newContext: function( evt, actionHandlers ) {
         this.eventCount = 1 + this.eventCount;
         var count = this.eventCount;
-        var detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid +
-                      (('currentTarget' in evt) ? ((evt.currentTarget === window) ? ("curTgt: Window") 
-                                                : (" curTgt: " + (('innerHTML' in evt.currentTarget) ?
-                                                        evt.currentTarget.innerHTML :
-                                                        evt.currentTarget.activeElement.innerHTML )).replace(/\s+/g, ' ').substring(0,80)) 
-                      : ((evt.target === window) ? ("tgt: Window") 
-                                                : (" tgt: " + (('innerHTML' in evt.target) ?
-                                                        evt.target.innerHTML :
-                                                        evt.target.activeElement.innerHTML )).replace(/\s+/g, ' ').substring(0,80)));
+		var detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid;
+		var evtActual;
+		var evtTarget;
+		if ( 'currentTarget' in evt ) {
+			detail += ' curTgt: ';
+			evtActual = evt.currentTarget;
+		} else {
+			detail += ' tgt: ';
+			evtActual = evt.target;
+		}
+		
+		if ( evtActual == window) {
+			detail += 'Window';
+		} else {
+			evtTarget = ('innerHTML' in evtActual) ? evtActual.innerHTML : evtActual.activeElement.innerHTML;
+			detail += evtTarget.replace(/\s+/g, ' ').substring(0,80);
+		}
+		
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;

@@ -84,17 +84,9 @@ function(database,   _) {
         now: function() {
             return new Date();
         },
-        //data gets a value by name and parses it.
-        //TODO: When the model starts using objects we will need to get rid of the json parsing.
+        //data gets a value by name.
         data: function(valueName) {
             var datavalue = database.getDataValue(valueName);
-            try {
-                if(datavalue){
-                    return JSON.parse(datavalue);
-                }
-            } catch(e) {
-                return datavalue;
-            }
             return datavalue;
         },
         evaluator: function(code){
