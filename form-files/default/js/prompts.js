@@ -594,7 +594,11 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
 });
 promptTypes.select_one = promptTypes.select.extend({
     renderContext: {
-        select_one: true
+        "select_one": true,
+        "deselect" : {
+            "default" : "Deselect",
+            "hindi" : "अचयनित"
+        }
     },
     events: {
         "change input": "modification",

@@ -668,7 +668,10 @@
         {
             "name": "pulseox", 
             "comments": "TODO: Do we need pulseox for under 2mo?", 
-            "label": "Record pulse and blood oxygen level.", 
+            "label": {
+                "default": "Record pulse and blood oxygen level.", 
+                "hindi": "रिकार्ड नाड़ी और रक्त ऑक्सीजन का स्तर."
+            }, 
             "param": null, 
             "rowNum": 9, 
             "type": "pulseox", 
@@ -2330,9 +2333,13 @@
         {
             "name": "pulseox", 
             "rowNum": 9, 
-            "type": "pulseox", 
             "param": null, 
-            "label": "Record pulse and blood oxygen level."
+            "type": "pulseox", 
+            "comments": "Google translated", 
+            "label": {
+                "default": "Record pulse and blood oxygen level.", 
+                "hindi": "रिकार्ड नाड़ी और रक्त ऑक्सीजन का स्तर."
+            }
         }, 
         {
             "rowNum": 10, 

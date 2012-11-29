@@ -5,12 +5,18 @@ function(promptTypes, $,       _) {
             type: "pulseox",
             datatype: "pulseox",
             intentString: 'org.opendatakit.sensors.PULSEOX',
-            buttonLabel: 'Launch PulseOx'
+            buttonLabel: {
+                'default': 'Launch PulseOx',
+                'hindi': 'शुरू करना PulseOx'
+            }
         }),
         "breathcounter" : promptTypes.launch_intent.extend({
             type: "breathcounter",
             datatype: "breathcounter",
-            buttonLabel: 'Launch breath counter',
+            buttonLabel: {
+                'default': 'Launch breath counter',
+                'hindi': 'शुरू करना सांस की गिनती'
+            },
             intentString: 'change.uw.android.BREATHCOUNT',
             parseValue: function(unparsedValue) {
                 return { 'value' : unparsedValue };
