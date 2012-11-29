@@ -377,119 +377,119 @@
         ], 
         "vaccinations": [
             {
+                "rowNum": 30, 
                 "label": {
                     "default": "BCG", 
                     "hindi": "बी. सी. गी"
                 }, 
-                "rowNum": 30, 
                 "age_weeks": 0, 
                 "name": "bcg"
             }, 
             {
+                "rowNum": 31, 
                 "label": {
                     "default": "OPV-0", 
                     "hindi": "ओ. पी. वी.-०"
                 }, 
-                "rowNum": 31, 
                 "age_weeks": 0, 
                 "name": "opv0"
             }, 
             {
+                "rowNum": 32, 
                 "label": {
                     "default": "DPT-1", 
                     "hindi": "दी. पी. ती -१"
                 }, 
-                "rowNum": 32, 
                 "age_weeks": 6, 
                 "name": "dpt1"
             }, 
             {
+                "rowNum": 33, 
                 "label": {
                     "default": "OPV-1 + Hepatitis B-1", 
                     "hindi": "ओ. पी. वी.-१ + हेपतितस बी-१"
                 }, 
-                "rowNum": 33, 
                 "age_weeks": 6, 
                 "name": "opv1hepatitusb1"
             }, 
             {
+                "rowNum": 34, 
                 "label": {
                     "default": "DPT-2", 
                     "hindi": "डीपीटी-2"
                 }, 
-                "rowNum": 34, 
                 "age_weeks": 10, 
                 "name": "dpt2"
             }, 
             {
+                "rowNum": 35, 
                 "label": {
                     "default": "OPV-2 + Hepatitis B-2", 
                     "hindi": "ओपीवी-2 + हेपेटाइटिस बी -2"
                 }, 
-                "rowNum": 35, 
                 "age_weeks": 10, 
                 "name": "opv2hepatitusb2"
             }, 
             {
+                "rowNum": 36, 
                 "label": {
                     "default": "DPT-3", 
                     "hindi": "डीपीटी-3"
                 }, 
-                "rowNum": 36, 
                 "age_weeks": 14, 
                 "name": "dpt3"
             }, 
             {
+                "rowNum": 37, 
                 "label": {
                     "default": "OPV-3 + Hepatitis B-3", 
                     "hindi": "ओपीवी-3 + हेपेटाइटिस बी -3"
                 }, 
-                "rowNum": 37, 
                 "age_weeks": 14, 
                 "name": "opv3hepatitusb3"
             }, 
             {
+                "rowNum": 38, 
                 "label": {
                     "default": "Measles", 
                     "hindi": "खसरा"
                 }, 
-                "rowNum": 38, 
                 "age_weeks": 36, 
                 "name": "measles"
             }, 
             {
+                "rowNum": 39, 
                 "label": {
                     "default": "Vitamin A", 
                     "hindi": "विटामिन ए"
                 }, 
-                "rowNum": 39, 
                 "age_weeks": 36, 
                 "name": "vitamin_a"
             }, 
             {
+                "rowNum": 40, 
                 "label": {
                     "default": "DPT", 
                     "hindi": "डीपीटी"
                 }, 
-                "rowNum": 40, 
                 "age_weeks": 64, 
                 "name": "dpt"
             }, 
             {
+                "rowNum": 41, 
                 "label": {
                     "default": "OPV", 
                     "hindi": "ओपीवी"
                 }, 
-                "rowNum": 41, 
                 "age_weeks": 64, 
                 "name": "opv"
             }, 
             {
+                "rowNum": 42, 
                 "label": {
                     "default": "DT", 
                     "hindi": "डीटी"
                 }, 
-                "rowNum": 42, 
                 "age_weeks": 240, 
                 "name": "dt"
             }
@@ -2331,22 +2331,11 @@
             "comments": "Everything above here will be skipped."
         }, 
         {
-            "name": "pulseox", 
             "rowNum": 9, 
-            "param": null, 
-            "type": "pulseox", 
-            "comments": "Google translated", 
-            "label": {
-                "default": "Record pulse and blood oxygen level.", 
-                "hindi": "रिकार्ड नाड़ी और रक्त ऑक्सीजन का स्तर."
-            }
-        }, 
-        {
-            "rowNum": 10, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 11, 
+                    "rowNum": 10, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2356,7 +2345,7 @@
                 }, 
                 {
                     "name": "able_to_drink", 
-                    "rowNum": 12, 
+                    "rowNum": 11, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2366,7 +2355,7 @@
                 }, 
                 {
                     "name": "vomit_everything", 
-                    "rowNum": 13, 
+                    "rowNum": 12, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2376,7 +2365,7 @@
                 }, 
                 {
                     "name": "convulsions", 
-                    "rowNum": 14, 
+                    "rowNum": 13, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2387,8 +2376,16 @@
             ]
         }, 
         {
+            "name": "pulseox", 
+            "rowNum": 15, 
+            "param": null, 
+            "type": "pulseox", 
+            "comments": "Google translated / CHANGED", 
+            "label": "Record pulse and oxygen saturation"
+        }, 
+        {
             "name": "lethargic", 
-            "rowNum": 16, 
+            "rowNum": 17, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": {
@@ -2397,11 +2394,11 @@
             }
         }, 
         {
-            "rowNum": 17, 
+            "rowNum": 18, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 18, 
+                    "rowNum": 19, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2411,7 +2408,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 19, 
+                    "rowNum": 20, 
                     "type": "note", 
                     "condition": "selected(data('able_to_drink'), 'no')", 
                     "label": {
@@ -2421,7 +2418,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 20, 
+                    "rowNum": 21, 
                     "type": "note", 
                     "condition": "selected(data('vomit_everything'), 'yes')", 
                     "label": {
@@ -2431,7 +2428,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 21, 
+                    "rowNum": 22, 
                     "type": "note", 
                     "condition": "selected(data('convulsions'), 'yes')", 
                     "label": {
@@ -2441,7 +2438,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 22, 
+                    "rowNum": 23, 
                     "type": "note", 
                     "condition": "selected(data('lethargic'), 'yes')", 
                     "label": {
@@ -2451,7 +2448,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 23, 
+                    "rowNum": 24, 
                     "type": "note", 
                     "condition": "calculates.bloodOxygenSat() < 90", 
                     "label": {
@@ -2468,19 +2465,19 @@
                         "hindi": "ख़तरे के आम चिन्ौ वाले बाकछे को <strong> तुरंत </strong> ध्यान देने की ज़रूरत  है. आकलन और रेफएरल पूर्व उपकर तुरंत दे, जिससे की रेफएरल मैं देरी नही हो."
                     }, 
                     "param": null, 
-                    "rowNum": 24, 
+                    "rowNum": 25, 
                     "type": "acknowledge"
                 }
             ], 
             "condition": "calculates.danger_signs_present()"
         }, 
         {
-            "rowNum": 26, 
+            "rowNum": 27, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "difficulty_breathing", 
-                    "rowNum": 27, 
+                    "rowNum": 28, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2499,7 +2496,7 @@
                         "default": "For how long?", 
                         "hindi": "पूछें कब से?"
                     }, 
-                    "rowNum": 28, 
+                    "rowNum": 29, 
                     "type": "integer", 
                     "condition": "selected(data('difficulty_breathing'), 'yes')"
                 }
@@ -2507,14 +2504,14 @@
         }, 
         {
             "comments": "Disabling based off Manoj's comment that we should check all signs.", 
-            "rowNum": 30, 
+            "rowNum": 31, 
             "param": "above_2mo_diarrhoea_section", 
             "type": "goto", 
             "condition": "false && selected(data('difficulty_breathing'), 'no')"
         }, 
         {
             "name": "breath_count", 
-            "rowNum": 31, 
+            "rowNum": 32, 
             "type": "breathcounter", 
             "param": null, 
             "label": {
@@ -2530,7 +2527,7 @@
                 "default": "Breath count is elevated. Repeat breath count.", 
                 "hindi": "सास की गिनती ज़्यादा है. एक बार और गिनिए."
             }, 
-            "rowNum": 32, 
+            "rowNum": 33, 
             "type": "breathcounter", 
             "condition": "data('breath_count') >= 60"
         }, 
@@ -2546,17 +2543,17 @@
                 "default": "Look for chest indrawing.", 
                 "hindi": "पसली का अत्यधिक धन्सना देखें."
             }, 
-            "rowNum": 33, 
+            "rowNum": 34, 
             "type": "select_one"
         }, 
         {
-            "rowNum": 62, 
+            "rowNum": 63, 
             "type": "label", 
             "param": "above_2mo_diarrhoea_section"
         }, 
         {
             "name": "diarrhoea", 
-            "rowNum": 63, 
+            "rowNum": 64, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": {
@@ -2566,17 +2563,17 @@
         }, 
         {
             "comments": "Disabling based off Manoj's comment that we should check all signs.", 
-            "rowNum": 64, 
+            "rowNum": 65, 
             "param": "above_2mo_fever_section", 
             "type": "goto", 
             "condition": "false && selected(data('diarrhoea'), 'no')"
         }, 
         {
-            "rowNum": 65, 
+            "rowNum": 66, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 66, 
+                    "rowNum": 67, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2586,7 +2583,7 @@
                 }, 
                 {
                     "name": "diarrhoea_days", 
-                    "rowNum": 67, 
+                    "rowNum": 68, 
                     "type": "integer", 
                     "param": null, 
                     "label": {
@@ -2596,7 +2593,7 @@
                 }, 
                 {
                     "name": "blood_in_stool", 
-                    "rowNum": 68, 
+                    "rowNum": 69, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2608,11 +2605,11 @@
             "condition": "selected(data('diarrhoea'), 'yes')"
         }, 
         {
-            "rowNum": 70, 
+            "rowNum": 71, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 71, 
+                    "rowNum": 72, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2633,12 +2630,12 @@
                         "hindi": "सुस्त या बेहोश है?"
                     }, 
                     "param": "yes_no", 
-                    "rowNum": 72, 
+                    "rowNum": 73, 
                     "type": "select_one"
                 }, 
                 {
                     "name": "restless", 
-                    "rowNum": 73, 
+                    "rowNum": 74, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2650,7 +2647,7 @@
         }, 
         {
             "name": "sunken_eyes", 
-            "rowNum": 75, 
+            "rowNum": 76, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": {
@@ -2659,11 +2656,11 @@
             }
         }, 
         {
-            "rowNum": 76, 
+            "rowNum": 77, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 77, 
+                    "rowNum": 78, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2673,7 +2670,7 @@
                 }, 
                 {
                     "name": "drinking_poorly", 
-                    "rowNum": 78, 
+                    "rowNum": 79, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2683,7 +2680,7 @@
                 }, 
                 {
                     "name": "drinking_eagerly", 
-                    "rowNum": 79, 
+                    "rowNum": 80, 
                     "param": "yes_no", 
                     "type": "select_one", 
                     "comments": "This is probably mutex with drinking_poorly but I'm always showing it to be on the safe side.", 
@@ -2698,7 +2695,7 @@
             "name": "skin_elasticity", 
             "image": "./img/pinchskin.jpg", 
             "type": "select_one", 
-            "rowNum": 81, 
+            "rowNum": 82, 
             "param": "skin_elasticity", 
             "label": {
                 "default": "Pinch the skin of the abdomen. Does it go back:", 
@@ -2706,17 +2703,17 @@
             }
         }, 
         {
-            "rowNum": 133, 
+            "rowNum": 134, 
             "type": "label", 
             "param": "above_2mo_fever_section"
         }, 
         {
-            "rowNum": 134, 
+            "rowNum": 135, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "axillary_temperature_possible", 
-                    "rowNum": 135, 
+                    "rowNum": 136, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": {
@@ -2732,13 +2729,13 @@
                         "default": "Measure axillary temperature:", 
                         "hindi": "कक्षा तापमान"
                     }, 
-                    "rowNum": 136, 
+                    "rowNum": 137, 
                     "type": "decimal", 
                     "condition": "selected(data('axillary_temperature_possible'), 'yes')"
                 }, 
                 {
                     "name": "feel_for_fever", 
-                    "rowNum": 137, 
+                    "rowNum": 138, 
                     "param": "present", 
                     "type": "select_one", 
                     "condition": "selected(data('axillary_temperature_possible'), 'no')", 
@@ -2749,7 +2746,7 @@
                 }, 
                 {
                     "name": "fever_by_history", 
-                    "rowNum": 138, 
+                    "rowNum": 139, 
                     "param": "yes_no", 
                     "type": "select_one", 
                     "condition": "selected(data('feel_for_fever'), 'not_present') && data('axillary_temperature') < 37.5", 
@@ -2761,16 +2758,16 @@
             ]
         }, 
         {
-            "rowNum": 140, 
+            "rowNum": 141, 
             "type": "label", 
             "param": "above_2mo_fever_assessment"
         }, 
         {
-            "rowNum": 141, 
+            "rowNum": 142, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 142, 
+                    "rowNum": 143, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2784,7 +2781,7 @@
                         "default": "(in days)", 
                         "hindi": "दीनो मैं"
                     }, 
-                    "rowNum": 143, 
+                    "rowNum": 144, 
                     "type": "integer", 
                     "param": null, 
                     "label": {
@@ -2801,7 +2798,7 @@
                         "hindi": "क्या बुखार रोज़ाना आता है?"
                     }, 
                     "param": "yes_no", 
-                    "rowNum": 144, 
+                    "rowNum": 145, 
                     "type": "select_one", 
                     "condition": "data('fever_days') > 7"
                 }
@@ -2809,13 +2806,13 @@
             "condition": "calculates.fever()"
         }, 
         {
-            "rowNum": 146, 
+            "rowNum": 147, 
             "type": "label", 
             "param": "above_2mo_fever_assessment_end"
         }, 
         {
             "name": "stiff_neck", 
-            "rowNum": 147, 
+            "rowNum": 148, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": {
@@ -2824,16 +2821,16 @@
             }
         }, 
         {
-            "rowNum": 176, 
+            "rowNum": 177, 
             "type": "label", 
             "param": "above_2mo_malnutrition_section"
         }, 
         {
-            "rowNum": 177, 
+            "rowNum": 178, 
             "type": "screen", 
             "prompts": [
                 {
-                    "rowNum": 178, 
+                    "rowNum": 179, 
                     "type": "note", 
                     "param": null, 
                     "label": {
@@ -2843,7 +2840,7 @@
                 }, 
                 {
                     "name": "wasting", 
-                    "rowNum": 179, 
+                    "rowNum": 180, 
                     "type": "select_one", 
                     "param": "present", 
                     "label": {
@@ -2853,7 +2850,7 @@
                 }, 
                 {
                     "name": "oedema", 
-                    "rowNum": 180, 
+                    "rowNum": 181, 
                     "type": "select_one", 
                     "param": "present", 
                     "label": {
@@ -2872,17 +2869,17 @@
                 "hindi": "वज़न को ग्रोत चार्ट पर दर्शा कर कुपोषण का ग्रेड निधारित करें."
             }, 
             "param": "malnutrition_grade", 
-            "rowNum": 182, 
+            "rowNum": 183, 
             "type": "select_one"
         }, 
         {
-            "rowNum": 217, 
+            "rowNum": 218, 
             "type": "label", 
             "param": "above_2mo_anaemia"
         }, 
         {
             "name": "anaemia_check", 
-            "rowNum": 218, 
+            "rowNum": 219, 
             "required": true, 
             "type": "select_one", 
             "param": "no_some_severe", 
@@ -2892,14 +2889,14 @@
             }
         }, 
         {
-            "rowNum": 247, 
+            "rowNum": 248, 
             "type": "label", 
             "param": "above_2mo_check_immunization_status"
         }, 
         {
             "name": "needed_vaccinations", 
             "choice_filter": "context.age_weeks <= Math.round(calculates.daysOld() / 7)", 
-            "rowNum": 248, 
+            "rowNum": 249, 
             "type": "select_multiple", 
             "param": "vaccinations", 
             "label": {
@@ -2908,13 +2905,13 @@
             }
         }, 
         {
-            "rowNum": 249, 
+            "rowNum": 250, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "given_vaccinations", 
                     "choice_filter": "selected(data('needed_vaccinations'), context.name)", 
-                    "rowNum": 250, 
+                    "rowNum": 251, 
                     "type": "select_multiple", 
                     "param": "vaccinations", 
                     "label": {
@@ -2924,7 +2921,7 @@
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 251, 
+                    "rowNum": 252, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (9 * 30)", 
                     "label": {
@@ -2938,7 +2935,7 @@
                         "default": "100,000 IU (1ml) at 9 months with measles immunization", 
                         "hindi": "१००,००० आई . यू (१ मिली) ९ महीने पर खसरा पर ख़तरा (माता जी) टीकाकरण के साथ."
                     }, 
-                    "rowNum": 252, 
+                    "rowNum": 253, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (9 * 30) && calculates.daysOld() < (16 * 30)"
                 }, 
@@ -2948,7 +2945,7 @@
                         "default": "200,000 IU (2ml) at 16-18 months with DPT Booster", 
                         "hindi": "२००,००० आई. यू (२ मिली) १६-१८ महीने मैं दि.पी.ती बूस्टर के साथ"
                     }, 
-                    "rowNum": 253, 
+                    "rowNum": 254, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (16 * 30) && calculates.daysOld() < (24 * 30)"
                 }, 
@@ -2958,7 +2955,7 @@
                         "default": "200,000 IU (2ml) at 24 months", 
                         "hindi": "२००,००० आई. यू (२ मिली) २४ महीने पर"
                     }, 
-                    "rowNum": 254, 
+                    "rowNum": 255, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (24 * 30) && calculates.daysOld() < (30 * 30)"
                 }, 
@@ -2968,7 +2965,7 @@
                         "default": "200,000 IU (2ml) at 30 months", 
                         "hindi": "२००,००० आई. यू (२ मिली) ३० महीने पर"
                     }, 
-                    "rowNum": 255, 
+                    "rowNum": 256, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (30 * 30) && calculates.daysOld() < (36 * 30)"
                 }, 
@@ -2978,12 +2975,12 @@
                         "default": "200,000 IU (2ml) at 36 months", 
                         "hindi": "२००,००० आई. यू (२ मिली) ३६ महीने पर"
                     }, 
-                    "rowNum": 256, 
+                    "rowNum": 257, 
                     "type": "note", 
                     "condition": "calculates.daysOld() >= (36 * 30)"
                 }, 
                 {
-                    "rowNum": 257, 
+                    "rowNum": 258, 
                     "type": "acknowledge", 
                     "name": "acknowledge_give_vitamin_a", 
                     "param": null
@@ -2994,7 +2991,7 @@
                         "default": "<ul>\n<li>The child is 6 months of age or older, and</li>\n<li>Has not received Pediatric IFA Tablet for 100 days in last one year.</li>\n</ul>", 
                         "hindi": "<ul><li>अगर बच्चे की उमर ६ महीने से उपर है और</li><li> एफ. ए की १०० दिन के लिए १ साल से नही मिली. .</li></ul>"
                     }, 
-                    "rowNum": 258, 
+                    "rowNum": 259, 
                     "type": "acknowledge", 
                     "param": null, 
                     "label": {
@@ -3006,7 +3003,7 @@
         }, 
         {
             "name": "other_problems", 
-            "rowNum": 260, 
+            "rowNum": 261, 
             "param": "yes_no", 
             "type": "select_one", 
             "comments": "Added based on correspondence with Amy/Manoj", 
@@ -3017,7 +3014,7 @@
         }, 
         {
             "name": "refer_for_other_problems", 
-            "rowNum": 261, 
+            "rowNum": 262, 
             "param": null, 
             "type": "acknowledge", 
             "condition": "selected(data('other_problems'), 'yes')", 
