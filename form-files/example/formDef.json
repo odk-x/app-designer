@@ -119,40 +119,26 @@
             "label": "Scan a barcode"
         }, 
         {
-            "name": "pulseox", 
-            "rowNum": 9, 
-            "type": "pulseox", 
-            "param": null, 
-            "label": "Record blood oxygen level"
-        }, 
-        {
-            "name": "breathcount", 
-            "rowNum": 10, 
-            "type": "breathcounter", 
-            "param": null, 
-            "label": "Record breath count"
-        }, 
-        {
             "name": "picture", 
-            "rowNum": 11, 
+            "rowNum": 9, 
             "type": "image", 
             "param": null, 
             "label": "Take a picture"
         }, 
         {
             "name": "recording", 
-            "rowNum": 12, 
+            "rowNum": 10, 
             "type": "audio", 
             "param": null, 
             "label": "Make a recording"
         }, 
         {
-            "rowNum": 13, 
+            "rowNum": 11, 
             "type": "label", 
             "param": "intents_end"
         }, 
         {
-            "rowNum": 14, 
+            "rowNum": 12, 
             "type": "goto", 
             "param": "dynamic_label_end", 
             "condition": "not(selected(data('examples'), 'dynamic_label'))"
@@ -160,83 +146,83 @@
         {
             "name": "name", 
             "hint": "Please use your full name", 
-            "rowNum": 15, 
+            "rowNum": 13, 
             "type": "text", 
             "param": null, 
             "label": "Enter your name"
         }, 
         {
-            "rowNum": 16, 
+            "rowNum": 14, 
             "type": "note", 
             "param": null, 
             "label": "Hello {{name.value}}"
         }, 
         {
-            "rowNum": 17, 
+            "rowNum": 15, 
             "type": "label", 
             "param": "dynamic_label_end"
         }, 
         {
-            "rowNum": 18, 
+            "rowNum": 16, 
             "type": "goto", 
             "param": "datetime_end", 
             "condition": "not(selected(data('examples'), 'datetime'))"
         }, 
         {
             "name": "born", 
-            "rowNum": 19, 
+            "rowNum": 17, 
             "type": "date", 
             "param": null, 
             "label": "When were you born?"
         }, 
         {
             "param": null, 
-            "rowNum": 20, 
+            "rowNum": 18, 
             "type": "note", 
             "condition": "data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
             "label": "Happy Birthday!"
         }, 
         {
             "name": "time", 
-            "rowNum": 21, 
+            "rowNum": 19, 
             "type": "time", 
             "param": null, 
             "label": "What time is it?"
         }, 
         {
             "name": "datetime", 
-            "rowNum": 22, 
+            "rowNum": 20, 
             "type": "datetime", 
             "param": null, 
             "label": "When will you be available for a follow up survey?"
         }, 
         {
-            "rowNum": 23, 
+            "rowNum": 21, 
             "type": "label", 
             "param": "datetime_end"
         }, 
         {
             "name": "location", 
-            "rowNum": 24, 
+            "rowNum": 22, 
             "param": null, 
             "type": "geopoint", 
             "condition": "selected(data('examples'), 'geopoint')", 
             "label": "Record your location:"
         }, 
         {
-            "rowNum": 25, 
+            "rowNum": 23, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "visited_continents", 
-                    "rowNum": 26, 
+                    "rowNum": 24, 
                     "type": "select", 
                     "param": "continents", 
                     "label": "Which continents have you visited?"
                 }, 
                 {
                     "name": "visited_seattle", 
-                    "rowNum": 27, 
+                    "rowNum": 25, 
                     "param": "yesno", 
                     "type": "select_one", 
                     "condition": "calculates.ask_about_seattle()", 
@@ -246,32 +232,32 @@
             "condition": "selected(data('examples'), 'screen_group')"
         }, 
         {
-            "rowNum": 29, 
+            "rowNum": 27, 
             "type": "goto", 
             "param": "media_end", 
             "condition": "not(selected(data('examples'), 'media'))"
         }, 
         {
-            "rowNum": 30, 
+            "rowNum": 28, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "audio_test", 
-                    "rowNum": 31, 
+                    "rowNum": 29, 
                     "type": "audio", 
                     "param": null, 
                     "label": "Make a recording:"
                 }, 
                 {
                     "name": "video_test", 
-                    "rowNum": 32, 
+                    "rowNum": 30, 
                     "type": "video", 
                     "param": null, 
                     "label": "Take a video:"
                 }, 
                 {
                     "name": "image_test", 
-                    "rowNum": 33, 
+                    "rowNum": 31, 
                     "type": "image", 
                     "param": null, 
                     "label": "Take a picture:"
@@ -279,7 +265,7 @@
             ]
         }, 
         {
-            "rowNum": 35, 
+            "rowNum": 33, 
             "audio": "audio/carrioncrow.mp3", 
             "type": "note", 
             "image": "img/dolphin.png", 
@@ -287,27 +273,27 @@
             "label": "This prompt shows how to embed media in labels."
         }, 
         {
-            "rowNum": 36, 
+            "rowNum": 34, 
             "type": "label", 
             "param": "media_end"
         }, 
         {
             "name": "x", 
-            "rowNum": 37, 
+            "rowNum": 35, 
             "type": "with_next", 
             "assign": 10, 
             "param": null
         }, 
         {
             "param": null, 
-            "rowNum": 38, 
+            "rowNum": 36, 
             "type": "note", 
             "condition": "selected(data('examples'), 'assignment')", 
             "label": "Assigning a value of 10 to x."
         }, 
         {
             "param": null, 
-            "rowNum": 39, 
+            "rowNum": 37, 
             "type": "note", 
             "condition": "data('x') === 10", 
             "label": "x = {{x.value}}"
@@ -316,7 +302,7 @@
             "name": "specialTemplateTest", 
             "param": null, 
             "label": "This is a custom template that uses D3.js:", 
-            "rowNum": 40, 
+            "rowNum": 38, 
             "type": "text", 
             "condition": "selected(data('examples'), 'custom_template')", 
             "templatePath": "test.handlebars"
@@ -332,7 +318,7 @@
             "param": null, 
             "label": "How would you rate this survey?", 
             "default": 5, 
-            "rowNum": 41, 
+            "rowNum": 39, 
             "type": "integer"
         }
     ], 

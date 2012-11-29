@@ -1280,6 +1280,8 @@ promptTypes.with_next = promptTypes.base.extend({
 		that.setValue(ctxt, value);
     }
 });
+promptTypes.error = promptTypes.base;
+
 //Ensure all prompt type names are lowercase.
 //TODO: Move to a test suite.
 _.each(_.keys(promptTypes), function(promptTypeName){
