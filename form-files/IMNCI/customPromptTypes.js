@@ -6,8 +6,8 @@ function(promptTypes, $,       _) {
             datatype: "pulseox",
             intentString: 'org.opendatakit.sensors.PULSEOX',
             buttonLabel: {
-                'default': 'Launch PulseOx',
-                'hindi': 'शुरू करना PulseOx'
+                'default': 'Get Oxygen Saturation',
+                'hindi': 'Get Oxygen Saturation'
             }
         }),
         "breathcounter" : promptTypes.launch_intent.extend({
