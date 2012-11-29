@@ -13,11 +13,6 @@ promptTypes.base = Backbone.View.extend({
     constraint_message: "Constraint violated.",
     invalid_value_message: "Invalid value.",
     required_message: "Required value not provided.",
-    // track how many times we've tried to retrieve and compile the 
-    // handlebars template for this prompt.
-    initializeTemplateMaxTryCount: 4,
-    initializeTemplateTryCount: 0,
-    initializeTemplateFailed: false,
     //renderContext is a dynamic object to be passed into the render function.
     //renderContext is meant to be private.
     renderContext: {},
@@ -28,7 +23,7 @@ promptTypes.base = Backbone.View.extend({
     baseInputAttributes: {},
     inputAttributes: {},
     initialize: function() {
-        this.initializeTemplate();
+        //this.initializeTemplate();
         this.initializeRenderContext();
         this.afterInitialize();
     },
@@ -60,9 +55,15 @@ promptTypes.base = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
+    /*
+    // track how many times we've tried to retrieve and compile the 
+    // handlebars template for this prompt.
+    initializeTemplateMaxTryCount: 4,
+    initializeTemplateTryCount: 0,
+    initializeTemplateFailed: false,
     initializeTemplate: function() {
         return;
-        /*
+        
         //if (this.template != null) return;
         var that = this;
         var f = function() {
@@ -85,9 +86,10 @@ promptTypes.base = Backbone.View.extend({
             }
         };
         f();
-        */
+        
     },
-
+    */
+    //TODO: I think we can remove isInitializeComplete
     isInitializeComplete: function() {
         return (this.templatePath == null || this.template != null);
     },
@@ -110,7 +112,13 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
+    /**
+     * afterInitialize is user defined
+     **/
     afterInitialize: function() {},
+    /**
+     * prompt types that override onActivate are expected to call baseActivate
+     **/
     baseActivate: function(ctxt) {
         var that = this;
         function callFunctionsInSeries(functions){
@@ -122,16 +130,6 @@ promptTypes.base = Backbone.View.extend({
         }
         callFunctionsInSeries(that.additionalActivateFunctions);
     },
-    /*
-    baseActivate: function(ctxt) {
-        var that = this;
-        var additionalActivateComplete = _.after(that.additionalActivateFunctions.length, function(){
-            that.whenTemplateIsReady(ctxt);
-        });
-        _.each(that.additionalActivateFunctions, function(additionalActivateFunc){
-            additionalActivateFunc($.extend({}, ctxt, { success : additionalActivateComplete}));
-        });
-    },*/
     onActivate: function(ctxt) {
         this.baseActivate(ctxt);
     },
@@ -191,10 +189,12 @@ promptTypes.base = Backbone.View.extend({
         return this;
         */
     },
-    //baseValidate isn't meant to be overidden or called externally.
-    //It does validation that will be common to most prompts.
-    //Validate is menat be overridden and publicly called. 
-    //It is validate's responsibility to call baseValidate.
+    /**
+     * baseValidate isn't meant to be overidden or called externally.
+     * It does validation that will be common to most prompts.
+     * Validate is meant be overridden and publicly called. 
+     * It is validate's responsibility to call baseValidate.
+     **/
     baseValidate: function(context) {
         var that = this;
         var isRequired = false;
@@ -280,13 +280,15 @@ promptTypes.base = Backbone.View.extend({
         // a page (e.g., update calculated fields).
     },
     */
+    /*
+    //TODO: I can't find any refrences to these, so we should probably remove them.
     validationFailedAction: function(isMoveBackward) {
         alert(this.validationFailedMessage);
     },
     requiredFieldMissingAction: function(isMovingBackward) {
         alert(this.requiredFieldMissingMessage);
     }
-
+    */
 });
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
@@ -601,7 +603,11 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
 });
 promptTypes.select_one = promptTypes.select.extend({
     renderContext: {
-        select_one: true
+        "select_one": true,
+        "deselect" : {
+            "default" : "Deselect",
+            "hindi" : "अचयनित"
+        }
     },
     events: {
         "change input": "modification",
@@ -1005,11 +1011,13 @@ promptTypes.launch_intent = promptTypes.base.extend({
     events: {
         "click .launch": "launch"
     },
+    parseValue: JSON.parse,
+    serializeValue: JSON.stringify,
     onActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
         if(typeof value !== 'undefined'){
-            value = JSON.parse(value);
+            value = that.parseValue(value);
         }
         that.renderContext.value = value;
         that.renderContext.buttonLabel = that.buttonLabel;
@@ -1018,8 +1026,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
     launch: function(evt) {
         var ctxt = controller.newContext(evt);
         var platInfo = opendatakit.getPlatformInfo(ctxt);
-        $('#block-ui').show();
-        $('#block-ui').on('swipeleft swiperight click', function(evt) {
+        $('#block-ui').show().on('swipeleft swiperight click', function(evt) {
             evt.stopPropagation();
         });
         //We assume that the webkit could go away when an intent is launched,
@@ -1030,9 +1037,11 @@ promptTypes.launch_intent = promptTypes.base.extend({
             ctxt.success();
         } else {
             alert("Should be OK got >" + outcome + "<");
-            $('#block-ui').hide();
+            $('#block-ui').hide().off();
             ctxt.failure({message: "Action canceled."});
         }
+        //Removing this because I want to simulate intents
+        //when not on android.
     },
     /**
      * When the intent returns a result this factory function creates a callback to process it.
@@ -1040,7 +1049,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
      */
     getCallback: function(ctxt, bypath, byaction) {
         var that = this;
-        $('#block-ui').hide();
+        $('#block-ui').hide().off();
         return function(ctxt, path, action, jsonString) {
             var jsonObject;
             ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " action: " + action);
@@ -1058,7 +1067,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                             that.render();
                             ctxt.success();
                         }
-                    }), JSON.stringify(jsonObject.result));
+                    }), that.serializeValue(jsonObject.result));
                 }
             } else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " action: " + action);
@@ -1073,15 +1082,7 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
     intentString: 'com.google.zxing.client.android.SCAN'
 });
-//TODO: Bundle this with a form.
-promptTypes.pulseox = promptTypes.launch_intent.extend({
-    type: "pulseox",
-    intentString: 'org.opendatakit.sensors.PULSEOX'
-});
-promptTypes.breathcounter = promptTypes.launch_intent.extend({
-    type: "breathcounter",
-    intentString: 'change.uw.android.BREATHCOUNT'
-});
+
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
     intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity'
@@ -1132,7 +1133,7 @@ promptTypes.screen = promptTypes.base.extend({
     prompts: [],
     initialize: function() {
         var that = this;
-        this.prompts = builder.initializePrompts(this.prompts);
+        this.prompts = builder.initializePrompts(this.prompts, function(){});
         //Wire up the prompts so that if any of them rerender the screen rerenders.
         //TODO: Think about whether there is a better way of doing this.
         //Maybe bind this or subprompts to database change events instead?
@@ -1142,7 +1143,7 @@ promptTypes.screen = promptTypes.base.extend({
                 that.render();
             };
         });
-        this.initializeTemplate();
+        //this.initializeTemplate();
         this.initializeRenderContext();
         this.afterInitialize();
     },
@@ -1260,6 +1261,10 @@ promptTypes.note = promptTypes.base.extend({
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
     autoAdvance: false,
+    acknLabel: {
+        "default": "Acknowledge",
+        "hindi": "स्वीकार करना"
+    },
     modification: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append('acknowledge.modification', this.promptIdx);
@@ -1269,7 +1274,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
             success: function() {
                 that.renderContext.choices = [{
                     "name": "acknowledge",
-                    "label": "Acknowledge",
+                    "label": that.acknLabel,
                     "checked": acknowledged
                 }];
                 if (acknowledged && that.autoAdvance) {
@@ -1291,7 +1296,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         }
         that.renderContext.choices = [{
             "name": "acknowledge",
-            "label": "Acknowledge",
+            "label": that.acknLabel,
             "checked": acknowledged
         }];
         this.baseActivate(ctxt);
@@ -1314,6 +1319,7 @@ promptTypes.with_next = promptTypes.base.extend({
     }
 });
 //Ensure all prompt type names are lowercase.
+//TODO: Move to a test suite.
 _.each(_.keys(promptTypes), function(promptTypeName){
     if(promptTypeName !== promptTypeName.toLowerCase()) {
         alert("Invalid prompt type name: " + promptTypeName);

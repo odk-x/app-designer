@@ -10,7 +10,7 @@
  *
  */
 define(['screenManager','opendatakit','database', 'jquery'],
-function(ScreenManager,  opendatakit,  database, $) {
+function(ScreenManager,  opendatakit,  database,   $) {
 window.controller = {
     eventCount: 0,
     screenManager : null,
@@ -53,6 +53,7 @@ window.controller = {
             }
         } catch(ex) {
             var e = (ex != null) ? ex.message  + " stack: " + ex.stack : "undef";
+            console.error(prompt);
             console.error("controller.validate: Exception: " + e );
             ctxt.append('controller.validate.exception', e );
             ctxt.failure({message: "Exception occurred while evaluating constraints"});
@@ -113,7 +114,6 @@ window.controller = {
     advanceToScreenPrompt: function(ctxt, prompt) {
         var nextPrompt = null;
         var that = this;
-
         try {
             // ***The order of the else-if statements below is very important.***
             // i.e., First test if the 'condition' is false, and skip to the next 
@@ -134,6 +134,8 @@ window.controller = {
         } catch (e) {
             if ( ctxt.strict ) {
                 ctxt.append("controller.advanceToScreenPrompt.exception.strict", e);
+                console.error(prompt);
+                console.error(nextPrompt);
                 ctxt.failure({message: "Exception while evaluating condition() expression. See console log."});
                 return;
             } else {
@@ -142,7 +144,7 @@ window.controller = {
             }
         }
         
-        if(nextPrompt != null) {
+        if(nextPrompt) {
             that.advanceToScreenPrompt(ctxt, nextPrompt);
         } else {
             ctxt.success(prompt);
