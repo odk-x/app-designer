@@ -30,7 +30,7 @@ promptTypes.base = Backbone.View.extend({
     },
     whenTemplateIsReady: function(ctxt){
         var that = this;
-        if(this.template){
+        if(this.template) {
             ctxt.success();
         } else if(this.templatePath) {
             requirejs(['text!'+this.templatePath], function(source) {
@@ -705,7 +705,7 @@ promptTypes.integer = promptTypes.input_type.extend({
     },
     invalidMessage: "Integer value expected",
     validateValue: function() {
-        return !isNaN(parseInt(this.getValue()));
+        return !isNaN(parseInt(this.getValue(), 10));
     }
 });
 promptTypes.decimal = promptTypes.input_type.extend({
@@ -1163,6 +1163,7 @@ promptTypes.screen = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
+        that.baseActivate(ctxt);
         var subPromptsReady = _.after(this.prompts.length, function () {
             ctxt.success();
         });
@@ -1191,6 +1192,10 @@ promptTypes.screen = promptTypes.base.extend({
             prompt.delegateEvents();
         });
         this.$el.trigger('create');
+    },
+    whenTemplateIsReady: function(ctxt){
+        //This stub is here because screens have no template so the default 
+        //whenTemplateIsReady would otherwise cause an error in baseActivate.
     }
 });
 promptTypes.label = promptTypes.base.extend({

@@ -32,12 +32,15 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     console.error(String(e));
                     console.error(result);
                     console.error(this);
-                    // TODO: rework this -- calling fatalError() will mess up ctxt reporting
-                    throw new Error("Exception in user formula.");
+
                     if(context && context.allowExceptions === true) {
                         throw new Error("Exception in user formula.");
                     } else {
                         alert("Could not call formula.\nSee console for details.");
+                        // TODO: rework this -- calling fatalError() will mess up ctxt reporting
+                        // Nathan says: I don't see an use for ctxt reporting here.
+                        //              The source of the exception is already logged.
+                        throw new Error("Exception in user formula.");
                         controller.fatalError();
                     }
                 }
