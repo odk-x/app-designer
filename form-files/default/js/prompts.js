@@ -723,9 +723,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
     datatype: "string",
-    baseInputAttributes: {
-        'type':'datetime'
-    },
+    useMobiscroll: true,
     scrollerAttributes: {
         preset: 'datetime',
         theme: 'jqm',
@@ -739,32 +737,58 @@ promptTypes.datetime = promptTypes.input_type.extend({
         "swipeleft input": "stopPropagation",
         "swiperight input": "stopPropagation"
     },
+    detectNativeDatePicker: function (){
+        //For now never use the native datepicker because the samsung note's
+        //native datepicker causes the webkit to freeze in some cases.
+        return false;
+        /*
+        //It may be best to user modernizr for this type of functionality.
+        var input = document.createElement('input');
+        input.setAttribute('type', this.type);
+        //See if the date/time type is allowed.
+        if(input.type === this.type){
+            //See if the input can hold non-date/time values.
+            input.value = 'test';
+            if (input.value !== 'test') {
+                return true;
+            }
+        }
+        return false;
+        */
+    },
     onActivate: function(ctxt) {
         var that = this;
         var renderContext = this.renderContext;
         var value = this.getValue();
         renderContext.value = value;
-        require(["mobiscroll"], function() {
-            $.scroller.themes.jqm.defaults = {
-                jqmBody: 'd',
-                jqmHeader:'d',
-                jqmWheel: 'd',
-                jqmClickPick: 'd',
-                jqmSet: 'd',
-                jqmCancel: 'd'
-            };
-            //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
-            //This is a problem because users may click twice while they wait for the date
-            //picker to open inadvertantly causing it to close.
-            var originalJqmInit = $.scroller.themes.jqm.init;
-            $.scroller.themes.jqm.init = function(elm, inst) {
-                originalJqmInit(elm, inst);
-                $('.dwo', elm).off('click');
-                $('.dwo').css("background-color", "white");
-                $('.dwo').css("opacity", ".5");
-            }
+        if(this.detectNativeDatePicker()){
+            renderContext.inputAttributes.type = this.type;
+            this.useMobiscroll = false;
             that.baseActivate(ctxt);
-        });
+        } else {
+            renderContext.value = value;
+            require(["mobiscroll"], function() {
+                $.scroller.themes.jqm.defaults = {
+                    jqmBody: 'd',
+                    jqmHeader:'d',
+                    jqmWheel: 'd',
+                    jqmClickPick: 'd',
+                    jqmSet: 'd',
+                    jqmCancel: 'd'
+                };
+                //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
+                //This is a problem because users may click twice while they wait for the date
+                //picker to open inadvertantly causing it to close.
+                var originalJqmInit = $.scroller.themes.jqm.init;
+                $.scroller.themes.jqm.init = function(elm, inst) {
+                    originalJqmInit(elm, inst);
+                    $('.dwo', elm).off('click');
+                    $('.dwo').css("background-color", "white");
+                    $('.dwo').css("opacity", ".5");
+                };
+                that.baseActivate(ctxt);
+            });
+        }
     },
     //TODO: This will have problems with image labels.
     render: function() {
@@ -772,15 +796,14 @@ promptTypes.datetime = promptTypes.input_type.extend({
         that.$el.html(that.template(that.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
-        that.$('input').scroller(that.scrollerAttributes);
+        if(this.useMobiscroll){
+            that.$('input').scroller(that.scrollerAttributes);
+        }
         return this;
     }
 });
 promptTypes.date = promptTypes.datetime.extend({
     type: "date",
-    baseInputAttributes: {
-        'type':'date'
-    },
     scrollerAttributes: {
         preset: 'date',
         theme: 'jqm'
@@ -788,9 +811,6 @@ promptTypes.date = promptTypes.datetime.extend({
 });
 promptTypes.time = promptTypes.datetime.extend({
     type: "time",
-    baseInputAttributes: {
-        'type':'time'
-    },
     scrollerAttributes: {
         preset: 'time',
         theme: 'jqm'
