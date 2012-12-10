@@ -29,7 +29,8 @@ return Backbone.View.extend({
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
-        "dragstart img": "disableImageDrag"
+        "dragstart img": "disableImageDrag",
+        "click #ok-btn": "closeScreenPopup"
     },
     noPreviousPage: function(ctxt) {
         ctxt.append("screenManager.noPreviousPage");
@@ -240,9 +241,13 @@ return Backbone.View.extend({
         this.controller.setLocale(ctxt, $(evt.target).attr("id"));
     },
     showScreenPopup: function(msg) {
-        var messageHtml = Handlebars.compile("{{#substitute}}{{localize message}}{{/substitute}}")(msg);
-        $( "#screenPopup" ).find('.message').html(messageHtml);
-        $( "#screenPopup" ).popup( "open" );
+        var $screenPopup = $( "#screenPopup" );
+        var messageHtml = Handlebars.compile("<h3>{{#substitute}}{{localize message}}{{/substitute}}</h3>")(msg);
+        $screenPopup.find('.message').html(messageHtml);
+        $screenPopup.popup( "open" );
+    },
+    closeScreenPopup: function() {
+        $( "#screenPopup" ).popup( "close" );
     },
     showSpinnerOverlay: function(msg) {
         $.mobile.loading( 'show', {
