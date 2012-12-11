@@ -1,7 +1,7 @@
 <form>
     {{> labelHint}}
     <fieldset data-role="controlgroup"
-        {{#eachProperty htmlAttributes}}
+        {{#eachProperty inputAttributes}}
             {{property}}="{{value}}"
         {{/eachProperty}}
         >
@@ -16,6 +16,7 @@
                     {{#if checked}}
                         checked="checked"
                     {{/if}}
+                    
                     {{! the name attribue has to be the same for all the options}}
                     name="{{../name}}"
                     id="{{name}}"
@@ -54,8 +55,11 @@
                         {{/unless}} /></div>
                 </label>
         {{/if}}
-        {{#if deselect}}
-            <a data-role="button" class="deselect">{{localize deselect}}</a>
-        {{/if}}
     </fieldset>
+    {{#unless required}}
+        {{#if deselect}}
+            <a data-role="button" data-mini="true" class="deselect">{{localize deselect}}</a>
+        {{/if}}
+    {{/unless}}
+    <div style="clear:both;"></div>
 </form>

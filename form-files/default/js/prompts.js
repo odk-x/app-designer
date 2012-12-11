@@ -14,14 +14,12 @@ promptTypes.base = Backbone.View.extend({
     constraint_message: "Constraint violated.",
 	invalid_value_message: "Invalid value.",
 	required_message: "Required value not provided.",
-    //renderContext is a dynamic object to be passed into the render function.
-    //renderContext is meant to be private.
-    renderContext: {},
+    //_renderContext is a dynamic object to be passed into the render function.
+    _renderContext: {},
     //Template context is an user specified object that overrides the render context.
     templateContext: {},
-    //base html attributes shouldn't be overridden by the user.
-    //they should use inputAttributes for that.
-    baseInputAttributes: {},
+    _baseInputAttributes: {},
+    //inputAttributes overrides _baseInputAttributes
     inputAttributes: {},
     initialize: function() {
         //this.initializeTemplate();
@@ -84,22 +82,23 @@ promptTypes.base = Backbone.View.extend({
     },
     initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
-        this.renderContext = Object.create(this.renderContext);
-        this.renderContext.label = this.label;
-        this.renderContext.name = this.name;
-        this.renderContext.disabled = this.disabled;
-        this.renderContext.image = this.image;
-        this.renderContext.audio = this.audio;
-        this.renderContext.video = this.video;
-        this.renderContext.hide = this.hide;
-        this.renderContext.hint = this.hint;
+        this._renderContext = Object.create(this._renderContext);
+        this._renderContext.label = this.label;
+        this._renderContext.name = this.name;
+        this._renderContext.disabled = this.disabled;
+        this._renderContext.image = this.image;
+        this._renderContext.audio = this.audio;
+        this._renderContext.video = this.video;
+        this._renderContext.hide = this.hide;
+        this._renderContext.hint = this.hint;
+        this._renderContext.required = this.required;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
-        this.renderContext.formTitle = database.getTableMetaDataValue('formTitle');
-        this.renderContext.formVersion = database.getTableMetaDataValue('formVersion');
+        this._renderContext.formTitle = database.getTableMetaDataValue('formTitle');
+        this._renderContext.formVersion = database.getTableMetaDataValue('formVersion');
         
-        this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
-        $.extend(this.renderContext, this.templateContext);
+        this._renderContext.inputAttributes = $.extend({}, this._baseInputAttributes, this.inputAttributes);
+        $.extend(this._renderContext, this.templateContext);
     },
     /**
      * afterInitialize is user defined
@@ -146,7 +145,7 @@ promptTypes.base = Backbone.View.extend({
             that.$el.trigger('create');
         }
         try {
-            $virtualEl.html(this.template(this.renderContext));
+            $virtualEl.html(this.template(this._renderContext));
         } catch(e) {
             alert("Error in template.");
             console.error(e);
@@ -172,7 +171,7 @@ promptTypes.base = Backbone.View.extend({
         },1000);
         return this;
         /*
-        this.$el.html(this.template(this.renderContext));
+        this.$el.html(this.template(this._renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         this.$el.trigger('create');
         return this;
@@ -280,7 +279,7 @@ promptTypes.opening = promptTypes.base.extend({
     onActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
-            this.renderContext.headerImg = formLogo;
+            this._renderContext.headerImg = formLogo;
         }
         var instanceName = database.getInstanceMetaDataValue('instanceName');
         if ( instanceName == null ) {
@@ -288,19 +287,19 @@ promptTypes.opening = promptTypes.base.extend({
             var date = new Date();
             var dateStr = date.toISOString();
             instanceName = dateStr; // .replace(/\W/g, "_")
-            this.renderContext.instanceName = instanceName;
+            this._renderContext.instanceName = instanceName;
 			database.setInstanceMetaData($.extend({}, ctxt, {success: function() { ctxt.success({enableBackNavigation: false}); }}),
 										 'instanceName', 'string', instanceName);
             return;
         }
-        this.renderContext.instanceName = instanceName;
+        this._renderContext.instanceName = instanceName;
         this.baseActivate($.extend({}, ctxt, {
             success:function(){
                 ctxt.success({enableBackwardNavigation: false});
             }
         }));
     },
-    renderContext: {
+    _renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png',
         backupImg: opendatakit.baseDir + 'img/backup.png',
         advanceImg: opendatakit.baseDir + 'img/advance.png'
@@ -331,15 +330,15 @@ promptTypes.finalize = promptTypes.base.extend({
         "click .incomplete": "saveIncomplete",
         "click .finalize": "saveFinal"
     },
-    renderContext: {
+    _renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png'
     },
     onActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
-            this.renderContext.headerImg = formLogo;
+            this._renderContext.headerImg = formLogo;
         }
-        this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
+        this._renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
         this.baseActivate($.extend({}, ctxt, {
             success:function(){
                 ctxt.success({enableForwardNavigation: false});
@@ -365,9 +364,9 @@ promptTypes.json = promptTypes.base.extend({
     onActivate: function(ctxt) {
         var that = this;
         if ( JSON != null ) {
-            that.renderContext.value = JSON.stringify(mdl.data,null,2);
+            that._renderContext.value = JSON.stringify(mdl.data,null,2);
         } else {
-            that.renderContext.value = "JSON Unavailable";
+            that._renderContext.value = "JSON Unavailable";
         }
         that.baseActivate($.extend({}, ctxt, {
             success:function(){
@@ -390,7 +389,7 @@ promptTypes.instances = promptTypes.base.extend({
         var that = this;
 		ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
         database.withDb($.extend({},ctxt,{success:function() {
-            $.extend(that.renderContext, {
+            $.extend(that._renderContext, {
                 formTitle: database.getTableMetaDataValue('formTitle'),
                 headerImg: opendatakit.baseDir + 'img/form_logo.png'
             });
@@ -406,11 +405,11 @@ promptTypes.instances = promptTypes.base.extend({
         }}), function(transaction) {
             var ss = database.getAllFormInstancesStmt();
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
-                that.renderContext.instances = [];
+                that._renderContext.instances = [];
                 console.log('test');
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
-                    that.renderContext.instances.push({
+                    that._renderContext.instances.push({
                         instanceName: instance.instanceName,
                         instance_id: instance.id,
                         last_saved_timestamp: new Date(instance.timestamp),
@@ -455,7 +454,7 @@ promptTypes.hierarchy = promptTypes.base.extend({
     events: {
     },
     onActivate: function(ctxt) {
-        this.renderContext.prompts = controller.prompts;
+        this._renderContext.prompts = controller.prompts;
         this.baseActivate($.extend({}, ctxt, {
             success:function(){
                 ctxt.success({showHeader: true, showFooter: false});
@@ -480,10 +479,10 @@ promptTypes.repeat = promptTypes.base.extend({
             //TODO: Make statement to get all subsurveys with this survey as parent.
             var ss = database.getAllFormInstancesStmt();
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
-                that.renderContext.instances = [];
+                that._renderContext.instances = [];
                 console.log('test');
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
-                    that.renderContext.instances.push(result.rows.item(i));
+                    that._renderContext.instances.push(result.rows.item(i));
                 }
             });
         });
@@ -508,18 +507,18 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     choice_filter: function(){ return true; },
     updateRenderValue: function(formValue) {
         var that = this;
-        //that.renderContext.value = formValue;
-        var filteredChoices = _.filter(that.renderContext.choices, function(choice){
+        //that._renderContext.value = formValue;
+        var filteredChoices = _.filter(that._renderContext.choices, function(choice){
             return that.choice_filter(choice);
         });
         if ( !formValue ) {
-            that.renderContext.choices = _.map(filteredChoices, function(choice) {
+            that._renderContext.choices = _.map(filteredChoices, function(choice) {
                 choice.checked = false;
                 return choice;
             });
             return;
         }
-        that.renderContext.choices = _.map(filteredChoices, function(choice) {
+        that._renderContext.choices = _.map(filteredChoices, function(choice) {
             choice.checked = _.any(formValue, function(valueObject) {
                 return choice.name === valueObject.value;
             });
@@ -528,13 +527,13 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         var otherObject = _.find(formValue, function(valueObject) {
             return (that.name + 'OtherValue' === valueObject.value);
         });
-        that.renderContext.other = {
+        that._renderContext.other = {
             value: otherObject ? otherObject.value : '',
             checked: _.any(formValue, function(valueObject) {
                 return (that.name + 'Other' === valueObject.name);
             })
         };
-        console.log(that.renderContext);
+        console.log(that._renderContext);
     },
     generateSaveValue: function(jsonFormSerialization) {
         return jsonFormSerialization ? JSON.stringify(jsonFormSerialization) : null;
@@ -573,7 +572,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "dataType": 'json',
                 "data": {},
                 "success": function(result){
-                    that.renderContext.choices = query.callback(result);
+                    that._renderContext.choices = query.callback(result);
                     that.updateRenderValue(saveValue);
                     that.baseActivate(ctxt);
                 },
@@ -586,14 +585,14 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         } else if (that.param in that.form.choices) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
-            that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
+            that._renderContext.choices = _.map(that.form.choices[that.param], _.clone);
         }
         that.updateRenderValue(saveValue);
         that.baseActivate(ctxt);
     }
 });
 promptTypes.select_one = promptTypes.select.extend({
-    renderContext: {
+    _renderContext: {
         "select_one": true,
         "deselect" : {
             "default" : "Deselect",
@@ -629,13 +628,13 @@ promptTypes.select_one = promptTypes.select.extend({
     }
 });
 promptTypes.select_one_or_other = promptTypes.select_one.extend({
-    renderContext: {
+    _renderContext: {
         select_one: true,
         or_other: true
     }
 });
 promptTypes.select_or_other = promptTypes.select.extend({
-    renderContext: {
+    _renderContext: {
         or_other: true
     }
 });
@@ -643,7 +642,7 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
     type: "text",
     datatype: "string",
     templatePath: "templates/input_type.handlebars",
-    renderContext: {
+    _renderContext: {
         "type": "text"
     },
     events: {
@@ -667,26 +666,26 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
         var that = this;
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
-        var renderContext = that.renderContext;
+        var _renderContext = that._renderContext;
         that.setValue($.extend({}, ctxt, {
             success: function() {
-                renderContext.value = value;
-                renderContext.invalid = !that.validateValue();
+                _renderContext.value = value;
+                _renderContext.invalid = !that.validateValue();
                 that.debouncedRender();
                 ctxt.success();
             },
             failure: function() {
-                renderContext.value = value;
-                renderContext.invalid = true;
+                _renderContext.value = value;
+                _renderContext.invalid = true;
                 that.debouncedRender();
                 ctxt.failure();
             }
         }), (value.length === 0 ? null : value));
     }, 500),
     onActivate: function(ctxt) {
-        var renderContext = this.renderContext;
+        var _renderContext = this._renderContext;
         var value = this.getValue();
-        renderContext.value = value;
+        _renderContext.value = value;
         this.baseActivate(ctxt);
     },
     beforeMove: function(ctxt) {
@@ -700,7 +699,7 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
 promptTypes.integer = promptTypes.input_type.extend({
     type: "integer",
     datatype: "integer",
-    baseInputAttributes: {
+    _baseInputAttributes: {
         'type':'number'
     },
     invalidMessage: "Integer value expected",
@@ -712,7 +711,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
     type: "decimal",
     datatype: "number",
     //TODO: This doesn't seem to be working.
-    baseInputAttributes: {
+    _baseInputAttributes: {
         'type':'number'
     },
     invalidMessage: "Numeric value expected",
@@ -758,15 +757,15 @@ promptTypes.datetime = promptTypes.input_type.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        var renderContext = this.renderContext;
+        var _renderContext = this._renderContext;
         var value = this.getValue();
-        renderContext.value = value;
+        _renderContext.value = value;
         if(this.detectNativeDatePicker()){
-            renderContext.inputAttributes.type = this.type;
+            _renderContext.inputAttributes.type = this.type;
             this.useMobiscroll = false;
             that.baseActivate(ctxt);
         } else {
-            renderContext.value = value;
+            _renderContext.value = value;
             require(["mobiscroll"], function() {
                 $.scroller.themes.jqm.defaults = {
                     jqmBody: 'd',
@@ -793,7 +792,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     //TODO: This will have problems with image labels.
     render: function() {
         var that = this;
-        that.$el.html(that.template(that.renderContext));
+        that.$el.html(that.template(that._renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
         if(this.useMobiscroll){
@@ -887,16 +886,16 @@ promptTypes.media = promptTypes.base.extend({
                         database.setData( $.extend({},ctxt,{success:function() {
 								that.enableButtons();
 								var mediaPath = that.getValue();
-								that.renderContext.mediaPath = mediaPath;
-								that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+								that._renderContext.mediaPath = mediaPath;
+								that._renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
 								that.render();
 								ctxt.success();
 							},
 							failure:function() {
 								that.enableButtons();
 								var mediaPath = that.getValue();
-								that.renderContext.mediaPath = mediaPath;
-								that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+								that._renderContext.mediaPath = mediaPath;
+								that._renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
 								that.render();
 								ctxt.failure();
 							}}), that.name, "file", mediaPath);
@@ -910,8 +909,8 @@ promptTypes.media = promptTypes.base.extend({
 		
 				that.enableButtons();
 				var mediaPath = that.getValue();
-				that.renderContext.mediaPath = mediaPath;
-				that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+				that._renderContext.mediaPath = mediaPath;
+				that._renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
 				that.render();
                 ctxt.failure();
             }
@@ -929,8 +928,8 @@ promptTypes.image = promptTypes.media.extend({
         var that = this;
         var value = that.getValue();
         if (value != null && value.length != 0) {
-			that.renderContext.mediaPath = value;
-			that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'img');
+			that._renderContext.mediaPath = value;
+			that._renderContext.uriValue = opendatakit.asUri(ctxt, value, 'img');
 		}
         this.baseActivate(ctxt);
     }
@@ -945,9 +944,9 @@ promptTypes.video = promptTypes.media.extend({
         var that = this;
         var value = that.getValue();
         if (value != null && value.length != 0) {
-			that.renderContext.mediaPath = value;
-            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
-            that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
+			that._renderContext.mediaPath = value;
+            that._renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
+            that._renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
         }
         this.baseActivate(ctxt);
     }
@@ -963,8 +962,8 @@ promptTypes.audio = promptTypes.media.extend({
         var that = this;
         var value = that.getValue();
         if (value != null && value.length != 0) {
-			that.renderContext.mediaPath = value;
-            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'audio', 'src');
+			that._renderContext.mediaPath = value;
+            that._renderContext.uriValue = opendatakit.asUri(ctxt, value, 'audio', 'src');
         }
         this.baseActivate(ctxt);
     },
@@ -990,8 +989,8 @@ promptTypes.launch_intent = promptTypes.base.extend({
         if(typeof value !== 'undefined'){
             value = that.parseValue(value);
         }
-        that.renderContext.value = value;
-        that.renderContext.buttonLabel = that.buttonLabel;
+        that._renderContext.value = value;
+        that._renderContext.buttonLabel = that.buttonLabel;
         this.baseActivate(ctxt);
     },
     launch: function(evt) {
@@ -1042,7 +1041,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                 if (jsonObject.result != null) {
                     that.setValue($.extend({}, ctxt, {
                         success: function() {
-                            that.renderContext.value = jsonObject.result;
+                            that._renderContext.value = jsonObject.result;
                             that.render();
                             ctxt.success();
                         }
@@ -1085,7 +1084,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
         function success(position) {
             that.setValue($.extend({}, controller.newContext(evt), {
                 success: function() {
-                    that.renderContext.value = position;
+                    that._renderContext.value = position;
                     that.render();
                 }
             }), position);
@@ -1105,7 +1104,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
     onActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
-        that.renderContext.value = value;
+        that._renderContext.value = value;
         this.baseActivate(ctxt);
     }
 });
@@ -1259,7 +1258,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var acknowledged = this.$('#acknowledge').is(':checked');
         this.setValue($.extend({}, ctxt, {
             success: function() {
-                that.renderContext.choices = [{
+                that._renderContext.choices = [{
                     "name": "acknowledge",
                     "label": that.acknLabel,
                     "checked": acknowledged
@@ -1281,7 +1280,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         } catch(e) {
             acknowledged = false;
         }
-        that.renderContext.choices = [{
+        that._renderContext.choices = [{
             "name": "acknowledge",
             "label": that.acknLabel,
             "checked": acknowledged
