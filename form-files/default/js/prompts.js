@@ -485,7 +485,7 @@ promptTypes.repeat = promptTypes.base.extend({
 		database.get_all_instances($.extend({},ctxt,{
 			success:function(instanceList) {
 				that.renderContext.instances = instanceList;
-				that._baseActivate($.extend({}, ctxt, {
+				that.baseActivate($.extend({}, ctxt, {
 					success:function(){
 						ctxt.success({
 							showHeader: false,
@@ -1293,9 +1293,8 @@ promptTypes.screen = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        that.baseActivate(ctxt);
         var subPromptsReady = _.after(this.prompts.length, function () {
-            ctxt.success();
+            that.baseActivate(ctxt);
         });
         _.each(this.prompts, function(prompt){
             prompt.onActivate($.extend({}, ctxt, {
