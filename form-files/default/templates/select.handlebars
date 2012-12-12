@@ -47,19 +47,17 @@
 {{else}}
 {{#ifEqual appearance "inline"}}
     <form>
-        <div data-role="fieldcontain">
+        <div class="inline-label-container">
+            {{> labelHint}}
+        </div>
         <fieldset
         data-role="controlgroup"
         data-type="horizontal"
+        style="float:right;margin-left:1em;display:block;"
         {{#eachProperty inputAttributes}}
             {{property}}="{{value}}"
         {{/eachProperty}}
         >
-            <div role="heading" class="ui-controlgroup-label">
-                <legend class="inline-select-legend">
-                    {{> labelHint}}
-                </legend>
-            </div>
             {{#each choices}}
                 <label>
                     <input
@@ -89,11 +87,11 @@
         </fieldset>
         {{#unless required}}
             {{#if deselect}}
+                <div style="clear:both;"></div>
                 <a data-role="button" data-mini="true" class="deselect inline">{{localize deselect}}</a>
             {{/if}}
         {{/unless}}
         <div style="clear:both;"></div>
-        </div>
     </form>
 {{else}}
     <form>

@@ -98,9 +98,15 @@ Eventually we should make a jqm theme for this.
 .odk-hint {
     font-style: italic;
 }
-.inline-select-legend > p {
-    margin-top: 0;
+.inline-label-container {
+    float:left;
+    width:33%;
+}
+.inline-label-container > :first-child {
+    margin-top: .5em;
 }
 .deselect.inline {
     /* Add media query for small screens? */
+    margin-top: 0;
+    float:left;
 }
