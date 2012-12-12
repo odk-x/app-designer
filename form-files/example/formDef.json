@@ -1,18 +1,18 @@
 {
     "model": {
         "picture": {
-			"type": "object",
-			"elementType": "mimeUri",
-			"isPersisted": true,
-			"properties": {
-				"uri": {
-					"type": "string"
-					},
-				"contentType": {
-					"type": "string",
-					"default": "image/*"
-					}
-				}
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "image/*"
+                    }
+                }
         }, 
         "visited_seattle": {
             "type": "string"
@@ -31,75 +31,75 @@
         }, 
         "time": {
             "type": "object",
-			"elementType": "time"
+            "elementType": "time"
         }, 
         "image_test": {
-			"type": "object",
-			"elementType": "mimeUri",
-			"isPersisted": true,
-			"properties": {
-				"uri": {
-					"type": "string"
-					},
-				"contentType": {
-					"type": "string",
-					"default": "image/*"
-					}
-				}
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "image/*"
+                    }
+                }
         }, 
         "datetime": {
             "type": "object",
-			"elementType": "dateTime"
+            "elementType": "dateTime"
         }, 
         "location": {
             "type": "object",
-			"elementType": "geopoint",
-			"properties": {
-				"latitude": {
-					"type": "number"
-					},
-				"longitude": {
-					"type": "number"
-					},
-				"altitude": {
-					"type": "number"
-					},
-				"accuracy": {
-					"type": "number"
-					}
-			}
+            "elementType": "geopoint",
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                    },
+                "longitude": {
+                    "type": "number"
+                    },
+                "altitude": {
+                    "type": "number"
+                    },
+                "accuracy": {
+                    "type": "number"
+                    }
+            }
         }, 
         "recording": {
-			"type": "object",
-			"elementType": "mimeUri",
-			"isPersisted": true,
-			"properties": {
-				"uri": {
-					"type": "string"
-					},
-				"contentType": {
-					"type": "string",
-					"default": "audio/*"
-					}
-				}
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "audio/*"
+                    }
+                }
         }, 
         "born": {
             "type": "object",
-			"elementType": "date"
+            "elementType": "date"
         }, 
         "audio_test": {
-			"type": "object",
-			"elementType": "mimeUri",
-			"isPersisted": true,
-			"properties": {
-				"uri": {
-					"type": "string"
-					},
-				"contentType": {
-					"type": "string",
-					"default": "audio/*"
-					}
-				}
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "audio/*"
+                    }
+                }
         }, 
         "examples": {
             "type": "string"
@@ -111,18 +111,18 @@
             "type": "string"
         }, 
         "video_test": {
-			"type": "object",
-			"elementType": "mimeUri",
-			"isPersisted": true,
-			"properties": {
-				"uri": {
-					"type": "string"
-					},
-				"contentType": {
-					"type": "string",
-					"default": "video/*"
-					}
-				}
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "video/*"
+                    }
+                }
         }, 
         "visited_continents": {
             "type": "string"

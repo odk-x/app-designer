@@ -842,6 +842,57 @@ promptTypes.time = promptTypes.datetime.extend({
         preset: 'time',
         theme: 'jqm',
 		display: 'modal'
+    },
+    modification: function(evt) {
+		var that = this;
+        var value = that.$('input').scroller('getDate');
+		var ref = that.getValue();
+		var rerender = ((ref == null || value == null) && (ref != value )) ||
+				(ref != null && value != null && ref.valueOf() != value.valueOf());
+		var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
+        var renderContext = that.renderContext;
+		if ( value == null ) {
+			renderContext.value = '';
+		} else {
+			renderContext.value = that.$('input').val();
+		}
+        that.setValue($.extend({}, ctxt, {
+            success: function() {
+                renderContext.invalid = !that.validateValue();
+				if ( rerender ) {
+					that.debouncedRender();
+				}
+                ctxt.success();
+            },
+            failure: function(m) {
+                renderContext.invalid = true;
+				if ( rerender ) {
+					that.debouncedRender();
+				}
+                ctxt.failure(m);
+            }
+        }), value);
+    },
+    //TODO: This will have problems with image labels.
+    render: function() {
+        var that = this;
+        that.$el.html(that.template(that.renderContext));
+        //Triggering create seems to prevent some issues where jQm styles are not applied.
+        that.$el.trigger('create');
+		that.$('input').scroller(that.scrollerAttributes);
+		var value = that.getValue();
+		if ( value == null ) {
+			that.$('input').val
+			that.$('input').scroller('setDate',new Date(),false);
+		} else {
+			that.$('input').scroller('setDate',value, true);
+		}
+        return this;
+    },
+    beforeMove: function(ctxt) {
+		// the spinner will have already saved the value
+        ctxt.success();
     }
 });
 /**
@@ -957,8 +1008,8 @@ promptTypes.image = promptTypes.media.extend({
         var that = this;
         var value = that.getValue();
         if (value != null && value.length != 0) {
-            that.renderContext.mediaPath = value;
-            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'img');
+            that.renderContext.mediaPath = value.uri;
+            that.renderContext.uriValue = value.uri;
         }
         this.baseActivate(ctxt);
     }
@@ -974,8 +1025,8 @@ promptTypes.video = promptTypes.media.extend({
         var that = this;
         var value = that.getValue();
         if (value != null && value.length != 0) {
-            that.renderContext.mediaPath = value;
-            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'video', 'src');
+            that.renderContext.mediaPath = value.uri;
+            that.renderContext.uriValue = value.uri;
             that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
         }
         this.baseActivate(ctxt);
@@ -992,8 +1043,8 @@ promptTypes.audio = promptTypes.media.extend({
         var that = this;
         var value = that.getValue();
         if (value != null && value.length != 0) {
-            that.renderContext.mediaPath = value;
-            that.renderContext.uriValue = opendatakit.asUri(ctxt, value, 'audio', 'src');
+            that.renderContext.mediaPath = value.uri;
+            that.renderContext.uriValue = value.uri;
         }
         this.baseActivate(ctxt);
     },

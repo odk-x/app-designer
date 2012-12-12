@@ -1218,11 +1218,15 @@ initializeTables:function(ctxt, formDef, tableId, formPath) {
 					var len = result.rows.length;
                     if (len == 0 ) {
                         // TODO: use something other than formId for the dbTableName...
-                        that._insertTableAndColumnProperties(transaction, tmpctxt, tlo);
+                        that._insertTableAndColumnProperties(transaction, tmpctxt, tlo, true);
                     } else if(len != 1) {
 						throw new Error("getMetaData: multiple rows! " + name + " count: " + len);
 					} else {
-						that.coreGetAllTableMetadata(transaction, tmpctxt, tlo);
+						// we have the table and column definitions in the database -- 
+						// assume the formPath description exactly matches and just build the metadata
+						// TODO: this does not verify that the database structure matches the
+						// structure defined by the formPath.
+                        that._insertTableAndColumnProperties(transaction, tmpctxt, tlo, false);
 					}
                 });
             });
@@ -1340,7 +1344,10 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
 	}
 	return jsonType;
 },
-_insertTableAndColumnProperties:function(transaction, ctxt, tlo) {
+/**
+  writeDatabase = true if the database should be written. False if we are just building the metadata.
+ */
+_insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) {
     var that = this;
     var fullDef = {
 		_table_definitions: [],
@@ -1478,8 +1485,6 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo) {
 		last_sync_time: -1, 
 		sync_state: 'REST', 
 		transactioning: 0 } );
-										
-    var createTableCmd = this._createTableStmt(dbTableName, dataTableModel);
 
     // construct the kvPairs to insert into kvstore
     fullDef._table_key_value_store_active.push( { table_id: tlo.tableId, key: 'displayName', type: 'string', value: opendatakit.getSetting(tlo.formDef, 'formTitle') } );
@@ -1497,11 +1502,18 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo) {
 		tableToUpdate = prop;
 		break;
 	}
-	
-	ctxt.sqlStatement = createTableCmd;
-    transaction.executeSql(createTableCmd.stmt, createTableCmd.bind, function(transaction, result) {
-        that.fullDefHelper(transaction, ctxt, tableToUpdate, 0, fullDef, dbTableName, dataTableModel, tlo);
-    });
+
+	if ( writeDatabase ) {
+		var createTableCmd = this._createTableStmt(dbTableName, dataTableModel);
+		ctxt.sqlStatement = createTableCmd;
+		transaction.executeSql(createTableCmd.stmt, createTableCmd.bind, function(transaction, result) {
+			that.fullDefHelper(transaction, ctxt, tableToUpdate, 0, fullDef, dbTableName, dataTableModel, tlo);
+		});
+	} else {
+		// we don't need to write the database -- just update everything
+		mdl.dataTableModel = dataTableModel;
+		that.coreGetAllTableMetadata(transaction, ctxt, tlo);
+	}
 },
 fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, dbTableName, dataTableModel, tlo) {
     var that = this;
