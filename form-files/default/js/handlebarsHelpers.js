@@ -4,8 +4,8 @@
  * These are invoked via {{helperFunction arg1}} or {{helperFunction arg1 arg2}}
  * within the handelbars templates.
  */
-define(['mdl','database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars'],
-function(mdl,  database,   opendatakit, Handlebars,  formulaFunctions,   labelHintPartial) {
+define(['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars'],
+function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial) {
 
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
     var locale = database.getInstanceMetaDataValue('locale');
@@ -70,7 +70,7 @@ Handlebars.registerPartial('labelHint', labelHintPartial);
  **/
 Handlebars.registerHelper('substitute', function(options) {
     var template = Handlebars.compile(options.fn(this));
-    var context = database.mdl.data;
+    var context = database.getAllDataValues();
     context.calculates = formulaFunctions.calculates;
     return template(context);
 });

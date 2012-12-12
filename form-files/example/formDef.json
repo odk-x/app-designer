@@ -1,7 +1,18 @@
 {
     "model": {
         "picture": {
-            "type": "image/*"
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "image/*"
+                    }
+                }
         }, 
         "visited_seattle": {
             "type": "string"
@@ -19,22 +30,76 @@
             "type": "string"
         }, 
         "time": {
-            "type": "string"
+            "type": "object",
+            "elementType": "time"
         }, 
         "image_test": {
-            "type": "image/*"
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "image/*"
+                    }
+                }
         }, 
         "datetime": {
-            "type": "string"
+            "type": "object",
+            "elementType": "dateTime"
+        }, 
+        "location": {
+            "type": "object",
+            "elementType": "geopoint",
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                    },
+                "longitude": {
+                    "type": "number"
+                    },
+                "altitude": {
+                    "type": "number"
+                    },
+                "accuracy": {
+                    "type": "number"
+                    }
+            }
         }, 
         "recording": {
-            "type": "audio/*"
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "audio/*"
+                    }
+                }
         }, 
         "born": {
-            "type": "string"
+            "type": "object",
+            "elementType": "date"
         }, 
         "audio_test": {
-            "type": "audio/*"
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "audio/*"
+                    }
+                }
         }, 
         "examples": {
             "type": "string"
@@ -46,7 +111,18 @@
             "type": "string"
         }, 
         "video_test": {
-            "type": "video/*"
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "video/*"
+                    }
+                }
         }, 
         "breathcount": {
             "type": "integer"
@@ -152,7 +228,7 @@
             "rowNum": 14, 
             "type": "note", 
             "param": null, 
-            "label": "Hello {{name.value}}"
+            "label": "Hello {{name}}"
         }, 
         {
             "rowNum": 15, 
@@ -293,7 +369,7 @@
             "rowNum": 37, 
             "type": "note", 
             "condition": "data('x') === 10", 
-            "label": "x = {{x.value}}"
+            "label": "x = {{x}}"
         }, 
         {
             "name": "specialTemplateTest", 

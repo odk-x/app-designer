@@ -54,18 +54,6 @@ return Backbone.View.extend({
         this.currentPageEl = $('[data-role=page]');
         console.assert(this.currentPageEl.length === 1);
         var that = this;
-        /*
-        var f = function() {
-            requirejs(['text!templates/screen.handlebars'], function(source) {
-                    that.template = Handlebars.compile(source);
-            }, function(err) {
-                if ( err.requireType == "timeout" ) {
-                    setTimeout( f, 100);
-                }
-            });
-        };
-        f();
-        */
     },
     cleanUpScreenManager: function(ctxt){
         this.swipeEnabled = true;
@@ -88,7 +76,7 @@ return Backbone.View.extend({
         }
         var that = this;
         that.renderContext = {
-            formTitle: prompt.database.getTableMetaDataValue('formTitle'),
+            formTitle: opendatakit.getSettingValue('formTitle'),
             instanceName: prompt.database.getInstanceMetaDataValue('instanceName'),
             locales: that.controller.getFormLocales(),
             showHeader: true,
@@ -156,10 +144,10 @@ return Backbone.View.extend({
                         that.swipeEnabled = true;
                         ctxt.success();
                     },
-                    failure: function() {
+                    failure: function(m) {
                         alert('Failure in screenManager.setPrompt');
                         that.swipeEnabled = true;
-                        ctxt.failure();
+                        ctxt.failure(m);
                     }
                 });
                 $.mobile.changePage(that.currentPageEl, $.extend({
@@ -189,8 +177,8 @@ return Backbone.View.extend({
         that.controller.gotoNextScreen($.extend({},ctxt,{
                 success:function(){
                     that.swipeEnabled = true; ctxt.success();
-                },failure:function(){
-                    that.swipeEnabled = true; ctxt.failure();
+                },failure:function(m){
+                    that.swipeEnabled = true; ctxt.failure(m);
                 }}));
         return false;
     },
@@ -219,8 +207,8 @@ return Backbone.View.extend({
         that.controller.gotoPreviousScreen($.extend({},ctxt,{
                 success:function(){ 
                     that.swipeEnabled = true; ctxt.success();
-                },failure:function(){
-                    that.swipeEnabled = true; ctxt.failure();
+                },failure:function(m){
+                    that.swipeEnabled = true; ctxt.failure(m);
                 }}));
         return false;
     },
@@ -275,7 +263,7 @@ return Backbone.View.extend({
             ctxt = that.controller.newContext(evt);
             ctxt.append('screenManager.handlePageChange.error');
             this.swipeEnabled = true;
-            ctxt.failure();
+            ctxt.failure({message: "Internal error. Unexpected triggering of page change event."});
         }
     },
     disableImageDrag: function(evt){

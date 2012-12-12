@@ -10,7 +10,8 @@
  parseParameters() -- interpret the window.location.hash parameters on start-up.
  
 */
-define(['mdl','opendatakit','database'],function(mdl,opendatakit,database) {
+define(['opendatakit','database'],
+function(opendatakit,  database) {
 return {
 
     controller: null,
@@ -30,21 +31,19 @@ return {
      * 
      * Immediate.
      */
-    _parseQueryHelper:function(ctxt, dataKeyValueList, key, value) {
-        if ( key == 'formPath' ) return;
-        if ( key == 'instanceId' ) return;
-        if ( key == 'pageRef' ) return;
-        for (var i = 0 ; i < dataKeyValueList.length ; ++i ) {
-            var e = dataKeyValueList[i];
-            if ( e.key == key ) {
-                // update value...
-                e.value = value;
-                return;
-            }
-        }
-        dataKeyValueList[dataKeyValueList.length] = { key: key, type: 'string', value: value };
+    _parseQueryHelper:function(ctxt, instanceMetadataKeyValueMap, key, value) {
+        if ( key == 'formPath' ) {
+			return;
+		}
+        if ( key == 'instanceId' ) {
+			return;
+		}
+        if ( key == 'pageRef' ) {
+			return;
+		}
+		instanceMetadataKeyValueMap[key] = value;
     },
-    _prepAndSwitchUI:function( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList ) {
+    _prepAndSwitchUI:function( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap ) {
         var that = this;
         // ensure initial empty record is written
         // cacheAllData
@@ -63,7 +62,7 @@ return {
                                     "gotoRef("+pageRef+") ms: " + (+new Date()));
                         that.controller.gotoRef(ctxt, pageRef);
                 }
-        }}), instanceId, instanceMetadataKeyValueList);
+        }}), instanceId, instanceMetadataKeyValueMap);
     },
     /**
      * Saves all passed-in parameter values into the MetaData table.
@@ -85,9 +84,8 @@ return {
      *
      * Immediate: _effectChange
     */
-    _parseQueryParameterContinuation:function(ctxt, formDef, formPath, instanceId, pageRef, instanceMetadataKeyValueList) {
+    _parseQueryParameterContinuation:function(ctxt, formDef, formPath, instanceId, pageRef, instanceMetadataKeyValueMap) {
         var that = this;
-        var protoTableMetadata = {};
         var settings = formDef.settings;
         
         // IMPLEMENTATION NOTE: formDef is only used in the case where sameForm is false.
@@ -96,50 +94,39 @@ return {
         if ( formPath == null ) {
             ctxt.append("parsequery._effectChange.nullFormPath");
             alert("Unexpected null formPath");
-            ctxt.failure();
+            ctxt.failure({message: "No form specified."});
             return;
         }
         
         if ( formDef == null ) {
             ctxt.append("parsequery._effectChange.nullFormDef");
             alert("Unexpected null formDef when changing forms");
-            ctxt.failure();
+            ctxt.failure({message: "Form definition is empty."});
             return;
         }
         
         // defined by form definition's settings:
-        var tableId = opendatakit.getSetting(formDef, 'formId');//TODO: opendatakit.getSetting(formDef, 'tableId');
+        var tableId = opendatakit.getSetting(formDef, 'tableId');
         var formId = opendatakit.getSetting(formDef, 'formId');
-        var formVersion = opendatakit.getSetting(formDef, 'formVersion');
-        var formLocales = opendatakit.getFormLocales(formDef);
-        var formTitle = opendatakit.getSetting(formDef, 'formTitle');
+		if ( tableId == null ) {
+			// fallback if there is no tableId defined
+			tableId = formId;
+		}
         
         if ( tableId == null ) {
             alert("no tableId specified in Form Definition!");
-            ctxt.failure();
+            ctxt.failure({message: "No tableId specified in form definition."});
             return;
         }
-        
-        // TODO: does any of this need to be persisted to the table KV store???
 
         // Seems like we would only need to create the KV entries for tableId, and otherwise not need to do anything?
         // E.g., to support multiple forms used within one table.
         
-        
         // we cannot write the instanceMetadata or the tableMetadata yet because the underlying tables may not yet exist.
-
-        // set up the minimal qp keys...
-        protoTableMetadata.formDef = { "type" : "object", "value": formDef };
-        protoTableMetadata.formId = { "type" : "string", "value": formId };
-        protoTableMetadata.formVersion = { "type" : "string", "value": formVersion };
-        protoTableMetadata.formLocales = { "type" : "string", "value": formLocales };
-        protoTableMetadata.formTitle = { "type" : "string", "value": formTitle };
-        
-        // TODO: locale of this form instance...
 
         // on first starting, the database would not have any tableId, formId or instanceId set...
         var sameTable = (opendatakit.getCurrentTableId() == tableId);
-        var sameForm = sameTable && (database.getTableMetaDataValue('formId') == formId) && (opendatakit.getCurrentFormPath() == formPath);
+        var sameForm = sameTable && (opendatakit.getSettingValue('formId') == formId) && (opendatakit.getCurrentFormPath() == formPath);
         var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() == instanceId) && (instanceId != null);
         var qpl = opendatakit.getHashString(formPath, instanceId, pageRef);
 
@@ -157,9 +144,9 @@ return {
                     that.builder.buildSurvey(formDef, function() {
                             // currentInstanceId == null
                             // TODO: load instance...
-                            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList, formDef );
+                            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
                         });
-                }}), formDef, tableId, protoTableMetadata, formPath);
+                }}), formDef, tableId, formPath);
         } else if (!sameForm) {
             opendatakit.setCurrentFormPath(null);
             opendatakit.setCurrentInstanceId(null);
@@ -167,8 +154,7 @@ return {
             that.controller.reset(ctxt, sameForm);
 
             // preserve values from the Tables metadata but override form info...
-            mdl.qp = $.extend(mdl.qp, protoTableMetadata);
-            
+            opendatakit.setCurrentFormDef(formDef);
             opendatakit.setCurrentFormPath(formPath);
             // currentInstanceId == null
             // data table already exists (since tableId is unchanged)
@@ -180,7 +166,7 @@ return {
             that.builder.buildSurvey(formDef, function() {
                         // currentInstanceId == null
                         // TODO: load instance...
-                        that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList, formDef );
+                        that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
             });
         } else  if (!sameInstance) {
             opendatakit.setCurrentInstanceId(null);
@@ -193,14 +179,14 @@ return {
 
             // currentInstanceId == null
             // TODO: load instance...
-            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList, formDef );
+            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
         } else {
             // currentInstanceId == valid value
             // data table already exists (since tableId is unchanged)
             // form definitions already processed (since formPath and formId unchanged)
             
             // TODO: change pageRef (presumably)
-            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueList, formDef );
+            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
         }
     },
     /**
@@ -216,7 +202,7 @@ return {
         var instanceId = null;
         var pageRef = null;
         
-        var instanceMetadataKeyValueList = [];
+        var instanceMetadataKeyValueMap = {};
         if (window.location.hash) {
             // split up the query string and store in an associative array
             var params = window.location.hash.slice(1).split("&");
@@ -232,7 +218,7 @@ return {
                 } else if ( key == 'pageRef' ) {
                     pageRef = value;
                 } else {
-                    that._parseQueryHelper(ctxt, instanceMetadataKeyValueList, key, value);
+                    that._parseQueryHelper(ctxt, instanceMetadataKeyValueMap, key, value);
                 }
             }
             
@@ -254,20 +240,20 @@ return {
             function(formDefTxt) {
                 if ( formDefTxt == null || formDefTxt.length == 0 ) {
                     alert('Unable to find file: ' + filename);
-                    ctxt.failure();
+                    ctxt.failure({message: "Form definition is empty."});
                 } else {
                     try {
                         var formDef = JSON.parse(formDefTxt);
                         that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
-                                                instanceId, pageRef, instanceMetadataKeyValueList);
+                                                instanceId, pageRef, instanceMetadataKeyValueMap);
                     } catch (ex) {
                         ctxt.append('parsequery.parseParameters.exception',  'unknown error: ' + ex);
-                        ctxt.failure();
+                        ctxt.failure({message: "Exception while processing form definition."});
                     }
                 }
             }, function(err) {
                 ctxt.append("parsequery.parseParameters.requirejs.failure", err.toString());
-                ctxt.failure();
+                ctxt.failure({message: "Failure while reading form definition."});
             }
         );
     },
@@ -287,6 +273,7 @@ return {
      */
     hashChangeHandler:function(evt) {
         var that = this;
+		var qpl;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('parsequery.hashChangeHandler');
         evt.stopPropagation();
@@ -296,10 +283,10 @@ return {
             // this is bogus transition due to jquery mobile widgets
             ctxt.append('parsequery.hashChangeHandler.emptyHash');
             alert('Hash is invalid!');
-            var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.currentPromptIdx);
+            qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.currentPromptIdx);
             ctxt.append('parsequery.hashChangeHandler.emptyHash.reset', qpl);
             window.location.hash = qpl;
-            ctxt.failure();
+            ctxt.failure({message: "Internal error: invalid hash (restoring)"});
             return false;
         }
         
@@ -330,9 +317,9 @@ return {
             that.controller.gotoRef(ctxt, pageRef);
         } else {
             ctxt.append('parsequery.hashChangeHandler.noPageRef.reset');
-            var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.currentPromptIdx);
+            qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.currentPromptIdx);
             window.location.hash = qpl;
-            ctxt.failure();
+            ctxt.failure({message: "Internal error: invalid hash (restoring)"});
         }
         return false;
     }
