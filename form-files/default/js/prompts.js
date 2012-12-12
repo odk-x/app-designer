@@ -29,7 +29,7 @@ promptTypes.base = Backbone.View.extend({
     },
     whenTemplateIsReady: function(ctxt){
         var that = this;
-        if(this.template){
+        if(this.template) {
             ctxt.success();
         } else if(this.templatePath) {
             requirejs(['text!'+this.templatePath], function(source) {
@@ -712,7 +712,7 @@ promptTypes.integer = promptTypes.input_type.extend({
     },
     invalidMessage: "Integer value expected",
     validateValue: function() {
-        return !isNaN(parseInt(this.getValue()));
+        return !isNaN(parseInt(this.getValue(), 10));
     }
 });
 promptTypes.decimal = promptTypes.input_type.extend({
@@ -728,9 +728,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
 });
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
-    baseInputAttributes: {
-        'type':'datetime'
-    },
+    useMobiscroll: true,
     scrollerAttributes: {
         preset: 'datetime',
         theme: 'jqm',
@@ -745,30 +743,56 @@ promptTypes.datetime = promptTypes.input_type.extend({
         "swipeleft input": "stopPropagation",
         "swiperight input": "stopPropagation"
     },
+    detectNativeDatePicker: function (){
+        //For now never use the native datepicker because the samsung note's
+        //native datepicker causes the webkit to freeze in some cases.
+        return false;
+        /*
+        //It may be best to user modernizr for this type of functionality.
+        var input = document.createElement('input');
+        input.setAttribute('type', this.type);
+        //See if the date/time type is allowed.
+        if(input.type === this.type){
+            //See if the input can hold non-date/time values.
+            input.value = 'test';
+            if (input.value !== 'test') {
+                return true;
+            }
+        }
+        return false;
+        */
+    },
     onActivate: function(ctxt) {
         var that = this;
         var renderContext = this.renderContext;
-		require(["mobiscroll"], function() {
-            $.scroller.themes.jqm.defaults = {
-                jqmBody: 'd',
-                jqmHeader:'d',
-                jqmWheel: 'd',
-                jqmClickPick: 'd',
-                jqmSet: 'd',
-                jqmCancel: 'd'
-            };
-            //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
-            //This is a problem because users may click twice while they wait for the date
-            //picker to open inadvertantly causing it to close.
-            var originalJqmInit = $.scroller.themes.jqm.init;
-            $.scroller.themes.jqm.init = function(elm, inst) {
-                originalJqmInit(elm, inst);
-                $('.dwo', elm).off('click');
-                $('.dwo').css("background-color", "white");
-                $('.dwo').css("opacity", ".5");
-            }
+        if(this.detectNativeDatePicker()){
+            renderContext.inputAttributes.type = this.type;
+            this.useMobiscroll = false;
             that.baseActivate(ctxt);
-        });
+        } else {
+            renderContext.value = value;
+            require(["mobiscroll"], function() {
+                $.scroller.themes.jqm.defaults = {
+                    jqmBody: 'd',
+                    jqmHeader:'d',
+                    jqmWheel: 'd',
+                    jqmClickPick: 'd',
+                    jqmSet: 'd',
+                    jqmCancel: 'd'
+                };
+                //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
+                //This is a problem because users may click twice while they wait for the date
+                //picker to open inadvertantly causing it to close.
+                var originalJqmInit = $.scroller.themes.jqm.init;
+                $.scroller.themes.jqm.init = function(elm, inst) {
+                    originalJqmInit(elm, inst);
+                    $('.dwo', elm).off('click');
+                    $('.dwo').css("background-color", "white");
+                    $('.dwo').css("opacity", ".5");
+                };
+                that.baseActivate(ctxt);
+            });
+        }
     },
     modification: function(evt) {
 		var that = this;
@@ -807,7 +831,8 @@ promptTypes.datetime = promptTypes.input_type.extend({
         that.$el.html(that.template(that.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
-		that.$('input').scroller(that.scrollerAttributes);
+        if(this.useMobiscroll){
+            that.$('input').scroller(that.scrollerAttributes);
 		var value = that.getValue();
 		if ( value == null ) {
 			that.$('input').val
@@ -824,9 +849,6 @@ promptTypes.datetime = promptTypes.input_type.extend({
 });
 promptTypes.date = promptTypes.datetime.extend({
     type: "date",
-    baseInputAttributes: {
-        'type':'date'
-    },
     scrollerAttributes: {
         preset: 'date',
         theme: 'jqm',
@@ -835,9 +857,6 @@ promptTypes.date = promptTypes.datetime.extend({
 });
 promptTypes.time = promptTypes.datetime.extend({
     type: "time",
-    baseInputAttributes: {
-        'type':'time'
-    },
     scrollerAttributes: {
         preset: 'time',
         theme: 'jqm',
@@ -1252,6 +1271,7 @@ promptTypes.screen = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
+        that.baseActivate(ctxt);
         var subPromptsReady = _.after(this.prompts.length, function () {
             ctxt.success();
         });
@@ -1280,6 +1300,10 @@ promptTypes.screen = promptTypes.base.extend({
             prompt.delegateEvents();
         });
         this.$el.trigger('create');
+    },
+    whenTemplateIsReady: function(ctxt){
+        //This stub is here because screens have no template so the default 
+        //whenTemplateIsReady would otherwise cause an error in baseActivate.
     }
 });
 promptTypes.label = promptTypes.base.extend({
@@ -1369,6 +1393,8 @@ promptTypes.with_next = promptTypes.base.extend({
         that.setValue(ctxt, value);
     }
 });
+promptTypes.error = promptTypes.base;
+
 //Ensure all prompt type names are lowercase.
 //TODO: Move to a test suite.
 _.each(_.keys(promptTypes), function(promptTypeName){

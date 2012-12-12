@@ -45,6 +45,7 @@
     {{/if}}
     <div data-role="popup" data-theme="a" data-overlay-theme="a" id="screenPopup">
         <p class="message"></p>
+        <button data-theme="a" id="ok-btn">OK</button>
     </div>
     {{! I have some concerns over inefficiency from including all the popup html in this template since it gets rerendered on every page change.}}
     {{! If it turns out to be a problem we can dynamically construct the popups when they are opened.}}
