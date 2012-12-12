@@ -3,8 +3,8 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _) {
+define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'translations', 'handlebarsHelpers'],
+function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _,            translations) {
 
 promptTypes.base = Backbone.View.extend({
     className: "current",
@@ -617,15 +617,6 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
         that.updateRenderValue(saveValue);
         that.baseActivate(ctxt);
-    }
-});
-promptTypes.select_one = promptTypes.select.extend({
-    _renderContext: {
-        "select_one": true,
-        "deselect" : {
-            "default" : "Deselect",
-            "hindi" : "अचयनित"
-        }
     },
     deselect: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -641,6 +632,12 @@ promptTypes.select_one = promptTypes.select.extend({
             }
         }), null);
         */
+    },
+});
+promptTypes.select_one = promptTypes.select.extend({
+    _renderContext: {
+        "select_one": true,
+        "deselect" : translations.deselect
     },
     generateSaveValue: function(jsonFormSerialization) {
         if(jsonFormSerialization){
@@ -1083,6 +1080,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
         };
     }
 });
+/* Save only SCAN_RESULT ? */
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
     datatype: "barcode",
@@ -1274,10 +1272,7 @@ promptTypes.note = promptTypes.base.extend({
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
     autoAdvance: false,
-    acknLabel: {
-        "default": "Acknowledge",
-        "hindi": "स्वीकार करना"
-    },
+    acknLabel: translations.acknLabel,
     modification: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append('acknowledge.modification', this.promptIdx);
