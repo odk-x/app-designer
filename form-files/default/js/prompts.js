@@ -770,7 +770,6 @@ promptTypes.datetime = promptTypes.input_type.extend({
             this.useMobiscroll = false;
             that.baseActivate(ctxt);
         } else {
-            renderContext.value = value;
             require(["mobiscroll"], function() {
                 $.scroller.themes.jqm.defaults = {
                     jqmBody: 'd',
@@ -831,17 +830,18 @@ promptTypes.datetime = promptTypes.input_type.extend({
         that.$el.html(that.template(that.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
-        if(this.useMobiscroll){
-            that.$('input').scroller(that.scrollerAttributes);
-		var value = that.getValue();
-		if ( value == null ) {
-			that.$('input').val
-			that.$('input').scroller('setDate',new Date(),false);
-		} else {
-			that.$('input').scroller('setDate',value, true);
+		if(this.useMobiscroll){
+				that.$('input').scroller(that.scrollerAttributes);
+			var value = that.getValue();
+			if ( value == null ) {
+				that.$('input').val
+				that.$('input').scroller('setDate',new Date(),false);
+			} else {
+				that.$('input').scroller('setDate',value, true);
+			}
+			return this;
 		}
-        return this;
-    },
+	},
     beforeMove: function(ctxt) {
 		// the spinner will have already saved the value
         ctxt.success();
@@ -1304,6 +1304,7 @@ promptTypes.screen = promptTypes.base.extend({
     whenTemplateIsReady: function(ctxt){
         //This stub is here because screens have no template so the default 
         //whenTemplateIsReady would otherwise cause an error in baseActivate.
+		ctxt.success();
     }
 });
 promptTypes.label = promptTypes.base.extend({

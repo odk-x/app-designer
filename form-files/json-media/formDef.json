@@ -193,13 +193,46 @@
             "type": "multiselect"
         }, 
         "image_test": {
-            "type": "image/*"
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "image/*"
+                    }
+                }
         }, 
         "audio_test": {
-            "type": "audio/*"
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "audio/*"
+                    }
+                }
         }, 
         "video_test": {
-            "type": "video/*"
+            "type": "object",
+            "elementType": "mimeUri",
+            "isPersisted": true,
+            "properties": {
+                "uri": {
+                    "type": "string"
+                    },
+                "contentType": {
+                    "type": "string",
+                    "default": "video/*"
+                    }
+                }
         }
     }, 
     "choices": {
