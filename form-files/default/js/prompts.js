@@ -502,15 +502,38 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     datatype: "string",
     templatePath: "templates/select.handlebars",
     events: {
-        "change input": "modification"
+        "change input": "modification",
+        //Only needed for child views
+        "click .deselect": "deselect",
+        "click .grid-select-item": "selectGridItem"
+    },
+    selectGridItem: function(evt) {
+        var $target = $(evt.target).closest('.grid-select-item');
+        var $input = $target.find('input');
+        $input.prop("checked", function(index, oldPropertyValue) {
+            if( oldPropertyValue ) {
+                $input.prop("checked", false);
+                $input.change();
+            } else {
+                $input.prop("checked", true);
+                $input.change();
+            }
+        });
     },
     choice_filter: function(){ return true; },
     updateRenderValue: function(formValue) {
         var that = this;
         //that._renderContext.value = formValue;
-        var filteredChoices = _.filter(that._renderContext.choices, function(choice){
+        var filteredChoices = _.filter(that._renderContext.choices, function(choice) {
             return that.choice_filter(choice);
         });
+        if(this.appearance === "grid") {
+            filteredChoices = _.map(filteredChoices, function(choice, idx) {
+                var columns = 3;
+                choice.colLetter = String.fromCharCode(97 + (idx % columns));
+                return choice;
+            });
+        }
         if ( !formValue ) {
             that._renderContext.choices = _.map(filteredChoices, function(choice) {
                 choice.checked = false;
@@ -518,12 +541,14 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             });
             return;
         }
+        //Check appropriate choices based on formValue
         that._renderContext.choices = _.map(filteredChoices, function(choice) {
             choice.checked = _.any(formValue, function(valueObject) {
                 return choice.name === valueObject.value;
             });
             return choice;
         });
+        //Stuff for handling or_other input. Possibly to be factored out.
         var otherObject = _.find(formValue, function(valueObject) {
             return (that.name + 'OtherValue' === valueObject.value);
         });
@@ -533,18 +558,20 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 return (that.name + 'Other' === valueObject.name);
             })
         };
-        console.log(that._renderContext);
     },
     generateSaveValue: function(jsonFormSerialization) {
         return jsonFormSerialization ? JSON.stringify(jsonFormSerialization) : null;
     },
-    parseSaveValue: function(savedValue){
+    parseSaveValue: function(savedValue) {
         return savedValue ? JSON.parse(savedValue) : null;
     },
-    // TODO: choices should be cloned and allow calculations in the choices
-    // perhaps a null 'name' would drop the value from the list of choices...
-    // could also allow calculations in the 'checked' and 'value' fields.
     modification: function(evt) {
+        if(this.appearance === 'grid') {
+            //Make selection more reponsive by providing visual feedback before
+            //the template is re-rendered.
+            this.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
+            this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
+        }
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
         var that = this;
@@ -563,6 +590,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         var that = this;
         var saveValue = that.parseSaveValue(that.getValue());
         var query;
+        that._renderContext.appearance = this.appearance;
         if(that.param in that.form.queries) {
             query = that.form.queries[that.param];
             //TODO: Come up with a tables uri and when we get that kind of uri do tables queries.
@@ -571,12 +599,12 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "url": query.uri(),
                 "dataType": 'json',
                 "data": {},
-                "success": function(result){
+                "success": function(result) {
                     that._renderContext.choices = query.callback(result);
                     that.updateRenderValue(saveValue);
                     that.baseActivate(ctxt);
                 },
-                "error": function(e){
+                "error": function(e) {
                     console.error(e);
                     alert('Could not get remote data');
                 }
@@ -599,13 +627,11 @@ promptTypes.select_one = promptTypes.select.extend({
             "hindi" : "अचयनित"
         }
     },
-    events: {
-        "change input": "modification",
-        "click .deselect": "deselect"
-    },
     deselect: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".deselect", "px: " + this.promptIdx);
+        this.$('input:checked').prop('checked', false).change();
+        /*
         var that = this;
         this.setValue($.extend({}, ctxt, {
             success: function() {
@@ -614,6 +640,7 @@ promptTypes.select_one = promptTypes.select.extend({
                 ctxt.success();
             }
         }), null);
+        */
     },
     generateSaveValue: function(jsonFormSerialization) {
         if(jsonFormSerialization){

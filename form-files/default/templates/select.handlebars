@@ -1,65 +1,141 @@
-<form>
-    {{> labelHint}}
-    <fieldset data-role="controlgroup"
+{{#ifEqual appearance "grid"}}
+    <form>
+        {{> labelHint}}
+            <div class="ui-grid-b">
+            {{#each choices}}
+                <div class="ui-block-{{colLetter}}">
+                    <div class="ui-bar
+                    {{#if checked}}
+                        ui-bar-e
+                    {{else}}
+                        ui-bar-c
+                    {{/if}} grid-select-item">
+                        <input
+                            {{#if ../select_one}}
+                                type="radio"
+                            {{else}}
+                                type="checkbox"
+                            {{/if}}
+                            {{#if checked}}
+                                checked="checked"
+                            {{/if}}
+                            
+                            {{! the name attribue has to be the same for all the options}}
+                            style="display:none;"
+                            name="{{../name}}"
+                            id="{{name}}"
+                            value="{{name}}" />
+                    {{#if image}}
+                        <center>
+                            <img  style="max-width: 100%;max-height: 100%;" src="{{formDirectory}}{{localize image}}"></img>
+                        </center>
+                    {{/if}}
+                    {{#if label}}
+                        {{#substitute}}{{localize label}}{{/substitute}}
+                    {{/if}}
+                    </div>
+                </div>
+            {{/each}}
+            </div><!-- /grid-b -->
+        {{#unless required}}
+            {{#if deselect}}
+                <a data-role="button" data-mini="true" class="deselect">{{localize deselect}}</a>
+            {{/if}}
+        {{/unless}}
+        <div style="clear:both;"></div>
+    </form>
+{{else}}
+{{#ifEqual appearance "inline"}}
+    <form>
+        <div data-role="fieldcontain">
+        <fieldset
+        data-role="controlgroup"
+        data-type="horizontal"
         {{#eachProperty inputAttributes}}
             {{property}}="{{value}}"
         {{/eachProperty}}
         >
-        {{#each choices}}
-            <label>
-                <input
-                    {{#if ../select_one}}
-                        type="radio"
-                    {{else}}
-                        type="checkbox"
-                    {{/if}}
-                    {{#if checked}}
-                        checked="checked"
-                    {{/if}}
-                    
-                    {{! the name attribue has to be the same for all the options}}
-                    name="{{../name}}"
-                    id="{{name}}"
-                    value="{{name}}" />
-            {{#if image}}
-                <div>
-                    <img src="{{formDirectory}}{{localize image}}"></img>
-                </div>
-            {{/if}}
-            {{#if label}}
-                {{#substitute}}{{localize label}}{{/substitute}}
-            {{/if}}
-            </label>
-        {{/each}}
-        {{#if or_other}}
-                <input
-                    {{#if select_one}}
-                        type="radio"
-                    {{else}}
-                        type="checkbox"
-                    {{/if}}
-                    {{#if other.checked}}
-                        checked
-                    {{/if}}
-                    name="{{name}}Other"
-                    id="other"
-                    value="other" />
-                <label for="other">
-                    Other:
-                    <div><input
-                        name="{{name}}OtherValue"
-                        value="{{other.value}}"
-                        style="height:36px;position:initial;"
-                        {{#unless other.checked}}
-                            disabled="true"
-                        {{/unless}} /></div>
+            <div role="heading" class="ui-controlgroup-label">
+                <legend class="inline-select-legend">
+                    {{> labelHint}}
+                </legend>
+            </div>
+            {{#each choices}}
+                <label>
+                    <input
+                        {{#if ../select_one}}
+                            type="radio"
+                        {{else}}
+                            type="checkbox"
+                        {{/if}}
+                        {{#if checked}}
+                            checked="checked"
+                        {{/if}}
+                        
+                        {{! the name attribue has to be the same for all the options}}
+                        name="{{../name}}"
+                        id="{{name}}"
+                        value="{{name}}" />
+                {{#if image}}
+                    <div>
+                        <img src="{{formDirectory}}{{localize image}}"></img>
+                    </div>
+                {{/if}}
+                {{#if label}}
+                    {{#substitute}}{{localize label}}{{/substitute}}
+                {{/if}}
                 </label>
-        {{/if}}
-    </fieldset>
-    {{#unless required}}
-        {{#if deselect}}
-            <a data-role="button" data-mini="true" class="deselect">{{localize deselect}}</a>
-        {{/if}}
-    {{/unless}}
-    <div style="clear:both;"></div>
-</form>
+            {{/each}}
+        </fieldset>
+        {{#unless required}}
+            {{#if deselect}}
+                <a data-role="button" data-mini="true" class="deselect inline">{{localize deselect}}</a>
+            {{/if}}
+        {{/unless}}
+        <div style="clear:both;"></div>
+        </div>
+    </form>
+{{else}}
+    <form>
+        {{> labelHint}}
+        <fieldset data-role="controlgroup"
+            {{#eachProperty inputAttributes}}
+                {{property}}="{{value}}"
+            {{/eachProperty}}
+            >
+            {{#each choices}}
+                <label>
+                    <input
+                        {{#if ../select_one}}
+                            type="radio"
+                        {{else}}
+                            type="checkbox"
+                        {{/if}}
+                        {{#if checked}}
+                            checked="checked"
+                        {{/if}}
+                        
+                        {{! the name attribue has to be the same for all the options}}
+                        name="{{../name}}"
+                        id="{{name}}"
+                        value="{{name}}" />
+                {{#if image}}
+                    <div>
+                        <img src="{{formDirectory}}{{localize image}}"></img>
+                    </div>
+                {{/if}}
+                {{#if label}}
+                    {{#substitute}}{{localize label}}{{/substitute}}
+                {{/if}}
+                </label>
+            {{/each}}
+        </fieldset>
+        {{#unless required}}
+            {{#if deselect}}
+                <a data-role="button" data-mini="true" class="deselect">{{localize deselect}}</a>
+            {{/if}}
+        {{/unless}}
+        <div style="clear:both;"></div>
+    </form>
+{{/ifEqual}}
+{{/ifEqual}}

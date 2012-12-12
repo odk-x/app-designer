@@ -83,6 +83,14 @@ Handlebars.registerHelper('selected', function(prompt, value, options) {
     }
 });
 
+Handlebars.registerHelper('ifEqual', function(item, value, options) {
+    if(item === value) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
 Handlebars.registerHelper('promptLink', function(value, options) {
     return new Handlebars.SafeString( opendatakit.getHashString( opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), value ));
 });

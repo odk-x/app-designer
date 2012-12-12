@@ -69,3 +69,38 @@ Eventually we should make a jqm theme for this.
 .deselect {
     float: right;
 }
+.grid-select-item {
+    /*
+    The height is a trade-off, we get a better looking regular grid with it set,
+    but we loose the ability auto-fit arbitrary sized content.
+    Maybe I could use a table to get the best of both worlds.
+    */
+    height: 120px;
+    margin: 2px;
+    padding: 3px;
+}
+.grid-select-item:active {
+    border: 1px solid 		#aaa /*{d-bdown-border}*/;
+	background: 			#eee /*{d-bdown-background-color}*/;
+	font-weight: bold;
+	color: 					#333 /*{d-bdown-color}*/;
+	text-shadow: 0 /*{d-bdown-shadow-x}*/ 1px /*{d-bdown-shadow-y}*/ 0 /*{d-bdown-shadow-radius}*/ 	#fff /*{d-bdown-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #e5e5e5 /*{d-bdown-background-start}*/), to( #f2f2f2 /*{d-bdown-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/);
+}
+.odk-label {
+    font-size: larger;
+}
+.odk-hint {
+    font-style: italic;
+}
+.inline-select-legend > p {
+    margin-top: 0;
+}
+.deselect.inline {
+    /* Add media query for small screens? */
+}

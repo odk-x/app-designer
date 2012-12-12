@@ -6,6 +6,15 @@
         "state": {
             "type": "string"
         }, 
+        "i1": {
+            "type": "string"
+        }, 
+        "i3": {
+            "type": "string"
+        }, 
+        "i2": {
+            "type": "string"
+        }, 
         "bird": {
             "type": "string"
         }
@@ -29,7 +38,7 @@
         {
             "rowNum": 5, 
             "name": "odk_values", 
-            "uri": "odkquery://table_id/elementKey1/elementKey5/?selection=encodeURIComponent('elementKey2=? and elementKey3>5')&selectionArgs=encodeURIComponent(JSON.stringify([data('state')])"
+            "uri": "\"content://com.opendatakit.tables.ContentProvider/database_id/table_id/row_id\""
         }
     ], 
     "survey": [
@@ -54,8 +63,9 @@
             "prompts": [
                 {
                     "name": "bird", 
-                    "rowNum": 5, 
                     "type": "select_one", 
+                    "rowNum": 5, 
+                    "appearance": "grid", 
                     "param": "birds", 
                     "label": "Choose a bird:"
                 }, 
@@ -75,6 +85,36 @@
                 }
             ], 
             "comments": "Image based select"
+        }, 
+        {
+            "rowNum": 9, 
+            "type": "screen", 
+            "prompts": [
+                {
+                    "name": "i1", 
+                    "type": "select_one", 
+                    "rowNum": 10, 
+                    "appearance": "inline", 
+                    "param": "yes_no", 
+                    "label": "Choose one:"
+                }, 
+                {
+                    "name": "i2", 
+                    "type": "select_one", 
+                    "rowNum": 11, 
+                    "appearance": "inline", 
+                    "param": "yes_no", 
+                    "label": "Choose one:"
+                }, 
+                {
+                    "name": "i3", 
+                    "type": "select_one", 
+                    "rowNum": 12, 
+                    "appearance": "inline", 
+                    "param": "yes_no", 
+                    "label": "Choose one:"
+                }
+            ]
         }
     ], 
     "settings": [
@@ -140,6 +180,18 @@
                 "rowNum": 10, 
                 "name": "jay", 
                 "image": "media/jay.png"
+            }
+        ], 
+        "yes_no": [
+            {
+                "rowNum": 12, 
+                "name": "yes", 
+                "label": "Yes"
+            }, 
+            {
+                "rowNum": 13, 
+                "name": "no", 
+                "label": "No"
             }
         ]
     }

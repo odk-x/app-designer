@@ -20,10 +20,12 @@
     </div>
 {{/if}}
 {{#if label}}
-    <big><p>
+    <p class="odk-label">
         {{#substitute}}{{localize label}}{{/substitute}}
-    </p></big>
+    </p>
 {{/if}}
 {{#if hint}}
-    <i><p class="odk-hint">{{#substitute}}{{localize hint}}{{/substitute}}</p></i>
+    <p class="odk-hint">
+        {{#substitute}}{{localize hint}}{{/substitute}}
+    </p>
 {{/if}}

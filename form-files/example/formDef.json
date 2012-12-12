@@ -48,9 +48,6 @@
         "video_test": {
             "type": "video/*"
         }, 
-        "visited_continents": {
-            "type": "string"
-        }, 
         "breathcount": {
             "type": "integer"
         }
