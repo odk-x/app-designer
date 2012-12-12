@@ -1411,7 +1411,7 @@
         }, 
         {
             "name": "malnutrition_grade", 
-            "hint": "Weight: {{weight}}kg", 
+            "hint": "Weight: {{weight.value}}kg", 
             "comments": "TODO: Template for plotting weight for age? Or make this a calculated value.", 
             "label": {
                 "default": "Determine grade of malnutrition by plotting weight for age on the graph", 
@@ -5034,7 +5034,8 @@
             "type": "string"
         }, 
         "birthday": {
-            "type": "string"
+            "elementType": "date", 
+            "type": "object"
         }, 
         "other_foods_per_day": {
             "type": "integer"

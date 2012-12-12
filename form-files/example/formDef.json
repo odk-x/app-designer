@@ -1,18 +1,18 @@
 {
     "model": {
         "picture": {
-            "type": "object",
-            "elementType": "mimeUri",
-            "isPersisted": true,
+            "isPersisted": true, 
+            "elementType": "mimeUri", 
+            "type": "object", 
             "properties": {
+                "contentType": {
+                    "default": "image/*", 
+                    "type": "string"
+                }, 
                 "uri": {
                     "type": "string"
-                    },
-                "contentType": {
-                    "type": "string",
-                    "default": "image/*"
-                    }
                 }
+            }
         }, 
         "visited_seattle": {
             "type": "string"
@@ -29,77 +29,58 @@
         "pulseox": {
             "type": "string"
         }, 
-        "time": {
-            "type": "object",
-            "elementType": "time"
+        "barcode": {
+            "type": "string"
         }, 
         "image_test": {
-            "type": "object",
-            "elementType": "mimeUri",
-            "isPersisted": true,
+            "isPersisted": true, 
+            "elementType": "mimeUri", 
+            "type": "object", 
             "properties": {
+                "contentType": {
+                    "default": "image/*", 
+                    "type": "string"
+                }, 
                 "uri": {
                     "type": "string"
-                    },
-                "contentType": {
-                    "type": "string",
-                    "default": "image/*"
-                    }
                 }
-        }, 
-        "datetime": {
-            "type": "object",
-            "elementType": "dateTime"
-        }, 
-        "location": {
-            "type": "object",
-            "elementType": "geopoint",
-            "properties": {
-                "latitude": {
-                    "type": "number"
-                    },
-                "longitude": {
-                    "type": "number"
-                    },
-                "altitude": {
-                    "type": "number"
-                    },
-                "accuracy": {
-                    "type": "number"
-                    }
             }
         }, 
+        "datetime": {
+            "elementType": "dateTime", 
+            "type": "object"
+        }, 
         "recording": {
-            "type": "object",
-            "elementType": "mimeUri",
-            "isPersisted": true,
+            "isPersisted": true, 
+            "elementType": "mimeUri", 
+            "type": "object", 
             "properties": {
+                "contentType": {
+                    "default": "audio/*", 
+                    "type": "string"
+                }, 
                 "uri": {
                     "type": "string"
-                    },
-                "contentType": {
-                    "type": "string",
-                    "default": "audio/*"
-                    }
                 }
+            }
         }, 
         "born": {
-            "type": "object",
-            "elementType": "date"
+            "elementType": "date", 
+            "type": "object"
         }, 
         "audio_test": {
-            "type": "object",
-            "elementType": "mimeUri",
-            "isPersisted": true,
+            "isPersisted": true, 
+            "elementType": "mimeUri", 
+            "type": "object", 
             "properties": {
+                "contentType": {
+                    "default": "audio/*", 
+                    "type": "string"
+                }, 
                 "uri": {
                     "type": "string"
-                    },
-                "contentType": {
-                    "type": "string",
-                    "default": "audio/*"
-                    }
                 }
+            }
         }, 
         "examples": {
             "type": "string"
@@ -111,18 +92,22 @@
             "type": "string"
         }, 
         "video_test": {
-            "type": "object",
-            "elementType": "mimeUri",
-            "isPersisted": true,
+            "isPersisted": true, 
+            "elementType": "mimeUri", 
+            "type": "object", 
             "properties": {
+                "contentType": {
+                    "default": "video/*", 
+                    "type": "string"
+                }, 
                 "uri": {
                     "type": "string"
-                    },
-                "contentType": {
-                    "type": "string",
-                    "default": "video/*"
-                    }
                 }
+            }
+        }, 
+        "time": {
+            "elementType": "time", 
+            "type": "object"
         }, 
         "breathcount": {
             "type": "integer"
@@ -228,7 +213,7 @@
             "rowNum": 14, 
             "type": "note", 
             "param": null, 
-            "label": "Hello {{name}}"
+            "label": "Hello {{name.value}}"
         }, 
         {
             "rowNum": 15, 
@@ -369,7 +354,7 @@
             "rowNum": 37, 
             "type": "note", 
             "condition": "data('x') === 10", 
-            "label": "x = {{x}}"
+            "label": "x = {{x.value}}"
         }, 
         {
             "name": "specialTemplateTest", 
