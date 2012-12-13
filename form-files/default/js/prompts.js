@@ -27,6 +27,9 @@ promptTypes.base = Backbone.View.extend({
         this.initializeRenderContext();
         this.afterInitialize();
     },
+	getPromptPath: function() {
+		return '' + this.promptIdx;
+	},
     whenTemplateIsReady: function(ctxt){
         var that = this;
         if(this.template) {
@@ -268,10 +271,8 @@ promptTypes.base = Backbone.View.extend({
         ctxt.append("prompts." + this.type, "px: " + this.promptIdx);
         ctxt.success();
     },
-    getCallback: function(ctxt, path, action) {
-        ctxt.append("prompts." + this.type, "px: " + this.promptIdx + " unimplemented: " + path + " action: " + action);
-        alert('getCallback: Unimplemented: ' + action);
-        ctxt.failure({message: "Unimplemented intent callback."});
+    getCallback: function(promptPath, internalPromptContext, action) {
+        throw new Error("prompts." + this.type, "px: " + this.promptIdx + " unimplemented promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
     },
     /*
     registerChangeHandlers: function() {
@@ -941,7 +942,7 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo(ctxt);
         // TODO: is this the right sequence?
-        var outcome = collect.doAction('' + that.promptIdx, 'take' + that.type, that.captureAction, null);
+        var outcome = collect.doAction(that.getPromptPath(), 'capture', that.captureAction, null);
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -957,7 +958,7 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo(ctxt);
         // TODO: is this the right sequence?
-        var outcome = collect.doAction('' + that.promptIdx, 'take' + that.type, that.chooseAction, null);
+        var outcome = collect.doAction(that.getPromptPath(), 'choose', that.chooseAction, null);
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -967,13 +968,18 @@ promptTypes.media = promptTypes.base.extend({
             ctxt.success();
         }
     },
-    getCallback: function(ctxt, bypath, byaction) {
+    getCallback: function(promptPath, byinternalPromptContext, byaction) {
         var that = this;
-        return function(ctxt, path, action, jsonString) {
-            ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " action: " + action);
+		if ( that.getPromptPath() != promptPath ) {
+			throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
+		}
+        return function(ctxt, internalPromptContext, action, jsonString) {
+            ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
+				" promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             var jsonObject = JSON.parse(jsonString);
             if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
-                ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " action: " + action);
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
+					" promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 var uri = (jsonObject.result != null) ? jsonObject.result.uri : null;
 				var contentType = (jsonObject.result != null) ? jsonObject.result.contentType : null;
                 if (uri != null && contentType != null) {
@@ -1005,7 +1011,8 @@ promptTypes.media = promptTypes.base.extend({
                 }
             }
             else {
-                ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " action: " + action);
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
+					" promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 console.log("failure returned");
                 alert(jsonObject.result);
         
@@ -1097,7 +1104,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
         });
         //We assume that the webkit could go away when an intent is launched,
         //so this prompt's "address" is passed along with the intent.
-        var outcome = collect.doAction('' + this.promptIdx, this.name, this.intentString, this.intentParameters);
+        var outcome = collect.doAction(that.getPromptPath(), 'launch', this.intentString, this.intentParameters);
         ctxt.append(this.intentString, platInfo.container + " outcome is " + outcome);
         if (outcome && outcome === "OK") {
             ctxt.success();
@@ -1113,19 +1120,22 @@ promptTypes.launch_intent = promptTypes.base.extend({
      * When the intent returns a result this factory function creates a callback to process it.
      * The callback can't use any state set before the intent was launched because the page might have been reloaded.
      */
-    getCallback: function(ctxt, bypath, byaction) {
+    getCallback: function(promptPath, byinternalPromptContext, byaction) {
         var that = this;
         $('#block-ui').hide().off();
-        return function(ctxt, path, action, jsonString) {
+		if ( that.getPromptPath() != promptPath ) {
+			throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
+		}
+        return function(ctxt, internalPromptContext, action, jsonString) {
             var jsonObject;
-            ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " action: " + action);
+            ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             try {
                 jsonObject = JSON.parse(jsonString);
             } catch (e) {
                 alert("Could not parse: " + jsonString);
             }
             if (jsonObject.status == -1 ) { // Activity.RESULT_OK
-                ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " action: " + action);
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 if (jsonObject.result != null) {
                     that.setValue($.extend({}, ctxt, {
                         success: function() {
@@ -1136,7 +1146,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                     }), that.extractDataValue(jsonObject));
                 }
             } else {
-                ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " action: " + action);
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 alert("failure returned");
                 console.error(jsonObject);
                 ctxt.failure({message: "Action canceled."});
@@ -1220,15 +1230,20 @@ promptTypes.screen = promptTypes.base.extend({
     prompts: [],
     initialize: function() {
         var that = this;
+		var curPath = that.getPromptPath();
         this.prompts = builder.initializePrompts(this.prompts, function(){});
         //Wire up the prompts so that if any of them rerender the screen rerenders.
         //TODO: Think about whether there is a better way of doing this.
         //Maybe bind this or subprompts to database change events instead?
         _.each(this.prompts, function(prompt){
             prompt._screenRender = prompt.render;
+			var curPromptPath = curPath + '.' + prompt.promptIdx;
             prompt.render = function(){
                 that.render();
             };
+			prompt.getPromptPath = function() {
+				return curPromptPath;
+			};
         });
         //this.initializeTemplate();
         this.initializeRenderContext();
@@ -1322,7 +1337,23 @@ promptTypes.screen = promptTypes.base.extend({
         //This stub is here because screens have no template so the default 
         //whenTemplateIsReady would otherwise cause an error in baseActivate.
 		ctxt.success();
-    }
+    },
+    /**
+     * When the intent returns a result this factory function creates a callback to process it.
+     * The callback can't use any state set before the intent was launched because the page might have been reloaded.
+     */
+    getCallback: function(promptPath, internalPromptContext, action) {
+		var pageParts = promptPath.split('.');
+		if ( pageParts.length != 2 ) {
+			throw new Error("prompts." + this.type, "px: " + this.promptIdx + " no nested promptIdx supplied: " + " page: " + page + " internalPromptContext: " + internalPromptContext + " action: " + action);
+		}
+		var idx = +pageParts[1];
+		if ( this.prompts.length <= idx ) {
+			throw new Error("prompts." + this.type, "px: " + this.promptIdx + " promptIdx not in screen: " + " page: " + page + " internalPromptContext: " + internalPromptContext + " action: " + action);
+		}
+		var p = this.prompts[idx];
+		return p.getCallback(promptPath, internalPromptContext, action);
+ 	}
 });
 promptTypes.label = promptTypes.base.extend({
     type: "label",

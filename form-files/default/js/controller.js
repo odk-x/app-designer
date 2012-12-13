@@ -417,27 +417,38 @@ window.controller = {
      * Callback interface from ODK Collect into javascript.
      * Handles all dispatching back into javascript from external intents
     */
-    opendatakitCallback:function(page, path, action, jsonString) {
+    opendatakitCallback:function(promptPath, internalPromptContext, action, jsonString) {
         var ctxt = this.newCallbackContext();
         ctxt.append('controller.opendatakitCallback', ((this.currentPromptIdx != null) ? ("px: " + this.currentPromptIdx) : "no current prompt"));
         
-        var selpage = this.getPromptByName(page);
+		// promptPath is a dot-separated list. The first element of 
+		// which is the index of the prompt in the global prompts list.
+		var promptPathParts = promptPath.split('.');
+        var selpage = this.getPromptByName(promptPathParts[0]);
         if ( selpage == null ) {
-            ctxt.append('controller.opendatakitCallback.noMatchingPrompt', page);
-            console.log("opendatakitCallback: ERROR - PAGE NOT FOUND! " + page + " path: " + path + " action: " + action );
+            ctxt.append('controller.opendatakitCallback.noMatchingPrompt', promptPath);
+            console.log("opendatakitCallback: ERROR - PAGE NOT FOUND! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
             ctxt.failure({message: "Internal error. Unable to locate matching prompt for callback."});
             return;
         }
         
-        var handler = selpage.getCallback(ctxt, path, action);
-        if ( handler != null ) {
-            handler( ctxt, path, action, jsonString );
-        } else {
-            ctxt.append('controller.opendatakitCallback.noHandler', page);
-            console.log("opendatakitCallback: ERROR - NO HANDLER ON PAGE! " + page + " path: " + path + " action: " + action );
-            ctxt.failure({message: "Internal error. No matching handler for callback."});
-            return;
-        }
+		try {
+			// ask this page to then get the appropriate handler
+			var handler = selpage.getCallback(promptPath, internalPromptContext, action);
+			if ( handler != null ) {
+				handler( ctxt, internalPromptContext, action, jsonString );
+			} else {
+				ctxt.append('controller.opendatakitCallback.noHandler', promptPath);
+				console.log("opendatakitCallback: ERROR - NO HANDLER ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
+				ctxt.failure({message: "Internal error. No matching handler for callback."});
+				return;
+			}
+		} catch (e) {
+			ctxt.append('controller.opendatakitCallback.exception', promptPath, e);
+			console.log("opendatakitCallback: EXCEPTION ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + " exception: " + e);
+			ctxt.failure({message: "Internal error. Exception while handling callback."});
+			return;
+		}
     },
     opendatakitGotoPreviousScreen:function() {
         var ctxt = controller.newCallbackContext();
