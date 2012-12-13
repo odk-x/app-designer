@@ -10,7 +10,7 @@
 *    Displays the options dialog for changing languages and navigations.
 */
 define(['opendatakit','backbone','jquery','handlebars','text!templates/screen.handlebars' ,'jqmobile'], 
-function(opendatakit, Backbone, $, Handlebars, screenTemplate) {
+function(opendatakit,  Backbone,  $,       Handlebars,  screenTemplate) {
 
 return Backbone.View.extend({
     el: "body",

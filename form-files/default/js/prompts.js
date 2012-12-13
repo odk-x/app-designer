@@ -3,24 +3,22 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'handlebarsHelpers'],
-function(database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _) {
+define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'translations', 'handlebarsHelpers'],
+function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _,            translations) {
 
 promptTypes.base = Backbone.View.extend({
     className: "current",
     type: "base",
     database: database,
     constraint_message: "Constraint violated.",
-    invalid_value_message: "Invalid value.",
-    required_message: "Required value not provided.",
+	invalid_value_message: "Invalid value.",
+	required_message: "Required value not provided.",
     //renderContext is a dynamic object to be passed into the render function.
-    //renderContext is meant to be private.
     renderContext: {},
     //Template context is an user specified object that overrides the render context.
     templateContext: {},
-    //base html attributes shouldn't be overridden by the user.
-    //they should use inputAttributes for that.
     baseInputAttributes: {},
+    //inputAttributes overrides baseInputAttributes
     inputAttributes: {},
     initialize: function() {
         //this.initializeTemplate();
@@ -107,11 +105,11 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.video = this.video;
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
+        this.renderContext.required = this.required;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
-        this.renderContext.formTitle = opendatakit.getSettingValue('formTitle');
-        this.renderContext.formVersion = opendatakit.getSettingValue('formVersion');
-        
+        this.renderContext.formTitle = database.getTableMetaDataValue('formTitle');
+        this.renderContext.formVersion = database.getTableMetaDataValue('formVersion');
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
@@ -144,6 +142,7 @@ promptTypes.base = Backbone.View.extend({
         console.log(evt);
         evt.stopImmediatePropagation();
     },
+    afterRender: function() {},
     render: function() {
         var that = this;
         //A virtual element is created so images can be loaded before the newly rendered screen is shown.
@@ -184,13 +183,8 @@ promptTypes.base = Backbone.View.extend({
                 numImagesLoaded = $imagesToLoad.length + 1;
             }
         },1000);
+        this.afterRender();
         return this;
-        /*
-        this.$el.html(this.template(this.renderContext));
-        //Triggering create seems to prevent some issues where jQm styles are not applied.
-        this.$el.trigger('create');
-        return this;
-        */
     },
     /**
      * baseValidate isn't meant to be overidden or called externally.
@@ -299,7 +293,7 @@ promptTypes.opening = promptTypes.base.extend({
         var that = this;
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
-            that.renderContext.headerImg = formLogo;
+            this.renderContext.headerImg = formLogo;
         }
         var instanceName = database.getInstanceMetaDataValue('instanceName');
         if ( instanceName == null ) {
@@ -513,15 +507,38 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     type: "select",
     templatePath: "templates/select.handlebars",
     events: {
-        "change input": "modification"
+        "change input": "modification",
+        //Only needed for child views
+        "click .deselect": "deselect",
+        "click .grid-select-item": "selectGridItem"
+    },
+    selectGridItem: function(evt) {
+        var $target = $(evt.target).closest('.grid-select-item');
+        var $input = $target.find('input');
+        $input.prop("checked", function(index, oldPropertyValue) {
+            if( oldPropertyValue ) {
+                $input.prop("checked", false);
+                $input.change();
+            } else {
+                $input.prop("checked", true);
+                $input.change();
+            }
+        });
     },
     choice_filter: function(){ return true; },
     updateRenderValue: function(formValue) {
         var that = this;
         //that.renderContext.value = formValue;
-        var filteredChoices = _.filter(that.renderContext.choices, function(choice){
+        var filteredChoices = _.filter(that.renderContext.choices, function(choice) {
             return that.choice_filter(choice);
         });
+        if(this.appearance === "grid") {
+            filteredChoices = _.map(filteredChoices, function(choice, idx) {
+                var columns = 3;
+                choice.colLetter = String.fromCharCode(97 + (idx % columns));
+                return choice;
+            });
+        }
         if ( !formValue ) {
             that.renderContext.choices = _.map(filteredChoices, function(choice) {
                 choice.checked = false;
@@ -529,33 +546,45 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             });
             return;
         }
+        //Check appropriate choices based on formValue
         that.renderContext.choices = _.map(filteredChoices, function(choice) {
             choice.checked = _.any(formValue, function(valueObject) {
                 return choice.name === valueObject.value;
             });
             return choice;
         });
-        var otherObject = _.find(formValue, function(valueObject) {
-            return (that.name + 'OtherValue' === valueObject.value);
-        });
-        that.renderContext.other = {
-            value: otherObject ? otherObject.value : '',
-            checked: _.any(formValue, function(valueObject) {
-                return (that.name + 'Other' === valueObject.name);
-            })
-        };
-        console.log(that.renderContext);
+        if(this.withOther) {
+            var otherObject = _.find(formValue, function(valueObject) {
+                return ('otherValue' === valueObject.name);
+            });
+            that.renderContext.other = {
+                value: otherObject ? otherObject.value : '',
+                checked: _.any(formValue, function(valueObject) {
+                    return ('other' === valueObject.value);
+                })
+            };
+        }
     },
     generateSaveValue: function(jsonFormSerialization) {
         return jsonFormSerialization ? JSON.stringify(jsonFormSerialization) : null;
     },
-    parseSaveValue: function(savedValue){
+    parseSaveValue: function(savedValue) {
         return savedValue ? JSON.parse(savedValue) : null;
     },
-    // TODO: choices should be cloned and allow calculations in the choices
-    // perhaps a null 'name' would drop the value from the list of choices...
-    // could also allow calculations in the 'checked' and 'value' fields.
     modification: function(evt) {
+        if(this.withOther) {
+            //This hack is needed to prevent rerendering
+            //causing the other input to loose focus when clicked.
+            if($(evt.target).val() === 'other' && this.renderContext.other.checked) {
+                return;
+            }
+        }
+        if(this.appearance === 'grid') {
+            //Make selection more reponsive by providing visual feedback before
+            //the template is re-rendered.
+            this.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
+            this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
+        }
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
         var that = this;
@@ -572,8 +601,8 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        var saveValue = that.parseSaveValue(that.getValue());
         var query;
+        that.renderContext.appearance = this.appearance;
         if(that.param in that.form.queries) {
             query = that.form.queries[that.param];
             //TODO: Come up with a tables uri and when we get that kind of uri do tables queries.
@@ -582,12 +611,12 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "url": query.uri(),
                 "dataType": 'json',
                 "data": {},
-                "success": function(result){
+                "success": function(result) {
                     that.renderContext.choices = query.callback(result);
-                    that.updateRenderValue(saveValue);
+                    that.updateRenderValue(that.parseSaveValue(that.getValue()));
                     that.baseActivate(ctxt);
                 },
-                "error": function(e){
+                "error": function(e) {
                     console.error(e);
                     alert('Could not get remote data');
                 }
@@ -598,56 +627,71 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             //We need to clone the choices so their values are unique to the prompt.
             that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
         }
-        that.updateRenderValue(saveValue);
+        that.updateRenderValue(that.parseSaveValue(that.getValue())); 
         that.baseActivate(ctxt);
+    },
+    deselect: function(evt) {
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".deselect", "px: " + this.promptIdx);
+        this.$('input:checked').prop('checked', false).change();
     }
 });
 promptTypes.select_one = promptTypes.select.extend({
     renderContext: {
         "select_one": true,
-        "deselect" : {
-            "default" : "Deselect",
-            "hindi" : "अचयनित"
-        }
-    },
-    events: {
-        "change input": "modification",
-        "click .deselect": "deselect"
-    },
-    deselect: function(evt) {
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".deselect", "px: " + this.promptIdx);
-        var that = this;
-        this.setValue($.extend({}, ctxt, {
-            success: function() {
-                that.updateRenderValue(null);
-                that.render();
-                ctxt.success();
-            }
-        }), null);
+        "deselect" : translations.deselect
     },
     generateSaveValue: function(jsonFormSerialization) {
+        var otherSelected, otherValue;
         if(jsonFormSerialization){
             if(jsonFormSerialization.length > 0){
+                if(this.withOther) {
+                    otherSelected = _.any(jsonFormSerialization, function(valueObject) {
+                        return ('other' === valueObject.value);
+                    });
+                    if(otherSelected) {
+                        otherValue = _.find(jsonFormSerialization, function(valueObject) {
+                            return ('otherValue' === valueObject.name);
+                        });
+                        return (otherValue ? otherValue.value : '');
+                    }
+                }
                 return jsonFormSerialization[0].value;
             }
         }
         return null;
     },
     parseSaveValue: function(savedValue){
-        return [{"name": this.name, "value": savedValue}];
+        //Note that this function expects to run after renderContext.choices
+        //has been initilized.
+        var inChoices = _.any(this.renderContext.choices, function(choice){
+            return choice.name === savedValue;
+        });
+        if (inChoices) {
+            return [{
+                "name": this.name,
+                "value": savedValue
+            }];
+        }
+        else {
+            return [{
+                "name": "other",
+                "value": "other"
+            }, {
+                "name": "otherValue",
+                "value": savedValue
+            }];
+        }
     }
 });
-promptTypes.select_one_or_other = promptTypes.select_one.extend({
-    renderContext: {
-        select_one: true,
-        or_other: true
-    }
+promptTypes.select_one_with_other = promptTypes.select_one.extend({
+    withOther: true
 });
-promptTypes.select_or_other = promptTypes.select.extend({
-    renderContext: {
-        or_other: true
-    }
+//TODO:
+//Since multiple choices are possible should it be possible
+//to add arbitrary many other values to a select_with_other?
+promptTypes.select_with_other = promptTypes.select.extend({
+    withOther: true
 });
 promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
     type: "text",
@@ -825,12 +869,15 @@ promptTypes.datetime = promptTypes.input_type.extend({
             }
         }), value);
     },
-    //TODO: This will have problems with image labels.
-    render: function() {
+    
+    afterRender: function() {
         var that = this;
+        /*
+        //TODO: This will have problems with image labels.
         that.$el.html(that.template(that.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
+        */
 		if(this.useMobiscroll){
 				that.$('input').scroller(that.scrollerAttributes);
 			var value = that.getValue();
@@ -1015,7 +1062,6 @@ promptTypes.media = promptTypes.base.extend({
 					" promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 console.log("failure returned");
                 alert(jsonObject.result);
-        
                 that.enableButtons();
                 var mediaUri = that.getValue();
                 var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
@@ -1154,9 +1200,10 @@ promptTypes.launch_intent = promptTypes.base.extend({
         };
     },
 	extractDataValue: function(jsonObject) {
-		return JSON.stringify(jsonObject.result);
+		return jsonObject.result;
 	}
 });
+/* Save only SCAN_RESULT ? */
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
     intentString: 'com.google.zxing.client.android.SCAN',
@@ -1174,8 +1221,8 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
 				 accuracy: jsonObject.result.accuracy };
 	}
 });
-promptTypes.geopointMap = promptTypes.launch_intent.extend({
-    type: "geopointMap",
+promptTypes.geopointmap = promptTypes.launch_intent.extend({
+    type: "geopointmap",
     intentString: 'org.opendatakit.collect.android.activities.GeoPointMapActivity',
  	extractDataValue: function(jsonObject) {
 		return { latitude: jsonObject.result.latitude, 
@@ -1303,9 +1350,8 @@ promptTypes.screen = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        that.baseActivate(ctxt);
         var subPromptsReady = _.after(this.prompts.length, function () {
-            ctxt.success();
+            that.baseActivate(ctxt);
         });
         _.each(this.prompts, function(prompt){
             prompt.onActivate($.extend({}, ctxt, {
@@ -1332,6 +1378,8 @@ promptTypes.screen = promptTypes.base.extend({
             prompt.delegateEvents();
         });
         this.$el.trigger('create');
+        this.afterRender();
+        return this;
     },
     whenTemplateIsReady: function(ctxt){
         //This stub is here because screens have no template so the default 
@@ -1385,10 +1433,7 @@ promptTypes.note = promptTypes.base.extend({
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
     autoAdvance: false,
-    acknLabel: {
-        "default": "Acknowledge",
-        "hindi": "स्वीकार करना"
-    },
+    acknLabel: translations.acknLabel,
     modification: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append('acknowledge.modification', this.promptIdx);

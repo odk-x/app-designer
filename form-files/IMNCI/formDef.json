@@ -29,7 +29,15 @@
             "rowNum": 2, 
             "name": "pulseox", 
             "schema": {
-                "type": "string"
+                "type": "object", 
+                "properties": {
+                    "pulse": {
+                        "type": "number"
+                    }, 
+                    "ox": {
+                        "type": "number"
+                    }
+                }
             }
         }, 
         {
@@ -629,7 +637,10 @@
                     "required": true, 
                     "type": "select_one", 
                     "param": "yes_no", 
-                    "label": "Does the mother know the child's birthdate?"
+                    "label": {
+                        "default": "Does the mother know the child's birthdate?", 
+                        "hindi": "क्या माँ को बच्चे की जन्मतिथि पता है?"
+                    }
                 }, 
                 {
                     "name": "birthday", 
@@ -657,7 +668,10 @@
                     "hint": "Please enter only months", 
                     "required": true, 
                     "param": null, 
-                    "label": "How many months old is the child?", 
+                    "label": {
+                        "default": "How many months old is the child?", 
+                        "hindi": "कितने महीने का बच्चा है?"
+                    }, 
                     "rowNum": 7, 
                     "type": "integer", 
                     "condition": "selected(data('birthdayKnown'), 'no')"
@@ -1411,7 +1425,7 @@
         }, 
         {
             "name": "malnutrition_grade", 
-            "hint": "Weight: {{weight}}kg", 
+            "hint": "Weight: {{weight.value}}kg", 
             "comments": "TODO: Template for plotting weight for age? Or make this a calculated value.", 
             "label": {
                 "default": "Determine grade of malnutrition by plotting weight for age on the graph", 
@@ -5034,7 +5048,8 @@
             "type": "string"
         }, 
         "birthday": {
-            "type": "string"
+            "elementType": "date", 
+            "type": "object"
         }, 
         "other_foods_per_day": {
             "type": "integer"
@@ -5154,7 +5169,15 @@
             "type": "string"
         }, 
         "pulseox": {
-            "type": "string"
+            "type": "object", 
+            "properties": {
+                "pulse": {
+                    "type": "number"
+                }, 
+                "ox": {
+                    "type": "number"
+                }
+            }
         }, 
         "serving_unit": {
             "type": "string"

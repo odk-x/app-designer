@@ -18,11 +18,8 @@ function(promptTypes, $,       _) {
                 'hindi': 'शुरू करना सांस की गिनती'
             },
             intentString: 'change.uw.android.BREATHCOUNT',
-            parseValue: function(unparsedValue) {
-                return { 'value' : unparsedValue };
-            },
-            serializeValue: function(value) {
-                return value.value;
+            extractDataValue: function(jsonObject) {
+                return jsonObject.result.value;
             }
         })
     };
