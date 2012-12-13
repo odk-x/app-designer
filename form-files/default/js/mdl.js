@@ -16,8 +16,8 @@
  */
 define({data: {},  // dataTable instance data values
 		metadata: {}, // dataTable instance Metadata: (instanceName, locale)
-		tableMetadata: {}, // _table_definitions and _table_key_value_store_active values: tableId, tableKey, dbTableName
-		columnMetadata: {},// _column_definitions and _column_key_value_store_active values: none...
+		tableMetadata: {}, // _table_definitions and _key_value_store_active("table","global") values: tableId, tableKey, dbTableName
+		columnMetadata: {},// _column_definitions and _key_value_store_active("column",elementKey) values: none...
 		dataTableModel: {},// inverted and extended formDef.model for representing data store
 		formDef: {}, 
 		formPath: '', 

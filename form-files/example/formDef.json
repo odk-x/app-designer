@@ -124,6 +124,9 @@
                     }
                 }
         }, 
+        "barcode": {
+            "type": "string"
+        }, 
         "visited_continents": {
             "type": "string"
         }, 
