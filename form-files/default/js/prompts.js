@@ -1021,30 +1021,33 @@ promptTypes.media = promptTypes.base.extend({
             var jsonObject = JSON.parse(jsonString);
             if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " action: " + action);
-                var mediaPath = (jsonObject.result !== null) ? jsonObject.result.mediaPath : null;
-                if (mediaPath !== null) {
+                var uri = (jsonObject.result != null) ? jsonObject.result.uri : null;
+				var contentType = (jsonObject.result != null) ? jsonObject.result.contentType : null;
+                if (uri != null && contentType != null) {
                     // TODO: write as MIMEURI type
                     var oldPath = that.getValue();
-                    if ( mediaPath != oldPath) {
+                    if ( uri != oldPath) {
                         // TODO: delete old??? Or leave until marked as finalized?
                         // TODO: I'm not sure how the resuming works, but we'll need to make sure
                         // onActivate get's called AFTER this happens.
                         database.setData( $.extend({},ctxt,{success:function() {
                                 that.enableButtons();
-                                var mediaPath = that.getValue();
-                                that.renderContext.mediaPath = mediaPath;
-                                that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+                                var mediaUri = that.getValue();
+								var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
+                                that.renderContext.mediaPath = uri;
+                                that.renderContext.uriValue = uri;
                                 that.render();
                                 ctxt.success();
                             },
                             failure:function(m) {
                                 that.enableButtons();
-                                var mediaPath = that.getValue();
-                                that.renderContext.mediaPath = mediaPath;
-                                that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+                                var mediaUri = that.getValue();
+								var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
+                                that.renderContext.mediaPath = uri;
+                                that.renderContext.uriValue = uri;
                                 that.render();
                                 ctxt.failure(m);
-                            }}), that.name, { uri : mediaPath, contentType: contentType } );
+                            }}), that.name, { uri : uri, contentType: contentType } );
                     }
                 }
             }
@@ -1053,9 +1056,10 @@ promptTypes.media = promptTypes.base.extend({
                 console.log("failure returned");
                 alert(jsonObject.result);
                 that.enableButtons();
-                var mediaPath = that.getValue();
-                that.renderContext.mediaPath = mediaPath;
-                that.renderContext.uriValue = opendatakit.asUri(ctxt, mediaPath, that.type, 'src');
+                var mediaUri = that.getValue();
+                var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
+                that.renderContext.mediaPath = uri;
+                that.renderContext.uriValue = uri;
                 that.render();
                 ctxt.failure({message: "Action canceled."});
             }
@@ -1071,11 +1075,10 @@ promptTypes.image = promptTypes.media.extend({
     chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseImageActivity',
     onActivate: function(ctxt) {
         var that = this;
-        var value = that.getValue();
-        if (value != null && value.length != 0) {
-            that.renderContext.mediaPath = value.uri;
-            that.renderContext.uriValue = value.uri;
-        }
+        var mediaUri = that.getValue();
+        var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
+		that.renderContext.mediaPath = uri;
+		that.renderContext.uriValue = uri;
         this.baseActivate(ctxt);
     }
 });
@@ -1088,12 +1091,11 @@ promptTypes.video = promptTypes.media.extend({
     chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseVideoActivity',
     onActivate: function(ctxt) {
         var that = this;
-        var value = that.getValue();
-        if (value != null && value.length != 0) {
-            that.renderContext.mediaPath = value.uri;
-            that.renderContext.uriValue = value.uri;
-            that.renderContext.videoPoster = opendatakit.asUri(ctxt, opendatakit.baseDir + "img/play.png", 'video', 'poster');
-        }
+        var mediaUri = that.getValue();
+        var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
+		that.renderContext.mediaPath = uri;
+		that.renderContext.uriValue = uri;
+		that.renderContext.videoPoster = uri;
         this.baseActivate(ctxt);
     }
 });
@@ -1106,11 +1108,10 @@ promptTypes.audio = promptTypes.media.extend({
     label: 'Take your audio:',
     onActivate: function(ctxt) {
         var that = this;
-        var value = that.getValue();
-        if (value != null && value.length != 0) {
-            that.renderContext.mediaPath = value.uri;
-            that.renderContext.uriValue = value.uri;
-        }
+        var mediaUri = that.getValue();
+        var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
+		that.renderContext.mediaPath = uri;
+		that.renderContext.uriValue = uri;
         this.baseActivate(ctxt);
     },
 });
@@ -1127,14 +1128,9 @@ promptTypes.launch_intent = promptTypes.base.extend({
     events: {
         "click .launch": "launch"
     },
-    parseValue: JSON.parse,
-    serializeValue: JSON.stringify,
     onActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
-        if(typeof value !== 'undefined'){
-            value = that.parseValue(value);
-        }
         that.renderContext.value = value;
         that.renderContext.buttonLabel = that.buttonLabel;
         this.baseActivate(ctxt);
@@ -1179,11 +1175,11 @@ promptTypes.launch_intent = promptTypes.base.extend({
                 if (jsonObject.result != null) {
                     that.setValue($.extend({}, ctxt, {
                         success: function() {
-                            that.renderContext.value = jsonObject.result;
+                            that.renderContext.value = that.getValue();
                             that.render();
                             ctxt.success();
                         }
-                    }), that.serializeValue(jsonObject.result));
+                    }), that.extractDataValue(jsonObject));
                 }
             } else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " action: " + action);
@@ -1192,17 +1188,38 @@ promptTypes.launch_intent = promptTypes.base.extend({
                 ctxt.failure({message: "Action canceled."});
             }
         };
-    }
+    },
+	extractDataValue: function(jsonObject) {
+		return jsonObject.result;
+	}
 });
 /* Save only SCAN_RESULT ? */
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
-    intentString: 'com.google.zxing.client.android.SCAN'
+    intentString: 'com.google.zxing.client.android.SCAN',
+ 	extractDataValue: function(jsonObject) {
+		return jsonObject.result.value;
+	}
 });
-
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
-    intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity'
+    intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity',
+ 	extractDataValue: function(jsonObject) {
+		return { latitude: jsonObject.result.latitude, 
+				 longitude: jsonObject.result.longitude, 
+				 altitude: jsonObject.result.altitude, 
+				 accuracy: jsonObject.result.accuracy };
+	}
+});
+promptTypes.geopointmap = promptTypes.launch_intent.extend({
+    type: "geopointmap",
+    intentString: 'org.opendatakit.collect.android.activities.GeoPointMapActivity',
+ 	extractDataValue: function(jsonObject) {
+		return { latitude: jsonObject.result.latitude, 
+				 longitude: jsonObject.result.longitude, 
+				 altitude: jsonObject.result.altitude, 
+				 accuracy: jsonObject.result.accuracy };
+	}
 });
 /*
 //HTML5 geopoints seem to work in the browser but not in the app.

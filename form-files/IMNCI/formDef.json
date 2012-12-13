@@ -26,10 +26,20 @@
     ], 
     "prompt_types": [
         {
+            "shema": {
+                "properties": {
+                    "pulse": {
+                        "type": "number"
+                    }, 
+                    "ox": {
+                        "type": "number"
+                    }
+                }
+            }, 
             "rowNum": 2, 
             "name": "pulseox", 
             "schema": {
-                "type": "string"
+                "type": "object"
             }
         }, 
         {
@@ -629,7 +639,10 @@
                     "required": true, 
                     "type": "select_one", 
                     "param": "yes_no", 
-                    "label": "Does the mother know the child's birthdate?"
+                    "label": {
+                        "default": "Does the mother know the child's birthdate?", 
+                        "hindi": "क्या माँ को बच्चे की जन्मतिथि पता है?"
+                    }
                 }, 
                 {
                     "name": "birthday", 
@@ -657,7 +670,10 @@
                     "hint": "Please enter only months", 
                     "required": true, 
                     "param": null, 
-                    "label": "How many months old is the child?", 
+                    "label": {
+                        "default": "How many months old is the child?", 
+                        "hindi": "कितने महीने का बच्चा है?"
+                    }, 
                     "rowNum": 7, 
                     "type": "integer", 
                     "condition": "selected(data('birthdayKnown'), 'no')"
@@ -5155,7 +5171,7 @@
             "type": "string"
         }, 
         "pulseox": {
-            "type": "string"
+            "type": "object"
         }, 
         "serving_unit": {
             "type": "string"

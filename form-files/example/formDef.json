@@ -26,9 +26,6 @@
         "specialTemplateTest": {
             "type": "string"
         }, 
-        "pulseox": {
-            "type": "string"
-        }, 
         "barcode": {
             "type": "string"
         }, 
@@ -108,9 +105,6 @@
         "time": {
             "elementType": "time", 
             "type": "object"
-        }, 
-        "breathcount": {
-            "type": "integer"
         }
     }, 
     "settings": [
