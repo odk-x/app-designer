@@ -504,38 +504,38 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
     }
 },
 _getElementPathPairFromKvMap: function(kvMap, elementPath) {
-	var path = elementPath.split('.');
-	var e = kvMap;
-	var i, j, term, value, pathChain;
-	// work from most specific to least specific searching for a value match
-	for (j = path.length-1 ; j >= 0 ; --j) {
-		pathChain = '';
-		for (i = 0 ; i <= j ; ++i) {
-			pathChain = '.' + path[i] + pathChain;
-		}
-		pathChain = pathChain.substring(1);
-		if ( kvMap[pathChain] != null ) {
-			// found a definition...
-			term = kvMap[pathChain];
-			value = term.value;
-			// now find the definition for this element
-			// within the composite value
-			for ( i = j+1 ; i <= path.length-1 ; ++i ) {
-				value = value[path[i]];
-				if ( value == null ) break;
-			}
-			var e = {};
-			var f;
-			for ( f in term ) {
-				if ( f != "value" ) {
-					e[f] = term[f];
-				}
-			}
-			e['value'] = value;
-			return {element: e, elementPath: pathChain};
-		}
-	}
-	return null;
+    var path = elementPath.split('.');
+    var e = kvMap;
+    var i, j, term, value, pathChain;
+    // work from most specific to least specific searching for a value match
+    for (j = path.length-1 ; j >= 0 ; --j) {
+        pathChain = '';
+        for (i = 0 ; i <= j ; ++i) {
+            pathChain = '.' + path[i] + pathChain;
+        }
+        pathChain = pathChain.substring(1);
+        if ( kvMap[pathChain] != null ) {
+            // found a definition...
+            term = kvMap[pathChain];
+            value = term.value;
+            // now find the definition for this element
+            // within the composite value
+            for ( i = j+1 ; i <= path.length-1 ; ++i ) {
+                value = value[path[i]];
+                if ( value == null ) break;
+            }
+            var e = {};
+            var f;
+            for ( f in term ) {
+                if ( f != "value" ) {
+                    e[f] = term[f];
+                }
+            }
+            e['value'] = value;
+            return {element: e, elementPath: pathChain};
+        }
+    }
+    return null;
 },
 /**
  * insert a new automatic savepoint for the given record and change the 
@@ -575,12 +575,12 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
         if ( defElement.isPersisted ) {
             stmt += comma;
             comma = ', ';
-			var elementPath = defElement['elementPath'];
-			if ( elementPath == null ) elementPath = f;
-			// TODO: get kvElement for this elementPath
+            var elementPath = defElement['elementPath'];
+            if ( elementPath == null ) elementPath = f;
+            // TODO: get kvElement for this elementPath
             elementPathPair = this._getElementPathPairFromKvMap(kvMap, elementPath);
-			if ( elementPathPair != null ) {
-				kvElement = elementPathPair.element;
+            if ( elementPathPair != null ) {
+                kvElement = elementPathPair.element;
                 // track that we matched the keyname...
                 processSet[elementPathPair.elementPath] = true;
                 if (kvElement.value == null) {

@@ -29,7 +29,7 @@ window.collect = window.collect || {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.jpg",' + 
-													'"contentType": "image/jpg" } }' );
+                                                    '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
         }
@@ -37,7 +37,7 @@ window.collect = window.collect || {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.3gpp",' + 
-													'"contentType": "video/3gpp" } }' );
+                                                    '"contentType": "video/3gpp" } }' );
             }, 100);
             return "OK";
         }
@@ -45,7 +45,7 @@ window.collect = window.collect || {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.3gpp",' + 
-													'"contentType": "audio/3gpp" } }' );
+                                                    '"contentType": "audio/3gpp" } }' );
             }, 100);
             return "OK";
         }
@@ -53,7 +53,7 @@ window.collect = window.collect || {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.jpg",' + 
-													'"contentType": "image/jpg" } }' );
+                                                    '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
         }
@@ -61,7 +61,7 @@ window.collect = window.collect || {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.3gpp",' + 
-													'"contentType": "video/3gpp" } }' );
+                                                    '"contentType": "video/3gpp" } }' );
             }, 100);
             return "OK";
         }
@@ -69,7 +69,7 @@ window.collect = window.collect || {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.3gpp",' + 
-													'"contentType": "audio/3gpp" } }' );
+                                                    '"contentType": "audio/3gpp" } }' );
             }, 100);
             return "OK";
         }
@@ -98,10 +98,10 @@ window.collect = window.collect || {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "latitude": ' + prompt("Enter latitude:") + 
-												', "longitude": ' + prompt("Enter longitude:") +
-												', "altitude": ' + prompt("Enter altitude:") +
-												', "accuracy": ' + prompt("Enter accuracy:") +
-												' } }' );
+                                                ', "longitude": ' + prompt("Enter longitude:") +
+                                                ', "altitude": ' + prompt("Enter altitude:") +
+                                                ', "accuracy": ' + prompt("Enter accuracy:") +
+                                                ' } }' );
             }, 1000);
             return "OK";
         }
@@ -109,10 +109,10 @@ window.collect = window.collect || {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "latitude": ' + prompt("Enter latitude:") + 
-												', "longitude": ' + prompt("Enter longitude:") +
-												', "altitude": ' + prompt("Enter altitude:") +
-												', "accuracy": ' + prompt("Enter accuracy:") +
-												' } }' );
+                                                ', "longitude": ' + prompt("Enter longitude:") +
+                                                ', "altitude": ' + prompt("Enter altitude:") +
+                                                ', "accuracy": ' + prompt("Enter accuracy:") +
+                                                ' } }' );
             }, 1000);
             return "OK";
         }

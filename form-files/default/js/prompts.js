@@ -11,8 +11,8 @@ promptTypes.base = Backbone.View.extend({
     type: "base",
     database: database,
     constraint_message: "Constraint violated.",
-	invalid_value_message: "Invalid value.",
-	required_message: "Required value not provided.",
+    invalid_value_message: "Invalid value.",
+    required_message: "Required value not provided.",
     //renderContext is a dynamic object to be passed into the render function.
     renderContext: {},
     //Template context is an user specified object that overrides the render context.
@@ -25,9 +25,9 @@ promptTypes.base = Backbone.View.extend({
         this.initializeRenderContext();
         this.afterInitialize();
     },
-	getPromptPath: function() {
-		return '' + this.promptIdx;
-	},
+    getPromptPath: function() {
+        return '' + this.promptIdx;
+    },
     whenTemplateIsReady: function(ctxt){
         var that = this;
         if(this.template) {
@@ -108,8 +108,8 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.required = this.required;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
-        this.renderContext.formTitle = database.getTableMetaDataValue('formTitle');
-        this.renderContext.formVersion = database.getTableMetaDataValue('formVersion');
+        this.renderContext.formTitle = database.getSettingValue('formTitle');
+        this.renderContext.formVersion = database.getSettingValue('formVersion');
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
@@ -408,22 +408,22 @@ promptTypes.instances = promptTypes.base.extend({
     onActivate: function(ctxt) {
         var that = this;
         ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
-		database.get_all_instances($.extend({},ctxt,{
-			success:function(instanceList) {
-				that.renderContext.instances = instanceList;
-				$.extend(that.renderContext, {
-					formTitle: opendatakit.getSettingValue('formTitle'),
-					headerImg: opendatakit.baseDir + 'img/form_logo.png'
-				});
-				that.baseActivate($.extend({}, ctxt, {
-					success:function(){
-						ctxt.success({
-							showHeader: false,
-							enableNavigation:false,
-							showFooter:false
-						});
-					}
-				}));
+        database.get_all_instances($.extend({},ctxt,{
+            success:function(instanceList) {
+                that.renderContext.instances = instanceList;
+                $.extend(that.renderContext, {
+                    formTitle: opendatakit.getSettingValue('formTitle'),
+                    headerImg: opendatakit.baseDir + 'img/form_logo.png'
+                });
+                that.baseActivate($.extend({}, ctxt, {
+                    success:function(){
+                        ctxt.success({
+                            showHeader: false,
+                            enableNavigation:false,
+                            showFooter:false
+                        });
+                    }
+                }));
         }}));
     },
     createInstance: function(evt){
@@ -479,18 +479,18 @@ promptTypes.repeat = promptTypes.base.extend({
         var that = this;
         var subsurveyType = this.param;
         ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
-		database.get_all_instances($.extend({},ctxt,{
-			success:function(instanceList) {
-				that.renderContext.instances = instanceList;
-				that.baseActivate($.extend({}, ctxt, {
-					success:function(){
-						ctxt.success({
-							showHeader: false,
-							enableNavigation:false,
-							showFooter:false
-						});
-					}
-				}));
+        database.get_all_instances($.extend({},ctxt,{
+            success:function(instanceList) {
+                that.renderContext.instances = instanceList;
+                that.baseActivate($.extend({}, ctxt, {
+                    success:function(){
+                        ctxt.success({
+                            showHeader: false,
+                            enableNavigation:false,
+                            showFooter:false
+                        });
+                    }
+                }));
         }}), subsurveyType);
     },
     openInstance: function(evt) {
@@ -777,7 +777,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     scrollerAttributes: {
         preset: 'datetime',
         theme: 'jqm',
-		display: 'modal'
+        display: 'modal'
         //Avoiding inline display because there
         //can be some debouncing issues.
         //Warning: mixed/clickpick mode doesn't work on galaxy nexus.
@@ -839,32 +839,32 @@ promptTypes.datetime = promptTypes.input_type.extend({
         }
     },
     modification: function(evt) {
-		var that = this;
+        var that = this;
         var value = that.$('input').scroller('getDate');
-		var ref = that.getValue();
-		var rerender = ((ref == null || value == null) && (ref != value )) ||
-				(ref != null && value != null && ref.valueOf() != value.valueOf());
-		var ctxt = controller.newContext(evt);
+        var ref = that.getValue();
+        var rerender = ((ref == null || value == null) && (ref != value )) ||
+                (ref != null && value != null && ref.valueOf() != value.valueOf());
+        var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
-		if ( value == null ) {
-			renderContext.value = '';
-		} else {
-			renderContext.value = that.$('input').val();
-		}
+        if ( value == null ) {
+            renderContext.value = '';
+        } else {
+            renderContext.value = that.$('input').val();
+        }
         that.setValue($.extend({}, ctxt, {
             success: function() {
                 renderContext.invalid = !that.validateValue();
-				if ( rerender ) {
-					that.debouncedRender();
-				}
+                if ( rerender ) {
+                    that.debouncedRender();
+                }
                 ctxt.success();
             },
             failure: function(m) {
                 renderContext.invalid = true;
-				if ( rerender ) {
-					that.debouncedRender();
-				}
+                if ( rerender ) {
+                    that.debouncedRender();
+                }
                 ctxt.failure(m);
             }
         }), value);
@@ -878,20 +878,20 @@ promptTypes.datetime = promptTypes.input_type.extend({
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
         */
-		if(this.useMobiscroll){
-				that.$('input').scroller(that.scrollerAttributes);
-			var value = that.getValue();
-			if ( value == null ) {
-				that.$('input').val
-				that.$('input').scroller('setDate',new Date(),false);
-			} else {
-				that.$('input').scroller('setDate',value, true);
-			}
-			return this;
-		}
-	},
+        if(this.useMobiscroll){
+                that.$('input').scroller(that.scrollerAttributes);
+            var value = that.getValue();
+            if ( value == null ) {
+                that.$('input').val
+                that.$('input').scroller('setDate',new Date(),false);
+            } else {
+                that.$('input').scroller('setDate',value, true);
+            }
+            return this;
+        }
+    },
     beforeMove: function(ctxt) {
-		// the spinner will have already saved the value
+        // the spinner will have already saved the value
         ctxt.success();
     }
 });
@@ -900,7 +900,7 @@ promptTypes.date = promptTypes.datetime.extend({
     scrollerAttributes: {
         preset: 'date',
         theme: 'jqm',
-		display: 'modal'
+        display: 'modal'
     }
 });
 promptTypes.time = promptTypes.datetime.extend({
@@ -908,35 +908,35 @@ promptTypes.time = promptTypes.datetime.extend({
     scrollerAttributes: {
         preset: 'time',
         theme: 'jqm',
-		display: 'modal'
+        display: 'modal'
     },
     modification: function(evt) {
-		var that = this;
+        var that = this;
         var value = that.$('input').scroller('getDate');
-		var ref = that.getValue();
-		var rerender = ((ref == null || value == null) && (ref != value )) ||
-				(ref != null && value != null && ref.valueOf() != value.valueOf());
-		var ctxt = controller.newContext(evt);
+        var ref = that.getValue();
+        var rerender = ((ref == null || value == null) && (ref != value )) ||
+                (ref != null && value != null && ref.valueOf() != value.valueOf());
+        var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
-		if ( value == null ) {
-			renderContext.value = '';
-		} else {
-			renderContext.value = that.$('input').val();
-		}
+        if ( value == null ) {
+            renderContext.value = '';
+        } else {
+            renderContext.value = that.$('input').val();
+        }
         that.setValue($.extend({}, ctxt, {
             success: function() {
                 renderContext.invalid = !that.validateValue();
-				if ( rerender ) {
-					that.debouncedRender();
-				}
+                if ( rerender ) {
+                    that.debouncedRender();
+                }
                 ctxt.success();
             },
             failure: function(m) {
                 renderContext.invalid = true;
-				if ( rerender ) {
-					that.debouncedRender();
-				}
+                if ( rerender ) {
+                    that.debouncedRender();
+                }
                 ctxt.failure(m);
             }
         }), value);
@@ -947,18 +947,18 @@ promptTypes.time = promptTypes.datetime.extend({
         that.$el.html(that.template(that.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
-		that.$('input').scroller(that.scrollerAttributes);
-		var value = that.getValue();
-		if ( value == null ) {
-			that.$('input').val
-			that.$('input').scroller('setDate',new Date(),false);
-		} else {
-			that.$('input').scroller('setDate',value, true);
-		}
+        that.$('input').scroller(that.scrollerAttributes);
+        var value = that.getValue();
+        if ( value == null ) {
+            that.$('input').val
+            that.$('input').scroller('setDate',new Date(),false);
+        } else {
+            that.$('input').scroller('setDate',value, true);
+        }
         return this;
     },
     beforeMove: function(ctxt) {
-		// the spinner will have already saved the value
+        // the spinner will have already saved the value
         ctxt.success();
     }
 });
@@ -1017,18 +1017,18 @@ promptTypes.media = promptTypes.base.extend({
     },
     getCallback: function(promptPath, byinternalPromptContext, byaction) {
         var that = this;
-		if ( that.getPromptPath() != promptPath ) {
-			throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
-		}
+        if ( that.getPromptPath() != promptPath ) {
+            throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
+        }
         return function(ctxt, internalPromptContext, action, jsonString) {
             ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
-				" promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+                " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             var jsonObject = JSON.parse(jsonString);
             if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
-					" promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+                    " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 var uri = (jsonObject.result != null) ? jsonObject.result.uri : null;
-				var contentType = (jsonObject.result != null) ? jsonObject.result.contentType : null;
+                var contentType = (jsonObject.result != null) ? jsonObject.result.contentType : null;
                 if (uri != null && contentType != null) {
                     // TODO: write as MIMEURI type
                     var oldPath = that.getValue();
@@ -1039,7 +1039,7 @@ promptTypes.media = promptTypes.base.extend({
                         database.setData( $.extend({},ctxt,{success:function() {
                                 that.enableButtons();
                                 var mediaUri = that.getValue();
-								var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
+                                var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
                                 that.renderContext.mediaPath = uri;
                                 that.renderContext.uriValue = uri;
                                 that.render();
@@ -1048,7 +1048,7 @@ promptTypes.media = promptTypes.base.extend({
                             failure:function(m) {
                                 that.enableButtons();
                                 var mediaUri = that.getValue();
-								var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
+                                var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
                                 that.renderContext.mediaPath = uri;
                                 that.renderContext.uriValue = uri;
                                 that.render();
@@ -1059,7 +1059,7 @@ promptTypes.media = promptTypes.base.extend({
             }
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
-					" promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+                    " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 console.log("failure returned");
                 alert(jsonObject.result);
                 that.enableButtons();
@@ -1075,7 +1075,7 @@ promptTypes.media = promptTypes.base.extend({
 });
 promptTypes.image = promptTypes.media.extend({
     type: "image",
-	contentType: "image/*",
+    contentType: "image/*",
     label: 'Take your photo:',
     templatePath: "templates/image.handlebars",
     captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity',
@@ -1084,14 +1084,14 @@ promptTypes.image = promptTypes.media.extend({
         var that = this;
         var mediaUri = that.getValue();
         var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
-		that.renderContext.mediaPath = uri;
-		that.renderContext.uriValue = uri;
+        that.renderContext.mediaPath = uri;
+        that.renderContext.uriValue = uri;
         this.baseActivate(ctxt);
     }
 });
 promptTypes.video = promptTypes.media.extend({
     type: "video",
-	contentType: "video/*",
+    contentType: "video/*",
     label: 'Take your video:',
     templatePath: "templates/video.handlebars",
     captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity',
@@ -1100,15 +1100,15 @@ promptTypes.video = promptTypes.media.extend({
         var that = this;
         var mediaUri = that.getValue();
         var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
-		that.renderContext.mediaPath = uri;
-		that.renderContext.uriValue = uri;
-		that.renderContext.videoPoster = uri;
+        that.renderContext.mediaPath = uri;
+        that.renderContext.uriValue = uri;
+        that.renderContext.videoPoster = uri;
         this.baseActivate(ctxt);
     }
 });
 promptTypes.audio = promptTypes.media.extend({
     type: "audio",
-	contentType: "audio/*",
+    contentType: "audio/*",
     templatePath: "templates/audio.handlebars",
     captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity',
     chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseAudioActivity',
@@ -1117,8 +1117,8 @@ promptTypes.audio = promptTypes.media.extend({
         var that = this;
         var mediaUri = that.getValue();
         var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
-		that.renderContext.mediaPath = uri;
-		that.renderContext.uriValue = uri;
+        that.renderContext.mediaPath = uri;
+        that.renderContext.uriValue = uri;
         this.baseActivate(ctxt);
     },
 });
@@ -1169,9 +1169,9 @@ promptTypes.launch_intent = promptTypes.base.extend({
     getCallback: function(promptPath, byinternalPromptContext, byaction) {
         var that = this;
         $('#block-ui').hide().off();
-		if ( that.getPromptPath() != promptPath ) {
-			throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
-		}
+        if ( that.getPromptPath() != promptPath ) {
+            throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
+        }
         return function(ctxt, internalPromptContext, action, jsonString) {
             var jsonObject;
             ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
@@ -1199,37 +1199,37 @@ promptTypes.launch_intent = promptTypes.base.extend({
             }
         };
     },
-	extractDataValue: function(jsonObject) {
-		return jsonObject.result;
-	}
+    extractDataValue: function(jsonObject) {
+        return jsonObject.result;
+    }
 });
-/* Save only SCAN_RESULT ? */
+/* Save only the 'value' of the scan result */
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
     intentString: 'com.google.zxing.client.android.SCAN',
- 	extractDataValue: function(jsonObject) {
-		return jsonObject.result.value;
-	}
+     extractDataValue: function(jsonObject) {
+        return jsonObject.result.value;
+    }
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
     intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity',
- 	extractDataValue: function(jsonObject) {
-		return { latitude: jsonObject.result.latitude, 
-				 longitude: jsonObject.result.longitude, 
-				 altitude: jsonObject.result.altitude, 
-				 accuracy: jsonObject.result.accuracy };
-	}
+     extractDataValue: function(jsonObject) {
+        return { latitude: jsonObject.result.latitude, 
+                 longitude: jsonObject.result.longitude, 
+                 altitude: jsonObject.result.altitude, 
+                 accuracy: jsonObject.result.accuracy };
+    }
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
     type: "geopointmap",
     intentString: 'org.opendatakit.collect.android.activities.GeoPointMapActivity',
- 	extractDataValue: function(jsonObject) {
-		return { latitude: jsonObject.result.latitude, 
-				 longitude: jsonObject.result.longitude, 
-				 altitude: jsonObject.result.altitude, 
-				 accuracy: jsonObject.result.accuracy };
-	}
+     extractDataValue: function(jsonObject) {
+        return { latitude: jsonObject.result.latitude, 
+                 longitude: jsonObject.result.longitude, 
+                 altitude: jsonObject.result.altitude, 
+                 accuracy: jsonObject.result.accuracy };
+    }
 });
 /*
 //HTML5 geopoints seem to work in the browser but not in the app.
@@ -1277,20 +1277,20 @@ promptTypes.screen = promptTypes.base.extend({
     prompts: [],
     initialize: function() {
         var that = this;
-		var curPath = that.getPromptPath();
+        var curPath = that.getPromptPath();
         this.prompts = builder.initializePrompts(this.prompts, function(){});
         //Wire up the prompts so that if any of them rerender the screen rerenders.
         //TODO: Think about whether there is a better way of doing this.
         //Maybe bind this or subprompts to database change events instead?
         _.each(this.prompts, function(prompt){
             prompt._screenRender = prompt.render;
-			var curPromptPath = curPath + '.' + prompt.promptIdx;
+            var curPromptPath = curPath + '.' + prompt.promptIdx;
             prompt.render = function(){
                 that.render();
             };
-			prompt.getPromptPath = function() {
-				return curPromptPath;
-			};
+            prompt.getPromptPath = function() {
+                return curPromptPath;
+            };
         });
         //this.initializeTemplate();
         this.initializeRenderContext();
@@ -1350,6 +1350,12 @@ promptTypes.screen = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
+        // The Activate sequence of a screen is ill-defined
+        // Here, we first activate all the sub-elements, then we call
+        // baseActivate the screen. One could argue that we should
+        // call baseActivate, then activate the children. Currently, 
+        // baseActivate is a no-op, so the order does not have an 
+        // effect yet...
         var subPromptsReady = _.after(this.prompts.length, function () {
             that.baseActivate(ctxt);
         });
@@ -1384,24 +1390,24 @@ promptTypes.screen = promptTypes.base.extend({
     whenTemplateIsReady: function(ctxt){
         //This stub is here because screens have no template so the default 
         //whenTemplateIsReady would otherwise cause an error in baseActivate.
-		ctxt.success();
+        ctxt.success();
     },
     /**
      * When the intent returns a result this factory function creates a callback to process it.
      * The callback can't use any state set before the intent was launched because the page might have been reloaded.
      */
     getCallback: function(promptPath, internalPromptContext, action) {
-		var pageParts = promptPath.split('.');
-		if ( pageParts.length != 2 ) {
-			throw new Error("prompts." + this.type, "px: " + this.promptIdx + " no nested promptIdx supplied: " + " page: " + page + " internalPromptContext: " + internalPromptContext + " action: " + action);
-		}
-		var idx = +pageParts[1];
-		if ( this.prompts.length <= idx ) {
-			throw new Error("prompts." + this.type, "px: " + this.promptIdx + " promptIdx not in screen: " + " page: " + page + " internalPromptContext: " + internalPromptContext + " action: " + action);
-		}
-		var p = this.prompts[idx];
-		return p.getCallback(promptPath, internalPromptContext, action);
- 	}
+        var pageParts = promptPath.split('.');
+        if ( pageParts.length != 2 ) {
+            throw new Error("prompts." + this.type, "px: " + this.promptIdx + " no nested promptIdx supplied: " + " page: " + page + " internalPromptContext: " + internalPromptContext + " action: " + action);
+        }
+        var idx = +pageParts[1];
+        if ( this.prompts.length <= idx ) {
+            throw new Error("prompts." + this.type, "px: " + this.promptIdx + " promptIdx not in screen: " + " page: " + page + " internalPromptContext: " + internalPromptContext + " action: " + action);
+        }
+        var p = this.prompts[idx];
+        return p.getCallback(promptPath, internalPromptContext, action);
+     }
 });
 promptTypes.label = promptTypes.base.extend({
     type: "label",

@@ -176,16 +176,16 @@ window.controller = {
                                                 ctxt.success();
                                             }
                                         },
-										failure: function(m) {
-											ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
-											that.setPrompt( $.extend({}, ctxt, {
-												success: function() {
-													setTimeout(function() {
-														ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-														ctxt.failure(m);
-														}, 500);
-												}}), nextPrompt);
-										}}), nextPrompt);
+                                        failure: function(m) {
+                                            ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
+                                            that.setPrompt( $.extend({}, ctxt, {
+                                                success: function() {
+                                                    setTimeout(function() {
+                                                        ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+                                                        ctxt.failure(m);
+                                                        }, 500);
+                                                }}), nextPrompt);
+                                        }}), nextPrompt);
                                 }
                             },
                             failure: function(msg) {
@@ -228,22 +228,22 @@ window.controller = {
         var promptCandidate = that.prompts[0];
         // set the 'strict' attribute on the context to report all 
         // formula exceptions and errors.
-		var oldvalue = ctxt.strict;
+        var oldvalue = ctxt.strict;
         ctxt.strict = true;
         // ensure we drop the spinner overlay when we complete...
         var newctxt = $.extend({},ctxt,{
-			success: function() {
-				ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-				that.screenManager.hideSpinnerOverlay();
-				ctxt.strict = oldvalue;
-				ctxt.success();
+            success: function() {
+                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                that.screenManager.hideSpinnerOverlay();
+                ctxt.strict = oldvalue;
+                ctxt.success();
             },
             failure: function(m) {
                 that.screenManager.hideSpinnerOverlay();
                 if ( m && m.message ) {
                     that.screenManager.showScreenPopup(m);
                 }
-				ctxt.strict = oldvalue;
+                ctxt.strict = oldvalue;
                 ctxt.failure(m);
             }});
         that.screenManager.showSpinnerOverlay({text:"Validating..."});
@@ -260,15 +260,15 @@ window.controller = {
                     newctxt.success();
                 }
             },
-			failure: function(m) {
-				newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
-				that.setPrompt( $.extend({}, newctxt, {
-					success: function() {
-						setTimeout(function() {
-							newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-							newctxt.failure(m);
-							}, 500);
-					}}), promptCandidate);
+            failure: function(m) {
+                newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
+                that.setPrompt( $.extend({}, newctxt, {
+                    success: function() {
+                        setTimeout(function() {
+                            newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+                            newctxt.failure(m);
+                            }, 500);
+                    }}), promptCandidate);
             }}), promptCandidate);
     },
     gotoNextScreen: function(ctxt, options){
@@ -339,8 +339,8 @@ window.controller = {
     },
     getPromptByName: function(name){
         if ( name == null ) {
-			return null;
-		}
+            return null;
+        }
         if ( ('' + name).match(/^\d+$/g) ) {
             var idx = Number(name);
             if(idx >= 0 && idx < this.prompts.length){
@@ -360,8 +360,8 @@ window.controller = {
         var prompts = this.prompts;
         for(var i = 0; i < prompts.length; i++){
             if(prompts[i].type !== 'label') {
-				continue;
-			}
+                continue;
+            }
             if(prompts[i].param === name){
                 return prompts[i];
             }
@@ -421,9 +421,9 @@ window.controller = {
         var ctxt = this.newCallbackContext();
         ctxt.append('controller.opendatakitCallback', ((this.currentPromptIdx != null) ? ("px: " + this.currentPromptIdx) : "no current prompt"));
         
-		// promptPath is a dot-separated list. The first element of 
-		// which is the index of the prompt in the global prompts list.
-		var promptPathParts = promptPath.split('.');
+        // promptPath is a dot-separated list. The first element of 
+        // which is the index of the prompt in the global prompts list.
+        var promptPathParts = promptPath.split('.');
         var selpage = this.getPromptByName(promptPathParts[0]);
         if ( selpage == null ) {
             ctxt.append('controller.opendatakitCallback.noMatchingPrompt', promptPath);
@@ -432,23 +432,23 @@ window.controller = {
             return;
         }
         
-		try {
-			// ask this page to then get the appropriate handler
-			var handler = selpage.getCallback(promptPath, internalPromptContext, action);
-			if ( handler != null ) {
-				handler( ctxt, internalPromptContext, action, jsonString );
-			} else {
-				ctxt.append('controller.opendatakitCallback.noHandler', promptPath);
-				console.log("opendatakitCallback: ERROR - NO HANDLER ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
-				ctxt.failure({message: "Internal error. No matching handler for callback."});
-				return;
-			}
-		} catch (e) {
-			ctxt.append('controller.opendatakitCallback.exception', promptPath, e);
-			console.log("opendatakitCallback: EXCEPTION ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + " exception: " + e);
-			ctxt.failure({message: "Internal error. Exception while handling callback."});
-			return;
-		}
+        try {
+            // ask this page to then get the appropriate handler
+            var handler = selpage.getCallback(promptPath, internalPromptContext, action);
+            if ( handler != null ) {
+                handler( ctxt, internalPromptContext, action, jsonString );
+            } else {
+                ctxt.append('controller.opendatakitCallback.noHandler', promptPath);
+                console.log("opendatakitCallback: ERROR - NO HANDLER ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
+                ctxt.failure({message: "Internal error. No matching handler for callback."});
+                return;
+            }
+        } catch (e) {
+            ctxt.append('controller.opendatakitCallback.exception', promptPath, e);
+            console.log("opendatakitCallback: EXCEPTION ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + " exception: " + e);
+            ctxt.failure({message: "Internal error. Exception while handling callback."});
+            return;
+        }
     },
     opendatakitGotoPreviousScreen:function() {
         var ctxt = controller.newCallbackContext();
@@ -647,24 +647,24 @@ window.controller = {
     newContext: function( evt, actionHandlers ) {
         this.eventCount = 1 + this.eventCount;
         var count = this.eventCount;
-		var detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid;
-		var evtActual;
-		var evtTarget;
-		if ( 'currentTarget' in evt ) {
-			detail += ' curTgt: ';
-			evtActual = evt.currentTarget;
-		} else {
-			detail += ' tgt: ';
-			evtActual = evt.target;
-		}
-		
-		if ( evtActual == window) {
-			detail += 'Window';
-		} else {
-			evtTarget = ('innerHTML' in evtActual) ? evtActual.innerHTML : evtActual.activeElement.innerHTML;
-			detail += evtTarget.replace(/\s+/g, ' ').substring(0,80);
-		}
-		
+        var detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid;
+        var evtActual;
+        var evtTarget;
+        if ( 'currentTarget' in evt ) {
+            detail += ' curTgt: ';
+            evtActual = evt.currentTarget;
+        } else {
+            detail += ' tgt: ';
+            evtActual = evt.target;
+        }
+        
+        if ( evtActual == window) {
+            detail += 'Window';
+        } else {
+            evtTarget = ('innerHTML' in evtActual) ? evtActual.innerHTML : evtActual.activeElement.innerHTML;
+            detail += evtTarget.replace(/\s+/g, ' ').substring(0,80);
+        }
+        
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
