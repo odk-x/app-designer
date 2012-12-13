@@ -127,6 +127,31 @@
                 {{/if}}
                 </label>
             {{/each}}
+            {{#if other}}
+                <label>
+                    <input
+                        {{#if select_one}}
+                            type="radio"
+                        {{else}}
+                            type="checkbox"
+                        {{/if}}
+                        {{#if other.checked}}
+                            checked
+                        {{/if}}
+                        name="{{name}}"
+                        id="other"
+                        value="other"
+                        />
+                        <label for="other">
+                            Other:
+                            <input
+                                name="otherValue"
+                                value="{{other.value}}"
+                                style="height:36px;position:initial;"
+                                />
+                        </label>
+                </label>
+            {{/if}}
         </fieldset>
         {{#unless required}}
             {{#if deselect}}

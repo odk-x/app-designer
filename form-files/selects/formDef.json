@@ -17,6 +17,9 @@
         }, 
         "bird": {
             "type": "string"
+        }, 
+        "color": {
+            "type": "string"
         }
     }, 
     "queries": [
@@ -115,6 +118,21 @@
                     "label": "Choose one:"
                 }
             ]
+        }, 
+        {
+            "name": "color", 
+            "rowNum": 14, 
+            "type": "select_one_with_other", 
+            "param": "colors", 
+            "label": "What is your favorite color?"
+        }, 
+        {
+            "condition": "selected(data('color'), 'teal')", 
+            "rowNum": 15, 
+            "param": null, 
+            "type": "note", 
+            "comments": "selected function with arguement not included in choices.", 
+            "label": "Teal is a good choice."
         }
     ], 
     "settings": [
@@ -135,6 +153,23 @@
         }
     ], 
     "choices": {
+        "colors": [
+            {
+                "rowNum": 15, 
+                "name": "red", 
+                "label": "Red"
+            }, 
+            {
+                "rowNum": 16, 
+                "name": "green", 
+                "label": "Green"
+            }, 
+            {
+                "rowNum": 17, 
+                "name": "blue", 
+                "label": "Blue"
+            }
+        ], 
         "birds": [
             {
                 "rowNum": 2, 

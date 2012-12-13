@@ -139,6 +139,7 @@ promptTypes.base = Backbone.View.extend({
         console.log(evt);
         evt.stopImmediatePropagation();
     },
+    afterRender: function() {},
     render: function() {
         var that = this;
         //A virtual element is created so images can be loaded before the newly rendered screen is shown.
@@ -179,13 +180,8 @@ promptTypes.base = Backbone.View.extend({
                 numImagesLoaded = $imagesToLoad.length + 1;
             }
         },1000);
+        this.afterRender();
         return this;
-        /*
-        this.$el.html(this.template(this.renderContext));
-        //Triggering create seems to prevent some issues where jQm styles are not applied.
-        this.$el.trigger('create');
-        return this;
-        */
     },
     /**
      * baseValidate isn't meant to be overidden or called externally.
@@ -556,16 +552,17 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             });
             return choice;
         });
-        //Stuff for handling or_other input. Possibly to be factored out.
-        var otherObject = _.find(formValue, function(valueObject) {
-            return (that.name + 'OtherValue' === valueObject.value);
-        });
-        that.renderContext.other = {
-            value: otherObject ? otherObject.value : '',
-            checked: _.any(formValue, function(valueObject) {
-                return (that.name + 'Other' === valueObject.name);
-            })
-        };
+        if(this.withOther) {
+            var otherObject = _.find(formValue, function(valueObject) {
+                return ('otherValue' === valueObject.name);
+            });
+            that.renderContext.other = {
+                value: otherObject ? otherObject.value : '',
+                checked: _.any(formValue, function(valueObject) {
+                    return ('other' === valueObject.value);
+                })
+            };
+        }
     },
     generateSaveValue: function(jsonFormSerialization) {
         return jsonFormSerialization ? JSON.stringify(jsonFormSerialization) : null;
@@ -574,6 +571,13 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         return savedValue ? JSON.parse(savedValue) : null;
     },
     modification: function(evt) {
+        if(this.withOther) {
+            //This hack is needed to prevent rerendering
+            //causing the other input to loose focus when clicked.
+            if($(evt.target).val() === 'other' && this.renderContext.other.checked) {
+                return;
+            }
+        }
         if(this.appearance === 'grid') {
             //Make selection more reponsive by providing visual feedback before
             //the template is re-rendered.
@@ -596,7 +600,6 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        var saveValue = that.parseSaveValue(that.getValue());
         var query;
         that.renderContext.appearance = this.appearance;
         if(that.param in that.form.queries) {
@@ -609,7 +612,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "data": {},
                 "success": function(result) {
                     that.renderContext.choices = query.callback(result);
-                    that.updateRenderValue(saveValue);
+                    that.updateRenderValue(that.parseSaveValue(that.getValue()));
                     that.baseActivate(ctxt);
                 },
                 "error": function(e) {
@@ -623,24 +626,14 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             //We need to clone the choices so their values are unique to the prompt.
             that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
         }
-        that.updateRenderValue(saveValue);
+        that.updateRenderValue(that.parseSaveValue(that.getValue())); 
         that.baseActivate(ctxt);
     },
     deselect: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".deselect", "px: " + this.promptIdx);
         this.$('input:checked').prop('checked', false).change();
-        /*
-        var that = this;
-        this.setValue($.extend({}, ctxt, {
-            success: function() {
-                that.updateRenderValue(null);
-                that.render();
-                ctxt.success();
-            }
-        }), null);
-        */
-    },
+    }
 });
 promptTypes.select_one = promptTypes.select.extend({
     renderContext: {
@@ -648,27 +641,56 @@ promptTypes.select_one = promptTypes.select.extend({
         "deselect" : translations.deselect
     },
     generateSaveValue: function(jsonFormSerialization) {
+        var otherSelected, otherValue;
         if(jsonFormSerialization){
             if(jsonFormSerialization.length > 0){
+                if(this.withOther) {
+                    otherSelected = _.any(jsonFormSerialization, function(valueObject) {
+                        return ('other' === valueObject.value);
+                    });
+                    if(otherSelected) {
+                        otherValue = _.find(jsonFormSerialization, function(valueObject) {
+                            return ('otherValue' === valueObject.name);
+                        });
+                        return (otherValue ? otherValue.value : '');
+                    }
+                }
                 return jsonFormSerialization[0].value;
             }
         }
         return null;
     },
     parseSaveValue: function(savedValue){
-        return [{"name": this.name, "value": savedValue}];
+        //Note that this function expects to run after renderContext.choices
+        //has been initilized.
+        var inChoices = _.any(this.renderContext.choices, function(choice){
+            return choice.name === savedValue;
+        });
+        if (inChoices) {
+            return [{
+                "name": this.name,
+                "value": savedValue
+            }];
+        }
+        else {
+            return [{
+                "name": "other",
+                "value": "other"
+            }, {
+                "name": "otherValue",
+                "value": savedValue
+            }];
+        }
     }
 });
-promptTypes.select_one_or_other = promptTypes.select_one.extend({
-    renderContext: {
-        select_one: true,
-        or_other: true
-    }
+promptTypes.select_one_with_other = promptTypes.select_one.extend({
+    withOther: true
 });
-promptTypes.select_or_other = promptTypes.select.extend({
-    renderContext: {
-        or_other: true
-    }
+//TODO:
+//Since multiple choices are possible should it be possible
+//to add arbitrary many other values to a select_with_other?
+promptTypes.select_with_other = promptTypes.select.extend({
+    withOther: true
 });
 promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
     type: "text",
@@ -846,12 +868,15 @@ promptTypes.datetime = promptTypes.input_type.extend({
             }
         }), value);
     },
-    //TODO: This will have problems with image labels.
-    render: function() {
+    
+    afterRender: function() {
         var that = this;
+        /*
+        //TODO: This will have problems with image labels.
         that.$el.html(that.template(that.renderContext));
         //Triggering create seems to prevent some issues where jQm styles are not applied.
         that.$el.trigger('create');
+        */
 		if(this.useMobiscroll){
 				that.$('input').scroller(that.scrollerAttributes);
 			var value = that.getValue();
@@ -1321,6 +1346,8 @@ promptTypes.screen = promptTypes.base.extend({
             prompt.delegateEvents();
         });
         this.$el.trigger('create');
+        this.afterRender();
+        return this;
     },
     whenTemplateIsReady: function(ctxt){
         //This stub is here because screens have no template so the default 
