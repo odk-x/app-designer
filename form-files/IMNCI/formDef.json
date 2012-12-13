@@ -26,7 +26,10 @@
     ], 
     "prompt_types": [
         {
-            "shema": {
+            "rowNum": 2, 
+            "name": "pulseox", 
+            "schema": {
+                "type": "object", 
                 "properties": {
                     "pulse": {
                         "type": "number"
@@ -35,11 +38,6 @@
                         "type": "number"
                     }
                 }
-            }, 
-            "rowNum": 2, 
-            "name": "pulseox", 
-            "schema": {
-                "type": "object"
             }
         }, 
         {
@@ -5171,7 +5169,15 @@
             "type": "string"
         }, 
         "pulseox": {
-            "type": "object"
+            "type": "object", 
+            "properties": {
+                "pulse": {
+                    "type": "number"
+                }, 
+                "ox": {
+                    "type": "number"
+                }
+            }
         }, 
         "serving_unit": {
             "type": "string"

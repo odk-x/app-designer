@@ -21,6 +21,6 @@ function(promptTypes, $,       _) {
             extractDataValue: function(jsonObject) {
                 return jsonObject.result.value;
             }
-        }),
+        })
     };
 });
