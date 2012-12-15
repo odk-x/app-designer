@@ -1,3 +1,8 @@
+{{#if passiveError}}
+    <div class="ui-bar ui-bar-a">
+        {{passiveError}}
+    </div>
+{{/if}}
 {{#ifEqual appearance "grid"}}
     <form>
         {{> labelHint}}
@@ -127,7 +132,7 @@
                 {{/if}}
                 </label>
             {{/each}}
-            {{#if other}}
+            {{#if withOther}}
                 <label>
                     <input
                         {{#if select_one}}
@@ -136,7 +141,7 @@
                             type="checkbox"
                         {{/if}}
                         {{#if other.checked}}
-                            checked
+                            checked="checked"
                         {{/if}}
                         name="{{name}}"
                         id="other"

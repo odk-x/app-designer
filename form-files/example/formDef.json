@@ -109,31 +109,31 @@
     }, 
     "settings": [
         {
-            "rowNum": 2, 
             "setting": "formId", 
+            "_rowNum": 2, 
             "value": "exampleForm"
         }, 
         {
-            "rowNum": 3, 
             "setting": "formVersion", 
+            "_rowNum": 3, 
             "value": 1
         }, 
         {
-            "rowNum": 4, 
             "setting": "formTitle", 
+            "_rowNum": 4, 
             "value": "Example Form"
         }
     ], 
     "survey": [
         {
             "name": "examples", 
-            "rowNum": 2, 
+            "_rowNum": 2, 
             "type": "select_multiple", 
             "param": "examples", 
             "label": "Which examples would you like to see?"
         }, 
         {
-            "rowNum": 3, 
+            "_rowNum": 3, 
             "type": "goto", 
             "param": "error_end", 
             "condition": "not(selected(data('examples'), 'error'))"
@@ -141,56 +141,56 @@
         {
             "name": "error", 
             "hint": "Error prompts are useful for finding bugs in forms with lots of branching.", 
-            "rowNum": 4, 
+            "_rowNum": 4, 
             "type": "select_one", 
             "param": "yesno", 
             "label": "Trigger an error on the next screen?"
         }, 
         {
-            "rowNum": 5, 
+            "_rowNum": 5, 
             "type": "error", 
             "param": null, 
             "condition": "selected(data('error'), 'yes')"
         }, 
         {
-            "rowNum": 6, 
             "type": "label", 
+            "_rowNum": 6, 
             "param": "error_end"
         }, 
         {
-            "rowNum": 7, 
+            "_rowNum": 7, 
             "type": "goto", 
             "param": "intents_end", 
             "condition": "not(selected(data('examples'), 'intents'))"
         }, 
         {
             "name": "barcode", 
-            "rowNum": 8, 
+            "_rowNum": 8, 
             "type": "barcode", 
             "param": null, 
             "label": "Scan a barcode"
         }, 
         {
             "name": "picture", 
-            "rowNum": 9, 
+            "_rowNum": 9, 
             "type": "image", 
             "param": null, 
             "label": "Take a picture"
         }, 
         {
             "name": "recording", 
-            "rowNum": 10, 
+            "_rowNum": 10, 
             "type": "audio", 
             "param": null, 
             "label": "Make a recording"
         }, 
         {
-            "rowNum": 11, 
             "type": "label", 
+            "_rowNum": 11, 
             "param": "intents_end"
         }, 
         {
-            "rowNum": 12, 
+            "_rowNum": 12, 
             "type": "goto", 
             "param": "dynamic_label_end", 
             "condition": "not(selected(data('examples'), 'dynamic_label'))"
@@ -198,163 +198,163 @@
         {
             "name": "name", 
             "hint": "Please use your full name", 
-            "rowNum": 13, 
+            "_rowNum": 13, 
             "type": "text", 
             "param": null, 
             "label": "Enter your name"
         }, 
         {
-            "rowNum": 14, 
+            "_rowNum": 14, 
             "type": "note", 
             "param": null, 
             "label": "Hello {{name.value}}"
         }, 
         {
-            "rowNum": 15, 
             "type": "label", 
+            "_rowNum": 15, 
             "param": "dynamic_label_end"
         }, 
         {
-            "rowNum": 16, 
+            "_rowNum": 16, 
             "type": "goto", 
             "param": "datetime_end", 
             "condition": "not(selected(data('examples'), 'datetime'))"
         }, 
         {
             "name": "born", 
-            "rowNum": 17, 
+            "_rowNum": 17, 
             "type": "date", 
             "param": null, 
             "label": "When were you born?"
         }, 
         {
             "param": null, 
-            "rowNum": 18, 
+            "_rowNum": 18, 
             "type": "note", 
             "condition": "data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
             "label": "Happy Birthday!"
         }, 
         {
             "name": "time", 
-            "rowNum": 19, 
+            "_rowNum": 19, 
             "type": "time", 
             "param": null, 
             "label": "What time is it?"
         }, 
         {
             "name": "datetime", 
-            "rowNum": 20, 
+            "_rowNum": 20, 
             "type": "datetime", 
             "param": null, 
             "label": "When will you be available for a follow up survey?"
         }, 
         {
-            "rowNum": 21, 
             "type": "label", 
+            "_rowNum": 21, 
             "param": "datetime_end"
         }, 
         {
             "name": "location", 
-            "rowNum": 22, 
-            "param": null, 
             "type": "geopoint", 
+            "param": null, 
+            "_rowNum": 22, 
             "condition": "selected(data('examples'), 'geopoint')", 
             "label": "Record your location:"
         }, 
         {
-            "rowNum": 23, 
-            "type": "screen", 
+            "_rowNum": 23, 
             "prompts": [
                 {
                     "name": "visited_continents", 
-                    "rowNum": 24, 
+                    "_rowNum": 24, 
                     "type": "select", 
                     "param": "continents", 
                     "label": "Which continents have you visited?"
                 }, 
                 {
                     "name": "visited_seattle", 
-                    "rowNum": 25, 
-                    "param": "yesno", 
                     "type": "select_one", 
+                    "param": "yesno", 
+                    "_rowNum": 25, 
                     "condition": "calculates.ask_about_seattle()", 
                     "label": "Have you visited Seattle?"
                 }
             ], 
+            "type": "screen", 
             "condition": "selected(data('examples'), 'screen_group')"
         }, 
         {
-            "rowNum": 27, 
+            "_rowNum": 27, 
             "type": "goto", 
             "param": "media_end", 
             "condition": "not(selected(data('examples'), 'media'))"
         }, 
         {
-            "rowNum": 28, 
             "type": "screen", 
             "prompts": [
                 {
                     "name": "audio_test", 
-                    "rowNum": 29, 
+                    "_rowNum": 29, 
                     "type": "audio", 
                     "param": null, 
                     "label": "Make a recording:"
                 }, 
                 {
                     "name": "video_test", 
-                    "rowNum": 30, 
+                    "_rowNum": 30, 
                     "type": "video", 
                     "param": null, 
                     "label": "Take a video:"
                 }, 
                 {
                     "name": "image_test", 
-                    "rowNum": 31, 
+                    "_rowNum": 31, 
                     "type": "image", 
                     "param": null, 
                     "label": "Take a picture:"
                 }
-            ]
+            ], 
+            "_rowNum": 28
         }, 
         {
-            "rowNum": 33, 
-            "audio": "audio/carrioncrow.mp3", 
             "type": "note", 
             "image": "img/dolphin.png", 
+            "audio": "audio/carrioncrow.mp3", 
+            "_rowNum": 33, 
             "param": null, 
             "label": "This prompt shows how to embed media in labels."
         }, 
         {
-            "rowNum": 34, 
             "type": "label", 
+            "_rowNum": 34, 
             "param": "media_end"
         }, 
         {
             "name": "x", 
-            "rowNum": 35, 
+            "_rowNum": 35, 
             "type": "with_next", 
             "assign": 10, 
             "param": null
         }, 
         {
             "param": null, 
-            "rowNum": 36, 
+            "_rowNum": 36, 
             "type": "note", 
             "condition": "selected(data('examples'), 'assignment')", 
             "label": "Assigning a value of 10 to x."
         }, 
         {
             "param": null, 
-            "rowNum": 37, 
+            "_rowNum": 37, 
             "type": "note", 
             "condition": "data('x') === 10", 
             "label": "x = {{x.value}}"
         }, 
         {
             "name": "specialTemplateTest", 
+            "_rowNum": 38, 
             "param": null, 
             "label": "This is a custom template that uses D3.js:", 
-            "rowNum": 38, 
             "type": "text", 
             "condition": "selected(data('examples'), 'custom_template')", 
             "templatePath": "test.handlebars"
@@ -367,113 +367,113 @@
                 "type": "range", 
                 "min": 1
             }, 
+            "_rowNum": 39, 
             "param": null, 
             "label": "How would you rate this survey?", 
             "default": 5, 
-            "rowNum": 39, 
             "type": "integer"
         }
     ], 
     "calculates": [
         {
             "calculation": "selected(data('visited_continents'), 'NorthAmerica')", 
-            "rowNum": 2, 
+            "_rowNum": 2, 
             "name": "ask_about_seattle"
         }
     ], 
     "choices": {
         "examples": [
             {
-                "rowNum": 11, 
+                "_rowNum": 11, 
                 "name": "error", 
                 "label": "error"
             }, 
             {
-                "rowNum": 12, 
+                "_rowNum": 12, 
                 "name": "intents", 
                 "label": "intents"
             }, 
             {
-                "rowNum": 13, 
+                "_rowNum": 13, 
                 "name": "dynamic_label", 
                 "label": "dynamic label"
             }, 
             {
-                "rowNum": 14, 
+                "_rowNum": 14, 
                 "name": "datetime", 
                 "label": "datetime"
             }, 
             {
-                "rowNum": 15, 
+                "_rowNum": 15, 
                 "name": "geopoint", 
                 "label": "geopoint"
             }, 
             {
-                "rowNum": 16, 
+                "_rowNum": 16, 
                 "name": "media", 
                 "label": "media"
             }, 
             {
-                "rowNum": 17, 
+                "_rowNum": 17, 
                 "name": "screen_group", 
                 "label": "screen group with select and calculate"
             }, 
             {
-                "rowNum": 18, 
+                "_rowNum": 18, 
                 "name": "custom_template", 
                 "label": "custom template"
             }, 
             {
-                "rowNum": 19, 
+                "_rowNum": 19, 
                 "name": "assignment", 
                 "label": "assignment"
             }
         ], 
         "yesno": [
             {
-                "rowNum": 2, 
+                "_rowNum": 2, 
                 "name": "yes", 
                 "label": "yes"
             }, 
             {
-                "rowNum": 3, 
+                "_rowNum": 3, 
                 "name": "no", 
                 "label": "no"
             }
         ], 
         "continents": [
             {
-                "rowNum": 4, 
+                "_rowNum": 4, 
                 "name": "NorthAmerica", 
                 "label": "North America"
             }, 
             {
-                "rowNum": 5, 
+                "_rowNum": 5, 
                 "name": "SouthAmerica", 
                 "label": "South America"
             }, 
             {
-                "rowNum": 6, 
+                "_rowNum": 6, 
                 "name": "Europe", 
                 "label": "Europe"
             }, 
             {
-                "rowNum": 7, 
+                "_rowNum": 7, 
                 "name": "Africa", 
                 "label": "Africa"
             }, 
             {
-                "rowNum": 8, 
+                "_rowNum": 8, 
                 "name": "Asia", 
                 "label": "Asia"
             }, 
             {
-                "rowNum": 9, 
+                "_rowNum": 9, 
                 "name": "Australia", 
                 "label": "Australia"
             }, 
             {
-                "rowNum": 10, 
+                "_rowNum": 10, 
                 "name": "Antarctica", 
                 "label": "Antarctica"
             }

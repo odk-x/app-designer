@@ -313,7 +313,7 @@ promptTypes.opening = promptTypes.base.extend({
         }
         that.renderContext.instanceName = instanceName;
         that.baseActivate($.extend({}, ctxt, {
-            success:function(){
+            success: function() {
                 ctxt.success({enableBackwardNavigation: false});
             }
         }));
@@ -543,6 +543,9 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 choice.checked = false;
                 return choice;
             });
+            if(this.withOther) {
+                that.renderContext.other = null;
+            }
             return;
         }
         //Check appropriate choices based on formValue
@@ -574,7 +577,11 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         if(this.withOther) {
             //This hack is needed to prevent rerendering
             //causing the other input to loose focus when clicked.
-            if($(evt.target).val() === 'other' && this.renderContext.other.checked) {
+            if( $(evt.target).val() === 'other' &&
+                $(evt.target).prop('checked') &&
+                //The next two lines determine if the checkbox was already checked.
+                this.renderContext.other &&
+                this.renderContext.other.checked) {
                 return;
             }
         }
@@ -601,7 +608,9 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     onActivate: function(ctxt) {
         var that = this;
         var query;
+        that.renderContext.passiveError = null;
         that.renderContext.appearance = this.appearance;
+        that.renderContext.withOther = this.withOther;
         if(that.param in that.form.queries) {
             query = that.form.queries[that.param];
             //TODO: Come up with a tables uri and when we get that kind of uri do tables queries.
@@ -616,8 +625,15 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                     that.baseActivate(ctxt);
                 },
                 "error": function(e) {
-                    console.error(e);
-                    alert('Could not get remote data');
+                    //This is a passive error because there could just be a problem
+                    //with the content provider/network/remote service rather than with
+                    //the form.
+                    console.log(e);
+                    that.renderContext.passiveError = "Error fetching choices.\n";
+                    if(e.statusText) {
+                        that.renderContext.passiveError += e.statusText;
+                    }
+                    that.baseActivate(ctxt);
                 }
             });
             return;
@@ -641,32 +657,43 @@ promptTypes.select_one = promptTypes.select.extend({
         "deselect" : translations.deselect
     },
     generateSaveValue: function(jsonFormSerialization) {
-        var otherSelected, otherValue;
-        if(jsonFormSerialization){
-            if(jsonFormSerialization.length > 0){
+        var selectedValue, otherValue;
+        var promptName = this.name;
+        if(jsonFormSerialization) {
+            selectedValue = _.find(jsonFormSerialization, function(valueObject) {
+                return (promptName === valueObject.name);
+            });
+            if(selectedValue) {
                 if(this.withOther) {
-                    otherSelected = _.any(jsonFormSerialization, function(valueObject) {
-                        return ('other' === valueObject.value);
-                    });
-                    if(otherSelected) {
+                    if(selectedValue.value === 'other') {
                         otherValue = _.find(jsonFormSerialization, function(valueObject) {
                             return ('otherValue' === valueObject.name);
                         });
                         return (otherValue ? otherValue.value : '');
                     }
                 }
-                return jsonFormSerialization[0].value;
+                return selectedValue.value;
             }
         }
         return null;
     },
+    /**
+     * Parse a saved string value into the format
+     * returned by jQuery's serializeArray function.
+     */
     parseSaveValue: function(savedValue){
         //Note that this function expects to run after renderContext.choices
         //has been initilized.
-        var inChoices = _.any(this.renderContext.choices, function(choice){
-            return choice.name === savedValue;
-        });
-        if (inChoices) {
+        var valInChoices = false;
+        if(!_.isString(savedValue)) {
+            return null;
+        }
+        if(this.renderContext.choices) {
+            valInChoices = _.any(this.renderContext.choices, function(choice){
+                return (choice.name === savedValue);
+            });
+        }
+        if (valInChoices) {
             return [{
                 "name": this.name,
                 "value": savedValue
@@ -674,7 +701,7 @@ promptTypes.select_one = promptTypes.select.extend({
         }
         else {
             return [{
-                "name": "other",
+                "name": this.name,
                 "value": "other"
             }, {
                 "name": "otherValue",
@@ -1197,19 +1224,21 @@ promptTypes.launch_intent = promptTypes.base.extend({
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
     intentString: 'com.google.zxing.client.android.SCAN',
- 	extractDataValue: function(jsonObject) {
-		return jsonObject.result.value;
-	}
+    extractDataValue: function(jsonObject) {
+        return jsonObject.result.value;
+    }
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
     intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity',
- 	extractDataValue: function(jsonObject) {
-		return { latitude: jsonObject.result.latitude, 
-				 longitude: jsonObject.result.longitude, 
-				 altitude: jsonObject.result.altitude, 
-				 accuracy: jsonObject.result.accuracy };
-	}
+    extractDataValue: function(jsonObject) {
+        return {
+            latitude: jsonObject.result.latitude,
+            longitude: jsonObject.result.longitude,
+            altitude: jsonObject.result.altitude,
+            accuracy: jsonObject.result.accuracy
+        };
+    }
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
     type: "geopointmap",
