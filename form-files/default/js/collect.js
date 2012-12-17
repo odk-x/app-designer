@@ -28,7 +28,7 @@ window.collect = window.collect || {
         if ( action == 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.jpg",' + 
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg",' + 
                                                     '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
@@ -36,23 +36,23 @@ window.collect = window.collect || {
         if ( action == 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.3gpp",' + 
-                                                    '"contentType": "video/3gpp" } }' );
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4",' + 
+                                                    '"contentType": "video/mp4" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.3gpp",' + 
-                                                    '"contentType": "audio/3gpp" } }' );
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-zWfluNSa.mp3",' + 
+                                                    '"contentType": "audio/mp3" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.MediaChooseImageActivity' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.jpg",' + 
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg",' + 
                                                     '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
@@ -60,16 +60,16 @@ window.collect = window.collect || {
         if ( action == 'org.opendatakit.collect.android.activities.MediaChooseVideoActivity' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.3gpp",' + 
-                                                    '"contentType": "video/3gpp" } }' );
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4",' + 
+                                                    '"contentType": "video/mp4" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.MediaChooseAudioActivity' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.3gpp",' + 
-                                                    '"contentType": "audio/3gpp" } }' );
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-zWfluNSa.mp3",' + 
+                                                    '"contentType": "audio/mp3" } }' );
             }, 100);
             return "OK";
         }
@@ -90,7 +90,7 @@ window.collect = window.collect || {
         if ( action == 'com.google.zxing.client.android.SCAN' ) {
             setTimeout(function() {
                 controller.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "value": "' + prompt("Enter barcode:") + '" } }' );
+                    '{ "status": -1, "result": { "SCAN_RESULT": "' + prompt("Enter barcode:") + '" } }' );
             }, 1000);
             return "OK";
         }

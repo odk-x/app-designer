@@ -11,7 +11,8 @@
     <button class="chooseAction">Choose Video</button>
     <div class="mediaContainer">
         {{#if uriValue}}
-            <video src="{{uriValue}}" controls="controls">video control not supported</video>
+            <video id="{{safeIdentity}}" src="{{uriValue}}" type="{{contentType}}" {{#if videoPoster}}poster="{{videoPoster}}"{{/if}}
+				{{#if pre4Android}} onclick="play()"{{/if}} video="true" controls="controls">video control not supported</video>
         {{/if}}
     </div>
 <div>

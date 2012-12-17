@@ -898,7 +898,12 @@ putInstanceMetaData:function(ctxt, name, value) {
         ctxt.failure({message:"Unrecognized instance metadata"});
         return;
       }
-      kvMap[dbColumnName] = {value: value, isInstanceMetadata: true };
+	  // and still use the elementPath for the lookup.
+	  // this simply ensures that the name is exported above 
+	  // the database layer. 
+	  // The database layer uses putDataKeyValueMap()
+	  // for lower-level manipulations.
+      kvMap[name] = {value: value, isInstanceMetadata: true };
       that.putDataKeyValueMap(ctxt, kvMap );
 },
 /**

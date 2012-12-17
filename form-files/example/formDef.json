@@ -207,7 +207,7 @@
             "rowNum": 14, 
             "type": "note", 
             "param": null, 
-            "label": "Hello {{name.value}}"
+            "label": "Hello {{name}}"
         }, 
         {
             "rowNum": 15, 
@@ -348,7 +348,7 @@
             "rowNum": 37, 
             "type": "note", 
             "condition": "data('x') === 10", 
-            "label": "x = {{x.value}}"
+            "label": "x = {{x}}"
         }, 
         {
             "name": "specialTemplateTest", 

@@ -19,11 +19,10 @@ return {
     /**
      * immediate return: platformInfo structure from ODK
      */
-    getPlatformInfo:function(ctxt) {
+    getPlatformInfo:function() {
         // fetch these settings from ODK Collect if running under that context
         if ( this.platformInfo == null ) {
             var jsonString = collect.getPlatformInfo();
-            ctxt.append('opendatakit.getPlatformInfo', jsonString);
             this.platformInfo = JSON.parse(jsonString);
         }
         return this.platformInfo;
@@ -50,7 +49,7 @@ return {
 			return null;
 		}
         
-        var info = this.getPlatformInfo(ctxt);
+        var info = this.getPlatformInfo();
         if ( info.container != 'Android' ) {
 			return mediaPath;
 		}
@@ -112,6 +111,9 @@ return {
     
     setCurrentInstanceId:function(instanceId) {
         mdl.instanceId = instanceId;
+		// Update container so that it can save media and auxillary data
+		// under different directories...
+		collect.setInstanceId(instanceId);
     },
     
     getCurrentInstanceId:function() {
