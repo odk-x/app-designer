@@ -62,10 +62,7 @@ Eventually we should make a jqm theme for this.
     background-color: #fff;
     opacity: 0.5;
 }
-.ui-btn-text {
-    font-size: 1.3em;
-    padding: .5em;
-}
+
 .deselect {
     float: right;
 }
@@ -109,4 +106,24 @@ Eventually we should make a jqm theme for this.
     /* Add media query for small screens? */
     margin-top: 0;
     float:left;
+}
+.ui-btn-text {
+    padding: .5em;
+}
+/*
+Below are some font-size resets meant to allow global font-size settings on the body.
+As font size is increased it will cause the header bar overtake the content.
+It may be best to set the view-port scale instead of messing with the jQm styles.
+*/
+.ui-btn-text {
+    font-size: 1em;
+}
+.ui-btn-inner {
+    font-size: 1em;
+}
+.ui-header .ui-btn-inner, .ui-footer .ui-btn-inner, .ui-mini .ui-btn-inner {
+    font-size: 1em;
+}
+.ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label {
+    font-size: 1em;
 }
