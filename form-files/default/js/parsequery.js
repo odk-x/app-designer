@@ -247,6 +247,7 @@ return {
                         that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
                                                 instanceId, pageRef, instanceMetadataKeyValueMap);
                     } catch (ex) {
+						console.error(String(ex));
                         ctxt.append('parsequery.parseParameters.exception',  'unknown error: ' + ex);
                         ctxt.failure({message: "Exception while processing form definition."});
                     }

@@ -566,10 +566,54 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
     },
     generateSaveValue: function(jsonFormSerialization) {
-        return jsonFormSerialization ? JSON.stringify(jsonFormSerialization) : null;
+        var otherSelected, otherValue;
+        if(jsonFormSerialization){
+			var flatList = _.map(jsonFormSerialization, function(valueObject) {
+					if ( 'otherValue' === valueObject.name ) {
+						otherValue = _.find(jsonFormSerialization, function(valueObject) {
+							return ('otherValue' === valueObject.name);
+						});
+						return (otherValue ? otherValue.value : '');
+					} else {
+						return valueObject.value;
+					}
+				});
+			return flatList;
+        }
+        return null;
     },
     parseSaveValue: function(savedValue) {
-        return savedValue ? JSON.parse(savedValue) : null;
+        //Note that this function expects to run after this.renderContext.choices
+        //has been initilized.
+		var that = this;
+		var otherChoices = [];
+		var matchedChoice = null;
+		var choiceList = _.map(savedValue, function(valueObject) {
+			matchedChoice = _.find(that.renderContext.choices, function(choiceObject) {
+							return (valueObject === choiceObject.value);
+				});
+			if ( matchedChoice != null ) {
+				return { "name": this.name,
+						 "value": valueObject };
+			} else {
+				otherChoices.push(valueObject);
+				return null;
+			}
+		});
+		if (this.withOther && otherChoices.length == 1 ) {
+			// emit the other choice list and the value for it...
+			choiceList.push({
+                "name": "other",
+                "value": "other"
+            });
+			choiceList.push({
+                "name": "otherValue",
+                "value": otherChoices[0]
+            });
+        } else if ( otherChoices.length > 0 ) {
+			console.log("invalid choices are in choices list");
+			console.log(otherChoices);
+		}
     },
     modification: function(evt) {
         if(this.withOther) {

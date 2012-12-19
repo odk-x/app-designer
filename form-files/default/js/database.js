@@ -224,11 +224,15 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
             if ( value instanceof Array ) {
                 refined = [];
                 itemType = jsonType.items;
-                for ( item in value ) {
-                    itemValue = that._toDatabaseFromElementType( itemType, item );
-                    refined.push(itemValue);
-                }
-                value = JSON.stringify(refined);
+				if ( itemType == null ) {
+					value = JSON.stringify(value);
+				} else {
+					for ( item = 0 ; item < value.length ; ++item ) {
+						itemValue = that._toDatabaseFromElementType( itemType, value[item] );
+						refined.push(itemValue);
+					}
+					value = JSON.stringify(refined);
+				}
             } else {
                 throw new Error("unexpected non-array value");
             }

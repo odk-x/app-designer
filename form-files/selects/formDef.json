@@ -3,9 +3,6 @@
         "city": {
             "type": "string"
         }, 
-        "state": {
-            "type": "string"
-        }, 
         "i1": {
             "type": "string"
         }, 
@@ -15,31 +12,54 @@
         "i2": {
             "type": "string"
         }, 
-        "bird": {
+        "i5": {
             "type": "string"
         }, 
+        "i4": {
+            "type": "string"
+        }, 
+        "altBird": {
+            "type": "array",
+            "isPersisted": true, 
+			"items":{
+				"type":"string"
+			}
+        }, 
         "color": {
+            "type": "string"
+        }, 
+        "state": {
+            "type": "string"
+        }, 
+        "otherBird": {
+            "type": "array",
+            "isPersisted": true, 
+			"items":{
+				"type":"string"
+			}
+        }, 
+        "bird": {
             "type": "string"
         }
     }, 
     "queries": [
         {
             "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []", 
-            "rowNum": 2, 
+            "_rowNum": 2, 
             "name": "states", 
             "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")"
         }, 
         {
             "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []", 
-            "rowNum": 3, 
+            "_rowNum": 3, 
             "name": "cities", 
             "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('state') + \"'\")"
         }, 
         {
-            "rowNum": 4
+            "_rowNum": 4
         }, 
         {
-            "rowNum": 5, 
+            "_rowNum": 5, 
             "name": "odk_values", 
             "uri": "\"content://com.opendatakit.tables.ContentProvider/database_id/table_id/row_id\""
         }
@@ -47,184 +67,219 @@
     "survey": [
         {
             "name": "state", 
-            "rowNum": 2, 
-            "param": "states", 
             "type": "select_one", 
+            "param": "states", 
+            "_rowNum": 2, 
             "comments": "Cascading select using remote data", 
             "label": "Choose a state:"
         }, 
         {
             "name": "city", 
-            "rowNum": 3, 
+            "_rowNum": 3, 
             "type": "select_one", 
             "param": "cities", 
             "label": "Choose a city:"
         }, 
         {
-            "rowNum": 4, 
-            "type": "screen", 
+            "_rowNum": 4, 
             "prompts": [
                 {
-                    "name": "bird", 
-                    "type": "select_one", 
-                    "rowNum": 5, 
                     "appearance": "grid", 
+                    "name": "bird", 
+                    "_rowNum": 5, 
+                    "type": "select_one", 
                     "param": "birds", 
                     "label": "Choose a bird:"
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 6, 
+                    "_rowNum": 6, 
                     "type": "note", 
                     "condition": "selected(data('bird'), 'blackbird')", 
                     "label": "Blackbird selected"
                 }, 
                 {
                     "param": null, 
-                    "rowNum": 7, 
+                    "_rowNum": 7, 
                     "type": "note", 
                     "condition": "selected(data('bird'), 'blackbird') && now().getHours() < 2", 
                     "label": "in the dead of night"
                 }
             ], 
+            "type": "screen", 
             "comments": "Image based select"
         }, 
         {
-            "rowNum": 9, 
             "type": "screen", 
             "prompts": [
                 {
+                    "appearance": "grid", 
+                    "name": "otherBird", 
+                    "_rowNum": 10, 
+                    "type": "select_multiple", 
+                    "param": "birds", 
+                    "label": "Choose a bird:"
+                }, 
+                {
+                    "name": "altBird", 
+                    "_rowNum": 11, 
+                    "type": "select_multiple", 
+                    "param": "birds", 
+                    "label": "Choose a bird:"
+                }
+            ], 
+            "_rowNum": 9
+        }, 
+        {
+            "type": "screen", 
+            "prompts": [
+                {
+                    "appearance": "inline", 
                     "name": "i1", 
+                    "_rowNum": 14, 
                     "type": "select_one", 
-                    "rowNum": 10, 
-                    "appearance": "inline", 
                     "param": "yes_no", 
                     "label": "Choose one:"
                 }, 
                 {
+                    "appearance": "inline", 
                     "name": "i2", 
+                    "_rowNum": 15, 
                     "type": "select_one", 
-                    "rowNum": 11, 
-                    "appearance": "inline", 
                     "param": "yes_no", 
                     "label": "Choose one:"
                 }, 
                 {
-                    "name": "i3", 
-                    "type": "select_one", 
-                    "rowNum": 12, 
                     "appearance": "inline", 
+                    "name": "i3", 
+                    "_rowNum": 16, 
+                    "type": "select_one", 
+                    "param": "yes_no", 
+                    "label": "Choose one:"
+                }, 
+                {
+                    "name": "i4", 
+                    "_rowNum": 17, 
+                    "type": "select_one_with_other", 
+                    "param": "yes_no", 
+                    "label": "Choose one:"
+                }, 
+                {
+                    "name": "i5", 
+                    "_rowNum": 18, 
+                    "type": "select_one_with_other", 
                     "param": "yes_no", 
                     "label": "Choose one:"
                 }
-            ]
+            ], 
+            "_rowNum": 13
         }, 
         {
             "name": "color", 
-            "rowNum": 14, 
+            "_rowNum": 20, 
             "type": "select_one_with_other", 
             "param": "colors", 
             "label": "What is your favorite color?"
         }, 
         {
             "condition": "selected(data('color'), 'teal')", 
-            "rowNum": 15, 
-            "param": null, 
             "type": "note", 
+            "param": null, 
+            "_rowNum": 21, 
             "comments": "selected function with arguement not included in choices.", 
             "label": "Teal is a good choice."
         }
     ], 
     "settings": [
         {
-            "rowNum": 2, 
             "setting": "formId", 
+            "_rowNum": 2, 
             "value": "selects"
         }, 
         {
-            "rowNum": 3, 
             "setting": "formVersion", 
+            "_rowNum": 3, 
             "value": 1
         }, 
         {
-            "rowNum": 4, 
             "setting": "formTitle", 
+            "_rowNum": 4, 
             "value": "Select Examples"
         }
     ], 
     "choices": {
         "colors": [
             {
-                "rowNum": 15, 
+                "_rowNum": 15, 
                 "name": "red", 
                 "label": "Red"
             }, 
             {
-                "rowNum": 16, 
+                "_rowNum": 16, 
                 "name": "green", 
                 "label": "Green"
             }, 
             {
-                "rowNum": 17, 
+                "_rowNum": 17, 
                 "name": "blue", 
                 "label": "Blue"
             }
         ], 
         "birds": [
             {
-                "rowNum": 2, 
-                "name": "blackbird", 
-                "image": "media/blackbird.png"
+                "image": "media/blackbird.png", 
+                "_rowNum": 2, 
+                "name": "blackbird"
             }, 
             {
-                "rowNum": 3, 
-                "name": "bluethroat", 
-                "image": "media/bluethroat.png"
+                "image": "media/bluethroat.png", 
+                "_rowNum": 3, 
+                "name": "bluethroat"
             }, 
             {
-                "rowNum": 4, 
-                "name": "crow", 
-                "image": "media/crow.png"
+                "image": "media/crow.png", 
+                "_rowNum": 4, 
+                "name": "crow"
             }, 
             {
-                "rowNum": 5, 
-                "name": "eagle", 
-                "image": "media/eagle.png"
+                "image": "media/eagle.png", 
+                "_rowNum": 5, 
+                "name": "eagle"
             }, 
             {
-                "rowNum": 6, 
-                "name": "egret", 
-                "image": "media/egret.png"
+                "image": "media/egret.png", 
+                "_rowNum": 6, 
+                "name": "egret"
             }, 
             {
-                "rowNum": 7, 
-                "name": "goose", 
-                "image": "media/goose.png"
+                "image": "media/goose.png", 
+                "_rowNum": 7, 
+                "name": "goose"
             }, 
             {
-                "rowNum": 8, 
-                "name": "gull", 
-                "image": "media/gull.png"
+                "image": "media/gull.png", 
+                "_rowNum": 8, 
+                "name": "gull"
             }, 
             {
-                "rowNum": 9, 
-                "name": "hawfinch", 
-                "image": "media/hawfinch.png"
+                "image": "media/hawfinch.png", 
+                "_rowNum": 9, 
+                "name": "hawfinch"
             }, 
             {
-                "rowNum": 10, 
-                "name": "jay", 
-                "image": "media/jay.png"
+                "image": "media/jay.png", 
+                "_rowNum": 10, 
+                "name": "jay"
             }
         ], 
         "yes_no": [
             {
-                "rowNum": 12, 
+                "_rowNum": 12, 
                 "name": "yes", 
                 "label": "Yes"
             }, 
             {
-                "rowNum": 13, 
+                "_rowNum": 13, 
                 "name": "no", 
                 "label": "No"
             }
