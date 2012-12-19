@@ -11,7 +11,9 @@
     <button class="chooseAction">Choose Audio</button>
     <div class="mediaContainer">
         {{#if uriValue}}
-            <audio src="{{uriValue}}" controls="true">audio control not supported</audio>
+            <{{#if pre4Android}}video{{else}}audio{{/if}} id="{{safeIdentity}}" src="{{uriValue}}" type="{{contentType}}"  {{#if videoPoster}}poster="{{videoPoster}}"{{/if}}
+						audio="true"{{#if pre4Android}} onclick="play()"{{/if}} controls="controls">audio control not supported</{{#if pre4Android}}video{{else}}audio{{/if}}>
+			
         {{/if}}
     </div>
 <div>

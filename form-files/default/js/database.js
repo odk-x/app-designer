@@ -504,38 +504,38 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
     }
 },
 _getElementPathPairFromKvMap: function(kvMap, elementPath) {
-	var path = elementPath.split('.');
-	var e = kvMap;
-	var i, j, term, value, pathChain;
-	// work from most specific to least specific searching for a value match
-	for (j = path.length-1 ; j >= 0 ; --j) {
-		pathChain = '';
-		for (i = 0 ; i <= j ; ++i) {
-			pathChain = '.' + path[i] + pathChain;
-		}
-		pathChain = pathChain.substring(1);
-		if ( kvMap[pathChain] != null ) {
-			// found a definition...
-			term = kvMap[pathChain];
-			value = term.value;
-			// now find the definition for this element
-			// within the composite value
-			for ( i = j+1 ; i <= path.length-1 ; ++i ) {
-				value = value[path[i]];
-				if ( value == null ) break;
-			}
-			var e = {};
-			var f;
-			for ( f in term ) {
-				if ( f != "value" ) {
-					e[f] = term[f];
-				}
-			}
-			e['value'] = value;
-			return {element: e, elementPath: pathChain};
-		}
-	}
-	return null;
+    var path = elementPath.split('.');
+    var e = kvMap;
+    var i, j, term, value, pathChain;
+    // work from most specific to least specific searching for a value match
+    for (j = path.length-1 ; j >= 0 ; --j) {
+        pathChain = '';
+        for (i = 0 ; i <= j ; ++i) {
+            pathChain = '.' + path[i] + pathChain;
+        }
+        pathChain = pathChain.substring(1);
+        if ( kvMap[pathChain] != null ) {
+            // found a definition...
+            term = kvMap[pathChain];
+            value = term.value;
+            // now find the definition for this element
+            // within the composite value
+            for ( i = j+1 ; i <= path.length-1 ; ++i ) {
+                value = value[path[i]];
+                if ( value == null ) break;
+            }
+            var e = {};
+            var f;
+            for ( f in term ) {
+                if ( f != "value" ) {
+                    e[f] = term[f];
+                }
+            }
+            e['value'] = value;
+            return {element: e, elementPath: pathChain};
+        }
+    }
+    return null;
 },
 /**
  * insert a new automatic savepoint for the given record and change the 
@@ -575,12 +575,12 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
         if ( defElement.isPersisted ) {
             stmt += comma;
             comma = ', ';
-			var elementPath = defElement['elementPath'];
-			if ( elementPath == null ) elementPath = f;
-			// TODO: get kvElement for this elementPath
+            var elementPath = defElement['elementPath'];
+            if ( elementPath == null ) elementPath = f;
+            // TODO: get kvElement for this elementPath
             elementPathPair = this._getElementPathPairFromKvMap(kvMap, elementPath);
-			if ( elementPathPair != null ) {
-				kvElement = elementPathPair.element;
+            if ( elementPathPair != null ) {
+                kvElement = elementPathPair.element;
                 // track that we matched the keyname...
                 processSet[elementPathPair.elementPath] = true;
                 if (kvElement.value == null) {
@@ -801,7 +801,7 @@ _selectTableDefinitionsDataStmt:function(tableId) {
 _selectAllTableMetaDataStmt:function(tableId) {
     return {
             stmt : 'select key, type, value from _key_value_store_active where table_id=? and partition=? and aspect=?',
-            bind : [tableId, "table", "global"]    
+            bind : [tableId, "Table", "global"]    
         };
 },
 // save the given value under that name
@@ -810,12 +810,12 @@ insertTableMetaDataStmt:function(tableId, name, type, value) {
     if (value == null) {
         return {
             stmt : 'insert into _key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,"");',
-            bind : [tableId, "table", "global", name, type]
+            bind : [tableId, "Table", "global", name, type]
         };
     } else {
         return {
             stmt : 'insert into _key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,?)',
-            bind : [tableId, "table", "global", name, type, value]
+            bind : [tableId, "Table", "global", name, type, value]
         };
     }
 },
@@ -842,7 +842,7 @@ _selectColumnDefinitionsDataStmt:function(tableId) {
 _selectAllColumnMetaDataStmt:function(tableId) {
     return {
             stmt : 'select aspect as element_key, key, type, value from _key_value_store_active where table_id=? and partition=?',
-            bind : [tableId, "column"]    
+            bind : [tableId, "Column"]    
         };
 },
 // save the given value under that name
@@ -851,12 +851,12 @@ insertColumnMetaDataStmt:function(tableId, elementKey, name, type, value) {
     if (value == null) {
         return {
             stmt : 'insert into _key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,"");',
-            bind : [tableId, "column", elementKey, name, type]
+            bind : [tableId, "Column", elementKey, name, type]
         };
     } else {
         return {
             stmt : 'insert into _key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,?)',
-            bind : [tableId, "column", elementKey, name, type, value]
+            bind : [tableId, "Column", elementKey, name, type, value]
         };
     }
 },
@@ -898,7 +898,12 @@ putInstanceMetaData:function(ctxt, name, value) {
         ctxt.failure({message:"Unrecognized instance metadata"});
         return;
       }
-      kvMap[dbColumnName] = {value: value, isInstanceMetadata: true };
+	  // and still use the elementPath for the lookup.
+	  // this simply ensures that the name is exported above 
+	  // the database layer. 
+	  // The database layer uses putDataKeyValueMap()
+	  // for lower-level manipulations.
+      kvMap[name] = {value: value, isInstanceMetadata: true };
       that.putDataKeyValueMap(ctxt, kvMap );
 },
 /**
@@ -1455,7 +1460,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             } );
             fullDef._key_value_store_active.push( {
                 table_id: tlo.tableId,
-                partition: "column",
+                partition: "Column",
                 aspect: dbColumnName,
                 key: "displayVisible",
                 type: "boolean",
@@ -1463,7 +1468,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             } );
             fullDef._key_value_store_active.push( {
                 table_id: tlo.tableId,
-                partition: "column",
+                partition: "Column",
                 aspect: dbColumnName,
                 key: "displayName",
                 type: "string",
@@ -1471,7 +1476,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             } );
             fullDef._key_value_store_active.push( {
                 table_id: tlo.tableId,
-                partition: "column",
+                partition: "Column",
                 aspect: dbColumnName,
                 key: "displayChoicesList",
                 type: "string",
@@ -1479,7 +1484,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             } );
             fullDef._key_value_store_active.push( {
                 table_id: tlo.tableId,
-                partition: "column",
+                partition: "Column",
                 aspect: dbColumnName,
                 key: "displayFormat",
                 type: "string",
@@ -1487,7 +1492,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             } );
             fullDef._key_value_store_active.push( {
                 table_id: tlo.tableId,
-                partition: "column",
+                partition: "Column",
                 aspect: dbColumnName,
                 key: "smsIn",
                 type: "boolean",
@@ -1495,7 +1500,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             } );
             fullDef._key_value_store_active.push( {
                 table_id: tlo.tableId,
-                partition: "column",
+                partition: "Column",
                 aspect: dbColumnName,
                 key: "smsOut",
                 type: "boolean",
@@ -1503,7 +1508,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             } );
             fullDef._key_value_store_active.push( {
                 table_id: tlo.tableId,
-                partition: "column",
+                partition: "Column",
                 aspect: dbColumnName,
                 key: "smsLabel",
                 type: "string",
@@ -1511,7 +1516,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             } );
             fullDef._key_value_store_active.push( {
                 table_id: tlo.tableId,
-                partition: "column",
+                partition: "Column",
                 aspect: dbColumnName,
                 key: "footerMode",
                 type: "string",
@@ -1532,14 +1537,14 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "table", aspect: "global", key: 'displayName', type: 'string', value: opendatakit.getSetting(tlo.formDef, 'formTitle') } );
-    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "table", aspect: "global", key: 'primeCols', type: 'string', value: '' } );
-    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "table", aspect: "global", key: 'sortCol', type: 'string', value: '' } );
-    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "table", aspect: "global", key: 'coViewSettings', type: 'string', value: '' } );
-    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "table", aspect: "global", key: 'detailViewFile', type: 'string', value: '' } );
-    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "table", aspect: "global", key: 'summaryDisplayFormat', type: 'string', value: '' } );
-    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "table", aspect: "global", key: 'colOrder', type: 'string', value: JSON.stringify(displayColumnOrder) } );
-    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "table", aspect: "global", key: 'ovViewSettings', type: 'string', value: '' } );
+    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'displayName', type: 'string', value: opendatakit.getSetting(tlo.formDef, 'formTitle') } );
+    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'primeCols', type: 'string', value: '' } );
+    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'sortCol', type: 'string', value: '' } );
+    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'coViewSettings', type: 'string', value: '' } );
+    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'detailViewFile', type: 'string', value: '' } );
+    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'summaryDisplayFormat', type: 'string', value: '' } );
+    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'colOrder', type: 'string', value: JSON.stringify(displayColumnOrder) } );
+    fullDef._key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'ovViewSettings', type: 'string', value: '' } );
 
     // get first property in fullDef -- we use native iteration ordering to step through the properties.
     var tableToUpdate = null;

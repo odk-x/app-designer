@@ -24,95 +24,95 @@ window.collect = window.collect || {
         // currently being worked on.
         this.instanceId = instanceId;
     },
-    doAction: function( page, path, action, jsonObj ) {
+    doAction: function( promptPath, internalPromptContext, action, jsonObj ) {
         if ( action == 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.jpg",' + 
-													'"contentType": "image/jpg" } }' );
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg",' + 
+                                                    '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.3gpp",' + 
-													'"contentType": "video/3gpp" } }' );
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4",' + 
+                                                    '"contentType": "video/mp4" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_capture_bubble.3gpp",' + 
-													'"contentType": "audio/3gpp" } }' );
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-zWfluNSa.mp3",' + 
+                                                    '"contentType": "audio/mp3" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.MediaChooseImageActivity' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.jpg",' + 
-													'"contentType": "image/jpg" } }' );
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg",' + 
+                                                    '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.MediaChooseVideoActivity' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.3gpp",' + 
-													'"contentType": "video/3gpp" } }' );
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4",' + 
+                                                    '"contentType": "video/mp4" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.MediaChooseAudioActivity' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "uri": "file:///C:\\\\Users\\\\Administrator\\\\Pictures\\\\new_choose_bubble.3gpp",' + 
-													'"contentType": "audio/3gpp" } }' );
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-zWfluNSa.mp3",' + 
+                                                    '"contentType": "audio/mp3" } }' );
             }, 100);
             return "OK";
         }
         if ( action == 'org.opendatakit.sensors.PULSEOX' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "pulse": 100, "ox": ' + prompt("Enter ox:") + ' } }' );
             }, 1000);
             return "OK";
         }
         if ( action == 'change.uw.android.BREATHCOUNT' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "value": ' + prompt("Enter breath count:") + ' } }' );
             }, 1000);
             return "OK";
         }
         if ( action == 'com.google.zxing.client.android.SCAN' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
-                    '{ "status": -1, "result": { "value": "' + prompt("Enter barcode:") + '" } }' );
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { "SCAN_RESULT": "' + prompt("Enter barcode:") + '" } }' );
             }, 1000);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.GeoPointMapActivity' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "latitude": ' + prompt("Enter latitude:") + 
-												', "longitude": ' + prompt("Enter longitude:") +
-												', "altitude": ' + prompt("Enter altitude:") +
-												', "accuracy": ' + prompt("Enter accuracy:") +
-												' } }' );
+                                                ', "longitude": ' + prompt("Enter longitude:") +
+                                                ', "altitude": ' + prompt("Enter altitude:") +
+                                                ', "accuracy": ' + prompt("Enter accuracy:") +
+                                                ' } }' );
             }, 1000);
             return "OK";
         }
         if ( action == 'org.opendatakit.collect.android.activities.GeoPointActivity' ) {
             setTimeout(function() {
-                controller.opendatakitCallback( page, path, action, 
+                controller.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "latitude": ' + prompt("Enter latitude:") + 
-												', "longitude": ' + prompt("Enter longitude:") +
-												', "altitude": ' + prompt("Enter altitude:") +
-												', "accuracy": ' + prompt("Enter accuracy:") +
-												' } }' );
+                                                ', "longitude": ' + prompt("Enter longitude:") +
+                                                ', "altitude": ' + prompt("Enter altitude:") +
+                                                ', "accuracy": ' + prompt("Enter accuracy:") +
+                                                ' } }' );
             }, 1000);
             return "OK";
         }
