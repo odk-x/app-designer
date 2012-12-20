@@ -24,6 +24,11 @@ window.collect = window.collect || {
         // currently being worked on.
         this.instanceId = instanceId;
     },
+    log: function(msg) {
+        if ( window.location.search != null && window.location.search.indexOf("log") >= 0 ) {
+            console.log(msg);
+        }
+    },
     doAction: function( promptPath, internalPromptContext, action, jsonObj ) {
         if ( action == 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {

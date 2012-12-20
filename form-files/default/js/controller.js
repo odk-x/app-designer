@@ -485,7 +485,7 @@ window.controller = {
             this.saveAllChanges(ctxt, asComplete);
         }
     },
-    saveAllChanges:function(ctxt, asComplete) {
+   saveAllChanges:function(ctxt, asComplete) {
         var that = this;
         // NOTE: only success is reported up to collect here.
         // if there are any failures, the failure callback is only invoked if the save request
@@ -622,7 +622,7 @@ window.controller = {
             $.each( this.contextChain, function(index,value) {
                 flattened += "\nmethod: " + value.method + ((value.detail != null) ? " detail: " + value.detail : "");
             });
-            console.log(contextMsg + " execution_chain: " + flattened);
+            collect.log(contextMsg + " execution_chain: " + flattened);
         }
     },
     

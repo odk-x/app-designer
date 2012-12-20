@@ -106,7 +106,15 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
             // the requested form.
             var f = function() {
                 if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
-                    parsequery.parseParameters(ctxt);
+                    
+                    if ( window.location.search != null && window.location.search.indexOf("purge") >= 0 ) {
+                        ctxt.append('purging datastore');
+                        database.purge($.extend({},ctxt,{success:function() {
+                                parsequery.parseParameters(ctxt);
+                            }}));
+                    } else {
+                        parsequery.parseParameters(ctxt);
+                    }
                 } else {
                     ctxt.append('startup.delay');
                     setTimeout(f, 200);
