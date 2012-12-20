@@ -203,9 +203,14 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 additionalActivateFunctions: additionalActivateFunctions
             }, that.initializeProperties(prompt)));
             PromptInstance = new ExtendedPromptType();
-            if (prompt.type === 'with_next') {
+            if (prompt.type === 'with_next' ) {
                 additionalActivateFunctions.push(function(ctxt) {
                     PromptInstance.assignToValue(ctxt);
+                });
+                return;
+            } else if (prompt.type === 'with_next_validate' ) {
+                additionalActivateFunctions.push(function(ctxt) {
+                    PromptInstance.triggerValidation(ctxt);
                 });
                 return;
             } else {

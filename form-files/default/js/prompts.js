@@ -568,52 +568,52 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     generateSaveValue: function(jsonFormSerialization) {
         var otherSelected, otherValue;
         if(jsonFormSerialization){
-			var flatList = _.map(jsonFormSerialization, function(valueObject) {
-					if ( 'otherValue' === valueObject.name ) {
-						otherValue = _.find(jsonFormSerialization, function(valueObject) {
-							return ('otherValue' === valueObject.name);
-						});
-						return (otherValue ? otherValue.value : '');
-					} else {
-						return valueObject.value;
-					}
-				});
-			return flatList;
+            var flatList = _.map(jsonFormSerialization, function(valueObject) {
+                    if ( 'otherValue' === valueObject.name ) {
+                        otherValue = _.find(jsonFormSerialization, function(valueObject) {
+                            return ('otherValue' === valueObject.name);
+                        });
+                        return (otherValue ? otherValue.value : '');
+                    } else {
+                        return valueObject.value;
+                    }
+                });
+            return flatList;
         }
         return null;
     },
     parseSaveValue: function(savedValue) {
         //Note that this function expects to run after this.renderContext.choices
         //has been initilized.
-		var that = this;
-		var otherChoices = [];
-		var matchedChoice = null;
-		var choiceList = _.map(savedValue, function(valueObject) {
-			matchedChoice = _.find(that.renderContext.choices, function(choiceObject) {
-							return (valueObject === choiceObject.value);
-				});
-			if ( matchedChoice != null ) {
-				return { "name": this.name,
-						 "value": valueObject };
-			} else {
-				otherChoices.push(valueObject);
-				return null;
-			}
-		});
-		if (this.withOther && otherChoices.length == 1 ) {
-			// emit the other choice list and the value for it...
-			choiceList.push({
+        var that = this;
+        var otherChoices = [];
+        var matchedChoice = null;
+        var choiceList = _.map(savedValue, function(valueObject) {
+            matchedChoice = _.find(that.renderContext.choices, function(choiceObject) {
+                            return (valueObject === choiceObject.value);
+                });
+            if ( matchedChoice != null ) {
+                return { "name": this.name,
+                         "value": valueObject };
+            } else {
+                otherChoices.push(valueObject);
+                return null;
+            }
+        });
+        if (this.withOther && otherChoices.length == 1 ) {
+            // emit the other choice list and the value for it...
+            choiceList.push({
                 "name": "other",
                 "value": "other"
             });
-			choiceList.push({
+            choiceList.push({
                 "name": "otherValue",
                 "value": otherChoices[0]
             });
         } else if ( otherChoices.length > 0 ) {
-			console.log("invalid choices are in choices list");
-			console.log(otherChoices);
-		}
+            console.log("invalid choices are in choices list");
+            console.log(otherChoices);
+        }
     },
     modification: function(evt) {
         if(this.withOther) {
@@ -1019,7 +1019,7 @@ promptTypes.media = promptTypes.base.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-		that.updateRenderContext();
+        that.updateRenderContext();
         that.baseActivate(ctxt);
     },
     disableButtons: function() {
@@ -1086,13 +1086,13 @@ promptTypes.media = promptTypes.base.extend({
                         // onActivate get's called AFTER this happens.
                         database.setData( $.extend({},ctxt,{success:function() {
                                 that.enableButtons();
-								that.updateRenderContext();
+                                that.updateRenderContext();
                                 that.render();
                                 ctxt.success();
                             },
                             failure:function(m) {
                                 that.enableButtons();
-								that.updateRenderContext();
+                                that.updateRenderContext();
                                 that.render();
                                 ctxt.failure(m);
                             }}), that.name, { uri : uri, contentType: contentType } );
@@ -1105,32 +1105,32 @@ promptTypes.media = promptTypes.base.extend({
                 console.log("failure returned");
                 alert(jsonObject.result);
                 that.enableButtons();
-				that.updateRenderContext();
+                that.updateRenderContext();
                 that.render();
                 ctxt.failure({message: "Action canceled."});
             }
         };
     },
-	baseUpdateRenderContext: function() {
-		var that = this;
+    baseUpdateRenderContext: function() {
+        var that = this;
         var mediaUri = that.getValue();
         var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
-		var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
-		var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
+        var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
+        var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
         var info = opendatakit.getPlatformInfo();
         if ( info.container != 'Android' ) {
-			that.renderContext.pre4Android = false;
-		} else {
-			that.renderContext.pre4Android = ( info.version.substring(0,1) < "4" );
-		}
-		that.renderContext.mediaPath = uri;
+            that.renderContext.pre4Android = false;
+        } else {
+            that.renderContext.pre4Android = ( info.version.substring(0,1) < "4" );
+        }
+        that.renderContext.mediaPath = uri;
         that.renderContext.uriValue = uri;
-		that.renderContext.safeIdentity = safeIdentity;
+        that.renderContext.safeIdentity = safeIdentity;
         that.renderContext.contentType = contentType;
-	},
-	updateRenderContext: function() {
-		this.baseUpdateRenderContext();
-	}
+    },
+    updateRenderContext: function() {
+        this.baseUpdateRenderContext();
+    }
 });
 promptTypes.image = promptTypes.media.extend({
     type: "image",
@@ -1147,10 +1147,10 @@ promptTypes.video = promptTypes.media.extend({
     templatePath: "templates/video.handlebars",
     captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity',
     chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseVideoActivity',
-	updateRenderContext: function() {
-		this.baseUpdateRenderContext();
+    updateRenderContext: function() {
+        this.baseUpdateRenderContext();
         // this.renderContext.videoPoster = this.renderContext.uriValue;
-	}
+    }
 });
 promptTypes.audio = promptTypes.media.extend({
     type: "audio",
@@ -1529,6 +1529,14 @@ promptTypes.with_next = promptTypes.base.extend({
             return;
         }
         that.setValue(ctxt, value);
+    }
+});
+// with_next_validate runs the validation check before rendering the next screen(like with_next)
+promptTypes.with_next_validate = promptTypes.base.extend({
+    type: "with_next_validate",
+    hideInHierarchy: true,
+    triggerValidation: function(ctxt){
+        controller.validateAllQuestions(ctxt);
     }
 });
 promptTypes.error = promptTypes.base;
