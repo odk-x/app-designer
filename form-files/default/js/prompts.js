@@ -1565,7 +1565,7 @@ promptTypes.with_next_validate = promptTypes.base.extend({
     type: "with_next_validate",
     hideInHierarchy: true,
     triggerValidation: function(ctxt){
-        controller.validateAllQuestions(ctxt);
+        controller.validateAllQuestions(ctxt, this.promptIdx);
     }
 });
 promptTypes.error = promptTypes.base;

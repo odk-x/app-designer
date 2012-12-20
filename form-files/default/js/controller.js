@@ -150,7 +150,7 @@ window.controller = {
             ctxt.success(prompt);
         }
     },
-    validateQuestionHelper: function(ctxt, promptCandidate) {
+    validateQuestionHelper: function(ctxt, promptCandidate, stopAtPromptIdx) {
         var that = this;
         return function() {
             try {
@@ -167,12 +167,14 @@ window.controller = {
                                     var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
                                     that.advanceToScreenPrompt($.extend({}, ctxt, {
                                         success: function(prompt){
-                                            if(prompt) {
+                                            if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
                                                 ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-                                                var fn = that.validateQuestionHelper(ctxt,prompt);
+                                                var fn = that.validateQuestionHelper(ctxt,prompt,stopAtPromptIdx);
                                                 (fn)();
                                             } else {
-                                                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+												if ( !prompt ) {
+													ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+												}
                                                 ctxt.success();
                                             }
                                         },
@@ -223,7 +225,7 @@ window.controller = {
             }
         };
     },
-    validateAllQuestions: function(ctxt){
+    validateAllQuestions: function(ctxt, stopAtPromptIdx){
         var that = this;
         var promptCandidate = that.prompts[0];
         // set the 'strict' attribute on the context to report all 
@@ -251,12 +253,14 @@ window.controller = {
         // call advanceToScreenPrompt, since prompt[0] is always a goto_if...
         that.advanceToScreenPrompt($.extend({},newctxt, {
             success: function(prompt) {
-                if(prompt) {
+                if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
                     newctxt.append("validateAllQuestions.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-                    var fn = that.validateQuestionHelper(newctxt,prompt);
+                    var fn = that.validateQuestionHelper(newctxt,prompt,stopAtPromptIdx);
                     (fn)();
                 } else {
-                    newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+					if ( !prompt ) {
+						newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+					}
                     newctxt.success();
                 }
             },
@@ -566,6 +570,8 @@ window.controller = {
         this.previousScreenIndices.length = 0;
     },
     reset: function(ctxt,sameForm) {
+		// NOTE: the ctxt calls here are synchronous actions
+		// ctxt is only passed in for logging purposes.
         ctxt.append('controller.reset');
         this.clearPromptHistory(ctxt);
         if ( this.screenManager != null ) {
@@ -579,6 +585,13 @@ window.controller = {
             this.prompts = [];
             this.calcs = [];
         }
+		// and execute an async callback to continue the reset
+		// this forces a refresh of the DOM prior to continuing, 
+		// ensuring that the page is changed to 'Please wait...'
+		// early.
+		setTimeout(function() {
+			ctxt.success();
+			}, 100);
     },
     fatalError: function() {
         //Stop the survey.

@@ -135,55 +135,56 @@ return {
             opendatakit.setCurrentFormPath(null);
             opendatakit.setCurrentInstanceId(null);
             // reset controller to pristine state...
-            that.controller.reset(ctxt, sameForm);
-            
-            // build table for tableId...
-            database.initializeTables($.extend({},ctxt,{success:function() {
-                    // data table already exists
-                    // build the survey and place it in the controller...
-                    that.builder.buildSurvey(formDef, function() {
-                            // currentInstanceId == null
-                            // TODO: load instance...
-                            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
-                        });
-                }}), formDef, tableId, formPath);
+            that.controller.reset($.extend({},ctxt, {success:function() {
+				// build table for tableId...
+				database.initializeTables($.extend({},ctxt,{success:function() {
+						// data table already exists
+						// build the survey and place it in the controller...
+						that.builder.buildSurvey(formDef, function() {
+								// currentInstanceId == null
+								// TODO: load instance...
+								that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+							});
+					}}), formDef, tableId, formPath);
+			}}), sameForm);
         } else if (!sameForm) {
             opendatakit.setCurrentFormPath(null);
             opendatakit.setCurrentInstanceId(null);
             // reset controller to pristine state...
-            that.controller.reset(ctxt, sameForm);
-
-            // preserve values from the Tables metadata but override form info...
-            opendatakit.setCurrentFormDef(formDef);
-            opendatakit.setCurrentFormPath(formPath);
-            // currentInstanceId == null
-            // data table already exists (since tableId is unchanged)
-            // TODO: parse new form...
-            // TODO: verify instance table exists
-            // TODO: load instance...
-            
-            // build the survey and place it in the controller...
-            that.builder.buildSurvey(formDef, function() {
-                        // currentInstanceId == null
-                        // TODO: load instance...
-                        that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
-            });
+            that.controller.reset($.extend({},ctxt, {success:function() {
+				// preserve values from the Tables metadata but override form info...
+				opendatakit.setCurrentFormDef(formDef);
+				opendatakit.setCurrentFormPath(formPath);
+				// currentInstanceId == null
+				// data table already exists (since tableId is unchanged)
+				// TODO: parse new form...
+				// TODO: verify instance table exists
+				// TODO: load instance...
+				
+				// build the survey and place it in the controller...
+				that.builder.buildSurvey(formDef, function() {
+							// currentInstanceId == null
+							// TODO: load instance...
+							that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+				});
+			}}), sameForm);
         } else  if (!sameInstance) {
             opendatakit.setCurrentInstanceId(null);
             // reset controller to pristine state...
-            that.controller.reset(ctxt, sameForm);
+            that.controller.reset($.extend({},ctxt, {success:function() {
+				// currentInstanceId == null
+				// data table already exists (since tableId is unchanged)
+				// form definitions already processed (since formPath and formId unchanged)
 
-            // currentInstanceId == null
-            // data table already exists (since tableId is unchanged)
-            // form definitions already processed (since formPath and formId unchanged)
-
-            // currentInstanceId == null
-            // TODO: load instance...
-            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+				// currentInstanceId == null
+				// TODO: load instance...
+				that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+			}}), sameForm);
         } else {
             // currentInstanceId == valid value
             // data table already exists (since tableId is unchanged)
             // form definitions already processed (since formPath and formId unchanged)
+			// same instance -- so just render the UI...
             
             // TODO: change pageRef (presumably)
             that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
@@ -233,9 +234,35 @@ return {
             instanceId = null;
             pageRef = null;
         }
-
+		
+		var formDef = opendatakit.getCurrentFormDef();
+		var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);
+        var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() == instanceId) && (instanceId != null);
+        
         // fetch the form definition (defered processing)
         var filename = formPath + 'formDef.json';
+		
+		if ( !sameForm ) {
+			// force a 'Please wait...' to display before we try to read the formDef file...
+		    that.controller.reset($.extend({},ctxt, {success:function() {
+				that._parseFormDefFile(ctxt, formPath, instanceId, pageRef, instanceMetadataKeyValueMap, filename);
+			}}), false );
+		} else {
+			try {
+				that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
+										instanceId, pageRef, instanceMetadataKeyValueMap);
+			} catch (ex) {
+				console.error(String(ex));
+				ctxt.append('parsequery.parseParameters.exception',  'unknown error: ' + ex);
+				ctxt.failure({message: "Exception while processing form definition."});
+			}
+		}
+    },
+	/**
+	 * What actually reads in and loads the formDef file (and then parses the query parameters against it).
+	 */
+	_parseFormDefFile: function(ctxt, formPath, instanceId, pageRef, instanceMetadataKeyValueMap, filename) {
+		var that = this;
         requirejs(['text!' + filename], 
             function(formDefTxt) {
                 if ( formDefTxt == null || formDefTxt.length == 0 ) {
@@ -257,7 +284,7 @@ return {
                 ctxt.failure({message: "Failure while reading form definition."});
             }
         );
-    },
+	},
     /**
      * Bound to the 'hashchange' event.
      *

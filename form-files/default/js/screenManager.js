@@ -61,14 +61,26 @@ return Backbone.View.extend({
         this.displayWaiting(ctxt);
     },
     displayWaiting: function(ctxt){
+		var that = this;
         ctxt.append("screenManager.displayWaiting", (this.prompt == null) ? "promptIdx: null" : ("promptIdx: " + this.prompt.promptIdx));
-        var $e;
-        $e = $('.current');
-        $e.html('<span>Please wait...</span>');
-        $e = $('.odk-toolbar');
-        $e.html('');
-        $e = $('.odk-nav');
-        $e.html('');
+		// update to be like a simulated page change...
+        var $page = $('<div>');
+        $page.attr('data-role', 'page');
+        $page.attr('data-theme', "d");
+        $page.attr('data-content-theme', "d");
+        $page.html('<div data-role="header" class="odk-toolbar"></div>' +
+					'<div data-role="content" class="odk-scroll">' + 
+					  '<div class="current"><span>Please wait...</span></div>' + 
+					'</div><div data-role="footer" class="odk-nav"></div>');
+		that.previousPageEl = that.currentPageEl;
+		that.currentPageEl = $page;
+		that.prompt = null;
+		that.$el.append(that.currentPageEl);
+		that.savedCtxt = ctxt;
+		$.mobile.changePage(that.currentPageEl, $.extend({
+			changeHash: false,
+			transition: 'none'
+		}));
     },
     setPrompt: function(ctxt, prompt, jqmAttrs){
         if(!jqmAttrs){
@@ -252,7 +264,9 @@ return Backbone.View.extend({
         
         if ( ctxt != null ) {
             ctxt.append('screenManager.handlePageChange.linked');
-            this.prompt.delegateEvents();
+            if ( this.prompt ) {
+				this.prompt.delegateEvents();
+			}
             if(this.previousPageEl){
                 var pg = this.previousPageEl;
                 this.previousPageEl = null;
@@ -260,7 +274,7 @@ return Backbone.View.extend({
             }
             ctxt.success();
         } else {
-            ctxt = that.controller.newContext(evt);
+            ctxt = this.controller.newContext(evt);
             ctxt.append('screenManager.handlePageChange.error');
             this.swipeEnabled = true;
             ctxt.failure({message: "Internal error. Unexpected triggering of page change event."});
