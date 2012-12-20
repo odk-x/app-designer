@@ -3,6 +3,12 @@
         "city": {
             "type": "string"
         }, 
+        "state": {
+            "type": "string"
+        }, 
+        "h_select": {
+            "type": "string"
+        }, 
         "i1": {
             "type": "string"
         }, 
@@ -12,33 +18,13 @@
         "i2": {
             "type": "string"
         }, 
-        "i5": {
+        "bird": {
             "type": "string"
-        }, 
-        "i4": {
-            "type": "string"
-        }, 
-        "altBird": {
-            "type": "array",
-            "isPersisted": true, 
-			"items":{
-				"type":"string"
-			}
         }, 
         "color": {
             "type": "string"
         }, 
-        "state": {
-            "type": "string"
-        }, 
-        "otherBird": {
-            "type": "array",
-            "isPersisted": true, 
-			"items":{
-				"type":"string"
-			}
-        }, 
-        "bird": {
+        "cp_test": {
             "type": "string"
         }
     }, 
@@ -59,8 +45,9 @@
             "_rowNum": 4
         }, 
         {
+            "callback": "[{ name: \"test\", label : JSON.stringify(context) }]", 
             "_rowNum": 5, 
-            "name": "odk_values", 
+            "name": "content_provider_test", 
             "uri": "\"content://com.opendatakit.tables.ContentProvider/database_id/table_id/row_id\""
         }
     ], 
@@ -113,30 +100,9 @@
             "type": "screen", 
             "prompts": [
                 {
-                    "appearance": "grid", 
-                    "name": "otherBird", 
-                    "_rowNum": 10, 
-                    "type": "select_multiple", 
-                    "param": "birds", 
-                    "label": "Choose a bird:"
-                }, 
-                {
-                    "name": "altBird", 
-                    "_rowNum": 11, 
-                    "type": "select_multiple", 
-                    "param": "birds", 
-                    "label": "Choose a bird:"
-                }
-            ], 
-            "_rowNum": 9
-        }, 
-        {
-            "type": "screen", 
-            "prompts": [
-                {
                     "appearance": "inline", 
                     "name": "i1", 
-                    "_rowNum": 14, 
+                    "_rowNum": 10, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": "Choose one:"
@@ -144,7 +110,7 @@
                 {
                     "appearance": "inline", 
                     "name": "i2", 
-                    "_rowNum": 15, 
+                    "_rowNum": 11, 
                     "type": "select_one", 
                     "param": "yes_no", 
                     "label": "Choose one:"
@@ -152,31 +118,17 @@
                 {
                     "appearance": "inline", 
                     "name": "i3", 
-                    "_rowNum": 16, 
+                    "_rowNum": 12, 
                     "type": "select_one", 
-                    "param": "yes_no", 
-                    "label": "Choose one:"
-                }, 
-                {
-                    "name": "i4", 
-                    "_rowNum": 17, 
-                    "type": "select_one_with_other", 
-                    "param": "yes_no", 
-                    "label": "Choose one:"
-                }, 
-                {
-                    "name": "i5", 
-                    "_rowNum": 18, 
-                    "type": "select_one_with_other", 
                     "param": "yes_no", 
                     "label": "Choose one:"
                 }
             ], 
-            "_rowNum": 13
+            "_rowNum": 9
         }, 
         {
             "name": "color", 
-            "_rowNum": 20, 
+            "_rowNum": 14, 
             "type": "select_one_with_other", 
             "param": "colors", 
             "label": "What is your favorite color?"
@@ -185,9 +137,26 @@
             "condition": "selected(data('color'), 'teal')", 
             "type": "note", 
             "param": null, 
-            "_rowNum": 21, 
+            "_rowNum": 15, 
             "comments": "selected function with arguement not included in choices.", 
             "label": "Teal is a good choice."
+        }, 
+        {
+            "name": "h_select", 
+            "inputAttributes": {
+                "data-type": "horizontal"
+            }, 
+            "_rowNum": 16, 
+            "type": "select_one", 
+            "param": "yes_no", 
+            "label": "Horizontal select example."
+        }, 
+        {
+            "name": "cp_test", 
+            "_rowNum": 17, 
+            "type": "select_one", 
+            "param": "content_provider_test", 
+            "label": "This demos a content provider query."
         }
     ], 
     "settings": [
