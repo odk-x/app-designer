@@ -369,7 +369,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
             inContinuation = true;
             ctxt.failure({message: "Web client does not support the W3C SQL database standard."});
         } else {
-            var settings = opendatakit.getDatabaseSettings(ctxt);
+            var settings = opendatakit.getDatabaseSettings();
             var database = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
               // create the database...
             database.transaction(function(transaction) {
@@ -425,18 +425,22 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
             ctxt.append('withDb.exception', 'invalid db version');
             console.error("Invalid database version.");
         } else {
-            ctxt.append('withDb.exception', 'unknown error: ' + e);
-            console.error("Unknown error " + e + ".");
+            ctxt.append('withDb.exception', 'unknown error: ' + String(e));
+            console.error("Unknown error " + String(e) + ".");
         }
         if ( !inContinuation ) {
             try {
                 ctxt.failure({message: "Exception while accessing or saving values to the database."});
             } catch(e) {
-                ctxt.append('withDb.ctxt.failure.exception', 'unknown error: ' + e);
-                console.error("withDb.ctxt.failure.exception " + e);
+                ctxt.append('withDb.ctxt.failure.exception', 'unknown error: ' + String(e));
+                console.error("withDb.ctxt.failure.exception " + String(e));
+				ctxt._log('E','withDb: exception caught while executing ctxt.failure(msg)');
+				alert('Fatal error while accessing or saving values to database');
             }
         } else {
             console.error("Unrecoverable Internal Error: Exception during success/failure continuation");
+			ctxt._log('E',"withDb: Unrecoverable Internal Error: Exception during success/failure continuation");
+			alert('Fatal error while accessing or saving values to database');
         }
         return;
     }
@@ -1140,17 +1144,14 @@ save_all_changes:function(ctxt, asComplete) {
                 var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, opendatakit.getCurrentInstanceId(), kvMap);
                 tmpctxt.sqlStatement = is;
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-                    if ( asComplete ) {
-                        ctxt.append('save_all_changes.cleanup');
-                        // and now delete the change history...
-                        var cs = that._deletePriorChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
-                        tmpctxt.sqlStatement = cs;
-                        transaction.executeSql(cs.stmt, cs.bind);
-                    }
+					ctxt.append('save_all_changes.cleanup');
+					// and now delete the change history...
+					var cs = that._deletePriorChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
+					tmpctxt.sqlStatement = cs;
+					transaction.executeSql(cs.stmt, cs.bind);
                 });
             }
         );
-    // TODO: should we have a failure callback in to ODK Collect?
 },
 ignore_all_changes:function(ctxt) {
       var that = this;
@@ -1184,7 +1185,6 @@ get_all_instances:function(ctxt, subsurveyType) {
             var ss = that._getAllInstancesDataTableStmt(mdl.tableMetadata.dbTableName);
             ctxt.sqlStatement = ss;
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
-                console.log('test');
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
                     instanceList.push({
@@ -1470,7 +1470,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         jsonDefn = dataTableModel[dbColumnName];
         
         if ( jsonDefn.elementSet == 'data' ) {
-            var collectElementName = jsonDefn.elementName;
+            var surveyElementName = jsonDefn.elementName;
             
             fullDef.column_definitions.push( {
                 table_id: tlo.tableId,
@@ -1495,7 +1495,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 aspect: dbColumnName,
                 key: "displayName",
                 type: "string",
-                value: collectElementName
+                value: surveyElementName
             } );
             fullDef.key_value_store_active.push( {
                 table_id: tlo.tableId,

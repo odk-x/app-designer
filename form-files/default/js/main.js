@@ -10,7 +10,7 @@
  * interpretation of the formDef.json for the form).
  */
 requirejs.config({
-    baseUrl: collect.getBaseUrl(),
+    baseUrl: shim.getBaseUrl(),
     paths: {
         // third-party libraries we depend upon 
         jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
@@ -27,7 +27,7 @@ requirejs.config({
         // top-level objects
         mdl : 'js/mdl',
         promptTypes : 'js/promptTypes',
-        // collect.js -- stub directly loaded
+        // shim.js -- stub directly loaded
         // functionality
         prompts : 'js/prompts',
         database : 'js/database',

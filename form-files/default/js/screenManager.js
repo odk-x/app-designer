@@ -26,6 +26,8 @@ return Backbone.View.extend({
         "click .odk-options-btn": "openOptions",
         "click .languageMenu": "openLanguagePopup",
         "click .language": "setLanguage",
+        "click .ignore-changes-and-exit": "ignoreChanges",
+        "click .save-incomplete-and-exit": "saveChanges",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
@@ -49,7 +51,7 @@ return Backbone.View.extend({
         }
         ctxt.success();
     },
-    initialize: function(ctxt){
+    initialize: function(){
         this.controller = this.options.controller;
         this.currentPageEl = $('[data-role=page]');
         console.assert(this.currentPageEl.length === 1);
@@ -124,22 +126,6 @@ return Backbone.View.extend({
                     //so this flag automatically disables nav in that case.
                     that.renderContext.enableNavigation = false;
                 }
-                /*
-                console.log(that.renderContext);
-                // work through setting the forward/backward enable flags
-                if ( that.renderContext.enableNavigation === undefined ) {
-                    that.renderContext.enableNavigation = true;
-                }
-                if ( that.renderContext.enableForwardNavigation === undefined ) {
-                    that.renderContext.enableForwardNavigation = 
-                        that.renderContext.enableNavigation;
-                }
-                if ( that.renderContext.enableBackNavigation === undefined ) {
-                    that.renderContext.enableBackNavigation = 
-                        that.renderContext.enableNavigation &&
-                        that.controller.hasPromptHistory(ctxt);
-                }
-                */
                 // TODO: tell existing prompt it is inactive (e.g,. semaphore)...
                 if(that.prompt) {
                     that.prompt.undelegateEvents();
@@ -224,6 +210,22 @@ return Backbone.View.extend({
                 }}));
         return false;
     },
+	ignoreChanges: function(evt) {
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append('screenManager.ignoreChanges', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
+		that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
+				that.controller.leaveInstance(ctxt);
+			}}));
+	},
+	saveChanges: function(evt) {
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append('screenManager.saveChanges', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
+		that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
+				that.controller.leaveInstance(ctxt);
+			}}), false);
+	},
     openOptions: function(evt) {
         $( "#optionsPopup" ).popup( "open" );
     },

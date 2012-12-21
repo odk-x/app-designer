@@ -11,7 +11,7 @@ function(database,   _) {
         calculates: {},
         localize: function(textOrLangMap, locale) {
             if(_.isUndefined(textOrLangMap)) {
-                return 'undefined';
+                return 'text_undefined';
             }
             if(_.isString(textOrLangMap)) {
                 return textOrLangMap;
@@ -24,7 +24,7 @@ function(database,   _) {
                 alert("Could not localize object. See console:");
                 console.error("Non localizable object:");
                 console.error(textOrLangMap);
-                return 'invalidOjbect';
+                return 'no_suitable_language_mapping_defined';
             }
         },
         selected: function(promptValue, qValue) {
@@ -38,7 +38,7 @@ function(database,   _) {
 			// it is a select_one...
             //Using double equals here because I suspect the type coercion will prevent more
             //user errors that it will cause when comparing numbers and strings.
-            return parsedPromptValue == qValue;
+            return promptValue == qValue;
         },
         countSelected: function(promptValue){
 			// select_multiple promptValue is an array
@@ -46,10 +46,10 @@ function(database,   _) {
                 return 0;
             }
             if(!_.isArray(promptValue)) {
-                alert("countSelected function expects an array. See console for details.");
                 console.error(promptValue);
                 console.error(qValue);
-                return false;
+                alert("countSelected function expects an array. See console for details.");
+				throw new Error("countSelected function expects an array.");
             }
             return promptValue.length;
         },

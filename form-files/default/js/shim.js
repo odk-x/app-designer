@@ -1,8 +1,10 @@
 /*
-This collect object is just a facade for browser testing.
-It will be replaced by one provided by Android.
+This shim  object is just a facade for browser testing.
+It defines the interface that ODK Survey or other container apps 
+must implement to work with the javascript library.
+It will be replaced by one injected by Android Java code.
 */
-window.collect = window.collect || {
+window.shim = window.shim || {
     instanceId: null,
     getBaseUrl: function() {
         return '../default';
@@ -24,9 +26,13 @@ window.collect = window.collect || {
         // currently being worked on.
         this.instanceId = instanceId;
     },
-    log: function(msg) {
+	/*
+	 * severity - one of 'E' (error), 'W' (warn), 'S' (success), 'I' (info), 'D' (debug), 'T' (trace)
+	 * msg -- message to log
+	 */
+    log: function(severity, msg) {
         if ( window.location.search != null && window.location.search.indexOf("log") >= 0 ) {
-            console.log(msg);
+            console.log(severity + '/' + msg);
         }
     },
     doAction: function( promptPath, internalPromptContext, action, jsonObj ) {

@@ -1,6 +1,5 @@
 'use strict';
 /**
- non-requirejs dependency: collect
  circular dependency upon: controller, builder (set via initialize)
  
  3 public APIs:
@@ -31,7 +30,7 @@ return {
      * 
      * Immediate.
      */
-    _parseQueryHelper:function(ctxt, instanceMetadataKeyValueMap, key, value) {
+    _parseQueryHelper:function(instanceMetadataKeyValueMap, key, value) {
         if ( key == 'formPath' ) {
 			return;
 		}
@@ -50,15 +49,14 @@ return {
         database.initializeInstance($.extend({},ctxt,{success:function() {
                 if ( qpl != window.location.hash ) {
                         // apply the change to the URL...
-                        ctxt.append("parsequery._effectChange." + (sameInstance ? "sameForm" : "differentForm"),
+                        ctxt.append("parsequery._effectChange.prehashchange." + (sameInstance ? "sameForm" : "differentForm"),
                                     "window.location.hash="+qpl+" ms: " + (+new Date()));
-                        ctxt.log("prehashchange");
                         window.location.hash = qpl;
                         ctxt.success();
                         // triggers hash-change listener...
                 } else {
                         // fire the controller to render the first page.
-                        ctxt.append("parsequery._effectChange." + (sameInstance ? "sameForm" : "differentForm"),
+                        ctxt.append("parsequery._effectChange.gotoRef." + (sameInstance ? "sameForm" : "differentForm"),
                                     "gotoRef("+pageRef+") ms: " + (+new Date()));
                         that.controller.gotoRef(ctxt, pageRef);
                 }
@@ -219,7 +217,7 @@ return {
                 } else if ( key == 'pageRef' ) {
                     pageRef = value;
                 } else {
-                    that._parseQueryHelper(ctxt, instanceMetadataKeyValueMap, key, value);
+                    that._parseQueryHelper(instanceMetadataKeyValueMap, key, value);
                 }
             }
             
@@ -252,8 +250,8 @@ return {
 				that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
 										instanceId, pageRef, instanceMetadataKeyValueMap);
 			} catch (ex) {
-				console.error(String(ex));
-				ctxt.append('parsequery.parseParameters.exception',  'unknown error: ' + ex);
+				console.error('parsequery.parseParameters.continuationException' + String(ex));
+				ctxt.append('parsequery.parseParameters.continuationException',  'unknown error: ' + ex);
 				ctxt.failure({message: "Exception while processing form definition."});
 			}
 		}
@@ -273,8 +271,8 @@ return {
                     try {
                         formDef = JSON.parse(formDefTxt);
                     } catch (ex) {
-						console.error(String(ex));
-                        ctxt.append('parsequery.parseParameters.exception',  'JSON parsing error: ' + ex);
+						console.error('parsequery.parseParameters.requirejs.JSONexception' + String(ex));
+                        ctxt.append('parsequery.parseParameters.requirejs.JSONexception',  'JSON parsing error: ' + ex);
                         ctxt.failure({message: "Exception while processing form definition."});
 						return;
                     }
@@ -282,8 +280,8 @@ return {
                         that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
                                                 instanceId, pageRef, instanceMetadataKeyValueMap);
                     } catch (ex) {
-						console.error(String(ex));
-                        ctxt.append('parsequery.parseParameters.exception',  'formDef interpetation or database setup error: ' + ex);
+						console.error('parsequery.parseParameters.requirejs.continuationException' + String(ex));
+                        ctxt.append('parsequery.parseParameters.requirejs.continuationException',  'formDef interpetation or database setup error: ' + ex);
                         ctxt.failure({message: "Exception while processing form definition."});
                     }
                 }
