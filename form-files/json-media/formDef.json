@@ -81,11 +81,11 @@
         {
             "type": "goto_if",
             "param": "test2",
-            "condition": "{{name}}.length > 7"
+            "condition": "data('name').length > 7"
         },
         {
             "name": "name", 
-            "constraint": "{{name}}.length > 4",
+            "constraint": "data('name').length > 4",
 			"constraint_message": "Name is too short -- enter a longer name",
             "type": "text", 
             "param": null, 
