@@ -9,9 +9,9 @@ function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPart
 
 Handlebars.registerHelper('localize', function(textOrLangMap, options) {
     var locale = database.getInstanceMetaDataValue('locale');
-	if ( locale == null ) {
-		locale = opendatakit.getDefaultFormLocaleValue();
-	}
+    if ( locale == null ) {
+        locale = opendatakit.getDefaultFormLocaleValue();
+    }
     var str = formulaFunctions.localize(textOrLangMap,locale);
     return new Handlebars.SafeString(str);
 });

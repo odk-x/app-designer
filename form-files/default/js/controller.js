@@ -65,13 +65,13 @@ window.controller = {
             success: function() {
                 ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
                 while (that.hasPromptHistory()) {
-					ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory", "px: " +  that.currentPromptIdx);
+                    ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory", "px: " +  that.currentPromptIdx);
                     var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
                     var t = prmpt.type;
                     if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
                         ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory.invalid", "px: " +  prmpt.currentPromptIdx);
-						console.error("Invalid previous prompt type px: " +  prmpt.currentPromptIdx);
-						continue; // attempt to recover...
+                        console.error("Invalid previous prompt type px: " +  prmpt.currentPromptIdx);
+                        continue; // attempt to recover...
                     }
                     // todo -- change to use hash?
                     that.setPrompt(ctxt, prmpt, {omitPushOnReturnStack:true, reverse:true});
@@ -128,18 +128,18 @@ window.controller = {
                 if('condition' in prompt && prompt.condition()) {
                     alert("Error prompt triggered.");
                     that.fatalError(ctxt);
-					return; // this directs the user to the _stop_survey page.
+                    return; // this directs the user to the _stop_survey page.
                 }
             }
         } catch (e) {
             if ( ctxt.strict ) {
                 console.error("controller.advanceToScreenPrompt.exception.strict px: " +
-								that.promptIdx + ' exception: ' + String(e));
+                                that.promptIdx + ' exception: ' + String(e));
                 ctxt.failure({message: "Exception while evaluating condition() expression. See console log."});
                 return;
             } else {
                 console.log("controller.advanceToScreenPrompt.exception.ignored px: " +
-								that.promptIdx + ' exception: ' + String(e));
+                                that.promptIdx + ' exception: ' + String(e));
                 ctxt.append("controller.advanceToScreenPrompt.exception.ignored", String(e));
                 nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
             }
@@ -173,9 +173,9 @@ window.controller = {
                                                 var fn = that.validateQuestionHelper(ctxt,prompt,stopAtPromptIdx);
                                                 (fn)();
                                             } else {
-												if ( !prompt ) {
-													ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-												}
+                                                if ( !prompt ) {
+                                                    ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                                                }
                                                 ctxt.success();
                                             }
                                         },
@@ -259,9 +259,9 @@ window.controller = {
                     var fn = that.validateQuestionHelper(newctxt,prompt,stopAtPromptIdx);
                     (fn)();
                 } else {
-					if ( !prompt ) {
-						newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-					}
+                    if ( !prompt ) {
+                        newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                    }
                     newctxt.success();
                 }
             },
@@ -517,11 +517,12 @@ window.controller = {
                 }}), false);
         }
     },
-	// return to the main screen (showing the available instances) for this form.
-	leaveInstance:function(ctxt) {
-		var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
-		window.location.hash = newhash;
-	},
+    // return to the main screen (showing the available instances) for this form.
+    leaveInstance:function(ctxt) {
+        var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
+        window.location.hash = newhash;
+        ctxt.success();
+    },
     gotoRef:function(ctxt, pageRef) {
         var that = this;
         if ( this.prompts.length == 0 ) {
@@ -571,8 +572,8 @@ window.controller = {
         this.previousScreenIndices.length = 0;
     },
     reset: function(ctxt,sameForm) {
-		// NOTE: the ctxt calls here are synchronous actions
-		// ctxt is only passed in for logging purposes.
+        // NOTE: the ctxt calls here are synchronous actions
+        // ctxt is only passed in for logging purposes.
         ctxt.append('controller.reset');
         this.clearPromptHistory();
         if ( this.screenManager != null ) {
@@ -586,32 +587,32 @@ window.controller = {
             this.prompts = [];
             this.calcs = [];
         }
-		// and execute an async callback to continue the reset
-		// this forces a refresh of the DOM prior to continuing, 
-		// ensuring that the page is changed to 'Please wait...'
-		// early.
-		setTimeout(function() {
-			ctxt.success();
-			}, 100);
+        // and execute an async callback to continue the reset
+        // this forces a refresh of the DOM prior to continuing, 
+        // ensuring that the page is changed to 'Please wait...'
+        // early.
+        setTimeout(function() {
+            ctxt.success();
+            }, 100);
     },
-	// fatalError -- it is OK for the ctxt argument to be undefined
+    // fatalError -- it is OK for the ctxt argument to be undefined
     fatalError: function(ctxt) {
-		if ( ctxt ) {
-			ctxt._log('E','controller.fatalError: Aborting existing context');
-		}
-		var that = this;
-		// create a new context...
+        if ( ctxt ) {
+            ctxt._log('E','controller.fatalError: Aborting existing context');
+        }
+        var that = this;
+        // create a new context...
         ctxt = controller.newFatalContext();
         //Stop the survey.
-		var promptCandidate = that.getPromptByName("_stop_survey");
+        var promptCandidate = that.getPromptByName("_stop_survey");
         that.setPrompt( $.extend({}, ctxt, {failure: function(msg) {
-				//There might be better ways to do it than this.
-				ctxt.failure();
-				alert('Unable to present Fatal Error screen');
-			}}), promptCandidate, {
-					omitPushOnReturnStack : true,
-					transition: 'none' });
-	},
+                //There might be better ways to do it than this.
+                ctxt.failure();
+                alert('Unable to present Fatal Error screen');
+            }}), promptCandidate, {
+                    omitPushOnReturnStack : true,
+                    transition: 'none' });
+    },
     setLocale: function(ctxt, locale) {
         var that = this;
         database.setInstanceMetaData($.extend({}, ctxt, {

@@ -63,26 +63,26 @@ return Backbone.View.extend({
         this.displayWaiting(ctxt);
     },
     displayWaiting: function(ctxt){
-		var that = this;
+        var that = this;
         ctxt.append("screenManager.displayWaiting", (this.prompt == null) ? "promptIdx: null" : ("promptIdx: " + this.prompt.promptIdx));
-		// update to be like a simulated page change...
+        // update to be like a simulated page change...
         var $page = $('<div>');
         $page.attr('data-role', 'page');
         $page.attr('data-theme', "d");
         $page.attr('data-content-theme', "d");
         $page.html('<div data-role="header" class="odk-toolbar"></div>' +
-					'<div data-role="content" class="odk-scroll">' + 
-					  '<div class="current"><span>Please wait...</span></div>' + 
-					'</div><div data-role="footer" class="odk-nav"></div>');
-		that.previousPageEl = that.currentPageEl;
-		that.currentPageEl = $page;
-		that.prompt = null;
-		that.$el.append(that.currentPageEl);
-		that.savedCtxt = ctxt;
-		$.mobile.changePage(that.currentPageEl, $.extend({
-			changeHash: false,
-			transition: 'none'
-		}));
+                    '<div data-role="content" class="odk-scroll">' + 
+                      '<div class="current"><span>Please wait...</span></div>' + 
+                    '</div><div data-role="footer" class="odk-nav"></div>');
+        that.previousPageEl = that.currentPageEl;
+        that.currentPageEl = $page;
+        that.prompt = null;
+        that.$el.append(that.currentPageEl);
+        that.savedCtxt = ctxt;
+        $.mobile.changePage(that.currentPageEl, $.extend({
+            changeHash: false,
+            transition: 'none'
+        }));
     },
     setPrompt: function(ctxt, prompt, jqmAttrs){
         if(!jqmAttrs){
@@ -174,9 +174,11 @@ return Backbone.View.extend({
         that.swipeEnabled = false;
         that.controller.gotoNextScreen($.extend({},ctxt,{
                 success:function(){
-                    that.swipeEnabled = true; ctxt.success();
+                    that.swipeEnabled = true; 
+                    ctxt.success();
                 },failure:function(m){
-                    that.swipeEnabled = true; ctxt.failure(m);
+                    that.swipeEnabled = true; 
+                    ctxt.failure(m);
                 }}));
         return false;
     },
@@ -204,28 +206,30 @@ return Backbone.View.extend({
         that.swipeEnabled = false;
         that.controller.gotoPreviousScreen($.extend({},ctxt,{
                 success:function(){ 
-                    that.swipeEnabled = true; ctxt.success();
+                    that.swipeEnabled = true; 
+                    ctxt.success();
                 },failure:function(m){
-                    that.swipeEnabled = true; ctxt.failure(m);
+                    that.swipeEnabled = true; 
+                    ctxt.failure(m);
                 }}));
         return false;
     },
-	ignoreChanges: function(evt) {
+    ignoreChanges: function(evt) {
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.ignoreChanges', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
-		that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
-				that.controller.leaveInstance(ctxt);
-			}}));
-	},
-	saveChanges: function(evt) {
+        that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
+                that.controller.leaveInstance(ctxt);
+            }}));
+    },
+    saveChanges: function(evt) {
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.saveChanges', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
-		that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
-				that.controller.leaveInstance(ctxt);
-			}}), false);
-	},
+        that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
+                that.controller.leaveInstance(ctxt);
+            }}), false);
+    },
     openOptions: function(evt) {
         $( "#optionsPopup" ).popup( "open" );
     },
@@ -267,8 +271,8 @@ return Backbone.View.extend({
         if ( ctxt != null ) {
             ctxt.append('screenManager.handlePageChange.linked');
             if ( this.prompt ) {
-				this.prompt.delegateEvents();
-			}
+                this.prompt.delegateEvents();
+            }
             if(this.previousPageEl){
                 var pg = this.previousPageEl;
                 this.previousPageEl = null;

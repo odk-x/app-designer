@@ -31,17 +31,17 @@ function(database,   _) {
             if(!promptValue) {
                 return false;
             }
-			// it is a select_multiple...
+            // it is a select_multiple...
             if(_.isArray(promptValue)) {
                 return _.include(promptValue, qValue);
             }
-			// it is a select_one...
+            // it is a select_one...
             //Using double equals here because I suspect the type coercion will prevent more
             //user errors that it will cause when comparing numbers and strings.
             return promptValue == qValue;
         },
         countSelected: function(promptValue){
-			// select_multiple promptValue is an array
+            // select_multiple promptValue is an array
             if(!promptValue) {
                 return 0;
             }
@@ -49,7 +49,7 @@ function(database,   _) {
                 console.error(promptValue);
                 console.error(qValue);
                 alert("countSelected function expects an array. See console for details.");
-				throw new Error("countSelected function expects an array.");
+                throw new Error("countSelected function expects an array.");
             }
             return promptValue.length;
         },

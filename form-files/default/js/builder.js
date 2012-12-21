@@ -32,13 +32,13 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     console.error("builder.formula: " + result + " exception: " + String(e));
                     alert("Could not call formula.\nSee console for details.");
                     throw new Error("Exception in user formula.");
-					// controller.fatalError();
+                    // controller.fatalError();
                 }
             };
         } catch (e) {
             console.error("builder.formula: " + result + " exception evaluating formula: " + String(e));
             alert("Could not evaluate formula: " + result + '\nSee console for details.');
-			throw new Error("Could not evaluate formula: " + result + '\nSee console for details.');
+            throw new Error("Could not evaluate formula: " + result + '\nSee console for details.');
             // return function(){};
         }
     }
@@ -152,9 +152,9 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     prompt[key] = propertyParser(propertyContent);
                 }
                 else {
-					console.error('builder.initializeProperties: Could not parse property of type ' + propertyType + ' px: ' + promptIdx);
+                    console.error('builder.initializeProperties: Could not parse property of type ' + propertyType + ' px: ' + promptIdx);
                     alert("Could not parse property of type " + propertyType + ". See console for details.");
-					throw new Error("Could not parse property of type " + propertyType + ". Prompt Index: " + promptIdx);
+                    throw new Error("Could not parse property of type " + propertyType + ". Prompt Index: " + promptIdx);
                 }
             }
         });
@@ -175,7 +175,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         _.each(prompts, function(prompt) {
             var PromptType, ExtendedPromptType, PromptInstance;
             if (!('type' in prompt)) {
-				shim.log('W', 'builder.initializePrompts: no type specified');
+                shim.log('W', 'builder.initializePrompts: no type specified');
                 console.log('no type specified');
                 console.log(prompt);
                 return;
@@ -183,7 +183,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             if (prompt.type in currentPromptTypes) {
                 PromptType = currentPromptTypes[prompt.type];
             } else {
-				shim.log('W', 'builder.initializePrompts: unknown type -- using text');
+                shim.log('W', 'builder.initializePrompts: unknown type -- using text');
                 console.log('unknown type -- using text');
                 console.log(prompt);
                 PromptType = currentPromptTypes['text'];
@@ -264,12 +264,12 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             name: "_hierarchy",
             label: "Hierarchy View"
         }, {
-			type: "stop_survey",
-			name: "_stop_survey",
-			label: "Fatal Error"
-		}]);
+            type: "stop_survey",
+            name: "_stop_survey",
+            label: "Fatal Error"
+        }]);
 
-		console.log('builder.buildSurvey: initializing');
+        console.log('builder.buildSurvey: initializing');
         //Transform the calculate sheet into an object with format {calculation_name:function}
         calculates = _.object(_.map(surveyJson.calculates, function(calculate){
             return [calculate.name, propertyParsers.formula(calculate.calculation)];
@@ -286,7 +286,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         var afterCustomPromptsLoadAttempt = function(){
             that.form.prompts = that.initializePrompts(prompts);
             controller.prompts = that.form.prompts;
-			console.log('builder.buildSurvey: starting form processing continuation');
+            console.log('builder.buildSurvey: starting form processing continuation');
             continuation();
         };
         //This tries to load any user defined prompt types provided in customPromptTypes.js.
@@ -296,20 +296,20 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             //Ensure all custom prompt type names are lowercase.
             _.each(_.keys(customPromptTypes), function(promptTypeName){
                 if(promptTypeName !== promptTypeName.toLowerCase()) {
-					console.error('builder.buildSurvey: Invalid prompt type name: ' + promptTypeName);
+                    console.error('builder.buildSurvey: Invalid prompt type name: ' + promptTypeName);
                     alert("Invalid prompt type name: " + promptTypeName);
                 }
             });
             $.extend(currentPromptTypes, customPromptTypes);
             afterCustomPromptsLoadAttempt();
         }, function (err) {
-			console.error('builder.buildSurvey: error loading ' +
-						opendatakit.getCurrentFormPath() + 'customPromptTypes.js');
+            console.error('builder.buildSurvey: error loading ' +
+                        opendatakit.getCurrentFormPath() + 'customPromptTypes.js');
             //The errback, error callback
             if(err.requireModules) {
                 //The error has a list of modules that failed
                 _.each(err.requireModules, function(failedId){
-					shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
+                    shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
                     //I'm using undef to clear internal knowledge of the given module.
                     //I'm not sure if it is necessiary.
                     window.requirejs.undef(failedId);
