@@ -4982,7 +4982,11 @@
             "type": "string"
         }, 
         "basic_q": {
-            "type": "string"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "cornea_clouding": {
             "type": "string"
@@ -5076,7 +5080,11 @@
             "type": "string"
         }, 
         "other_foods_types": {
-            "type": "string"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "weight": {
             "type": "number"
@@ -5133,7 +5141,11 @@
             "type": "string"
         }, 
         "given_vaccinations": {
-            "type": "string"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "acknowledge_give_IFA_14_days": {
             "type": "boolean"
@@ -5166,7 +5178,11 @@
             "type": "boolean"
         }, 
         "needed_vaccinations": {
-            "type": "string"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "pulseox": {
             "type": "object", 

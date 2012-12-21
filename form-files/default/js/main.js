@@ -38,7 +38,8 @@ requirejs.config({
         opendatakit : 'js/opendatakit',
         jqmConfig : 'js/jqmConfig',
         handlebarsHelpers : 'js/handlebarsHelpers',
-        formulaFunctions : 'js/formulaFunctions'
+        formulaFunctions : 'js/formulaFunctions',
+        'jquery-csv' : 'libs/jquery-csv/src/jquery.csv'
     },
     shim: {
         'jquery': {
@@ -81,6 +82,9 @@ requirejs.config({
             exports: 'Handlebars'
         },
         'mobiscroll': {
+            deps: ['jquery']
+        },
+        'jquery-csv' : {
             deps: ['jquery']
         }
     }

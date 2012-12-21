@@ -14,20 +14,21 @@
                 }
             }
         }, 
-        "visited_seattle": {
-            "type": "string"
-        }, 
-        "name": {
-            "type": "string"
-        }, 
         "rating": {
             "type": "integer"
         }, 
-        "specialTemplateTest": {
-            "type": "string"
+        "avg_coffee": {
+            "type": "integer"
+        }, 
+        "coffee_today": {
+            "type": "integer"
         }, 
         "barcode": {
             "type": "string"
+        }, 
+        "datetime": {
+            "elementType": "dateTime", 
+            "type": "object"
         }, 
         "image_test": {
             "isPersisted": true, 
@@ -43,9 +44,32 @@
                 }
             }
         }, 
-        "datetime": {
-            "elementType": "dateTime", 
+        "born": {
+            "elementType": "date", 
             "type": "object"
+        }, 
+        "examples": {
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "visited_continents": {
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "visited_seattle": {
+            "type": "string"
+        }, 
+        "name": {
+            "type": "string"
+        }, 
+        "specialTemplateTest": {
+            "type": "string"
         }, 
         "recording": {
             "isPersisted": true, 
@@ -61,10 +85,6 @@
                 }
             }
         }, 
-        "born": {
-            "elementType": "date", 
-            "type": "object"
-        }, 
         "audio_test": {
             "isPersisted": true, 
             "elementType": "mimeUri", 
@@ -79,8 +99,9 @@
                 }
             }
         }, 
-        "examples": {
-            "type": "string"
+        "time": {
+            "elementType": "time", 
+            "type": "object"
         }, 
         "error": {
             "type": "string"
@@ -102,9 +123,24 @@
                 }
             }
         }, 
-        "time": {
-            "elementType": "time", 
-            "type": "object"
+        "location": {
+            "elementType": "geopoint", 
+            "type": "object", 
+            "name": "geopoint", 
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                }, 
+                "altitude": {
+                    "type": "number"
+                }, 
+                "longitude": {
+                    "type": "number"
+                }, 
+                "accuracy": {
+                    "type": "number"
+                }
+            }
         }
     }, 
     "settings": [
@@ -196,78 +232,99 @@
             "condition": "not(selected(data('examples'), 'dynamic_label'))"
         }, 
         {
-            "name": "name", 
-            "hint": "Please use your full name", 
-            "_rowNum": 13, 
-            "type": "text", 
-            "param": null, 
-            "label": "Enter your name"
+            "type": "screen", 
+            "prompts": [
+                {
+                    "name": "name", 
+                    "hint": "Please use your full name", 
+                    "_rowNum": 14, 
+                    "type": "text", 
+                    "param": null, 
+                    "label": "Enter your name"
+                }, 
+                {
+                    "_rowNum": 15, 
+                    "type": "note", 
+                    "param": null, 
+                    "label": "Hello {{name.value}}"
+                }
+            ], 
+            "_rowNum": 13
         }, 
         {
-            "_rowNum": 14, 
-            "type": "note", 
+            "name": "avg_coffee", 
+            "_rowNum": 17, 
+            "type": "integer", 
             "param": null, 
-            "label": "Hello {{name}}"
+            "label": "On average, how many cups of coffee do you drink in a day?"
+        }, 
+        {
+            "name": "coffee_today", 
+            "default": "data('avg_coffee')", 
+            "_rowNum": 18, 
+            "type": "integer", 
+            "param": null, 
+            "label": "How many cups of coffee did you drink today?"
         }, 
         {
             "type": "label", 
-            "_rowNum": 15, 
+            "_rowNum": 19, 
             "param": "dynamic_label_end"
         }, 
         {
-            "_rowNum": 16, 
+            "_rowNum": 20, 
             "type": "goto", 
             "param": "datetime_end", 
             "condition": "not(selected(data('examples'), 'datetime'))"
         }, 
         {
             "name": "born", 
-            "_rowNum": 17, 
+            "_rowNum": 21, 
             "type": "date", 
             "param": null, 
             "label": "When were you born?"
         }, 
         {
             "param": null, 
-            "_rowNum": 18, 
+            "_rowNum": 22, 
             "type": "note", 
             "condition": "data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
             "label": "Happy Birthday!"
         }, 
         {
             "name": "time", 
-            "_rowNum": 19, 
+            "_rowNum": 23, 
             "type": "time", 
             "param": null, 
             "label": "What time is it?"
         }, 
         {
             "name": "datetime", 
-            "_rowNum": 20, 
+            "_rowNum": 24, 
             "type": "datetime", 
             "param": null, 
             "label": "When will you be available for a follow up survey?"
         }, 
         {
             "type": "label", 
-            "_rowNum": 21, 
+            "_rowNum": 25, 
             "param": "datetime_end"
         }, 
         {
             "name": "location", 
             "type": "geopoint", 
             "param": null, 
-            "_rowNum": 22, 
+            "_rowNum": 26, 
             "condition": "selected(data('examples'), 'geopoint')", 
             "label": "Record your location:"
         }, 
         {
-            "_rowNum": 23, 
+            "_rowNum": 27, 
             "prompts": [
                 {
                     "name": "visited_continents", 
-                    "_rowNum": 24, 
-                    "type": "select", 
+                    "_rowNum": 28, 
+                    "type": "select_multiple", 
                     "param": "continents", 
                     "label": "Which continents have you visited?"
                 }, 
@@ -275,7 +332,7 @@
                     "name": "visited_seattle", 
                     "type": "select_one", 
                     "param": "yesno", 
-                    "_rowNum": 25, 
+                    "_rowNum": 29, 
                     "condition": "calculates.ask_about_seattle()", 
                     "label": "Have you visited Seattle?"
                 }
@@ -284,7 +341,7 @@
             "condition": "selected(data('examples'), 'screen_group')"
         }, 
         {
-            "_rowNum": 27, 
+            "_rowNum": 31, 
             "type": "goto", 
             "param": "media_end", 
             "condition": "not(selected(data('examples'), 'media'))"
@@ -294,65 +351,64 @@
             "prompts": [
                 {
                     "name": "audio_test", 
-                    "_rowNum": 29, 
+                    "_rowNum": 33, 
                     "type": "audio", 
                     "param": null, 
                     "label": "Make a recording:"
                 }, 
                 {
                     "name": "video_test", 
-                    "_rowNum": 30, 
+                    "_rowNum": 34, 
                     "type": "video", 
                     "param": null, 
                     "label": "Take a video:"
                 }, 
                 {
                     "name": "image_test", 
-                    "_rowNum": 31, 
+                    "_rowNum": 35, 
                     "type": "image", 
                     "param": null, 
                     "label": "Take a picture:"
                 }
             ], 
-            "_rowNum": 28
+            "_rowNum": 32
         }, 
         {
             "type": "note", 
             "image": "img/dolphin.png", 
             "audio": "audio/carrioncrow.mp3", 
-            "_rowNum": 33, 
+            "_rowNum": 37, 
             "param": null, 
             "label": "This prompt shows how to embed media in labels."
         }, 
         {
             "type": "label", 
-            "_rowNum": 34, 
+            "_rowNum": 38, 
             "param": "media_end"
         }, 
         {
-            "name": "x", 
-            "_rowNum": 35, 
+            "_rowNum": 39, 
             "type": "with_next", 
-            "assign": 10, 
+            "name": "x", 
             "param": null
         }, 
         {
             "param": null, 
-            "_rowNum": 36, 
+            "_rowNum": 40, 
             "type": "note", 
             "condition": "selected(data('examples'), 'assignment')", 
             "label": "Assigning a value of 10 to x."
         }, 
         {
             "param": null, 
-            "_rowNum": 37, 
+            "_rowNum": 41, 
             "type": "note", 
             "condition": "data('x') === 10", 
-            "label": "x = {{x}}"
+            "label": "x = {{x.value}}"
         }, 
         {
             "name": "specialTemplateTest", 
-            "_rowNum": 38, 
+            "_rowNum": 42, 
             "param": null, 
             "label": "This is a custom template that uses D3.js:", 
             "type": "text", 
@@ -367,7 +423,7 @@
                 "type": "range", 
                 "min": 1
             }, 
-            "_rowNum": 39, 
+            "_rowNum": 43, 
             "param": null, 
             "label": "How would you rate this survey?", 
             "default": 5, 

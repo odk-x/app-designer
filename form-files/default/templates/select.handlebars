@@ -99,6 +99,24 @@
         <div style="clear:both;"></div>
     </form>
 {{else}}
+{{#ifEqual appearance "dropdown"}}
+    <form>
+        <div class="inline-label-container">
+            {{> labelHint}}
+        </div>
+        <select name="{{name}}">        
+            {{#each choices}}
+                <option 
+                    {{#if checked}}
+                        selected
+                    {{/if}}
+                    value="{{name}}">
+                    {{localize label}}
+                </option>
+            {{/each}}
+        </select>
+    </form>
+{{else}}
     <form>
         {{> labelHint}}
         <fieldset data-role="controlgroup"
@@ -165,5 +183,6 @@
         {{/unless}}
         <div style="clear:both;"></div>
     </form>
+{{/ifEqual}}
 {{/ifEqual}}
 {{/ifEqual}}

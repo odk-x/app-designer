@@ -1,14 +1,5 @@
 {
     "model": {
-        "city": {
-            "type": "string"
-        }, 
-        "state": {
-            "type": "string"
-        }, 
-        "h_select": {
-            "type": "string"
-        }, 
         "i1": {
             "type": "string"
         }, 
@@ -18,10 +9,25 @@
         "i2": {
             "type": "string"
         }, 
-        "bird": {
+        "city": {
+            "type": "string"
+        }, 
+        "country": {
+            "type": "string"
+        }, 
+        "region": {
             "type": "string"
         }, 
         "color": {
+            "type": "string"
+        }, 
+        "state": {
+            "type": "string"
+        }, 
+        "h_select": {
+            "type": "string"
+        }, 
+        "bird": {
             "type": "string"
         }, 
         "cp_test": {
@@ -42,13 +48,22 @@
             "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('state') + \"'\")"
         }, 
         {
-            "_rowNum": 4
+            "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n})", 
+            "_rowNum": 4, 
+            "name": "countries_csv", 
+            "uri": "\"regions.csv\""
         }, 
         {
-            "callback": "[{ name: \"test\", label : JSON.stringify(context) }]", 
+            "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nreturn place;\n})", 
             "_rowNum": 5, 
+            "name": "regions_csv", 
+            "uri": "\"regions.csv\""
+        }, 
+        {
+            "callback": "[context]", 
+            "_rowNum": 6, 
             "name": "content_provider_test", 
-            "uri": "\"content://com.opendatakit.tables.ContentProvider/database_id/table_id/row_id\""
+            "uri": "\"content://org.opendatakit.FileContentProviderExample/\""
         }
     ], 
     "survey": [
@@ -152,8 +167,25 @@
             "label": "Horizontal select example."
         }, 
         {
-            "name": "cp_test", 
+            "name": "region", 
             "_rowNum": 17, 
+            "type": "select_one", 
+            "param": "regions_csv", 
+            "label": "Choose a region:"
+        }, 
+        {
+            "name": "country", 
+            "choice_filter": "_.where(context, {\n  region: data('region')\n})", 
+            "appearance": "dropdown", 
+            "_rowNum": 18, 
+            "param": "countries_csv", 
+            "label": "Choose a country:", 
+            "type": "select_one"
+        }, 
+        {
+            "name": "cp_test", 
+            "hint": "You will need to install a content provider app for the query to work. There is an example app available here: https://github.com/nathanathan/FileContentProviderExample", 
+            "_rowNum": 19, 
             "type": "select_one", 
             "param": "content_provider_test", 
             "label": "This demos a content provider query."

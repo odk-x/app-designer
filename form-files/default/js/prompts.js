@@ -614,17 +614,35 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         that.renderContext.withOther = this.withOther;
         if(that.param in that.form.queries) {
             query = that.form.queries[that.param];
-            //TODO: Come up with a tables uri and when we get that kind of uri do tables queries.
+            var queryUri = query.uri();
+            if(queryUri.search('//') < 0){
+                //If the uri is not a content provider or web resource,
+                //assume the path  is relative to the form directory.
+                queryUri = opendatakit.getCurrentFormPath() + queryUri;
+            }
+            var queryDataType = 'json';
+            var baseSuccessCallback = function(result) {
+                that.renderContext.choices = query.callback(result);
+                that.updateRenderValue(that.parseSaveValue(that.getValue()));
+                that.baseActivate(ctxt);
+            };
+            var successCallback = baseSuccessCallback;
+            var queryUriExt = queryUri.split('.').pop();
+            //TODO: It might also be desireable to include datasheets in the XLSForm.
+            if(queryUriExt === 'csv') {
+                queryDataType = 'text';
+                successCallback = function(result) {
+                    require(['jquery-csv'], function(){
+                        baseSuccessCallback($.csv.toObjects(result));
+                    });
+                };
+            }
             $.ajax({
                 "type": 'GET',
-                "url": query.uri(),
-                "dataType": 'json',
+                "url": queryUri,
+                "dataType": queryDataType,
                 "data": {},
-                "success": function(result) {
-                    that.renderContext.choices = query.callback(result);
-                    that.updateRenderValue(that.parseSaveValue(that.getValue()));
-                    that.baseActivate(ctxt);
-                },
+                "success": successCallback,
                 "error": function(e) {
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
