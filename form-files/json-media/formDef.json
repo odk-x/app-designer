@@ -147,7 +147,7 @@
             }
         }, 
         {
-            "type": "select", 
+            "type": "select_multiple", 
             "name": "sel",
             "label": "Select all genders:",
             "param": "gender"
@@ -190,7 +190,11 @@
             "type": "number"
         }, 
         "sel": {
-            "type": "multiselect"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "image_test": {
             "type": "object",
