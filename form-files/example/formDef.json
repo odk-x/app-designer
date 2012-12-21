@@ -14,30 +14,6 @@
                 }
             }
         }, 
-		"location": {
-			"type": "object",
-			"elementType": "geopoint",
-			"properties": {
-				"latitude": {
-					"type": "number"
-				},
-				"longitude": {
-					"type": "number"
-				},
-				"altitude": {
-					"type": "number"
-				},
-				"accuracy": {
-					"type": "number"
-				}
-			}
-		},
-        "visited_continents": {
-            "type": "array",
-			"items": {
-				"type": "string"
-				}
-        }, 
         "visited_seattle": {
             "type": "string"
         }, 
@@ -104,10 +80,11 @@
             }
         }, 
         "examples": {
-            "type": "array",
-			"items": {
-				"type": "string"
-				}
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "error": {
             "type": "string"
@@ -129,9 +106,35 @@
                 }
             }
         }, 
+        "visited_continents": {
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
         "time": {
             "elementType": "time", 
             "type": "object"
+        }, 
+        "location": {
+            "elementType": "geopoint", 
+            "type": "object", 
+            "name": "geopoint", 
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                }, 
+                "altitude": {
+                    "type": "number"
+                }, 
+                "longitude": {
+                    "type": "number"
+                }, 
+                "accuracy": {
+                    "type": "number"
+                }
+            }
         }
     }, 
     "settings": [
@@ -294,7 +297,7 @@
                 {
                     "name": "visited_continents", 
                     "_rowNum": 24, 
-                    "type": "select", 
+                    "type": "select_multiple", 
                     "param": "continents", 
                     "label": "Which continents have you visited?"
                 }, 
