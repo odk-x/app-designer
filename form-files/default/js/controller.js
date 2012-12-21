@@ -53,9 +53,8 @@ window.controller = {
             }
         } catch(ex) {
             var e = (ex != null) ? ex.message  + " stack: " + ex.stack : "undef";
-            console.error(prompt);
-            console.error("controller.validate: Exception: " + e );
-            ctxt.append('controller.validate.exception', e );
+            console.error("controller.validate: Exception: " + e + " px: " + this.currentPromptIdx);
+            ctxt.append('controller.validate.exception', e + " px: " + this.currentPromptIdx );
             ctxt.failure({message: "Exception occurred while evaluating constraints"});
         }
     },
@@ -65,14 +64,14 @@ window.controller = {
         that.beforeMove($.extend({}, ctxt,{
             success: function() {
                 ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
-                while (that.hasPromptHistory(ctxt)) {
-                    console.log("gotoPreviousScreen: poppreviousScreenNames ms: " + (+new Date()) + 
-                                " page: " + that.currentPromptIdx);
+                while (that.hasPromptHistory()) {
+					ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory", "px: " +  that.currentPromptIdx);
                     var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
                     var t = prmpt.type;
                     if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
-                        console.error("Invalid previous prompt type");
-                        console.log(prmpt);
+                        ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory.invalid", "px: " +  prmpt.currentPromptIdx);
+						console.error("Invalid previous prompt type px: " +  prmpt.currentPromptIdx);
+						continue; // attempt to recover...
                     }
                     // todo -- change to use hash?
                     that.setPrompt(ctxt, prmpt, {omitPushOnReturnStack:true, reverse:true});
@@ -128,18 +127,20 @@ window.controller = {
             } else if( prompt.type == "error" ) {
                 if('condition' in prompt && prompt.condition()) {
                     alert("Error prompt triggered.");
-                    that.fatalError();
+                    that.fatalError(ctxt);
+					return; // this directs the user to the _stop_survey page.
                 }
             }
         } catch (e) {
             if ( ctxt.strict ) {
-                ctxt.append("controller.advanceToScreenPrompt.exception.strict", e);
-                console.error(prompt);
-                console.error(nextPrompt);
+                console.error("controller.advanceToScreenPrompt.exception.strict px: " +
+								that.promptIdx + ' exception: ' + String(e));
                 ctxt.failure({message: "Exception while evaluating condition() expression. See console log."});
                 return;
             } else {
-                ctxt.append("controller.advanceToScreenPrompt.exception.ignored", e);
+                console.log("controller.advanceToScreenPrompt.exception.ignored px: " +
+								that.promptIdx + ' exception: ' + String(e));
+                ctxt.append("controller.advanceToScreenPrompt.exception.ignored", String(e));
                 nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
             }
         }
@@ -150,7 +151,7 @@ window.controller = {
             ctxt.success(prompt);
         }
     },
-    validateQuestionHelper: function(ctxt, promptCandidate) {
+    validateQuestionHelper: function(ctxt, promptCandidate, stopAtPromptIdx) {
         var that = this;
         return function() {
             try {
@@ -167,12 +168,14 @@ window.controller = {
                                     var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
                                     that.advanceToScreenPrompt($.extend({}, ctxt, {
                                         success: function(prompt){
-                                            if(prompt) {
+                                            if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
                                                 ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-                                                var fn = that.validateQuestionHelper(ctxt,prompt);
+                                                var fn = that.validateQuestionHelper(ctxt,prompt,stopAtPromptIdx);
                                                 (fn)();
                                             } else {
-                                                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+												if ( !prompt ) {
+													ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+												}
                                                 ctxt.success();
                                             }
                                         },
@@ -223,7 +226,7 @@ window.controller = {
             }
         };
     },
-    validateAllQuestions: function(ctxt){
+    validateAllQuestions: function(ctxt, stopAtPromptIdx){
         var that = this;
         var promptCandidate = that.prompts[0];
         // set the 'strict' attribute on the context to report all 
@@ -251,12 +254,14 @@ window.controller = {
         // call advanceToScreenPrompt, since prompt[0] is always a goto_if...
         that.advanceToScreenPrompt($.extend({},newctxt, {
             success: function(prompt) {
-                if(prompt) {
+                if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
                     newctxt.append("validateAllQuestions.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-                    var fn = that.validateQuestionHelper(newctxt,prompt);
+                    var fn = that.validateQuestionHelper(newctxt,prompt,stopAtPromptIdx);
                     (fn)();
                 } else {
-                    newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+					if ( !prompt ) {
+						newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+					}
                     newctxt.success();
                 }
             },
@@ -401,9 +406,7 @@ window.controller = {
         this.screenManager.setPrompt(ctxt, prompt, options);
         // the prompt should never be changed at this point!!!
         if ( this.currentPromptIdx != prompt.promptIdx ) {
-            ctxt.log('assumption violation');
             console.error("controller.setPrompt: prompt index changed -- assumption violation!!!");
-            alert("controller.setPrompt: should never get here");
             ctxt.failure({message: "Internal error - unexpected change in prompt index!"});
             return;
         }
@@ -414,7 +417,7 @@ window.controller = {
         }
     },
     /*
-     * Callback interface from ODK Collect into javascript.
+     * Callback interface from ODK Survey (or other container apps) into javascript.
      * Handles all dispatching back into javascript from external intents
     */
     opendatakitCallback:function(promptPath, internalPromptContext, action, jsonString) {
@@ -427,7 +430,7 @@ window.controller = {
         var selpage = this.getPromptByName(promptPathParts[0]);
         if ( selpage == null ) {
             ctxt.append('controller.opendatakitCallback.noMatchingPrompt', promptPath);
-            console.log("opendatakitCallback: ERROR - PAGE NOT FOUND! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
+            console.error("opendatakitCallback: ERROR - PAGE NOT FOUND! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
             ctxt.failure({message: "Internal error. Unable to locate matching prompt for callback."});
             return;
         }
@@ -439,13 +442,13 @@ window.controller = {
                 handler( ctxt, internalPromptContext, action, jsonString );
             } else {
                 ctxt.append('controller.opendatakitCallback.noHandler', promptPath);
-                console.log("opendatakitCallback: ERROR - NO HANDLER ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
+                console.error("opendatakitCallback: ERROR - NO HANDLER ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
                 ctxt.failure({message: "Internal error. No matching handler for callback."});
                 return;
             }
         } catch (e) {
             ctxt.append('controller.opendatakitCallback.exception', promptPath, e);
-            console.log("opendatakitCallback: EXCEPTION ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + " exception: " + e);
+            console.error("opendatakitCallback: EXCEPTION ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + " exception: " + e);
             ctxt.failure({message: "Internal error. Exception while handling callback."});
             return;
         }
@@ -459,14 +462,14 @@ window.controller = {
         var ctxt = controller.newCallbackContext();
         ctxt.append("controller.opendatakitIgnoreAllChanges", this.currentPromptIdx);
         if ( opendatakit.getCurrentInstanceId() == null ) {
-            collect.ignoreAllChangesFailed( opendatakit.getSettingValue('formId'), null );
+            shim.ignoreAllChangesFailed( opendatakit.getSettingValue('formId'), null );
             ctxt.failure({message: "No instance selected."});
         } else {
             this.ignoreAllChanges($.extend({},ctxt,{success:function() {
-                                collect.ignoreAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId());
+                                shim.ignoreAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId());
                                 ctxt.success();
                             }, failure:function(m) {
-                                collect.ignoreAllChangesFailed( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId());
+                                shim.ignoreAllChangesFailed( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId());
                                 ctxt.failure(m);
                             }}));
         }
@@ -479,17 +482,17 @@ window.controller = {
         var ctxt = controller.newCallbackContext();
         ctxt.append("controller.opendatakitSaveAllChanges", this.currentPromptIdx);
         if ( opendatakit.getCurrentInstanceId() == null ) {
-            collect.saveAllChangesFailed( opendatakit.getSettingValue('formId'), null );
+            shim.saveAllChangesFailed( opendatakit.getSettingValue('formId'), null );
             ctxt.failure({message: "No instance selected."});
         } else {
             this.saveAllChanges(ctxt, asComplete);
         }
     },
-    saveAllChanges:function(ctxt, asComplete) {
+   saveAllChanges:function(ctxt, asComplete) {
         var that = this;
-        // NOTE: only success is reported up to collect here.
+        // NOTE: only success is reported up to shim here.
         // if there are any failures, the failure callback is only invoked if the save request
-        // was initiated from within collect (via controller.opendatakitSaveAllChanges(), above).
+        // was initiated from within shim (via controller.opendatakitSaveAllChanges(), above).
         if ( asComplete ) {
             database.save_all_changes($.extend({},ctxt,{
                 success:function(){
@@ -497,11 +500,11 @@ window.controller = {
                         success:function(){
                             database.save_all_changes($.extend({},ctxt,{
                                 success:function() {
-                                    collect.saveAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), true);
+                                    shim.saveAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), true);
                                     ctxt.success();
                                 },
                                 failure:function(m) {
-                                    collect.saveAllChangesFailed( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), true);
+                                    shim.saveAllChangesFailed( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), true);
                                     ctxt.failure(m);
                                 }}), true);
                         }}));
@@ -509,16 +512,20 @@ window.controller = {
         } else {
             database.save_all_changes($.extend({},ctxt,{
                 success:function() {
-                    collect.saveAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), false);
+                    shim.saveAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), false);
                     ctxt.success();
                 }}), false);
         }
     },
+	// return to the main screen (showing the available instances) for this form.
+	leaveInstance:function(ctxt) {
+		var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
+		window.location.hash = newhash;
+	},
     gotoRef:function(ctxt, pageRef) {
         var that = this;
         if ( this.prompts.length == 0 ) {
             console.error("controller.gotoRef: No prompts registered in controller!");
-            alert("controller.gotoRef: No prompts registered in controller!");
             ctxt.failure({message: "Internal error. No prompts registered in controller!"});
             return;
         }
@@ -542,7 +549,6 @@ window.controller = {
         }
         
         if ( promptCandidate == null ) {
-            alert("controller.gotoRef: null prompt after resolution!");
             ctxt.failure({message: "Requested prompt not found."});
             return;
         }
@@ -551,7 +557,6 @@ window.controller = {
             success:function(prompt){
                 if ( prompt == null ) {
                     ctxt.append('controller.gotoRef', "no prompt after advance");
-                    alert("controller.gotoRef: null prompt after advanceToScreenPrompt!");
                     ctxt.failure({message: "No next prompt."});
                     return;
                 }
@@ -559,15 +564,17 @@ window.controller = {
             }}), promptCandidate);
         
     },
-    hasPromptHistory: function(ctxt) {
+    hasPromptHistory: function() {
         return (this.previousScreenIndices.length !== 0);
     },
-    clearPromptHistory: function(ctxt) {
+    clearPromptHistory: function() {
         this.previousScreenIndices.length = 0;
     },
     reset: function(ctxt,sameForm) {
+		// NOTE: the ctxt calls here are synchronous actions
+		// ctxt is only passed in for logging purposes.
         ctxt.append('controller.reset');
-        this.clearPromptHistory(ctxt);
+        this.clearPromptHistory();
         if ( this.screenManager != null ) {
             this.screenManager.cleanUpScreenManager(ctxt);
         } else {
@@ -579,14 +586,32 @@ window.controller = {
             this.prompts = [];
             this.calcs = [];
         }
+		// and execute an async callback to continue the reset
+		// this forces a refresh of the DOM prior to continuing, 
+		// ensuring that the page is changed to 'Please wait...'
+		// early.
+		setTimeout(function() {
+			ctxt.success();
+			}, 100);
     },
-    fatalError: function() {
+	// fatalError -- it is OK for the ctxt argument to be undefined
+    fatalError: function(ctxt) {
+		if ( ctxt ) {
+			ctxt._log('E','controller.fatalError: Aborting existing context');
+		}
+		var that = this;
+		// create a new context...
+        ctxt = controller.newFatalContext();
         //Stop the survey.
-        //There might be better ways to do it than this.
-        this.beforeMove = null;
-        this.setPrompt = null;
-        $('body').empty();
-    },
+		var promptCandidate = that.getPromptByName("_stop_survey");
+        that.setPrompt( $.extend({}, ctxt, {failure: function(msg) {
+				//There might be better ways to do it than this.
+				ctxt.failure();
+				alert('Unable to present Fatal Error screen');
+			}}), promptCandidate, {
+					omitPushOnReturnStack : true,
+					transition: 'none' });
+	},
     setLocale: function(ctxt, locale) {
         var that = this;
         database.setInstanceMetaData($.extend({}, ctxt, {
@@ -610,19 +635,19 @@ window.controller = {
         },
         
         success: function(){
-            this.log('success!');
+            this._log('S', 'success!');
         },
         
         failure: function(m) {
-            this.log('failure! ' + (( m != null && m.message != null) ? m.message : ""));
+            this._log('E', 'failure! ' + (( m != null && m.message != null) ? m.message : ""));
         },
         
-        log: function( contextMsg ) {
+        _log: function( severity, contextMsg ) {
             var flattened = "seqAtEnd: " + window.controller.eventCount;
             $.each( this.contextChain, function(index,value) {
                 flattened += "\nmethod: " + value.method + ((value.detail != null) ? " detail: " + value.detail : "");
             });
-            console.log(contextMsg + " execution_chain: " + flattened);
+            shim.log(severity, contextMsg + " execution_chain: " + flattened);
         }
     },
     
@@ -633,6 +658,15 @@ window.controller = {
         var detail =  "seq: " + count + " timestamp: " + now;
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
         ctxt.append('callback', detail);
+        return ctxt;
+    },
+    newFatalContext : function( actionHandlers ) {
+        this.eventCount = 1 + this.eventCount;
+        var count = this.eventCount;
+        var now = new Date().getTime();
+        var detail =  "seq: " + count + " timestamp: " + now;
+        var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
+        ctxt.append('fatal_error', detail);
         return ctxt;
     },
     newStartContext: function( actionHandlers ) {

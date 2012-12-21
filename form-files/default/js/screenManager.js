@@ -26,6 +26,8 @@ return Backbone.View.extend({
         "click .odk-options-btn": "openOptions",
         "click .languageMenu": "openLanguagePopup",
         "click .language": "setLanguage",
+        "click .ignore-changes-and-exit": "ignoreChanges",
+        "click .save-incomplete-and-exit": "saveChanges",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
@@ -49,7 +51,7 @@ return Backbone.View.extend({
         }
         ctxt.success();
     },
-    initialize: function(ctxt){
+    initialize: function(){
         this.controller = this.options.controller;
         this.currentPageEl = $('[data-role=page]');
         console.assert(this.currentPageEl.length === 1);
@@ -61,14 +63,26 @@ return Backbone.View.extend({
         this.displayWaiting(ctxt);
     },
     displayWaiting: function(ctxt){
+		var that = this;
         ctxt.append("screenManager.displayWaiting", (this.prompt == null) ? "promptIdx: null" : ("promptIdx: " + this.prompt.promptIdx));
-        var $e;
-        $e = $('.current');
-        $e.html('<span>Please wait...</span>');
-        $e = $('.odk-toolbar');
-        $e.html('');
-        $e = $('.odk-nav');
-        $e.html('');
+		// update to be like a simulated page change...
+        var $page = $('<div>');
+        $page.attr('data-role', 'page');
+        $page.attr('data-theme', "d");
+        $page.attr('data-content-theme', "d");
+        $page.html('<div data-role="header" class="odk-toolbar"></div>' +
+					'<div data-role="content" class="odk-scroll">' + 
+					  '<div class="current"><span>Please wait...</span></div>' + 
+					'</div><div data-role="footer" class="odk-nav"></div>');
+		that.previousPageEl = that.currentPageEl;
+		that.currentPageEl = $page;
+		that.prompt = null;
+		that.$el.append(that.currentPageEl);
+		that.savedCtxt = ctxt;
+		$.mobile.changePage(that.currentPageEl, $.extend({
+			changeHash: false,
+			transition: 'none'
+		}));
     },
     setPrompt: function(ctxt, prompt, jqmAttrs){
         if(!jqmAttrs){
@@ -112,22 +126,6 @@ return Backbone.View.extend({
                     //so this flag automatically disables nav in that case.
                     that.renderContext.enableNavigation = false;
                 }
-                /*
-                console.log(that.renderContext);
-                // work through setting the forward/backward enable flags
-                if ( that.renderContext.enableNavigation === undefined ) {
-                    that.renderContext.enableNavigation = true;
-                }
-                if ( that.renderContext.enableForwardNavigation === undefined ) {
-                    that.renderContext.enableForwardNavigation = 
-                        that.renderContext.enableNavigation;
-                }
-                if ( that.renderContext.enableBackNavigation === undefined ) {
-                    that.renderContext.enableBackNavigation = 
-                        that.renderContext.enableNavigation &&
-                        that.controller.hasPromptHistory(ctxt);
-                }
-                */
                 // TODO: tell existing prompt it is inactive (e.g,. semaphore)...
                 if(that.prompt) {
                     that.prompt.undelegateEvents();
@@ -212,6 +210,22 @@ return Backbone.View.extend({
                 }}));
         return false;
     },
+	ignoreChanges: function(evt) {
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append('screenManager.ignoreChanges', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
+		that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
+				that.controller.leaveInstance(ctxt);
+			}}));
+	},
+	saveChanges: function(evt) {
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append('screenManager.saveChanges', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
+		that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
+				that.controller.leaveInstance(ctxt);
+			}}), false);
+	},
     openOptions: function(evt) {
         $( "#optionsPopup" ).popup( "open" );
     },
@@ -252,7 +266,9 @@ return Backbone.View.extend({
         
         if ( ctxt != null ) {
             ctxt.append('screenManager.handlePageChange.linked');
-            this.prompt.delegateEvents();
+            if ( this.prompt ) {
+				this.prompt.delegateEvents();
+			}
             if(this.previousPageEl){
                 var pg = this.previousPageEl;
                 this.previousPageEl = null;
@@ -260,7 +276,7 @@ return Backbone.View.extend({
             }
             ctxt.success();
         } else {
-            ctxt = that.controller.newContext(evt);
+            ctxt = this.controller.newContext(evt);
             ctxt.append('screenManager.handlePageChange.error');
             this.swipeEnabled = true;
             ctxt.failure({message: "Internal error. Unexpected triggering of page change event."});

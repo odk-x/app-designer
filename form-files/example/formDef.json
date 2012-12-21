@@ -246,7 +246,7 @@
                     "_rowNum": 15, 
                     "type": "note", 
                     "param": null, 
-                    "label": "Hello {{name.value}}"
+                    "label": "{{#if name}}Hello {{name}}{{/if}}"
                 }
             ], 
             "_rowNum": 13

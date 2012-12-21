@@ -29,28 +29,17 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 try {
                     return parsedFunction.call(this, context);
                 } catch (e) {
-                    console.error(String(e));
-                    console.error(result);
-                    console.error(this);
-
-                    if(context && context.allowExceptions === true) {
-                        throw new Error("Exception in user formula.");
-                    } else {
-                        alert("Could not call formula.\nSee console for details.");
-                        // TODO: rework this -- calling fatalError() will mess up ctxt reporting
-                        // Nathan says: I don't see an use for ctxt reporting here.
-                        //              The source of the exception is already logged.
-                        throw new Error("Exception in user formula.");
-                        controller.fatalError();
-                    }
+                    console.error("builder.formula: " + result + " exception: " + String(e));
+                    alert("Could not call formula.\nSee console for details.");
+                    throw new Error("Exception in user formula.");
+					// controller.fatalError();
                 }
             };
         } catch (e) {
-            alert("Could not evaluate formula: " + content + '\nSee console for details.');
-            console.error(String(e));
-            console.error(result);
-            console.error(content);
-            return function(){};
+            console.error("builder.formula: " + result + " exception evaluating formula: " + String(e));
+            alert("Could not evaluate formula: " + result + '\nSee console for details.');
+			throw new Error("Could not evaluate formula: " + result + '\nSee console for details.');
+            // return function(){};
         }
     }
     /**
@@ -63,10 +52,10 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             if(context){
                 return myFormula.call(this, context);
             } else {
+                console.error('builder.formula_with_context: formula: ' + myFormula.toString(2) + ' is missing a context argument');
                 alert("Formula requires context arg.\nSee console for details.");
-                console.error(this);
-                console.error(content);
-                controller.fatalError();
+                throw new Error("Exception in user formula. Formula requires context arg.");
+                // controller.fatalError();
             }
         };
     }
@@ -129,7 +118,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
      * Go through an object (usually representing a row in a spreadsheet) 
      * and parse all its properties
      **/
-    initializeProperties: function(prompt) {
+    initializeProperties: function(prompt, promptIdx) {
         $.each(prompt, function(key, property) {
             var propertyType, propertyContent;
             if (key in prompt) {
@@ -163,9 +152,9 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     prompt[key] = propertyParser(propertyContent);
                 }
                 else {
+					console.error('builder.initializeProperties: Could not parse property of type ' + propertyType + ' px: ' + promptIdx);
                     alert("Could not parse property of type " + propertyType + ". See console for details.");
-                    console.error(propertyType);
-                    console.error(prompt);
+					throw new Error("Could not parse property of type " + propertyType + ". Prompt Index: " + promptIdx);
                 }
             }
         });
@@ -186,6 +175,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         _.each(prompts, function(prompt) {
             var PromptType, ExtendedPromptType, PromptInstance;
             if (!('type' in prompt)) {
+				shim.log('W', 'builder.initializePrompts: no type specified');
                 console.log('no type specified');
                 console.log(prompt);
                 return;
@@ -193,7 +183,8 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             if (prompt.type in currentPromptTypes) {
                 PromptType = currentPromptTypes[prompt.type];
             } else {
-                console.log('unknown type');
+				shim.log('W', 'builder.initializePrompts: unknown type -- using text');
+                console.log('unknown type -- using text');
                 console.log(prompt);
                 PromptType = currentPromptTypes['text'];
             }
@@ -201,11 +192,16 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 form: that.form,
                 promptIdx: initializedPrompts.length,
                 additionalActivateFunctions: additionalActivateFunctions
-            }, that.initializeProperties(prompt)));
+            }, that.initializeProperties(prompt, initializedPrompts.length)));
             PromptInstance = new ExtendedPromptType();
-            if (prompt.type === 'with_next') {
+            if (prompt.type === 'with_next' ) {
                 additionalActivateFunctions.push(function(ctxt) {
                     PromptInstance.assignToValue(ctxt);
+                });
+                return;
+            } else if (prompt.type === 'with_next_validate' ) {
+                additionalActivateFunctions.push(function(ctxt) {
+                    PromptInstance.triggerValidation(ctxt);
                 });
                 return;
             } else {
@@ -267,9 +263,13 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             type: "hierarchy",
             name: "_hierarchy",
             label: "Hierarchy View"
-        }]);
+        }, {
+			type: "stop_survey",
+			name: "_stop_survey",
+			label: "Fatal Error"
+		}]);
 
-        console.log('initializing');
+		console.log('builder.buildSurvey: initializing');
         //Transform the calculate sheet into an object with format {calculation_name:function}
         calculates = _.object(_.map(surveyJson.calculates, function(calculate){
             return [calculate.name, propertyParsers.formula(calculate.calculation)];
@@ -286,26 +286,30 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         var afterCustomPromptsLoadAttempt = function(){
             that.form.prompts = that.initializePrompts(prompts);
             controller.prompts = that.form.prompts;
-            console.log('starting');
+			console.log('builder.buildSurvey: starting form processing continuation');
             continuation();
         };
         //This tries to load any user defined prompt types provided in customPromptTypes.js.
         //TODO: The approach to getting the current form path might need to change.
         require([opendatakit.getCurrentFormPath() + 'customPromptTypes.js'], function (customPromptTypes) {
-            console.log("customPromptTypes found");
+            console.log("builder.buildSurvey: customPromptTypes found");
             //Ensure all custom prompt type names are lowercase.
             _.each(_.keys(customPromptTypes), function(promptTypeName){
                 if(promptTypeName !== promptTypeName.toLowerCase()) {
+					console.error('builder.buildSurvey: Invalid prompt type name: ' + promptTypeName);
                     alert("Invalid prompt type name: " + promptTypeName);
                 }
             });
             $.extend(currentPromptTypes, customPromptTypes);
             afterCustomPromptsLoadAttempt();
         }, function (err) {
+			console.error('builder.buildSurvey: error loading ' +
+						opendatakit.getCurrentFormPath() + 'customPromptTypes.js');
             //The errback, error callback
             if(err.requireModules) {
                 //The error has a list of modules that failed
                 _.each(err.requireModules, function(failedId){
+					shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
                     //I'm using undef to clear internal knowledge of the given module.
                     //I'm not sure if it is necessiary.
                     window.requirejs.undef(failedId);

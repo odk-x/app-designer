@@ -2,12 +2,14 @@
 /**
  * This is a random collection of methods that don't quite belong anywhere.
  *
- * A set of utilities, some of which wrap the Java interface (collect.js), and others
+ * A set of utilities, some of which wrap the Java interface (shim.js), and others
  * provide useful parsing or interpretation of localization details.
  *
  */
 define(['mdl'],function(mdl) {
 return {
+    saved_complete: 'COMPLETE',
+    saved_incomplete: 'INCOMPLETE',
     baseDir: '',
     databaseSettings: null,
     platformInfo: null,
@@ -20,9 +22,9 @@ return {
      * immediate return: platformInfo structure from ODK
      */
     getPlatformInfo:function() {
-        // fetch these settings from ODK Collect if running under that context
+        // fetch these settings from ODK Survey (the container app)
         if ( this.platformInfo == null ) {
-            var jsonString = collect.getPlatformInfo();
+            var jsonString = shim.getPlatformInfo();
             this.platformInfo = JSON.parse(jsonString);
         }
         return this.platformInfo;
@@ -31,44 +33,14 @@ return {
     /**
      * immediate return: databaseSettings structure from ODK
      */
-    getDatabaseSettings:function(ctxt) {
-        // fetch these settings from ODK Collect if running under that context
+    getDatabaseSettings:function() {
+        // fetch these settings from ODK Survey (the container app)
         if ( this.databaseSettings == null ) {
-            var jsonString = collect.getDatabaseSettings();
-            ctxt.append('opendatakit.getDatabaseSettings', jsonString);
+            var jsonString = shim.getDatabaseSettings();
+            console.log('opendatakit.getDatabaseSettings: ' + jsonString);
             this.databaseSettings = JSON.parse(jsonString);
         }
         return this.databaseSettings;
-    },
-
-    /**
-     * immediate return: URI for this media file
-     */
-    asUri:function(ctxt,mediaPath,widget,attribute) {
-        if ( mediaPath == null ) {
-			return null;
-		}
-        
-        var info = this.getPlatformInfo();
-        if ( info.container != 'Android' ) {
-			return mediaPath;
-		}
-        
-        if ( mediaPath[0] == '.' ) {
-            mediaPath = info.appPath + mediaPath;
-        }
-                
-        if ( mediaPath.substr(0,7) == "file://" ) {
-            mediaPath = mediaPath.substr(7);
-        }
-
-        if ( widget != 'img' ) {
-            if ( attribute == 'poster' ) {
-                
-                return "file://127.0.0.1" + mediaPath;
-            }
-        }
-        return "file://127.0.0.1" + mediaPath;
     },
 
     genUUID:function() {
@@ -83,7 +55,7 @@ return {
     
     getHashString:function(formPath, instanceId, pageRef) {
         if ( formPath == null ) {
-            formPath = collect.getBaseUrl();
+            formPath = shim.getBaseUrl();
             return '#formPath=' + escape(formPath);
         }
         var qpl =
@@ -113,7 +85,7 @@ return {
         mdl.instanceId = instanceId;
 		// Update container so that it can save media and auxillary data
 		// under different directories...
-		collect.setInstanceId(instanceId);
+		shim.setInstanceId(instanceId);
     },
     
     getCurrentInstanceId:function() {
@@ -150,7 +122,7 @@ return {
 
     localize:function(textOrLangMap, locale) {
         if(_.isUndefined(textOrLangMap)) {
-            return 'undefined';
+            return 'text_undefined';
         }
         if(_.isString(textOrLangMap)) {
             return textOrLangMap;
@@ -163,7 +135,7 @@ return {
             alert("Could not localize object. See console:");
             console.error("Non localizable object:");
             console.error(textOrLangMap);
-            return 'invalidOjbect';
+            return 'no_suitable_language_mapping_defined';
         }
     },
     

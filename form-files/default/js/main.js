@@ -10,7 +10,7 @@
  * interpretation of the formDef.json for the form).
  */
 requirejs.config({
-    baseUrl: collect.getBaseUrl(),
+    baseUrl: shim.getBaseUrl(),
     paths: {
         // third-party libraries we depend upon 
         jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
@@ -27,7 +27,7 @@ requirejs.config({
         // top-level objects
         mdl : 'js/mdl',
         promptTypes : 'js/promptTypes',
-        // collect.js -- stub directly loaded
+        // shim.js -- stub directly loaded
         // functionality
         prompts : 'js/prompts',
         database : 'js/database',
@@ -110,7 +110,15 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
             // the requested form.
             var f = function() {
                 if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
-                    parsequery.parseParameters(ctxt);
+                    
+                    if ( window.location.search != null && window.location.search.indexOf("purge") >= 0 ) {
+                        ctxt.append('purging datastore');
+                        database.purge($.extend({},ctxt,{success:function() {
+                                parsequery.parseParameters(ctxt);
+                            }}));
+                    } else {
+                        parsequery.parseParameters(ctxt);
+                    }
                 } else {
                     ctxt.append('startup.delay');
                     setTimeout(f, 200);

@@ -81,11 +81,11 @@
         {
             "type": "goto_if",
             "param": "test2",
-            "condition": "{{name}}.length > 7"
+            "condition": "data('name').length > 7"
         },
         {
             "name": "name", 
-            "constraint": "{{name}}.length > 4",
+            "constraint": "data('name').length > 4",
 			"constraint_message": "Name is too short -- enter a longer name",
             "type": "text", 
             "param": null, 
@@ -147,7 +147,7 @@
             }
         }, 
         {
-            "type": "select", 
+            "type": "select_multiple", 
             "name": "sel",
             "label": "Select all genders:",
             "param": "gender"
@@ -190,7 +190,11 @@
             "type": "number"
         }, 
         "sel": {
-            "type": "multiselect"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "image_test": {
             "type": "object",
