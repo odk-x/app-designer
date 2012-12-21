@@ -569,19 +569,26 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
     },
     generateSaveValue: function(jsonFormSerialization) {
-        var otherSelected, otherValue;
+		var that = this;
+        var selectedValues;
         if(jsonFormSerialization){
-            var flatList = _.map(jsonFormSerialization, function(valueObject) {
-                    if ( 'otherValue' === valueObject.name ) {
-                        otherValue = _.find(jsonFormSerialization, function(valueObject) {
-                            return ('otherValue' === valueObject.name);
-                        });
-                        return (otherValue ? otherValue.value : '');
-                    } else {
-                        return valueObject.value;
-                    }
-                });
-            return flatList;
+            selectedValues = _.map(jsonFormSerialization, function(valueObject) {
+				if ( valueObject.name === that.name ) {
+					return valueObject.value;
+				}
+            });
+            if(selectedValues && that.withOther) {
+                var otherValue = _find(selectedValues, function(value) {
+						return ('other' === value);
+					});
+				if (otherValue) {
+					var otherObject = _.find(jsonFormSerialization, function(valueObject) {
+						return ('otherValue' === valueObject.name);
+						});
+					selectedValues.push(otherObject.value);
+				}
+            }
+            return selectedValues;
         }
         return null;
     },
@@ -593,20 +600,19 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         var matchedChoice = null;
         var choiceList = _.map(savedValue, function(valueObject) {
             matchedChoice = _.find(that.renderContext.choices, function(choiceObject) {
-                            return (valueObject === choiceObject.value);
+                            return (valueObject === choiceObject.name);
                 });
             if ( matchedChoice != null ) {
-                return { "name": this.name,
+                return { "name": that.name,
                          "value": valueObject };
             } else {
                 otherChoices.push(valueObject);
-                return null;
             }
         });
-        if (this.withOther && otherChoices.length == 1 ) {
+        if (that.withOther && otherChoices.length == 1 ) {
             // emit the other choice list and the value for it...
             choiceList.push({
-                "name": "other",
+                "name": that.name,
                 "value": "other"
             });
             choiceList.push({
@@ -617,6 +623,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             console.log("invalid choices are in choices list");
             console.log(otherChoices);
         }
+		return choiceList;
     },
     modification: function(evt) {
         if(this.withOther) {
@@ -640,8 +647,8 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
         var that = this;
         console.log("select modification");
-        console.log(this.$('form').serializeArray());
         var formValue = (this.$('form').serializeArray());
+		console.log(formValue);
         this.setValue($.extend({}, ctxt, {
             success: function() {
                 that.updateRenderValue(formValue);
@@ -1164,16 +1171,16 @@ promptTypes.image = promptTypes.media.extend({
     contentType: "image/*",
     label: 'Take your photo:',
     templatePath: "templates/image.handlebars",
-    captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureImageActivity',
-    chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseImageActivity'
+    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity',
+    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseImageActivity'
 });
 promptTypes.video = promptTypes.media.extend({
     type: "video",
     contentType: "video/*",
     label: 'Take your video:',
     templatePath: "templates/video.handlebars",
-    captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureVideoActivity',
-    chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseVideoActivity',
+    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity',
+    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity',
     updateRenderContext: function() {
         this.baseUpdateRenderContext();
         // this.renderContext.videoPoster = this.renderContext.uriValue;
@@ -1184,8 +1191,8 @@ promptTypes.audio = promptTypes.media.extend({
     contentType: "audio/*",
     label: 'Take your audio:',
     templatePath: "templates/audio.handlebars",
-    captureAction: 'org.opendatakit.collect.android.activities.MediaCaptureAudioActivity',
-    chooseAction: 'org.opendatakit.collect.android.activities.MediaChooseAudioActivity'
+    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity',
+    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity'
 });
 /**
  * launch_intent is an abstract prompt type used as a base for single intent launching (e.g. barcodes)
@@ -1278,7 +1285,7 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
-    intentString: 'org.opendatakit.collect.android.activities.GeoPointActivity',
+    intentString: 'org.opendatakit.survey.android.activities.GeoPointActivity',
     extractDataValue: function(jsonObject) {
         return {
             latitude: jsonObject.result.latitude,
@@ -1290,7 +1297,7 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
     type: "geopointmap",
-    intentString: 'org.opendatakit.collect.android.activities.GeoPointMapActivity',
+    intentString: 'org.opendatakit.survey.android.activities.GeoPointMapActivity',
      extractDataValue: function(jsonObject) {
         return { latitude: jsonObject.result.latitude, 
                  longitude: jsonObject.result.longitude, 

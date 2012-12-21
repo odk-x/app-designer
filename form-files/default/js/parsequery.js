@@ -269,13 +269,21 @@ return {
                     alert('Unable to find file: ' + filename);
                     ctxt.failure({message: "Form definition is empty."});
                 } else {
+					var formDef;
                     try {
-                        var formDef = JSON.parse(formDefTxt);
+                        formDef = JSON.parse(formDefTxt);
+                    } catch (ex) {
+						console.error(String(ex));
+                        ctxt.append('parsequery.parseParameters.exception',  'JSON parsing error: ' + ex);
+                        ctxt.failure({message: "Exception while processing form definition."});
+						return;
+                    }
+                    try {
                         that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
                                                 instanceId, pageRef, instanceMetadataKeyValueMap);
                     } catch (ex) {
 						console.error(String(ex));
-                        ctxt.append('parsequery.parseParameters.exception',  'unknown error: ' + ex);
+                        ctxt.append('parsequery.parseParameters.exception',  'formDef interpetation or database setup error: ' + ex);
                         ctxt.failure({message: "Exception while processing form definition."});
                     }
                 }

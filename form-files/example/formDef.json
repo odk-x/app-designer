@@ -14,6 +14,30 @@
                 }
             }
         }, 
+		"location": {
+			"type": "object",
+			"elementType": "geopoint",
+			"properties": {
+				"latitude": {
+					"type": "number"
+				},
+				"longitude": {
+					"type": "number"
+				},
+				"altitude": {
+					"type": "number"
+				},
+				"accuracy": {
+					"type": "number"
+				}
+			}
+		},
+        "visited_continents": {
+            "type": "array",
+			"items": {
+				"type": "string"
+				}
+        }, 
         "visited_seattle": {
             "type": "string"
         }, 
@@ -80,7 +104,10 @@
             }
         }, 
         "examples": {
-            "type": "string"
+            "type": "array",
+			"items": {
+				"type": "string"
+				}
         }, 
         "error": {
             "type": "string"

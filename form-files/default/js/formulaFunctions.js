@@ -31,30 +31,22 @@ function(database,   _) {
             if(!promptValue) {
                 return false;
             }
-            var parsedPromptValue;
-            try {
-                //TODO: This parsing might change if the model stores JSON
-                parsedPromptValue = JSON.parse(promptValue);
-            } catch(e) {
-                //Treat promptValue as a string
-                parsedPromptValue = promptValue;
+			// it is a select_multiple...
+            if(_.isArray(promptValue)) {
+                return _.include(promptValue, qValue);
             }
-            if(_.isArray(parsedPromptValue)) {
-                return _.include(_.pluck(parsedPromptValue, 'value'), qValue);
-            }
+			// it is a select_one...
             //Using double equals here because I suspect the type coercion will prevent more
             //user errors that it will cause when comparing numbers and strings.
             return parsedPromptValue == qValue;
         },
         countSelected: function(promptValue){
+			// select_multiple promptValue is an array
             if(!promptValue) {
                 return 0;
             }
-            if(_.isString(promptValue)) {
-                promptValue = JSON.parse(promptValue);
-            }
             if(!_.isArray(promptValue)) {
-                alert("Selected function expects an array. See console for details.");
+                alert("countSelected function expects an array. See console for details.");
                 console.error(promptValue);
                 console.error(qValue);
                 return false;
@@ -66,16 +58,14 @@ function(database,   _) {
             var parsedArgs = arguments;
             if(_.all(parsedArgs, _.isArray)) {
                 //We are probably dealing with a select. values is an array of the selected values.
-                var values = _.map(parsedArgs, function(arguement) {
-                    return _.pluck(arguement, 'value');
-                });
+                var values = parsedArgs;
                 return _.all(values.slice(1), function(value) {
                     return _.union(_.difference(value, values[0]), _.difference(values[0], value)).length == 0;
                 });
             } else {
                 var arg0 = parsedArgs[0];
-                return _.all(parsedArgs, function(arguement) {
-                    return _.isEqual(arg0, arguement);
+                return _.all(parsedArgs, function(argument) {
+                    return _.isEqual(arg0, argument);
                 });
             }
         },
