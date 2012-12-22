@@ -689,7 +689,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             }
             var queryDataType = 'json';
             var baseSuccessCallback = function(result) {
-                ctxt.append("prompts." + this.type + ".postActivate.success", "px: " + that.promptIdx);
+                ctxt.append("prompts." + that.type + ".postActivate.success", "px: " + that.promptIdx);
                 that.renderContext.choices = query.callback(result);
                 that.updateRenderValue(that.parseSaveValue(that.getValue()));
                 ctxt.success();
