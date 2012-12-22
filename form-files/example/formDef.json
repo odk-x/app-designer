@@ -95,9 +95,6 @@
         "error": {
             "type": "string"
         }, 
-        "x": {
-            "type": "string"
-        }, 
         "video_test": {
             "isPersisted": true, 
             "elementType": "mimeUri", 
@@ -381,28 +378,8 @@
             "param": "media_end"
         }, 
         {
-            "_rowNum": 37, 
-            "type": "with_next", 
-            "name": "x", 
-            "param": null
-        }, 
-        {
-            "param": null, 
-            "_rowNum": 38, 
-            "type": "note", 
-            "condition": "selected(data('examples'), 'assignment')", 
-            "label": "Assigning a value of 10 to x."
-        }, 
-        {
-            "param": null, 
-            "_rowNum": 39, 
-            "type": "note", 
-            "condition": "data('x') === 10", 
-            "label": "x = {{x.value}}"
-        }, 
-        {
             "name": "specialTemplateTest", 
-            "_rowNum": 40, 
+            "_rowNum": 37, 
             "param": null, 
             "label": "This is a custom template that uses D3.js:", 
             "type": "text", 
@@ -417,7 +394,7 @@
                 "type": "range", 
                 "min": 1
             }, 
-            "_rowNum": 41, 
+            "_rowNum": 38, 
             "param": null, 
             "label": "How would you rate this survey?", 
             "default": 5, 
@@ -434,49 +411,44 @@
     "choices": {
         "examples": [
             {
-                "_rowNum": 11, 
+                "_rowNum": 12, 
                 "name": "error", 
                 "label": "error"
             }, 
             {
-                "_rowNum": 12, 
+                "_rowNum": 13, 
                 "name": "intents", 
                 "label": "intents"
             }, 
             {
-                "_rowNum": 13, 
+                "_rowNum": 14, 
                 "name": "dynamic_label", 
                 "label": "dynamic label"
             }, 
             {
-                "_rowNum": 14, 
+                "_rowNum": 15, 
                 "name": "datetime", 
                 "label": "datetime"
             }, 
             {
-                "_rowNum": 15, 
+                "_rowNum": 16, 
                 "name": "geopoint", 
                 "label": "geopoint"
             }, 
             {
-                "_rowNum": 16, 
+                "_rowNum": 17, 
                 "name": "media", 
                 "label": "media"
             }, 
             {
-                "_rowNum": 17, 
+                "_rowNum": 18, 
                 "name": "screen_group", 
                 "label": "screen group with select and calculate"
             }, 
             {
-                "_rowNum": 18, 
+                "_rowNum": 19, 
                 "name": "custom_template", 
                 "label": "custom template"
-            }, 
-            {
-                "_rowNum": 19, 
-                "name": "assignment", 
-                "label": "assignment"
             }
         ], 
         "yesno": [
