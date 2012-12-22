@@ -48,15 +48,15 @@
             "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('state') + \"'\")"
         }, 
         {
-            "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n})", 
+            "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n}).value()", 
             "_rowNum": 4, 
-            "name": "countries_csv", 
+            "name": "regions_csv", 
             "uri": "\"regions.csv\""
         }, 
         {
             "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nreturn place;\n})", 
             "_rowNum": 5, 
-            "name": "regions_csv", 
+            "name": "countries_csv", 
             "uri": "\"regions.csv\""
         }, 
         {

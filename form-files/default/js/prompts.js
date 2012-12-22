@@ -289,6 +289,10 @@ promptTypes.base = Backbone.View.extend({
     getCallback: function(promptPath, internalPromptContext, action) {
         throw new Error("prompts." + this.type, "px: " + this.promptIdx + " unimplemented promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
     },
+    __test__: function(evt){
+        //This is a utility function for checking to make sure event maps are working.
+        console.log(evt);
+    }
     /*
     registerChangeHandlers: function() {
         // TODO: code that is executed after all page prompts are inserted into the DOM.
@@ -525,6 +529,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     templatePath: "templates/select.handlebars",
     events: {
         "change input": "modification",
+        "change select": "modification",
         //Only needed for child views
         "click .deselect": "deselect",
         "click .grid-select-item": "selectGridItem"
@@ -644,6 +649,9 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
 		return choiceList;
     },
     modification: function(evt) {
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
+        var that = this;
         if(this.withOther) {
             //This hack is needed to prevent rerendering
             //causing the other input to loose focus when clicked.
@@ -661,9 +669,6 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             this.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
             this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
         }
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
-        var that = this;
         var formValue = (this.$('form').serializeArray());
         this.setValue($.extend({}, ctxt, {
             success: function() {

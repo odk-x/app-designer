@@ -101,14 +101,12 @@
 {{else}}
 {{#ifEqual appearance "dropdown"}}
     <form>
-        <div class="inline-label-container">
-            {{> labelHint}}
-        </div>
+        {{> labelHint}}
         <select name="{{name}}">        
             {{#each choices}}
                 <option 
                     {{#if checked}}
-                        selected
+                        selected="selected"
                     {{/if}}
                     value="{{name}}">
                     {{localize label}}
