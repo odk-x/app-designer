@@ -114,22 +114,40 @@ promptTypes.base = Backbone.View.extend({
      * afterInitialize is user defined
      **/
     afterInitialize: function() {},
-    /**
-     * prompt types that override onActivate are expected to call baseActivate
-     **/
-    baseActivate: function(ctxt) {
+    preActivate: function(ctxt) {
         var that = this;
         function callFunctionsInSeries(functions){
-            if(functions.length > 0){
-                functions[0]($.extend({}, ctxt, { success : function(){callFunctionsInSeries(functions.slice(1));}}))
+            if (functions.length > 0) {
+                functions[0]($.extend({}, ctxt, {
+                    success: function() {
+                        callFunctionsInSeries(functions.slice(1));
+                    }
+                }));
             } else {
-                that.whenTemplateIsReady(ctxt);
+                if(('default' in that) && that.getValue() === null) {
+                    console.log(that['default']());
+                    that.setValue($.extend({}, ctxt, {
+                        success: function() {
+                            that.whenTemplateIsReady(ctxt);
+                        }
+                    }), that['default']());
+                } else {
+                    that.whenTemplateIsReady(ctxt);
+                }
             }
         }
         callFunctionsInSeries(that.additionalActivateFunctions);
     },
+    postActivate: function(ctxt){
+        ctxt.success();
+    },
     onActivate: function(ctxt) {
-        this.baseActivate(ctxt);
+        var that = this;
+        this.preActivate($.extend({}, ctxt, {
+            success: function() {
+                that.postActivate(ctxt);
+            }
+        }));
     },
     /**
      * stopPropagation is used in the events map to disable swiping on various elements
@@ -292,35 +310,30 @@ promptTypes.opening = promptTypes.base.extend({
     type: "opening",
     hideInHierarchy: true,
     templatePath: "templates/opening.handlebars",
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
         var instanceName = database.getInstanceMetaDataValue('instanceName');
-        if ( instanceName == null ) {
+        if (instanceName == null) {
             // construct a friendly name for this form... use just the date, as the form name is well known
             var date = new Date();
             var dateStr = date.toISOString();
             instanceName = dateStr; // .replace(/\W/g, "_")
             that.renderContext.instanceName = instanceName;
             database.setInstanceMetaData($.extend({}, ctxt, {
-                success: function() { 
-                    that.baseActivate($.extend({}, ctxt, {
-                                        success:function(){
-                                ctxt.success({enableBackwardNavigation: false});
-                            }
-                        }));
-                }}), 'instanceName', instanceName);
+                success: function() {
+                    ctxt.success({
+                        enableBackwardNavigation: false
+                    });
+                }
+            }), 'instanceName', instanceName);
             return;
         }
         that.renderContext.instanceName = instanceName;
-        that.baseActivate($.extend({}, ctxt, {
-            success: function() {
-                ctxt.success({enableBackwardNavigation: false});
-            }
-        }));
+        ctxt.success({enableBackwardNavigation: false});
     },
     renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png',
@@ -356,17 +369,13 @@ promptTypes.finalize = promptTypes.base.extend({
     renderContext: {
         headerImg: opendatakit.baseDir + 'img/form_logo.png'
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
-        this.baseActivate($.extend({}, ctxt, {
-            success:function(){
-                ctxt.success({enableForwardNavigation: false});
-            }
-        }));
+        ctxt.success({enableForwardNavigation: false});
     },
     saveIncomplete: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -388,18 +397,14 @@ promptTypes.json = promptTypes.base.extend({
     hideInHierarchy: true,
     valid: true,
     templatePath: "templates/json.handlebars",
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         if ( JSON != null ) {
             that.renderContext.value = JSON.stringify(database.getAllDataValues(),null,2);
         } else {
             that.renderContext.value = "JSON Unavailable";
         }
-        that.baseActivate($.extend({}, ctxt, {
-            success:function(){
-                ctxt.success({enableNavigation: false});
-            }
-        }));
+        ctxt.success({enableNavigation: false});
     }
 });
 promptTypes.instances = promptTypes.base.extend({
@@ -414,9 +419,9 @@ promptTypes.instances = promptTypes.base.extend({
         "click .deleteInstance": "deleteInstance",
         "click .createInstance": "createInstance"
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
-        ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
+        ctxt.append("prompts." + this.type + ".postActivate", "px: " + this.promptIdx);
         database.get_all_instances($.extend({},ctxt,{
             success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
@@ -433,16 +438,13 @@ promptTypes.instances = promptTypes.base.extend({
                     formTitle: opendatakit.getSettingValue('formTitle'),
                     headerImg: opendatakit.baseDir + 'img/form_logo.png'
                 });
-                that.baseActivate($.extend({}, ctxt, {
-                    success:function(){
-                        ctxt.success({
-                            showHeader: false,
-                            enableNavigation:false,
-                            showFooter:false
-                        });
-                    }
-                }));
-        }}));
+                ctxt.success({
+                    showHeader: false,
+                    enableNavigation:false,
+                    showFooter:false
+                });
+            }
+        }));
     },
     createInstance: function(evt){
         var ctxt = controller.newContext(evt);
@@ -460,12 +462,17 @@ promptTypes.instances = promptTypes.base.extend({
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".deleteInstance", "px: " + this.promptIdx);
         var that = this;
-        database.delete_all($.extend({}, ctxt,{
-                    success:function() {
-                        that.onActivate($.extend({}, ctxt,{
-                            success:function(){that.render();ctxt.success();}}));
-                }}), 
-                $(evt.target).attr('id'));
+        database.delete_all($.extend({}, ctxt, {
+            success: function() {
+                that.onActivate($.extend({}, ctxt, {
+                    success: function() {
+                        that.render();
+                        ctxt.success();
+                    }
+                }));
+            }
+        }),
+        $(evt.target).attr('id'));
     }
 });
 promptTypes.hierarchy = promptTypes.base.extend({
@@ -475,13 +482,9 @@ promptTypes.hierarchy = promptTypes.base.extend({
     templatePath: 'templates/hierarchy.handlebars',
     events: {
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         this.renderContext.prompts = controller.prompts;
-        this.baseActivate($.extend({}, ctxt, {
-            success:function(){
-                ctxt.success({showHeader: true, showFooter: false});
-            }
-        }));
+        ctxt.success({showHeader: true, showFooter: false});
     }
 });
 promptTypes.repeat = promptTypes.base.extend({
@@ -493,22 +496,18 @@ promptTypes.repeat = promptTypes.base.extend({
         "click .deleteInstance": "deleteInstance",
         "click .addInstance": "addInstance"
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         var subsurveyType = this.param;
-        ctxt.append("prompts." + this.type + ".onActivate", "px: " + this.promptIdx);
+        ctxt.append("prompts." + this.type + ".postActivate", "px: " + this.promptIdx);
         database.get_all_instances($.extend({},ctxt,{
             success:function(instanceList) {
                 that.renderContext.instances = instanceList;
-                that.baseActivate($.extend({}, ctxt, {
-                    success:function(){
-                        ctxt.success({
-                            showHeader: false,
-                            enableNavigation:false,
-                            showFooter:false
-                        });
-                    }
-                }));
+                ctxt.success({
+                    showHeader: false,
+                    enableNavigation:false,
+                    showFooter:false
+                });
         }}), subsurveyType);
     },
     openInstance: function(evt) {
@@ -674,7 +673,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             }
         }), this.generateSaveValue(formValue));
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         var query;
         that.renderContext.passiveError = null;
@@ -690,10 +689,10 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             }
             var queryDataType = 'json';
             var baseSuccessCallback = function(result) {
-                ctxt.append("prompts." + this.type + ".onActivate.success", "px: " + that.promptIdx);
+                ctxt.append("prompts." + this.type + ".postActivate.success", "px: " + that.promptIdx);
                 that.renderContext.choices = query.callback(result);
                 that.updateRenderValue(that.parseSaveValue(that.getValue()));
-                that.baseActivate(ctxt);
+                ctxt.success();
             };
             var successCallback = baseSuccessCallback;
             var queryUriExt = queryUri.split('.').pop();
@@ -713,7 +712,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "data": {},
                 "success": successCallback,
                 "error": function(e) {
-					ctxt.append("prompts." + this.type + ".onActivate.error", "px: " + this.promptIdx + " Error fetching choices");
+					ctxt.append("prompts." + this.type + ".postActivate.error", "px: " + this.promptIdx + " Error fetching choices");
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
                     //the form.
@@ -722,7 +721,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                     if(e.statusText) {
                         that.renderContext.passiveError += e.statusText;
                     }
-                    that.baseActivate(ctxt);
+                    ctxt.success();
                 }
             });
             return;
@@ -732,7 +731,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
         }
         that.updateRenderValue(that.parseSaveValue(that.getValue())); 
-        that.baseActivate(ctxt);
+        ctxt.success();
     },
     deselect: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -851,11 +850,11 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
             }
         }), (value.length === 0 ? null : value));
     }, 500),
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var renderContext = this.renderContext;
         var value = this.getValue();
         renderContext.value = value;
-        this.baseActivate(ctxt);
+        ctxt.success();
     },
     beforeMove: function(ctxt) {
         var that = this;
@@ -922,13 +921,13 @@ promptTypes.datetime = promptTypes.input_type.extend({
         return false;
         */
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         var renderContext = this.renderContext;
         if(this.detectNativeDatePicker()){
             renderContext.inputAttributes.type = this.type;
             this.useMobiscroll = false;
-            that.baseActivate(ctxt);
+            ctxt.success();
         } else {
             require(["mobiscroll"], function() {
                 $.scroller.themes.jqm.defaults = {
@@ -949,7 +948,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
                     $('.dwo').css("background-color", "white");
                     $('.dwo').css("opacity", ".5");
                 };
-                that.baseActivate(ctxt);
+                ctxt.success();
             });
         }
     },
@@ -1088,10 +1087,10 @@ promptTypes.media = promptTypes.base.extend({
         "click .captureAction:enabled": "capture",
         "click .chooseAction:enabled": "choose"
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         that.updateRenderContext();
-        that.baseActivate(ctxt);
+        ctxt.success();
     },
     disableButtons: function() {
         var that = this;
@@ -1244,12 +1243,12 @@ promptTypes.launch_intent = promptTypes.base.extend({
     events: {
         "click .launch": "launch"
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
         that.renderContext.value = value;
         that.renderContext.buttonLabel = that.buttonLabel;
-        this.baseActivate(ctxt);
+        ctxt.success();
     },
     launch: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -1377,11 +1376,11 @@ promptTypes.geopoint = promptTypes.input_type.extend({
             error('not supported');
         }
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         var value = that.getValue();
         that.renderContext.value = value;
-        this.baseActivate(ctxt);
+        ctxt.success();
     }
 });
 */
@@ -1461,16 +1460,12 @@ promptTypes.screen = promptTypes.base.extend({
             prompt.validate(subPromptContext);
         });
     },
-    onActivate: function(ctxt) {
-        var that = this;
-        // The Activate sequence of a screen is ill-defined
-        // Here, we first activate all the sub-elements, then we call
-        // baseActivate the screen. One could argue that we should
-        // call baseActivate, then activate the children. Currently, 
-        // baseActivate is a no-op, so the order does not have an 
-        // effect yet...
+    postActivate: function(ctxt) {
+        // We do not support dependent default values within screen groups.
+        // If we are to do so, we will need to add code here to ensure
+        // their on activate functions are called in the right order.
         var subPromptsReady = _.after(this.prompts.length, function () {
-            that.baseActivate(ctxt);
+            ctxt.success();
         });
         _.each(this.prompts, function(prompt){
             prompt.onActivate($.extend({}, ctxt, {
@@ -1502,7 +1497,7 @@ promptTypes.screen = promptTypes.base.extend({
     },
     whenTemplateIsReady: function(ctxt){
         //This stub is here because screens have no template so the default 
-        //whenTemplateIsReady would otherwise cause an error in baseActivate.
+        //whenTemplateIsReady would otherwise cause an error in preActivate
         ctxt.success();
     },
     /**
@@ -1574,7 +1569,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
             }
         }), acknowledged);
     },
-    onActivate: function(ctxt) {
+    postActivate: function(ctxt) {
         var that = this;
         var acknowledged;
         try{
@@ -1587,7 +1582,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
             "label": that.acknLabel,
             "checked": acknowledged
         }];
-        this.baseActivate(ctxt);
+        ctxt.success(ctxt);
     }
 });
 // Do not allow survey to proceed, either moving backward or forward...
@@ -1596,17 +1591,13 @@ promptTypes.stop_survey = promptTypes.base.extend({
     templatePath: "templates/stop_survey.handlebars",
     hideInHierarchy: true,
 	validate: true,
-	onActivate: function(ctxt) {
+	postActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
-        this.baseActivate($.extend({}, ctxt, {
-            success:function(){
-                ctxt.success({enableForwardNavigation: false, enableBackNavigation: false});
-            }
-        }));
+        ctxt.success({enableForwardNavigation: false, enableBackNavigation: false});
     },
     beforeMove: function(ctxt) {
         ctxt.append("prompts." + this.type, "px: " + this.promptIdx);
