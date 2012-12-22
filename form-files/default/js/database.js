@@ -434,13 +434,13 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
             } catch(e) {
                 ctxt.append('withDb.ctxt.failure.exception', 'unknown error: ' + String(e));
                 console.error("withDb.ctxt.failure.exception " + String(e));
-				ctxt._log('E','withDb: exception caught while executing ctxt.failure(msg)');
-				alert('Fatal error while accessing or saving values to database');
+                ctxt._log('E','withDb: exception caught while executing ctxt.failure(msg)');
+                alert('Fatal error while accessing or saving values to database');
             }
         } else {
             console.error("Unrecoverable Internal Error: Exception during success/failure continuation");
-			ctxt._log('E',"withDb: Unrecoverable Internal Error: Exception during success/failure continuation");
-			alert('Fatal error while accessing or saving values to database');
+            ctxt._log('E',"withDb: Unrecoverable Internal Error: Exception during success/failure continuation");
+            alert('Fatal error while accessing or saving values to database');
         }
         return;
     }
@@ -1144,11 +1144,11 @@ save_all_changes:function(ctxt, asComplete) {
                 var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, opendatakit.getCurrentInstanceId(), kvMap);
                 tmpctxt.sqlStatement = is;
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-					ctxt.append('save_all_changes.cleanup');
-					// and now delete the change history...
-					var cs = that._deletePriorChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
-					tmpctxt.sqlStatement = cs;
-					transaction.executeSql(cs.stmt, cs.bind);
+                    ctxt.append('save_all_changes.cleanup');
+                    // and now delete the change history...
+                    var cs = that._deletePriorChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
+                    tmpctxt.sqlStatement = cs;
+                    transaction.executeSql(cs.stmt, cs.bind);
                 });
             }
         );
