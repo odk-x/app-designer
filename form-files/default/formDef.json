@@ -1,22 +1,18 @@
 {
     "settings": [
         {
-            "setting": "tableId",
+            "setting": "table_id",
             "value": "default01"
         },
         {
-            "setting": "formId",
+            "setting": "form_id",
             "value": "default"
         },
         {
-            "setting": "formVersion"
+            "setting": "form_version"
         },
         {
-            "setting": "formLocales",
-            "value": ["en_us"]
-        },
-        {
-            "setting": "formTitle",
+            "setting": "form_title",
             "value": {
                 "en_us": "Default form"
             }

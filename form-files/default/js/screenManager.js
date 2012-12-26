@@ -9,14 +9,14 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
-define(['opendatakit','backbone','jquery','handlebars','text!templates/screen.handlebars' ,'jqmobile'], 
-function(opendatakit,  Backbone,  $,       Handlebars,  screenTemplate) {
+define(['opendatakit','backbone','jquery','handlebars','text!templates/navbarAndPopups.handlebars' ,'jqmobile'], 
+function(opendatakit,  Backbone,  $,       Handlebars,  navbarAndPopups) {
 
 return Backbone.View.extend({
     el: "body",
     className: "current",
     instance_id:123,
-    template: Handlebars.compile(screenTemplate),
+    template: Handlebars.compile(navbarAndPopups),
     swipeTimeStamp: -1,
     swipeEnabled: true,//Swipe can be disabled to prevent double swipe bug
     renderContext:{},
