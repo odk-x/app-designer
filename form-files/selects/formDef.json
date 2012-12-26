@@ -175,7 +175,7 @@
         }, 
         {
             "name": "country", 
-            "choice_filter": "_.where(context, {\n  region: data('region')\n})", 
+            "choice_filter": "context.region === data('region')", 
             "appearance": "dropdown", 
             "_rowNum": 18, 
             "param": "countries_csv", 
@@ -193,17 +193,17 @@
     ], 
     "settings": [
         {
-            "setting": "formId", 
+            "setting": "form_id", 
             "_rowNum": 2, 
             "value": "selects"
         }, 
         {
-            "setting": "formVersion", 
+            "setting": "form_version", 
             "_rowNum": 3, 
             "value": 1
         }, 
         {
-            "setting": "formTitle", 
+            "setting": "form_title", 
             "_rowNum": 4, 
             "value": "Select Examples"
         }

@@ -92,12 +92,12 @@ return {
         return mdl.instanceId;
     },
     
-    setCurrentTableId:function(tableId) {
-        mdl.tableId = tableId;
+    setCurrentTableId:function(table_id) {
+        mdl.table_id = table_id;
     },
     
     getCurrentTableId:function() {
-        return mdl.tableId;
+        return mdl.table_id;
     },
     
     /**
@@ -173,13 +173,13 @@ return {
     getFormLocales:function(formDef) {
         var locales = [];
         // assume all the locales are specified by the title...
-        var formTitle = this.getSetting(formDef, 'formTitle');
-        if ( _.isUndefined(formTitle) || _.isString(formTitle) ) {
+        var form_title = this.getSetting(formDef, 'form_title');
+        if ( _.isUndefined(form_title) || _.isString(form_title) ) {
             // no internationalization -- just default choice
             return [ 'default' ];
         }
         // we have localization -- find all the tags
-        for ( var f in formTitle ) {
+        for ( var f in form_title ) {
             var translations = this.getSetting(formDef, f );
             if ( translations == null ) {
                 translations = f;
@@ -191,10 +191,10 @@ return {
     
     /*
         The default locale is specified by the 'defaultLocale' setting.
-        If this is not present, the first locale in the formTitle array
+        If this is not present, the first locale in the form_title array
         is used (this likely does not have any bearing to the order 
         of the translations in the XLSForm). Otherwise, if there are no
-        formTitle translations, then 'default' is returned.
+        form_title translations, then 'default' is returned.
      */
     getDefaultFormLocale:function(formDef) {
         var locale = this.getSetting(formDef, 'defaultLocale');

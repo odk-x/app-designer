@@ -462,14 +462,14 @@ window.controller = {
         var ctxt = controller.newCallbackContext();
         ctxt.append("controller.opendatakitIgnoreAllChanges", this.currentPromptIdx);
         if ( opendatakit.getCurrentInstanceId() == null ) {
-            shim.ignoreAllChangesFailed( opendatakit.getSettingValue('formId'), null );
+            shim.ignoreAllChangesFailed( opendatakit.getSettingValue('form_id'), null );
             ctxt.failure({message: "No instance selected."});
         } else {
             this.ignoreAllChanges($.extend({},ctxt,{success:function() {
-                                shim.ignoreAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId());
+                                shim.ignoreAllChangesCompleted( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId());
                                 ctxt.success();
                             }, failure:function(m) {
-                                shim.ignoreAllChangesFailed( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId());
+                                shim.ignoreAllChangesFailed( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId());
                                 ctxt.failure(m);
                             }}));
         }
@@ -482,7 +482,7 @@ window.controller = {
         var ctxt = controller.newCallbackContext();
         ctxt.append("controller.opendatakitSaveAllChanges", this.currentPromptIdx);
         if ( opendatakit.getCurrentInstanceId() == null ) {
-            shim.saveAllChangesFailed( opendatakit.getSettingValue('formId'), null );
+            shim.saveAllChangesFailed( opendatakit.getSettingValue('form_id'), null );
             ctxt.failure({message: "No instance selected."});
         } else {
             this.saveAllChanges(ctxt, asComplete);
@@ -500,11 +500,11 @@ window.controller = {
                         success:function(){
                             database.save_all_changes($.extend({},ctxt,{
                                 success:function() {
-                                    shim.saveAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), true);
+                                    shim.saveAllChangesCompleted( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId(), true);
                                     ctxt.success();
                                 },
                                 failure:function(m) {
-                                    shim.saveAllChangesFailed( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), true);
+                                    shim.saveAllChangesFailed( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId(), true);
                                     ctxt.failure(m);
                                 }}), true);
                         }}));
@@ -512,7 +512,7 @@ window.controller = {
         } else {
             database.save_all_changes($.extend({},ctxt,{
                 success:function() {
-                    shim.saveAllChangesCompleted( opendatakit.getSettingValue('formId'), opendatakit.getCurrentInstanceId(), false);
+                    shim.saveAllChangesCompleted( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId(), false);
                     ctxt.success();
                 }}), false);
         }

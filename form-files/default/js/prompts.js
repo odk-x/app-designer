@@ -105,8 +105,8 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.required = this.required;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
-        this.renderContext.formTitle = opendatakit.getSettingValue('formTitle');
-        this.renderContext.formVersion = opendatakit.getSettingValue('formVersion');
+        this.renderContext.form_title = opendatakit.getSettingValue('form_title');
+        this.renderContext.form_version = opendatakit.getSettingValue('form_version');
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
     },
@@ -439,7 +439,7 @@ promptTypes.instances = promptTypes.base.extend({
 				});
 				
                 $.extend(that.renderContext, {
-                    formTitle: opendatakit.getSettingValue('formTitle'),
+                    form_title: opendatakit.getSettingValue('form_title'),
                     headerImg: opendatakit.baseDir + 'img/form_logo.png'
                 });
                 ctxt.success({

@@ -128,16 +128,16 @@ window.shim = window.shim || {
             return "OK";
         }
     },
-    saveAllChangesCompleted: function( formId, instanceId, asComplete ) {
+    saveAllChangesCompleted: function( form_id, instanceId, asComplete ) {
         alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
-    saveAllChangesFailed: function( formId, instanceId ) {
+    saveAllChangesFailed: function( form_id, instanceId ) {
         alert("notify container FAILED save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
-    ignoreAllChangesCompleted: function( formId, instanceId ) {
+    ignoreAllChangesCompleted: function( form_id, instanceId ) {
         alert("notify container OK ignore all changes.");
     },
-    ignoreAllChangesFailed: function( formId, instanceId ) {
+    ignoreAllChangesFailed: function( form_id, instanceId ) {
         alert("notify container FAILED ignore all changes.");
     }
 };

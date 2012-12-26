@@ -90,7 +90,7 @@ return Backbone.View.extend({
         }
         var that = this;
         that.renderContext = {
-            formTitle: opendatakit.getSettingValue('formTitle'),
+            form_title: opendatakit.getSettingValue('form_title'),
             instanceName: prompt.database.getInstanceMetaDataValue('instanceName'),
             locales: that.controller.getFormLocales(),
             showHeader: true,
