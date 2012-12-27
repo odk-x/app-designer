@@ -14,6 +14,9 @@
                 }
             }
         }, 
+        "barcode": {
+            "type": "string"
+        }, 
         "visited_seattle": {
             "type": "string"
         }, 
@@ -29,8 +32,24 @@
         "coffee_today": {
             "type": "integer"
         }, 
-        "barcode": {
-            "type": "string"
+        "geopoint": {
+            "elementType": "geopoint", 
+            "type": "object", 
+            "name": "geopoint", 
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                }, 
+                "altitude": {
+                    "type": "number"
+                }, 
+                "longitude": {
+                    "type": "number"
+                }, 
+                "accuracy": {
+                    "type": "number"
+                }
+            }
         }, 
         "rating": {
             "type": "integer"
@@ -204,26 +223,33 @@
             "label": "Scan a barcode"
         }, 
         {
-            "name": "picture", 
+            "name": "geopoint", 
             "_rowNum": 9, 
+            "type": "geopoint", 
+            "param": null, 
+            "label": "Capture your location"
+        }, 
+        {
+            "name": "picture", 
+            "_rowNum": 10, 
             "type": "image", 
             "param": null, 
             "label": "Take a picture"
         }, 
         {
             "name": "recording", 
-            "_rowNum": 10, 
+            "_rowNum": 11, 
             "type": "audio", 
             "param": null, 
             "label": "Make a recording"
         }, 
         {
             "type": "label", 
-            "_rowNum": 11, 
+            "_rowNum": 12, 
             "param": "intents_end"
         }, 
         {
-            "_rowNum": 12, 
+            "_rowNum": 13, 
             "type": "goto", 
             "param": "label_features_end", 
             "condition": "not(selected(data('examples'), 'label_features'))"
@@ -231,7 +257,7 @@
         {
             "name": "name", 
             "hint": "Please use your full name", 
-            "_rowNum": 13, 
+            "_rowNum": 14, 
             "type": "text", 
             "param": null, 
             "label": "Enter your name"
@@ -239,14 +265,14 @@
         {
             "hint": "Handlebars templates allow labels to change depending on the values previously entered.", 
             "type": "note", 
-            "_rowNum": 14, 
+            "_rowNum": 15, 
             "param": null, 
             "label": "{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}\nThis label is a handlesbars template."
         }, 
         {
             "hint": "So can <b>hints</b>", 
             "type": "note", 
-            "_rowNum": 15, 
+            "_rowNum": 16, 
             "param": null, 
             "label": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>"
         }, 
@@ -254,85 +280,85 @@
             "type": "note", 
             "image": "img/dolphin.png", 
             "audio": "audio/carrioncrow.mp3", 
-            "_rowNum": 16, 
+            "_rowNum": 17, 
             "param": null, 
             "label": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns."
         }, 
         {
             "type": "label", 
-            "_rowNum": 17, 
+            "_rowNum": 18, 
             "param": "label_features_end"
         }, 
         {
             "name": "avg_coffee", 
             "type": "integer", 
             "param": null, 
-            "_rowNum": 18, 
+            "_rowNum": 19, 
             "condition": "selected(data('examples'), 'dynamic_defaults')", 
             "label": "On average, how many cups of coffee do you drink in a day?"
         }, 
         {
             "name": "coffee_today", 
             "default": "data('avg_coffee')", 
-            "_rowNum": 19, 
+            "_rowNum": 20, 
             "param": null, 
             "label": "How many cups of coffee did you drink today?", 
             "type": "integer", 
             "condition": "selected(data('examples'), 'dynamic_defaults')"
         }, 
         {
-            "_rowNum": 20, 
+            "_rowNum": 21, 
             "type": "goto", 
             "param": "datetime_end", 
             "condition": "not(selected(data('examples'), 'datetime'))"
         }, 
         {
             "name": "born", 
-            "_rowNum": 21, 
+            "_rowNum": 22, 
             "type": "date", 
             "param": null, 
             "label": "When were you born?"
         }, 
         {
             "param": null, 
-            "_rowNum": 22, 
+            "_rowNum": 23, 
             "type": "note", 
             "condition": "data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
             "label": "Happy Birthday!"
         }, 
         {
             "name": "time", 
-            "_rowNum": 23, 
+            "_rowNum": 24, 
             "type": "time", 
             "param": null, 
             "label": "What time is it?"
         }, 
         {
             "name": "datetime", 
-            "_rowNum": 24, 
+            "_rowNum": 25, 
             "type": "datetime", 
             "param": null, 
             "label": "When will you be available for a follow up survey?"
         }, 
         {
             "type": "label", 
-            "_rowNum": 25, 
+            "_rowNum": 26, 
             "param": "datetime_end"
         }, 
         {
             "name": "location", 
             "type": "geopoint", 
             "param": null, 
-            "_rowNum": 26, 
+            "_rowNum": 27, 
             "condition": "selected(data('examples'), 'geopoint')", 
             "label": "Record your location:"
         }, 
         {
-            "_rowNum": 27, 
+            "_rowNum": 28, 
             "prompts": [
                 {
                     "name": "visited_continents", 
-                    "_rowNum": 28, 
+                    "_rowNum": 29, 
                     "type": "select_multiple", 
                     "param": "continents", 
                     "label": "Which continents have you visited?"
@@ -340,7 +366,7 @@
                 {
                     "name": "visited_seattle", 
                     "required": true, 
-                    "_rowNum": 29, 
+                    "_rowNum": 30, 
                     "param": "yesno", 
                     "label": "Have you visited Seattle?", 
                     "type": "select_one", 
@@ -351,7 +377,7 @@
             "condition": "selected(data('examples'), 'screen_group')"
         }, 
         {
-            "_rowNum": 31, 
+            "_rowNum": 32, 
             "type": "goto", 
             "param": "media_end", 
             "condition": "not(selected(data('examples'), 'media'))"
@@ -361,36 +387,36 @@
             "prompts": [
                 {
                     "name": "audio_test", 
-                    "_rowNum": 33, 
+                    "_rowNum": 34, 
                     "type": "audio", 
                     "param": null, 
                     "label": "Make a recording:"
                 }, 
                 {
                     "name": "video_test", 
-                    "_rowNum": 34, 
+                    "_rowNum": 35, 
                     "type": "video", 
                     "param": null, 
                     "label": "Take a video:"
                 }, 
                 {
                     "name": "image_test", 
-                    "_rowNum": 35, 
+                    "_rowNum": 36, 
                     "type": "image", 
                     "param": null, 
                     "label": "Take a picture:"
                 }
             ], 
-            "_rowNum": 32
+            "_rowNum": 33
         }, 
         {
             "type": "label", 
-            "_rowNum": 37, 
+            "_rowNum": 38, 
             "param": "media_end"
         }, 
         {
             "name": "specialTemplateTest", 
-            "_rowNum": 38, 
+            "_rowNum": 39, 
             "param": null, 
             "label": "This is a custom template that uses D3.js:", 
             "type": "text", 
@@ -405,7 +431,7 @@
                 "type": "range", 
                 "min": 1
             }, 
-            "_rowNum": 39, 
+            "_rowNum": 40, 
             "param": null, 
             "label": "How would you rate this survey?", 
             "default": 5, 

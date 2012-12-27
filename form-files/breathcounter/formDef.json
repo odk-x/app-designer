@@ -1,0 +1,43 @@
+{
+    "prompt_types": [
+        {
+            "_rowNum": 2, 
+            "name": "breathcounter", 
+            "schema": {
+                "type": "integer"
+            }
+        }
+    ], 
+    "model": {
+        "breath_count": {
+            "type": "integer"
+        }
+    }, 
+    "survey": [
+        {
+            "name": "breath_count", 
+            "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet.", 
+            "_rowNum": 2, 
+            "type": "breathcounter", 
+            "param": null, 
+            "label": "This breathcounter an example of a custom prompt that launches an intent."
+        }
+    ], 
+    "settings": [
+        {
+            "setting": "form_id", 
+            "_rowNum": 2, 
+            "value": "breathcounter"
+        }, 
+        {
+            "setting": "form_version", 
+            "_rowNum": 3, 
+            "value": 1
+        }, 
+        {
+            "setting": "form_title", 
+            "_rowNum": 4, 
+            "value": "Breathcounter"
+        }
+    ]
+}
