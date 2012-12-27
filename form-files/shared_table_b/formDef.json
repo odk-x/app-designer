@@ -4,11 +4,20 @@
             "elementType": "geopoint", 
             "type": "object", 
             "properties": {
-                "latitude": "number", 
-                "altitude": "number", 
-                "longitude": "number", 
-                "accuracy": "number"
-            }
+                "latitude": {
+                    "type": "number"
+                }, 
+                "altitude": {
+                    "type": "number"
+                }, 
+                "longitude": {
+                    "type": "number"
+                }, 
+                "accuracy": {
+                    "type": "number"
+                }
+            }, 
+            "name": "geopoint"
         }, 
         "refrigerator_condition": {
             "type": "string"
