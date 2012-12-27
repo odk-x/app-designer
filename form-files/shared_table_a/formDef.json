@@ -36,7 +36,7 @@
         {
             "setting": "form_id", 
             "_rowNum": 2, 
-            "value": "refrigerators"
+            "value": "refrigerators_init"
         }, 
         {
             "setting": "table_id", 
