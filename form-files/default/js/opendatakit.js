@@ -190,14 +190,14 @@ return {
     },
     
     /*
-        The default locale is specified by the 'defaultLocale' setting.
+        The default locale is specified by the 'default_locale' setting.
         If this is not present, the first locale in the form_title array
         is used (this likely does not have any bearing to the order 
         of the translations in the XLSForm). Otherwise, if there are no
         form_title translations, then 'default' is returned.
      */
     getDefaultFormLocale:function(formDef) {
-        var locale = this.getSetting(formDef, 'defaultLocale');
+        var locale = this.getSetting(formDef, 'default_locale');
         if ( locale != null ) {
 			return locale;
 		}
