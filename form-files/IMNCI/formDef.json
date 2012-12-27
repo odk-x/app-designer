@@ -664,7 +664,10 @@
                 }, 
                 {
                     "name": "monthsOld", 
-                    "hint": "Please enter only months", 
+                    "hint": {
+                        "default": "Please enter only months", 
+                        "hindi": "केवल महीने दर्ज करें"
+                    }, 
                     "required": true, 
                     "_rowNum": 7, 
                     "param": null, 
@@ -714,11 +717,14 @@
         }, 
         {
             "name": "under_2_months", 
-            "_rowNum": 13, 
-            "required": true, 
             "type": "acknowledge", 
+            "required": true, 
+            "_rowNum": 13, 
             "param": null, 
-            "label": "Protocol does NOT support under 2 months. Please refer the child to a doctor for detailed assessment."
+            "label": {
+                "default": "Protocol does NOT support under 2 months. Please refer the child to a doctor for detailed assessment.", 
+                "hindi": "2 महीने के नीचे प्रोटोकॉल का समर्थन नहीं है.  बच्चे को चिकित्सक के पास लेजाने को कहें"
+            }
         }, 
         {
             "type": "goto", 
@@ -795,7 +801,10 @@
             "param": null, 
             "_rowNum": 25, 
             "comments": "Google translated / CHANGED", 
-            "label": "Record pulse and oxygen saturation"
+            "label": {
+                "default": "Record pulse and oxygen saturation", 
+                "hindi": "रिकॉर्ड करें नाड़ी और ऑक्सीजन  परिपूर्णता"
+            }
         }, 
         {
             "type": "screen", 
@@ -878,11 +887,17 @@
         }, 
         {
             "name": "basic_q", 
-            "hint": "Select all that apply", 
-            "_rowNum": 35, 
+            "hint": {
+                "default": "Select all that apply", 
+                "hindi": "जो भी लागू हो उसे चुनें"
+            }, 
             "type": "select_multiple", 
+            "_rowNum": 35, 
             "param": "basic_four_questions", 
-            "label": "Does the child have:"
+            "label": {
+                "default": "Does the child have:", 
+                "hindi": "बच्चे को क्या है:"
+            }
         }, 
         {
             "name": "how_long_difficulty_breathing", 
@@ -893,7 +908,10 @@
             "required": true, 
             "_rowNum": 37, 
             "param": null, 
-            "label": "For how long has the child had a cough or difficult breathing?", 
+            "label": {
+                "default": "For how long has the child had a cough or difficult breathing?", 
+                "hindi": "कितनी देर के लिए बच्चे को खांसी या साँस लेनें में दिकत हुई?"
+            }, 
             "type": "integer", 
             "condition": "calculates.reportDifficultyBreathing()"
         }, 
@@ -1181,19 +1199,25 @@
             "prompts": [
                 {
                     "name": "malaria_risk", 
-                    "_rowNum": 78, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 78, 
                     "param": "high_low", 
-                    "label": "Decide Malaria Risk"
+                    "label": {
+                        "default": "Decide Malaria Risk", 
+                        "hindi": "मलेरिया जोखिम तय करें"
+                    }
                 }, 
                 {
                     "name": "measles_three_month", 
-                    "_rowNum": 79, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 79, 
                     "param": "yes_no", 
-                    "label": "Has the child had measles within the last 3 months?"
+                    "label": {
+                        "default": "Has the child had measles within the last 3 months?", 
+                        "hindi": "बच्चे को पिछले 3 महीने के भीतर चेचक था?"
+                    }
                 }
             ], 
             "type": "screen", 
@@ -1213,18 +1237,24 @@
                 }, 
                 {
                     "name": "stiff_neck", 
-                    "_rowNum": 84, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 84, 
                     "param": "present", 
-                    "label": "Stiff neck"
+                    "label": {
+                        "default": "Stiff neck", 
+                        "hindi": "अकड़ी गर्दन"
+                    }
                 }, 
                 {
                     "name": "bulging_fontanelle", 
                     "required": true, 
                     "_rowNum": 85, 
                     "comments": "per manoj/amy only ask until 18 months", 
-                    "label": "Bulging fontanelle", 
+                    "label": {
+                        "default": "Bulging fontanelle", 
+                        "hindi": "ब्रह्मारंध्र उभड़ा"
+                    }, 
                     "param": "present", 
                     "type": "select_one", 
                     "condition": "calculates.daysOld() < 30 * 18"
@@ -1240,31 +1270,43 @@
                     "_rowNum": 89, 
                     "type": "note", 
                     "param": null, 
-                    "label": "LOOK for:"
+                    "label": {
+                        "default": "LOOK for:", 
+                        "hindi": "निम्नलिखित पे निशान करे"
+                    }
                 }, 
                 {
                     "name": "rash_generalized", 
-                    "_rowNum": 90, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 90, 
                     "param": "present", 
-                    "label": "Generalized Rash"
+                    "label": {
+                        "default": "Generalized Rash", 
+                        "hindi": "साधारण लाल चकत्ते"
+                    }
                 }, 
                 {
                     "name": "runny_nose", 
-                    "_rowNum": 91, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 91, 
                     "param": "present", 
-                    "label": "Runny nose"
+                    "label": {
+                        "default": "Runny nose", 
+                        "hindi": "नाक बह रही है"
+                    }
                 }, 
                 {
                     "name": "red_eyes", 
-                    "_rowNum": 92, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 92, 
                     "param": "present", 
-                    "label": "Red eyes"
+                    "label": {
+                        "default": "Red eyes", 
+                        "hindi": "लाल आँखें"
+                    }
                 }
             ], 
             "type": "screen", 
@@ -1277,38 +1319,53 @@
                     "_rowNum": 96, 
                     "type": "note", 
                     "param": null, 
-                    "label": "LOOK for:"
+                    "label": {
+                        "default": "LOOK for:", 
+                        "hindi": "निम्नलिखित पे निशान करे"
+                    }
                 }, 
                 {
                     "name": "eye_pus", 
-                    "_rowNum": 97, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 97, 
                     "param": "present", 
-                    "label": "Pus draining from the eye"
+                    "label": {
+                        "default": "Pus draining from the eye", 
+                        "hindi": "आंख से पस बह रही हे"
+                    }
                 }, 
                 {
                     "name": "cornea_clouding", 
-                    "_rowNum": 98, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 98, 
                     "param": "present", 
-                    "label": "Clouding of the cornea"
+                    "label": {
+                        "default": "Clouding of the cornea", 
+                        "hindi": "कॉर्निया के clouding"
+                    }
                 }, 
                 {
                     "name": "mouth_ulcers", 
-                    "_rowNum": 99, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 99, 
                     "param": "present", 
-                    "label": "Mouth ulcers"
+                    "label": {
+                        "default": "Mouth ulcers", 
+                        "hindi": "मुँह में अल्सर"
+                    }
                 }, 
                 {
                     "name": "mouth_ulcers_deep", 
                     "required": true, 
                     "_rowNum": 100, 
                     "param": "yes_no", 
-                    "label": "Are the mouth ulcers deep or extensive?", 
+                    "label": {
+                        "default": "Are the mouth ulcers deep or extensive?", 
+                        "hindi": "मुँह अल्सर गहरा है या लंबा - चौड़ा\n है?"
+                    }, 
                     "type": "select_one", 
                     "condition": "selected(data('mouth_ulcers'), 'present')"
                 }
@@ -1331,26 +1388,35 @@
             "prompts": [
                 {
                     "name": "ear_pain", 
-                    "_rowNum": 110, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 110, 
                     "param": "yes_no", 
-                    "label": "Is there ear pain?"
+                    "label": {
+                        "default": "Is there ear pain?", 
+                        "hindi": "कान में दर्द है?"
+                    }
                 }, 
                 {
                     "name": "ear_discharge_reported", 
-                    "_rowNum": 111, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 111, 
                     "param": "yes_no", 
-                    "label": "Is there ear discharge?"
+                    "label": {
+                        "default": "Is there ear discharge?", 
+                        "hindi": "कान बहतें हेय़"
+                    }
                 }, 
                 {
                     "name": "ear_discharge_days", 
                     "required": true, 
                     "_rowNum": 112, 
                     "param": null, 
-                    "label": "How many days has there been ear discharge?", 
+                    "label": {
+                        "default": "How many days has there been ear discharge?", 
+                        "hindi": "कितने दिनों से कान बह रहे हेंय़"
+                    }, 
                     "type": "integer", 
                     "condition": "selected(data('ear_discharge'), 'yes')"
                 }
@@ -1363,19 +1429,25 @@
             "prompts": [
                 {
                     "name": "ear_discharge_observed", 
-                    "_rowNum": 116, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 116, 
                     "param": "present", 
-                    "label": "Look for pus draining from the ear"
+                    "label": {
+                        "default": "Look for pus draining from the ear", 
+                        "hindi": "कान से पस बहने के लिए देखे"
+                    }
                 }, 
                 {
                     "name": "ear_swelling", 
-                    "_rowNum": 117, 
-                    "required": true, 
                     "type": "select_one", 
+                    "required": true, 
+                    "_rowNum": 117, 
                     "param": "present", 
-                    "label": "Feel for tender swelling behind the ear"
+                    "label": {
+                        "default": "Feel for tender swelling behind the ear", 
+                        "hindi": "कान के पीछे नाज़ुक सूजन के लिए महसूस करे"
+                    }
                 }
             ], 
             "type": "screen", 
@@ -2326,10 +2398,8 @@
                     "hint": "Use clean cloth and water to gently wipe away pus."
                 }, 
                 {
-                    "default": "Wash hands", 
-                    "type": "note", 
-                    "image": "note", 
                     "_rowNum": 61, 
+                    "type": "note", 
                     "param": null, 
                     "label": "Then apply tetracycline eye ointment"
                 }, 
@@ -4982,7 +5052,11 @@
             "type": "string"
         }, 
         "basic_q": {
-            "type": "string"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "cornea_clouding": {
             "type": "string"
@@ -5076,7 +5150,11 @@
             "type": "string"
         }, 
         "other_foods_types": {
-            "type": "string"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "weight": {
             "type": "number"
@@ -5133,7 +5211,11 @@
             "type": "string"
         }, 
         "given_vaccinations": {
-            "type": "string"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "acknowledge_give_IFA_14_days": {
             "type": "boolean"
@@ -5166,7 +5248,11 @@
             "type": "boolean"
         }, 
         "needed_vaccinations": {
-            "type": "string"
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
         }, 
         "pulseox": {
             "type": "object", 

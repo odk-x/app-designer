@@ -68,6 +68,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         required: 'formula',
         validate: 'formula_with_context', // expects calling context arg.
         calculation: 'formula',
+        'default': 'formula',
         assign: 'formula',
         //TODO: Choice filter has some syntax issues to consider.
         //      It would be nice to have a "choice" variable we can refer to directly.
