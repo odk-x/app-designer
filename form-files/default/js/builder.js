@@ -318,6 +318,11 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             }
             afterCustomPromptsLoadAttempt();
         });
+        //This resets the custom css styles to the customStyles.css file in the
+        //current form's directory (or nothing if customStyles.css doesn't exist).
+        $('#custom-styles').attr('href', opendatakit.getCurrentFormPath() + 'customStyles.css');
+        
+        $('body').css("font-size", opendatakit.getSettingValue("font-size"));
     }
 };
 });
