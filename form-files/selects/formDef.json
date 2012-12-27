@@ -1,30 +1,27 @@
 {
     "model": {
-        "i1": {
-            "type": "string"
-        }, 
-        "i3": {
-            "type": "string"
-        }, 
-        "i2": {
-            "type": "string"
-        }, 
-        "city": {
-            "type": "string"
-        }, 
-        "country": {
-            "type": "string"
-        }, 
-        "region": {
-            "type": "string"
-        }, 
         "color": {
             "type": "string"
         }, 
         "state": {
             "type": "string"
         }, 
+        "region": {
+            "type": "string"
+        }, 
         "h_select": {
+            "type": "string"
+        }, 
+        "i1": {
+            "type": "string"
+        }, 
+        "country": {
+            "type": "string"
+        }, 
+        "i3": {
+            "type": "string"
+        }, 
+        "i2": {
             "type": "string"
         }, 
         "bird": {
@@ -38,14 +35,14 @@
         {
             "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []", 
             "_rowNum": 2, 
-            "name": "states", 
+            "name": "countries", 
             "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")"
         }, 
         {
             "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []", 
             "_rowNum": 3, 
-            "name": "cities", 
-            "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('state') + \"'\")"
+            "name": "states", 
+            "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")"
         }, 
         {
             "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n}).value()", 
@@ -68,19 +65,19 @@
     ], 
     "survey": [
         {
-            "name": "state", 
+            "name": "country", 
             "type": "select_one", 
-            "param": "states", 
+            "param": "countries", 
             "_rowNum": 2, 
             "comments": "Cascading select using remote data", 
-            "label": "Choose a state:"
+            "label": "Choose a country:"
         }, 
         {
-            "name": "city", 
+            "name": "state", 
             "_rowNum": 3, 
             "type": "select_one", 
-            "param": "cities", 
-            "label": "Choose a city:"
+            "param": "states", 
+            "label": "Choose a state:"
         }, 
         {
             "_rowNum": 4, 
