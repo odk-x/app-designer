@@ -216,19 +216,19 @@ function execFormChange( idxSubfolder ) {
 						var xmlRootElementName, xmlSubmissionUrl = null, xmlBase64RsaPublicKey = null;
 						for ( var i = 0 ; i < settings.length ; ++i ) {
 							var key = settings[i].setting;
-							if ( key == "formId" ) {
+							if ( key == "form_id" ) {
 								formId = settings[i].value;
-							} else if ( key == "formVersion" ) {
+							} else if ( key == "form_version" ) {
 								formVersion = settings[i].value;
-							} else if ( key == "formTitle" ) {
+							} else if ( key == "form_title" ) {
 								formTitle = settings[i].value;
-							} else if ( key == "xmlRootElementName" ) {
+							} else if ( key == "xml_root_element_name" ) {
 								xmlRootElementName = settings[i].value;
-							} else if ( key == "xmlSubmissionUrl" ) {
+							} else if ( key == "xml_submission_url" ) {
 								xmlSubmissionUrl = settings[i].value;
-							} else if ( key == "xmlBase64RsaPublicKey" ) {
+							} else if ( key == "xml_base64_rsa_public_key" ) {
 								xmlBase64RsaPublicKey = settings[i].value;
-							} else if ( key == "defaultLocale" ) {
+							} else if ( key == "default_locale" ) {
 								defaultLocale = settings[i].value;
 							}
 						}
