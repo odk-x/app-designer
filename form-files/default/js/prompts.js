@@ -53,44 +53,6 @@ promptTypes.base = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    /*
-    // track how many times we've tried to retrieve and compile the 
-    // handlebars template for this prompt.
-    initializeTemplateMaxTryCount: 4,
-    initializeTemplateTryCount: 0,
-    initializeTemplateFailed: false,
-    initializeTemplate: function() {
-        return;
-        
-        //if (this.template != null) return;
-        var that = this;
-        var f = function() {
-            if(that.templatePath){
-                that.initializeTemplateTryCount++;
-                requirejs(['text!'+that.templatePath], function(source) {
-                    that.template = Handlebars.compile(source);
-                }, function(err) {
-                    if ( err.requireType == "timeout" ) {
-                        if ( that.initializeTemplateTryCount >
-                                that.initializeTemplateMaxTryCount ) {
-                            that.initializeTemplateFailed = true;
-                        } else {
-                            setTimeout( f, 100);
-                        }
-                    } else {
-                        that.initializeTemplateFailed = true;
-                    }
-                });
-            }
-        };
-        f();
-        
-    },
-    */
-    //TODO: I think we can remove isInitializeComplete
-    isInitializeComplete: function() {
-        return (this.templatePath == null || this.template != null);
-    },
     initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
         this.renderContext = Object.create(this.renderContext);
@@ -1413,14 +1375,6 @@ promptTypes.screen = promptTypes.base.extend({
         this.initializeRenderContext();
         this.afterInitialize();
     },
-    isInitializeComplete: function() {
-        var i;
-        for ( i = 0 ; i < this.prompts.length; ++i ) {
-            var p = this.prompts[i];
-            if ( !p.isInitializeComplete() ) return false;
-        }
-        return true;
-    },
     getActivePrompts: function(context) {
         var that = this;
         var subPrompts;
@@ -1525,9 +1479,6 @@ promptTypes.screen = promptTypes.base.extend({
 promptTypes.label = promptTypes.base.extend({
     type: "label",
     hideInHierarchy: true,
-    isInitializeComplete: function() {
-        return true;
-    },
     onActivate: function(ctxt){
         alert("label.onActivate: Should never be called!");
         ctxt.failure({message: "Internal error."});
@@ -1536,9 +1487,6 @@ promptTypes.label = promptTypes.base.extend({
 promptTypes.goto = promptTypes.base.extend({
     type: "goto",
     hideInHierarchy: true,
-    isInitializeComplete: function() {
-        return true;
-    },
     onActivate: function(ctxt) {
         alert("goto.onActivate: Should never be called!");
         ctxt.failure({message: "Internal error."});
