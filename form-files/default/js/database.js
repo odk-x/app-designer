@@ -586,7 +586,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
             stmt += '"' + f + '"';
         }
     }
-    stmt += ") select id";
+    stmt += ") select ";
     comma = '';
     for (f in dataTableModel) {
         defElement = dataTableModel[f];
