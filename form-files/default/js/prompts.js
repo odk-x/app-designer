@@ -120,7 +120,7 @@ promptTypes.base = Backbone.View.extend({
         console.log('stopProp');
         console.log(evt);
         evt.stopImmediatePropagation();
-		ctxt.success();
+        ctxt.success();
     },
     afterRender: function() {},
     render: function() {
@@ -234,7 +234,7 @@ promptTypes.base = Backbone.View.extend({
     getValue: function() {
         if (!this.name) {
             console.error("prompts."+that.type+
-				".getValue: Cannot get value of prompt with no name. px: " + this.promptIdx);
+                ".getValue: Cannot get value of prompt with no name. px: " + this.promptIdx);
             throw new Error("Cannot get value of prompt with no name.");
         }
         return database.getDataValue(this.name);
@@ -347,15 +347,15 @@ promptTypes.finalize = promptTypes.base.extend({
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
-				controller.leaveInstance(ctxt);
-			}}),false);
+                controller.leaveInstance(ctxt);
+            }}),false);
     },
     saveFinal: function(evt) {
          var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
-				controller.leaveInstance(ctxt);
-			}}),true);
+                controller.leaveInstance(ctxt);
+            }}),true);
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -377,8 +377,8 @@ promptTypes.instances = promptTypes.base.extend({
     type:"instances",
     hideInHierarchy: true,
     valid: true,
-	saved_finalized_text: 'finalized',
-	saved_incomplete_text: 'incomplete',
+    saved_finalized_text: 'finalized',
+    saved_incomplete_text: 'incomplete',
     templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
@@ -391,15 +391,15 @@ promptTypes.instances = promptTypes.base.extend({
         database.get_all_instances($.extend({},ctxt,{
             success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
-					var saved = term.saved_status;
-					if ( saved == opendatakit.saved_complete ) {
-						term.saved_text = that.saved_finalized_text;
-					} else if ( saved == opendatakit.saved_incomplete ) {
-						term.saved_text = that.saved_incomplete_text;
-					}
-					return term;
-				});
-				
+                    var saved = term.saved_status;
+                    if ( saved == opendatakit.saved_complete ) {
+                        term.saved_text = that.saved_finalized_text;
+                    } else if ( saved == opendatakit.saved_incomplete ) {
+                        term.saved_text = that.saved_incomplete_text;
+                    }
+                    return term;
+                });
+                
                 $.extend(that.renderContext, {
                     form_title: opendatakit.getSettingValue('form_title'),
                     headerImg: opendatakit.baseDir + 'img/form_logo.png'
@@ -553,24 +553,24 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
     },
     generateSaveValue: function(jsonFormSerialization) {
-		var that = this;
+        var that = this;
         var selectedValues;
         if(jsonFormSerialization){
             selectedValues = _.map(jsonFormSerialization, function(valueObject) {
-				if ( valueObject.name === that.name ) {
-					return valueObject.value;
-				}
+                if ( valueObject.name === that.name ) {
+                    return valueObject.value;
+                }
             });
             if(selectedValues && that.withOther) {
                 var otherValue = _find(selectedValues, function(value) {
-						return ('other' === value);
-					});
-				if (otherValue) {
-					var otherObject = _.find(jsonFormSerialization, function(valueObject) {
-						return ('otherValue' === valueObject.name);
-						});
-					selectedValues.push(otherObject.value);
-				}
+                        return ('other' === value);
+                    });
+                if (otherValue) {
+                    var otherObject = _.find(jsonFormSerialization, function(valueObject) {
+                        return ('otherValue' === valueObject.name);
+                        });
+                    selectedValues.push(otherObject.value);
+                }
             }
             return selectedValues;
         }
@@ -606,9 +606,9 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         } else if ( otherChoices.length > 0 ) {
             shim.log('W',"invalid choices are in choices list");
             console.log("invalid choices are in choices list");
-			// do not log choices in production code...
+            // do not log choices in production code...
         }
-		return choiceList;
+        return choiceList;
     },
     modification: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -679,7 +679,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "data": {},
                 "success": successCallback,
                 "error": function(e) {
-					ctxt.append("prompts." + this.type + ".postActivate.error", "px: " + this.promptIdx + " Error fetching choices");
+                    ctxt.append("prompts." + this.type + ".postActivate.error", "px: " + this.promptIdx + " Error fetching choices");
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
                     //the form.
@@ -991,12 +991,18 @@ promptTypes.time = promptTypes.datetime.extend({
         theme: 'jqm',
         display: 'modal'
     },
+	sameTime: function(ref, value) {
+		// these are milliseconds relative to Jan 1 1970...
+		var ref_tod = (ref.valueOf() % 86400000);
+		var value_tod = (value.valueOf() % 86400000);
+		return (ref_tod != value_tod);
+	},
     modification: function(evt) {
         var that = this;
         var value = that.$('input').scroller('getDate');
         var ref = that.getValue();
         var rerender = ((ref == null || value == null) && (ref != value )) ||
-                (ref != null && value != null && ref.valueOf() != value.valueOf());
+                (ref != null && value != null && that.sameTime(ref,value));
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
@@ -1543,8 +1549,8 @@ promptTypes.stop_survey = promptTypes.base.extend({
     type: "stop_survey",
     templatePath: "templates/stop_survey.handlebars",
     hideInHierarchy: true,
-	validate: true,
-	postActivate: function(ctxt) {
+    validate: true,
+    postActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
             this.renderContext.headerImg = formLogo;

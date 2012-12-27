@@ -165,12 +165,10 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                 var idx = value.indexOf(':');
                 hh = Number(value.substring(0,idx));
                 min = Number(value.substr(idx+1,2));
-                sec = Number(value.substr(idx+3,2));
-                msec = Number(value.substr(idx+6,3));
-                zsign = value.substr(idx+10,1);
-                zhh = Number(value.substr(idx+11,2));
-                zmm = Number(value.substr(idx+13,2));
-                value = new Date(Date.UTC(0,0,0,hh,min,sec,msec));
+                sec = Number(value.substr(idx+4,2));
+                msec = Number(value.substr(idx+7,3));
+                value = new Date();
+				value.setHours(hh,min,sec,msec);
                 return value;
             } else {
                 value = JSON.parse(value);
@@ -270,24 +268,26 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                         that._padWithLeadingZeros(msec,3) + 'Z';
                 return value;
             } else if ( jsonType.elementType == 'time' ) {
-                yyyy = value.getUTCFullYear();
-                mm = value.getUTCMonth(); // months are 0-11
-                if ( mm != 0 || yyyy != 1970 ) {
-                    throw new Error("time value is not based upon Jan 1, 1970");
-                }
-                // TODO: this is broken w.r.t. leap years
-                dd = value.getUTCDate();
-                hh = value.getUTCHours() + 24*(dd);
-                min = value.getUTCMinutes();
-                sec = value.getUTCSeconds();
-                msec = value.getUTCMilliseconds();
-                zsign = 'Z';
-                zhh = '';
-                zmm = '';
+				// strip off the time-of-day and drop the rest...
+                hh = value.getHours();
+                min = value.getMinutes();
+                sec = value.getSeconds();
+                msec = value.getMilliseconds();
+				var n = value.getTimezoneOffset();
+				var sign = false;
+				if ( n < 0) {
+					n = -n;
+					sign = true;
+				}
+				zhh = Math.floor(n/60);
+				zmm = n - zhh*60;
+                zsign = (sign ? '+' : '-');
                 value = that._padWithLeadingZeros(hh,2) + ':' +
                         that._padWithLeadingZeros(min,2) + ':' +
                         that._padWithLeadingZeros(sec,2) + '.' +
-                        that._padWithLeadingZeros(msec,3) + 'Z';
+                        that._padWithLeadingZeros(msec,3) + zsign +
+						that._padWithLeadingZeros(zhh,2) +
+						that._padWithLeadingZeros(zmm,2);
                 return value;
             } else if ( !jsonType.properties ) {
                 // this is an opaque BLOB w.r.t. database layer
