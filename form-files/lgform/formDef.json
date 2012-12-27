@@ -1,20 +1,20 @@
 {
     "settings": [
         {
-            "setting": "formId",
+            "setting": "form_id",
             "value": "lgform"
         },
         {
-            "setting": "formVersion"
+            "setting": "form_version"
         },
         {
-            "setting": "formTitle",
+            "setting": "form_title",
             "value": {
                 "en_us": "Short Test Form"
                 }
         },
         {
-            "setting": "formLogo",
+            "setting": "form_logo",
             "value": "img/form_logo.png"
         }
     ],

@@ -27,7 +27,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                      instance_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'instanceName', elementSet: 'instanceMetadata' },
                      locale: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'locale', elementSet: 'instanceMetadata' } },
   tableDefinitionsPredefinedColumns: {
-                    table_id: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'tableId', elementSet: 'tableMetadata' },
+                    table_id: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
                     table_key: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'tableKey', elementSet: 'tableMetadata' },
                     db_table_name: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
                     type: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
@@ -38,7 +38,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                     transactioning: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' } },
   columnDefinitionsTableConstraint: 'PRIMARY KEY ( "table_id", "element_key" )',
   columnDefinitionsPredefinedColumns: {
-                    table_id: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'tableId', elementSet: 'columnMetadata' },
+                    table_id: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'table_id', elementSet: 'columnMetadata' },
                     element_key: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'elementKey', elementSet: 'columnMetadata' },
                     element_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'elementName', elementSet: 'columnMetadata' },
                     element_type: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'columnMetadata' },
@@ -48,7 +48,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                                 type: 'object', 
                                 listChildElementKeys: [],
                                 properties: {
-                                    "table_id": { type: "string", isNotNullable: false, isPersisted: false, elementKey: 'tableId', elementSet: 'columnMetadata' },
+                                    "table_id": { type: "string", isNotNullable: false, isPersisted: false, elementKey: 'table_id', elementSet: 'columnMetadata' },
                                     "element_key": { type: "string", isNotNullable: false, isPersisted: false, elementKey: 'elementKey', elementSet: 'columnMetadata' } } },
                             isNotNullable: false, isPersisted: true, elementPath: 'joins', elementSet: 'columnMetadata' } },
   // key value stores are fairly straightforward...
@@ -809,10 +809,10 @@ _getAllInstancesDataTableStmt:function(dbTableName) {
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-_selectTableDefinitionsDataStmt:function(tableId) {
+_selectTableDefinitionsDataStmt:function(table_id) {
     return {
             stmt : 'select * from table_definitions where table_id=?',
-            bind : [tableId]    
+            bind : [table_id]    
         };
 },
 
@@ -822,24 +822,24 @@ _selectAllTableDbNamesAndIdsDataStmt: function() {
             bind: []
         };
 },
-_selectAllTableMetaDataStmt:function(tableId) {
+_selectAllTableMetaDataStmt:function(table_id) {
     return {
             stmt : 'select key, type, value from key_value_store_active where table_id=? and partition=? and aspect=?',
-            bind : [tableId, "Table", "global"]    
+            bind : [table_id, "Table", "global"]    
         };
 },
 // save the given value under that name
-insertTableMetaDataStmt:function(tableId, name, type, value) {
+insertTableMetaDataStmt:function(table_id, name, type, value) {
     var now = new Date().getTime();
     if (value == null) {
         return {
             stmt : 'insert into key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,"");',
-            bind : [tableId, "Table", "global", name, type]
+            bind : [table_id, "Table", "global", name, type]
         };
     } else {
         return {
             stmt : 'insert into key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,?)',
-            bind : [tableId, "Table", "global", name, type, value]
+            bind : [table_id, "Table", "global", name, type, value]
         };
     }
 },
@@ -857,30 +857,30 @@ insertTableMetaDataStmt:function(tableId, name, type, value) {
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-_selectColumnDefinitionsDataStmt:function(tableId) {
+_selectColumnDefinitionsDataStmt:function(table_id) {
     return {
             stmt : 'select * from column_definitions where table_id=?',
-            bind : [tableId]    
+            bind : [table_id]    
         };
 },
-_selectAllColumnMetaDataStmt:function(tableId) {
+_selectAllColumnMetaDataStmt:function(table_id) {
     return {
             stmt : 'select aspect as element_key, key, type, value from key_value_store_active where table_id=? and partition=?',
-            bind : [tableId, "Column"]    
+            bind : [table_id, "Column"]    
         };
 },
 // save the given value under that name
-insertColumnMetaDataStmt:function(tableId, elementKey, name, type, value) {
+insertColumnMetaDataStmt:function(table_id, elementKey, name, type, value) {
     var now = new Date().getTime();
     if (value == null) {
         return {
             stmt : 'insert into key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,"");',
-            bind : [tableId, "Column", elementKey, name, type]
+            bind : [table_id, "Column", elementKey, name, type]
         };
     } else {
         return {
             stmt : 'insert into key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,?)',
-            bind : [tableId, "Column", elementKey, name, type, value]
+            bind : [table_id, "Column", elementKey, name, type, value]
         };
     }
 },
@@ -1022,7 +1022,7 @@ coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
     var that = this;
     var outcome = true;
     var ss;
-    ss = that._selectTableDefinitionsDataStmt(tlo.tableId);
+    ss = that._selectTableDefinitionsDataStmt(tlo.table_id);
     ctxt.sqlStatement = ss;
     transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
         var len = result.rows.length;
@@ -1030,7 +1030,7 @@ coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
         var row;
         var defn;
         if ( len != 1 ) {
-            throw new Error("Internal error: unknown tableId");
+            throw new Error("Internal error: unknown table_id");
         }
         row = result.rows.item(0);
         for ( f in that.tableDefinitionsPredefinedColumns ) {
@@ -1039,7 +1039,7 @@ coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
                 that._reconstructElementPath(defn.elementPath, defn, row[f], tlo.tableMetadata );
             }
         }
-        ss = that._selectAllTableMetaDataStmt(tlo.tableId);
+        ss = that._selectAllTableMetaDataStmt(tlo.table_id);
         ctxt.sqlStatement = ss;
         transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
             var len = result.rows.length;
@@ -1055,7 +1055,7 @@ coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
                 }
             }
             // read all column definitions...
-            ss = that._selectColumnDefinitionsDataStmt(tlo.tableId);
+            ss = that._selectColumnDefinitionsDataStmt(tlo.table_id);
             ctxt.sqlStatement = ss;
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 var len = result.rows.length;
@@ -1076,7 +1076,7 @@ coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
                     tlo.columnMetadata[defn.elementKey] = defn;
                 }
                 
-                ss = that._selectAllColumnMetaDataStmt(tlo.tableId);
+                ss = that._selectAllColumnMetaDataStmt(tlo.table_id);
                 ctxt.sqlStatement = ss;
                 transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                     var len = result.rows.length;
@@ -1097,9 +1097,9 @@ coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
         });
     });
 },
-getAllTableMetaData:function(ctxt, tableId) {
+getAllTableMetaData:function(ctxt, table_id) {
     var that = this;
-    var tlo = { tableMetadata: {}, columnMetadata: {}, tableId: tableId };
+    var tlo = { tableMetadata: {}, columnMetadata: {}, table_id: table_id };
     ctxt.append('getAllTableMetaData');
     var tmpctxt = $.extend({},ctxt,{success:function() {
                 ctxt.append('getAllTableMetaData.success');
@@ -1109,7 +1109,7 @@ getAllTableMetaData:function(ctxt, tableId) {
             that.coreGetAllTableMetadata(transaction, tmpctxt, tlo);
         });
 },
-cacheAllTableMetaData:function(ctxt, tableId) {
+cacheAllTableMetaData:function(ctxt, table_id) {
     var that = this;
     // pull everything for synchronous read access
     ctxt.append('cacheAllTableMetaData.getAllTableMetaData');
@@ -1126,7 +1126,7 @@ cacheAllTableMetaData:function(ctxt, tableId) {
         mdl.metadata = tlo.metadata;
         mdl.data = tlo.data;
         ctxt.success();
-        }}), tableId);
+        }}), table_id);
 },
 save_all_changes:function(ctxt, asComplete) {
       var that = this;
@@ -1134,7 +1134,7 @@ save_all_changes:function(ctxt, asComplete) {
       ctxt.append('save_all_changes');
       var tmpctxt = $.extend({}, ctxt, {success:function() {
                 ctxt.append('save_all_changes.markCurrentStateSaved.success', 
-                opendatakit.getSettingValue('formId') + " instanceId: " + opendatakit.getCurrentInstanceId() + " asComplete: " + asComplete);
+                opendatakit.getSettingValue('form_id') + " instanceId: " + opendatakit.getCurrentInstanceId() + " asComplete: " + asComplete);
                 ctxt.success();
             }});
       that.withDb( tmpctxt, 
@@ -1247,40 +1247,40 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
         });
     }
 },
-initializeTables:function(ctxt, formDef, tableId, formPath) {
+initializeTables:function(ctxt, formDef, table_id, formPath) {
     var that = this;
     var tlo = {data: {},  // dataTable instance data values
         metadata: {}, // dataTable instance Metadata: (instanceName, locale)
-        tableMetadata: {}, // table_definitions and key_value_store_active values for ("table", "global") of: tableId, tableKey, dbTableName
+        tableMetadata: {}, // table_definitions and key_value_store_active values for ("table", "global") of: table_id, tableKey, dbTableName
         columnMetadata: {},// column_definitions and key_value_store_active values for ("column", elementKey) of: none...
         dataTableModel: {},// inverted and extended formDef.model for representing data store
         formDef: formDef, 
         formPath: formPath, 
         instanceId: null, 
-        tableId: tableId
+        table_id: table_id
         };
                             
     ctxt.append('initializeTables');
     var tmpctxt = $.extend({},ctxt,{success:function() {
                 ctxt.append('getAllTableMetaData.success');
                 // these values come from the current webpage
-                // update tableId and qp
+                // update table_id and qp
                 mdl.formDef = tlo.formDef;
                 mdl.tableMetadata = tlo.tableMetadata;
                 mdl.columnMetadata = tlo.columnMetadata;
                 mdl.data = tlo.data;
-                opendatakit.setCurrentTableId(tableId);
+                opendatakit.setCurrentTableId(table_id);
                 opendatakit.setCurrentFormPath(formPath);
                 ctxt.success();
             }});
     that.withDb(tmpctxt, function(transaction) {
                 // now insert records into these tables...
-                var ss = that._selectTableDefinitionsDataStmt(tableId);
+                var ss = that._selectTableDefinitionsDataStmt(table_id);
                 ctxt.sqlStatement = ss;
                 transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                     var len = result.rows.length;
                     if (len == 0 ) {
-                        // TODO: use something other than formId for the dbTableName...
+                        // TODO: use something other than form_id for the dbTableName...
                         that._insertTableAndColumnProperties(transaction, tmpctxt, tlo, true);
                     } else if(len != 1) {
                         throw new Error("getMetaData: multiple rows! " + name + " count: " + len);
@@ -1424,7 +1424,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...
-    var dbTableName = '_' + opendatakit.getSetting(tlo.formDef, 'formId');
+    var dbTableName = '_' + opendatakit.getSetting(tlo.formDef, 'form_id');
     // dataTableModel holds an inversion of the tlo.formDef.model
     //
     //  elementKey : jsonSchemaType
@@ -1451,7 +1451,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         displayColumnOrder.push(f);
         jsonDefn = that._flattenElementPath( dataTableModel, null, f, null, tlo.formDef.model[f] );
         fullDef.column_definitions.push( {
-            table_id: tlo.tableId,
+            table_id: tlo.table_id,
             element_key: jsonDefn.elementKey,
             element_name: jsonDefn.elementName,
             element_type: (jsonDefn.elementType == null ? jsonDefn.type : jsonDefn.elementType),
@@ -1473,7 +1473,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
             var surveyElementName = jsonDefn.elementName;
             
             fullDef.column_definitions.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 element_key: dbColumnName,
                 element_name: jsonDefn.elementName,
                 element_type: (jsonDefn.elementType == null ? jsonDefn.type : jsonDefn.elementType),
@@ -1482,7 +1482,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 joins: null
             } );
             fullDef.key_value_store_active.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 partition: "Column",
                 aspect: dbColumnName,
                 key: "displayVisible",
@@ -1490,7 +1490,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 value: true
             } );
             fullDef.key_value_store_active.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 partition: "Column",
                 aspect: dbColumnName,
                 key: "displayName",
@@ -1498,7 +1498,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 value: surveyElementName
             } );
             fullDef.key_value_store_active.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 partition: "Column",
                 aspect: dbColumnName,
                 key: "displayChoicesList",
@@ -1506,7 +1506,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 value: ((jsonDefn.choicesList == null) ? null : JSON.stringify(tlo.formDef.choices[jsonDefn.choicesList]))
             } );
             fullDef.key_value_store_active.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 partition: "Column",
                 aspect: dbColumnName,
                 key: "displayFormat",
@@ -1514,7 +1514,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 value: jsonDefn.displayFormat
             } );
             fullDef.key_value_store_active.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 partition: "Column",
                 aspect: dbColumnName,
                 key: "smsIn",
@@ -1522,7 +1522,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 value: true
             } );
             fullDef.key_value_store_active.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 partition: "Column",
                 aspect: dbColumnName,
                 key: "smsOut",
@@ -1530,7 +1530,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 value: true
             } );
             fullDef.key_value_store_active.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 partition: "Column",
                 aspect: dbColumnName,
                 key: "smsLabel",
@@ -1538,7 +1538,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 value: null
             } );
             fullDef.key_value_store_active.push( {
-                table_id: tlo.tableId,
+                table_id: tlo.table_id,
                 partition: "Column",
                 aspect: dbColumnName,
                 key: "footerMode",
@@ -1549,7 +1549,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
     }
 
     fullDef.table_definitions.push( { 
-        table_id: tlo.tableId, 
+        table_id: tlo.table_id, 
         table_key: dbTableName, 
         db_table_name: dbTableName, 
         type: 'data', 
@@ -1560,14 +1560,14 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef.key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'displayName', type: 'string', value: opendatakit.getSetting(tlo.formDef, 'formTitle') } );
-    fullDef.key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'primeCols', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'sortCol', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'coViewSettings', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'detailViewFile', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'summaryDisplayFormat', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'colOrder', type: 'string', value: JSON.stringify(displayColumnOrder) } );
-    fullDef.key_value_store_active.push( { table_id: tlo.tableId, partition: "Table", aspect: "global", key: 'ovViewSettings', type: 'string', value: '' } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "global", key: 'displayName', type: 'string', value: opendatakit.getSetting(tlo.formDef, 'form_title') } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "global", key: 'primeCols', type: 'string', value: '' } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "global", key: 'sortCol', type: 'string', value: '' } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "global", key: 'coViewSettings', type: 'string', value: '' } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "global", key: 'detailViewFile', type: 'string', value: '' } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "global", key: 'summaryDisplayFormat', type: 'string', value: '' } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "global", key: 'colOrder', type: 'string', value: JSON.stringify(displayColumnOrder) } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "global", key: 'ovViewSettings', type: 'string', value: '' } );
 
     // get first property in fullDef -- we use native iteration ordering to step through the properties.
     var tableToUpdate = null;
@@ -1727,13 +1727,13 @@ purge:function(ctxt) {
             var i, row, tableEntry;
             for ( i = 0 ; i < len ; ++i ) {
                 row = result.rows.item(i);
-                tableEntry = { dbTableName: row['db_table_name'], tableId: row['table_id'] };
+                tableEntry = { dbTableName: row['db_table_name'], table_id: row['table_id'] };
                 tableSets.push(tableEntry);
             }
         });
     });
 },
-discoverTableFromTableId:function(ctxt, tableId) {
+discoverTableFromTableId:function(ctxt, table_id) {
 }
 };
 });

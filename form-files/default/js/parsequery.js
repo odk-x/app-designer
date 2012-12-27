@@ -104,27 +104,27 @@ return {
         }
         
         // defined by form definition's settings:
-        var tableId = opendatakit.getSetting(formDef, 'tableId');
-        var formId = opendatakit.getSetting(formDef, 'formId');
-		if ( tableId == null ) {
-			// fallback if there is no tableId defined
-			tableId = formId;
+        var table_id = opendatakit.getSetting(formDef, 'table_id');
+        var form_id = opendatakit.getSetting(formDef, 'form_id');
+		if ( table_id == null ) {
+			// fallback if there is no table_id defined
+			table_id = form_id;
 		}
         
-        if ( tableId == null ) {
-            alert("no tableId specified in Form Definition!");
-            ctxt.failure({message: "No tableId specified in form definition."});
+        if ( table_id == null ) {
+            alert("no table_id specified in Form Definition!");
+            ctxt.failure({message: "No table_id specified in form definition."});
             return;
         }
 
-        // Seems like we would only need to create the KV entries for tableId, and otherwise not need to do anything?
+        // Seems like we would only need to create the KV entries for table_id, and otherwise not need to do anything?
         // E.g., to support multiple forms used within one table.
         
         // we cannot write the instanceMetadata or the tableMetadata yet because the underlying tables may not yet exist.
 
-        // on first starting, the database would not have any tableId, formId or instanceId set...
-        var sameTable = (opendatakit.getCurrentTableId() == tableId);
-        var sameForm = sameTable && (opendatakit.getSettingValue('formId') == formId) && (opendatakit.getCurrentFormPath() == formPath);
+        // on first starting, the database would not have any table_id, form_id or instanceId set...
+        var sameTable = (opendatakit.getCurrentTableId() == table_id);
+        var sameForm = sameTable && (opendatakit.getSettingValue('form_id') == form_id) && (opendatakit.getCurrentFormPath() == formPath);
         var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() == instanceId) && (instanceId != null);
         var qpl = opendatakit.getHashString(formPath, instanceId, pageRef);
 
@@ -134,7 +134,7 @@ return {
             opendatakit.setCurrentInstanceId(null);
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
-				// build table for tableId...
+				// build table for table_id...
 				database.initializeTables($.extend({},ctxt,{success:function() {
 						// data table already exists
 						// build the survey and place it in the controller...
@@ -143,7 +143,7 @@ return {
 								// TODO: load instance...
 								that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
 							});
-					}}), formDef, tableId, formPath);
+					}}), formDef, table_id, formPath);
 			}}), sameForm);
         } else if (!sameForm) {
             opendatakit.setCurrentFormPath(null);
@@ -154,7 +154,7 @@ return {
 				opendatakit.setCurrentFormDef(formDef);
 				opendatakit.setCurrentFormPath(formPath);
 				// currentInstanceId == null
-				// data table already exists (since tableId is unchanged)
+				// data table already exists (since table_id is unchanged)
 				// TODO: parse new form...
 				// TODO: verify instance table exists
 				// TODO: load instance...
@@ -171,8 +171,8 @@ return {
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
 				// currentInstanceId == null
-				// data table already exists (since tableId is unchanged)
-				// form definitions already processed (since formPath and formId unchanged)
+				// data table already exists (since table_id is unchanged)
+				// form definitions already processed (since formPath and form_id unchanged)
 
 				// currentInstanceId == null
 				// TODO: load instance...
@@ -180,8 +180,8 @@ return {
 			}}), sameForm);
         } else {
             // currentInstanceId == valid value
-            // data table already exists (since tableId is unchanged)
-            // form definitions already processed (since formPath and formId unchanged)
+            // data table already exists (since table_id is unchanged)
+            // form definitions already processed (since formPath and form_id unchanged)
 			// same instance -- so just render the UI...
             
             // TODO: change pageRef (presumably)
