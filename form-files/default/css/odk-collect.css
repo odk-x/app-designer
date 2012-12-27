@@ -1,6 +1,6 @@
 body {
     height: 100%;
-    /* This is to disable accidental of highlighting survey text */
+    /* This is to disable accidental highlighting of survey text */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -8,17 +8,21 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
+@media all and (max-width: 340px) {
+    /*
+    This media query prevents spillover in the header.
+    */
+    .odk-header {
+        font-size: .7em;
+    }
+}
 .odk-scroll {
     margin-bottom: 1em;
 }
-/*
-.odk-nav {
-    position: relative;
-    bottom: 59px;
-}
-*/
 /* The long selector is to make sure we clobber the jqm padding styles */
-.ui-page-header-fullscreen .ui-content, .ui-page-footer-fullscreen .ui-content, .odk-container {
+.ui-page-header-fullscreen .ui-content,
+.ui-page-footer-fullscreen .ui-content,
+.odk-container {
     padding: 0;
     padding-left: 1em;
     padding-right: 1em;
@@ -31,10 +35,6 @@ body {
     float: left;
 }
 /*
-.headerNavBtns > a {
-    margin-top:3px;
-}
-
 Orangy glow.
 Eventually we should make a jqm theme for this.
 */
@@ -43,19 +43,17 @@ Eventually we should make a jqm theme for this.
 	-webkit-box-shadow: 0px 0px 12px 		rgb(255, 194, 0);
 	box-shadow: 0px 0px 12px 				rgb(255, 194, 0);
 }
+
 #screenPopup > .message {
     font-weight: bold;
-}
-.strikethrough {
-    text-decoration: line-through;
 }
 
 #block-ui {
     display: none;
     cursor: wait;
     position: absolute;
-    top: 0px;
-    left: 0px;  
+    top: 0;
+    left: 0;  
     width: 100%;
     height: 100%;
     z-index: 1000; 
@@ -63,9 +61,31 @@ Eventually we should make a jqm theme for this.
     opacity: 0.5;
 }
 
+.odk-label {
+    font-size: larger;
+}
+.odk-hint {
+    font-style: italic;
+}
+.inline-label-container {
+    float:left;
+    width:33%;
+}
+.inline-label-container > :first-child {
+    margin-top: .5em;
+}
+
+/* Deselct button styles: */
 .deselect {
     float: right;
 }
+.inline-deselect {
+    /* Add media query for small screens? */
+    margin-top: 0;
+    float:left;
+}
+
+/* Grid select styles: */
 .grid-select-item {
     /*
     The height is a trade-off, we get a better looking regular grid with it set,
@@ -89,24 +109,7 @@ Eventually we should make a jqm theme for this.
 	background-image:      -o-linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/);
 }
-.odk-label {
-    font-size: larger;
-}
-.odk-hint {
-    font-style: italic;
-}
-.inline-label-container {
-    float:left;
-    width:33%;
-}
-.inline-label-container > :first-child {
-    margin-top: .5em;
-}
-.deselect.inline {
-    /* Add media query for small screens? */
-    margin-top: 0;
-    float:left;
-}
+
 .ui-btn-text {
     padding: .5em;
 }
