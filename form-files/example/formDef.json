@@ -415,8 +415,42 @@
             "param": "media_end"
         }, 
         {
-            "name": "specialTemplateTest", 
+            "param": null, 
             "_rowNum": 39, 
+            "type": "note", 
+            "condition": "selected(data('examples'), 'prompt_link')", 
+            "label": "<a href=\"{{promptLink \"unreachable\"}}\">This is a link to another prompt</a>"
+        }, 
+        {
+            "type": "label", 
+            "_rowNum": 40, 
+            "param": "prompt_link_return"
+        }, 
+        {
+            "type": "goto", 
+            "_rowNum": 41, 
+            "param": "unreachable_end"
+        }, 
+        {
+            "name": "unreachable", 
+            "_rowNum": 42, 
+            "type": "note", 
+            "param": null, 
+            "label": "This prompt is unreachable except by links."
+        }, 
+        {
+            "type": "goto", 
+            "_rowNum": 43, 
+            "param": "prompt_link_return"
+        }, 
+        {
+            "type": "label", 
+            "_rowNum": 44, 
+            "param": "unreachable_end"
+        }, 
+        {
+            "name": "specialTemplateTest", 
+            "_rowNum": 45, 
             "param": null, 
             "label": "This is a custom template that uses D3.js:", 
             "type": "text", 
@@ -431,7 +465,7 @@
                 "type": "range", 
                 "min": 1
             }, 
-            "_rowNum": 40, 
+            "_rowNum": 46, 
             "param": null, 
             "label": "How would you rate this survey?", 
             "default": 5, 
@@ -491,6 +525,11 @@
                 "_rowNum": 20, 
                 "name": "custom_template", 
                 "label": "custom template"
+            }, 
+            {
+                "_rowNum": 21, 
+                "name": "prompt_link", 
+                "label": "prompt linking"
             }
         ], 
         "yesno": [
