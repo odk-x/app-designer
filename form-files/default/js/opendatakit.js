@@ -55,7 +55,7 @@ return {
     
     getHashString:function(formPath, instanceId, pageRef) {
         if ( formPath == null ) {
-            formPath = shim.getBaseUrl();
+            formPath = shim.getBaseUrl() + "/";
             return '#formPath=' + escape(formPath);
         }
         var qpl =
