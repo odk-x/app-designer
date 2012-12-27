@@ -1450,15 +1450,6 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
     for ( f in tlo.formDef.model ) {
         displayColumnOrder.push(f);
         jsonDefn = that._flattenElementPath( dataTableModel, null, f, null, tlo.formDef.model[f] );
-        fullDef.column_definitions.push( {
-            table_id: tlo.table_id,
-            element_key: jsonDefn.elementKey,
-            element_name: jsonDefn.elementName,
-            element_type: (jsonDefn.elementType == null ? jsonDefn.type : jsonDefn.elementType),
-            list_child_element_keys : ((jsonDefn.listChildElementKeys == null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
-            is_persisted : jsonDefn.isPersisted,
-            joins: null
-        } );
     }
 
     // and now traverse the dataTableModel making sure all the
@@ -1477,8 +1468,8 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 element_key: dbColumnName,
                 element_name: jsonDefn.elementName,
                 element_type: (jsonDefn.elementType == null ? jsonDefn.type : jsonDefn.elementType),
-                list_child_element_keys : ((jsonDefn.type == 'array') ? jsonDefn.items : jsonDefn.properties),
-                is_persisted : true,
+                list_child_element_keys : ((jsonDefn.listChildElementKeys == null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
+                is_persisted : jsonDefn.isPersisted,
                 joins: null
             } );
             fullDef.key_value_store_active.push( {
