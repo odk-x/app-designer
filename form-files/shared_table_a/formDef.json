@@ -1,0 +1,117 @@
+{
+    "model": {
+        "refrigerator_location": {
+            "elementType": "geopoint", 
+            "type": "object", 
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                }, 
+                "altitude": {
+                    "type": "number"
+                }, 
+                "longitude": {
+                    "type": "number"
+                }, 
+                "accuracy": {
+                    "type": "number"
+                }
+            }, 
+            "name": "geopoint"
+        }, 
+        "refrigerator_condition": {
+            "type": "string"
+        }, 
+        "refrigerator_id": {
+            "type": "string"
+        }, 
+        "refrigerator_stock_level": {
+            "type": "integer"
+        }, 
+        "refrigerator_size": {
+            "type": "number"
+        }
+    }, 
+    "settings": [
+        {
+            "setting": "form_id", 
+            "_rowNum": 2, 
+            "value": "refrigerators"
+        }, 
+        {
+            "setting": "table_id", 
+            "_rowNum": 3, 
+            "value": "refrigerators"
+        }, 
+        {
+            "setting": "form_version", 
+            "_rowNum": 4, 
+            "value": 1
+        }, 
+        {
+            "setting": "form_title", 
+            "_rowNum": 5, 
+            "value": "Initial refrigerator information"
+        }
+    ], 
+    "survey": [
+        {
+            "name": "refrigerator_id", 
+            "_rowNum": 2, 
+            "type": "text", 
+            "param": null, 
+            "label": "Enter refrigerator id:"
+        }, 
+        {
+            "name": "refrigerator_size", 
+            "hint": "cubic meters", 
+            "_rowNum": 3, 
+            "type": "decimal", 
+            "param": null, 
+            "label": "Enter refrigerator size:"
+        }, 
+        {
+            "name": "refrigerator_condition", 
+            "_rowNum": 4, 
+            "type": "select_one", 
+            "param": "conditions", 
+            "label": "Select refrigerator condition:"
+        }, 
+        {
+            "name": "refrigerator_location", 
+            "_rowNum": 5, 
+            "type": "geopoint", 
+            "param": null, 
+            "label": "Capture refrigerator coordinates:"
+        }
+    ], 
+    "choices": {
+        "conditions": [
+            {
+                "_rowNum": 2, 
+                "name": "Excellent", 
+                "label": "Excellent"
+            }, 
+            {
+                "_rowNum": 3, 
+                "name": "Good", 
+                "label": "Good"
+            }, 
+            {
+                "_rowNum": 4, 
+                "name": "Fair", 
+                "label": "Fair"
+            }, 
+            {
+                "_rowNum": 5, 
+                "name": "Poor", 
+                "label": "Poor"
+            }, 
+            {
+                "_rowNum": 6, 
+                "name": "Terrible", 
+                "label": "Terrible"
+            }
+        ]
+    }
+}
