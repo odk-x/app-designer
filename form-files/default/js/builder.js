@@ -322,6 +322,11 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         //current form's directory (or nothing if customStyles.css doesn't exist).
         $('#custom-styles').attr('href', opendatakit.getCurrentFormPath() + 'customStyles.css');
         
+        //Set the jQm theme if one is provided in the settings sheet.
+        $('#theme').attr('href', 'libs/jquery.mobile-1.2.0/themes/' +
+                (opendatakit.getSettingValue("theme") || 'default' ) + '.css');
+        //TODO: Add theme_uri param to package themes with forms?
+        
         $('body').css("font-size", opendatakit.getSettingValue("font-size"));
     }
 };

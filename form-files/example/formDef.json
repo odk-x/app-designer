@@ -177,8 +177,13 @@
         }, 
         {
             "setting": "font-size", 
-            "_rowNum": 4, 
-            "value": "12pt"
+            "_rowNum": 5, 
+            "value": "11pt"
+        }, 
+        {
+            "setting": "theme", 
+            "_rowNum": 6, 
+            "value": "square"
         }
     ], 
     "survey": [
