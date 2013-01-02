@@ -113,6 +113,14 @@ Eventually we should make a jqm theme for this.
 .ui-btn-text {
     padding: .5em;
 }
+
+.odk-formlogo {
+    width: 50%;
+}
+.odk-label-image {
+    width: 100%;
+}
+
 /*
 Below are some font-size resets meant to allow global font-size settings on the body.
 As font size is increased it will cause the header bar overtake the content.
