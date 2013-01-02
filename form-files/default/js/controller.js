@@ -576,24 +576,24 @@ window.controller = {
         // ctxt is only passed in for logging purposes.
         ctxt.append('controller.reset');
         this.clearPromptHistory();
-        if ( this.screenManager != null ) {
-            this.screenManager.cleanUpScreenManager(ctxt);
-        } else {
-            ctxt.append('controller.reset.newScreenManager');
-            this.screenManager = new ScreenManager({controller: this});
-        }
         this.currentPromptIdx = -1;
         if ( !sameForm ) {
             this.prompts = [];
             this.calcs = [];
         }
-        // and execute an async callback to continue the reset
-        // this forces a refresh of the DOM prior to continuing, 
-        // ensuring that the page is changed to 'Please wait...'
-        // early.
-        setTimeout(function() {
-            ctxt.success();
-            }, 100);
+        if ( this.screenManager != null ) {
+            // this asynchronously calls ctxt.success()...
+            this.screenManager.cleanUpScreenManager(ctxt);
+        } else {
+            ctxt.append('controller.reset.newScreenManager');
+            this.screenManager = new ScreenManager({controller: this});
+            // and execute an async callback to continue the reset
+            // this maintains the same async sequencing as the 
+            // more common non-null case above.
+            setTimeout(function() {
+                ctxt.success();
+                }, 100);
+        }
     },
     // fatalError -- it is OK for the ctxt argument to be undefined
     fatalError: function(ctxt) {

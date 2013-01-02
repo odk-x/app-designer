@@ -51,6 +51,11 @@ var logfileName = null;
 var terminalOutcome = 0; // 0 - unknown, 1 = success, -1 = failure
 var logContainsError = 0; // count the occurances of 'rror' in output
 	
+// needed for recursive structures...
+var instanceBody = '';
+var bindBody = '';
+var bodyBody = '';
+
 function init() { 
 	var X=800;
 	var Y=800;
@@ -167,6 +172,64 @@ function continueWaitingForCompletion() {
 		}
 	}
 }
+	
+function buildFormStructures( instanceBodyPrefix, bindPrefix, bodyPrefix, model ) { 
+	var enames = [];
+	var i, element, defn;
+	var contentType, bindPrefix2, bodyPrefix2; 
+	for ( element in model ) {
+		enames.push(element);
+	}
+	enames.sort();
+	for ( i = 0 ; i < enames.length ; ++i ) {
+		element = enames[i];
+		wlog("element: " + element);
+		defn = model[element];
+		
+		if ( defn.type == "string" ) {
+			instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+			bindBody += bindPrefix + element + '" type="string"/>\n';
+		} else if ( defn.type == "integer" ) {
+			instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+			bindBody += bindPrefix + element + '" type="int"/>\n';
+		} else if ( defn.type == "number" ) {
+			instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+			bindBody += bindPrefix + element + '" type="decimal"/>\n';
+		} else if ( defn.type == "array" ) {
+			instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+			bindBody += bindPrefix + element + '" type="select"/>\n';
+		} else if ( defn.type == "object" ) {
+			if ( defn.elementType == "date" ) {
+				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+				bindBody += bindPrefix + element + '" type="date"/>\n';
+			} else if ( defn.elementType == "datetime" ) {
+				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+				bindBody += bindPrefix + element + '" type="datetime"/>\n';
+			} else if ( defn.elementType == "time" ) {
+				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+				bindBody += bindPrefix + element + '" type="time"/>\n';
+			} else if ( defn.elementType == "geopoint" ) {
+				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+				bindBody += bindPrefix + element + '" type="geopoint"/>\n';
+			} else if ( defn.elementType == "mimeUri" ) {
+				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+				contentType = defn.properties.contentType['default'];
+				bindBody += bindPrefix + element + '" type="binary"/>\n';
+				bodyBody += '<upload ref="' + bodyPrefix + element + '" mediatype="' + contentType + '"><label>Dummy</label></upload>\n';
+			} else if ( defn.isPersisted ) {
+				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+				bindBody += bindPrefix + element + '" type="string"/>\n';
+			} else {
+				// it is a recursive structure
+				bindPrefix2 = bindPrefix + element + '/';
+				bodyPrefix2 = bodyPrefix + element + '/';
+				instanceBody = instanceBody + instanceBodyPrefix + element + '>\n';
+				buildFormStructures( '  ' + instanceBodyPrefix, bindPrefix2, bodyPrefix2, defn.properties );
+				instanceBody = instanceBody + instanceBodyPrefix + '/' + element + '>\n';
+			}
+		}
+	}
+}
 
 function execFormChange( idxSubfolder ) {
 	
@@ -214,6 +277,7 @@ function execFormChange( idxSubfolder ) {
 						var settings = jsonDef.settings;
 						var formId, formVersion = null, formTitle, defaultLocale = null;
 						var xmlRootElementName, xmlSubmissionUrl = null, xmlBase64RsaPublicKey = null;
+						var xmlDeviceIdPropertyName = null, xmlUserIdPropertyName = null;
 						for ( var i = 0 ; i < settings.length ; ++i ) {
 							var key = settings[i].setting;
 							if ( key == "form_id" ) {
@@ -228,6 +292,10 @@ function execFormChange( idxSubfolder ) {
 								xmlSubmissionUrl = settings[i].value;
 							} else if ( key == "xml_base64_rsa_public_key" ) {
 								xmlBase64RsaPublicKey = settings[i].value;
+							} else if ( key == "xml_device_id_property_name" ) {
+								xmlDeviceIdPropertyName = settings[i].value;
+							} else if ( key == "xml_user_id_property_name" ) {
+								xmlUserIdPropertyName = settings[i].value;
 							} else if ( key == "default_locale" ) {
 								defaultLocale = settings[i].value;
 							}
@@ -261,6 +329,8 @@ function execFormChange( idxSubfolder ) {
 						// 
 						// Now we can generate the XML form...
 						
+						// TODO: encrypted forms need the encrypted-form-stub definition...
+						
 						var file;
 						// create empty output file
 						file = fso.CreateTextFile(xmlName,true);
@@ -279,48 +349,35 @@ function execFormChange( idxSubfolder ) {
 										((formVersion==null)?'"':('" version="'+formVersion+'"')) + '>\n'+
 								'        <orx:meta>\n'+
 								'          <orx:instanceID/>\n'+
-								((xmlBase64RsaPublicKey == null) ? '' : 
-								'          <orx:base64EncryptedFieldKey/>\n') +
+								((xmlDeviceIdPropertyName == null) ? '' : 
+								'          <orx:deviceID/>\n') +
+								((xmlUserIdPropertyName == null) ? '' : 
+								'          <orx:userID/>\n') +
+								'          <orx:timeEnd/>\n' +
+								'          <instanceName/>\n' +
+								'          <saved/>\n' +
 								'        </orx:meta>');
-						var instanceBody = "\n";
-						var bindBody = "";
-						var bodyBody = "";
+						instanceBody = "\n";
+						bindBody = "";
+						bodyBody = "";
 						var bindPrefix = '    <bind nodeset="/' + xmlRootElementName + '/';
+						var instanceBodyPrefix = '        <';
 						
 						wlog("before model analysis");
 						
-						bindBody += bindPrefix + 'meta/instanceID" type="string" readonly="true()" calculate="concat(\'uuid:\', uuid())"/>\n';
-						if (xmlBase64RsaPublicKey != null) {
-							bindBody += bindPrefix + 'meta/base64EncryptedFieldKey" type="string" odk:length="2048"  base64RsaPublicKey="' + xmlBase64RsaPublicKey + '" />\n';
+						bindBody += bindPrefix + 'meta/instanceID" type="string"/>\n';
+						if ( xmlDeviceIdPropertyName != null) {
+							bindBody += bindPrefix + 'meta/deviceID" type="string"/>\n';
 						}
+						if ( xmlUserIdPropertyName != null) {
+							bindBody += bindPrefix + 'meta/userID" type="string"/>\n';
+						}
+						bindBody += bindPrefix + 'meta/timeEnd" type="datetime"/>\n';
+						bindBody += bindPrefix + 'meta/instanceName" type="string"/>\n';
+						bindBody += bindPrefix + 'meta/saved" type="string"/>\n';
+						
 						var model = jsonDef.model;
-						for ( var element in model ) {
-							
-							wlog("element: " + element);
-							var defn = model[element];
-							
-							instanceBody = instanceBody + '        <' + element + '/>\n';
-							
-							if ( defn.type == "string" ) {
-								bindBody += bindPrefix + element + '" type="string"/>\n';
-							} else if ( defn.type == "integer" ) {
-								bindBody += bindPrefix + element + '" type="int"/>\n';
-							} else if ( defn.type == "number" ) {
-								bindBody += bindPrefix + element + '" type="decimal"/>\n';
-							} else if ( defn.type == "image/*" ) {
-								bindBody += bindPrefix + element + '" type="binary"/>\n';
-								bodyBody += '<upload ref="' + element + '" mediatype="image/*"><label>Dummy</label></upload>\n';
-							} else if ( defn.type == "audio/*" ) {
-								bindBody += bindPrefix + element + '" type="binary"/>\n';
-								bodyBody += '<upload ref="' + element + '" mediatype="audio/*"><label>Dummy</label></upload>\n';
-							} else if ( defn.type == "video/*" ) {
-								bindBody += bindPrefix + element + '" type="binary"/>\n';
-								bodyBody += '<upload ref="' + element + '" mediatype="video/*"><label>Dummy</label></upload>\n';
-							} else {
-								// TODO: handle multiselect types...
-								bindBody += bindPrefix + element + '" type="string"/>\n';
-							}
-						}
+						buildFormStructures( instanceBodyPrefix, bindPrefix, '', model );
 						file.Write(instanceBody +
 								'      </'+xmlRootElementName+'> \n'+
 								'    </instance> \n');
