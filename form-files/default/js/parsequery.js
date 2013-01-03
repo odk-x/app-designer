@@ -132,6 +132,7 @@ return {
             opendatakit.setCurrentTableId(null);
             opendatakit.setCurrentFormPath(null);
             opendatakit.setCurrentInstanceId(null);
+			shim.setPageRef(pageRef);
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
 				// build table for table_id...
@@ -148,6 +149,7 @@ return {
         } else if (!sameForm) {
             opendatakit.setCurrentFormPath(null);
             opendatakit.setCurrentInstanceId(null);
+            shim.setPageRef(pageRef);
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
 				// preserve values from the Tables metadata but override form info...
@@ -168,6 +170,7 @@ return {
 			}}), sameForm);
         } else  if (!sameInstance) {
             opendatakit.setCurrentInstanceId(null);
+            shim.setPageRef(pageRef);
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
 				// currentInstanceId == null
@@ -179,6 +182,7 @@ return {
 				that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
 			}}), sameForm);
         } else {
+            shim.setPageRef(pageRef);
             // currentInstanceId == valid value
             // data table already exists (since table_id is unchanged)
             // form definitions already processed (since formPath and form_id unchanged)
