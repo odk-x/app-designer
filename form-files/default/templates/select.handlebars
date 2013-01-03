@@ -43,8 +43,10 @@
             {{/each}}
             </div><!-- /grid-b -->
         {{#unless required}}
+            {{#if false}}
             {{#if deselect}}
                 <a data-role="button" data-mini="true" class="deselect">{{localize deselect}}</a>
+            {{/if}}
             {{/if}}
         {{/unless}}
         <div style="clear:both;"></div>
@@ -91,9 +93,11 @@
             {{/each}}
         </fieldset>
         {{#unless required}}
+            {{#if false}}
             {{#if deselect}}
                 <div style="clear:both;"></div>
                 <a data-role="button" data-mini="true" class="deselect inline-deselect">{{localize deselect}}</a>
+            {{/if}}
             {{/if}}
         {{/unless}}
         <div style="clear:both;"></div>
@@ -175,8 +179,10 @@
             {{/if}}
         </fieldset>
         {{#unless required}}
+            {{#if false}}
             {{#if deselect}}
                 <a data-role="button" data-mini="true" class="deselect">{{localize deselect}}</a>
+            {{/if}}
             {{/if}}
         {{/unless}}
         <div style="clear:both;"></div>

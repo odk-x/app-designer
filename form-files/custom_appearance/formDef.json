@@ -1,0 +1,156 @@
+{
+    "model": {
+        "visited_seattle": {
+            "type": "string"
+        }, 
+        "visited_continents": {
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "name": {
+            "type": "string"
+        }, 
+        "rating": {
+            "type": "integer"
+        }
+    }, 
+    "settings": [
+        {
+            "setting": "form_id", 
+            "_rowNum": 2, 
+            "value": "customAppearance"
+        }, 
+        {
+            "setting": "form_version", 
+            "_rowNum": 3, 
+            "value": 1
+        }, 
+        {
+            "setting": "form_title", 
+            "_rowNum": 4, 
+            "value": "Custom Appearance Form"
+        }, 
+        {
+            "setting": "font-size", 
+            "_rowNum": 5, 
+            "value": "11pt"
+        }, 
+        {
+            "setting": "theme", 
+            "_rowNum": 6, 
+            "value": "square"
+        }
+    ], 
+    "survey": [
+        {
+            "_rowNum": 2, 
+            "type": "note", 
+            "param": null, 
+            "label": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+        }, 
+        {
+            "type": "screen", 
+            "prompts": [
+                {
+                    "name": "name", 
+                    "_rowNum": 4, 
+                    "type": "text", 
+                    "param": null, 
+                    "label": "Enter your name"
+                }, 
+                {
+                    "name": "visited_continents", 
+                    "_rowNum": 5, 
+                    "type": "select_multiple", 
+                    "param": "continents", 
+                    "label": "Which continents have you visited?"
+                }
+            ], 
+            "_rowNum": 3
+        }, 
+        {
+            "name": "visited_seattle", 
+            "required": true, 
+            "_rowNum": 7, 
+            "param": "yesno", 
+            "label": "Have you visited Seattle?", 
+            "type": "select_one", 
+            "condition": "selected(data('visited_continents'), 'NorthAmerica')"
+        }, 
+        {
+            "type": "note", 
+            "image": "dolphin.png", 
+            "_rowNum": 8, 
+            "param": null, 
+            "label": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed."
+        }, 
+        {
+            "name": "rating", 
+            "hint": "1 is very bad. 10 is very good.", 
+            "inputAttributes": {
+                "max": 10, 
+                "type": "range", 
+                "min": 1
+            }, 
+            "_rowNum": 9, 
+            "param": null, 
+            "label": "How would you rate this survey?", 
+            "default": 5, 
+            "type": "integer"
+        }
+    ], 
+    "choices": {
+        "yesno": [
+            {
+                "_rowNum": 2, 
+                "name": "yes", 
+                "label": "yes"
+            }, 
+            {
+                "_rowNum": 3, 
+                "name": "no", 
+                "label": "no"
+            }
+        ], 
+        "continents": [
+            {
+                "_rowNum": 4, 
+                "name": "NorthAmerica", 
+                "label": "North America"
+            }, 
+            {
+                "_rowNum": 5, 
+                "name": "SouthAmerica", 
+                "label": "South America"
+            }, 
+            {
+                "_rowNum": 6, 
+                "name": "Europe", 
+                "label": "Europe"
+            }, 
+            {
+                "_rowNum": 7, 
+                "name": "Africa", 
+                "label": "Africa"
+            }, 
+            {
+                "_rowNum": 8, 
+                "name": "Asia", 
+                "label": "Asia"
+            }, 
+            {
+                "_rowNum": 9, 
+                "name": "Australia", 
+                "label": "Australia"
+            }, 
+            {
+                "_rowNum": 10, 
+                "name": "Antarctica", 
+                "label": "Antarctica"
+            }
+        ]
+    }
+}

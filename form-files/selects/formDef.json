@@ -1,27 +1,30 @@
 {
     "model": {
+        "smartphone": {
+            "type": "string"
+        }, 
         "color": {
             "type": "string"
         }, 
-        "state": {
+        "laptop": {
             "type": "string"
         }, 
-        "region": {
-            "type": "string"
-        }, 
-        "h_select": {
-            "type": "string"
-        }, 
-        "i1": {
+        "tablet": {
             "type": "string"
         }, 
         "country": {
             "type": "string"
         }, 
-        "i3": {
+        "region": {
             "type": "string"
         }, 
-        "i2": {
+        "desktop": {
+            "type": "string"
+        }, 
+        "state": {
+            "type": "string"
+        }, 
+        "h_select": {
             "type": "string"
         }, 
         "bird": {
@@ -57,7 +60,7 @@
             "uri": "\"regions.csv\""
         }, 
         {
-            "callback": "[context]", 
+            "callback": "context", 
             "_rowNum": 6, 
             "name": "content_provider_test", 
             "uri": "\"content://org.opendatakit.FileContentProviderExample/\""
@@ -112,35 +115,49 @@
             "type": "screen", 
             "prompts": [
                 {
-                    "appearance": "inline", 
-                    "name": "i1", 
                     "_rowNum": 10, 
-                    "type": "select_one", 
-                    "param": "yes_no", 
-                    "label": "Choose one:"
+                    "type": "note", 
+                    "param": null, 
+                    "label": "Which devices do you use?"
                 }, 
                 {
                     "appearance": "inline", 
-                    "name": "i2", 
+                    "name": "desktop", 
                     "_rowNum": 11, 
                     "type": "select_one", 
                     "param": "yes_no", 
-                    "label": "Choose one:"
+                    "label": "Desktop computer"
                 }, 
                 {
                     "appearance": "inline", 
-                    "name": "i3", 
+                    "name": "laptop", 
                     "_rowNum": 12, 
                     "type": "select_one", 
                     "param": "yes_no", 
-                    "label": "Choose one:"
+                    "label": "Laptop computer"
+                }, 
+                {
+                    "appearance": "inline", 
+                    "name": "smartphone", 
+                    "_rowNum": 13, 
+                    "type": "select_one", 
+                    "param": "yes_no", 
+                    "label": "Smartphone"
+                }, 
+                {
+                    "appearance": "inline", 
+                    "name": "tablet", 
+                    "_rowNum": 14, 
+                    "type": "select_one", 
+                    "param": "yes_no", 
+                    "label": "Tablet"
                 }
             ], 
             "_rowNum": 9
         }, 
         {
             "name": "color", 
-            "_rowNum": 14, 
+            "_rowNum": 16, 
             "type": "select_one_with_other", 
             "param": "colors", 
             "label": "What is your favorite color?"
@@ -149,7 +166,7 @@
             "condition": "selected(data('color'), 'teal')", 
             "type": "note", 
             "param": null, 
-            "_rowNum": 15, 
+            "_rowNum": 17, 
             "comments": "selected function with arguement not included in choices.", 
             "label": "Teal is a good choice."
         }, 
@@ -158,14 +175,14 @@
             "inputAttributes": {
                 "data-type": "horizontal"
             }, 
-            "_rowNum": 16, 
+            "_rowNum": 18, 
             "type": "select_one", 
             "param": "yes_no", 
             "label": "Horizontal select example."
         }, 
         {
             "name": "region", 
-            "_rowNum": 17, 
+            "_rowNum": 19, 
             "type": "select_one", 
             "param": "regions_csv", 
             "label": "Choose a region:"
@@ -174,7 +191,7 @@
             "name": "country", 
             "choice_filter": "context.region === data('region')", 
             "appearance": "dropdown", 
-            "_rowNum": 18, 
+            "_rowNum": 20, 
             "param": "countries_csv", 
             "label": "Choose a country:", 
             "type": "select_one"
@@ -182,10 +199,11 @@
         {
             "name": "cp_test", 
             "hint": "You will need to install a content provider app for the query to work. There is an example app available here: https://github.com/nathanathan/FileContentProviderExample", 
-            "_rowNum": 19, 
-            "type": "select_one", 
+            "_rowNum": 21, 
             "param": "content_provider_test", 
-            "label": "This demos a content provider query."
+            "label": "This demos a content provider query.", 
+            "type": "select_one", 
+            "condition": false
         }
     ], 
     "settings": [

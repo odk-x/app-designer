@@ -174,16 +174,6 @@
             "setting": "form_title", 
             "_rowNum": 4, 
             "value": "Example Form"
-        }, 
-        {
-            "setting": "font-size", 
-            "_rowNum": 5, 
-            "value": "11pt"
-        }, 
-        {
-            "setting": "theme", 
-            "_rowNum": 6, 
-            "value": "square"
         }
     ], 
     "survey": [
@@ -265,24 +255,9 @@
             "condition": "not(selected(data('examples'), 'label_features'))"
         }, 
         {
-            "name": "name", 
-            "hint": "Please use your full name", 
-            "_rowNum": 14, 
-            "type": "text", 
-            "param": null, 
-            "label": "Enter your name"
-        }, 
-        {
-            "hint": "Handlebars templates allow labels to change depending on the values previously entered.", 
-            "type": "note", 
-            "_rowNum": 15, 
-            "param": null, 
-            "label": "{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}\nThis label is a handlesbars template."
-        }, 
-        {
             "hint": "So can <b>hints</b>", 
             "type": "note", 
-            "_rowNum": 16, 
+            "_rowNum": 14, 
             "param": null, 
             "label": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>"
         }, 
@@ -290,9 +265,24 @@
             "type": "note", 
             "image": "img/dolphin.png", 
             "audio": "audio/carrioncrow.mp3", 
-            "_rowNum": 17, 
+            "_rowNum": 15, 
             "param": null, 
             "label": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns."
+        }, 
+        {
+            "name": "name", 
+            "hint": "It will be used in the next question.", 
+            "_rowNum": 16, 
+            "type": "text", 
+            "param": null, 
+            "label": "Enter your name"
+        }, 
+        {
+            "hint": "Handlebars templates allow labels to change depending on the values previously entered.", 
+            "type": "note", 
+            "_rowNum": 17, 
+            "param": null, 
+            "label": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}"
         }, 
         {
             "type": "label", 
@@ -331,9 +321,10 @@
         }, 
         {
             "param": null, 
+            "hint": "This prompt shows how to use dates in fomulas.", 
             "_rowNum": 23, 
             "type": "note", 
-            "condition": "data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
+            "condition": "data('born') && data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
             "label": "Happy Birthday!"
         }, 
         {
@@ -341,7 +332,7 @@
             "_rowNum": 24, 
             "type": "time", 
             "param": null, 
-            "label": "What time is it?"
+            "label": "What time do you usually wake up?"
         }, 
         {
             "name": "datetime", 
