@@ -23,11 +23,14 @@
         "name": {
             "type": "string"
         }, 
+        "weight": {
+            "type": "number"
+        }, 
         "avg_coffee": {
             "type": "integer"
         }, 
-        "specialTemplateTest": {
-            "type": "string"
+        "rating": {
+            "type": "integer"
         }, 
         "coffee_today": {
             "type": "integer"
@@ -50,9 +53,6 @@
                     "type": "number"
                 }
             }
-        }, 
-        "rating": {
-            "type": "integer"
         }, 
         "image_test": {
             "isPersisted": true, 
@@ -127,6 +127,9 @@
                     "type": "string"
                 }
             }
+        }, 
+        "age": {
+            "type": "integer"
         }, 
         "visited_continents": {
             "isPersisted": true, 
@@ -450,13 +453,36 @@
             "param": "unreachable_end"
         }, 
         {
-            "name": "specialTemplateTest", 
             "_rowNum": 45, 
+            "prompts": [
+                {
+                    "name": "age", 
+                    "constraint_message": "The grown chart only has data for below 20 years. This age you entered will not fit on the plot.", 
+                    "constraint": "data('age') <= 20", 
+                    "_rowNum": 46, 
+                    "param": null, 
+                    "label": "Enter age:", 
+                    "type": "integer"
+                }, 
+                {
+                    "name": "weight", 
+                    "_rowNum": 47, 
+                    "type": "decimal", 
+                    "param": null, 
+                    "label": "Enter weight:"
+                }
+            ], 
+            "type": "screen", 
+            "condition": "selected(data('examples'), 'custom_template')"
+        }, 
+        {
+            "name": "specialTemplateTest", 
+            "_rowNum": 49, 
             "param": null, 
-            "label": "This is a custom template that uses D3.js:", 
-            "type": "text", 
+            "label": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:", 
+            "type": "note", 
             "condition": "selected(data('examples'), 'custom_template')", 
-            "templatePath": "test.handlebars"
+            "templatePath": "ageWeightPlot.handlebars"
         }, 
         {
             "name": "rating", 
@@ -466,7 +492,7 @@
                 "type": "range", 
                 "min": 1
             }, 
-            "_rowNum": 46, 
+            "_rowNum": 50, 
             "param": null, 
             "label": "How would you rate this survey?", 
             "default": 5, 

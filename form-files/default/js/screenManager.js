@@ -156,6 +156,9 @@ return Backbone.View.extend({
         }));
     },
     gotoNextScreen: function(evt) {
+        this.currentPageEl.css('opacity', '.5');
+        //var transitionStart = new Date();
+        
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.gotoNextScreen', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
@@ -176,6 +179,11 @@ return Backbone.View.extend({
                 success:function(){
                     that.swipeEnabled = true; 
                     ctxt.success();
+                    /*
+                    setTimeout(function(){
+                        alert(new Date() - transitionStart);
+                    }, 0);
+                    */
                 },failure:function(m){
                     that.swipeEnabled = true; 
                     ctxt.failure(m);
@@ -183,6 +191,7 @@ return Backbone.View.extend({
         return false;
     },
     gotoPreviousScreen: function(evt) {
+        this.currentPageEl.css('opacity', '.5');
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.gotoPreviousScreen', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
