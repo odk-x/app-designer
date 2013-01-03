@@ -32,15 +32,15 @@ return {
      */
     _parseQueryHelper:function(instanceMetadataKeyValueMap, key, value) {
         if ( key == 'formPath' ) {
-			return;
-		}
+            return;
+        }
         if ( key == 'instanceId' ) {
-			return;
-		}
+            return;
+        }
         if ( key == 'pageRef' ) {
-			return;
-		}
-		instanceMetadataKeyValueMap[key] = value;
+            return;
+        }
+        instanceMetadataKeyValueMap[key] = value;
     },
     _prepAndSwitchUI:function( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap ) {
         var that = this;
@@ -55,6 +55,7 @@ return {
                         ctxt.success();
                         // triggers hash-change listener...
                 } else {
+                        shim.setPageRef(pageRef);
                         // fire the controller to render the first page.
                         ctxt.append("parsequery._effectChange.gotoRef." + (sameInstance ? "sameForm" : "differentForm"),
                                     "gotoRef("+pageRef+") ms: " + (+new Date()));
@@ -106,10 +107,10 @@ return {
         // defined by form definition's settings:
         var table_id = opendatakit.getSetting(formDef, 'table_id');
         var form_id = opendatakit.getSetting(formDef, 'form_id');
-		if ( table_id == null ) {
-			// fallback if there is no table_id defined
-			table_id = form_id;
-		}
+        if ( table_id == null ) {
+            // fallback if there is no table_id defined
+            table_id = form_id;
+        }
         
         if ( table_id == null ) {
             alert("no table_id specified in Form Definition!");
@@ -132,61 +133,58 @@ return {
             opendatakit.setCurrentTableId(null);
             opendatakit.setCurrentFormPath(null);
             opendatakit.setCurrentInstanceId(null);
-			shim.setPageRef(pageRef);
+            shim.setPageRef(null);
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
-				// build table for table_id...
-				database.initializeTables($.extend({},ctxt,{success:function() {
-						// data table already exists
-						// build the survey and place it in the controller...
-						that.builder.buildSurvey(formDef, function() {
-								// currentInstanceId == null
-								// TODO: load instance...
-								that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
-							});
-					}}), formDef, table_id, formPath);
-			}}), sameForm);
+                // build table for table_id...
+                database.initializeTables($.extend({},ctxt,{success:function() {
+                        // data table already exists
+                        // build the survey and place it in the controller...
+                        that.builder.buildSurvey(formDef, function() {
+                                // currentInstanceId == null
+                                // TODO: load instance...
+                                that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+                            });
+                    }}), formDef, table_id, formPath);
+            }}), sameForm);
         } else if (!sameForm) {
             opendatakit.setCurrentFormPath(null);
             opendatakit.setCurrentInstanceId(null);
-            shim.setPageRef(pageRef);
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
-				// preserve values from the Tables metadata but override form info...
-				opendatakit.setCurrentFormDef(formDef);
-				opendatakit.setCurrentFormPath(formPath);
-				// currentInstanceId == null
-				// data table already exists (since table_id is unchanged)
-				// TODO: parse new form...
-				// TODO: verify instance table exists
-				// TODO: load instance...
-				
-				// build the survey and place it in the controller...
-				that.builder.buildSurvey(formDef, function() {
-							// currentInstanceId == null
-							// TODO: load instance...
-							that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
-				});
-			}}), sameForm);
+                // preserve values from the Tables metadata but override form info...
+                opendatakit.setCurrentFormDef(formDef);
+                opendatakit.setCurrentFormPath(formPath);
+                // currentInstanceId == null
+                // data table already exists (since table_id is unchanged)
+                // TODO: parse new form...
+                // TODO: verify instance table exists
+                // TODO: load instance...
+                
+                // build the survey and place it in the controller...
+                that.builder.buildSurvey(formDef, function() {
+                            // currentInstanceId == null
+                            // TODO: load instance...
+                            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+                });
+            }}), sameForm);
         } else  if (!sameInstance) {
             opendatakit.setCurrentInstanceId(null);
-            shim.setPageRef(pageRef);
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
-				// currentInstanceId == null
-				// data table already exists (since table_id is unchanged)
-				// form definitions already processed (since formPath and form_id unchanged)
+                // currentInstanceId == null
+                // data table already exists (since table_id is unchanged)
+                // form definitions already processed (since formPath and form_id unchanged)
 
-				// currentInstanceId == null
-				// TODO: load instance...
-				that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
-			}}), sameForm);
+                // currentInstanceId == null
+                // TODO: load instance...
+                that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+            }}), sameForm);
         } else {
-            shim.setPageRef(pageRef);
             // currentInstanceId == valid value
             // data table already exists (since table_id is unchanged)
             // form definitions already processed (since formPath and form_id unchanged)
-			// same instance -- so just render the UI...
+            // same instance -- so just render the UI...
             
             // TODO: change pageRef (presumably)
             that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
@@ -236,55 +234,55 @@ return {
             instanceId = null;
             pageRef = null;
         }
-		
-		var formDef = opendatakit.getCurrentFormDef();
-		var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);
+        
+        var formDef = opendatakit.getCurrentFormDef();
+        var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);
         var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() == instanceId) && (instanceId != null);
         
         // fetch the form definition (defered processing)
         var filename = formPath + 'formDef.json';
-		
-		if ( !sameForm ) {
-			// force a 'Please wait...' to display before we try to read the formDef file...
-		    that.controller.reset($.extend({},ctxt, {success:function() {
-				that._parseFormDefFile(ctxt, formPath, instanceId, pageRef, instanceMetadataKeyValueMap, filename);
-			}}), false );
-		} else {
-			try {
-				that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
-										instanceId, pageRef, instanceMetadataKeyValueMap);
-			} catch (ex) {
-				console.error('parsequery.parseParameters.continuationException' + String(ex));
-				ctxt.append('parsequery.parseParameters.continuationException',  'unknown error: ' + ex);
-				ctxt.failure({message: "Exception while processing form definition."});
-			}
-		}
+        
+        if ( !sameForm ) {
+            // force a 'Please wait...' to display before we try to read the formDef file...
+            that.controller.reset($.extend({},ctxt, {success:function() {
+                that._parseFormDefFile(ctxt, formPath, instanceId, pageRef, instanceMetadataKeyValueMap, filename);
+            }}), false );
+        } else {
+            try {
+                that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
+                                        instanceId, pageRef, instanceMetadataKeyValueMap);
+            } catch (ex) {
+                console.error('parsequery.parseParameters.continuationException' + String(ex));
+                ctxt.append('parsequery.parseParameters.continuationException',  'unknown error: ' + ex);
+                ctxt.failure({message: "Exception while processing form definition."});
+            }
+        }
     },
-	/**
-	 * What actually reads in and loads the formDef file (and then parses the query parameters against it).
-	 */
-	_parseFormDefFile: function(ctxt, formPath, instanceId, pageRef, instanceMetadataKeyValueMap, filename) {
-		var that = this;
+    /**
+     * What actually reads in and loads the formDef file (and then parses the query parameters against it).
+     */
+    _parseFormDefFile: function(ctxt, formPath, instanceId, pageRef, instanceMetadataKeyValueMap, filename) {
+        var that = this;
         requirejs(['text!' + filename], 
             function(formDefTxt) {
                 if ( formDefTxt == null || formDefTxt.length == 0 ) {
                     alert('Unable to find file: ' + filename);
                     ctxt.failure({message: "Form definition is empty."});
                 } else {
-					var formDef;
+                    var formDef;
                     try {
                         formDef = JSON.parse(formDefTxt);
                     } catch (ex) {
-						console.error('parsequery.parseParameters.requirejs.JSONexception' + String(ex));
+                        console.error('parsequery.parseParameters.requirejs.JSONexception' + String(ex));
                         ctxt.append('parsequery.parseParameters.requirejs.JSONexception',  'JSON parsing error: ' + ex);
                         ctxt.failure({message: "Exception while processing form definition."});
-						return;
+                        return;
                     }
                     try {
                         that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
                                                 instanceId, pageRef, instanceMetadataKeyValueMap);
                     } catch (ex) {
-						console.error('parsequery.parseParameters.requirejs.continuationException' + String(ex));
+                        console.error('parsequery.parseParameters.requirejs.continuationException' + String(ex));
                         ctxt.append('parsequery.parseParameters.requirejs.continuationException',  'formDef interpetation or database setup error: ' + ex);
                         ctxt.failure({message: "Exception while processing form definition."});
                     }
@@ -294,7 +292,7 @@ return {
                 ctxt.failure({message: "Failure while reading form definition."});
             }
         );
-	},
+    },
     /**
      * Bound to the 'hashchange' event.
      *
@@ -311,7 +309,7 @@ return {
      */
     hashChangeHandler:function(evt) {
         var that = this;
-		var qpl;
+        var qpl;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('parsequery.hashChangeHandler');
         evt.stopPropagation();
@@ -351,6 +349,7 @@ return {
             ctxt.append('parsequery.hashChangeHandler', "window.location.hash="+window.location.hash);
             that.parseParameters(ctxt);
         } else if ( pageRef != null && pageRef != "") {
+            shim.setPageRef(pageRef);
             ctxt.append('parsequery.hashChangeHandler.gotoRef', "window.location.hash="+window.location.hash);
             that.controller.gotoRef(ctxt, pageRef);
         } else {
