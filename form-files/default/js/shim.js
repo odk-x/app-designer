@@ -6,6 +6,8 @@ It will be replaced by one injected by Android Java code.
 */
 window.shim = window.shim || {
     instanceId: null,
+	pageRef: null,
+	auxillaryHash: null,
     getBaseUrl: function() {
         return '../default';
     },
@@ -25,6 +27,12 @@ window.shim = window.shim || {
         // needed so that callbacks, etc. can properly track the instanceId 
         // currently being worked on.
         this.instanceId = instanceId;
+    },
+    setPageRef: function(pageRef) {
+        // report the new pageRef to ODK Survey...
+        // needed so that the WebKit can be restored to the same state upon
+		// orientation change and after intent completions.
+        this.pageRef = pageRef;
     },
 	/*
 	 * severity - one of 'E' (error), 'W' (warn), 'S' (success), 'I' (info), 'D' (debug), 'T' (trace)

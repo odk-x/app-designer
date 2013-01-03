@@ -375,6 +375,7 @@ window.controller = {
         return null;
     },
     setPrompt: function(ctxt, prompt, passedInOptions){
+        var that = this;
         var options;
         ctxt.append('controller.setPrompt', "nextPx: " + prompt.promptIdx);
 
@@ -403,7 +404,12 @@ window.controller = {
             }
         }
         this.currentPromptIdx = prompt.promptIdx;
-        this.screenManager.setPrompt(ctxt, prompt, options);
+        this.screenManager.setPrompt($.extend({},ctxt,{
+            success: function() {
+                ctxt.success();
+                // and flush any pending doAction callback
+                landing.setController(that);
+            }}), prompt, options);
         // the prompt should never be changed at this point!!!
         if ( this.currentPromptIdx != prompt.promptIdx ) {
             console.error("controller.setPrompt: prompt index changed -- assumption violation!!!");
