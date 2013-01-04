@@ -322,10 +322,21 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         //current form's directory (or nothing if customStyles.css doesn't exist).
         $('#custom-styles').attr('href', opendatakit.getCurrentFormPath() + 'customStyles.css');
         
-        //Set the jQm theme if one is provided in the settings sheet.
-        $('#theme').attr('href', 'libs/jquery.mobile-1.2.0/themes/' +
-                (opendatakit.getSettingValue("theme") || 'default' ) + '.css');
-        //TODO: Add theme_uri param to package themes with forms?
+        //Do an ajax request to see if there is a custom theme packaged with the form:
+        var customTheme = opendatakit.getCurrentFormPath() + 'customTheme.css';
+        $.ajax({
+            url: customTheme,
+            success: function() {
+                $('#theme').attr('href', customTheme);
+            },
+            error: function() {
+                console.log("No custom theme.");
+                //Set the jQm theme to the defualt theme, or if there is a 
+                //predefined theme specified in the settings sheet, use that.
+                $('#theme').attr('href', 'libs/jquery.mobile-1.2.0/themes/' +
+                        (opendatakit.getSettingValue("theme") || 'default' ) + '.css');
+            }
+        });
         
         $('body').css("font-size", opendatakit.getSettingValue("font-size"));
     }

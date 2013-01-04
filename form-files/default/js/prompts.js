@@ -785,14 +785,6 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
         "swipeleft .input-container": "stopPropagation",
         "swiperight .input-container": "stopPropagation"
     },
-    //a debounced function will postpone execution until after wait (parameter 2)
-    //milliseconds have elapsed since the last time it was invoked.
-    //Useful for sliders.
-    //It might be better to listen for the jQm event for when a slider is released.
-    //This could cause problems since the debounced function could fire after a page change.
-    debouncedRender: _.debounce(function() {
-        this.render();
-    }, 500),
     //This has to be debounced for the slider to work.
     //However, debouncing might cause an event ordering problem in screen groups
     //if a select is clicked to unfocus an input box.
@@ -806,17 +798,17 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
             success: function() {
                 renderContext.value = value;
                 renderContext.invalid = !that.validateValue();
-                that.debouncedRender();
+                that.render();
                 ctxt.success();
             },
             failure: function(m) {
                 renderContext.value = value;
                 renderContext.invalid = true;
-                that.debouncedRender();
+                that.render();
                 ctxt.failure(m);
             }
         }), (value.length === 0 ? null : value));
-    }, 500),
+    }),
     postActivate: function(ctxt) {
         var renderContext = this.renderContext;
         var value = this.getValue();

@@ -156,7 +156,7 @@ return Backbone.View.extend({
         }));
     },
     gotoNextScreen: function(evt) {
-        this.currentPageEl.css('opacity', '.5');
+        this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
         //var transitionStart = new Date();
         
         var that = this;
@@ -191,7 +191,7 @@ return Backbone.View.extend({
         return false;
     },
     gotoPreviousScreen: function(evt) {
-        this.currentPageEl.css('opacity', '.5');
+        this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.gotoPreviousScreen', ((that.prompt != null) ? ("px: " + that.prompt.promptIdx) : "no current prompt"));
