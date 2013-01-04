@@ -288,7 +288,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             that.form.prompts = that.initializePrompts(prompts);
             controller.prompts = that.form.prompts;
             console.log('builder.buildSurvey: starting form processing continuation');
-            continuation();
+            continuation(that.form);
         };
         //This tries to load any user defined prompt types provided in customPromptTypes.js.
         //TODO: The approach to getting the current form path might need to change.

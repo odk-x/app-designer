@@ -1585,12 +1585,5 @@ promptTypes.with_next_validate = promptTypes.base.extend({
 });
 promptTypes.error = promptTypes.base;
 
-//Ensure all prompt type names are lowercase.
-//TODO: Move to a test suite.
-_.each(_.keys(promptTypes), function(promptTypeName){
-    if(promptTypeName !== promptTypeName.toLowerCase()) {
-        alert("Invalid prompt type name: " + promptTypeName);
-    }
-});
-
+return promptTypes;
 });
