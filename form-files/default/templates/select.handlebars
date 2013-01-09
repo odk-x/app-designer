@@ -169,11 +169,13 @@
                         />
                         <label for="other">
                             Other:
+                            {{#if other.checked}}
                             <input
                                 name="otherValue"
                                 value="{{other.value}}"
                                 style="height:36px;position:initial;"
                                 />
+                            {{/if}}
                         </label>
                 </label>
             {{/if}}

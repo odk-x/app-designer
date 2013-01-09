@@ -1,8 +1,12 @@
 <div>
-    <h1 style="float:left;">{{localize form_title}}</h1>
+    <h1 style="float:left;">
+    {{localize form_title}}
     {{#if form_version}}
-        <p style="float:left;">version:{{form_version}}</p>
+        <span style="vertical-align: super; font-size:.5em; font-weight:normal;">
+        version:{{form_version}}
+        </span>
     {{/if}}
+    </h1>
     <div style="clear:both"></div>
     <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
     <a class="createInstance" data-role="button" data-icon="new" data-iconpos="top">Create new instance</a>

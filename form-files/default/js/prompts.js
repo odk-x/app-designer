@@ -808,7 +808,7 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
                 ctxt.failure(m);
             }
         }), (value.length === 0 ? null : value));
-    }),
+    }, 500),
     postActivate: function(ctxt) {
         var renderContext = this.renderContext;
         var value = this.getValue();
