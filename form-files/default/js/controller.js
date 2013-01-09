@@ -110,7 +110,7 @@ window.controller = {
      *
      * return that renderable screen prompt.
      */
-    advanceToScreenPrompt: function(ctxt, prompt) {
+    advanceToScreenPromptHelper: function(ctxt, prompt) {
         var nextPrompt = null;
         var that = this;
         try {
@@ -132,33 +132,39 @@ window.controller = {
                 }
             }
         } catch (e) {
-            console.error("controller.advanceToScreenPrompt.exception.strict px: " +
+            console.error("controller.advanceToScreenPromptHelper.exception.strict px: " +
                             that.promptIdx + ' exception: ' + String(e));
-            ctxt.failure({message: "Possible goto loop or error in condition expression. See console log."});
+            ctxt.failure({message: "Error in condition expression. See console log."});
             return;
             /*
             if ( ctxt.strict ) {
-                console.error("controller.advanceToScreenPrompt.exception.strict px: " +
+                console.error("controller.advanceToScreenPromptHelper.exception.strict px: " +
                                 that.promptIdx + ' exception: ' + String(e));
                 ctxt.failure({message: "Exception while evaluating condition() expression. See console log."});
                 return;
             } else {
-                //If there is a goto loop this  will freeze the browser by catching
-                //stack overflows then triggering new ones.
-                //And if there is an error in the form's branching logic,
-                //I can't think of a case where you wouldn't want to make it known.
-                console.log("controller.advanceToScreenPrompt.exception.ignored px: " +
+                console.log("controller.advanceToScreenPromptHelper.exception.ignored px: " +
                                 that.promptIdx + ' exception: ' + String(e));
-                ctxt.append("controller.advanceToScreenPrompt.exception.ignored", String(e));
+                ctxt.append("controller.advanceToScreenPromptHelper.exception.ignored", String(e));
                 nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
             }
             */
         }
         
         if(nextPrompt) {
-            that.advanceToScreenPrompt(ctxt, nextPrompt);
+            that.advanceToScreenPromptHelper(ctxt, nextPrompt);
         } else {
             ctxt.success(prompt);
+        }
+    },
+    advanceToScreenPrompt: function(ctxt, prompt) {
+        try {
+            return this.advanceToScreenPromptHelper(ctxt, prompt);
+        } catch (e) {
+            console.error("controller.advanceToScreenPrompt.exception: " + String(e));
+            ctxt.failure({
+                message: "Possible goto loop."
+            });
         }
     },
     validateQuestionHelper: function(ctxt, promptCandidate, stopAtPromptIdx) {
@@ -330,6 +336,11 @@ window.controller = {
                                                 that.gotoRef(ctxt,"0");
                                             }}));
                                 }
+                        },
+                        failure: function(m) {
+                            ctxt.append("gotoNextScreen.advanceToScreenPrompt.failure", "px: " +  that.currentPromptIdx);
+                            that.screenManager.showScreenPopup(m); 
+                            ctxt.failure(m);
                         }}), promptCandidate);
                     },
                     failure: function(m) {
