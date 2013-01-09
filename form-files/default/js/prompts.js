@@ -929,14 +929,14 @@ promptTypes.datetime = promptTypes.input_type.extend({
             success: function() {
                 renderContext.invalid = !that.validateValue();
                 if ( rerender ) {
-                    that.debouncedRender();
+                    that.render();
                 }
                 ctxt.success();
             },
             failure: function(m) {
                 renderContext.invalid = true;
                 if ( rerender ) {
-                    that.debouncedRender();
+                    that.render();
                 }
                 ctxt.failure(m);
             }
@@ -952,10 +952,9 @@ promptTypes.datetime = promptTypes.input_type.extend({
         that.$el.trigger('create');
         */
         if(this.useMobiscroll){
-                that.$('input').scroller(that.scrollerAttributes);
+            that.$('input').scroller(that.scrollerAttributes);
             var value = that.getValue();
             if ( value == null ) {
-                that.$('input').val
                 that.$('input').scroller('setDate',new Date(),false);
             } else {
                 that.$('input').scroller('setDate',value, true);
@@ -1007,14 +1006,14 @@ promptTypes.time = promptTypes.datetime.extend({
             success: function() {
                 renderContext.invalid = !that.validateValue();
                 if ( rerender ) {
-                    that.debouncedRender();
+                    that.render();
                 }
                 ctxt.success();
             },
             failure: function(m) {
                 renderContext.invalid = true;
                 if ( rerender ) {
-                    that.debouncedRender();
+                    that.render();
                 }
                 ctxt.failure(m);
             }
