@@ -302,9 +302,9 @@ promptTypes.opening = promptTypes.base.extend({
         ctxt.success({enableBackwardNavigation: false});
     },
     renderContext: {
-        headerImg: opendatakit.baseDir + 'img/form_logo.png',
-        backupImg: opendatakit.baseDir + 'img/backup.png',
-        advanceImg: opendatakit.baseDir + 'img/advance.png'
+        headerImg: requirejs.toUrl('img/form_logo.png'),
+        backupImg: requirejs.toUrl('img/backup.png'),
+        advanceImg: requirejs.toUrl('img/advance.png')
     },
     //Events copied from input_type, should probably refactor.
     events: {
@@ -333,7 +333,7 @@ promptTypes.finalize = promptTypes.base.extend({
         "click .finalize": "saveFinal"
     },
     renderContext: {
-        headerImg: opendatakit.baseDir + 'img/form_logo.png'
+        headerImg: requirejs.toUrl('img/form_logo.png')
     },
     postActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.
@@ -402,7 +402,7 @@ promptTypes.instances = promptTypes.base.extend({
                 
                 $.extend(that.renderContext, {
                     form_title: opendatakit.getSettingValue('form_title'),
-                    headerImg: opendatakit.baseDir + 'img/form_logo.png'
+                    headerImg: requirejs.toUrl('img/form_logo.png')
                 });
                 ctxt.success({
                     showHeader: false,
@@ -785,12 +785,24 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
         "swipeleft .input-container": "stopPropagation",
         "swiperight .input-container": "stopPropagation"
     },
-    //This has to be debounced for the slider to work.
-    //However, debouncing might cause an event ordering problem in screen groups
-    //if a select is clicked to unfocus an input box.
-    modification: _.debounce(function(evt) {
+    //DebouncedRender throttles rerendering so that sliders work.
+    debouncedRender: _.debounce(function() {
+        this.render();
+    }, 500),
+    modification: function(evt) {
         var value = $(evt.target).val();
         var that = this;
+        if ( that.insideMutex ) {
+            console.log("event received while inside mutex");
+            return;
+        }
+        if ( that.lastEventTimestamp == evt.timeStamp ) {
+            console.log("duplicate event ignored");
+            return;
+        }
+        that.lastEventTimestamp = evt.timeStamp;
+        console.log("event being processed");
+        that.insideMutex = true;
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
@@ -798,17 +810,19 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
             success: function() {
                 renderContext.value = value;
                 renderContext.invalid = !that.validateValue();
-                that.render();
+                that.insideMutex = false;
+                that.debouncedRender();
                 ctxt.success();
             },
             failure: function(m) {
                 renderContext.value = value;
                 renderContext.invalid = true;
-                that.render();
+                that.insideMutex = false;
+                that.debouncedRender();
                 ctxt.failure(m);
             }
         }), (value.length === 0 ? null : value));
-    }, 500),
+    },
     postActivate: function(ctxt) {
         var renderContext = this.renderContext;
         var value = this.getValue();

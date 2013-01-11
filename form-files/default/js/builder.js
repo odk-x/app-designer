@@ -333,8 +333,8 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 console.log("No custom theme.");
                 //Set the jQm theme to the defualt theme, or if there is a 
                 //predefined theme specified in the settings sheet, use that.
-                $('#theme').attr('href', 'libs/jquery.mobile-1.2.0/themes/' +
-                        (opendatakit.getSettingValue("theme") || 'default' ) + '.css');
+                $('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.2.0/themes/' +
+                        (opendatakit.getSettingValue("theme") || 'default' ) + '.css'));
             }
         });
         
