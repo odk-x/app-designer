@@ -1,5 +1,68 @@
 {
     "model": {
+        "rating": {
+            "type": "integer"
+        }, 
+        "weight": {
+            "type": "number"
+        }, 
+        "avg_coffee": {
+            "type": "integer"
+        }, 
+        "coffee_today": {
+            "type": "integer"
+        }, 
+        "sex": {
+            "type": "string"
+        }, 
+        "image_test": {
+            "isPersisted": true, 
+            "elementType": "mimeUri", 
+            "type": "object", 
+            "properties": {
+                "contentType": {
+                    "default": "image/*", 
+                    "type": "string"
+                }, 
+                "uri": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "born": {
+            "elementType": "date", 
+            "type": "object"
+        }, 
+        "examples": {
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "location": {
+            "elementType": "geopoint", 
+            "type": "object", 
+            "name": "geopoint", 
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                }, 
+                "altitude": {
+                    "type": "number"
+                }, 
+                "longitude": {
+                    "type": "number"
+                }, 
+                "accuracy": {
+                    "type": "number"
+                }
+            }
+        }, 
+        "time": {
+            "elementType": "time", 
+            "type": "object"
+        }, 
         "picture": {
             "isPersisted": true, 
             "elementType": "mimeUri", 
@@ -17,22 +80,24 @@
         "barcode": {
             "type": "string"
         }, 
+        "datetime": {
+            "elementType": "dateTime", 
+            "type": "object"
+        }, 
+        "visited_continents": {
+            "isPersisted": true, 
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
         "visited_seattle": {
             "type": "string"
         }, 
         "name": {
             "type": "string"
         }, 
-        "weight": {
-            "type": "number"
-        }, 
-        "avg_coffee": {
-            "type": "integer"
-        }, 
-        "rating": {
-            "type": "integer"
-        }, 
-        "coffee_today": {
+        "age": {
             "type": "integer"
         }, 
         "geopoint": {
@@ -54,24 +119,6 @@
                 }
             }
         }, 
-        "image_test": {
-            "isPersisted": true, 
-            "elementType": "mimeUri", 
-            "type": "object", 
-            "properties": {
-                "contentType": {
-                    "default": "image/*", 
-                    "type": "string"
-                }, 
-                "uri": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "datetime": {
-            "elementType": "dateTime", 
-            "type": "object"
-        }, 
         "recording": {
             "isPersisted": true, 
             "elementType": "mimeUri", 
@@ -85,10 +132,6 @@
                     "type": "string"
                 }
             }
-        }, 
-        "born": {
-            "elementType": "date", 
-            "type": "object"
         }, 
         "audio_test": {
             "isPersisted": true, 
@@ -104,13 +147,6 @@
                 }
             }
         }, 
-        "examples": {
-            "isPersisted": true, 
-            "items": {
-                "type": "string"
-            }, 
-            "type": "array"
-        }, 
         "error": {
             "type": "string"
         }, 
@@ -125,39 +161,6 @@
                 }, 
                 "uri": {
                     "type": "string"
-                }
-            }
-        }, 
-        "age": {
-            "type": "integer"
-        }, 
-        "visited_continents": {
-            "isPersisted": true, 
-            "items": {
-                "type": "string"
-            }, 
-            "type": "array"
-        }, 
-        "time": {
-            "elementType": "time", 
-            "type": "object"
-        }, 
-        "location": {
-            "elementType": "geopoint", 
-            "type": "object", 
-            "name": "geopoint", 
-            "properties": {
-                "latitude": {
-                    "type": "number"
-                }, 
-                "altitude": {
-                    "type": "number"
-                }, 
-                "longitude": {
-                    "type": "number"
-                }, 
-                "accuracy": {
-                    "type": "number"
                 }
             }
         }
@@ -456,20 +459,34 @@
             "_rowNum": 45, 
             "prompts": [
                 {
+                    "_rowNum": 46, 
+                    "type": "note", 
+                    "param": null, 
+                    "label": "The following data will be used to generate a weight for age plot."
+                }, 
+                {
                     "name": "age", 
                     "constraint_message": "The grown chart only has data for below 20 years. This age you entered will not fit on the plot.", 
+                    "hint": "Must be less than 20.", 
                     "constraint": "data('age') <= 20", 
-                    "_rowNum": 46, 
+                    "_rowNum": 47, 
                     "param": null, 
-                    "label": "Enter age:", 
+                    "label": "Enter age (in years):", 
                     "type": "integer"
                 }, 
                 {
                     "name": "weight", 
-                    "_rowNum": 47, 
+                    "_rowNum": 48, 
                     "type": "decimal", 
                     "param": null, 
-                    "label": "Enter weight:"
+                    "label": "Enter weight (in lbs):"
+                }, 
+                {
+                    "name": "sex", 
+                    "_rowNum": 49, 
+                    "type": "select_one", 
+                    "param": "sexes", 
+                    "label": "Enter sex:"
                 }
             ], 
             "type": "screen", 
@@ -477,7 +494,7 @@
         }, 
         {
             "name": "specialTemplateTest", 
-            "_rowNum": 49, 
+            "_rowNum": 51, 
             "param": null, 
             "label": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:", 
             "type": "note", 
@@ -492,7 +509,7 @@
                 "type": "range", 
                 "min": 1
             }, 
-            "_rowNum": 50, 
+            "_rowNum": 52, 
             "param": null, 
             "label": "How would you rate this survey?", 
             "default": 5, 
@@ -557,6 +574,18 @@
                 "_rowNum": 21, 
                 "name": "prompt_link", 
                 "label": "prompt linking"
+            }
+        ], 
+        "sexes": [
+            {
+                "_rowNum": 23, 
+                "name": "male", 
+                "label": "male"
+            }, 
+            {
+                "_rowNum": 24, 
+                "name": "female", 
+                "label": "female"
             }
         ], 
         "yesno": [
