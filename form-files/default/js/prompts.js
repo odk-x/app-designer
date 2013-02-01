@@ -494,7 +494,8 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         "change select": "modification",
         //Only needed for child views
         "click .deselect": "deselect",
-        "click .grid-select-item": "selectGridItem"
+        "click .grid-select-item": "selectGridItem",
+        "taphold .ui-radio": "deselect"
     },
     selectGridItem: function(evt) {
         var $target = $(evt.target).closest('.grid-select-item');
