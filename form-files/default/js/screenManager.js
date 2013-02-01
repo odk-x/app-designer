@@ -89,10 +89,12 @@ return Backbone.View.extend({
             jqmAttrs = {};
         }
         var that = this;
+        var locales = that.controller.getFormLocales();
         that.renderContext = {
             form_title: opendatakit.getSettingValue('form_title'),
             instanceName: prompt.database.getInstanceMetaDataValue('instanceName'),
-            locales: that.controller.getFormLocales(),
+            locales: locales,
+            hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
             enableForwardNavigation: true,

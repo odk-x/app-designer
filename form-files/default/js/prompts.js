@@ -292,14 +292,14 @@ promptTypes.opening = promptTypes.base.extend({
             database.setInstanceMetaData($.extend({}, ctxt, {
                 success: function() {
                     ctxt.success({
-                        enableBackwardNavigation: false
+                        enableBackNavigation: false
                     });
                 }
             }), 'instanceName', instanceName);
             return;
         }
         that.renderContext.instanceName = instanceName;
-        ctxt.success({enableBackwardNavigation: false});
+        ctxt.success({enableBackNavigation: false});
     },
     renderContext: {
         headerImg: requirejs.toUrl('img/form_logo.png'),

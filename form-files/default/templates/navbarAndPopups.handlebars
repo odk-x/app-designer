@@ -3,11 +3,10 @@
         <div class="odk-header" data-role="header" data-theme="c" data-position="fixed">
             <div class="odk-options-btn"><a data-role="button" data-inline="true">Survey</a></div>
             <div class="headerNavBtns">
-                {{#if enableBackNavigation}}
-                    <a class="odk-prev-btn
-                    {{#unless enableBackNavigation}}ui-disabled{{/unless}}"
-                    data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">back</a>
-                {{/if}}
+
+                <a class="odk-prev-btn
+                {{#unless enableBackNavigation}}ui-disabled{{/unless}}"
+                data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">back</a>
                 
                 <a class="odk-next-btn
                 {{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
@@ -47,7 +46,12 @@
     {{! If it turns out to be a problem we can dynamically construct the popups when they are opened.}}
     <div data-role="popup" data-theme="d" data-overlay-theme="d" id="optionsPopup">
         <ul data-role="listview" data-inset="true" data-theme="d">
-			<li><a data-rel="popup" class="languageMenu">Language</a></li>
+            
+			<li><a data-rel="popup"
+                class="languageMenu
+                {{#unless hasTranslations}}ui-disabled{{/unless}}">
+                Language
+                </a></li>
 			<li><a href="{{promptLink "_hierarchy"}}" data-rel="popup">Hierarchy</a></li>
 			<li><a data-rel="popup" class="ignore-changes-and-exit">Ignore Changes + Exit</a></li>
 			<li><a data-rel="popup" class="save-incomplete-and-exit">Save Changes + Exit</a></li>
