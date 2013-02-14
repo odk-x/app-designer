@@ -1547,7 +1547,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         table_id_access_controls: null, 
         sync_tag: "", 
         last_sync_time: -1, 
-        sync_state: 'REST', 
+        sync_state: 'rest', 
         transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
