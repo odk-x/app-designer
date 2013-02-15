@@ -1560,7 +1560,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'displayName', type: 'string', value: opendatakit.getSetting(tlo.formDef, 'form_title') } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'displayName', type: 'string', value: JSON.stringify(opendatakit.getSetting(tlo.formDef, 'form_title')) } );
     fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'primeCols', type: 'string', value: '' } );
     fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'sortCol', type: 'string', value: '' } );
     fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'coViewSettings', type: 'string', value: '' } );
