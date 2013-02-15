@@ -27,14 +27,11 @@
 
 .dot {
     fill: none;
-    stroke: #000;
+    stroke: #0a0;
     stroke-width: 1.5px;
 }
 </style>
 <div id="plot"></div>
-<p>
-    The blue line is an aproximation of the median female body weight.
-</p>
 <script type="text/javascript">
 require(['database', "{{formDirectory}}d3.v2.js"], function(database){
 //Defering in hopes that the template fully loads before the script runs.
@@ -42,13 +39,22 @@ _.defer(function() {
         
     var age = database.getDataValue('age');
     var weight = database.getDataValue('weight');
+    var sex = database.getDataValue('sex');
     
-    if(!age || ! weight) {
-        document.getElementById('plot').innerHTML = "Missing age or weight.";
+    if(!age) {
+        document.getElementById('plot').innerHTML = "Missing value for age.";
+        return;
+    }
+    if(!weight) {
+        document.getElementById('plot').innerHTML = "Missing value for weight.";
+        return;
+    }
+    if(!sex) {
+        document.getElementById('plot').innerHTML = "Missing value for sex.";
         return;
     }
     
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    var margin = {top: 50, right: 20, bottom: 30, left: 50},
         width = document.getElementById('plot').clientWidth - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
     
@@ -60,6 +66,7 @@ _.defer(function() {
     
     var xAxis = d3.svg.axis()
         .scale(x)
+        .ticks(width/40)
         .orient("bottom");
     
     var yAxis = d3.svg.axis()
@@ -77,6 +84,27 @@ _.defer(function() {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
+    // add legend   
+    var legend = svg.append("g")
+      .attr("class", "legend")
+      .attr("height", 50)
+      .attr("width", 100);
+    
+    legend
+      .append("rect")
+      .attr("x", -10 )
+      .attr("y", -30)
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", 'blue');
+      
+    legend
+      .append("text")
+      .attr("x", 10)
+      .attr("y", -20)
+      .text(sex + " median weight for age");
+    
+    
     x.domain([0, 20]);
     y.domain([0, 180]);
     
@@ -89,7 +117,7 @@ _.defer(function() {
       .attr("y", -6)
       .style("text-anchor", "end")
       .attr("dx", ".71em")
-      .text("age");
+      .text("age (yrs)");
     
     svg.append("g")
       .attr("class", "y axis")
@@ -99,10 +127,25 @@ _.defer(function() {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("weight");
+      .text("weight (lbs)");
+    
+    var medianWFA = [
+        [2, 27],
+        [10, 70],
+        [15, 115],
+        [20, 130]
+    ];
+    if (sex === "male") {
+        medianWFA = [
+            [2, 28],
+            [10, 70],
+            [15, 125],
+            [20, 155]
+        ];
+    }
     
     svg.append("path")
-      .datum([[2,27],[10,70],[15,115],[20,130]])
+      .datum(medianWFA)
       .attr("class", "line")
       .attr("d", line);
       

@@ -105,6 +105,14 @@ return Backbone.View.extend({
             // the absence of page history disabled backward swipe and button.
         };
 
+        //If the prompt is slow to activate display a loading dialog.
+        //This is going to be useful if the prompt gets data from a remote source.
+        var slowPageChange = false;
+        var activateTimeout = window.setTimeout(function(){
+            slowPageChange = true;
+            that.showSpinnerOverlay("Loading...");
+        }, 400);
+        
         //A better way to do this might be to pass a controller interface object to 
         //onActivate that can trigger screen refreshes, as well as goto other prompts.
         //(We would not allow prompts to access the controller directly).
@@ -148,6 +156,7 @@ return Backbone.View.extend({
                         ctxt.failure(m);
                     }
                 });
+                window.clearTimeout(activateTimeout);
                 $.mobile.changePage(that.currentPageEl, $.extend({
                     changeHash: false,
                     transition: transition
