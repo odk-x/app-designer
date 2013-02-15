@@ -16,7 +16,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
         // i.e., it is not settable/gettable via Javascript used in prompts.
         // This is used for bookkeeping columns (e.g., server sync, save status).
         //
-  dataTablePredefinedColumns: { id: {type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'PRIMARY KEY', elementSet: 'instanceMetadata' },
+  dataTablePredefinedColumns: { id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
                      uri_user: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      last_mod_time: { type: 'integer', isNotNullable: true, 'default': -1, isPersisted: true, elementSet: 'instanceMetadata' },
                      sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
