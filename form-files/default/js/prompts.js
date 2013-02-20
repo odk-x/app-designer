@@ -3,8 +3,8 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'translations', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _,            translations) {
+define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
+function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  $,       _,            translations) {
 
 promptTypes.base = Backbone.View.extend({
     className: "current",
@@ -1369,7 +1369,6 @@ promptTypes.screen = promptTypes.base.extend({
     initialize: function() {
         var that = this;
         var curPath = that.getPromptPath();
-        this.prompts = builder.initializePrompts(this.prompts, function(){});
         //Wire up the prompts so that if any of them rerender the screen rerenders.
         //TODO: Think about whether there is a better way of doing this.
         //Maybe bind this or subprompts to database change events instead?
@@ -1491,7 +1490,7 @@ promptTypes.screen = promptTypes.base.extend({
 promptTypes.label = promptTypes.base.extend({
     type: "label",
     hideInHierarchy: true,
-    onActivate: function(ctxt){
+    onActivate: function(ctxt) {
         alert("label.onActivate: Should never be called!");
         ctxt.failure({message: "Internal error."});
     }

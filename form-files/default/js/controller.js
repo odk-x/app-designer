@@ -14,7 +14,7 @@ function(ScreenManager,  opendatakit,  database,   $) {
 window.controller = {
     eventCount: 0,
     screenManager : null,
-    currentPromptIdx : -1,
+    currentPromptIdx : -1,//We should get rid of this and just keep a refrence to the current prompt.
     prompts : [],
     calcs: [],
     previousScreenIndices : [],
@@ -58,306 +58,469 @@ window.controller = {
             ctxt.failure({message: "Exception occurred while evaluating constraints"});
         }
     },
-    gotoPreviousScreen: function(ctxt){
-        var that = this;
-        ctxt.append('controller:gotPreviousScreen');
-        that.beforeMove($.extend({}, ctxt,{
-            success: function() {
-                ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
-                while (that.hasPromptHistory()) {
-                    ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory", "px: " +  that.currentPromptIdx);
-                    var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
-                    var t = prmpt.type;
-                    if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
-                        ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory.invalid", "px: " +  prmpt.currentPromptIdx);
-                        console.error("Invalid previous prompt type px: " +  prmpt.currentPromptIdx);
-                        continue; // attempt to recover...
-                    }
-                    // todo -- change to use hash?
-                    that.setPrompt(ctxt, prmpt, {omitPushOnReturnStack:true, reverse:true});
-                    return;
-                }
-                ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
-                // display the 'no previous prompt' screen message.
-                // then transition to the start of the form.
-                that.screenManager.noPreviousPage($.extend({}, ctxt,{
-                                        success: function() {
-                                            // pop ctxt
-                                            ctxt.append("gotoPreviousScreen.noPrompts");
-                                            that.gotoRef($.extend({},ctxt,{
-                                                success:function() {
-                                                    ctxt.failure({message: "Returning to start of form."});
-                                                }}),"0");
-                                        }}));
-            },
-            failure: function(m) {
-                ctxt.append("gotoPreviousScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
-                // should stay on this screen...
-                if ( that.screenManager != null ) {
-                    that.screenManager.unexpectedError($.extend({},ctxt,{
-                        success:function() {
-                            ctxt.failure(m); 
-                        }}), "beforeMove");
-                } else {
-                    ctxt.failure(m);
-                }
-            }
-        }));
-    },
+//    gotoPreviousScreen: function(ctxt){
+//        var that = this;
+//        ctxt.append('controller:gotPreviousScreen');
+//        that.beforeMove($.extend({}, ctxt,{
+//            success: function() {
+//                ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
+//                while (that.hasPromptHistory()) {
+//                    ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory", "px: " +  that.currentPromptIdx);
+//                    var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
+//                    var t = prmpt.type;
+//                    if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
+//                        ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory.invalid", "px: " +  prmpt.currentPromptIdx);
+//                        console.error("Invalid previous prompt type px: " +  prmpt.currentPromptIdx);
+//                        continue; // attempt to recover...
+//                    }
+//                    // todo -- change to use hash?
+//                    that.setPrompt(ctxt, prmpt, {omitPushOnReturnStack:true, reverse:true});
+//                    return;
+//                }
+//                ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
+//                // display the 'no previous prompt' screen message.
+//                // then transition to the start of the form.
+//                that.screenManager.noPreviousPage($.extend({}, ctxt,{
+//                                        success: function() {
+//                                            // pop ctxt
+//                                            ctxt.append("gotoPreviousScreen.noPrompts");
+//                                            that.gotoRef($.extend({},ctxt,{
+//                                                success:function() {
+//                                                    ctxt.failure({message: "Returning to start of form."});
+//                                                }}),"0");
+//                                        }}));
+//            },
+//            failure: function(m) {
+//                ctxt.append("gotoPreviousScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
+//                // should stay on this screen...
+//                if ( that.screenManager != null ) {
+//                    that.screenManager.unexpectedError($.extend({},ctxt,{
+//                        success:function() {
+//                            ctxt.failure(m); 
+//                        }}), "beforeMove");
+//                } else {
+//                    ctxt.failure(m);
+//                }
+//            }
+//        }));
+//    },
+//    /**
+//     * If 'prompt' is a label or goto, advance through the 
+//     * business logic until it is resolved to a renderable screen prompt.
+//     *
+//     * return that renderable screen prompt.
+//     */
+//    advanceToScreenPromptHelper: function(ctxt, prompt) {
+//        var nextPrompt = null;
+//        var that = this;
+//        var prompts = this.prompts;
+//        if("__parentPrompt__" in prompt){
+//            prompts = prompt.__parentPrompt__.prompts;
+//        }
+//        
+//        console.log(prompt);
+//        try {
+//            // ***The order of the else-if statements below is very important.***
+//            // i.e., First test if the 'condition' is false, and skip to the next 
+//            // question if it is; if the 'condition' is true or not present, then 
+//            // execute the 'goto'
+//            if ( prompt.type == "label" ) {
+//                nextPrompt = prompts[prompt.promptIdx + 1];
+//            } else if('condition' in prompt && !prompt.condition()) {
+//                nextPrompt = prompts[prompt.promptIdx + 1];
+//            } else if ( prompt.type == "goto" ) {
+//                nextPrompt = that.getPromptByLabel(prompt.param);
+//            } else if( prompt.type == "error" ) {
+//                if('condition' in prompt && prompt.condition()) {
+//                    alert("Error prompt triggered.");
+//                    that.fatalError(ctxt);
+//                    return; // this directs the user to the _stop_survey page.
+//                }
+//            } else if (prompt.type == "group" || prompt.type == "section") {
+//                if ("prompts" in prompt && prompt.prompts.length > 0){
+//                    nextPrompt = prompt.prompts[0];
+//                } else {
+//                    nextPrompt = prompts[prompt.promptIdx + 1];
+//                }
+//            }
+//        } catch (e) {
+//            console.error("controller.advanceToScreenPromptHelper.exception.strict px: " +
+//                            that.promptIdx + ' exception: ' + String(e));
+//            ctxt.failure({message: "Error in condition expression. See console log."});
+//            return;
+//
+//            if ( ctxt.strict ) {
+//                console.error("controller.advanceToScreenPromptHelper.exception.strict px: " +
+//                                that.promptIdx + ' exception: ' + String(e));
+//                ctxt.failure({message: "Exception while evaluating condition() expression. See console log."});
+//                return;
+//            } else {
+//                console.log("controller.advanceToScreenPromptHelper.exception.ignored px: " +
+//                                that.promptIdx + ' exception: ' + String(e));
+//                ctxt.append("controller.advanceToScreenPromptHelper.exception.ignored", String(e));
+//                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+//            }
+//
+//        }
+//        
+//        if(nextPrompt) {
+//            that.advanceToScreenPromptHelper(ctxt, nextPrompt);
+//        } else {
+//            ctxt.success(prompt);
+//        }
+//    },
+//    advanceToScreenPrompt: function(ctxt, prompt) {
+//        try {
+//            return this.advanceToScreenPromptHelper(ctxt, prompt);
+//        } catch (e) {
+//            console.error("controller.advanceToScreenPrompt.exception: " + String(e));
+//            ctxt.failure({
+//                message: "Possible goto loop."
+//            });
+//        }
+//    },
+//    validateQuestionHelper: function(ctxt, promptCandidate, stopAtPromptIdx) {
+//        var that = this;
+//        return function() {
+//            try {
+//                // pass in 'render':false to indicate that rendering will not occur.
+//                // call onActivate() to ensure that we have values (assignTo) initialized for validate()
+//                promptCandidate.onActivate( $.extend({render: false}, ctxt, {
+//                    success: function(renderContext) {
+//                        promptCandidate.validate( $.extend({}, ctxt, {
+//                            success: function() {
+//                                if ( promptCandidate.type == 'finalize' ) {
+//                                    ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+//                                    ctxt.success();
+//                                } else {
+//                                    that.advanceToScreenPrompt($.extend({}, ctxt, {
+//                                        success: function(prompt){
+//                                            if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
+//                                                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+//                                                var fn = that.validateQuestionHelper(ctxt,prompt,stopAtPromptIdx);
+//                                                (fn)();
+//                                            } else {
+//                                                if ( !prompt ) {
+//                                                    ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+//                                                }
+//                                                ctxt.success();
+//                                            }
+//                                        },
+//                                        failure: function(m) {
+//                                            ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
+//                                            
+//                                            that.setPrompt( $.extend({}, ctxt, {
+//                                                success: function() {
+//                                                    setTimeout(function() {
+//                                                        ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+//                                                        ctxt.failure(m);
+//                                                        }, 500);
+//                                                }}), nextPrompt);
+//
+//                                        }}));
+//                                }
+//                            },
+//                            failure: function(msg) {
+//                                ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
+//                                that.setPrompt( $.extend({}, ctxt, {
+//                                    success: function() {
+//                                        var simpleCtxt = $.extend({}, ctxt, {
+//                                            success: function() {
+//                                                // should never get here...
+//                                                ctxt.append("validateQuestionHelper.validate.failure.setPrompt.validate", "px: " + promptCandidate.promptIdx);
+//                                                ctxt.failure({message: "Internal error - Unexpected execution path."});
+//                                            }});
+//                                        setTimeout(function() {
+//                                            simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+//                                            that.validate( simpleCtxt );
+//                                            }, 500);
+//                                    }}), promptCandidate);
+//                            }}));
+//                    }}) );
+//            } catch(e) {
+//                ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
+//                that.setPrompt( $.extend({}, ctxt, {
+//                    success: function() {
+//                        var simpleCtxt = $.extend({}, ctxt, {
+//                            success: function() {
+//                                // should never get here...
+//                                ctxt.append("validateQuestionHelper.validate.exception.setPrompt.validate", "px: " + promptCandidate.promptIdx);
+//                                ctxt.failure({message: "Internal error - Unexpected execution path."});
+//                            }});
+//                        setTimeout(function() {
+//                            simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+//                            that.validate( simpleCtxt );
+//                            }, 500);
+//                    }}), promptCandidate);
+//            }
+//        };
+//    },
+//    validateAllQuestions: function(ctxt, stopAtPromptIdx){
+//        var that = this;
+//        var promptCandidate = that.prompts[0];
+//        // set the 'strict' attribute on the context to report all 
+//        // formula exceptions and errors.
+//        var oldvalue = ctxt.strict;
+//        ctxt.strict = true;
+//        // ensure we drop the spinner overlay when we complete...
+//        var newctxt = $.extend({},ctxt,{
+//            success: function() {
+//                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+//                that.screenManager.hideSpinnerOverlay();
+//                ctxt.strict = oldvalue;
+//                ctxt.success();
+//            },
+//            failure: function(m) {
+//                that.screenManager.hideSpinnerOverlay();
+//                if ( m && m.message ) {
+//                    that.screenManager.showScreenPopup(m);
+//                }
+//                ctxt.strict = oldvalue;
+//                ctxt.failure(m);
+//            }});
+//        that.screenManager.showSpinnerOverlay({text:"Validating..."});
+//        
+//        // call advanceToScreenPrompt, since prompt[0] is always a goto_if...
+//        that.advanceToScreenPrompt($.extend({},newctxt, {
+//            success: function(prompt) {
+//                if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
+//                    newctxt.append("validateAllQuestions.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
+//                    var fn = that.validateQuestionHelper(newctxt,prompt,stopAtPromptIdx);
+//                    (fn)();
+//                } else {
+//                    if ( !prompt ) {
+//                        newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+//                    }
+//                    newctxt.success();
+//                }
+//            },
+//            failure: function(m) {
+//                newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
+//                that.setPrompt( $.extend({}, newctxt, {
+//                    success: function() {
+//                        setTimeout(function() {
+//                            newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
+//                            newctxt.failure(m);
+//                            }, 500);
+//                    }}), promptCandidate);
+//            }}), promptCandidate);
+//    },
     /**
-     * If 'prompt' is a label or goto, advance through the 
-     * business logic until it is resolved to a renderable screen prompt.
-     *
-     * return that renderable screen prompt.
-     */
-    advanceToScreenPromptHelper: function(ctxt, prompt) {
-        var nextPrompt = null;
-        var that = this;
-        try {
-            // ***The order of the else-if statements below is very important.***
-            // i.e., First test if the 'condition' is false, and skip to the next 
-            // question if it is; if the 'condition' is true or not present, then 
-            // execute the 'goto'
-            if ( prompt.type == "label" ) {
-                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-            } else if('condition' in prompt && !prompt.condition()) {
-                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-            } else if ( prompt.type == "goto" ) {
-                nextPrompt = that.getPromptByLabel(prompt.param);
-            } else if( prompt.type == "error" ) {
-                if('condition' in prompt && prompt.condition()) {
-                    alert("Error prompt triggered.");
-                    that.fatalError(ctxt);
-                    return; // this directs the user to the _stop_survey page.
-                }
-            }
-        } catch (e) {
-            console.error("controller.advanceToScreenPromptHelper.exception.strict px: " +
-                            that.promptIdx + ' exception: ' + String(e));
-            ctxt.failure({message: "Error in condition expression. See console log."});
-            return;
-            /*
-            if ( ctxt.strict ) {
-                console.error("controller.advanceToScreenPromptHelper.exception.strict px: " +
-                                that.promptIdx + ' exception: ' + String(e));
-                ctxt.failure({message: "Exception while evaluating condition() expression. See console log."});
-                return;
+     * Determine which prompt to go to after the given prompt by evaluating conditions
+     * and traversing though prompt groups.
+     **/
+    computeNextPrompt: function (curPrompt) {
+        var nextPrompt, prompts;
+        
+        prompts = this.prompts;
+        if("__parentPrompt__" in curPrompt) {
+            prompts = curPrompt.__parentPrompt__.prompts;
+        }
+        if(curPrompt.promptIdx + 1 >= prompts.length) {
+            if("__parentPrompt__" in curPrompt) {
+                return this.computeNextPrompt(curPrompt.__parentPrompt__);
             } else {
-                console.log("controller.advanceToScreenPromptHelper.exception.ignored px: " +
-                                that.promptIdx + ' exception: ' + String(e));
-                ctxt.append("controller.advanceToScreenPromptHelper.exception.ignored", String(e));
-                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
+                //All prompts traversed, return null to indicate no next prompt.
+                return null;
             }
-            */
         }
         
-        if(nextPrompt) {
-            that.advanceToScreenPromptHelper(ctxt, nextPrompt);
-        } else {
-            ctxt.success(prompt);
-        }
-    },
-    advanceToScreenPrompt: function(ctxt, prompt) {
-        try {
-            return this.advanceToScreenPromptHelper(ctxt, prompt);
-        } catch (e) {
-            console.error("controller.advanceToScreenPrompt.exception: " + String(e));
-            ctxt.failure({
-                message: "Possible goto loop."
-            });
-        }
-    },
-    validateQuestionHelper: function(ctxt, promptCandidate, stopAtPromptIdx) {
-        var that = this;
-        return function() {
-            try {
-                // pass in 'render':false to indicate that rendering will not occur.
-                // call onActivate() to ensure that we have values (assignTo) initialized for validate()
-                promptCandidate.onActivate( $.extend({render: false}, ctxt, {
-                    success: function(renderContext) {
-                        promptCandidate.validate( $.extend({}, ctxt, {
-                            success: function() {
-                                if ( promptCandidate.type == 'finalize' ) {
-                                    ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-                                    ctxt.success();
-                                } else {
-                                    var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
-                                    that.advanceToScreenPrompt($.extend({}, ctxt, {
-                                        success: function(prompt){
-                                            if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
-                                                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-                                                var fn = that.validateQuestionHelper(ctxt,prompt,stopAtPromptIdx);
-                                                (fn)();
-                                            } else {
-                                                if ( !prompt ) {
-                                                    ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-                                                }
-                                                ctxt.success();
-                                            }
-                                        },
-                                        failure: function(m) {
-                                            ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
-                                            that.setPrompt( $.extend({}, ctxt, {
-                                                success: function() {
-                                                    setTimeout(function() {
-                                                        ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-                                                        ctxt.failure(m);
-                                                        }, 500);
-                                                }}), nextPrompt);
-                                        }}), nextPrompt);
-                                }
-                            },
-                            failure: function(msg) {
-                                ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
-                                that.setPrompt( $.extend({}, ctxt, {
-                                    success: function() {
-                                        var simpleCtxt = $.extend({}, ctxt, {
-                                            success: function() {
-                                                // should never get here...
-                                                ctxt.append("validateQuestionHelper.validate.failure.setPrompt.validate", "px: " + promptCandidate.promptIdx);
-                                                ctxt.failure({message: "Internal error - Unexpected execution path."});
-                                            }});
-                                        setTimeout(function() {
-                                            simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-                                            that.validate( simpleCtxt );
-                                            }, 500);
-                                    }}), promptCandidate);
-                            }}));
-                    }}) );
-            } catch(e) {
-                ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
-                that.setPrompt( $.extend({}, ctxt, {
-                    success: function() {
-                        var simpleCtxt = $.extend({}, ctxt, {
-                            success: function() {
-                                // should never get here...
-                                ctxt.append("validateQuestionHelper.validate.exception.setPrompt.validate", "px: " + promptCandidate.promptIdx);
-                                ctxt.failure({message: "Internal error - Unexpected execution path."});
-                            }});
-                        setTimeout(function() {
-                            simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-                            that.validate( simpleCtxt );
-                            }, 500);
-                    }}), promptCandidate);
+        nextPrompt = prompts[curPrompt.promptIdx + 1];
+        //Loop to traverse down into child prompts
+        while(true){
+            if('condition' in nextPrompt && !nextPrompt.condition()) {
+                return this.computeNextPrompt(nextPrompt);
+            } else if (nextPrompt.type == "group" || nextPrompt.type == "section") {
+                if ("prompts" in nextPrompt && nextPrompt.prompts.length > 0) {
+                    nextPrompt = nextPrompt.prompts[0];
+                }
+            } else {
+                return nextPrompt;
             }
-        };
+        }
     },
-    validateAllQuestions: function(ctxt, stopAtPromptIdx){
+    computePreviousPrompt: function (curPrompt) {
+        var prevPrompt, prompts;
+        
+        if( curPrompt.type == "goto" ) {
+            return this.computePreviousPrompt(this.getPromptByLabel(curPrompt.param));        
+        }
+        
+        prompts = this.prompts;
+        if("__parentPrompt__" in curPrompt) {
+            prompts = curPrompt.__parentPrompt__.prompts;
+        }
+        if(curPrompt.promptIdx === 0) {
+            if("__parentPrompt__" in curPrompt) {
+                return this.computePreviousPrompt(curPrompt.__parentPrompt__);
+            } else {
+                //All prompts traversed, return null to indicate no next prompt.
+                return null;
+            }
+        }
+        
+        prevPrompt = prompts[curPrompt.promptIdx - 1];
+        //Loop to traverse down into child prompts
+        while(true){
+            if('condition' in prevPrompt && !prevPrompt.condition()) {
+                return this.computePreviousPrompt(prevPrompt);
+            } else if( prompt.type == "label" ) {
+                return this.computePreviousPrompt(prevPrompt);
+            } else if (prevPrompt.type == "group" || prevPrompt.type == "section") {
+                if ("prompts" in prevPrompt && prevPrompt.prompts.length > 0) {
+                    prevPrompt = prevPrompt.prompts[prevPrompt.prompts.length - 1];
+                }
+            } else {
+                return prevPrompt;
+            }
+        }
+    },
+    gotoPreviousScreen: function(ctxt, options) {
         var that = this;
-        var promptCandidate = that.prompts[0];
-        // set the 'strict' attribute on the context to report all 
-        // formula exceptions and errors.
-        var oldvalue = ctxt.strict;
-        ctxt.strict = true;
-        // ensure we drop the spinner overlay when we complete...
-        var newctxt = $.extend({},ctxt,{
+        that.beforeMove($.extend({}, ctxt, {
             success: function() {
-                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-                that.screenManager.hideSpinnerOverlay();
-                ctxt.strict = oldvalue;
-                ctxt.success();
-            },
-            failure: function(m) {
-                that.screenManager.hideSpinnerOverlay();
-                if ( m && m.message ) {
-                    that.screenManager.showScreenPopup(m);
-                }
-                ctxt.strict = oldvalue;
-                ctxt.failure(m);
-            }});
-        that.screenManager.showSpinnerOverlay({text:"Validating..."});
-        
-        // call advanceToScreenPrompt, since prompt[0] is always a goto_if...
-        that.advanceToScreenPrompt($.extend({},newctxt, {
-            success: function(prompt) {
-                if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
-                    newctxt.append("validateAllQuestions.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-                    var fn = that.validateQuestionHelper(newctxt,prompt,stopAtPromptIdx);
-                    (fn)();
-                } else {
-                    if ( !prompt ) {
-                        newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-                    }
-                    newctxt.success();
-                }
-            },
-            failure: function(m) {
-                newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
-                that.setPrompt( $.extend({}, newctxt, {
-                    success: function() {
-                        setTimeout(function() {
-                            newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-                            newctxt.failure(m);
-                            }, 500);
-                    }}), promptCandidate);
-            }}), promptCandidate);
-    },
-    gotoNextScreen: function(ctxt, options){
-        var that = this;
-        that.beforeMove($.extend({}, ctxt,
-            { success: function() {
-                ctxt.append("gotoNextScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
+                ctxt.append("gotoNextScreen.beforeMove.success", "px: " + that.currentPromptIdx);
                 // we are ready for move -- validate...
-                that.validate( $.extend({}, ctxt, {
+                that.validate($.extend({}, ctxt, {
                     success: function() {
-                        ctxt.append("gotoNextScreen.validate.success", "px: " +  that.currentPromptIdx);
-                        // navigate through all gotos, goto_ifs and labels.
-                        var promptCandidate = null;
-                        if ( that.currentPromptIdx >= 0 ) {
-                            promptCandidate = that.getPromptByName(that.currentPromptIdx + 1);
-                        } else {
-                            promptCandidate = that.prompts[0];
+                        var prevPrompt;
+                        ctxt.append("gotoNextScreen.validate.success", "px: " + that.currentPromptIdx);
+                        prevPrompt = that.computePreviousPrompt(that.currentPrompt);
+                        
+                        if (prevPrompt) {
+                            ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: " + prompt.promptIdx);
+                            // todo -- change to use hash?
+                            that.setPrompt(ctxt, prevPrompt, options);
                         }
-
-                        // abort and display error if we don't have any prompts...
-                        if ( promptCandidate == null ) {
-                            that.screenManager.noNextPage($.extend({}, ctxt,{
-                                        success: function() {
-                                            ctxt.append("gotoNextScreen.noPrompts");
-                                            that.gotoRef($.extend({},ctxt,{
-                                                success:function(){
-                                                    ctxt.failure({message: "Returning to start of form."});
-                                                }}),"0");
-                                        }}));
-                            return;
+                        else {
+                            ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: no prompt!");
+                            that.screenManager.noNextPage($.extend({}, ctxt, {
+                                success: function() {
+                                    ctxt.append("gotoNextScreen.noPrompts");
+                                    that.gotoRef(ctxt, "0");
+                                }
+                            }));
                         }
                         
-                        that.advanceToScreenPrompt($.extend({}, ctxt, {
-                            success: function(prompt){
-                                if(prompt) {
-                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: " + prompt.promptIdx);
-                                    // todo -- change to use hash?
-                                    that.setPrompt(ctxt, prompt, options);
-                                } else {
-                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: no prompt!");
-                                    that.screenManager.noNextPage($.extend({}, ctxt,{
-                                            success: function() {
-                                                ctxt.append("gotoNextScreen.noPrompts");
-                                                that.gotoRef(ctxt,"0");
-                                            }}));
-                                }
-                        },
-                        failure: function(m) {
-                            ctxt.append("gotoNextScreen.advanceToScreenPrompt.failure", "px: " +  that.currentPromptIdx);
-                            that.screenManager.showScreenPopup(m); 
-                            ctxt.failure(m);
-                        }}), promptCandidate);
                     },
                     failure: function(m) {
-                        ctxt.append("gotoNextScreen.validate.failure", "px: " +  that.currentPromptIdx);
-                        that.screenManager.showScreenPopup(m); 
+                        ctxt.append("gotoNextScreen.validate.failure", "px: " + that.currentPromptIdx);
+                        that.screenManager.showScreenPopup(m);
                         ctxt.failure(m);
                     }
                 }));
             },
             failure: function(m) {
-                ctxt.append("gotoNextScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
-                if ( that.screenManager != null ) {
-                    that.screenManager.unexpectedError($.extend({},ctxt,{
-                        success:function() {
-                            ctxt.failure(m); 
-                        }}), "beforeMove");
-                } else {
+                ctxt.append("gotoNextScreen.beforeMove.failure", "px: " + that.currentPromptIdx);
+                if (that.screenManager != null) {
+                    that.screenManager.unexpectedError($.extend({}, ctxt, {
+                        success: function() {
+                            ctxt.failure(m);
+                        }
+                    }), "beforeMove");
+                }
+                else {
+                    ctxt.failure(m);
+                }
+            }
+        }));
+    },
+    gotoNextScreen: function(ctxt, options) {
+        var that = this;
+        that.beforeMove($.extend({}, ctxt, {
+            success: function() {
+                ctxt.append("gotoNextScreen.beforeMove.success", "px: " + that.currentPromptIdx);
+                // we are ready for move -- validate...
+                that.validate($.extend({}, ctxt, {
+                    success: function() {
+                        var nextPrompt;
+                        ctxt.append("gotoNextScreen.validate.success", "px: " + that.currentPromptIdx);
+                        nextPrompt = that.computeNextPrompt(that.currentPrompt);
+                        
+                        if (nextPrompt) {
+                            ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: " + prompt.promptIdx);
+                            // todo -- change to use hash?
+                            that.setPrompt(ctxt, nextPrompt, options);
+                        }
+                        else {
+                            ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: no prompt!");
+                            that.screenManager.noNextPage($.extend({}, ctxt, {
+                                success: function() {
+                                    ctxt.append("gotoNextScreen.noPrompts");
+                                    that.gotoRef(ctxt, "0");
+                                }
+                            }));
+                        }
+                        
+                        /*
+                        // navigate through all gotos, goto_ifs and labels.
+                        var promptCandidate = null;
+                        if (that.currentPromptIdx >= 0) {
+                            promptCandidate = that.getPromptByName(that.currentPromptIdx + 1);
+                        }
+                        else {
+                            promptCandidate = that.prompts[0];
+                        }
+
+                        // abort and display error if we don't have any prompts...
+                        if (promptCandidate == null) {
+                            that.screenManager.noNextPage($.extend({}, ctxt, {
+                                success: function() {
+                                    ctxt.append("gotoNextScreen.noPrompts");
+                                    that.gotoRef($.extend({}, ctxt, {
+                                        success: function() {
+                                            ctxt.failure({
+                                                message: "Returning to start of form."
+                                            });
+                                        }
+                                    }), "0");
+                                }
+                            }));
+                            return;
+                        }
+
+                        that.advanceToScreenPrompt($.extend({}, ctxt, {
+                            success: function(prompt) {
+                                if (prompt) {
+                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: " + prompt.promptIdx);
+                                    // todo -- change to use hash?
+                                    that.setPrompt(ctxt, prompt, options);
+                                }
+                                else {
+                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: no prompt!");
+                                    that.screenManager.noNextPage($.extend({}, ctxt, {
+                                        success: function() {
+                                            ctxt.append("gotoNextScreen.noPrompts");
+                                            that.gotoRef(ctxt, "0");
+                                        }
+                                    }));
+                                }
+                            },
+                            failure: function(m) {
+                                ctxt.append("gotoNextScreen.advanceToScreenPrompt.failure", "px: " + that.currentPromptIdx);
+                                that.screenManager.showScreenPopup(m);
+                                ctxt.failure(m);
+                            }
+                        }), promptCandidate);
+                        */
+                    },
+                    failure: function(m) {
+                        ctxt.append("gotoNextScreen.validate.failure", "px: " + that.currentPromptIdx);
+                        that.screenManager.showScreenPopup(m);
+                        ctxt.failure(m);
+                    }
+                }));
+            },
+            failure: function(m) {
+                ctxt.append("gotoNextScreen.beforeMove.failure", "px: " + that.currentPromptIdx);
+                if (that.screenManager != null) {
+                    that.screenManager.unexpectedError($.extend({}, ctxt, {
+                        success: function() {
+                            ctxt.failure(m);
+                        }
+                    }), "beforeMove");
+                }
+                else {
                     ctxt.failure(m);
                 }
             }
@@ -398,7 +561,17 @@ window.controller = {
     setPrompt: function(ctxt, prompt, passedInOptions){
         var that = this;
         var options;
+        
         ctxt.append('controller.setPrompt', "nextPx: " + prompt.promptIdx);
+        
+        if(prompt.type === "goto"){
+            that.setPrompt(ctxt, that.getPromptByLabel(prompt.param), passedInOptions);
+            return;
+        }
+        if(prompt.type === "label"){
+            that.setPrompt(ctxt, that.computeNextPrompt(prompt), passedInOptions);
+            return;
+        }
 
         if ( this.currentPromptIdx == prompt.promptIdx ) {
             if ( passedInOptions == null || !passedInOptions.changeLocale) {
@@ -425,12 +598,16 @@ window.controller = {
             }
         }
         this.currentPromptIdx = prompt.promptIdx;
+        this.currentPrompt = prompt;
         this.screenManager.setPrompt($.extend({},ctxt,{
             success: function() {
                 ctxt.success();
                 // and flush any pending doAction callback
                 landing.setController(that);
             }}), prompt, options);
+        /*
+        //We will need to rethink the way prompts are refrenced for groups to work.
+        
         // the prompt should never be changed at this point!!!
         if ( this.currentPromptIdx != prompt.promptIdx ) {
             console.error("controller.setPrompt: prompt index changed -- assumption violation!!!");
@@ -442,6 +619,7 @@ window.controller = {
         if ( newhash != window.location.hash ) {
             window.location.hash = newhash;
         }
+        */
     },
     /*
      * Callback interface from ODK Survey (or other container apps) into javascript.
@@ -581,6 +759,9 @@ window.controller = {
             return;
         }
         
+        that.setPrompt(ctxt, promptCandidate, { hlist : hlist });
+        
+        /*
         this.advanceToScreenPrompt($.extend({}, ctxt, {
             success:function(prompt){
                 if ( prompt == null ) {
@@ -590,6 +771,7 @@ window.controller = {
                 }
                 that.setPrompt(ctxt, prompt, { hlist : hlist });
             }}), promptCandidate);
+        */
         
     },
     hasPromptHistory: function() {

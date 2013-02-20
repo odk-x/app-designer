@@ -109,9 +109,7 @@ return Backbone.View.extend({
 
         //If the prompt is slow to activate display a loading dialog.
         //This is going to be useful if the prompt gets data from a remote source.
-        var slowPageChange = false;
         var activateTimeout = window.setTimeout(function(){
-            slowPageChange = true;
             that.showSpinnerOverlay("Loading...");
         }, 400);
         
@@ -163,6 +161,9 @@ return Backbone.View.extend({
                     changeHash: false,
                     transition: transition
                 }, jqmAttrs));
+            }, failure: function(){
+                window.clearTimeout(activateTimeout);
+                that.hideSpinnerOverlay();
             }
         }));
     },

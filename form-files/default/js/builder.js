@@ -120,6 +120,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
      * and parse all its properties
      **/
     initializeProperties: function(prompt, promptIdx) {
+        var that = this;
         $.each(prompt, function(key, property) {
             var propertyType, propertyContent;
             if (key in prompt) {
@@ -130,6 +131,9 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     return;
                 }
                 if ($.isArray(property)) {
+                    if(key === "prompts"){
+                        prompt.prompts = that.initializePrompts(property);
+                    }
                     return;
                 }
                 if ($.isPlainObject(property) && ('cell_type' in property)) {
@@ -140,8 +144,7 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     if (key in column_types) {
                         propertyType = column_types[key];
                         propertyContent = property;
-                    }
-                    else {
+                    } else {
                         //Leave the type as a string/int/bool
                         return;
                     }
@@ -195,20 +198,27 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 additionalActivateFunctions: additionalActivateFunctions
             }, that.initializeProperties(prompt, initializedPrompts.length)));
             PromptInstance = new ExtendedPromptType();
+
+            //Give subprompts a parent pointer.
+            if('prompts' in PromptInstance){
+                _.each(PromptInstance.prompts, function(subprompt){
+                    subprompt.__parentPrompt__ = PromptInstance;
+                });
+            }
+
             if (prompt.type === 'with_next' ) {
                 additionalActivateFunctions.push(function(ctxt) {
                     PromptInstance.assignToValue(ctxt);
                 });
-                return;
             } else if (prompt.type === 'with_next_validate' ) {
                 additionalActivateFunctions.push(function(ctxt) {
                     PromptInstance.triggerValidation(ctxt);
                 });
-                return;
             } else {
                 initializedPrompts.push(PromptInstance);
                 additionalActivateFunctions = [];
             }
+            
         });
         return initializedPrompts;
     },
@@ -286,6 +296,8 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         }));
         var afterCustomPromptsLoadAttempt = function(){
             that.form.prompts = that.initializePrompts(prompts);
+            //For debug
+            window.surveyObject = that.form.prompts;
             controller.prompts = that.form.prompts;
             console.log('builder.buildSurvey: starting form processing continuation');
             continuation(that.form);
