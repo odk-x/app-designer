@@ -1086,7 +1086,7 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var outcome = shim.doAction(that.getPromptPath(), 'capture', that.captureAction, null);
+        var outcome = shim.doAction(that.getPromptPath(), 'capture', that.captureAction, JSON.stringify({ newFile: "opendatakit-macro(newFile)" }));
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -1102,7 +1102,7 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var outcome = shim.doAction(that.getPromptPath(), 'choose', that.chooseAction, null);
+        var outcome = shim.doAction(that.getPromptPath(), 'choose', that.chooseAction,  JSON.stringify({ newFile: "opendatakit-macro(newFile)" }));
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -1182,8 +1182,9 @@ promptTypes.media = promptTypes.base.extend({
 });
 promptTypes.image = promptTypes.media.extend({
     type: "image",
+	extension: "jpg",
     contentType: "image/*",
-    label: 'Take your photo:',
+    buttonLabel: 'Take your photo:',
     templatePath: "templates/image.handlebars",
     captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity',
     chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseImageActivity'
@@ -1191,7 +1192,7 @@ promptTypes.image = promptTypes.media.extend({
 promptTypes.video = promptTypes.media.extend({
     type: "video",
     contentType: "video/*",
-    label: 'Take your video:',
+    buttonLabel: 'Take your video:',
     templatePath: "templates/video.handlebars",
     captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity',
     chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity',
@@ -1203,7 +1204,7 @@ promptTypes.video = promptTypes.media.extend({
 promptTypes.audio = promptTypes.media.extend({
     type: "audio",
     contentType: "audio/*",
-    label: 'Take your audio:',
+    buttonLabel: 'Take your audio:',
     templatePath: "templates/audio.handlebars",
     captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity',
     chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity'
@@ -1217,7 +1218,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
     buttonLabel: 'Launch intent',
     templatePath: "templates/launch_intent.handlebars",
     intentString: "",
-    intentParameters: null,//TODO: Allow this arguement to be an object {},
+    intentParameters: null,//TODO: Allow this arguement to be an object {} -- note that we JSON.stringify this...,
     events: {
         "click .launch": "launch"
     },
@@ -1236,7 +1237,8 @@ promptTypes.launch_intent = promptTypes.base.extend({
         });
         //We assume that the webkit could go away when an intent is launched,
         //so this prompt's "address" is passed along with the intent.
-        var outcome = shim.doAction(this.getPromptPath(), 'launch', this.intentString, this.intentParameters);
+        var outcome = shim.doAction(this.getPromptPath(), 'launch', this.intentString,
+							((this.intentParameters == null) ? null : JSON.stringify(this.intentParameters)));
         ctxt.append(this.intentString, platInfo.container + " outcome is " + outcome);
         if (outcome && outcome === "OK") {
             ctxt.success();

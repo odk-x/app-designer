@@ -7,6 +7,7 @@ It will be replaced by one injected by Android Java code.
 window.shim = window.shim || {
     instanceId: null,
 	pageRef: null,
+	previousScreenIndices: [],
 	auxillaryHash: null,
     getBaseUrl: function() {
         return '../default';
@@ -34,6 +35,18 @@ window.shim = window.shim || {
 		// orientation change and after intent completions.
         this.pageRef = pageRef;
     },
+    hasPromptHistory: function() {
+        return (this.previousScreenIndices.length !== 0);
+    },
+    clearPromptHistory: function() {
+        this.previousScreenIndices.length = 0;
+    },
+	popPromptHistory: function() {
+		return this.previousScreenIndices.pop();
+	},
+	pushPromptHistory: function(idx) {
+        this.previousScreenIndices.push(idx);
+	},
 	/*
 	 * severity - one of 'E' (error), 'W' (warn), 'S' (success), 'I' (info), 'D' (debug), 'T' (trace)
 	 * msg -- message to log

@@ -24,6 +24,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                      transactioning: { type: 'integer', isNotNullable: true, 'default': 1, isPersisted: true, elementSet: 'instanceMetadata' },
                      timestamp: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
                      saved: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
+                     form_id: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      instance_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'instanceName', elementSet: 'instanceMetadata' },
                      locale: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'locale', elementSet: 'instanceMetadata' } },
   tableDefinitionsPredefinedColumns: {
@@ -619,6 +620,9 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
             } else if ( f == "timestamp" ) {
                 stmt += "?";
                 bindings.push(now);
+            } else if ( f == "form_id" ) {
+                stmt += "?";
+                bindings.push(opendatakit.getSettingValue('form_id'));
             } else if ( f == "saved" ) {
                 stmt += "null";
             } else {
@@ -723,6 +727,9 @@ _insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, kvMap) 
             } else if ( f == "timestamp" ) {
                 stmt += "?";
                 bindings.push(now);
+            } else if ( f == "form_id" ) {
+                stmt += "?";
+                bindings.push(opendatakit.getSettingValue('form_id'));
             } else {
                 // use default values from reference map...
                 if ( defElement['default'] == null ) {

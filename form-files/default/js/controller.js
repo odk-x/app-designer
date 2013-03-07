@@ -17,7 +17,6 @@ window.controller = {
     currentPromptIdx : -1,
     prompts : [],
     calcs: [],
-    previousScreenIndices : [],
     beforeMove: function(ctxt){
         ctxt.append('controller.beforeMove');
         var that = this;
@@ -66,7 +65,7 @@ window.controller = {
                 ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
                 while (that.hasPromptHistory()) {
                     ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory", "px: " +  that.currentPromptIdx);
-                    var prmpt = that.getPromptByName(that.previousScreenIndices.pop(), {reverse:true});
+                    var prmpt = that.getPromptByName(that.popPromptHistory(), {reverse:true});
                     var t = prmpt.type;
                     if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
                         ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory.invalid", "px: " +  prmpt.currentPromptIdx);
@@ -421,7 +420,7 @@ window.controller = {
         }
         if (!options.omitPushOnReturnStack) {
             if ( this.currentPromptIdx >= 0 && this.currentPromptIdx < this.prompts.length ) {
-                this.previousScreenIndices.push(this.currentPromptIdx);
+                this.pushPromptHistory(this.currentPromptIdx);
             }
         }
         this.currentPromptIdx = prompt.promptIdx;
@@ -593,11 +592,17 @@ window.controller = {
         
     },
     hasPromptHistory: function() {
-        return (this.previousScreenIndices.length !== 0);
+        return shim.hasPromptHistory();
     },
     clearPromptHistory: function() {
-        this.previousScreenIndices.length = 0;
+		shim.clearPromptHistory();
     },
+	popPromptHistory: function() {
+		return shim.popPromptHistory();
+	},
+	pushPromptHistory: function(idx) {
+		shim.pushPromptHistory(idx);
+	},
     reset: function(ctxt,sameForm) {
         // NOTE: the ctxt calls here are synchronous actions
         // ctxt is only passed in for logging purposes.
@@ -660,6 +665,11 @@ window.controller = {
         
         append : function( method, detail ) {
             this.contextChain.push( {method: method, detail: detail} );
+			// SpeedTracer Logging API
+  		    var logger = window.console;
+		    if (logger && logger.markTimeline) {
+  			  logger.markTimeline(method);
+		    }
         },
         
         success: function(){
