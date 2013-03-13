@@ -1,0 +1,13 @@
+<div>
+    {{> labelHint}}
+    {{#if instances}}
+        <h3>Subform: {{instances.0.instance_name}}</h3>
+        <button class="odk openInstance" data-instance-id="{{instances.0.id}}">
+            Edit Subform
+        </button>
+    {{else}}
+        <button class="odk createInstance" data-icon="plus">
+            Start Subform
+        </button>
+    {{/if}}
+<div>

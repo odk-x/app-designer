@@ -348,6 +348,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
     ctxt.append('database.withDb');
     ctxt.sqlStatement = null;
     var that = this;
+    
     try {
         if ( that.submissionDb ) {
             that.submissionDb.transaction(transactionBody, function(error,a) {

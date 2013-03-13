@@ -1,0 +1,30 @@
+b<div>
+    {{> labelHint}}
+    <p>
+        <button id="{{instance_id}}" class="odk createInstance" data-icon="plus">
+            Start New Subform
+        </button>
+    <p>
+    <h3></h3>
+    <ul data-role="listview" data-theme="d" data-divider-theme="d" data-inset="true">
+        {{#each instances}}
+            <li>
+                <h3>Name: {{instance_name}}</h3>
+        		<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+                        <button data-instance-id="{{id}}" class="odk openInstance">
+                        edit
+                        </button>
+                    </div>
+					<div class="ui-block-b">
+                        <button data-instance-id="{{id}}" class="odk deleteInstance">
+                        delete
+                        </button>
+                    </div>
+    		    </fieldset>
+            </li>
+        {{else}}
+            <li>No subforms</li>
+        {{/each}}
+    </ul>
+<div>

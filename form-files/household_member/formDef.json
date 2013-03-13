@@ -1,0 +1,109 @@
+{
+    "model": {
+        "income_contribution": {
+            "type": "string"
+        }, 
+        "age": {
+            "type": "integer"
+        }, 
+        "sex": {
+            "type": "string"
+        }, 
+        "cousins": {
+            "type": "string"
+        }, 
+        "siblings": {
+            "type": "string"
+        }, 
+        "children": {
+            "type": "string"
+        }
+    }, 
+    "settings": [
+        {
+            "setting": "form_id", 
+            "_rowNum": 2, 
+            "value": "household_member"
+        }, 
+        {
+            "setting": "form_version", 
+            "_rowNum": 3, 
+            "value": 1
+        }, 
+        {
+            "setting": "form_title", 
+            "_rowNum": 4, 
+            "value": "Household Member Survey"
+        }
+    ], 
+    "survey": [
+        {
+            "name": "age", 
+            "_rowNum": 2, 
+            "type": "integer", 
+            "param": null, 
+            "label": "Enter age:"
+        }, 
+        {
+            "name": "sex", 
+            "_rowNum": 3, 
+            "type": "select_one", 
+            "param": "sexes", 
+            "label": "Enter sex:"
+        }, 
+        {
+            "name": "income_contribution", 
+            "_rowNum": 4, 
+            "type": "select_one", 
+            "param": "yesno", 
+            "label": "Does this household member contribute to the household income?"
+        }, 
+        {
+            "name": "children", 
+            "_rowNum": 5, 
+            "type": "text", 
+            "param": null, 
+            "label": "Which household members are children of this household member?"
+        }, 
+        {
+            "name": "siblings", 
+            "_rowNum": 6, 
+            "type": "text", 
+            "param": null, 
+            "label": "Which household members are siblings of this household member?"
+        }, 
+        {
+            "name": "cousins", 
+            "_rowNum": 7, 
+            "type": "text", 
+            "param": null, 
+            "label": "Which household members are cousins of this household member?"
+        }
+    ], 
+    "choices": {
+        "yesno": [
+            {
+                "_rowNum": 2, 
+                "name": "yes", 
+                "label": "yes"
+            }, 
+            {
+                "_rowNum": 3, 
+                "name": "no", 
+                "label": "no"
+            }
+        ], 
+        "sexes": [
+            {
+                "_rowNum": 5, 
+                "name": "male", 
+                "label": "male"
+            }, 
+            {
+                "_rowNum": 6, 
+                "name": "female", 
+                "label": "female"
+            }
+        ]
+    }
+}

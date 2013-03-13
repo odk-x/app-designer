@@ -1549,6 +1549,111 @@ promptTypes.acknowledge = promptTypes.select.extend({
         ctxt.success(ctxt);
     }
 });
+promptTypes.repeat_subform = promptTypes.base.extend({
+    templatePath: "templates/repeat_subform.handlebars",
+    events: {
+        "click .openInstance": "openInstance",
+        "click .deleteInstance": "deleteInstance",
+        "click .createInstance": "createInstance"
+    },
+    updateSubforms: function(ctxt){
+        var that = this;
+        database.withDb(ctxt, function(transaction) {
+            transaction.executeSql('select * from "' + that.__table_id + '";', [],
+            function(transaction, result) {
+                if(result){
+                    //Convert the sql result into an instanceList row object array.
+                    var instanceList = [];
+                    for(var i = 0; i < result.rows.length; i++){
+                        instanceList.push(result.rows.item(i));
+                    }
+                    that.renderContext.instances = instanceList;
+                }
+                
+                ctxt.success({});
+            }, function(){
+                //Error callback function.
+                //For some reason the success callback seems to get called on error
+                //if and only if the error callback is present.
+            });
+        });
+    },
+    postActivate: function(ctxt) {
+        var that = this;
+        var subformJSONUrl = requirejs.toUrl('../' + this.param + '/formDef.json');
+        ctxt.append("prompts." + this.type + ".postActivate", "px: " + this.promptIdx);
+        //Fetch the subform JSON to figure out it's table id.
+        $.ajax({
+            url: subformJSONUrl,
+            success: function(formDef){
+                var table_id;
+                var table_id_rows = _.where(formDef.settings, {setting: "table_id"});
+                if(table_id_rows.length !== 1){
+                    table_id = _.where(formDef.settings, {
+                        setting: "form_id"
+                    })[0].value;
+                } else {
+                    table_id = table_id_rows[0].value;
+                }
+                table_id = "_" + table_id;
+                that.__table_id = table_id;
+                that.updateSubforms(ctxt);
+            },
+            error: function(){
+                alert("Could not find subform json at: " + subformJSONUrl);
+                ctxt.failure();
+            }
+        });
+    },
+    launchInstance: function(id){
+        var formPath = requirejs.toUrl('../' + this.param + '/');
+        var that = this;
+
+        $(window).on('focus', function(){
+            //TODO: It's probably better to make this a global handler so
+            //whatever that whever the window is focused the current prompt rerenders.
+            //TODO: We might need to use a different method for rerendering on android.
+            that.updateSubforms($.extend(controller.newCallbackContext(), {
+                success: function() {
+                    that.render();
+                }
+            }));
+            $(window).off('focus');
+        });
+        //TODO: We still need a way to launch instances on Android.
+        window.open("#formPath=" + formPath + "&instanceId=" + id, '_blank');
+    },
+    createInstance: function(evt){
+        this.launchInstance(opendatakit.genUUID());
+    },
+    openInstance: function(evt) {
+        var instanceId = $(evt.target).data("instance-id");
+        this.launchInstance(instanceId);
+    },
+    deleteInstance: function(evt) {
+        var that = this;
+        var instanceId = $(evt.target).data("instance-id");
+        
+        database.withDb(controller.newCallbackContext(), function(transaction) {
+            transaction.executeSql('delete from "' + that.__table_id + '" where id="' + instanceId + '";', [],
+            function(transaction, result) {
+                that.updateSubforms($.extend(controller.newCallbackContext(), {
+                    success: function() {
+                        that.render();
+                    }
+                }));
+            }, function() {
+                alert("Could not delete instance");
+            });
+        });
+    }
+});
+promptTypes.launch_subform = promptTypes.repeat_subform.extend({
+    templatePath: "templates/launch_subform.handlebars",
+});
+
+
+
 // Do not allow survey to proceed, either moving backward or forward...
 promptTypes.stop_survey = promptTypes.base.extend({
     type: "stop_survey",
