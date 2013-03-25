@@ -65,6 +65,8 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
         this.renderContext.required = this.required;
+        this.renderContext.appearance = this.appearance;
+        this.renderContext.withOther = this.withOther;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
         this.renderContext.form_title = opendatakit.getSettingValue('form_title');
@@ -643,44 +645,32 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     },
     postActivate: function(ctxt) {
         var that = this;
-        var query;
-        that.renderContext.passiveError = null;
-        that.renderContext.appearance = this.appearance;
-        that.renderContext.withOther = this.withOther;
-        if(that.param in that.form.queries) {
-            query = that.form.queries[that.param];
+		var newctxt = $.extend({}, ctxt, {success: function(outcome) {
+			ctxt.append("prompts." + that.type + ".postActivate." + outcome,
+						"px: " + that.promptIdx);
+			that.updateRenderValue(that.parseSaveValue(that.getValue()));
+			ctxt.success();
+		}});
+        var populateChoicesViaQuery = function(query, newctxt){
             var queryUri = query.uri();
             if(queryUri.search('//') < 0){
                 //If the uri is not a content provider or web resource,
                 //assume the path  is relative to the form directory.
                 queryUri = opendatakit.getCurrentFormPath() + queryUri;
             }
-            var queryDataType = 'json';
-            var baseSuccessCallback = function(result) {
-                ctxt.append("prompts." + that.type + ".postActivate.success", "px: " + that.promptIdx);
-                that.renderContext.choices = query.callback(result);
-                that.updateRenderValue(that.parseSaveValue(that.getValue()));
-                ctxt.success();
-            };
-            var successCallback = baseSuccessCallback;
-            var queryUriExt = queryUri.split('.').pop();
-            //TODO: It might also be desireable to include datasheets in the XLSForm.
-            if(queryUriExt === 'csv') {
-                queryDataType = 'text';
-                successCallback = function(result) {
-                    require(['jquery-csv'], function(){
-                        baseSuccessCallback($.csv.toObjects(result));
-                    });
-                };
-            }
-            $.ajax({
+            
+            var ajaxOptions = {
                 "type": 'GET',
                 "url": queryUri,
-                "dataType": queryDataType,
+                "dataType": 'json',
                 "data": {},
-                "success": successCallback,
+                "success": function(result){
+                    that.renderContext.choices = query.callback(result);
+                    newctxt.success("success");
+                },
                 "error": function(e) {
-                    ctxt.append("prompts." + this.type + ".postActivate.error", "px: " + this.promptIdx + " Error fetching choices");
+                    newctxt.append("prompts." + this.type + ".postActivate.error", 
+								"px: " + this.promptIdx + " Error fetching choices");
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
                     //the form.
@@ -689,17 +679,42 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                     if(e.statusText) {
                         that.renderContext.passiveError += e.statusText;
                     }
-                    ctxt.success();
+					// TODO: verify how this error should be handled...
+					newctxt.failure({message: : "Error fetching choices via ajax."});
                 }
-            });
-            return;
+            };
+ 
+			//TODO: It might also be desireable to make it so queries can refrence
+            //datasheets in the XLSX file.
+            var queryUriExt = queryUri.split('.').pop();
+            if(queryUriExt === 'csv') {
+                ajaxOptions.dataType = 'text';
+                ajaxOptions.success = function(result) {
+                    requirejs(['jquery-csv'], function(){
+                        that.renderContext.choices = query.callback($.csv.toObjects(result));
+                        newctxt.success("success");
+                    },
+					function (err) {
+						newctxt.append("promptType.select.requirejs.failure", err.toString());
+						newctxt.failure({message: "Error fetching choices from csv data."});
+					});
+                };
+            }
+            
+            $.ajax(ajaxOptions);
+		};
+		
+        that.renderContext.passiveError = null;
+        if(that.param in that.form.queries) {
+            populateChoicesViaQuery(that.form.queries[that.param], newctxt);
         } else if (that.param in that.form.choices) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
             that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
+            newctxt.success("choiceList.success");
+        } else {
+            newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
         }
-        that.updateRenderValue(that.parseSaveValue(that.getValue())); 
-        ctxt.success();
     },
     deselect: function(evt) {
         var ctxt = controller.newContext(evt);

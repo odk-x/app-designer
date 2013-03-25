@@ -466,7 +466,7 @@
                 }, 
                 {
                     "name": "age", 
-                    "constraint_message": "The grown chart only has data for below 20 years. This age you entered will not fit on the plot.", 
+                    "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.", 
                     "hint": "Must be less than 20.", 
                     "constraint": "data('age') <= 20", 
                     "_rowNum": 47, 
