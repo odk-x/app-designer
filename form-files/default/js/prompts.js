@@ -3,8 +3,8 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','builder','jquery','underscore', 'translations', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  builder,  $,       _,            translations) {
+define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
+function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  $,       _,            translations) {
 
 promptTypes.base = Backbone.View.extend({
     className: "current",
@@ -292,14 +292,14 @@ promptTypes.opening = promptTypes.base.extend({
             database.setInstanceMetaData($.extend({}, ctxt, {
                 success: function() {
                     ctxt.success({
-                        enableBackwardNavigation: false
+                        enableBackNavigation: false
                     });
                 }
             }), 'instanceName', instanceName);
             return;
         }
         that.renderContext.instanceName = instanceName;
-        ctxt.success({enableBackwardNavigation: false});
+        ctxt.success({enableBackNavigation: false});
     },
     renderContext: {
         headerImg: requirejs.toUrl('img/form_logo.png'),
@@ -494,7 +494,8 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         "change select": "modification",
         //Only needed for child views
         "click .deselect": "deselect",
-        "click .grid-select-item": "selectGridItem"
+        "click .grid-select-item": "selectGridItem",
+        "taphold .ui-radio": "deselect"
     },
     selectGridItem: function(evt) {
         var $target = $(evt.target).closest('.grid-select-item');
@@ -996,12 +997,12 @@ promptTypes.time = promptTypes.datetime.extend({
         theme: 'jqm',
         display: 'modal'
     },
-	sameTime: function(ref, value) {
-		// these are milliseconds relative to Jan 1 1970...
-		var ref_tod = (ref.valueOf() % 86400000);
-		var value_tod = (value.valueOf() % 86400000);
-		return (ref_tod != value_tod);
-	},
+    sameTime: function(ref, value) {
+        // these are milliseconds relative to Jan 1 1970...
+        var ref_tod = (ref.valueOf() % 86400000);
+        var value_tod = (value.valueOf() % 86400000);
+        return (ref_tod != value_tod);
+    },
     modification: function(evt) {
         var that = this;
         var value = that.$('input').scroller('getDate');
@@ -1165,11 +1166,11 @@ promptTypes.media = promptTypes.base.extend({
         var uri = (mediaUri != null && mediaUri.uri != null) ? mediaUri.uri : null;
         var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
         var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
-        var info = opendatakit.getPlatformInfo();
-        if ( info.container != 'Android' ) {
+        var platinfo = opendatakit.getPlatformInfo();
+        if ( platinfo.container != 'Android' ) {
             that.renderContext.pre4Android = false;
         } else {
-            that.renderContext.pre4Android = ( info.version.substring(0,1) < "4" );
+            that.renderContext.pre4Android = ( platinfo.version.substring(0,1) < "4" );
         }
         that.renderContext.mediaPath = uri;
         that.renderContext.uriValue = uri;
@@ -1182,7 +1183,7 @@ promptTypes.media = promptTypes.base.extend({
 });
 promptTypes.image = promptTypes.media.extend({
     type: "image",
-	extension: "jpg",
+    extension: "jpg",
     contentType: "image/*",
     buttonLabel: 'Take your photo:',
     templatePath: "templates/image.handlebars",
@@ -1238,7 +1239,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
         //We assume that the webkit could go away when an intent is launched,
         //so this prompt's "address" is passed along with the intent.
         var outcome = shim.doAction(this.getPromptPath(), 'launch', this.intentString,
-							((this.intentParameters == null) ? null : JSON.stringify(this.intentParameters)));
+                            ((this.intentParameters == null) ? null : JSON.stringify(this.intentParameters)));
         ctxt.append(this.intentString, platInfo.container + " outcome is " + outcome);
         if (outcome && outcome === "OK") {
             ctxt.success();
@@ -1370,7 +1371,6 @@ promptTypes.screen = promptTypes.base.extend({
     initialize: function() {
         var that = this;
         var curPath = that.getPromptPath();
-        this.prompts = builder.initializePrompts(this.prompts, function(){});
         //Wire up the prompts so that if any of them rerender the screen rerenders.
         //TODO: Think about whether there is a better way of doing this.
         //Maybe bind this or subprompts to database change events instead?
@@ -1492,7 +1492,7 @@ promptTypes.screen = promptTypes.base.extend({
 promptTypes.label = promptTypes.base.extend({
     type: "label",
     hideInHierarchy: true,
-    onActivate: function(ctxt){
+    onActivate: function(ctxt) {
         alert("label.onActivate: Should never be called!");
         ctxt.failure({message: "Internal error."});
     }

@@ -15,8 +15,7 @@ window.shim = window.shim || {
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.
-        // appPath identifies root app path (path of the index.html file).
-        return '{"container":"Chrome","version":"21.0.1180.83 m","appPath":""}';
+        return '{"container":"Chrome","version":"21.0.1180.83 m"}';
     },
     getDatabaseSettings: function() {
         // version identifies the database schema that the database layer should use.
