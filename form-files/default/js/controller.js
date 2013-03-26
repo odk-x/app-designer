@@ -664,7 +664,8 @@ window.controller = {
         contextChain: [],
         
         append : function( method, detail ) {
-            this.contextChain.push( {method: method, detail: detail} );
+			var now = new Date().getTime();
+			this.contextChain.push( {method: method, timestamp: now, detail: detail } );
 			// SpeedTracer Logging API
   		    var logger = window.console;
 		    if (logger && logger.markTimeline) {
@@ -683,7 +684,8 @@ window.controller = {
         _log: function( severity, contextMsg ) {
             var flattened = "seqAtEnd: " + window.controller.eventCount;
             $.each( this.contextChain, function(index,value) {
-                flattened += "\nmethod: " + value.method + ((value.detail != null) ? " detail: " + value.detail : "");
+                flattened += "\nmethod: " + value.method + " timestamp: " +
+					value.timestamp + ((value.detail != null) ? " detail: " + value.detail : "");
             });
             shim.log(severity, contextMsg + " execution_chain: " + flattened);
         }

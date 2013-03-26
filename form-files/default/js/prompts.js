@@ -680,7 +680,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                         that.renderContext.passiveError += e.statusText;
                     }
 					// TODO: verify how this error should be handled...
-					newctxt.failure({message: : "Error fetching choices via ajax."});
+					newctxt.failure({message: "Error fetching choices via ajax."});
                 }
             };
  
