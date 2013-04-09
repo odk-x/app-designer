@@ -1,121 +1,122 @@
 {
-    "model": {
-        "num_rooms": {
-            "type": "integer"
-        }, 
-        "electricity": {
-            "type": "string"
-        }, 
-        "water": {
-            "type": "string"
-        }, 
-        "location": {
-            "elementType": "geopoint", 
-            "type": "object", 
-            "name": "geopoint", 
-            "properties": {
-                "latitude": {
-                    "type": "number"
-                }, 
-                "altitude": {
-                    "type": "number"
-                }, 
-                "longitude": {
-                    "type": "number"
-                }, 
-                "accuracy": {
-                    "type": "number"
-                }
-            }
-        }, 
-        "owner": {
-            "type": "string"
-        }
-    }, 
-    "settings": [
-        {
-            "setting": "form_id", 
-            "_rowNum": 2, 
-            "value": "household"
-        }, 
-        {
-            "setting": "form_version", 
-            "_rowNum": 3, 
-            "value": 1
-        }, 
-        {
-            "setting": "form_title", 
-            "_rowNum": 4, 
-            "value": "Household survey"
-        }
-    ], 
-    "survey": [
-        {
-            "name": "num_rooms", 
-            "_rowNum": 2, 
-            "type": "integer", 
-            "param": null, 
-            "label": "How many rooms does the house contain?"
-        }, 
-        {
-            "name": "electricity", 
-            "_rowNum": 3, 
-            "type": "select_one", 
-            "param": "yesno", 
-            "label": "Does the house have electricity?"
-        }, 
-        {
-            "name": "water", 
-            "_rowNum": 4, 
-            "type": "select_one", 
-            "param": "yesno", 
-            "label": "Does the house have running water?"
-        }, 
-        {
-            "name": "location", 
-            "_rowNum": 5, 
-            "type": "geopoint", 
-            "param": null, 
-            "label": "Capture the household location."
-        }, 
-        {
-            "_rowNum": 6, 
-            "type": "repeat_subform", 
-            "param": "household_member", 
-            "label": "Household members:"
-        }, 
-        {
-            "name": "owner", 
-            "_rowNum": 7, 
-            "type": "text", 
-            "param": null, 
-            "label": "Who is the owner of the household?"
-        }
-    ], 
-    "choices": {
-        "yesno": [
-            {
-                "_rowNum": 2, 
-                "name": "yes", 
-                "label": "yes"
-            }, 
-            {
-                "_rowNum": 3, 
-                "name": "no", 
-                "label": "no"
-            }
-        ], 
-        "sexes": [
-            {
-                "_rowNum": 5, 
-                "name": "male", 
-                "label": "male"
-            }, 
-            {
-                "_rowNum": 6, 
-                "name": "female", 
-                "label": "female"
-            }
-        ]
+  "survey": [
+    {
+      "type": "integer",
+      "name": "num_rooms",
+      "label": "How many rooms does the house contain?",
+      "_rowNum": 2
+    },
+    {
+      "type": "select_one",
+      "name": "electricity",
+      "label": "Does the house have electricity?",
+      "_rowNum": 3,
+      "param": "yesno"
+    },
+    {
+      "type": "select_one",
+      "name": "water",
+      "label": "Does the house have running water?",
+      "_rowNum": 4,
+      "param": "yesno"
+    },
+    {
+      "type": "geopoint",
+      "name": "location",
+      "label": "Capture the household location.",
+      "_rowNum": 5
+    },
+    {
+      "type": "repeat_subform",
+      "label": "Household members:",
+      "_rowNum": 6,
+      "param": "household_member"
+    },
+    {
+      "type": "text",
+      "name": "owner",
+      "label": "Who is the owner of the household?",
+      "_rowNum": 7
     }
+  ],
+  "choices": {
+    "yesno": [
+      {
+        "list_name": "yesno",
+        "name": "yes",
+        "label": "yes",
+        "_rowNum": 2
+      },
+      {
+        "list_name": "yesno",
+        "name": "no",
+        "label": "no",
+        "_rowNum": 3
+      }
+    ],
+    "sexes": [
+      {
+        "list_name": "sexes",
+        "name": "male",
+        "label": "male",
+        "_rowNum": 5
+      },
+      {
+        "list_name": "sexes",
+        "name": "female",
+        "label": "female",
+        "_rowNum": 6
+      }
+    ]
+  },
+  "settings": [
+    {
+      "setting": "form_id",
+      "value": "household",
+      "_rowNum": 2
+    },
+    {
+      "setting": "form_version",
+      "value": 20130408,
+      "_rowNum": 3
+    },
+    {
+      "setting": "form_title",
+      "value": "Household survey",
+      "_rowNum": 4
+    }
+  ],
+  "model": {
+    "num_rooms": {
+      "type": "integer"
+    },
+    "electricity": {
+      "type": "string"
+    },
+    "water": {
+      "type": "string"
+    },
+    "location": {
+      "name": "geopoint",
+      "type": "object",
+      "elementType": "geopoint",
+      "properties": {
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "altitude": {
+          "type": "number"
+        },
+        "accuracy": {
+          "type": "number"
+        }
+      }
+    },
+    "owner": {
+      "type": "string"
+    }
+  }
 }

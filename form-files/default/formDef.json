@@ -9,7 +9,8 @@
             "value": "default"
         },
         {
-            "setting": "form_version"
+            "setting": "form_version",
+			"value": 20130408
         },
         {
             "setting": "form_title",

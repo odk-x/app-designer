@@ -1,641 +1,636 @@
-{
-    "model": {
-        "rating": {
-            "type": "integer"
-        }, 
-        "weight": {
-            "type": "number"
-        }, 
-        "avg_coffee": {
-            "type": "integer"
-        }, 
-        "coffee_today": {
-            "type": "integer"
-        }, 
-        "sex": {
-            "type": "string"
-        }, 
-        "image_test": {
-            "isPersisted": true, 
-            "elementType": "mimeUri", 
-            "type": "object", 
-            "properties": {
-                "contentType": {
-                    "default": "image/*", 
-                    "type": "string"
-                }, 
-                "uri": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "born": {
-            "elementType": "date", 
-            "type": "object"
-        }, 
-        "examples": {
-            "isPersisted": true, 
-            "items": {
-                "type": "string"
-            }, 
-            "type": "array"
-        }, 
-        "location": {
-            "elementType": "geopoint", 
-            "type": "object", 
-            "name": "geopoint", 
-            "properties": {
-                "latitude": {
-                    "type": "number"
-                }, 
-                "altitude": {
-                    "type": "number"
-                }, 
-                "longitude": {
-                    "type": "number"
-                }, 
-                "accuracy": {
-                    "type": "number"
-                }
-            }
-        }, 
-        "time": {
-            "elementType": "time", 
-            "type": "object"
-        }, 
-        "picture": {
-            "isPersisted": true, 
-            "elementType": "mimeUri", 
-            "type": "object", 
-            "properties": {
-                "contentType": {
-                    "default": "image/*", 
-                    "type": "string"
-                }, 
-                "uri": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "barcode": {
-            "type": "string"
-        }, 
-        "datetime": {
-            "elementType": "dateTime", 
-            "type": "object"
-        }, 
-        "visited_continents": {
-            "isPersisted": true, 
-            "items": {
-                "type": "string"
-            }, 
-            "type": "array"
-        }, 
-        "visited_seattle": {
-            "type": "string"
-        }, 
-        "name": {
-            "type": "string"
-        }, 
-        "age": {
-            "type": "integer"
-        }, 
-        "geopoint": {
-            "elementType": "geopoint", 
-            "type": "object", 
-            "name": "geopoint", 
-            "properties": {
-                "latitude": {
-                    "type": "number"
-                }, 
-                "altitude": {
-                    "type": "number"
-                }, 
-                "longitude": {
-                    "type": "number"
-                }, 
-                "accuracy": {
-                    "type": "number"
-                }
-            }
-        }, 
-        "recording": {
-            "isPersisted": true, 
-            "elementType": "mimeUri", 
-            "type": "object", 
-            "properties": {
-                "contentType": {
-                    "default": "audio/*", 
-                    "type": "string"
-                }, 
-                "uri": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "audio_test": {
-            "isPersisted": true, 
-            "elementType": "mimeUri", 
-            "type": "object", 
-            "properties": {
-                "contentType": {
-                    "default": "audio/*", 
-                    "type": "string"
-                }, 
-                "uri": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "error": {
-            "type": "string"
-        }, 
-        "video_test": {
-            "isPersisted": true, 
-            "elementType": "mimeUri", 
-            "type": "object", 
-            "properties": {
-                "contentType": {
-                    "default": "video/*", 
-                    "type": "string"
-                }, 
-                "uri": {
-                    "type": "string"
-                }
-            }
+﻿{
+  "survey": [
+    {
+      "type": "select_multiple",
+      "name": "examples",
+      "label": "Which examples would you like to see?",
+      "_rowNum": 2,
+      "param": "examples"
+    },
+    {
+      "type": "goto",
+      "condition": "not(selected(data('examples'), 'error'))",
+      "_rowNum": 3,
+      "param": "error_end"
+    },
+    {
+      "type": "select_one",
+      "name": "error",
+      "label": "Trigger an error on the next screen?",
+      "hint": "Error prompts are useful for finding bugs in forms with lots of branching.",
+      "_rowNum": 4,
+      "param": "yesno"
+    },
+    {
+      "type": "error",
+      "condition": "selected(data('error'), 'yes')",
+      "_rowNum": 5
+    },
+    {
+      "type": "label",
+      "_rowNum": 6,
+      "param": "error_end"
+    },
+    {
+      "type": "goto",
+      "condition": "not(selected(data('examples'), 'intents'))",
+      "_rowNum": 7,
+      "param": "intents_end"
+    },
+    {
+      "type": "barcode",
+      "name": "barcode",
+      "label": "Scan a barcode",
+      "_rowNum": 8
+    },
+    {
+      "type": "geopoint",
+      "name": "geopoint",
+      "label": "Capture your location",
+      "_rowNum": 9
+    },
+    {
+      "type": "image",
+      "name": "picture",
+      "label": "Take a picture",
+      "_rowNum": 10
+    },
+    {
+      "type": "audio",
+      "name": "recording",
+      "label": "Make a recording",
+      "_rowNum": 11
+    },
+    {
+      "type": "label",
+      "_rowNum": 12,
+      "param": "intents_end"
+    },
+    {
+      "type": "goto",
+      "condition": "not(selected(data('examples'), 'label_features'))",
+      "_rowNum": 13,
+      "param": "label_features_end"
+    },
+    {
+      "type": "note",
+      "label": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>",
+      "hint": "So can <b>hints</b>",
+      "_rowNum": 14
+    },
+    {
+      "type": "note",
+      "label": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
+      "audio": "audio/carrioncrow.mp3",
+      "image": "img/dolphin.png",
+      "_rowNum": 15
+    },
+    {
+      "type": "text",
+      "name": "name",
+      "label": "Enter your name",
+      "hint": "It will be used in the next question.",
+      "_rowNum": 16
+    },
+    {
+      "type": "note",
+      "label": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}",
+      "hint": "Handlebars templates allow labels to change depending on the values previously entered.",
+      "_rowNum": 17
+    },
+    {
+      "type": "label",
+      "_rowNum": 18,
+      "param": "label_features_end"
+    },
+    {
+      "type": "integer",
+      "condition": "selected(data('examples'), 'dynamic_defaults')",
+      "name": "avg_coffee",
+      "label": "On average, how many cups of coffee do you drink in a day?",
+      "_rowNum": 19
+    },
+    {
+      "type": "integer",
+      "condition": "selected(data('examples'), 'dynamic_defaults')",
+      "name": "coffee_today",
+      "label": "How many cups of coffee did you drink today?",
+      "default": "data('avg_coffee')",
+      "_rowNum": 20
+    },
+    {
+      "type": "goto",
+      "condition": "not(selected(data('examples'), 'datetime'))",
+      "_rowNum": 21,
+      "param": "datetime_end"
+    },
+    {
+      "type": "date",
+      "name": "born",
+      "label": "When were you born?",
+      "_rowNum": 22
+    },
+    {
+      "type": "note",
+      "condition": "data('born') && data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()",
+      "label": "Happy Birthday!",
+      "hint": "This prompt shows how to use dates in fomulas.",
+      "_rowNum": 23
+    },
+    {
+      "type": "time",
+      "name": "time",
+      "label": "What time do you usually wake up?",
+      "_rowNum": 24
+    },
+    {
+      "type": "datetime",
+      "name": "datetime",
+      "label": "When will you be available for a follow up survey?",
+      "_rowNum": 25
+    },
+    {
+      "type": "label",
+      "_rowNum": 26,
+      "param": "datetime_end"
+    },
+    {
+      "type": "geopoint",
+      "condition": "selected(data('examples'), 'geopoint')",
+      "name": "location",
+      "label": "Record your location:",
+      "_rowNum": 27
+    },
+    {
+      "type": "screen",
+      "condition": "selected(data('examples'), 'screen_group')",
+      "_rowNum": 28,
+      "prompts": [
+        {
+          "type": "select_multiple",
+          "name": "visited_continents",
+          "label": "Which continents have you visited?",
+          "_rowNum": 29,
+          "param": "continents"
+        },
+        {
+          "type": "select_one",
+          "condition": "calculates.ask_about_seattle()",
+          "name": "visited_seattle",
+          "label": "Have you visited Seattle?",
+          "required": true,
+          "_rowNum": 30,
+          "param": "yesno"
         }
-    }, 
-    "settings": [
+      ]
+    },
+    {
+      "type": "goto",
+      "condition": "not(selected(data('examples'), 'media'))",
+      "_rowNum": 32,
+      "param": "media_end"
+    },
+    {
+      "type": "screen",
+      "_rowNum": 33,
+      "prompts": [
         {
-            "setting": "form_id", 
-            "_rowNum": 2, 
-            "value": "exampleForm"
-        }, 
+          "type": "audio",
+          "name": "audio_test",
+          "label": "Make a recording:",
+          "_rowNum": 34
+        },
         {
-            "setting": "form_version", 
-            "_rowNum": 3, 
-            "value": 1
-        }, 
+          "type": "video",
+          "name": "video_test",
+          "label": "Take a video:",
+          "_rowNum": 35
+        },
         {
-            "setting": "form_title", 
-            "_rowNum": 4, 
-            "value": "Example Form"
+          "type": "image",
+          "name": "image_test",
+          "label": "Take a picture:",
+          "_rowNum": 36
         }
-    ], 
-    "survey": [
+      ]
+    },
+    {
+      "type": "label",
+      "_rowNum": 38,
+      "param": "media_end"
+    },
+    {
+      "type": "note",
+      "condition": "selected(data('examples'), 'prompt_link')",
+      "label": "<a href=\"{{promptLink \"unreachable\"}}\">This is a link to another prompt</a>",
+      "_rowNum": 39
+    },
+    {
+      "type": "label",
+      "_rowNum": 40,
+      "param": "prompt_link_return"
+    },
+    {
+      "type": "goto",
+      "_rowNum": 41,
+      "param": "unreachable_end"
+    },
+    {
+      "type": "note",
+      "name": "unreachable",
+      "label": "This prompt is unreachable except by links.",
+      "_rowNum": 42
+    },
+    {
+      "type": "goto",
+      "_rowNum": 43,
+      "param": "prompt_link_return"
+    },
+    {
+      "type": "label",
+      "_rowNum": 44,
+      "param": "unreachable_end"
+    },
+    {
+      "type": "screen",
+      "condition": "selected(data('examples'), 'custom_template')",
+      "_rowNum": 45,
+      "prompts": [
         {
-            "name": "examples", 
-            "_rowNum": 2, 
-            "type": "select_multiple", 
-            "param": "examples", 
-            "label": "Which examples would you like to see?"
-        }, 
+          "type": "note",
+          "label": "The following data will be used to generate a weight for age plot.",
+          "_rowNum": 46
+        },
         {
-            "_rowNum": 3, 
-            "type": "goto", 
-            "param": "error_end", 
-            "condition": "not(selected(data('examples'), 'error'))"
-        }, 
+          "type": "integer",
+          "name": "age",
+          "label": "Enter age (in years):",
+          "hint": "Must be less than 20.",
+          "constraint": "data('age') <= 20",
+          "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
+          "_rowNum": 47
+        },
         {
-            "name": "error", 
-            "hint": "Error prompts are useful for finding bugs in forms with lots of branching.", 
-            "_rowNum": 4, 
-            "type": "select_one", 
-            "param": "yesno", 
-            "label": "Trigger an error on the next screen?"
-        }, 
+          "type": "decimal",
+          "name": "weight",
+          "label": "Enter weight (in lbs):",
+          "_rowNum": 48
+        },
         {
-            "_rowNum": 5, 
-            "type": "error", 
-            "param": null, 
-            "condition": "selected(data('error'), 'yes')"
-        }, 
-        {
-            "type": "label", 
-            "_rowNum": 6, 
-            "param": "error_end"
-        }, 
-        {
-            "_rowNum": 7, 
-            "type": "goto", 
-            "param": "intents_end", 
-            "condition": "not(selected(data('examples'), 'intents'))"
-        }, 
-        {
-            "name": "barcode", 
-            "_rowNum": 8, 
-            "type": "barcode", 
-            "param": null, 
-            "label": "Scan a barcode"
-        }, 
-        {
-            "name": "geopoint", 
-            "_rowNum": 9, 
-            "type": "geopoint", 
-            "param": null, 
-            "label": "Capture your location"
-        }, 
-        {
-            "name": "picture", 
-            "_rowNum": 10, 
-            "type": "image", 
-            "param": null, 
-            "label": "Take a picture"
-        }, 
-        {
-            "name": "recording", 
-            "_rowNum": 11, 
-            "type": "audio", 
-            "param": null, 
-            "label": "Make a recording"
-        }, 
-        {
-            "type": "label", 
-            "_rowNum": 12, 
-            "param": "intents_end"
-        }, 
-        {
-            "_rowNum": 13, 
-            "type": "goto", 
-            "param": "label_features_end", 
-            "condition": "not(selected(data('examples'), 'label_features'))"
-        }, 
-        {
-            "hint": "So can <b>hints</b>", 
-            "type": "note", 
-            "_rowNum": 14, 
-            "param": null, 
-            "label": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>"
-        }, 
-        {
-            "type": "note", 
-            "image": "img/dolphin.png", 
-            "audio": "audio/carrioncrow.mp3", 
-            "_rowNum": 15, 
-            "param": null, 
-            "label": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns."
-        }, 
-        {
-            "name": "name", 
-            "hint": "It will be used in the next question.", 
-            "_rowNum": 16, 
-            "type": "text", 
-            "param": null, 
-            "label": "Enter your name"
-        }, 
-        {
-            "hint": "Handlebars templates allow labels to change depending on the values previously entered.", 
-            "type": "note", 
-            "_rowNum": 17, 
-            "param": null, 
-            "label": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}"
-        }, 
-        {
-            "type": "label", 
-            "_rowNum": 18, 
-            "param": "label_features_end"
-        }, 
-        {
-            "name": "avg_coffee", 
-            "type": "integer", 
-            "param": null, 
-            "_rowNum": 19, 
-            "condition": "selected(data('examples'), 'dynamic_defaults')", 
-            "label": "On average, how many cups of coffee do you drink in a day?"
-        }, 
-        {
-            "name": "coffee_today", 
-            "default": "data('avg_coffee')", 
-            "_rowNum": 20, 
-            "param": null, 
-            "label": "How many cups of coffee did you drink today?", 
-            "type": "integer", 
-            "condition": "selected(data('examples'), 'dynamic_defaults')"
-        }, 
-        {
-            "_rowNum": 21, 
-            "type": "goto", 
-            "param": "datetime_end", 
-            "condition": "not(selected(data('examples'), 'datetime'))"
-        }, 
-        {
-            "name": "born", 
-            "_rowNum": 22, 
-            "type": "date", 
-            "param": null, 
-            "label": "When were you born?"
-        }, 
-        {
-            "param": null, 
-            "hint": "This prompt shows how to use dates in fomulas.", 
-            "_rowNum": 23, 
-            "type": "note", 
-            "condition": "data('born') && data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()", 
-            "label": "Happy Birthday!"
-        }, 
-        {
-            "name": "time", 
-            "_rowNum": 24, 
-            "type": "time", 
-            "param": null, 
-            "label": "What time do you usually wake up?"
-        }, 
-        {
-            "name": "datetime", 
-            "_rowNum": 25, 
-            "type": "datetime", 
-            "param": null, 
-            "label": "When will you be available for a follow up survey?"
-        }, 
-        {
-            "type": "label", 
-            "_rowNum": 26, 
-            "param": "datetime_end"
-        }, 
-        {
-            "name": "location", 
-            "type": "geopoint", 
-            "param": null, 
-            "_rowNum": 27, 
-            "condition": "selected(data('examples'), 'geopoint')", 
-            "label": "Record your location:"
-        }, 
-        {
-            "_rowNum": 28, 
-            "prompts": [
-                {
-                    "name": "visited_continents", 
-                    "_rowNum": 29, 
-                    "type": "select_multiple", 
-                    "param": "continents", 
-                    "label": "Which continents have you visited?"
-                }, 
-                {
-                    "name": "visited_seattle", 
-                    "required": true, 
-                    "_rowNum": 30, 
-                    "param": "yesno", 
-                    "label": "Have you visited Seattle?", 
-                    "type": "select_one", 
-                    "condition": "calculates.ask_about_seattle()"
-                }
-            ], 
-            "type": "screen", 
-            "condition": "selected(data('examples'), 'screen_group')"
-        }, 
-        {
-            "_rowNum": 32, 
-            "type": "goto", 
-            "param": "media_end", 
-            "condition": "not(selected(data('examples'), 'media'))"
-        }, 
-        {
-            "type": "screen", 
-            "prompts": [
-                {
-                    "name": "audio_test", 
-                    "_rowNum": 34, 
-                    "type": "audio", 
-                    "param": null, 
-                    "label": "Make a recording:"
-                }, 
-                {
-                    "name": "video_test", 
-                    "_rowNum": 35, 
-                    "type": "video", 
-                    "param": null, 
-                    "label": "Take a video:"
-                }, 
-                {
-                    "name": "image_test", 
-                    "_rowNum": 36, 
-                    "type": "image", 
-                    "param": null, 
-                    "label": "Take a picture:"
-                }
-            ], 
-            "_rowNum": 33
-        }, 
-        {
-            "type": "label", 
-            "_rowNum": 38, 
-            "param": "media_end"
-        }, 
-        {
-            "param": null, 
-            "_rowNum": 39, 
-            "type": "note", 
-            "condition": "selected(data('examples'), 'prompt_link')", 
-            "label": "<a href=\"{{promptLink \"unreachable\"}}\">This is a link to another prompt</a>"
-        }, 
-        {
-            "type": "label", 
-            "_rowNum": 40, 
-            "param": "prompt_link_return"
-        }, 
-        {
-            "type": "goto", 
-            "_rowNum": 41, 
-            "param": "unreachable_end"
-        }, 
-        {
-            "name": "unreachable", 
-            "_rowNum": 42, 
-            "type": "note", 
-            "param": null, 
-            "label": "This prompt is unreachable except by links."
-        }, 
-        {
-            "type": "goto", 
-            "_rowNum": 43, 
-            "param": "prompt_link_return"
-        }, 
-        {
-            "type": "label", 
-            "_rowNum": 44, 
-            "param": "unreachable_end"
-        }, 
-        {
-            "_rowNum": 45, 
-            "prompts": [
-                {
-                    "_rowNum": 46, 
-                    "type": "note", 
-                    "param": null, 
-                    "label": "The following data will be used to generate a weight for age plot."
-                }, 
-                {
-                    "name": "age", 
-                    "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.", 
-                    "hint": "Must be less than 20.", 
-                    "constraint": "data('age') <= 20", 
-                    "_rowNum": 47, 
-                    "param": null, 
-                    "label": "Enter age (in years):", 
-                    "type": "integer"
-                }, 
-                {
-                    "name": "weight", 
-                    "_rowNum": 48, 
-                    "type": "decimal", 
-                    "param": null, 
-                    "label": "Enter weight (in lbs):"
-                }, 
-                {
-                    "name": "sex", 
-                    "_rowNum": 49, 
-                    "type": "select_one", 
-                    "param": "sexes", 
-                    "label": "Enter sex:"
-                }
-            ], 
-            "type": "screen", 
-            "condition": "selected(data('examples'), 'custom_template')"
-        }, 
-        {
-            "name": "specialTemplateTest", 
-            "_rowNum": 51, 
-            "param": null, 
-            "label": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:", 
-            "type": "note", 
-            "condition": "selected(data('examples'), 'custom_template')", 
-            "templatePath": "ageWeightPlot.handlebars"
-        }, 
-        {
-            "name": "rating", 
-            "hint": "1 is very bad. 10 is very good.", 
-            "inputAttributes": {
-                "max": 10, 
-                "type": "range", 
-                "min": 1
-            }, 
-            "_rowNum": 52, 
-            "param": null, 
-            "label": "How would you rate this survey?", 
-            "default": 5, 
-            "type": "integer"
+          "type": "select_one",
+          "name": "sex",
+          "label": "Enter sex:",
+          "_rowNum": 49,
+          "param": "sexes"
         }
-    ], 
-    "calculates": [
-        {
-            "calculation": "selected(data('visited_continents'), 'NorthAmerica')", 
-            "_rowNum": 2, 
-            "name": "ask_about_seattle"
-        }
-    ], 
-    "choices": {
-        "examples": [
-            {
-                "_rowNum": 12, 
-                "name": "error", 
-                "label": "error"
-            }, 
-            {
-                "_rowNum": 13, 
-                "name": "intents", 
-                "label": "intent launching"
-            }, 
-            {
-                "_rowNum": 14, 
-                "name": "label_features", 
-                "label": "label features"
-            }, 
-            {
-                "_rowNum": 15, 
-                "name": "dynamic_defaults", 
-                "label": "computed default values"
-            }, 
-            {
-                "_rowNum": 16, 
-                "name": "datetime", 
-                "label": "datetime"
-            }, 
-            {
-                "_rowNum": 17, 
-                "name": "geopoint", 
-                "label": "geopoint"
-            }, 
-            {
-                "_rowNum": 18, 
-                "name": "media", 
-                "label": "media"
-            }, 
-            {
-                "_rowNum": 19, 
-                "name": "screen_group", 
-                "label": "screen group with select and calculate"
-            }, 
-            {
-                "_rowNum": 20, 
-                "name": "custom_template", 
-                "label": "custom template"
-            }, 
-            {
-                "_rowNum": 21, 
-                "name": "prompt_link", 
-                "label": "prompt linking"
-            }
-        ], 
-        "sexes": [
-            {
-                "_rowNum": 23, 
-                "name": "male", 
-                "label": "male"
-            }, 
-            {
-                "_rowNum": 24, 
-                "name": "female", 
-                "label": "female"
-            }
-        ], 
-        "yesno": [
-            {
-                "_rowNum": 2, 
-                "name": "yes", 
-                "label": "yes"
-            }, 
-            {
-                "_rowNum": 3, 
-                "name": "no", 
-                "label": "no"
-            }
-        ], 
-        "continents": [
-            {
-                "_rowNum": 4, 
-                "name": "NorthAmerica", 
-                "label": "North America"
-            }, 
-            {
-                "_rowNum": 5, 
-                "name": "SouthAmerica", 
-                "label": "South America"
-            }, 
-            {
-                "_rowNum": 6, 
-                "name": "Europe", 
-                "label": "Europe"
-            }, 
-            {
-                "_rowNum": 7, 
-                "name": "Africa", 
-                "label": "Africa"
-            }, 
-            {
-                "_rowNum": 8, 
-                "name": "Asia", 
-                "label": "Asia"
-            }, 
-            {
-                "_rowNum": 9, 
-                "name": "Australia", 
-                "label": "Australia"
-            }, 
-            {
-                "_rowNum": 10, 
-                "name": "Antarctica", 
-                "label": "Antarctica"
-            }
-        ]
+      ]
+    },
+    {
+      "type": "note",
+      "condition": "selected(data('examples'), 'custom_template')",
+      "name": "specialTemplateTest",
+      "label": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:",
+      "templatePath": "ageWeightPlot.handlebars",
+      "_rowNum": 51
+    },
+    {
+      "type": "integer",
+      "name": "rating",
+      "label": "How would you rate this survey?",
+      "hint": "1 is very bad. 10 is very good.",
+      "default": 5,
+      "inputAttributes": {
+        "type": "range",
+        "min": 1,
+        "max": 10
+      },
+      "_rowNum": 52
     }
+  ],
+  "calculates": [
+    {
+      "name": "ask_about_seattle",
+      "calculation": "selected(data('visited_continents'), 'NorthAmerica')",
+      "_rowNum": 2
+    }
+  ],
+  "choices": {
+    "yesno": [
+      {
+        "list_name": "yesno",
+        "name": "yes",
+        "label": "yes",
+        "_rowNum": 2
+      },
+      {
+        "list_name": "yesno",
+        "name": "no",
+        "label": "no",
+        "_rowNum": 3
+      }
+    ],
+    "continents": [
+      {
+        "list_name": "continents",
+        "name": "NorthAmerica",
+        "label": "North America",
+        "_rowNum": 4
+      },
+      {
+        "list_name": "continents",
+        "name": "SouthAmerica",
+        "label": "South America",
+        "_rowNum": 5
+      },
+      {
+        "list_name": "continents",
+        "name": "Europe",
+        "label": "Europe",
+        "_rowNum": 6
+      },
+      {
+        "list_name": "continents",
+        "name": "Africa",
+        "label": "Africa",
+        "_rowNum": 7
+      },
+      {
+        "list_name": "continents",
+        "name": "Asia",
+        "label": "Asia",
+        "_rowNum": 8
+      },
+      {
+        "list_name": "continents",
+        "name": "Australia",
+        "label": "Australia",
+        "_rowNum": 9
+      },
+      {
+        "list_name": "continents",
+        "name": "Antarctica",
+        "label": "Antarctica",
+        "_rowNum": 10
+      }
+    ],
+    "examples": [
+      {
+        "list_name": "examples",
+        "name": "error",
+        "label": "error",
+        "_rowNum": 12
+      },
+      {
+        "list_name": "examples",
+        "name": "intents",
+        "label": "intent launching",
+        "_rowNum": 13
+      },
+      {
+        "list_name": "examples",
+        "name": "label_features",
+        "label": "label features",
+        "_rowNum": 14
+      },
+      {
+        "list_name": "examples",
+        "name": "dynamic_defaults",
+        "label": "computed default values",
+        "_rowNum": 15
+      },
+      {
+        "list_name": "examples",
+        "name": "datetime",
+        "label": "datetime",
+        "_rowNum": 16
+      },
+      {
+        "list_name": "examples",
+        "name": "geopoint",
+        "label": "geopoint",
+        "_rowNum": 17
+      },
+      {
+        "list_name": "examples",
+        "name": "media",
+        "label": "media",
+        "_rowNum": 18
+      },
+      {
+        "list_name": "examples",
+        "name": "screen_group",
+        "label": "screen group with select and calculate",
+        "_rowNum": 19
+      },
+      {
+        "list_name": "examples",
+        "name": "custom_template",
+        "label": "custom template",
+        "_rowNum": 20
+      },
+      {
+        "list_name": "examples",
+        "name": "prompt_link",
+        "label": "prompt linking",
+        "_rowNum": 21
+      }
+    ],
+    "sexes": [
+      {
+        "list_name": "sexes",
+        "name": "male",
+        "label": "male",
+        "_rowNum": 23
+      },
+      {
+        "list_name": "sexes",
+        "name": "female",
+        "label": "female",
+        "_rowNum": 24
+      }
+    ]
+  },
+  "settings": [
+    {
+      "setting": "form_id",
+      "value": "exampleForm",
+      "_rowNum": 2
+    },
+    {
+      "setting": "form_version",
+      "value": 20130408,
+      "_rowNum": 3
+    },
+    {
+      "setting": "form_title",
+      "value": "Example Form",
+      "_rowNum": 4
+    }
+  ],
+  "model": {
+    "examples": {
+      "type": "array",
+      "isPersisted": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "error": {
+      "type": "string"
+    },
+    "barcode": {
+      "type": "string"
+    },
+    "geopoint": {
+      "name": "geopoint",
+      "type": "object",
+      "elementType": "geopoint",
+      "properties": {
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "altitude": {
+          "type": "number"
+        },
+        "accuracy": {
+          "type": "number"
+        }
+      }
+    },
+    "picture": {
+      "type": "object",
+      "elementType": "mimeUri",
+      "isPersisted": true,
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string",
+          "default": "image/*"
+        }
+      }
+    },
+    "recording": {
+      "type": "object",
+      "elementType": "mimeUri",
+      "isPersisted": true,
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string",
+          "default": "audio/*"
+        }
+      }
+    },
+    "name": {
+      "type": "string"
+    },
+    "avg_coffee": {
+      "type": "integer"
+    },
+    "coffee_today": {
+      "type": "integer"
+    },
+    "born": {
+      "type": "object",
+      "elementType": "date"
+    },
+    "time": {
+      "type": "object",
+      "elementType": "time"
+    },
+    "datetime": {
+      "type": "object",
+      "elementType": "dateTime"
+    },
+    "location": {
+      "name": "geopoint",
+      "type": "object",
+      "elementType": "geopoint",
+      "properties": {
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "altitude": {
+          "type": "number"
+        },
+        "accuracy": {
+          "type": "number"
+        }
+      }
+    },
+    "visited_continents": {
+      "type": "array",
+      "isPersisted": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "visited_seattle": {
+      "type": "string"
+    },
+    "audio_test": {
+      "type": "object",
+      "elementType": "mimeUri",
+      "isPersisted": true,
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string",
+          "default": "audio/*"
+        }
+      }
+    },
+    "video_test": {
+      "type": "object",
+      "elementType": "mimeUri",
+      "isPersisted": true,
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string",
+          "default": "video/*"
+        }
+      }
+    },
+    "image_test": {
+      "type": "object",
+      "elementType": "mimeUri",
+      "isPersisted": true,
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string",
+          "default": "image/*"
+        }
+      }
+    },
+    "age": {
+      "type": "integer"
+    },
+    "weight": {
+      "type": "number"
+    },
+    "sex": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "integer"
+    }
+  }
 }

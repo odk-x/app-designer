@@ -1,4 +1,4 @@
-{
+﻿{
   "survey": [
     {
       "type": "text",
@@ -7,11 +7,13 @@
         "default": "What is the child's name?",
         "hindi": "शिशु का नाम क्या है?"
       },
-      "required": true
+      "required": true,
+      "_rowNum": 2
     },
     {
       "comments": "determine birthday section",
       "type": "screen",
+      "_rowNum": 4,
       "prompts": [
         {
           "type": "select_one",
@@ -21,6 +23,7 @@
             "hindi": "क्या माँ को बच्चे की जन्मतिथि पता है?"
           },
           "required": true,
+          "_rowNum": 5,
           "param": "yes_no"
         },
         {
@@ -40,7 +43,8 @@
           "constraint_message": {
             "default": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.",
             "hindi": "आप भविष्य में एक जन्मदिन में प्रवेश किया. शायद अपने डिवाइस सही तारीख नहीं है"
-          }
+          },
+          "_rowNum": 6
         },
         {
           "type": "integer",
@@ -54,7 +58,8 @@
             "default": "Please enter only months",
             "hindi": "केवल महीने दर्ज करें"
           },
-          "required": true
+          "required": true,
+          "_rowNum": 7
         }
       ]
     },
@@ -64,7 +69,8 @@
       "label": {
         "default": "Weight in kilograms:",
         "hindi": "वज़न"
-      }
+      },
+      "_rowNum": 9
     },
     {
       "type": "select_one",
@@ -73,44 +79,52 @@
         "default": "Is this an initial visit or follow-up?",
         "hindi": "क्या यह पहली विज़िट है ?"
       },
+      "_rowNum": 10,
       "param": "visit_type"
     },
     {
       "comments": "jump to gt2month",
       "type": "goto",
       "condition": "calculates.daysOld() > 2 * 30",
+      "_rowNum": 11,
       "param": "more_than_2mo"
     },
     {
       "type": "error",
-      "condition": "calculates.daysOld() > 2 * 30"
+      "condition": "calculates.daysOld() > 2 * 30",
+      "_rowNum": 12
     },
     {
       "type": "acknowledge",
       "name": "under_2_months",
       "label": {
         "default": "Protocol does NOT support under 2 months. Please refer the child to a doctor for detailed assessment.",
-        "hindi": "2 महीने के नीचे प्रोटोकॉल का समर्थन नहीं है.  बच्चे को चिकित्सक के पास लेजाने को कहें"
+        "hindi": "2 महीने के नीचे प्रोटोकॉल का समर्थन नहीं है.  बच्चे को चिकित्सक के पास लेजाने को कहें"
       },
-      "required": true
+      "required": true,
+      "_rowNum": 13
     },
     {
       "type": "goto",
+      "_rowNum": 14,
       "param": "end_of_treatments"
     },
     {
       "type": "label",
+      "_rowNum": 16,
       "param": "more_than_2mo"
     },
     {
       "type": "screen",
+      "_rowNum": 17,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "ASK:",
             "hindi": "पूछें"
-          }
+          },
+          "_rowNum": 18
         },
         {
           "type": "select_one",
@@ -120,6 +134,7 @@
             "hindi": "क्या शिशु स्तनपान ले पा रहा है?"
           },
           "required": true,
+          "_rowNum": 19,
           "param": "yes_no"
         },
         {
@@ -130,6 +145,7 @@
             "hindi": "क्या बच्चा सब कुछ ऊलती कर देता है?"
           },
           "required": true,
+          "_rowNum": 20,
           "param": "yes_no"
         },
         {
@@ -140,6 +156,7 @@
             "hindi": "पूछे: क्या शिशु को दौरे पढ़े थे?"
           },
           "required": true,
+          "_rowNum": 21,
           "param": "yes_no"
         }
       ]
@@ -152,6 +169,7 @@
         "hindi": "देखें, क्या शिशु सुस्त या बेहोश है?"
       },
       "required": true,
+      "_rowNum": 23,
       "param": "yes_no"
     },
     {
@@ -161,19 +179,22 @@
       "label": {
         "default": "Record pulse and oxygen saturation",
         "hindi": "रिकॉर्ड करें नाड़ी और ऑक्सीजन  परिपूर्णता"
-      }
+      },
+      "_rowNum": 25
     },
     {
       "comments": "FIGURE OUT REQUIRED",
       "type": "screen",
       "condition": "calculates.danger_signs_present()",
+      "_rowNum": 26,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<strong>DANGER SIGNS:</strong>",
             "hindi": "<strong>ख़तरा चिन्ह </strong>"
-          }
+          },
+          "_rowNum": 27
         },
         {
           "type": "note",
@@ -181,7 +202,8 @@
           "label": {
             "default": "<li>Not able to drink or breastfeed</li>",
             "hindi": "<li>पी नही सकना या स्तनपान नही कर सकना </li>"
-          }
+          },
+          "_rowNum": 28
         },
         {
           "type": "note",
@@ -189,7 +211,8 @@
           "label": {
             "default": "<li>Vomits everything</li>",
             "hindi": "<li>सब कुछ ऊलती कर देना</li>"
-          }
+          },
+          "_rowNum": 29
         },
         {
           "type": "note",
@@ -197,7 +220,8 @@
           "label": {
             "default": "<li>Convulsions</li>",
             "hindi": "<li>दौरे पढ़ना </li>"
-          }
+          },
+          "_rowNum": 30
         },
         {
           "type": "note",
@@ -205,7 +229,8 @@
           "label": {
             "default": "<li>Lethargic or unconscious</li>",
             "hindi": "<li>सुस्त या बेहोश</li>"
-          }
+          },
+          "_rowNum": 31
         },
         {
           "type": "note",
@@ -213,7 +238,8 @@
           "label": {
             "default": "<li>Oxygen saturation less than 90%</li>",
             "hindi": "<li>ऑक्सीजन संतृप्ति कम से कम 90%</li>"
-          }
+          },
+          "_rowNum": 32
         },
         {
           "comments": "I'm a bit uncertain whether this classification section should move to the end. I think it's best to leave it where it is so the HW knows to complete the survey immediatley",
@@ -223,7 +249,8 @@
             "default": "This child needs <strong>URGENT</strong> attention; complete the assessment and any pre-referral treatment immediately so referral is not delayed",
             "hindi": "ख़तरे के आम चिन्ौ वाले बाकछे को <strong> तुरंत </strong> ध्यान देने की ज़रूरत  है. आकलन और रेफएरल पूर्व उपकर तुरंत दे, जिससे की रेफएरल मैं देरी नही हो."
           },
-          "required": true
+          "required": true,
+          "_rowNum": 33
         }
       ]
     },
@@ -232,12 +259,13 @@
       "name": "basic_q",
       "label": {
         "default": "Does the child have:",
-        "hindi": "बच्चे को क्या है:"
+        "hindi": "बच्चे को क्या है:"
       },
       "hint": {
         "default": "Select all that apply",
-        "hindi": "जो भी लागू हो उसे चुनें"
+        "hindi": "जो भी लागू हो उसे चुनें"
       },
+      "_rowNum": 35,
       "param": "basic_four_questions"
     },
     {
@@ -246,13 +274,14 @@
       "name": "how_long_difficulty_breathing",
       "label": {
         "default": "For how long has the child had a cough or difficult breathing?",
-        "hindi": "कितनी देर के लिए बच्चे को खांसी या साँस लेनें में दिकत हुई?"
+        "hindi": "कितनी देर के लिए बच्चे को खांसी या साँस लेनें में दिकत हुई?"
       },
       "hint": {
         "default": "(in days)",
         "hindi": "दीनो मैं"
       },
-      "required": true
+      "required": true,
+      "_rowNum": 37
     },
     {
       "comments": "REQUIRED WITH PROMPTING",
@@ -262,7 +291,8 @@
       "label": {
         "default": "Count the breaths in one minute.",
         "hindi": "एक मिनिट के लिए साँस गिने."
-      }
+      },
+      "_rowNum": 39
     },
     {
       "type": "breathcounter",
@@ -272,7 +302,8 @@
         "default": "Breath count is elevated. Repeat breath count.",
         "hindi": "सास की गिनती ज़्यादा है. एक बार और गिनिए."
       },
-      "required": true
+      "required": true,
+      "_rowNum": 40
     },
     {
       "type": "select_one",
@@ -288,6 +319,7 @@
       },
       "image": "./img/chestdrawing.jpg",
       "required": true,
+      "_rowNum": 41,
       "param": "present"
     },
     {
@@ -296,22 +328,26 @@
       "name": "stridor",
       "label": "Look and listen for stridor.",
       "required": true,
+      "_rowNum": 42,
       "param": "present"
     },
     {
       "type": "label",
+      "_rowNum": 44,
       "param": "above_2mo_diarrhoea_section"
     },
     {
       "type": "screen",
       "condition": "calculates.reportDiarrhoea()",
+      "_rowNum": 45,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "ASK:",
             "hindi": "पूछें"
-          }
+          },
+          "_rowNum": 46
         },
         {
           "type": "integer",
@@ -320,7 +356,8 @@
             "default": "For how many days has the child had diarrhoea?",
             "hindi": "कब से?"
           },
-          "required": true
+          "required": true,
+          "_rowNum": 47
         },
         {
           "type": "select_one",
@@ -330,6 +367,7 @@
             "hindi": "पूछें क्या माल में खून आता है?"
           },
           "required": true,
+          "_rowNum": 48,
           "param": "yes_no"
         }
       ]
@@ -337,13 +375,15 @@
     {
       "type": "screen",
       "condition": "calculates.reportDiarrhoea()",
+      "_rowNum": 50,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "Assess the child's general condition:",
             "hindi": "शिशु की सामानया स्थिति देखें."
-          }
+          },
+          "_rowNum": 51
         },
         {
           "type": "select_one",
@@ -353,6 +393,7 @@
             "hindi": "बेचेन्न या चिढ़चिढ़ा  है?"
           },
           "required": true,
+          "_rowNum": 52,
           "param": "yes_no"
         }
       ]
@@ -366,11 +407,13 @@
         "hindi": "धँसी हूई आखें के लिए देखें."
       },
       "required": true,
+      "_rowNum": 54,
       "param": "yes_no"
     },
     {
       "type": "screen",
       "condition": "calculates.reportDiarrhoea()",
+      "_rowNum": 55,
       "prompts": [
         {
           "type": "note",
@@ -378,7 +421,8 @@
             "default": "<strong><span style=\"color:blue\">Offer the child fluid to drink.</span></strong>",
             "hindi": "बच्चे को कुछ पीने को दे."
           },
-          "required": true
+          "required": true,
+          "_rowNum": 56
         },
         {
           "type": "select_one",
@@ -388,6 +432,7 @@
             "hindi": "क्या बच्चा पी नही सकता या बहुत कम पिता है?"
           },
           "required": true,
+          "_rowNum": 57,
           "param": "yes_no"
         },
         {
@@ -399,6 +444,7 @@
             "hindi": "पीने को उतावला है, प्यासा है?"
           },
           "required": true,
+          "_rowNum": 58,
           "param": "yes_no"
         }
       ]
@@ -413,14 +459,17 @@
       },
       "image": "./img/pinchskin.jpg",
       "required": true,
+      "_rowNum": 60,
       "param": "skin_elasticity"
     },
     {
       "type": "label",
+      "_rowNum": 64,
       "param": "above_2mo_fever_section"
     },
     {
       "type": "screen",
+      "_rowNum": 65,
       "prompts": [
         {
           "type": "select_one",
@@ -430,6 +479,7 @@
             "hindi": "कक्षा तापमान को मापने के लिए संभव है?"
           },
           "required": true,
+          "_rowNum": 66,
           "param": "yes_no"
         },
         {
@@ -440,7 +490,8 @@
             "default": "Measure axillary temperature:",
             "hindi": "कक्षा तापमान"
           },
-          "required": true
+          "required": true,
+          "_rowNum": 67
         },
         {
           "type": "select_one",
@@ -450,24 +501,28 @@
             "default": "Feel  for fever:",
             "hindi": "तापमान देखें"
           },
+          "_rowNum": 68,
           "param": "present"
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 70,
       "param": "above_2mo_fever_assessment"
     },
     {
       "type": "screen",
       "condition": "calculates.fever()",
+      "_rowNum": 71,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "ASK:",
             "hindi": "पूछें:"
-          }
+          },
+          "_rowNum": 72
         },
         {
           "type": "integer",
@@ -480,7 +535,8 @@
             "default": "(in days)",
             "hindi": "दीनो मैं"
           },
-          "required": true
+          "required": true,
+          "_rowNum": 73
         },
         {
           "comments": "test",
@@ -492,6 +548,7 @@
             "hindi": "क्या बुखार रोज़ाना आता है?"
           },
           "required": true,
+          "_rowNum": 74,
           "param": "yes_no"
         }
       ]
@@ -499,15 +556,17 @@
     {
       "type": "screen",
       "condition": "calculates.fever()",
+      "_rowNum": 77,
       "prompts": [
         {
           "type": "select_one",
           "name": "malaria_risk",
           "label": {
             "default": "Decide Malaria Risk",
-            "hindi": "मलेरिया जोखिम तय करें"
+            "hindi": "मलेरिया जोखिम तय करें"
           },
           "required": true,
+          "_rowNum": 78,
           "param": "high_low"
         },
         {
@@ -518,6 +577,7 @@
             "hindi": "बच्चे को पिछले 3 महीने के भीतर चेचक था?"
           },
           "required": true,
+          "_rowNum": 79,
           "param": "yes_no"
         }
       ]
@@ -525,13 +585,15 @@
     {
       "type": "screen",
       "condition": "calculates.fever()",
+      "_rowNum": 82,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "LOOK or FEEL for:",
             "hindi": "देखें व महसूस करें."
-          }
+          },
+          "_rowNum": 83
         },
         {
           "type": "select_one",
@@ -541,6 +603,7 @@
             "hindi": "अकड़ी गर्दन"
           },
           "required": true,
+          "_rowNum": 84,
           "param": "present"
         },
         {
@@ -553,6 +616,7 @@
             "hindi": "ब्रह्मारंध्र उभड़ा"
           },
           "required": true,
+          "_rowNum": 85,
           "param": "present"
         }
       ]
@@ -560,13 +624,15 @@
     {
       "type": "screen",
       "condition": "calculates.fever()",
+      "_rowNum": 88,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "LOOK for:",
-            "hindi": "निम्नलिखित पे निशान करे"
-          }
+            "hindi": "निम्नलिखित पे निशान करे"
+          },
+          "_rowNum": 89
         },
         {
           "type": "select_one",
@@ -576,6 +642,7 @@
             "hindi": "साधारण लाल चकत्ते"
           },
           "required": true,
+          "_rowNum": 90,
           "param": "present"
         },
         {
@@ -586,6 +653,7 @@
             "hindi": "नाक बह रही है"
           },
           "required": true,
+          "_rowNum": 91,
           "param": "present"
         },
         {
@@ -596,6 +664,7 @@
             "hindi": "लाल आँखें"
           },
           "required": true,
+          "_rowNum": 92,
           "param": "present"
         }
       ]
@@ -603,22 +672,25 @@
     {
       "type": "screen",
       "condition": "calculates.fever() && calculates.anyMeasles()",
+      "_rowNum": 95,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "LOOK for:",
-            "hindi": "निम्नलिखित पे निशान करे"
-          }
+            "hindi": "निम्नलिखित पे निशान करे"
+          },
+          "_rowNum": 96
         },
         {
           "type": "select_one",
           "name": "eye_pus",
           "label": {
             "default": "Pus draining from the eye",
-            "hindi": "आंख से पस बह रही हे"
+            "hindi": "आंख से पस बह रही हे"
           },
           "required": true,
+          "_rowNum": 97,
           "param": "present"
         },
         {
@@ -629,6 +701,7 @@
             "hindi": "कॉर्निया के clouding"
           },
           "required": true,
+          "_rowNum": 98,
           "param": "present"
         },
         {
@@ -636,9 +709,10 @@
           "name": "mouth_ulcers",
           "label": {
             "default": "Mouth ulcers",
-            "hindi": "मुँह में अल्सर"
+            "hindi": "मुँह में अल्सर"
           },
           "required": true,
+          "_rowNum": 99,
           "param": "present"
         },
         {
@@ -650,21 +724,25 @@
             "hindi": "मुँह अल्सर गहरा है या लंबा - चौड़ा\n है?"
           },
           "required": true,
+          "_rowNum": 100,
           "param": "yes_no"
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 105,
       "param": "above_2mo_fever_assessment_end"
     },
     {
       "type": "label",
+      "_rowNum": 107,
       "param": "above_2mo_ear_section"
     },
     {
       "type": "screen",
       "condition": "calculates.reportEarProblem()",
+      "_rowNum": 109,
       "prompts": [
         {
           "type": "select_one",
@@ -674,6 +752,7 @@
             "hindi": "कान में दर्द है?"
           },
           "required": true,
+          "_rowNum": 110,
           "param": "yes_no"
         },
         {
@@ -681,9 +760,10 @@
           "name": "ear_discharge_reported",
           "label": {
             "default": "Is there ear discharge?",
-            "hindi": "कान बहतें हेय़"
+            "hindi": "कान बहतें हेय़"
           },
           "required": true,
+          "_rowNum": 111,
           "param": "yes_no"
         },
         {
@@ -692,24 +772,27 @@
           "name": "ear_discharge_days",
           "label": {
             "default": "How many days has there been ear discharge?",
-            "hindi": "कितने दिनों से कान बह रहे हेंय़"
+            "hindi": "कितने दिनों से कान बह रहे हेंय़"
           },
-          "required": true
+          "required": true,
+          "_rowNum": 112
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.reportEarProblem()",
+      "_rowNum": 115,
       "prompts": [
         {
           "type": "select_one",
           "name": "ear_discharge_observed",
           "label": {
             "default": "Look for pus draining from the ear",
-            "hindi": "कान से पस बहने के लिए देखे"
+            "hindi": "कान से पस बहने के लिए देखे"
           },
           "required": true,
+          "_rowNum": 116,
           "param": "present"
         },
         {
@@ -717,26 +800,30 @@
           "name": "ear_swelling",
           "label": {
             "default": "Feel for tender swelling behind the ear",
-            "hindi": "कान के पीछे नाज़ुक सूजन के लिए महसूस करे"
+            "hindi": "कान के पीछे नाज़ुक सूजन के लिए महसूस करे"
           },
           "required": true,
+          "_rowNum": 117,
           "param": "present"
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 120,
       "param": "above_2mo_malnutrition_section"
     },
     {
       "type": "screen",
+      "_rowNum": 121,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "LOOK and FEEL:",
             "hindi": "देखें व महसूस करें."
-          }
+          },
+          "_rowNum": 122
         },
         {
           "type": "select_one",
@@ -746,6 +833,7 @@
             "hindi": "दिखने वाला गंभीर सुखापना."
           },
           "required": true,
+          "_rowNum": 123,
           "param": "present"
         },
         {
@@ -756,6 +844,7 @@
             "hindi": "दोनो परो मैं सूजन"
           },
           "required": true,
+          "_rowNum": 124,
           "param": "present"
         }
       ]
@@ -769,10 +858,12 @@
         "hindi": "वज़न को ग्रोत चार्ट पर दर्शा कर कुपोषण का ग्रेड निधारित करें."
       },
       "hint": "Weight: {{weight.value}}kg",
+      "_rowNum": 126,
       "param": "malnutrition_grade"
     },
     {
       "type": "label",
+      "_rowNum": 128,
       "param": "above_2mo_anaemia"
     },
     {
@@ -783,10 +874,12 @@
         "hindi": "देखें व महसूस करें."
       },
       "required": true,
+      "_rowNum": 129,
       "param": "no_some_severe"
     },
     {
       "type": "label",
+      "_rowNum": 132,
       "param": "above_2mo_check_immunization_status"
     },
     {
@@ -797,6 +890,7 @@
         "hindi": "शिशु को कौनसा टीका नही लगा है?"
       },
       "choice_filter": "context.age_weeks <= Math.round(calculates.daysOld() / 7)",
+      "_rowNum": 133,
       "param": "vaccinations"
     },
     {
@@ -807,6 +901,7 @@
         "default": "Does the child have any other health problems?",
         "hindi": "शिशु को कोई और दिकाट है?"
       },
+      "_rowNum": 135,
       "param": "yes_no"
     },
     {
@@ -816,28 +911,34 @@
       "label": {
         "default": "Refer the child to a doctor for detailed assessment or the \"other health problem(s)\".",
         "hindi": "शिशु को डॉक्टर के पास रेफर करें."
-      }
+      },
+      "_rowNum": 136
     },
     {
       "type": "goto",
+      "_rowNum": 138,
       "param": "start_classifications"
     },
     {
       "type": "label",
+      "_rowNum": 2,
       "param": "start_classifications"
     },
     {
       "type": "screen",
+      "_rowNum": 3,
       "prompts": [
         {
           "type": "note",
           "condition": "calculates.danger_signs_present()",
-          "label": "<div style=\"background-color:#F5A9A9;\"><strong>GENERAL DANGER SIGN PRESENT</div>"
+          "label": "<div style=\"background-color:#F5A9A9;\"><strong>GENERAL DANGER SIGN PRESENT</div>",
+          "_rowNum": 5
         },
         {
           "type": "note",
           "condition": "calculates.reportDifficultyBreathing()",
-          "label": "<u>RESPIRATORY CLASSIFICATION: </u>"
+          "label": "<u>RESPIRATORY CLASSIFICATION: </u>",
+          "_rowNum": 7
         },
         {
           "type": "note",
@@ -845,12 +946,14 @@
           "label": {
             "default": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE PNEUMONIA OR VERY SEVERE DISEASE</strong></div>",
             "hindi": "<strong>गंभीर निमोनिया या बहुत गंभीर बीमारी</strong>"
-          }
+          },
+          "_rowNum": 9
         },
         {
           "type": "note",
           "condition": "calculates.severePneumonia() && calculates.danger_signs_present()",
-          "hint": "General danger sign pesent"
+          "hint": "General danger sign pesent",
+          "_rowNum": 10
         },
         {
           "type": "note",
@@ -858,12 +961,14 @@
           "hint": {
             "default": "Chest indrawing.",
             "hindi": "पसली का अत्यधिक धसना"
-          }
+          },
+          "_rowNum": 11
         },
         {
           "type": "note",
           "condition": "calculates.severePneumonia() && selected(data('stridor'), 'present')",
-          "hint": "Stridor in calm child"
+          "hint": "Stridor in calm child",
+          "_rowNum": 12
         },
         {
           "type": "note",
@@ -871,7 +976,8 @@
           "label": {
             "default": "<div style=\"background-color:yellow;\"><strong>PNEUMONIA</strong></div>",
             "hindi": "निमोनिया"
-          }
+          },
+          "_rowNum": 14
         },
         {
           "type": "note",
@@ -879,7 +985,8 @@
           "hint": {
             "default": "Fast Breathing",
             "hindi": "तेज़ी से साँस लेना"
-          }
+          },
+          "_rowNum": 15
         },
         {
           "type": "note",
@@ -887,12 +994,14 @@
           "label": {
             "default": "<div style=\"background-color:#81F781;\"><strong>COUGH OR COLD</strong></div>",
             "hindi": "खाँसी या ज़ुकाम"
-          }
+          },
+          "_rowNum": 17
         },
         {
           "type": "note",
           "condition": "calculates.reportDiarrhoea()",
-          "label": "<u>DIARRHOEA CLASSIFICATION:</u>"
+          "label": "<u>DIARRHOEA CLASSIFICATION:</u>",
+          "_rowNum": 20
         },
         {
           "type": "note",
@@ -900,7 +1009,8 @@
           "label": {
             "default": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE DEHYDRATION</strong></div>",
             "hindi": "<strong>गंभीर निर्जलीकरण</strong>"
-          }
+          },
+          "_rowNum": 22
         },
         {
           "type": "note",
@@ -908,7 +1018,8 @@
           "hint": {
             "default": "Lethargic or unconscious.",
             "hindi": "सुस्त या बेहोश"
-          }
+          },
+          "_rowNum": 23
         },
         {
           "type": "note",
@@ -916,7 +1027,8 @@
           "hint": {
             "default": "Sunken eyes.",
             "hindi": "धँसी हुई आँखें."
-          }
+          },
+          "_rowNum": 24
         },
         {
           "type": "note",
@@ -924,7 +1036,8 @@
           "hint": {
             "default": "Not able to drink or drinking poorly.",
             "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना."
-          }
+          },
+          "_rowNum": 25
         },
         {
           "type": "note",
@@ -932,7 +1045,8 @@
           "hint": {
             "default": "Skin pinch goes back very slowly.",
             "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
-          }
+          },
+          "_rowNum": 26
         },
         {
           "type": "note",
@@ -940,7 +1054,8 @@
           "label": {
             "default": "<div style=\"background-color:yellow;\"><strong>SOME DEHYDRATION</strong></div>",
             "hindi": "कुछ निर्जलीकरण"
-          }
+          },
+          "_rowNum": 28
         },
         {
           "type": "note",
@@ -948,7 +1063,8 @@
           "hint": {
             "default": "Restless, irritable.",
             "hindi": "बेचें व चिढ़चिढ़ा"
-          }
+          },
+          "_rowNum": 29
         },
         {
           "type": "note",
@@ -956,7 +1072,8 @@
           "hint": {
             "default": "Sunken eyes.",
             "hindi": "धँसी हुई आँखें"
-          }
+          },
+          "_rowNum": 30
         },
         {
           "type": "note",
@@ -964,7 +1081,8 @@
           "hint": {
             "default": "Drinks eagerly, thirsty.",
             "hindi": "प्यासा है"
-          }
+          },
+          "_rowNum": 31
         },
         {
           "type": "note",
@@ -972,7 +1090,8 @@
           "hint": {
             "default": "Skin pinch goes back slowly.",
             "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
-          }
+          },
+          "_rowNum": 32
         },
         {
           "type": "note",
@@ -984,7 +1103,8 @@
           "hint": {
             "default": "Not enough signs to classify as    \n  some or severe dehydration.",
             "hindi": "निर्जलीकरण के पयापत चिन्ह का न होना."
-          }
+          },
+          "_rowNum": 34
         },
         {
           "type": "note",
@@ -992,7 +1112,8 @@
           "label": {
             "default": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE PERSISTENT DIARRHOEA</strong></div>",
             "hindi": "गंभीर लगातार दस्त"
-          }
+          },
+          "_rowNum": 36
         },
         {
           "type": "note",
@@ -1000,17 +1121,20 @@
           "hint": {
             "default": "Diarrhoea for 14 days or more.",
             "hindi": "१४ दिन से ज़्यादा दस्त"
-          }
+          },
+          "_rowNum": 37
         },
         {
           "type": "note",
           "condition": "calculates.severePersistentDiarrhoea() && calculates.anyDehydration()",
-          "hint": "Deyhdration"
+          "hint": "Deyhdration",
+          "_rowNum": 38
         },
         {
           "type": "note",
           "condition": "calculates.persistentDiarrhoea()",
-          "label": "<div style=\"background-color:yellow;\"><strong>PERSISTENT DIARRHOEA</strong></div>"
+          "label": "<div style=\"background-color:yellow;\"><strong>PERSISTENT DIARRHOEA</strong></div>",
+          "_rowNum": 40
         },
         {
           "type": "note",
@@ -1018,7 +1142,8 @@
           "hint": {
             "default": "Diarrhoea for 14 days or more.",
             "hindi": "१४ दिन से ज़्यादा दस्त"
-          }
+          },
+          "_rowNum": 41
         },
         {
           "type": "note",
@@ -1026,7 +1151,8 @@
           "label": {
             "default": "<div style=\"background-color:yellow;\"><strong>DYSENTERY</strong></div>",
             "hindi": "पोचिश"
-          }
+          },
+          "_rowNum": 43
         },
         {
           "type": "note",
@@ -1034,38 +1160,45 @@
           "hint": {
             "default": "Blood in the stool",
             "hindi": "माल मैं खून"
-          }
+          },
+          "_rowNum": 44
         },
         {
           "type": "note",
           "condition": "calculates.fever()",
-          "label": "<u>FEVER CLASSIFICATION:</u>"
+          "label": "<u>FEVER CLASSIFICATION:</u>",
+          "_rowNum": 46
         },
         {
           "comments": "These can have high or low malaria risk which needs to be incorporated into treatments.",
           "type": "note",
           "condition": "calculates.verySevereFebrileDisease() && calculates.fever()",
-          "label": "<div style=\"background-color:#F5A9A9;\"><strong>VERY SEVERE FEBRILE DISEASE</strong></div>"
+          "label": "<div style=\"background-color:#F5A9A9;\"><strong>VERY SEVERE FEBRILE DISEASE</strong></div>",
+          "_rowNum": 48
         },
         {
           "type": "note",
           "condition": "calculates.verySevereFebrileDisease() && calculates.danger_signs_present() && calculates.fever()",
-          "hint": "Danger Sign Present"
+          "hint": "Danger Sign Present",
+          "_rowNum": 49
         },
         {
           "type": "note",
           "condition": "calculates.verySevereFebrileDisease() && selected(data('stiff_neck'), 'present') && calculates.fever()",
-          "hint": "Stiff Neck"
+          "hint": "Stiff Neck",
+          "_rowNum": 50
         },
         {
           "type": "note",
           "condition": "calculates.verySevereFebrileDisease() &&  selected(data('bulging_fontanelle'), 'present') && calculates.fever()",
-          "hint": "Bulging Fontanelle"
+          "hint": "Bulging Fontanelle",
+          "_rowNum": 51
         },
         {
           "type": "note",
           "condition": "calculates.malaria() && calculates.fever()",
-          "label": "<div style=\"background-color:yellow;\"><strong>MALARIA</strong></div>"
+          "label": "<div style=\"background-color:yellow;\"><strong>MALARIA</strong></div>",
+          "_rowNum": 53
         },
         {
           "type": "note",
@@ -1073,136 +1206,163 @@
           "hint": {
             "default": "Fever (by history hot or temperature 37.5 deg C or above)",
             "hindi": "पूछने से या छूने से या तापमान ३७.५ डेग सी या अधिक"
-          }
+          },
+          "_rowNum": 54
         },
         {
           "type": "note",
           "condition": "calculates.malaria() && selected(data('malaria_risk'), 'low') && calculates.fever()",
-          "hint": "NO runny nose, NO measles, and NO other cause of fever"
+          "hint": "NO runny nose, NO measles, and NO other cause of fever",
+          "_rowNum": 55
         },
         {
           "type": "note",
           "condition": "calculates.feverMalariaUnlikely() && calculates.fever()",
-          "label": "<div style=\"background-color:#81F781;\">FEVER-MALARIA UNLIKELY</div>"
+          "label": "<div style=\"background-color:#81F781;\">FEVER-MALARIA UNLIKELY</div>",
+          "_rowNum": 57
         },
         {
           "type": "note",
           "condition": "calculates.severeComplicatedMeasles() && calculates.fever()",
-          "label": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE COMPLICATED MEASLES</strong></div>"
+          "label": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE COMPLICATED MEASLES</strong></div>",
+          "_rowNum": 59
         },
         {
           "type": "note",
           "condition": "calculates.severeComplicatedMeasles() && calculates.danger_signs_present() && calculates.fever()",
-          "hint": "Danger Sign Present"
+          "hint": "Danger Sign Present",
+          "_rowNum": 60
         },
         {
           "type": "note",
           "condition": "calculates.severeComplicatedMeasles() && selected(data('cornea_clouding'), 'present') && calculates.fever()",
-          "hint": "Clouding of cornea"
+          "hint": "Clouding of cornea",
+          "_rowNum": 61
         },
         {
           "type": "note",
           "condition": "calculates.severeComplicatedMeasles() && (selected(data('mouth_ulcers'), 'present') && selected(data('mouth_ulcers_deep'), 'yes') ) && calculates.fever()",
-          "hint": "Deep or extensive mouth ulcers"
+          "hint": "Deep or extensive mouth ulcers",
+          "_rowNum": 62
         },
         {
           "type": "note",
           "condition": "calculates.measlesWithComplications() && calculates.fever()",
-          "label": "<div style=\"background-color:yellow;\"><strong>MEASLES WITH EYE OR MOUTH COMPLICATIONS</strong></div>"
+          "label": "<div style=\"background-color:yellow;\"><strong>MEASLES WITH EYE OR MOUTH COMPLICATIONS</strong></div>",
+          "_rowNum": 64
         },
         {
           "type": "note",
           "condition": "calculates.measlesWithComplications() && selected(data('eye_pus'), 'present') && calculates.fever()",
-          "hint": "Pus draining from the eye"
+          "hint": "Pus draining from the eye",
+          "_rowNum": 65
         },
         {
           "type": "note",
           "condition": "calculates.measlesWithComplications() && selected(data('mouth_ulcers'), 'present') && calculates.fever()",
-          "hint": "Mouth ulcers"
+          "hint": "Mouth ulcers",
+          "_rowNum": 66
         },
         {
           "type": "note",
           "condition": "calculates.measlesClassification() && calculates.fever()",
-          "label": "<div style=\"background-color:#81F781;\"><strong>MEASLES</strong></div>"
+          "label": "<div style=\"background-color:#81F781;\"><strong>MEASLES</strong></div>",
+          "_rowNum": 68
         },
         {
           "type": "note",
           "condition": "calculates.reportEarProblem()",
-          "label": "<u>EAR PROBLEM CLASSIFICATION:</u>"
+          "label": "<u>EAR PROBLEM CLASSIFICATION:</u>",
+          "_rowNum": 70
         },
         {
           "type": "note",
           "condition": "calculates.mastoiditis()",
-          "label": "<div style=\"background-color:#F5A9A9;\"><strong>MASTOIDITIS</strong></div>"
+          "label": "<div style=\"background-color:#F5A9A9;\"><strong>MASTOIDITIS</strong></div>",
+          "_rowNum": 72
         },
         {
           "type": "note",
           "condition": "calculates.mastoiditis() && selected(data('ear_swelling'), 'present')",
-          "hint": "Tender swelling behind the ear"
+          "hint": "Tender swelling behind the ear",
+          "_rowNum": 73
         },
         {
           "type": "note",
           "condition": "calculates.acuteEarInfection()",
-          "label": "<div style=\"background-color:yellow;\"><strong>ACUTE EAR INFECTION</strong></div>"
+          "label": "<div style=\"background-color:yellow;\"><strong>ACUTE EAR INFECTION</strong></div>",
+          "_rowNum": 75
         },
         {
           "type": "note",
           "condition": "calculates.acuteEarInfection() && selected(data('ear_pain'), 'yes')",
-          "hint": "Ear pain"
+          "hint": "Ear pain",
+          "_rowNum": 76
         },
         {
           "type": "note",
           "condition": "calculates.acuteEarInfection() && selected(data('ear_discharge_observed'), 'present') && (data('ear_discharge_days') < 14)",
-          "hint": "Pus is seen draining from the ear and discharge is reported for less than 14 days"
+          "hint": "Pus is seen draining from the ear and discharge is reported for less than 14 days",
+          "_rowNum": 77
         },
         {
           "type": "note",
           "condition": "calculates.chronicEarInfection()",
-          "label": "<div style=\"background-color:yellow;\"><strong>CHRONIC EAR INFECTION</strong></div>"
+          "label": "<div style=\"background-color:yellow;\"><strong>CHRONIC EAR INFECTION</strong></div>",
+          "_rowNum": 79
         },
         {
           "type": "note",
           "condition": "calculates.chronicEarInfection() && selected(data('ear_discharge_observed'), 'present') && (data('ear_discharge_days') >= 14)",
-          "hint": "Pus is seen draining from the ear and discharge is reported for 14 days or more"
+          "hint": "Pus is seen draining from the ear and discharge is reported for 14 days or more",
+          "_rowNum": 80
         },
         {
           "type": "note",
           "condition": "calculates.noEarInfection() && calculates.reportEarProblem()",
-          "label": "<div style=\"background-color:#81F781;\">NO EAR INFECTION</div>"
+          "label": "<div style=\"background-color:#81F781;\">NO EAR INFECTION</div>",
+          "_rowNum": 82
         },
         {
           "type": "note",
-          "label": "<u>NUTRITIONAL STATUS CLASSIFICATION:</u>"
+          "label": "<u>NUTRITIONAL STATUS CLASSIFICATION:</u>",
+          "_rowNum": 84
         },
         {
           "type": "note",
           "condition": "calculates.severeMalnutrition()",
-          "label": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE MALNUTRITION</strong></div>"
+          "label": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE MALNUTRITION</strong></div>",
+          "_rowNum": 86
         },
         {
           "type": "note",
           "condition": "calculates.severeMalnutrition() && selected(data('wasting'), 'present')",
-          "hint": "Visible severe wasting"
+          "hint": "Visible severe wasting",
+          "_rowNum": 87
         },
         {
           "type": "note",
           "condition": "calculates.severeMalnutrition() && selected(data('oedema'), 'present')",
-          "hint": "Oedema of both feet"
+          "hint": "Oedema of both feet",
+          "_rowNum": 88
         },
         {
           "type": "note",
           "condition": "calculates.veryLowWeight()",
           "label": "<div style=\"background-color:yellow;\"><strong>VERY LOW WEIGHT</strong></div>",
-          "hint": "Very low weight for age"
+          "hint": "Very low weight for age",
+          "_rowNum": 90
         },
         {
           "type": "note",
           "condition": "calculates.notVeryLowWeight()",
-          "label": "<div style=\"background-color:#81F781;\">NOT VERY LOW WEIGHT</div>"
+          "label": "<div style=\"background-color:#81F781;\">NOT VERY LOW WEIGHT</div>",
+          "_rowNum": 92
         },
         {
           "type": "note",
-          "label": "<u>ANAEMIA CLASSIFICATION:</u>"
+          "label": "<u>ANAEMIA CLASSIFICATION:</u>",
+          "_rowNum": 94
         },
         {
           "type": "note",
@@ -1211,7 +1371,8 @@
             "default": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE ANAEMIA</strong></div>",
             "hindi": "<strong>गंभीर अनेमिया</strong>"
           },
-          "hint": "Severe palmar pallor"
+          "hint": "Severe palmar pallor",
+          "_rowNum": 96
         },
         {
           "type": "note",
@@ -1220,7 +1381,8 @@
             "default": "<div style=\"background-color:yellow;\"><strong>ANAEMIA</strong></div>",
             "hindi": "अनीमिया"
           },
-          "hint": "Some palmar pallor"
+          "hint": "Some palmar pallor",
+          "_rowNum": 98
         },
         {
           "type": "note",
@@ -1228,88 +1390,105 @@
           "label": {
             "default": "<div style=\"background-color:#81F781;\">NO ANAEMIA</div>",
             "hindi": "अनीमिया नही"
-          }
+          },
+          "_rowNum": 100
         }
       ]
     },
     {
       "type": "goto",
       "condition": false,
+      "_rowNum": 104,
       "param": "skip_treatment"
     },
     {
       "comments": "This section is for treatments that are given no matter the classification color.",
       "type": "label",
+      "_rowNum": 2,
       "param": "shared_treatment_section"
     },
     {
       "type": "screen",
       "condition": "(calculates.persistentDiarrhoea() && not(calculates.hasSevereCondition())) || calculates.severeMalnutrition() || calculates.anyMeasles()",
+      "_rowNum": 4,
       "prompts": [
         {
           "type": "note",
-          "label": "<h3>Give Vitamin A</h3>"
+          "label": "<h3>Give Vitamin A</h3>",
+          "_rowNum": 5
         },
         {
           "type": "note",
           "condition": "calculates.persistentDiarrhoea() || calculates.severeMalnutrition()",
-          "hint": "Give single dose in clinic in Persistent Diarrhoea & Severe Malnutrition"
+          "hint": "Give single dose in clinic in Persistent Diarrhoea & Severe Malnutrition",
+          "_rowNum": 6
         },
         {
           "type": "note",
           "condition": "calculates.anyMeasles()",
-          "hint": "Give two doses in Measles (Give first does in clinic and give mother one dose to give at home the next day)."
+          "hint": "Give two doses in Measles (Give first does in clinic and give mother one dose to give at home the next day).",
+          "_rowNum": 7
         },
         {
           "type": "note",
           "label": {
             "default": "Vitamin A syrup (100,000 IU/ml) dosage instructions:",
             "hindi": "डोसेज देने के निर्देशन:"
-          }
+          },
+          "_rowNum": 8
         },
         {
           "type": "note",
           "condition": "calculates.daysOld() < 30 * 6",
-          "label": "Give .5 ml"
+          "label": "Give .5 ml",
+          "_rowNum": 9
         },
         {
           "type": "note",
           "condition": "calculates.daysOld() >= 30 * 6 && calculates.daysOld() < 30 * 12",
-          "label": "Give 1 ml"
+          "label": "Give 1 ml",
+          "_rowNum": 10
         },
         {
           "type": "note",
           "condition": "calculates.daysOld() >= 30 * 12",
-          "label": "Give 2 ml"
+          "label": "Give 2 ml",
+          "_rowNum": 11
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 16,
       "param": "red_treatment_section"
     },
     {
       "type": "goto",
       "condition": "not(calculates.hasSevereCondition() || calculates.danger_signs_present())",
+      "_rowNum": 17,
       "param": "no_severe_conditions"
     },
     {
       "type": "screen",
+      "_rowNum": 19,
       "prompts": [
         {
           "type": "note",
-          "label": "Initial Treatment of Severe Conditions"
+          "label": "Initial Treatment of Severe Conditions",
+          "_rowNum": 20
         },
         {
           "type": "acknowledge",
           "name": "acknowledge_severe_condition_referral_begin_red",
-          "label": "Patient should be REFERRED to Hospital immediately after giving initial treatment"
+          "label": "Patient should be REFERRED to Hospital immediately after giving initial treatment",
+          "_rowNum": 21
         },
         {
           "type": "acknowledge",
           "condition": "calculates.severeMalnutrition()",
           "name": "acknowledge_keep_warm_red",
-          "label": "Keep the child warm while referral is being arranged"
+          "label": "Keep the child warm while referral is being arranged",
+          "_rowNum": 22
         }
       ]
     },
@@ -1317,11 +1496,13 @@
       "type": "screen",
       "condition": "calculates.firstDoseChloramophenicol()",
       "required": true,
+      "_rowNum": 25,
       "prompts": [
         {
           "type": "note",
           "label": "<h3>Give First does of Cotrimoxazole </h3>",
-          "hint": "If not possible, give oral amoxycillin."
+          "hint": "If not possible, give oral amoxycillin.",
+          "_rowNum": 26
         },
         {
           "type": "select_one",
@@ -1330,6 +1511,7 @@
             "default": "Choose a cotrimoxazole tablet type:",
             "hindi": "कोटरिमोक्षज़ोल टॅबलेट चुनें"
           },
+          "_rowNum": 27,
           "param": "cotrimoxazole_type"
         },
         {
@@ -1340,7 +1522,8 @@
           "label": {
             "default": "Give 1/2 Adult Tablet",
             "hindi": "बढ़ों की १/२ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 28
         },
         {
           "comments": "less than a year old",
@@ -1350,7 +1533,8 @@
           "label": {
             "default": "Give 2 Pediatric Tablets",
             "hindi": "बच्चों की २ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 29
         },
         {
           "comments": "more than an year old",
@@ -1360,7 +1544,8 @@
           "label": {
             "default": "Give 1 Adult Tablet",
             "hindi": "बढ़ों की १ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 30
         },
         {
           "comments": "more than an year old",
@@ -1370,105 +1555,127 @@
           "label": {
             "default": "Give 3 Pediatric Tablets",
             "hindi": "बच्चों की ३ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 31
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.verySevereFebrileDisease()",
+      "_rowNum": 34,
       "prompts": [
         {
           "comments": "TODO: There is a referral not possible contingency for this.",
           "type": "acknowledge",
           "name": "acknowledge_give_quinine_red",
           "label": "Give first dose of quinine after making a blood smear.",
-          "required": true
+          "required": true,
+          "_rowNum": 35
         },
         {
           "type": "note",
-          "label": "Intravenous or intramuscular quinine dosage:"
+          "label": "Intravenous or intramuscular quinine dosage:",
+          "_rowNum": 36
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 6) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 4 * 30)",
-          "label": "<p>Give 0.4 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.2 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
+          "label": "<p>Give 0.4 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.2 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>",
+          "_rowNum": 37
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 6 && data('weight') < 10) : (calculates.daysOld() >= 30 * 4 && calculates.daysOld() < 30 * 12)",
-          "label": "<p>Give 0.6 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.3 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
+          "label": "<p>Give 0.6 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.3 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>",
+          "_rowNum": 38
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 12) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 24)",
-          "label": "<p>Give 0.8 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.4 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
+          "label": "<p>Give 0.8 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.4 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>",
+          "_rowNum": 39
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 12 && data('weight') < 14) : (calculates.daysOld() >= 30 * 24 && calculates.daysOld() < 30 * 36)",
-          "label": "<p>Give 1.0 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.5 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
+          "label": "<p>Give 1.0 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.5 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>",
+          "_rowNum": 40
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 14 && data('weight') < 19) : (calculates.daysOld() >= 30 * 36 && calculates.daysOld() < 30 * 60)",
-          "label": "<p>Give 1.2 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.6 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
+          "label": "<p>Give 1.2 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.6 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>",
+          "_rowNum": 41
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.verySevereFebrileDisease() || calculates.mastoiditis()",
+      "_rowNum": 44,
       "prompts": []
     },
     {
       "type": "goto",
       "condition": "calculates.severeDehydration() || calculates.severePersistentDiarrhoea()",
+      "_rowNum": 52,
       "param": "dehydration_treatments"
     },
     {
       "type": "label",
+      "_rowNum": 53,
       "param": "severe_condition_dehydration_return"
     },
     {
       "type": "screen",
       "condition": "calculates.severeComplicatedMeasles() && (selected(data('cornea_clouding'), 'present') || selected(data('eye_pus'), 'present') )",
+      "_rowNum": 55,
       "prompts": [
         {
           "type": "note",
-          "label": "<h3>Treat Eye Infection with Tetracycline Eye Ointment.</h3>"
+          "label": "<h3>Treat Eye Infection with Tetracycline Eye Ointment.</h3>",
+          "_rowNum": 56
         },
         {
           "type": "note",
-          "label": "Clean both eyes"
+          "label": "Clean both eyes",
+          "_rowNum": 57
         },
         {
           "type": "note",
-          "hint": "Wash Hands"
+          "hint": "Wash Hands",
+          "_rowNum": 58
         },
         {
           "type": "note",
-          "hint": "Ask child to close the eye."
+          "hint": "Ask child to close the eye.",
+          "_rowNum": 59
         },
         {
           "type": "note",
-          "hint": "Use clean cloth and water to gently wipe away pus."
+          "hint": "Use clean cloth and water to gently wipe away pus.",
+          "_rowNum": 60
         },
         {
           "type": "note",
-          "label": "Then apply tetracycline eye ointment"
+          "label": "Then apply tetracycline eye ointment",
+          "_rowNum": 61
         },
         {
           "type": "note",
-          "hint": "Ask the child to look up."
+          "hint": "Ask the child to look up.",
+          "_rowNum": 62
         },
         {
           "type": "note",
-          "hint": "Squirt a small amount of ointment on the inside of the lower lid."
+          "hint": "Squirt a small amount of ointment on the inside of the lower lid.",
+          "_rowNum": 63
         },
         {
           "type": "note",
-          "hint": "Wash hands again."
+          "hint": "Wash hands again.",
+          "_rowNum": 64
         }
       ]
     },
@@ -1480,21 +1687,25 @@
       "label": {
         "default": "Prevent low blood sugar by breastmilk, other milk/water with sugar (4 tsp sugar per cup.)",
         "hindi": "खून मैं शक्कर की कमी रोकने के लिए स्तनपान कराए. ऊपरी दूधा, पानी मैं शक्कर मिलकर दें  (४ चम्मच शक्कर १ कप पानी मे.)"
-      }
+      },
+      "_rowNum": 67
     },
     {
       "type": "screen",
+      "_rowNum": 68,
       "prompts": [
         {
           "type": "acknowledge",
           "name": "acknowledge_referral_reminder_red",
-          "label": "Patient should be REFERRED to the Hospital IMMEDIATELY"
+          "label": "Patient should be REFERRED to the Hospital IMMEDIATELY",
+          "_rowNum": 69
         },
         {
           "type": "select_one",
           "name": "going_to_hospital",
           "label": "Is the child going to the hospital?",
           "required": true,
+          "_rowNum": 70,
           "param": "yes_no"
         }
       ]
@@ -1503,26 +1714,31 @@
       "type": "acknowledge",
       "condition": "calculates.severeMalnutrition() && selected(data('going_to_hospital'), 'yes')",
       "name": "acknowledge_keep_warm_on_way_red",
-      "label": "Keep the child warm while on the way to hospital"
+      "label": "Keep the child warm while on the way to hospital",
+      "_rowNum": 73
     },
     {
       "type": "goto",
+      "_rowNum": 74,
       "param": "end_of_treatments"
     },
     {
       "type": "label",
+      "_rowNum": 78,
       "param": "no_severe_conditions"
     },
     {
       "type": "screen",
       "condition": "calculates.pneumonia() || calculates.acuteEarInfection() || calculates.dysentery()",
+      "_rowNum": 82,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Give Cotrimoxazole for 5 days</h3>",
             "hindi": "<h3>कोटरिमोक्षज़ोल देने के इन्स्ट्रक्षन</h3>"
-          }
+          },
+          "_rowNum": 83
         },
         {
           "type": "select_one",
@@ -1531,6 +1747,7 @@
             "default": "Choose a cotrimoxazole tablet type:",
             "hindi": "कोटरिमोक्षज़ोल टॅबलेट चुनें"
           },
+          "_rowNum": 84,
           "param": "cotrimoxazole_type"
         },
         {
@@ -1541,7 +1758,8 @@
           "label": {
             "default": "Give 1/2 Adult Tablet",
             "hindi": "बढ़ों की १/२ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 85
         },
         {
           "comments": "less than a year old",
@@ -1551,7 +1769,8 @@
           "label": {
             "default": "Give 2 Pediatric Tablets",
             "hindi": "बच्चों की २ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 86
         },
         {
           "comments": "more than an year old",
@@ -1561,7 +1780,8 @@
           "label": {
             "default": "Give 1 Adult Tablet",
             "hindi": "बढ़ों की १ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 87
         },
         {
           "comments": "more than an year old",
@@ -1571,29 +1791,34 @@
           "label": {
             "default": "Give 3 Pediatric Tablets",
             "hindi": "बच्चों की ३ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 88
         }
       ]
     },
     {
       "type": "screen",
       "condition": "(data('axillary_temperature') > 38.5) || selected(data('ear_pain'), 'yes')",
+      "_rowNum": 91,
       "prompts": [
         {
           "type": "note",
-          "label": "<h3>Give Paracetamol for High Fever or Ear Pain</h3>"
+          "label": "<h3>Give Paracetamol for High Fever or Ear Pain</h3>",
+          "_rowNum": 92
         },
         {
           "type": "note",
           "hint": {
             "default": "Give a single dose of paracetamol in the clinic.",
             "hindi": "क्लिनिक मैं एक खुराक प्रेसेटमल की दें."
-          }
+          },
+          "_rowNum": 93
         },
         {
           "type": "note",
           "condition": "not(calculates.hasSevereCondition())",
-          "hint": "Give 3 additional doses of paracetamol for use at home every 6 hours until high fever or ear pain is gone."
+          "hint": "Give 3 additional doses of paracetamol for use at home every 6 hours until high fever or ear pain is gone.",
+          "_rowNum": 94
         },
         {
           "type": "note",
@@ -1605,7 +1830,8 @@
           "hint": {
             "default": "No dosage instructions for children under 2 months.",
             "hindi": "२ महीन से कम उम्र के बच्चों के लिए कोई निर्देशन नही है."
-          }
+          },
+          "_rowNum": 95
         },
         {
           "type": "note",
@@ -1617,7 +1843,8 @@
           "hint": {
             "default": "Give 1/4 500mg tablet or one 100mg tabel",
             "hindi": "५०० मी ग्राम का १/४ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 96
         },
         {
           "type": "note",
@@ -1629,17 +1856,20 @@
           "hint": {
             "default": "Give 1/2 500mg tablet or one and one half 100 mg tablet",
             "hindi": "५०० मी ग्राम का १/२ टॅबलेट दें"
-          }
+          },
+          "_rowNum": 97
         }
       ]
     },
     {
       "type": "goto",
       "condition": false,
+      "_rowNum": 120,
       "param": "dehydration_treatments"
     },
     {
       "type": "label",
+      "_rowNum": 121,
       "param": "normal_dehydration_return"
     },
     {
@@ -1650,149 +1880,180 @@
         "hindi": "निम्नलिखित टीके दें:"
       },
       "choice_filter": "selected(data('needed_vaccinations'), context.name)",
+      "_rowNum": 123,
       "param": "vaccinations"
     },
     {
       "type": "acknowledge",
       "condition": "selected(data('mouth_ulcers'), 'present')",
       "name": "acknowledge_give_gentian_violet",
-      "label": "If mouth ulcers, treat with gentian violet."
+      "label": "If mouth ulcers, treat with gentian violet.",
+      "_rowNum": 125
     },
     {
       "type": "screen",
       "condition": "selected(data('eye_pus'), 'present')",
+      "_rowNum": 127,
       "prompts": [
         {
           "type": "note",
-          "label": "<h3>Treat Eye Infection with Tetracycline Eye Ointment.</h3>"
+          "label": "<h3>Treat Eye Infection with Tetracycline Eye Ointment.</h3>",
+          "_rowNum": 128
         },
         {
           "type": "note",
-          "label": "Clean both eyes 3 times daily."
+          "label": "Clean both eyes 3 times daily.",
+          "_rowNum": 129
         },
         {
           "type": "note",
-          "hint": "Wash hands."
+          "hint": "Wash hands.",
+          "_rowNum": 130
         },
         {
           "type": "note",
-          "hint": "Ask child to close the eye."
+          "hint": "Ask child to close the eye.",
+          "_rowNum": 131
         },
         {
           "type": "note",
-          "hint": "Use clean cloth and water to gently wipe away pus."
+          "hint": "Use clean cloth and water to gently wipe away pus.",
+          "_rowNum": 132
         },
         {
           "type": "note",
-          "label": "Then apply tetracycline eye ointment in both eyes 3 times daily."
+          "label": "Then apply tetracycline eye ointment in both eyes 3 times daily.",
+          "_rowNum": 133
         },
         {
           "type": "note",
-          "hint": "Ask the child to look up."
+          "hint": "Ask the child to look up.",
+          "_rowNum": 134
         },
         {
           "type": "note",
-          "hint": "Squirt a small amount of ointment on the inside of the lower lid."
+          "hint": "Squirt a small amount of ointment on the inside of the lower lid.",
+          "_rowNum": 135
         },
         {
           "type": "note",
-          "hint": "Wash hands again."
+          "hint": "Wash hands again.",
+          "_rowNum": 136
         },
         {
           "type": "note",
-          "label": "Treat until redness is gone."
+          "label": "Treat until redness is gone.",
+          "_rowNum": 137
         },
         {
           "type": "note",
-          "label": "Do not use other eye ointments or drops, or put anything else in the eye."
+          "label": "Do not use other eye ointments or drops, or put anything else in the eye.",
+          "_rowNum": 138
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.chronicEarInfection()",
+      "_rowNum": 141,
       "prompts": [
         {
           "type": "note",
-          "label": "<h3>Dry the Ear by Wicking.</h3>"
+          "label": "<h3>Dry the Ear by Wicking.</h3>",
+          "_rowNum": 142
         },
         {
           "type": "note",
-          "label": "Dry the ear at least 3 time daily"
+          "label": "Dry the ear at least 3 time daily",
+          "_rowNum": 143
         },
         {
           "type": "note",
-          "hint": "Roll clean absorbent cloth or soft, strong tissue paper into a wick."
+          "hint": "Roll clean absorbent cloth or soft, strong tissue paper into a wick.",
+          "_rowNum": 144
         },
         {
           "type": "note",
-          "hint": "Place the wick in the young infant's ear."
+          "hint": "Place the wick in the young infant's ear.",
+          "_rowNum": 145
         },
         {
           "type": "note",
-          "hint": "Remove the wick when wet."
+          "hint": "Remove the wick when wet.",
+          "_rowNum": 146
         },
         {
           "type": "note",
-          "hint": "Replace the wick with a clean one and repeat these steps until the ear is dry."
+          "hint": "Replace the wick with a clean one and repeat these steps until the ear is dry.",
+          "_rowNum": 147
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.persistentDiarrhoea()",
+      "_rowNum": 150,
       "prompts": [
         {
           "type": "note",
           "label": "Give Zinc",
-          "hint": "For persistent diarrhoea give zinc sulphate (20 mg elemental zinc) daily for 14 days."
+          "hint": "For persistent diarrhoea give zinc sulphate (20 mg elemental zinc) daily for 14 days.",
+          "_rowNum": 151
         },
         {
           "type": "select_one",
           "name": "zinc_type",
           "label": "Choose zinc type:",
+          "_rowNum": 152,
           "param": "tablet_syrup"
         },
         {
           "type": "note",
           "condition": "selected(data('zinc_type'), 'tablet')",
-          "label": "Give one zinc tablet."
+          "label": "Give one zinc tablet.",
+          "_rowNum": 153
         },
         {
           "type": "note",
           "condition": "selected(data('zinc_type'), 'syrup')",
-          "label": "Give 10 ml of zinc syrup."
+          "label": "Give 10 ml of zinc syrup.",
+          "_rowNum": 154
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 156,
       "param": "advise_home_care_cold"
     },
     {
       "type": "screen",
       "condition": "calculates.coughOrCold()",
+      "_rowNum": 157,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Advise to Give Home Care for cough or cold</h3>",
             "hindi": "<h3>मा को सलाह दें खाँसी ज़ुकाम के लिए घर मैं देख भाल करें.</h3>"
-          }
+          },
+          "_rowNum": 158
         },
         {
           "type": "note",
           "label": {
             "default": "<strong>TELL THE MOTHER:</strong>",
             "hindi": "<strong>मा से बोले</strong>"
-          }
+          },
+          "_rowNum": 159
         },
         {
           "type": "note",
           "label": {
             "default": "<li>Feed the child during illness.</li>",
             "hindi": "<li>बीमारी मैं भी खाना दें. </li>"
-          }
+          },
+          "_rowNum": 160
         },
         {
           "comments": "See home fluids? These appear to be listed in Plan A",
@@ -1804,7 +2065,8 @@
           "hint": {
             "default": "<ul><li>Increase breast feeding.</li>\n<li>Offer the child extra to drink. (See home fluids)</li></ul>",
             "hindi": "<ul><li>बच्चे को ज़्यादा पीने के लिए दें.</li><li> घर पर देने वाले पेय की सूची देखें.</li>"
-          }
+          },
+          "_rowNum": 161
         },
         {
           "type": "note",
@@ -1812,7 +2074,8 @@
           "label": {
             "default": "<li>Soothe the Throat, with a Safe Remedy (age 6 months or more)</li>",
             "hindi": "<li>गले की खराश के लिए द्वा दें. (६ महीने की उम्र से उपर)</li>"
-          }
+          },
+          "_rowNum": 162
         },
         {
           "type": "note",
@@ -1820,7 +2083,8 @@
           "hint": {
             "default": "Safe remedies to recommend:\n<li>Continue Breastfeeding</li>\n<li>Honey, tulsi, ginger, herbal teas and other safe local home remedies</li>",
             "hindi": "घर मैं काम आने वाली सुरक्षित चीज़े बताए. <li>स्तनपान जारी रखें</li><li> घर मैं शहदाए सौंठ</li><li> हरबल चाय या कोई अन्य सुरक्षित घरेलू इलाज</li>"
-          }
+          },
+          "_rowNum": 163
         },
         {
           "type": "note",
@@ -1828,35 +2092,40 @@
           "hint": {
             "default": "Avoid cough syrups.",
             "hindi": "खाँसी की दावा न पिलाए."
-          }
+          },
+          "_rowNum": 164
         },
         {
           "type": "note",
           "label": {
             "default": "<li>If the child's nose is blocked and interferes with feeding clear the nose.</li>",
             "hindi": "<li>अगर बाँध नाक स्तनपान मैं रुकावट लाती है तो नाक सॉफ करें. </li>"
-          }
+          },
+          "_rowNum": 165
         },
         {
           "type": "note",
           "label": {
             "default": "<li>Watch for the following signs and return quickly if they occur:</li>",
             "hindi": "<li>चिन्ह के लिए सावधान रह और यदि कुछ होये तो वापस आए. </li>"
-          }
+          },
+          "_rowNum": 166
         },
         {
           "type": "note",
           "hint": {
             "default": "<li>Child becomes sicker</li>",
             "hindi": "<li>बच्चा अधिक बीमार हो जाए. </li>"
-          }
+          },
+          "_rowNum": 167
         },
         {
           "type": "note",
           "hint": {
             "default": "<li>Not able to drink or breastfeed</li>",
             "hindi": "<li>स्तनपान या अन्य तरल पदार्थ नही ले सके. </li>"
-          }
+          },
+          "_rowNum": 168
         },
         {
           "comments": "In accordance with the note, fast/difficult breathing and fever only appear if the child doesn't already have them",
@@ -1865,7 +2134,8 @@
           "hint": {
             "default": "<li>Fast breathing</li>",
             "hindi": "<li>तेज़ सास लेना</li>"
-          }
+          },
+          "_rowNum": 169
         },
         {
           "type": "note",
@@ -1873,7 +2143,8 @@
           "hint": {
             "default": "<li>Difficult breathing</li>",
             "hindi": "<li>सास लेने मैं दिकाट </li>"
-          }
+          },
+          "_rowNum": 170
         },
         {
           "comments": "Should this include cold to touch like the signs for home care?",
@@ -1882,7 +2153,8 @@
           "hint": {
             "default": "<li>Develops a fever</li>",
             "hindi": "<li>बुखार हो जाए. </li>"
-          }
+          },
+          "_rowNum": 171
         },
         {
           "comments": "TODO: See if we should add this one",
@@ -1891,26 +2163,31 @@
           "hint": {
             "default": "<li>Blood in stools</li>",
             "hindi": "<li>मल मैं खून. </li>"
-          }
+          },
+          "_rowNum": 172
         }
       ]
     },
     {
       "type": "goto",
       "condition": "calculates.malaria() && selected(data('fever_present_every_day'), 'yes') && data('fever_days') > 7",
+      "_rowNum": 175,
       "param": "acknowledge_refer_for_assessment"
     },
     {
       "type": "goto",
       "condition": "calculates.coughOrCold() && (data('how_long_difficulty_breathing') > 30)",
+      "_rowNum": 176,
       "param": "acknowledge_refer_for_assessment"
     },
     {
       "type": "goto",
+      "_rowNum": 177,
       "param": "end_acknowledge_refer_for_assessment"
     },
     {
       "type": "label",
+      "_rowNum": 178,
       "param": "acknowledge_refer_for_assessment"
     },
     {
@@ -1919,7 +2196,8 @@
       "label": {
         "default": "Refer for assessment.",
         "hindi": "अगर खाँसी ३० दिन से ज़्यादा की है तो जाच के लिए रेफर करें."
-      }
+      },
+      "_rowNum": 179
     },
     {
       "type": "note",
@@ -1927,35 +2205,42 @@
       "hint": {
         "default": "Coughing for more than 30 days requires referral.",
         "hindi": "३० दिन से ज़्यादा खाँस तो रेफरल दें"
-      }
+      },
+      "_rowNum": 180
     },
     {
       "type": "label",
+      "_rowNum": 181,
       "param": "end_acknowledge_refer_for_assessment"
     },
     {
       "type": "goto",
       "condition": "not(calculates.malaria())",
+      "_rowNum": 183,
       "param": "end_give_antimalarials"
     },
     {
       "type": "screen",
+      "_rowNum": 184,
       "prompts": [
         {
           "comments": "Teach the mother",
           "type": "note",
           "condition": "calculates.gtTwoMonth_malariaHigh()",
-          "label": "<h3>Give Oral Antimalarials for HIGH malaria risk areas after making a blood smear.</h3>"
+          "label": "<h3>Give Oral Antimalarials for HIGH malaria risk areas after making a blood smear.</h3>",
+          "_rowNum": 185
         },
         {
           "type": "note",
           "condition": "calculates.gtTwoMonth_malariaLow()",
-          "label": "<h3>Give Oral Antimalarials for LOW malaria risk areas after making a blood smear.</h3>"
+          "label": "<h3>Give Oral Antimalarials for LOW malaria risk areas after making a blood smear.</h3>",
+          "_rowNum": 186
         },
         {
           "type": "select_one",
           "name": "antimalarial",
           "label": "Choose an antimalarial:",
+          "_rowNum": 187,
           "param": "antimalarial"
         }
       ]
@@ -1963,214 +2248,258 @@
     {
       "type": "screen",
       "condition": "calculates.gtTwoMonth_malariaHigh() && selected(data('antimalarial'), 'chloroquine')",
+      "_rowNum": 189,
       "prompts": [
         {
           "type": "note",
           "label": "Presumptive treatment:",
-          "hint": "Give to all children classified as MALARIA for 3 days."
+          "hint": "Give to all children classified as MALARIA for 3 days.",
+          "_rowNum": 190
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Day 1</td><td colspan=\"2\">Day 2</td><td colspan=\"2\">Day 3</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td colspan=\"1\">Primaquin</td><td colspan=\"2\">Chloroquine</td><td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td><td>Tablet</td><td>Syrup</td><td>Tablet</td><td>Syrup</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td><td>1/2</td><td>7.5 ml</td><td>1/4</td><td>4 ml</td>\n    </tr>\n</table>"
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Day 1</td><td colspan=\"2\">Day 2</td><td colspan=\"2\">Day 3</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td colspan=\"1\">Primaquin</td><td colspan=\"2\">Chloroquine</td><td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td><td>Tablet</td><td>Syrup</td><td>Tablet</td><td>Syrup</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td><td>1/2</td><td>7.5 ml</td><td>1/4</td><td>4 ml</td>\n    </tr>\n</table>",
+          "_rowNum": 191
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Day 1</td><td colspan=\"2\">Day 2</td><td colspan=\"2\">Day 3</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td colspan=\"1\">Primaquin</td><td colspan=\"2\">Chloroquine</td><td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td><td>Tablet</td><td>Syrup</td><td>Tablet</td><td>Syrup</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td><td>1</td><td>15 ml</td><td>1/2</td><td>7.5 ml</td>\n    </tr>\n</table>"
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Day 1</td><td colspan=\"2\">Day 2</td><td colspan=\"2\">Day 3</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td colspan=\"1\">Primaquin</td><td colspan=\"2\">Chloroquine</td><td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td><td>Tablet</td><td>Syrup</td><td>Tablet</td><td>Syrup</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td><td>1</td><td>15 ml</td><td>1/2</td><td>7.5 ml</td>\n    </tr>\n</table>",
+          "_rowNum": 192
         },
         {
           "type": "note",
-          "hint": "Explain to the mother that she should watch her child carefully for 30 minutes after giving a dose of chloroquine."
+          "hint": "Explain to the mother that she should watch her child carefully for 30 minutes after giving a dose of chloroquine.",
+          "_rowNum": 193
         },
         {
           "type": "note",
-          "hint": "Explain that itching is a possible side effect of the drug, but is not dangerous."
+          "hint": "Explain that itching is a possible side effect of the drug, but is not dangerous.",
+          "_rowNum": 194
         },
         {
           "type": "note",
           "label": "Radical treatment:",
-          "hint": "Give ONLY if blood smear is P. vivax positive; no radical treatment is required if P. falciparum smear positive."
+          "hint": "Give ONLY if blood smear is P. vivax positive; no radical treatment is required if P. falciparum smear positive.",
+          "_rowNum": 195
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "No radical treatment."
+          "label": "No radical treatment.",
+          "_rowNum": 196
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "Give one primaquine tablet 2.5 mg base daily for 5 days."
+          "label": "Give one primaquine tablet 2.5 mg base daily for 5 days.",
+          "_rowNum": 197
         },
         {
           "type": "note",
-          "label": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
+          "label": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>",
+          "_rowNum": 198
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.gtTwoMonth_malariaHigh() && selected(data('antimalarial'), 'sulphadoxine')",
+      "_rowNum": 201,
       "prompts": [
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "Give 1/4 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
+          "label": "Give 1/4 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose",
+          "_rowNum": 202
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "Give 1 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
+          "label": "Give 1 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose",
+          "_rowNum": 203
         },
         {
           "type": "note",
           "label": "Radical treatment:",
-          "hint": "Give ONLY if blood smear is P. vivax positive; no radical treatment is required if P. falciparum smear positive."
+          "hint": "Give ONLY if blood smear is P. vivax positive; no radical treatment is required if P. falciparum smear positive.",
+          "_rowNum": 204
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "No radical treatment."
+          "label": "No radical treatment.",
+          "_rowNum": 205
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "Give one primaquine tablet 2.5 mg base daily for 5 days."
+          "label": "Give one primaquine tablet 2.5 mg base daily for 5 days.",
+          "_rowNum": 206
         },
         {
           "type": "note",
-          "label": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
+          "label": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>",
+          "_rowNum": 207
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.gtTwoMonth_malariaLow() && selected(data('antimalarial'), 'chloroquine')",
+      "_rowNum": 210,
       "prompts": [
         {
           "type": "note",
           "label": "Presumptive treatment:",
-          "hint": "Give to all children classified as MALARIA for 1 day."
+          "hint": "Give to all children classified as MALARIA for 1 day.",
+          "_rowNum": 211
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Day 1</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td>\n    </tr>\n</table>"
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Day 1</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td>\n    </tr>\n</table>",
+          "_rowNum": 212
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Day 1</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td>\n    </tr>\n</table>"
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Day 1</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td>\n    </tr>\n</table>",
+          "_rowNum": 213
         },
         {
           "comments": "This isn't included in the low risk section but I'm assuming I should add it",
           "type": "note",
-          "hint": "Explain to the mother that she should watch her child carefully for 30 minutes after giving a dose of chloroquine."
+          "hint": "Explain to the mother that she should watch her child carefully for 30 minutes after giving a dose of chloroquine.",
+          "_rowNum": 214
         },
         {
           "comments": "This isn't included in the low risk section but I'm assuming I should add it",
           "type": "note",
-          "hint": "Explain that itching is a possible side effect of the drug, but is not dangerous."
+          "hint": "Explain that itching is a possible side effect of the drug, but is not dangerous.",
+          "_rowNum": 215
         },
         {
           "type": "note",
           "label": "Radical treatment:",
-          "hint": "Give ONLY if blood smear is positive for malarial parasite."
+          "hint": "Give ONLY if blood smear is positive for malarial parasite.",
+          "_rowNum": 216
         },
         {
           "type": "note",
-          "label": "If blood smear is P. falciparum positive"
-        },
-        {
-          "type": "note",
-          "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
-        },
-        {
-          "type": "note",
-          "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td>\n    </tr>\n</table>"
-        },
-        {
-          "type": "note",
-          "label": "If blood smear is P. vivax positive"
+          "label": "If blood smear is P. falciparum positive",
+          "_rowNum": 217
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>",
+          "_rowNum": 218
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>1</td>\n    </tr>\n</table>"
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td>\n    </tr>\n</table>",
+          "_rowNum": 219
         },
         {
           "type": "note",
-          "label": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
+          "label": "If blood smear is P. vivax positive",
+          "_rowNum": 220
+        },
+        {
+          "type": "note",
+          "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>",
+          "_rowNum": 221
+        },
+        {
+          "type": "note",
+          "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>1</td>\n    </tr>\n</table>",
+          "_rowNum": 222
+        },
+        {
+          "type": "note",
+          "label": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>",
+          "_rowNum": 223
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.gtTwoMonth_malariaLow() && selected(data('antimalarial'), 'sulphadoxine')",
+      "_rowNum": 225,
       "prompts": [
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "Give 1/4 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
+          "label": "Give 1/4 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose",
+          "_rowNum": 226
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "Give 1 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
+          "label": "Give 1 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose",
+          "_rowNum": 227
         },
         {
           "type": "note",
           "label": "Radical treatment:",
-          "hint": "Give ONLY if blood smear is positive for malarial parasite."
+          "hint": "Give ONLY if blood smear is positive for malarial parasite.",
+          "_rowNum": 228
         },
         {
           "type": "note",
-          "label": "If blood smear is P. falciparum positive"
-        },
-        {
-          "type": "note",
-          "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
-        },
-        {
-          "type": "note",
-          "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td>\n    </tr>\n</table>"
-        },
-        {
-          "type": "note",
-          "label": "If blood smear is P. vivax positive"
+          "label": "If blood smear is P. falciparum positive",
+          "_rowNum": 229
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>",
+          "_rowNum": 230
         },
         {
           "type": "note",
           "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
-          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>1</td>\n    </tr>\n</table>"
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td>\n    </tr>\n</table>",
+          "_rowNum": 231
         },
         {
           "type": "note",
-          "label": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
+          "label": "If blood smear is P. vivax positive",
+          "_rowNum": 232
+        },
+        {
+          "type": "note",
+          "condition": "data('weight') ? (data('weight') >= 4 && data('weight') < 10) : (calculates.daysOld() >= 30 * 2 && calculates.daysOld() < 30 * 12)",
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>",
+          "_rowNum": 233
+        },
+        {
+          "type": "note",
+          "condition": "data('weight') ? (data('weight') >= 10 && data('weight') < 19) : (calculates.daysOld() >= 30 * 12 && calculates.daysOld() < 30 * 60)",
+          "label": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>1</td>\n    </tr>\n</table>",
+          "_rowNum": 234
+        },
+        {
+          "type": "note",
+          "label": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>",
+          "_rowNum": 235
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 237,
       "param": "end_give_antimalarials"
     },
     {
       "type": "screen",
       "condition": "calculates.malaria()",
+      "_rowNum": 240,
       "prompts": [
         {
           "type": "acknowledge",
@@ -2178,56 +2507,66 @@
           "label": {
             "default": "Advise extra fluids, continue feeding and advise about danger signs.",
             "hindi": "अतिरिक्त तरल पर्धार्थ और आहार जारी रखने की साल्ह के साथ ख़तरे के चिन्ह्ो के बारे मैं सलाह दें"
-          }
+          },
+          "_rowNum": 241
         }
       ]
     },
     {
       "type": "goto",
       "condition": "not(calculates.anaemiaNone())",
+      "_rowNum": 247,
       "param": "assess_feeding"
     },
     {
       "type": "goto",
       "condition": "calculates.severeMalnutrition()",
+      "_rowNum": 248,
       "param": "assess_feeding"
     },
     {
       "type": "goto",
       "condition": "calculates.daysOld() < (365 * 2)",
+      "_rowNum": 249,
       "param": "assess_feeding"
     },
     {
       "type": "goto",
+      "_rowNum": 250,
       "param": "feeding_assessment_end"
     },
     {
       "type": "label",
+      "_rowNum": 251,
       "param": "assess_feeding"
     },
     {
       "comments": "TODO: Do we need this screen?",
       "type": "screen",
       "condition": false,
+      "_rowNum": 252,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Counsel The Mother</h3>",
             "hindi": "<h3>मा को सलाह दें </h3>"
-          }
+          },
+          "_rowNum": 253
         },
         {
           "type": "note",
           "label": {
             "default": "ASSESS FEEDING IN ALL CHILDREN BELOW 2 YEARS AND ALSO IN CHILDREN WITH VERY LOW WEIGHT FOR AGE (Malnutrition grade 2, 3 or 4) OR ANAEMIA.",
             "hindi": "दो साल की कम उम्र के बच्चो का खाना पीना देखें और उन बच्चो मैं भी जिनका वज़न बहुत कम हो उम्र के लिए (कुपोषण ग्रेड २,३,४) या अनीमिया."
-          }
+          },
+          "_rowNum": 254
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 256,
       "prompts": [
         {
           "type": "select_one",
@@ -2236,6 +2575,7 @@
             "default": "Do you breast feed the child?",
             "hindi": "क्या स्तनपान करते हैं?"
           },
+          "_rowNum": 257,
           "param": "yes_no"
         },
         {
@@ -2245,7 +2585,8 @@
           "label": {
             "default": "How many times in 24 hours?",
             "hindi": "24 घंटे में कई बार कैसे?"
-          }
+          },
+          "_rowNum": 258
         },
         {
           "type": "select_one",
@@ -2255,12 +2596,14 @@
             "default": "Do you breast feed the child at night?",
             "hindi": "रात को?"
           },
+          "_rowNum": 259,
           "param": "yes_no"
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 261,
       "prompts": [
         {
           "comments": "Manoj says: this asks about offering food/liquid other than breastfeeding",
@@ -2270,6 +2613,7 @@
             "default": "Does the child take any other foods or fluids?",
             "hindi": "क्या बच्चा कुच्छ और खाना पीना लेता है?"
           },
+          "_rowNum": 262,
           "param": "yes_no"
         },
         {
@@ -2281,6 +2625,7 @@
             "default": "What foods or fluids?",
             "hindi": "क्या खाना?"
           },
+          "_rowNum": 263,
           "param": "food"
         },
         {
@@ -2290,7 +2635,8 @@
           "label": {
             "default": "How many times in 24 hours?",
             "hindi": "24 घंटे में कई बार कैसे?"
-          }
+          },
+          "_rowNum": 264
         },
         {
           "type": "decimal",
@@ -2299,13 +2645,15 @@
           "label": {
             "default": "How large are the servings?",
             "hindi": "कितना ज़्यादा?"
-          }
+          },
+          "_rowNum": 265
         },
         {
           "comments": "TODO: data-type horizontal",
           "type": "select_one",
           "condition": "selected(data('takes_other_foods'), 'yes')",
           "name": "serving_unit",
+          "_rowNum": 266,
           "param": "katori_teaspoon"
         },
         {
@@ -2316,6 +2664,7 @@
             "default": "Does the child receive separate serving?",
             "hindi": "क्या बच्चे को अलग से मिलता है?"
           },
+          "_rowNum": 267,
           "param": "yes_no"
         },
         {
@@ -2326,12 +2675,14 @@
           "label": {
             "default": "Who feeds the child and how?",
             "hindi": "बच्चे को खाना कौन देता है और कैसे?"
-          }
+          },
+          "_rowNum": 268
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 270,
       "prompts": [
         {
           "type": "select_one",
@@ -2340,6 +2691,7 @@
             "default": "Ask if the child's feeding has changed during this illness?",
             "hindi": "पूछें: अगर बच्चे का ख़ान-पं बीमारी वजह से बदला है?"
           },
+          "_rowNum": 271,
           "param": "yes_no"
         },
         {
@@ -2350,42 +2702,50 @@
           "label": {
             "default": "If yes how?",
             "hindi": "अगर हा  तो कैसे?"
-          }
+          },
+          "_rowNum": 272
         }
       ]
     },
     {
       "type": "goto",
       "condition": "calculates.daysOld() < 6 * 30",
+      "_rowNum": 274,
       "param": "up_to_6mo_feeding_rec"
     },
     {
       "type": "goto",
       "condition": "calculates.daysOld() < 12 * 30",
+      "_rowNum": 275,
       "param": "6mo_12mo_feeding_rec"
     },
     {
       "type": "goto",
       "condition": "calculates.daysOld() < 2 * 12 * 30",
+      "_rowNum": 276,
       "param": "1yo_2yo_feeding_rec"
     },
     {
       "type": "goto",
+      "_rowNum": 277,
       "param": "above_2yo_feeding_rec"
     },
     {
       "type": "label",
+      "_rowNum": 278,
       "param": "up_to_6mo_feeding_rec"
     },
     {
       "type": "screen",
+      "_rowNum": 279,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Praise the mother for:</h3>",
             "hindi": "<h3>मा को शाबाशी दें. </h3>"
-          }
+          },
+          "_rowNum": 280
         },
         {
           "type": "note",
@@ -2393,7 +2753,8 @@
           "label": {
             "default": "Breastfeeding at least 8 time in 24 hours.",
             "hindi": "२४ घंटो मैं कम-से-कम ८ बार स्तनपान करें."
-          }
+          },
+          "_rowNum": 281
         },
         {
           "type": "note",
@@ -2401,7 +2762,8 @@
           "label": {
             "default": "Breastfeeding at night.",
             "hindi": "रात को भी."
-          }
+          },
+          "_rowNum": 282
         },
         {
           "type": "note",
@@ -2409,26 +2771,30 @@
           "label": {
             "default": "Not giving any other foods or fluids including water.",
             "hindi": "और कुछ ना दे सिवाए पानी."
-          }
+          },
+          "_rowNum": 283
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 285,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Feeding problems identified:</h3>",
             "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
-          }
+          },
+          "_rowNum": 286
         },
         {
           "type": "note",
           "label": {
             "default": "Solutions:",
             "hindi": "समाधान:"
-          }
+          },
+          "_rowNum": 287
         },
         {
           "type": "note",
@@ -2436,7 +2802,8 @@
           "label": {
             "default": "Beastfeed as often as the child wants, day and night, at least 8 times in 24 hours.",
             "hindi": "२४ घंटो मैं कम-से-कम ८ बार स्तनपान करें."
-          }
+          },
+          "_rowNum": 288
         },
         {
           "type": "note",
@@ -2444,7 +2811,8 @@
           "label": {
             "default": "Do not give any other foods or fluids, not even water.",
             "hindi": "और कुछ ना दे सिवाए पानी."
-          }
+          },
+          "_rowNum": 289
         }
       ]
     },
@@ -2457,27 +2825,32 @@
       "hint": {
         "default": "<ol>\n<li>Continue breastfeeding if the child is sick.</li>\n</ol>",
         "hindi": "<ol><li>स्तनपान जारी रखें अगर बच्चा बीमार रहे फिर भी.</li></ol>"
-      }
+      },
+      "_rowNum": 291
     },
     {
       "type": "goto",
+      "_rowNum": 292,
       "param": "feeding_assessment_end"
     },
     {
       "type": "label",
+      "_rowNum": 293,
       "param": "6mo_12mo_feeding_rec"
     },
     {
       "comments": "Do we need this section?",
       "type": "screen",
       "condition": false,
+      "_rowNum": 294,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Praise the mother for:</h3>",
             "hindi": "<h3>मा को शाबाशी दें. </h3>"
-          }
+          },
+          "_rowNum": 295
         }
       ]
     },
@@ -2485,32 +2858,37 @@
       "comments": "Do we need this section?",
       "type": "screen",
       "condition": false,
+      "_rowNum": 297,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Feeding problems identified:</h3>",
             "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
-          }
+          },
+          "_rowNum": 298
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 300,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Feeding advice:</h3>",
             "hindi": "<h3>सलाह</h3>"
-          }
+          },
+          "_rowNum": 301
         },
         {
           "type": "note",
           "label": {
             "default": "Breastfeed as often as the child wants.",
             "hindi": "बच्चा जितनी बारी चाहे स्तनपान करें."
-          }
+          },
+          "_rowNum": 302
         },
         {
           "type": "note",
@@ -2521,35 +2899,40 @@
           "hint": {
             "default": "<p>\n*3 times per day if breastfed\n</p>\n<p>\n*5 times per day if not breastfed.\n</p>",
             "hindi": "<p>\n*दिन मैं 3 बार अगर स्तनपान किया  \n</p>\n<p>\n*दिन मैं 5 बार अगर स्तनपान किया  \n</p>"
-          }
+          },
+          "_rowNum": 303
         },
         {
           "type": "note",
           "label": {
             "default": "Mashed roti/rice/bread/biscuit mixed in sweetened undiluted milk OR",
             "hindi": "मूसी हुई रोटी, चावल, ब्रेड, बिस्कुट या बिना मीठे का दूध दें"
-          }
+          },
+          "_rowNum": 304
         },
         {
           "type": "note",
           "label": {
             "default": "Mashed roti/rice/bread mixed in thick dal with added ghee/oil or khichri with added oil/ghee. Add cooked vegetables also in the servings OR",
             "hindi": "मूसी हुई रोटी, चावल, ब्रेड के साथ गाढ़ी डाल और तेल या खिचरी के साथ तेल और पक्की सब्ज़ी"
-          }
+          },
+          "_rowNum": 305
         },
         {
           "type": "note",
           "label": {
             "default": "Sevian/dalia/halwa/kheer prepared in milk or any cereal porridge cooked in milk OR",
             "hindi": "सेवीयन, हलवा, खीर, दूध मैं बना हुआ."
-          }
+          },
+          "_rowNum": 306
         },
         {
           "type": "note",
           "label": {
             "default": "Mashed boiled/fried potatoes or give one banana/cheeko/mango",
             "hindi": "म्यूज़्ज़ हुआ या तले हुए आलू या केला, छीकू या आम."
-          }
+          },
+          "_rowNum": 307
         }
       ]
     },
@@ -2562,51 +2945,60 @@
       "hint": {
         "default": "<ol>\n<li>Keep the child in your lap and feed with your own hands</li>\n<li>Wash your child's hands with soap and water every time before feeding</li>\n</ol>",
         "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
-      }
+      },
+      "_rowNum": 309
     },
     {
       "type": "goto",
+      "_rowNum": 310,
       "param": "feeding_assessment_end"
     },
     {
       "type": "label",
+      "_rowNum": 311,
       "param": "1yo_2yo_feeding_rec"
     },
     {
       "comments": "Do we need this section?",
       "type": "screen",
       "condition": false,
+      "_rowNum": 312,
       "prompts": []
     },
     {
       "comments": "Do we need this section?",
       "type": "screen",
       "condition": false,
+      "_rowNum": 315,
       "prompts": []
     },
     {
       "type": "screen",
+      "_rowNum": 318,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Feeding advice:</h3>",
             "hindi": "<h3>स्तनपानस लाह</h3>"
-          }
+          },
+          "_rowNum": 319
         },
         {
           "type": "note",
           "label": {
             "default": "Breastfeed as often as the child wants.",
             "hindi": "बच्चा जितनी बारी चाहे स्तनपान करें."
-          }
+          },
+          "_rowNum": 320
         },
         {
           "type": "note",
           "label": {
             "default": "Offer food from the family pot",
             "hindi": "पारिवारिक पोत से दें."
-          }
+          },
+          "_rowNum": 321
         },
         {
           "type": "note",
@@ -2617,35 +3009,40 @@
           "hint": {
             "default": "*5 times per day",
             "hindi": "दिन मैं पाँच बार"
-          }
+          },
+          "_rowNum": 322
         },
         {
           "type": "note",
           "label": {
             "default": "Mashed roti/rice/bread mixed in thick dal with added ghee/oil or khichri with added oil/ghee. Add cooked vegetables also in the servings OR",
             "hindi": "मूसी हुई रोटी, चावल, ब्रेड, बिस्कुट या बिना मीठे का दूध दें"
-          }
+          },
+          "_rowNum": 323
         },
         {
           "type": "note",
           "label": {
             "default": "Mashed roti/rice/bread/biscuit mixed in sweetened undiluted milk OR",
             "hindi": "मूसी हुई रोटी, चावल, ब्रेड के साथ गाढ़ी डाल और तेल या खिचरी के साथ तेल और पक्की सब्ज़ी"
-          }
+          },
+          "_rowNum": 324
         },
         {
           "type": "note",
           "label": {
             "default": "Sevian/dalia/halwa/kheer prepared in milk or any cereal porridge cooked in milk OR",
             "hindi": "सेवीयन, हलवा, खीर, दूध मैं बना हुआ."
-          }
+          },
+          "_rowNum": 325
         },
         {
           "type": "note",
           "label": {
             "default": "Mashed boiled/fried potatoes or give at least one banana/cheeko/mango",
             "hindi": "म्यूज़्ज़ हुआ या तले हुए आलू या केला, छीकू या आम."
-          }
+          },
+          "_rowNum": 326
         },
         {
           "type": "note",
@@ -2656,81 +3053,94 @@
           "hint": {
             "default": "<ol>\n<li>Sit by the side of child and help him to finish the serving</li>\n<li>Wash your child's hands with soap and water every time before feeding</li>\n</ol>",
             "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
-          }
+          },
+          "_rowNum": 327
         }
       ]
     },
     {
       "type": "goto",
+      "_rowNum": 329,
       "param": "feeding_assessment_end"
     },
     {
       "type": "label",
+      "_rowNum": 330,
       "param": "above_2yo_feeding_rec"
     },
     {
       "type": "screen",
       "condition": "data('other_foods_per_day') >= 3",
+      "_rowNum": 331,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Praise the mother for:</h3>",
             "hindi": "<h3>मा को शाबाशी दें. </h3>"
-          }
+          },
+          "_rowNum": 332
         },
         {
           "type": "note",
           "label": {
             "default": "Giving family foods at 3 meals each day.",
             "hindi": "3 भोजन में हर दिन परिवार खाद्य पदार्थ दे रही है."
-          }
+          },
+          "_rowNum": 333
         }
       ]
     },
     {
       "type": "screen",
       "condition": "not(data('other_foods_per_day') >= 3)",
+      "_rowNum": 335,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Feeding problems identified:</h3>",
             "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
-          }
+          },
+          "_rowNum": 336
         },
         {
           "type": "note",
           "label": {
             "default": "Solutions:",
             "hindi": "समाधान:"
-          }
+          },
+          "_rowNum": 337
         },
         {
           "type": "note",
           "label": {
             "default": "Give family foods at 3 meals each day.",
             "hindi": "3 भोजन में हर दिन परिवार खाद्य पदार्थ दे रही है."
-          }
+          },
+          "_rowNum": 338
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 340,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Feeding advice:</h3>",
             "hindi": "<h3>सलाह</h3>"
-          }
+          },
+          "_rowNum": 341
         },
         {
           "type": "note",
           "label": {
             "default": "Twice daily, give nutritious food between meals, such as: banana/biscuit/cheeko/mango/papaya/egg as snacks",
             "hindi": "दिन मैं दो बार छीकू , केला, बिस्कुट, आम, पपाइया, अंडा दें"
-          }
+          },
+          "_rowNum": 342
         },
         {
           "type": "note",
@@ -2741,12 +3151,14 @@
           "hint": {
             "default": "<ol>\n<li>Ensure that the child finishes the serving</li>\n<li>Teach your child to wash hands with soap and water every time before feeding</li>\n</ol>",
             "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
-          }
+          },
+          "_rowNum": 343
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 345,
       "param": "feeding_assessment_end"
     },
     {
@@ -2756,11 +3168,13 @@
       "label": {
         "default": "Give iron folic acid therapy for 14 days.",
         "hindi": "अनेमिया १४दिन के लिए आयर्ण फोलिक गोलियो दें."
-      }
+      },
+      "_rowNum": 348
     },
     {
       "type": "screen",
       "condition": "not(calculates.anaemiaNone())",
+      "_rowNum": 349,
       "prompts": [
         {
           "type": "note",
@@ -2772,14 +3186,16 @@
           "hint": {
             "default": "Give one dose daily for 14 days.",
             "hindi": "१४ दिन के लिए रोज़ एक डोस."
-          }
+          },
+          "_rowNum": 350
         },
         {
           "type": "note",
           "label": {
             "default": "Dosage instructions:",
             "hindi": "डोसेज देने के निर्देशन:"
-          }
+          },
+          "_rowNum": 351
         },
         {
           "type": "note",
@@ -2787,7 +3203,8 @@
           "hint": {
             "default": "No IFA dosage instructions for children under 4 months.",
             "hindi": "४ महीने की कम उम्र के बच्चों के लिए इ.एफ.ए के कोई निर्देशन नही है."
-          }
+          },
+          "_rowNum": 352
         },
         {
           "comments": "TODO: Mention age/weight in instructions.",
@@ -2796,7 +3213,8 @@
           "hint": {
             "default": "Give 1 IFA pediatric tablet.",
             "hindi": "१ बच्चों वाली इ.एक.ए. टॅबलेट दें."
-          }
+          },
+          "_rowNum": 353
         },
         {
           "type": "note",
@@ -2804,12 +3222,14 @@
           "hint": {
             "default": "Give 2 IFA pediatric tablets.",
             "hindi": "२ बच्चों वाली इ.एक.ए. टॅबलेट दें."
-          }
+          },
+          "_rowNum": 354
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 359,
       "prompts": [
         {
           "type": "acknowledge",
@@ -2818,7 +3238,8 @@
           "label": {
             "default": "Give a single dose of prophylactic vitamin A:",
             "hindi": "प्रोफाइलॅक्टिक विटामिन ए की एक खुराक दें."
-          }
+          },
+          "_rowNum": 360
         },
         {
           "type": "note",
@@ -2826,7 +3247,8 @@
           "hint": {
             "default": "100,000 IU (1ml) at 9 months with measles immunization",
             "hindi": "१००,००० आई . यू (१ मिली) ९ महीने पर खसरा पर ख़तरा (माता जी) टीकाकरण के साथ."
-          }
+          },
+          "_rowNum": 361
         },
         {
           "type": "note",
@@ -2834,7 +3256,8 @@
           "hint": {
             "default": "200,000 IU (2ml) at 16-18 months with DPT Booster",
             "hindi": "२००,००० आई. यू (२ मिली) १६-१८ महीने मैं दि.पी.ती बूस्टर के साथ"
-          }
+          },
+          "_rowNum": 362
         },
         {
           "type": "note",
@@ -2842,7 +3265,8 @@
           "hint": {
             "default": "200,000 IU (2ml) at 24 months",
             "hindi": "२००,००० आई. यू (२ मिली) २४ महीने पर"
-          }
+          },
+          "_rowNum": 363
         },
         {
           "type": "note",
@@ -2850,7 +3274,8 @@
           "hint": {
             "default": "200,000 IU (2ml) at 30 months",
             "hindi": "२००,००० आई. यू (२ मिली) ३० महीने पर"
-          }
+          },
+          "_rowNum": 364
         },
         {
           "type": "note",
@@ -2858,7 +3283,8 @@
           "hint": {
             "default": "200,000 IU (2ml) at 36 months",
             "hindi": "२००,००० आई. यू (२ मिली) ३६ महीने पर"
-          }
+          },
+          "_rowNum": 365
         }
       ]
     },
@@ -2873,33 +3299,39 @@
       "hint": {
         "default": "<ul>\n<li>The child is 6 months of age or older, and</li>\n<li>Has not received Pediatric IFA Tablet/syrup/drops for 100 days in last one year.</li>\n</ul>",
         "hindi": "<ul><li>अगर बच्चे की उमर ६ महीने से उपर है और</li><li> एफ. ए की १०० दिन के लिए १ साल से नही मिली. .</li></ul>"
-      }
+      },
+      "_rowNum": 368
     },
     {
       "type": "note",
       "condition": "calculates.pneumonia() || calculates.dysentery()",
       "label": "Advise the Mother When to Return to Health Worker",
-      "hint": "Return for follow-up in 2 days."
+      "hint": "Return for follow-up in 2 days.",
+      "_rowNum": 370
     },
     {
       "type": "goto",
       "condition": "calculates.pneumonia() || calculates.dysentery()",
+      "_rowNum": 371,
       "param": "end_of_followup_directions"
     },
     {
       "type": "note",
       "condition": "calculates.malaria() || calculates.feverMalariaUnlikely()",
       "label": "Advise the Mother When to Return to Health Worker",
-      "hint": "Return for follow-up in 2 days if fever persists."
+      "hint": "Return for follow-up in 2 days if fever persists.",
+      "_rowNum": 372
     },
     {
       "type": "goto",
       "condition": "calculates.malaria() || calculates.feverMalariaUnlikely()",
+      "_rowNum": 373,
       "param": "end_of_followup_directions"
     },
     {
       "type": "goto",
       "condition": "calculates.persistentDiarrhoea() || calculates.acuteEarInfection() || calculates.chronicEarInfection()",
+      "_rowNum": 375,
       "param": "end_of_followup_directions"
     },
     {
@@ -2907,7 +3339,8 @@
       "type": "note",
       "condition": "calculates.diarrhoea()",
       "label": "Advise the Mother When to Return to Health Worker",
-      "hint": "Return for follow-up in 5 days if diarrhoea not improving."
+      "hint": "Return for follow-up in 5 days if diarrhoea not improving.",
+      "_rowNum": 376
     },
     {
       "comments": "Is this a condition for the patient to follow or the HW? i.e. can we infer it?",
@@ -2917,105 +3350,127 @@
       "hint": {
         "default": "If feeding problem, follow-up in 5 days.",
         "hindi": "5 दिन बाद पून: देखें."
-      }
+      },
+      "_rowNum": 377
     },
     {
       "type": "goto",
       "condition": "calculates.diarrhoea()",
+      "_rowNum": 378,
       "param": "end_of_followup_directions"
     },
     {
       "type": "goto",
       "condition": "calculates.veryLowWeight() || calculates.notVeryLowWeight()",
+      "_rowNum": 379,
       "param": "end_of_followup_directions"
     },
     {
       "type": "note",
       "condition": "calculates.anaemia()",
       "label": "Advise the Mother When to Return to Health Worker",
-      "hint": "Return for follow-up in 14 days."
+      "hint": "Return for follow-up in 14 days.",
+      "_rowNum": 380
     },
     {
       "type": "goto",
       "condition": "calculates.anaemia()",
+      "_rowNum": 381,
       "param": "end_of_followup_directions"
     },
     {
       "type": "note",
       "condition": "calculates.veryLowWeight()",
       "label": "Advise the Mother When to Return to Health Worker",
-      "hint": "Return for follow-up in 30 days."
+      "hint": "Return for follow-up in 30 days.",
+      "_rowNum": 382
     },
     {
       "type": "label",
+      "_rowNum": 383,
       "param": "end_of_followup_directions"
     },
     {
       "type": "screen",
+      "_rowNum": 384,
       "prompts": [
         {
           "type": "note",
-          "label": "Advise mother to return immediately if the child has any of these signs:"
+          "label": "Advise mother to return immediately if the child has any of these signs:",
+          "_rowNum": 385
         },
         {
           "type": "note",
-          "label": "Not able to drink or breastfeed"
+          "label": "Not able to drink or breastfeed",
+          "_rowNum": 386
         },
         {
           "type": "note",
-          "label": "Becomes sicker"
+          "label": "Becomes sicker",
+          "_rowNum": 387
         },
         {
           "type": "note",
-          "label": "Develops a fever"
+          "label": "Develops a fever",
+          "_rowNum": 388
         },
         {
           "type": "note",
           "condition": "calculates.coughOrCold()",
-          "label": "Fast breathing"
+          "label": "Fast breathing",
+          "_rowNum": 389
         },
         {
           "type": "note",
           "condition": "calculates.coughOrCold()",
-          "label": "Difficult breathing"
+          "label": "Difficult breathing",
+          "_rowNum": 390
         },
         {
           "type": "note",
           "condition": "calculates.diarrhoea()",
-          "label": "Blood in stool"
+          "label": "Blood in stool",
+          "_rowNum": 391
         },
         {
           "type": "note",
           "condition": "calculates.diarrhoea()",
-          "label": "Drinking poorly"
+          "label": "Drinking poorly",
+          "_rowNum": 392
         }
       ]
     },
     {
       "type": "note",
-      "label": "Advise mother when to return for next immunization according to immunization schedule."
+      "label": "Advise mother when to return for next immunization according to immunization schedule.",
+      "_rowNum": 394
     },
     {
       "type": "goto",
+      "_rowNum": 396,
       "param": "end_of_treatments"
     },
     {
       "type": "label",
+      "_rowNum": 3,
       "param": "dehydration_treatments"
     },
     {
       "type": "label",
+      "_rowNum": 5,
       "param": "dehydation_plan_c"
     },
     {
       "type": "screen",
       "condition": "calculates.severeDehydration()",
+      "_rowNum": 7,
       "prompts": [
         {
           "type": "select_one",
           "name": "cholera_in_area",
           "label": "Is there cholera in your area?",
           "required": true,
+          "_rowNum": 8,
           "param": "yes_no"
         },
         {
@@ -3023,7 +3478,8 @@
           "condition": "selected(data('cholera_in_area'), 'yes') && calculates.ageDays() > (2 * 365)",
           "name": "acknowledge_give_doxycycline",
           "label": "Give doxycycline for cholera.",
-          "required": true
+          "required": true,
+          "_rowNum": 9
         },
         {
           "type": "acknowledge",
@@ -3033,23 +3489,27 @@
             "default": "Refer URGENTLY to hospital with mother giving frequent sips of ORS on the way. Advise the mother to keep breast feeding.",
             "hindi": "तुरंत अस्पताल रेफर करें व रास्ते मैं शिशु को ओ. आर. एस देते रहें."
           },
-          "required": true
+          "required": true,
+          "_rowNum": 10
         },
         {
           "type": "acknowledge",
           "condition": "not(calculates.hasSevereConditionWODehydrationDiarrhoea())",
           "name": "acknowledge_severe_condition_referral",
-          "label": "Administer Dehydration Treatment Plan C"
+          "label": "Administer Dehydration Treatment Plan C",
+          "_rowNum": 11
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 14,
       "param": "dehydation_plan_b"
     },
     {
       "type": "screen",
       "condition": "calculates.someDehydration() && calculates.hasSevereConditionWODehydrationDiarrhoea()",
+      "_rowNum": 16,
       "prompts": [
         {
           "type": "acknowledge",
@@ -3058,39 +3518,47 @@
             "default": "Refer URGENTLY to hospital with mother giving frequent sips of ORS on the way. Advise the mother to keep breast feeding.",
             "hindi": "तुरंत अस्पताल रेफर करें व रास्ते मैं शिशु को ओ. आर. एस देते रहें."
           },
-          "required": true
+          "required": true,
+          "_rowNum": 17
         }
       ]
     },
     {
       "type": "goto",
       "condition": "calculates.someDehydration() && not(calculates.hasSevereConditionWODehydrationDiarrhoea())",
+      "_rowNum": 19,
       "param": "plan_B"
     },
     {
       "type": "label",
+      "_rowNum": 21,
       "param": "dehydation_plan_a"
     },
     {
       "type": "goto",
       "condition": "not(calculates.anyDehydration() || calculates.hasSevereConditionWODehydrationDiarrhoea())",
+      "_rowNum": 23,
       "param": "gt2mo_plan_A"
     },
     {
       "type": "label",
+      "_rowNum": 25,
       "param": "finished_dehydration_plan"
     },
     {
       "type": "goto",
       "condition": "calculates.hasSevereCondition()",
+      "_rowNum": 26,
       "param": "severe_condition_dehydration_return"
     },
     {
       "type": "goto",
+      "_rowNum": 27,
       "param": "normal_dehydration_return"
     },
     {
       "type": "label",
+      "_rowNum": 34,
       "param": "plan_B"
     },
     {
@@ -3102,24 +3570,28 @@
       "hint": {
         "default": "Give in clinic recommended amount of ORS over 4-hour period",
         "hindi": "ओ. आर. एस की मात्रा को निर्धारित कर स्वास्थ्य केन्द्रा मैं ४ घंटे मैं दे."
-      }
+      },
+      "_rowNum": 35
     },
     {
       "type": "screen",
+      "_rowNum": 36,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<p>Give {{calculates.planBORSAmntMl}} ml of ORS over 4 hour period</p>\n<p>({{calculates.planBORSAmntCups}} cups)</p>",
             "hindi": "<p>ओऽअर.एस की {{calculates.planBORSAmntMl}} मि.लि ४ घंटे मैं दे. </p> <p> {{calculates.planBORSAmntCups}} कप्स. </p>"
-          }
+          },
+          "_rowNum": 37
         },
         {
           "type": "note",
           "hint": {
             "default": "If the child wants more ORS than shown, give more.",
             "hindi": "अगर बच्चा ज़्यादा ओ. आर. एस चाहता है तो ज़्यादा दे."
-          }
+          },
+          "_rowNum": 38
         },
         {
           "type": "note",
@@ -3127,73 +3599,84 @@
           "hint": {
             "default": "For infants under 6 months who are not breastfed, also give 100-200 ml clean water during this period.",
             "hindi": "स्तनपान नही करने वाले ६ महीने से कम उम्र के बच्चों को १००-२०० मि.लि सॉफ पानी भी दें."
-          }
+          },
+          "_rowNum": 39
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 41,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "SHOW THE MOTHER HOW TO GIVE ORS SOLUTION",
             "hindi": "मा को बताए ओ. आर. एस दिया जाता है."
-          }
+          },
+          "_rowNum": 42
         },
         {
           "type": "note",
           "label": {
             "default": "<li>Give frequent small sips from a cup.</li>",
             "hindi": "<li>कप से बच्चे को बार-बार छोटे-छोटे घूँट दें. </li>"
-          }
+          },
+          "_rowNum": 43
         },
         {
           "type": "note",
           "label": {
             "default": "<li>If the child vomits, wait 10 minutes. Then continue but more slowly</li>",
             "hindi": "<li>अगर बच्चा उल्टी करता है तो १० मिनिट रूकें और धीरे-धीरे दें. </li>"
-          }
+          },
+          "_rowNum": 44
         },
         {
           "type": "note",
           "label": {
             "default": "<li>Continue breastfeeding whenever the child wants.</li>",
             "hindi": "<li>जब भी बच्चा चाहे स्तनपान कराए. </li>"
-          }
+          },
+          "_rowNum": 45
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 47,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "AFTER 4 HOURS:",
             "hindi": "४ घंटे के बाद"
-          }
+          },
+          "_rowNum": 48
         },
         {
           "type": "note",
           "label": {
             "default": "<li>Reassess the child and classify the child for dehydration.</li>",
             "hindi": "<li>बच्चे को दोबारा जाँच करे व पानी की कमी के लिए वर्गीकरण करें. </li>"
-          }
+          },
+          "_rowNum": 49
         },
         {
           "type": "note",
           "label": {
             "default": "<li>Select the appropriate plan to continue treatment.</li>",
             "hindi": "<li>उचित प्लान चुने व इलाज जारी रखें. </li>"
-          }
+          },
+          "_rowNum": 50
         },
         {
           "type": "note",
           "label": {
             "default": "<li>Begin feeding the child.</li>",
             "hindi": "<li>बच्चे को खिलाना शुरू करें. </li>"
-          }
+          },
+          "_rowNum": 51
         },
         {
           "type": "select_one",
@@ -3202,6 +3685,7 @@
             "default": "DOES THE MOTHER NEED TO LEAVE BEFORE COMPLETING TREATMENT?",
             "hindi": "अगर मा इलाज से पहले जाना चाहे"
           },
+          "_rowNum": 52,
           "param": "yes_no"
         }
       ]
@@ -3209,13 +3693,15 @@
     {
       "type": "screen",
       "condition": "selected(data('leave_before_treatment_end'), 'yes')",
+      "_rowNum": 54,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "Show the mother how to prepare ORS solution at home.",
             "hindi": "मा को दिखाया कि वह ओ. आर. एस घर पर कैसे बनायाएगी."
-          }
+          },
+          "_rowNum": 55
         },
         {
           "type": "note",
@@ -3226,14 +3712,16 @@
           "hint": {
             "default": "<p>Give {{calculates.planBORSAmntMl}} ml of ORS over 4 hour period</p>\n<p>({{calculates.planBORSAmntCups}} cups)</p>",
             "hindi": "<p>ओऽअर.एस की {{calculates \"planBORSAmntMl\"}} मि.लि ४ घंटे मैं दे. </p> <p> {{calculates \"planBORSAmntCups\"}} कप्स. </p>"
-          }
+          },
+          "_rowNum": 56
         },
         {
           "type": "note",
           "label": {
             "default": "Give her enough ORS packets to complete rehydration. Also give her 2 packets as recommended in Plan A.",
             "hindi": "मा को सही मात्रा मैं ओ. आर. एस पॅकेट दें, जिससे निर्जलीकरण का इलाज हो जाय व २ पॅकेट अलग से दे जैसा की प्लान आ मैं बताया गया है."
-          }
+          },
+          "_rowNum": 57
         },
         {
           "comments": "TODO: Goto Plan A?",
@@ -3245,34 +3733,41 @@
           "hint": {
             "default": "<ol>\n<li>GIVE EXTRA FLUID</li>\n<li>CONTINUE FEEDING</li>\n<li>WHEN TO RETURN</li>\n</ol>",
             "hindi": "<ol><li>ज़्यादा पिलाए,<li><li> स्तनपान करते रहें</li>, <li>वापस कब आए.</li></ol>"
-          }
+          },
+          "_rowNum": 58
         },
         {
-          "type": "note"
+          "type": "note",
+          "_rowNum": 59
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 61,
       "param": "plan_B_end"
     },
     {
       "type": "goto",
+      "_rowNum": 62,
       "param": "finished_dehydration_plan"
     },
     {
       "type": "label",
+      "_rowNum": 66,
       "param": "gt2mo_plan_A"
     },
     {
       "type": "screen",
+      "_rowNum": 67,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<h3>Plan A: Treat Diarrhoea at Home</h3>",
             "hindi": "<h3>प्लान आ: दस्त को घर मैं ठीक करें. </h3>"
-          }
+          },
+          "_rowNum": 68
         },
         {
           "type": "note",
@@ -3283,7 +3778,8 @@
           "hint": {
             "default": "Give Extra Fluid, Continue Feeding, When to Return",
             "hindi": "ज़्यादा पिलाए, स्तनपान करते रहें, वापस कब आए."
-          }
+          },
+          "_rowNum": 69
         }
       ]
     },
@@ -3292,17 +3788,20 @@
       "label": {
         "default": "<strong>1. GIVE EXTRA FLUID</strong> (as much as the child will take)",
         "hindi": "<strong>पीने के लिए ज़्यादा दें.</strong> (जितना बच्चा ले सके.)"
-      }
+      },
+      "_rowNum": 71
     },
     {
       "type": "screen",
+      "_rowNum": 72,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<strong>TELL THE MOTHER:</strong>",
             "hindi": "<strong>मा से बोले</strong>"
-          }
+          },
+          "_rowNum": 73
         },
         {
           "comments": "TODO: We could infer this but it will have to come after the feeding section.",
@@ -3310,14 +3809,16 @@
           "label": {
             "default": "If the child is exclusively breastfed: Breastfeed frequently and for longer at each feed.",
             "hindi": "अगर शिशु अकेला है स्तनपान लेने वाला तो ज़्यादा बार और ज़्यादा देर तक दें."
-          }
+          },
+          "_rowNum": 74
         },
         {
           "type": "note",
           "label": {
             "default": "If passing frequent watery stools:",
             "hindi": "अगर बच्चा बार-बार पानी जैसे दस्त करता है."
-          }
+          },
+          "_rowNum": 75
         },
         {
           "type": "note",
@@ -3325,7 +3826,8 @@
           "hint": {
             "default": "<li>For less than 6 months age give ORS and clean, preferably boiled, water in addition to breast milk.</li>",
             "hindi": "<li>६ महीने से कम उम्र के बच्चे को स्तनपान के अलावा आफ पानी(उबला हुआ) मैं बनाया हुआ ओ. आर. एस दें. </li>"
-          }
+          },
+          "_rowNum": 76
         },
         {
           "type": "note",
@@ -3333,7 +3835,8 @@
           "hint": {
             "default": "<li>If 6 months or older give one or more of the home fluids in addition to breast milk.</li>",
             "hindi": "<li>६ महीने से ज़्यादा के बच्चे को स्तनपान के अलावा घर के और तरल पदार्थ दें. </li>"
-          }
+          },
+          "_rowNum": 77
         },
         {
           "comments": "TODO: Use bullets?",
@@ -3341,26 +3844,30 @@
           "label": {
             "default": "If the child is not exclusively breastfed: Give one or more of the following home fluids; ORS solution, yoghurt drink, milk, lemon drink, rice or pulses-based drink, vegetable soup, green coconut water or plain clean water.",
             "hindi": "अगर नहीं तो बच्चे को ओ.आर.एस सल्यूशन, दही, नींबू, दूध, चावल, डाल, सूप, नारियल पानी और सॉफ पानी दें."
-          }
+          },
+          "_rowNum": 78
         },
         {
           "type": "note",
           "label": {
             "default": "It is especially important to give ORS at home when:",
             "hindi": "ओऽअर.एस ज़रूरी से दें."
-          }
+          },
+          "_rowNum": 79
         },
         {
           "type": "note",
           "hint": {
             "default": "<ol><li>the child has been treated with Plan B or Plan C during the visit.</li>\n<li>the child cannot return to a clinic if the diarrhoea gets worse.</li></ol>",
             "hindi": "<ol><li>बच्चे का इलाज प्लान 'बी' से कर रहें हो </li><li>या ज़्यादा दस्त होने पर बच्चा स्‍वास्थ्य केन्द्रा वापस नही आ सकता. </li></ol>"
-          }
+          },
+          "_rowNum": 80
         }
       ]
     },
     {
       "type": "screen",
+      "_rowNum": 82,
       "prompts": [
         {
           "comments": "TODO: This might require the dosage instructions from plan B",
@@ -3368,14 +3875,16 @@
           "label": {
             "default": "TEACH THE MOTHER HOW TO MIX AND GIVE ORS. GIVE THE MOTHER 2 PACKETS OF ORS TO USE AT HOME.",
             "hindi": "मा को ओऽअर.एस देना सिखाए, २ पॅकेट घर के लिए दें."
-          }
+          },
+          "_rowNum": 83
         },
         {
           "type": "note",
           "label": {
             "default": "SHOW THE MOTHER HOW MUCH FLUID TO GIVE IN ADDITION TO THE USUAL FLUID INTAKE:",
             "hindi": "मा को दिखे कितना अधिक पिलाने छाईए"
-          }
+          },
+          "_rowNum": 84
         },
         {
           "type": "note",
@@ -3387,7 +3896,8 @@
           "hint": {
             "default": "< 2 months old",
             "hindi": "< २ महीने"
-          }
+          },
+          "_rowNum": 85
         },
         {
           "type": "note",
@@ -3399,7 +3909,8 @@
           "hint": {
             "default": "2 months up to 2 years",
             "hindi": "२ महीने से ३ साल तक"
-          }
+          },
+          "_rowNum": 86
         },
         {
           "type": "note",
@@ -3411,7 +3922,8 @@
           "hint": {
             "default": "2 years or more",
             "hindi": "२ साल से ज़्यादा"
-          }
+          },
+          "_rowNum": 87
         }
       ]
     },
@@ -3424,38 +3936,44 @@
       "hint": {
         "default": "<ol>\n<li>Give frequent small sips from a cup.</li>\n<li>If the child vomits, wait 10 minutes. Then continue but more slowly.</li>\n<li><u>Continue giving extra fluid until the diarrhoea stops.</u></li>\n</ol>",
         "hindi": "<ol>\n<li>कप से बच्चे को बार-बार छोटे-छोटे घूँट दें. </li>\n<li>अगर बच्चा उल्टी करता है तो १० मिनिट रूकें और धीरे-धीरे दें. </li>\n<li><u>बच्चे को पीने के लिए ज़्यादा देते रहें जब तब दस्त नही रुक जाते. .</u></li>\n</ol>"
-      }
+      },
+      "_rowNum": 89
     },
     {
       "type": "note",
       "label": {
         "default": "<strong>2. CONTINUE FEEDING</strong>",
         "hindi": "<strong>पाइलेट रहें </strong>"
-      }
+      },
+      "_rowNum": 90
     },
     {
       "type": "screen",
+      "_rowNum": 91,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "<strong>3. WHEN TO RETURN</strong>",
             "hindi": "<strong>वापस कब आए </strong>"
-          }
+          },
+          "_rowNum": 92
         },
         {
           "type": "note",
           "hint": {
             "default": "<li>Child becomes sicker</li>",
             "hindi": "बच्चा अधिक बीमार हो जाए."
-          }
+          },
+          "_rowNum": 93
         },
         {
           "type": "note",
           "hint": {
             "default": "<li>Not able to drink or breastfeed</li>",
             "hindi": "स्तनपान या अन्य तरल पदार्थ नही ले सके."
-          }
+          },
+          "_rowNum": 94
         },
         {
           "comments": "In accordance with the note, blood in stool and fever only appear if the child doesn't already have them",
@@ -3464,7 +3982,8 @@
           "hint": {
             "default": "<li>Blood in stools</li>",
             "hindi": "मल मैं खून."
-          }
+          },
+          "_rowNum": 95
         },
         {
           "comments": "This seems like a duplicate and should these lists always be different?",
@@ -3472,7 +3991,8 @@
           "hint": {
             "default": "<li>Drinking poorly</li>",
             "hindi": "बहुत कम पीना."
-          }
+          },
+          "_rowNum": 96
         },
         {
           "type": "note",
@@ -3480,24 +4000,29 @@
           "hint": {
             "default": "<li>Develops a fever</li>",
             "hindi": "बुखार हो जाए."
-          }
+          },
+          "_rowNum": 97
         }
       ]
     },
     {
       "type": "label",
+      "_rowNum": 99,
       "param": "gt2mo_plan_A_end"
     },
     {
       "type": "goto",
+      "_rowNum": 101,
       "param": "finished_dehydration_plan"
     },
     {
       "type": "label",
+      "_rowNum": 102,
       "param": "skip_treatment"
     },
     {
       "type": "label",
+      "_rowNum": 103,
       "param": "end_of_treatments"
     }
   ],
@@ -3514,287 +4039,357 @@
             "type": "number"
           }
         }
-      }
+      },
+      "_rowNum": 2
     },
     {
       "name": "breathcounter",
       "schema": {
         "type": "integer"
-      }
+      },
+      "_rowNum": 3
     }
   ],
   "calculates": [
     {
       "name": "daysOld",
-      "calculation": "selected(data('birthdayKnown'), 'yes') ? (now().getTime() - new Date(data('birthday')).getTime()) / (1000 * 60 * 60 * 24) : data('monthsOld')*30"
+      "calculation": "selected(data('birthdayKnown'), 'yes') ? (now().getTime() - new Date(data('birthday')).getTime()) / (1000 * 60 * 60 * 24) : data('monthsOld')*30",
+      "_rowNum": 2
     },
     {
       "name": "danger_signs_present",
-      "calculation": "selected(data('able_to_drink'), 'no') || selected(data('vomit_everything'), 'yes') ||  selected(data('convulsions'), 'yes') || selected(data('lethargic'), 'yes') || calculates.bloodOxygenSat() < 90"
+      "calculation": "selected(data('able_to_drink'), 'no') || selected(data('vomit_everything'), 'yes') ||  selected(data('convulsions'), 'yes') || selected(data('lethargic'), 'yes') || calculates.bloodOxygenSat() < 90",
+      "_rowNum": 3
     },
     {
       "name": "malnutrition_grade",
-      "calculation": "/*data('weight') data('birthday')*/null"
+      "calculation": "/*data('weight') data('birthday')*/null",
+      "_rowNum": 4
     },
     {
       "name": "planBORSAmntMl",
-      "calculation": "(function(){\nif(data('weight')){\nreturn data('weight') * 75;\n} else if(calculates.daysOld() < 4 * 30) {\nreturn 300;\n} else if(calculates.daysOld() < 12 * 30) {\nreturn 550;\n} else if(calculates.daysOld() < 24 * 30) {\nreturn 800;\n} else {\nreturn 1150;\n}\n})()"
+      "calculation": "(function(){\nif(data('weight')){\nreturn data('weight') * 75;\n} else if(calculates.daysOld() < 4 * 30) {\nreturn 300;\n} else if(calculates.daysOld() < 12 * 30) {\nreturn 550;\n} else if(calculates.daysOld() < 24 * 30) {\nreturn 800;\n} else {\nreturn 1150;\n}\n})()",
+      "_rowNum": 5
     },
     {
       "name": "planBORSAmntCups",
-      "calculation": "Math.ceil(calculates.planBORSAmntMl()/236.588)"
+      "calculation": "Math.ceil(calculates.planBORSAmntMl()/236.588)",
+      "_rowNum": 6
     },
     {
       "name": "fever",
-      "calculation": "( (selected(data('axillary_temperature_possible'), 'yes') && data('axillary_temperature') >= 37.5)\n||\nselected(data('feel_for_fever'), 'present')\n||\nselected(data('basic_q'), 'fever_reported') )"
+      "calculation": "( (selected(data('axillary_temperature_possible'), 'yes') && data('axillary_temperature') >= 37.5)\n||\nselected(data('feel_for_fever'), 'present')\n||\nselected(data('basic_q'), 'fever_reported') )",
+      "_rowNum": 7
     },
     {
       "name": "fastBreathing",
-      "calculation": "(calculates.daysOld()  < 365 && data('breaths_per_minute') > 50) || (calculates.daysOld()  >= 365 && data('breaths_per_minute') > 40)"
+      "calculation": "(calculates.daysOld()  < 365 && data('breaths_per_minute') > 50) || (calculates.daysOld()  >= 365 && data('breaths_per_minute') > 40)",
+      "_rowNum": 8
     },
     {
       "name": "bloodOxygenSat",
-      "calculation": "data('pulseox') ? data('pulseox').ox : null"
+      "calculation": "data('pulseox') ? data('pulseox').ox : null",
+      "_rowNum": 9
     },
     {
       "name": "reportDifficultyBreathing",
-      "calculation": "(selected(data('basic_q'), 'difficulty_breathing'))"
+      "calculation": "(selected(data('basic_q'), 'difficulty_breathing'))",
+      "_rowNum": 11
     },
     {
       "name": "reportDiarrhoea",
-      "calculation": "(selected(data('basic_q'), 'diarrhoea'))"
+      "calculation": "(selected(data('basic_q'), 'diarrhoea'))",
+      "_rowNum": 12
     },
     {
       "name": "reportFever",
-      "calculation": "(selected(data('basic_q'), 'fever_reported'))"
+      "calculation": "(selected(data('basic_q'), 'fever_reported'))",
+      "_rowNum": 13
     },
     {
       "name": "reportEarProblem",
-      "calculation": "(selected(data('basic_q'), 'ear_problem'))"
+      "calculation": "(selected(data('basic_q'), 'ear_problem'))",
+      "_rowNum": 14
     },
     {
       "name": "gtTwoMonth_severePneumonia",
-      "calculation": "((selected(data('chest_indrawing'), 'present') || calculates.danger_signs_present() || selected(data('stridor'), 'present')) && selected(data('basic_q'), 'difficulty_breathing'))"
+      "calculation": "((selected(data('chest_indrawing'), 'present') || calculates.danger_signs_present() || selected(data('stridor'), 'present')) && selected(data('basic_q'), 'difficulty_breathing'))",
+      "_rowNum": 16
     },
     {
       "name": "gtTwoMonth_pneumonia",
-      "calculation": "(calculates.fastBreathing() && selected(data('basic_q'), 'difficulty_breathing'))"
+      "calculation": "(calculates.fastBreathing() && selected(data('basic_q'), 'difficulty_breathing'))",
+      "_rowNum": 17
     },
     {
       "name": "gtTwoMonth_coughOrCold",
-      "calculation": "(selected(data('basic_q'), 'difficulty_breathing'))"
+      "calculation": "(selected(data('basic_q'), 'difficulty_breathing'))",
+      "_rowNum": 18
     },
     {
       "name": "severePneumonia",
-      "calculation": "(calculates.gtTwoMonth_severePneumonia())"
+      "calculation": "(calculates.gtTwoMonth_severePneumonia())",
+      "_rowNum": 20
     },
     {
       "name": "pneumonia",
-      "calculation": "(calculates.gtTwoMonth_pneumonia() && not(calculates.severePneumonia()))"
+      "calculation": "(calculates.gtTwoMonth_pneumonia() && not(calculates.severePneumonia()))",
+      "_rowNum": 21
     },
     {
       "name": "anyPneumonia",
-      "calculation": "(calculates.severePneumonia() || calculates.pneumonia())"
+      "calculation": "(calculates.severePneumonia() || calculates.pneumonia())",
+      "_rowNum": 22
     },
     {
       "name": "coughOrCold",
-      "calculation": "(calculates.gtTwoMonth_coughOrCold() && not(calculates.anyPneumonia()) )"
+      "calculation": "(calculates.gtTwoMonth_coughOrCold() && not(calculates.anyPneumonia()) )",
+      "_rowNum": 23
     },
     {
       "name": "gtTwoMonth_severeDehydration",
-      "calculation": "(selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') + selected(data('drinking_poorly'), 'yes')  >= 2) && calculates.reportDiarrhoea()"
+      "calculation": "(selected(data('lethargic'),'yes') + selected(data('skin_elasticity'), 'very_slow') + selected(data('sunken_eyes'), 'yes') + selected(data('drinking_poorly'), 'yes')  >= 2) && calculates.reportDiarrhoea()",
+      "_rowNum": 25
     },
     {
       "name": "gtTwoMonth_someDehydration",
-      "calculation": "(selected(data('restless'), 'yes') + (selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow')) + selected(data('sunken_eyes'), 'yes') + selected(data('drinking_eagerly'), 'yes') >= 2) && calculates.reportDiarrhoea()"
+      "calculation": "(selected(data('restless'), 'yes') + (selected(data('skin_elasticity'), 'slow') || selected(data('skin_elasticity'), 'very_slow')) + selected(data('sunken_eyes'), 'yes') + selected(data('drinking_eagerly'), 'yes') >= 2) && calculates.reportDiarrhoea()",
+      "_rowNum": 26
     },
     {
       "name": "severeDehydration",
-      "calculation": "(calculates.gtTwoMonth_severeDehydration())"
+      "calculation": "(calculates.gtTwoMonth_severeDehydration())",
+      "_rowNum": 28
     },
     {
       "name": "someDehydration",
-      "calculation": "(calculates.gtTwoMonth_someDehydration() && not(calculates.severeDehydration()))"
+      "calculation": "(calculates.gtTwoMonth_someDehydration() && not(calculates.severeDehydration()))",
+      "_rowNum": 29
     },
     {
       "name": "anyDehydration",
-      "calculation": "(calculates.severeDehydration() || calculates.someDehydration())"
+      "calculation": "(calculates.severeDehydration() || calculates.someDehydration())",
+      "_rowNum": 30
     },
     {
       "name": "gtTwoMonth_severePersistentDiarrhoea",
-      "calculation": "(calculates.reportDiarrhoea() && (data('diarrhoea_days') >= 14) && calculates.anyDehydration() )"
+      "calculation": "(calculates.reportDiarrhoea() && (data('diarrhoea_days') >= 14) && calculates.anyDehydration() )",
+      "_rowNum": 32
     },
     {
       "name": "gtTwoMonth_persistentDiarrhoea",
-      "calculation": "(calculates.reportDiarrhoea() && (data('diarrhoea_days') >= 14) && not(calculates.anyDehydration()) )"
+      "calculation": "(calculates.reportDiarrhoea() && (data('diarrhoea_days') >= 14) && not(calculates.anyDehydration()) )",
+      "_rowNum": 33
     },
     {
       "name": "severePersistentDiarrhoea",
-      "calculation": "(calculates.gtTwoMonth_severePersistentDiarrhoea())"
+      "calculation": "(calculates.gtTwoMonth_severePersistentDiarrhoea())",
+      "_rowNum": 35
     },
     {
       "name": "persistentDiarrhoea",
-      "calculation": "(calculates.gtTwoMonth_persistentDiarrhoea() && not(calculates.severePersistentDiarrhoea()) )"
+      "calculation": "(calculates.gtTwoMonth_persistentDiarrhoea() && not(calculates.severePersistentDiarrhoea()) )",
+      "_rowNum": 36
     },
     {
       "name": "diarrhoea",
-      "calculation": "calculates.reportDiarrhoea()"
+      "calculation": "calculates.reportDiarrhoea()",
+      "_rowNum": 37
     },
     {
       "name": "gtTwoMonth_dysentery",
-      "calculation": "(selected(data('blood_in_stool'), 'yes') && calculates.reportDiarrhoea())"
+      "calculation": "(selected(data('blood_in_stool'), 'yes') && calculates.reportDiarrhoea())",
+      "_rowNum": 38
     },
     {
       "name": "dysentery",
-      "calculation": "(calculates.gtTwoMonth_dysentery())"
+      "calculation": "(calculates.gtTwoMonth_dysentery())",
+      "_rowNum": 40
     },
     {
       "name": "currentMeasles",
-      "calculation": "(selected(data('rash_generalized'), 'present') && (selected(data('runny_nose'), 'present')  || selected(data('basic_q'), 'difficulty_breathing') ||selected(data('rash_generalized'), 'present')  ))"
+      "calculation": "(selected(data('rash_generalized'), 'present') && (selected(data('runny_nose'), 'present')  || selected(data('basic_q'), 'difficulty_breathing') ||selected(data('rash_generalized'), 'present')  ))",
+      "_rowNum": 43
     },
     {
       "name": "anyMeasles",
-      "calculation": "calculates.currentMeasles() || selected(data('measles_three_month'), 'yes')"
+      "calculation": "calculates.currentMeasles() || selected(data('measles_three_month'), 'yes')",
+      "_rowNum": 44
     },
     {
       "name": "nonMeaslesCauseFever",
-      "calculation": "(calculates.coughOrCold() || calculates.anyPneumonia() || selected(data('basic_q'), 'diarrhoea') || calculates.dysentery() )"
+      "calculation": "(calculates.coughOrCold() || calculates.anyPneumonia() || selected(data('basic_q'), 'diarrhoea') || calculates.dysentery() )",
+      "_rowNum": 45
     },
     {
       "name": "gtTwoMonth_verySevereFebrileDisease",
-      "calculation": "(calculates.danger_signs_present() || selected(data('stiff_neck'), 'present') || selected(data('bulging_fontanelle'), 'present'))"
+      "calculation": "(calculates.danger_signs_present() || selected(data('stiff_neck'), 'present') || selected(data('bulging_fontanelle'), 'present'))",
+      "_rowNum": 47
     },
     {
       "name": "gtTwoMonth_malariaHigh",
-      "calculation": "(selected(data('malaria_risk'), 'high') && calculates.fever())"
+      "calculation": "(selected(data('malaria_risk'), 'high') && calculates.fever())",
+      "_rowNum": 48
     },
     {
       "name": "gtTwoMonth_malariaLow",
-      "calculation": "(selected(data('malaria_risk'), 'low') && selected(data('runny_nose'), 'not_present') && calculates.anyMeasles() && not(calculates.nonMeaslesCauseFever())  )"
+      "calculation": "(selected(data('malaria_risk'), 'low') && selected(data('runny_nose'), 'not_present') && calculates.anyMeasles() && not(calculates.nonMeaslesCauseFever())  )",
+      "_rowNum": 49
     },
     {
       "name": "gtTwoMonth_feverMalariaUnlikely",
-      "calculation": "(selected(data('runny_nose'), 'present') || calculates.anyMeasles() || calculates.nonMeaslesCauseFever() )"
+      "calculation": "(selected(data('runny_nose'), 'present') || calculates.anyMeasles() || calculates.nonMeaslesCauseFever() )",
+      "_rowNum": 50
     },
     {
       "name": "verySevereFebrileDisease",
-      "calculation": "(calculates.fever() && calculates.gtTwoMonth_verySevereFebrileDisease())"
+      "calculation": "(calculates.fever() && calculates.gtTwoMonth_verySevereFebrileDisease())",
+      "_rowNum": 52
     },
     {
       "name": "malaria",
-      "calculation": "(calculates.fever() && (calculates.gtTwoMonth_malariaHigh() || calculates.gtTwoMonth_malariaLow() ) && not(calculates.verySevereFebrileDisease()) )"
+      "calculation": "(calculates.fever() && (calculates.gtTwoMonth_malariaHigh() || calculates.gtTwoMonth_malariaLow() ) && not(calculates.verySevereFebrileDisease()) )",
+      "_rowNum": 53
     },
     {
       "name": "feverMalariaUnlikely",
-      "calculation": "(calculates.fever() && calculates.gtTwoMonth_feverMalariaUnlikely() && not(calculates.verySevereFebrileDisease()) && not(calculates.malaria()) )"
+      "calculation": "(calculates.fever() && calculates.gtTwoMonth_feverMalariaUnlikely() && not(calculates.verySevereFebrileDisease()) && not(calculates.malaria()) )",
+      "_rowNum": 54
     },
     {
       "name": "gtTwoMonth_severeComplicatedMeasles",
-      "calculation": "(calculates.anyMeasles() && (calculates.danger_signs_present() || selected(data('cornea_clouding'), 'present') || (selected(data('mouth_ulcers'), 'present') && selected(data('mouth_ulcers_deep'), 'yes') ) ) )"
+      "calculation": "(calculates.anyMeasles() && (calculates.danger_signs_present() || selected(data('cornea_clouding'), 'present') || (selected(data('mouth_ulcers'), 'present') && selected(data('mouth_ulcers_deep'), 'yes') ) ) )",
+      "_rowNum": 56
     },
     {
       "name": "gtTwoMonth_measlesWithComplications",
-      "calculation": "(calculates.anyMeasles() && ( selected(data('eye_pus'), 'present') || selected(data('mouth_ulcers'), 'present') ) )"
+      "calculation": "(calculates.anyMeasles() && ( selected(data('eye_pus'), 'present') || selected(data('mouth_ulcers'), 'present') ) )",
+      "_rowNum": 57
     },
     {
       "name": "severeComplicatedMeasles",
-      "calculation": "(calculates.gtTwoMonth_severeComplicatedMeasles())"
+      "calculation": "(calculates.gtTwoMonth_severeComplicatedMeasles())",
+      "_rowNum": 59
     },
     {
       "name": "measlesWithComplications",
-      "calculation": "(calculates.gtTwoMonth_measlesWithComplications() && not(calculates.severeComplicatedMeasles()) )"
+      "calculation": "(calculates.gtTwoMonth_measlesWithComplications() && not(calculates.severeComplicatedMeasles()) )",
+      "_rowNum": 60
     },
     {
       "name": "measlesClassification",
-      "calculation": "(calculates.anyMeasles() && not(calculates.severeComplicatedMeasles())  && not(calculates.measlesWithComplications()) )"
+      "calculation": "(calculates.anyMeasles() && not(calculates.severeComplicatedMeasles())  && not(calculates.measlesWithComplications()) )",
+      "_rowNum": 61
     },
     {
       "name": "gtTwoMonth_mastoiditis",
-      "calculation": "(selected(data('ear_swelling'), 'present') && calculates.reportEarProblem() )"
+      "calculation": "(selected(data('ear_swelling'), 'present') && calculates.reportEarProblem() )",
+      "_rowNum": 66
     },
     {
       "name": "gtTwoMonth_acuteEarInfection",
-      "calculation": "(selected(data('ear_pain'), 'yes') || ( selected(data('ear_discharge_observed'), 'present') && (data('ear_discharge_days') < 14) ) && calculates.reportEarProblem() )"
+      "calculation": "(selected(data('ear_pain'), 'yes') || ( selected(data('ear_discharge_observed'), 'present') && (data('ear_discharge_days') < 14) ) && calculates.reportEarProblem() )",
+      "_rowNum": 67
     },
     {
       "name": "gtTwoMonth_chronicEarInfection",
-      "calculation": "( selected(data('ear_discharge_observed'), 'present') && (data('ear_discharge_days') >= 14) && calculates.reportEarProblem() )"
+      "calculation": "( selected(data('ear_discharge_observed'), 'present') && (data('ear_discharge_days') >= 14) && calculates.reportEarProblem() )",
+      "_rowNum": 68
     },
     {
       "name": "mastoiditis",
-      "calculation": "(calculates.gtTwoMonth_mastoiditis())"
+      "calculation": "(calculates.gtTwoMonth_mastoiditis())",
+      "_rowNum": 70
     },
     {
       "name": "acuteEarInfection",
-      "calculation": "(calculates.gtTwoMonth_acuteEarInfection() && not(calculates.mastoiditis() ) )"
+      "calculation": "(calculates.gtTwoMonth_acuteEarInfection() && not(calculates.mastoiditis() ) )",
+      "_rowNum": 71
     },
     {
       "name": "chronicEarInfection",
-      "calculation": "(calculates.gtTwoMonth_chronicEarInfection() && not(calculates.mastoiditis() || calculates.acuteEarInfection() ) )"
+      "calculation": "(calculates.gtTwoMonth_chronicEarInfection() && not(calculates.mastoiditis() || calculates.acuteEarInfection() ) )",
+      "_rowNum": 72
     },
     {
       "name": "noEarInfection",
-      "calculation": "(not(calculates.mastoiditis() || calculates.acuteEarInfection() || calculates.chronicEarInfection() ) )"
+      "calculation": "(not(calculates.mastoiditis() || calculates.acuteEarInfection() || calculates.chronicEarInfection() ) )",
+      "_rowNum": 73
     },
     {
       "name": "gtTwoMonth_severeMalnutrition",
-      "calculation": "(selected(data('wasting'), 'present')  ||  selected(data('oedema'), 'present') )"
+      "calculation": "(selected(data('wasting'), 'present')  ||  selected(data('oedema'), 'present') )",
+      "_rowNum": 77
     },
     {
       "name": "gtTwoMonth_veryLowWeight",
-      "calculation": "(not(selected(data('malnutrition_grade'), 'normal') ) )"
+      "calculation": "(not(selected(data('malnutrition_grade'), 'normal') ) )",
+      "_rowNum": 78
     },
     {
       "name": "severeMalnutrition",
-      "calculation": "(calculates.gtTwoMonth_severeMalnutrition())"
+      "calculation": "(calculates.gtTwoMonth_severeMalnutrition())",
+      "_rowNum": 80
     },
     {
       "name": "veryLowWeight",
-      "calculation": "(calculates.gtTwoMonth_veryLowWeight() && not(calculates.gtTwoMonth_severeMalnutrition()) )"
+      "calculation": "(calculates.gtTwoMonth_veryLowWeight() && not(calculates.gtTwoMonth_severeMalnutrition()) )",
+      "_rowNum": 81
     },
     {
       "name": "notVeryLowWeight",
-      "calculation": "(not(calculates.gtTwoMonth_veryLowWeight()) && not(calculates.gtTwoMonth_severeMalnutrition()) )"
+      "calculation": "(not(calculates.gtTwoMonth_veryLowWeight()) && not(calculates.gtTwoMonth_severeMalnutrition()) )",
+      "_rowNum": 82
     },
     {
       "name": "gtTwoMonth_anaemiaSevere",
-      "calculation": "(selected(data('anaemia_check'), 'severe') )"
+      "calculation": "(selected(data('anaemia_check'), 'severe') )",
+      "_rowNum": 86
     },
     {
       "name": "gtTwoMonth_anaemiaSome",
-      "calculation": "(selected(data('anaemia_check'), 'some') )"
+      "calculation": "(selected(data('anaemia_check'), 'some') )",
+      "_rowNum": 87
     },
     {
       "name": "anaemiaSevere",
-      "calculation": "(calculates.gtTwoMonth_anaemiaSevere())"
+      "calculation": "(calculates.gtTwoMonth_anaemiaSevere())",
+      "_rowNum": 89
     },
     {
       "name": "anaemiaSome",
-      "calculation": "(calculates.gtTwoMonth_anaemiaSome() && not(calculates.gtTwoMonth_anaemiaSevere()) )"
+      "calculation": "(calculates.gtTwoMonth_anaemiaSome() && not(calculates.gtTwoMonth_anaemiaSevere()) )",
+      "_rowNum": 90
     },
     {
       "name": "anaemiaNone",
-      "calculation": "(not(calculates.gtTwoMonth_anaemiaSome() || calculates.gtTwoMonth_anaemiaSevere() ) )"
+      "calculation": "(not(calculates.gtTwoMonth_anaemiaSome() || calculates.gtTwoMonth_anaemiaSevere() ) )",
+      "_rowNum": 91
     },
     {
       "name": "hasSevereConditionWODehydrationDiarrhoea",
-      "calculation": "(calculates.severePneumonia() || calculates.verySevereFebrileDisease() || calculates.severeComplicatedMeasles() || calculates.mastoiditis() || calculates.severeMalnutrition() || calculates.anaemiaSevere())"
+      "calculation": "(calculates.severePneumonia() || calculates.verySevereFebrileDisease() || calculates.severeComplicatedMeasles() || calculates.mastoiditis() || calculates.severeMalnutrition() || calculates.anaemiaSevere())",
+      "_rowNum": 97
     },
     {
       "name": "hasSevereCondition",
-      "calculation": "(calculates.hasSevereConditionWODehydrationDiarrhoea()  || calculates.severeDehydration() || calculates.severePersistentDiarrhoea() )"
+      "calculation": "(calculates.hasSevereConditionWODehydrationDiarrhoea()  || calculates.severeDehydration() || calculates.severePersistentDiarrhoea() )",
+      "_rowNum": 98
     },
     {
       "name": "hasSevereConditionWODehydration",
-      "calculation": "(calculates.hasSevereConditionWODehydrationDiarrhoea() || calculates.severePersistentDiarrhoea() )"
+      "calculation": "(calculates.hasSevereConditionWODehydrationDiarrhoea() || calculates.severePersistentDiarrhoea() )",
+      "_rowNum": 99
     },
     {
       "name": "hasSevereConditionWODiarrhoea",
-      "calculation": "(calculates.hasSevereConditionWODehydrationDiarrhoea()  || calculates.severeDehydration() )"
+      "calculation": "(calculates.hasSevereConditionWODehydrationDiarrhoea()  || calculates.severeDehydration() )",
+      "_rowNum": 100
     },
     {
       "name": "firstDoseChloramophenicol",
-      "calculation": "(calculates.severePneumonia() || calculates.verySevereFebrileDisease() || calculates.severeComplicatedMeasles() ||  calculates.mastoiditis())"
+      "calculation": "(calculates.severePneumonia() || calculates.verySevereFebrileDisease() || calculates.severeComplicatedMeasles() ||  calculates.mastoiditis())",
+      "_rowNum": 103
     }
   ],
   "choices": {
@@ -3805,7 +4400,8 @@
         "label": {
           "default": "Yes",
           "hindi": "हाँ"
-        }
+        },
+        "_rowNum": 2
       },
       {
         "list_name": "yes_no",
@@ -3813,7 +4409,8 @@
         "label": {
           "default": "No",
           "hindi": "ना"
-        }
+        },
+        "_rowNum": 3
       }
     ],
     "present": [
@@ -3823,7 +4420,8 @@
         "label": {
           "default": "Present",
           "hindi": "है"
-        }
+        },
+        "_rowNum": 5
       },
       {
         "list_name": "present",
@@ -3831,7 +4429,8 @@
         "label": {
           "default": "Not present",
           "hindi": "नही है"
-        }
+        },
+        "_rowNum": 6
       }
     ],
     "agree": [
@@ -3841,7 +4440,8 @@
         "label": {
           "default": "Agree",
           "hindi": "राज़ी"
-        }
+        },
+        "_rowNum": 8
       },
       {
         "list_name": "agree",
@@ -3849,7 +4449,8 @@
         "label": {
           "default": "Disagree",
           "hindi": "नही राज़ी"
-        }
+        },
+        "_rowNum": 9
       }
     ],
     "sex": [
@@ -3859,7 +4460,8 @@
         "label": {
           "default": "Male",
           "hindi": "पुरुष"
-        }
+        },
+        "_rowNum": 11
       },
       {
         "list_name": "sex",
@@ -3867,7 +4469,8 @@
         "label": {
           "default": "Female",
           "hindi": "नारी"
-        }
+        },
+        "_rowNum": 12
       }
     ],
     "skin_elasticity": [
@@ -3877,7 +4480,8 @@
         "label": {
           "default": "Very slowly (longer than 2 seconds)?",
           "hindi": "बहुत धीरे (२ सेकेंड से ज़्यादा)"
-        }
+        },
+        "_rowNum": 15
       },
       {
         "list_name": "skin_elasticity",
@@ -3885,7 +4489,8 @@
         "label": {
           "default": "Slowly?",
           "hindi": "धीरे?"
-        }
+        },
+        "_rowNum": 16
       },
       {
         "list_name": "skin_elasticity",
@@ -3893,7 +4498,8 @@
         "label": {
           "default": "Skin goes back normally.",
           "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
-        }
+        },
+        "_rowNum": 17
       }
     ],
     "attachment_quality": [
@@ -3903,7 +4509,8 @@
         "label": {
           "default": "No attachment at all.",
           "hindi": "कोई लगाव नही"
-        }
+        },
+        "_rowNum": 20
       },
       {
         "list_name": "attachment_quality",
@@ -3911,7 +4518,8 @@
         "label": {
           "default": "Not well attached.",
           "hindi": "लगाव ठीक से नही है"
-        }
+        },
+        "_rowNum": 21
       },
       {
         "list_name": "attachment_quality",
@@ -3919,7 +4527,8 @@
         "label": {
           "default": "Good attachment.",
           "hindi": "अच्छा लगाव"
-        }
+        },
+        "_rowNum": 22
       }
     ],
     "sucking_effectiveness": [
@@ -3929,7 +4538,8 @@
         "label": {
           "default": "Not suckling at all.",
           "hindi": "स्तन को बिल्कुल नही चूसना"
-        }
+        },
+        "_rowNum": 25
       },
       {
         "list_name": "sucking_effectiveness",
@@ -3937,7 +4547,8 @@
         "label": {
           "default": "Not suckling effectively.",
           "hindi": "स्तन को प्रभावी डांग से नही चूसना"
-        }
+        },
+        "_rowNum": 26
       },
       {
         "list_name": "sucking_effectiveness",
@@ -3945,7 +4556,8 @@
         "label": {
           "default": "Suckling effectively.",
           "hindi": "स्तन को प्रभावी डांग से चूसना"
-        }
+        },
+        "_rowNum": 27
       }
     ],
     "vaccinations": [
@@ -3956,7 +4568,8 @@
           "default": "BCG",
           "hindi": "बी. सी. गी"
         },
-        "age_weeks": 0
+        "age_weeks": 0,
+        "_rowNum": 30
       },
       {
         "list_name": "vaccinations",
@@ -3965,25 +4578,29 @@
           "default": "OPV-0",
           "hindi": "ओ. पी. वी.-०"
         },
-        "age_weeks": 0
+        "age_weeks": 0,
+        "_rowNum": 31
       },
       {
         "list_name": "vaccinations",
         "name": "opv1hepatitusb1dpt1",
         "label": "OPV-1 + Hep B-1 + DPT-1",
-        "age_weeks": 6
+        "age_weeks": 6,
+        "_rowNum": 32
       },
       {
         "list_name": "vaccinations",
         "name": "opv2hepatitusb2dpt2",
         "label": "OPV-2 + Hep B-2 + DPT-2",
-        "age_weeks": 10
+        "age_weeks": 10,
+        "_rowNum": 33
       },
       {
         "list_name": "vaccinations",
         "name": "opv3hepatitusb3dpt3",
         "label": "OPV-3 + Hep B-3 + DPT-3",
-        "age_weeks": 14
+        "age_weeks": 14,
+        "_rowNum": 34
       },
       {
         "list_name": "vaccinations",
@@ -3992,7 +4609,8 @@
           "default": "Measles",
           "hindi": "खसरा"
         },
-        "age_weeks": 36
+        "age_weeks": 36,
+        "_rowNum": 35
       },
       {
         "list_name": "vaccinations",
@@ -4001,19 +4619,22 @@
           "default": "Vitamin A",
           "hindi": "विटामिन ए"
         },
-        "age_weeks": 36
+        "age_weeks": 36,
+        "_rowNum": 36
       },
       {
         "list_name": "vaccinations",
         "name": "dpt",
         "label": "DPT Booster",
-        "age_weeks": 64
+        "age_weeks": 64,
+        "_rowNum": 37
       },
       {
         "list_name": "vaccinations",
         "name": "opv",
         "label": "OPV Booster",
-        "age_weeks": 64
+        "age_weeks": 64,
+        "_rowNum": 38
       },
       {
         "list_name": "vaccinations",
@@ -4022,7 +4643,8 @@
           "default": "DT",
           "hindi": "डीटी"
         },
-        "age_weeks": 240
+        "age_weeks": 240,
+        "_rowNum": 39
       }
     ],
     "food": [
@@ -4032,7 +4654,8 @@
         "label": {
           "default": "Milk",
           "hindi": "दूध"
-        }
+        },
+        "_rowNum": 42
       },
       {
         "list_name": "food",
@@ -4040,7 +4663,8 @@
         "label": {
           "default": "Juice",
           "hindi": "जूस"
-        }
+        },
+        "_rowNum": 43
       },
       {
         "list_name": "food",
@@ -4048,7 +4672,8 @@
         "label": {
           "default": "Water",
           "hindi": "पानी"
-        }
+        },
+        "_rowNum": 44
       },
       {
         "list_name": "food",
@@ -4056,7 +4681,8 @@
         "label": {
           "default": "Formula",
           "hindi": "फ़ॉर्मूला"
-        }
+        },
+        "_rowNum": 45
       },
       {
         "list_name": "food",
@@ -4064,7 +4690,8 @@
         "label": {
           "default": "Cereal",
           "hindi": "सेरल"
-        }
+        },
+        "_rowNum": 46
       },
       {
         "list_name": "food",
@@ -4072,7 +4699,8 @@
         "label": {
           "default": "Cooked wheat/rice based with undiluted milk and sugar",
           "hindi": "पक्की हुई रोति / चावल शूध दूष और चीनी के साथ."
-        }
+        },
+        "_rowNum": 47
       },
       {
         "list_name": "food",
@@ -4080,7 +4708,8 @@
         "label": {
           "default": "Cooked wheat/rice based with dal/lentil water",
           "hindi": "पक्की हुई रोति / चावल डाल और पानी के साथ."
-        }
+        },
+        "_rowNum": 48
       },
       {
         "list_name": "food",
@@ -4088,7 +4717,8 @@
         "label": {
           "default": "Khichri (cooked rice+dal/lentil in thinned form)",
           "hindi": "खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)"
-        }
+        },
+        "_rowNum": 49
       },
       {
         "list_name": "food",
@@ -4096,7 +4726,8 @@
         "label": {
           "default": "Mashed fruit",
           "hindi": "पीसा हुए फल"
-        }
+        },
+        "_rowNum": 50
       },
       {
         "list_name": "food",
@@ -4104,7 +4735,8 @@
         "label": {
           "default": "Boiled or cooked vegetables",
           "hindi": "उबली या पक्की हुई सब्ज़ियाँ."
-        }
+        },
+        "_rowNum": 51
       },
       {
         "list_name": "food",
@@ -4112,7 +4744,8 @@
         "label": {
           "default": "Normal mixed food as adults",
           "hindi": "बढ़ों जैसे सामान्य खाना."
-        }
+        },
+        "_rowNum": 52
       }
     ],
     "attachment_quality_sign": [
@@ -4122,7 +4755,8 @@
         "label": {
           "default": "Chin touching breast",
           "hindi": "तोढी स्तन को चू रही है."
-        }
+        },
+        "_rowNum": 55
       },
       {
         "list_name": "attachment_quality_sign",
@@ -4130,7 +4764,8 @@
         "label": {
           "default": "Mouth wide open",
           "hindi": "मूँह पूरा खुला हुआ है."
-        }
+        },
+        "_rowNum": 56
       },
       {
         "list_name": "attachment_quality_sign",
@@ -4138,7 +4773,8 @@
         "label": {
           "default": "Lower lip turned outward",
           "hindi": "निचला होंठ बाहर की तरफ मूधा हुआ है."
-        }
+        },
+        "_rowNum": 57
       },
       {
         "list_name": "attachment_quality_sign",
@@ -4146,7 +4782,8 @@
         "label": {
           "default": "More areola visible above than below the \nmouth",
           "hindi": "नीचे की अपेक्षा उपर एरियोला अधिक दिख रहा है."
-        }
+        },
+        "_rowNum": 58
       }
     ],
     "visit_type": [
@@ -4156,7 +4793,8 @@
         "label": {
           "default": "Initial visit",
           "hindi": "प्रथम भेट."
-        }
+        },
+        "_rowNum": 61
       },
       {
         "list_name": "visit_type",
@@ -4164,7 +4802,8 @@
         "label": {
           "default": "Follow-up",
           "hindi": "पुन: भेट"
-        }
+        },
+        "_rowNum": 62
       }
     ],
     "breast_problems": [
@@ -4174,7 +4813,8 @@
         "label": {
           "default": "Flat/inverted nipple",
           "hindi": "चुचक के घाव"
-        }
+        },
+        "_rowNum": 65
       },
       {
         "list_name": "breast_problems",
@@ -4182,7 +4822,8 @@
         "label": {
           "default": "Sore/cracked nipple",
           "hindi": "चुचक के घाव"
-        }
+        },
+        "_rowNum": 66
       },
       {
         "list_name": "breast_problems",
@@ -4190,7 +4831,8 @@
         "label": {
           "default": "Engorged breasts",
           "hindi": "स्तानो मैं सूजन"
-        }
+        },
+        "_rowNum": 67
       },
       {
         "list_name": "breast_problems",
@@ -4198,7 +4840,8 @@
         "label": {
           "default": "Breast abscess",
           "hindi": "स्तानो मैं फोड़े"
-        }
+        },
+        "_rowNum": 68
       }
     ],
     "no_some_severe": [
@@ -4208,7 +4851,8 @@
         "label": {
           "default": "None",
           "hindi": "कुच्छ"
-        }
+        },
+        "_rowNum": 70
       },
       {
         "list_name": "no_some_severe",
@@ -4216,7 +4860,8 @@
         "label": {
           "default": "Some",
           "hindi": "तोढा"
-        }
+        },
+        "_rowNum": 71
       },
       {
         "list_name": "no_some_severe",
@@ -4224,7 +4869,8 @@
         "label": {
           "default": "Severe",
           "hindi": "बहुत"
-        }
+        },
+        "_rowNum": 72
       }
     ],
     "katori_teaspoon": [
@@ -4234,7 +4880,8 @@
         "label": {
           "default": "Katori",
           "hindi": "कटोरी"
-        }
+        },
+        "_rowNum": 74
       },
       {
         "list_name": "katori_teaspoon",
@@ -4242,7 +4889,8 @@
         "label": {
           "default": "Teaspoon",
           "hindi": "चम्मच"
-        }
+        },
+        "_rowNum": 75
       }
     ],
     "cotrimoxazole_type": [
@@ -4252,7 +4900,8 @@
         "label": {
           "default": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)",
           "hindi": "अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)"
-        }
+        },
+        "_rowNum": 77
       },
       {
         "list_name": "cotrimoxazole_type",
@@ -4260,7 +4909,8 @@
         "label": {
           "default": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)",
           "hindi": "बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)"
-        }
+        },
+        "_rowNum": 78
       }
     ],
     "malnutrition_grade": [
@@ -4270,7 +4920,8 @@
         "label": {
           "default": "Normal",
           "hindi": "नॉर्मल"
-        }
+        },
+        "_rowNum": 80
       },
       {
         "list_name": "malnutrition_grade",
@@ -4278,7 +4929,8 @@
         "label": {
           "default": "Grade I",
           "hindi": "ग्रेड १"
-        }
+        },
+        "_rowNum": 81
       },
       {
         "list_name": "malnutrition_grade",
@@ -4286,7 +4938,8 @@
         "label": {
           "default": "Grade II",
           "hindi": "ग्रेड २"
-        }
+        },
+        "_rowNum": 82
       },
       {
         "list_name": "malnutrition_grade",
@@ -4294,7 +4947,8 @@
         "label": {
           "default": "Grade III",
           "hindi": "ग्रेड ३"
-        }
+        },
+        "_rowNum": 83
       },
       {
         "list_name": "malnutrition_grade",
@@ -4302,87 +4956,102 @@
         "label": {
           "default": "Grade IV",
           "hindi": "ग्रेड ४"
-        }
+        },
+        "_rowNum": 84
       }
     ],
     "high_low": [
       {
         "list_name": "high_low",
         "name": "high",
-        "label": "High Risk"
+        "label": "High Risk",
+        "_rowNum": 86
       },
       {
         "list_name": "high_low",
         "name": "low",
-        "label": "Low Risk"
+        "label": "Low Risk",
+        "_rowNum": 87
       }
     ],
     "tablet_syrup": [
       {
         "list_name": "tablet_syrup",
         "name": "tablet",
-        "label": "Tablet"
+        "label": "Tablet",
+        "_rowNum": 89
       },
       {
         "list_name": "tablet_syrup",
         "name": "syrup",
-        "label": "Syrup"
+        "label": "Syrup",
+        "_rowNum": 90
       }
     ],
     "basic_four_questions": [
       {
         "list_name": "basic_four_questions",
         "name": "difficulty_breathing",
-        "label": "Cough or difficulty breathing"
+        "label": "Cough or difficulty breathing",
+        "_rowNum": 92
       },
       {
         "list_name": "basic_four_questions",
         "name": "diarrhoea",
-        "label": "Diarrhoea"
+        "label": "Diarrhoea",
+        "_rowNum": 93
       },
       {
         "list_name": "basic_four_questions",
         "name": "fever_reported",
-        "label": "Fever"
+        "label": "Fever",
+        "_rowNum": 94
       },
       {
         "list_name": "basic_four_questions",
         "name": "ear_problem",
-        "label": "Ear problem"
+        "label": "Ear problem",
+        "_rowNum": 95
       }
     ],
     "antimalarial": [
       {
         "list_name": "antimalarial",
         "name": "chloroquine",
-        "label": "First-line antimalarial:<br />\nChloroquine"
+        "label": "First-line antimalarial:<br />\nChloroquine",
+        "_rowNum": 97
       },
       {
         "list_name": "antimalarial",
         "name": "sulphadoxine",
-        "label": "Second-line antimalarial:\n<br />Sulphadoxine (or sulphalena) plus pyrimethamine*<br />\n*First line treatment in areas with High Resistance to Chloroquine"
+        "label": "Second-line antimalarial:\n<br />Sulphadoxine (or sulphalena) plus pyrimethamine*<br />\n*First line treatment in areas with High Resistance to Chloroquine",
+        "_rowNum": 98
       }
     ]
   },
   "settings": [
     {
       "setting": "form_id",
-      "value": "imnci"
+      "value": "imnci",
+      "_rowNum": 2
     },
     {
       "setting": "form_version",
-      "value": 3
+      "value": 20130408,
+      "_rowNum": 3
     },
     {
       "setting": "form_title",
       "value": {
         "default": "IMNCI",
         "hindi": "IMNCI"
-      }
+      },
+      "_rowNum": 4
     },
     {
       "setting": "table_id",
-      "value": "test"
+      "value": "test",
+      "_rowNum": 5
     }
   ],
   "model": {
