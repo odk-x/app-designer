@@ -593,6 +593,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
     }
     stmt += ") select ";
     comma = '';
+    var updates = {};
     for (f in dataTableModel) {
         defElement = dataTableModel[f];
         if ( defElement.isPersisted ) {
@@ -604,6 +605,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
             elementPathPair = this._getElementPathPairFromKvMap(kvMap, elementPath);
             if ( elementPathPair != null ) {
                 kvElement = elementPathPair.element;
+                updates[f] = {"elementPath" : elementPath, "value": null};
                 // track that we matched the keyname...
                 processSet[elementPathPair.elementPath] = true;
                 if (kvElement.value == null) {
@@ -613,16 +615,18 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
                     // remap kvElement.value into storage value...
                     v = this._toDatabaseFromElementType(defElement, kvElement.value);
                     bindings.push(v);
+                    updates[f].value = v; 
                 }
-            } else if ( f == "last_mod_time" ) {
+            } else if (( f == "last_mod_time" ) || (f == "timestamp")) {
                 stmt += "?";
-                bindings.push(now);
-            } else if ( f == "timestamp" ) {
-                stmt += "?";
-                bindings.push(now);
+                v = now;
+                bindings.push(v);
+                updates[f] = {"elementPath" : elementPath, "value": v};
             } else if ( f == "form_id" ) {
                 stmt += "?";
-                bindings.push(opendatakit.getSettingValue('form_id'));
+                v = opendatakit.getSettingValue('form_id');
+                bindings.push(v);
+                updates[f] = {"elementPath" : elementPath, "value": v};
             } else if ( f == "saved" ) {
                 stmt += "null";
             } else {
@@ -640,7 +644,8 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
     }
     return {
         stmt : stmt,
-        bind : bindings
+        bind : bindings,
+        updates : updates
         };
 },
 /**
@@ -955,11 +960,31 @@ putDataKeyValueMap:function(ctxt, kvMap) {
       }
       names = names.substring(1);
       ctxt.append('database.putDataKeyValueMap.initiated', names );
-      that.withDb( ctxt, function(transaction) {
+
+      var updates = {};
+      var tmpctxt = $.extend({}, ctxt, {success:function() {
+                ctxt.append('database.putDataKeyValueMap.updatingCache');
+                var uf;
+                for (var f in updates) {
+                    var uf = updates[f];
+                    var de = mdl.dataTableModel[f];
+                    if (de.isPersisted) {
+                        var elementPath = de.elementPath || uf.elementPath;
+                        if ( de.elementSet == 'instanceMetadata' ) {
+                            that._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
+                        } else {
+                            that._reconstructElementPath(elementPath, de, uf.value, mdl.data );
+                        }
+                    }
+                }
+                ctxt.success();
+            }});
+
+      that.withDb( tmpctxt, function(transaction) {
             var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, opendatakit.getCurrentInstanceId(), kvMap);
-            ctxt.sqlStatement = is;
             transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-                ctxt.append("putDataKeyValueMap.success", names);
+                updates = is.updates;
+                tmpctxt.append("putDataKeyValueMap.success", names);
             });
         });
 },
@@ -1007,13 +1032,18 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
 },
 cacheAllData:function(ctxt, instanceId) {
     var that = this;
-    this.getAllData($.extend({},ctxt,{success:function(tlo) {
-        ctxt.append("cacheAllData.success");
-        mdl.metadata = tlo.metadata;
-        mdl.data = tlo.data;
-        opendatakit.setCurrentInstanceId(instanceId);
+    if (mdl.loaded) {
         ctxt.success();
-    }}), mdl.dataTableModel, mdl.tableMetadata.dbTableName, instanceId);
+    } else {
+        this.getAllData($.extend({},ctxt,{success:function(tlo) {
+            ctxt.append("cacheAllData.success");
+            mdl.metadata = tlo.metadata;
+            mdl.data = tlo.data;
+            opendatakit.setCurrentInstanceId(instanceId);
+            mdl.loaded = true;
+            ctxt.success();
+        }}), mdl.dataTableModel, mdl.tableMetadata.dbTableName, instanceId);
+    }
 },
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
@@ -1171,6 +1201,7 @@ ignore_all_changes:function(ctxt) {
             var cs = that._deleteUnsavedChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
             ctxt.sqlStatement = cs;
             transaction.executeSql(cs.stmt, cs.bind);
+            mdl.loaded = false;
         });
 },
  delete_all:function(ctxt, instanceId) {
@@ -1215,6 +1246,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
         ctxt.append('initializeInstance.noInstance');
         mdl.metadata = {};
         mdl.data = {};
+        mdl.loaded = false;
         opendatakit.setCurrentInstanceId(null);
         ctxt.success();
     } else {
