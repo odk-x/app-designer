@@ -99,7 +99,7 @@
       "name": "under_2_months",
       "label": {
         "default": "Protocol does NOT support under 2 months. Please refer the child to a doctor for detailed assessment.",
-        "hindi": "2 महीने के नीचे प्रोटोकॉल का समर्थन नहीं है.  बच्चे को चिकित्सक के पास लेजाने को कहें"
+        "hindi": "2 महीने के नीचे प्रोटोकॉल का समर्थन नहीं है.  बच्चे को चिकित्सक के पास लेजाने को कहें"
       },
       "required": true,
       "_rowNum": 13
@@ -115,8 +115,61 @@
       "param": "more_than_2mo"
     },
     {
+      "type": "with_next",
+      "name": "malnutrition_grade",
+      "assign": "window.classifyWeight()",
+      "_rowNum": 17
+    },
+    {
       "type": "screen",
-      "_rowNum": 17,
+      "_rowNum": 18,
+      "prompts": [
+        {
+          "type": "note",
+          "condition": "selected(data('malnutrition_grade'), 'normal')",
+          "label": "System automatically determined nutrition <FONT COLOR=\"6600CC\"> <strong> Normal </strong> </FONT>",
+          "_rowNum": 19
+        },
+        {
+          "type": "note",
+          "condition": "selected(data('malnutrition_grade'), 'grade1')",
+          "label": "System automatically determined  malnutrition <FONT COLOR=\"6600CC\"> <strong> Grade 1</strong> </FONT>",
+          "_rowNum": 20
+        },
+        {
+          "type": "note",
+          "condition": "selected(data('malnutrition_grade'), 'grade2')",
+          "label": "System automatically determined malnutrition <FONT COLOR=\"6600CC\"> <strong> Grade 2 </strong> </FONT>",
+          "_rowNum": 21
+        },
+        {
+          "type": "note",
+          "condition": "selected(data('malnutrition_grade'), 'grade3')",
+          "label": "System automatically determined  malnutrition <FONT COLOR=\"6600CC\"> <strong> Grade 3 </strong> </FONT>",
+          "_rowNum": 22
+        },
+        {
+          "type": "note",
+          "condition": "selected(data('malnutrition_grade'), 'grade4')",
+          "label": "System automatically determined malnutrition <FONT COLOR=\"6600CC\"> <strong> Grade 4 </strong> </FONT>",
+          "_rowNum": 23
+        },
+        {
+          "type": "select_one",
+          "name": "malnutrition_grade",
+          "label": {
+            "default": "Change grade of malnutrition by plotting weight for age on the graph",
+            "hindi": "वज़न को ग्रोत चार्ट पर दर्शा कर कुपोषण का ग्रेड निधारित करें."
+          },
+          "hint": "Weight: {{weight.value}}kg",
+          "_rowNum": 24,
+          "param": "malnutrition_grade"
+        }
+      ]
+    },
+    {
+      "type": "screen",
+      "_rowNum": 27,
       "prompts": [
         {
           "type": "note",
@@ -124,7 +177,7 @@
             "default": "ASK:",
             "hindi": "पूछें"
           },
-          "_rowNum": 18
+          "_rowNum": 28
         },
         {
           "type": "select_one",
@@ -134,7 +187,7 @@
             "hindi": "क्या शिशु स्तनपान ले पा रहा है?"
           },
           "required": true,
-          "_rowNum": 19,
+          "_rowNum": 29,
           "param": "yes_no"
         },
         {
@@ -145,32 +198,38 @@
             "hindi": "क्या बच्चा सब कुछ ऊलती कर देता है?"
           },
           "required": true,
-          "_rowNum": 20,
-          "param": "yes_no"
-        },
-        {
-          "type": "select_one",
-          "name": "convulsions",
-          "label": {
-            "default": "Has the child had convulsions?",
-            "hindi": "पूछे: क्या शिशु को दौरे पढ़े थे?"
-          },
-          "required": true,
-          "_rowNum": 21,
+          "_rowNum": 30,
           "param": "yes_no"
         }
       ]
     },
     {
-      "type": "select_one",
-      "name": "lethargic",
-      "label": {
-        "default": "LOOK: See if the child is lethargic or unconscious.",
-        "hindi": "देखें, क्या शिशु सुस्त या बेहोश है?"
-      },
-      "required": true,
-      "_rowNum": 23,
-      "param": "yes_no"
+      "type": "screen",
+      "_rowNum": 32,
+      "prompts": [
+        {
+          "type": "select_one",
+          "name": "convulsions",
+          "label": {
+            "default": "ASK: Has the child had convulsions?",
+            "hindi": "पूछे: क्या शिशु को दौरे पढ़े थे?"
+          },
+          "required": true,
+          "_rowNum": 33,
+          "param": "yes_no"
+        },
+        {
+          "type": "select_one",
+          "name": "lethargic",
+          "label": {
+            "default": "LOOK: See if the child is lethargic or unconscious.",
+            "hindi": "देखें, क्या शिशु सुस्त या बेहोश है?"
+          },
+          "required": true,
+          "_rowNum": 34,
+          "param": "yes_no"
+        }
+      ]
     },
     {
       "comments": "Google translated / CHANGED",
@@ -180,13 +239,13 @@
         "default": "Record pulse and oxygen saturation",
         "hindi": "रिकॉर्ड करें नाड़ी और ऑक्सीजन  परिपूर्णता"
       },
-      "_rowNum": 25
+      "_rowNum": 36
     },
     {
       "comments": "FIGURE OUT REQUIRED",
       "type": "screen",
       "condition": "calculates.danger_signs_present()",
-      "_rowNum": 26,
+      "_rowNum": 37,
       "prompts": [
         {
           "type": "note",
@@ -194,7 +253,7 @@
             "default": "<strong>DANGER SIGNS:</strong>",
             "hindi": "<strong>ख़तरा चिन्ह </strong>"
           },
-          "_rowNum": 27
+          "_rowNum": 38
         },
         {
           "type": "note",
@@ -203,7 +262,7 @@
             "default": "<li>Not able to drink or breastfeed</li>",
             "hindi": "<li>पी नही सकना या स्तनपान नही कर सकना </li>"
           },
-          "_rowNum": 28
+          "_rowNum": 39
         },
         {
           "type": "note",
@@ -212,7 +271,7 @@
             "default": "<li>Vomits everything</li>",
             "hindi": "<li>सब कुछ ऊलती कर देना</li>"
           },
-          "_rowNum": 29
+          "_rowNum": 40
         },
         {
           "type": "note",
@@ -221,7 +280,7 @@
             "default": "<li>Convulsions</li>",
             "hindi": "<li>दौरे पढ़ना </li>"
           },
-          "_rowNum": 30
+          "_rowNum": 41
         },
         {
           "type": "note",
@@ -230,7 +289,7 @@
             "default": "<li>Lethargic or unconscious</li>",
             "hindi": "<li>सुस्त या बेहोश</li>"
           },
-          "_rowNum": 31
+          "_rowNum": 42
         },
         {
           "type": "note",
@@ -239,7 +298,7 @@
             "default": "<li>Oxygen saturation less than 90%</li>",
             "hindi": "<li>ऑक्सीजन संतृप्ति कम से कम 90%</li>"
           },
-          "_rowNum": 32
+          "_rowNum": 43
         },
         {
           "comments": "I'm a bit uncertain whether this classification section should move to the end. I think it's best to leave it where it is so the HW knows to complete the survey immediatley",
@@ -250,7 +309,7 @@
             "hindi": "ख़तरे के आम चिन्ौ वाले बाकछे को <strong> तुरंत </strong> ध्यान देने की ज़रूरत  है. आकलन और रेफएरल पूर्व उपकर तुरंत दे, जिससे की रेफएरल मैं देरी नही हो."
           },
           "required": true,
-          "_rowNum": 33
+          "_rowNum": 44
         }
       ]
     },
@@ -259,13 +318,13 @@
       "name": "basic_q",
       "label": {
         "default": "Does the child have:",
-        "hindi": "बच्चे को क्या है:"
+        "hindi": "बच्चे को क्या है:"
       },
       "hint": {
         "default": "Select all that apply",
-        "hindi": "जो भी लागू हो उसे चुनें"
+        "hindi": "जो भी लागू हो उसे चुनें"
       },
-      "_rowNum": 35,
+      "_rowNum": 46,
       "param": "basic_four_questions"
     },
     {
@@ -274,14 +333,14 @@
       "name": "how_long_difficulty_breathing",
       "label": {
         "default": "For how long has the child had a cough or difficult breathing?",
-        "hindi": "कितनी देर के लिए बच्चे को खांसी या साँस लेनें में दिकत हुई?"
+        "hindi": "कितनी देर के लिए बच्चे को खांसी या साँस लेनें में दिकत हुई?"
       },
       "hint": {
         "default": "(in days)",
         "hindi": "दीनो मैं"
       },
       "required": true,
-      "_rowNum": 37
+      "_rowNum": 48
     },
     {
       "comments": "REQUIRED WITH PROMPTING",
@@ -292,7 +351,7 @@
         "default": "Count the breaths in one minute.",
         "hindi": "एक मिनिट के लिए साँस गिने."
       },
-      "_rowNum": 39
+      "_rowNum": 50
     },
     {
       "type": "breathcounter",
@@ -303,7 +362,7 @@
         "hindi": "सास की गिनती ज़्यादा है. एक बार और गिनिए."
       },
       "required": true,
-      "_rowNum": 40
+      "_rowNum": 51
     },
     {
       "type": "select_one",
@@ -319,7 +378,7 @@
       },
       "image": "./img/chestdrawing.jpg",
       "required": true,
-      "_rowNum": 41,
+      "_rowNum": 52,
       "param": "present"
     },
     {
@@ -328,18 +387,18 @@
       "name": "stridor",
       "label": "Look and listen for stridor.",
       "required": true,
-      "_rowNum": 42,
+      "_rowNum": 53,
       "param": "present"
     },
     {
       "type": "label",
-      "_rowNum": 44,
+      "_rowNum": 55,
       "param": "above_2mo_diarrhoea_section"
     },
     {
       "type": "screen",
       "condition": "calculates.reportDiarrhoea()",
-      "_rowNum": 45,
+      "_rowNum": 56,
       "prompts": [
         {
           "type": "note",
@@ -347,7 +406,7 @@
             "default": "ASK:",
             "hindi": "पूछें"
           },
-          "_rowNum": 46
+          "_rowNum": 57
         },
         {
           "type": "integer",
@@ -357,7 +416,7 @@
             "hindi": "कब से?"
           },
           "required": true,
-          "_rowNum": 47
+          "_rowNum": 58
         },
         {
           "type": "select_one",
@@ -367,7 +426,7 @@
             "hindi": "पूछें क्या माल में खून आता है?"
           },
           "required": true,
-          "_rowNum": 48,
+          "_rowNum": 59,
           "param": "yes_no"
         }
       ]
@@ -375,7 +434,7 @@
     {
       "type": "screen",
       "condition": "calculates.reportDiarrhoea()",
-      "_rowNum": 50,
+      "_rowNum": 61,
       "prompts": [
         {
           "type": "note",
@@ -383,7 +442,7 @@
             "default": "Assess the child's general condition:",
             "hindi": "शिशु की सामानया स्थिति देखें."
           },
-          "_rowNum": 51
+          "_rowNum": 62
         },
         {
           "type": "select_one",
@@ -393,7 +452,7 @@
             "hindi": "बेचेन्न या चिढ़चिढ़ा  है?"
           },
           "required": true,
-          "_rowNum": 52,
+          "_rowNum": 63,
           "param": "yes_no"
         }
       ]
@@ -407,13 +466,13 @@
         "hindi": "धँसी हूई आखें के लिए देखें."
       },
       "required": true,
-      "_rowNum": 54,
+      "_rowNum": 65,
       "param": "yes_no"
     },
     {
       "type": "screen",
       "condition": "calculates.reportDiarrhoea()",
-      "_rowNum": 55,
+      "_rowNum": 66,
       "prompts": [
         {
           "type": "note",
@@ -422,7 +481,7 @@
             "hindi": "बच्चे को कुछ पीने को दे."
           },
           "required": true,
-          "_rowNum": 56
+          "_rowNum": 67
         },
         {
           "type": "select_one",
@@ -432,7 +491,7 @@
             "hindi": "क्या बच्चा पी नही सकता या बहुत कम पिता है?"
           },
           "required": true,
-          "_rowNum": 57,
+          "_rowNum": 68,
           "param": "yes_no"
         },
         {
@@ -444,7 +503,7 @@
             "hindi": "पीने को उतावला है, प्यासा है?"
           },
           "required": true,
-          "_rowNum": 58,
+          "_rowNum": 69,
           "param": "yes_no"
         }
       ]
@@ -459,17 +518,17 @@
       },
       "image": "./img/pinchskin.jpg",
       "required": true,
-      "_rowNum": 60,
+      "_rowNum": 71,
       "param": "skin_elasticity"
     },
     {
       "type": "label",
-      "_rowNum": 64,
+      "_rowNum": 75,
       "param": "above_2mo_fever_section"
     },
     {
       "type": "screen",
-      "_rowNum": 65,
+      "_rowNum": 76,
       "prompts": [
         {
           "type": "select_one",
@@ -479,7 +538,7 @@
             "hindi": "कक्षा तापमान को मापने के लिए संभव है?"
           },
           "required": true,
-          "_rowNum": 66,
+          "_rowNum": 77,
           "param": "yes_no"
         },
         {
@@ -491,7 +550,7 @@
             "hindi": "कक्षा तापमान"
           },
           "required": true,
-          "_rowNum": 67
+          "_rowNum": 78
         },
         {
           "type": "select_one",
@@ -501,20 +560,20 @@
             "default": "Feel  for fever:",
             "hindi": "तापमान देखें"
           },
-          "_rowNum": 68,
+          "_rowNum": 79,
           "param": "present"
         }
       ]
     },
     {
       "type": "label",
-      "_rowNum": 70,
+      "_rowNum": 81,
       "param": "above_2mo_fever_assessment"
     },
     {
       "type": "screen",
       "condition": "calculates.fever()",
-      "_rowNum": 71,
+      "_rowNum": 82,
       "prompts": [
         {
           "type": "note",
@@ -522,7 +581,7 @@
             "default": "ASK:",
             "hindi": "पूछें:"
           },
-          "_rowNum": 72
+          "_rowNum": 83
         },
         {
           "type": "integer",
@@ -536,7 +595,7 @@
             "hindi": "दीनो मैं"
           },
           "required": true,
-          "_rowNum": 73
+          "_rowNum": 84
         },
         {
           "comments": "test",
@@ -548,7 +607,7 @@
             "hindi": "क्या बुखार रोज़ाना आता है?"
           },
           "required": true,
-          "_rowNum": 74,
+          "_rowNum": 85,
           "param": "yes_no"
         }
       ]
@@ -556,17 +615,17 @@
     {
       "type": "screen",
       "condition": "calculates.fever()",
-      "_rowNum": 77,
+      "_rowNum": 88,
       "prompts": [
         {
           "type": "select_one",
           "name": "malaria_risk",
           "label": {
             "default": "Decide Malaria Risk",
-            "hindi": "मलेरिया जोखिम तय करें"
+            "hindi": "मलेरिया जोखिम तय करें"
           },
           "required": true,
-          "_rowNum": 78,
+          "_rowNum": 89,
           "param": "high_low"
         },
         {
@@ -577,7 +636,7 @@
             "hindi": "बच्चे को पिछले 3 महीने के भीतर चेचक था?"
           },
           "required": true,
-          "_rowNum": 79,
+          "_rowNum": 90,
           "param": "yes_no"
         }
       ]
@@ -585,7 +644,7 @@
     {
       "type": "screen",
       "condition": "calculates.fever()",
-      "_rowNum": 82,
+      "_rowNum": 93,
       "prompts": [
         {
           "type": "note",
@@ -593,7 +652,7 @@
             "default": "LOOK or FEEL for:",
             "hindi": "देखें व महसूस करें."
           },
-          "_rowNum": 83
+          "_rowNum": 94
         },
         {
           "type": "select_one",
@@ -603,7 +662,7 @@
             "hindi": "अकड़ी गर्दन"
           },
           "required": true,
-          "_rowNum": 84,
+          "_rowNum": 95,
           "param": "present"
         },
         {
@@ -616,7 +675,7 @@
             "hindi": "ब्रह्मारंध्र उभड़ा"
           },
           "required": true,
-          "_rowNum": 85,
+          "_rowNum": 96,
           "param": "present"
         }
       ]
@@ -624,15 +683,15 @@
     {
       "type": "screen",
       "condition": "calculates.fever()",
-      "_rowNum": 88,
+      "_rowNum": 99,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "LOOK for:",
-            "hindi": "निम्नलिखित पे निशान करे"
+            "hindi": "निम्नलिखित पे निशान करे"
           },
-          "_rowNum": 89
+          "_rowNum": 100
         },
         {
           "type": "select_one",
@@ -642,7 +701,7 @@
             "hindi": "साधारण लाल चकत्ते"
           },
           "required": true,
-          "_rowNum": 90,
+          "_rowNum": 101,
           "param": "present"
         },
         {
@@ -653,7 +712,7 @@
             "hindi": "नाक बह रही है"
           },
           "required": true,
-          "_rowNum": 91,
+          "_rowNum": 102,
           "param": "present"
         },
         {
@@ -664,7 +723,7 @@
             "hindi": "लाल आँखें"
           },
           "required": true,
-          "_rowNum": 92,
+          "_rowNum": 103,
           "param": "present"
         }
       ]
@@ -672,25 +731,25 @@
     {
       "type": "screen",
       "condition": "calculates.fever() && calculates.anyMeasles()",
-      "_rowNum": 95,
+      "_rowNum": 106,
       "prompts": [
         {
           "type": "note",
           "label": {
             "default": "LOOK for:",
-            "hindi": "निम्नलिखित पे निशान करे"
+            "hindi": "निम्नलिखित पे निशान करे"
           },
-          "_rowNum": 96
+          "_rowNum": 107
         },
         {
           "type": "select_one",
           "name": "eye_pus",
           "label": {
             "default": "Pus draining from the eye",
-            "hindi": "आंख से पस बह रही हे"
+            "hindi": "आंख से पस बह रही हे"
           },
           "required": true,
-          "_rowNum": 97,
+          "_rowNum": 108,
           "param": "present"
         },
         {
@@ -701,7 +760,7 @@
             "hindi": "कॉर्निया के clouding"
           },
           "required": true,
-          "_rowNum": 98,
+          "_rowNum": 109,
           "param": "present"
         },
         {
@@ -709,10 +768,10 @@
           "name": "mouth_ulcers",
           "label": {
             "default": "Mouth ulcers",
-            "hindi": "मुँह में अल्सर"
+            "hindi": "मुँह में अल्सर"
           },
           "required": true,
-          "_rowNum": 99,
+          "_rowNum": 110,
           "param": "present"
         },
         {
@@ -724,25 +783,25 @@
             "hindi": "मुँह अल्सर गहरा है या लंबा - चौड़ा\n है?"
           },
           "required": true,
-          "_rowNum": 100,
+          "_rowNum": 111,
           "param": "yes_no"
         }
       ]
     },
     {
       "type": "label",
-      "_rowNum": 105,
+      "_rowNum": 116,
       "param": "above_2mo_fever_assessment_end"
     },
     {
       "type": "label",
-      "_rowNum": 107,
+      "_rowNum": 118,
       "param": "above_2mo_ear_section"
     },
     {
       "type": "screen",
       "condition": "calculates.reportEarProblem()",
-      "_rowNum": 109,
+      "_rowNum": 120,
       "prompts": [
         {
           "type": "select_one",
@@ -752,7 +811,7 @@
             "hindi": "कान में दर्द है?"
           },
           "required": true,
-          "_rowNum": 110,
+          "_rowNum": 121,
           "param": "yes_no"
         },
         {
@@ -760,10 +819,10 @@
           "name": "ear_discharge_reported",
           "label": {
             "default": "Is there ear discharge?",
-            "hindi": "कान बहतें हेय़"
+            "hindi": "कान बहतें हेय़"
           },
           "required": true,
-          "_rowNum": 111,
+          "_rowNum": 122,
           "param": "yes_no"
         },
         {
@@ -772,27 +831,27 @@
           "name": "ear_discharge_days",
           "label": {
             "default": "How many days has there been ear discharge?",
-            "hindi": "कितने दिनों से कान बह रहे हेंय़"
+            "hindi": "कितने दिनों से कान बह रहे हेंय़"
           },
           "required": true,
-          "_rowNum": 112
+          "_rowNum": 123
         }
       ]
     },
     {
       "type": "screen",
       "condition": "calculates.reportEarProblem()",
-      "_rowNum": 115,
+      "_rowNum": 126,
       "prompts": [
         {
           "type": "select_one",
           "name": "ear_discharge_observed",
           "label": {
             "default": "Look for pus draining from the ear",
-            "hindi": "कान से पस बहने के लिए देखे"
+            "hindi": "कान से पस बहने के लिए देखे"
           },
           "required": true,
-          "_rowNum": 116,
+          "_rowNum": 127,
           "param": "present"
         },
         {
@@ -800,22 +859,22 @@
           "name": "ear_swelling",
           "label": {
             "default": "Feel for tender swelling behind the ear",
-            "hindi": "कान के पीछे नाज़ुक सूजन के लिए महसूस करे"
+            "hindi": "कान के पीछे नाज़ुक सूजन के लिए महसूस करे"
           },
           "required": true,
-          "_rowNum": 117,
+          "_rowNum": 128,
           "param": "present"
         }
       ]
     },
     {
       "type": "label",
-      "_rowNum": 120,
+      "_rowNum": 131,
       "param": "above_2mo_malnutrition_section"
     },
     {
       "type": "screen",
-      "_rowNum": 121,
+      "_rowNum": 132,
       "prompts": [
         {
           "type": "note",
@@ -823,7 +882,7 @@
             "default": "LOOK and FEEL:",
             "hindi": "देखें व महसूस करें."
           },
-          "_rowNum": 122
+          "_rowNum": 133
         },
         {
           "type": "select_one",
@@ -833,7 +892,7 @@
             "hindi": "दिखने वाला गंभीर सुखापना."
           },
           "required": true,
-          "_rowNum": 123,
+          "_rowNum": 134,
           "param": "present"
         },
         {
@@ -844,26 +903,14 @@
             "hindi": "दोनो परो मैं सूजन"
           },
           "required": true,
-          "_rowNum": 124,
+          "_rowNum": 135,
           "param": "present"
         }
       ]
     },
     {
-      "comments": "TODO: Template for plotting weight for age? Or make this a calculated value.",
-      "type": "select_one",
-      "name": "malnutrition_grade",
-      "label": {
-        "default": "Determine grade of malnutrition by plotting weight for age on the graph",
-        "hindi": "वज़न को ग्रोत चार्ट पर दर्शा कर कुपोषण का ग्रेड निधारित करें."
-      },
-      "hint": "Weight: {{weight.value}}kg",
-      "_rowNum": 126,
-      "param": "malnutrition_grade"
-    },
-    {
       "type": "label",
-      "_rowNum": 128,
+      "_rowNum": 138,
       "param": "above_2mo_anaemia"
     },
     {
@@ -874,12 +921,12 @@
         "hindi": "देखें व महसूस करें."
       },
       "required": true,
-      "_rowNum": 129,
+      "_rowNum": 139,
       "param": "no_some_severe"
     },
     {
       "type": "label",
-      "_rowNum": 132,
+      "_rowNum": 142,
       "param": "above_2mo_check_immunization_status"
     },
     {
@@ -890,7 +937,7 @@
         "hindi": "शिशु को कौनसा टीका नही लगा है?"
       },
       "choice_filter": "context.age_weeks <= Math.round(calculates.daysOld() / 7)",
-      "_rowNum": 133,
+      "_rowNum": 143,
       "param": "vaccinations"
     },
     {
@@ -901,7 +948,7 @@
         "default": "Does the child have any other health problems?",
         "hindi": "शिशु को कोई और दिकाट है?"
       },
-      "_rowNum": 135,
+      "_rowNum": 145,
       "param": "yes_no"
     },
     {
@@ -912,11 +959,11 @@
         "default": "Refer the child to a doctor for detailed assessment or the \"other health problem(s)\".",
         "hindi": "शिशु को डॉक्टर के पास रेफर करें."
       },
-      "_rowNum": 136
+      "_rowNum": 146
     },
     {
       "type": "goto",
-      "_rowNum": 138,
+      "_rowNum": 148,
       "param": "start_classifications"
     },
     {
@@ -5037,7 +5084,7 @@
     },
     {
       "setting": "form_version",
-      "value": 20130408,
+      "value": 3,
       "_rowNum": 3
     },
     {
@@ -5076,6 +5123,9 @@
     },
     "under_2_months": {
       "type": "boolean"
+    },
+    "malnutrition_grade": {
+      "type": "string"
     },
     "able_to_drink": {
       "type": "string"
@@ -5213,9 +5263,6 @@
       "type": "string"
     },
     "oedema": {
-      "type": "string"
-    },
-    "malnutrition_grade": {
       "type": "string"
     },
     "anaemia_check": {
