@@ -1,42 +1,56 @@
 {
   "survey": [
     {
+      "type": "text",
+      "name": "household_id",
+      "label": "Unique barcode ID or locator designation for this household (foreign key into household table).",
+      "readonly": true,
+      "comments": "readonly is not implemented, but this would be a note-like field that was set to be the parent table key via the extra URL arguments.  It could be hidden and only displayed as a reference in a prompt label.",
+      "_rowNum": 2
+    },
+    {
+      "type": "text",
+      "name": "member_name",
+      "label": "Enter the name of the household member:",
+      "_rowNum": 3
+    },
+    {
       "type": "integer",
       "name": "age",
       "label": "Enter age:",
-      "_rowNum": 2
+      "_rowNum": 4
     },
     {
       "type": "select_one",
       "name": "sex",
       "label": "Enter sex:",
-      "_rowNum": 3,
+      "_rowNum": 5,
       "param": "sexes"
     },
     {
       "type": "select_one",
       "name": "income_contribution",
       "label": "Does this household member contribute to the household income?",
-      "_rowNum": 4,
+      "_rowNum": 6,
       "param": "yesno"
     },
     {
       "type": "text",
       "name": "children",
       "label": "Which household members are children of this household member?",
-      "_rowNum": 5
+      "_rowNum": 7
     },
     {
       "type": "text",
       "name": "siblings",
       "label": "Which household members are siblings of this household member?",
-      "_rowNum": 6
+      "_rowNum": 8
     },
     {
       "type": "text",
       "name": "cousins",
       "label": "Which household members are cousins of this household member?",
-      "_rowNum": 7
+      "_rowNum": 9
     }
   ],
   "choices": {
@@ -84,9 +98,24 @@
       "setting": "form_title",
       "value": "Household Member Survey",
       "_rowNum": 4
+    },
+    {
+      "setting": "table_id",
+      "value": "household_member",
+      "_rowNum": 5
     }
   ],
   "model": {
+    "household_id": {
+      "type": "string",
+      "joins": [{
+        "table_id": "household",
+        "element_name": "household_id"
+      }]
+    },
+    "member_name": {
+      "type": "string"
+    },
     "age": {
       "type": "integer"
     },
