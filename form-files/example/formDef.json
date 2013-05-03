@@ -80,7 +80,7 @@
     },
     {
       "type": "note",
-      "label": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
+      "label": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
       "audio": "audio/carrioncrow.mp3",
       "image": "img/dolphin.png",
       "_rowNum": 15
