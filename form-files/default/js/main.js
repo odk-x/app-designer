@@ -13,22 +13,31 @@ requirejs.config({
     baseUrl: shim.getBaseUrl(),
     paths: {
         // third-party libraries we depend upon 
-        jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
-        jquery : 'libs/jquery.1.8.2',
-        backbone : 'libs/backbone.0.9.2',
-        handlebars : 'libs/handlebars.1.0.0.beta.6',
-        underscore : 'libs/underscore.1.4.2',
+        //jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
+        jqmobile : 'libs/jquery.mobile-1.3.1/jquery.mobile-1.3.1',
+        //jquery : 'libs/jquery.1.8.2',
+        jquery : 'libs/jquery.1.9.1',
+        //backbone : 'libs/backbone.0.9.2',
+        backbone : 'libs/backbone.1.0.0',
+        //handlebars : 'libs/handlebars.1.0.0.beta.6',
+        handlebars : 'libs/handlebars.1.0.0.rc.4',
         //underscore : 'libs/underscore.1.3.3',
-        text : 'libs/text.2.0.3',
-        mobiscroll : 'libs/mobiscroll/js/mobiscroll-2.0.3.custom.min',
+        //underscore : 'libs/underscore.1.4.2',
+        underscore : 'libs/underscore.1.4.4',
+        //text : 'libs/text.2.0.3',
+        text : 'libs/text.2.0.6',
+        //mobiscroll : 'libs/mobiscroll/js/mobiscroll-2.0.3.custom.min',
+        mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
         // directory paths for resources
         img : 'img',
         templates : 'templates',
         // top-level objects
         mdl : 'js/mdl',
+        screenTypes : 'js/screenTypes',
         promptTypes : 'js/promptTypes',
         // shim.js -- stub directly loaded
         // functionality
+        screens : 'js/screens',
         prompts : 'js/prompts',
         database : 'js/database',
         controller : 'js/controller',
@@ -92,8 +101,9 @@ requirejs.config({
 
 requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                         'jqmobile', 'builder', 'controller',
+						'screens',
                         'prompts'/* mix-in additional prompts and support libs here */], 
-        function($, mdl,opendatakit,database,parsequery,m,builder,controller,prompts) {
+        function($, mdl,opendatakit,database,parsequery,m,builder,controller) {
             var ctxt = controller.newStartContext();
 
             parsequery.initialize(controller,builder);
@@ -114,10 +124,26 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                     if ( window.location.search != null && window.location.search.indexOf("purge") >= 0 ) {
                         ctxt.append('purging datastore');
                         database.purge($.extend({},ctxt,{success:function() {
-                                parsequery.parseParameters(ctxt);
+                                parsequery.parseParameters($.extend({},ctxt,{success:function() {
+									// and update the hash to refer to this page...
+									var pageRef = controller.getCurrentPageRef();
+									var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), pageRef);
+									if ( newhash != window.location.hash ) {
+										window.location.hash = newhash;
+									}
+									ctxt.success();
+								}}));
                             }}));
                     } else {
-                        parsequery.parseParameters(ctxt);
+                        parsequery.parseParameters($.extend({},ctxt,{success:function() {
+							// and update the hash to refer to this page...
+							var pageRef = controller.getCurrentPageRef();
+							var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), pageRef);
+							if ( newhash != window.location.hash ) {
+								window.location.hash = newhash;
+							}
+							ctxt.success();
+						}}));
                     }
                 } else {
                     ctxt.append('startup.delay');

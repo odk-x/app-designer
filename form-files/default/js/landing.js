@@ -16,31 +16,31 @@ ability to handle the information at that moment of execution.
 */
 window.landing = {
     controller: null,
-    pageRef: null,
+    promptRef: null,
     pathRef: null,
     actionRef: null,
     jsonString: null,
-    opendatakitCallback: function( pageWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject ) {
+    opendatakitCallback: function( promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject ) {
         if ( this.controller == null ) {
-            if ( this.pageRef != null ) {
+            if ( this.promptRef != null ) {
                 console.error("Data loss: existing doAction callback data has been lost");
             }
-            this.pageRef = pageWaitingForData;
+            this.promptRef = promptWaitingForData;
             this.pathRef = pathWaitingForData;
             this.actionRef = actionWaitingForData;
             this.jsonString = jsonObject;
         } else {
-            this.controller.opendatakitCallback( pageWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
+            this.controller.opendatakitCallback( promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
         }
     },
     setController: function(controller) {
         this.controller = controller;
-        if ( this.pageRef != null ) {
-            var ref = this.pageRef;
+        if ( this.promptRef != null ) {
+            var ref = this.promptRef;
             var path = this.pathRef;
             var action = this.actionRef;
             var json = this.jsonString;
-            this.pageRef = null;
+            this.promptRef = null;
             this.pathRef = null;
             this.actionRef = null;
             this.jsonString = null;

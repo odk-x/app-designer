@@ -1,4 +1,7 @@
 body {
+	min-width: 100%;
+	min-height: 100%;
+	width: 100%;
     height: 100%;
     /* This is to disable accidental highlighting of survey text */
     -webkit-touch-callout: none;
@@ -15,19 +18,38 @@ body {
     .odk-header {
         font-size: .7em;
     }
+    .odk-footer {
+        font-size: .7em;
+    }
+}
+.odk-screen {
+	min-height: inherit;
+	min-width: inherit;
+}
+.odk-header {
+	overflow: hidden;
+	clear: both;
 }
 .odk-scroll {
-    margin-bottom: 1em;
+	clear: both;
+	width: inherit;
 }
-/* The long selector is to make sure we clobber the jqm padding styles */
-.ui-page-header-fullscreen .ui-content,
-.ui-page-footer-fullscreen .ui-content,
+.odk-footer {
+	position: fixed;
+	bottom: 0%;
+	overflow: hidden;
+	clear: both;
+}
 .odk-container {
     padding: 0;
     padding-left: 1em;
     padding-right: 1em;
 }
 .headerNavBtns {
+    float: right;
+    /* margin-right: 1em; */
+}
+.footerNavBtns {
     float: right;
     /* margin-right: 1em; */
 }
@@ -39,9 +61,9 @@ Orangy glow.
 Eventually we should make a jqm theme for this.
 */
 .ui-input-text.ui-focus, .ui-input-search.ui-focus {
-    -moz-box-shadow: 0px 0px 12px 			rgb(255, 194, 0);
-	-webkit-box-shadow: 0px 0px 12px 		rgb(255, 194, 0);
-	box-shadow: 0px 0px 12px 				rgb(255, 194, 0);
+    -moz-box-shadow: 1px 1px 12px 			rgb(255, 194, 0);
+	-webkit-box-shadow: 1px 1px 12px 		rgb(255, 194, 0);
+	box-shadow: 1px 1px 12px 				rgb(255, 194, 0);
 }
 
 #screenPopup > .message {

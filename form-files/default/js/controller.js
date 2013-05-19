@@ -1,172 +1,485 @@
 'use strict';
 /**
- * NOTE: builder.js sets controller.prompts property.
- *
- * Manages the execution state and page history of the overall survey, 
+ * Manages the execution state and screen history of the overall survey, 
  * including form validation, saving and marking the form as 'complete'.
  *
- * Delegates the display of individual prompts to the screenManager. 
- * Delegates the evaluation of individual constraints, etc. to the prompts.
+ * Delegates the display of individual screens to the screenManager. 
+ * On page advance, asks the screen manager whether advancing off the
+ * screen is allowed. 
+ *
+ * Delegates the evaluation of individual constraints, etc. to the 
+ * screens and thereby to the prompts within those screens.
  *
  */
-define(['screenManager','opendatakit','database', 'jquery'],
-function(ScreenManager,  opendatakit,  database,   $) {
+define(['screenManager','opendatakit','database', 'mdl', 'jquery'],
+function(ScreenManager,  opendatakit,  database,   mdl,   $) {
 window.controller = {
     eventCount: 0,
     screenManager : null,
-    currentPromptIdx : -1,
-    prompts : [],
-    calcs: [],
-    beforeMove: function(ctxt){
+	currentScreenPath : null,
+	sectionStack : [],
+	getCurrentPageRef: function() {
+		return this.currentScreenPath;
+	},
+	// TODO: clean this up and push action into database?
+	assign: function( name, value, pendingChanges ) {
+		var justChange = {};
+		justChange[name] = {value: value, isInstanceMetadata: false };
+		pendingChanges[name] = {value: value, isInstanceMetadata: false };
+		// apply the change immediately...
+		var is = database._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
+						mdl.dataTableModel, opendatakit.getCurrentInstanceId(), justChange);
+		var uf;
+		for (var f in is.updates) {
+			var uf = is.updates[f];
+			var de = mdl.dataTableModel[f];
+			if (de.isPersisted) {
+				var elementPath = de.elementPath || uf.elementPath;
+				if ( de.elementSet == 'instanceMetadata' ) {
+					database._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
+				} else {
+					database._reconstructElementPath(elementPath, de, uf.value, mdl.data );
+				}
+			}
+		}
+	},
+	applyChanges: function( pendingChanges, ctxt) {
+		database.putDataKeyValueMap(ctxt, pendingChanges );
+	},
+	getOperationPath: function(ctxt, opPath) {
+		
+		if ( opPath == null ) {
+			ctxt.failure({message: "invalid opPath: null"});
+			return;
+		}
+		
+		var parts = opPath.split("/");
+		if ( parts.length < 2 ) {
+			ctxt.append("controller.getOperationPath: invalid opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+		
+		var formDef = opendatakit.getCurrentFormDef();
+		var section = formDef.logic_flow.sections[parts[0]];
+		if ( section == null ) {
+			ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+
+		var intRegex = /^\d+$/;
+		var intIndex;
+		if(intRegex.test(parts[1])) {
+			intIndex = parseInt(parts[1]);
+		} else {
+			intIndex = section.branch_label_map[parts[1]];
+		}
+
+		if ( intIndex == null ) {
+			ctxt.append("controller.getOperationPath: no branch label matching opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+
+		if ( intIndex >= section.operations.length ) {
+			ctxt.append("controller.getOperationPath: invalid opPath (beyond end of operations array): " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+		
+		var newPath = parts[0] + '/' + intIndex;
+		ctxt.success(newPath);
+	},
+	getNextOperationPath: function(ctxt, opPath) {
+		
+		if ( opPath == null ) {
+			ctxt.failure({message: "invalid opPath: null"});
+			return;
+		}
+		
+		var parts = opPath.split("/");
+		if ( parts.length < 2 ) {
+			ctxt.append("controller.getNextOperationPath: invalid opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+		
+		var formDef = opendatakit.getCurrentFormDef();
+		var section = formDef.logic_flow.sections[parts[0]];
+		if ( section == null ) {
+			ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+
+		var intRegex = /^\d+$/;
+		var intIndex;
+		if(intRegex.test(parts[1])) {
+			intIndex = parseInt(parts[1]);
+		} else {
+			intIndex = section.branch_label_map[parts[1]];
+		}
+
+		if ( intIndex == null ) {
+			ctxt.append("controller.getNextOperationPath: no branch label matching opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+
+		if ( intIndex >= section.operations.length ) {
+			ctxt.append("controller.getNextOperationPath: invalid opPath (beyond end of operations array): " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+		
+		intIndex++;
+		var newPath = parts[0] + '/' + intIndex;
+
+		if ( intIndex >= section.operations.length ) {
+			ctxt.append("controller.getNextOperationPath: advancing beyond end of operations array: " + newPath);
+			ctxt.failure({message: "invalid opPath: " + newPath});
+			return;
+		}
+		
+		ctxt.success(newPath);
+	},
+	getOperation: function(ctxt, opPath) {
+		if ( opPath == null ) {
+			ctxt.failure({message: "invalid opPath: null"});
+			return;
+		}
+		
+		var parts = opPath.split("/");
+		if ( parts.length < 2 ) {
+			ctxt.append("controller.getOperation: invalid opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+		
+		var formDef = opendatakit.getCurrentFormDef();
+		var section = formDef.logic_flow.sections[parts[0]];
+		if ( section == null ) {
+			ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+		var intRegex = /^\d+$/;
+		var intIndex;
+		if(intRegex.test(parts[1])) {
+			intIndex = parseInt(parts[1]);
+		} else {
+			intIndex = section.branch_label_map[parts[1]];
+		}
+
+		if ( intIndex == null ) {
+			ctxt.append("controller.getOperation: no branch label matching opPath: " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+
+		if ( intIndex >= section.operations.length ) {
+			ctxt.append("controller.getOperation: invalid opPath (beyond end of operations array): " + opPath);
+			ctxt.failure({message: "invalid opPath: " + opPath});
+			return;
+		}
+		var op = section.operations[intIndex];
+		ctxt.success(op);
+	},
+	getCurrentSectionPrompts: function() {
+		var opPath = this.getCurrentPageRef();
+		
+		if ( opPath == null ) {
+			return [];
+		}
+		
+		var parts = opPath.split("/");
+		if ( parts.length < 2 ) {
+			return [];
+		}
+		
+		var formDef = opendatakit.getCurrentFormDef();
+		var section = formDef.logic_flow.sections[parts[0]];
+		if ( section == null ) {
+			return [];
+		}
+		
+		return section.parsed_prompts;
+	},
+	getPrompt: function(ctxt, promptPath) {
+		if ( promptPath == null ) {
+			ctxt.failure({message: "invalid promptRef: null"});
+			return;
+		}
+		
+		var parts = promptPath.split("/");
+		if ( parts.length < 2 ) {
+			ctxt.append("controller.getPrompt: invalid promptRef: " + promptPath);
+			ctxt.failure({message: "invalid promptRef: " + promptPath});
+			return;
+		}
+		
+		var formDef = opendatakit.getCurrentFormDef();
+		var section = formDef.logic_flow.sections[parts[0]];
+		if ( section == null ) {
+			ctxt.append("controller.getPrompt: no section matching promptRef: " + promptPath);
+			ctxt.failure({message: "invalid promptRef: " + promptPath});
+			return;
+		}
+		var intRegex = /^\d+$/;
+		var intIndex;
+		if(intRegex.test(parts[1])) {
+			intIndex = parseInt(parts[1]);
+		}
+
+		if ( intIndex == null ) {
+			ctxt.append("controller.getPrompt: no branch label matching promptRef: " + promptPath);
+			ctxt.failure({message: "invalid promptRef: " + promptPath});
+			return;
+		}
+
+		if ( intIndex >= section.parsed_prompts.length ) {
+			ctxt.append("controller.getPrompt: invalid promptRef (beyond end of operations array): " + promptPath);
+			ctxt.failure({message: "invalid promptRef: " + promptPath});
+			return;
+		}
+		var prompt = section.parsed_prompts[intIndex];
+		ctxt.success(prompt);
+	},
+    beforeMove: function(ctxt, advancing){
         ctxt.append('controller.beforeMove');
         var that = this;
-        var prompt = null;
-        if ( this.currentPromptIdx != -1 ) {
-            prompt = this.prompts[this.currentPromptIdx];
-        }
-        try {
-            if ( prompt != null ) {
-                prompt.beforeMove(ctxt);
-            } else {
-                ctxt.success();
-            }
-        } catch(ex) {
-            var e = (ex != null) ? ex.message + " stack: " + ex.stack : "undef";
-            console.error("controller.beforeMove: Exception: " + e);
-            ctxt.append('controller.beforeMove.exception', e );
-            ctxt.failure({message: "Exception while advancing to next prompt."});
-        }
-    },
-    validate: function(ctxt){
-        ctxt.append('controller.validate');
-        var that = this;
-        var prompt;
-        if ( this.currentPromptIdx != -1 ) {
-            prompt = this.prompts[this.currentPromptIdx];
-        }
-        try {
-            if ( prompt ) {
-                prompt.validate(ctxt);
-            } else {
-                ctxt.success();
-            }
-        } catch(ex) {
-            var e = (ex != null) ? ex.message  + " stack: " + ex.stack : "undef";
-            console.error("controller.validate: Exception: " + e + " px: " + this.currentPromptIdx);
-            ctxt.append('controller.validate.exception', e + " px: " + this.currentPromptIdx );
-            ctxt.failure({message: "Exception occurred while evaluating constraints"});
-        }
+		if ( that.screenManager ) {
+			try {
+				that.screenManager.beforeMove(ctxt, advancing);
+			} catch(ex) {
+				var e = (ex != null) ? ex.message + " stack: " + ex.stack : "undef";
+				var opPath = that.getCurrentPageRef();
+        		console.error("controller.beforeMove: Exception: " + e + " px: " + opPath);
+				ctxt.append('controller.beforeMove.exception', e  + " px: " + opPath);
+				ctxt.failure({message: "Exception while advancing to next screen."});
+			}
+		} else {
+			ctxt.success();
+		}
     },
     gotoPreviousScreen: function(ctxt){
         var that = this;
         ctxt.append('controller:gotPreviousScreen');
+		var opPath = that.getCurrentPageRef();
         that.beforeMove($.extend({}, ctxt,{
             success: function() {
-                ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
-                while (that.hasPromptHistory()) {
-                    ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory", "px: " +  that.currentPromptIdx);
-                    var prmpt = that.getPromptByName(that.popPromptHistory(), {reverse:true});
-                    var t = prmpt.type;
-                    if ( t == "goto_if" || t == "goto" || t == "label" || t == "calculate" ) {
-                        ctxt.append("gotoPreviousScreen.beforeMove.success.hasPromptHistory.invalid", "px: " +  prmpt.currentPromptIdx);
-                        console.error("Invalid previous prompt type px: " +  prmpt.currentPromptIdx);
-                        continue; // attempt to recover...
-                    }
-                    // todo -- change to use hash?
-                    that.setPrompt(ctxt, prmpt, {omitPushOnReturnStack:true, reverse:true});
-                    return;
-                }
-                ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
-                // display the 'no previous prompt' screen message.
-                // then transition to the start of the form.
-                that.screenManager.noPreviousPage($.extend({}, ctxt,{
-                                        success: function() {
-                                            // pop ctxt
-                                            ctxt.append("gotoPreviousScreen.noPrompts");
-                                            that.gotoRef($.extend({},ctxt,{
-                                                success:function() {
-                                                    ctxt.failure({message: "Returning to start of form."});
-                                                }}),"0");
-                                        }}));
+                ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  opPath);
+                if (that.hasScreenHistory()) {
+                    ctxt.append("gotoPreviousScreen.beforeMove.success.hasScreenHistory", "px: " +  opPath);
+					var operationPath = that.popScreenHistory();
+					that.gotoRef(ctxt, operationPath, {omitPushOnReturnStack:true, reverse:true});
+                } else {
+					ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
+					// display the 'no previous screen' screen message.
+					// then transition to the start of the form.
+					that.screenManager.noPreviousPage($.extend({}, ctxt,{
+						success: function() {
+							// pop ctxt
+							ctxt.append("gotoPreviousScreen.noScreens");
+							that.gotoRef($.extend({},ctxt,{
+								success:function() {
+									ctxt.failure({message: "Returning to start of form."});
+								}}),opendatakit.initialPageRef);
+						}}));
+				}
             },
             failure: function(m) {
-                ctxt.append("gotoPreviousScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
+                ctxt.append("gotoPreviousScreen.beforeMove.failure", "px: " +  opPath);
                 // should stay on this screen...
-                if ( that.screenManager != null ) {
-                    that.screenManager.unexpectedError($.extend({},ctxt,{
-                        success:function() {
-                            ctxt.failure(m); 
-                        }}), "beforeMove");
-                } else {
-                    ctxt.failure(m);
-                }
+				that.screenManager.showScreenPopup(m); 
+                ctxt.failure(m);
             }
-        }));
+        }), false);
     },
     /**
-     * If 'prompt' is a label or goto, advance through the 
-     * business logic until it is resolved to a renderable screen prompt.
+     * Get 'op' at 'path'. If it is anything but a 'begin_screen', we 
+	 * step through and process it, until we land on a 'begin_screen'
+	 * operation.
      *
-     * return that renderable screen prompt.
+     * pass the 'begin_screen' operation into the ctxt success callback.
      */
-    advanceToScreenPromptHelper: function(ctxt, prompt) {
-        var nextPrompt = null;
+    advanceToNextScreenHelper: function(ctxt, path) {
         var that = this;
-        try {
-            // ***The order of the else-if statements below is very important.***
-            // i.e., First test if the 'condition' is false, and skip to the next 
-            // question if it is; if the 'condition' is true or not present, then 
-            // execute the 'goto'
-            if ( prompt.type == "label" ) {
-                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-            } else if('condition' in prompt && !prompt.condition()) {
-                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-            } else if ( prompt.type == "goto" ) {
-                nextPrompt = that.getPromptByLabel(prompt.param);
-            } else if( prompt.type == "error" ) {
-                if('condition' in prompt && prompt.condition()) {
-                    alert("Error prompt triggered.");
-                    that.fatalError(ctxt);
-                    return; // this directs the user to the _stop_survey page.
-                }
-            }
-        } catch (e) {
-            console.error("controller.advanceToScreenPromptHelper.exception.strict px: " +
-                            that.promptIdx + ' exception: ' + String(e));
-            ctxt.failure({message: "Error in condition expression. See console log."});
-            return;
-            /*
-            if ( ctxt.strict ) {
-                console.error("controller.advanceToScreenPromptHelper.exception.strict px: " +
-                                that.promptIdx + ' exception: ' + String(e));
-                ctxt.failure({message: "Exception while evaluating condition() expression. See console log."});
-                return;
-            } else {
-                console.log("controller.advanceToScreenPromptHelper.exception.ignored px: " +
-                                that.promptIdx + ' exception: ' + String(e));
-                ctxt.append("controller.advanceToScreenPromptHelper.exception.ignored", String(e));
-                nextPrompt = that.getPromptByName(prompt.promptIdx + 1);
-            }
-            */
-        }
-        
-        if(nextPrompt) {
-            that.advanceToScreenPromptHelper(ctxt, nextPrompt);
-        } else {
-            ctxt.success(prompt);
-        }
+		that.getOperation($.extend({},ctxt,{success:function(op) {
+			try {
+				// ***The order of the else-if statements below is very important.***
+				// i.e., First test if the '_parsed_condition' (function constructed 
+				// from closure of the 'condition' column) is false, and skip to the next 
+				// question if it is; if the '_parsed_condition' is true or not
+				// present, then execute the 'goto'
+				switch ( op._token_type ) {
+				case "goto_label":
+					// jump to a label. This may be conditional...
+					if('_parsed_condition' in op && !op._parsed_condition()) {
+						that.getNextOperationPath($.extend({},ctxt,{success:function(path){
+								that.advanceToNextScreenHelper(ctxt, path);
+							}, failure:function(m) {
+								ctxt.failure(m); 
+							}}), op._section_name + "/" + op.operationIdx);
+					} else {
+						that.getOperationPath($.extend({},ctxt,{success:function(path){
+								that.advanceToNextScreenHelper(ctxt, path);
+							}, failure:function(m) {
+								ctxt.failure(m); 
+							}}), op._section_name + "/" + op._branch_label);
+					}
+					break;
+				case "assign":
+					// do an assignment statement.
+					// defer the database update until we reach a screen.
+					that.assign( op.name, op.value(), ctxt.pendingChanges );
+					that.getNextOperationPath($.extend({},ctxt,{success:function(path){
+							that.advanceToNextScreenHelper(ctxt, path);
+						}, failure:function(m) {
+							ctxt.failure(m); 
+						}}), op._section_name + "/" + op.operationIdx);
+					break;
+				case "back_in_history":
+					// pop the history stack, and render that screen.
+					var processOps = false;
+					var priorPagePath;
+					if (that.hasScreenHistory()) {
+						priorPagePath = that.popScreenHistory();
+					} else {
+						processOps = true;
+						priorPagePath = opendatakit.initialPageRef;
+					}
+					that.getOperation($.extend({},ctxt,{success:function(op) {
+							if ( processOps ) {
+								that.advanceToNextScreenHelper(ctxt, op._section_name + "/" + op.operationIdx);
+							} else {
+								// normal case...
+								ctxt.success(op, {omitPushOnReturnStack:true, reverse:true});
+							}
+						}, failure:function(m) {
+							ctxt.failure(m); 
+						}}), priorPagePath);
+					break;
+				case "do_section":
+					// push the section stack (TBD)
+					// start at operation 0 in the new section
+					that.getNextOperationPath($.extend({},ctxt,{success:function(path){
+							that.sectionStack.push(path);
+							that.advanceToNextScreenHelper(ctxt, op._do_section_name + "/0");
+						}, failure:function(m) {
+							ctxt.failure(m); 
+						}}), op._section_name + "/" + op.operationIdx);
+					break;
+				case "exit_section":
+					if ( that.sectionStack.length !== 0 ) {
+						var stackPath = that.sectionStack.pop();
+						that.advanceToNextScreenHelper(ctxt, stackPath);
+					} else {
+						that.reset($.extend({},ctxt,{success:function() {
+								that.advanceToNextScreenHelper(ctxt, opendatakit.initialPageRef);
+							}}),true);
+					}
+					break;
+				case "validate":
+					that.getNextOperationPath($.extend({},ctxt,{
+						success:function(path){
+							that.applyChanges( ctxt.pendingChanges, $.extend({},ctxt,{
+								success:function() {
+									// clear any pendingChanges
+									var key;
+									var keys = [];
+									for ( key in ctxt.pendingChanges ) {
+										keys.push(key);
+									}
+									while ( keys.length != 0 ) {
+										key = keys.pop();
+										delete ctxt.pendingChanges[key];
+									}
+									// push self for retry after validation failure...
+									that.sectionStack.push(op._section_name + "/" + op.operationIdx);
+									that.validateAllQuestions($.extend({},ctxt,{
+										just_report_failure: true,
+										success:function() {
+											// pop self upon success.
+											that.sectionStack.pop();
+											// and advance to the next action...
+											that.advanceToNextScreenHelper(ctxt, path);
+										},
+										failure:function(m) {
+											if ( this.failedOperation != null ) {
+												// a validation failed
+												// we should show this screen and this error toast.
+												ctxt.success(this.failedOperation, { toast: m, pop_section_on_exit: true });
+											} else {
+												// other failure -- just show toast.
+												ctxt.failure(m);
+											}
+										}	
+									}), op._sweep_name);
+								}, failure:function(m) {
+									mdl.loaded = false;
+									database.cacheAllData($.extend({},ctxt,{success:function() {
+										ctxt.failure(m);
+									}, failure:function(m2) {
+										ctxt.failure(m);
+									}}), opendatakit.getCurrentInstanceId());
+								}}));
+						}, failure:function(m) {
+							ctxt.failure(m); 
+						}}), op._section_name + "/" + op.operationIdx);
+					// on success, call advance. 
+					// on failure, we are done.
+					break;
+				case "begin_screen":
+					ctxt.success(op);
+					break;
+				}
+			} catch (e) {
+				console.error("controller.advanceToNextScreenHelper.exception.strict px: " +
+								that.operationIdx + ' exception: ' + String(e));
+				ctxt.failure({message: "Error in condition expression. See console log."});
+				return;
+			}
+		}, failure:function(m) {
+			ctxt.failure(m); 
+		}}), path);
     },
-    advanceToScreenPrompt: function(ctxt, prompt) {
-        try {
-            return this.advanceToScreenPromptHelper(ctxt, prompt);
-        } catch (e) {
-            console.error("controller.advanceToScreenPrompt.exception: " + String(e));
-            ctxt.failure({
-                message: "Possible goto loop."
-            });
-        }
+    advanceToNextScreen: function(ctxt, path) {
+		var that = this;
+		try {
+			var newctxt = $.extend({},ctxt,{
+			pendingChanges: {},
+			success:function(screen, options) {
+				that.applyChanges( this.pendingChanges, $.extend({},ctxt,{
+					success:function() {
+						ctxt.success(screen, options);
+					}, failure:function(m) {
+						mdl.loaded = false;
+						database.cacheAllData($.extend({},ctxt,{success:function() {
+							ctxt.failure(m);
+						}, failure:function(m2) {
+							ctxt.failure(m);
+						}}), opendatakit.getCurrentInstanceId());
+					}}));
+			},
+			failure:function(m) {
+				mdl.loaded = false;
+				database.cacheAllData($.extend({},ctxt,{success:function() {
+					ctxt.failure(m);
+				}, failure:function(m) {
+					ctxt.failure(m);
+				}}), opendatakit.getCurrentInstanceId());
+			}});
+			that.advanceToNextScreenHelper( newctxt, path);
+		} catch (e) {
+			console.error("controller.advanceToNextScreen.exception: " + String(e));
+			ctxt.failure({
+				message: "Possible goto loop."
+			});
+		}
     },
-    validateQuestionHelper: function(ctxt, promptCandidate, stopAtPromptIdx) {
+    validateQuestionHelper: function(ctxt, promptCandidate, promptList, nextPromptIdx) {
         var that = this;
         return function() {
             try {
@@ -176,271 +489,193 @@ window.controller = {
                     success: function(renderContext) {
                         promptCandidate.validate( $.extend({}, ctxt, {
                             success: function() {
-                                if ( promptCandidate.type == 'finalize' ) {
-                                    ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.atFinalize", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                                if ( promptList.length == nextPromptIdx ) {
+                                    ctxt.append("validateQuestionHelper.success.endOfValidationList", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
                                     ctxt.success();
                                 } else {
-                                    var nextPrompt = that.getPromptByName(promptCandidate.promptIdx + 1);
-                                    that.advanceToScreenPrompt($.extend({}, ctxt, {
-                                        success: function(prompt){
-                                            if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
-                                                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-                                                var fn = that.validateQuestionHelper(ctxt,prompt,stopAtPromptIdx);
-                                                (fn)();
-                                            } else {
-                                                if ( !prompt ) {
-                                                    ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-                                                }
-                                                ctxt.success();
-                                            }
-                                        },
-                                        failure: function(m) {
-                                            ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
-                                            that.setPrompt( $.extend({}, ctxt, {
-                                                success: function() {
-                                                    setTimeout(function() {
-                                                        ctxt.append("validateQuestionHelper.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-                                                        ctxt.failure(m);
-                                                        }, 500);
-                                                }}), nextPrompt);
-                                        }}), nextPrompt);
+									that.getPrompt($.extend({},ctxt,{success:function(promptCandidate){
+										var fn = that.validateQuestionHelper(ctxt,promptCandidate,promptList,nextPromptIdx+1);
+										(fn)();
+									}}), promptList[nextPromptIdx]);
                                 }
                             },
                             failure: function(msg) {
                                 ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
-                                that.setPrompt( $.extend({}, ctxt, {
-                                    success: function() {
-                                        var simpleCtxt = $.extend({}, ctxt, {
-                                            success: function() {
-                                                // should never get here...
-                                                ctxt.append("validateQuestionHelper.validate.failure.setPrompt.validate", "px: " + promptCandidate.promptIdx);
-                                                ctxt.failure({message: "Internal error - Unexpected execution path."});
-                                            }});
-                                        setTimeout(function() {
-                                            simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-                                            that.validate( simpleCtxt );
-                                            }, 500);
-                                    }}), promptCandidate);
+								that.getOperation($.extend({},ctxt,{success:function(op){
+									ctxt.failedOperation = op;
+									ctxt.failure(msg);
+									}}), promptCandidate._section_name + "/" + promptCandidate._branch_label_enclosing_screen);
                             }}));
                     }}) );
             } catch(e) {
                 ctxt.append("validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
-                that.setPrompt( $.extend({}, ctxt, {
-                    success: function() {
-                        var simpleCtxt = $.extend({}, ctxt, {
-                            success: function() {
-                                // should never get here...
-                                ctxt.append("validateQuestionHelper.validate.exception.setPrompt.validate", "px: " + promptCandidate.promptIdx);
-                                ctxt.failure({message: "Internal error - Unexpected execution path."});
-                            }});
-                        setTimeout(function() {
-                            simpleCtxt.append("validateQuestionHelper.validate.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-                            that.validate( simpleCtxt );
-                            }, 500);
-                    }}), promptCandidate);
+				ctxt.failedPrompt = promptCandidate;
+				ctxt.failure({message: "Exception during validation: " + e});
             }
         };
     },
-    validateAllQuestions: function(ctxt, stopAtPromptIdx){
+    validateAllQuestions: function(ctxt, validationTag){
         var that = this;
-        var promptCandidate = that.prompts[0];
-        // set the 'strict' attribute on the context to report all 
-        // formula exceptions and errors.
-        var oldvalue = ctxt.strict;
-        ctxt.strict = true;
-        // ensure we drop the spinner overlay when we complete...
-        var newctxt = $.extend({},ctxt,{
-            success: function() {
-                ctxt.append("validateQuestionHelper.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-                that.screenManager.hideSpinnerOverlay();
-                ctxt.strict = oldvalue;
-                ctxt.success();
-            },
-            failure: function(m) {
-                that.screenManager.hideSpinnerOverlay();
-                if ( m && m.message ) {
-                    that.screenManager.showScreenPopup(m);
-                }
-                ctxt.strict = oldvalue;
-                ctxt.failure(m);
-            }});
-        that.screenManager.showSpinnerOverlay({text:"Validating..."});
-        
-        // call advanceToScreenPrompt, since prompt[0] is always a goto_if...
-        that.advanceToScreenPrompt($.extend({},newctxt, {
-            success: function(prompt) {
-                if(prompt && (prompt.promptIdx != stopAtPromptIdx)) {
-                    newctxt.append("validateAllQuestions.advanceToScreenPrompt.success", "px: " + promptCandidate.promptIdx + " nextPx: " + prompt.promptIdx);
-                    var fn = that.validateQuestionHelper(newctxt,prompt,stopAtPromptIdx);
-                    (fn)();
-                } else {
-                    if ( !prompt ) {
-                        newctxt.append("validateAllQuestions.advanceToScreenPrompt.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
-                    }
-                    newctxt.success();
-                }
-            },
-            failure: function(m) {
-                newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure", "px: " + promptCandidate.promptIdx);
-                that.setPrompt( $.extend({}, newctxt, {
-                    success: function() {
-                        setTimeout(function() {
-                            newctxt.append("validateAllQuestions.advanceToScreenPrompt.failure.setPrompt.setTimeout", "px: " + that.currentPromptIdx);
-                            newctxt.failure(m);
-                            }, 500);
-                    }}), promptCandidate);
-            }}), promptCandidate);
+		var formDef = opendatakit.getCurrentFormDef();
+		var section_names = formDef.logic_flow.section_names;
+		var i, j;
+		var promptList = [];
+		for ( i = 0 ; i < section_names.length ; ++i ) {
+			var sectionName = section_names[i];
+			var section = formDef.logic_flow.sections[sectionName];
+			var tagList = section.validation_tag_map[validationTag];
+			if ( tagList != null ) {
+				for ( j = 0 ; j < tagList.length ; ++j ) {
+					promptList.push(sectionName + "/" + tagList[j]);
+				}
+			}
+		}
+		if ( promptList.length == 0 ) {
+			ctxt.success();
+			return;
+		}
+		
+		ctxt.failedOperation = null;
+		
+		that.getPrompt($.extend({},ctxt,{success:function(promptCandidate){
+			// set the 'strict' attribute on the context to report all 
+			// formula exceptions and errors.
+			var oldvalue = ctxt.strict;
+			ctxt.strict = true;
+			// ensure we drop the spinner overlay when we complete...
+			var newctxt = $.extend({},ctxt,{
+				success: function() {
+					ctxt.append("validateQuestionHelper.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+					that.screenManager.hideSpinnerOverlay();
+					ctxt.strict = oldvalue;
+					ctxt.success();
+				},
+				failure: function(m) {
+					ctxt.failedOperation = this.failedOperation;
+					if ( ctxt.failedOperation == null ) {
+						ctxt.failure(m);
+						return;
+					}
+					if ( ctxt.just_report_failure ) {
+						ctxt.failure(m);
+						return;
+					} else {
+						that.setScreen( $.extend({}, ctxt, {
+							success: function() {
+								setTimeout(function() {
+									ctxt.append("validateQuestionHelper.failure.setScreen.setTimeout", "px: " + that.getCurrentPageRef());
+									that.screenManager.hideSpinnerOverlay();
+									if ( m && m.message ) {
+										that.screenManager.showScreenPopup(m);
+									}
+									ctxt.strict = oldvalue;
+									ctxt.failure(m);
+									}, 500);
+							}}), ctxt.failedOperation);
+					}
+				}});
+			that.screenManager.showSpinnerOverlay({text:"Validating..."});
+
+			var fn = that.validateQuestionHelper(newctxt,promptCandidate,promptList,1);
+			(fn)();
+		}}), promptList[0]);
     },
     gotoNextScreen: function(ctxt, options){
         var that = this;
-        that.beforeMove($.extend({}, ctxt,
-            { success: function() {
-                ctxt.append("gotoNextScreen.beforeMove.success", "px: " +  that.currentPromptIdx);
-                // we are ready for move -- validate...
-                that.validate( $.extend({}, ctxt, {
-                    success: function() {
-                        ctxt.append("gotoNextScreen.validate.success", "px: " +  that.currentPromptIdx);
-                        // navigate through all gotos, goto_ifs and labels.
-                        var promptCandidate = null;
-                        if ( that.currentPromptIdx >= 0 ) {
-                            promptCandidate = that.getPromptByName(that.currentPromptIdx + 1);
-                        } else {
-                            promptCandidate = that.prompts[0];
-                        }
-
-                        // abort and display error if we don't have any prompts...
-                        if ( promptCandidate == null ) {
-                            that.screenManager.noNextPage($.extend({}, ctxt,{
-                                        success: function() {
-                                            ctxt.append("gotoNextScreen.noPrompts");
-                                            that.gotoRef($.extend({},ctxt,{
-                                                success:function(){
-                                                    ctxt.failure({message: "Returning to start of form."});
-                                                }}),"0");
-                                        }}));
-                            return;
-                        }
-                        
-                        that.advanceToScreenPrompt($.extend({}, ctxt, {
-                            success: function(prompt){
-                                if(prompt) {
-                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: " + prompt.promptIdx);
-                                    // todo -- change to use hash?
-                                    that.setPrompt(ctxt, prompt, options);
-                                } else {
-                                    ctxt.append("gotoNextScreen.advanceToScreenPrompt.success", "px: " + that.currentPromptIdx + " nextPx: no prompt!");
-                                    that.screenManager.noNextPage($.extend({}, ctxt,{
-                                            success: function() {
-                                                ctxt.append("gotoNextScreen.noPrompts");
-                                                that.gotoRef(ctxt,"0");
-                                            }}));
-                                }
-                        },
-                        failure: function(m) {
-                            ctxt.append("gotoNextScreen.advanceToScreenPrompt.failure", "px: " +  that.currentPromptIdx);
-                            that.screenManager.showScreenPopup(m); 
-                            ctxt.failure(m);
-                        }}), promptCandidate);
-                    },
-                    failure: function(m) {
-                        ctxt.append("gotoNextScreen.validate.failure", "px: " +  that.currentPromptIdx);
-                        that.screenManager.showScreenPopup(m); 
-                        ctxt.failure(m);
-                    }
-                }));
-            },
-            failure: function(m) {
-                ctxt.append("gotoNextScreen.beforeMove.failure", "px: " +  that.currentPromptIdx);
-                if ( that.screenManager != null ) {
-                    that.screenManager.unexpectedError($.extend({},ctxt,{
-                        success:function() {
-                            ctxt.failure(m); 
-                        }}), "beforeMove");
-                } else {
-                    ctxt.failure(m);
-                }
-            }
-        }));
+		var failurePop = function(m) {
+			ctxt.append("gotoNextScreen.failure", "px: " +  that.getCurrentPageRef());
+			that.screenManager.showScreenPopup(m); 
+			ctxt.failure(m);
+		};
+        that.beforeMove($.extend({}, ctxt, {
+            success: function() {
+                ctxt.append("gotoNextScreen.beforeMove.success", "px: " +  that.getCurrentPageRef());
+				// all prompt values have been saved Prompt validation has been run if we 
+				// are advancing and the screen.allowMove(advancing) test has passed.
+                // Now step through operations until we reach a begin_screen action.
+				that.getNextOperationPath($.extend({}, ctxt, {
+					success: function(path) {
+						// if the next operation is not a screen, gotoRef will
+						// perform all operations until it comes to a screen.
+						that.gotoRef(ctxt, path, options);
+					},
+					failure: failurePop
+				}), that.getCurrentPageRef());
+			},
+			failure: failurePop
+        }), true);
     },
-    getPromptByName: function(name){
-        if ( name == null ) {
-            return null;
-        }
-        if ( ('' + name).match(/^\d+$/g) ) {
-            var idx = Number(name);
-            if(idx >= 0 && idx < this.prompts.length){
-                return this.prompts[idx];
-            }
-        }
-        for(var i = 0; i < this.prompts.length; i++){
-            var promptName = this.prompts[i].name;
-            if(promptName == name){
-                return this.prompts[i];
-            }
-        }
-        alert("Unable to find screen: " + name);
-        return null;
-    },
-    getPromptByLabel: function(name){
-        var prompts = this.prompts;
-        for(var i = 0; i < prompts.length; i++){
-            if(prompts[i].type !== 'label') {
-                continue;
-            }
-            if(prompts[i].param === name){
-                return prompts[i];
-            }
-        }
-        alert("Unable to find label: " + name);
-        return null;
-    },
-    setPrompt: function(ctxt, prompt, passedInOptions){
+    setScreen: function(ctxt, operation, passedInOptions){
         var that = this;
         var options;
-        ctxt.append('controller.setPrompt', "nextPx: " + prompt.promptIdx);
+        ctxt.append('controller.setScreen', "nextPx: " + operation.operationIdx);
 
-        if ( this.currentPromptIdx == prompt.promptIdx ) {
-            if ( passedInOptions == null || !passedInOptions.changeLocale) {
-                ctxt.append('controller.setPrompt:ignored', "nextPx: " + prompt.promptIdx);
-                ctxt.success();
-                return;
-            } else {
-                options = {
-                    omitPushOnReturnStack : true
-                };
-            }
-        } else {
-            options = {
-                omitPushOnReturnStack : false
-            };
-        }
-        
-        if(passedInOptions){
-            $.extend(options, passedInOptions);
-        }
-        if (!options.omitPushOnReturnStack) {
-            if ( this.currentPromptIdx >= 0 && this.currentPromptIdx < this.prompts.length ) {
-                this.pushPromptHistory(this.currentPromptIdx);
-            }
-        }
-        this.currentPromptIdx = prompt.promptIdx;
-        this.screenManager.setPrompt($.extend({},ctxt,{
-            success: function() {
-                ctxt.success();
-                // and flush any pending doAction callback
-                landing.setController(that);
-            }}), prompt, options);
-        // the prompt should never be changed at this point!!!
-        if ( this.currentPromptIdx != prompt.promptIdx ) {
-            console.error("controller.setPrompt: prompt index changed -- assumption violation!!!");
-            ctxt.failure({message: "Internal error - unexpected change in prompt index!"});
-            return;
-        }
-        var idx = this.currentPromptIdx;
-        var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), ''+idx);
-        if ( newhash != window.location.hash ) {
-            window.location.hash = newhash;
-        }
+		this.getOperationPath($.extend({},ctxt,{success:function(newPath) {
+			if ( that.getCurrentPageRef() == newPath ) {
+				if ( passedInOptions == null || !passedInOptions.changeLocale) {
+					ctxt.append('controller.setScreen:ignored', "nextPx: " + operation.operationIdx);
+					ctxt.success();
+					return;
+				} else {
+					options = {
+						omitPushOnReturnStack : true
+					};
+				}
+			} else {
+				options = {
+					omitPushOnReturnStack : false
+				};
+			}
+			
+			if(passedInOptions){
+				$.extend(options, passedInOptions);
+			}
+
+			var oldPath = that.getCurrentPageRef();
+			if (!options.omitPushOnReturnStack) {
+				if ( oldPath != null ) {
+					that.pushScreenHistory(oldPath);
+				}
+			}
+			that.currentScreenPath = newPath;
+			// Build a new Screen object so that jQuery Mobile is always happy...
+			//
+			var formDef = opendatakit.getCurrentFormDef();
+			var screen_attrs = operation.screen;
+			var screen_type = 'screen';
+			var ScreenType, ExtendedScreenType, ScreenInstance;
+			if (screen_attrs != null && ('screen_type' in screen_attrs)) {
+				screen_type = screen_attrs.screen_type;
+			}
+			
+			if (!(screen_type in formDef.logic_flow.currentScreenTypes)) {
+				ctxt.append('controller.setScreen.unrecognizedScreenType', screen_type);
+				ctxt.failure({message: 'unknown screen_type'});
+				return;
+			}
+			
+			ScreenType = formDef.logic_flow.currentScreenTypes[screen_type];
+			ExtendedScreenType = ScreenType.extend(screen_attrs);
+			ScreenInstance = new ExtendedScreenType({ _section_name: operation._section_name, _operation: operation });
+
+			that.screenManager.setScreen($.extend({},ctxt,{
+				success: function() {
+					ctxt.success();
+					// queue to update the URL...
+					setTimeout(function() {
+						var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
+									opendatakit.getCurrentInstanceId(), that.getCurrentPageRef());
+						window.location.hash = qpl;
+					}, 0);
+				}, failure: function(m) {
+					ctxt.failure(m);
+					setTimeout(function() {
+						var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
+									opendatakit.getCurrentInstanceId(), oldPath);
+						window.location.hash = qpl;
+					}, 0);
+				}}), ScreenInstance, options);
+		}}), operation._section_name + "/" + operation.operationIdx );
     },
     /*
      * Callback interface from ODK Survey (or other container apps) into javascript.
@@ -448,56 +683,55 @@ window.controller = {
     */
     opendatakitCallback:function(promptPath, internalPromptContext, action, jsonString) {
         var ctxt = this.newCallbackContext();
-        ctxt.append('controller.opendatakitCallback', ((this.currentPromptIdx != null) ? ("px: " + this.currentPromptIdx) : "no current prompt"));
+		var pageRef = this.getCurrentPageRef();
+        ctxt.append('controller.opendatakitCallback', ((pageRef != null) ? ("px: " + pageRef) : "no current prompt"));
         
-        // promptPath is a dot-separated list. The first element of 
-        // which is the index of the prompt in the global prompts list.
-        var promptPathParts = promptPath.split('.');
-        var selpage = this.getPromptByName(promptPathParts[0]);
-        if ( selpage == null ) {
+        // promptPath is the path to the prompt issuing the doAction.
+		// prompts know their enclosing screen, so we don't need to 
+		// worry about that...
+        this.getPrompt($.extend({},ctxt,{success:function(prompt) {
+			try {
+				// ask this page to then get the appropriate handler
+				var handler = prompt.getCallback(promptPath, internalPromptContext, action);
+				if ( handler != null ) {
+					handler( ctxt, internalPromptContext, action, jsonString );
+				} else {
+					ctxt.append('controller.opendatakitCallback.noHandler', promptPath);
+					console.error("opendatakitCallback: ERROR - NO HANDLER ON PROMPT! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
+					ctxt.failure({message: "Internal error. No matching handler for callback."});
+					return;
+				}
+			} catch (e) {
+				ctxt.append('controller.opendatakitCallback.exception', promptPath, e);
+				console.error("opendatakitCallback: EXCEPTION ON PROMPT! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + " exception: " + e);
+				ctxt.failure({message: "Internal error. Exception while handling callback."});
+				return;
+			}
+		}, failure:function(m) {
             ctxt.append('controller.opendatakitCallback.noMatchingPrompt', promptPath);
-            console.error("opendatakitCallback: ERROR - PAGE NOT FOUND! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
+            console.error("opendatakitCallback: ERROR - PROMPT NOT FOUND! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
             ctxt.failure({message: "Internal error. Unable to locate matching prompt for callback."});
-            return;
-        }
-        
-        try {
-            // ask this page to then get the appropriate handler
-            var handler = selpage.getCallback(promptPath, internalPromptContext, action);
-            if ( handler != null ) {
-                handler( ctxt, internalPromptContext, action, jsonString );
-            } else {
-                ctxt.append('controller.opendatakitCallback.noHandler', promptPath);
-                console.error("opendatakitCallback: ERROR - NO HANDLER ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
-                ctxt.failure({message: "Internal error. No matching handler for callback."});
-                return;
-            }
-        } catch (e) {
-            ctxt.append('controller.opendatakitCallback.exception', promptPath, e);
-            console.error("opendatakitCallback: EXCEPTION ON PAGE! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + " exception: " + e);
-            ctxt.failure({message: "Internal error. Exception while handling callback."});
-            return;
-        }
+		}}), promptPath);
     },
     opendatakitGotoPreviousScreen:function() {
         var ctxt = controller.newCallbackContext();
-        ctxt.append("controller.opendatakitGotoPreviousScreen", this.currentPromptIdx);
+        ctxt.append("controller.opendatakitGotoPreviousScreen", this.getCurrentPageRef());
         this.screenManager.gotoPreviousScreenAction(ctxt);
     },
     opendatakitIgnoreAllChanges:function() {
         var ctxt = controller.newCallbackContext();
-        ctxt.append("controller.opendatakitIgnoreAllChanges", this.currentPromptIdx);
+        ctxt.append("controller.opendatakitIgnoreAllChanges", this.getCurrentPageRef());
         if ( opendatakit.getCurrentInstanceId() == null ) {
             shim.ignoreAllChangesFailed( opendatakit.getSettingValue('form_id'), null );
             ctxt.failure({message: "No instance selected."});
         } else {
             this.ignoreAllChanges($.extend({},ctxt,{success:function() {
-                                shim.ignoreAllChangesCompleted( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId());
-                                ctxt.success();
-                            }, failure:function(m) {
-                                shim.ignoreAllChangesFailed( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId());
-                                ctxt.failure(m);
-                            }}));
+					shim.ignoreAllChangesCompleted( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId());
+					ctxt.success();
+				}, failure:function(m) {
+					shim.ignoreAllChangesFailed( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId());
+					ctxt.failure(m);
+			}}));
         }
     },
     ignoreAllChanges:function(ctxt) {
@@ -506,7 +740,7 @@ window.controller = {
     opendatakitSaveAllChanges:function(asComplete) {
         var that = this;
         var ctxt = controller.newCallbackContext();
-        ctxt.append("controller.opendatakitSaveAllChanges", this.currentPromptIdx);
+        ctxt.append("controller.opendatakitSaveAllChanges", this.getCurrentPageRef());
         if ( opendatakit.getCurrentInstanceId() == null ) {
             shim.saveAllChangesFailed( opendatakit.getSettingValue('form_id'), null );
             ctxt.failure({message: "No instance selected."});
@@ -533,7 +767,7 @@ window.controller = {
                                     shim.saveAllChangesFailed( opendatakit.getSettingValue('form_id'), opendatakit.getCurrentInstanceId(), true);
                                     ctxt.failure(m);
                                 }}), true);
-                        }}));
+                        }}), "finalize");
                 }}), false);
         } else {
             database.save_all_changes($.extend({},ctxt,{
@@ -549,115 +783,120 @@ window.controller = {
         window.location.hash = newhash;
         ctxt.success();
     },
-    gotoRef:function(ctxt, pageRef) {
+    gotoRef:function(ctxt, path, options) {
         var that = this;
-        if ( this.prompts.length == 0 ) {
-            console.error("controller.gotoRef: No prompts registered in controller!");
-            ctxt.failure({message: "Internal error. No prompts registered in controller!"});
-            return;
+		if ( path == null ) {
+            path = opendatakit.initialPageRef;
         }
-        if ( pageRef == null ) {
-            pageRef = '0';
-        }
-        // process the pageRef... -- each part is separated by slashes
-        var hlist = pageRef.split('/');
-        var hleading = hlist[0];
-
-        var promptCandidate; 
-        if ( hleading != null ) {
-            promptCandidate = this.getPromptByName(hleading);
-            if ( promptCandidate == null ) {
-                promptCandidate = this.prompts[0];
-                hlist = [];
-            }
-        } else {
-            promptCandidate = this.prompts[0];
-            hlist = [];
-        }
-        
-        if ( promptCandidate == null ) {
-            ctxt.failure({message: "Requested prompt not found."});
-            return;
-        }
-        
-        this.advanceToScreenPrompt($.extend({}, ctxt, {
-            success:function(prompt){
-                if ( prompt == null ) {
-                    ctxt.append('controller.gotoRef', "no prompt after advance");
-                    ctxt.failure({message: "No next prompt."});
-                    return;
-                }
-                that.setPrompt(ctxt, prompt, { hlist : hlist });
-            }}), promptCandidate);
-        
+		if ( options == null ) {
+			options = {};
+		}
+		// navigate through all gotos, goto_ifs and labels.
+		that.advanceToNextScreen($.extend({}, ctxt, {
+			success: function(screen, addedOptions){
+				if(screen) {
+					ctxt.append("controller.gotoRef.advanceToNextScreen.success", "px: " + that.getCurrentPageRef() + " nextPx: " + screen.operationIdx);
+					// todo -- change to use hash?
+					that.setScreen(ctxt, screen, $.extend({}, options, addedOptions));
+				} else {
+					ctxt.append("controller.gotoRef.advanceToNextScreen.success", "px: " + that.getCurrentPageRef() + " nextPx: no screen!");
+					that.screenManager.noNextPage($.extend({}, ctxt,{
+						success: function() {
+							ctxt.append("controller.gotoRef.noSreens");
+							that.gotoRef(ctxt, opendatakit.initialPageRef);
+					}}));
+				}
+			},
+			failure: function(m) {
+				ctxt.append("controller.gotoRef.failure", "px: " +  that.getCurrentPageRef());
+				that.screenManager.showScreenPopup(m); 
+				ctxt.failure(m);
+			}
+		}), path);
     },
-    hasPromptHistory: function() {
+    hasScreenHistory: function() {
         return shim.hasPromptHistory();
     },
-    clearPromptHistory: function() {
+    clearScreenHistory: function() {
 		shim.clearPromptHistory();
     },
-	popPromptHistory: function() {
+	popScreenHistory: function() {
 		return shim.popPromptHistory();
 	},
-	pushPromptHistory: function(idx) {
+	pushScreenHistory: function(idx) {
 		shim.pushPromptHistory(idx);
 	},
     reset: function(ctxt,sameForm) {
         // NOTE: the ctxt calls here are synchronous actions
         // ctxt is only passed in for logging purposes.
         ctxt.append('controller.reset');
-        this.clearPromptHistory();
-        this.currentPromptIdx = -1;
-        if ( !sameForm ) {
-            this.prompts = [];
-            this.calcs = [];
-        }
+        this.clearScreenHistory();
+        this.currentScreenPath = null;
         if ( this.screenManager != null ) {
             // this asynchronously calls ctxt.success()...
             this.screenManager.cleanUpScreenManager(ctxt);
         } else {
             ctxt.append('controller.reset.newScreenManager');
             this.screenManager = new ScreenManager({controller: this});
-            // and execute an async callback to continue the reset
-            // this maintains the same async sequencing as the 
-            // more common non-null case above.
-            setTimeout(function() {
-                ctxt.success();
-                }, 100);
+            this.screenManager.cleanUpScreenManager(ctxt);
         }
-    },
-    // fatalError -- it is OK for the ctxt argument to be undefined
-    fatalError: function(ctxt) {
-        if ( ctxt ) {
-            ctxt._log('E','controller.fatalError: Aborting existing context');
-        }
-        var that = this;
-        // create a new context...
-        ctxt = controller.newFatalContext();
-        //Stop the survey.
-        var promptCandidate = that.getPromptByName("_stop_survey");
-        that.setPrompt( $.extend({}, ctxt, {failure: function(msg) {
-                //There might be better ways to do it than this.
-                ctxt.failure();
-                alert('Unable to present Fatal Error screen');
-            }}), promptCandidate, {
-                    omitPushOnReturnStack : true,
-                    transition: 'none' });
     },
     setLocale: function(ctxt, locale) {
         var that = this;
         database.setInstanceMetaData($.extend({}, ctxt, {
             success: function() {
-                var prompt = that.getPromptByName(that.currentPromptIdx);
-                that.setPrompt(ctxt, prompt, {changeLocale: true} );
+				that.getOperation($.extend({}, ctxt, { success: function(op) {
+						that.setScreen(ctxt, op, {changeLocale: true});
+					}}), that.getCurrentPageRef());
             }
         }), 'locale', locale);
     },
     getFormLocales: function() {
         return opendatakit.getFormLocalesValue();
     },
-  
+    getSectionTitle: function() {
+		var that = this;
+		var opPath = that.getCurrentPageRef();
+		if ( opPath == null ) {
+			return "";
+		}
+		
+		var parts = opPath.split("/");
+		if ( parts.length < 2 ) {
+			return "";
+		}
+		
+		var formDef = opendatakit.getCurrentFormDef();
+		var sectionSettings = opendatakit.getSettingObject(formDef,parts[0]);
+		if ( sectionSettings == null ) {
+			return "";
+		}
+		
+		return sectionSettings.display.title;
+	},
+    getSectionShowHierarchy: function() {
+		var that = this;
+		var opPath = that.getCurrentPageRef();
+		if ( opPath == null ) {
+			return false;
+		}
+		
+		var parts = opPath.split("/");
+		if ( parts.length < 2 ) {
+			return false;
+		}
+		
+		var formDef = opendatakit.getCurrentFormDef();
+		var sectionSettings = opendatakit.getSettingObject(formDef,parts[0]);
+		if ( sectionSettings == null ) {
+			return false;
+		}
+		
+		if ( 'showHierarchy' in sectionSettings ) {
+			return sectionSettings.showHierarchy;
+		}
+		return true;
+	},
     ///////////////////////////////////////////////////////
     // Logging context
     baseContext : {

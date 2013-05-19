@@ -4,11 +4,12 @@
  * (for use within their formulas).
  */
  //TODO: These functions need unit testing.
-define(['database', 'underscore'],
-function(database,   _) {
+define(['opendatakit','database', 'underscore'],
+function(opendatakit,  database,   _) {
     return {
         //calculates will be set by the builder
         calculates: {},
+		opendatakit: opendatakit,
         localize: function(textOrLangMap, locale) {
             if(_.isUndefined(textOrLangMap)) {
                 return 'text_undefined';

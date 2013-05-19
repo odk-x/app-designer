@@ -7,27 +7,128 @@ define(['mdl','database','opendatakit','controller','backbone','handlebars','pro
 function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  $,       _,            translations) {
 
 promptTypes.base = Backbone.View.extend({
-    className: "current",
+    className: "odk-base",
+	// type should match the 'xxxx' of the promptTypes.xxxx assignment
     type: "base",
     database: database,
+    // user-defined inputAttributes overrides baseInputAttributes
+    baseInputAttributes: {},
+	// the handlebars template to render
+	template: null,
+    //renderContext is a dynamic object to be passed into the render function.
+    renderContext: {},
+	/**
+	 * User-overridable data and methods. These can be overridden in 
+	 * the Excel worksheet.
+	 */
     constraint_message: "Constraint violated.",
     invalid_value_message: "Invalid value.",
     required_message: "Required value not provided.",
-    //renderContext is a dynamic object to be passed into the render function.
-    renderContext: {},
-    //Template context is an user specified object that overrides the render context.
+	// the path to the handlebars template that is compiled and stored in 'template'
+	templatePath: null,
+    // Template context is a user-specified object that overrides the render context.
     templateContext: {},
-    baseInputAttributes: {},
-    //inputAttributes overrides baseInputAttributes
+	// inputAttributes are a user-specified object that overrides baseInputAttributes.
     inputAttributes: {},
-    initialize: function() {
-        //this.initializeTemplate();
-        this.initializeRenderContext();
+    /**
+     * afterInitialize is user defined.
+	 * Called during the building of the survey, before any 
+	 * instance data has been fetched or templates loaded.
+     **/
+    afterInitialize: function() {
+	},
+	/**
+	 * default is a function field in the worksheet.
+	 * Called during rendering if the prompt has backing
+	 * storage (a 'name') and the value of that storage is null.
+	 */
+	// default: function() { return value; } // e.g., calculates.incItem() in XLSX
+	
+	reRender: function(ctxt) {
+		this._screen.reRender(ctxt);
+	},
+	/**
+	 * Generic methods -- probably should not be overridden
+	 */
+	
+	/**
+	 * initialize
+	 * called via Backbone when a new instance of this
+	 * prototype is constructed.
+	 *
+	 * User-extensible via overriding of the afterInitialize() method.
+	 */
+    initialize: function(args) {
+		$.extend(this, args);
         this.afterInitialize();
     },
+	/**
+	 * getPromptPath
+	 * retrieve the path to this prompt. This is used ONLY by the 
+	 * shim.doAction(...) method and the corresponding 
+	 * landing.opendatakitCallback(...) method to ensure that
+	 * the results of an intent execution (doAction) are routed
+	 * back to the prompt that initiated that action.
+	 */
     getPromptPath: function() {
-        return '' + this.promptIdx;
+        return this._section_name + '/' + this.promptIdx;
     },
+	getPromptId: function() {
+		return 'i' + this.getPromptPath().replace(/[^a-zA-Z0-9]/,'');
+	},
+	/**
+	 * TODO: move this to screen.
+	 * TODO: move this to screen.
+	 * TODO: move this to screen.
+	 * TODO: move this to screen.
+	 * TODO: move this to screen.
+	 * TODO: move this to screen.
+	 * TODO: move this to screen.
+	 * TODO: move this to screen.
+	 * onActivate
+	 * Called before a prompt is rendered.
+	 */
+    onActivate: function(ctxt) {
+        var that = this;
+        this.preActivate($.extend({}, ctxt, {
+            success: function() {
+				that.whenTemplateIsReady($.extend({}, ctxt, {
+					success: function() {
+						that.initializeRenderContext($.extend({}, ctxt, {
+							success: function() {
+								that.postActivate(ctxt);
+							}}));
+					}}));
+            }}));
+    },
+	/**
+	 * preActivate
+	 * If there is a default method defined (e.g., XLSX 
+	 * defined a default column with a calculate...() expression,
+	 * then if the prompt has backing store (a 'name' field) and
+	 * if the backing store value is null, set it to the value 
+	 * returned by the default() method before continuing with
+	 * prompt activation.
+	 */
+    preActivate: function(ctxt) {
+        var that = this;
+		if((that.name != null && 
+			'default' in that) && 
+			that.getValue() == null) {
+			var value = that['default']();
+			ctxt.append('preActivate','assigning default value');
+			that.setValue(ctxt, value);
+		} else {
+			ctxt.success();
+		}
+    },
+	/**
+	 * whenTemplateIsReady
+	 * Ensure that the template is loaded and compiled before 
+	 * proceeding (via ctxt.success()).
+	 * 
+	 * Part of the preliminaries to rendering a page.
+	 */
     whenTemplateIsReady: function(ctxt){
         var that = this;
         if(this.template) {
@@ -53,10 +154,16 @@ promptTypes.base = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    initializeRenderContext: function() {
+	/**
+	 * initializeRenderContext
+	 * construct the renderContext for this prompt. This is an entirely new
+	 * object every time the screen is redrawn.
+	 */
+    initializeRenderContext: function(ctxt) {
         //Object.create is used because we don't want to modify the class's render context.
         this.renderContext = Object.create(this.renderContext);
-        this.renderContext.label = this.label;
+        this.renderContext.display = this.display;
+		this.renderContext.promptId = this.getPromptId();
         this.renderContext.name = this.name;
         this.renderContext.disabled = this.disabled;
         this.renderContext.image = this.image;
@@ -69,49 +176,18 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.withOther = this.withOther;
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
-        this.renderContext.form_title = opendatakit.getSettingValue('form_title');
+        this.renderContext.form_title = opendatakit.getCurrentSectionTitle(this._section_name);
         this.renderContext.form_version = opendatakit.getSettingValue('form_version');
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
+		ctxt.success();
     },
-    /**
-     * afterInitialize is user defined
-     **/
-    afterInitialize: function() {},
-    preActivate: function(ctxt) {
-        var that = this;
-        function callFunctionsInSeries(functions){
-            if (functions.length > 0) {
-                functions[0]($.extend({}, ctxt, {
-                    success: function() {
-                        callFunctionsInSeries(functions.slice(1));
-                    }
-                }));
-            } else {
-                if(('default' in that) && that.getValue() === null) {
-                    console.log(that['default']());
-                    that.setValue($.extend({}, ctxt, {
-                        success: function() {
-                            that.whenTemplateIsReady(ctxt);
-                        }
-                    }), that['default']());
-                } else {
-                    that.whenTemplateIsReady(ctxt);
-                }
-            }
-        }
-        callFunctionsInSeries(that.additionalActivateFunctions);
-    },
+	/**
+	 * postActivate
+	 * User-overridable action to perform additional actions prior to the call to render.
+	 */
     postActivate: function(ctxt){
         ctxt.success();
-    },
-    onActivate: function(ctxt) {
-        var that = this;
-        this.preActivate($.extend({}, ctxt, {
-            success: function() {
-                that.postActivate(ctxt);
-            }
-        }));
     },
     /**
      * stopPropagation is used in the events map to disable swiping on various elements
@@ -127,46 +203,14 @@ promptTypes.base = Backbone.View.extend({
     afterRender: function() {},
     render: function() {
         var that = this;
-        //A virtual element is created so images can be loaded before the newly rendered screen is shown.
-        //I think there is a better way to do this. meteor.js uses an approach were you add template markup to indicate
-        //which elements should not be rerendered.
-        //This is better because we don't have to wait for images to reload,
-        //and it has the additional benefit of making it so we don't loose focus on input fields.
-        var $virtualEl = $('<div>');
-        var $imagesToLoad;
-        var numImagesLoaded = 0;
-        function imagesLoaded(){
-            that.$el.empty();
-            that.$el.append($virtualEl.children());
-            that.$el.trigger('create');
-        }
         try {
-            $virtualEl.html(this.template(this.renderContext));
+            that.$el.html(this.template(this.renderContext));
         } catch(e) {
             console.error("prompts." + that.type + ".render.exception: " + String(e) + ' px: ' + that.promptIdx);
             console.error(that);
             alert("Error in template.");
         }
-        $imagesToLoad = $virtualEl.find('img');
-        $imagesToLoad.load(function(){
-            numImagesLoaded++;
-            if(numImagesLoaded === $imagesToLoad.length) {
-                imagesLoaded();
-            }
-        });
-        if($imagesToLoad.length === 0) {
-            imagesLoaded();
-        }
-        //If the images don't load after 1 second render the template anyways.
-        setTimeout(function(){
-            if(numImagesLoaded < $imagesToLoad.length) {
-                imagesLoaded();
-                //prevent imagesLoaded from being triggered by late images.
-                numImagesLoaded = $imagesToLoad.length + 1;
-            }
-        },1000);
-        this.afterRender();
-        return this;
+		return;
     },
     /**
      * baseValidate isn't meant to be overidden or called externally.
@@ -403,7 +447,7 @@ promptTypes.instances = promptTypes.base.extend({
                 });
                 
                 $.extend(that.renderContext, {
-                    form_title: opendatakit.getSettingValue('form_title'),
+                    form_title: opendatakit.getCurrentSectionTitle(this._section_name),
                     headerImg: requirejs.toUrl('img/form_logo.png')
                 });
                 ctxt.success({
@@ -434,8 +478,7 @@ promptTypes.instances = promptTypes.base.extend({
             success: function() {
                 that.onActivate($.extend({}, ctxt, {
                     success: function() {
-                        that.render();
-                        ctxt.success();
+                        that.reRender(ctxt);
                     }
                 }));
             }
@@ -451,7 +494,7 @@ promptTypes.hierarchy = promptTypes.base.extend({
     events: {
     },
     postActivate: function(ctxt) {
-        this.renderContext.prompts = controller.prompts;
+        this.renderContext.prompts = controller.getCurrentSectionPrompts();
         ctxt.success({showHeader: true, showFooter: false});
     }
 });
@@ -539,7 +582,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         //Check appropriate choices based on formValue
         that.renderContext.choices = _.map(filteredChoices, function(choice) {
             choice.checked = _.any(formValue, function(valueObject) {
-                return choice.name === valueObject.value;
+                return choice.data_value === valueObject.value;
             });
             return choice;
         });
@@ -587,7 +630,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         var matchedChoice = null;
         var choiceList = _.map(savedValue, function(valueObject) {
             matchedChoice = _.find(that.renderContext.choices, function(choiceObject) {
-                            return (valueObject === choiceObject.name);
+                            return (valueObject === choiceObject.data_value);
                 });
             if ( matchedChoice != null ) {
                 return { "name": that.name,
@@ -638,8 +681,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         this.setValue($.extend({}, ctxt, {
             success: function() {
                 that.updateRenderValue(formValue);
-                that.render();
-                ctxt.success();
+                that.reRender(ctxt);
             }
         }), this.generateSaveValue(formValue));
     },
@@ -705,12 +747,14 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
 		};
 		
         that.renderContext.passiveError = null;
-        if(that.param in that.form.queries) {
-            populateChoicesViaQuery(that.form.queries[that.param], newctxt);
-        } else if (that.param in that.form.choices) {
+		var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+		var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
+        if(queryDefn != null) {
+            populateChoicesViaQuery(queryDefn, newctxt);
+        } else if (choiceListDefn != null) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
-            that.renderContext.choices = _.map(that.form.choices[that.param], _.clone);
+            that.renderContext.choices = _.map(choiceListDefn, _.clone);
             newctxt.success("choiceList.success");
         } else {
             newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
@@ -761,7 +805,7 @@ promptTypes.select_one = promptTypes.select.extend({
         }
         if(this.renderContext.choices) {
             valInChoices = _.any(this.renderContext.choices, function(choice){
-                return (choice.name === savedValue);
+                return (choice.data_value === savedValue);
             });
         }
         if (valInChoices) {
@@ -802,8 +846,8 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
         "swiperight .input-container": "stopPropagation"
     },
     //DebouncedRender throttles rerendering so that sliders work.
-    debouncedRender: _.debounce(function() {
-        this.render();
+    debouncedRender: _.debounce(function(ctxt) {
+        this.reRender(ctxt);
     }, 500),
     modification: function(evt) {
         var value = $(evt.target).val();
@@ -827,15 +871,14 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
                 renderContext.value = value;
                 renderContext.invalid = !that.validateValue();
                 that.insideMutex = false;
-                that.debouncedRender();
-                ctxt.success();
+                that.debouncedRender(ctxt);
             },
             failure: function(m) {
                 renderContext.value = value;
                 renderContext.invalid = true;
                 that.insideMutex = false;
-                that.debouncedRender();
-                ctxt.failure(m);
+                that.debouncedRender({success: function() { ctxt.failure(m);},
+					failure: function(j) { ctxt.failure(m);}});
             }
         }), (value.length === 0 ? null : value));
     },
@@ -919,7 +962,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
             ctxt.success();
         } else {
             require(["mobiscroll"], function() {
-                $.scroller.themes.jqm.defaults = {
+                $.mobiscroll.themes.jqm.defaults = {
                     jqmBody: 'd',
                     jqmHeader:'d',
                     jqmWheel: 'd',
@@ -930,20 +973,20 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
                 //This is a problem because users may click twice while they wait for the date
                 //picker to open inadvertantly causing it to close.
-                var originalJqmInit = $.scroller.themes.jqm.init;
-                $.scroller.themes.jqm.init = function(elm, inst) {
+/*                var originalJqmInit = $.mobiscroll.themes.jqm.init;
+                $.mobiscroll.themes.jqm.init = function(elm, inst) {
                     originalJqmInit(elm, inst);
                     $('.dwo', elm).off('click');
                     $('.dwo').css("background-color", "white");
                     $('.dwo').css("opacity", ".5");
-                };
+                }; */
                 ctxt.success();
             });
         }
     },
     modification: function(evt) {
         var that = this;
-        var value = that.$('input').scroller('getDate');
+        var value = that.$('input').mobiscroll('getDate');
         var ref = that.getValue();
         var rerender = ((ref == null || value == null) && (ref != value )) ||
                 (ref != null && value != null && ref.valueOf() != value.valueOf());
@@ -959,37 +1002,33 @@ promptTypes.datetime = promptTypes.input_type.extend({
             success: function() {
                 renderContext.invalid = !that.validateValue();
                 if ( rerender ) {
-                    that.render();
-                }
-                ctxt.success();
+                    that.reRender(ctxt);
+                } else {
+					ctxt.success();
+				}
             },
             failure: function(m) {
                 renderContext.invalid = true;
                 if ( rerender ) {
-                    that.render();
-                }
-                ctxt.failure(m);
+                    that.reRender({success: function() { ctxt.failure(m);},
+					failure: function(j) { ctxt.failure(m);}});
+                } else {
+					ctxt.failure(m);
+				}
             }
         }), value);
     },
     
     afterRender: function() {
         var that = this;
-        /*
-        //TODO: This will have problems with image labels.
-        that.$el.html(that.template(that.renderContext));
-        //Triggering create seems to prevent some issues where jQm styles are not applied.
-        that.$el.trigger('create');
-        */
         if(this.useMobiscroll){
-            that.$('input').scroller(that.scrollerAttributes);
+            that.$('input').mobiscroll()[that.scrollerAttributes.preset](that.scrollerAttributes);
             var value = that.getValue();
             if ( value == null ) {
-                that.$('input').scroller('setDate',new Date(),false);
+                that.$('input').mobiscroll('setDate',new Date(),false);
             } else {
-                that.$('input').scroller('setDate',value, true);
+                that.$('input').mobiscroll('setDate',value, true);
             }
-            return this;
         }
     },
     beforeMove: function(ctxt) {
@@ -1020,7 +1059,7 @@ promptTypes.time = promptTypes.datetime.extend({
     },
     modification: function(evt) {
         var that = this;
-        var value = that.$('input').scroller('getDate');
+        var value = that.$('input').mobiscroll('getDate');
         var ref = that.getValue();
         var rerender = ((ref == null || value == null) && (ref != value )) ||
                 (ref != null && value != null && that.sameTime(ref,value));
@@ -1036,34 +1075,33 @@ promptTypes.time = promptTypes.datetime.extend({
             success: function() {
                 renderContext.invalid = !that.validateValue();
                 if ( rerender ) {
-                    that.render();
-                }
-                ctxt.success();
+                    that.reRender(ctxt);
+                } else {
+					ctxt.success();
+				}
             },
             failure: function(m) {
                 renderContext.invalid = true;
                 if ( rerender ) {
-                    that.render();
-                }
-                ctxt.failure(m);
+                    that.reRender({success: function() { ctxt.failure(m);},
+					failure: function(j) { ctxt.failure(m);}});
+                } else {
+					ctxt.failure(m);
+				}
             }
         }), value);
     },
-    //TODO: This will have problems with image labels.
-    render: function() {
+    afterRender: function() {
         var that = this;
-        that.$el.html(that.template(that.renderContext));
-        //Triggering create seems to prevent some issues where jQm styles are not applied.
-        that.$el.trigger('create');
-        that.$('input').scroller(that.scrollerAttributes);
-        var value = that.getValue();
-        if ( value == null ) {
-            that.$('input').val
-            that.$('input').scroller('setDate',new Date(),false);
-        } else {
-            that.$('input').scroller('setDate',value, true);
+        if(this.useMobiscroll){
+            that.$('input').mobiscroll()[that.scrollerAttributes.preset](that.scrollerAttributes);
+            var value = that.getValue();
+            if ( value == null ) {
+                that.$('input').mobiscroll('setDate',new Date(),false);
+            } else {
+                that.$('input').mobiscroll('setDate',value, true);
+            }
         }
-        return this;
     },
     beforeMove: function(ctxt) {
         // the spinner will have already saved the value
@@ -1151,14 +1189,13 @@ promptTypes.media = promptTypes.base.extend({
                         database.setData( $.extend({},ctxt,{success:function() {
                                 that.enableButtons();
                                 that.updateRenderContext();
-                                that.render();
-                                ctxt.success();
+                                that.reRender(ctxt);
                             },
                             failure:function(m) {
                                 that.enableButtons();
                                 that.updateRenderContext();
-                                that.render();
-                                ctxt.failure(m);
+                                that.reRender({success: function() { ctxt.failure(m);},
+									failure: function(j) { ctxt.failure(m);}});
                             }}), that.name, { uri : uri, contentType: contentType } );
                     }
                 }
@@ -1170,8 +1207,8 @@ promptTypes.media = promptTypes.base.extend({
                 alert(jsonObject.result);
                 that.enableButtons();
                 that.updateRenderContext();
-                that.render();
-                ctxt.failure({message: "Action canceled."});
+                that.reRender({success: function() { ctxt.failure({message: "Action canceled."});},
+					failure: function(j) { ctxt.failure({message: "Action canceled."});}});
             }
         };
     },
@@ -1292,8 +1329,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                     that.setValue($.extend({}, ctxt, {
                         success: function() {
                             that.renderContext.value = that.getValue();
-                            that.render();
-                            ctxt.success();
+                            that.reRender(ctxt);
                         }
                     }), that.extractDataValue(jsonObject));
                 }
@@ -1356,7 +1392,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
             that.setValue($.extend({}, controller.newContext(evt), {
                 success: function() {
                     that.renderContext.value = position;
-                    that.render();
+                    that.reRender();
                 }
             }), position);
         }
@@ -1380,130 +1416,6 @@ promptTypes.geopoint = promptTypes.input_type.extend({
     }
 });
 */
-promptTypes.screen = promptTypes.base.extend({
-    type: "screen",
-    prompts: [],
-    initialize: function() {
-        var that = this;
-        var curPath = that.getPromptPath();
-        //Wire up the prompts so that if any of them rerender the screen rerenders.
-        //TODO: Think about whether there is a better way of doing this.
-        //Maybe bind this or subprompts to database change events instead?
-        _.each(this.prompts, function(prompt){
-            prompt._screenRender = prompt.render;
-            var curPromptPath = curPath + '.' + prompt.promptIdx;
-            prompt.render = function(){
-                that.render();
-            };
-            prompt.getPromptPath = function() {
-                return curPromptPath;
-            };
-        });
-        //this.initializeTemplate();
-        this.initializeRenderContext();
-        this.afterInitialize();
-    },
-    getActivePrompts: function(context) {
-        var that = this;
-        var subPrompts;
-        subPrompts = _.filter(that.prompts, function(prompt) {
-            try {
-                if('condition' in prompt) {
-                    return prompt.condition();
-                }
-            } catch (e) {
-                if ( context ) {
-                    context.append('prompts.screen.getActivePrompts.condition.exception', String(e));
-                } else {
-                    console.error('prompts.screen.getActivePrompts.condition.exception: ' + String(e));
-                }
-                return false;
-            }
-            return true;
-        });
-        return subPrompts;
-    },
-    beforeMove: function(context) {
-        var that = this;
-        var subPrompts, subPromptContext;
-        subPrompts = that.getActivePrompts(context);
-        subPromptContext = $.extend({},context,{
-            success: _.after(subPrompts.length, context.success),
-            failure: _.once(context.failure)
-        });
-        $.each(subPrompts, function(idx, prompt){
-            prompt.beforeMove(subPromptContext);
-        });
-    },
-    validate: function(context) {
-        var that = this;
-        var subPrompts, subPromptContext;
-        subPrompts = that.getActivePrompts(context);
-        subPromptContext = $.extend({},context,{
-            success: _.after(subPrompts.length, context.success),
-            failure: _.once(context.failure)
-        });
-        $.each(subPrompts, function(idx, prompt){
-            prompt.validate(subPromptContext);
-        });
-    },
-    postActivate: function(ctxt) {
-        // We do not support dependent default values within screen groups.
-        // If we are to do so, we will need to add code here to ensure
-        // their on activate functions are called in the right order.
-        var subPromptsReady = _.after(this.prompts.length, function () {
-            ctxt.success();
-        });
-        _.each(this.prompts, function(prompt){
-            prompt.onActivate($.extend({}, ctxt, {
-                success:function() {
-                    subPromptsReady(ctxt);
-                }
-            }));
-        });
-    },
-    render: function() {
-        var that = this;
-        var subPrompts = that.getActivePrompts();
-        this.$el.html('<div class="odk odk-prompts">');
-        var $prompts = this.$('.odk-prompts');
-        $.each(subPrompts, function(idx, prompt){
-            //prompt.render();
-            prompt._screenRender();
-            if(!prompt.$el){
-                console.error("render px: " + this.promptIdx + " Prompts must have synchronous render functions. Don't debounce them or launch async calls before el is set.");
-                console.error(prompt);
-                alert("Sub-prompt has not been rendered. See console for details.");
-            }
-            $prompts.append(prompt.$el);
-            prompt.delegateEvents();
-        });
-        this.$el.trigger('create');
-        this.afterRender();
-        return this;
-    },
-    whenTemplateIsReady: function(ctxt){
-        //This stub is here because screens have no template so the default 
-        //whenTemplateIsReady would otherwise cause an error in preActivate
-        ctxt.success();
-    },
-    /**
-     * When the intent returns a result this factory function creates a callback to process it.
-     * The callback can't use any state set before the intent was launched because the page might have been reloaded.
-     */
-    getCallback: function(promptPath, internalPromptContext, action) {
-        var pageParts = promptPath.split('.');
-        if ( pageParts.length != 2 ) {
-            throw new Error("prompts." + this.type, "px: " + this.promptIdx + " no nested promptIdx supplied: " + " page: " + page + " internalPromptContext: " + internalPromptContext + " action: " + action);
-        }
-        var idx = +pageParts[1];
-        if ( this.prompts.length <= idx ) {
-            throw new Error("prompts." + this.type, "px: " + this.promptIdx + " promptIdx not in screen: " + " page: " + page + " internalPromptContext: " + internalPromptContext + " action: " + action);
-        }
-        var p = this.prompts[idx];
-        return p.getCallback(promptPath, internalPromptContext, action);
-     }
-});
 promptTypes.label = promptTypes.base.extend({
     type: "label",
     hideInHierarchy: true,
@@ -1585,35 +1497,6 @@ promptTypes.stop_survey = promptTypes.base.extend({
         ctxt.failure();
     }
 });
-promptTypes.with_next = promptTypes.base.extend({
-    type: "with_next",
-    hideInHierarchy: true,
-    assignToValue: function(ctxt){
-        var that = this;
-        var value;
-        try {
-            value = that.assign();
-        } catch (e) {
-            ctxt.append('prompts.'+that.type+'.assignToValue.assign.exception', e);
-            ctxt.failure({message: "Error computing with_next expression."});
-            return;
-        }
-        that.setValue(ctxt, value);
-    }
-});
-// with_next_validate runs the validation check before rendering the next screen(like with_next)
-promptTypes.with_next_validate = promptTypes.base.extend({
-    type: "with_next_validate",
-    hideInHierarchy: true,
-    triggerValidation: function(ctxt){
-        // guard to prevent infinite recursion...
-        if ( !ctxt.with_next_validate ) {
-            ctxt.with_next_validate = true;
-            controller.validateAllQuestions(ctxt, this.promptIdx);
-        }
-    }
-});
-promptTypes.error = promptTypes.base;
 
 return promptTypes;
 });

@@ -18,7 +18,6 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
         //
   dataTablePredefinedColumns: { id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
                      uri_user: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-                     last_mod_time: { type: 'integer', isNotNullable: true, 'default': -1, isPersisted: true, elementSet: 'instanceMetadata' },
                      sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      sync_state: { type: 'integer', isNotNullable: true, 'default': 0, isPersisted: true, elementSet: 'instanceMetadata' },
                      transactioning: { type: 'integer', isNotNullable: true, 'default': 1, isPersisted: true, elementSet: 'instanceMetadata' },
@@ -617,7 +616,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
                     bindings.push(v);
                     updates[f].value = v; 
                 }
-            } else if (( f == "last_mod_time" ) || (f == "timestamp")) {
+            } else if (f == "timestamp") {
                 stmt += "?";
                 v = now;
                 bindings.push(v);
@@ -726,9 +725,6 @@ _insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, kvMap) 
                     stmt += "?";
                     bindings.push(kvElement.value);
                 }
-            } else if ( f == "last_mod_time" ) {
-                stmt += "?";
-                bindings.push(now);
             } else if ( f == "timestamp" ) {
                 stmt += "?";
                 bindings.push(now);
@@ -1490,8 +1486,8 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
     // go through the supplied tlo.formDef model
     // and invert it into the dataTableModel
     var jsonDefn;
-    for ( f in tlo.formDef.model ) {
-        jsonDefn = that._flattenElementPath( dataTableModel, null, f, null, tlo.formDef.model[f] );
+    for ( f in tlo.formDef.logic_flow.model ) {
+        jsonDefn = that._flattenElementPath( dataTableModel, null, f, null, tlo.formDef.logic_flow.model[f] );
     }
 
     // and now traverse the dataTableModel making sure all the
@@ -1542,7 +1538,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 aspect: dbColumnName,
                 key: "displayChoicesList",
                 type: "string",
-                value: ((jsonDefn.choicesList == null) ? "" : JSON.stringify(tlo.formDef.choices[jsonDefn.choicesList]))
+                value: ((jsonDefn.choicesList == null) ? "" : JSON.stringify(tlo.formDef.logic_flow.choices[jsonDefn.choicesList]))
             } );
             fullDef.key_value_store_active.push( {
                 table_id: tlo.table_id,
@@ -1599,7 +1595,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'displayName', type: 'string', value: JSON.stringify(opendatakit.getSetting(tlo.formDef, 'form_title')) } );
+    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'displayName', type: 'string', value: JSON.stringify(opendatakit.getSectionTitle(tlo.formDef, 'survey')) } );
     fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'primeCols', type: 'string', value: '' } );
     fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'sortCol', type: 'string', value: '' } );
     fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'coViewSettings', type: 'string', value: '' } );

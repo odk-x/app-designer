@@ -1,314 +1,1206 @@
 {
-  "survey": [
-    {
-      "comments": "Cascading select using remote data",
-      "type": "select_one",
-      "name": "country",
-      "label": "Choose a country:",
-      "_rowNum": 2,
-      "param": "countries"
-    },
-    {
-      "type": "select_one",
-      "name": "state",
-      "label": "Choose a state:",
-      "_rowNum": 3,
-      "param": "states"
-    },
-    {
-      "comments": "Image based select",
-      "type": "screen",
-      "_rowNum": 4,
-      "prompts": [
-        {
-          "type": "select_one",
-          "appearance": "grid",
-          "name": "bird",
-          "label": "Choose a bird:",
-          "_rowNum": 5,
-          "param": "birds"
+  "xlsx": {
+    "survey": [
+      {
+        "comments": "Cascading select using remote data",
+        "type": "select_one",
+        "values_list": "countries",
+        "name": "country",
+        "display": {
+          "text": "Choose a country:"
         },
-        {
-          "type": "note",
-          "condition": "selected(data('bird'), 'blackbird')",
-          "label": "Blackbird selected",
-          "_rowNum": 6
+        "_row_num": 2
+      },
+      {
+        "type": "select_one",
+        "values_list": "states",
+        "name": "state",
+        "display": {
+          "text": "Choose a state:"
         },
-        {
-          "type": "note",
-          "condition": "selected(data('bird'), 'blackbird') && now().getHours() < 2",
-          "label": "in the dead of night",
-          "_rowNum": 7
-        }
-      ]
-    },
-    {
-      "type": "screen",
-      "_rowNum": 9,
-      "prompts": [
-        {
-          "type": "note",
-          "label": "Which devices do you use?",
-          "_rowNum": 10
+        "_row_num": 3
+      },
+      {
+        "comments": "Image based select",
+        "clause": "begin screen",
+        "_row_num": 4
+      },
+      {
+        "type": "select_one",
+        "values_list": "birds",
+        "appearance": "grid",
+        "name": "bird",
+        "display": {
+          "text": "Choose a bird:"
         },
-        {
-          "type": "select_one",
-          "appearance": "inline",
-          "name": "desktop",
-          "label": "Desktop computer",
-          "_rowNum": 11,
-          "param": "yes_no"
+        "_row_num": 5
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('bird'), 'blackbird')",
+        "_row_num": 6
+      },
+      {
+        "type": "note",
+        "display": {
+          "text": "Blackbird selected"
         },
-        {
-          "type": "select_one",
-          "appearance": "inline",
-          "name": "laptop",
-          "label": "Laptop computer",
-          "_rowNum": 12,
-          "param": "yes_no"
+        "_row_num": 7
+      },
+      {
+        "clause": "end if",
+        "_row_num": 8
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('bird'), 'blackbird') && now().getHours() < 2",
+        "_row_num": 9
+      },
+      {
+        "type": "note",
+        "display": {
+          "text": "in the dead of night"
         },
-        {
-          "type": "select_one",
-          "appearance": "inline",
-          "name": "smartphone",
-          "label": "Smartphone",
-          "_rowNum": 13,
-          "param": "yes_no"
+        "_row_num": 10
+      },
+      {
+        "clause": "end if",
+        "_row_num": 11
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 12
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 13
+      },
+      {
+        "type": "note",
+        "display": {
+          "text": "Which devices do you use?"
         },
-        {
-          "type": "select_one",
-          "appearance": "inline",
-          "name": "tablet",
-          "label": "Tablet",
-          "_rowNum": 14,
-          "param": "yes_no"
-        }
-      ]
-    },
-    {
-      "type": "select_one_with_other",
-      "name": "color",
-      "label": "What is your favorite color?",
-      "_rowNum": 16,
-      "param": "colors"
-    },
-    {
-      "comments": "selected function with arguement not included in choices.",
-      "type": "note",
-      "condition": "selected(data('color'), 'teal')",
-      "label": "Teal is a good choice.",
-      "_rowNum": 17
-    },
-    {
-      "type": "select_one",
-      "inputAttributes": {
-        "data-type": "horizontal"
-      },
-      "name": "h_select",
-      "label": "Horizontal select example.",
-      "_rowNum": 18,
-      "param": "yes_no"
-    },
-    {
-      "type": "select_one",
-      "name": "region",
-      "label": "Choose a region:",
-      "_rowNum": 19,
-      "param": "regions_csv"
-    },
-    {
-      "type": "select_one",
-      "appearance": "dropdown",
-      "name": "country",
-      "label": "Choose a country:",
-      "choice_filter": "context.region === data('region')",
-      "_rowNum": 20,
-      "param": "countries_csv"
-    },
-    {
-      "type": "select_one",
-      "condition": false,
-      "name": "cp_test",
-      "label": "This demos a content provider query.",
-      "hint": "You will need to install a content provider app for the query to work. There is an example app available here: https://github.com/nathanathan/FileContentProviderExample",
-      "_rowNum": 21,
-      "param": "content_provider_test"
-    }
-  ],
-  "choices": {
-    "birds": [
-      {
-        "list_name": "birds",
-        "name": "blackbird",
-        "image": "media/blackbird.png",
-        "_rowNum": 2
+        "_row_num": 14
       },
       {
-        "list_name": "birds",
-        "name": "bluethroat",
-        "image": "media/bluethroat.png",
-        "_rowNum": 3
+        "type": "select_one",
+        "values_list": "yes_no",
+        "appearance": "inline",
+        "name": "desktop",
+        "display": {
+          "text": "Desktop computer"
+        },
+        "_row_num": 15
       },
       {
-        "list_name": "birds",
-        "name": "crow",
-        "image": "media/crow.png",
-        "_rowNum": 4
+        "type": "select_one",
+        "values_list": "yes_no",
+        "appearance": "inline",
+        "name": "laptop",
+        "display": {
+          "text": "Laptop computer"
+        },
+        "_row_num": 16
       },
       {
-        "list_name": "birds",
-        "name": "eagle",
-        "image": "media/eagle.png",
-        "_rowNum": 5
+        "type": "select_one",
+        "values_list": "yes_no",
+        "appearance": "inline",
+        "name": "smartphone",
+        "display": {
+          "text": "Smartphone"
+        },
+        "_row_num": 17
       },
       {
-        "list_name": "birds",
-        "name": "egret",
-        "image": "media/egret.png",
-        "_rowNum": 6
+        "type": "select_one",
+        "values_list": "yes_no",
+        "appearance": "inline",
+        "name": "tablet",
+        "display": {
+          "text": "Tablet"
+        },
+        "_row_num": 18
       },
       {
-        "list_name": "birds",
-        "name": "goose",
-        "image": "media/goose.png",
-        "_rowNum": 7
+        "clause": "end screen",
+        "_row_num": 19
       },
       {
-        "list_name": "birds",
-        "name": "gull",
-        "image": "media/gull.png",
-        "_rowNum": 8
+        "type": "select_one_with_other",
+        "values_list": "colors",
+        "name": "color",
+        "display": {
+          "text": "What is your favorite color?"
+        },
+        "_row_num": 20
       },
       {
-        "list_name": "birds",
-        "name": "hawfinch",
-        "image": "media/hawfinch.png",
-        "_rowNum": 9
+        "clause": "if",
+        "condition": "selected(data('color'), 'teal')",
+        "_row_num": 21
       },
       {
-        "list_name": "birds",
-        "name": "jay",
-        "image": "media/jay.png",
-        "_rowNum": 10
+        "comments": "selected function with arguement not included in choices.",
+        "type": "note",
+        "display": {
+          "text": "Teal is a good choice."
+        },
+        "_row_num": 22
+      },
+      {
+        "clause": "end if",
+        "_row_num": 23
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "inputAttributes": {
+          "data-type": "horizontal"
+        },
+        "name": "h_select",
+        "display": {
+          "text": "Horizontal select example."
+        },
+        "_row_num": 24
+      },
+      {
+        "type": "select_one",
+        "values_list": "regions_csv",
+        "name": "region",
+        "display": {
+          "text": "Choose a region:"
+        },
+        "_row_num": 25
+      },
+      {
+        "type": "select_one",
+        "values_list": "countries_csv",
+        "appearance": "dropdown",
+        "name": "country",
+        "display": {
+          "text": "Choose a country:"
+        },
+        "choice_filter": "context.region === data('region')",
+        "_row_num": 26
+      },
+      {
+        "clause": "if",
+        "condition": false,
+        "_row_num": 27
+      },
+      {
+        "type": "select_one",
+        "values_list": "content_provider_test",
+        "name": "cp_test",
+        "display": {
+          "text": "This demos a content provider query.",
+          "hint": "You will need to install a content provider app for the query to work. There is an example app available here: https://github.com/nathanathan/FileContentProviderExample"
+        },
+        "_row_num": 28
+      },
+      {
+        "clause": "end if",
+        "_row_num": 29
       }
     ],
-    "yes_no": [
+    "choices": [
       {
-        "list_name": "yes_no",
-        "name": "yes",
-        "label": "Yes",
-        "_rowNum": 12
+        "choice_list_name": "birds",
+        "data_value": "blackbird",
+        "display": {
+          "image": "media/blackbird.png"
+        },
+        "_row_num": 2
       },
       {
-        "list_name": "yes_no",
-        "name": "no",
-        "label": "No",
-        "_rowNum": 13
+        "choice_list_name": "birds",
+        "data_value": "bluethroat",
+        "display": {
+          "image": "media/bluethroat.png"
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "birds",
+        "data_value": "crow",
+        "display": {
+          "image": "media/crow.png"
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "birds",
+        "data_value": "eagle",
+        "display": {
+          "image": "media/eagle.png"
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "birds",
+        "data_value": "egret",
+        "display": {
+          "image": "media/egret.png"
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "birds",
+        "data_value": "goose",
+        "display": {
+          "image": "media/goose.png"
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "birds",
+        "data_value": "gull",
+        "display": {
+          "image": "media/gull.png"
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "birds",
+        "data_value": "hawfinch",
+        "display": {
+          "image": "media/hawfinch.png"
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "birds",
+        "data_value": "jay",
+        "display": {
+          "image": "media/jay.png"
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "yes_no",
+        "data_value": "yes",
+        "display": {
+          "text": "Yes"
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "yes_no",
+        "data_value": "no",
+        "display": {
+          "text": "No"
+        },
+        "_row_num": 13
+      },
+      {
+        "choice_list_name": "colors",
+        "data_value": "red",
+        "display": {
+          "text": "Red"
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "colors",
+        "data_value": "green",
+        "display": {
+          "text": "Green"
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "colors",
+        "data_value": "blue",
+        "display": {
+          "text": "Blue"
+        },
+        "_row_num": 17
       }
     ],
-    "colors": [
+    "queries": [
       {
-        "list_name": "colors",
-        "name": "red",
-        "label": "Red",
-        "_rowNum": 15
+        "query_name": "countries",
+        "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
+        "_row_num": 2
       },
       {
-        "list_name": "colors",
-        "name": "green",
-        "label": "Green",
-        "_rowNum": 16
+        "query_name": "states",
+        "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
+        "_row_num": 3
       },
       {
-        "list_name": "colors",
-        "name": "blue",
-        "label": "Blue",
-        "_rowNum": 17
+        "query_name": "regions_csv",
+        "uri": "\"regions.csv\"",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n}).value()",
+        "_row_num": 4
+      },
+      {
+        "query_name": "countries_csv",
+        "uri": "\"regions.csv\"",
+        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nreturn place;\n})",
+        "_row_num": 5
+      },
+      {
+        "query_name": "content_provider_test",
+        "uri": "\"content://org.opendatakit.FileContentProviderExample/\"",
+        "callback": "context",
+        "_row_num": 6
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "selects",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20130408,
+        "_row_num": 3
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": "Select Examples"
+        },
+        "_row_num": 4
       }
     ]
   },
-  "queries": [
-    {
-      "name": "countries",
-      "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-      "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
-      "_rowNum": 2
+  "logic_flow": {
+    "settings": {
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "selects",
+        "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20130408,
+        "_row_num": 3
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": "Select Examples"
+        },
+        "_row_num": 4
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": "Select Examples"
+        },
+        "_row_num": 4
+      }
     },
-    {
-      "name": "states",
-      "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-      "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
-      "_rowNum": 3
+    "choices": {
+      "birds": [
+        {
+          "choice_list_name": "birds",
+          "data_value": "blackbird",
+          "display": {
+            "image": "media/blackbird.png"
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "birds",
+          "data_value": "bluethroat",
+          "display": {
+            "image": "media/bluethroat.png"
+          },
+          "_row_num": 3
+        },
+        {
+          "choice_list_name": "birds",
+          "data_value": "crow",
+          "display": {
+            "image": "media/crow.png"
+          },
+          "_row_num": 4
+        },
+        {
+          "choice_list_name": "birds",
+          "data_value": "eagle",
+          "display": {
+            "image": "media/eagle.png"
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "birds",
+          "data_value": "egret",
+          "display": {
+            "image": "media/egret.png"
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "birds",
+          "data_value": "goose",
+          "display": {
+            "image": "media/goose.png"
+          },
+          "_row_num": 7
+        },
+        {
+          "choice_list_name": "birds",
+          "data_value": "gull",
+          "display": {
+            "image": "media/gull.png"
+          },
+          "_row_num": 8
+        },
+        {
+          "choice_list_name": "birds",
+          "data_value": "hawfinch",
+          "display": {
+            "image": "media/hawfinch.png"
+          },
+          "_row_num": 9
+        },
+        {
+          "choice_list_name": "birds",
+          "data_value": "jay",
+          "display": {
+            "image": "media/jay.png"
+          },
+          "_row_num": 10
+        }
+      ],
+      "yes_no": [
+        {
+          "choice_list_name": "yes_no",
+          "data_value": "yes",
+          "display": {
+            "text": "Yes"
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "yes_no",
+          "data_value": "no",
+          "display": {
+            "text": "No"
+          },
+          "_row_num": 13
+        }
+      ],
+      "colors": [
+        {
+          "choice_list_name": "colors",
+          "data_value": "red",
+          "display": {
+            "text": "Red"
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "colors",
+          "data_value": "green",
+          "display": {
+            "text": "Green"
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "colors",
+          "data_value": "blue",
+          "display": {
+            "text": "Blue"
+          },
+          "_row_num": 17
+        }
+      ]
     },
-    {
-      "name": "regions_csv",
-      "uri": "\"regions.csv\"",
-      "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n}).value()",
-      "_rowNum": 4
+    "queries": {
+      "countries": {
+        "query_name": "countries",
+        "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
+        "_row_num": 2
+      },
+      "states": {
+        "query_name": "states",
+        "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
+        "_row_num": 3
+      },
+      "regions_csv": {
+        "query_name": "regions_csv",
+        "uri": "\"regions.csv\"",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n}).value()",
+        "_row_num": 4
+      },
+      "countries_csv": {
+        "query_name": "countries_csv",
+        "uri": "\"regions.csv\"",
+        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nreturn place;\n})",
+        "_row_num": 5
+      },
+      "content_provider_test": {
+        "query_name": "content_provider_test",
+        "uri": "\"content://org.opendatakit.FileContentProviderExample/\"",
+        "callback": "context",
+        "_row_num": 6
+      }
     },
-    {
-      "name": "countries_csv",
-      "uri": "\"regions.csv\"",
-      "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nreturn place;\n})",
-      "_rowNum": 5
+    "calculates": {},
+    "model": {
+      "country": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ]
+      },
+      "state": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "bird": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "desktop": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "laptop": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "smartphone": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "tablet": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "color": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "h_select": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "region": {
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "cp_test": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      }
     },
-    {
-      "name": "content_provider_test",
-      "uri": "\"content://org.opendatakit.FileContentProviderExample/\"",
-      "callback": "context",
-      "_rowNum": 6
-    }
-  ],
-  "settings": [
-    {
-      "setting": "form_id",
-      "value": "selects",
-      "_rowNum": 2
-    },
-    {
-      "setting": "form_version",
-      "value": 20130408,
-      "_rowNum": 3
-    },
-    {
-      "setting": "form_title",
-      "value": "Select Examples",
-      "_rowNum": 4
-    }
-  ],
-  "model": {
-    "country": {
-      "type": "string"
-    },
-    "state": {
-      "type": "string"
-    },
-    "bird": {
-      "type": "string"
-    },
-    "desktop": {
-      "type": "string"
-    },
-    "laptop": {
-      "type": "string"
-    },
-    "smartphone": {
-      "type": "string"
-    },
-    "tablet": {
-      "type": "string"
-    },
-    "color": {
-      "type": "string"
-    },
-    "h_select": {
-      "type": "string"
-    },
-    "region": {
-      "type": "string"
-    },
-    "cp_test": {
-      "type": "string"
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "comments": "Cascading select using remote data",
+            "type": "select_one",
+            "values_list": "countries",
+            "name": "country",
+            "display": {
+              "text": "Choose a country:"
+            },
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "select_one",
+            "values_list": "states",
+            "name": "state",
+            "display": {
+              "text": "Choose a state:"
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen3",
+            "promptIdx": 1
+          },
+          {
+            "type": "select_one",
+            "values_list": "birds",
+            "appearance": "grid",
+            "name": "bird",
+            "display": {
+              "text": "Choose a bird:"
+            },
+            "_row_num": 5,
+            "__rowNum__": 4,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen4",
+            "promptIdx": 2
+          },
+          {
+            "type": "note",
+            "display": {
+              "text": "Blackbird selected"
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "screen4",
+            "promptIdx": 3
+          },
+          {
+            "type": "note",
+            "display": {
+              "text": "in the dead of night"
+            },
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "screen4",
+            "promptIdx": 4
+          },
+          {
+            "type": "note",
+            "display": {
+              "text": "Which devices do you use?"
+            },
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "screen13",
+            "promptIdx": 5
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "appearance": "inline",
+            "name": "desktop",
+            "display": {
+              "text": "Desktop computer"
+            },
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen13",
+            "promptIdx": 6
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "appearance": "inline",
+            "name": "laptop",
+            "display": {
+              "text": "Laptop computer"
+            },
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen13",
+            "promptIdx": 7
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "appearance": "inline",
+            "name": "smartphone",
+            "display": {
+              "text": "Smartphone"
+            },
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen13",
+            "promptIdx": 8
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "appearance": "inline",
+            "name": "tablet",
+            "display": {
+              "text": "Tablet"
+            },
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen13",
+            "promptIdx": 9
+          },
+          {
+            "type": "select_one_with_other",
+            "values_list": "colors",
+            "name": "color",
+            "display": {
+              "text": "What is your favorite color?"
+            },
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "prompt",
+            "_type": "select_one_with_other",
+            "_branch_label_enclosing_screen": "screen20",
+            "promptIdx": 10
+          },
+          {
+            "comments": "selected function with arguement not included in choices.",
+            "type": "note",
+            "display": {
+              "text": "Teal is a good choice."
+            },
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "screen22",
+            "promptIdx": 11
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "inputAttributes": {
+              "data-type": "horizontal"
+            },
+            "name": "h_select",
+            "display": {
+              "text": "Horizontal select example."
+            },
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen24",
+            "promptIdx": 12
+          },
+          {
+            "type": "select_one",
+            "values_list": "regions_csv",
+            "name": "region",
+            "display": {
+              "text": "Choose a region:"
+            },
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen25",
+            "promptIdx": 13
+          },
+          {
+            "type": "select_one",
+            "values_list": "countries_csv",
+            "appearance": "dropdown",
+            "name": "country",
+            "display": {
+              "text": "Choose a country:"
+            },
+            "choice_filter": "context.region === data('region')",
+            "_row_num": 26,
+            "__rowNum__": 25,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen26",
+            "promptIdx": 14
+          },
+          {
+            "type": "select_one",
+            "values_list": "content_provider_test",
+            "name": "cp_test",
+            "display": {
+              "text": "This demos a content provider query.",
+              "hint": "You will need to install a content provider app for the query to work. There is an example app available here: https://github.com/nathanathan/FileContentProviderExample"
+            },
+            "_row_num": 28,
+            "__rowNum__": 27,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen28",
+            "promptIdx": 15
+          },
+          {
+            "_token_type": "prompt",
+            "type": "hierarchy",
+            "_type": "hierarchy",
+            "_row_num": 30,
+            "_branch_label_enclosing_screen": "screen30",
+            "promptIdx": 16
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "comments": "Image based select",
+            "clause": "begin screen",
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 12,
+              "__rowNum__": 11,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(2);\nif (selected(data('bird'), 'blackbird')) {\nctxt.activePrompts.push(3);\n}\nif (selected(data('bird'), 'blackbird') && now().getHours() < 2) {\nctxt.activePrompts.push(4);\n}\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 19,
+              "__rowNum__": 18,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(5);\nctxt.activePrompts.push(6);\nctxt.activePrompts.push(7);\nctxt.activePrompts.push(8);\nctxt.activePrompts.push(9);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 20,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(10);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('color'), 'teal')",
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "goto_label",
+            "_branch_label": "_then21",
+            "operationIdx": 5
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else23",
+            "_row_num": 23,
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 22,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(11);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif23",
+            "_row_num": 23,
+            "operationIdx": 8
+          },
+          {
+            "_row_num": 24,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(12);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 9
+          },
+          {
+            "_row_num": 25,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(13);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 10
+          },
+          {
+            "_row_num": 26,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(14);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 11
+          },
+          {
+            "clause": "if",
+            "condition": false,
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "goto_label",
+            "_branch_label": "_then27",
+            "operationIdx": 12
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else29",
+            "_row_num": 29,
+            "operationIdx": 13
+          },
+          {
+            "_row_num": 28,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(15);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 14
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif29",
+            "_row_num": 29,
+            "operationIdx": 15
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 30,
+            "operationIdx": 16
+          },
+          {
+            "_row_num": 30,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(16);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 17
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 30,
+            "operationIdx": 18
+          }
+        ],
+        "branch_label_map": {
+          "screen2": 0,
+          "screen3": 1,
+          "screen4": 2,
+          "screen13": 3,
+          "screen20": 4,
+          "_then21": 7,
+          "screen22": 7,
+          "_else23": 9,
+          "_endif23": 9,
+          "screen24": 9,
+          "screen25": 10,
+          "screen26": 11,
+          "_then27": 14,
+          "screen28": 14,
+          "_else29": 16,
+          "_endif29": 16,
+          "hierarchy": 17,
+          "screen30": 17
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "_row_num": 3,
+            "type": "opening",
+            "display": {
+              "text": "Edit form"
+            },
+            "_token_type": "prompt",
+            "_type": "opening",
+            "_branch_label_enclosing_screen": "screen3",
+            "promptIdx": 0
+          },
+          {
+            "_row_num": 5,
+            "type": "finalize",
+            "display": {
+              "text": "Save form"
+            },
+            "_token_type": "prompt",
+            "_type": "finalize",
+            "_branch_label_enclosing_screen": "screen5",
+            "promptIdx": 1
+          },
+          {
+            "_row_num": 7,
+            "type": "instances",
+            "display": {
+              "text": "Saved instances"
+            },
+            "_token_type": "prompt",
+            "_type": "instances",
+            "_branch_label_enclosing_screen": "screen7",
+            "promptIdx": 2
+          },
+          {
+            "_token_type": "prompt",
+            "type": "hierarchy",
+            "_type": "hierarchy",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "screen9",
+            "promptIdx": 3
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "clause": "if // start",
+            "condition": "(opendatakit.getCurrentInstanceId() != null)",
+            "_token_type": "goto_label",
+            "_tag_name": "start",
+            "_branch_label": "_then2",
+            "operationIdx": 0
+          },
+          {
+            "clause": "else // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_else6",
+            "_row_num": 6,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "end if // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(2);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 9,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(3);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 9,
+            "operationIdx": 9
+          }
+        ],
+        "branch_label_map": {
+          "_then2": 2,
+          "screen3": 2,
+          "screen5": 4,
+          "_else6": 6,
+          "screen7": 6,
+          "_endif8": 7,
+          "hierarchy": 8,
+          "screen9": 8
+        }
+      }
     }
   }
 }

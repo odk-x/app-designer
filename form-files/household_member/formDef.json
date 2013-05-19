@@ -1,138 +1,646 @@
 {
-  "survey": [
-    {
-      "type": "text",
-      "name": "household_id",
-      "label": "Unique barcode ID or locator designation for this household (foreign key into household table).",
-      "readonly": true,
-      "comments": "readonly is not implemented, but this would be a note-like field that was set to be the parent table key via the extra URL arguments.  It could be hidden and only displayed as a reference in a prompt label.",
-      "_rowNum": 2
-    },
-    {
-      "type": "text",
-      "name": "member_name",
-      "label": "Enter the name of the household member:",
-      "_rowNum": 3
-    },
-    {
-      "type": "integer",
-      "name": "age",
-      "label": "Enter age:",
-      "_rowNum": 4
-    },
-    {
-      "type": "select_one",
-      "name": "sex",
-      "label": "Enter sex:",
-      "_rowNum": 5,
-      "param": "sexes"
-    },
-    {
-      "type": "select_one",
-      "name": "income_contribution",
-      "label": "Does this household member contribute to the household income?",
-      "_rowNum": 6,
-      "param": "yesno"
-    },
-    {
-      "type": "text",
-      "name": "children",
-      "label": "Which household members are children of this household member?",
-      "_rowNum": 7
-    },
-    {
-      "type": "text",
-      "name": "siblings",
-      "label": "Which household members are siblings of this household member?",
-      "_rowNum": 8
-    },
-    {
-      "type": "text",
-      "name": "cousins",
-      "label": "Which household members are cousins of this household member?",
-      "_rowNum": 9
-    }
-  ],
-  "choices": {
-    "yesno": [
+  "xlsx": {
+    "survey": [
       {
-        "list_name": "yesno",
-        "name": "yes",
-        "label": "yes",
-        "_rowNum": 2
+        "type": "text",
+        "name": "household_id",
+        "display": {
+          "text": "Unique barcode ID or locator designation for this household (foreign key into household table)."
+        },
+        "readonly": true,
+        "comments": "readonly is not implemented, but this would be a note-like field that was set to be the parent table key via the extra URL arguments.  It could be hidden and only displayed as a reference in a prompt label.",
+        "_row_num": 2
       },
       {
-        "list_name": "yesno",
-        "name": "no",
-        "label": "no",
-        "_rowNum": 3
+        "type": "text",
+        "name": "member_name",
+        "display": {
+          "text": "Enter the name of the household member:"
+        },
+        "_row_num": 3
+      },
+      {
+        "type": "integer",
+        "name": "age",
+        "display": {
+          "text": "Enter age:"
+        },
+        "_row_num": 4
+      },
+      {
+        "type": "select_one",
+        "value_list": "sexes",
+        "name": "sex",
+        "display": {
+          "text": "Enter sex:"
+        },
+        "_row_num": 5
+      },
+      {
+        "type": "select_one",
+        "value_list": "yesno",
+        "name": "income_contribution",
+        "display": {
+          "text": "Does this household member contribute to the household income?"
+        },
+        "_row_num": 6
+      },
+      {
+        "type": "text",
+        "name": "children",
+        "display": {
+          "text": "Which household members are children of this household member?"
+        },
+        "_row_num": 7
+      },
+      {
+        "type": "text",
+        "name": "siblings",
+        "display": {
+          "text": "Which household members are siblings of this household member?"
+        },
+        "_row_num": 8
+      },
+      {
+        "type": "text",
+        "name": "cousins",
+        "display": {
+          "text": "Which household members are cousins of this household member?"
+        },
+        "_row_num": 9
       }
     ],
-    "sexes": [
+    "choices": [
       {
-        "list_name": "sexes",
-        "name": "male",
-        "label": "male",
-        "_rowNum": 5
+        "choice_list_name": "yesno",
+        "data_value": "yes",
+        "display": {
+          "text": "yes"
+        },
+        "_row_num": 2
       },
       {
-        "list_name": "sexes",
-        "name": "female",
-        "label": "female",
-        "_rowNum": 6
+        "choice_list_name": "yesno",
+        "data_value": "no",
+        "display": {
+          "text": "no"
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "sexes",
+        "data_value": "male",
+        "display": {
+          "text": "male"
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "sexes",
+        "data_value": "female",
+        "display": {
+          "text": "female"
+        },
+        "_row_num": 6
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "household_member",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20130408,
+        "_row_num": 3
+      },
+      {
+        "setting_name": "table_id",
+        "value": "household_member",
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": "Household Member Survey"
+        },
+        "_row_num": 5
+      }
+    ],
+    "model": [
+      {
+        "name": "household_id",
+        "type": "string",
+        "joins": [
+          {
+            "table_id": "household",
+            "element_name": "household_id"
+          }
+        ],
+        "comments": "This inserts a 'joins' entry into the column_definitions table for the household_id column of the household_member table_id of the form: \n\n\"[ { table_id: household, element_name: household_id } ]\"",
+        "_row_num": 2
       }
     ]
   },
-  "settings": [
-    {
-      "setting": "form_id",
-      "value": "household_member",
-      "_rowNum": 2
+  "logic_flow": {
+    "settings": {
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "household_member",
+        "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20130408,
+        "_row_num": 3
+      },
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "household_member",
+        "_row_num": 4
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": "Household Member Survey"
+        },
+        "_row_num": 5
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": "Household Member Survey"
+        },
+        "_row_num": 5
+      }
     },
-    {
-      "setting": "form_version",
-      "value": 20130408,
-      "_rowNum": 3
+    "choices": {
+      "yesno": [
+        {
+          "choice_list_name": "yesno",
+          "data_value": "yes",
+          "display": {
+            "text": "yes"
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "yesno",
+          "data_value": "no",
+          "display": {
+            "text": "no"
+          },
+          "_row_num": 3
+        }
+      ],
+      "sexes": [
+        {
+          "choice_list_name": "sexes",
+          "data_value": "male",
+          "display": {
+            "text": "male"
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "sexes",
+          "data_value": "female",
+          "display": {
+            "text": "female"
+          },
+          "_row_num": 6
+        }
+      ]
     },
-    {
-      "setting": "form_title",
-      "value": "Household Member Survey",
-      "_rowNum": 4
+    "queries": {},
+    "calculates": {},
+    "model": {
+      "household_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "joins": [
+          {
+            "table_id": "household",
+            "element_name": "household_id"
+          }
+        ]
+      },
+      "member_name": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer"
+      },
+      "sex": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "income_contribution": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "children": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "siblings": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      },
+      "cousins": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string"
+      }
     },
-    {
-      "setting": "table_id",
-      "value": "household_member",
-      "_rowNum": 5
-    }
-  ],
-  "model": {
-    "household_id": {
-      "type": "string",
-      "joins": [{
-        "table_id": "household",
-        "element_name": "household_id"
-      }]
-    },
-    "member_name": {
-      "type": "string"
-    },
-    "age": {
-      "type": "integer"
-    },
-    "sex": {
-      "type": "string"
-    },
-    "income_contribution": {
-      "type": "string"
-    },
-    "children": {
-      "type": "string"
-    },
-    "siblings": {
-      "type": "string"
-    },
-    "cousins": {
-      "type": "string"
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "text",
+            "name": "household_id",
+            "display": {
+              "text": "Unique barcode ID or locator designation for this household (foreign key into household table)."
+            },
+            "readonly": true,
+            "comments": "readonly is not implemented, but this would be a note-like field that was set to be the parent table key via the extra URL arguments.  It could be hidden and only displayed as a reference in a prompt label.",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "text",
+            "name": "member_name",
+            "display": {
+              "text": "Enter the name of the household member:"
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "screen3",
+            "promptIdx": 1
+          },
+          {
+            "type": "integer",
+            "name": "age",
+            "display": {
+              "text": "Enter age:"
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "screen4",
+            "promptIdx": 2
+          },
+          {
+            "type": "select_one",
+            "value_list": "sexes",
+            "name": "sex",
+            "display": {
+              "text": "Enter sex:"
+            },
+            "_row_num": 5,
+            "__rowNum__": 4,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen5",
+            "promptIdx": 3
+          },
+          {
+            "type": "select_one",
+            "value_list": "yesno",
+            "name": "income_contribution",
+            "display": {
+              "text": "Does this household member contribute to the household income?"
+            },
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "screen6",
+            "promptIdx": 4
+          },
+          {
+            "type": "text",
+            "name": "children",
+            "display": {
+              "text": "Which household members are children of this household member?"
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "screen7",
+            "promptIdx": 5
+          },
+          {
+            "type": "text",
+            "name": "siblings",
+            "display": {
+              "text": "Which household members are siblings of this household member?"
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "screen8",
+            "promptIdx": 6
+          },
+          {
+            "type": "text",
+            "name": "cousins",
+            "display": {
+              "text": "Which household members are cousins of this household member?"
+            },
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "screen9",
+            "promptIdx": 7
+          },
+          {
+            "_token_type": "prompt",
+            "type": "hierarchy",
+            "_type": "hierarchy",
+            "_row_num": 10,
+            "_branch_label_enclosing_screen": "screen10",
+            "promptIdx": 8
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 4,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(2);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(3);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 6,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(4);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(5);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(6);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(7);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 10,
+            "operationIdx": 8
+          },
+          {
+            "_row_num": 10,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(8);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 9
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 10,
+            "operationIdx": 10
+          }
+        ],
+        "branch_label_map": {
+          "screen2": 0,
+          "screen3": 1,
+          "screen4": 2,
+          "screen5": 3,
+          "screen6": 4,
+          "screen7": 5,
+          "screen8": 6,
+          "screen9": 7,
+          "hierarchy": 9,
+          "screen10": 9
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "_row_num": 3,
+            "type": "opening",
+            "display": {
+              "text": "Edit form"
+            },
+            "_token_type": "prompt",
+            "_type": "opening",
+            "_branch_label_enclosing_screen": "screen3",
+            "promptIdx": 0
+          },
+          {
+            "_row_num": 5,
+            "type": "finalize",
+            "display": {
+              "text": "Save form"
+            },
+            "_token_type": "prompt",
+            "_type": "finalize",
+            "_branch_label_enclosing_screen": "screen5",
+            "promptIdx": 1
+          },
+          {
+            "_row_num": 7,
+            "type": "instances",
+            "display": {
+              "text": "Saved instances"
+            },
+            "_token_type": "prompt",
+            "_type": "instances",
+            "_branch_label_enclosing_screen": "screen7",
+            "promptIdx": 2
+          },
+          {
+            "_token_type": "prompt",
+            "type": "hierarchy",
+            "_type": "hierarchy",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "screen9",
+            "promptIdx": 3
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "clause": "if // start",
+            "condition": "(opendatakit.getCurrentInstanceId() != null)",
+            "_token_type": "goto_label",
+            "_tag_name": "start",
+            "_branch_label": "_then2",
+            "operationIdx": 0
+          },
+          {
+            "clause": "else // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_else6",
+            "_row_num": 6,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "end if // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(2);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 9,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(3);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 9,
+            "operationIdx": 9
+          }
+        ],
+        "branch_label_map": {
+          "_then2": 2,
+          "screen3": 2,
+          "screen5": 4,
+          "_else6": 6,
+          "screen7": 6,
+          "_endif8": 7,
+          "hierarchy": 8,
+          "screen9": 8
+        }
+      }
     }
   }
 }

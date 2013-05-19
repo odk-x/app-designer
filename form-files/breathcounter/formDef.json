@@ -1,42 +1,284 @@
 {
-  "survey": [
-    {
-      "type": "breathcounter",
-      "name": "breath_count",
-      "label": "This breathcounter an example of a custom prompt that launches an intent.",
-      "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet.",
-      "_rowNum": 2
-    }
-  ],
-  "prompt_types": [
-    {
-      "name": "breathcounter",
-      "schema": {
-        "type": "integer"
+  "xlsx": {
+    "survey": [
+      {
+        "type": "breathcounter",
+        "name": "breath_count",
+        "display": {
+          "text": "This breathcounter an example of a custom prompt that launches an intent.",
+          "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+        },
+        "_row_num": 2
+      }
+    ],
+    "prompt_types": [
+      {
+        "prompt_type_name": "breathcounter",
+        "type": "integer",
+        "_row_num": 2
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "breathcounter",
+        "_row_num": 2
       },
-      "_rowNum": 2
-    }
-  ],
-  "settings": [
-    {
-      "setting": "form_id",
-      "value": "breathcounter",
-      "_rowNum": 2
+      {
+        "setting_name": "form_version",
+        "value": 20130408,
+        "_row_num": 3
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": "Breathcounter"
+        },
+        "_row_num": 4
+      }
+    ]
+  },
+  "logic_flow": {
+    "settings": {
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "breathcounter",
+        "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20130408,
+        "_row_num": 3
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": "Breathcounter"
+        },
+        "_row_num": 4
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": "Breathcounter"
+        },
+        "_row_num": 4
+      }
     },
-    {
-      "setting": "form_version",
-      "value": 20130408,
-      "_rowNum": 3
+    "choices": {},
+    "queries": {},
+    "calculates": {},
+    "model": {
+      "breath_count": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "prompt_type_name": "breathcounter",
+        "type": "integer"
+      }
     },
-    {
-      "setting": "form_title",
-      "value": "Breathcounter",
-      "_rowNum": 4
-    }
-  ],
-  "model": {
-    "breath_count": {
-      "type": "integer"
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "breathcounter",
+            "name": "breath_count",
+            "display": {
+              "text": "This breathcounter an example of a custom prompt that launches an intent.",
+              "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+            },
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "breathcounter",
+            "_branch_label_enclosing_screen": "screen2",
+            "promptIdx": 0
+          },
+          {
+            "_token_type": "prompt",
+            "type": "hierarchy",
+            "_type": "hierarchy",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "screen3",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 3,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 3,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "screen2": 0,
+          "hierarchy": 2,
+          "screen3": 2
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "_row_num": 3,
+            "type": "opening",
+            "display": {
+              "text": "Edit form"
+            },
+            "_token_type": "prompt",
+            "_type": "opening",
+            "_branch_label_enclosing_screen": "screen3",
+            "promptIdx": 0
+          },
+          {
+            "_row_num": 5,
+            "type": "finalize",
+            "display": {
+              "text": "Save form"
+            },
+            "_token_type": "prompt",
+            "_type": "finalize",
+            "_branch_label_enclosing_screen": "screen5",
+            "promptIdx": 1
+          },
+          {
+            "_row_num": 7,
+            "type": "instances",
+            "display": {
+              "text": "Saved instances"
+            },
+            "_token_type": "prompt",
+            "_type": "instances",
+            "_branch_label_enclosing_screen": "screen7",
+            "promptIdx": 2
+          },
+          {
+            "_token_type": "prompt",
+            "type": "hierarchy",
+            "_type": "hierarchy",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "screen9",
+            "promptIdx": 3
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "clause": "if // start",
+            "condition": "(opendatakit.getCurrentInstanceId() != null)",
+            "_token_type": "goto_label",
+            "_tag_name": "start",
+            "_branch_label": "_then2",
+            "operationIdx": 0
+          },
+          {
+            "clause": "else // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_else6",
+            "_row_num": 6,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "end if // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(2);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 9,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(3);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 9,
+            "operationIdx": 9
+          }
+        ],
+        "branch_label_map": {
+          "_then2": 2,
+          "screen3": 2,
+          "screen5": 4,
+          "_else6": 6,
+          "screen7": 6,
+          "_endif8": 7,
+          "hierarchy": 8,
+          "screen9": 8
+        }
+      }
     }
   }
 }

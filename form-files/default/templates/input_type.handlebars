@@ -1,7 +1,7 @@
 <div class="{{#if hide}}odk-hidden{{/if}}">
-    {{> labelHint}}
+    <label for="slider-{{promptId}}">{{> labelHint}}</label>
     <div class="input-container">{{! used to prevent swiping on sliders}}
-    <input
+    <input id="slider-{{promptId}}"
         class="odk"
         name="{{name}}"
         value="{{value}}"

@@ -1,35 +1,204 @@
 {
-    "settings": [
-        {
-            "setting": "table_id",
-            "value": "default01"
-        },
-        {
-            "setting": "form_id",
-            "value": "default"
-        },
-        {
-            "setting": "form_version",
-			"value": 20130408
-        },
-        {
-            "setting": "form_title",
-            "value": {
-                "en_us": "Common Javascript Framework"
-            }
-        }
+  "xlsx": {
+    "initial": [
+      {
+        "clause": "do section survey",
+        "_row_num": 2
+      }
     ],
     "survey": [
-        {
-            "type": "note", 
-            "label": {
-                "en_us": "This is the default form."
-            },
-            "hint": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
+      {
+        "type": "note",
+        "display": {
+          "text": "This is the default form.",
+          "hint": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
+        },
+        "screen": {
+          "showHierarchy": false
+        },
+        "_row_num": 2
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "default",
+        "comments": "The unique form id.",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20130424,
+        "comments": "The version of this form",
+        "_row_num": 3
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": "Common Javascript Framework"
+        },
+        "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "_row_num": 4
+      }
+    ]
+  },
+  "logic_flow": {
+    "settings": {
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "default",
+        "comments": "The unique form id.",
+        "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20130424,
+        "comments": "The version of this form",
+        "_row_num": 3
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": "Common Javascript Framework"
+        },
+        "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "_row_num": 4
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": "Common Javascript Framework"
+        },
+        "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "_row_num": 4
+      }
+    },
+    "choices": {},
+    "queries": {},
+    "calculates": {},
+    "model": {},
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "_token_type": "prompt",
+            "type": "hierarchy",
+            "_type": "hierarchy",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "screen3",
+            "promptIdx": 0
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 3,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 3,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "hierarchy": 2,
+          "screen3": 2
         }
-    ], 
-    "model": {
-    }, 
-    "choices": {
+      },
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "note",
+            "display": {
+              "text": "This is the default form.",
+              "hint": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
+            },
+            "screen": {
+              "showHierarchy": false
+            },
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "screen2",
+            "promptIdx": 0
+          },
+          {
+            "_token_type": "prompt",
+            "type": "hierarchy",
+            "_type": "hierarchy",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "screen3",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 3,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 3,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "screen2": 0,
+          "hierarchy": 2,
+          "screen3": 2
+        }
+      }
     }
+  }
 }

@@ -8,6 +8,7 @@
  */
 define(['mdl'],function(mdl) {
 return {
+	initialPageRef: "initial/0",
     saved_complete: 'COMPLETE',
     saved_incomplete: 'INCOMPLETE',
     baseDir: '',
@@ -61,7 +62,7 @@ return {
         var qpl =
             '#formPath=' + escape(formPath) +
             ((instanceId == null) ? '' : ('&instanceId=' + escape(instanceId))) +
-            '&pageRef=' + escape((pageRef == null) ? '0' : pageRef);
+            '&pageRef=' + escape((pageRef == null) ? this.initialPageRef : pageRef);
         return qpl;
     },
 
@@ -71,6 +72,14 @@ return {
 	
 	getCurrentFormDef:function() {
 		return mdl.formDef;
+	},
+	
+	getQueriesDefinition: function(query_name) {
+		return mdl.formDef.logic_flow.parsed_queries[query_name];
+	},
+	
+	getChoicesDefinition: function(choice_list_name) {
+		return mdl.formDef.logic_flow.choices[choice_list_name];
 	},
 	
     setCurrentFormPath:function(formPath) {
@@ -100,6 +109,25 @@ return {
         return mdl.table_id;
     },
     
+	getSectionTitle:function(formDef, sectionName) {
+		var ref = this.getSettingObject(formDef, sectionName);
+		if ( ref == null ) {
+			ref = this.getSettingObject(formDef, 'survey'); // fallback
+		}
+		if ( ref == null || !("display" in ref) ) {
+			return "<no title>";
+		} else {
+			var display = ref.display;
+			if ( "title" in display ) {
+				return display.title;
+			} else {
+				return "<no title>";
+			}
+		}
+	},
+	getCurrentSectionTitle:function(sectionName) {
+		return this.getSectionTitle(this.getCurrentFormDef(),sectionName);
+	},
     /**
      * immediate return: undef
      * side effect: revise: window.location.hash
@@ -114,7 +142,7 @@ return {
         
         // formPath is assumed to be unchanged...
         // Do not set instanceId here -- do that in the hashChange handler...
-        var qpl = this.getHashString(this.getCurrentFormPath(), id, 0);
+        var qpl = this.getHashString(this.getCurrentFormPath(), id, this.initialPageRef);
         // apply the change to the URL...
         window.location.hash = qpl;
         ctxt.success();
@@ -141,24 +169,22 @@ return {
     
     /**
      * Retrieve the value of a setting from the form definition file.
+	 * NOTE: in Survey XLSX syntax, the settings are row-by-row, like choices.
+	 * The returned object is therefore a map of keys to values for that row.
      * 
      * Immediate.
       */
-    getSetting:function(formDef, key) {
-        for (var i = 0 ; i < formDef.settings.length ; ++i ) {
-            var e = formDef.settings[i];
-            if ( e.setting == key ) {
-                return e.value;
-            }
-        }
-        return null;
+    getSettingObject:function(formDef, key) {
+        return formDef.logic_flow.settings[key];
     },
     
     /**
      * use this if you know the formDef is valid within the mdl...
      */
     getSettingValue:function(key) {
-        return this.getSetting(this.getCurrentFormDef(), key);
+        var obj = this.getSettingObject(this.getCurrentFormDef(), key);
+		if ( obj == null ) return null;
+		return obj.value;
     },
     /*
         Form locales are specified by the translations available on the 
@@ -172,19 +198,26 @@ return {
     */
     getFormLocales:function(formDef) {
         var locales = [];
+		if ( formDef == null ) {
+			return [ 'default' ];
+		}
         // assume all the locales are specified by the title...
-        var form_title = this.getSetting(formDef, 'form_title');
+        var form_title = this.getSectionTitle(formDef, 'survey');
         if ( _.isUndefined(form_title) || _.isString(form_title) ) {
             // no internationalization -- just default choice
             return [ 'default' ];
         }
         // we have localization -- find all the tags
         for ( var f in form_title ) {
-            var translations = this.getSetting(formDef, f );
-            if ( translations == null ) {
-                translations = f;
-            }
-            locales.push( { label: translations, name: f } );
+			// get the setting object for the tag (e.g., for display.text for that language)
+            var translations = this.getSettingObject(formDef, f );	
+            if ( translations == null || translations.display == null ) {
+				locales.push( { display: { text: f }, name: f } );
+			} else if ( translations.display.text == null ) {
+                locales.push( { display: { text: f }, name: f } );
+            } else {
+				locales.push( { display: translations.display, name: f } );
+			}
         }
         return locales;
     },
@@ -197,9 +230,9 @@ return {
         form_title translations, then 'default' is returned.
      */
     getDefaultFormLocale:function(formDef) {
-        var locale = this.getSetting(formDef, 'default_locale');
-        if ( locale != null ) {
-			return locale;
+		var localeObject = this.getSettingObject(formDef, 'default_locale');
+        if ( localeObject != null && localeObject.value != null ) {
+			return localeObject.value;
 		}
         var locales = this.getFormLocales(formDef);
         if ( locales.length > 0 ) {

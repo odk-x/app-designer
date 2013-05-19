@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 /**
  * Main entry point: buildSurvey
  * 
@@ -8,8 +8,8 @@
  * Major task is to construct function()s for the calculates, constraints and other equations.
  *
  */
-define(['controller', 'opendatakit', 'database', 'jquery', 'promptTypes', 'formulaFunctions', 'underscore'],
-function(controller,   opendatakit,   database,   $,        promptTypes,   formulaFunctions,   _) {
+define(['controller', 'opendatakit', 'database', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore'],
+function(controller,   opendatakit,   database,   $,        screenTypes,   promptTypes,   formulaFunctions,   _) {
     /**
      * formula is a function for creating JavaScript functions from user defined formulas.
      * TODO: Link/copy formula documentation.
@@ -32,7 +32,6 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     console.error("builder.formula: " + result + " exception: " + String(e));
                     alert("Could not call formula.\nSee console for details.");
                     throw new Error("Exception in user formula.");
-                    // controller.fatalError();
                 }
             };
         } catch (e) {
@@ -55,11 +54,29 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 console.error('builder.formula_with_context: formula: ' + myFormula.toString(2) + ' is missing a context argument');
                 alert("Formula requires context arg.\nSee console for details.");
                 throw new Error("Exception in user formula. Formula requires context arg.");
-                // controller.fatalError();
             }
         };
     }
+    function genericFunction(defn) {
+        try {
+            var parsedFunction = formulaFunctions.evaluator("("+defn+")");
+            return function(/*...*/){
+                try {
+                    return parsedFunction.apply(this, arguments);
+                } catch (e) {
+                    console.error("builder.genericFunction: " + defn + " exception: " + String(e));
+                    alert("Could not invoke genericFunction.\nSee console for details.");
+                    throw new Error("Exception in genericFunction.");
+                }
+            };
+        } catch (e) {
+            console.error("builder.genericFunction: " + defn + " exception evaluating function definition: " + String(e));
+            alert("Could not evaluate genericFunction: " + defn + '\nSee console for details.');
+            throw new Error("Could not evaluate genericFunction: " + defn + '\nSee console for details.');
+        }
+    }
     var currentPromptTypes;
+	var currentScreenTypes;
     var calculates = {};
     //column_types maps each column to a property parser to use on its values.
     var column_types = {
@@ -114,12 +131,13 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
             }
         }
     };
+
     return {
     /**
      * Go through an object (usually representing a row in a spreadsheet) 
      * and parse all its properties
      **/
-    initializeProperties: function(prompt, promptIdx) {
+    initializeProperties: function(prompt) {
 		var that = this;
         $.each(prompt, function(key, property) {
             var propertyType, propertyContent;
@@ -131,9 +149,6 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     return;
                 }
                 if ($.isArray(property)) {
-                    if(key === "prompts"){
-                        prompt.prompts = that.initializePrompts(property);
-                    }
                     return;
                 }
                 if ($.isPlainObject(property) && ('cell_type' in property)) {
@@ -156,9 +171,9 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     prompt[key] = propertyParser(propertyContent);
                 }
                 else {
-                    console.error('builder.initializeProperties: Could not parse property of type ' + propertyType + ' px: ' + promptIdx);
+                    console.error('builder.initializeProperties: Could not parse property of type ' + propertyType + ' px: ' + prompt.promptIdx);
                     alert("Could not parse property of type " + propertyType + ". See console for details.");
-                    throw new Error("Could not parse property of type " + propertyType + ". Prompt Index: " + promptIdx);
+                    throw new Error("Could not parse property of type " + propertyType + ". Prompt Index: " + prompt.promptIdx);
                 }
             }
         });
@@ -169,14 +184,11 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
      * instances of the prompt types defined in prompts.js
      * (or as one of the user specified prompt types).
      **/
-    initializePrompts: function(prompts) {
+    initializePrompts: function(section) {
         var that = this;
-        //withNext type prompts can use this to set a function that gets
-        //called inside the next prompt's onActivate.
-        var additionalActivateFunctions = [];
         var initializedPrompts = [];
         
-        _.each(prompts, function(prompt) {
+        _.each(section.prompts, function(prompt) {
             var PromptType, ExtendedPromptType, PromptInstance;
             if (!('type' in prompt)) {
                 shim.log('W', 'builder.initializePrompts: no type specified');
@@ -192,29 +204,39 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                 console.log(prompt);
                 PromptType = currentPromptTypes['text'];
             }
-            ExtendedPromptType = PromptType.extend($.extend({
-                form: that.form,
-                promptIdx: initializedPrompts.length,
-                additionalActivateFunctions: additionalActivateFunctions
-            }, that.initializeProperties(prompt, initializedPrompts.length)));
-            PromptInstance = new ExtendedPromptType();
-
-            if (prompt.type === 'with_next' ) {
-                additionalActivateFunctions.push(function(ctxt) {
-                    PromptInstance.assignToValue(ctxt);
-                });
-            } else if (prompt.type === 'with_next_validate' ) {
-                additionalActivateFunctions.push(function(ctxt) {
-                    PromptInstance.triggerValidation(ctxt);
-                });
-            } else {
-                initializedPrompts.push(PromptInstance);
-                additionalActivateFunctions = [];
-            }
+            ExtendedPromptType = PromptType.extend(that.initializeProperties(prompt));
+            PromptInstance = new ExtendedPromptType({ _section_name: section.section_name });
+			initializedPrompts.push(PromptInstance);
         });
         return initializedPrompts;
     },
-    buildSurvey: function(surveyJson, continuation) {
+	initializeOperations: function(section) {
+		var that = this;
+		var i, op;
+		var functionBody;
+		var parsedFunction;
+		for (i = 0 ; i < section.operations.length ; ++i ) {
+			var op = section.operations[i];
+			parsedFunction = null;
+			op._section_name = section.section_name;
+			if ( op._token_type == "goto_label" ) {
+				// convert condition into predicate...
+				if ( op.condition ) {
+					functionBody = "function() { return " + op.condition + ";}";
+					op._parsed_condition = genericFunction(functionBody);
+				}
+			} else if ( op._token_type == "assign" ) {
+				// convert value into value method...
+				functionBody = "function() { return " + op.value + ";}";
+				op._parsed_value = genericFunction(functionBody);
+			} else if ( op._token_type == "begin_screen" ) {
+				functionBody = op._screen_block;
+				op._parsed_screen_block = genericFunction(functionBody);
+			}
+		}
+	},
+    buildSurvey: function(continuation) {
+		var surveyJson = opendatakit.getCurrentFormDef();
         // if we have no survey object, we are bootstrapping
         // just run the continuation (which will register a
         // hash change processor).
@@ -228,86 +250,118 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
         //currentPromptTypes set to a promptTypes subtype so user defined prompts
         //don't clobber the base prompt types for other surveys.
         currentPromptTypes = Object.create(promptTypes);
-
-        that.form = {
-            choices: surveyJson.choices,
-            settings: surveyJson.settings
-        };
-
-        var prompts = ([{
-            "type": "goto",
-            "condition": function() {
-                return (opendatakit.getCurrentInstanceId() != null);
-            },
-            "param": "_begin"
-        }, {
-            type: "instances",
-            name: "_instances",
-            label: "Saved Instances"
-        }, {
-            "type": "label",
-            "param": "_output"
-        }, {
-            type: "json",
-            name: "_json",
-            label: "JSON formatted survey answers"
-        }, {
-            "type": "label",
-            "param": "_begin"
-        }, {
-            type: "opening",
-            name: "_opening",
-            label: "opening page"
-        }]).concat(surveyJson.survey).concat([{
-            type: "finalize",
-            name: "_finalize",
-            label: "Save Form"
-        }, {
-            type: "hierarchy",
-            name: "_hierarchy",
-            label: "Hierarchy View"
-        }, {
-            type: "stop_survey",
-            name: "_stop_survey",
-            label: "Fatal Error"
-        }]);
+		// ditto
+		currentScreenTypes = Object.create(screenTypes);
 
         console.log('builder.buildSurvey: initializing');
         //Transform the calculate sheet into an object with format {calculation_name:function}
-        calculates = _.object(_.map(surveyJson.calculates, function(calculate){
-            return [calculate.name, propertyParsers.formula(calculate.calculation)];
+        calculates = _.object(_.map(surveyJson.logic_flow.calculates, function(calculate){
+            return [calculate.calculation_name, propertyParsers.formula(calculate.calculation)];
         }));
         formulaFunctions.calculates = calculates;
         
-        that.form.queries = _.object(_.map(surveyJson.queries, function(query) {
+        surveyJson.logic_flow.parsed_queries = _.object(_.map(surveyJson.logic_flow.queries, function(query) {
             return [
             query.name, {
                 "uri" : propertyParsers.formula(query.uri),
                 "callback" : propertyParsers.formula(query.callback)
             }];
         }));
+		
         var afterCustomPromptsLoadAttempt = function(){
-            that.form.prompts = that.initializePrompts(prompts);
-            controller.prompts = that.form.prompts;
-            console.log('builder.buildSurvey: starting form processing continuation');
-            continuation(that.form);
+			// save the current prompts and screens in the logic_flow
+			surveyJson.logic_flow.currentPromptTypes = currentPromptTypes;
+			surveyJson.logic_flow.currentScreenTypes = currentScreenTypes;
+			
+			// initialize the section.parsed_prompts 
+			// initialize the section.parsed_screen_block
+			_.each(surveyJson.logic_flow.sections, function(section, sectionName) {
+				section.parsed_prompts = that.initializePrompts(section);
+				// operations are in-place expanded, as they have no inheritance
+				that.initializeOperations(section);
+			});
+			
+			//This resets the custom css styles to the customStyles.css file in the
+			//current form's directory (or nothing if customStyles.css doesn't exist).
+			$('#custom-styles').attr('href', opendatakit.getCurrentFormPath() + 'customStyles.css');
+			
+			//Do an ajax request to see if there is a custom theme packaged with the form:
+			var customTheme = opendatakit.getCurrentFormPath() + 'customTheme.css';
+			$.ajax({
+				url: customTheme,
+				success: function() {
+					$('#theme').attr('href', customTheme);
+					var fontSize = opendatakit.getSettingValue("font-size");
+					if ( fontSize != null ) {
+						$('body').css("font-size", fontSize);
+					}
+					console.log('builder.buildSurvey: starting form processing continuation');
+					continuation();
+				},
+				error: function() {
+					console.log('builder.buildSurvey: error loading ' +
+							opendatakit.getCurrentFormPath() + 'customTheme.css');
+					//Set the jQm theme to the defualt theme, or if there is a 
+					//predefined theme specified in the settings sheet, use that.
+					$('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.2.0/themes/' +
+							(opendatakit.getSettingValue("theme") || 'default' ) + '.css'));
+					var fontSize = opendatakit.getSettingValue("font-size");
+					if ( fontSize != null ) {
+						$('body').css("font-size", fontSize);
+					}
+					console.log('builder.buildSurvey: starting form processing continuation');
+					continuation();
+				}
+			});
         };
+		
+        var afterCustomScreensLoadAttempt = function(){
+			//This tries to load any user defined prompt types provided in customPromptTypes.js.
+			//TODO: The approach to getting the current form path might need to change.
+			require([opendatakit.getCurrentFormPath() + 'customPromptTypes.js'], function (customPromptTypes) {
+				console.log("builder.buildSurvey: customPromptTypes found");
+				//Ensure all custom prompt type names are lowercase.
+				_.each(_.keys(customPromptTypes), function(promptTypeName){
+					if(promptTypeName !== promptTypeName.toLowerCase()) {
+						console.error('builder.buildSurvey: Invalid prompt type name: ' + promptTypeName);
+						alert("Invalid prompt type name: " + promptTypeName);
+					}
+				});
+				$.extend(currentPromptTypes, customPromptTypes);
+				afterCustomPromptsLoadAttempt();
+			}, function (err) {
+				console.log('builder.buildSurvey: error loading ' +
+							opendatakit.getCurrentFormPath() + 'customPromptTypes.js');
+				//The errback, error callback
+				if(err.requireModules) {
+					//The error has a list of modules that failed
+					_.each(err.requireModules, function(failedId){
+						shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
+						//I'm using undef to clear internal knowledge of the given module.
+						//I'm not sure if it is necessiary.
+						window.requirejs.undef(failedId);
+					});
+				}
+				afterCustomPromptsLoadAttempt();
+			});
+		};
+		
         //This tries to load any user defined prompt types provided in customPromptTypes.js.
         //TODO: The approach to getting the current form path might need to change.
-        require([opendatakit.getCurrentFormPath() + 'customPromptTypes.js'], function (customPromptTypes) {
-            console.log("builder.buildSurvey: customPromptTypes found");
+        require([opendatakit.getCurrentFormPath() + 'customScreenTypes.js'], function (customScreenTypes) {
+            console.log("builder.buildSurvey: customScreenTypes found");
             //Ensure all custom prompt type names are lowercase.
-            _.each(_.keys(customPromptTypes), function(promptTypeName){
-                if(promptTypeName !== promptTypeName.toLowerCase()) {
-                    console.error('builder.buildSurvey: Invalid prompt type name: ' + promptTypeName);
-                    alert("Invalid prompt type name: " + promptTypeName);
+            _.each(_.keys(customScreenTypes), function(screenTypeName){
+                if(screenTypeName !== screenTypeName.toLowerCase()) {
+                    console.error('builder.buildSurvey: Invalid screen type name: ' + screenTypeName);
+                    alert("Invalid screen type name: " + screenTypeName);
                 }
             });
-            $.extend(currentPromptTypes, customPromptTypes);
-            afterCustomPromptsLoadAttempt();
+            $.extend(currentScreenTypes, customScreenTypes);
+            afterCustomScreensLoadAttempt();
         }, function (err) {
-            console.error('builder.buildSurvey: error loading ' +
-                        opendatakit.getCurrentFormPath() + 'customPromptTypes.js');
+            console.log('builder.buildSurvey: error loading ' +
+                        opendatakit.getCurrentFormPath() + 'customScreenTypes.js');
             //The errback, error callback
             if(err.requireModules) {
                 //The error has a list of modules that failed
@@ -318,29 +372,8 @@ function(controller,   opendatakit,   database,   $,        promptTypes,   formu
                     window.requirejs.undef(failedId);
                 });
             }
-            afterCustomPromptsLoadAttempt();
+            afterCustomScreensLoadAttempt();
         });
-        //This resets the custom css styles to the customStyles.css file in the
-        //current form's directory (or nothing if customStyles.css doesn't exist).
-        $('#custom-styles').attr('href', opendatakit.getCurrentFormPath() + 'customStyles.css');
-        
-        //Do an ajax request to see if there is a custom theme packaged with the form:
-        var customTheme = opendatakit.getCurrentFormPath() + 'customTheme.css';
-        $.ajax({
-            url: customTheme,
-            success: function() {
-                $('#theme').attr('href', customTheme);
-            },
-            error: function() {
-                console.log("No custom theme.");
-                //Set the jQm theme to the defualt theme, or if there is a 
-                //predefined theme specified in the settings sheet, use that.
-                $('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.2.0/themes/' +
-                        (opendatakit.getSettingValue("theme") || 'default' ) + '.css'));
-            }
-        });
-        
-        $('body').css("font-size", opendatakit.getSettingValue("font-size"));
     }
 };
 });

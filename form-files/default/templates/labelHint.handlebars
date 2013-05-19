@@ -1,31 +1,14 @@
-{{#if image}}
-    <div style="text-align: center;">
-        <img class="odk-label-image" src="{{formDirectory}}{{localize image}}"></img>
-    </div>
-{{/if}}
-{{#if audio}}
-    <div>
-        <audio controls="controls">
-            <source src="{{formDirectory}}{{localize audio}}">
+{{#if display.image}}<div style="text-align: center;">
+        <img class="odk-label-image" src="{{formDirectory}}{{localize display.image}}"></img>
+</div>{{/if}}
+{{#if display.audio}}<div><audio controls="controls">
+            <source src="{{formDirectory}}{{localize display.audio}}">
             Your browser does not support the audio element.
-        </audio>
-    </div>
-{{/if}}
-{{#if video}}
-    <div>
+</audio></div>{{/if}}
+{{#if display.video}}<div>
         <video controls="controls">
-            <source src="{{formDirectory}}{{localize video}}">
+            <source src="{{formDirectory}}{{localize display.video}}">
             Your browser does not support the video element.
-        </video>
-    </div>
-{{/if}}
-{{#if label}}
-    <p class="odk-label">
-        {{#substitute}}{{localize label}}{{/substitute}}
-    </p>
-{{/if}}
-{{#if hint}}
-    <p class="odk-hint">
-        {{#substitute}}{{localize hint}}{{/substitute}}
-    </p>
-{{/if}}
+</video></div>{{/if}}
+{{#if display.text}}<p class="odk-label">{{#substitute}}{{localize display.text}}{{/substitute}}</p>{{/if}}
+{{#if display.hint}}<p class="odk-hint">{{#substitute}}{{localize display.hint}}{{/substitute}}</p>{{/if}}
