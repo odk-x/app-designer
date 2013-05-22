@@ -95,5 +95,41 @@ Handlebars.registerHelper('promptLink', function(value, options) {
     return new Handlebars.SafeString( opendatakit.getHashString( opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), value ));
 });
 
+Handlebars.registerHelper('qrcode', function(data, size) {
+    //If the data is a function (i.e. a calculate) evaluate it.
+    data = $.isFunction(data) ? data() : data;
+    data = JSON.stringify(data);
+    
+    var defaultSize = (1 + Math.floor(data.length / 40)) * 96;
+    //If the size is not numeric, it probably was not specified,
+    //so use the default size.
+    size = $.isNumeric(size) ? size : defaultSize;
+    if(size < defaultSize) {
+        alert("Warning, there is a qrcode constrained to a size smaller " +
+            "than recommended for the amount of data it contains.");
+    }
+    
+    //Generate a unique id for the qrcode container so we can find it when
+    //we're ready to populate it.
+    var uid = Math.random().toString().slice(2, 10);
+    
+    //Load the qrcode lib asynchronously and populate the qrcode container 
+    //when it loads.
+    window.setTimeout(function(){
+        require(['jquery-qrcode'], function() {
+            console.log(uid, size, data);
+            $('#' + uid)
+            .empty()
+            .qrcode({
+                width: size,
+                height: size,
+                text: data
+            });
+        });
+    }, 0);
+    
+    //Return the container html
+    return new Handlebars.SafeString( '<div id="' + uid + '">Loading qrcode...</div>' );
+});
 
 });

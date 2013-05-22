@@ -39,7 +39,8 @@ requirejs.config({
         jqmConfig : 'js/jqmConfig',
         handlebarsHelpers : 'js/handlebarsHelpers',
         formulaFunctions : 'js/formulaFunctions',
-        'jquery-csv' : 'libs/jquery-csv/src/jquery.csv'
+        'jquery-csv' : 'libs/jquery-csv/src/jquery.csv',
+        'jquery-qrcode' : 'libs/jquery-qrcode/jquery.qrcode.min'
     },
     shim: {
         'jquery': {
