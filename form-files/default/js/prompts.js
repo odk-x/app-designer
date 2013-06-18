@@ -462,12 +462,14 @@ promptTypes.instances = promptTypes.base.extend({
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
         evt.stopPropagation(true);
+        controller.attachHashChangeHandler();
         opendatakit.openNewInstanceId(ctxt, null);
     },
     openInstance: function(evt) {
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
         evt.stopPropagation(true);
+        controller.attachHashChangeHandler();
         opendatakit.openNewInstanceId(ctxt, $(evt.target).attr('id'));
     },
     deleteInstance: function(evt){

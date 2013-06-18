@@ -11,8 +11,8 @@
  * screens and thereby to the prompts within those screens.
  *
  */
-define(['screenManager','opendatakit','database', 'mdl', 'jquery'],
-function(ScreenManager,  opendatakit,  database,   mdl,   $) {
+define(['screenManager','opendatakit','database', 'mdl', 'jquery', 'parsequery'],
+function(ScreenManager,  opendatakit,  database,   mdl,   $, parsequery) {
 window.controller = {
     eventCount: 0,
     screenManager : null,
@@ -780,6 +780,7 @@ window.controller = {
     // return to the main screen (showing the available instances) for this form.
     leaveInstance:function(ctxt) {
         var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
+        this.attachHashChangeHandler();
         window.location.hash = newhash;
         ctxt.success();
     },
@@ -981,6 +982,13 @@ window.controller = {
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
+    },
+    attachHashChangeHandler: function() {
+    	$(window).off('hashchange.opendatakit');
+        $(window).on('hashchange.opendatakit', function(evt) {
+            parsequery.hashChangeHandler(evt);
+            $(window).off('hashchange.opendatakit');
+        });
     }
 };
 return window.controller;

@@ -110,9 +110,7 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
 
             //
             // register to handle manual #hash changes
-            $(window).bind('hashchange', function(evt) {
-                parsequery.hashChangeHandler(evt);
-            });
+            controller.attachHashChangeHandler();
             
             //
             // define a function that waits until jquery mobile is initialized
