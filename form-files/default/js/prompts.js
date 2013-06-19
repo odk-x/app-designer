@@ -393,14 +393,14 @@ promptTypes.finalize = promptTypes.base.extend({
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                controller.leaveInstance(ctxt);
+                controller.leaveInstance(evt, ctxt);
             }}),false);
     },
     saveFinal: function(evt) {
          var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                controller.leaveInstance(ctxt);
+                controller.leaveInstance(evt, ctxt);
             }}),true);
     }
 });

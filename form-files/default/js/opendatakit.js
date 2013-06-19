@@ -130,7 +130,6 @@ return {
 	},
     /**
      * immediate return: undef
-     * side effect: revise: window.location.hash
      */
     openNewInstanceId:function(ctxt, id) {
         if (id == null) {

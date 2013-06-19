@@ -778,11 +778,10 @@ window.controller = {
         }
     },
     // return to the main screen (showing the available instances) for this form.
-    leaveInstance:function(ctxt) {
-        var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
-        this.attachHashChangeHandler();
-        window.location.hash = newhash;
-        ctxt.success();
+    leaveInstance:function(event,ctxt) {
+      var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
+      this.changeUrlHash(event,newhash,null)
+      ctxt.success();
     },
     gotoRef:function(ctxt, path, options) {
         var that = this;
@@ -985,30 +984,32 @@ window.controller = {
     },
 
     createInstance: function(evt){
+      var that = this;
       var ctxt = controller.newContext(evt);
       ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
       opendatakit.openNewInstanceId($.extend({},ctxt,{
         success: function(){
           evt.stopPropagation(true);
           var url = arguments[0];
-          changeUrlHash(evt,url,ctxt)
+          that.changeUrlHash(evt,url,ctxt)
        }}), null);
     },
 
     openInstance: function(evt) {
+      var that = this;
       var ctxt = controller.newContext(evt);
       ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
       opendatakit.openNewInstanceId($.extend({},ctxt,{
         success: function(){
           evt.stopPropagation(true);
           var url = arguments[0];
-          changeUrlHash(evt,url,ctxt)
+          that.changeUrlHash(evt,url,ctxt)
        }}), $(evt.target).attr('id'));
     },
 
     changeUrlHash : function(event,url,context){
-        window.location.hash = url;
-        parsequery.hashChangeHandler(event,url,ctxt);
+      window.location.hash = url;
+      parsequery.hashChangeHandler(event,url,context);
     },
 
     attachHashChangeHandler: function() {

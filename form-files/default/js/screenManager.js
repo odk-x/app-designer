@@ -332,7 +332,7 @@ return Backbone.View.extend({
         ctxt.append('screenManager.ignoreChanges', 
 			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
-                that.controller.leaveInstance(ctxt);
+                that.controller.leaveInstance(evt, ctxt);
             }}));
     },
     saveChanges: function(evt) {
@@ -341,7 +341,7 @@ return Backbone.View.extend({
         ctxt.append('screenManager.saveChanges', 
 			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
-                that.controller.leaveInstance(ctxt);
+                that.controller.leaveInstance(evt,ctxt);
             }}), false);
     },
     openOptions: function(evt) {
