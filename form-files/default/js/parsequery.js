@@ -307,23 +307,23 @@ return {
      *    pathRef=concatenation of screenIdx (or name) and other data used
      *            when rendering a screen. If omitted, go to initial screen.
      */
-    hashChangeHandler:function(evt) {
+    hashChangeHandler:function(evt, urlHash, context) {
         var that = this;
         var qpl;
-        var inner_ctxt = that.controller.newContext(evt);
-		var ctxt = $.extend({}, inner_ctxt, {success: function() {
-				inner_ctxt.success();
-				// and flush any pending doAction callback
-				landing.setController(that.controller);
-			}, failure: function(m) {
-				window.location.hash = "#formPath=";
-				inner_ctxt.failure(m);
-			}});
+        var inner_ctxt = context || that.controller.newContext(evt);
+        var ctxt = $.extend({}, inner_ctxt, {success: function() {
+            inner_ctxt.success();
+            // and flush any pending doAction callback
+            landing.setController(that.controller);
+          }, failure: function(m) {
+            window.location.hash = "#formPath=";
+            inner_ctxt.failure(m);
+          }});
 
         ctxt.append('parsequery.hashChangeHandler');
         evt.stopPropagation();
         evt.stopImmediatePropagation();
-        
+
         if ( window.location.hash == '#' ) {
             // this is bogus transition due to jquery mobile widgets
             ctxt.append('parsequery.hashChangeHandler.emptyHash');
@@ -334,8 +334,9 @@ return {
             ctxt.failure({message: "Internal error: invalid hash (restoring)"});
             return false;
         }
-        
-        var params = window.location.hash.slice(1).split("&");
+
+        var hash = urlHash || window.location.hash;
+        var params = hash.slice(1).split("&");
         var formPath = null;
         var instanceId = null;
         var pageRef = null;
@@ -385,6 +386,5 @@ return {
         }
         return false;
     }
-
 };
 });

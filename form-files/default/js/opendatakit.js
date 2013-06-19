@@ -143,9 +143,7 @@ return {
         // formPath is assumed to be unchanged...
         // Do not set instanceId here -- do that in the hashChange handler...
         var qpl = this.getHashString(this.getCurrentFormPath(), id, this.initialPageRef);
-        // apply the change to the URL...
-        window.location.hash = qpl;
-        ctxt.success();
+        ctxt.success(qpl);
     },
 
     localize:function(textOrLangMap, locale) {

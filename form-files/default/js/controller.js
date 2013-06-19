@@ -983,20 +983,34 @@ window.controller = {
         ctxt.append( evt.type, detail);
         return ctxt;
     },
+
     createInstance: function(evt){
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
-        evt.stopPropagation(true);
-        controller.attachHashChangeHandler();
-        opendatakit.openNewInstanceId(ctxt, null);
+      var ctxt = controller.newContext(evt);
+      ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
+      opendatakit.openNewInstanceId($.extend({},ctxt,{
+        success: function(){
+          evt.stopPropagation(true);
+          var url = arguments[0];
+          changeUrlHash(evt,url,ctxt)
+       }}), null);
     },
+
     openInstance: function(evt) {
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
-        evt.stopPropagation(true);
-        controller.attachHashChangeHandler();
-        opendatakit.openNewInstanceId(ctxt, $(evt.target).attr('id'));
+      var ctxt = controller.newContext(evt);
+      ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
+      opendatakit.openNewInstanceId($.extend({},ctxt,{
+        success: function(){
+          evt.stopPropagation(true);
+          var url = arguments[0];
+          changeUrlHash(evt,url,ctxt)
+       }}), $(evt.target).attr('id'));
     },
+
+    changeUrlHash : function(event,url,context){
+        window.location.hash = url;
+        parsequery.hashChangeHandler(event,url,ctxt);
+    },
+
     attachHashChangeHandler: function() {
     	$(window).off('hashchange.opendatakit');
         $(window).on('hashchange.opendatakit', function(evt) {
