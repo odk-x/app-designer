@@ -459,18 +459,10 @@ promptTypes.instances = promptTypes.base.extend({
         }));
     },
     createInstance: function(evt){
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
-        evt.stopPropagation(true);
-        controller.attachHashChangeHandler();
-        opendatakit.openNewInstanceId(ctxt, null);
+      controller.createInstance(evt);
     },
     openInstance: function(evt) {
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
-        evt.stopPropagation(true);
-        controller.attachHashChangeHandler();
-        opendatakit.openNewInstanceId(ctxt, $(evt.target).attr('id'));
+      controller.openInstance(evt);
     },
     deleteInstance: function(evt){
         var ctxt = controller.newContext(evt);

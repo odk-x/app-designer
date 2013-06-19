@@ -983,6 +983,20 @@ window.controller = {
         ctxt.append( evt.type, detail);
         return ctxt;
     },
+    createInstance: function(evt){
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
+        evt.stopPropagation(true);
+        controller.attachHashChangeHandler();
+        opendatakit.openNewInstanceId(ctxt, null);
+    },
+    openInstance: function(evt) {
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
+        evt.stopPropagation(true);
+        controller.attachHashChangeHandler();
+        opendatakit.openNewInstanceId(ctxt, $(evt.target).attr('id'));
+    },
     attachHashChangeHandler: function() {
     	$(window).off('hashchange.opendatakit');
         $(window).on('hashchange.opendatakit', function(evt) {
