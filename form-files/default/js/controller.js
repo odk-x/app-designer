@@ -780,8 +780,9 @@ window.controller = {
     // return to the main screen (showing the available instances) for this form.
     leaveInstance:function(event,ctxt) {
       var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
-      this.changeUrlHash(event,newhash,null)
-      ctxt.success();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      this.changeUrlHash(newhash, ctxt);
     },
     gotoRef:function(ctxt, path, options) {
         var that = this;
@@ -982,43 +983,38 @@ window.controller = {
         ctxt.append( evt.type, detail);
         return ctxt;
     },
-
+    
     createInstance: function(evt){
       var that = this;
       var ctxt = controller.newContext(evt);
+      evt.stopPropagation(true);
+      evt.stopImmediatePropagation();
       ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
       opendatakit.openNewInstanceId($.extend({},ctxt,{
         success: function(){
-          evt.stopPropagation(true);
           var url = arguments[0];
-          that.changeUrlHash(evt,url,ctxt)
+          that.changeUrlHash(url,ctxt)
        }}), null);
     },
 
     openInstance: function(evt) {
       var that = this;
       var ctxt = controller.newContext(evt);
+      evt.stopPropagation(true);
+      evt.stopImmediatePropagation();
       ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
       opendatakit.openNewInstanceId($.extend({},ctxt,{
         success: function(){
-          evt.stopPropagation(true);
           var url = arguments[0];
-          that.changeUrlHash(evt,url,ctxt)
+          that.changeUrlHash(url,ctxt)
        }}), $(evt.target).attr('id'));
     },
 
-    changeUrlHash : function(event,url,context){
+    changeUrlHash : function(url,context){
       window.location.hash = url;
-      parsequery.hashChangeHandler(event,url,context);
-    },
-
-    attachHashChangeHandler: function() {
-    	$(window).off('hashchange.opendatakit');
-        $(window).on('hashchange.opendatakit', function(evt) {
-            parsequery.hashChangeHandler(evt);
-            $(window).off('hashchange.opendatakit');
-        });
+      parsequery.hashChangeHandler(url,context);
     }
+
 };
 return window.controller;
 });

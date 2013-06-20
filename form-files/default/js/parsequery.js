@@ -307,22 +307,21 @@ return {
      *    pathRef=concatenation of screenIdx (or name) and other data used
      *            when rendering a screen. If omitted, go to initial screen.
      */
-    hashChangeHandler:function(evt, urlHash, context) {
+    hashChangeHandler:function(urlHash, context) {
         var that = this;
         var qpl;
-        var inner_ctxt = context || that.controller.newContext(evt);
-        var ctxt = $.extend({}, inner_ctxt, {success: function() {
-            inner_ctxt.success();
+        
+        var ctxt = $.extend({}, context, {success: function() {
+            context.success();
             // and flush any pending doAction callback
             landing.setController(that.controller);
           }, failure: function(m) {
             window.location.hash = "#formPath=";
-            inner_ctxt.failure(m);
+            context.failure(m);
           }});
 
         ctxt.append('parsequery.hashChangeHandler');
-        evt.stopPropagation();
-        evt.stopImmediatePropagation();
+        
 
         if ( window.location.hash == '#' ) {
             // this is bogus transition due to jquery mobile widgets
