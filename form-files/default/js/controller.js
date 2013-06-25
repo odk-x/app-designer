@@ -794,11 +794,11 @@ window.controller = {
 		}
 		// navigate through all gotos, goto_ifs and labels.
 		that.advanceToNextScreen($.extend({}, ctxt, {
-			success: function(screen, addedOptions){
-				if(screen) {
-					ctxt.append("controller.gotoRef.advanceToNextScreen.success", "px: " + that.getCurrentPageRef() + " nextPx: " + screen.operationIdx);
+			success: function(operation, addedOptions){
+				if(operation) {
+					ctxt.append("controller.gotoRef.advanceToNextScreen.success", "px: " + that.getCurrentPageRef() + " nextPx: " + operation.operationIdx);
 					// todo -- change to use hash?
-					that.setScreen(ctxt, screen, $.extend({}, options, addedOptions));
+					that.setScreen(ctxt, operation, $.extend({}, options, addedOptions));
 				} else {
 					ctxt.append("controller.gotoRef.advanceToNextScreen.success", "px: " + that.getCurrentPageRef() + " nextPx: no screen!");
 					that.screenManager.noNextPage($.extend({}, ctxt,{
