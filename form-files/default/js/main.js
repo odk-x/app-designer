@@ -109,12 +109,6 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
             parsequery.initialize(controller,builder);
 
             //
-            // register to handle manual #hash changes
-            $(window).bind('hashchange', function(evt) {
-                parsequery.hashChangeHandler(evt);
-            });
-            
-            //
             // define a function that waits until jquery mobile is initialized
             // then calls parseParameters() to trigger loading and processing of
             // the requested form.
@@ -129,9 +123,10 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
 									var pageRef = controller.getCurrentPageRef();
 									var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), pageRef);
 									if ( newhash != window.location.hash ) {
-										window.location.hash = newhash;
-									}
-									ctxt.success();
+                                        controller.changeUrlHash(newhash, ctxt);
+									} else {
+									   ctxt.success();
+                                    }
 								}}));
                             }}));
                     } else {
@@ -140,9 +135,10 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
 							var pageRef = controller.getCurrentPageRef();
 							var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), pageRef);
 							if ( newhash != window.location.hash ) {
-								window.location.hash = newhash;
-							}
-							ctxt.success();
+								controller.changeUrlHash(newhash, ctxt);
+							} else {
+							    ctxt.success();
+                            }
 						}}));
                     }
                 } else {

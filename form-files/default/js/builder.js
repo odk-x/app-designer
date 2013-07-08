@@ -303,8 +303,8 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
 							opendatakit.getCurrentFormPath() + 'customTheme.css');
 					//Set the jQm theme to the defualt theme, or if there is a 
 					//predefined theme specified in the settings sheet, use that.
-					$('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.2.0/themes/' +
-							(opendatakit.getSettingValue("theme") || 'default' ) + '.css'));
+					$('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.3.1/' +
+							(opendatakit.getSettingValue("theme") || 'jquery.mobile.theme-1.3.1' ) + '.css'));
 					var fontSize = opendatakit.getSettingValue("font-size");
 					if ( fontSize != null ) {
 						$('body').css("font-size", fontSize);

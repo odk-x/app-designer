@@ -948,41 +948,45 @@ putInstanceMetaData:function(ctxt, name, value) {
  * Requires: mdl to be initialized -- e.g., mdl.tableMetadata, mdl.dataTableModel
  */
 putDataKeyValueMap:function(ctxt, kvMap) {
-      var that = this;
-      var property;
-      var names = '';
-      for ( property in kvMap ) {
-        names += "," + property;
-      }
-      names = names.substring(1);
-      ctxt.append('database.putDataKeyValueMap.initiated', names );
+    if ($.isEmptyObject(kvMap)) {
+        ctxt.success();
+    } else {
+          var that = this;
+          var property;
+          var names = '';
+          for ( property in kvMap ) {
+            names += "," + property;
+          }
+          names = names.substring(1);
+          ctxt.append('database.putDataKeyValueMap.initiated', names );
 
-      var updates = {};
-      var tmpctxt = $.extend({}, ctxt, {success:function() {
-                ctxt.append('database.putDataKeyValueMap.updatingCache');
-                var uf;
-                for (var f in updates) {
-                    var uf = updates[f];
-                    var de = mdl.dataTableModel[f];
-                    if (de.isPersisted) {
-                        var elementPath = de.elementPath || uf.elementPath;
-                        if ( de.elementSet == 'instanceMetadata' ) {
-                            that._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
-                        } else {
-                            that._reconstructElementPath(elementPath, de, uf.value, mdl.data );
+          var updates = {};
+          var tmpctxt = $.extend({}, ctxt, {success:function() {
+                    ctxt.append('database.putDataKeyValueMap.updatingCache');
+                    var uf;
+                    for (var f in updates) {
+                        var uf = updates[f];
+                        var de = mdl.dataTableModel[f];
+                        if (de.isPersisted) {
+                            var elementPath = de.elementPath || uf.elementPath;
+                            if ( de.elementSet == 'instanceMetadata' ) {
+                                that._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
+                            } else {
+                                that._reconstructElementPath(elementPath, de, uf.value, mdl.data );
+                            }
                         }
                     }
-                }
-                ctxt.success();
-            }});
+                    ctxt.success();
+                }});
 
-      that.withDb( tmpctxt, function(transaction) {
-            var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, opendatakit.getCurrentInstanceId(), kvMap);
-            transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-                updates = is.updates;
-                tmpctxt.append("putDataKeyValueMap.success", names);
+          that.withDb( tmpctxt, function(transaction) {
+                var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, opendatakit.getCurrentInstanceId(), kvMap);
+                transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
+                    updates = is.updates;
+                    tmpctxt.append("putDataKeyValueMap.success", names);
+                });
             });
-        });
+    }
 },
 getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
       var that = this;
@@ -1690,6 +1694,13 @@ getDataValue:function(name) {
 setData:function(ctxt, name, value) {
     ctxt.append('setData: ' + name);
     var that = this;
+    if (mdl.data.hasOwnProperty(name)) {
+        if (mdl.data[name] === value) {
+            ctxt.success();
+            return;
+        }
+    }
+
     that.putData($.extend({}, ctxt, {success: function() {
             that.cacheAllData(ctxt, opendatakit.getCurrentInstanceId());
         }}), name, value);

@@ -11,8 +11,8 @@
  * screens and thereby to the prompts within those screens.
  *
  */
-define(['screenManager','opendatakit','database', 'mdl', 'jquery'],
-function(ScreenManager,  opendatakit,  database,   mdl,   $) {
+define(['screenManager','opendatakit','database', 'mdl', 'jquery', 'parsequery'],
+function(ScreenManager,  opendatakit,  database,   mdl,   $, parsequery) {
 window.controller = {
     eventCount: 0,
     screenManager : null,
@@ -778,10 +778,11 @@ window.controller = {
         }
     },
     // return to the main screen (showing the available instances) for this form.
-    leaveInstance:function(ctxt) {
-        var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
-        window.location.hash = newhash;
-        ctxt.success();
+    leaveInstance:function(event,ctxt) {
+      var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      this.changeUrlHash(newhash, ctxt);
     },
     gotoRef:function(ctxt, path, options) {
         var that = this;
@@ -793,11 +794,11 @@ window.controller = {
 		}
 		// navigate through all gotos, goto_ifs and labels.
 		that.advanceToNextScreen($.extend({}, ctxt, {
-			success: function(screen, addedOptions){
-				if(screen) {
-					ctxt.append("controller.gotoRef.advanceToNextScreen.success", "px: " + that.getCurrentPageRef() + " nextPx: " + screen.operationIdx);
+			success: function(operation, addedOptions){
+				if(operation) {
+					ctxt.append("controller.gotoRef.advanceToNextScreen.success", "px: " + that.getCurrentPageRef() + " nextPx: " + operation.operationIdx);
 					// todo -- change to use hash?
-					that.setScreen(ctxt, screen, $.extend({}, options, addedOptions));
+					that.setScreen(ctxt, operation, $.extend({}, options, addedOptions));
 				} else {
 					ctxt.append("controller.gotoRef.advanceToNextScreen.success", "px: " + that.getCurrentPageRef() + " nextPx: no screen!");
 					that.screenManager.noNextPage($.extend({}, ctxt,{
@@ -981,7 +982,39 @@ window.controller = {
         var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
+    },
+    
+    createInstance: function(evt){
+      var that = this;
+      var ctxt = controller.newContext(evt);
+      evt.stopPropagation(true);
+      evt.stopImmediatePropagation();
+      ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
+      opendatakit.openNewInstanceId($.extend({},ctxt,{
+        success: function(){
+          var url = arguments[0];
+          that.changeUrlHash(url,ctxt)
+       }}), null);
+    },
+
+    openInstance: function(evt) {
+      var that = this;
+      var ctxt = controller.newContext(evt);
+      evt.stopPropagation(true);
+      evt.stopImmediatePropagation();
+      ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
+      opendatakit.openNewInstanceId($.extend({},ctxt,{
+        success: function(){
+          var url = arguments[0];
+          that.changeUrlHash(url,ctxt)
+       }}), $(evt.target).attr('id'));
+    },
+
+    changeUrlHash : function(url,context){
+      window.location.hash = url;
+      parsequery.hashChangeHandler(url,context);
     }
+
 };
 return window.controller;
 });

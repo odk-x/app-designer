@@ -393,14 +393,14 @@ promptTypes.finalize = promptTypes.base.extend({
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                controller.leaveInstance(ctxt);
+                controller.leaveInstance(evt, ctxt);
             }}),false);
     },
     saveFinal: function(evt) {
          var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                controller.leaveInstance(ctxt);
+                controller.leaveInstance(evt, ctxt);
             }}),true);
     }
 });
@@ -459,16 +459,10 @@ promptTypes.instances = promptTypes.base.extend({
         }));
     },
     createInstance: function(evt){
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
-        evt.stopPropagation(true);
-        opendatakit.openNewInstanceId(ctxt, null);
+      controller.createInstance(evt);
     },
     openInstance: function(evt) {
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
-        evt.stopPropagation(true);
-        opendatakit.openNewInstanceId(ctxt, $(evt.target).attr('id'));
+      controller.openInstance(evt);
     },
     deleteInstance: function(evt){
         var ctxt = controller.newContext(evt);
