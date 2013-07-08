@@ -262,7 +262,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         
         surveyJson.logic_flow.parsed_queries = _.object(_.map(surveyJson.logic_flow.queries, function(query) {
             return [
-            query.name, {
+            query.query_name, {
                 "uri" : propertyParsers.formula(query.uri),
                 "callback" : propertyParsers.formula(query.callback)
             }];
