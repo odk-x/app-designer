@@ -17,7 +17,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
         // This is used for bookkeeping columns (e.g., server sync, save status).
         //
   dataTablePredefinedColumns: { id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
-                     uri_user: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
+                     uri_access_control: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      sync_state: { type: 'integer', isNotNullable: true, 'default': 0, isPersisted: true, elementSet: 'instanceMetadata' },
                      transactioning: { type: 'integer', isNotNullable: true, 'default': 1, isPersisted: true, elementSet: 'instanceMetadata' },
@@ -168,7 +168,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                 sec = Number(value.substr(idx+4,2));
                 msec = Number(value.substr(idx+7,3));
                 value = new Date();
-				value.setHours(hh,min,sec,msec);
+                value.setHours(hh,min,sec,msec);
                 return value;
             } else {
                 value = JSON.parse(value);
@@ -268,26 +268,26 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                         that._padWithLeadingZeros(msec,3) + 'Z';
                 return value;
             } else if ( jsonType.elementType == 'time' ) {
-				// strip off the time-of-day and drop the rest...
+                // strip off the time-of-day and drop the rest...
                 hh = value.getHours();
                 min = value.getMinutes();
                 sec = value.getSeconds();
                 msec = value.getMilliseconds();
-				var n = value.getTimezoneOffset();
-				var sign = false;
-				if ( n < 0) {
-					n = -n;
-					sign = true;
-				}
-				zhh = Math.floor(n/60);
-				zmm = n - zhh*60;
+                var n = value.getTimezoneOffset();
+                var sign = false;
+                if ( n < 0) {
+                    n = -n;
+                    sign = true;
+                }
+                zhh = Math.floor(n/60);
+                zmm = n - zhh*60;
                 zsign = (sign ? '+' : '-');
                 value = that._padWithLeadingZeros(hh,2) + ':' +
                         that._padWithLeadingZeros(min,2) + ':' +
                         that._padWithLeadingZeros(sec,2) + '.' +
                         that._padWithLeadingZeros(msec,3) + zsign +
-						that._padWithLeadingZeros(zhh,2) +
-						that._padWithLeadingZeros(zmm,2);
+                        that._padWithLeadingZeros(zhh,2) +
+                        that._padWithLeadingZeros(zmm,2);
                 return value;
             } else if ( !jsonType.properties ) {
                 // this is an opaque BLOB w.r.t. database layer
@@ -353,7 +353,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
             that.submissionDb.transaction(transactionBody, function(error,a) {
                     if ( ctxt.sqlStatement != null ) {
                         ctxt.append("withDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
-						ctxt.append("withDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
+                        ctxt.append("withDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
                     }
                     ctxt.append("withDb.transaction.error", error.message);
                     ctxt.append("withDb.transaction.error.transactionBody", transactionBody.toString());
@@ -373,7 +373,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
             var settings = opendatakit.getDatabaseSettings();
             var database = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
               // create the database...
-			database.transaction(function(transaction) {
+            database.transaction(function(transaction) {
                     var td;
                     td = that._createTableStmt('column_definitions', 
                                                 that.columnDefinitionsPredefinedColumns,
@@ -392,7 +392,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                 }, function(error) {
                     if ( ctxt.sqlStatement != null ) {
                         ctxt.append("withDb.createDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
-						ctxt.append("withDb.createDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
+                        ctxt.append("withDb.createDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
                     }
                     ctxt.append("withDb.createDb.transaction.error", error.message);
                     ctxt.append("withDb.createDb.transaction.error.transactionBody", "initializing database tables");
@@ -402,11 +402,11 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
                     // DB is created -- record the submissionDb and initiate the transaction...
                     that.submissionDb = database;
                     ctxt.append("withDb.createDb.transacton.success");
-					ctxt.sqlStatement = null;
+                    ctxt.sqlStatement = null;
                     that.submissionDb.transaction(transactionBody, function(error) {
                                 if ( ctxt.sqlStatement != null ) {
                                     ctxt.append("withDb.afterCreateDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
-									ctxt.append("withDb.afterCreateDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
+                                    ctxt.append("withDb.afterCreateDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
                                 }
                                 ctxt.append("withDb.afterCreateDb.transaction.error", error.message);
                                 ctxt.append("withDb.afterCreateDb.transaction.error.transactionBody", transactionBody.toString());
@@ -1247,7 +1247,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
         mdl.metadata = {};
         mdl.data = {};
         mdl.loaded = false;
-        opendatakit.setCurrentInstanceId(null);
+        opendatakit.clearCurrentInstanceId();
         ctxt.success();
     } else {
         ctxt.append('initializeInstance.access', instanceId);
@@ -1514,11 +1514,11 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 is_persisted : (jsonDefn.isPersisted ? 1 : 0),
                 joins: null
             } );
-			
-			// displayed columns within Tables, at least for now, are the persisted columns only.
-			if ( jsonDefn.isPersisted ) {
-				displayColumnOrder.push(dbColumnName);
-			}
+            
+            // displayed columns within Tables, at least for now, are the persisted columns only.
+            if ( jsonDefn.isPersisted ) {
+                displayColumnOrder.push(dbColumnName);
+            }
 
             fullDef.key_value_store_active.push( {
                 table_id: tlo.table_id,

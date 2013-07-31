@@ -5,7 +5,7 @@
  3 public APIs:
  
  initialize(controller, builder) -- initialize to avoid circular load dependency.
- hashChangeHandler(evt) -- handle 'hashChange' events.
+ hashChangeHandler(newHash,ctxt) -- handle 'hashChange' events.
  parseParameters() -- interpret the window.location.hash parameters on start-up.
  
 */
@@ -37,20 +37,27 @@ return {
         if ( key == 'instanceId' ) {
             return;
         }
-        if ( key == 'pageRef' ) {
+        if ( key == 'screenPath' ) {
+            return;
+        }
+        if ( key == 'refId' ) {
             return;
         }
         instanceMetadataKeyValueMap[key] = value;
     },
-    _prepAndSwitchUI:function( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap ) {
+    _prepAndSwitchUI:function( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap ) {
         var that = this;
         // ensure initial empty record is written
         // cacheAllData
         database.initializeInstance($.extend({},ctxt,{success:function() {
-			// fire the controller to render the first page.
-			ctxt.append("parsequery._effectChange.gotoRef." + (sameInstance ? "sameForm" : "differentForm"),
-						"gotoRef("+pageRef+") ms: " + (+new Date()));
-			that.controller.gotoRef(ctxt, pageRef);
+            // fire the controller to render the first page.
+            ctxt.append("parsequery._effectChange.gotoScreenPath." + (sameInstance ? "sameForm" : "differentForm"),
+                        "gotoScreenPath("+screenPath+") refId: " + refId + " ms: " + (+new Date()));
+            // set the refId. From this point onward,
+            // changes will be applied within the shim
+            opendatakit.setRefId(refId);
+            opendatakit.setCurrentInstanceId(instanceId);
+            that.controller.gotoScreenPath(ctxt, screenPath);
         }}), instanceId, instanceMetadataKeyValueMap);
     },
     /**
@@ -73,7 +80,7 @@ return {
      *
      * Immediate: _effectChange
     */
-    _parseQueryParameterContinuation:function(ctxt, formDef, formPath, instanceId, pageRef, instanceMetadataKeyValueMap) {
+    _parseQueryParameterContinuation:function(ctxt, formDef, formPath, instanceId, screenPath, refId, instanceMetadataKeyValueMap) {
         var that = this;
         
         // IMPLEMENTATION NOTE: formDef is only used in the case where sameForm is false.
@@ -93,24 +100,24 @@ return {
             return;
         }
         
-		var fidObject = opendatakit.getSettingObject(formDef, 'form_id');
-		if ( fidObject == null || !('value' in fidObject) ) {
+        var fidObject = opendatakit.getSettingObject(formDef, 'form_id');
+        if ( fidObject == null || !('value' in fidObject) ) {
             ctxt.append("parsequery._effectChange.missingFormId");
             alert("Unexpected missing value for form_id setting when changing forms");
             ctxt.failure({message: "Form definition has no form_id."});
             return;
-		}
-		var form_id = fidObject.value;
-		
+        }
+        var form_id = fidObject.value;
+        
         // defined by form definition's settings:
-		var tidObject = opendatakit.getSettingObject(formDef, 'table_id');
+        var tidObject = opendatakit.getSettingObject(formDef, 'table_id');
         var table_id;
         if ( tidObject == null || !('value' in tidObject) ) {
             // fallback if there is no table_id defined
             table_id = form_id;
         } else {
-			table_id = tidObject.value;
-		}
+            table_id = tidObject.value;
+        }
         
         if ( table_id == null ) {
             alert("no table_id specified in Form Definition!");
@@ -127,13 +134,10 @@ return {
         var sameTable = (opendatakit.getCurrentTableId() == table_id);
         var sameForm = sameTable && (opendatakit.getSettingValue('form_id') == form_id) && (opendatakit.getCurrentFormPath() == formPath);
         var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() == instanceId) && (instanceId != null);
-        var qpl = opendatakit.getHashString(formPath, instanceId, pageRef);
+        var qpl = opendatakit.getHashString(formPath, instanceId, screenPath);
 
         if ( !sameTable ) {
-            opendatakit.setCurrentTableId(null);
-            opendatakit.setCurrentFormPath(null);
-            opendatakit.setCurrentInstanceId(null);
-            shim.setPageRef(null);
+            opendatakit.clearLocalInfo("table"); // tableId, formPath, instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
                 // build table for table_id...
@@ -143,13 +147,12 @@ return {
                         that.builder.buildSurvey(function() {
                                 // currentInstanceId == null
                                 // TODO: load instance...
-                                that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+                                that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
                             });
                     }}), formDef, table_id, formPath);
             }}), sameForm);
         } else if (!sameForm) {
-            opendatakit.setCurrentFormPath(null);
-            opendatakit.setCurrentInstanceId(null);
+            opendatakit.clearLocalInfo("form"); // formPath, instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
                 // preserve values from the Tables metadata but override form info...
@@ -165,11 +168,11 @@ return {
                 that.builder.buildSurvey(function() {
                             // currentInstanceId == null
                             // TODO: load instance...
-                            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+                            that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
                 });
             }}), sameForm);
         } else  if (!sameInstance) {
-            opendatakit.setCurrentInstanceId(null);
+            opendatakit.clearLocalInfo("instance"); // instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
                 // currentInstanceId == null
@@ -178,16 +181,17 @@ return {
 
                 // currentInstanceId == null
                 // TODO: load instance...
-                that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+                that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
             }}), sameForm);
         } else {
+            opendatakit.clearLocalInfo("screen"); // screenPath, refId
             // currentInstanceId == valid value
             // data table already exists (since table_id is unchanged)
             // form definitions already processed (since formPath and form_id unchanged)
             // same instance -- so just render the UI...
             
-            // TODO: change pageRef (presumably)
-            that._prepAndSwitchUI( ctxt, qpl, instanceId, pageRef, sameInstance, instanceMetadataKeyValueMap, formDef );
+            // TODO: change screenPath (presumably)
+            that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
         }
     },
     /**
@@ -201,7 +205,8 @@ return {
         
         var formPath = null;
         var instanceId = null;
-        var pageRef = null;
+        var screenPath = null;
+        var refId = null;
         
         var instanceMetadataKeyValueMap = {};
         if (window.location.hash) {
@@ -216,8 +221,10 @@ return {
                     formPath = value;
                 } else if ( key == 'instanceId' ) {
                     instanceId = value;
-                } else if ( key == 'pageRef' ) {
-                    pageRef = value;
+                } else if ( key == 'screenPath' ) {
+                    screenPath = value;
+                } else if ( key == 'refId' ) {
+                    refId = value;
                 } else {
                     that._parseQueryHelper(instanceMetadataKeyValueMap, key, value);
                 }
@@ -232,7 +239,18 @@ return {
             // do the prompts and widget warmup form...
             formPath = "";
             instanceId = null;
-            pageRef = null;
+            screenPath = null;
+        }
+        
+        if ( refId == null ) {
+            ctxt.append('parseParameters.shim.refId is null -- generating unique value');
+            refId = opendatakit.genUUID();
+            // This may fail when embedded
+            try {
+                shim.refId = refId;
+            } catch(e) {
+                ctxt.append('parseParameters.shim.refId assignment failed');
+            }
         }
         
         var formDef = opendatakit.getCurrentFormDef();
@@ -245,12 +263,12 @@ return {
         if ( !sameForm ) {
             // force a 'Please wait...' to display before we try to read the formDef file...
             that.controller.reset($.extend({},ctxt, {success:function() {
-                that._parseFormDefFile(ctxt, formPath, instanceId, pageRef, instanceMetadataKeyValueMap, filename);
+                that._parseFormDefFile(ctxt, formPath, instanceId, screenPath, refId, instanceMetadataKeyValueMap, filename);
             }}), false );
         } else {
             try {
                 that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
-                                        instanceId, pageRef, instanceMetadataKeyValueMap);
+                                        instanceId, screenPath, refId, instanceMetadataKeyValueMap);
             } catch (ex) {
                 console.error('parsequery.parseParameters.continuationException' + String(ex));
                 ctxt.append('parsequery.parseParameters.continuationException',  'unknown error: ' + ex);
@@ -261,7 +279,7 @@ return {
     /**
      * What actually reads in and loads the formDef file (and then parses the query parameters against it).
      */
-    _parseFormDefFile: function(ctxt, formPath, instanceId, pageRef, instanceMetadataKeyValueMap, filename) {
+    _parseFormDefFile: function(ctxt, formPath, instanceId, screenPath, refId, instanceMetadataKeyValueMap, filename) {
         var that = this;
         requirejs(['text!' + filename], 
             function(formDefTxt) {
@@ -280,7 +298,7 @@ return {
                     }
                     try {
                         that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
-                                                instanceId, pageRef, instanceMetadataKeyValueMap);
+                                                instanceId, screenPath, refId, instanceMetadataKeyValueMap);
                     } catch (ex) {
                         console.error('parsequery.parseParameters.requirejs.continuationException' + String(ex));
                         ctxt.append('parsequery.parseParameters.requirejs.continuationException',  'formDef interpetation or database setup error: ' + ex);
@@ -304,86 +322,52 @@ return {
      *
      *    instanceId=unique id for this filled-in form instance. May be omitted.
      *
-     *    pathRef=concatenation of screenIdx (or name) and other data used
-     *            when rendering a screen. If omitted, go to initial screen.
+     *    screenPath=slash-delimited concatenation of sectionName/screenIdx.
+     *             If omitted, go to initial screen.
      */
-    hashChangeHandler:function(urlHash, context) {
+    hashChangeHandler:function(urlHash, ctxtIn) {
         var that = this;
         var qpl;
+        ctxtIn.append('parsequery.hashChangeHandler');
+
+        var hash = urlHash || window.location.hash;
+        if ( hash == '#' ) {
+            // this is bogus transition due to jquery mobile widgets
+            ctxtIn.append('parsequery.hashChangeHandler.emptyHash');
+            alert('Hash is invalid!');
+            qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.getCurrentScreenPath());
+            ctxtIn.append('parsequery.hashChangeHandler.emptyHash.reset', qpl);
+            window.location.hash = qpl;
+            ctxtIn.failure({message: "Internal error: invalid hash (restoring)"});
+            return false;
+        }
         
-        var ctxt = $.extend({}, context, {success: function() {
-            context.success();
+        // update the location
+        window.location.hash = hash;
+        
+        var ctxt = $.extend({}, ctxtIn, {success: function() {
+            ctxtIn.success();
             // and flush any pending doAction callback
             landing.setController(that.controller);
           }, failure: function(m) {
-            window.location.hash = "#formPath=";
-            context.failure(m);
+            ctxtIn.append('parsequery.hashChangeHandler unable to transition to ' + hash, m);
+            if ( hash == "#formPath=" ) {
+                ctxtIn.failure(m);
+            } else {
+                that.hashChangeHandler("#formPath=", ctxtIn);
+            }
           }});
 
-        ctxt.append('parsequery.hashChangeHandler');
-        
-
-        if ( window.location.hash == '#' ) {
-            // this is bogus transition due to jquery mobile widgets
-            ctxt.append('parsequery.hashChangeHandler.emptyHash');
-            alert('Hash is invalid!');
-            qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.getCurrentPageRef());
-            ctxt.append('parsequery.hashChangeHandler.emptyHash.reset', qpl);
-            window.location.hash = qpl;
-            ctxt.failure({message: "Internal error: invalid hash (restoring)"});
-            return false;
-        }
-
-        var hash = urlHash || window.location.hash;
-        var params = hash.slice(1).split("&");
-        var formPath = null;
-        var instanceId = null;
-        var pageRef = null;
-        for (var i = 0; i < params.length; i++)
-        {
-            var tmp = params[i].split("=");
-            var key = tmp[0];
-            var value = unescape(tmp[1]);
-            if ( key == 'formPath' ) {
-                formPath = value;
-            } else if ( key == 'instanceId' ) {
-                instanceId = value;
-            } else if ( key == 'pageRef' ) {
-                pageRef = value;
-            }
-        }
-        
-        if ( formPath != opendatakit.getCurrentFormPath() || instanceId != opendatakit.getCurrentInstanceId() ) {
-            // this should trigger a hash-change action
-            ctxt.append('parsequery.hashChangeHandler', "window.location.hash="+window.location.hash);
-            that.parseParameters($.extend({},ctxt,{success:function() {
-					// and update the hash to refer to this page...
-					var pageRef = controller.getCurrentPageRef();
-					var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), pageRef);
-					if ( newhash != window.location.hash ) {
-						window.location.hash = newhash;
-					}
-					ctxt.success();
-			}}));
-        } else if ( pageRef != null && pageRef != "") {
-            shim.setPageRef(pageRef);
-            ctxt.append('parsequery.hashChangeHandler.gotoRef', "window.location.hash="+window.location.hash);
-            that.controller.gotoRef($.extend({},ctxt,{success:function() {
-					// and update the hash to refer to this page...
-					var pageRef = controller.getCurrentPageRef();
-					var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), pageRef);
-					if ( newhash != window.location.hash ) {
-						window.location.hash = newhash;
-					}
-					ctxt.success();
-			}}), pageRef);
-        } else {
-            ctxt.append('parsequery.hashChangeHandler.noPageRef.reset');
-            qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.getCurrentPageRef());
-            window.location.hash = qpl;
-            ctxt.failure({message: "Internal error: invalid hash (restoring)"});
-        }
-        return false;
+        ctxt.append('parsequery.hashChangeHandler', "window.location.hash="+window.location.hash);
+        that.parseParameters($.extend({},ctxt,{success:function() {
+                // and update the hash to refer to this page...
+                var screenPath = controller.getCurrentScreenPath();
+                var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), screenPath);
+                if ( newhash != window.location.hash ) {
+                    window.location.hash = newhash;
+                }
+                ctxt.success();
+        }}));
     }
 };
 });

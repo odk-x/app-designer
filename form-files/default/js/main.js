@@ -101,11 +101,11 @@ requirejs.config({
 
 requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                         'jqmobile', 'builder', 'controller',
-						'screens',
+                        'screens',
                         'prompts'/* mix-in additional prompts and support libs here */], 
         function($, mdl,opendatakit,database,parsequery,m,builder,controller) {
             var ctxt = controller.newStartContext();
-
+            ctxt.append("main.parsequery.initialize");
             parsequery.initialize(controller,builder);
 
             //
@@ -118,28 +118,10 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                     if ( window.location.search != null && window.location.search.indexOf("purge") >= 0 ) {
                         ctxt.append('purging datastore');
                         database.purge($.extend({},ctxt,{success:function() {
-                                parsequery.parseParameters($.extend({},ctxt,{success:function() {
-									// and update the hash to refer to this page...
-									var pageRef = controller.getCurrentPageRef();
-									var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), pageRef);
-									if ( newhash != window.location.hash ) {
-                                        controller.changeUrlHash(newhash, ctxt);
-									} else {
-									   ctxt.success();
-                                    }
-								}}));
+                                parsequery.hashChangeHandler(null, ctxt);
                             }}));
                     } else {
-                        parsequery.parseParameters($.extend({},ctxt,{success:function() {
-							// and update the hash to refer to this page...
-							var pageRef = controller.getCurrentPageRef();
-							var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), pageRef);
-							if ( newhash != window.location.hash ) {
-								controller.changeUrlHash(newhash, ctxt);
-							} else {
-							    ctxt.success();
-                            }
-						}}));
+                        parsequery.hashChangeHandler(null, ctxt);
                     }
                 } else {
                     ctxt.append('startup.delay');

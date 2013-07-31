@@ -8,7 +8,7 @@
  */
 define(['mdl'],function(mdl) {
 return {
-	initialPageRef: "initial/0",
+    initialScreenPath: "initial/0",
     saved_complete: 'COMPLETE',
     saved_incomplete: 'INCOMPLETE',
     baseDir: '',
@@ -54,34 +54,35 @@ return {
         return id;
     },
     
-    getHashString:function(formPath, instanceId, pageRef) {
+    getHashString:function(formPath, instanceId, screenPath) {
+        var refId = this.getRefId();
         if ( formPath == null ) {
             formPath = shim.getBaseUrl() + "/";
-            return '#formPath=' + escape(formPath);
         }
         var qpl =
             '#formPath=' + escape(formPath) +
             ((instanceId == null) ? '' : ('&instanceId=' + escape(instanceId))) +
-            '&pageRef=' + escape((pageRef == null) ? this.initialPageRef : pageRef);
+            '&screenPath=' + escape((screenPath == null) ? this.initialScreenPath : screenPath) +
+            ((refId == null) ? '' : ('&refId=' + escape(refId)));
         return qpl;
     },
 
-	setCurrentFormDef:function(formDef) {
-		mdl.formDef = formDef;
-	},
-	
-	getCurrentFormDef:function() {
-		return mdl.formDef;
-	},
-	
-	getQueriesDefinition: function(query_name) {
-		return mdl.formDef.logic_flow.parsed_queries[query_name];
-	},
-	
-	getChoicesDefinition: function(choice_list_name) {
-		return mdl.formDef.logic_flow.choices[choice_list_name];
-	},
-	
+    setCurrentFormDef:function(formDef) {
+        mdl.formDef = formDef;
+    },
+    
+    getCurrentFormDef:function() {
+        return mdl.formDef;
+    },
+    
+    getQueriesDefinition: function(query_name) {
+        return mdl.formDef.logic_flow.parsed_queries[query_name];
+    },
+    
+    getChoicesDefinition: function(choice_list_name) {
+        return mdl.formDef.logic_flow.choices[choice_list_name];
+    },
+    
     setCurrentFormPath:function(formPath) {
         mdl.formPath = formPath;
     },
@@ -90,11 +91,42 @@ return {
         return mdl.formPath;
     },
     
+    setRefId:function(refId) {
+        mdl.ref_id = refId;
+    },
+    
+    getRefId:function() {
+        return mdl.ref_id;
+    },
+    
+    clearLocalInfo:function(type) {
+        // wipe the ref_id --
+        // this prevents saves into the shim from succeeding...
+        mdl.ref_id = this.genUUID();
+        if ( type == "table" ) {
+            mdl.table_id = null;
+            mdl.formPath = null;
+            mdl.instanceId = null;
+        } else if ( type == "form" ) {
+            mdl.formPath = null;
+            mdl.instanceId = null;
+        } else if ( type == "instance" ) {
+            mdl.instanceId = null;
+        } // screen -- just wipe the ref_id
+    },
+    
+    clearCurrentInstanceId:function() {
+        mdl.instanceId = null;
+        // Update container so that it can save media and auxillary data
+        // under different directories...
+        shim.clearInstanceId(this.getRefId());
+    },
+    
     setCurrentInstanceId:function(instanceId) {
         mdl.instanceId = instanceId;
-		// Update container so that it can save media and auxillary data
-		// under different directories...
-		shim.setInstanceId(instanceId);
+        // Update container so that it can save media and auxillary data
+        // under different directories...
+        shim.setInstanceId( this.getRefId(), instanceId);
     },
     
     getCurrentInstanceId:function() {
@@ -109,25 +141,25 @@ return {
         return mdl.table_id;
     },
     
-	getSectionTitle:function(formDef, sectionName) {
-		var ref = this.getSettingObject(formDef, sectionName);
-		if ( ref == null ) {
-			ref = this.getSettingObject(formDef, 'survey'); // fallback
-		}
-		if ( ref == null || !("display" in ref) ) {
-			return "<no title>";
-		} else {
-			var display = ref.display;
-			if ( "title" in display ) {
-				return display.title;
-			} else {
-				return "<no title>";
-			}
-		}
-	},
-	getCurrentSectionTitle:function(sectionName) {
-		return this.getSectionTitle(this.getCurrentFormDef(),sectionName);
-	},
+    getSectionTitle:function(formDef, sectionName) {
+        var ref = this.getSettingObject(formDef, sectionName);
+        if ( ref == null ) {
+            ref = this.getSettingObject(formDef, 'survey'); // fallback
+        }
+        if ( ref == null || !("display" in ref) ) {
+            return "<no title>";
+        } else {
+            var display = ref.display;
+            if ( "title" in display ) {
+                return display.title;
+            } else {
+                return "<no title>";
+            }
+        }
+    },
+    getCurrentSectionTitle:function(sectionName) {
+        return this.getSectionTitle(this.getCurrentFormDef(),sectionName);
+    },
     /**
      * immediate return: undef
      */
@@ -141,7 +173,7 @@ return {
         
         // formPath is assumed to be unchanged...
         // Do not set instanceId here -- do that in the hashChange handler...
-        var qpl = this.getHashString(this.getCurrentFormPath(), id, this.initialPageRef);
+        var qpl = this.getHashString(this.getCurrentFormPath(), id, this.initialScreenPath);
         ctxt.success(qpl);
     },
 
@@ -166,12 +198,13 @@ return {
     
     /**
      * Retrieve the value of a setting from the form definition file.
-	 * NOTE: in Survey XLSX syntax, the settings are row-by-row, like choices.
-	 * The returned object is therefore a map of keys to values for that row.
+     * NOTE: in Survey XLSX syntax, the settings are row-by-row, like choices.
+     * The returned object is therefore a map of keys to values for that row.
      * 
      * Immediate.
       */
     getSettingObject:function(formDef, key) {
+        if (formDef == null) return null;
         return formDef.logic_flow.settings[key];
     },
     
@@ -180,8 +213,8 @@ return {
      */
     getSettingValue:function(key) {
         var obj = this.getSettingObject(this.getCurrentFormDef(), key);
-		if ( obj == null ) return null;
-		return obj.value;
+        if ( obj == null ) return null;
+        return obj.value;
     },
     /*
         Form locales are specified by the translations available on the 
@@ -195,9 +228,9 @@ return {
     */
     getFormLocales:function(formDef) {
         var locales = [];
-		if ( formDef == null ) {
-			return [ 'default' ];
-		}
+        if ( formDef == null ) {
+            return [ 'default' ];
+        }
         // assume all the locales are specified by the title...
         var form_title = this.getSectionTitle(formDef, 'survey');
         if ( _.isUndefined(form_title) || _.isString(form_title) ) {
@@ -206,15 +239,15 @@ return {
         }
         // we have localization -- find all the tags
         for ( var f in form_title ) {
-			// get the setting object for the tag (e.g., for display.text for that language)
-            var translations = this.getSettingObject(formDef, f );	
+            // get the setting object for the tag (e.g., for display.text for that language)
+            var translations = this.getSettingObject(formDef, f );    
             if ( translations == null || translations.display == null ) {
-				locales.push( { display: { text: f }, name: f } );
-			} else if ( translations.display.text == null ) {
+                locales.push( { display: { text: f }, name: f } );
+            } else if ( translations.display.text == null ) {
                 locales.push( { display: { text: f }, name: f } );
             } else {
-				locales.push( { display: translations.display, name: f } );
-			}
+                locales.push( { display: translations.display, name: f } );
+            }
         }
         return locales;
     },
@@ -227,10 +260,10 @@ return {
         form_title translations, then 'default' is returned.
      */
     getDefaultFormLocale:function(formDef) {
-		var localeObject = this.getSettingObject(formDef, 'default_locale');
+        var localeObject = this.getSettingObject(formDef, 'default_locale');
         if ( localeObject != null && localeObject.value != null ) {
-			return localeObject.value;
-		}
+            return localeObject.value;
+        }
         var locales = this.getFormLocales(formDef);
         if ( locales.length > 0 ) {
             return locales[0].name;

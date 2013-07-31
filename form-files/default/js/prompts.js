@@ -8,127 +8,127 @@ function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  pro
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
-	// type should match the 'xxxx' of the promptTypes.xxxx assignment
+    // type should match the 'xxxx' of the promptTypes.xxxx assignment
     type: "base",
     database: database,
     // user-defined inputAttributes overrides baseInputAttributes
     baseInputAttributes: {},
-	// the handlebars template to render
-	template: null,
+    // the handlebars template to render
+    template: null,
     //renderContext is a dynamic object to be passed into the render function.
     renderContext: {},
-	/**
-	 * User-overridable data and methods. These can be overridden in 
-	 * the Excel worksheet.
-	 */
+    /**
+     * User-overridable data and methods. These can be overridden in 
+     * the Excel worksheet.
+     */
     constraint_message: "Constraint violated.",
     invalid_value_message: "Invalid value.",
     required_message: "Required value not provided.",
-	// the path to the handlebars template that is compiled and stored in 'template'
-	templatePath: null,
+    // the path to the handlebars template that is compiled and stored in 'template'
+    templatePath: null,
     // Template context is a user-specified object that overrides the render context.
     templateContext: {},
-	// inputAttributes are a user-specified object that overrides baseInputAttributes.
+    // inputAttributes are a user-specified object that overrides baseInputAttributes.
     inputAttributes: {},
     /**
      * afterInitialize is user defined.
-	 * Called during the building of the survey, before any 
-	 * instance data has been fetched or templates loaded.
+     * Called during the building of the survey, before any 
+     * instance data has been fetched or templates loaded.
      **/
     afterInitialize: function() {
-	},
-	/**
-	 * default is a function field in the worksheet.
-	 * Called during rendering if the prompt has backing
-	 * storage (a 'name') and the value of that storage is null.
-	 */
-	// default: function() { return value; } // e.g., calculates.incItem() in XLSX
-	
-	reRender: function(ctxt) {
-		this._screen.reRender(ctxt);
-	},
-	/**
-	 * Generic methods -- probably should not be overridden
-	 */
-	
-	/**
-	 * initialize
-	 * called via Backbone when a new instance of this
-	 * prototype is constructed.
-	 *
-	 * User-extensible via overriding of the afterInitialize() method.
-	 */
+    },
+    /**
+     * default is a function field in the worksheet.
+     * Called during rendering if the prompt has backing
+     * storage (a 'name') and the value of that storage is null.
+     */
+    // default: function() { return value; } // e.g., calculates.incItem() in XLSX
+    
+    reRender: function(ctxt) {
+        this._screen.reRender(ctxt);
+    },
+    /**
+     * Generic methods -- probably should not be overridden
+     */
+    
+    /**
+     * initialize
+     * called via Backbone when a new instance of this
+     * prototype is constructed.
+     *
+     * User-extensible via overriding of the afterInitialize() method.
+     */
     initialize: function(args) {
-		$.extend(this, args);
+        $.extend(this, args);
         this.afterInitialize();
     },
-	/**
-	 * getPromptPath
-	 * retrieve the path to this prompt. This is used ONLY by the 
-	 * shim.doAction(...) method and the corresponding 
-	 * landing.opendatakitCallback(...) method to ensure that
-	 * the results of an intent execution (doAction) are routed
-	 * back to the prompt that initiated that action.
-	 */
+    /**
+     * getPromptPath
+     * retrieve the path to this prompt. This is used ONLY by the 
+     * shim.doAction(...) method and the corresponding 
+     * landing.opendatakitCallback(...) method to ensure that
+     * the results of an intent execution (doAction) are routed
+     * back to the prompt that initiated that action.
+     */
     getPromptPath: function() {
         return this._section_name + '/' + this.promptIdx;
     },
-	getPromptId: function() {
-		return 'i' + this.getPromptPath().replace(/[^a-zA-Z0-9]/,'');
-	},
-	/**
-	 * TODO: move this to screen.
-	 * TODO: move this to screen.
-	 * TODO: move this to screen.
-	 * TODO: move this to screen.
-	 * TODO: move this to screen.
-	 * TODO: move this to screen.
-	 * TODO: move this to screen.
-	 * TODO: move this to screen.
-	 * onActivate
-	 * Called before a prompt is rendered.
-	 */
+    getPromptId: function() {
+        return 'i' + this.getPromptPath().replace(/[^a-zA-Z0-9]/,'');
+    },
+    /**
+     * TODO: move this to screen.
+     * TODO: move this to screen.
+     * TODO: move this to screen.
+     * TODO: move this to screen.
+     * TODO: move this to screen.
+     * TODO: move this to screen.
+     * TODO: move this to screen.
+     * TODO: move this to screen.
+     * onActivate
+     * Called before a prompt is rendered.
+     */
     onActivate: function(ctxt) {
         var that = this;
         this.preActivate($.extend({}, ctxt, {
             success: function() {
-				that.whenTemplateIsReady($.extend({}, ctxt, {
-					success: function() {
-						that.initializeRenderContext($.extend({}, ctxt, {
-							success: function() {
-								that.postActivate(ctxt);
-							}}));
-					}}));
+                that.whenTemplateIsReady($.extend({}, ctxt, {
+                    success: function() {
+                        that.initializeRenderContext($.extend({}, ctxt, {
+                            success: function() {
+                                that.postActivate(ctxt);
+                            }}));
+                    }}));
             }}));
     },
-	/**
-	 * preActivate
-	 * If there is a default method defined (e.g., XLSX 
-	 * defined a default column with a calculate...() expression,
-	 * then if the prompt has backing store (a 'name' field) and
-	 * if the backing store value is null, set it to the value 
-	 * returned by the default() method before continuing with
-	 * prompt activation.
-	 */
+    /**
+     * preActivate
+     * If there is a default method defined (e.g., XLSX 
+     * defined a default column with a calculate...() expression,
+     * then if the prompt has backing store (a 'name' field) and
+     * if the backing store value is null, set it to the value 
+     * returned by the default() method before continuing with
+     * prompt activation.
+     */
     preActivate: function(ctxt) {
         var that = this;
-		if((that.name != null && 
-			'default' in that) && 
-			that.getValue() == null) {
-			var value = that['default']();
-			ctxt.append('preActivate','assigning default value');
-			that.setValue(ctxt, value);
-		} else {
-			ctxt.success();
-		}
+        if((that.name != null && 
+            'default' in that) && 
+            that.getValue() == null) {
+            var value = that['default']();
+            ctxt.append('preActivate','assigning default value');
+            that.setValue(ctxt, value);
+        } else {
+            ctxt.success();
+        }
     },
-	/**
-	 * whenTemplateIsReady
-	 * Ensure that the template is loaded and compiled before 
-	 * proceeding (via ctxt.success()).
-	 * 
-	 * Part of the preliminaries to rendering a page.
-	 */
+    /**
+     * whenTemplateIsReady
+     * Ensure that the template is loaded and compiled before 
+     * proceeding (via ctxt.success()).
+     * 
+     * Part of the preliminaries to rendering a page.
+     */
     whenTemplateIsReady: function(ctxt){
         var that = this;
         if(this.template) {
@@ -154,16 +154,16 @@ promptTypes.base = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-	/**
-	 * initializeRenderContext
-	 * construct the renderContext for this prompt. This is an entirely new
-	 * object every time the screen is redrawn.
-	 */
+    /**
+     * initializeRenderContext
+     * construct the renderContext for this prompt. This is an entirely new
+     * object every time the screen is redrawn.
+     */
     initializeRenderContext: function(ctxt) {
         //Object.create is used because we don't want to modify the class's render context.
         this.renderContext = Object.create(this.renderContext);
         this.renderContext.display = this.display;
-		this.renderContext.promptId = this.getPromptId();
+        this.renderContext.promptId = this.getPromptId();
         this.renderContext.name = this.name;
         this.renderContext.disabled = this.disabled;
         this.renderContext.image = this.image;
@@ -180,12 +180,12 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.form_version = opendatakit.getSettingValue('form_version');
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
-		ctxt.success();
+        ctxt.success();
     },
-	/**
-	 * postActivate
-	 * User-overridable action to perform additional actions prior to the call to render.
-	 */
+    /**
+     * postActivate
+     * User-overridable action to perform additional actions prior to the call to render.
+     */
     postActivate: function(ctxt){
         ctxt.success();
     },
@@ -210,7 +210,7 @@ promptTypes.base = Backbone.View.extend({
             console.error(that);
             alert("Error in template.");
         }
-		return;
+        return;
     },
     /**
      * baseValidate isn't meant to be overidden or called externally.
@@ -279,7 +279,7 @@ promptTypes.base = Backbone.View.extend({
     },
     getValue: function() {
         if (!this.name) {
-            console.error("prompts."+that.type+
+            console.error("prompts."+this.type+
                 ".getValue: Cannot get value of prompt with no name. px: " + this.promptIdx);
             throw new Error("Cannot get value of prompt with no name.");
         }
@@ -433,7 +433,7 @@ promptTypes.instances = promptTypes.base.extend({
     },
     postActivate: function(ctxt) {
         var that = this;
-        ctxt.append("prompts." + this.type + ".postActivate", "px: " + this.promptIdx);
+        ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
         database.get_all_instances($.extend({},ctxt,{
             success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
@@ -447,7 +447,7 @@ promptTypes.instances = promptTypes.base.extend({
                 });
                 
                 $.extend(that.renderContext, {
-                    form_title: opendatakit.getCurrentSectionTitle(this._section_name),
+                    form_title: opendatakit.getCurrentSectionTitle(that._section_name),
                     headerImg: requirejs.toUrl('img/form_logo.png')
                 });
                 ctxt.success({
@@ -465,9 +465,9 @@ promptTypes.instances = promptTypes.base.extend({
       controller.openInstance(evt);
     },
     deleteInstance: function(evt){
-        var ctxt = controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".deleteInstance", "px: " + this.promptIdx);
         var that = this;
+        var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
         database.delete_all($.extend({}, ctxt, {
             success: function() {
                 that.onActivate($.extend({}, ctxt, {
@@ -503,8 +503,8 @@ promptTypes.repeat = promptTypes.base.extend({
     },
     postActivate: function(ctxt) {
         var that = this;
-        var subsurveyType = this.param;
-        ctxt.append("prompts." + this.type + ".postActivate", "px: " + this.promptIdx);
+        var subsurveyType = that.param;
+        ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
         database.get_all_instances($.extend({},ctxt,{
             success:function(instanceList) {
                 that.renderContext.instances = instanceList;
@@ -681,12 +681,12 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     },
     postActivate: function(ctxt) {
         var that = this;
-		var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-			ctxt.append("prompts." + that.type + ".postActivate." + outcome,
-						"px: " + that.promptIdx);
-			that.updateRenderValue(that.parseSaveValue(that.getValue()));
-			ctxt.success();
-		}});
+        var newctxt = $.extend({}, ctxt, {success: function(outcome) {
+            ctxt.append("prompts." + that.type + ".postActivate." + outcome,
+                        "px: " + that.promptIdx);
+            that.updateRenderValue(that.parseSaveValue(that.getValue()));
+            ctxt.success();
+        }});
         var populateChoicesViaQuery = function(query, newctxt){
             var queryUri = query.uri();
             if(queryUri.search('//') < 0){
@@ -706,7 +706,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 },
                 "error": function(e) {
                     newctxt.append("prompts." + this.type + ".postActivate.error", 
-								"px: " + this.promptIdx + " Error fetching choices");
+                                "px: " + this.promptIdx + " Error fetching choices");
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
                     //the form.
@@ -715,12 +715,12 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                     if(e.statusText) {
                         that.renderContext.passiveError += e.statusText;
                     }
-					// TODO: verify how this error should be handled...
-					newctxt.failure({message: "Error fetching choices via ajax."});
+                    // TODO: verify how this error should be handled...
+                    newctxt.failure({message: "Error fetching choices via ajax."});
                 }
             };
  
-			//TODO: It might also be desireable to make it so queries can refrence
+            //TODO: It might also be desireable to make it so queries can refrence
             //datasheets in the XLSX file.
             var queryUriExt = queryUri.split('.').pop();
             if(queryUriExt === 'csv') {
@@ -730,19 +730,19 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                         that.renderContext.choices = query.callback($.csv.toObjects(result));
                         newctxt.success("success");
                     },
-					function (err) {
-						newctxt.append("promptType.select.requirejs.failure", err.toString());
-						newctxt.failure({message: "Error fetching choices from csv data."});
-					});
+                    function (err) {
+                        newctxt.append("promptType.select.requirejs.failure", err.toString());
+                        newctxt.failure({message: "Error fetching choices from csv data."});
+                    });
                 };
             }
             
             $.ajax(ajaxOptions);
-		};
-		
+        };
+        
         that.renderContext.passiveError = null;
-		var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-		var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
         if(queryDefn != null) {
             populateChoicesViaQuery(queryDefn, newctxt);
         } else if (choiceListDefn != null) {
@@ -872,7 +872,7 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
                 renderContext.invalid = true;
                 that.insideMutex = false;
                 that.debouncedRender({success: function() { ctxt.failure(m);},
-					failure: function(j) { ctxt.failure(m);}});
+                    failure: function(j) { ctxt.failure(m);}});
             }
         }), (value.length === 0 ? null : value));
     },
@@ -998,17 +998,17 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 if ( rerender ) {
                     that.reRender(ctxt);
                 } else {
-					ctxt.success();
-				}
+                    ctxt.success();
+                }
             },
             failure: function(m) {
                 renderContext.invalid = true;
                 if ( rerender ) {
                     that.reRender({success: function() { ctxt.failure(m);},
-					failure: function(j) { ctxt.failure(m);}});
+                    failure: function(j) { ctxt.failure(m);}});
                 } else {
-					ctxt.failure(m);
-				}
+                    ctxt.failure(m);
+                }
             }
         }), value);
     },
@@ -1071,17 +1071,17 @@ promptTypes.time = promptTypes.datetime.extend({
                 if ( rerender ) {
                     that.reRender(ctxt);
                 } else {
-					ctxt.success();
-				}
+                    ctxt.success();
+                }
             },
             failure: function(m) {
                 renderContext.invalid = true;
                 if ( rerender ) {
                     that.reRender({success: function() { ctxt.failure(m);},
-					failure: function(j) { ctxt.failure(m);}});
+                    failure: function(j) { ctxt.failure(m);}});
                 } else {
-					ctxt.failure(m);
-				}
+                    ctxt.failure(m);
+                }
             }
         }), value);
     },
@@ -1134,7 +1134,7 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var outcome = shim.doAction(that.getPromptPath(), 'capture', that.captureAction, JSON.stringify({ newFile: "opendatakit-macro(newFile)" }));
+        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 'capture', that.captureAction, JSON.stringify({ newFile: "opendatakit-macro(newFile)" }));
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -1150,7 +1150,7 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var outcome = shim.doAction(that.getPromptPath(), 'choose', that.chooseAction,  JSON.stringify({ newFile: "opendatakit-macro(newFile)" }));
+        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 'choose', that.chooseAction,  JSON.stringify({ newFile: "opendatakit-macro(newFile)" }));
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -1189,7 +1189,7 @@ promptTypes.media = promptTypes.base.extend({
                                 that.enableButtons();
                                 that.updateRenderContext();
                                 that.reRender({success: function() { ctxt.failure(m);},
-									failure: function(j) { ctxt.failure(m);}});
+                                    failure: function(j) { ctxt.failure(m);}});
                             }}), that.name, { uri : uri, contentType: contentType } );
                     }
                 }
@@ -1202,7 +1202,7 @@ promptTypes.media = promptTypes.base.extend({
                 that.enableButtons();
                 that.updateRenderContext();
                 that.reRender({success: function() { ctxt.failure({message: "Action canceled."});},
-					failure: function(j) { ctxt.failure({message: "Action canceled."});}});
+                    failure: function(j) { ctxt.failure({message: "Action canceled."});}});
             }
         };
     },
@@ -1284,7 +1284,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
         });
         //We assume that the webkit could go away when an intent is launched,
         //so this prompt's "address" is passed along with the intent.
-        var outcome = shim.doAction(this.getPromptPath(), 'launch', this.intentString,
+        var outcome = shim.doAction( opendatakit.getRefId(), this.getPromptPath(), 'launch', this.intentString,
                             ((this.intentParameters == null) ? null : JSON.stringify(this.intentParameters)));
         ctxt.append(this.intentString, platInfo.container + " outcome is " + outcome);
         if (outcome && outcome === "OK") {
