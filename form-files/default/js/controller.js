@@ -19,30 +19,9 @@ window.controller = {
     getCurrentScreenPath: function() {
         return shim.getScreenPath(opendatakit.getRefId());
     },
-    // TODO: clean this up and push action into database?
-    assign: function( name, value, pendingChanges ) {
-        var justChange = {};
-        justChange[name] = {value: value, isInstanceMetadata: false };
-        pendingChanges[name] = {value: value, isInstanceMetadata: false };
-        // apply the change immediately...
-        var is = database._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
-                        mdl.dataTableModel, opendatakit.getCurrentInstanceId(), justChange);
-        var uf;
-        for (var f in is.updates) {
-            var uf = is.updates[f];
-            var de = mdl.dataTableModel[f];
-            if (de.isPersisted) {
-                var elementPath = de.elementPath || uf.elementPath;
-                if ( de.elementSet == 'instanceMetadata' ) {
-                    database._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
-                } else {
-                    database._reconstructElementPath(elementPath, de, uf.value, mdl.data );
-                }
-            }
-        }
-    },
-    applyChanges: function( pendingChanges, ctxt) {
-        database.putDataKeyValueMap(ctxt, pendingChanges );
+    // NOTE: this is only here to avoid having screen depend upon database.
+    commitChanges: function(ctxt) {
+        database.applyDeferredChanges(ctxt);
     },
     getOperationPath: function(ctxt, opPath) {
         
@@ -331,7 +310,7 @@ window.controller = {
                 case "assign":
                     // do an assignment statement.
                     // defer the database update until we reach a screen.
-                    that.assign( op.name, op.value(), ctxt.pendingChanges );
+					database.setValueDeferredChange(op.name, op._parsed_value());
                     that.getNextOperationPath($.extend({},ctxt,{success:function(path){
                             that.advanceToNextScreenHelper(ctxt, path);
                         }, failure:function(m) {
@@ -382,18 +361,8 @@ window.controller = {
                 case "validate":
                     that.getNextOperationPath($.extend({},ctxt,{
                         success:function(path){
-                            that.applyChanges( ctxt.pendingChanges, $.extend({},ctxt,{
+							database.applyDeferredChanges($.extend({},ctxt,{
                                 success:function() {
-                                    // clear any pendingChanges
-                                    var key;
-                                    var keys = [];
-                                    for ( key in ctxt.pendingChanges ) {
-                                        keys.push(key);
-                                    }
-                                    while ( keys.length != 0 ) {
-                                        key = keys.pop();
-                                        delete ctxt.pendingChanges[key];
-                                    }
                                     // push self for retry after validation failure...
                                     that.pushSectionStack(op._section_name + "/" + op.operationIdx);
                                     that.validateAllQuestions($.extend({},ctxt,{
@@ -447,9 +416,8 @@ window.controller = {
         var that = this;
         try {
             var newctxt = $.extend({},ctxt,{
-            pendingChanges: {},
             success:function(screen, options) {
-                that.applyChanges( this.pendingChanges, $.extend({},ctxt,{
+				database.applyDeferredChanges($.extend({},ctxt,{
                     success:function() {
                         ctxt.success(screen, options);
                     }, failure:function(m) {
@@ -833,9 +801,6 @@ window.controller = {
             }
         }), 'locale', locale);
     },
-    getFormLocales: function() {
-        return opendatakit.getFormLocalesValue();
-    },
     getSectionTitle: function() {
         var that = this;
         var opPath = that.getCurrentScreenPath();
@@ -917,7 +882,7 @@ window.controller = {
         var count = this.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
+        var ctxt = $.extend({}, this.baseContext, {seq: count, contextChain: []}, actionHandlers );
         ctxt.append('callback', detail);
         return ctxt;
     },
@@ -926,7 +891,7 @@ window.controller = {
         var count = this.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
+        var ctxt = $.extend({}, this.baseContext, {seq: count, contextChain: []}, actionHandlers );
         ctxt.append('fatal_error', detail);
         return ctxt;
     },
@@ -935,7 +900,7 @@ window.controller = {
         var count = this.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
+        var ctxt = $.extend({}, this.baseContext, {seq: count, contextChain: []}, actionHandlers );
         ctxt.append('startup', detail);
         return ctxt;
     },
@@ -960,7 +925,7 @@ window.controller = {
             detail += evtTarget.replace(/\s+/g, ' ').substring(0,80);
         }
         
-        var ctxt = $.extend({}, this.baseContext, {contextChain: []}, actionHandlers );
+        var ctxt = $.extend({}, this.baseContext, {seq: count, contextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
     },

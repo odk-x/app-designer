@@ -227,7 +227,7 @@ screenTypes.screen = Backbone.View.extend({
 		} else {
 			this._renderContext.display = this.display;
 		}
-        var locales = controller.getFormLocales();
+        var locales = opendatakit.getFormLocalesValue();
 		this._renderContext.disabled = this.disabled;
         this._renderContext.hide = this.hide;
 		this._renderContext.form_title = controller.getSectionTitle();
@@ -258,23 +258,27 @@ screenTypes.screen = Backbone.View.extend({
 		that.whenTemplateIsReady($.extend({}, ctxt, {
 			success:function() {
 				// determine the active prompts
-				ctxt.activePrompts = [];
-				that._operation._parsed_screen_block(controller, $.extend({}, ctxt, {
-				success:function() {
-					var sectionPrompts = controller.getCurrentSectionPrompts();
-					var ap = [];
-					var i;
-					for ( i = 0 ; i < ctxt.activePrompts.length ; ++i ) {
-						var prompt = sectionPrompts[ctxt.activePrompts[i]];
-						prompt._screen = that;
-						ap.push(sectionPrompts[ctxt.activePrompts[i]]);
-					}
-					that.activePrompts = ap;
-					_.each(that.activePrompts, function(prompt){
-						prompt._screen = that;
-					});
-					that.initializeRenderContext(ctxt);
-				}}));
+				var activePromptIndices = that._operation._parsed_screen_block();
+				var sectionPrompts = controller.getCurrentSectionPrompts();
+				var ap = [];
+				var i;
+				for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
+					var prompt = sectionPrompts[activePromptIndices[i]];
+					prompt._screen = that;
+					ap.push(sectionPrompts[activePromptIndices[i]]);
+				}
+				that.activePrompts = ap;
+				_.each(that.activePrompts, function(prompt){
+					prompt._screen = that;
+				});
+				// we now know what we are going to render.
+				// work with the controller to ensure that all
+				// intermediate state has been written to the 
+				// database before commencing the rendering
+				controller.commitChanges($.extend({},ctxt,
+					{success:function() {
+						that.initializeRenderContext(ctxt);
+					}}));
 			}}));
     },
 	postActivate: function(ctxt) {

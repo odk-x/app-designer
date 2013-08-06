@@ -118,10 +118,10 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                     if ( window.location.search != null && window.location.search.indexOf("purge") >= 0 ) {
                         ctxt.append('purging datastore');
                         database.purge($.extend({},ctxt,{success:function() {
-                                parsequery.hashChangeHandler(null, ctxt);
+                                parsequery.hashChangeHandler(window.location.hash, ctxt);
                             }}));
                     } else {
-                        parsequery.hashChangeHandler(null, ctxt);
+                        parsequery.hashChangeHandler(window.location.hash, ctxt);
                     }
                 } else {
                     ctxt.append('startup.delay');

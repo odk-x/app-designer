@@ -113,16 +113,12 @@ return {
         var tidObject = opendatakit.getSettingObject(formDef, 'table_id');
         var table_id;
         if ( tidObject == null || !('value' in tidObject) ) {
-            // fallback if there is no table_id defined
-            table_id = form_id;
-        } else {
-            table_id = tidObject.value;
-        }
-        
-        if ( table_id == null ) {
-            alert("no table_id specified in Form Definition!");
+            ctxt.append("parsequery._effectChange.missingTableId");
+            alert("No table_id specified in Form Definition!");
             ctxt.failure({message: "No table_id specified in form definition."});
             return;
+        } else {
+            table_id = tidObject.value;
         }
 
         // Seems like we would only need to create the KV entries for table_id, and otherwise not need to do anything?

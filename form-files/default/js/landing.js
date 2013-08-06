@@ -32,6 +32,7 @@ window.landing = {
     jsonString: null,
     opendatakitChangeUrlHash: function(hash) {
         if ( this.controller == null ) {
+            shim.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (queued)");
             this.changeUrlHash = hash;
             this.promptRef = null;
             this.pathRef = null;
@@ -43,15 +44,15 @@ window.landing = {
             this.pathRef = null;
             this.actionRef = null;
             this.jsonString = null;
-            shim.log('I', "opendatakitChangeUrlHash.newCallbackContext attempted");
             var ctxt = this.controller.newCallbackContext();
-            shim.log('I', "opendatakitChangeUrlHash.newCallbackContext attempt ok");
+            shim.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (immediate) seq: " + ctxt.seq);
             ctxt.append("landing.opendatakitChangeUrlHash.changeUrlHash", hash);
             this.controller.changeUrlHash(hash,ctxt);
         }
     },
     opendatakitCallback: function( promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject ) {
         if ( this.controller == null ) {
+            shim.log('I', "landing.opendatakitCallback.actionCallback (queued)");
             if ( this.promptRef != null ) {
                 console.error("Data loss: existing doAction callback data has been lost");
             }
@@ -64,9 +65,8 @@ window.landing = {
             this.pathRef = null;
             this.actionRef = null;
             this.jsonString = null;
-            shim.log('I', "opendatakitCallback.newCallbackContext attempted");
             var ctxt = this.controller.newCallbackContext();
-            shim.log('I', "opendatakitCallback.newCallbackContext attempt ok");
+            shim.log('I', "landing.opendatakitCallback.actionCallback (immediate) seq: " + ctxt.seq);
             ctxt.append("landing.opendatakitCallback.actionCallback", actionWaitingForData);
             this.controller.actionCallback( ctxt, promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
         }
@@ -74,35 +74,41 @@ window.landing = {
     setController: function(controller) {
         var that = this;
         this.controller = controller;
+		
+		// save member values into local scope...
+		var hash = this.changeUrlHash;
+		var ref = this.promptRef;
+		var path = this.pathRef;
+		var action = this.actionRef;
+		var json = this.jsonString;
+		
+		// clear member values
+		this.changeUrlHash = null;
+		this.promptRef = null;
+		this.pathRef = null;
+		this.actionRef = null;
+		this.jsonString = null;
+		
         if ( controller == null ) {
-            this.changeUrlHash = null;
-            this.promptRef = null;
-            this.pathRef = null;
-            this.actionRef = null;
-            this.jsonString = null;
+            shim.log('I', "landing.setController (null)");
         } else if ( this.changeUrlHash != null ) {
-            var hash = this.changeUrlHash;
-            this.changeUrlHash = null;
-            shim.log('I', "setController.changeUrlHash.newCallbackContext attempted");
             var ctxt = this.controller.newCallbackContext();
-            shim.log('I', "setController.changeUrlHash.newCallbackContext attempt ok");
+            shim.log('I', "landing.setController.changeUrlHash seq: " + ctxt.seq);
             ctxt.append("landing.setController.changeUrlHash", hash);
             this.controller.changeUrlHash(hash,$.extend({},ctxt,{ success: function() {
-                    ctxt.append("landing.setController.recursive.setController", hash);
-                    that.setController(that.controller);
-                }}));
+				// and process any action callback...
+				if ( ref != null ) {
+					shim.log('I', "landing.setController.changeUrlHash actionCallback! seq: " + ctxt.seq);
+					ctxt.append("landing.setController.changeUrlHash actionCallback!", action);
+					this.controller.actionCallback( ctxt, ref, path, action, json );
+				} else {
+					ctxt.append("landing.setController.changeUrlHash done!", hash);
+					ctxt.success();
+				}
+			}}));
         } else if ( this.promptRef != null ) {
-            var ref = this.promptRef;
-            var path = this.pathRef;
-            var action = this.actionRef;
-            var json = this.jsonString;
-            this.promptRef = null;
-            this.pathRef = null;
-            this.actionRef = null;
-            this.jsonString = null;
-            shim.log('I', "setController.actionCallback.newCallbackContext attempted");
             var ctxt = this.controller.newCallbackContext();
-            shim.log('I', "setController.actionCallback.newCallbackContext attempt ok");
+            shim.log('I', "landing.setController.actionCallback seq: " + ctxt.seq);
             ctxt.append("landing.setController.actionCallback", action);
             this.controller.actionCallback( ctxt, ref, path, action, json );
         }

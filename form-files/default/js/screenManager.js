@@ -90,7 +90,7 @@ return Backbone.View.extend({
 	refreshScreen: function(ctxt) {
 		var jqmAttrs = {};
         var that = this;
-        var locales = that.controller.getFormLocales();
+        var locales = opendatakit.getFormLocalesValue();
 		// useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
@@ -158,7 +158,7 @@ return Backbone.View.extend({
             jqmAttrs = {};
         }
         var that = this;
-        var locales = that.controller.getFormLocales();
+        var locales = opendatakit.getFormLocalesValue();
 		// useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
@@ -348,7 +348,7 @@ return Backbone.View.extend({
 		var that = this;
 		var $contentArea = $('#optionsPopup');
 		$contentArea.empty().remove();
-        var locales = that.controller.getFormLocales();
+        var locales = opendatakit.getFormLocalesValue();
 		// useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
@@ -364,7 +364,7 @@ return Backbone.View.extend({
         $( "#optionsPopup" ).popup( "close" );
 		var $contentArea = $('#languagePopup');
 		$contentArea.empty().remove();
-        var locales = that.controller.getFormLocales();
+        var locales = opendatakit.getFormLocalesValue();
 		// useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
@@ -389,7 +389,7 @@ return Backbone.View.extend({
 		var that = this;
 		var $contentArea = $('#screenPopup');
 		$contentArea.empty().remove();
-        var locales = that.controller.getFormLocales();
+        var locales = opendatakit.getFormLocalesValue();
 		// useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),

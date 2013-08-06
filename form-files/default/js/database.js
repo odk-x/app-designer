@@ -3,6 +3,7 @@
 define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
     return {
   submissionDb:false,
+  pendingChanges: [],
         // maps of:
         //   dbColumnName : { 
         //        type: databaseType, 
@@ -1781,6 +1782,32 @@ purge:function(ctxt) {
     });
 },
 discoverTableFromTableId:function(ctxt, table_id) {
+},
+setValueDeferredChange: function( name, value ) {
+	var justChange = {};
+	justChange[name] = {value: value, isInstanceMetadata: false };
+	this.pendingChanges[name] = {value: value, isInstanceMetadata: false };
+	// apply the change immediately...
+	var is = this._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
+					mdl.dataTableModel, opendatakit.getCurrentInstanceId(), justChange);
+	var uf;
+	for (var f in is.updates) {
+		var uf = is.updates[f];
+		var de = mdl.dataTableModel[f];
+		if (de.isPersisted) {
+			var elementPath = de.elementPath || uf.elementPath;
+			if ( de.elementSet == 'instanceMetadata' ) {
+				this._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
+			} else {
+				this._reconstructElementPath(elementPath, de, uf.value, mdl.data );
+			}
+		}
+	}
+},
+applyDeferredChanges: function(ctxt) {
+	var changes = this.pendingChanges;
+	this.pendingChanges = [];
+    this.putDataKeyValueMap(ctxt, changes );
 }
 };
 });

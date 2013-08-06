@@ -9,7 +9,7 @@ function(opendatakit,  database,   _) {
     return {
         //calculates will be set by the builder
         calculates: {},
-		opendatakit: opendatakit,
+        opendatakit: opendatakit,
         localize: function(textOrLangMap, locale) {
             if(_.isUndefined(textOrLangMap)) {
                 return 'text_undefined';
@@ -80,6 +80,15 @@ function(opendatakit,  database,   _) {
         data: function(valueName) {
             var datavalue = database.getDataValue(valueName);
             return datavalue;
+        },
+        /**
+         * assignment operator that returns the value that was assigned.
+         * i.e., assign('a', 3) will store the value 3 in data('a') and
+         * return the value 3 (for use in the remainder of the expression).
+         */
+        assign: function(valueName, value) {
+            database.setValueDeferredChange(name, value);
+            return value;
         },
         /**
          * evaluator takes a string of code and evaluates in an environment with

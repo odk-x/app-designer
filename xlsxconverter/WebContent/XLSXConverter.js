@@ -1,11 +1,11 @@
-/* 
+/*
  * Copyright (C) 2013 University of Washington
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -863,7 +863,11 @@
     		var clause = blockFlow[i];
     		switch (clause._token_type) {
     		case "assign":
-    			defn += "controller.assign('" + clause.name + "', " + clause.value + ", pendingChanges);\n";
+    			// assign(valueName,value) will save the value into data(valueName)
+    			// and return the value for use in any enclosing expression.
+    			// (in this case, there is none).  It is exposed via formulaFunctions.
+    			// The actual write to the database occurs later in processing.
+    			defn += "assign('" + clause.name + "', " + clause.value + ");\n";
     			++i;
     			break;
     		case "prompt":
@@ -876,7 +880,7 @@
     				throw Error("Error in clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
     					sheetName + " Prompts nested within begin/end screen directives cannot set 'screen' parameters ");
     			}
-    			defn += "ctxt.activePrompts.push(" + promptIdx + ");\n";
+    			defn += "activePromptIndicies.push(" + promptIdx + ");\n";
     			++i;
     			break;
     		case "begin_if":
@@ -944,8 +948,8 @@
     			prompts.push(clause);
     			updateValidationTagMap( validationTagMap, promptIdx, clause);
 
-    			var defn = "ctxt.activePrompts.push(" + promptIdx + ");\n";
-    			defn = "function(controller, ctxt) { var pendingChanges={};\n"+defn+"controller.applyChanges(pendingChanges,ctxt);\n}\n";
+    			var defn = "activePromptIndicies.push(" + promptIdx + ");\n";
+    			defn = "function() {var activePromptIndicies = [];\n"+defn+"\nreturn activePromptIndicies;\n}\n";
 
     			var bsb = { clause: clause.clause,
     				_row_num: clause._row_num,
@@ -953,7 +957,7 @@
     				_screen_block: defn };
     			if ( 'screen' in clause ) {
     				// copy the 'screen' settings into the clause
-    				$.extend(bsb, clause.screen );
+    				_.extend(bsb, clause.screen );
     				delete clause.screen;
     			}
     			flattened.push(bsb);
@@ -966,7 +970,7 @@
     			flattened.push(labelEntry);
     			// process the screen definition
     			var defn = constructScreenDefn(sheetName, prompts, validationTagMap, clause._screen_block, 0, newScreenLabel);
-    			defn = "function(controller, ctxt) { var pendingChanges={};\n"+defn+"controller.applyChanges(pendingChanges,ctxt);\n}\n";
+    			defn = "function() {var activePromptIndicies = [];\n"+defn+"\nreturn activePromptIndicies;\n}\n";
     			clause._screen_block = defn;
         		flattened.push(clause);
     			++i;
@@ -1539,9 +1543,17 @@
                     	}
                     	processedSettings[name] = value[0];
                     } else {
-                    	throw Error("Unexpected non-array for '" + name + "' on 'settins' sheet");
+                    	throw Error("Unexpected non-array for '" + name + "' on 'settings' sheet");
                     }
             	});
+            }
+            if ( !('form_id' in processedSettings) ) {
+            	throw Error("Please define a 'form_id' setting_name on the settings sheet and specify the unique form id for the form");
+            }
+            if ( !('table_id' in processedSettings) ) {
+            	var entry = _.extend({},processedSettings['form_id']);
+            	entry.setting_name = "table_id";
+            	processedSettings['table_id'] = entry;
             }
             if ( !('survey' in processedSettings) ) {
             	throw Error("Please define a 'survey' setting_name on the settings sheet and specify the survey title under display.title");
@@ -1549,10 +1561,106 @@
             if ( !('display' in processedSettings.survey) ) {
             	throw Error("Please specify the survey title under the display.title column for the 'survey' setting_name on the settings sheet");
             }
-
             if ( _.isEmpty(processedSettings.survey.display) ||
             		(processedSettings.survey.display.title == null && processedSettings.survey.display.text != null) ) {
             	throw Error("Please specify the survey title under the display.title column for the 'survey' setting_name on the settings sheet");
+            }
+
+            // construct the list of all available form locales and the default locale.
+            // Relies upon the title translations of the 'survey' sheet.
+            // If
+            //   settings.survey.display.title = { 'en' : 'Joy of life', 'fr' : 'Joi de vivre'}
+            // and if
+            //   settings.en.display = { text: {'en' : 'English', 'fr' : 'Anglais'} }
+            //   settings.fr.display = { text: {'en' : 'French', 'fr', 'Francais' } }
+            // then we compose
+            //
+            //   settings._locales = [ { name: 'en', display: { text: { 'en' : 'English' , 'fr': 'Anglais' }}},
+            //                         { name: 'fr', display: { text: { 'en' : 'French', 'fr': 'Francais' }}} ]
+            //
+            // If the localizations for the language tags are missing (e.g., no settings.en, settings.fr)
+            // then we just use the tag as the display string for that translation:
+            //
+            //   settings._locales = [ { name: 'en', display: { text: 'en'} },
+            //                         { name: 'fr', display: { text: 'fr'} } ]
+            //
+            // The default locale is the first locale in the settings sheet.
+            // i.e., if you have two languages, settings.en and settings.fr,
+            // if (settings.en._row_num < settings.fr._row_num) then
+            // en is the default locale.
+            // If the languages are not defined in the settings sheet but
+            // are simply referenced in the survey title, then the default
+            // is the first in javascript attribute-iteration order.
+            //
+
+            {
+                var locales = [];
+                var defaultLocale = null;
+
+                // assume all the locales are specified by the title...
+                var form_title = processedSettings.survey.display.title;
+                if ( _.isUndefined(form_title) || _.isString(form_title) ) {
+                    // no internationalization -- just default choice
+                    locales.push({display: {text: 'default'}, name: 'default'});
+                    defaultLocale = 'default';
+                } else {
+                    // we have localization -- find all the tags
+                	var firstTranslation = null;
+
+                    for ( var f in form_title ) {
+                        // If the tag value is defined in the settings page, use its
+                    	// display value as the display string for the language.
+                    	// Otherwise, use the tag itself as the name for that language.
+                        var translations = processedSettings[f];
+                        if ( translations == null || translations.display == null ) {
+                            locales.push( { display: {text: f},
+                            				name: f } );
+                            if ( defaultLocale == null ) {
+                            	defaultLocale = f;
+                            }
+                        } else {
+                            locales.push( { display: translations.display,
+                            				_row_num: translations._row_num,
+                            				name: f } );
+                            if ( firstTranslation == null ||
+                            	 firstTranslation > translations._row_num) {
+                            	defaultLocale = f;
+                            	firstTranslation = translations._row_num;
+                            }
+                        }
+                    }
+
+                    // Order by _row_num, if not null...
+                    // If some are defined and some are not,
+                    // place the defined ones first.
+                    locales = locales.sort( function(a,b) {
+                    	if ( '_row_num' in b ) {
+                    		if ( '_row_num' in a ) {
+                    			return a._row_num - b._row_num;
+                    		} else {
+                    			return 1;
+                    		}
+                    	} else if ( '_row_num' in a ) {
+                    		return -1;
+                    	} else if ( a.name > b.name ) {
+                    		return 1;
+                    	} else if ( a.name == b.name ) {
+                    		return 0;
+                    	} else {
+                    		return -1;
+                    	}
+                    });
+                }
+
+                var entry = { setting_name: "_locales",
+                			  _row_num: processedSettings.survey._row_num,
+                			  value: locales };
+                processedSettings['_locales'] = entry;
+
+                var entry = { setting_name: "_default_locale",
+                			  _row_num: processedSettings.survey._row_num,
+                			  value: defaultLocale };
+                processedSettings['_default_locale'] = entry;
             }
 
             if ( !('initial' in processedSettings) ) {

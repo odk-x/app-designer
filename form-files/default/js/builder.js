@@ -226,7 +226,9 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
 					op._parsed_condition = genericFunction(functionBody);
 				}
 			} else if ( op._token_type == "assign" ) {
-				// convert value into value method...
+				// this is only done for the top-level assign expressions.
+				// the ones within begin...end screen blocks are executed
+				// in-line as part of the _parsed_screen_block.
 				functionBody = "function() { return " + op.value + ";}";
 				op._parsed_value = genericFunction(functionBody);
 			} else if ( op._token_type == "begin_screen" ) {

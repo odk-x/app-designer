@@ -389,6 +389,29 @@
         },
         "_row_num": 4
       },
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "selects",
+        "_row_num": 2,
+        "__rowNum__": 1
+      },
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "display": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      },
       "initial": {
         "setting_name": "survey",
         "display": {
@@ -910,13 +933,13 @@
           {
             "_row_num": 2,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
             "_row_num": 3,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
@@ -931,7 +954,7 @@
               "__rowNum__": 11,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(2);\nif (selected(data('bird'), 'blackbird')) {\nctxt.activePrompts.push(3);\n}\nif (selected(data('bird'), 'blackbird') && now().getHours() < 2) {\nctxt.activePrompts.push(4);\n}\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nif (selected(data('bird'), 'blackbird')) {\nactivePromptIndicies.push(3);\n}\nif (selected(data('bird'), 'blackbird') && now().getHours() < 2) {\nactivePromptIndicies.push(4);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
@@ -945,13 +968,13 @@
               "__rowNum__": 18,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(5);\nctxt.activePrompts.push(6);\nctxt.activePrompts.push(7);\nctxt.activePrompts.push(8);\nctxt.activePrompts.push(9);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "_row_num": 20,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(10);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
@@ -973,7 +996,7 @@
           {
             "_row_num": 22,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(11);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
@@ -986,19 +1009,19 @@
           {
             "_row_num": 24,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(12);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 9
           },
           {
             "_row_num": 25,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(13);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 10
           },
           {
             "_row_num": 26,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(14);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 11
           },
           {
@@ -1020,7 +1043,7 @@
           {
             "_row_num": 28,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(15);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 14
           },
           {
@@ -1039,7 +1062,7 @@
           {
             "_row_num": 30,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(16);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 17
           },
           {
@@ -1143,7 +1166,7 @@
           {
             "_row_num": 3,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(0);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
@@ -1156,7 +1179,7 @@
           {
             "_row_num": 5,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(1);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
@@ -1169,7 +1192,7 @@
           {
             "_row_num": 7,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(2);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
@@ -1181,7 +1204,7 @@
           {
             "_row_num": 9,
             "_token_type": "begin_screen",
-            "_screen_block": "function(controller, ctxt) { var pendingChanges={};\nctxt.activePrompts.push(3);\ncontroller.applyChanges(pendingChanges,ctxt);\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
