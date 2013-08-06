@@ -178,6 +178,13 @@ promptTypes.base = Backbone.View.extend({
         //Maybe it would be better to use handlebars helpers to get metadata?
         this.renderContext.form_title = opendatakit.getCurrentSectionTitle(this._section_name);
         this.renderContext.form_version = opendatakit.getSettingValue('form_version');
+		// set whether we are pre-4.x Android OS (legacy compatibility)
+        var platinfo = opendatakit.getPlatformInfo();
+        if ( platinfo.container != 'Android' ) {
+            this.renderContext.pre4Android = false;
+        } else {
+            this.renderContext.pre4Android = ( platinfo.version.substring(0,1) < "4" );
+        }
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
         ctxt.success();
