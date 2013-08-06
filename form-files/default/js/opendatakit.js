@@ -216,57 +216,39 @@ return {
         if ( obj == null ) return null;
         return obj.value;
     },
-    /*
-        Form locales are specified by the translations available on the 
-        form title.  These translation names are then looked up in the 
-        settings sheet to see if they have translations, and those are used
-        as the label for that translation code. Otherwise, the translation
-        name is used.  The returned list is of the form:
+    /**
+        The list of locales should have been constructed by the XLSXConverter.
+        It will be saved under settings._locales.value as a list:
         
-        [ { name: "en_us", label: { "en_us": "English", "fr": "Anglais"}},
-           { name: "fr", label: {"en_us": "French", "fr": "Francais"}} ]
+        [ { name: "en_us", display: { text: { "en_us": "English", "fr": "Anglais"}}},
+           { name: "fr", display: { text: {"en_us": "French", "fr": "Francais"}}} ]
     */
     getFormLocales:function(formDef) {
-        var locales = [];
-        if ( formDef == null ) {
-            return [ 'default' ];
-        }
-        // assume all the locales are specified by the title...
-        var form_title = this.getSectionTitle(formDef, 'survey');
-        if ( _.isUndefined(form_title) || _.isString(form_title) ) {
-            // no internationalization -- just default choice
-            return [ 'default' ];
-        }
-        // we have localization -- find all the tags
-        for ( var f in form_title ) {
-            // get the setting object for the tag (e.g., for display.text for that language)
-            var translations = this.getSettingObject(formDef, f );    
-            if ( translations == null || translations.display == null ) {
-                locales.push( { display: { text: f }, name: f } );
-            } else if ( translations.display.text == null ) {
-                locales.push( { display: { text: f }, name: f } );
-            } else {
-                locales.push( { display: translations.display, name: f } );
+        if ( formDef != null ) {
+            var locales = this.getSettingObject(formDef, '_locales' );
+            if ( locales != null && locales.value != null ) {
+                return locales.value;
             }
+            alert("_locales not present in form! See console:");
+            console.error("The synthesized _locales field is not present in the form!");
         }
-        return locales;
+        return [ { display: { text: 'default' }, name: 'default' } ];
     },
     
-    /*
-        The default locale is specified by the 'default_locale' setting.
-        If this is not present, the first locale in the form_title array
-        is used (this likely does not have any bearing to the order 
-        of the translations in the XLSForm). Otherwise, if there are no
-        form_title translations, then 'default' is returned.
+    /**
+        The default locale is a synthesized value. It is specified by 
+        the value of the '_default_locale' setting.
+        
+        This is generally the first locale in the _locales list, above.
      */
     getDefaultFormLocale:function(formDef) {
-        var localeObject = this.getSettingObject(formDef, 'default_locale');
-        if ( localeObject != null && localeObject.value != null ) {
-            return localeObject.value;
-        }
-        var locales = this.getFormLocales(formDef);
-        if ( locales.length > 0 ) {
-            return locales[0].name;
+        if ( formDef != null ) {
+            var localeObject = this.getSettingObject(formDef, '_default_locale');
+            if ( localeObject != null && localeObject.value != null ) {
+                return localeObject.value;
+            }
+            alert("_default_locales not present in form! See console:");
+            console.error("The synthesized _default_locales field is not present in the form!");
         }
         return "default";
     },
