@@ -230,7 +230,14 @@ function buildFormStructures( instanceBodyPrefix, bindPrefix, bodyPrefix, model 
 		}
 	}
 }
-
+function getSettingValue( settings, id ) {
+	var entry = settings[id];
+	if ( entry != null ) {
+		return entry.value;
+	} else {
+		return null;
+	}
+}
 function execFormChange( idxSubfolder ) {
 	
 	var formsDir = fso.GetFolder(window.formDirPath);
@@ -271,56 +278,32 @@ function execFormChange( idxSubfolder ) {
 					
 					wlog("start of formDef file: " + formDef.substring(0,40));
 					try {
-						var jsonDef = JSON.parse(formDef);
+						var jsonDefTopLevel = JSON.parse(formDef);
 						wlog("processing json file: " + formDefFile);
 						
+						var jsonDef = jsonDefTopLevel.logic_flow;
 						var settings = jsonDef.settings;
-						var formId, tableId, formVersion = null, formTitle, defaultLocale = null;
-						var xmlRootElementName, xmlSubmissionUrl = null, xmlBase64RsaPublicKey = null;
-						var xmlDeviceIdPropertyName = null, xmlUserIdPropertyName = null;
-						for ( var i = 0 ; i < settings.length ; ++i ) {
-							var key = settings[i].setting;
-							if ( key == "form_id" ) {
-								formId = settings[i].value;
-							} else if ( key == "form_version" ) {
-								formVersion = settings[i].value;
-							} else if ( key == "form_title" ) {
-								formTitle = settings[i].value;
-							} else if ( key == "table_id" ) {
-								tableId = settings[i].value;
-							} else if ( key == "xml_root_element_name" ) {
-								xmlRootElementName = settings[i].value;
-							} else if ( key == "xml_submission_url" ) {
-								xmlSubmissionUrl = settings[i].value;
-							} else if ( key == "xml_base64_rsa_public_key" ) {
-								xmlBase64RsaPublicKey = settings[i].value;
-							} else if ( key == "xml_device_id_property_name" ) {
-								xmlDeviceIdPropertyName = settings[i].value;
-							} else if ( key == "xml_user_id_property_name" ) {
-								xmlUserIdPropertyName = settings[i].value;
-							} else if ( key == "default_locale" ) {
-								defaultLocale = settings[i].value;
-							}
-						}
+						var formId = getSettingValue(settings, 'form_id');
+						var tableId = getSettingValue(settings, 'table_id');
+						var formVersion = getSettingValue(settings, 'form_version');
+						var defaultLocale = getSettingValue(settings, '_default_locale');
+						var xmlRootElementName = getSettingValue(settings, 'xml_root_element_name');
+						var xmlSubmissionUrl = getSettingValue(settings, 'xml_submission_url');
+						var xmlBase64RsaPublicKey = getSettingValue(settings, 'xml_base64_rsa_public_key');
+						var xmlDeviceIdPropertyName = getSettingValue(settings, 'xml_device_id_property_name');
+						var xmlUserIdPropertyName = getSettingValue(settings, 'xml_user_id_property_name');
 						
-						wlog("before formTitle analysis");
+						wlog("processing json file -- survey title: " + formDefFile);
+						var formTitle = settings.survey.display.title;
 						var formName = null;
 						if ( typeof formTitle == "string" ) {
 							formName = formTitle;
 						} else {
-							if ( defaultLocale != null && formTitle[defaultLocale] != null ) {
-								formName = formTitle[defaultLocale];
-							} else if ( ('default' in formTitle) && formTitle['default'] != null ) {
-								formName = formTitle['default'];
-							} else {
-								for ( var locale in formTitle ) {
-									formName = formTitle[locale];
-									if ( formName != null ) break;
-								}
-								if ( formName == null ) {
-									formName = name.substring(0,idx);
-								}
-							}
+							formName = formTitle[defaultLocale];
+						}
+						
+						if (formName == null) {
+							formName = 'Form without a Survey Title';
 						}
 						
 						if ( xmlRootElementName == null ) {
