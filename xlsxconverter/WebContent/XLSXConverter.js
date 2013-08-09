@@ -98,6 +98,7 @@
         "label": null,
         "screen": null,
         "note": null,
+        "user_branch": null,
         "error" : null,
         "opening": null,
         "instances": null,

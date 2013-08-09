@@ -532,6 +532,107 @@ promptTypes.repeat = promptTypes.base.extend({
         //TODO: Notify collect of change of form? Or fire intent to launch new instance of collect?
     }
 });
+promptTypes.user_branch = promptTypes.base.extend({
+    type: "user_branch",
+    templatePath: "templates/user_branch.handlebars",
+    renderContext: {
+    },
+    events: {
+        "click .branch-select-item": "selectBranchItem",
+    },
+    selectBranchItem: function(evt) {
+		var that = this;
+		var ctxt = controller.newContext(evt);
+        var $target = $(evt.target).closest('.branch-select-item');
+		$target.attr("label", function(index, oldPropertyValue) {
+			var currentPath = controller.getCurrentScreenPath();
+			var parts = currentPath.split("/");
+			if ( parts.length < 2 ) {
+				ctxt.append("prompts." + that.type + ".selectBranchItem: invalid currentPath: " + currentPath);
+				ctxt.failure({message: "invalid currentPath: " + currentPath});
+				return;
+			}
+			var newPath = parts[0] + "/" + oldPropertyValue;
+			ctxt.append("prompts." + that.type + ".click", "px: " + that.promptIdx);
+			controller.gotoScreenPath(ctxt,newPath);
+		});
+    },
+    choice_filter: function(){ return true; },
+    postActivate: function(ctxt) {
+        var that = this;
+        var newctxt = $.extend({}, ctxt, {success: function(outcome) {
+            ctxt.append("prompts." + that.type + ".postActivate." + outcome,
+                        "px: " + that.promptIdx);
+            ctxt.success();
+        }});
+        var populateChoicesViaQuery = function(query, newctxt){
+            var queryUri = query.uri();
+            if(queryUri.search('//') < 0){
+                //If the uri is not a content provider or web resource,
+                //assume the path  is relative to the form directory.
+                queryUri = opendatakit.getCurrentFormPath() + queryUri;
+            }
+            
+            var ajaxOptions = {
+                "type": 'GET',
+                "url": queryUri,
+                "dataType": 'json',
+                "data": {},
+                "success": function(result){
+                    that.renderContext.choices = query.callback(result);
+                    newctxt.success("success");
+                },
+                "error": function(e) {
+                    newctxt.append("prompts." + this.type + ".postActivate.error", 
+                                "px: " + this.promptIdx + " Error fetching choices");
+                    //This is a passive error because there could just be a problem
+                    //with the content provider/network/remote service rather than with
+                    //the form.
+                    console.log(e);
+                    that.renderContext.passiveError = "Error fetching choices.\n";
+                    if(e.statusText) {
+                        that.renderContext.passiveError += e.statusText;
+                    }
+                    // TODO: verify how this error should be handled...
+                    newctxt.failure({message: "Error fetching choices via ajax."});
+                }
+            };
+ 
+            //TODO: It might also be desireable to make it so queries can refrence
+            //datasheets in the XLSX file.
+            var queryUriExt = queryUri.split('.').pop();
+            if(queryUriExt === 'csv') {
+                ajaxOptions.dataType = 'text';
+                ajaxOptions.success = function(result) {
+                    requirejs(['jquery-csv'], function(){
+                        that.renderContext.choices = query.callback($.csv.toObjects(result));
+                        newctxt.success("success");
+                    },
+                    function (err) {
+                        newctxt.append("promptType.select.requirejs.failure", err.toString());
+                        newctxt.failure({message: "Error fetching choices from csv data."});
+                    });
+                };
+            }
+            
+            $.ajax(ajaxOptions);
+        };
+        
+        that.renderContext.passiveError = null;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
+        if(queryDefn != null) {
+            populateChoicesViaQuery(queryDefn, newctxt);
+        } else if (choiceListDefn != null) {
+            //Very important.
+            //We need to clone the choices so their values are unique to the prompt.
+            that.renderContext.choices = _.map(choiceListDefn, _.clone);
+            newctxt.success("choiceList.success");
+        } else {
+            newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
+        }
+    }
+});
 promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
     type: "select",
     templatePath: "templates/select.handlebars",
