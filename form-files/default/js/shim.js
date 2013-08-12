@@ -127,7 +127,7 @@ window.shim = window.shim || {
         if (refId != this.refId) return null;
 		
 		for(;;) {
-			var sreenPath = this.popScreenHistory(refId);
+			var screenPath = this.popScreenHistory(refId);
 			if ( screenPath == null ) return null;
 			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
 			if ( lastSection.state == state ) {

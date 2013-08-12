@@ -729,14 +729,14 @@ window.controller = {
             database.save_all_changes($.extend({},ctxt,{
                 success:function(){
 					// push self for retry after validation failure...
-					var ref = that.getCurrentScreenPath();
+					var path = that.getCurrentScreenPath();
 					shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
 					shim.pushSectionScreenState( opendatakit.getRefId());
 					that.validateAllQuestions($.extend({},ctxt,{
 						justReportFailure: false,
 						success:function() {
 							var refPath = shim.popScreenHistoryUntilState( opendatakit.getRefId(), 'v');
-							if ( refPath != ref ) {
+							if ( refPath != path ) {
 								ctxt.append("unexpected mis-match of screen history states");
 								ctxt.failure();
 								return;
