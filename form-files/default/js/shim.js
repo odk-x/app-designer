@@ -7,10 +7,11 @@ It will be replaced by one injected by Android Java code.
 window.shim = window.shim || {
     refId: null,
     instanceId: null,
+	sectionStateScreenHistory: [],
     screenPath: null,
     previousScreenIndices: [],
     previousSections: [],
-    auxillaryHash: null,
+    controllerState: null,
     getBaseUrl: function() {
         return '../default';
     },
@@ -44,52 +45,122 @@ window.shim = window.shim || {
         // currently being worked on.
         this.instanceId = instanceId;
     },
-    setScreenPath: function( refId, screenPath ) {
+	pushSectionScreenState: function( refId) {
         if (refId != this.refId) return;
-        // report the new screenPath to ODK Survey...
-        // needed so that the WebKit can be restored to the same state upon
-        // orientation change and after intent completions.
-        this.screenPath = screenPath;
-    },
-    getScreenPath: function( refId ) {
+
+		if ( this.sectionStateScreenHistory.length == 0 ) {
+			return;
+		}
+		
+		var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+		if ( lastSection.screen != null ) {
+			lastSection.screenHistory.push( { screen: lastSection.screen, state: lastSection.state } );
+		}
+	},
+	setSectionScreenState: function( refId, screenPath, state) {
+        if (refId != this.refId) return;
+
+		var splits = screenPath.split('/');
+		var sectionName = splits[0];
+		if (this.sectionStateScreenHistory.length == 0) {
+			this.sectionStateScreenHistory.push( { sectionName: sectionName, screenHistory: [], screen: screenPath, state: state } );
+		} else {
+			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+			if ( lastSection.sectionName == sectionName ) {
+				lastSection.screen = screenPath;
+				lastSection.state = state;
+			} else {
+				this.sectionStateScreenHistory.push( { sectionName: sectionName, screenHistory: [], screen: screenPath, state: state } );
+			}
+		}
+	},
+	clearSectionScreenState: function( refId ) {
+        if (refId != this.refId) return;
+
+		//  { sectionName: 'initial', screenHistory: [ { screen: 'initial/0', state: null } ] 
+		this.sectionStateScreenHistory = [];
+	},
+	getControllerState: function( refId ) {
+		if (refId != this.refId) return null;
+		
+		if ( this.sectionStateScreenHistory.length == 0 ) {
+			return null;
+		}
+		var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+		return lastSection.state;
+	},
+	getScreenPath: function(refId) {
         if (refId != this.refId) return null;
-        return this.screenPath;
-    },
+		
+		if ( this.sectionStateScreenHistory.length == 0 ) {
+			return null;
+		}
+		var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+		return lastSection.screen;
+	},
     hasScreenHistory: function( refId ) {
         if (refId != this.refId) return false;
-        return (this.previousScreenIndices.length !== 0);
-    },
-    clearScreenHistory: function( refId ) {
-        if (refId != this.refId) return;
-        this.previousScreenIndices.length = 0;
-    },
-    popScreenHistory: function( refId ) {
+		var i;
+		for ( i = 0 ; i < this.sectionStateScreenHistory.length ; ++i ) {
+			var thisSection = this.sectionStateScreenHistory[i];
+			if ( thisSection.screenHistory.length !== 0 ) {
+				return true;
+			}
+		}
+		return false;
+	},
+	popScreenHistory: function( refId ) {
         if (refId != this.refId) return null;
-        return this.previousScreenIndices.pop();
-    },
-    pushScreenHistory: function(refId, idx) {
-        if (refId != this.refId) return;
-        this.previousScreenIndices.push(idx);
-    },
+		while ( this.sectionStateScreenHistory.length !== 0 ) {
+			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+			if ( lastSection.screenHistory.length !== 0 ) {
+				var lastHistory = lastSection.screenHistory.pop();
+				lastSection.screen = lastHistory.screen;
+				lastSection.state = lastHistory.state;
+				return lastSection.screen;
+			}
+			this.sectionStateScreenHistory.pop();
+		}
+		return null;
+	},
+	popScreenHistoryUntilState: function(refId, state) {
+        if (refId != this.refId) return null;
+		
+		for(;;) {
+			var sreenPath = this.popScreenHistory(refId);
+			if ( screenPath == null ) return null;
+			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+			if ( lastSection.state == state ) {
+				return screenPath;
+			}
+		}
+	},
     /**
      * Section stack -- maintains the stack of sections from which you can exit.
      */
     hasSectionStack: function( refId ) {
         if (refId != this.refId) return false;
-        return (this.previousSections.length !== 0);
-    },
-    clearSectionStack: function( refId ) {
-        if (refId != this.refId) return;
-        this.previousSections.length = 0;
-    },
-    popSectionStack: function( refId ) {
+		return this.sectionStateScreenHistory.length !== 0;
+	},
+	popSectionStack: function( refId ) {
         if (refId != this.refId) return null;
-        return this.previousSections.pop();
-    },
-    pushSectionStack: function( refId, section_name) {
-        if (refId != this.refId) return;
-        this.previousSections.push(section_name);
-    },
+		
+		if ( this.sectionStateScreenHistory.length != 0 ) {
+			this.sectionStateScreenHistory.pop();
+		}
+		
+		while ( this.sectionStateScreenHistory.length != 0 ) {
+			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+			if ( lastSection.screenHistory.length != 0 ) {
+				var lastHistory = lastSection.screenHistory.pop();
+				lastSection.screen = lastHistory.screen;
+				lastSection.state = lastHistory.state;
+				return lastSection.screen;
+			}
+			this.sectionStateScreenHistory.pop();
+		}
+		return null;
+	},
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
         if (refId != this.refId) return "IGNORE";
         if ( action == 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
