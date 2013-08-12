@@ -342,17 +342,13 @@ promptTypes.opening = promptTypes.base.extend({
             var dateStr = date.toISOString();
             instanceName = dateStr; // .replace(/\W/g, "_")
             that.renderContext.instanceName = instanceName;
-            database.setInstanceMetaData($.extend({}, ctxt, {
-                success: function() {
-                    ctxt.success({
-                        enableBackNavigation: false
-                    });
-                }
-            }), 'instanceName', instanceName);
+			that._screen._renderContext.enableBackNavigation = false;
+            database.setInstanceMetaData(ctxt, 'instanceName', instanceName);
             return;
         }
         that.renderContext.instanceName = instanceName;
-        ctxt.success({enableBackNavigation: false});
+		that._screen._renderContext.enableBackNavigation = false;
+        ctxt.success();
     },
     renderContext: {
         headerImg: requirejs.toUrl('img/form_logo.png'),
@@ -394,7 +390,8 @@ promptTypes.finalize = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
-        ctxt.success({enableForwardNavigation: false});
+		this._screen._renderContext.enableForwardNavigation = false;
+        ctxt.success();
     },
     saveIncomplete: function(evt) {
         var ctxt = controller.newContext(evt);
@@ -423,7 +420,8 @@ promptTypes.json = promptTypes.base.extend({
         } else {
             that.renderContext.value = "JSON Unavailable";
         }
-        ctxt.success({enableNavigation: false});
+		that._screen._renderContext.enableNavigation = false;
+        ctxt.success();
     }
 });
 promptTypes.instances = promptTypes.base.extend({
@@ -457,11 +455,10 @@ promptTypes.instances = promptTypes.base.extend({
                     form_title: opendatakit.getCurrentSectionTitle(that._section_name),
                     headerImg: requirejs.toUrl('img/form_logo.png')
                 });
-                ctxt.success({
-                    showHeader: false,
-                    enableNavigation:false,
-                    showFooter:false
-                });
+				that._screen._renderContext.showHeader = false;
+				that._screen._renderContext.enableNavigation = false;
+				that._screen._renderContext.showFooter = false;
+                ctxt.success();
             }
         }));
     },
@@ -496,7 +493,10 @@ promptTypes.hierarchy = promptTypes.base.extend({
     },
     postActivate: function(ctxt) {
         this.renderContext.prompts = controller.getCurrentSectionPrompts();
-        ctxt.success({showHeader: true, showFooter: false});
+		this._screen._renderContext.enableForwardNavigation = false;
+		this._screen._renderContext.showHeader = true;
+		this._screen._renderContext.showFooter = false;
+        ctxt.success();
     }
 });
 promptTypes.repeat = promptTypes.base.extend({
@@ -515,11 +515,10 @@ promptTypes.repeat = promptTypes.base.extend({
         database.get_all_instances($.extend({},ctxt,{
             success:function(instanceList) {
                 that.renderContext.instances = instanceList;
-                ctxt.success({
-                    showHeader: false,
-                    enableNavigation:false,
-                    showFooter:false
-                });
+		        that._screen._renderContext.enableNavigation = false;
+		        that._screen._renderContext.showHeader = false;
+		        that._screen._renderContext.showFooter = false;
+                ctxt.success();
         }}), subsurveyType);
     },
     openInstance: function(evt) {
@@ -1526,14 +1525,6 @@ promptTypes.label = promptTypes.base.extend({
         ctxt.failure({message: "Internal error."});
     }
 });
-promptTypes.goto = promptTypes.base.extend({
-    type: "goto",
-    hideInHierarchy: true,
-    onActivate: function(ctxt) {
-        alert("goto.onActivate: Should never be called!");
-        ctxt.failure({message: "Internal error."});
-    }
-});
 promptTypes.note = promptTypes.base.extend({
     type: "note",
     hideInHierarchy: true,
@@ -1592,7 +1583,9 @@ promptTypes.stop_survey = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
-        ctxt.success({enableForwardNavigation: false, enableBackNavigation: false});
+		this._screen._renderContext.enableForwardNavigation = false;
+        this._screen._renderContext.enableBackNavigation = false;
+        ctxt.success();
     },
     beforeMove: function(ctxt) {
         ctxt.append("prompts." + this.type, "px: " + this.promptIdx);

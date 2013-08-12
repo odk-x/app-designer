@@ -258,19 +258,22 @@ screenTypes.screen = Backbone.View.extend({
 		that.whenTemplateIsReady($.extend({}, ctxt, {
 			success:function() {
 				// determine the active prompts
+				that.activePrompts = []; // clear all prompts...
 				var activePromptIndices = that._operation._parsed_screen_block();
 				var sectionPrompts = controller.getCurrentSectionPrompts();
 				var ap = [];
 				var i;
 				for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
 					var prompt = sectionPrompts[activePromptIndices[i]];
+					if ( prompt == null ) {
+						ctxt.append("Error! unable to resolve prompt!");
+						ctxt.failure({message: "bad prompt index!"});
+						return;
+					}
 					prompt._screen = that;
-					ap.push(sectionPrompts[activePromptIndices[i]]);
+					ap.push(prompt);
 				}
 				that.activePrompts = ap;
-				_.each(that.activePrompts, function(prompt){
-					prompt._screen = that;
-				});
 				// we now know what we are going to render.
 				// work with the controller to ensure that all
 				// intermediate state has been written to the 

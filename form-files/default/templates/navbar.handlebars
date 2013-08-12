@@ -8,7 +8,7 @@
                 data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">back</a>     
                 <a class="odk-next-btn
                 {{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
-                data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">next</a>               
+                data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">{{#if showAsContinueButton}}continue{{else}}next{{/if}}</a>               
            </div>
         </div>
     {{/if}}
@@ -22,7 +22,7 @@
 				data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">back</a>     
 				<a class="odk-next-btn
 				{{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
-				data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">next</a>
+				data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">{{#if showAsContinueButton}}continue{{else}}next{{/if}}</a>
 			</div>
 		{{/if}}
 	</div>

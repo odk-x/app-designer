@@ -153,10 +153,7 @@ return Backbone.View.extend({
 			}}));
 		}}));
  	},
-    setScreen: function(ctxt, screen, jqmAttrs){
-        if(!jqmAttrs){
-            jqmAttrs = {};
-        }
+    setScreen: function(ctxt, screen, popScreenOnExit){
         var that = this;
         var locales = opendatakit.getFormLocalesValue();
 		// useful defaults...
@@ -174,7 +171,12 @@ return Backbone.View.extend({
             // enableForwardNavigation -- forward swipe and button
             // enableBackNavigation -- backward swipe and button
         };
-
+		
+		if (popScreenOnExit) {
+			that.renderContext.enableBackNavigation = false;
+			that.renderContext.showAsContinueButton = true;
+		}
+		
         //If the screen is slow to activate display a loading dialog.
         //This is going to be useful if the screen gets data from a remote source.
         var activateTimeout = window.setTimeout(function(){
@@ -244,10 +246,10 @@ return Backbone.View.extend({
 						// that.$el.trigger(that.getMobileAction());
 						// that.$el.trigger('create');
 						window.clearTimeout(activateTimeout);
-						$.mobile.changePage(that.currentPageEl, $.extend({
+						$.mobile.changePage(that.currentPageEl, {
 							changeHash: false,
 							transition: transition
-						}, jqmAttrs));
+						});
 					}}));
 				}}));
             }, failure: function(m) {
