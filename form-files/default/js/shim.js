@@ -8,10 +8,6 @@ window.shim = window.shim || {
     refId: null,
     instanceId: null,
 	sectionStateScreenHistory: [],
-    screenPath: null,
-    previousScreenIndices: [],
-    previousSections: [],
-    controllerState: null,
     getBaseUrl: function() {
         return '../default';
     },
