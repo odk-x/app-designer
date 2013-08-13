@@ -240,13 +240,6 @@ window.controller = {
             ctxt.success();
         }
     },
-	/**
-	 * This is only called when we are going backward on the screen history.
-	 * If we ever change the section we are in, we need to remember to pop
-	 * the section stack. 
-	 *
-	 * TODO: Shouldn't this be managed by the shim layer?
-	 */
     gotoPreviousScreen: function(ctxt){
         var that = this;
         ctxt.append('controller:gotPreviousScreen');
@@ -254,9 +247,9 @@ window.controller = {
         that.beforeMove($.extend({}, ctxt,{
             success: function() {
                 ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  opPath);
-                if (that.hasScreenHistory()) {
+                if (shim.hasScreenHistory(opendatakit.getRefId())) {
                     ctxt.append("gotoPreviousScreen.beforeMove.success.hasScreenHistory", "px: " +  opPath);
-                    var operationPath = that.popScreenHistory();
+                    var operationPath = shim.popScreenHistory(opendatakit.getRefId());
                     that.gotoScreenPath(ctxt, operationPath, {omitPushOnReturnStack:true});
                 } else {
                     ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
@@ -329,8 +322,8 @@ window.controller = {
                     var processOps = false;
 					var priorPageState = null;
                     var priorPagePath;
-                    if (that.hasScreenHistory()) {
-                        priorPagePath = that.popScreenHistory();
+                    if (shim.hasScreenHistory(opendatakit.getRefId())) {
+                        priorPagePath = shim.popScreenHistory(opendatakit.getRefId());
 						priorPageState = shim.getControllerState(opendatakit.getRefId());
                     } else {
                         processOps = true;
@@ -363,8 +356,8 @@ window.controller = {
 					}
                     break;
                 case "exit_section":
-                    if ( that.hasSectionStack() ) {
-                        var stackPath = that.popSectionStack();
+                    if ( shim.hasSectionStack(opendatakit.getRefId()) ) {
+                        var stackPath = shim.popSectionStack(opendatakit.getRefId());
                         that.advanceToNextScreenHelper(ctxt, stackPath, shim.getControllerState(opendatakit.getRefId()));
                     } else {
                         that.reset($.extend({},ctxt,{success:function() {
@@ -380,6 +373,7 @@ window.controller = {
                                     // mark self for re-processing on restore...
                                     shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
 									shim.pushSectionScreenState( opendatakit.getRefId());
+									shim.setSectionScreenState( opendatakit.getRefId(), path, null);
 									that.validateAllQuestions($.extend({},ctxt,{
                                         justReportFailure: false,
                                         success:function() {
@@ -569,8 +563,8 @@ window.controller = {
                 ctxt.append("gotoNextScreen.beforeMove.success", "px: " +  that.getCurrentScreenPath());
 				var state = shim.getControllerState(opendatakit.getRefId());
 				if ( state == 'p' ) {
-                    if ( that.hasSectionStack() ) {
-                        var stackPath = that.popSectionStack();
+                    if ( shim.hasSectionStack(opendatakit.getRefId()) ) {
+                        var stackPath = shim.popSectionStack(opendatakit.getRefId());
 						// TODO: this is not rendering -- should it be the helper, with the ctxt 
 						// extended to match something like what is done in advanceToNextScreen?
                         that.gotoScreenPath(ctxt, stackPath, options );
@@ -732,18 +726,28 @@ window.controller = {
 					var path = that.getCurrentScreenPath();
 					shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
 					shim.pushSectionScreenState( opendatakit.getRefId());
+					shim.setSectionScreenState( opendatakit.getRefId(), path, null);
 					that.validateAllQuestions($.extend({},ctxt,{
 						justReportFailure: false,
 						success:function() {
 							var refPath = shim.popScreenHistoryUntilState( opendatakit.getRefId(), 'v');
 							if ( refPath != path ) {
 								ctxt.append("unexpected mis-match of screen history states");
+								shim.saveAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
 								ctxt.failure();
 								return;
 							}
-							// and advance to the next action...
-							shim.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), true);
-							ctxt.success();
+							// everything validated... now mark the record as COMPLETE...
+							database.save_all_changes($.extend({},ctxt,{
+								success:function(){
+									// and advance to the next action...
+									shim.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), true);
+									ctxt.success();
+								},
+								failure:function(m) {
+									shim.saveAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
+									ctxt.failure(m);
+								}}), true);
 						}}), "finalize");
                 }}), false);
         } else {
@@ -795,24 +799,6 @@ window.controller = {
                 ctxt.failure(m);
             }
         }), path);
-    },
-    /**
-     * Manage the swipe-back stack of where we have been.
-     */
-    hasScreenHistory: function() {
-        return shim.hasScreenHistory(opendatakit.getRefId());
-    },
-    popScreenHistory: function() {
-        return shim.popScreenHistory(opendatakit.getRefId());
-    },
-    /**
-     * Manage the stack of sections in which we are operating.
-     */
-    hasSectionStack: function() {
-        return shim.hasSectionStack(opendatakit.getRefId());
-    },
-    popSectionStack: function() {
-        return shim.popSectionStack(opendatakit.getRefId());
     },
     reset: function(ctxt,sameForm) {
         // NOTE: the ctxt calls here are synchronous actions

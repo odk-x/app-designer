@@ -11,6 +11,7 @@
  */
 requirejs.config({
     baseUrl: shim.getBaseUrl(),
+	waitSeconds: 12,
     paths: {
         // third-party libraries we depend upon 
         //jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',

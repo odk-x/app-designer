@@ -145,16 +145,11 @@ window.shim = window.shim || {
 			this.sectionStateScreenHistory.pop();
 		}
 		
-		while ( this.sectionStateScreenHistory.length != 0 ) {
+		if ( this.sectionStateScreenHistory.length != 0 ) {
 			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-			if ( lastSection.screenHistory.length != 0 ) {
-				var lastHistory = lastSection.screenHistory.pop();
-				lastSection.screen = lastHistory.screen;
-				lastSection.state = lastHistory.state;
-				return lastSection.screen;
-			}
-			this.sectionStateScreenHistory.pop();
+			return lastSection.screen;
 		}
+
 		return null;
 	},
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
