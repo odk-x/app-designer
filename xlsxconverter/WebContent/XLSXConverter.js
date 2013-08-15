@@ -891,7 +891,7 @@
     			defn += "if (" + clause.condition + ") {\n";
     			defn +=	constructScreenDefn(sheetName, prompts, validationTagMap, thenBlock, 0, enclosingScreenLabel);
     			defn += "}\n";
-    			if ( clause.elseBlock != null && clause.elseBlock.length > 0 ) {
+    			if ( elseBlock != null && elseBlock.length > 0 ) {
     				defn += "else {\n";
         			defn +=	constructScreenDefn(sheetName, prompts, validationTagMap, elseBlock, 0, enclosingScreenLabel);
         			defn += "}\n";
