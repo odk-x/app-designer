@@ -24,93 +24,123 @@ without worrying about the state of the script and its
 ability to handle the information at that moment of execution.
 */
 window.landing = {
-    changeUrlHash: null,
-    controller: null,
-    promptRef: null,
-    pathRef: null,
-    actionRef: null,
-    jsonString: null,
+    /**
+	 * Array of chained contexts that should be executed.
+	 */
+	_chainedContexts: [],
+	/**
+	 * Work through the _chainedContexts, if any.
+	 * Upon the first failure, clear that array.
+	 */
+	_getChainingContext: function() {
+		var that = this;
+		var ctxt = that.controller.newStartContext();
+		var ref = $.extend({},ctxt,{
+		success: function() {
+			ctxt.append('setChaining.wrapper.success');
+			if ( that._chainedContexts.length != 0 ) {
+				var realChain = that._chainedContexts.shift();
+				ctxt.setChainedContext(realChain);
+			}
+			ctxt.success();
+		}, 
+		failure: function(m) {
+			ctxt.append('setChaining.wrapper.failure - flush action');
+			that._chainedContexts = [];
+			ctxt.failure;
+		}});
+		return ref;
+	},
+	/**
+	 * Called from the Java side. If the framework has not completed
+	 * loading, the controller will not be set. In that case, or if 
+	 * there are other actions queued, the url hash change will be 
+	 * added to that queue and performed once the framework has been
+	 * initialized and the preceding actions in the queue have executed.
+	 */
     opendatakitChangeUrlHash: function(hash) {
-        if ( this.controller == null ) {
+		var that = this;
+        if ( that.controller == null || that._chainedContexts.length != 0 ) {
+			// not initialized, or there are other queued requests
             shim.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (queued)");
-            this.changeUrlHash = hash;
-            this.promptRef = null;
-            this.pathRef = null;
-            this.actionRef = null;
-            this.jsonString = null;
+			var ctxt = that.controller.newCallbackContext();
+			var ref = $.extend({},ctxt,{ success: function() {
+				ctxt.append("landing.opendatakitChangeUrlHash.changeUrlHash (executing queued request)", hash);
+				that.controller.changeUrlHash($.extend({}, ctxt,{ 
+				success: function() {
+					ctxt.append("landing.setController.changeUrlHash done!", hash);
+					// attached chaining
+					ctxt.setChainedContext(that._getChainingContext());
+					ctxt.success();
+				}, failure: function(m) {
+					ctxt.append("landing.setController.changeUrlHash flushed all pending actions!", hash);
+					// attached chaining
+					ctxt.setChainedContext(that._getChainingContext());
+					ctxt.failure(m);
+				}}), hash);
+			}, failure: function(m) {
+				ctxt.append("landing.setController.changeUrlHash flushed all pending actions!", hash);
+				// attached chaining
+				ctxt.setChainedContext(that._getChainingContext());
+				ctxt.failure(m);
+			}});
+			that._chainedContexts.push(ref);
         } else {
-            this.changeUrlHash = null;
-            this.promptRef = null;
-            this.pathRef = null;
-            this.actionRef = null;
-            this.jsonString = null;
-            var ctxt = this.controller.newCallbackContext();
+            var ctxt = that.controller.newCallbackContext();
             shim.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (immediate) seq: " + ctxt.seq);
             ctxt.append("landing.opendatakitChangeUrlHash.changeUrlHash", hash);
-            this.controller.changeUrlHash(hash,ctxt);
+            that.controller.changeUrlHash(ctxt,hash);
         }
     },
+	/**
+	 * Called from the Java side. If the framework has not completed
+	 * loading, the controller will not be set. In that case, or if 
+	 * there are other actions queued, the action callback will be 
+	 * added to that queue and performed once the framework has been
+	 * initialized and the preceding actions in the queue have executed.
+	 */
     opendatakitCallback: function( promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject ) {
-        if ( this.controller == null ) {
+		var that = this;
+        if ( that.controller == null || that._chainedContexts.length != 0 ) {
             shim.log('I', "landing.opendatakitCallback.actionCallback (queued)");
-            if ( this.promptRef != null ) {
-                console.error("Data loss: existing doAction callback data has been lost");
-            }
-            this.promptRef = promptWaitingForData;
-            this.pathRef = pathWaitingForData;
-            this.actionRef = actionWaitingForData;
-            this.jsonString = jsonObject;
+			var ctxt = that.controller.newCallbackContext();
+			var ref = $.extend({},ctxt,{ success: function() {
+				shim.log('I', "landing.actionCallback.actionCallback seq: " + ctxt.seq);
+				ctxt.append("landing.opendatakitCallback.actionCallback (executing queued request)", action);
+				that.controller.actionCallback( $.extend({}, ctxt, { success: function() {
+					ctxt.append("landing.opendatakitCallback.actionCallback (executing queued request) success!", action);
+					// attached chaining
+					ctxt.setChainedContext(that._getChainingContext());
+					ctxt.success();
+				}, failure: function(m) {
+					ctxt.append("landing.opendatakitCallback.actionCallback (executing queued request) flushed all pending actions!", action);
+					// attached chaining
+					ctxt.setChainedContext(that._getChainingContext());
+					ctxt.failure(m);
+				}}), 
+					promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
+			}, failure: function(m) {
+				ctxt.append("landing.opendatakitCallback.actionCallback (executing queued request) flushed all pending actions!", action);
+				// attached chaining
+				ctxt.setChainedContext(that._getChainingContext());
+				ctxt.failure(m);
+			}});
+			that._chainedContexts.push(ref);
         } else {
-            this.promptRef = null;
-            this.pathRef = null;
-            this.actionRef = null;
-            this.jsonString = null;
-            var ctxt = this.controller.newCallbackContext();
+            var ctxt = that.controller.newCallbackContext();
             shim.log('I', "landing.opendatakitCallback.actionCallback (immediate) seq: " + ctxt.seq);
             ctxt.append("landing.opendatakitCallback.actionCallback", actionWaitingForData);
-            this.controller.actionCallback( ctxt, promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
+            that.controller.actionCallback( ctxt, promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
         }
     },
-    setController: function(controller) {
+	/**
+	 * Invoked after all of the framework has been loaded.
+	 * This will kick off the executions of the queued
+	 * actions, if any.
+	 */
+    setController: function(ctxt, controller) {
         var that = this;
-        this.controller = controller;
-		
-		// save member values into local scope...
-		var hash = this.changeUrlHash;
-		var ref = this.promptRef;
-		var path = this.pathRef;
-		var action = this.actionRef;
-		var json = this.jsonString;
-		
-		// clear member values
-		this.changeUrlHash = null;
-		this.promptRef = null;
-		this.pathRef = null;
-		this.actionRef = null;
-		this.jsonString = null;
-		
-        if ( controller == null ) {
-            shim.log('I', "landing.setController (null)");
-        } else if ( this.changeUrlHash != null ) {
-            var ctxt = this.controller.newCallbackContext();
-            shim.log('I', "landing.setController.changeUrlHash seq: " + ctxt.seq);
-            ctxt.append("landing.setController.changeUrlHash", hash);
-            this.controller.changeUrlHash(hash,$.extend({},ctxt,{ success: function() {
-				// and process any action callback...
-				if ( ref != null ) {
-					shim.log('I', "landing.setController.changeUrlHash actionCallback! seq: " + ctxt.seq);
-					ctxt.append("landing.setController.changeUrlHash actionCallback!", action);
-					this.controller.actionCallback( ctxt, ref, path, action, json );
-				} else {
-					ctxt.append("landing.setController.changeUrlHash done!", hash);
-					ctxt.success();
-				}
-			}}));
-        } else if ( this.promptRef != null ) {
-            var ctxt = this.controller.newCallbackContext();
-            shim.log('I', "landing.setController.actionCallback seq: " + ctxt.seq);
-            ctxt.append("landing.setController.actionCallback", action);
-            this.controller.actionCallback( ctxt, ref, path, action, json );
-        }
+        that.controller = controller;
+		ctxt.setChainedContext(that._getChainingContext());
     }
 };

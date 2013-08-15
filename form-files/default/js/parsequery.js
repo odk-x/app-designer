@@ -2,11 +2,10 @@
 /**
  circular dependency upon: controller, builder (set via initialize)
  
- 3 public APIs:
+ 2 public APIs:
  
  initialize(controller, builder) -- initialize to avoid circular load dependency.
- hashChangeHandler(newHash,ctxt) -- handle 'hashChange' events.
- parseParameters() -- interpret the window.location.hash parameters on start-up.
+ changeUrlHash(ctxt) -- handle changes to the window.location.hash
  
 */
 define(['opendatakit','database'],
@@ -191,12 +190,10 @@ return {
         }
     },
     /**
-     * Invoked on initial page load and whenever a URL change alters the formPath or instanceId.
-     *
-     * Callers should ensure that this is ONLY called when the formPath or instanceId has changed.
+     * Invoked whenever a URL change alters the window.location.hash
      */
-    parseParameters:function(ctxt) {
-        ctxt.append("parsequery.parseParameters");
+    _parseParameters:function(ctxt) {
+        ctxt.append("parsequery._parseParameters");
         var that = this;
         
         var formPath = null;
@@ -239,15 +236,16 @@ return {
         }
         
         if ( refId == null ) {
-            ctxt.append('parseParameters.shim.refId is null -- generating unique value');
+            ctxt.append('parsequery._parseParameters.shim.refId is null -- generating unique value');
             refId = opendatakit.genUUID();
-            // This may fail when embedded
-            try {
-                shim.refId = refId;
-            } catch(e) {
-                ctxt.append('parseParameters.shim.refId assignment failed');
-            }
-        }
+		}
+		
+		// This may fail when embedded
+		try {
+			shim.refId = refId;
+		} catch(e) {
+			ctxt.append('parsequery._parseParameters.shim.refId assignment failed');
+		}
         
         var formDef = opendatakit.getCurrentFormDef();
         var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);
@@ -266,8 +264,8 @@ return {
                 that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
                                         instanceId, screenPath, refId, instanceMetadataKeyValueMap);
             } catch (ex) {
-                console.error('parsequery.parseParameters.continuationException' + String(ex));
-                ctxt.append('parsequery.parseParameters.continuationException',  'unknown error: ' + ex);
+                console.error('parsequery._parseParameters.continuationException' + String(ex));
+                ctxt.append('parsequery._parseParameters.continuationException',  'unknown error: ' + ex);
                 ctxt.failure({message: "Exception while processing form definition."});
             }
         }
@@ -287,8 +285,8 @@ return {
                     try {
                         formDef = JSON.parse(formDefTxt);
                     } catch (ex) {
-                        console.error('parsequery.parseParameters.requirejs.JSONexception' + String(ex));
-                        ctxt.append('parsequery.parseParameters.requirejs.JSONexception',  'JSON parsing error: ' + ex);
+                        console.error('parsequery._parseParameters.requirejs.JSONexception' + String(ex));
+                        ctxt.append('parsequery._parseParameters.requirejs.JSONexception',  'JSON parsing error: ' + ex);
                         ctxt.failure({message: "Exception while processing form definition."});
                         return;
                     }
@@ -296,19 +294,18 @@ return {
                         that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
                                                 instanceId, screenPath, refId, instanceMetadataKeyValueMap);
                     } catch (ex) {
-                        console.error('parsequery.parseParameters.requirejs.continuationException' + String(ex));
-                        ctxt.append('parsequery.parseParameters.requirejs.continuationException',  'formDef interpetation or database setup error: ' + ex);
+                        console.error('parsequery._parseParameters.requirejs.continuationException' + String(ex));
+                        ctxt.append('parsequery._parseParameters.requirejs.continuationException',  'formDef interpetation or database setup error: ' + ex);
                         ctxt.failure({message: "Exception while processing form definition."});
                     }
                 }
             }, function(err) {
-                ctxt.append("parsequery.parseParameters.requirejs.failure", err.toString());
+                ctxt.append("parsequery._parseParameters.requirejs.failure", err.toString());
                 ctxt.failure({message: "Failure while reading form definition."});
             }
         );
     },
     /**
-     * Bound to the 'hashchange' event.
      *
      * window.location.hash is an ampersand-separated list of 
      * key=value pairs. The key and value are escaped.
@@ -321,48 +318,45 @@ return {
      *    screenPath=slash-delimited concatenation of sectionName/screenIdx.
      *             If omitted, go to initial screen.
      */
-    hashChangeHandler:function(urlHash, ctxtIn) {
+    changeUrlHash:function(ctxt) {
         var that = this;
         var qpl;
-        ctxtIn.append('parsequery.hashChangeHandler');
 
-        var hash = urlHash || window.location.hash;
+        var hash = window.location.hash;
+        ctxt.append('parsequery.changeUrlHash', "window.location.hash="+hash);
+
         if ( hash == '#' ) {
             // this is bogus transition due to jquery mobile widgets
-            ctxtIn.append('parsequery.hashChangeHandler.emptyHash');
+            ctxt.append('parsequery.changeUrlHash.emptyHash');
             alert('Hash is invalid!');
             qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.getCurrentScreenPath());
-            ctxtIn.append('parsequery.hashChangeHandler.emptyHash.reset', qpl);
+            ctxt.append('parsequery.changeUrlHash.emptyHash.reset', qpl);
             window.location.hash = qpl;
-            ctxtIn.failure({message: "Internal error: invalid hash (restoring)"});
+            ctxt.failure({message: "Internal error: invalid hash (restoring)"});
             return false;
         }
         
-        // update the location
-        window.location.hash = hash;
-        
-        var ctxt = $.extend({}, ctxtIn, {success: function() {
-            ctxtIn.success();
+        var ctxtNext = $.extend({}, ctxt, {success: function() {
             // and flush any pending doAction callback
-            landing.setController(that.controller);
+            landing.setController(ctxt, that.controller);
           }, failure: function(m) {
-            ctxtIn.append('parsequery.hashChangeHandler unable to transition to ' + hash, m);
+            ctxt.append('parsequery.changeUrlHash unable to transition to ' + hash, m);
             if ( hash == "#formPath=" ) {
-                ctxtIn.failure(m);
+                ctxt.failure(m);
             } else {
-                that.hashChangeHandler("#formPath=", ctxtIn);
+				window.location.hash = "#formPath=";
+                that.changeUrlHash(ctxt);
             }
           }});
 
-        ctxt.append('parsequery.hashChangeHandler', "window.location.hash="+window.location.hash);
-        that.parseParameters($.extend({},ctxt,{success:function() {
+        that._parseParameters($.extend({},ctxtNext,{success:function() {
                 // and update the hash to refer to this page...
                 var screenPath = controller.getCurrentScreenPath();
                 var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), screenPath);
                 if ( newhash != window.location.hash ) {
                     window.location.hash = newhash;
                 }
-                ctxt.success();
+                ctxtNext.success();
         }}));
     }
 };

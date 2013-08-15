@@ -603,8 +603,7 @@ window.controller = {
         this.getOperationPath($.extend({},ctxt,{success:function(newPath) {
 			var stateString = null;
             if ( that.getCurrentScreenPath() == newPath ) {
-                // this was redundant when we were using a hashChangeHandler
-                // it is now necessary.    we are redrawing this screen
+                // this is now necessary if we are redrawing this screen
                 options = {
                     omitPushOnReturnStack : true
                 };
@@ -724,6 +723,12 @@ window.controller = {
                 success:function(){
 					// push self for retry after validation failure...
 					var path = that.getCurrentScreenPath();
+					if ( path == null ) {
+						ctxt.append("unexpected null current screen path");
+						shim.saveAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
+						ctxt.failure();
+						return;
+					}
 					shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
 					shim.pushSectionScreenState( opendatakit.getRefId());
 					shim.setSectionScreenState( opendatakit.getRefId(), path, null);
@@ -763,11 +768,9 @@ window.controller = {
         }
     },
     // return to the main screen (showing the available instances) for this form.
-    leaveInstance:function(event,ctxt) {
+    leaveInstance:function(ctxt) {
       var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-      this.changeUrlHash(newhash, ctxt);
+      this.changeUrlHash(ctxt, newhash);
     },
     gotoScreenPath:function(ctxt, path, options) {
         var that = this;
@@ -799,6 +802,10 @@ window.controller = {
                 ctxt.failure(m);
             }
         }), path);
+    },
+    changeUrlHash: function(ctxt,url){
+      window.location.hash = url;
+      parsequery.changeUrlHash(ctxt);
     },
     reset: function(ctxt,sameForm) {
         // NOTE: the ctxt calls here are synchronous actions
@@ -871,29 +878,39 @@ window.controller = {
     ///////////////////////////////////////////////////////
     // Logging context
     baseContext : {
-        contextChain: [],
-        
+        loggingContextChain: [],
+        chainedCtxt: null,
+		
         append : function( method, detail ) {
             var now = new Date().getTime();
-            this.contextChain.push( {method: method, timestamp: now, detail: detail } );
+            this.loggingContextChain.push( {method: method, timestamp: now, detail: detail } );
             // SpeedTracer Logging API
               var logger = window.console;
             if (logger && logger.markTimeline) {
                 logger.markTimeline(method);
             }
         },
-        
         success: function(){
             this._log('S', 'success!');
+			if ( this.chainedCtxt != null ) {
+				this.chainedCtxt.success();
+			}
         },
         
         failure: function(m) {
             this._log('E', 'failure! ' + (( m != null && m.message != null) ? m.message : ""));
+			if ( this.chainedCtxt != null ) {
+				this.chainedCtxt.failure();
+			}
         },
         
+		setChainedContext: function(ctxt) {
+			this.chainedContext = ctxt;
+		},
+
         _log: function( severity, contextMsg ) {
             var flattened = "seqAtEnd: " + window.controller.eventCount;
-            $.each( this.contextChain, function(index,value) {
+            $.each( this.loggingContextChain, function(index,value) {
                 flattened += "\nmethod: " + value.method + " timestamp: " +
                     value.timestamp + ((value.detail != null) ? " detail: " + value.detail : "");
             });
@@ -906,7 +923,7 @@ window.controller = {
         var count = this.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {seq: count, contextChain: []}, actionHandlers );
+        var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append('callback', detail);
         return ctxt;
     },
@@ -915,7 +932,7 @@ window.controller = {
         var count = this.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {seq: count, contextChain: []}, actionHandlers );
+        var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append('fatal_error', detail);
         return ctxt;
     },
@@ -924,7 +941,7 @@ window.controller = {
         var count = this.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {seq: count, contextChain: []}, actionHandlers );
+        var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append('startup', detail);
         return ctxt;
     },
@@ -949,7 +966,7 @@ window.controller = {
             detail += evtTarget.replace(/\s+/g, ' ').substring(0,80);
         }
         
-        var ctxt = $.extend({}, this.baseContext, {seq: count, contextChain: []}, actionHandlers );
+        var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
     },
@@ -963,7 +980,7 @@ window.controller = {
       opendatakit.openNewInstanceId($.extend({},ctxt,{
         success: function(){
           var url = arguments[0];
-          that.changeUrlHash(url,ctxt)
+          that.changeUrlHash(ctxt,url)
        }}), null);
     },
 
@@ -976,13 +993,8 @@ window.controller = {
       opendatakit.openNewInstanceId($.extend({},ctxt,{
         success: function(){
           var url = arguments[0];
-          that.changeUrlHash(url,ctxt)
+          that.changeUrlHash(ctxt,url)
        }}), $(evt.target).attr('id'));
-    },
-
-    changeUrlHash : function(url,context){
-      window.location.hash = url;
-      parsequery.hashChangeHandler(url,context);
     }
 
 };

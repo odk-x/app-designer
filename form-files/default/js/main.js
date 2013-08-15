@@ -1,7 +1,8 @@
 /**
  * Simple boilerplate for defining the requirejs settings, 
- * to initialize parsequery dependencies, and to establish
- * the parsequery.hashChangeHandler for hash change events.
+ * to initialize parsequery dependencies, and to invoke
+ * the parsequery.changeUrlHash to interpret the 
+ * window.location.hash value.
  *
  * Also sets up a timer polling for the completion of the
  * jquery mobile platform. After it is initialized, the
@@ -111,7 +112,7 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
 
             //
             // define a function that waits until jquery mobile is initialized
-            // then calls parseParameters() to trigger loading and processing of
+            // then calls changeUrlHash() to trigger loading and processing of
             // the requested form.
             var f = function() {
                 if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
@@ -119,10 +120,10 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                     if ( window.location.search != null && window.location.search.indexOf("purge") >= 0 ) {
                         ctxt.append('purging datastore');
                         database.purge($.extend({},ctxt,{success:function() {
-                                parsequery.hashChangeHandler(window.location.hash, ctxt);
+                                parsequery.changeUrlHash(ctxt);
                             }}));
                     } else {
-                        parsequery.hashChangeHandler(window.location.hash, ctxt);
+                        parsequery.changeUrlHash(ctxt);
                     }
                 } else {
                     ctxt.append('startup.delay');

@@ -49,32 +49,35 @@ window.shim = window.shim || {
 		}
 		
 		var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-		if ( lastSection.screen != null ) {
-			lastSection.screenHistory.push( { screen: lastSection.screen, state: lastSection.state } );
-		}
+		lastSection.screenHistory.push( { screen: lastSection.screen, state: lastSection.state } );
 	},
 	setSectionScreenState: function( refId, screenPath, state) {
         if (refId != this.refId) return;
-
-		var splits = screenPath.split('/');
-		var sectionName = splits[0];
-		if (this.sectionStateScreenHistory.length == 0) {
-			this.sectionStateScreenHistory.push( { sectionName: sectionName, screenHistory: [], screen: screenPath, state: state } );
+		if ( screenPath == null ) {
+			alert("setSectionScreenState received a null screen path!");
+			console.log("E/setSectionScreenState received a null screen path!");
+			return;
 		} else {
-			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-			if ( lastSection.sectionName == sectionName ) {
-				lastSection.screen = screenPath;
-				lastSection.state = state;
+			var splits = screenPath.split('/');
+			var sectionName = splits[0] + "/";
+			if (this.sectionStateScreenHistory.length == 0) {
+				this.sectionStateScreenHistory.push( { screenHistory: [], screen: screenPath, state: state } );
 			} else {
-				this.sectionStateScreenHistory.push( { sectionName: sectionName, screenHistory: [], screen: screenPath, state: state } );
+				var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+				if ( lastSection.screen.substring(0,sectionName.length) == sectionName ) {
+					lastSection.screen = screenPath;
+					lastSection.state = state;
+				} else {
+					this.sectionStateScreenHistory.push( { screenHistory: [], screen: screenPath, state: state } );
+				}
 			}
 		}
 	},
 	clearSectionScreenState: function( refId ) {
         if (refId != this.refId) return;
 
-		//  { sectionName: 'initial', screenHistory: [ { screen: 'initial/0', state: null } ] 
-		this.sectionStateScreenHistory = [];
+		this.sectionStateScreenHistory = [ { screenHistory: [], screen: 'initial/0', state: null } ];
+//		this.sectionStateScreenHistory = [];
 	},
 	getControllerState: function( refId ) {
 		if (refId != this.refId) return null;
@@ -130,6 +133,7 @@ window.shim = window.shim || {
 				return screenPath;
 			}
 		}
+		return null;
 	},
     /**
      * Section stack -- maintains the stack of sections from which you can exit.

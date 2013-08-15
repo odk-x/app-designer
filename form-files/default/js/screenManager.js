@@ -329,21 +329,25 @@ return Backbone.View.extend({
         return false;
     },
     ignoreChanges: function(evt) {
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.ignoreChanges', 
 			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
-                that.controller.leaveInstance(evt, ctxt);
+                that.controller.leaveInstance(ctxt);
             }}));
     },
     saveChanges: function(evt) {
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.saveChanges', 
 			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
-                that.controller.leaveInstance(evt,ctxt);
+                that.controller.leaveInstance(ctxt);
             }}), false);
     },
     openOptions: function(evt) {

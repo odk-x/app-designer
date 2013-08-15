@@ -394,18 +394,22 @@ promptTypes.finalize = promptTypes.base.extend({
         ctxt.success();
     },
     saveIncomplete: function(evt) {
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                controller.leaveInstance(evt, ctxt);
-            }}),false);
+                controller.leaveInstance(ctxt);
+            }}), false);
     },
     saveFinal: function(evt) {
-         var ctxt = controller.newContext(evt);
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
+        var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                controller.leaveInstance(evt, ctxt);
-            }}),true);
+                controller.leaveInstance(ctxt);
+            }}), true);
     }
 });
 promptTypes.json = promptTypes.base.extend({
