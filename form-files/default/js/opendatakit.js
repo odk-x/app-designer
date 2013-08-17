@@ -16,7 +16,7 @@ return {
     platformInfo: null,
     
     logInitDone:function(pagename) {
-        console.log("logInitDone: doneInit ms: " + (+new Date()) + " page: " + pagename);
+        shim.log("I","logInitDone: doneInit ms: " + (+new Date()) + " page: " + pagename);
     },
 
     /**
@@ -38,7 +38,7 @@ return {
         // fetch these settings from ODK Survey (the container app)
         if ( this.databaseSettings == null ) {
             var jsonString = shim.getDatabaseSettings();
-            console.log('opendatakit.getDatabaseSettings: ' + jsonString);
+            shim.log("I",'opendatakit.getDatabaseSettings: ' + jsonString);
             this.databaseSettings = JSON.parse(jsonString);
         }
         return this.databaseSettings;
