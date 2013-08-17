@@ -202,8 +202,7 @@ promptTypes.base = Backbone.View.extend({
     stopPropagation: function(evt){
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".stopPropagation", "px: " + this.promptIdx);
-        console.log('stopProp');
-        console.log(evt);
+        shim.log("D","prompts." + this.type + ".stopPropagation", "px: " + this.promptIdx + " evt: " + evt);
         evt.stopImmediatePropagation();
         ctxt.success();
     },
@@ -237,7 +236,7 @@ promptTypes.base = Backbone.View.extend({
                 ctxt.failure({message: "Exception while evaluating required() expression. See console log."});
                 return;
             } else {
-                console.log("prompts."+that.type+".baseValidate.required.exception.ignored px: " + that.promptIdx + " exception: " + String(e));
+                shim.log("I","prompts."+that.type+".baseValidate.required.exception.ignored px: " + that.promptIdx + " exception: " + String(e));
                 ctxt.append("prompts."+that.type+".baseValidate.required.exception.ignored", String(e));
                 isRequired = false;
             }
@@ -591,7 +590,8 @@ promptTypes.user_branch = promptTypes.base.extend({
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
                     //the form.
-                    console.log(e);
+                    shim.log("prompts." + this.type + ".postActivate.error px: " +
+                             this.promptIdx + " Error fetching choices: " + e);
                     that.renderContext.passiveError = "Error fetching choices.\n";
                     if(e.statusText) {
                         that.renderContext.passiveError += e.statusText;
@@ -756,8 +756,6 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             });
         } else if ( otherChoices.length > 0 ) {
             shim.log('W',"invalid choices are in choices list");
-            console.log("invalid choices are in choices list");
-            // do not log choices in production code...
         }
         return choiceList;
     },
@@ -821,7 +819,8 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
                     //the form.
-                    console.log(e);
+                    shim.log("D","prompts." + this.type + ".postActivate.error px: " + 
+                                this.promptIdx + " Error fetching choices: " + e);
                     that.renderContext.passiveError = "Error fetching choices.\n";
                     if(e.statusText) {
                         that.renderContext.passiveError += e.statusText;
@@ -958,15 +957,15 @@ promptTypes.input_type = promptTypes.base.extend({
         var value = $(evt.target).val();
         var that = this;
         if ( that.insideMutex ) {
-            console.log("event received while inside mutex");
+            shim.log("D","event received while inside mutex");
             return;
         }
         if ( that.lastEventTimestamp == evt.timeStamp ) {
-            console.log("duplicate event ignored");
+            shim.log("D","duplicate event ignored");
             return;
         }
         that.lastEventTimestamp = evt.timeStamp;
-        console.log("event being processed");
+        shim.log("D","event being processed");
         that.insideMutex = true;
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
@@ -1320,7 +1319,7 @@ promptTypes.media = promptTypes.base.extend({
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                console.log("failure returned from intent");
+                shim.log("I","failure returned from intent");
                 alert(jsonObject.result);
                 that.enableButtons();
                 that.updateRenderContext();
