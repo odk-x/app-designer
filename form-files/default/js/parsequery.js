@@ -246,6 +246,8 @@ return {
 		} catch(e) {
 			ctxt.append('parsequery._parseParameters.shim.refId assignment failed');
 		}
+		ctxt.append('parsequery._parseParameters.shim.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
+		shim.log('D', 'parsequery._parseParameters.shim.refId AFTER ASSIGNMENT refId: ' + refId);
         
         var formDef = opendatakit.getCurrentFormDef();
         var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);

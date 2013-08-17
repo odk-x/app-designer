@@ -939,11 +939,11 @@ promptTypes.select_one_with_other = promptTypes.select_one.extend({
 promptTypes.select_with_other = promptTypes.select.extend({
     withOther: true
 });
-promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
-    type: "text",
+promptTypes.input_type = promptTypes.base.extend({
+    type: "input_type",
     templatePath: "templates/input_type.handlebars",
     renderContext: {
-        "type": "text"
+        "type": "input_type"
     },
     events: {
         "change input": "modification",
@@ -999,6 +999,18 @@ promptTypes.input_type = promptTypes.text = promptTypes.base.extend({
     },
     validateValue: function() {
         return true;
+    }
+});
+promptTypes.string = promptTypes.input_type.extend({
+    type: "string",
+    renderContext: {
+        "type": "string"
+    }
+});
+promptTypes.text = promptTypes.input_type.extend({
+    type: "text",
+    renderContext: {
+        "type": "text"
     }
 });
 promptTypes.integer = promptTypes.input_type.extend({

@@ -76,7 +76,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         }
     }
     var currentPromptTypes;
-	var currentScreenTypes;
+    var currentScreenTypes;
     var calculates = {};
     //column_types maps each column to a property parser to use on its values.
     var column_types = {
@@ -138,7 +138,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
      * and parse all its properties
      **/
     initializeProperties: function(prompt) {
-		var that = this;
+        var that = this;
         $.each(prompt, function(key, property) {
             var propertyType, propertyContent;
             if (key in prompt) {
@@ -155,7 +155,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
                     propertyType = property.cell_type;
                     propertyContent = property['default'];
                 } 
-				else {
+                else {
                     if (key in column_types) {
                         propertyType = column_types[key];
                         propertyContent = property;
@@ -166,8 +166,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
                 }
                 if (propertyType in propertyParsers) {
                     var propertyParser = propertyParsers[propertyType];
-                    console.log('Parsing:');
-                    console.log(property);
+                    shim.log("I",'Parsing: ' + property);
                     prompt[key] = propertyParser(propertyContent);
                 }
                 else {
@@ -190,55 +189,51 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         
         _.each(section.prompts, function(prompt) {
             var PromptType, ExtendedPromptType, PromptInstance;
-            if (!('type' in prompt)) {
-                shim.log('W', 'builder.initializePrompts: no type specified');
-                console.log('no type specified');
-                console.log(prompt);
+            if (!('_type' in prompt)) {
+                shim.log('W', 'builder.initializePrompts: no _type specified ' + prompt);
                 return;
             }
-            if (prompt.type in currentPromptTypes) {
-                PromptType = currentPromptTypes[prompt.type];
+            if (prompt._type in currentPromptTypes) {
+                PromptType = currentPromptTypes[prompt._type];
             } else {
-                shim.log('W', 'builder.initializePrompts: unknown type -- using text');
-                console.log('unknown type -- using text');
-                console.log(prompt);
+                shim.log('W', 'builder.initializePrompts: unknown _type ' + prompt._type + ' -- using text ' + prompt);
                 PromptType = currentPromptTypes['text'];
             }
             ExtendedPromptType = PromptType.extend(that.initializeProperties(prompt));
             PromptInstance = new ExtendedPromptType({ _section_name: section.section_name });
-			initializedPrompts.push(PromptInstance);
+            initializedPrompts.push(PromptInstance);
         });
         return initializedPrompts;
     },
-	initializeOperations: function(section) {
-		var that = this;
-		var i, op;
-		var functionBody;
-		var parsedFunction;
-		for (i = 0 ; i < section.operations.length ; ++i ) {
-			var op = section.operations[i];
-			parsedFunction = null;
-			op._section_name = section.section_name;
-			if ( op._token_type == "goto_label" ) {
-				// convert condition into predicate...
-				if ( op.condition ) {
-					functionBody = "function() { return " + op.condition + ";}";
-					op._parsed_condition = genericFunction(functionBody);
-				}
-			} else if ( op._token_type == "assign" ) {
-				// this is only done for the top-level assign expressions.
-				// the ones within begin...end screen blocks are executed
-				// in-line as part of the _parsed_screen_block.
-				functionBody = "function() { return " + op.value + ";}";
-				op._parsed_value = genericFunction(functionBody);
-			} else if ( op._token_type == "begin_screen" ) {
-				functionBody = op._screen_block;
-				op._parsed_screen_block = genericFunction(functionBody);
-			}
-		}
-	},
+    initializeOperations: function(section) {
+        var that = this;
+        var i, op;
+        var functionBody;
+        var parsedFunction;
+        for (i = 0 ; i < section.operations.length ; ++i ) {
+            var op = section.operations[i];
+            parsedFunction = null;
+            op._section_name = section.section_name;
+            if ( op._token_type == "goto_label" ) {
+                // convert condition into predicate...
+                if ( op.condition ) {
+                    functionBody = "function() { return " + op.condition + ";}";
+                    op._parsed_condition = genericFunction(functionBody);
+                }
+            } else if ( op._token_type == "assign" ) {
+                // this is only done for the top-level assign expressions.
+                // the ones within begin...end screen blocks are executed
+                // in-line as part of the _parsed_screen_block.
+                functionBody = "function() { return " + op.value + ";}";
+                op._parsed_value = genericFunction(functionBody);
+            } else if ( op._token_type == "begin_screen" ) {
+                functionBody = op._screen_block;
+                op._parsed_screen_block = genericFunction(functionBody);
+            }
+        }
+    },
     buildSurvey: function(continuation) {
-		var surveyJson = opendatakit.getCurrentFormDef();
+        var surveyJson = opendatakit.getCurrentFormDef();
         // if we have no survey object, we are bootstrapping
         // just run the continuation (which will register a
         // hash change processor).
@@ -252,10 +247,10 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         //currentPromptTypes set to a promptTypes subtype so user defined prompts
         //don't clobber the base prompt types for other surveys.
         currentPromptTypes = Object.create(promptTypes);
-		// ditto
-		currentScreenTypes = Object.create(screenTypes);
+        // ditto
+        currentScreenTypes = Object.create(screenTypes);
 
-        console.log('builder.buildSurvey: initializing');
+        shim.log("I",'builder.buildSurvey: initializing');
         //Transform the calculate sheet into an object with format {calculation_name:function}
         calculates = _.object(_.map(surveyJson.logic_flow.calculates, function(calculate){
             return [calculate.calculation_name, propertyParsers.formula(calculate.calculation)];
@@ -269,89 +264,89 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
                 "callback" : propertyParsers.formula(query.callback)
             }];
         }));
-		
+        
         var afterCustomPromptsLoadAttempt = function(){
-			// save the current prompts and screens in the logic_flow
-			surveyJson.logic_flow.currentPromptTypes = currentPromptTypes;
-			surveyJson.logic_flow.currentScreenTypes = currentScreenTypes;
-			
-			// initialize the section.parsed_prompts 
-			// initialize the section.parsed_screen_block
-			_.each(surveyJson.logic_flow.sections, function(section, sectionName) {
-				section.parsed_prompts = that.initializePrompts(section);
-				// operations are in-place expanded, as they have no inheritance
-				that.initializeOperations(section);
-			});
-			
-			//This resets the custom css styles to the customStyles.css file in the
-			//current form's directory (or nothing if customStyles.css doesn't exist).
-			$('#custom-styles').attr('href', opendatakit.getCurrentFormPath() + 'customStyles.css');
-			
-			//Do an ajax request to see if there is a custom theme packaged with the form:
-			var customTheme = opendatakit.getCurrentFormPath() + 'customTheme.css';
-			$.ajax({
-				url: customTheme,
-				success: function() {
-					$('#theme').attr('href', customTheme);
-					var fontSize = opendatakit.getSettingValue("font-size");
-					if ( fontSize != null ) {
-						$('body').css("font-size", fontSize);
-					}
-					console.log('builder.buildSurvey: starting form processing continuation');
-					continuation();
-				},
-				error: function() {
-					console.log('builder.buildSurvey: error loading ' +
-							opendatakit.getCurrentFormPath() + 'customTheme.css');
-					//Set the jQm theme to the defualt theme, or if there is a 
-					//predefined theme specified in the settings sheet, use that.
-					$('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.3.1/' +
-							(opendatakit.getSettingValue("theme") || 'jquery.mobile.theme-1.3.1' ) + '.css'));
-					var fontSize = opendatakit.getSettingValue("font-size");
-					if ( fontSize != null ) {
-						$('body').css("font-size", fontSize);
-					}
-					console.log('builder.buildSurvey: starting form processing continuation');
-					continuation();
-				}
-			});
+            // save the current prompts and screens in the logic_flow
+            surveyJson.logic_flow.currentPromptTypes = currentPromptTypes;
+            surveyJson.logic_flow.currentScreenTypes = currentScreenTypes;
+            
+            // initialize the section.parsed_prompts 
+            // initialize the section.parsed_screen_block
+            _.each(surveyJson.logic_flow.sections, function(section, sectionName) {
+                section.parsed_prompts = that.initializePrompts(section);
+                // operations are in-place expanded, as they have no inheritance
+                that.initializeOperations(section);
+            });
+            
+            //This resets the custom css styles to the customStyles.css file in the
+            //current form's directory (or nothing if customStyles.css doesn't exist).
+            $('#custom-styles').attr('href', opendatakit.getCurrentFormPath() + 'customStyles.css');
+            
+            //Do an ajax request to see if there is a custom theme packaged with the form:
+            var customTheme = opendatakit.getCurrentFormPath() + 'customTheme.css';
+            $.ajax({
+                url: customTheme,
+                success: function() {
+                    $('#theme').attr('href', customTheme);
+                    var fontSize = opendatakit.getSettingValue("font-size");
+                    if ( fontSize != null ) {
+                        $('body').css("font-size", fontSize);
+                    }
+                    shim.log("I",'builder.buildSurvey: starting form processing continuation');
+                    continuation();
+                },
+                error: function() {
+                    shim.log("W",'builder.buildSurvey: error loading ' +
+                            opendatakit.getCurrentFormPath() + 'customTheme.css');
+                    //Set the jQm theme to the defualt theme, or if there is a 
+                    //predefined theme specified in the settings sheet, use that.
+                    $('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.3.1/' +
+                            (opendatakit.getSettingValue("theme") || 'jquery.mobile.theme-1.3.1' ) + '.css'));
+                    var fontSize = opendatakit.getSettingValue("font-size");
+                    if ( fontSize != null ) {
+                        $('body').css("font-size", fontSize);
+                    }
+                    shim.log("I",'builder.buildSurvey: starting form processing continuation');
+                    continuation();
+                }
+            });
         };
-		
+        
         var afterCustomScreensLoadAttempt = function(){
-			//This tries to load any user defined prompt types provided in customPromptTypes.js.
-			//TODO: The approach to getting the current form path might need to change.
-			require([opendatakit.getCurrentFormPath() + 'customPromptTypes.js'], function (customPromptTypes) {
-				console.log("builder.buildSurvey: customPromptTypes found");
-				//Ensure all custom prompt type names are lowercase.
-				_.each(_.keys(customPromptTypes), function(promptTypeName){
-					if(promptTypeName !== promptTypeName.toLowerCase()) {
-						console.error('builder.buildSurvey: Invalid prompt type name: ' + promptTypeName);
-						alert("Invalid prompt type name: " + promptTypeName);
-					}
-				});
-				$.extend(currentPromptTypes, customPromptTypes);
-				afterCustomPromptsLoadAttempt();
-			}, function (err) {
-				console.log('builder.buildSurvey: error loading ' +
-							opendatakit.getCurrentFormPath() + 'customPromptTypes.js');
-				//The errback, error callback
-				if(err.requireModules) {
-					//The error has a list of modules that failed
-					_.each(err.requireModules, function(failedId){
-						shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
-						//I'm using undef to clear internal knowledge of the given module.
-						//I'm not sure if it is necessiary.
-						window.requirejs.undef(failedId);
-					});
-				}
-				afterCustomPromptsLoadAttempt();
-			});
-		};
-		
+            //This tries to load any user defined prompt types provided in customPromptTypes.js.
+            //TODO: The approach to getting the current form path might need to change.
+            require([opendatakit.getCurrentFormPath() + 'customPromptTypes.js'], function (customPromptTypes) {
+                shim.log("I","builder.buildSurvey: customPromptTypes found");
+                //Ensure all custom prompt type names are lowercase.
+                _.each(_.keys(customPromptTypes), function(promptTypeName){
+                    if(promptTypeName !== promptTypeName.toLowerCase()) {
+                        console.error('builder.buildSurvey: Invalid prompt type name: ' + promptTypeName);
+                        alert("Invalid prompt type name: " + promptTypeName);
+                    }
+                });
+                $.extend(currentPromptTypes, customPromptTypes);
+                afterCustomPromptsLoadAttempt();
+            }, function (err) {
+                shim.log("W",'builder.buildSurvey: error loading ' +
+                            opendatakit.getCurrentFormPath() + 'customPromptTypes.js');
+                //The errback, error callback
+                if(err.requireModules) {
+                    //The error has a list of modules that failed
+                    _.each(err.requireModules, function(failedId){
+                        shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
+                        //I'm using undef to clear internal knowledge of the given module.
+                        //I'm not sure if it is necessiary.
+                        window.requirejs.undef(failedId);
+                    });
+                }
+                afterCustomPromptsLoadAttempt();
+            });
+        };
+        
         //This tries to load any user defined prompt types provided in customPromptTypes.js.
         //TODO: The approach to getting the current form path might need to change.
         require([opendatakit.getCurrentFormPath() + 'customScreenTypes.js'], function (customScreenTypes) {
-            console.log("builder.buildSurvey: customScreenTypes found");
+            shim.log("I","builder.buildSurvey: customScreenTypes found");
             //Ensure all custom prompt type names are lowercase.
             _.each(_.keys(customScreenTypes), function(screenTypeName){
                 if(screenTypeName !== screenTypeName.toLowerCase()) {
@@ -362,7 +357,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
             $.extend(currentScreenTypes, customScreenTypes);
             afterCustomScreensLoadAttempt();
         }, function (err) {
-            console.log('builder.buildSurvey: error loading ' +
+            shim.log("W",'builder.buildSurvey: error loading ' +
                         opendatakit.getCurrentFormPath() + 'customScreenTypes.js');
             //The errback, error callback
             if(err.requireModules) {

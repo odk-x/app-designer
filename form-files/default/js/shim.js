@@ -7,7 +7,7 @@ It will be replaced by one injected by Android Java code.
 window.shim = window.shim || {
     refId: null,
     instanceId: null,
-	sectionStateScreenHistory: [],
+    sectionStateScreenHistory: [],
     getBaseUrl: function() {
         return '../default';
     },
@@ -31,133 +31,213 @@ window.shim = window.shim || {
         }
     },
     clearInstanceId: function( refId ) {
-        if (refId != this.refId) return;
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: clearInstanceId(" + refId + ")");
+            return;
+        }
+        this.log("D","shim: DO: clearInstanceId(" + refId + ")");
         this.instanceId = null;
     },
     setInstanceId: function( refId, instanceId ) {
-        if (refId != this.refId) return;
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: setInstanceId(" + refId + ", " + instanceId + ")");
+            return;
+        }
         // report the new instanceId to ODK Survey...
         // needed so that callbacks, etc. can properly track the instanceId 
         // currently being worked on.
+        this.log("D","shim: DO: setInstanceId(" + refId + ", " + instanceId + ")");
         this.instanceId = instanceId;
     },
-	pushSectionScreenState: function( refId) {
-        if (refId != this.refId) return;
+    _dumpScreenStateHistory : function() {
+        this.log("D","shim -------------*start* dumpScreenStateHistory--------------------");
+        if ( this.sectionStateScreenHistory.length == 0 ) {
+            this.log("D","shim sectionScreenStateHistory EMPTY");
+        } else {
+            var i;
+            for ( i = this.sectionStateScreenHistory.length-1 ; i >= 0 ; --i ) {
+                var thisSection = this.sectionStateScreenHistory[i];
+                this.log("D","shim [" + i + "] screenPath: " + thisSection.screen );
+                this.log("D","shim [" + i + "] state:      " + thisSection.state );
+                if ( thisSection.history.length == 0 ) {
+                    this.log("D","shim [" + i + "] history[] EMPTY" );
+                } else {
+                    var j;
+                    for ( j = thisSection.history.length-1 ; j >= 0 ; --j ) {
+                        var ss = thisSection.history[j];
+                        this.log("D","shim [" + i + "] history[" + j + "] screenPath: " + ss.screen );
+                        this.log("D","shim [" + i + "] history[" + j + "] state:      " + ss.state );
+                    }
+                }
+            }
+        }
+        this.log("D","shim ------------- *end*  dumpScreenStateHistory--------------------");
+    },
+    pushSectionScreenState: function( refId) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: pushSectionScreenState(" + refId + ")");
+            return;
+        }
 
-		if ( this.sectionStateScreenHistory.length == 0 ) {
-			return;
-		}
-		
-		var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-		lastSection.screenHistory.push( { screen: lastSection.screen, state: lastSection.state } );
-	},
-	setSectionScreenState: function( refId, screenPath, state) {
-        if (refId != this.refId) return;
-		if ( screenPath == null ) {
-			alert("setSectionScreenState received a null screen path!");
-			console.log("E/setSectionScreenState received a null screen path!");
-			return;
-		} else {
-			var splits = screenPath.split('/');
-			var sectionName = splits[0] + "/";
-			if (this.sectionStateScreenHistory.length == 0) {
-				this.sectionStateScreenHistory.push( { screenHistory: [], screen: screenPath, state: state } );
-			} else {
-				var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-				if ( lastSection.screen.substring(0,sectionName.length) == sectionName ) {
-					lastSection.screen = screenPath;
-					lastSection.state = state;
-				} else {
-					this.sectionStateScreenHistory.push( { screenHistory: [], screen: screenPath, state: state } );
-				}
-			}
-		}
-	},
-	clearSectionScreenState: function( refId ) {
-        if (refId != this.refId) return;
+        this.log("D","shim: DO: pushSectionScreenState(" + refId + ")");
 
-		this.sectionStateScreenHistory = [ { screenHistory: [], screen: 'initial/0', state: null } ];
-//		this.sectionStateScreenHistory = [];
-	},
-	getControllerState: function( refId ) {
-		if (refId != this.refId) return null;
-		
-		if ( this.sectionStateScreenHistory.length == 0 ) {
-			return null;
-		}
-		var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-		return lastSection.state;
-	},
-	getScreenPath: function(refId) {
-        if (refId != this.refId) return null;
-		
-		if ( this.sectionStateScreenHistory.length == 0 ) {
-			return null;
-		}
-		var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-		return lastSection.screen;
-	},
+        if ( this.sectionStateScreenHistory.length == 0 ) {
+            return;
+        }
+        
+        var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
+    },
+    setSectionScreenState: function( refId, screenPath, state) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
+            return;
+        }
+
+        this.log("D","shim: DO: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
+        if ( screenPath == null ) {
+            alert("setSectionScreenState received a null screen path!");
+            this.log("E","setSectionScreenState received a null screen path!");
+            return;
+        } else {
+            var splits = screenPath.split('/');
+            var sectionName = splits[0] + "/";
+            if (this.sectionStateScreenHistory.length == 0) {
+                this.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
+            } else {
+                var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+                if ( lastSection.screen.substring(0,sectionName.length) == sectionName ) {
+                    lastSection.screen = screenPath;
+                    lastSection.state = state;
+                } else {
+                    this.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
+                }
+            }
+        }
+    },
+    clearSectionScreenState: function( refId ) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: clearSectionScreenState(" + refId + ")");
+            return;
+        }
+
+        this.log("D","shim: DO: clearSectionScreenState(" + refId + ")");
+        this.sectionStateScreenHistory = [ { history: [], screen: 'initial/0', state: null } ];
+//        this.sectionStateScreenHistory = [];
+    },
+    getControllerState: function( refId ) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: getControllerState(" + refId + ")");
+            return null;
+        }
+        this.log("D","shim: DO: getControllerState(" + refId + ")");
+        
+        if ( this.sectionStateScreenHistory.length == 0 ) {
+            this.log("D","shim: getControllerState: NULL!");
+            return null;
+        }
+        var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        return lastSection.state;
+    },
+    getScreenPath: function(refId) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: getScreenPath(" + refId + ")");
+            return null;
+        }
+        this.log("D","shim: DO: getScreenPath(" + refId + ")");
+        this._dumpScreenStateHistory();
+        
+        if ( this.sectionStateScreenHistory.length == 0 ) {
+            this.log("D","shim: getScreenPath: NULL!");
+            return null;
+        }
+        var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        return lastSection.screen;
+    },
     hasScreenHistory: function( refId ) {
-        if (refId != this.refId) return false;
-		var i;
-		for ( i = 0 ; i < this.sectionStateScreenHistory.length ; ++i ) {
-			var thisSection = this.sectionStateScreenHistory[i];
-			if ( thisSection.screenHistory.length !== 0 ) {
-				return true;
-			}
-		}
-		return false;
-	},
-	popScreenHistory: function( refId ) {
-        if (refId != this.refId) return null;
-		while ( this.sectionStateScreenHistory.length !== 0 ) {
-			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-			if ( lastSection.screenHistory.length !== 0 ) {
-				var lastHistory = lastSection.screenHistory.pop();
-				lastSection.screen = lastHistory.screen;
-				lastSection.state = lastHistory.state;
-				return lastSection.screen;
-			}
-			this.sectionStateScreenHistory.pop();
-		}
-		return null;
-	},
-	popScreenHistoryUntilState: function(refId, state) {
-        if (refId != this.refId) return null;
-		
-		for(;;) {
-			var screenPath = this.popScreenHistory(refId);
-			if ( screenPath == null ) return null;
-			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-			if ( lastSection.state == state ) {
-				return screenPath;
-			}
-		}
-		return null;
-	},
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: hasScreenHistory(" + refId + ")");
+            return false;
+        }
+        this.log("D","shim: DO: hasScreenHistory(" + refId + ")");
+        var i;
+        for ( i = 0 ; i < this.sectionStateScreenHistory.length ; ++i ) {
+            var thisSection = this.sectionStateScreenHistory[i];
+            if ( thisSection.history.length !== 0 ) {
+                return true;
+            }
+        }
+        return false;
+    },
+    popScreenHistory: function( refId ) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: popScreenHistory(" + refId + ")");
+            return null;
+        }
+        this.log("D","shim: DO: popScreenHistory(" + refId + ")");
+        while ( this.sectionStateScreenHistory.length !== 0 ) {
+            var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+            if ( lastSection.history.length !== 0 ) {
+                var lastHistory = lastSection.history.pop();
+                lastSection.screen = lastHistory.screen;
+                lastSection.state = lastHistory.state;
+                return lastSection.screen;
+            }
+            this.sectionStateScreenHistory.pop();
+        }
+        return null;
+    },
+    popScreenHistoryUntilState: function(refId, state) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: popScreenHistoryUntilState(" + refId + ", " + state + ")");
+            return null;
+        }
+        
+        this.log("D","shim: DO: popScreenHistoryUntilState(" + refId + ", " + state + ")");
+        for(;;) {
+            var screenPath = this.popScreenHistory(refId);
+            if ( screenPath == null ) return null;
+            var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+            if ( lastSection.state == state ) {
+                return screenPath;
+            }
+        }
+        return null;
+    },
     /**
      * Section stack -- maintains the stack of sections from which you can exit.
      */
     hasSectionStack: function( refId ) {
-        if (refId != this.refId) return false;
-		return this.sectionStateScreenHistory.length !== 0;
-	},
-	popSectionStack: function( refId ) {
-        if (refId != this.refId) return null;
-		
-		if ( this.sectionStateScreenHistory.length != 0 ) {
-			this.sectionStateScreenHistory.pop();
-		}
-		
-		if ( this.sectionStateScreenHistory.length != 0 ) {
-			var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-			return lastSection.screen;
-		}
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: hasSectionStack(" + refId + ")");
+            return false;
+        }
+        this.log("D","shim: DO: hasSectionStack(" + refId + ")");
+        return this.sectionStateScreenHistory.length !== 0;
+    },
+    popSectionStack: function( refId ) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: popSectionStack(" + refId + ")");
+            return null;
+        }
+        this.log("D","shim: DO: popSectionStack(" + refId + ")");
+        if ( this.sectionStateScreenHistory.length != 0 ) {
+            this.sectionStateScreenHistory.pop();
+        }
+        
+        if ( this.sectionStateScreenHistory.length != 0 ) {
+            var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+            return lastSection.screen;
+        }
 
-		return null;
-	},
+        return null;
+    },
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
-        if (refId != this.refId) return "IGNORE";
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + ", " + internalPromptContext + ", " + action + ", ...)");
+            return "IGNORE";
+        }
+        this.log("D","shim: DO: doAction(" + refId + ", " + promptPath + ", " + internalPromptContext + ", " + action + ", ...)");
         if ( action == 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
@@ -251,19 +331,35 @@ window.shim = window.shim || {
         }
     },
     saveAllChangesCompleted: function( refId, instanceId, asComplete ) {
-        if (refId != this.refId) return;
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
+            return;
+        }
+        this.log("D","shim: DO: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
         alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     saveAllChangesFailed: function( refId, instanceId ) {
-        if (refId != this.refId) return;
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
+            return;
+        }
+        this.log("D","shim: DO: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
         alert("notify container FAILED save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     ignoreAllChangesCompleted: function( refId, instanceId ) {
-        if (refId != this.refId) return;
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
+            return;
+        }
+        this.log("D","shim: DO: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
         alert("notify container OK ignore all changes.");
     },
     ignoreAllChangesFailed: function( refId, instanceId ) {
-        if (refId != this.refId) return;
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: ignoreAllChangesFailed(" + refId + ", " + instanceId + ")");
+            return;
+        }
+        this.log("D","shim: DO: ignoreAllChangesFailed(" + refId + ", " + instanceId + ")");
         alert("notify container FAILED ignore all changes.");
     }
 };

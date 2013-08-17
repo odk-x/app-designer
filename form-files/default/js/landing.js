@@ -25,8 +25,9 @@ ability to handle the information at that moment of execution.
 */
 window.landing = {
     /**
-     * Array of functions that should be evaluated to obtain the
-     * contexts that should be executed.
+     * Array of { description: 'blah', evaluator: function() {...} }
+     * The evaluator should be evaluated to obtain the contexts 
+     * that should be executed.
      */
     _chainedContextEvaluators: [],
     /**
@@ -40,9 +41,17 @@ window.landing = {
         success: function() {
             ctxt.append('setChaining.wrapper.success');
             if ( that._chainedContextEvaluators.length != 0 ) {
+                var i;
+                for ( i = 0 ; i < that._chainedContextEvaluators.length ; ++i ) {
+                    ctxt.append('setChaining.wrapper.success.beforeChaining', 
+                        '_chainedContextEvaluators[' + i + ']' +
+                        that._chainedContextEvaluators[i].description );
+                }
                 var realChain = that._chainedContextEvaluators.shift();
-                var chainCtxt = (realChain)();
+                var chainCtxt = (realChain.evaluator)();
                 ctxt.setChainedContext(chainCtxt);
+            } else {
+                ctxt.append('setChaining.wrapper.success - no pending actions');
             }
             ctxt.success();
         }, 
@@ -92,7 +101,7 @@ window.landing = {
                 }});
                 return ref;
             };
-            that._chainedContextEvaluators.push(fn);
+            that._chainedContextEvaluators.push({ description: 'changeUrlHash: ' + hash, evaluator: fn });
         } else {
             var ctxt = that.controller.newCallbackContext();
             shim.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (immediate) seq: " + ctxt.seq);
@@ -139,7 +148,7 @@ window.landing = {
                 }});
                 return ref;
             };
-            that._chainedContextEvaluators.push(fn);
+            that._chainedContextEvaluators.push({ description: 'actionCallback: ' + action, evaluator: fn });
         } else {
             var ctxt = that.controller.newCallbackContext();
             shim.log('I', "landing.opendatakitCallback.actionCallback (immediate) seq: " + ctxt.seq);
@@ -156,5 +165,6 @@ window.landing = {
         var that = this;
         that.controller = controller;
         ctxt.setChainedContext(that._getChainingContext());
+        ctxt.success();
     }
 };

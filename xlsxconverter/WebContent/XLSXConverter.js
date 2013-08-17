@@ -491,10 +491,9 @@
         					sheetName + " on row: " + row._row_num);
         		}
     			/*
-    			 * distinguish between parse the clause, set _token_type and begin/end matching annotations
+    			 * distinguish between 'assign [promptType]' and 'promptType'
     			 */
     			var raw_prompt_type = row.type;
-    			raw_prompt_type = raw_prompt_type.replace(/\/\//g,' // ');// surround with spaces
     			raw_prompt_type = raw_prompt_type.replace(/\s+/g,' ');// remove extra spaces
     			raw_prompt_type = raw_prompt_type.trim();// remove BOL/EOL spaces
     			var parts = raw_prompt_type.split(' ');
