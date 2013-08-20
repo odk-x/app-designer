@@ -997,6 +997,11 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
                 ctxt.append("getAllData.success");
                 ctxt.success(tlo);
             }});
+	  if ( instanceId == null ) {
+		ctxt.append("getAllData.instanceId.null");
+		tmpctxt.success();
+		return;
+	  }
       that.withDb( tmpctxt, function(transaction) {
         var ss = that._selectAllFromDataTableStmt(dbTableName, instanceId);
         tmpctxt.sqlStatement = ss;

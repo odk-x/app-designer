@@ -160,23 +160,6 @@ return {
     getCurrentSectionTitle:function(sectionName) {
         return this.getSectionTitle(this.getCurrentFormDef(),sectionName);
     },
-    /**
-     * immediate return: undef
-     */
-    openNewInstanceId:function(ctxt, id) {
-        if (id == null) {
-            id = this.genUUID();
-            ctxt.append("openNewInstanceId.genUUID", id);
-        } else {
-            ctxt.append("openNewInstanceId.useInstanceId", id);
-        }
-        
-        // formPath is assumed to be unchanged...
-        // Do not set instanceId here -- do that in the hashChange handler...
-        var qpl = this.getHashString(this.getCurrentFormPath(), id, this.initialScreenPath);
-        ctxt.success(qpl);
-    },
-
     localize:function(textOrLangMap, locale) {
         if(_.isUndefined(textOrLangMap)) {
             return 'text_undefined';

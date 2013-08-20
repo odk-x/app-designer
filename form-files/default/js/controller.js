@@ -250,6 +250,12 @@ window.controller = {
                 if (shim.hasScreenHistory(opendatakit.getRefId())) {
                     ctxt.append("gotoPreviousScreen.beforeMove.success.hasScreenHistory", "px: " +  opPath);
                     var operationPath = shim.popScreenHistory(opendatakit.getRefId());
+					var controllerState = shim.getControllerState(opendatakit.getRefId());
+					if ( controllerState == 'a' ) {
+						ctxt.append("gotoPreviousScreen.beforeMove.success.unexpectedControllerState", "px: " +  operationPath);
+						console.error("ERROR! unexpectedControllerState px: " +  operationPath);
+						alert("ERROR! unexpectedControllerState px: " +  operationPath);
+					}
                     that.gotoScreenPath(ctxt, operationPath, {omitPushOnReturnStack:true});
                 } else {
                     ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
@@ -349,6 +355,8 @@ window.controller = {
                                 ctxt.failure(m); 
                             }}), op._section_name + "/" + op.operationIdx);
                     } else {
+						// push the prior rendered screen onto the stack before we mark the 'do_section' callout
+						shim.pushSectionScreenState(opendatakit.getRefId());
                         // save our op with note to advance immediately on return...
                         shim.setSectionScreenState(opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'a');
                         // start at operation 0 in the new section
@@ -358,6 +366,13 @@ window.controller = {
                 case "exit_section":
                     if ( shim.hasSectionStack(opendatakit.getRefId()) ) {
                         var stackPath = shim.popSectionStack(opendatakit.getRefId());
+						var controllerState = shim.getControllerState(opendatakit.getRefId());
+						if ( stackPath == null ) {
+							// we have popped everything off -- reset to initial page
+							shim.clearSectionScreenState(opendatakit.getRefId());
+							stackPath = shim.getScreenPath(opendatakit.getRefId());
+							controllerState = shim.getControllerState(opendatakit.getRefId());
+						}
                         that.advanceToNextScreenHelper(ctxt, stackPath, shim.getControllerState(opendatakit.getRefId()));
                     } else {
                         that.reset($.extend({},ctxt,{success:function() {
@@ -366,39 +381,36 @@ window.controller = {
                     }
                     break;
                 case "validate":
-                    that.getNextOperationPath($.extend({},ctxt,{
-                        success:function(path){
-                            database.applyDeferredChanges($.extend({},ctxt,{
-                                success:function() {
-                                    // mark self for re-processing on restore...
-                                    shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
-                                    shim.pushSectionScreenState( opendatakit.getRefId());
-                                    shim.setSectionScreenState( opendatakit.getRefId(), path, null);
-                                    that.validateAllQuestions($.extend({},ctxt,{
-                                        justReportFailure: false,
-                                        success:function() {
-                                            var refPath = shim.popScreenHistoryUntilState( opendatakit.getRefId(), 'v');
-                                            if ( refPath != path ) {
-                                                ctxt.append("unexpected mis-match of screen history states");
-                                                ctxt.failure();
-                                                return;
-                                            }
-                                            that.getNextOperationPath($.extend({},ctxt,{
-                                                success:function(next) {
-                                                    that.advanceToNextScreenHelper(ctxt,next, shim.getControllerState(opendatakit.getRefId()));
-                                                }}), path);
-                                        }}), op._sweep_name);
-                                }, failure:function(m) {
-                                    mdl.loaded = false;
-                                    database.cacheAllData($.extend({},ctxt,{success:function() {
-                                        ctxt.failure(m);
-                                    }, failure:function(m2) {
-                                        ctxt.failure(m);
-                                    }}), opendatakit.getCurrentInstanceId());
-                                }}));
-                        }, failure:function(m) {
-                            ctxt.failure(m); 
-                        }}), op._section_name + "/" + op.operationIdx);
+					database.applyDeferredChanges($.extend({},ctxt,{
+						success:function() {
+							// mark self for re-processing on restore...
+							if ( shim.getControllerState( opendatakit.getRefId()) != 'v' ) {
+								shim.pushSectionScreenState( opendatakit.getRefId());
+								shim.setSectionScreenState( opendatakit.getRefId(), op, 'v');
+								shim.pushSectionScreenState( opendatakit.getRefId());
+							}
+							that.validateAllQuestions($.extend({},ctxt,{
+								justReportFailure: false,
+								success:function() {
+									var refPath = shim.popScreenHistoryUntilState( opendatakit.getRefId(), 'v');
+									if ( refPath != op ) {
+										ctxt.append("unexpected mis-match of screen history states");
+										ctxt.failure();
+										return;
+									}
+									that.getNextOperationPath($.extend({},ctxt,{
+										success:function(next) {
+											that.advanceToNextScreenHelper(ctxt,next, shim.getControllerState(opendatakit.getRefId()));
+										}}), op);
+								}}), op._sweep_name);
+						}, failure:function(m) {
+							mdl.loaded = false;
+							database.cacheAllData($.extend({},ctxt,{success:function() {
+								ctxt.failure(m);
+							}, failure:function(m2) {
+								ctxt.failure(m);
+							}}), opendatakit.getCurrentInstanceId());
+						}}));
                     // on success, call advance. 
                     // on failure, we are done.
                     break;
@@ -729,9 +741,11 @@ window.controller = {
                         ctxt.failure();
                         return;
                     }
-                    shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
-                    shim.pushSectionScreenState( opendatakit.getRefId());
-                    shim.setSectionScreenState( opendatakit.getRefId(), path, null);
+					if ( shim.getControllerState( opendatakit.getRefId()) != 'v' ) {
+						shim.pushSectionScreenState( opendatakit.getRefId());
+						shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
+						shim.pushSectionScreenState( opendatakit.getRefId());
+					}
                     that.validateAllQuestions($.extend({},ctxt,{
                         justReportFailure: false,
                         success:function() {
@@ -767,11 +781,6 @@ window.controller = {
                 }}), false);
         }
     },
-    // return to the main screen (showing the available instances) for this form.
-    leaveInstance:function(ctxt) {
-      var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), null, null);
-      this.changeUrlHash(ctxt, newhash);
-    },
     gotoScreenPath:function(ctxt, path, options) {
         var that = this;
         if ( path == null ) {
@@ -792,7 +801,7 @@ window.controller = {
                     that.screenManager.noNextPage($.extend({}, ctxt,{
                         success: function() {
                             ctxt.append("controller.gotoScreenPath.noSreens");
-                            that.gotoScreenPath(ctxt, opendatakit.initialScreenPath);
+                            that.gotoScreenPath(ctxt, opendatakit.initialScreenPath, addedOptions);
                     }}));
                 }
             },
@@ -808,12 +817,40 @@ window.controller = {
         window.location.hash = url;
         parsequery.changeUrlHash(ctxt);
     },
+    // return to the main screen (showing the available instances) for this form.
+    leaveInstance:function(ctxt) {
+		this.openInstance(ctxt, null);
+    },
+    createInstance: function(ctxt){
+		var id = opendatakit.genUUID();
+		this.openInstance(ctxt, id);
+    },
+    openInstance: function(ctxt, id, instanceMetadataKeyValueMap) {
+		var that = this;
+		that.reset($.extend({},ctxt,{success:function() {
+			if ( id == null ) {
+				opendatakit.clearCurrentInstanceId();
+			} else {
+				opendatakit.setCurrentInstanceId(id);
+			}
+			var kvList = "";
+			if ( instanceMetadataKeyValueMap != null ) {
+				for ( var f in instanceMetadataKeyValueMap ) {
+					var v = instanceMetadataKeyValueMap[f];
+					kvList = kvList + "&" + f + "=" + escape(v);
+				}
+			}
+			var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
+                         id, opendatakit.initialScreenPath);
+			that.changeUrlHash(ctxt,qpl + kvList);
+		}}),true);
+    },
     reset: function(ctxt,sameForm) {
         // NOTE: the ctxt calls here are synchronous actions
         // ctxt is only passed in for logging purposes.
         ctxt.append('controller.reset');
         shim.clearSectionScreenState(opendatakit.getRefId());
-        shim.clearInstanceId(opendatakit.getRefId());
+        opendatakit.clearCurrentInstanceId();
         if ( this.screenManager != null ) {
             // this asynchronously calls ctxt.success()...
             this.screenManager.cleanUpScreenManager(ctxt);
@@ -884,12 +921,16 @@ window.controller = {
         
         append : function( method, detail ) {
             var now = new Date().getTime();
-            this.loggingContextChain.push( {method: method, timestamp: now, detail: detail } );
+			var log_obj = {method: method, timestamp: now, detail: detail };
+            this.loggingContextChain.push( log_obj );
             // SpeedTracer Logging API
-              var logger = window.console;
+            var logger = window.console;
             if (logger && logger.markTimeline) {
                 logger.markTimeline(method);
             }
+			var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail == null) ? ")" : ") detail: " + detail);
+			shim.log('D', dlog);
+ 
         },
         success: function(){
             this._log('S', 'success!');
@@ -910,12 +951,10 @@ window.controller = {
         },
 
         _log: function( severity, contextMsg ) {
-            var flattened = "seqAtEnd: " + window.controller.eventCount;
-            $.each( this.loggingContextChain, function(index,value) {
-                flattened += "\nmethod: " + value.method + " timestamp: " +
-                    value.timestamp + ((value.detail != null) ? " detail: " + value.detail : "");
-            });
-            shim.log(severity, contextMsg + " execution_chain: " + flattened);
+			var value = this.loggingContextChain[0];
+            var flattened =	contextMsg + " contextType: " + value.method + " (" +
+				value.detail + ") seqAtEnd: " + window.controller.eventCount;
+            shim.log(severity, flattened);
         }
     },
     
@@ -970,32 +1009,6 @@ window.controller = {
         var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
-    },
-    
-    createInstance: function(evt){
-      var that = this;
-      var ctxt = controller.newContext(evt);
-      evt.stopPropagation(true);
-      evt.stopImmediatePropagation();
-      ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
-      opendatakit.openNewInstanceId($.extend({},ctxt,{
-        success: function(){
-          var url = arguments[0];
-          that.changeUrlHash(ctxt,url)
-       }}), null);
-    },
-
-    openInstance: function(evt) {
-      var that = this;
-      var ctxt = controller.newContext(evt);
-      evt.stopPropagation(true);
-      evt.stopImmediatePropagation();
-      ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
-      opendatakit.openNewInstanceId($.extend({},ctxt,{
-        success: function(){
-          var url = arguments[0];
-          that.changeUrlHash(ctxt,url)
-       }}), $(evt.target).attr('id'));
     }
 
 };

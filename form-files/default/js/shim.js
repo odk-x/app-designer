@@ -86,6 +86,10 @@ window.shim = window.shim || {
         }
         
         var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+		if ( lastSection.state == 'a' ) {
+			this.log("I","shim: SKIPPED('" + lastSection.screen + "','a'): pushSectionScreenState(" + refId + ")");
+			return;
+		}
         lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
     },
     setSectionScreenState: function( refId, screenPath, state) {
