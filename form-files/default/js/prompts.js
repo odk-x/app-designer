@@ -960,7 +960,7 @@ promptTypes.input_type = promptTypes.base.extend({
     //DebouncedRender throttles rerendering so that sliders work.
     debouncedRender: _.debounce(function(ctxt) {
         this.reRender(ctxt);
-    }, 500),
+    }, 500, true),
     modification: function(evt) {
         var value = $(evt.target).val();
         var that = this;
