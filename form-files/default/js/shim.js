@@ -127,7 +127,6 @@ window.shim = window.shim || {
 
         this.log("D","shim: DO: clearSectionScreenState(" + refId + ")");
         this.sectionStateScreenHistory = [ { history: [], screen: 'initial/0', state: null } ];
-//        this.sectionStateScreenHistory = [];
     },
     getControllerState: function( refId ) {
         if (refId != this.refId) {
@@ -149,7 +148,7 @@ window.shim = window.shim || {
             return null;
         }
         this.log("D","shim: DO: getScreenPath(" + refId + ")");
-        this._dumpScreenStateHistory();
+		this._dumpScreenStateHistory();
         
         if ( this.sectionStateScreenHistory.length == 0 ) {
             this.log("D","shim: getScreenPath: NULL!");
@@ -188,23 +187,6 @@ window.shim = window.shim || {
                 return lastSection.screen;
             }
             this.sectionStateScreenHistory.pop();
-        }
-        return null;
-    },
-    popScreenHistoryUntilState: function(refId, state) {
-        if (refId != this.refId) {
-            this.log("D","shim: IGNORED: popScreenHistoryUntilState(" + refId + ", " + state + ")");
-            return null;
-        }
-        
-        this.log("D","shim: DO: popScreenHistoryUntilState(" + refId + ", " + state + ")");
-        for(;;) {
-            var screenPath = this.popScreenHistory(refId);
-            if ( screenPath == null ) return null;
-            var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-            if ( lastSection.state == state ) {
-                return screenPath;
-            }
         }
         return null;
     },
