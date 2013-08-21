@@ -250,12 +250,12 @@ window.controller = {
                 if (shim.hasScreenHistory(opendatakit.getRefId())) {
                     ctxt.append("gotoPreviousScreen.beforeMove.success.hasScreenHistory", "px: " +  opPath);
                     var operationPath = shim.popScreenHistory(opendatakit.getRefId());
-					var controllerState = shim.getControllerState(opendatakit.getRefId());
-					if ( controllerState == 'a' ) {
-						ctxt.append("gotoPreviousScreen.beforeMove.success.unexpectedControllerState", "px: " +  operationPath);
-						console.error("ERROR! unexpectedControllerState px: " +  operationPath);
-						alert("ERROR! unexpectedControllerState px: " +  operationPath);
-					}
+                    var controllerState = shim.getControllerState(opendatakit.getRefId());
+                    if ( controllerState == 'a' ) {
+                        ctxt.append("gotoPreviousScreen.beforeMove.success.unexpectedControllerState", "px: " +  operationPath);
+                        console.error("ERROR! unexpectedControllerState px: " +  operationPath);
+                        alert("ERROR! unexpectedControllerState px: " +  operationPath);
+                    }
                     that.gotoScreenPath(ctxt, operationPath, {omitPushOnReturnStack:true});
                 } else {
                     ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
@@ -355,8 +355,8 @@ window.controller = {
                                 ctxt.failure(m); 
                             }}), op._section_name + "/" + op.operationIdx);
                     } else {
-						// push the prior rendered screen onto the stack before we mark the 'do_section' callout
-						shim.pushSectionScreenState(opendatakit.getRefId());
+                        // push the prior rendered screen onto the stack before we mark the 'do_section' callout
+                        shim.pushSectionScreenState(opendatakit.getRefId());
                         // save our op with note to advance immediately on return...
                         shim.setSectionScreenState(opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'a');
                         // start at operation 0 in the new section
@@ -366,13 +366,13 @@ window.controller = {
                 case "exit_section":
                     if ( shim.hasSectionStack(opendatakit.getRefId()) ) {
                         var stackPath = shim.popSectionStack(opendatakit.getRefId());
-						var controllerState = shim.getControllerState(opendatakit.getRefId());
-						if ( stackPath == null ) {
-							// we have popped everything off -- reset to initial page
-							shim.clearSectionScreenState(opendatakit.getRefId());
-							stackPath = shim.getScreenPath(opendatakit.getRefId());
-							controllerState = shim.getControllerState(opendatakit.getRefId());
-						}
+                        var controllerState = shim.getControllerState(opendatakit.getRefId());
+                        if ( stackPath == null ) {
+                            // we have popped everything off -- reset to initial page
+                            shim.clearSectionScreenState(opendatakit.getRefId());
+                            stackPath = shim.getScreenPath(opendatakit.getRefId());
+                            controllerState = shim.getControllerState(opendatakit.getRefId());
+                        }
                         that.advanceToNextScreenHelper(ctxt, stackPath, controllerState);
                     } else {
                         that.reset($.extend({},ctxt,{success:function() {
@@ -381,39 +381,39 @@ window.controller = {
                     }
                     break;
                 case "validate":
-					database.applyDeferredChanges($.extend({},ctxt,{
-						success:function() {
-							if ( shim.getControllerState( opendatakit.getRefId()) != 'v' ) {
-								// push the prompt we are leaving...
-								shim.pushSectionScreenState( opendatakit.getRefId());
-							}
-							// tag ourself as a 'v' node. Push onto stack.
-							shim.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'v');
-							shim.pushSectionScreenState( opendatakit.getRefId());
-							that.validateAllQuestions($.extend({},ctxt,{
-								justReportFailure: false,
-								success:function() {
-									// DONE: pop ourselves off.
-									var refPath = shim.popScreenHistory( opendatakit.getRefId());
-									if ( refPath != op._section_name + "/" + op.operationIdx ) {
-										ctxt.append("unexpected mis-match of screen history states");
-										ctxt.failure();
-										return;
-									}
-									shim.setSectionScreenState( opendatakit.getRefId(), refPath, 'a');
-									that.getNextOperationPath($.extend({},ctxt,{
-										success:function(next) {
-											that.advanceToNextScreenHelper(ctxt,next);
-										}}), op._section_name + "/" + op.operationIdx);
-								}}), op._sweep_name);
-						}, failure:function(m) {
-							mdl.loaded = false;
-							database.cacheAllData($.extend({},ctxt,{success:function() {
-								ctxt.failure(m);
-							}, failure:function(m2) {
-								ctxt.failure(m);
-							}}), opendatakit.getCurrentInstanceId());
-						}}));
+                    database.applyDeferredChanges($.extend({},ctxt,{
+                        success:function() {
+                            if ( shim.getControllerState( opendatakit.getRefId()) != 'v' ) {
+                                // push the prompt we are leaving...
+                                shim.pushSectionScreenState( opendatakit.getRefId());
+                            }
+                            // tag ourself as a 'v' node. Push onto stack.
+                            shim.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'v');
+                            shim.pushSectionScreenState( opendatakit.getRefId());
+                            that.validateAllQuestions($.extend({},ctxt,{
+                                justReportFailure: false,
+                                success:function() {
+                                    // DONE: pop ourselves off.
+                                    var refPath = shim.popScreenHistory( opendatakit.getRefId());
+                                    if ( refPath != op._section_name + "/" + op.operationIdx ) {
+                                        ctxt.append("unexpected mis-match of screen history states");
+                                        ctxt.failure();
+                                        return;
+                                    }
+                                    shim.setSectionScreenState( opendatakit.getRefId(), refPath, 'a');
+                                    that.getNextOperationPath($.extend({},ctxt,{
+                                        success:function(next) {
+                                            that.advanceToNextScreenHelper(ctxt,next);
+                                        }}), op._section_name + "/" + op.operationIdx);
+                                }}), op._sweep_name);
+                        }, failure:function(m) {
+                            mdl.loaded = false;
+                            database.cacheAllData($.extend({},ctxt,{success:function() {
+                                ctxt.failure(m);
+                            }, failure:function(m2) {
+                                ctxt.failure(m);
+                            }}), opendatakit.getCurrentInstanceId());
+                        }}));
                     // on success, call advance. 
                     // on failure, we are done.
                     break;
@@ -545,17 +545,40 @@ window.controller = {
                         ctxt.failure(m);
                         return;
                     } else {
-                        that.setScreen( $.extend({}, ctxt, {
+                        var popupbasectxt = that.newCallbackContext();
+                        var popupctxt = $.extend({}, popupbasectxt, {
                             success: function() {
+                                popupbasectxt.append("validateQuestionHelper.failure.setScreen.showScreenPopup", "px: " + ctxt.failedOperation.operationIdx);
                                 setTimeout(function() {
-                                    ctxt.append("validateQuestionHelper.failure.setScreen.setTimeout", "px: " + that.getCurrentScreenPath());
-                                    that.screenManager.hideSpinnerOverlay();
+                                    popupbasectxt.append("validateQuestionHelper.failure.setScreen.setTimeout", "px: " + that.getCurrentScreenPath());
                                     if ( m && m.message ) {
                                         that.screenManager.showScreenPopup(m);
                                     }
-                                    ctxt.strict = oldvalue;
-                                    ctxt.failure(m);
-                                    }, 500);
+                                    popupbasectxt.success();
+                                }, 500);
+                            },
+                            failure: function() {
+                                popupbasectxt.append("validateQuestionHelper.failure.setScreen.showScreenPopup", "px: " + ctxt.failedOperation.operationIdx);
+                                setTimeout(function() {
+                                    popupbasectxt.append("validateQuestionHelper.failure.setScreen.setTimeout", "px: " + that.getCurrentScreenPath());
+                                    if ( m && m.message ) {
+                                        that.screenManager.showScreenPopup(m);
+                                    }
+                                    popupbasectxt.success();
+                                }, 500);
+                            }});
+                        that.setScreen( $.extend({}, ctxt, {
+                            success: function() {
+                                that.screenManager.hideSpinnerOverlay();
+                                ctxt.setChainedContext(popupctxt);
+                                ctxt.strict = oldvalue;
+                                ctxt.failure(m);
+                            }, 
+                            failure: function(ignored) {
+                                that.screenManager.hideSpinnerOverlay();
+                                ctxt.setChainedContext(popupctxt);
+                                ctxt.strict = oldvalue;
+                                ctxt.failure(m);
                             }}), ctxt.failedOperation, 
                                 { popHistoryOnExit: true, omitPushOnReturnStack: true } );
                     }
@@ -744,17 +767,17 @@ window.controller = {
                         ctxt.failure();
                         return;
                     }
-					if ( shim.getControllerState( opendatakit.getRefId()) != 'v' ) {
-						// push the prompt we are leaving...
-						shim.pushSectionScreenState( opendatakit.getRefId());
-					}
-					// tag ourself as a 'v' node. Push onto stack.
-					shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
-					shim.pushSectionScreenState( opendatakit.getRefId());
+                    if ( shim.getControllerState( opendatakit.getRefId()) != 'v' ) {
+                        // push the prompt we are leaving...
+                        shim.pushSectionScreenState( opendatakit.getRefId());
+                    }
+                    // tag ourself as a 'v' node. Push onto stack.
+                    shim.setSectionScreenState( opendatakit.getRefId(), path, 'v');
+                    shim.pushSectionScreenState( opendatakit.getRefId());
                     that.validateAllQuestions($.extend({},ctxt,{
                         justReportFailure: false,
                         success:function() {
-							// DONE: pop ourselves off.
+                            // DONE: pop ourselves off.
                             var refPath = shim.popScreenHistory( opendatakit.getRefId());
                             if ( refPath != path ) {
                                 ctxt.append("unexpected mis-match of screen history states");
@@ -762,7 +785,7 @@ window.controller = {
                                 ctxt.failure();
                                 return;
                             }
-							shim.setSectionScreenState( opendatakit.getRefId(), path, 'a');
+                            shim.setSectionScreenState( opendatakit.getRefId(), path, 'a');
                             // everything validated... now mark the record as COMPLETE...
                             database.save_all_changes($.extend({},ctxt,{
                                 success:function(){
@@ -826,37 +849,37 @@ window.controller = {
     },
     // return to the main screen (showing the available instances) for this form.
     leaveInstance:function(ctxt) {
-		this.openInstance(ctxt, null);
+        this.openInstance(ctxt, null);
     },
     createInstance: function(ctxt){
-		var id = opendatakit.genUUID();
-		this.openInstance(ctxt, id);
+        var id = opendatakit.genUUID();
+        this.openInstance(ctxt, id);
     },
     openInstance: function(ctxt, id, instanceMetadataKeyValueMap) {
-		var that = this;
-		that.reset($.extend({},ctxt,{success:function() {
-			if ( id == null ) {
-				opendatakit.clearCurrentInstanceId();
-			} else {
-				opendatakit.setCurrentInstanceId(id);
-			}
-			var kvList = "";
-			if ( instanceMetadataKeyValueMap != null ) {
-				for ( var f in instanceMetadataKeyValueMap ) {
-					var v = instanceMetadataKeyValueMap[f];
-					kvList = kvList + "&" + f + "=" + escape(v);
-				}
-			}
-			var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
+        var that = this;
+        that.reset($.extend({},ctxt,{success:function() {
+            if ( id == null ) {
+                opendatakit.clearCurrentInstanceId();
+            } else {
+                opendatakit.setCurrentInstanceId(id);
+            }
+            var kvList = "";
+            if ( instanceMetadataKeyValueMap != null ) {
+                for ( var f in instanceMetadataKeyValueMap ) {
+                    var v = instanceMetadataKeyValueMap[f];
+                    kvList = kvList + "&" + f + "=" + escape(v);
+                }
+            }
+            var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
                         id, opendatakit.initialScreenPath);
-			// this does not reset the RefId...
-			parsequery._prepAndSwitchUI( ctxt, qpl, 
-						id, opendatakit.initialScreenPath,
-						opendatakit.getRefId(), false,
-						instanceMetadataKeyValueMap );
-			// this resets the RefId...
-			// that.changeUrlHash(ctxt,qpl + kvList);
-		}}),true);
+            // this does not reset the RefId...
+            parsequery._prepAndSwitchUI( ctxt, qpl, 
+                        id, opendatakit.initialScreenPath,
+                        opendatakit.getRefId(), false,
+                        instanceMetadataKeyValueMap );
+            // this resets the RefId...
+            // that.changeUrlHash(ctxt,qpl + kvList);
+        }}),true);
     },
     reset: function(ctxt,sameForm) {
         // NOTE: the ctxt calls here are synchronous actions
@@ -934,15 +957,15 @@ window.controller = {
         
         append : function( method, detail ) {
             var now = new Date().getTime();
-			var log_obj = {method: method, timestamp: now, detail: detail };
+            var log_obj = {method: method, timestamp: now, detail: detail };
             this.loggingContextChain.push( log_obj );
             // SpeedTracer Logging API
             var logger = window.console;
             if (logger && logger.markTimeline) {
                 logger.markTimeline(method);
             }
-			var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail == null) ? ")" : ") detail: " + detail);
-			shim.log('D', dlog);
+            var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail == null) ? ")" : ") detail: " + detail);
+            shim.log('D', dlog);
  
         },
         success: function(){
@@ -960,13 +983,17 @@ window.controller = {
         },
         
         setChainedContext: function(ctxt) {
-            this.chainedCtxt = ctxt;
+            var cur = this;
+            while ( cur.chainedCtxt != null ) {
+                cur = cur.chainedCtxt;
+            }
+            cur.chainedCtxt = ctxt;
         },
 
         _log: function( severity, contextMsg ) {
-			var value = this.loggingContextChain[0];
-            var flattened =	contextMsg + " contextType: " + value.method + " (" +
-				value.detail + ") seqAtEnd: " + window.controller.eventCount;
+            var value = this.loggingContextChain[0];
+            var flattened =    contextMsg + " contextType: " + value.method + " (" +
+                value.detail + ") seqAtEnd: " + window.controller.eventCount;
             shim.log(severity, flattened);
         }
     },
