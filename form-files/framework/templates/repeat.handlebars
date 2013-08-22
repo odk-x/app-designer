@@ -1,0 +1,30 @@
+<table>
+    {{> labelHint}}
+    <tr><td align="center">
+        <table class="tableGrid">
+            <tr class="tableGrid">
+                <th class="tableGrid">Last Save Date</th>
+                <th class="tableGrid">Instance Name</th>
+                <th class="tableGrid">Version</th>
+                <th class="tableGrid">Finalized</th>
+                <th class="tableGrid"></th>
+            </tr>
+            {{#each instances}}
+                <tr class="tableGrid">
+                    <td class="tableGrid"><span>{{last_saved_timestamp}}</span></td>
+                    <td class="tableGrid">
+                        <button id="{{instance_id}}" class="whiteButton openInstance">{{instanceName}}</button>
+                    </td>
+                    <td class="tableGrid"><span>{{version}}</span></td>
+                    <td class="tableGrid"><span>{{saved_status}}</span></td>
+                    <td class="tableGrid">
+                        <button id="{{instance_id}}" class="whiteButton deleteInstance">delete</button>
+                    </td></tr>
+                </tr>
+            {{else}}
+                <span>No instances</span>
+            {{/each}}
+            <button class="whiteButton addInstance">Add an instance</button>
+        </table>
+    </td></tr>
+</table>
