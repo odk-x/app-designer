@@ -55,7 +55,11 @@ return {
             // set the refId. From this point onward,
             // changes will be applied within the shim
             opendatakit.setRefId(refId);
-            opendatakit.setCurrentInstanceId(instanceId);
+			if ( instanceId == null ) {
+				opendatakit.clearCurrentInstanceId();
+			} else {
+				opendatakit.setCurrentInstanceId(instanceId);
+			}
             that.controller.gotoScreenPath(ctxt, screenPath);
         }}), instanceId, instanceMetadataKeyValueMap);
     },
@@ -136,35 +140,33 @@ return {
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
                 // build table for table_id...
+                // create data table and/or configure the Tables metadata...
                 database.initializeTables($.extend({},ctxt,{success:function() {
-                        // data table already exists
                         // build the survey and place it in the controller...
-                        that.builder.buildSurvey(function() {
+                        that.builder.buildSurvey($.extend({}, ctxt, {success:function() {
+								opendatakit.setCurrentFormDef(formDef);
+								opendatakit.setCurrentFormPath(formPath);
+								// currentInstanceId == null
                                 // currentInstanceId == null
                                 // TODO: load instance...
                                 that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
-                            });
+                            }}), formDef, formPath);
                     }}), formDef, table_id, formPath);
             }}), sameForm);
         } else if (!sameForm) {
             opendatakit.clearLocalInfo("form"); // formPath, instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
-                // preserve values from the Tables metadata but override form info...
-                opendatakit.setCurrentFormDef(formDef);
-                opendatakit.setCurrentFormPath(formPath);
-                // currentInstanceId == null
-                // data table already exists (since table_id is unchanged)
-                // TODO: parse new form...
-                // TODO: verify instance table exists
-                // TODO: load instance...
-                
                 // build the survey and place it in the controller...
-                that.builder.buildSurvey(function() {
+                that.builder.buildSurvey($.extend({}, ctxt, {success: function() {
+							// data table already exists (since table_id is unchanged)
+							// preserve values from the Tables metadata but override form info...
+							opendatakit.setCurrentFormDef(formDef);
+							opendatakit.setCurrentFormPath(formPath);
                             // currentInstanceId == null
                             // TODO: load instance...
                             that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
-                });
+                }}), formDef, formPath);
             }}), sameForm);
         } else  if (!sameInstance) {
             opendatakit.clearLocalInfo("instance"); // instanceId, screenPath, refId
@@ -272,40 +274,17 @@ return {
             }
         }
     },
+	
     /**
      * What actually reads in and loads the formDef file (and then parses the query parameters against it).
      */
     _parseFormDefFile: function(ctxt, formPath, instanceId, screenPath, refId, instanceMetadataKeyValueMap, filename) {
         var that = this;
-        requirejs(['text!' + filename], 
-            function(formDefTxt) {
-                if ( formDefTxt == null || formDefTxt.length == 0 ) {
-                    alert('Unable to find file: ' + filename);
-                    ctxt.failure({message: "Form definition is empty."});
-                } else {
-                    var formDef;
-                    try {
-                        formDef = JSON.parse(formDefTxt);
-                    } catch (ex) {
-                        console.error('parsequery._parseParameters.requirejs.JSONexception' + String(ex));
-                        ctxt.append('parsequery._parseParameters.requirejs.JSONexception',  'JSON parsing error: ' + ex);
-                        ctxt.failure({message: "Exception while processing form definition."});
-                        return;
-                    }
-                    try {
-                        that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
-                                                instanceId, screenPath, refId, instanceMetadataKeyValueMap);
-                    } catch (ex) {
-                        console.error('parsequery._parseParameters.requirejs.continuationException' + String(ex));
-                        ctxt.append('parsequery._parseParameters.requirejs.continuationException',  'formDef interpetation or database setup error: ' + ex);
-                        ctxt.failure({message: "Exception while processing form definition."});
-                    }
-                }
-            }, function(err) {
-                ctxt.append("parsequery._parseParameters.requirejs.failure", err.toString());
-                ctxt.failure({message: "Failure while reading form definition."});
-            }
-        );
+		var newCtxt = $.extend({},ctxt, {success:function(formDef) {
+				that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
+					instanceId, screenPath, refId, instanceMetadataKeyValueMap);
+			}});
+		opendatakit.readFormDefFile(newCtxt, filename);
     },
     /**
      *

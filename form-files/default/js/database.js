@@ -471,7 +471,7 @@ define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
 // Otherwise, saved == "INCOMPLETE" indicates a manual user savepoint and
 // saved IS NULL indicates an automatic savepoint. The timestamp indicates
 // the time at which the savepoint occured.
-
+ 
 /**
  * get the contents of the active data table row for a given instanceId
  *
@@ -512,16 +512,29 @@ _selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionAr
             };
     }
 },
-selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs) {
+/**
+ * get the contents of the active data table row for a given table
+ * for related forms (with filters).
+ *
+ * dbTableName
+ * selection  e.g., 'name=? and age=?'
+ * selectionArgs e.g., ['Tom',33]
+ * orderBy  e.g., 'name asc, age desc'
+ *
+ * Requires: no globals
+ */
+selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
     if ( selection != null ) {
         return {
                 stmt :  'select * from (select * from "' + dbTableName +
-                        '" group by id having timestamp = max(timestamp)) where ' + selection,
+                        '" group by id having timestamp = max(timestamp)) where ' + selection +
+						((orderBy == null) ? '' : ' order by ' + orderBy),
                 bind : selectionArgs
             };
     } else {
         return {
-                stmt : 'select * from "' + dbTableName + '" group by id having timestamp = max(timestamp)',
+                stmt : 'select * from "' + dbTableName + '" group by id having timestamp = max(timestamp)' +
+						((orderBy == null) ? '' : ' order by ' + orderBy),
                 bind : []    
             };
     }
@@ -1065,7 +1078,7 @@ cacheAllData:function(ctxt, instanceId) {
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
+_coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
     var that = this;
     var outcome = true;
     var ss;
@@ -1144,37 +1157,6 @@ coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
         });
     });
 },
-getAllTableMetaData:function(ctxt, table_id) {
-    var that = this;
-    var tlo = { tableMetadata: {}, columnMetadata: {}, table_id: table_id };
-    ctxt.append('getAllTableMetaData');
-    var tmpctxt = $.extend({},ctxt,{success:function() {
-                ctxt.append('getAllTableMetaData.success');
-                ctxt.success(tlo);
-            }});
-    that.withDb( tmpctxt, function(transaction) {
-            that.coreGetAllTableMetadata(transaction, tmpctxt, tlo);
-        });
-},
-cacheAllTableMetaData:function(ctxt, table_id) {
-    var that = this;
-    // pull everything for synchronous read access
-    ctxt.append('cacheAllTableMetaData.getAllTableMetaData');
-    that.getAllTableMetaData($.extend({},ctxt,{success:function(tlo) {
-        ctxt.append('cacheAllTableMetaData.success');
-        if ( tlo == null ) {
-            tlo = {};
-        }
-        // these values come from the current webpage
-        // tlo.formDef = mdl.formDef;
-        // mdl.formDef = tlo.formDef;
-        mdl.tableMetadata = tlo.tableMetadata;
-        mdl.columnMetadata = tlo.columnMetadata;
-        mdl.metadata = tlo.metadata;
-        mdl.data = tlo.data;
-        ctxt.success();
-        }}), table_id);
-},
 save_all_changes:function(ctxt, asComplete) {
       var that = this;
     // TODO: if called from Java, ensure that all data on the current page is saved...
@@ -1210,7 +1192,7 @@ ignore_all_changes:function(ctxt) {
             mdl.loaded = false;
         });
 },
- delete_all:function(ctxt, instanceId) {
+delete_all:function(ctxt, instanceId) {
       var that = this;
       ctxt.append('delete_all');
       that.withDb( ctxt, function(transaction) {
@@ -1219,18 +1201,48 @@ ignore_all_changes:function(ctxt) {
             transaction.executeSql(cs.stmt, cs.bind);
         });
 },
-get_all_instances:function(ctxt, subsurveyType) {
+get_all_instances:function(ctxt) {
       var that = this;
-      // TODO: support subforms. The subsurveyType is the form_id of the 
-      // subform. This should then be used to read its config, issue the 
-      // query against it's mdl.tableMetadata.dbTableName, etc.
       var instanceList = [];
-      ctxt.append('get_all_instances', subsurveyType);
+      ctxt.append('get_all_instances');
       that.withDb($.extend({},ctxt,{
         success: function() {
             ctxt.success(instanceList);
         }}), function(transaction) {
             var ss = that._getAllInstancesDataTableStmt(mdl.tableMetadata.dbTableName);
+            ctxt.sqlStatement = ss;
+            transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
+                for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
+                    var instance = result.rows.item(i);
+                    instanceList.push({
+                        instanceName: instance.instance_name,
+                        instance_id: instance.id,
+                        last_saved_timestamp: new Date(instance.timestamp),
+                        saved_status: instance.saved,
+                        locale: instance.locale
+                    });
+                }
+            });
+        });
+},
+delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
+      var that = this;
+      ctxt.append('delete_linked_instance_all');
+      that.withDb( ctxt, function(transaction) {
+            var cs = that._deleteDataTableStmt(dbTableName, instanceId);
+            ctxt.sqlStatement = cs;
+            transaction.executeSql(cs.stmt, cs.bind);
+        });
+},
+get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, orderBy) {
+      var that = this;
+      var instanceList = [];
+      ctxt.append('get_linked_instances', dbTableName);
+      that.withDb($.extend({},ctxt,{
+        success: function() {
+            ctxt.success(instanceList);
+        }}), function(transaction) {
+            var ss = that.selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
             ctxt.sqlStatement = ss;
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
@@ -1298,6 +1310,28 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
 },
 initializeTables:function(ctxt, formDef, table_id, formPath) {
     var that = this;
+	var rectxt = $.extend({}, ctxt, {success:function(tlo) {
+		ctxt.append('getAllTableMetaData.success');
+		// these values come from the current webpage
+		// update table_id and qp
+		mdl.formDef = tlo.formDef;
+		mdl.tableMetadata = tlo.tableMetadata;
+		mdl.columnMetadata = tlo.columnMetadata;
+		mdl.data = tlo.data;
+		opendatakit.setCurrentTableId(table_id);
+		opendatakit.setCurrentFormPath(formPath);
+		ctxt.success();
+	}});
+	that.readTableDefinition(rectxt, formDef, table_id, formPath);
+},
+/**
+ * Process the formDef into a table definition.
+ *
+ * On success, invoke ctxt.success(tlo); where tlo is what will become the mdl
+ *
+ */
+readTableDefinition:function(ctxt, formDef, table_id, formPath) {
+    var that = this;
     var tlo = {data: {},  // dataTable instance data values
         metadata: {}, // dataTable instance Metadata: (instanceName, locale)
         tableMetadata: {}, // table_definitions and key_value_store_active values for ("table", "default") of: table_id, tableKey, dbTableName
@@ -1311,16 +1345,8 @@ initializeTables:function(ctxt, formDef, table_id, formPath) {
                             
     ctxt.append('initializeTables');
     var tmpctxt = $.extend({},ctxt,{success:function() {
-                ctxt.append('getAllTableMetaData.success');
-                // these values come from the current webpage
-                // update table_id and qp
-                mdl.formDef = tlo.formDef;
-                mdl.tableMetadata = tlo.tableMetadata;
-                mdl.columnMetadata = tlo.columnMetadata;
-                mdl.data = tlo.data;
-                opendatakit.setCurrentTableId(table_id);
-                opendatakit.setCurrentFormPath(formPath);
-                ctxt.success();
+                ctxt.append('readTableDefinition.success');
+                ctxt.success(tlo);
             }});
     that.withDb(tmpctxt, function(transaction) {
                 // now insert records into these tables...
@@ -1630,7 +1656,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
     } else {
         // we don't need to write the database -- just update everything
         mdl.dataTableModel = dataTableModel;
-        that.coreGetAllTableMetadata(transaction, ctxt, tlo);
+        that._coreGetAllTableMetadata(transaction, ctxt, tlo);
     }
 },
 fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, dbTableName, dataTableModel, tlo) {
@@ -1662,7 +1688,7 @@ fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, dbTableNa
         if ( tableToUpdate == null ) {
             // end of the array -- we are done!
             mdl.dataTableModel = dataTableModel;
-            that.coreGetAllTableMetadata(transaction, ctxt, tlo);
+            that._coreGetAllTableMetadata(transaction, ctxt, tlo);
             return;
         }
 

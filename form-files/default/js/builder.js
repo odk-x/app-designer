@@ -105,10 +105,11 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         formula: formula,
         formula_with_context: formula_with_context,
         requirejs_path : function(content) {
-            return opendatakit.getCurrentFormPath() + content;
+			alert("Internal Error: this should already be substituted");
+            return this._formPath + content;
         },
         app_path_localized : function(content) {
-            var fd = opendatakit.getCurrentFormPath();
+            var fd = this.requirejs_path('');
             if ( content == null ) {
                 return content;
             } else if ( $.isPlainObject(content) ) {
@@ -232,25 +233,29 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
             }
         }
     },
-    buildSurvey: function(continuation) {
-        var surveyJson = opendatakit.getCurrentFormDef();
-        // if we have no survey object, we are bootstrapping
-        // just run the continuation (which will register a
-        // hash change processor).
+    buildSurvey: function(ctxt, surveyJson, formPath) {
         if (surveyJson == null) {
-            continuation();
+			ctxt.append('builder.buildSurvey', 'no formDef!');
+            ctxt.failure();
             return;
         }
         
         var that = this;
-        
+		
+		// define the requirejs_path action on the property parser.
+		// this is the only property parser that depends upon a 
+		// current mdl value.
+		propertyParsers.requirejs_path = function(content) {
+			return formPath + content;
+        };
+
         //currentPromptTypes set to a promptTypes subtype so user defined prompts
         //don't clobber the base prompt types for other surveys.
         currentPromptTypes = Object.create(promptTypes);
         // ditto
         currentScreenTypes = Object.create(screenTypes);
 
-        shim.log("I",'builder.buildSurvey: initializing');
+        ctxt.append('builder.buildSurvey: initializing');
         //Transform the calculate sheet into an object with format {calculation_name:function}
         calculates = _.object(_.map(surveyJson.logic_flow.calculates, function(calculate){
             return [calculate.calculation_name, propertyParsers.formula(calculate.calculation)];
@@ -280,34 +285,39 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
             
             //This resets the custom css styles to the customStyles.css file in the
             //current form's directory (or nothing if customStyles.css doesn't exist).
-            $('#custom-styles').attr('href', opendatakit.getCurrentFormPath() + 'customStyles.css');
+            $('#custom-styles').attr('href', formPath + 'customStyles.css');
             
             //Do an ajax request to see if there is a custom theme packaged with the form:
-            var customTheme = opendatakit.getCurrentFormPath() + 'customTheme.css';
+            var customTheme = formPath + 'customTheme.css';
             $.ajax({
                 url: customTheme,
                 success: function() {
                     $('#theme').attr('href', customTheme);
-                    var fontSize = opendatakit.getSettingValue("font-size");
-                    if ( fontSize != null ) {
-                        $('body').css("font-size", fontSize);
+                    var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
+                    if ( fontSize != null && fontSize.value != null) {
+                        $('body').css("font-size", fontSize.value);
                     }
-                    shim.log("I",'builder.buildSurvey: starting form processing continuation');
-                    continuation();
+                    ctxt.append('builder.buildSurvey: completed load - starting form processing');
+                    ctxt.success();
                 },
                 error: function() {
                     shim.log("W",'builder.buildSurvey: error loading ' +
-                            opendatakit.getCurrentFormPath() + 'customTheme.css');
+                            formPath + 'customTheme.css');
                     //Set the jQm theme to the defualt theme, or if there is a 
                     //predefined theme specified in the settings sheet, use that.
-                    $('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.3.1/' +
-                            (opendatakit.getSettingValue("theme") || 'jquery.mobile.theme-1.3.1' ) + '.css'));
-                    var fontSize = opendatakit.getSettingValue("font-size");
-                    if ( fontSize != null ) {
-                        $('body').css("font-size", fontSize);
+					var theme = opendatakit.getSettingObject(surveyJson, "theme");
+					if ( theme == null || theme.value == null ) {
+						theme = 'jquery.mobile.theme-1.3.1';
+					} else {
+						theme = theme.value;
+					}
+                    $('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.3.1/' + theme + '.css'));
+                    var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
+                    if ( fontSize != null && fontSize.value != null) {
+                        $('body').css("font-size", fontSize.value);
                     }
-                    shim.log("I",'builder.buildSurvey: starting form processing continuation');
-                    continuation();
+                    ctxt.append('builder.buildSurvey: completed load - starting form processing');
+                    ctxt.success();
                 }
             });
         };
@@ -315,7 +325,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         var afterCustomScreensLoadAttempt = function(){
             //This tries to load any user defined prompt types provided in customPromptTypes.js.
             //TODO: The approach to getting the current form path might need to change.
-            require([opendatakit.getCurrentFormPath() + 'customPromptTypes.js'], function (customPromptTypes) {
+            require([formPath + 'customPromptTypes.js'], function (customPromptTypes) {
                 shim.log("I","builder.buildSurvey: customPromptTypes found");
                 //Ensure all custom prompt type names are lowercase.
                 _.each(_.keys(customPromptTypes), function(promptTypeName){
@@ -328,7 +338,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
                 afterCustomPromptsLoadAttempt();
             }, function (err) {
                 shim.log("W",'builder.buildSurvey: error loading ' +
-                            opendatakit.getCurrentFormPath() + 'customPromptTypes.js');
+                            formPath + 'customPromptTypes.js');
                 //The errback, error callback
                 if(err.requireModules) {
                     //The error has a list of modules that failed
@@ -345,7 +355,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         
         //This tries to load any user defined prompt types provided in customPromptTypes.js.
         //TODO: The approach to getting the current form path might need to change.
-        require([opendatakit.getCurrentFormPath() + 'customScreenTypes.js'], function (customScreenTypes) {
+        require([formPath + 'customScreenTypes.js'], function (customScreenTypes) {
             shim.log("I","builder.buildSurvey: customScreenTypes found");
             //Ensure all custom prompt type names are lowercase.
             _.each(_.keys(customScreenTypes), function(screenTypeName){
@@ -358,7 +368,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
             afterCustomScreensLoadAttempt();
         }, function (err) {
             shim.log("W",'builder.buildSurvey: error loading ' +
-                        opendatakit.getCurrentFormPath() + 'customScreenTypes.js');
+                        formPath + 'customScreenTypes.js');
             //The errback, error callback
             if(err.requireModules) {
                 //The error has a list of modules that failed

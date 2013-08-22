@@ -510,36 +510,235 @@ promptTypes.hierarchy = promptTypes.base.extend({
         ctxt.success();
     }
 });
-promptTypes.repeat = promptTypes.base.extend({
-    type: "repeat",
+promptTypes.linked_table = promptTypes.base.extend({
+    type: "linked_table",
     valid: true,
-    templatePath: 'templates/repeat.handlebars',
+    templatePath: 'templates/linked_table.handlebars',
+	launchAction: 'org.opendatakit.survey.android.activities.LaunchSurveyActivity',
+	linked_form_id: null,
+	table_id: null,
+	selection: null, // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
+	selectionArgs: function() {return null;},
+	order_by: null, // must be: (elementName [asc|desc] )+  -- same restriction as selection -- cannot be elementPath
     events: {
         "click .openInstance": "openInstance",
         "click .deleteInstance": "deleteInstance",
         "click .addInstance": "addInstance"
     },
+	getLinkedTableId: function() {
+		if ( this.table_id == null ) {
+			return this.linked_form_id;
+		} else {
+			return this.table_id;
+		}
+	},
+	getFormPath: function() {
+		return '../' + this.linked_form_id + '/';
+	},
+	_linkedCachedMdl: null,
+	getLinkedMdl: function(ctxt) {
+		var that = this;
+		if ( that._linkedCachedMdl != null ) {
+			ctxt.success(that._linkedCachedMdl);
+		}
+		var filePath = that.getFormPath() + 'formDef.json';
+		opendatakit.readFormDefFile($.extend({},ctxt,{success:function(formDef) {
+			database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
+				that._linkedCachedMdl = tlo;
+				ctxt.success(tlo);
+			}}), formDef, that.getLinkedTableId(), filePath);
+		}}), filePath );
+	},
+	_cachedSelection: null,
+	convertSelection: function(linkedMdl) {
+		var that = this;
+		if ( that.selection == null || that.selection.length == 0 ) {
+			return null;
+		}
+        if ( that._cachedSelection != null ) {
+			return that._cachedSelection;
+		}
+		var parts = that.selection.split(' ');
+		var remapped = '';
+		var i;
+		for ( i = 0 ; i < parts.length ; ++i ) {
+			var e = parts[i];
+			if ( e.length = 0 || !/^[a-z0-9]+$/i.test(e) ) {
+				remapped = remapped + ' ' + e;
+			} else {
+				// map e back to elementKey
+				var found = false;
+				for (f in linkedMdl.dataTableModel) {
+					var defElement = dataTableModel[f];
+					var elementPath = defElement['elementPath'];
+					if ( elementPath == null ) elementPath = f;
+					if ( elementPath == e ) {
+						remapped = remapped + ' "' + f + '"';
+						found = true;
+						break;
+					}
+				}
+				if ( found == false ) {
+					alert('selection: unrecognized elementPath: ' + e );
+					shim.log('E','convertSelection: unrecognized elementPath: ' + e );
+					return null;
+				}
+			}
+		}
+		that._cachedSelection = remapped;
+		return that._cachedSelection;
+	},
+	_cachedOrderBy: null,
+	convertOrderBy: function(linkedMdl) {
+		var that = this;
+		if ( that.order_by == null || that.order_by.length == 0 ) {
+			return null;
+		}
+        if ( that._cachedOrderBy != null ) {
+			return that._cachedOrderBy;
+		}
+		var parts = that.order_by.split(' ');
+		var remapped = '';
+		var isElement = true;
+		var i;
+		for ( i = 0 ; i < parts.length ; ++i ) {
+			var e = parts[i];
+			if ( e.length = 0 ) {
+				// no-op
+			} else if ( isElement ) {
+				// map e back to elementKey
+				var found = false;
+				for (f in linkedMdl.dataTableModel) {
+					var defElement = dataTableModel[f];
+					var elementPath = defElement['elementPath'];
+					if ( elementPath == null ) elementPath = f;
+					if ( elementPath == e ) {
+						remapped = remapped + ' "' + f + '"';
+						found = true;
+						break;
+					}
+				}
+				if ( found == false ) {
+					alert('order_by: unrecognized elementPath: ' + e );
+					shim.log('E','convertOrderBy: unrecognized elementPath: ' + e );
+					return null;
+				}
+				isElement = false;
+			} else {
+				remapped = remapped + ' ' + e;
+				isElement = true;
+			}
+		}
+		that._cachedOrderBy = remapped;
+		return that._cachedOrderBy;
+	},
+    disableButtons: function() {
+        var that = this;
+        that.$('.openInstance').attr('disabled','true');
+        that.$('.deleteInstance').attr('disabled','true');
+        that.$('.addInstance').attr('disabled','true');
+    },
+    enableButtons: function() {
+        var that = this;
+        that.$('.openInstance').removeAttr('disabled');
+        that.$('.deleteInstance').removeAttr('disabled');
+        that.$('.addInstance').removeAttr('disabled');
+    },
     postActivate: function(ctxt) {
         var that = this;
-        var subsurveyType = that.param;
         ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
-        database.get_all_instances($.extend({},ctxt,{
-            success:function(instanceList) {
-                that.renderContext.instances = instanceList;
-		        that._screen._renderContext.enableNavigation = false;
-		        that._screen._renderContext.showHeader = false;
-		        that._screen._renderContext.showFooter = false;
-                ctxt.success();
-        }}), subsurveyType);
+		that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
+			var dbTableName = linkedMdl.tableMetadata.dbTableName;
+			var selectionString = that.convertSelection(linkedMdl);
+			var orderBy = that.convertOrderBy(linkedMdl);
+			database.get_linked_instances($.extend({},ctxt,{
+				success:function(instanceList) {
+					that.renderContext.instances = instanceList;
+					ctxt.success();
+			}}), dbTableName, that.selection, that.selectionArgs(), that.orderBy);
+		}}));
     },
     openInstance: function(evt) {
         var instanceId = $(evt.target).attr('id');
+        var that = this;
+        var ctxt = controller.newContext(evt);
+        that.disableButtons();
+        var platInfo = opendatakit.getPlatformInfo();
+        // TODO: is this the right sequence?
+        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
+			'launchSurvey', that.launchAction, 
+			JSON.stringify({ url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }));
+        ctxt.append('linked_table.openInstance', platInfo.container + " outcome is " + outcome);
+        if (outcome === null || outcome !== "OK") {
+            alert("Should be OK got >" + outcome + "<");
+            that.enableButtons();
+            ctxt.failure({message: "Action canceled."});
+        } else {
+            ctxt.success();
+        }
     },
     deleteInstance: function(evt) {
         var instanceId = $(evt.target).attr('id');
+        var that = this;
+        var ctxt = controller.newContext(evt);
+        that.disableButtons();
+		that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
+			var dbTableName = linkedMdl.tableMetadata.dbTableName;
+			database.delete_linked_instance_all($.extend({},ctxt,{
+				success:function() {
+					that.enableButtons();
+				},
+				failure:function(m) {
+					that.enableButtons();
+					ctxt.failure(m);
+				}}), dbTableName, instanceId);
+		}}));
     },
     addInstance: function(evt) {
-        //TODO: Notify collect of change of form? Or fire intent to launch new instance of collect?
+        var instanceId = opendatakit.genUUID();
+        var that = this;
+        var ctxt = controller.newContext(evt);
+        that.disableButtons();
+        var platInfo = opendatakit.getPlatformInfo();
+        // TODO: is this the right sequence?
+        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
+			'launchSurvey', that.launchAction, 
+			JSON.stringify({ url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }));
+        ctxt.append('linked_table.addInstance', platInfo.container + " outcome is " + outcome);
+        if (outcome === null || outcome !== "OK") {
+            alert("Should be OK got >" + outcome + "<");
+            that.enableButtons();
+            ctxt.failure({message: "Action canceled."});
+        } else {
+            ctxt.success();
+        }
+    },
+	getCallback: function(promptPath, byinternalPromptContext, byaction) {
+        var that = this;
+        if ( that.getPromptPath() != promptPath ) {
+            throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
+        }
+        return function(ctxt, internalPromptContext, action, jsonString) {
+            ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
+                " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+            var jsonObject = JSON.parse(jsonString);
+            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
+                    " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+				that.enableButtons();
+				that.reRender({success: function() { ctxt.failure(m);},
+								failure: function(j) { ctxt.failure(m);}});
+            }
+            else {
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
+                    " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+                shim.log("I","failure returned from intent");
+                alert(jsonObject.result);
+                that.enableButtons();
+                that.reRender({success: function() { ctxt.failure({message: "Action canceled."});},
+                    failure: function(j) { ctxt.failure({message: "Action canceled."});}});
+            }
+        };
     }
 });
 promptTypes.user_branch = promptTypes.base.extend({

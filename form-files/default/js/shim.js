@@ -49,6 +49,17 @@ window.shim = window.shim || {
         this.log("D","shim: DO: setInstanceId(" + refId + ", " + instanceId + ")");
         this.instanceId = instanceId;
     },
+    getInstanceId: function( refId ) {
+        if (refId != this.refId) {
+            this.log("D","shim: IGNORED: getInstanceId(" + refId + ")");
+            return null;
+        }
+        // report the new instanceId to ODK Survey...
+        // needed so that callbacks, etc. can properly track the instanceId 
+        // currently being worked on.
+        this.log("D","shim: DO: getInstanceId(" + refId + ")");
+        return this.instanceId;
+    },
     _dumpScreenStateHistory : function() {
         this.log("D","shim -------------*start* dumpScreenStateHistory--------------------");
         if ( this.sectionStateScreenHistory.length == 0 ) {
@@ -312,6 +323,16 @@ window.shim = window.shim || {
                                                 ', "altitude": ' + prompt("Enter altitude:") +
                                                 ', "accuracy": ' + prompt("Enter accuracy:") +
                                                 ' } }' );
+            }, 1000);
+            return "OK";
+        }
+        if ( action == 'org.opendatakit.survey.android.activities.LaunchSurveyActivity' ) {
+			var value = JSON.parse(jsonObj);
+			window.open(value.url,'_blank', null, false);
+            setTimeout(function() {
+				alert("Click OK to continue");
+                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { } }' );
             }, 1000);
             return "OK";
         }
