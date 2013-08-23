@@ -640,7 +640,8 @@ window.controller = {
          */
         this.getOperationPath($.extend({},ctxt,{success:function(newPath) {
             var stateString = null;
-            if ( that.getCurrentScreenPath() == newPath ) {
+            var oldPath = that.getCurrentScreenPath();
+            if ( oldPath == newPath ) {
                 // this is now necessary if we are redrawing this screen
                 options = {
                     omitPushOnReturnStack : true
@@ -668,7 +669,6 @@ window.controller = {
                 }
             }
 
-            var oldPath = that.getCurrentScreenPath();
             if (!options.omitPushOnReturnStack && oldPath != null) {
                 shim.pushSectionScreenState( opendatakit.getRefId());
             }
@@ -696,20 +696,28 @@ window.controller = {
 
             that.screenManager.setScreen($.extend({},ctxt,{
                 success: function() {
+                    var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
+                                opendatakit.getCurrentInstanceId(), that.getCurrentScreenPath());
+                    window.location.hash = qpl;
                     ctxt.success();
-                    // queue to update the URL...
-                    setTimeout(function() {
-                        var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
-                                    opendatakit.getCurrentInstanceId(), that.getCurrentScreenPath());
-                        window.location.hash = qpl;
-                    }, 0);
                 }, failure: function(m) {
-                    ctxt.failure(m);
-                    setTimeout(function() {
-                        var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
-                                    opendatakit.getCurrentInstanceId(), oldPath);
-                        window.location.hash = qpl;
-                    }, 0);
+                    // undo screen change on failure...
+                    ctxt.append('controller.setScreen.failureRecovery', 'hash: ' + qpl);
+                    if (!options.omitPushOnReturnStack && oldPath != null) {
+                        shim.popScreenHistory( opendatakit.getRefId());
+                    }
+                    if ( oldPath == newPath ) {
+                        ctxt.failure(m);
+                    } else {
+                        // set the screen back to what it was, then report this failure
+                        that.setScreen($.extend({},ctxt,{success:function() {
+                            // report the failure.
+                            ctxt.failure(m);
+                        }, failure: function() {
+                            // report the failure.
+                            ctxt.failure(m);
+                        }}), oldPath);
+                    }
                 }}), ScreenInstance, options.popHistoryOnExit || false );
         }}), operation._section_name + "/" + operation.operationIdx );
     },
@@ -787,8 +795,7 @@ window.controller = {
                             }
                             shim.setSectionScreenState( opendatakit.getRefId(), path, 'a');
                             // everything validated... now mark the record as COMPLETE...
-                            database.save_all_changes($.extend({},ctxt,{
-                                success:function(){
+                            database.save_all_changes($.extend({},ctxt,{success:function(){
                                     // and advance to the next action...
                                     shim.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), true);
                                     ctxt.success();
@@ -800,8 +807,7 @@ window.controller = {
                         }}), "finalize");
                 }}), false);
         } else {
-            database.save_all_changes($.extend({},ctxt,{
-                success:function() {
+            database.save_all_changes($.extend({},ctxt,{success:function() {
                     shim.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), false);
                     ctxt.success();
                 },
@@ -820,16 +826,14 @@ window.controller = {
             options = {};
         }
         // navigate through all gotos, goto_ifs and labels.
-        that.advanceToNextScreen($.extend({}, ctxt, {
-            success: function(operation, addedOptions){
+        that.advanceToNextScreen($.extend({}, ctxt, {success: function(operation, addedOptions){
                 if(operation) {
                     ctxt.append("controller.gotoScreenPath.advanceToNextScreen.success", "px: " + that.getCurrentScreenPath() + " nextPx: " + operation.operationIdx);
                     // todo -- change to use hash?
                     that.setScreen(ctxt, operation, $.extend({}, options, addedOptions));
                 } else {
                     ctxt.append("controller.gotoScreenPath.advanceToNextScreen.success", "px: " + that.getCurrentScreenPath() + " nextPx: no screen!");
-                    that.screenManager.noNextPage($.extend({}, ctxt,{
-                        success: function() {
+                    that.screenManager.noNextPage($.extend({}, ctxt,{success: function() {
                             ctxt.append("controller.gotoScreenPath.noSreens");
                             that.gotoScreenPath(ctxt, opendatakit.initialScreenPath, addedOptions);
                     }}));
@@ -898,8 +902,7 @@ window.controller = {
     },
     setLocale: function(ctxt, locale) {
         var that = this;
-        database.setInstanceMetaData($.extend({}, ctxt, {
-            success: function() {
+        database.setInstanceMetaData($.extend({}, ctxt, {success: function() {
                 that.getOperation($.extend({}, ctxt, { success: function(op) {
                         that.setScreen(ctxt, op, {changeLocale: true});
                     }}), that.getCurrentScreenPath());

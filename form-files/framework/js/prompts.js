@@ -90,12 +90,10 @@ promptTypes.base = Backbone.View.extend({
      */
     onActivate: function(ctxt) {
         var that = this;
-        this.preActivate($.extend({}, ctxt, {
-            success: function() {
-                that.whenTemplateIsReady($.extend({}, ctxt, {
-                    success: function() {
-                        that.initializeRenderContext($.extend({}, ctxt, {
-                            success: function() {
+        this.preActivate($.extend({}, ctxt, {success: function() {
+                that.whenTemplateIsReady($.extend({}, ctxt, {success: function() {
+                        that.initializeRenderContext(
+                            $.extend({}, ctxt, {success: function() {
                                 that.postActivate(ctxt);
                             }}));
                     }}));
@@ -131,10 +129,10 @@ promptTypes.base = Backbone.View.extend({
      */
     whenTemplateIsReady: function(ctxt){
         var that = this;
-        if(this.template) {
+        if(that.template) {
             ctxt.success();
-        } else if(this.templatePath) {
-            requirejs(['text!'+this.templatePath], function(source) {
+        } else if(that.templatePath) {
+            requirejs(['text!'+that.templatePath], function(source) {
                 try {
                     that.template = Handlebars.compile(source);
                     ctxt.success();
@@ -178,7 +176,7 @@ promptTypes.base = Backbone.View.extend({
         //Maybe it would be better to use handlebars helpers to get metadata?
         this.renderContext.form_title = opendatakit.getCurrentSectionTitle(this._section_name);
         this.renderContext.form_version = opendatakit.getSettingValue('form_version');
-		// set whether we are pre-4.x Android OS (legacy compatibility)
+        // set whether we are pre-4.x Android OS (legacy compatibility)
         var platinfo = opendatakit.getPlatformInfo();
         if ( platinfo.container != 'Android' ) {
             this.renderContext.pre4Android = false;
@@ -341,12 +339,12 @@ promptTypes.opening = promptTypes.base.extend({
             var dateStr = date.toISOString();
             instanceName = dateStr; // .replace(/\W/g, "_")
             that.renderContext.instanceName = instanceName;
-			that._screen._renderContext.enableBackNavigation = false;
+            that._screen._renderContext.enableBackNavigation = false;
             database.setInstanceMetaData(ctxt, 'instanceName', instanceName);
             return;
         }
         that.renderContext.instanceName = instanceName;
-		that._screen._renderContext.enableBackNavigation = false;
+        that._screen._renderContext.enableBackNavigation = false;
         ctxt.success();
     },
     renderContext: {
@@ -389,12 +387,12 @@ promptTypes.finalize = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
-		this._screen._renderContext.enableForwardNavigation = false;
+        this._screen._renderContext.enableForwardNavigation = false;
         ctxt.success();
     },
     saveIncomplete: function(evt) {
-		evt.stopPropagation();
-		evt.stopImmediatePropagation();
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
@@ -402,8 +400,8 @@ promptTypes.finalize = promptTypes.base.extend({
             }}), false);
     },
     saveFinal: function(evt) {
-		evt.stopPropagation();
-		evt.stopImmediatePropagation();
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
         controller.saveAllChanges($.extend({},ctxt,{success:function() {
@@ -423,7 +421,7 @@ promptTypes.json = promptTypes.base.extend({
         } else {
             that.renderContext.value = "JSON Unavailable";
         }
-		that._screen._renderContext.enableNavigation = false;
+        that._screen._renderContext.enableNavigation = false;
         ctxt.success();
     }
 });
@@ -442,8 +440,7 @@ promptTypes.instances = promptTypes.base.extend({
     postActivate: function(ctxt) {
         var that = this;
         ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
-        database.get_all_instances($.extend({},ctxt,{
-            success:function(instanceList) {
+        database.get_all_instances($.extend({},ctxt,{success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
                     var saved = term.saved_status;
                     if ( saved == opendatakit.saved_complete ) {
@@ -458,9 +455,9 @@ promptTypes.instances = promptTypes.base.extend({
                     form_title: opendatakit.getCurrentSectionTitle(that._section_name),
                     headerImg: requirejs.toUrl('img/form_logo.png')
                 });
-				that._screen._renderContext.showHeader = false;
-				that._screen._renderContext.enableNavigation = false;
-				that._screen._renderContext.showFooter = false;
+                that._screen._renderContext.showHeader = false;
+                that._screen._renderContext.enableNavigation = false;
+                that._screen._renderContext.showFooter = false;
                 ctxt.success();
             }
         }));
@@ -483,10 +480,8 @@ promptTypes.instances = promptTypes.base.extend({
         var that = this;
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
-        database.delete_all($.extend({}, ctxt, {
-            success: function() {
-                that.onActivate($.extend({}, ctxt, {
-                    success: function() {
+        database.delete_all($.extend({}, ctxt, {success: function() {
+                that.onActivate($.extend({}, ctxt, {success: function() {
                         that.reRender(ctxt);
                     }
                 }));
@@ -504,9 +499,9 @@ promptTypes.hierarchy = promptTypes.base.extend({
     },
     postActivate: function(ctxt) {
         this.renderContext.prompts = controller.getCurrentSectionPrompts();
-		this._screen._renderContext.enableForwardNavigation = false;
-		this._screen._renderContext.showHeader = true;
-		this._screen._renderContext.showFooter = false;
+        this._screen._renderContext.enableForwardNavigation = false;
+        this._screen._renderContext.showHeader = true;
+        this._screen._renderContext.showFooter = false;
         ctxt.success();
     }
 });
@@ -514,124 +509,124 @@ promptTypes.linked_table = promptTypes.base.extend({
     type: "linked_table",
     valid: true,
     templatePath: 'templates/linked_table.handlebars',
-	launchAction: 'org.opendatakit.survey.android.activities.LaunchSurveyActivity',
-	linked_form_id: null,
-	table_id: null,
-	selection: null, // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
-	selectionArgs: function() {return null;},
-	order_by: null, // must be: (elementName [asc|desc] )+  -- same restriction as selection -- cannot be elementPath
+    launchAction: 'org.opendatakit.survey.android.activities.LaunchSurveyActivity',
+    linked_form_id: null,
+    table_id: null,
+    selection: null, // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
+    selectionArgs: function() {return null;},
+    order_by: null, // must be: (elementName [asc|desc] )+  -- same restriction as selection -- cannot be elementPath
     events: {
         "click .openInstance": "openInstance",
         "click .deleteInstance": "deleteInstance",
         "click .addInstance": "addInstance"
     },
-	getLinkedTableId: function() {
-		if ( this.table_id == null ) {
-			return this.linked_form_id;
-		} else {
-			return this.table_id;
-		}
-	},
-	getFormPath: function() {
-		return '../' + this.linked_form_id + '/';
-	},
-	_linkedCachedMdl: null,
-	getLinkedMdl: function(ctxt) {
-		var that = this;
-		if ( that._linkedCachedMdl != null ) {
-			ctxt.success(that._linkedCachedMdl);
-		}
-		var filePath = that.getFormPath() + 'formDef.json';
-		opendatakit.readFormDefFile($.extend({},ctxt,{success:function(formDef) {
-			database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
-				that._linkedCachedMdl = tlo;
-				ctxt.success(tlo);
-			}}), formDef, that.getLinkedTableId(), filePath);
-		}}), filePath );
-	},
-	_cachedSelection: null,
-	convertSelection: function(linkedMdl) {
-		var that = this;
-		if ( that.selection == null || that.selection.length == 0 ) {
-			return null;
-		}
+    getLinkedTableId: function() {
+        if ( this.table_id == null ) {
+            return this.linked_form_id;
+        } else {
+            return this.table_id;
+        }
+    },
+    getFormPath: function() {
+        return '../' + this.linked_form_id + '/';
+    },
+    _linkedCachedMdl: null,
+    getLinkedMdl: function(ctxt) {
+        var that = this;
+        if ( that._linkedCachedMdl != null ) {
+            ctxt.success(that._linkedCachedMdl);
+        }
+        var filePath = that.getFormPath() + 'formDef.json';
+        opendatakit.readFormDefFile($.extend({},ctxt,{success:function(formDef) {
+            database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
+                that._linkedCachedMdl = tlo;
+                ctxt.success(tlo);
+            }}), formDef, that.getLinkedTableId(), filePath);
+        }}), filePath );
+    },
+    _cachedSelection: null,
+    convertSelection: function(linkedMdl) {
+        var that = this;
+        if ( that.selection == null || that.selection.length == 0 ) {
+            return null;
+        }
         if ( that._cachedSelection != null ) {
-			return that._cachedSelection;
-		}
-		var parts = that.selection.split(' ');
-		var remapped = '';
-		var i;
-		for ( i = 0 ; i < parts.length ; ++i ) {
-			var e = parts[i];
-			if ( e.length = 0 || !/^[a-z0-9]+$/i.test(e) ) {
-				remapped = remapped + ' ' + e;
-			} else {
-				// map e back to elementKey
-				var found = false;
-				for (f in linkedMdl.dataTableModel) {
-					var defElement = dataTableModel[f];
-					var elementPath = defElement['elementPath'];
-					if ( elementPath == null ) elementPath = f;
-					if ( elementPath == e ) {
-						remapped = remapped + ' "' + f + '"';
-						found = true;
-						break;
-					}
-				}
-				if ( found == false ) {
-					alert('selection: unrecognized elementPath: ' + e );
-					shim.log('E','convertSelection: unrecognized elementPath: ' + e );
-					return null;
-				}
-			}
-		}
-		that._cachedSelection = remapped;
-		return that._cachedSelection;
-	},
-	_cachedOrderBy: null,
-	convertOrderBy: function(linkedMdl) {
-		var that = this;
-		if ( that.order_by == null || that.order_by.length == 0 ) {
-			return null;
-		}
+            return that._cachedSelection;
+        }
+        var parts = that.selection.split(' ');
+        var remapped = '';
+        var i;
+        for ( i = 0 ; i < parts.length ; ++i ) {
+            var e = parts[i];
+            if ( e.length = 0 || !/^[a-z0-9]+$/i.test(e) ) {
+                remapped = remapped + ' ' + e;
+            } else {
+                // map e back to elementKey
+                var found = false;
+                for (f in linkedMdl.dataTableModel) {
+                    var defElement = dataTableModel[f];
+                    var elementPath = defElement['elementPath'];
+                    if ( elementPath == null ) elementPath = f;
+                    if ( elementPath == e ) {
+                        remapped = remapped + ' "' + f + '"';
+                        found = true;
+                        break;
+                    }
+                }
+                if ( found == false ) {
+                    alert('selection: unrecognized elementPath: ' + e );
+                    shim.log('E','convertSelection: unrecognized elementPath: ' + e );
+                    return null;
+                }
+            }
+        }
+        that._cachedSelection = remapped;
+        return that._cachedSelection;
+    },
+    _cachedOrderBy: null,
+    convertOrderBy: function(linkedMdl) {
+        var that = this;
+        if ( that.order_by == null || that.order_by.length == 0 ) {
+            return null;
+        }
         if ( that._cachedOrderBy != null ) {
-			return that._cachedOrderBy;
-		}
-		var parts = that.order_by.split(' ');
-		var remapped = '';
-		var isElement = true;
-		var i;
-		for ( i = 0 ; i < parts.length ; ++i ) {
-			var e = parts[i];
-			if ( e.length = 0 ) {
-				// no-op
-			} else if ( isElement ) {
-				// map e back to elementKey
-				var found = false;
-				for (f in linkedMdl.dataTableModel) {
-					var defElement = dataTableModel[f];
-					var elementPath = defElement['elementPath'];
-					if ( elementPath == null ) elementPath = f;
-					if ( elementPath == e ) {
-						remapped = remapped + ' "' + f + '"';
-						found = true;
-						break;
-					}
-				}
-				if ( found == false ) {
-					alert('order_by: unrecognized elementPath: ' + e );
-					shim.log('E','convertOrderBy: unrecognized elementPath: ' + e );
-					return null;
-				}
-				isElement = false;
-			} else {
-				remapped = remapped + ' ' + e;
-				isElement = true;
-			}
-		}
-		that._cachedOrderBy = remapped;
-		return that._cachedOrderBy;
-	},
+            return that._cachedOrderBy;
+        }
+        var parts = that.order_by.split(' ');
+        var remapped = '';
+        var isElement = true;
+        var i;
+        for ( i = 0 ; i < parts.length ; ++i ) {
+            var e = parts[i];
+            if ( e.length = 0 ) {
+                // no-op
+            } else if ( isElement ) {
+                // map e back to elementKey
+                var found = false;
+                for (f in linkedMdl.dataTableModel) {
+                    var defElement = dataTableModel[f];
+                    var elementPath = defElement['elementPath'];
+                    if ( elementPath == null ) elementPath = f;
+                    if ( elementPath == e ) {
+                        remapped = remapped + ' "' + f + '"';
+                        found = true;
+                        break;
+                    }
+                }
+                if ( found == false ) {
+                    alert('order_by: unrecognized elementPath: ' + e );
+                    shim.log('E','convertOrderBy: unrecognized elementPath: ' + e );
+                    return null;
+                }
+                isElement = false;
+            } else {
+                remapped = remapped + ' ' + e;
+                isElement = true;
+            }
+        }
+        that._cachedOrderBy = remapped;
+        return that._cachedOrderBy;
+    },
     disableButtons: function() {
         var that = this;
         that.$('.openInstance').attr('disabled','true');
@@ -647,16 +642,15 @@ promptTypes.linked_table = promptTypes.base.extend({
     postActivate: function(ctxt) {
         var that = this;
         ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
-		that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
-			var dbTableName = linkedMdl.tableMetadata.dbTableName;
-			var selectionString = that.convertSelection(linkedMdl);
-			var orderBy = that.convertOrderBy(linkedMdl);
-			database.get_linked_instances($.extend({},ctxt,{
-				success:function(instanceList) {
-					that.renderContext.instances = instanceList;
-					ctxt.success();
-			}}), dbTableName, that.selection, that.selectionArgs(), that.orderBy);
-		}}));
+        that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
+            var dbTableName = linkedMdl.tableMetadata.dbTableName;
+            var selectionString = that.convertSelection(linkedMdl);
+            var orderBy = that.convertOrderBy(linkedMdl);
+            database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
+                    that.renderContext.instances = instanceList;
+                    ctxt.success();
+            }}), dbTableName, that.selection, that.selectionArgs(), that.orderBy);
+        }}));
     },
     openInstance: function(evt) {
         var instanceId = $(evt.target).attr('id');
@@ -666,8 +660,8 @@ promptTypes.linked_table = promptTypes.base.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
-			'launchSurvey', that.launchAction, 
-			JSON.stringify({ url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }));
+            'launchSurvey', that.launchAction, 
+            JSON.stringify({ extras: { url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }}));
         ctxt.append('linked_table.openInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -682,17 +676,16 @@ promptTypes.linked_table = promptTypes.base.extend({
         var that = this;
         var ctxt = controller.newContext(evt);
         that.disableButtons();
-		that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
-			var dbTableName = linkedMdl.tableMetadata.dbTableName;
-			database.delete_linked_instance_all($.extend({},ctxt,{
-				success:function() {
-					that.enableButtons();
-				},
-				failure:function(m) {
-					that.enableButtons();
-					ctxt.failure(m);
-				}}), dbTableName, instanceId);
-		}}));
+        that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
+            var dbTableName = linkedMdl.tableMetadata.dbTableName;
+            database.delete_linked_instance_all($.extend({},ctxt,{success:function() {
+                    that.enableButtons();
+                },
+                failure:function(m) {
+                    that.enableButtons();
+                    ctxt.failure(m);
+                }}), dbTableName, instanceId);
+        }}));
     },
     addInstance: function(evt) {
         var instanceId = opendatakit.genUUID();
@@ -702,8 +695,8 @@ promptTypes.linked_table = promptTypes.base.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
-			'launchSurvey', that.launchAction, 
-			JSON.stringify({ url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }));
+            'launchSurvey', that.launchAction, 
+            JSON.stringify({ extras: { url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }}));
         ctxt.append('linked_table.addInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -713,7 +706,7 @@ promptTypes.linked_table = promptTypes.base.extend({
             ctxt.success();
         }
     },
-	getCallback: function(promptPath, byinternalPromptContext, byaction) {
+    getCallback: function(promptPath, byinternalPromptContext, byaction) {
         var that = this;
         if ( that.getPromptPath() != promptPath ) {
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
@@ -725,9 +718,9 @@ promptTypes.linked_table = promptTypes.base.extend({
             if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-				that.enableButtons();
-				that.reRender({success: function() { ctxt.failure(m);},
-								failure: function(j) { ctxt.failure(m);}});
+                that.enableButtons();
+                that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure(m);},
+                                failure: function(j) { ctxt.failure(m);}}));
             }
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
@@ -735,8 +728,72 @@ promptTypes.linked_table = promptTypes.base.extend({
                 shim.log("I","failure returned from intent");
                 alert(jsonObject.result);
                 that.enableButtons();
-                that.reRender({success: function() { ctxt.failure({message: "Action canceled."});},
-                    failure: function(j) { ctxt.failure({message: "Action canceled."});}});
+                that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
+                    failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
+            }
+        };
+    }
+});
+promptTypes.external_link = promptTypes.base.extend({
+    type: "external_link",
+    valid: true,
+    templatePath: 'templates/external_link.handlebars',
+    launchAction: 'android.content.Intent.ACTION_VIEW',
+    url: null,
+    events: {
+        "click .openLink": "openLink"
+    },
+    disableButtons: function() {
+        var that = this;
+        that.$('.openLink').attr('disabled','true');
+    },
+    enableButtons: function() {
+        var that = this;
+        that.$('.openLink').removeAttr('disabled');
+    },
+    openLink: function(evt) {
+        var that = this;
+        var ctxt = controller.newContext(evt);
+        var fullUrl = that.url();
+        that.disableButtons();
+        var platInfo = opendatakit.getPlatformInfo();
+        // TODO: is this the right sequence?
+        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
+            'openLink', that.launchAction, 
+            JSON.stringify({ uri: fullUrl }));
+        ctxt.append('external_link.openLink', platInfo.container + " outcome is " + outcome);
+        if (outcome === null || outcome !== "OK") {
+            alert("Should be OK got >" + outcome + "<");
+            that.enableButtons();
+            ctxt.failure({message: "Action canceled."});
+        } else {
+            ctxt.success();
+        }
+    },
+    getCallback: function(promptPath, byinternalPromptContext, byaction) {
+        var that = this;
+        if ( that.getPromptPath() != promptPath ) {
+            throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
+        }
+        return function(ctxt, internalPromptContext, action, jsonString) {
+            ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
+                " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+            var jsonObject = JSON.parse(jsonString);
+            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
+                    " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+                that.enableButtons();
+                that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure(m);},
+                                failure: function(j) { ctxt.failure(m);}}));
+            }
+            else {
+                ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
+                    " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+                shim.log("I","failure returned from intent");
+                alert(jsonObject.result);
+                that.enableButtons();
+                that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
+                    failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
             }
         };
     }
@@ -750,21 +807,21 @@ promptTypes.user_branch = promptTypes.base.extend({
         "click .branch-select-item": "selectBranchItem",
     },
     selectBranchItem: function(evt) {
-		var that = this;
-		var ctxt = controller.newContext(evt);
+        var that = this;
+        var ctxt = controller.newContext(evt);
         var $target = $(evt.target).closest('.branch-select-item');
-		$target.attr("label", function(index, oldPropertyValue) {
-			var currentPath = controller.getCurrentScreenPath();
-			var parts = currentPath.split("/");
-			if ( parts.length < 2 ) {
-				ctxt.append("prompts." + that.type + ".selectBranchItem: invalid currentPath: " + currentPath);
-				ctxt.failure({message: "invalid currentPath: " + currentPath});
-				return;
-			}
-			var newPath = parts[0] + "/" + oldPropertyValue;
-			ctxt.append("prompts." + that.type + ".click", "px: " + that.promptIdx);
-			controller.gotoScreenPath(ctxt,newPath);
-		});
+        $target.attr("label", function(index, oldPropertyValue) {
+            var currentPath = controller.getCurrentScreenPath();
+            var parts = currentPath.split("/");
+            if ( parts.length < 2 ) {
+                ctxt.append("prompts." + that.type + ".selectBranchItem: invalid currentPath: " + currentPath);
+                ctxt.failure({message: "invalid currentPath: " + currentPath});
+                return;
+            }
+            var newPath = parts[0] + "/" + oldPropertyValue;
+            ctxt.append("prompts." + that.type + ".click", "px: " + that.promptIdx);
+            controller.gotoScreenPath(ctxt,newPath);
+        });
     },
     choice_filter: function(){ return true; },
     postActivate: function(ctxt) {
@@ -988,8 +1045,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
         }
         var formValue = (this.$('form').serializeArray());
-        this.setValue($.extend({}, ctxt, {
-            success: function() {
+        this.setValue($.extend({}, ctxt, {success: function() {
                 that.updateRenderValue(formValue);
                 that.reRender(ctxt);
             }
@@ -1177,8 +1233,7 @@ promptTypes.input_type = promptTypes.base.extend({
         var ctxt = controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
-        that.setValue($.extend({}, ctxt, {
-            success: function() {
+        that.setValue($.extend({}, ctxt, {success: function() {
                 renderContext.value = value;
                 renderContext.invalid = !that.validateValue();
                 that.insideMutex = false;
@@ -1321,8 +1376,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         } else {
             renderContext.value = that.$('input').val();
         }
-        that.setValue($.extend({}, ctxt, {
-            success: function() {
+        that.setValue($.extend({}, ctxt, {success: function() {
                 renderContext.invalid = !that.validateValue();
                 if ( rerender ) {
                     that.reRender(ctxt);
@@ -1333,8 +1387,9 @@ promptTypes.datetime = promptTypes.input_type.extend({
             failure: function(m) {
                 renderContext.invalid = true;
                 if ( rerender ) {
-                    that.reRender({success: function() { ctxt.failure(m);},
-                    failure: function(j) { ctxt.failure(m);}});
+                    that.reRender($.extend({}, ctxt, {success: function() {
+                        ctxt.failure(m);
+                    }, failure: function(j) { ctxt.failure(m);}}));
                 } else {
                     ctxt.failure(m);
                 }
@@ -1394,8 +1449,7 @@ promptTypes.time = promptTypes.datetime.extend({
         } else {
             renderContext.value = that.$('input').val();
         }
-        that.setValue($.extend({}, ctxt, {
-            success: function() {
+        that.setValue($.extend({}, ctxt, {success: function() {
                 renderContext.invalid = !that.validateValue();
                 if ( rerender ) {
                     that.reRender(ctxt);
@@ -1406,8 +1460,9 @@ promptTypes.time = promptTypes.datetime.extend({
             failure: function(m) {
                 renderContext.invalid = true;
                 if ( rerender ) {
-                    that.reRender({success: function() { ctxt.failure(m);},
-                    failure: function(j) { ctxt.failure(m);}});
+                    that.reRender($.extend({}, ctxt, {success: function() {
+                        ctxt.failure(m);
+                    }, failure: function(j) { ctxt.failure(m);}}));
                 } else {
                     ctxt.failure(m);
                 }
@@ -1463,7 +1518,8 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 'capture', that.captureAction, JSON.stringify({ newFile: "opendatakit-macro(newFile)" }));
+        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
+            'capture', that.captureAction, JSON.stringify({ extras: { newFile: "opendatakit-macro(newFile)" }}));
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -1479,7 +1535,8 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 'choose', that.chooseAction,  JSON.stringify({ newFile: "opendatakit-macro(newFile)" }));
+        var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
+            'choose', that.chooseAction,  JSON.stringify({ extras: { newFile: "opendatakit-macro(newFile)" }}));
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -1517,8 +1574,9 @@ promptTypes.media = promptTypes.base.extend({
                             failure:function(m) {
                                 that.enableButtons();
                                 that.updateRenderContext();
-                                that.reRender({success: function() { ctxt.failure(m);},
-                                    failure: function(j) { ctxt.failure(m);}});
+                                that.reRender($.extend({}, ctxt, {success: function() {
+                                    ctxt.failure(m);
+                                }, failure: function(j) { ctxt.failure(m);}}));
                             }}), that.name, { uri : uri, contentType: contentType } );
                     }
                 }
@@ -1530,8 +1588,9 @@ promptTypes.media = promptTypes.base.extend({
                 alert(jsonObject.result);
                 that.enableButtons();
                 that.updateRenderContext();
-                that.reRender({success: function() { ctxt.failure({message: "Action canceled."});},
-                    failure: function(j) { ctxt.failure({message: "Action canceled."});}});
+                that.reRender($.extend({}, ctxt, {success: function() {
+                    ctxt.failure({message: "Action canceled."});
+                }, failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
             }
         };
     },
@@ -1613,8 +1672,9 @@ promptTypes.launch_intent = promptTypes.base.extend({
         });
         //We assume that the webkit could go away when an intent is launched,
         //so this prompt's "address" is passed along with the intent.
-        var outcome = shim.doAction( opendatakit.getRefId(), this.getPromptPath(), 'launch', this.intentString,
-                            ((this.intentParameters == null) ? null : JSON.stringify(this.intentParameters)));
+        var outcome = shim.doAction( opendatakit.getRefId(), this.getPromptPath(), 
+            'launch', this.intentString,
+            ((this.intentParameters == null) ? null : JSON.stringify(this.intentParameters)));
         ctxt.append(this.intentString, platInfo.container + " outcome is " + outcome);
         if (outcome && outcome === "OK") {
             ctxt.success();
@@ -1649,8 +1709,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
             if (jsonObject.status == -1 ) { // Activity.RESULT_OK
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 if (jsonObject.result != null) {
-                    that.setValue($.extend({}, ctxt, {
-                        success: function() {
+                    that.setValue($.extend({}, ctxt, {success: function() {
                             that.renderContext.value = that.getValue();
                             that.reRender(ctxt);
                         }
@@ -1712,8 +1771,8 @@ promptTypes.geopoint = promptTypes.input_type.extend({
         that.$('.status').text("Capturing...");
         that.$('.captureAction').addClass('ui-disabled');
         function success(position) {
-            that.setValue($.extend({}, controller.newContext(evt), {
-                success: function() {
+            that.setValue(
+                $.extend({}, controller.newContext(evt), {success: function() {
                     that.renderContext.value = position;
                     that.reRender();
                 }
@@ -1761,8 +1820,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         ctxt.append('acknowledge.modification', this.promptIdx);
         var that = this;
         var acknowledged = this.$('#acknowledge').is(':checked');
-        this.setValue($.extend({}, ctxt, {
-            success: function() {
+        this.setValue($.extend({}, ctxt, {success: function() {
                 that.renderContext.choices = [{
                     "name": "acknowledge",
                     "label": that.acknLabel,
@@ -1805,7 +1863,7 @@ promptTypes.stop_survey = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
-		this._screen._renderContext.enableForwardNavigation = false;
+        this._screen._renderContext.enableForwardNavigation = false;
         this._screen._renderContext.enableBackNavigation = false;
         ctxt.success();
     },
