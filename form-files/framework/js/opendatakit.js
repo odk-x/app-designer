@@ -240,13 +240,13 @@ return {
     getFormLocalesValue:function() {
         return this.getFormLocales(this.getCurrentFormDef());
     },
-	
-	/**
+    
+    /**
      * Lower-level function to access a formDef file and parse it.
-	 * Should not be called from renderers!
-	 *
-	 * Read and JSON.parse() the specified filename. 
-	 * Then invoke ctxt.success(jsonObj).
+     * Should not be called from renderers!
+     *
+     * Read and JSON.parse() the specified filename. 
+     * Then invoke ctxt.success(jsonObj).
      */
     readFormDefFile: function(ctxt, filename) {
         var that = this;
