@@ -1205,8 +1205,7 @@ get_all_instances:function(ctxt) {
       var that = this;
       var instanceList = [];
       ctxt.append('get_all_instances');
-      that.withDb($.extend({},ctxt,{
-        success: function() {
+      that.withDb($.extend({},ctxt,{success: function() {
             ctxt.success(instanceList);
         }}), function(transaction) {
             var ss = that._getAllInstancesDataTableStmt(mdl.tableMetadata.dbTableName);
@@ -1238,8 +1237,7 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, order
       var that = this;
       var instanceList = [];
       ctxt.append('get_linked_instances', dbTableName);
-      that.withDb($.extend({},ctxt,{
-        success: function() {
+      that.withDb($.extend({},ctxt,{success: function() {
             ctxt.success(instanceList);
         }}), function(transaction) {
             var ss = that.selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);

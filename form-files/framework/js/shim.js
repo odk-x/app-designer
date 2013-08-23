@@ -9,7 +9,7 @@ window.shim = window.shim || {
     instanceId: null,
     sectionStateScreenHistory: [],
     getBaseUrl: function() {
-        return '../default';
+        return '../framework';
     },
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
@@ -231,10 +231,12 @@ window.shim = window.shim || {
     },
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
         if (refId != this.refId) {
-            this.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + ", " + internalPromptContext + ", " + action + ", ...)");
+            this.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + 
+				", " + internalPromptContext + ", " + action + ", ...)");
             return "IGNORE";
         }
-        this.log("D","shim: DO: doAction(" + refId + ", " + promptPath + ", " + internalPromptContext + ", " + action + ", ...)");
+        this.log("D","shim: DO: doAction(" + refId + ", " + promptPath + 
+			", " + internalPromptContext + ", " + action + ", ...)");
         if ( action == 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
@@ -328,9 +330,19 @@ window.shim = window.shim || {
         }
         if ( action == 'org.opendatakit.survey.android.activities.LaunchSurveyActivity' ) {
 			var value = JSON.parse(jsonObj);
-			window.open(value.url,'_blank', null, false);
+			window.open(value.extras.url,'_blank', null, false);
             setTimeout(function() {
-				alert("Click OK to continue");
+				alert("Opened new browser window for Survey content. Close to continue");
+                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { } }' );
+            }, 1000);
+            return "OK";
+        }
+        if ( action == 'android.content.Intent.ACTION_VIEW' ) {
+			var value = JSON.parse(jsonObj);
+			window.open(value.uri,'_blank', null, false);
+            setTimeout(function() {
+				alert("Opened new browser window for 3rd party content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { } }' );
             }, 1000);

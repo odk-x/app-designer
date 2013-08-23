@@ -37,8 +37,7 @@ window.landing = {
     _getChainingContext: function() {
         var that = this;
         var ctxt = that.controller.newStartContext();
-        var ref = $.extend({},ctxt,{
-        success: function() {
+        var ref = $.extend({},ctxt,{success: function() {
             ctxt.append('setChaining.wrapper.success');
             if ( that._chainedContextEvaluators.length != 0 ) {
                 var i;
@@ -81,8 +80,7 @@ window.landing = {
                 ctxt.append(txt);
                 var ref = $.extend({},ctxt,{ success: function() {
                     ctxt.append("landing.opendatakitChangeUrlHash.changeUrlHash (executing queued request)", hash);
-                    that.controller.changeUrlHash($.extend({}, ctxt,{ 
-                    success: function() {
+                    that.controller.changeUrlHash($.extend({}, ctxt,{success: function() {
                         ctxt.append("landing.setController.changeUrlHash done!", hash);
                         // attached chaining
                         ctxt.setChainedContext(that._getChainingContext());

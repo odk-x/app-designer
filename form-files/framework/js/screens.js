@@ -93,8 +93,7 @@ screenTypes.waiting = Backbone.View.extend({
     onActivate: function(ctxt) {
         var that = this;
         // this once held the code to invoke with_next and with_next_validate actions
-        that.whenTemplateIsReady($.extend({}, ctxt, {
-            success:function() {
+        that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
                 that.initializeRenderContext(ctxt);
             }}));
     },
@@ -254,8 +253,7 @@ screenTypes.screen = Backbone.View.extend({
     preActivate: function(ctxt) {
         var that = this;
         // this once held the code to invoke with_next and with_next_validate actions
-        that.whenTemplateIsReady($.extend({}, ctxt, {
-            success:function() {
+        that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
                 // determine the active prompts
                 that.activePrompts = []; // clear all prompts...
                 var activePromptIndices = that._operation._parsed_screen_block();
@@ -277,8 +275,7 @@ screenTypes.screen = Backbone.View.extend({
                 // work with the controller to ensure that all
                 // intermediate state has been written to the 
                 // database before commencing the rendering
-                controller.commitChanges($.extend({},ctxt,
-                    {success:function() {
+                controller.commitChanges($.extend({},ctxt,{success:function() {
                         that.initializeRenderContext(ctxt);
                     }}));
             }}));
@@ -292,8 +289,7 @@ screenTypes.screen = Backbone.View.extend({
             ctxt.success();
         });
         _.each(that.activePrompts, function(prompt){
-            prompt.onActivate($.extend({}, ctxt, {
-                success:function() {
+            prompt.onActivate($.extend({}, ctxt, {success:function() {
                     subPromptsReady(ctxt);
                 }
             }));
@@ -301,8 +297,7 @@ screenTypes.screen = Backbone.View.extend({
     },
     onActivate: function(ctxt) {
         var that = this;
-        this.preActivate($.extend({}, ctxt, {
-            success: function() {
+        this.preActivate($.extend({}, ctxt, {success: function() {
                 that.postActivate(ctxt);
             }
         }));
@@ -401,15 +396,15 @@ screenTypes.screen = Backbone.View.extend({
             }
         };
 
-        var validationPromptCtxt = $.extend({},ctxt,{
-            success: _.after(that.activePrompts.length, function() {
+        var validationPromptCtxt = $.extend({},ctxt,{success:
+				_.after(that.activePrompts.length, function() {
                     allowMoveHandler(advancing);
                 }),
             failure: _.once(ctxt.failure)
         });
 
-        var subPromptCtxt = $.extend({},ctxt,{
-            success: _.after(that.activePrompts.length, function() {
+        var subPromptCtxt = $.extend({},ctxt,{success: 
+			_.after(that.activePrompts.length, function() {
                 if ( advancing ) {
                     $.each(that.activePrompts, function(idx, prompt){
                         prompt.validate(validationPromptCtxt);

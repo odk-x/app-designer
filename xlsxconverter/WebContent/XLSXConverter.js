@@ -100,6 +100,7 @@
         "note": null,
         "linked_table": null,
         "user_branch": null,
+        "external_link": null,
         "error" : null,
         "opening": null,
         "instances": null,

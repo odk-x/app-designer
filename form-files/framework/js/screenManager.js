@@ -126,8 +126,7 @@ return Backbone.View.extend({
 				screen.$el.trigger('pagecreate');
 				screen.afterRender($.extend({},ctxt,{success:function() {
 					// this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
-					that.savedCtxt = $.extend({}, ctxt, {
-						success: function() {
+					that.savedCtxt = $.extend({}, ctxt, {success: function() {
 							that.pageChangeActionLockout = false;
 							window.clearTimeout(activateTimeout);
 							that.hideSpinnerOverlay();
@@ -192,8 +191,7 @@ return Backbone.View.extend({
         // 
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
-        screen.onActivate($.extend({render:true},ctxt,{
-            success:function(renderContext){
+        screen.onActivate($.extend({render:true},ctxt,{success:function(renderContext){
                 var isFirstScreen = !('previousPageEl' in that);
                 var transition = 'none'; // isFirstScreen ? 'fade' : 'slide';
                 if(renderContext){
@@ -223,8 +221,7 @@ return Backbone.View.extend({
 					// inconsistent state.
 					screen.afterRender($.extend({}, ctxt, {success: function() {
 						// this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
-						that.savedCtxt = $.extend({}, ctxt, {
-							success: function() {
+						that.savedCtxt = $.extend({}, ctxt, {success: function() {
 								that.pageChangeActionLockout = false;
 								window.clearTimeout(activateTimeout);
 								that.hideSpinnerOverlay();
@@ -284,8 +281,7 @@ return Backbone.View.extend({
             return false;
         }
         that.pageChangeActionLockout = true;
-        that.controller.gotoNextScreen($.extend({},ctxt,{
-                success:function(){
+        that.controller.gotoNextScreen($.extend({},ctxt,{success:function(){
                     that.pageChangeActionLockout = false; 
                     ctxt.success();
                 },failure:function(m){
@@ -318,8 +314,7 @@ return Backbone.View.extend({
             return false;
         }
         that.pageChangeActionLockout = true;
-        that.controller.gotoPreviousScreen($.extend({},ctxt,{
-                success:function(){ 
+        that.controller.gotoPreviousScreen($.extend({},ctxt,{success:function(){ 
                     that.pageChangeActionLockout = false; 
                     ctxt.success();
                 },failure:function(m){
