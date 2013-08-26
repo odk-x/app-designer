@@ -281,7 +281,7 @@ function execFormChange( idxSubfolder ) {
 						var jsonDefTopLevel = JSON.parse(formDef);
 						wlog("processing json file: " + formDefFile);
 						
-						var jsonDef = jsonDefTopLevel.logic_flow;
+						var jsonDef = jsonDefTopLevel.specification;
 						var settings = jsonDef.settings;
 						var formId = getSettingValue(settings, 'form_id');
 						var tableId = getSettingValue(settings, 'table_id');

@@ -38,7 +38,7 @@ window.controller = {
         }
         
         var formDef = opendatakit.getCurrentFormDef();
-        var section = formDef.logic_flow.sections[parts[0]];
+        var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
             ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
             ctxt.failure({message: "invalid opPath: " + opPath});
@@ -83,7 +83,7 @@ window.controller = {
         }
         
         var formDef = opendatakit.getCurrentFormDef();
-        var section = formDef.logic_flow.sections[parts[0]];
+        var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
             ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
             ctxt.failure({message: "invalid opPath: " + opPath});
@@ -135,7 +135,7 @@ window.controller = {
         }
         
         var formDef = opendatakit.getCurrentFormDef();
-        var section = formDef.logic_flow.sections[parts[0]];
+        var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
             ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
             ctxt.failure({message: "invalid opPath: " + opPath});
@@ -176,7 +176,7 @@ window.controller = {
         }
         
         var formDef = opendatakit.getCurrentFormDef();
-        var section = formDef.logic_flow.sections[parts[0]];
+        var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
             return [];
         }
@@ -197,7 +197,7 @@ window.controller = {
         }
         
         var formDef = opendatakit.getCurrentFormDef();
-        var section = formDef.logic_flow.sections[parts[0]];
+        var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
             ctxt.append("controller.getPrompt: no section matching promptPath: " + promptPath);
             ctxt.failure({message: "invalid promptPath: " + promptPath});
@@ -452,7 +452,7 @@ window.controller = {
                 mdl.loaded = false;
                 database.cacheAllData($.extend({},ctxt,{success:function() {
                     ctxt.failure(m);
-                }, failure:function(m) {
+                }, failure:function(m2) {
                     ctxt.failure(m);
                 }}), opendatakit.getCurrentInstanceId());
             }});
@@ -502,12 +502,12 @@ window.controller = {
     validateAllQuestions: function(ctxt, validationTag){
         var that = this;
         var formDef = opendatakit.getCurrentFormDef();
-        var section_names = formDef.logic_flow.section_names;
+        var section_names = formDef.specification.section_names;
         var i, j;
         var promptList = [];
         for ( i = 0 ; i < section_names.length ; ++i ) {
             var sectionName = section_names[i];
-            var section = formDef.logic_flow.sections[sectionName];
+            var section = formDef.specification.sections[sectionName];
             var tagList = section.validation_tag_map[validationTag];
             if ( tagList != null ) {
                 for ( j = 0 ; j < tagList.length ; ++j ) {
@@ -557,7 +557,7 @@ window.controller = {
                                     popupbasectxt.success();
                                 }, 500);
                             },
-                            failure: function() {
+                            failure: function(m2) {
                                 popupbasectxt.append("validateQuestionHelper.failure.setScreen.showScreenPopup", "px: " + ctxt.failedOperation.operationIdx);
                                 setTimeout(function() {
                                     popupbasectxt.append("validateQuestionHelper.failure.setScreen.setTimeout", "px: " + that.getCurrentScreenPath());
@@ -574,7 +574,7 @@ window.controller = {
                                 ctxt.strict = oldvalue;
                                 ctxt.failure(m);
                             }, 
-                            failure: function(ignored) {
+                            failure: function(m3) {
                                 that.screenManager.hideSpinnerOverlay();
                                 ctxt.setChainedContext(popupctxt);
                                 ctxt.strict = oldvalue;
@@ -684,13 +684,13 @@ window.controller = {
                 screen_type = screen_attrs.screen_type;
             }
             
-            if (!(screen_type in formDef.logic_flow.currentScreenTypes)) {
+            if (!(screen_type in formDef.specification.currentScreenTypes)) {
                 ctxt.append('controller.setScreen.unrecognizedScreenType', screen_type);
                 ctxt.failure({message: 'unknown screen_type'});
                 return;
             }
             
-            ScreenType = formDef.logic_flow.currentScreenTypes[screen_type];
+            ScreenType = formDef.specification.currentScreenTypes[screen_type];
             ExtendedScreenType = ScreenType.extend(screen_attrs);
             ScreenInstance = new ExtendedScreenType({ _section_name: operation._section_name, _operation: operation });
 
@@ -713,7 +713,7 @@ window.controller = {
                         that.setScreen($.extend({},ctxt,{success:function() {
                             // report the failure.
                             ctxt.failure(m);
-                        }, failure: function() {
+                        }, failure: function(m2) {
                             // report the failure.
                             ctxt.failure(m);
                         }}), oldPath);

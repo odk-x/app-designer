@@ -107,7 +107,7 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "household",
+        "value": "household_new",
         "_row_num": 2
       },
       {
@@ -147,7 +147,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "household",
+        "value": "household_new",
         "_row_num": 2
       },
       "form_version": {

@@ -57,7 +57,7 @@ window.landing = {
         failure: function(m) {
             ctxt.append('setChaining.wrapper.failure - flush action');
             that._chainedContextEvaluators = [];
-            ctxt.failure;
+            ctxt.failure(m);
         }});
         return ref;
     },

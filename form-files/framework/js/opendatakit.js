@@ -76,11 +76,11 @@ return {
     },
     
     getQueriesDefinition: function(query_name) {
-        return mdl.formDef.logic_flow.parsed_queries[query_name];
+        return mdl.formDef.specification.parsed_queries[query_name];
     },
     
     getChoicesDefinition: function(choice_list_name) {
-        return mdl.formDef.logic_flow.choices[choice_list_name];
+        return mdl.formDef.specification.choices[choice_list_name];
     },
     
     setCurrentFormPath:function(formPath) {
@@ -183,7 +183,7 @@ return {
       */
     getSettingObject:function(formDef, key) {
         if (formDef == null) return null;
-        return formDef.logic_flow.settings[key];
+        return formDef.specification.settings[key];
     },
     
     /**

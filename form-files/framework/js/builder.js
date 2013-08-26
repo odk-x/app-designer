@@ -105,7 +105,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         formula: formula,
         formula_with_context: formula_with_context,
         requirejs_path : function(content) {
-			alert("Internal Error: this should already be substituted");
+            alert("Internal Error: this should already be substituted");
             return this._formPath + content;
         },
         app_path_localized : function(content) {
@@ -235,18 +235,18 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
     },
     buildSurvey: function(ctxt, surveyJson, formPath) {
         if (surveyJson == null) {
-			ctxt.append('builder.buildSurvey', 'no formDef!');
+            ctxt.append('builder.buildSurvey', 'no formDef!');
             ctxt.failure();
             return;
         }
         
         var that = this;
-		
-		// define the requirejs_path action on the property parser.
-		// this is the only property parser that depends upon a 
-		// current mdl value.
-		propertyParsers.requirejs_path = function(content) {
-			return formPath + content;
+        
+        // define the requirejs_path action on the property parser.
+        // this is the only property parser that depends upon a 
+        // current mdl value.
+        propertyParsers.requirejs_path = function(content) {
+            return formPath + content;
         };
 
         //currentPromptTypes set to a promptTypes subtype so user defined prompts
@@ -257,12 +257,12 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
 
         ctxt.append('builder.buildSurvey: initializing');
         //Transform the calculate sheet into an object with format {calculation_name:function}
-        calculates = _.object(_.map(surveyJson.logic_flow.calculates, function(calculate){
+        calculates = _.object(_.map(surveyJson.specification.calculates, function(calculate){
             return [calculate.calculation_name, propertyParsers.formula(calculate.calculation)];
         }));
         formulaFunctions.calculates = calculates;
         
-        surveyJson.logic_flow.parsed_queries = _.object(_.map(surveyJson.logic_flow.queries, function(query) {
+        surveyJson.specification.parsed_queries = _.object(_.map(surveyJson.specification.queries, function(query) {
             return [
             query.query_name, {
                 "uri" : propertyParsers.formula(query.uri),
@@ -271,13 +271,13 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
         }));
         
         var afterCustomPromptsLoadAttempt = function(){
-            // save the current prompts and screens in the logic_flow
-            surveyJson.logic_flow.currentPromptTypes = currentPromptTypes;
-            surveyJson.logic_flow.currentScreenTypes = currentScreenTypes;
+            // save the current prompts and screens in the specification
+            surveyJson.specification.currentPromptTypes = currentPromptTypes;
+            surveyJson.specification.currentScreenTypes = currentScreenTypes;
             
             // initialize the section.parsed_prompts 
             // initialize the section.parsed_screen_block
-            _.each(surveyJson.logic_flow.sections, function(section, sectionName) {
+            _.each(surveyJson.specification.sections, function(section, sectionName) {
                 section.parsed_prompts = that.initializePrompts(section);
                 // operations are in-place expanded, as they have no inheritance
                 that.initializeOperations(section);
@@ -305,12 +305,12 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
                             formPath + 'customTheme.css');
                     //Set the jQm theme to the defualt theme, or if there is a 
                     //predefined theme specified in the settings sheet, use that.
-					var theme = opendatakit.getSettingObject(surveyJson, "theme");
-					if ( theme == null || theme.value == null ) {
-						theme = 'jquery.mobile.theme-1.3.1';
-					} else {
-						theme = theme.value;
-					}
+                    var theme = opendatakit.getSettingObject(surveyJson, "theme");
+                    if ( theme == null || theme.value == null ) {
+                        theme = 'jquery.mobile.theme-1.3.1';
+                    } else {
+                        theme = theme.value;
+                    }
                     $('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.3.1/' + theme + '.css'));
                     var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
                     if ( fontSize != null && fontSize.value != null) {

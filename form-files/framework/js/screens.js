@@ -43,26 +43,35 @@ screenTypes.waiting = Backbone.View.extend({
         if(this.template) {
             ctxt.success();
         } else if(this.templatePath) {
-            requirejs(['text!'+this.templatePath], function(source) {
-                try {
-                    that.template = Handlebars.compile(source);
-                    ctxt.success();
-                } catch (e) {
+            try {
+                requirejs(['text!'+this.templatePath], function(source) {
+                    try {
+                        that.template = Handlebars.compile(source);
+                        ctxt.success();
+                    } catch (e) {
+                        ctxt.append("screens."+that.type+
+                            ".whenTemplateIsReady.exception", e);
+                        console.error("screens."+that.type+
+                            ".whenTemplateIsReady.exception " + String(e) +
+                            " px: " + that.promptIdx);
+                        ctxt.failure({message: "Error compiling handlebars template."});
+                    }
+                }, function(err) {
                     ctxt.append("screens."+that.type+
-                        ".whenTemplateIsReady.exception", e);
+                        ".whenTemplateIsReady.requirejs.failure", err);
                     console.error("screens."+that.type+
-                        ".whenTemplateIsReady.exception " + String(e) +
+                        ".whenTemplateIsReady.requirejs.failure " + String(err) +
                         " px: " + that.promptIdx);
-                    ctxt.failure({message: "Error compiling handlebars template."});
-                }
-            }, function(err) {
+                    ctxt.failure({message: "Error loading handlebars template."});
+                });
+            } catch (e) {
                 ctxt.append("screens."+that.type+
-                    ".whenTemplateIsReady.requirejs.failure", err);
+                    ".whenTemplateIsReady.requirejs.exception", e);
                 console.error("screens."+that.type+
-                    ".whenTemplateIsReady.requirejs.failure " + String(err) +
+                    ".whenTemplateIsReady.requirejs.exception " + String(e) +
                     " px: " + that.promptIdx);
-                ctxt.failure({message: "Error loading handlebars template."});
-            });
+                ctxt.failure({message: "Error reading handlebars template."});
+            }
         } else {
             ctxt.append("screens." + that.type +
                 ".whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
@@ -181,26 +190,35 @@ screenTypes.screen = Backbone.View.extend({
         if(this.template) {
             ctxt.success();
         } else if(this.templatePath) {
-            requirejs(['text!'+this.templatePath], function(source) {
-                try {
-                    that.template = Handlebars.compile(source);
-                    ctxt.success();
-                } catch (e) {
+            try {
+                requirejs(['text!'+this.templatePath], function(source) {
+                    try {
+                        that.template = Handlebars.compile(source);
+                        ctxt.success();
+                    } catch (e) {
+                        ctxt.append("screens."+that.type+
+                            ".whenTemplateIsReady.exception", e);
+                        console.error("screens."+that.type+
+                            ".whenTemplateIsReady.exception " + String(e) +
+                            " px: " + that.promptIdx);
+                        ctxt.failure({message: "Error compiling handlebars template."});
+                    }
+                }, function(err) {
                     ctxt.append("screens."+that.type+
-                        ".whenTemplateIsReady.exception", e);
+                        ".whenTemplateIsReady.requirejs.failure", err);
                     console.error("screens."+that.type+
-                        ".whenTemplateIsReady.exception " + String(e) +
+                        ".whenTemplateIsReady.requirejs.failure " + String(err) +
                         " px: " + that.promptIdx);
-                    ctxt.failure({message: "Error compiling handlebars template."});
-                }
-            }, function(err) {
+                    ctxt.failure({message: "Error loading handlebars template."});
+                });
+            } catch (e) {
                 ctxt.append("screens."+that.type+
-                    ".whenTemplateIsReady.requirejs.failure", err);
+                    ".whenTemplateIsReady.requirejs.exception", e);
                 console.error("screens."+that.type+
-                    ".whenTemplateIsReady.requirejs.failure " + String(err) +
+                    ".whenTemplateIsReady.requirejs.exception " + String(e) +
                     " px: " + that.promptIdx);
-                ctxt.failure({message: "Error loading handlebars template."});
-            });
+                ctxt.failure({message: "Error reading handlebars template."});
+            }
         } else {
             ctxt.append("screens." + that.type +
                 ".whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
@@ -397,14 +415,14 @@ screenTypes.screen = Backbone.View.extend({
         };
 
         var validationPromptCtxt = $.extend({},ctxt,{success:
-				_.after(that.activePrompts.length, function() {
+                _.after(that.activePrompts.length, function() {
                     allowMoveHandler(advancing);
                 }),
             failure: _.once(ctxt.failure)
         });
 
         var subPromptCtxt = $.extend({},ctxt,{success: 
-			_.after(that.activePrompts.length, function() {
+            _.after(that.activePrompts.length, function() {
                 if ( advancing ) {
                     $.each(that.activePrompts, function(idx, prompt){
                         prompt.validate(validationPromptCtxt);

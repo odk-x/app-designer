@@ -12,7 +12,7 @@
  */
 requirejs.config({
     baseUrl: shim.getBaseUrl(),
-	waitSeconds: 12,
+    waitSeconds: 12,
     paths: {
         // third-party libraries we depend upon 
         //jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
@@ -105,7 +105,7 @@ requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
                         'jqmobile', 'builder', 'controller',
                         'screens',
                         'prompts'/* mix-in additional prompts and support libs here */], 
-        function($, mdl,opendatakit,database,parsequery,m,builder,controller) {
+        function($, mdl,opendatakit,database,parsequery,jqm,builder,controller) {
             var ctxt = controller.newStartContext();
             ctxt.append("main.parsequery.initialize");
             parsequery.initialize(controller,builder);

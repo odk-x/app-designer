@@ -1380,10 +1380,10 @@
         removeIgnorableModelFields(defn);
     };
 
-    var developDataModel = function( logic_flow, promptTypes ) {
+    var developDataModel = function( specification, promptTypes ) {
     	var assigns = [];
         var model = {};
-    	_.each(logic_flow.sections, function(section){
+    	_.each(specification.sections, function(section){
             _.each(section.prompts, function(prompt){
                 var schema;
                 if(prompt._type in promptTypes) {
@@ -1463,11 +1463,11 @@
     	// prompts declare a different data type, then warn the user. Regardless, treat the
     	// model tab as the authority, overriding any inconsistency from the prompt definitions.
     	// NOTE: Warnings can be suppressed by defining model.xxx overrides on each prompt.
-    	_.each( _.keys(logic_flow.model), function(name) {
+    	_.each( _.keys(specification.model), function(name) {
     		if ( name in model ) {
     			// defined in both
             	var defn = model[name];
-            	var mdef = logic_flow.model[name];
+            	var mdef = specification.model[name];
             	var amodb = _.extend({}, defn, mdef);
             	var bmoda = _.extend({}, mdef, defn);
             	removeIgnorableModelFields(amodb);
@@ -1495,13 +1495,13 @@
             	_.extend(defn, mdef);
             	defn._defn = dt;
             	// update model...
-            	logic_flow.model[name] = defn;
+            	specification.model[name] = defn;
     		}
     	});
     	// copy over the fields in the prompt model that were not defined in the model tab...
     	_.each( _.keys(model), function(name) {
-    		if ( !(name in logic_flow.model) ) {
-    			logic_flow.model[name] = model[name];
+    		if ( !(name in specification.model) ) {
+    			specification.model[name] = model[name];
     		}
     	});
 
@@ -1529,7 +1529,7 @@
 
             // we have done the standard conversions on all the sheets.
 
-            var logic_flow = {};
+            var specification = {};
             // Compute Processed intermediaries
 
             // SETTINGS
@@ -1669,7 +1669,7 @@
             	processedSettings.initial = processedSettings.survey;
             }
 
-            logic_flow.settings = processedSettings;
+            specification.settings = processedSettings;
 
             // CHOICES
             var processedChoices = {};
@@ -1680,7 +1680,7 @@
             	errorIfFieldMissing('choices',cleanSet, 'display', true);
             	processedChoices = _.groupBy(cleanSet, 'choice_list_name');
             }
-            logic_flow.choices = processedChoices;
+            specification.choices = processedChoices;
 
             // QUERIES
             var processedQueries = {};
@@ -1701,7 +1701,7 @@
                     }
             	});
             }
-            logic_flow.queries = processedQueries;
+            specification.queries = processedQueries;
 
             // verify that queries and choices don't share the same names
             for (var key in processedQueries ) {
@@ -1728,7 +1728,7 @@
                     }
             	});
             }
-            logic_flow.calculates = processedCalculates;
+            specification.calculates = processedCalculates;
 
             // PROMPT_TYPES
             var processedPromptTypes = promptTypeMap;
@@ -1773,7 +1773,7 @@
                     }
                 });
             }
-            logic_flow.model = processedModel;
+            specification.model = processedModel;
 
             // Find the sheets that are survey sheets
             // (not one of the reserved names and not beginning with '-')
@@ -1807,30 +1807,30 @@
             // values in the 'survey' settings.
 
             _.each(sectionNames, function(name) {
-            	if (! (name in logic_flow.settings) ) {
-            		logic_flow.settings[name] = {};
+            	if (! (name in specification.settings) ) {
+            		specification.settings[name] = {};
             	}
-            	if (! ('display' in logic_flow.settings[name]) ) {
-            		logic_flow.settings[name].display = logic_flow.settings.survey.display;
+            	if (! ('display' in specification.settings[name]) ) {
+            		specification.settings[name].display = specification.settings.survey.display;
             	}
             });
 
             // construct the json sheet for the interpreter
             var parsedSections = parseSections(sectionNames, sections);
 
-            logic_flow.section_names = sectionNames; // in alphabetical order
+            specification.section_names = sectionNames; // in alphabetical order
 
-            logic_flow.sections = parsedSections;
+            specification.sections = parsedSections;
 
             // flesh out model based upon prompts and assign statements
-            developDataModel(logic_flow, processedPromptTypes);
+            developDataModel(specification, processedPromptTypes);
 
         	// ensure that all values_list names have a backing choices or queries definition
-        	_.each(logic_flow.sections, function(section){
+        	_.each(specification.sections, function(section){
                 _.each(section.prompts, function(prompt){
                     if ("values_list" in prompt) {
                     	var name = prompt.values_list;
-                    	if ( !((name in logic_flow.choices) || (name in logic_flow.queries)) ) {
+                    	if ( !((name in specification.choices) || (name in specification.queries)) ) {
                         	throw Error("Unrecognized 'values_list' name: '" + name + "'. Prompt: '" + prompt.type + "' at row " +
                         			prompt._row_num + " on sheet: " + section.section_name);
                     	}
@@ -1840,7 +1840,7 @@
 
         	/*
         	 * // INCOMING:
-        	 * logic_flow = {
+        	 * specification = {
         	 *
         	 *    settings: { setting_name : ... }
         	 *    choices: { choice_list_name : ... }
@@ -1866,7 +1866,7 @@
         	 *  };
         	 */
 
-            return { xlsx: wbJson, logic_flow: logic_flow };
+            return { xlsx: wbJson, specification: specification };
         },
         //Returns the warnings from the last workbook processed.
         getWarnings: function(){

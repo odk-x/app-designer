@@ -132,20 +132,26 @@ promptTypes.base = Backbone.View.extend({
         if(that.template) {
             ctxt.success();
         } else if(that.templatePath) {
-            requirejs(['text!'+that.templatePath], function(source) {
-                try {
-                    that.template = Handlebars.compile(source);
-                    ctxt.success();
-                } catch (e) {
-                    ctxt.append("prompts."+that.type+".whenTemplateIsReady.exception", e);
-                    console.error("prompts."+that.type+".whenTemplateIsReady.exception " + String(e) + " px: " + that.promptIdx);
-                    ctxt.failure({message: "Error compiling handlebars template."});
-                }
-            }, function(err) {
-                ctxt.append("prompts."+that.type+".whenTemplateIsReady.requirejs.failure", err);
-                console.error("prompts."+that.type+".whenTemplateIsReady.requirejs.failure " + String(err) + " px: " + that.promptIdx);
-                ctxt.failure({message: "Error loading handlebars template."});
-            });
+            try {
+                requirejs(['text!'+that.templatePath], function(source) {
+                    try {
+                        that.template = Handlebars.compile(source);
+                        ctxt.success();
+                    } catch (e) {
+                        ctxt.append("prompts."+that.type+".whenTemplateIsReady.exception", e);
+                        console.error("prompts."+that.type+".whenTemplateIsReady.exception " + String(e) + " px: " + that.promptIdx);
+                        ctxt.failure({message: "Error compiling handlebars template."});
+                    }
+                }, function(err) {
+                    ctxt.append("prompts."+that.type+".whenTemplateIsReady.requirejs.failure", err);
+                    console.error("prompts."+that.type+".whenTemplateIsReady.requirejs.failure " + String(err) + " px: " + that.promptIdx);
+                    ctxt.failure({message: "Error loading handlebars template."});
+                });
+            } catch (e) {
+                ctxt.append("prompts."+that.type+".whenTemplateIsReady.requirejs.exception", e);
+                console.error("prompts."+that.type+".whenTemplateIsReady.requirejs.exception " + String(e) + " px: " + that.promptIdx);
+                ctxt.failure({message: "Error reading handlebars template."});
+            }
         } else {
             ctxt.append("prompts." + that.type + ".whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
             console.error("prompts."+that.type+".whenTemplateIsReady.noTemplate px: " + that.promptIdx);
@@ -719,8 +725,7 @@ promptTypes.linked_table = promptTypes.base.extend({
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 that.enableButtons();
-                that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure(m);},
-                                failure: function(j) { ctxt.failure(m);}}));
+                that.reRender(ctxt);
             }
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
@@ -783,8 +788,7 @@ promptTypes.external_link = promptTypes.base.extend({
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 that.enableButtons();
-                that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure(m);},
-                                failure: function(j) { ctxt.failure(m);}}));
+                that.reRender(ctxt);
             }
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
@@ -871,14 +875,19 @@ promptTypes.user_branch = promptTypes.base.extend({
             if(queryUriExt === 'csv') {
                 ajaxOptions.dataType = 'text';
                 ajaxOptions.success = function(result) {
-                    requirejs(['jquery-csv'], function(){
-                        that.renderContext.choices = query.callback($.csv.toObjects(result));
-                        newctxt.success("success");
-                    },
-                    function (err) {
-                        newctxt.append("promptType.select.requirejs.failure", err.toString());
-                        newctxt.failure({message: "Error fetching choices from csv data."});
-                    });
+                    try {
+                        requirejs(['jquery-csv'], function(){
+                            that.renderContext.choices = query.callback($.csv.toObjects(result));
+                            newctxt.success("success");
+                        },
+                        function (err) {
+                            newctxt.append("promptType.select.requirejs.failure", err.toString());
+                            newctxt.failure({message: "Error fetching choices from csv data."});
+                        });
+                    } catch (e) {
+                        newctxt.append("promptType.select.requirejs.exception", e.toString());
+                        newctxt.failure({message: "Error reading choices from csv data."});
+                    }
                 };
             }
             
@@ -1099,15 +1108,20 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             if(queryUriExt === 'csv') {
                 ajaxOptions.dataType = 'text';
                 ajaxOptions.success = function(result) {
-                    requirejs(['jquery-csv'], function(){
-                        that.renderContext.choices = query.callback($.csv.toObjects(result));
-                        newctxt.success("success");
-                    },
-                    function (err) {
-                        newctxt.append("promptType.select.requirejs.failure", err.toString());
-                        newctxt.failure({message: "Error fetching choices from csv data."});
-                    });
-                };
+                    try {
+                        requirejs(['jquery-csv'], function(){
+                            that.renderContext.choices = query.callback($.csv.toObjects(result));
+                            newctxt.success("success");
+                        },
+                        function (err) {
+                            newctxt.append("promptType.select.requirejs.failure", err.toString());
+                            newctxt.failure({message: "Error fetching choices from csv data."});
+                        });
+                    } catch (e) {
+                        newctxt.append("promptType.select.requirejs.exception", e.toString());
+                        newctxt.failure({message: "Error reading choices from csv data."});
+                    }
+                    };
             }
             
             $.ajax(ajaxOptions);
@@ -1244,7 +1258,7 @@ promptTypes.input_type = promptTypes.base.extend({
                 renderContext.invalid = true;
                 that.insideMutex = false;
                 that.debouncedRender({success: function() { ctxt.failure(m);},
-                    failure: function(j) { ctxt.failure(m);}});
+                    failure: function(m2) { ctxt.failure(m);}});
             }
         }), (value.length === 0 ? null : value));
     },
@@ -1389,7 +1403,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 if ( rerender ) {
                     that.reRender($.extend({}, ctxt, {success: function() {
                         ctxt.failure(m);
-                    }, failure: function(j) { ctxt.failure(m);}}));
+                    }, failure: function(m2) { ctxt.failure(m);}}));
                 } else {
                     ctxt.failure(m);
                 }
@@ -1462,7 +1476,7 @@ promptTypes.time = promptTypes.datetime.extend({
                 if ( rerender ) {
                     that.reRender($.extend({}, ctxt, {success: function() {
                         ctxt.failure(m);
-                    }, failure: function(j) { ctxt.failure(m);}}));
+                    }, failure: function(m2) { ctxt.failure(m);}}));
                 } else {
                     ctxt.failure(m);
                 }
@@ -1576,7 +1590,7 @@ promptTypes.media = promptTypes.base.extend({
                                 that.updateRenderContext();
                                 that.reRender($.extend({}, ctxt, {success: function() {
                                     ctxt.failure(m);
-                                }, failure: function(j) { ctxt.failure(m);}}));
+                                }, failure: function(m2) { ctxt.failure(m);}}));
                             }}), that.name, { uri : uri, contentType: contentType } );
                     }
                 }

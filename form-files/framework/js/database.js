@@ -528,13 +528,13 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
         return {
                 stmt :  'select * from (select * from "' + dbTableName +
                         '" group by id having timestamp = max(timestamp)) where ' + selection +
-						((orderBy == null) ? '' : ' order by ' + orderBy),
+                        ((orderBy == null) ? '' : ' order by ' + orderBy),
                 bind : selectionArgs
             };
     } else {
         return {
                 stmt : 'select * from "' + dbTableName + '" group by id having timestamp = max(timestamp)' +
-						((orderBy == null) ? '' : ' order by ' + orderBy),
+                        ((orderBy == null) ? '' : ' order by ' + orderBy),
                 bind : []    
             };
     }
@@ -1010,11 +1010,11 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
                 ctxt.append("getAllData.success");
                 ctxt.success(tlo);
             }});
-	  if ( instanceId == null ) {
-		ctxt.append("getAllData.instanceId.null");
-		tmpctxt.success();
-		return;
-	  }
+      if ( instanceId == null ) {
+        ctxt.append("getAllData.instanceId.null");
+        tmpctxt.success();
+        return;
+      }
       that.withDb( tmpctxt, function(transaction) {
         var ss = that._selectAllFromDataTableStmt(dbTableName, instanceId);
         tmpctxt.sqlStatement = ss;
@@ -1308,19 +1308,19 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
 },
 initializeTables:function(ctxt, formDef, table_id, formPath) {
     var that = this;
-	var rectxt = $.extend({}, ctxt, {success:function(tlo) {
-		ctxt.append('getAllTableMetaData.success');
-		// these values come from the current webpage
-		// update table_id and qp
-		mdl.formDef = tlo.formDef;
-		mdl.tableMetadata = tlo.tableMetadata;
-		mdl.columnMetadata = tlo.columnMetadata;
-		mdl.data = tlo.data;
-		opendatakit.setCurrentTableId(table_id);
-		opendatakit.setCurrentFormPath(formPath);
-		ctxt.success();
-	}});
-	that.readTableDefinition(rectxt, formDef, table_id, formPath);
+    var rectxt = $.extend({}, ctxt, {success:function(tlo) {
+        ctxt.append('getAllTableMetaData.success');
+        // these values come from the current webpage
+        // update table_id and qp
+        mdl.formDef = tlo.formDef;
+        mdl.tableMetadata = tlo.tableMetadata;
+        mdl.columnMetadata = tlo.columnMetadata;
+        mdl.data = tlo.data;
+        opendatakit.setCurrentTableId(table_id);
+        opendatakit.setCurrentFormPath(formPath);
+        ctxt.success();
+    }});
+    that.readTableDefinition(rectxt, formDef, table_id, formPath);
 },
 /**
  * Process the formDef into a table definition.
@@ -1520,8 +1520,8 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
     // go through the supplied tlo.formDef model
     // and invert it into the dataTableModel
     var jsonDefn;
-    for ( f in tlo.formDef.logic_flow.model ) {
-        jsonDefn = that._flattenElementPath( dataTableModel, null, f, null, tlo.formDef.logic_flow.model[f] );
+    for ( f in tlo.formDef.specification.model ) {
+        jsonDefn = that._flattenElementPath( dataTableModel, null, f, null, tlo.formDef.specification.model[f] );
     }
 
     // and now traverse the dataTableModel making sure all the
@@ -1572,7 +1572,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 aspect: dbColumnName,
                 key: "displayChoicesList",
                 type: "string",
-                value: ((jsonDefn.choicesList == null) ? "" : JSON.stringify(tlo.formDef.logic_flow.choices[jsonDefn.choicesList]))
+                value: ((jsonDefn.choicesList == null) ? "" : JSON.stringify(tlo.formDef.specification.choices[jsonDefn.choicesList]))
             } );
             fullDef.key_value_store_active.push( {
                 table_id: tlo.table_id,
@@ -1813,29 +1813,29 @@ purge:function(ctxt) {
 discoverTableFromTableId:function(ctxt, table_id) {
 },
 setValueDeferredChange: function( name, value ) {
-	var justChange = {};
-	justChange[name] = {value: value, isInstanceMetadata: false };
-	this.pendingChanges[name] = {value: value, isInstanceMetadata: false };
-	// apply the change immediately...
-	var is = this._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
-					mdl.dataTableModel, opendatakit.getCurrentInstanceId(), justChange);
-	var uf;
-	for (var f in is.updates) {
-		var uf = is.updates[f];
-		var de = mdl.dataTableModel[f];
-		if (de.isPersisted) {
-			var elementPath = de.elementPath || uf.elementPath;
-			if ( de.elementSet == 'instanceMetadata' ) {
-				this._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
-			} else {
-				this._reconstructElementPath(elementPath, de, uf.value, mdl.data );
-			}
-		}
-	}
+    var justChange = {};
+    justChange[name] = {value: value, isInstanceMetadata: false };
+    this.pendingChanges[name] = {value: value, isInstanceMetadata: false };
+    // apply the change immediately...
+    var is = this._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
+                    mdl.dataTableModel, opendatakit.getCurrentInstanceId(), justChange);
+    var uf;
+    for (var f in is.updates) {
+        var uf = is.updates[f];
+        var de = mdl.dataTableModel[f];
+        if (de.isPersisted) {
+            var elementPath = de.elementPath || uf.elementPath;
+            if ( de.elementSet == 'instanceMetadata' ) {
+                this._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
+            } else {
+                this._reconstructElementPath(elementPath, de, uf.value, mdl.data );
+            }
+        }
+    }
 },
 applyDeferredChanges: function(ctxt) {
-	var changes = this.pendingChanges;
-	this.pendingChanges = [];
+    var changes = this.pendingChanges;
+    this.pendingChanges = [];
     this.putDataKeyValueMap(ctxt, changes );
 }
 };

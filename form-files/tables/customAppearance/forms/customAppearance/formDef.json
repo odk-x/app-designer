@@ -180,7 +180,7 @@
       }
     ]
   },
-  "logic_flow": {
+  "specification": {
     "settings": {
       "form_id": {
         "setting_name": "form_id",

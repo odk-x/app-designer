@@ -55,11 +55,11 @@ return {
             // set the refId. From this point onward,
             // changes will be applied within the shim
             opendatakit.setRefId(refId);
-			if ( instanceId == null ) {
-				opendatakit.clearCurrentInstanceId();
-			} else {
-				opendatakit.setCurrentInstanceId(instanceId);
-			}
+            if ( instanceId == null ) {
+                opendatakit.clearCurrentInstanceId();
+            } else {
+                opendatakit.setCurrentInstanceId(instanceId);
+            }
             that.controller.gotoScreenPath(ctxt, screenPath);
         }}), instanceId, instanceMetadataKeyValueMap);
     },
@@ -144,9 +144,9 @@ return {
                 database.initializeTables($.extend({},ctxt,{success:function() {
                         // build the survey and place it in the controller...
                         that.builder.buildSurvey($.extend({}, ctxt, {success:function() {
-								opendatakit.setCurrentFormDef(formDef);
-								opendatakit.setCurrentFormPath(formPath);
-								// currentInstanceId == null
+                                opendatakit.setCurrentFormDef(formDef);
+                                opendatakit.setCurrentFormPath(formPath);
+                                // currentInstanceId == null
                                 // currentInstanceId == null
                                 // TODO: load instance...
                                 that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
@@ -159,10 +159,10 @@ return {
             that.controller.reset($.extend({},ctxt, {success:function() {
                 // build the survey and place it in the controller...
                 that.builder.buildSurvey($.extend({}, ctxt, {success: function() {
-							// data table already exists (since table_id is unchanged)
-							// preserve values from the Tables metadata but override form info...
-							opendatakit.setCurrentFormDef(formDef);
-							opendatakit.setCurrentFormPath(formPath);
+                            // data table already exists (since table_id is unchanged)
+                            // preserve values from the Tables metadata but override form info...
+                            opendatakit.setCurrentFormDef(formDef);
+                            opendatakit.setCurrentFormPath(formPath);
                             // currentInstanceId == null
                             // TODO: load instance...
                             that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
@@ -240,16 +240,16 @@ return {
         if ( refId == null ) {
             ctxt.append('parsequery._parseParameters.shim.refId is null -- generating unique value');
             refId = opendatakit.genUUID();
-		}
-		
-		// This may fail when embedded
-		try {
-			shim.refId = refId;
-		} catch(e) {
-			ctxt.append('parsequery._parseParameters.shim.refId assignment failed');
-		}
-		ctxt.append('parsequery._parseParameters.shim.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
-		shim.log('D', 'parsequery._parseParameters.shim.refId AFTER ASSIGNMENT refId: ' + refId);
+        }
+        
+        // This may fail when embedded
+        try {
+            shim.refId = refId;
+        } catch(e) {
+            ctxt.append('parsequery._parseParameters.shim.refId assignment failed');
+        }
+        ctxt.append('parsequery._parseParameters.shim.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
+        shim.log('D', 'parsequery._parseParameters.shim.refId AFTER ASSIGNMENT refId: ' + refId);
         
         var formDef = opendatakit.getCurrentFormDef();
         var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);
@@ -274,17 +274,17 @@ return {
             }
         }
     },
-	
+    
     /**
      * What actually reads in and loads the formDef file (and then parses the query parameters against it).
      */
     _parseFormDefFile: function(ctxt, formPath, instanceId, screenPath, refId, instanceMetadataKeyValueMap, filename) {
         var that = this;
-		var newCtxt = $.extend({},ctxt, {success:function(formDef) {
-				that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
-					instanceId, screenPath, refId, instanceMetadataKeyValueMap);
-			}});
-		opendatakit.readFormDefFile(newCtxt, filename);
+        var newCtxt = $.extend({},ctxt, {success:function(formDef) {
+                that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
+                    instanceId, screenPath, refId, instanceMetadataKeyValueMap);
+            }});
+        opendatakit.readFormDefFile(newCtxt, filename);
     },
     /**
      *
@@ -325,8 +325,8 @@ return {
             if ( hash == "#formPath=" ) {
                 ctxt.failure(m);
             } else {
-				window.location.hash = "#formPath=";
-                that.changeUrlHash(ctxt);
+                window.location.hash = "#formPath=";
+                that.changeUrlHash($.extend({},ctxt,{success:function() { ctxt.failure(m); }}));
             }
           }});
 

@@ -5,7 +5,7 @@
  * detection or handling (do our own navigation handling).
  */
 define(['jquery'], function($){
-    $(document).bind("mobileinit", function () {
+    $(document).on("mobileinit", function () {
         $.mobile.ajaxEnabled = false;
         $.mobile.linkBindingEnabled = false;
         $.mobile.hashListeningEnabled = false;
