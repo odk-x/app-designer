@@ -745,6 +745,8 @@ promptTypes.external_link = promptTypes.base.extend({
     templatePath: 'templates/external_link.handlebars',
     launchAction: 'android.content.Intent.ACTION_VIEW',
     url: null,
+    renderContext: {
+    },
     events: {
         "click .openLink": "openLink"
     },
