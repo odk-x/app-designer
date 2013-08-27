@@ -1557,6 +1557,18 @@
             	entry.setting_name = "table_id";
             	processedSettings['table_id'] = entry;
             }
+
+            // Unicode extensions to standard RegExp...
+            var safeId = XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)+$', 'A');
+
+            if ( !safeId.test(processedSettings.form_id.value) ) {
+            	throw Error("The value of the 'form_id' setting_name on the settings sheet must begin with a letter and contain only letters, digits and '_'");
+            }
+
+            if ( !safeId.test(processedSettings.table_id.value) ) {
+            	throw Error("The value of the 'table_id' setting_name on the settings sheet must begin with a letter and contain only letters, digits and '_'");
+            }
+
             if ( !('survey' in processedSettings) ) {
             	throw Error("Please define a 'survey' setting_name on the settings sheet and specify the survey title under display.title");
             }
