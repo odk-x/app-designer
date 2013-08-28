@@ -1559,7 +1559,7 @@
             }
 
             // Unicode extensions to standard RegExp...
-            var safeId = XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)+$', 'A');
+            var safeId = XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)*$', 'A');
 
             if ( !safeId.test(processedSettings.form_id.value) ) {
             	throw Error("The value of the 'form_id' setting_name on the settings sheet must begin with a letter and contain only letters, digits and '_'");
