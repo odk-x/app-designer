@@ -29,7 +29,7 @@
       },
       {
         "type": "select_one",
-        "value_list": "sexes",
+        "values_list": "sexes",
         "name": "sex",
         "display": {
           "text": "Enter sex:"
@@ -38,7 +38,7 @@
       },
       {
         "type": "select_one",
-        "value_list": "yesno",
+        "values_list": "yesno",
         "name": "income_contribution",
         "display": {
           "text": "Does this household member contribute to the household income?"
@@ -369,7 +369,7 @@
           },
           {
             "type": "select_one",
-            "value_list": "sexes",
+            "values_list": "sexes",
             "name": "sex",
             "display": {
               "text": "Enter sex:"
@@ -383,7 +383,7 @@
           },
           {
             "type": "select_one",
-            "value_list": "yesno",
+            "values_list": "yesno",
             "name": "income_contribution",
             "display": {
               "text": "Does this household member contribute to the household income?"

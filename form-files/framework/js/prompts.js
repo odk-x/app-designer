@@ -534,7 +534,7 @@ promptTypes.linked_table = promptTypes.base.extend({
         }
     },
     getFormPath: function() {
-        return '../' + this.linked_form_id + '/';
+        return '../tables/' + this.getLinkedTableId() + '/forms/' + this.linked_form_id + '/';
     },
     _linkedCachedMdl: null,
     getLinkedMdl: function(ctxt) {
