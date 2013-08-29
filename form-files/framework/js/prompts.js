@@ -562,9 +562,11 @@ promptTypes.linked_table = promptTypes.base.extend({
         var parts = that.selection.split(' ');
         var remapped = '';
         var i;
+        var elementNamePattern = /^[a-zA-Z0-9_]+$/i;
+        
         for ( i = 0 ; i < parts.length ; ++i ) {
             var e = parts[i];
-            if ( e.length = 0 || !/^[a-z0-9]+$/i.test(e) ) {
+            if ( e.length == 0 || !elementNamePattern.test(e) ) {
                 remapped = remapped + ' ' + e;
             } else {
                 // map e back to elementKey
@@ -604,11 +606,12 @@ promptTypes.linked_table = promptTypes.base.extend({
         var i;
         for ( i = 0 ; i < parts.length ; ++i ) {
             var e = parts[i];
-            if ( e.length = 0 ) {
+            if ( e.length == 0 ) {
                 // no-op
             } else if ( isElement ) {
                 // map e back to elementKey
                 var found = false;
+                var f;
                 for (f in linkedMdl.dataTableModel) {
                     var defElement = dataTableModel[f];
                     var elementPath = defElement['elementPath'];
@@ -650,12 +653,13 @@ promptTypes.linked_table = promptTypes.base.extend({
         ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
-            var selectionString = that.convertSelection(linkedMdl);
-            var orderBy = that.convertOrderBy(linkedMdl);
+            var selString = that.convertSelection(linkedMdl);
+            var selArgs = that.selectionArgs();
+            var ordBy = that.convertOrderBy(linkedMdl);
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
                     that.renderContext.instances = instanceList;
                     ctxt.success();
-            }}), dbTableName, that.selection, that.selectionArgs(), that.orderBy);
+            }}), dbTableName, selString, selArgs, ordBy);
         }}));
     },
     openInstance: function(evt) {

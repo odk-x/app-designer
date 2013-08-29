@@ -1313,6 +1313,7 @@ initializeTables:function(ctxt, formDef, table_id, formPath) {
         // these values come from the current webpage
         // update table_id and qp
         mdl.formDef = tlo.formDef;
+        mdl.dataTableModel = tlo.dataTableModel;
         mdl.tableMetadata = tlo.tableMetadata;
         mdl.columnMetadata = tlo.columnMetadata;
         mdl.data = tlo.data;
@@ -1653,7 +1654,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         });
     } else {
         // we don't need to write the database -- just update everything
-        mdl.dataTableModel = dataTableModel;
+        tlo.dataTableModel = dataTableModel;
         that._coreGetAllTableMetadata(transaction, ctxt, tlo);
     }
 },

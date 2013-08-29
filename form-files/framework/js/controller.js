@@ -710,18 +710,18 @@ window.controller = {
                         ctxt.failure(m);
                     } else {
                         // set the screen back to what it was, then report this failure
-						that.getOperation($.extend({},ctxt,{success:function(op) {
-							that.setScreen($.extend({},ctxt,{success:function() {
-								// report the failure.
-								ctxt.failure(m);
-							}, failure: function(m2) {
-								// report the failure.
-								ctxt.failure(m);
-							}}), op);
-						}, failure: function(m2) {
-							// report the failure.
-							ctxt.failure(m);
-						}}), oldPath);
+                        that.getOperation($.extend({},ctxt,{success:function(op) {
+                            that.setScreen($.extend({},ctxt,{success:function() {
+                                // report the failure.
+                                ctxt.failure(m);
+                            }, failure: function(m2) {
+                                // report the failure.
+                                ctxt.failure(m);
+                            }}), op);
+                        }, failure: function(m2) {
+                            // report the failure.
+                            ctxt.failure(m);
+                        }}), oldPath);
                     }
                 }}), ScreenInstance, options.popHistoryOnExit || false );
         }}), operation._section_name + "/" + operation.operationIdx );
