@@ -309,7 +309,7 @@ promptTypes.base = Backbone.View.extend({
     },
     __test__: function(evt){
         //This is a utility function for checking to make sure event maps are working.
-        console.log(evt);
+        shim.log('T',evt);
     }
     /*
     registerChangeHandlers: function() {
@@ -571,8 +571,9 @@ promptTypes.linked_table = promptTypes.base.extend({
             } else {
                 // map e back to elementKey
                 var found = false;
+				var f;
                 for (f in linkedMdl.dataTableModel) {
-                    var defElement = dataTableModel[f];
+                    var defElement = linkedMdl.dataTableModel[f];
                     var elementPath = defElement['elementPath'];
                     if ( elementPath == null ) elementPath = f;
                     if ( elementPath == e ) {
@@ -1800,7 +1801,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
         }
         function error(msg) {
             that.$('.status').text((typeof msg == 'string') ? msg : "failed");
-            console.log(arguments);
+            shim.log('E', arguments);
         }
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(success, error, {

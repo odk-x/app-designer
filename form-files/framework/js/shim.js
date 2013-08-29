@@ -26,7 +26,9 @@ window.shim = window.shim || {
      * msg -- message to log
      */
     log: function(severity, msg) {
-        /* if ( window.location.search != null && window.location.search.indexOf("log") >= 0 ) */ {
+		if ( severity == 'E' || severity == 'W' ) {
+			console.error(severity + '/' + msg);
+		} else {
             console.log(severity + '/' + msg);
         }
     },
