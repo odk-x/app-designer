@@ -7,7 +7,7 @@
 define(['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars'],
 function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial) {
 
-Handlebars.registerHelper('localize', function(textOrLangMap, options) {
+Handlebars.registerHelper('localize', function(textOrLangMap) {
     var locale = database.getInstanceMetaDataValue('locale');
     if ( locale == null ) {
         locale = opendatakit.getDefaultFormLocaleValue();
@@ -16,13 +16,18 @@ Handlebars.registerHelper('localize', function(textOrLangMap, options) {
     return new Handlebars.SafeString(str);
 });
 
-Handlebars.registerHelper('metadata', function(value, options) {
-    var val = database.getInstanceMetaDataValue( options ? options : value );
+Handlebars.registerHelper('metadata', function(fieldName) {
+    var val = database.getInstanceMetaDataValue( fieldName );
     return new Handlebars.SafeString( (val != null) ? val : "" );
 });
 
-Handlebars.registerHelper('setting', function(value, options) {
-    var val = database.getSettingValue( options ? options : value );
+Handlebars.registerHelper('evaluate', function(calcFunction) {
+	var val = (calcFunction)();
+    return new Handlebars.SafeString( (val != null) ? val : "" );
+});
+
+Handlebars.registerHelper('setting', function(settingName) {
+    var val = opendatakit.getSettingValue( settingName );
     return new Handlebars.SafeString( (val != null) ? val : "" );
 });
 
