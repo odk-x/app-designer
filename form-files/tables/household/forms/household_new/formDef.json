@@ -50,6 +50,11 @@
           "hint": "listing of subforms displays the line_text in larger font, and the line_subtext in smaller font beside an 'edit' button."
         },
         "linked_form_id": "household_member",
+        "selection": "household_id = ?",
+        "selectionArgs": {
+          "default": "[ data('household_id') ]",
+          "cell_type": "formula"
+        },
         "comments": "The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
         "line_text": {
           "elementName": "instanceName",
@@ -397,6 +402,11 @@
               "hint": "listing of subforms displays the line_text in larger font, and the line_subtext in smaller font beside an 'edit' button."
             },
             "linked_form_id": "household_member",
+            "selection": "household_id = ?",
+            "selectionArgs": {
+              "default": "[ data('household_id') ]",
+              "cell_type": "formula"
+            },
             "comments": "The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
             "line_text": {
               "elementName": "instanceName",
