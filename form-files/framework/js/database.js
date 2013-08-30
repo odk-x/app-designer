@@ -1058,7 +1058,6 @@ cacheAllData:function(ctxt, instanceId) {
             ctxt.append("cacheAllData.success");
             mdl.metadata = tlo.metadata;
             mdl.data = tlo.data;
-            opendatakit.setCurrentInstanceId(instanceId);
             mdl.loaded = true;
             ctxt.success();
         }}), mdl.dataTableModel, mdl.tableMetadata.dbTableName, instanceId);
@@ -1263,7 +1262,6 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
         mdl.metadata = {};
         mdl.data = {};
         mdl.loaded = false;
-        opendatakit.clearCurrentInstanceId();
         ctxt.success();
     } else {
         ctxt.append('initializeInstance.access', instanceId);

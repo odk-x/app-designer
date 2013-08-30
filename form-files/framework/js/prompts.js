@@ -571,7 +571,7 @@ promptTypes.linked_table = promptTypes.base.extend({
             } else {
                 // map e back to elementKey
                 var found = false;
-				var f;
+                var f;
                 for (f in linkedMdl.dataTableModel) {
                     var defElement = linkedMdl.dataTableModel[f];
                     var elementPath = defElement['elementPath'];
@@ -820,8 +820,10 @@ promptTypes.user_branch = promptTypes.base.extend({
     selectBranchItem: function(evt) {
         var that = this;
         var ctxt = controller.newContext(evt);
+        ctxt.append("prompts." + that.type + ".selectBranchItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.branch-select-item');
         $target.attr("label", function(index, oldPropertyValue) {
+            ctxt.append("prompts." + that.type + ".selectBranchItem: click near label: " + oldPropertyValue);
             var currentPath = controller.getCurrentScreenPath();
             var parts = currentPath.split("/");
             if ( parts.length < 2 ) {

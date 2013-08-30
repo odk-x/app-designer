@@ -60,6 +60,12 @@ return {
             } else {
                 opendatakit.setCurrentInstanceId(instanceId);
             }
+            // if we are not starting fresh, we will have 
+            // something on the stack -- retain it, otherwise
+            // reset the stack to the default content.
+            if ( !shim.hasSectionStack(refId) ) {
+                shim.clearSectionScreenState(refId);
+            }
             that.controller.gotoScreenPath(ctxt, screenPath);
         }}), instanceId, instanceMetadataKeyValueMap);
     },
@@ -90,14 +96,14 @@ return {
         // THIS IS AN ASSUMPTION OF THE CALLING FUNCTION!!!!
         
         if ( formPath == null ) {
-            ctxt.append("parsequery._effectChange.nullFormPath");
+            ctxt.append("parsequery._parseQueryParameterContinuation.nullFormPath");
             alert("Unexpected null formPath");
             ctxt.failure({message: "No form specified."});
             return;
         }
         
         if ( formDef == null ) {
-            ctxt.append("parsequery._effectChange.nullFormDef");
+            ctxt.append("parsequery._parseQueryParameterContinuation.nullFormDef");
             alert("Unexpected null formDef when changing forms");
             ctxt.failure({message: "Form definition is empty."});
             return;
@@ -105,7 +111,7 @@ return {
         
         var fidObject = opendatakit.getSettingObject(formDef, 'form_id');
         if ( fidObject == null || !('value' in fidObject) ) {
-            ctxt.append("parsequery._effectChange.missingFormId");
+            ctxt.append("parsequery._parseQueryParameterContinuation.missingFormId");
             alert("Unexpected missing value for form_id setting when changing forms");
             ctxt.failure({message: "Form definition has no form_id."});
             return;
@@ -116,7 +122,7 @@ return {
         var tidObject = opendatakit.getSettingObject(formDef, 'table_id');
         var table_id;
         if ( tidObject == null || !('value' in tidObject) ) {
-            ctxt.append("parsequery._effectChange.missingTableId");
+            ctxt.append("parsequery._parseQueryParameterContinuation.missingTableId");
             alert("No table_id specified in Form Definition!");
             ctxt.failure({message: "No table_id specified in form definition."});
             return;
@@ -136,6 +142,7 @@ return {
         var qpl = opendatakit.getHashString(formPath, instanceId, screenPath);
 
         if ( !sameTable ) {
+            ctxt.append("parsequery._parseQueryParameterContinuation.differentTable");
             opendatakit.clearLocalInfo("table"); // tableId, formPath, instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
@@ -154,6 +161,7 @@ return {
                     }}), formDef, table_id, formPath);
             }}), sameForm);
         } else if (!sameForm) {
+            ctxt.append("parsequery._parseQueryParameterContinuation.differentForm");
             opendatakit.clearLocalInfo("form"); // formPath, instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
@@ -169,6 +177,7 @@ return {
                 }}), formDef, formPath);
             }}), sameForm);
         } else  if (!sameInstance) {
+            ctxt.append("parsequery._parseQueryParameterContinuation.differentInstance");
             opendatakit.clearLocalInfo("instance"); // instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
@@ -181,6 +190,7 @@ return {
                 that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
             }}), sameForm);
         } else {
+            ctxt.append("parsequery._parseQueryParameterContinuation.differentScreen");
             opendatakit.clearLocalInfo("screen"); // screenPath, refId
             // currentInstanceId == valid value
             // data table already exists (since table_id is unchanged)
