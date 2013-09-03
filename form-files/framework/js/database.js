@@ -1,7 +1,10 @@
 'use strict';
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
 define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
-    return {
+verifyLoad('database',
+    ['mdl','opendatakit','jquery'],
+    [mdl,opendatakit,$]);
+return {
   submissionDb:false,
   pendingChanges: [],
         // maps of:
@@ -1257,6 +1260,7 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, order
 },
 initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
     var that = this;
+	instanceMetadataKeyValueMap = instanceMetadataKeyValueMap || {};
     if ( instanceId == null ) {
         ctxt.append('initializeInstance.noInstance');
         mdl.metadata = {};
@@ -1493,6 +1497,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         column_definitions: []
         };
 
+	ctxt.append('database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...
@@ -1645,10 +1650,11 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
     }
 
     if ( writeDatabase ) {
+        tlo.dataTableModel = dataTableModel;
         var createTableCmd = this._createTableStmt(dbTableName, dataTableModel);
         ctxt.sqlStatement = createTableCmd;
         transaction.executeSql(createTableCmd.stmt, createTableCmd.bind, function(transaction, result) {
-            that.fullDefHelper(transaction, ctxt, tableToUpdate, 0, fullDef, dbTableName, dataTableModel, tlo);
+            that.fullDefHelper(transaction, ctxt, tableToUpdate, 0, fullDef, tlo);
         });
     } else {
         // we don't need to write the database -- just update everything
@@ -1656,7 +1662,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         that._coreGetAllTableMetadata(transaction, ctxt, tlo);
     }
 },
-fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, dbTableName, dataTableModel, tlo) {
+fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, tlo) {
     var that = this;
     var row = null;
     
@@ -1684,7 +1690,6 @@ fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, dbTableNa
         
         if ( tableToUpdate == null ) {
             // end of the array -- we are done!
-            mdl.dataTableModel = dataTableModel;
             that._coreGetAllTableMetadata(transaction, ctxt, tlo);
             return;
         }
@@ -1706,7 +1711,7 @@ fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, dbTableNa
     ctxt.sqlStatement = { stmt: insertCmd, bind: bindArray };
         
     transaction.executeSql(insertCmd, bindArray, function(transaction, result) {
-        that.fullDefHelper(transaction, ctxt, tableToUpdate, idx+1, fullDef, dbTableName, dataTableModel, tlo);
+        that.fullDefHelper(transaction, ctxt, tableToUpdate, idx+1, fullDef, tlo);
     });
 },
 getDataValue:function(name) {

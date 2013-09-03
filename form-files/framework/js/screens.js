@@ -8,10 +8,15 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
-define(['screenTypes','opendatakit','backbone','jquery','handlebars','jqmobile'], 
-function(screenTypes,  opendatakit,  Backbone,  $,       Handlebars) {
+define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','jqmobile','handlebarsHelpers', 'translations'], 
+function(screenTypes,  opendatakit,  controller,  Backbone,  $,       _,           Handlebars, _jqmobile, _hh, translations) {
+verifyLoad('screens',
+    ['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','jqmobile','handlebarsHelpers', 'translations'],
+    [screenTypes,   opendatakit,  controller,  Backbone,  $,       _,           Handlebars,  _jqmobile, _hh, translations]);
+
 screenTypes.waiting = Backbone.View.extend({
     type: "waiting",
+    controller: controller,
     templatePath: "templates/waiting.handlebars",
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
@@ -44,10 +49,11 @@ screenTypes.waiting = Backbone.View.extend({
             ctxt.success();
         } else if(this.templatePath) {
             try {
-                requirejs(['text!'+this.templatePath], function(source) {
+                require(['text!'+this.templatePath], function(source) {
                     try {
                         that.template = Handlebars.compile(source);
-                        ctxt.success();
+                        // ensure that require is unwound
+                        setTimeout(function() { ctxt.success(); }, 0 );
                     } catch (e) {
                         ctxt.append("screens."+that.type+
                             ".whenTemplateIsReady.exception", e);
@@ -58,17 +64,16 @@ screenTypes.waiting = Backbone.View.extend({
                     }
                 }, function(err) {
                     ctxt.append("screens."+that.type+
-                        ".whenTemplateIsReady.requirejs.failure", err);
-                    console.error("screens."+that.type+
-                        ".whenTemplateIsReady.requirejs.failure " + String(err) +
-                        " px: " + that.promptIdx);
-                    ctxt.failure({message: "Error loading handlebars template."});
+                        ".whenTemplateIsReady.require.failure " + err.requireType + " modules: ", err.requireModules);
+                    shim.log('E',"screens."+that.type+
+                        ".whenTemplateIsReady.require.failure " + err.requireType + " modules: " + err.requireModules.toString());
+                    ctxt.failure({message: "Error loading handlebars template (" + err.requireType + ")."});
                 });
             } catch (e) {
                 ctxt.append("screens."+that.type+
-                    ".whenTemplateIsReady.requirejs.exception", e);
+                    ".whenTemplateIsReady.require.exception", e);
                 console.error("screens."+that.type+
-                    ".whenTemplateIsReady.requirejs.exception " + String(e) +
+                    ".whenTemplateIsReady.require.exception " + String(e) +
                     " px: " + that.promptIdx);
                 ctxt.failure({message: "Error reading handlebars template."});
             }
@@ -110,7 +115,7 @@ screenTypes.waiting = Backbone.View.extend({
      * stopPropagation is used in the events map to disable swiping on various elements
      **/
     stopPropagation: function(evt){
-        var ctxt = controller.newContext(evt);
+        var ctxt = this.controller.newContext(evt);
         ctxt.append("screens." + this.type + ".stopPropagation", "px: " + this.promptIdx);
         shim.log("D","screens." + this.type + ".stopPropagation px: " + this.promptIdx + "evt: " + evt);
         evt.stopImmediatePropagation();
@@ -159,6 +164,7 @@ screenTypes.waiting = Backbone.View.extend({
 });
 screenTypes.screen = Backbone.View.extend({
     type: "screen",
+    controller: controller,
     templatePath: "templates/navbar.handlebars",
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
@@ -191,7 +197,7 @@ screenTypes.screen = Backbone.View.extend({
             ctxt.success();
         } else if(this.templatePath) {
             try {
-                requirejs(['text!'+this.templatePath], function(source) {
+                require(['text!'+this.templatePath], function(source) {
                     try {
                         that.template = Handlebars.compile(source);
                         ctxt.success();
@@ -199,23 +205,21 @@ screenTypes.screen = Backbone.View.extend({
                         ctxt.append("screens."+that.type+
                             ".whenTemplateIsReady.exception", e);
                         console.error("screens."+that.type+
-                            ".whenTemplateIsReady.exception " + String(e) +
-                            " px: " + that.promptIdx);
+                            ".whenTemplateIsReady.exception " + String(e));
                         ctxt.failure({message: "Error compiling handlebars template."});
                     }
                 }, function(err) {
                     ctxt.append("screens."+that.type+
-                        ".whenTemplateIsReady.requirejs.failure", err);
+                        ".whenTemplateIsReady.require.failure " + err.requireType + " modules: ", err.requireModules);
                     console.error("screens."+that.type+
-                        ".whenTemplateIsReady.requirejs.failure " + String(err) +
-                        " px: " + that.promptIdx);
-                    ctxt.failure({message: "Error loading handlebars template."});
+                        ".whenTemplateIsReady.require.failure " + err.requireType + " modules: " + err.requireModules.toString());
+                    ctxt.failure({message: "Error loading handlebars template (" + err.requireType + ")."});
                 });
             } catch (e) {
                 ctxt.append("screens."+that.type+
-                    ".whenTemplateIsReady.requirejs.exception", e);
+                    ".whenTemplateIsReady.require.exception", e);
                 console.error("screens."+that.type+
-                    ".whenTemplateIsReady.requirejs.exception " + String(e) +
+                    ".whenTemplateIsReady.require.exception " + String(e) +
                     " px: " + that.promptIdx);
                 ctxt.failure({message: "Error reading handlebars template."});
             }
@@ -246,12 +250,12 @@ screenTypes.screen = Backbone.View.extend({
         var locales = opendatakit.getFormLocalesValue();
         this._renderContext.disabled = this.disabled;
         this._renderContext.hide = this.hide;
-        this._renderContext.form_title = controller.getSectionTitle();
+        this._renderContext.form_title = this.controller.getSectionTitle();
         this._renderContext.locales = locales;
         this._renderContext.hasTranslations = (locales.length > 1);
         this._renderContext.showHeader = true;
         this._renderContext.showFooter = false;
-        this._renderContext.showHierarchy = controller.getSectionShowHierarchy();
+        this._renderContext.showHierarchy = this.controller.getSectionShowHierarchy();
         this._renderContext.enableForwardNavigation = true;
         this._renderContext.enableBackNavigation = true;
         this._renderContext.enableNavigation = true;
@@ -275,7 +279,7 @@ screenTypes.screen = Backbone.View.extend({
                 // determine the active prompts
                 that.activePrompts = []; // clear all prompts...
                 var activePromptIndices = that._operation._parsed_screen_block();
-                var sectionPrompts = controller.getCurrentSectionPrompts();
+                var sectionPrompts = that.controller.getCurrentSectionPrompts();
                 var ap = [];
                 var i;
                 for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
@@ -293,7 +297,7 @@ screenTypes.screen = Backbone.View.extend({
                 // work with the controller to ensure that all
                 // intermediate state has been written to the 
                 // database before commencing the rendering
-                controller.commitChanges($.extend({},ctxt,{success:function() {
+                that.controller.commitChanges($.extend({},ctxt,{success:function() {
                         that.initializeRenderContext(ctxt);
                     }}));
             }}));
@@ -324,7 +328,7 @@ screenTypes.screen = Backbone.View.extend({
      * stopPropagation is used in the events map to disable swiping on various elements
      **/
     stopPropagation: function(evt){
-        var ctxt = controller.newContext(evt);
+        var ctxt = this.controller.newContext(evt);
         ctxt.append("screens." + this.type + ".stopPropagation", "px: " + this.promptIdx);
         shim.log("D","screens." + this.type + ".stopPropagation px: " + this.promptIdx + "evt: " + evt);
         evt.stopImmediatePropagation();
@@ -339,7 +343,7 @@ screenTypes.screen = Backbone.View.extend({
             that.render($.extend({},ctxt,{success:function() {
                 that.$el.trigger('create');
                 that.afterRender($.extend({},ctxt,{success:function() {
-                    $.mobile.changePage(that.$el, {
+                    window.$.mobile.changePage(that.$el, {
                             changeHash: false,
                             allowSamePageTransition: true,
                             transition: 'none'
@@ -456,4 +460,6 @@ screenTypes.screen = Backbone.View.extend({
     }
     */
 });
+
+return screenTypes;
 });

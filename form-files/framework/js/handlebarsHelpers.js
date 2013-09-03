@@ -4,8 +4,11 @@
  * These are invoked via {{helperFunction arg1}} or {{helperFunction arg1 arg2}}
  * within the handelbars templates.
  */
-define(['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars'],
-function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial) {
+define(['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],
+function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                     $) {
+verifyLoad('handlebarsHelpers',
+    ['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],
+    [database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                      $]);
 
 Handlebars.registerHelper('localize', function(textOrLangMap) {
     var locale = database.getInstanceMetaDataValue('locale');
@@ -22,7 +25,7 @@ Handlebars.registerHelper('metadata', function(fieldName) {
 });
 
 Handlebars.registerHelper('evaluate', function(calcFunction) {
-	var val = (calcFunction)();
+    var val = (calcFunction)();
     return new Handlebars.SafeString( (val != null) ? val : "" );
 });
 
@@ -101,4 +104,5 @@ Handlebars.registerHelper('promptLink', function(value, options) {
 });
 
 
+return "handlebarsHelpers were successfully registered";
 });

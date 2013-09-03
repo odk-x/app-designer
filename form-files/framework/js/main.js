@@ -12,23 +12,15 @@
  */
 requirejs.config({
     baseUrl: shim.getBaseUrl(),
-    waitSeconds: 12,
+    waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon 
-        //jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
-        jqmobile : 'libs/jquery.mobile-1.3.1/jquery.mobile-1.3.1',
-        //jquery : 'libs/jquery.1.8.2',
+        jqmobile : 'libs/jquery.mobile-1.3.2/jquery.mobile-1.3.2',
         jquery : 'libs/jquery.1.9.1',
-        //backbone : 'libs/backbone.0.9.2',
         backbone : 'libs/backbone.1.0.0',
-        //handlebars : 'libs/handlebars.1.0.0.beta.6',
         handlebars : 'libs/handlebars.1.0.0.rc.4',
-        //underscore : 'libs/underscore.1.3.3',
-        //underscore : 'libs/underscore.1.4.2',
         underscore : 'libs/underscore.1.4.4',
-        //text : 'libs/text.2.0.3',
-        text : 'libs/text.2.0.6',
-        //mobiscroll : 'libs/mobiscroll/js/mobiscroll-2.0.3.custom.min',
+        text : 'libs/text.2.0.10',
         mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
         // directory paths for resources
         img : 'img',
@@ -53,15 +45,6 @@ requirejs.config({
         'jquery-csv' : 'libs/jquery-csv/src/jquery.csv'
     },
     shim: {
-        'jquery': {
-            // Slimmer drop-in replacement for jquery
-            //These script dependencies should be loaded before loading
-            //zepto.js
-            deps: [],
-            //Once loaded, use the global '$' as the
-            //module value.
-            exports: '$'
-        },
         'jqmobile': {
             // Slimmer drop-in replacement for jquery
             //These script dependencies should be loaded before loading
@@ -93,7 +76,7 @@ requirejs.config({
             exports: 'Handlebars'
         },
         'mobiscroll': {
-            deps: ['jquery']
+            deps: ['jquery','jqmobile']
         },
         'jquery-csv' : {
             deps: ['jquery']
@@ -101,36 +84,100 @@ requirejs.config({
     }
 });
 
-requirejs(['jquery', 'mdl','opendatakit', 'database','parsequery',
-                        'jqmobile', 'builder', 'controller',
-                        'screens',
-                        'prompts'/* mix-in additional prompts and support libs here */], 
-        function($, mdl,opendatakit,database,parsequery,jqm,builder,controller) {
-            var ctxt = controller.newStartContext();
-            ctxt.append("main.parsequery.initialize");
-            parsequery.initialize(controller,builder);
+/**
+ * Test to confirm that all required dependencies have
+ * been loaded. If there is a circular dependency, it will
+ * be null. If so, log the error.
+ */
+function verifyLoad( prefix, alist, args ) {
+    var i;
+    for ( i = 0 ; i < args.length ; ++i ) {
+        if ( args[i] == null ) {
+            shim.log('E',prefix + ' cyclic dependency prevented initialization of ' + alist[i]);
+        }
+    }
+}
 
-            //
-            // define a function that waits until jquery mobile is initialized
-            // then calls changeUrlHash() to trigger loading and processing of
-            // the requested form.
-            var f = function() {
-                if ( $.mobile != null && !$.mobile.hashListeningEnabled ) {
+require(['jquery'], 
+    function($) {
+        verifyLoad('main.require.jquery',
+            ['jquery'],
+            [$]);
+
+    shim.log('I','main.require.jquery.loaded establish mobileinit action');
+    $(document).on("mobileinit", function () {
+    
+        $.mobile.ajaxEnabled = false;
+        $.mobile.allowCrossDomainPages = false;
+        $.mobile.linkBindingEnabled = false;
+        $.mobile.hashListeningEnabled = false;
+        $.mobile.pushStateEnabled = false;
+
+        // unwind require then launch the framework...
+        setTimeout( function() {
+                
+            // and launch the framework...
+            require(['mdl','opendatakit', 'database','parsequery',
+                            'builder', 'controller'], 
+            function(   mdl,  opendatakit,   database,  parsequery,
+                             builder,   controller) {
+                verifyLoad('main.require.framework.loaded',
+                    ['mdl','opendatakit', 'database','parsequery',
+                            'builder', 'controller'],
+                    [ mdl,  opendatakit,   database,  parsequery,
+                             builder,   controller]);
+
+                
+                // define a function that waits until jquery mobile is initialized
+                // then calls changeUrlHash() to trigger loading and processing of
+                // the requested form.
                     
-                    if ( window.location.search != null && window.location.search.indexOf("purge") >= 0 ) {
-                        ctxt.append('purging datastore');
-                        database.purge($.extend({},ctxt,{success:function() {
-                                parsequery.changeUrlHash(ctxt);
-                            }}));
-                    } else {
-                        parsequery.changeUrlHash(ctxt);
-                    }
-                } else {
-                    ctxt.append('startup.delay');
-                    setTimeout(f, 200);
-                }
-            };
-        
-            f();
+                parsequery.initialize(controller,builder);
 
+                var ref = window.location.href;
+                var hashIdx = ref.indexOf("#");
+                var searchIdx = ref.indexOf("?");
+                var search = window.location.search;
+
+                if ( searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx) ) {
+                    if ( hashIdx < 0 ) {
+                        ref = ref + '?';
+                    } else if ( hashIdx > 0 ) {
+                        ref = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
+                    }
+                    window.location.assign(ref);
+                } else if ( search != null && search.indexOf("purge") >= 0 ) {
+                    var ctxt = controller.newStartContext();
+                    ctxt.append("jqmConfig.purge");
+                    shim.log('W','jqmConfig.purge');
+                    database.purge($.extend({},ctxt,{success:function() {
+                        ctxt.append('jqmConfig.purge.changeUrlHash');
+                        parsequery.changeUrlHash(ctxt);
+                    }}));
+                } else {
+                    var ctxt = controller.newStartContext();
+                    ctxt.append('jqmConfig.changeUrlHash');
+                    parsequery.changeUrlHash(ctxt);
+                }
+            }, function(err) {
+                shim.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+            });
+        }, 0);
+
+        });
+
+    
+    require(['jqmobile'], 
+      function(_jqmobile) {
+        verifyLoad('main.require.jqmobile.loaded',
+            ['jqmobile'],
+            [_jqmobile]);
+    }, function(err) {
+        shim.log('E','main.require.jqmobile.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+    });
+        
+
+}, function(err) {
+    shim.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
 });
+                         

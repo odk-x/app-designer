@@ -11,9 +11,12 @@
  * screens and thereby to the prompts within those screens.
  *
  */
-define(['screenManager','opendatakit','database', 'mdl', 'jquery', 'parsequery'],
-function(ScreenManager,  opendatakit,  database,   mdl,   $, parsequery) {
-window.controller = {
+define(['screenManager','opendatakit','database', 'mdl', 'parsequery', 'jquery' ],
+function(ScreenManager,  opendatakit,  database,   mdl,   parsequery,  $ ) {
+verifyLoad('controller',
+    ['screenManager','opendatakit','database', 'mdl', 'parsequery', 'jquery' ],
+    [ScreenManager,  opendatakit,  database,   mdl,   parsequery,  $]);
+return {
     eventCount: 0,
     screenManager : null,
     getCurrentScreenPath: function() {
@@ -1001,41 +1004,48 @@ window.controller = {
         _log: function( severity, contextMsg ) {
             var value = this.loggingContextChain[0];
             var flattened =    contextMsg + " contextType: " + value.method + " (" +
-                value.detail + ") seqAtEnd: " + window.controller.eventCount;
+                value.detail + ") seqAtEnd: " + this.getCurrentSeqNo();
             shim.log(severity, flattened);
         }
     },
     
     newCallbackContext : function( actionHandlers ) {
-        this.eventCount = 1 + this.eventCount;
-        var count = this.eventCount;
+        var that = this;
+        that.eventCount = 1 + that.eventCount;
+        var count = that.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
+        var ctxt = $.extend({getCurrentSeqNo:function() { return that.eventCount;}},
+            that.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append('callback', detail);
         return ctxt;
     },
     newFatalContext : function( actionHandlers ) {
-        this.eventCount = 1 + this.eventCount;
-        var count = this.eventCount;
+        var that = this;
+        that.eventCount = 1 + that.eventCount;
+        var count = that.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
+        var ctxt = $.extend({getCurrentSeqNo:function() { return that.eventCount;}}, 
+            that.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append('fatal_error', detail);
         return ctxt;
     },
     newStartContext: function( actionHandlers ) {
-        this.eventCount = 1 + this.eventCount;
-        var count = this.eventCount;
+        var that = this;
+        that.eventCount = 1 + that.eventCount;
+        var count = that.eventCount;
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
+        var ctxt = $.extend({getCurrentSeqNo:function() { return that.eventCount;}}, 
+            that.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append('startup', detail);
         return ctxt;
     },
     newContext: function( evt, actionHandlers ) {
-        this.eventCount = 1 + this.eventCount;
-        var count = this.eventCount;
+        var that = this;
+        that.eventCount = 1 + that.eventCount;
+        var count = that.eventCount;
         var detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid;
         var evtActual;
         var evtTarget;
@@ -1054,11 +1064,11 @@ window.controller = {
             detail += evtTarget.replace(/\s+/g, ' ').substring(0,80);
         }
         
-        var ctxt = $.extend({}, this.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
+        var ctxt = $.extend({getCurrentSeqNo:function() { return that.eventCount;}}, 
+            that.baseContext, {seq: count, loggingContextChain: []}, actionHandlers );
         ctxt.append( evt.type, detail);
         return ctxt;
     }
 
 };
-return window.controller;
 });

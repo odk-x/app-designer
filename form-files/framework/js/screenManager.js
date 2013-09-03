@@ -10,9 +10,14 @@
 *    Displays the options dialog for changing languages and navigations.
 */
 define(['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 
-	'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'screens'], 
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'handlebarsHelpers', 'translations'], 
 function(opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, 
-	 optionsPopup,                             languagePopup) {
+     optionsPopup,                             languagePopup, jqmobile, _hh, translations) {
+verifyLoad('screenManager',
+    ['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'handlebarsHelpers', 'translations'],
+    [opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, 
+     optionsPopup,                             languagePopup, jqmobile, _hh, translations]);
 
 return Backbone.View.extend({
     el: "body",
@@ -20,7 +25,7 @@ return Backbone.View.extend({
     optionsTemplate: Handlebars.compile(optionsPopup),
     languageTemplate: Handlebars.compile(languagePopup),
     eventTimeStamp: -1,
-	pageChangeActionLockout: false, // to control double-swiping...
+    pageChangeActionLockout: false, // to control double-swiping...
     renderContext:{},
     events: {
         "click .odk-next-btn": "gotoNextScreen",
@@ -55,7 +60,7 @@ return Backbone.View.extend({
     },
     initialize: function(){
         this.controller = this.options.controller;
-		this.$el = $('body');
+        this.$el = $('body');
     },
     cleanUpScreenManager: function(ctxt){
         this.pageChangeActionLockout = false;
@@ -65,40 +70,40 @@ return Backbone.View.extend({
     displayWaiting: function(ctxt){
         var that = this;
         ctxt.append("screenManager.displayWaiting", 
-			(that.activeScreen == null) ? "activeScreenIdx: null" : ("activeScreenIdx: " + that.activeScreen.promptIdx));
-		var ScreenType = screenTypes['waiting'];
-		var ExtendedScreenType = ScreenType.extend({});
-		var ScreenInstance = new ExtendedScreenType({});
-		that.setScreen(ctxt, ScreenInstance);
+            (that.activeScreen == null) ? "activeScreenIdx: null" : ("activeScreenIdx: " + that.activeScreen.promptIdx));
+        var ScreenType = screenTypes['waiting'];
+        var ExtendedScreenType = ScreenType.extend({});
+        var ScreenInstance = new ExtendedScreenType({});
+        that.setScreen(ctxt, ScreenInstance);
     },
-	firstRender: true,
-	getMobileAction: function() {
-		if ( this.firstRender ) {
-			this.firstRender = false;
-			return 'create';
-		} else {
-			return 'refresh';
-		}
-	},
-	beforeMove: function(ctxt, advancing) {
-		if ( this.activeScreen ) {
-			this.activeScreen.beforeMove(ctxt, advancing);
-		} else {
-			ctxt.success();
-		}
-	},
-	refreshScreen: function(ctxt) {
-		var jqmAttrs = {};
+    firstRender: true,
+    getMobileAction: function() {
+        if ( this.firstRender ) {
+            this.firstRender = false;
+            return 'create';
+        } else {
+            return 'refresh';
+        }
+    },
+    beforeMove: function(ctxt, advancing) {
+        if ( this.activeScreen ) {
+            this.activeScreen.beforeMove(ctxt, advancing);
+        } else {
+            ctxt.success();
+        }
+    },
+    refreshScreen: function(ctxt) {
+        var jqmAttrs = {};
         var that = this;
         var locales = opendatakit.getFormLocalesValue();
-		// useful defaults...
+        // useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
             locales: locales,
             hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
-			showHierarchy: that.controller.getSectionShowHierarchy(),
+            showHierarchy: that.controller.getSectionShowHierarchy(),
             enableForwardNavigation: true,
             enableBackNavigation: true,
             enableNavigation: true
@@ -106,63 +111,63 @@ return Backbone.View.extend({
             // enableForwardNavigation -- forward swipe and button
             // enableBackNavigation -- backward swipe and button
         };
-		that.pageChangeActionLockout = true;
+        that.pageChangeActionLockout = true;
         //If the screen is slow to activate display a loading dialog.
         //This is going to be useful if the screen gets data from a remote source.
         var activateTimeout = window.setTimeout(function(){
             that.showSpinnerOverlay("Loading...");
         }, 400);
 
-		var screen = that.activeScreen;
-		if (that.activeScreen) {
-			that.activeScreen.undelegateEvents();
-		}
-		that.pageChangeActionLockout = true;
-		
-		screen.onActivate($.extend({render:true},ctxt,{success:function() {
-			ctxt.newScreen = false;
-			screen.render($.extend({},ctxt,{success:function() {
-				that.currentPageEl = screen.$el;
-				screen.$el.trigger('pagecreate');
-				screen.afterRender($.extend({},ctxt,{success:function() {
-					// this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
-					that.savedCtxt = $.extend({}, ctxt, {success: function() {
-							that.pageChangeActionLockout = false;
-							window.clearTimeout(activateTimeout);
-							that.hideSpinnerOverlay();
-							that.pageChangeActionLockout = false;
-							ctxt.success();
-						},
-						failure: function(m) {
-							alert('Failure in screenManager.setScreen');
-							that.pageChangeActionLockout = false;
-							window.clearTimeout(activateTimeout);
-							that.hideSpinnerOverlay();
-							that.pageChangeActionLockout = false;
-							ctxt.failure(m);
-						}
-					});
-					window.clearTimeout(activateTimeout);
-					$.mobile.changePage(screen.$el, {
-							changeHash: false,
-							allowSamePageTransition: true,
-							transition: 'none'
-						});
-				}}));
-			}}));
-		}}));
- 	},
+        var screen = that.activeScreen;
+        if (that.activeScreen) {
+            that.activeScreen.undelegateEvents();
+        }
+        that.pageChangeActionLockout = true;
+        
+        screen.onActivate($.extend({render:true},ctxt,{success:function() {
+            ctxt.newScreen = false;
+            screen.render($.extend({},ctxt,{success:function() {
+                that.currentPageEl = screen.$el;
+                screen.$el.trigger('pagecreate');
+                screen.afterRender($.extend({},ctxt,{success:function() {
+                    // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
+                    that.savedCtxt = $.extend({}, ctxt, {success: function() {
+                            that.pageChangeActionLockout = false;
+                            window.clearTimeout(activateTimeout);
+                            that.hideSpinnerOverlay();
+                            that.pageChangeActionLockout = false;
+                            ctxt.success();
+                        },
+                        failure: function(m) {
+                            alert('Failure in screenManager.setScreen');
+                            that.pageChangeActionLockout = false;
+                            window.clearTimeout(activateTimeout);
+                            that.hideSpinnerOverlay();
+                            that.pageChangeActionLockout = false;
+                            ctxt.failure(m);
+                        }
+                    });
+                    window.clearTimeout(activateTimeout);
+                    window.$.mobile.changePage(screen.$el, {
+                            changeHash: false,
+                            allowSamePageTransition: true,
+                            transition: 'none'
+                        });
+                }}));
+            }}));
+        }}));
+     },
     setScreen: function(ctxt, screen, popScreenOnExit){
         var that = this;
         var locales = opendatakit.getFormLocalesValue();
-		// useful defaults...
+        // useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
             locales: locales,
             hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
-			showHierarchy: that.controller.getSectionShowHierarchy(),
+            showHierarchy: that.controller.getSectionShowHierarchy(),
             enableForwardNavigation: true,
             enableBackNavigation: true,
             enableNavigation: true
@@ -170,19 +175,19 @@ return Backbone.View.extend({
             // enableForwardNavigation -- forward swipe and button
             // enableBackNavigation -- backward swipe and button
         };
-		
-		if (popScreenOnExit) {
-			that.renderContext.enableBackNavigation = false;
-			that.renderContext.showAsContinueButton = true;
-		}
-		
+        
+        if (popScreenOnExit) {
+            that.renderContext.enableBackNavigation = false;
+            that.renderContext.showAsContinueButton = true;
+        }
+        
         //If the screen is slow to activate display a loading dialog.
         //This is going to be useful if the screen gets data from a remote source.
         var activateTimeout = window.setTimeout(function(){
             that.showSpinnerOverlay("Loading...");
         }, 400);
         
-		screen._screenManager = that;
+        screen._screenManager = that;
         //A better way to do this might be to pass a controller interface object to 
         //onActivate that can trigger screen refreshes, as well as goto other screens.
         //(We would not allow screens to access the controller directly).
@@ -211,49 +216,46 @@ return Backbone.View.extend({
                 // swap the screens:
                 that.previousPageEl = that.currentPageEl;
                 that.activeScreen = screen;
-				// render screen
-				screen.render($.extend({},ctxt,{success: function() {
-					that.currentPageEl = screen.$el;
-					$.mobile.pageContainer.append(that.currentPageEl);
-					
-					// TODO: unclear what proper action should be for a failure
-					// during afterRender(). For now, the display ends up in an 
-					// inconsistent state.
-					screen.afterRender($.extend({}, ctxt, {success: function() {
-						// this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
-						that.savedCtxt = $.extend({}, ctxt, {success: function() {
-								that.pageChangeActionLockout = false;
-								window.clearTimeout(activateTimeout);
-								that.hideSpinnerOverlay();
-								that.pageChangeActionLockout = false;
-								ctxt.success();
-							},
-							failure: function(m) {
-								alert('Failure in screenManager.setScreen');
-								that.pageChangeActionLockout = false;
-								window.clearTimeout(activateTimeout);
-								that.hideSpinnerOverlay();
-								that.pageChangeActionLockout = false;
-								ctxt.failure(m);
-							}
-						});
-						// turn first child into a page...
-						//append it to the page container
-						//$.mobile.initializePage(that.currentPageEl);
-						// that.$el.trigger(that.getMobileAction());
-						// that.$el.trigger('create');
-						window.clearTimeout(activateTimeout);
-						$.mobile.changePage(that.currentPageEl, {
-							changeHash: false,
-							transition: transition
-						});
-					}}));
-				}}));
+                // render screen
+                screen.render($.extend({},ctxt,{success: function() {
+                    that.currentPageEl = screen.$el;
+                    window.$.mobile.pageContainer.append(that.currentPageEl);
+                    
+                    // TODO: unclear what proper action should be for a failure
+                    // during afterRender(). For now, the display ends up in an 
+                    // inconsistent state.
+                    screen.afterRender($.extend({}, ctxt, {success: function() {
+                        // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
+                        that.savedCtxt = $.extend({}, ctxt, {success: function() {
+                                that.pageChangeActionLockout = false;
+                                window.clearTimeout(activateTimeout);
+                                that.hideSpinnerOverlay();
+                                that.pageChangeActionLockout = false;
+                                ctxt.success();
+                            },
+                            failure: function(m) {
+                                alert('Failure in screenManager.setScreen');
+                                that.pageChangeActionLockout = false;
+                                window.clearTimeout(activateTimeout);
+                                that.hideSpinnerOverlay();
+                                that.pageChangeActionLockout = false;
+                                ctxt.failure(m);
+                            }
+                        });
+                        // turn first child into a page...
+                        //append it to the page container
+                        window.clearTimeout(activateTimeout);
+                        window.$.mobile.changePage(that.currentPageEl, {
+                            changeHash: false,
+                            transition: transition
+                        });
+                    }}));
+                }}));
             }, failure: function(m) {
-				window.clearTimeout(activateTimeout);
-				that.hideSpinnerOverlay();
-				that.pageChangeActionLockout = false;
-				ctxt.failure(m);
+                window.clearTimeout(activateTimeout);
+                that.hideSpinnerOverlay();
+                that.pageChangeActionLockout = false;
+                ctxt.failure(m);
             }
         }));
     },
@@ -261,7 +263,7 @@ return Backbone.View.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.gotoNextScreen', 
-			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
@@ -270,7 +272,7 @@ return Backbone.View.extend({
             return false;
         }
         that.eventTimeStamp = evt.timeStamp;
-		return that.gotoNextScreenAction(ctxt);
+        return that.gotoNextScreenAction(ctxt);
     },
     gotoNextScreenAction: function(ctxt) {
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
@@ -294,7 +296,7 @@ return Backbone.View.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.gotoPreviousScreen', 
-			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
@@ -324,96 +326,96 @@ return Backbone.View.extend({
         return false;
     },
     ignoreChanges: function(evt) {
-		evt.stopPropagation();
-		evt.stopImmediatePropagation();
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.ignoreChanges', 
-			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
                 that.controller.leaveInstance(ctxt);
             }}));
     },
     saveChanges: function(evt) {
-		evt.stopPropagation();
-		evt.stopImmediatePropagation();
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.saveChanges', 
-			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
                 that.controller.leaveInstance(ctxt);
             }}), false);
     },
     openOptions: function(evt) {
-		var that = this;
-		var $contentArea = $('#optionsPopup');
-		$contentArea.empty().remove();
+        var that = this;
+        var $contentArea = $('#optionsPopup');
+        $contentArea.empty().remove();
         var locales = opendatakit.getFormLocalesValue();
-		// useful defaults...
+        // useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
             locales: locales,
             hasTranslations: (locales.length > 1),
-			showHierarchy: that.controller.getSectionShowHierarchy()
-		};
-		that.activeScreen.$el.append(that.optionsTemplate(that.renderContext)).trigger('pagecreate');
-		$( "#optionsPopup" ).popup( "open" );
+            showHierarchy: that.controller.getSectionShowHierarchy()
+        };
+        that.activeScreen.$el.append(that.optionsTemplate(that.renderContext)).trigger('pagecreate');
+        $( "#optionsPopup" ).popup( "open" );
     },
     openLanguagePopup: function(evt) {
-		var that = this;
+        var that = this;
         $( "#optionsPopup" ).popup( "close" );
-		var $contentArea = $('#languagePopup');
-		$contentArea.empty().remove();
+        var $contentArea = $('#languagePopup');
+        $contentArea.empty().remove();
         var locales = opendatakit.getFormLocalesValue();
-		// useful defaults...
+        // useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
             locales: locales,
             hasTranslations: (locales.length > 1),
-			showHierarchy: that.controller.getSectionShowHierarchy()
-		};
-		that.activeScreen.$el.append(that.languageTemplate(that.renderContext)).trigger('pagecreate');
+            showHierarchy: that.controller.getSectionShowHierarchy()
+        };
+        that.activeScreen.$el.append(that.languageTemplate(that.renderContext)).trigger('pagecreate');
         $( "#languagePopup" ).popup( "open" );
     },
     setLanguage: function(evt) {
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('screenManager.setLanguage', 
-			((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         //Closing popups is important,
         //they will not open in the future if one is not closed.
         $( "#languagePopup" ).popup( "close" );
         this.controller.setLocale(ctxt, $(evt.target).attr("id"));
     },
     showScreenPopup: function(msg) {
-		var that = this;
-		var $contentArea = $('#screenPopup');
-		$contentArea.empty().remove();
+        var that = this;
+        var $contentArea = $('#screenPopup');
+        $contentArea.empty().remove();
         var locales = opendatakit.getFormLocalesValue();
-		// useful defaults...
+        // useful defaults...
         that.renderContext = {
             form_title: that.controller.getSectionTitle(),
             locales: locales,
             hasTranslations: (locales.length > 1),
-			showHierarchy: that.controller.getSectionShowHierarchy(),
-			message: msg.message
-		};
-		that.activeScreen.$el.append(that.screenTemplate(that.renderContext)).trigger('pagecreate');
+            showHierarchy: that.controller.getSectionShowHierarchy(),
+            message: msg.message
+        };
+        that.activeScreen.$el.append(that.screenTemplate(that.renderContext)).trigger('pagecreate');
         var $screenPopup = $( "#screenPopup" );
-		$screenPopup.popup( "open" );
+        $screenPopup.popup( "open" );
     },
     closeScreenPopup: function() {
         $( "#screenPopup" ).popup( "close" );
     },
     showSpinnerOverlay: function(msg) {
-        $.mobile.loading( 'show', {
+        window.$.mobile.loading( 'show', {
             text: msg.text,
             textVisible: true
         });
     },
     hideSpinnerOverlay: function() {
-        $.mobile.loading( 'hide' );
+        window.$.mobile.loading( 'hide' );
     },
     handlePagechange: function(evt){
         var ctxt = this.savedCtxt;

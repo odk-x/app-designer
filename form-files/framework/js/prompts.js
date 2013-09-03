@@ -4,13 +4,17 @@
  * All  the standard prompts available to a form designer.
  */
 define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  $,       _,            translations) {
+function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  $,       _,            translations, _hh) {
+verifyLoad('database',
+    ['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
+    [mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  $,       _,            translations, _hh]);
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
     // type should match the 'xxxx' of the promptTypes.xxxx assignment
     type: "base",
     database: database,
+    controller: controller,
     // user-defined inputAttributes overrides baseInputAttributes
     baseInputAttributes: {},
     // the handlebars template to render
@@ -133,28 +137,29 @@ promptTypes.base = Backbone.View.extend({
             ctxt.success();
         } else if(that.templatePath) {
             try {
-                requirejs(['text!'+that.templatePath], function(source) {
+                require(['text!'+that.templatePath], function(source) {
                     try {
                         that.template = Handlebars.compile(source);
-                        ctxt.success();
+                        // ensure that require is unwound
+                        setTimeout(function() { ctxt.success(); }, 0 );
                     } catch (e) {
                         ctxt.append("prompts."+that.type+".whenTemplateIsReady.exception", e);
-                        console.error("prompts."+that.type+".whenTemplateIsReady.exception " + String(e) + " px: " + that.promptIdx);
+                        shim.log('E',"prompts."+that.type+".whenTemplateIsReady.exception " + String(e) + " px: " + that.promptIdx);
                         ctxt.failure({message: "Error compiling handlebars template."});
                     }
                 }, function(err) {
-                    ctxt.append("prompts."+that.type+".whenTemplateIsReady.requirejs.failure", err);
-                    console.error("prompts."+that.type+".whenTemplateIsReady.requirejs.failure " + String(err) + " px: " + that.promptIdx);
+                    ctxt.append("prompts."+that.type+".whenTemplateIsReady.require.failure " + err.requireType + ' modules: ', err.requireModules);
+                    shim.log('E',"prompts."+that.type+".whenTemplateIsReady.require.failure " + err.requireType + ' modules: ', err.requireModules.toString() + " px: " + that.promptIdx);
                     ctxt.failure({message: "Error loading handlebars template."});
                 });
             } catch (e) {
-                ctxt.append("prompts."+that.type+".whenTemplateIsReady.requirejs.exception", e);
-                console.error("prompts."+that.type+".whenTemplateIsReady.requirejs.exception " + String(e) + " px: " + that.promptIdx);
+                ctxt.append("prompts."+that.type+".whenTemplateIsReady.require.exception", e);
+                shim.log('E',"prompts."+that.type+".whenTemplateIsReady.require.exception " + String(e) + " px: " + that.promptIdx);
                 ctxt.failure({message: "Error reading handlebars template."});
             }
         } else {
             ctxt.append("prompts." + that.type + ".whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
-            console.error("prompts."+that.type+".whenTemplateIsReady.noTemplate px: " + that.promptIdx);
+            shim.log('E',"prompts."+that.type+".whenTemplateIsReady.noTemplate px: " + that.promptIdx);
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
@@ -204,7 +209,7 @@ promptTypes.base = Backbone.View.extend({
      * stopPropagation is used in the events map to disable swiping on various elements
      **/
     stopPropagation: function(evt){
-        var ctxt = controller.newContext(evt);
+        var ctxt = this.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".stopPropagation", "px: " + this.promptIdx);
         shim.log("D","prompts." + this.type + ".stopPropagation", "px: " + this.promptIdx + " evt: " + evt);
         evt.stopImmediatePropagation();
@@ -365,7 +370,7 @@ promptTypes.opening = promptTypes.base.extend({
         "swiperight .input-container": "stopPropagation"
     },
     modification: function(evt) {
-        var ctxt = controller.newContext(evt);
+        var ctxt = this.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
         database.setInstanceMetaData(ctxt, 'instanceName', this.$('input').val());
     },
@@ -399,19 +404,21 @@ promptTypes.finalize = promptTypes.base.extend({
     saveIncomplete: function(evt) {
         evt.stopPropagation();
         evt.stopImmediatePropagation();
-        var ctxt = controller.newContext(evt);
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
-        controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                controller.leaveInstance(ctxt);
+        that.controller.saveAllChanges($.extend({},ctxt,{success:function() {
+                that.controller.leaveInstance(ctxt);
             }}), false);
     },
     saveFinal: function(evt) {
         evt.stopPropagation();
         evt.stopImmediatePropagation();
-        var ctxt = controller.newContext(evt);
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
-        controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                controller.leaveInstance(ctxt);
+        that.controller.saveAllChanges($.extend({},ctxt,{success:function() {
+                that.controller.leaveInstance(ctxt);
             }}), true);
     }
 });
@@ -469,22 +476,22 @@ promptTypes.instances = promptTypes.base.extend({
         }));
     },
     createInstance: function(evt){
-      var ctxt = controller.newContext(evt);
+      var ctxt = this.controller.newContext(evt);
       evt.stopPropagation(true);
       evt.stopImmediatePropagation();
       ctxt.append("prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
-      controller.createInstance(ctxt);
+      this.controller.createInstance(ctxt);
     },
     openInstance: function(evt) {
-      var ctxt = controller.newContext(evt);
+      var ctxt = this.controller.newContext(evt);
       evt.stopPropagation(true);
       evt.stopImmediatePropagation();
       ctxt.append("prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
-      controller.openInstance(ctxt, $(evt.target).attr('id'));
+      this.controller.openInstance(ctxt, $(evt.target).attr('id'));
     },
     deleteInstance: function(evt){
         var that = this;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
         database.delete_all($.extend({}, ctxt, {success: function() {
                 that.onActivate($.extend({}, ctxt, {success: function() {
@@ -504,7 +511,7 @@ promptTypes.hierarchy = promptTypes.base.extend({
     events: {
     },
     postActivate: function(ctxt) {
-        this.renderContext.prompts = controller.getCurrentSectionPrompts();
+        this.renderContext.prompts = this.controller.getCurrentSectionPrompts();
         this._screen._renderContext.enableForwardNavigation = false;
         this._screen._renderContext.showHeader = true;
         this._screen._renderContext.showFooter = false;
@@ -666,7 +673,7 @@ promptTypes.linked_table = promptTypes.base.extend({
     openInstance: function(evt) {
         var instanceId = $(evt.target).attr('id');
         var that = this;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -685,7 +692,7 @@ promptTypes.linked_table = promptTypes.base.extend({
     deleteInstance: function(evt) {
         var instanceId = $(evt.target).attr('id');
         var that = this;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         that.disableButtons();
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
@@ -701,7 +708,7 @@ promptTypes.linked_table = promptTypes.base.extend({
     addInstance: function(evt) {
         var instanceId = opendatakit.genUUID();
         var that = this;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -765,7 +772,7 @@ promptTypes.external_link = promptTypes.base.extend({
     },
     openLink: function(evt) {
         var that = this;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         var fullUrl = that.url();
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
@@ -819,12 +826,12 @@ promptTypes.user_branch = promptTypes.base.extend({
     },
     selectBranchItem: function(evt) {
         var that = this;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".selectBranchItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.branch-select-item');
         $target.attr("label", function(index, oldPropertyValue) {
             ctxt.append("prompts." + that.type + ".selectBranchItem: click near label: " + oldPropertyValue);
-            var currentPath = controller.getCurrentScreenPath();
+            var currentPath = that.controller.getCurrentScreenPath();
             var parts = currentPath.split("/");
             if ( parts.length < 2 ) {
                 ctxt.append("prompts." + that.type + ".selectBranchItem: invalid currentPath: " + currentPath);
@@ -833,7 +840,7 @@ promptTypes.user_branch = promptTypes.base.extend({
             }
             var newPath = parts[0] + "/" + oldPropertyValue;
             ctxt.append("prompts." + that.type + ".click", "px: " + that.promptIdx);
-            controller.gotoScreenPath(ctxt,newPath);
+            that.controller.gotoScreenPath(ctxt,newPath);
         });
     },
     choice_filter: function(){ return true; },
@@ -885,16 +892,17 @@ promptTypes.user_branch = promptTypes.base.extend({
                 ajaxOptions.dataType = 'text';
                 ajaxOptions.success = function(result) {
                     try {
-                        requirejs(['jquery-csv'], function(){
+                        require(['jquery-csv'], function(){
                             that.renderContext.choices = query.callback($.csv.toObjects(result));
                             newctxt.success("success");
                         },
                         function (err) {
-                            newctxt.append("promptType.select.requirejs.failure", err.toString());
+                            newctxt.append("prompts."+that.type+".require.failure " + err.requireType + ' modules: ', err.requireModules);
+                            shim.log('E',"prompts."+that.type+".require.failure " + err.requireType + ' modules: ', err.requireModules.toString() + " px: " + that.promptIdx);
                             newctxt.failure({message: "Error fetching choices from csv data."});
                         });
                     } catch (e) {
-                        newctxt.append("promptType.select.requirejs.exception", e.toString());
+                        newctxt.append("promptType.select.require.exception", e.toString());
                         newctxt.failure({message: "Error reading choices from csv data."});
                     }
                 };
@@ -1042,7 +1050,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         return choiceList;
     },
     modification: function(evt) {
-        var ctxt = controller.newContext(evt);
+        var ctxt = this.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
         var that = this;
         if(this.withOther) {
@@ -1118,16 +1126,17 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 ajaxOptions.dataType = 'text';
                 ajaxOptions.success = function(result) {
                     try {
-                        requirejs(['jquery-csv'], function(){
+                        require(['jquery-csv'], function(){
                             that.renderContext.choices = query.callback($.csv.toObjects(result));
                             newctxt.success("success");
                         },
                         function (err) {
-                            newctxt.append("promptType.select.requirejs.failure", err.toString());
+                            newctxt.append("prompts."+that.type+".require.failure " + err.requireType + ' modules: ', err.requireModules);
+                            shim.log('E',"prompts."+that.type+".require.failure " + err.requireType + ' modules: ', err.requireModules.toString() + " px: " + that.promptIdx);
                             newctxt.failure({message: "Error fetching choices from csv data."});
                         });
                     } catch (e) {
-                        newctxt.append("promptType.select.requirejs.exception", e.toString());
+                        newctxt.append("promptType.select.require.exception", e.toString());
                         newctxt.failure({message: "Error reading choices from csv data."});
                     }
                     };
@@ -1151,7 +1160,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
         }
     },
     deselect: function(evt) {
-        var ctxt = controller.newContext(evt);
+        var ctxt = this.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".deselect", "px: " + this.promptIdx);
         this.$('input:checked').prop('checked', false).change();
     }
@@ -1253,7 +1262,7 @@ promptTypes.input_type = promptTypes.base.extend({
         that.lastEventTimestamp = evt.timeStamp;
         shim.log("D","event being processed");
         that.insideMutex = true;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
         that.setValue($.extend({}, ctxt, {success: function() {
@@ -1391,7 +1400,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         var ref = that.getValue();
         var rerender = ((ref == null || value == null) && (ref != value )) ||
                 (ref != null && value != null && ref.valueOf() != value.valueOf());
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
         if ( value == null ) {
@@ -1464,7 +1473,7 @@ promptTypes.time = promptTypes.datetime.extend({
         var ref = that.getValue();
         var rerender = ((ref == null || value == null) && (ref != value )) ||
                 (ref != null && value != null && that.sameTime(ref,value));
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
         if ( value == null ) {
@@ -1537,7 +1546,7 @@ promptTypes.media = promptTypes.base.extend({
     },
     capture: function(evt) {
         var that = this;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -1554,7 +1563,7 @@ promptTypes.media = promptTypes.base.extend({
     },
     choose: function(evt) {
         var that = this;
-        var ctxt = controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt);
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -1688,7 +1697,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
         ctxt.success();
     },
     launch: function(evt) {
-        var ctxt = controller.newContext(evt);
+        var ctxt = this.controller.newContext(evt);
         var platInfo = opendatakit.getPlatformInfo();
         $('#block-ui').show().on('swipeleft swiperight click', function(evt) {
             evt.stopPropagation();
@@ -1795,7 +1804,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
         that.$('.captureAction').addClass('ui-disabled');
         function success(position) {
             that.setValue(
-                $.extend({}, controller.newContext(evt), {success: function() {
+                $.extend({}, that.controller.newContext(evt), {success: function() {
                     that.renderContext.value = position;
                     that.reRender();
                 }
@@ -1839,7 +1848,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
     autoAdvance: false,
     acknLabel: translations.acknLabel,
     modification: function(evt) {
-        var ctxt = controller.newContext(evt);
+        var ctxt = this.controller.newContext(evt);
         ctxt.append('acknowledge.modification', this.promptIdx);
         var that = this;
         var acknowledged = this.$('#acknowledge').is(':checked');
@@ -1850,7 +1859,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
                     "checked": acknowledged
                 }];
                 if (acknowledged && that.autoAdvance) {
-                    controller.gotoNextScreen(ctxt);
+                    that.controller.gotoNextScreen(ctxt);
                 }
                 else {
                     ctxt.success();

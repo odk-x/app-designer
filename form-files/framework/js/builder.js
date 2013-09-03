@@ -8,8 +8,12 @@
  * Major task is to construct function()s for the calculates, constraints and other equations.
  *
  */
-define(['controller', 'opendatakit', 'database', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore'],
-function(controller,   opendatakit,   database,   $,        screenTypes,   promptTypes,   formulaFunctions,   _) {
+define(['controller', 'opendatakit', 'database', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore', 'screens', 'prompts'],
+function(controller,   opendatakit,   database,   $,        screenTypes,   promptTypes,   formulaFunctions,   _, _screens, _prompts) {
+verifyLoad('builder',
+    ['controller', 'opendatakit', 'database', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore', 'screens', 'prompts'],
+    [controller,   opendatakit,   database,   $,        screenTypes,   promptTypes,   formulaFunctions,   _, _screens, _prompts]);
+
     /**
      * formula is a function for creating JavaScript functions from user defined formulas.
      * TODO: Link/copy formula documentation.
@@ -305,13 +309,17 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
                             formPath + 'customTheme.css');
                     //Set the jQm theme to the defualt theme, or if there is a 
                     //predefined theme specified in the settings sheet, use that.
+                    var url = null;
                     var theme = opendatakit.getSettingObject(surveyJson, "theme");
                     if ( theme == null || theme.value == null ) {
-                        theme = 'jquery.mobile.theme-1.3.1';
+                        var jqmVersion = window.$.mobile.version;
+                        theme = 'jquery.mobile.theme-' + jqmVersion;
+                        url = requirejs.toUrl('libs/jquery.mobile-' + jqmVersion + '/' + theme + '.css');
                     } else {
                         theme = theme.value;
+                        url = requirejs.toUrl('css/' + theme + '.css');
                     }
-                    $('#theme').attr('href', requirejs.toUrl('libs/jquery.mobile-1.3.1/' + theme + '.css'));
+                    $('#theme').attr('href', url);
                     var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
                     if ( fontSize != null && fontSize.value != null) {
                         $('body').css("font-size", fontSize.value);
@@ -346,7 +354,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
                         shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
                         //I'm using undef to clear internal knowledge of the given module.
                         //I'm not sure if it is necessiary.
-                        window.requirejs.undef(failedId);
+                        requirejs.undef(failedId);
                     });
                 }
                 afterCustomPromptsLoadAttempt();
@@ -376,7 +384,7 @@ function(controller,   opendatakit,   database,   $,        screenTypes,   promp
                     shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
                     //I'm using undef to clear internal knowledge of the given module.
                     //I'm not sure if it is necessiary.
-                    window.requirejs.undef(failedId);
+                    requirejs.undef(failedId);
                 });
             }
             afterCustomScreensLoadAttempt();

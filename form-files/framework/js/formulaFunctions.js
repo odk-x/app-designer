@@ -6,6 +6,9 @@
  //TODO: These functions need unit testing.
 define(['opendatakit','database', 'underscore'],
 function(opendatakit,  database,   _) {
+    verifyLoad('formulaFunctions',
+        ['opendatakit','database', 'underscore'],
+        [opendatakit,  database,   _]);
     return {
         //calculates will be set by the builder
         calculates: {},

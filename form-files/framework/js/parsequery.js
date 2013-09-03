@@ -8,8 +8,11 @@
  changeUrlHash(ctxt) -- handle changes to the window.location.hash
  
 */
-define(['opendatakit','database'],
-function(opendatakit,  database) {
+define(['opendatakit','database','jquery'],
+function(opendatakit,  database,  $) {
+verifyLoad('parsequery',
+	['opendatakit','database','jquery'],
+	[opendatakit,  database,   $]);
 return {
 
     controller: null,
@@ -242,7 +245,7 @@ return {
 
         if ( formPath == null ) {
             // do the prompts and widget warmup form...
-            formPath = "";
+            formPath = shim.getBaseUrl() + '/';
             instanceId = null;
             screenPath = null;
         }
@@ -332,17 +335,17 @@ return {
             landing.setController(ctxt, that.controller);
           }, failure: function(m) {
             ctxt.append('parsequery.changeUrlHash unable to transition to ' + hash, m);
-            if ( hash == "#formPath=" ) {
+            if ( hash == '#formPath=' + escape(shim.getBaseUrl() + '/') ) {
                 ctxt.failure(m);
             } else {
-                window.location.hash = "#formPath=";
+                window.location.hash = '#formPath=' + escape(shim.getBaseUrl() + '/');
                 that.changeUrlHash($.extend({},ctxt,{success:function() { ctxt.failure(m); }}));
             }
           }});
 
         that._parseParameters($.extend({},ctxtNext,{success:function() {
                 // and update the hash to refer to this page...
-                var screenPath = controller.getCurrentScreenPath();
+                var screenPath = that.controller.getCurrentScreenPath();
                 var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), screenPath);
                 if ( newhash != window.location.hash ) {
                     window.location.hash = newhash;

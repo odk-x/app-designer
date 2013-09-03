@@ -9,10 +9,10 @@ js/version.txt
 libs/backbone.1.0.0.js
 libs/handlebars.1.0.0.rc.4.js
 libs/jquery.1.9.1.js
-libs/require.2.1.6.js
-libs/text.2.0.6.js
+libs/require.2.1.8.js
+libs/text.2.0.10.js
 libs/underscore.1.4.4.js
-libs/jquery.mobile-1.3.1
+libs/jquery.mobile-1.3.2
 libs/jquery-csv
 libs/mobiscroll-2.5.4
 
