@@ -11,8 +11,8 @@
 define(['opendatakit','database','jquery'],
 function(opendatakit,  database,  $) {
 verifyLoad('parsequery',
-	['opendatakit','database','jquery'],
-	[opendatakit,  database,   $]);
+    ['opendatakit','database','jquery'],
+    [opendatakit,  database,   $]);
 return {
 
     controller: null,
@@ -332,11 +332,11 @@ return {
         
         var ctxtNext = $.extend({}, ctxt, {success: function() {
             // and flush any pending doAction callback
-            landing.setController(ctxt, that.controller);
+            landing.setController(ctxt, that.controller, opendatakit.getRefId());
           }, failure: function(m) {
             ctxt.append('parsequery.changeUrlHash unable to transition to ' + hash, m);
             if ( hash == '#formPath=' + escape(shim.getBaseUrl() + '/') ) {
-                ctxt.failure(m);
+                landing.setController(ctxt, that.controller, opendatakit.getRefId(), m || { message: 'failed to load page'});
             } else {
                 window.location.hash = '#formPath=' + escape(shim.getBaseUrl() + '/');
                 that.changeUrlHash($.extend({},ctxt,{success:function() { ctxt.failure(m); }}));

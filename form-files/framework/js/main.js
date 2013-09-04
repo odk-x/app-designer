@@ -105,13 +105,13 @@ require(['jquery'],
             [$]);
 
     shim.log('I','main.require.jquery.loaded establish mobileinit action');
-    $(document).on("mobileinit", function () {
+    window.$(document).on("mobileinit", function () {
     
-        $.mobile.ajaxEnabled = false;
-        $.mobile.allowCrossDomainPages = false;
-        $.mobile.linkBindingEnabled = false;
-        $.mobile.hashListeningEnabled = false;
-        $.mobile.pushStateEnabled = false;
+        window.$.mobile.ajaxEnabled = false;
+        window.$.mobile.allowCrossDomainPages = false;
+        window.$.mobile.linkBindingEnabled = false;
+        window.$.mobile.hashListeningEnabled = false;
+        window.$.mobile.pushStateEnabled = false;
 
         // unwind require then launch the framework...
         setTimeout( function() {
@@ -139,7 +139,12 @@ require(['jquery'],
                 var searchIdx = ref.indexOf("?");
                 var search = window.location.search;
 
-                if ( searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx) ) {
+                var testAndroidParsing = false;
+                // TODO: figure out why Chrome adds an empty '?' search string
+                // to window.location.href   We deal with that here, but doing
+                // this will catastrophically break Android
+                if ( (!testAndroidParsing && opendatakit.getPlatformInfo().container != "Android") &&
+                     (searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx)) ) {
                     if ( hashIdx < 0 ) {
                         ref = ref + '?';
                     } else if ( hashIdx > 0 ) {
@@ -147,13 +152,29 @@ require(['jquery'],
                     }
                     window.location.assign(ref);
                 } else if ( search != null && search.indexOf("purge") >= 0 ) {
+                    // this only occurs in a web-hosted XLSXConverter (for testing)
                     var ctxt = controller.newStartContext();
                     ctxt.append("jqmConfig.purge");
                     shim.log('W','jqmConfig.purge');
                     database.purge($.extend({},ctxt,{success:function() {
                         ctxt.append('jqmConfig.purge.changeUrlHash');
-                        parsequery.changeUrlHash(ctxt);
+                        // remove the 'purge' flag...
+                        if ( hashIdx < 0 ) {
+                            ref = ref + '?';
+                        } else if ( hashIdx > 0 ) {
+                            ref = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
+                        }
+                        // we loose the ctxt action (page load restarts everything...)
+                        shim.log('W','jqmConfig.purge.reloadpage');
+                        window.location.assign(ref);
                     }}));
+                } else if ( (testAndroidParsing || opendatakit.getPlatformInfo().container == "Android") && 
+                            (searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx)) ) {
+                    // we have a '?' on the URL. Forcibly remove it.
+                    hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
+                    var newref = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
+                    shim.log('W','jqmConfig.removeUrlSearchTerm: ' + ref.substring(searchIdx,hashIdx) );
+                    window.location.assign(newref);
                 } else {
                     var ctxt = controller.newStartContext();
                     ctxt.append('jqmConfig.changeUrlHash');

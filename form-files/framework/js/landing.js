@@ -23,7 +23,7 @@ This allows the container to hand data off to the script
 without worrying about the state of the script and its 
 ability to handle the information at that moment of execution.
 */
-window.landing = {
+window.landing = window.landing || {
     /**
      * Array of { description: 'blah', evaluator: function() {...} }
      * The evaluator should be evaluated to obtain the contexts 
@@ -159,10 +159,16 @@ window.landing = {
      * This will kick off the executions of the queued
      * actions, if any.
      */
-    setController: function(ctxt, controller) {
+    setController: function(ctxt, controller, refId, m) {
         var that = this;
         that.controller = controller;
-        ctxt.setChainedContext(that._getChainingContext());
-        ctxt.success();
+        shim.frameworkHasLoaded(refId, m == null );
+        if ( m ) {
+            that._chainedContextEvaluators = [];
+            ctxt.failure(m);
+        } else {
+            ctxt.setChainedContext(that._getChainingContext());
+            ctxt.success();
+        }
     }
 };

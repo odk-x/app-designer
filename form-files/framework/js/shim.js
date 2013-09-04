@@ -6,6 +6,7 @@ It will be replaced by one injected by Android Java code.
 */
 window.shim = window.shim || {
     refId: null,
+	enforceRefIdMatch: true,
     instanceId: null,
     sectionStateScreenHistory: [],
     getBaseUrl: function() {
@@ -14,7 +15,7 @@ window.shim = window.shim || {
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.
-        return '{"container":"Chrome","version":"21.0.1180.83 m"}';
+        return '{"container":"Chrome","version":"21.0.1180.83 m","appName":"testing"}';
     },
     getDatabaseSettings: function() {
         // version identifies the database schema that the database layer should use.
@@ -33,7 +34,7 @@ window.shim = window.shim || {
         }
     },
     clearInstanceId: function( refId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: clearInstanceId(" + refId + ")");
             return;
         }
@@ -41,7 +42,7 @@ window.shim = window.shim || {
         this.instanceId = null;
     },
     setInstanceId: function( refId, instanceId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: setInstanceId(" + refId + ", " + instanceId + ")");
             return;
         }
@@ -52,7 +53,7 @@ window.shim = window.shim || {
         this.instanceId = instanceId;
     },
     getInstanceId: function( refId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: getInstanceId(" + refId + ")");
             return null;
         }
@@ -87,7 +88,7 @@ window.shim = window.shim || {
         this.log("D","shim ------------- *end*  dumpScreenStateHistory--------------------");
     },
     pushSectionScreenState: function( refId) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: pushSectionScreenState(" + refId + ")");
             return;
         }
@@ -106,7 +107,7 @@ window.shim = window.shim || {
         lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
     },
     setSectionScreenState: function( refId, screenPath, state) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
             return;
         }
@@ -133,7 +134,7 @@ window.shim = window.shim || {
         }
     },
     clearSectionScreenState: function( refId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: clearSectionScreenState(" + refId + ")");
             return;
         }
@@ -142,7 +143,7 @@ window.shim = window.shim || {
         this.sectionStateScreenHistory = [ { history: [], screen: 'initial/0', state: null } ];
     },
     getControllerState: function( refId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: getControllerState(" + refId + ")");
             return null;
         }
@@ -156,7 +157,7 @@ window.shim = window.shim || {
         return lastSection.state;
     },
     getScreenPath: function(refId) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: getScreenPath(" + refId + ")");
             return null;
         }
@@ -171,7 +172,7 @@ window.shim = window.shim || {
         return lastSection.screen;
     },
     hasScreenHistory: function( refId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: hasScreenHistory(" + refId + ")");
             return false;
         }
@@ -186,7 +187,7 @@ window.shim = window.shim || {
         return false;
     },
     popScreenHistory: function( refId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: popScreenHistory(" + refId + ")");
             return null;
         }
@@ -207,7 +208,7 @@ window.shim = window.shim || {
      * Section stack -- maintains the stack of sections from which you can exit.
      */
     hasSectionStack: function( refId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: hasSectionStack(" + refId + ")");
             return false;
         }
@@ -215,7 +216,7 @@ window.shim = window.shim || {
         return this.sectionStateScreenHistory.length !== 0;
     },
     popSectionStack: function( refId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: popSectionStack(" + refId + ")");
             return null;
         }
@@ -232,7 +233,7 @@ window.shim = window.shim || {
         return null;
     },
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + 
 				", " + internalPromptContext + ", " + action + ", ...)");
             return "IGNORE";
@@ -330,7 +331,7 @@ window.shim = window.shim || {
             }, 1000);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.LaunchSurveyActivity' ) {
+        if ( action == 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
 			var value = JSON.parse(jsonObj);
 			window.open(value.extras.url,'_blank', null, false);
             setTimeout(function() {
@@ -351,8 +352,16 @@ window.shim = window.shim || {
             return "OK";
         }
     },
+	frameworkHasLoaded: function(refId, outcome) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
+            this.log("D","shim: IGNORED: frameworkHasLoaded(" + refId + ", " + outcome + ")");
+            return;
+        }
+        this.log("D","shim: DO: frameworkHasLoaded(" + refId + ", " + outcome + ")");
+        alert("notify container frameworkHasLoaded " + (outcome ? "SUCCESS" : "FAILURE"));
+	},
     saveAllChangesCompleted: function( refId, instanceId, asComplete ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
             return;
         }
@@ -360,7 +369,7 @@ window.shim = window.shim || {
         alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     saveAllChangesFailed: function( refId, instanceId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
             return;
         }
@@ -368,7 +377,7 @@ window.shim = window.shim || {
         alert("notify container FAILED save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     ignoreAllChangesCompleted: function( refId, instanceId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
             return;
         }
@@ -376,7 +385,7 @@ window.shim = window.shim || {
         alert("notify container OK ignore all changes.");
     },
     ignoreAllChangesFailed: function( refId, instanceId ) {
-        if (refId != this.refId) {
+        if (this.enforceRefIdMatch && refId != this.refId) {
             this.log("D","shim: IGNORED: ignoreAllChangesFailed(" + refId + ", " + instanceId + ")");
             return;
         }

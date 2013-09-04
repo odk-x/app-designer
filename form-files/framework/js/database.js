@@ -20,61 +20,61 @@ return {
         // i.e., it is not settable/gettable via Javascript used in prompts.
         // This is used for bookkeeping columns (e.g., server sync, save status).
         //
-  dataTablePredefinedColumns: { id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
-                     uri_access_control: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-                     sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-                     sync_state: { type: 'integer', isNotNullable: true, 'default': 0, isPersisted: true, elementSet: 'instanceMetadata' },
-                     transactioning: { type: 'integer', isNotNullable: true, 'default': 1, isPersisted: true, elementSet: 'instanceMetadata' },
-                     timestamp: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
-                     saved: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-                     form_id: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-                     instance_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'instanceName', elementSet: 'instanceMetadata' },
-                     locale: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'locale', elementSet: 'instanceMetadata' } },
+  dataTablePredefinedColumns: { _id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _uri_access_control: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _sync_state: { type: 'integer', isNotNullable: true, 'default': 0, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _transactioning: { type: 'integer', isNotNullable: true, 'default': 1, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _timestamp: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _saved: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _form_id: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'form_id', elementSet: 'instanceMetadata' },
+                     _instance_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'instanceName', elementSet: 'instanceMetadata' },
+                     _locale: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'locale', elementSet: 'instanceMetadata' } },
   tableDefinitionsPredefinedColumns: {
-                    table_id: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
-                    table_key: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'tableKey', elementSet: 'tableMetadata' },
-                    db_table_name: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
-                    type: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
-                    table_id_access_controls: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'tableMetadata' },
-                    sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'tableMetadata' },
-                    last_sync_time: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
-                    sync_state: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
-                    transactioning: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' } },
-  columnDefinitionsTableConstraint: 'PRIMARY KEY ( "table_id", "element_key" )',
+                    _table_id: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
+                    _table_key: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'tableKey', elementSet: 'tableMetadata' },
+                    _db_table_name: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
+                    _type: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
+                    _table_id_access_controls: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'tableMetadata' },
+                    _sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'tableMetadata' },
+                    _last_sync_time: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
+                    _sync_state: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
+                    _transactioning: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' } },
+  columnDefinitionsTableConstraint: 'PRIMARY KEY ( "_table_id", "_element_key" )',
   columnDefinitionsPredefinedColumns: {
-                    table_id: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'table_id', elementSet: 'columnMetadata' },
-                    element_key: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'elementKey', elementSet: 'columnMetadata' },
-                    element_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'elementName', elementSet: 'columnMetadata' },
-                    element_type: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'columnMetadata' },
-                    list_child_element_keys: { type: 'array', items: { type: 'string' }, isNotNullable: false, isPersisted: true, elementSet: 'columnMetadata' },
-                    is_persisted: { type: 'boolean', isNotNullable: true, isPersisted: true, elementSet: 'columnMetadata' },
-                    joins: { type: 'array', items: {
+                    _table_id: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'table_id', elementSet: 'columnMetadata' },
+                    _element_key: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'elementKey', elementSet: 'columnMetadata' },
+                    _element_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'elementName', elementSet: 'columnMetadata' },
+                    _element_type: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'elementType', elementSet: 'columnMetadata' },
+                    _list_child_element_keys: { type: 'array', items: { type: 'string' }, isNotNullable: false, elementPath: 'listChildElementKeys', isPersisted: true, elementSet: 'columnMetadata' },
+                    _is_persisted: { type: 'boolean', isNotNullable: true, isPersisted: true, elementPath: 'isPersisted', elementSet: 'columnMetadata' },
+                    _joins: { type: 'array', items: {
                                 type: 'object', 
                                 listChildElementKeys: [],
                                 properties: {
                                     "table_id": { type: "string", isNotNullable: false, isPersisted: false, elementKey: 'table_id', elementSet: 'columnMetadata' },
                                     "element_key": { type: "string", isNotNullable: false, isPersisted: false, elementKey: 'elementKey', elementSet: 'columnMetadata' } } },
-                            isNotNullable: false, isPersisted: true, elementPath: 'joins', elementSet: 'columnMetadata' } },
+								isNotNullable: false, isPersisted: true, elementPath: 'joins', elementSet: 'columnMetadata' } },
   // key value stores are fairly straightforward...
-  keyValueStoreActiveTableConstraint: 'PRIMARY KEY ("table_id", "partition", "aspect", "key")',
+  keyValueStoreActiveTableConstraint: 'PRIMARY KEY ("_table_id", "_partition", "_aspect", "_key")',
   keyValueStoreActivePredefinedColumns: {
-                    table_id: { type: 'string', isNotNullable: true, isPersisted: true },
-                    partition: { type: 'string', isNotNullable: true, isPersisted: true },
-                    aspect: { type: 'string', isNotNullable: true, isPersisted: true },
-                    key: { type: 'string', isNotNullable: true, isPersisted: true },
-                    type: { type: 'string', isNotNullable: false, isPersisted: true },
-                    value: { type: 'string', isNotNullable: false, isPersisted: true } },
+                    _table_id: { type: 'string', isNotNullable: true, isPersisted: true },
+                    _partition: { type: 'string', isNotNullable: true, isPersisted: true },
+                    _aspect: { type: 'string', isNotNullable: true, isPersisted: true },
+                    _key: { type: 'string', isNotNullable: true, isPersisted: true },
+                    _type: { type: 'string', isNotNullable: false, isPersisted: true },
+                    _value: { type: 'string', isNotNullable: false, isPersisted: true } },
    _tableKeyValueStoreActiveAccessibleKeys: {
             // keys we are allowing the user to access from within Javascript
-            // partition: table
-            // aspect: default
+            // _partition: table
+            // _aspect: default
             // mapped as psuedo-columns per PredefinedColumns objects, above.
             // propertyName is the value of the 'key' in the database.
     },
    _columnKeyValueStoreActiveAccessibleKeys: {
             // keys we are allowing the user to access from within Javascript
-            // partition: column
-            // aspect: element_key
+            // _partition: column
+            // _aspect: element_key
             // mapped as psuedo-columns per PredefinedColumns objects, above.
             // propertyName is the value of the 'key' in the database.
      },
@@ -362,6 +362,7 @@ return {
                     ctxt.append("withDb.transaction.error", error.message);
                     ctxt.append("withDb.transaction.error.transactionBody", transactionBody.toString());
                     inContinuation = true;
+					that.submissionDb = null;
                     ctxt.failure({message: "Error while accessing or saving values to the database."});
                     }, function() {
                         ctxt.append("withDb.transaction.success");
@@ -379,17 +380,17 @@ return {
               // create the database...
             database.transaction(function(transaction) {
                     var td;
-                    td = that._createTableStmt('column_definitions', 
+                    td = that._createTableStmt('_column_definitions', 
                                                 that.columnDefinitionsPredefinedColumns,
                                                 that.columnDefinitionsTableConstraint );
                     ctxt.sqlStatement = td;
                     transaction.executeSql(td.stmt, td.bind);
-                    td = that._createTableStmt('key_value_store_active', 
+                    td = that._createTableStmt('_key_value_store_active', 
                                                 that.keyValueStoreActivePredefinedColumns,
                                                 that.keyValueStoreActiveTableConstraint );
                     ctxt.sqlStatement = td;
                     transaction.executeSql(td.stmt, td.bind);
-                    td = that._createTableStmt('table_definitions', 
+                    td = that._createTableStmt('_table_definitions', 
                                                 that.tableDefinitionsPredefinedColumns);
                     ctxt.sqlStatement = td;
                     transaction.executeSql(td.stmt, td.bind);
@@ -414,7 +415,8 @@ return {
                                 }
                                 ctxt.append("withDb.afterCreateDb.transaction.error", error.message);
                                 ctxt.append("withDb.afterCreateDb.transaction.error.transactionBody", transactionBody.toString());
-                                inContinuation = true;
+                                that.submissionDb = null;
+								inContinuation = true;
                                 ctxt.failure({message: "Error while accessing or saving values to the database."});
                             }, function() {
                                 ctxt.append("withDb.afterCreateDb.transaction.success");
@@ -424,6 +426,7 @@ return {
                 });
         }
     } catch(e) {
+		that.submissionDb = null;
         // Error handling code goes here.
         if ( ctxt.sqlStatement != null ) {
             ctxt.append("withDb.exception.sqlStmt", ctxt.sqlStatement.stmt);
@@ -481,7 +484,7 @@ return {
  * Requires: no globals
  */
 _selectAllFromDataTableStmt:function(dbTableName, instanceId) {
-    var stmt = 'select * from "' + dbTableName + '" where id=? group by id having timestamp = max(timestamp)'; 
+    var stmt = 'select * from "' + dbTableName + '" where _id=? group by _id having _timestamp = max(_timestamp)'; 
     return {
         stmt : stmt,
         bind : [instanceId]
@@ -505,12 +508,12 @@ _selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionAr
         }
         return {
                 stmt : 'select * from (select * from "' + dbTableName +
-                        '" where saved=?  group by id having timestamp = max(timestamp)) where ' + selection,
+                        '" where _saved=?  group by _id having _timestamp = max(_timestamp)) where ' + selection,
                 bind : args
             };
     } else {
         return {
-                stmt : 'select * from "' + dbTableName + '" where saved=? group by id having timestamp = max(timestamp)',
+                stmt : 'select * from "' + dbTableName + '" where _saved=? group by _id having _timestamp = max(_timestamp)',
                 bind : ['COMPLETE']    
             };
     }
@@ -530,13 +533,13 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
     if ( selection != null ) {
         return {
                 stmt :  'select * from (select * from "' + dbTableName +
-                        '" group by id having timestamp = max(timestamp)) where ' + selection +
+                        '" group by _id having _timestamp = max(_timestamp)) where ' + selection +
                         ((orderBy == null) ? '' : ' order by ' + orderBy),
                 bind : selectionArgs
             };
     } else {
         return {
-                stmt : 'select * from "' + dbTableName + '" group by id having timestamp = max(timestamp)' +
+                stmt : 'select * from "' + dbTableName + '" group by _id having _timestamp = max(_timestamp)' +
                         ((orderBy == null) ? '' : ' order by ' + orderBy),
                 bind : []    
             };
@@ -633,24 +636,24 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
                     bindings.push(v);
                     updates[f].value = v; 
                 }
-            } else if (f == "timestamp") {
+            } else if (f == "_timestamp") {
                 stmt += "?";
                 v = now;
                 bindings.push(v);
                 updates[f] = {"elementPath" : elementPath, "value": v};
-            } else if ( f == "form_id" ) {
+            } else if ( f == "_form_id" ) {
                 stmt += "?";
                 v = opendatakit.getSettingValue('form_id');
                 bindings.push(v);
                 updates[f] = {"elementPath" : elementPath, "value": v};
-            } else if ( f == "saved" ) {
+            } else if ( f == "_saved" ) {
                 stmt += "null";
             } else {
                 stmt += '"' + f + '"';
             }
         }
     }
-    stmt += ' from "' + dbTableName + '" where id=? group by id having timestamp = max(timestamp)'; 
+    stmt += ' from "' + dbTableName + '" where _id=? group by _id having _timestamp = max(_timestamp)'; 
     bindings.push(instanceId);
     
     for ( f in kvMap ) {
@@ -671,7 +674,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
  */
 _selectDataTableCountStmt:function(dbTableName, instanceId) {
     
-    var stmt = 'select count(*) as rowcount from "' + dbTableName + '" where id=?';
+    var stmt = 'select count(*) as rowcount from "' + dbTableName + '" where _id=?';
     return {
         stmt : stmt,
         bind : [instanceId]
@@ -742,10 +745,10 @@ _insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, kvMap) 
                     stmt += "?";
                     bindings.push(kvElement.value);
                 }
-            } else if ( f == "timestamp" ) {
+            } else if ( f == "_timestamp" ) {
                 stmt += "?";
                 bindings.push(now);
-            } else if ( f == "form_id" ) {
+            } else if ( f == "_form_id" ) {
                 stmt += "?";
                 bindings.push(opendatakit.getSettingValue('form_id'));
             } else {
@@ -782,7 +785,7 @@ _insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, kvMap) 
  */
 _deletePriorChangesDataTableStmt:function(dbTableName, instanceId) {
     
-    var stmt = 'delete from "' + dbTableName + '" where id=? and timestamp not in (select max(timestamp) from "' + dbTableName + '" where id=?);';
+    var stmt = 'delete from "' + dbTableName + '" where _id=? and _timestamp not in (select max(_timestamp) from "' + dbTableName + '" where _id=?);';
     return {
         stmt : stmt,
         bind : [instanceId, instanceId]
@@ -796,7 +799,7 @@ _deletePriorChangesDataTableStmt:function(dbTableName, instanceId) {
  */
 _deleteUnsavedChangesDataTableStmt:function(dbTableName, instanceId) {
     return {
-        stmt : 'delete from "' + dbTableName + '" where id=? and saved is null;',
+        stmt : 'delete from "' + dbTableName + '" where _id=? and _saved is null;',
         bind : [instanceId]
     };
 },
@@ -807,7 +810,7 @@ _deleteUnsavedChangesDataTableStmt:function(dbTableName, instanceId) {
  */
 _deleteDataTableStmt:function(dbTableName, instanceid) {
     return {
-        stmt : 'delete from "' + dbTableName + '" where id=?;',
+        stmt : 'delete from "' + dbTableName + '" where _id=?;',
         bind : [instanceid]
     };
 },
@@ -819,8 +822,8 @@ _deleteDataTableStmt:function(dbTableName, instanceid) {
  */
 _getAllInstancesDataTableStmt:function(dbTableName) {
     return {
-            stmt : 'select instance_name, timestamp, saved, locale, id from "' +
-                    dbTableName + '" group by id having timestamp = max(timestamp) order by timestamp desc;',
+            stmt : 'select _instance_name, _timestamp, _saved, _locale, _id from "' +
+                    dbTableName + '" group by _id having _timestamp = max(_timestamp) order by _timestamp desc;',
             bind : []
             };
 },
@@ -840,20 +843,20 @@ _getAllInstancesDataTableStmt:function(dbTableName) {
 /////////////////////////////////////////////////////////////////////////
 _selectTableDefinitionsDataStmt:function(table_id) {
     return {
-            stmt : 'select * from table_definitions where table_id=?',
+            stmt : 'select * from _table_definitions where _table_id=?',
             bind : [table_id]    
         };
 },
 
 _selectAllTableDbNamesAndIdsDataStmt: function() {
     return {
-            stmt: 'select db_table_name, table_id from table_definitions',
+            stmt: 'select _db_table_name, _table_id from _table_definitions',
             bind: []
         };
 },
 _selectAllTableMetaDataStmt:function(table_id) {
     return {
-            stmt : 'select key, type, value from key_value_store_active where table_id=? and partition=? and aspect=?',
+            stmt : 'select _key, _type, _value from _key_value_store_active where _table_id=? and _partition=? and _aspect=?',
             bind : [table_id, "Table", "default"]    
         };
 },
@@ -862,12 +865,12 @@ insertTableMetaDataStmt:function(table_id, name, type, value) {
     var now = new Date().getTime();
     if (value == null) {
         return {
-            stmt : 'insert into key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,"");',
+            stmt : 'insert into _key_value_store_active (_table_id, _partition, _aspect, _key, _type, _value) values (?,?,?,?,?,"");',
             bind : [table_id, "Table", "default", name, type]
         };
     } else {
         return {
-            stmt : 'insert into key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,?)',
+            stmt : 'insert into _key_value_store_active (_table_id, _partition, _aspect, _key, _type, _value) values (?,?,?,?,?,?)',
             bind : [table_id, "Table", "default", name, type, value]
         };
     }
@@ -888,13 +891,13 @@ insertTableMetaDataStmt:function(table_id, name, type, value) {
 /////////////////////////////////////////////////////////////////////////
 _selectColumnDefinitionsDataStmt:function(table_id) {
     return {
-            stmt : 'select * from column_definitions where table_id=?',
+            stmt : 'select * from _column_definitions where _table_id=?',
             bind : [table_id]    
         };
 },
 _selectAllColumnMetaDataStmt:function(table_id) {
     return {
-            stmt : 'select aspect as element_key, key, type, value from key_value_store_active where table_id=? and partition=?',
+            stmt : 'select _aspect as _element_key, _key, _type, _value from _key_value_store_active where _table_id=? and _partition=?',
             bind : [table_id, "Column"]    
         };
 },
@@ -903,12 +906,12 @@ insertColumnMetaDataStmt:function(table_id, elementKey, name, type, value) {
     var now = new Date().getTime();
     if (value == null) {
         return {
-            stmt : 'insert into key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,"");',
+            stmt : 'insert into _key_value_store_active (_table_id, _partition, _aspect, _key, _type, _value) values (?,?,?,?,?,"");',
             bind : [table_id, "Column", elementKey, name, type]
         };
     } else {
         return {
-            stmt : 'insert into key_value_store_active (table_id, partition, aspect, key, type, value) values (?,?,?,?,?,?)',
+            stmt : 'insert into _key_value_store_active (_table_id, _partition, _aspect, _key, _type, _value) values (?,?,?,?,?,?)',
             bind : [table_id, "Column", elementKey, name, type, value]
         };
     }
@@ -1145,10 +1148,10 @@ _coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
                     var defn;
                     for (var i = 0 ; i < len ; ++i ) {
                         var row = result.rows.item(i);
-                        var elementKey = row['element_key'];
-                        var dbKey = row['key'];
-                        var dbValue = row['value'];
-                        var dbType = row['type'];
+                        var elementKey = row['_element_key'];
+                        var dbKey = row['_key'];
+                        var dbValue = row['_value'];
+                        var dbType = row['_type'];
                         defn = that._getAccessibleColumnKeyDefinition(dbKey);
                         if ( defn != null ) {
                             that._reconstructElementPath(defn.elementPath, defn, dbValue, tlo.columnMetadata[elementKey] );
@@ -1216,11 +1219,11 @@ get_all_instances:function(ctxt) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
                     instanceList.push({
-                        instanceName: instance.instance_name,
-                        instance_id: instance.id,
-                        last_saved_timestamp: new Date(instance.timestamp),
-                        saved_status: instance.saved,
-                        locale: instance.locale
+                        instanceName: instance._instance_name,
+                        instance_id: instance._id,
+                        last_saved_timestamp: new Date(instance._timestamp),
+                        saved_status: instance._saved,
+                        locale: instance._locale
                     });
                 }
             });
@@ -1248,11 +1251,11 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, order
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
                     instanceList.push({
-                        instanceName: instance.instance_name,
-                        instance_id: instance.id,
-                        last_saved_timestamp: new Date(instance.timestamp),
-                        saved_status: instance.saved,
-                        locale: instance.locale
+                        instanceName: instance._instance_name,
+                        instance_id: instance._id,
+                        last_saved_timestamp: new Date(instance._timestamp),
+                        saved_status: instance._saved,
+                        locale: instance._locale
                     });
                 }
             });
@@ -1290,9 +1293,9 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     var instanceName = dateStr; // .replace(/\W/g, "_")
                     
                     var kvMap = {};
-                    kvMap.id = { value: instanceId, isInstanceMetadata: true };
-                    kvMap.instance_name = { value: instanceName, isInstanceMetadata: true };
-                    kvMap.locale = { value: locale, isInstanceMetadata: true };
+                    kvMap._id = { value: instanceId, isInstanceMetadata: true };
+                    kvMap._instance_name = { value: instanceName, isInstanceMetadata: true };
+                    kvMap._locale = { value: locale, isInstanceMetadata: true };
                     var propertyCount = 0;
                     for ( var f in instanceMetadataKeyValueMap ) {
                         ++propertyCount;
@@ -1335,8 +1338,8 @@ readTableDefinition:function(ctxt, formDef, table_id, formPath) {
     var that = this;
     var tlo = {data: {},  // dataTable instance data values
         metadata: {}, // dataTable instance Metadata: (instanceName, locale)
-        tableMetadata: {}, // table_definitions and key_value_store_active values for ("table", "default") of: table_id, tableKey, dbTableName
-        columnMetadata: {},// column_definitions and key_value_store_active values for ("column", elementKey) of: none...
+        tableMetadata: {}, // _table_definitions and key_value_store_active values for ("table", "default") of: table_id, tableKey, dbTableName
+        columnMetadata: {},// _column_definitions and key_value_store_active values for ("column", elementKey) of: none...
         dataTableModel: {},// inverted and extended formDef.model for representing data store
         formDef: formDef, 
         formPath: formPath, 
@@ -1413,14 +1416,14 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
         if ( dbKeyMap[elementKey] != null && dbKeyMap[elementKey] != jsonType ) {
             throw new Error("supplied elementKey is already used (autogenerated?) for another model element");
         }
-        if ( elementKey.charAt(0) != '_' ) {
-            throw new Error("supplied elementKey does not start with underscore");
+        if ( elementKey.charAt(0) == '_' ) {
+            throw new Error("supplied elementKey starts with underscore");
         }
     }
     
     if ( elementKey == null ) {
         // synthesize an element key...
-        elementKey = (( elementKeyPrefix == null ) ? ('_' + elementName) : (elementKeyPrefix + '_' + elementName));
+        elementKey = (( elementKeyPrefix == null ) ? elementName : (elementKeyPrefix + '_' + elementName));
     }
 
     // assume the primitive types are persisted.
@@ -1492,16 +1495,16 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
 _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) {
     var that = this;
     var fullDef = {
-        table_definitions: [],
-        key_value_store_active: [],
-        column_definitions: []
+        _table_definitions: [],
+        _key_value_store_active: [],
+        _column_definitions: []
         };
 
 	ctxt.append('database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...
-    var dbTableName = '_' + tlo.table_id;
+    var dbTableName = tlo.table_id;
     // dataTableModel holds an inversion of the tlo.formDef.model
     //
     //  elementKey : jsonSchemaType
@@ -1539,14 +1542,14 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         if ( jsonDefn.elementSet == 'data' ) {
             var surveyElementName = jsonDefn.elementName;
             
-            fullDef.column_definitions.push( {
-                table_id: tlo.table_id,
-                element_key: dbColumnName,
-                element_name: jsonDefn.elementName,
-                element_type: (jsonDefn.elementType == null ? jsonDefn.type : jsonDefn.elementType),
-                list_child_element_keys : ((jsonDefn.listChildElementKeys == null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
-                is_persisted : (jsonDefn.isPersisted ? 1 : 0),
-                joins: null
+            fullDef._column_definitions.push( {
+                _table_id: tlo.table_id,
+                _element_key: dbColumnName,
+                _element_name: jsonDefn.elementName,
+                _element_type: (jsonDefn.elementType == null ? jsonDefn.type : jsonDefn.elementType),
+                _list_child_element_keys : ((jsonDefn.listChildElementKeys == null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
+                _is_persisted : (jsonDefn.isPersisted ? 1 : 0),
+                _joins: null
             } );
             
             // displayed columns within Tables, at least for now, are the persisted columns only.
@@ -1554,93 +1557,93 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 displayColumnOrder.push(dbColumnName);
             }
 
-            fullDef.key_value_store_active.push( {
-                table_id: tlo.table_id,
-                partition: "Column",
-                aspect: dbColumnName,
-                key: "displayVisible",
-                type: "boolean",
-                value: true
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "displayVisible",
+                _type: "boolean",
+                _value: true
             } );
-            fullDef.key_value_store_active.push( {
-                table_id: tlo.table_id,
-                partition: "Column",
-                aspect: dbColumnName,
-                key: "displayName",
-                type: "string",
-                value: surveyElementName
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "displayName",
+                _type: "string",
+                _value: surveyElementName
             } );
-            fullDef.key_value_store_active.push( {
-                table_id: tlo.table_id,
-                partition: "Column",
-                aspect: dbColumnName,
-                key: "displayChoicesList",
-                type: "string",
-                value: ((jsonDefn.choicesList == null) ? "" : JSON.stringify(tlo.formDef.specification.choices[jsonDefn.choicesList]))
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "displayChoicesList",
+                _type: "string",
+                _value: ((jsonDefn.choicesList == null) ? "" : JSON.stringify(tlo.formDef.specification.choices[jsonDefn.choicesList]))
             } );
-            fullDef.key_value_store_active.push( {
-                table_id: tlo.table_id,
-                partition: "Column",
-                aspect: dbColumnName,
-                key: "displayFormat",
-                type: "string",
-                value: (jsonDefn.displayFormat == null) ? "" : jsonDefn.displayFormat
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "displayFormat",
+                _type: "string",
+                _value: (jsonDefn.displayFormat == null) ? "" : jsonDefn.displayFormat
             } );
-            fullDef.key_value_store_active.push( {
-                table_id: tlo.table_id,
-                partition: "Column",
-                aspect: dbColumnName,
-                key: "smsIn",
-                type: "boolean",
-                value: true
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "smsIn",
+                _type: "boolean",
+                _value: true
             } );
-            fullDef.key_value_store_active.push( {
-                table_id: tlo.table_id,
-                partition: "Column",
-                aspect: dbColumnName,
-                key: "smsOut",
-                type: "boolean",
-                value: true
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "smsOut",
+                _type: "boolean",
+                _value: true
             } );
-            fullDef.key_value_store_active.push( {
-                table_id: tlo.table_id,
-                partition: "Column",
-                aspect: dbColumnName,
-                key: "smsLabel",
-                type: "string",
-                value: ""
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "smsLabel",
+                _type: "string",
+                _value: ""
             } );
-            fullDef.key_value_store_active.push( {
-                table_id: tlo.table_id,
-                partition: "Column",
-                aspect: dbColumnName,
-                key: "footerMode",
-                type: "string",
-                value: 'none'
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "footerMode",
+                _type: "string",
+                _value: 'none'
             } );
         }
     }
 
-    fullDef.table_definitions.push( { 
-        table_id: tlo.table_id, 
-        table_key: dbTableName, 
-        db_table_name: dbTableName, 
-        type: 'data', 
-        table_id_access_controls: null, 
-        sync_tag: "", 
-        last_sync_time: -1, 
-        sync_state: 'rest', 
-        transactioning: 0 } );
+    fullDef._table_definitions.push( { 
+        _table_id: tlo.table_id, 
+        _table_key: dbTableName, 
+        _db_table_name: dbTableName, 
+        _type: 'data', 
+        _table_id_access_controls: null, 
+        _sync_tag: "", 
+        _last_sync_time: -1, 
+        _sync_state: 'rest', 
+        _transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'displayName', type: 'string', value: JSON.stringify(opendatakit.getSectionTitle(tlo.formDef, 'survey')) } );
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'primeCols', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'sortCol', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'coViewSettings', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'detailViewFile', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'summaryDisplayFormat', type: 'string', value: '' } );
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'colOrder', type: 'string', value: JSON.stringify(displayColumnOrder) } );
-    fullDef.key_value_store_active.push( { table_id: tlo.table_id, partition: "Table", aspect: "default", key: 'ovViewSettings', type: 'string', value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'string', _value: JSON.stringify(opendatakit.getSectionTitle(tlo.formDef, 'survey')) } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'primeCols', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'coViewSettings', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'detailViewFile', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'summaryDisplayFormat', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'string', _value: JSON.stringify(displayColumnOrder) } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'ovViewSettings', _type: 'string', _value: '' } );
 
     // get first property in fullDef -- we use native iteration ordering to step through the properties.
     var tableToUpdate = null;
@@ -1792,11 +1795,11 @@ purge:function(ctxt) {
                 ctxt.sqlStatement = sql;
                 transaction.executeSql(sql.stmt, sql.bind);
                 
-                sql = that._deleteEntireTableContentsTableStmt('column_definitions');
+                sql = that._deleteEntireTableContentsTableStmt('_column_definitions');
                 ctxt.sqlStatement = sql;
                 transaction.executeSql(sql.stmt, sql.bind);
 
-                sql = that._deleteEntireTableContentsTableStmt('table_definitions');
+                sql = that._deleteEntireTableContentsTableStmt('_table_definitions');
                 ctxt.sqlStatement = sql;
                 transaction.executeSql(sql.stmt, sql.bind);
             });
@@ -1808,7 +1811,7 @@ purge:function(ctxt) {
             var i, row, tableEntry;
             for ( i = 0 ; i < len ; ++i ) {
                 row = result.rows.item(i);
-                tableEntry = { dbTableName: row['db_table_name'], table_id: row['table_id'] };
+                tableEntry = { dbTableName: row['_db_table_name'], table_id: row['_table_id'] };
                 tableSets.push(tableEntry);
             }
         });

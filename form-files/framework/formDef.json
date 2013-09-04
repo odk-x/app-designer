@@ -123,12 +123,12 @@
         "_row_num": 19
       },
       {
-        "branch_label": "household",
+        "branch_label": "household_new",
         "_row_num": 20
       },
       {
         "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/household/forms/household/',null)",
+          "default": "'?' + opendatakit.getHashString('../tables/household/forms/household_new/',null)",
           "cell_type": "formula"
         },
         "type": "external_link",
@@ -142,12 +142,12 @@
         "_row_num": 22
       },
       {
-        "branch_label": "household_new",
+        "branch_label": "household_member",
         "_row_num": 23
       },
       {
         "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/household/forms/household_new/',null)",
+          "default": "'?' + opendatakit.getHashString('../tables/household_member/forms/household_member/',null)",
           "cell_type": "formula"
         },
         "type": "external_link",
@@ -161,12 +161,12 @@
         "_row_num": 25
       },
       {
-        "branch_label": "household_member",
+        "branch_label": "imnci_test",
         "_row_num": 26
       },
       {
         "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/household_member/forms/household_member/',null)",
+          "default": "'?' + opendatakit.getHashString('../tables/imnci/forms/imnci_test/',null)",
           "cell_type": "formula"
         },
         "type": "external_link",
@@ -180,12 +180,12 @@
         "_row_num": 28
       },
       {
-        "branch_label": "imnci_test",
+        "branch_label": "refrigerators_init",
         "_row_num": 29
       },
       {
         "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/imnci/forms/imnci_test/',null)",
+          "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_init/',null)",
           "cell_type": "formula"
         },
         "type": "external_link",
@@ -199,12 +199,12 @@
         "_row_num": 31
       },
       {
-        "branch_label": "refrigerators_init",
+        "branch_label": "refrigerators_update",
         "_row_num": 32
       },
       {
         "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_init/',null)",
+          "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_update/',null)",
           "cell_type": "formula"
         },
         "type": "external_link",
@@ -218,12 +218,12 @@
         "_row_num": 34
       },
       {
-        "branch_label": "refrigerators_update",
+        "branch_label": "section_test",
         "_row_num": 35
       },
       {
         "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_update/',null)",
+          "default": "'?' + opendatakit.getHashString('../tables/section_test/forms/section_test/',null)",
           "cell_type": "formula"
         },
         "type": "external_link",
@@ -237,12 +237,12 @@
         "_row_num": 37
       },
       {
-        "branch_label": "section_test",
+        "branch_label": "selects",
         "_row_num": 38
       },
       {
         "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/section_test/forms/section_test/',null)",
+          "default": "'?' + opendatakit.getHashString('../tables/selects/forms/selects/',null)",
           "cell_type": "formula"
         },
         "type": "external_link",
@@ -254,25 +254,6 @@
       {
         "clause": "exit section",
         "_row_num": 40
-      },
-      {
-        "branch_label": "selects",
-        "_row_num": 41
-      },
-      {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/selects/forms/selects/',null)",
-          "cell_type": "formula"
-        },
-        "type": "external_link",
-        "display": {
-          "text": "Open form"
-        },
-        "_row_num": 42
-      },
-      {
-        "clause": "exit section",
-        "_row_num": 43
       }
     ],
     "settings": [
@@ -332,19 +313,11 @@
       },
       {
         "choice_list_name": "test_forms",
-        "data_value": "household",
-        "display": {
-          "text": "household"
-        },
-        "_row_num": 6
-      },
-      {
-        "choice_list_name": "test_forms",
         "data_value": "household_new",
         "display": {
           "text": "household_new"
         },
-        "_row_num": 7
+        "_row_num": 6
       },
       {
         "choice_list_name": "test_forms",
@@ -352,7 +325,7 @@
         "display": {
           "text": "household_member"
         },
-        "_row_num": 8
+        "_row_num": 7
       },
       {
         "choice_list_name": "test_forms",
@@ -360,7 +333,7 @@
         "display": {
           "text": "imnci_test"
         },
-        "_row_num": 9
+        "_row_num": 8
       },
       {
         "choice_list_name": "test_forms",
@@ -368,7 +341,7 @@
         "display": {
           "text": "refrigerators_init"
         },
-        "_row_num": 10
+        "_row_num": 9
       },
       {
         "choice_list_name": "test_forms",
@@ -376,7 +349,7 @@
         "display": {
           "text": "refrigerators_update"
         },
-        "_row_num": 11
+        "_row_num": 10
       },
       {
         "choice_list_name": "test_forms",
@@ -384,7 +357,7 @@
         "display": {
           "text": "section_test"
         },
-        "_row_num": 12
+        "_row_num": 11
       },
       {
         "choice_list_name": "test_forms",
@@ -392,7 +365,7 @@
         "display": {
           "text": "selects"
         },
-        "_row_num": 13
+        "_row_num": 12
       }
     ]
   },
@@ -487,19 +460,11 @@
         },
         {
           "choice_list_name": "test_forms",
-          "data_value": "household",
-          "display": {
-            "text": "household"
-          },
-          "_row_num": 6
-        },
-        {
-          "choice_list_name": "test_forms",
           "data_value": "household_new",
           "display": {
             "text": "household_new"
           },
-          "_row_num": 7
+          "_row_num": 6
         },
         {
           "choice_list_name": "test_forms",
@@ -507,7 +472,7 @@
           "display": {
             "text": "household_member"
           },
-          "_row_num": 8
+          "_row_num": 7
         },
         {
           "choice_list_name": "test_forms",
@@ -515,7 +480,7 @@
           "display": {
             "text": "imnci_test"
           },
-          "_row_num": 9
+          "_row_num": 8
         },
         {
           "choice_list_name": "test_forms",
@@ -523,7 +488,7 @@
           "display": {
             "text": "refrigerators_init"
           },
-          "_row_num": 10
+          "_row_num": 9
         },
         {
           "choice_list_name": "test_forms",
@@ -531,7 +496,7 @@
           "display": {
             "text": "refrigerators_update"
           },
-          "_row_num": 11
+          "_row_num": 10
         },
         {
           "choice_list_name": "test_forms",
@@ -539,7 +504,7 @@
           "display": {
             "text": "section_test"
           },
-          "_row_num": 12
+          "_row_num": 11
         },
         {
           "choice_list_name": "test_forms",
@@ -547,7 +512,7 @@
           "display": {
             "text": "selects"
           },
-          "_row_num": 13
+          "_row_num": 12
         }
       ]
     },
@@ -709,7 +674,7 @@
           },
           {
             "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/household/forms/household/',null)",
+              "default": "'?' + opendatakit.getHashString('../tables/household/forms/household_new/',null)",
               "cell_type": "formula"
             },
             "type": "external_link",
@@ -725,7 +690,7 @@
           },
           {
             "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/household/forms/household_new/',null)",
+              "default": "'?' + opendatakit.getHashString('../tables/household_member/forms/household_member/',null)",
               "cell_type": "formula"
             },
             "type": "external_link",
@@ -741,7 +706,7 @@
           },
           {
             "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/household_member/forms/household_member/',null)",
+              "default": "'?' + opendatakit.getHashString('../tables/imnci/forms/imnci_test/',null)",
               "cell_type": "formula"
             },
             "type": "external_link",
@@ -757,7 +722,7 @@
           },
           {
             "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/imnci/forms/imnci_test/',null)",
+              "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_init/',null)",
               "cell_type": "formula"
             },
             "type": "external_link",
@@ -773,7 +738,7 @@
           },
           {
             "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_init/',null)",
+              "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_update/',null)",
               "cell_type": "formula"
             },
             "type": "external_link",
@@ -789,7 +754,7 @@
           },
           {
             "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_update/',null)",
+              "default": "'?' + opendatakit.getHashString('../tables/section_test/forms/section_test/',null)",
               "cell_type": "formula"
             },
             "type": "external_link",
@@ -805,7 +770,7 @@
           },
           {
             "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/section_test/forms/section_test/',null)",
+              "default": "'?' + opendatakit.getHashString('../tables/selects/forms/selects/',null)",
               "cell_type": "formula"
             },
             "type": "external_link",
@@ -820,28 +785,12 @@
             "promptIdx": 12
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/selects/forms/selects/',null)",
-              "cell_type": "formula"
-            },
-            "type": "external_link",
-            "display": {
-              "text": "Open form"
-            },
-            "_row_num": 42,
-            "__rowNum__": 41,
-            "_token_type": "prompt",
-            "_type": "external_link",
-            "_branch_label_enclosing_screen": "screen42",
-            "promptIdx": 13
-          },
-          {
             "_token_type": "prompt",
             "type": "hierarchy",
             "_type": "hierarchy",
-            "_row_num": 44,
-            "_branch_label_enclosing_screen": "screen44",
-            "promptIdx": 14
+            "_row_num": 41,
+            "_branch_label_enclosing_screen": "screen41",
+            "promptIdx": 13
           }
         ],
         "validation_tag_map": {
@@ -1036,34 +985,21 @@
             "operationIdx": 27
           },
           {
-            "_row_num": 42,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 41,
             "operationIdx": 28
           },
           {
-            "clause": "exit section",
-            "_row_num": 43,
-            "__rowNum__": 42,
-            "_token_type": "exit_section",
+            "_row_num": 41,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 29
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 44,
-            "operationIdx": 30
-          },
-          {
-            "_row_num": 44,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 31
-          },
-          {
             "_token_type": "back_in_history",
-            "_row_num": 44,
-            "operationIdx": 32
+            "_row_num": 41,
+            "operationIdx": 30
           }
         ],
         "branch_label_map": {
@@ -1080,24 +1016,22 @@
           "screen15": 10,
           "exampleForm": 12,
           "screen18": 12,
-          "household": 14,
+          "household_new": 14,
           "screen21": 14,
-          "household_new": 16,
+          "household_member": 16,
           "screen24": 16,
-          "household_member": 18,
+          "imnci_test": 18,
           "screen27": 18,
-          "imnci_test": 20,
+          "refrigerators_init": 20,
           "screen30": 20,
-          "refrigerators_init": 22,
+          "refrigerators_update": 22,
           "screen33": 22,
-          "refrigerators_update": 24,
+          "section_test": 24,
           "screen36": 24,
-          "section_test": 26,
+          "selects": 26,
           "screen39": 26,
-          "selects": 28,
-          "screen42": 28,
-          "hierarchy": 31,
-          "screen44": 31
+          "hierarchy": 29,
+          "screen41": 29
         }
       }
     }
