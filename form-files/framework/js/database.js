@@ -24,7 +24,7 @@ return {
                      _uri_access_control: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _sync_state: { type: 'integer', isNotNullable: true, 'default': 0, isPersisted: true, elementSet: 'instanceMetadata' },
-                     _transactioning: { type: 'integer', isNotNullable: true, 'default': 1, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _conflict_type: { type: 'integer', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _timestamp: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
                      _saved: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _form_id: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'form_id', elementSet: 'instanceMetadata' },
