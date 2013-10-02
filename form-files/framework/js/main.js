@@ -25,6 +25,7 @@ requirejs.config({
         // directory paths for resources
         img : 'img',
         templates : 'templates',
+        translations : 'translations',
         // top-level objects
         mdl : 'js/mdl',
         screenTypes : 'js/screenTypes',
