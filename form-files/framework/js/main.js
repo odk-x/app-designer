@@ -16,7 +16,7 @@ requirejs.config({
     paths: {
         // third-party libraries we depend upon 
         jqmobile : 'libs/jquery.mobile-1.3.2/jquery.mobile-1.3.2',
-        jquery : 'libs/jquery.1.9.1',
+        jquery : 'libs/jquery.1.10.2',
         backbone : 'libs/backbone.1.0.0',
         handlebars : 'libs/handlebars.1.0.0.rc.4',
         underscore : 'libs/underscore.1.4.4',
