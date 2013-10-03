@@ -1858,9 +1858,9 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var acknowledged = this.$('#acknowledge').is(':checked');
         this.setValue($.extend({}, ctxt, {success: function() {
                 that.renderContext.choices = [{
-                    "name": "acknowledge",
-                    "label": that.acknLabel,
-                    "checked": acknowledged
+                    name: "acknowledge",
+                    display: { text: that.acknLabel },
+                    checked: acknowledged
                 }];
                 if (acknowledged && that.autoAdvance) {
                     that.controller.gotoNextScreen(ctxt);
@@ -1880,9 +1880,9 @@ promptTypes.acknowledge = promptTypes.select.extend({
             acknowledged = false;
         }
         that.renderContext.choices = [{
-            "name": "acknowledge",
-            "label": that.acknLabel,
-            "checked": acknowledged
+            name: "acknowledge",
+            display: { text: that.acknLabel },
+            checked: acknowledged
         }];
         ctxt.success(ctxt);
     }
