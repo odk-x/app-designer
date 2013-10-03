@@ -22,6 +22,22 @@ return {
     getCurrentScreenPath: function() {
         return shim.getScreenPath(opendatakit.getRefId());
     },
+	getCurrentHierarchyScreenPath: function() {
+		var currentPath = this.getCurrentScreenPath();
+        if ( currentPath == null ) {
+            ctxt.append("controller.getCurrentHierarchyScreenPath: null currentScreenPath!");
+            ctxt.failure({message: "no current screen!"});
+            return;
+        }
+		var parts = currentPath.split("/");
+        if ( parts.length < 2 ) {
+            ctxt.append("controller.getCurrentHierarchyScreenPath: invalid currentScreenPath: " + currentPath);
+            ctxt.failure({message: "invalid currentScreenPath: " + currentPath});
+            return;
+        }
+ 
+		return parts[0] + '/hierarchy';
+	},
     // NOTE: this is only here to avoid having screen depend upon database.
     commitChanges: function(ctxt) {
         database.applyDeferredChanges(ctxt);
@@ -630,6 +646,31 @@ return {
             },
             failure: failurePop
         }), true);
+    },
+    gotoHierarchyScreen: function(ctxt, options){
+        var that = this;
+        var failurePop = function(m) {
+            ctxt.append("gotoHierarchyScreen.failure", "px: " +  that.getCurrentScreenPath());
+            that.screenManager.showScreenPopup(m); 
+            ctxt.failure(m);
+        };
+        that.beforeMove($.extend({}, ctxt, {
+            success: function() {
+                ctxt.append("gotoHierarchyScreen.beforeMove.success", "px: " +  that.getCurrentScreenPath());
+				// all prompt values have been saved Prompt validation has been run if we 
+				// are advancing and the screen.allowMove(advancing) test has passed.
+				// Now step through operations until we reach a begin_screen action.
+				that.getOperationPath($.extend({}, ctxt, {
+					success: function(path) {
+						// if the next operation is not a screen, gotoScreenPath will
+						// perform all operations until it comes to a screen.
+						that.gotoScreenPath(ctxt, path, options);
+					},
+					failure: failurePop
+				}), that.getCurrentHierarchyScreenPath());
+            },
+            failure: failurePop
+        }), false);
     },
     setScreen: function(ctxt, operation, passedInOptions){
         var that = this;
