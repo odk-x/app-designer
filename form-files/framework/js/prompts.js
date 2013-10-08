@@ -715,10 +715,18 @@ promptTypes.linked_table = promptTypes.base.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
 		var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
+		var auxHash = '';
+		if ( that.auxillaryHash ) {
+			auxHash = that.auxillaryHash();
+			if ( auxHash && auxHash != '' && auxHash.charAt(0) != '&' ) {
+				auxHash = '&' + auxHash;
+			}
+		}
+		var fullUrl = shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
-							 extras: { url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }}));
+							 extras: { url: fullUrl }}));
         ctxt.append('linked_table.addInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");

@@ -1292,16 +1292,41 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     var locale = opendatakit.getDefaultFormLocale(mdl.formDef);
                     var instanceName = dateStr; // .replace(/\W/g, "_")
                     
+					var propList = '';
                     var kvMap = {};
                     kvMap._id = { value: instanceId, isInstanceMetadata: true };
                     kvMap._instance_name = { value: instanceName, isInstanceMetadata: true };
                     kvMap._locale = { value: locale, isInstanceMetadata: true };
                     var propertyCount = 0;
                     for ( var f in instanceMetadataKeyValueMap ) {
+						propList = propList + ' ' + f;
                         ++propertyCount;
+						// determine if f is metadata or not...
+						var metaField, isMetadata;
+						for ( var g in that.dataTablePredefinedColumns ) {
+							var eName = g;
+							if ( 'elementPath' in that.dataTablePredefinedColumns[g] ) {
+								eName = that.dataTablePredefinedColumns[g].elementPath;
+							}
+							if ( f == eName ) {
+								metaField = g;
+								isMetadata = (that.dataTablePredefinedColumns[g].elementSet == 'instanceMetadata');
+								break;
+							}
+						}
+						
+						if ( isMetadata ) {
+							kvMap[metaField] = { value: instanceMetadataKeyValueMap[f], 
+												 isInstanceMetadata: true };
+						} else {
+							// TODO: convert f from elementPath into elementKey
+							kvMap[f] = { value: instanceMetadataKeyValueMap[f], 
+												 isInstanceMetadata: false };
+						}
                     }
+					
                     if ( propertyCount != 0 ) {
-                        console.error("Extra arguments found in instanceMetadataKeyValueMap: " + instanceMetadataKeyValueMap );
+                        shim.log('I',"Extra arguments found in instanceMetadataKeyValueMap" + propList);
                     }
                     var cs = that._insertNewKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, kvMap);
                     tmpctxt.sqlStatement = cs;
