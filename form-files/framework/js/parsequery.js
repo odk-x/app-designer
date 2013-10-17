@@ -84,11 +84,7 @@ return {
      * If no instanceId is supplied, swap the in-process MetaData to the new form's core
      * MetaData and invoke _effectChange.
      *
-     * Otherwise, read the instanceName for this instanceId directly from the database. 
-     *
-     * If instanceName is null, construct and write a new candidate instanceName before 
-     * making the swap of the core MetaData and invoking _effectChange.
-     * If instanceName is not null, swap to the core Metadata and invoke _effectChange.
+     * Otherwise, read the data row for this instanceId directly from the database. 
      *
      * Immediate: _effectChange
     */

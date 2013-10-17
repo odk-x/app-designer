@@ -343,18 +343,18 @@ promptTypes.opening = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        var instanceName = database.getInstanceMetaDataValue('instanceName');
-        if (instanceName == null) {
+        var instance_name = database.getDataValue('instance_name');
+        if (instance_name == null) {
             // construct a friendly name for this form... use just the date, as the form name is well known
             var date = new Date();
             var dateStr = date.toISOString();
-            instanceName = dateStr; // .replace(/\W/g, "_")
-            that.renderContext.instanceName = instanceName;
+            instance_name = dateStr; // .replace(/\W/g, "_")
+            that.renderContext.instance_name = instance_name;
             that._screen._renderContext.enableBackNavigation = false;
-            database.setInstanceMetaData(ctxt, 'instanceName', instanceName);
+            database.setData(ctxt, 'instance_name', instance_name);
             return;
         }
-        that.renderContext.instanceName = instanceName;
+        that.renderContext.instance_name = instance_name;
         that._screen._renderContext.enableBackNavigation = false;
         ctxt.success();
     },
@@ -372,11 +372,11 @@ promptTypes.opening = promptTypes.base.extend({
     modification: function(evt) {
         var ctxt = this.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
-        database.setInstanceMetaData(ctxt, 'instanceName', this.$('input').val());
+        database.setData(ctxt, 'instance_name', this.$('input').val());
     },
     beforeMove: function(ctxt) {
         ctxt.append("prompts." + this.type + ".beforeMove", "px: " + this.promptIdx);
-        database.setInstanceMetaData(ctxt, 'instanceName', this.$('input').val());
+        database.setData(ctxt, 'instance_name', this.$('input').val());
         // ctxt.success();
     }
 });
@@ -397,7 +397,7 @@ promptTypes.finalize = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
+        this.renderContext.instance_name = database.getDataValue('instance_name');
         this._screen._renderContext.enableForwardNavigation = false;
         ctxt.success();
     },
@@ -442,8 +442,9 @@ promptTypes.instances = promptTypes.base.extend({
     type:"instances",
     hideInHierarchy: true,
     valid: true,
-    saved_finalized_text: 'finalized',
-    saved_incomplete_text: 'incomplete',
+    savepoint_type_finalized_text: 'finalized',
+    savepoint_type_incomplete_text: 'incomplete',
+    savepoint_type_checkpoint_text: 'checkpoint',
     templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
@@ -455,12 +456,14 @@ promptTypes.instances = promptTypes.base.extend({
         ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
         database.get_all_instances($.extend({},ctxt,{success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
-                    var saved = term.saved_status;
-                    if ( saved == opendatakit.saved_complete ) {
-                        term.saved_text = that.saved_finalized_text;
-                    } else if ( saved == opendatakit.saved_incomplete ) {
-                        term.saved_text = that.saved_incomplete_text;
-                    }
+                    var savepoint_type = term.savepoint_type;
+                    if ( savepoint_type == opendatakit.savepoint_type_complete ) {
+                        term.savepoint_type_text = that.savepoint_type_finalized_text;
+                    } else if ( savepoint_type == opendatakit.savepoint_type_incomplete ) {
+                        term.savepoint_type_text = that.savepoint_type_incomplete_text;
+                    } else {
+						term.savepoint_type_text = that.savepoint_type_checkpoint_text;
+					}
                     return term;
                 });
                 
@@ -1906,7 +1909,7 @@ promptTypes.stop_survey = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        this.renderContext.instanceName = database.getInstanceMetaDataValue('instanceName');
+        this.renderContext.instance_name = database.getInstanceMetaDataValue('instance_name');
         this._screen._renderContext.enableForwardNavigation = false;
         this._screen._renderContext.enableBackNavigation = false;
         ctxt.success();

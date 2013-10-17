@@ -39,7 +39,7 @@
       {
         "type": "note",
         "display": {
-          "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}} for {{metadata 'instanceName'}}"
+          "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}} for {{instance_name}}"
         },
         "_row_num": 6
       },
@@ -404,7 +404,7 @@
           {
             "type": "note",
             "display": {
-              "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}} for {{metadata 'instanceName'}}"
+              "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}} for {{instance_name}}"
             },
             "_row_num": 6,
             "__rowNum__": 5,

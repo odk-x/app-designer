@@ -61,8 +61,8 @@
         },
         "comments": "auxillaryHash defines the auxillary hash to supply when creating a new sub-form. This is an ampersand-separated list of elementName=value pairs that will be used to initialize the subform. The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
         "line_text": {
-          "elementName": "instanceName",
-          "isInstanceMetadata": true
+          "elementName": "instance_name",
+          "isInstanceMetadata": false
         },
         "line_subtext": {
           "elementName": "name",
@@ -417,8 +417,8 @@
             },
             "comments": "auxillaryHash defines the auxillary hash to supply when creating a new sub-form. This is an ampersand-separated list of elementName=value pairs that will be used to initialize the subform. The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
             "line_text": {
-              "elementName": "instanceName",
-              "isInstanceMetadata": true
+              "elementName": "instance_name",
+              "isInstanceMetadata": false
             },
             "line_subtext": {
               "elementName": "name",

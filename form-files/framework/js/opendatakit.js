@@ -12,8 +12,8 @@ verifyLoad('opendatakit',
 	[ mdl,  _]);
 return {
     initialScreenPath: "initial/0",
-    saved_complete: 'COMPLETE',
-    saved_incomplete: 'INCOMPLETE',
+    savepoint_type_complete: 'COMPLETE',
+    savepoint_type_incomplete: 'INCOMPLETE',
     baseDir: '',
     databaseSettings: null,
     platformInfo: null,

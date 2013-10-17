@@ -384,7 +384,7 @@ function execFormChange( idxSubfolder ) {
 									'          <orx:timeEnd/>\n' +
 									'          <instanceName/>\n' +
 									'          <formID/>\n'+
-									'          <saved/>\n' +
+									'          <savepointType/>\n' +
 									'        </orx:meta>');
 							instanceBody = "\n";
 							bindBody = "";
@@ -404,7 +404,7 @@ function execFormChange( idxSubfolder ) {
 							bindBody += bindPrefix + 'meta/timeEnd" type="datetime"/>\n';
 							bindBody += bindPrefix + 'meta/instanceName" type="string"/>\n';
 							bindBody += bindPrefix + 'meta/formID" type="string"/>\n';
-							bindBody += bindPrefix + 'meta/saved" type="string"/>\n';
+							bindBody += bindPrefix + 'meta/savepointType" type="string"/>\n';
 							
 							var model = jsonDef.model;
 							buildFormStructures( instanceBodyPrefix, bindPrefix, '', model );

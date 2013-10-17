@@ -20,16 +20,19 @@ return {
         // i.e., it is not settable/gettable via Javascript used in prompts.
         // This is used for bookkeeping columns (e.g., server sync, save status).
         //
-  dataTablePredefinedColumns: { _id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
+  dataTablePredefinedColumns: { 
+					 // these have leading underscores because they are hidden from the user and not directly manipulable
+					 _id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
                      _uri_access_control: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _sync_state: { type: 'integer', isNotNullable: true, 'default': 0, isPersisted: true, elementSet: 'instanceMetadata' },
                      _conflict_type: { type: 'integer', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-                     _timestamp: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
-                     _saved: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-                     _form_id: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'form_id', elementSet: 'instanceMetadata' },
-                     _instance_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'instanceName', elementSet: 'instanceMetadata' },
-                     _locale: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'locale', elementSet: 'instanceMetadata' } },
+                     _savepoint_timestamp: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _savepoint_type: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _form_id: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
+                     _locale: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
+					 // this is the one required, automatically-supplied, table column
+                     instance_name: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'data' } },
   tableDefinitionsPredefinedColumns: {
                     _table_id: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
                     _table_key: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'tableKey', elementSet: 'tableMetadata' },
@@ -466,10 +469,10 @@ return {
 // Records in the data table are always inserted.
 // Metadata columns are indicated by a leading underscore in the name.
 // 
-// The saved (metadata) column == "COMPLETE" if they are 'official' values.
-// Otherwise, saved == "INCOMPLETE" indicates a manual user savepoint and
-// saved IS NULL indicates an automatic savepoint. The timestamp indicates
-// the time at which the savepoint occured.
+// The _savepoint_type (metadata) column == "COMPLETE" if they are 'official' values.
+// Otherwise, _savepoint_type == "INCOMPLETE" indicates a manual user savepoint and
+// _savepoint_type IS NULL indicates an automatic (checkpoint) savepoint. 
+// The _savepoint_timestamp indicates the time at which the savepoint occured.
  
 /**
  * get the contents of the active data table row for a given instanceId
@@ -477,7 +480,7 @@ return {
  * Requires: no globals
  */
 _selectAllFromDataTableStmt:function(dbTableName, instanceId) {
-    var stmt = 'select * from "' + dbTableName + '" where _id=? group by _id having _timestamp = max(_timestamp)'; 
+    var stmt = 'select * from "' + dbTableName + '" where _id=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)'; 
     return {
         stmt : stmt,
         bind : [instanceId]
@@ -501,12 +504,12 @@ _selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionAr
         }
         return {
                 stmt : 'select * from (select * from "' + dbTableName +
-                        '" where _saved=?  group by _id having _timestamp = max(_timestamp)) where ' + selection,
+                        '" where _savepoint_type=?  group by _id having _savepoint_timestamp = max(_savepoint_timestamp)) where ' + selection,
                 bind : args
             };
     } else {
         return {
-                stmt : 'select * from "' + dbTableName + '" where _saved=? group by _id having _timestamp = max(_timestamp)',
+                stmt : 'select * from "' + dbTableName + '" where _savepoint_type=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)',
                 bind : ['COMPLETE']    
             };
     }
@@ -526,13 +529,13 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
     if ( selection != null ) {
         return {
                 stmt :  'select * from (select * from "' + dbTableName +
-                        '" group by _id having _timestamp = max(_timestamp)) where ' + selection +
+                        '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)) where ' + selection +
                         ((orderBy == null) ? '' : ' order by ' + orderBy),
                 bind : selectionArgs
             };
     } else {
         return {
-                stmt : 'select * from "' + dbTableName + '" group by _id having _timestamp = max(_timestamp)' +
+                stmt : 'select * from "' + dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
                         ((orderBy == null) ? '' : ' order by ' + orderBy),
                 bind : []    
             };
@@ -575,7 +578,7 @@ _getElementPathPairFromKvMap: function(kvMap, elementPath) {
 /**
  * insert a new automatic savepoint for the given record and change the 
  * database columns (including instance metadata columns) specified in the kvMap.
- * Also used to set a manual savepoint when the kvMap specifies the 'saved' 
+ * Also used to set a manual savepoint when the kvMap specifies the '_savepoint_type' 
  * instance metadata value (not accessible to external users).
  *
  * kvMap : { 'columnName' : { value: "foo name", isInstanceMetadata: false } ...}
@@ -629,7 +632,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
                     bindings.push(v);
                     updates[f].value = v; 
                 }
-            } else if (f == "_timestamp") {
+            } else if (f == "_savepoint_timestamp") {
                 stmt += "?";
                 v = now;
                 bindings.push(v);
@@ -639,14 +642,14 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
                 v = opendatakit.getSettingValue('form_id');
                 bindings.push(v);
                 updates[f] = {"elementPath" : elementPath, "value": v};
-            } else if ( f == "_saved" ) {
+            } else if ( f == "_savepoint_type" ) {
                 stmt += "null";
             } else {
                 stmt += '"' + f + '"';
             }
         }
     }
-    stmt += ' from "' + dbTableName + '" where _id=? group by _id having _timestamp = max(_timestamp)'; 
+    stmt += ' from "' + dbTableName + '" where _id=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)'; 
     bindings.push(instanceId);
     
     for ( f in kvMap ) {
@@ -738,7 +741,7 @@ _insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, kvMap) 
                     stmt += "?";
                     bindings.push(kvElement.value);
                 }
-            } else if ( f == "_timestamp" ) {
+            } else if ( f == "_savepoint_timestamp" ) {
                 stmt += "?";
                 bindings.push(now);
             } else if ( f == "_form_id" ) {
@@ -778,7 +781,7 @@ _insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, kvMap) 
  */
 _deletePriorChangesDataTableStmt:function(dbTableName, instanceId) {
     
-    var stmt = 'delete from "' + dbTableName + '" where _id=? and _timestamp not in (select max(_timestamp) from "' + dbTableName + '" where _id=?);';
+    var stmt = 'delete from "' + dbTableName + '" where _id=? and _savepoint_timestamp not in (select max(_savepoint_timestamp) from "' + dbTableName + '" where _id=?);';
     return {
         stmt : stmt,
         bind : [instanceId, instanceId]
@@ -792,7 +795,7 @@ _deletePriorChangesDataTableStmt:function(dbTableName, instanceId) {
  */
 _deleteUnsavedChangesDataTableStmt:function(dbTableName, instanceId) {
     return {
-        stmt : 'delete from "' + dbTableName + '" where _id=? and _saved is null;',
+        stmt : 'delete from "' + dbTableName + '" where _id=? and _savepoint_type is null;',
         bind : [instanceId]
     };
 },
@@ -815,8 +818,8 @@ _deleteDataTableStmt:function(dbTableName, instanceid) {
  */
 _getAllInstancesDataTableStmt:function(dbTableName) {
     return {
-            stmt : 'select _instance_name, _timestamp, _saved, _locale, _id from "' +
-                    dbTableName + '" group by _id having _timestamp = max(_timestamp) order by _timestamp desc;',
+            stmt : 'select instance_name, _savepoint_timestamp, _savepoint_type, _locale, _id from "' +
+                    dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp) order by _savepoint_timestamp desc;',
             bind : []
             };
 },
@@ -937,7 +940,10 @@ putInstanceMetaData:function(ctxt, name, value) {
       var f;
       ctxt.append('putInstanceMetaData', 'name: ' + name);
       for ( f in that.dataTablePredefinedColumns ) {
-        if ( that.dataTablePredefinedColumns[f].elementPath == name ) {
+		var defn = that.dataTablePredefinedColumns[f];
+        if (  defn.elementSet == 'instanceMetadata' &&
+		      ( defn.elementPath == name ||
+			    (defn.elementPath == null && f == name) ) ) {
             dbColumnName = f;
             break;
         }
@@ -1167,7 +1173,7 @@ save_all_changes:function(ctxt, asComplete) {
       that.withDb( tmpctxt, 
             function(transaction) {
                 var kvMap = {};
-                kvMap['saved'] = {value: (asComplete ? 'COMPLETE' : 'INCOMPLETE'), isInstanceMetadata: true };
+                kvMap['_savepoint_type'] = {value: (asComplete ? 'COMPLETE' : 'INCOMPLETE'), isInstanceMetadata: true };
                 var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, opendatakit.getCurrentInstanceId(), kvMap);
                 tmpctxt.sqlStatement = is;
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
@@ -1212,10 +1218,10 @@ get_all_instances:function(ctxt) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
                     instanceList.push({
-                        instanceName: instance._instance_name,
+                        instance_name: instance.instance_name,
                         instance_id: instance._id,
-                        last_saved_timestamp: new Date(instance._timestamp),
-                        saved_status: instance._saved,
+                        savepoint_timestamp: new Date(instance._savepoint_timestamp),
+                        savepoint_type: instance._savepoint_type,
                         locale: instance._locale
                     });
                 }
@@ -1244,10 +1250,10 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, order
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
                     instanceList.push({
-                        instanceName: instance._instance_name,
+                        instance_name: instance.instance_name,
                         instance_id: instance._id,
-                        last_saved_timestamp: new Date(instance._timestamp),
-                        saved_status: instance._saved,
+                        savepoint_timestamp: new Date(instance._savepoint_timestamp),
+                        savepoint_type: instance._savepoint_type,
                         locale: instance._locale
                     });
                 }
@@ -1268,21 +1274,24 @@ processPassedInKeyValueMap: function(kvMap, instanceMetadataKeyValueMap) {
 		++propertyCount;
 		// determine if f is metadata or not...
 		var metaField, isMetadata;
+		var found = false;
 		for ( var g in that.dataTablePredefinedColumns ) {
+			var eDefn = that.dataTablePredefinedColumns[g];
 			var eName = g;
-			if ( 'elementPath' in that.dataTablePredefinedColumns[g] ) {
-				eName = that.dataTablePredefinedColumns[g].elementPath;
+			if ( 'elementPath' in eDefn ) {
+				eName = eDefn.elementPath;
 			}
 			if ( f == eName ) {
+				found = true;
 				metaField = g;
-				isMetadata = (that.dataTablePredefinedColumns[g].elementSet == 'instanceMetadata');
+				isMetadata = (eDefn.elementSet == 'instanceMetadata');
 				break;
 			}
 		}
 		
-		if ( isMetadata ) {
+		if ( found ) {
 			kvMap[metaField] = { value: instanceMetadataKeyValueMap[f], 
-								 isInstanceMetadata: true };
+								 isInstanceMetadata: isMetadata };
 		} else {
 			// TODO: convert f from elementPath into elementKey
 			kvMap[f] = { value: instanceMetadataKeyValueMap[f], 
@@ -1323,11 +1332,11 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     var date = new Date();
                     var dateStr = date.toISOString();
                     var locale = opendatakit.getDefaultFormLocale(mdl.formDef);
-                    var instanceName = dateStr; // .replace(/\W/g, "_")
+                    var instance_name = dateStr; // .replace(/\W/g, "_")
                     
                     var kvMap = {};
                     kvMap._id = { value: instanceId, isInstanceMetadata: true };
-                    kvMap._instance_name = { value: instanceName, isInstanceMetadata: true };
+                    kvMap.instance_name = { value: instance_name, isInstanceMetadata: false };
                     kvMap._locale = { value: locale, isInstanceMetadata: true };
 					// overwrite these with anything that was passed in...
 					that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);
@@ -1340,7 +1349,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     var kvMap = {};
 					// gather anything that was passed in...
 					that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);
-					if ( kvMap != {} ) {
+					if ( !$.isEmptyObject(kvMap) ) {
 						var cs = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, instanceId, kvMap);
 						tmpctxt.sqlStatement = cs;
 						transaction.executeSql(cs.stmt, cs.bind);

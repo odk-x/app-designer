@@ -18,10 +18,10 @@
             <li data-role="list-divider">{{dateDivider}}</li>
         {{/if}}
         <li>
-            <h3>{{instanceName}}</h3>
+            <h3>{{instance_name}}</h3>
             <p><strong>Last Save Date:</strong></p>
-            <p>{{last_saved_timestamp}}</p>
-            {{#if saved_status}}<p>{{saved_text}}</p>{{/if}}
+            <p>{{savepoint_timestamp}}</p>
+            {{#if savepoint_type}}<p>{{savepoint_type_text}}</p>{{/if}}
 			<fieldset class="ui-grid-a">
 					<div class="ui-block-a"><button id="{{instance_id}}" class="odk openInstance">edit</button></div>
 					<div class="ui-block-b"><button id="{{instance_id}}" class="odk deleteInstance">delete</button></div>

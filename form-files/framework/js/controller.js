@@ -956,7 +956,7 @@ return {
                         that.setScreen(ctxt, op, {changeLocale: true});
                     }}), that.getCurrentScreenPath());
             }
-        }), 'locale', locale);
+        }), '_locale', locale);
     },
     getSectionTitle: function() {
         var that = this;
@@ -1013,8 +1013,8 @@ return {
             this.loggingContextChain.push( log_obj );
             // SpeedTracer Logging API
             var logger = window.console;
-            if (logger && logger.markTimeline) {
-                logger.markTimeline(method);
+            if (logger && logger.timeStamp ) {
+                logger.timeStamp(method);
             }
             var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail == null) ? ")" : ") detail: " + detail);
             shim.log('D', dlog);

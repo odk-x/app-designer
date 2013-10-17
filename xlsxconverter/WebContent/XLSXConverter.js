@@ -23,6 +23,7 @@
           "choices",
           "queries",
           "calculates",
+          "column_types",
           "prompt_types",
           "model"
       ];
@@ -54,6 +55,28 @@
     		 clause: "end if // start"
     	 }
     ];
+
+    //The column type map is used to express whether a column needs special
+    //interpretation or not. I.e., whether to wrap the text inside a function() {...}
+    //and evaluate that.
+    var columnTypeMap = {
+            condition: 'formula',
+            constraint: 'formula',
+            required: 'formula',
+            validate: 'formula_with_context', // expects calling context arg.
+            calculation: 'formula',
+            'default': 'formula',
+            assign: 'formula',
+            //TODO: Choice filter has some syntax issues to consider.
+            //      It would be nice to have a "choice" variable we can refer to directly.
+            //      One idea is to define variables in a context object that gets passed into the generated function.
+            //      The generated function would then add the object's keys to the namespace.
+            choice_filter: 'formula_with_context', // expects "choice" context arg.
+            templatePath: 'requirejs_path',
+            image: 'app_path_localized',
+            audio: 'app_path_localized',
+            video: 'app_path_localized'
+    };
 
     //The prompt type map is not kept in a separate JSON file because
     //origin policies might prevent it from being fetched when this script
