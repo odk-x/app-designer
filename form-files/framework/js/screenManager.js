@@ -35,6 +35,7 @@ return Backbone.View.extend({
         "click .language": "setLanguage",
         "click .ignore-changes-and-exit": "ignoreChanges",
         "click .save-incomplete-and-exit": "saveChanges",
+		"click .show-hierarchy": "showHierarchy",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
@@ -317,6 +318,36 @@ return Backbone.View.extend({
         }
         that.pageChangeActionLockout = true;
         that.controller.gotoPreviousScreen($.extend({},ctxt,{success:function(){ 
+                    that.pageChangeActionLockout = false; 
+                    ctxt.success();
+                },failure:function(m){
+                    that.pageChangeActionLockout = false; 
+                    ctxt.failure(m);
+                }}));
+        return false;
+    },
+    showHierarchy: function(evt) {
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append('screenManager.showHierarchy', 
+            ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
+        if (that.eventTimeStamp == evt.timeStamp) {
+            ctxt.append('screenManager.showHierarchy.duplicateEvent');
+            ctxt.success();
+            return false;
+        }
+        that.eventTimeStamp = evt.timeStamp;
+        this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
+        var that = this;
+        if(that.pageChangeActionLockout) {
+            ctxt.append('screenManager.showHierarchy.ignoreDisabled');
+            ctxt.success();
+            return false;
+        }
+        that.pageChangeActionLockout = true;
+        that.controller.gotoHierarchyScreen($.extend({},ctxt,{success:function(){
                     that.pageChangeActionLockout = false; 
                     ctxt.success();
                 },failure:function(m){

@@ -47,14 +47,7 @@ return {
                     _element_name: { type: 'string', isNotNullable: true, isPersisted: true, elementPath: 'elementName', elementSet: 'columnMetadata' },
                     _element_type: { type: 'string', isNotNullable: false, isPersisted: true, elementPath: 'elementType', elementSet: 'columnMetadata' },
                     _list_child_element_keys: { type: 'array', items: { type: 'string' }, isNotNullable: false, elementPath: 'listChildElementKeys', isPersisted: true, elementSet: 'columnMetadata' },
-                    _is_persisted: { type: 'boolean', isNotNullable: true, isPersisted: true, elementPath: 'isPersisted', elementSet: 'columnMetadata' },
-                    _joins: { type: 'array', items: {
-                                type: 'object', 
-                                listChildElementKeys: [],
-                                properties: {
-                                    "table_id": { type: "string", isNotNullable: false, isPersisted: false, elementKey: 'table_id', elementSet: 'columnMetadata' },
-                                    "element_key": { type: "string", isNotNullable: false, isPersisted: false, elementKey: 'elementKey', elementSet: 'columnMetadata' } } },
-								isNotNullable: false, isPersisted: true, elementPath: 'joins', elementSet: 'columnMetadata' } },
+                    _is_persisted: { type: 'boolean', isNotNullable: true, isPersisted: true, elementPath: 'isPersisted', elementSet: 'columnMetadata' } },
   // key value stores are fairly straightforward...
   keyValueStoreActiveTableConstraint: 'PRIMARY KEY ("_table_id", "_partition", "_aspect", "_key")',
   keyValueStoreActivePredefinedColumns: {
@@ -1261,6 +1254,46 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, order
             });
         });
 },
+/**
+ * Process instanceMetadataKeyValueMap and add entries to kvMap.
+ * Common code to construct the update kvMap for arguments passed
+ * in on the command line.
+ */
+processPassedInKeyValueMap: function(kvMap, instanceMetadataKeyValueMap) {
+	var that = this;
+	var propList = '';
+	var propertyCount = 0;
+	for ( var f in instanceMetadataKeyValueMap ) {
+		propList = propList + ' ' + f;
+		++propertyCount;
+		// determine if f is metadata or not...
+		var metaField, isMetadata;
+		for ( var g in that.dataTablePredefinedColumns ) {
+			var eName = g;
+			if ( 'elementPath' in that.dataTablePredefinedColumns[g] ) {
+				eName = that.dataTablePredefinedColumns[g].elementPath;
+			}
+			if ( f == eName ) {
+				metaField = g;
+				isMetadata = (that.dataTablePredefinedColumns[g].elementSet == 'instanceMetadata');
+				break;
+			}
+		}
+		
+		if ( isMetadata ) {
+			kvMap[metaField] = { value: instanceMetadataKeyValueMap[f], 
+								 isInstanceMetadata: true };
+		} else {
+			// TODO: convert f from elementPath into elementKey
+			kvMap[f] = { value: instanceMetadataKeyValueMap[f], 
+								 isInstanceMetadata: false };
+		}
+	}
+	
+	if ( propertyCount != 0 ) {
+		shim.log('I',"Extra arguments found in instanceMetadataKeyValueMap" + propList);
+	}
+},
 initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
     var that = this;
 	instanceMetadataKeyValueMap = instanceMetadataKeyValueMap || {};
@@ -1296,17 +1329,23 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     kvMap._id = { value: instanceId, isInstanceMetadata: true };
                     kvMap._instance_name = { value: instanceName, isInstanceMetadata: true };
                     kvMap._locale = { value: locale, isInstanceMetadata: true };
-                    var propertyCount = 0;
-                    for ( var f in instanceMetadataKeyValueMap ) {
-                        ++propertyCount;
-                    }
-                    if ( propertyCount != 0 ) {
-                        console.error("Extra arguments found in instanceMetadataKeyValueMap: " + instanceMetadataKeyValueMap );
-                    }
+					// overwrite these with anything that was passed in...
+					that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);
+					
                     var cs = that._insertNewKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, kvMap);
                     tmpctxt.sqlStatement = cs;
                     transaction.executeSql(cs.stmt, cs.bind);
-                }
+                } else {
+					// apply changes to the instance 
+                    var kvMap = {};
+					// gather anything that was passed in...
+					that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);
+					if ( kvMap != {} ) {
+						var cs = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, instanceId, kvMap);
+						tmpctxt.sqlStatement = cs;
+						transaction.executeSql(cs.stmt, cs.bind);
+					}
+				}
             });
         });
     }
@@ -1548,8 +1587,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 _element_name: jsonDefn.elementName,
                 _element_type: (jsonDefn.elementType == null ? jsonDefn.type : jsonDefn.elementType),
                 _list_child_element_keys : ((jsonDefn.listChildElementKeys == null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
-                _is_persisted : (jsonDefn.isPersisted ? 1 : 0),
-                _joins: null
+                _is_persisted : (jsonDefn.isPersisted ? 1 : 0)
             } );
             
             // displayed columns within Tables, at least for now, are the persisted columns only.
@@ -1620,6 +1658,14 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 _key: "footerMode",
                 _type: "string",
                 _value: 'none'
+            } );
+            fullDef._key_value_store_active.push( {
+                _table_id: tlo.table_id,
+                _partition: "Column",
+                _aspect: dbColumnName,
+                _key: "joins",
+                _type: "string",
+                _value: ""
             } );
         }
     }

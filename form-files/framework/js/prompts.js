@@ -715,10 +715,18 @@ promptTypes.linked_table = promptTypes.base.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
 		var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
+		var auxHash = '';
+		if ( that.auxillaryHash ) {
+			auxHash = that.auxillaryHash();
+			if ( auxHash && auxHash != '' && auxHash.charAt(0) != '&' ) {
+				auxHash = '&' + auxHash;
+			}
+		}
+		var fullUrl = shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
-            JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
-							 extras: { url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }}));
+            JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash,
+							 extras: { url: fullUrl }}));
         ctxt.append('linked_table.addInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -1858,9 +1866,9 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var acknowledged = this.$('#acknowledge').is(':checked');
         this.setValue($.extend({}, ctxt, {success: function() {
                 that.renderContext.choices = [{
-                    "name": "acknowledge",
-                    "label": that.acknLabel,
-                    "checked": acknowledged
+                    name: "acknowledge",
+                    display: { text: that.acknLabel },
+                    checked: acknowledged
                 }];
                 if (acknowledged && that.autoAdvance) {
                     that.controller.gotoNextScreen(ctxt);
@@ -1880,9 +1888,9 @@ promptTypes.acknowledge = promptTypes.select.extend({
             acknowledged = false;
         }
         that.renderContext.choices = [{
-            "name": "acknowledge",
-            "label": that.acknLabel,
-            "checked": acknowledged
+            name: "acknowledge",
+            display: { text: that.acknLabel },
+            checked: acknowledged
         }];
         ctxt.success(ctxt);
     }

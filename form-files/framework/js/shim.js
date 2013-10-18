@@ -233,12 +233,13 @@ window.shim = window.shim || {
         return null;
     },
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
-            this.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + 
+		var that = this;
+        if (that.enforceRefIdMatch && refId != this.refId) {
+            that.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + 
 				", " + internalPromptContext + ", " + action + ", ...)");
             return "IGNORE";
         }
-        this.log("D","shim: DO: doAction(" + refId + ", " + promptPath + 
+        that.log("D","shim: DO: doAction(" + refId + ", " + promptPath + 
 			", " + internalPromptContext + ", " + action + ", ...)");
         if ( action == 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
@@ -335,7 +336,7 @@ window.shim = window.shim || {
 			var value = JSON.parse(jsonObj);
 			window.open(value.extras.url,'_blank', null, false);
             setTimeout(function() {
-				alert("Opened new browser window for Survey content. Close to continue");
+				that.log("D","Opened new browser window for Survey content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { } }' );
             }, 1000);
@@ -345,7 +346,7 @@ window.shim = window.shim || {
 			var value = JSON.parse(jsonObj);
 			window.open(value.uri,'_blank', null, false);
             setTimeout(function() {
-				alert("Opened new browser window for 3rd party content. Close to continue");
+				that.log("D","Opened new browser window for 3rd party content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { } }' );
             }, 1000);
@@ -357,7 +358,7 @@ window.shim = window.shim || {
             this.log("D","shim: IGNORED: frameworkHasLoaded(" + refId + ", " + outcome + ")");
             return;
         }
-        this.log("D","shim: DO: frameworkHasLoaded(" + refId + ", " + outcome + ")");
+        this.log("E","shim: DO: frameworkHasLoaded(" + refId + ", " + outcome + ")");
         alert("notify container frameworkHasLoaded " + (outcome ? "SUCCESS" : "FAILURE"));
 	},
     saveAllChangesCompleted: function( refId, instanceId, asComplete ) {
