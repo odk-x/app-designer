@@ -919,8 +919,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 30,
             "_branch_label_enclosing_screen": "screen30",
             "promptIdx": 16
@@ -1088,7 +1088,7 @@
           "screen28": 14,
           "_else29": 16,
           "_endif29": 16,
-          "hierarchy": 17,
+          "contents": 17,
           "screen30": 17
         }
       },
@@ -1136,8 +1136,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 9,
             "_branch_label_enclosing_screen": "screen9",
             "promptIdx": 3
@@ -1220,7 +1220,7 @@
           "_else6": 6,
           "screen7": 6,
           "_endif8": 7,
-          "hierarchy": 8,
+          "contents": 8,
           "screen9": 8
         }
       }

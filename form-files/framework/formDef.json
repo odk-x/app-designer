@@ -19,7 +19,7 @@
           "text": "Choose a test form"
         },
         "screen": {
-          "showHierarchy": false
+          "showContents": false
         },
         "_row_num": 3
       },
@@ -34,7 +34,7 @@
           "hint": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
         },
         "screen": {
-          "showHierarchy": false
+          "showContents": false
         },
         "_row_num": 5
       },
@@ -535,8 +535,8 @@
         "prompts": [
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 3,
             "_branch_label_enclosing_screen": "screen3",
             "promptIdx": 0
@@ -573,7 +573,7 @@
           }
         ],
         "branch_label_map": {
-          "hierarchy": 2,
+          "contents": 2,
           "screen3": 2
         }
       },
@@ -786,8 +786,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 41,
             "_branch_label_enclosing_screen": "screen41",
             "promptIdx": 13
@@ -817,7 +817,7 @@
             "_row_num": 3,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "showHierarchy": false,
+            "showContents": false,
             "operationIdx": 2
           },
           {
@@ -831,7 +831,7 @@
             "_row_num": 5,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
-            "showHierarchy": false,
+            "showContents": false,
             "operationIdx": 4
           },
           {
@@ -1030,7 +1030,7 @@
           "screen36": 24,
           "selects": 26,
           "screen39": 26,
-          "hierarchy": 29,
+          "contents": 29,
           "screen41": 29
         }
       }

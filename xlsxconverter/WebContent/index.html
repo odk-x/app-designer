@@ -16,6 +16,11 @@ body {
 	font:20pt bold;
     color:#bbb
 }
+#browse {
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 1em;
+}
 #out{
     clear: both;
     height: 500px;
@@ -46,11 +51,17 @@ body {
     padding-top: .5em;
     padding-bottom: .5em;
 }
+.input {
+    padding-left: .5em;
+}
+
 </style>
 <div class="panel">
     <div id="drop">Drop an XLSX file here to convert to JSON.</div>
 </div>
-
+<div id="browse">
+    Select a file to convert to JSON<input class="input" type="file" id="browsefile"/>
+</div>
 <div id="errors"></div>
 <div id="warnings"></div>
 
@@ -66,6 +77,7 @@ body {
 <script src="underscore.js"></script>
 <script src="XLSXConverter.js"></script>
 <script>
+
 
 function removeEmptyStrings(rObjArr){
     var outArr = [];
@@ -101,9 +113,11 @@ function print_output(output) {
     if(out.innerHTML === undefined){
         out.textContent = output;
     } else {
-        out.innerHTML = output;
+        out.innerHTML = 'Loading...';
+        window.setTimeout(function() {out.innerHTML = output;}, 500);
     }
 }
+
 
 function handleSave(e) {
     var uriContent = "data:application/octet-stream," + encodeURIComponent(document.getElementById("out").value);
@@ -116,14 +130,23 @@ function handleSave(e) {
 var drop = document.getElementById('drop');
 //TODO: Test multiple forms
 function handleDrop(e) {
+    document.getElementById('browsefile').value = '';
 	e.stopPropagation();
 	e.preventDefault();
 	var files = e.dataTransfer.files;
 	var f = files[0];
+    makeReader(f);
+}
 
-	var reader = new FileReader();
-	var name = f.name;
-
+var browse = document.getElementById("browsefile");
+function handleFileSelect(e) {
+    var files = e.target.files;
+    var f = files[0];
+    makeReader(f);
+}
+function makeReader(f) {
+    var reader = new FileReader();
+    var name = f.name;
     //Clear the warnings and errors:
     var errorsEl = document.getElementById('errors');
     while (errorsEl.hasChildNodes()) {
@@ -135,21 +158,21 @@ function handleDrop(e) {
     }
 
     reader.onload = function(e) {
-		var data = e.target.result;
+        var data = e.target.result;
         var errorEl = document.createElement("p");
         if(f.name.slice(-3) === "xls"){
             errorEl.innerHTML = "Sorry, XLS files are not supported.<br />";
             errorEl.innerHTML += "You can convert your XLS file to XLSX using libreOffice or Google Docs.";
             errorsEl.appendChild(errorEl);
             /*
-			var cfb = CFB.read(data, {type:'binary'})
-			window.cfbs[name] = cfb;
-			//cfb.Paths.forEach(function(x){console.log(x); out.innerHTML+=x+"\n";});
-			var wb = parse_xlscfb(cfb);
-			var ws = wb.Sheets[wb.Directory[0]]
-			var csv = make_csv(ws);
-			var cmds = get_formulae(ws).join("\n");
-			out.innerHTML+=csv+"\n";
+            var cfb = CFB.read(data, {type:'binary'})
+            window.cfbs[name] = cfb;
+            //cfb.Paths.forEach(function(x){console.log(x); out.innerHTML+=x+"\n";});
+            var wb = parse_xlscfb(cfb);
+            var ws = wb.Sheets[wb.Directory[0]]
+            var csv = make_csv(ws);
+            var cmds = get_formulae(ws).join("\n");
+            out.innerHTML+=csv+"\n";
             */
         } else {
              try {
@@ -170,13 +193,13 @@ function handleDrop(e) {
                 throw e;
             }
         }
-	};
+    };
     try {
-	    reader.readAsBinaryString(f);
+        reader.readAsBinaryString(f);
     } catch(e) {
         errorEl.innerHTML = "Could not read file.";
         throw e;
-    }
+    }    
 }
 
 function handleDragover(e) {
@@ -184,6 +207,7 @@ function handleDragover(e) {
 	e.preventDefault();
 	e.dataTransfer.dropEffect = 'copy';
 }
+browse.addEventListener('change', handleFileSelect, false);
 drop.addEventListener('dragover', handleDragover, false);
 drop.addEventListener('drop', handleDrop, false);
 </script>

@@ -129,8 +129,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 3,
             "_branch_label_enclosing_screen": "screen3",
             "promptIdx": 1
@@ -166,7 +166,7 @@
         ],
         "branch_label_map": {
           "screen2": 0,
-          "hierarchy": 2,
+          "contents": 2,
           "screen3": 2
         }
       },
@@ -214,8 +214,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 9,
             "_branch_label_enclosing_screen": "screen9",
             "promptIdx": 3
@@ -298,7 +298,7 @@
           "_else6": 6,
           "screen7": 6,
           "_endif8": 7,
-          "hierarchy": 8,
+          "contents": 8,
           "screen9": 8
         }
       }
