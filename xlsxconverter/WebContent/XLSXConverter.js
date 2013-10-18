@@ -129,7 +129,6 @@
         "instances": null,
         "finalize": null,
         "hierarchy": null,
-        "repeat_subform": null,
         "image": {
             "type": "object",
             "elementType": "mimeUri",

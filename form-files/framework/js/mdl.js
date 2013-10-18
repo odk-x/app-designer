@@ -14,7 +14,7 @@
  * interaction model.
  * 
  */
-define({data: {},  // dataTable instance data values: (instance_name, ...)
+define({data: {},  // dataTable instance data values: (...)
 		metadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_type, _form_id, _locale)
 		tableMetadata: {}, // table_definitions and key_value_store_active("table","global") values: table_id, tableKey, dbTableName
 		columnMetadata: {},// column_definitions and key_value_store_active("column",elementKey) values: none...

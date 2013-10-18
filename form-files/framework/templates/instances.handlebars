@@ -9,7 +9,6 @@
     </h1>
     <div style="clear:both"></div>
     <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
-    <a class="createInstance" data-role="button" data-icon="new" data-iconpos="top">Create new instance</a>
 </div>
 <h3>Previous instances:</h3>
 <ul data-role="listview" data-theme="d" data-divider-theme="d">
@@ -18,7 +17,7 @@
             <li data-role="list-divider">{{dateDivider}}</li>
         {{/if}}
         <li>
-            <h3>{{instance_name}}</h3>
+            <h3>{{display_field}}</h3>
             <p><strong>Last Save Date:</strong></p>
             <p>{{savepoint_timestamp}}</p>
             {{#if savepoint_type}}<p>{{savepoint_type_text}}</p>{{/if}}
@@ -31,3 +30,6 @@
         <li>No saved instances.</li>
     {{/each}}
 </ul>
+<div>
+    <a class="createInstance" data-role="button" data-icon="new" data-iconpos="top">Create new instance</a>
+</div>

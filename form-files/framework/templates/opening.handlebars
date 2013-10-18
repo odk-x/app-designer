@@ -16,10 +16,6 @@
             </span>
         </div>
         -->
-        <div class="input-container" style="clear:both;">
-            <label>Name this instance:
-                <input class="odk" name="instance_name" value="{{instance_name}}"></input>
-            </label>
-        </div>
+		<p>{{#if display_field}}Instance: {{display_field}}{{else}}{{#if last_save_date}}Time of last save: {{last_save_date}}{{/if}}{{/if}}</p>
     </center>
 </div>

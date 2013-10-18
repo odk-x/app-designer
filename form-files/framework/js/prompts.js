@@ -343,18 +343,22 @@ promptTypes.opening = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        var instance_name = database.getDataValue('instance_name');
-        if (instance_name == null) {
-            // construct a friendly name for this form... use just the date, as the form name is well known
-            var date = new Date();
-            var dateStr = date.toISOString();
-            instance_name = dateStr; // .replace(/\W/g, "_")
-            that.renderContext.instance_name = instance_name;
-            that._screen._renderContext.enableBackNavigation = false;
-            database.setData(ctxt, 'instance_name', instance_name);
-            return;
+		var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
+		if ( lastSave != null ) {
+			var date = new Date(lastSave);
+			var dateStr = date.toISOString();
+			that.renderContext.last_save_date = dateStr;
+		} else {
+			that.renderContext.last_save_date = null;
+		}
+        
+        var displayElementName = opendatakit.getSettingValue('instance_name');
+        var displayName = (displayElementName == null) ? null : database.getDataValue(displayElementName);
+        if ( displayElementName != null ) {
+            that.renderContext.display_field = displayName;
+        } else {
+            that.renderContext.display_field = null;
         }
-        that.renderContext.instance_name = instance_name;
         that._screen._renderContext.enableBackNavigation = false;
         ctxt.success();
     },
@@ -365,19 +369,8 @@ promptTypes.opening = promptTypes.base.extend({
     },
     //Events copied from input_type, should probably refactor.
     events: {
-        "change input": "modification",
         "swipeleft .input-container": "stopPropagation",
         "swiperight .input-container": "stopPropagation"
-    },
-    modification: function(evt) {
-        var ctxt = this.controller.newContext(evt);
-        ctxt.append("prompts." + this.type + ".modification", "px: " + this.promptIdx);
-        database.setData(ctxt, 'instance_name', this.$('input').val());
-    },
-    beforeMove: function(ctxt) {
-        ctxt.append("prompts." + this.type + ".beforeMove", "px: " + this.promptIdx);
-        database.setData(ctxt, 'instance_name', this.$('input').val());
-        // ctxt.success();
     }
 });
 promptTypes.finalize = promptTypes.base.extend({
@@ -393,11 +386,19 @@ promptTypes.finalize = promptTypes.base.extend({
         headerImg: requirejs.toUrl('img/form_logo.png')
     },
     postActivate: function(ctxt) {
+        var that = this;
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-        this.renderContext.instance_name = database.getDataValue('instance_name');
+        
+        var displayElementName = opendatakit.getSettingValue('instance_name');
+        var displayName = (displayElementName == null) ? null : database.getDataValue(displayElementName);
+        if ( displayElementName != null ) {
+            that.renderContext.display_field = displayName;
+        } else {
+            that.renderContext.display_field = null;
+        }
         this._screen._renderContext.enableForwardNavigation = false;
         ctxt.success();
     },
@@ -462,8 +463,8 @@ promptTypes.instances = promptTypes.base.extend({
                     } else if ( savepoint_type == opendatakit.savepoint_type_incomplete ) {
                         term.savepoint_type_text = that.savepoint_type_incomplete_text;
                     } else {
-						term.savepoint_type_text = that.savepoint_type_checkpoint_text;
-					}
+                        term.savepoint_type_text = that.savepoint_type_checkpoint_text;
+                    }
                     return term;
                 });
                 
@@ -547,6 +548,10 @@ promptTypes.linked_table = promptTypes.base.extend({
         return '../tables/' + this.getLinkedTableId() + '/forms/' + this.linked_form_id + '/';
     },
     _linkedCachedMdl: null,
+    _linkedCachedInstanceName: null,
+    getLinkedInstanceName: function() {
+        return this._linkedCachedInstanceName;
+    },
     getLinkedMdl: function(ctxt) {
         var that = this;
         if ( that._linkedCachedMdl != null ) {
@@ -554,6 +559,12 @@ promptTypes.linked_table = promptTypes.base.extend({
         }
         var filePath = that.getFormPath() + 'formDef.json';
         opendatakit.readFormDefFile($.extend({},ctxt,{success:function(formDef) {
+             var ino = opendatakit.getSettingObject(formDef, 'instance_name');
+             if ( ino != null ) {
+                that._linkedCachedInstanceName = ino.value;
+            } else {
+                that._linkedCachedInstanceName = null;
+            }
             database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
                 that._linkedCachedMdl = tlo;
                 ctxt.success(tlo);
@@ -667,10 +678,11 @@ promptTypes.linked_table = promptTypes.base.extend({
             var selString = that.convertSelection(linkedMdl);
             var selArgs = that.selectionArgs();
             var ordBy = that.convertOrderBy(linkedMdl);
+            var displayElementName = that.getLinkedInstanceName();
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
                     that.renderContext.instances = instanceList;
                     ctxt.success();
-            }}), dbTableName, selString, selArgs, ordBy);
+            }}), dbTableName, selString, selArgs, displayElementName, ordBy);
         }}));
     },
     openInstance: function(evt) {
@@ -680,11 +692,11 @@ promptTypes.linked_table = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-		var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
+        var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
-							 extras: { url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }}));
+                             extras: { url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }}));
         ctxt.append('linked_table.openInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -717,19 +729,19 @@ promptTypes.linked_table = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-		var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
-		var auxHash = '';
-		if ( that.auxillaryHash ) {
-			auxHash = that.auxillaryHash();
-			if ( auxHash && auxHash != '' && auxHash.charAt(0) != '&' ) {
-				auxHash = '&' + auxHash;
-			}
-		}
-		var fullUrl = shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
+        var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
+        var auxHash = '';
+        if ( that.auxillaryHash ) {
+            auxHash = that.auxillaryHash();
+            if ( auxHash && auxHash != '' && auxHash.charAt(0) != '&' ) {
+                auxHash = '&' + auxHash;
+            }
+        }
+        var fullUrl = shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash,
-							 extras: { url: fullUrl }}));
+                             extras: { url: fullUrl }}));
         ctxt.append('linked_table.addInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             alert("Should be OK got >" + outcome + "<");
@@ -1896,27 +1908,6 @@ promptTypes.acknowledge = promptTypes.select.extend({
             checked: acknowledged
         }];
         ctxt.success(ctxt);
-    }
-});
-// Do not allow survey to proceed, either moving backward or forward...
-promptTypes.stop_survey = promptTypes.base.extend({
-    type: "stop_survey",
-    templatePath: "templates/stop_survey.handlebars",
-    hideInHierarchy: true,
-    validate: true,
-    postActivate: function(ctxt) {
-        var formLogo = false;//TODO: Need way to access form settings.
-        if(formLogo){
-            this.renderContext.headerImg = formLogo;
-        }
-        this.renderContext.instance_name = database.getInstanceMetaDataValue('instance_name');
-        this._screen._renderContext.enableForwardNavigation = false;
-        this._screen._renderContext.enableBackNavigation = false;
-        ctxt.success();
-    },
-    beforeMove: function(ctxt) {
-        ctxt.append("prompts." + this.type, "px: " + this.promptIdx);
-        ctxt.failure();
     }
 });
 

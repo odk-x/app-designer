@@ -30,9 +30,7 @@ return {
                      _savepoint_timestamp: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
                      _savepoint_type: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _form_id: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-                     _locale: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
-					 // this is the one required, automatically-supplied, table column
-                     instance_name: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'data' } },
+                     _locale: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' } },
   tableDefinitionsPredefinedColumns: {
                     _table_id: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
                     _table_key: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'tableKey', elementSet: 'tableMetadata' },
@@ -816,9 +814,14 @@ _deleteDataTableStmt:function(dbTableName, instanceid) {
  *
  * Requires: no globals
  */
-_getAllInstancesDataTableStmt:function(dbTableName) {
+_getAllInstancesDataTableStmt:function(dbTableName, displayElementName) {
+	if ( displayElementName == null ) {
+		displayElementName = '';
+	} else {
+		displayElementName = displayElementName + ', ';
+	}
     return {
-            stmt : 'select instance_name, _savepoint_timestamp, _savepoint_type, _locale, _id from "' +
+            stmt : 'select ' + displayElementName + ' _savepoint_timestamp, _savepoint_type, _locale, _id from "' +
                     dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp) order by _savepoint_timestamp desc;',
             bind : []
             };
@@ -1212,15 +1215,17 @@ get_all_instances:function(ctxt) {
       that.withDb($.extend({},ctxt,{success: function() {
             ctxt.success(instanceList);
         }}), function(transaction) {
-            var ss = that._getAllInstancesDataTableStmt(mdl.tableMetadata.dbTableName);
+			var displayElementName = opendatakit.getSettingValue('instance_name');
+            var ss = that._getAllInstancesDataTableStmt(mdl.tableMetadata.dbTableName, displayElementName);
             ctxt.sqlStatement = ss;
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
+                    var ts = new Date(instance._savepoint_timestamp);
                     instanceList.push({
-                        instance_name: instance.instance_name,
+                        display_field: (displayElementName == null) ? ts.toISOString(): instance[displayElementName],
                         instance_id: instance._id,
-                        savepoint_timestamp: new Date(instance._savepoint_timestamp),
+                        savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,
                         locale: instance._locale
                     });
@@ -1237,7 +1242,7 @@ delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
             transaction.executeSql(cs.stmt, cs.bind);
         });
 },
-get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, orderBy) {
+get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displayElementName, orderBy) {
       var that = this;
       var instanceList = [];
       ctxt.append('get_linked_instances', dbTableName);
@@ -1249,10 +1254,11 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, order
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
+					var ts = new Date(instance._savepoint_timestamp);
                     instanceList.push({
-                        instance_name: instance.instance_name,
+                        display_field: (displayElementName == null) ? ts.toISOString(): instance[displayElementName],
                         instance_id: instance._id,
-                        savepoint_timestamp: new Date(instance._savepoint_timestamp),
+                        savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,
                         locale: instance._locale
                     });
@@ -1332,11 +1338,9 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     var date = new Date();
                     var dateStr = date.toISOString();
                     var locale = opendatakit.getDefaultFormLocale(mdl.formDef);
-                    var instance_name = dateStr; // .replace(/\W/g, "_")
                     
                     var kvMap = {};
                     kvMap._id = { value: instanceId, isInstanceMetadata: true };
-                    kvMap.instance_name = { value: instance_name, isInstanceMetadata: false };
                     kvMap._locale = { value: locale, isInstanceMetadata: true };
 					// overwrite these with anything that was passed in...
 					that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);

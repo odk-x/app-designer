@@ -39,7 +39,7 @@
       {
         "type": "note",
         "display": {
-          "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}} for {{instance_name}}"
+          "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
         },
         "_row_num": 6
       },
@@ -133,6 +133,11 @@
           "title": "Household Member Survey"
         },
         "_row_num": 5
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "member_name",
+        "_row_num": 6
       }
     ],
     "model": [
@@ -180,6 +185,11 @@
           "title": "Household Member Survey"
         },
         "_row_num": 5
+      },
+      "instance_name": {
+        "setting_name": "instance_name",
+        "value": "member_name",
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
@@ -404,7 +414,7 @@
           {
             "type": "note",
             "display": {
-              "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}} for {{instance_name}}"
+              "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
             },
             "_row_num": 6,
             "__rowNum__": 5,

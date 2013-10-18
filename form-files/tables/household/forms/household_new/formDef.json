@@ -47,7 +47,7 @@
         "type": "linked_table",
         "display": {
           "text": "Household members:",
-          "hint": "listing of subforms displays the line_text in larger font, and the line_subtext in smaller font beside an 'edit' button."
+          "hint": "listing of linked forms displays the value of the field specified in the linekd form's instance_name setting field within a button. Click that button to edit that linked form."
         },
         "linked_form_id": "household_member",
         "selection": "household_id = ?",
@@ -60,14 +60,6 @@
           "cell_type": "formula"
         },
         "comments": "auxillaryHash defines the auxillary hash to supply when creating a new sub-form. This is an ampersand-separated list of elementName=value pairs that will be used to initialize the subform. The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
-        "line_text": {
-          "elementName": "instance_name",
-          "isInstanceMetadata": false
-        },
-        "line_subtext": {
-          "elementName": "name",
-          "isInstanceMetadata": false
-        },
         "_row_num": 7
       },
       {
@@ -403,7 +395,7 @@
             "type": "linked_table",
             "display": {
               "text": "Household members:",
-              "hint": "listing of subforms displays the line_text in larger font, and the line_subtext in smaller font beside an 'edit' button."
+              "hint": "listing of linked forms displays the value of the field specified in the linekd form's instance_name setting field within a button. Click that button to edit that linked form."
             },
             "linked_form_id": "household_member",
             "selection": "household_id = ?",
@@ -416,14 +408,6 @@
               "cell_type": "formula"
             },
             "comments": "auxillaryHash defines the auxillary hash to supply when creating a new sub-form. This is an ampersand-separated list of elementName=value pairs that will be used to initialize the subform. The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
-            "line_text": {
-              "elementName": "instance_name",
-              "isInstanceMetadata": false
-            },
-            "line_subtext": {
-              "elementName": "name",
-              "isInstanceMetadata": false
-            },
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
