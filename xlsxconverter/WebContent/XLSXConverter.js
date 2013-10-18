@@ -105,7 +105,7 @@
         "opening": null,
         "instances": null,
         "finalize": null,
-        "hierarchy": null,
+        "contents": null,
         "repeat_subform": null,
         "image": {
             "type": "object",
@@ -803,14 +803,14 @@
     					   _row_num: rowNum };
     	blockFlow.push(exitEnding);
 
-    	/** if there is no hierarchy branch label, emit one */
+    	/** if there is no contents branch label, emit one */
     	var found = false;
     	i = 0;
     	while ( !found && i < blockFlow.length ) {
     		var clause = blockFlow[i];
     		switch (clause._token_type) {
     		case "branch_label":
-    			if (clause.branch_label == "hierarchy") {
+    			if (clause.branch_label == "contents") {
     				found = true;
     			}
     			break;
@@ -818,9 +818,9 @@
     		++i;
     	}
     	if ( !found ) {
-    		/** emit a hierarchy branch label, prompt and back-action */
-    		blockFlow.push({ _token_type: "branch_label", branch_label: "hierarchy", _row_num: rowNum });
-    		blockFlow.push({ _token_type: "prompt", type: "hierarchy", _type: "hierarchy", _row_num: rowNum });
+    		/** emit a contents branch label, prompt and back-action */
+    		blockFlow.push({ _token_type: "branch_label", branch_label: "contents", _row_num: rowNum });
+    		blockFlow.push({ _token_type: "prompt", type: "contents", _type: "contents", _row_num: rowNum });
     		blockFlow.push({ _token_type: "back_in_history", _row_num: rowNum });
     	}
     	return blockFlow;

@@ -22,21 +22,21 @@ return {
     getCurrentScreenPath: function() {
         return shim.getScreenPath(opendatakit.getRefId());
     },
-	getCurrentHierarchyScreenPath: function() {
+	getCurrentContentsScreenPath: function() {
 		var currentPath = this.getCurrentScreenPath();
         if ( currentPath == null ) {
-            ctxt.append("controller.getCurrentHierarchyScreenPath: null currentScreenPath!");
+            ctxt.append("controller.getCurrentContentsScreenPath: null currentScreenPath!");
             ctxt.failure({message: "no current screen!"});
             return;
         }
 		var parts = currentPath.split("/");
         if ( parts.length < 2 ) {
-            ctxt.append("controller.getCurrentHierarchyScreenPath: invalid currentScreenPath: " + currentPath);
+            ctxt.append("controller.getCurrentContentsScreenPath: invalid currentScreenPath: " + currentPath);
             ctxt.failure({message: "invalid currentScreenPath: " + currentPath});
             return;
         }
  
-		return parts[0] + '/hierarchy';
+		return parts[0] + '/contents';
 	},
     // NOTE: this is only here to avoid having screen depend upon database.
     commitChanges: function(ctxt) {
@@ -647,16 +647,16 @@ return {
             failure: failurePop
         }), true);
     },
-    gotoHierarchyScreen: function(ctxt, options){
+    gotoContentsScreen: function(ctxt, options){
         var that = this;
         var failurePop = function(m) {
-            ctxt.append("gotoHierarchyScreen.failure", "px: " +  that.getCurrentScreenPath());
+            ctxt.append("gotoContentsScreen.failure", "px: " +  that.getCurrentScreenPath());
             that.screenManager.showScreenPopup(m); 
             ctxt.failure(m);
         };
         that.beforeMove($.extend({}, ctxt, {
             success: function() {
-                ctxt.append("gotoHierarchyScreen.beforeMove.success", "px: " +  that.getCurrentScreenPath());
+                ctxt.append("gotoContentsScreen.beforeMove.success", "px: " +  that.getCurrentScreenPath());
 				// all prompt values have been saved Prompt validation has been run if we 
 				// are advancing and the screen.allowMove(advancing) test has passed.
 				// Now step through operations until we reach a begin_screen action.
@@ -667,7 +667,7 @@ return {
 						that.gotoScreenPath(ctxt, path, options);
 					},
 					failure: failurePop
-				}), that.getCurrentHierarchyScreenPath());
+				}), that.getCurrentContentsScreenPath());
             },
             failure: failurePop
         }), false);
@@ -978,7 +978,7 @@ return {
         
         return sectionSettings.display.title;
     },
-    getSectionShowHierarchy: function() {
+    getSectionShowContents: function() {
         var that = this;
         var opPath = that.getCurrentScreenPath();
         if ( opPath == null ) {
@@ -996,8 +996,8 @@ return {
             return false;
         }
         
-        if ( 'showHierarchy' in sectionSettings ) {
-            return sectionSettings.showHierarchy;
+        if ( 'showContents' in sectionSettings ) {
+            return sectionSettings.showContents;
         }
         return true;
     },
@@ -1013,8 +1013,8 @@ return {
             this.loggingContextChain.push( log_obj );
             // SpeedTracer Logging API
             var logger = window.console;
-            if (logger && logger.markTimeline) {
-                logger.markTimeline(method);
+            if (logger && logger.timeStamp) {
+                logger.timeStamp(method);
             }
             var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail == null) ? ")" : ") detail: " + detail);
             shim.log('D', dlog);

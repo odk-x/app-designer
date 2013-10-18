@@ -1,7 +1,7 @@
-<p>Hierarchy View</p>
+<h3>Contents</h3>
 <ul data-role="listview"><!-- this is completely wrong - should not use promptLink - should have screenPath of prompt and goto that path. -->
     {{#each prompts}}
-        {{#unless hideInHierarchy}}
+        {{#unless hideInContents}}
             {{#if prompts}}
             <li>
                 <h3><a href="{{promptLink promptIdx}}">Group</a></h3>
@@ -9,8 +9,12 @@
             {{else}}
                 {{#if name}}
                 <li>
-                    <h3><a href="{{promptLink promptIdx}}">{{name}}</a>: {{getValue}}</h3>
-                    <p>{{localize display.text}}</p>
+                    <div class="select-contents-item" label="{{_branch_label_enclosing_screen}}">
+                        {{#if display.text}}
+                            {{#substitute}}{{localize display.text}}  {{getValue}}{{/substitute}}
+                        {{/if}}
+                        <a class="select-contents-item-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">edit</a>
+                    </div>
                 </li>
                 {{/if}}
             {{/if}}

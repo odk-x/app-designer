@@ -20,7 +20,7 @@ screenTypes.waiting = Backbone.View.extend({
     templatePath: "templates/waiting.handlebars",
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
-    renderContext: {showHierarchy: false, dataTheme: "d"},
+    renderContext: {showContents: false, dataTheme: "d"},
     //Template context is an user specified object that overrides the render context.
     templateContext: {},
     baseInputAttributes: {},
@@ -168,7 +168,7 @@ screenTypes.screen = Backbone.View.extend({
     templatePath: "templates/navbar.handlebars",
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
-    renderContext: {showHierarchy: true, dataTheme: "d"},
+    renderContext: {showContents: true, dataTheme: "d"},
     //Template context is an user specified object that overrides the render context.
     templateContext: {},
     baseInputAttributes: {},
@@ -255,7 +255,7 @@ screenTypes.screen = Backbone.View.extend({
         this._renderContext.hasTranslations = (locales.length > 1);
         this._renderContext.showHeader = true;
         this._renderContext.showFooter = false;
-        this._renderContext.showHierarchy = this.controller.getSectionShowHierarchy();
+        this._renderContext.showContents = this.controller.getSectionShowContents();
         this._renderContext.enableForwardNavigation = true;
         this._renderContext.enableBackNavigation = true;
         this._renderContext.enableNavigation = true;

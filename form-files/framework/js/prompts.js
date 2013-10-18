@@ -335,7 +335,7 @@ promptTypes.base = Backbone.View.extend({
 });
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
-    hideInHierarchy: true,
+    hideInContents: true,
     templatePath: "templates/opening.handlebars",
     postActivate: function(ctxt) {
         var that = this;
@@ -382,7 +382,7 @@ promptTypes.opening = promptTypes.base.extend({
 });
 promptTypes.finalize = promptTypes.base.extend({
     type:"finalize",
-    hideInHierarchy: true,
+    hideInContents: true,
     valid: true,
     templatePath: "templates/finalize.handlebars",
     events: {
@@ -424,7 +424,7 @@ promptTypes.finalize = promptTypes.base.extend({
 });
 promptTypes.json = promptTypes.base.extend({
     type:"json",
-    hideInHierarchy: true,
+    hideInContents: true,
     valid: true,
     templatePath: "templates/json.handlebars",
     postActivate: function(ctxt) {
@@ -440,7 +440,7 @@ promptTypes.json = promptTypes.base.extend({
 });
 promptTypes.instances = promptTypes.base.extend({
     type:"instances",
-    hideInHierarchy: true,
+    hideInContents: true,
     valid: true,
     saved_finalized_text: 'finalized',
     saved_incomplete_text: 'incomplete',
@@ -503,12 +503,32 @@ promptTypes.instances = promptTypes.base.extend({
         $(evt.target).attr('id'));
     }
 });
-promptTypes.hierarchy = promptTypes.base.extend({
-    type:"hierarchy",
-    hideInHierarchy: true,
+promptTypes.contents = promptTypes.base.extend({
+    type:"contents",
+    hideInContents: true,
     valid: true,
-    templatePath: 'templates/hierarchy.handlebars',
+    templatePath: 'templates/contents.handlebars',
     events: {
+    	"click .select-contents-item-btn": "selectContentsItem"
+    },
+    selectContentsItem: function(evt) {
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append("prompts." + that.type + ".selectContentsItem: click detected: " + evt.target);
+        var $target = $(evt.target).closest('.select-contents-item');
+        $target.attr("label", function(index, oldPropertyValue){
+            ctxt.append("prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue);
+            var currentPath = that.controller.getCurrentScreenPath();
+            var parts = currentPath.split("/");
+            if (parts.length < 2){
+                ctxt.append("prompts." + that.type + ".selectContentsItem: invalid currentPath" + currentPath);
+                ctxt.failure({message: "invalid currentPath: " + currentPath});
+                return;
+            }
+            var newPath = parts[0] + "/" + oldPropertyValue;
+            ctxt.append("prompts. " + that.type + ".click", "px: " + that.promptIdx);
+            that.controller.gotoScreenPath(ctxt, newPath);
+        });
     },
     postActivate: function(ctxt) {
         this.renderContext.prompts = this.controller.getCurrentSectionPrompts();
@@ -1844,7 +1864,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
 */
 promptTypes.label = promptTypes.base.extend({
     type: "label",
-    hideInHierarchy: true,
+    hideInContents: true,
     onActivate: function(ctxt) {
         alert("label.onActivate: Should never be called!");
         ctxt.failure({message: "Internal error."});
@@ -1852,7 +1872,7 @@ promptTypes.label = promptTypes.base.extend({
 });
 promptTypes.note = promptTypes.base.extend({
     type: "note",
-    hideInHierarchy: true,
+    hideInContents: true,
     templatePath: "templates/note.handlebars"
 });
 promptTypes.acknowledge = promptTypes.select.extend({
@@ -1899,7 +1919,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
 promptTypes.stop_survey = promptTypes.base.extend({
     type: "stop_survey",
     templatePath: "templates/stop_survey.handlebars",
-    hideInHierarchy: true,
+    hideInContents: true,
     validate: true,
     postActivate: function(ctxt) {
         var formLogo = false;//TODO: Need way to access form settings.

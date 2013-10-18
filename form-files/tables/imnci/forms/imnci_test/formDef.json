@@ -10113,8 +10113,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 23,
             "_branch_label_enclosing_screen": "screen23",
             "promptIdx": 5
@@ -10298,7 +10298,7 @@
           "screen21": 17,
           "_else22": 19,
           "_endif22": 19,
-          "hierarchy": 20,
+          "contents": 20,
           "screen23": 20
         }
       },
@@ -10441,8 +10441,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 19,
             "_branch_label_enclosing_screen": "screen19",
             "promptIdx": 7
@@ -10555,7 +10555,7 @@
           "_endif16": 7,
           "screen17": 7,
           "screen18": 8,
-          "hierarchy": 10,
+          "contents": 10,
           "screen19": 10
         }
       },
@@ -10776,8 +10776,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 34,
             "_branch_label_enclosing_screen": "screen34",
             "promptIdx": 13
@@ -10882,7 +10882,7 @@
           "screen14": 5,
           "_else33": 7,
           "_endif33": 7,
-          "hierarchy": 8,
+          "contents": 8,
           "screen34": 8
         }
       },
@@ -10985,8 +10985,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 10,
             "_branch_label_enclosing_screen": "screen10",
             "promptIdx": 5
@@ -11081,7 +11081,7 @@
           "_endif7": 6,
           "screen8": 6,
           "screen9": 7,
-          "hierarchy": 9,
+          "contents": 9,
           "screen10": 9
         }
       },
@@ -11264,8 +11264,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 23,
             "_branch_label_enclosing_screen": "screen23",
             "promptIdx": 10
@@ -11362,7 +11362,7 @@
           "screen14": 2,
           "screen16": 3,
           "screen22": 4,
-          "hierarchy": 6,
+          "contents": 6,
           "screen23": 6
         }
       },
@@ -11707,8 +11707,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 57,
             "_branch_label_enclosing_screen": "screen57",
             "promptIdx": 19
@@ -11902,7 +11902,7 @@
           "screen47": 11,
           "_else56": 13,
           "_endif56": 13,
-          "hierarchy": 14,
+          "contents": 14,
           "screen57": 14
         }
       },
@@ -12002,8 +12002,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 15,
             "_branch_label_enclosing_screen": "screen15",
             "promptIdx": 5
@@ -12068,7 +12068,7 @@
         "branch_label_map": {
           "screen3": 0,
           "screen11": 1,
-          "hierarchy": 3,
+          "contents": 3,
           "screen15": 3
         }
       },
@@ -12148,8 +12148,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 10,
             "_branch_label_enclosing_screen": "screen10",
             "promptIdx": 4
@@ -12203,7 +12203,7 @@
         "branch_label_map": {
           "screen3": 0,
           "screen9": 1,
-          "hierarchy": 3,
+          "contents": 3,
           "screen10": 3
         }
       },
@@ -13065,8 +13065,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 200,
             "_branch_label_enclosing_screen": "screen200",
             "promptIdx": 64
@@ -13110,7 +13110,7 @@
         ],
         "branch_label_map": {
           "screen2": 0,
-          "hierarchy": 2,
+          "contents": 2,
           "screen200": 2
         }
       },
@@ -16172,8 +16172,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 642,
             "_branch_label_enclosing_screen": "screen642",
             "promptIdx": 215
@@ -18112,7 +18112,7 @@
           "_then637": 191,
           "_else639": 193,
           "_endif641": 194,
-          "hierarchy": 195,
+          "contents": 195,
           "screen642": 195
         }
       },
@@ -18863,8 +18863,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 130,
             "_branch_label_enclosing_screen": "screen130",
             "promptIdx": 47
@@ -19206,7 +19206,7 @@
           "gt2mo_plan_A_end": 27,
           "skip_treatment": 28,
           "end_of_treatments": 28,
-          "hierarchy": 29,
+          "contents": 29,
           "screen130": 29
         }
       },
@@ -19259,8 +19259,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 9,
             "_branch_label_enclosing_screen": "screen9",
             "promptIdx": 3
@@ -19343,7 +19343,7 @@
           "_else6": 6,
           "screen7": 6,
           "_endif8": 7,
-          "hierarchy": 8,
+          "contents": 8,
           "screen9": 8
         }
       }

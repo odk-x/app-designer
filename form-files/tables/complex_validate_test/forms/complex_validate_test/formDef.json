@@ -115,7 +115,7 @@
         "_row_num": 20
       },
       {
-        "branch_label": "hierarchy",
+        "branch_label": "contents",
         "_row_num": 21
       },
       {
@@ -744,7 +744,7 @@
           "screen14": 9,
           "exitpath": 11,
           "screen17": 11,
-          "hierarchy": 15
+          "contents": 15
         }
       },
       "section1": {
@@ -838,8 +838,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 6,
             "_branch_label_enclosing_screen": "screen6",
             "promptIdx": 4
@@ -905,7 +905,7 @@
           "screen3": 1,
           "screen4": 2,
           "screen5": 3,
-          "hierarchy": 5,
+          "contents": 5,
           "screen6": 5
         }
       },
@@ -949,8 +949,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 4,
             "_branch_label_enclosing_screen": "screen4",
             "promptIdx": 2
@@ -995,7 +995,7 @@
         "branch_label_map": {
           "screen2": 0,
           "screen3": 1,
-          "hierarchy": 3,
+          "contents": 3,
           "screen4": 3
         }
       },
@@ -1045,8 +1045,8 @@
           },
           {
             "_token_type": "prompt",
-            "type": "hierarchy",
-            "_type": "hierarchy",
+            "type": "contents",
+            "_type": "contents",
             "_row_num": 9,
             "_branch_label_enclosing_screen": "screen9",
             "promptIdx": 3
@@ -1127,7 +1127,7 @@
           "_else6": 6,
           "screen7": 6,
           "_endif8": 7,
-          "hierarchy": 8,
+          "contents": 8,
           "screen9": 8
         }
       }

@@ -35,7 +35,7 @@ return Backbone.View.extend({
         "click .language": "setLanguage",
         "click .ignore-changes-and-exit": "ignoreChanges",
         "click .save-incomplete-and-exit": "saveChanges",
-		"click .show-hierarchy": "showHierarchy",
+		"click .show-contents": "showContents",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
@@ -104,7 +104,7 @@ return Backbone.View.extend({
             hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
-            showHierarchy: that.controller.getSectionShowHierarchy(),
+            showContents: that.controller.getSectionShowContents(),
             enableForwardNavigation: true,
             enableBackNavigation: true,
             enableNavigation: true
@@ -168,7 +168,7 @@ return Backbone.View.extend({
             hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
-            showHierarchy: that.controller.getSectionShowHierarchy(),
+            showContents: that.controller.getSectionShowContents(),
             enableForwardNavigation: true,
             enableBackNavigation: true,
             enableNavigation: true
@@ -326,15 +326,15 @@ return Backbone.View.extend({
                 }}));
         return false;
     },
-    showHierarchy: function(evt) {
+    showContents: function(evt) {
         var that = this;
         var ctxt = that.controller.newContext(evt);
-        ctxt.append('screenManager.showHierarchy', 
+        ctxt.append('screenManager.showContents', 
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
-            ctxt.append('screenManager.showHierarchy.duplicateEvent');
+            ctxt.append('screenManager.showContents.duplicateEvent');
             ctxt.success();
             return false;
         }
@@ -342,12 +342,12 @@ return Backbone.View.extend({
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
         var that = this;
         if(that.pageChangeActionLockout) {
-            ctxt.append('screenManager.showHierarchy.ignoreDisabled');
+            ctxt.append('screenManager.showContents.ignoreDisabled');
             ctxt.success();
             return false;
         }
         that.pageChangeActionLockout = true;
-        that.controller.gotoHierarchyScreen($.extend({},ctxt,{success:function(){
+        that.controller.gotoContentsScreen($.extend({},ctxt,{success:function(){
                     that.pageChangeActionLockout = false; 
                     ctxt.success();
                 },failure:function(m){
@@ -388,7 +388,7 @@ return Backbone.View.extend({
             form_title: that.controller.getSectionTitle(),
             locales: locales,
             hasTranslations: (locales.length > 1),
-            showHierarchy: that.controller.getSectionShowHierarchy()
+            showContents: that.controller.getSectionShowContents()
         };
         that.activeScreen.$el.append(that.optionsTemplate(that.renderContext)).trigger('pagecreate');
         $( "#optionsPopup" ).popup( "open" );
@@ -404,7 +404,7 @@ return Backbone.View.extend({
             form_title: that.controller.getSectionTitle(),
             locales: locales,
             hasTranslations: (locales.length > 1),
-            showHierarchy: that.controller.getSectionShowHierarchy()
+            showContents: that.controller.getSectionShowContents()
         };
         that.activeScreen.$el.append(that.languageTemplate(that.renderContext)).trigger('pagecreate');
         $( "#languagePopup" ).popup( "open" );
@@ -429,7 +429,7 @@ return Backbone.View.extend({
             form_title: that.controller.getSectionTitle(),
             locales: locales,
             hasTranslations: (locales.length > 1),
-            showHierarchy: that.controller.getSectionShowHierarchy(),
+            showContents: that.controller.getSectionShowContents(),
             message: msg.message
         };
         that.activeScreen.$el.append(that.screenTemplate(that.renderContext)).trigger('pagecreate');
