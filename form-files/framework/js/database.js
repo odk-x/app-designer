@@ -35,8 +35,6 @@ return {
                     _table_id: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
                     _table_key: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'tableKey', elementSet: 'tableMetadata' },
                     _db_table_name: { type: 'string', isNotNullable: true, isPersisted: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
-                    _type: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
-                    _table_id_access_controls: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'tableMetadata' },
                     _sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'tableMetadata' },
                     _last_sync_time: { type: 'integer', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
                     _sync_state: { type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'tableMetadata' },
@@ -1687,22 +1685,22 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         _table_id: tlo.table_id, 
         _table_key: dbTableName, 
         _db_table_name: dbTableName, 
-        _type: 'data', 
-        _table_id_access_controls: null, 
         _sync_tag: "", 
         _last_sync_time: -1, 
         _sync_state: 'rest', 
         _transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'tableType', _type: 'string', _value: 'data' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'accessControlTableId', _type: 'string', _value: '' } );
     fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'string', _value: JSON.stringify(opendatakit.getSectionTitle(tlo.formDef, 'survey')) } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'string', _value: JSON.stringify(displayColumnOrder) } );
     fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'primeCols', _type: 'string', _value: '' } );
     fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'coViewSettings', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'detailViewFile', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'indexCol', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'currentViewType', _type: 'string', _value: 'Spreadsheet' } );
     fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'summaryDisplayFormat', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'string', _value: JSON.stringify(displayColumnOrder) } );
-    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'ovViewSettings', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: tlo.table_id, _partition: "Table", _aspect: "default", _key: 'currentQuery', _type: 'string', _value: '' } );
 
     // get first property in fullDef -- we use native iteration ordering to step through the properties.
     var tableToUpdate = null;
