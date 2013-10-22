@@ -343,14 +343,14 @@ promptTypes.opening = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
-		var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
-		if ( lastSave != null ) {
-			var date = new Date(lastSave);
-			var dateStr = date.toISOString();
-			that.renderContext.last_save_date = dateStr;
-		} else {
-			that.renderContext.last_save_date = null;
-		}
+        var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
+        if ( lastSave != null ) {
+            var date = new Date(lastSave);
+            var dateStr = date.toISOString();
+            that.renderContext.last_save_date = dateStr;
+        } else {
+            that.renderContext.last_save_date = null;
+        }
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
         var displayName = (displayElementName == null) ? null : database.getDataValue(displayElementName);
@@ -513,7 +513,7 @@ promptTypes.contents = promptTypes.base.extend({
     valid: true,
     templatePath: 'templates/contents.handlebars',
     events: {
-    	"click .select-contents-item-btn": "selectContentsItem"
+        "click .select-contents-item-btn": "selectContentsItem"
     },
     selectContentsItem: function(evt) {
         var that = this;
@@ -719,7 +719,7 @@ promptTypes.linked_table = promptTypes.base.extend({
                              extras: { url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }}));
         ctxt.append('linked_table.openInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            alert("Should be OK got >" + outcome + "<");
+            shim.log("W","Should be OK got >" + outcome + "<");
             that.enableButtons();
             ctxt.failure({message: "Action canceled."});
         } else {
@@ -764,7 +764,7 @@ promptTypes.linked_table = promptTypes.base.extend({
                              extras: { url: fullUrl }}));
         ctxt.append('linked_table.addInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            alert("Should be OK got >" + outcome + "<");
+            shim.log("W","Should be OK got >" + outcome + "<");
             that.enableButtons();
             ctxt.failure({message: "Action canceled."});
         } else {
@@ -789,8 +789,7 @@ promptTypes.linked_table = promptTypes.base.extend({
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                shim.log("I","failure returned from intent");
-                alert(jsonObject.result);
+                shim.log("I","failure returned from intent: " + jsonString);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
                     failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
@@ -829,7 +828,7 @@ promptTypes.external_link = promptTypes.base.extend({
             JSON.stringify({ uri: fullUrl }));
         ctxt.append('external_link.openLink', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            alert("Should be OK got >" + outcome + "<");
+            shim.log("W","Should be OK got >" + outcome + "<");
             that.enableButtons();
             ctxt.failure({message: "Action canceled."});
         } else {
@@ -854,8 +853,7 @@ promptTypes.external_link = promptTypes.base.extend({
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                shim.log("I","failure returned from intent");
-                alert(jsonObject.result);
+                shim.log("I","failure returned from intent: " + jsonString);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
                     failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
@@ -1601,7 +1599,7 @@ promptTypes.media = promptTypes.base.extend({
             'capture', that.captureAction, JSON.stringify({ extras: { newFile: "opendatakit-macro(newFile)" }}));
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            alert("Should be OK got >" + outcome + "<");
+            shim.log("W","Should be OK got >" + outcome + "<");
             that.enableButtons();
             ctxt.failure({message: "Action canceled."});
         } else {
@@ -1618,7 +1616,7 @@ promptTypes.media = promptTypes.base.extend({
             'choose', that.chooseAction,  JSON.stringify({ extras: { newFile: "opendatakit-macro(newFile)" }}));
         ctxt.append('media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            alert("Should be OK got >" + outcome + "<");
+            shim.log("W","Should be OK got >" + outcome + "<");
             that.enableButtons();
             ctxt.failure({message: "Action canceled."});
         } else {
@@ -1663,8 +1661,7 @@ promptTypes.media = promptTypes.base.extend({
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                shim.log("I","failure returned from intent");
-                alert(jsonObject.result);
+                shim.log("I","failure returned from intent: " + jsonString);
                 that.enableButtons();
                 that.updateRenderContext();
                 that.reRender($.extend({}, ctxt, {success: function() {
@@ -1758,7 +1755,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
         if (outcome && outcome === "OK") {
             ctxt.success();
         } else {
-            alert("Should be OK got >" + outcome + "<");
+            shim.log("W","Should be OK got >" + outcome + "<");
             $('#block-ui').hide().off();
             ctxt.failure({message: "Action canceled."});
         }

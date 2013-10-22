@@ -338,20 +338,6 @@ screenTypes.screen = Backbone.View.extend({
     reRender: function(ctxt) {
         var that = this;
         that._screenManager.refreshScreen(ctxt);
-        return;
-        that.onActivate($.extend({},ctxt,{success:function() {
-            ctxt.newScreen = false;
-            that.render($.extend({},ctxt,{success:function() {
-                that.$el.trigger('create');
-                that.afterRender($.extend({},ctxt,{success:function() {
-                    window.$.mobile.changePage(that.$el, {
-                            changeHash: false,
-                            allowSamePageTransition: true,
-                            transition: 'none'
-                        });
-                }}));
-            }}));
-        }}));
     },
     afterRender: function(ctxt) {
         var that = this;
@@ -637,20 +623,6 @@ screenTypes.columns_2 = Backbone.View.extend({
     reRender: function(ctxt) {
         var that = this;
         that._screenManager.refreshScreen(ctxt);
-        return;
-        that.onActivate($.extend({},ctxt,{success:function() {
-            ctxt.newScreen = false;
-            that.render($.extend({},ctxt,{success:function() {
-                that.$el.trigger('create');
-                that.afterRender($.extend({},ctxt,{success:function() {
-                    window.$.mobile.changePage(that.$el, {
-                            changeHash: false,
-                            allowSamePageTransition: true,
-                            transition: 'none'
-                        });
-                }}));
-            }}));
-        }}));
     },
     afterRender: function(ctxt) {
         var that = this;

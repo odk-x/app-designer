@@ -35,7 +35,7 @@ return Backbone.View.extend({
         "click .language": "setLanguage",
         "click .ignore-changes-and-exit": "ignoreChanges",
         "click .save-incomplete-and-exit": "saveChanges",
-		"click .show-contents": "showContents",
+        "click .show-contents": "showContents",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
@@ -94,72 +94,31 @@ return Backbone.View.extend({
         }
     },
     refreshScreen: function(ctxt) {
-        var jqmAttrs = {};
         var that = this;
-        var locales = opendatakit.getFormLocalesValue();
-        // useful defaults...
-        that.renderContext = {
-            form_title: that.controller.getSectionTitle(),
-            locales: locales,
-            hasTranslations: (locales.length > 1),
-            showHeader: true,
-            showFooter: false,
-            showContents: that.controller.getSectionShowContents(),
-            enableForwardNavigation: true,
-            enableBackNavigation: true,
-            enableNavigation: true
-            // enableNavigation -- defaults to true; false to disable everything...
-            // enableForwardNavigation -- forward swipe and button
-            // enableBackNavigation -- backward swipe and button
-        };
-        that.pageChangeActionLockout = true;
-        //If the screen is slow to activate display a loading dialog.
-        //This is going to be useful if the screen gets data from a remote source.
-        var activateTimeout = window.setTimeout(function(){
-            that.showSpinnerOverlay("Loading...");
-        }, 400);
 
-        var screen = that.activeScreen;
-        if (that.activeScreen) {
-            that.activeScreen.undelegateEvents();
-        }
-        that.pageChangeActionLockout = true;
-        
-        screen.onActivate($.extend({render:true},ctxt,{success:function() {
-            ctxt.newScreen = false;
-            screen.render($.extend({},ctxt,{success:function() {
-                that.currentPageEl = screen.$el;
-                screen.$el.trigger('pagecreate');
-                screen.afterRender($.extend({},ctxt,{success:function() {
-                    // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
-                    that.savedCtxt = $.extend({}, ctxt, {success: function() {
-                            that.pageChangeActionLockout = false;
-                            window.clearTimeout(activateTimeout);
-                            that.hideSpinnerOverlay();
-                            that.pageChangeActionLockout = false;
-                            ctxt.success();
-                        },
-                        failure: function(m) {
-                            alert('Failure in screenManager.setScreen');
-                            that.pageChangeActionLockout = false;
-                            window.clearTimeout(activateTimeout);
-                            that.hideSpinnerOverlay();
-                            that.pageChangeActionLockout = false;
-                            ctxt.failure(m);
-                        }
-                    });
-                    window.clearTimeout(activateTimeout);
-                    window.$.mobile.changePage(screen.$el, {
-                            changeHash: false,
-                            allowSamePageTransition: true,
-                            transition: 'none'
-                        });
-                }}));
-            }}));
-        }}));
+        var isFirstScreen = !('previousPageEl' in that);
+        var transition = 'none'; // isFirstScreen ? 'fade' : 'slide';
+        var allowSamePageTransition = true;
+
+		var screen = that.activeScreen;
+		
+		that.commonDrawScreen(ctxt, screen, transition, allowSamePageTransition);
      },
     setScreen: function(ctxt, screen, popScreenOnExit){
         var that = this;
+        
+        // remember this parameter to support refreshScreen...
+        that.popScreenOnExit = popScreenOnExit ? true : false;
+        screen._screenManager = that;
+
+        var isFirstScreen = !('previousPageEl' in that);
+        var transition = 'none'; // isFirstScreen ? 'fade' : 'slide';
+        var allowSamePageTransition = false;
+
+		that.commonDrawScreen(ctxt, screen, transition, allowSamePageTransition);
+	},
+	commonDrawScreen: function(ctxt, screen, transition, allowSamePageTransition) {
+		var that = this;
         var locales = opendatakit.getFormLocalesValue();
         // useful defaults...
         that.renderContext = {
@@ -170,17 +129,13 @@ return Backbone.View.extend({
             showFooter: false,
             showContents: that.controller.getSectionShowContents(),
             enableForwardNavigation: true,
-            enableBackNavigation: true,
+            enableBackNavigation: ! that.popScreenOnExit,
+            showAsContinueButton: that.popScreenOnExit,
             enableNavigation: true
             // enableNavigation -- defaults to true; false to disable everything...
             // enableForwardNavigation -- forward swipe and button
             // enableBackNavigation -- backward swipe and button
         };
-        
-        if (popScreenOnExit) {
-            that.renderContext.enableBackNavigation = false;
-            that.renderContext.showAsContinueButton = true;
-        }
         
         //If the screen is slow to activate display a loading dialog.
         //This is going to be useful if the screen gets data from a remote source.
@@ -188,6 +143,8 @@ return Backbone.View.extend({
             that.showSpinnerOverlay("Loading...");
         }, 400);
         
+        that.pageChangeActionLockout = true;
+
         screen._screenManager = that;
         //A better way to do this might be to pass a controller interface object to 
         //onActivate that can trigger screen refreshes, as well as goto other screens.
@@ -198,13 +155,11 @@ return Backbone.View.extend({
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
         screen.onActivate($.extend({render:true},ctxt,{success:function(renderContext){
-                var isFirstScreen = !('previousPageEl' in that);
-                var transition = 'none'; // isFirstScreen ? 'fade' : 'slide';
                 if(renderContext){
                     $.extend(that.renderContext, renderContext);
                 }
                 if( !that.renderContext.enableBackNavigation &&
-                !that.renderContext.enableForwardNavigation ){
+                    !that.renderContext.enableForwardNavigation ) {
                     //If we try to render a jqm nav without buttons we get an error
                     //so this flag automatically disables nav in that case.
                     that.renderContext.enableNavigation = false;
@@ -213,7 +168,6 @@ return Backbone.View.extend({
                 if(that.activeScreen) {
                     that.activeScreen.undelegateEvents();
                 }
-                that.pageChangeActionLockout = true;
                 // swap the screens:
                 that.previousPageEl = that.currentPageEl;
                 that.activeScreen = screen;
@@ -248,7 +202,8 @@ return Backbone.View.extend({
                         window.clearTimeout(activateTimeout);
                         window.$.mobile.changePage(that.currentPageEl, {
                             changeHash: false,
-                            transition: transition
+                            transition: transition,
+                            allowSamePageTransition: allowSamePageTransition
                         });
                     }}));
                 }}));
