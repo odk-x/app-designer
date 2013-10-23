@@ -36,7 +36,7 @@ return {
             return;
         }
  
-		return parts[0] + '/contents';
+		return parts[0] + '/_contents';
 	},
     // NOTE: this is only here to avoid having screen depend upon database.
     commitChanges: function(ctxt) {
