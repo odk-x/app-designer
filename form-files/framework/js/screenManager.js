@@ -178,21 +178,15 @@ return Backbone.View.extend({
                 // render screen
                 screen.render($.extend({},ctxt,{success: function() {
                     
-					if ( that.currentPageEl == screen.$el ) {
-                    //if ( redraw ) {
-						// redraw destroys the old $el in the DOM at this point...
+                    if ( that.currentPageEl == screen.$el ) {
+                        // overwrites the old $el in the DOM at this point...
                         that.currentPageEl.replaceWith(screen.$el);
-					} else {
-						that.currentPageEl = screen.$el;
-						window.$.mobile.pageContainer.append(that.currentPageEl);
-					}
-                    /* } else {
-                        if ( !redraw ) {
-							that.previousPageEl = that.currentPageEl;
-						}
+                    } else {
+                        // record previous screen so we can delete it after moving on...
+                        that.previousPageEl = that.currentPageEl;
                         that.currentPageEl = screen.$el;
                         window.$.mobile.pageContainer.append(that.currentPageEl);
-                    } */
+                    }
                     
                     // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
                     that.savedCtxt = $.extend({}, ctxt, {success: function() {
@@ -407,13 +401,13 @@ return Backbone.View.extend({
     hideSpinnerOverlay: function() {
         window.$.mobile.loading( 'hide' );
     },
-	removePreviousPageEl: function() {
-		if( this.previousPageEl){
-			var pg = this.previousPageEl;
-			this.previousPageEl = null;
-			pg.empty().remove();
-		}
-	},
+    removePreviousPageEl: function() {
+        if( this.previousPageEl){
+            var pg = this.previousPageEl;
+            this.previousPageEl = null;
+            pg.empty().remove();
+        }
+    },
     handlePagechange: function(evt){
         var that = this;
         var ctxt = that.savedCtxt;
@@ -427,11 +421,11 @@ return Backbone.View.extend({
                 // inconsistent state.
                 that.activeScreen.afterRender($.extend({}, ctxt, {success: function() {
                     that.activeScreen.recursiveDelegateEvents();
-					that.removePreviousPageEl();
+                    that.removePreviousPageEl();
                     ctxt.success();
                 }}));
             } else {
-				that.removePreviousPageEl();
+                that.removePreviousPageEl();
                 ctxt.success();
             }
         } else {
