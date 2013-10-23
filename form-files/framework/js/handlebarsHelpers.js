@@ -11,7 +11,7 @@ verifyLoad('handlebarsHelpers',
     [database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                      $]);
 
 Handlebars.registerHelper('localize', function(textOrLangMap) {
-    var locale = database.getInstanceMetaDataValue('locale');
+    var locale = database.getInstanceMetaDataValue('_locale');
     if ( locale == null ) {
         locale = opendatakit.getDefaultFormLocaleValue();
     }
