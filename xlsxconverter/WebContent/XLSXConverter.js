@@ -830,7 +830,7 @@
         blockFlow.push({ _token_type: "prompt", type: "contents", _type: "contents", _row_num: rowNum });
         // this should never be reached....
         blockFlow.push({ _token_type: "back_in_history", _row_num: rowNum });
-        }
+
         return blockFlow;
     };
 
