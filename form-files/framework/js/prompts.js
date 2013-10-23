@@ -789,7 +789,7 @@ promptTypes.linked_table = promptTypes.base.extend({
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                shim.log("I","failure returned from intent: " + jsonString);
+                shim.log("W","failure returned from intent: " + jsonString);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
                     failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
@@ -853,7 +853,7 @@ promptTypes.external_link = promptTypes.base.extend({
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                shim.log("I","failure returned from intent: " + jsonString);
+                shim.log("W","failure returned from intent: " + jsonString);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
                     failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
@@ -1661,7 +1661,7 @@ promptTypes.media = promptTypes.base.extend({
             else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                shim.log("I","failure returned from intent: " + jsonString);
+                shim.log("W","failure returned from intent: " + jsonString);
                 that.enableButtons();
                 that.updateRenderContext();
                 that.reRender($.extend({}, ctxt, {success: function() {
