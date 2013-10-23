@@ -102,9 +102,11 @@ return Backbone.View.extend({
         
         // remember this parameter to support refreshScreen...
         that.popScreenOnExit = popScreenOnExit ? true : false;
-        
-        var isFirstScreen = !('previousPageEl' in that);
-        var transition = 'none'; // isFirstScreen ? 'fade' : 'slide';
+
+        // TODO: support sliding left and right transitions.
+        // This requires additional info from controller as to what
+        // direction we are going (forward or backward).
+        var transition = 'none'; // 'slide' with data-direction="reverse" or not...;
         
         that.commonDrawScreen(ctxt, screen, transition);
     },
@@ -138,7 +140,7 @@ return Backbone.View.extend({
 
         // disable events on the outgoing screen
         if (that.activeScreen) {
-            that.activeScreen.undelegateEvents();
+            that.activeScreen.recursiveUndelegateEvents();
         }
         
         //If the screen is slow to activate display a loading dialog.
@@ -169,45 +171,47 @@ return Backbone.View.extend({
                     //so this flag automatically disables nav in that case.
                     that.renderContext.enableNavigation = false;
                 }
-                if ( !redraw ) {
-                    // make the new screen the active screen
-                    that.activeScreen = screen;
-                }
+
+                // make the new screen the active screen (...no-op if redraw).
+                that.activeScreen = screen;
 
                 // render screen
                 screen.render($.extend({},ctxt,{success: function() {
                     
-                    if ( redraw ) {
+					if ( that.currentPageEl == screen.$el ) {
+                    //if ( redraw ) {
+						// redraw destroys the old $el in the DOM at this point...
                         that.currentPageEl.replaceWith(screen.$el);
-                    } else {
-						that.previousPageEl = that.currentPageEl;
+					} else {
+						that.currentPageEl = screen.$el;
+						window.$.mobile.pageContainer.append(that.currentPageEl);
+					}
+                    /* } else {
+                        if ( !redraw ) {
+							that.previousPageEl = that.currentPageEl;
+						}
                         that.currentPageEl = screen.$el;
                         window.$.mobile.pageContainer.append(that.currentPageEl);
-                    }
+                    } */
                     
-                    // TODO: unclear what proper action should be for a failure
-                    // during afterRender(). For now, the display ends up in an 
-                    // inconsistent state.
-                    screen.afterRender($.extend({}, ctxt, {success: function() {
-                        // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
-                        that.savedCtxt = $.extend({}, ctxt, {success: function() {
-                                that.pageChangeActionLockout = false;
-                                window.clearTimeout(activateTimeout);
-                                that.hideSpinnerOverlay();
-                                that.pageChangeActionLockout = false;
-                                ctxt.success();
-                            }});
-                        // turn first child into a page...
-                        //append it to the page container
-                        window.clearTimeout(activateTimeout);
-                        window.$.mobile.changePage(that.currentPageEl, {
-                            changeHash: false,
-                            transition: transition,
-                            allowSamePageTransition: true
-                        });
-                    }}));
+                    // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
+                    that.savedCtxt = $.extend({}, ctxt, {success: function() {
+                            window.clearTimeout(activateTimeout);
+                            that.hideSpinnerOverlay();
+                            that.pageChangeActionLockout = false;
+                            ctxt.success();
+                        }});
+                    // turn first child into a page...
+                    //append it to the page container
+                    // maybe need to drop spinner for jqMobile?: window.clearTimeout(activateTimeout);
+                    window.$.mobile.changePage(that.currentPageEl, {
+                        changeHash: false,
+                        transition: transition,
+                        allowSamePageTransition: true
+                    });
                 }}));
             }, failure: function(m) {
+                that.savedCtxt = null;
                 window.clearTimeout(activateTimeout);
                 that.hideSpinnerOverlay();
                 that.pageChangeActionLockout = false;
@@ -403,24 +407,36 @@ return Backbone.View.extend({
     hideSpinnerOverlay: function() {
         window.$.mobile.loading( 'hide' );
     },
+	removePreviousPageEl: function() {
+		if( this.previousPageEl){
+			var pg = this.previousPageEl;
+			this.previousPageEl = null;
+			pg.empty().remove();
+		}
+	},
     handlePagechange: function(evt){
-        var ctxt = this.savedCtxt;
-        this.savedCtxt = null;
+        var that = this;
+        var ctxt = that.savedCtxt;
+        that.savedCtxt = null;
         
         if ( ctxt != null ) {
             ctxt.append('screenManager.handlePageChange.linked');
-            if ( this.activeScreen ) {
-                this.activeScreen.delegateEvents();
+            if ( that.activeScreen ) {
+                // TODO: unclear what proper action should be for a failure
+                // during afterRender(). For now, the display ends up in an 
+                // inconsistent state.
+                that.activeScreen.afterRender($.extend({}, ctxt, {success: function() {
+                    that.activeScreen.recursiveDelegateEvents();
+					that.removePreviousPageEl();
+                    ctxt.success();
+                }}));
+            } else {
+				that.removePreviousPageEl();
+                ctxt.success();
             }
-            if(this.previousPageEl){
-                var pg = this.previousPageEl;
-                this.previousPageEl = null;
-                pg.empty().remove();
-            }
-            ctxt.success();
         } else {
             ctxt = this.controller.newContext(evt);
-            ctxt.append('screenManager.handlePageChange.error');
+            shim.log('E','screenManager.handlePageChange.error');
             this.pageChangeActionLockout = false;
             ctxt.failure({message: "Internal error. Unexpected triggering of page change event."});
         }

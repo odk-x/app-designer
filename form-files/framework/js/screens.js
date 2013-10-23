@@ -148,9 +148,22 @@ screenTypes.waiting = Backbone.View.extend({
             console.error(that);
             alert("Error in template.");
         }
-        that.delegateEvents();
         ctxt.success();
     },
+	recursiveUndelegateEvents: function() {
+		var that = this;
+		that.undelegateEvents();
+        $.each(that.activePrompts, function(idx, prompt){
+            prompt.undelegateEvents();
+		});
+	},
+	recursiveDelegateEvents: function() {
+		var that = this;
+        $.each(that.activePrompts, function(idx, prompt){
+            prompt.delegateEvents();
+		});
+		that.delegateEvents();
+	},
     /**
      * Give the prompts a chance to save their state to the database.
      * Also, enable the screen to enforce its own criteria for when it
@@ -371,11 +384,23 @@ screenTypes.screen = Backbone.View.extend({
                 alert("Sub-prompt has not been rendered. See console for details.");
             }
             $container.append(prompt.$el);
-            prompt.delegateEvents();
         });
-        that.delegateEvents();
         ctxt.success();
     },
+	recursiveUndelegateEvents: function() {
+		var that = this;
+		that.undelegateEvents();
+        $.each(that.activePrompts, function(idx, prompt){
+            prompt.undelegateEvents();
+		});
+	},
+	recursiveDelegateEvents: function() {
+		var that = this;
+        $.each(that.activePrompts, function(idx, prompt){
+            prompt.delegateEvents();
+		});
+		that.delegateEvents();
+	},
     /**
      * allowMove
      *   advancing == true if the user is not going 'back'
@@ -670,16 +695,28 @@ screenTypes.columns_2 = Backbone.View.extend({
             else {
                 col_a.append(prompt.$el);
             }
-            prompt.delegateEvents();
         });
         
         grid.append(col_a);
         grid.append(col_b);
         $container.append(grid);
 
-        that.delegateEvents();
         ctxt.success();
     },
+	recursiveUndelegateEvents: function() {
+		var that = this;
+		that.undelegateEvents();
+        $.each(that.activePrompts, function(idx, prompt){
+            prompt.undelegateEvents();
+		});
+	},
+	recursiveDelegateEvents: function() {
+		var that = this;
+        $.each(that.activePrompts, function(idx, prompt){
+            prompt.delegateEvents();
+		});
+		that.delegateEvents();
+	},
     /**
      * allowMove
      *   advancing == true if the user is not going 'back'
