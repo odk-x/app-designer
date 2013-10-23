@@ -608,7 +608,7 @@
           }
         ],
         "branch_label_map": {
-          "contents": 2,
+          "_contents": 2,
           "screen3": 2
         }
       },
@@ -1096,7 +1096,7 @@
           "screen39": 26,
           "twoColumn": 28,
           "screen42": 28,
-          "contents": 31,
+          "_contents": 31,
           "screen44": 31
         }
       }
