@@ -101,14 +101,6 @@
       {
         "clause": "exit section",
         "_row_num": 17
-      },
-      {
-        "branch_label": "contents",
-        "_row_num": 18
-      },
-      {
-        "clause": "goto welcome_screen",
-        "_row_num": 19
       }
     ],
     "section1": [
@@ -520,6 +512,14 @@
             "_type": "note",
             "_branch_label_enclosing_screen": "screen16",
             "promptIdx": 5
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 18,
+            "_branch_label_enclosing_screen": "screen18",
+            "promptIdx": 6
           }
         ],
         "validation_tag_map": {
@@ -610,18 +610,21 @@
             "operationIdx": 11
           },
           {
-            "clause": "goto welcome_screen",
-            "_row_num": 19,
-            "__rowNum__": 18,
-            "_token_type": "goto_label",
-            "_branch_label": "welcome_screen",
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 18,
             "operationIdx": 12
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 20,
+            "_row_num": 18,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 13
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 18,
+            "operationIdx": 14
           }
         ],
         "branch_label_map": {
@@ -635,7 +638,8 @@
           "screen13": 8,
           "exitpath": 10,
           "screen16": 10,
-          "contents": 12
+          "_contents": 13,
+          "screen18": 13
         }
       },
       "section1": {
@@ -728,7 +732,7 @@
         "branch_label_map": {
           "screen2": 0,
           "screen3": 1,
-          "contents": 3,
+          "_contents": 3,
           "screen4": 3
         }
       },
@@ -822,7 +826,7 @@
         "branch_label_map": {
           "screen2": 0,
           "screen3": 1,
-          "contents": 3,
+          "_contents": 3,
           "screen4": 3
         }
       },
@@ -956,7 +960,7 @@
           "_else6": 6,
           "screen7": 6,
           "_endif8": 7,
-          "contents": 8,
+          "_contents": 8,
           "screen9": 8
         }
       }

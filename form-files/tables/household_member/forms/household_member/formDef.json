@@ -571,7 +571,7 @@
           "screen8": 6,
           "screen9": 7,
           "screen10": 8,
-          "contents": 10,
+          "_contents": 10,
           "screen11": 10
         }
       },
@@ -703,7 +703,7 @@
           "_else6": 6,
           "screen7": 6,
           "_endif8": 7,
-          "contents": 8,
+          "_contents": 8,
           "screen9": 8
         }
       }

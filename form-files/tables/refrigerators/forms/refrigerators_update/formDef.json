@@ -402,7 +402,7 @@
           "screen2": 0,
           "screen3": 1,
           "screen4": 2,
-          "contents": 4,
+          "_contents": 4,
           "screen5": 4
         }
       },
@@ -534,7 +534,7 @@
           "_else6": 6,
           "screen7": 6,
           "_endif8": 7,
-          "contents": 8,
+          "_contents": 8,
           "screen9": 8
         }
       }
