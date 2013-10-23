@@ -124,7 +124,6 @@ screenTypes.waiting = Backbone.View.extend({
     reRender: function(ctxt) {
         var that = this;
         that.onActivate($.extend({},ctxt,{success:function() {
-            ctxt.newScreen = false;
             that.render($.extend({},ctxt,{success:function() {
                 that.$el.trigger('create');
                 that.afterRender(ctxt);
