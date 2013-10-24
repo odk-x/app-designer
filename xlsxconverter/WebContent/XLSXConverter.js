@@ -116,15 +116,11 @@
             }
         },
         "barcode": {"type":"string"},
-        "with_next": {"type":"string"},
-        "goto": null,
-        "label": null,
-        "screen": null,
         "note": null,
+        "_section" : null, // synthesized prompt inserted where 'do section' occurs
         "linked_table": null,
         "user_branch": null,
         "external_link": null,
-        "error" : null,
         "opening": null,
         "instances": null,
         "finalize": null,
@@ -940,14 +936,29 @@
             case "assign":
             case "goto_label":
             case "back_in_history":
-            case "do_section":
             case "exit_section":
             case "validate":
                 flattened.push(clause);
                 ++i;
                 break;
+            case "do_section":
+                var newSectionLabel = "_section"+clause._row_num;
+                var labelEntry = { _token_type: "branch_label",
+                        branch_label: newSectionLabel, _row_num: clause._row_num };
+                flattened.push(labelEntry);
+                // create a psuedo-prompt that references this section
+                // inform the prompt of the tag for the enclosing screen...
+                var psuedoPrompt = _.extend({}, clause,
+                	{ _token_type: "prompt",
+                	  _type: "_section",
+            		  promptIdx: prompts.length,
+            		  _branch_label_enclosing_screen: newSectionLabel } );
+                prompts.push(psuedoPrompt);
+                flattened.push(clause);
+                ++i;
+                break;
             case "prompt":
-                var newScreenLabel = "screen"+clause._row_num;
+                var newScreenLabel = "_screen"+clause._row_num;
                 var labelEntry = { _token_type: "branch_label",
                         branch_label: newScreenLabel, _row_num: clause._row_num };
                 flattened.push(labelEntry);
@@ -974,7 +985,7 @@
                 ++i;
                 break;
             case "begin_screen":
-                var newScreenLabel = "screen"+clause._row_num;
+                var newScreenLabel = "_screen"+clause._row_num;
                 var labelEntry = { _token_type: "branch_label",
                         branch_label: newScreenLabel, _row_num: clause._row_num };
                 flattened.push(labelEntry);

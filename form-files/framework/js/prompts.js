@@ -3,11 +3,11 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  $,       _,            translations, _hh) {
+define(['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
+function(mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            translations, _hh) {
 verifyLoad('database',
-    ['mdl','database','opendatakit','controller','backbone','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
-    [mdl,  database,  opendatakit,  controller,  Backbone,  Handlebars,  promptTypes,  $,       _,            translations, _hh]);
+    ['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
+    [mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,   Handlebars,  promptTypes,  $,       _,            translations, _hh]);
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -35,13 +35,6 @@ promptTypes.base = Backbone.View.extend({
     // inputAttributes are a user-specified object that overrides baseInputAttributes.
     inputAttributes: {},
     /**
-     * afterInitialize is user defined.
-     * Called during the building of the survey, before any 
-     * instance data has been fetched or templates loaded.
-     **/
-    afterInitialize: function() {
-    },
-    /**
      * default is a function field in the worksheet.
      * Called during rendering if the prompt has backing
      * storage (a 'name') and the value of that storage is null.
@@ -59,12 +52,9 @@ promptTypes.base = Backbone.View.extend({
      * initialize
      * called via Backbone when a new instance of this
      * prototype is constructed.
-     *
-     * User-extensible via overriding of the afterInitialize() method.
      */
     initialize: function(args) {
         $.extend(this, args);
-        this.afterInitialize();
     },
     /**
      * getPromptPath
@@ -292,6 +282,13 @@ promptTypes.base = Backbone.View.extend({
     validate: function(ctxt) {
         return this.baseValidate(ctxt);
     },
+	formattedValueForContentsDisplay: function() {
+		if ( !this.name ) {
+			return '';
+		} else {
+			return getValue();
+		}
+	},
     getValue: function() {
         if (!this.name) {
             console.error("prompts."+this.type+
@@ -1874,18 +1871,26 @@ promptTypes.geopoint = promptTypes.input_type.extend({
     }
 });
 */
-promptTypes.label = promptTypes.base.extend({
-    type: "label",
-    hideInContents: true,
-    onActivate: function(ctxt) {
-        alert("label.onActivate: Should never be called!");
-        ctxt.failure({message: "Internal error."});
-    }
-});
 promptTypes.note = promptTypes.base.extend({
     type: "note",
-    hideInContents: true,
     templatePath: "templates/note.handlebars"
+});
+// psuedo-prompt emitted by do_section so that sections appear in contents list
+promptTypes._section = promptTypes.base.extend({
+    type: "_section",
+    templatePath: "templates/_section.handlebars",
+	// need to do this somewhere...
+	formattedValueForContentsDisplay: function() {
+        var formDef = opendatakit.getCurrentFormDef();
+        var sectionSettings = opendatakit.getSettingObject(formDef,this._do_section_name);
+		var textOrLangMap = sectionSettings.display.title;
+		var locale = database.getInstanceMetaDataValue('_locale');
+		if ( locale == null ) {
+			locale = opendatakit.getDefaultFormLocaleValue();
+		}
+		var str = formulaFunctions.localize(textOrLangMap,locale);
+		return str;
+	}
 });
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",

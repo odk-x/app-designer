@@ -32,7 +32,6 @@ screenTypes.waiting = Backbone.View.extend({
     initialize: function(args) {
         var that = this;
         $.extend(this, args);
-        this.afterInitialize();
     },
     getActivePrompts: function(context) {
         return activePrompts;
@@ -106,7 +105,6 @@ screenTypes.waiting = Backbone.View.extend({
     afterInitialize: function() {},
     onActivate: function(ctxt) {
         var that = this;
-        // this once held the code to invoke with_next and with_next_validate actions
         that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
                 that.initializeRenderContext(ctxt);
             }}));
@@ -578,10 +576,6 @@ screenTypes.columns_2 = Backbone.View.extend({
         $.extend(this._renderContext, this.templateContext);
         this.afterInitializeRenderContext(ctxt);
     },
-    /**
-     * afterInitialize is user defined
-     **/
-    afterInitialize: function() {},
     preActivate: function(ctxt) {
         var that = this;
         // this once held the code to invoke with_next and with_next_validate actions
