@@ -518,17 +518,9 @@ promptTypes.contents = promptTypes.base.extend({
         ctxt.append("prompts." + that.type + ".selectContentsItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.select-contents-item');
         $target.attr("label", function(index, oldPropertyValue){
-            ctxt.append("prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue);
-            var currentPath = that.controller.getCurrentScreenPath();
-            var parts = currentPath.split("/");
-            if (parts.length < 2){
-                ctxt.append("prompts." + that.type + ".selectContentsItem: invalid currentPath" + currentPath);
-                ctxt.failure({message: "invalid currentPath: " + currentPath});
-                return;
-            }
-            var newPath = parts[0] + "/" + oldPropertyValue;
-            ctxt.append("prompts. " + that.type + ".click", "px: " + that.promptIdx);
-            that.controller.gotoScreenPath(ctxt, newPath);
+            ctxt.append("prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
+				"px: " + that.promptIdx);
+            that.controller.gotoScreenPath(ctxt, oldPropertyValue);
         });
     },
     postActivate: function(ctxt) {

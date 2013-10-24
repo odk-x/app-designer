@@ -459,7 +459,7 @@
             "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "user_branch",
-            "_branch_label_enclosing_screen": "_screen3",
+            "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 0
           },
           {
@@ -474,7 +474,7 @@
             "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 1
           },
           {
@@ -485,7 +485,7 @@
             "_do_section_name": "section1",
             "_type": "_section",
             "promptIdx": 2,
-            "_branch_label_enclosing_screen": "_section7"
+            "_branch_label_enclosing_screen": "section1/_contents"
           },
           {
             "type": "note",
@@ -499,7 +499,7 @@
             "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 3
           },
           {
@@ -514,7 +514,7 @@
             "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 4
           },
           {
@@ -525,7 +525,7 @@
             "_do_section_name": "section2",
             "_type": "_section",
             "promptIdx": 5,
-            "_branch_label_enclosing_screen": "_section12"
+            "_branch_label_enclosing_screen": "section2/_contents"
           },
           {
             "type": "note",
@@ -539,7 +539,7 @@
             "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "_screen13",
+            "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 6
           },
           {
@@ -554,7 +554,7 @@
             "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "_screen16",
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 7
           },
           {
@@ -562,7 +562,7 @@
             "type": "contents",
             "_type": "contents",
             "_row_num": 18,
-            "_branch_label_enclosing_screen": "_screen18",
+            "_branch_label_enclosing_screen": "survey/_screen18",
             "promptIdx": 8
           }
         ],
@@ -676,11 +676,9 @@
           "_screen3": 0,
           "branch1": 2,
           "_screen6": 2,
-          "_section7": 3,
           "_screen8": 4,
           "branch2": 6,
           "_screen11": 6,
-          "_section12": 7,
           "_screen13": 8,
           "exitpath": 10,
           "_screen16": 10,
@@ -705,7 +703,7 @@
             "__rowNum__": 1,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "_screen2",
+            "_branch_label_enclosing_screen": "section1/_screen2",
             "promptIdx": 0
           },
           {
@@ -727,7 +725,7 @@
             "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "_screen3",
+            "_branch_label_enclosing_screen": "section1/_screen3",
             "promptIdx": 1
           },
           {
@@ -735,7 +733,7 @@
             "type": "contents",
             "_type": "contents",
             "_row_num": 4,
-            "_branch_label_enclosing_screen": "_screen4",
+            "_branch_label_enclosing_screen": "section1/_screen4",
             "promptIdx": 2
           }
         ],
@@ -799,7 +797,7 @@
             "__rowNum__": 1,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "_screen2",
+            "_branch_label_enclosing_screen": "section2/_screen2",
             "promptIdx": 0
           },
           {
@@ -821,7 +819,7 @@
             "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "_screen3",
+            "_branch_label_enclosing_screen": "section2/_screen3",
             "promptIdx": 1
           },
           {
@@ -829,7 +827,7 @@
             "type": "contents",
             "_type": "contents",
             "_row_num": 4,
-            "_branch_label_enclosing_screen": "_screen4",
+            "_branch_label_enclosing_screen": "section2/_screen4",
             "promptIdx": 2
           }
         ],
@@ -895,7 +893,7 @@
             },
             "_token_type": "prompt",
             "_type": "opening",
-            "_branch_label_enclosing_screen": "_screen3",
+            "_branch_label_enclosing_screen": "initial/_screen3",
             "promptIdx": 0
           },
           {
@@ -905,7 +903,7 @@
             "_do_section_name": "survey",
             "_type": "_section",
             "promptIdx": 1,
-            "_branch_label_enclosing_screen": "_section4"
+            "_branch_label_enclosing_screen": "survey/_contents"
           },
           {
             "_row_num": 5,
@@ -915,7 +913,7 @@
             },
             "_token_type": "prompt",
             "_type": "finalize",
-            "_branch_label_enclosing_screen": "_screen5",
+            "_branch_label_enclosing_screen": "initial/_screen5",
             "promptIdx": 2
           },
           {
@@ -926,7 +924,7 @@
             },
             "_token_type": "prompt",
             "_type": "instances",
-            "_branch_label_enclosing_screen": "_screen7",
+            "_branch_label_enclosing_screen": "initial/_screen7",
             "promptIdx": 3
           },
           {
@@ -934,7 +932,7 @@
             "type": "contents",
             "_type": "contents",
             "_row_num": 9,
-            "_branch_label_enclosing_screen": "_screen9",
+            "_branch_label_enclosing_screen": "initial/_screen9",
             "promptIdx": 4
           }
         ],
@@ -1011,7 +1009,6 @@
         "branch_label_map": {
           "_then2": 2,
           "_screen3": 2,
-          "_section4": 3,
           "_screen5": 4,
           "_else6": 6,
           "_screen7": 6,

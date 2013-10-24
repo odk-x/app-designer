@@ -878,7 +878,7 @@
                 break;
             case "prompt":
                 var promptIdx = prompts.length;
-                clause._branch_label_enclosing_screen = enclosingScreenLabel;
+                clause._branch_label_enclosing_screen = sheetName + '/' + enclosingScreenLabel;
                 clause.promptIdx = promptIdx;
                 prompts.push(clause);
                 updateValidationTagMap( validationTagMap, promptIdx, clause);
@@ -942,17 +942,16 @@
                 ++i;
                 break;
             case "do_section":
-                var newSectionLabel = "_section"+clause._row_num;
-                var labelEntry = { _token_type: "branch_label",
-                        branch_label: newSectionLabel, _row_num: clause._row_num };
-                flattened.push(labelEntry);
-                // create a psuedo-prompt that references this section
-                // inform the prompt of the tag for the enclosing screen...
+                // create a psuedo-prompt in this section that has a
+				// _branch_label_enclosing_screen that references the 
+				// contents prompt within the subsection.  This is used
+				// by the contents menu item to navigate into the contents
+				// screen of the subsection.
                 var psuedoPrompt = _.extend({}, clause,
                 	{ _token_type: "prompt",
                 	  _type: "_section",
             		  promptIdx: prompts.length,
-            		  _branch_label_enclosing_screen: newSectionLabel } );
+            		  _branch_label_enclosing_screen: clause._do_section_name + '/_contents' } );
                 prompts.push(psuedoPrompt);
                 flattened.push(clause);
                 ++i;
@@ -964,7 +963,7 @@
                 flattened.push(labelEntry);
                 // inform the prompt of the tag for the enclosing screen...
                 var promptIdx = prompts.length;
-                clause._branch_label_enclosing_screen = newScreenLabel;
+                clause._branch_label_enclosing_screen = sheetName + '/' + newScreenLabel;
                 clause.promptIdx = promptIdx;
                 prompts.push(clause);
                 updateValidationTagMap( validationTagMap, promptIdx, clause);

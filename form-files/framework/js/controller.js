@@ -508,7 +508,7 @@ return {
                                 that.getOperation($.extend({},ctxt,{success:function(op){
                                     ctxt.failedOperation = op;
                                     ctxt.failure(msg);
-                                    }}), promptCandidate._section_name + "/" + promptCandidate._branch_label_enclosing_screen);
+                                    }}), promptCandidate._branch_label_enclosing_screen);
                             }}));
                     }}) );
             } catch(e) {
