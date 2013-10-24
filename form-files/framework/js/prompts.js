@@ -286,7 +286,7 @@ promptTypes.base = Backbone.View.extend({
 		if ( !this.name ) {
 			return '';
 		} else {
-			return getValue();
+			return this.getValue();
 		}
 	},
     getValue: function() {
