@@ -124,7 +124,7 @@
             "__rowNum__": 1,
             "_token_type": "prompt",
             "_type": "breathcounter",
-            "_branch_label_enclosing_screen": "screen2",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
@@ -132,7 +132,7 @@
             "type": "contents",
             "_type": "contents",
             "_row_num": 3,
-            "_branch_label_enclosing_screen": "screen3",
+            "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 1
           }
         ],
@@ -165,9 +165,9 @@
           }
         ],
         "branch_label_map": {
-          "screen2": 0,
+          "_screen2": 0,
           "_contents": 2,
-          "screen3": 2
+          "_screen3": 2
         }
       },
       "initial": {
@@ -187,8 +187,17 @@
             },
             "_token_type": "prompt",
             "_type": "opening",
-            "_branch_label_enclosing_screen": "screen3",
+            "_branch_label_enclosing_screen": "initial/_screen3",
             "promptIdx": 0
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 1,
+            "_branch_label_enclosing_screen": "survey/_contents"
           },
           {
             "_row_num": 5,
@@ -198,8 +207,8 @@
             },
             "_token_type": "prompt",
             "_type": "finalize",
-            "_branch_label_enclosing_screen": "screen5",
-            "promptIdx": 1
+            "_branch_label_enclosing_screen": "initial/_screen5",
+            "promptIdx": 2
           },
           {
             "_row_num": 7,
@@ -209,16 +218,16 @@
             },
             "_token_type": "prompt",
             "_type": "instances",
-            "_branch_label_enclosing_screen": "screen7",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "initial/_screen7",
+            "promptIdx": 3
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
             "_row_num": 9,
-            "_branch_label_enclosing_screen": "screen9",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "initial/_screen9",
+            "promptIdx": 4
           }
         ],
         "validation_tag_map": {
@@ -257,7 +266,7 @@
           {
             "_row_num": 5,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
@@ -270,7 +279,7 @@
           {
             "_row_num": 7,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
@@ -282,7 +291,7 @@
           {
             "_row_num": 9,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
@@ -293,13 +302,13 @@
         ],
         "branch_label_map": {
           "_then2": 2,
-          "screen3": 2,
-          "screen5": 4,
+          "_screen3": 2,
+          "_screen5": 4,
           "_else6": 6,
-          "screen7": 6,
+          "_screen7": 6,
           "_endif8": 7,
           "_contents": 8,
-          "screen9": 8
+          "_screen9": 8
         }
       }
     }
