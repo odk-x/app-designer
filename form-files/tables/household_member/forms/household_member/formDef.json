@@ -41,6 +41,7 @@
         "display": {
           "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
         },
+        "hideInContents": true,
         "_row_num": 6
       },
       {
@@ -416,6 +417,7 @@
             "display": {
               "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
             },
+            "hideInContents": true,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",

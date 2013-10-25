@@ -261,6 +261,7 @@
             "hindi": "पूछें"
           }
         },
+        "hideInContents": true,
         "_row_num": 4
       },
       {
@@ -347,6 +348,7 @@
             "hindi": "<strong>ख़तरा चिन्ह </strong>"
           }
         },
+        "hideInContents": true,
         "_row_num": 15
       },
       {
@@ -362,6 +364,7 @@
             "hindi": "<li>पी नही सकना या स्तनपान नही कर सकना </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 17
       },
       {
@@ -381,6 +384,7 @@
             "hindi": "<li>सब कुछ ऊलती कर देना</li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 20
       },
       {
@@ -400,6 +404,7 @@
             "hindi": "<li>दौरे पढ़ना </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 23
       },
       {
@@ -419,6 +424,7 @@
             "hindi": "<li>सुस्त या बेहोश</li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 26
       },
       {
@@ -438,6 +444,7 @@
             "hindi": "<li>ऑक्सीजन संतृप्ति कम से कम 90%</li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 29
       },
       {
@@ -556,6 +563,7 @@
             "hindi": "पूछें"
           }
         },
+        "hideInContents ": true,
         "_row_num": 4
       },
       {
@@ -599,6 +607,7 @@
             "hindi": "शिशु की सामानया स्थिति देखें."
           }
         },
+        "hideInContents ": true,
         "_row_num": 10
       },
       {
@@ -644,6 +653,7 @@
           }
         },
         "required": true,
+        "hideInContents ": true,
         "_row_num": 17
       },
       {
@@ -775,6 +785,7 @@
             "hindi": "पूछें:"
           }
         },
+        "hideInContents": true,
         "_row_num": 19
       },
       {
@@ -865,6 +876,7 @@
             "hindi": "देखें व महसूस करें."
           }
         },
+        "hideInContents": true,
         "_row_num": 32
       },
       {
@@ -918,6 +930,7 @@
             "hindi": "निम्नलिखित पे निशान करे"
           }
         },
+        "hideInContents": true,
         "_row_num": 40
       },
       {
@@ -1156,6 +1169,7 @@
             "hindi": "देखें व महसूस करें."
           }
         },
+        "hideInContents": true,
         "_row_num": 4
       },
       {
@@ -1217,6 +1231,7 @@
         "display": {
           "text": "<div style=\"background-color:#F5A9A9;\"><strong>GENERAL DANGER SIGN PRESENT</div>"
         },
+        "hideInContents": true,
         "_row_num": 4
       },
       {
@@ -1233,6 +1248,7 @@
         "display": {
           "text": "<u>RESPIRATORY CLASSIFICATION: </u>"
         },
+        "hideInContents": true,
         "_row_num": 7
       },
       {
@@ -1248,6 +1264,7 @@
             "hindi": "<strong>गंभीर निमोनिया या बहुत गंभीर बीमारी</strong>"
           }
         },
+        "hideInContents": true,
         "_row_num": 9
       },
       {
@@ -1260,6 +1277,7 @@
         "display": {
           "hint": "General danger sign pesent"
         },
+        "hideInContents": true,
         "_row_num": 11
       },
       {
@@ -1279,6 +1297,7 @@
             "hindi": "पसली का अत्यधिक धसना"
           }
         },
+        "hideInContents": true,
         "_row_num": 14
       },
       {
@@ -1295,6 +1314,7 @@
         "display": {
           "hint": "Stridor in calm child"
         },
+        "hideInContents": true,
         "_row_num": 17
       },
       {
@@ -1318,6 +1338,7 @@
             "hindi": "निमोनिया"
           }
         },
+        "hideInContents": true,
         "_row_num": 21
       },
       {
@@ -1333,6 +1354,7 @@
             "hindi": "तेज़ी से साँस लेना"
           }
         },
+        "hideInContents": true,
         "_row_num": 23
       },
       {
@@ -1356,6 +1378,7 @@
             "hindi": "खाँसी या ज़ुकाम"
           }
         },
+        "hideInContents": true,
         "_row_num": 27
       },
       {
@@ -1376,6 +1399,7 @@
         "display": {
           "text": "<u>DIARRHOEA CLASSIFICATION:</u>"
         },
+        "hideInContents": true,
         "_row_num": 31
       },
       {
@@ -1391,6 +1415,7 @@
             "hindi": "<strong>गंभीर निर्जलीकरण</strong>"
           }
         },
+        "hideInContents": true,
         "_row_num": 33
       },
       {
@@ -1410,6 +1435,7 @@
             "hindi": "सुस्त या बेहोश"
           }
         },
+        "hideInContents": true,
         "_row_num": 36
       },
       {
@@ -1429,6 +1455,7 @@
             "hindi": "धँसी हुई आँखें."
           }
         },
+        "hideInContents": true,
         "_row_num": 39
       },
       {
@@ -1448,6 +1475,7 @@
             "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना."
           }
         },
+        "hideInContents": true,
         "_row_num": 42
       },
       {
@@ -1467,6 +1495,7 @@
             "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
           }
         },
+        "hideInContents": true,
         "_row_num": 45
       },
       {
@@ -1490,6 +1519,7 @@
             "hindi": "कुछ निर्जलीकरण"
           }
         },
+        "hideInContents": true,
         "_row_num": 49
       },
       {
@@ -1505,6 +1535,7 @@
             "hindi": "बेचें व चिढ़चिढ़ा"
           }
         },
+        "hideInContents": true,
         "_row_num": 51
       },
       {
@@ -1524,6 +1555,7 @@
             "hindi": "धँसी हुई आँखें"
           }
         },
+        "hideInContents": true,
         "_row_num": 54
       },
       {
@@ -1543,6 +1575,7 @@
             "hindi": "प्यासा है"
           }
         },
+        "hideInContents": true,
         "_row_num": 57
       },
       {
@@ -1562,6 +1595,7 @@
             "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
           }
         },
+        "hideInContents": true,
         "_row_num": 60
       },
       {
@@ -1585,6 +1619,7 @@
             "hindi": "निर्जलीकरण के पयापत चिन्ह का न होना."
           }
         },
+        "hideInContents": true,
         "_row_num": 63
       },
       {
@@ -1608,6 +1643,7 @@
             "hindi": "गंभीर लगातार दस्त"
           }
         },
+        "hideInContents": true,
         "_row_num": 67
       },
       {
@@ -1623,6 +1659,7 @@
             "hindi": "१४ दिन से ज़्यादा दस्त"
           }
         },
+        "hideInContents": true,
         "_row_num": 69
       },
       {
@@ -1639,6 +1676,7 @@
         "display": {
           "hint": "Deyhdration"
         },
+        "hideInContents": true,
         "_row_num": 72
       },
       {
@@ -1659,6 +1697,7 @@
         "display": {
           "text": "<div style=\"background-color:yellow;\"><strong>PERSISTENT DIARRHOEA</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 76
       },
       {
@@ -1674,6 +1713,7 @@
             "hindi": "१४ दिन से ज़्यादा दस्त"
           }
         },
+        "hideInContents": true,
         "_row_num": 78
       },
       {
@@ -1697,6 +1737,7 @@
             "hindi": "पोचिश"
           }
         },
+        "hideInContents": true,
         "_row_num": 82
       },
       {
@@ -1712,6 +1753,7 @@
             "hindi": "माल मैं खून"
           }
         },
+        "hideInContents": true,
         "_row_num": 84
       },
       {
@@ -1732,6 +1774,7 @@
         "display": {
           "text": "<u>FEVER CLASSIFICATION:</u>"
         },
+        "hideInContents": true,
         "_row_num": 88
       },
       {
@@ -1745,6 +1788,7 @@
         "display": {
           "text": "<div style=\"background-color:#F5A9A9;\"><strong>VERY SEVERE FEBRILE DISEASE</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 90
       },
       {
@@ -1757,6 +1801,7 @@
         "display": {
           "hint": "Danger Sign Present"
         },
+        "hideInContents": true,
         "_row_num": 92
       },
       {
@@ -1773,6 +1818,7 @@
         "display": {
           "hint": "Stiff Neck"
         },
+        "hideInContents": true,
         "_row_num": 95
       },
       {
@@ -1789,6 +1835,7 @@
         "display": {
           "hint": "Bulging Fontanelle"
         },
+        "hideInContents": true,
         "_row_num": 98
       },
       {
@@ -1809,6 +1856,7 @@
         "display": {
           "text": "<div style=\"background-color:yellow;\"><strong>MALARIA</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 102
       },
       {
@@ -1824,6 +1872,7 @@
             "hindi": "पूछने से या छूने से या तापमान ३७.५ डेग सी या अधिक"
           }
         },
+        "hideInContents": true,
         "_row_num": 104
       },
       {
@@ -1840,6 +1889,7 @@
         "display": {
           "hint": "NO runny nose, NO measles, and NO other cause of fever"
         },
+        "hideInContents": true,
         "_row_num": 107
       },
       {
@@ -1860,6 +1910,7 @@
         "display": {
           "text": "<div style=\"background-color:#81F781;\">FEVER-MALARIA UNLIKELY</div>"
         },
+        "hideInContents": true,
         "_row_num": 111
       },
       {
@@ -1876,6 +1927,7 @@
         "display": {
           "text": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE COMPLICATED MEASLES</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 114
       },
       {
@@ -1888,6 +1940,7 @@
         "display": {
           "hint": "Danger Sign Present"
         },
+        "hideInContents": true,
         "_row_num": 116
       },
       {
@@ -1904,6 +1957,7 @@
         "display": {
           "hint": "Clouding of cornea"
         },
+        "hideInContents": true,
         "_row_num": 119
       },
       {
@@ -1920,6 +1974,7 @@
         "display": {
           "hint": "Deep or extensive mouth ulcers"
         },
+        "hideInContents": true,
         "_row_num": 122
       },
       {
@@ -1940,6 +1995,7 @@
         "display": {
           "text": "<div style=\"background-color:yellow;\"><strong>MEASLES WITH EYE OR MOUTH COMPLICATIONS</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 126
       },
       {
@@ -1952,6 +2008,7 @@
         "display": {
           "hint": "Pus draining from the eye"
         },
+        "hideInContents": true,
         "_row_num": 128
       },
       {
@@ -1968,6 +2025,7 @@
         "display": {
           "hint": "Mouth ulcers"
         },
+        "hideInContents": true,
         "_row_num": 131
       },
       {
@@ -1988,6 +2046,7 @@
         "display": {
           "text": "<div style=\"background-color:#81F781;\"><strong>MEASLES</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 135
       },
       {
@@ -2008,6 +2067,7 @@
         "display": {
           "text": "<u>EAR PROBLEM CLASSIFICATION:</u>"
         },
+        "hideInContents": true,
         "_row_num": 139
       },
       {
@@ -2020,6 +2080,7 @@
         "display": {
           "text": "<div style=\"background-color:#F5A9A9;\"><strong>MASTOIDITIS</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 141
       },
       {
@@ -2032,6 +2093,7 @@
         "display": {
           "hint": "Tender swelling behind the ear"
         },
+        "hideInContents": true,
         "_row_num": 143
       },
       {
@@ -2052,6 +2114,7 @@
         "display": {
           "text": "<div style=\"background-color:yellow;\"><strong>ACUTE EAR INFECTION</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 147
       },
       {
@@ -2064,6 +2127,7 @@
         "display": {
           "hint": "Ear pain"
         },
+        "hideInContents": true,
         "_row_num": 149
       },
       {
@@ -2080,6 +2144,7 @@
         "display": {
           "hint": "Pus is draining from the ear and discharge is reported for less than 14 days"
         },
+        "hideInContents": true,
         "_row_num": 152
       },
       {
@@ -2100,6 +2165,7 @@
         "display": {
           "text": "<div style=\"background-color:yellow;\"><strong>CHRONIC EAR INFECTION</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 156
       },
       {
@@ -2112,6 +2178,7 @@
         "display": {
           "hint": "Pus is seen draining from the ear and discharge is reported for 14 days or more"
         },
+        "hideInContents": true,
         "_row_num": 158
       },
       {
@@ -2132,6 +2199,7 @@
         "display": {
           "text": "<div style=\"background-color:#81F781;\">NO EAR INFECTION</div>"
         },
+        "hideInContents": true,
         "_row_num": 162
       },
       {
@@ -2147,6 +2215,7 @@
         "display": {
           "text": "<u>NUTRITIONAL STATUS CLASSIFICATION:</u>"
         },
+        "hideInContents": true,
         "_row_num": 165
       },
       {
@@ -2159,6 +2228,7 @@
         "display": {
           "text": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE MALNUTRITION</strong></div>"
         },
+        "hideInContents": true,
         "_row_num": 168
       },
       {
@@ -2175,6 +2245,7 @@
         "display": {
           "hint": "Visible severe wasting"
         },
+        "hideInContents": true,
         "_row_num": 171
       },
       {
@@ -2191,6 +2262,7 @@
         "display": {
           "hint": "Oedema of both feet"
         },
+        "hideInContents": true,
         "_row_num": 174
       },
       {
@@ -2208,6 +2280,7 @@
           "text": "<div style=\"background-color:yellow;\"><strong>VERY LOW WEIGHT</strong></div>",
           "hint": "Very low weight for age"
         },
+        "hideInContents": true,
         "_row_num": 178
       },
       {
@@ -2224,6 +2297,7 @@
         "display": {
           "text": "<div style=\"background-color:#81F781;\">NOT VERY LOW WEIGHT</div>"
         },
+        "hideInContents": true,
         "_row_num": 182
       },
       {
@@ -2235,6 +2309,7 @@
         "display": {
           "text": "<u>ANAEMIA CLASSIFICATION:</u>"
         },
+        "hideInContents": true,
         "_row_num": 185
       },
       {
@@ -2251,6 +2326,7 @@
           },
           "hint": "Severe palmar pallor"
         },
+        "hideInContents": true,
         "_row_num": 188
       },
       {
@@ -2271,6 +2347,7 @@
           },
           "hint": "Some palmar pallor"
         },
+        "hideInContents": true,
         "_row_num": 192
       },
       {
@@ -2290,6 +2367,7 @@
             "hindi": "अनीमिया नही"
           }
         },
+        "hideInContents": true,
         "_row_num": 196
       },
       {
@@ -2325,6 +2403,7 @@
         "display": {
           "text": "<h3>Give Vitamin A</h3>"
         },
+        "hideInContents": true,
         "_row_num": 6
       },
       {
@@ -2337,6 +2416,7 @@
         "display": {
           "hint": "Give single dose in clinic in Persistent Diarrhoea & Severe Malnutrition"
         },
+        "hideInContents": true,
         "_row_num": 8
       },
       {
@@ -2353,6 +2433,7 @@
         "display": {
           "hint": "Give two doses in Measles (Give first does in clinic and give mother one dose to give at home the next day)."
         },
+        "hideInContents": true,
         "_row_num": 11
       },
       {
@@ -2367,6 +2448,7 @@
             "hindi": "डोसेज देने के निर्देशन:"
           }
         },
+        "hideInContents": true,
         "_row_num": 13
       },
       {
@@ -2379,6 +2461,7 @@
         "display": {
           "text": "Give .5 ml"
         },
+        "hideInContents": true,
         "_row_num": 15
       },
       {
@@ -2395,6 +2478,7 @@
         "display": {
           "text": "Give 1 ml"
         },
+        "hideInContents": true,
         "_row_num": 18
       },
       {
@@ -2411,6 +2495,7 @@
         "display": {
           "text": "Give 2 ml"
         },
+        "hideInContents": true,
         "_row_num": 21
       },
       {
@@ -2443,6 +2528,7 @@
         "display": {
           "text": "Initial Treatment of Severe Conditions"
         },
+        "hideInContents": true,
         "_row_num": 31
       },
       {
@@ -2490,6 +2576,7 @@
           "text": "<h3>Give First does of Cotrimoxazole </h3>",
           "hint": "If not possible, give oral amoxycillin."
         },
+        "hideInContents": true,
         "_row_num": 40
       },
       {
@@ -2620,6 +2707,7 @@
         "display": {
           "text": "Intravenous or intramuscular quinine dosage:"
         },
+        "hideInContents": true,
         "_row_num": 60
       },
       {
@@ -2632,6 +2720,7 @@
         "display": {
           "text": "<p>Give 0.4 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.2 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
         },
+        "hideInContents": true,
         "_row_num": 62
       },
       {
@@ -2648,6 +2737,7 @@
         "display": {
           "text": "<p>Give 0.6 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.3 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
         },
+        "hideInContents": true,
         "_row_num": 65
       },
       {
@@ -2664,6 +2754,7 @@
         "display": {
           "text": "<p>Give 0.8 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.4 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
         },
+        "hideInContents": true,
         "_row_num": 68
       },
       {
@@ -2680,6 +2771,7 @@
         "display": {
           "text": "<p>Give 1.0 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.5 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
         },
+        "hideInContents": true,
         "_row_num": 71
       },
       {
@@ -2696,6 +2788,7 @@
         "display": {
           "text": "<p>Give 1.2 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.6 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
         },
+        "hideInContents": true,
         "_row_num": 74
       },
       {
@@ -2740,6 +2833,7 @@
         "display": {
           "text": "Treat High Fever (> 38.5°C) With Paracetamol"
         },
+        "hideInContents": true,
         "_row_num": 83
       },
       {
@@ -2763,6 +2857,7 @@
             "hindi": "२ महीन से कम उम्र के बच्चों के लिए कोई निर्देशन नही है."
           }
         },
+        "hideInContents": true,
         "_row_num": 86
       },
       {
@@ -2786,6 +2881,7 @@
             "hindi": "५०० मी ग्राम का १/४ टॅबलेट दें"
           }
         },
+        "hideInContents": true,
         "_row_num": 89
       },
       {
@@ -2809,6 +2905,7 @@
             "hindi": "५०० मी ग्राम का १/२ टॅबलेट दें"
           }
         },
+        "hideInContents": true,
         "_row_num": 92
       },
       {
@@ -2846,6 +2943,7 @@
         "display": {
           "text": "<h3>Treat Eye Infection with Tetracycline Eye Ointment.</h3>"
         },
+        "hideInContents": true,
         "_row_num": 102
       },
       {
@@ -2853,6 +2951,7 @@
         "display": {
           "text": "Clean both eyes"
         },
+        "hideInContents": true,
         "_row_num": 103
       },
       {
@@ -2860,6 +2959,7 @@
         "display": {
           "hint": "Wash Hands"
         },
+        "hideInContents": true,
         "_row_num": 104
       },
       {
@@ -2867,6 +2967,7 @@
         "display": {
           "hint": "Ask child to close the eye."
         },
+        "hideInContents": true,
         "_row_num": 105
       },
       {
@@ -2874,6 +2975,7 @@
         "display": {
           "hint": "Use clean cloth and water to gently wipe away pus."
         },
+        "hideInContents": true,
         "_row_num": 106
       },
       {
@@ -2881,6 +2983,7 @@
         "display": {
           "text": "Then apply tetracycline eye ointment"
         },
+        "hideInContents": true,
         "_row_num": 107
       },
       {
@@ -2888,6 +2991,7 @@
         "display": {
           "hint": "Ask the child to look up."
         },
+        "hideInContents": true,
         "_row_num": 108
       },
       {
@@ -2895,6 +2999,7 @@
         "display": {
           "hint": "Squirt a small amount of ointment on the inside of the lower lid."
         },
+        "hideInContents": true,
         "_row_num": 109
       },
       {
@@ -2902,6 +3007,7 @@
         "display": {
           "hint": "Wash hands again."
         },
+        "hideInContents": true,
         "_row_num": 110
       },
       {
@@ -3001,6 +3107,7 @@
             "hindi": "<h3>कोटरिमोक्षज़ोल देने के इन्स्ट्रक्षन</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 135
       },
       {
@@ -3121,6 +3228,7 @@
         "display": {
           "text": "<h3>Give Paracetamol for High Fever or Ear Pain</h3>"
         },
+        "hideInContents": true,
         "_row_num": 154
       },
       {
@@ -3131,6 +3239,7 @@
             "hindi": "क्लिनिक मैं एक खुराक प्रेसेटमल की दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 155
       },
       {
@@ -3143,6 +3252,7 @@
         "display": {
           "hint": "Give 3 additional doses of paracetamol for use at home every 6 hours until high fever or ear pain is gone."
         },
+        "hideInContents": true,
         "_row_num": 157
       },
       {
@@ -3166,6 +3276,7 @@
             "hindi": "२ महीन से कम उम्र के बच्चों के लिए कोई निर्देशन नही है."
           }
         },
+        "hideInContents": true,
         "_row_num": 160
       },
       {
@@ -3189,6 +3300,7 @@
             "hindi": "५०० मी ग्राम का १/४ टॅबलेट दें"
           }
         },
+        "hideInContents": true,
         "_row_num": 163
       },
       {
@@ -3212,6 +3324,7 @@
             "hindi": "५०० मी ग्राम का १/२ टॅबलेट दें"
           }
         },
+        "hideInContents": true,
         "_row_num": 166
       },
       {
@@ -3279,6 +3392,7 @@
         "display": {
           "text": "<h3>Treat Eye Infection with Tetracycline Eye Ointment.</h3>"
         },
+        "hideInContents": true,
         "_row_num": 201
       },
       {
@@ -3286,6 +3400,7 @@
         "display": {
           "text": "Clean both eyes 3 times daily."
         },
+        "hideInContents": true,
         "_row_num": 202
       },
       {
@@ -3293,6 +3408,7 @@
         "display": {
           "hint": "Wash hands."
         },
+        "hideInContents": true,
         "_row_num": 203
       },
       {
@@ -3300,6 +3416,7 @@
         "display": {
           "hint": "Ask child to close the eye."
         },
+        "hideInContents": true,
         "_row_num": 204
       },
       {
@@ -3307,6 +3424,7 @@
         "display": {
           "hint": "Use clean cloth and water to gently wipe away pus."
         },
+        "hideInContents": true,
         "_row_num": 205
       },
       {
@@ -3314,6 +3432,7 @@
         "display": {
           "text": "Then apply tetracycline eye ointment in both eyes 3 times daily."
         },
+        "hideInContents": true,
         "_row_num": 206
       },
       {
@@ -3321,6 +3440,7 @@
         "display": {
           "hint": "Ask the child to look up."
         },
+        "hideInContents": true,
         "_row_num": 207
       },
       {
@@ -3328,6 +3448,7 @@
         "display": {
           "hint": "Squirt a small amount of ointment on the inside of the lower lid."
         },
+        "hideInContents": true,
         "_row_num": 208
       },
       {
@@ -3335,6 +3456,7 @@
         "display": {
           "hint": "Wash hands again."
         },
+        "hideInContents": true,
         "_row_num": 209
       },
       {
@@ -3342,6 +3464,7 @@
         "display": {
           "text": "Treat until redness is gone."
         },
+        "hideInContents": true,
         "_row_num": 210
       },
       {
@@ -3349,6 +3472,7 @@
         "display": {
           "text": "Do not use other eye ointments or drops, or put anything else in the eye."
         },
+        "hideInContents": true,
         "_row_num": 211
       },
       {
@@ -3373,6 +3497,7 @@
         "display": {
           "text": "<h3>Dry the Ear by Wicking.</h3>"
         },
+        "hideInContents": true,
         "_row_num": 217
       },
       {
@@ -3380,6 +3505,7 @@
         "display": {
           "text": "Dry the ear at least 3 time daily"
         },
+        "hideInContents": true,
         "_row_num": 218
       },
       {
@@ -3387,6 +3513,7 @@
         "display": {
           "hint": "Roll clean absorbent cloth or soft, strong tissue paper into a wick."
         },
+        "hideInContents": true,
         "_row_num": 219
       },
       {
@@ -3394,6 +3521,7 @@
         "display": {
           "hint": "Place the wick in the young infant's ear."
         },
+        "hideInContents": true,
         "_row_num": 220
       },
       {
@@ -3401,6 +3529,7 @@
         "display": {
           "hint": "Remove the wick when wet."
         },
+        "hideInContents": true,
         "_row_num": 221
       },
       {
@@ -3408,6 +3537,7 @@
         "display": {
           "hint": "Replace the wick with a clean one and repeat these steps until the ear is dry."
         },
+        "hideInContents": true,
         "_row_num": 222
       },
       {
@@ -3433,6 +3563,7 @@
           "text": "Give Zinc",
           "hint": "For persistent diarrhoea give zinc sulphate (20 mg elemental zinc) daily for 14 days."
         },
+        "hideInContents": true,
         "_row_num": 227
       },
       {
@@ -3454,6 +3585,7 @@
         "display": {
           "text": "Give one zinc tablet."
         },
+        "hideInContents": true,
         "_row_num": 230
       },
       {
@@ -3470,6 +3602,7 @@
         "display": {
           "text": "Give 10 ml of zinc syrup."
         },
+        "hideInContents": true,
         "_row_num": 233
       },
       {
@@ -3505,6 +3638,7 @@
             "hindi": "<h3>मा को सलाह दें खाँसी ज़ुकाम के लिए घर मैं देख भाल करें.</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 240
       },
       {
@@ -3515,6 +3649,7 @@
             "hindi": "<strong>मा से बोले</strong>"
           }
         },
+        "hideInContents": true,
         "_row_num": 241
       },
       {
@@ -3525,6 +3660,7 @@
             "hindi": "<li>बीमारी मैं भी खाना दें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 242
       },
       {
@@ -3540,6 +3676,7 @@
             "hindi": "<ul><li>बच्चे को ज़्यादा पीने के लिए दें.</li><li> घर पर देने वाले पेय की सूची देखें.</li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 243
       },
       {
@@ -3555,6 +3692,7 @@
             "hindi": "<li>गले की खराश के लिए द्वा दें. (६ महीने की उम्र से उपर)</li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 245
       },
       {
@@ -3574,6 +3712,7 @@
             "hindi": "घर मैं काम आने वाली सुरक्षित चीज़े बताए. <li>स्तनपान जारी रखें</li><li> घर मैं शहदाए सौंठ</li><li> हरबल चाय या कोई अन्य सुरक्षित घरेलू इलाज</li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 248
       },
       {
@@ -3593,6 +3732,7 @@
             "hindi": "खाँसी की दावा न पिलाए."
           }
         },
+        "hideInContents": true,
         "_row_num": 251
       },
       {
@@ -3607,6 +3747,7 @@
             "hindi": "<li>अगर बाँध नाक स्तनपान मैं रुकावट लाती है तो नाक सॉफ करें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 253
       },
       {
@@ -3617,6 +3758,7 @@
             "hindi": "<li>चिन्ह के लिए सावधान रह और यदि कुछ होये तो वापस आए. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 254
       },
       {
@@ -3627,6 +3769,7 @@
             "hindi": "<li>बच्चा अधिक बीमार हो जाए. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 255
       },
       {
@@ -3637,6 +3780,7 @@
             "hindi": "<li>स्तनपान या अन्य तरल पदार्थ नही ले सके. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 256
       },
       {
@@ -3653,6 +3797,7 @@
             "hindi": "<li>तेज़ सास लेना</li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 258
       },
       {
@@ -3672,6 +3817,7 @@
             "hindi": "<li>सास लेने मैं दिकाट </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 261
       },
       {
@@ -3692,6 +3838,7 @@
             "hindi": "<li>बुखार हो जाए. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 264
       },
       {
@@ -3712,6 +3859,7 @@
             "hindi": "<li>मल मैं खून. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 267
       },
       {
@@ -3768,6 +3916,7 @@
             "hindi": "३० दिन से ज़्यादा खाँस तो रेफरल दें"
           }
         },
+        "hideInContents": true,
         "_row_num": 278
       },
       {
@@ -3802,6 +3951,7 @@
         "display": {
           "text": "<h3>Give Oral Antimalarials for HIGH malaria risk areas after making a blood smear.</h3>"
         },
+        "hideInContents": true,
         "_row_num": 285
       },
       {
@@ -3852,6 +4002,7 @@
           "text": "Presumptive treatment:",
           "hint": "Give to all children classified as MALARIA for 3 days."
         },
+        "hideInContents": true,
         "_row_num": 294
       },
       {
@@ -3864,6 +4015,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Day 1</td><td colspan=\"2\">Day 2</td><td colspan=\"2\">Day 3</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td colspan=\"1\">Primaquin</td><td colspan=\"2\">Chloroquine</td><td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td><td>Tablet</td><td>Syrup</td><td>Tablet</td><td>Syrup</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td><td>1/2</td><td>7.5 ml</td><td>1/4</td><td>4 ml</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 296
       },
       {
@@ -3880,6 +4032,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Day 1</td><td colspan=\"2\">Day 2</td><td colspan=\"2\">Day 3</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td colspan=\"1\">Primaquin</td><td colspan=\"2\">Chloroquine</td><td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td><td>Tablet</td><td>Syrup</td><td>Tablet</td><td>Syrup</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td><td>1</td><td>15 ml</td><td>1/2</td><td>7.5 ml</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 299
       },
       {
@@ -3891,6 +4044,7 @@
         "display": {
           "hint": "Explain to the mother that she should watch her child carefully for 30 minutes after giving a dose of chloroquine."
         },
+        "hideInContents": true,
         "_row_num": 301
       },
       {
@@ -3898,6 +4052,7 @@
         "display": {
           "hint": "Explain that itching is a possible side effect of the drug, but is not dangerous."
         },
+        "hideInContents": true,
         "_row_num": 302
       },
       {
@@ -3906,6 +4061,7 @@
           "text": "Radical treatment:",
           "hint": "Give ONLY if blood smear is P. vivax positive; no radical treatment is required if P. falciparum smear positive."
         },
+        "hideInContents": true,
         "_row_num": 303
       },
       {
@@ -3918,6 +4074,7 @@
         "display": {
           "text": "No radical treatment."
         },
+        "hideInContents": true,
         "_row_num": 305
       },
       {
@@ -3934,6 +4091,7 @@
         "display": {
           "text": "Give one primaquine tablet 2.5 mg base daily for 5 days."
         },
+        "hideInContents": true,
         "_row_num": 308
       },
       {
@@ -3945,6 +4103,7 @@
         "display": {
           "text": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
         },
+        "hideInContents": true,
         "_row_num": 310
       },
       {
@@ -3974,6 +4133,7 @@
         "display": {
           "text": "Give 1/4 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
         },
+        "hideInContents": true,
         "_row_num": 316
       },
       {
@@ -3990,6 +4150,7 @@
         "display": {
           "text": "Give 1 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
         },
+        "hideInContents": true,
         "_row_num": 319
       },
       {
@@ -4002,6 +4163,7 @@
           "text": "Radical treatment:",
           "hint": "Give ONLY if blood smear is P. vivax positive; no radical treatment is required if P. falciparum smear positive."
         },
+        "hideInContents": true,
         "_row_num": 321
       },
       {
@@ -4014,6 +4176,7 @@
         "display": {
           "text": "No radical treatment."
         },
+        "hideInContents": true,
         "_row_num": 323
       },
       {
@@ -4030,6 +4193,7 @@
         "display": {
           "text": "Give one primaquine tablet 2.5 mg base daily for 5 days."
         },
+        "hideInContents": true,
         "_row_num": 326
       },
       {
@@ -4041,6 +4205,7 @@
         "display": {
           "text": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
         },
+        "hideInContents": true,
         "_row_num": 328
       },
       {
@@ -4066,6 +4231,7 @@
           "text": "Presumptive treatment:",
           "hint": "Give to all children classified as MALARIA for 1 day."
         },
+        "hideInContents": true,
         "_row_num": 334
       },
       {
@@ -4078,6 +4244,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Day 1</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 336
       },
       {
@@ -4094,6 +4261,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Day 1</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 339
       },
       {
@@ -4106,6 +4274,7 @@
         "display": {
           "hint": "Explain to the mother that she should watch her child carefully for 30 minutes after giving a dose of chloroquine."
         },
+        "hideInContents": true,
         "_row_num": 341
       },
       {
@@ -4114,6 +4283,7 @@
         "display": {
           "hint": "Explain that itching is a possible side effect of the drug, but is not dangerous."
         },
+        "hideInContents": true,
         "_row_num": 342
       },
       {
@@ -4122,6 +4292,7 @@
           "text": "Radical treatment:",
           "hint": "Give ONLY if blood smear is positive for malarial parasite."
         },
+        "hideInContents": true,
         "_row_num": 343
       },
       {
@@ -4129,6 +4300,7 @@
         "display": {
           "text": "If blood smear is P. falciparum positive"
         },
+        "hideInContents": true,
         "_row_num": 344
       },
       {
@@ -4141,6 +4313,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 346
       },
       {
@@ -4157,6 +4330,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 349
       },
       {
@@ -4168,6 +4342,7 @@
         "display": {
           "text": "If blood smear is P. vivax positive"
         },
+        "hideInContents": true,
         "_row_num": 351
       },
       {
@@ -4180,6 +4355,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 353
       },
       {
@@ -4196,6 +4372,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>1</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 356
       },
       {
@@ -4207,6 +4384,7 @@
         "display": {
           "text": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
         },
+        "hideInContents": true,
         "_row_num": 358
       },
       {
@@ -4236,6 +4414,7 @@
         "display": {
           "text": "Give 1/4 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
         },
+        "hideInContents": true,
         "_row_num": 364
       },
       {
@@ -4252,6 +4431,7 @@
         "display": {
           "text": "Give 1 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
         },
+        "hideInContents": true,
         "_row_num": 367
       },
       {
@@ -4264,6 +4444,7 @@
           "text": "Radical treatment:",
           "hint": "Give ONLY if blood smear is positive for malarial parasite."
         },
+        "hideInContents": true,
         "_row_num": 369
       },
       {
@@ -4271,6 +4452,7 @@
         "display": {
           "text": "If blood smear is P. falciparum positive"
         },
+        "hideInContents": true,
         "_row_num": 370
       },
       {
@@ -4283,6 +4465,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 372
       },
       {
@@ -4299,6 +4482,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 375
       },
       {
@@ -4310,6 +4494,7 @@
         "display": {
           "text": "If blood smear is P. vivax positive"
         },
+        "hideInContents": true,
         "_row_num": 377
       },
       {
@@ -4322,6 +4507,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 379
       },
       {
@@ -4338,6 +4524,7 @@
         "display": {
           "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>1</td>\n    </tr>\n</table>"
         },
+        "hideInContents": true,
         "_row_num": 382
       },
       {
@@ -4349,6 +4536,7 @@
         "display": {
           "text": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
         },
+        "hideInContents": true,
         "_row_num": 384
       },
       {
@@ -4432,6 +4620,7 @@
             "hindi": "<h3>मा को सलाह दें </h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 406
       },
       {
@@ -4442,6 +4631,7 @@
             "hindi": "दो साल की कम उम्र के बच्चो का खाना पीना देखें और उन बच्चो मैं भी जिनका वज़न बहुत कम हो उम्र के लिए (कुपोषण ग्रेड २,३,४) या अनीमिया."
           }
         },
+        "hideInContents": true,
         "_row_num": 407
       },
       {
@@ -4730,6 +4920,7 @@
             "hindi": "<h3>मा को शाबाशी दें. </h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 452
       },
       {
@@ -4745,6 +4936,7 @@
             "hindi": "२४ घंटो मैं कम-से-कम ८ बार स्तनपान करें."
           }
         },
+        "hideInContents": true,
         "_row_num": 454
       },
       {
@@ -4764,6 +4956,7 @@
             "hindi": "रात को भी."
           }
         },
+        "hideInContents": true,
         "_row_num": 457
       },
       {
@@ -4783,6 +4976,7 @@
             "hindi": "और कुछ ना दे सिवाए पानी."
           }
         },
+        "hideInContents": true,
         "_row_num": 460
       },
       {
@@ -4805,6 +4999,7 @@
             "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 464
       },
       {
@@ -4815,6 +5010,7 @@
             "hindi": "समाधान:"
           }
         },
+        "hideInContents": true,
         "_row_num": 465
       },
       {
@@ -4830,6 +5026,7 @@
             "hindi": "२४ घंटो मैं कम-से-कम ८ बार स्तनपान करें."
           }
         },
+        "hideInContents": true,
         "_row_num": 467
       },
       {
@@ -4849,6 +5046,7 @@
             "hindi": "और कुछ ना दे सिवाए पानी."
           }
         },
+        "hideInContents": true,
         "_row_num": 470
       },
       {
@@ -4871,6 +5069,7 @@
             "hindi": "<ol><li>स्तनपान जारी रखें अगर बच्चा बीमार रहे फिर भी.</li></ol>"
           }
         },
+        "hideInContents": true,
         "_row_num": 473
       },
       {
@@ -4899,6 +5098,7 @@
             "hindi": "<h3>मा को शाबाशी दें. </h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 478
       },
       {
@@ -4927,6 +5127,7 @@
             "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 483
       },
       {
@@ -4949,6 +5150,7 @@
             "hindi": "<h3>सलाह</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 487
       },
       {
@@ -4959,6 +5161,7 @@
             "hindi": "बच्चा जितनी बारी चाहे स्तनपान करें."
           }
         },
+        "hideInContents": true,
         "_row_num": 488
       },
       {
@@ -4973,6 +5176,7 @@
             "hindi": "<p>\n*दिन मैं 3 बार अगर स्तनपान किया  \n</p>\n<p>\n*दिन मैं 5 बार अगर स्तनपान किया  \n</p>"
           }
         },
+        "hideInContents": true,
         "_row_num": 489
       },
       {
@@ -4983,6 +5187,7 @@
             "hindi": "मूसी हुई रोटी, चावल, ब्रेड, बिस्कुट या बिना मीठे का दूध दें"
           }
         },
+        "hideInContents": true,
         "_row_num": 490
       },
       {
@@ -4993,6 +5198,7 @@
             "hindi": "मूसी हुई रोटी, चावल, ब्रेड के साथ गाढ़ी डाल और तेल या खिचरी के साथ तेल और पक्की सब्ज़ी"
           }
         },
+        "hideInContents": true,
         "_row_num": 491
       },
       {
@@ -5003,6 +5209,7 @@
             "hindi": "सेवीयन, हलवा, खीर, दूध मैं बना हुआ."
           }
         },
+        "hideInContents": true,
         "_row_num": 492
       },
       {
@@ -5013,6 +5220,7 @@
             "hindi": "म्यूज़्ज़ हुआ या तले हुए आलू या केला, छीकू या आम."
           }
         },
+        "hideInContents": true,
         "_row_num": 493
       },
       {
@@ -5031,6 +5239,7 @@
             "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
           }
         },
+        "hideInContents": true,
         "_row_num": 495
       },
       {
@@ -5059,6 +5268,7 @@
             "hindi": "<h3>मा को शाबाशी दें.</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 500
       },
       {
@@ -5087,6 +5297,7 @@
             "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 505
       },
       {
@@ -5109,6 +5320,7 @@
             "hindi": "<h3>स्तनपानस लाह</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 509
       },
       {
@@ -5119,6 +5331,7 @@
             "hindi": "बच्चा जितनी बारी चाहे स्तनपान करें."
           }
         },
+        "hideInContents": true,
         "_row_num": 510
       },
       {
@@ -5129,6 +5342,7 @@
             "hindi": "पारिवारिक पोत से दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 511
       },
       {
@@ -5143,6 +5357,7 @@
             "hindi": "दिन मैं पाँच बार"
           }
         },
+        "hideInContents": true,
         "_row_num": 512
       },
       {
@@ -5153,6 +5368,7 @@
             "hindi": "मूसी हुई रोटी, चावल, ब्रेड, बिस्कुट या बिना मीठे का दूध दें"
           }
         },
+        "hideInContents": true,
         "_row_num": 513
       },
       {
@@ -5163,6 +5379,7 @@
             "hindi": "मूसी हुई रोटी, चावल, ब्रेड के साथ गाढ़ी डाल और तेल या खिचरी के साथ तेल और पक्की सब्ज़ी"
           }
         },
+        "hideInContents": true,
         "_row_num": 514
       },
       {
@@ -5173,6 +5390,7 @@
             "hindi": "सेवीयन, हलवा, खीर, दूध मैं बना हुआ."
           }
         },
+        "hideInContents": true,
         "_row_num": 515
       },
       {
@@ -5183,6 +5401,7 @@
             "hindi": "म्यूज़्ज़ हुआ या तले हुए आलू या केला, छीकू या आम."
           }
         },
+        "hideInContents": true,
         "_row_num": 516
       },
       {
@@ -5197,6 +5416,7 @@
             "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
           }
         },
+        "hideInContents": true,
         "_row_num": 517
       },
       {
@@ -5228,6 +5448,7 @@
             "hindi": "<h3>मा को शाबाशी दें. </h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 523
       },
       {
@@ -5238,6 +5459,7 @@
             "hindi": "3 भोजन में हर दिन परिवार खाद्य पदार्थ दे रही है."
           }
         },
+        "hideInContents": true,
         "_row_num": 524
       },
       {
@@ -5265,6 +5487,7 @@
             "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 529
       },
       {
@@ -5275,6 +5498,7 @@
             "hindi": "समाधान:"
           }
         },
+        "hideInContents": true,
         "_row_num": 530
       },
       {
@@ -5285,6 +5509,7 @@
             "hindi": "3 भोजन में हर दिन परिवार खाद्य पदार्थ दे रही है."
           }
         },
+        "hideInContents": true,
         "_row_num": 531
       },
       {
@@ -5307,6 +5532,7 @@
             "hindi": "<h3>सलाह</h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 535
       },
       {
@@ -5317,6 +5543,7 @@
             "hindi": "दिन मैं दो बार छीकू , केला, बिस्कुट, आम, पपाइया, अंडा दें"
           }
         },
+        "hideInContents": true,
         "_row_num": 536
       },
       {
@@ -5331,6 +5558,7 @@
             "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
           }
         },
+        "hideInContents": true,
         "_row_num": 537
       },
       {
@@ -5383,6 +5611,7 @@
             "hindi": "१४ दिन के लिए रोज़ एक डोस."
           }
         },
+        "hideInContents": true,
         "_row_num": 547
       },
       {
@@ -5393,6 +5622,7 @@
             "hindi": "डोसेज देने के निर्देशन:"
           }
         },
+        "hideInContents": true,
         "_row_num": 548
       },
       {
@@ -5408,6 +5638,7 @@
             "hindi": "४ महीने की कम उम्र के बच्चों के लिए इ.एफ.ए के कोई निर्देशन नही है."
           }
         },
+        "hideInContents": true,
         "_row_num": 550
       },
       {
@@ -5428,6 +5659,7 @@
             "hindi": "१ बच्चों वाली इ.एक.ए. टॅबलेट दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 553
       },
       {
@@ -5447,6 +5679,7 @@
             "hindi": "२ बच्चों वाली इ.एक.ए. टॅबलेट दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 556
       },
       {
@@ -5498,6 +5731,7 @@
             "hindi": "१००,००० आई . यू (१ मिली) ९ महीने पर खसरा पर ख़तरा (माता जी) टीकाकरण के साथ."
           }
         },
+        "hideInContents": true,
         "_row_num": 568
       },
       {
@@ -5517,6 +5751,7 @@
             "hindi": "२००,००० आई. यू (२ मिली) १६-१८ महीने मैं दि.पी.ती बूस्टर के साथ"
           }
         },
+        "hideInContents": true,
         "_row_num": 571
       },
       {
@@ -5536,6 +5771,7 @@
             "hindi": "२००,००० आई. यू (२ मिली) २४ महीने पर"
           }
         },
+        "hideInContents": true,
         "_row_num": 574
       },
       {
@@ -5555,6 +5791,7 @@
             "hindi": "२००,००० आई. यू (२ मिली) ३० महीने पर"
           }
         },
+        "hideInContents": true,
         "_row_num": 577
       },
       {
@@ -5574,6 +5811,7 @@
             "hindi": "२००,००० आई. यू (२ मिली) ३६ महीने पर"
           }
         },
+        "hideInContents": true,
         "_row_num": 580
       },
       {
@@ -5619,6 +5857,7 @@
           "text": "Advise the Mother When to Return to Health Worker",
           "hint": "Return for follow-up in 2 days."
         },
+        "hideInContents": true,
         "_row_num": 589
       },
       {
@@ -5641,6 +5880,7 @@
           "text": "Advise the Mother When to Return to Health Worker",
           "hint": "Return for follow-up in 2 days if fever persists."
         },
+        "hideInContents": true,
         "_row_num": 593
       },
       {
@@ -5678,6 +5918,7 @@
           "text": "Advise the Mother When to Return to Health Worker",
           "hint": "Return for follow-up in 5 days if diarrhoea not improving."
         },
+        "hideInContents": true,
         "_row_num": 599
       },
       {
@@ -5699,6 +5940,7 @@
             "hindi": "5 दिन बाद पून: देखें."
           }
         },
+        "hideInContents": true,
         "_row_num": 602
       },
       {
@@ -5726,6 +5968,7 @@
           "text": "Advise the Mother When to Return to Health Worker",
           "hint": "Return for follow-up in 14 days."
         },
+        "hideInContents": true,
         "_row_num": 607
       },
       {
@@ -5748,6 +5991,7 @@
           "text": "Advise the Mother When to Return to Health Worker",
           "hint": "Return for follow-up in 30 days."
         },
+        "hideInContents": true,
         "_row_num": 611
       },
       {
@@ -5767,6 +6011,7 @@
         "display": {
           "text": "Advise mother to return immediately if the child has any of these signs:"
         },
+        "hideInContents": true,
         "_row_num": 615
       },
       {
@@ -5774,6 +6019,7 @@
         "display": {
           "text": "Not able to drink or breastfeed"
         },
+        "hideInContents": true,
         "_row_num": 616
       },
       {
@@ -5781,6 +6027,7 @@
         "display": {
           "text": "Becomes sicker"
         },
+        "hideInContents": true,
         "_row_num": 617
       },
       {
@@ -5788,6 +6035,7 @@
         "display": {
           "text": "Develops a fever"
         },
+        "hideInContents": true,
         "_row_num": 618
       },
       {
@@ -5800,6 +6048,7 @@
         "display": {
           "text": "Fast breathing"
         },
+        "hideInContents": true,
         "_row_num": 620
       },
       {
@@ -5816,6 +6065,7 @@
         "display": {
           "text": "Difficult breathing"
         },
+        "hideInContents": true,
         "_row_num": 623
       },
       {
@@ -5832,6 +6082,7 @@
         "display": {
           "text": "Blood in stool"
         },
+        "hideInContents": true,
         "_row_num": 626
       },
       {
@@ -5848,6 +6099,7 @@
         "display": {
           "text": "Drinking poorly"
         },
+        "hideInContents": true,
         "_row_num": 629
       },
       {
@@ -5863,6 +6115,7 @@
         "display": {
           "text": "Advise mother when to return for next immunization according to immunization schedule."
         },
+        "hideInContents": true,
         "_row_num": 632
       },
       {
@@ -6062,6 +6315,7 @@
             "hindi": "ओ. आर. एस की मात्रा को निर्धारित कर स्वास्थ्य केन्द्रा मैं ४ घंटे मैं दे."
           }
         },
+        "hideInContents": true,
         "_row_num": 44
       },
       {
@@ -6076,6 +6330,7 @@
             "hindi": "<p>ओऽअर.एस की {{calculates.planBORSAmntMl}} मि.लि ४ घंटे मैं दे. </p> <p> {{calculates.planBORSAmntCups}} कप्स. </p>"
           }
         },
+        "hideInContents": true,
         "_row_num": 46
       },
       {
@@ -6086,6 +6341,7 @@
             "hindi": "अगर बच्चा ज़्यादा ओ. आर. एस चाहता है तो ज़्यादा दे."
           }
         },
+        "hideInContents": true,
         "_row_num": 47
       },
       {
@@ -6101,6 +6357,7 @@
             "hindi": "स्तनपान नही करने वाले ६ महीने से कम उम्र के बच्चों को १००-२०० मि.लि सॉफ पानी भी दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 49
       },
       {
@@ -6123,6 +6380,7 @@
             "hindi": "मा को बताए ओ. आर. एस दिया जाता है."
           }
         },
+        "hideInContents": true,
         "_row_num": 53
       },
       {
@@ -6133,6 +6391,7 @@
             "hindi": "<li>कप से बच्चे को बार-बार छोटे-छोटे घूँट दें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 54
       },
       {
@@ -6143,6 +6402,7 @@
             "hindi": "<li>अगर बच्चा उल्टी करता है तो १० मिनिट रूकें और धीरे-धीरे दें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 55
       },
       {
@@ -6153,6 +6413,7 @@
             "hindi": "<li>जब भी बच्चा चाहे स्तनपान कराए. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 56
       },
       {
@@ -6171,6 +6432,7 @@
             "hindi": "४ घंटे के बाद"
           }
         },
+        "hideInContents": true,
         "_row_num": 59
       },
       {
@@ -6181,6 +6443,7 @@
             "hindi": "<li>बच्चे को दोबारा जाँच करे व पानी की कमी के लिए वर्गीकरण करें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 60
       },
       {
@@ -6191,6 +6454,7 @@
             "hindi": "<li>उचित प्लान चुने व इलाज जारी रखें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 61
       },
       {
@@ -6201,6 +6465,7 @@
             "hindi": "<li>बच्चे को खिलाना शुरू करें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 62
       },
       {
@@ -6236,6 +6501,7 @@
             "hindi": "मा को दिखाया कि वह ओ. आर. एस घर पर कैसे बनायाएगी."
           }
         },
+        "hideInContents": true,
         "_row_num": 67
       },
       {
@@ -6250,6 +6516,7 @@
             "hindi": "<p>ओऽअर.एस की {{calculates \"planBORSAmntMl\"}} मि.लि ४ घंटे मैं दे. </p> <p> {{calculates \"planBORSAmntCups\"}} कप्स. </p>"
           }
         },
+        "hideInContents": true,
         "_row_num": 68
       },
       {
@@ -6260,6 +6527,7 @@
             "hindi": "मा को सही मात्रा मैं ओ. आर. एस पॅकेट दें, जिससे निर्जलीकरण का इलाज हो जाय व २ पॅकेट अलग से दे जैसा की प्लान आ मैं बताया गया है."
           }
         },
+        "hideInContents": true,
         "_row_num": 69
       },
       {
@@ -6275,10 +6543,12 @@
             "hindi": "<ol><li>ज़्यादा पिलाए,<li><li> स्तनपान करते रहें</li>, <li>वापस कब आए.</li></ol>"
           }
         },
+        "hideInContents": true,
         "_row_num": 70
       },
       {
         "type": "note",
+        "hideInContents": true,
         "_row_num": 71
       },
       {
@@ -6313,6 +6583,7 @@
             "hindi": "<h3>प्लान आ: दस्त को घर मैं ठीक करें. </h3>"
           }
         },
+        "hideInContents": true,
         "_row_num": 81
       },
       {
@@ -6327,6 +6598,7 @@
             "hindi": "ज़्यादा पिलाए, स्तनपान करते रहें, वापस कब आए."
           }
         },
+        "hideInContents": true,
         "_row_num": 82
       },
       {
@@ -6341,6 +6613,7 @@
             "hindi": "<strong>पीने के लिए ज़्यादा दें.</strong> (जितना बच्चा ले सके.)"
           }
         },
+        "hideInContents": true,
         "_row_num": 84
       },
       {
@@ -6355,6 +6628,7 @@
             "hindi": "<strong>मा से बोले</strong>"
           }
         },
+        "hideInContents": true,
         "_row_num": 86
       },
       {
@@ -6366,6 +6640,7 @@
             "hindi": "अगर शिशु अकेला है स्तनपान लेने वाला तो ज़्यादा बार और ज़्यादा देर तक दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 87
       },
       {
@@ -6376,6 +6651,7 @@
             "hindi": "अगर बच्चा बार-बार पानी जैसे दस्त करता है."
           }
         },
+        "hideInContents": true,
         "_row_num": 88
       },
       {
@@ -6391,6 +6667,7 @@
             "hindi": "<li>६ महीने से कम उम्र के बच्चे को स्तनपान के अलावा आफ पानी(उबला हुआ) मैं बनाया हुआ ओ. आर. एस दें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 90
       },
       {
@@ -6405,6 +6682,7 @@
             "hindi": "<li>६ महीने से ज़्यादा के बच्चे को स्तनपान के अलावा घर के और तरल पदार्थ दें. </li>"
           }
         },
+        "hideInContents": true,
         "_row_num": 92
       },
       {
@@ -6420,6 +6698,7 @@
             "hindi": "अगर नहीं तो बच्चे को ओ.आर.एस सल्यूशन, दही, नींबू, दूध, चावल, डाल, सूप, नारियल पानी और सॉफ पानी दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 94
       },
       {
@@ -6430,6 +6709,7 @@
             "hindi": "ओऽअर.एस ज़रूरी से दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 95
       },
       {
@@ -6440,6 +6720,7 @@
             "hindi": "<ol><li>बच्चे का इलाज प्लान 'बी' से कर रहें हो </li><li>या ज़्यादा दस्त होने पर बच्चा स्‍वास्थ्य केन्द्रा वापस नही आ सकता. </li></ol>"
           }
         },
+        "hideInContents": true,
         "_row_num": 96
       },
       {
@@ -6459,6 +6740,7 @@
             "hindi": "मा को ओऽअर.एस देना सिखाए, २ पॅकेट घर के लिए दें."
           }
         },
+        "hideInContents": true,
         "_row_num": 99
       },
       {
@@ -6469,6 +6751,7 @@
             "hindi": "मा को दिखे कितना अधिक पिलाने छाईए"
           }
         },
+        "hideInContents": true,
         "_row_num": 100
       },
       {
@@ -6488,6 +6771,7 @@
             "hindi": "< २ महीने"
           }
         },
+        "hideInContents": true,
         "_row_num": 102
       },
       {
@@ -6511,6 +6795,7 @@
             "hindi": "२ महीने से ३ साल तक"
           }
         },
+        "hideInContents": true,
         "_row_num": 105
       },
       {
@@ -6534,6 +6819,7 @@
             "hindi": "२ साल से ज़्यादा"
           }
         },
+        "hideInContents": true,
         "_row_num": 108
       },
       {
@@ -6556,6 +6842,7 @@
             "hindi": "<ol>\n<li>कप से बच्चे को बार-बार छोटे-छोटे घूँट दें. </li>\n<li>अगर बच्चा उल्टी करता है तो १० मिनिट रूकें और धीरे-धीरे दें. </li>\n<li><u>बच्चे को पीने के लिए ज़्यादा देते रहें जब तब दस्त नही रुक जाते. .</u></li>\n</ol>"
           }
         },
+        "hideInContents": true,
         "_row_num": 111
       },
       {
@@ -6566,6 +6853,7 @@
             "hindi": "<strong>पाइलेट रहें </strong>"
           }
         },
+        "hideInContents": true,
         "_row_num": 112
       },
       {
@@ -6580,6 +6868,7 @@
             "hindi": "<strong>वापस कब आए </strong>"
           }
         },
+        "hideInContents": true,
         "_row_num": 114
       },
       {
@@ -6590,6 +6879,7 @@
             "hindi": "बच्चा अधिक बीमार हो जाए."
           }
         },
+        "hideInContents": true,
         "_row_num": 115
       },
       {
@@ -6600,6 +6890,7 @@
             "hindi": "स्तनपान या अन्य तरल पदार्थ नही ले सके."
           }
         },
+        "hideInContents": true,
         "_row_num": 116
       },
       {
@@ -6616,6 +6907,7 @@
             "hindi": "मल मैं खून."
           }
         },
+        "hideInContents": true,
         "_row_num": 118
       },
       {
@@ -6631,6 +6923,7 @@
             "hindi": "बहुत कम पीना."
           }
         },
+        "hideInContents": true,
         "_row_num": 120
       },
       {
@@ -6646,6 +6939,7 @@
             "hindi": "बुखार हो जाए."
           }
         },
+        "hideInContents": true,
         "_row_num": 122
       },
       {
@@ -7784,6 +8078,41 @@
         "_row_num": 3
       },
       {
+        "setting_name": "PatientDemographics",
+        "display": {
+          "title": "PatientDemographics"
+        },
+        "_row_num": 4
+      },
+      {
+        "setting_name": "DangerSigns",
+        "display": {
+          "title": "DangerSigns"
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "Respitory",
+        "display": {
+          "title": "Respitory"
+        },
+        "_row_num": 6
+      },
+      {
+        "setting_name": "Diarrhoea",
+        "display": {
+          "title": "Diarrhoea"
+        },
+        "_row_num": 7
+      },
+      {
+        "setting_name": "Fever",
+        "display": {
+          "title": "Fever"
+        },
+        "_row_num": 8
+      },
+      {
         "setting_name": "survey",
         "display": {
           "title": {
@@ -7791,12 +8120,12 @@
             "hindi": "IMNCI"
           }
         },
-        "_row_num": 4
+        "_row_num": 9
       },
       {
         "setting_name": "table_id",
         "value": "imnci",
-        "_row_num": 5
+        "_row_num": 10
       },
       {
         "setting_name": "default",
@@ -7806,7 +8135,7 @@
             "hindi": "English (as hindi name)"
           }
         },
-        "_row_num": 6
+        "_row_num": 11
       },
       {
         "setting_name": "hindi",
@@ -7816,7 +8145,7 @@
             "hindi": "Hindi (as hindi name)"
           }
         },
-        "_row_num": 7
+        "_row_num": 12
       }
     ]
   },
@@ -7832,6 +8161,41 @@
         "value": 20130509,
         "_row_num": 3
       },
+      "PatientDemographics": {
+        "setting_name": "PatientDemographics",
+        "display": {
+          "title": "PatientDemographics"
+        },
+        "_row_num": 4
+      },
+      "DangerSigns": {
+        "setting_name": "DangerSigns",
+        "display": {
+          "title": "DangerSigns"
+        },
+        "_row_num": 5
+      },
+      "Respitory": {
+        "setting_name": "Respitory",
+        "display": {
+          "title": "Respitory"
+        },
+        "_row_num": 6
+      },
+      "Diarrhoea": {
+        "setting_name": "Diarrhoea",
+        "display": {
+          "title": "Diarrhoea"
+        },
+        "_row_num": 7
+      },
+      "Fever": {
+        "setting_name": "Fever",
+        "display": {
+          "title": "Fever"
+        },
+        "_row_num": 8
+      },
       "survey": {
         "setting_name": "survey",
         "display": {
@@ -7840,12 +8204,12 @@
             "hindi": "IMNCI"
           }
         },
-        "_row_num": 4
+        "_row_num": 9
       },
       "table_id": {
         "setting_name": "table_id",
         "value": "imnci",
-        "_row_num": 5
+        "_row_num": 10
       },
       "default": {
         "setting_name": "default",
@@ -7855,7 +8219,7 @@
             "hindi": "English (as hindi name)"
           }
         },
-        "_row_num": 6
+        "_row_num": 11
       },
       "hindi": {
         "setting_name": "hindi",
@@ -7865,11 +8229,11 @@
             "hindi": "Hindi (as hindi name)"
           }
         },
-        "_row_num": 7
+        "_row_num": 12
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 4,
+        "_row_num": 9,
         "value": [
           {
             "display": {
@@ -7878,7 +8242,7 @@
                 "hindi": "English (as hindi name)"
               }
             },
-            "_row_num": 6,
+            "_row_num": 11,
             "name": "default"
           },
           {
@@ -7888,14 +8252,14 @@
                 "hindi": "Hindi (as hindi name)"
               }
             },
-            "_row_num": 7,
+            "_row_num": 12,
             "name": "hindi"
           }
         ]
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 4,
+        "_row_num": 9,
         "value": "default"
       },
       "initial": {
@@ -7906,17 +8270,9 @@
             "hindi": "IMNCI"
           }
         },
-        "_row_num": 4
+        "_row_num": 9
       },
       "Classification": {
-        "display": {
-          "title": {
-            "default": "IMNCI",
-            "hindi": "IMNCI"
-          }
-        }
-      },
-      "DangerSigns": {
         "display": {
           "title": {
             "default": "IMNCI",
@@ -7932,14 +8288,6 @@
           }
         }
       },
-      "Diarrhoea": {
-        "display": {
-          "title": {
-            "default": "IMNCI",
-            "hindi": "IMNCI"
-          }
-        }
-      },
       "Ear": {
         "display": {
           "title": {
@@ -7948,31 +8296,7 @@
           }
         }
       },
-      "Fever": {
-        "display": {
-          "title": {
-            "default": "IMNCI",
-            "hindi": "IMNCI"
-          }
-        }
-      },
       "Malnutrition": {
-        "display": {
-          "title": {
-            "default": "IMNCI",
-            "hindi": "IMNCI"
-          }
-        }
-      },
-      "PatientDemographics": {
-        "display": {
-          "title": {
-            "default": "IMNCI",
-            "hindi": "IMNCI"
-          }
-        }
-      },
-      "Respitory": {
         "display": {
           "title": {
             "default": "IMNCI",
@@ -10622,6 +10946,7 @@
                 "hindi": "पूछें"
               }
             },
+            "hideInContents": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -10725,6 +11050,7 @@
                 "hindi": "<strong>ख़तरा चिन्ह </strong>"
               }
             },
+            "hideInContents": true,
             "_row_num": 15,
             "__rowNum__": 14,
             "_token_type": "prompt",
@@ -10740,6 +11066,7 @@
                 "hindi": "<li>पी नही सकना या स्तनपान नही कर सकना </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
@@ -10755,6 +11082,7 @@
                 "hindi": "<li>सब कुछ ऊलती कर देना</li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 20,
             "__rowNum__": 19,
             "_token_type": "prompt",
@@ -10770,6 +11098,7 @@
                 "hindi": "<li>दौरे पढ़ना </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 23,
             "__rowNum__": 22,
             "_token_type": "prompt",
@@ -10785,6 +11114,7 @@
                 "hindi": "<li>सुस्त या बेहोश</li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",
@@ -10800,6 +11130,7 @@
                 "hindi": "<li>ऑक्सीजन संतृप्ति कम से कम 90%</li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 29,
             "__rowNum__": 28,
             "_token_type": "prompt",
@@ -11148,6 +11479,7 @@
                 "hindi": "पूछें"
               }
             },
+            "hideInContents ": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -11198,6 +11530,7 @@
                 "hindi": "शिशु की सामानया स्थिति देखें."
               }
             },
+            "hideInContents ": true,
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
@@ -11250,6 +11583,7 @@
               }
             },
             "required": true,
+            "hideInContents ": true,
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
@@ -11481,6 +11815,7 @@
                 "hindi": "पूछें:"
               }
             },
+            "hideInContents": true,
             "_row_num": 19,
             "__rowNum__": 18,
             "_token_type": "prompt",
@@ -11571,6 +11906,7 @@
                 "hindi": "देखें व महसूस करें."
               }
             },
+            "hideInContents": true,
             "_row_num": 32,
             "__rowNum__": 31,
             "_token_type": "prompt",
@@ -11622,6 +11958,7 @@
                 "hindi": "निम्नलिखित पे निशान करे"
               }
             },
+            "hideInContents": true,
             "_row_num": 40,
             "__rowNum__": 39,
             "_token_type": "prompt",
@@ -12135,6 +12472,7 @@
                 "hindi": "देखें व महसूस करें."
               }
             },
+            "hideInContents": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -12267,6 +12605,7 @@
             "display": {
               "text": "<div style=\"background-color:#F5A9A9;\"><strong>GENERAL DANGER SIGN PRESENT</div>"
             },
+            "hideInContents": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -12279,6 +12618,7 @@
             "display": {
               "text": "<u>RESPIRATORY CLASSIFICATION: </u>"
             },
+            "hideInContents": true,
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
@@ -12294,6 +12634,7 @@
                 "hindi": "<strong>गंभीर निमोनिया या बहुत गंभीर बीमारी</strong>"
               }
             },
+            "hideInContents": true,
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -12306,6 +12647,7 @@
             "display": {
               "hint": "General danger sign pesent"
             },
+            "hideInContents": true,
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
@@ -12321,6 +12663,7 @@
                 "hindi": "पसली का अत्यधिक धसना"
               }
             },
+            "hideInContents": true,
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -12333,6 +12676,7 @@
             "display": {
               "hint": "Stridor in calm child"
             },
+            "hideInContents": true,
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
@@ -12348,6 +12692,7 @@
                 "hindi": "निमोनिया"
               }
             },
+            "hideInContents": true,
             "_row_num": 21,
             "__rowNum__": 20,
             "_token_type": "prompt",
@@ -12363,6 +12708,7 @@
                 "hindi": "तेज़ी से साँस लेना"
               }
             },
+            "hideInContents": true,
             "_row_num": 23,
             "__rowNum__": 22,
             "_token_type": "prompt",
@@ -12378,6 +12724,7 @@
                 "hindi": "खाँसी या ज़ुकाम"
               }
             },
+            "hideInContents": true,
             "_row_num": 27,
             "__rowNum__": 26,
             "_token_type": "prompt",
@@ -12390,6 +12737,7 @@
             "display": {
               "text": "<u>DIARRHOEA CLASSIFICATION:</u>"
             },
+            "hideInContents": true,
             "_row_num": 31,
             "__rowNum__": 30,
             "_token_type": "prompt",
@@ -12405,6 +12753,7 @@
                 "hindi": "<strong>गंभीर निर्जलीकरण</strong>"
               }
             },
+            "hideInContents": true,
             "_row_num": 33,
             "__rowNum__": 32,
             "_token_type": "prompt",
@@ -12420,6 +12769,7 @@
                 "hindi": "सुस्त या बेहोश"
               }
             },
+            "hideInContents": true,
             "_row_num": 36,
             "__rowNum__": 35,
             "_token_type": "prompt",
@@ -12435,6 +12785,7 @@
                 "hindi": "धँसी हुई आँखें."
               }
             },
+            "hideInContents": true,
             "_row_num": 39,
             "__rowNum__": 38,
             "_token_type": "prompt",
@@ -12450,6 +12801,7 @@
                 "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना."
               }
             },
+            "hideInContents": true,
             "_row_num": 42,
             "__rowNum__": 41,
             "_token_type": "prompt",
@@ -12465,6 +12817,7 @@
                 "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
               }
             },
+            "hideInContents": true,
             "_row_num": 45,
             "__rowNum__": 44,
             "_token_type": "prompt",
@@ -12480,6 +12833,7 @@
                 "hindi": "कुछ निर्जलीकरण"
               }
             },
+            "hideInContents": true,
             "_row_num": 49,
             "__rowNum__": 48,
             "_token_type": "prompt",
@@ -12495,6 +12849,7 @@
                 "hindi": "बेचें व चिढ़चिढ़ा"
               }
             },
+            "hideInContents": true,
             "_row_num": 51,
             "__rowNum__": 50,
             "_token_type": "prompt",
@@ -12510,6 +12865,7 @@
                 "hindi": "धँसी हुई आँखें"
               }
             },
+            "hideInContents": true,
             "_row_num": 54,
             "__rowNum__": 53,
             "_token_type": "prompt",
@@ -12525,6 +12881,7 @@
                 "hindi": "प्यासा है"
               }
             },
+            "hideInContents": true,
             "_row_num": 57,
             "__rowNum__": 56,
             "_token_type": "prompt",
@@ -12540,6 +12897,7 @@
                 "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
               }
             },
+            "hideInContents": true,
             "_row_num": 60,
             "__rowNum__": 59,
             "_token_type": "prompt",
@@ -12559,6 +12917,7 @@
                 "hindi": "निर्जलीकरण के पयापत चिन्ह का न होना."
               }
             },
+            "hideInContents": true,
             "_row_num": 63,
             "__rowNum__": 62,
             "_token_type": "prompt",
@@ -12574,6 +12933,7 @@
                 "hindi": "गंभीर लगातार दस्त"
               }
             },
+            "hideInContents": true,
             "_row_num": 67,
             "__rowNum__": 66,
             "_token_type": "prompt",
@@ -12589,6 +12949,7 @@
                 "hindi": "१४ दिन से ज़्यादा दस्त"
               }
             },
+            "hideInContents": true,
             "_row_num": 69,
             "__rowNum__": 68,
             "_token_type": "prompt",
@@ -12601,6 +12962,7 @@
             "display": {
               "hint": "Deyhdration"
             },
+            "hideInContents": true,
             "_row_num": 72,
             "__rowNum__": 71,
             "_token_type": "prompt",
@@ -12613,6 +12975,7 @@
             "display": {
               "text": "<div style=\"background-color:yellow;\"><strong>PERSISTENT DIARRHOEA</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 76,
             "__rowNum__": 75,
             "_token_type": "prompt",
@@ -12628,6 +12991,7 @@
                 "hindi": "१४ दिन से ज़्यादा दस्त"
               }
             },
+            "hideInContents": true,
             "_row_num": 78,
             "__rowNum__": 77,
             "_token_type": "prompt",
@@ -12643,6 +13007,7 @@
                 "hindi": "पोचिश"
               }
             },
+            "hideInContents": true,
             "_row_num": 82,
             "__rowNum__": 81,
             "_token_type": "prompt",
@@ -12658,6 +13023,7 @@
                 "hindi": "माल मैं खून"
               }
             },
+            "hideInContents": true,
             "_row_num": 84,
             "__rowNum__": 83,
             "_token_type": "prompt",
@@ -12670,6 +13036,7 @@
             "display": {
               "text": "<u>FEVER CLASSIFICATION:</u>"
             },
+            "hideInContents": true,
             "_row_num": 88,
             "__rowNum__": 87,
             "_token_type": "prompt",
@@ -12683,6 +13050,7 @@
             "display": {
               "text": "<div style=\"background-color:#F5A9A9;\"><strong>VERY SEVERE FEBRILE DISEASE</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 90,
             "__rowNum__": 89,
             "_token_type": "prompt",
@@ -12695,6 +13063,7 @@
             "display": {
               "hint": "Danger Sign Present"
             },
+            "hideInContents": true,
             "_row_num": 92,
             "__rowNum__": 91,
             "_token_type": "prompt",
@@ -12707,6 +13076,7 @@
             "display": {
               "hint": "Stiff Neck"
             },
+            "hideInContents": true,
             "_row_num": 95,
             "__rowNum__": 94,
             "_token_type": "prompt",
@@ -12719,6 +13089,7 @@
             "display": {
               "hint": "Bulging Fontanelle"
             },
+            "hideInContents": true,
             "_row_num": 98,
             "__rowNum__": 97,
             "_token_type": "prompt",
@@ -12731,6 +13102,7 @@
             "display": {
               "text": "<div style=\"background-color:yellow;\"><strong>MALARIA</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 102,
             "__rowNum__": 101,
             "_token_type": "prompt",
@@ -12746,6 +13118,7 @@
                 "hindi": "पूछने से या छूने से या तापमान ३७.५ डेग सी या अधिक"
               }
             },
+            "hideInContents": true,
             "_row_num": 104,
             "__rowNum__": 103,
             "_token_type": "prompt",
@@ -12758,6 +13131,7 @@
             "display": {
               "hint": "NO runny nose, NO measles, and NO other cause of fever"
             },
+            "hideInContents": true,
             "_row_num": 107,
             "__rowNum__": 106,
             "_token_type": "prompt",
@@ -12770,6 +13144,7 @@
             "display": {
               "text": "<div style=\"background-color:#81F781;\">FEVER-MALARIA UNLIKELY</div>"
             },
+            "hideInContents": true,
             "_row_num": 111,
             "__rowNum__": 110,
             "_token_type": "prompt",
@@ -12782,6 +13157,7 @@
             "display": {
               "text": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE COMPLICATED MEASLES</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 114,
             "__rowNum__": 113,
             "_token_type": "prompt",
@@ -12794,6 +13170,7 @@
             "display": {
               "hint": "Danger Sign Present"
             },
+            "hideInContents": true,
             "_row_num": 116,
             "__rowNum__": 115,
             "_token_type": "prompt",
@@ -12806,6 +13183,7 @@
             "display": {
               "hint": "Clouding of cornea"
             },
+            "hideInContents": true,
             "_row_num": 119,
             "__rowNum__": 118,
             "_token_type": "prompt",
@@ -12818,6 +13196,7 @@
             "display": {
               "hint": "Deep or extensive mouth ulcers"
             },
+            "hideInContents": true,
             "_row_num": 122,
             "__rowNum__": 121,
             "_token_type": "prompt",
@@ -12830,6 +13209,7 @@
             "display": {
               "text": "<div style=\"background-color:yellow;\"><strong>MEASLES WITH EYE OR MOUTH COMPLICATIONS</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 126,
             "__rowNum__": 125,
             "_token_type": "prompt",
@@ -12842,6 +13222,7 @@
             "display": {
               "hint": "Pus draining from the eye"
             },
+            "hideInContents": true,
             "_row_num": 128,
             "__rowNum__": 127,
             "_token_type": "prompt",
@@ -12854,6 +13235,7 @@
             "display": {
               "hint": "Mouth ulcers"
             },
+            "hideInContents": true,
             "_row_num": 131,
             "__rowNum__": 130,
             "_token_type": "prompt",
@@ -12866,6 +13248,7 @@
             "display": {
               "text": "<div style=\"background-color:#81F781;\"><strong>MEASLES</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 135,
             "__rowNum__": 134,
             "_token_type": "prompt",
@@ -12878,6 +13261,7 @@
             "display": {
               "text": "<u>EAR PROBLEM CLASSIFICATION:</u>"
             },
+            "hideInContents": true,
             "_row_num": 139,
             "__rowNum__": 138,
             "_token_type": "prompt",
@@ -12890,6 +13274,7 @@
             "display": {
               "text": "<div style=\"background-color:#F5A9A9;\"><strong>MASTOIDITIS</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 141,
             "__rowNum__": 140,
             "_token_type": "prompt",
@@ -12902,6 +13287,7 @@
             "display": {
               "hint": "Tender swelling behind the ear"
             },
+            "hideInContents": true,
             "_row_num": 143,
             "__rowNum__": 142,
             "_token_type": "prompt",
@@ -12914,6 +13300,7 @@
             "display": {
               "text": "<div style=\"background-color:yellow;\"><strong>ACUTE EAR INFECTION</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 147,
             "__rowNum__": 146,
             "_token_type": "prompt",
@@ -12926,6 +13313,7 @@
             "display": {
               "hint": "Ear pain"
             },
+            "hideInContents": true,
             "_row_num": 149,
             "__rowNum__": 148,
             "_token_type": "prompt",
@@ -12938,6 +13326,7 @@
             "display": {
               "hint": "Pus is draining from the ear and discharge is reported for less than 14 days"
             },
+            "hideInContents": true,
             "_row_num": 152,
             "__rowNum__": 151,
             "_token_type": "prompt",
@@ -12950,6 +13339,7 @@
             "display": {
               "text": "<div style=\"background-color:yellow;\"><strong>CHRONIC EAR INFECTION</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 156,
             "__rowNum__": 155,
             "_token_type": "prompt",
@@ -12962,6 +13352,7 @@
             "display": {
               "hint": "Pus is seen draining from the ear and discharge is reported for 14 days or more"
             },
+            "hideInContents": true,
             "_row_num": 158,
             "__rowNum__": 157,
             "_token_type": "prompt",
@@ -12974,6 +13365,7 @@
             "display": {
               "text": "<div style=\"background-color:#81F781;\">NO EAR INFECTION</div>"
             },
+            "hideInContents": true,
             "_row_num": 162,
             "__rowNum__": 161,
             "_token_type": "prompt",
@@ -12986,6 +13378,7 @@
             "display": {
               "text": "<u>NUTRITIONAL STATUS CLASSIFICATION:</u>"
             },
+            "hideInContents": true,
             "_row_num": 165,
             "__rowNum__": 164,
             "_token_type": "prompt",
@@ -12998,6 +13391,7 @@
             "display": {
               "text": "<div style=\"background-color:#F5A9A9;\"><strong>SEVERE MALNUTRITION</strong></div>"
             },
+            "hideInContents": true,
             "_row_num": 168,
             "__rowNum__": 167,
             "_token_type": "prompt",
@@ -13010,6 +13404,7 @@
             "display": {
               "hint": "Visible severe wasting"
             },
+            "hideInContents": true,
             "_row_num": 171,
             "__rowNum__": 170,
             "_token_type": "prompt",
@@ -13022,6 +13417,7 @@
             "display": {
               "hint": "Oedema of both feet"
             },
+            "hideInContents": true,
             "_row_num": 174,
             "__rowNum__": 173,
             "_token_type": "prompt",
@@ -13035,6 +13431,7 @@
               "text": "<div style=\"background-color:yellow;\"><strong>VERY LOW WEIGHT</strong></div>",
               "hint": "Very low weight for age"
             },
+            "hideInContents": true,
             "_row_num": 178,
             "__rowNum__": 177,
             "_token_type": "prompt",
@@ -13047,6 +13444,7 @@
             "display": {
               "text": "<div style=\"background-color:#81F781;\">NOT VERY LOW WEIGHT</div>"
             },
+            "hideInContents": true,
             "_row_num": 182,
             "__rowNum__": 181,
             "_token_type": "prompt",
@@ -13059,6 +13457,7 @@
             "display": {
               "text": "<u>ANAEMIA CLASSIFICATION:</u>"
             },
+            "hideInContents": true,
             "_row_num": 185,
             "__rowNum__": 184,
             "_token_type": "prompt",
@@ -13075,6 +13474,7 @@
               },
               "hint": "Severe palmar pallor"
             },
+            "hideInContents": true,
             "_row_num": 188,
             "__rowNum__": 187,
             "_token_type": "prompt",
@@ -13091,6 +13491,7 @@
               },
               "hint": "Some palmar pallor"
             },
+            "hideInContents": true,
             "_row_num": 192,
             "__rowNum__": 191,
             "_token_type": "prompt",
@@ -13106,6 +13507,7 @@
                 "hindi": "अनीमिया नही"
               }
             },
+            "hideInContents": true,
             "_row_num": 196,
             "__rowNum__": 195,
             "_token_type": "prompt",
@@ -13178,6 +13580,7 @@
             "display": {
               "text": "<h3>Give Vitamin A</h3>"
             },
+            "hideInContents": true,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -13190,6 +13593,7 @@
             "display": {
               "hint": "Give single dose in clinic in Persistent Diarrhoea & Severe Malnutrition"
             },
+            "hideInContents": true,
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -13202,6 +13606,7 @@
             "display": {
               "hint": "Give two doses in Measles (Give first does in clinic and give mother one dose to give at home the next day)."
             },
+            "hideInContents": true,
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
@@ -13217,6 +13622,7 @@
                 "hindi": "डोसेज देने के निर्देशन:"
               }
             },
+            "hideInContents": true,
             "_row_num": 13,
             "__rowNum__": 12,
             "_token_type": "prompt",
@@ -13229,6 +13635,7 @@
             "display": {
               "text": "Give .5 ml"
             },
+            "hideInContents": true,
             "_row_num": 15,
             "__rowNum__": 14,
             "_token_type": "prompt",
@@ -13241,6 +13648,7 @@
             "display": {
               "text": "Give 1 ml"
             },
+            "hideInContents": true,
             "_row_num": 18,
             "__rowNum__": 17,
             "_token_type": "prompt",
@@ -13253,6 +13661,7 @@
             "display": {
               "text": "Give 2 ml"
             },
+            "hideInContents": true,
             "_row_num": 21,
             "__rowNum__": 20,
             "_token_type": "prompt",
@@ -13265,6 +13674,7 @@
             "display": {
               "text": "Initial Treatment of Severe Conditions"
             },
+            "hideInContents": true,
             "_row_num": 31,
             "__rowNum__": 30,
             "_token_type": "prompt",
@@ -13304,6 +13714,7 @@
               "text": "<h3>Give First does of Cotrimoxazole </h3>",
               "hint": "If not possible, give oral amoxycillin."
             },
+            "hideInContents": true,
             "_row_num": 40,
             "__rowNum__": 39,
             "_token_type": "prompt",
@@ -13416,6 +13827,7 @@
             "display": {
               "text": "Intravenous or intramuscular quinine dosage:"
             },
+            "hideInContents": true,
             "_row_num": 60,
             "__rowNum__": 59,
             "_token_type": "prompt",
@@ -13428,6 +13840,7 @@
             "display": {
               "text": "<p>Give 0.4 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.2 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
             },
+            "hideInContents": true,
             "_row_num": 62,
             "__rowNum__": 61,
             "_token_type": "prompt",
@@ -13440,6 +13853,7 @@
             "display": {
               "text": "<p>Give 0.6 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.3 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
             },
+            "hideInContents": true,
             "_row_num": 65,
             "__rowNum__": 64,
             "_token_type": "prompt",
@@ -13452,6 +13866,7 @@
             "display": {
               "text": "<p>Give 0.8 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.4 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
             },
+            "hideInContents": true,
             "_row_num": 68,
             "__rowNum__": 67,
             "_token_type": "prompt",
@@ -13464,6 +13879,7 @@
             "display": {
               "text": "<p>Give 1.0 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.5 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
             },
+            "hideInContents": true,
             "_row_num": 71,
             "__rowNum__": 70,
             "_token_type": "prompt",
@@ -13476,6 +13892,7 @@
             "display": {
               "text": "<p>Give 1.2 ml of 150 mg/ml quinine salt (in 2 ml ampoules) or</p>\n<p>Give 0.6 ml of 300 mg/ml quinine salt (in 2 ml ampoules)</p>"
             },
+            "hideInContents": true,
             "_row_num": 74,
             "__rowNum__": 73,
             "_token_type": "prompt",
@@ -13504,6 +13921,7 @@
             "display": {
               "text": "Treat High Fever (> 38.5°C) With Paracetamol"
             },
+            "hideInContents": true,
             "_row_num": 83,
             "__rowNum__": 82,
             "_token_type": "prompt",
@@ -13523,6 +13941,7 @@
                 "hindi": "२ महीन से कम उम्र के बच्चों के लिए कोई निर्देशन नही है."
               }
             },
+            "hideInContents": true,
             "_row_num": 86,
             "__rowNum__": 85,
             "_token_type": "prompt",
@@ -13542,6 +13961,7 @@
                 "hindi": "५०० मी ग्राम का १/४ टॅबलेट दें"
               }
             },
+            "hideInContents": true,
             "_row_num": 89,
             "__rowNum__": 88,
             "_token_type": "prompt",
@@ -13561,6 +13981,7 @@
                 "hindi": "५०० मी ग्राम का १/२ टॅबलेट दें"
               }
             },
+            "hideInContents": true,
             "_row_num": 92,
             "__rowNum__": 91,
             "_token_type": "prompt",
@@ -13573,6 +13994,7 @@
             "display": {
               "text": "<h3>Treat Eye Infection with Tetracycline Eye Ointment.</h3>"
             },
+            "hideInContents": true,
             "_row_num": 102,
             "__rowNum__": 101,
             "_token_type": "prompt",
@@ -13585,6 +14007,7 @@
             "display": {
               "text": "Clean both eyes"
             },
+            "hideInContents": true,
             "_row_num": 103,
             "__rowNum__": 102,
             "_token_type": "prompt",
@@ -13597,6 +14020,7 @@
             "display": {
               "hint": "Wash Hands"
             },
+            "hideInContents": true,
             "_row_num": 104,
             "__rowNum__": 103,
             "_token_type": "prompt",
@@ -13609,6 +14033,7 @@
             "display": {
               "hint": "Ask child to close the eye."
             },
+            "hideInContents": true,
             "_row_num": 105,
             "__rowNum__": 104,
             "_token_type": "prompt",
@@ -13621,6 +14046,7 @@
             "display": {
               "hint": "Use clean cloth and water to gently wipe away pus."
             },
+            "hideInContents": true,
             "_row_num": 106,
             "__rowNum__": 105,
             "_token_type": "prompt",
@@ -13633,6 +14059,7 @@
             "display": {
               "text": "Then apply tetracycline eye ointment"
             },
+            "hideInContents": true,
             "_row_num": 107,
             "__rowNum__": 106,
             "_token_type": "prompt",
@@ -13645,6 +14072,7 @@
             "display": {
               "hint": "Ask the child to look up."
             },
+            "hideInContents": true,
             "_row_num": 108,
             "__rowNum__": 107,
             "_token_type": "prompt",
@@ -13657,6 +14085,7 @@
             "display": {
               "hint": "Squirt a small amount of ointment on the inside of the lower lid."
             },
+            "hideInContents": true,
             "_row_num": 109,
             "__rowNum__": 108,
             "_token_type": "prompt",
@@ -13669,6 +14098,7 @@
             "display": {
               "hint": "Wash hands again."
             },
+            "hideInContents": true,
             "_row_num": 110,
             "__rowNum__": 109,
             "_token_type": "prompt",
@@ -13742,6 +14172,7 @@
                 "hindi": "<h3>कोटरिमोक्षज़ोल देने के इन्स्ट्रक्षन</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 135,
             "__rowNum__": 134,
             "_token_type": "prompt",
@@ -13839,6 +14270,7 @@
             "display": {
               "text": "<h3>Give Paracetamol for High Fever or Ear Pain</h3>"
             },
+            "hideInContents": true,
             "_row_num": 154,
             "__rowNum__": 153,
             "_token_type": "prompt",
@@ -13854,6 +14286,7 @@
                 "hindi": "क्लिनिक मैं एक खुराक प्रेसेटमल की दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 155,
             "__rowNum__": 154,
             "_token_type": "prompt",
@@ -13866,6 +14299,7 @@
             "display": {
               "hint": "Give 3 additional doses of paracetamol for use at home every 6 hours until high fever or ear pain is gone."
             },
+            "hideInContents": true,
             "_row_num": 157,
             "__rowNum__": 156,
             "_token_type": "prompt",
@@ -13885,6 +14319,7 @@
                 "hindi": "२ महीन से कम उम्र के बच्चों के लिए कोई निर्देशन नही है."
               }
             },
+            "hideInContents": true,
             "_row_num": 160,
             "__rowNum__": 159,
             "_token_type": "prompt",
@@ -13904,6 +14339,7 @@
                 "hindi": "५०० मी ग्राम का १/४ टॅबलेट दें"
               }
             },
+            "hideInContents": true,
             "_row_num": 163,
             "__rowNum__": 162,
             "_token_type": "prompt",
@@ -13923,6 +14359,7 @@
                 "hindi": "५०० मी ग्राम का १/२ टॅबलेट दें"
               }
             },
+            "hideInContents": true,
             "_row_num": 166,
             "__rowNum__": 165,
             "_token_type": "prompt",
@@ -13966,6 +14403,7 @@
             "display": {
               "text": "<h3>Treat Eye Infection with Tetracycline Eye Ointment.</h3>"
             },
+            "hideInContents": true,
             "_row_num": 201,
             "__rowNum__": 200,
             "_token_type": "prompt",
@@ -13978,6 +14416,7 @@
             "display": {
               "text": "Clean both eyes 3 times daily."
             },
+            "hideInContents": true,
             "_row_num": 202,
             "__rowNum__": 201,
             "_token_type": "prompt",
@@ -13990,6 +14429,7 @@
             "display": {
               "hint": "Wash hands."
             },
+            "hideInContents": true,
             "_row_num": 203,
             "__rowNum__": 202,
             "_token_type": "prompt",
@@ -14002,6 +14442,7 @@
             "display": {
               "hint": "Ask child to close the eye."
             },
+            "hideInContents": true,
             "_row_num": 204,
             "__rowNum__": 203,
             "_token_type": "prompt",
@@ -14014,6 +14455,7 @@
             "display": {
               "hint": "Use clean cloth and water to gently wipe away pus."
             },
+            "hideInContents": true,
             "_row_num": 205,
             "__rowNum__": 204,
             "_token_type": "prompt",
@@ -14026,6 +14468,7 @@
             "display": {
               "text": "Then apply tetracycline eye ointment in both eyes 3 times daily."
             },
+            "hideInContents": true,
             "_row_num": 206,
             "__rowNum__": 205,
             "_token_type": "prompt",
@@ -14038,6 +14481,7 @@
             "display": {
               "hint": "Ask the child to look up."
             },
+            "hideInContents": true,
             "_row_num": 207,
             "__rowNum__": 206,
             "_token_type": "prompt",
@@ -14050,6 +14494,7 @@
             "display": {
               "hint": "Squirt a small amount of ointment on the inside of the lower lid."
             },
+            "hideInContents": true,
             "_row_num": 208,
             "__rowNum__": 207,
             "_token_type": "prompt",
@@ -14062,6 +14507,7 @@
             "display": {
               "hint": "Wash hands again."
             },
+            "hideInContents": true,
             "_row_num": 209,
             "__rowNum__": 208,
             "_token_type": "prompt",
@@ -14074,6 +14520,7 @@
             "display": {
               "text": "Treat until redness is gone."
             },
+            "hideInContents": true,
             "_row_num": 210,
             "__rowNum__": 209,
             "_token_type": "prompt",
@@ -14086,6 +14533,7 @@
             "display": {
               "text": "Do not use other eye ointments or drops, or put anything else in the eye."
             },
+            "hideInContents": true,
             "_row_num": 211,
             "__rowNum__": 210,
             "_token_type": "prompt",
@@ -14098,6 +14546,7 @@
             "display": {
               "text": "<h3>Dry the Ear by Wicking.</h3>"
             },
+            "hideInContents": true,
             "_row_num": 217,
             "__rowNum__": 216,
             "_token_type": "prompt",
@@ -14110,6 +14559,7 @@
             "display": {
               "text": "Dry the ear at least 3 time daily"
             },
+            "hideInContents": true,
             "_row_num": 218,
             "__rowNum__": 217,
             "_token_type": "prompt",
@@ -14122,6 +14572,7 @@
             "display": {
               "hint": "Roll clean absorbent cloth or soft, strong tissue paper into a wick."
             },
+            "hideInContents": true,
             "_row_num": 219,
             "__rowNum__": 218,
             "_token_type": "prompt",
@@ -14134,6 +14585,7 @@
             "display": {
               "hint": "Place the wick in the young infant's ear."
             },
+            "hideInContents": true,
             "_row_num": 220,
             "__rowNum__": 219,
             "_token_type": "prompt",
@@ -14146,6 +14598,7 @@
             "display": {
               "hint": "Remove the wick when wet."
             },
+            "hideInContents": true,
             "_row_num": 221,
             "__rowNum__": 220,
             "_token_type": "prompt",
@@ -14158,6 +14611,7 @@
             "display": {
               "hint": "Replace the wick with a clean one and repeat these steps until the ear is dry."
             },
+            "hideInContents": true,
             "_row_num": 222,
             "__rowNum__": 221,
             "_token_type": "prompt",
@@ -14171,6 +14625,7 @@
               "text": "Give Zinc",
               "hint": "For persistent diarrhoea give zinc sulphate (20 mg elemental zinc) daily for 14 days."
             },
+            "hideInContents": true,
             "_row_num": 227,
             "__rowNum__": 226,
             "_token_type": "prompt",
@@ -14197,6 +14652,7 @@
             "display": {
               "text": "Give one zinc tablet."
             },
+            "hideInContents": true,
             "_row_num": 230,
             "__rowNum__": 229,
             "_token_type": "prompt",
@@ -14209,6 +14665,7 @@
             "display": {
               "text": "Give 10 ml of zinc syrup."
             },
+            "hideInContents": true,
             "_row_num": 233,
             "__rowNum__": 232,
             "_token_type": "prompt",
@@ -14224,6 +14681,7 @@
                 "hindi": "<h3>मा को सलाह दें खाँसी ज़ुकाम के लिए घर मैं देख भाल करें.</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 240,
             "__rowNum__": 239,
             "_token_type": "prompt",
@@ -14239,6 +14697,7 @@
                 "hindi": "<strong>मा से बोले</strong>"
               }
             },
+            "hideInContents": true,
             "_row_num": 241,
             "__rowNum__": 240,
             "_token_type": "prompt",
@@ -14254,6 +14713,7 @@
                 "hindi": "<li>बीमारी मैं भी खाना दें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 242,
             "__rowNum__": 241,
             "_token_type": "prompt",
@@ -14274,6 +14734,7 @@
                 "hindi": "<ul><li>बच्चे को ज़्यादा पीने के लिए दें.</li><li> घर पर देने वाले पेय की सूची देखें.</li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 243,
             "__rowNum__": 242,
             "_token_type": "prompt",
@@ -14289,6 +14750,7 @@
                 "hindi": "<li>गले की खराश के लिए द्वा दें. (६ महीने की उम्र से उपर)</li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 245,
             "__rowNum__": 244,
             "_token_type": "prompt",
@@ -14304,6 +14766,7 @@
                 "hindi": "घर मैं काम आने वाली सुरक्षित चीज़े बताए. <li>स्तनपान जारी रखें</li><li> घर मैं शहदाए सौंठ</li><li> हरबल चाय या कोई अन्य सुरक्षित घरेलू इलाज</li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 248,
             "__rowNum__": 247,
             "_token_type": "prompt",
@@ -14319,6 +14782,7 @@
                 "hindi": "खाँसी की दावा न पिलाए."
               }
             },
+            "hideInContents": true,
             "_row_num": 251,
             "__rowNum__": 250,
             "_token_type": "prompt",
@@ -14334,6 +14798,7 @@
                 "hindi": "<li>अगर बाँध नाक स्तनपान मैं रुकावट लाती है तो नाक सॉफ करें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 253,
             "__rowNum__": 252,
             "_token_type": "prompt",
@@ -14349,6 +14814,7 @@
                 "hindi": "<li>चिन्ह के लिए सावधान रह और यदि कुछ होये तो वापस आए. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 254,
             "__rowNum__": 253,
             "_token_type": "prompt",
@@ -14364,6 +14830,7 @@
                 "hindi": "<li>बच्चा अधिक बीमार हो जाए. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 255,
             "__rowNum__": 254,
             "_token_type": "prompt",
@@ -14379,6 +14846,7 @@
                 "hindi": "<li>स्तनपान या अन्य तरल पदार्थ नही ले सके. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 256,
             "__rowNum__": 255,
             "_token_type": "prompt",
@@ -14395,6 +14863,7 @@
                 "hindi": "<li>तेज़ सास लेना</li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 258,
             "__rowNum__": 257,
             "_token_type": "prompt",
@@ -14410,6 +14879,7 @@
                 "hindi": "<li>सास लेने मैं दिकाट </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 261,
             "__rowNum__": 260,
             "_token_type": "prompt",
@@ -14426,6 +14896,7 @@
                 "hindi": "<li>बुखार हो जाए. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 264,
             "__rowNum__": 263,
             "_token_type": "prompt",
@@ -14442,6 +14913,7 @@
                 "hindi": "<li>मल मैं खून. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 267,
             "__rowNum__": 266,
             "_token_type": "prompt",
@@ -14473,6 +14945,7 @@
                 "hindi": "३० दिन से ज़्यादा खाँस तो रेफरल दें"
               }
             },
+            "hideInContents": true,
             "_row_num": 278,
             "__rowNum__": 277,
             "_token_type": "prompt",
@@ -14486,6 +14959,7 @@
             "display": {
               "text": "<h3>Give Oral Antimalarials for HIGH malaria risk areas after making a blood smear.</h3>"
             },
+            "hideInContents": true,
             "_row_num": 285,
             "__rowNum__": 284,
             "_token_type": "prompt",
@@ -14525,6 +14999,7 @@
               "text": "Presumptive treatment:",
               "hint": "Give to all children classified as MALARIA for 3 days."
             },
+            "hideInContents": true,
             "_row_num": 294,
             "__rowNum__": 293,
             "_token_type": "prompt",
@@ -14537,6 +15012,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Day 1</td><td colspan=\"2\">Day 2</td><td colspan=\"2\">Day 3</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td colspan=\"1\">Primaquin</td><td colspan=\"2\">Chloroquine</td><td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td><td>Tablet</td><td>Syrup</td><td>Tablet</td><td>Syrup</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td><td>1/2</td><td>7.5 ml</td><td>1/4</td><td>4 ml</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 296,
             "__rowNum__": 295,
             "_token_type": "prompt",
@@ -14549,6 +15025,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Day 1</td><td colspan=\"2\">Day 2</td><td colspan=\"2\">Day 3</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td colspan=\"1\">Primaquin</td><td colspan=\"2\">Chloroquine</td><td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td><td>Tablet</td><td>Syrup</td><td>Tablet</td><td>Syrup</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td><td>1</td><td>15 ml</td><td>1/2</td><td>7.5 ml</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 299,
             "__rowNum__": 298,
             "_token_type": "prompt",
@@ -14561,6 +15038,7 @@
             "display": {
               "hint": "Explain to the mother that she should watch her child carefully for 30 minutes after giving a dose of chloroquine."
             },
+            "hideInContents": true,
             "_row_num": 301,
             "__rowNum__": 300,
             "_token_type": "prompt",
@@ -14573,6 +15051,7 @@
             "display": {
               "hint": "Explain that itching is a possible side effect of the drug, but is not dangerous."
             },
+            "hideInContents": true,
             "_row_num": 302,
             "__rowNum__": 301,
             "_token_type": "prompt",
@@ -14586,6 +15065,7 @@
               "text": "Radical treatment:",
               "hint": "Give ONLY if blood smear is P. vivax positive; no radical treatment is required if P. falciparum smear positive."
             },
+            "hideInContents": true,
             "_row_num": 303,
             "__rowNum__": 302,
             "_token_type": "prompt",
@@ -14598,6 +15078,7 @@
             "display": {
               "text": "No radical treatment."
             },
+            "hideInContents": true,
             "_row_num": 305,
             "__rowNum__": 304,
             "_token_type": "prompt",
@@ -14610,6 +15091,7 @@
             "display": {
               "text": "Give one primaquine tablet 2.5 mg base daily for 5 days."
             },
+            "hideInContents": true,
             "_row_num": 308,
             "__rowNum__": 307,
             "_token_type": "prompt",
@@ -14622,6 +15104,7 @@
             "display": {
               "text": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
             },
+            "hideInContents": true,
             "_row_num": 310,
             "__rowNum__": 309,
             "_token_type": "prompt",
@@ -14634,6 +15117,7 @@
             "display": {
               "text": "Give 1/4 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
             },
+            "hideInContents": true,
             "_row_num": 316,
             "__rowNum__": 315,
             "_token_type": "prompt",
@@ -14646,6 +15130,7 @@
             "display": {
               "text": "Give 1 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
             },
+            "hideInContents": true,
             "_row_num": 319,
             "__rowNum__": 318,
             "_token_type": "prompt",
@@ -14659,6 +15144,7 @@
               "text": "Radical treatment:",
               "hint": "Give ONLY if blood smear is P. vivax positive; no radical treatment is required if P. falciparum smear positive."
             },
+            "hideInContents": true,
             "_row_num": 321,
             "__rowNum__": 320,
             "_token_type": "prompt",
@@ -14671,6 +15157,7 @@
             "display": {
               "text": "No radical treatment."
             },
+            "hideInContents": true,
             "_row_num": 323,
             "__rowNum__": 322,
             "_token_type": "prompt",
@@ -14683,6 +15170,7 @@
             "display": {
               "text": "Give one primaquine tablet 2.5 mg base daily for 5 days."
             },
+            "hideInContents": true,
             "_row_num": 326,
             "__rowNum__": 325,
             "_token_type": "prompt",
@@ -14695,6 +15183,7 @@
             "display": {
               "text": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
             },
+            "hideInContents": true,
             "_row_num": 328,
             "__rowNum__": 327,
             "_token_type": "prompt",
@@ -14708,6 +15197,7 @@
               "text": "Presumptive treatment:",
               "hint": "Give to all children classified as MALARIA for 1 day."
             },
+            "hideInContents": true,
             "_row_num": 334,
             "__rowNum__": 333,
             "_token_type": "prompt",
@@ -14720,6 +15210,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Day 1</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 336,
             "__rowNum__": 335,
             "_token_type": "prompt",
@@ -14732,6 +15223,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Day 1</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (50 mg base per 5 ml)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 339,
             "__rowNum__": 338,
             "_token_type": "prompt",
@@ -14745,6 +15237,7 @@
             "display": {
               "hint": "Explain to the mother that she should watch her child carefully for 30 minutes after giving a dose of chloroquine."
             },
+            "hideInContents": true,
             "_row_num": 341,
             "__rowNum__": 340,
             "_token_type": "prompt",
@@ -14758,6 +15251,7 @@
             "display": {
               "hint": "Explain that itching is a possible side effect of the drug, but is not dangerous."
             },
+            "hideInContents": true,
             "_row_num": 342,
             "__rowNum__": 341,
             "_token_type": "prompt",
@@ -14771,6 +15265,7 @@
               "text": "Radical treatment:",
               "hint": "Give ONLY if blood smear is positive for malarial parasite."
             },
+            "hideInContents": true,
             "_row_num": 343,
             "__rowNum__": 342,
             "_token_type": "prompt",
@@ -14783,6 +15278,7 @@
             "display": {
               "text": "If blood smear is P. falciparum positive"
             },
+            "hideInContents": true,
             "_row_num": 344,
             "__rowNum__": 343,
             "_token_type": "prompt",
@@ -14795,6 +15291,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 346,
             "__rowNum__": 345,
             "_token_type": "prompt",
@@ -14807,6 +15304,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 349,
             "__rowNum__": 348,
             "_token_type": "prompt",
@@ -14819,6 +15317,7 @@
             "display": {
               "text": "If blood smear is P. vivax positive"
             },
+            "hideInContents": true,
             "_row_num": 351,
             "__rowNum__": 350,
             "_token_type": "prompt",
@@ -14831,6 +15330,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 353,
             "__rowNum__": 352,
             "_token_type": "prompt",
@@ -14843,6 +15343,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>1</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 356,
             "__rowNum__": 355,
             "_token_type": "prompt",
@@ -14855,6 +15356,7 @@
             "display": {
               "text": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
             },
+            "hideInContents": true,
             "_row_num": 358,
             "__rowNum__": 357,
             "_token_type": "prompt",
@@ -14867,6 +15369,7 @@
             "display": {
               "text": "Give 1/4 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
             },
+            "hideInContents": true,
             "_row_num": 364,
             "__rowNum__": 363,
             "_token_type": "prompt",
@@ -14879,6 +15382,7 @@
             "display": {
               "text": "Give 1 sulpha (500 mg)- pyrimethamine (25 mg) tablet single dose"
             },
+            "hideInContents": true,
             "_row_num": 367,
             "__rowNum__": 366,
             "_token_type": "prompt",
@@ -14892,6 +15396,7 @@
               "text": "Radical treatment:",
               "hint": "Give ONLY if blood smear is positive for malarial parasite."
             },
+            "hideInContents": true,
             "_row_num": 369,
             "__rowNum__": 368,
             "_token_type": "prompt",
@@ -14904,6 +15409,7 @@
             "display": {
               "text": "If blood smear is P. falciparum positive"
             },
+            "hideInContents": true,
             "_row_num": 370,
             "__rowNum__": 369,
             "_token_type": "prompt",
@@ -14916,6 +15422,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 372,
             "__rowNum__": 371,
             "_token_type": "prompt",
@@ -14928,6 +15435,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"3\">Single dose of</td>\n    </tr>\n    <tr>\n        <td colspan=\"2\">Chloroquine</td><td>Primaquin</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>3</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 375,
             "__rowNum__": 374,
             "_token_type": "prompt",
@@ -14940,6 +15448,7 @@
             "display": {
               "text": "If blood smear is P. vivax positive"
             },
+            "hideInContents": true,
             "_row_num": 377,
             "__rowNum__": 376,
             "_token_type": "prompt",
@@ -14952,6 +15461,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1/2</td><td>7.5 ml</td><td>0</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 379,
             "__rowNum__": 378,
             "_token_type": "prompt",
@@ -14964,6 +15474,7 @@
             "display": {
               "text": "<table border=\"1\">\n    <tr>\n        <td colspan=\"2\">Chloroquine single dose</td><td>Primaquin daily dose for 5 days</td>\n    </tr>\n    <tr>\n        <td>Tablet (150 mg base)</td><td>Syrup (500 mg base per 5 ml)</td>\n        <td>Tablet (2.5 mg base)</td>\n    </tr>\n    <tr>\n        <td>1</td><td>15 ml</td><td>1</td>\n    </tr>\n</table>"
             },
+            "hideInContents": true,
             "_row_num": 382,
             "__rowNum__": 381,
             "_token_type": "prompt",
@@ -14976,6 +15487,7 @@
             "display": {
               "text": "<strong>Primaquin should NOT be given to children up to 1 year and during pregnancy.</strong>"
             },
+            "hideInContents": true,
             "_row_num": 384,
             "__rowNum__": 383,
             "_token_type": "prompt",
@@ -15007,6 +15519,7 @@
                 "hindi": "<h3>मा को सलाह दें </h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 406,
             "__rowNum__": 405,
             "_token_type": "prompt",
@@ -15022,6 +15535,7 @@
                 "hindi": "दो साल की कम उम्र के बच्चो का खाना पीना देखें और उन बच्चो मैं भी जिनका वज़न बहुत कम हो उम्र के लिए (कुपोषण ग्रेड २,३,४) या अनीमिया."
               }
             },
+            "hideInContents": true,
             "_row_num": 407,
             "__rowNum__": 406,
             "_token_type": "prompt",
@@ -15235,6 +15749,7 @@
                 "hindi": "<h3>मा को शाबाशी दें. </h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 452,
             "__rowNum__": 451,
             "_token_type": "prompt",
@@ -15250,6 +15765,7 @@
                 "hindi": "२४ घंटो मैं कम-से-कम ८ बार स्तनपान करें."
               }
             },
+            "hideInContents": true,
             "_row_num": 454,
             "__rowNum__": 453,
             "_token_type": "prompt",
@@ -15265,6 +15781,7 @@
                 "hindi": "रात को भी."
               }
             },
+            "hideInContents": true,
             "_row_num": 457,
             "__rowNum__": 456,
             "_token_type": "prompt",
@@ -15280,6 +15797,7 @@
                 "hindi": "और कुछ ना दे सिवाए पानी."
               }
             },
+            "hideInContents": true,
             "_row_num": 460,
             "__rowNum__": 459,
             "_token_type": "prompt",
@@ -15295,6 +15813,7 @@
                 "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 464,
             "__rowNum__": 463,
             "_token_type": "prompt",
@@ -15310,6 +15829,7 @@
                 "hindi": "समाधान:"
               }
             },
+            "hideInContents": true,
             "_row_num": 465,
             "__rowNum__": 464,
             "_token_type": "prompt",
@@ -15325,6 +15845,7 @@
                 "hindi": "२४ घंटो मैं कम-से-कम ८ बार स्तनपान करें."
               }
             },
+            "hideInContents": true,
             "_row_num": 467,
             "__rowNum__": 466,
             "_token_type": "prompt",
@@ -15340,6 +15861,7 @@
                 "hindi": "और कुछ ना दे सिवाए पानी."
               }
             },
+            "hideInContents": true,
             "_row_num": 470,
             "__rowNum__": 469,
             "_token_type": "prompt",
@@ -15359,6 +15881,7 @@
                 "hindi": "<ol><li>स्तनपान जारी रखें अगर बच्चा बीमार रहे फिर भी.</li></ol>"
               }
             },
+            "hideInContents": true,
             "_row_num": 473,
             "__rowNum__": 472,
             "_token_type": "prompt",
@@ -15374,6 +15897,7 @@
                 "hindi": "<h3>मा को शाबाशी दें. </h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 478,
             "__rowNum__": 477,
             "_token_type": "prompt",
@@ -15389,6 +15913,7 @@
                 "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 483,
             "__rowNum__": 482,
             "_token_type": "prompt",
@@ -15404,6 +15929,7 @@
                 "hindi": "<h3>सलाह</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 487,
             "__rowNum__": 486,
             "_token_type": "prompt",
@@ -15419,6 +15945,7 @@
                 "hindi": "बच्चा जितनी बारी चाहे स्तनपान करें."
               }
             },
+            "hideInContents": true,
             "_row_num": 488,
             "__rowNum__": 487,
             "_token_type": "prompt",
@@ -15438,6 +15965,7 @@
                 "hindi": "<p>\n*दिन मैं 3 बार अगर स्तनपान किया  \n</p>\n<p>\n*दिन मैं 5 बार अगर स्तनपान किया  \n</p>"
               }
             },
+            "hideInContents": true,
             "_row_num": 489,
             "__rowNum__": 488,
             "_token_type": "prompt",
@@ -15453,6 +15981,7 @@
                 "hindi": "मूसी हुई रोटी, चावल, ब्रेड, बिस्कुट या बिना मीठे का दूध दें"
               }
             },
+            "hideInContents": true,
             "_row_num": 490,
             "__rowNum__": 489,
             "_token_type": "prompt",
@@ -15468,6 +15997,7 @@
                 "hindi": "मूसी हुई रोटी, चावल, ब्रेड के साथ गाढ़ी डाल और तेल या खिचरी के साथ तेल और पक्की सब्ज़ी"
               }
             },
+            "hideInContents": true,
             "_row_num": 491,
             "__rowNum__": 490,
             "_token_type": "prompt",
@@ -15483,6 +16013,7 @@
                 "hindi": "सेवीयन, हलवा, खीर, दूध मैं बना हुआ."
               }
             },
+            "hideInContents": true,
             "_row_num": 492,
             "__rowNum__": 491,
             "_token_type": "prompt",
@@ -15498,6 +16029,7 @@
                 "hindi": "म्यूज़्ज़ हुआ या तले हुए आलू या केला, छीकू या आम."
               }
             },
+            "hideInContents": true,
             "_row_num": 493,
             "__rowNum__": 492,
             "_token_type": "prompt",
@@ -15517,6 +16049,7 @@
                 "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
               }
             },
+            "hideInContents": true,
             "_row_num": 495,
             "__rowNum__": 494,
             "_token_type": "prompt",
@@ -15532,6 +16065,7 @@
                 "hindi": "<h3>मा को शाबाशी दें.</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 500,
             "__rowNum__": 499,
             "_token_type": "prompt",
@@ -15547,6 +16081,7 @@
                 "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 505,
             "__rowNum__": 504,
             "_token_type": "prompt",
@@ -15562,6 +16097,7 @@
                 "hindi": "<h3>स्तनपानस लाह</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 509,
             "__rowNum__": 508,
             "_token_type": "prompt",
@@ -15577,6 +16113,7 @@
                 "hindi": "बच्चा जितनी बारी चाहे स्तनपान करें."
               }
             },
+            "hideInContents": true,
             "_row_num": 510,
             "__rowNum__": 509,
             "_token_type": "prompt",
@@ -15592,6 +16129,7 @@
                 "hindi": "पारिवारिक पोत से दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 511,
             "__rowNum__": 510,
             "_token_type": "prompt",
@@ -15611,6 +16149,7 @@
                 "hindi": "दिन मैं पाँच बार"
               }
             },
+            "hideInContents": true,
             "_row_num": 512,
             "__rowNum__": 511,
             "_token_type": "prompt",
@@ -15626,6 +16165,7 @@
                 "hindi": "मूसी हुई रोटी, चावल, ब्रेड, बिस्कुट या बिना मीठे का दूध दें"
               }
             },
+            "hideInContents": true,
             "_row_num": 513,
             "__rowNum__": 512,
             "_token_type": "prompt",
@@ -15641,6 +16181,7 @@
                 "hindi": "मूसी हुई रोटी, चावल, ब्रेड के साथ गाढ़ी डाल और तेल या खिचरी के साथ तेल और पक्की सब्ज़ी"
               }
             },
+            "hideInContents": true,
             "_row_num": 514,
             "__rowNum__": 513,
             "_token_type": "prompt",
@@ -15656,6 +16197,7 @@
                 "hindi": "सेवीयन, हलवा, खीर, दूध मैं बना हुआ."
               }
             },
+            "hideInContents": true,
             "_row_num": 515,
             "__rowNum__": 514,
             "_token_type": "prompt",
@@ -15671,6 +16213,7 @@
                 "hindi": "म्यूज़्ज़ हुआ या तले हुए आलू या केला, छीकू या आम."
               }
             },
+            "hideInContents": true,
             "_row_num": 516,
             "__rowNum__": 515,
             "_token_type": "prompt",
@@ -15690,6 +16233,7 @@
                 "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
               }
             },
+            "hideInContents": true,
             "_row_num": 517,
             "__rowNum__": 516,
             "_token_type": "prompt",
@@ -15705,6 +16249,7 @@
                 "hindi": "<h3>मा को शाबाशी दें. </h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 523,
             "__rowNum__": 522,
             "_token_type": "prompt",
@@ -15720,6 +16265,7 @@
                 "hindi": "3 भोजन में हर दिन परिवार खाद्य पदार्थ दे रही है."
               }
             },
+            "hideInContents": true,
             "_row_num": 524,
             "__rowNum__": 523,
             "_token_type": "prompt",
@@ -15735,6 +16281,7 @@
                 "hindi": "<h3>खिलाने की दिक्कत पहचाने</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 529,
             "__rowNum__": 528,
             "_token_type": "prompt",
@@ -15750,6 +16297,7 @@
                 "hindi": "समाधान:"
               }
             },
+            "hideInContents": true,
             "_row_num": 530,
             "__rowNum__": 529,
             "_token_type": "prompt",
@@ -15765,6 +16313,7 @@
                 "hindi": "3 भोजन में हर दिन परिवार खाद्य पदार्थ दे रही है."
               }
             },
+            "hideInContents": true,
             "_row_num": 531,
             "__rowNum__": 530,
             "_token_type": "prompt",
@@ -15780,6 +16329,7 @@
                 "hindi": "<h3>सलाह</h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 535,
             "__rowNum__": 534,
             "_token_type": "prompt",
@@ -15795,6 +16345,7 @@
                 "hindi": "दिन मैं दो बार छीकू , केला, बिस्कुट, आम, पपाइया, अंडा दें"
               }
             },
+            "hideInContents": true,
             "_row_num": 536,
             "__rowNum__": 535,
             "_token_type": "prompt",
@@ -15814,6 +16365,7 @@
                 "hindi": "<ol><li>ध्यान दें बच्चा अपना खाना ख़तम करे</li><li> और खाना खाने से पहले साबुन से अपना हाथ धोए. </li></ol>"
               }
             },
+            "hideInContents": true,
             "_row_num": 537,
             "__rowNum__": 536,
             "_token_type": "prompt",
@@ -15850,6 +16402,7 @@
                 "hindi": "१४ दिन के लिए रोज़ एक डोस."
               }
             },
+            "hideInContents": true,
             "_row_num": 547,
             "__rowNum__": 546,
             "_token_type": "prompt",
@@ -15865,6 +16418,7 @@
                 "hindi": "डोसेज देने के निर्देशन:"
               }
             },
+            "hideInContents": true,
             "_row_num": 548,
             "__rowNum__": 547,
             "_token_type": "prompt",
@@ -15880,6 +16434,7 @@
                 "hindi": "४ महीने की कम उम्र के बच्चों के लिए इ.एफ.ए के कोई निर्देशन नही है."
               }
             },
+            "hideInContents": true,
             "_row_num": 550,
             "__rowNum__": 549,
             "_token_type": "prompt",
@@ -15896,6 +16451,7 @@
                 "hindi": "१ बच्चों वाली इ.एक.ए. टॅबलेट दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 553,
             "__rowNum__": 552,
             "_token_type": "prompt",
@@ -15911,6 +16467,7 @@
                 "hindi": "२ बच्चों वाली इ.एक.ए. टॅबलेट दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 556,
             "__rowNum__": 555,
             "_token_type": "prompt",
@@ -15942,6 +16499,7 @@
                 "hindi": "१००,००० आई . यू (१ मिली) ९ महीने पर खसरा पर ख़तरा (माता जी) टीकाकरण के साथ."
               }
             },
+            "hideInContents": true,
             "_row_num": 568,
             "__rowNum__": 567,
             "_token_type": "prompt",
@@ -15957,6 +16515,7 @@
                 "hindi": "२००,००० आई. यू (२ मिली) १६-१८ महीने मैं दि.पी.ती बूस्टर के साथ"
               }
             },
+            "hideInContents": true,
             "_row_num": 571,
             "__rowNum__": 570,
             "_token_type": "prompt",
@@ -15972,6 +16531,7 @@
                 "hindi": "२००,००० आई. यू (२ मिली) २४ महीने पर"
               }
             },
+            "hideInContents": true,
             "_row_num": 574,
             "__rowNum__": 573,
             "_token_type": "prompt",
@@ -15987,6 +16547,7 @@
                 "hindi": "२००,००० आई. यू (२ मिली) ३० महीने पर"
               }
             },
+            "hideInContents": true,
             "_row_num": 577,
             "__rowNum__": 576,
             "_token_type": "prompt",
@@ -16002,6 +16563,7 @@
                 "hindi": "२००,००० आई. यू (२ मिली) ३६ महीने पर"
               }
             },
+            "hideInContents": true,
             "_row_num": 580,
             "__rowNum__": 579,
             "_token_type": "prompt",
@@ -16035,6 +16597,7 @@
               "text": "Advise the Mother When to Return to Health Worker",
               "hint": "Return for follow-up in 2 days."
             },
+            "hideInContents": true,
             "_row_num": 589,
             "__rowNum__": 588,
             "_token_type": "prompt",
@@ -16048,6 +16611,7 @@
               "text": "Advise the Mother When to Return to Health Worker",
               "hint": "Return for follow-up in 2 days if fever persists."
             },
+            "hideInContents": true,
             "_row_num": 593,
             "__rowNum__": 592,
             "_token_type": "prompt",
@@ -16062,6 +16626,7 @@
               "text": "Advise the Mother When to Return to Health Worker",
               "hint": "Return for follow-up in 5 days if diarrhoea not improving."
             },
+            "hideInContents": true,
             "_row_num": 599,
             "__rowNum__": 598,
             "_token_type": "prompt",
@@ -16079,6 +16644,7 @@
                 "hindi": "5 दिन बाद पून: देखें."
               }
             },
+            "hideInContents": true,
             "_row_num": 602,
             "__rowNum__": 601,
             "_token_type": "prompt",
@@ -16092,6 +16658,7 @@
               "text": "Advise the Mother When to Return to Health Worker",
               "hint": "Return for follow-up in 14 days."
             },
+            "hideInContents": true,
             "_row_num": 607,
             "__rowNum__": 606,
             "_token_type": "prompt",
@@ -16105,6 +16672,7 @@
               "text": "Advise the Mother When to Return to Health Worker",
               "hint": "Return for follow-up in 30 days."
             },
+            "hideInContents": true,
             "_row_num": 611,
             "__rowNum__": 610,
             "_token_type": "prompt",
@@ -16117,6 +16685,7 @@
             "display": {
               "text": "Advise mother to return immediately if the child has any of these signs:"
             },
+            "hideInContents": true,
             "_row_num": 615,
             "__rowNum__": 614,
             "_token_type": "prompt",
@@ -16129,6 +16698,7 @@
             "display": {
               "text": "Not able to drink or breastfeed"
             },
+            "hideInContents": true,
             "_row_num": 616,
             "__rowNum__": 615,
             "_token_type": "prompt",
@@ -16141,6 +16711,7 @@
             "display": {
               "text": "Becomes sicker"
             },
+            "hideInContents": true,
             "_row_num": 617,
             "__rowNum__": 616,
             "_token_type": "prompt",
@@ -16153,6 +16724,7 @@
             "display": {
               "text": "Develops a fever"
             },
+            "hideInContents": true,
             "_row_num": 618,
             "__rowNum__": 617,
             "_token_type": "prompt",
@@ -16165,6 +16737,7 @@
             "display": {
               "text": "Fast breathing"
             },
+            "hideInContents": true,
             "_row_num": 620,
             "__rowNum__": 619,
             "_token_type": "prompt",
@@ -16177,6 +16750,7 @@
             "display": {
               "text": "Difficult breathing"
             },
+            "hideInContents": true,
             "_row_num": 623,
             "__rowNum__": 622,
             "_token_type": "prompt",
@@ -16189,6 +16763,7 @@
             "display": {
               "text": "Blood in stool"
             },
+            "hideInContents": true,
             "_row_num": 626,
             "__rowNum__": 625,
             "_token_type": "prompt",
@@ -16201,6 +16776,7 @@
             "display": {
               "text": "Drinking poorly"
             },
+            "hideInContents": true,
             "_row_num": 629,
             "__rowNum__": 628,
             "_token_type": "prompt",
@@ -16213,6 +16789,7 @@
             "display": {
               "text": "Advise mother when to return for next immunization according to immunization schedule."
             },
+            "hideInContents": true,
             "_row_num": 632,
             "__rowNum__": 631,
             "_token_type": "prompt",
@@ -18269,6 +18846,7 @@
                 "hindi": "ओ. आर. एस की मात्रा को निर्धारित कर स्वास्थ्य केन्द्रा मैं ४ घंटे मैं दे."
               }
             },
+            "hideInContents": true,
             "_row_num": 44,
             "__rowNum__": 43,
             "_token_type": "prompt",
@@ -18284,6 +18862,7 @@
                 "hindi": "<p>ओऽअर.एस की {{calculates.planBORSAmntMl}} मि.लि ४ घंटे मैं दे. </p> <p> {{calculates.planBORSAmntCups}} कप्स. </p>"
               }
             },
+            "hideInContents": true,
             "_row_num": 46,
             "__rowNum__": 45,
             "_token_type": "prompt",
@@ -18299,6 +18878,7 @@
                 "hindi": "अगर बच्चा ज़्यादा ओ. आर. एस चाहता है तो ज़्यादा दे."
               }
             },
+            "hideInContents": true,
             "_row_num": 47,
             "__rowNum__": 46,
             "_token_type": "prompt",
@@ -18314,6 +18894,7 @@
                 "hindi": "स्तनपान नही करने वाले ६ महीने से कम उम्र के बच्चों को १००-२०० मि.लि सॉफ पानी भी दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 49,
             "__rowNum__": 48,
             "_token_type": "prompt",
@@ -18329,6 +18910,7 @@
                 "hindi": "मा को बताए ओ. आर. एस दिया जाता है."
               }
             },
+            "hideInContents": true,
             "_row_num": 53,
             "__rowNum__": 52,
             "_token_type": "prompt",
@@ -18344,6 +18926,7 @@
                 "hindi": "<li>कप से बच्चे को बार-बार छोटे-छोटे घूँट दें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 54,
             "__rowNum__": 53,
             "_token_type": "prompt",
@@ -18359,6 +18942,7 @@
                 "hindi": "<li>अगर बच्चा उल्टी करता है तो १० मिनिट रूकें और धीरे-धीरे दें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 55,
             "__rowNum__": 54,
             "_token_type": "prompt",
@@ -18374,6 +18958,7 @@
                 "hindi": "<li>जब भी बच्चा चाहे स्तनपान कराए. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 56,
             "__rowNum__": 55,
             "_token_type": "prompt",
@@ -18389,6 +18974,7 @@
                 "hindi": "४ घंटे के बाद"
               }
             },
+            "hideInContents": true,
             "_row_num": 59,
             "__rowNum__": 58,
             "_token_type": "prompt",
@@ -18404,6 +18990,7 @@
                 "hindi": "<li>बच्चे को दोबारा जाँच करे व पानी की कमी के लिए वर्गीकरण करें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 60,
             "__rowNum__": 59,
             "_token_type": "prompt",
@@ -18419,6 +19006,7 @@
                 "hindi": "<li>उचित प्लान चुने व इलाज जारी रखें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 61,
             "__rowNum__": 60,
             "_token_type": "prompt",
@@ -18434,6 +19022,7 @@
                 "hindi": "<li>बच्चे को खिलाना शुरू करें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 62,
             "__rowNum__": 61,
             "_token_type": "prompt",
@@ -18466,6 +19055,7 @@
                 "hindi": "मा को दिखाया कि वह ओ. आर. एस घर पर कैसे बनायाएगी."
               }
             },
+            "hideInContents": true,
             "_row_num": 67,
             "__rowNum__": 66,
             "_token_type": "prompt",
@@ -18485,6 +19075,7 @@
                 "hindi": "<p>ओऽअर.एस की {{calculates \"planBORSAmntMl\"}} मि.लि ४ घंटे मैं दे. </p> <p> {{calculates \"planBORSAmntCups\"}} कप्स. </p>"
               }
             },
+            "hideInContents": true,
             "_row_num": 68,
             "__rowNum__": 67,
             "_token_type": "prompt",
@@ -18500,6 +19091,7 @@
                 "hindi": "मा को सही मात्रा मैं ओ. आर. एस पॅकेट दें, जिससे निर्जलीकरण का इलाज हो जाय व २ पॅकेट अलग से दे जैसा की प्लान आ मैं बताया गया है."
               }
             },
+            "hideInContents": true,
             "_row_num": 69,
             "__rowNum__": 68,
             "_token_type": "prompt",
@@ -18520,6 +19112,7 @@
                 "hindi": "<ol><li>ज़्यादा पिलाए,<li><li> स्तनपान करते रहें</li>, <li>वापस कब आए.</li></ol>"
               }
             },
+            "hideInContents": true,
             "_row_num": 70,
             "__rowNum__": 69,
             "_token_type": "prompt",
@@ -18529,6 +19122,7 @@
           },
           {
             "type": "note",
+            "hideInContents": true,
             "_row_num": 71,
             "__rowNum__": 70,
             "_token_type": "prompt",
@@ -18544,6 +19138,7 @@
                 "hindi": "<h3>प्लान आ: दस्त को घर मैं ठीक करें. </h3>"
               }
             },
+            "hideInContents": true,
             "_row_num": 81,
             "__rowNum__": 80,
             "_token_type": "prompt",
@@ -18563,6 +19158,7 @@
                 "hindi": "ज़्यादा पिलाए, स्तनपान करते रहें, वापस कब आए."
               }
             },
+            "hideInContents": true,
             "_row_num": 82,
             "__rowNum__": 81,
             "_token_type": "prompt",
@@ -18578,6 +19174,7 @@
                 "hindi": "<strong>पीने के लिए ज़्यादा दें.</strong> (जितना बच्चा ले सके.)"
               }
             },
+            "hideInContents": true,
             "_row_num": 84,
             "__rowNum__": 83,
             "_token_type": "prompt",
@@ -18593,6 +19190,7 @@
                 "hindi": "<strong>मा से बोले</strong>"
               }
             },
+            "hideInContents": true,
             "_row_num": 86,
             "__rowNum__": 85,
             "_token_type": "prompt",
@@ -18609,6 +19207,7 @@
                 "hindi": "अगर शिशु अकेला है स्तनपान लेने वाला तो ज़्यादा बार और ज़्यादा देर तक दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 87,
             "__rowNum__": 86,
             "_token_type": "prompt",
@@ -18624,6 +19223,7 @@
                 "hindi": "अगर बच्चा बार-बार पानी जैसे दस्त करता है."
               }
             },
+            "hideInContents": true,
             "_row_num": 88,
             "__rowNum__": 87,
             "_token_type": "prompt",
@@ -18639,6 +19239,7 @@
                 "hindi": "<li>६ महीने से कम उम्र के बच्चे को स्तनपान के अलावा आफ पानी(उबला हुआ) मैं बनाया हुआ ओ. आर. एस दें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 90,
             "__rowNum__": 89,
             "_token_type": "prompt",
@@ -18654,6 +19255,7 @@
                 "hindi": "<li>६ महीने से ज़्यादा के बच्चे को स्तनपान के अलावा घर के और तरल पदार्थ दें. </li>"
               }
             },
+            "hideInContents": true,
             "_row_num": 92,
             "__rowNum__": 91,
             "_token_type": "prompt",
@@ -18670,6 +19272,7 @@
                 "hindi": "अगर नहीं तो बच्चे को ओ.आर.एस सल्यूशन, दही, नींबू, दूध, चावल, डाल, सूप, नारियल पानी और सॉफ पानी दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 94,
             "__rowNum__": 93,
             "_token_type": "prompt",
@@ -18685,6 +19288,7 @@
                 "hindi": "ओऽअर.एस ज़रूरी से दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 95,
             "__rowNum__": 94,
             "_token_type": "prompt",
@@ -18700,6 +19304,7 @@
                 "hindi": "<ol><li>बच्चे का इलाज प्लान 'बी' से कर रहें हो </li><li>या ज़्यादा दस्त होने पर बच्चा स्‍वास्थ्य केन्द्रा वापस नही आ सकता. </li></ol>"
               }
             },
+            "hideInContents": true,
             "_row_num": 96,
             "__rowNum__": 95,
             "_token_type": "prompt",
@@ -18716,6 +19321,7 @@
                 "hindi": "मा को ओऽअर.एस देना सिखाए, २ पॅकेट घर के लिए दें."
               }
             },
+            "hideInContents": true,
             "_row_num": 99,
             "__rowNum__": 98,
             "_token_type": "prompt",
@@ -18731,6 +19337,7 @@
                 "hindi": "मा को दिखे कितना अधिक पिलाने छाईए"
               }
             },
+            "hideInContents": true,
             "_row_num": 100,
             "__rowNum__": 99,
             "_token_type": "prompt",
@@ -18750,6 +19357,7 @@
                 "hindi": "< २ महीने"
               }
             },
+            "hideInContents": true,
             "_row_num": 102,
             "__rowNum__": 101,
             "_token_type": "prompt",
@@ -18769,6 +19377,7 @@
                 "hindi": "२ महीने से ३ साल तक"
               }
             },
+            "hideInContents": true,
             "_row_num": 105,
             "__rowNum__": 104,
             "_token_type": "prompt",
@@ -18788,6 +19397,7 @@
                 "hindi": "२ साल से ज़्यादा"
               }
             },
+            "hideInContents": true,
             "_row_num": 108,
             "__rowNum__": 107,
             "_token_type": "prompt",
@@ -18807,6 +19417,7 @@
                 "hindi": "<ol>\n<li>कप से बच्चे को बार-बार छोटे-छोटे घूँट दें. </li>\n<li>अगर बच्चा उल्टी करता है तो १० मिनिट रूकें और धीरे-धीरे दें. </li>\n<li><u>बच्चे को पीने के लिए ज़्यादा देते रहें जब तब दस्त नही रुक जाते. .</u></li>\n</ol>"
               }
             },
+            "hideInContents": true,
             "_row_num": 111,
             "__rowNum__": 110,
             "_token_type": "prompt",
@@ -18822,6 +19433,7 @@
                 "hindi": "<strong>पाइलेट रहें </strong>"
               }
             },
+            "hideInContents": true,
             "_row_num": 112,
             "__rowNum__": 111,
             "_token_type": "prompt",
@@ -18837,6 +19449,7 @@
                 "hindi": "<strong>वापस कब आए </strong>"
               }
             },
+            "hideInContents": true,
             "_row_num": 114,
             "__rowNum__": 113,
             "_token_type": "prompt",
@@ -18852,6 +19465,7 @@
                 "hindi": "बच्चा अधिक बीमार हो जाए."
               }
             },
+            "hideInContents": true,
             "_row_num": 115,
             "__rowNum__": 114,
             "_token_type": "prompt",
@@ -18867,6 +19481,7 @@
                 "hindi": "स्तनपान या अन्य तरल पदार्थ नही ले सके."
               }
             },
+            "hideInContents": true,
             "_row_num": 116,
             "__rowNum__": 115,
             "_token_type": "prompt",
@@ -18883,6 +19498,7 @@
                 "hindi": "मल मैं खून."
               }
             },
+            "hideInContents": true,
             "_row_num": 118,
             "__rowNum__": 117,
             "_token_type": "prompt",
@@ -18899,6 +19515,7 @@
                 "hindi": "बहुत कम पीना."
               }
             },
+            "hideInContents": true,
             "_row_num": 120,
             "__rowNum__": 119,
             "_token_type": "prompt",
@@ -18914,6 +19531,7 @@
                 "hindi": "बुखार हो जाए."
               }
             },
+            "hideInContents": true,
             "_row_num": 122,
             "__rowNum__": 121,
             "_token_type": "prompt",

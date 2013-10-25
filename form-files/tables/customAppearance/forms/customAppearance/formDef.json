@@ -6,6 +6,7 @@
         "display": {
           "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
         },
+        "hideInContents": true,
         "_row_num": 2
       },
       {
@@ -58,6 +59,7 @@
           "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
           "image": "dolphin.png"
         },
+        "hideInContents": true,
         "_row_num": 10
       },
       {
@@ -377,6 +379,7 @@
             "display": {
               "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
             },
+            "hideInContents": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -432,6 +435,7 @@
               "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
               "image": "dolphin.png"
             },
+            "hideInContents": true,
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
