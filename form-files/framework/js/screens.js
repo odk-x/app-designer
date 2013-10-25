@@ -84,25 +84,14 @@ screenTypes.waiting = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    /*
-     * afterInitializeRenderContext
-     * can be redefined by the user.
-     */
-    afterInitializeRenderContext: function(ctxt) {
-        ctxt.success();
-    },
     initializeRenderContext: function(ctxt) {
         //Object.create is used because we don't want to modify the class's render context.
         this._renderContext = Object.create(this.renderContext);
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this._renderContext, this.templateContext);
-        this.afterInitializeRenderContext(ctxt);
+        ctxt.success();
     },
-    /**
-     * afterInitialize is user defined
-     **/
-    afterInitialize: function() {},
     onActivate: function(ctxt) {
         var that = this;
         that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
@@ -191,7 +180,6 @@ screenTypes.screen = Backbone.View.extend({
     initialize: function(args) {
         var that = this;
         $.extend(this, args);
-        this.afterInitialize();
     },
     getActivePrompts: function(context) {
         return activePrompts;
@@ -242,13 +230,6 @@ screenTypes.screen = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    /*
-     * afterInitializeRenderContext
-     * can be redefined by the user.
-     */
-    afterInitializeRenderContext: function(ctxt) {
-        ctxt.success();
-    },
     initializeRenderContext: function(ctxt) {
         //Object.create is used because we don't want to modify the class's render context.
         this._renderContext = Object.create(this.renderContext);
@@ -277,12 +258,8 @@ screenTypes.screen = Backbone.View.extend({
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this._renderContext, this.templateContext);
-        this.afterInitializeRenderContext(ctxt);
+        ctxt.success();
     },
-    /**
-     * afterInitialize is user defined
-     **/
-    afterInitialize: function() {},
     preActivate: function(ctxt) {
         var that = this;
         // this once held the code to invoke with_next and with_next_validate actions
@@ -488,7 +465,6 @@ screenTypes.columns_2 = Backbone.View.extend({
     initialize: function(args) {
         var that = this;
         $.extend(this, args);
-        this.afterInitialize();
     },
     getActivePrompts: function(context) {
         return activePrompts;
@@ -539,13 +515,6 @@ screenTypes.columns_2 = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    /*
-     * afterInitializeRenderContext
-     * can be redefined by the user.
-     */
-    afterInitializeRenderContext: function(ctxt) {
-        ctxt.success();
-    },
     initializeRenderContext: function(ctxt) {
         //Object.create is used because we don't want to modify the class's render context.
         this._renderContext = Object.create(this.renderContext);
@@ -574,7 +543,7 @@ screenTypes.columns_2 = Backbone.View.extend({
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this._renderContext, this.templateContext);
-        this.afterInitializeRenderContext(ctxt);
+        ctxt.success();
     },
     preActivate: function(ctxt) {
         var that = this;
