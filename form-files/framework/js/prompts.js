@@ -282,13 +282,13 @@ promptTypes.base = Backbone.View.extend({
     validate: function(ctxt) {
         return this.baseValidate(ctxt);
     },
-	formattedValueForContentsDisplay: function() {
-		if ( !this.name ) {
-			return '';
-		} else {
-			return this.getValue();
-		}
-	},
+    formattedValueForContentsDisplay: function() {
+        if ( !this.name ) {
+            return '';
+        } else {
+            return this.getValue();
+        }
+    },
     getValue: function() {
         if (!this.name) {
             console.error("prompts."+this.type+
@@ -519,7 +519,7 @@ promptTypes.contents = promptTypes.base.extend({
         var $target = $(evt.target).closest('.select-contents-item');
         $target.attr("label", function(index, oldPropertyValue){
             ctxt.append("prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
-				"px: " + that.promptIdx);
+                "px: " + that.promptIdx);
             that.controller.gotoScreenPath(ctxt, oldPropertyValue);
         });
     },
@@ -682,6 +682,7 @@ promptTypes.linked_table = promptTypes.base.extend({
     postActivate: function(ctxt) {
         var that = this;
         ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
+        that.renderContext.add_instance_label = that.display.new_instance_text || "Add Instance";
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
             var selString = that.convertSelection(linkedMdl);
@@ -690,6 +691,12 @@ promptTypes.linked_table = promptTypes.base.extend({
             var displayElementName = that.getLinkedInstanceName();
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
                     that.renderContext.instances = instanceList;
+                    // change this to incomplete if it wasn't saved via the specific form
+                    for (var i = 0; i < instanceList.length; i++) {
+                        if (instanceList[i].form_id != linked_form_id) {
+                            instanceList[i].savepoint_type = "incomplete";
+                        }
+                    }
                     ctxt.success();
             }}), dbTableName, selString, selArgs, displayElementName, ordBy);
         }}));
@@ -1871,18 +1878,18 @@ promptTypes.note = promptTypes.base.extend({
 promptTypes._section = promptTypes.base.extend({
     type: "_section",
     templatePath: "templates/_section.handlebars",
-	// need to do this somewhere...
-	formattedValueForContentsDisplay: function() {
+    // need to do this somewhere...
+    formattedValueForContentsDisplay: function() {
         var formDef = opendatakit.getCurrentFormDef();
         var sectionSettings = opendatakit.getSettingObject(formDef,this._do_section_name);
-		var textOrLangMap = sectionSettings.display.title;
-		var locale = database.getInstanceMetaDataValue('_locale');
-		if ( locale == null ) {
-			locale = opendatakit.getDefaultFormLocaleValue();
-		}
-		var str = formulaFunctions.localize(textOrLangMap,locale);
-		return str;
-	}
+        var textOrLangMap = sectionSettings.display.title;
+        var locale = database.getInstanceMetaDataValue('_locale');
+        if ( locale == null ) {
+            locale = opendatakit.getDefaultFormLocaleValue();
+        }
+        var str = formulaFunctions.localize(textOrLangMap,locale);
+        return str;
+    }
 });
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",

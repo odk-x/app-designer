@@ -21,8 +21,8 @@ return {
         // This is used for bookkeeping columns (e.g., server sync, save status).
         //
   dataTablePredefinedColumns: { 
-					 // these have leading underscores because they are hidden from the user and not directly manipulable
-					 _id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
+                     // these have leading underscores because they are hidden from the user and not directly manipulable
+                     _id: {type: 'string', isNotNullable: true, isPersisted: true, elementSet: 'instanceMetadata' },
                      _uri_access_control: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _sync_tag: { type: 'string', isNotNullable: false, isPersisted: true, elementSet: 'instanceMetadata' },
                      _sync_state: { type: 'integer', isNotNullable: true, 'default': 0, isPersisted: true, elementSet: 'instanceMetadata' },
@@ -354,7 +354,7 @@ return {
                     ctxt.append("withDb.transaction.error", error.message);
                     ctxt.append("withDb.transaction.error.transactionBody", transactionBody.toString());
                     inContinuation = true;
-					that.submissionDb = null;
+                    that.submissionDb = null;
                     ctxt.failure({message: "Error while accessing or saving values to the database."});
                     }, function() {
                         ctxt.append("withDb.transaction.success");
@@ -408,7 +408,7 @@ return {
                                 ctxt.append("withDb.afterCreateDb.transaction.error", error.message);
                                 ctxt.append("withDb.afterCreateDb.transaction.error.transactionBody", transactionBody.toString());
                                 that.submissionDb = null;
-								inContinuation = true;
+                                inContinuation = true;
                                 ctxt.failure({message: "Error while accessing or saving values to the database."});
                             }, function() {
                                 ctxt.append("withDb.afterCreateDb.transaction.success");
@@ -418,7 +418,7 @@ return {
                 });
         }
     } catch(e) {
-		that.submissionDb = null;
+        that.submissionDb = null;
         // Error handling code goes here.
         if ( ctxt.sqlStatement != null ) {
             ctxt.append("withDb.exception.sqlStmt", ctxt.sqlStatement.stmt);
@@ -813,11 +813,11 @@ _deleteDataTableStmt:function(dbTableName, instanceid) {
  * Requires: no globals
  */
 _getAllInstancesDataTableStmt:function(dbTableName, displayElementName) {
-	if ( displayElementName == null ) {
-		displayElementName = '';
-	} else {
-		displayElementName = displayElementName + ', ';
-	}
+    if ( displayElementName == null ) {
+        displayElementName = '';
+    } else {
+        displayElementName = displayElementName + ', ';
+    }
     return {
             stmt : 'select ' + displayElementName + ' _savepoint_timestamp, _savepoint_type, _locale, _id from "' +
                     dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp) order by _savepoint_timestamp desc;',
@@ -941,10 +941,10 @@ putInstanceMetaData:function(ctxt, name, value) {
       var f;
       ctxt.append('putInstanceMetaData', 'name: ' + name);
       for ( f in that.dataTablePredefinedColumns ) {
-		var defn = that.dataTablePredefinedColumns[f];
+        var defn = that.dataTablePredefinedColumns[f];
         if (  defn.elementSet == 'instanceMetadata' &&
-		      ( defn.elementPath == name ||
-			    (defn.elementPath == null && f == name) ) ) {
+              ( defn.elementPath == name ||
+                (defn.elementPath == null && f == name) ) ) {
             dbColumnName = f;
             break;
         }
@@ -1213,7 +1213,7 @@ get_all_instances:function(ctxt) {
       that.withDb($.extend({},ctxt,{success: function() {
             ctxt.success(instanceList);
         }}), function(transaction) {
-			var displayElementName = opendatakit.getSettingValue('instance_name');
+            var displayElementName = opendatakit.getSettingValue('instance_name');
             var ss = that._getAllInstancesDataTableStmt(mdl.tableMetadata.dbTableName, displayElementName);
             ctxt.sqlStatement = ss;
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
@@ -1252,13 +1252,14 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
-					var ts = new Date(instance._savepoint_timestamp);
+                    var ts = new Date(instance._savepoint_timestamp);
                     instanceList.push({
                         display_field: (displayElementName == null) ? ts.toISOString(): instance[displayElementName],
                         instance_id: instance._id,
                         savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,
-                        locale: instance._locale
+                        locale: instance._locale,
+                        form_id: instance._form_id
                     });
                 }
             });
@@ -1270,46 +1271,46 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
  * in on the command line.
  */
 processPassedInKeyValueMap: function(kvMap, instanceMetadataKeyValueMap) {
-	var that = this;
-	var propList = '';
-	var propertyCount = 0;
-	for ( var f in instanceMetadataKeyValueMap ) {
-		propList = propList + ' ' + f;
-		++propertyCount;
-		// determine if f is metadata or not...
-		var metaField, isMetadata;
-		var found = false;
-		for ( var g in that.dataTablePredefinedColumns ) {
-			var eDefn = that.dataTablePredefinedColumns[g];
-			var eName = g;
-			if ( 'elementPath' in eDefn ) {
-				eName = eDefn.elementPath;
-			}
-			if ( f == eName ) {
-				found = true;
-				metaField = g;
-				isMetadata = (eDefn.elementSet == 'instanceMetadata');
-				break;
-			}
-		}
-		
-		if ( found ) {
-			kvMap[metaField] = { value: instanceMetadataKeyValueMap[f], 
-								 isInstanceMetadata: isMetadata };
-		} else {
-			// TODO: convert f from elementPath into elementKey
-			kvMap[f] = { value: instanceMetadataKeyValueMap[f], 
-								 isInstanceMetadata: false };
-		}
-	}
-	
-	if ( propertyCount != 0 ) {
-		shim.log('I',"Extra arguments found in instanceMetadataKeyValueMap" + propList);
-	}
+    var that = this;
+    var propList = '';
+    var propertyCount = 0;
+    for ( var f in instanceMetadataKeyValueMap ) {
+        propList = propList + ' ' + f;
+        ++propertyCount;
+        // determine if f is metadata or not...
+        var metaField, isMetadata;
+        var found = false;
+        for ( var g in that.dataTablePredefinedColumns ) {
+            var eDefn = that.dataTablePredefinedColumns[g];
+            var eName = g;
+            if ( 'elementPath' in eDefn ) {
+                eName = eDefn.elementPath;
+            }
+            if ( f == eName ) {
+                found = true;
+                metaField = g;
+                isMetadata = (eDefn.elementSet == 'instanceMetadata');
+                break;
+            }
+        }
+        
+        if ( found ) {
+            kvMap[metaField] = { value: instanceMetadataKeyValueMap[f], 
+                                 isInstanceMetadata: isMetadata };
+        } else {
+            // TODO: convert f from elementPath into elementKey
+            kvMap[f] = { value: instanceMetadataKeyValueMap[f], 
+                                 isInstanceMetadata: false };
+        }
+    }
+    
+    if ( propertyCount != 0 ) {
+        shim.log('I',"Extra arguments found in instanceMetadataKeyValueMap" + propList);
+    }
 },
 initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
     var that = this;
-	instanceMetadataKeyValueMap = instanceMetadataKeyValueMap || {};
+    instanceMetadataKeyValueMap = instanceMetadataKeyValueMap || {};
     if ( instanceId == null ) {
         ctxt.append('initializeInstance.noInstance');
         mdl.metadata = {};
@@ -1340,23 +1341,23 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     var kvMap = {};
                     kvMap._id = { value: instanceId, isInstanceMetadata: true };
                     kvMap._locale = { value: locale, isInstanceMetadata: true };
-					// overwrite these with anything that was passed in...
-					that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);
-					
+                    // overwrite these with anything that was passed in...
+                    that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);
+                    
                     var cs = that._insertNewKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, kvMap);
                     tmpctxt.sqlStatement = cs;
                     transaction.executeSql(cs.stmt, cs.bind);
                 } else {
-					// apply changes to the instance 
+                    // apply changes to the instance 
                     var kvMap = {};
-					// gather anything that was passed in...
-					that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);
-					if ( !$.isEmptyObject(kvMap) ) {
-						var cs = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, instanceId, kvMap);
-						tmpctxt.sqlStatement = cs;
-						transaction.executeSql(cs.stmt, cs.bind);
-					}
-				}
+                    // gather anything that was passed in...
+                    that.processPassedInKeyValueMap(kvMap, instanceMetadataKeyValueMap);
+                    if ( !$.isEmptyObject(kvMap) ) {
+                        var cs = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, instanceId, kvMap);
+                        tmpctxt.sqlStatement = cs;
+                        transaction.executeSql(cs.stmt, cs.bind);
+                    }
+                }
             });
         });
     }
@@ -1550,7 +1551,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         _column_definitions: []
         };
 
-	ctxt.append('database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
+    ctxt.append('database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...
