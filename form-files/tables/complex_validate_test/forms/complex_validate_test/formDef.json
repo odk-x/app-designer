@@ -14,6 +14,7 @@
             "hindi": "प्रवेश करने के लिए खंड चुनें"
           }
         },
+        "hideInContents": true,
         "_row_num": 3
       },
       {
@@ -32,6 +33,7 @@
             "hindi": "धारा 1 चुना"
           }
         },
+        "hideInContents": true,
         "_row_num": 6
       },
       {
@@ -46,6 +48,7 @@
             "hindi": "खंड 1 से लौटे"
           }
         },
+        "hideInContents": true,
         "_row_num": 8
       },
       {
@@ -64,6 +67,7 @@
             "hindi": "धारा 2 चुना"
           }
         },
+        "hideInContents": true,
         "_row_num": 11
       },
       {
@@ -82,6 +86,7 @@
             "hindi": "धारा 2 से लौटे"
           }
         },
+        "hideInContents": true,
         "_row_num": 14
       },
       {
@@ -100,6 +105,7 @@
             "hindi": "बाहर निकलने सर्वेक्षण"
           }
         },
+        "hideInContents": true,
         "_row_num": 17
       },
       {
@@ -124,6 +130,7 @@
             "hindi": "में प्रवेश किया अभिलक्षण"
           }
         },
+        "hideInContents": true,
         "_row_num": 2
       },
       {
@@ -190,6 +197,7 @@
             "hindi": "में प्रवेश किया धारा 2"
           }
         },
+        "hideInContents": true,
         "_row_num": 2
       },
       {
@@ -518,6 +526,7 @@
                 "hindi": "प्रवेश करने के लिए खंड चुनें"
               }
             },
+            "hideInContents": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -533,6 +542,7 @@
                 "hindi": "धारा 1 चुना"
               }
             },
+            "hideInContents": true,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -558,6 +568,7 @@
                 "hindi": "खंड 1 से लौटे"
               }
             },
+            "hideInContents": true,
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -573,6 +584,7 @@
                 "hindi": "धारा 2 चुना"
               }
             },
+            "hideInContents": true,
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
@@ -598,6 +610,7 @@
                 "hindi": "धारा 2 से लौटे"
               }
             },
+            "hideInContents": true,
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -613,6 +626,7 @@
                 "hindi": "बाहर निकलने सर्वेक्षण"
               }
             },
+            "hideInContents": true,
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
@@ -784,6 +798,7 @@
                 "hindi": "में प्रवेश किया अभिलक्षण"
               }
             },
+            "hideInContents": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -946,6 +961,7 @@
                 "hindi": "में प्रवेश किया धारा 2"
               }
             },
+            "hideInContents": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",

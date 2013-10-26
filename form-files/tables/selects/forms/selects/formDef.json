@@ -45,6 +45,7 @@
         "display": {
           "text": "Blackbird selected"
         },
+        "hideInContents": true,
         "_row_num": 7
       },
       {
@@ -61,6 +62,7 @@
         "display": {
           "text": "in the dead of night"
         },
+        "hideInContents": true,
         "_row_num": 10
       },
       {
@@ -80,6 +82,7 @@
         "display": {
           "text": "Which devices do you use?"
         },
+        "hideInContents": true,
         "_row_num": 14
       },
       {
@@ -146,6 +149,7 @@
         "display": {
           "text": "Teal is a good choice."
         },
+        "hideInContents": true,
         "_row_num": 22
       },
       {
@@ -737,6 +741,7 @@
             "display": {
               "text": "Blackbird selected"
             },
+            "hideInContents": true,
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
@@ -749,6 +754,7 @@
             "display": {
               "text": "in the dead of night"
             },
+            "hideInContents": true,
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
@@ -761,6 +767,7 @@
             "display": {
               "text": "Which devices do you use?"
             },
+            "hideInContents": true,
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -848,6 +855,7 @@
             "display": {
               "text": "Teal is a good choice."
             },
+            "hideInContents": true,
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "prompt",
