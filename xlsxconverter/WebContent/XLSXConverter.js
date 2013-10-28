@@ -927,7 +927,7 @@
      * Replace if constructs with labels and conditional branches.
      * Move prompts into prompts list and extract the validation tag map.
      */
-    var flattenBlocks = function(sheetName, prompts, validationTagMap, flattened, blockFlow, idx) {
+    var flattenBlocks = function(sheetName, prompts, validationTagMap, flattened, blockFlow, idx, specSettings) {
         var i = idx;
         while ( i < blockFlow.length ) {
             var clause = blockFlow[i];
@@ -943,7 +943,7 @@
                 break;
             case "do_section":
                 // create a psuedo-prompt in this section that has a
-				// _branch_label_enclosing_screen that references the 
+				// _branch_label_enclosing_screen that references the
 				// contents prompt within the subsection.  This is used
 				// by the contents menu item to navigate into the contents
 				// screen of the subsection.
@@ -951,6 +951,7 @@
                 	{ _token_type: "prompt",
                 	  _type: "_section",
             		  promptIdx: prompts.length,
+            		  display: specSettings[clause._do_section_name].display,
             		  _branch_label_enclosing_screen: clause._do_section_name + '/_contents' } );
                 prompts.push(psuedoPrompt);
                 flattened.push(clause);
@@ -1029,7 +1030,7 @@
 
                 flattened.push(labelEntry); // Then label
                 // then block...
-                flattenBlocks(sheetName, prompts, validationTagMap, flattened, thenBlock, 0);
+                flattenBlocks(sheetName, prompts, validationTagMap, flattened, thenBlock, 0, specSettings);
 
                 var goendif = { clause: endIfClause.clause,
                         _token_type: "goto_label",
@@ -1046,7 +1047,7 @@
 
                 // else block...
                 if ( elseBlock != null ) {
-                    flattenBlocks(sheetName, prompts, validationTagMap, flattened, elseBlock, 0);
+                    flattenBlocks(sheetName, prompts, validationTagMap, flattened, elseBlock, 0, specSettings);
                 }
 
                 labelEntry = { _token_type: "branch_label",
@@ -1189,7 +1190,7 @@
         }
     };
 
-    var parseSection = function(sheetName, sheet){
+    var parseSection = function(sheetName, sheet, specSettings){
 
         /*
          * parse the 'clause' field
@@ -1217,7 +1218,7 @@
         var validationTagMap = { _finalize: [] };
         var prompts = [];
         var flattened = [];
-        flattenBlocks(sheetName, prompts, validationTagMap, flattened, blockFlow, 0);
+        flattenBlocks(sheetName, prompts, validationTagMap, flattened, blockFlow, 0, specSettings);
         /*
          *
          * OK:
@@ -1264,13 +1265,13 @@
         };
     };
 
-    var parseSections = function(sectionNames, sections) {
+    var parseSections = function(sectionNames, sections, specSettings) {
         /* Step 1: restructure each section.
          *
          */
         var newSections = {};
         _.each(sections, function(section, sectionName){
-            var sectionObject = parseSection(sectionName, section);
+            var sectionObject = parseSection(sectionName, section, specSettings);
             newSections[sectionName] = sectionObject;
         });
 
@@ -1846,7 +1847,7 @@
             });
 
             // construct the json sheet for the interpreter
-            var parsedSections = parseSections(sectionNames, sections);
+            var parsedSections = parseSections(sectionNames, sections, specification.settings);
 
             specification.section_names = sectionNames; // in alphabetical order
 
