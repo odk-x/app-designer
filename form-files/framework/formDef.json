@@ -18,9 +18,6 @@
         "display": {
           "text": "Choose a test form"
         },
-        "screen": {
-          "showContents": false
-        },
         "_row_num": 3
       },
       {
@@ -32,9 +29,6 @@
         "display": {
           "text": "This is the default form.",
           "hint": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
-        },
-        "screen": {
-          "showContents": false
         },
         "_row_num": 5
       },
@@ -294,6 +288,7 @@
           "title": "Common Javascript Framework"
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "showContents": false,
         "_row_num": 4
       }
     ],
@@ -416,6 +411,7 @@
           "title": "Common Javascript Framework"
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "showContents": false,
         "_row_num": 4
       },
       "table_id": {
@@ -448,6 +444,7 @@
           "title": "Common Javascript Framework"
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "showContents": false,
         "_row_num": 4
       }
     },
@@ -878,7 +875,6 @@
             "_row_num": 3,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "showContents": false,
             "operationIdx": 2
           },
           {
@@ -892,7 +888,6 @@
             "_row_num": 5,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
-            "showContents": false,
             "operationIdx": 4
           },
           {
