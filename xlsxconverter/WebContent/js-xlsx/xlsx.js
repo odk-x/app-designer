@@ -533,7 +533,7 @@ function parseSheet(data) {
 
 	/* 18.3.1.35 dimension CT_SheetDimension ? */
 	var ref = data.match(/<dimension ref="([^"]*)"\s*\/>/);
-	if(ref && ref.indexOf(":") !== -1) s["!ref"] = ref[1];
+	if(ref && ref.length == 2 && ref[1].indexOf(":") !== -1) s["!ref"] = ref[1];
 
 	var refguess = {s: {r:1000000, c:1000000}, e: {r:0, c:0} };
 	var q = ["v","f"];
@@ -552,8 +552,9 @@ function parseSheet(data) {
 		var cells = x.substr(x.indexOf('>')+1).split(/<c/);
 		cells.forEach(function(c, idx) { if(c === "" || c.trim() === "") return;
 			c = "<c" + c;
-			if(refguess.s.c > idx - 1) refguess.s.c = idx - 1;
-			if(refguess.e.c < idx - 1) refguess.e.c = idx - 1;
+			// idx is already zero-based
+			if(refguess.s.c > idx) refguess.s.c = idx;
+			if(refguess.e.c < idx) refguess.e.c = idx;
 			var cell = parsexmltag((c.match(/<c[^>]*>/)||[c])[0]); delete cell[0];
 			var d = c.substr(c.indexOf('>')+1);
 			var p = {};
@@ -600,7 +601,8 @@ function parseSheet(data) {
 			s[cell.r] = p;
 		});
 	});
-	if(!s["!ref"]) s["!ref"] = encode_range(refguess);
+	var rguess = encode_range(refguess);
+	if(!s["!ref"]) s["!ref"] = rguess;
 	return s;
 }
 
