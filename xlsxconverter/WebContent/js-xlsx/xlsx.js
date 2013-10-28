@@ -551,8 +551,12 @@ function parseSheet(data) {
 		/* 18.3.1.4 c CT_Cell */
 		var cells = x.substr(x.indexOf('>')+1).split(/<c/);
 		cells.forEach(function(c, idx) { if(c === "" || c.trim() === "") return;
+			var cref = c.match(/r="([^"]*)"/);
 			c = "<c" + c;
-			// idx is already zero-based
+			if(cref && cref.length == 2) {
+				var cref_cell = decode_cell(cref[1]);
+				idx = cref_cell.c;
+			}
 			if(refguess.s.c > idx) refguess.s.c = idx;
 			if(refguess.e.c < idx) refguess.e.c = idx;
 			var cell = parsexmltag((c.match(/<c[^>]*>/)||[c])[0]); delete cell[0];
@@ -601,8 +605,7 @@ function parseSheet(data) {
 			s[cell.r] = p;
 		});
 	});
-	var rguess = encode_range(refguess);
-	if(!s["!ref"]) s["!ref"] = rguess;
+	if(!s["!ref"]) s["!ref"] = encode_range(refguess);
 	return s;
 }
 
