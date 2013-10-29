@@ -478,13 +478,13 @@ return {
         return function() {
             try {
                 // pass in 'render':false to indicate that rendering will not occur.
-                // call buildRenderContext() to ensure that we have values (assignTo) initialized for _validate()
+                // call buildRenderContext() to ensure that we have values (assignTo) initialized for _isValid()
                 promptCandidate.buildRenderContext( $.extend({render: false}, ctxt, {
                     success: function(renderContext) {
-                        promptCandidate._validate( $.extend({}, ctxt, {
+                        promptCandidate._isValid( $.extend({}, ctxt, {
                             success: function() {
                                 if ( promptList.length == nextPromptIdx ) {
-                                    ctxt.append("validateQuestionHelper.success.endOfValidationList", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                                    ctxt.append("validateQuestionHelper.success.endOfValidationList", "px: " + nextPromptIdx + " nextPx: no prompt!");
                                     ctxt.success();
                                 } else {
                                     var promptCandidate = that.getPrompt(promptList[nextPromptIdx]);

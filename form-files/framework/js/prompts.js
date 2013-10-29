@@ -205,23 +205,23 @@ promptTypes.base = Backbone.View.extend({
         return;
     },
     /**
-     * _validate isn't meant to be overidden.
+     * _isValid isn't meant to be overidden.
      * It does validation that will be common to most prompts.
      **/
-    _validate: function(ctxt) {
+    _isValid: function(ctxt) {
         var that = this;
         var isRequired = false;
         try {
             isRequired = that.required ? that.required() : false;
         } catch (e) {
             if ( ctxt.strict ) {
-                console.error("prompts."+that.type+"._validate.required.exception.strict px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+"._validate.required.exception.strict", String(e));
+                console.error("prompts."+that.type+"._isValid.required.exception.strict px: " + that.promptIdx + " exception: " + String(e));
+                ctxt.append("prompts."+that.type+"._isValid.required.exception.strict", String(e));
                 ctxt.failure({message: "Exception while evaluating required() expression. See console log."});
                 return;
             } else {
-                shim.log("I","prompts."+that.type+"._validate.required.exception.ignored px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+"._validate.required.exception.ignored", String(e));
+                shim.log("I","prompts."+that.type+"._isValid.required.exception.ignored px: " + that.promptIdx + " exception: " + String(e));
+                ctxt.append("prompts."+that.type+"._isValid.required.exception.ignored", String(e));
                 isRequired = false;
             }
         }
@@ -255,7 +255,7 @@ promptTypes.base = Backbone.View.extend({
                     return;
                 }
             } catch (e) {
-                ctxt.append("prompts."+that.type+"_validate.constraint.exception", e);
+                ctxt.append("prompts."+that.type+"_isValid.constraint.exception", e);
                 outcome = false;
                 that.valid = false;
                 ctxt.failure({ message: "Exception in constraint." });

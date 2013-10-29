@@ -415,7 +415,7 @@ screenTypes.screen = Backbone.View.extend({
             _.after(that.activePrompts.length, function() {
                 if ( advancing ) {
                     $.each(that.activePrompts, function(idx, prompt){
-                        prompt._validate(validationPromptCtxt);
+                        prompt._isValid(validationPromptCtxt);
                     });
                 } else {
                     allowMoveHandler(advancing);
@@ -719,7 +719,7 @@ screenTypes.columns_2 = Backbone.View.extend({
             _.after(that.activePrompts.length, function() {
                 if ( advancing ) {
                     $.each(that.activePrompts, function(idx, prompt){
-                        prompt._validate(validationPromptCtxt);
+                        prompt._isValid(validationPromptCtxt);
                     });
                 } else {
                     allowMoveHandler(advancing);
