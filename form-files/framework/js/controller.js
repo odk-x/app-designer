@@ -260,17 +260,12 @@ return {
                     that.gotoScreenPath(ctxt, operationPath, {omitPushOnReturnStack:true});
                 } else {
                     ctxt.append("gotoPreviousScreen.beforeMove.success.noPreviousPage");
-                    // display the 'no previous screen' screen message.
-                    // then transition to the start of the form.
-                    that.screenManager.noPreviousPage($.extend({}, ctxt,{
-                        success: function() {
-                            // pop ctxt
-                            ctxt.append("gotoPreviousScreen.noScreens");
-                            that.gotoScreenPath($.extend({},ctxt,{
-                                success:function() {
-                                    ctxt.failure({message: "Returning to start of form."});
-                                }}),opendatakit.initialScreenPath);
-                        }}));
+                    // transition to the start of the form.
+					// pop ctxt
+					that.gotoScreenPath($.extend({},ctxt,{
+						success:function() {
+							ctxt.failure({message: "Returning to start of form."});
+						}}),opendatakit.initialScreenPath);
                 }
             },
             failure: function(m) {
@@ -887,10 +882,7 @@ return {
                     that.setScreen(ctxt, operation, $.extend({}, options, addedOptions));
                 } else {
                     ctxt.append("controller.gotoScreenPath.advanceToNextScreen.success", "px: " + that.getCurrentScreenPath() + " nextPx: no screen!");
-                    that.screenManager.noNextPage($.extend({}, ctxt,{success: function() {
-                            ctxt.append("controller.gotoScreenPath.noSreens");
-                            that.gotoScreenPath(ctxt, opendatakit.initialScreenPath, addedOptions);
-                    }}));
+                    that.gotoScreenPath(ctxt, opendatakit.initialScreenPath, addedOptions);
                 }
             },
             failure: function(m) {

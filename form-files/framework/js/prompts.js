@@ -229,16 +229,10 @@ promptTypes.base = Backbone.View.extend({
         try {
             isRequired = that.required ? that.required() : false;
         } catch (e) {
-            if ( ctxt.strict ) {
-                console.error("prompts."+that.type+".baseValidate.required.exception.strict px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+".baseValidate.required.exception.strict", String(e));
-                ctxt.failure({message: "Exception while evaluating required() expression. See console log."});
-                return;
-            } else {
-                shim.log("I","prompts."+that.type+".baseValidate.required.exception.ignored px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+".baseValidate.required.exception.ignored", String(e));
-                isRequired = false;
-            }
+			shim.log('E',"prompts."+that.type+".baseValidate.required.exception px: " + that.promptIdx + " exception: " + String(e));
+			ctxt.append("prompts."+that.type+".baseValidate.required.exception", String(e));
+			ctxt.failure({message: "Exception while evaluating required() expression. See console log."});
+			return;
         }
         that.valid = true;
         if ( !('name' in that) ) {
@@ -270,10 +264,11 @@ promptTypes.base = Backbone.View.extend({
                     return;
                 }
             } catch (e) {
+				shim.log('E',"prompts."+that.type+".baseValidate.constraint.exception px: " + that.promptIdx + " exception: " + String(e));
                 ctxt.append("prompts."+that.type+"baseValidate.constraint.exception", e);
                 outcome = false;
                 that.valid = false;
-                ctxt.failure({ message: "Exception in constraint." });
+                ctxt.failure({ message: "Exception while evaluating constraint() expression. See console log." });
                 return;
             }
         }
@@ -1884,11 +1879,11 @@ promptTypes.acknowledge = promptTypes.select.extend({
     autoAdvance: false,
     acknLabel: translations.acknLabel,
     modification: function(evt) {
-        var ctxt = this.controller.newContext(evt);
-        ctxt.append('acknowledge.modification', this.promptIdx);
         var that = this;
-        var acknowledged = this.$('#acknowledge').is(':checked');
-        this.setValue($.extend({}, ctxt, {success: function() {
+        var ctxt = that.controller.newContext(evt);
+        ctxt.append('acknowledge.modification', that.promptIdx);
+        var acknowledged = that.$('#acknowledge').is(':checked');
+        that.setValue($.extend({}, ctxt, {success: function() {
                 that.renderContext.choices = [{
                     name: "acknowledge",
                     display: { text: that.acknLabel },

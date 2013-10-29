@@ -42,23 +42,6 @@ return Backbone.View.extend({
         "dragstart img": "disableImageDrag",
         "click #ok-btn": "closeScreenPopup"
     },
-    noPreviousPage: function(ctxt) {
-        ctxt.append("screenManager.noPreviousPage");
-        alert("I've forgotten what the previous page was!");
-        ctxt.success();
-    },
-    noNextPage: function(ctxt) {
-        ctxt.append("screenManager.noNextPage");
-        alert("No next page!");
-        ctxt.success();
-    },
-    unexpectedError: function(ctxt, action, ex) {
-        try {
-            alert("Unexpected error: " + action + " Reason: " + ex );
-        } catch (e) {
-        }
-        ctxt.success();
-    },
     initialize: function(){
         this.controller = this.options.controller;
         this.$el = $('body');
