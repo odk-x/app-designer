@@ -573,6 +573,9 @@
             "_do_section_name": "survey",
             "_type": "_section",
             "promptIdx": 0,
+            "display": {
+              "title": "Common Javascript Framework"
+            },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
           {

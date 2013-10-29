@@ -540,6 +540,9 @@
             "_do_section_name": "survey",
             "_type": "_section",
             "promptIdx": 1,
+            "display": {
+              "title": "Household Survey"
+            },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
           {

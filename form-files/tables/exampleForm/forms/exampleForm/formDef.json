@@ -81,6 +81,7 @@
           "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>",
           "hint": "So can <b>hints</b>"
         },
+        "hideInContents": true,
         "_row_num": 13
       },
       {
@@ -90,6 +91,7 @@
           "audio": "audio/carrioncrow.mp3",
           "image": "img/dolphin.png"
         },
+        "hideInContents": true,
         "_row_num": 14
       },
       {
@@ -107,6 +109,7 @@
           "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}",
           "hint": "Handlebars templates allow labels to change depending on the values previously entered."
         },
+        "hideInContents": true,
         "_row_num": 16
       },
       {
@@ -172,6 +175,7 @@
           "text": "Happy Birthday!",
           "hint": "This prompt shows how to use dates in fomulas."
         },
+        "hideInContents": true,
         "_row_num": 27
       },
       {
@@ -310,6 +314,7 @@
         "display": {
           "text": "<a href=\"{{promptLink \"unreachable\"}}\">This is a link to another prompt</a>"
         },
+        "hideInContents": true,
         "_row_num": 51
       },
       {
@@ -330,6 +335,7 @@
         "display": {
           "text": "This prompt is unreachable except by links."
         },
+        "hideInContents": true,
         "_row_num": 55
       },
       {
@@ -354,6 +360,7 @@
         "display": {
           "text": "The following data will be used to generate a weight for age plot."
         },
+        "hideInContents": true,
         "_row_num": 60
       },
       {
@@ -395,6 +402,7 @@
           "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
         },
         "templatePath": "ageWeightPlot.handlebars",
+        "hideInContents": true,
         "_row_num": 65
       },
       {
@@ -1227,6 +1235,7 @@
               "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>",
               "hint": "So can <b>hints</b>"
             },
+            "hideInContents": true,
             "_row_num": 13,
             "__rowNum__": 12,
             "_token_type": "prompt",
@@ -1241,6 +1250,7 @@
               "audio": "audio/carrioncrow.mp3",
               "image": "img/dolphin.png"
             },
+            "hideInContents": true,
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -1268,6 +1278,7 @@
               "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}",
               "hint": "Handlebars templates allow labels to change depending on the values previously entered."
             },
+            "hideInContents": true,
             "_row_num": 16,
             "__rowNum__": 15,
             "_token_type": "prompt",
@@ -1321,6 +1332,7 @@
               "text": "Happy Birthday!",
               "hint": "This prompt shows how to use dates in fomulas."
             },
+            "hideInContents": true,
             "_row_num": 27,
             "__rowNum__": 26,
             "_token_type": "prompt",
@@ -1439,6 +1451,7 @@
             "display": {
               "text": "<a href=\"{{promptLink \"unreachable\"}}\">This is a link to another prompt</a>"
             },
+            "hideInContents": true,
             "_row_num": 51,
             "__rowNum__": 50,
             "_token_type": "prompt",
@@ -1452,6 +1465,7 @@
             "display": {
               "text": "This prompt is unreachable except by links."
             },
+            "hideInContents": true,
             "_row_num": 55,
             "__rowNum__": 54,
             "_token_type": "prompt",
@@ -1464,6 +1478,7 @@
             "display": {
               "text": "The following data will be used to generate a weight for age plot."
             },
+            "hideInContents": true,
             "_row_num": 60,
             "__rowNum__": 59,
             "_token_type": "prompt",
@@ -1521,6 +1536,7 @@
               "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
             },
             "templatePath": "ageWeightPlot.handlebars",
+            "hideInContents": true,
             "_row_num": 65,
             "__rowNum__": 64,
             "_token_type": "prompt",
@@ -2138,6 +2154,9 @@
             "_do_section_name": "survey",
             "_type": "_section",
             "promptIdx": 1,
+            "display": {
+              "title": "Example Form"
+            },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
           {

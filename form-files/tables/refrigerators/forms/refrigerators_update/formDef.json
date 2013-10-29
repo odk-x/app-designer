@@ -433,6 +433,9 @@
             "_do_section_name": "survey",
             "_type": "_section",
             "promptIdx": 1,
+            "display": {
+              "title": "Refrigerator information update form"
+            },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
           {
