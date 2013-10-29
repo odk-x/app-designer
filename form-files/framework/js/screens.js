@@ -299,7 +299,7 @@ screenTypes.screen = Backbone.View.extend({
             ctxt.success();
         });
         _.each(that.activePrompts, function(prompt){
-            prompt.onActivate($.extend({}, ctxt, {success:function() {
+            prompt.buildRenderContext($.extend({}, ctxt, {success:function() {
                     subPromptsReady(ctxt);
                 }
             }));
@@ -350,7 +350,7 @@ screenTypes.screen = Backbone.View.extend({
         }
         var $container = that.$('.odk-container');
         $.each(that.activePrompts, function(idx, prompt){
-            prompt.render();
+            prompt._render();
             if(!prompt.$el){
                 console.error("render px: " + that.promptIdx + 
                     " Prompts must have synchronous render functions. " +
@@ -415,7 +415,7 @@ screenTypes.screen = Backbone.View.extend({
             _.after(that.activePrompts.length, function() {
                 if ( advancing ) {
                     $.each(that.activePrompts, function(idx, prompt){
-                        prompt.validate(validationPromptCtxt);
+                        prompt._validate(validationPromptCtxt);
                     });
                 } else {
                     allowMoveHandler(advancing);
@@ -584,7 +584,7 @@ screenTypes.columns_2 = Backbone.View.extend({
             ctxt.success();
         });
         _.each(that.activePrompts, function(prompt){
-            prompt.onActivate($.extend({}, ctxt, {success:function() {
+            prompt.buildRenderContext($.extend({}, ctxt, {success:function() {
                     subPromptsReady(ctxt);
                 }
             }));
@@ -642,7 +642,7 @@ screenTypes.columns_2 = Backbone.View.extend({
         var col_b = $('<div class="ui-block-b">');
 
         $.each(that.activePrompts, function(idx, prompt){
-            prompt.render();
+            prompt._render();
             if(!prompt.$el){
                 console.error("render px: " + that.promptIdx + 
                     " Prompts must have synchronous render functions. " +
@@ -719,7 +719,7 @@ screenTypes.columns_2 = Backbone.View.extend({
             _.after(that.activePrompts.length, function() {
                 if ( advancing ) {
                     $.each(that.activePrompts, function(idx, prompt){
-                        prompt.validate(validationPromptCtxt);
+                        prompt._validate(validationPromptCtxt);
                     });
                 } else {
                     allowMoveHandler(advancing);

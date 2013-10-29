@@ -79,49 +79,37 @@ promptTypes.base = Backbone.View.extend({
      * TODO: move this to screen.
      * TODO: move this to screen.
      * TODO: move this to screen.
-     * onActivate
+     * buildRenderContext
      * Called before a prompt is rendered.
      */
-    onActivate: function(ctxt) {
+    buildRenderContext: function(ctxt) {
         var that = this;
-        this.preActivate($.extend({}, ctxt, {success: function() {
-                that.whenTemplateIsReady($.extend({}, ctxt, {success: function() {
-                        that.initializeRenderContext(
-                            $.extend({}, ctxt, {success: function() {
-                                that.postActivate(ctxt);
-                            }}));
-                    }}));
+        
+        var newCtxt = $.extend({}, ctxt, {success: function() {
+            that._whenTemplateIsReady($.extend({}, ctxt, {success: function() {
+                that._initializeRenderContext();
+                that.configureRenderContext(ctxt);
             }}));
-    },
-    /**
-     * preActivate
-     * If there is a default method defined (e.g., XLSX 
-     * defined a default column with a calculate...() expression,
-     * then if the prompt has backing store (a 'name' field) and
-     * if the backing store value is null, set it to the value 
-     * returned by the default() method before continuing with
-     * prompt activation.
-     */
-    preActivate: function(ctxt) {
-        var that = this;
+        }});
+
         if((that.name != null && 
             'default' in that) && 
             that.getValue() == null) {
             var value = that['default']();
-            ctxt.append('preActivate','assigning default value');
-            that.setValue(ctxt, value);
+            newCtxt.append('buildRenderContext','assigning default value');
+            that.setValue(newCtxt, value);
         } else {
-            ctxt.success();
+            newCtxt.success();
         }
     },
     /**
-     * whenTemplateIsReady
+     * _whenTemplateIsReady
      * Ensure that the template is loaded and compiled before 
      * proceeding (via ctxt.success()).
      * 
      * Part of the preliminaries to rendering a page.
      */
-    whenTemplateIsReady: function(ctxt){
+    _whenTemplateIsReady: function(ctxt){
         var that = this;
         if(that.template) {
             ctxt.success();
@@ -133,32 +121,32 @@ promptTypes.base = Backbone.View.extend({
                         // ensure that require is unwound
                         setTimeout(function() { ctxt.success(); }, 0 );
                     } catch (e) {
-                        ctxt.append("prompts."+that.type+".whenTemplateIsReady.exception", e);
-                        shim.log('E',"prompts."+that.type+".whenTemplateIsReady.exception " + String(e) + " px: " + that.promptIdx);
+                        ctxt.append("prompts."+that.type+"._whenTemplateIsReady.exception", e);
+                        shim.log('E',"prompts."+that.type+"._whenTemplateIsReady.exception " + String(e) + " px: " + that.promptIdx);
                         ctxt.failure({message: "Error compiling handlebars template."});
                     }
                 }, function(err) {
-                    ctxt.append("prompts."+that.type+".whenTemplateIsReady.require.failure " + err.requireType + ' modules: ', err.requireModules);
-                    shim.log('E',"prompts."+that.type+".whenTemplateIsReady.require.failure " + err.requireType + ' modules: ', err.requireModules.toString() + " px: " + that.promptIdx);
+                    ctxt.append("prompts."+that.type+"._whenTemplateIsReady.require.failure " + err.requireType + ' modules: ', err.requireModules);
+                    shim.log('E',"prompts."+that.type+"._whenTemplateIsReady.require.failure " + err.requireType + ' modules: ', err.requireModules.toString() + " px: " + that.promptIdx);
                     ctxt.failure({message: "Error loading handlebars template."});
                 });
             } catch (e) {
-                ctxt.append("prompts."+that.type+".whenTemplateIsReady.require.exception", e);
-                shim.log('E',"prompts."+that.type+".whenTemplateIsReady.require.exception " + String(e) + " px: " + that.promptIdx);
+                ctxt.append("prompts."+that.type+"._whenTemplateIsReady.require.exception", e);
+                shim.log('E',"prompts."+that.type+"._whenTemplateIsReady.require.exception " + String(e) + " px: " + that.promptIdx);
                 ctxt.failure({message: "Error reading handlebars template."});
             }
         } else {
-            ctxt.append("prompts." + that.type + ".whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
-            shim.log('E',"prompts."+that.type+".whenTemplateIsReady.noTemplate px: " + that.promptIdx);
+            ctxt.append("prompts." + that.type + "._whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
+            shim.log('E',"prompts."+that.type+"._whenTemplateIsReady.noTemplate px: " + that.promptIdx);
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
     /**
-     * initializeRenderContext
+     * _initializeRenderContext
      * construct the renderContext for this prompt. This is an entirely new
      * object every time the screen is redrawn.
      */
-    initializeRenderContext: function(ctxt) {
+    _initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
         this.renderContext = Object.create(this.renderContext);
         this.renderContext.display = this.display;
@@ -186,13 +174,12 @@ promptTypes.base = Backbone.View.extend({
         }
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this.renderContext, this.templateContext);
-        ctxt.success();
     },
     /**
-     * postActivate
+     * configureRenderContext
      * User-overridable action to perform additional actions prior to the call to render.
      */
-    postActivate: function(ctxt){
+    configureRenderContext: function(ctxt){
         ctxt.success();
     },
     /**
@@ -206,37 +193,35 @@ promptTypes.base = Backbone.View.extend({
         ctxt.success();
     },
     afterRender: function() {},
-    render: function() {
+    _render: function() {
         var that = this;
         try {
             that.$el.html(this.template(this.renderContext));
         } catch(e) {
-            console.error("prompts." + that.type + ".render.exception: " + String(e) + ' px: ' + that.promptIdx);
+            console.error("prompts." + that.type + "._render.exception: " + String(e) + ' px: ' + that.promptIdx);
             console.error(that);
             alert("Error in template.");
         }
         return;
     },
     /**
-     * baseValidate isn't meant to be overidden or called externally.
+     * _validate isn't meant to be overidden.
      * It does validation that will be common to most prompts.
-     * Validate is meant be overridden and publicly called. 
-     * It is validate's responsibility to call baseValidate.
      **/
-    baseValidate: function(ctxt) {
+    _validate: function(ctxt) {
         var that = this;
         var isRequired = false;
         try {
             isRequired = that.required ? that.required() : false;
         } catch (e) {
             if ( ctxt.strict ) {
-                console.error("prompts."+that.type+".baseValidate.required.exception.strict px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+".baseValidate.required.exception.strict", String(e));
+                console.error("prompts."+that.type+"._validate.required.exception.strict px: " + that.promptIdx + " exception: " + String(e));
+                ctxt.append("prompts."+that.type+"._validate.required.exception.strict", String(e));
                 ctxt.failure({message: "Exception while evaluating required() expression. See console log."});
                 return;
             } else {
-                shim.log("I","prompts."+that.type+".baseValidate.required.exception.ignored px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+".baseValidate.required.exception.ignored", String(e));
+                shim.log("I","prompts."+that.type+"._validate.required.exception.ignored px: " + that.promptIdx + " exception: " + String(e));
+                ctxt.append("prompts."+that.type+"._validate.required.exception.ignored", String(e));
                 isRequired = false;
             }
         }
@@ -270,7 +255,7 @@ promptTypes.base = Backbone.View.extend({
                     return;
                 }
             } catch (e) {
-                ctxt.append("prompts."+that.type+"baseValidate.constraint.exception", e);
+                ctxt.append("prompts."+that.type+"_validate.constraint.exception", e);
                 outcome = false;
                 that.valid = false;
                 ctxt.failure({ message: "Exception in constraint." });
@@ -278,9 +263,6 @@ promptTypes.base = Backbone.View.extend({
             }
         }
         ctxt.success();
-    },
-    validate: function(ctxt) {
-        return this.baseValidate(ctxt);
     },
     formattedValueForContentsDisplay: function() {
         if ( !this.name ) {
@@ -334,7 +316,7 @@ promptTypes.opening = promptTypes.base.extend({
     type: "opening",
     hideInContents: true,
     templatePath: "templates/opening.handlebars",
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
@@ -382,7 +364,7 @@ promptTypes.finalize = promptTypes.base.extend({
     renderContext: {
         headerImg: requirejs.toUrl('img/form_logo.png')
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         var formLogo = false;//TODO: Need way to access form settings.
         if(formLogo){
@@ -425,7 +407,7 @@ promptTypes.json = promptTypes.base.extend({
     hideInContents: true,
     valid: true,
     templatePath: "templates/json.handlebars",
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         if ( JSON != null ) {
             that.renderContext.value = JSON.stringify(database.getAllDataValues(),null,2);
@@ -449,9 +431,9 @@ promptTypes.instances = promptTypes.base.extend({
         "click .deleteInstance": "deleteInstance",
         "click .createInstance": "createInstance"
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
-        ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
+        ctxt.append("prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
         database.get_all_instances($.extend({},ctxt,{success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
                     var savepoint_type = term.savepoint_type;
@@ -495,7 +477,7 @@ promptTypes.instances = promptTypes.base.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
         database.delete_all($.extend({}, ctxt, {success: function() {
-                that.onActivate($.extend({}, ctxt, {success: function() {
+                that.buildRenderContext($.extend({}, ctxt, {success: function() {
                         that.reRender(ctxt);
                     }
                 }));
@@ -523,7 +505,7 @@ promptTypes.contents = promptTypes.base.extend({
             that.controller.gotoScreenPath(ctxt, oldPropertyValue);
         });
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         this.renderContext.prompts = this.controller.getCurrentSectionPrompts();
         this._screen._renderContext.enableForwardNavigation = false;
         this._screen._renderContext.showHeader = true;
@@ -679,9 +661,9 @@ promptTypes.linked_table = promptTypes.base.extend({
         that.$('.deleteInstance').removeAttr('disabled');
         that.$('.addInstance').removeAttr('disabled');
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
-        ctxt.append("prompts." + that.type + ".postActivate", "px: " + that.promptIdx);
+        ctxt.append("prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
         that.renderContext.add_instance_label = that.display.new_instance_text || "Add Instance";
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
@@ -693,7 +675,7 @@ promptTypes.linked_table = promptTypes.base.extend({
                     that.renderContext.instances = instanceList;
                     // change this to incomplete if it wasn't saved via the specific form
                     for (var i = 0; i < instanceList.length; i++) {
-                        if (instanceList[i].form_id != linked_form_id) {
+                        if (instanceList[i].form_id != that.linked_form_id) {
                             instanceList[i].savepoint_type = "incomplete";
                         }
                     }
@@ -885,10 +867,10 @@ promptTypes.user_branch = promptTypes.base.extend({
         });
     },
     choice_filter: function(){ return true; },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-            ctxt.append("prompts." + that.type + ".postActivate." + outcome,
+            ctxt.append("prompts." + that.type + ".configureRenderContext." + outcome,
                         "px: " + that.promptIdx);
             ctxt.success();
         }});
@@ -910,12 +892,12 @@ promptTypes.user_branch = promptTypes.base.extend({
                     newctxt.success("success");
                 },
                 "error": function(e) {
-                    newctxt.append("prompts." + this.type + ".postActivate.error", 
+                    newctxt.append("prompts." + this.type + ".configureRenderContext.error", 
                                 "px: " + this.promptIdx + " Error fetching choices");
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
                     //the form.
-                    shim.log("prompts." + this.type + ".postActivate.error px: " +
+                    shim.log("prompts." + this.type + ".configureRenderContext.error px: " +
                              this.promptIdx + " Error fetching choices: " + e);
                     that.renderContext.passiveError = "Error fetching choices.\n";
                     if(e.statusText) {
@@ -1118,10 +1100,10 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             }
         }), this.generateSaveValue(formValue));
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-            ctxt.append("prompts." + that.type + ".postActivate." + outcome,
+            ctxt.append("prompts." + that.type + ".configureRenderContext." + outcome,
                         "px: " + that.promptIdx);
             that.updateRenderValue(that.parseSaveValue(that.getValue()));
             ctxt.success();
@@ -1144,12 +1126,12 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                     newctxt.success("success");
                 },
                 "error": function(e) {
-                    newctxt.append("prompts." + this.type + ".postActivate.error", 
+                    newctxt.append("prompts." + this.type + ".configureRenderContext.error", 
                                 "px: " + this.promptIdx + " Error fetching choices");
                     //This is a passive error because there could just be a problem
                     //with the content provider/network/remote service rather than with
                     //the form.
-                    shim.log("D","prompts." + this.type + ".postActivate.error px: " + 
+                    shim.log("D","prompts." + this.type + ".configureRenderContext.error px: " + 
                                 this.promptIdx + " Error fetching choices: " + e);
                     that.renderContext.passiveError = "Error fetching choices.\n";
                     if(e.statusText) {
@@ -1321,7 +1303,7 @@ promptTypes.input_type = promptTypes.base.extend({
             }
         }), (value.length === 0 ? null : value));
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var renderContext = this.renderContext;
         var value = this.getValue();
         renderContext.value = value;
@@ -1404,7 +1386,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         return false;
         */
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         var renderContext = this.renderContext;
         if(this.detectNativeDatePicker()){
@@ -1570,7 +1552,7 @@ promptTypes.media = promptTypes.base.extend({
         "click .captureAction:enabled": "capture",
         "click .chooseAction:enabled": "choose"
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         that.updateRenderContext();
         ctxt.success();
@@ -1638,7 +1620,7 @@ promptTypes.media = promptTypes.base.extend({
                     if ( uri != oldPath) {
                         // TODO: delete old??? Or leave until marked as finalized?
                         // TODO: I'm not sure how the resuming works, but we'll need to make sure
-                        // onActivate get's called AFTER this happens.
+                        // buildRenderContext get's called AFTER this happens.
                         database.setData( $.extend({},ctxt,{success:function() {
                                 that.enableButtons();
                                 that.updateRenderContext();
@@ -1729,7 +1711,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
     events: {
         "click .launch": "launch"
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         var value = that.getValue();
         that.renderContext.value = value;
@@ -1862,7 +1844,7 @@ promptTypes.geopoint = promptTypes.input_type.extend({
             error('not supported');
         }
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         var value = that.getValue();
         that.renderContext.value = value;
@@ -1915,7 +1897,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
             }
         }), acknowledged);
     },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         var acknowledged;
         try{
