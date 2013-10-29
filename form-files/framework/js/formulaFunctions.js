@@ -90,7 +90,7 @@ function(opendatakit,  database,   _) {
          * return the value 3 (for use in the remainder of the expression).
          */
         assign: function(valueName, value) {
-            database.setValueDeferredChange(name, value);
+            database.setValueDeferredChange(valueName, value);
             return value;
         },
         /**
