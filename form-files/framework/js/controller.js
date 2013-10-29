@@ -500,7 +500,7 @@ return {
                         promptCandidate.validate( $.extend({}, ctxt, {
                             success: function() {
                                 if ( promptList.length == nextPromptIdx ) {
-                                    ctxt.append("_validateQuestionHelper.success.endOfValidationList", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                                    ctxt.append("_validateQuestionHelper.success.endOfValidationList");
                                     ctxt.success();
                                 } else {
                                     var promptCandidate = that.getPrompt(promptList[nextPromptIdx]);
