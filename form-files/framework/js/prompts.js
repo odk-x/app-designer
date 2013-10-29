@@ -109,7 +109,8 @@ promptTypes.base = Backbone.View.extend({
             that.getValue() == null) {
             var value = that['default']();
             ctxt.append('preActivate','assigning default value');
-            that.setValue(ctxt, value);
+            that.setValueDeferredChange(value);
+            ctxt.success();
         } else {
             ctxt.success();
         }
@@ -229,10 +230,10 @@ promptTypes.base = Backbone.View.extend({
         try {
             isRequired = that.required ? that.required() : false;
         } catch (e) {
-			shim.log('E',"prompts."+that.type+".baseValidate.required.exception px: " + that.promptIdx + " exception: " + String(e));
-			ctxt.append("prompts."+that.type+".baseValidate.required.exception", String(e));
-			ctxt.failure({message: "Exception while evaluating required() expression. See console log."});
-			return;
+            shim.log('E',"prompts."+that.type+".baseValidate.required.exception px: " + that.promptIdx + " exception: " + String(e));
+            ctxt.append("prompts."+that.type+".baseValidate.required.exception", String(e));
+            ctxt.failure({message: "Exception while evaluating required() expression. See console log."});
+            return;
         }
         that.valid = true;
         if ( !('name' in that) ) {
@@ -264,7 +265,7 @@ promptTypes.base = Backbone.View.extend({
                     return;
                 }
             } catch (e) {
-				shim.log('E',"prompts."+that.type+".baseValidate.constraint.exception px: " + that.promptIdx + " exception: " + String(e));
+                shim.log('E',"prompts."+that.type+".baseValidate.constraint.exception px: " + that.promptIdx + " exception: " + String(e));
                 ctxt.append("prompts."+that.type+"baseValidate.constraint.exception", e);
                 outcome = false;
                 that.valid = false;
@@ -292,10 +293,10 @@ promptTypes.base = Backbone.View.extend({
         }
         return database.getDataValue(this.name);
     },
-    setValue: function(ctxt, value) {
+    setValueDeferredChange: function(value) {
         // NOTE: data IS NOT updated synchronously. Use callback!
         var that = this;
-        database.setData(ctxt, that.name, value);
+        database.setValueDeferredChange(that.name, value);
     },
     beforeMove: function(ctxt) {
         ctxt.append("prompts." + this.type, "px: " + this.promptIdx);
@@ -1107,11 +1108,9 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
             this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
         }
         var formValue = (this.$('form').serializeArray());
-        this.setValue($.extend({}, ctxt, {success: function() {
-                that.updateRenderValue(formValue);
-                that.reRender(ctxt);
-            }
-        }), this.generateSaveValue(formValue));
+        that.setValueDeferredChange(that.generateSaveValue(formValue));
+        that.updateRenderValue(formValue);
+        that.reRender(ctxt);
     },
     postActivate: function(ctxt) {
         var that = this;
@@ -1301,20 +1300,18 @@ promptTypes.input_type = promptTypes.base.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
-        that.setValue($.extend({}, ctxt, {success: function() {
-                renderContext.value = value;
-                renderContext.invalid = !that.validateValue();
-                that.insideMutex = false;
-                that.debouncedRender(ctxt);
-            },
-            failure: function(m) {
-                renderContext.value = value;
-                renderContext.invalid = true;
-                that.insideMutex = false;
-                that.debouncedRender({success: function() { ctxt.failure(m);},
-                    failure: function(m2) { ctxt.failure(m);}});
-            }
-        }), (value.length === 0 ? null : value));
+        // track original value
+        var originalValue = that.getValue();
+        that.setValueDeferredChange((value.length === 0 ? null : value));
+        renderContext.invalid = !that.validateValue();
+        if ( renderContext.invalid ) {
+            value = originalValue;
+            // restore it...
+            that.setValueDeferredChange(originalValue);
+        }
+        renderContext.value = value;
+        that.insideMutex = false;
+        that.debouncedRender(ctxt);
     },
     postActivate: function(ctxt) {
         var renderContext = this.renderContext;
@@ -1324,7 +1321,18 @@ promptTypes.input_type = promptTypes.base.extend({
     },
     beforeMove: function(ctxt) {
         var that = this;
-        that.setValue(ctxt, this.$('input').val());
+        // track original value
+        var originalValue = that.getValue();
+        that.setValueDeferredChange(this.$('input').val());
+        var isInvalid = !that.validateValue();
+        if ( isInvalid ) {
+            value = originalValue;
+            // restore it...
+            that.setValueDeferredChange(originalValue);
+			ctxt.failure({ message: that.invalid_value_message });
+        } else {
+			ctxt.success();
+		}
     },
     validateValue: function() {
         return true;
@@ -1444,25 +1452,22 @@ promptTypes.datetime = promptTypes.input_type.extend({
         } else {
             renderContext.value = that.$('input').val();
         }
-        that.setValue($.extend({}, ctxt, {success: function() {
-                renderContext.invalid = !that.validateValue();
-                if ( rerender ) {
-                    that.reRender(ctxt);
-                } else {
-                    ctxt.success();
-                }
-            },
-            failure: function(m) {
-                renderContext.invalid = true;
-                if ( rerender ) {
-                    that.reRender($.extend({}, ctxt, {success: function() {
-                        ctxt.failure(m);
-                    }, failure: function(m2) { ctxt.failure(m);}}));
-                } else {
-                    ctxt.failure(m);
-                }
-            }
-        }), value);
+        // track original value
+        var originalValue = that.getValue();
+        that.setValueDeferredChange(value);
+        renderContext.invalid = !that.validateValue();
+        if ( renderContext.invalid ) {
+            value = originalValue;
+            // restore it...
+            that.setValueDeferredChange(originalValue);
+            rerender = true;
+        }
+        renderContext.value = value;
+        if ( rerender ) {
+            that.reRender(ctxt);
+        } else {
+            ctxt.success();
+        }
     },
     
     afterRender: function() {
@@ -1517,25 +1522,22 @@ promptTypes.time = promptTypes.datetime.extend({
         } else {
             renderContext.value = that.$('input').val();
         }
-        that.setValue($.extend({}, ctxt, {success: function() {
-                renderContext.invalid = !that.validateValue();
-                if ( rerender ) {
-                    that.reRender(ctxt);
-                } else {
-                    ctxt.success();
-                }
-            },
-            failure: function(m) {
-                renderContext.invalid = true;
-                if ( rerender ) {
-                    that.reRender($.extend({}, ctxt, {success: function() {
-                        ctxt.failure(m);
-                    }, failure: function(m2) { ctxt.failure(m);}}));
-                } else {
-                    ctxt.failure(m);
-                }
-            }
-        }), value);
+        // track original value
+        var originalValue = that.getValue();
+        that.setValueDeferredChange(value);
+        renderContext.invalid = !that.validateValue();
+        if ( renderContext.invalid ) {
+            value = originalValue;
+            // restore it...
+            that.setValueDeferredChange(originalValue);
+            rerender = true;
+        }
+        renderContext.value = value;
+        if ( rerender ) {
+            that.reRender(ctxt);
+        } else {
+            ctxt.success();
+        }
     },
     afterRender: function() {
         var that = this;
@@ -1776,11 +1778,9 @@ promptTypes.launch_intent = promptTypes.base.extend({
             if (jsonObject.status == -1 ) { // Activity.RESULT_OK
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 if (jsonObject.result != null) {
-                    that.setValue($.extend({}, ctxt, {success: function() {
-                            that.renderContext.value = that.getValue();
-                            that.reRender(ctxt);
-                        }
-                    }), that.extractDataValue(jsonObject));
+                    that.setValueDeferredChange(that.extractDataValue(jsonObject));
+                    that.renderContext.value = that.getValue();
+                    that.reRender(ctxt);
                 }
             } else {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.failureOutcome', "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
@@ -1824,47 +1824,6 @@ promptTypes.geopointmap = promptTypes.launch_intent.extend({
                  accuracy: jsonObject.result.accuracy };
     }
 });
-/*
-//HTML5 geopoints seem to work in the browser but not in the app.
-promptTypes.geopoint = promptTypes.input_type.extend({
-    type: "geopoint",
-    label: 'Capture geopoint:',
-    templatePath: "templates/geopoint.handlebars",
-    events: {
-        "click .captureAction": "capture"
-    },
-    capture: function(evt){
-        var that = this;
-        that.$('.status').text("Capturing...");
-        that.$('.captureAction').addClass('ui-disabled');
-        function success(position) {
-            that.setValue(
-                $.extend({}, that.controller.newContext(evt), {success: function() {
-                    that.renderContext.value = position;
-                    that.reRender();
-                }
-            }), position);
-        }
-        function error(msg) {
-            that.$('.status').text((typeof msg == 'string') ? msg : "failed");
-            shim.log('E', arguments);
-        }
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(success, error, {
-                "enableHighAccuracy": true
-            });
-        } else {
-            error('not supported');
-        }
-    },
-    postActivate: function(ctxt) {
-        var that = this;
-        var value = that.getValue();
-        that.renderContext.value = value;
-        ctxt.success();
-    }
-});
-*/
 promptTypes.note = promptTypes.base.extend({
     type: "note",
     templatePath: "templates/note.handlebars"
@@ -1882,21 +1841,21 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('acknowledge.modification', that.promptIdx);
+		var oldValue = that.getValue();
         var acknowledged = that.$('#acknowledge').is(':checked');
-        that.setValue($.extend({}, ctxt, {success: function() {
-                that.renderContext.choices = [{
-                    name: "acknowledge",
-                    display: { text: that.acknLabel },
-                    checked: acknowledged
-                }];
-                if (acknowledged && that.autoAdvance) {
-                    that.controller.gotoNextScreen(ctxt);
-                }
-                else {
-                    ctxt.success();
-                }
-            }
-        }), acknowledged);
+        that.setValueDeferredChange(acknowledged);
+        that.renderContext.choices = [{
+            name: "acknowledge",
+            display: { text: that.acknLabel },
+            checked: acknowledged
+        }];
+        if (acknowledged && that.autoAdvance) {
+            that.controller.gotoNextScreen(ctxt);
+        } else if ( oldValue != acknowledged ) {
+            that.reRender(ctxt);
+		} else {
+            ctxt.success();
+        }
     },
     postActivate: function(ctxt) {
         var that = this;
