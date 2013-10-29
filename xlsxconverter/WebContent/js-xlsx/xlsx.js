@@ -282,7 +282,7 @@ function parseVector(data) {
 	if(matches.length != h.size) throw "unexpected vector length " + matches.length + " != " + h.size;
 	var res = [];
 	matches.forEach(function(x) {
-		var v = x.replace(/<[\/]?vt:variant>/g,"").match(/<vt:([^>]*)>(.*)</);
+		var v = x.replace(/<[/]?vt:variant>/g,"").match(/<vt:([^>]*)>(.*)</);
 		res.push({v:v[2], t:v[1]});
 	});
 	return res;
@@ -533,7 +533,7 @@ function parseSheet(data) {
 
 	/* 18.3.1.35 dimension CT_SheetDimension ? */
 	var ref = data.match(/<dimension ref="([^"]*)"\s*\/>/);
-	if(ref && ref.indexOf(":") !== -1) s["!ref"] = ref[1];
+	if(ref && ref.length == 2 && ref[1].indexOf(":") !== -1) s["!ref"] = ref[1];
 
 	var refguess = {s: {r:1000000, c:1000000}, e: {r:0, c:0} };
 	var q = ["v","f"];
@@ -551,9 +551,14 @@ function parseSheet(data) {
 		/* 18.3.1.4 c CT_Cell */
 		var cells = x.substr(x.indexOf('>')+1).split(/<c/);
 		cells.forEach(function(c, idx) { if(c === "" || c.trim() === "") return;
+			var cref = c.match(/r="([^"]*)"/);
 			c = "<c" + c;
-			if(refguess.s.c > idx - 1) refguess.s.c = idx - 1;
-			if(refguess.e.c < idx - 1) refguess.e.c = idx - 1;
+			if(cref && cref.length == 2) {
+				var cref_cell = decode_cell(cref[1]);
+				idx = cref_cell.c;
+			}
+			if(refguess.s.c > idx) refguess.s.c = idx;
+			if(refguess.e.c < idx) refguess.e.c = idx;
 			var cell = parsexmltag((c.match(/<c[^>]*>/)||[c])[0]); delete cell[0];
 			var d = c.substr(c.indexOf('>')+1);
 			var p = {};
@@ -631,7 +636,6 @@ function parseProps(data) {
 			switch(v[i].v) {
 				case "Worksheets": widx = j; p.Worksheets = +v[++i]; break;
 				case "Named Ranges": ++i; break; // TODO: Handle Named Ranges
-				default: console.error("Unrecognized key in Heading Pairs: " + v[i++].v);
 			}
 		}
 		var parts = parseVector(q.TitlesOfParts).map(utf8read);
@@ -787,8 +791,6 @@ function parseWB(data) {
 			case '<mx:ArchID': break;
 			case '<mc:AlternateContent': pass=true; break;
 			case '</mc:AlternateContent>': pass=false; break;
-
-			default: if(!pass) console.error("WB Tag",x,y);
 		}
 	});
 	if(wb.xmlns !== XMLNS_WB) throw "Unknown Namespace: " + wb.xmlns;
@@ -1038,7 +1040,7 @@ function sheet_to_csv(sheet) {
 			var row = [];
 			for(var C = r.s.c; C <= r.e.c; ++C) {
 				var val = sheet[utils.encode_cell({c:C,r:R})];
-				row.push(val ? stringify(val).replace(/\\r\\n/g,"\n").replace(/\\t/g,"\t").replace(/\\\\/g,"\\").replace(/\\\"/g,"\"\"") : "");
+				row.push(val ? stringify(val).replace(/\\r\\n/g,"\n").replace(/\\t/g,"\t").replace(/\\\\/g,"\\").replace("\\\"","\"\"") : "");
 			}
 			out += row.join(",") + "\n";
 		}

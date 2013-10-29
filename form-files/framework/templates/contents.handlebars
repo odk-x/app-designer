@@ -1,5 +1,5 @@
 <h3>Contents</h3>
-<ul data-role="listview"><!-- this is completely wrong - should not use promptLink - should have screenPath of prompt and goto that path. -->
+<ul data-role="listview">
     {{#each prompts}}
         {{#unless hideInContents}}
 		<li>
@@ -8,11 +8,12 @@
 					{{#substitute}}{{localize display.title}} {{/substitute}}{{formattedValueForContentsDisplay}}
 				{{else}}
 					{{#if display.text}}{{#substitute}}{{localize display.text}} {{/substitute}}{{/if}}{{formattedValueForContentsDisplay}}
-				{{/if}}				
-				{{#if _do_section_name}}
-					<a class="select-contents-item-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">go to</a>
-				{{else}} 
+				{{/if}}
+				{{! if the prompt has a data field, display edit, otherwise display go to}}
+				{{#if name}}
 					<a class="select-contents-item-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">edit</a>
+				{{else}} 
+					<a class="select-contents-item-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">go to</a>
 				{{/if}}
 			</div>
 		</li>

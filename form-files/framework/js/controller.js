@@ -18,49 +18,46 @@ verifyLoad('controller',
     [ScreenManager,  opendatakit,  database,   mdl,   parsequery,  $]);
 return {
     eventCount: 0,
+    moveFailureMessage: { message: "Internal Error: Unable to determine next prompt." },
     screenManager : null,
     getCurrentScreenPath: function() {
         return shim.getScreenPath(opendatakit.getRefId());
     },
-	getCurrentContentsScreenPath: function() {
-		var currentPath = this.getCurrentScreenPath();
+    getCurrentContentsScreenPath: function() {
+        var currentPath = this.getCurrentScreenPath();
         if ( currentPath == null ) {
-            ctxt.append("controller.getCurrentContentsScreenPath: null currentScreenPath!");
-            ctxt.failure({message: "no current screen!"});
+            shim.log('E',"controller.getCurrentContentsScreenPath: null currentScreenPath!");
             return;
         }
-		var parts = currentPath.split("/");
+        var parts = currentPath.split("/");
         if ( parts.length < 2 ) {
-            ctxt.append("controller.getCurrentContentsScreenPath: invalid currentScreenPath: " + currentPath);
-            ctxt.failure({message: "invalid currentScreenPath: " + currentPath});
+            shim.log('E',"controller.getCurrentContentsScreenPath: invalid currentScreenPath: " + currentPath);
             return;
         }
  
-		return parts[0] + '/_contents';
-	},
+        return parts[0] + '/_contents';
+    },
     // NOTE: this is only here to avoid having screen depend upon database.
     commitChanges: function(ctxt) {
         database.applyDeferredChanges(ctxt);
     },
-    getOperationPath: function(ctxt, opPath) {
+    getOperationPath: function(opPath) {
         
         if ( opPath == null ) {
-            ctxt.failure({message: "invalid opPath: null"});
+            shim.log('E',"invalid opPath: null");
             return;
         }
         
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
-            ctxt.append("controller.getOperationPath: invalid opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getOperationPath: invalid opPath: " + opPath);
             return;
         }
         
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
-            ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getOperationPath: no section matching opPath: " + opPath);
             return;
         }
 
@@ -73,39 +70,35 @@ return {
         }
 
         if ( intIndex == null ) {
-            ctxt.append("controller.getOperationPath: no branch label matching opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getOperationPath: no branch label matching opPath: " + opPath);
             return;
         }
 
         if ( intIndex >= section.operations.length ) {
-            ctxt.append("controller.getOperationPath: invalid opPath (beyond end of operations array): " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getOperationPath: invalid opPath (beyond end of operations array): " + opPath);
             return;
         }
         
         var newPath = parts[0] + '/' + intIndex;
-        ctxt.success(newPath);
+        return newPath;
     },
-    getNextOperationPath: function(ctxt, opPath) {
+    getNextOperationPath: function(opPath) {
         
         if ( opPath == null ) {
-            ctxt.failure({message: "invalid opPath: null"});
+            shim.log('E',"invalid opPath: null");
             return;
         }
         
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
-            ctxt.append("controller.getNextOperationPath: invalid opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getNextOperationPath: invalid opPath: " + opPath);
             return;
         }
         
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
-            ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getNextOperationPath: no section matching opPath: " + opPath);
             return;
         }
 
@@ -118,14 +111,12 @@ return {
         }
 
         if ( intIndex == null ) {
-            ctxt.append("controller.getNextOperationPath: no branch label matching opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getNextOperationPath: no branch label matching opPath: " + opPath);
             return;
         }
 
         if ( intIndex >= section.operations.length ) {
-            ctxt.append("controller.getNextOperationPath: invalid opPath (beyond end of operations array): " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getNextOperationPath: invalid opPath (beyond end of operations array): " + opPath);
             return;
         }
         
@@ -133,31 +124,28 @@ return {
         var newPath = parts[0] + '/' + intIndex;
 
         if ( intIndex >= section.operations.length ) {
-            ctxt.append("controller.getNextOperationPath: advancing beyond end of operations array: " + newPath);
-            ctxt.failure({message: "invalid opPath: " + newPath});
+            shim.log('E',"controller.getNextOperationPath: advancing beyond end of operations array: " + newPath);
             return;
         }
         
-        ctxt.success(newPath);
+        return newPath;
     },
-    getOperation: function(ctxt, opPath) {
+    getOperation: function(opPath) {
         if ( opPath == null ) {
-            ctxt.failure({message: "invalid opPath: null"});
+            shim.log('E',"invalid opPath: null");
             return;
         }
         
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
-            ctxt.append("controller.getOperation: invalid opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getOperation: invalid opPath: " + opPath);
             return;
         }
         
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
-            ctxt.append("controller.getOperation: no section matching opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getOperation: no section matching opPath: " + opPath);
             return;
         }
         var intRegex = /^\d+$/;
@@ -169,18 +157,16 @@ return {
         }
 
         if ( intIndex == null ) {
-            ctxt.append("controller.getOperation: no branch label matching opPath: " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getOperation: no branch label matching opPath: " + opPath);
             return;
         }
 
         if ( intIndex >= section.operations.length ) {
-            ctxt.append("controller.getOperation: invalid opPath (beyond end of operations array): " + opPath);
-            ctxt.failure({message: "invalid opPath: " + opPath});
+            shim.log('E',"controller.getOperation: invalid opPath (beyond end of operations array): " + opPath);
             return;
         }
         var op = section.operations[intIndex];
-        ctxt.success(op);
+        return op;
     },
     getCurrentSectionPrompts: function() {
         var opPath = this.getCurrentScreenPath();
@@ -202,24 +188,22 @@ return {
         
         return section.parsed_prompts;
     },
-    getPrompt: function(ctxt, promptPath) {
+    getPrompt: function(promptPath) {
         if ( promptPath == null ) {
-            ctxt.failure({message: "invalid promptPath: null"});
+            shim.log('E',"invalid promptPath: null");
             return;
         }
         
         var parts = promptPath.split("/");
         if ( parts.length < 2 ) {
-            ctxt.append("controller.getPrompt: invalid promptPath: " + promptPath);
-            ctxt.failure({message: "invalid promptPath: " + promptPath});
+            shim.log('E',"controller.getPrompt: invalid promptPath: " + promptPath);
             return;
         }
         
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section == null ) {
-            ctxt.append("controller.getPrompt: no section matching promptPath: " + promptPath);
-            ctxt.failure({message: "invalid promptPath: " + promptPath});
+            shim.log('E',"controller.getPrompt: no section matching promptPath: " + promptPath);
             return;
         }
         var intRegex = /^\d+$/;
@@ -229,18 +213,16 @@ return {
         }
 
         if ( intIndex == null ) {
-            ctxt.append("controller.getPrompt: no branch label matching promptPath: " + promptPath);
-            ctxt.failure({message: "invalid promptPath: " + promptPath});
+            shim.log('E',"controller.getPrompt: no branch label matching promptPath: " + promptPath);
             return;
         }
 
         if ( intIndex >= section.parsed_prompts.length ) {
-            ctxt.append("controller.getPrompt: invalid promptPath (beyond end of operations array): " + promptPath);
-            ctxt.failure({message: "invalid promptPath: " + promptPath});
+            shim.log('E',"controller.getPrompt: invalid promptPath (beyond end of operations array): " + promptPath);
             return;
         }
         var prompt = section.parsed_prompts[intIndex];
-        ctxt.success(prompt);
+        return prompt;
     },
     beforeMove: function(ctxt, advancing){
         ctxt.append('controller.beforeMove');
@@ -308,7 +290,8 @@ return {
      */
     advanceToNextScreenHelper: function(ctxt, path, state) {
         var that = this;
-        that.getOperation($.extend({},ctxt,{success:function(op) {
+        var op = that.getOperation(path);
+        if ( op != null ) {
             try {
                 // ***The order of the else-if statements below is very important.***
                 // i.e., First test if the '_parsed_condition' (function constructed 
@@ -319,28 +302,31 @@ return {
                 case "goto_label":
                     // jump to a label. This may be conditional...
                     if('_parsed_condition' in op && !op._parsed_condition()) {
-                        that.getNextOperationPath($.extend({},ctxt,{success:function(path){
+                        var path = that.getNextOperationPath(op._section_name + "/" + op.operationIdx);
+                        if ( path != null ) {
                                 that.advanceToNextScreenHelper(ctxt, path);
-                            }, failure:function(m) {
-                                ctxt.failure(m); 
-                            }}), op._section_name + "/" + op.operationIdx);
                     } else {
-                        that.getOperationPath($.extend({},ctxt,{success:function(path){
+                            ctxt.failure(that.moveFailureMessage);
+                        }
+                    } else {
+                        var path = that.getOperationPath(op._section_name + "/" + op._branch_label);
+                        if ( path != null ) {
                                 that.advanceToNextScreenHelper(ctxt, path);
-                            }, failure:function(m) {
-                                ctxt.failure(m); 
-                            }}), op._section_name + "/" + op._branch_label);
+                        } else {
+                            ctxt.failure(that.moveFailureMessage);
+                        }
                     }
                     break;
                 case "assign":
                     // do an assignment statement.
                     // defer the database update until we reach a screen.
                     database.setValueDeferredChange(op.name, op._parsed_value());
-                    that.getNextOperationPath($.extend({},ctxt,{success:function(path){
+                    var path = that.getNextOperationPath(op._section_name + "/" + op.operationIdx);
+                    if ( path != null ) {
                             that.advanceToNextScreenHelper(ctxt, path);
-                        }, failure:function(m) {
-                            ctxt.failure(m); 
-                        }}), op._section_name + "/" + op.operationIdx);
+                    } else {
+                        ctxt.failure(that.moveFailureMessage);
+                    }
                     break;
                 case "back_in_history":
                     // pop the history stack, and render that screen.
@@ -354,25 +340,27 @@ return {
                         processOps = true;
                         priorPagePath = opendatakit.initialScreenPath;
                     }
-                    that.getOperation($.extend({},ctxt,{success:function(op) {
+                    var backop = that.getOperation(priorPagePath);
+                    if ( backop != null ) {
                             if ( processOps ) {
-                                that.advanceToNextScreenHelper(ctxt, op._section_name + "/" + op.operationIdx, priorPageState);
+                            that.advanceToNextScreenHelper(ctxt, backop._section_name + "/" + backop.operationIdx, priorPageState);
                             } else {
                                 // normal case...
-                                ctxt.success(op, {omitPushOnReturnStack:true});
+                            ctxt.success(backop, {omitPushOnReturnStack:true});
                             }
-                        }, failure:function(m) {
-                            ctxt.failure(m); 
-                        }}), priorPagePath);
+                    } else {
+                        ctxt.failure(that.moveFailureMessage);
+                    }
                     break;
                 case "do_section":
                     // state is 'a' if we are returning from an exit_section
                     if ( state == 'a' ) {
-                        that.getNextOperationPath($.extend({},ctxt,{success:function(path){
+                        var path = that.getNextOperationPath(op._section_name + "/" + op.operationIdx);
+                        if ( path != null ) {
                                 that.advanceToNextScreenHelper(ctxt, path);
-                            }, failure:function(m) {
-                                ctxt.failure(m); 
-                            }}), op._section_name + "/" + op.operationIdx);
+                        } else {
+                            ctxt.failure(that.moveFailureMessage); 
+                        }
                     } else {
                         // push the prior rendered screen onto the stack before we mark the 'do_section' callout
                         shim.pushSectionScreenState(opendatakit.getRefId());
@@ -420,10 +408,12 @@ return {
                                         return;
                                     }
                                     shim.setSectionScreenState( opendatakit.getRefId(), refPath, 'a');
-                                    that.getNextOperationPath($.extend({},ctxt,{
-                                        success:function(next) {
+                                    var next = that.getNextOperationPath(op._section_name + "/" + op.operationIdx);
+                                    if ( next != null ) {
                                             that.advanceToNextScreenHelper(ctxt,next);
-                                        }}), op._section_name + "/" + op.operationIdx);
+                                    } else {
+                                        ctxt.failure(that.moveFailureMessage);
+                                    }
                                 }}), op._sweep_name);
                         }, failure:function(m) {
                             mdl.loaded = false;
@@ -446,9 +436,9 @@ return {
                 ctxt.failure({message: "Error in condition expression. See console log."});
                 return;
             }
-        }, failure:function(m) {
-            ctxt.failure(m); 
-        }}), path);
+        } else {
+            ctxt.failure(that.moveFailureMessage);
+        }
     },
     advanceToNextScreen: function(ctxt, path) {
         var that = this;
@@ -497,18 +487,24 @@ return {
                                     ctxt.append("validateQuestionHelper.success.endOfValidationList", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
                                     ctxt.success();
                                 } else {
-                                    that.getPrompt($.extend({},ctxt,{success:function(promptCandidate){
+                                    var promptCandidate = that.getPrompt(promptList[nextPromptIdx]);
+                                    if ( promptCandidate != null ) {
                                         var fn = that.validateQuestionHelper(ctxt,promptCandidate,promptList,nextPromptIdx+1);
                                         (fn)();
-                                    }}), promptList[nextPromptIdx]);
+                                    } else {
+                                        ctxt.failure(that.moveFailureMessage);
+                                    }
                                 }
                             },
                             failure: function(msg) {
                                 ctxt.append("validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
-                                that.getOperation($.extend({},ctxt,{success:function(op){
-                                    ctxt.failedOperation = op;
+                                var nextOp = that.getOperation(promptCandidate._branch_label_enclosing_screen);
+                                if ( nextOp != null ) {
+                                    ctxt.failedOperation = nextOp;
                                     ctxt.failure(msg);
-                                    }}), promptCandidate._branch_label_enclosing_screen);
+                                } else {
+                                    ctxt.failure(that.moveFailureMessage);
+                                }
                             }}));
                     }}) );
             } catch(e) {
@@ -541,7 +537,8 @@ return {
         
         ctxt.failedOperation = null;
         
-        that.getPrompt($.extend({},ctxt,{success:function(promptCandidate){
+        var promptCandidate = that.getPrompt(promptList[0]);
+        if ( promptCandidate != null ) {
             // set the 'strict' attribute on the context to report all 
             // formula exceptions and errors.
             var oldvalue = ctxt.strict;
@@ -606,7 +603,9 @@ return {
 
             var fn = that.validateQuestionHelper(newctxt,promptCandidate,promptList,1);
             (fn)();
-        }}), promptList[0]);
+        } else {
+            ctxt.failure({message: "Internal Error: Unable to access prompt"});
+        }
     },
     gotoNextScreen: function(ctxt, options){
         var that = this;
@@ -634,14 +633,14 @@ return {
                     // all prompt values have been saved Prompt validation has been run if we 
                     // are advancing and the screen.allowMove(advancing) test has passed.
                     // Now step through operations until we reach a begin_screen action.
-                    that.getNextOperationPath($.extend({}, ctxt, {
-                        success: function(path) {
+                    var path = that.getNextOperationPath(that.getCurrentScreenPath());
+                    if ( path != null ) {
                             // if the next operation is not a screen, gotoScreenPath will
                             // perform all operations until it comes to a screen.
                             that.gotoScreenPath(ctxt, path, options);
-                        },
-                        failure: failurePop
-                    }), that.getCurrentScreenPath());
+                    } else {
+                        failurePop(that.moveFailureMessage);
+                    }
                 }
             },
             failure: failurePop
@@ -657,17 +656,17 @@ return {
         that.beforeMove($.extend({}, ctxt, {
             success: function() {
                 ctxt.append("gotoContentsScreen.beforeMove.success", "px: " +  that.getCurrentScreenPath());
-				// all prompt values have been saved Prompt validation has been run if we 
-				// are advancing and the screen.allowMove(advancing) test has passed.
-				// Now step through operations until we reach a begin_screen action.
-				that.getOperationPath($.extend({}, ctxt, {
-					success: function(path) {
-						// if the next operation is not a screen, gotoScreenPath will
-						// perform all operations until it comes to a screen.
-						that.gotoScreenPath(ctxt, path, options);
-					},
-					failure: failurePop
-				}), that.getCurrentContentsScreenPath());
+                // all prompt values have been saved Prompt validation has been run if we 
+                // are advancing and the screen.allowMove(advancing) test has passed.
+                // Now step through operations until we reach a begin_screen action.
+                var path = that.getOperationPath( that.getCurrentContentsScreenPath() );
+                if ( path != null ) {
+                        // if the next operation is not a screen, gotoScreenPath will
+                        // perform all operations until it comes to a screen.
+                        that.gotoScreenPath(ctxt, path, options);
+                } else {
+                    failurePop(that.moveFailureMessage);
+                }
             },
             failure: failurePop
         }), false);
@@ -682,7 +681,9 @@ return {
          *  omitPushOnReturnStack: true/false
          *  popHistoryOnExit: true/false
          */
-        this.getOperationPath($.extend({},ctxt,{success:function(newPath) {
+        var newPath = that.getOperationPath(operation._section_name + "/" + operation.operationIdx);
+        
+        if ( newPath != null ) {
             var stateString = null;
             var oldPath = that.getCurrentScreenPath();
             if ( oldPath == newPath ) {
@@ -754,7 +755,8 @@ return {
                         ctxt.failure(m);
                     } else {
                         // set the screen back to what it was, then report this failure
-                        that.getOperation($.extend({},ctxt,{success:function(op) {
+                        var op = that.getOperation(oldPath);
+                        if ( op != null ) {
                             that.setScreen($.extend({},ctxt,{success:function() {
                                 // report the failure.
                                 ctxt.failure(m);
@@ -762,26 +764,29 @@ return {
                                 // report the failure.
                                 ctxt.failure(m);
                             }}), op);
-                        }, failure: function(m2) {
-                            // report the failure.
+                        } else {
                             ctxt.failure(m);
-                        }}), oldPath);
+                        }
                     }
                 }}), ScreenInstance, options.popHistoryOnExit || false );
-        }}), operation._section_name + "/" + operation.operationIdx );
+        } else {
+            ctxt.failure(that.moveFailureMessage);
+        }
     },
     /*
      * Callback interface from ODK Survey (or other container apps) into javascript.
      * Handles all dispatching back into javascript from external intents
     */
     actionCallback:function(ctxt, promptPath, internalPromptContext, action, jsonString) {
-        var screenPath = this.getCurrentScreenPath();
+        var that = this;
+        var screenPath = that.getCurrentScreenPath();
         ctxt.append('controller.actionCallback', ((screenPath != null) ? ("px: " + screenPath) : "no current prompt"));
         
         // promptPath is the path to the prompt issuing the doAction.
         // prompts know their enclosing screen, so we don't need to 
         // worry about that...
-        this.getPrompt($.extend({},ctxt,{success:function(prompt) {
+        var prompt = that.getPrompt(promptPath);
+        if ( prompt != null ) {
             try {
                 // ask this page to then get the appropriate handler
                 var handler = prompt.getCallback(promptPath, internalPromptContext, action);
@@ -799,11 +804,11 @@ return {
                 ctxt.failure({message: "Internal error. Exception while handling callback."});
                 return;
             }
-        }, failure:function(m) {
+        } else {
             ctxt.append('controller.actionCallback.noMatchingPrompt', promptPath);
             console.error("actionCallback: ERROR - PROMPT NOT FOUND! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
             ctxt.failure({message: "Internal error. Unable to locate matching prompt for callback."});
-        }}), promptPath);
+        }
     },
     ignoreAllChanges:function(ctxt) {
         database.ignore_all_changes(ctxt);
@@ -952,11 +957,13 @@ return {
     setLocale: function(ctxt, locale) {
         var that = this;
         database.setInstanceMetaData($.extend({}, ctxt, {success: function() {
-                that.getOperation($.extend({}, ctxt, { success: function(op) {
+            var op = that.getOperation(that.getCurrentScreenPath());
+            if ( op != null ) {
                         that.setScreen(ctxt, op, {changeLocale: true});
-                    }}), that.getCurrentScreenPath());
+            } else {
+                ctxt.failure(that.moveFailureMessage);
             }
-        }), '_locale', locale);
+        }}), '_locale', locale);
     },
     getSectionTitle: function() {
         var that = this;

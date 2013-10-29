@@ -1859,19 +1859,7 @@ promptTypes.note = promptTypes.base.extend({
 // psuedo-prompt emitted by do_section so that sections appear in contents list
 promptTypes._section = promptTypes.base.extend({
     type: "_section",
-    templatePath: "templates/_section.handlebars",
-    // need to do this somewhere...
-    formattedValueForContentsDisplay: function() {
-        var formDef = opendatakit.getCurrentFormDef();
-        var sectionSettings = opendatakit.getSettingObject(formDef,this._do_section_name);
-        var textOrLangMap = sectionSettings.display.title;
-        var locale = database.getInstanceMetaDataValue('_locale');
-        if ( locale == null ) {
-            locale = opendatakit.getDefaultFormLocaleValue();
-        }
-        var str = formulaFunctions.localize(textOrLangMap,locale);
-        return str;
-    }
+    templatePath: "templates/_section.handlebars"
 });
 promptTypes.acknowledge = promptTypes.select.extend({
     type: "acknowledge",
