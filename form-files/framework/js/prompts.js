@@ -1815,7 +1815,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.append('acknowledge.modification', that.promptIdx);
         var oldValue = that.getValue();
-        var acknowledged = that.$('#acknowledge').is(':checked');
+        var acknowledged = (oldValue != null) ? !oldValue : true;
         that.setValueDeferredChange(acknowledged);
         that.renderContext.choices = [{
             name: "acknowledge",
@@ -1824,10 +1824,8 @@ promptTypes.acknowledge = promptTypes.select.extend({
         }];
         if (acknowledged && that.autoAdvance) {
             that.controller.gotoNextScreen(ctxt);
-        } else if ( oldValue != acknowledged ) {
+		} else {
             that.reRender(ctxt);
-        } else {
-            ctxt.success();
         }
     },
     configureRenderContext: function(ctxt) {
@@ -1835,6 +1833,9 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var acknowledged;
         try{
             acknowledged = that.getValue();
+			if ( acknowledged == null ) {
+				acknowledged = false;
+			}
         } catch(e) {
             acknowledged = false;
         }
