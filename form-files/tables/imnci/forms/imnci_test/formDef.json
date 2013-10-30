@@ -10356,6 +10356,9 @@
             "_do_section_name": "PatientDemographics",
             "_type": "_section",
             "promptIdx": 0,
+            "display": {
+              "title": "PatientDemographics"
+            },
             "_branch_label_enclosing_screen": "PatientDemographics/_contents"
           },
           {
@@ -10366,6 +10369,9 @@
             "_do_section_name": "DangerSigns",
             "_type": "_section",
             "promptIdx": 1,
+            "display": {
+              "title": "DangerSigns"
+            },
             "_branch_label_enclosing_screen": "DangerSigns/_contents"
           },
           {
@@ -10398,6 +10404,9 @@
             "_do_section_name": "Respitory",
             "_type": "_section",
             "promptIdx": 3,
+            "display": {
+              "title": "Respitory"
+            },
             "_branch_label_enclosing_screen": "Respitory/_contents"
           },
           {
@@ -10408,6 +10417,9 @@
             "_do_section_name": "Diarrhoea",
             "_type": "_section",
             "promptIdx": 4,
+            "display": {
+              "title": "Diarrhoea"
+            },
             "_branch_label_enclosing_screen": "Diarrhoea/_contents"
           },
           {
@@ -10418,6 +10430,9 @@
             "_do_section_name": "Fever",
             "_type": "_section",
             "promptIdx": 5,
+            "display": {
+              "title": "Fever"
+            },
             "_branch_label_enclosing_screen": "Fever/_contents"
           },
           {
@@ -16809,6 +16824,12 @@
             "_do_section_name": "DehydrationTreatment",
             "_type": "_section",
             "promptIdx": 215,
+            "display": {
+              "title": {
+                "default": "IMNCI",
+                "hindi": "IMNCI"
+              }
+            },
             "_branch_label_enclosing_screen": "DehydrationTreatment/_contents"
           },
           {
@@ -19924,6 +19945,12 @@
             "_do_section_name": "survey",
             "_type": "_section",
             "promptIdx": 1,
+            "display": {
+              "title": {
+                "default": "IMNCI",
+                "hindi": "IMNCI"
+              }
+            },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
           {

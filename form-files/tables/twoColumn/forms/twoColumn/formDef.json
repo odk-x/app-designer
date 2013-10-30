@@ -51,6 +51,7 @@
         "display": {
           "text": "The following data will be used to generate a weight for age plot."
         },
+        "hideInContents": true,
         "_row_num": 9
       },
       {
@@ -643,6 +644,7 @@
             "display": {
               "text": "The following data will be used to generate a weight for age plot."
             },
+            "hideInContents": true,
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -821,6 +823,9 @@
             "_do_section_name": "survey",
             "_type": "_section",
             "promptIdx": 1,
+            "display": {
+              "title": "Two Column Form"
+            },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
           {

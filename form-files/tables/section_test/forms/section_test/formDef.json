@@ -493,6 +493,12 @@
             "_do_section_name": "section1",
             "_type": "_section",
             "promptIdx": 2,
+            "display": {
+              "title": {
+                "default": "Section 1",
+                "hindi": "धारा 1"
+              }
+            },
             "_branch_label_enclosing_screen": "section1/_contents"
           },
           {
@@ -535,6 +541,12 @@
             "_do_section_name": "section2",
             "_type": "_section",
             "promptIdx": 5,
+            "display": {
+              "title": {
+                "default": "Section 2",
+                "hindi": "धारा 2"
+              }
+            },
             "_branch_label_enclosing_screen": "section2/_contents"
           },
           {
@@ -917,6 +929,12 @@
             "_do_section_name": "survey",
             "_type": "_section",
             "promptIdx": 1,
+            "display": {
+              "title": {
+                "default": "Section Test",
+                "hindi": "धारा टेस्ट"
+              }
+            },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
           {
