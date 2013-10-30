@@ -85,23 +85,18 @@ promptTypes.base = Backbone.View.extend({
     buildRenderContext: function(ctxt) {
         var that = this;
         
-        var newCtxt = $.extend({}, ctxt, {success: function() {
-            that._whenTemplateIsReady($.extend({}, ctxt, {success: function() {
-                that._initializeRenderContext();
-                that.configureRenderContext(ctxt);
-            }}));
-        }});
-
         if((that.name != null && 
             'default' in that) && 
             that.getValue() == null) {
             var value = that['default']();
-            newCtxt.append('buildRenderContext','assigning default value');
+            ctxt.append('buildRenderContext','assigning default value');
             that.setValueDeferredChange(value);
-            ctxt.success();
-        } else {
-            newCtxt.success();
         }
+        that._initializeRenderContext();
+        
+        that._whenTemplateIsReady($.extend({}, ctxt, {success: function() {
+            that.configureRenderContext(ctxt);
+        }}));
     },
     /**
      * _whenTemplateIsReady
@@ -1317,10 +1312,10 @@ promptTypes.input_type = promptTypes.base.extend({
             value = originalValue;
             // restore it...
             that.setValueDeferredChange(originalValue);
-			ctxt.failure({ message: that.invalid_value_message });
+            ctxt.failure({ message: that.invalid_value_message });
         } else {
-			ctxt.success();
-		}
+            ctxt.success();
+        }
     },
     validateValue: function() {
         return true;
@@ -1829,7 +1824,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append('acknowledge.modification', that.promptIdx);
-		var oldValue = that.getValue();
+        var oldValue = that.getValue();
         var acknowledged = that.$('#acknowledge').is(':checked');
         that.setValueDeferredChange(acknowledged);
         that.renderContext.choices = [{
@@ -1841,7 +1836,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
             that.controller.gotoNextScreen(ctxt);
         } else if ( oldValue != acknowledged ) {
             that.reRender(ctxt);
-		} else {
+        } else {
             ctxt.success();
         }
     },
