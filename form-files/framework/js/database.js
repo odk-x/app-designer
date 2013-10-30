@@ -1879,8 +1879,16 @@ setValueDeferredChange: function( name, value ) {
 },
 applyDeferredChanges: function(ctxt) {
     var changes = this.pendingChanges;
-    this.pendingChanges = [];
-    this.putDataKeyValueMap(ctxt, changes );
+    this.pendingChanges = {};
+    this.putDataKeyValueMap($.extend({},ctxt,{failure:function(m) {
+		// a failure happened during writing -- reload state from db
+		mdl.loaded = false;
+		that.cacheAllData($.extend({},ctxt,{success:function() {
+				ctxt.failure(m);
+			}, failure:function(m2) {
+				ctxt.failure(m);
+			}}), opendatakit.getCurrentInstanceId());
+		}}), changes );
 }
 };
 });
