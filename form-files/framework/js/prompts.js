@@ -1824,7 +1824,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         }];
         if (acknowledged && that.autoAdvance) {
             that.controller.gotoNextScreen(ctxt);
-		} else {
+        } else {
             that.reRender(ctxt);
         }
     },
@@ -1833,9 +1833,9 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var acknowledged;
         try{
             acknowledged = that.getValue();
-			if ( acknowledged == null ) {
-				acknowledged = false;
-			}
+            if ( acknowledged == null ) {
+                acknowledged = false;
+            }
         } catch(e) {
             acknowledged = false;
         }
