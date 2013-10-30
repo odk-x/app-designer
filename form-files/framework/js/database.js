@@ -171,7 +171,7 @@ return {
                 return value;
             }
         } else if ( jsonType.type == 'boolean' ) {
-            return Boolean(value); // make it a boolean
+            return (value == null) ? null : (Number(value) != 0); // '0' is false. 
         } else if ( jsonType.type == 'integer' ) {
             value = Number(value);
             if ( Math.round(value) != value ) {
@@ -927,13 +927,6 @@ insertColumnMetaDataStmt:function(table_id, elementKey, name, type, value) {
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-putData:function(ctxt, name, value) {
-      var that = this;
-      var kvMap = {};
-      ctxt.append('putData', 'name: ' + name);
-      kvMap[name] = {value: value, isInstanceMetadata: false };
-      that.putDataKeyValueMap(ctxt, kvMap );
-},
 putInstanceMetaData:function(ctxt, name, value) {
       var that = this;
       var kvMap = {};
@@ -1785,20 +1778,6 @@ getDataValue:function(name) {
         }
     }
     return v;
-},
-setData:function(ctxt, name, value) {
-    ctxt.append('setData: ' + name);
-    var that = this;
-    if (mdl.data.hasOwnProperty(name)) {
-        if (mdl.data[name] === value) {
-            ctxt.success();
-            return;
-        }
-    }
-
-    that.putData($.extend({}, ctxt, {success: function() {
-            that.cacheAllData(ctxt, opendatakit.getCurrentInstanceId());
-        }}), name, value);
 },
 getInstanceMetaDataValue:function(name) {
     var path = name.split('.');

@@ -1617,20 +1617,10 @@ promptTypes.media = promptTypes.base.extend({
                     var oldPath = that.getValue();
                     if ( uri != oldPath) {
                         // TODO: delete old??? Or leave until marked as finalized?
-                        // TODO: I'm not sure how the resuming works, but we'll need to make sure
-                        // buildRenderContext get's called AFTER this happens.
-                        database.setData( $.extend({},ctxt,{success:function() {
-                                that.enableButtons();
-                                that.updateRenderContext();
-                                that.reRender(ctxt);
-                            },
-                            failure:function(m) {
-                                that.enableButtons();
-                                that.updateRenderContext();
-                                that.reRender($.extend({}, ctxt, {success: function() {
-                                    ctxt.failure(m);
-                                }, failure: function(m2) { ctxt.failure(m);}}));
-                            }}), that.name, { uri : uri, contentType: contentType } );
+                        that.setValueDeferredChange({ uri : uri, contentType: contentType });
+                        that.enableButtons();
+                        that.updateRenderContext();
+                        that.reRender(ctxt);
                     }
                 }
             }
@@ -1844,7 +1834,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var that = this;
         var acknowledged;
         try{
-            acknowledged = JSON.parse(that.getValue());
+            acknowledged = that.getValue();
         } catch(e) {
             acknowledged = false;
         }
