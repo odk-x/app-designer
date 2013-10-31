@@ -28,6 +28,145 @@
           "model"
       ];
 
+    var reservedFieldNames = {
+        /**
+         * ODK Metadata reserved names
+         */
+    	savepoint_timestamp: true,
+    	savepoint_type: true,
+    	form_id: true,
+    	locale: true,
+
+        /**
+         * SQLite keywords ( http://www.sqlite.org/lang_keywords.html )
+         */
+    	abort: true,
+    	action: true,
+    	add: true,
+    	after: true,
+    	all: true,
+    	alter: true,
+    	analyze: true,
+    	and: true,
+    	as: true,
+    	asc: true,
+    	attach: true,
+    	autoincrement: true,
+    	before: true,
+    	begin: true,
+    	between: true,
+    	by: true,
+    	cascade: true,
+    	'case': true,
+    	cast: true,
+    	check: true,
+    	collate: true,
+    	column: true,
+    	commit: true,
+    	conflict: true,
+    	constraint: true,
+    	create: true,
+    	cross: true,
+    	current_date: true,
+    	current_time: true,
+    	current_timestamp: true,
+    	database: true,
+    	'default': true,
+    	deferrable: true,
+    	deferred: true,
+    	'delete': true,
+    	desc: true,
+    	detach: true,
+    	distinct: true,
+    	drop: true,
+    	each: true,
+    	'else': true,
+    	end: true,
+    	escape: true,
+    	except: true,
+    	exclusive: true,
+    	exists: true,
+    	explain: true,
+    	fail: true,
+    	'for': true,
+    	foreign: true,
+    	from: true,
+    	full: true,
+    	glob: true,
+    	group: true,
+    	having: true,
+    	'if': true,
+    	ignore: true,
+    	immediate: true,
+    	'in': true,
+    	index: true,
+    	indexed: true,
+    	initially: true,
+    	inner: true,
+    	insert: true,
+    	instead: true,
+    	intersect: true,
+    	into: true,
+    	is: true,
+    	isnull: true,
+    	join: true,
+    	key: true,
+    	left: true,
+    	like: true,
+    	limit: true,
+    	match: true,
+    	natural: true,
+    	no: true,
+    	not: true,
+    	notnull: true,
+    	'null': true,
+    	of: true,
+    	offset: true,
+    	on: true,
+    	or: true,
+    	order: true,
+    	outer: true,
+    	plan: true,
+    	pragma: true,
+    	primary: true,
+    	query: true,
+    	raise: true,
+    	references: true,
+    	regexp: true,
+    	reindex: true,
+    	release: true,
+    	rename: true,
+    	replace: true,
+    	restrict: true,
+    	right: true,
+    	rollback: true,
+    	row: true,
+    	savepoint: true,
+    	select: true,
+    	set: true,
+    	table: true,
+    	temp: true,
+    	temporary: true,
+    	then: true,
+    	to: true,
+    	transaction: true,
+    	trigger: true,
+    	union: true,
+    	unique: true,
+    	update: true,
+    	using: true,
+    	vacuum: true,
+    	values: true,
+    	view: true,
+    	virtual: true,
+    	when: true,
+    	where: true
+    };
+
+    // Unicode extensions to standard RegExp...
+    var pattern_valid_user_defined_name =
+        XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)*$', 'A');
+
     var default_initial = [
          { _row_num: 2,
              clause: "if // start",
@@ -1370,6 +1509,18 @@
         }
 
         var name = promptOrAction.name;
+
+        // if a displayName has not already been defined and if
+        // display.title is present, then it becomes the displayName for the model.
+        // otherwise, use the element name.
+        if ( !("displayName" in mdef) ) {
+	        var displayName = name;
+	        if ( "display" in promptOrAction && "title" in promptOrAction.display ) {
+	        	displayName = promptOrAction.display.title;
+	        }
+        	mdef.displayName = displayName;
+        }
+
         if ( name in model ) {
             var defn = model[name];
             var amodb = _.extend({}, defn, schema, mdef);
@@ -1399,6 +1550,88 @@
         removeIgnorableModelFields(defn);
     };
 
+    var assertValidUserDefinedName = function(errorPrefix, name) {
+    	if ( name == null ) {
+            throw Error(errorPrefix + " is not defined.");
+    	}
+        if ( !pattern_valid_user_defined_name.test(name) ) {
+            throw Error(errorPrefix + " must begin with a letter and contain only letters, digits and '_'");
+        }
+        if ( name.length > 62 ) {
+            throw Error(errorPrefix + " cannot be longer than 62 characters. It is " + name.length + " characters long.");
+        }
+        var lowercase = name.toLowerCase();
+        if (lowercase in reservedFieldNames) {
+            throw Error(errorPrefix + " is one of a long list of reserved words. To work around these, consider using a concatenation of two words (e.g., 'firstname').");
+        }
+    };
+
+    /**
+     * Helper function to ensure that all fieldNames are short enough once
+     * all recursively expanded elementPaths are considered.
+     */
+    var assertValidElementKey = function(elementPath, elementKey, fullSetOfElementKeys) {
+    	var isSimple = false;
+    	if ( elementPath == null ) {
+            throw Error("Field is not defined.");
+    	} else if ( elementPath.indexOf('.') == -1) {
+    		// simple name
+    		isSimple = true;
+    		assertValidUserDefinedName("Field '" + elementPath + "' ", elementKey);
+    	} else {
+	    	try {
+	    		assertValidUserDefinedName("Fully qualified element path ", elementKey);
+	    	} catch (e) {
+	    		var name = elementPath.substring(0,elementPath.indexOf('.'));
+	    		throw Error(e.message + " Full elementPath: " + elementPath + " Consider shortening the field name '" + name + "'.");
+	    	}
+    	}
+
+    	if ( fullSetOfElementKeys != null ) {
+    		if ( elementKey in fullSetOfElementKeys ) {
+	    		var path = fullSetOfElementKeys[elementKey];
+
+	        	if ( isSimple ) {
+	        		var name = path.indexOf('.') == -1 ? path : path.substring(0,path.indexOf('.'));
+	        		throw Error("The framework's identifier for field '" + elementPath +
+	        				"' collides with the identifier for the full elementPath: '" + path +
+	        				"'. Please change one of the field names ('" + elementPath + "' or '" + name + "').");
+	        	} else {
+	        		var refname = path.indexOf('.') == -1 ? path : path.substring(0,path.indexOf('.'));
+	        		var name = elementPath.substring(0,elementPath.indexOf('.'));
+	        		throw Error("The framework's identifier for the full elementPath: '" + elementPath +
+	        				"' collides with the identifier for the full elementPath: '" + path +
+	        				"'. Please change one of the field names ('" + name + "' or '" + refname + "').");
+	        	}
+	    	}
+    	}
+
+    };
+
+    /**
+     * Helper function for constructing and assigning the elementKey in the model
+     */
+    var recursiveAssignPropertiesElementKey = function( elementPathPrefix, elementKeyPrefix, fullSetOfElementKeys, properties ) {
+    	if ( properties == null ) {
+    		return;
+    	}
+
+    	_.each( _.keys(properties), function(name) {
+    		var entry = properties[name];
+    		var elementPath = elementPathPrefix + '.' + name;
+    		var key = elementKeyPrefix + '_' + name;
+    		if ( entry.elementKey != null && entry.elementKey != key ) {
+    			throw Error("elementKey is user-defined for " + elementPath + " but does not match computed key: " + key);
+    		}
+    		assertValidElementKey(elementPath, key, fullSetOfElementKeys);
+    		entry.elementKey = key;
+    		if ( entry.type == "object" ) {
+    			// we have properties...
+    			recursiveAssignPropertiesElementKey( elementPath, key, fullSetOfElementKeys, entry.properties );
+    		}
+    	});
+    }
+
     var developDataModel = function( specification, promptTypes ) {
         var assigns = [];
         var model = {};
@@ -1409,11 +1642,13 @@
                     schema = promptTypes[prompt._type];
                     if(schema){
                         if("name" in prompt) {
-                            var name = prompt.name.trim();
-                            if(name.indexOf(' ') != -1 || prompt.name != name) {
-                                throw Error("Prompt names cannot contain spaces. Prompt: '" + prompt.type + "' at row " +
-                                        prompt._row_num + " on sheet: " + section.section_name);
-                            }
+                        	var name = prompt.name;
+                        	try {
+                        		assertValidElementKey(name, name);
+                        	} catch (e) {
+                        		throw Error(e.message + " Prompt: '" + prompt.type + "' at row " +
+                                    prompt._row_num + " on sheet: " + section.section_name);
+                        	}
                             updateModel( section, prompt, model, schema );
                         } else {
                             throw Error("Expected 'name' but none defined for prompt. Prompt: '" + prompt.type + "' at row " +
@@ -1442,12 +1677,13 @@
             _.each(section.operations, function(operation) {
                 if ( operation._token_type == "assign" ) {
                     if("name" in operation) {
-                        var name = operation.name.trim();
-                        if(name.indexOf(' ') != -1 || operation.name != name) {
-                            throw Error("Assign names cannot contain spaces. Clause: '" + operation.type + "' at row " +
+                    	var name = operation.name;
+                    	try {
+                    		assertValidElementKey(name, name);
+                    	} catch (e) {
+                    		throw Error(e.message + " Assign clause: '" + operation.type + "' at row " +
                                     operation._row_num + " on sheet: " + section.section_name);
-                        }
-
+                    	}
                         if (operation._data_type == null ) {
                             // no explicit type -- hope that the field gets a value somewhere else...
                             // record name to verify that is the case.
@@ -1532,6 +1768,24 @@
                         operation._row_num + " on sheet: " + section.section_name);
             }
         }
+
+        var fullSetOfElementKeys = {};
+
+        // ensure that all the model entries are not reserved words or too long
+        _.each( _.keys(specification.model), function(name) {
+        	var entry = specification.model[name];
+    		if ( entry.elementKey != null && entry.elementKey != name ) {
+    			throw Error("elementKey is user-defined for " + name + " but does not match computed key: " + name);
+    		}
+    		// this is already known to be true for prompts and assigns within the form.
+    		// test again to catch any fields that are defined only via the model.
+    		assertValidElementKey(name, name, fullSetOfElementKeys);
+    		entry.elementKey = name;
+        	if ( entry.type == "object" ) {
+        		// we have properties...
+        		recursiveAssignPropertiesElementKey( name, name, fullSetOfElementKeys, entry.properties );
+        	}
+        });
     };
 
     root.XLSXConverter = {
@@ -1577,16 +1831,11 @@
                 processedSettings['table_id'] = entry;
             }
 
-            // Unicode extensions to standard RegExp...
-            var safeId = XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)*$', 'A');
+            assertValidUserDefinedName("The value of the 'form_id' setting_name on the settings sheet",
+            							processedSettings.form_id.value);
 
-            if ( !safeId.test(processedSettings.form_id.value) ) {
-                throw Error("The value of the 'form_id' setting_name on the settings sheet must begin with a letter and contain only letters, digits and '_'");
-            }
-
-            if ( !safeId.test(processedSettings.table_id.value) ) {
-                throw Error("The value of the 'table_id' setting_name on the settings sheet must begin with a letter and contain only letters, digits and '_'");
-            }
+            assertValidUserDefinedName("The value of the 'table_id' setting_name on the settings sheet",
+            							processedSettings.table_id.value);
 
             if ( !('survey' in processedSettings) ) {
                 throw Error("Please define a 'survey' setting_name on the settings sheet and specify the survey title under display.title");

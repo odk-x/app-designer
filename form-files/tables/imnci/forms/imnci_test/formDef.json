@@ -6975,10 +6975,12 @@
         "type": "object",
         "properties": {
           "pulse": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "pulseox_pulse"
           },
           "ox": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "pulseox_ox"
           }
         },
         "_row_num": 2
@@ -9447,7 +9449,9 @@
         "isPersisted": true,
         "items": {
           "type": "string"
-        }
+        },
+        "displayName": "Which symptoms does the child have?",
+        "elementKey": "basic_q"
       },
       "anaemia_check": {
         "_defn": [
@@ -9456,7 +9460,9 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "anaemia_check",
+        "elementKey": "anaemia_check"
       },
       "needed_vaccinations": {
         "_defn": [
@@ -9469,7 +9475,9 @@
         "isPersisted": true,
         "items": {
           "type": "string"
-        }
+        },
+        "displayName": "needed_vaccinations",
+        "elementKey": "needed_vaccinations"
       },
       "other_problems": {
         "_defn": [
@@ -9478,7 +9486,9 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "other_problems",
+        "elementKey": "other_problems"
       },
       "refer_for_other_problems": {
         "_defn": [
@@ -9487,7 +9497,9 @@
             "section_name": "survey"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "refer_for_other_problems",
+        "elementKey": "refer_for_other_problems"
       },
       "name": {
         "_defn": [
@@ -9496,7 +9508,9 @@
             "section_name": "PatientDemographics"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "name",
+        "elementKey": "name"
       },
       "birthdayKnown": {
         "_defn": [
@@ -9505,7 +9519,9 @@
             "section_name": "PatientDemographics"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "birthdayKnown",
+        "elementKey": "birthdayKnown"
       },
       "birthday": {
         "_defn": [
@@ -9515,7 +9531,9 @@
           }
         ],
         "type": "object",
-        "elementType": "date"
+        "elementType": "date",
+        "displayName": "birthday",
+        "elementKey": "birthday"
       },
       "monthsOld": {
         "_defn": [
@@ -9524,7 +9542,9 @@
             "section_name": "PatientDemographics"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "monthsOld",
+        "elementKey": "monthsOld"
       },
       "under_2_months": {
         "_defn": [
@@ -9533,7 +9553,9 @@
             "section_name": "PatientDemographics"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "Acknowledge that protocol does not support assessing a child under 2 months old.",
+        "elementKey": "under_2_months"
       },
       "weight": {
         "_defn": [
@@ -9542,7 +9564,9 @@
             "section_name": "PatientDemographics"
           }
         ],
-        "type": "number"
+        "type": "number",
+        "displayName": "weight",
+        "elementKey": "weight"
       },
       "visit_type": {
         "_defn": [
@@ -9551,7 +9575,9 @@
             "section_name": "PatientDemographics"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "visit_type",
+        "elementKey": "visit_type"
       },
       "able_to_drink": {
         "_defn": [
@@ -9560,7 +9586,9 @@
             "section_name": "DangerSigns"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "able_to_drink",
+        "elementKey": "able_to_drink"
       },
       "vomit_everything": {
         "_defn": [
@@ -9569,7 +9597,9 @@
             "section_name": "DangerSigns"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "vomit_everything",
+        "elementKey": "vomit_everything"
       },
       "convulsions": {
         "_defn": [
@@ -9578,7 +9608,9 @@
             "section_name": "DangerSigns"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "convulsions",
+        "elementKey": "convulsions"
       },
       "lethargic": {
         "_defn": [
@@ -9587,7 +9619,9 @@
             "section_name": "DangerSigns"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "lethargic",
+        "elementKey": "lethargic"
       },
       "pulseox": {
         "_defn": [
@@ -9600,15 +9634,20 @@
         "type": "object",
         "properties": {
           "pulse": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "pulseox_pulse"
           },
           "ox": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "pulseox_ox"
           }
-        }
+        },
+        "displayName": "pulseox",
+        "elementKey": "pulseox"
       },
       "refer_urgently_to_hospital": {
         "type": "boolean",
+        "displayName": "refer_urgently_to_hospital",
         "_defn": [
           {
             "_row_num": 31,
@@ -9622,7 +9661,8 @@
             "_row_num": 26,
             "section_name": "DehydrationTreatment"
           }
-        ]
+        ],
+        "elementKey": "refer_urgently_to_hospital"
       },
       "how_long_difficulty_breathing": {
         "_defn": [
@@ -9631,7 +9671,9 @@
             "section_name": "Respitory"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "how_long_difficulty_breathing",
+        "elementKey": "how_long_difficulty_breathing"
       },
       "breath_count": {
         "_defn": [
@@ -9641,7 +9683,9 @@
           }
         ],
         "prompt_type_name": "breathcounter",
-        "type": "integer"
+        "type": "integer",
+        "displayName": "breath_count",
+        "elementKey": "breath_count"
       },
       "breath_count_2": {
         "_defn": [
@@ -9651,7 +9695,9 @@
           }
         ],
         "prompt_type_name": "breathcounter",
-        "type": "integer"
+        "type": "integer",
+        "displayName": "breath_count_2",
+        "elementKey": "breath_count_2"
       },
       "chest_indrawing": {
         "_defn": [
@@ -9660,7 +9706,9 @@
             "section_name": "Respitory"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "chest_indrawing",
+        "elementKey": "chest_indrawing"
       },
       "stridor": {
         "_defn": [
@@ -9669,7 +9717,9 @@
             "section_name": "Respitory"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "stridor",
+        "elementKey": "stridor"
       },
       "diarrhoea_days": {
         "_defn": [
@@ -9678,7 +9728,9 @@
             "section_name": "Diarrhoea"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "diarrhoea_days",
+        "elementKey": "diarrhoea_days"
       },
       "blood_in_stool": {
         "_defn": [
@@ -9687,7 +9739,9 @@
             "section_name": "Diarrhoea"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "blood_in_stool",
+        "elementKey": "blood_in_stool"
       },
       "restless": {
         "_defn": [
@@ -9696,7 +9750,9 @@
             "section_name": "Diarrhoea"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "restless",
+        "elementKey": "restless"
       },
       "sunken_eyes": {
         "_defn": [
@@ -9705,7 +9761,9 @@
             "section_name": "Diarrhoea"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "sunken_eyes",
+        "elementKey": "sunken_eyes"
       },
       "drinking_poorly": {
         "_defn": [
@@ -9714,7 +9772,9 @@
             "section_name": "Diarrhoea"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "drinking_poorly",
+        "elementKey": "drinking_poorly"
       },
       "drinking_eagerly": {
         "_defn": [
@@ -9723,7 +9783,9 @@
             "section_name": "Diarrhoea"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "drinking_eagerly",
+        "elementKey": "drinking_eagerly"
       },
       "skin_elasticity": {
         "_defn": [
@@ -9732,7 +9794,9 @@
             "section_name": "Diarrhoea"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "skin_elasticity",
+        "elementKey": "skin_elasticity"
       },
       "axillary_temperature_possible": {
         "_defn": [
@@ -9741,7 +9805,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "axillary_temperature_possible",
+        "elementKey": "axillary_temperature_possible"
       },
       "axillary_temperature": {
         "_defn": [
@@ -9750,7 +9816,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "number"
+        "type": "number",
+        "displayName": "axillary_temperature",
+        "elementKey": "axillary_temperature"
       },
       "feel_for_fever": {
         "_defn": [
@@ -9759,7 +9827,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "feel_for_fever",
+        "elementKey": "feel_for_fever"
       },
       "fever_days": {
         "_defn": [
@@ -9768,7 +9838,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "fever_days",
+        "elementKey": "fever_days"
       },
       "fever_present_every_day": {
         "_defn": [
@@ -9777,7 +9849,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "fever_present_every_day",
+        "elementKey": "fever_present_every_day"
       },
       "malaria_risk": {
         "_defn": [
@@ -9786,7 +9860,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "malaria_risk",
+        "elementKey": "malaria_risk"
       },
       "measles_three_month": {
         "_defn": [
@@ -9795,7 +9871,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "measles_three_month",
+        "elementKey": "measles_three_month"
       },
       "stiff_neck": {
         "_defn": [
@@ -9804,7 +9882,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "stiff_neck",
+        "elementKey": "stiff_neck"
       },
       "bulging_fontanelle": {
         "_defn": [
@@ -9813,7 +9893,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "bulging_fontanelle",
+        "elementKey": "bulging_fontanelle"
       },
       "rash_generalized": {
         "_defn": [
@@ -9822,7 +9904,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "rash_generalized",
+        "elementKey": "rash_generalized"
       },
       "runny_nose": {
         "_defn": [
@@ -9831,7 +9915,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "runny_nose",
+        "elementKey": "runny_nose"
       },
       "red_eyes": {
         "_defn": [
@@ -9840,7 +9926,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "red_eyes",
+        "elementKey": "red_eyes"
       },
       "eye_pus": {
         "_defn": [
@@ -9849,7 +9937,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "eye_pus",
+        "elementKey": "eye_pus"
       },
       "cornea_clouding": {
         "_defn": [
@@ -9858,7 +9948,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "cornea_clouding",
+        "elementKey": "cornea_clouding"
       },
       "mouth_ulcers": {
         "_defn": [
@@ -9867,7 +9959,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "mouth_ulcers",
+        "elementKey": "mouth_ulcers"
       },
       "mouth_ulcers_deep": {
         "_defn": [
@@ -9876,7 +9970,9 @@
             "section_name": "Fever"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "mouth_ulcers_deep",
+        "elementKey": "mouth_ulcers_deep"
       },
       "ear_pain": {
         "_defn": [
@@ -9885,7 +9981,9 @@
             "section_name": "Ear"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "ear_pain",
+        "elementKey": "ear_pain"
       },
       "ear_discharge_reported": {
         "_defn": [
@@ -9894,7 +9992,9 @@
             "section_name": "Ear"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "ear_discharge_reported",
+        "elementKey": "ear_discharge_reported"
       },
       "ear_discharge_days": {
         "_defn": [
@@ -9903,7 +10003,9 @@
             "section_name": "Ear"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "ear_discharge_days",
+        "elementKey": "ear_discharge_days"
       },
       "ear_discharge_observed": {
         "_defn": [
@@ -9912,7 +10014,9 @@
             "section_name": "Ear"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "ear_discharge_observed",
+        "elementKey": "ear_discharge_observed"
       },
       "ear_swelling": {
         "_defn": [
@@ -9921,7 +10025,9 @@
             "section_name": "Ear"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "ear_swelling",
+        "elementKey": "ear_swelling"
       },
       "wasting": {
         "_defn": [
@@ -9930,7 +10036,9 @@
             "section_name": "Malnutrition"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "wasting",
+        "elementKey": "wasting"
       },
       "oedema": {
         "_defn": [
@@ -9939,7 +10047,9 @@
             "section_name": "Malnutrition"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "oedema",
+        "elementKey": "oedema"
       },
       "malnutrition_grade": {
         "_defn": [
@@ -9948,7 +10058,9 @@
             "section_name": "Malnutrition"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "malnutrition_grade",
+        "elementKey": "malnutrition_grade"
       },
       "acknowledge_severe_condition_referral_begin_red": {
         "_defn": [
@@ -9957,7 +10069,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_severe_condition_referral_begin_red",
+        "elementKey": "acknowledge_severe_condition_referral_begin_red"
       },
       "acknowledge_keep_warm_red": {
         "_defn": [
@@ -9966,7 +10080,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_keep_warm_red",
+        "elementKey": "acknowledge_keep_warm_red"
       },
       "cotrimoxazole_type_red": {
         "_defn": [
@@ -9975,10 +10091,13 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "cotrimoxazole_type_red",
+        "elementKey": "cotrimoxazole_type_red"
       },
       "acknowledge_give_cotrimoxazole_red": {
         "type": "boolean",
+        "displayName": "acknowledge_give_cotrimoxazole_red",
         "_defn": [
           {
             "_row_num": 43,
@@ -9996,7 +10115,8 @@
             "_row_num": 52,
             "section_name": "Treatment"
           }
-        ]
+        ],
+        "elementKey": "acknowledge_give_cotrimoxazole_red"
       },
       "acknowledge_give_quinine_red": {
         "_defn": [
@@ -10005,7 +10125,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_give_quinine_red",
+        "elementKey": "acknowledge_give_quinine_red"
       },
       "acknowledge_give_paracetamol_red": {
         "_defn": [
@@ -10014,7 +10136,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_give_paracetamol_red",
+        "elementKey": "acknowledge_give_paracetamol_red"
       },
       "acknowledge_prevent_low_blood_sugar": {
         "_defn": [
@@ -10023,7 +10147,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_prevent_low_blood_sugar",
+        "elementKey": "acknowledge_prevent_low_blood_sugar"
       },
       "acknowledge_referral_reminder_red": {
         "_defn": [
@@ -10032,7 +10158,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_referral_reminder_red",
+        "elementKey": "acknowledge_referral_reminder_red"
       },
       "going_to_hospital": {
         "_defn": [
@@ -10041,7 +10169,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "going_to_hospital",
+        "elementKey": "going_to_hospital"
       },
       "acknowledge_keep_warm_on_way_red": {
         "_defn": [
@@ -10050,7 +10180,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_keep_warm_on_way_red",
+        "elementKey": "acknowledge_keep_warm_on_way_red"
       },
       "cotrimoxazole_type": {
         "_defn": [
@@ -10059,10 +10191,13 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "cotrimoxazole_type",
+        "elementKey": "cotrimoxazole_type"
       },
       "acknowledge_give_cotrimoxazole": {
         "type": "boolean",
+        "displayName": "acknowledge_give_cotrimoxazole",
         "_defn": [
           {
             "_row_num": 138,
@@ -10080,7 +10215,8 @@
             "_row_num": 147,
             "section_name": "Treatment"
           }
-        ]
+        ],
+        "elementKey": "acknowledge_give_cotrimoxazole"
       },
       "given_vaccinations": {
         "_defn": [
@@ -10093,7 +10229,9 @@
         "isPersisted": true,
         "items": {
           "type": "string"
-        }
+        },
+        "displayName": "given_vaccinations",
+        "elementKey": "given_vaccinations"
       },
       "acknowledge_give_gentian_violet": {
         "_defn": [
@@ -10102,7 +10240,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_give_gentian_violet",
+        "elementKey": "acknowledge_give_gentian_violet"
       },
       "zinc_type": {
         "_defn": [
@@ -10111,7 +10251,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "zinc_type",
+        "elementKey": "zinc_type"
       },
       "acknowledge_refer_for_assessment": {
         "_defn": [
@@ -10120,7 +10262,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_refer_for_assessment",
+        "elementKey": "acknowledge_refer_for_assessment"
       },
       "antimalarial": {
         "_defn": [
@@ -10129,7 +10273,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "antimalarial",
+        "elementKey": "antimalarial"
       },
       "acknowledge_continue_feeding": {
         "_defn": [
@@ -10138,7 +10284,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_continue_feeding",
+        "elementKey": "acknowledge_continue_feeding"
       },
       "breastfed": {
         "_defn": [
@@ -10147,7 +10295,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "breastfed",
+        "elementKey": "breastfed"
       },
       "breastfeedings_per_day": {
         "_defn": [
@@ -10156,7 +10306,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "breastfeedings_per_day",
+        "elementKey": "breastfeedings_per_day"
       },
       "breastfed_at_night": {
         "_defn": [
@@ -10165,7 +10317,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "breastfed_at_night",
+        "elementKey": "breastfed_at_night"
       },
       "takes_other_foods": {
         "_defn": [
@@ -10174,7 +10328,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "takes_other_foods",
+        "elementKey": "takes_other_foods"
       },
       "other_foods_types": {
         "_defn": [
@@ -10187,7 +10343,9 @@
         "isPersisted": true,
         "items": {
           "type": "string"
-        }
+        },
+        "displayName": "other_foods_types",
+        "elementKey": "other_foods_types"
       },
       "other_foods_per_day": {
         "_defn": [
@@ -10196,7 +10354,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "other_foods_per_day",
+        "elementKey": "other_foods_per_day"
       },
       "serving_size": {
         "_defn": [
@@ -10205,7 +10365,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "number"
+        "type": "number",
+        "displayName": "serving_size",
+        "elementKey": "serving_size"
       },
       "serving_unit": {
         "_defn": [
@@ -10214,7 +10376,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "serving_unit",
+        "elementKey": "serving_unit"
       },
       "separate_serving": {
         "_defn": [
@@ -10223,7 +10387,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "separate_serving",
+        "elementKey": "separate_serving"
       },
       "who_feeds_how": {
         "_defn": [
@@ -10232,7 +10398,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "who_feeds_how",
+        "elementKey": "who_feeds_how"
       },
       "change_in_feeding": {
         "_defn": [
@@ -10241,7 +10409,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "change_in_feeding",
+        "elementKey": "change_in_feeding"
       },
       "change_in_feeding_how": {
         "_defn": [
@@ -10250,7 +10420,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "change_in_feeding_how",
+        "elementKey": "change_in_feeding_how"
       },
       "acknowledge_give_IFA_14_days": {
         "_defn": [
@@ -10259,7 +10431,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_give_IFA_14_days",
+        "elementKey": "acknowledge_give_IFA_14_days"
       },
       "acknowledge_give_prophylactic_vitamin_a": {
         "_defn": [
@@ -10268,7 +10442,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_give_prophylactic_vitamin_a",
+        "elementKey": "acknowledge_give_prophylactic_vitamin_a"
       },
       "acknowledge_give_ifa_tablet": {
         "_defn": [
@@ -10277,7 +10453,9 @@
             "section_name": "Treatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_give_ifa_tablet",
+        "elementKey": "acknowledge_give_ifa_tablet"
       },
       "cholera_in_area": {
         "_defn": [
@@ -10286,7 +10464,9 @@
             "section_name": "DehydrationTreatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "cholera_in_area",
+        "elementKey": "cholera_in_area"
       },
       "acknowledge_give_doxycycline": {
         "_defn": [
@@ -10295,7 +10475,9 @@
             "section_name": "DehydrationTreatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_give_doxycycline",
+        "elementKey": "acknowledge_give_doxycycline"
       },
       "acknowledge_severe_condition_referral": {
         "_defn": [
@@ -10304,7 +10486,9 @@
             "section_name": "DehydrationTreatment"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "acknowledge_severe_condition_referral",
+        "elementKey": "acknowledge_severe_condition_referral"
       },
       "leave_before_treatment_end": {
         "_defn": [
@@ -10313,7 +10497,9 @@
             "section_name": "DehydrationTreatment"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "leave_before_treatment_end",
+        "elementKey": "leave_before_treatment_end"
       }
     },
     "section_names": [

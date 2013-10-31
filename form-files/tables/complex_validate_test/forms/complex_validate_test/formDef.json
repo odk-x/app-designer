@@ -469,7 +469,9 @@
             "section_name": "section1"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "age",
+        "elementKey": "age"
       },
       "color": {
         "_defn": [
@@ -478,7 +480,9 @@
             "section_name": "section1"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "displayName": "color",
+        "elementKey": "color"
       },
       "weight": {
         "_defn": [
@@ -487,7 +491,9 @@
             "section_name": "section1"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "displayName": "weight",
+        "elementKey": "weight"
       },
       "confirm_fact": {
         "_defn": [
@@ -496,7 +502,9 @@
             "section_name": "section2"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "displayName": "confirm_fact",
+        "elementKey": "confirm_fact"
       }
     },
     "section_names": [
