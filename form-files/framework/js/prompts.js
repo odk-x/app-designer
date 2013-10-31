@@ -516,7 +516,7 @@ promptTypes.linked_table = promptTypes.base.extend({
     templatePath: 'templates/linked_table.handlebars',
     launchAction: 'org.opendatakit.survey.android.activities.MainMenuActivity',
     linked_form_id: null,
-    table_id: null,
+    linked_table_id: null,
     selection: null, // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     selectionArgs: function() {return null;},
     order_by: null, // must be: (elementName [asc|desc] )+  -- same restriction as selection -- cannot be elementPath
@@ -526,10 +526,10 @@ promptTypes.linked_table = promptTypes.base.extend({
         "click .addInstance": "addInstance"
     },
     getLinkedTableId: function() {
-        if ( this.table_id == null ) {
+        if ( this.linked_table_id == null ) {
             return this.linked_form_id;
         } else {
-            return this.table_id;
+            return this.linked_table_id;
         }
     },
     getFormPath: function() {
