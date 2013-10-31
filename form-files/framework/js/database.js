@@ -1594,7 +1594,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 _aspect: dbColumnName,
                 _key: "displayName",
                 _type: "string",
-                _value: surveyDisplayName
+                _value: JSON.stringify(surveyDisplayName) // this is a localizable string...
             } );
             fullDef._key_value_store_active.push( {
                 _table_id: tlo.table_id,
