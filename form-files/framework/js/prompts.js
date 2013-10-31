@@ -204,41 +204,36 @@ promptTypes.base = Backbone.View.extend({
      * _isValid isn't meant to be overidden.
      * It does validation that will be common to most prompts.
      **/
-    _isValid: function(ctxt) {
+    _isValid: function(isStrict) {
         var that = this;
         var isRequired = false;
         try {
             isRequired = that.required ? that.required() : false;
         } catch (e) {
-            if ( ctxt.strict ) {
+            if ( isStrict ) {
                 console.error("prompts."+that.type+"._isValid.required.exception.strict px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+"._isValid.required.exception.strict", String(e));
-                ctxt.failure({message: "Exception while evaluating required() expression. See console log."});
-                return;
+                shim.log('E',"prompts."+that.type+"._isValid.required.exception.strict", String(e));
+                return { message: "Exception while evaluating required() expression. See console log." };
             } else {
                 shim.log("I","prompts."+that.type+"._isValid.required.exception.ignored px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+"._isValid.required.exception.ignored", String(e));
                 isRequired = false;
             }
         }
         that.valid = true;
         if ( !('name' in that) ) {
             // no data validation if no persistence...
-            ctxt.success();
-            return;
+            return null;
         } 
         var value = that.getValue();
         if ( value == null || value == "" ) {
             if ( isRequired ) {
                 that.valid = false;
-                ctxt.failure({ message: that.required_message });
-                return;
+                return { message: that.required_message };
             }
         } else if ( 'validateValue' in that ) {
             if ( !that.validateValue() ) {
                 that.valid = false;
-                ctxt.failure({ message: that.invalid_value_message });
-                return;
+                return { message: that.invalid_value_message };
             }
         } 
         if ( 'constraint' in that ) {
@@ -247,19 +242,16 @@ promptTypes.base = Backbone.View.extend({
                 outcome = that.constraint({"allowExceptions":true});
                 if ( !outcome ) {
                     that.valid = false;
-                    ctxt.failure({ message: that.constraint_message });
-                    return;
+                    return { message: that.constraint_message };
                 }
             } catch (e) {
                 shim.log('E',"prompts."+that.type+".baseValidate.constraint.exception px: " + that.promptIdx + " exception: " + String(e));
-                ctxt.append("prompts."+that.type+"baseValidate.constraint.exception", e);
                 outcome = false;
                 that.valid = false;
-                ctxt.failure({ message: "Exception while evaluating constraint() expression. See console log." });
-                return;
+                return { message: "Exception while evaluating constraint() expression. See console log." };
             }
         }
-        ctxt.success();
+        return null;
     },
     formattedValueForContentsDisplay: function() {
         if ( !this.name ) {

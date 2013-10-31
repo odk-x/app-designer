@@ -404,25 +404,30 @@ screenTypes.screen = Backbone.View.extend({
             }
         };
 
-        var validationPromptCtxt = $.extend({},ctxt,{success:
-                _.after(that.activePrompts.length, function() {
-                    allowMoveHandler(advancing);
-                }),
-            failure: _.once(ctxt.failure)
-        });
-
         var subPromptCtxt = $.extend({},ctxt,{success: 
             _.after(that.activePrompts.length, function() {
                 if ( advancing ) {
-                    $.each(that.activePrompts, function(idx, prompt){
-                        prompt._isValid(validationPromptCtxt);
-                    });
-                } else {
+                    var validateError;
+                    for ( var i = 0; i < that.activePrompts.length; i++ )
+                    {
+                    	validateError = that.activePrompts[i]._isValid(ctxt.strict);
+                    	if ( validateError != null ) { 
+                            break; 
+                    	}
+                    }
+                    if ( validateError == null ) { 
+                    	allowMoveHandler(advancing); 
+                    } else {
+                    	ctxt.failure(validateError);
+                    }
+                } 
+                else {
                     allowMoveHandler(advancing);
                 }
             }),
             failure: _.once(ctxt.failure)
         });
+        
         $.each(that.activePrompts, function(idx, prompt){
             prompt.beforeMove(subPromptCtxt);
         });
@@ -708,25 +713,30 @@ screenTypes.columns_2 = Backbone.View.extend({
             }
         };
 
-        var validationPromptCtxt = $.extend({},ctxt,{success:
-                _.after(that.activePrompts.length, function() {
-                    allowMoveHandler(advancing);
-                }),
-            failure: _.once(ctxt.failure)
-        });
-
         var subPromptCtxt = $.extend({},ctxt,{success: 
             _.after(that.activePrompts.length, function() {
                 if ( advancing ) {
-                    $.each(that.activePrompts, function(idx, prompt){
-                        prompt._isValid(validationPromptCtxt);
-                    });
-                } else {
+                    var validateError;
+                    for ( var i = 0; i < that.activePrompts.length; i++ )
+                    {
+                    	validateError = that.activePrompts[i]._isValid(ctxt.strict);
+                    	if ( validateError != null ) { 
+                            break; 
+                    	}
+                    }
+                    if ( validateError == null ) { 
+                    	allowMoveHandler(advancing); 
+                    } else {
+                    	ctxt.failure(validateError);
+                    }
+                } 
+                else {
                     allowMoveHandler(advancing);
                 }
             }),
             failure: _.once(ctxt.failure)
         });
+        
         $.each(that.activePrompts, function(idx, prompt){
             prompt.beforeMove(subPromptCtxt);
         });
