@@ -332,6 +332,82 @@
         }
     };
 
+    /**
+     * This is not efficient, but the only deep-copy clone functionality
+     * is in jQuery, and we don't want to introduce that dependency.
+     */
+    var deepCopyObject = function( o ) {
+    	if ( o == null ) return null;
+    	return JSON.parse(JSON.stringify(o));
+    };
+
+    /**
+     * _.extend is shallow. Sometimes we need a deeply recursive extend.
+     *
+     * deepExtendObject(o1,o2) --
+     *
+     * If either o1 or o2 are null, primitive types, strings,
+     * arrays or functions, it returns o2.
+     *
+     * Otherwise, both o1 and o2 are objects.
+     *
+     * For each non-colliding property, take the union of o1 and o2.
+     * For each colliding property, if the property value 'key' in o1 is
+     * a non-array, non-function, object, do:
+     *    o1[key] = deepExtendObject(o1[key], o2[key]);
+     *
+     * I.e., if you have:
+     *
+     *   first = {bar: {a: true, c:false}};
+     *   second = {bar: {c: true, d: false}, none: true};
+     *
+     *   Then
+     *
+     *   out = deepExtendObject(deepExtendObject({},first), second)
+     *
+     *   will return:
+     *
+     *   out = {bar: {a:true, c:true, d:false}, none:true};
+     *
+     *   and
+     *
+     *   out = deepExtendObject(deepExtendObject({},second), first)
+     *
+     *   will return:
+     *
+     *   out = {bar: {a:true, c:false, d:false}, none: true};
+     */
+    var deepExtendObject = function( o1, o2 ) {
+    	// stomp on o1 if o2 is not an object...
+    	if ( o2 == null || _.isArray(o2)  || _.isFunction(o2) || !_.isObject(o2) ) {
+    		return o2;
+    	}
+    	// stomp on o1 if o1 is not an object...
+    	if ( o1 == null || _.isArray(o1)  || _.isFunction(o1) ) {
+    		return o2;
+    	}
+
+    	// OK. they are both objects...
+    	_.each(_.keys(o2), function(key) {
+    		var isObjectInO1 = false;
+    		if ( key in o1 ) {
+        		var value = o1[key];
+        		isObjectInO1 = ( value != null && !_.isArray(value) &&
+        			!_.isFunction(value) && _.isObject(value) );
+    		}
+    		if ( isObjectInO1 ) {
+    			// deep overwrite -- o1[key] may no longer be an object...
+    			o1[key] = deepExtendObject(o1[key], o2[key]);
+    		} else {
+    			// shallow replace
+    			o1[key] = o2[key];
+    		}
+    	});
+
+    	// return the extended object
+    	return o1;
+    };
+
     //Remove carriage returns, trim values in each cell of spreadsheet.
     var cleanValues = function(row){
         var outRow = Object.create(row.__proto__ || row.prototype);
@@ -1514,17 +1590,17 @@
         // display.title is present, then it becomes the displayName for the model.
         // otherwise, use the element name.
         if ( !("displayName" in mdef) ) {
-	        var displayName = name;
 	        if ( "display" in promptOrAction && "title" in promptOrAction.display ) {
-	        	displayName = promptOrAction.display.title;
+	        	mdef.displayName = promptOrAction.display.title;
 	        }
-        	mdef.displayName = displayName;
         }
 
         if ( name in model ) {
             var defn = model[name];
-            var amodb = _.extend({}, defn, schema, mdef);
-            var bmoda = _.extend({}, schema, mdef, defn);
+            var amodb = deepExtendObject( deepExtendObject(
+            				deepExtendObject({},defn), schema), mdef );
+            var bmoda = deepExtendObject( deepExtendObject(
+    						deepExtendObject({},schema), mdef), defn );
             removeIgnorableModelFields(amodb);
             removeIgnorableModelFields(bmoda);
             delete amodb._defn;
@@ -1541,10 +1617,11 @@
             defn._defn.push({_row_num: promptOrAction._row_num, section_name: section.section_name});
             var dt = defn._defn;
             delete defn._defn;
-            _.extend(defn, schema, mdef);
+            deepExtendObject( deepExtendObject( defn, schema ), mdef );
             defn._defn = dt;
         } else {
-            model[name] = _.extend({_defn: [{ _row_num : promptOrAction._row_num, section_name: section.section_name }]}, schema, mdef);
+            model[name] = deepExtendObject( deepExtendObject(
+            		{_defn: [{ _row_num : promptOrAction._row_num, section_name: section.section_name }]}, schema), mdef);
             defn = model[name];
         }
         removeIgnorableModelFields(defn);
@@ -1603,9 +1680,26 @@
 	        				"' collides with the identifier for the full elementPath: '" + path +
 	        				"'. Please change one of the field names ('" + name + "' or '" + refname + "').");
 	        	}
+	    	} else {
+	    		fullSetOfElementKeys[elementKey] = elementPath;
 	    	}
     	}
 
+    };
+
+    var assignItemsElementKey = function( elementPathPrefix, elementKeyPrefix, fullSetOfElementKeys, enclosingElement ) {
+    	if ( !('items' in enclosingElement) ) {
+    		enclosingElement.items = {"type": "object"};
+    	}
+
+		var elementPath = elementPathPrefix + '.items';
+		var key = elementKeyPrefix + '_items';
+		if ( ('elementKey' in enclosingElement.items) && enclosingElement.items.elementKey != key ) {
+			throw Error("elementKey is user-defined for '" + elementPath +
+					"' (the array-element type declaration) but does not match computed key: " + key);
+		}
+		assertValidElementKey(elementPath, key, fullSetOfElementKeys);
+		enclosingElement.items.elementKey = key;
     };
 
     /**
@@ -1620,7 +1714,7 @@
     		var entry = properties[name];
     		var elementPath = elementPathPrefix + '.' + name;
     		var key = elementKeyPrefix + '_' + name;
-    		if ( entry.elementKey != null && entry.elementKey != key ) {
+    		if ( ('elementKey' in entry) && entry.elementKey != key ) {
     			throw Error("elementKey is user-defined for " + elementPath + " but does not match computed key: " + key);
     		}
     		assertValidElementKey(elementPath, key, fullSetOfElementKeys);
@@ -1628,9 +1722,11 @@
     		if ( entry.type == "object" ) {
     			// we have properties...
     			recursiveAssignPropertiesElementKey( elementPath, key, fullSetOfElementKeys, entry.properties );
+        	} else if ( entry.type == "array" ) {
+        		assignItemsElementKey( elementPath, key, fullSetOfElementKeys, entry );
     		}
     	});
-    }
+    };
 
     var developDataModel = function( specification, promptTypes ) {
         var assigns = [];
@@ -1649,6 +1745,8 @@
                         		throw Error(e.message + " Prompt: '" + prompt.type + "' at row " +
                                     prompt._row_num + " on sheet: " + section.section_name);
                         	}
+                        	// deep copy of schema because we are going to add properties recursively
+                        	schema = deepCopyObject(schema);
                             updateModel( section, prompt, model, schema );
                         } else {
                             throw Error("Expected 'name' but none defined for prompt. Prompt: '" + prompt.type + "' at row " +
@@ -1689,9 +1787,10 @@
                             // record name to verify that is the case.
                             assigns.push(operation);
                         } else if(operation._data_type in promptTypes) {
-                            var schema;
-                            schema = promptTypes[operation._data_type];
+                            var schema = promptTypes[operation._data_type];
                             if(schema){
+                            	// deep copy of schema because we are going to add properties recursively
+                            	schema = deepCopyObject(schema);
                                 updateModel( section, operation, model, schema );
                             } else if ( schema === undefined ) {
                                 throw Error("Unrecognized assign type: " + operation._data_type + ". Clause: '" + operation.type + "' at row " +
@@ -1722,9 +1821,22 @@
             if ( name in model ) {
                 // defined in both
                 var defn = model[name];
+                if ( 'elementType' in defn ) {
+                	// blend in the default definition for this elementType
+                	var type = defn.elementType;
+                	if ( type in promptTypes ) {
+                		var schema = promptTypes[type];
+                        if(schema) {
+                        	// deep copy of schema because we are going to add properties recursively
+                        	schema = deepCopyObject(schema);
+                        	// override the promptTypes definition with info supplied in the model sheet.
+                        	defn = deepExtendObject( schema, defn );
+                        }
+                	}
+                }
                 var mdef = specification.model[name];
-                var amodb = _.extend({}, defn, mdef);
-                var bmoda = _.extend({}, mdef, defn);
+                var amodb = deepExtendObject( deepExtendObject( {}, defn), mdef);
+                var bmoda = deepExtendObject( deepExtendObject( {}, mdef), defn);
                 removeIgnorableModelFields(amodb);
                 removeIgnorableModelFields(bmoda);
                 delete amodb._defn;
@@ -1747,7 +1859,7 @@
                 defn._defn.push(mdef._defn[0]);
                 var dt = defn._defn;
                 delete defn._defn;
-                _.extend(defn, mdef);
+                deepExtendObject(defn, mdef);
                 defn._defn = dt;
                 // update model...
                 specification.model[name] = defn;
@@ -1774,7 +1886,7 @@
         // ensure that all the model entries are not reserved words or too long
         _.each( _.keys(specification.model), function(name) {
         	var entry = specification.model[name];
-    		if ( entry.elementKey != null && entry.elementKey != name ) {
+    		if ( ('elementKey' in entry) && entry.elementKey != name ) {
     			throw Error("elementKey is user-defined for " + name + " but does not match computed key: " + name);
     		}
     		// this is already known to be true for prompts and assigns within the form.
@@ -1784,6 +1896,8 @@
         	if ( entry.type == "object" ) {
         		// we have properties...
         		recursiveAssignPropertiesElementKey( name, name, fullSetOfElementKeys, entry.properties );
+        	} else if ( entry.type == "array" ) {
+        		assignItemsElementKey( name, name, fullSetOfElementKeys, entry );
         	}
         });
     };

@@ -87,7 +87,7 @@
       {
         "type": "note",
         "display": {
-          "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
+          "text": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
           "audio": "audio/carrioncrow.mp3",
           "image": "img/dolphin.png"
         },
@@ -853,8 +853,10 @@
         "type": "array",
         "isPersisted": true,
         "items": {
-          "type": "string"
-        }
+          "type": "string",
+          "elementKey": "examples_items"
+        },
+        "elementKey": "examples"
       },
       "error": {
         "_defn": [
@@ -863,7 +865,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "error"
       },
       "barcode": {
         "_defn": [
@@ -872,7 +875,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "barcode"
       },
       "geopoint": {
         "_defn": [
@@ -885,18 +889,23 @@
         "elementType": "geopoint",
         "properties": {
           "latitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "geopoint_latitude"
           },
           "longitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "geopoint_longitude"
           },
           "altitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "geopoint_altitude"
           },
           "accuracy": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "geopoint_accuracy"
           }
-        }
+        },
+        "elementKey": "geopoint"
       },
       "picture": {
         "_defn": [
@@ -910,13 +919,16 @@
         "isPersisted": true,
         "properties": {
           "uri": {
-            "type": "string"
+            "type": "string",
+            "elementKey": "picture_uri"
           },
           "contentType": {
             "type": "string",
-            "default": "image/*"
+            "default": "image/*",
+            "elementKey": "picture_contentType"
           }
-        }
+        },
+        "elementKey": "picture"
       },
       "recording": {
         "_defn": [
@@ -930,13 +942,16 @@
         "isPersisted": true,
         "properties": {
           "uri": {
-            "type": "string"
+            "type": "string",
+            "elementKey": "recording_uri"
           },
           "contentType": {
             "type": "string",
-            "default": "audio/*"
+            "default": "audio/*",
+            "elementKey": "recording_contentType"
           }
-        }
+        },
+        "elementKey": "recording"
       },
       "name": {
         "_defn": [
@@ -945,7 +960,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "name"
       },
       "avg_coffee": {
         "_defn": [
@@ -954,7 +970,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "avg_coffee"
       },
       "coffee_today": {
         "_defn": [
@@ -963,7 +980,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "coffee_today"
       },
       "born": {
         "_defn": [
@@ -973,7 +991,8 @@
           }
         ],
         "type": "object",
-        "elementType": "date"
+        "elementType": "date",
+        "elementKey": "born"
       },
       "time": {
         "_defn": [
@@ -983,7 +1002,8 @@
           }
         ],
         "type": "object",
-        "elementType": "time"
+        "elementType": "time",
+        "elementKey": "time"
       },
       "datetime": {
         "_defn": [
@@ -993,7 +1013,8 @@
           }
         ],
         "type": "object",
-        "elementType": "dateTime"
+        "elementType": "dateTime",
+        "elementKey": "datetime"
       },
       "location": {
         "_defn": [
@@ -1006,18 +1027,23 @@
         "elementType": "geopoint",
         "properties": {
           "latitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "location_latitude"
           },
           "longitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "location_longitude"
           },
           "altitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "location_altitude"
           },
           "accuracy": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "location_accuracy"
           }
-        }
+        },
+        "elementKey": "location"
       },
       "visited_continents": {
         "_defn": [
@@ -1029,8 +1055,10 @@
         "type": "array",
         "isPersisted": true,
         "items": {
-          "type": "string"
-        }
+          "type": "string",
+          "elementKey": "visited_continents_items"
+        },
+        "elementKey": "visited_continents"
       },
       "visited_seattle": {
         "_defn": [
@@ -1039,7 +1067,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "visited_seattle"
       },
       "audio_test": {
         "_defn": [
@@ -1053,13 +1082,16 @@
         "isPersisted": true,
         "properties": {
           "uri": {
-            "type": "string"
+            "type": "string",
+            "elementKey": "audio_test_uri"
           },
           "contentType": {
             "type": "string",
-            "default": "audio/*"
+            "default": "audio/*",
+            "elementKey": "audio_test_contentType"
           }
-        }
+        },
+        "elementKey": "audio_test"
       },
       "video_test": {
         "_defn": [
@@ -1073,13 +1105,16 @@
         "isPersisted": true,
         "properties": {
           "uri": {
-            "type": "string"
+            "type": "string",
+            "elementKey": "video_test_uri"
           },
           "contentType": {
             "type": "string",
-            "default": "video/*"
+            "default": "video/*",
+            "elementKey": "video_test_contentType"
           }
-        }
+        },
+        "elementKey": "video_test"
       },
       "image_test": {
         "_defn": [
@@ -1093,13 +1128,16 @@
         "isPersisted": true,
         "properties": {
           "uri": {
-            "type": "string"
+            "type": "string",
+            "elementKey": "image_test_uri"
           },
           "contentType": {
             "type": "string",
-            "default": "image/*"
+            "default": "image/*",
+            "elementKey": "image_test_contentType"
           }
-        }
+        },
+        "elementKey": "image_test"
       },
       "age": {
         "_defn": [
@@ -1108,7 +1146,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "age"
       },
       "weight": {
         "_defn": [
@@ -1117,7 +1156,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "number"
+        "type": "number",
+        "elementKey": "weight"
       },
       "sex": {
         "_defn": [
@@ -1126,7 +1166,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "sex"
       },
       "rating": {
         "_defn": [
@@ -1135,7 +1176,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "rating"
       }
     },
     "section_names": [
@@ -1246,7 +1288,7 @@
           {
             "type": "note",
             "display": {
-              "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
+              "text": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
               "audio": "audio/carrioncrow.mp3",
               "image": "img/dolphin.png"
             },

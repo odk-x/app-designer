@@ -1564,7 +1564,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         
         if ( jsonDefn.elementSet == 'data' ) {
             var surveyElementName = jsonDefn.elementName;
-            var surveyDisplayName = jsonDefn.displayName;
+            var surveyDisplayName = (jsonDefn.displayName == null) ? surveyElementName : jsonDefn.displayName;
             
             fullDef._column_definitions.push( {
                 _table_id: tlo.table_id,
