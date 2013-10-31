@@ -273,9 +273,9 @@ promptTypes.base = Backbone.View.extend({
         var that = this;
         database.setValueDeferredChange(that.name, value);
     },
-    beforeMove: function(ctxt) {
-        ctxt.append("prompts." + this.type, "px: " + this.promptIdx);
-        ctxt.success();
+    beforeMove: function() {
+        shim.log("prompts." + this.type, "px: " + this.promptIdx);
+        return null;
     },
     getCallback: function(promptPath, internalPromptContext, action) {
         throw new Error("prompts." + this.type, "px: " + this.promptIdx + " unimplemented promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
@@ -1294,7 +1294,7 @@ promptTypes.input_type = promptTypes.base.extend({
         renderContext.value = value;
         ctxt.success();
     },
-    beforeMove: function(ctxt) {
+    beforeMove: function() {
         var that = this;
         // track original value
         var originalValue = that.getValue();
@@ -1304,9 +1304,9 @@ promptTypes.input_type = promptTypes.base.extend({
             value = originalValue;
             // restore it...
             that.setValueDeferredChange(originalValue);
-            ctxt.failure({ message: that.invalid_value_message });
+            return { message: that.invalid_value_message };
         } else {
-            ctxt.success();
+            return null;
         }
     },
     validateValue: function() {
@@ -1457,9 +1457,9 @@ promptTypes.datetime = promptTypes.input_type.extend({
             }
         }
     },
-    beforeMove: function(ctxt) {
+    beforeMove: function() {
         // the spinner will have already saved the value
-        ctxt.success();
+        return null;
     }
 });
 promptTypes.date = promptTypes.datetime.extend({
@@ -1526,9 +1526,9 @@ promptTypes.time = promptTypes.datetime.extend({
             }
         }
     },
-    beforeMove: function(ctxt) {
+    beforeMove: function() {
         // the spinner will have already saved the value
-        ctxt.success();
+        return null;
     }
 });
 /**
