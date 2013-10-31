@@ -418,50 +418,6 @@ return {
         }
     },
     /**
-     * Internal routine: called only from validateAllQuestions()
-     */
-    _validateQuestionHelper: function(ctxt, promptCandidate, promptList, nextPromptIdx) {
-        var that = this;
-        return function() {
-            try {
-                // pass in 'render':false to indicate that rendering will not occur.
-                // call buildRenderContext() to ensure that we have values (assignTo) initialized for _isValid()
-                promptCandidate.buildRenderContext( $.extend({render: false}, ctxt, {
-                    success: function(renderContext) {
-                        promptCandidate._isValid( $.extend({}, ctxt, {
-                            success: function() {
-                                if ( promptList.length == nextPromptIdx ) {
-                                    ctxt.append("validateQuestionHelper.success.endOfValidationList", "px: " + nextPromptIdx + " nextPx: no prompt!");
-                                    ctxt.success();
-                                } else {
-                                    var promptCandidate = that.getPrompt(promptList[nextPromptIdx]);
-                                    if ( promptCandidate != null ) {
-                                        var fn = that._validateQuestionHelper(ctxt,promptCandidate,promptList,nextPromptIdx+1);
-                                        (fn)();
-                                    } else {
-                                        ctxt.failure(that.moveFailureMessage);
-                                    }
-                                }
-                            },
-                            failure: function(msg) {
-                                ctxt.append("_validateQuestionHelper.validate.failure", "px: " + promptCandidate.promptIdx);
-                                var nextOp = that.getOperation(promptCandidate._branch_label_enclosing_screen);
-                                if ( nextOp != null ) {
-                                    ctxt.failedOperation = nextOp;
-                                    ctxt.failure(msg);
-                                } else {
-                                    ctxt.failure(that.moveFailureMessage);
-                                }
-                            }}));
-                    }}) );
-            } catch(e) {
-                ctxt.append("_validateQuestionHelper.validate.exception", "px: " + promptCandidate.promptIdx + " exception: " + e);
-                ctxt.failedPrompt = promptCandidate;
-                ctxt.failure({message: "Exception during validation: " + e});
-            }
-        };
-    },
-    /**
      * Upon exit:
      *   ctxt.success() -- for every prompt associated with this validationTag, 
      *                     if required() evaluates to true, then the field has a value
@@ -492,28 +448,16 @@ return {
             ctxt.success();
             return;
         }
-        
-        var promptCandidate = that.getPrompt(promptList[0]);
-        if ( promptCandidate == null ) {
-            // this is an error in the generation of the formDef.json. 
-            // we treat it as 'success' for expedience, but display 
-            // an ugly dialog to the user whenever this happens.
-            shim.log('E', "Internal Error: null value in promptList[]");
-            alert("Internal Error! Please regenerate your formDef.json");
-            ctxt.success();
-            return;
-        }
-
         ctxt.failedOperation = null;
         
         // set the 'strict' attribute on the context to report all 
         // formula exceptions and errors.
         var oldvalue = ctxt.strict;
         ctxt.strict = true;
-        // ensure we drop the spinner overlay when we complete...
+        
         var newctxt = $.extend({},ctxt,{
             success: function() {
-                ctxt.append("validateAllQuestions.success.noPrompt", "px: " + promptCandidate.promptIdx + " nextPx: no prompt!");
+                ctxt.append("validateAllQuestions.success", "px: " + that.getCurrentScreenPath());
                 that.screenManager.hideSpinnerOverlay();
                 ctxt.strict = oldvalue;
                 ctxt.success();
@@ -521,6 +465,9 @@ return {
             failure: function(m) {
                 ctxt.failedOperation = this.failedOperation;
                 if ( ctxt.failedOperation == null ) {
+                    that.screenManager.hideSpinnerOverlay();
+                    that.screenManager.showScreenPopup(m);
+                    ctxt.strict = oldvalue;
                     ctxt.failure(m);
                     return;
                 }
@@ -547,7 +494,7 @@ return {
                             }
                             popupbasectxt.success();
                         }, 500);
-                    }});
+                }});
                 that.setScreen( $.extend({}, ctxt, {
                     success: function() {
                         that.screenManager.hideSpinnerOverlay();
@@ -563,10 +510,47 @@ return {
                     }}), ctxt.failedOperation, 
                         { popHistoryOnExit: true, omitPushOnReturnStack: true } );
             }});
+    	
+    	// start our work -- display the 'validating...' spinner
         that.screenManager.showSpinnerOverlay({text:"Validating..."});
+      
+        var buildRenderDoneCtxt = $.extend({render: false}, newctxt, {
+            success: _.after(promptList.length, function() {
+                // all render contexts have been refreshed
+                var currPrompt;
+                var validateError;
+                for ( var i = 0; i < promptList.length; i++ ) {
+                    currPrompt = that.getPrompt(promptList[i]);
+                    validateError = currPrompt._isValid(ctxt.strict);
+                    if ( validateError != null ) {
+                        break;
+                    }
+                }
+                if ( validateError == null ) {
+                    newctxt.append("validateQuestionHelper.success.endOfValidationList");
+                    newctxt.success();
+                } else {
+                    newctxt.append("_validateQuestionHelper.validate.failure", "px: " + currPrompt.promptIdx);
+                    var nextOp = that.getOperation(currPrompt._branch_label_enclosing_screen);
+					if ( nextOp != null ) {
+                        newctxt.failedOperation = nextOp;
+                        newctxt.failure(validateError);
+                    } else {
+                        newctxt.failure(that.moveFailureMessage);
+                    }
+                }
+            }),
+            failure: _.once(function(m) {
+                newctxt.failure(m);
+            })
+        });
 
-        var fn = that._validateQuestionHelper(newctxt,promptCandidate,promptList,1);
-        (fn)();
+        // refresh all render contexts (they may have constraint values
+        // that could have changed -- e.g., filtered choice lists).
+        $.each( promptList, function(idx, promptCandidatePath) {
+        	var promptCandidate = that.getPrompt(promptCandidatePath);
+        	promptCandidate.buildRenderContext(buildRenderDoneCtxt);
+        });		
     },
     setScreen: function(ctxt, operation, passedInOptions){
         var that = this;

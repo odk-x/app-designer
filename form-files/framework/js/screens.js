@@ -403,29 +403,39 @@ screenTypes.screen = Backbone.View.extend({
                 ctxt.failure({message: allowed.message});
             }
         };
-
-        var validationPromptCtxt = $.extend({},ctxt,{success:
-                _.after(that.activePrompts.length, function() {
-                    allowMoveHandler(advancing);
-                }),
-            failure: _.once(ctxt.failure)
-        });
-
-        var subPromptCtxt = $.extend({},ctxt,{success: 
-            _.after(that.activePrompts.length, function() {
-                if ( advancing ) {
-                    $.each(that.activePrompts, function(idx, prompt){
-                        prompt._isValid(validationPromptCtxt);
-                    });
-                } else {
-                    allowMoveHandler(advancing);
+        
+        var beforeMoveError;
+        for ( var i = 0; i < that.activePrompts.length; i ++)
+        {
+            beforeMoveError = that.activePrompts[i].beforeMove();
+            if ( beforeMoveError != null ) {
+                break;
+            }
+        }
+        
+        if ( beforeMoveError == null )
+        {
+            if ( advancing ) {
+                var validateError;
+                for ( var i = 0; i < that.activePrompts.length; i++ )
+                {
+                    validateError = that.activePrompts[i]._isValid(ctxt.strict);
+                    if ( validateError != null ) { 
+                        break; 
+                    }
                 }
-            }),
-            failure: _.once(ctxt.failure)
-        });
-        $.each(that.activePrompts, function(idx, prompt){
-            prompt.beforeMove(subPromptCtxt);
-        });
+                if ( validateError == null ) { 
+                    allowMoveHandler(advancing); 
+                } else {
+                    ctxt.failure(validateError);
+                }
+            } 
+            else {
+                allowMoveHandler(advancing);
+            }
+        } else {
+            ctxt.failure(beforeMoveError);
+        }
     },
     __test__: function(evt){
         //This is a utility function for checking to make sure event maps are working.
@@ -707,29 +717,39 @@ screenTypes.columns_2 = Backbone.View.extend({
                 ctxt.failure({message: allowed.message});
             }
         };
-
-        var validationPromptCtxt = $.extend({},ctxt,{success:
-                _.after(that.activePrompts.length, function() {
-                    allowMoveHandler(advancing);
-                }),
-            failure: _.once(ctxt.failure)
-        });
-
-        var subPromptCtxt = $.extend({},ctxt,{success: 
-            _.after(that.activePrompts.length, function() {
-                if ( advancing ) {
-                    $.each(that.activePrompts, function(idx, prompt){
-                        prompt._isValid(validationPromptCtxt);
-                    });
-                } else {
-                    allowMoveHandler(advancing);
+        
+        var beforeMoveError;
+        for ( var i = 0; i < that.activePrompts.length; i ++)
+        {
+            beforeMoveError = that.activePrompts[i].beforeMove();
+            if ( beforeMoveError != null ) {
+                break;
+            }
+        }
+        
+        if ( beforeMoveError == null )
+        {
+            if ( advancing ) {
+                var validateError;
+                for ( var i = 0; i < that.activePrompts.length; i++ )
+                {
+                    validateError = that.activePrompts[i]._isValid(ctxt.strict);
+                    if ( validateError != null ) { 
+                        break; 
+                    }
                 }
-            }),
-            failure: _.once(ctxt.failure)
-        });
-        $.each(that.activePrompts, function(idx, prompt){
-            prompt.beforeMove(subPromptCtxt);
-        });
+                if ( validateError == null ) { 
+                    allowMoveHandler(advancing); 
+                } else {
+                    ctxt.failure(validateError);
+                }
+            } 
+            else {
+                allowMoveHandler(advancing);
+            }
+        } else {
+            ctxt.failure(beforeMoveError);
+        }
     },
     __test__: function(evt){
         //This is a utility function for checking to make sure event maps are working.
