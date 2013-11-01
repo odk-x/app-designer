@@ -470,7 +470,6 @@
           }
         ],
         "type": "integer",
-        "displayName": "age",
         "elementKey": "age"
       },
       "color": {
@@ -481,7 +480,6 @@
           }
         ],
         "type": "string",
-        "displayName": "color",
         "elementKey": "color"
       },
       "weight": {
@@ -492,7 +490,6 @@
           }
         ],
         "type": "integer",
-        "displayName": "weight",
         "elementKey": "weight"
       },
       "confirm_fact": {
@@ -503,7 +500,6 @@
           }
         ],
         "type": "boolean",
-        "displayName": "confirm_fact",
         "elementKey": "confirm_fact"
       }
     },

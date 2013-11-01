@@ -251,7 +251,8 @@
             "table_id": "household_member",
             "element_name": "household_id"
           }
-        ]
+        ],
+        "elementKey": "household_id"
       },
       "num_rooms": {
         "_defn": [
@@ -260,7 +261,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "num_rooms"
       },
       "electricity": {
         "_defn": [
@@ -269,7 +271,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "electricity"
       },
       "water": {
         "_defn": [
@@ -278,7 +281,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "water"
       },
       "location": {
         "_defn": [
@@ -291,18 +295,23 @@
         "elementType": "geopoint",
         "properties": {
           "latitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "location_latitude"
           },
           "longitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "location_longitude"
           },
           "altitude": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "location_altitude"
           },
           "accuracy": {
-            "type": "number"
+            "type": "number",
+            "elementKey": "location_accuracy"
           }
-        }
+        },
+        "elementKey": "location"
       },
       "owner": {
         "_defn": [
@@ -311,7 +320,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "owner"
       }
     },
     "section_names": [

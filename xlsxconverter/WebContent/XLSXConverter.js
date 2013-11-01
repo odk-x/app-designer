@@ -202,15 +202,16 @@
             condition: 'formula',
             constraint: 'formula',
             required: 'formula',
-            validate: 'formula_with_context', // expects calling context arg.
             calculation: 'formula',
-            'default': 'formula',
-            assign: 'formula',
+            auxillaryHash: 'formula',
+            selectionArgs: 'formula',
+            uri: 'formula',
+            callback: 'formula',
             //TODO: Choice filter has some syntax issues to consider.
             //      It would be nice to have a "choice" variable we can refer to directly.
             //      One idea is to define variables in a context object that gets passed into the generated function.
             //      The generated function would then add the object's keys to the namespace.
-            choice_filter: 'formula_with_context', // expects "choice" context arg.
+            choice_filter: 'formula(context)', // expects "choice" context arg.
             templatePath: 'requirejs_path',
             image: 'app_path_localized',
             audio: 'app_path_localized',
@@ -337,8 +338,19 @@
      * is in jQuery, and we don't want to introduce that dependency.
      */
     var deepCopyObject = function( o ) {
-    	if ( o == null ) return null;
-    	return JSON.parse(JSON.stringify(o));
+    	if ( o == null || _.isFunction(o) || !_.isObject(o) ) {
+    		return o;
+    	}
+
+    	if ( _.isArray(o) ) {
+    		return _.map(o, function(v) { return deepCopyObject(v); });
+    	} else {
+    		var newo = _.clone(o);
+    		_.each(_.keys(newo), function(k) {
+    			newo[k] = deepCopyObject(newo[k]);
+    		});
+    		return newo;
+    	}
     };
 
     /**
@@ -347,7 +359,9 @@
      * deepExtendObject(o1,o2) --
      *
      * If either o1 or o2 are null, primitive types, strings,
-     * arrays or functions, it returns o2.
+     * arrays or functions, it returns a deep copy of o2.
+     *
+     * If
      *
      * Otherwise, both o1 and o2 are objects.
      *
@@ -378,29 +392,28 @@
      *   out = {bar: {a:true, c:false, d:false}, none: true};
      */
     var deepExtendObject = function( o1, o2 ) {
-    	// stomp on o1 if o2 is not an object...
-    	if ( o2 == null || _.isArray(o2)  || _.isFunction(o2) || !_.isObject(o2) ) {
+    	// stomp on o1 if o2 is not an object or array...
+    	if ( o2 == null || _.isFunction(o2) || !_.isObject(o2) ) {
+    		// don't need to deeply copy these non-array, non-objects.
     		return o2;
     	}
-    	// stomp on o1 if o1 is not an object...
-    	if ( o1 == null || _.isArray(o1)  || _.isFunction(o1) ) {
-    		return o2;
+    	// stomp on o1 if o1 is not an object or array...
+    	if ( o1 == null || _.isFunction(o1) || !_.isObject(o1) ) {
+    		// deep copy it...
+    		return deepCopyObject(o2);
+    	}
+    	// if o1 or o2 are arrays, stomp on o1 (don't merge arrays)...
+    	if ( _.isArray(o1) || _.isArray(o2) ) {
+    		// deep copy it...
+    		return deepCopyObject(o2);
     	}
 
     	// OK. they are both objects...
     	_.each(_.keys(o2), function(key) {
-    		var isObjectInO1 = false;
     		if ( key in o1 ) {
-        		var value = o1[key];
-        		isObjectInO1 = ( value != null && !_.isArray(value) &&
-        			!_.isFunction(value) && _.isObject(value) );
-    		}
-    		if ( isObjectInO1 ) {
-    			// deep overwrite -- o1[key] may no longer be an object...
     			o1[key] = deepExtendObject(o1[key], o2[key]);
     		} else {
-    			// shallow replace
-    			o1[key] = o2[key];
+    			o1[key] = deepCopyObject(o2[key]);
     		}
     	});
 
@@ -743,8 +756,8 @@
                         throw Error("'assign' expressions must specify a field 'name' Error on sheet: " +
                                 sheetName + " on row: " + row._row_num);
                     }
-                    if (!("value" in row)) {
-                        throw Error("'assign' expressions must specify a 'value' expression. Error on sheet: " +
+                    if (!("calculation" in row)) {
+                        throw Error("'assign' expressions must specify a 'calculation' expression. Error on sheet: " +
                                 sheetName + " on row: " + row._row_num);
                     }
                 } else {
@@ -1088,7 +1101,7 @@
                 // and return the value for use in any enclosing expression.
                 // (in this case, there is none).  It is exposed via formulaFunctions.
                 // The actual write to the database occurs later in processing.
-                defn += "assign('" + clause.name + "', " + clause.value + ");\n";
+                defn += "assign('" + clause.name + "', " + clause.calculation + ");\n";
                 ++i;
                 break;
             case "prompt":
@@ -1765,8 +1778,8 @@
             /*
              * Process the 'assign' statements.
              * Two flavors of these statements:
-             *   assign  | name | value   -- no prompt_type info
-             *   assign integer | name | value  -- prompt_type info supplied in 'type' column.
+             *   assign  | name | calculation   -- no prompt_type info
+             *   assign integer | name | calculation  -- prompt_type info supplied in 'type' column.
              *
              *   The initial parsing has
              *   _token_type = "assign"

@@ -90,19 +90,24 @@
         "_row_num": 13
       },
       {
+        "type": "assign",
+        "name": "rating",
+        "calculation": 5,
+        "_row_num": 14
+      },
+      {
         "type": "integer",
         "name": "rating",
         "display": {
           "text": "How would you rate this survey?",
           "hint": "1 is very bad. 10 is very good."
         },
-        "default": 5,
         "inputAttributes": {
           "type": "range",
           "min": 1,
           "max": 10
         },
-        "_row_num": 14
+        "_row_num": 15
       }
     ],
     "calculates": [
@@ -549,8 +554,10 @@
         "type": "array",
         "isPersisted": true,
         "items": {
-          "type": "string"
-        }
+          "type": "string",
+          "elementKey": "visited_continents_items"
+        },
+        "elementKey": "visited_continents"
       },
       "visited_seattle": {
         "_defn": [
@@ -559,7 +566,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "visited_seattle"
       },
       "age": {
         "_defn": [
@@ -568,7 +576,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "age"
       },
       "sex": {
         "_defn": [
@@ -577,7 +586,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "sex"
       },
       "weight": {
         "_defn": [
@@ -586,16 +596,18 @@
             "section_name": "survey"
           }
         ],
-        "type": "number"
+        "type": "number",
+        "elementKey": "weight"
       },
       "rating": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "rating"
       }
     },
     "section_names": [
@@ -705,25 +717,24 @@
               "text": "How would you rate this survey?",
               "hint": "1 is very bad. 10 is very good."
             },
-            "default": 5,
             "inputAttributes": {
               "type": "range",
               "min": 1,
               "max": 10
             },
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen14",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 6
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 15,
-            "_branch_label_enclosing_screen": "survey/_screen15",
+            "_row_num": 16,
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 7
           }
         ],
@@ -765,35 +776,44 @@
             "operationIdx": 1
           },
           {
+            "type": "assign",
+            "name": "rating",
+            "calculation": 5,
             "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "assign",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 15,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
+            "operationIdx": 3
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 15,
-            "operationIdx": 3
-          },
-          {
-            "_row_num": 15,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_row_num": 16,
             "operationIdx": 4
           },
           {
-            "_token_type": "back_in_history",
-            "_row_num": 15,
+            "_row_num": 16,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 16,
+            "operationIdx": 6
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen8": 1,
-          "_screen14": 2,
-          "_contents": 4,
-          "_screen15": 4
+          "_screen15": 3,
+          "_contents": 5,
+          "_screen16": 5
         }
       },
       "initial": {

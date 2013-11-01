@@ -34,12 +34,6 @@ promptTypes.base = Backbone.View.extend({
     templateContext: {},
     // inputAttributes are a user-specified object that overrides baseInputAttributes.
     inputAttributes: {},
-    /**
-     * default is a function field in the worksheet.
-     * Called during rendering if the prompt has backing
-     * storage (a 'name') and the value of that storage is null.
-     */
-    // default: function() { return value; } // e.g., calculates.incItem() in XLSX
     
     reRender: function(ctxt) {
         this._screen.reRender(ctxt);
@@ -71,27 +65,11 @@ promptTypes.base = Backbone.View.extend({
         return 'i' + this.getPromptPath().replace(/[^a-zA-Z0-9]/,'');
     },
     /**
-     * TODO: move this to screen.
-     * TODO: move this to screen.
-     * TODO: move this to screen.
-     * TODO: move this to screen.
-     * TODO: move this to screen.
-     * TODO: move this to screen.
-     * TODO: move this to screen.
-     * TODO: move this to screen.
      * buildRenderContext
      * Called before a prompt is rendered.
      */
     buildRenderContext: function(ctxt) {
         var that = this;
-        
-        if((that.name != null && 
-            'default' in that) && 
-            that.getValue() == null) {
-            var value = that['default']();
-            ctxt.append('buildRenderContext','assigning default value');
-            that.setValueDeferredChange(value);
-        }
         that._initializeRenderContext();
         
         that._whenTemplateIsReady($.extend({}, ctxt, {success: function() {
