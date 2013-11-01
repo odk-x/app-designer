@@ -89,8 +89,6 @@ verifyLoad('builder',
         required: 'formula',
         validate: 'formula_with_context', // expects calling context arg.
         calculation: 'formula',
-        'default': 'formula',
-        assign: 'formula',
         //TODO: Choice filter has some syntax issues to consider.
         //      It would be nice to have a "choice" variable we can refer to directly.
         //      One idea is to define variables in a context object that gets passed into the generated function.
@@ -229,8 +227,8 @@ verifyLoad('builder',
                 // this is only done for the top-level assign expressions.
                 // the ones within begin...end screen blocks are executed
                 // in-line as part of the _parsed_screen_block.
-                functionBody = "function() { return " + op.value + ";}";
-                op._parsed_value = genericFunction(functionBody);
+                functionBody = "function() { return " + op.calculation + ";}";
+                op._parsed_calculation = genericFunction(functionBody);
             } else if ( op._token_type == "begin_screen" ) {
                 functionBody = op._screen_block;
                 op._parsed_screen_block = genericFunction(functionBody);

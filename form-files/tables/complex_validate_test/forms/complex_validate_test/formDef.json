@@ -469,7 +469,8 @@
             "section_name": "section1"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "age"
       },
       "color": {
         "_defn": [
@@ -478,7 +479,8 @@
             "section_name": "section1"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "color"
       },
       "weight": {
         "_defn": [
@@ -487,7 +489,8 @@
             "section_name": "section1"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "weight"
       },
       "confirm_fact": {
         "_defn": [
@@ -496,7 +499,8 @@
             "section_name": "section2"
           }
         ],
-        "type": "boolean"
+        "type": "boolean",
+        "elementKey": "confirm_fact"
       }
     },
     "section_names": [

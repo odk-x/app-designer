@@ -83,20 +83,6 @@
         "name": "refrigerator_location",
         "type": "object",
         "elementType": "geopoint",
-        "properties": {
-          "latitude": {
-            "type": "number"
-          },
-          "longitude": {
-            "type": "number"
-          },
-          "altitude": {
-            "type": "number"
-          },
-          "accuracy": {
-            "type": "number"
-          }
-        },
         "_row_num": 4
       },
       {
@@ -238,7 +224,8 @@
             "section_name": "model"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "refrigerator_id"
       },
       "refrigerator_size": {
         "_defn": [
@@ -247,7 +234,8 @@
             "section_name": "model"
           }
         ],
-        "type": "number"
+        "type": "number",
+        "elementKey": "refrigerator_size"
       },
       "refrigerator_location": {
         "_defn": [
@@ -258,20 +246,7 @@
         ],
         "type": "object",
         "elementType": "geopoint",
-        "properties": {
-          "latitude": {
-            "type": "number"
-          },
-          "longitude": {
-            "type": "number"
-          },
-          "altitude": {
-            "type": "number"
-          },
-          "accuracy": {
-            "type": "number"
-          }
-        }
+        "elementKey": "refrigerator_location"
       },
       "refrigerator_condition": {
         "type": "string",
@@ -284,7 +259,8 @@
             "_row_num": 5,
             "section_name": "model"
           }
-        ]
+        ],
+        "elementKey": "refrigerator_condition"
       },
       "refrigerator_stock_level": {
         "type": "integer",
@@ -297,7 +273,8 @@
             "_row_num": 6,
             "section_name": "model"
           }
-        ]
+        ],
+        "elementKey": "refrigerator_stock_level"
       }
     },
     "section_names": [

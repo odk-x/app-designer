@@ -63,19 +63,24 @@
         "_row_num": 10
       },
       {
+        "type": "assign",
+        "name": "rating",
+        "calculation": "((data('rating') == null) ? 5 : data('rating'))",
+        "_row_num": 11
+      },
+      {
         "type": "integer",
         "name": "rating",
         "display": {
           "text": "How would you rate this survey?",
           "hint": "1 is very bad. 10 is very good."
         },
-        "default": 5,
         "inputAttributes": {
           "type": "range",
           "min": 1,
           "max": 10
         },
-        "_row_num": 11
+        "_row_num": 12
       }
     ],
     "choices": [
@@ -330,7 +335,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "name"
       },
       "visited_continents": {
         "_defn": [
@@ -342,8 +348,10 @@
         "type": "array",
         "isPersisted": true,
         "items": {
-          "type": "string"
-        }
+          "type": "string",
+          "elementKey": "visited_continents_items"
+        },
+        "elementKey": "visited_continents"
       },
       "visited_seattle": {
         "_defn": [
@@ -352,16 +360,18 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "visited_seattle"
       },
       "rating": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "rating"
       }
     },
     "section_names": [
@@ -450,25 +460,24 @@
               "text": "How would you rate this survey?",
               "hint": "1 is very bad. 10 is very good."
             },
-            "default": 5,
             "inputAttributes": {
               "type": "range",
               "min": 1,
               "max": 10
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen12",
             "promptIdx": 5
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 12,
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_row_num": 13,
+            "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 6
           }
         ],
@@ -534,27 +543,36 @@
             "operationIdx": 6
           },
           {
+            "type": "assign",
+            "name": "rating",
+            "calculation": "((data('rating') == null) ? 5 : data('rating'))",
             "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "assign",
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 12,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
+            "operationIdx": 8
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 12,
-            "operationIdx": 8
-          },
-          {
-            "_row_num": 12,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "_row_num": 13,
             "operationIdx": 9
           },
           {
-            "_token_type": "back_in_history",
-            "_row_num": 12,
+            "_row_num": 13,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 10
+          },
+          {
+            "_token_type": "back_in_history",
+            "_row_num": 13,
+            "operationIdx": 11
           }
         ],
         "branch_label_map": {
@@ -565,9 +583,9 @@
           "_else9": 6,
           "_endif9": 6,
           "_screen10": 6,
-          "_screen11": 7,
-          "_contents": 9,
-          "_screen12": 9
+          "_screen12": 8,
+          "_contents": 10,
+          "_screen13": 10
         }
       },
       "initial": {
