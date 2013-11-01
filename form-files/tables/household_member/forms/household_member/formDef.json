@@ -281,7 +281,8 @@
             "table_id": "household",
             "element_name": "household_id"
           }
-        ]
+        ],
+        "elementKey": "household_id"
       },
       "member_name": {
         "_defn": [
@@ -290,7 +291,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "member_name"
       },
       "age": {
         "_defn": [
@@ -299,7 +301,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "age"
       },
       "sex": {
         "_defn": [
@@ -308,7 +311,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "sex"
       },
       "income_contribution": {
         "_defn": [
@@ -317,7 +321,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "income_contribution"
       },
       "children": {
         "_defn": [
@@ -326,7 +331,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "children"
       },
       "siblings": {
         "_defn": [
@@ -335,7 +341,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "siblings"
       },
       "cousins": {
         "_defn": [
@@ -344,7 +351,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "cousins"
       }
     },
     "section_names": [
