@@ -589,7 +589,8 @@
             "_row_num": 26,
             "section_name": "survey"
           }
-        ]
+        ],
+        "elementKey": "country"
       },
       "state": {
         "_defn": [
@@ -598,7 +599,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "state"
       },
       "bird": {
         "_defn": [
@@ -607,7 +609,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "bird"
       },
       "desktop": {
         "_defn": [
@@ -616,7 +619,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "desktop"
       },
       "laptop": {
         "_defn": [
@@ -625,7 +629,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "laptop"
       },
       "smartphone": {
         "_defn": [
@@ -634,7 +639,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "smartphone"
       },
       "tablet": {
         "_defn": [
@@ -643,7 +649,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "tablet"
       },
       "color": {
         "_defn": [
@@ -652,7 +659,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "color"
       },
       "h_select": {
         "_defn": [
@@ -661,7 +669,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "h_select"
       },
       "region": {
         "_defn": [
@@ -670,7 +679,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "region"
       },
       "cp_test": {
         "_defn": [
@@ -679,7 +689,8 @@
             "section_name": "survey"
           }
         ],
-        "type": "string"
+        "type": "string",
+        "elementKey": "cp_test"
       }
     },
     "section_names": [

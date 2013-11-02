@@ -11,7 +11,7 @@
         "display": {
           "text": {
             "default": "Choose the section to enter",
-            "hindi": "?????? ???? ?? ??? ??? ?????"
+            "hindi": "प्रवेश करने के लिए खंड चुनें"
           }
         },
         "_row_num": 3
@@ -29,7 +29,7 @@
         "display": {
           "text": {
             "default": "Section 1 chosen",
-            "hindi": "???? 1 ????"
+            "hindi": "धारा 1 चुना"
           }
         },
         "hideInContents": true,
@@ -44,7 +44,7 @@
         "display": {
           "text": {
             "default": "Returned from section 1",
-            "hindi": "??? 1 ?? ????"
+            "hindi": "खंड 1 से लौटे"
           }
         },
         "hideInContents": true,
@@ -63,7 +63,7 @@
         "display": {
           "text": {
             "default": "Section 2 chosen",
-            "hindi": "???? 2 ????"
+            "hindi": "धारा 2 चुना"
           }
         },
         "hideInContents": true,
@@ -78,7 +78,7 @@
         "display": {
           "text": {
             "default": "Returned from section 2",
-            "hindi": "???? 2 ?? ????"
+            "hindi": "धारा 2 से लौटे"
           }
         },
         "hideInContents": true,
@@ -97,7 +97,7 @@
         "display": {
           "text": {
             "default": "Exiting survey",
-            "hindi": "???? ?????? ?????????"
+            "hindi": "बाहर निकलने सर्वेक्षण"
           }
         },
         "hideInContents": true,
@@ -114,7 +114,7 @@
         "display": {
           "text": {
             "default": "Entered Section 1",
-            "hindi": "??? ?????? ???? ???? 1"
+            "hindi": "में प्रवेश किया धारा 1"
           }
         },
         "hideInContents": true,
@@ -126,14 +126,14 @@
         "display": {
           "text": {
             "default": "What is your age?",
-            "hindi": "???? ???? ???? ???"
+            "hindi": "आपकी उम्र क्या है?"
           }
         },
         "required": true,
         "constraint": "data('age') > 20",
         "constraint_message": {
           "default": "Age must be greater than 20",
-          "hindi": "20 ??? ?? ???? ?? ???? ???? ?????"
+          "hindi": "20 साल की उम्र से अधिक होना चाहिए"
         },
         "_row_num": 3
       }
@@ -144,7 +144,7 @@
         "display": {
           "text": {
             "default": "Entered Section 2",
-            "hindi": "??? ?????? ???? ???? 2"
+            "hindi": "में प्रवेश किया धारा 2"
           }
         },
         "hideInContents": true,
@@ -156,14 +156,14 @@
         "display": {
           "text": {
             "default": "What is your favorite color?",
-            "hindi": "???? ??????? ??? ???? ???"
+            "hindi": "अपने पसंदीदा रंग क्या है?"
           }
         },
         "required": true,
         "constraint": "data('color') == 'red'",
         "constraint_message": {
           "default": "Red is the only correct answer!",
-          "hindi": "??? ?? ??? ???? ??!"
+          "hindi": "लाल ही सही जवाब है!"
         },
         "_row_num": 3
       }
@@ -175,7 +175,7 @@
         "display": {
           "text": {
             "default": "Go to section 1",
-            "hindi": "??? 1 ?? ??? ???"
+            "hindi": "खंड 1 के लिए जाओ"
           }
         },
         "_row_num": 2
@@ -186,7 +186,7 @@
         "display": {
           "text": {
             "default": "Go to section 2",
-            "hindi": "???? 2 ?? ??? ???"
+            "hindi": "धारा 2 के लिए जाओ"
           }
         },
         "_row_num": 3
@@ -197,7 +197,7 @@
         "display": {
           "text": {
             "default": "Exit Survey",
-            "hindi": "????????? ?? ???? ??????"
+            "hindi": "सर्वेक्षण से बाहर निकलें"
           }
         },
         "_row_num": 4
@@ -219,7 +219,7 @@
         "display": {
           "title": {
             "default": "Section Test",
-            "hindi": "???? ?????"
+            "hindi": "धारा टेस्ट"
           }
         },
         "_row_num": 4
@@ -229,7 +229,7 @@
         "display": {
           "title": {
             "default": "Section 1",
-            "hindi": "???? 1"
+            "hindi": "धारा 1"
           }
         },
         "_row_num": 5
@@ -239,7 +239,7 @@
         "display": {
           "title": {
             "default": "Section 2",
-            "hindi": "???? 2"
+            "hindi": "धारा 2"
           }
         },
         "_row_num": 6
@@ -249,7 +249,7 @@
         "display": {
           "text": {
             "default": "English",
-            "hindi": "?????????"
+            "hindi": "अंग्रेज़ी"
           }
         },
         "_row_num": 7
@@ -259,7 +259,7 @@
         "display": {
           "text": {
             "default": "Hindi",
-            "hindi": "?????"
+            "hindi": "हिंदी"
           }
         },
         "_row_num": 8
@@ -283,7 +283,7 @@
         "display": {
           "title": {
             "default": "Section Test",
-            "hindi": "???? ?????"
+            "hindi": "धारा टेस्ट"
           }
         },
         "_row_num": 4
@@ -293,7 +293,7 @@
         "display": {
           "title": {
             "default": "Section 1",
-            "hindi": "???? 1"
+            "hindi": "धारा 1"
           }
         },
         "_row_num": 5
@@ -303,7 +303,7 @@
         "display": {
           "title": {
             "default": "Section 2",
-            "hindi": "???? 2"
+            "hindi": "धारा 2"
           }
         },
         "_row_num": 6
@@ -313,7 +313,7 @@
         "display": {
           "text": {
             "default": "English",
-            "hindi": "?????????"
+            "hindi": "अंग्रेज़ी"
           }
         },
         "_row_num": 7
@@ -323,7 +323,7 @@
         "display": {
           "text": {
             "default": "Hindi",
-            "hindi": "?????"
+            "hindi": "हिंदी"
           }
         },
         "_row_num": 8
@@ -342,7 +342,7 @@
             "display": {
               "text": {
                 "default": "English",
-                "hindi": "?????????"
+                "hindi": "अंग्रेज़ी"
               }
             },
             "_row_num": 7,
@@ -352,7 +352,7 @@
             "display": {
               "text": {
                 "default": "Hindi",
-                "hindi": "?????"
+                "hindi": "हिंदी"
               }
             },
             "_row_num": 8,
@@ -370,7 +370,7 @@
         "display": {
           "title": {
             "default": "Section Test",
-            "hindi": "???? ?????"
+            "hindi": "धारा टेस्ट"
           }
         },
         "_row_num": 4
@@ -384,7 +384,7 @@
           "display": {
             "text": {
               "default": "Go to section 1",
-              "hindi": "??? 1 ?? ??? ???"
+              "hindi": "खंड 1 के लिए जाओ"
             }
           },
           "_row_num": 2
@@ -395,7 +395,7 @@
           "display": {
             "text": {
               "default": "Go to section 2",
-              "hindi": "???? 2 ?? ??? ???"
+              "hindi": "धारा 2 के लिए जाओ"
             }
           },
           "_row_num": 3
@@ -406,7 +406,7 @@
           "display": {
             "text": {
               "default": "Exit Survey",
-              "hindi": "????????? ?? ???? ??????"
+              "hindi": "सर्वेक्षण से बाहर निकलें"
             }
           },
           "_row_num": 4
@@ -461,7 +461,7 @@
             "display": {
               "text": {
                 "default": "Choose the section to enter",
-                "hindi": "?????? ???? ?? ??? ??? ?????"
+                "hindi": "प्रवेश करने के लिए खंड चुनें"
               }
             },
             "_row_num": 3,
@@ -476,7 +476,7 @@
             "display": {
               "text": {
                 "default": "Section 1 chosen",
-                "hindi": "???? 1 ????"
+                "hindi": "धारा 1 चुना"
               }
             },
             "hideInContents": true,
@@ -498,7 +498,7 @@
             "display": {
               "title": {
                 "default": "Section 1",
-                "hindi": "???? 1"
+                "hindi": "धारा 1"
               }
             },
             "_branch_label_enclosing_screen": "section1/_contents"
@@ -508,7 +508,7 @@
             "display": {
               "text": {
                 "default": "Returned from section 1",
-                "hindi": "??? 1 ?? ????"
+                "hindi": "खंड 1 से लौटे"
               }
             },
             "hideInContents": true,
@@ -524,7 +524,7 @@
             "display": {
               "text": {
                 "default": "Section 2 chosen",
-                "hindi": "???? 2 ????"
+                "hindi": "धारा 2 चुना"
               }
             },
             "hideInContents": true,
@@ -546,7 +546,7 @@
             "display": {
               "title": {
                 "default": "Section 2",
-                "hindi": "???? 2"
+                "hindi": "धारा 2"
               }
             },
             "_branch_label_enclosing_screen": "section2/_contents"
@@ -556,7 +556,7 @@
             "display": {
               "text": {
                 "default": "Returned from section 2",
-                "hindi": "???? 2 ?? ????"
+                "hindi": "धारा 2 से लौटे"
               }
             },
             "hideInContents": true,
@@ -572,7 +572,7 @@
             "display": {
               "text": {
                 "default": "Exiting survey",
-                "hindi": "???? ?????? ?????????"
+                "hindi": "बाहर निकलने सर्वेक्षण"
               }
             },
             "hideInContents": true,
@@ -722,7 +722,7 @@
             "display": {
               "text": {
                 "default": "Entered Section 1",
-                "hindi": "??? ?????? ???? ???? 1"
+                "hindi": "में प्रवेश किया धारा 1"
               }
             },
             "hideInContents": true,
@@ -739,14 +739,14 @@
             "display": {
               "text": {
                 "default": "What is your age?",
-                "hindi": "???? ???? ???? ???"
+                "hindi": "आपकी उम्र क्या है?"
               }
             },
             "required": true,
             "constraint": "data('age') > 20",
             "constraint_message": {
               "default": "Age must be greater than 20",
-              "hindi": "20 ??? ?? ???? ?? ???? ???? ?????"
+              "hindi": "20 साल की उम्र से अधिक होना चाहिए"
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -817,7 +817,7 @@
             "display": {
               "text": {
                 "default": "Entered Section 2",
-                "hindi": "??? ?????? ???? ???? 2"
+                "hindi": "में प्रवेश किया धारा 2"
               }
             },
             "hideInContents": true,
@@ -834,14 +834,14 @@
             "display": {
               "text": {
                 "default": "What is your favorite color?",
-                "hindi": "???? ??????? ??? ???? ???"
+                "hindi": "अपने पसंदीदा रंग क्या है?"
               }
             },
             "required": true,
             "constraint": "data('color') == 'red'",
             "constraint_message": {
               "default": "Red is the only correct answer!",
-              "hindi": "??? ?? ??? ???? ??!"
+              "hindi": "लाल ही सही जवाब है!"
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -934,7 +934,7 @@
             "display": {
               "title": {
                 "default": "Section Test",
-                "hindi": "???? ?????"
+                "hindi": "धारा टेस्ट"
               }
             },
             "_branch_label_enclosing_screen": "survey/_contents"

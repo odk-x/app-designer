@@ -84,19 +84,19 @@ screenTypes.waiting = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    initializeRenderContext: function(ctxt) {
+    initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
         this._renderContext = Object.create(this.renderContext);
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this._renderContext, this.templateContext);
-        ctxt.success();
     },
-    onActivate: function(ctxt) {
+    buildRenderContext: function(ctxt) {
         var that = this;
         that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
-                that.initializeRenderContext(ctxt);
-            }}));
+            that.initializeRenderContext();
+            ctxt.success();
+        }}));
     },
     /**
      * stopPropagation is used in the events map to disable swiping on various elements
@@ -110,7 +110,7 @@ screenTypes.waiting = Backbone.View.extend({
     },
     reRender: function(ctxt) {
         var that = this;
-        that.onActivate($.extend({},ctxt,{success:function() {
+        that.buildRenderContext($.extend({},ctxt,{success:function() {
             that.render($.extend({},ctxt,{success:function() {
                 that.$el.trigger('create');
                 that.afterRender(ctxt);
@@ -157,8 +157,8 @@ screenTypes.waiting = Backbone.View.extend({
      * is allowable to move off the screen. E.g., after saving or 
      * rolling back all changes.
      */
-    beforeMove: function(ctxt, advancing) {
-        ctxt.success();
+    beforeMove: function(isStrict, advancing) {
+        return null;
     }
 });
 
@@ -230,7 +230,7 @@ screenTypes.screen = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    initializeRenderContext: function(ctxt) {
+    initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
         this._renderContext = Object.create(this.renderContext);
         if ( this.display == null ) {
@@ -258,39 +258,8 @@ screenTypes.screen = Backbone.View.extend({
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this._renderContext, this.templateContext);
-        ctxt.success();
     },
-    preActivate: function(ctxt) {
-        var that = this;
-        // this once held the code to invoke with_next and with_next_validate actions
-        that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
-                // determine the active prompts
-                that.activePrompts = []; // clear all prompts...
-                var activePromptIndices = that._operation._parsed_screen_block();
-                var sectionPrompts = that.controller.getCurrentSectionPrompts();
-                var ap = [];
-                var i;
-                for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
-                    var prompt = sectionPrompts[activePromptIndices[i]];
-                    if ( prompt == null ) {
-                        ctxt.append("Error! unable to resolve prompt!");
-                        ctxt.failure({message: "bad prompt index!"});
-                        return;
-                    }
-                    prompt._screen = that;
-                    ap.push(prompt);
-                }
-                that.activePrompts = ap;
-                // we now know what we are going to render.
-                // work with the controller to ensure that all
-                // intermediate state has been written to the 
-                // database before commencing the rendering
-                that.controller.commitChanges($.extend({},ctxt,{success:function() {
-                        that.initializeRenderContext(ctxt);
-                    }}));
-            }}));
-    },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         // We do not support dependent default values within screen groups.
         // If we are to do so, we will need to add code here to ensure
@@ -305,12 +274,36 @@ screenTypes.screen = Backbone.View.extend({
             }));
         });
     },
-    onActivate: function(ctxt) {
+    buildRenderContext: function(ctxt) {
         var that = this;
-        this.preActivate($.extend({}, ctxt, {success: function() {
-                that.postActivate(ctxt);
+        // this once held the code to invoke with_next and with_next_validate actions
+        that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
+            // determine the active prompts
+            that.activePrompts = []; // clear all prompts...
+            var activePromptIndices = that._operation._parsed_screen_block();
+            var sectionPrompts = that.controller.getCurrentSectionPrompts();
+            var ap = [];
+            var i;
+            for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
+                var prompt = sectionPrompts[activePromptIndices[i]];
+                if ( prompt == null ) {
+                    ctxt.append("Error! unable to resolve prompt!");
+                    ctxt.failure({message: "bad prompt index!"});
+                    return;
+                }
+                prompt._screen = that;
+                ap.push(prompt);
             }
-        }));
+            that.activePrompts = ap;
+            // we now know what we are going to render.
+            // work with the controller to ensure that all
+            // intermediate state has been written to the 
+            // database before commencing the rendering
+            that.controller.commitChanges($.extend({},ctxt,{success:function() {
+                    that.initializeRenderContext();
+                    that.configureRenderContext(ctxt);
+            }}));
+        }}));
     },
     /**
      * stopPropagation is used in the events map to disable swiping on various elements
@@ -393,14 +386,14 @@ screenTypes.screen = Backbone.View.extend({
      * is allowable to move off the screen. E.g., after saving or 
      * rolling back all changes.
      */
-    beforeMove: function(ctxt, advancing) {
+    beforeMove: function(isStrict, advancing) {
         var that = this;
         var allowMoveHandler = function(advancing) {
             var allowed = that.allowMove(advancing);
             if ( allowed.outcome ) {
-                ctxt.success();
+                return null;
             } else {
-                ctxt.failure({message: allowed.message});
+                return { message: allowed.message };
             }
         };
         
@@ -419,7 +412,7 @@ screenTypes.screen = Backbone.View.extend({
                 var validateError;
                 for ( var i = 0; i < that.activePrompts.length; i++ )
                 {
-                    validateError = that.activePrompts[i]._isValid(ctxt.strict);
+                    validateError = that.activePrompts[i]._isValid(isStrict);
                     if ( validateError != null ) { 
                         break; 
                     }
@@ -427,14 +420,14 @@ screenTypes.screen = Backbone.View.extend({
                 if ( validateError == null ) { 
                     allowMoveHandler(advancing); 
                 } else {
-                    ctxt.failure(validateError);
+                    return validateError;
                 }
             } 
             else {
                 allowMoveHandler(advancing);
             }
         } else {
-            ctxt.failure(beforeMoveError);
+            return beforeMoveError;
         }
     },
     __test__: function(evt){
@@ -525,7 +518,7 @@ screenTypes.columns_2 = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    initializeRenderContext: function(ctxt) {
+    initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
         this._renderContext = Object.create(this.renderContext);
         if ( this.display == null ) {
@@ -553,39 +546,8 @@ screenTypes.columns_2 = Backbone.View.extend({
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
         $.extend(this._renderContext, this.templateContext);
-        ctxt.success();
     },
-    preActivate: function(ctxt) {
-        var that = this;
-        // this once held the code to invoke with_next and with_next_validate actions
-        that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
-                // determine the active prompts
-                that.activePrompts = []; // clear all prompts...
-                var activePromptIndices = that._operation._parsed_screen_block();
-                var sectionPrompts = that.controller.getCurrentSectionPrompts();
-                var ap = [];
-                var i;
-                for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
-                    var prompt = sectionPrompts[activePromptIndices[i]];
-                    if ( prompt == null ) {
-                        ctxt.append("Error! unable to resolve prompt!");
-                        ctxt.failure({message: "bad prompt index!"});
-                        return;
-                    }
-                    prompt._screen = that;
-                    ap.push(prompt);
-                }
-                that.activePrompts = ap;
-                // we now know what we are going to render.
-                // work with the controller to ensure that all
-                // intermediate state has been written to the 
-                // database before commencing the rendering
-                that.controller.commitChanges($.extend({},ctxt,{success:function() {
-                        that.initializeRenderContext(ctxt);
-                    }}));
-            }}));
-    },
-    postActivate: function(ctxt) {
+    configureRenderContext: function(ctxt) {
         var that = this;
         // We do not support dependent default values within screen groups.
         // If we are to do so, we will need to add code here to ensure
@@ -600,12 +562,36 @@ screenTypes.columns_2 = Backbone.View.extend({
             }));
         });
     },
-    onActivate: function(ctxt) {
-        var that = this;
-        this.preActivate($.extend({}, ctxt, {success: function() {
-                that.postActivate(ctxt);
+    buildRenderContext: function(ctxt) {
+       var that = this;
+        // this once held the code to invoke with_next and with_next_validate actions
+        that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
+            // determine the active prompts
+            that.activePrompts = []; // clear all prompts...
+            var activePromptIndices = that._operation._parsed_screen_block();
+            var sectionPrompts = that.controller.getCurrentSectionPrompts();
+            var ap = [];
+            var i;
+            for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
+                var prompt = sectionPrompts[activePromptIndices[i]];
+                if ( prompt == null ) {
+                    ctxt.append("Error! unable to resolve prompt!");
+                    ctxt.failure({message: "bad prompt index!"});
+                    return;
+                }
+                prompt._screen = that;
+                ap.push(prompt);
             }
-        }));
+            that.activePrompts = ap;
+            // we now know what we are going to render.
+            // work with the controller to ensure that all
+            // intermediate state has been written to the 
+            // database before commencing the rendering
+            that.controller.commitChanges($.extend({},ctxt,{success:function() {
+                that.initializeRenderContext();
+                that.configureRenderContext(ctxt);
+            }}));
+        }}));
     },
     /**
      * stopPropagation is used in the events map to disable swiping on various elements
@@ -707,14 +693,14 @@ screenTypes.columns_2 = Backbone.View.extend({
      * is allowable to move off the screen. E.g., after saving or 
      * rolling back all changes.
      */
-    beforeMove: function(ctxt, advancing) {
+    beforeMove: function(isStrict, advancing) {
         var that = this;
         var allowMoveHandler = function(advancing) {
             var allowed = that.allowMove(advancing);
             if ( allowed.outcome ) {
-                ctxt.success();
+                return null;
             } else {
-                ctxt.failure({message: allowed.message});
+                return { message: allowed.message };
             }
         };
         
@@ -733,7 +719,7 @@ screenTypes.columns_2 = Backbone.View.extend({
                 var validateError;
                 for ( var i = 0; i < that.activePrompts.length; i++ )
                 {
-                    validateError = that.activePrompts[i]._isValid(ctxt.strict);
+                    validateError = that.activePrompts[i]._isValid(isStrict);
                     if ( validateError != null ) { 
                         break; 
                     }
@@ -741,14 +727,14 @@ screenTypes.columns_2 = Backbone.View.extend({
                 if ( validateError == null ) { 
                     allowMoveHandler(advancing); 
                 } else {
-                    ctxt.failure(validateError);
+                    return validateError;
                 }
             } 
             else {
                 allowMoveHandler(advancing);
             }
         } else {
-            ctxt.failure(beforeMoveError);
+            return beforeMoveError;
         }
     },
     __test__: function(evt){

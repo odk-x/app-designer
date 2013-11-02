@@ -71,7 +71,12 @@ return Backbone.View.extend({
     },
     beforeMove: function(ctxt, advancing) {
         if ( this.activeScreen ) {
-            this.activeScreen.beforeMove(ctxt, advancing);
+            var screenBeforeMoveError = this.activeScreen.beforeMove(ctxt.strict, advancing);
+            if ( screenBeforeMoveError == null ){
+                ctxt.success();	
+            } else {
+                ctxt.failure(screenBeforeMoveError);
+            }
         } else {
             ctxt.success();
         }
@@ -136,14 +141,14 @@ return Backbone.View.extend({
         screen._screenManager = that;
 
         //A better way to do this might be to pass a controller interface object to 
-        //onActivate that can trigger screen refreshes, as well as goto other screens.
+        //buildRenderContext that can trigger screen refreshes, as well as goto other screens.
         //(We would not allow screens to access the controller directly).
         //When the screen changes, we could disconnect the interface to prevent the old
         //screens from messing with the current screen.
         // 
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
-        screen.onActivate($.extend({render:true},ctxt,{success:function(renderContext){
+        screen.buildRenderContext($.extend({render:true},ctxt,{success:function(renderContext){
                 if(renderContext){
                     $.extend(that.renderContext, renderContext);
                 }

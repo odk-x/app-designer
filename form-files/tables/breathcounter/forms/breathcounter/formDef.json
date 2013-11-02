@@ -100,7 +100,8 @@
           }
         ],
         "prompt_type_name": "breathcounter",
-        "type": "integer"
+        "type": "integer",
+        "elementKey": "breath_count"
       }
     },
     "section_names": [
