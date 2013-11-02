@@ -662,7 +662,7 @@ screenTypes.columns_2 = Backbone.View.extend({
             }
 
             // Append element to appropriate column
-            if (prompt.screen_column == 2) {
+            if (prompt.screen_column === 2) {
                 col_b.append(prompt.$el);
             } 
             else {

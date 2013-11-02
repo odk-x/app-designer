@@ -64,7 +64,7 @@ function(opendatakit,  database,   _) {
                 //We are probably dealing with a select. values is an array of the selected values.
                 var values = parsedArgs;
                 return _.all(values.slice(1), function(value) {
-                    return _.union(_.difference(value, values[0]), _.difference(values[0], value)).length == 0;
+                    return _.union(_.difference(value, values[0]), _.difference(values[0], value)).length === 0;
                 });
             } else {
                 var arg0 = parsedArgs[0];

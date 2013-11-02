@@ -87,8 +87,11 @@ verifyLoad('builder',
         condition: 'formula',
         constraint: 'formula',
         required: 'formula',
-        validate: 'formula_with_context', // expects calling context arg.
         calculation: 'formula',
+		auxillaryHash: 'formula',
+		selectionArgs: 'formula',
+		url: 'formula',
+		callback: 'formula',
         //TODO: Choice filter has some syntax issues to consider.
         //      It would be nice to have a "choice" variable we can refer to directly.
         //      One idea is to define variables in a context object that gets passed into the generated function.
@@ -112,13 +115,13 @@ verifyLoad('builder',
         },
         app_path_localized : function(content) {
             var fd = this.requirejs_path('');
-            if ( content == null ) {
+            if ( content === undefined || content === null ) {
                 return content;
             } else if ( $.isPlainObject(content) ) {
                 var newcontent = {};
                 for ( var key in content ) {
                     var val = content[key];
-                    if ( val.indexOf('/') == 0 || val.indexOf('http:') == 0 || val.indexOf('https:') == 0 ) {
+                    if ( val.indexOf('/') === 0 || val.indexOf('http:') === 0 || val.indexOf('https:') === 0 ) {
                         newcontent[key] = val;
                     } else {
                         newcontent[key] = fd + val;
@@ -126,7 +129,7 @@ verifyLoad('builder',
                 }
                 return newcontent;
             } else {
-                if ( content.indexOf('/') == 0 || content.indexOf('http:') == 0 || content.indexOf('https:') == 0 ) {
+                if ( content.indexOf('/') === 0 || content.indexOf('http:') === 0 || content.indexOf('https:') === 0 ) {
                     return content;
                 } else {
                     return fd + content;
@@ -217,26 +220,26 @@ verifyLoad('builder',
             var op = section.operations[i];
             parsedFunction = null;
             op._section_name = section.section_name;
-            if ( op._token_type == "goto_label" ) {
+            if ( op._token_type === "goto_label" ) {
                 // convert condition into predicate...
                 if ( op.condition ) {
                     functionBody = "function() { return " + op.condition + ";}";
                     op._parsed_condition = genericFunction(functionBody);
                 }
-            } else if ( op._token_type == "assign" ) {
+            } else if ( op._token_type === "assign" ) {
                 // this is only done for the top-level assign expressions.
                 // the ones within begin...end screen blocks are executed
                 // in-line as part of the _parsed_screen_block.
                 functionBody = "function() { return " + op.calculation + ";}";
                 op._parsed_calculation = genericFunction(functionBody);
-            } else if ( op._token_type == "begin_screen" ) {
+            } else if ( op._token_type === "begin_screen" ) {
                 functionBody = op._screen_block;
                 op._parsed_screen_block = genericFunction(functionBody);
             }
         }
     },
     buildSurvey: function(ctxt, surveyJson, formPath) {
-        if (surveyJson == null) {
+        if (surveyJson === undefined || surveyJson === null) {
             ctxt.append('builder.buildSurvey', 'no formDef!');
             ctxt.failure();
             return;

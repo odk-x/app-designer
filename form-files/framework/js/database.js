@@ -85,17 +85,17 @@ return {
             if ( f.isPersisted ) {
                 createTableCmd += comma + dbColumnName + " ";
                 comma = ',';
-                if ( f.type == "string" ) {
+                if ( f.type === "string" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type == "integer" ) {
+                } else if ( f.type === "integer" ) {
                     createTableCmd += "INTEGER" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type == "number" ) {
+                } else if ( f.type === "number" ) {
                     createTableCmd += "REAL" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type == "boolean" ) {
+                } else if ( f.type === "boolean" ) {
                     createTableCmd += "INTEGER" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type == "object" ) {
+                } else if ( f.type === "object" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type == "array" ) {
+                } else if ( f.type === "array" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else {
                     throw new Error("unhandled type: " + f.type);
@@ -126,20 +126,20 @@ return {
         // date conversion elements...
         var yyyy, mm, dd, hh, min, sec, msec, zsign, zhh, zmm;
 
-        if ( value == null ) {
+        if ( value === undefined || value === null ) {
             if ( jsonType.isNotNullable ) {
                 throw new Error("unexpected null value for non-nullable field");
             }
             return null;
         }
         
-        if ( jsonType.type == 'array' ) {
+        if ( jsonType.type === 'array' ) {
             value = JSON.parse(value);
             // TODO: ensure object spec conformance on read?
             return value;
-        } else if ( jsonType.type == 'object' ) {
-            if ( jsonType.elementType == 'date' ||
-                 jsonType.elementType == 'dateTime' ) {
+        } else if ( jsonType.type === 'object' ) {
+            if ( jsonType.elementType === 'date' ||
+                 jsonType.elementType === 'dateTime' ) {
                 // convert an iso8601 date yyyymmddTHH:MM:SS.ssszzzzz 
                 // to a Date object...
                 // TODO: FIX FRAGILE: loss of timezone info
@@ -155,7 +155,7 @@ return {
                 zmm = Number(value.substr(24,2));
                 value = new Date(Date.UTC(yyyy,mm,dd,hh,min,sec,msec));
                 return value;
-            } else if ( jsonType.elementType == 'time' ) {
+            } else if ( jsonType.elementType === 'time' ) {
                 // convert an iso8601 time HH:MM:SS.ssszzzzz to a Date object...
                 // TODO: FIX FRAGILE: loss of timezone info
                 var idx = value.indexOf(':');
@@ -170,17 +170,17 @@ return {
                 value = JSON.parse(value);
                 return value;
             }
-        } else if ( jsonType.type == 'boolean' ) {
-            return (value == null) ? null : (Number(value) != 0); // '0' is false. 
-        } else if ( jsonType.type == 'integer' ) {
+        } else if ( jsonType.type === 'boolean' ) {
+            return (value === undefined || value === null) ? null : (Number(value) !== 0); // '0' is false. 
+        } else if ( jsonType.type === 'integer' ) {
             value = Number(value);
             if ( Math.round(value) != value ) {
                 throw new Error("non-integer value for integer type");
             }
             return value;
-        } else if ( jsonType.type == 'number' ) {
+        } else if ( jsonType.type === 'number' ) {
             return Number(value);
-        } else if ( jsonType.type == 'string' ) {
+        } else if ( jsonType.type === 'string' ) {
             return '' + value;
         } else {
             throw new Error("unrecognized JSON schema type");
@@ -191,7 +191,7 @@ return {
         var d, i, s;
         var sign = (value >= 0);
         value = Math.abs(value);
-        while ( value != 0 ) {
+        while ( value !== 0 ) {
             d = (value % 10);
             digits.push(d);
             value = Math.floor(value/10);
@@ -216,19 +216,19 @@ return {
         // date conversion elements...
         var yyyy, mm, dd, hh, min, sec, msec, zsign, zhh, zmm;
 
-        if ( value == null ) {
+        if ( value === undefined || value === null ) {
             if ( jsontype.isNotNullable ) {
                 throw new Error("unexpected null value for non-nullable field");
             }
             return null;
         }
         
-        if ( jsonType.type == 'array' ) {
+        if ( jsonType.type === 'array' ) {
             // ensure that it is an array of the appropriate type...
             if ( value instanceof Array ) {
                 refined = [];
                 itemType = jsonType.items;
-                if ( itemType == null ) {
+                if (itemType === undefined || itemType === null ) {
                     value = JSON.stringify(value);
                 } else {
                     for ( item = 0 ; item < value.length ; ++item ) {
@@ -241,9 +241,9 @@ return {
                 throw new Error("unexpected non-array value");
             }
             return value;
-        } else if ( jsonType.type == 'object' ) {
-            if ( jsonType.elementType == 'dateTime' ||
-                 jsonType.elementType == 'date' ) {
+        } else if ( jsonType.type === 'object' ) {
+            if ( jsonType.elementType === 'dateTime' ||
+                 jsonType.elementType === 'date' ) {
 
                 yyyy = value.getUTCFullYear();
                 mm = value.getUTCMonth() + 1; // months are 0-11
@@ -263,7 +263,7 @@ return {
                         that._padWithLeadingZeros(sec,2) + '.' +
                         that._padWithLeadingZeros(msec,3) + 'Z';
                 return value;
-            } else if ( jsonType.elementType == 'time' ) {
+            } else if ( jsonType.elementType === 'time' ) {
                 // strip off the time-of-day and drop the rest...
                 hh = value.getHours();
                 min = value.getMinutes();
@@ -305,14 +305,14 @@ return {
                 value = JSON.stringify(refined);
                 return value;
             }
-        } else if ( jsonType.type == 'boolean' ) {
+        } else if ( jsonType.type === 'boolean' ) {
             return (value ? '1' : '0'); // make it a boolean
-        } else if ( jsonType.type == 'integer' ) {
+        } else if ( jsonType.type === 'integer' ) {
             value = '' + Math.round(value);
             return value;
-        } else if ( jsonType.type == 'number' ) {
+        } else if ( jsonType.type === 'number' ) {
             return '' + value;
-        } else if ( jsonType.type == 'string' ) {
+        } else if ( jsonType.type === 'string' ) {
             return '' + value;
         } else {
             throw new Error("unrecognized JSON schema type");
@@ -325,16 +325,16 @@ return {
         var term;
         for (var j = 0 ; j < path.length-1 ; ++j) {
             term = path[j];
-            if ( term == null || term == "" ) {
+            if ( term === undefined || term === null || term === "" ) {
                 throw new Error("unexpected empty string in dot-separated variable name");
             }
-            if ( e[term] == null ) {
+            if ( e[term] === undefined || e[term] === null ) {
                 e[term] = {};
             }
             e = e[term];
         }
         term = path[path.length-1];
-        if ( term == null || term == "" ) {
+        if ( term === undefined || term === null || term === "" ) {
             throw new Error("unexpected empty string in dot-separated variable name");
         }
         e[term] = value;
@@ -465,8 +465,8 @@ return {
 // Records in the data table are always inserted.
 // Metadata columns are indicated by a leading underscore in the name.
 // 
-// The _savepoint_type (metadata) column == "COMPLETE" if they are 'official' values.
-// Otherwise, _savepoint_type == "INCOMPLETE" indicates a manual user savepoint and
+// The _savepoint_type (metadata) column === "COMPLETE" if they are 'official' values.
+// Otherwise, _savepoint_type === "INCOMPLETE" indicates a manual user savepoint and
 // _savepoint_type IS NULL indicates an automatic (checkpoint) savepoint. 
 // The _savepoint_timestamp indicates the time at which the savepoint occured.
  
@@ -526,13 +526,13 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
         return {
                 stmt :  'select * from (select * from "' + dbTableName +
                         '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)) where ' + selection +
-                        ((orderBy == null) ? '' : ' order by ' + orderBy),
+                        ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
                 bind : selectionArgs
             };
     } else {
         return {
                 stmt : 'select * from "' + dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
-                        ((orderBy == null) ? '' : ' order by ' + orderBy),
+                        ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
                 bind : []    
             };
     }
@@ -556,12 +556,12 @@ _getElementPathPairFromKvMap: function(kvMap, elementPath) {
             // within the composite value
             for ( i = j+1 ; i <= path.length-1 ; ++i ) {
                 value = value[path[i]];
-                if ( value == null ) break;
+                if ( value === undefined || value === null ) break;
             }
             var e = {};
             var f;
             for ( f in term ) {
-                if ( f != "value" ) {
+                if ( f !== "value" ) {
                     e[f] = term[f];
                 }
             }
@@ -611,7 +611,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
             stmt += comma;
             comma = ', ';
             var elementPath = defElement['elementPath'];
-            if ( elementPath == null ) elementPath = f;
+            if ( elementPath === undefined || elementPath === null ) elementPath = f;
             // TODO: get kvElement for this elementPath
             elementPathPair = this._getElementPathPairFromKvMap(kvMap, elementPath);
             if ( elementPathPair != null ) {
@@ -619,7 +619,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
                 updates[f] = {"elementPath" : elementPath, "value": null};
                 // track that we matched the keyname...
                 processSet[elementPathPair.elementPath] = true;
-                if (kvElement.value == null) {
+                if (kvElement.value === undefined || kvElement.value === null) {
                     stmt += "null";
                 } else {
                     stmt += "?";
@@ -628,17 +628,17 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
                     bindings.push(v);
                     updates[f].value = v; 
                 }
-            } else if (f == "_savepoint_timestamp") {
+            } else if (f === "_savepoint_timestamp") {
                 stmt += "?";
                 v = now;
                 bindings.push(v);
                 updates[f] = {"elementPath" : elementPath, "value": v};
-            } else if ( f == "_form_id" ) {
+            } else if ( f === "_form_id" ) {
                 stmt += "?";
                 v = opendatakit.getSettingValue('form_id');
                 bindings.push(v);
                 updates[f] = {"elementPath" : elementPath, "value": v};
-            } else if ( f == "_savepoint_type" ) {
+            } else if ( f === "_savepoint_type" ) {
                 stmt += "null";
             } else {
                 stmt += '"' + f + '"';
@@ -731,21 +731,21 @@ _insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, kvMap) 
             if ( kvElement != null ) {
                 // track that we matched the keyname...
                 processSet[f] = true;
-                if (kvElement.value == null) {
+                if (kvElement.value === undefined || kvElement.value === null) {
                     stmt += "null";
                 } else {
                     stmt += "?";
                     bindings.push(kvElement.value);
                 }
-            } else if ( f == "_savepoint_timestamp" ) {
+            } else if ( f === "_savepoint_timestamp" ) {
                 stmt += "?";
                 bindings.push(now);
-            } else if ( f == "_form_id" ) {
+            } else if ( f === "_form_id" ) {
                 stmt += "?";
                 bindings.push(opendatakit.getSettingValue('form_id'));
             } else {
                 // use default values from reference map...
-                if ( defElement['default'] == null ) {
+                if ( defElement['default'] === undefined || defElement['default'] === null ) {
                     stmt += "null";
                 } else {
                     stmt += "?";
@@ -813,7 +813,7 @@ _deleteDataTableStmt:function(dbTableName, instanceid) {
  * Requires: no globals
  */
 _getAllInstancesDataTableStmt:function(dbTableName, displayElementName) {
-    if ( displayElementName == null ) {
+    if ( displayElementName === undefined || displayElementName === null ) {
         displayElementName = '';
     } else {
         displayElementName = displayElementName + ', ';
@@ -860,7 +860,7 @@ _selectAllTableMetaDataStmt:function(table_id) {
 // save the given value under that name
 insertTableMetaDataStmt:function(table_id, name, type, value) {
     var now = new Date().getTime();
-    if (value == null) {
+    if (value === undefined || value === null) {
         return {
             stmt : 'insert into _key_value_store_active (_table_id, _partition, _aspect, _key, _type, _value) values (?,?,?,?,?,"");',
             bind : [table_id, "Table", "default", name, type]
@@ -901,7 +901,7 @@ _selectAllColumnMetaDataStmt:function(table_id) {
 // save the given value under that name
 insertColumnMetaDataStmt:function(table_id, elementKey, name, type, value) {
     var now = new Date().getTime();
-    if (value == null) {
+    if (value === undefined || value === null) {
         return {
             stmt : 'insert into _key_value_store_active (_table_id, _partition, _aspect, _key, _type, _value) values (?,?,?,?,?,"");',
             bind : [table_id, "Column", elementKey, name, type]
@@ -935,14 +935,14 @@ putInstanceMetaData:function(ctxt, name, value) {
       ctxt.append('putInstanceMetaData', 'name: ' + name);
       for ( f in that.dataTablePredefinedColumns ) {
         var defn = that.dataTablePredefinedColumns[f];
-        if (  defn.elementSet == 'instanceMetadata' &&
-              ( defn.elementPath == name ||
-                (defn.elementPath == null && f == name) ) ) {
+        if (  defn.elementSet === 'instanceMetadata' &&
+              ( defn.elementPath === name ||
+                (defn.elementPath ===undefined || defn.elementPath === null && f === name) ) ) {
             dbColumnName = f;
             break;
         }
       }
-      if ( dbColumnName == null ) {
+      if ( dbColumnName === undefined || dbColumnName === null ) {
         ctxt.append('putInstanceMetaData.elementPath.missing', 'name: ' + name);
         ctxt.failure({message:"Unrecognized instance metadata"});
         return;
@@ -982,7 +982,7 @@ putDataKeyValueMap:function(ctxt, kvMap) {
                         var de = mdl.dataTableModel[f];
                         if (de.isPersisted) {
                             var elementPath = de.elementPath || uf.elementPath;
-                            if ( de.elementSet == 'instanceMetadata' ) {
+                            if ( de.elementSet === 'instanceMetadata' ) {
                                 that._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
                             } else {
                                 that._reconstructElementPath(elementPath, de, uf.value, mdl.data );
@@ -1009,7 +1009,7 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
                 ctxt.append("getAllData.success");
                 ctxt.success(tlo);
             }});
-      if ( instanceId == null ) {
+      if ( instanceId === undefined || instanceId === null ) {
         ctxt.append("getAllData.instanceId.null");
         tmpctxt.success();
         return;
@@ -1019,9 +1019,9 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
         tmpctxt.sqlStatement = ss;
         transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
             var len = result.rows.length;
-            if (len == 0 ) {
+            if (len === 0 ) {
                 throw new Error("no record for getAllData!");
-            } else if (len != 1 ) {
+            } else if (len !== 1 ) {
                 throw new Error("not exactly one record in getAllData!");
             } else {
                 var row = result.rows.item(0);
@@ -1036,7 +1036,7 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
                         elementPath = jsonType.elementPath;
                         if ( elementPath != null ) {
                             // we expose it to the Javascript layer if it has an elementPath...
-                            if ( jsonType.elementSet == 'instanceMetadata' ) {
+                            if ( jsonType.elementSet === 'instanceMetadata' ) {
                                 that._reconstructElementPath(elementPath, jsonType, dbValue, tlo.metadata );
                             } else {
                                 that._reconstructElementPath(elementPath, jsonType, dbValue, tlo.data );
@@ -1087,7 +1087,7 @@ _coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
         var f;
         var row;
         var defn;
-        if ( len != 1 ) {
+        if ( len !== 1 ) {
             throw new Error("Internal error: unknown table_id");
         }
         row = result.rows.item(0);
@@ -1214,7 +1214,7 @@ get_all_instances:function(ctxt) {
                     var instance = result.rows.item(i);
                     var ts = new Date(instance._savepoint_timestamp);
                     instanceList.push({
-                        display_field: (displayElementName == null) ? ts.toISOString(): instance[displayElementName],
+                        display_field: (displayElementName === undefined || displayElementName === null) ? ts.toISOString(): instance[displayElementName],
                         instance_id: instance._id,
                         savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,
@@ -1247,7 +1247,7 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
                     var instance = result.rows.item(i);
                     var ts = new Date(instance._savepoint_timestamp);
                     instanceList.push({
-                        display_field: (displayElementName == null) ? ts.toISOString(): instance[displayElementName],
+                        display_field: (displayElementName === undefined || displayElementName === null) ? ts.toISOString(): instance[displayElementName],
                         instance_id: instance._id,
                         savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,
@@ -1279,10 +1279,10 @@ processPassedInKeyValueMap: function(kvMap, instanceMetadataKeyValueMap) {
             if ( 'elementPath' in eDefn ) {
                 eName = eDefn.elementPath;
             }
-            if ( f == eName ) {
+            if ( f === eName ) {
                 found = true;
                 metaField = g;
-                isMetadata = (eDefn.elementSet == 'instanceMetadata');
+                isMetadata = (eDefn.elementSet === 'instanceMetadata');
                 break;
             }
         }
@@ -1297,14 +1297,14 @@ processPassedInKeyValueMap: function(kvMap, instanceMetadataKeyValueMap) {
         }
     }
     
-    if ( propertyCount != 0 ) {
+    if ( propertyCount !== 0 ) {
         shim.log('I',"Extra arguments found in instanceMetadataKeyValueMap" + propList);
     }
 },
 initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
     var that = this;
     instanceMetadataKeyValueMap = instanceMetadataKeyValueMap || {};
-    if ( instanceId == null ) {
+    if ( instanceId === undefined || instanceId === null ) {
         ctxt.append('initializeInstance.noInstance');
         mdl.metadata = {};
         mdl.data = {};
@@ -1320,11 +1320,11 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
             tmpctxt.sqlStatement = cs;
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
                 var count = 0;
-                if ( result.rows.length == 1 ) {
+                if ( result.rows.length === 1 ) {
                     var row = result.rows.item(0);
                     count = row['rowcount'];
                 }
-                if ( count == null || count == 0) {
+                if ( count === undefined || count === null || count === 0) {
                     ctxt.append('initializeInstance.insertEmptyInstance');
                     // construct a friendly name for this new form...
                     var date = new Date();
@@ -1402,10 +1402,10 @@ readTableDefinition:function(ctxt, formDef, table_id, formPath) {
                 ctxt.sqlStatement = ss;
                 transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                     var len = result.rows.length;
-                    if (len == 0 ) {
+                    if (len === 0 ) {
                         // TODO: use something other than form_id for the dbTableName...
                         that._insertTableAndColumnProperties(transaction, tmpctxt, tlo, true);
-                    } else if(len != 1) {
+                    } else if(len !== 1) {
                         throw new Error("getMetaData: multiple rows! " + name + " count: " + len);
                     } else {
                         // we have the table and column definitions in the database -- 
@@ -1425,9 +1425,9 @@ _clearPersistedFlag: function( dbKeyMap, listChildElementKeys) {
             var f = listChildElementKeys[i];
             var jsonType = dbKeyMap[f];
             jsonType.isPersisted = false;
-            if ( jsonType.type == 'array' ) {
+            if ( jsonType.type === 'array' ) {
                 this._clearPersistedFlag(dbKeyMap, jsonType.listChildElementKeys);
-            } else if ( jsonType.type == 'object' ) {
+            } else if ( jsonType.type === 'object' ) {
                 this._clearPersistedFlag(dbKeyMap, jsonType.listChildElementKeys);
             }
         }
@@ -1444,14 +1444,14 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
     jsonType.elementSet = 'data';
     
     // update element path prefix for recursive elements
-    elementPathPrefix = (elementPathPrefix == null ) ? elementName : (elementPathPrefix + '.' + elementName);
+    elementPathPrefix = ( elementPathPrefix === undefined || elementPathPrefix === null ) ? elementName : (elementPathPrefix + '.' + elementName);
     // and our own element path is exactly just this prefix
     jsonType.elementPath = elementPathPrefix;
 
     // use the user's elementKey if specified
     elementKey = jsonType.elementKey;
 
-    if ( elementKey == null ) {
+    if ( elementKey === undefined || elementKey === null ) {
         throw new Error("elementKey is not defined for '" + jsonType.elementPath + "'.");
     }
 
@@ -1461,20 +1461,20 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
     if ( elementKey.length > 62 ) {
         throw new Error("supplied elementKey is longer than 62 characters");
     }
-    if ( dbKeyMap[elementKey] != null && dbKeyMap[elementKey] != jsonType ) {
+    if ( dbKeyMap[elementKey] !== undefined && dbKeyMap[elementKey] !== null && dbKeyMap[elementKey] != jsonType ) {
         throw new Error("supplied elementKey is already used (autogenerated?) for another model element");
     }
-    if ( elementKey.charAt(0) == '_' ) {
+    if ( elementKey.charAt(0) === '_' ) {
         throw new Error("supplied elementKey starts with underscore");
     }
 
     // assume the primitive types are persisted.
     // this will be updated if there is an outer array or object
     // that persists itself (below).
-    if ( jsonType.type == 'string' || 
-            jsonType.type == 'number' || 
-            jsonType.type == 'integer' ||
-            jsonType.type == 'boolean' ) {
+    if ( jsonType.type === 'string' || 
+            jsonType.type === 'number' || 
+            jsonType.type === 'integer' ||
+            jsonType.type === 'boolean' ) {
         // these should be persisted...
         jsonType.isPersisted = true;
     }
@@ -1483,12 +1483,12 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
     dbKeyMap[elementKey] = jsonType;
 
     // handle the recursive structures...
-    if ( jsonType.type == 'array' ) {
+    if ( jsonType.type === 'array' ) {
         // explode with subordinate elements
         f = this._flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
         jsonType.listChildElementKeys = [ f.elementKey ];
         jsonType.isPersisted = true;
-    } else if ( jsonType.type == 'object' ) {
+    } else if ( jsonType.type === 'object' ) {
         // object...
         var hasProperties = false;
         var e;
@@ -1562,16 +1562,16 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         // TODO: case: geopoint -- expand to different persistence columns
         jsonDefn = dataTableModel[dbColumnName];
         
-        if ( jsonDefn.elementSet == 'data' ) {
+        if ( jsonDefn.elementSet === 'data' ) {
             var surveyElementName = jsonDefn.elementName;
-            var surveyDisplayName = (jsonDefn.displayName == null) ? surveyElementName : jsonDefn.displayName;
+            var surveyDisplayName = (jsonDefn.displayName === undefined || jsonDefn.displayName === null) ? surveyElementName : jsonDefn.displayName;
             
             fullDef._column_definitions.push( {
                 _table_id: tlo.table_id,
                 _element_key: dbColumnName,
                 _element_name: jsonDefn.elementName,
-                _element_type: (jsonDefn.elementType == null ? jsonDefn.type : jsonDefn.elementType),
-                _list_child_element_keys : ((jsonDefn.listChildElementKeys == null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
+                _element_type: (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType),
+                _list_child_element_keys : ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
                 _is_persisted : (jsonDefn.isPersisted ? 1 : 0)
             } );
             
@@ -1602,7 +1602,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 _aspect: dbColumnName,
                 _key: "displayChoicesList",
                 _type: "string",
-                _value: ((jsonDefn.choicesList == null) ? "" : JSON.stringify(tlo.formDef.specification.choices[jsonDefn.choicesList]))
+                _value: ((jsonDefn.choicesList === undefined || jsonDefn.choicesList === null) ? "" : JSON.stringify(tlo.formDef.specification.choices[jsonDefn.choicesList]))
             } );
             fullDef._key_value_store_active.push( {
                 _table_id: tlo.table_id,
@@ -1610,7 +1610,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
                 _aspect: dbColumnName,
                 _key: "displayFormat",
                 _type: "string",
-                _value: (jsonDefn.displayFormat == null) ? "" : jsonDefn.displayFormat
+                _value: (jsonDefn.displayFormat === undefined || jsonDefn.displayFormat === null) ? "" : jsonDefn.displayFormat
             } );
             fullDef._key_value_store_active.push( {
                 _table_id: tlo.table_id,
@@ -1714,7 +1714,7 @@ fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, tlo) {
         tableToUpdate = null;
         var found = false;
         for ( var prop in fullDef ) {
-            if ( prop == old ) {
+            if ( prop === old ) {
                 found = true; // get the table after this...
             } else if ( found ) {
                 tableToUpdate = prop;
@@ -1722,7 +1722,7 @@ fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, tlo) {
             }
         }
         
-        if ( tableToUpdate == null ) {
+        if ( tableToUpdate === undefined || tableToUpdate === null ) {
             // end of the array -- we are done!
             that._coreGetAllTableMetadata(transaction, ctxt, tlo);
             return;
@@ -1753,7 +1753,7 @@ getDataValue:function(name) {
     var v = mdl.data;
     for ( var i = 0 ; i < path.length ; ++i ) {
         v = v[path[i]];
-        if ( v == null ) {
+        if ( v === undefined || v === null ) {
             return null;
         }
     }
@@ -1764,7 +1764,7 @@ getInstanceMetaDataValue:function(name) {
     var v = mdl.metadata;
     for ( var i = 0 ; i < path.length ; ++i ) {
         v = v[path[i]];
-        if ( v == null ) {
+        if ( v === undefined || v === null ) {
             return v;
         }
     }
@@ -1784,7 +1784,7 @@ getTableMetaDataValue:function(name) {
     var v = mdl.tableMetadata;
     for ( var i = 0 ; i < path.length ; ++i ) {
         v = v[path[i]];
-        if ( v == null ) {
+        if ( v === undefined || v === null ) {
             return v;
         }
     }
@@ -1849,7 +1849,7 @@ setValueDeferredChange: function( name, value ) {
         var de = mdl.dataTableModel[f];
         if (de.isPersisted) {
             var elementPath = de.elementPath || uf.elementPath;
-            if ( de.elementSet == 'instanceMetadata' ) {
+            if ( de.elementSet === 'instanceMetadata' ) {
                 this._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
             } else {
                 this._reconstructElementPath(elementPath, de, uf.value, mdl.data );

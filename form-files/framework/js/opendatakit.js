@@ -27,7 +27,7 @@ return {
      */
     getPlatformInfo:function() {
         // fetch these settings from ODK Survey (the container app)
-        if ( this.platformInfo == null ) {
+        if ( this.platformInfo === undefined || this.platformInfo === null ) {
             var jsonString = shim.getPlatformInfo();
             this.platformInfo = JSON.parse(jsonString);
         }
@@ -39,7 +39,7 @@ return {
      */
     getDatabaseSettings:function() {
         // fetch these settings from ODK Survey (the container app)
-        if ( this.databaseSettings == null ) {
+        if ( this.databaseSettings === undefined || this.databaseSettings === null ) {
             var jsonString = shim.getDatabaseSettings();
             shim.log("I",'opendatakit.getDatabaseSettings: ' + jsonString);
             this.databaseSettings = JSON.parse(jsonString);
@@ -51,7 +51,7 @@ return {
         // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
         var id = "uuid:" + 
         'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            var r = Math.random()*16|0, v = (c === 'x') ? r : (r&0x3|0x8);
             return v.toString(16);
         });
         return id;
@@ -59,14 +59,14 @@ return {
     
     getHashString:function(formPath, instanceId, screenPath) {
         var refId = this.getRefId();
-        if ( formPath == null ) {
+        if ( formPath === undefined || formPath === null ) {
             formPath = shim.getBaseUrl() + "/";
         }
         var qpl =
             '#formPath=' + escape(formPath) +
-            ((instanceId == null) ? '' : ('&instanceId=' + escape(instanceId))) +
-            '&screenPath=' + escape((screenPath == null) ? this.initialScreenPath : screenPath) +
-            ((refId == null) ? '' : ('&refId=' + escape(refId)));
+            ((instanceId === undefined || instanceId === null) ? '' : ('&instanceId=' + escape(instanceId))) +
+            '&screenPath=' + escape((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
+            ((refId === undefined || refId === null) ? '' : ('&refId=' + escape(refId)));
         return qpl;
     },
 
@@ -106,12 +106,12 @@ return {
         // wipe the ref_id --
         // this prevents saves into the shim from succeeding...
         mdl.ref_id = this.genUUID();
-        if ( type == "table" ) {
+        if ( type === "table" ) {
             mdl.table_id = null;
             mdl.formPath = null;
-        } else if ( type == "form" ) {
+        } else if ( type === "form" ) {
             mdl.formPath = null;
-        } else if ( type == "instance" ) {
+        } else if ( type === "instance" ) {
         } // screen -- just wipe the ref_id
     },
     
@@ -141,10 +141,10 @@ return {
     
     getSectionTitle:function(formDef, sectionName) {
         var ref = this.getSettingObject(formDef, sectionName);
-        if ( ref == null ) {
+        if ( ref === undefined || ref === null ) {
             ref = this.getSettingObject(formDef, 'survey'); // fallback
         }
-        if ( ref == null || !("display" in ref) ) {
+        if ( ref === undefined || ref === null || !("display" in ref) ) {
             return "<no title>";
         } else {
             var display = ref.display;
@@ -185,7 +185,7 @@ return {
      * Immediate.
       */
     getSettingObject:function(formDef, key) {
-        if (formDef == null) return null;
+        if (formDef === undefined || formDef === null) return null;
         return formDef.specification.settings[key];
     },
     
@@ -194,7 +194,7 @@ return {
      */
     getSettingValue:function(key) {
         var obj = this.getSettingObject(this.getCurrentFormDef(), key);
-        if ( obj == null ) return null;
+        if ( obj === undefined || obj === null ) return null;
         return obj.value;
     },
     /**
@@ -205,7 +205,7 @@ return {
            { name: "fr", display: { text: {"en_us": "French", "fr": "Francais"}}} ]
     */
     getFormLocales:function(formDef) {
-        if ( formDef != null ) {
+        if ( formDef !== undefined && formDef !== null ) {
             var locales = this.getSettingObject(formDef, '_locales' );
             if ( locales != null && locales.value != null ) {
                 return locales.value;
@@ -255,7 +255,7 @@ return {
         var that = this;
         require(['text!' + filename], 
             function(formDefTxt) {
-                if ( formDefTxt == null || formDefTxt.length == 0 ) {
+                if ( formDefTxt === undefined || formDefTxt === null || formDefTxt.length === 0 ) {
                     alert('Unable to find file: ' + filename);
                     ctxt.failure({message: "Form definition is empty."});
                 } else {

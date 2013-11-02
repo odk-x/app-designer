@@ -362,6 +362,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
+      "auxillaryHash": "formula",
+      "selectionArgs": "formula",
       "uri": "formula",
       "callback": "formula",
       "choice_filter": "formula(context)",

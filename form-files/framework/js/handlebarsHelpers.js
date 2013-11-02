@@ -12,7 +12,7 @@ verifyLoad('handlebarsHelpers',
 
 Handlebars.registerHelper('localize', function(textOrLangMap) {
     var locale = database.getInstanceMetaDataValue('_locale');
-    if ( locale == null ) {
+    if ( locale === undefined || locale === null ) {
         locale = opendatakit.getDefaultFormLocaleValue();
     }
     var str = formulaFunctions.localize(textOrLangMap,locale);
@@ -21,33 +21,33 @@ Handlebars.registerHelper('localize', function(textOrLangMap) {
 
 Handlebars.registerHelper('metadata', function(fieldName) {
     var val = database.getInstanceMetaDataValue( fieldName );
-    return new Handlebars.SafeString( (val != null) ? val : "" );
+    return new Handlebars.SafeString( (val !== undefined && val !== null) ? val : "" );
 });
 
 Handlebars.registerHelper('evaluate', function(calcFunction) {
     var val = (calcFunction)();
-    return new Handlebars.SafeString( (val != null) ? val : "" );
+    return new Handlebars.SafeString( (val !== undefined && val !== null) ? val : "" );
 });
 
 Handlebars.registerHelper('setting', function(settingName) {
     var val = opendatakit.getSettingValue( settingName );
-    return new Handlebars.SafeString( (val != null) ? val : "" );
+    return new Handlebars.SafeString( (val !== undefined && val !== null) ? val : "" );
 });
 
 Handlebars.registerHelper('toFixed', function(value, options) {
-    return new Handlebars.SafeString( (value != null) ? (+value).toFixed(options) : "" );
+    return new Handlebars.SafeString( (value !== undefined && value !== null) ? (+value).toFixed(options) : "" );
 });
     
 Handlebars.registerHelper('toExponential', function(value, options) {
-    return new Handlebars.SafeString( (value != null) ? (+value).toExponential(options) : "" );
+    return new Handlebars.SafeString( (value !== undefined && value !== null) ? (+value).toExponential(options) : "" );
 });
     
 Handlebars.registerHelper('toPrecision', function(value, options) {
-    return new Handlebars.SafeString( (value != null) ? (+value).toPrecision(options) : "" );
+    return new Handlebars.SafeString( (value !== undefined && value !== null) ? (+value).toPrecision(options) : "" );
 });
     
 Handlebars.registerHelper('toString', function(value, options) {
-    return new Handlebars.SafeString( (value != null) ? (+value).toString(options) : "" );
+    return new Handlebars.SafeString( (value !== undefined && value !== null) ? (+value).toString(options) : "" );
 });
     
 Handlebars.registerHelper('stringify', function(value, options) {

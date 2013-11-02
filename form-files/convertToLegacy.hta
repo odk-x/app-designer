@@ -93,7 +93,7 @@ function wlog(logString) {
 }
 
 function generate() {
-	if ( formDirName.value == "" ) {
+	if ( formDirName.value === "" ) {
 		alert("ERROR: Please enter a Forms directory name");
 		formDirName.focus();
 		return;
@@ -123,7 +123,7 @@ function fetchMoreOutput() {
 	if ( window.logfile != null ) {
 		while ( !window.logfile.AtEndOfStream ) {
 			var line = window.logfile.ReadLine();
-			if ( line.indexOf('rror:') != -1 ) {
+			if ( line.indexOf('rror:') !== -1 ) {
 				logContainsError = logContainsError + 1;
 				line = "<font color='red'>" + line + "</font>";
 			}
@@ -149,7 +149,7 @@ function continueWaitingForCompletion() {
 	} else {
 		preElement.scrollTop = preElement.offsetHeight;
 	}
-	if ( window.terminalOutcome == 0 ) {
+	if ( window.terminalOutcome === 0 ) {
 		setTimeout(continueWaitingForCompletion,10);
 	} else {
 		if ( logContainsError > 0 ) {
@@ -165,7 +165,7 @@ function continueWaitingForCompletion() {
 		} else {
 			preElement.scrollTop = preElement.offsetHeight;
 		}
-		if ( window.terminalOutcome == 1 && logContainsError > 0 ) {
+		if ( window.terminalOutcome === 1 && logContainsError > 0 ) {
 			document.getElementById('leftButton').innerHTML = '';
 		} else {
 			document.getElementById('leftButton').disabled = false;
@@ -186,32 +186,32 @@ function buildFormStructures( instanceBodyPrefix, bindPrefix, bodyPrefix, model 
 		wlog("element: " + element);
 		defn = model[element];
 		
-		if ( defn.type == "string" ) {
+		if ( defn.type === "string" ) {
 			instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 			bindBody += bindPrefix + element + '" type="string"/>\n';
-		} else if ( defn.type == "integer" ) {
+		} else if ( defn.type === "integer" ) {
 			instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 			bindBody += bindPrefix + element + '" type="int"/>\n';
-		} else if ( defn.type == "number" ) {
+		} else if ( defn.type === "number" ) {
 			instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 			bindBody += bindPrefix + element + '" type="decimal"/>\n';
-		} else if ( defn.type == "array" ) {
+		} else if ( defn.type === "array" ) {
 			instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 			bindBody += bindPrefix + element + '" type="select"/>\n';
-		} else if ( defn.type == "object" ) {
-			if ( defn.elementType == "date" ) {
+		} else if ( defn.type === "object" ) {
+			if ( defn.elementType === "date" ) {
 				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 				bindBody += bindPrefix + element + '" type="date"/>\n';
-			} else if ( defn.elementType == "datetime" ) {
+			} else if ( defn.elementType === "datetime" ) {
 				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 				bindBody += bindPrefix + element + '" type="datetime"/>\n';
-			} else if ( defn.elementType == "time" ) {
+			} else if ( defn.elementType === "time" ) {
 				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 				bindBody += bindPrefix + element + '" type="time"/>\n';
-			} else if ( defn.elementType == "geopoint" ) {
+			} else if ( defn.elementType === "geopoint" ) {
 				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 				bindBody += bindPrefix + element + '" type="geopoint"/>\n';
-			} else if ( defn.elementType == "mimeUri" ) {
+			} else if ( defn.elementType === "mimeUri" ) {
 				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 				contentType = defn.properties.contentType['default'];
 				bindBody += bindPrefix + element + '" type="binary"/>\n';
@@ -296,7 +296,7 @@ function execFormChange( idxSubfolder ) {
 						wlog("processing json file -- survey title: " + formDefFile);
 						var formTitle = settings.survey.display.title;
 						var formName = null;
-						if ( typeof formTitle == "string" ) {
+						if ( typeof formTitle === "string" ) {
 							formName = formTitle;
 						} else {
 							formName = formTitle[defaultLocale];

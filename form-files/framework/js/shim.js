@@ -27,14 +27,14 @@ window.shim = window.shim || {
      * msg -- message to log
      */
     log: function(severity, msg) {
-		if ( severity == 'E' || severity == 'W' ) {
+		if ( severity === 'E' || severity === 'W' ) {
 			console.error(severity + '/' + msg);
 		} else {
             console.log(severity + '/' + msg);
         }
     },
     clearInstanceId: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: clearInstanceId(" + refId + ")");
             return;
         }
@@ -42,7 +42,7 @@ window.shim = window.shim || {
         this.instanceId = null;
     },
     setInstanceId: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: setInstanceId(" + refId + ", " + instanceId + ")");
             return;
         }
@@ -53,7 +53,7 @@ window.shim = window.shim || {
         this.instanceId = instanceId;
     },
     getInstanceId: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: getInstanceId(" + refId + ")");
             return null;
         }
@@ -65,7 +65,7 @@ window.shim = window.shim || {
     },
     _dumpScreenStateHistory : function() {
         this.log("D","shim -------------*start* dumpScreenStateHistory--------------------");
-        if ( this.sectionStateScreenHistory.length == 0 ) {
+        if ( this.sectionStateScreenHistory.length === 0 ) {
             this.log("D","shim sectionScreenStateHistory EMPTY");
         } else {
             var i;
@@ -73,7 +73,7 @@ window.shim = window.shim || {
                 var thisSection = this.sectionStateScreenHistory[i];
                 this.log("D","shim [" + i + "] screenPath: " + thisSection.screen );
                 this.log("D","shim [" + i + "] state:      " + thisSection.state );
-                if ( thisSection.history.length == 0 ) {
+                if ( thisSection.history.length === 0 ) {
                     this.log("D","shim [" + i + "] history[] EMPTY" );
                 } else {
                     var j;
@@ -88,43 +88,43 @@ window.shim = window.shim || {
         this.log("D","shim ------------- *end*  dumpScreenStateHistory--------------------");
     },
     pushSectionScreenState: function( refId) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: pushSectionScreenState(" + refId + ")");
             return;
         }
 
         this.log("D","shim: DO: pushSectionScreenState(" + refId + ")");
 
-        if ( this.sectionStateScreenHistory.length == 0 ) {
+        if ( this.sectionStateScreenHistory.length === 0 ) {
             return;
         }
         
         var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-		if ( lastSection.state == 'a' ) {
+		if ( lastSection.state === 'a' ) {
 			this.log("I","shim: SKIPPED('" + lastSection.screen + "','a'): pushSectionScreenState(" + refId + ")");
 			return;
 		}
         lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
     },
     setSectionScreenState: function( refId, screenPath, state) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
             return;
         }
 
         this.log("D","shim: DO: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
-        if ( screenPath == null ) {
+        if ( screenPath === undefined || screenPath === null ) {
             alert("setSectionScreenState received a null screen path!");
             this.log("E","setSectionScreenState received a null screen path!");
             return;
         } else {
             var splits = screenPath.split('/');
             var sectionName = splits[0] + "/";
-            if (this.sectionStateScreenHistory.length == 0) {
+            if (this.sectionStateScreenHistory.length === 0) {
                 this.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
             } else {
                 var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-                if ( lastSection.screen.substring(0,sectionName.length) == sectionName ) {
+                if ( lastSection.screen.substring(0,sectionName.length) === sectionName ) {
                     lastSection.screen = screenPath;
                     lastSection.state = state;
                 } else {
@@ -134,7 +134,7 @@ window.shim = window.shim || {
         }
     },
     clearSectionScreenState: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: clearSectionScreenState(" + refId + ")");
             return;
         }
@@ -149,7 +149,7 @@ window.shim = window.shim || {
         }
         this.log("D","shim: DO: getControllerState(" + refId + ")");
         
-        if ( this.sectionStateScreenHistory.length == 0 ) {
+        if ( this.sectionStateScreenHistory.length === 0 ) {
             this.log("D","shim: getControllerState: NULL!");
             return null;
         }
@@ -157,14 +157,14 @@ window.shim = window.shim || {
         return lastSection.state;
     },
     getScreenPath: function(refId) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: getScreenPath(" + refId + ")");
             return null;
         }
         this.log("D","shim: DO: getScreenPath(" + refId + ")");
 		this._dumpScreenStateHistory();
         
-        if ( this.sectionStateScreenHistory.length == 0 ) {
+        if ( this.sectionStateScreenHistory.length === 0 ) {
             this.log("D","shim: getScreenPath: NULL!");
             return null;
         }
@@ -172,7 +172,7 @@ window.shim = window.shim || {
         return lastSection.screen;
     },
     hasScreenHistory: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: hasScreenHistory(" + refId + ")");
             return false;
         }
@@ -187,7 +187,7 @@ window.shim = window.shim || {
         return false;
     },
     popScreenHistory: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: popScreenHistory(" + refId + ")");
             return null;
         }
@@ -208,7 +208,7 @@ window.shim = window.shim || {
      * Section stack -- maintains the stack of sections from which you can exit.
      */
     hasSectionStack: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: hasSectionStack(" + refId + ")");
             return false;
         }
@@ -216,16 +216,16 @@ window.shim = window.shim || {
         return this.sectionStateScreenHistory.length !== 0;
     },
     popSectionStack: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: popSectionStack(" + refId + ")");
             return null;
         }
         this.log("D","shim: DO: popSectionStack(" + refId + ")");
-        if ( this.sectionStateScreenHistory.length != 0 ) {
+        if ( this.sectionStateScreenHistory.length !== 0 ) {
             this.sectionStateScreenHistory.pop();
         }
         
-        if ( this.sectionStateScreenHistory.length != 0 ) {
+        if ( this.sectionStateScreenHistory.length !== 0 ) {
             var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
             return lastSection.screen;
         }
@@ -234,14 +234,14 @@ window.shim = window.shim || {
     },
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
 		var that = this;
-        if (that.enforceRefIdMatch && refId != this.refId) {
+        if (that.enforceRefIdMatch && refId !== this.refId) {
             that.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + 
 				", " + internalPromptContext + ", " + action + ", ...)");
             return "IGNORE";
         }
         that.log("D","shim: DO: doAction(" + refId + ", " + promptPath + 
 			", " + internalPromptContext + ", " + action + ", ...)");
-        if ( action == 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg",' + 
@@ -249,7 +249,7 @@ window.shim = window.shim || {
             }, 100);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4",' + 
@@ -257,7 +257,7 @@ window.shim = window.shim || {
             }, 100);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-zWfluNSa.mp3",' + 
@@ -265,7 +265,7 @@ window.shim = window.shim || {
             }, 100);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.MediaChooseImageActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.MediaChooseImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg",' + 
@@ -273,7 +273,7 @@ window.shim = window.shim || {
             }, 100);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4",' + 
@@ -281,7 +281,7 @@ window.shim = window.shim || {
             }, 100);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-zWfluNSa.mp3",' + 
@@ -289,28 +289,28 @@ window.shim = window.shim || {
             }, 100);
             return "OK";
         }
-        if ( action == 'org.opendatakit.sensors.PULSEOX' ) {
+        if ( action === 'org.opendatakit.sensors.PULSEOX' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "pulse": 100, "ox": ' + prompt("Enter ox:") + ' } }' );
             }, 1000);
             return "OK";
         }
-        if ( action == 'change.uw.android.BREATHCOUNT' ) {
+        if ( action === 'change.uw.android.BREATHCOUNT' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "value": ' + prompt("Enter breath count:") + ' } }' );
             }, 1000);
             return "OK";
         }
-        if ( action == 'com.google.zxing.client.android.SCAN' ) {
+        if ( action === 'com.google.zxing.client.android.SCAN' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "SCAN_RESULT": "' + prompt("Enter barcode:") + '" } }' );
             }, 1000);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.GeoPointMapActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.GeoPointMapActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "latitude": ' + prompt("Enter latitude:") + 
@@ -321,7 +321,7 @@ window.shim = window.shim || {
             }, 1000);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.GeoPointActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.GeoPointActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { "latitude": ' + prompt("Enter latitude:") + 
@@ -332,7 +332,7 @@ window.shim = window.shim || {
             }, 1000);
             return "OK";
         }
-        if ( action == 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
+        if ( action === 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
 			var value = JSON.parse(jsonObj);
 			window.open(value.extras.url,'_blank', null, false);
             setTimeout(function() {
@@ -342,7 +342,7 @@ window.shim = window.shim || {
             }, 1000);
             return "OK";
         }
-        if ( action == 'android.content.Intent.ACTION_VIEW' ) {
+        if ( action === 'android.content.Intent.ACTION_VIEW' ) {
 			var value = JSON.parse(jsonObj);
 			window.open(value.uri,'_blank', null, false);
             setTimeout(function() {
@@ -354,7 +354,7 @@ window.shim = window.shim || {
         }
     },
 	frameworkHasLoaded: function(refId, outcome) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: frameworkHasLoaded(" + refId + ", " + outcome + ")");
             return;
         }
@@ -362,7 +362,7 @@ window.shim = window.shim || {
         alert("notify container frameworkHasLoaded " + (outcome ? "SUCCESS" : "FAILURE"));
 	},
     saveAllChangesCompleted: function( refId, instanceId, asComplete ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
             return;
         }
@@ -370,7 +370,7 @@ window.shim = window.shim || {
         alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     saveAllChangesFailed: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
             return;
         }
@@ -378,7 +378,7 @@ window.shim = window.shim || {
         alert("notify container FAILED save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     ignoreAllChangesCompleted: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
             return;
         }
@@ -386,7 +386,7 @@ window.shim = window.shim || {
         alert("notify container OK ignore all changes.");
     },
     ignoreAllChangesFailed: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: ignoreAllChangesFailed(" + refId + ", " + instanceId + ")");
             return;
         }

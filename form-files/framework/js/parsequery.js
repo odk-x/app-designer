@@ -33,16 +33,16 @@ return {
      * Immediate.
      */
     _parseQueryHelper:function(instanceMetadataKeyValueMap, key, value) {
-        if ( key == 'formPath' ) {
+        if ( key === 'formPath' ) {
             return;
         }
-        if ( key == 'instanceId' ) {
+        if ( key === 'instanceId' ) {
             return;
         }
-        if ( key == 'screenPath' ) {
+        if ( key === 'screenPath' ) {
             return;
         }
-        if ( key == 'refId' ) {
+        if ( key === 'refId' ) {
             return;
         }
         instanceMetadataKeyValueMap[key] = value;
@@ -221,20 +221,20 @@ return {
                 var tmp = params[i].split("=");
                 var key = tmp[0];
                 var value = unescape(tmp[1]);
-                if ( key == 'formPath' ) {
+                if ( key === 'formPath' ) {
                     formPath = value;
-                } else if ( key == 'instanceId' ) {
+                } else if ( key === 'instanceId' ) {
                     instanceId = value;
-                } else if ( key == 'screenPath' ) {
+                } else if ( key === 'screenPath' ) {
                     screenPath = value;
-                } else if ( key == 'refId' ) {
+                } else if ( key === 'refId' ) {
                     refId = value;
                 } else {
                     that._parseQueryHelper(instanceMetadataKeyValueMap, key, value);
                 }
             }
             
-            if ( formPath != null && formPath.length > 0 && formPath[formPath.length-1] != '/' ) {
+            if ( formPath != null && formPath.length > 0 && formPath[formPath.length-1] !== '/' ) {
                 formPath[formPath.length] = '/';
             }
         }
@@ -315,7 +315,7 @@ return {
         var hash = window.location.hash;
         ctxt.append('parsequery.changeUrlHash', "window.location.hash="+hash);
 
-        if ( hash == '#' ) {
+        if ( hash === '#' ) {
             // this is bogus transition due to jquery mobile widgets
             ctxt.append('parsequery.changeUrlHash.emptyHash');
             alert('Hash is invalid!');
@@ -331,7 +331,7 @@ return {
             landing.setController(ctxt, that.controller, opendatakit.getRefId());
           }, failure: function(m) {
             ctxt.append('parsequery.changeUrlHash unable to transition to ' + hash, m);
-            if ( hash == '#formPath=' + escape(shim.getBaseUrl() + '/') ) {
+            if ( hash === '#formPath=' + escape(shim.getBaseUrl() + '/') ) {
                 landing.setController(ctxt, that.controller, opendatakit.getRefId(), m || { message: 'failed to load page'});
             } else {
                 window.location.hash = '#formPath=' + escape(shim.getBaseUrl() + '/');

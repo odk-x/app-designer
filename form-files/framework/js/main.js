@@ -144,7 +144,7 @@ require(['jquery'],
                 // TODO: figure out why Chrome adds an empty '?' search string
                 // to window.location.href   We deal with that here, but doing
                 // this will catastrophically break Android
-                if ( (!testAndroidParsing && opendatakit.getPlatformInfo().container != "Android") &&
+                if ( (!testAndroidParsing && opendatakit.getPlatformInfo().container !== "Android") &&
                      (searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx)) ) {
                     if ( hashIdx < 0 ) {
                         ref = ref + '?';
@@ -169,7 +169,7 @@ require(['jquery'],
                         shim.log('W','jqmConfig.purge.reloadpage');
                         window.location.assign(ref);
                     }}));
-                } else if ( (testAndroidParsing || opendatakit.getPlatformInfo().container == "Android") && 
+                } else if ( (testAndroidParsing || opendatakit.getPlatformInfo().container === "Android") && 
                             (searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx)) ) {
                     // we have a '?' on the URL. Forcibly remove it.
                     hashIdx = (hashIdx > 0) ? hashIdx : ref.length;

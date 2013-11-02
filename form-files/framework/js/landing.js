@@ -39,7 +39,7 @@ window.landing = window.landing || {
         var ctxt = that.controller.newStartContext();
         var ref = $.extend({},ctxt,{success: function() {
             ctxt.append('setChaining.wrapper.success');
-            if ( that._chainedContextEvaluators.length != 0 ) {
+            if ( that._chainedContextEvaluators.length !== 0 ) {
                 var i;
                 for ( i = 0 ; i < that._chainedContextEvaluators.length ; ++i ) {
                     ctxt.append('setChaining.wrapper.success.beforeChaining', 
@@ -70,7 +70,7 @@ window.landing = window.landing || {
      */
     opendatakitChangeUrlHash: function(hash) {
         var that = this;
-        if ( that.controller == null || that._chainedContextEvaluators.length != 0 ) {
+        if ( that.controller === undefined || that.controller === null || that._chainedContextEvaluators.length !== 0 ) {
             // not initialized, or there are other queued requests
             shim.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (queued)");
             var now = new Date().getTime();
@@ -116,7 +116,7 @@ window.landing = window.landing || {
      */
     opendatakitCallback: function( promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject ) {
         var that = this;
-        if ( that.controller == null || that._chainedContextEvaluators.length != 0 ) {
+        if ( that.controller === undefined || that.controller === null || that._chainedContextEvaluators.length !== 0 ) {
             shim.log('I', "landing.opendatakitCallback.actionCallback (queued)");
             var now = new Date().getTime();
             var txt = "landing.opendatakitCallback original timestamp: " + now;
@@ -162,7 +162,7 @@ window.landing = window.landing || {
     setController: function(ctxt, controller, refId, m) {
         var that = this;
         that.controller = controller;
-        shim.frameworkHasLoaded(refId, m == null );
+        shim.frameworkHasLoaded(refId, m === undefined || m === null );
         if ( m ) {
             that._chainedContextEvaluators = [];
             ctxt.failure(m);

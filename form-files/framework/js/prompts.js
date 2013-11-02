@@ -141,7 +141,7 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.form_version = opendatakit.getSettingValue('form_version');
         // set whether we are pre-4.x Android OS (legacy compatibility)
         var platinfo = opendatakit.getPlatformInfo();
-        if ( platinfo.container != 'Android' ) {
+        if ( platinfo.container !== 'Android' ) {
             this.renderContext.pre4Android = false;
         } else {
             this.renderContext.pre4Android = ( platinfo.version.substring(0,1) < "4" );
@@ -203,7 +203,7 @@ promptTypes.base = Backbone.View.extend({
             return null;
         } 
         var value = that.getValue();
-        if ( value == null || value == "" ) {
+        if ( value === undefined || value === null || value === "" ) {
             if ( isRequired ) {
                 that.valid = false;
                 return { message: that.required_message };
@@ -299,7 +299,7 @@ promptTypes.opening = promptTypes.base.extend({
         }
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
-        var displayName = (displayElementName == null) ? null : database.getDataValue(displayElementName);
+        var displayName = (displayElementName === undefined || displayElementName === null) ? null : database.getDataValue(displayElementName);
         if ( displayElementName != null ) {
             that.renderContext.display_field = displayName;
         } else {
@@ -404,9 +404,9 @@ promptTypes.instances = promptTypes.base.extend({
         database.get_all_instances($.extend({},ctxt,{success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
                     var savepoint_type = term.savepoint_type;
-                    if ( savepoint_type == opendatakit.savepoint_type_complete ) {
+                    if ( savepoint_type === opendatakit.savepoint_type_complete ) {
                         term.savepoint_type_text = that.savepoint_type_finalized_text;
-                    } else if ( savepoint_type == opendatakit.savepoint_type_incomplete ) {
+                    } else if ( savepoint_type === opendatakit.savepoint_type_incomplete ) {
                         term.savepoint_type_text = that.savepoint_type_incomplete_text;
                     } else {
                         term.savepoint_type_text = that.savepoint_type_checkpoint_text;
@@ -532,7 +532,7 @@ promptTypes.linked_table = promptTypes.base.extend({
     _cachedSelection: null,
     convertSelection: function(linkedMdl) {
         var that = this;
-        if ( that.selection == null || that.selection.length == 0 ) {
+        if ( that.selection == null || that.selection.length === 0 ) {
             return null;
         }
         if ( that._cachedSelection != null ) {
@@ -545,7 +545,7 @@ promptTypes.linked_table = promptTypes.base.extend({
         
         for ( i = 0 ; i < parts.length ; ++i ) {
             var e = parts[i];
-            if ( e.length == 0 || !elementNamePattern.test(e) ) {
+            if ( e.length === 0 || !elementNamePattern.test(e) ) {
                 remapped = remapped + ' ' + e;
             } else {
                 // map e back to elementKey
@@ -574,7 +574,7 @@ promptTypes.linked_table = promptTypes.base.extend({
     _cachedOrderBy: null,
     convertOrderBy: function(linkedMdl) {
         var that = this;
-        if ( that.order_by == null || that.order_by.length == 0 ) {
+        if ( that.order_by == null || that.order_by.length === 0 ) {
             return null;
         }
         if ( that._cachedOrderBy != null ) {
@@ -586,7 +586,7 @@ promptTypes.linked_table = promptTypes.base.extend({
         var i;
         for ( i = 0 ; i < parts.length ; ++i ) {
             var e = parts[i];
-            if ( e.length == 0 ) {
+            if ( e.length === 0 ) {
                 // no-op
             } else if ( isElement ) {
                 // map e back to elementKey
@@ -698,7 +698,7 @@ promptTypes.linked_table = promptTypes.base.extend({
         var auxHash = '';
         if ( that.auxillaryHash ) {
             auxHash = that.auxillaryHash();
-            if ( auxHash && auxHash != '' && auxHash.charAt(0) != '&' ) {
+            if ( auxHash && auxHash !== '' && auxHash.charAt(0) !== '&' ) {
                 auxHash = '&' + auxHash;
             }
         }
@@ -725,7 +725,7 @@ promptTypes.linked_table = promptTypes.base.extend({
             ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             var jsonObject = JSON.parse(jsonString);
-            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
+            if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 that.enableButtons();
@@ -789,7 +789,7 @@ promptTypes.external_link = promptTypes.base.extend({
             ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             var jsonObject = JSON.parse(jsonString);
-            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
+            if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 that.enableButtons();
@@ -1024,7 +1024,7 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 otherChoices.push(valueObject);
             }
         });
-        if (that.withOther && otherChoices.length == 1 ) {
+        if (that.withOther && otherChoices.length === 1 ) {
             // emit the other choice list and the value for it...
             choiceList.push({
                 "name": that.name,
@@ -1400,7 +1400,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
-        if ( value == null ) {
+        if ( value === undefined || value === null ) {
             renderContext.value = '';
         } else {
             renderContext.value = that.$('input').val();
@@ -1428,7 +1428,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         if(this.useMobiscroll){
             that.$('input').mobiscroll()[that.scrollerAttributes.preset](that.scrollerAttributes);
             var value = that.getValue();
-            if ( value == null ) {
+            if ( value === undefined || value === null ) {
                 that.$('input').mobiscroll('setDate',new Date(),false);
             } else {
                 that.$('input').mobiscroll('setDate',value, true);
@@ -1465,12 +1465,12 @@ promptTypes.time = promptTypes.datetime.extend({
         var that = this;
         var value = that.$('input').mobiscroll('getDate');
         var ref = that.getValue();
-        var rerender = ((ref == null || value == null) && (ref != value )) ||
+        var rerender = ((ref === undefined || ref === null || value === undefined || value === null) && (ref != value )) ||
                 (ref != null && value != null && that.sameTime(ref,value));
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
-        if ( value == null ) {
+        if ( value === undefined || value === null ) {
             renderContext.value = '';
         } else {
             renderContext.value = that.$('input').val();
@@ -1497,7 +1497,7 @@ promptTypes.time = promptTypes.datetime.extend({
         if(this.useMobiscroll){
             that.$('input').mobiscroll()[that.scrollerAttributes.preset](that.scrollerAttributes);
             var value = that.getValue();
-            if ( value == null ) {
+            if ( value === undefined || value === null ) {
                 that.$('input').mobiscroll('setDate',new Date(),false);
             } else {
                 that.$('input').mobiscroll('setDate',value, true);
@@ -1578,7 +1578,7 @@ promptTypes.media = promptTypes.base.extend({
             ctxt.append("prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             var jsonObject = JSON.parse(jsonString);
-            if (jsonObject.status == -1 /* Activity.RESULT_OK */ ) {
+            if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 var uri = (jsonObject.result != null) ? jsonObject.result.uri : null;
@@ -1613,7 +1613,7 @@ promptTypes.media = promptTypes.base.extend({
         var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
         var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
         var platinfo = opendatakit.getPlatformInfo();
-        if ( platinfo.container != 'Android' ) {
+        if ( platinfo.container !== 'Android' ) {
             that.renderContext.pre4Android = false;
         } else {
             that.renderContext.pre4Android = ( platinfo.version.substring(0,1) < "4" );
@@ -1718,7 +1718,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                 console.error("prompts." + that.type + 'getCallback.actionFn.JSONparse.exception px: ' + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + ' exception ' + String(e));
                 ctxt.failure({message: "Action response could not be parsed."});
             }
-            if (jsonObject.status == -1 ) { // Activity.RESULT_OK
+            if (jsonObject.status === -1 ) { // Activity.RESULT_OK
                 ctxt.append("prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 if (jsonObject.result != null) {
                     that.setValueDeferredChange(that.extractDataValue(jsonObject));
@@ -1785,7 +1785,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.append('acknowledge.modification', that.promptIdx);
         var oldValue = that.getValue();
-        var acknowledged = (oldValue != null) ? !oldValue : true;
+        var acknowledged = (oldValue !== undefined && oldValue !== null) ? !oldValue : true;
         that.setValueDeferredChange(acknowledged);
         that.renderContext.choices = [{
             name: "acknowledge",
@@ -1803,7 +1803,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         var acknowledged;
         try{
             acknowledged = that.getValue();
-            if ( acknowledged == null ) {
+            if ( acknowledged === undefined || acknowledged === null ) {
                 acknowledged = false;
             }
         } catch(e) {

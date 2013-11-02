@@ -69,7 +69,7 @@ return {
             intIndex = section.branch_label_map[parts[1]];
         }
 
-        if ( intIndex == null ) {
+        if ( intIndex === undefined || intIndex === null ) {
             shim.log('E',"controller.getOperationPath: no branch label matching opPath: " + opPath);
             return;
         }
@@ -110,7 +110,7 @@ return {
             intIndex = section.branch_label_map[parts[1]];
         }
 
-        if ( intIndex == null ) {
+        if ( intIndex === undefined || intIndex === null ) {
             shim.log('E',"controller.getNextOperationPath: no branch label matching opPath: " + opPath);
             return;
         }
@@ -156,7 +156,7 @@ return {
             intIndex = section.branch_label_map[parts[1]];
         }
 
-        if ( intIndex == null ) {
+        if ( intIndex === undefined || intIndex === null ) {
             shim.log('E',"controller.getOperation: no branch label matching opPath: " + opPath);
             return;
         }
@@ -212,7 +212,7 @@ return {
             intIndex = parseInt(parts[1]);
         }
 
-        if ( intIndex == null ) {
+        if ( intIndex === undefined || intIndex === null ) {
             shim.log('E',"controller.getPrompt: no branch label matching promptPath: " + promptPath);
             return;
         }
@@ -282,7 +282,7 @@ return {
                     break;
                 case "advance":
                     state = shim.getControllerState(opendatakit.getRefId());
-                    if ( state != 'p' ) {
+                    if ( state !== 'p' ) {
                         path = that.getNextOperationPath(path);
                         break;
                     }
@@ -296,7 +296,7 @@ return {
                         options.omitPushOnReturnStack = true;
                         
                         state = shim.getControllerState(opendatakit.getRefId());
-                        if ( state == 'a' ) {
+                        if ( state === 'a' ) {
                             ctxt.append("controller._doActionAtLoop.back_in_history.unexpectedControllerState", "px: " + path);
                             shim.log('E',"controller._doActionAtLoop.back_in_history.unexpectedControllerState(a) px: " + path);
                             ctxt.failure(that.moveFailureMessage);
@@ -313,7 +313,7 @@ return {
                 case "do_section":
                     // state is 'a' if we are returning from an exit_section
                     state = shim.getControllerState(opendatakit.getRefId());
-                    if ( state == 'a' ) {
+                    if ( state === 'a' ) {
                         path = that.getNextOperationPath(path);
                     } else {
                         // push the prior rendered screen onto the stack before we mark the 'do_section' callout
@@ -338,7 +338,7 @@ return {
                 case "validate":
                     database.applyDeferredChanges($.extend({},ctxt,{
                         success:function() {
-                            if ( shim.getControllerState( opendatakit.getRefId()) != 'v' ) {
+                            if ( shim.getControllerState( opendatakit.getRefId()) !== 'v' ) {
                                 // push the prompt we are leaving...
                                 shim.pushSectionScreenState( opendatakit.getRefId());
                             }
@@ -444,7 +444,7 @@ return {
                 }
             }
         }
-        if ( promptList.length == 0 ) {
+        if ( promptList.length === 0 ) {
             ctxt.success();
             return;
         }
@@ -767,7 +767,7 @@ return {
                         ctxt.failure();
                         return;
                     }
-                    if ( shim.getControllerState( opendatakit.getRefId()) != 'v' ) {
+                    if ( shim.getControllerState( opendatakit.getRefId()) !== 'v' ) {
                         // push the prompt we are leaving...
                         shim.pushSectionScreenState( opendatakit.getRefId());
                     }
