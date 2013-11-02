@@ -99,10 +99,6 @@ Handlebars.registerHelper('ifEqual', function(item, value, options) {
     }
 });
 
-Handlebars.registerHelper('promptLink', function(value, options) {
-    return new Handlebars.SafeString( opendatakit.getHashString( opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), value ));
-});
-
 
 return "handlebarsHelpers were successfully registered";
 });

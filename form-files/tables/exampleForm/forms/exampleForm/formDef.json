@@ -319,54 +319,12 @@
       },
       {
         "clause": "if",
-        "condition": "selected(data('examples'), 'prompt_link')",
+        "condition": "selected(data('examples'), 'custom_template')",
         "_row_num": 53
       },
       {
-        "type": "note",
-        "display": {
-          "text": "<a href=\"{{promptLink \"unreachable\"}}\">This is a link to another prompt</a>"
-        },
-        "hideInContents": true,
-        "_row_num": 54
-      },
-      {
-        "clause": "end if",
-        "_row_num": 55
-      },
-      {
-        "branch_label": "prompt_link_return",
-        "_row_num": 56
-      },
-      {
-        "clause": "goto unreachable_end",
-        "_row_num": 57
-      },
-      {
-        "type": "note",
-        "name": "unreachable",
-        "display": {
-          "text": "This prompt is unreachable except by links."
-        },
-        "hideInContents": true,
-        "_row_num": 58
-      },
-      {
-        "clause": "goto prompt_link_return",
-        "_row_num": 59
-      },
-      {
-        "branch_label": "unreachable_end",
-        "_row_num": 60
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('examples'), 'custom_template')",
-        "_row_num": 61
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 62
+        "_row_num": 54
       },
       {
         "type": "note",
@@ -374,7 +332,7 @@
           "text": "The following data will be used to generate a weight for age plot."
         },
         "hideInContents": true,
-        "_row_num": 63
+        "_row_num": 55
       },
       {
         "type": "integer",
@@ -385,7 +343,7 @@
         },
         "constraint": "data('age') <= 20",
         "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
-        "_row_num": 64
+        "_row_num": 56
       },
       {
         "type": "decimal",
@@ -393,7 +351,7 @@
         "display": {
           "text": "Enter weight (in lbs):"
         },
-        "_row_num": 65
+        "_row_num": 57
       },
       {
         "type": "select_one",
@@ -402,11 +360,11 @@
         "display": {
           "text": "Enter sex:"
         },
-        "_row_num": 66
+        "_row_num": 58
       },
       {
         "clause": "end screen",
-        "_row_num": 67
+        "_row_num": 59
       },
       {
         "type": "note",
@@ -416,21 +374,21 @@
         },
         "templatePath": "ageWeightPlot.handlebars",
         "hideInContents": true,
-        "_row_num": 68
+        "_row_num": 60
       },
       {
         "clause": "end if",
-        "_row_num": 69
+        "_row_num": 61
       },
       {
         "clause": "begin screen",
-        "_row_num": 70
+        "_row_num": 62
       },
       {
         "type": "assign",
         "name": "rating",
         "calculation": "((data('rating') == null) ? 5 : data('rating'))",
-        "_row_num": 71
+        "_row_num": 63
       },
       {
         "type": "integer",
@@ -444,11 +402,11 @@
           "min": 1,
           "max": 10
         },
-        "_row_num": 72
+        "_row_num": 64
       },
       {
         "clause": "end screen",
-        "_row_num": 73
+        "_row_num": 65
       }
     ],
     "calculates": [
@@ -596,20 +554,12 @@
         "_row_num": 19
       },
       {
-        "choice_list_name": "examples",
-        "data_value": "prompt_link",
-        "display": {
-          "text": "prompt linking"
-        },
-        "_row_num": 20
-      },
-      {
         "choice_list_name": "sexes",
         "data_value": "male",
         "display": {
           "text": "male"
         },
-        "_row_num": 22
+        "_row_num": 21
       },
       {
         "choice_list_name": "sexes",
@@ -617,7 +567,7 @@
         "display": {
           "text": "female"
         },
-        "_row_num": 23
+        "_row_num": 22
       }
     ],
     "settings": [
@@ -831,14 +781,6 @@
             "text": "custom template"
           },
           "_row_num": 19
-        },
-        {
-          "choice_list_name": "examples",
-          "data_value": "prompt_link",
-          "display": {
-            "text": "prompt linking"
-          },
-          "_row_num": 20
         }
       ],
       "sexes": [
@@ -848,7 +790,7 @@
           "display": {
             "text": "male"
           },
-          "_row_num": 22
+          "_row_num": 21
         },
         {
           "choice_list_name": "sexes",
@@ -856,7 +798,7 @@
           "display": {
             "text": "female"
           },
-          "_row_num": 23
+          "_row_num": 22
         }
       ]
     },
@@ -1168,7 +1110,7 @@
       "age": {
         "_defn": [
           {
-            "_row_num": 64,
+            "_row_num": 56,
             "section_name": "survey"
           }
         ],
@@ -1178,7 +1120,7 @@
       "weight": {
         "_defn": [
           {
-            "_row_num": 65,
+            "_row_num": 57,
             "section_name": "survey"
           }
         ],
@@ -1188,7 +1130,7 @@
       "sex": {
         "_defn": [
           {
-            "_row_num": 66,
+            "_row_num": 58,
             "section_name": "survey"
           }
         ],
@@ -1198,7 +1140,7 @@
       "rating": {
         "_defn": [
           {
-            "_row_num": 72,
+            "_row_num": 64,
             "section_name": "survey"
           }
         ],
@@ -1516,42 +1458,15 @@
           {
             "type": "note",
             "display": {
-              "text": "<a href=\"{{promptLink \"unreachable\"}}\">This is a link to another prompt</a>"
+              "text": "The following data will be used to generate a weight for age plot."
             },
             "hideInContents": true,
-            "_row_num": 54,
-            "__rowNum__": 53,
+            "_row_num": 55,
+            "__rowNum__": 54,
             "_token_type": "prompt",
             "_type": "note",
             "_branch_label_enclosing_screen": "survey/_screen54",
             "promptIdx": 22
-          },
-          {
-            "type": "note",
-            "name": "unreachable",
-            "display": {
-              "text": "This prompt is unreachable except by links."
-            },
-            "hideInContents": true,
-            "_row_num": 58,
-            "__rowNum__": 57,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen58",
-            "promptIdx": 23
-          },
-          {
-            "type": "note",
-            "display": {
-              "text": "The following data will be used to generate a weight for age plot."
-            },
-            "hideInContents": true,
-            "_row_num": 63,
-            "__rowNum__": 62,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen62",
-            "promptIdx": 24
           },
           {
             "type": "integer",
@@ -1562,12 +1477,12 @@
             },
             "constraint": "data('age') <= 20",
             "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
-            "_row_num": 64,
-            "__rowNum__": 63,
+            "_row_num": 56,
+            "__rowNum__": 55,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen62",
-            "promptIdx": 25
+            "_branch_label_enclosing_screen": "survey/_screen54",
+            "promptIdx": 23
           },
           {
             "type": "decimal",
@@ -1575,12 +1490,12 @@
             "display": {
               "text": "Enter weight (in lbs):"
             },
-            "_row_num": 65,
-            "__rowNum__": 64,
+            "_row_num": 57,
+            "__rowNum__": 56,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen62",
-            "promptIdx": 26
+            "_branch_label_enclosing_screen": "survey/_screen54",
+            "promptIdx": 24
           },
           {
             "type": "select_one",
@@ -1589,12 +1504,12 @@
             "display": {
               "text": "Enter sex:"
             },
-            "_row_num": 66,
-            "__rowNum__": 65,
+            "_row_num": 58,
+            "__rowNum__": 57,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen62",
-            "promptIdx": 27
+            "_branch_label_enclosing_screen": "survey/_screen54",
+            "promptIdx": 25
           },
           {
             "type": "note",
@@ -1604,12 +1519,12 @@
             },
             "templatePath": "ageWeightPlot.handlebars",
             "hideInContents": true,
-            "_row_num": 68,
-            "__rowNum__": 67,
+            "_row_num": 60,
+            "__rowNum__": 59,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen68",
-            "promptIdx": 28
+            "_branch_label_enclosing_screen": "survey/_screen60",
+            "promptIdx": 26
           },
           {
             "type": "integer",
@@ -1623,25 +1538,25 @@
               "min": 1,
               "max": 10
             },
-            "_row_num": 72,
-            "__rowNum__": 71,
+            "_row_num": 64,
+            "__rowNum__": 63,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen70",
-            "promptIdx": 29
+            "_branch_label_enclosing_screen": "survey/_screen62",
+            "promptIdx": 27
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 74,
-            "_branch_label_enclosing_screen": "survey/_screen74",
-            "promptIdx": 30
+            "_row_num": 66,
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 28
           }
         ],
         "validation_tag_map": {
           "finalize": [
-            25
+            23
           ]
         },
         "operations": [
@@ -2018,7 +1933,7 @@
           },
           {
             "clause": "if",
-            "condition": "selected(data('examples'), 'prompt_link')",
+            "condition": "selected(data('examples'), 'custom_template')",
             "_row_num": 53,
             "__rowNum__": 52,
             "_token_type": "goto_label",
@@ -2028,60 +1943,36 @@
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else55",
-            "_row_num": 55,
+            "_branch_label": "_else61",
+            "_row_num": 61,
             "operationIdx": 50
           },
           {
+            "clause": "begin screen",
             "_row_num": 54,
+            "__rowNum__": 53,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 59,
+              "__rowNum__": 58,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 51
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif55",
-            "_row_num": 55,
+            "_row_num": 60,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 52
           },
           {
-            "clause": "goto unreachable_end",
-            "_row_num": 57,
-            "__rowNum__": 56,
-            "_token_type": "goto_label",
-            "_branch_label": "unreachable_end",
-            "operationIdx": 53
-          },
-          {
-            "_row_num": 58,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 54
-          },
-          {
-            "clause": "goto prompt_link_return",
-            "_row_num": 59,
-            "__rowNum__": 58,
-            "_token_type": "goto_label",
-            "_branch_label": "prompt_link_return",
-            "operationIdx": 55
-          },
-          {
-            "clause": "if",
-            "condition": "selected(data('examples'), 'custom_template')",
-            "_row_num": 61,
-            "__rowNum__": 60,
-            "_token_type": "goto_label",
-            "_branch_label": "_then61",
-            "operationIdx": 56
-          },
-          {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else69",
-            "_row_num": 69,
-            "operationIdx": 57
+            "_branch_label": "_endif61",
+            "_row_num": 61,
+            "operationIdx": 53
           },
           {
             "clause": "begin screen",
@@ -2090,56 +1981,29 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 67,
-              "__rowNum__": 66,
+              "_row_num": 65,
+              "__rowNum__": 64,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\nactivePromptIndicies.push(26);\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 58
-          },
-          {
-            "_row_num": 68,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 59
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif69",
-            "_row_num": 69,
-            "operationIdx": 60
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 70,
-            "__rowNum__": 69,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 73,
-              "__rowNum__": 72,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('rating', ((data('rating') == null) ? 5 : data('rating')));\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 61
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('rating', ((data('rating') == null) ? 5 : data('rating')));\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 54
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 74,
-            "operationIdx": 62
+            "_row_num": 66,
+            "operationIdx": 55
           },
           {
-            "_row_num": 74,
+            "_row_num": 66,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 63
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 56
           },
           {
             "_token_type": "back_in_history",
-            "_row_num": 74,
-            "operationIdx": 64
+            "_row_num": 66,
+            "operationIdx": 57
           }
         ],
         "branch_label_map": {
@@ -2194,19 +2058,12 @@
           "_endif52": 49,
           "_then53": 51,
           "_screen54": 51,
-          "_else55": 53,
-          "_endif55": 53,
-          "prompt_link_return": 53,
-          "_screen58": 54,
-          "unreachable_end": 56,
-          "_then61": 58,
-          "_screen62": 58,
-          "_screen68": 59,
-          "_else69": 61,
-          "_endif69": 61,
-          "_screen70": 61,
-          "_contents": 63,
-          "_screen74": 63
+          "_screen60": 52,
+          "_else61": 54,
+          "_endif61": 54,
+          "_screen62": 54,
+          "_contents": 56,
+          "_screen66": 56
         }
       },
       "initial": {
