@@ -132,6 +132,22 @@
     ]
   },
   "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "auxillaryHash": "formula",
+      "selectionArgs": "formula",
+      "uri": "formula",
+      "callback": "formula",
+      "choice_filter": "formula(context)",
+      "templatePath": "requirejs_path",
+      "image": "app_path_localized",
+      "audio": "app_path_localized",
+      "video": "app_path_localized"
+    },
     "settings": {
       "form_id": {
         "setting_name": "form_id",

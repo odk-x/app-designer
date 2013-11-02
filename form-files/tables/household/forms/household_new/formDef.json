@@ -136,13 +136,6 @@
         "comments": "This inserts a 'joins' entry into the column_definitions table for the household_id column of the household table_id of the form: \n\n\"[ { table_id: household_member, element_name: household_id } ]\"",
         "_row_num": 2
       }
-    ],
-    "column_types": [
-      {
-        "auxillaryHash": "formula",
-        "selectionArgs": "formula",
-        "_row_num": 2
-      }
     ]
   },
   "specification": {
@@ -152,17 +145,15 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
+      "auxillaryHash": "formula",
+      "selectionArgs": "formula",
       "uri": "formula",
       "callback": "formula",
       "choice_filter": "formula(context)",
       "templatePath": "requirejs_path",
       "image": "app_path_localized",
       "audio": "app_path_localized",
-      "video": "app_path_localized",
-      "auxillaryHash": "formula",
-      "selectionArgs": "formula",
-      "_row_num": 2,
-      "__rowNum__": 1
+      "video": "app_path_localized"
     },
     "settings": {
       "form_id": {
