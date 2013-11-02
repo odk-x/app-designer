@@ -199,6 +199,7 @@
     //interpretation or not. I.e., whether to wrap the text inside a function() {...}
     //and evaluate that.
     var columnTypeMap = {
+    		_screen_block: 'function',
             condition: 'formula',
             constraint: 'formula',
             required: 'formula',
@@ -207,10 +208,6 @@
             selectionArgs: 'formula',
             uri: 'formula',
             callback: 'formula',
-            //TODO: Choice filter has some syntax issues to consider.
-            //      It would be nice to have a "choice" variable we can refer to directly.
-            //      One idea is to define variables in a context object that gets passed into the generated function.
-            //      The generated function would then add the object's keys to the namespace.
             choice_filter: 'formula(context)', // expects "choice" context arg.
             templatePath: 'requirejs_path',
             image: 'app_path_localized',
@@ -338,7 +335,7 @@
      * is in jQuery, and we don't want to introduce that dependency.
      */
     var deepCopyObject = function( o ) {
-    	if ( o == null || _.isFunction(o) || !_.isObject(o) ) {
+    	if ( o === undefined || o === null || _.isFunction(o) || !_.isObject(o) ) {
     		return o;
     	}
 
@@ -393,12 +390,12 @@
      */
     var deepExtendObject = function( o1, o2 ) {
     	// stomp on o1 if o2 is not an object or array...
-    	if ( o2 == null || _.isFunction(o2) || !_.isObject(o2) ) {
+    	if ( o2 === undefined || o2 === null || _.isFunction(o2) || !_.isObject(o2) ) {
     		// don't need to deeply copy these non-array, non-objects.
     		return o2;
     	}
     	// stomp on o1 if o1 is not an object or array...
-    	if ( o1 == null || _.isFunction(o1) || !_.isObject(o1) ) {
+    	if ( o1 === undefined || o1 === null || _.isFunction(o1) || !_.isObject(o1) ) {
     		// deep copy it...
     		return deepCopyObject(o2);
     	}
@@ -450,10 +447,10 @@
     var saveValue = function(arr, idxs, value) {
         var idx = idxs.shift();
         while (arr.length <= idx ) {
-            arr.push( (idxs.length != 0) ? [] : null);
+            arr.push( (idxs.length !== 0) ? [] : null);
         }
-        if ( idxs.length == 0 ) {
-            if ( arr[idx] == null ) {
+        if ( idxs.length === 0 ) {
+            if ( arr[idx] === undefined || arr[idx] === null ) {
                 arr[idx] = value;
             } else {
                 _.extend(arr[idx], value);
@@ -492,8 +489,8 @@
                     } else {
                         // Handle array syntax...
                         var i = prop.indexOf('[');
-                        if ( i != -1 ) {
-                            if ( prop.lastIndexOf("]") != prop.length-1 ) {
+                        if ( i !== -1 ) {
+                            if ( prop.lastIndexOf("]") !== prop.length-1 ) {
                                 throw Error("Invalid array subscript in column heading: " + prop);
                             };
                             var nm = prop.substring(0,i);
@@ -507,7 +504,7 @@
                                 e = parseInt(e);
                                 idxs.push(e);
                             }
-                            if ( obj[nm] == null ) {
+                            if ( obj[nm] === undefined || obj[nm] === null ) {
                                 obj[nm] = [];
                             }
                             saveValue(obj[nm], idxs, source[prop]);
@@ -552,7 +549,7 @@
                         " for column: " + requiredField + " on row: " + row._row_num);
             }
             var value = row[requiredField];
-            if ( nonEmpty && (value == null || value == [] || value == {}) ) {
+            if ( nonEmpty && (value !== 0) && (value == null || value == [] || value == {}) ) {
                 throw Error("Cell value is unexpectedly empty on sheet: " + sheetName +
                         " for column: " + requiredField + " on row: " + row._row_num);
             }
@@ -608,8 +605,8 @@
                 var first = parts[0];
                 switch (first ) {
                 case "begin":
-                    if ( parts.length < 2 || parts[1] != "screen" || parts.length > 4 ||
-                            (parts.length == 4 && parts[2] != "//") ) {
+                    if ( parts.length < 2 || parts[1] !== "screen" || parts.length > 4 ||
+                            (parts.length === 4 && parts[2] !== "//") ) {
                         throw Error("Expected 'begin screen [ // <tagname> ]' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
@@ -618,16 +615,16 @@
                                 sheetName + " on row: " + row._row_num);
                     }
                     clauseEntry._token_type = "begin_screen";
-                    if ( parts.length == 4 ) {
+                    if ( parts.length === 4 ) {
                         clauseEntry._tag_name = parts[3];
                     }
                     break;
                 case "end":
-                    if ( parts.length < 2 || (parts[1] != "screen" && parts[1] != "if") ) {
+                    if ( parts.length < 2 || (parts[1] !== "screen" && parts[1] !== "if") ) {
                         throw Error("Expected 'end if' or 'end screen' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
-                    if ( parts.length > 4 || (parts.length == 4 && parts[2] != "//") ) {
+                    if ( parts.length > 4 || (parts.length === 4 && parts[2] !== "//") ) {
                         throw Error("Expected 'end " + parts[1] + " [ // <tagname> ]' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
@@ -636,12 +633,12 @@
                                 sheetName + " on row: " + row._row_num);
                     }
                     clauseEntry._token_type = "end_" + parts[1];
-                    if ( parts.length == 4 ) {
+                    if ( parts.length === 4 ) {
                         clauseEntry._tag_name = parts[3];
                     }
                     break;
                 case "if":
-                    if ( parts.length > 3 || (parts.length >= 2 && parts[1] != "//") ) {
+                    if ( parts.length > 3 || (parts.length >= 2 && parts[1] !== "//") ) {
                         throw Error("Expected 'if [ // <tagname> ]' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
@@ -650,12 +647,12 @@
                                 sheetName + " on row: " + row._row_num);
                     }
                     clauseEntry._token_type = "begin_if";
-                    if ( parts.length == 3 ) {
+                    if ( parts.length === 3 ) {
                         clauseEntry._tag_name = parts[2];
                     }
                     break;
                 case "else":
-                    if ( parts.length > 3 || (parts.length >= 2 && parts[1] != "//") ) {
+                    if ( parts.length > 3 || (parts.length >= 2 && parts[1] !== "//") ) {
                         throw Error("Expected 'else [ // <tagname> ]' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
@@ -664,12 +661,12 @@
                                 sheetName + " on row: " + row._row_num);
                     }
                     clauseEntry._token_type = "else";
-                    if ( parts.length == 3 ) {
+                    if ( parts.length === 3 ) {
                         clauseEntry._tag_name = parts[2];
                     }
                     break;
                 case "goto":
-                    if ( parts.length != 2 ) {
+                    if ( parts.length !== 2 ) {
                         throw Error("Expected 'goto <branchlabel>' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
@@ -677,7 +674,7 @@
                     clauseEntry._branch_label = parts[1];
                     break;
                 case "back":
-                    if ( parts.length != 1 ) {
+                    if ( parts.length !== 1 ) {
                         throw Error("Expected 'back' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
@@ -688,7 +685,7 @@
                     clauseEntry._token_type = "back_in_history";
                     break;
                 case "do":
-                    if ( parts.length != 3 || parts[1] != "section" ) {
+                    if ( parts.length !== 3 || parts[1] !== "section" ) {
                         throw Error("Expected 'do section <sectionname>' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
@@ -700,7 +697,7 @@
                     clauseEntry._do_section_name = parts[2];
                     break;
                 case "exit":
-                    if ( parts.length != 2 || parts[1] != "section" ) {
+                    if ( parts.length !== 2 || parts[1] !== "section" ) {
                         throw Error("Expected 'exit section' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
@@ -720,7 +717,7 @@
                                 sheetName + " on row: " + row._row_num);
                     }
                     clauseEntry._token_type = "validate";
-                    if ( parts.length == 2 ) {
+                    if ( parts.length === 2 ) {
                         clauseEntry._sweep_name = parts[1];
                     } else {
                         clauseEntry._sweep_name = "finalize";
@@ -746,7 +743,7 @@
                 raw_prompt_type = raw_prompt_type.trim();// remove BOL/EOL spaces
                 var parts = raw_prompt_type.split(' ');
                 var first = parts[0];
-                if ( first == "assign" ) {
+                if ( first === "assign" ) {
                     typeEntry._token_type = "assign";
                     if ( parts.length >= 2 ) {
                         /* explicit type is specified */
@@ -1039,7 +1036,7 @@
         }
         /** ensure the section ends with an exit_section command */
         var rowNum;
-        if ( flow.length == 0 ) {
+        if ( flow.length === 0 ) {
             rowNum = 2;
         } else {
             rowNum = flow[flow.length-1]._row_num+1;
@@ -1071,7 +1068,7 @@
         tags = tags.replace(/\s+/g,' ');// remove extra spaces
         tags = tags.trim();
         var parts = tags.split(" ");
-        if ( tags == "" || parts.length == 0 || (parts.length == 1 && parts[0] == "") ) {
+        if ( tags === "" || parts.length === 0 || (parts.length === 1 && parts[0] === "") ) {
             if ( "required" in clause || "constraint" in clause ) {
                 validationTagMap._finalize.push(promptIdx);
             }
@@ -1417,8 +1414,82 @@
             }
         }
     };
+    var evalAsFunction = function(wrappedFn, field, worksheet, rowNum, columnPath) {
+        try {
+        	var obj = {};
+        	with (obj) {
+        		eval(wrappedFn);
+        	}
+        } catch (e) {
+            throw new Error("Error: " + e.message + " interpretting formula: " + field + " on sheet: " +
+            		worksheet + " row: " + rowNum + " column: " + columnPath);
+        }
+    };
 
-    var parseSection = function(sheetName, sheet, specSettings){
+    /**
+     * Verify that the given field looks good w.r.t. the given columnType
+     */
+    var sanityCheckOneField = function( field, columnType, worksheet, rowNum, columnPath ) {
+    	if ( _.isArray(columnType) ) {
+    		throw Error("Unable to handle array-valued column_types enforcement: ", columnPath);
+    	}
+    	if ( _.isObject(columnType) ) {
+
+        	_.each(_.keys(field), function(k) {
+        		if ( k in columnType ) {
+        			sanityCheckOneField( field[k], columnType[k], worksheet, rowNum, columnPath + '.' + k );
+        		}
+        	});
+        	return;
+    	}
+
+    	// OK. We have a specific columnType.
+    	var formulaArgs = 'formula(';
+    	if ( columnType === 'formula' || columnType.substring(0,formulaArgs.length) == formulaArgs ) {
+    		var iArg = columnType.indexOf('(');
+    		var argList = "()";
+    		if ( iArg !== -1 ) {
+    			argList = columnType.substring(iArg);
+    		}
+
+    		var fn = "function" + argList + "{\nreturn (" + field + ");\n}";
+    		evalAsFunction('('+fn+')', field, worksheet, rowNum, columnPath);
+    	} else if ( columnType === 'function' ) {
+    		// see if we can eval it...
+    		evalAsFunction('('+field+')', field, worksheet, rowNum, columnPath);
+    	} else if ( columnType === 'requirejs_path') {
+    		// nothing to test
+    	} else if ( columnType === 'app_path_localized') {
+    		// nothing to test
+    	}
+    };
+
+    /**
+     * The rowObject represents a single processed row in the workbook, excluding the
+     * column_types, prompt_types and model sheets.
+     *
+     * The specColumnTypes declares what the field types should be for this object.
+     *
+     * Throw an exception if the field types are not appropriate or well-formed.
+     */
+    var sanityCheckFieldTypes = function(rowObject, worksheet, specColumnTypes) {
+    	_.each(_.keys(rowObject), function(k) {
+    		if ( k in specColumnTypes && k !== '_row_num' && k !== '__rowNum') {
+    			sanityCheckOneField( rowObject[k], specColumnTypes[k], worksheet, rowObject._row_num, k );
+    		}
+    	});
+    };
+
+
+    var parseSection = function(sheetName, sheet, specSettings, specColumnTypes){
+
+        /*
+         * Ensure that all the evaluated field types are well-formed
+         */
+        var i = 0;
+        for ( i = 0 ; i < sheet.length ; ++i ) {
+        	sanityCheckFieldTypes(sheet[i], sheetName, specColumnTypes);
+        }
 
         /*
          * parse the 'clause' field
@@ -1493,13 +1564,13 @@
         };
     };
 
-    var parseSections = function(sectionNames, sections, specSettings) {
+    var parseSections = function(sectionNames, sections, specSettings, specColumnTypes) {
         /* Step 1: restructure each section.
          *
          */
         var newSections = {};
         _.each(sections, function(section, sectionName){
-            var sectionObject = parseSection(sectionName, section, specSettings);
+            var sectionObject = parseSection(sectionName, section, specSettings, specColumnTypes);
             newSections[sectionName] = sectionObject;
         });
 
@@ -1556,7 +1627,7 @@
             key_length++;
         }
 
-        if ( key_length == 1 && "_finalize" in keys ) {
+        if ( key_length === 1 && "_finalize" in keys ) {
             // not using validation tags -- rename _finalize to finalize.
             _.each(newSections, function(section) {
                 section.validation_tag_map.finalize = section.validation_tag_map._finalize;
@@ -1664,7 +1735,7 @@
     	var isSimple = false;
     	if ( elementPath == null ) {
             throw Error("Field is not defined.");
-    	} else if ( elementPath.indexOf('.') == -1) {
+    	} else if ( elementPath.indexOf('.') === -1) {
     		// simple name
     		isSimple = true;
     		assertValidUserDefinedName("Field '" + elementPath + "' ", elementKey);
@@ -1682,12 +1753,12 @@
 	    		var path = fullSetOfElementKeys[elementKey];
 
 	        	if ( isSimple ) {
-	        		var name = path.indexOf('.') == -1 ? path : path.substring(0,path.indexOf('.'));
+	        		var name = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
 	        		throw Error("The framework's identifier for field '" + elementPath +
 	        				"' collides with the identifier for the full elementPath: '" + path +
 	        				"'. Please change one of the field names ('" + elementPath + "' or '" + name + "').");
 	        	} else {
-	        		var refname = path.indexOf('.') == -1 ? path : path.substring(0,path.indexOf('.'));
+	        		var refname = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
 	        		var name = elementPath.substring(0,elementPath.indexOf('.'));
 	        		throw Error("The framework's identifier for the full elementPath: '" + elementPath +
 	        				"' collides with the identifier for the full elementPath: '" + path +
@@ -1732,10 +1803,10 @@
     		}
     		assertValidElementKey(elementPath, key, fullSetOfElementKeys);
     		entry.elementKey = key;
-    		if ( entry.type == "object" ) {
+    		if ( entry.type === "object" ) {
     			// we have properties...
     			recursiveAssignPropertiesElementKey( elementPath, key, fullSetOfElementKeys, entry.properties );
-        	} else if ( entry.type == "array" ) {
+        	} else if ( entry.type === "array" ) {
         		assignItemsElementKey( elementPath, key, fullSetOfElementKeys, entry );
     		}
     	});
@@ -1786,7 +1857,7 @@
              *   _data_type = null or "integer", respectively, for above.
              */
             _.each(section.operations, function(operation) {
-                if ( operation._token_type == "assign" ) {
+                if ( operation._token_type === "assign" ) {
                     if("name" in operation) {
                     	var name = operation.name;
                     	try {
@@ -1906,10 +1977,10 @@
     		// test again to catch any fields that are defined only via the model.
     		assertValidElementKey(name, name, fullSetOfElementKeys);
     		entry.elementKey = name;
-        	if ( entry.type == "object" ) {
+        	if ( entry.type === "object" ) {
         		// we have properties...
         		recursiveAssignPropertiesElementKey( name, name, fullSetOfElementKeys, entry.properties );
-        	} else if ( entry.type == "array" ) {
+        	} else if ( entry.type === "array" ) {
         		assignItemsElementKey( name, name, fullSetOfElementKeys, entry );
         	}
         });
@@ -1930,6 +2001,19 @@
             // we have done the standard conversions on all the sheets.
 
             var specification = {};
+
+            // COLUMN_TYPES
+            var processedColumnTypes = columnTypeMap;
+            if("column_types" in wbJson) {
+                var userDefColumnTypes = wbJson['column_types'];
+                if (userDefColumnTypes.length !== 1) {
+                    throw Error("Expected only one row in the 'column_types' sheet");
+                }
+                // NOTE: we allow override of default data type definitions...
+                processedColumnTypes = _.extend({}, columnTypeMap, userDefColumnTypes[0]);
+            }
+            specification.column_types = processedColumnTypes;
+
             // Compute Processed intermediaries
 
             // SETTINGS
@@ -1940,7 +2024,7 @@
                 processedSettings = _.groupBy(cleanSet, 'setting_name');
                 _.each(processedSettings, function(value, name) {
                     if(_.isArray(value)){
-                        if (value.length != 1) {
+                        if (value.length !== 1) {
                             throw Error("Duplicate definitions of '" + name + "' on 'settings' sheet");
                         }
                         processedSettings[name] = value[0];
@@ -2099,7 +2183,7 @@
                 processedQueries = _.groupBy(cleanSet, 'query_name');
                 _.each(processedQueries, function(value, name) {
                     if(_.isArray(value)){
-                        if (value.length != 1) {
+                        if (value.length !== 1) {
                             throw Error("Duplicate definitions of '" + name + "' on 'queries' sheet");
                         }
                         processedQueries[name] = value[0];
@@ -2126,7 +2210,7 @@
                 processedCalculates = _.groupBy(cleanSet, 'calculation_name');
                 _.each(processedCalculates, function(value, name) {
                     if(_.isArray(value)){
-                        if (value.length != 1) {
+                        if (value.length !== 1) {
                             throw Error("Duplicate definitions of '" + name + "' on 'calculates' sheet");
                         }
                         processedCalculates[name] = value[0];
@@ -2138,6 +2222,7 @@
             specification.calculates = processedCalculates;
 
             // PROMPT_TYPES
+            // NOTE: does NOT have any column_type processing
             var processedPromptTypes = promptTypeMap;
             if("prompt_types" in wbJson) {
                 var cleanSet = wbJson['prompt_types'];
@@ -2147,11 +2232,11 @@
                 userDefPrompts = _.groupBy(cleanSet, "prompt_type_name");
                 _.each(userDefPrompts, function(value, key){
                     if(_.isArray(value)){
-                        if (value.length != 1) {
+                        if (value.length !== 1) {
                             throw Error("Duplicate definitions of '" + key + "' on 'prompt_types' sheet");
                         }
                         var schema = value[0];
-                        if ( schema.type == "null" ) {
+                        if ( schema.type === "null" ) {
                             // to enable 'note' prompt types that don't have any backing data value
                             userDefPrompts[key] = null;
                         } else {
@@ -2164,6 +2249,7 @@
             }
 
             // MODEL
+            // NOTE: does NOT have any column_type processing
             var processedModel = {};
             if("model" in wbJson){
                 var cleanSet = wbJson['model'];
@@ -2172,7 +2258,7 @@
                 processedModel = _.groupBy(cleanSet, "name");
                 _.each(processedModel, function(value, key){
                     if(_.isArray(value)){
-                        if (value.length != 1) {
+                        if (value.length !== 1) {
                             throw Error("Duplicate definitions of '" + key + "' on 'model' sheet");
                         }
                         processedModel[key] = _.extend({_defn: [{ _row_num : value[0]._row_num, section_name: 'model' }] }, value[0] );
@@ -2187,13 +2273,13 @@
             var sections = {};
             var sectionNames = [];
             _.each(wbJson, function(sheet, sheetName){
-                if ( sheetName.indexOf('.') != -1 ) {
+                if ( sheetName.indexOf('.') !== -1 ) {
                     throw Error("Dots are not allowed in sheet names.");
                 }
-                if ( sheetName.indexOf('_') == 0 ) {
+                if ( sheetName.indexOf('_') === 0 ) {
                     throw Error("Sheet names cannot begin with '_'.");
                 }
-                if ( sheetName.indexOf('-') != 0 && ! _.contains(reservedSheetNames, sheetName) ) {
+                if ( sheetName.indexOf('-') !== 0 && ! _.contains(reservedSheetNames, sheetName) ) {
                     sections[sheetName] = sheet;
                     sectionNames.push(sheetName);
                 }
@@ -2222,8 +2308,24 @@
                 }
             });
 
+            _.each(specification.settings, function(value, name) {
+            	sanityCheckFieldTypes(value, 'settings', specification.column_types);
+            });
+            _.each(specification.choices, function(value, name) {
+            	sanityCheckFieldTypes(value, 'choices', specification.column_types);
+            });
+            _.each(specification.queries, function(value, name) {
+            	sanityCheckFieldTypes(value, 'queries', specification.column_types);
+            });
+            _.each(specification.calculates, function(value, name) {
+            	sanityCheckFieldTypes(value, 'calculates', specification.column_types);
+            });
+            _.each(specification.queries, function(value, name) {
+            	sanityCheckFieldTypes(value, 'queries', specification.column_types);
+            });
+
             // construct the json sheet for the interpreter
-            var parsedSections = parseSections(sectionNames, sections, specification.settings);
+            var parsedSections = parseSections(sectionNames, sections, specification.settings, specification.column_types);
 
             specification.section_names = sectionNames; // in alphabetical order
 
@@ -2244,6 +2346,10 @@
                     }
                 });
             });
+
+            // TODO: deal with column_types
+            // column types are applied to ALL sheets.
+            specification.column_types
 
             /*
              * // INCOMING:

@@ -45,10 +45,7 @@
         "_row_num": 8
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/breathcounter/forms/breathcounter/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/breathcounter/forms/breathcounter/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -64,10 +61,7 @@
         "_row_num": 11
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/complex_validate_test/forms/complex_validate_test/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/complex_validate_test/forms/complex_validate_test/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -83,10 +77,7 @@
         "_row_num": 14
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/customAppearance/forms/customAppearance/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/customAppearance/forms/customAppearance/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -102,10 +93,7 @@
         "_row_num": 17
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/exampleForm/forms/exampleForm/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/exampleForm/forms/exampleForm/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -121,10 +109,7 @@
         "_row_num": 20
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/household/forms/household_new/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/household/forms/household_new/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -140,10 +125,7 @@
         "_row_num": 23
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/household_member/forms/household_member/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/household_member/forms/household_member/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -159,10 +141,7 @@
         "_row_num": 26
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/imnci/forms/imnci_test/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/imnci/forms/imnci_test/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -178,10 +157,7 @@
         "_row_num": 29
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_init/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_init/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -197,10 +173,7 @@
         "_row_num": 32
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_update/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_update/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -216,10 +189,7 @@
         "_row_num": 35
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/section_test/forms/section_test/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/section_test/forms/section_test/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -235,10 +205,7 @@
         "_row_num": 38
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/selects/forms/selects/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/selects/forms/selects/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -254,10 +221,7 @@
         "_row_num": 41
       },
       {
-        "url": {
-          "default": "'?' + opendatakit.getHashString('../tables/twoColumn/forms/twoColumn/',null)",
-          "cell_type": "formula"
-        },
+        "url": "'?' + opendatakit.getHashString('../tables/twoColumn/forms/twoColumn/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -392,6 +356,20 @@
     ]
   },
   "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "uri": "formula",
+      "callback": "formula",
+      "choice_filter": "formula(context)",
+      "templatePath": "requirejs_path",
+      "image": "app_path_localized",
+      "audio": "app_path_localized",
+      "video": "app_path_localized"
+    },
     "settings": {
       "form_id": {
         "setting_name": "form_id",
@@ -654,10 +632,7 @@
             "promptIdx": 1
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/breathcounter/forms/breathcounter/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/breathcounter/forms/breathcounter/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -670,10 +645,7 @@
             "promptIdx": 2
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/complex_validate_test/forms/complex_validate_test/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/complex_validate_test/forms/complex_validate_test/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -686,10 +658,7 @@
             "promptIdx": 3
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/customAppearance/forms/customAppearance/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/customAppearance/forms/customAppearance/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -702,10 +671,7 @@
             "promptIdx": 4
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/exampleForm/forms/exampleForm/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/exampleForm/forms/exampleForm/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -718,10 +684,7 @@
             "promptIdx": 5
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/household/forms/household_new/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/household/forms/household_new/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -734,10 +697,7 @@
             "promptIdx": 6
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/household_member/forms/household_member/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/household_member/forms/household_member/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -750,10 +710,7 @@
             "promptIdx": 7
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/imnci/forms/imnci_test/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/imnci/forms/imnci_test/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -766,10 +723,7 @@
             "promptIdx": 8
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_init/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_init/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -782,10 +736,7 @@
             "promptIdx": 9
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_update/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/refrigerators/forms/refrigerators_update/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -798,10 +749,7 @@
             "promptIdx": 10
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/section_test/forms/section_test/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/section_test/forms/section_test/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -814,10 +762,7 @@
             "promptIdx": 11
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/selects/forms/selects/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/selects/forms/selects/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -830,10 +775,7 @@
             "promptIdx": 12
           },
           {
-            "url": {
-              "default": "'?' + opendatakit.getHashString('../tables/twoColumn/forms/twoColumn/',null)",
-              "cell_type": "formula"
-            },
+            "url": "'?' + opendatakit.getHashString('../tables/twoColumn/forms/twoColumn/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"

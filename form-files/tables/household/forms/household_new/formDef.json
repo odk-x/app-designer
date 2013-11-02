@@ -51,14 +51,8 @@
         },
         "linked_form_id": "household_member",
         "selection": "household_id = ?",
-        "selectionArgs": {
-          "default": "[ data('household_id') ]",
-          "cell_type": "formula"
-        },
-        "auxillaryHash": {
-          "default": "'household_id='+escape(data('household_id'))",
-          "cell_type": "formula"
-        },
+        "selectionArgs": "[ data('household_id') ]",
+        "auxillaryHash": "'household_id='+escape(data('household_id'))",
         "comments": "auxillaryHash defines the auxillary hash to supply when creating a new sub-form. This is an ampersand-separated list of elementName=value pairs that will be used to initialize the subform. The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
         "_row_num": 7
       },
@@ -142,9 +136,34 @@
         "comments": "This inserts a 'joins' entry into the column_definitions table for the household_id column of the household table_id of the form: \n\n\"[ { table_id: household_member, element_name: household_id } ]\"",
         "_row_num": 2
       }
+    ],
+    "column_types": [
+      {
+        "auxillaryHash": "formula",
+        "selectionArgs": "formula",
+        "_row_num": 2
+      }
     ]
   },
   "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "uri": "formula",
+      "callback": "formula",
+      "choice_filter": "formula(context)",
+      "templatePath": "requirejs_path",
+      "image": "app_path_localized",
+      "audio": "app_path_localized",
+      "video": "app_path_localized",
+      "auxillaryHash": "formula",
+      "selectionArgs": "formula",
+      "_row_num": 2,
+      "__rowNum__": 1
+    },
     "settings": {
       "form_id": {
         "setting_name": "form_id",
@@ -409,14 +428,8 @@
             },
             "linked_form_id": "household_member",
             "selection": "household_id = ?",
-            "selectionArgs": {
-              "default": "[ data('household_id') ]",
-              "cell_type": "formula"
-            },
-            "auxillaryHash": {
-              "default": "'household_id='+escape(data('household_id'))",
-              "cell_type": "formula"
-            },
+            "selectionArgs": "[ data('household_id') ]",
+            "auxillaryHash": "'household_id='+escape(data('household_id'))",
             "comments": "auxillaryHash defines the auxillary hash to supply when creating a new sub-form. This is an ampersand-separated list of elementName=value pairs that will be used to initialize the subform. The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
             "_row_num": 7,
             "__rowNum__": 6,
