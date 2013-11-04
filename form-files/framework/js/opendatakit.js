@@ -79,7 +79,7 @@ return {
     },
     
     getQueriesDefinition: function(query_name) {
-        return mdl.formDef.specification.parsed_queries[query_name];
+        return mdl.formDef.specification.queries[query_name];
     },
     
     getChoicesDefinition: function(choice_list_name) {

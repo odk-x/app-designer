@@ -15,103 +15,43 @@ verifyLoad('builder',
     [controller,   opendatakit,   database,   $,        screenTypes,   promptTypes,   formulaFunctions,   _, _screens, _prompts]);
 
     /**
-     * formula is a function for creating JavaScript functions from user defined formulas.
-     * TODO: Link/copy formula documentation.
+     * evalFn takes a 'function(...) {}' definition ('fn') and evaluates it in the
+	 * FormulaFunctions context so that it has access to all other functions and 
+	 * does not otherwise pollute the global namespace.
+	 * 
+	 * TODO: Link/copy formula documentation.
      * TODO: How do exceptions work?
      **/
-    function formula(content) {
-        // If context.allowExceptions is true call is responsible for catching
-        // and handling exceptions.
-        // The 'context' passed in may or may not be defined. 
-        // It may or may not be the calling context object.
-        var result = '(function(context){\n'+
-            'return ('+ content + ');\n' +
-            '})';
+    function evalFn(fn, fieldSource, worksheet, rowNum, columnPath) {
         try {
-            var parsedFunction = formulaFunctions.evaluator(result);
-            return function(context){
-                try {
-                    return parsedFunction.call(this, context);
-                } catch (e) {
-                    console.error("builder.formula: " + result + " exception: " + String(e));
-                    alert("Could not call formula.\nSee console for details.");
-                    throw new Error("Exception in user formula.");
-                }
-            };
-        } catch (e) {
-            console.error("builder.formula: " + result + " exception evaluating formula: " + String(e));
-            alert("Could not evaluate formula: " + result + '\nSee console for details.');
-            throw new Error("Could not evaluate formula: " + result + '\nSee console for details.');
-            // return function(){};
-        }
-    }
-    /**
-     * formula_with_context does the same thing as formula but checks to make
-     * sure a context arguement is provided when the generated function is called.
-     **/
-    function formula_with_context(content){
-        var myFormula = formula(content);
-        return function(context){
-            if(context){
-                return myFormula.call(this, context);
-            } else {
-                console.error('builder.formula_with_context: formula: ' + myFormula.toString(2) + ' is missing a context argument');
-                alert("Formula requires context arg.\nSee console for details.");
-                throw new Error("Exception in user formula. Formula requires context arg.");
-            }
-        };
-    }
-    function genericFunction(defn) {
-        try {
-            var parsedFunction = formulaFunctions.evaluator("("+defn+")");
+            var parsedFunction = formulaFunctions.evaluator('('+fn+')');
             return function(/*...*/){
                 try {
                     return parsedFunction.apply(this, arguments);
                 } catch (e) {
-                    console.error("builder.genericFunction: " + defn + " exception: " + String(e));
-                    alert("Could not invoke genericFunction.\nSee console for details.");
-                    throw new Error("Exception in genericFunction.");
+					var msg = "Exception: " + e.message + " in user-defined expression: " + fieldSource +
+						" on " + worksheet + " row " + rowNum + " column: " + columnPath;
+					shim.log('E', msg);
+                    throw new Error(msg);
                 }
             };
         } catch (e) {
-            console.error("builder.genericFunction: " + defn + " exception evaluating function definition: " + String(e));
-            alert("Could not evaluate genericFunction: " + defn + '\nSee console for details.');
-            throw new Error("Could not evaluate genericFunction: " + defn + '\nSee console for details.');
+			var msg = "Exception: " + e.message + " when evaluating user-defined expression: " + fieldSource +
+				" on " + worksheet + " row " + rowNum + " column: " + columnPath;
+			shim.log('E', "builder.evalFn " + msg);
+            alert(msg + '\nSee console for details.');
+            throw new Error(msg + '\nSee console for details.');
         }
-    }
-    var currentPromptTypes;
-    var currentScreenTypes;
-    var calculates = {};
-    //column_types maps each column to a property parser to use on its values.
-    var column_types = {
-        condition: 'formula',
-        constraint: 'formula',
-        required: 'formula',
-        calculation: 'formula',
-		auxillaryHash: 'formula',
-		selectionArgs: 'formula',
-		url: 'formula',
-		callback: 'formula',
-        //TODO: Choice filter has some syntax issues to consider.
-        //      It would be nice to have a "choice" variable we can refer to directly.
-        //      One idea is to define variables in a context object that gets passed into the generated function.
-        //      The generated function would then add the object's keys to the namespace.
-        choice_filter: 'formula_with_context', // expects "choice" context arg.
-        templatePath: 'requirejs_path',
-        image: 'app_path_localized',
-        audio: 'app_path_localized',
-        video: 'app_path_localized'
     };
+
     //propertyParsers are functions for transforming property values into
     //useful formats.
     //For example, transformings all the constraint/condition/etc. 
     //formula strings into JS functions.
     var propertyParsers = {
-        formula: formula,
-        formula_with_context: formula_with_context,
+		'function': evalFn,
         requirejs_path : function(content) {
             alert("Internal Error: this should already be substituted");
-            return this._formPath + content;
         },
         app_path_localized : function(content) {
             var fd = this.requirejs_path('');
@@ -138,106 +78,56 @@ verifyLoad('builder',
         }
     };
 
+    /**
+     * Resolve the contents of one field w.r.t. column_types map.
+	 * Returns the adjusted 'field' contents.
+     */
+    var resolveOneField = function( field, parentObject, parentKey, columnType, worksheet, rowNum, columnPath, propertyParsers ) {
+    	if ( _.isArray(columnType) ) {
+    		throw Error("Unable to handle array-valued column_types enforcement: ", columnPath);
+    	}
+    	if ( _.isObject(columnType) ) {
+
+        	_.each(_.keys(field), function(k) {
+        		if ( k in columnType ) {
+        			resolveOneField( field[k], field, k, columnType[k], worksheet, rowNum, columnPath + '.' + k, propertyParsers );
+        		}
+        	});
+			return;
+    	}
+
+    	// OK. We have a specific columnType.
+		var property = field;
+		var propertySource = field;
+		var evalAs = columnType;
+
+		var formulaArgs = 'formula(';
+		if ( columnType === 'formula' || columnType.substring(0,formulaArgs.length) == formulaArgs ) {
+			var iArg = columnType.indexOf('(');
+			var argList = "()";
+			if ( iArg !== -1 ) {
+				argList = columnType.substring(iArg);
+			}
+			property = "function " + argList + "{\nreturn (" + property + ");\n}";
+			evalAs = 'function';
+		}
+		
+		if (evalAs in propertyParsers) {
+			var propertyParser = propertyParsers[evalAs];
+			shim.log("I",'Parsing: ' + property);
+			parentObject[parentKey] = propertyParser(property, propertySource, worksheet, rowNum, columnPath);
+			return;
+		}
+		else {
+			var msg = "Could not parse property of type: " + columnType + " for user-defined expression: " + fieldSource +
+				" on " + worksheet + " row " + rowNum + " column: " + columnPath;
+			shim.log('E', "builder.evalFn " + msg);
+            alert(msg + '\nSee console for details.');
+            throw new Error(msg + '\nSee console for details.');
+		}
+    };
+
     return {
-    /**
-     * Go through an object (usually representing a row in a spreadsheet) 
-     * and parse all its properties
-     **/
-    initializeProperties: function(prompt) {
-        var that = this;
-        $.each(prompt, function(key, property) {
-            var propertyType, propertyContent;
-            if (key in prompt) {
-                if (typeof property === 'function') {
-                    //Generally all properties will be plain JSON,
-                    //but being able to pass in function directly can be useful
-                    //for debugging.
-                    return;
-                }
-                if ($.isArray(property)) {
-                    return;
-                }
-                if ($.isPlainObject(property) && ('cell_type' in property)) {
-                    propertyType = property.cell_type;
-                    propertyContent = property['default'];
-                } 
-                else {
-                    if (key in column_types) {
-                        propertyType = column_types[key];
-                        propertyContent = property;
-                    } else {
-                        //Leave the type as a string/int/bool
-                        return;
-                    }
-                }
-                if (propertyType in propertyParsers) {
-                    var propertyParser = propertyParsers[propertyType];
-                    shim.log("I",'Parsing: ' + property);
-                    prompt[key] = propertyParser(propertyContent);
-                }
-                else {
-                    console.error('builder.initializeProperties: Could not parse property of type ' + propertyType + ' px: ' + prompt.promptIdx);
-                    alert("Could not parse property of type " + propertyType + ". See console for details.");
-                    throw new Error("Could not parse property of type " + propertyType + ". Prompt Index: " + prompt.promptIdx);
-                }
-            }
-        });
-        return prompt;
-    },
-    /**
-     * Iterate over the given partial prompt objects and initialize them as
-     * instances of the prompt types defined in prompts.js
-     * (or as one of the user specified prompt types).
-     **/
-    initializePrompts: function(section) {
-        var that = this;
-        var initializedPrompts = [];
-        
-        _.each(section.prompts, function(prompt) {
-            var PromptType, ExtendedPromptType, PromptInstance;
-            if (!('_type' in prompt)) {
-                shim.log('W', 'builder.initializePrompts: no _type specified ' + prompt);
-                return;
-            }
-            if (prompt._type in currentPromptTypes) {
-                PromptType = currentPromptTypes[prompt._type];
-            } else {
-                shim.log('W', 'builder.initializePrompts: unknown _type ' + prompt._type + ' -- using text ' + prompt);
-                PromptType = currentPromptTypes['text'];
-            }
-            ExtendedPromptType = PromptType.extend(that.initializeProperties(prompt));
-            PromptInstance = new ExtendedPromptType({ _section_name: section.section_name });
-            initializedPrompts.push(PromptInstance);
-        });
-        return initializedPrompts;
-    },
-    initializeOperations: function(section) {
-        var that = this;
-        var i, op;
-        var functionBody;
-        var parsedFunction;
-        for (i = 0 ; i < section.operations.length ; ++i ) {
-            var op = section.operations[i];
-            parsedFunction = null;
-            op._section_name = section.section_name;
-            if ( op._token_type === "goto_label" ) {
-                // convert condition into predicate...
-                if ( op.condition ) {
-                    functionBody = "function() { return " + op.condition + ";}";
-                    op._parsed_condition = genericFunction(functionBody);
-                }
-            } else if ( op._token_type === "assign" ) {
-                // this is only done for the top-level assign expressions.
-                // the ones within begin...end screen blocks are executed
-                // in-line as part of the _parsed_screen_block.
-                functionBody = "function() { return " + op.calculation + ";}";
-                op._parsed_calculation = genericFunction(functionBody);
-            } else if ( op._token_type === "begin_screen" ) {
-                functionBody = op._screen_block;
-                op._parsed_screen_block = genericFunction(functionBody);
-            }
-        }
-    },
     buildSurvey: function(ctxt, surveyJson, formPath) {
         if (surveyJson === undefined || surveyJson === null) {
             ctxt.append('builder.buildSurvey', 'no formDef!');
@@ -246,47 +136,129 @@ verifyLoad('builder',
         }
         
         var that = this;
-        
-        // define the requirejs_path action on the property parser.
-        // this is the only property parser that depends upon a 
-        // current mdl value.
-        propertyParsers.requirejs_path = function(content) {
-            return formPath + content;
-        };
 
         //currentPromptTypes set to a promptTypes subtype so user defined prompts
         //don't clobber the base prompt types for other surveys.
-        currentPromptTypes = Object.create(promptTypes);
+        var currentPromptTypes = Object.create(promptTypes);
         // ditto
-        currentScreenTypes = Object.create(screenTypes);
+        var currentScreenTypes = Object.create(screenTypes);
 
         ctxt.append('builder.buildSurvey: initializing');
-        //Transform the calculate sheet into an object with format {calculation_name:function}
-        calculates = _.object(_.map(surveyJson.specification.calculates, function(calculate){
-            return [calculate.calculation_name, propertyParsers.formula(calculate.calculation)];
-        }));
-        formulaFunctions.calculates = calculates;
-        
-        surveyJson.specification.parsed_queries = _.object(_.map(surveyJson.specification.queries, function(query) {
-            return [
-            query.query_name, {
-                "uri" : propertyParsers.formula(query.uri),
-                "callback" : propertyParsers.formula(query.callback)
-            }];
-        }));
         
         var afterCustomPromptsLoadAttempt = function(){
             // save the current prompts and screens in the specification
             surveyJson.specification.currentPromptTypes = currentPromptTypes;
             surveyJson.specification.currentScreenTypes = currentScreenTypes;
-            
-            // initialize the section.parsed_prompts 
-            // initialize the section.parsed_screen_block
-            _.each(surveyJson.specification.sections, function(section, sectionName) {
-                section.parsed_prompts = that.initializePrompts(section);
-                // operations are in-place expanded, as they have no inheritance
-                that.initializeOperations(section);
-            });
+        
+			// define the requirejs_path action on the property parser.
+			// this is the only property parser that depends upon a 
+			// current mdl value.
+			propertyParsers.requirejs_path = function(content) {
+				return formPath + content;
+			};
+
+			// process the calculates sheet for column_types
+			_.each( _.keys(surveyJson.specification.calculates), function(key) {
+				var rowObject = surveyJson.specification.calculates[key];
+				_.each(_.keys(rowObject), function(k) {
+					if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+						resolveOneField( rowObject[k], rowObject, k,
+							surveyJson.specification.column_types[k], 'calculates', rowObject._row_num,
+							k, propertyParsers );
+					}
+				});
+			});
+			formulaFunctions.calculates = surveyJson.specification.calculates;
+
+			// process the settings sheet for column_types
+			_.each( _.keys(surveyJson.specification.settings), function(key) {
+				var rowObject = surveyJson.specification.settings[key];
+				_.each(_.keys(rowObject), function(k) {
+					if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+						resolveOneField( rowObject[k], rowObject, k, 
+							surveyJson.specification.column_types[k], 'settings', rowObject._row_num,
+							k, propertyParsers );
+					}
+				});
+			});
+
+			// process the choices sheet for column_types
+			_.each( _.keys(surveyJson.specification.choices), function(key) {
+				var rowObject = surveyJson.specification.choices[key];
+				_.each(_.keys(rowObject), function(k) {
+					if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+						resolveOneField( rowObject[k], rowObject, k, 
+							surveyJson.specification.column_types[k], 'choices', rowObject._row_num,
+							k, propertyParsers );
+					}
+				});
+			});
+
+			// process the queries sheet for column_types
+			_.each( _.keys(surveyJson.specification.queries), function(key) {
+				var rowObject = surveyJson.specification.queries[key];
+				_.each(_.keys(rowObject), function(k) {
+					if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+						resolveOneField( rowObject[k], rowObject, k, 
+							surveyJson.specification.column_types[k], 'queries', rowObject._row_num,
+							k, propertyParsers );
+					}
+				});
+			});
+
+			// process the sections
+			_.each( _.keys(surveyJson.specification.sections), function(key) {
+				var sectionObject = surveyJson.specification.sections[key];
+				var i;
+				
+				sectionObject.parsed_prompts = [];
+				// process prompts
+				for ( i = 0 ; i < sectionObject.prompts.length ; ++i ) {
+					var rowObject = sectionObject.prompts[i];
+					var PromptType, ExtendedPromptType, PromptInstance;
+					
+					// xlsxconverter should have defined an _type field in the prompt...
+					if (!('_type' in rowObject)) {
+						var msg = 'builder.initializePrompts: no _type specified for prompt in row ' +
+									rowObject._row_num + ' section: ' + key;
+						shim.log('E',msg);
+						throw new Error(msg);
+					}
+					
+					if (rowObject._type in currentPromptTypes) {
+						PromptType = currentPromptTypes[rowObject._type];
+					} else {
+						shim.log('W', 'builder.initializePrompts: unknown _type ' + rowObject._type +
+							' -- using text for prompt in row ' + rowObject._row_num + ' section: ' + key);
+						PromptType = currentPromptTypes['text'];
+					}
+					ExtendedPromptType = PromptType.extend(rowObject);
+					PromptInstance = new ExtendedPromptType({ _section_name: section.section_name });
+
+					// resolve column_types on this instance...
+					_.each(_.keys(PromptInstance), function(k) {
+						if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+							resolveOneField( PromptInstance[k], PromptInstance, k, 
+								surveyJson.specification.column_types[k], key, PromptInstance._row_num,
+								k, propertyParsers );
+						}
+					});
+					
+					sectionObject.parsed_prompts.push(PromptInstance);
+				}
+				
+				// process operations
+				for ( i = 0 ; i < sectionObject.operations.length ; ++i ) {
+					var rowObject = sectionObject.operations[i];
+					_.each(_.keys(rowObject), function(k) {
+						if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+							resolveOneField( rowObject[k], rowObject, k, 
+								surveyJson.specification.column_types[k], key, rowObject._row_num,
+								k, propertyParsers );
+						}
+					});
+				}
+			});
             
             //This resets the custom css styles to the customStyles.css file in the
             //current form's directory (or nothing if customStyles.css doesn't exist).

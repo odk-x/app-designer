@@ -280,7 +280,7 @@ screenTypes.screen = Backbone.View.extend({
         that.whenTemplateIsReady($.extend({}, ctxt, {success:function() {
             // determine the active prompts
             that.activePrompts = []; // clear all prompts...
-            var activePromptIndices = that._operation._parsed_screen_block();
+            var activePromptIndices = that._operation._screen_block();
             var sectionPrompts = that.controller.getCurrentSectionPrompts();
             var ap = [];
             var i;

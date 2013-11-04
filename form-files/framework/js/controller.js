@@ -263,11 +263,12 @@ return {
                 switch ( action ) {
                 case "goto_label":
                     // jump to a label. This may be conditional...
-                    // i.e., First test if the '_parsed_condition' (function constructed 
-                    // from closure of the 'condition' column) is false, and skip to the next 
-                    // question if it is; if the '_parsed_condition' is true or not
-                    // present, then execute the 'goto'
-                    if('_parsed_condition' in op && !op._parsed_condition()) {
+                    // i.e., The 'condition' property is now a boolean predicate
+					// (it is compiled into one during the builder's processing 
+					// of the form). If it evaluates to false, then skip to the
+					// next question; if it evaluates to true or is not present, 
+					// then execute the 'goto'
+                    if('condition' in op && !op.condition()) {
                         path = that.getNextOperationPath(path);
                     } else {
                         path = that.getOperationPath(op._section_name + "/" + op._branch_label);
