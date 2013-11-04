@@ -27,7 +27,7 @@ verifyLoad('builder',
             var parsedFunction = formulaFunctions.evaluator('('+fn+')');
             return function(/*...*/){
                 try {
-                    return parsedFunction.apply(this, arguments);
+                    return parsedFunction.apply(formulaFunctions, arguments);
                 } catch (e) {
 					var msg = "Exception: " + e.message + " in user-defined expression: " + fieldSource +
 						" on " + worksheet + " row " + rowNum + " column: " + columnPath;
@@ -168,7 +168,13 @@ verifyLoad('builder',
 					}
 				});
 			});
-			formulaFunctions.calculates = surveyJson.specification.calculates;
+
+			// copy the user-defined calculates into formulaFunctions
+			formulaFunctions.calculates = {};
+			_.each( _.keys(surveyJson.specification.calculates), function(key) {
+				var rowObject = surveyJson.specification.calculates[key];
+				formulaFunctions.calculates[key] = rowObject.calculation;
+			});
 
 			// process the settings sheet for column_types
 			_.each( _.keys(surveyJson.specification.settings), function(key) {
@@ -232,24 +238,32 @@ verifyLoad('builder',
 							' -- using text for prompt in row ' + rowObject._row_num + ' section: ' + key);
 						PromptType = currentPromptTypes['text'];
 					}
-					ExtendedPromptType = PromptType.extend(rowObject);
-					PromptInstance = new ExtendedPromptType({ _section_name: section.section_name });
-
-					// resolve column_types on this instance...
-					_.each(_.keys(PromptInstance), function(k) {
+					// ensure that the section is saved...
+					rowObject._section_name = key;
+					
+					// resolve column_types within the prompt fields coming from XLSX.
+					// NOTE: we really should apply this to all of our code in 
+					// currentPromptTypes plus all of the fields in rowObject.
+					// HOWEVER, it is unclear how to do this using Backbone
+					// due to the way inheritance is implemented.
+					_.each(_.keys(rowObject), function(k) {
 						if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-							resolveOneField( PromptInstance[k], PromptInstance, k, 
-								surveyJson.specification.column_types[k], key, PromptInstance._row_num,
+							resolveOneField( rowObject[k], rowObject, k, 
+								surveyJson.specification.column_types[k], key, rowObject._row_num,
 								k, propertyParsers );
 						}
 					});
 					
+					ExtendedPromptType = PromptType.extend(rowObject);
+					PromptInstance = new ExtendedPromptType();
+
 					sectionObject.parsed_prompts.push(PromptInstance);
 				}
 				
 				// process operations
 				for ( i = 0 ; i < sectionObject.operations.length ; ++i ) {
 					var rowObject = sectionObject.operations[i];
+					rowObject._section_name = key;
 					_.each(_.keys(rowObject), function(k) {
 						if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
 							resolveOneField( rowObject[k], rowObject, k, 

@@ -203,11 +203,12 @@
             condition: 'formula',
             constraint: 'formula',
             required: 'formula',
-            calculation: 'formula',
-            auxillaryHash: 'formula',
-            selectionArgs: 'formula',
-            uri: 'formula',
-            callback: 'formula',
+            calculation: 'formula', // 'assign' prompt and on calculates sheet.
+            auxillaryHash: 'formula', // TODO: move to queries
+            selectionArgs: 'formula', // TODO: move to queries
+            url: 'formula', // external_link prompt
+            uri: 'formula', // queries
+            callback: 'formula', // queries
             choice_filter: 'formula(context)', // expects "choice" context arg.
             templatePath: 'requirejs_path',
             image: 'app_path_localized',

@@ -364,6 +364,7 @@
       "calculation": "formula",
       "auxillaryHash": "formula",
       "selectionArgs": "formula",
+      "url": "formula",
       "uri": "formula",
       "callback": "formula",
       "choice_filter": "formula(context)",
