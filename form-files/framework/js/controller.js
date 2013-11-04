@@ -277,7 +277,7 @@ return {
                 case "assign":
                     // do an assignment statement.
                     // defer the database update until we reach a screen.
-                    database.setValueDeferredChange(op.name, op._parsed_calculation());
+                    database.setValueDeferredChange(op.name, op.calculation());
                     // advance to the next operation.
                     path = that.getNextOperationPath(path);
                     break;
