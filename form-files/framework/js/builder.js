@@ -16,10 +16,10 @@ verifyLoad('builder',
 
     /**
      * evalFn takes a 'function(...) {}' definition ('fn') and evaluates it in the
-	 * FormulaFunctions context so that it has access to all other functions and 
-	 * does not otherwise pollute the global namespace.
-	 * 
-	 * TODO: Link/copy formula documentation.
+     * FormulaFunctions context so that it has access to all other functions and 
+     * does not otherwise pollute the global namespace.
+     * 
+     * TODO: Link/copy formula documentation.
      * TODO: How do exceptions work?
      **/
     function evalFn(fn, fieldSource, worksheet, rowNum, columnPath) {
@@ -29,16 +29,16 @@ verifyLoad('builder',
                 try {
                     return parsedFunction.apply(formulaFunctions, arguments);
                 } catch (e) {
-					var msg = "Exception: " + e.message + " in user-defined expression: " + fieldSource +
-						" on " + worksheet + " row " + rowNum + " column: " + columnPath;
-					shim.log('E', msg);
+                    var msg = "Exception: '" + e.message + "' in user-defined expression: " + fieldSource +
+                        " on " + worksheet + " row " + rowNum + " column: " + columnPath;
+                    shim.log('E', msg);
                     throw new Error(msg);
                 }
             };
         } catch (e) {
-			var msg = "Exception: " + e.message + " when evaluating user-defined expression: " + fieldSource +
-				" on " + worksheet + " row " + rowNum + " column: " + columnPath;
-			shim.log('E', "builder.evalFn " + msg);
+            var msg = "Exception: '" + e.message + "' when evaluating user-defined expression: " + fieldSource +
+                " on " + worksheet + " row " + rowNum + " column: " + columnPath;
+            shim.log('E', "builder.evalFn " + msg);
             alert(msg + '\nSee console for details.');
             throw new Error(msg + '\nSee console for details.');
         }
@@ -49,7 +49,7 @@ verifyLoad('builder',
     //For example, transformings all the constraint/condition/etc. 
     //formula strings into JS functions.
     var propertyParsers = {
-		'function': evalFn,
+        'function': evalFn,
         requirejs_path : function(content) {
             alert("Internal Error: this should already be substituted");
         },
@@ -80,51 +80,51 @@ verifyLoad('builder',
 
     /**
      * Resolve the contents of one field w.r.t. column_types map.
-	 * Returns the adjusted 'field' contents.
+     * Returns the adjusted 'field' contents.
      */
     var resolveOneField = function( field, parentObject, parentKey, columnType, worksheet, rowNum, columnPath, propertyParsers ) {
-    	if ( _.isArray(columnType) ) {
-    		throw Error("Unable to handle array-valued column_types enforcement: ", columnPath);
-    	}
-    	if ( _.isObject(columnType) ) {
+        if ( _.isArray(columnType) ) {
+            throw Error("Unable to handle array-valued column_types enforcement: ", columnPath);
+        }
+        if ( _.isObject(columnType) ) {
 
-        	_.each(_.keys(field), function(k) {
-        		if ( k in columnType ) {
-        			resolveOneField( field[k], field, k, columnType[k], worksheet, rowNum, columnPath + '.' + k, propertyParsers );
-        		}
-        	});
-			return;
-    	}
+            _.each(_.keys(field), function(k) {
+                if ( k in columnType ) {
+                    resolveOneField( field[k], field, k, columnType[k], worksheet, rowNum, columnPath + '.' + k, propertyParsers );
+                }
+            });
+            return;
+        }
 
-    	// OK. We have a specific columnType.
-		var property = field;
-		var propertySource = field;
-		var evalAs = columnType;
+        // OK. We have a specific columnType.
+        var property = field;
+        var propertySource = field;
+        var evalAs = columnType;
 
-		var formulaArgs = 'formula(';
-		if ( columnType === 'formula' || columnType.substring(0,formulaArgs.length) == formulaArgs ) {
-			var iArg = columnType.indexOf('(');
-			var argList = "()";
-			if ( iArg !== -1 ) {
-				argList = columnType.substring(iArg);
-			}
-			property = "function " + argList + "{\nreturn (" + property + ");\n}";
-			evalAs = 'function';
-		}
-		
-		if (evalAs in propertyParsers) {
-			var propertyParser = propertyParsers[evalAs];
-			shim.log("I",'Parsing: ' + property);
-			parentObject[parentKey] = propertyParser(property, propertySource, worksheet, rowNum, columnPath);
-			return;
-		}
-		else {
-			var msg = "Could not parse property of type: " + columnType + " for user-defined expression: " + fieldSource +
-				" on " + worksheet + " row " + rowNum + " column: " + columnPath;
-			shim.log('E', "builder.evalFn " + msg);
+        var formulaArgs = 'formula(';
+        if ( columnType === 'formula' || columnType.substring(0,formulaArgs.length) == formulaArgs ) {
+            var iArg = columnType.indexOf('(');
+            var argList = "()";
+            if ( iArg !== -1 ) {
+                argList = columnType.substring(iArg);
+            }
+            property = "function " + argList + "{\nreturn (" + property + ");\n}";
+            evalAs = 'function';
+        }
+        
+        if (evalAs in propertyParsers) {
+            var propertyParser = propertyParsers[evalAs];
+            shim.log("I",'Parsing: ' + property);
+            parentObject[parentKey] = propertyParser(property, propertySource, worksheet, rowNum, columnPath);
+            return;
+        }
+        else {
+            var msg = "Could not parse property of type: " + columnType + " for user-defined expression: " + fieldSource +
+                " on " + worksheet + " row " + rowNum + " column: " + columnPath;
+            shim.log('E', "builder.evalFn " + msg);
             alert(msg + '\nSee console for details.');
             throw new Error(msg + '\nSee console for details.');
-		}
+        }
     };
 
     return {
@@ -150,129 +150,129 @@ verifyLoad('builder',
             surveyJson.specification.currentPromptTypes = currentPromptTypes;
             surveyJson.specification.currentScreenTypes = currentScreenTypes;
         
-			// define the requirejs_path action on the property parser.
-			// this is the only property parser that depends upon a 
-			// current mdl value.
-			propertyParsers.requirejs_path = function(content) {
-				return formPath + content;
-			};
+            // define the requirejs_path action on the property parser.
+            // this is the only property parser that depends upon a 
+            // current mdl value.
+            propertyParsers.requirejs_path = function(content) {
+                return formPath + content;
+            };
 
-			// process the calculates sheet for column_types
-			_.each( _.keys(surveyJson.specification.calculates), function(key) {
-				var rowObject = surveyJson.specification.calculates[key];
-				_.each(_.keys(rowObject), function(k) {
-					if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-						resolveOneField( rowObject[k], rowObject, k,
-							surveyJson.specification.column_types[k], 'calculates', rowObject._row_num,
-							k, propertyParsers );
-					}
-				});
-			});
+            // process the calculates sheet for column_types
+            _.each( _.keys(surveyJson.specification.calculates), function(key) {
+                var rowObject = surveyJson.specification.calculates[key];
+                _.each(_.keys(rowObject), function(k) {
+                    if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+                        resolveOneField( rowObject[k], rowObject, k,
+                            surveyJson.specification.column_types[k], 'calculates', rowObject._row_num,
+                            k, propertyParsers );
+                    }
+                });
+            });
 
-			// copy the user-defined calculates into formulaFunctions
-			formulaFunctions.calculates = {};
-			_.each( _.keys(surveyJson.specification.calculates), function(key) {
-				var rowObject = surveyJson.specification.calculates[key];
-				formulaFunctions.calculates[key] = rowObject.calculation;
-			});
+            // copy the user-defined calculates into formulaFunctions
+            formulaFunctions.calculates = {};
+            _.each( _.keys(surveyJson.specification.calculates), function(key) {
+                var rowObject = surveyJson.specification.calculates[key];
+                formulaFunctions.calculates[key] = rowObject.calculation;
+            });
 
-			// process the settings sheet for column_types
-			_.each( _.keys(surveyJson.specification.settings), function(key) {
-				var rowObject = surveyJson.specification.settings[key];
-				_.each(_.keys(rowObject), function(k) {
-					if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-						resolveOneField( rowObject[k], rowObject, k, 
-							surveyJson.specification.column_types[k], 'settings', rowObject._row_num,
-							k, propertyParsers );
-					}
-				});
-			});
+            // process the settings sheet for column_types
+            _.each( _.keys(surveyJson.specification.settings), function(key) {
+                var rowObject = surveyJson.specification.settings[key];
+                _.each(_.keys(rowObject), function(k) {
+                    if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+                        resolveOneField( rowObject[k], rowObject, k, 
+                            surveyJson.specification.column_types[k], 'settings', rowObject._row_num,
+                            k, propertyParsers );
+                    }
+                });
+            });
 
-			// process the choices sheet for column_types
-			_.each( _.keys(surveyJson.specification.choices), function(key) {
-				var rowObject = surveyJson.specification.choices[key];
-				_.each(_.keys(rowObject), function(k) {
-					if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-						resolveOneField( rowObject[k], rowObject, k, 
-							surveyJson.specification.column_types[k], 'choices', rowObject._row_num,
-							k, propertyParsers );
-					}
-				});
-			});
+            // process the choices sheet for column_types
+            _.each( _.keys(surveyJson.specification.choices), function(key) {
+                var rowObject = surveyJson.specification.choices[key];
+                _.each(_.keys(rowObject), function(k) {
+                    if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+                        resolveOneField( rowObject[k], rowObject, k, 
+                            surveyJson.specification.column_types[k], 'choices', rowObject._row_num,
+                            k, propertyParsers );
+                    }
+                });
+            });
 
-			// process the queries sheet for column_types
-			_.each( _.keys(surveyJson.specification.queries), function(key) {
-				var rowObject = surveyJson.specification.queries[key];
-				_.each(_.keys(rowObject), function(k) {
-					if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-						resolveOneField( rowObject[k], rowObject, k, 
-							surveyJson.specification.column_types[k], 'queries', rowObject._row_num,
-							k, propertyParsers );
-					}
-				});
-			});
+            // process the queries sheet for column_types
+            _.each( _.keys(surveyJson.specification.queries), function(key) {
+                var rowObject = surveyJson.specification.queries[key];
+                _.each(_.keys(rowObject), function(k) {
+                    if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+                        resolveOneField( rowObject[k], rowObject, k, 
+                            surveyJson.specification.column_types[k], 'queries', rowObject._row_num,
+                            k, propertyParsers );
+                    }
+                });
+            });
 
-			// process the sections
-			_.each( _.keys(surveyJson.specification.sections), function(key) {
-				var sectionObject = surveyJson.specification.sections[key];
-				var i;
-				
-				sectionObject.parsed_prompts = [];
-				// process prompts
-				for ( i = 0 ; i < sectionObject.prompts.length ; ++i ) {
-					var rowObject = sectionObject.prompts[i];
-					var PromptType, ExtendedPromptType, PromptInstance;
-					
-					// xlsxconverter should have defined an _type field in the prompt...
-					if (!('_type' in rowObject)) {
-						var msg = 'builder.initializePrompts: no _type specified for prompt in row ' +
-									rowObject._row_num + ' section: ' + key;
-						shim.log('E',msg);
-						throw new Error(msg);
-					}
-					
-					if (rowObject._type in currentPromptTypes) {
-						PromptType = currentPromptTypes[rowObject._type];
-					} else {
-						shim.log('W', 'builder.initializePrompts: unknown _type ' + rowObject._type +
-							' -- using text for prompt in row ' + rowObject._row_num + ' section: ' + key);
-						PromptType = currentPromptTypes['text'];
-					}
-					// ensure that the section is saved...
-					rowObject._section_name = key;
-					
-					// resolve column_types within the prompt fields coming from XLSX.
-					// NOTE: we really should apply this to all of our code in 
-					// currentPromptTypes plus all of the fields in rowObject.
-					// HOWEVER, it is unclear how to do this using Backbone
-					// due to the way inheritance is implemented.
-					_.each(_.keys(rowObject), function(k) {
-						if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-							resolveOneField( rowObject[k], rowObject, k, 
-								surveyJson.specification.column_types[k], key, rowObject._row_num,
-								k, propertyParsers );
-						}
-					});
-					
-					ExtendedPromptType = PromptType.extend(rowObject);
-					PromptInstance = new ExtendedPromptType();
+            // process the sections
+            _.each( _.keys(surveyJson.specification.sections), function(key) {
+                var sectionObject = surveyJson.specification.sections[key];
+                var i;
+                
+                sectionObject.parsed_prompts = [];
+                // process prompts
+                for ( i = 0 ; i < sectionObject.prompts.length ; ++i ) {
+                    var rowObject = sectionObject.prompts[i];
+                    var PromptType, ExtendedPromptType, PromptInstance;
+                    
+                    // xlsxconverter should have defined an _type field in the prompt...
+                    if (!('_type' in rowObject)) {
+                        var msg = 'builder.initializePrompts: no _type specified for prompt in row ' +
+                                    rowObject._row_num + ' section: ' + key;
+                        shim.log('E',msg);
+                        throw new Error(msg);
+                    }
+                    
+                    if (rowObject._type in currentPromptTypes) {
+                        PromptType = currentPromptTypes[rowObject._type];
+                    } else {
+                        shim.log('W', 'builder.initializePrompts: unknown _type ' + rowObject._type +
+                            ' -- using text for prompt in row ' + rowObject._row_num + ' section: ' + key);
+                        PromptType = currentPromptTypes['text'];
+                    }
+                    // ensure that the section is saved...
+                    rowObject._section_name = key;
+                    
+                    // resolve column_types within the prompt fields coming from XLSX.
+                    // NOTE: we really should apply this to all of our code in 
+                    // currentPromptTypes plus all of the fields in rowObject.
+                    // HOWEVER, it is unclear how to do this using Backbone
+                    // due to the way inheritance is implemented.
+                    _.each(_.keys(rowObject), function(k) {
+                        if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+                            resolveOneField( rowObject[k], rowObject, k, 
+                                surveyJson.specification.column_types[k], key, rowObject._row_num,
+                                k, propertyParsers );
+                        }
+                    });
+                    
+                    ExtendedPromptType = PromptType.extend(rowObject);
+                    PromptInstance = new ExtendedPromptType();
 
-					sectionObject.parsed_prompts.push(PromptInstance);
-				}
-				
-				// process operations
-				for ( i = 0 ; i < sectionObject.operations.length ; ++i ) {
-					var rowObject = sectionObject.operations[i];
-					rowObject._section_name = key;
-					_.each(_.keys(rowObject), function(k) {
-						if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-							resolveOneField( rowObject[k], rowObject, k, 
-								surveyJson.specification.column_types[k], key, rowObject._row_num,
-								k, propertyParsers );
-						}
-					});
-				}
-			});
+                    sectionObject.parsed_prompts.push(PromptInstance);
+                }
+                
+                // process operations
+                for ( i = 0 ; i < sectionObject.operations.length ; ++i ) {
+                    var rowObject = sectionObject.operations[i];
+                    rowObject._section_name = key;
+                    _.each(_.keys(rowObject), function(k) {
+                        if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+                            resolveOneField( rowObject[k], rowObject, k, 
+                                surveyJson.specification.column_types[k], key, rowObject._row_num,
+                                k, propertyParsers );
+                        }
+                    });
+                }
+            });
             
             //This resets the custom css styles to the customStyles.css file in the
             //current form's directory (or nothing if customStyles.css doesn't exist).

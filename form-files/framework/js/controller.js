@@ -248,8 +248,17 @@ return {
      *
      * pass the 'begin_screen' operation into the ctxt success callback.
      */
-    _doActionAtLoop: function(ctxt, op, action, options) {
+    _doActionAtLoop: function(ctxt, inOp, inAction, inOptions) {
         var that = this;
+		// NOTE: copy arguments into local variables
+		// so that the Chrome debugger will show the 
+		// current values of these variables as the 
+		// loop below progresses.
+		//
+        var op = inOp;
+        var action = inAction;
+        var options = inOptions;
+        var path = null;
         var state = '';
         if ( options == null ) {
             options = {};
@@ -258,16 +267,16 @@ return {
             action = op._token_type;
         }
         for (;;) {
-            var path = op._section_name + "/" + op.operationIdx;
+            path = op._section_name + "/" + op.operationIdx;
             try {
                 switch ( action ) {
                 case "goto_label":
                     // jump to a label. This may be conditional...
                     // i.e., The 'condition' property is now a boolean predicate
-					// (it is compiled into one during the builder's processing 
-					// of the form). If it evaluates to false, then skip to the
-					// next question; if it evaluates to true or is not present, 
-					// then execute the 'goto'
+                    // (it is compiled into one during the builder's processing 
+                    // of the form). If it evaluates to false, then skip to the
+                    // next question; if it evaluates to true or is not present, 
+                    // then execute the 'goto'
                     if('condition' in op && !op.condition()) {
                         path = that.getNextOperationPath(path);
                     } else {
@@ -287,7 +296,7 @@ return {
                         path = that.getNextOperationPath(path);
                         break;
                     }
-                    // drop through...
+                    // otherwise drop through...
                 case "back_in_history":
                     // pop the history stack, and render that screen.
                     if (shim.hasScreenHistory(opendatakit.getRefId())) {
@@ -382,9 +391,11 @@ return {
                 }
                 
             } catch (e) {
-                console.error("controller._doActionAtLoop.exception px: " +
+                shim.log('E', "controller._doActionAtLoop.exception px: " +
                                 path + ' exception: ' + String(e));
-                ctxt.failure(that.moveFailureMessage);
+                var mf = _.extend({}, that.moveFailureMessage);
+                mf.message = mf.message + ' ' + e.message;
+                ctxt.failure(mf);
                 return;
             }
         }
@@ -511,8 +522,8 @@ return {
                     }}), ctxt.failedOperation, 
                         { popHistoryOnExit: true, omitPushOnReturnStack: true } );
             }});
-    	
-    	// start our work -- display the 'validating...' spinner
+        
+        // start our work -- display the 'validating...' spinner
         that.screenManager.showSpinnerOverlay({text:"Validating..."});
       
         var buildRenderDoneCtxt = $.extend({render: false}, newctxt, {
@@ -533,7 +544,7 @@ return {
                 } else {
                     newctxt.append("_validateQuestionHelper.validate.failure", "px: " + currPrompt.promptIdx);
                     var nextOp = that.getOperation(currPrompt._branch_label_enclosing_screen);
-					if ( nextOp != null ) {
+                    if ( nextOp != null ) {
                         newctxt.failedOperation = nextOp;
                         newctxt.failure(validateError);
                     } else {
@@ -549,9 +560,9 @@ return {
         // refresh all render contexts (they may have constraint values
         // that could have changed -- e.g., filtered choice lists).
         $.each( promptList, function(idx, promptCandidatePath) {
-        	var promptCandidate = that.getPrompt(promptCandidatePath);
-        	promptCandidate.buildRenderContext(buildRenderDoneCtxt);
-        });		
+            var promptCandidate = that.getPrompt(promptCandidatePath);
+            promptCandidate.buildRenderContext(buildRenderDoneCtxt);
+        });        
     },
     setScreen: function(ctxt, operation, passedInOptions){
         var that = this;
