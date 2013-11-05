@@ -366,7 +366,7 @@
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
-      "callback": "formula",
+      "callback": "formula(context)",
       "choice_filter": "formula(context)",
       "templatePath": "requirejs_path",
       "image": "app_path_localized",
