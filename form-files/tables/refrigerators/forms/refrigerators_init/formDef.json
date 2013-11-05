@@ -81,23 +81,22 @@
     "model": [
       {
         "name": "refrigerator_id",
-        "type": "string",
+        "type": "text",
         "_row_num": 2
       },
       {
         "name": "refrigerator_size",
-        "type": "number",
+        "type": "decimal",
         "_row_num": 3
       },
       {
         "name": "refrigerator_location",
-        "type": "object",
-        "elementType": "geopoint",
+        "type": "geopoint",
         "_row_num": 4
       },
       {
         "name": "refrigerator_condition",
-        "type": "string",
+        "type": "select_one",
         "_row_num": 5
       },
       {
@@ -273,7 +272,6 @@
         "elementKey": "refrigerator_size"
       },
       "refrigerator_location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -294,6 +292,7 @@
             "elementKey": "refrigerator_location_accuracy"
           }
         },
+        "name": "geopoint",
         "_defn": [
           {
             "_row_num": 5,
@@ -321,13 +320,13 @@
         "elementKey": "refrigerator_condition"
       },
       "refrigerator_stock_level": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 6,
             "section_name": "model"
           }
         ],
-        "type": "integer",
         "elementKey": "refrigerator_stock_level"
       }
     },
@@ -446,6 +445,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 6,
             "operationIdx": 6
           }
@@ -588,6 +588,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 9,
             "operationIdx": 9
           }
