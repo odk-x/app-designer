@@ -68,7 +68,7 @@
       {
         "type": "note",
         "display": {
-          "text": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
+          "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
           "audio": "audio/carrioncrow.mp3",
           "image": "img/dolphin.png"
         },
@@ -1229,7 +1229,7 @@
           {
             "type": "note",
             "display": {
-              "text": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
+              "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
               "audio": "audio/carrioncrow.mp3",
               "image": "img/dolphin.png"
             },
@@ -1945,6 +1945,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 63,
             "operationIdx": 53
           }
@@ -2134,6 +2135,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 9,
             "operationIdx": 9
           }
