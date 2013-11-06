@@ -354,11 +354,10 @@ promptTypes.finalize = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
-        that.controller.saveAllChanges($.extend({},ctxt,{success:function() {
-//        that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
+
+        that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
                 that.controller.leaveInstance(ctxt);
-//            }}));
-            }}), false);
+            }}));
     },
     saveFinal: function(evt) {
         evt.stopPropagation();
@@ -366,10 +365,7 @@ promptTypes.finalize = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
-//        that.controller.gotoFinalizeAndTerminateAction(ctxt);
-        that.controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                that.controller.leaveInstance(ctxt);
-            }}), true);
+        that.controller.gotoFinalizeAndTerminateAction(ctxt);
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -473,7 +469,7 @@ promptTypes.contents = promptTypes.base.extend({
             ctxt.append("prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
                 "px: " + that.promptIdx);
             // TODO: allow user to specify whether or not this is an 'advancing' operation
-            that.controller.gotoScreenPath(ctxt, oldPropertyValue /*, true */);
+            that.controller.gotoScreenPath(ctxt, oldPropertyValue, true);
         });
     },
     configureRenderContext: function(ctxt) {
@@ -829,7 +825,7 @@ promptTypes.user_branch = promptTypes.base.extend({
             var newPath = parts[0] + "/" + oldPropertyValue;
             ctxt.append("prompts." + that.type + ".click", "px: " + that.promptIdx);
             // TODO: allow user to specify whether or not this is an 'advancing' operation
-            that.controller.gotoScreenPath(ctxt,newPath /*, true */);
+            that.controller.gotoScreenPath(ctxt,newPath,true);
         });
     },
     choice_filter: function(){ return true; },
@@ -1813,7 +1809,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
             display: { text: that.acknLabel },
             checked: acknowledged
         }];
-        ctxt.success(ctxt);
+        ctxt.success();
     }
 });
 

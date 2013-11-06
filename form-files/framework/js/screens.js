@@ -137,27 +137,27 @@ screenTypes.waiting = Backbone.View.extend({
         }
         ctxt.success();
     },
-	recursiveUndelegateEvents: function() {
-		var that = this;
-		that.undelegateEvents();
+    recursiveUndelegateEvents: function() {
+        var that = this;
+        that.undelegateEvents();
         $.each(that.activePrompts, function(idx, prompt){
             prompt.undelegateEvents();
-		});
-	},
-	recursiveDelegateEvents: function() {
-		var that = this;
+        });
+    },
+    recursiveDelegateEvents: function() {
+        var that = this;
         $.each(that.activePrompts, function(idx, prompt){
             prompt.delegateEvents();
-		});
-		that.delegateEvents();
-	},
+        });
+        that.delegateEvents();
+    },
     /**
      * Give the prompts a chance to save their state to the database.
      * Also, enable the screen to enforce its own criteria for when it
      * is allowable to move off the screen. E.g., after saving or 
      * rolling back all changes.
      */
-    beforeMove: function(isStrict, advancing) {
+    beforeMove: function(isStrict, advancing, validateValues) {
         return null;
     }
 });
@@ -355,20 +355,20 @@ screenTypes.screen = Backbone.View.extend({
         });
         ctxt.success();
     },
-	recursiveUndelegateEvents: function() {
-		var that = this;
-		that.undelegateEvents();
+    recursiveUndelegateEvents: function() {
+        var that = this;
+        that.undelegateEvents();
         $.each(that.activePrompts, function(idx, prompt){
             prompt.undelegateEvents();
-		});
-	},
-	recursiveDelegateEvents: function() {
-		var that = this;
+        });
+    },
+    recursiveDelegateEvents: function() {
+        var that = this;
         $.each(that.activePrompts, function(idx, prompt){
             prompt.delegateEvents();
-		});
-		that.delegateEvents();
-	},
+        });
+        that.delegateEvents();
+    },
     /**
      * allowMove
      *   advancing == true if the user is not going 'back'
@@ -386,7 +386,7 @@ screenTypes.screen = Backbone.View.extend({
      * is allowable to move off the screen. E.g., after saving or 
      * rolling back all changes.
      */
-    beforeMove: function(isStrict, advancing) {
+    beforeMove: function(isStrict, advancing, validateValues) {
         var that = this;
         var allowMoveHandler = function(advancing) {
             var allowed = that.allowMove(advancing);
@@ -408,7 +408,7 @@ screenTypes.screen = Backbone.View.extend({
         
         if ( beforeMoveError == null )
         {
-            if ( advancing ) {
+            if ( validateValues ) {
                 var validateError;
                 for ( var i = 0; i < that.activePrompts.length; i++ )
                 {
@@ -662,20 +662,20 @@ screenTypes.columns_2 = Backbone.View.extend({
 
         ctxt.success();
     },
-	recursiveUndelegateEvents: function() {
-		var that = this;
-		that.undelegateEvents();
+    recursiveUndelegateEvents: function() {
+        var that = this;
+        that.undelegateEvents();
         $.each(that.activePrompts, function(idx, prompt){
             prompt.undelegateEvents();
-		});
-	},
-	recursiveDelegateEvents: function() {
-		var that = this;
+        });
+    },
+    recursiveDelegateEvents: function() {
+        var that = this;
         $.each(that.activePrompts, function(idx, prompt){
             prompt.delegateEvents();
-		});
-		that.delegateEvents();
-	},
+        });
+        that.delegateEvents();
+    },
     /**
      * allowMove
      *   advancing == true if the user is not going 'back'
@@ -693,7 +693,7 @@ screenTypes.columns_2 = Backbone.View.extend({
      * is allowable to move off the screen. E.g., after saving or 
      * rolling back all changes.
      */
-    beforeMove: function(isStrict, advancing) {
+    beforeMove: function(isStrict, advancing, validateValues) {
         var that = this;
         var allowMoveHandler = function(advancing) {
             var allowed = that.allowMove(advancing);
@@ -715,7 +715,7 @@ screenTypes.columns_2 = Backbone.View.extend({
         
         if ( beforeMoveError == null )
         {
-            if ( advancing ) {
+            if ( validateValues ) {
                 var validateError;
                 for ( var i = 0; i < that.activePrompts.length; i++ )
                 {

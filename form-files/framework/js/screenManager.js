@@ -69,16 +69,11 @@ return Backbone.View.extend({
             return 'refresh';
         }
     },
-    beforeMove: function(ctxt, advancing) {
+    beforeMove: function(isStrict, advancing, validateValues) {
         if ( this.activeScreen ) {
-            var screenBeforeMoveError = this.activeScreen.beforeMove(ctxt.strict, advancing);
-            if ( screenBeforeMoveError == null ){
-                ctxt.success();	
-            } else {
-                ctxt.failure(screenBeforeMoveError);
-            }
+            return this.activeScreen.beforeMove(isStrict, advancing, validateValues);
         } else {
-            ctxt.success();
+            return null;
         }
     },
     refreshScreen: function(ctxt) {

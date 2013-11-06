@@ -594,13 +594,35 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 3,
             "operationIdx": 3
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 3,
+            "operationIdx": 4
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 3,
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "back_in_history",
+            "clause": "back",
+            "_row_num": 3,
+            "operationIdx": 6
           }
         ],
         "branch_label_map": {
           "_contents": 2,
-          "_screen3": 2
+          "_screen3": 2,
+          "_finalize": 4
         }
       },
       "survey": {
@@ -1015,6 +1037,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 44,
             "operationIdx": 32
           }

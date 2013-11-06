@@ -5,10 +5,12 @@ must implement to work with the javascript library.
 It will be replaced by one injected by Android Java code.
 */
 window.shim = window.shim || {
+	showAlerts: false,
     refId: null,
-	enforceRefIdMatch: true,
+    enforceRefIdMatch: true,
     instanceId: null,
     sectionStateScreenHistory: [],
+    sessionVariables: {},
     getBaseUrl: function() {
         return '../framework';
     },
@@ -27,9 +29,9 @@ window.shim = window.shim || {
      * msg -- message to log
      */
     log: function(severity, msg) {
-		if ( severity === 'E' || severity === 'W' ) {
-			console.error(severity + '/' + msg);
-		} else {
+        if ( severity === 'E' || severity === 'W' ) {
+            console.error(severity + '/' + msg);
+        } else {
             console.log(severity + '/' + msg);
         }
     },
@@ -100,10 +102,10 @@ window.shim = window.shim || {
         }
         
         var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-		if ( lastSection.state === 'a' ) {
-			this.log("I","shim: SKIPPED('" + lastSection.screen + "','a'): pushSectionScreenState(" + refId + ")");
-			return;
-		}
+        if ( lastSection.state === 'a' ) {
+            this.log("I","shim: SKIPPED('" + lastSection.screen + "','a'): pushSectionScreenState(" + refId + ")");
+            return;
+        }
         lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
     },
     setSectionScreenState: function( refId, screenPath, state) {
@@ -162,7 +164,7 @@ window.shim = window.shim || {
             return null;
         }
         this.log("D","shim: DO: getScreenPath(" + refId + ")");
-		this._dumpScreenStateHistory();
+        this._dumpScreenStateHistory();
         
         if ( this.sectionStateScreenHistory.length === 0 ) {
             this.log("D","shim: getScreenPath: NULL!");
@@ -232,15 +234,57 @@ window.shim = window.shim || {
 
         return null;
     },
+    setSessionVariable: function(refId, elementPath, value) {
+        var that = this;
+        if (that.enforceRefIdMatch && refId !== this.refId) {
+            that.log("D","shim: IGNORED: setSessionVariable(" + refId + ", " + elementPath + 
+                ", " + value + ")");
+            return "IGNORE";
+        }
+        var parts = elementPath.split('.');
+        var i;
+        var pterm = that.sessionVariables;
+        var term = that.sessionVariables;
+        for ( i = 0 ; i < parts.length ; ++i ) {
+            if ( parts[i] in term ) {
+                pterm = term;
+                term = term[parts[i]];
+            } else {
+                pterm = term;
+                term[parts[i]] = {};
+                term = term[parts[i]];
+            }
+        }
+        pterm[parts[parts.length-1]] = value;
+    },
+    getSessionVariable: function(refId, elementPath) {
+        var that = this;
+        if (that.enforceRefIdMatch && refId !== this.refId) {
+            that.log("D","shim: IGNORED: getSessionVariable(" + refId + ", " + elementPath + 
+                ")");
+            return undefined;
+        }
+        var parts = elementPath.split('.');
+        var i;
+        var term = that.sessionVariables;
+        for ( i = 0 ; i < parts.length ; ++i ) {
+            if ( parts[i] in term ) {
+                term = term[parts[i]];
+            } else {
+                return null;
+            }
+        }
+        return term;
+    },
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
-		var that = this;
+        var that = this;
         if (that.enforceRefIdMatch && refId !== this.refId) {
             that.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + 
-				", " + internalPromptContext + ", " + action + ", ...)");
+                ", " + internalPromptContext + ", " + action + ", ...)");
             return "IGNORE";
         }
         that.log("D","shim: DO: doAction(" + refId + ", " + promptPath + 
-			", " + internalPromptContext + ", " + action + ", ...)");
+            ", " + internalPromptContext + ", " + action + ", ...)");
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
@@ -333,41 +377,42 @@ window.shim = window.shim || {
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
-			var value = JSON.parse(jsonObj);
-			window.open(value.extras.url,'_blank', null, false);
+            var value = JSON.parse(jsonObj);
+            window.open(value.extras.url,'_blank', null, false);
             setTimeout(function() {
-				that.log("D","Opened new browser window for Survey content. Close to continue");
+                that.log("D","Opened new browser window for Survey content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { } }' );
             }, 1000);
             return "OK";
         }
         if ( action === 'android.content.Intent.ACTION_VIEW' ) {
-			var value = JSON.parse(jsonObj);
-			window.open(value.uri,'_blank', null, false);
+            var value = JSON.parse(jsonObj);
+            window.open(value.uri,'_blank', null, false);
             setTimeout(function() {
-				that.log("D","Opened new browser window for 3rd party content. Close to continue");
+                that.log("D","Opened new browser window for 3rd party content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
                     '{ "status": -1, "result": { } }' );
             }, 1000);
             return "OK";
         }
     },
-	frameworkHasLoaded: function(refId, outcome) {
+    frameworkHasLoaded: function(refId, outcome) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: frameworkHasLoaded(" + refId + ", " + outcome + ")");
             return;
         }
         this.log("E","shim: DO: frameworkHasLoaded(" + refId + ", " + outcome + ")");
-        alert("notify container frameworkHasLoaded " + (outcome ? "SUCCESS" : "FAILURE"));
-	},
+        if ( this.showAlerts ) alert("notify container frameworkHasLoaded " + (outcome ? "SUCCESS" : "FAILURE"));
+    },
     saveAllChangesCompleted: function( refId, instanceId, asComplete ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
             return;
         }
         this.log("D","shim: DO: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
-        alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
+        if ( this.showAlerts ) alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
+		window.close();
     },
     saveAllChangesFailed: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -375,7 +420,7 @@ window.shim = window.shim || {
             return;
         }
         this.log("D","shim: DO: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
-        alert("notify container FAILED save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
+        if ( this.showAlerts ) alert("notify container FAILED save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
     },
     ignoreAllChangesCompleted: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -383,7 +428,8 @@ window.shim = window.shim || {
             return;
         }
         this.log("D","shim: DO: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
-        alert("notify container OK ignore all changes.");
+        if ( this.showAlerts ) alert("notify container OK ignore all changes.");
+		window.close();
     },
     ignoreAllChangesFailed: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -391,6 +437,6 @@ window.shim = window.shim || {
             return;
         }
         this.log("D","shim: DO: ignoreAllChangesFailed(" + refId + ", " + instanceId + ")");
-        alert("notify container FAILED ignore all changes.");
+        if ( this.showAlerts ) alert("notify container FAILED ignore all changes.");
     }
 };

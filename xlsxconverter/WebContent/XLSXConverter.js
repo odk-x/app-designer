@@ -580,6 +580,7 @@
          *    do_section (_do_section_name)
          *    exit_section
          *    validate (_sweep_name)
+         *    save_and_terminate
          *
          *    statements.
          */
@@ -810,6 +811,7 @@
             case "do_section":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
             case "begin_screen":
             case "end_screen":
                 throw Error("Disallowed clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
@@ -884,6 +886,7 @@
             case "do_section":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
             case "begin_screen":
                 throw Error("Disallowed clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName + " within '" + flow[idx].clause + "' beginning at row " + flow[idx]._row_num);
@@ -941,6 +944,7 @@
             case "do_section":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
                 blockFlow.push(clause);
                 ++i;
                 break;
@@ -1019,6 +1023,7 @@
             case "do_section":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
                 blockFlow.push(clause);
                 ++i;
                 break;
@@ -1067,6 +1072,13 @@
         // this should never be reached....
         blockFlow.push({ _token_type: "back_in_history", clause: "back", _row_num: rowNum });
 
+        if ( sheetName == 'initial' ) {
+	        blockFlow.push({ _token_type: "branch_label", branch_label: "_finalize", _row_num: rowNum });
+	        blockFlow.push({ _token_type: "validate", clause: "validate finalize", _sweep_name: "finalize", _row_num: rowNum });
+	        blockFlow.push({ _token_type: "save_and_terminate", clause: "save and terminate", calculation: true, _row_num: rowNum });
+	        // this should never be reached....
+	        blockFlow.push({ _token_type: "back_in_history", clause: "back", _row_num: rowNum });
+        }
         return blockFlow;
     };
 
@@ -1152,6 +1164,7 @@
             case "do_section":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
                 throw Error("Internal error. clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
                 break;
@@ -1178,6 +1191,7 @@
             case "back_in_history":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
                 flattened.push(clause);
                 ++i;
                 break;
@@ -1328,6 +1342,7 @@
             case "do_section":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
             case "begin_screen":
                 clause.operationIdx = operations.length;
                 operations.push(clause);
@@ -1373,6 +1388,7 @@
             case "do_section":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
             case "begin_screen":
                 ++i;
                 break;
@@ -1410,6 +1426,7 @@
             case "back_in_history":
             case "exit_section":
             case "validate":
+            case "save_and_terminate":
             case "begin_screen":
                 ++i;
                 break;

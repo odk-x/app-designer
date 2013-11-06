@@ -53,8 +53,8 @@ return {
         // cacheAllData
         database.initializeInstance($.extend({},ctxt,{success:function() {
             // fire the controller to render the first page.
-            ctxt.append("parsequery._effectChange.gotoScreenPath." + (sameInstance ? "sameForm" : "differentForm"),
-                        "gotoScreenPath("+screenPath+") refId: " + refId + " ms: " + (+new Date()));
+            ctxt.append("parsequery._effectChange.startAtScreenPath." + (sameInstance ? "sameForm" : "differentForm"),
+                        "startAtScreenPath("+screenPath+") refId: " + refId + " ms: " + (+new Date()));
             // set the refId. From this point onward,
             // changes will be applied within the shim
             opendatakit.setRefId(refId);
@@ -69,7 +69,7 @@ return {
             if ( !shim.hasSectionStack(refId) ) {
                 shim.clearSectionScreenState(refId);
             }
-            that.controller.gotoScreenPath(ctxt, screenPath);
+            that.controller.startAtScreenPath(ctxt, screenPath);
         }}), instanceId, instanceMetadataKeyValueMap);
     },
     /**
