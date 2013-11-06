@@ -355,7 +355,9 @@ promptTypes.finalize = promptTypes.base.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
         that.controller.saveAllChanges($.extend({},ctxt,{success:function() {
+//        that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
                 that.controller.leaveInstance(ctxt);
+//            }}));
             }}), false);
     },
     saveFinal: function(evt) {
@@ -364,6 +366,7 @@ promptTypes.finalize = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
+//        that.controller.gotoFinalizeAndTerminateAction(ctxt);
         that.controller.saveAllChanges($.extend({},ctxt,{success:function() {
                 that.controller.leaveInstance(ctxt);
             }}), true);
@@ -469,7 +472,8 @@ promptTypes.contents = promptTypes.base.extend({
         $target.attr("label", function(index, oldPropertyValue){
             ctxt.append("prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
                 "px: " + that.promptIdx);
-            that.controller.gotoScreenPath(ctxt, oldPropertyValue);
+            // TODO: allow user to specify whether or not this is an 'advancing' operation
+            that.controller.gotoScreenPath(ctxt, oldPropertyValue /*, true */);
         });
     },
     configureRenderContext: function(ctxt) {
@@ -541,11 +545,10 @@ promptTypes.linked_table = promptTypes.base.extend({
         var parts = that.selection.split(' ');
         var remapped = '';
         var i;
-        var elementNamePattern = /^[a-zA-Z0-9_]+$/i;
         
         for ( i = 0 ; i < parts.length ; ++i ) {
             var e = parts[i];
-            if ( e.length === 0 || !elementNamePattern.test(e) ) {
+            if ( e.length === 0 || !database.isValidElementPath(e) ) {
                 remapped = remapped + ' ' + e;
             } else {
                 // map e back to elementKey
@@ -582,13 +585,12 @@ promptTypes.linked_table = promptTypes.base.extend({
         }
         var parts = that.order_by.split(' ');
         var remapped = '';
-        var isElement = true;
         var i;
         for ( i = 0 ; i < parts.length ; ++i ) {
             var e = parts[i];
-            if ( e.length === 0 ) {
-                // no-op
-            } else if ( isElement ) {
+            if ( e.length === 0 || !database.isValidElementPath(e) ) {
+                remapped = remapped + ' ' + e;
+            } else {
                 // map e back to elementKey
                 var found = false;
                 var f;
@@ -607,10 +609,6 @@ promptTypes.linked_table = promptTypes.base.extend({
                     shim.log('E','convertOrderBy: unrecognized elementPath: ' + e );
                     return null;
                 }
-                isElement = false;
-            } else {
-                remapped = remapped + ' ' + e;
-                isElement = true;
             }
         }
         that._cachedOrderBy = remapped;
@@ -631,7 +629,7 @@ promptTypes.linked_table = promptTypes.base.extend({
     configureRenderContext: function(ctxt) {
         var that = this;
         ctxt.append("prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
-        that.renderContext.add_instance_label = that.display.new_instance_text || "Add Instance";
+        that.renderContext.add_instance_label = ((that.display != null) ? that.display.new_instance_text : null) || "Add Instance";
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
             var selString = that.convertSelection(linkedMdl);
@@ -830,7 +828,8 @@ promptTypes.user_branch = promptTypes.base.extend({
             }
             var newPath = parts[0] + "/" + oldPropertyValue;
             ctxt.append("prompts." + that.type + ".click", "px: " + that.promptIdx);
-            that.controller.gotoScreenPath(ctxt,newPath);
+            // TODO: allow user to specify whether or not this is an 'advancing' operation
+            that.controller.gotoScreenPath(ctxt,newPath /*, true */);
         });
     },
     choice_filter: function(){ return true; },

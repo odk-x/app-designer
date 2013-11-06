@@ -81,13 +81,12 @@
       },
       {
         "name": "refrigerator_location",
-        "type": "object",
-        "elementType": "geopoint",
+        "type": "geopoint",
         "_row_num": 4
       },
       {
         "name": "refrigerator_condition",
-        "type": "string",
+        "type": "select_one",
         "_row_num": 5
       },
       {
@@ -235,34 +234,53 @@
     "calculates": {},
     "model": {
       "refrigerator_id": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 2,
             "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "refrigerator_id"
       },
       "refrigerator_size": {
+        "type": "number",
         "_defn": [
           {
             "_row_num": 3,
             "section_name": "model"
           }
         ],
-        "type": "number",
         "elementKey": "refrigerator_size"
       },
       "refrigerator_location": {
+        "name": "geopoint",
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "refrigerator_location_latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "refrigerator_location_longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "refrigerator_location_altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "refrigerator_location_accuracy"
+          }
+        },
         "_defn": [
           {
             "_row_num": 4,
             "section_name": "model"
           }
         ],
-        "type": "object",
-        "elementType": "geopoint",
         "elementKey": "refrigerator_location"
       },
       "refrigerator_condition": {
@@ -388,6 +406,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 5,
             "operationIdx": 5
           }
@@ -529,6 +548,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 9,
             "operationIdx": 9
           }

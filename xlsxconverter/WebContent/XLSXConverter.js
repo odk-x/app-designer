@@ -220,9 +220,13 @@
     //origin policies might prevent it from being fetched when this script
     //is used from the local file system.
     var promptTypeMap = {
+        "string" : {"type":"string"}, // database primitive
+        "integer" : {"type":"integer"}, // database primitive
+        "number" : {"type":"number"}, // database primitive
+        "boolean" : {"type":"boolean"}, // database primitive
+        "object" : {"type":"object"}, // database primitive
+        "array" : {"type":"array"}, // database primitive
         "text" : {"type":"string"},
-        "string" : {"type":"string"},
-        "integer" : {"type":"integer"},
         "decimal" : {"type":"number"},
         "acknowledge" : {"type":"boolean"},
         "select_one" : {"type":"string"},
@@ -724,6 +728,16 @@
                         clauseEntry._sweep_name = "finalize";
                     }
                     break;
+                case "save":
+                	if ( parts.length != 3 && parts[1] != 'and' && parts[2] != 'terminate' ) {
+                        throw Error("Expected 'save and terminate' but found: " + row.clause +
+                                " on sheet: " + sheetName + " on row: " + row._row_num);
+                	}
+                	if (! "calculation" in row) {
+                		clauseEntry.calculation = false;
+                	}
+                    clauseEntry._token_type = "save_and_terminate";
+                    break;
                 default:
                     throw Error("Unrecognized 'clause' expression: " + row.clause +
                             " on sheet: " + sheetName + " on row: " + row._row_num);
@@ -1051,7 +1065,7 @@
         blockFlow.push({ _token_type: "branch_label", branch_label: "_contents", _row_num: rowNum });
         blockFlow.push({ _token_type: "prompt", type: "contents", _type: "contents", _row_num: rowNum });
         // this should never be reached....
-        blockFlow.push({ _token_type: "back_in_history", _row_num: rowNum });
+        blockFlow.push({ _token_type: "back_in_history", clause: "back", _row_num: rowNum });
 
         return blockFlow;
     };
@@ -1813,7 +1827,78 @@
     	});
     };
 
+    /**
+     * Descend into 'term' expanding the 'type' field with the promptType storage
+     * definition found in the 'prompt_types' sheet; override that definition with
+     * whatever is provided in the model sheet (excluding the original 'type' field).
+     */
+    var recursivelyResolveTypeInDataModel = function( term, promptTypes ) {
+    	if ( 'properties' in term ) {
+    		_.each( _.keys(term.properties), function(name) {
+	            var defn = term.properties[name];
+	            if ( 'type' in defn ) {
+	            	// blend in the default definition for this prompt type
+	            	var type = defn.type;
+	            	if ( type in promptTypes ) {
+	            		var schema = promptTypes[type];
+	                    if(schema) {
+	                    	// deep copy of schema because we are going to add properties recursively
+	                    	schema = deepCopyObject(schema);
+	                    	// override the promptTypes 'type' with info supplied by the prompt_type sheet.
+	                    	delete defn.type;
+	                    	term.properties[name] = deepExtendObject( schema, defn );
+	                    }
+	            	}
+	            }
+	            recursivelyResolveTypeInDataModel(term.properties[name], promptTypes);
+    		});
+    	}
+    	if ( 'items' in term ) {
+            var defn = term.items;
+            if ( 'type' in defn ) {
+            	// blend in the default definition for this prompt type
+            	var type = defn.type;
+            	if ( type in promptTypes ) {
+            		var schema = promptTypes[type];
+                    if(schema) {
+                    	// deep copy of schema because we are going to add properties recursively
+                    	schema = deepCopyObject(schema);
+                    	// override the promptTypes 'type' with info supplied by the prompt_type sheet.
+                    	delete defn.type;
+                    	term.items = deepExtendObject( schema, defn );
+                    }
+            	}
+            }
+            recursivelyResolveTypeInDataModel(term.items, promptTypes);
+    	}
+    };
+
     var developDataModel = function( specification, promptTypes ) {
+    	/**
+    	 * The user understands prompt 'type'
+    	 * Go through the model and replace the 'type' value found with the expansion of
+    	 * the storage for that prompt 'type' with the actual datastore representation.
+    	 */
+
+        _.each( _.keys(specification.model), function(name) {
+            var defn = specification.model[name];
+            if ( 'type' in defn ) {
+            	// blend in the default definition for this prompt type
+            	var type = defn.type;
+            	if ( type in promptTypes ) {
+            		var schema = promptTypes[type];
+                    if(schema) {
+                    	// deep copy of schema because we are going to add properties recursively
+                    	schema = deepCopyObject(schema);
+                    	// override the promptTypes 'type' with info supplied by the prompt_type sheet.
+                    	delete defn.type;
+                    	specification.model[name] = deepExtendObject( schema, defn );
+                    }
+            	}
+            }
+            recursivelyResolveTypeInDataModel(specification.model[name], promptTypes);
+        });
+
         var assigns = [];
         var model = {};
         _.each(specification.sections, function(section){
@@ -1832,6 +1917,7 @@
                         	}
                         	// deep copy of schema because we are going to add properties recursively
                         	schema = deepCopyObject(schema);
+                            recursivelyResolveTypeInDataModel(schema, promptTypes);
                             updateModel( section, prompt, model, schema );
                         } else {
                             throw Error("Expected 'name' but none defined for prompt. Prompt: '" + prompt.type + "' at row " +
@@ -1876,6 +1962,7 @@
                             if(schema){
                             	// deep copy of schema because we are going to add properties recursively
                             	schema = deepCopyObject(schema);
+                            	recursivelyResolveTypeInDataModel(schema, promptTypes);
                                 updateModel( section, operation, model, schema );
                             } else if ( schema === undefined ) {
                                 throw Error("Unrecognized assign type: " + operation._data_type + ". Clause: '" + operation.type + "' at row " +
@@ -1906,19 +1993,6 @@
             if ( name in model ) {
                 // defined in both
                 var defn = model[name];
-                if ( 'elementType' in defn ) {
-                	// blend in the default definition for this elementType
-                	var type = defn.elementType;
-                	if ( type in promptTypes ) {
-                		var schema = promptTypes[type];
-                        if(schema) {
-                        	// deep copy of schema because we are going to add properties recursively
-                        	schema = deepCopyObject(schema);
-                        	// override the promptTypes definition with info supplied in the model sheet.
-                        	defn = deepExtendObject( schema, defn );
-                        }
-                	}
-                }
                 var mdef = specification.model[name];
                 var amodb = deepExtendObject( deepExtendObject( {}, defn), mdef);
                 var bmoda = deepExtendObject( deepExtendObject( {}, mdef), defn);

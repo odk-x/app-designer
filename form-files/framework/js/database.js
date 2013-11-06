@@ -1,6 +1,6 @@
 'use strict';
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
-define(['mdl','opendatakit','jquery'], function(mdl,opendatakit,$) {
+define(['mdl','opendatakit','jquery','XRegExp'], function(mdl,opendatakit,$,XRegExp) {
 verifyLoad('database',
     ['mdl','opendatakit','jquery'],
     [mdl,opendatakit,$]);
@@ -70,6 +70,165 @@ return {
             // mapped as psuedo-columns per PredefinedColumns objects, above.
             // propertyName is the value of the 'key' in the database.
      },
+    _reservedFieldNames: {
+        /**
+         * ODK Metadata reserved names
+         */
+        savepoint_timestamp: true,
+        savepoint_type: true,
+        form_id: true,
+        locale: true,
+
+        /**
+         * SQLite keywords ( http://www.sqlite.org/lang_keywords.html )
+         */
+        abort: true,
+        action: true,
+        add: true,
+        after: true,
+        all: true,
+        alter: true,
+        analyze: true,
+        and: true,
+        as: true,
+        asc: true,
+        attach: true,
+        autoincrement: true,
+        before: true,
+        begin: true,
+        between: true,
+        by: true,
+        cascade: true,
+        'case': true,
+        cast: true,
+        check: true,
+        collate: true,
+        column: true,
+        commit: true,
+        conflict: true,
+        constraint: true,
+        create: true,
+        cross: true,
+        current_date: true,
+        current_time: true,
+        current_timestamp: true,
+        database: true,
+        'default': true,
+        deferrable: true,
+        deferred: true,
+        'delete': true,
+        desc: true,
+        detach: true,
+        distinct: true,
+        drop: true,
+        each: true,
+        'else': true,
+        end: true,
+        escape: true,
+        except: true,
+        exclusive: true,
+        exists: true,
+        explain: true,
+        fail: true,
+        'for': true,
+        foreign: true,
+        from: true,
+        full: true,
+        glob: true,
+        group: true,
+        having: true,
+        'if': true,
+        ignore: true,
+        immediate: true,
+        'in': true,
+        index: true,
+        indexed: true,
+        initially: true,
+        inner: true,
+        insert: true,
+        instead: true,
+        intersect: true,
+        into: true,
+        is: true,
+        isnull: true,
+        join: true,
+        key: true,
+        left: true,
+        like: true,
+        limit: true,
+        match: true,
+        natural: true,
+        no: true,
+        not: true,
+        notnull: true,
+        'null': true,
+        of: true,
+        offset: true,
+        on: true,
+        or: true,
+        order: true,
+        outer: true,
+        plan: true,
+        pragma: true,
+        primary: true,
+        query: true,
+        raise: true,
+        references: true,
+        regexp: true,
+        reindex: true,
+        release: true,
+        rename: true,
+        replace: true,
+        restrict: true,
+        right: true,
+        rollback: true,
+        row: true,
+        savepoint: true,
+        select: true,
+        set: true,
+        table: true,
+        temp: true,
+        temporary: true,
+        then: true,
+        to: true,
+        transaction: true,
+        trigger: true,
+        union: true,
+        unique: true,
+        update: true,
+        using: true,
+        vacuum: true,
+        values: true,
+        view: true,
+        virtual: true,
+        when: true,
+        where: true
+    },
+    // Unicode extensions to standard RegExp...
+    _pattern_valid_user_defined_name: 
+        XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)*$', 'A'),
+    isValidElementPath: function(path) {
+        var that = this;
+        if ( path == null ) {
+            return false;
+        }
+        if ( path.length > 62 ) {
+            return false;
+        }
+        var parts = path.split('.');
+        var i;
+        for ( i = 0 ; i < parts.length ; ++i ) {
+            var name = parts[i];
+            if ( !that._pattern_valid_user_defined_name.test(name) ) {
+                return false;
+            }
+            var lowercase = name.toLowerCase();
+            if (lowercase in that._reservedFieldNames) {
+                return false;
+            }
+        }
+        return true;
+    },
     _getAccessibleTableKeyDefinition: function( key ) {
         return this._tableKeyValueStoreActiveAccessibleKeys[key];
     },
