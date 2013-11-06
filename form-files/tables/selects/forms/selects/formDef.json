@@ -181,7 +181,7 @@
         "type": "select_one",
         "values_list": "countries_csv",
         "appearance": "dropdown",
-        "name": "country",
+        "name": "country_csv",
         "display": {
           "text": "Choose a country:"
         },
@@ -326,25 +326,25 @@
       {
         "query_name": "countries",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
         "_row_num": 2
       },
       {
         "query_name": "states",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
         "_row_num": 3
       },
       {
         "query_name": "regions_csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
         "_row_num": 4
       },
       {
         "query_name": "countries_csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
         "_row_num": 5
       },
       {
@@ -565,25 +565,25 @@
       "countries": {
         "query_name": "countries",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
         "_row_num": 2
       },
       "states": {
         "query_name": "states",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
         "_row_num": 3
       },
       "regions_csv": {
         "query_name": "regions_csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region};\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
         "_row_num": 4
       },
       "countries_csv": {
         "query_name": "countries_csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
         "_row_num": 5
       },
       "content_provider_test": {
@@ -596,17 +596,13 @@
     "calculates": {},
     "model": {
       "country": {
-        "type": "string",
         "_defn": [
           {
             "_row_num": 2,
             "section_name": "survey"
-          },
-          {
-            "_row_num": 26,
-            "section_name": "survey"
           }
         ],
+        "type": "string",
         "elementKey": "country"
       },
       "state": {
@@ -698,6 +694,16 @@
         ],
         "type": "string",
         "elementKey": "region"
+      },
+      "country_csv": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "country_csv"
       },
       "cp_test": {
         "_defn": [
@@ -926,7 +932,7 @@
             "type": "select_one",
             "values_list": "countries_csv",
             "appearance": "dropdown",
-            "name": "country",
+            "name": "country_csv",
             "display": {
               "text": "Choose a country:"
             },
