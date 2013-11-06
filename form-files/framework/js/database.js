@@ -205,7 +205,7 @@ return {
         where: true
     },
     // Unicode extensions to standard RegExp...
-    pattern_valid_user_defined_name: 
+    _pattern_valid_user_defined_name: 
         XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)*$', 'A'),
     isValidElementPath: function(path) {
         var that = this;
@@ -219,11 +219,11 @@ return {
         var i;
         for ( i = 0 ; i < parts.length ; ++i ) {
             var name = parts[i];
-            if ( !that.pattern_valid_user_defined_name.test(name) ) {
+            if ( !that._pattern_valid_user_defined_name.test(name) ) {
                 return false;
             }
             var lowercase = name.toLowerCase();
-            if (lowercase in that.reservedFieldNames) {
+            if (lowercase in that._reservedFieldNames) {
                 return false;
             }
         }
