@@ -113,7 +113,11 @@
                         selected="selected"
                     {{/if}}
                     value="{{data_value}}">
-                    {{localize display.text}}
+                    {{#if display.text}}
+                    	{{#substitute}}{{localize display.text}}{{/substitute}}
+                    {{else}}
+                        {{name}}
+                    {{/if}}
                 </option>
             {{/each}}
         </select>
@@ -149,6 +153,8 @@
                 {{/if}}
                 {{#if display.text}}
                     {{#substitute}}{{localize display.text}}{{/substitute}}
+                {{else}}
+                    {{name}}
                 {{/if}}
                 </label>
             {{/each}}

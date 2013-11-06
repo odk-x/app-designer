@@ -1087,7 +1087,15 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 "dataType": 'json',
                 "data": {},
                 "success": function(result){
-                    that.renderContext.choices = query.callback(result);
+
+                    // Hack just to prove that this will work
+                    // This will be taken out in the cleanup
+                    var queryResultChoices = query.callback(result);
+                    that.renderContext.choices = _.map(queryResultChoices, function(choice){
+                        choice.data_value = choice.name;
+                        return choice;
+                    });
+
                     newctxt.success("success");
                 },
                 "error": function(e) {
@@ -1115,7 +1123,15 @@ promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
                 ajaxOptions.success = function(result) {
                     try {
                         require(['jquery-csv'], function(){
-                            that.renderContext.choices = query.callback($.csv.toObjects(result));
+
+                            // Hack just to prove that this will work
+                            // This will be taken out in the cleanup
+                            var queryResultChoices = query.callback($.csv.toObjects(result));
+                            that.renderContext.choices = _.map(queryResultChoices, function(choice){
+                                choice.data_value = choice.name;
+                                return choice;
+                            });
+
                             newctxt.success("success");
                         },
                         function (err) {
