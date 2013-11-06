@@ -43,7 +43,8 @@ requirejs.config({
         jqmConfig : 'js/jqmConfig',
         handlebarsHelpers : 'js/handlebarsHelpers',
         formulaFunctions : 'js/formulaFunctions',
-        'jquery-csv' : 'libs/jquery-csv/src/jquery.csv'
+        'jquery-csv' : 'libs/jquery-csv/src/jquery.csv',
+        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2013-08-27'
     },
     shim: {
         'jqmobile': {
