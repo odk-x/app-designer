@@ -156,10 +156,9 @@ require(['jquery'],
                 } else if ( search != null && search.indexOf("purge") >= 0 ) {
                     // this only occurs in a web-hosted XLSXConverter (for testing)
                     var ctxt = controller.newStartContext();
-                    ctxt.append("jqmConfig.purge");
-                    shim.log('W','jqmConfig.purge');
+                    ctxt.log('W',"jqmConfig.purge");
                     database.purge($.extend({},ctxt,{success:function() {
-                        ctxt.append('jqmConfig.purge.changeUrlHash');
+                        ctxt.log('D','jqmConfig.purge.changeUrlHash');
                         // remove the 'purge' flag...
                         if ( hashIdx < 0 ) {
                             ref = ref + '?';
@@ -167,7 +166,7 @@ require(['jquery'],
                             ref = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                         }
                         // we loose the ctxt action (page load restarts everything...)
-                        shim.log('W','jqmConfig.purge.reloadpage');
+                        ctxt.log('W','jqmConfig.purge.reloadpage');
                         window.location.assign(ref);
                     }}));
                 } else if ( (testAndroidParsing || opendatakit.getPlatformInfo().container === "Android") && 
@@ -179,7 +178,7 @@ require(['jquery'],
                     window.location.assign(newref);
                 } else {
                     var ctxt = controller.newStartContext();
-                    ctxt.append('jqmConfig.changeUrlHash');
+                    ctxt.log('D','jqmConfig.changeUrlHash');
                     parsequery.changeUrlHash(ctxt);
                 }
             }, function(err) {

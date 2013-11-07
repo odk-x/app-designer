@@ -53,7 +53,7 @@ return {
         // cacheAllData
         database.initializeInstance($.extend({},ctxt,{success:function() {
             // fire the controller to render the first page.
-            ctxt.append("parsequery._effectChange.startAtScreenPath." + (sameInstance ? "sameForm" : "differentForm"),
+            ctxt.log('D',"parsequery._effectChange.startAtScreenPath." + (sameInstance ? "sameForm" : "differentForm"),
                         "startAtScreenPath("+screenPath+") refId: " + refId + " ms: " + (+new Date()));
             // set the refId. From this point onward,
             // changes will be applied within the shim
@@ -95,14 +95,14 @@ return {
         // THIS IS AN ASSUMPTION OF THE CALLING FUNCTION!!!!
         
         if ( formPath == null ) {
-            ctxt.append("parsequery._parseQueryParameterContinuation.nullFormPath");
+            ctxt.log('E',"parsequery._parseQueryParameterContinuation.nullFormPath");
             alert("Unexpected null formPath");
             ctxt.failure({message: "No form specified."});
             return;
         }
         
         if ( formDef == null ) {
-            ctxt.append("parsequery._parseQueryParameterContinuation.nullFormDef");
+            ctxt.log('E',"parsequery._parseQueryParameterContinuation.nullFormDef");
             alert("Unexpected null formDef when changing forms");
             ctxt.failure({message: "Form definition is empty."});
             return;
@@ -110,7 +110,7 @@ return {
         
         var fidObject = opendatakit.getSettingObject(formDef, 'form_id');
         if ( fidObject == null || !('value' in fidObject) ) {
-            ctxt.append("parsequery._parseQueryParameterContinuation.missingFormId");
+            ctxt.log('E',"parsequery._parseQueryParameterContinuation.missingFormId");
             alert("Unexpected missing value for form_id setting when changing forms");
             ctxt.failure({message: "Form definition has no form_id."});
             return;
@@ -121,7 +121,7 @@ return {
         var tidObject = opendatakit.getSettingObject(formDef, 'table_id');
         var table_id;
         if ( tidObject == null || !('value' in tidObject) ) {
-            ctxt.append("parsequery._parseQueryParameterContinuation.missingTableId");
+            ctxt.log('E',"parsequery._parseQueryParameterContinuation.missingTableId");
             alert("No table_id specified in Form Definition!");
             ctxt.failure({message: "No table_id specified in form definition."});
             return;
@@ -141,7 +141,7 @@ return {
         var qpl = opendatakit.getHashString(formPath, instanceId, screenPath);
 
         if ( !sameTable ) {
-            ctxt.append("parsequery._parseQueryParameterContinuation.differentTable");
+            ctxt.log('D',"parsequery._parseQueryParameterContinuation.differentTable");
             opendatakit.clearLocalInfo("table"); // tableId, formPath, instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
@@ -160,7 +160,7 @@ return {
                     }}), formDef, table_id, formPath);
             }}), sameForm);
         } else if (!sameForm) {
-            ctxt.append("parsequery._parseQueryParameterContinuation.differentForm");
+            ctxt.log('D',"parsequery._parseQueryParameterContinuation.differentForm");
             opendatakit.clearLocalInfo("form"); // formPath, instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
@@ -176,7 +176,7 @@ return {
                 }}), formDef, formPath);
             }}), sameForm);
         } else  if (!sameInstance) {
-            ctxt.append("parsequery._parseQueryParameterContinuation.differentInstance");
+            ctxt.log('D',"parsequery._parseQueryParameterContinuation.differentInstance");
             opendatakit.clearLocalInfo("instance"); // instanceId, screenPath, refId
             // reset controller to pristine state...
             that.controller.reset($.extend({},ctxt, {success:function() {
@@ -189,7 +189,7 @@ return {
                 that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
             }}), sameForm);
         } else {
-            ctxt.append("parsequery._parseQueryParameterContinuation.differentScreen");
+            ctxt.log('D',"parsequery._parseQueryParameterContinuation.differentScreen");
             opendatakit.clearLocalInfo("screen"); // screenPath, refId
             // currentInstanceId == valid value
             // data table already exists (since table_id is unchanged)
@@ -204,7 +204,7 @@ return {
      * Invoked whenever a URL change alters the window.location.hash
      */
     _parseParameters:function(ctxt) {
-        ctxt.append("parsequery._parseParameters");
+        ctxt.log('D',"parsequery._parseParameters");
         var that = this;
         
         var formPath = null;
@@ -247,7 +247,7 @@ return {
         }
         
         if ( refId == null ) {
-            ctxt.append('parsequery._parseParameters.shim.refId is null -- generating unique value');
+            ctxt.log('I','parsequery._parseParameters.shim.refId is null -- generating unique value');
             refId = opendatakit.genUUID();
         }
         
@@ -255,10 +255,9 @@ return {
         try {
             shim.refId = refId;
         } catch(e) {
-            ctxt.append('parsequery._parseParameters.shim.refId assignment failed');
+            ctxt.log('W','parsequery._parseParameters.shim.refId assignment failed (ok if embedded)');
         }
-        ctxt.append('parsequery._parseParameters.shim.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
-        shim.log('D', 'parsequery._parseParameters.shim.refId AFTER ASSIGNMENT refId: ' + refId);
+        ctxt.log('D','parsequery._parseParameters.shim.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
         
         var formDef = opendatakit.getCurrentFormDef();
         var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);
@@ -277,8 +276,7 @@ return {
                 that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
                                         instanceId, screenPath, refId, instanceMetadataKeyValueMap);
             } catch (ex) {
-                console.error('parsequery._parseParameters.continuationException' + String(ex));
-                ctxt.append('parsequery._parseParameters.continuationException',  'unknown error: ' + ex);
+                ctxt.log('E','parsequery._parseParameters.continuationException',  'unknown error: ' + ex.message);
                 ctxt.failure({message: "Exception while processing form definition."});
             }
         }
@@ -313,14 +311,13 @@ return {
         var qpl;
 
         var hash = window.location.hash;
-        ctxt.append('parsequery.changeUrlHash', "window.location.hash="+hash);
+        ctxt.log('D','parsequery.changeUrlHash', "window.location.hash="+hash);
 
         if ( hash === '#' ) {
             // this is bogus transition due to jquery mobile widgets
-            ctxt.append('parsequery.changeUrlHash.emptyHash');
-            alert('Hash is invalid!');
+            ctxt.log('W','parsequery.changeUrlHash.emptyHash - bad jqueryMobile interaction!!');
             qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.getCurrentScreenPath());
-            ctxt.append('parsequery.changeUrlHash.emptyHash.reset', qpl);
+            ctxt.log('D','parsequery.changeUrlHash.emptyHash.reset', qpl);
             window.location.hash = qpl;
             ctxt.failure({message: "Internal error: invalid hash (restoring)"});
             return false;
@@ -330,7 +327,7 @@ return {
             // and flush any pending doAction callback
             landing.setController(ctxt, that.controller, opendatakit.getRefId());
           }, failure: function(m) {
-            ctxt.append('parsequery.changeUrlHash unable to transition to ' + hash, m);
+            ctxt.log('E','parsequery.changeUrlHash unable to transition to ' + hash, m);
             if ( hash === '#formPath=' + escape(shim.getBaseUrl() + '/') ) {
                 landing.setController(ctxt, that.controller, opendatakit.getRefId(), m || { message: 'failed to load page'});
             } else {
