@@ -30,8 +30,6 @@ promptTypes.base = Backbone.View.extend({
     required_message: "Required value not provided.",
     // the path to the handlebars template that is compiled and stored in 'template'
     templatePath: null,
-    // Template context is a user-specified object that overrides the render context.
-    templateContext: {},
     // inputAttributes are a user-specified object that overrides baseInputAttributes.
     inputAttributes: {},
     
@@ -130,7 +128,6 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.image = this.image;
         this.renderContext.audio = this.audio;
         this.renderContext.video = this.video;
-        this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
         this.renderContext.required = this.required;
         this.renderContext.appearance = this.appearance;
@@ -147,7 +144,6 @@ promptTypes.base = Backbone.View.extend({
             this.renderContext.pre4Android = ( platinfo.version.substring(0,1) < "4" );
         }
         this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
-        $.extend(this.renderContext, this.templateContext);
     },
     /**
      * configureRenderContext
