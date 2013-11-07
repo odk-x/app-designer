@@ -15,18 +15,18 @@ verifyLoad('screens',
     [screenTypes,   opendatakit,  controller,  Backbone,  $,       _,           Handlebars,  _jqmobile, _hh, translations]);
 
 screenTypes.base = Backbone.View.extend({
-	/**
-	 * These values must be defined in concrete implementations:
-	 *   type
-	 *   templatePath
-	 *   renderContext
-	 */
+    /**
+     * These values must be defined in concrete implementations:
+     *   type
+     *   templatePath
+     */
     controller: controller,
-	/**
-	 * These values are injected by screenManager:
-	 *   _section_name
-	 *   _row_num
-	 */
+    /**
+     * These values are injected by screenManager:
+     *   _section_name
+     *   _row_num
+     *   _screenManager.renderContext
+     */
     activePrompts: [],
     initialize: function(args) {
         var that = this;
@@ -97,20 +97,56 @@ screenTypes.base = Backbone.View.extend({
         var that = this;
         that._screenManager.refreshScreen(ctxt);
     },
+    /**
+     * Use the render context from the screenManager, but mix in 
+     * any values explicitly defined for this screen.  Screen can
+     * only enable or disable navigation, but cannot enable or 
+     * disable forward/backward functionality -- that is dictated
+     * by the controller via the screenManager.
+     */
+    initializeRenderContext: function() {
+        var that = this;
+        // shallow copy because we don't want to modify the screenManager's render context.
+        that._renderContext = $.extend({},that._screenManager.renderContext);
+        if ( 'display' in that && _.isObject(that.display) ) {
+            that._renderContext.display = that.display;
+        } else {
+            var section = opendatakit.getSettingObject(opendatakit.getCurrentFormDef(), that._section_name);
+            that._renderContext.display = (section && section.display) ? 
+                section.display : {title: that.controller.getSectionTitle()};
+        }
+        if ( 'showHeader' in that ) {
+            that._renderContext.showHeader = that.showHeader;
+        }
+        if ( 'showFooter' in that ) {
+            that._renderContext.showFooter = that.showFooter;
+        }
+        if ( 'showContents' in that ) {
+            that._renderContext.showContents = that.showContents;
+        }
+        if ( 'enableNavigation' in that ) {
+            that._renderContext.enableNavigation = that.enableNavigation;
+        }
+    },
     configureRenderContext: function(ctxt) {
         var that = this;
-        // We do not support dependent default values within screen groups.
-        // If we are to do so, we will need to add code here to ensure
-        // their on activate functions are called in the right order.
-        var subPromptsReady = _.after(that.activePrompts.length, function () {
+        if ( that.activePrompts.length == 0 ) {
             ctxt.success();
-        });
-        _.each(that.activePrompts, function(prompt){
-            prompt.buildRenderContext($.extend({}, ctxt, {success:function() {
-                    subPromptsReady(ctxt);
-                }
-            }));
-        });
+        } else {
+            // We do not support dependent default values within screen groups.
+            // If we are to do so, we will need to add code here to ensure
+            // their on activate functions are called in the right order.
+            _.each(that.activePrompts, function(prompt){
+                prompt.buildRenderContext($.extend({}, ctxt, {
+                    success:_.after(that.activePrompts.length, function() {
+                        ctxt.success();
+                    }),
+                    failure: _.once(function(m) {
+                        ctxt.failure(m);
+                    })
+                }));
+            });
+        }
     },
     buildRenderContext: function(ctxt) {
        var that = this;
@@ -119,23 +155,23 @@ screenTypes.base = Backbone.View.extend({
             // determine the active prompts
             that.activePrompts = []; // clear all prompts...
             var activePromptIndices = [];
-			if ( that._operation && that._operation._screen_block ) {
-				activePromptIndices = that._operation._screen_block();
-				var sectionPrompts = that.controller.getCurrentSectionPrompts();
-				var ap = [];
-				var i;
-				for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
-					var prompt = sectionPrompts[activePromptIndices[i]];
-					if ( prompt == null ) {
-						ctxt.append("Error! unable to resolve prompt!");
-						ctxt.failure({message: "bad prompt index!"});
-						return;
-					}
-					prompt._screen = that;
-					ap.push(prompt);
-				}
-				that.activePrompts = ap;
-			}
+            if ( that._operation && that._operation._screen_block ) {
+                activePromptIndices = that._operation._screen_block();
+                var sectionPrompts = that.controller.getCurrentSectionPrompts();
+                var ap = [];
+                var i;
+                for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
+                    var prompt = sectionPrompts[activePromptIndices[i]];
+                    if ( prompt == null ) {
+                        ctxt.append("Error! unable to resolve prompt!");
+                        ctxt.failure({message: "bad prompt index!"});
+                        return;
+                    }
+                    prompt._screen = that;
+                    ap.push(prompt);
+                }
+                that.activePrompts = ap;
+            }
             // we now know what we are going to render.
             // work with the controller to ensure that all
             // intermediate state has been written to the 
@@ -153,7 +189,7 @@ screenTypes.base = Backbone.View.extend({
         });
         ctxt.success();
     },
-	recursiveUndelegateEvents: function() {
+    recursiveUndelegateEvents: function() {
         var that = this;
         that.undelegateEvents();
         $.each(that.activePrompts, function(idx, prompt){
@@ -236,13 +272,6 @@ screenTypes.base = Backbone.View.extend({
 screenTypes.waiting = screenTypes.base.extend({
     type: "waiting",
     templatePath: "templates/waiting.handlebars",
-    //renderContext is static data for the dynamic _renderContext object 
-    // that is passed into the render function.
-    renderContext: {showContents: false, dataTheme: "d"},
-    initializeRenderContext: function() {
-        // Object.create is used because we don't want to modify the class's render context.
-        this._renderContext = Object.create(this.renderContext);
-    },
     render: function(ctxt) {
         var that = this;
         // TODO: understand what Nathan was trying to do here with a virtual element.
@@ -264,36 +293,7 @@ screenTypes.waiting = screenTypes.base.extend({
 
 screenTypes.screen = screenTypes.base.extend({
     type: "screen",
-    controller: controller,
     templatePath: "templates/navbar.handlebars",
-    //renderContext is static data for the dynamic _renderContext object 
-    // that is passed into the render function.
-    renderContext: {showContents: true, dataTheme: "d"},
-    initializeRenderContext: function() {
-        //Object.create is used because we don't want to modify the class's render context.
-		this._renderContext = Object.create(this.renderContext);
-        if ( this.display == null ) {
-            var section = opendatakit.getSettingObject(opendatakit.getCurrentFormDef(), this._section_name);
-            this._renderContext.display = section.display;
-        } else {
-            this._renderContext.display = this.display;
-        }
-        var locales = opendatakit.getFormLocalesValue();
-        this._renderContext.disabled = this.disabled;
-        this._renderContext.form_title = this.controller.getSectionTitle();
-        this._renderContext.locales = locales;
-        this._renderContext.hasTranslations = (locales.length > 1);
-        this._renderContext.showHeader = true;
-        this._renderContext.showFooter = false;
-        this._renderContext.showContents = this.controller.getSectionShowContents();
-        this._renderContext.enableForwardNavigation = true;
-        this._renderContext.enableBackNavigation = true;
-        this._renderContext.enableNavigation = true;
-
-        //It's probably not good to get data like this in initialize
-        //Maybe it would be better to use handlebars helpers to get metadata?
-        this._renderContext.form_version = opendatakit.getSettingValue('form_version');
-    },
     render: function(ctxt) {
         var that = this;
         // TODO: understand what Nathan was trying to do here with a virtual element.
@@ -327,36 +327,7 @@ screenTypes.screen = screenTypes.base.extend({
 
 screenTypes.columns_2 = screenTypes.base.extend({
     type: "columns_2",
-    controller: controller,
     templatePath: "templates/navbar.handlebars",
-    //renderContext is static data for the dynamic _renderContext object 
-    // that is passed into the render function.
-    renderContext: {showContents: true, dataTheme: "d"},
-    initializeRenderContext: function() {
-        //Object.create is used because we don't want to modify the class's render context.
-        this._renderContext = Object.create(this.renderContext);
-        if ( this.display == null ) {
-            var section = opendatakit.getSettingObject(opendatakit.getCurrentFormDef(), this._section_name);
-            this._renderContext.display = section.display;
-        } else {
-            this._renderContext.display = this.display;
-        }
-        var locales = opendatakit.getFormLocalesValue();
-        this._renderContext.disabled = this.disabled;
-        this._renderContext.form_title = this.controller.getSectionTitle();
-        this._renderContext.locales = locales;
-        this._renderContext.hasTranslations = (locales.length > 1);
-        this._renderContext.showHeader = true;
-        this._renderContext.showFooter = false;
-        this._renderContext.showContents = this.controller.getSectionShowContents();
-        this._renderContext.enableForwardNavigation = true;
-        this._renderContext.enableBackNavigation = true;
-        this._renderContext.enableNavigation = true;
-
-        //It's probably not good to get data like this in initialize
-        //Maybe it would be better to use handlebars helpers to get metadata?
-        this._renderContext.form_version = opendatakit.getSettingValue('form_version');
-    },
     render: function(ctxt) {
 
         var that = this;

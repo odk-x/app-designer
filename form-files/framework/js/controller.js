@@ -42,6 +42,11 @@ return {
     },
     getSectionShowContents: function() {
         var that = this;
+        // if we are in the middle of a validation action, do not show contents screen.
+        if ( shim.getControllerState(opendatakit.getRefId()) === 'popHistoryOnExit' ) {
+            return false;
+        }
+        
         var opPath = that.getCurrentScreenPath();
         if ( opPath == null ) {
             return false;
@@ -458,7 +463,7 @@ return {
                                 that.screenManager.showSpinnerOverlay({text:"Validating..."});
                               
                                 var buildRenderDoneCtxt = $.extend({render: false}, vctxt, {
-                                    success: _.after(promptList.length, function() {
+                                    success: function() {
                                         // all render contexts have been refreshed
                                         var currPrompt;
                                         var validateError;
@@ -478,18 +483,31 @@ return {
                                         }
                                         vctxt.append("validateQuestionHelper.success.endOfValidationList");
                                         vctxt.success();
+                                    },
+                                    failure: function(m) {
+                                        vctxt.failure(m);
+                                    }
+                                });
+
+                                var buildRenderDoneOnceCtxt = $.extend({render: false}, buildRenderDoneCtxt, {
+                                    success: _.after(promptList.length, function() {
+                                        buildRenderDoneCtxt.success();
                                     }),
                                     failure: _.once(function(m) {
-                                        vctxt.failure(m);
+                                        buildRenderDoneCtxt.failure(m);
                                     })
                                 });
 
-                                // refresh all render contexts (they may have constraint values
-                                // that could have changed -- e.g., filtered choice lists).
-                                $.each( promptList, function(idx, promptCandidatePath) {
-                                    var promptCandidate = that.getPrompt(promptCandidatePath);
-                                    promptCandidate.buildRenderContext(buildRenderDoneCtxt);
-                                });
+                                if ( promptList.length == 0 ) {
+                                    buildRenderDoneCtxt.success();
+                                } else {
+                                    // refresh all render contexts (they may have constraint values
+                                    // that could have changed -- e.g., filtered choice lists).
+                                    $.each( promptList, function(idx, promptCandidatePath) {
+                                        var promptCandidate = that.getPrompt(promptCandidatePath);
+                                        promptCandidate.buildRenderContext(buildRenderDoneOnceCtxt);
+                                    });
+                                }
                             }
                         }}));
                     return;

@@ -104,8 +104,10 @@ return Backbone.View.extend({
         var locales = opendatakit.getFormLocalesValue();
         // useful defaults...
         that.renderContext = {
+            form_version: opendatakit.getSettingValue('form_version'),
             form_title: that.controller.getSectionTitle(),
             locales: locales,
+            dataTheme: "d",
             hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
@@ -114,9 +116,6 @@ return Backbone.View.extend({
             enableBackNavigation: ! that.popScreenOnExit,
             showAsContinueButton: that.popScreenOnExit,
             enableNavigation: true
-            // enableNavigation -- defaults to true; false to disable everything...
-            // enableForwardNavigation -- forward swipe and button
-            // enableBackNavigation -- backward swipe and button
         };
         
         that.pageChangeActionLockout = true;
@@ -143,16 +142,21 @@ return Backbone.View.extend({
         // 
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
-        screen.buildRenderContext($.extend({render:true},ctxt,{success:function(renderContext){
-                if(renderContext){
-                    $.extend(that.renderContext, renderContext);
-                }
+        screen.buildRenderContext($.extend({render:true},ctxt,{success:function(){
+        
+                // patch up navigation settings for the screen...
                 // if neither forward or backward navigation is enabled, disable all navigations.
-                if( !that.renderContext.enableBackNavigation &&
-                    !that.renderContext.enableForwardNavigation ) {
+                if ( !screen._renderContext.enableNavigation ) {
+                    screen._renderContext.enableBackNavigation = false;
+                    screen._renderContext.enableForwardNavigation = false;
+                    screen._renderContext.enableNavigation = false;
+                }
+                
+                if( !screen._renderContext.enableBackNavigation &&
+                    !screen._renderContext.enableForwardNavigation ) {
                     //If we try to render a jqm nav without buttons we get an error
                     //so this flag automatically disables nav in that case.
-                    that.renderContext.enableNavigation = false;
+                    screen._renderContext.enableNavigation = false;
                 }
 
                 // make the new screen the active screen (...no-op if redraw).
@@ -318,15 +322,9 @@ return Backbone.View.extend({
         var that = this;
         var $contentArea = $('#optionsPopup');
         $contentArea.empty().remove();
-        var locales = opendatakit.getFormLocalesValue();
-        // useful defaults...
-        that.renderContext = {
-            form_title: that.controller.getSectionTitle(),
-            locales: locales,
-            hasTranslations: (locales.length > 1),
-            showContents: that.controller.getSectionShowContents()
-        };
-        that.activeScreen.$el.append(that.optionsTemplate(that.renderContext)).trigger('pagecreate');
+        var rc = (that.activeScreen && that.activeScreen._renderContext) ?
+            that.activeScreen._renderContext : that.renderContext;
+        that.activeScreen.$el.append(that.optionsTemplate(rc)).trigger('pagecreate');
         $( "#optionsPopup" ).popup( "open" );
     },
     openLanguagePopup: function(evt) {
@@ -334,15 +332,9 @@ return Backbone.View.extend({
         $( "#optionsPopup" ).popup( "close" );
         var $contentArea = $('#languagePopup');
         $contentArea.empty().remove();
-        var locales = opendatakit.getFormLocalesValue();
-        // useful defaults...
-        that.renderContext = {
-            form_title: that.controller.getSectionTitle(),
-            locales: locales,
-            hasTranslations: (locales.length > 1),
-            showContents: that.controller.getSectionShowContents()
-        };
-        that.activeScreen.$el.append(that.languageTemplate(that.renderContext)).trigger('pagecreate');
+        var rc = (that.activeScreen && that.activeScreen._renderContext) ?
+            that.activeScreen._renderContext : that.renderContext;
+        that.activeScreen.$el.append(that.languageTemplate(rc)).trigger('pagecreate');
         $( "#languagePopup" ).popup( "open" );
     },
     setLanguage: function(evt) {
@@ -359,16 +351,10 @@ return Backbone.View.extend({
         var that = this;
         var $contentArea = $('#screenPopup');
         $contentArea.empty().remove();
-        var locales = opendatakit.getFormLocalesValue();
-        // useful defaults...
-        that.renderContext = {
-            form_title: that.controller.getSectionTitle(),
-            locales: locales,
-            hasTranslations: (locales.length > 1),
-            showContents: that.controller.getSectionShowContents(),
-            message: msg.message
-        };
-        that.activeScreen.$el.append(that.screenTemplate(that.renderContext)).trigger('pagecreate');
+        var rc = (that.activeScreen && that.activeScreen._renderContext) ?
+            that.activeScreen._renderContext : that.renderContext;
+        var rcWithMsg = $.extend({message: msg.message}, rc);
+        that.activeScreen.$el.append(that.screenTemplate(rcWithMsg)).trigger('pagecreate');
         var $screenPopup = $( "#screenPopup" );
         $screenPopup.popup( "open" );
     },
