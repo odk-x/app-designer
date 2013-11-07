@@ -15,8 +15,8 @@ promptTypes.base = Backbone.View.extend({
     type: "base",
     database: database,
     controller: controller,
-    // user-defined inputAttributes overrides baseInputAttributes
-    baseInputAttributes: {},
+    // user-defined inputAttributes overrides _baseInputAttributes
+    _baseInputAttributes: {},
     // the handlebars template to render
     template: null,
     //renderContext is a dynamic object to be passed into the render function.
@@ -30,9 +30,7 @@ promptTypes.base = Backbone.View.extend({
     required_message: "Required value not provided.",
     // the path to the handlebars template that is compiled and stored in 'template'
     templatePath: null,
-    // Template context is a user-specified object that overrides the render context.
-    templateContext: {},
-    // inputAttributes are a user-specified object that overrides baseInputAttributes.
+    // inputAttributes are a user-specified object that overrides _baseInputAttributes.
     inputAttributes: {},
     
     reRender: function(ctxt) {
@@ -130,7 +128,6 @@ promptTypes.base = Backbone.View.extend({
         this.renderContext.image = this.image;
         this.renderContext.audio = this.audio;
         this.renderContext.video = this.video;
-        this.renderContext.hide = this.hide;
         this.renderContext.hint = this.hint;
         this.renderContext.required = this.required;
         this.renderContext.appearance = this.appearance;
@@ -146,8 +143,7 @@ promptTypes.base = Backbone.View.extend({
         } else {
             this.renderContext.pre4Android = ( platinfo.version.substring(0,1) < "4" );
         }
-        this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
-        $.extend(this.renderContext, this.templateContext);
+        this.renderContext.inputAttributes = $.extend({}, this._baseInputAttributes, this.inputAttributes);
     },
     /**
      * configureRenderContext
@@ -262,22 +258,6 @@ promptTypes.base = Backbone.View.extend({
         //This is a utility function for checking to make sure event maps are working.
         shim.log('T',evt);
     }
-    /*
-    registerChangeHandlers: function() {
-        // TODO: code that is executed after all page prompts are inserted into the DOM.
-        // This code would, e.g., handle value-change events to propagate changes across
-        // a page (e.g., update calculated fields).
-    },
-    */
-    /*
-    //TODO: I can't find any refrences to these, so we should probably remove them.
-    validationFailedAction: function(isMoveBackward) {
-        alert(this.validationFailedMessage);
-    },
-    requiredFieldMissingAction: function(isMovingBackward) {
-        alert(this.requiredFieldMissingMessage);
-    }
-    */
 });
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
@@ -354,11 +334,10 @@ promptTypes.finalize = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
-        that.controller.saveAllChanges($.extend({},ctxt,{success:function() {
-//        that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
+
+        that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
                 that.controller.leaveInstance(ctxt);
-//            }}));
-            }}), false);
+            }}));
     },
     saveFinal: function(evt) {
         evt.stopPropagation();
@@ -366,10 +345,7 @@ promptTypes.finalize = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.append("prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
-//        that.controller.gotoFinalizeAndTerminateAction(ctxt);
-        that.controller.saveAllChanges($.extend({},ctxt,{success:function() {
-                that.controller.leaveInstance(ctxt);
-            }}), true);
+        that.controller.gotoFinalizeAndTerminateAction(ctxt);
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -418,7 +394,6 @@ promptTypes.instances = promptTypes.base.extend({
                 });
                 
                 $.extend(that.renderContext, {
-                    form_title: opendatakit.getCurrentSectionTitle(that._section_name),
                     headerImg: requirejs.toUrl('img/form_logo.png')
                 });
                 that._screen._renderContext.showHeader = false;
@@ -473,7 +448,7 @@ promptTypes.contents = promptTypes.base.extend({
             ctxt.append("prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
                 "px: " + that.promptIdx);
             // TODO: allow user to specify whether or not this is an 'advancing' operation
-            that.controller.gotoScreenPath(ctxt, oldPropertyValue /*, true */);
+            that.controller.gotoScreenPath(ctxt, oldPropertyValue, true);
         });
     },
     configureRenderContext: function(ctxt) {
@@ -829,7 +804,7 @@ promptTypes.user_branch = promptTypes.base.extend({
             var newPath = parts[0] + "/" + oldPropertyValue;
             ctxt.append("prompts." + that.type + ".click", "px: " + that.promptIdx);
             // TODO: allow user to specify whether or not this is an 'advancing' operation
-            that.controller.gotoScreenPath(ctxt,newPath /*, true */);
+            that.controller.gotoScreenPath(ctxt,newPath,true);
         });
     },
     choice_filter: function(){ return true; },
@@ -1409,7 +1384,7 @@ promptTypes.text = promptTypes.input_type.extend({
 });
 promptTypes.integer = promptTypes.input_type.extend({
     type: "integer",
-    baseInputAttributes: {
+    _baseInputAttributes: {
         'type':'number'
     },
     invalidMessage: "Integer value expected",
@@ -1420,7 +1395,7 @@ promptTypes.integer = promptTypes.input_type.extend({
 promptTypes.decimal = promptTypes.input_type.extend({
     type: "decimal",
     //TODO: This doesn't seem to be working.
-    baseInputAttributes: {
+    _baseInputAttributes: {
         'type':'number'
     },
     invalidMessage: "Numeric value expected",
@@ -1918,7 +1893,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
             display: { text: that.acknLabel },
             checked: acknowledged
         }];
-        ctxt.success(ctxt);
+        ctxt.success();
     }
 });
 
