@@ -258,22 +258,6 @@ promptTypes.base = Backbone.View.extend({
         //This is a utility function for checking to make sure event maps are working.
         shim.log('T',evt);
     }
-    /*
-    registerChangeHandlers: function() {
-        // TODO: code that is executed after all page prompts are inserted into the DOM.
-        // This code would, e.g., handle value-change events to propagate changes across
-        // a page (e.g., update calculated fields).
-    },
-    */
-    /*
-    //TODO: I can't find any refrences to these, so we should probably remove them.
-    validationFailedAction: function(isMoveBackward) {
-        alert(this.validationFailedMessage);
-    },
-    requiredFieldMissingAction: function(isMovingBackward) {
-        alert(this.requiredFieldMissingMessage);
-    }
-    */
 });
 promptTypes.opening = promptTypes.base.extend({
     type: "opening",
