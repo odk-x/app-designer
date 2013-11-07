@@ -10787,6 +10787,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 23,
             "operationIdx": 21
           }
@@ -11051,6 +11052,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 19,
             "operationIdx": 11
           }
@@ -11386,6 +11388,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 34,
             "operationIdx": 9
           }
@@ -11584,6 +11587,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 10,
             "operationIdx": 10
           }
@@ -11871,6 +11875,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 23,
             "operationIdx": 7
           }
@@ -12407,6 +12412,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 57,
             "operationIdx": 15
           }
@@ -12583,6 +12589,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 15,
             "operationIdx": 4
           }
@@ -12719,6 +12726,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 10,
             "operationIdx": 4
           }
@@ -13691,6 +13699,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 200,
             "operationIdx": 3
           }
@@ -18703,6 +18712,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 642,
             "operationIdx": 196
           }
@@ -19986,6 +19996,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 130,
             "operationIdx": 30
           }
@@ -20166,6 +20177,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 9,
             "operationIdx": 9
           }

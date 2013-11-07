@@ -178,6 +178,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 3,
             "operationIdx": 3
           }
@@ -317,6 +318,7 @@
           },
           {
             "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 9,
             "operationIdx": 9
           }
