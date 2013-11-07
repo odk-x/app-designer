@@ -21,8 +21,6 @@ screenTypes.waiting = Backbone.View.extend({
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
     renderContext: {showContents: false, dataTheme: "d"},
-    //Template context is an user specified object that overrides the render context.
-    templateContext: {},
     baseInputAttributes: {},
     //inputAttributes overrides baseInputAttributes
     inputAttributes: {},
@@ -89,7 +87,6 @@ screenTypes.waiting = Backbone.View.extend({
         this._renderContext = Object.create(this.renderContext);
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
-        $.extend(this._renderContext, this.templateContext);
     },
     buildRenderContext: function(ctxt) {
         var that = this;
@@ -169,8 +166,6 @@ screenTypes.screen = Backbone.View.extend({
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
     renderContext: {showContents: true, dataTheme: "d"},
-    //Template context is an user specified object that overrides the render context.
-    templateContext: {},
     baseInputAttributes: {},
     //inputAttributes overrides baseInputAttributes
     inputAttributes: {},
@@ -232,7 +227,7 @@ screenTypes.screen = Backbone.View.extend({
     },
     initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
-        this._renderContext = Object.create(this.renderContext);
+		this._renderContext = Object.create(this.renderContext);
         if ( this.display == null ) {
             var section = opendatakit.getSettingObject(opendatakit.getCurrentFormDef(), this._section_name);
             this._renderContext.display = section.display;
@@ -241,7 +236,6 @@ screenTypes.screen = Backbone.View.extend({
         }
         var locales = opendatakit.getFormLocalesValue();
         this._renderContext.disabled = this.disabled;
-        this._renderContext.hide = this.hide;
         this._renderContext.form_title = this.controller.getSectionTitle();
         this._renderContext.locales = locales;
         this._renderContext.hasTranslations = (locales.length > 1);
@@ -257,7 +251,6 @@ screenTypes.screen = Backbone.View.extend({
         this._renderContext.form_version = opendatakit.getSettingValue('form_version');
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
-        $.extend(this._renderContext, this.templateContext);
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -457,8 +450,6 @@ screenTypes.columns_2 = Backbone.View.extend({
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
     renderContext: {showContents: true, dataTheme: "d"},
-    //Template context is an user specified object that overrides the render context.
-    templateContext: {},
     baseInputAttributes: {},
     //inputAttributes overrides baseInputAttributes
     inputAttributes: {},
@@ -529,7 +520,6 @@ screenTypes.columns_2 = Backbone.View.extend({
         }
         var locales = opendatakit.getFormLocalesValue();
         this._renderContext.disabled = this.disabled;
-        this._renderContext.hide = this.hide;
         this._renderContext.form_title = this.controller.getSectionTitle();
         this._renderContext.locales = locales;
         this._renderContext.hasTranslations = (locales.length > 1);
@@ -545,7 +535,6 @@ screenTypes.columns_2 = Backbone.View.extend({
         this._renderContext.form_version = opendatakit.getSettingValue('form_version');
         this._renderContext.inputAttributes = 
                 $.extend({}, this.baseInputAttributes, this.inputAttributes);
-        $.extend(this._renderContext, this.templateContext);
     },
     configureRenderContext: function(ctxt) {
         var that = this;
