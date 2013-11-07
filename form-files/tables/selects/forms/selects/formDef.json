@@ -26,9 +26,8 @@
         "_row_num": 4
       },
       {
-        "type": "select_one",
+        "type": "select_one_grid",
         "values_list": "birds",
-        "appearance": "grid",
         "name": "bird",
         "display": {
           "text": "Choose a bird:"
@@ -86,9 +85,8 @@
         "_row_num": 14
       },
       {
-        "type": "select_one",
+        "type": "select_one_inline",
         "values_list": "yes_no",
-        "appearance": "inline",
         "name": "desktop",
         "display": {
           "text": "Desktop computer"
@@ -96,9 +94,8 @@
         "_row_num": 15
       },
       {
-        "type": "select_one",
+        "type": "select_one_inline",
         "values_list": "yes_no",
-        "appearance": "inline",
         "name": "laptop",
         "display": {
           "text": "Laptop computer"
@@ -106,9 +103,8 @@
         "_row_num": 16
       },
       {
-        "type": "select_one",
+        "type": "select_one_inline",
         "values_list": "yes_no",
-        "appearance": "inline",
         "name": "smartphone",
         "display": {
           "text": "Smartphone"
@@ -116,9 +112,8 @@
         "_row_num": 17
       },
       {
-        "type": "select_one",
+        "type": "select_one_inline",
         "values_list": "yes_no",
-        "appearance": "inline",
         "name": "tablet",
         "display": {
           "text": "Tablet"
@@ -178,9 +173,8 @@
         "_row_num": 25
       },
       {
-        "type": "select_one",
+        "type": "select_one_dropdown",
         "values_list": "countries_csv",
-        "appearance": "dropdown",
         "name": "country_csv",
         "display": {
           "text": "Choose a country:"
@@ -206,6 +200,76 @@
       {
         "clause": "end if",
         "_row_num": 29
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 30
+      },
+      {
+        "type": "note",
+        "display": {
+          "text": "Selects Demo"
+        },
+        "hideInContents": true,
+        "_row_num": 31
+      },
+      {
+        "type": "select_one_grid",
+        "values_list": "holidays",
+        "name": "favoriteHoliday",
+        "display": {
+          "text": "What is your favorite holiday?"
+        },
+        "_row_num": 32
+      },
+      {
+        "type": "select_one_inline",
+        "values_list": "holidays",
+        "name": "secondFavoriteHoliday",
+        "display": {
+          "text": "What is your second favorite holiday?"
+        },
+        "_row_num": 33
+      },
+      {
+        "type": "select_one_dropdown",
+        "values_list": "holidays",
+        "name": "thirdFavoriteHoliday",
+        "display": {
+          "text": "What is your third favorite holiday?"
+        },
+        "_row_num": 34
+      },
+      {
+        "type": "select_multiple",
+        "values_list": "foods",
+        "name": "breakfastFood",
+        "display": {
+          "text": "What types of food do you eat for breakfast?"
+        },
+        "_row_num": 35
+      },
+      {
+        "type": "select_multiple_inline",
+        "values_list": "foods",
+        "name": "lunchFood",
+        "display": {
+          "text": "What types of food do you eat for lunch?"
+        },
+        "_row_num": 36
+      },
+      {
+        "type": "select_multiple_grid",
+        "values_list": "foods",
+        "name": "dinnerFood",
+        "display": {
+          "text": "What types of food do you eat for dinner?"
+        },
+        "_row_num": 37
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 38
       }
     ],
     "choices": [
@@ -320,6 +384,78 @@
           "text": "Blue"
         },
         "_row_num": 17
+      },
+      {
+        "choice_list_name": "holidays",
+        "data_value": "christmas",
+        "display": {
+          "text": "Christmas"
+        },
+        "_row_num": 19
+      },
+      {
+        "choice_list_name": "holidays",
+        "data_value": "thanksgiving",
+        "display": {
+          "text": "Thanksgiving"
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "holidays",
+        "data_value": "easter",
+        "display": {
+          "text": "Easter"
+        },
+        "_row_num": 21
+      },
+      {
+        "choice_list_name": "holidays",
+        "data_value": "halloween",
+        "display": {
+          "text": "Halloween"
+        },
+        "_row_num": 22
+      },
+      {
+        "choice_list_name": "foods",
+        "data_value": "milk",
+        "display": {
+          "text": "Milk"
+        },
+        "_row_num": 24
+      },
+      {
+        "choice_list_name": "foods",
+        "data_value": "bread",
+        "display": {
+          "text": "Bread"
+        },
+        "_row_num": 25
+      },
+      {
+        "choice_list_name": "foods",
+        "data_value": "fruit",
+        "display": {
+          "text": "Fruit"
+        },
+        "_row_num": 26
+      },
+      {
+        "choice_list_name": "foods",
+        "data_value": "vegetable",
+        "display": {
+          "text": "Vegetable"
+        },
+        "_row_num": 27
+      },
+      {
+        "choice_list_name": "foods",
+        "data_value": "meat",
+        "display": {
+          "text": "Meat"
+        },
+        "_row_num": 28
       }
     ],
     "queries": [
@@ -559,6 +695,82 @@
           },
           "_row_num": 17
         }
+      ],
+      "holidays": [
+        {
+          "choice_list_name": "holidays",
+          "data_value": "christmas",
+          "display": {
+            "text": "Christmas"
+          },
+          "_row_num": 19
+        },
+        {
+          "choice_list_name": "holidays",
+          "data_value": "thanksgiving",
+          "display": {
+            "text": "Thanksgiving"
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "holidays",
+          "data_value": "easter",
+          "display": {
+            "text": "Easter"
+          },
+          "_row_num": 21
+        },
+        {
+          "choice_list_name": "holidays",
+          "data_value": "halloween",
+          "display": {
+            "text": "Halloween"
+          },
+          "_row_num": 22
+        }
+      ],
+      "foods": [
+        {
+          "choice_list_name": "foods",
+          "data_value": "milk",
+          "display": {
+            "text": "Milk"
+          },
+          "_row_num": 24
+        },
+        {
+          "choice_list_name": "foods",
+          "data_value": "bread",
+          "display": {
+            "text": "Bread"
+          },
+          "_row_num": 25
+        },
+        {
+          "choice_list_name": "foods",
+          "data_value": "fruit",
+          "display": {
+            "text": "Fruit"
+          },
+          "_row_num": 26
+        },
+        {
+          "choice_list_name": "foods",
+          "data_value": "vegetable",
+          "display": {
+            "text": "Vegetable"
+          },
+          "_row_num": 27
+        },
+        {
+          "choice_list_name": "foods",
+          "data_value": "meat",
+          "display": {
+            "text": "Meat"
+          },
+          "_row_num": 28
+        }
       ]
     },
     "queries": {
@@ -714,6 +926,81 @@
         ],
         "type": "string",
         "elementKey": "cp_test"
+      },
+      "favoriteHoliday": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "favoriteHoliday"
+      },
+      "secondFavoriteHoliday": {
+        "_defn": [
+          {
+            "_row_num": 33,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "secondFavoriteHoliday"
+      },
+      "thirdFavoriteHoliday": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "thirdFavoriteHoliday"
+      },
+      "breakfastFood": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "isPersisted": true,
+        "items": {
+          "type": "string",
+          "elementKey": "breakfastFood_items"
+        },
+        "elementKey": "breakfastFood"
+      },
+      "lunchFood": {
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "isPersisted": true,
+        "items": {
+          "type": "string",
+          "elementKey": "lunchFood_items"
+        },
+        "elementKey": "lunchFood"
+      },
+      "dinnerFood": {
+        "_defn": [
+          {
+            "_row_num": 37,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "isPersisted": true,
+        "items": {
+          "type": "string",
+          "elementKey": "dinnerFood_items"
+        },
+        "elementKey": "dinnerFood"
       }
     },
     "section_names": [
@@ -756,9 +1043,8 @@
             "promptIdx": 1
           },
           {
-            "type": "select_one",
+            "type": "select_one_grid",
             "values_list": "birds",
-            "appearance": "grid",
             "name": "bird",
             "display": {
               "text": "Choose a bird:"
@@ -766,7 +1052,7 @@
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_one_grid",
             "_branch_label_enclosing_screen": "survey/_screen4",
             "promptIdx": 2
           },
@@ -810,9 +1096,8 @@
             "promptIdx": 5
           },
           {
-            "type": "select_one",
+            "type": "select_one_inline",
             "values_list": "yes_no",
-            "appearance": "inline",
             "name": "desktop",
             "display": {
               "text": "Desktop computer"
@@ -820,14 +1105,13 @@
             "_row_num": 15,
             "__rowNum__": 14,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_one_inline",
             "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 6
           },
           {
-            "type": "select_one",
+            "type": "select_one_inline",
             "values_list": "yes_no",
-            "appearance": "inline",
             "name": "laptop",
             "display": {
               "text": "Laptop computer"
@@ -835,14 +1119,13 @@
             "_row_num": 16,
             "__rowNum__": 15,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_one_inline",
             "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 7
           },
           {
-            "type": "select_one",
+            "type": "select_one_inline",
             "values_list": "yes_no",
-            "appearance": "inline",
             "name": "smartphone",
             "display": {
               "text": "Smartphone"
@@ -850,14 +1133,13 @@
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_one_inline",
             "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 8
           },
           {
-            "type": "select_one",
+            "type": "select_one_inline",
             "values_list": "yes_no",
-            "appearance": "inline",
             "name": "tablet",
             "display": {
               "text": "Tablet"
@@ -865,7 +1147,7 @@
             "_row_num": 18,
             "__rowNum__": 17,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_one_inline",
             "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 9
           },
@@ -929,9 +1211,8 @@
             "promptIdx": 13
           },
           {
-            "type": "select_one",
+            "type": "select_one_dropdown",
             "values_list": "countries_csv",
-            "appearance": "dropdown",
             "name": "country_csv",
             "display": {
               "text": "Choose a country:"
@@ -940,7 +1221,7 @@
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_one_dropdown",
             "_branch_label_enclosing_screen": "survey/_screen26",
             "promptIdx": 14
           },
@@ -960,12 +1241,109 @@
             "promptIdx": 15
           },
           {
+            "type": "note",
+            "display": {
+              "text": "Selects Demo"
+            },
+            "hideInContents": true,
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 16
+          },
+          {
+            "type": "select_one_grid",
+            "values_list": "holidays",
+            "name": "favoriteHoliday",
+            "display": {
+              "text": "What is your favorite holiday?"
+            },
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "prompt",
+            "_type": "select_one_grid",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 17
+          },
+          {
+            "type": "select_one_inline",
+            "values_list": "holidays",
+            "name": "secondFavoriteHoliday",
+            "display": {
+              "text": "What is your second favorite holiday?"
+            },
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "prompt",
+            "_type": "select_one_inline",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 18
+          },
+          {
+            "type": "select_one_dropdown",
+            "values_list": "holidays",
+            "name": "thirdFavoriteHoliday",
+            "display": {
+              "text": "What is your third favorite holiday?"
+            },
+            "_row_num": 34,
+            "__rowNum__": 33,
+            "_token_type": "prompt",
+            "_type": "select_one_dropdown",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 19
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "foods",
+            "name": "breakfastFood",
+            "display": {
+              "text": "What types of food do you eat for breakfast?"
+            },
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 20
+          },
+          {
+            "type": "select_multiple_inline",
+            "values_list": "foods",
+            "name": "lunchFood",
+            "display": {
+              "text": "What types of food do you eat for lunch?"
+            },
+            "_row_num": 36,
+            "__rowNum__": 35,
+            "_token_type": "prompt",
+            "_type": "select_multiple_inline",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 21
+          },
+          {
+            "type": "select_multiple_grid",
+            "values_list": "foods",
+            "name": "dinnerFood",
+            "display": {
+              "text": "What types of food do you eat for dinner?"
+            },
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "prompt",
+            "_type": "select_multiple_grid",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 22
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 30,
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 16
+            "_row_num": 39,
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 23
           }
         ],
         "validation_tag_map": {
@@ -1096,22 +1474,36 @@
             "operationIdx": 15
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
+            "clause": "begin screen",
             "_row_num": 30,
+            "__rowNum__": 29,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 38,
+              "__rowNum__": 37,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 16
           },
           {
-            "_row_num": 30,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 39,
             "operationIdx": 17
+          },
+          {
+            "_row_num": 39,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
-            "_row_num": 30,
-            "operationIdx": 18
+            "_row_num": 39,
+            "operationIdx": 19
           }
         ],
         "branch_label_map": {
@@ -1131,8 +1523,9 @@
           "_screen28": 14,
           "_else29": 16,
           "_endif29": 16,
-          "_contents": 17,
-          "_screen30": 17
+          "_screen30": 16,
+          "_contents": 18,
+          "_screen39": 18
         }
       },
       "initial": {

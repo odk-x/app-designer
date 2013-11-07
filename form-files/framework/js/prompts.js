@@ -915,7 +915,7 @@ promptTypes.user_branch = promptTypes.base.extend({
         }
     }
 });
-promptTypes.select = promptTypes.select_multiple = promptTypes.base.extend({
+promptTypes.select = promptTypes.base.extend({
     type: "select",
     templatePath: "templates/select.handlebars",
     events: {
@@ -1211,14 +1211,119 @@ promptTypes.select_one = promptTypes.select.extend({
         }
     }
 });
-promptTypes.select_one_with_other = promptTypes.select_one.extend({
-    withOther: true
-});
 //TODO:
 //Since multiple choices are possible should it be possible
 //to add arbitrary many other values to a select_with_other?
 promptTypes.select_with_other = promptTypes.select.extend({
     withOther: true
+});
+promptTypes.select_multiple = promptTypes.select.extend({
+});
+promptTypes.select_one_with_other = promptTypes.select_one.extend({
+    withOther: true
+});
+promptTypes.select_one_grid = promptTypes.select_one.extend({
+    templatePath: "templates/select_grid.handlebars",
+    updateRenderValue: function(formValue) {
+        var that = this;
+        //that.renderContext.value = formValue;
+        var filteredChoices = _.filter(that.renderContext.choices, function(choice) {
+            return that.choice_filter(choice);
+        });
+
+        // This should always be done for select_one_grid
+        //if(this.appearance === "grid") {
+        filteredChoices = _.map(filteredChoices, function(choice, idx) {
+            var columns = 3;
+            choice.colLetter = String.fromCharCode(97 + (idx % columns));
+            return choice;
+        });
+        //}
+        if ( !formValue ) {
+            that.renderContext.choices = _.map(filteredChoices, function(choice) {
+                choice.checked = false;
+                return choice;
+            });
+            if(this.withOther) {
+                that.renderContext.other = null;
+            }
+            return;
+        }
+        //Check appropriate choices based on formValue
+        that.renderContext.choices = _.map(filteredChoices, function(choice) {
+            choice.checked = _.any(formValue, function(valueObject) {
+                return choice.data_value === valueObject.value;
+            });
+            return choice;
+        });
+        if(this.withOther) {
+            var otherObject = _.find(formValue, function(valueObject) {
+                return ('otherValue' === valueObject.name);
+            });
+            that.renderContext.other = {
+                value: otherObject ? otherObject.value : '',
+                checked: _.any(formValue, function(valueObject) {
+                    return ('other' === valueObject.value);
+                })
+            };
+        }
+    }
+});
+promptTypes.select_one_inline = promptTypes.select_one.extend({
+    templatePath: "templates/select_inline.handlebars"
+});
+promptTypes.select_one_dropdown = promptTypes.select_one.extend({
+    templatePath: "templates/select_dropdown.handlebars"
+});
+promptTypes.select_multiple_grid = promptTypes.select_multiple.extend({
+    templatePath: "templates/select_grid.handlebars",
+    updateRenderValue: function(formValue) {
+        var that = this;
+        //that.renderContext.value = formValue;
+        var filteredChoices = _.filter(that.renderContext.choices, function(choice) {
+            return that.choice_filter(choice);
+        });
+
+        // This should always be done for select_one_grid
+        //if(this.appearance === "grid") {
+        filteredChoices = _.map(filteredChoices, function(choice, idx) {
+            var columns = 3;
+            choice.colLetter = String.fromCharCode(97 + (idx % columns));
+            return choice;
+        });
+        //}
+        if ( !formValue ) {
+            that.renderContext.choices = _.map(filteredChoices, function(choice) {
+                choice.checked = false;
+                return choice;
+            });
+            if(this.withOther) {
+                that.renderContext.other = null;
+            }
+            return;
+        }
+        //Check appropriate choices based on formValue
+        that.renderContext.choices = _.map(filteredChoices, function(choice) {
+            choice.checked = _.any(formValue, function(valueObject) {
+                return choice.data_value === valueObject.value;
+            });
+            return choice;
+        });
+        if(this.withOther) {
+            var otherObject = _.find(formValue, function(valueObject) {
+                return ('otherValue' === valueObject.name);
+            });
+            that.renderContext.other = {
+                value: otherObject ? otherObject.value : '',
+                checked: _.any(formValue, function(valueObject) {
+                    return ('other' === valueObject.value);
+                })
+            };
+        }
+    }
+});
+promptTypes.select_multiple_inline = promptTypes.select_multiple.extend({
+	templatePath: "templates/select_inline.handlebars"
 });
 promptTypes.input_type = promptTypes.base.extend({
     type: "input_type",
