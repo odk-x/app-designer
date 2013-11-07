@@ -21,9 +21,6 @@ screenTypes.waiting = Backbone.View.extend({
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
     renderContext: {showContents: false, dataTheme: "d"},
-    baseInputAttributes: {},
-    //inputAttributes overrides baseInputAttributes
-    inputAttributes: {},
     // _section_name...
     // _row_num...
     activePrompts: [],
@@ -83,10 +80,8 @@ screenTypes.waiting = Backbone.View.extend({
         }
     },
     initializeRenderContext: function() {
-        //Object.create is used because we don't want to modify the class's render context.
+        // Object.create is used because we don't want to modify the class's render context.
         this._renderContext = Object.create(this.renderContext);
-        this._renderContext.inputAttributes = 
-                $.extend({}, this.baseInputAttributes, this.inputAttributes);
     },
     buildRenderContext: function(ctxt) {
         var that = this;
@@ -166,9 +161,6 @@ screenTypes.screen = Backbone.View.extend({
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
     renderContext: {showContents: true, dataTheme: "d"},
-    baseInputAttributes: {},
-    //inputAttributes overrides baseInputAttributes
-    inputAttributes: {},
     // _section_name...
     // _row_num...
     activePrompts: [],
@@ -249,8 +241,6 @@ screenTypes.screen = Backbone.View.extend({
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
         this._renderContext.form_version = opendatakit.getSettingValue('form_version');
-        this._renderContext.inputAttributes = 
-                $.extend({}, this.baseInputAttributes, this.inputAttributes);
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -450,9 +440,6 @@ screenTypes.columns_2 = Backbone.View.extend({
     //renderContext is static data for the dynamic _renderContext object 
     // that is passed into the render function.
     renderContext: {showContents: true, dataTheme: "d"},
-    baseInputAttributes: {},
-    //inputAttributes overrides baseInputAttributes
-    inputAttributes: {},
     // _section_name...
     // _row_num...
     activePrompts: [],
@@ -533,8 +520,6 @@ screenTypes.columns_2 = Backbone.View.extend({
         //It's probably not good to get data like this in initialize
         //Maybe it would be better to use handlebars helpers to get metadata?
         this._renderContext.form_version = opendatakit.getSettingValue('form_version');
-        this._renderContext.inputAttributes = 
-                $.extend({}, this.baseInputAttributes, this.inputAttributes);
     },
     configureRenderContext: function(ctxt) {
         var that = this;

@@ -15,8 +15,8 @@ promptTypes.base = Backbone.View.extend({
     type: "base",
     database: database,
     controller: controller,
-    // user-defined inputAttributes overrides baseInputAttributes
-    baseInputAttributes: {},
+    // user-defined inputAttributes overrides _baseInputAttributes
+    _baseInputAttributes: {},
     // the handlebars template to render
     template: null,
     //renderContext is a dynamic object to be passed into the render function.
@@ -30,7 +30,7 @@ promptTypes.base = Backbone.View.extend({
     required_message: "Required value not provided.",
     // the path to the handlebars template that is compiled and stored in 'template'
     templatePath: null,
-    // inputAttributes are a user-specified object that overrides baseInputAttributes.
+    // inputAttributes are a user-specified object that overrides _baseInputAttributes.
     inputAttributes: {},
     
     reRender: function(ctxt) {
@@ -143,7 +143,7 @@ promptTypes.base = Backbone.View.extend({
         } else {
             this.renderContext.pre4Android = ( platinfo.version.substring(0,1) < "4" );
         }
-        this.renderContext.inputAttributes = $.extend({}, this.baseInputAttributes, this.inputAttributes);
+        this.renderContext.inputAttributes = $.extend({}, this._baseInputAttributes, this.inputAttributes);
     },
     /**
      * configureRenderContext
@@ -410,7 +410,6 @@ promptTypes.instances = promptTypes.base.extend({
                 });
                 
                 $.extend(that.renderContext, {
-                    form_title: opendatakit.getCurrentSectionTitle(that._section_name),
                     headerImg: requirejs.toUrl('img/form_logo.png')
                 });
                 that._screen._renderContext.showHeader = false;
@@ -1296,7 +1295,7 @@ promptTypes.text = promptTypes.input_type.extend({
 });
 promptTypes.integer = promptTypes.input_type.extend({
     type: "integer",
-    baseInputAttributes: {
+    _baseInputAttributes: {
         'type':'number'
     },
     invalidMessage: "Integer value expected",
@@ -1307,7 +1306,7 @@ promptTypes.integer = promptTypes.input_type.extend({
 promptTypes.decimal = promptTypes.input_type.extend({
     type: "decimal",
     //TODO: This doesn't seem to be working.
-    baseInputAttributes: {
+    _baseInputAttributes: {
         'type':'number'
     },
     invalidMessage: "Numeric value expected",
