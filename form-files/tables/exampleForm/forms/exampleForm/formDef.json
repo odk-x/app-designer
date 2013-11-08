@@ -1948,26 +1948,6 @@
             "clause": "back",
             "_row_num": 63,
             "operationIdx": 53
-          },
-          {
-            "_token_type": "validate",
-            "clause": "validate finalize",
-            "_sweep_name": "finalize",
-            "_row_num": 63,
-            "operationIdx": 54
-          },
-          {
-            "_token_type": "save_and_terminate",
-            "clause": "save and terminate",
-            "calculation": true,
-            "_row_num": 63,
-            "operationIdx": 55
-          },
-          {
-            "_token_type": "back_in_history",
-            "clause": "back",
-            "_row_num": 63,
-            "operationIdx": 56
           }
         ],
         "branch_label_map": {
@@ -2023,8 +2003,7 @@
           "_endif58": 50,
           "_screen59": 50,
           "_contents": 52,
-          "_screen63": 52,
-          "_finalize": 54
+          "_screen63": 52
         }
       },
       "initial": {

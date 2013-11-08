@@ -246,6 +246,23 @@
             }
         },
         "select_one_with_other" : {"type":"string"},
+        "select_one_grid" : {"type":"string"},
+        "select_one_inline" : {"type":"string"},
+        "select_one_dropdown" : {"type":"string"},
+        "select_multiple_grid": {
+            "type": "array",
+            "isPersisted": true,
+            "items" : {
+                "type":"string"
+            }
+        },
+        "select_multiple_inline": {
+            "type": "array",
+            "isPersisted": true,
+            "items" : {
+                "type":"string"
+            }
+        },
         "geopoint" : {
             "name": "geopoint",
             "type": "object",
