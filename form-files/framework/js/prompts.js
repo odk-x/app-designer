@@ -290,9 +290,8 @@ promptTypes.opening = promptTypes.base.extend({
         }
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
-        var displayName = (displayElementName === undefined || displayElementName === null) ? null : database.getDataValue(displayElementName);
         if ( displayElementName != null ) {
-            that.renderContext.display_field = displayName;
+            that.renderContext.display_field = database.getDataValue(displayElementName);
         } else {
             that.renderContext.display_field = null;
         }
@@ -332,9 +331,8 @@ promptTypes.finalize = promptTypes.base.extend({
         }
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
-        var displayName = (displayElementName == null) ? null : database.getDataValue(displayElementName);
         if ( displayElementName != null ) {
-            that.renderContext.display_field = displayName;
+            that.renderContext.display_field = database.getDataValue(displayElementName);
         } else {
             that.renderContext.display_field = null;
         }

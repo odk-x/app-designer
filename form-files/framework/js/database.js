@@ -2,16 +2,17 @@
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
 define(['mdl','opendatakit','jquery','XRegExp'], function(mdl,opendatakit,$,XRegExp) {
 verifyLoad('database',
-    ['mdl','opendatakit','jquery'],
-    [mdl,opendatakit,$]);
+    ['mdl','opendatakit','jquery','XRegExp'],
+    [mdl,opendatakit,$,XRegExp]);
 return {
   submissionDb:false,
   pendingChanges: [],
         // maps of:
         //   dbColumnName : { 
-        //        type: databaseType, 
-        //         isNotNullable: false/true, 
-        //        isPersisted: false/true,
+        //      type: databaseType, 
+        //      isNotNullable: false/true, 
+        //      isPersisted: false/true,
+		//      isSessionVariable: false/true,
         //      'default': defaultValue,
         //      elementPath: exposedName }
         // 
@@ -1990,8 +1991,6 @@ purge:function(ctxt) {
             }
         });
     });
-},
-discoverTableFromTableId:function(ctxt, table_id) {
 },
 setValueDeferredChange: function( name, value ) {
     var justChange = {};
