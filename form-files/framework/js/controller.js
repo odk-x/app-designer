@@ -312,25 +312,17 @@ return {
                             break;
                         }
                     }
-                    if ( path === null ) {
+                    if ( path == null ) {
                         path = opendatakit.initialScreenPath;
                     }
                     // just for debugging...
                     shim.getScreenPath(opendatakit.getRefId());
                     break;
                 case "do_section":
-                    // state is 'advanceOnReturn' if we are returning from an exit_section
-                    if ( shim.getScreenPath(opendatakit.getRefId()) === path &&
-                         shim.getControllerState(opendatakit.getRefId()) === 'advanceOnReturn' ) {
-                        // we are popping up from an exit_section
-                        path = that.getNextOperationPath(path);
-                        ctxt.log('E',"shouldn't get here anymore");
-                    } else {
-                        // save our op...
-                        shim.setSectionScreenState(opendatakit.getRefId(), path, 'advanceOnReturn');
-                        // start at operation 0 in the new section
-                        path = op._do_section_name + "/0";
-                    }
+                    // save our op...
+                    shim.setSectionScreenState(opendatakit.getRefId(), path, 'advanceOnReturn');
+                    // start at operation 0 in the new section
+                    path = op._do_section_name + "/0";
                     break;
                 case "exit_section":
                     path = shim.popSectionStack(opendatakit.getRefId());
@@ -362,13 +354,13 @@ return {
                     return;
                 case "validate":
                     var validationTag = op._sweep_name;
-					
+                    
                     if ( shim.getScreenPath(opendatakit.getRefId()) !== path ||
                          shim.getControllerState(opendatakit.getRefId()) !== 'validateInProgress' ) {
-						// tag this op as a 'validateInProgress' node. Push onto stack.
-						shim.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
-						shim.pushSectionScreenState( opendatakit.getRefId());
-					}
+                        // tag this op as a 'validateInProgress' node. Push onto stack.
+                        shim.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
+                        shim.pushSectionScreenState( opendatakit.getRefId());
+                    }
                     
                     database.applyDeferredChanges($.extend({},ctxt,{
                         success:function() {
@@ -833,6 +825,10 @@ return {
             ctxt.failure(that.moveFailureMessage);
             return;    
         }
+        // special case: jumping across sections
+        //
+        // do not push the current screen if we are changing sections,
+        // as all section jumps implicitly save where they came from.
         if ( currentOp != null && op._section_name === currentOp._section_name && advancing ) {
             shim.pushSectionScreenState(opendatakit.getRefId());
         }    
