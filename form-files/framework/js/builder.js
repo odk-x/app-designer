@@ -130,7 +130,7 @@ verifyLoad('builder',
     return {
     buildSurvey: function(ctxt, surveyJson, formPath) {
         if (surveyJson === undefined || surveyJson === null) {
-            ctxt.append('builder.buildSurvey', 'no formDef!');
+            ctxt.log('E','builder.buildSurvey', 'no formDef!');
             ctxt.failure();
             return;
         }
@@ -143,7 +143,7 @@ verifyLoad('builder',
         // ditto
         var currentScreenTypes = Object.create(screenTypes);
 
-        ctxt.append('builder.buildSurvey: initializing');
+        ctxt.log('D','builder.buildSurvey: initializing');
         
         var afterCustomPromptsLoadAttempt = function(){
             // save the current prompts and screens in the specification
@@ -288,7 +288,7 @@ verifyLoad('builder',
                     if ( fontSize != null && fontSize.value != null) {
                         $('body').css("font-size", fontSize.value);
                     }
-                    ctxt.append('builder.buildSurvey: completed load - starting form processing');
+                    ctxt.log('D','builder.buildSurvey: completed load - starting form processing');
                     ctxt.success();
                 },
                 error: function() {
@@ -311,7 +311,7 @@ verifyLoad('builder',
                     if ( fontSize != null && fontSize.value != null) {
                         $('body').css("font-size", fontSize.value);
                     }
-                    ctxt.append('builder.buildSurvey: completed load - starting form processing');
+                    ctxt.log('D','builder.buildSurvey: completed load - starting form processing');
                     ctxt.success();
                 }
             });

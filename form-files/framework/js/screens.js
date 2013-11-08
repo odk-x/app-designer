@@ -53,33 +53,25 @@ screenTypes.base = Backbone.View.extend({
                         // ensure that require is unwound
                         setTimeout(function() { ctxt.success(); }, 0 );
                     } catch (e) {
-                        ctxt.append("screens."+that.type+
-                            ".whenTemplateIsReady.exception", e);
-                        console.error("screens."+that.type+
-                            ".whenTemplateIsReady.exception " + String(e) +
+                        ctxt.log('E',"screens."+that.type+
+                            ".whenTemplateIsReady.exception", e.message +
                             " px: " + that.promptIdx);
                         ctxt.failure({message: "Error compiling handlebars template."});
                     }
                 }, function(err) {
-                    ctxt.append("screens."+that.type+
-                        ".whenTemplateIsReady.require.failure " + err.requireType + " modules: ", err.requireModules);
-                    shim.log('E',"screens."+that.type+
-                        ".whenTemplateIsReady.require.failure " + err.requireType + " modules: " + err.requireModules.toString());
+                    ctxt.log('E',"screens."+that.type+
+                        ".whenTemplateIsReady.require.failure " + err.requireType + " modules: ", err.requireModules.toString());
                     ctxt.failure({message: "Error loading handlebars template (" + err.requireType + ")."});
                 });
             } catch (e) {
-                ctxt.append("screens."+that.type+
-                    ".whenTemplateIsReady.require.exception", e);
-                console.error("screens."+that.type+
-                    ".whenTemplateIsReady.require.exception " + String(e) +
+                ctxt.log('E',"screens."+that.type+
+                    ".whenTemplateIsReady.require.exception", e.message +
                     " px: " + that.promptIdx);
                 ctxt.failure({message: "Error reading handlebars template."});
             }
         } else {
-            ctxt.append("screens." + that.type +
+            ctxt.log('E',"screens." + that.type +
                 ".whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
-            console.error("screens."+that.type+
-                ".whenTemplateIsReady.noTemplate px: " + that.promptIdx);
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
@@ -88,8 +80,7 @@ screenTypes.base = Backbone.View.extend({
      **/
     stopPropagation: function(evt){
         var ctxt = this.controller.newContext(evt);
-        ctxt.append("screens." + this.type + ".stopPropagation", "px: " + this.promptIdx);
-        shim.log("D","screens." + this.type + ".stopPropagation px: " + this.promptIdx + "evt: " + evt);
+        ctxt.log('D',"screens." + this.type + ".stopPropagation", "px: " + this.promptIdx + "evt: " + evt);
         evt.stopImmediatePropagation();
         ctxt.success();
     },
@@ -111,9 +102,7 @@ screenTypes.base = Backbone.View.extend({
         if ( 'display' in that && _.isObject(that.display) ) {
             that._renderContext.display = that.display;
         } else {
-            var section = opendatakit.getSettingObject(opendatakit.getCurrentFormDef(), that._section_name);
-            that._renderContext.display = (section && section.display) ? 
-                section.display : {title: that.controller.getSectionTitle()};
+            that._renderContext.display = { title: that._renderContext.form_title };
         }
         if ( 'showHeader' in that ) {
             that._renderContext.showHeader = that.showHeader;
@@ -133,7 +122,7 @@ screenTypes.base = Backbone.View.extend({
         if ( that.activePrompts.length == 0 ) {
             ctxt.success();
         } else {
-            var oneCtxt = $.extend({}, ctxt, {
+            var onceCtxt = $.extend({}, ctxt, {
                 success:_.after(that.activePrompts.length, function() {
                     ctxt.success();
                 }),
@@ -141,12 +130,18 @@ screenTypes.base = Backbone.View.extend({
                     ctxt.failure(m);
                 })
             });
-            // We do not support dependent default values within screen groups.
-            // If we are to do so, we will need to add code here to ensure
-            // their on activate functions are called in the right order.
-            _.each(that.activePrompts, function(prompt){
-                prompt.buildRenderContext(oneCtxt);
-            });
+            try {
+                // We do not support dependent default values within screen groups.
+                // If we are to do so, we will need to add code here to ensure
+                // their on activate functions are called in the right order.
+                _.each(that.activePrompts, function(prompt){
+                    prompt.buildRenderContext(onceCtxt);
+                });
+            } catch (e) {
+                ctxt.log('E','controller.beforeMove.exception', 
+                    "exception: " + ex.message + " stack: " + ex.stack  + " px: " + opPath);
+                ctxt.failure({message: "Exception while initializing screen: " + e.message});
+            }
         }
     },
     buildRenderContext: function(ctxt) {
@@ -164,7 +159,7 @@ screenTypes.base = Backbone.View.extend({
                 for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
                     var prompt = sectionPrompts[activePromptIndices[i]];
                     if ( prompt == null ) {
-                        ctxt.append("Error! unable to resolve prompt!");
+                        ctxt.log('E',"Error! unable to resolve prompt!");
                         ctxt.failure({message: "bad prompt index!"});
                         return;
                     }

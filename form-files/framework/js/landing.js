@@ -38,11 +38,11 @@ window.landing = window.landing || {
         var that = this;
         var ctxt = that.controller.newStartContext();
         var ref = $.extend({},ctxt,{success: function() {
-            ctxt.append('setChaining.wrapper.success');
+            ctxt.log('D','setChaining.wrapper.success');
             if ( that._chainedContextEvaluators.length !== 0 ) {
                 var i;
                 for ( i = 0 ; i < that._chainedContextEvaluators.length ; ++i ) {
-                    ctxt.append('setChaining.wrapper.success.beforeChaining', 
+                    ctxt.log('D','setChaining.wrapper.success.beforeChaining', 
                         '_chainedContextEvaluators[' + i + ']' +
                         that._chainedContextEvaluators[i].description );
                 }
@@ -50,12 +50,12 @@ window.landing = window.landing || {
                 var chainCtxt = (realChain.evaluator)();
                 ctxt.setChainedContext(chainCtxt);
             } else {
-                ctxt.append('setChaining.wrapper.success - no pending actions');
+                ctxt.log('D','setChaining.wrapper.success - no pending actions');
             }
             ctxt.success();
         }, 
         failure: function(m) {
-            ctxt.append('setChaining.wrapper.failure - flush action');
+            ctxt.log('E','setChaining.wrapper.failure - flush action');
             that._chainedContextEvaluators = [];
             ctxt.failure(m);
         }});
@@ -77,22 +77,22 @@ window.landing = window.landing || {
             var txt = "landing.opendatakitChangeUrlHash original timestamp: " + now;
             var fn = function() {
                 var ctxt = that.controller.newCallbackContext();
-                ctxt.append(txt);
+                ctxt.log('D',txt);
                 var ref = $.extend({},ctxt,{ success: function() {
-                    ctxt.append("landing.opendatakitChangeUrlHash.changeUrlHash (executing queued request)", hash);
+                    ctxt.log('D',"landing.opendatakitChangeUrlHash.changeUrlHash (executing queued request)", hash);
                     that.controller.changeUrlHash($.extend({}, ctxt,{success: function() {
-                        ctxt.append("landing.setController.changeUrlHash done!", hash);
+                        ctxt.log('D',"landing.setController.changeUrlHash done!", hash);
                         // attached chaining
                         ctxt.setChainedContext(that._getChainingContext());
                         ctxt.success();
                     }, failure: function(m) {
-                        ctxt.append("landing.setController.changeUrlHash flushed all pending actions!", hash);
+                        ctxt.log('E',"landing.setController.changeUrlHash flushed all pending actions!", hash);
                         // attached chaining
                         ctxt.setChainedContext(that._getChainingContext());
                         ctxt.failure(m);
                     }}), hash);
                 }, failure: function(m) {
-                    ctxt.append("landing.setController.changeUrlHash flushed all pending actions!", hash);
+                    ctxt.log('E',"landing.setController.changeUrlHash flushed all pending actions!", hash);
                     // attached chaining
                     ctxt.setChainedContext(that._getChainingContext());
                     ctxt.failure(m);
@@ -102,8 +102,7 @@ window.landing = window.landing || {
             that._chainedContextEvaluators.push({ description: 'changeUrlHash: ' + hash, evaluator: fn });
         } else {
             var ctxt = that.controller.newCallbackContext();
-            shim.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (immediate) seq: " + ctxt.seq);
-            ctxt.append("landing.opendatakitChangeUrlHash.changeUrlHash", hash);
+            ctxt.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (immediate)", hash);
             that.controller.changeUrlHash(ctxt,hash);
         }
     },
@@ -122,24 +121,23 @@ window.landing = window.landing || {
             var txt = "landing.opendatakitCallback original timestamp: " + now;
             var fn = function() {
                 var ctxt = that.controller.newCallbackContext();
-                ctxt.append(txt);
+                ctxt.log('D',txt);
                 var ref = $.extend({},ctxt,{ success: function() {
-                    shim.log('I', "landing.opendatakitCallback.actionCallback seq: " + ctxt.seq);
-                    ctxt.append("landing.opendatakitCallback.actionCallback (executing queued request)", action);
+                    ctxt.log('I',"landing.opendatakitCallback.actionCallback (executing queued request)", action);
                     that.controller.actionCallback( $.extend({}, ctxt, { success: function() {
-                        ctxt.append("landing.opendatakitCallback.actionCallback (executing queued request) success!", action);
+                        ctxt.log('D',"landing.opendatakitCallback.actionCallback (executing queued request) success!", action);
                         // attached chaining
                         ctxt.setChainedContext(that._getChainingContext());
                         ctxt.success();
                     }, failure: function(m) {
-                        ctxt.append("landing.opendatakitCallback.actionCallback (executing queued request) flushed all pending actions!", action);
+                        ctxt.log('E',"landing.opendatakitCallback.actionCallback (executing queued request) flushed all pending actions!", action);
                         // attached chaining
                         ctxt.setChainedContext(that._getChainingContext());
                         ctxt.failure(m);
                     }}), 
                         promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
                 }, failure: function(m) {
-                    ctxt.append("landing.opendatakitCallback.actionCallback (executing queued request) flushed all pending actions!", action);
+                    ctxt.log('E',"landing.opendatakitCallback.actionCallback (executing queued request) flushed all pending actions!", action);
                     // attached chaining
                     ctxt.setChainedContext(that._getChainingContext());
                     ctxt.failure(m);
@@ -149,8 +147,7 @@ window.landing = window.landing || {
             that._chainedContextEvaluators.push({ description: 'actionCallback: ' + action, evaluator: fn });
         } else {
             var ctxt = that.controller.newCallbackContext();
-            shim.log('I', "landing.opendatakitCallback.actionCallback (immediate) seq: " + ctxt.seq);
-            ctxt.append("landing.opendatakitCallback.actionCallback", actionWaitingForData);
+            ctxt.log('I', "landing.opendatakitCallback.actionCallback (immediate)", actionWaitingForData);
             that.controller.actionCallback( ctxt, promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
         }
     },

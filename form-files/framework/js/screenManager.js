@@ -53,7 +53,7 @@ return Backbone.View.extend({
     },
     displayWaiting: function(ctxt){
         var that = this;
-        ctxt.append("screenManager.displayWaiting", 
+        ctxt.log('D',"screenManager.displayWaiting", 
             (that.activeScreen == null) ? "activeScreenIdx: null" : ("activeScreenIdx: " + that.activeScreen.promptIdx));
         var ScreenType = screenTypes['waiting'];
         var ExtendedScreenType = ScreenType.extend({});
@@ -105,13 +105,13 @@ return Backbone.View.extend({
         // useful defaults...
         that.renderContext = {
             form_version: opendatakit.getSettingValue('form_version'),
-            form_title: that.controller.getSectionTitle(),
+            form_title: opendatakit.getCurrentSectionTitle(screen._section_name),
             locales: locales,
             dataTheme: "d",
             hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
-            showContents: that.controller.getSectionShowContents(),
+            showContents: (!that.popScreenOnExit && opendatakit.getCurrentSectionShowContents(screen._section_name)),
             enableForwardNavigation: true,
             enableBackNavigation: ! that.popScreenOnExit,
             showAsContinueButton: that.popScreenOnExit,
@@ -203,12 +203,12 @@ return Backbone.View.extend({
     gotoNextScreen: function(evt) {
         var that = this;
         var ctxt = that.controller.newContext(evt);
-        ctxt.append('screenManager.gotoNextScreen', 
+        ctxt.log('D','screenManager.gotoNextScreen', 
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
-            ctxt.append('screenManager.gotoNextScreen.duplicateEvent');
+            ctxt.log('I','screenManager.gotoNextScreen.duplicateEvent');
             ctxt.success();
             return false;
         }
@@ -219,7 +219,7 @@ return Backbone.View.extend({
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
         var that = this;
         if(that.pageChangeActionLockout) {
-            ctxt.append('screenManager.gotoNextScreen.ignoreDisabled');
+            ctxt.log('D','screenManager.gotoNextScreen.ignoreDisabled');
             ctxt.success();
             return false;
         }
@@ -236,12 +236,12 @@ return Backbone.View.extend({
     gotoPreviousScreen: function(evt) {
         var that = this;
         var ctxt = that.controller.newContext(evt);
-        ctxt.append('screenManager.gotoPreviousScreen', 
+        ctxt.log('D','screenManager.gotoPreviousScreen', 
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
-            ctxt.append('screenManager.gotoPreviousScreen.duplicateEvent');
+            ctxt.log('I','screenManager.gotoPreviousScreen.duplicateEvent');
             ctxt.success();
             return false;
         }
@@ -252,7 +252,7 @@ return Backbone.View.extend({
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
         var that = this;
         if(that.pageChangeActionLockout) {
-            ctxt.append('screenManager.gotoPreviousScreen.ignoreDisabled');
+            ctxt.log('D','screenManager.gotoPreviousScreen.ignoreDisabled');
             ctxt.success();
             return false;
         }
@@ -269,12 +269,12 @@ return Backbone.View.extend({
     showContents: function(evt) {
         var that = this;
         var ctxt = that.controller.newContext(evt);
-        ctxt.append('screenManager.showContents', 
+        ctxt.log('D','screenManager.showContents', 
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
-            ctxt.append('screenManager.showContents.duplicateEvent');
+            ctxt.log('I','screenManager.showContents.duplicateEvent');
             ctxt.success();
             return false;
         }
@@ -282,7 +282,7 @@ return Backbone.View.extend({
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
         var that = this;
         if(that.pageChangeActionLockout) {
-            ctxt.append('screenManager.showContents.ignoreDisabled');
+            ctxt.log('D','screenManager.showContents.ignoreDisabled');
             ctxt.success();
             return false;
         }
@@ -301,7 +301,7 @@ return Backbone.View.extend({
         evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt);
-        ctxt.append('screenManager.ignoreChanges', 
+        ctxt.log('D','screenManager.ignoreChanges', 
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
                 that.controller.leaveInstance(ctxt);
@@ -312,7 +312,7 @@ return Backbone.View.extend({
         evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt);
-        ctxt.append('screenManager.saveChanges', 
+        ctxt.log('D','screenManager.saveChanges', 
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
                 that.controller.leaveInstance(ctxt);
@@ -340,7 +340,7 @@ return Backbone.View.extend({
     setLanguage: function(evt) {
         var that = this;
         var ctxt = that.controller.newContext(evt);
-        ctxt.append('screenManager.setLanguage', 
+        ctxt.log('D','screenManager.setLanguage', 
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         //Closing popups is important,
         //they will not open in the future if one is not closed.
@@ -383,7 +383,7 @@ return Backbone.View.extend({
         that.savedCtxt = null;
         
         if ( ctxt != null ) {
-            ctxt.append('screenManager.handlePageChange.linked');
+            ctxt.log('D','screenManager.handlePageChange.linked');
             if ( that.activeScreen ) {
                 // TODO: unclear what proper action should be for a failure
                 // during afterRender(). For now, the display ends up in an 
@@ -399,7 +399,7 @@ return Backbone.View.extend({
             }
         } else {
             ctxt = this.controller.newContext(evt);
-            shim.log('E','screenManager.handlePageChange.error');
+            ctxt.log('E','screenManager.handlePageChange.error');
             this.pageChangeActionLockout = false;
             ctxt.failure({message: "Internal error. Unexpected triggering of page change event."});
         }

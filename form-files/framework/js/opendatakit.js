@@ -8,8 +8,8 @@
  */
 define(['mdl','underscore'],function(mdl,_) {
 verifyLoad('opendatakit',
-	['mdl','underscore'],
-	[ mdl,  _]);
+    ['mdl','underscore'],
+    [ mdl,  _]);
 return {
     initialScreenPath: "initial/0",
     savepoint_type_complete: 'COMPLETE',
@@ -158,6 +158,21 @@ return {
     getCurrentSectionTitle:function(sectionName) {
         return this.getSectionTitle(this.getCurrentFormDef(),sectionName);
     },
+    getCurrentSectionShowContents: function(sectionName) {
+        var formDef = this.getCurrentFormDef();
+        var sectionSettings = this.getSettingObject(formDef,sectionName);
+        if ( sectionSettings === undefined || sectionSettings === null ) {
+            sectionSettings = this.getSettingObject(formDef, 'survey'); // fallback
+        }
+        
+        if ( sectionSettings === undefined || 
+             sectionSettings === null ||
+             !('showContents' in sectionSettings) ) {
+            return true;
+        }
+        
+        return sectionSettings.showContents;
+    },
     localize:function(textOrLangMap, locale) {
         if(_.isUndefined(textOrLangMap)) {
             return 'text_undefined';
@@ -259,28 +274,26 @@ return {
                     alert('Unable to find file: ' + filename);
                     ctxt.failure({message: "Form definition is empty."});
                 } else {
-					setTimeout(function() {
-						var formDef;
-						try {
-							formDef = JSON.parse(formDefTxt);
-						} catch (ex) {
-							console.error('opendatakit.readFormDefFile.require.JSONexception' + String(ex));
-							ctxt.append('opendatakit.readFormDefFile.require.JSONexception',  'JSON parsing error: ' + ex);
-							ctxt.failure({message: "Exception while processing form definition."});
-							return;
-						}
-						try {
-							ctxt.success(formDef);
-						} catch (ex) {
-							console.error('opendatakit.readFormDefFile.require.continuationException' + String(ex));
-							ctxt.append('opendatakit.readFormDefFile.require.continuationException',  'formDef interpetation or database setup error: ' + ex);
-							ctxt.failure({message: "Exception while processing form definition."});
-						}
-					}, 0);
+                    setTimeout(function() {
+                        var formDef;
+                        try {
+                            formDef = JSON.parse(formDefTxt);
+                        } catch (ex) {
+                            ctxt.log('E','opendatakit.readFormDefFile.require.JSONexception',  'JSON parsing error: ' + ex.message);
+                            ctxt.failure({message: "Exception while processing form definition."});
+                            return;
+                        }
+                        try {
+                            ctxt.success(formDef);
+                        } catch (ex) {
+                            ctxt.log('E','opendatakit.readFormDefFile.require.continuationException', 
+                                        'formDef interpetation or database setup error: ' + ex.message);
+                            ctxt.failure({message: "Exception while processing form definition."});
+                        }
+                    }, 0);
                 }
             }, function(err) {
-                ctxt.append("opendatakit.readFormDefFile.require.failure" + err.requireType + ' modules: ', err.requireModules);
-                shim.log('E',"opendatakit.readFormDefFile.require.failure" + err.requireType + ' modules: ', err.requireModules.toString());
+                ctxt.log('E',"opendatakit.readFormDefFile.require.failure" + err.requireType + ' modules: ', err.requireModules.toString());
                 ctxt.failure({message: "Failure while reading form definition (" + err.requireType + ")."});
             });
     }

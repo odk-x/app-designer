@@ -2,16 +2,17 @@
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
 define(['mdl','opendatakit','jquery','XRegExp'], function(mdl,opendatakit,$,XRegExp) {
 verifyLoad('database',
-    ['mdl','opendatakit','jquery'],
-    [mdl,opendatakit,$]);
+    ['mdl','opendatakit','jquery','XRegExp'],
+    [mdl,opendatakit,$,XRegExp]);
 return {
   submissionDb:false,
   pendingChanges: [],
         // maps of:
         //   dbColumnName : { 
-        //        type: databaseType, 
-        //         isNotNullable: false/true, 
-        //        isPersisted: false/true,
+        //      type: databaseType, 
+        //      isNotNullable: false/true, 
+        //      isPersisted: false/true,
+		//      isSessionVariable: false/true,
         //      'default': defaultValue,
         //      elementPath: exposedName }
         // 
@@ -500,29 +501,28 @@ return {
     },
   withDb:function(ctxt, transactionBody) {
     var inContinuation = false;
-    ctxt.append('database.withDb');
+    ctxt.log('D','database.withDb');
     ctxt.sqlStatement = null;
     var that = this;
     try {
         if ( that.submissionDb ) {
             that.submissionDb.transaction(transactionBody, function(error,a) {
                     if ( ctxt.sqlStatement != null ) {
-                        ctxt.append("withDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
-                        ctxt.append("withDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
+                        ctxt.log('E',"withDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
+                        ctxt.log('E',"withDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
                     }
-                    ctxt.append("withDb.transaction.error", error.message);
-                    ctxt.append("withDb.transaction.error.transactionBody", transactionBody.toString());
+                    ctxt.log('E',"withDb.transaction.error", error.message);
+                    ctxt.log('E',"withDb.transaction.error.transactionBody", transactionBody.toString());
                     inContinuation = true;
                     that.submissionDb = null;
                     ctxt.failure({message: "Error while accessing or saving values to the database."});
                     }, function() {
-                        ctxt.append("withDb.transaction.success");
+                        ctxt.log('D',"withDb.transaction.success");
                         inContinuation = true;
                         ctxt.success();
                     });
         } else if(!window.openDatabase) {
-            ctxt.append('database.withDb.notSupported');
-            console.error('w3c SQL interface is not supported');
+            ctxt.log('E','database.withDb.notSupported w3c SQL interface is not supported');
             inContinuation = true;
             ctxt.failure({message: "Web client does not support the W3C SQL database standard."});
         } else {
@@ -547,30 +547,30 @@ return {
                     transaction.executeSql(td.stmt, td.bind);
                 }, function(error) {
                     if ( ctxt.sqlStatement != null ) {
-                        ctxt.append("withDb.createDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
-                        ctxt.append("withDb.createDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
+                        ctxt.log('E',"withDb.createDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
+                        ctxt.log('E',"withDb.createDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
                     }
-                    ctxt.append("withDb.createDb.transaction.error", error.message);
-                    ctxt.append("withDb.createDb.transaction.error.transactionBody", "initializing database tables");
+                    ctxt.log('E',"withDb.createDb.transaction.error", error.message);
+                    ctxt.log('E',"withDb.createDb.transaction.error.transactionBody", "initializing database tables");
                     inContinuation = true;
                     ctxt.failure({message: "Error while initializing database tables."});
                 }, function() {
                     // DB is created -- record the submissionDb and initiate the transaction...
                     that.submissionDb = database;
-                    ctxt.append("withDb.createDb.transacton.success");
+                    ctxt.log('D',"withDb.createDb.transacton.success");
                     ctxt.sqlStatement = null;
                     that.submissionDb.transaction(transactionBody, function(error) {
                                 if ( ctxt.sqlStatement != null ) {
-                                    ctxt.append("withDb.afterCreateDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
-                                    ctxt.append("withDb.afterCreateDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
+                                    ctxt.log('E',"withDb.afterCreateDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
+                                    ctxt.log('E',"withDb.afterCreateDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
                                 }
-                                ctxt.append("withDb.afterCreateDb.transaction.error", error.message);
-                                ctxt.append("withDb.afterCreateDb.transaction.error.transactionBody", transactionBody.toString());
+                                ctxt.log('E',"withDb.afterCreateDb.transaction.error", error.message);
+                                ctxt.log('E',"withDb.afterCreateDb.transaction.error.transactionBody", transactionBody.toString());
                                 that.submissionDb = null;
                                 inContinuation = true;
                                 ctxt.failure({message: "Error while accessing or saving values to the database."});
                             }, function() {
-                                ctxt.append("withDb.afterCreateDb.transaction.success");
+                                ctxt.log('D',"withDb.afterCreateDb.transaction.success");
                                 inContinuation = true;
                                 ctxt.success();
                             });
@@ -580,28 +580,23 @@ return {
         that.submissionDb = null;
         // Error handling code goes here.
         if ( ctxt.sqlStatement != null ) {
-            ctxt.append("withDb.exception.sqlStmt", ctxt.sqlStatement.stmt);
+            ctxt.log('E',"withDb.exception.sqlStmt", ctxt.sqlStatement.stmt);
         }
         if(e.INVALID_STATE_ERR) {
             // Version number mismatch.
-            ctxt.append('withDb.exception', 'invalid db version');
-            console.error("Invalid database version.");
+            ctxt.log('E','withDb.exception', 'invalid database version');
         } else {
-            ctxt.append('withDb.exception', 'unknown error: ' + String(e));
-            console.error("Unknown error " + String(e) + ".");
+            ctxt.log('E','withDb.exception', 'unknown error: ' + e.message + " e: " + String(e));
         }
         if ( !inContinuation ) {
             try {
                 ctxt.failure({message: "Exception while accessing or saving values to the database."});
             } catch(e) {
-                ctxt.append('withDb.ctxt.failure.exception', 'unknown error: ' + String(e));
-                console.error("withDb.ctxt.failure.exception " + String(e));
-                ctxt._log('E','withDb: exception caught while executing ctxt.failure(msg)');
+                ctxt.log('E','withDb.ctxt.failure.exception caught while executing ctxt.failure(msg)', 'unknown error: ' + e.message + " e: " + String(e));
                 alert('Fatal error while accessing or saving values to database');
             }
         } else {
-            console.error("Unrecoverable Internal Error: Exception during success/failure continuation");
-            ctxt._log('E',"withDb: Unrecoverable Internal Error: Exception during success/failure continuation");
+            ctxt.log('E',"withDb: Unrecoverable Internal Error: Exception during success/failure continuation");
             alert('Fatal error while accessing or saving values to database');
         }
         return;
@@ -1088,10 +1083,9 @@ insertColumnMetaDataStmt:function(table_id, elementKey, name, type, value) {
 /////////////////////////////////////////////////////////////////////////
 putInstanceMetaData:function(ctxt, name, value) {
       var that = this;
-      var kvMap = {};
       var dbColumnName;
       var f;
-      ctxt.append('putInstanceMetaData', 'name: ' + name);
+      ctxt.log('D','putInstanceMetaData', 'name: ' + name);
       for ( f in that.dataTablePredefinedColumns ) {
         var defn = that.dataTablePredefinedColumns[f];
         if (  defn.elementSet === 'instanceMetadata' &&
@@ -1102,7 +1096,7 @@ putInstanceMetaData:function(ctxt, name, value) {
         }
       }
       if ( dbColumnName === undefined || dbColumnName === null ) {
-        ctxt.append('putInstanceMetaData.elementPath.missing', 'name: ' + name);
+        ctxt.log('E','putInstanceMetaData.elementPath.missing', 'name: ' + name);
         ctxt.failure({message:"Unrecognized instance metadata"});
         return;
       }
@@ -1111,8 +1105,13 @@ putInstanceMetaData:function(ctxt, name, value) {
       // the database layer. 
       // The database layer uses putDataKeyValueMap()
       // for lower-level manipulations.
-      kvMap[name] = {value: value, isInstanceMetadata: true };
-      that.putDataKeyValueMap(ctxt, kvMap );
+
+      // flush any pending changes too...
+      var changes = that.pendingChanges;
+      that.pendingChanges = {};
+      changes[name] = {value: value, isInstanceMetadata: true };
+
+      that.putDataKeyValueMap(ctxt, changes );
 },
 /**
  * kvMap is: { 'keyname' : {value: 'val', isInstanceMetadata: false }, ... }
@@ -1130,11 +1129,11 @@ putDataKeyValueMap:function(ctxt, kvMap) {
             names += "," + property;
           }
           names = names.substring(1);
-          ctxt.append('database.putDataKeyValueMap.initiated', names );
+          ctxt.log('D','database.putDataKeyValueMap.initiated', names );
 
           var updates = {};
           var tmpctxt = $.extend({}, ctxt, {success:function() {
-                    ctxt.append('database.putDataKeyValueMap.updatingCache');
+                    ctxt.log('D','database.putDataKeyValueMap.updatingCache');
                     var uf;
                     for (var f in updates) {
                         var uf = updates[f];
@@ -1155,7 +1154,7 @@ putDataKeyValueMap:function(ctxt, kvMap) {
                 var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, opendatakit.getCurrentInstanceId(), kvMap);
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                     updates = is.updates;
-                    tmpctxt.append("putDataKeyValueMap.success", names);
+                    tmpctxt.log('D',"putDataKeyValueMap.success", names);
                 });
             });
     }
@@ -1163,13 +1162,13 @@ putDataKeyValueMap:function(ctxt, kvMap) {
 getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
       var that = this;
       var tlo = { data: {}, metadata: {}};
-      ctxt.append('getAllData');
+      ctxt.log('D','getAllData');
       var tmpctxt = $.extend({},ctxt,{success:function() {
-                ctxt.append("getAllData.success");
+                ctxt.log('D',"getAllData.success");
                 ctxt.success(tlo);
             }});
       if ( instanceId === undefined || instanceId === null ) {
-        ctxt.append("getAllData.instanceId.null");
+        ctxt.log('D',"getAllData.instanceId.null");
         tmpctxt.success();
         return;
       }
@@ -1213,7 +1212,7 @@ cacheAllData:function(ctxt, instanceId) {
         ctxt.success();
     } else {
         this.getAllData($.extend({},ctxt,{success:function(tlo) {
-            ctxt.append("cacheAllData.success");
+            ctxt.log('I',"cacheAllData.success");
             mdl.metadata = tlo.metadata;
             mdl.data = tlo.data;
             mdl.loaded = true;
@@ -1317,9 +1316,9 @@ _coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
 save_all_changes:function(ctxt, asComplete) {
       var that = this;
     // TODO: if called from Java, ensure that all data on the current page is saved...
-      ctxt.append('save_all_changes');
+      ctxt.log('D','save_all_changes');
       var tmpctxt = $.extend({}, ctxt, {success:function() {
-                ctxt.append('save_all_changes.markCurrentStateSaved.success', 
+                ctxt.log('I','save_all_changes.markCurrentStateSaved.success', 
                 opendatakit.getSettingValue('form_id') + " instanceId: " + opendatakit.getCurrentInstanceId() + " asComplete: " + asComplete);
                 ctxt.success();
             }});
@@ -1330,7 +1329,7 @@ save_all_changes:function(ctxt, asComplete) {
                 var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, opendatakit.getCurrentInstanceId(), kvMap);
                 tmpctxt.sqlStatement = is;
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-                    ctxt.append('save_all_changes.cleanup');
+                    ctxt.log('D','save_all_changes.cleanup');
                     // and now delete the change history...
                     var cs = that._deletePriorChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
                     tmpctxt.sqlStatement = cs;
@@ -1341,7 +1340,7 @@ save_all_changes:function(ctxt, asComplete) {
 },
 ignore_all_changes:function(ctxt) {
       var that = this;
-      ctxt.append('database.ignore_all_changes');
+      ctxt.log('I','database.ignore_all_changes');
       that.withDb( ctxt, function(transaction) {
             var cs = that._deleteUnsavedChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
             ctxt.sqlStatement = cs;
@@ -1351,7 +1350,7 @@ ignore_all_changes:function(ctxt) {
 },
 delete_all:function(ctxt, instanceId) {
       var that = this;
-      ctxt.append('delete_all');
+      ctxt.log('I','delete_all');
       that.withDb( ctxt, function(transaction) {
             var cs = that._deleteDataTableStmt(mdl.tableMetadata.dbTableName, instanceId);
             ctxt.sqlStatement = cs;
@@ -1361,7 +1360,7 @@ delete_all:function(ctxt, instanceId) {
 get_all_instances:function(ctxt) {
       var that = this;
       var instanceList = [];
-      ctxt.append('get_all_instances');
+      ctxt.log('D','get_all_instances');
       that.withDb($.extend({},ctxt,{success: function() {
             ctxt.success(instanceList);
         }}), function(transaction) {
@@ -1385,7 +1384,7 @@ get_all_instances:function(ctxt) {
 },
 delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
       var that = this;
-      ctxt.append('delete_linked_instance_all');
+      ctxt.log('I','delete_linked_instance_all');
       that.withDb( ctxt, function(transaction) {
             var cs = that._deleteDataTableStmt(dbTableName, instanceId);
             ctxt.sqlStatement = cs;
@@ -1395,7 +1394,7 @@ delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
 get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displayElementName, orderBy) {
       var that = this;
       var instanceList = [];
-      ctxt.append('get_linked_instances', dbTableName);
+      ctxt.log('D','get_linked_instances', dbTableName);
       that.withDb($.extend({},ctxt,{success: function() {
             ctxt.success(instanceList);
         }}), function(transaction) {
@@ -1464,13 +1463,13 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
     var that = this;
     instanceMetadataKeyValueMap = instanceMetadataKeyValueMap || {};
     if ( instanceId === undefined || instanceId === null ) {
-        ctxt.append('initializeInstance.noInstance');
+        ctxt.log('D','initializeInstance.noInstance');
         mdl.metadata = {};
         mdl.data = {};
         mdl.loaded = false;
         ctxt.success();
     } else {
-        ctxt.append('initializeInstance.access', instanceId);
+        ctxt.log('D','initializeInstance.access', instanceId);
         var tmpctxt = $.extend({},ctxt,{success:function() {
                 that.cacheAllData(ctxt, instanceId);
             }});
@@ -1484,7 +1483,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     count = row['rowcount'];
                 }
                 if ( count === undefined || count === null || count === 0) {
-                    ctxt.append('initializeInstance.insertEmptyInstance');
+                    ctxt.log('D','initializeInstance.insertEmptyInstance');
                     // construct a friendly name for this new form...
                     var date = new Date();
                     var dateStr = date.toISOString();
@@ -1517,7 +1516,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
 initializeTables:function(ctxt, formDef, table_id, formPath) {
     var that = this;
     var rectxt = $.extend({}, ctxt, {success:function(tlo) {
-        ctxt.append('getAllTableMetaData.success');
+        ctxt.log('D','getAllTableMetaData.success');
         // these values come from the current webpage
         // update table_id and qp
         mdl.formDef = tlo.formDef;
@@ -1550,9 +1549,9 @@ readTableDefinition:function(ctxt, formDef, table_id, formPath) {
         table_id: table_id
         };
                             
-    ctxt.append('initializeTables');
+    ctxt.log('D','initializeTables');
     var tmpctxt = $.extend({},ctxt,{success:function() {
-                ctxt.append('readTableDefinition.success');
+                ctxt.log('D','readTableDefinition.success');
                 ctxt.success(tlo);
             }});
     that.withDb(tmpctxt, function(transaction) {
@@ -1682,7 +1681,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
         _column_definitions: []
         };
 
-    ctxt.append('database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
+    ctxt.log('D','database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...
@@ -1930,7 +1929,7 @@ getInstanceMetaDataValue:function(name) {
     return v;
 },
 setInstanceMetaData:function(ctxt, name, value) {
-    ctxt.append('setInstanceMetaData: ' + name);
+    ctxt.log('I','setInstanceMetaData: ' + name);
     var that = this;
     that.putInstanceMetaData($.extend({}, ctxt, {success: function() {
                 that.cacheAllData(ctxt, opendatakit.getCurrentInstanceId());
@@ -1954,7 +1953,7 @@ getAllDataValues:function() {
 },
 purge:function(ctxt) {
     var that = this;
-    ctxt.append('database.purge.initiated');
+    ctxt.log('I','database.purge.initiated');
     var tableSets = [];
     that.withDb( $.extend({},ctxt,{success:function() {
             // OK we have tableSets[] constructed.
@@ -1993,8 +1992,6 @@ purge:function(ctxt) {
         });
     });
 },
-discoverTableFromTableId:function(ctxt, table_id) {
-},
 setValueDeferredChange: function( name, value ) {
     var justChange = {};
     justChange[name] = {value: value, isInstanceMetadata: false };
@@ -2028,6 +2025,77 @@ applyDeferredChanges: function(ctxt) {
                 ctxt.failure(m);
             }}), opendatakit.getCurrentInstanceId());
         }}), changes );
+},
+convertSelectionString: function(linkedMdl, selection) {
+	var that = this;
+	if ( selection == null || selection.length === 0 ) {
+		return null;
+	}
+	var parts = selection.split(' ');
+	var remapped = '';
+	var i;
+	
+	for ( i = 0 ; i < parts.length ; ++i ) {
+		var e = parts[i];
+		if ( e.length === 0 || !that.isValidElementPath(e) ) {
+			remapped = remapped + ' ' + e;
+		} else {
+			// map e back to elementKey
+			var found = false;
+			var f;
+			for (f in linkedMdl.dataTableModel) {
+				var defElement = linkedMdl.dataTableModel[f];
+				var elementPath = defElement['elementPath'];
+				if ( elementPath == null ) elementPath = f;
+				if ( elementPath == e ) {
+					remapped = remapped + ' "' + f + '"';
+					found = true;
+					break;
+				}
+			}
+			if ( found == false ) {
+				alert('database.convertSelectionString: unrecognized elementPath: ' + e );
+				shim.log('E',"database.convertSelectionString: unrecognized elementPath: " + e);
+				return null;
+			}
+		}
+	}
+	return remapped;
+},
+convertOrderByString: function(linkedMdl, order_by) {
+	var that = this;
+	if ( order_by == null || order_by.length === 0 ) {
+		return null;
+	}
+	var parts = order_by.split(' ');
+	var remapped = '';
+	var i;
+	for ( i = 0 ; i < parts.length ; ++i ) {
+		var e = parts[i];
+		if ( e.length === 0 || !that.isValidElementPath(e) ) {
+			remapped = remapped + ' ' + e;
+		} else {
+			// map e back to elementKey
+			var found = false;
+			var f;
+			for (f in linkedMdl.dataTableModel) {
+				var defElement = dataTableModel[f];
+				var elementPath = defElement['elementPath'];
+				if ( elementPath == null ) elementPath = f;
+				if ( elementPath == e ) {
+					remapped = remapped + ' "' + f + '"';
+					found = true;
+					break;
+				}
+			}
+			if ( found == false ) {
+				alert('database.convertOrderByString: unrecognized elementPath: ' + e );
+				shim.log('E',"database.convertOrderByString: unrecognized elementPath: " + e );
+				return null;
+			}
+		}
+	}
+	return remapped;
 }
 };
 });

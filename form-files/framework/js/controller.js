@@ -20,54 +20,6 @@ return {
     eventCount: 0,
     moveFailureMessage: { message: "Internal Error: Unable to determine next prompt." },
     screenManager : null,
-    getSectionTitle: function() {
-        var that = this;
-        var opPath = that.getCurrentScreenPath();
-        if ( opPath == null ) {
-            return "";
-        }
-        
-        var parts = opPath.split("/");
-        if ( parts.length < 2 ) {
-            return "";
-        }
-        
-        var formDef = opendatakit.getCurrentFormDef();
-        var sectionSettings = opendatakit.getSettingObject(formDef,parts[0]);
-        if ( sectionSettings == null ) {
-            return "";
-        }
-        
-        return sectionSettings.display.title;
-    },
-    getSectionShowContents: function() {
-        var that = this;
-        // if we are in the middle of a validation action, do not show contents screen.
-        if ( shim.getControllerState(opendatakit.getRefId()) === 'popHistoryOnExit' ) {
-            return false;
-        }
-        
-        var opPath = that.getCurrentScreenPath();
-        if ( opPath == null ) {
-            return false;
-        }
-        
-        var parts = opPath.split("/");
-        if ( parts.length < 2 ) {
-            return false;
-        }
-        
-        var formDef = opendatakit.getCurrentFormDef();
-        var sectionSettings = opendatakit.getSettingObject(formDef,parts[0]);
-        if ( sectionSettings == null ) {
-            return false;
-        }
-        
-        if ( 'showContents' in sectionSettings ) {
-            return sectionSettings.showContents;
-        }
-        return true;
-    },
     getCurrentScreenPath: function() {
         return shim.getScreenPath(opendatakit.getRefId());
     },
@@ -360,26 +312,23 @@ return {
                             break;
                         }
                     }
-                    if ( !shim.hasScreenHistory(opendatakit.getRefId())) {
+                    if ( path == null ) {
                         path = opendatakit.initialScreenPath;
                     }
+                    // just for debugging...
+                    shim.getScreenPath(opendatakit.getRefId());
                     break;
                 case "do_section":
-                    // state is 'advanceOnReturn' if we are returning from an exit_section
-                    state = shim.getControllerState(opendatakit.getRefId());
-                    if ( state === 'advanceOnReturn' ) {
-                        path = that.getNextOperationPath(path);
-                    } else {
-                        // push the prior rendered screen onto the stack before we mark the 'do_section' callout
-                        shim.pushSectionScreenState(opendatakit.getRefId());
-                        // save our op with note to advance immediately on return...
-                        shim.setSectionScreenState(opendatakit.getRefId(), path, 'advanceOnReturn');
-                        // start at operation 0 in the new section
-                        path = op._do_section_name + "/0";
-                    }
+                    // save our op...
+                    shim.setSectionScreenState(opendatakit.getRefId(), path, 'advanceOnReturn');
+                    // start at operation 0 in the new section
+                    path = op._do_section_name + "/0";
                     break;
                 case "exit_section":
                     path = shim.popSectionStack(opendatakit.getRefId());
+                    if ( shim.getControllerState(opendatakit.getRefId()) === 'advanceOnReturn' ) {
+                        path = that.getNextOperationPath(path);
+                    }
                     if ( path == null ) {
                         path = opendatakit.initialScreenPath;
                     }
@@ -405,10 +354,13 @@ return {
                     return;
                 case "validate":
                     var validationTag = op._sweep_name;
-
-                    // tag this op as a 'validateInProgress' node. Push onto stack.
-                    shim.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
-                    shim.pushSectionScreenState( opendatakit.getRefId());
+                    
+                    if ( shim.getScreenPath(opendatakit.getRefId()) !== path ||
+                         shim.getControllerState(opendatakit.getRefId()) !== 'validateInProgress' ) {
+                        // tag this op as a 'validateInProgress' node. Push onto stack.
+                        shim.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
+                        shim.pushSectionScreenState( opendatakit.getRefId());
+                    }
                     
                     database.applyDeferredChanges($.extend({},ctxt,{
                         success:function() {
@@ -418,7 +370,7 @@ return {
                                         // validation is DONE: pop ourselves off return stack.
                                         var refPath = shim.popScreenHistory( opendatakit.getRefId());
                                         if ( refPath != op._section_name + "/" + op.operationIdx ) {
-                                            ctxt.append("unexpected mis-match of screen history states");
+                                            ctxt.log('E',"unexpected mis-match of screen history states");
                                             ctxt.failure(that.moveFailureMessage);
                                             return;
                                         }
@@ -454,7 +406,7 @@ return {
                                     }
                                 }
                                 if ( promptList.length === 0 ) {
-                                    vctxt.append("validateQuestionHelper.success.emptyValidationList");
+                                    vctxt.log('D',"validateQuestionHelper.success.emptyValidationList");
                                     vctxt.success();
                                     return;
                                 }
@@ -471,7 +423,7 @@ return {
                                             currPrompt = that.getPrompt(promptList[i]);
                                             validateError = currPrompt._isValid(true);
                                             if ( validateError != null ) {
-                                                vctxt.append("_validateQuestionHelper.validate.failure", "px: " + currPrompt.promptIdx);
+                                                vctxt.log('I',"_validateQuestionHelper.validate.failure", "px: " + currPrompt.promptIdx);
                                                 var nextOp = that.getOperation(currPrompt._branch_label_enclosing_screen);
                                                 if ( nextOp == null ) {
                                                     vctxt.failure(that.moveFailureMessage);
@@ -481,7 +433,7 @@ return {
                                                 return;
                                             }
                                         }
-                                        vctxt.append("validateQuestionHelper.success.endOfValidationList");
+                                        vctxt.log('D',"validateQuestionHelper.success.endOfValidationList");
                                         vctxt.success();
                                     },
                                     failure: function(m) {
@@ -548,11 +500,11 @@ return {
         var popupbasectxt = that.newCallbackContext();
         var popupctxt = $.extend({}, popupbasectxt, {
             success: function() {
-                popupbasectxt.append("setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath);
+                popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath);
                 if ( m && m.message ) {
                     // schedule a timer to show the message after the page has rendered
                     setTimeout(function() {
-                        popupbasectxt.append("setScreenWithMessagePopup.popupSuccess.setTimeout", "px: " + that.getCurrentScreenPath());
+                        popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.setTimeout", "px: " + that.getCurrentScreenPath());
                             that.screenManager.showScreenPopup(m);
                         popupbasectxt.success();
                     }, 500);
@@ -561,12 +513,12 @@ return {
                 }
             },
             failure: function(m2) {
-                popupbasectxt.append("setScreenWithMessagePopup.popupFailure.showScreenPopup", "px: " + opPath);
+                popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup", "px: " + opPath);
                 // NOTE: if the setScreen() call failed, we should show the error from that...
                 if ( m2 && m2.message ) {
                     // schedule a timer to show the mesage after the page has rendered
                     setTimeout(function() {
-                        popupbasectxt.append("setScreenWithMessagePopup.popupFailure.setTimeout", "px: " + that.getCurrentScreenPath());
+                        popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.setTimeout", "px: " + that.getCurrentScreenPath());
                         that.screenManager.showScreenPopup(m2);
                         popupbasectxt.success();
                     }, 500);
@@ -602,10 +554,10 @@ return {
             var newctxt = $.extend({},ctxt,{
                 success:function(operation, options, m) {
                     if(operation) {
-                        ctxt.append("controller._doActionAt._doActionAtLoop.success", "px: " + that.getCurrentScreenPath() + " nextPx: " + operation.operationIdx);
+                        ctxt.log('D',"controller._doActionAt._doActionAtLoop.success", "px: " + that.getCurrentScreenPath() + " nextPx: " + operation.operationIdx);
                         that.setScreenWithMessagePopup(ctxt, operation, options, m);
                     } else {
-                        ctxt.append("controller._doActionAt._doActionAtLoop.success", "px: " + that.getCurrentScreenPath() + " nextPx: no screen!");
+                        ctxt.log('D',"controller._doActionAt._doActionAtLoop.success", "px: " + that.getCurrentScreenPath() + " nextPx: no screen!");
                         // do nothing -- the action already is showing the appropriate screen.
                         ctxt.success();
                     }
@@ -614,7 +566,7 @@ return {
                         shim.popScreenHistory(opendatakit.getRefId());
                     }
                     if ( that.getCurrentScreenPath() !== currentScreenPath ) {
-                        ctxt.append("controller._doActionAt._doActionAtLoop.failure", "px: " + 
+                        ctxt.log('W',"controller._doActionAt._doActionAtLoop.failure", "px: " + 
                             that.getCurrentScreenPath() + " does not match starting screen: " + currentScreenPath);
                     }
                     var op = that.getOperation(currentScreenPath);
@@ -632,7 +584,7 @@ return {
     },
     setScreen: function(ctxt, operation, inOptions){
         var that = this;
-        ctxt.append('controller.setScreen', "nextPx: " + operation.operationIdx);
+        ctxt.log('D','controller.setScreen', "nextPx: " + operation.operationIdx);
         var options = (inOptions === undefined || inOptions === null) ? {} : inOptions;
 
         /**
@@ -669,7 +621,7 @@ return {
         }
         
         if (!(screen_type in formDef.specification.currentScreenTypes)) {
-            ctxt.append('controller.setScreen.unrecognizedScreenType', screen_type);
+            ctxt.log('E','controller.setScreen.unrecognizedScreenType', screen_type);
             ctxt.failure({message: 'unknown screen_type'});
             return;
         }
@@ -690,7 +642,7 @@ return {
             // one or the other should pop the stack.
             // How does this flow?
                 // undo screen change on failure...
-                ctxt.append('controller.setScreen.failureRecovery', 'hash: ' + window.location.hash);
+                ctxt.log('D','controller.setScreen.failureRecovery', 'hash: ' + window.location.hash);
                 if ( oldPath == newPath ) {
                     ctxt.failure(m);
                 } else {
@@ -725,18 +677,18 @@ return {
      */
     gotoPreviousScreen: function(ctxt){
         var that = this;
-        ctxt.append('controller.gotoPreviousScreen');
+        ctxt.log('D','controller.gotoPreviousScreen');
         var opPath = that.getCurrentScreenPath();
         
         var failureObject = that.beforeMove(true, false);
         if ( failureObject != null ) {
-            ctxt.append("gotoPreviousScreen.beforeMove.failure", "px: " +  opPath);
+            ctxt.log('I',"gotoPreviousScreen.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
             return;
         }
 
-        ctxt.append("gotoPreviousScreen.beforeMove.success", "px: " +  opPath);
+        ctxt.log('D',"gotoPreviousScreen.beforeMove.success", "px: " +  opPath);
         var op = that.getOperation(opPath);
         if ( op == null ) {
             ctxt.failure(that.moveFailureMessage);
@@ -754,18 +706,18 @@ return {
      */
     gotoNextScreen: function(ctxt){
         var that = this;
-        ctxt.append('controller.gotoNextScreen');
+        ctxt.log('D','controller.gotoNextScreen');
         var opPath = that.getCurrentScreenPath();
 
         var failureObject = that.beforeMove(true, true);
         if ( failureObject != null ) {
-            ctxt.append("gotoNextScreen.beforeMove.failure", "px: " +  opPath);
+            ctxt.log('I',"gotoNextScreen.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
             return;
         }
 
-        ctxt.append("gotoNextScreen.beforeMove.success", "px: " +  opPath);
+        ctxt.log('D',"gotoNextScreen.beforeMove.success", "px: " +  opPath);
         var op = that.getOperation(opPath);
         if ( op == null ) {
             ctxt.failure(that.moveFailureMessage);
@@ -790,18 +742,18 @@ return {
      */
     gotoContentsScreen: function(ctxt){
         var that = this;
-        ctxt.append('controller.gotoContentsScreen');
+        ctxt.log('D','controller.gotoContentsScreen');
         var opPath = that.getCurrentScreenPath();
 
         var failureObject = that.beforeMove(true, false);
         if ( failureObject != null ) {
-            ctxt.append("gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
+            ctxt.log('I',"gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
             return;
         }
 
-        ctxt.append("gotoContentsScreen.beforeMove.success", "px: " +  opPath);
+        ctxt.log('D',"gotoContentsScreen.beforeMove.success", "px: " +  opPath);
         var op = that.getOperation( that.getCurrentContentsScreenPath() );
         if ( op == null ) {
             ctxt.failure(that.moveFailureMessage);
@@ -823,18 +775,18 @@ return {
      */
     gotoFinalizeAndTerminateAction: function(ctxt){
         var that = this;
-        ctxt.append('controller.gotoFinalizeAction');
+        ctxt.log('D','controller.gotoFinalizeAction');
         var opPath = that.getCurrentScreenPath();
 
         var failureObject = that.beforeMove(true, false);
         if ( failureObject != null ) {
-            ctxt.append("gotoFinalizeAction.beforeMove.failure", "px: " +  opPath);
+            ctxt.log('I',"gotoFinalizeAction.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
             return;
         }
 
-        ctxt.append("gotoFinalizeAction.beforeMove.success", "px: " +  opPath);
+        ctxt.log('D',"gotoFinalizeAction.beforeMove.success", "px: " +  opPath);
         var op = that.getOperation( 'initial/_finalize' );
         if ( op == null ) {
             ctxt.failure(that.moveFailureMessage);
@@ -855,26 +807,31 @@ return {
      */
     gotoScreenPath:function(ctxt, path, advancing) {
         var that = this;
-        ctxt.append('controller.gotoScreenPath');
+        ctxt.log('D','controller.gotoScreenPath');
         var opPath = that.getCurrentScreenPath();
-
+        var currentOp = that.getOperation(opPath);
+        
         var failureObject = that.beforeMove(true, advancing);
         if ( failureObject != null ) {
-            ctxt.append("gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
+            ctxt.log('I',"gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
             return;
         }
 
-        ctxt.append("gotoScreenPath.beforeMove.success", "px: " +  opPath);
+        ctxt.log('D',"gotoScreenPath.beforeMove.success", "px: " +  opPath);
         var op = that.getOperation(path);
         if ( op == null ) {
             ctxt.failure(that.moveFailureMessage);
-            return;
+            return;    
         }
-        if ( advancing ) {
+        // special case: jumping across sections
+        //
+        // do not push the current screen if we are changing sections,
+        // as all section jumps implicitly save where they came from.
+        if ( currentOp != null && op._section_name === currentOp._section_name && advancing ) {
             shim.pushSectionScreenState(opendatakit.getRefId());
-        }
+        }    
         that._doActionAt(ctxt, op, op._token_type, advancing);
     },
     /*
@@ -893,7 +850,7 @@ return {
      */
     startAtScreenPath:function(ctxt, path) {
         var that = this;
-        ctxt.append('controller.startAtScreenPath');
+        ctxt.log('D','controller.startAtScreenPath');
         
         if ( path == null ) {
             path = opendatakit.initialScreenPath;
@@ -957,7 +914,7 @@ return {
     actionCallback:function(ctxt, promptPath, internalPromptContext, action, jsonString) {
         var that = this;
         var screenPath = that.getCurrentScreenPath();
-        ctxt.append('controller.actionCallback', ((screenPath != null) ? ("px: " + screenPath) : "no current prompt"));
+        ctxt.log('I','controller.actionCallback', ((screenPath != null) ? ("px: " + screenPath) : "no current prompt"));
         
         // promptPath is the path to the prompt issuing the doAction.
         // prompts know their enclosing screen, so we don't need to 
@@ -970,25 +927,26 @@ return {
                 if ( handler != null ) {
                     handler( ctxt, internalPromptContext, action, jsonString );
                 } else {
-                    ctxt.append('controller.actionCallback.noHandler', promptPath);
-                    console.error("actionCallback: ERROR - NO HANDLER ON PROMPT! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
+                    ctxt.log('E','controller.actionCallback.noHandler: ERROR - NO HANDLER ON PROMPT!', 
+                        promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                     ctxt.failure({message: "Internal error. No matching handler for callback."});
                     return;
                 }
             } catch (e) {
-                ctxt.append('controller.actionCallback.exception', promptPath, e);
-                console.error("actionCallback: EXCEPTION ON PROMPT! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action + " exception: " + e);
+                ctxt.log('E','controller.actionCallback.exception: EXCEPTION ON PROMPT!', 
+                    promptPath,  + " internalPromptContext: " + internalPromptContext + " action: " +
+                    action + " exception: " + e.message);
                 ctxt.failure({message: "Internal error. Exception while handling callback."});
                 return;
             }
         } else {
-            ctxt.append('controller.actionCallback.noMatchingPrompt', promptPath);
-            console.error("actionCallback: ERROR - PROMPT NOT FOUND! " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action );
+            ctxt.log('E','controller.actionCallback.noMatchingPrompt: ERROR - PROMPT NOT FOUND!',
+                promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             ctxt.failure({message: "Internal error. Unable to locate matching prompt for callback."});
         }
     },
     changeUrlHash: function(ctxt,url){
-        ctxt.append("controller.changeUrlHash", url);
+        ctxt.log('I',"controller.changeUrlHash", url);
         window.location.hash = url;
         parsequery.changeUrlHash(ctxt);
     },
@@ -1027,14 +985,14 @@ return {
         }}));
     },
     reset: function(ctxt,sameForm) {
-        ctxt.append('controller.reset');
+        ctxt.log('I','controller.reset');
         shim.clearSectionScreenState(opendatakit.getRefId());
         opendatakit.clearCurrentInstanceId();
         if ( this.screenManager != null ) {
             // this asynchronously calls ctxt.success()...
             this.screenManager.cleanUpScreenManager(ctxt);
         } else {
-            ctxt.append('controller.reset.newScreenManager');
+            ctxt.log('I','controller.reset.newScreenManager');
             this.screenManager = new ScreenManager({controller: this});
             this.screenManager.cleanUpScreenManager(ctxt);
         }
@@ -1055,7 +1013,7 @@ return {
     baseContext : {
         loggingContextChain: [],
         
-        append : function( method, detail ) {
+        log : function( severity, method, detail ) {
             var now = new Date().getTime();
             var log_obj = {method: method, timestamp: now, detail: detail };
             if ( this.loggingContextChain.length === 0 ) {
@@ -1067,9 +1025,10 @@ return {
                 logger.timeStamp(method);
             }
             var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail == null) ? ")" : ") detail: " + detail);
-            shim.log('D', dlog);
+            shim.log(severity, dlog);
  
         },
+
         success: function(){
             this.updateAndLogOutstandingContexts(this);
             this._log('S', 'success!');
@@ -1112,10 +1071,10 @@ return {
             }
         }
         if ( that.outstandingContexts.length === 0 ) {
-                ctxt.append("atEnd.outstandingContext nothingOutstanding!");
+                ctxt.log('D',"atEnd.outstandingContext nothingOutstanding!");
         } else {
             for ( i = 0 ; i < that.outstandingContexts.length ; ++i ) {
-                ctxt.append("atEnd.outstandingContext seqNo: " + that.outstandingContexts[i]);
+                ctxt.log('D',"atEnd.outstandingContext seqNo: " + that.outstandingContexts[i]);
             }
         }
     },
@@ -1132,7 +1091,7 @@ return {
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this) },
               chainedCtxt: { ctxt: null } }, actionHandlers );
-        ctxt.append('callback', detail);
+        ctxt.log('D','callback', detail);
         return ctxt;
     },
     newFatalContext : function( actionHandlers ) {
@@ -1148,7 +1107,7 @@ return {
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this) },
               chainedCtxt: { ctxt: null } }, actionHandlers );
-        ctxt.append('fatal_error', detail);
+        ctxt.log('D','fatal_error', detail);
         return ctxt;
     },
     newStartContext: function( actionHandlers ) {
@@ -1164,7 +1123,7 @@ return {
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this) },
               chainedCtxt: { ctxt: null } }, actionHandlers );
-        ctxt.append('startup', detail);
+        ctxt.log('D','startup', detail);
         return ctxt;
     },
     newContext: function( evt, actionHandlers ) {
@@ -1196,7 +1155,7 @@ return {
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this) },
               chainedCtxt: { ctxt: null } }, actionHandlers );
-        ctxt.append( evt.type, detail);
+        ctxt.log('D', evt.type, detail);
         return ctxt;
     }
 
