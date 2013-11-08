@@ -105,13 +105,13 @@ return Backbone.View.extend({
         // useful defaults...
         that.renderContext = {
             form_version: opendatakit.getSettingValue('form_version'),
-            form_title: that.controller.getSectionTitle(),
+            form_title: opendatakit.getCurrentSectionTitle(screen._section_name),
             locales: locales,
             dataTheme: "d",
             hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
-            showContents: that.controller.getSectionShowContents(),
+            showContents: (!that.popScreenOnExit && opendatakit.getCurrentSectionShowContents(screen._section_name)),
             enableForwardNavigation: true,
             enableBackNavigation: ! that.popScreenOnExit,
             showAsContinueButton: that.popScreenOnExit,

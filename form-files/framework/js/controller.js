@@ -20,54 +20,6 @@ return {
     eventCount: 0,
     moveFailureMessage: { message: "Internal Error: Unable to determine next prompt." },
     screenManager : null,
-    getSectionTitle: function() {
-        var that = this;
-        var opPath = that.getCurrentScreenPath();
-        if ( opPath == null ) {
-            return "";
-        }
-        
-        var parts = opPath.split("/");
-        if ( parts.length < 2 ) {
-            return "";
-        }
-        
-        var formDef = opendatakit.getCurrentFormDef();
-        var sectionSettings = opendatakit.getSettingObject(formDef,parts[0]);
-        if ( sectionSettings == null ) {
-            return "";
-        }
-        
-        return sectionSettings.display.title;
-    },
-    getSectionShowContents: function() {
-        var that = this;
-        // if we are in the middle of a validation action, do not show contents screen.
-        if ( shim.getControllerState(opendatakit.getRefId()) === 'popHistoryOnExit' ) {
-            return false;
-        }
-        
-        var opPath = that.getCurrentScreenPath();
-        if ( opPath == null ) {
-            return false;
-        }
-        
-        var parts = opPath.split("/");
-        if ( parts.length < 2 ) {
-            return false;
-        }
-        
-        var formDef = opendatakit.getCurrentFormDef();
-        var sectionSettings = opendatakit.getSettingObject(formDef,parts[0]);
-        if ( sectionSettings == null ) {
-            return false;
-        }
-        
-        if ( 'showContents' in sectionSettings ) {
-            return sectionSettings.showContents;
-        }
-        return true;
-    },
     getCurrentScreenPath: function() {
         return shim.getScreenPath(opendatakit.getRefId());
     },
@@ -360,19 +312,21 @@ return {
                             break;
                         }
                     }
-                    if ( !shim.hasScreenHistory(opendatakit.getRefId())) {
+                    if ( path === null ) {
                         path = opendatakit.initialScreenPath;
                     }
+                    // just for debugging...
+                    shim.getScreenPath(opendatakit.getRefId());
                     break;
                 case "do_section":
                     // state is 'advanceOnReturn' if we are returning from an exit_section
-                    state = shim.getControllerState(opendatakit.getRefId());
-                    if ( state === 'advanceOnReturn' ) {
+                    if ( shim.getScreenPath(opendatakit.getRefId()) === path &&
+                         shim.getControllerState(opendatakit.getRefId()) === 'advanceOnReturn' ) {
+                        // we are popping up from an exit_section
                         path = that.getNextOperationPath(path);
+                        ctxt.log('E',"shouldn't get here anymore");
                     } else {
-                        // push the prior rendered screen onto the stack before we mark the 'do_section' callout
-                        shim.pushSectionScreenState(opendatakit.getRefId());
-                        // save our op with note to advance immediately on return...
+                        // save our op...
                         shim.setSectionScreenState(opendatakit.getRefId(), path, 'advanceOnReturn');
                         // start at operation 0 in the new section
                         path = op._do_section_name + "/0";
@@ -380,6 +334,9 @@ return {
                     break;
                 case "exit_section":
                     path = shim.popSectionStack(opendatakit.getRefId());
+                    if ( shim.getControllerState(opendatakit.getRefId()) === 'advanceOnReturn' ) {
+                        path = that.getNextOperationPath(path);
+                    }
                     if ( path == null ) {
                         path = opendatakit.initialScreenPath;
                     }
@@ -405,10 +362,13 @@ return {
                     return;
                 case "validate":
                     var validationTag = op._sweep_name;
-
-                    // tag this op as a 'validateInProgress' node. Push onto stack.
-                    shim.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
-                    shim.pushSectionScreenState( opendatakit.getRefId());
+					
+                    if ( shim.getScreenPath(opendatakit.getRefId()) !== path ||
+                         shim.getControllerState(opendatakit.getRefId()) !== 'validateInProgress' ) {
+						// tag this op as a 'validateInProgress' node. Push onto stack.
+						shim.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
+						shim.pushSectionScreenState( opendatakit.getRefId());
+					}
                     
                     database.applyDeferredChanges($.extend({},ctxt,{
                         success:function() {
@@ -857,7 +817,8 @@ return {
         var that = this;
         ctxt.log('D','controller.gotoScreenPath');
         var opPath = that.getCurrentScreenPath();
-
+        var currentOp = that.getOperation(opPath);
+        
         var failureObject = that.beforeMove(true, advancing);
         if ( failureObject != null ) {
             ctxt.log('I',"gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
@@ -870,11 +831,11 @@ return {
         var op = that.getOperation(path);
         if ( op == null ) {
             ctxt.failure(that.moveFailureMessage);
-            return;
+            return;    
         }
-        if ( advancing ) {
+        if ( currentOp != null && op._section_name === currentOp._section_name && advancing ) {
             shim.pushSectionScreenState(opendatakit.getRefId());
-        }
+        }    
         that._doActionAt(ctxt, op, op._token_type, advancing);
     },
     /*

@@ -164,7 +164,7 @@
           }
         },
         "required": true,
-        "constraint": "new Date(this.getValue()) <= now()",
+        "constraint": "data('birthday') <= now()",
         "constraint_message": {
           "default": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.",
           "hindi": "आप भविष्य में एक जन्मदिन में प्रवेश किया. शायद अपने डिवाइस सही तारीख नहीं है"
@@ -8108,11 +8108,18 @@
         "_row_num": 7
       },
       {
+        "setting_name": "DehydrationTreatment",
+        "display": {
+          "title": "Dehydration Treatment"
+        },
+        "_row_num": 8
+      },
+      {
         "setting_name": "Fever",
         "display": {
           "title": "Fever"
         },
-        "_row_num": 8
+        "_row_num": 9
       },
       {
         "setting_name": "survey",
@@ -8122,12 +8129,12 @@
             "hindi": "IMNCI"
           }
         },
-        "_row_num": 9
+        "_row_num": 10
       },
       {
         "setting_name": "table_id",
         "value": "imnci",
-        "_row_num": 10
+        "_row_num": 11
       },
       {
         "setting_name": "default",
@@ -8137,7 +8144,7 @@
             "hindi": "English (as hindi name)"
           }
         },
-        "_row_num": 11
+        "_row_num": 12
       },
       {
         "setting_name": "hindi",
@@ -8147,7 +8154,7 @@
             "hindi": "Hindi (as hindi name)"
           }
         },
-        "_row_num": 12
+        "_row_num": 13
       }
     ]
   },
@@ -8208,12 +8215,19 @@
         },
         "_row_num": 7
       },
+      "DehydrationTreatment": {
+        "setting_name": "DehydrationTreatment",
+        "display": {
+          "title": "Dehydration Treatment"
+        },
+        "_row_num": 8
+      },
       "Fever": {
         "setting_name": "Fever",
         "display": {
           "title": "Fever"
         },
-        "_row_num": 8
+        "_row_num": 9
       },
       "survey": {
         "setting_name": "survey",
@@ -8223,12 +8237,12 @@
             "hindi": "IMNCI"
           }
         },
-        "_row_num": 9
+        "_row_num": 10
       },
       "table_id": {
         "setting_name": "table_id",
         "value": "imnci",
-        "_row_num": 10
+        "_row_num": 11
       },
       "default": {
         "setting_name": "default",
@@ -8238,7 +8252,7 @@
             "hindi": "English (as hindi name)"
           }
         },
-        "_row_num": 11
+        "_row_num": 12
       },
       "hindi": {
         "setting_name": "hindi",
@@ -8248,11 +8262,11 @@
             "hindi": "Hindi (as hindi name)"
           }
         },
-        "_row_num": 12
+        "_row_num": 13
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 9,
+        "_row_num": 10,
         "value": [
           {
             "display": {
@@ -8261,7 +8275,7 @@
                 "hindi": "English (as hindi name)"
               }
             },
-            "_row_num": 11,
+            "_row_num": 12,
             "name": "default"
           },
           {
@@ -8271,14 +8285,14 @@
                 "hindi": "Hindi (as hindi name)"
               }
             },
-            "_row_num": 12,
+            "_row_num": 13,
             "name": "hindi"
           }
         ]
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 9,
+        "_row_num": 10,
         "value": "default"
       },
       "initial": {
@@ -8289,17 +8303,9 @@
             "hindi": "IMNCI"
           }
         },
-        "_row_num": 9
+        "_row_num": 10
       },
       "Classification": {
-        "display": {
-          "title": {
-            "default": "IMNCI",
-            "hindi": "IMNCI"
-          }
-        }
-      },
-      "DehydrationTreatment": {
         "display": {
           "title": {
             "default": "IMNCI",
@@ -10865,7 +10871,7 @@
               }
             },
             "required": true,
-            "constraint": "new Date(this.getValue()) <= now()",
+            "constraint": "data('birthday') <= now()",
             "constraint_message": {
               "default": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.",
               "hindi": "आप भविष्य में एक जन्मदिन में प्रवेश किया. शायद अपने डिवाइस सही तारीख नहीं है"
@@ -16950,10 +16956,7 @@
             "_type": "_section",
             "promptIdx": 215,
             "display": {
-              "title": {
-                "default": "IMNCI",
-                "hindi": "IMNCI"
-              }
+              "title": "Dehydration Treatment"
             },
             "_branch_label_enclosing_screen": "DehydrationTreatment/_contents"
           },
@@ -20180,6 +20183,26 @@
             "clause": "back",
             "_row_num": 9,
             "operationIdx": 9
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 9,
+            "operationIdx": 10
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 9,
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "back_in_history",
+            "clause": "back",
+            "_row_num": 9,
+            "operationIdx": 12
           }
         ],
         "branch_label_map": {
@@ -20190,7 +20213,8 @@
           "_screen7": 6,
           "_endif8": 7,
           "_contents": 8,
-          "_screen9": 8
+          "_screen9": 8,
+          "_finalize": 10
         }
       }
     }

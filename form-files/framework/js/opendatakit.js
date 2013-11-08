@@ -158,6 +158,21 @@ return {
     getCurrentSectionTitle:function(sectionName) {
         return this.getSectionTitle(this.getCurrentFormDef(),sectionName);
     },
+    getCurrentSectionShowContents: function(sectionName) {
+        var formDef = this.getCurrentFormDef();
+        var sectionSettings = this.getSettingObject(formDef,sectionName);
+        if ( sectionSettings === undefined || sectionSettings === null ) {
+			sectionSettings = this.getSettingObject(formDef, 'survey'); // fallback
+        }
+		
+        if ( sectionSettings === undefined || 
+			 sectionSettings === null ||
+			 !('showContents' in sectionSettings) ) {
+			return true;
+		}
+		
+		return sectionSettings.showContents;
+    },
     localize:function(textOrLangMap, locale) {
         if(_.isUndefined(textOrLangMap)) {
             return 'text_undefined';

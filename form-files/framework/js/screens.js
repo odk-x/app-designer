@@ -102,9 +102,7 @@ screenTypes.base = Backbone.View.extend({
         if ( 'display' in that && _.isObject(that.display) ) {
             that._renderContext.display = that.display;
         } else {
-            var section = opendatakit.getSettingObject(opendatakit.getCurrentFormDef(), that._section_name);
-            that._renderContext.display = (section && section.display) ? 
-                section.display : {title: that.controller.getSectionTitle()};
+            that._renderContext.display = { title: that._renderContext.form_title };
         }
         if ( 'showHeader' in that ) {
             that._renderContext.showHeader = that.showHeader;

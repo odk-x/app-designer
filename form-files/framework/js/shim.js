@@ -5,7 +5,7 @@ must implement to work with the javascript library.
 It will be replaced by one injected by Android Java code.
 */
 window.shim = window.shim || {
-	showAlerts: false,
+    showAlerts: false,
     refId: null,
     enforceRefIdMatch: true,
     instanceId: null,
@@ -102,10 +102,6 @@ window.shim = window.shim || {
         }
         
         var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-        if ( lastSection.state === 'a' ) {
-            this.log("I","shim: SKIPPED('" + lastSection.screen + "','a'): pushSectionScreenState(" + refId + ")");
-            return;
-        }
         lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
     },
     setSectionScreenState: function( refId, screenPath, state) {
@@ -179,14 +175,17 @@ window.shim = window.shim || {
             return false;
         }
         this.log("D","shim: DO: hasScreenHistory(" + refId + ")");
-        var i;
-        for ( i = 0 ; i < this.sectionStateScreenHistory.length ; ++i ) {
-            var thisSection = this.sectionStateScreenHistory[i];
-            if ( thisSection.history.length !== 0 ) {
-                return true;
-            }
+        // two or more sections -- there must be history!
+        if ( this.sectionStateScreenHistory.length > 1 ) {
+            return true;
         }
-        return false;
+        // nothing at all -- no history
+        if ( this.sectionStateScreenHistory.length === 0 ) {
+            return false;
+        }
+        // just one section -- is there any screen history within it?
+        var thisSection = this.sectionStateScreenHistory[0];
+        return ( thisSection.history.length !== 0 );
     },
     popScreenHistory: function( refId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -194,17 +193,31 @@ window.shim = window.shim || {
             return null;
         }
         this.log("D","shim: DO: popScreenHistory(" + refId + ")");
-        while ( this.sectionStateScreenHistory.length !== 0 ) {
-            var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
-            if ( lastSection.history.length !== 0 ) {
-                var lastHistory = lastSection.history.pop();
-                lastSection.screen = lastHistory.screen;
-                lastSection.state = lastHistory.state;
-                return lastSection.screen;
-            }
-            this.sectionStateScreenHistory.pop();
+		
+        if ( this.sectionStateScreenHistory.length === 0 ) {
+            return null;
         }
-        return null;
+        
+        var lastSection;
+		
+		lastSection	= this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        if ( lastSection.history.length !== 0 ) {
+            // pop history from within this section
+            var lastHistory = lastSection.history.pop();
+            lastSection.screen = lastHistory.screen;
+            lastSection.state = lastHistory.state;
+            return lastSection.screen;
+        }
+
+        // pop to an enclosing section
+        this.sectionStateScreenHistory.pop();
+        if ( this.sectionStateScreenHistory.length === 0 ) {
+            return null;
+        }
+		
+        // return the screen from that last section... (do not pop the history)
+        lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        return lastSection.screen;
     },
     /**
      * Section stack -- maintains the stack of sections from which you can exit.
@@ -412,7 +425,7 @@ window.shim = window.shim || {
         }
         this.log("D","shim: DO: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
         if ( this.showAlerts ) alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
-		window.close();
+        window.close();
     },
     saveAllChangesFailed: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -429,7 +442,7 @@ window.shim = window.shim || {
         }
         this.log("D","shim: DO: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
         if ( this.showAlerts ) alert("notify container OK ignore all changes.");
-		window.close();
+        window.close();
     },
     ignoreAllChangesFailed: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {

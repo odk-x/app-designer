@@ -197,16 +197,27 @@ promptTypes.base = Backbone.View.extend({
             // no data validation if no persistence...
             return null;
         } 
+		
+		// compute the field display name...
+		var locale = database.getInstanceMetaDataValue('_locale');
+		if ( locale === undefined || locale === null ) {
+			locale = opendatakit.getDefaultFormLocaleValue();
+		}
+		var textOrMap = (that.renderContext.display.title ? 
+			that.renderContext.display.title : that.renderContext.display.text);
+		var fieldDisplayName = formulaFunctions.localize(textOrMap,locale);
+		
         var value = that.getValue();
         if ( value === undefined || value === null || value === "" ) {
             if ( isRequired ) {
                 that.valid = false;
-                return { message: that.required_message };
+
+                return { message: that.required_message + " " + fieldDisplayName };
             }
         } else if ( 'validateValue' in that ) {
             if ( !that.validateValue() ) {
                 that.valid = false;
-                return { message: that.invalid_value_message };
+                return { message: that.invalid_value_message + " " + fieldDisplayName };
             }
         } 
         if ( 'constraint' in that ) {
@@ -215,7 +226,7 @@ promptTypes.base = Backbone.View.extend({
                 outcome = that.constraint({"allowExceptions":true});
                 if ( !outcome ) {
                     that.valid = false;
-                    return { message: that.constraint_message };
+                    return { message: that.constraint_message + " " + fieldDisplayName };
                 }
             } catch (e) {
                 shim.log('E',"prompts."+that.type+".baseValidate.constraint.exception px: " +
@@ -285,7 +296,9 @@ promptTypes.opening = promptTypes.base.extend({
         } else {
             that.renderContext.display_field = null;
         }
-        that._screen._renderContext.enableBackNavigation = false;
+		if ( that._screen && that._screen._renderContext ) {
+			that._screen._renderContext.enableBackNavigation = false;
+		}
         ctxt.success();
     },
     renderContext: {
@@ -325,7 +338,9 @@ promptTypes.finalize = promptTypes.base.extend({
         } else {
             that.renderContext.display_field = null;
         }
-        this._screen._renderContext.enableForwardNavigation = false;
+		if ( that._screen && that._screen._renderContext ) {
+			that._screen._renderContext.enableForwardNavigation = false;
+		}
         ctxt.success();
     },
     saveIncomplete: function(evt) {
@@ -360,7 +375,9 @@ promptTypes.json = promptTypes.base.extend({
         } else {
             that.renderContext.value = "JSON Unavailable";
         }
-        that._screen._renderContext.enableNavigation = false;
+		if ( that._screen && that._screen._renderContext ) {
+			that._screen._renderContext.enableNavigation = false;
+		}
         ctxt.success();
     }
 });
@@ -396,9 +413,11 @@ promptTypes.instances = promptTypes.base.extend({
                 $.extend(that.renderContext, {
                     headerImg: requirejs.toUrl('img/form_logo.png')
                 });
-                that._screen._renderContext.showHeader = false;
-                that._screen._renderContext.enableNavigation = false;
-                that._screen._renderContext.showFooter = false;
+				if ( that._screen && that._screen._renderContext ) {
+					that._screen._renderContext.showHeader = false;
+					that._screen._renderContext.enableNavigation = false;
+					that._screen._renderContext.showFooter = false;
+				}
                 ctxt.success();
             }
         }));
@@ -422,12 +441,8 @@ promptTypes.instances = promptTypes.base.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
         database.delete_all($.extend({}, ctxt, {success: function() {
-                that.buildRenderContext($.extend({}, ctxt, {success: function() {
-                        that.reRender(ctxt);
-                    }
-                }));
-            }
-        }),
+				that.reRender(ctxt);
+            }}),
         $(evt.target).attr('id'));
     }
 });
@@ -452,10 +467,13 @@ promptTypes.contents = promptTypes.base.extend({
         });
     },
     configureRenderContext: function(ctxt) {
-        this.renderContext.prompts = this.controller.getCurrentSectionPrompts();
-        this._screen._renderContext.enableForwardNavigation = false;
-        this._screen._renderContext.showHeader = true;
-        this._screen._renderContext.showFooter = false;
+		var that = this;
+        that.renderContext.prompts = that.controller.getCurrentSectionPrompts();
+		if ( that._screen && that._screen._renderContext ) {
+			that._screen._renderContext.enableForwardNavigation = false;
+			that._screen._renderContext.showHeader = true;
+			that._screen._renderContext.showFooter = false;
+		}
         ctxt.success();
     }
 });
