@@ -2025,6 +2025,77 @@ applyDeferredChanges: function(ctxt) {
                 ctxt.failure(m);
             }}), opendatakit.getCurrentInstanceId());
         }}), changes );
+},
+convertSelectionString: function(linkedMdl, selection) {
+	var that = this;
+	if ( selection == null || selection.length === 0 ) {
+		return null;
+	}
+	var parts = selection.split(' ');
+	var remapped = '';
+	var i;
+	
+	for ( i = 0 ; i < parts.length ; ++i ) {
+		var e = parts[i];
+		if ( e.length === 0 || !that.isValidElementPath(e) ) {
+			remapped = remapped + ' ' + e;
+		} else {
+			// map e back to elementKey
+			var found = false;
+			var f;
+			for (f in linkedMdl.dataTableModel) {
+				var defElement = linkedMdl.dataTableModel[f];
+				var elementPath = defElement['elementPath'];
+				if ( elementPath == null ) elementPath = f;
+				if ( elementPath == e ) {
+					remapped = remapped + ' "' + f + '"';
+					found = true;
+					break;
+				}
+			}
+			if ( found == false ) {
+				alert('database.convertSelectionString: unrecognized elementPath: ' + e );
+				shim.log('E',"database.convertSelectionString: unrecognized elementPath: " + e);
+				return null;
+			}
+		}
+	}
+	return remapped;
+},
+convertOrderByString: function(linkedMdl, order_by) {
+	var that = this;
+	if ( order_by == null || order_by.length === 0 ) {
+		return null;
+	}
+	var parts = order_by.split(' ');
+	var remapped = '';
+	var i;
+	for ( i = 0 ; i < parts.length ; ++i ) {
+		var e = parts[i];
+		if ( e.length === 0 || !that.isValidElementPath(e) ) {
+			remapped = remapped + ' ' + e;
+		} else {
+			// map e back to elementKey
+			var found = false;
+			var f;
+			for (f in linkedMdl.dataTableModel) {
+				var defElement = dataTableModel[f];
+				var elementPath = defElement['elementPath'];
+				if ( elementPath == null ) elementPath = f;
+				if ( elementPath == e ) {
+					remapped = remapped + ' "' + f + '"';
+					found = true;
+					break;
+				}
+			}
+			if ( found == false ) {
+				alert('database.convertOrderByString: unrecognized elementPath: ' + e );
+				shim.log('E',"database.convertOrderByString: unrecognized elementPath: " + e );
+				return null;
+			}
+		}
+	}
+	return remapped;
 }
 };
 });

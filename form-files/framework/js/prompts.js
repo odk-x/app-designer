@@ -533,37 +533,7 @@ promptTypes.linked_table = promptTypes.base.extend({
         if ( that._cachedSelection != null ) {
             return that._cachedSelection;
         }
-        var parts = that.selection.split(' ');
-        var remapped = '';
-        var i;
-        
-        for ( i = 0 ; i < parts.length ; ++i ) {
-            var e = parts[i];
-            if ( e.length === 0 || !database.isValidElementPath(e) ) {
-                remapped = remapped + ' ' + e;
-            } else {
-                // map e back to elementKey
-                var found = false;
-                var f;
-                for (f in linkedMdl.dataTableModel) {
-                    var defElement = linkedMdl.dataTableModel[f];
-                    var elementPath = defElement['elementPath'];
-                    if ( elementPath == null ) elementPath = f;
-                    if ( elementPath == e ) {
-                        remapped = remapped + ' "' + f + '"';
-                        found = true;
-                        break;
-                    }
-                }
-                if ( found == false ) {
-                    alert('selection: unrecognized elementPath: ' + e );
-                    shim.log('E',"prompts." + that.type + 
-                        '.convertSelection: unrecognized elementPath: ' + e + " px: " + that.promptIdx);
-                    return null;
-                }
-            }
-        }
-        that._cachedSelection = remapped;
+        that._cachedSelection = database.convertSelectionString(linkedMdl, that.selection);
         return that._cachedSelection;
     },
     _cachedOrderBy: null,
@@ -575,36 +545,7 @@ promptTypes.linked_table = promptTypes.base.extend({
         if ( that._cachedOrderBy != null ) {
             return that._cachedOrderBy;
         }
-        var parts = that.order_by.split(' ');
-        var remapped = '';
-        var i;
-        for ( i = 0 ; i < parts.length ; ++i ) {
-            var e = parts[i];
-            if ( e.length === 0 || !database.isValidElementPath(e) ) {
-                remapped = remapped + ' ' + e;
-            } else {
-                // map e back to elementKey
-                var found = false;
-                var f;
-                for (f in linkedMdl.dataTableModel) {
-                    var defElement = dataTableModel[f];
-                    var elementPath = defElement['elementPath'];
-                    if ( elementPath == null ) elementPath = f;
-                    if ( elementPath == e ) {
-                        remapped = remapped + ' "' + f + '"';
-                        found = true;
-                        break;
-                    }
-                }
-                if ( found == false ) {
-                    alert('order_by: unrecognized elementPath: ' + e );
-                    shim.log('E',"prompts." + that.type + 
-                        '.convertOrderBy: unrecognized elementPath: ' + e + " px: " + that.promptIdx );
-                    return null;
-                }
-            }
-        }
-        that._cachedOrderBy = remapped;
+        that._cachedOrderBy = convertOrderByString(linkedMdl, that.order_by);
         return that._cachedOrderBy;
     },
     disableButtons: function() {
