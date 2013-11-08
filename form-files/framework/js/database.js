@@ -12,7 +12,7 @@ return {
         //      type: databaseType, 
         //      isNotNullable: false/true, 
         //      isPersisted: false/true,
-		//      isSessionVariable: false/true,
+        //      isSessionVariable: false/true,
         //      'default': defaultValue,
         //      elementPath: exposedName }
         // 
@@ -231,10 +231,12 @@ return {
         return true;
     },
     _getAccessibleTableKeyDefinition: function( key ) {
-        return this._tableKeyValueStoreActiveAccessibleKeys[key];
+        var that = this;
+        return that._tableKeyValueStoreActiveAccessibleKeys[key];
     },
     _getAccessibleColumnKeyDefinition: function( key ) {
-        return this._columnKeyValueStoreActiveAccessibleKeys[key];
+        var that = this;
+        return that._columnKeyValueStoreActiveAccessibleKeys[key];
     },
     _createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
         // TODO: verify that dbTableName is not already in use...
@@ -479,7 +481,8 @@ return {
         }
     },
     _reconstructElementPath: function(elementPath, jsonType, dbValue, topLevelObject) {
-        var value = this._fromDatabaseToElementType( jsonType, dbValue );
+        var that = this;
+        var value = that._fromDatabaseToElementType( jsonType, dbValue );
         var path = elementPath.split('.');
         var e = topLevelObject;
         var term;
@@ -738,6 +741,7 @@ _getElementPathPairFromKvMap: function(kvMap, elementPath) {
  * Requires: No global dependencies
  */
 _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId, kvMap) {
+    var that = this;
     var t = new Date();
     var now = t.getTime();
     
@@ -767,7 +771,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
             var elementPath = defElement['elementPath'];
             if ( elementPath === undefined || elementPath === null ) elementPath = f;
             // TODO: get kvElement for this elementPath
-            elementPathPair = this._getElementPathPairFromKvMap(kvMap, elementPath);
+            elementPathPair = that._getElementPathPairFromKvMap(kvMap, elementPath);
             if ( elementPathPair != null ) {
                 kvElement = elementPathPair.element;
                 updates[f] = {"elementPath" : elementPath, "value": null};
@@ -778,7 +782,7 @@ _insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, instanceId
                 } else {
                     stmt += "?";
                     // remap kvElement.value into storage value...
-                    v = this._toDatabaseFromElementType(defElement, kvElement.value);
+                    v = that._toDatabaseFromElementType(defElement, kvElement.value);
                     bindings.push(v);
                     updates[f].value = v; 
                 }
@@ -1576,6 +1580,7 @@ readTableDefinition:function(ctxt, formDef, table_id, formPath) {
             });
 },
 _clearPersistedFlag: function( dbKeyMap, listChildElementKeys) {
+    var that = this;
     var i;
     var f;
     if ( listChildElementKeys != null ) {
@@ -1584,14 +1589,15 @@ _clearPersistedFlag: function( dbKeyMap, listChildElementKeys) {
             var jsonType = dbKeyMap[f];
             jsonType.isPersisted = false;
             if ( jsonType.type === 'array' ) {
-                this._clearPersistedFlag(dbKeyMap, jsonType.listChildElementKeys);
+                that._clearPersistedFlag(dbKeyMap, jsonType.listChildElementKeys);
             } else if ( jsonType.type === 'object' ) {
-                this._clearPersistedFlag(dbKeyMap, jsonType.listChildElementKeys);
+                that._clearPersistedFlag(dbKeyMap, jsonType.listChildElementKeys);
             }
         }
     }
 },
 _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementKeyPrefix, jsonType ) {
+    var that = this;
     var fullPath;
     var elementKey;
     var i = 0;
@@ -1643,7 +1649,7 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
     // handle the recursive structures...
     if ( jsonType.type === 'array' ) {
         // explode with subordinate elements
-        f = this._flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
+        f = that._flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
         jsonType.listChildElementKeys = [ f.elementKey ];
         jsonType.isPersisted = true;
     } else if ( jsonType.type === 'object' ) {
@@ -1654,7 +1660,7 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
         var listChildElementKeys = [];
         for ( e in jsonType.properties ) {
             hasProperties = true;
-            f = this._flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
+            f = that._flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
             listChildElementKeys.push(f.elementKey);
         }
         jsonType.listChildElementKeys = listChildElementKeys;
@@ -1666,7 +1672,7 @@ _flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, element
     if ( jsonType.isPersisted && (jsonType.listChildElementKeys != null)) {
         // we have some sort of structure that is persisting
         // clear the isPersisted tags on the nested elements
-        this._clearPersistedFlag(dbKeyMap, jsonType.listChildElementKeys);
+        that._clearPersistedFlag(dbKeyMap, jsonType.listChildElementKeys);
     }
     return jsonType;
 },
@@ -1843,7 +1849,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
 
     if ( writeDatabase ) {
         tlo.dataTableModel = dataTableModel;
-        var createTableCmd = this._createTableStmt(dbTableName, dataTableModel);
+        var createTableCmd = that._createTableStmt(dbTableName, dataTableModel);
         ctxt.sqlStatement = createTableCmd;
         transaction.executeSql(createTableCmd.stmt, createTableCmd.bind, function(transaction, result) {
             that.fullDefHelper(transaction, ctxt, tableToUpdate, 0, fullDef, tlo);
@@ -1993,11 +1999,12 @@ purge:function(ctxt) {
     });
 },
 setValueDeferredChange: function( name, value ) {
+    var that = this;
     var justChange = {};
     justChange[name] = {value: value, isInstanceMetadata: false };
-    this.pendingChanges[name] = {value: value, isInstanceMetadata: false };
+    that.pendingChanges[name] = {value: value, isInstanceMetadata: false };
     // apply the change immediately...
-    var is = this._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
+    var is = that._insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
                     mdl.dataTableModel, opendatakit.getCurrentInstanceId(), justChange);
     var uf;
     for (var f in is.updates) {
@@ -2006,17 +2013,18 @@ setValueDeferredChange: function( name, value ) {
         if (de.isPersisted) {
             var elementPath = de.elementPath || uf.elementPath;
             if ( de.elementSet === 'instanceMetadata' ) {
-                this._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
+                that._reconstructElementPath(elementPath, de, uf.value, mdl.metadata );
             } else {
-                this._reconstructElementPath(elementPath, de, uf.value, mdl.data );
+                that._reconstructElementPath(elementPath, de, uf.value, mdl.data );
             }
         }
     }
 },
 applyDeferredChanges: function(ctxt) {
-    var changes = this.pendingChanges;
-    this.pendingChanges = {};
-    this.putDataKeyValueMap($.extend({},ctxt,{failure:function(m) {
+    var that = this;
+    var changes = that.pendingChanges;
+    that.pendingChanges = {};
+    that.putDataKeyValueMap($.extend({},ctxt,{failure:function(m) {
         // a failure happened during writing -- reload state from db
         mdl.loaded = false;
         that.cacheAllData($.extend({},ctxt,{success:function() {
@@ -2027,75 +2035,75 @@ applyDeferredChanges: function(ctxt) {
         }}), changes );
 },
 convertSelectionString: function(linkedMdl, selection) {
-	var that = this;
-	if ( selection == null || selection.length === 0 ) {
-		return null;
-	}
-	var parts = selection.split(' ');
-	var remapped = '';
-	var i;
-	
-	for ( i = 0 ; i < parts.length ; ++i ) {
-		var e = parts[i];
-		if ( e.length === 0 || !that.isValidElementPath(e) ) {
-			remapped = remapped + ' ' + e;
-		} else {
-			// map e back to elementKey
-			var found = false;
-			var f;
-			for (f in linkedMdl.dataTableModel) {
-				var defElement = linkedMdl.dataTableModel[f];
-				var elementPath = defElement['elementPath'];
-				if ( elementPath == null ) elementPath = f;
-				if ( elementPath == e ) {
-					remapped = remapped + ' "' + f + '"';
-					found = true;
-					break;
-				}
-			}
-			if ( found == false ) {
-				alert('database.convertSelectionString: unrecognized elementPath: ' + e );
-				shim.log('E',"database.convertSelectionString: unrecognized elementPath: " + e);
-				return null;
-			}
-		}
-	}
-	return remapped;
+    var that = this;
+    if ( selection == null || selection.length === 0 ) {
+        return null;
+    }
+    var parts = selection.split(' ');
+    var remapped = '';
+    var i;
+    
+    for ( i = 0 ; i < parts.length ; ++i ) {
+        var e = parts[i];
+        if ( e.length === 0 || !that.isValidElementPath(e) ) {
+            remapped = remapped + ' ' + e;
+        } else {
+            // map e back to elementKey
+            var found = false;
+            var f;
+            for (f in linkedMdl.dataTableModel) {
+                var defElement = linkedMdl.dataTableModel[f];
+                var elementPath = defElement['elementPath'];
+                if ( elementPath == null ) elementPath = f;
+                if ( elementPath == e ) {
+                    remapped = remapped + ' "' + f + '"';
+                    found = true;
+                    break;
+                }
+            }
+            if ( found == false ) {
+                alert('database.convertSelectionString: unrecognized elementPath: ' + e );
+                shim.log('E',"database.convertSelectionString: unrecognized elementPath: " + e);
+                return null;
+            }
+        }
+    }
+    return remapped;
 },
 convertOrderByString: function(linkedMdl, order_by) {
-	var that = this;
-	if ( order_by == null || order_by.length === 0 ) {
-		return null;
-	}
-	var parts = order_by.split(' ');
-	var remapped = '';
-	var i;
-	for ( i = 0 ; i < parts.length ; ++i ) {
-		var e = parts[i];
-		if ( e.length === 0 || !that.isValidElementPath(e) ) {
-			remapped = remapped + ' ' + e;
-		} else {
-			// map e back to elementKey
-			var found = false;
-			var f;
-			for (f in linkedMdl.dataTableModel) {
-				var defElement = dataTableModel[f];
-				var elementPath = defElement['elementPath'];
-				if ( elementPath == null ) elementPath = f;
-				if ( elementPath == e ) {
-					remapped = remapped + ' "' + f + '"';
-					found = true;
-					break;
-				}
-			}
-			if ( found == false ) {
-				alert('database.convertOrderByString: unrecognized elementPath: ' + e );
-				shim.log('E',"database.convertOrderByString: unrecognized elementPath: " + e );
-				return null;
-			}
-		}
-	}
-	return remapped;
+    var that = this;
+    if ( order_by == null || order_by.length === 0 ) {
+        return null;
+    }
+    var parts = order_by.split(' ');
+    var remapped = '';
+    var i;
+    for ( i = 0 ; i < parts.length ; ++i ) {
+        var e = parts[i];
+        if ( e.length === 0 || !that.isValidElementPath(e) ) {
+            remapped = remapped + ' ' + e;
+        } else {
+            // map e back to elementKey
+            var found = false;
+            var f;
+            for (f in linkedMdl.dataTableModel) {
+                var defElement = dataTableModel[f];
+                var elementPath = defElement['elementPath'];
+                if ( elementPath == null ) elementPath = f;
+                if ( elementPath == e ) {
+                    remapped = remapped + ' "' + f + '"';
+                    found = true;
+                    break;
+                }
+            }
+            if ( found == false ) {
+                alert('database.convertOrderByString: unrecognized elementPath: ' + e );
+                shim.log('E',"database.convertOrderByString: unrecognized elementPath: " + e );
+                return null;
+            }
+        }
+    }
+    return remapped;
 }
 };
 });
