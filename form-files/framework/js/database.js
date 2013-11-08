@@ -1082,7 +1082,6 @@ insertColumnMetaDataStmt:function(table_id, elementKey, name, type, value) {
 /////////////////////////////////////////////////////////////////////////
 putInstanceMetaData:function(ctxt, name, value) {
       var that = this;
-      var kvMap = {};
       var dbColumnName;
       var f;
       ctxt.log('D','putInstanceMetaData', 'name: ' + name);
@@ -1105,8 +1104,13 @@ putInstanceMetaData:function(ctxt, name, value) {
       // the database layer. 
       // The database layer uses putDataKeyValueMap()
       // for lower-level manipulations.
-      kvMap[name] = {value: value, isInstanceMetadata: true };
-      that.putDataKeyValueMap(ctxt, kvMap );
+
+      // flush any pending changes too...
+      var changes = that.pendingChanges;
+      that.pendingChanges = {};
+      changes[name] = {value: value, isInstanceMetadata: true };
+
+      that.putDataKeyValueMap(ctxt, changes );
 },
 /**
  * kvMap is: { 'keyname' : {value: 'val', isInstanceMetadata: false }, ... }
