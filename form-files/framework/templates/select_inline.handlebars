@@ -4,11 +4,17 @@
     </div>
 {{/if}}
 <form>
-    {{> labelHint}}
-    <fieldset data-role="controlgroup"
-        {{#eachProperty inputAttributes}}
-            {{property}}="{{value}}"
-        {{/eachProperty}}>
+	<div class="inline-label-container">
+        {{> labelHint}}
+    </div>
+    <fieldset
+    data-role="controlgroup"
+    data-type="horizontal"
+    style="float:right;margin-left:1em;display:block;"
+    {{#eachProperty inputAttributes}}
+        {{property}}="{{value}}"
+    {{/eachProperty}}
+    >
         {{#each choices}}
             <label>
                 <input
@@ -35,38 +41,14 @@
             {{/if}}
             </label>
         {{/each}}
-        {{#if withOther}}
-            <label>
-                <input
-                    {{#if select_one}}
-                        type="radio"
-                    {{else}}
-                        type="checkbox"
-                    {{/if}}
-                    {{#if other.checked}}
-                        checked="checked"
-                    {{/if}}
-                    name="{{name}}"
-                    id="other"
-                    value="other"/>
-                    <label for="other">
-                        Other:
-                        {{#if other.checked}}
-                        <input
-                            name="otherValue"
-                            value="{{other.value}}"
-                            style="height:36px;position:initial;"/>
-                        {{/if}}
-                    </label>
-            </label>
-        {{/if}}
     </fieldset>
     {{#unless required}}
         {{#if false}}
         {{#if display.deselect}}
-            <a data-role="button" data-mini="true" class="deselect">{{localize display.deselect}}</a>
+            <div style="clear:both;"></div>
+            <a data-role="button" data-mini="true" class="deselect inline-deselect">{{localize display.deselect}}</a>
         {{/if}}
-        {{/if}}
+    	{{/if}}
     {{/unless}}
     <div style="clear:both;"></div>
 </form>

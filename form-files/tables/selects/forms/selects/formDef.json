@@ -208,7 +208,7 @@
       {
         "type": "note",
         "display": {
-          "text": "Selects Demo"
+          "text": "Holidays"
         },
         "hideInContents": true,
         "_row_num": 31
@@ -241,13 +241,29 @@
         "_row_num": 34
       },
       {
+        "clause": "end screen",
+        "_row_num": 35
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 36
+      },
+      {
+        "type": "note",
+        "display": {
+          "text": "Food"
+        },
+        "hideInContents": true,
+        "_row_num": 37
+      },
+      {
         "type": "select_multiple",
         "values_list": "foods",
         "name": "breakfastFood",
         "display": {
           "text": "What types of food do you eat for breakfast?"
         },
-        "_row_num": 35
+        "_row_num": 38
       },
       {
         "type": "select_multiple_inline",
@@ -256,7 +272,7 @@
         "display": {
           "text": "What types of food do you eat for lunch?"
         },
-        "_row_num": 36
+        "_row_num": 39
       },
       {
         "type": "select_multiple_grid",
@@ -265,11 +281,11 @@
         "display": {
           "text": "What types of food do you eat for dinner?"
         },
-        "_row_num": 37
+        "_row_num": 40
       },
       {
         "clause": "end screen",
-        "_row_num": 38
+        "_row_num": 41
       }
     ],
     "choices": [
@@ -461,24 +477,28 @@
     "queries": [
       {
         "query_name": "countries",
+        "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
         "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
         "_row_num": 2
       },
       {
         "query_name": "states",
+        "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
         "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
         "_row_num": 3
       },
       {
         "query_name": "regions_csv",
+        "query_type": "csv",
         "uri": "\"regions.csv\"",
         "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
         "_row_num": 4
       },
       {
         "query_name": "countries_csv",
+        "query_type": "csv",
         "uri": "\"regions.csv\"",
         "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
         "_row_num": 5
@@ -776,24 +796,28 @@
     "queries": {
       "countries": {
         "query_name": "countries",
+        "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
         "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
         "_row_num": 2
       },
       "states": {
         "query_name": "states",
+        "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
         "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
         "_row_num": 3
       },
       "regions_csv": {
         "query_name": "regions_csv",
+        "query_type": "csv",
         "uri": "\"regions.csv\"",
         "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
         "_row_num": 4
       },
       "countries_csv": {
         "query_name": "countries_csv",
+        "query_type": "csv",
         "uri": "\"regions.csv\"",
         "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
         "_row_num": 5
@@ -960,7 +984,7 @@
       "breakfastFood": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -975,7 +999,7 @@
       "lunchFood": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -990,7 +1014,7 @@
       "dinnerFood": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -1243,7 +1267,7 @@
           {
             "type": "note",
             "display": {
-              "text": "Selects Demo"
+              "text": "Holidays"
             },
             "hideInContents": true,
             "_row_num": 31,
@@ -1296,18 +1320,31 @@
             "promptIdx": 19
           },
           {
+            "type": "note",
+            "display": {
+              "text": "Food"
+            },
+            "hideInContents": true,
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen36",
+            "promptIdx": 20
+          },
+          {
             "type": "select_multiple",
             "values_list": "foods",
             "name": "breakfastFood",
             "display": {
               "text": "What types of food do you eat for breakfast?"
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen36",
+            "promptIdx": 21
           },
           {
             "type": "select_multiple_inline",
@@ -1316,12 +1353,12 @@
             "display": {
               "text": "What types of food do you eat for lunch?"
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "select_multiple_inline",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen36",
+            "promptIdx": 22
           },
           {
             "type": "select_multiple_grid",
@@ -1330,20 +1367,20 @@
             "display": {
               "text": "What types of food do you eat for dinner?"
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "select_multiple_grid",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen36",
+            "promptIdx": 23
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 39,
-            "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 23
+            "_row_num": 42,
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 24
           }
         ],
         "validation_tag_map": {
@@ -1480,30 +1517,44 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 38,
-              "__rowNum__": 37,
+              "_row_num": 35,
+              "__rowNum__": 34,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 16
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 36,
+            "__rowNum__": 35,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 41,
+              "__rowNum__": 40,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 17
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 39,
-            "operationIdx": 17
+            "_row_num": 42,
+            "operationIdx": 18
           },
           {
-            "_row_num": 39,
+            "_row_num": 42,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 18
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 19
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
-            "_row_num": 39,
-            "operationIdx": 19
+            "_row_num": 42,
+            "operationIdx": 20
           }
         ],
         "branch_label_map": {
@@ -1524,8 +1575,9 @@
           "_else29": 16,
           "_endif29": 16,
           "_screen30": 16,
-          "_contents": 18,
-          "_screen39": 18
+          "_screen36": 17,
+          "_contents": 19,
+          "_screen42": 19
         }
       },
       "initial": {
@@ -1660,6 +1712,26 @@
             "clause": "back",
             "_row_num": 9,
             "operationIdx": 9
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 9,
+            "operationIdx": 10
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 9,
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "back_in_history",
+            "clause": "back",
+            "_row_num": 9,
+            "operationIdx": 12
           }
         ],
         "branch_label_map": {
@@ -1670,7 +1742,8 @@
           "_screen7": 6,
           "_endif8": 7,
           "_contents": 8,
-          "_screen9": 8
+          "_screen9": 8,
+          "_finalize": 10
         }
       }
     }

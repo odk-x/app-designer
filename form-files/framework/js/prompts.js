@@ -921,13 +921,7 @@ promptTypes.select = promptTypes.base.extend({
         var filteredChoices = _.filter(that.renderContext.choices, function(choice) {
             return that.choice_filter(choice);
         });
-        if(this.appearance === "grid") {
-            filteredChoices = _.map(filteredChoices, function(choice, idx) {
-                var columns = 3;
-                choice.colLetter = String.fromCharCode(97 + (idx % columns));
-                return choice;
-            });
-        }
+
         if ( !formValue ) {
             that.renderContext.choices = _.map(filteredChoices, function(choice) {
                 choice.checked = false;
@@ -1206,14 +1200,12 @@ promptTypes.select_one_grid = promptTypes.select_one.extend({
             return that.choice_filter(choice);
         });
 
-        // This should always be done for select_one_grid
-        //if(this.appearance === "grid") {
         filteredChoices = _.map(filteredChoices, function(choice, idx) {
             var columns = 3;
             choice.colLetter = String.fromCharCode(97 + (idx % columns));
             return choice;
         });
-        //}
+
         if ( !formValue ) {
             that.renderContext.choices = _.map(filteredChoices, function(choice) {
                 choice.checked = false;
@@ -1259,14 +1251,12 @@ promptTypes.select_multiple_grid = promptTypes.select_multiple.extend({
             return that.choice_filter(choice);
         });
 
-        // This should always be done for select_one_grid
-        //if(this.appearance === "grid") {
         filteredChoices = _.map(filteredChoices, function(choice, idx) {
             var columns = 3;
             choice.colLetter = String.fromCharCode(97 + (idx % columns));
             return choice;
         });
-        //}
+
         if ( !formValue ) {
             that.renderContext.choices = _.map(filteredChoices, function(choice) {
                 choice.checked = false;

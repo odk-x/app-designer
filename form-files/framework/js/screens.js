@@ -133,18 +133,19 @@ screenTypes.base = Backbone.View.extend({
         if ( that.activePrompts.length == 0 ) {
             ctxt.success();
         } else {
+            var oneCtxt = $.extend({}, ctxt, {
+                success:_.after(that.activePrompts.length, function() {
+                    ctxt.success();
+                }),
+                failure: _.once(function(m) {
+                    ctxt.failure(m);
+                })
+            });
             // We do not support dependent default values within screen groups.
             // If we are to do so, we will need to add code here to ensure
             // their on activate functions are called in the right order.
             _.each(that.activePrompts, function(prompt){
-                prompt.buildRenderContext($.extend({}, ctxt, {
-                    success:_.after(that.activePrompts.length, function() {
-                        ctxt.success();
-                    }),
-                    failure: _.once(function(m) {
-                        ctxt.failure(m);
-                    })
-                }));
+                prompt.buildRenderContext(oneCtxt);
             });
         }
     },
