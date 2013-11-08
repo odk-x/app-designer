@@ -30,137 +30,145 @@
 
     var reservedFieldNames = {
         /**
+         * ODK processor reserved names
+         *
+         * For template substitution, we reserve 'calculates' so that
+         * the {{#substitute}} directive can substitute values and 
+         * calculates into a display string.
+         */
+        calculates: true,
+        /**
          * ODK Metadata reserved names
          */
-    	savepoint_timestamp: true,
-    	savepoint_type: true,
-    	form_id: true,
-    	locale: true,
+        savepoint_timestamp: true,
+        savepoint_type: true,
+        form_id: true,
+        locale: true,
 
         /**
          * SQLite keywords ( http://www.sqlite.org/lang_keywords.html )
          */
-    	abort: true,
-    	action: true,
-    	add: true,
-    	after: true,
-    	all: true,
-    	alter: true,
-    	analyze: true,
-    	and: true,
-    	as: true,
-    	asc: true,
-    	attach: true,
-    	autoincrement: true,
-    	before: true,
-    	begin: true,
-    	between: true,
-    	by: true,
-    	cascade: true,
-    	'case': true,
-    	cast: true,
-    	check: true,
-    	collate: true,
-    	column: true,
-    	commit: true,
-    	conflict: true,
-    	constraint: true,
-    	create: true,
-    	cross: true,
-    	current_date: true,
-    	current_time: true,
-    	current_timestamp: true,
-    	database: true,
-    	'default': true,
-    	deferrable: true,
-    	deferred: true,
-    	'delete': true,
-    	desc: true,
-    	detach: true,
-    	distinct: true,
-    	drop: true,
-    	each: true,
-    	'else': true,
-    	end: true,
-    	escape: true,
-    	except: true,
-    	exclusive: true,
-    	exists: true,
-    	explain: true,
-    	fail: true,
-    	'for': true,
-    	foreign: true,
-    	from: true,
-    	full: true,
-    	glob: true,
-    	group: true,
-    	having: true,
-    	'if': true,
-    	ignore: true,
-    	immediate: true,
-    	'in': true,
-    	index: true,
-    	indexed: true,
-    	initially: true,
-    	inner: true,
-    	insert: true,
-    	instead: true,
-    	intersect: true,
-    	into: true,
-    	is: true,
-    	isnull: true,
-    	join: true,
-    	key: true,
-    	left: true,
-    	like: true,
-    	limit: true,
-    	match: true,
-    	natural: true,
-    	no: true,
-    	not: true,
-    	notnull: true,
-    	'null': true,
-    	of: true,
-    	offset: true,
-    	on: true,
-    	or: true,
-    	order: true,
-    	outer: true,
-    	plan: true,
-    	pragma: true,
-    	primary: true,
-    	query: true,
-    	raise: true,
-    	references: true,
-    	regexp: true,
-    	reindex: true,
-    	release: true,
-    	rename: true,
-    	replace: true,
-    	restrict: true,
-    	right: true,
-    	rollback: true,
-    	row: true,
-    	savepoint: true,
-    	select: true,
-    	set: true,
-    	table: true,
-    	temp: true,
-    	temporary: true,
-    	then: true,
-    	to: true,
-    	transaction: true,
-    	trigger: true,
-    	union: true,
-    	unique: true,
-    	update: true,
-    	using: true,
-    	vacuum: true,
-    	values: true,
-    	view: true,
-    	virtual: true,
-    	when: true,
-    	where: true
+        abort: true,
+        action: true,
+        add: true,
+        after: true,
+        all: true,
+        alter: true,
+        analyze: true,
+        and: true,
+        as: true,
+        asc: true,
+        attach: true,
+        autoincrement: true,
+        before: true,
+        begin: true,
+        between: true,
+        by: true,
+        cascade: true,
+        'case': true,
+        cast: true,
+        check: true,
+        collate: true,
+        column: true,
+        commit: true,
+        conflict: true,
+        constraint: true,
+        create: true,
+        cross: true,
+        current_date: true,
+        current_time: true,
+        current_timestamp: true,
+        database: true,
+        'default': true,
+        deferrable: true,
+        deferred: true,
+        'delete': true,
+        desc: true,
+        detach: true,
+        distinct: true,
+        drop: true,
+        each: true,
+        'else': true,
+        end: true,
+        escape: true,
+        except: true,
+        exclusive: true,
+        exists: true,
+        explain: true,
+        fail: true,
+        'for': true,
+        foreign: true,
+        from: true,
+        full: true,
+        glob: true,
+        group: true,
+        having: true,
+        'if': true,
+        ignore: true,
+        immediate: true,
+        'in': true,
+        index: true,
+        indexed: true,
+        initially: true,
+        inner: true,
+        insert: true,
+        instead: true,
+        intersect: true,
+        into: true,
+        is: true,
+        isnull: true,
+        join: true,
+        key: true,
+        left: true,
+        like: true,
+        limit: true,
+        match: true,
+        natural: true,
+        no: true,
+        not: true,
+        notnull: true,
+        'null': true,
+        of: true,
+        offset: true,
+        on: true,
+        or: true,
+        order: true,
+        outer: true,
+        plan: true,
+        pragma: true,
+        primary: true,
+        query: true,
+        raise: true,
+        references: true,
+        regexp: true,
+        reindex: true,
+        release: true,
+        rename: true,
+        replace: true,
+        restrict: true,
+        right: true,
+        rollback: true,
+        row: true,
+        savepoint: true,
+        select: true,
+        set: true,
+        table: true,
+        temp: true,
+        temporary: true,
+        then: true,
+        to: true,
+        transaction: true,
+        trigger: true,
+        union: true,
+        unique: true,
+        update: true,
+        using: true,
+        vacuum: true,
+        values: true,
+        view: true,
+        virtual: true,
+        when: true,
+        where: true
     };
 
     // Unicode extensions to standard RegExp...
@@ -199,7 +207,7 @@
     //interpretation or not. I.e., whether to wrap the text inside a function() {...}
     //and evaluate that.
     var columnTypeMap = {
-    		_screen_block: 'function',
+            _screen_block: 'function',
             condition: 'formula',
             constraint: 'formula',
             required: 'formula',
@@ -340,19 +348,19 @@
      * is in jQuery, and we don't want to introduce that dependency.
      */
     var deepCopyObject = function( o ) {
-    	if ( o === undefined || o === null || _.isFunction(o) || !_.isObject(o) ) {
-    		return o;
-    	}
+        if ( o === undefined || o === null || _.isFunction(o) || !_.isObject(o) ) {
+            return o;
+        }
 
-    	if ( _.isArray(o) ) {
-    		return _.map(o, function(v) { return deepCopyObject(v); });
-    	} else {
-    		var newo = _.clone(o);
-    		_.each(_.keys(newo), function(k) {
-    			newo[k] = deepCopyObject(newo[k]);
-    		});
-    		return newo;
-    	}
+        if ( _.isArray(o) ) {
+            return _.map(o, function(v) { return deepCopyObject(v); });
+        } else {
+            var newo = _.clone(o);
+            _.each(_.keys(newo), function(k) {
+                newo[k] = deepCopyObject(newo[k]);
+            });
+            return newo;
+        }
     };
 
     /**
@@ -394,33 +402,33 @@
      *   out = {bar: {a:true, c:false, d:false}, none: true};
      */
     var deepExtendObject = function( o1, o2 ) {
-    	// stomp on o1 if o2 is not an object or array...
-    	if ( o2 === undefined || o2 === null || _.isFunction(o2) || !_.isObject(o2) ) {
-    		// don't need to deeply copy these non-array, non-objects.
-    		return o2;
-    	}
-    	// stomp on o1 if o1 is not an object or array...
-    	if ( o1 === undefined || o1 === null || _.isFunction(o1) || !_.isObject(o1) ) {
-    		// deep copy it...
-    		return deepCopyObject(o2);
-    	}
-    	// if o1 or o2 are arrays, stomp on o1 (don't merge arrays)...
-    	if ( _.isArray(o1) || _.isArray(o2) ) {
-    		// deep copy it...
-    		return deepCopyObject(o2);
-    	}
+        // stomp on o1 if o2 is not an object or array...
+        if ( o2 === undefined || o2 === null || _.isFunction(o2) || !_.isObject(o2) ) {
+            // don't need to deeply copy these non-array, non-objects.
+            return o2;
+        }
+        // stomp on o1 if o1 is not an object or array...
+        if ( o1 === undefined || o1 === null || _.isFunction(o1) || !_.isObject(o1) ) {
+            // deep copy it...
+            return deepCopyObject(o2);
+        }
+        // if o1 or o2 are arrays, stomp on o1 (don't merge arrays)...
+        if ( _.isArray(o1) || _.isArray(o2) ) {
+            // deep copy it...
+            return deepCopyObject(o2);
+        }
 
-    	// OK. they are both objects...
-    	_.each(_.keys(o2), function(key) {
-    		if ( key in o1 ) {
-    			o1[key] = deepExtendObject(o1[key], o2[key]);
-    		} else {
-    			o1[key] = deepCopyObject(o2[key]);
-    		}
-    	});
+        // OK. they are both objects...
+        _.each(_.keys(o2), function(key) {
+            if ( key in o1 ) {
+                o1[key] = deepExtendObject(o1[key], o2[key]);
+            } else {
+                o1[key] = deepCopyObject(o2[key]);
+            }
+        });
 
-    	// return the extended object
-    	return o1;
+        // return the extended object
+        return o1;
     };
 
     //Remove carriage returns, trim values in each cell of spreadsheet.
@@ -730,13 +738,13 @@
                     }
                     break;
                 case "save":
-                	if ( parts.length != 3 && parts[1] != 'and' && parts[2] != 'terminate' ) {
+                    if ( parts.length != 3 && parts[1] != 'and' && parts[2] != 'terminate' ) {
                         throw Error("Expected 'save and terminate' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
-                	}
-                	if (! "calculation" in row) {
-                		clauseEntry.calculation = false;
-                	}
+                    }
+                    if (! "calculation" in row) {
+                        clauseEntry.calculation = false;
+                    }
                     clauseEntry._token_type = "save_and_terminate";
                     break;
                 default:
@@ -1073,11 +1081,11 @@
         blockFlow.push({ _token_type: "back_in_history", clause: "back", _row_num: rowNum });
 
         if ( sheetName == 'initial' ) {
-	        blockFlow.push({ _token_type: "branch_label", branch_label: "_finalize", _row_num: rowNum });
-	        blockFlow.push({ _token_type: "validate", clause: "validate finalize", _sweep_name: "finalize", _row_num: rowNum });
-	        blockFlow.push({ _token_type: "save_and_terminate", clause: "save and terminate", calculation: true, _row_num: rowNum });
-	        // this should never be reached....
-	        blockFlow.push({ _token_type: "back_in_history", clause: "back", _row_num: rowNum });
+            blockFlow.push({ _token_type: "branch_label", branch_label: "_finalize", _row_num: rowNum });
+            blockFlow.push({ _token_type: "validate", clause: "validate finalize", _sweep_name: "finalize", _row_num: rowNum });
+            blockFlow.push({ _token_type: "save_and_terminate", clause: "save and terminate", calculation: true, _row_num: rowNum });
+            // this should never be reached....
+            blockFlow.push({ _token_type: "back_in_history", clause: "back", _row_num: rowNum });
         }
         return blockFlow;
     };
@@ -1197,16 +1205,16 @@
                 break;
             case "do_section":
                 // create a psuedo-prompt in this section that has a
-				// _branch_label_enclosing_screen that references the
-				// contents prompt within the subsection.  This is used
-				// by the contents menu item to navigate into the contents
-				// screen of the subsection.
+                // _branch_label_enclosing_screen that references the
+                // contents prompt within the subsection.  This is used
+                // by the contents menu item to navigate into the contents
+                // screen of the subsection.
                 var psuedoPrompt = _.extend({}, clause,
-                	{ _token_type: "prompt",
-                	  _type: "_section",
-            		  promptIdx: prompts.length,
-            		  display: specSettings[clause._do_section_name].display,
-            		  _branch_label_enclosing_screen: clause._do_section_name + '/_contents' } );
+                    { _token_type: "prompt",
+                      _type: "_section",
+                      promptIdx: prompts.length,
+                      display: specSettings[clause._do_section_name].display,
+                      _branch_label_enclosing_screen: clause._do_section_name + '/_contents' } );
                 prompts.push(psuedoPrompt);
                 flattened.push(clause);
                 ++i;
@@ -1448,13 +1456,13 @@
     };
     var evalAsFunction = function(wrappedFn, field, worksheet, rowNum, columnPath) {
         try {
-        	var obj = {};
-        	with (obj) {
-        		eval(wrappedFn);
-        	}
+            var obj = {};
+            with (obj) {
+                eval(wrappedFn);
+            }
         } catch (e) {
             throw new Error("Error: " + e.message + " interpretting formula: " + field + " on sheet: " +
-            		worksheet + " row: " + rowNum + " column: " + columnPath);
+                    worksheet + " row: " + rowNum + " column: " + columnPath);
         }
     };
 
@@ -1462,38 +1470,38 @@
      * Verify that the given field looks good w.r.t. the given columnType
      */
     var sanityCheckOneField = function( field, columnType, worksheet, rowNum, columnPath ) {
-    	if ( _.isArray(columnType) ) {
-    		throw Error("Unable to handle array-valued column_types enforcement: ", columnPath);
-    	}
-    	if ( _.isObject(columnType) ) {
+        if ( _.isArray(columnType) ) {
+            throw Error("Unable to handle array-valued column_types enforcement: ", columnPath);
+        }
+        if ( _.isObject(columnType) ) {
 
-        	_.each(_.keys(field), function(k) {
-        		if ( k in columnType ) {
-        			sanityCheckOneField( field[k], columnType[k], worksheet, rowNum, columnPath + '.' + k );
-        		}
-        	});
-        	return;
-    	}
+            _.each(_.keys(field), function(k) {
+                if ( k in columnType ) {
+                    sanityCheckOneField( field[k], columnType[k], worksheet, rowNum, columnPath + '.' + k );
+                }
+            });
+            return;
+        }
 
-    	// OK. We have a specific columnType.
-    	var formulaArgs = 'formula(';
-    	if ( columnType === 'formula' || columnType.substring(0,formulaArgs.length) == formulaArgs ) {
-    		var iArg = columnType.indexOf('(');
-    		var argList = "()";
-    		if ( iArg !== -1 ) {
-    			argList = columnType.substring(iArg);
-    		}
+        // OK. We have a specific columnType.
+        var formulaArgs = 'formula(';
+        if ( columnType === 'formula' || columnType.substring(0,formulaArgs.length) == formulaArgs ) {
+            var iArg = columnType.indexOf('(');
+            var argList = "()";
+            if ( iArg !== -1 ) {
+                argList = columnType.substring(iArg);
+            }
 
-    		var fn = "function" + argList + "{\nreturn (" + field + ");\n}";
-    		evalAsFunction('('+fn+')', field, worksheet, rowNum, columnPath);
-    	} else if ( columnType === 'function' ) {
-    		// see if we can eval it...
-    		evalAsFunction('('+field+')', field, worksheet, rowNum, columnPath);
-    	} else if ( columnType === 'requirejs_path') {
-    		// nothing to test
-    	} else if ( columnType === 'app_path_localized') {
-    		// nothing to test
-    	}
+            var fn = "function" + argList + "{\nreturn (" + field + ");\n}";
+            evalAsFunction('('+fn+')', field, worksheet, rowNum, columnPath);
+        } else if ( columnType === 'function' ) {
+            // see if we can eval it...
+            evalAsFunction('('+field+')', field, worksheet, rowNum, columnPath);
+        } else if ( columnType === 'requirejs_path') {
+            // nothing to test
+        } else if ( columnType === 'app_path_localized') {
+            // nothing to test
+        }
     };
 
     /**
@@ -1505,11 +1513,11 @@
      * Throw an exception if the field types are not appropriate or well-formed.
      */
     var sanityCheckFieldTypes = function(rowObject, worksheet, specColumnTypes) {
-    	_.each(_.keys(rowObject), function(k) {
-    		if ( k in specColumnTypes && k !== '_row_num' && k !== '__rowNum') {
-    			sanityCheckOneField( rowObject[k], specColumnTypes[k], worksheet, rowObject._row_num, k );
-    		}
-    	});
+        _.each(_.keys(rowObject), function(k) {
+            if ( k in specColumnTypes && k !== '_row_num' && k !== '__rowNum') {
+                sanityCheckOneField( rowObject[k], specColumnTypes[k], worksheet, rowObject._row_num, k );
+            }
+        });
     };
 
 
@@ -1520,7 +1528,7 @@
          */
         var i = 0;
         for ( i = 0 ; i < sheet.length ; ++i ) {
-        	sanityCheckFieldTypes(sheet[i], sheetName, specColumnTypes);
+            sanityCheckFieldTypes(sheet[i], sheetName, specColumnTypes);
         }
 
         /*
@@ -1706,17 +1714,17 @@
         // display.title is present, then it becomes the displayName for the model.
         // otherwise, use the element name.
         if ( !("displayName" in mdef) ) {
-	        if ( "display" in promptOrAction && "title" in promptOrAction.display ) {
-	        	mdef.displayName = promptOrAction.display.title;
-	        }
+            if ( "display" in promptOrAction && "title" in promptOrAction.display ) {
+                mdef.displayName = promptOrAction.display.title;
+            }
         }
 
         if ( name in model ) {
             var defn = model[name];
             var amodb = deepExtendObject( deepExtendObject(
-            				deepExtendObject({},defn), schema), mdef );
+                            deepExtendObject({},defn), schema), mdef );
             var bmoda = deepExtendObject( deepExtendObject(
-    						deepExtendObject({},schema), mdef), defn );
+                            deepExtendObject({},schema), mdef), defn );
             removeIgnorableModelFields(amodb);
             removeIgnorableModelFields(bmoda);
             delete amodb._defn;
@@ -1737,16 +1745,16 @@
             defn._defn = dt;
         } else {
             model[name] = deepExtendObject( deepExtendObject(
-            		{_defn: [{ _row_num : promptOrAction._row_num, section_name: section.section_name }]}, schema), mdef);
+                    {_defn: [{ _row_num : promptOrAction._row_num, section_name: section.section_name }]}, schema), mdef);
             defn = model[name];
         }
         removeIgnorableModelFields(defn);
     };
 
     var assertValidUserDefinedName = function(errorPrefix, name) {
-    	if ( name == null ) {
+        if ( name == null ) {
             throw Error(errorPrefix + " is not defined.");
-    	}
+        }
         if ( !pattern_valid_user_defined_name.test(name) ) {
             throw Error(errorPrefix + " must begin with a letter and contain only letters, digits and '_'");
         }
@@ -1764,84 +1772,84 @@
      * all recursively expanded elementPaths are considered.
      */
     var assertValidElementKey = function(elementPath, elementKey, fullSetOfElementKeys) {
-    	var isSimple = false;
-    	if ( elementPath == null ) {
+        var isSimple = false;
+        if ( elementPath == null ) {
             throw Error("Field is not defined.");
-    	} else if ( elementPath.indexOf('.') === -1) {
-    		// simple name
-    		isSimple = true;
-    		assertValidUserDefinedName("Field '" + elementPath + "' ", elementKey);
-    	} else {
-	    	try {
-	    		assertValidUserDefinedName("Fully qualified element path ", elementKey);
-	    	} catch (e) {
-	    		var name = elementPath.substring(0,elementPath.indexOf('.'));
-	    		throw Error(e.message + " Full elementPath: " + elementPath + " Consider shortening the field name '" + name + "'.");
-	    	}
-    	}
+        } else if ( elementPath.indexOf('.') === -1) {
+            // simple name
+            isSimple = true;
+            assertValidUserDefinedName("Field '" + elementPath + "' ", elementKey);
+        } else {
+            try {
+                assertValidUserDefinedName("Fully qualified element path ", elementKey);
+            } catch (e) {
+                var name = elementPath.substring(0,elementPath.indexOf('.'));
+                throw Error(e.message + " Full elementPath: " + elementPath + " Consider shortening the field name '" + name + "'.");
+            }
+        }
 
-    	if ( fullSetOfElementKeys != null ) {
-    		if ( elementKey in fullSetOfElementKeys ) {
-	    		var path = fullSetOfElementKeys[elementKey];
+        if ( fullSetOfElementKeys != null ) {
+            if ( elementKey in fullSetOfElementKeys ) {
+                var path = fullSetOfElementKeys[elementKey];
 
-	        	if ( isSimple ) {
-	        		var name = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
-	        		throw Error("The framework's identifier for field '" + elementPath +
-	        				"' collides with the identifier for the full elementPath: '" + path +
-	        				"'. Please change one of the field names ('" + elementPath + "' or '" + name + "').");
-	        	} else {
-	        		var refname = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
-	        		var name = elementPath.substring(0,elementPath.indexOf('.'));
-	        		throw Error("The framework's identifier for the full elementPath: '" + elementPath +
-	        				"' collides with the identifier for the full elementPath: '" + path +
-	        				"'. Please change one of the field names ('" + name + "' or '" + refname + "').");
-	        	}
-	    	} else {
-	    		fullSetOfElementKeys[elementKey] = elementPath;
-	    	}
-    	}
+                if ( isSimple ) {
+                    var name = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
+                    throw Error("The framework's identifier for field '" + elementPath +
+                            "' collides with the identifier for the full elementPath: '" + path +
+                            "'. Please change one of the field names ('" + elementPath + "' or '" + name + "').");
+                } else {
+                    var refname = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
+                    var name = elementPath.substring(0,elementPath.indexOf('.'));
+                    throw Error("The framework's identifier for the full elementPath: '" + elementPath +
+                            "' collides with the identifier for the full elementPath: '" + path +
+                            "'. Please change one of the field names ('" + name + "' or '" + refname + "').");
+                }
+            } else {
+                fullSetOfElementKeys[elementKey] = elementPath;
+            }
+        }
 
     };
 
     var assignItemsElementKey = function( elementPathPrefix, elementKeyPrefix, fullSetOfElementKeys, enclosingElement ) {
-    	if ( !('items' in enclosingElement) ) {
-    		enclosingElement.items = {"type": "object"};
-    	}
+        if ( !('items' in enclosingElement) ) {
+            enclosingElement.items = {"type": "object"};
+        }
 
-		var elementPath = elementPathPrefix + '.items';
-		var key = elementKeyPrefix + '_items';
-		if ( ('elementKey' in enclosingElement.items) && enclosingElement.items.elementKey != key ) {
-			throw Error("elementKey is user-defined for '" + elementPath +
-					"' (the array-element type declaration) but does not match computed key: " + key);
-		}
-		assertValidElementKey(elementPath, key, fullSetOfElementKeys);
-		enclosingElement.items.elementKey = key;
+        var elementPath = elementPathPrefix + '.items';
+        var key = elementKeyPrefix + '_items';
+        if ( ('elementKey' in enclosingElement.items) && enclosingElement.items.elementKey != key ) {
+            throw Error("elementKey is user-defined for '" + elementPath +
+                    "' (the array-element type declaration) but does not match computed key: " + key);
+        }
+        assertValidElementKey(elementPath, key, fullSetOfElementKeys);
+        enclosingElement.items.elementKey = key;
     };
 
     /**
      * Helper function for constructing and assigning the elementKey in the model
      */
     var recursiveAssignPropertiesElementKey = function( elementPathPrefix, elementKeyPrefix, fullSetOfElementKeys, properties ) {
-    	if ( properties == null ) {
-    		return;
-    	}
+        if ( properties == null ) {
+            return;
+        }
 
-    	_.each( _.keys(properties), function(name) {
-    		var entry = properties[name];
-    		var elementPath = elementPathPrefix + '.' + name;
-    		var key = elementKeyPrefix + '_' + name;
-    		if ( ('elementKey' in entry) && entry.elementKey != key ) {
-    			throw Error("elementKey is user-defined for " + elementPath + " but does not match computed key: " + key);
-    		}
-    		assertValidElementKey(elementPath, key, fullSetOfElementKeys);
-    		entry.elementKey = key;
-    		if ( entry.type === "object" ) {
-    			// we have properties...
-    			recursiveAssignPropertiesElementKey( elementPath, key, fullSetOfElementKeys, entry.properties );
-        	} else if ( entry.type === "array" ) {
-        		assignItemsElementKey( elementPath, key, fullSetOfElementKeys, entry );
-    		}
-    	});
+        _.each( _.keys(properties), function(name) {
+            var entry = properties[name];
+            var elementPath = elementPathPrefix + '.' + name;
+            var key = elementKeyPrefix + '_' + name;
+            if ( ('elementKey' in entry) && entry.elementKey != key ) {
+                throw Error("elementKey is user-defined for " + elementPath + " but does not match computed key: " + key);
+            }
+            assertValidElementKey(elementPath, key, fullSetOfElementKeys);
+            entry.elementKey = key;
+            if ( entry.type === "object" ) {
+                // we have properties...
+                recursiveAssignPropertiesElementKey( elementPath, key, fullSetOfElementKeys, entry.properties );
+            } else if ( entry.type === "array" ) {
+                assignItemsElementKey( elementPath, key, fullSetOfElementKeys, entry );
+            }
+        });
     };
 
     /**
@@ -1850,68 +1858,68 @@
      * whatever is provided in the model sheet (excluding the original 'type' field).
      */
     var recursivelyResolveTypeInDataModel = function( term, promptTypes ) {
-    	if ( 'properties' in term ) {
-    		_.each( _.keys(term.properties), function(name) {
-	            var defn = term.properties[name];
-	            if ( 'type' in defn ) {
-	            	// blend in the default definition for this prompt type
-	            	var type = defn.type;
-	            	if ( type in promptTypes ) {
-	            		var schema = promptTypes[type];
-	                    if(schema) {
-	                    	// deep copy of schema because we are going to add properties recursively
-	                    	schema = deepCopyObject(schema);
-	                    	// override the promptTypes 'type' with info supplied by the prompt_type sheet.
-	                    	delete defn.type;
-	                    	term.properties[name] = deepExtendObject( schema, defn );
-	                    }
-	            	}
-	            }
-	            recursivelyResolveTypeInDataModel(term.properties[name], promptTypes);
-    		});
-    	}
-    	if ( 'items' in term ) {
+        if ( 'properties' in term ) {
+            _.each( _.keys(term.properties), function(name) {
+                var defn = term.properties[name];
+                if ( 'type' in defn ) {
+                    // blend in the default definition for this prompt type
+                    var type = defn.type;
+                    if ( type in promptTypes ) {
+                        var schema = promptTypes[type];
+                        if(schema) {
+                            // deep copy of schema because we are going to add properties recursively
+                            schema = deepCopyObject(schema);
+                            // override the promptTypes 'type' with info supplied by the prompt_type sheet.
+                            delete defn.type;
+                            term.properties[name] = deepExtendObject( schema, defn );
+                        }
+                    }
+                }
+                recursivelyResolveTypeInDataModel(term.properties[name], promptTypes);
+            });
+        }
+        if ( 'items' in term ) {
             var defn = term.items;
             if ( 'type' in defn ) {
-            	// blend in the default definition for this prompt type
-            	var type = defn.type;
-            	if ( type in promptTypes ) {
-            		var schema = promptTypes[type];
+                // blend in the default definition for this prompt type
+                var type = defn.type;
+                if ( type in promptTypes ) {
+                    var schema = promptTypes[type];
                     if(schema) {
-                    	// deep copy of schema because we are going to add properties recursively
-                    	schema = deepCopyObject(schema);
-                    	// override the promptTypes 'type' with info supplied by the prompt_type sheet.
-                    	delete defn.type;
-                    	term.items = deepExtendObject( schema, defn );
+                        // deep copy of schema because we are going to add properties recursively
+                        schema = deepCopyObject(schema);
+                        // override the promptTypes 'type' with info supplied by the prompt_type sheet.
+                        delete defn.type;
+                        term.items = deepExtendObject( schema, defn );
                     }
-            	}
+                }
             }
             recursivelyResolveTypeInDataModel(term.items, promptTypes);
-    	}
+        }
     };
 
     var developDataModel = function( specification, promptTypes ) {
-    	/**
-    	 * The user understands prompt 'type'
-    	 * Go through the model and replace the 'type' value found with the expansion of
-    	 * the storage for that prompt 'type' with the actual datastore representation.
-    	 */
+        /**
+         * The user understands prompt 'type'
+         * Go through the model and replace the 'type' value found with the expansion of
+         * the storage for that prompt 'type' with the actual datastore representation.
+         */
 
         _.each( _.keys(specification.model), function(name) {
             var defn = specification.model[name];
             if ( 'type' in defn ) {
-            	// blend in the default definition for this prompt type
-            	var type = defn.type;
-            	if ( type in promptTypes ) {
-            		var schema = promptTypes[type];
+                // blend in the default definition for this prompt type
+                var type = defn.type;
+                if ( type in promptTypes ) {
+                    var schema = promptTypes[type];
                     if(schema) {
-                    	// deep copy of schema because we are going to add properties recursively
-                    	schema = deepCopyObject(schema);
-                    	// override the promptTypes 'type' with info supplied by the prompt_type sheet.
-                    	delete defn.type;
-                    	specification.model[name] = deepExtendObject( schema, defn );
+                        // deep copy of schema because we are going to add properties recursively
+                        schema = deepCopyObject(schema);
+                        // override the promptTypes 'type' with info supplied by the prompt_type sheet.
+                        delete defn.type;
+                        specification.model[name] = deepExtendObject( schema, defn );
                     }
-            	}
+                }
             }
             recursivelyResolveTypeInDataModel(specification.model[name], promptTypes);
         });
@@ -1925,15 +1933,15 @@
                     schema = promptTypes[prompt._type];
                     if(schema){
                         if("name" in prompt) {
-                        	var name = prompt.name;
-                        	try {
-                        		assertValidElementKey(name, name);
-                        	} catch (e) {
-                        		throw Error(e.message + " Prompt: '" + prompt.type + "' at row " +
+                            var name = prompt.name;
+                            try {
+                                assertValidElementKey(name, name);
+                            } catch (e) {
+                                throw Error(e.message + " Prompt: '" + prompt.type + "' at row " +
                                     prompt._row_num + " on sheet: " + section.section_name);
-                        	}
-                        	// deep copy of schema because we are going to add properties recursively
-                        	schema = deepCopyObject(schema);
+                            }
+                            // deep copy of schema because we are going to add properties recursively
+                            schema = deepCopyObject(schema);
                             recursivelyResolveTypeInDataModel(schema, promptTypes);
                             updateModel( section, prompt, model, schema );
                         } else {
@@ -1963,13 +1971,13 @@
             _.each(section.operations, function(operation) {
                 if ( operation._token_type === "assign" ) {
                     if("name" in operation) {
-                    	var name = operation.name;
-                    	try {
-                    		assertValidElementKey(name, name);
-                    	} catch (e) {
-                    		throw Error(e.message + " Assign clause: '" + operation.type + "' at row " +
+                        var name = operation.name;
+                        try {
+                            assertValidElementKey(name, name);
+                        } catch (e) {
+                            throw Error(e.message + " Assign clause: '" + operation.type + "' at row " +
                                     operation._row_num + " on sheet: " + section.section_name);
-                    	}
+                        }
                         if (operation._data_type == null ) {
                             // no explicit type -- hope that the field gets a value somewhere else...
                             // record name to verify that is the case.
@@ -1977,9 +1985,9 @@
                         } else if(operation._data_type in promptTypes) {
                             var schema = promptTypes[operation._data_type];
                             if(schema){
-                            	// deep copy of schema because we are going to add properties recursively
-                            	schema = deepCopyObject(schema);
-                            	recursivelyResolveTypeInDataModel(schema, promptTypes);
+                                // deep copy of schema because we are going to add properties recursively
+                                schema = deepCopyObject(schema);
+                                recursivelyResolveTypeInDataModel(schema, promptTypes);
                                 updateModel( section, operation, model, schema );
                             } else if ( schema === undefined ) {
                                 throw Error("Unrecognized assign type: " + operation._data_type + ". Clause: '" + operation.type + "' at row " +
@@ -2061,20 +2069,20 @@
 
         // ensure that all the model entries are not reserved words or too long
         _.each( _.keys(specification.model), function(name) {
-        	var entry = specification.model[name];
-    		if ( ('elementKey' in entry) && entry.elementKey != name ) {
-    			throw Error("elementKey is user-defined for " + name + " but does not match computed key: " + name);
-    		}
-    		// this is already known to be true for prompts and assigns within the form.
-    		// test again to catch any fields that are defined only via the model.
-    		assertValidElementKey(name, name, fullSetOfElementKeys);
-    		entry.elementKey = name;
-        	if ( entry.type === "object" ) {
-        		// we have properties...
-        		recursiveAssignPropertiesElementKey( name, name, fullSetOfElementKeys, entry.properties );
-        	} else if ( entry.type === "array" ) {
-        		assignItemsElementKey( name, name, fullSetOfElementKeys, entry );
-        	}
+            var entry = specification.model[name];
+            if ( ('elementKey' in entry) && entry.elementKey != name ) {
+                throw Error("elementKey is user-defined for " + name + " but does not match computed key: " + name);
+            }
+            // this is already known to be true for prompts and assigns within the form.
+            // test again to catch any fields that are defined only via the model.
+            assertValidElementKey(name, name, fullSetOfElementKeys);
+            entry.elementKey = name;
+            if ( entry.type === "object" ) {
+                // we have properties...
+                recursiveAssignPropertiesElementKey( name, name, fullSetOfElementKeys, entry.properties );
+            } else if ( entry.type === "array" ) {
+                assignItemsElementKey( name, name, fullSetOfElementKeys, entry );
+            }
         });
     };
 
@@ -2135,10 +2143,10 @@
             }
 
             assertValidUserDefinedName("The value of the 'form_id' setting_name on the settings sheet",
-            							processedSettings.form_id.value);
+                                        processedSettings.form_id.value);
 
             assertValidUserDefinedName("The value of the 'table_id' setting_name on the settings sheet",
-            							processedSettings.table_id.value);
+                                        processedSettings.table_id.value);
 
             if ( !('survey' in processedSettings) ) {
                 throw Error("Please define a 'survey' setting_name on the settings sheet and specify the survey title under display.title");
@@ -2401,19 +2409,19 @@
             });
 
             _.each(specification.settings, function(value, name) {
-            	sanityCheckFieldTypes(value, 'settings', specification.column_types);
+                sanityCheckFieldTypes(value, 'settings', specification.column_types);
             });
             _.each(specification.choices, function(value, name) {
-            	sanityCheckFieldTypes(value, 'choices', specification.column_types);
+                sanityCheckFieldTypes(value, 'choices', specification.column_types);
             });
             _.each(specification.queries, function(value, name) {
-            	sanityCheckFieldTypes(value, 'queries', specification.column_types);
+                sanityCheckFieldTypes(value, 'queries', specification.column_types);
             });
             _.each(specification.calculates, function(value, name) {
-            	sanityCheckFieldTypes(value, 'calculates', specification.column_types);
+                sanityCheckFieldTypes(value, 'calculates', specification.column_types);
             });
             _.each(specification.queries, function(value, name) {
-            	sanityCheckFieldTypes(value, 'queries', specification.column_types);
+                sanityCheckFieldTypes(value, 'queries', specification.column_types);
             });
 
             // construct the json sheet for the interpreter

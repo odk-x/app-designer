@@ -73,6 +73,14 @@ return {
      },
     _reservedFieldNames: {
         /**
+         * ODK processor reserved names
+         *
+         * For template substitution, we reserve 'calculates' so that
+         * the {{#substitute}} directive can substitute values and 
+         * calculates into a display string.
+         */
+        calculates: true,
+        /**
          * ODK Metadata reserved names
          */
         savepoint_timestamp: true,
