@@ -545,7 +545,7 @@ promptTypes.linked_table = promptTypes.base.extend({
         if ( that._cachedOrderBy != null ) {
             return that._cachedOrderBy;
         }
-        that._cachedOrderBy = convertOrderByString(linkedMdl, that.order_by);
+        that._cachedOrderBy = database.convertOrderByString(linkedMdl, that.order_by);
         return that._cachedOrderBy;
     },
     disableButtons: function() {
