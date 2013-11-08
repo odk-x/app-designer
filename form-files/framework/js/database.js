@@ -530,9 +530,9 @@ return {
             ctxt.failure({message: "Web client does not support the W3C SQL database standard."});
         } else {
             var settings = opendatakit.getDatabaseSettings();
-            var database = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
+            var w3cDatabase = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
               // create the database...
-            database.transaction(function(transaction) {
+            w3cDatabase.transaction(function(transaction) {
                     var td;
                     td = that._createTableStmt('_column_definitions', 
                                                 that.columnDefinitionsPredefinedColumns,
@@ -559,7 +559,7 @@ return {
                     ctxt.failure({message: "Error while initializing database tables."});
                 }, function() {
                     // DB is created -- record the submissionDb and initiate the transaction...
-                    that.submissionDb = database;
+                    that.submissionDb = w3cDatabase;
                     ctxt.log('D',"withDb.createDb.transacton.success");
                     ctxt.sqlStatement = null;
                     that.submissionDb.transaction(transactionBody, function(error) {
