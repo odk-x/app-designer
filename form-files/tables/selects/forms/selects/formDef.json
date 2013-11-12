@@ -183,27 +183,8 @@
         "_row_num": 26
       },
       {
-        "clause": "if",
-        "condition": false,
-        "_row_num": 27
-      },
-      {
-        "type": "select_one",
-        "values_list": "content_provider_test",
-        "name": "cp_test",
-        "display": {
-          "text": "This demos a content provider query.",
-          "hint": "You will need to install a content provider app for the query to work. There is an example app available here: https://github.com/nathanathan/FileContentProviderExample"
-        },
-        "_row_num": 28
-      },
-      {
-        "clause": "end if",
-        "_row_num": 29
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 30
+        "_row_num": 27
       },
       {
         "type": "note",
@@ -211,7 +192,7 @@
           "text": "Holidays"
         },
         "hideInContents": true,
-        "_row_num": 31
+        "_row_num": 28
       },
       {
         "type": "select_one_grid",
@@ -220,7 +201,7 @@
         "display": {
           "text": "What is your favorite holiday?"
         },
-        "_row_num": 32
+        "_row_num": 29
       },
       {
         "type": "select_one_inline",
@@ -229,7 +210,7 @@
         "display": {
           "text": "What is your second favorite holiday?"
         },
-        "_row_num": 33
+        "_row_num": 30
       },
       {
         "type": "select_one_dropdown",
@@ -238,15 +219,15 @@
         "display": {
           "text": "What is your third favorite holiday?"
         },
-        "_row_num": 34
+        "_row_num": 31
       },
       {
         "clause": "end screen",
-        "_row_num": 35
+        "_row_num": 32
       },
       {
         "clause": "begin screen",
-        "_row_num": 36
+        "_row_num": 33
       },
       {
         "type": "note",
@@ -254,7 +235,7 @@
           "text": "Food"
         },
         "hideInContents": true,
-        "_row_num": 37
+        "_row_num": 34
       },
       {
         "type": "select_multiple",
@@ -263,7 +244,7 @@
         "display": {
           "text": "What types of food do you eat for breakfast?"
         },
-        "_row_num": 38
+        "_row_num": 35
       },
       {
         "type": "select_multiple_inline",
@@ -272,7 +253,7 @@
         "display": {
           "text": "What types of food do you eat for lunch?"
         },
-        "_row_num": 39
+        "_row_num": 36
       },
       {
         "type": "select_multiple_grid",
@@ -281,11 +262,11 @@
         "display": {
           "text": "What types of food do you eat for dinner?"
         },
-        "_row_num": 40
+        "_row_num": 37
       },
       {
         "clause": "end screen",
-        "_row_num": 41
+        "_row_num": 38
       }
     ],
     "choices": [
@@ -502,12 +483,6 @@
         "uri": "\"regions.csv\"",
         "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
         "_row_num": 5
-      },
-      {
-        "query_name": "content_provider_test",
-        "uri": "\"content://org.opendatakit.FileContentProviderExample/\"",
-        "callback": "context",
-        "_row_num": 6
       }
     ],
     "settings": [
@@ -821,12 +796,6 @@
         "uri": "\"regions.csv\"",
         "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
         "_row_num": 5
-      },
-      "content_provider_test": {
-        "query_name": "content_provider_test",
-        "uri": "\"content://org.opendatakit.FileContentProviderExample/\"",
-        "callback": "context",
-        "_row_num": 6
       }
     },
     "calculates": {},
@@ -941,20 +910,10 @@
         "type": "string",
         "elementKey": "country_csv"
       },
-      "cp_test": {
-        "_defn": [
-          {
-            "_row_num": 28,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "cp_test"
-      },
       "favoriteHoliday": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -964,7 +923,7 @@
       "secondFavoriteHoliday": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -974,7 +933,7 @@
       "thirdFavoriteHoliday": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -984,7 +943,7 @@
       "breakfastFood": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -999,7 +958,7 @@
       "lunchFood": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -1014,7 +973,7 @@
       "dinnerFood": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -1250,32 +1209,17 @@
             "promptIdx": 14
           },
           {
-            "type": "select_one",
-            "values_list": "content_provider_test",
-            "name": "cp_test",
-            "display": {
-              "text": "This demos a content provider query.",
-              "hint": "You will need to install a content provider app for the query to work. There is an example app available here: https://github.com/nathanathan/FileContentProviderExample"
-            },
-            "_row_num": 28,
-            "__rowNum__": 27,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 15
-          },
-          {
             "type": "note",
             "display": {
               "text": "Holidays"
             },
             "hideInContents": true,
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 15
           },
           {
             "type": "select_one_grid",
@@ -1284,12 +1228,12 @@
             "display": {
               "text": "What is your favorite holiday?"
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "select_one_grid",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 16
           },
           {
             "type": "select_one_inline",
@@ -1298,12 +1242,12 @@
             "display": {
               "text": "What is your second favorite holiday?"
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "select_one_inline",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 17
           },
           {
             "type": "select_one_dropdown",
@@ -1312,12 +1256,12 @@
             "display": {
               "text": "What is your third favorite holiday?"
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 18
           },
           {
             "type": "note",
@@ -1325,12 +1269,12 @@
               "text": "Food"
             },
             "hideInContents": true,
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 19
           },
           {
             "type": "select_multiple",
@@ -1339,12 +1283,12 @@
             "display": {
               "text": "What types of food do you eat for breakfast?"
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 20
           },
           {
             "type": "select_multiple_inline",
@@ -1353,12 +1297,12 @@
             "display": {
               "text": "What types of food do you eat for lunch?"
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "select_multiple_inline",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 21
           },
           {
             "type": "select_multiple_grid",
@@ -1367,20 +1311,20 @@
             "display": {
               "text": "What types of food do you eat for dinner?"
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "select_multiple_grid",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 23
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 22
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 42,
-            "_branch_label_enclosing_screen": "survey/_screen42",
-            "promptIdx": 24
+            "_row_num": 39,
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 23
           }
         ],
         "validation_tag_map": {
@@ -1482,79 +1426,50 @@
             "operationIdx": 11
           },
           {
-            "clause": "if",
-            "condition": false,
+            "clause": "begin screen",
             "_row_num": 27,
             "__rowNum__": 26,
-            "_token_type": "goto_label",
-            "_branch_label": "_then27",
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 32,
+              "__rowNum__": 31,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 12
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else29",
-            "_row_num": 29,
+            "clause": "begin screen",
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 38,
+              "__rowNum__": 37,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 13
-          },
-          {
-            "_row_num": 28,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 14
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif29",
-            "_row_num": 29,
-            "operationIdx": 15
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 30,
-            "__rowNum__": 29,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 35,
-              "__rowNum__": 34,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 16
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 36,
-            "__rowNum__": 35,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 41,
-              "__rowNum__": 40,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 17
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 42,
-            "operationIdx": 18
+            "_row_num": 39,
+            "operationIdx": 14
           },
           {
-            "_row_num": 42,
+            "_row_num": 39,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 19
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 15
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
-            "_row_num": 42,
-            "operationIdx": 20
+            "_row_num": 39,
+            "operationIdx": 16
           }
         ],
         "branch_label_map": {
@@ -1570,14 +1485,10 @@
           "_screen24": 9,
           "_screen25": 10,
           "_screen26": 11,
-          "_then27": 14,
-          "_screen28": 14,
-          "_else29": 16,
-          "_endif29": 16,
-          "_screen30": 16,
-          "_screen36": 17,
-          "_contents": 19,
-          "_screen42": 19
+          "_screen27": 12,
+          "_screen33": 13,
+          "_contents": 15,
+          "_screen39": 15
         }
       },
       "initial": {

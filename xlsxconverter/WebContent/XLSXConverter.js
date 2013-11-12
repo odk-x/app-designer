@@ -578,6 +578,15 @@
         });
     };
 
+    var errorIfFieldsMissingForQueryType = function(sheetName, rows, queryType, requiredField, nonEmpty ) {
+        _.each(rows, function(row) {
+            if ((row.query_type ==  queryType) && !(requiredField in row)) {
+                throw Error("Missing cell value on sheet: " + sheetName +
+                        " for column: " + requiredField + " on row: " + row._row_num);
+            }
+        });
+    };
+
     /*
      * Parse the 'clause' field and create independent records for branch labels.
      */
@@ -2287,8 +2296,15 @@
             if ('queries' in wbJson) {
                 var cleanSet = wbJson['queries'];
                 cleanSet = omitRowsWithMissingField(cleanSet, 'query_name');
-                errorIfFieldMissing('queries',cleanSet,'uri', true);
-                errorIfFieldMissing('queries',cleanSet, 'callback', true);
+                errorIfFieldMissing('queries',cleanSet,'query_type', true);
+                errorIfFieldsMissingForQueryType('queries',cleanSet,'csv', 'uri', true);
+                errorIfFieldsMissingForQueryType('queries',cleanSet,'csv', 'callback', true);
+                errorIfFieldsMissingForQueryType('queries',cleanSet,'ajax', 'uri', true);
+                errorIfFieldsMissingForQueryType('queries',cleanSet,'ajax', 'callback', true);
+                errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'linked_form_id', true);
+                errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'selection', true);
+                errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'selectionArgs', true);
+                errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'auxillaryHash', true);
                 processedQueries = _.groupBy(cleanSet, 'query_name');
                 _.each(processedQueries, function(value, name) {
                     if(_.isArray(value)){
