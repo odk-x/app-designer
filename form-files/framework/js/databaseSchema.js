@@ -533,13 +533,14 @@ selectAllColumnMetaDataStmt:function(table_id) {
  * Return the set of database table inserts needed for saving this data table model to the database.
  */
 updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
+	var that = this;
     var fullDef = {
         _table_definitions: [],
         _key_value_store_active: [],
         _column_definitions: []
         };
 
-    shim.log('D','database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
+    shim.log('D','database._insertTableAndColumnProperties');
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...
@@ -559,8 +560,8 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     //    
     var dataTableModel = {};
     var f;
-    for ( f in databaseSchema.dataTablePredefinedColumns ) {
-        dataTableModel[f] = databaseSchema.dataTablePredefinedColumns[f];
+    for ( f in that.dataTablePredefinedColumns ) {
+        dataTableModel[f] = that.dataTablePredefinedColumns[f];
     }
     
     // go through the supplied protoMdl.formDef model

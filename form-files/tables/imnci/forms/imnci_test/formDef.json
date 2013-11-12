@@ -9467,7 +9467,7 @@
           }
         ],
         "type": "array",
-        "isPersisted": true,
+        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "basic_q_items"
@@ -9493,7 +9493,7 @@
           }
         ],
         "type": "array",
-        "isPersisted": true,
+        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "needed_vaccinations_items"
@@ -10185,7 +10185,7 @@
           }
         ],
         "type": "array",
-        "isPersisted": true,
+        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "given_vaccinations_items"
@@ -10290,7 +10290,7 @@
           }
         ],
         "type": "array",
-        "isPersisted": true,
+        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "other_foods_types_items"

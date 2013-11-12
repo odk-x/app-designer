@@ -363,7 +363,7 @@
           }
         ],
         "type": "array",
-        "isPersisted": true,
+        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "visited_continents_items"

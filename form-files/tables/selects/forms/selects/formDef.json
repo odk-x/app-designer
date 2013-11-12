@@ -989,7 +989,7 @@
           }
         ],
         "type": "array",
-        "isPersisted": true,
+        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "breakfastFood_items"
@@ -1004,7 +1004,7 @@
           }
         ],
         "type": "array",
-        "isPersisted": true,
+        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "lunchFood_items"
@@ -1019,7 +1019,7 @@
           }
         ],
         "type": "array",
-        "isPersisted": true,
+        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "dinnerFood_items"

@@ -402,7 +402,7 @@ reconstructModelDataFromElementPathValueUpdates: function(mdl, updates) {
 		if (de.isUnitOfRetention) {
 			var elementPath = de.elementPath || elementPathValue.elementPath;
 			if ( de.elementSet === 'instanceMetadata' ) {
-				that.reconstructElementPath(elementPath, de, elementPathValue.value, mdl.metadata );
+				that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, mdl.metadata );
 			} else {
 				that.reconstructElementPath(elementPath, de, elementPathValue.value, mdl.data );
 			}
@@ -597,6 +597,7 @@ getElementPathValue:function(data,pathName) {
     return v;
 },
 convertSelectionString: function(linkedMdl, selection) {
+	// must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     var that = this;
     if ( selection == null || selection.length === 0 ) {
         return null;
@@ -633,6 +634,7 @@ convertSelectionString: function(linkedMdl, selection) {
     return remapped;
 },
 convertOrderByString: function(linkedMdl, order_by) {
+	// must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     var that = this;
     if ( order_by == null || order_by.length === 0 ) {
         return null;
