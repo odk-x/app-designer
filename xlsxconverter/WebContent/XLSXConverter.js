@@ -33,7 +33,7 @@
          * ODK processor reserved names
          *
          * For template substitution, we reserve 'calculates' so that
-         * the {{#substitute}} directive can substitute values and 
+         * the {{#substitute}} directive can substitute values and
          * calculates into a display string.
          */
         calculates: true,
@@ -240,7 +240,7 @@
         "select_one" : {"type":"string"},
         "select_multiple": {
             "type": "array",
-            "isPersisted": true,
+            "isUnitOfRetention": true,
             "items" : {
                 "type":"string"
             }
@@ -251,14 +251,14 @@
         "select_one_dropdown" : {"type":"string"},
         "select_multiple_grid": {
             "type": "array",
-            "isPersisted": true,
+            "isUnitOfRetention": true,
             "items" : {
                 "type":"string"
             }
         },
         "select_multiple_inline": {
             "type": "array",
-            "isPersisted": true,
+            "isUnitOfRetention": true,
             "items" : {
                 "type":"string"
             }
@@ -295,7 +295,7 @@
         "image": {
             "type": "object",
             "elementType": "mimeUri",
-            "isPersisted": true,
+            "isUnitOfRetention": true,
             "properties": {
                 "uri": {
                     "type": "string"
@@ -309,7 +309,7 @@
         "audio": {
             "type": "object",
             "elementType": "mimeUri",
-            "isPersisted": true,
+            "isUnitOfRetention": true,
             "properties": {
                 "uri": {
                     "type": "string"
@@ -323,7 +323,7 @@
         "video": {
             "type": "object",
             "elementType": "mimeUri",
-            "isPersisted": true,
+            "isUnitOfRetention": true,
             "properties": {
                 "uri": {
                     "type": "string"

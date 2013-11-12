@@ -35,6 +35,8 @@ requirejs.config({
         screens : 'js/screens',
         prompts : 'js/prompts',
         database : 'js/database',
+        databaseUtils : 'js/databaseUtils',
+        databaseSchema : 'js/databaseSchema',
         controller : 'js/controller',
         builder : 'js/builder',
         screenManager : 'js/screenManager',
