@@ -395,19 +395,19 @@ reconstructElementPath: function(elementPath, jsonType, dbValue, topLevelObject)
         e[term] = value;
     },
 reconstructModelDataFromElementPathValueUpdates: function(mdl, updates) {
-	var that = this;
-	for (var dbKey in updates) {
-		var elementPathValue = updates[dbKey];
-		var de = mdl.dataTableModel[dbKey];
-		if (de.isUnitOfRetention) {
-			var elementPath = de.elementPath || elementPathValue.elementPath;
-			if ( de.elementSet === 'instanceMetadata' ) {
-				that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, mdl.metadata );
-			} else {
-				that.reconstructElementPath(elementPath, de, elementPathValue.value, mdl.data );
-			}
-		}
-	}
+    var that = this;
+    for (var dbKey in updates) {
+        var elementPathValue = updates[dbKey];
+        var de = mdl.dataTableModel[dbKey];
+        if (de.isUnitOfRetention) {
+            var elementPath = de.elementPath || elementPathValue.elementPath;
+            if ( de.elementSet === 'instanceMetadata' ) {
+                that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, mdl.metadata );
+            } else {
+                that.reconstructElementPath(elementPath, de, elementPathValue.value, mdl.data );
+            }
+        }
+    }
 },
 getElementPathPairFromKvMap: function(kvMap, elementPath) {
     var path = elementPath.split('.');
@@ -503,6 +503,23 @@ _clearUnitOfRetentionFlag: function( dbKeyMap, listChildElementKeys) {
         }
     }
 },
+_setSessionVariableFlag: function( dbKeyMap, listChildElementKeys) {
+    var that = this;
+    var i;
+    var f;
+    if ( listChildElementKeys != null ) {
+        for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
+            var f = listChildElementKeys[i];
+            var jsonType = dbKeyMap[f];
+            jsonType.isSessionVariable = true;
+            if ( jsonType.type === 'array' ) {
+                that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+            } else if ( jsonType.type === 'object' ) {
+                that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+            }
+        }
+    }
+},
 flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementKeyPrefix, jsonType ) {
     var that = this;
     var fullPath;
@@ -547,7 +564,7 @@ flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementK
             jsonType.type === 'integer' ||
             jsonType.type === 'boolean' ) {
         // these should be retained
-		// as their own column values...
+        // as their own column values...
         jsonType.isUnitOfRetention = true;
     }
 
@@ -579,9 +596,15 @@ flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementK
 
     if ( jsonType.isUnitOfRetention && (jsonType.listChildElementKeys != null)) {
         // we have some sort of structure that is written out as 
-		// a JSON serialization. Clear the isUnitOfRetention tags
-		// on the nested elements
+        // a JSON serialization. Clear the isUnitOfRetention tags
+        // on the nested elements
         that._clearUnitOfRetentionFlag(dbKeyMap, jsonType.listChildElementKeys);
+    }
+
+    if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys != null)) {
+        // we have some sort of structure that is a sessionVariable
+        // Set the isSessionVariable tags on all its nested elements.
+        that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
     }
     return jsonType;
 },
@@ -597,7 +620,7 @@ getElementPathValue:function(data,pathName) {
     return v;
 },
 convertSelectionString: function(linkedMdl, selection) {
-	// must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
+    // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     var that = this;
     if ( selection == null || selection.length === 0 ) {
         return null;
@@ -634,7 +657,7 @@ convertSelectionString: function(linkedMdl, selection) {
     return remapped;
 },
 convertOrderByString: function(linkedMdl, order_by) {
-	// must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
+    // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     var that = this;
     if ( order_by == null || order_by.length === 0 ) {
         return null;

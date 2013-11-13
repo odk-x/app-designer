@@ -177,12 +177,12 @@ putDataKeyValueMap:function(ctxt, kvMap) {
           var updates = {};
           var tmpctxt = $.extend({}, ctxt, {success:function() {
                     ctxt.log('D','database.putDataKeyValueMap.updatingCache');
-					databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, updates);
+                    databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, updates);
                     ctxt.success();
                 }});
 
           that.withDb( tmpctxt, function(transaction) {
-				var formId = opendatakit.getSettingValue('form_id');
+                var formId = opendatakit.getSettingValue('form_id');
                 var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), kvMap);
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                     updates = is.updates;
@@ -218,18 +218,22 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
                 var dbKey, dbValue, jsonType;
                 var elementPath;
                 
-				var updates = {};
+                var updates = {};
                 // and then just snarf the fields...
                 for ( dbKey in dataTableModel ) {
                     jsonType = dataTableModel[dbKey];
                     if ( jsonType.isUnitOfRetention ) {
-                        dbValue = row[dbKey];
                         elementPath = jsonType.elementPath;
-						updates[dbKey] = { elementPath: elementPath, value: dbValue };
-					}
-				}
-	
-				databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, updates);
+                        if ( jsonType.isSessionVariable ) {
+                            dbValue = JSON.parse(shim.getSessionVariable(opendatakit.getRefId(), elementPath ));
+                        } else {
+                            dbValue = row[dbKey];
+                        }
+                        updates[dbKey] = { elementPath: elementPath, value: dbValue };
+                    }
+                }
+    
+                databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, updates);
             }
         });
       });
@@ -568,17 +572,17 @@ readTableDefinition:function(ctxt, formDef, table_id, formPath) {
 _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) {
     var that = this;
     ctxt.log('D','database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
-	var fullDef = 
-		databaseSchema.updateDataTableModelAndReturnDatabaseInsertLists(tlo, opendatakit.getSectionTitle(tlo.formDef, 'survey'))
+    var fullDef = 
+        databaseSchema.updateDataTableModelAndReturnDatabaseInsertLists(tlo, opendatakit.getSectionTitle(tlo.formDef, 'survey'))
 
     if ( writeDatabase ) {
-		// get first property in fullDef -- we use native iteration ordering to step through the properties.
-		var tableToUpdate = null;
-		for ( var prop in fullDef ) {
-			tableToUpdate = prop;
-			break;
-		}
-		
+        // get first property in fullDef -- we use native iteration ordering to step through the properties.
+        var tableToUpdate = null;
+        for ( var prop in fullDef ) {
+            tableToUpdate = prop;
+            break;
+        }
+        
         var createTableCmd = databaseSchema.createTableStmt(tlo.table_id, tlo.dataTableModel);
         ctxt.sqlStatement = createTableCmd;
         transaction.executeSql(createTableCmd.stmt, createTableCmd.bind, function(transaction, result) {
@@ -642,12 +646,12 @@ fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, tlo) {
     });
 },
 getDataValue:function(name) {
-	var that = this;
-	return databaseUtils.getElementPathValue(mdl.data, name);
+    var that = this;
+    return databaseUtils.getElementPathValue(mdl.data, name);
 },
 getInstanceMetaDataValue:function(name) {
-	var that = this;
-	return databaseUtils.getElementPathValue(mdl.metadata, name);
+    var that = this;
+    return databaseUtils.getElementPathValue(mdl.metadata, name);
 },
 setInstanceMetaData:function(ctxt, name, value) {
     ctxt.log('I','setInstanceMetaData: ' + name);
@@ -659,8 +663,8 @@ setInstanceMetaData:function(ctxt, name, value) {
 // TODO: table metadata is under mdl.tableMetadata
 // TODO: column metadata is under mdl.columnMetadata
 getTableMetaDataValue:function(name) {
-	var that = this;
-	return databaseUtils.getElementPathValue(mdl.tableMetadata, name);
+    var that = this;
+    return databaseUtils.getElementPathValue(mdl.tableMetadata, name);
 },
 getAllDataValues:function() {
     return mdl.data;
@@ -715,8 +719,8 @@ setValueDeferredChange: function( name, value ) {
     // apply the change immediately...
     var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
                     mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), justChange);
-	
-	databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, is.updates);
+    
+    databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, is.updates);
 },
 applyDeferredChanges: function(ctxt) {
     var that = this;

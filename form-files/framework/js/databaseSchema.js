@@ -83,7 +83,7 @@ createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
         var comma = '';
         for ( var dbColumnName in kvMap ) {
             var f = kvMap[dbColumnName];
-            if ( f.isUnitOfRetention ) {
+            if ( f.isUnitOfRetention && !f.isSessionVariable ) {
                 createTableCmd += comma + dbColumnName + " ";
                 comma = ',';
                 if ( f.type === "string" ) {
@@ -169,7 +169,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
     var stmt = 'insert into "' + dbTableName + '" (';
     for ( f in dataTableModel ) {
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention ) {
+        if ( defElement.isUnitOfRetention && !defElement.isSessionVariable ) {
             stmt += comma;
             comma = ', ';
             stmt += '"' + f + '"';
@@ -181,25 +181,35 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
     for (f in dataTableModel) {
         defElement = dataTableModel[f];
         if ( defElement.isUnitOfRetention ) {
-            stmt += comma;
-            comma = ', ';
+            if ( !defElement.isSessionVariable ) {
+                stmt += comma;
+                comma = ', ';
+            }
             var elementPath = defElement['elementPath'];
             if ( elementPath === undefined || elementPath === null ) elementPath = f;
             // TODO: get kvElement for this elementPath
             elementPathPair = databaseUtils.getElementPathPairFromKvMap(kvMap, elementPath);
             if ( elementPathPair != null ) {
                 kvElement = elementPathPair.element;
-                updates[f] = {"elementPath" : elementPath, "value": null};
                 // track that we matched the keyname...
                 processSet[elementPathPair.elementPath] = true;
                 if (kvElement.value === undefined || kvElement.value === null) {
-                    stmt += "null";
+                    updates[f] = {"elementPath" : elementPath, "value": null};
+                    if ( !defElement.isSessionVariable ) {
+                        stmt += "null";
+                    } else {
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, null);
+                    }
                 } else {
-                    stmt += "?";
                     // remap kvElement.value into storage value...
                     v = databaseUtils.toDatabaseFromElementType(defElement, kvElement.value);
-                    bindings.push(v);
                     updates[f].value = v; 
+                    if ( !defElement.isSessionVariable ) {
+                        stmt += "?";
+                        bindings.push(v);
+                    } else {
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, JSON.stringify(v));
+                    }
                 }
             } else if (f === "_savepoint_timestamp") {
                 stmt += "?";
@@ -214,7 +224,9 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
             } else if ( f === "_savepoint_type" ) {
                 stmt += "null";
             } else {
-                stmt += '"' + f + '"';
+                if ( !defElement.isSessionVariable ) {
+                    stmt += '"' + f + '"';
+                }
             }
         }
     }
@@ -274,7 +286,7 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
     var stmt = 'insert into "' + dbTableName + '" (';
     for ( f in dataTableModel ) {
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention ) {
+        if ( defElement.isUnitOfRetention && !defElement.isSessionVariable ) {
             stmt += comma;
             comma = ', ';
             stmt += '"' + f + '"';
@@ -285,8 +297,10 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
     for (f in dataTableModel) {    
         defElement = dataTableModel[f];
         if ( defElement.isUnitOfRetention ) {
-            stmt += comma;
-            comma = ', ';
+            if ( !defElement.isSessionVariable ) {
+                stmt += comma;
+                comma = ', ';
+            }
             var elementPath = defElement['elementPath'];
             if ( elementPath === undefined || elementPath === null ) elementPath = f;
             // TODO: get kvElement for this elementPath
@@ -296,11 +310,19 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
                 // track that we matched the keyname...
                 processSet[elementPathPair.elementPath] = true;
                 if (kvElement.value === undefined || kvElement.value === null) {
-                    stmt += "null";
+                    if ( !defElement.isSessionVariable ) {
+                        stmt += "null";
+                    } else {
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, null);
+                    }
                 } else {
-                    stmt += "?";
-					v = databaseUtils.toDatabaseFromElementType(defElement, kvElement.value);
-                    bindings.push(v);
+                    v = databaseUtils.toDatabaseFromElementType(defElement, kvElement.value);
+                    if ( !defElement.isSessionVariable ) {
+                        stmt += "?";
+                        bindings.push(v);
+                    } else {
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, JSON.stringify(v));
+                    }
                 }
             } else if ( f === "_savepoint_timestamp" ) {
                 stmt += "?";
@@ -311,10 +333,19 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
             } else {
                 // use default values from reference map...
                 if ( defElement['default'] === undefined || defElement['default'] === null ) {
-                    stmt += "null";
+                    if ( !defElement.isSessionVariable ) {
+                        stmt += "null";
+                    } else {
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, null);
+                    }
                 } else {
-                    stmt += "?";
-                    bindings.push(defElement['default']);
+                    v = databaseUtils.toDatabaseFromElementType(defElement, defElement['default']);
+                    if ( !defElement.isSessionVariable ) {
+                        stmt += "?";
+                        bindings.push(v);
+                    } else {
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, JSON.stringify(v));
+                    }
                 }
             }
         }
@@ -531,9 +562,10 @@ selectAllColumnMetaDataStmt:function(table_id) {
  * Flesh out the protoMdl with a dataTableModel constructed from its formDef
  * 
  * Return the set of database table inserts needed for saving this data table model to the database.
+ * This returned set does not include sessionVariable fields.
  */
 updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
-	var that = this;
+    var that = this;
     var fullDef = {
         _table_definitions: [],
         _key_value_store_active: [],
@@ -550,6 +582,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     //  elementKey : jsonSchemaType
     //
     // with the addition of:
+    //    isSessionVariable : true if this is not retained across sessions
     //    isUnitOfRetention : true if elementKey is a dbColumnName
     //    elementPath : pathToElement
     //    elementSet : 'data'
@@ -576,10 +609,10 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     //
     for ( var dbColumnName in dataTableModel ) {
         // the XLSXconverter already handles expanding complex types
-		// such as geopoint into their underlying storage representation.
+        // such as geopoint into their underlying storage representation.
         jsonDefn = dataTableModel[dbColumnName];
         
-        if ( jsonDefn.elementSet === 'data' ) {
+        if ( jsonDefn.elementSet === 'data' && !jsonDefn.isSessionVariable ) {
             var surveyElementName = jsonDefn.elementName;
             var surveyDisplayName = (jsonDefn.displayName === undefined || jsonDefn.displayName === null) ? surveyElementName : jsonDefn.displayName;
             
@@ -693,8 +726,8 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'summaryDisplayFormat', _type: 'string', _value: '' } );
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'currentQuery', _type: 'string', _value: '' } );
 
-	protoMdl.dataTableModel = dataTableModel;
-	return fullDef;
+    protoMdl.dataTableModel = dataTableModel;
+    return fullDef;
 }
 };
 });
