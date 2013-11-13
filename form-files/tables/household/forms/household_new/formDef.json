@@ -55,12 +55,22 @@
         "_row_num": 7
       },
       {
-        "type": "text",
+        "type": "select_one",
+        "values_list": "select_linked_data",
         "name": "owner",
         "display": {
           "text": "Who is the owner of the household?"
         },
         "_row_num": 8
+      },
+      {
+        "type": "select_multiple",
+        "values_list": "select_linked_data",
+        "name": "youngest",
+        "display": {
+          "text": "Who are the two youngest members of the household?"
+        },
+        "_row_num": 9
       }
     ],
     "choices": [
@@ -144,6 +154,15 @@
         "selectionArgs": "[ data('household_id') ]",
         "auxillaryHash": "'household_id='+escape(data('household_id'))",
         "_row_num": 2
+      },
+      {
+        "query_name": "select_linked_data",
+        "query_type": "linked_table",
+        "linked_form_id": "household_member",
+        "selection": "household_id = ?",
+        "selectionArgs": "[ data('household_id') ]",
+        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "_row_num": 3
       }
     ]
   },
@@ -260,6 +279,15 @@
         "selectionArgs": "[ data('household_id') ]",
         "auxillaryHash": "'household_id='+escape(data('household_id'))",
         "_row_num": 2
+      },
+      "select_linked_data": {
+        "query_name": "select_linked_data",
+        "query_type": "linked_table",
+        "linked_form_id": "household_member",
+        "selection": "household_id = ?",
+        "selectionArgs": "[ data('household_id') ]",
+        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "_row_num": 3
       }
     },
     "calculates": {},
@@ -352,6 +380,21 @@
         ],
         "type": "string",
         "elementKey": "owner"
+      },
+      "youngest": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "isPersisted": true,
+        "items": {
+          "type": "string",
+          "elementKey": "youngest_items"
+        },
+        "elementKey": "youngest"
       }
     },
     "section_names": [
@@ -448,7 +491,8 @@
             "promptIdx": 5
           },
           {
-            "type": "text",
+            "type": "select_one",
+            "values_list": "select_linked_data",
             "name": "owner",
             "display": {
               "text": "Who is the owner of the household?"
@@ -456,17 +500,31 @@
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 6
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "select_linked_data",
+            "name": "youngest",
+            "display": {
+              "text": "Who are the two youngest members of the household?"
+            },
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 7
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 9,
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 7
+            "_row_num": 10,
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 8
           }
         ],
         "validation_tag_map": {
@@ -516,22 +574,28 @@
             "operationIdx": 6
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 9,
-            "operationIdx": 7
-          },
-          {
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 10,
             "operationIdx": 8
+          },
+          {
+            "_row_num": 10,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 9
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
-            "_row_num": 9,
-            "operationIdx": 9
+            "_row_num": 10,
+            "operationIdx": 10
           }
         ],
         "branch_label_map": {
@@ -542,8 +606,9 @@
           "_screen6": 4,
           "_screen7": 5,
           "_screen8": 6,
-          "_contents": 8,
-          "_screen9": 8
+          "_screen9": 7,
+          "_contents": 9,
+          "_screen10": 9
         }
       },
       "initial": {
