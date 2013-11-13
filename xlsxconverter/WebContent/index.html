@@ -10,10 +10,10 @@ body {
     border:2px dashed #bbb;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
-	border-radius:5px;
-	padding:25px;
-	text-align:center;
-	font:20pt bold;
+    border-radius:5px;
+    padding:25px;
+    text-align:center;
+    font:20pt bold;
     color:#bbb
 }
 #browse {
@@ -60,7 +60,7 @@ body {
     <div id="drop">Drop an XLSX file here to convert to JSON.</div>
 </div>
 <div id="browse">
-    Select a file to convert to JSON<input class="input" type="file" id="browsefile"/>
+    Select a file to convert to JSON<input class="input" type="file" id="browsefile" disabled="true"/>
 </div>
 <div id="errors"></div>
 <div id="warnings"></div>
@@ -97,15 +97,24 @@ function removeEmptyStrings(rObjArr){
 }
 
 function to_json(workbook) {
-	var result = {};
-	_.each(workbook.SheetNames, function(sheetName) {
-		var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+    var result = {};
+    _.each(workbook.SheetNames, function(sheetName) {
+        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
         rObjArr = removeEmptyStrings(rObjArr);
-		if(rObjArr.length > 0){
-			result[sheetName] =  rObjArr;
-		}
-	});
-	return result;
+        if(rObjArr.length > 0){
+            result[sheetName] =  rObjArr;
+        }
+    });
+    return result;
+}
+
+function clear_output() {
+    var out = document.getElementById("out");
+    if(out.innerHTML === undefined){
+        out.textContent = 'Loading...';
+    } else {
+        out.innerHTML = 'Loading...';
+    }
 }
 
 function print_output(output) {
@@ -113,8 +122,7 @@ function print_output(output) {
     if(out.innerHTML === undefined){
         out.textContent = output;
     } else {
-        out.innerHTML = 'Loading...';
-        window.setTimeout(function() {out.innerHTML = output;}, 500);
+        out.innerHTML = output;
     }
 }
 
@@ -131,18 +139,55 @@ var drop = document.getElementById('drop');
 //TODO: Test multiple forms
 function handleDrop(e) {
     document.getElementById('browsefile').value = '';
-	e.stopPropagation();
-	e.preventDefault();
-	var files = e.dataTransfer.files;
-	var f = files[0];
-    makeReader(f);
+    e.stopPropagation();
+    e.preventDefault();
+    if ( !drop.disabled ) {
+        var files = e.dataTransfer.files;
+        var f = files[0];
+        if ( f ) {
+            makeReader(f);
+        }
+    } else {
+        alert("drop ignored -- conversion in progress!");
+    }
 }
 
 var browse = document.getElementById("browsefile");
+var wasClicked = false;
+function handleFileChooserClick(e) {
+
+    // reset the value so that re-selecting the file will trigger a change event...
+    browse.value = '';
+    
+    if ( browse.disabled ) {
+        e.stopPropagation();
+        e.preventDefault();
+        alert("choose file ignored -- conversion in progress!");
+        return;
+    }
+
+    // debounce the file chooser...
+    if ( wasClicked ) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    wasClicked = true;
+    setTimeout(function() {
+        wasClicked = false;
+    }, 1000);
+    return wasClicked;
+}
+
 function handleFileSelect(e) {
     var files = e.target.files;
     var f = files[0];
-    makeReader(f);
+    if ( f ) {
+        makeReader(f);
+    }
+}
+function enableActions() {
+    browse.disabled = false;
+    drop.disabled = false;
 }
 function makeReader(f) {
     var reader = new FileReader();
@@ -164,6 +209,7 @@ function makeReader(f) {
             errorEl.innerHTML = "Sorry, XLS files are not supported.<br />";
             errorEl.innerHTML += "You can convert your XLS file to XLSX using libreOffice or Google Docs.";
             errorsEl.appendChild(errorEl);
+            enableActions();
             /*
             var cfb = CFB.read(data, {type:'binary'})
             window.cfbs[name] = cfb;
@@ -187,7 +233,9 @@ function makeReader(f) {
                     console.log(warning);
                     warnings.appendChild(warningEl);
                 });
+                enableActions();
             } catch(e) {
+                enableActions();
                 errorEl.innerHTML = String(e);
                 errorsEl.appendChild(errorEl);
                 throw e;
@@ -195,19 +243,25 @@ function makeReader(f) {
         }
     };
     try {
+        browse.disabled = true;
+        drop.disabled = true;
+        clear_output();
         reader.readAsBinaryString(f);
     } catch(e) {
+        enableActions();
         errorEl.innerHTML = "Could not read file.";
         throw e;
     }    
 }
 
 function handleDragover(e) {
-	e.stopPropagation();
-	e.preventDefault();
-	e.dataTransfer.dropEffect = 'copy';
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
 }
+browse.addEventListener('click', handleFileChooserClick, false);
 browse.addEventListener('change', handleFileSelect, false);
 drop.addEventListener('dragover', handleDragover, false);
 drop.addEventListener('drop', handleDrop, false);
+browse.disabled = false;
 </script>

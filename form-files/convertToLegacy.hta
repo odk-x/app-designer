@@ -216,7 +216,7 @@ function buildFormStructures( instanceBodyPrefix, bindPrefix, bodyPrefix, model 
 				contentType = defn.properties.contentType['default'];
 				bindBody += bindPrefix + element + '" type="binary"/>\n';
 				bodyBody += '<upload ref="' + bodyPrefix + element + '" mediatype="' + contentType + '"><label>Dummy</label></upload>\n';
-			} else if ( defn.isPersisted ) {
+			} else if ( defn.isUnitOfRetention ) {
 				instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
 				bindBody += bindPrefix + element + '" type="string"/>\n';
 			} else {

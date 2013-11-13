@@ -282,7 +282,7 @@ function parseVector(data) {
 	if(matches.length != h.size) throw "unexpected vector length " + matches.length + " != " + h.size;
 	var res = [];
 	matches.forEach(function(x) {
-		var v = x.replace(/<[/]?vt:variant>/g,"").match(/<vt:([^>]*)>(.*)</);
+		var v = x.replace(/<[\/]?vt:variant>/g,"").match(/<vt:([^>]*)>(.*)</);
 		res.push({v:v[2], t:v[1]});
 	});
 	return res;
