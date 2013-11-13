@@ -2,18 +2,30 @@
   "xlsx": {
     "survey": [
       {
+        "type": "integer",
+        "name": "default_rating",
+        "display": {
+          "text": "Enter an initial rating (1-10) for this survey",
+          "hint": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+        },
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 2
+      },
+      {
         "type": "select_multiple",
         "values_list": "examples",
         "name": "examples",
         "display": {
           "text": "Which examples would you like to see?"
         },
-        "_row_num": 2
+        "_row_num": 3
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'intents')",
-        "_row_num": 3
+        "_row_num": 4
       },
       {
         "type": "barcode",
@@ -21,7 +33,7 @@
         "display": {
           "text": "Scan a barcode"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       {
         "type": "geopoint",
@@ -29,7 +41,7 @@
         "display": {
           "text": "Capture your location"
         },
-        "_row_num": 5
+        "_row_num": 6
       },
       {
         "type": "image",
@@ -37,7 +49,7 @@
         "display": {
           "text": "Take a picture"
         },
-        "_row_num": 6
+        "_row_num": 7
       },
       {
         "type": "audio",
@@ -45,16 +57,16 @@
         "display": {
           "text": "Make a recording"
         },
-        "_row_num": 7
+        "_row_num": 8
       },
       {
         "clause": "end if",
-        "_row_num": 8
+        "_row_num": 9
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'label_features')",
-        "_row_num": 9
+        "_row_num": 10
       },
       {
         "type": "note",
@@ -63,7 +75,7 @@
           "hint": "So can <b>hints</b>"
         },
         "hideInContents": true,
-        "_row_num": 10
+        "_row_num": 11
       },
       {
         "type": "note",
@@ -73,7 +85,7 @@
           "image": "img/dolphin.png"
         },
         "hideInContents": true,
-        "_row_num": 11
+        "_row_num": 12
       },
       {
         "type": "text",
@@ -82,7 +94,7 @@
           "text": "Enter your name",
           "hint": "It will be used in the next question."
         },
-        "_row_num": 12
+        "_row_num": 13
       },
       {
         "type": "note",
@@ -91,16 +103,16 @@
           "hint": "Handlebars templates allow labels to change depending on the values previously entered."
         },
         "hideInContents": true,
-        "_row_num": 13
+        "_row_num": 14
       },
       {
         "clause": "end if",
-        "_row_num": 14
+        "_row_num": 15
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'dynamic_defaults')",
-        "_row_num": 15
+        "_row_num": 16
       },
       {
         "type": "integer",
@@ -108,26 +120,26 @@
         "display": {
           "text": "On average, how many cups of coffee do you drink in a day?"
         },
-        "_row_num": 16
+        "_row_num": 17
       },
       {
         "clause": "end if",
-        "_row_num": 17
+        "_row_num": 18
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'dynamic_defaults')",
-        "_row_num": 18
+        "_row_num": 19
       },
       {
         "clause": "begin screen",
-        "_row_num": 19
+        "_row_num": 20
       },
       {
         "type": "assign",
         "name": "coffee_today",
         "calculation": "(( data('coffee_today') == null ) ? data('avg_coffee') : data('coffee_today'))",
-        "_row_num": 20
+        "_row_num": 21
       },
       {
         "type": "integer",
@@ -135,20 +147,20 @@
         "display": {
           "text": "How many cups of coffee did you drink today?"
         },
-        "_row_num": 21
-      },
-      {
-        "clause": "end screen",
         "_row_num": 22
       },
       {
-        "clause": "end if",
+        "clause": "end screen",
         "_row_num": 23
+      },
+      {
+        "clause": "end if",
+        "_row_num": 24
       },
       {
         "clause": "if // demo_datetime",
         "condition": "selected(data('examples'), 'datetime')",
-        "_row_num": 24
+        "_row_num": 25
       },
       {
         "type": "date",
@@ -156,12 +168,12 @@
         "display": {
           "text": "When were you born?"
         },
-        "_row_num": 25
+        "_row_num": 26
       },
       {
         "clause": "if",
         "condition": "data('born') && data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()",
-        "_row_num": 26
+        "_row_num": 27
       },
       {
         "type": "note",
@@ -170,11 +182,11 @@
           "hint": "This prompt shows how to use dates in fomulas."
         },
         "hideInContents": true,
-        "_row_num": 27
+        "_row_num": 28
       },
       {
         "clause": "end if",
-        "_row_num": 28
+        "_row_num": 29
       },
       {
         "type": "time",
@@ -182,7 +194,7 @@
         "display": {
           "text": "What time do you usually wake up?"
         },
-        "_row_num": 29
+        "_row_num": 30
       },
       {
         "type": "datetime",
@@ -190,16 +202,16 @@
         "display": {
           "text": "When will you be available for a follow up survey?"
         },
-        "_row_num": 30
+        "_row_num": 31
       },
       {
         "clause": "end if // demo_datetime",
-        "_row_num": 31
+        "_row_num": 32
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'geopoint')",
-        "_row_num": 32
+        "_row_num": 33
       },
       {
         "type": "geopoint",
@@ -207,20 +219,20 @@
         "display": {
           "text": "Record your location:"
         },
-        "_row_num": 33
+        "_row_num": 34
       },
       {
         "clause": "end if",
-        "_row_num": 34
+        "_row_num": 35
       },
       {
         "clause": "if // demo_screen_group",
         "condition": "selected(data('examples'), 'screen_group')",
-        "_row_num": 35
+        "_row_num": 36
       },
       {
         "clause": "begin screen",
-        "_row_num": 36
+        "_row_num": 37
       },
       {
         "type": "select_multiple",
@@ -229,12 +241,12 @@
         "display": {
           "text": "Which continents have you visited?"
         },
-        "_row_num": 37
+        "_row_num": 38
       },
       {
         "clause": "if",
         "condition": "calculates.ask_about_seattle()",
-        "_row_num": 38
+        "_row_num": 39
       },
       {
         "type": "select_one",
@@ -243,28 +255,28 @@
         "display": {
           "text": "Have you visited Seattle?"
         },
-        "_row_num": 39
-      },
-      {
-        "clause": "end if",
         "_row_num": 40
       },
       {
-        "clause": "end screen",
+        "clause": "end if",
         "_row_num": 41
       },
       {
-        "clause": "end if // demo_screen_group",
+        "clause": "end screen",
         "_row_num": 42
+      },
+      {
+        "clause": "end if // demo_screen_group",
+        "_row_num": 43
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'media')",
-        "_row_num": 43
+        "_row_num": 44
       },
       {
         "clause": "begin screen",
-        "_row_num": 44
+        "_row_num": 45
       },
       {
         "type": "audio",
@@ -272,7 +284,7 @@
         "display": {
           "text": "Make a recording:"
         },
-        "_row_num": 45
+        "_row_num": 46
       },
       {
         "type": "video",
@@ -280,7 +292,7 @@
         "display": {
           "text": "Take a video:"
         },
-        "_row_num": 46
+        "_row_num": 47
       },
       {
         "type": "image",
@@ -288,24 +300,24 @@
         "display": {
           "text": "Take a picture:"
         },
-        "_row_num": 47
-      },
-      {
-        "clause": "end screen",
         "_row_num": 48
       },
       {
-        "clause": "end if",
+        "clause": "end screen",
         "_row_num": 49
+      },
+      {
+        "clause": "end if",
+        "_row_num": 50
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'custom_template')",
-        "_row_num": 50
+        "_row_num": 51
       },
       {
         "clause": "begin screen",
-        "_row_num": 51
+        "_row_num": 52
       },
       {
         "type": "note",
@@ -313,7 +325,7 @@
           "text": "The following data will be used to generate a weight for age plot."
         },
         "hideInContents": true,
-        "_row_num": 52
+        "_row_num": 53
       },
       {
         "type": "integer",
@@ -324,7 +336,7 @@
         },
         "constraint": "data('age') <= 20",
         "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
-        "_row_num": 53
+        "_row_num": 54
       },
       {
         "type": "decimal",
@@ -332,7 +344,7 @@
         "display": {
           "text": "Enter weight (in lbs):"
         },
-        "_row_num": 54
+        "_row_num": 55
       },
       {
         "type": "select_one",
@@ -341,11 +353,11 @@
         "display": {
           "text": "Enter sex:"
         },
-        "_row_num": 55
+        "_row_num": 56
       },
       {
         "clause": "end screen",
-        "_row_num": 56
+        "_row_num": 57
       },
       {
         "type": "note",
@@ -355,21 +367,21 @@
         },
         "templatePath": "ageWeightPlot.handlebars",
         "hideInContents": true,
-        "_row_num": 57
-      },
-      {
-        "clause": "end if",
         "_row_num": 58
       },
       {
-        "clause": "begin screen",
+        "clause": "end if",
         "_row_num": 59
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 60
       },
       {
         "type": "assign",
         "name": "rating",
-        "calculation": "((data('rating') == null) ? 5 : data('rating'))",
-        "_row_num": 60
+        "calculation": "((data('rating') == null) ? data('default_rating') : data('rating'))",
+        "_row_num": 61
       },
       {
         "type": "integer",
@@ -383,11 +395,11 @@
           "min": 1,
           "max": 10
         },
-        "_row_num": 61
+        "_row_num": 62
       },
       {
         "clause": "end screen",
-        "_row_num": 62
+        "_row_num": 63
       }
     ],
     "calculates": [
@@ -809,10 +821,21 @@
       }
     },
     "model": {
-      "examples": {
+      "default_rating": {
         "_defn": [
           {
             "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "isSessionVariable": true,
+        "elementKey": "default_rating"
+      },
+      "examples": {
+        "_defn": [
+          {
+            "_row_num": 3,
             "section_name": "survey"
           }
         ],
@@ -827,7 +850,7 @@
       "barcode": {
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "survey"
           }
         ],
@@ -837,7 +860,7 @@
       "geopoint": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -866,7 +889,7 @@
       "picture": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -889,7 +912,7 @@
       "recording": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -912,7 +935,7 @@
       "name": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -922,7 +945,7 @@
       "avg_coffee": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 17,
             "section_name": "survey"
           }
         ],
@@ -932,7 +955,7 @@
       "coffee_today": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -942,7 +965,7 @@
       "born": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -953,7 +976,7 @@
       "time": {
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -964,7 +987,7 @@
       "datetime": {
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -975,7 +998,7 @@
       "location": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -1004,7 +1027,7 @@
       "visited_continents": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -1019,7 +1042,7 @@
       "visited_seattle": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -1029,7 +1052,7 @@
       "audio_test": {
         "_defn": [
           {
-            "_row_num": 45,
+            "_row_num": 46,
             "section_name": "survey"
           }
         ],
@@ -1052,7 +1075,7 @@
       "video_test": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -1075,7 +1098,7 @@
       "image_test": {
         "_defn": [
           {
-            "_row_num": 47,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -1098,7 +1121,7 @@
       "age": {
         "_defn": [
           {
-            "_row_num": 53,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -1108,7 +1131,7 @@
       "weight": {
         "_defn": [
           {
-            "_row_num": 54,
+            "_row_num": 55,
             "section_name": "survey"
           }
         ],
@@ -1118,7 +1141,7 @@
       "sex": {
         "_defn": [
           {
-            "_row_num": 55,
+            "_row_num": 56,
             "section_name": "survey"
           }
         ],
@@ -1128,7 +1151,7 @@
       "rating": {
         "_defn": [
           {
-            "_row_num": 61,
+            "_row_num": 62,
             "section_name": "survey"
           }
         ],
@@ -1147,18 +1170,35 @@
         "reachable_sections": {},
         "prompts": [
           {
+            "type": "integer",
+            "name": "default_rating",
+            "display": {
+              "text": "Enter an initial rating (1-10) for this survey",
+              "hint": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+            },
+            "model": {
+              "isSessionVariable": true
+            },
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
             "type": "select_multiple",
             "values_list": "examples",
             "name": "examples",
             "display": {
               "text": "Which examples would you like to see?"
             },
-            "_row_num": 2,
-            "__rowNum__": 1,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 0
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 1
           },
           {
             "type": "barcode",
@@ -1166,12 +1206,12 @@
             "display": {
               "text": "Scan a barcode"
             },
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 1
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 2
           },
           {
             "type": "geopoint",
@@ -1179,12 +1219,12 @@
             "display": {
               "text": "Capture your location"
             },
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen5",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 3
           },
           {
             "type": "image",
@@ -1192,12 +1232,12 @@
             "display": {
               "text": "Take a picture"
             },
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 4
           },
           {
             "type": "audio",
@@ -1205,33 +1245,18 @@
             "display": {
               "text": "Make a recording"
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "audio",
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 4
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 5
           },
           {
             "type": "note",
             "display": {
               "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>",
               "hint": "So can <b>hints</b>"
-            },
-            "hideInContents": true,
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 5
-          },
-          {
-            "type": "note",
-            "display": {
-              "text": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
-              "audio": "audio/carrioncrow.mp3",
-              "image": "img/dolphin.png"
             },
             "hideInContents": true,
             "_row_num": 11,
@@ -1242,18 +1267,33 @@
             "promptIdx": 6
           },
           {
+            "type": "note",
+            "display": {
+              "text": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
+              "audio": "audio/carrioncrow.mp3",
+              "image": "img/dolphin.png"
+            },
+            "hideInContents": true,
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 7
+          },
+          {
             "type": "text",
             "name": "name",
             "display": {
               "text": "Enter your name",
               "hint": "It will be used in the next question."
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 8
           },
           {
             "type": "note",
@@ -1262,12 +1302,12 @@
               "hint": "Handlebars templates allow labels to change depending on the values previously entered."
             },
             "hideInContents": true,
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen13",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 9
           },
           {
             "type": "integer",
@@ -1275,12 +1315,12 @@
             "display": {
               "text": "On average, how many cups of coffee do you drink in a day?"
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 10
           },
           {
             "type": "integer",
@@ -1288,12 +1328,12 @@
             "display": {
               "text": "How many cups of coffee did you drink today?"
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen19",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen20",
+            "promptIdx": 11
           },
           {
             "type": "date",
@@ -1301,12 +1341,12 @@
             "display": {
               "text": "When were you born?"
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen25",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen26",
+            "promptIdx": 12
           },
           {
             "type": "note",
@@ -1315,12 +1355,12 @@
               "hint": "This prompt shows how to use dates in fomulas."
             },
             "hideInContents": true,
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen28",
+            "promptIdx": 13
           },
           {
             "type": "time",
@@ -1328,12 +1368,12 @@
             "display": {
               "text": "What time do you usually wake up?"
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "time",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 14
           },
           {
             "type": "datetime",
@@ -1341,12 +1381,12 @@
             "display": {
               "text": "When will you be available for a follow up survey?"
             },
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "datetime",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen31",
+            "promptIdx": 15
           },
           {
             "type": "geopoint",
@@ -1354,12 +1394,12 @@
             "display": {
               "text": "Record your location:"
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 16
           },
           {
             "type": "select_multiple",
@@ -1368,12 +1408,12 @@
             "display": {
               "text": "Which continents have you visited?"
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen37",
+            "promptIdx": 17
           },
           {
             "type": "select_one",
@@ -1382,12 +1422,12 @@
             "display": {
               "text": "Have you visited Seattle?"
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen37",
+            "promptIdx": 18
           },
           {
             "type": "audio",
@@ -1395,12 +1435,12 @@
             "display": {
               "text": "Make a recording:"
             },
-            "_row_num": 45,
-            "__rowNum__": 44,
+            "_row_num": 46,
+            "__rowNum__": 45,
             "_token_type": "prompt",
             "_type": "audio",
-            "_branch_label_enclosing_screen": "survey/_screen44",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen45",
+            "promptIdx": 19
           },
           {
             "type": "video",
@@ -1408,12 +1448,12 @@
             "display": {
               "text": "Take a video:"
             },
-            "_row_num": 46,
-            "__rowNum__": 45,
+            "_row_num": 47,
+            "__rowNum__": 46,
             "_token_type": "prompt",
             "_type": "video",
-            "_branch_label_enclosing_screen": "survey/_screen44",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen45",
+            "promptIdx": 20
           },
           {
             "type": "image",
@@ -1421,12 +1461,12 @@
             "display": {
               "text": "Take a picture:"
             },
-            "_row_num": 47,
-            "__rowNum__": 46,
+            "_row_num": 48,
+            "__rowNum__": 47,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen44",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen45",
+            "promptIdx": 21
           },
           {
             "type": "note",
@@ -1434,12 +1474,12 @@
               "text": "The following data will be used to generate a weight for age plot."
             },
             "hideInContents": true,
-            "_row_num": 52,
-            "__rowNum__": 51,
+            "_row_num": 53,
+            "__rowNum__": 52,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen51",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen52",
+            "promptIdx": 22
           },
           {
             "type": "integer",
@@ -1450,12 +1490,12 @@
             },
             "constraint": "data('age') <= 20",
             "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
-            "_row_num": 53,
-            "__rowNum__": 52,
+            "_row_num": 54,
+            "__rowNum__": 53,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen51",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen52",
+            "promptIdx": 23
           },
           {
             "type": "decimal",
@@ -1463,12 +1503,12 @@
             "display": {
               "text": "Enter weight (in lbs):"
             },
-            "_row_num": 54,
-            "__rowNum__": 53,
+            "_row_num": 55,
+            "__rowNum__": 54,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen51",
-            "promptIdx": 23
+            "_branch_label_enclosing_screen": "survey/_screen52",
+            "promptIdx": 24
           },
           {
             "type": "select_one",
@@ -1477,12 +1517,12 @@
             "display": {
               "text": "Enter sex:"
             },
-            "_row_num": 55,
-            "__rowNum__": 54,
+            "_row_num": 56,
+            "__rowNum__": 55,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen51",
-            "promptIdx": 24
+            "_branch_label_enclosing_screen": "survey/_screen52",
+            "promptIdx": 25
           },
           {
             "type": "note",
@@ -1492,12 +1532,12 @@
             },
             "templatePath": "ageWeightPlot.handlebars",
             "hideInContents": true,
-            "_row_num": 57,
-            "__rowNum__": 56,
+            "_row_num": 58,
+            "__rowNum__": 57,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen57",
-            "promptIdx": 25
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 26
           },
           {
             "type": "integer",
@@ -1511,25 +1551,25 @@
               "min": 1,
               "max": 10
             },
-            "_row_num": 61,
-            "__rowNum__": 60,
+            "_row_num": 62,
+            "__rowNum__": 61,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen59",
-            "promptIdx": 26
+            "_branch_label_enclosing_screen": "survey/_screen60",
+            "promptIdx": 27
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 63,
-            "_branch_label_enclosing_screen": "survey/_screen63",
-            "promptIdx": 27
+            "_row_num": 64,
+            "_branch_label_enclosing_screen": "survey/_screen64",
+            "promptIdx": 28
           }
         ],
         "validation_tag_map": {
           "finalize": [
-            22
+            23
           ]
         },
         "operations": [
@@ -1540,25 +1580,25 @@
             "operationIdx": 0
           },
           {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
             "clause": "if",
             "condition": "selected(data('examples'), 'intents')",
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "goto_label",
-            "_branch_label": "_then3",
-            "operationIdx": 1
+            "_branch_label": "_then4",
+            "operationIdx": 2
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else8",
-            "_row_num": 8,
-            "operationIdx": 2
-          },
-          {
-            "_row_num": 4,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_branch_label": "_else9",
+            "_row_num": 9,
             "operationIdx": 3
           },
           {
@@ -1580,32 +1620,32 @@
             "operationIdx": 6
           },
           {
+            "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif8",
-            "_row_num": 8,
-            "operationIdx": 7
+            "_branch_label": "_endif9",
+            "_row_num": 9,
+            "operationIdx": 8
           },
           {
             "clause": "if",
             "condition": "selected(data('examples'), 'label_features')",
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "goto_label",
-            "_branch_label": "_then9",
-            "operationIdx": 8
+            "_branch_label": "_then10",
+            "operationIdx": 9
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else14",
-            "_row_num": 14,
-            "operationIdx": 9
-          },
-          {
-            "_row_num": 10,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_branch_label": "_else15",
+            "_row_num": 15,
             "operationIdx": 10
           },
           {
@@ -1627,134 +1667,134 @@
             "operationIdx": 13
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif14",
             "_row_num": 14,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 14
           },
           {
-            "clause": "if",
-            "condition": "selected(data('examples'), 'dynamic_defaults')",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_then15",
+            "_branch_label": "_endif15",
+            "_row_num": 15,
             "operationIdx": 15
           },
           {
-            "clause": "end if",
+            "clause": "if",
+            "condition": "selected(data('examples'), 'dynamic_defaults')",
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "goto_label",
-            "_branch_label": "_else17",
-            "_row_num": 17,
+            "_branch_label": "_then16",
             "operationIdx": 16
           },
           {
-            "_row_num": 16,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else18",
+            "_row_num": 18,
             "operationIdx": 17
+          },
+          {
+            "_row_num": 17,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif17",
-            "_row_num": 17,
-            "operationIdx": 18
+            "_branch_label": "_endif18",
+            "_row_num": 18,
+            "operationIdx": 19
           },
           {
             "clause": "if",
             "condition": "selected(data('examples'), 'dynamic_defaults')",
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "goto_label",
-            "_branch_label": "_then18",
-            "operationIdx": 19
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else23",
-            "_row_num": 23,
+            "_branch_label": "_then19",
             "operationIdx": 20
           },
           {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else24",
+            "_row_num": 24,
+            "operationIdx": 21
+          },
+          {
             "clause": "begin screen",
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 22,
-              "__rowNum__": 21,
+              "_row_num": 23,
+              "__rowNum__": 22,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('coffee_today', (( data('coffee_today') == null ) ? data('avg_coffee') : data('coffee_today')));\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 21
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('coffee_today', (( data('coffee_today') == null ) ? data('avg_coffee') : data('coffee_today')));\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 22
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif23",
-            "_row_num": 23,
-            "operationIdx": 22
+            "_branch_label": "_endif24",
+            "_row_num": 24,
+            "operationIdx": 23
           },
           {
             "clause": "if // demo_datetime",
             "condition": "selected(data('examples'), 'datetime')",
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "goto_label",
             "_tag_name": "demo_datetime",
-            "_branch_label": "_then24",
-            "operationIdx": 23
+            "_branch_label": "_then25",
+            "operationIdx": 24
           },
           {
             "clause": "end if // demo_datetime",
             "_token_type": "goto_label",
-            "_branch_label": "_else31",
-            "_row_num": 31,
-            "operationIdx": 24
+            "_branch_label": "_else32",
+            "_row_num": 32,
+            "operationIdx": 25
           },
           {
-            "_row_num": 25,
+            "_row_num": 26,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 25
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 26
           },
           {
             "clause": "if",
             "condition": "data('born') && data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()",
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "goto_label",
-            "_branch_label": "_then26",
-            "operationIdx": 26
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else28",
-            "_row_num": 28,
+            "_branch_label": "_then27",
             "operationIdx": 27
           },
           {
-            "_row_num": 27,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else29",
+            "_row_num": 29,
             "operationIdx": 28
+          },
+          {
+            "_row_num": 28,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 29
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif28",
-            "_row_num": 28,
-            "operationIdx": 29
-          },
-          {
+            "_branch_label": "_endif29",
             "_row_num": 29,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 30
           },
           {
@@ -1764,246 +1804,253 @@
             "operationIdx": 31
           },
           {
+            "_row_num": 31,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 32
+          },
+          {
             "clause": "end if // demo_datetime",
             "_token_type": "goto_label",
-            "_branch_label": "_endif31",
-            "_row_num": 31,
-            "operationIdx": 32
+            "_branch_label": "_endif32",
+            "_row_num": 32,
+            "operationIdx": 33
           },
           {
             "clause": "if",
             "condition": "selected(data('examples'), 'geopoint')",
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "goto_label",
-            "_branch_label": "_then32",
-            "operationIdx": 33
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else34",
-            "_row_num": 34,
+            "_branch_label": "_then33",
             "operationIdx": 34
           },
           {
-            "_row_num": 33,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else35",
+            "_row_num": 35,
             "operationIdx": 35
+          },
+          {
+            "_row_num": 34,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 36
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif34",
-            "_row_num": 34,
-            "operationIdx": 36
+            "_branch_label": "_endif35",
+            "_row_num": 35,
+            "operationIdx": 37
           },
           {
             "clause": "if // demo_screen_group",
             "condition": "selected(data('examples'), 'screen_group')",
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "goto_label",
             "_tag_name": "demo_screen_group",
-            "_branch_label": "_then35",
-            "operationIdx": 37
-          },
-          {
-            "clause": "end if // demo_screen_group",
-            "_token_type": "goto_label",
-            "_branch_label": "_else42",
-            "_row_num": 42,
+            "_branch_label": "_then36",
             "operationIdx": 38
           },
           {
+            "clause": "end if // demo_screen_group",
+            "_token_type": "goto_label",
+            "_branch_label": "_else43",
+            "_row_num": 43,
+            "operationIdx": 39
+          },
+          {
             "clause": "begin screen",
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 41,
-              "__rowNum__": 40,
+              "_row_num": 42,
+              "__rowNum__": 41,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nif (calculates.ask_about_seattle()) {\nactivePromptIndicies.push(17);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 39
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nif (calculates.ask_about_seattle()) {\nactivePromptIndicies.push(18);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 40
           },
           {
             "clause": "end if // demo_screen_group",
             "_token_type": "goto_label",
-            "_branch_label": "_endif42",
-            "_row_num": 42,
-            "operationIdx": 40
+            "_branch_label": "_endif43",
+            "_row_num": 43,
+            "operationIdx": 41
           },
           {
             "clause": "if",
             "condition": "selected(data('examples'), 'media')",
-            "_row_num": 43,
-            "__rowNum__": 42,
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "goto_label",
-            "_branch_label": "_then43",
-            "operationIdx": 41
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else49",
-            "_row_num": 49,
+            "_branch_label": "_then44",
             "operationIdx": 42
           },
           {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else50",
+            "_row_num": 50,
+            "operationIdx": 43
+          },
+          {
             "clause": "begin screen",
-            "_row_num": 44,
-            "__rowNum__": 43,
+            "_row_num": 45,
+            "__rowNum__": 44,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 48,
-              "__rowNum__": 47,
+              "_row_num": 49,
+              "__rowNum__": 48,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 43
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 44
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif49",
-            "_row_num": 49,
-            "operationIdx": 44
+            "_branch_label": "_endif50",
+            "_row_num": 50,
+            "operationIdx": 45
           },
           {
             "clause": "if",
             "condition": "selected(data('examples'), 'custom_template')",
-            "_row_num": 50,
-            "__rowNum__": 49,
+            "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "goto_label",
-            "_branch_label": "_then50",
-            "operationIdx": 45
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else58",
-            "_row_num": 58,
+            "_branch_label": "_then51",
             "operationIdx": 46
           },
           {
-            "clause": "begin screen",
-            "_row_num": 51,
-            "__rowNum__": 50,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 56,
-              "__rowNum__": 55,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else59",
+            "_row_num": 59,
             "operationIdx": 47
           },
           {
-            "_row_num": 57,
+            "clause": "begin screen",
+            "_row_num": 52,
+            "__rowNum__": 51,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 57,
+              "__rowNum__": 56,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 48
+          },
+          {
+            "_row_num": 58,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 49
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif58",
-            "_row_num": 58,
-            "operationIdx": 49
+            "_branch_label": "_endif59",
+            "_row_num": 59,
+            "operationIdx": 50
           },
           {
             "clause": "begin screen",
-            "_row_num": 59,
-            "__rowNum__": 58,
+            "_row_num": 60,
+            "__rowNum__": 59,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 62,
-              "__rowNum__": 61,
+              "_row_num": 63,
+              "__rowNum__": 62,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('rating', ((data('rating') == null) ? 5 : data('rating')));\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 50
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('rating', ((data('rating') == null) ? data('default_rating') : data('rating')));\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 51
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 63,
-            "operationIdx": 51
+            "_row_num": 64,
+            "operationIdx": 52
           },
           {
-            "_row_num": 63,
+            "_row_num": 64,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 52
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 53
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
-            "_row_num": 63,
-            "operationIdx": 53
+            "_row_num": 64,
+            "operationIdx": 54
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_then3": 3,
-          "_screen4": 3,
+          "_screen3": 1,
+          "_then4": 4,
           "_screen5": 4,
           "_screen6": 5,
           "_screen7": 6,
-          "_else8": 8,
-          "_endif8": 8,
-          "_then9": 10,
-          "_screen10": 10,
+          "_screen8": 7,
+          "_else9": 9,
+          "_endif9": 9,
+          "_then10": 11,
           "_screen11": 11,
           "_screen12": 12,
           "_screen13": 13,
-          "_else14": 15,
-          "_endif14": 15,
-          "_then15": 17,
-          "_screen16": 17,
-          "_else17": 19,
-          "_endif17": 19,
-          "_then18": 21,
-          "_screen19": 21,
-          "_else23": 23,
-          "_endif23": 23,
-          "_then24": 25,
-          "_screen25": 25,
-          "_then26": 28,
-          "_screen27": 28,
-          "_else28": 30,
-          "_endif28": 30,
-          "_screen29": 30,
+          "_screen14": 14,
+          "_else15": 16,
+          "_endif15": 16,
+          "_then16": 18,
+          "_screen17": 18,
+          "_else18": 20,
+          "_endif18": 20,
+          "_then19": 22,
+          "_screen20": 22,
+          "_else24": 24,
+          "_endif24": 24,
+          "_then25": 26,
+          "_screen26": 26,
+          "_then27": 29,
+          "_screen28": 29,
+          "_else29": 31,
+          "_endif29": 31,
           "_screen30": 31,
-          "_else31": 33,
-          "_endif31": 33,
-          "_then32": 35,
-          "_screen33": 35,
-          "_else34": 37,
-          "_endif34": 37,
-          "_then35": 39,
-          "_screen36": 39,
-          "_else42": 41,
-          "_endif42": 41,
-          "_then43": 43,
-          "_screen44": 43,
-          "_else49": 45,
-          "_endif49": 45,
-          "_then50": 47,
-          "_screen51": 47,
-          "_screen57": 48,
-          "_else58": 50,
-          "_endif58": 50,
-          "_screen59": 50,
-          "_contents": 52,
-          "_screen63": 52
+          "_screen31": 32,
+          "_else32": 34,
+          "_endif32": 34,
+          "_then33": 36,
+          "_screen34": 36,
+          "_else35": 38,
+          "_endif35": 38,
+          "_then36": 40,
+          "_screen37": 40,
+          "_else43": 42,
+          "_endif43": 42,
+          "_then44": 44,
+          "_screen45": 44,
+          "_else50": 46,
+          "_endif50": 46,
+          "_then51": 48,
+          "_screen52": 48,
+          "_screen58": 49,
+          "_else59": 51,
+          "_endif59": 51,
+          "_screen60": 51,
+          "_contents": 53,
+          "_screen64": 53
         }
       },
       "initial": {
