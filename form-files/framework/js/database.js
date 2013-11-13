@@ -191,22 +191,21 @@ putDataKeyValueMap:function(ctxt, kvMap) {
             });
     }
 },
-getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
+getAllData:function(ctxt, mdl, instanceId) {
       var that = this;
-      var tlo = { data: {}, metadata: {}};
+      mdl.data = {};
+      mdl.metadata = {};
+      mdl.loaded = false;
       ctxt.log('D','getAllData');
-      var tmpctxt = $.extend({},ctxt,{success:function() {
-                ctxt.log('D',"getAllData.success");
-                ctxt.success(tlo);
-            }});
       if ( instanceId === undefined || instanceId === null ) {
         ctxt.log('D',"getAllData.instanceId.null");
-        tmpctxt.success();
+        mdl.loaded = true;
+        ctxt.success();
         return;
       }
-      that.withDb( tmpctxt, function(transaction) {
-        var ss = databaseSchema.selectAllFromDataTableStmt(dbTableName, instanceId);
-        tmpctxt.sqlStatement = ss;
+      that.withDb( ctxt, function(transaction) {
+        var ss = databaseSchema.selectAllFromDataTableStmt(mdl.tableMetadata.dbTableName, instanceId);
+        ctxt.sqlStatement = ss;
         transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
             var len = result.rows.length;
             if (len === 0 ) {
@@ -220,8 +219,8 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
                 
                 var updates = {};
                 // and then just snarf the fields...
-                for ( dbKey in dataTableModel ) {
-                    jsonType = dataTableModel[dbKey];
+                for ( dbKey in mdl.dataTableModel ) {
+                    jsonType = mdl.dataTableModel[dbKey];
                     if ( jsonType.isUnitOfRetention ) {
                         elementPath = jsonType.elementPath;
                         if ( jsonType.isSessionVariable ) {
@@ -234,6 +233,7 @@ getAllData:function(ctxt, dataTableModel, dbTableName, instanceId) {
                 }
     
                 databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, updates);
+                mdl.loaded = true;
             }
         });
       });
@@ -243,13 +243,7 @@ cacheAllData:function(ctxt, instanceId) {
     if (mdl.loaded) {
         ctxt.success();
     } else {
-        this.getAllData($.extend({},ctxt,{success:function(tlo) {
-            ctxt.log('I',"cacheAllData.success");
-            mdl.metadata = tlo.metadata;
-            mdl.data = tlo.data;
-            mdl.loaded = true;
-            ctxt.success();
-        }}), mdl.dataTableModel, mdl.tableMetadata.dbTableName, instanceId);
+        this.getAllData(ctxt, mdl, instanceId);
     }
 },
 /////////////////////////////////////////////////////////////////////////

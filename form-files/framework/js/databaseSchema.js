@@ -1,9 +1,9 @@
 'use strict';
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
-define(['mdl','databaseUtils'], function(mdl, databaseUtils) {
+define(['mdl','databaseUtils','opendatakit'], function(mdl, databaseUtils,opendatakit) {
 verifyLoad('databaseSchema',
-    ['mdl','databaseUtils'],
-    [mdl,databaseUtils]);
+    ['mdl','databaseUtils','opendatakit'],
+    [mdl,databaseUtils,opendatakit]);
 return {
         // maps of:
         //   dbColumnName : { 
@@ -186,7 +186,11 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
                 comma = ', ';
             }
             var elementPath = defElement['elementPath'];
-            if ( elementPath === undefined || elementPath === null ) elementPath = f;
+            // don't allow working with elementKey primitives if not manipulating metadata
+            if (( elementPath === undefined || elementPath === null ) && 
+                  defElement.elementSet === 'instanceMetadata') {
+                elementPath = f;
+            }
             // TODO: get kvElement for this elementPath
             elementPathPair = databaseUtils.getElementPathPairFromKvMap(kvMap, elementPath);
             if ( elementPathPair != null ) {
@@ -203,7 +207,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
                 } else {
                     // remap kvElement.value into storage value...
                     v = databaseUtils.toDatabaseFromElementType(defElement, kvElement.value);
-                    updates[f].value = v; 
+                    updates[f] = {"elementPath" : elementPath, "value": v};
                     if ( !defElement.isSessionVariable ) {
                         stmt += "?";
                         bindings.push(v);
@@ -302,7 +306,11 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
                 comma = ', ';
             }
             var elementPath = defElement['elementPath'];
-            if ( elementPath === undefined || elementPath === null ) elementPath = f;
+            // don't allow working with elementKey primitives if not manipulating metadata
+            if (( elementPath === undefined || elementPath === null ) && 
+                  defElement.elementSet === 'instanceMetadata') {
+                elementPath = f;
+            }
             // TODO: get kvElement for this elementPath
             elementPathPair = databaseUtils.getElementPathPairFromKvMap(kvMap, elementPath);
             if ( elementPathPair != null ) {
