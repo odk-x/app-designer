@@ -211,13 +211,14 @@ promptTypes.base = Backbone.View.extend({
         if ( value === undefined || value === null || value === "" ) {
             if ( isRequired ) {
                 that.valid = false;
-
-                return { message: that.required_message + " " + fieldDisplayName };
+                var localizeRequiredMessage = formulaFunctions.localize(that.required_message,locale);
+                return { message: localizeRequiredMessage + " " + fieldDisplayName };
             }
         } else if ( 'validateValue' in that ) {
             if ( !that.validateValue() ) {
                 that.valid = false;
-                return { message: that.invalid_value_message + " " + fieldDisplayName };
+                var localizeInvalidValueMessage = formulaFunctions.localize(that.invalid_value_message,locale);
+                return { message: localizeInvalidValueMessage + " " + fieldDisplayName };
             }
         } 
         if ( 'constraint' in that ) {
@@ -226,7 +227,8 @@ promptTypes.base = Backbone.View.extend({
                 outcome = that.constraint({"allowExceptions":true});
                 if ( !outcome ) {
                     that.valid = false;
-                    return { message: that.constraint_message + " " + fieldDisplayName };
+                    var localizeConstraintMessage = formulaFunctions.localize(that.constraint_message,locale);
+                    return { message: localizeConstraintMessage + " " + fieldDisplayName };
                 }
             } catch (e) {
                 shim.log('E',"prompts."+that.type+".baseValidate.constraint.exception px: " +
