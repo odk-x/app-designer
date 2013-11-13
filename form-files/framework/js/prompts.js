@@ -211,13 +211,14 @@ promptTypes.base = Backbone.View.extend({
         if ( value === undefined || value === null || value === "" ) {
             if ( isRequired ) {
                 that.valid = false;
-
-                return { message: that.required_message + " " + fieldDisplayName };
+                var localizeRequiredMessage = formulaFunctions.localize(that.required_message,locale);
+                return { message: localizeRequiredMessage + " " + fieldDisplayName };
             }
         } else if ( 'validateValue' in that ) {
             if ( !that.validateValue() ) {
                 that.valid = false;
-                return { message: that.invalid_value_message + " " + fieldDisplayName };
+                var localizeInvalidValueMessage = formulaFunctions.localize(that.invalid_value_message,locale);
+                return { message: localizeInvalidValueMessage + " " + fieldDisplayName };
             }
         } 
         if ( 'constraint' in that ) {
@@ -226,7 +227,8 @@ promptTypes.base = Backbone.View.extend({
                 outcome = that.constraint({"allowExceptions":true});
                 if ( !outcome ) {
                     that.valid = false;
-                    return { message: that.constraint_message + " " + fieldDisplayName };
+                    var localizeConstraintMessage = formulaFunctions.localize(that.constraint_message,locale);
+                    return { message: localizeConstraintMessage + " " + fieldDisplayName };
                 }
             } catch (e) {
                 shim.log('E',"prompts."+that.type+".baseValidate.constraint.exception px: " +
@@ -475,21 +477,15 @@ promptTypes.contents = promptTypes.base.extend({
         ctxt.success();
     }
 });
-promptTypes.linked_table = promptTypes.base.extend({
-    type: "linked_table",
-    valid: true,
-    templatePath: 'templates/linked_table.handlebars',
-    launchAction: 'org.opendatakit.survey.android.activities.MainMenuActivity',
+promptTypes._linked_type = promptTypes.base.extend({
+    type: "_linked_type",
     linked_form_id: null,
     linked_table_id: null,
     selection: null, // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     selectionArgs: function() {return null;},
     order_by: null, // must be: (elementName [asc|desc] )+  -- same restriction as selection -- cannot be elementPath
-    events: {
-        "click .openInstance": "openInstance",
-        "click .deleteInstance": "deleteInstance",
-        "click .addInstance": "addInstance"
-    },
+    _cachedSelection: null,
+    _cachedOrderBy: null,
     getLinkedTableId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         if ( queryDefn != null )
@@ -508,6 +504,30 @@ promptTypes.linked_table = promptTypes.base.extend({
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
 
         return '../tables/' + this.getLinkedTableId() + '/forms/' + queryDefn.linked_form_id + '/'; 
+    },
+    convertSelection: function(linkedMdl) {
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
+        var that = this;
+        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
+            return null;
+        }
+        if ( that._cachedSelection != null ) {
+            return that._cachedSelection;
+        }
+        that._cachedSelection = database.convertSelectionString(linkedMdl, queryDefn.selection);
+        return that._cachedSelection;
+    },
+    convertOrderBy: function(linkedMdl) {
+        var that = this;
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
+        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
+            return null;
+        }
+        if ( that._cachedOrderBy != null ) {
+            return that._cachedOrderBy;
+        }
+        that._cachedOrderBy = database.convertOrderByString(linkedMdl, queryDefn.order_by);
+        return that._cachedOrderBy;
     },
     _linkedCachedMdl: null,
     _linkedCachedInstanceName: null,
@@ -533,31 +553,42 @@ promptTypes.linked_table = promptTypes.base.extend({
             }}), formDef, that.getLinkedTableId(), filePath);
         }}), filePath );
     },
-    _cachedSelection: null,
-    convertSelection: function(linkedMdl) {
-        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
+    getCallback: function(promptPath, byinternalPromptContext, byaction) {
         var that = this;
-        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
-            return null;
+        if ( that.getPromptPath() != promptPath ) {
+            throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
-        if ( that._cachedSelection != null ) {
-            return that._cachedSelection;
-        }
-        that._cachedSelection = database.convertSelectionString(linkedMdl, queryDefn.selection);
-        return that._cachedSelection;
-    },
-    _cachedOrderBy: null,
-    convertOrderBy: function(linkedMdl) {
-        var that = this;
-        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
-            return null;
-        }
-        if ( that._cachedOrderBy != null ) {
-            return that._cachedOrderBy;
-        }
-        that._cachedOrderBy = database.convertOrderByString(linkedMdl, queryDefn.order_by);
-        return that._cachedOrderBy;
+        return function(ctxt, internalPromptContext, action, jsonString) {
+            ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
+                " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+            var jsonObject = JSON.parse(jsonString);
+            if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
+                ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
+                    " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+                that.enableButtons();
+                that.reRender(ctxt);
+            }
+            else {
+                ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent', 
+                    "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + 
+                    internalPromptContext + " action: " + action + " jsonString: " + jsonString);
+                that.enableButtons();
+                that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
+                    failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
+            }
+        };
+    }
+});
+promptTypes.linked_table = promptTypes._linked_type.extend({
+    type: "linked_table",
+    valid: true,
+    templatePath: 'templates/linked_table.handlebars',
+    launchAction: 'org.opendatakit.survey.android.activities.MainMenuActivity',
+
+    events: {
+        "click .openInstance": "openInstance",
+        "click .deleteInstance": "deleteInstance",
+        "click .addInstance": "addInstance"
     },
     disableButtons: function() {
         var that = this;
@@ -661,31 +692,7 @@ promptTypes.linked_table = promptTypes.base.extend({
             ctxt.success();
         }
     },
-    getCallback: function(promptPath, byinternalPromptContext, byaction) {
-        var that = this;
-        if ( that.getPromptPath() != promptPath ) {
-            throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
-        }
-        return function(ctxt, internalPromptContext, action, jsonString) {
-            ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
-                " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-            var jsonObject = JSON.parse(jsonString);
-            if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
-                ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
-                    " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                that.enableButtons();
-                that.reRender(ctxt);
-            }
-            else {
-                ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent', 
-                    "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + 
-                    internalPromptContext + " action: " + action + " jsonString: " + jsonString);
-                that.enableButtons();
-                that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
-                    failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
-            }
-        };
-    }
+
 });
 promptTypes.external_link = promptTypes.base.extend({
     type: "external_link",
@@ -860,7 +867,7 @@ promptTypes.user_branch = promptTypes.base.extend({
         }
     }
 });
-promptTypes.select = promptTypes.base.extend({
+promptTypes.select = promptTypes._linked_type.extend({
     type: "select",
     templatePath: "templates/select.handlebars",
     events: {
@@ -1011,7 +1018,7 @@ promptTypes.select = promptTypes.base.extend({
             that.updateRenderValue(that.parseSaveValue(that.getValue()));
             ctxt.success();
         }});
-        var populateChoicesViaQuery = function(query, newctxt){
+        var populateChoicesViaQueryUsingAjax = function(query, newctxt){
             var queryUri = query.uri();
             if(queryUri.search('//') < 0){
                 //If the uri is not a content provider or web resource,
@@ -1068,6 +1075,40 @@ promptTypes.select = promptTypes.base.extend({
             
             $.ajax(ajaxOptions);
         };
+
+         var populateChoicesViaQueryUsingLinkedTable = function(query, newctxt){
+            newctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
+            that.getLinkedMdl($.extend({},newctxt,{success:function(linkedMdl) {
+                var dbTableName = linkedMdl.tableMetadata.dbTableName;
+                var selString = that.convertSelection(linkedMdl);
+                var selArgs = query.selectionArgs();
+                var ordBy = that.convertOrderBy(linkedMdl);
+                var displayElementName = that.getLinkedInstanceName();
+                database.get_linked_instances($.extend({},newctxt,{success:function(instanceList) {
+                    that.renderContext.choices = _.map(instanceList, function(instance) {
+                        instance.display = {text:instance.display_field};
+                        instance.data_value = instance.instance_id;
+                        return instance;
+                    });
+                    newctxt.success();
+                }}), dbTableName, selString, selArgs, displayElementName, ordBy);
+            }}));
+        };
+
+        var populateChoicesViaQuery = function(query, newctxt){
+            if (query.query_type == 'csv' || query.query_type == 'ajax')
+            {
+                populateChoicesViaQueryUsingAjax(query, newctxt);
+            }
+            else if (query.query_type == 'linked_table')
+            {
+                populateChoicesViaQueryUsingLinkedTable(query, newctxt);
+            }
+            else
+            {
+                newctxt.failure({message: "Error: undefined query type - a query in the queries sheet must have a query_type"});
+            }
+        }
         
         that.renderContext.passiveError = null;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);

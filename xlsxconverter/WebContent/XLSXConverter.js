@@ -628,10 +628,7 @@
             if ( "clause" in row ) {
                 var clauseEntry = _.extend({}, row);
                 delete clauseEntry.branch_label;
-                if ("type" in row) {
-                    throw Error("Exactly one of 'clause' and 'type' may be defined on any given row. Error on sheet: " +
-                            sheetName + " on row: " + row._row_num);
-                }
+
                 clauseEntry._token_type = "clause";
                 /*
                  * parse the clause, set _token_type and begin/end matching annotations
@@ -641,8 +638,21 @@
                 raw_clause_type = raw_clause_type.replace(/\s+/g,' ');// remove extra spaces
                 raw_clause_type = raw_clause_type.trim();// remove BOL/EOL spaces
                 var parts = raw_clause_type.split(' ');
-
+                
                 var first = parts[0];
+
+                // Code to allow the user to comment out lines
+                if (first.length >= 2)
+                {   
+                    if (first.substring(0,2) == "//")
+                        first = "comment";
+                }
+
+                if ("type" in row && first != "comment") {
+                    throw Error("Exactly one of 'clause' and 'type' may be defined on any given row. Error on sheet: " +
+                    sheetName + " on row: " + row._row_num);
+                }
+
                 switch (first ) {
                 case "begin":
                     if ( parts.length < 2 || parts[1] !== "screen" || parts.length > 4 ||
@@ -773,6 +783,9 @@
                     }
                     clauseEntry._token_type = "save_and_terminate";
                     break;
+                case "comment":
+                    // Skip to the next clause entry
+                    return;
                 default:
                     throw Error("Unrecognized 'clause' expression: " + row.clause +
                             " on sheet: " + sheetName + " on row: " + row._row_num);
