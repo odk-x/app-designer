@@ -202,7 +202,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
                     if ( !defElement.isSessionVariable ) {
                         stmt += "null";
                     } else {
-                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, null);
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, JSON.stringify(null));
                     }
                 } else {
                     // remap kvElement.value into storage value...
@@ -321,7 +321,7 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
                     if ( !defElement.isSessionVariable ) {
                         stmt += "null";
                     } else {
-                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, null);
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, JSON.stringify(null));
                     }
                 } else {
                     v = databaseUtils.toDatabaseFromElementType(defElement, kvElement.value);
@@ -344,7 +344,7 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
                     if ( !defElement.isSessionVariable ) {
                         stmt += "null";
                     } else {
-                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, null);
+                        shim.setSessionVariable(opendatakit.getRefId(), elementPath, JSON.stringify(null));
                     }
                 } else {
                     v = databaseUtils.toDatabaseFromElementType(defElement, defElement['default']);
