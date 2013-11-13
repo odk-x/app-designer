@@ -491,14 +491,23 @@ promptTypes.linked_table = promptTypes.base.extend({
         "click .addInstance": "addInstance"
     },
     getLinkedTableId: function() {
-        if ( this.linked_table_id == null ) {
-            return this.linked_form_id;
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
+        if ( queryDefn != null )
+        {
+            if ( queryDefn.linked_table_id == null ) {
+                return queryDefn.linked_form_id;
+            } else {
+                return queryDefn.linked_table_id;
+            }
         } else {
-            return this.linked_table_id;
+            return null;
+            shim.log('E',"query definiton is null for " + this.type + " in getLinkedTableId");
         }
     },
     getFormPath: function() {
-        return '../tables/' + this.getLinkedTableId() + '/forms/' + this.linked_form_id + '/';
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
+
+        return '../tables/' + this.getLinkedTableId() + '/forms/' + queryDefn.linked_form_id + '/'; 
     },
     _linkedCachedMdl: null,
     _linkedCachedInstanceName: null,
@@ -526,26 +535,28 @@ promptTypes.linked_table = promptTypes.base.extend({
     },
     _cachedSelection: null,
     convertSelection: function(linkedMdl) {
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         var that = this;
-        if ( that.selection == null || that.selection.length === 0 ) {
+        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
             return null;
         }
         if ( that._cachedSelection != null ) {
             return that._cachedSelection;
         }
-        that._cachedSelection = database.convertSelectionString(linkedMdl, that.selection);
+        that._cachedSelection = database.convertSelectionString(linkedMdl, queryDefn.selection);
         return that._cachedSelection;
     },
     _cachedOrderBy: null,
     convertOrderBy: function(linkedMdl) {
         var that = this;
-        if ( that.order_by == null || that.order_by.length === 0 ) {
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
+        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
             return null;
         }
         if ( that._cachedOrderBy != null ) {
             return that._cachedOrderBy;
         }
-        that._cachedOrderBy = database.convertOrderByString(linkedMdl, that.order_by);
+        that._cachedOrderBy = database.convertOrderByString(linkedMdl, queryDefn.order_by);
         return that._cachedOrderBy;
     },
     disableButtons: function() {
@@ -562,12 +573,13 @@ promptTypes.linked_table = promptTypes.base.extend({
     },
     configureRenderContext: function(ctxt) {
         var that = this;
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
         that.renderContext.add_instance_label = ((that.display != null) ? that.display.new_instance_text : null) || "Add Instance";
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
             var selString = that.convertSelection(linkedMdl);
-            var selArgs = that.selectionArgs();
+            var selArgs = queryDefn.selectionArgs();
             var ordBy = that.convertOrderBy(linkedMdl);
             var displayElementName = that.getLinkedInstanceName();
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
@@ -620,6 +632,7 @@ promptTypes.linked_table = promptTypes.base.extend({
         }}));
     },
     addInstance: function(evt) {
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         var instanceId = opendatakit.genUUID();
         var that = this;
         var ctxt = that.controller.newContext(evt);
@@ -628,8 +641,8 @@ promptTypes.linked_table = promptTypes.base.extend({
         // TODO: is this the right sequence?
         var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
         var auxHash = '';
-        if ( that.auxillaryHash ) {
-            auxHash = that.auxillaryHash();
+        if ( queryDefn.auxillaryHash ) {
+            auxHash = queryDefn.auxillaryHash();
             if ( auxHash && auxHash !== '' && auxHash.charAt(0) !== '&' ) {
                 auxHash = '&' + auxHash;
             }

@@ -45,14 +45,12 @@
       },
       {
         "type": "linked_table",
+        "values_list": "linked_data",
+        "name": "household_members",
         "display": {
           "text": "Household members:",
           "hint": "listing of linked forms displays the value of the field specified in the linekd form's instance_name setting field within a button. Click that button to edit that linked form."
         },
-        "linked_form_id": "household_member",
-        "selection": "household_id = ?",
-        "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
         "comments": "auxillaryHash defines the auxillary hash to supply when creating a new sub-form. This is an ampersand-separated list of elementName=value pairs that will be used to initialize the subform. The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
         "_row_num": 7
       },
@@ -134,6 +132,17 @@
           }
         ],
         "comments": "This inserts a 'joins' entry into the column_definitions table for the household_id column of the household table_id of the form: \n\n\"[ { table_id: household_member, element_name: household_id } ]\"",
+        "_row_num": 2
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "linked_data",
+        "query_type": "linked_table",
+        "linked_form_id": "household_member",
+        "selection": "household_id = ?",
+        "selectionArgs": "[ data('household_id') ]",
+        "auxillaryHash": "'household_id='+escape(data('household_id'))",
         "_row_num": 2
       }
     ]
@@ -242,7 +251,17 @@
         }
       ]
     },
-    "queries": {},
+    "queries": {
+      "linked_data": {
+        "query_name": "linked_data",
+        "query_type": "linked_table",
+        "linked_form_id": "household_member",
+        "selection": "household_id = ?",
+        "selectionArgs": "[ data('household_id') ]",
+        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "_row_num": 2
+      }
+    },
     "calculates": {},
     "model": {
       "household_id": {
@@ -414,14 +433,12 @@
           },
           {
             "type": "linked_table",
+            "values_list": "linked_data",
+            "name": "household_members",
             "display": {
               "text": "Household members:",
               "hint": "listing of linked forms displays the value of the field specified in the linekd form's instance_name setting field within a button. Click that button to edit that linked form."
             },
-            "linked_form_id": "household_member",
-            "selection": "household_id = ?",
-            "selectionArgs": "[ data('household_id') ]",
-            "auxillaryHash": "'household_id='+escape(data('household_id'))",
             "comments": "auxillaryHash defines the auxillary hash to supply when creating a new sub-form. This is an ampersand-separated list of elementName=value pairs that will be used to initialize the subform. The joined_through_name value identifies the name (elementName) in the model that should be used when scanning in the joins lists for the table_id to discover the foreign key column to filter on in the subform.\n\nIf this is omitted, we would probably just scan the entire model to see if table_id appears anywhere and use the first match we find.",
             "_row_num": 7,
             "__rowNum__": 6,
