@@ -134,12 +134,13 @@
         "_row_num": 20
       },
       {
-        "clause": "if",
+        "clause": "//if",
         "condition": "selected(data('color'), 'teal')",
         "_row_num": 21
       },
       {
         "comments": "selected function with arguement not included in choices.",
+        "clause": "//",
         "type": "note",
         "display": {
           "text": "Teal is a good choice."
@@ -148,7 +149,7 @@
         "_row_num": 22
       },
       {
-        "clause": "end if",
+        "clause": "// end if",
         "_row_num": 23
       },
       {
@@ -183,10 +184,11 @@
         "_row_num": 26
       },
       {
-        "clause": "begin screen",
+        "clause": "//begin screen",
         "_row_num": 27
       },
       {
+        "clause": "//",
         "type": "note",
         "display": {
           "text": "Holidays"
@@ -195,6 +197,7 @@
         "_row_num": 28
       },
       {
+        "clause": "//",
         "type": "select_one_grid",
         "values_list": "holidays",
         "name": "favoriteHoliday",
@@ -204,6 +207,7 @@
         "_row_num": 29
       },
       {
+        "clause": "//",
         "type": "select_one_inline",
         "values_list": "holidays",
         "name": "secondFavoriteHoliday",
@@ -213,6 +217,7 @@
         "_row_num": 30
       },
       {
+        "clause": "//",
         "type": "select_one_dropdown",
         "values_list": "holidays",
         "name": "thirdFavoriteHoliday",
@@ -222,7 +227,7 @@
         "_row_num": 31
       },
       {
-        "clause": "end screen",
+        "clause": "//end screen",
         "_row_num": 32
       },
       {
@@ -384,33 +389,33 @@
       },
       {
         "choice_list_name": "holidays",
-        "data_value": "christmas",
+        "data_value": "kwanzaa",
         "display": {
-          "text": "Christmas"
+          "text": "Kwanzaa"
         },
         "_row_num": 19
       },
       {
         "choice_list_name": "holidays",
-        "data_value": "thanksgiving",
+        "data_value": "christmas",
         "display": {
-          "text": "Thanksgiving"
+          "text": "Christmas"
         },
         "_row_num": 20
       },
       {
         "choice_list_name": "holidays",
-        "data_value": "easter",
+        "data_value": "hannukah",
         "display": {
-          "text": "Easter"
+          "text": "Hannukah"
         },
         "_row_num": 21
       },
       {
         "choice_list_name": "holidays",
-        "data_value": "halloween",
+        "data_value": "diwali",
         "display": {
-          "text": "Halloween"
+          "text": "Diwali"
         },
         "_row_num": 22
       },
@@ -694,33 +699,33 @@
       "holidays": [
         {
           "choice_list_name": "holidays",
-          "data_value": "christmas",
+          "data_value": "kwanzaa",
           "display": {
-            "text": "Christmas"
+            "text": "Kwanzaa"
           },
           "_row_num": 19
         },
         {
           "choice_list_name": "holidays",
-          "data_value": "thanksgiving",
+          "data_value": "christmas",
           "display": {
-            "text": "Thanksgiving"
+            "text": "Christmas"
           },
           "_row_num": 20
         },
         {
           "choice_list_name": "holidays",
-          "data_value": "easter",
+          "data_value": "hannukah",
           "display": {
-            "text": "Easter"
+            "text": "Hannukah"
           },
           "_row_num": 21
         },
         {
           "choice_list_name": "holidays",
-          "data_value": "halloween",
+          "data_value": "diwali",
           "display": {
-            "text": "Halloween"
+            "text": "Diwali"
           },
           "_row_num": 22
         }
@@ -909,36 +914,6 @@
         ],
         "type": "string",
         "elementKey": "country_csv"
-      },
-      "favoriteHoliday": {
-        "_defn": [
-          {
-            "_row_num": 29,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "favoriteHoliday"
-      },
-      "secondFavoriteHoliday": {
-        "_defn": [
-          {
-            "_row_num": 30,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "secondFavoriteHoliday"
-      },
-      "thirdFavoriteHoliday": {
-        "_defn": [
-          {
-            "_row_num": 31,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "thirdFavoriteHoliday"
       },
       "breakfastFood": {
         "_defn": [
@@ -1149,20 +1124,6 @@
             "promptIdx": 10
           },
           {
-            "comments": "selected function with arguement not included in choices.",
-            "type": "note",
-            "display": {
-              "text": "Teal is a good choice."
-            },
-            "hideInContents": true,
-            "_row_num": 22,
-            "__rowNum__": 21,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 11
-          },
-          {
             "type": "select_one",
             "values_list": "yes_no",
             "inputAttributes": {
@@ -1177,7 +1138,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 12
+            "promptIdx": 11
           },
           {
             "type": "select_one",
@@ -1191,7 +1152,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen25",
-            "promptIdx": 13
+            "promptIdx": 12
           },
           {
             "type": "select_one_dropdown",
@@ -1206,62 +1167,7 @@
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
             "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 14
-          },
-          {
-            "type": "note",
-            "display": {
-              "text": "Holidays"
-            },
-            "hideInContents": true,
-            "_row_num": 28,
-            "__rowNum__": 27,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 15
-          },
-          {
-            "type": "select_one_grid",
-            "values_list": "holidays",
-            "name": "favoriteHoliday",
-            "display": {
-              "text": "What is your favorite holiday?"
-            },
-            "_row_num": 29,
-            "__rowNum__": 28,
-            "_token_type": "prompt",
-            "_type": "select_one_grid",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 16
-          },
-          {
-            "type": "select_one_inline",
-            "values_list": "holidays",
-            "name": "secondFavoriteHoliday",
-            "display": {
-              "text": "What is your second favorite holiday?"
-            },
-            "_row_num": 30,
-            "__rowNum__": 29,
-            "_token_type": "prompt",
-            "_type": "select_one_inline",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 17
-          },
-          {
-            "type": "select_one_dropdown",
-            "values_list": "holidays",
-            "name": "thirdFavoriteHoliday",
-            "display": {
-              "text": "What is your third favorite holiday?"
-            },
-            "_row_num": 31,
-            "__rowNum__": 30,
-            "_token_type": "prompt",
-            "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 18
+            "promptIdx": 13
           },
           {
             "type": "note",
@@ -1274,7 +1180,7 @@
             "_token_type": "prompt",
             "_type": "note",
             "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 19
+            "promptIdx": 14
           },
           {
             "type": "select_multiple",
@@ -1288,7 +1194,7 @@
             "_token_type": "prompt",
             "_type": "select_multiple",
             "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 20
+            "promptIdx": 15
           },
           {
             "type": "select_multiple_inline",
@@ -1302,7 +1208,7 @@
             "_token_type": "prompt",
             "_type": "select_multiple_inline",
             "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 21
+            "promptIdx": 16
           },
           {
             "type": "select_multiple_grid",
@@ -1316,7 +1222,7 @@
             "_token_type": "prompt",
             "_type": "select_multiple_grid",
             "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 22
+            "promptIdx": 17
           },
           {
             "_token_type": "prompt",
@@ -1324,7 +1230,7 @@
             "_type": "contents",
             "_row_num": 39,
             "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 23
+            "promptIdx": 18
           }
         ],
         "validation_tag_map": {
@@ -1379,65 +1285,22 @@
             "operationIdx": 4
           },
           {
-            "clause": "if",
-            "condition": "selected(data('color'), 'teal')",
-            "_row_num": 21,
-            "__rowNum__": 20,
-            "_token_type": "goto_label",
-            "_branch_label": "_then21",
-            "operationIdx": 5
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else23",
-            "_row_num": 23,
-            "operationIdx": 6
-          },
-          {
-            "_row_num": 22,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif23",
-            "_row_num": 23,
-            "operationIdx": 8
-          },
-          {
             "_row_num": 24,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
           },
           {
             "_row_num": 25,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 10
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
           },
           {
             "_row_num": 26,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 11
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 27,
-            "__rowNum__": 26,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 32,
-              "__rowNum__": 31,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 12
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
           },
           {
             "clause": "begin screen",
@@ -1450,26 +1313,26 @@
               "__rowNum__": 37,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 13
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
             "_row_num": 39,
-            "operationIdx": 14
+            "operationIdx": 9
           },
           {
             "_row_num": 39,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 15
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
             "_row_num": 39,
-            "operationIdx": 16
+            "operationIdx": 11
           }
         ],
         "branch_label_map": {
@@ -1478,17 +1341,12 @@
           "_screen4": 2,
           "_screen13": 3,
           "_screen20": 4,
-          "_then21": 7,
-          "_screen22": 7,
-          "_else23": 9,
-          "_endif23": 9,
-          "_screen24": 9,
-          "_screen25": 10,
-          "_screen26": 11,
-          "_screen27": 12,
-          "_screen33": 13,
-          "_contents": 15,
-          "_screen39": 15
+          "_screen24": 5,
+          "_screen25": 6,
+          "_screen26": 7,
+          "_screen33": 8,
+          "_contents": 10,
+          "_screen39": 10
         }
       },
       "initial": {
