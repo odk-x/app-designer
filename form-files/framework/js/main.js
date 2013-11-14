@@ -148,7 +148,7 @@ require(['jquery'],
 
                 var isAndroid = (opendatakit.getPlatformInfo().container === "Android");
                 var testAndroidParsing = false;
-                var remapUrl = false;
+                var remapUrl = !isAndroid;
                 // TODO: figure out why jqMobile+Chrome adds an empty '?' search
                 // string to window.location.href   Code deals with that here.
                 // The ? catastrophically breaks Android 2.x
@@ -156,11 +156,11 @@ require(['jquery'],
                     if ( !(testAndroidParsing || isAndroid) ) {
                         if ( searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx) ) {
                             // add it if it is missing
-                    if ( hashIdx < 0 ) {
-                                newRef = ref + '?';
-                    } else if ( hashIdx > 0 ) {
-                                newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
-                    }
+                            if ( hashIdx < 0 ) {
+                                        newRef = ref + '?';
+                            } else if ( hashIdx > 0 ) {
+                                        newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
+                            }
                             shim.log('W','jqmConfig.addSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
                             window.location.assign(newRef);
                         } else if ( search !== undefined && search !== null && search.indexOf("purge") >= 0 ) {
@@ -171,7 +171,7 @@ require(['jquery'],
                                 newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                             }
                             ctxt.log('W',"jqmConfig.purge ref: " + ref + ' newRef: ' + newRef);
-                    database.purge($.extend({},ctxt,{success:function() {
+                            database.purge($.extend({},ctxt,{success:function() {
                                 // we loose the ctxt action (page load restarts everything...)
                                 ctxt.log('W','jqmConfig.purge.reloadpage newRef: ' + newRef);
                                 window.location.assign(newRef);
@@ -181,12 +181,12 @@ require(['jquery'],
                             parsequery.changeUrlHash(ctxt);
                         }
                     } else if ( searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx) ) {
-                    // we have a '?' on the URL. Forcibly remove it.
-                    hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
+                        // we have a '?' on the URL. Forcibly remove it.
+                        hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
                         var newRef = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
                         shim.log('W','jqmConfig.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
                         window.location.assign(newRef);
-                } else {
+                    } else {
                         // no search term -- pass through
                         ctxt.log('D','jqmConfig.changeUrlHash ref: ' + ref);
                         parsequery.changeUrlHash(ctxt);
