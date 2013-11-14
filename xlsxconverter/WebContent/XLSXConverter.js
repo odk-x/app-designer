@@ -217,7 +217,7 @@
             url: 'formula', // external_link prompt
             uri: 'formula', // queries
             callback: 'formula(context)', // queries
-            choice_filter: 'formula(context)', // expects "choice" context arg.
+            choice_filter: 'formula(choice_item)', // expects "choice" context arg.
             templatePath: 'requirejs_path',
             image: 'app_path_localized',
             audio: 'app_path_localized',

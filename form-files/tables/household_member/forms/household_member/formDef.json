@@ -175,7 +175,7 @@
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
-      "choice_filter": "formula(context)",
+      "choice_filter": "formula(choice_item)",
       "templatePath": "requirejs_path",
       "image": "app_path_localized",
       "audio": "app_path_localized",

@@ -180,7 +180,7 @@
         "display": {
           "text": "Choose a country:"
         },
-        "choice_filter": "context.region === data('region')",
+        "choice_filter": "choice_item.region === data('region')",
         "_row_num": 26
       },
       {
@@ -522,7 +522,7 @@
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
-      "choice_filter": "formula(context)",
+      "choice_filter": "formula(choice_item)",
       "templatePath": "requirejs_path",
       "image": "app_path_localized",
       "audio": "app_path_localized",
@@ -1161,7 +1161,7 @@
             "display": {
               "text": "Choose a country:"
             },
-            "choice_filter": "context.region === data('region')",
+            "choice_filter": "choice_item.region === data('region')",
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",

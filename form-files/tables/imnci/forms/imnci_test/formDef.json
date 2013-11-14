@@ -3360,7 +3360,7 @@
             "hindi": "निम्नलिखित टीके दें:"
           }
         },
-        "choice_filter": "selected(data('needed_vaccinations'), context.name)",
+        "choice_filter": "selected(data('needed_vaccinations'), choice_item.name)",
         "_row_num": 193
       },
       {
@@ -8170,7 +8170,7 @@
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
-      "choice_filter": "formula(context)",
+      "choice_filter": "formula(choice_item)",
       "templatePath": "requirejs_path",
       "image": "app_path_localized",
       "audio": "app_path_localized",
@@ -14527,7 +14527,7 @@
                 "hindi": "निम्नलिखित टीके दें:"
               }
             },
-            "choice_filter": "selected(data('needed_vaccinations'), context.name)",
+            "choice_filter": "selected(data('needed_vaccinations'), choice_item.name)",
             "_row_num": 193,
             "__rowNum__": 192,
             "_token_type": "prompt",
