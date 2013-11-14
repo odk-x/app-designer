@@ -197,16 +197,16 @@ promptTypes.base = Backbone.View.extend({
             // no data validation if no persistence...
             return null;
         } 
-		
-		// compute the field display name...
-		var locale = database.getInstanceMetaDataValue('_locale');
-		if ( locale === undefined || locale === null ) {
-			locale = opendatakit.getDefaultFormLocaleValue();
-		}
-		var textOrMap = (that.renderContext.display.title ? 
-			that.renderContext.display.title : that.renderContext.display.text);
-		var fieldDisplayName = formulaFunctions.localize(textOrMap,locale);
-		
+        
+        // compute the field display name...
+        var locale = database.getInstanceMetaDataValue('_locale');
+        if ( locale === undefined || locale === null ) {
+            locale = opendatakit.getDefaultFormLocaleValue();
+        }
+        var textOrMap = (that.renderContext.display.title ? 
+            that.renderContext.display.title : that.renderContext.display.text);
+        var fieldDisplayName = formulaFunctions.localize(textOrMap,locale);
+        
         var value = that.getValue();
         if ( value === undefined || value === null || value === "" ) {
             if ( isRequired ) {
@@ -297,9 +297,9 @@ promptTypes.opening = promptTypes.base.extend({
         } else {
             that.renderContext.display_field = null;
         }
-		if ( that._screen && that._screen._renderContext ) {
-			that._screen._renderContext.enableBackNavigation = false;
-		}
+        if ( that._screen && that._screen._renderContext ) {
+            that._screen._renderContext.enableBackNavigation = false;
+        }
         ctxt.success();
     },
     renderContext: {
@@ -338,9 +338,9 @@ promptTypes.finalize = promptTypes.base.extend({
         } else {
             that.renderContext.display_field = null;
         }
-		if ( that._screen && that._screen._renderContext ) {
-			that._screen._renderContext.enableForwardNavigation = false;
-		}
+        if ( that._screen && that._screen._renderContext ) {
+            that._screen._renderContext.enableForwardNavigation = false;
+        }
         ctxt.success();
     },
     saveIncomplete: function(evt) {
@@ -375,9 +375,9 @@ promptTypes.json = promptTypes.base.extend({
         } else {
             that.renderContext.value = "JSON Unavailable";
         }
-		if ( that._screen && that._screen._renderContext ) {
-			that._screen._renderContext.enableNavigation = false;
-		}
+        if ( that._screen && that._screen._renderContext ) {
+            that._screen._renderContext.enableNavigation = false;
+        }
         ctxt.success();
     }
 });
@@ -413,11 +413,11 @@ promptTypes.instances = promptTypes.base.extend({
                 $.extend(that.renderContext, {
                     headerImg: requirejs.toUrl('img/form_logo.png')
                 });
-				if ( that._screen && that._screen._renderContext ) {
-					that._screen._renderContext.showHeader = false;
-					that._screen._renderContext.enableNavigation = false;
-					that._screen._renderContext.showFooter = false;
-				}
+                if ( that._screen && that._screen._renderContext ) {
+                    that._screen._renderContext.showHeader = false;
+                    that._screen._renderContext.enableNavigation = false;
+                    that._screen._renderContext.showFooter = false;
+                }
                 ctxt.success();
             }
         }));
@@ -441,7 +441,7 @@ promptTypes.instances = promptTypes.base.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
         database.delete_all($.extend({}, ctxt, {success: function() {
-				that.reRender(ctxt);
+                that.reRender(ctxt);
             }}),
         $(evt.target).attr('id'));
     }
@@ -467,23 +467,18 @@ promptTypes.contents = promptTypes.base.extend({
         });
     },
     configureRenderContext: function(ctxt) {
-		var that = this;
+        var that = this;
         that.renderContext.prompts = that.controller.getCurrentSectionPrompts();
-		if ( that._screen && that._screen._renderContext ) {
-			that._screen._renderContext.enableForwardNavigation = false;
-			that._screen._renderContext.showHeader = true;
-			that._screen._renderContext.showFooter = false;
-		}
+        if ( that._screen && that._screen._renderContext ) {
+            that._screen._renderContext.enableForwardNavigation = false;
+            that._screen._renderContext.showHeader = true;
+            that._screen._renderContext.showFooter = false;
+        }
         ctxt.success();
     }
 });
 promptTypes._linked_type = promptTypes.base.extend({
     type: "_linked_type",
-    linked_form_id: null,
-    linked_table_id: null,
-    selection: null, // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
-    selectionArgs: function() {return null;},
-    order_by: null, // must be: (elementName [asc|desc] )+  -- same restriction as selection -- cannot be elementPath
     _cachedSelection: null,
     _cachedOrderBy: null,
     getLinkedTableId: function() {
@@ -500,10 +495,18 @@ promptTypes._linked_type = promptTypes.base.extend({
             shim.log('E',"query definiton is null for " + this.type + " in getLinkedTableId");
         }
     },
-    getFormPath: function() {
+    getLinkedFormId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-
-        return '../tables/' + this.getLinkedTableId() + '/forms/' + queryDefn.linked_form_id + '/'; 
+        if ( queryDefn != null )
+        {
+            return queryDefn.linked_form_id;
+        } else {
+            return null;
+            shim.log('E',"query definiton is null for " + this.type + " in getLinkedFormId");
+        }
+    },
+    getFormPath: function() {
+        return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
     },
     convertSelection: function(linkedMdl) {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
@@ -617,7 +620,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                     that.renderContext.instances = instanceList;
                     // change this to incomplete if it wasn't saved via the specific form
                     for (var i = 0; i < instanceList.length; i++) {
-                        if (instanceList[i].form_id != that.linked_form_id) {
+                        if (instanceList[i].form_id != that.getLinkedFormId()) {
                             instanceList[i].savepoint_type = "incomplete";
                         }
                     }
@@ -632,7 +635,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
+        var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.getLinkedFormId();
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
@@ -670,7 +673,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.linked_form_id;
+        var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.getLinkedFormId();
         var auxHash = '';
         if ( queryDefn.auxillaryHash ) {
             auxHash = queryDefn.auxillaryHash();
@@ -1297,7 +1300,7 @@ promptTypes.select_multiple_grid = promptTypes.select_multiple.extend({
     }
 });
 promptTypes.select_multiple_inline = promptTypes.select_multiple.extend({
-	templatePath: "templates/select_inline.handlebars"
+    templatePath: "templates/select_inline.handlebars"
 });
 promptTypes.input_type = promptTypes.base.extend({
     type: "input_type",
