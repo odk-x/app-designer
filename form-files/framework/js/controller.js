@@ -1041,7 +1041,7 @@ return {
             this.updateAndLogOutstandingContexts(this);
             this._log('E', 'failure! ' + (( m != null && m.message != null) ? m.message : ""));
             if ( this.chainedCtxt.ctxt != null ) {
-                this.chainedCtxt.ctxt.failure();
+                this.chainedCtxt.ctxt.failure(m);
             }
         },
         

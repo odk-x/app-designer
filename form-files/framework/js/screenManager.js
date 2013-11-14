@@ -314,7 +314,7 @@ return Backbone.View.extend({
         var ctxt = that.controller.newContext(evt);
         ctxt.log('D','screenManager.saveChanges', 
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
-        that.controller.saveAllChanges($.extend({},ctxt,{success: function() {
+        that.controller.saveIncomplete($.extend({},ctxt,{success: function() {
                 that.controller.leaveInstance(ctxt);
             }}), false);
     },

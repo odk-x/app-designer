@@ -1020,6 +1020,9 @@ promptTypes.select = promptTypes._linked_type.extend({
                         "px: " + that.promptIdx);
             that.updateRenderValue(that.parseSaveValue(that.getValue()));
             ctxt.success();
+        },
+        failure:function(m) {
+            ctxt.failure(m);
         }});
         var populateChoicesViaQueryUsingAjax = function(query, newctxt){
             var queryUri = query.uri();
