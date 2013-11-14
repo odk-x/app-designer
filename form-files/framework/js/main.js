@@ -142,45 +142,58 @@ require(['jquery'],
                 var hashIdx = ref.indexOf("#");
                 var searchIdx = ref.indexOf("?");
                 var search = window.location.search;
+                var newRef = ref;
 
+                var ctxt = controller.newStartContext();
+
+                var isAndroid = (opendatakit.getPlatformInfo().container === "Android");
                 var testAndroidParsing = false;
-                // TODO: figure out why Chrome adds an empty '?' search string
-                // to window.location.href   We deal with that here, but doing
-                // this will catastrophically break Android
-                if ( (!testAndroidParsing && opendatakit.getPlatformInfo().container !== "Android") &&
-                     (searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx)) ) {
+                var remapUrl = false;
+                // TODO: figure out why jqMobile+Chrome adds an empty '?' search
+                // string to window.location.href   Code deals with that here.
+                // The ? catastrophically breaks Android 2.x
+                if ( remapUrl ) {
+                    if ( !(testAndroidParsing || isAndroid) ) {
+                        if ( searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx) ) {
+                            // add it if it is missing
                     if ( hashIdx < 0 ) {
-                        ref = ref + '?';
+                                newRef = ref + '?';
                     } else if ( hashIdx > 0 ) {
-                        ref = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
+                                newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                     }
-                    window.location.assign(ref);
-                } else if ( search != null && search.indexOf("purge") >= 0 ) {
-                    // this only occurs in a web-hosted XLSXConverter (for testing)
-                    var ctxt = controller.newStartContext();
-                    ctxt.log('W',"jqmConfig.purge");
+                            shim.log('W','jqmConfig.addSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
+                            window.location.assign(newRef);
+                        } else if ( search !== undefined && search !== null && search.indexOf("purge") >= 0 ) {
+                            // remove the search string (?purge) and replace with ?
+                            if ( hashIdx < 0 ) {
+                                newRef = ref + '?';
+                            } else if ( hashIdx > 0 ) {
+                                newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
+                            }
+                            ctxt.log('W',"jqmConfig.purge ref: " + ref + ' newRef: ' + newRef);
                     database.purge($.extend({},ctxt,{success:function() {
-                        ctxt.log('D','jqmConfig.purge.changeUrlHash');
-                        // remove the 'purge' flag...
-                        if ( hashIdx < 0 ) {
-                            ref = ref + '?';
-                        } else if ( hashIdx > 0 ) {
-                            ref = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
+                                // we loose the ctxt action (page load restarts everything...)
+                                ctxt.log('W','jqmConfig.purge.reloadpage newRef: ' + newRef);
+                                window.location.assign(newRef);
+                            }}));
+                        } else {
+                            ctxt.log('D','jqmConfig.changeUrlHash ref: ' + ref);
+                            parsequery.changeUrlHash(ctxt);
                         }
-                        // we loose the ctxt action (page load restarts everything...)
-                        ctxt.log('W','jqmConfig.purge.reloadpage');
-                        window.location.assign(ref);
-                    }}));
-                } else if ( (testAndroidParsing || opendatakit.getPlatformInfo().container === "Android") && 
-                            (searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx)) ) {
+                    } else if ( searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx) ) {
                     // we have a '?' on the URL. Forcibly remove it.
                     hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
-                    var newref = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
-                    shim.log('W','jqmConfig.removeUrlSearchTerm: ' + ref.substring(searchIdx,hashIdx) );
-                    window.location.assign(newref);
+                        var newRef = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
+                        shim.log('W','jqmConfig.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
+                        window.location.assign(newRef);
                 } else {
-                    var ctxt = controller.newStartContext();
-                    ctxt.log('D','jqmConfig.changeUrlHash');
+                        // no search term -- pass through
+                        ctxt.log('D','jqmConfig.changeUrlHash ref: ' + ref);
+                        parsequery.changeUrlHash(ctxt);
+                    }
+                } else {
+                    // don't care -- do whatever...
+                    ctxt.log('D','jqmConfig.simple.changeUrlHash ref: ' + ref);
                     parsequery.changeUrlHash(ctxt);
                 }
             }, function(err) {

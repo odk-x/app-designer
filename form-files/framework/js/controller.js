@@ -271,6 +271,7 @@ return {
         }
         for (;;) {
             path = op._section_name + "/" + op.operationIdx;
+            ctxt.log('I','controller._doActionAtLoop: path: ' + path + ' action: ' + action);
             try {
                 switch ( action ) {
                 case "goto_label":
@@ -1074,7 +1075,7 @@ return {
                 ctxt.log('D',"atEnd.outstandingContext nothingOutstanding!");
         } else {
             for ( i = 0 ; i < that.outstandingContexts.length ; ++i ) {
-                ctxt.log('D',"atEnd.outstandingContext seqNo: " + that.outstandingContexts[i]);
+                ctxt.log('W',"atEnd.outstandingContext seqNo: " + that.outstandingContexts[i]);
             }
         }
     },
