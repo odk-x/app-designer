@@ -609,7 +609,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
-        that.renderContext.add_instance_label = ((that.display != null) ? that.display.new_instance_text : null) || "Add Instance";
+        that.renderContext.add_instance_label = ((that.display.new_instance_text != null) ? that.display.new_instance_text : "Add New Instance");
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
             var selString = that.convertSelection(linkedMdl);
