@@ -2,13 +2,15 @@
     {{> labelHint}}
     <tr><td align="center">
         <table class="tableGrid">
+            {{#if instances}}
             <tr class="tableGrid">
                 <th class="tableGrid">Last Save Date</th>
                 <th class="tableGrid">Name</th>
                 <th class="tableGrid">Finalized</th>
                 <th class="tableGrid"></th>
             </tr>
-            {{#each instances}}
+            {{#each instances}} 
+                
                 <tr class="tableGrid">
                     <td class="tableGrid"><span>{{savepoint_timestamp}}</span></td>
                     <td class="tableGrid">
@@ -16,13 +18,16 @@
                     </td>
                     <td class="tableGrid"><span>{{savepoint_type}}</span></td>
                     <td class="tableGrid">
-                        <button id="{{instance_id}}" class="whiteButton deleteInstance">delete</button>
-                    </td></tr>
+                        {{#unless ../display.hide_delete_button}}<button id="{{instance_id}}" class="whiteButton deleteInstance">delete</button>{{/unless}}
+                    </td>
+                    </tr>
                 </tr>
+                
             {{else}}
                 <span>No instances</span>
             {{/each}}
-            <button class="whiteButton addInstance">Add an instance</button>
+            {{/if}}
+            {{#unless display.hide_add_instance}}<button class="whiteButton addInstance">{{add_instance_label}}</button>{{/unless}}
         </table>
     </td></tr>
 </table>
