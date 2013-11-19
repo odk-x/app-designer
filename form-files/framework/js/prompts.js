@@ -617,19 +617,45 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             var ordBy = that.convertOrderBy(linkedMdl);
             var displayElementName = that.getLinkedInstanceName();
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
-                    that.renderContext.instances = instanceList;
-                    // change this to incomplete if it wasn't saved via the specific form
-                    for (var i = 0; i < instanceList.length; i++) {
-                        if (instanceList[i].form_id != that.getLinkedFormId()) {
-                            instanceList[i].savepoint_type = "incomplete";
-                        }
+                // set the image icon
+                for (var i = 0; i < instanceList.length ; i++){
+                    if (instanceList[i]["savepoint_type"] == "COMPLETE"){
+                        instanceList[i]["icon_class"] = "ui-icon-check";
+                    }  
+                    else{
+                        instanceList[i]["icon_class"] = "ui-icon-alert";
                     }
-                    ctxt.success();
+                    //make the date more readable
+                    instanceList[i]["savepoint_timestamp"] = opendatakit.getShortDateFormat(new Date(instanceList[i]["savepoint_timestamp"]));          
+                }
+
+                that.renderContext.instances = instanceList;
+
+                that.renderContext.columns = [
+                    { title : "Last Saved"},
+                    { title : "Name"},
+                    { title : "Finalized"},
+                    { title : ""}
+                ];
+                    
+                // change this to incomplete if it wasn't saved via the specific form
+                for (var i = 0; i < instanceList.length; i++) {
+                    if (instanceList[i].form_id != that.getLinkedFormId()) {
+                        instanceList[i].savepoint_type = "incomplete";
+                    }
+                }
+                ctxt.success();
             }}), dbTableName, selString, selArgs, displayElementName, ordBy);
         }}));
     },
     openInstance: function(evt) {
-        var instanceId = $(evt.target).attr('id');
+        var instanceId = undefined;
+        var openButton = $(evt.target).closest(".openInstance");
+        if (openButton != undefined)
+            instanceId = openButton.attr("instance-id");
+        else
+            ctxt.log('E','linked_table.openInstance', "instanceId is undefined");
+
         var that = this;
         var ctxt = that.controller.newContext(evt);
         that.disableButtons();
@@ -650,7 +676,16 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }
     },
     deleteInstance: function(evt) {
-        var instanceId = $(evt.target).attr('id');
+        var instanceId = undefined;
+        var deleteButton = $(evt.target).closest(".deleteInstance");
+        if (deleteButton != undefined)
+            instanceId  = deleteButton.attr("instance-id"); 
+        else
+            ctxt.log('E','linked_table.deleteInstance', "instanceId is undefined"); 
+
+        var tableRow = $(evt.target).closest(".linkedTable tr");
+        if (tableRow != undefined)
+            tableRow.remove();
         var that = this;
         var ctxt = that.controller.newContext(evt);
         that.disableButtons();
@@ -961,17 +996,26 @@ promptTypes.select = promptTypes._linked_type.extend({
         var that = this;
         var otherChoices = [];
         var matchedChoice = null;
-        var choiceList = _.map(savedValue, function(valueObject) {
+        var choiceList = [];
+        var newChoice = null;
+     
+        if (savedValue == null)
+            return choiceList;
+
+        for (var i = 0; i < savedValue.length; i++)
+        {
             matchedChoice = _.find(that.renderContext.choices, function(choiceObject) {
-                            return (valueObject === choiceObject.data_value);
-                });
+                return (savedValue[i] === choiceObject.data_value);
+            });
+
             if ( matchedChoice != null ) {
-                return { "name": that.name,
-                         "value": valueObject };
+                newChoice = { "name": that.name, "value": savedValue[i] };
+                choiceList.push(newChoice);
             } else {
-                otherChoices.push(valueObject);
+                otherChoices.push(savedValue[i]);
             }
-        });
+        }
+
         if (that.withOther && otherChoices.length === 1 ) {
             // emit the other choice list and the value for it...
             choiceList.push({
@@ -985,6 +1029,7 @@ promptTypes.select = promptTypes._linked_type.extend({
         } else if ( otherChoices.length > 0 ) {
             shim.log('W',"prompts." + this.type + " px: " + this.promptIdx + " invalid choices are in choices list");
         }
+        
         return choiceList;
     },
     modification: function(evt) {

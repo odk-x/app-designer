@@ -296,6 +296,15 @@ return {
                 ctxt.log('E',"opendatakit.readFormDefFile.require.failure" + err.requireType + ' modules: ', err.requireModules.toString());
                 ctxt.failure({message: "Failure while reading form definition (" + err.requireType + ")."});
             });
+    },
+
+    getShortDateFormat:function(date) {
+        if (date == null || date.constructor.name != 'Date')
+            return null;
+        
+        var shortDate = (date.getMonth() + 1) + "/" + date.getDate()  + "/" + date.getFullYear();      
+
+        return shortDate;
     }
 };
 });
