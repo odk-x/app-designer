@@ -18,7 +18,7 @@ window.shim = window.shim || {
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.
-        return '{"container":"Chrome","version":"21.0.1180.83 m","appName":"testing","logLevel":"' + this.logLevel + '"}';
+        return '{"container":"Chrome","version":"21.0.1180.83 m","baseUri":"http://localhost/FORM/","appName":"testing","logLevel":"' + this.logLevel + '"}';
     },
     getDatabaseSettings: function() {
         // version identifies the database schema that the database layer should use.
@@ -335,7 +335,7 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg",' + 
+                    '{ "status": -1, "result": { "uriFragment": "framework/tests/venice.jpg",' + 
                                                     '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
@@ -343,23 +343,23 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4",' + 
-                                                    '"contentType": "video/mp4" } }' );
+                    '{ "status": -1, "result": { "uriFragment": "framework/tests/bali.3gp",' + 
+                                                    '"contentType": "video/3gp" } }' );
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-zWfluNSa.mp3",' + 
-                                                    '"contentType": "audio/mp3" } }' );
+                    '{ "status": -1, "result": { "uriFragment": "framework/tests/raven.wav",' + 
+                                                    '"contentType": "audio/wav" } }' );
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg",' + 
+                    '{ "status": -1, "result": { "uriFragment": "framework/tests/venice.jpg",' + 
                                                     '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
@@ -367,16 +367,16 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4",' + 
-                                                    '"contentType": "video/mp4" } }' );
+                    '{ "status": -1, "result": { "uriFragment": "framework/tests/bali.3gp",' + 
+                                                    '"contentType": "video/3gp" } }' );
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uri": "http://content.bitsontherun.com/videos/bkaovAYt-zWfluNSa.mp3",' + 
-                                                    '"contentType": "audio/mp3" } }' );
+                    '{ "status": -1, "result": { "uriFragment": "framework/tests/raven.wav",' + 
+                                                    '"contentType": "audio/wav" } }' );
             }, 100);
             return "OK";
         }

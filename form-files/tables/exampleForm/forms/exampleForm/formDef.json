@@ -80,7 +80,7 @@
       {
         "type": "note",
         "display": {
-          "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
+          "text": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
           "audio": "audio/carrioncrow.mp3",
           "image": "img/dolphin.png"
         },
@@ -897,9 +897,9 @@
         "elementType": "mimeUri",
         "isUnitOfRetention": true,
         "properties": {
-          "uri": {
+          "uriFragment": {
             "type": "string",
-            "elementKey": "picture_uri"
+            "elementKey": "picture_uriFragment"
           },
           "contentType": {
             "type": "string",
@@ -920,9 +920,9 @@
         "elementType": "mimeUri",
         "isUnitOfRetention": true,
         "properties": {
-          "uri": {
+          "uriFragment": {
             "type": "string",
-            "elementKey": "recording_uri"
+            "elementKey": "recording_uriFragment"
           },
           "contentType": {
             "type": "string",
@@ -1060,9 +1060,9 @@
         "elementType": "mimeUri",
         "isUnitOfRetention": true,
         "properties": {
-          "uri": {
+          "uriFragment": {
             "type": "string",
-            "elementKey": "audio_test_uri"
+            "elementKey": "audio_test_uriFragment"
           },
           "contentType": {
             "type": "string",
@@ -1083,9 +1083,9 @@
         "elementType": "mimeUri",
         "isUnitOfRetention": true,
         "properties": {
-          "uri": {
+          "uriFragment": {
             "type": "string",
-            "elementKey": "video_test_uri"
+            "elementKey": "video_test_uriFragment"
           },
           "contentType": {
             "type": "string",
@@ -1106,9 +1106,9 @@
         "elementType": "mimeUri",
         "isUnitOfRetention": true,
         "properties": {
-          "uri": {
+          "uriFragment": {
             "type": "string",
-            "elementKey": "image_test_uri"
+            "elementKey": "image_test_uriFragment"
           },
           "contentType": {
             "type": "string",
@@ -1269,7 +1269,7 @@
           {
             "type": "note",
             "display": {
-              "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
+              "text": "Labels can contain <img> and <audio> HTML tags, but it is often easier to add media via the image and audio columns.",
               "audio": "audio/carrioncrow.mp3",
               "image": "img/dolphin.png"
             },

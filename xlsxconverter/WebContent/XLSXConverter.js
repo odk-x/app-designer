@@ -297,7 +297,7 @@
             "elementType": "mimeUri",
             "isUnitOfRetention": true,
             "properties": {
-                "uri": {
+                "uriFragment": {
                     "type": "string"
                 },
                 "contentType": {
@@ -311,7 +311,7 @@
             "elementType": "mimeUri",
             "isUnitOfRetention": true,
             "properties": {
-                "uri": {
+                "uriFragment": {
                     "type": "string"
                 },
                 "contentType": {
@@ -325,7 +325,7 @@
             "elementType": "mimeUri",
             "isUnitOfRetention": true,
             "properties": {
-                "uri": {
+                "uriFragment": {
                     "type": "string"
                 },
                 "contentType": {
@@ -638,12 +638,12 @@
                 raw_clause_type = raw_clause_type.replace(/\s+/g,' ');// remove extra spaces
                 raw_clause_type = raw_clause_type.trim();// remove BOL/EOL spaces
                 var parts = raw_clause_type.split(' ');
-                
+
                 var first = parts[0];
 
                 // Code to allow the user to comment out lines
                 if (first.length >= 2)
-                {   
+                {
                     if (first.substring(0,2) == "//")
                         first = "comment";
                 }
