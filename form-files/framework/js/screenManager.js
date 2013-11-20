@@ -113,7 +113,7 @@ return Backbone.View.extend({
             showFooter: false,
             showContents: (!that.popScreenOnExit && opendatakit.getCurrentSectionShowContents(screen._section_name)),
             enableForwardNavigation: true,
-            enableBackNavigation: ! that.popScreenOnExit,
+            enableBackNavigation: true,
             showAsContinueButton: that.popScreenOnExit,
             enableNavigation: true
         };
