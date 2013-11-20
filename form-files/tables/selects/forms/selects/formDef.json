@@ -1125,9 +1125,9 @@
         "elementType": "mimeUri",
         "isUnitOfRetention": true,
         "properties": {
-          "uri": {
+          "uriFragment": {
             "type": "string",
-            "elementKey": "picture_uri"
+            "elementKey": "picture_uriFragment"
           },
           "contentType": {
             "type": "string",
