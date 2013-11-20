@@ -1680,7 +1680,9 @@ promptTypes.media = promptTypes.base.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
-            'capture', that.captureAction, JSON.stringify({ extras: { newFile: "opendatakit-macro(newFile)" }}));
+            'capture', that.captureAction, JSON.stringify({ extras: { 
+				appName: opendatakit.getPlatformInfo().appName, 
+				uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
         ctxt.log('D','media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             ctxt.log("W",'media.capture',platInfo.container + " Should be OK got >" + outcome + "<");
@@ -1697,7 +1699,9 @@ promptTypes.media = promptTypes.base.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
-            'choose', that.chooseAction,  JSON.stringify({ extras: { newFile: "opendatakit-macro(newFile)" }}));
+            'choose', that.chooseAction,  JSON.stringify({ extras: { 
+				appName: opendatakit.getPlatformInfo().appName, 
+				uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
         ctxt.log('D','media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             ctxt.log("W",'media.capture', platInfo.container + " Should be OK got >" + outcome + "<");
