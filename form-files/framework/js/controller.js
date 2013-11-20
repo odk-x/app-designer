@@ -1073,14 +1073,17 @@ return {
 
         _log: function( severity, contextMsg ) {
             var value = this.loggingContextChain[0];
-            var flattened =    contextMsg + " contextType: " + value.method + " (" +
+            var flattened = contextMsg + " contextType: " + value.method + " (" +
                 value.detail + ") seqAtEnd: " + this.getCurrentSeqNo();
             var pi = opendatakit.getPlatformInfo();
             var ll = (pi && pi.logLevel) ? pi.logLevel : 'D';
             switch(severity) {
-            default:
             case 'S':
+                shim.log(severity, flattened);
+                break;
             case 'F':
+                shim.log(severity, flattened);
+                break;
             case 'E':
                 shim.log(severity, flattened);
                 break;
@@ -1103,6 +1106,9 @@ return {
                 if ( ll !== 'E' && ll !== 'W' && ll !== 'I' && ll !== 'D' ) {
                     shim.log(severity, flattened);
                 }
+                break;
+            default:
+                shim.log(severity, flattened);
                 break;
             }
         }

@@ -224,7 +224,8 @@ getAllData:function(ctxt, mdl, instanceId) {
                     if ( jsonType.isUnitOfRetention ) {
                         elementPath = jsonType.elementPath;
                         if ( jsonType.isSessionVariable ) {
-                            dbValue = JSON.parse(shim.getSessionVariable(opendatakit.getRefId(), elementPath ));
+                            var jsValue = shim.getSessionVariable(opendatakit.getRefId(), elementPath );
+                            dbValue = (jsValue === null || jsValue === undefined) ? null : JSON.parse(jsValue);
                         } else {
                             dbValue = row[dbKey];
                         }
