@@ -202,7 +202,7 @@ function buildFormStructures( instanceBodyPrefix, bindPrefix, bodyPrefix, model 
                 if ( defn.elementType === "date" ) {
                     instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
                     bindBody += bindPrefix + element + '" type="date"/>\n';
-                } else if ( defn.elementType === "datetime" ) {
+                } else if ( defn.elementType === "dateTime" ) {
                     instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
                     bindBody += bindPrefix + element + '" type="datetime"/>\n';
                 } else if ( defn.elementType === "time" ) {
