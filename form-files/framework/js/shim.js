@@ -11,13 +11,14 @@ window.shim = window.shim || {
     instanceId: null,
     sectionStateScreenHistory: [],
     sessionVariables: {},
+    logLevel: 'D',
     getBaseUrl: function() {
         return '../framework';
     },
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.
-        return '{"container":"Chrome","version":"21.0.1180.83 m","appName":"testing"}';
+        return '{"container":"Chrome","version":"21.0.1180.83 m","appName":"testing","logLevel":"' + this.logLevel + '"}';
     },
     getDatabaseSettings: function() {
         // version identifies the database schema that the database layer should use.
@@ -29,10 +30,43 @@ window.shim = window.shim || {
      * msg -- message to log
      */
     log: function(severity, msg) {
-        if ( severity === 'E' || severity === 'W' ) {
-            console.error(severity + '/' + msg);
-        } else {
-            console.log(severity + '/' + msg);
+        var logIt = false;
+        var ll = this.logLevel;
+        switch(severity) {
+        default:
+        case 'S':
+        case 'F':
+        case 'E':
+            logIt = true;
+            break;
+        case 'W':
+            if ( ll !== 'E' ) {
+                logIt = true;
+            }
+            break;
+        case 'I':
+            if ( ll !== 'E' && ll !== 'W' ) {
+                logIt = true;
+            }
+            break;
+        case 'D':
+            if ( ll !== 'E' && ll !== 'W' && ll !== 'I' ) {
+                logIt = true;
+            }
+            break;
+        case 'T':
+            if ( ll !== 'E' && ll !== 'W' && ll !== 'I' && ll !== 'D' ) {
+                logIt = true;
+            }
+            break;
+        }
+
+        if ( logIt ) {
+            if ( severity === 'E' || severity === 'W' ) {
+                console.error(severity + '/' + msg);
+            } else {
+                console.log(severity + '/' + msg);
+            }
         }
     },
     clearInstanceId: function( refId ) {
@@ -193,14 +227,14 @@ window.shim = window.shim || {
             return null;
         }
         this.log("D","shim: DO: popScreenHistory(" + refId + ")");
-		
+        
         if ( this.sectionStateScreenHistory.length === 0 ) {
             return null;
         }
         
         var lastSection;
-		
-		lastSection	= this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        
+        lastSection    = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
         if ( lastSection.history.length !== 0 ) {
             // pop history from within this section
             var lastHistory = lastSection.history.pop();
@@ -214,7 +248,7 @@ window.shim = window.shim || {
         if ( this.sectionStateScreenHistory.length === 0 ) {
             return null;
         }
-		
+        
         // return the screen from that last section... (do not pop the history)
         lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
         return lastSection.screen;
