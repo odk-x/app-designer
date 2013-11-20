@@ -663,10 +663,14 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     openInstance: function(evt) {
         var instanceId = undefined;
         var openButton = $(evt.target).closest(".openInstance");
-        if (openButton != undefined)
+
+        if (openButton != undefined) {
             instanceId = openButton.attr("instance-id");
-        else
-            ctxt.log('E','linked_table.openInstance', "instanceId is undefined");
+        }
+        else {
+            shim.log('E',"In linked_table.openInstance instanceId is undefined");
+            return
+        }
 
         var that = this;
         var ctxt = that.controller.newContext(evt);
@@ -690,16 +694,21 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     deleteInstance: function(evt) {
         var instanceId = undefined;
         var deleteButton = $(evt.target).closest(".deleteInstance");
-        if (deleteButton != undefined)
+        
+        if (deleteButton != undefined) {
             instanceId  = deleteButton.attr("instance-id"); 
-        else
-            ctxt.log('E','linked_table.deleteInstance', "instanceId is undefined"); 
+        }
+        else {
+            shim.log('E',"In linked_table.deleteInstance instanceId is undefined"); 
+            return;
+        }
 
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
         var tableRow = $(evt.target).closest(".linkedTable tr");
         if (tableRow != undefined)
             tableRow.remove();
-        var that = this;
-        var ctxt = that.controller.newContext(evt);
+
         that.disableButtons();
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
