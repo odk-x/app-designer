@@ -51,7 +51,10 @@ screenTypes.base = Backbone.View.extend({
                     try {
                         that.template = Handlebars.compile(source);
                         // ensure that require is unwound
-                        setTimeout(function() { ctxt.success(); }, 0 );
+                        setTimeout(function() { 
+                            ctxt.log('I',"screens."+that.type+"._whenTemplateIsReady.success.setTimeout");
+                            ctxt.success(); 
+                        }, 0 );
                     } catch (e) {
                         ctxt.log('E',"screens."+that.type+
                             ".whenTemplateIsReady.exception", e.message +
@@ -120,13 +123,16 @@ screenTypes.base = Backbone.View.extend({
     configureRenderContext: function(ctxt) {
         var that = this;
         if ( that.activePrompts.length == 0 ) {
+            ctxt.log('D','configureRenderContext.noActivePrompts.success');
             ctxt.success();
         } else {
             var onceCtxt = $.extend({}, ctxt, {
                 success:_.after(that.activePrompts.length, function() {
+                    ctxt.log('D','configureRenderContext.onceCtxt.success');
                     ctxt.success();
                 }),
                 failure: _.once(function(m) {
+                    ctxt.log('D','configureRenderContext.onceCtxt.failure');
                     ctxt.failure(m);
                 })
             });
@@ -138,7 +144,7 @@ screenTypes.base = Backbone.View.extend({
                     prompt.buildRenderContext(onceCtxt);
                 });
             } catch (e) {
-                ctxt.log('E','controller.beforeMove.exception', 
+                ctxt.log('E','screen.configureRenderContext.exception', 
                     "exception: " + ex.message + " stack: " + ex.stack  + " px: " + opPath);
                 ctxt.failure({message: "Exception while initializing screen: " + e.message});
             }
@@ -173,17 +179,17 @@ screenTypes.base = Backbone.View.extend({
             // intermediate state has been written to the 
             // database before commencing the rendering
             that.controller.commitChanges($.extend({},ctxt,{success:function() {
+                ctxt.log('D','buildRenderContext.commitChanges.success');
                 that.initializeRenderContext();
                 that.configureRenderContext(ctxt);
             }}));
         }}));
     },
-    afterRender: function(ctxt) {
+    afterRender: function() {
         var that = this;
         $.each(that.activePrompts, function(idx, prompt){
             prompt.afterRender();
         });
-        ctxt.success();
     },
     recursiveUndelegateEvents: function() {
         var that = this;

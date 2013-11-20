@@ -423,10 +423,13 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
       var instanceList = [];
       ctxt.log('D','get_linked_instances', dbTableName);
       that.withDb($.extend({},ctxt,{success: function() {
+            ctxt.log('D','get_linked_instances.overallSuccess', dbTableName);
+            ctxt.success(instanceList);
             ctxt.success(instanceList);
         }}), function(transaction) {
             var ss = databaseSchema.selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
             ctxt.sqlStatement = ss;
+            ctxt.log('D','get_linked_instances.inside', dbTableName);
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
@@ -440,6 +443,7 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
                         form_id: instance._form_id
                     });
                 }
+                ctxt.log('D','get_linked_instances.inside', dbTableName + " instanceList: " + instanceList.length);
             });
         });
 },
@@ -534,9 +538,9 @@ readTableDefinition:function(ctxt, formDef, table_id, formPath) {
         table_id: table_id
         };
                             
-    ctxt.log('D','initializeTables');
+    ctxt.log('D','readTableDefinition: ' + table_id);
     var tmpctxt = $.extend({},ctxt,{success:function() {
-                ctxt.log('D','readTableDefinition.success');
+                ctxt.log('D','readTableDefinition.success: ' + table_id);
                 ctxt.success(tlo);
             }});
     that.withDb(tmpctxt, function(transaction) {

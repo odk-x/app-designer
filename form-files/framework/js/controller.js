@@ -475,6 +475,7 @@ return {
                     op = that.getOperation(path);
                     action = op._token_type;
                 } else {
+                    shim.log('E',"controller._doActionAtLoop.failure px: " + path);
                     ctxt.failure(that.moveFailureMessage);
                     return;
                 }
@@ -503,29 +504,27 @@ return {
             success: function() {
                 popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath);
                 if ( m && m.message ) {
+                    popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath + " message: " + m.message);
                     // schedule a timer to show the message after the page has rendered
                     setTimeout(function() {
                         popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.setTimeout", "px: " + that.getCurrentScreenPath());
-                            that.screenManager.showScreenPopup(m);
-                        popupbasectxt.success();
+                        that.screenManager.showScreenPopup(m);
                     }, 500);
-                } else {
-                    popupbasectxt.success();
                 }
+                popupbasectxt.success();
             },
             failure: function(m2) {
                 popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup", "px: " + opPath);
                 // NOTE: if the setScreen() call failed, we should show the error from that...
                 if ( m2 && m2.message ) {
+                    popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup", "px: " + opPath + " message: " + m2.message);
                     // schedule a timer to show the mesage after the page has rendered
                     setTimeout(function() {
                         popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.setTimeout", "px: " + that.getCurrentScreenPath());
                         that.screenManager.showScreenPopup(m2);
-                        popupbasectxt.success();
                     }, 500);
-                } else {
-                    popupbasectxt.success();
                 }
+                popupbasectxt.success();
         }});
 
         /**
@@ -1033,6 +1032,15 @@ return {
         success: function(){
             this.updateAndLogOutstandingContexts(this);
             this._log('S', 'success!');
+            var pi = opendatakit.getPlatformInfo();
+            var ll = (pi && pi.logLevel) ? pi.logLevel : 'D';
+            if ( ll === 'T' ) {
+                try {
+                    throw Error("call stack details: ");
+                } catch (e) {
+                    this._log('T', e.stack);
+                }
+            }
             if ( this.chainedCtxt.ctxt != null ) {
                 this.chainedCtxt.ctxt.success();
             }
@@ -1041,6 +1049,15 @@ return {
         failure: function(m) {
             this.updateAndLogOutstandingContexts(this);
             this._log('E', 'failure! ' + (( m != null && m.message != null) ? m.message : ""));
+            var pi = opendatakit.getPlatformInfo();
+            var ll = (pi && pi.logLevel) ? pi.logLevel : 'D';
+            if ( ll === 'T' ) {
+                try {
+                    throw Error("call stack details: ");
+                } catch (e) {
+                    this._log('T', e.stack);
+                }
+            }
             if ( this.chainedCtxt.ctxt != null ) {
                 this.chainedCtxt.ctxt.failure(m);
             }
@@ -1058,7 +1075,36 @@ return {
             var value = this.loggingContextChain[0];
             var flattened =    contextMsg + " contextType: " + value.method + " (" +
                 value.detail + ") seqAtEnd: " + this.getCurrentSeqNo();
-            shim.log(severity, flattened);
+            var pi = opendatakit.getPlatformInfo();
+            var ll = (pi && pi.logLevel) ? pi.logLevel : 'D';
+            switch(severity) {
+            default:
+            case 'S':
+            case 'F':
+            case 'E':
+                shim.log(severity, flattened);
+                break;
+            case 'W':
+                if ( ll !== 'E' ) {
+                    shim.log(severity, flattened);
+                }
+                break;
+            case 'I':
+                if ( ll !== 'E' && ll !== 'W' ) {
+                    shim.log(severity, flattened);
+                }
+                break;
+            case 'D':
+                if ( ll !== 'E' && ll !== 'W' && ll !== 'I' ) {
+                    shim.log(severity, flattened);
+                }
+                break;
+            case 'T':
+                if ( ll !== 'E' && ll !== 'W' && ll !== 'I' && ll !== 'D' ) {
+                    shim.log(severity, flattened);
+                }
+                break;
+            }
         }
     },
     outstandingContexts: [],

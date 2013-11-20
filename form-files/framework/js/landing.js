@@ -159,13 +159,14 @@ window.landing = window.landing || {
     setController: function(ctxt, controller, refId, m) {
         var that = this;
         that.controller = controller;
-        shim.frameworkHasLoaded(refId, m === undefined || m === null );
-        if ( m ) {
-            that._chainedContextEvaluators = [];
-            ctxt.failure(m);
-        } else {
+        if ( m === undefined || m === null ) {
+            shim.frameworkHasLoaded(refId, true );
             ctxt.setChainedContext(that._getChainingContext());
             ctxt.success();
+        } else {
+            shim.frameworkHasLoaded(refId, false );
+            that._chainedContextEvaluators = [];
+            ctxt.failure(m);
         }
     }
 };

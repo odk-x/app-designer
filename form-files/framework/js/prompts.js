@@ -90,8 +90,15 @@ promptTypes.base = Backbone.View.extend({
                 require(['text!'+that.templatePath], function(source) {
                     try {
                         that.template = Handlebars.compile(source);
+                        ctxt.log('D',"prompts."+that.type+"._whenTemplateIsReady.success", 
+                            " px: " + that.promptIdx);
                         // ensure that require is unwound
-                        setTimeout(function() { ctxt.success(); }, 0 );
+                        setTimeout(function() { 
+                                ctxt.log('I',"prompts."+that.type+"._whenTemplateIsReady.success.setTimeout", 
+                                            " px: " + that.promptIdx);
+                                ctxt.success(); 
+                            }, 
+                            0 );
                     } catch (e) {
                         ctxt.log('E',"prompts."+that.type+"._whenTemplateIsReady.exception", 
                             " px: " + that.promptIdx + " exception: " + e.message + " e: " + String(e));
@@ -551,6 +558,8 @@ promptTypes._linked_type = promptTypes.base.extend({
                 that._linkedCachedInstanceName = null;
             }
             database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
+                ctxt.log('D',"prompts." + that.type + 
+                    'getLinkedMdl.readTableDefinition.success', "px: " + that.promptIdx );
                 that._linkedCachedMdl = tlo;
                 ctxt.success(tlo);
             }}), formDef, that.getLinkedTableId(), filePath);
@@ -616,15 +625,18 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             var selArgs = queryDefn.selectionArgs();
             var ordBy = that.convertOrderBy(linkedMdl);
             var displayElementName = that.getLinkedInstanceName();
+            ctxt.log('D',"prompts." + that.type + ".configureRenderContext.before.get_linked_instances", "px: " + that.promptIdx);
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
-                    that.renderContext.instances = instanceList;
-                    // change this to incomplete if it wasn't saved via the specific form
-                    for (var i = 0; i < instanceList.length; i++) {
-                        if (instanceList[i].form_id != that.getLinkedFormId()) {
-                            instanceList[i].savepoint_type = "incomplete";
-                        }
+                ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances", "px: " + that.promptIdx);
+                that.renderContext.instances = instanceList;
+                // change this to incomplete if it wasn't saved via the specific form
+                for (var i = 0; i < instanceList.length; i++) {
+                    if (instanceList[i].form_id != that.getLinkedFormId()) {
+                        instanceList[i].savepoint_type = opendatakit.savepoint_type_incomplete;
                     }
-                    ctxt.success();
+                }
+                ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances.success", "px: " + that.promptIdx + " instanceList: " + instanceList.length);
+                ctxt.success();
             }}), dbTableName, selString, selArgs, displayElementName, ordBy);
         }}));
     },
@@ -658,6 +670,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             var dbTableName = linkedMdl.tableMetadata.dbTableName;
             database.delete_linked_instance_all($.extend({},ctxt,{success:function() {
                     that.enableButtons();
+                    that.reRender(ctxt);
                 },
                 failure:function(m) {
                     that.enableButtons();
@@ -999,6 +1012,8 @@ promptTypes.select = promptTypes._linked_type.extend({
                 //The next two lines determine if the checkbox was already checked.
                 this.renderContext.other &&
                 this.renderContext.other.checked) {
+                ctxt.log('D',"prompts." + this.type + ".modification.withOther.hack", "px: " + this.promptIdx);
+                ctxt.success();
                 return;
             }
         }
@@ -1131,8 +1146,7 @@ promptTypes.select = promptTypes._linked_type.extend({
         }
     },
     deselect: function(evt) {
-        var ctxt = this.controller.newContext(evt);
-        ctxt.log('D',"prompts." + this.type + ".deselect", "px: " + this.promptIdx);
+        shim.log('D',"prompts." + this.type + ".deselect px: " + this.promptIdx);
         this.$('input:checked').prop('checked', false).change();
     }
 });
@@ -1317,25 +1331,21 @@ promptTypes.input_type = promptTypes.base.extend({
         "swiperight .input-container": "stopPropagation"
     },
     //DebouncedRender throttles rerendering so that sliders work.
-    debouncedRender: _.debounce(function(ctxt) {
-        this.reRender(ctxt);
+    debouncedRender: _.debounce(function(evt) {
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
+        that.reRender(ctxt);
     }, 500, true),
     modification: function(evt) {
         var value = $(evt.target).val();
         var that = this;
-        if ( that.insideMutex ) {
-            shim.log("D","prompts." + that.type + ".modification event received while inside mutex");
-            return;
-        }
         if ( that.lastEventTimestamp == evt.timeStamp ) {
             shim.log("D","prompts." + that.type + ".modification duplicate event ignored");
             return;
         }
         that.lastEventTimestamp = evt.timeStamp;
         shim.log("D","prompts." + that.type + ".modification event being processed");
-        that.insideMutex = true;
-        var ctxt = that.controller.newContext(evt);
-        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
         var renderContext = that.renderContext;
         // track original value
         var originalValue = that.getValue();
@@ -1347,8 +1357,7 @@ promptTypes.input_type = promptTypes.base.extend({
             that.setValueDeferredChange(originalValue);
         }
         renderContext.value = value;
-        that.insideMutex = false;
-        that.debouncedRender(ctxt);
+        that.debouncedRender(evt);
     },
     configureRenderContext: function(ctxt) {
         var renderContext = this.renderContext;
@@ -1780,8 +1789,6 @@ promptTypes.launch_intent = promptTypes.base.extend({
             $('#block-ui').hide().off();
             ctxt.failure({message: "Action canceled."});
         }
-        //Removing this because I want to simulate intents
-        //when not on android.
     },
     /**
      * When the intent returns a result this factory function creates a callback to process it.

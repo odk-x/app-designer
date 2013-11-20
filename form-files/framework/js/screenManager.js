@@ -144,6 +144,7 @@ return Backbone.View.extend({
         // completion.
         screen.buildRenderContext($.extend({render:true},ctxt,{success:function(){
         
+                ctxt.log('D', "screenManager.commonDrawScreen.screen.buildRenderContext.success");
                 // patch up navigation settings for the screen...
                 // if neither forward or backward navigation is enabled, disable all navigations.
                 if ( !screen._renderContext.enableNavigation ) {
@@ -163,8 +164,10 @@ return Backbone.View.extend({
                 that.activeScreen = screen;
 
                 // render screen
+                ctxt.log('D', "screenManager.commonDrawScreen.screen.before.render");
                 screen.render($.extend({},ctxt,{success: function() {
                     
+                    ctxt.log('D', "screenManager.commonDrawScreen.screen.render.success");
                     if ( that.currentPageEl == screen.$el ) {
                         // overwrites the old $el in the DOM at this point...
                         that.currentPageEl.replaceWith(screen.$el);
@@ -177,6 +180,7 @@ return Backbone.View.extend({
                     
                     // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
                     that.savedCtxt = $.extend({}, ctxt, {success: function() {
+                            ctxt.log('D', "screenManager.commonDrawScreen.savedCtxt.success (should be from within handlePageChange)");
                             window.clearTimeout(activateTimeout);
                             that.hideSpinnerOverlay();
                             that.pageChangeActionLockout = false;
@@ -192,6 +196,7 @@ return Backbone.View.extend({
                     });
                 }}));
             }, failure: function(m) {
+                ctxt.log('D', "screenManager.screen.buildRenderContext.failure");
                 that.savedCtxt = null;
                 window.clearTimeout(activateTimeout);
                 that.hideSpinnerOverlay();
@@ -388,11 +393,10 @@ return Backbone.View.extend({
                 // TODO: unclear what proper action should be for a failure
                 // during afterRender(). For now, the display ends up in an 
                 // inconsistent state.
-                that.activeScreen.afterRender($.extend({}, ctxt, {success: function() {
-                    that.activeScreen.recursiveDelegateEvents();
-                    that.removePreviousPageEl();
-                    ctxt.success();
-                }}));
+                that.activeScreen.afterRender();
+                that.activeScreen.recursiveDelegateEvents();
+                that.removePreviousPageEl();
+                ctxt.success();
             } else {
                 that.removePreviousPageEl();
                 ctxt.success();
