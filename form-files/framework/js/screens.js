@@ -78,15 +78,6 @@ screenTypes.base = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    /**
-     * stopPropagation is used in the events map to disable swiping on various elements
-     **/
-    stopPropagation: function(evt){
-        var ctxt = this.controller.newContext(evt);
-        ctxt.log('D',"screens." + this.type + ".stopPropagation", "px: " + this.promptIdx + "evt: " + evt);
-        evt.stopImmediatePropagation();
-        ctxt.success();
-    },
     reRender: function(ctxt) {
         var that = this;
         that._screenManager.refreshScreen(ctxt);

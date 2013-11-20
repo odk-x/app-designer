@@ -215,10 +215,12 @@ return Backbone.View.extend({
         if (that.eventTimeStamp == evt.timeStamp) {
             ctxt.log('I','screenManager.gotoNextScreen.duplicateEvent');
             ctxt.success();
-            return false;
+			evt.preventDefault();
+            return;
         }
         that.eventTimeStamp = evt.timeStamp;
-        return that.gotoNextScreenAction(ctxt);
+		that.gotoNextScreenAction(ctxt);
+		evt.preventDefault();
     },
     gotoNextScreenAction: function(ctxt) {
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
@@ -226,7 +228,7 @@ return Backbone.View.extend({
         if(that.pageChangeActionLockout) {
             ctxt.log('D','screenManager.gotoNextScreen.ignoreDisabled');
             ctxt.success();
-            return false;
+            return;
         }
         that.pageChangeActionLockout = true;
         that.controller.gotoNextScreen($.extend({},ctxt,{success:function(){
@@ -236,7 +238,6 @@ return Backbone.View.extend({
                     that.pageChangeActionLockout = false; 
                     ctxt.failure(m);
                 }}));
-        return false;
     },
     gotoPreviousScreen: function(evt) {
         var that = this;
@@ -248,10 +249,12 @@ return Backbone.View.extend({
         if (that.eventTimeStamp == evt.timeStamp) {
             ctxt.log('I','screenManager.gotoPreviousScreen.duplicateEvent');
             ctxt.success();
-            return false;
+			evt.preventDefault();
+            return;
         }
         that.eventTimeStamp = evt.timeStamp;
-        return that.gotoPreviousScreenAction(ctxt);
+        that.gotoPreviousScreenAction(ctxt);
+		evt.preventDefault();
     },
     gotoPreviousScreenAction: function(ctxt) {
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
@@ -259,7 +262,7 @@ return Backbone.View.extend({
         if(that.pageChangeActionLockout) {
             ctxt.log('D','screenManager.gotoPreviousScreen.ignoreDisabled');
             ctxt.success();
-            return false;
+            return;
         }
         that.pageChangeActionLockout = true;
         that.controller.gotoPreviousScreen($.extend({},ctxt,{success:function(){ 
@@ -269,7 +272,6 @@ return Backbone.View.extend({
                     that.pageChangeActionLockout = false; 
                     ctxt.failure(m);
                 }}));
-        return false;
     },
     showContents: function(evt) {
         var that = this;
@@ -281,7 +283,8 @@ return Backbone.View.extend({
         if (that.eventTimeStamp == evt.timeStamp) {
             ctxt.log('I','screenManager.showContents.duplicateEvent');
             ctxt.success();
-            return false;
+			evt.preventDefault();
+            return;
         }
         that.eventTimeStamp = evt.timeStamp;
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
@@ -289,7 +292,8 @@ return Backbone.View.extend({
         if(that.pageChangeActionLockout) {
             ctxt.log('D','screenManager.showContents.ignoreDisabled');
             ctxt.success();
-            return false;
+			evt.preventDefault();
+            return;
         }
         that.pageChangeActionLockout = true;
         that.controller.gotoContentsScreen($.extend({},ctxt,{success:function(){
@@ -299,7 +303,7 @@ return Backbone.View.extend({
                     that.pageChangeActionLockout = false; 
                     ctxt.failure(m);
                 }}));
-        return false;
+		evt.preventDefault();
     },
     ignoreChanges: function(evt) {
         evt.stopPropagation();
