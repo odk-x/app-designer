@@ -392,7 +392,7 @@ return Backbone.View.extend({
         that.savedCtxt = null;
         
         if ( ctxt != null ) {
-            ctxt.log('D','screenManager.handlePageChange.linked');
+            ctxt.log('I','screenManager.handlePageChange.linked');
             if ( that.activeScreen ) {
                 // TODO: unclear what proper action should be for a failure
                 // during afterRender(). For now, the display ends up in an 
