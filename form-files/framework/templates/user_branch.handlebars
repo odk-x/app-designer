@@ -1,0 +1,26 @@
+{{#if passiveError}}
+    <div class="ui-bar ui-bar-a">
+        {{passiveError}}
+    </div>
+{{/if}}
+<form>
+	{{> labelHint}}
+		<div class="ui-grid-b">
+		{{#each choices}}
+			<div class="branch-select-item" label="{{data_value}}">
+				<button class="launch">
+				{{#if display.image}}
+					<center>
+						<img  style="max-width: 100%;max-height: 100%;" src="{{formDirectory}}{{localize display.image}}"></img>
+					</center>
+				{{/if}}
+				{{#if display.text}}
+					<br/>
+					{{#substitute}}{{localize display.text}}{{/substitute}}
+				{{/if}}
+				</button>
+			</div>
+		{{/each}}
+		</div><!-- /grid-b -->
+	<div style="clear:both;"></div>
+</form>

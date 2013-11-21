@@ -1,0 +1,72 @@
+{{#if passiveError}}
+    <div class="ui-bar ui-bar-a">
+        {{passiveError}}
+    </div>
+{{/if}}
+<form>
+    {{> labelHint}}
+    <fieldset data-role="controlgroup"
+        {{#eachProperty inputAttributes}}
+            {{property}}="{{value}}"
+        {{/eachProperty}}>
+        {{#each choices}}
+            <label>
+                <input
+                    {{#if ../select_one}}
+                        type="radio"
+                    {{else}}
+                        type="checkbox"
+                    {{/if}}
+                    {{#if checked}}
+                        checked="checked"
+                    {{/if}}
+                        
+                    {{! the name attribue has to be the same for all the options}}
+                    name="{{../name}}"
+                    id="{{data_value}}"
+                    value="{{data_value}}" />
+            {{#if display.image}}
+                <div>
+                    <img src="{{formDirectory}}{{localize display.image}}"></img>
+                </div>
+            {{/if}}
+            {{#if display.text}}
+                {{#substitute}}{{localize display.text}}{{/substitute}}
+            {{/if}}
+            </label>
+        {{/each}}
+        {{#if withOther}}
+            <label>
+                <input
+                    {{#if select_one}}
+                        type="radio"
+                    {{else}}
+                        type="checkbox"
+                    {{/if}}
+                    {{#if other.checked}}
+                        checked="checked"
+                    {{/if}}
+                    name="{{name}}"
+                    id="other"
+                    value="other"/>
+                    <label for="other">
+                        Other:
+                        {{#if other.checked}}
+                        <input
+                            name="otherValue"
+                            value="{{other.value}}"
+                            style="height:36px;position:initial;"/>
+                        {{/if}}
+                    </label>
+            </label>
+        {{/if}}
+    </fieldset>
+    {{#unless required}}
+        {{#if false}}
+        {{#if display.deselect}}
+            <a data-role="button" data-mini="true" class="deselect">{{localize display.deselect}}</a>
+        {{/if}}
+        {{/if}}
+    {{/unless}}
+    <div style="clear:both;"></div>
+</form>

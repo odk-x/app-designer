@@ -1,0 +1,14 @@
+<form>
+    <label>{{localize display.text}}</label>
+    <select name="{{name}}">        
+        {{#each choices}}
+            <option 
+                {{#if selected}}
+                    selected
+                {{/if}}
+                value="{{value}}">
+                {{localize display.text}}
+            </option>
+        {{/each}}
+    </select>
+</form>

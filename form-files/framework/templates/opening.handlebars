@@ -1,0 +1,21 @@
+<div>
+    <center>
+        <img src="{{ headerImg }}" class="odk-formlogo" />
+        <p>You are at the start of:</p>
+        <p>"{{localize form_title}}".</p>
+        <!-- 
+        <p>Swipe the screen as shown below to begin.</p>
+        <div>
+            <span style="width:0;float:left;">
+                <img src="{{ backupImg }}"/>
+                <p style="white-space: nowrap;">Previous prompt</p>
+            </span>
+            <span style="float:right;">
+                <img src="{{ advanceImg }}"/>
+                <p>Next prompt</p>
+            </span>
+        </div>
+        -->
+		<p>{{#if display_field}}Instance: {{display_field}}{{else}}{{#if last_save_date}}Time of last save: {{last_save_date}}{{/if}}{{/if}}</p>
+    </center>
+</div>

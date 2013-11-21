@@ -1,0 +1,17 @@
+<div>
+    {{> labelHint}}
+    <input type="text" name="{{name}}" value="{{mediaPath}}"
+            style="background-color:lightgray;"
+            disabled="true"
+        />
+    {{#if invalid}}
+        <p>invalid</p>
+    {{/if}}
+    <button class="captureAction">Take Picture</button>
+    <button class="chooseAction">Choose Picture</button>
+    <div class="mediaContainer">
+        {{#if uriFragmentValue}}
+            <img width="200" src="{{mediaPath}}"/>
+        {{/if}}
+    </div>
+<div>

@@ -1,0 +1,19 @@
+<div>
+    {{> labelHint}}
+    <input type="text" name="{{name}}" value="{{mediaPath}}"
+            style="background-color:lightgray;"
+            disabled="true"
+        />
+    {{#if invalid}}
+        <p>invalid</p>
+    {{/if}}
+    <button class="captureAction">Capture Audio</button>
+    <button class="chooseAction">Choose Audio</button>
+    <div class="mediaContainer">
+        {{#if uriFragmentValue}}
+            <{{#if pre4Android}}video{{else}}audio{{/if}} id="{{safeIdentity}}" src="{{mediaPath}}" type="{{contentType}}"  {{#if videoPoster}}poster="{{videoPoster}}"{{/if}}
+						audio="true"{{#if pre4Android}} onclick="play()"{{/if}} controls="controls">audio control not supported</{{#if pre4Android}}video{{else}}audio{{/if}}>
+			
+        {{/if}}
+    </div>
+<div>

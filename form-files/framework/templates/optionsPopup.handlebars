@@ -1,0 +1,18 @@
+<div data-role="popup" data-theme="d" data-overlay-theme="d" id="optionsPopup">
+    <ul data-role="listview" data-inset="true" data-theme="d">
+        <li><a data-rel="popup"
+            class="languageMenu
+            {{#unless hasTranslations}}ui-disabled{{/unless}}">
+            Language
+            </a>
+        </li>
+        <li><a data-rel="popup" 
+            class="show-contents
+            {{#unless showContents}}ui-disabled{{/unless}}">
+            Contents
+            </a>
+        </li>
+        <li><a data-rel="popup" class="ignore-changes-and-exit">Ignore Changes + Exit</a></li>
+        <li><a data-rel="popup" class="save-incomplete-and-exit">Save Changes + Exit</a></li>
+    </ul>
+</div>
