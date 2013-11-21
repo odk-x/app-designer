@@ -426,7 +426,6 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
       that.withDb($.extend({},ctxt,{success: function() {
             ctxt.log('D','get_linked_instances.overallSuccess', dbTableName);
             ctxt.success(instanceList);
-            ctxt.success(instanceList);
         }}), function(transaction) {
             var ss = databaseSchema.selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
             ctxt.sqlStatement = ss;

@@ -21,6 +21,7 @@ verifyLoad('screenManager',
 
 return Backbone.View.extend({
     el: "body",
+    unknownScreenError: {message:"Internal Error: Unable to determine current screen."},
     screenTemplate: Handlebars.compile(screenPopup),
     optionsTemplate: Handlebars.compile(optionsPopup),
     languageTemplate: Handlebars.compile(languagePopup),
@@ -100,6 +101,10 @@ return Backbone.View.extend({
             screen = that.activeScreen;
             redraw = true;
             transition = 'none'; // redrawing!
+            if ( that.activeScreen == null ) {
+                ctxt.failure(that.unknownScreenError);
+                return;
+            }
         }
         var locales = opendatakit.getFormLocalesValue();
         // useful defaults...
@@ -134,6 +139,22 @@ return Backbone.View.extend({
         // make sure screen knows about this screen manager
         screen._screenManager = that;
 
+        var cleanupCtxt = $.extend({}, ctxt, {success: function() {
+                ctxt.log('D', "screenManager.commonDrawScreen.ultimate.success (should be from within handlePageChange)");
+                that.savedCtxt = null;
+                window.clearTimeout(activateTimeout);
+                that.hideSpinnerOverlay();
+                that.pageChangeActionLockout = false;
+                ctxt.success();
+            }, failure: function(m) {
+                ctxt.log('D', "screenManager.commonDrawScreen.ultimate.failure");
+                that.savedCtxt = null;
+                window.clearTimeout(activateTimeout);
+                that.hideSpinnerOverlay();
+                that.pageChangeActionLockout = false;
+                ctxt.failure(m);
+            }});
+
         //A better way to do this might be to pass a controller interface object to 
         //buildRenderContext that can trigger screen refreshes, as well as goto other screens.
         //(We would not allow screens to access the controller directly).
@@ -142,9 +163,9 @@ return Backbone.View.extend({
         // 
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
-        screen.buildRenderContext($.extend({render:true},ctxt,{success:function(){
+        var buildCtxt = $.extend({render:true},cleanupCtxt,{success:function(){
         
-                ctxt.log('D', "screenManager.commonDrawScreen.screen.buildRenderContext.success");
+                cleanupCtxt.log('D', "screenManager.commonDrawScreen.screen.buildRenderContext.success");
                 // patch up navigation settings for the screen...
                 // if neither forward or backward navigation is enabled, disable all navigations.
                 if ( !screen._renderContext.enableNavigation ) {
@@ -160,14 +181,11 @@ return Backbone.View.extend({
                     screen._renderContext.enableNavigation = false;
                 }
 
-                // make the new screen the active screen (...no-op if redraw).
-                that.activeScreen = screen;
-
                 // render screen
-                ctxt.log('D', "screenManager.commonDrawScreen.screen.before.render");
-                screen.render($.extend({},ctxt,{success: function() {
+                cleanupCtxt.log('D', "screenManager.commonDrawScreen.screen.before.render");
+                var screenRenderCtxt = $.extend({},cleanupCtxt,{success: function() {
                     
-                    ctxt.log('D', "screenManager.commonDrawScreen.screen.render.success");
+                    cleanupCtxt.log('D', "screenManager.commonDrawScreen.screen.render.success");
                     if ( that.currentPageEl == screen.$el ) {
                         // overwrites the old $el in the DOM at this point...
                         that.currentPageEl.replaceWith(screen.$el);
@@ -178,14 +196,10 @@ return Backbone.View.extend({
                         window.$.mobile.pageContainer.append(that.currentPageEl);
                     }
                     
+                    // make the new screen the active screen (...no-op if redraw).
+                    that.activeScreen = screen;
                     // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
-                    that.savedCtxt = $.extend({}, ctxt, {success: function() {
-                            ctxt.log('D', "screenManager.commonDrawScreen.savedCtxt.success (should be from within handlePageChange)");
-                            window.clearTimeout(activateTimeout);
-                            that.hideSpinnerOverlay();
-                            that.pageChangeActionLockout = false;
-                            ctxt.success();
-                        }});
+                    that.savedCtxt = cleanupCtxt;
                     // turn first child into a page...
                     //append it to the page container
                     // maybe need to drop spinner for jqMobile?: window.clearTimeout(activateTimeout);
@@ -194,16 +208,10 @@ return Backbone.View.extend({
                         transition: transition,
                         allowSamePageTransition: true
                     });
-                }}));
-            }, failure: function(m) {
-                ctxt.log('D', "screenManager.screen.buildRenderContext.failure");
-                that.savedCtxt = null;
-                window.clearTimeout(activateTimeout);
-                that.hideSpinnerOverlay();
-                that.pageChangeActionLockout = false;
-                ctxt.failure(m);
-            }
-        }));
+                }});
+                screen.render(screenRenderCtxt);
+            }});
+        screen.buildRenderContext(buildCtxt);
     },
     gotoNextScreen: function(evt) {
         var that = this;
@@ -215,12 +223,12 @@ return Backbone.View.extend({
         if (that.eventTimeStamp == evt.timeStamp) {
             ctxt.log('I','screenManager.gotoNextScreen.duplicateEvent');
             ctxt.success();
-			evt.preventDefault();
+            evt.preventDefault();
             return;
         }
         that.eventTimeStamp = evt.timeStamp;
-		that.gotoNextScreenAction(ctxt);
-		evt.preventDefault();
+        that.gotoNextScreenAction(ctxt);
+        evt.preventDefault();
     },
     gotoNextScreenAction: function(ctxt) {
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
@@ -249,12 +257,12 @@ return Backbone.View.extend({
         if (that.eventTimeStamp == evt.timeStamp) {
             ctxt.log('I','screenManager.gotoPreviousScreen.duplicateEvent');
             ctxt.success();
-			evt.preventDefault();
+            evt.preventDefault();
             return;
         }
         that.eventTimeStamp = evt.timeStamp;
         that.gotoPreviousScreenAction(ctxt);
-		evt.preventDefault();
+        evt.preventDefault();
     },
     gotoPreviousScreenAction: function(ctxt) {
         this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
@@ -283,7 +291,7 @@ return Backbone.View.extend({
         if (that.eventTimeStamp == evt.timeStamp) {
             ctxt.log('I','screenManager.showContents.duplicateEvent');
             ctxt.success();
-			evt.preventDefault();
+            evt.preventDefault();
             return;
         }
         that.eventTimeStamp = evt.timeStamp;
@@ -292,7 +300,7 @@ return Backbone.View.extend({
         if(that.pageChangeActionLockout) {
             ctxt.log('D','screenManager.showContents.ignoreDisabled');
             ctxt.success();
-			evt.preventDefault();
+            evt.preventDefault();
             return;
         }
         that.pageChangeActionLockout = true;
@@ -303,7 +311,7 @@ return Backbone.View.extend({
                     that.pageChangeActionLockout = false; 
                     ctxt.failure(m);
                 }}));
-		evt.preventDefault();
+        evt.preventDefault();
     },
     ignoreChanges: function(evt) {
         evt.stopPropagation();
@@ -331,6 +339,11 @@ return Backbone.View.extend({
         var that = this;
         var $contentArea = $('#optionsPopup');
         $contentArea.empty().remove();
+        if ( that.activeScreen == null ) {
+            evt.stopPropagation();
+            evt.stopImmediatePropagation();
+            return;
+        }
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         that.activeScreen.$el.append(that.optionsTemplate(rc)).trigger('pagecreate');
@@ -341,6 +354,11 @@ return Backbone.View.extend({
         $( "#optionsPopup" ).popup( "close" );
         var $contentArea = $('#languagePopup');
         $contentArea.empty().remove();
+        if ( that.activeScreen == null ) {
+            evt.stopPropagation();
+            evt.stopImmediatePropagation();
+            return;
+        }
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         that.activeScreen.$el.append(that.languageTemplate(rc)).trigger('pagecreate');
@@ -360,6 +378,11 @@ return Backbone.View.extend({
         var that = this;
         var $contentArea = $('#screenPopup');
         $contentArea.empty().remove();
+        if ( that.activeScreen == null ) {
+            evt.stopPropagation();
+            evt.stopImmediatePropagation();
+            return;
+        }
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         var rcWithMsg = $.extend({message: msg.message}, rc);
