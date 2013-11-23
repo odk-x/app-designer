@@ -2,13 +2,10 @@
   "xlsx": {
     "survey": [
       {
-        "type": "text",
-        "name": "household_id",
+        "type": "note",
         "display": {
-          "text": "Unique barcode ID or locator designation for this household (foreign key into household table)."
+          "text": "Data for household: {{household_id}}"
         },
-        "readonly": true,
-        "comments": "readonly is not implemented, but this would be a note-like field that was set to be the parent table key via the extra URL arguments.  It could be hidden and only displayed as a reference in a prompt label.",
         "_row_num": 2
       },
       {
@@ -286,10 +283,6 @@
         "_defn": [
           {
             "_row_num": 2,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 2,
             "section_name": "model"
           }
         ],
@@ -383,17 +376,14 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "text",
-            "name": "household_id",
+            "type": "note",
             "display": {
-              "text": "Unique barcode ID or locator designation for this household (foreign key into household table)."
+              "text": "Data for household: {{household_id}}"
             },
-            "readonly": true,
-            "comments": "readonly is not implemented, but this would be a note-like field that was set to be the parent table key via the extra URL arguments.  It could be hidden and only displayed as a reference in a prompt label.",
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "note",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
