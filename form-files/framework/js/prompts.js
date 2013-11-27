@@ -631,6 +631,11 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                 ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances", "px: " + that.promptIdx);
                 // set the image icon
                 for (var i = 0; i < instanceList.length ; i++){
+                	// sets the savepoint_type to incomplete if the formId doesn't match the current form
+                    if (instanceList[i]["form_id"] != that.getLinkedFormId()) {
+                        instanceList[i].savepoint_type = opendatakit.savepoint_type_incomplete;
+                    }
+                    
                     if (instanceList[i]["savepoint_type"] == "COMPLETE"){
                         instanceList[i]["icon_class"] = "ui-icon-check";
                     }  
@@ -650,12 +655,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                     { title : ""}
                 ];
                     
-                // change this to incomplete if it wasn't saved via the specific form
-                for (var i = 0; i < instanceList.length; i++) {
-                    if (instanceList[i].form_id != that.getLinkedFormId()) {
-                        instanceList[i].savepoint_type = opendatakit.savepoint_type_incomplete;
-                    }
-                }
+             
+
                 ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances.success", "px: " + that.promptIdx + " instanceList: " + instanceList.length);
                 ctxt.success();
             }}), dbTableName, selString, selArgs, displayElementName, ordBy);
