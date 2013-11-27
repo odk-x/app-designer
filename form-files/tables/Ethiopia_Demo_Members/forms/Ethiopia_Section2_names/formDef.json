@@ -13,160 +13,93 @@
     "survey": [
       {
         "type": "text",
-        "name": "fuel_injury",
+        "name": "name",
         "display": {
-          "text": "Specify injury"
+          "text": "What is the household member's name?"
         },
+        "required": true,
         "_row_num": 2
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section9_3_injuries",
-        "display": {
-          "title": "display"
-        },
+        "value": "Ethiopia_Section2_names",
         "_row_num": 2
       },
       {
-        "setting_name": "form_version",
-        "value": 20131112,
-        "_row_num": 3
-      },
-      {
         "setting_name": "table_id",
-        "value": "Ethiopia_members",
-        "_row_num": 4
+        "value": "Ethiopia_Demo_Members",
+        "_row_num": 3
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.3 Injuries"
+          "title": "Names"
         },
-        "_row_num": 5
+        "_row_num": 4
       },
       {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 6
+        "_row_num": 5
       }
     ],
     "model": [
       {
-        "name": "name",
+        "name": "household_id",
         "type": "string",
         "_row_num": 2
       },
       {
-        "name": "household_id",
-        "type": "string",
-        "_row_num": 3
-      },
-      {
         "name": "relation",
         "type": "select_one",
-        "_row_num": 4
+        "_row_num": 3
       },
       {
         "name": "gender",
         "type": "select_one",
-        "_row_num": 5
+        "_row_num": 4
       },
       {
         "name": "age",
         "type": "integer",
-        "_row_num": 6
+        "_row_num": 5
       },
       {
         "name": "marital_status",
         "type": "select_one",
+        "_row_num": 6
+      },
+      {
+        "name": "primary_occupation",
+        "type": "select_one",
         "_row_num": 7
       },
       {
-        "name": "months_away",
-        "type": "integer",
+        "name": "primary_cook",
+        "type": "select_one",
         "_row_num": 8
       },
       {
-        "name": "region_born",
-        "type": "select_one_with_other",
+        "name": "qa_cooking_1",
+        "type": "select_multiple",
         "_row_num": 9
       },
       {
-        "name": "religion",
-        "type": "select_one_with_other",
+        "name": "qa_food_expense_1",
+        "type": "select_multiple",
         "_row_num": 10
       },
       {
-        "name": "write_language",
-        "type": "select_one",
+        "name": "qa_fuel_1",
+        "type": "select_multiple",
         "_row_num": 11
       },
       {
-        "name": "attend_school",
-        "type": "select_one",
-        "_row_num": 12
-      },
-      {
-        "name": "school_type",
+        "name": "qa_fuel_purchase",
         "type": "select_multiple",
-        "_row_num": 13
-      },
-      {
-        "name": "grade_level",
-        "type": "select_one",
-        "_row_num": 14
-      },
-      {
-        "name": "post_secondary",
-        "type": "select_one",
-        "_row_num": 15
-      },
-      {
-        "name": "grade_within_level",
-        "type": "string",
-        "_row_num": 16
-      },
-      {
-        "name": "currently_school",
-        "type": "select_one",
-        "_row_num": 17
-      },
-      {
-        "name": "answering",
-        "type": "select_one_with_other",
-        "_row_num": 18
-      },
-      {
-        "name": "headache_7days",
-        "type": "select_one",
-        "_row_num": 19
-      },
-      {
-        "name": "headache_number_days",
-        "type": "integer",
-        "_row_num": 20
-      },
-      {
-        "name": "headache_2months",
-        "type": "select_one",
-        "_row_num": 21
-      },
-      {
-        "name": "dizziness_7days",
-        "type": "select_one",
-        "_row_num": 22
-      },
-      {
-        "name": "dizziness_number_days",
-        "type": "integer",
-        "_row_num": 23
-      },
-      {
-        "name": "dizziness_2months",
-        "type": "select_one",
-        "_row_num": 24
+        "_row_num": 12
       }
     ]
   },
@@ -191,37 +124,29 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section9_3_injuries",
-        "display": {
-          "title": "display"
-        },
+        "value": "Ethiopia_Section2_names",
         "_row_num": 2
-      },
-      "form_version": {
-        "setting_name": "form_version",
-        "value": 20131112,
-        "_row_num": 3
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "Ethiopia_members",
-        "_row_num": 4
+        "value": "Ethiopia_Demo_Members",
+        "_row_num": 3
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.3 Injuries"
+          "title": "Names"
         },
-        "_row_num": 5
+        "_row_num": 4
       },
       "instance_name": {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 6
+        "_row_num": 5
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 5,
+        "_row_num": 4,
         "value": [
           {
             "display": {
@@ -233,36 +158,26 @@
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 5,
+        "_row_num": 4,
         "value": "default"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.3 Injuries"
+          "title": "Names"
         },
-        "_row_num": 5
+        "_row_num": 4
       }
     },
     "choices": {},
     "queries": {},
     "calculates": {},
     "model": {
-      "name": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "name"
-      },
       "household_id": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 2,
             "section_name": "model"
           }
         ],
@@ -272,7 +187,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "model"
           }
         ],
@@ -282,7 +197,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -292,7 +207,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -302,188 +217,93 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
         "elementKey": "marital_status"
       },
-      "months_away": {
-        "type": "integer",
+      "primary_occupation": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "primary_occupation"
+      },
+      "primary_cook": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 8,
             "section_name": "model"
           }
         ],
-        "elementKey": "months_away"
+        "elementKey": "primary_cook"
       },
-      "region_born": {
-        "type": "string",
+      "qa_cooking_1": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "qa_cooking_1_items"
+        },
         "_defn": [
           {
             "_row_num": 9,
             "section_name": "model"
           }
         ],
-        "elementKey": "region_born"
+        "elementKey": "qa_cooking_1"
       },
-      "religion": {
-        "type": "string",
+      "qa_food_expense_1": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "qa_food_expense_1_items"
+        },
         "_defn": [
           {
             "_row_num": 10,
             "section_name": "model"
           }
         ],
-        "elementKey": "religion"
+        "elementKey": "qa_food_expense_1"
       },
-      "write_language": {
-        "type": "string",
+      "qa_fuel_1": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "qa_fuel_1_items"
+        },
         "_defn": [
           {
             "_row_num": 11,
             "section_name": "model"
           }
         ],
-        "elementKey": "write_language"
+        "elementKey": "qa_fuel_1"
       },
-      "attend_school": {
-        "type": "string",
+      "qa_fuel_purchase": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "qa_fuel_purchase_items"
+        },
         "_defn": [
           {
             "_row_num": 12,
             "section_name": "model"
           }
         ],
-        "elementKey": "attend_school"
+        "elementKey": "qa_fuel_purchase"
       },
-      "school_type": {
-        "type": "array",
-        "isUnitOfRetention": true,
-        "items": {
-          "type": "string",
-          "elementKey": "school_type_items"
-        },
-        "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "school_type"
-      },
-      "grade_level": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "grade_level"
-      },
-      "post_secondary": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 15,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "post_secondary"
-      },
-      "grade_within_level": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 16,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "grade_within_level"
-      },
-      "currently_school": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 17,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "currently_school"
-      },
-      "answering": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 18,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "answering"
-      },
-      "headache_7days": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 19,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "headache_7days"
-      },
-      "headache_number_days": {
-        "type": "integer",
-        "_defn": [
-          {
-            "_row_num": 20,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "headache_number_days"
-      },
-      "headache_2months": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 21,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "headache_2months"
-      },
-      "dizziness_7days": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 22,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "dizziness_7days"
-      },
-      "dizziness_number_days": {
-        "type": "integer",
-        "_defn": [
-          {
-            "_row_num": 23,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "dizziness_number_days"
-      },
-      "dizziness_2months": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 24,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "dizziness_2months"
-      },
-      "fuel_injury": {
+      "name": {
         "_defn": [
           {
             "_row_num": 2,
@@ -491,7 +311,7 @@
           }
         ],
         "type": "string",
-        "elementKey": "fuel_injury"
+        "elementKey": "name"
       }
     },
     "section_names": [
@@ -517,7 +337,7 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 9.3 Injuries"
+              "title": "Names"
             },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
@@ -602,10 +422,11 @@
         "prompts": [
           {
             "type": "text",
-            "name": "fuel_injury",
+            "name": "name",
             "display": {
-              "text": "Specify injury"
+              "text": "What is the household member's name?"
             },
+            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -623,7 +444,9 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            0
+          ]
         },
         "operations": [
           {
