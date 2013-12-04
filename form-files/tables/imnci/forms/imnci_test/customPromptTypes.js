@@ -8,6 +8,19 @@ function(promptTypes, $,       _) {
             buttonLabel: {
                 'default': 'Get Oxygen Saturation',
                 'hindi': 'Get Oxygen Saturation'
+            },
+            formattedValueForContentsDisplay: function() {
+                if ( !this.name ) {
+                    return '';
+                } else {
+                    var displayObject = this.getValue();
+                    if (displayObject.pulse != null && displayObject.ox != null) {
+                        return "pulse: " + displayObject.pulse + " ox: " + displayObject.ox;
+                    }
+                    else {
+                        return '';
+                    }
+                }
             }
         }),
         "breathcounter" : promptTypes.launch_intent.extend({

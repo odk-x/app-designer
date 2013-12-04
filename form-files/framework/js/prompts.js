@@ -1780,6 +1780,20 @@ promptTypes.media = promptTypes.base.extend({
     },
     updateRenderContext: function() {
         this.baseUpdateRenderContext();
+    },
+    formattedValueForContentsDisplay: function() {
+        if ( !this.name ) {
+            return '';
+        } else {
+            var displayObject = this.getValue();
+            if (displayObject != null) {
+                var ind = displayObject.uriFragment.lastIndexOf("/");
+                return displayObject.uriFragment.substring(++ind);
+            }
+            else {
+                return '';
+            }          
+        }
     }
 });
 promptTypes.image = promptTypes.media.extend({
@@ -1910,6 +1924,19 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
             altitude: jsonObject.result.altitude,
             accuracy: jsonObject.result.accuracy
         };
+    },
+    formattedValueForContentsDisplay: function() {
+        if ( !this.name ) {
+            return '';
+        } else {
+            var displayObject = this.getValue();
+            if (displayObject.latitude != null && displayObject.longitude != null) {
+                return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
+            }
+            else {
+                return '';
+            }
+        }
     }
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
