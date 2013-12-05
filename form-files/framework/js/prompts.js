@@ -679,7 +679,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.getLinkedFormId();
+        var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedFormId();
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
@@ -732,7 +732,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var uri = 'content://org.opendatakit.survey.android.provider.forms/' + platInfo.appName + '/' + that.getLinkedFormId();
+        var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedFormId();
         var auxHash = '';
         if ( queryDefn.auxillaryHash ) {
             auxHash = queryDefn.auxillaryHash();

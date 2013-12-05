@@ -32,7 +32,6 @@ dataTablePredefinedColumns: {
                      _locale: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' } },
 tableDefinitionsPredefinedColumns: {
                     _table_id: { type: 'string', isNotNullable: true, isUnitOfRetention: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
-                    _table_key: { type: 'string', isNotNullable: true, isUnitOfRetention: true, dbColumnConstraint: 'UNIQUE', elementPath: 'tableKey', elementSet: 'tableMetadata' },
                     _db_table_name: { type: 'string', isNotNullable: true, isUnitOfRetention: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
                     _sync_tag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'tableMetadata' },
                     _last_sync_time: { type: 'integer', isNotNullable: true, isUnitOfRetention: true, elementSet: 'tableMetadata' },
@@ -715,7 +714,6 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
 
     fullDef._table_definitions.push( { 
         _table_id: protoMdl.table_id, 
-        _table_key: dbTableName, 
         _db_table_name: dbTableName, 
         _sync_tag: "", 
         _last_sync_time: -1, 
