@@ -62,51 +62,6 @@
       {
         "clause": "end if",
         "_row_num": 7
-      },
-      {
-        "clause": "if",
-        "condition": "data('age') >= 10",
-        "_row_num": 8
-      },
-      {
-        "type": "integer",
-        "name": "months_away",
-        "display": {
-          "text": "For how many months during the last 12 months was {{name}} away from the household?",
-          "hint": "0 if never away, or less than two weeks."
-        },
-        "_row_num": 9
-      },
-      {
-        "clause": "end if",
-        "_row_num": 10
-      },
-      {
-        "type": "select_one_with_other",
-        "values_list": "regions",
-        "name": "region_born",
-        "display": {
-          "text": "In what region was {{name}} born?"
-        },
-        "_row_num": 11
-      },
-      {
-        "clause": "if",
-        "condition": "data('age') >= 10",
-        "_row_num": 12
-      },
-      {
-        "type": "select_one_with_other",
-        "values_list": "religions",
-        "name": "religion",
-        "display": {
-          "text": "What is {{name}}'s main religion?"
-        },
-        "_row_num": 13
-      },
-      {
-        "clause": "end if",
-        "_row_num": 14
       }
     ],
     "choices": [
@@ -285,134 +240,6 @@
           "text": "5. Widowed"
         },
         "_row_num": 23
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "tigray",
-        "display": {
-          "text": "1. Tigray"
-        },
-        "_row_num": 24
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "afar",
-        "display": {
-          "text": "2. Afar"
-        },
-        "_row_num": 25
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "amhara",
-        "display": {
-          "text": "3. Amhara"
-        },
-        "_row_num": 26
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "oromia",
-        "display": {
-          "text": "4. Oromia"
-        },
-        "_row_num": 27
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "benshangul_gumuz",
-        "display": {
-          "text": "5. Benshangul Gumuz"
-        },
-        "_row_num": 28
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "snnp",
-        "display": {
-          "text": "6. SNNP"
-        },
-        "_row_num": 29
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "gambella",
-        "display": {
-          "text": "7. Gambella"
-        },
-        "_row_num": 30
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "harari",
-        "display": {
-          "text": "8. Harari"
-        },
-        "_row_num": 31
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "addis_ababa",
-        "display": {
-          "text": "9. Addis Ababa"
-        },
-        "_row_num": 32
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "diredawa",
-        "display": {
-          "text": "10. Diredawa"
-        },
-        "_row_num": 33
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "orthodox",
-        "display": {
-          "text": "1. Orthodox"
-        },
-        "_row_num": 34
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "catholic",
-        "display": {
-          "text": "2. Catholic"
-        },
-        "_row_num": 35
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "protestant",
-        "display": {
-          "text": "3. Protestant"
-        },
-        "_row_num": 36
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "muslim",
-        "display": {
-          "text": "4. Muslim"
-        },
-        "_row_num": 37
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "traditional",
-        "display": {
-          "text": "5. Traditional"
-        },
-        "_row_num": 38
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "pagan",
-        "display": {
-          "text": "6. Pagan"
-        },
-        "_row_num": 39
       }
     ],
     "settings": [
@@ -423,7 +250,7 @@
       },
       {
         "setting_name": "table_id",
-        "value": "Ethiopia_members",
+        "value": "Ethiopia_Demo_Members",
         "_row_num": 3
       },
       {
@@ -451,79 +278,34 @@
         "_row_num": 3
       },
       {
-        "name": "write_language",
+        "name": "primary_occupation",
         "type": "select_one",
         "_row_num": 4
       },
       {
-        "name": "attend_school",
+        "name": "primary_cook",
         "type": "select_one",
         "_row_num": 5
       },
       {
-        "name": "school_type",
+        "name": "qa_cooking_1",
         "type": "select_multiple",
         "_row_num": 6
       },
       {
-        "name": "grade_level",
-        "type": "select_one",
+        "name": "qa_food_expense_1",
+        "type": "select_multiple",
         "_row_num": 7
       },
       {
-        "name": "post_secondary",
-        "type": "select_one",
+        "name": "qa_fuel_1",
+        "type": "select_multiple",
         "_row_num": 8
       },
       {
-        "name": "grade_within_level",
-        "type": "string",
+        "name": "qa_fuel_purchase",
+        "type": "select_multiple",
         "_row_num": 9
-      },
-      {
-        "name": "currently_school",
-        "type": "select_one",
-        "_row_num": 10
-      },
-      {
-        "name": "fuel_injury",
-        "type": "string",
-        "_row_num": 11
-      },
-      {
-        "name": "answering",
-        "type": "select_one_with_other",
-        "_row_num": 12
-      },
-      {
-        "name": "headache_7days",
-        "type": "select_one",
-        "_row_num": 13
-      },
-      {
-        "name": "headache_number_days",
-        "type": "integer",
-        "_row_num": 14
-      },
-      {
-        "name": "headache_2months",
-        "type": "select_one",
-        "_row_num": 15
-      },
-      {
-        "name": "dizziness_7days",
-        "type": "select_one",
-        "_row_num": 16
-      },
-      {
-        "name": "dizziness_number_days",
-        "type": "integer",
-        "_row_num": 17
-      },
-      {
-        "name": "dizziness_2months",
-        "type": "select_one",
-        "_row_num": 18
       }
     ]
   },
@@ -553,7 +335,7 @@
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "Ethiopia_members",
+        "value": "Ethiopia_Demo_Members",
         "_row_num": 3
       },
       "survey": {
@@ -775,138 +557,6 @@
           },
           "_row_num": 23
         }
-      ],
-      "regions": [
-        {
-          "choice_list_name": "regions",
-          "data_value": "tigray",
-          "display": {
-            "text": "1. Tigray"
-          },
-          "_row_num": 24
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "afar",
-          "display": {
-            "text": "2. Afar"
-          },
-          "_row_num": 25
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "amhara",
-          "display": {
-            "text": "3. Amhara"
-          },
-          "_row_num": 26
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "oromia",
-          "display": {
-            "text": "4. Oromia"
-          },
-          "_row_num": 27
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "benshangul_gumuz",
-          "display": {
-            "text": "5. Benshangul Gumuz"
-          },
-          "_row_num": 28
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "snnp",
-          "display": {
-            "text": "6. SNNP"
-          },
-          "_row_num": 29
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "gambella",
-          "display": {
-            "text": "7. Gambella"
-          },
-          "_row_num": 30
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "harari",
-          "display": {
-            "text": "8. Harari"
-          },
-          "_row_num": 31
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "addis_ababa",
-          "display": {
-            "text": "9. Addis Ababa"
-          },
-          "_row_num": 32
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "diredawa",
-          "display": {
-            "text": "10. Diredawa"
-          },
-          "_row_num": 33
-        }
-      ],
-      "religions": [
-        {
-          "choice_list_name": "religions",
-          "data_value": "orthodox",
-          "display": {
-            "text": "1. Orthodox"
-          },
-          "_row_num": 34
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "catholic",
-          "display": {
-            "text": "2. Catholic"
-          },
-          "_row_num": 35
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "protestant",
-          "display": {
-            "text": "3. Protestant"
-          },
-          "_row_num": 36
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "muslim",
-          "display": {
-            "text": "4. Muslim"
-          },
-          "_row_num": 37
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "traditional",
-          "display": {
-            "text": "5. Traditional"
-          },
-          "_row_num": 38
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "pagan",
-          "display": {
-            "text": "6. Pagan"
-          },
-          "_row_num": 39
-        }
       ]
     },
     "queries": {},
@@ -932,7 +582,7 @@
         ],
         "elementKey": "name"
       },
-      "write_language": {
+      "primary_occupation": {
         "type": "string",
         "_defn": [
           {
@@ -940,9 +590,9 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "write_language"
+        "elementKey": "primary_occupation"
       },
-      "attend_school": {
+      "primary_cook": {
         "type": "string",
         "_defn": [
           {
@@ -950,14 +600,14 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "attend_school"
+        "elementKey": "primary_cook"
       },
-      "school_type": {
+      "qa_cooking_1": {
         "type": "array",
         "isUnitOfRetention": true,
         "items": {
           "type": "string",
-          "elementKey": "school_type_items"
+          "elementKey": "qa_cooking_1_items"
         },
         "_defn": [
           {
@@ -965,127 +615,52 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "school_type"
+        "elementKey": "qa_cooking_1"
       },
-      "grade_level": {
-        "type": "string",
+      "qa_food_expense_1": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "qa_food_expense_1_items"
+        },
         "_defn": [
           {
             "_row_num": 7,
             "section_name": "model"
           }
         ],
-        "elementKey": "grade_level"
+        "elementKey": "qa_food_expense_1"
       },
-      "post_secondary": {
-        "type": "string",
+      "qa_fuel_1": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "qa_fuel_1_items"
+        },
         "_defn": [
           {
             "_row_num": 8,
             "section_name": "model"
           }
         ],
-        "elementKey": "post_secondary"
+        "elementKey": "qa_fuel_1"
       },
-      "grade_within_level": {
-        "type": "string",
+      "qa_fuel_purchase": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "qa_fuel_purchase_items"
+        },
         "_defn": [
           {
             "_row_num": 9,
             "section_name": "model"
           }
         ],
-        "elementKey": "grade_within_level"
-      },
-      "currently_school": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "currently_school"
-      },
-      "fuel_injury": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 11,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "fuel_injury"
-      },
-      "answering": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 12,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "answering"
-      },
-      "headache_7days": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "headache_7days"
-      },
-      "headache_number_days": {
-        "type": "integer",
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "headache_number_days"
-      },
-      "headache_2months": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 15,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "headache_2months"
-      },
-      "dizziness_7days": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 16,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "dizziness_7days"
-      },
-      "dizziness_number_days": {
-        "type": "integer",
-        "_defn": [
-          {
-            "_row_num": 17,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "dizziness_number_days"
-      },
-      "dizziness_2months": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 18,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "dizziness_2months"
+        "elementKey": "qa_fuel_purchase"
       },
       "relation": {
         "_defn": [
@@ -1126,36 +701,6 @@
         ],
         "type": "string",
         "elementKey": "marital_status"
-      },
-      "months_away": {
-        "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "elementKey": "months_away"
-      },
-      "region_born": {
-        "_defn": [
-          {
-            "_row_num": 11,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "region_born"
-      },
-      "religion": {
-        "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "religion"
       }
     },
     "section_names": [
@@ -1336,54 +881,12 @@
             "promptIdx": 3
           },
           {
-            "type": "integer",
-            "name": "months_away",
-            "display": {
-              "text": "For how many months during the last 12 months was {{name}} away from the household?",
-              "hint": "0 if never away, or less than two weeks."
-            },
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 4
-          },
-          {
-            "type": "select_one_with_other",
-            "values_list": "regions",
-            "name": "region_born",
-            "display": {
-              "text": "In what region was {{name}} born?"
-            },
-            "_row_num": 11,
-            "__rowNum__": 10,
-            "_token_type": "prompt",
-            "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 5
-          },
-          {
-            "type": "select_one_with_other",
-            "values_list": "religions",
-            "name": "religion",
-            "display": {
-              "text": "What is {{name}}'s main religion?"
-            },
-            "_row_num": 13,
-            "__rowNum__": 12,
-            "_token_type": "prompt",
-            "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen13",
-            "promptIdx": 6
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 15,
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 7
+            "_row_num": 8,
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 4
           }
         ],
         "validation_tag_map": {
@@ -1443,86 +946,22 @@
             "operationIdx": 6
           },
           {
-            "clause": "if",
-            "condition": "data('age') >= 10",
+            "_token_type": "exit_section",
+            "clause": "exit section",
             "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "goto_label",
-            "_branch_label": "_then8",
             "operationIdx": 7
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else10",
-            "_row_num": 10,
-            "operationIdx": 8
-          },
-          {
-            "_row_num": 9,
+            "_row_num": 8,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif10",
-            "_row_num": 10,
-            "operationIdx": 10
-          },
-          {
-            "_row_num": 11,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 11
-          },
-          {
-            "clause": "if",
-            "condition": "data('age') >= 10",
-            "_row_num": 12,
-            "__rowNum__": 11,
-            "_token_type": "goto_label",
-            "_branch_label": "_then12",
-            "operationIdx": 12
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else14",
-            "_row_num": 14,
-            "operationIdx": 13
-          },
-          {
-            "_row_num": 13,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 14
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif14",
-            "_row_num": 14,
-            "operationIdx": 15
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 15,
-            "operationIdx": 16
-          },
-          {
-            "_row_num": 15,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 17
+            "operationIdx": 8
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
-            "_row_num": 15,
-            "operationIdx": 18
+            "_row_num": 8,
+            "operationIdx": 9
           }
         ],
         "branch_label_map": {
@@ -1533,17 +972,8 @@
           "_screen6": 5,
           "_else7": 7,
           "_endif7": 7,
-          "_then8": 9,
-          "_screen9": 9,
-          "_else10": 11,
-          "_endif10": 11,
-          "_screen11": 11,
-          "_then12": 14,
-          "_screen13": 14,
-          "_else14": 16,
-          "_endif14": 16,
-          "_contents": 17,
-          "_screen15": 17
+          "_contents": 8,
+          "_screen8": 8
         }
       }
     }

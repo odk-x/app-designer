@@ -1,21 +1,16 @@
 <h3>Contents</h3>
-<ul data-role="listview">
+<ul data-role="listview" data-inset="true">
     {{#each prompts}}
         {{#unless hideInContents}}
-		<li>
-			<div class="select-contents-item" label="{{_branch_label_enclosing_screen}}">
+		<li data-shadow="false" data-icon-shadow="true" data-theme="d" data-icon="arrow-r" data-iconpos="right" class="select-contents-item" label="{{_branch_label_enclosing_screen}}">
+            <a class="select-contents-item-btn">
 				{{#if display.title}}
-					{{#substitute}}{{localize display.title}} {{/substitute}}{{formattedValueForContentsDisplay}}
+					<h3 class="ui-li-heading">{{#if display.title}}{{#substitute}}{{localize display.title}} {{/substitute}}{{/if}}</h3>
 				{{else}}
-					{{#if display.text}}{{#substitute}}{{localize display.text}} {{/substitute}}{{/if}}{{formattedValueForContentsDisplay}}
+					<h3 class="ui-li-heading">{{#if display.text}}{{#substitute}}{{localize display.text}} {{/substitute}}{{/if}}</h3>
 				{{/if}}
-				{{! if the prompt has a data field, display edit, otherwise display go to}}
-				{{#if name}}
-					<a class="select-contents-item-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">edit</a>
-				{{else}} 
-					<a class="select-contents-item-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">go to</a>
-				{{/if}}
-			</div>
+                <p class="ui-li-desc">{{formattedValueForContentsDisplay}}</p>
+            </a>
 		</li>
         {{/unless}}
     {{else}}

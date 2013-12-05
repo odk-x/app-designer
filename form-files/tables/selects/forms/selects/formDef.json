@@ -410,6 +410,7 @@
         "display": {
           "text": "The following data will be used to generate a graph."
         },
+        "hideInContents": true,
         "_row_num": 62
       },
       {
@@ -419,7 +420,6 @@
           "text": "Enter approximate age of bird (in years):",
           "hint": "Must be less than 20."
         },
-        "hideInContents": true,
         "constraint": "data('age') <= 20",
         "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
         "_row_num": 63
@@ -1475,6 +1475,7 @@
             "display": {
               "text": "The following data will be used to generate a graph."
             },
+            "hideInContents": true,
             "_row_num": 62,
             "__rowNum__": 61,
             "_token_type": "prompt",
@@ -1489,7 +1490,6 @@
               "text": "Enter approximate age of bird (in years):",
               "hint": "Must be less than 20."
             },
-            "hideInContents": true,
             "constraint": "data('age') <= 20",
             "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
             "_row_num": 63,
