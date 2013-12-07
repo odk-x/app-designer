@@ -24,7 +24,7 @@ dataTablePredefinedColumns: {
                      _id: {type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _uri_access_control: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _sync_tag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _sync_state: { type: 'integer', isNotNullable: true, 'default': 0, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
+                     _sync_state: { type: 'integer', isNotNullable: true, 'default': 1, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _conflict_type: { type: 'integer', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _savepoint_timestamp: { type: 'integer', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _savepoint_type: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
@@ -717,7 +717,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
         _db_table_name: dbTableName, 
         _sync_tag: "", 
         _last_sync_time: -1, 
-        _sync_state: 'rest', 
+        _sync_state: 'inserting', 
         _transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
