@@ -24,7 +24,7 @@ dataTablePredefinedColumns: {
                      _id: {type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _uri_access_control: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _sync_tag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _sync_state: { type: 'integer', isNotNullable: true, 'default': 1, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
+                     _sync_state: { type: 'string', isNotNullable: true, 'default': 'inserting', isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _conflict_type: { type: 'integer', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _savepoint_timestamp: { type: 'integer', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _savepoint_type: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
@@ -650,7 +650,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayName",
-                _type: "string",
+                _type: "json",
                 _value: JSON.stringify(surveyDisplayName) // this is a localizable string...
             } );
             fullDef._key_value_store_active.push( {
@@ -658,7 +658,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayChoicesList",
-                _type: "string",
+                _type: "json",
                 _value: ((jsonDefn.choicesList === undefined || jsonDefn.choicesList === null) ? "" : JSON.stringify(protoMdl.formDef.specification.choices[jsonDefn.choicesList]))
             } );
             fullDef._key_value_store_active.push( {
@@ -706,7 +706,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "joins",
-                _type: "string",
+                _type: "json",
                 _value: ""
             } );
         }
@@ -723,8 +723,8 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     // construct the kvPairs to insert into kvstore
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'tableType', _type: 'string', _value: 'data' } );
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'accessControlTableId', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'string', _value: JSON.stringify(formTitle) } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'string', _value: JSON.stringify(displayColumnOrder) } );
+    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'json', _value: JSON.stringify(formTitle) } );
+    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'json', _value: JSON.stringify(displayColumnOrder) } );
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'primeCols', _type: 'string', _value: '' } );
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'indexCol', _type: 'string', _value: '' } );
