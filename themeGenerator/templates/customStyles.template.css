@@ -1,0 +1,38 @@
+.odk-container, .odk-screen, .odk-scroll, .ui-page, .ui-li, .ui-page  {
+	color: {{font-color}};
+	background: {{background-color}}; 
+	text-shadow: 0 /*{d-body-shadow-x}*/ 0 /*{d-body-shadow-y}*/ 0 /*{d-body-shadow-radius}*/ #000 /*{d-body-shadow-color}*/;
+  font-family:  {{font-family}};
+  
+}
+.odk-label {
+	color: {{font-color}};
+    font-size: large;
+}
+
+.odk-hint {
+	color: {{font-color}};
+	font-size: 95%;
+    font-style: italic;
+}
+
+.ui-btn-text {
+	color:  {{button-text-color}};
+    font-size: 1em;
+}
+
+.ui-btn-up-d a.ui-link-inherit{
+	color:  {{button-text-color}};
+}
+
+.ui-btn-hover-d a.ui-link-inherit{
+	color: {{button-text-color}};
+}
+
+.ui-header .ui-btn-inner, .ui-footer .ui-btn-inner, .ui-mini .ui-btn-inner {
+	color:  #000000;
+    font-size: 1em;
+}
+.ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label {
+    font-size: 1em;
+}

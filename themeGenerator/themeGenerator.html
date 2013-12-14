@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Theme Generator</title>
+    <script src="./lib/jquery.1.10.2.js"></script>
+    <script src="./lib/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="./lib/colorpicker/spectrum.js"></script>
+    <script src="./lib/FileSaver.js"></script>
+    <link rel='stylesheet' href='./lib/colorpicker/spectrum.css'/>
+    <link rel='stylesheet' href='./lib/jquery-ui-1.10.3.custom.min.css'/>
+    <link rel='stylesheet' href='./generateStyle.css'/>
+    <script src="./themeGenerator.js"></script>
+  </head>
+  <body>
+  <div id="toolbar" class="accordion ui-widget-content">
+    <h3>General</h3>
+    <div class="toobar-section">
+      <div class='nowrap'>
+        <label for="background-color">Background</label>
+        <div class="pull-right">
+          <input id='background-color' type="text" class="colorpicker update-styles" name="background-color" value="#13357d"></input>
+        </div>
+      </div>
+      <div class='nowrap'>
+        <label for="font-color">Text</label>
+        <div class="pull-right">
+          <input id='font-color' type="text" class="colorpicker update-styles" name="font-color" value="#fff"></input>
+        </div>
+      </div>
+      <div class='nowrap'>
+        <label for="font-family">Font</label>
+        <div class="pull-right">
+          <select id="select-font-family" class="update-styles" name="select-font-family">
+          <option> Serif </option>
+          <option> Arial </option>
+          <option> Sans-Serif </option>                                  
+          <option> Tahoma </option>
+          <option> Verdana </option>
+          <option> Lucida Sans Unicode </option>                               
+          </select>
+        </div>
+      </div>
+    </div>
+    <h3>Button Styles </h3>
+    <div class="toolbar-section">
+      <div class= "nowrap">
+        <label for="button-text-color">Text Color</label>
+        <div class="pull-right">
+          <input id='button-text-color' type="text" class="colorpicker update-styles" name="button-text-color" value="#000"></input>
+        </div>
+      </div>
+      <div class="nowrap"> 
+        <label for="button-color">Color</label>
+        <div class="pull-right">
+          <input id='button-color' type="text" class="colorpicker update-styles" name="button-color" value="#fff"></input>
+        </div>
+      </div>
+      <div class="nowrap">
+        <label for="button-selected-color">Selected color</label>
+        <div class="pull-right">
+          <input id='button-selected-color' type="text" class="colorpicker update-styles" name="button-selected-color" value="#f4dd29"></input>
+        </div>
+      </div>
+      <div class="nowrap">
+        <label for="button-border-color">Border color</label>
+        <div class="pull-right">
+          <input id='button-border-color' type="text" class="colorpicker update-styles" name="button-border-color" value="#000"></input>
+        </div>
+      </div>
+    </div>
+    <h3>Navbar Styles</h3>
+    <div>
+      <div class='nowrap'>
+        <label for="navbar-background-color">Background</label>
+        <div class="pull-right">
+          <input id='navbar-background-color' type="text" class="colorpicker update-styles" name="navbar-background-color" value="#358e92"></input>
+        </div>
+      </div>
+      <div class='nowrap'>
+        <label for="navbar-button-color">Button Color</label>
+        <div class="pull-right">
+          <input id='navbar-button-color' type="text" class="colorpicker update-styles" name="navbar-button-color" value="#e5fefd"></input>
+        </div>
+      </div>
+      <div class='nowrap'>
+        <label for="navbar-button-selected-color">Button selected Color</label>
+        <div class="pull-right">
+          <input id='navbar-button-selected-color' type="text" class="colorpicker update-styles" name="navbar-button-selected-color" value="#ffff00"></input>
+        </div>
+      </div>
+    </div>
+    <h3>Finish</h3>
+    <div>
+      <p>Press the two buttons below to generate the neccesary CSS files</p> 
+      <button id="generateTheme">Generate Themes</button>
+      <br/>
+      <button id="generateStyles">Generate Styles</button>
+    </div>
+  </div>
+      
+     <iframe id="odk_view" 
+      src='http://homes.cs.washington.edu/~eastebry/odk/opendatakit.survey-js/form-files/framework/?#formPath=../tables/household_member/forms/household_member/&screenPath=initial/6&refId=uuid%3Ab94c6064-be6e-41d6-9f88-d1e95f6247a1'
+      style="width: 800px; height: 600px;">
+    </iframe>
+  </body>
+</html>
