@@ -595,12 +595,13 @@ promptTypes._linked_type = promptTypes.base.extend({
 promptTypes.linked_table = promptTypes._linked_type.extend({
     type: "linked_table",
     valid: true,
+    _cachedEvent: null,
     templatePath: 'templates/linked_table.handlebars',
     launchAction: 'org.opendatakit.survey.android.activities.MainMenuActivity',
 
     events: {
         "click .openInstance": "openInstance",
-        "click .deleteInstance": "deleteInstance",
+        "click .deleteInstance": "confirmDeleteInstance",
         "click .addInstance": "addInstance"
     },
     disableButtons: function() {
@@ -693,7 +694,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             ctxt.success();
         }
     },
-    deleteInstance: function(evt) {
+    confirmDeleteInstance: function(evt) {
+        var that = this;
         var instanceId = undefined;
         var deleteButton = $(evt.target).closest(".deleteInstance");
         
@@ -701,13 +703,32 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             instanceId  = deleteButton.attr("instance-id"); 
         }
         else {
-            shim.log('E',"In linked_table.deleteInstance instanceId is undefined"); 
+            shim.log('E',"In linked_table.confirmDeleteInstance instanceId is undefined"); 
             return;
         }
 
+        that._cachedEvent = evt;
+        that.controller.setScreenWithDeletePopup({message:"Delete?"});
+    },
+    deleteInstance: function() {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
-        var tableRow = $(evt.target).closest(".linkedTable tr");
+
+        if (that._cachedEvent == null) {
+            return ({message:"In linked_table.deleteInstance _cachedEvent is null"});
+        }
+        var instanceId = undefined;
+        var deleteButton = $(that._cachedEvent.target).closest(".deleteInstance");
+        
+        if (deleteButton != undefined) {
+            instanceId  = deleteButton.attr("instance-id"); 
+        }
+        else {
+            shim.log('E',"In linked_table.confirmDeleteInstance instanceId is undefined"); 
+            return;
+        }
+
+        var ctxt = that.controller.newContext(that._cachedEvent);
+        var tableRow = $(that._cachedEvent.target).closest(".linkedTable tr");
         if (tableRow != undefined)
             tableRow.remove();
 
@@ -723,6 +744,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                     ctxt.failure(m);
                 }}), dbTableName, instanceId);
         }}));
+        that._cachedEvent = null;
+        return null;
     },
     addInstance: function(evt) {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);

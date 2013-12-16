@@ -542,6 +542,10 @@ return {
                     ctxt.failure(m3);
                 }}), op, options );
     },
+    setScreenWithDeletePopup:function(m) {
+        var that = this;
+        that.screenManager.showDeletePopup(m);      
+    },
     _doActionAt:function(ctxt, op, action, popStateOnFailure) {
         var that = this;
         var currentScreenPath = that.getCurrentScreenPath();
