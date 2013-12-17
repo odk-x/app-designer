@@ -37,6 +37,7 @@ return Backbone.View.extend({
         "click .language": "setLanguage",
         "click .ignore-changes-and-exit": "ignoreChanges",
         "click .save-incomplete-and-exit": "saveChanges",
+        "click .finalize-and-exit": "finalizeChanges",
         "click .show-contents": "showContents",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
@@ -337,6 +338,15 @@ return Backbone.View.extend({
         that.controller.saveIncomplete($.extend({},ctxt,{success: function() {
                 that.controller.leaveInstance(ctxt);
             }}), false);
+    },
+    finalizeChanges: function(evt) {
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.log('D','screenManager.finalizeChanges', 
+            ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+        that.controller.gotoFinalizeAndTerminateAction(ctxt);
     },
     openOptions: function(evt) {
         var that = this;
