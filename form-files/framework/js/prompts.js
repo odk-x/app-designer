@@ -697,10 +697,12 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     confirmDeleteInstance: function(evt) {
         var that = this;
         var instanceId = undefined;
+        var instanceName = undefined;
         var deleteButton = $(evt.target).closest(".deleteInstance");
         
         if (deleteButton != undefined) {
             instanceId  = deleteButton.attr("instance-id"); 
+            instanceName = deleteButton.attr("instance-name")
         }
         else {
             shim.log('E',"In linked_table.confirmDeleteInstance instanceId is undefined"); 
@@ -708,7 +710,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }
 
         that._cachedEvent = evt;
-        that.controller.setScreenWithDeletePopup({message:"Delete?"});
+        that.controller.setScreenWithDeletePopup({message:"Delete " + instanceName + "?"});
     },
     deleteInstance: function() {
         var that = this;

@@ -1,5 +1,7 @@
 <div data-role="popup" data-theme="a" data-overlay-theme="a" id="deletePopup">
-	<h3>{{#substitute}}{{localize message}}{{/substitute}}</h3>
-	<button data-theme="a" id="yes-btn">YES</button>
-    <button data-theme="a" id="no-btn">NO</button>
+    <h3>{{#substitute}}{{localize message}}{{/substitute}}</h3>
+    <fieldset class="ui-grid-a">
+	    <div class="ui-block-a"><button data-theme="a" id="yes-btn" data-inline="true">YES</button></div>
+	    <div class="ui-block-b"><button data-theme="a" id="no-btn" data-inline="true">NO</button></div>	   
+    </fieldset>
 </div>
