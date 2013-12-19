@@ -257,6 +257,21 @@ screenTypes.base = Backbone.View.extend({
             return beforeMoveError;
         }
     },
+    deleteInstances: function() {
+        var that = this;
+        for ( var i = 0; i < that.activePrompts.length; i ++)
+        {
+            if (that.activePrompts[i].type == "linked_table") {
+                var success = that.activePrompts[i].deleteInstance();
+                if (success == null) {
+                    break;
+                }
+                else {
+                    console.error(success);
+                }
+            }
+        }
+    },
     __test__: function(evt){
         //This is a utility function for checking to make sure event maps are working.
         console.log(evt);
