@@ -9,20 +9,21 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
-define(['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 
+define(['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/deletePopup.handlebars',
     'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'handlebarsHelpers', 'translations'], 
-function(opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, 
+function(opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, deletePopup,
      optionsPopup,                             languagePopup, jqmobile, _hh, translations) {
 verifyLoad('screenManager',
-    ['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 
+    ['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/deletePopup.handlebars',
     'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'handlebarsHelpers', 'translations'],
-    [opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, 
+    [opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, deletePopup,
      optionsPopup,                             languagePopup, jqmobile, _hh, translations]);
 
 return Backbone.View.extend({
     el: "body",
     unknownScreenError: {message:"Internal Error: Unable to determine current screen."},
     screenTemplate: Handlebars.compile(screenPopup),
+    deleteTemplate: Handlebars.compile(deletePopup),
     optionsTemplate: Handlebars.compile(optionsPopup),
     languageTemplate: Handlebars.compile(languagePopup),
     eventTimeStamp: -1,
@@ -36,12 +37,15 @@ return Backbone.View.extend({
         "click .language": "setLanguage",
         "click .ignore-changes-and-exit": "ignoreChanges",
         "click .save-incomplete-and-exit": "saveChanges",
+        "click .finalize-and-exit": "finalizeChanges",
         "click .show-contents": "showContents",
         "swipeleft .swipeForwardEnabled": "gotoNextScreen",
         "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
         "dragstart img": "disableImageDrag",
-        "click #ok-btn": "closeScreenPopup"
+        "click #ok-btn": "closeScreenPopup",
+        "click #yes-btn": "processDeleteConfirm",
+        "click #no-btn": "closeDeletePopup",
     },
     initialize: function(){
         this.controller = this.options.controller;
@@ -335,6 +339,15 @@ return Backbone.View.extend({
                 that.controller.leaveInstance(ctxt);
             }}), false);
     },
+    finalizeChanges: function(evt) {
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
+        var that = this;
+        var ctxt = that.controller.newContext(evt);
+        ctxt.log('D','screenManager.finalizeChanges', 
+            ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+        that.controller.gotoFinalizeAndTerminateAction(ctxt);
+    },
     openOptions: function(evt) {
         var that = this;
         var $contentArea = $('#optionsPopup');
@@ -392,6 +405,32 @@ return Backbone.View.extend({
     },
     closeScreenPopup: function() {
         $( "#screenPopup" ).popup( "close" );
+    },
+    showDeletePopup: function(msg) {
+        var that = this;
+        var $contentArea = $('#deletePopup');
+        $contentArea.empty().remove();
+        if ( that.activeScreen == null ) {
+            evt.stopPropagation();
+            evt.stopImmediatePropagation();
+            return;
+        }
+        var rc = (that.activeScreen && that.activeScreen._renderContext) ?
+            that.activeScreen._renderContext : that.renderContext;
+        var rcWithMsg = $.extend({message: msg.message}, rc);
+        that.activeScreen.$el.append(that.deleteTemplate(rcWithMsg)).trigger('pagecreate');
+        var $deletePopup = $( "#deletePopup" );
+        $deletePopup.popup( "open" );
+    },
+    processDeleteConfirm: function() {
+        var that = this;
+        if ( that.activeScreen != null ) {
+            that.activeScreen.deleteInstances();
+        }
+        $( "#deletePopup" ).popup( "close" );
+    },
+    closeDeletePopup: function() {
+        $( "#deletePopup" ).popup( "close" );
     },
     showSpinnerOverlay: function(msg) {
         window.$.mobile.loading( 'show', {
