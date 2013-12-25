@@ -710,9 +710,10 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }
 
         that._cachedEvent = evt;
-        that.controller.setScreenWithDeletePopup({message:"Delete " + instanceName + "?"});
+        that._screen._screenManager.showConfirmationPopup({message:"Delete " + instanceName + "?", 
+                                                           promptIndex:that.promptIdx});
     },
-    deleteInstance: function() {
+    handleConfirmation: function() {
         var that = this;
 
         if (that._cachedEvent == null) {

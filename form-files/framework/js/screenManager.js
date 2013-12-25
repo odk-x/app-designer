@@ -9,26 +9,27 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
-define(['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/deletePopup.handlebars',
+define(['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
     'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'handlebarsHelpers', 'translations'], 
-function(opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, deletePopup,
+function(opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, confirmationPopup,
      optionsPopup,                             languagePopup, jqmobile, _hh, translations) {
 verifyLoad('screenManager',
-    ['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/deletePopup.handlebars',
+    ['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
     'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'handlebarsHelpers', 'translations'],
-    [opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, deletePopup,
+    [opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, confirmationPopup,
      optionsPopup,                             languagePopup, jqmobile, _hh, translations]);
 
 return Backbone.View.extend({
     el: "body",
     unknownScreenError: {message:"Internal Error: Unable to determine current screen."},
     screenTemplate: Handlebars.compile(screenPopup),
-    deleteTemplate: Handlebars.compile(deletePopup),
+    confirmationTemplate: Handlebars.compile(confirmationPopup),
     optionsTemplate: Handlebars.compile(optionsPopup),
     languageTemplate: Handlebars.compile(languagePopup),
     eventTimeStamp: -1,
     pageChangeActionLockout: false, // to control double-swiping...
     renderContext:{},
+    promptIndex: -1,
     events: {
         "click .odk-next-btn": "gotoNextScreen",
         "click .odk-prev-btn": "gotoPreviousScreen",
@@ -44,8 +45,8 @@ return Backbone.View.extend({
         "pagechange": "handlePagechange",
         "dragstart img": "disableImageDrag",
         "click #ok-btn": "closeScreenPopup",
-        "click #yes-btn": "processDeleteConfirm",
-        "click #no-btn": "closeDeletePopup",
+        "click #yes-btn": "handleConfirmation",
+        "click #no-btn": "closeConfirmationPopup",
     },
     initialize: function(){
         this.controller = this.options.controller;
@@ -406,9 +407,10 @@ return Backbone.View.extend({
     closeScreenPopup: function() {
         $( "#screenPopup" ).popup( "close" );
     },
-    showDeletePopup: function(msg) {
+    showConfirmationPopup: function(msg) {
         var that = this;
-        var $contentArea = $('#deletePopup');
+        that.promptIndex = msg.promptIndex;
+        var $contentArea = $('#confirmationPopup');
         $contentArea.empty().remove();
         if ( that.activeScreen == null ) {
             evt.stopPropagation();
@@ -418,19 +420,19 @@ return Backbone.View.extend({
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         var rcWithMsg = $.extend({message: msg.message}, rc);
-        that.activeScreen.$el.append(that.deleteTemplate(rcWithMsg)).trigger('pagecreate');
-        var $deletePopup = $( "#deletePopup" );
-        $deletePopup.popup( "open" );
+        that.activeScreen.$el.append(that.confirmationTemplate(rcWithMsg)).trigger('pagecreate');
+        var $confirmationPopup = $( "#confirmationPopup" );
+        $confirmationPopup.popup( "open" );
     },
-    processDeleteConfirm: function() {
+    handleConfirmation: function() {
         var that = this;
         if ( that.activeScreen != null ) {
-            that.activeScreen.deleteInstances();
+            that.activeScreen.handleConfirmation(that.promptIndex);
         }
-        $( "#deletePopup" ).popup( "close" );
+        $( "#confirmationPopup" ).popup( "close" );
     },
-    closeDeletePopup: function() {
-        $( "#deletePopup" ).popup( "close" );
+    closeConfirmationPopup: function() {
+        $( "#confirmationPopup" ).popup( "close" );
     },
     showSpinnerOverlay: function(msg) {
         window.$.mobile.loading( 'show', {

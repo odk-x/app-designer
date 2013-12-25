@@ -257,12 +257,12 @@ screenTypes.base = Backbone.View.extend({
             return beforeMoveError;
         }
     },
-    deleteInstances: function() {
+    handleConfirmation: function(promptIndex) {
         var that = this;
         for ( var i = 0; i < that.activePrompts.length; i ++)
         {
-            if (that.activePrompts[i].type == "linked_table") {
-                var success = that.activePrompts[i].deleteInstance();
+            if (that.activePrompts[i].promptIdx == promptIndex) {
+                var success = that.activePrompts[i].handleConfirmation();
                 if (success == null) {
                     break;
                 }
