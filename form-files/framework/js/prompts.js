@@ -616,6 +616,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.$('.deleteInstance').removeAttr('disabled');
         that.$('.addInstance').removeAttr('disabled');
     },
+    choice_filter: function(){ return true; },
     configureRenderContext: function(ctxt) {
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
@@ -630,6 +631,10 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             ctxt.log('D',"prompts." + that.type + ".configureRenderContext.before.get_linked_instances", "px: " + that.promptIdx);
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
                 ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances", "px: " + that.promptIdx);
+                var filteredInstanceList = _.filter(instanceList, function(instance) {
+                    return that.choice_filter(instance);
+                });
+                instanceList = filteredInstanceList;
                 // set the image icon
                 for (var i = 0; i < instanceList.length ; i++){
                 	// sets the savepoint_type to incomplete if the formId doesn't match the current form
