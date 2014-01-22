@@ -960,6 +960,27 @@ return {
     },
     openInstance: function(ctxt, id, instanceMetadataKeyValueMap) {
         var that = this;
+
+        // NOTE: if the openInstance call failed, we should popup the error from that...
+        var popupbasectxt = that.newCallbackContext();
+        var popupctxt = $.extend({}, popupbasectxt, {
+            success: function() {
+                popupbasectxt.log('D',"Unexpected openInstance.popupSuccess");
+                popupbasectxt.success();
+            },
+            failure: function(m2) {
+                popupbasectxt.log('D',"openInstance.popupFailure");
+                if ( m2 && m2.message ) {
+                    popupbasectxt.log('D',"openInstance.popupFailure", " message: " + m2.message);
+                    // schedule a timer to show the mesage after the page has rendered
+                    setTimeout(function() {
+                        popupbasectxt.log('D',"openInstance.popupFailure.setTimeout");
+                        that.screenManager.showScreenPopup(m2);
+                    }, 500);
+                }
+                popupbasectxt.success();
+        }});
+
         database.applyDeferredChanges($.extend({},ctxt,{success:function() {
             that.reset($.extend({},ctxt,{success:function() {
                 if ( id == null ) {
@@ -976,8 +997,14 @@ return {
                 }
                 var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
                             id, opendatakit.initialScreenPath);
+                
+
+
                 // this does not reset the RefId...
-                parsequery._prepAndSwitchUI( ctxt, qpl, 
+                parsequery._prepAndSwitchUI( $.extend({},ctxt, {failure:function(m) {
+                                ctxt.setChainedContext(popupctxt);
+                                ctxt.failure(m);
+                            }}), qpl, 
                             id, opendatakit.initialScreenPath,
                             opendatakit.getRefId(), false,
                             instanceMetadataKeyValueMap );

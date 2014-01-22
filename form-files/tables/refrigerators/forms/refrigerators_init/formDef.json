@@ -103,6 +103,11 @@
         "name": "refrigerator_stock_level",
         "type": "integer",
         "_row_num": 6
+      },
+      {
+        "name": "refrigerator_text",
+        "type": "text",
+        "_row_num": 7
       }
     ],
     "settings": [
@@ -328,6 +333,16 @@
           }
         ],
         "elementKey": "refrigerator_stock_level"
+      },
+      "refrigerator_text": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "refrigerator_text"
       }
     },
     "section_names": [
