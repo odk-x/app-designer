@@ -1,4 +1,4 @@
-<div class="odk-screen{{#if enableNavigation}}{{#if enableForwardNavigation}} swipeForwardEnabled{{/if}}{{#if enableBackNavigation}} swipeBackEnabled{{/if}}{{/if}}" >
+<div class="odk-screen{{#unless disableSwipeNavigation}}{{#if enableNavigation}}{{#if enableForwardNavigation}} swipeForwardEnabled{{/if}}{{#if enableBackNavigation}} swipeBackEnabled{{/if}}{{/if}}{{/unless}}" >
     {{#if showHeader}}
         <div class="odk-header" data-role="header" data-theme="c">
             <div class="odk-options-btn"><a data-role="button" data-inline="true">{{localize form_title}}</a></div>

@@ -125,7 +125,8 @@ return Backbone.View.extend({
             enableForwardNavigation: true,
             enableBackNavigation: true,
             showAsContinueButton: that.popScreenOnExit,
-            enableNavigation: true
+            enableNavigation: true,
+            disableSwipeNavigation: (opendatakit.getSettingValue('disableSwipeNavigation') ? opendatakit.getSettingValue('disableSwipeNavigation') : false)
         };
         
         that.pageChangeActionLockout = true;
