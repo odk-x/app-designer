@@ -210,9 +210,14 @@ promptTypes.base = Backbone.View.extend({
         if ( locale === undefined || locale === null ) {
             locale = opendatakit.getDefaultFormLocaleValue();
         }
-        var textOrMap = (that.renderContext.display.title ? 
-            that.renderContext.display.title : that.renderContext.display.text);
-        var fieldDisplayName = formulaFunctions.localize(textOrMap,locale);
+        var fieldDisplayName;
+        if (that.renderContext.display) {
+            var textOrMap = (that.renderContext.display.title ? 
+                that.renderContext.display.title : that.renderContext.display.text);
+            fieldDisplayName = formulaFunctions.localize(textOrMap,locale);
+        } else {
+            fieldDisplayName = '';
+        }
         
         var value = that.getValue();
         if ( value === undefined || value === null || value === "" ) {
