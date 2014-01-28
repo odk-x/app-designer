@@ -1678,9 +1678,13 @@
                 var newReachable = {};
                 _.each(section.reachable_sections, function(reached, sectionName) {
                     newReachable[sectionName] = true;
-                    _.each(newSections[sectionName].reachable_sections, function(rreached, depthOne) {
-                        newReachable[depthOne] = true;
-                    });
+                    if (newSections[sectionName]) {
+                        _.each(newSections[sectionName].reachable_sections, function(rreached, depthOne) {
+                            newReachable[depthOne] = true;
+                        });
+                    } else {
+                        throw new Error("Cannot convert section " + sectionName +". Section may be blank or missing.");
+                    }
                 });
                 section.reachable_sections = newReachable;
             });
