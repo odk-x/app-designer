@@ -46,7 +46,7 @@ return Backbone.View.extend({
         "dragstart img": "disableImageDrag",
         "click #ok-btn": "closeScreenPopup",
         "click #yes-btn": "handleConfirmation",
-        "click #no-btn": "closeConfirmationPopup",
+        "click #no-btn": "closeConfirmationPopup"
     },
     initialize: function(){
         this.controller = this.options.controller;
@@ -301,8 +301,7 @@ return Backbone.View.extend({
             return;
         }
         that.eventTimeStamp = evt.timeStamp;
-        this.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
-        var that = this;
+        that.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
         if(that.pageChangeActionLockout) {
             ctxt.log('D','screenManager.showContents.ignoreDisabled');
             ctxt.success();

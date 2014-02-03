@@ -286,7 +286,7 @@ window.shim = window.shim || {
         if (that.enforceRefIdMatch && refId !== this.refId) {
             that.log("D","shim: IGNORED: setSessionVariable(" + refId + ", " + elementPath + 
                 ", " + value + ")");
-            return "IGNORE";
+            return;
         }
         var parts = elementPath.split('.');
         var i;
@@ -325,6 +325,7 @@ window.shim = window.shim || {
     },
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
         var that = this;
+		var value;
         if (that.enforceRefIdMatch && refId !== this.refId) {
             that.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + 
                 ", " + internalPromptContext + ", " + action + ", ...)");
@@ -424,7 +425,7 @@ window.shim = window.shim || {
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
-            var value = JSON.parse(jsonObj);
+            value = JSON.parse(jsonObj);
             window.open(value.extras.url,'_blank', null, false);
             setTimeout(function() {
                 that.log("D","Opened new browser window for Survey content. Close to continue");
@@ -434,7 +435,7 @@ window.shim = window.shim || {
             return "OK";
         }
         if ( action === 'android.content.Intent.ACTION_VIEW' ) {
-            var value = JSON.parse(jsonObj);
+            value = JSON.parse(jsonObj);
             window.open(value.uri,'_blank', null, false);
             setTimeout(function() {
                 that.log("D","Opened new browser window for 3rd party content. Close to continue");

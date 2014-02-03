@@ -96,7 +96,7 @@ requirejs.config({
 function verifyLoad( prefix, alist, args ) {
     var i;
     for ( i = 0 ; i < args.length ; ++i ) {
-        if ( args[i] == null ) {
+        if ( args[i] === undefined || args[i] === null ) {
             shim.log('E',prefix + ' cyclic dependency prevented initialization of ' + alist[i]);
         }
     }
@@ -183,7 +183,7 @@ require(['jquery'],
                     } else if ( searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx) ) {
                         // we have a '?' on the URL. Forcibly remove it.
                         hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
-                        var newRef = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
+                        newRef = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
                         shim.log('W','jqmConfig.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
                         window.location.assign(newRef);
                     } else {

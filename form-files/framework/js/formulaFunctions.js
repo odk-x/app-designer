@@ -111,5 +111,5 @@ function(opendatakit,  database,   _) {
                 return eval(code);
             }
         }
-    }
+    };
 });

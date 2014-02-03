@@ -109,7 +109,7 @@ return {
         }
         
         var fidObject = opendatakit.getSettingObject(formDef, 'form_id');
-        if ( fidObject == null || !('value' in fidObject) ) {
+        if ( fidObject === null || !('value' in fidObject) ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.missingFormId");
             alert("Unexpected missing value for form_id setting when changing forms");
             ctxt.failure({message: "Form definition has no form_id."});
@@ -120,7 +120,7 @@ return {
         // defined by form definition's settings:
         var tidObject = opendatakit.getSettingObject(formDef, 'table_id');
         var table_id;
-        if ( tidObject == null || !('value' in tidObject) ) {
+        if ( tidObject === null || !('value' in tidObject) ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.missingTableId");
             alert("No table_id specified in Form Definition!");
             ctxt.failure({message: "No table_id specified in form definition."});
@@ -320,7 +320,7 @@ return {
             ctxt.log('D','parsequery.changeUrlHash.emptyHash.reset', qpl);
             window.location.hash = qpl;
             ctxt.failure({message: "Internal error: invalid hash (restoring)"});
-            return false;
+            return;
         }
         
         var ctxtNext = $.extend({}, ctxt, {success: function() {

@@ -470,30 +470,29 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     var row = result.rows.item(0);
                     count = row['rowcount'];
                 }
+                var formId = opendatakit.getSettingValue('form_id');
+                var kvMap = {};
+                var cs;
                 if ( count === undefined || count === null || count === 0) {
                     ctxt.log('D','initializeInstance.insertEmptyInstance');
                     // construct a friendly name for this new form...
                     var date = new Date();
                     var dateStr = date.toISOString();
                     var locale = opendatakit.getDefaultFormLocale(mdl.formDef);
-                    var formId = opendatakit.getSettingValue('form_id');
-                    var kvMap = {};
                     kvMap._id = { value: instanceId, isInstanceMetadata: true };
                     kvMap._locale = { value: locale, isInstanceMetadata: true };
                     // overwrite these with anything that was passed in...
                     databaseUtils.processPassedInKeyValueMap(databaseSchema.dataTablePredefinedColumns, kvMap, instanceMetadataKeyValueMap);
                     
-                    var cs = databaseSchema.insertNewKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, kvMap);
+                    cs = databaseSchema.insertNewKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, kvMap);
                     tmpctxt.sqlStatement = cs;
                     transaction.executeSql(cs.stmt, cs.bind);
                 } else {
                     // apply changes to the instance 
-                    var formId = opendatakit.getSettingValue('form_id');
-                    var kvMap = {};
                     // gather anything that was passed in...
                     databaseUtils.processPassedInKeyValueMap(databaseSchema.dataTablePredefinedColumns, kvMap, instanceMetadataKeyValueMap);
                     if ( !$.isEmptyObject(kvMap) ) {
-                        var cs = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, instanceId, kvMap);
+                        cs = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, instanceId, kvMap);
                         tmpctxt.sqlStatement = cs;
                         transaction.executeSql(cs.stmt, cs.bind);
                     }
@@ -571,7 +570,7 @@ _insertTableAndColumnProperties:function(transaction, ctxt, tlo, writeDatabase) 
     var that = this;
     ctxt.log('D','database._insertTableAndColumnProperties writeDatabase: ' + writeDatabase);
     var fullDef = 
-        databaseSchema.updateDataTableModelAndReturnDatabaseInsertLists(tlo, opendatakit.getSectionTitle(tlo.formDef, 'survey'))
+        databaseSchema.updateDataTableModelAndReturnDatabaseInsertLists(tlo, opendatakit.getSectionTitle(tlo.formDef, 'survey'));
 
     if ( writeDatabase ) {
         // get first property in fullDef -- we use native iteration ordering to step through the properties.
