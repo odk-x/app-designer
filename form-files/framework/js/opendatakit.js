@@ -194,6 +194,23 @@ return {
     },
     
     /**
+     * NOTE: this rounds and looses the nano fields...
+     */
+    convertNanosToDateTime:function(timestamp) {
+        if ( timestamp === undefined || timestamp === null ) return null;
+        timestamp = timestamp.substring(0,timestamp.length-6);
+        return new Date(timestamp);
+    },
+    /**
+     * Converts a Date to nanos. If no date supplied, uses the current time.
+     */
+    convertDateTimeToNanos: function(dateTime) {
+        if ( dateTime === undefined || dateTime === null ) {
+            dateTime = new Date();
+        }
+        return "" + dateTime.getTime() + "000000";
+    },
+    /**
      * Retrieve the value of a setting from the form definition file or null if
      * undefined.
      * NOTE: in Survey XLSX syntax, the settings are row-by-row, like choices.

@@ -398,12 +398,13 @@ get_all_instances:function(ctxt) {
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
-                    var ts = new Date(instance._savepoint_timestamp);
+                    var ts = opendatakit.convertNanosToDateTime(instance._savepoint_timestamp);
                     instanceList.push({
                         display_field: (displayElementName === undefined || displayElementName === null) ? ts.toISOString(): instance[displayElementName],
                         instance_id: instance._id,
                         savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,
+                        savepoint_creator: instance._savepoint_creator,
                         locale: instance._locale
                     });
                 }
@@ -433,12 +434,13 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
             transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
                 for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
                     var instance = result.rows.item(i);
-                    var ts = new Date(instance._savepoint_timestamp);
+                    var ts = opendatakit.convertNanosToDateTime(instance._savepoint_timestamp);
                     instanceList.push({
                         display_field: (displayElementName === undefined || displayElementName === null) ? ts.toISOString(): instance[displayElementName],
                         instance_id: instance._id,
                         savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,
+                        savepoint_creator: instance._savepoint_creator,
                         locale: instance._locale,
                         form_id: instance._form_id
                     });

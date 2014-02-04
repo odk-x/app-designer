@@ -22,11 +22,11 @@ return {
 dataTablePredefinedColumns: { 
                      // these have leading underscores because they are hidden from the user and not directly manipulable
                      _id: {type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _uri_access_control: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _sync_tag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
+                     _row_etag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _sync_state: { type: 'string', isNotNullable: true, 'default': 'inserting', isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _conflict_type: { type: 'integer', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _savepoint_timestamp: { type: 'integer', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
+                     _savepoint_timestamp: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
+                     _savepoint_creator: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _savepoint_type: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _form_id: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
                      _locale: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' } },
@@ -141,7 +141,7 @@ deleteEntireTableContentsTableStmt: function(dbTableName) {
 // The _savepoint_type (metadata) column === "COMPLETE" if they are 'official' values.
 // Otherwise, _savepoint_type === "INCOMPLETE" indicates a manual user savepoint and
 // _savepoint_type IS NULL indicates an automatic (checkpoint) savepoint. 
-// The _savepoint_timestamp indicates the time at which the savepoint occured.
+// The _savepoint_timestamp indicates the time in NANOSECONDS at which the savepoint occured.
 
 /**
  * insert a new automatic savepoint for the given record and change the 
@@ -156,9 +156,9 @@ deleteEntireTableContentsTableStmt: function(dbTableName) {
  * Requires: No global dependencies
  */
 insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, instanceId, kvMap) {
-    var t = new Date();
-    var now = t.getTime();
-    
+    var nowNano = opendatakit.convertDateTimeToNanos();
+    var activeUser = opendatakit.getPlatformInfo().activeUser;
+
     var bindings = [];
     var processSet = {};
     
@@ -216,7 +216,12 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
                 }
             } else if (f === "_savepoint_timestamp") {
                 stmt += "?";
-                v = now;
+                v = nowNano;
+                bindings.push(v);
+                updates[f] = {"elementPath" : elementPath, "value": v};
+            } else if (f === "_savepoint_creator") {
+                stmt += "?";
+                v = activeUser;
                 bindings.push(v);
                 updates[f] = {"elementPath" : elementPath, "value": v};
             } else if ( f === "_form_id" ) {
@@ -277,9 +282,9 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
  * Requires: No global context
  */
 insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, kvMap) {
-    var t = new Date();
-    var now = t.getTime();
-    
+    var nowNano = opendatakit.convertDateTimeToNanos();
+    var activeUser = opendatakit.getPlatformInfo().activeUser;
+
     var bindings = [];
     var processSet = {};
     
@@ -333,7 +338,10 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
                 }
             } else if ( f === "_savepoint_timestamp" ) {
                 stmt += "?";
-                bindings.push(now);
+                bindings.push(nowNano);
+            } else if (f === "_savepoint_creator") {
+                stmt += "?";
+                bindings.push(activeUser);
             } else if ( f === "_form_id" ) {
                 stmt += "?";
                 bindings.push(formId);

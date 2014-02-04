@@ -295,13 +295,7 @@ promptTypes.opening = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
-        if ( lastSave != null ) {
-            var date = new Date(lastSave);
-            var dateStr = date.toISOString();
-            that.renderContext.last_save_date = dateStr;
-        } else {
-            that.renderContext.last_save_date = null;
-        }
+        that.renderContext.last_save_date = opendatakit.convertNanosToDateTime(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName != null ) {
@@ -642,7 +636,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                 instanceList = filteredInstanceList;
                 // set the image icon
                 for (var i = 0; i < instanceList.length ; i++){
-                	// sets the savepoint_type to incomplete if the formId doesn't match the current form
+                    // sets the savepoint_type to incomplete if the formId doesn't match the current form
                     if (instanceList[i]["form_id"] != that.getLinkedFormId()) {
                         instanceList[i].savepoint_type = opendatakit.savepoint_type_incomplete;
                     }

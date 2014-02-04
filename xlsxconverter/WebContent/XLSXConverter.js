@@ -40,7 +40,11 @@
         /**
          * ODK Metadata reserved names
          */
+        row_etag: true,
+        sync_state: true,
+        conflict_type: true,
         savepoint_timestamp: true,
+        savepoint_creator: true,
         savepoint_type: true,
         form_id: true,
         locale: true,
@@ -1801,8 +1805,9 @@
         if ( !pattern_valid_user_defined_name.test(name) ) {
             throw Error(errorPrefix + " must begin with a letter and contain only letters, digits and '_'");
         }
-        if ( name.length > 62 ) {
-            throw Error(errorPrefix + " cannot be longer than 62 characters. It is " + name.length + " characters long.");
+        // leave 3 characters for our own use (leading double underscore + 1 character suffix).
+        if ( name.length > 59 ) {
+            throw Error(errorPrefix + " cannot be longer than 59 characters. It is " + name.length + " characters long.");
         }
         var lowercase = name.toLowerCase();
         if (lowercase in reservedFieldNames) {
@@ -2185,12 +2190,23 @@
                 processedSettings['table_id'] = entry;
             }
 
+            // restrict the table_id and form_id to be no more than 50 characters long.
+            // This allows for versioning on the server and for auxillary shadow status tables.
+            
+            if ( processedSettings.form_id.value.length > 50 ) {
+                throw Error("The value of the 'form_id' setting_name on the settings sheet cannot be more than 50 characters long");
+            }
+
+            if ( processedSettings.table_id.value.length > 50 ) {
+                throw Error("The value of the 'table_id' setting_name on the settings sheet cannot be more than 50 characters long");
+            }
+
             assertValidUserDefinedName("The value of the 'form_id' setting_name on the settings sheet",
                                         processedSettings.form_id.value);
 
             assertValidUserDefinedName("The value of the 'table_id' setting_name on the settings sheet",
                                         processedSettings.table_id.value);
-
+            
             if ( !('survey' in processedSettings) ) {
                 throw Error("Please define a 'survey' setting_name on the settings sheet and specify the survey title under display.title");
             }

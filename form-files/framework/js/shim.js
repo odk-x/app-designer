@@ -18,7 +18,7 @@ window.shim = window.shim || {
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.
-        return '{"container":"Chrome","version":"21.0.1180.83 m","baseUri":"http://localhost/FORM/","formsUri":"content://org.opendatakit.common.android.provider.forms/","appName":"testing","logLevel":"' + this.logLevel + '"}';
+        return '{"container":"Chrome","version":"21.0.1180.83 m","activeUser":"username:badger","baseUri":"http://localhost/FORM/","formsUri":"content://org.opendatakit.common.android.provider.forms/","appName":"testing","logLevel":"' + this.logLevel + '"}';
     },
     getDatabaseSettings: function() {
         // version identifies the database schema that the database layer should use.
