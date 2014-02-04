@@ -400,7 +400,7 @@ get_all_instances:function(ctxt) {
                     var instance = result.rows.item(i);
                     var ts = opendatakit.convertNanosToDateTime(instance._savepoint_timestamp);
                     instanceList.push({
-                        display_field: (displayElementName === undefined || displayElementName === null) ? ts.toISOString(): instance[displayElementName],
+                        display_field: (displayElementName === undefined || displayElementName === null) ? ((ts == null) ? "" : ts.toISOString()): instance[displayElementName],
                         instance_id: instance._id,
                         savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,

@@ -648,7 +648,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                         instanceList[i]["icon_class"] = "ui-icon-alert";
                     }
                     //make the date more readable
-                    instanceList[i]["savepoint_timestamp"] = opendatakit.getShortDateFormat(new Date(instanceList[i]["savepoint_timestamp"]));          
+                    instanceList[i]["savepoint_timestamp"] = opendatakit.getShortDateFormat(instanceList[i]["savepoint_timestamp"]);          
                 }
 
                 that.renderContext.instances = instanceList;

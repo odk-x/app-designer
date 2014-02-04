@@ -349,7 +349,7 @@ return {
                             // advance to next operation if we fail...
                             path = that.getNextOperationPath(path);
                             op = that.getOperation(path);
-                            if ( op !== null ) {
+                            if ( op !== undefined && op !== null ) {
                                 that._doActionAtLoop(ctxt, op, op._token_type );
                             } else {
                                 ctxt.failure(that.moveFailureMessage);

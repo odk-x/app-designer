@@ -178,7 +178,7 @@ return {
     _fromDatabaseToElementType: function( jsonType, value ) {
         var that = this;
         // date conversion elements...
-        var yyyy, mm, dd, hh, min, sec, msec, zsign, zhh, zmm;
+        var hh, min, sec, msec;
 
         if ( value === undefined || value === null ) {
             if ( jsonType.isNotNullable ) {
@@ -194,24 +194,12 @@ return {
         } else if ( jsonType.type === 'object' ) {
             if ( jsonType.elementType === 'date' ||
                  jsonType.elementType === 'dateTime' ) {
-                // convert an iso8601 date yyyymmddTHH:MM:SS.ssszzzzz 
-                // to a Date object...
-                // TODO: FIX FRAGILE: loss of timezone info
-                yyyy = Number(value.substr(0,4));
-                mm = Number(value.substr(4,2))-1;// months are 0-11
-                dd = Number(value.substr(6,2));
-                hh = Number(value.substr(9,2));
-                min = Number(value.substr(12,2));
-                sec = Number(value.substr(15,2));
-                msec = Number(value.substr(18,3));
-                zsign = value.substr(21,1);
-                zhh = Number(value.substr(22,2));
-                zmm = Number(value.substr(24,2));
-                value = new Date(Date.UTC(yyyy,mm,dd,hh,min,sec,msec));
-                return value;
+                // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                // this does not preserve the nanosecond field...
+                return opendatakit.convertNanosToDateTime(value);
             } else if ( jsonType.elementType === 'time' ) {
-                // convert an iso8601 time HH:MM:SS.ssszzzzz to a Date object...
-                // TODO: FIX FRAGILE: loss of timezone info
+                // convert from a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
+                // this does not preserve the nanosecond field...
                 var idx = value.indexOf(':');
                 hh = Number(value.substring(0,idx));
                 min = Number(value.substr(idx+1,2));
@@ -239,27 +227,6 @@ return {
         } else {
             throw new Error("unrecognized JSON schema type");
         }
-    },
-    _padWithLeadingZeros: function( value, places ) {
-        var digits = [];
-        var d, i, s;
-        var sign = (value >= 0);
-        value = Math.abs(value);
-        while ( value !== 0 ) {
-            d = (value % 10);
-            digits.push(d);
-            value = Math.floor(value/10);
-        }
-        while ( digits.length < places ) {
-            digits.push(0);
-        }
-        digits.reverse();
-        s = '';
-        for ( i = 0 ; i < digits.length ; ++i ) {
-            d = digits[i];
-            s += d;
-        }
-        return (sign ? '' : '-') + s;
     },
 toDatabaseFromElementType: function( jsonType, value ) {
         var that = this;
@@ -298,46 +265,19 @@ toDatabaseFromElementType: function( jsonType, value ) {
         } else if ( jsonType.type === 'object' ) {
             if ( jsonType.elementType === 'dateTime' ||
                  jsonType.elementType === 'date' ) {
-
-                yyyy = value.getUTCFullYear();
-                mm = value.getUTCMonth() + 1; // months are 0-11
-                dd = value.getUTCDate();
-                hh = value.getUTCHours();
-                min = value.getUTCMinutes();
-                sec = value.getUTCSeconds();
-                msec = value.getUTCMilliseconds();
-                zsign = 'Z';
-                zhh = '';
-                zmm = '';
-                value = that._padWithLeadingZeros(yyyy,4) + 
-                        that._padWithLeadingZeros(mm,2) +
-                        that._padWithLeadingZeros(dd,2) + 'T' +
-                        that._padWithLeadingZeros(hh,2) + ':' +
-                        that._padWithLeadingZeros(min,2) + ':' +
-                        that._padWithLeadingZeros(sec,2) + '.' +
-                        that._padWithLeadingZeros(msec,3) + 'Z';
-                return value;
+                // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                return opendatakit.convertDateTimeToNanos(value);
             } else if ( jsonType.elementType === 'time' ) {
+                // convert to a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
                 // strip off the time-of-day and drop the rest...
                 hh = value.getHours();
                 min = value.getMinutes();
                 sec = value.getSeconds();
                 msec = value.getMilliseconds();
-                var n = value.getTimezoneOffset();
-                var sign = false;
-                if ( n < 0) {
-                    n = -n;
-                    sign = true;
-                }
-                zhh = Math.floor(n/60);
-                zmm = n - zhh*60;
-                zsign = (sign ? '+' : '-');
-                value = that._padWithLeadingZeros(hh,2) + ':' +
-                        that._padWithLeadingZeros(min,2) + ':' +
-                        that._padWithLeadingZeros(sec,2) + '.' +
-                        that._padWithLeadingZeros(msec,3) + zsign +
-                        that._padWithLeadingZeros(zhh,2) +
-                        that._padWithLeadingZeros(zmm,2);
+                value = opendatakit.padWithLeadingZeros(hh,2) + ':' +
+                        opendatakit.padWithLeadingZeros(min,2) + ':' +
+                        opendatakit.padWithLeadingZeros(sec,2) + '.' +
+                        opendatakit.padWithLeadingZeros(msec,3) + '000000';
                 return value;
             } else if ( !jsonType.properties ) {
                 // this is an opaque BLOB w.r.t. database layer

@@ -199,16 +199,71 @@ return {
     convertNanosToDateTime:function(timestamp) {
         if ( timestamp === undefined || timestamp === null ) return null;
         timestamp = timestamp.substring(0,timestamp.length-6);
-        return new Date(timestamp);
+        // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+        // yyyy-mm-ddTHH:MM:SS.sssssssss
+        // 01234567890123456789012345678
+        // to a Date object...
+        var yyyy,mm,dd,hh,min,sec,msec;
+        // NOTE: we toss out the nanoseconds field
+        yyyy = Number(timestamp.substr(0,4));
+        mm = Number(timestamp.substr(5,2))-1;// months are 0-11
+        dd = Number(timestamp.substr(8,2));
+        hh = Number(timestamp.substr(11,2));
+        min = Number(timestamp.substr(14,2));
+        sec = Number(timestamp.substr(17,2));
+        msec = Number(timestamp.substr(20,3));
+        var value = new Date(Date.UTC(yyyy,mm,dd,hh,min,sec,msec));
+        return value;
+    },
+    padWithLeadingZeros: function( value, places ) {
+        var digits = [];
+        var d, i, s;
+        var sign = (value >= 0);
+        value = Math.abs(value);
+        while ( value !== 0 ) {
+            d = (value % 10);
+            digits.push(d);
+            value = Math.floor(value/10);
+        }
+        while ( digits.length < places ) {
+            digits.push(0);
+        }
+        digits.reverse();
+        s = '';
+        for ( i = 0 ; i < digits.length ; ++i ) {
+            d = digits[i];
+            s += d;
+        }
+        return (sign ? '' : '-') + s;
     },
     /**
      * Converts a Date to nanos. If no date supplied, uses the current time.
      */
     convertDateTimeToNanos: function(dateTime) {
+        var that = this;
+        // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+        // yyyy-mm-ddTHH:MM:SS.sssssssss
+        // 01234567890123456789012345678
         if ( dateTime === undefined || dateTime === null ) {
             dateTime = new Date();
         }
-        return "" + dateTime.getTime() + "000000";
+        var yyyy,mm,dd,hh,min,sec,msec;
+        yyyy = dateTime.getUTCFullYear();
+        mm = dateTime.getUTCMonth() + 1; // months are 0-11
+        dd = dateTime.getUTCDate();
+        hh = dateTime.getUTCHours();
+        min = dateTime.getUTCMinutes();
+        sec = dateTime.getUTCSeconds();
+        msec = dateTime.getUTCMilliseconds();
+        var value;
+        value = that.padWithLeadingZeros(yyyy,4) + '-' +
+                that.padWithLeadingZeros(mm,2) + '-' +
+                that.padWithLeadingZeros(dd,2) + 'T' +
+                that.padWithLeadingZeros(hh,2) + ':' +
+                that.padWithLeadingZeros(min,2) + ':' +
+                that.padWithLeadingZeros(sec,2) + '.' +
+                that.padWithLeadingZeros(msec,3) + '000000';
+        return value;
     },
     /**
      * Retrieve the value of a setting from the form definition file or null if
