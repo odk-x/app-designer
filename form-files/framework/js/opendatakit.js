@@ -112,7 +112,9 @@ return {
         } else if ( type === "form" ) {
             mdl.formPath = null;
         } else if ( type === "instance" ) {
-        } // screen -- just wipe the ref_id
+          // do not alter instance id
+          return;
+        }
     },
     
     clearCurrentInstanceId:function() {
@@ -141,10 +143,10 @@ return {
     
     getSectionTitle:function(formDef, sectionName) {
         var ref = this.getSettingObject(formDef, sectionName);
-        if ( ref === undefined || ref === null ) {
+        if ( ref === null ) {
             ref = this.getSettingObject(formDef, 'survey'); // fallback
         }
-        if ( ref === undefined || ref === null || !("display" in ref) ) {
+        if ( ref === null || !("display" in ref) ) {
             return "<no title>";
         } else {
             var display = ref.display;
@@ -161,12 +163,11 @@ return {
     getCurrentSectionShowContents: function(sectionName) {
         var formDef = this.getCurrentFormDef();
         var sectionSettings = this.getSettingObject(formDef,sectionName);
-        if ( sectionSettings === undefined || sectionSettings === null ) {
+        if ( sectionSettings === null ) {
             sectionSettings = this.getSettingObject(formDef, 'survey'); // fallback
         }
         
-        if ( sectionSettings === undefined || 
-             sectionSettings === null ||
+        if ( sectionSettings === null ||
              !('showContents' in sectionSettings) ) {
             return true;
         }
@@ -193,7 +194,8 @@ return {
     },
     
     /**
-     * Retrieve the value of a setting from the form definition file.
+     * Retrieve the value of a setting from the form definition file or null if
+     * undefined.
      * NOTE: in Survey XLSX syntax, the settings are row-by-row, like choices.
      * The returned object is therefore a map of keys to values for that row.
      * 
@@ -201,7 +203,9 @@ return {
       */
     getSettingObject:function(formDef, key) {
         if (formDef === undefined || formDef === null) return null;
-        return formDef.specification.settings[key];
+        var obj = formDef.specification.settings[key];
+        if ( obj === undefined ) return null;
+        return obj;
     },
     
     /**
@@ -209,7 +213,7 @@ return {
      */
     getSettingValue:function(key) {
         var obj = this.getSettingObject(this.getCurrentFormDef(), key);
-        if ( obj === undefined || obj === null ) return null;
+        if ( obj === null ) return null;
         return obj.value;
     },
     /**
@@ -222,7 +226,7 @@ return {
     getFormLocales:function(formDef) {
         if ( formDef !== undefined && formDef !== null ) {
             var locales = this.getSettingObject(formDef, '_locales' );
-            if ( locales != null && locales.value != null ) {
+            if ( locales !== null && locales.value != null ) {
                 return locales.value;
             }
             alert("_locales not present in form! See console:");
@@ -240,7 +244,7 @@ return {
     getDefaultFormLocale:function(formDef) {
         if ( formDef != null ) {
             var localeObject = this.getSettingObject(formDef, '_default_locale');
-            if ( localeObject != null && localeObject.value != null ) {
+            if ( localeObject !== null && localeObject.value != null ) {
                 return localeObject.value;
             }
             alert("_default_locales not present in form! See console:");

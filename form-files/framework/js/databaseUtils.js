@@ -411,7 +411,6 @@ reconstructModelDataFromElementPathValueUpdates: function(mdl, updates) {
 },
 getElementPathPairFromKvMap: function(kvMap, elementPath) {
     var path = elementPath.split('.');
-    var e = kvMap;
     var i, j, term, value, pathChain;
     // work from most specific to least specific searching for a value match
     for (j = path.length-1 ; j >= 0 ; --j) {
@@ -489,7 +488,6 @@ processPassedInKeyValueMap: function(dataTablePredefinedColumns, kvMap, instance
 _clearUnitOfRetentionFlag: function( dbKeyMap, listChildElementKeys) {
     var that = this;
     var i;
-    var f;
     if ( listChildElementKeys != null ) {
         for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
             var f = listChildElementKeys[i];
@@ -506,7 +504,6 @@ _clearUnitOfRetentionFlag: function( dbKeyMap, listChildElementKeys) {
 _setSessionVariableFlag: function( dbKeyMap, listChildElementKeys) {
     var that = this;
     var i;
-    var f;
     if ( listChildElementKeys != null ) {
         for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
             var f = listChildElementKeys[i];

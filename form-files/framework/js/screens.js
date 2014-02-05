@@ -224,8 +224,9 @@ screenTypes.base = Backbone.View.extend({
             }
         };
         
+		var i;
         var beforeMoveError;
-        for ( var i = 0; i < that.activePrompts.length; i ++)
+        for ( i = 0; i < that.activePrompts.length; i ++)
         {
             beforeMoveError = that.activePrompts[i].beforeMove();
             if ( beforeMoveError != null ) {
@@ -237,7 +238,7 @@ screenTypes.base = Backbone.View.extend({
         {
             if ( validateValues ) {
                 var validateError;
-                for ( var i = 0; i < that.activePrompts.length; i++ )
+                for ( i = 0; i < that.activePrompts.length; i++ )
                 {
                     validateError = that.activePrompts[i]._isValid(isStrict);
                     if ( validateError != null ) { 
@@ -245,13 +246,13 @@ screenTypes.base = Backbone.View.extend({
                     }
                 }
                 if ( validateError == null ) { 
-                    allowMoveHandler(advancing); 
+                    return allowMoveHandler(advancing); 
                 } else {
                     return validateError;
                 }
             } 
             else {
-                allowMoveHandler(advancing);
+                return allowMoveHandler(advancing);
             }
         } else {
             return beforeMoveError;
@@ -330,7 +331,7 @@ screenTypes.screen = screenTypes.base.extend({
             $container.append(prompt.$el);
         });
         ctxt.success();
-    },
+    }
 });
 
 screenTypes.columns_2 = screenTypes.base.extend({

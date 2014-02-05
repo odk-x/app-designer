@@ -42,7 +42,7 @@ verifyLoad('builder',
             alert(msg + '\nSee console for details.');
             throw new Error(msg + '\nSee console for details.');
         }
-    };
+    }
 
     //propertyParsers are functions for transforming property values into
     //useful formats.
@@ -216,11 +216,11 @@ verifyLoad('builder',
             _.each( _.keys(surveyJson.specification.sections), function(key) {
                 var sectionObject = surveyJson.specification.sections[key];
                 var i;
-                
+                var rowObject;
                 sectionObject.parsed_prompts = [];
                 // process prompts
                 for ( i = 0 ; i < sectionObject.prompts.length ; ++i ) {
-                    var rowObject = sectionObject.prompts[i];
+                    rowObject = sectionObject.prompts[i];
                     var PromptType, ExtendedPromptType, PromptInstance;
                     
                     // xlsxconverter should have defined an _type field in the prompt...
@@ -262,7 +262,7 @@ verifyLoad('builder',
                 
                 // process operations
                 for ( i = 0 ; i < sectionObject.operations.length ; ++i ) {
-                    var rowObject = sectionObject.operations[i];
+                    rowObject = sectionObject.operations[i];
                     rowObject._section_name = key;
                     _.each(_.keys(rowObject), function(k) {
                         if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
@@ -285,7 +285,7 @@ verifyLoad('builder',
                 success: function() {
                     $('#theme').attr('href', customTheme);
                     var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
-                    if ( fontSize != null && fontSize.value != null) {
+                    if ( fontSize !== null && fontSize.value != null) {
                         $('body').css("font-size", fontSize.value);
                     }
                     ctxt.log('D','builder.buildSurvey: completed load - starting form processing');
@@ -298,7 +298,7 @@ verifyLoad('builder',
                     //predefined theme specified in the settings sheet, use that.
                     var url = null;
                     var theme = opendatakit.getSettingObject(surveyJson, "theme");
-                    if ( theme == null || theme.value == null ) {
+                    if ( theme === null || theme.value == null ) {
                         var jqmVersion = window.$.mobile.version;
                         theme = 'jquery.mobile.theme-' + jqmVersion;
                         url = requirejs.toUrl('libs/jquery.mobile-' + jqmVersion + '/' + theme + '.css');
@@ -308,7 +308,7 @@ verifyLoad('builder',
                     }
                     $('#theme').attr('href', url);
                     var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
-                    if ( fontSize != null && fontSize.value != null) {
+                    if ( fontSize !== null && fontSize.value != null) {
                         $('body').css("font-size", fontSize.value);
                     }
                     ctxt.log('D','builder.buildSurvey: completed load - starting form processing');

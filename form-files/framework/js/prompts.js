@@ -503,8 +503,8 @@ promptTypes._linked_type = promptTypes.base.extend({
                 return queryDefn.linked_table_id;
             }
         } else {
-            return null;
             shim.log('E',"query definiton is null for " + this.type + " in getLinkedTableId");
+            return null;
         }
     },
     getLinkedFormId: function() {
@@ -513,8 +513,8 @@ promptTypes._linked_type = promptTypes.base.extend({
         {
             return queryDefn.linked_form_id;
         } else {
-            return null;
             shim.log('E',"query definiton is null for " + this.type + " in getLinkedFormId");
+            return null;
         }
     },
     getFormPath: function() {
@@ -558,7 +558,7 @@ promptTypes._linked_type = promptTypes.base.extend({
         var filePath = that.getFormPath() + 'formDef.json';
         opendatakit.readFormDefFile($.extend({},ctxt,{success:function(formDef) {
              var ino = opendatakit.getSettingObject(formDef, 'instance_name');
-             if ( ino != null ) {
+             if ( ino !== null ) {
                 that._linkedCachedInstanceName = ino.value;
             } else {
                 that._linkedCachedInstanceName = null;
@@ -682,7 +682,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }
         else {
             shim.log('E',"In linked_table.openInstance instanceId is undefined");
-            return
+            return;
         }
 
         var that = this;
@@ -712,7 +712,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         
         if (deleteButton != undefined) {
             instanceId  = deleteButton.attr("instance-id"); 
-            instanceName = deleteButton.attr("instance-name")
+            instanceName = deleteButton.attr("instance-name");
         }
         else {
             shim.log('E',"In linked_table.confirmDeleteInstance instanceId is undefined"); 
@@ -727,6 +727,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var that = this;
 
         if (that._cachedEvent == null) {
+            shim.log('E',"In linked_table.handleConfirmation _cachedEvent is null"); 
             return ({message:"In linked_table.deleteInstance _cachedEvent is null"});
         }
         var instanceId = undefined;
@@ -736,8 +737,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             instanceId  = deleteButton.attr("instance-id"); 
         }
         else {
-            shim.log('E',"In linked_table.confirmDeleteInstance instanceId is undefined"); 
-            return;
+            shim.log('W',"In linked_table.handleConfirmation instanceId is undefined"); 
+            return null;
         }
 
         var ctxt = that.controller.newContext(that._cachedEvent);
@@ -789,8 +790,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         } else {
             ctxt.success();
         }
-    },
-
+    }
 });
 promptTypes.external_link = promptTypes.base.extend({
     type: "external_link",
@@ -862,7 +862,7 @@ promptTypes.user_branch = promptTypes.base.extend({
     renderContext: {
     },
     events: {
-        "click .branch-select-item": "selectBranchItem",
+        "click .branch-select-item": "selectBranchItem"
     },
     selectBranchItem: function(evt) {
         var that = this;
@@ -1221,7 +1221,7 @@ promptTypes.select = promptTypes._linked_type.extend({
             {
                 newctxt.failure({message: "Error: undefined query type - a query in the queries sheet must have a query_type"});
             }
-        }
+        };
         
         that.renderContext.passiveError = null;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
@@ -1823,8 +1823,8 @@ promptTypes.media = promptTypes.base.extend({
         } else {
             var displayObject = this.getValue();
             if (displayObject != null) {
-                var ind = displayObject.uriFragment.lastIndexOf("/");
-                return displayObject.uriFragment.substring(++ind);
+                var ind = displayObject.uriFragment.lastIndexOf("/") + 1;
+                return displayObject.uriFragment.substring(ind);
             }
             else {
                 return '';
@@ -1847,7 +1847,7 @@ promptTypes.video = promptTypes.media.extend({
     buttonLabel: 'Take your video:',
     templatePath: "templates/video.handlebars",
     captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity',
-    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity',
+    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity'
 });
 promptTypes.audio = promptTypes.media.extend({
     type: "audio",
