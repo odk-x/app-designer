@@ -78,10 +78,10 @@ screenTypes.base = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    reRender: function(ctxt) {
+    reRender: _.debounce(function(ctxt) {
         var that = this;
         that._screenManager.refreshScreen(ctxt);
-    },
+    }, 500, true),
     /**
      * Use the render context from the screenManager, but mix in 
      * any values explicitly defined for this screen.  Screen can
