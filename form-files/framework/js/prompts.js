@@ -1408,21 +1408,26 @@ promptTypes.select_multiple_inline = promptTypes.select_multiple.extend({
 promptTypes.input_type = promptTypes.base.extend({
     type: "input_type",
     templatePath: "templates/input_type.handlebars",
+    inputAttributes: {
+        'placeholder':'not specified'
+    },
+    displayed: false,
+    modified: false,
     renderContext: {
         "type": "input_type"
     },
     events: {
         "change input": "modification",
         "swipeleft .input-container": "stopPropagation",
-        "swiperight .input-container": "stopPropagation"
+        "swiperight .input-container": "stopPropagation",
+        "focusout .input-container": "lostFocus"
     },
-    //DebouncedRender throttles rerendering so that sliders work.
-    debouncedRender: _.debounce(function(evt) {
-        var that = this;
+    lostFocus: function(evt) {
+        var that = this;;
         var ctxt = that.controller.newContext(evt);
-        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
+        ctxt.log('D',"prompts." + that.type + ".focusout", "px: " + that.promptIdx);
         that.reRender(ctxt);
-    }, 500, true),
+    },
     modification: function(evt) {
         var value = $(evt.target).val();
         var that = this;
@@ -1434,37 +1439,40 @@ promptTypes.input_type = promptTypes.base.extend({
         shim.log("D","prompts." + that.type + ".modification event being processed");
         var renderContext = that.renderContext;
         // track original value
-        var originalValue = that.getValue();
-        that.setValueDeferredChange((value.length === 0 ? null : value));
-        renderContext.invalid = !that.validateValue();
-        if ( renderContext.invalid ) {
-            value = originalValue;
-            // restore it...
-            that.setValueDeferredChange(originalValue);
-        }
+        renderContext.invalid = that.setValueAndValidate(value);
+        that.modified = true;
         renderContext.value = value;
-        that.debouncedRender(evt);
     },
     configureRenderContext: function(ctxt) {
-        var renderContext = this.renderContext;
-        var value = this.getValue();
+        var that = this;
+        var renderContext = that.renderContext;
+        var value = that.getValue();
         renderContext.value = value;
+        if (ctxt.render == true) {
+            that.displayed = true;
+        }
         ctxt.success();
     },
     beforeMove: function() {
         var that = this;
-        // track original value
-        var originalValue = that.getValue();
-        that.setValueDeferredChange(this.$('input').val());
-        var isInvalid = !that.validateValue();
+        var isInvalid = that.setValueAndValidate(this.$('input').val());
         if ( isInvalid ) {
-            value = originalValue;
-            // restore it...
-            that.setValueDeferredChange(originalValue);
             return { message: that.invalid_value_message };
         } else {
             return null;
         }
+    },
+    setValueAndValidate: function(value) {
+        var that = this;
+        var originalValue = that.getValue();
+        that.setValueDeferredChange((value.length === 0 ? null : value));
+        var invalid = !that.validateValue();
+        if ( invalid ) {
+            value = originalValue;
+            // restore it...
+            that.setValueDeferredChange(originalValue);
+        }
+        return invalid;
     },
     validateValue: function() {
         return true;
@@ -1487,9 +1495,15 @@ promptTypes.integer = promptTypes.input_type.extend({
     _baseInputAttributes: {
         'type':'number'
     },
-    invalidMessage: "Integer value expected",
+    invalid_value_message: "Integer value expected",
     validateValue: function() {
-        return !isNaN(parseInt(this.getValue(), 10));
+        var value = this.getValue();
+        if ( value === null) {
+            // Null values are now respected
+            return true;
+        } else {
+            return !isNaN(parseInt(value, 10));
+        }
     }
 });
 promptTypes.decimal = promptTypes.input_type.extend({
@@ -1498,9 +1512,15 @@ promptTypes.decimal = promptTypes.input_type.extend({
     _baseInputAttributes: {
         'type':'number'
     },
-    invalidMessage: "Numeric value expected",
+    invalid_value_message: "Numeric value expected",
     validateValue: function() {
+        var value = this.getValue();
+        if (value === null) {
+            // Null values are now respected 
+            return true;
+        } else {
         return !isNaN(parseFloat(this.getValue()));
+        }
     }
 });
 promptTypes.datetime = promptTypes.input_type.extend({
