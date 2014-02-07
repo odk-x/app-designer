@@ -163,7 +163,7 @@
             "hindi": "अगर ठीक तारीक़ याद नही तो लगभग आस-पास की तारीक़ डालें."
           }
         },
-        "required": true,
+        "required": "selected(data('birthdayKnown'), 'yes')",
         "constraint": "data('birthday') <= now()",
         "constraint_message": {
           "default": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.",
@@ -188,7 +188,7 @@
             "hindi": "केवल महीने दर्ज करें"
           }
         },
-        "required": true,
+        "required": "not(selected(data('birthdayKnown'), 'yes'))",
         "_row_num": 9
       },
       {
@@ -215,7 +215,7 @@
             "hindi": "2 महीने के नीचे प्रोटोकॉल का समर्थन नहीं है.  बच्चे को चिकित्सक के पास लेजाने को कहें"
           }
         },
-        "required": true,
+        "required": "calculates.daysOld() < 2 * 30",
         "_row_num": 14
       },
       {
@@ -516,7 +516,7 @@
             "hindi": "सास की गिनती ज़्यादा है. एक बार और गिनिए."
           }
         },
-        "required": true,
+        "required": "data('breath_count') >= 60",
         "_row_num": 6
       },
       {
@@ -735,7 +735,7 @@
             "hindi": "कक्षा तापमान"
           }
         },
-        "required": true,
+        "required": "selected(data('axillary_temperature_possible'), 'yes')",
         "_row_num": 6
       },
       {
@@ -821,7 +821,7 @@
             "hindi": "क्या बुखार रोज़ाना आता है?"
           }
         },
-        "required": true,
+        "required": "data('fever_days') > 7",
         "_row_num": 22
       },
       {
@@ -909,7 +909,7 @@
             "hindi": "ब्रह्मारंध्र उभड़ा"
           }
         },
-        "required": true,
+        "required": "calculates.daysOld() < 30 * 18",
         "_row_num": 35
       },
       {
@@ -1051,7 +1051,7 @@
             "hindi": "मुँह अल्सर गहरा है या लंबा - चौड़ा\n है?"
           }
         },
-        "required": true,
+        "required": "selected(data('mouth_ulcers'), 'present')",
         "_row_num": 53
       },
       {
@@ -1112,7 +1112,7 @@
             "hindi": "कितने दिनों से कान बह रहे हेंय़"
           }
         },
-        "required": true,
+        "required": "selected(data('ear_discharge'), 'yes')",
         "_row_num": 7
       },
       {
@@ -2569,7 +2569,7 @@
       },
       {
         "clause": "begin screen",
-        "required": true,
+        "required": "calculates.firstDoseChloramophenicol()",
         "_row_num": 39
       },
       {
@@ -2701,7 +2701,7 @@
         "display": {
           "text": "Give first dose of quinine after making a blood smear."
         },
-        "required": true,
+        "required": "calculates.verySevereFebrileDisease()",
         "_row_num": 59
       },
       {
@@ -6179,7 +6179,7 @@
         "display": {
           "text": "Is there cholera in your area?"
         },
-        "required": true,
+        "required": "calculates.severeDehydration()",
         "_row_num": 9
       },
       {
@@ -6193,7 +6193,7 @@
         "display": {
           "text": "Give doxycycline for cholera."
         },
-        "required": true,
+        "required": "selected(data('cholera_in_area'), 'yes') && calculates.daysOld() > (2 * 365)",
         "_row_num": 11
       },
       {
@@ -6214,7 +6214,7 @@
             "hindi": "तुरंत अस्पताल रेफर करें व रास्ते मैं शिशु को ओ. आर. एस देते रहें."
           }
         },
-        "required": true,
+        "required": "calculates.hasSevereConditionWODehydrationDiarrhoea()",
         "_row_num": 14
       },
       {
@@ -6268,7 +6268,7 @@
             "hindi": "तुरंत अस्पताल रेफर करें व रास्ते मैं शिशु को ओ. आर. एस देते रहें."
           }
         },
-        "required": true,
+        "required": "calculates.someDehydration() && calculates.hasSevereConditionWODehydrationDiarrhoea()",
         "_row_num": 26
       },
       {
@@ -8155,6 +8155,11 @@
           }
         },
         "_row_num": 13
+      },
+      {
+        "setting_name": "hideNavigationButtonText",
+        "value": true,
+        "_row_num": 14
       }
     ]
   },
@@ -8263,6 +8268,11 @@
           }
         },
         "_row_num": 13
+      },
+      "hideNavigationButtonText": {
+        "setting_name": "hideNavigationButtonText",
+        "value": true,
+        "_row_num": 14
       },
       "_locales": {
         "setting_name": "_locales",
@@ -10870,7 +10880,7 @@
                 "hindi": "अगर ठीक तारीक़ याद नही तो लगभग आस-पास की तारीक़ डालें."
               }
             },
-            "required": true,
+            "required": "selected(data('birthdayKnown'), 'yes')",
             "constraint": "data('birthday') <= now()",
             "constraint_message": {
               "default": "You entered a birthday in the future. Perhaps your device doesn't have the correct date.",
@@ -10896,7 +10906,7 @@
                 "hindi": "केवल महीने दर्ज करें"
               }
             },
-            "required": true,
+            "required": "not(selected(data('birthdayKnown'), 'yes'))",
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -10914,7 +10924,7 @@
                 "hindi": "2 महीने के नीचे प्रोटोकॉल का समर्थन नहीं है.  बच्चे को चिकित्सक के पास लेजाने को कहें"
               }
             },
-            "required": true,
+            "required": "calculates.daysOld() < 2 * 30",
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -11462,7 +11472,7 @@
                 "hindi": "सास की गिनती ज़्यादा है. एक बार और गिनिए."
               }
             },
-            "required": true,
+            "required": "data('breath_count') >= 60",
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -11928,7 +11938,7 @@
                 "hindi": "कक्षा तापमान"
               }
             },
-            "required": true,
+            "required": "selected(data('axillary_temperature_possible'), 'yes')",
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -12000,7 +12010,7 @@
                 "hindi": "क्या बुखार रोज़ाना आता है?"
               }
             },
-            "required": true,
+            "required": "data('fever_days') > 7",
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "prompt",
@@ -12088,7 +12098,7 @@
                 "hindi": "ब्रह्मारंध्र उभड़ा"
               }
             },
-            "required": true,
+            "required": "calculates.daysOld() < 30 * 18",
             "_row_num": 35,
             "__rowNum__": 34,
             "_token_type": "prompt",
@@ -12230,7 +12240,7 @@
                 "hindi": "मुँह अल्सर गहरा है या लंबा - चौड़ा\n है?"
               }
             },
-            "required": true,
+            "required": "selected(data('mouth_ulcers'), 'present')",
             "_row_num": 53,
             "__rowNum__": 52,
             "_token_type": "prompt",
@@ -12490,7 +12500,7 @@
                 "hindi": "कितने दिनों से कान बह रहे हेंय़"
               }
             },
-            "required": true,
+            "required": "selected(data('ear_discharge'), 'yes')",
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
@@ -13964,7 +13974,7 @@
             "display": {
               "text": "Give first dose of quinine after making a blood smear."
             },
-            "required": true,
+            "required": "calculates.verySevereFebrileDisease()",
             "_row_num": 59,
             "__rowNum__": 58,
             "_token_type": "prompt",
@@ -17054,7 +17064,7 @@
           },
           {
             "clause": "begin screen",
-            "required": true,
+            "required": "calculates.firstDoseChloramophenicol()",
             "_row_num": 39,
             "__rowNum__": 38,
             "_token_type": "begin_screen",
@@ -18919,7 +18929,7 @@
             "display": {
               "text": "Is there cholera in your area?"
             },
-            "required": true,
+            "required": "calculates.severeDehydration()",
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -18933,7 +18943,7 @@
             "display": {
               "text": "Give doxycycline for cholera."
             },
-            "required": true,
+            "required": "selected(data('cholera_in_area'), 'yes') && calculates.daysOld() > (2 * 365)",
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
@@ -18950,7 +18960,7 @@
                 "hindi": "तुरंत अस्पताल रेफर करें व रास्ते मैं शिशु को ओ. आर. एस देते रहें."
               }
             },
-            "required": true,
+            "required": "calculates.hasSevereConditionWODehydrationDiarrhoea()",
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -18980,7 +18990,7 @@
                 "hindi": "तुरंत अस्पताल रेफर करें व रास्ते मैं शिशु को ओ. आर. एस देते रहें."
               }
             },
-            "required": true,
+            "required": "calculates.someDehydration() && calculates.hasSevereConditionWODehydrationDiarrhoea()",
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",

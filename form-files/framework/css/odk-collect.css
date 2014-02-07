@@ -11,24 +11,25 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
-@media all and (max-width: 340px) {
-    /*
-    This media query prevents spillover in the header.
-    */
-    .odk-header {
-        font-size: .7em;
-    }
-    .odk-footer {
-        font-size: .7em;
-    }
+
+@media all and (max-width: 25em) {
+    .my-breakpoint-no-nav-btn-text.ui-grid-b .ui-block-a { width: 54.95%; }
+    .my-breakpoint-no-nav-btn-text.ui-grid-b .ui-block-b, 
+    .my-breakpoint-no-nav-btn-text.ui-grid-b .ui-block-c { width: 22.425%; } 
+}
+
+@media all and (min-width: 26em) {
+    .my-breakpoint.ui-grid-b .ui-block-a { width: 49.95%; }
+    .my-breakpoint.ui-grid-b .ui-block-b, 
+    .my-breakpoint.ui-grid-b .ui-block-c { width: 24.925%; } 
 }
 .odk-screen {
 	min-height: inherit;
 	min-width: inherit;
 }
 .odk-header {
-	overflow: hidden;
-	clear: both;
+    overflow: hidden;
+    clear: both;
 }
 .odk-scroll {
 	clear: both;
@@ -45,16 +46,9 @@ body {
     padding-left: 1em;
     padding-right: 1em;
 }
-.headerNavBtns {
-    float: right;
-    /* margin-right: 1em; */
-}
 .footerNavBtns {
     float: right;
     /* margin-right: 1em; */
-}
-.odk-options-btn {
-    float: left;
 }
 /*
 Orangy glow.
