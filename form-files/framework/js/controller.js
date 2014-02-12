@@ -227,6 +227,7 @@ return {
         var that = this;
         var path = null;
         var state = null;
+        var repop = false;
         var oldScreenPath = that.getCurrentScreenPath();
         while (shim.hasScreenHistory(opendatakit.getRefId())) {
             path = shim.popScreenHistory(opendatakit.getRefId());
@@ -286,6 +287,7 @@ return {
                         shim.pushSectionScreenState(opendatakit.getRefId());
                         path = that.getCurrentContentsScreenPath();
                         state = '';
+                        repop = true;
                         break;
                     }
                 }
@@ -299,7 +301,7 @@ return {
                 }
             }
         }
-        return { path: path, state: state};
+        return { path: path, state: state, repop: repop};
     },
     beforeMove: function(isStrict, advancing){
         var that = this;
@@ -401,7 +403,7 @@ return {
                     state = ''; // reset this, since we want to advance
                     if ( path == null ) {
                         path = opendatakit.initialScreenPath;
-                    } else {
+                    } else if ( !combo.repop ) {
                        path = that.getNextOperationPath(path);
                     }
                     // just for debugging...
