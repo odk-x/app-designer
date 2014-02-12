@@ -476,7 +476,6 @@ promptTypes.contents = promptTypes.base.extend({
         var that = this;
         that.renderContext.prompts = that.controller.getCurrentSectionPrompts();
         if ( that._screen && that._screen._renderContext ) {
-            that._screen._renderContext.enableForwardNavigation = false;
             that._screen._renderContext.showHeader = true;
             that._screen._renderContext.showFooter = false;
         }

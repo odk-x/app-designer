@@ -223,6 +223,84 @@ return {
         var prompt = section.parsed_prompts[intIndex];
         return prompt;
     },
+    findPreviousScreenAndState: function(isResume) {
+        var that = this;
+        var path = null;
+        var state = null;
+        var oldScreenPath = that.getCurrentScreenPath();
+        while (shim.hasScreenHistory(opendatakit.getRefId())) {
+            path = shim.popScreenHistory(opendatakit.getRefId());
+            state = shim.getControllerState(opendatakit.getRefId());
+            // possible 'state' values:
+            // advanceOnReturn
+            // hideInBackHistory
+            // popHistoryOnExit -- awkward
+            // validateinProgress -- awkward
+            //
+            // the later two are possible if a validation constraint 
+            // shared a screen with a user-directed branch and the 
+            // user took the branch rather than fix the validation
+            // failure.
+            // 
+            // It is safe to back over the popHistoryOnExit, as 
+            // that is the screen that failed validation.
+            // 
+            // It also makes sense to back over the validation 
+            // command (which will always have validateInProgress
+            // state), as it doesn't have any UI on success.
+            //
+            if ( state === 'hideInBackHistory' || 
+                 state === 'validateInProgress' || 
+                 state === 'popHistoryOnExit' ) {
+                // this is a hidden screen w.r.t. the back history
+                // skip over it.
+                continue;
+            } else if ( state !== 'advanceOnReturn' ) {
+                // this is not a do section action. 
+                // show it.
+                break;
+            } else {
+                // this IS a do section action.
+                // if we started in a different section than 
+                // the one we are in now, then we are backing out
+                // of a subsection. In that case, we should show
+                // the contents screen of the section we are 
+                // re-entering.
+                var newScreenPath = that.getCurrentScreenPath();
+                if ( oldScreenPath != null && newScreenPath != null ) {
+                    var oldParts = oldScreenPath.split("/");
+                    var newParts = newScreenPath.split("/");
+                    if ( oldParts[0] != newParts[0] ) {
+                        // we are popping up.
+                        // retain the do section clause in the 
+                        // history record (since we are backing
+                        // up, this will not be done on the screen
+                        // transition, so we must do that here).
+                        // and show the contents screen.
+                        // When we advance forward from 
+                        // the contents screen we will resume
+                        // at the statement after the do section.
+                        // If we go backward, we will silently
+                        // clear this record out and move to the 
+                        // screen before the do section.
+                        shim.pushSectionScreenState(opendatakit.getRefId());
+                        path = that.getCurrentContentsScreenPath();
+                        state = '';
+                        break;
+                    }
+                }
+                // Otherwise, we are in the same section.
+                // If isResume is true, then we want to stop
+                // at this point. Otherwise, we want to move
+                // back through to an earlier screen in this 
+                // same section.
+                if ( isResume ) {
+                    break;
+                }
+            }
+        }
+        return { path: path, state: state};
+    },
     beforeMove: function(isStrict, advancing){
         var that = this;
         if ( that.screenManager ) {
@@ -306,18 +384,25 @@ return {
                     // otherwise drop through...
                 case "back_in_history":
                     // pop the history stack, and render that screen.
-                    while (shim.hasScreenHistory(opendatakit.getRefId())) {
-                        path = shim.popScreenHistory(opendatakit.getRefId());
-                        state = shim.getControllerState(opendatakit.getRefId());
-                        // if this is an intermediate advanceOnReturn
-                        // state, then we should continue by backing up
-                        // through it.
-                        if ( state !== 'advanceOnReturn' ) {
-                            break;
-                        }
-                    }
+                    var combo = that.findPreviousScreenAndState(false);
+                    path = combo.path;
+                    state = combo.state;
+
                     if ( path == null ) {
                         path = opendatakit.initialScreenPath;
+                    }
+                    // just for debugging...
+                    shim.getScreenPath(opendatakit.getRefId());
+                    break;
+                case "resume":
+                    // pop the history stack, and render the next screen.
+                    var combo = that.findPreviousScreenAndState(true);
+                    path = combo.path;
+                    state = ''; // reset this, since we want to advance
+                    if ( path == null ) {
+                        path = opendatakit.initialScreenPath;
+                    } else {
+                       path = that.getNextOperationPath(path);
                     }
                     // just for debugging...
                     shim.getScreenPath(opendatakit.getRefId());
@@ -612,8 +697,10 @@ return {
         
         if ( options.popHistoryOnExit ) {
             stateString = 'popHistoryOnExit';
+        } else if ( operation.hideInBackHistory ) {
+            stateString = 'hideInBackHistory';
         }
-
+        
         shim.setSectionScreenState( opendatakit.getRefId(), newPath, stateString);
         // Build a new Screen object so that jQuery Mobile is always happy...
         var formDef = opendatakit.getCurrentFormDef();
