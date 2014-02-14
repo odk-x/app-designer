@@ -14675,7 +14675,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "PatientDemographics/_contents"
+            "_branch_label_enclosing_screen": "PatientDemographics/0"
           },
           {
             "clause": "do section DangerSigns",
@@ -14688,7 +14688,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "DangerSigns/_contents"
+            "_branch_label_enclosing_screen": "DangerSigns/0"
           },
           {
             "type": "select_multiple",
@@ -14716,7 +14716,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "Respiratory/_contents"
+            "_branch_label_enclosing_screen": "Respiratory/0"
           },
           {
             "clause": "do section Diarrhoea",
@@ -14729,7 +14729,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "Diarrhoea/_contents"
+            "_branch_label_enclosing_screen": "Diarrhoea/0"
           },
           {
             "clause": "do section Fever",
@@ -14742,7 +14742,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "Fever/_contents"
+            "_branch_label_enclosing_screen": "Fever/0"
           },
           {
             "clause": "do section EarProblem",
@@ -14755,7 +14755,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "EarProblem/_contents"
+            "_branch_label_enclosing_screen": "EarProblem/0"
           },
           {
             "clause": "do section Malnutrition",
@@ -14768,7 +14768,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "Malnutrition/_contents"
+            "_branch_label_enclosing_screen": "Malnutrition/0"
           },
           {
             "type": "note",
@@ -14837,7 +14837,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "Classification/_contents"
+            "_branch_label_enclosing_screen": "Classification/0"
           },
           {
             "clause": "do section RedTreatment",
@@ -14850,7 +14850,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "RedTreatment/_contents"
+            "_branch_label_enclosing_screen": "RedTreatment/0"
           },
           {
             "clause": "do section RespiratoryTX",
@@ -14863,7 +14863,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "RespiratoryTX/_contents"
+            "_branch_label_enclosing_screen": "RespiratoryTX/0"
           },
           {
             "clause": "do section DiarrhoeaTX",
@@ -14876,7 +14876,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "DiarrhoeaTX/_contents"
+            "_branch_label_enclosing_screen": "DiarrhoeaTX/0"
           },
           {
             "clause": "do section FeverTX",
@@ -14889,7 +14889,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "FeverTX/_contents"
+            "_branch_label_enclosing_screen": "FeverTX/0"
           },
           {
             "clause": "do section EarTX",
@@ -14902,7 +14902,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "EarTX/_contents"
+            "_branch_label_enclosing_screen": "EarTX/0"
           },
           {
             "clause": "do section MalnutritionTX",
@@ -14915,7 +14915,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "MalnutritionTX/_contents"
+            "_branch_label_enclosing_screen": "MalnutritionTX/0"
           },
           {
             "clause": "do section CounselFeeding",
@@ -14928,7 +14928,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "CounselFeeding/_contents"
+            "_branch_label_enclosing_screen": "CounselFeeding/0"
           },
           {
             "clause": "do section FollowUp",
@@ -14941,7 +14941,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "FollowUp/_contents"
+            "_branch_label_enclosing_screen": "FollowUp/0"
           },
           {
             "type": "select_one",
@@ -14982,7 +14982,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "VaccRef/_contents"
+            "_branch_label_enclosing_screen": "VaccRef/0"
           },
           {
             "type": "text",
@@ -15434,11 +15434,12 @@
             "_row_num": 53,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 53
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 53,
             "operationIdx": 54
           }
@@ -15730,11 +15731,12 @@
             "_row_num": 27,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 9
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 27,
             "operationIdx": 10
           }
@@ -16205,11 +16207,12 @@
             "_row_num": 70,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 12
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 70,
             "operationIdx": 13
           }
@@ -16612,11 +16615,12 @@
             "_row_num": 34,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 22
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 34,
             "operationIdx": 23
           }
@@ -17038,11 +17042,12 @@
             "_row_num": 44,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 7
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 44,
             "operationIdx": 8
           }
@@ -17728,11 +17733,12 @@
             "_row_num": 78,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 22
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 78,
             "operationIdx": 23
           }
@@ -17962,11 +17968,12 @@
             "_row_num": 21,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 4
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 21,
             "operationIdx": 5
           }
@@ -18236,11 +18243,12 @@
             "_row_num": 29,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 5
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 29,
             "operationIdx": 6
           }
@@ -19288,11 +19296,12 @@
             "_row_num": 250,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(82);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 2
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 250,
             "operationIdx": 3
           }
@@ -20825,11 +20834,12 @@
             "_row_num": 247,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(76);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 57
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 247,
             "operationIdx": 58
           }
@@ -21457,11 +21467,12 @@
             "_row_num": 82,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 17
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 82,
             "operationIdx": 18
           }
@@ -22664,11 +22675,12 @@
             "_row_num": 189,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(68);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 35
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 189,
             "operationIdx": 36
           }
@@ -24299,11 +24311,12 @@
             "_row_num": 224,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(98);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 39
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 224,
             "operationIdx": 40
           }
@@ -25092,11 +25105,12 @@
             "_row_num": 96,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(38);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 30
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 96,
             "operationIdx": 31
           }
@@ -25647,11 +25661,12 @@
             "_row_num": 69,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 22
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 69,
             "operationIdx": 23
           }
@@ -27206,11 +27221,12 @@
             "_row_num": 212,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(85);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 44
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 212,
             "operationIdx": 45
           }
@@ -27587,11 +27603,12 @@
             "_row_num": 62,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 6
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 62,
             "operationIdx": 7
           }
@@ -28248,11 +28265,12 @@
             "_row_num": 96,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(42);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 12
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 96,
             "operationIdx": 13
           }
@@ -28584,11 +28602,12 @@
             "_row_num": 58,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 3
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 58,
             "operationIdx": 4
           }
@@ -28647,7 +28666,7 @@
             "display": {
               "title": "<b>IMCI Ghana</b>"
             },
-            "_branch_label_enclosing_screen": "survey/_contents"
+            "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "_row_num": 5,
@@ -28742,11 +28761,12 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 8
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 9
           },
@@ -28755,6 +28775,9 @@
             "clause": "validate finalize",
             "_sweep_name": "finalize",
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 10
           },
           {
@@ -28762,11 +28785,14 @@
             "clause": "save and terminate",
             "calculation": true,
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 11
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 12
           }

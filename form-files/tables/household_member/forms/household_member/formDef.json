@@ -570,11 +570,12 @@
             "_row_num": 11,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 10
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 11,
             "operationIdx": 11
           }
@@ -623,7 +624,7 @@
             "display": {
               "title": "Household Member Survey"
             },
-            "_branch_label_enclosing_screen": "survey/_contents"
+            "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "_row_num": 5,
@@ -718,11 +719,12 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 8
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 9
           },
@@ -731,6 +733,9 @@
             "clause": "validate finalize",
             "_sweep_name": "finalize",
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 10
           },
           {
@@ -738,11 +743,14 @@
             "clause": "save and terminate",
             "calculation": true,
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 11
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 12
           }

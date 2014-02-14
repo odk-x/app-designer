@@ -10491,7 +10491,7 @@
             "display": {
               "title": "PatientDemographics"
             },
-            "_branch_label_enclosing_screen": "PatientDemographics/_contents"
+            "_branch_label_enclosing_screen": "PatientDemographics/0"
           },
           {
             "clause": "do section DangerSigns",
@@ -10504,7 +10504,7 @@
             "display": {
               "title": "DangerSigns"
             },
-            "_branch_label_enclosing_screen": "DangerSigns/_contents"
+            "_branch_label_enclosing_screen": "DangerSigns/0"
           },
           {
             "type": "select_multiple",
@@ -10539,7 +10539,7 @@
             "display": {
               "title": "Respitory"
             },
-            "_branch_label_enclosing_screen": "Respitory/_contents"
+            "_branch_label_enclosing_screen": "Respitory/0"
           },
           {
             "clause": "do section Diarrhoea",
@@ -10552,7 +10552,7 @@
             "display": {
               "title": "Diarrhoea"
             },
-            "_branch_label_enclosing_screen": "Diarrhoea/_contents"
+            "_branch_label_enclosing_screen": "Diarrhoea/0"
           },
           {
             "clause": "do section Fever",
@@ -10565,7 +10565,7 @@
             "display": {
               "title": "Fever"
             },
-            "_branch_label_enclosing_screen": "Fever/_contents"
+            "_branch_label_enclosing_screen": "Fever/0"
           },
           {
             "type": "select_one",
@@ -10799,11 +10799,12 @@
             "_row_num": 23,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 20
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 23,
             "operationIdx": 21
           }
@@ -11064,11 +11065,12 @@
             "_row_num": 19,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 10
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 19,
             "operationIdx": 11
           }
@@ -11400,11 +11402,12 @@
             "_row_num": 34,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 8
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 34,
             "operationIdx": 9
           }
@@ -11599,11 +11602,12 @@
             "_row_num": 10,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 9
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 10,
             "operationIdx": 10
           }
@@ -11887,11 +11891,12 @@
             "_row_num": 23,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 6
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 23,
             "operationIdx": 7
           }
@@ -12424,11 +12429,12 @@
             "_row_num": 57,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 14
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 57,
             "operationIdx": 15
           }
@@ -12601,11 +12607,12 @@
             "_row_num": 15,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 3
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 15,
             "operationIdx": 4
           }
@@ -12738,11 +12745,12 @@
             "_row_num": 10,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 3
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 10,
             "operationIdx": 4
           }
@@ -13711,11 +13719,12 @@
             "_row_num": 200,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(64);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 2
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 200,
             "operationIdx": 3
           }
@@ -16968,7 +16977,7 @@
             "display": {
               "title": "Dehydration Treatment"
             },
-            "_branch_label_enclosing_screen": "DehydrationTreatment/_contents"
+            "_branch_label_enclosing_screen": "DehydrationTreatment/0"
           },
           {
             "_token_type": "prompt",
@@ -18721,11 +18730,12 @@
             "_row_num": 642,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(216);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 195
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 642,
             "operationIdx": 196
           }
@@ -20005,11 +20015,12 @@
             "_row_num": 130,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(47);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 29
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 130,
             "operationIdx": 30
           }
@@ -20091,7 +20102,7 @@
                 "hindi": "IMNCI"
               }
             },
-            "_branch_label_enclosing_screen": "survey/_contents"
+            "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "_row_num": 5,
@@ -20186,11 +20197,12 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 8
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 9
           },
@@ -20199,6 +20211,9 @@
             "clause": "validate finalize",
             "_sweep_name": "finalize",
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 10
           },
           {
@@ -20206,11 +20221,14 @@
             "clause": "save and terminate",
             "calculation": true,
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 11
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 12
           }

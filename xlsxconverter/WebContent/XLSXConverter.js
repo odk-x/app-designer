@@ -614,6 +614,7 @@
          *    else (_tag_name)
          *    end_if (_tag_name)
          *    goto_label (_branch_label)
+         *    resume
          *    back_in_history
          *    do_section (_do_section_name)
          *    exit_section
@@ -738,6 +739,17 @@
                     }
                     clauseEntry._token_type = "back_in_history";
                     break;
+                case "resume":
+                    if ( parts.length !== 1 ) {
+                        throw Error("Expected 'resume' but found: " + row.clause +
+                                " on sheet: " + sheetName + " on row: " + row._row_num);
+                    }
+                    if ("condition" in row) {
+                        throw Error("'condition' expressions are not allowed on 'resume' clauses. Error on sheet: " +
+                                sheetName + " on row: " + row._row_num);
+                    }
+                    clauseEntry._token_type = "resume";
+                    break;
                 case "do":
                     if ( parts.length !== 3 || parts[1] !== "section" ) {
                         throw Error("Expected 'do section <sectionname>' but found: " + row.clause +
@@ -858,6 +870,7 @@
                 break;
             case "branch_label":
             case "goto_label":
+            case "resume":
             case "back_in_history":
             case "do_section":
             case "exit_section":
@@ -933,6 +946,7 @@
                 break;
             case "branch_label":
             case "goto_label":
+            case "resume":
             case "back_in_history":
             case "do_section":
             case "exit_section":
@@ -991,6 +1005,7 @@
             case "assign":
             case "prompt":
             case "goto_label":
+            case "resume":
             case "back_in_history":
             case "do_section":
             case "exit_section":
@@ -1070,6 +1085,7 @@
             case "assign":
             case "prompt":
             case "goto_label":
+            case "resume":
             case "back_in_history":
             case "do_section":
             case "exit_section":
@@ -1119,16 +1135,16 @@
 
         /** emit the _contents branch label (for the contents prompt) */
         blockFlow.push({ _token_type: "branch_label", branch_label: "_contents", _row_num: rowNum });
-        blockFlow.push({ _token_type: "prompt", type: "contents", _type: "contents", _row_num: rowNum });
+        blockFlow.push({ _token_type: "prompt", type: "contents", _type: "contents", _row_num: rowNum, screen: { hideInBackHistory: true } });
         // this should never be reached....
-        blockFlow.push({ _token_type: "back_in_history", clause: "back", _row_num: rowNum });
+        blockFlow.push({ _token_type: "resume", clause: "resume", _row_num: rowNum });
 
         if ( sheetName == 'initial' ) {
             blockFlow.push({ _token_type: "branch_label", branch_label: "_finalize", _row_num: rowNum });
-            blockFlow.push({ _token_type: "validate", clause: "validate finalize", _sweep_name: "finalize", _row_num: rowNum });
-            blockFlow.push({ _token_type: "save_and_terminate", clause: "save and terminate", calculation: true, _row_num: rowNum });
+            blockFlow.push({ _token_type: "validate", clause: "validate finalize", _sweep_name: "finalize", _row_num: rowNum, screen: { hideInBackHistory: true } });
+            blockFlow.push({ _token_type: "save_and_terminate", clause: "save and terminate", calculation: true, _row_num: rowNum, screen: { hideInBackHistory: true } });
             // this should never be reached....
-            blockFlow.push({ _token_type: "back_in_history", clause: "back", _row_num: rowNum });
+            blockFlow.push({ _token_type: "resume", clause: "resume", _row_num: rowNum });
         }
         return blockFlow;
     };
@@ -1211,6 +1227,7 @@
             case "end_if":
             case "branch_label":
             case "goto_label":
+            case "resume":
             case "back_in_history":
             case "do_section":
             case "exit_section":
@@ -1239,6 +1256,7 @@
             case "branch_label":
             case "assign":
             case "goto_label":
+            case "resume":
             case "back_in_history":
             case "exit_section":
             case "validate":
@@ -1249,15 +1267,15 @@
             case "do_section":
                 // create a psuedo-prompt in this section that has a
                 // _branch_label_enclosing_screen that references the
-                // contents prompt within the subsection.  This is used
-                // by the contents menu item to navigate into the contents
-                // screen of the subsection.
+                // first prompt within the subsection.  This is used
+                // by the contents menu item to navigate to the first
+                // prompt of that section.
                 var psuedoPrompt = _.extend({}, clause,
                     { _token_type: "prompt",
                       _type: "_section",
                       promptIdx: prompts.length,
                       display: specSettings[clause._do_section_name].display,
-                      _branch_label_enclosing_screen: clause._do_section_name + '/_contents' } );
+                      _branch_label_enclosing_screen: clause._do_section_name + '/0' } );
                 prompts.push(psuedoPrompt);
                 flattened.push(clause);
                 ++i;
@@ -1389,6 +1407,7 @@
             case "assign":
             case "render":
             case "goto_label":
+            case "resume":
             case "back_in_history":
             case "do_section":
             case "exit_section":
@@ -1435,6 +1454,7 @@
                 ++i;
                 break;
             case "assign":
+            case "resume":
             case "back_in_history":
             case "do_section":
             case "exit_section":
@@ -1474,6 +1494,7 @@
                 break;
             case "assign":
             case "goto_label":
+            case "resume":
             case "back_in_history":
             case "exit_section":
             case "validate":

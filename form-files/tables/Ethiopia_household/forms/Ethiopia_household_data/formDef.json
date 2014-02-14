@@ -2394,7 +2394,7 @@
             "display": {
               "title": "Section 2"
             },
-            "_branch_label_enclosing_screen": "section2/_contents"
+            "_branch_label_enclosing_screen": "section2/0"
           },
           {
             "clause": "do section section3",
@@ -2407,7 +2407,7 @@
             "display": {
               "title": "Section 3"
             },
-            "_branch_label_enclosing_screen": "section3/_contents"
+            "_branch_label_enclosing_screen": "section3/0"
           },
           {
             "clause": "do section section4",
@@ -2420,7 +2420,7 @@
             "display": {
               "title": "Section 4"
             },
-            "_branch_label_enclosing_screen": "section4/_contents"
+            "_branch_label_enclosing_screen": "section4/0"
           },
           {
             "clause": "do section section5",
@@ -2433,7 +2433,7 @@
             "display": {
               "title": "Section 5"
             },
-            "_branch_label_enclosing_screen": "section5/_contents"
+            "_branch_label_enclosing_screen": "section5/0"
           },
           {
             "clause": "do section section8",
@@ -2446,7 +2446,7 @@
             "display": {
               "title": "Section 8"
             },
-            "_branch_label_enclosing_screen": "section8/_contents"
+            "_branch_label_enclosing_screen": "section8/0"
           },
           {
             "clause": "do section section9",
@@ -2459,7 +2459,7 @@
             "display": {
               "title": "Section 9"
             },
-            "_branch_label_enclosing_screen": "section9/_contents"
+            "_branch_label_enclosing_screen": "section9/0"
           },
           {
             "clause": "do section section10",
@@ -2472,7 +2472,7 @@
             "display": {
               "title": "Section 10"
             },
-            "_branch_label_enclosing_screen": "section10/_contents"
+            "_branch_label_enclosing_screen": "section10/0"
           },
           {
             "_token_type": "prompt",
@@ -2560,11 +2560,12 @@
             "_row_num": 18,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 9
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 18,
             "operationIdx": 10
           }
@@ -2666,11 +2667,12 @@
             "_row_num": 5,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 4
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 5,
             "operationIdx": 5
           }
@@ -2750,11 +2752,12 @@
             "_row_num": 4,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 3
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 4,
             "operationIdx": 4
           }
@@ -2996,11 +2999,12 @@
             "_row_num": 12,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 11
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 12,
             "operationIdx": 12
           }
@@ -3238,11 +3242,12 @@
             "_row_num": 15,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 16
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 15,
             "operationIdx": 17
           }
@@ -3721,11 +3726,12 @@
             "_row_num": 28,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 33
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 28,
             "operationIdx": 34
           }
@@ -4372,11 +4378,12 @@
             "_row_num": 39,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 41
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 39,
             "operationIdx": 42
           }
@@ -4701,11 +4708,12 @@
             "_row_num": 23,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 13
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 23,
             "operationIdx": 14
           }
@@ -4764,7 +4772,7 @@
             "display": {
               "title": "Ethiopia Household Data"
             },
-            "_branch_label_enclosing_screen": "survey/_contents"
+            "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "_row_num": 5,
@@ -4859,11 +4867,12 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 8
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 9
           },
@@ -4872,6 +4881,9 @@
             "clause": "validate finalize",
             "_sweep_name": "finalize",
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 10
           },
           {
@@ -4879,11 +4891,14 @@
             "clause": "save and terminate",
             "calculation": true,
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 11
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 12
           }

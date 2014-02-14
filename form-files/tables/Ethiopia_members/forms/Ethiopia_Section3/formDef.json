@@ -1452,7 +1452,7 @@
             "display": {
               "title": "Section 3"
             },
-            "_branch_label_enclosing_screen": "survey/_contents"
+            "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "type": "finalize",
@@ -1503,11 +1503,12 @@
             "_row_num": 4,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 3
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 4,
             "operationIdx": 4
           },
@@ -1516,6 +1517,9 @@
             "clause": "validate finalize",
             "_sweep_name": "finalize",
             "_row_num": 4,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 5
           },
           {
@@ -1523,11 +1527,14 @@
             "clause": "save and terminate",
             "calculation": true,
             "_row_num": 4,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 6
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 4,
             "operationIdx": 7
           }
@@ -1725,11 +1732,12 @@
             "_row_num": 18,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 9
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 18,
             "operationIdx": 10
           }

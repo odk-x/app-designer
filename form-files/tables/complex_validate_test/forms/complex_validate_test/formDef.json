@@ -585,7 +585,7 @@
                 "hindi": "उपयोगकर्ता जानकारी"
               }
             },
-            "_branch_label_enclosing_screen": "section1/_contents"
+            "_branch_label_enclosing_screen": "section1/0"
           },
           {
             "type": "note",
@@ -633,7 +633,7 @@
                 "hindi": "अनुशंसाएँ"
               }
             },
-            "_branch_label_enclosing_screen": "section2/_contents"
+            "_branch_label_enclosing_screen": "section2/0"
           },
           {
             "type": "note",
@@ -795,11 +795,12 @@
             "_row_num": 21,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 16
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 21,
             "operationIdx": 17
           }
@@ -965,11 +966,12 @@
             "_row_num": 6,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 5
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 6,
             "operationIdx": 6
           }
@@ -1059,11 +1061,12 @@
             "_row_num": 4,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 3
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 4,
             "operationIdx": 4
           }
@@ -1110,7 +1113,7 @@
                 "hindi": "दो भाग मान्यकरण टेस्ट"
               }
             },
-            "_branch_label_enclosing_screen": "survey/_contents"
+            "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "_row_num": 5,
@@ -1203,11 +1206,12 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 8
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 9
           },
@@ -1216,6 +1220,9 @@
             "clause": "validate finalize",
             "_sweep_name": "finalize",
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 10
           },
           {
@@ -1223,11 +1230,14 @@
             "clause": "save and terminate",
             "calculation": true,
             "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 11
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 9,
             "operationIdx": 12
           }
