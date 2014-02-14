@@ -7,43 +7,105 @@
       },
       {
         "clause": "goto _finalize",
-        "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
         "_row_num": 3
       }
     ],
     "survey": [
       {
-        "type": "text",
-        "name": "name",
+        "type": "select_multiple",
+        "values_list": "med_location",
+        "name": "where_medical_attention",
         "display": {
-          "text": "What is the household member's name?"
+          "text": "Where did {{name}} receive or consult medical assistance primarily?"
         },
-        "required": true,
         "_row_num": 2
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "med_location",
+        "data_value": "hospital",
+        "display": {
+          "text": "Hospital"
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "med_location",
+        "data_value": "health_center",
+        "display": {
+          "text": "Health Center"
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "med_location",
+        "data_value": "health_post",
+        "display": {
+          "text": "Health Post"
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "med_location",
+        "data_value": "clinics",
+        "display": {
+          "text": "Clinics"
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "med_location",
+        "data_value": "pharmacy",
+        "display": {
+          "text": "Pharmacy"
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "med_location",
+        "data_value": "tradition",
+        "display": {
+          "text": "Traditional Healer"
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "med_location",
+        "data_value": "religious",
+        "display": {
+          "text": "Religious / Spiritual"
+        },
+        "_row_num": 8
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section2_names",
+        "value": "Ethiopia_Section91",
         "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20131210,
+        "_row_num": 3
       },
       {
         "setting_name": "table_id",
         "value": "Ethiopia_members",
-        "_row_num": 3
+        "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 9.1"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 5
+        "_row_num": 6
       }
     ],
     "model": [
@@ -402,29 +464,34 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section2_names",
+        "value": "Ethiopia_Section91",
         "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20131210,
+        "_row_num": 3
       },
       "table_id": {
         "setting_name": "table_id",
         "value": "Ethiopia_members",
-        "_row_num": 3
+        "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 9.1"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       "instance_name": {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 5
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": [
           {
             "display": {
@@ -436,18 +503,77 @@
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": "default"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 9.1"
         },
-        "_row_num": 4
+        "_row_num": 5
       }
     },
-    "choices": {},
+    "choices": {
+      "med_location": [
+        {
+          "choice_list_name": "med_location",
+          "data_value": "hospital",
+          "display": {
+            "text": "Hospital"
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "med_location",
+          "data_value": "health_center",
+          "display": {
+            "text": "Health Center"
+          },
+          "_row_num": 3
+        },
+        {
+          "choice_list_name": "med_location",
+          "data_value": "health_post",
+          "display": {
+            "text": "Health Post"
+          },
+          "_row_num": 4
+        },
+        {
+          "choice_list_name": "med_location",
+          "data_value": "clinics",
+          "display": {
+            "text": "Clinics"
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "med_location",
+          "data_value": "pharmacy",
+          "display": {
+            "text": "Pharmacy"
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "med_location",
+          "data_value": "tradition",
+          "display": {
+            "text": "Traditional Healer"
+          },
+          "_row_num": 7
+        },
+        {
+          "choice_list_name": "med_location",
+          "data_value": "religious",
+          "display": {
+            "text": "Religious / Spiritual"
+          },
+          "_row_num": 8
+        }
+      ]
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -465,10 +591,6 @@
       "name": {
         "type": "string",
         "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          },
           {
             "_row_num": 3,
             "section_name": "model"
@@ -769,6 +891,10 @@
           "elementKey": "where_medical_attention_items"
         },
         "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
           {
             "_row_num": 31,
             "section_name": "model"
@@ -1136,7 +1262,7 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Roster"
+              "title": "Section 9.1"
             },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
@@ -1163,7 +1289,6 @@
           },
           {
             "clause": "goto _finalize",
-            "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "goto_label",
@@ -1221,16 +1346,16 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "text",
-            "name": "name",
+            "type": "select_multiple",
+            "values_list": "med_location",
+            "name": "where_medical_attention",
             "display": {
-              "text": "What is the household member's name?"
+              "text": "Where did {{name}} receive or consult medical assistance primarily?"
             },
-            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_multiple",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -1244,9 +1369,7 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": [
-            0
-          ]
+          "finalize": []
         },
         "operations": [
           {

@@ -10,441 +10,190 @@
         "display": {
           "text": "Save Form"
         },
-        "comment": "goes to the finalize screen instead of just automatically finalizing",
         "_row_num": 3
       }
     ],
     "survey": [
       {
-        "comments": "the required column accepts a javascript expression that evaluates to true or false. A blank cell defaults to false. If true, the form cannot be submitted unless it is answered and the user cannot progress to the next question",
-        "type": "select_one",
-        "values_list": "relation_to_house_head",
-        "name": "relation",
+        "type": "select_one_with_other",
+        "values_list": "self",
+        "name": "answering_self_95",
         "display": {
-          "text": "What is {{name}}'s relationship to the household head?"
+          "text": "Who is answering for  {{name}}?"
         },
-        "required": true,
         "_row_num": 2
       },
       {
         "type": "select_one",
-        "values_list": "gender",
-        "name": "gender",
+        "values_list": "no_yes",
+        "name": "stuffy_nose",
         "display": {
-          "text": "What is {{name}}'s sex?"
+          "text": "In the past seven days have you experienced stuffy or runny nose?"
         },
-        "required": true,
         "_row_num": 3
       },
       {
-        "comments": "constraint is used to make sure legal values are entered. In this case, the answer to age cannot be negative. If it is, when the user tries to move on the constraint message will be displayed",
-        "type": "integer",
-        "name": "age",
-        "display": {
-          "text": "What is {{name}}'s age?",
-          "hint": "in years"
-        },
-        "required": true,
-        "constraint": "data('age') >= 0",
-        "constraint_message": "Age cannot be negative",
+        "clause": "if",
+        "condition": "selected(data('stuffy_nose'), 'yes')",
         "_row_num": 4
       },
       {
-        "clause": "if",
-        "condition": "data('age') >= 15",
+        "type": "integer",
+        "name": "days_stuffy_nose",
+        "display": {
+          "text": "How many days of the past 7 days have you experienced stuffy or runny nose?"
+        },
         "_row_num": 5
       },
       {
-        "comments": "When using required with prompts nested in if statements, instead of simply writing true, copy the condition for the if statement",
-        "type": "select_one",
-        "values_list": "marital_options",
-        "name": "marital_status",
-        "display": {
-          "text": "Marital status of {{name}}."
-        },
-        "required": "data('age') >= 15",
+        "clause": "else",
         "_row_num": 6
       },
       {
-        "clause": "end if",
+        "type": "select_one",
+        "values_list": "no_yes",
+        "name": "month_stuffy_nose",
+        "display": {
+          "text": "Have you ever experienced stuffy or runny nose in the past 2 months?"
+        },
         "_row_num": 7
       },
       {
-        "clause": "if",
-        "condition": "data('age') >= 10",
+        "clause": "end if",
         "_row_num": 8
       },
       {
-        "type": "integer",
-        "name": "months_away",
+        "type": "select_one",
+        "values_list": "no_yes",
+        "name": "fever",
         "display": {
-          "text": "For how many months during the last 12 months was {{name}} away from the household?",
-          "hint": "0 if never away, or less than two weeks."
+          "text": "In the past seven days have you experienced fever?"
         },
-        "constraint": "data('months_away') >= 0 && data('months_away') <= 12",
-        "constraint_message": "Answer must be between 0 and 12",
         "_row_num": 9
       },
       {
-        "clause": "end if",
+        "clause": "if",
+        "condition": "selected(data('fever'), 'yes')",
         "_row_num": 10
       },
       {
-        "type": "select_one_with_other",
-        "values_list": "regions",
-        "name": "region_born",
+        "type": "integer",
+        "name": "days_fever",
         "display": {
-          "text": "In what region was {{name}} born?"
+          "text": "How many days of the past 7 days have you experienced fever?"
         },
         "_row_num": 11
       },
       {
-        "clause": "if",
-        "condition": "data('age') >= 10",
+        "clause": "else",
         "_row_num": 12
       },
       {
-        "type": "select_one_with_other",
-        "values_list": "religions",
-        "name": "religion",
+        "type": "select_one",
+        "values_list": "no_yes",
+        "name": "month_fever",
         "display": {
-          "text": "What is {{name}}'s main religion?"
+          "text": "Have you experienced fever in the past 2 months"
         },
         "_row_num": 13
       },
       {
         "clause": "end if",
         "_row_num": 14
-      }
-    ],
-    "choices": [
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "head",
-        "display": {
-          "text": "1. Head"
-        },
-        "_row_num": 2
       },
       {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "spouse",
+        "type": "select_one",
+        "values_list": "no_yes",
+        "name": "eye_problem",
         "display": {
-          "text": "2. Spouse"
-        },
-        "_row_num": 3
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "son_daughter",
-        "display": {
-          "text": "3. Son/Daughter"
-        },
-        "_row_num": 4
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "grandchild",
-        "display": {
-          "text": "4. Grandchild"
-        },
-        "_row_num": 5
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "father_mother",
-        "display": {
-          "text": "5. Father/Mother"
-        },
-        "_row_num": 6
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "sister_brother",
-        "display": {
-          "text": "6. Sister/Brother"
-        },
-        "_row_num": 7
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "niece_nephew",
-        "display": {
-          "text": "7. Niece/Nephew"
-        },
-        "_row_num": 8
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "uncle_aunt",
-        "display": {
-          "text": "8. Uncle/Aunt"
-        },
-        "_row_num": 9
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "in_law_son_daughter",
-        "display": {
-          "text": "9. Son/Daughter in-law"
-        },
-        "_row_num": 10
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "in_law_father_mother",
-        "display": {
-          "text": "10. Father/Mother in-law"
-        },
-        "_row_num": 11
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "in_law_brother_sister",
-        "display": {
-          "text": "11. Brother/Sister in-law"
-        },
-        "_row_num": 12
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "grandparent",
-        "display": {
-          "text": "12. Grandparent"
-        },
-        "_row_num": 13
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "other_relative",
-        "display": {
-          "text": "13. Other relative"
-        },
-        "_row_num": 14
-      },
-      {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "servant",
-        "display": {
-          "text": "14. Servant"
+          "text": "In the past seven days have you experienced burning irritated or watery eyes?"
         },
         "_row_num": 15
       },
       {
-        "choice_list_name": "relation_to_house_head",
-        "data_value": "non_relative",
-        "display": {
-          "text": "15. Non-relative"
-        },
+        "clause": "if",
+        "condition": "selected(data('eye_problem'), 'yes')",
         "_row_num": 16
       },
       {
-        "choice_list_name": "gender",
-        "data_value": "male",
+        "type": "integer",
+        "name": "days_eye_problem",
         "display": {
-          "text": "1. Male"
+          "text": "How many days of the past 7 days have you experienced burning/irritated or watery eyes?"
         },
         "_row_num": 17
       },
       {
-        "choice_list_name": "gender",
-        "data_value": "female",
-        "display": {
-          "text": "2. Female"
-        },
+        "clause": "else",
         "_row_num": 18
       },
       {
-        "choice_list_name": "marital_options",
-        "data_value": "married",
+        "type": "select_one",
+        "values_list": "no_yes",
+        "name": "month_eye_problem",
         "display": {
-          "text": "1. Married"
+          "text": "Have you experienced burning or irritated eyes in the past 2 months?"
         },
         "_row_num": 19
       },
       {
-        "choice_list_name": "marital_options",
-        "data_value": "never_married",
-        "display": {
-          "text": "2. Never Married"
-        },
+        "clause": "end if",
         "_row_num": 20
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "self",
+        "data_value": "self",
+        "display": {
+          "text": "Self"
+        },
+        "_row_num": 2
       },
       {
-        "choice_list_name": "marital_options",
-        "data_value": "divorced",
+        "choice_list_name": "no_yes",
+        "data_value": "no",
         "display": {
-          "text": "3. Divorced"
+          "text": "No"
         },
-        "_row_num": 21
+        "_row_num": 3
       },
       {
-        "choice_list_name": "marital_options",
-        "data_value": "separated",
+        "choice_list_name": "no_yes",
+        "data_value": "yes",
         "display": {
-          "text": "4. Separated"
+          "text": "Yes"
         },
-        "_row_num": 22
-      },
-      {
-        "choice_list_name": "marital_options",
-        "data_value": "widowed",
-        "display": {
-          "text": "5. Widowed"
-        },
-        "_row_num": 23
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "tigray",
-        "display": {
-          "text": "1. Tigray"
-        },
-        "_row_num": 24
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "afar",
-        "display": {
-          "text": "2. Afar"
-        },
-        "_row_num": 25
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "amhara",
-        "display": {
-          "text": "3. Amhara"
-        },
-        "_row_num": 26
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "oromia",
-        "display": {
-          "text": "4. Oromia"
-        },
-        "_row_num": 27
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "benshangul_gumuz",
-        "display": {
-          "text": "5. Benshangul Gumuz"
-        },
-        "_row_num": 28
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "snnp",
-        "display": {
-          "text": "6. SNNP"
-        },
-        "_row_num": 29
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "gambella",
-        "display": {
-          "text": "7. Gambella"
-        },
-        "_row_num": 30
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "harari",
-        "display": {
-          "text": "8. Harari"
-        },
-        "_row_num": 31
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "addis_ababa",
-        "display": {
-          "text": "9. Addis Ababa"
-        },
-        "_row_num": 32
-      },
-      {
-        "choice_list_name": "regions",
-        "data_value": "diredawa",
-        "display": {
-          "text": "10. Diredawa"
-        },
-        "_row_num": 33
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "orthodox",
-        "display": {
-          "text": "1. Orthodox"
-        },
-        "_row_num": 34
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "catholic",
-        "display": {
-          "text": "2. Catholic"
-        },
-        "_row_num": 35
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "protestant",
-        "display": {
-          "text": "3. Protestant"
-        },
-        "_row_num": 36
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "muslim",
-        "display": {
-          "text": "4. Muslim"
-        },
-        "_row_num": 37
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "traditional",
-        "display": {
-          "text": "5. Traditional"
-        },
-        "_row_num": 38
-      },
-      {
-        "choice_list_name": "religions",
-        "data_value": "pagan",
-        "display": {
-          "text": "6. Pagan"
-        },
-        "_row_num": 39
+        "_row_num": 4
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section2_other_info",
+        "value": "Ethiopia_Section95",
         "_row_num": 2
+      },
+      {
+        "setting_name": "form version",
+        "value": 20131210,
+        "_row_num": 3
       },
       {
         "setting_name": "table_id",
         "value": "Ethiopia_members",
-        "_row_num": 3
+        "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": "Section 9.5"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 5
+        "_row_num": 6
       }
     ],
     "model": [
@@ -803,29 +552,34 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section2_other_info",
+        "value": "Ethiopia_Section95",
         "_row_num": 2
+      },
+      "form version": {
+        "setting_name": "form version",
+        "value": 20131210,
+        "_row_num": 3
       },
       "table_id": {
         "setting_name": "table_id",
         "value": "Ethiopia_members",
-        "_row_num": 3
+        "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": "Section 9.5"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       "instance_name": {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 5
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": [
           {
             "display": {
@@ -837,330 +591,44 @@
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": "default"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": "Section 9.5"
         },
-        "_row_num": 4
+        "_row_num": 5
       }
     },
     "choices": {
-      "relation_to_house_head": [
+      "self": [
         {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "head",
+          "choice_list_name": "self",
+          "data_value": "self",
           "display": {
-            "text": "1. Head"
+            "text": "Self"
           },
           "_row_num": 2
-        },
+        }
+      ],
+      "no_yes": [
         {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "spouse",
+          "choice_list_name": "no_yes",
+          "data_value": "no",
           "display": {
-            "text": "2. Spouse"
+            "text": "No"
           },
           "_row_num": 3
         },
         {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "son_daughter",
+          "choice_list_name": "no_yes",
+          "data_value": "yes",
           "display": {
-            "text": "3. Son/Daughter"
+            "text": "Yes"
           },
           "_row_num": 4
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "grandchild",
-          "display": {
-            "text": "4. Grandchild"
-          },
-          "_row_num": 5
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "father_mother",
-          "display": {
-            "text": "5. Father/Mother"
-          },
-          "_row_num": 6
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "sister_brother",
-          "display": {
-            "text": "6. Sister/Brother"
-          },
-          "_row_num": 7
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "niece_nephew",
-          "display": {
-            "text": "7. Niece/Nephew"
-          },
-          "_row_num": 8
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "uncle_aunt",
-          "display": {
-            "text": "8. Uncle/Aunt"
-          },
-          "_row_num": 9
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "in_law_son_daughter",
-          "display": {
-            "text": "9. Son/Daughter in-law"
-          },
-          "_row_num": 10
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "in_law_father_mother",
-          "display": {
-            "text": "10. Father/Mother in-law"
-          },
-          "_row_num": 11
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "in_law_brother_sister",
-          "display": {
-            "text": "11. Brother/Sister in-law"
-          },
-          "_row_num": 12
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "grandparent",
-          "display": {
-            "text": "12. Grandparent"
-          },
-          "_row_num": 13
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "other_relative",
-          "display": {
-            "text": "13. Other relative"
-          },
-          "_row_num": 14
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "servant",
-          "display": {
-            "text": "14. Servant"
-          },
-          "_row_num": 15
-        },
-        {
-          "choice_list_name": "relation_to_house_head",
-          "data_value": "non_relative",
-          "display": {
-            "text": "15. Non-relative"
-          },
-          "_row_num": 16
-        }
-      ],
-      "gender": [
-        {
-          "choice_list_name": "gender",
-          "data_value": "male",
-          "display": {
-            "text": "1. Male"
-          },
-          "_row_num": 17
-        },
-        {
-          "choice_list_name": "gender",
-          "data_value": "female",
-          "display": {
-            "text": "2. Female"
-          },
-          "_row_num": 18
-        }
-      ],
-      "marital_options": [
-        {
-          "choice_list_name": "marital_options",
-          "data_value": "married",
-          "display": {
-            "text": "1. Married"
-          },
-          "_row_num": 19
-        },
-        {
-          "choice_list_name": "marital_options",
-          "data_value": "never_married",
-          "display": {
-            "text": "2. Never Married"
-          },
-          "_row_num": 20
-        },
-        {
-          "choice_list_name": "marital_options",
-          "data_value": "divorced",
-          "display": {
-            "text": "3. Divorced"
-          },
-          "_row_num": 21
-        },
-        {
-          "choice_list_name": "marital_options",
-          "data_value": "separated",
-          "display": {
-            "text": "4. Separated"
-          },
-          "_row_num": 22
-        },
-        {
-          "choice_list_name": "marital_options",
-          "data_value": "widowed",
-          "display": {
-            "text": "5. Widowed"
-          },
-          "_row_num": 23
-        }
-      ],
-      "regions": [
-        {
-          "choice_list_name": "regions",
-          "data_value": "tigray",
-          "display": {
-            "text": "1. Tigray"
-          },
-          "_row_num": 24
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "afar",
-          "display": {
-            "text": "2. Afar"
-          },
-          "_row_num": 25
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "amhara",
-          "display": {
-            "text": "3. Amhara"
-          },
-          "_row_num": 26
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "oromia",
-          "display": {
-            "text": "4. Oromia"
-          },
-          "_row_num": 27
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "benshangul_gumuz",
-          "display": {
-            "text": "5. Benshangul Gumuz"
-          },
-          "_row_num": 28
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "snnp",
-          "display": {
-            "text": "6. SNNP"
-          },
-          "_row_num": 29
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "gambella",
-          "display": {
-            "text": "7. Gambella"
-          },
-          "_row_num": 30
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "harari",
-          "display": {
-            "text": "8. Harari"
-          },
-          "_row_num": 31
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "addis_ababa",
-          "display": {
-            "text": "9. Addis Ababa"
-          },
-          "_row_num": 32
-        },
-        {
-          "choice_list_name": "regions",
-          "data_value": "diredawa",
-          "display": {
-            "text": "10. Diredawa"
-          },
-          "_row_num": 33
-        }
-      ],
-      "religions": [
-        {
-          "choice_list_name": "religions",
-          "data_value": "orthodox",
-          "display": {
-            "text": "1. Orthodox"
-          },
-          "_row_num": 34
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "catholic",
-          "display": {
-            "text": "2. Catholic"
-          },
-          "_row_num": 35
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "protestant",
-          "display": {
-            "text": "3. Protestant"
-          },
-          "_row_num": 36
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "muslim",
-          "display": {
-            "text": "4. Muslim"
-          },
-          "_row_num": 37
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "traditional",
-          "display": {
-            "text": "5. Traditional"
-          },
-          "_row_num": 38
-        },
-        {
-          "choice_list_name": "religions",
-          "data_value": "pagan",
-          "display": {
-            "text": "6. Pagan"
-          },
-          "_row_num": 39
         }
       ]
     },
@@ -1193,10 +661,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 2,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 4,
             "section_name": "model"
           }
@@ -1208,10 +672,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 5,
             "section_name": "model"
           }
@@ -1221,10 +681,6 @@
       "age": {
         "type": "integer",
         "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "survey"
-          },
           {
             "_row_num": 6,
             "section_name": "model"
@@ -1236,10 +692,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 7,
             "section_name": "model"
           }
@@ -1249,10 +701,6 @@
       "months_away": {
         "type": "integer",
         "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
-          },
           {
             "_row_num": 8,
             "section_name": "model"
@@ -1264,10 +712,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 9,
             "section_name": "model"
           }
@@ -1277,10 +721,6 @@
       "religion": {
         "type": "string",
         "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "survey"
-          },
           {
             "_row_num": 10,
             "section_name": "model"
@@ -1755,6 +1195,10 @@
         "type": "string",
         "_defn": [
           {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 55,
             "section_name": "model"
           }
@@ -1766,6 +1210,10 @@
         "type": "string",
         "_defn": [
           {
+            "_row_num": 3,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 56,
             "section_name": "model"
           }
@@ -1775,6 +1223,10 @@
       "days_stuffy_nose": {
         "type": "integer",
         "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          },
           {
             "_row_num": 57,
             "section_name": "model"
@@ -1786,6 +1238,10 @@
         "type": "string",
         "_defn": [
           {
+            "_row_num": 7,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 58,
             "section_name": "model"
           }
@@ -1795,6 +1251,10 @@
       "fever": {
         "type": "string",
         "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          },
           {
             "_row_num": 59,
             "section_name": "model"
@@ -1806,6 +1266,10 @@
         "type": "integer",
         "_defn": [
           {
+            "_row_num": 11,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 60,
             "section_name": "model"
           }
@@ -1815,6 +1279,10 @@
       "month_fever": {
         "type": "string",
         "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
           {
             "_row_num": 61,
             "section_name": "model"
@@ -1826,6 +1294,10 @@
         "type": "string",
         "_defn": [
           {
+            "_row_num": 15,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 62,
             "section_name": "model"
           }
@@ -1836,6 +1308,10 @@
         "type": "integer",
         "_defn": [
           {
+            "_row_num": 17,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 63,
             "section_name": "model"
           }
@@ -1845,6 +1321,10 @@
       "month_eye_problem": {
         "type": "string",
         "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          },
           {
             "_row_num": 64,
             "section_name": "model"
@@ -1876,7 +1356,7 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 2"
+              "title": "Section 9.5"
             },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
@@ -1885,7 +1365,6 @@
             "display": {
               "text": "Save Form"
             },
-            "comment": "goes to the finalize screen instead of just automatically finalizing",
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -1972,29 +1451,26 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "comments": "the required column accepts a javascript expression that evaluates to true or false. A blank cell defaults to false. If true, the form cannot be submitted unless it is answered and the user cannot progress to the next question",
-            "type": "select_one",
-            "values_list": "relation_to_house_head",
-            "name": "relation",
+            "type": "select_one_with_other",
+            "values_list": "self",
+            "name": "answering_self_95",
             "display": {
-              "text": "What is {{name}}'s relationship to the household head?"
+              "text": "Who is answering for  {{name}}?"
             },
-            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_one_with_other",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
             "type": "select_one",
-            "values_list": "gender",
-            "name": "gender",
+            "values_list": "no_yes",
+            "name": "stuffy_nose",
             "display": {
-              "text": "What is {{name}}'s sex?"
+              "text": "In the past seven days have you experienced stuffy or runny nose?"
             },
-            "required": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -2003,100 +1479,125 @@
             "promptIdx": 1
           },
           {
-            "comments": "constraint is used to make sure legal values are entered. In this case, the answer to age cannot be negative. If it is, when the user tries to move on the constraint message will be displayed",
             "type": "integer",
-            "name": "age",
+            "name": "days_stuffy_nose",
             "display": {
-              "text": "What is {{name}}'s age?",
-              "hint": "in years"
+              "text": "How many days of the past 7 days have you experienced stuffy or runny nose?"
             },
-            "required": true,
-            "constraint": "data('age') >= 0",
-            "constraint_message": "Age cannot be negative",
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen4",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 2
           },
           {
-            "comments": "When using required with prompts nested in if statements, instead of simply writing true, copy the condition for the if statement",
             "type": "select_one",
-            "values_list": "marital_options",
-            "name": "marital_status",
+            "values_list": "no_yes",
+            "name": "month_stuffy_nose",
             "display": {
-              "text": "Marital status of {{name}}."
+              "text": "Have you ever experienced stuffy or runny nose in the past 2 months?"
             },
-            "required": "data('age') >= 15",
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 3
           },
           {
-            "type": "integer",
-            "name": "months_away",
+            "type": "select_one",
+            "values_list": "no_yes",
+            "name": "fever",
             "display": {
-              "text": "For how many months during the last 12 months was {{name}} away from the household?",
-              "hint": "0 if never away, or less than two weeks."
+              "text": "In the past seven days have you experienced fever?"
             },
-            "constraint": "data('months_away') >= 0 && data('months_away') <= 12",
-            "constraint_message": "Answer must be between 0 and 12",
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
-            "_type": "integer",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 4
           },
           {
-            "type": "select_one_with_other",
-            "values_list": "regions",
-            "name": "region_born",
+            "type": "integer",
+            "name": "days_fever",
             "display": {
-              "text": "In what region was {{name}} born?"
+              "text": "How many days of the past 7 days have you experienced fever?"
             },
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
-            "_type": "select_one_with_other",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 5
           },
           {
-            "type": "select_one_with_other",
-            "values_list": "religions",
-            "name": "religion",
+            "type": "select_one",
+            "values_list": "no_yes",
+            "name": "month_fever",
             "display": {
-              "text": "What is {{name}}'s main religion?"
+              "text": "Have you experienced fever in the past 2 months"
             },
             "_row_num": 13,
             "__rowNum__": 12,
             "_token_type": "prompt",
-            "_type": "select_one_with_other",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 6
+          },
+          {
+            "type": "select_one",
+            "values_list": "no_yes",
+            "name": "eye_problem",
+            "display": {
+              "text": "In the past seven days have you experienced burning irritated or watery eyes?"
+            },
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 7
+          },
+          {
+            "type": "integer",
+            "name": "days_eye_problem",
+            "display": {
+              "text": "How many days of the past 7 days have you experienced burning/irritated or watery eyes?"
+            },
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 8
+          },
+          {
+            "type": "select_one",
+            "values_list": "no_yes",
+            "name": "month_eye_problem",
+            "display": {
+              "text": "Have you experienced burning or irritated eyes in the past 2 months?"
+            },
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 9
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 15,
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 7
+            "_row_num": 21,
+            "_branch_label_enclosing_screen": "survey/_screen21",
+            "promptIdx": 10
           }
         ],
         "validation_tag_map": {
-          "finalize": [
-            0,
-            1,
-            2,
-            3,
-            4
-          ]
+          "finalize": []
         },
         "operations": [
           {
@@ -2112,142 +1613,163 @@
             "operationIdx": 1
           },
           {
+            "clause": "if",
+            "condition": "selected(data('stuffy_nose'), 'yes')",
             "_row_num": 4,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 3,
+            "_token_type": "goto_label",
+            "_branch_label": "_then4",
             "operationIdx": 2
           },
           {
-            "clause": "if",
-            "condition": "data('age') >= 15",
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_then5",
+            "_branch_label": "_else6",
+            "_row_num": 6,
             "operationIdx": 3
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else7",
-            "_row_num": 7,
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
-            "_row_num": 6,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
             "operationIdx": 5
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif7",
             "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
-          },
-          {
-            "clause": "if",
-            "condition": "data('age') >= 10",
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "goto_label",
-            "_branch_label": "_then8",
-            "operationIdx": 7
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else10",
-            "_row_num": 10,
-            "operationIdx": 8
           },
           {
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
+            "operationIdx": 7
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif10",
+            "clause": "if",
+            "condition": "selected(data('fever'), 'yes')",
             "_row_num": 10,
-            "operationIdx": 10
+            "__rowNum__": 9,
+            "_token_type": "goto_label",
+            "_branch_label": "_then10",
+            "operationIdx": 8
+          },
+          {
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else12",
+            "_row_num": 12,
+            "operationIdx": 9
           },
           {
             "_row_num": 11,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 11
-          },
-          {
-            "clause": "if",
-            "condition": "data('age') >= 10",
-            "_row_num": 12,
-            "__rowNum__": 11,
-            "_token_type": "goto_label",
-            "_branch_label": "_then12",
-            "operationIdx": 12
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else14",
-            "_row_num": 14,
-            "operationIdx": 13
-          },
-          {
-            "_row_num": 13,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 14
+            "operationIdx": 10
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
             "_branch_label": "_endif14",
             "_row_num": 14,
-            "operationIdx": 15
+            "operationIdx": 11
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 15,
-            "operationIdx": 16
+            "_row_num": 13,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 12
           },
           {
             "_row_num": 15,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 13
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('eye_problem'), 'yes')",
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "goto_label",
+            "_branch_label": "_then16",
+            "operationIdx": 14
+          },
+          {
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else18",
+            "_row_num": 18,
+            "operationIdx": 15
+          },
+          {
+            "_row_num": 17,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 16
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif20",
+            "_row_num": 20,
             "operationIdx": 17
+          },
+          {
+            "_row_num": 19,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 21,
+            "operationIdx": 19
+          },
+          {
+            "_row_num": 21,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 20
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
-            "_row_num": 15,
-            "operationIdx": 18
+            "_row_num": 21,
+            "operationIdx": 21
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen3": 1,
-          "_screen4": 2,
-          "_then5": 5,
-          "_screen6": 5,
-          "_else7": 7,
-          "_endif7": 7,
-          "_then8": 9,
-          "_screen9": 9,
-          "_else10": 11,
-          "_endif10": 11,
-          "_screen11": 11,
-          "_then12": 14,
-          "_screen13": 14,
-          "_else14": 16,
-          "_endif14": 16,
-          "_contents": 17,
-          "_screen15": 17
+          "_then4": 4,
+          "_screen5": 4,
+          "_else6": 6,
+          "_screen7": 6,
+          "_endif8": 7,
+          "_screen9": 7,
+          "_then10": 10,
+          "_screen11": 10,
+          "_else12": 12,
+          "_screen13": 12,
+          "_endif14": 13,
+          "_screen15": 13,
+          "_then16": 16,
+          "_screen17": 16,
+          "_else18": 18,
+          "_screen19": 18,
+          "_endif20": 19,
+          "_contents": 20,
+          "_screen21": 20
         }
       }
     }

@@ -297,11 +297,11 @@
         "_row_num": 55
       },
       {
-        "branch_label": "Ethiopia_Section9_3_general",
+        "branch_label": "Ethiopia_Section4",
         "_row_num": 56
       },
       {
-        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section9_3_general/',null)",
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section4/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -313,11 +313,11 @@
         "_row_num": 58
       },
       {
-        "branch_label": "Ethiopia_Section9_3_injuries",
+        "branch_label": "Ethiopia_Section5",
         "_row_num": 59
       },
       {
-        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section9_3_injuries/',null)",
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section5/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -327,6 +327,150 @@
       {
         "clause": "exit section",
         "_row_num": 61
+      },
+      {
+        "branch_label": "Ethiopia_Section82",
+        "_row_num": 62
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 63
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 64
+      },
+      {
+        "branch_label": "Ethiopia_Section82_p2",
+        "_row_num": 65
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82_p2/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 66
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 67
+      },
+      {
+        "branch_label": "Ethiopia_Section82_p3",
+        "_row_num": 68
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82_p3/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 69
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 70
+      },
+      {
+        "branch_label": "Ethiopia_Section82_p4",
+        "_row_num": 71
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82_p4/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 72
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 73
+      },
+      {
+        "branch_label": "Ethiopia_Section82_p5",
+        "_row_num": 74
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82_p5/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 75
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 76
+      },
+      {
+        "branch_label": "Ethiopia_Section93",
+        "_row_num": 77
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section93/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 78
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 79
+      },
+      {
+        "branch_label": "Ethiopia_Section93_p2",
+        "_row_num": 80
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section93_p2/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 81
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 82
+      },
+      {
+        "branch_label": "Ethiopia_Section94",
+        "_row_num": 83
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section94/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 84
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 85
+      },
+      {
+        "branch_label": "Ethiopia_Section95",
+        "_row_num": 86
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section95/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 87
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 88
       }
     ],
     "settings": [
@@ -475,27 +619,107 @@
       },
       {
         "choice_list_name": "test_forms",
-        "data_value": "Ethiopia_Section3",
+        "data_value": "Ethiopia_Section4",
         "display": {
-          "text": "Ethiopia Section 3"
+          "text": "Ethiopia Section 4"
         },
         "_row_num": 17
       },
       {
         "choice_list_name": "test_forms",
-        "data_value": "Ethiopia_Section9_3_general",
+        "data_value": "Ethiopia_Section5",
         "display": {
-          "text": "Ethiopia Section 9.3 general"
+          "text": "Ethiopia Section 5"
         },
         "_row_num": 18
       },
       {
         "choice_list_name": "test_forms",
-        "data_value": "Ethiopia_Section9_3_injuries",
+        "data_value": "Ethiopia_Section82",
         "display": {
-          "text": "Ethiopia Section 9.3 Injuries"
+          "text": "Ethiopia Section 8.2"
         },
         "_row_num": 19
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section82_p2",
+        "display": {
+          "text": "Ethiopia Section 8.2 p2"
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section82_p3",
+        "display": {
+          "text": "Ethiopia Section 8.2 p3"
+        },
+        "_row_num": 21
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section82_p4",
+        "display": {
+          "text": "Ethiopia Section 8.2 p4"
+        },
+        "_row_num": 22
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section82_p5",
+        "display": {
+          "text": "Ethiopia Section 8.2 p5"
+        },
+        "_row_num": 23
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section91",
+        "display": {
+          "text": "Ethiopia Section 9.1"
+        },
+        "_row_num": 24
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section91_p2",
+        "display": {
+          "text": "Ethiopia Section 9.1 p2"
+        },
+        "_row_num": 25
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section93",
+        "display": {
+          "text": "Ethiopia Section 9.3"
+        },
+        "_row_num": 26
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section93_p2",
+        "display": {
+          "text": "Ethiopia Section 9.3 p2"
+        },
+        "_row_num": 27
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section94",
+        "display": {
+          "text": "Ethiopia Section 9.4"
+        },
+        "_row_num": 28
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "Ethiopia_Section95",
+        "display": {
+          "text": "Ethiopia Section 9.5"
+        },
+        "_row_num": 29
       }
     ]
   },
@@ -697,27 +921,107 @@
         },
         {
           "choice_list_name": "test_forms",
-          "data_value": "Ethiopia_Section3",
+          "data_value": "Ethiopia_Section4",
           "display": {
-            "text": "Ethiopia Section 3"
+            "text": "Ethiopia Section 4"
           },
           "_row_num": 17
         },
         {
           "choice_list_name": "test_forms",
-          "data_value": "Ethiopia_Section9_3_general",
+          "data_value": "Ethiopia_Section5",
           "display": {
-            "text": "Ethiopia Section 9.3 general"
+            "text": "Ethiopia Section 5"
           },
           "_row_num": 18
         },
         {
           "choice_list_name": "test_forms",
-          "data_value": "Ethiopia_Section9_3_injuries",
+          "data_value": "Ethiopia_Section82",
           "display": {
-            "text": "Ethiopia Section 9.3 Injuries"
+            "text": "Ethiopia Section 8.2"
           },
           "_row_num": 19
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section82_p2",
+          "display": {
+            "text": "Ethiopia Section 8.2 p2"
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section82_p3",
+          "display": {
+            "text": "Ethiopia Section 8.2 p3"
+          },
+          "_row_num": 21
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section82_p4",
+          "display": {
+            "text": "Ethiopia Section 8.2 p4"
+          },
+          "_row_num": 22
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section82_p5",
+          "display": {
+            "text": "Ethiopia Section 8.2 p5"
+          },
+          "_row_num": 23
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section91",
+          "display": {
+            "text": "Ethiopia Section 9.1"
+          },
+          "_row_num": 24
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section91_p2",
+          "display": {
+            "text": "Ethiopia Section 9.1 p2"
+          },
+          "_row_num": 25
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section93",
+          "display": {
+            "text": "Ethiopia Section 9.3"
+          },
+          "_row_num": 26
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section93_p2",
+          "display": {
+            "text": "Ethiopia Section 9.3 p2"
+          },
+          "_row_num": 27
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section94",
+          "display": {
+            "text": "Ethiopia Section 9.4"
+          },
+          "_row_num": 28
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "Ethiopia_Section95",
+          "display": {
+            "text": "Ethiopia Section 9.5"
+          },
+          "_row_num": 29
         }
       ]
     },
@@ -1057,7 +1361,7 @@
             "promptIdx": 17
           },
           {
-            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section9_3_general/',null)",
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section4/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -1070,7 +1374,7 @@
             "promptIdx": 18
           },
           {
-            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section9_3_injuries/',null)",
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section5/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -1083,12 +1387,129 @@
             "promptIdx": 19
           },
           {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 63,
+            "__rowNum__": 62,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen63",
+            "promptIdx": 20
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82_p2/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 66,
+            "__rowNum__": 65,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 21
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82_p3/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 69,
+            "__rowNum__": 68,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen69",
+            "promptIdx": 22
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82_p4/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 72,
+            "__rowNum__": 71,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen72",
+            "promptIdx": 23
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section82_p5/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 75,
+            "__rowNum__": 74,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen75",
+            "promptIdx": 24
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section93/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 78,
+            "__rowNum__": 77,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen78",
+            "promptIdx": 25
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section93_p2/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 81,
+            "__rowNum__": 80,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen81",
+            "promptIdx": 26
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section94/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 84,
+            "__rowNum__": 83,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen84",
+            "promptIdx": 27
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/Ethiopia_members/forms/Ethiopia_Section95/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 87,
+            "__rowNum__": 86,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen87",
+            "promptIdx": 28
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 62,
-            "_branch_label_enclosing_screen": "survey/_screen62",
-            "promptIdx": 20
+            "_row_num": 89,
+            "_branch_label_enclosing_screen": "survey/_screen89",
+            "promptIdx": 29
           }
         ],
         "validation_tag_map": {
@@ -1372,22 +1793,139 @@
             "operationIdx": 41
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 62,
+            "_row_num": 63,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 42
           },
           {
-            "_row_num": 62,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "exit section",
+            "_row_num": 64,
+            "__rowNum__": 63,
+            "_token_type": "exit_section",
             "operationIdx": 43
+          },
+          {
+            "_row_num": 66,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 44
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 67,
+            "__rowNum__": 66,
+            "_token_type": "exit_section",
+            "operationIdx": 45
+          },
+          {
+            "_row_num": 69,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 46
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 70,
+            "__rowNum__": 69,
+            "_token_type": "exit_section",
+            "operationIdx": 47
+          },
+          {
+            "_row_num": 72,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 48
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 73,
+            "__rowNum__": 72,
+            "_token_type": "exit_section",
+            "operationIdx": 49
+          },
+          {
+            "_row_num": 75,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 50
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 76,
+            "__rowNum__": 75,
+            "_token_type": "exit_section",
+            "operationIdx": 51
+          },
+          {
+            "_row_num": 78,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 52
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 79,
+            "__rowNum__": 78,
+            "_token_type": "exit_section",
+            "operationIdx": 53
+          },
+          {
+            "_row_num": 81,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 54
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 82,
+            "__rowNum__": 81,
+            "_token_type": "exit_section",
+            "operationIdx": 55
+          },
+          {
+            "_row_num": 84,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 56
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 85,
+            "__rowNum__": 84,
+            "_token_type": "exit_section",
+            "operationIdx": 57
+          },
+          {
+            "_row_num": 87,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 58
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 88,
+            "__rowNum__": 87,
+            "_token_type": "exit_section",
+            "operationIdx": 59
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 89,
+            "operationIdx": 60
+          },
+          {
+            "_row_num": 89,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 61
           },
           {
             "_token_type": "back_in_history",
             "clause": "back",
-            "_row_num": 62,
-            "operationIdx": 44
+            "_row_num": 89,
+            "operationIdx": 62
           }
         ],
         "branch_label_map": {
@@ -1428,12 +1966,30 @@
           "_screen51": 34,
           "Ethiopia_Section3": 36,
           "_screen54": 36,
-          "Ethiopia_Section9_3_general": 38,
+          "Ethiopia_Section4": 38,
           "_screen57": 38,
-          "Ethiopia_Section9_3_injuries": 40,
+          "Ethiopia_Section5": 40,
           "_screen60": 40,
-          "_contents": 43,
-          "_screen62": 43
+          "Ethiopia_Section82": 42,
+          "_screen63": 42,
+          "Ethiopia_Section82_p2": 44,
+          "_screen66": 44,
+          "Ethiopia_Section82_p3": 46,
+          "_screen69": 46,
+          "Ethiopia_Section82_p4": 48,
+          "_screen72": 48,
+          "Ethiopia_Section82_p5": 50,
+          "_screen75": 50,
+          "Ethiopia_Section93": 52,
+          "_screen78": 52,
+          "Ethiopia_Section93_p2": 54,
+          "_screen81": 54,
+          "Ethiopia_Section94": 56,
+          "_screen84": 56,
+          "Ethiopia_Section95": 58,
+          "_screen87": 58,
+          "_contents": 61,
+          "_screen89": 61
         }
       }
     }

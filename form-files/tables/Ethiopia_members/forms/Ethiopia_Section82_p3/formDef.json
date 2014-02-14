@@ -7,43 +7,46 @@
       },
       {
         "clause": "goto _finalize",
-        "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
         "_row_num": 3
       }
     ],
     "survey": [
       {
-        "type": "text",
-        "name": "name",
+        "type": "integer",
+        "name": "hours_spent_wood",
         "display": {
-          "text": "What is the household member's name?"
+          "text": "How many hours did {{name}} spend transporting purchased wood?"
         },
-        "required": true,
         "_row_num": 2
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section2_names",
+        "value": "Ethiopia_Section82_p3",
         "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20131203,
+        "_row_num": 3
       },
       {
         "setting_name": "table_id",
         "value": "Ethiopia_members",
-        "_row_num": 3
+        "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 8.2"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 5
+        "_row_num": 6
       }
     ],
     "model": [
@@ -402,29 +405,34 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section2_names",
+        "value": "Ethiopia_Section82_p3",
         "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20131203,
+        "_row_num": 3
       },
       "table_id": {
         "setting_name": "table_id",
         "value": "Ethiopia_members",
-        "_row_num": 3
+        "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 8.2"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       "instance_name": {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 5
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": [
           {
             "display": {
@@ -436,15 +444,15 @@
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": "default"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 8.2"
         },
-        "_row_num": 4
+        "_row_num": 5
       }
     },
     "choices": {},
@@ -465,10 +473,6 @@
       "name": {
         "type": "string",
         "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          },
           {
             "_row_num": 3,
             "section_name": "model"
@@ -731,6 +735,10 @@
       "hours_spent_wood": {
         "type": "integer",
         "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
           {
             "_row_num": 28,
             "section_name": "model"
@@ -1136,7 +1144,7 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Roster"
+              "title": "Section 8.2"
             },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
@@ -1163,7 +1171,6 @@
           },
           {
             "clause": "goto _finalize",
-            "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "goto_label",
@@ -1221,16 +1228,15 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "text",
-            "name": "name",
+            "type": "integer",
+            "name": "hours_spent_wood",
             "display": {
-              "text": "What is the household member's name?"
+              "text": "How many hours did {{name}} spend transporting purchased wood?"
             },
-            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -1244,9 +1250,7 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": [
-            0
-          ]
+          "finalize": []
         },
         "operations": [
           {

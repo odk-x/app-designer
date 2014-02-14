@@ -47,6 +47,7 @@
         "_row_num": 5
       },
       {
+        "comments": "begin screen displays the following questions all on the same screen until it reaches the end screen tag",
         "clause": "begin screen",
         "_row_num": 6
       },
@@ -81,6 +82,7 @@
         "_row_num": 10
       },
       {
+        "comments": "putting two slashes in the beginning of the clause column causes that row to be ignored by the XLSX converter",
         "clause": "//",
         "type": "text",
         "name": "grade_within_level",
@@ -235,16 +237,19 @@
     ],
     "model": [
       {
+        "comment": "auxillaryHash",
         "name": "household_id",
         "type": "string",
         "_row_num": 2
       },
       {
+        "comment": "Section2_names",
         "name": "name",
         "type": "string",
         "_row_num": 3
       },
       {
+        "comment": "Section2_other_info",
         "name": "relation",
         "type": "select_one",
         "_row_num": 4
@@ -280,44 +285,288 @@
         "_row_num": 10
       },
       {
-        "name": "fuel_injury",
-        "type": "string",
+        "comment": "Section3",
+        "name": "write_language",
+        "type": "select_one",
         "_row_num": 11
       },
       {
-        "name": "answering",
-        "type": "select_one_with_other",
+        "name": "attend_school",
+        "type": "select_one",
         "_row_num": 12
       },
       {
-        "name": "headache_7days",
-        "type": "select_one",
+        "name": "school_type",
+        "type": "select_multiple",
         "_row_num": 13
       },
       {
-        "name": "headache_number_days",
-        "type": "integer",
+        "name": "grade_level",
+        "type": "select_one",
         "_row_num": 14
       },
       {
-        "name": "headache_2months",
+        "name": "post_secondary",
         "type": "select_one",
         "_row_num": 15
       },
       {
+        "name": "grade_within_level",
+        "type": "string",
+        "_row_num": 16
+      },
+      {
+        "name": "currently_school",
+        "type": "select_one",
+        "_row_num": 17
+      },
+      {
+        "comment": "Section4",
+        "name": "primary_occupation",
+        "type": "select_one",
+        "_row_num": 18
+      },
+      {
+        "comment": "Section5",
+        "name": "is_smoker",
+        "type": "select_one",
+        "_row_num": 19
+      },
+      {
+        "name": "smoked_years_ago",
+        "type": "integer",
+        "_row_num": 20
+      },
+      {
+        "name": "began_smoke_age",
+        "type": "integer",
+        "_row_num": 21
+      },
+      {
+        "name": "number_cigarettes",
+        "type": "integer",
+        "_row_num": 22
+      },
+      {
+        "name": "smokes_in_house",
+        "type": "select_one",
+        "_row_num": 23
+      },
+      {
+        "comment": "Section82",
+        "name": "hours_collecting",
+        "type": "integer",
+        "_row_num": 24
+      },
+      {
+        "name": "hours_fuel_materials",
+        "type": "integer",
+        "_row_num": 25
+      },
+      {
+        "name": "hours_fuel_sale",
+        "type": "integer",
+        "_row_num": 26
+      },
+      {
+        "comment": "Section82 p2",
+        "name": "hours_fuel_purchase",
+        "type": "integer",
+        "_row_num": 27
+      },
+      {
+        "comment": "Section82 p3",
+        "name": "hours_spent_wood",
+        "type": "integer",
+        "_row_num": 28
+      },
+      {
+        "comment": "Section82 p4",
+        "name": "hours_spent_cooking",
+        "type": "integer",
+        "_row_num": 29
+      },
+      {
+        "comment": "Section82 p5",
+        "name": "hours_spent_collecting_water",
+        "type": "integer",
+        "_row_num": 30
+      },
+      {
+        "comment": "Section91",
+        "name": "where_medical_attention",
+        "type": "select_multiple",
+        "_row_num": 31
+      },
+      {
+        "comment": "Section91 p2",
+        "name": "injury_faced",
+        "type": "select_one_with_other",
+        "_row_num": 32
+      },
+      {
+        "name": "days_absent",
+        "type": "integer",
+        "_row_num": 33
+      },
+      {
+        "name": "diagnosis",
+        "type": "select_one",
+        "_row_num": 34
+      },
+      {
+        "name": "diagnosis_by_whom",
+        "type": "select_one_with_other",
+        "_row_num": 35
+      },
+      {
+        "comment": "Section93",
+        "name": "fuel_injury",
+        "type": "string",
+        "_row_num": 36
+      },
+      {
+        "comment": "Section93 p2",
+        "name": "answering",
+        "type": "select_one_with_other",
+        "_row_num": 37
+      },
+      {
+        "name": "headache_7days",
+        "type": "select_one",
+        "_row_num": 38
+      },
+      {
+        "name": "headache_number_days",
+        "type": "integer",
+        "_row_num": 39
+      },
+      {
+        "name": "headache_2months",
+        "type": "select_one",
+        "_row_num": 40
+      },
+      {
         "name": "dizziness_7days",
         "type": "select_one",
-        "_row_num": 16
+        "_row_num": 41
       },
       {
         "name": "dizziness_number_days",
         "type": "integer",
-        "_row_num": 17
+        "_row_num": 42
       },
       {
         "name": "dizziness_2months",
         "type": "select_one",
-        "_row_num": 18
+        "_row_num": 43
+      },
+      {
+        "comment": "Section94",
+        "name": "answering_for_self",
+        "type": "select_one_with_other",
+        "_row_num": 44
+      },
+      {
+        "name": "shortness_of_breath",
+        "type": "select_one",
+        "_row_num": 45
+      },
+      {
+        "name": "days_short_of_breath",
+        "type": "integer",
+        "_row_num": 46
+      },
+      {
+        "name": "month_short_of_breath",
+        "type": "select_one",
+        "_row_num": 47
+      },
+      {
+        "name": "cough",
+        "type": "select_one",
+        "_row_num": 48
+      },
+      {
+        "name": "cough_frequency",
+        "type": "select_one",
+        "_row_num": 49
+      },
+      {
+        "name": "dry_cough",
+        "type": "select_one",
+        "_row_num": 50
+      },
+      {
+        "name": "productive_cough",
+        "type": "select_one",
+        "_row_num": 51
+      },
+      {
+        "name": "sore_throat",
+        "type": "select_one",
+        "_row_num": 52
+      },
+      {
+        "name": "days_sore_throat",
+        "type": "integer",
+        "_row_num": 53
+      },
+      {
+        "name": "month_sore_throat",
+        "type": "select_one",
+        "_row_num": 54
+      },
+      {
+        "comment": "Section95",
+        "name": "answering_self_95",
+        "type": "select_one_with_other",
+        "_row_num": 55
+      },
+      {
+        "name": "stuffy_nose",
+        "type": "select_one",
+        "_row_num": 56
+      },
+      {
+        "name": "days_stuffy_nose",
+        "type": "integer",
+        "_row_num": 57
+      },
+      {
+        "name": "month_stuffy_nose",
+        "type": "select_one",
+        "_row_num": 58
+      },
+      {
+        "name": "fever",
+        "type": "select_one",
+        "_row_num": 59
+      },
+      {
+        "name": "days_fever",
+        "type": "integer",
+        "_row_num": 60
+      },
+      {
+        "name": "month_fever",
+        "type": "select_one",
+        "_row_num": 61
+      },
+      {
+        "name": "eye_problem",
+        "type": "select_one",
+        "_row_num": 62
+      },
+      {
+        "name": "days_eye_problem",
+        "type": "integer",
+        "_row_num": 63
+      },
+      {
+        "name": "month_eye_problem",
+        "type": "select_one",
+        "_row_num": 64
       }
     ]
   },
@@ -504,6 +753,7 @@
             "section_name": "model"
           }
         ],
+        "comment": "auxillaryHash",
         "elementKey": "household_id"
       },
       "name": {
@@ -514,6 +764,7 @@
             "section_name": "model"
           }
         ],
+        "comment": "Section2_names",
         "elementKey": "name"
       },
       "relation": {
@@ -524,6 +775,7 @@
             "section_name": "model"
           }
         ],
+        "comment": "Section2_other_info",
         "elementKey": "relation"
       },
       "gender": {
@@ -586,31 +838,327 @@
         ],
         "elementKey": "religion"
       },
-      "fuel_injury": {
+      "write_language": {
         "type": "string",
         "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
           {
             "_row_num": 11,
             "section_name": "model"
           }
         ],
+        "comment": "Section3",
+        "elementKey": "write_language"
+      },
+      "attend_school": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "attend_school"
+      },
+      "school_type": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "school_type_items"
+        },
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "school_type"
+      },
+      "grade_level": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "grade_level"
+      },
+      "post_secondary": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "post_secondary"
+      },
+      "grade_within_level": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "grade_within_level"
+      },
+      "currently_school": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "currently_school"
+      },
+      "primary_occupation": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section4",
+        "elementKey": "primary_occupation"
+      },
+      "is_smoker": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section5",
+        "elementKey": "is_smoker"
+      },
+      "smoked_years_ago": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "smoked_years_ago"
+      },
+      "began_smoke_age": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "began_smoke_age"
+      },
+      "number_cigarettes": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "number_cigarettes"
+      },
+      "smokes_in_house": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "smokes_in_house"
+      },
+      "hours_collecting": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section82",
+        "elementKey": "hours_collecting"
+      },
+      "hours_fuel_materials": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "hours_fuel_materials"
+      },
+      "hours_fuel_sale": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "hours_fuel_sale"
+      },
+      "hours_fuel_purchase": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section82 p2",
+        "elementKey": "hours_fuel_purchase"
+      },
+      "hours_spent_wood": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section82 p3",
+        "elementKey": "hours_spent_wood"
+      },
+      "hours_spent_cooking": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section82 p4",
+        "elementKey": "hours_spent_cooking"
+      },
+      "hours_spent_collecting_water": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section82 p5",
+        "elementKey": "hours_spent_collecting_water"
+      },
+      "where_medical_attention": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "where_medical_attention_items"
+        },
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section91",
+        "elementKey": "where_medical_attention"
+      },
+      "injury_faced": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section91 p2",
+        "elementKey": "injury_faced"
+      },
+      "days_absent": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 33,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "days_absent"
+      },
+      "diagnosis": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "diagnosis"
+      },
+      "diagnosis_by_whom": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "diagnosis_by_whom"
+      },
+      "fuel_injury": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section93",
         "elementKey": "fuel_injury"
       },
       "answering": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 37,
             "section_name": "model"
           }
         ],
+        "comment": "Section93 p2",
         "elementKey": "answering"
       },
       "headache_7days": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 38,
             "section_name": "model"
           }
         ],
@@ -620,7 +1168,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 39,
             "section_name": "model"
           }
         ],
@@ -630,7 +1178,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 40,
             "section_name": "model"
           }
         ],
@@ -640,7 +1188,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 41,
             "section_name": "model"
           }
         ],
@@ -650,7 +1198,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 42,
             "section_name": "model"
           }
         ],
@@ -660,76 +1208,223 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 43,
             "section_name": "model"
           }
         ],
         "elementKey": "dizziness_2months"
       },
-      "write_language": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
+      "answering_for_self": {
         "type": "string",
-        "elementKey": "write_language"
-      },
-      "attend_school": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "survey"
+            "_row_num": 44,
+            "section_name": "model"
           }
         ],
+        "comment": "Section94",
+        "elementKey": "answering_for_self"
+      },
+      "shortness_of_breath": {
         "type": "string",
-        "elementKey": "attend_school"
-      },
-      "school_type": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "survey"
+            "_row_num": 45,
+            "section_name": "model"
           }
         ],
-        "type": "array",
-        "isUnitOfRetention": true,
-        "items": {
-          "type": "string",
-          "elementKey": "school_type_items"
-        },
-        "elementKey": "school_type"
+        "elementKey": "shortness_of_breath"
       },
-      "grade_level": {
+      "days_short_of_breath": {
+        "type": "integer",
         "_defn": [
           {
-            "_row_num": 8,
-            "section_name": "survey"
+            "_row_num": 46,
+            "section_name": "model"
           }
         ],
+        "elementKey": "days_short_of_breath"
+      },
+      "month_short_of_breath": {
         "type": "string",
-        "elementKey": "grade_level"
-      },
-      "post_secondary": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "survey"
+            "_row_num": 47,
+            "section_name": "model"
           }
         ],
-        "type": "string",
-        "elementKey": "post_secondary"
+        "elementKey": "month_short_of_breath"
       },
-      "currently_school": {
+      "cough": {
+        "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
-            "section_name": "survey"
+            "_row_num": 48,
+            "section_name": "model"
           }
         ],
+        "elementKey": "cough"
+      },
+      "cough_frequency": {
         "type": "string",
-        "elementKey": "currently_school"
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cough_frequency"
+      },
+      "dry_cough": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 50,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "dry_cough"
+      },
+      "productive_cough": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 51,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "productive_cough"
+      },
+      "sore_throat": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "sore_throat"
+      },
+      "days_sore_throat": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "days_sore_throat"
+      },
+      "month_sore_throat": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 54,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "month_sore_throat"
+      },
+      "answering_self_95": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "model"
+          }
+        ],
+        "comment": "Section95",
+        "elementKey": "answering_self_95"
+      },
+      "stuffy_nose": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "stuffy_nose"
+      },
+      "days_stuffy_nose": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 57,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "days_stuffy_nose"
+      },
+      "month_stuffy_nose": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 58,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "month_stuffy_nose"
+      },
+      "fever": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fever"
+      },
+      "days_fever": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 60,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "days_fever"
+      },
+      "month_fever": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 61,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "month_fever"
+      },
+      "eye_problem": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 62,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "eye_problem"
+      },
+      "days_eye_problem": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 63,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "days_eye_problem"
+      },
+      "month_eye_problem": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 64,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "month_eye_problem"
       }
     },
     "section_names": [
@@ -993,6 +1688,7 @@
             "operationIdx": 4
           },
           {
+            "comments": "begin screen displays the following questions all on the same screen until it reaches the end screen tag",
             "clause": "begin screen",
             "_row_num": 6,
             "__rowNum__": 5,

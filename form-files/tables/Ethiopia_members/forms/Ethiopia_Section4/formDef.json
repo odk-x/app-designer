@@ -7,43 +7,93 @@
       },
       {
         "clause": "goto _finalize",
-        "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
         "_row_num": 3
       }
     ],
     "survey": [
       {
-        "type": "text",
-        "name": "name",
+        "type": "select_one",
+        "values_list": "occupations",
+        "name": "primary_occupation",
         "display": {
-          "text": "What is the household member's name?"
+          "text": "What is {{name}}'s primary occupation?"
         },
-        "required": true,
+        "_row_num": 2
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "occupations",
+        "data_value": "student",
+        "display": {
+          "text": "Student"
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "occupations",
+        "data_value": "homemaker",
+        "display": {
+          "text": "Homemaker"
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "occupations",
+        "data_value": "retired",
+        "display": {
+          "text": "Retired"
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "occupations",
+        "data_value": "unemployed",
+        "display": {
+          "text": "Unemployed"
+        },
+        "_row_num": 5
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "roster",
+        "query_type": "linked_table",
+        "linked_form_id": "Ethiopia_Section2_names",
+        "linked_table_id": "Ethiopia_members",
+        "selection": "household_id = ?",
+        "selectionArgs": "[ data('household_id') ]",
+        "auxillaryHash": "'household_id='+escape(data('household_id'))",
         "_row_num": 2
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section2_names",
+        "value": "Ethiopia_Section4",
         "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20131119,
+        "_row_num": 3
       },
       {
         "setting_name": "table_id",
         "value": "Ethiopia_members",
-        "_row_num": 3
+        "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 4"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 5
+        "_row_num": 6
       }
     ],
     "model": [
@@ -402,29 +452,34 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "Ethiopia_Section2_names",
+        "value": "Ethiopia_Section4",
         "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20131119,
+        "_row_num": 3
       },
       "table_id": {
         "setting_name": "table_id",
         "value": "Ethiopia_members",
-        "_row_num": 3
+        "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 4"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       "instance_name": {
         "setting_name": "instance_name",
         "value": "name",
-        "_row_num": 5
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": [
           {
             "display": {
@@ -436,19 +491,65 @@
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": "default"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Roster"
+          "title": "Section 4"
         },
-        "_row_num": 4
+        "_row_num": 5
       }
     },
-    "choices": {},
-    "queries": {},
+    "choices": {
+      "occupations": [
+        {
+          "choice_list_name": "occupations",
+          "data_value": "student",
+          "display": {
+            "text": "Student"
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "occupations",
+          "data_value": "homemaker",
+          "display": {
+            "text": "Homemaker"
+          },
+          "_row_num": 3
+        },
+        {
+          "choice_list_name": "occupations",
+          "data_value": "retired",
+          "display": {
+            "text": "Retired"
+          },
+          "_row_num": 4
+        },
+        {
+          "choice_list_name": "occupations",
+          "data_value": "unemployed",
+          "display": {
+            "text": "Unemployed"
+          },
+          "_row_num": 5
+        }
+      ]
+    },
+    "queries": {
+      "roster": {
+        "query_name": "roster",
+        "query_type": "linked_table",
+        "linked_form_id": "Ethiopia_Section2_names",
+        "linked_table_id": "Ethiopia_members",
+        "selection": "household_id = ?",
+        "selectionArgs": "[ data('household_id') ]",
+        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "_row_num": 2
+      }
+    },
     "calculates": {},
     "model": {
       "household_id": {
@@ -465,10 +566,6 @@
       "name": {
         "type": "string",
         "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          },
           {
             "_row_num": 3,
             "section_name": "model"
@@ -627,6 +724,10 @@
       "primary_occupation": {
         "type": "string",
         "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
           {
             "_row_num": 18,
             "section_name": "model"
@@ -1136,7 +1237,7 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Roster"
+              "title": "Section 4"
             },
             "_branch_label_enclosing_screen": "survey/_contents"
           },
@@ -1163,7 +1264,6 @@
           },
           {
             "clause": "goto _finalize",
-            "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "goto_label",
@@ -1221,16 +1321,16 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "text",
-            "name": "name",
+            "type": "select_one",
+            "values_list": "occupations",
+            "name": "primary_occupation",
             "display": {
-              "text": "What is the household member's name?"
+              "text": "What is {{name}}'s primary occupation?"
             },
-            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -1244,9 +1344,7 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": [
-            0
-          ]
+          "finalize": []
         },
         "operations": [
           {

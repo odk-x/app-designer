@@ -615,6 +615,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.$('.deleteInstance').removeAttr('disabled');
         that.$('.addInstance').removeAttr('disabled');
     },
+    choice_filter: function(){ return true; },
     configureRenderContext: function(ctxt) {
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
@@ -630,7 +631,22 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
                 ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances", "px: " + that.promptIdx);
                 // set the image icon
+                      /*  //that.renderContext.value = formValue;
+        var filteredChoices = _.filter(that.renderContext.choices, function(choice) {
+            return that.choice_filter(choice);
+        }); */
+			
+				var filteredInstanceList = _.filter(instanceList, function(instance) {
+					return that.choice_filter(instance);
+				});
+				instanceList = filteredInstanceList;
+			
                 for (var i = 0; i < instanceList.length ; i++){
+                	// sets the savepoint_type to incomplete if the formId doesn't match the current form
+                    if (instanceList[i]["form_id"] != that.getLinkedFormId()) {
+                        instanceList[i].savepoint_type = opendatakit.savepoint_type_incomplete;
+                    }
+                    
                     if (instanceList[i]["savepoint_type"] == "COMPLETE"){
                         instanceList[i]["icon_class"] = "ui-icon-check";
                     }  
@@ -650,12 +666,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                     { title : ""}
                 ];
                     
-                // change this to incomplete if it wasn't saved via the specific form
-                for (var i = 0; i < instanceList.length; i++) {
-                    if (instanceList[i].form_id != that.getLinkedFormId()) {
-                        instanceList[i].savepoint_type = opendatakit.savepoint_type_incomplete;
-                    }
-                }
+             
+
                 ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances.success", "px: " + that.promptIdx + " instanceList: " + instanceList.length);
                 ctxt.success();
             }}), dbTableName, selString, selArgs, displayElementName, ordBy);
@@ -1275,6 +1287,7 @@ promptTypes.select_multiple = promptTypes.select.extend({
 promptTypes.select_one_with_other = promptTypes.select_one.extend({
     withOther: true
 });
+
 promptTypes.select_one_grid = promptTypes.select_one.extend({
     templatePath: "templates/select_grid.handlebars",
     updateRenderValue: function(formValue) {
@@ -1779,6 +1792,20 @@ promptTypes.media = promptTypes.base.extend({
     },
     updateRenderContext: function() {
         this.baseUpdateRenderContext();
+    },
+    formattedValueForContentsDisplay: function() {
+        if ( !this.name ) {
+            return '';
+        } else {
+            var displayObject = this.getValue();
+            if (displayObject != null) {
+                var ind = displayObject.uriFragment.lastIndexOf("/");
+                return displayObject.uriFragment.substring(++ind);
+            }
+            else {
+                return '';
+            }          
+        }
     }
 });
 promptTypes.image = promptTypes.media.extend({
@@ -1909,6 +1936,19 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
             altitude: jsonObject.result.altitude,
             accuracy: jsonObject.result.accuracy
         };
+    },
+    formattedValueForContentsDisplay: function() {
+        if ( !this.name ) {
+            return '';
+        } else {
+            var displayObject = this.getValue();
+            if (displayObject.latitude != null && displayObject.longitude != null) {
+                return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
+            }
+            else {
+                return '';
+            }
+        }
     }
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
