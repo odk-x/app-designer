@@ -28,6 +28,9 @@ screenTypes.base = Backbone.View.extend({
      *   _screenManager.renderContext
      */
     activePrompts: [],
+    $focusPromptTest: null,
+    focusScrollPos: null,
+    pendingCtxt: [],
     initialize: function(args) {
         var that = this;
         $.extend(this, args);
@@ -78,11 +81,44 @@ screenTypes.base = Backbone.View.extend({
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
-    reRender: _.debounce(function(ctxt) {
+    reRender: function(ctxt) {
+        var that = this; 
+
+        that.pendingCtxt.push(ctxt);
+        shim.log("D","screens.reRender: called");
+        that.debouncedReRender();
+     },
+    debouncedReRender: _.debounce(function() {
         var that = this;
-        that._screenManager.refreshScreen(ctxt);
-    }, 500, true),
-    /**
+        that.focusScrollPos = null;
+        that.$focusPromptTest = null;
+        var ctxt = null;
+
+        that.focusScrollPos = $(window).scrollTop();
+        shim.log("D","screens.reRender.debouncedReRender: focusScrollPos = " + that.focusScrollPos);
+
+        // Find the element in focus
+        that.$focusPromptTest = $(':focus');
+        if (that.$focusPromptTest.length == 0) {
+            that.$focusPromptTest = null;
+        }
+
+        shim.log("D","screens.reRender.debouncedReRender: pendingCtxtLength: " + that.pendingCtxt.length);
+        if (that.pendingCtxt.length > 0) {
+            ctxt = that.pendingCtxt.pop();   
+        } else {
+            shim.log("W","screens.reRender.debouncedReRender: no pendingCtxts");
+        }
+
+        while (that.pendingCtxt.length > 0) {
+            ctxt.setChainedContext(that.pendingCtxt.pop());
+        }
+            
+        if (ctxt !== null) {
+            that._screenManager.refreshScreen(ctxt);
+        }
+    }, 500),
+   /**
      * Use the render context from the screenManager, but mix in 
      * any values explicitly defined for this screen.  Screen can
      * only enable or disable navigation, but cannot enable or 
@@ -134,10 +170,10 @@ screenTypes.base = Backbone.View.extend({
                 _.each(that.activePrompts, function(prompt){
                     prompt.buildRenderContext(onceCtxt);
                 });
-            } catch (e) {
+            } catch (ex) {
                 ctxt.log('E','screen.configureRenderContext.exception', 
-                    "exception: " + ex.message + " stack: " + ex.stack  + " px: " + opPath);
-                ctxt.failure({message: "Exception while initializing screen: " + e.message});
+                    "exception: " + ex.message + " stack: " + ex.stack );
+                ctxt.failure({message: "Exception while initializing screen: " + ex.message});
             }
         }
     },
@@ -178,9 +214,35 @@ screenTypes.base = Backbone.View.extend({
     },
     afterRender: function() {
         var that = this;
+        var setFocus = false;
+
         $.each(that.activePrompts, function(idx, prompt){
             prompt.afterRender();
         });
+
+        if (that.$focusPromptTest != null) 
+        {   
+            var focusElementAttr = {'id' : that.$focusPromptTest.attr('id'),
+                                    'value' : that.$focusPromptTest.attr('value'),
+                                    'name' : that.$focusPromptTest.attr('name')};
+
+            var focusElementString = (that.$focusPromptTest.get(0).tagName).toLowerCase();
+            for (var key in focusElementAttr) {
+                if (focusElementAttr[key]) {
+                    focusElementString = focusElementString + "[" + key + "='" + focusElementAttr[key] + "']";
+                    setFocus = true;
+                }
+            }
+
+            if (setFocus == true) {
+                shim.log("D","screens.afterRender: focusElementString = " + focusElementString);
+                $(focusElementString).focus();
+            }
+        }        
+            
+        if (that.focusScrollPos != null) {
+            $(window).scrollTop(that.focusScrollPos);
+        }
     },
     recursiveUndelegateEvents: function() {
         var that = this;

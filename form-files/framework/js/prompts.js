@@ -1088,7 +1088,7 @@ promptTypes.select = promptTypes._linked_type.extend({
     },
     modification: function(evt) {
         var ctxt = this.controller.newContext(evt);
-        ctxt.log('D',"prompts." + this.type + ".modification", "px: " + this.promptIdx);
+        ctxt.log('D',"prompts." + this.type + ".modification", "px: " + this.promptIdx + " val: " + $(evt.target).attr('value'));
         var that = this;
         if(this.withOther) {
             //This hack is needed to prevent rerendering
@@ -1420,17 +1420,26 @@ promptTypes.input_type = promptTypes.base.extend({
         "change input": "modification",
         "swipeleft .input-container": "stopPropagation",
         "swiperight .input-container": "stopPropagation",
-        "focusout .input-container": "lostFocus"
+        "focusout .input-container": "loseFocus",
+        "focusin .input-container": "gainFocus"
     },
-    lostFocus: function(evt) {
-        var that = this;;
-        var ctxt = that.controller.newContext(evt);
-        ctxt.log('D',"prompts." + that.type + ".focusout", "px: " + that.promptIdx);
-        that.reRender(ctxt);
+    loseFocus: function(evt) {
+        var that = this;
+        shim.log('D',"prompts." + that.type + ".focusout px: " + that.promptIdx);
+                
+        if (that.modified === true) {
+            var ctxt = that.controller.newContext(evt);
+            that.reRender(ctxt);
+        }
+    },
+    gainFocus: function(evt) {
+        var that = this;
+        shim.log('D',"prompts." + that.type + ".focusin px: " + that.promptIdx);
     },
     modification: function(evt) {
         var value = $(evt.target).val();
         var that = this;
+        that.modified = false;
         if ( that.lastEventTimestamp == evt.timeStamp ) {
             shim.log("D","prompts." + that.type + ".modification duplicate event ignored");
             return;
