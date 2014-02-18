@@ -1,5 +1,5 @@
 rmdir /S /Q "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\FORM\"
-xcopy form-files "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\FORM" /E /I /R /Y
+xcopy app "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\FORM" /E /I /R /Y
 del "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\FORM\copy.bat"
 del "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\FORM\copyMnt.bat"
 del "C:\Program Files\Apache Software Foundation\Apache2.4\htdocs\FORM\convertToLegacy.hta"

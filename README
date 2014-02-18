@@ -1,0 +1,21 @@
+This repository contains an example application written for Open Data Kit (ODK)
+Tables. ODK Tables is a data manager and visualizer for Android devices.
+Complete Android apps, including data entry, synchronization, and distribution,
+can be written using HTML and JavaScript files. ODK Tables will serve these
+files as the skin of your app.
+
+Projects intending to write a Tables app can clone this repository and use it
+as a starting point.
+
+Much of the boilerplate of app creation can be avoided by employing the Grunt
+tasks specified in the Gruntfile.
+
+For a more complete description of how to use this repository, please see this
+entry on the official ODK wiki:
+
+https://code.google.com/p/opendatakit/wiki/WritingATablesApp
+
+Suggestions and corrections are welcomed in our efforts to make the
+documentation more complete and the app easier to use. Please send to:
+
+opendatakit@googlegroups.com

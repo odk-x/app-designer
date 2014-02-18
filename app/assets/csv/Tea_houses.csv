@@ -1,0 +1,18 @@
+House_id,State,Region,District,Neighborhood,Specialty_Type_id,Name,Customers,Visits,Iced,Hot,WiFi,Latitude,Longitude,Date_Opened,Owner,Phone_Number,GeoPoint
+t3,Ulong,Cascadia,Magdalene,Capitol Hill,1,Tibbins House on Kingsley,1907,10987,Yes,No,Yes,10.20976,1.47962,07/13/2009,Colonel Toppington,5550981,10.20976 1.47962
+t2,Ulong,Cascadia,Magdalene,Capitol Hill,1,Tea for All,176,2762,Yes,Yes,Yes,10.304162,1.37962,6/28/2010,Miss Tealicious,5558778,10.304162 1.37962
+t4,Ulong,Cascadia,Magdalene,First Hill,2,Green with Tea-envy,887,2710,Yes,Yes,Yes,10.26794,0.95949,6/28/2010,David Serra,5558719,10.26794 0.95949
+t5,Ulong,Cascadia,Magdalene,First Hill,2,Read the Leaves,892,9876,Yes,Yes,No,10.177112,1.106208,6/28/2010,Wendy Florent,5558171,10.177112 1.106208
+t6,Ulong,Cascadia,St John's,University,3,Trinity's Spies,123,8196,Yes,No,Yes,10.35259,1.10885,6/28/2010,Brandon Stark,5553342,10.35259 1.10885
+t7,Ulong,Cascadia,St John's,University,4,The Bridge of Sighs,198,188,Yes,Yes,No,10.177112,1.106208,6/28/2010,Takeshi Kovacs,5554113,10.177112 1.106208
+t8,Ulong,Cascadia,St John's,Fremont,4,Kitchen Court,768,1719,No,Yes,No,10.177112,1.106208,6/28/2010,Rick Deckard,5559109,10.177112 1.106208
+t1,Ulong,Cascadia,St John's,Fremont,1,The Buttery,779,8817,Yes,No,No,10.502791,1.374374,6/29/2010,Madame Bemford,5551134,10.502791 1.374374
+t9,Ulong,Cascadia,St John's,Fremont,2,Whipplesnaith,153,9873,Yes,Yes,Yes,10.487957,1.510158,6/29/2010,Willard Pewpew,5558171,10.487957 1.510158
+t10,Ulong,Cascadia,St John's,University,5,The Tower,1139,7866,No,Yes,Yes,10.502791,1.374374,6/29/2010,Genevieve Twilly,5558189,10.502791 1.374374
+t11,Ulong,Weste,Pembroke,Wallingford,5,Tea-rrible,195,256,Yes,Yes,Yes,10.11595,1.43991,6/28/2010,Jaime Lancaster,5555678,10.11595 1.43991
+t12,Ulong,Weste,Pembroke,Wallingford,6,Make it So,56,77,Yes,Yes,Yes,10.39157,1.572896,6/29/2010,Mrs Featherbottom,5551240,10.39157 1.572896
+t13,Ulong,Weste,Pembroke,Greenlake,7,Soothing Remedies,351,508,Yes,Yes,No,10.30691,1.53396,6/29/2010,Tyrion Lannister,5551328,10.30691 1.53396
+t14,Ulong,Weste,Pembroke,Wallingford,1,Serving it Up,231,401,No,Yes,No,10.304162,1.37962,6/29/2010,Jon Snow,5558108,10.304162 1.37962
+t15,Ulong,Weste,Pembroke,Greenlake,7,Kingston Tea,176,1689,Yes,Yes,Yes,10.113404,1.344558,07/13/2009,Charlotte Weber,5556146,10.113404 1.344558
+t16,Ulong,Weste,Pembroke,Greenlake,2,Te Verde,973,6651,Yes,Yes,No,10.30518702,1.38153076,6/29/2010,Melody Trumpington,5554143,10.30518702 1.38153076
+t17,Ulong,Weste,Pembroke,Greenwood,6,En-tea-rprising,144,1987,Yes,Yes,Yes,10.1738,1.11166,6/29/2010,Cher,5550017,10.1738 1.11166
