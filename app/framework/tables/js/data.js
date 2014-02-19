@@ -24,6 +24,13 @@ window.__getTableData = function() {
         return (typeof str === 'string');
     };
 
+    /**
+     * Returns ture if num is a number, else false.
+     */
+    var isNumber = function(num) {
+        return (typeof num === 'number');
+    };
+
     var isInteger = function(i) {
         return (typeof i === 'number' && Math.floor(i) === i);
     };
@@ -86,6 +93,9 @@ window.__getTableData = function() {
         }
         if (!isString(elementPath)) {
             throw 'getForegroundColor()--elementPath must be string';
+        }
+        if (!isString(value) && !isNumber(value)) {
+            throw 'getForegroundColor()--value must be string or number';
         }
         var len = 0;
         if (value !== null && value !== undefined) {
