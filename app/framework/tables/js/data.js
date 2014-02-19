@@ -87,13 +87,13 @@ window.__getTableData = function() {
         if (!isString(elementPath)) {
             throw 'getForegroundColor()--elementPath must be string';
         }
-		var len = 0;
+        var len = 0;
         if (value !== null && value !== undefined) {
-			len = (''+value).length;
+            len = (''+value).length;
         }
         console.log('getForegroundColor() called');
         // we need to return a string, so we'll just bring back a dummy value
-		var colors = ['blue','red','yellow','orange','green'];
+        var colors = ['blue','red','yellow','orange','green'];
         return colors[len % colors.length];
     };
 

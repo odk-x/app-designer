@@ -27,7 +27,8 @@ define(['chai',
                 // $.getScript so that we can perform the callback
                 // synchronously.
                 $.ajax({
-                    url: getUrl('../test/test_data/control.json'),
+                    // Don't use getUrl, bc not in the app folder.
+                    url: '/test/test_data/control.json',
                     success: function(data) {
                         var controlObject = data;
                         control.setBackingObject(controlObject);

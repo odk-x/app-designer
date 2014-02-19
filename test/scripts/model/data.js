@@ -4,7 +4,7 @@ define(['chai',
         'jquery'],
     function(chai, $) {
 
-        $.getScript(window.getUrl('../app/framework/tables/js/data.js'),
+        $.getScript(window.getUrl('framework/tables/js/data.js'),
             function() {
 
                 var data = window.data;

@@ -79,6 +79,15 @@ if (!window.control) {
         return result;
     };
 
+    pub.getFileAsUrl = function(relativePath) {
+        var cleanedStr = relativePath.replace(/\\/g, '');
+        // We can't use pub, b/c for some reason that is being overwritten
+        // by the data object's pub. 
+        var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
+        var result = baseUri + cleanedStr;
+        return result;
+    };
+
     /**
      * This is the only function that is exposed to the caller that is NOT a 
      * function exposed to the android object. It is intended only for use on
@@ -134,7 +143,7 @@ if (!window.control) {
             // then we need the default
             relativePath = controlObj.tables[tableId].defaultListFile;
         }
-        relativePath = getUrl(relativePath);
+        relativePath = pub.getFileAsUrl(relativePath);
         window.location.href = relativePath;
     };
 
@@ -184,7 +193,7 @@ if (!window.control) {
         // Now we need to get the object.
         var newTableData = window.__getTableData();
         $.ajax({
-            url: getUrl('output/debug/' + tableId + '_data.json'),
+            url: pub.getFileAsUrl('output/debug/' + tableId + '_data.json'),
             success: function(dataObj) {
                 newTableData.setBackingObject(dataObj);
             },
@@ -215,7 +224,7 @@ if (!window.control) {
             throw 'launchHTML()--relativePath not a string';
         }
         // We don't have a default for this, so just launch it.
-        relativePath = getUrl(relativePath);
+        relativePath = pub.getFileAsUrl(relativePath);
         window.location.href = relativePath;
     };
 
@@ -235,7 +244,7 @@ if (!window.control) {
             // Then we need the default
             relativePath = controlObj.tables[tableId].defaultDetailFile;
         }
-        relativePath = getUrl(relativePath);
+        relativePath = pub.getFileAsUrl(relativePath);
         window.location.href = relativePath;
     };
 
@@ -311,13 +320,17 @@ if (!window.control) {
         return pub.getElementKey(tableId, elementPath) !== undefined;
     };
 
-    pub.getFileAsUrl = function(relativePath) {
+    // Now we also need to set the backing object we are going to use. We
+    // assume it is in the output/debug directory.
+    $.ajax({
+        url: pub.getFileAsUrl('output/debug/control.json'),
+        success: function(data) {
+            var controlObject = data;
+            pub.setBackingObject(controlObject);
+        },
+        async: false
+    });
 
-    };
-
-	// initialization of this stub is done in the html file that loads
-	// in the debug environment.
-	
     window.control = window.control || pub;
 
 }
