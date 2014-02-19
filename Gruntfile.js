@@ -274,8 +274,10 @@ module.exports = function (grunt) {
                 var replaceIdAndWrite = function(srcPath, destPath, tableId) {
                     var contents = grunt.file.read(srcPath);
                     // Now modify it.
+                    // We need to do a global replace.
+                    var regex = new RegExp(tablesConfig.tableIdStr, 'g');
                     contents =
-                        contents.replace(tablesConfig.tableIdStr, tableId);
+                        contents.replace(regex, tableId);
                     grunt.file.write(destPath, contents);
                 };
 
@@ -291,7 +293,6 @@ module.exports = function (grunt) {
                 // These will be the files in the tableTemplateDir we want to
                 // copy directly. You must terminate with / if it is a dir.
                 var toCopy = [
-                    'formDef.json',
                     'forms/',
                     'forms/collect/',
                     'instances/'
