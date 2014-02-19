@@ -92,20 +92,19 @@ module.exports = function (grunt) {
                 },
                 files: [
                     '<%= yeoman.app %>/*.html',
+                    '<%= yeoman.app %>/framework/formDef.json',
+                    '<%= yeoman.app %>/tables/*/{forms,js,html}/**',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+
                     '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
                     'test/spec/**/*.js',
-                    // We also want to watch all the files in app/tables and
-                    // app/assets. If others change that you are interested in,
-                    // add them here to be watched as well.
-                    '<%= yeoman.app %>/tables/**',
+                    '<%= yeoman.app %>/framework/*',
+                    '<%= yeoman.app %>/framework/graph/**',
+                    '<%= yeoman.app %>/framework/survey/{templates,js}/*',
+                    '<%= yeoman.app %>/framework/tables/js/*',
                     '<%= yeoman.app %>/assets/**',
-                    // And the framework js objects.
-                    '<%= yeoman.app %>/framework/js/**',
-                    // And the test files.
-                    'test/**/*.{js, html}'
+                    '<%= yeoman.app %>/themeGenerator/*'
                 ]
             },
             test: {
