@@ -34,6 +34,8 @@ module.exports = function (grunt) {
         appName: 'tables',
         // The mount point of the device. Should allow adb push/pull.
         deviceMount: '/sdcard/opendatakit',
+        // The mount point of the device for odk collect forms.
+        formMount: '/sdcard/odk/forms',
         // The directory where the 'tables' directory containing the tableId
         // directories lives.
         tablesDir: yeomanConfig.app + '/tables',
@@ -235,16 +237,14 @@ module.exports = function (grunt) {
             tableIds.forEach(function(tableId) {
                 var files = grunt.file.expand(
                     tablesConfig.tablesDir + '/' + tableId +
-                    '/forms/collect/*');
+                    '/forms/collect/*.xml');
                 files.forEach(function(file) {
                     var src = file;
                     // We basically want to push this file to something like:
                     // /sdcard/opendatakit/APP/tables/tableId/forms/collect
                     // The name of the file will stay the same if we push it
                     // to a directory, so we can leave that.
-                    var dest = tablesConfig.deviceMount + '/' +
-                        tablesConfig.appName + '/tables/' + tableId +
-                        '/forms/collect/';
+                    var dest = tablesConfig.formMount;
                     grunt.log.writeln(
                         'adb push ' + src + ' ' + dest);
                     grunt.task.run('exec:adbpush: ' + src + ':' + dest);
