@@ -5,10 +5,10 @@
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-if (control.getPlatformInfo().container === 'Chrome') {
+if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
     console.log('Welcome to Tables debugging in Chrome!');
     $.ajax({
-        url: getUrl('../output/debug/Tea_houses_data.json'),
+        url: control.getFileAsUrl('output/debug/Tea_houses_data.json'),
         async: false,  // do it first
         success: function(dataObj) {
             window.data.setBackingObject(dataObj);

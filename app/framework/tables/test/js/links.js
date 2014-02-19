@@ -41,7 +41,7 @@ listViewCustom.click(function() {
         'Tea_inventory',
         null,
         null,
-        'framework/test/html/Tea_inventory_list.html');
+        'framework/tables/test/html/Tea_inventory_list.html');
 });
 appendElement(listViewCustom);
 
@@ -54,7 +54,7 @@ listViewMismatch.click(function() {
         'Tea_houses_editable',
         null,
         null,
-        'framework/test/html/Tea_houses_detail.html');
+        'framework/tables/test/html/Tea_houses_detail.html');
 });
 appendElement(listViewMismatch);
 
@@ -66,7 +66,7 @@ detailViewMismatch.click(function() {
     control.openDetailView(
         'Tea_houses_editable',
         data.getRowId(0),
-        'framework/test/html/Tea_houses_list.html');
+        'framework/tables/test/html/Tea_houses_list.html');
 });
 appendElement(detailViewMismatch);
 

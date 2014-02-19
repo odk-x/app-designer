@@ -4,10 +4,10 @@
 /* global $, control, data */
 'use strict';
 
-if (control.getPlatformInfo().container === 'Chrome') {
+if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
     console.log('Welcome to Tables debugging in Chrome!');
     $.ajax({
-        url: getUrl('../output/debug/Tea_houses_data.json'),
+        url: control.getFileAsUrl('output/debug/Tea_houses_data.json'),
         async: false,  // do it first
         success: function(dataObj) {
             window.data.setBackingObject(dataObj);
@@ -91,7 +91,7 @@ var displayGroup = function(idxStart) {
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
-        chevron.attr('src', getUrl('../assets/img/little_arrow.png'));
+        chevron.attr('src', control.getFileAsUrl('assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
                 
