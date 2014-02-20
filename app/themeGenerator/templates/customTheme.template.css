@@ -14,13 +14,15 @@
 .ui-body-a .ui-link:visited,.ui-body-a .ui-link:hover,.ui-body-a .ui-link:active{color:{{button-selected-color}}}
 .ui-body-a.ui-input-text{border:2px solid #eee;}
 .ui-body-a.ui-input-text.ui-focus{border:2px solid {{button-border-color}};-webkit-transition:border linear .2s;-moz-transition:border linear .2s;-o-transition:border linear .2s;transition:border linear .2s}
-.ui-btn-up-a{border:1px solid {{button-border-color}};background:{{button-color}};font-weight:bold;color:#fff;}
+.ui-btn-up-a{border:1px solid {{button-border-color}};background-image:linear-gradient({{button-color}}, {{button-color}});font-weight:bold;color:#fff;}
 .ui-btn-up-a:visited,.ui-btn-up-a a.ui-link-inherit{color:#fff}
 .ui-btn-hover-a{border:1px solid {{button-border-color}};background:{{button-selected-color}};font-weight:bold;color:#fff;}
 .ui-btn-hover-a:visited,.ui-btn-hover-a:hover,.ui-btn-hover-a a.ui-link-inherit{color:#fff}
 .ui-btn-down-a{border:1px solid {{button-border-color}};background:{{button-selected-color}};font-weight:bold;color:#fff;}
 .ui-btn-down-a:visited,.ui-btn-down-a:hover,.ui-btn-down-a a.ui-link-inherit{color:#fff}
 .ui-btn-up-a,.ui-btn-hover-a,.ui-btn-down-a{font-family:inherit;text-decoration:none}
+.ui-btn-up-d {border:1px solid {{button-border-color}};background-image:linear-gradient({{button-color}}, {{button-color}});font-weight:bold;color:#fff;}
+.ui-btn-down-d {border:1px solid {{button-border-color}};background-image:linear-gradient({{button-selected-color}}, {{button-selected-color}});font-weight:bold;color:#fff;}
 
 
 /* Navbar styles */
@@ -93,9 +95,19 @@ input.ui-input-text.ui-slider-input {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-corner-all {
-	-webkit-border-radius:  6px /*{global-radii-blocks}*/;
-	border-radius:  6px /*{global-radii-blocks}*/;
+	-webkit-border-radius:  6px; /*{global-radii-blocks}*/
+	border-radius: {{button-radius}} /*{global-radii-blocks}*/;
 }
+
+.ui-input-text {
+	-webkit-border-radius:  6px; /*{global-radii-blocks}*/
+	border-radius: 6px; /*{global-radii-blocks}*/
+}
+
+
+
+
+
 
 /* Form field separator
 -----------------------------------------------------------------------------------------------------------*/
