@@ -5,6 +5,7 @@
 <!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="../app/framework/libs/jquery.1.10.2.js"></script>
+<script type="text/javascript" src="../app/framework/survey/js/shim.js"></script>
 <link  rel='stylesheet' type='text/css'href='css/animate.css' />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
   <script type="text/javascript">
@@ -21,16 +22,47 @@
   function loadPage(value) {
         var cw = document.getElementById('screen').contentWindow;
 		cw.history.go(value);
+		cw.location = value;
+		cw.location.src = cw.location.src;
 		setTimeout(function() {
-			cw.location = value;
-			cw.location.src = cw.location.src;
-		}, 10);
+			var cw = document.getElementById('screen').contentWindow;
+			cw.location.reload();
+		}, 100);
   }
   function purge() {
+	var jsonString = shim.getDatabaseSettings();
+	var settings = JSON.parse(jsonString);
+	var w3cDatabase = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
+	  // create the database...
+	w3cDatabase.transaction(function(transaction) {
+		transaction.executeSql('drop table if exists _uploads');
+		transaction.executeSql('drop table if exists _formDefs');
+		transaction.executeSql('drop table if exists _column_definitions');
+		transaction.executeSql('drop table if exists _key_value_store_default');
+		transaction.executeSql('drop table if exists _key_value_store_active');
+		transaction.executeSql('drop table if exists _key_value_store_server');
+		transaction.executeSql('drop table if exists _key_value_store_sync');
+		transaction.executeSql('select _db_table_name from _table_definitions', null, function(transaction, result) {
+			var len = result.rows.length;
+			for ( var i = 0 ; i < len ; ++i ) {
+				var row = result.rows.item(0);
+				var tableName = row['_db_table_name'];
+				transaction.executeSql('drop table if exists ' + tableName);
+			}
+			transaction.executeSql('drop table if exists _table_definitions');
+		});
+	}, function(error) {
+		alert(String(error));
+        var cw = document.getElementById('screen').contentWindow;
+        cw.location.reload();
+	}, function() {
+		alert('Database Tables Purged');
+        var cw = document.getElementById('screen').contentWindow;
+        cw.location.reload();
+	});
   }
   //]]>   
   </script>
-
   <title>OpenDataKit Common Javascript Framework Launcher</title>
 </head>
 
