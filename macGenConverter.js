@@ -1,8 +1,8 @@
-load('app/xlsxconverter/js-xlsx/jszip.js');
-load('app/xlsxconverter/js-xlsx/xlsx.js');
-load('app/xlsxconverter/XRegExp-All-3.0.0-pre-2013-08-27.js');
-load('app/xlsxconverter/underscore.js');
-load('app/xlsxconverter/XLSXConverter.js');
+load('xlsxconverter/js-xlsx/jszip.js');
+load('xlsxconverter/js-xlsx/xlsx.js');
+load('xlsxconverter/XRegExp-All-3.0.0-pre-2013-08-27.js');
+load('xlsxconverter/underscore.js');
+load('xlsxconverter/XLSXConverter.js');
 function removeEmptyStrings(rObjArr){
     var outArr = [];
     _.each(rObjArr, function(row){
