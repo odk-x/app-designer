@@ -1043,9 +1043,11 @@ return {
         window.location.hash = url;
         parsequery.changeUrlHash(ctxt);
     },
-    // return to the main screen (showing the available instances) for this form.
+    // exit the page
     leaveInstance:function(ctxt) {
-        this.openInstance(ctxt, null);
+		ctxt.success();
+		// this would reset to the main page.
+		// this.openInstance(ctxt, null);
     },
     createInstance: function(ctxt){
         var id = opendatakit.genUUID();

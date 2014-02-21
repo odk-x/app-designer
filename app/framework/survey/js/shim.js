@@ -18,7 +18,7 @@ window.shim = window.shim || {
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.
-        return '{"container":"Chrome","version":"21.0.1180.83 m","activeUser":"username:badger","baseUri":"http://localhost/FORM/","formsUri":"content://org.opendatakit.common.android.provider.forms/","appName":"testing","logLevel":"' + this.logLevel + '"}';
+        return '{"container":"Chrome","version":"21.0.1180.83 m","activeUser":"username:badger","baseUri":"http://localhost:8000/app/","formsUri":"content://org.opendatakit.common.android.provider.forms/","appName":"testing","logLevel":"' + this.logLevel + '"}';
     },
     getDatabaseSettings: function() {
         // version identifies the database schema that the database layer should use.
@@ -426,7 +426,14 @@ window.shim = window.shim || {
         }
         if ( action === 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
             value = JSON.parse(jsonObj);
-            window.open(value.extras.url,'_blank', null, false);
+			if ( window.parent === window ) {
+				// naked
+				window.open(value.extras.url,'_blank', null, false);
+			} else {
+				// inside tab1
+				window.parent.pageStack.push(window.location.href);
+				window.parent.loadPage(value.extras.url);
+			}
             setTimeout(function() {
                 that.log("D","Opened new browser window for Survey content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
@@ -436,7 +443,14 @@ window.shim = window.shim || {
         }
         if ( action === 'android.content.Intent.ACTION_VIEW' ) {
             value = JSON.parse(jsonObj);
-            window.open(value.uri,'_blank', null, false);
+			if ( window.parent === window ) {
+				// naked
+				window.open(value.extras.url,'_blank', null, false);
+			} else {
+				// inside tab1
+				window.parent.pageStack.push(window.location.href);
+				window.parent.loadPage(value.extras.url);
+			}
             setTimeout(function() {
                 that.log("D","Opened new browser window for 3rd party content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
@@ -460,7 +474,14 @@ window.shim = window.shim || {
         }
         this.log("D","shim: DO: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
         if ( this.showAlerts ) alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
-        window.close();
+		if ( window.parent === window ) {
+			window.close();
+		} else {
+			if ( window.parent.pageStack.length > 0 ) {
+				var prior = window.parent.pageStack.pop();
+				window.parent.loadPage(prior);
+			}
+		}
     },
     saveAllChangesFailed: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -477,7 +498,14 @@ window.shim = window.shim || {
         }
         this.log("D","shim: DO: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
         if ( this.showAlerts ) alert("notify container OK ignore all changes.");
-        window.close();
+		if ( window.parent === window ) {
+			window.close();
+		} else {
+			if ( window.parent.pageStack.length > 0 ) {
+				var prior = window.parent.pageStack.pop();
+				window.parent.loadPage(prior);
+			}
+		}
     },
     ignoreAllChangesFailed: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
