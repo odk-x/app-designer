@@ -52,6 +52,7 @@ function generateCustomTheme(){
   var navbarButtonColor= $("#navbar-button-color").val();
   var navbarButtonSelectedColor= $("#navbar-button-selected-color").val();
   var buttonBorderColor = $("#button-border-color").val();
+  var buttonRadius = $("#button-radius").val();
   var themes = window.customTheme.replace(/{{button-color}}/g, buttonColor);
   themes = themes.replace(/{{button-selected-color}}/g, buttonSelectedColor);
   themes = themes.replace(/{{button-border-color}}/g, buttonBorderColor);
@@ -61,6 +62,7 @@ function generateCustomTheme(){
   themes = themes.replace(/{{navbar-font-color}}/g, navbarFontColor);
   themes = themes.replace(/{{navbar-button-color}}/g, navbarButtonColor);
   themes = themes.replace(/{{navbar-button-selected-color}}/g, navbarButtonSelectedColor);
+  themes = themes.replace(/{{button-radius}}/g, buttonRadius);
   return themes;
 }
 
