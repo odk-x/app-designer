@@ -27,18 +27,16 @@ module.exports = function (grunt) {
     // load all grunt tasks
     require('load-grunt-tasks')(grunt);
 
-    // configurable paths
-    var yeomanConfig = {
-        app: 'app',
-        dist: 'dist'
-    };
-    
     // We do not want the default behavior of serving only the app folder.
     // Instead we want to serve the base repo directory, as this will give us
     // access to the test dir as well. Further, if you don't have a homescreen
     // defined, it doesn't really make sense to have a single index.html.
     var baseDirForServer = '';
     var tablesConfig = {
+        // The base app directory. Note that if you modify this you should
+        // also modify the other properties in this object that refer to 
+        // app
+        appDir: 'app',
         appName: 'tables',
         // The mount point of the device. Should allow adb push/pull.
         deviceMount: '/sdcard/opendatakit',
@@ -46,7 +44,7 @@ module.exports = function (grunt) {
         formMount: '/sdcard/odk/forms',
         // The directory where the 'tables' directory containing the tableId
         // directories lives.
-        tablesDir: yeomanConfig.app + '/tables',
+        tablesDir: 'app/tables',
         // Where the templates for a new tableId folder lives. i.e. if you want
         // to add a table, the contents of this directory would be copied to
         // tablesDir/tableId.
@@ -88,7 +86,7 @@ module.exports = function (grunt) {
             }
         },
 
-        yeoman: yeomanConfig,
+        tables: tablesConfig,
         watch: {
             options: {
                 nospawn: true,
@@ -99,24 +97,24 @@ module.exports = function (grunt) {
                     livereload: LIVERELOAD_PORT
                 },
                 files: [
-                    '<%= yeoman.app %>/*.html',
-                    '<%= yeoman.app %>/framework/formDef.json',
-                    '<%= yeoman.app %>/tables/*/{forms,js,html}/**',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '<%= tables.appDir %>/*.html',
+                    '<%= tables.appDir %>/framework/formDef.json',
+                    '<%= tables.appDir %>/tables/*/{forms,js,html}/**',
+                    '<%= tables.appDir %>/styles/{,*/}*.css',
+                    '<%= tables.appDir %>/scripts/{,*/}*.js',
 
-                    '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
-                    'test/spec/**/*.js',
-                    '<%= yeoman.app %>/framework/*',
-                    '<%= yeoman.app %>/framework/graph/**',
-                    '<%= yeoman.app %>/framework/survey/{templates,js}/*',
-                    '<%= yeoman.app %>/framework/tables/js/*',
-                    '<%= yeoman.app %>/assets/**',
-                    '<%= yeoman.app %>/themeGenerator/*'
+                    '<%= tables.appDir %>/scripts/templates/*.{ejs,mustache,hbs}',
+                    'test/tables/**/*.js',
+                    '<%= tables.appDir %>/framework/*',
+                    '<%= tables.appDir %>/framework/graph/**',
+                    '<%= tables.appDir %>/framework/survey/{templates,js}/*',
+                    '<%= tables.appDir %>/framework/tables/js/*',
+                    '<%= tables.appDir %>/assets/**',
+                    '<%= tables.appDir %>/themeGenerator/*'
                 ]
             },
             test: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
+                files: ['<%= tables.appDir %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
                 tasks: ['test']
             }
         },
@@ -180,7 +178,7 @@ module.exports = function (grunt) {
         function() {
             var src = tablesConfig.deviceMount + '/' + tablesConfig.appName +
                 '/' + tablesConfig.outputDebugDir;
-            var dest = yeomanConfig.app + '/' + tablesConfig.outputDebugDir;
+            var dest = tablesConfig.appDir + '/' + tablesConfig.outputDebugDir;
             grunt.log.writeln('adb pull ' + src + ' ' + dest);
             grunt.task.run('exec:adbpull:' + src + ':' + dest);
         });
@@ -192,7 +190,7 @@ module.exports = function (grunt) {
             var dbPath = tablesConfig.deviceDbPath;
             dbPath = dbPath.replace(tablesConfig.appStr, tablesConfig.appName);
             var src = dbPath;
-            var dest = yeomanConfig.app + '/' + tablesConfig.outputDbDir;
+            var dest = tablesConfig.appDir + '/' + tablesConfig.outputDbDir;
             grunt.log.writeln('adb pull ' + src + ' ' + dest);
             grunt.task.run('exec:adbpull:' + src + ':' + dest);
         });
@@ -203,7 +201,7 @@ module.exports = function (grunt) {
         function() {
             var src = tablesConfig.deviceMount + '/' + tablesConfig.appName +
                 '/' + tablesConfig.outputCsvDir;
-            var dest = yeomanConfig.app + '/' + tablesConfig.outputCsvDir;
+            var dest = tablesConfig.appDir + '/' + tablesConfig.outputCsvDir;
             grunt.log.writeln('adb pull ' + src + ' ' + dest);
             grunt.task.run('exec:adbpull:' + src + ':' + dest);
         });
@@ -213,7 +211,7 @@ module.exports = function (grunt) {
         'adbpush-app',
         'Push everything in the app directory to the device',
         function() {
-            var src = yeomanConfig.app;
+            var src = tablesConfig.appDir;
             var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName;
             grunt.log.writeln('adb push ' + src + ' ' + dest);
             grunt.task.run('exec:adbpush:' + src + ':' + dest);
