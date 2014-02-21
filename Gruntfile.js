@@ -3,7 +3,15 @@ var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 8000;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
+    return connect.static(require('path').resolve(dir), {index: 'homeScreen.html'});
+};
+var mountDirectory = function(connect, dir) {
+    return connect.directory(
+        require('path').resolve(dir),
+        {
+            icons: true,
+        }
+    );
 };
 
 // # Globbing
@@ -123,8 +131,8 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             lrSnippet,
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, baseDirForServer)
+                            mountFolder(connect, baseDirForServer),
+                            mountDirectory(connect, baseDirForServer)
                         ];
                     }
                 }
@@ -135,18 +143,9 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             lrSnippet,
-                            mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'test'),
-                            mountFolder(connect, baseDirForServer)
-                        ];
-                    }
-                }
-            },
-            dist: {
-                options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, yeomanConfig.dist)
+                            mountFolder(connect, baseDirForServer),
+                            mountDirectory(connect, baseDirForServer)
                         ];
                     }
                 }
@@ -154,7 +153,8 @@ module.exports = function (grunt) {
         },
         open: {
             server: {
-                path: 'http://localhost:<%= connect.options.port %>'
+                path: 'http://localhost:<%= connect.options.port %>',
+                app: 'Google Chrome'
             }
         },
     });
