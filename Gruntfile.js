@@ -3,7 +3,14 @@ var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 8000;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir), {index: 'homeScreen.html'});
+    return connect.static(
+        require('path').resolve(dir),
+        {
+            // We need to specify a file that will be displayed in place of
+            // index.html. _.html is used because it is unlikely to exist.
+            index: '_.html'
+        }
+    );
 };
 var mountDirectory = function(connect, dir) {
     return connect.directory(
@@ -152,7 +159,19 @@ module.exports = function (grunt) {
         open: {
             server: {
                 path: 'http://localhost:<%= connect.options.port %>',
-                app: 'Google Chrome'
+                app: function() {
+                    var platform = require('os').platform();
+                    // windows: *win*
+                    // mac: darwin
+                    if (platform.search('win') >= 0) {
+                        // Windows expects chrome.
+                        return 'chrome';
+                    } else {
+                        // Mac (and maybe others--add as discovered), expects
+                        // Google Chrome
+                        return 'Google Chrome';
+                    }
+                }
             }
         },
     });
