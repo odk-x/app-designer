@@ -16,7 +16,7 @@
         "values_list": "occupations",
         "name": "primary_occupation",
         "display": {
-          "text": "What is {{name}}'s primary occupation?"
+          "text": "What is {{data.name}}'s primary occupation?"
         },
         "_row_num": 2
       }
@@ -1332,7 +1332,7 @@
             "values_list": "occupations",
             "name": "primary_occupation",
             "display": {
-              "text": "What is {{name}}'s primary occupation?"
+              "text": "What is {{data.name}}'s primary occupation?"
             },
             "_row_num": 2,
             "__rowNum__": 1,

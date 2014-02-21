@@ -15,7 +15,7 @@
         "type": "integer",
         "name": "hours_fuel_purchase",
         "display": {
-          "text": "How many hours did {{name}} spend purchasing fuel?"
+          "text": "How many hours did {{data.name}} spend purchasing fuel?"
         },
         "_row_num": 2
       }
@@ -1238,7 +1238,7 @@
             "type": "integer",
             "name": "hours_fuel_purchase",
             "display": {
-              "text": "How many hours did {{name}} spend purchasing fuel?"
+              "text": "How many hours did {{data.name}} spend purchasing fuel?"
             },
             "_row_num": 2,
             "__rowNum__": 1,

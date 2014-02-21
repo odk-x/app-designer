@@ -16,7 +16,7 @@
         "values_list": "med_location",
         "name": "where_medical_attention",
         "display": {
-          "text": "Where did {{name}} receive or consult medical assistance primarily?"
+          "text": "Where did {{data.name}} receive or consult medical assistance primarily?"
         },
         "_row_num": 2
       }
@@ -1357,7 +1357,7 @@
             "values_list": "med_location",
             "name": "where_medical_attention",
             "display": {
-              "text": "Where did {{name}} receive or consult medical assistance primarily?"
+              "text": "Where did {{data.name}} receive or consult medical assistance primarily?"
             },
             "_row_num": 2,
             "__rowNum__": 1,

@@ -21,7 +21,7 @@
         "values_list": "relation_to_house_head",
         "name": "relation",
         "display": {
-          "text": "What is {{name}}'s relationship to the household head?"
+          "text": "What is {{data.name}}'s relationship to the household head?"
         },
         "required": true,
         "_row_num": 2
@@ -31,7 +31,7 @@
         "values_list": "gender",
         "name": "gender",
         "display": {
-          "text": "What is {{name}}'s sex?"
+          "text": "What is {{data.name}}'s sex?"
         },
         "required": true,
         "_row_num": 3
@@ -41,7 +41,7 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "What is {{name}}'s age?",
+          "text": "What is {{data.name}}'s age?",
           "hint": "in years"
         },
         "required": true,
@@ -60,7 +60,7 @@
         "values_list": "marital_options",
         "name": "marital_status",
         "display": {
-          "text": "Marital status of {{name}}."
+          "text": "Marital status of {{data.name}}."
         },
         "required": "data('age') >= 15",
         "_row_num": 6
@@ -78,7 +78,7 @@
         "type": "integer",
         "name": "months_away",
         "display": {
-          "text": "For how many months during the last 12 months was {{name}} away from the household?",
+          "text": "For how many months during the last 12 months was {{data.name}} away from the household?",
           "hint": "0 if never away, or less than two weeks."
         },
         "constraint": "data('months_away') >= 0 && data('months_away') <= 12",
@@ -94,7 +94,7 @@
         "values_list": "regions",
         "name": "region_born",
         "display": {
-          "text": "In what region was {{name}} born?"
+          "text": "In what region was {{data.name}} born?"
         },
         "_row_num": 11
       },
@@ -108,7 +108,7 @@
         "values_list": "religions",
         "name": "religion",
         "display": {
-          "text": "What is {{name}}'s main religion?"
+          "text": "What is {{data.name}}'s main religion?"
         },
         "_row_num": 13
       },
@@ -1984,7 +1984,7 @@
             "values_list": "relation_to_house_head",
             "name": "relation",
             "display": {
-              "text": "What is {{name}}'s relationship to the household head?"
+              "text": "What is {{data.name}}'s relationship to the household head?"
             },
             "required": true,
             "_row_num": 2,
@@ -1999,7 +1999,7 @@
             "values_list": "gender",
             "name": "gender",
             "display": {
-              "text": "What is {{name}}'s sex?"
+              "text": "What is {{data.name}}'s sex?"
             },
             "required": true,
             "_row_num": 3,
@@ -2014,7 +2014,7 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "What is {{name}}'s age?",
+              "text": "What is {{data.name}}'s age?",
               "hint": "in years"
             },
             "required": true,
@@ -2033,7 +2033,7 @@
             "values_list": "marital_options",
             "name": "marital_status",
             "display": {
-              "text": "Marital status of {{name}}."
+              "text": "Marital status of {{data.name}}."
             },
             "required": "data('age') >= 15",
             "_row_num": 6,
@@ -2047,7 +2047,7 @@
             "type": "integer",
             "name": "months_away",
             "display": {
-              "text": "For how many months during the last 12 months was {{name}} away from the household?",
+              "text": "For how many months during the last 12 months was {{data.name}} away from the household?",
               "hint": "0 if never away, or less than two weeks."
             },
             "constraint": "data('months_away') >= 0 && data('months_away') <= 12",
@@ -2064,7 +2064,7 @@
             "values_list": "regions",
             "name": "region_born",
             "display": {
-              "text": "In what region was {{name}} born?"
+              "text": "In what region was {{data.name}} born?"
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -2078,7 +2078,7 @@
             "values_list": "religions",
             "name": "religion",
             "display": {
-              "text": "What is {{name}}'s main religion?"
+              "text": "What is {{data.name}}'s main religion?"
             },
             "_row_num": 13,
             "__rowNum__": 12,

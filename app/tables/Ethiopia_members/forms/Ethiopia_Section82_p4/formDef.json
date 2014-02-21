@@ -15,7 +15,7 @@
         "type": "integer",
         "name": "hours_spent_cooking",
         "display": {
-          "text": "How many hours did {{name}} spend cooking, baking, or preparing food in the last 7 days?"
+          "text": "How many hours did {{data.name}} spend cooking, baking, or preparing food in the last 7 days?"
         },
         "_row_num": 2
       }
@@ -1238,7 +1238,7 @@
             "type": "integer",
             "name": "hours_spent_cooking",
             "display": {
-              "text": "How many hours did {{name}} spend cooking, baking, or preparing food in the last 7 days?"
+              "text": "How many hours did {{data.name}} spend cooking, baking, or preparing food in the last 7 days?"
             },
             "_row_num": 2,
             "__rowNum__": 1,

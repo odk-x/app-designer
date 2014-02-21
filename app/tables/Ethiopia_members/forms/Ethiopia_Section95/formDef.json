@@ -19,7 +19,7 @@
         "values_list": "self",
         "name": "answering_self_95",
         "display": {
-          "text": "Who is answering for  {{name}}?"
+          "text": "Who is answering for  {{data.name}}?"
         },
         "_row_num": 2
       },
@@ -1462,7 +1462,7 @@
             "values_list": "self",
             "name": "answering_self_95",
             "display": {
-              "text": "Who is answering for  {{name}}?"
+              "text": "Who is answering for  {{data.name}}?"
             },
             "_row_num": 2,
             "__rowNum__": 1,

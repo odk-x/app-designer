@@ -19,7 +19,7 @@
         "values_list": "no_yes",
         "name": "write_language",
         "display": {
-          "text": "Can {{name}} read and write in any language?"
+          "text": "Can {{data.name}} read and write in any language?"
         },
         "_row_num": 2
       },
@@ -28,7 +28,7 @@
         "values_list": "no_yes",
         "name": "attend_school",
         "display": {
-          "text": "Has {{name}} ever attended school?"
+          "text": "Has {{data.name}} ever attended school?"
         },
         "_row_num": 3
       },
@@ -42,7 +42,7 @@
         "values_list": "school_types",
         "name": "school_type",
         "display": {
-          "text": "What kind(s) of school did {{name}} primarily attend?"
+          "text": "What kind(s) of school did {{data.name}} primarily attend?"
         },
         "_row_num": 5
       },
@@ -54,7 +54,7 @@
       {
         "type": "note",
         "display": {
-          "text": "What is the highest grade {{name}} completed?"
+          "text": "What is the highest grade {{data.name}} completed?"
         },
         "_row_num": 7
       },
@@ -104,7 +104,7 @@
         "values_list": "no_yes",
         "name": "currently_school",
         "display": {
-          "text": "Is  {{name}} currently in attending school?"
+          "text": "Is  {{data.name}} currently in attending school?"
         },
         "_row_num": 16
       },
@@ -1556,7 +1556,7 @@
             "values_list": "no_yes",
             "name": "write_language",
             "display": {
-              "text": "Can {{name}} read and write in any language?"
+              "text": "Can {{data.name}} read and write in any language?"
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1570,7 +1570,7 @@
             "values_list": "no_yes",
             "name": "attend_school",
             "display": {
-              "text": "Has {{name}} ever attended school?"
+              "text": "Has {{data.name}} ever attended school?"
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1584,7 +1584,7 @@
             "values_list": "school_types",
             "name": "school_type",
             "display": {
-              "text": "What kind(s) of school did {{name}} primarily attend?"
+              "text": "What kind(s) of school did {{data.name}} primarily attend?"
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1596,7 +1596,7 @@
           {
             "type": "note",
             "display": {
-              "text": "What is the highest grade {{name}} completed?"
+              "text": "What is the highest grade {{data.name}} completed?"
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1638,7 +1638,7 @@
             "values_list": "no_yes",
             "name": "currently_school",
             "display": {
-              "text": "Is  {{name}} currently in attending school?"
+              "text": "Is  {{data.name}} currently in attending school?"
             },
             "_row_num": 16,
             "__rowNum__": 15,

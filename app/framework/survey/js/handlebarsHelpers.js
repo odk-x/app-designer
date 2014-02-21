@@ -16,7 +16,11 @@ Handlebars.registerHelper('localize', function(textOrLangMap) {
         locale = opendatakit.getDefaultFormLocaleValue();
     }
     var str = formulaFunctions.localize(textOrLangMap,locale);
-    return new Handlebars.SafeString(str);
+    var context = this;
+    var template = Handlebars.compile(str);
+    context.data = database.getAllDataValues();
+    context.calculates = formulaFunctions.calculates;
+    return template(context);
 });
 
 Handlebars.registerHelper('metadata', function(fieldName) {

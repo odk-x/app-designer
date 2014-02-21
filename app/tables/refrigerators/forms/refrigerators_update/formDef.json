@@ -4,7 +4,7 @@
       {
         "type": "note",
         "display": {
-          "text": "Refrigerator id: {{refrigerator_id}}"
+          "text": "Refrigerator id: {{data.refrigerator_id}}"
         },
         "_row_num": 2
       },
@@ -325,7 +325,7 @@
           {
             "type": "note",
             "display": {
-              "text": "Refrigerator id: {{refrigerator_id}}"
+              "text": "Refrigerator id: {{data.refrigerator_id}}"
             },
             "_row_num": 2,
             "__rowNum__": 1,
