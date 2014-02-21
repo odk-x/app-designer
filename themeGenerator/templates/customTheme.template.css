@@ -1,3 +1,9 @@
+.iframe-view {
+	width : 600px;
+	height : 600px;
+}
+
+
 /* Form element styles */
 .ui-bar-a{border:1px solid {{button-color}};background:{{button-color}};color:#fff;font-weight:bold;font-family:inherit;}
 .ui-bar-a .ui-link-inherit{color:{{font-color}}}
@@ -24,6 +30,17 @@
 .ui-btn-up-d {border:1px solid {{button-border-color}};background-image:linear-gradient({{button-color}}, {{button-color}});font-weight:bold;color:#fff;}
 .ui-btn-down-d {border:1px solid {{button-border-color}};background-image:linear-gradient({{button-selected-color}}, {{button-selected-color}});font-weight:bold;color:#fff;}
 .ui-checkbox-on, .ui-radio-on {border:1px solid {{button-border-color}};background-image:linear-gradient({{button-selected-color}}, {{button-selected-color}});font-weight:bold;color:#fff;}
+.ui-radio .ui-btn-inner, .ui-checkbox .ui-btn-inner  {height: {{button-height}};}
+.ui-radio .ui-btn-text, .ui-checkbox .ui-btn-text {
+    font-size: {{button-text-size}};
+}
+.ui-radio .ui-btn-text, .ui-checkbox .ui-btn-text {
+	position: absolute;
+	height: {{button-text-size}};
+	top: {{button-offset}};
+	padding-top: inherit;
+}
+
 
 /* Navbar styles */
 .ui-bar-c{border:1px solid {{navbar-color}} ;background:{{navbar-color}};color:{{navbar-font-color}};font-weight:bold;font-family:inherit;}

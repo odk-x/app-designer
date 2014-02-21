@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=us-ascii">
+<!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="../app/framework/libs/jquery.1.10.2.js"></script>
+<script type="text/javascript" src="../app/framework/survey/js/shim.js"></script>
+<link  rel='stylesheet' type='text/css'href='css/animate.css' />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script type="text/javascript">
+//<![CDATA[
+  var pageStack = [];
+  function resizeIframe(value) {
+        var parts = value.substring(1).split('x');
+        var $el = $('#screen');
+        $el.width(parseInt(parts[0]));
+        $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
+        var cw = document.getElementById('screen').contentWindow;
+        cw.location.reload();
+  }
+  function loadPage(value) {
+        var cw = document.getElementById('screen').contentWindow;
+		cw.history.go(value);
+		cw.location = value;
+		cw.location.src = cw.location.src;
+		setTimeout(function() {
+			var cw = document.getElementById('screen').contentWindow;
+			cw.location.reload();
+		}, 100);
+  }
+  function purge() {
+	var jsonString = shim.getDatabaseSettings();
+	var settings = JSON.parse(jsonString);
+	var w3cDatabase = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
+	  // create the database...
+	w3cDatabase.transaction(function(transaction) {
+		transaction.executeSql('drop table if exists _uploads');
+		transaction.executeSql('drop table if exists _formDefs');
+		transaction.executeSql('drop table if exists _column_definitions');
+		transaction.executeSql('drop table if exists _key_value_store_default');
+		transaction.executeSql('drop table if exists _key_value_store_active');
+		transaction.executeSql('drop table if exists _key_value_store_server');
+		transaction.executeSql('drop table if exists _key_value_store_sync');
+		transaction.executeSql('select _db_table_name from _table_definitions', null, function(transaction, result) {
+			var len = result.rows.length;
+			for ( var i = 0 ; i < len ; ++i ) {
+				var row = result.rows.item(0);
+				var tableName = row['_db_table_name'];
+				transaction.executeSql('drop table if exists ' + tableName);
+			}
+			transaction.executeSql('drop table if exists _table_definitions');
+		});
+	}, function(error) {
+		alert(String(error));
+        var cw = document.getElementById('screen').contentWindow;
+        cw.location.reload();
+	}, function() {
+		alert('Database Tables Purged');
+        var cw = document.getElementById('screen').contentWindow;
+        cw.location.reload();
+	});
+  }
+  //]]>   
+  </script>
+  <title>OpenDataKit Common Javascript Framework Launcher</title>
+</head>
+
+<body class="fullembedded">
+  <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
+	<div class="flowleft">
+	  <p>Launch page:</p>
+	  <table>
+		<tr>
+		  <td><input type="radio" name="page" id="survey" value=
+		  "framework/index.html?" onclick="loadPage('../app/framework/index.html?')" checked
+		  /></td>
+
+		  <td><label for="survey">ODK Survey Framework Page</label></td>
+		</tr>
+
+		<tr>
+		  <td><input type="radio" name="page" id="graph" value=
+		  "framework/optionspane.html" onclick=
+		  "loadPage('../app/framework/optionspane.html')"/></td>
+
+		  <td><label for="graph">ODK Tables Graph Page</label></td>
+		</tr>
+
+		<tr>
+		  <td><input type="radio" name="page" id="surveyTest" value=
+		  "framework/surveyTest.html" onclick=
+		  "loadPage('../app/framework/surveyTest.html')"/></td>
+
+		  <td><label for="surveyTest">ODK Survey Advancing-Through-Example Test Page
+		  (Silly)</label></td>
+		</tr>
+
+		<tr>
+		  <td><input type="radio" name="page" id="tablesTest" value=
+		  "../test/index.html" onclick="loadPage('../test/index.html')"/></td>
+
+		  <td><label for="tablesTest">ODK Tables API Test Page</label></td>
+		</tr>
+	  </table>
+	</div>
+	<div class="flowright">
+	  <p>Device Dimension</p>
+
+	  <!-- 3 across -->
+	  <table >
+		<tr>
+		  <td><input type="radio" name="size" id="w480x854" value="w480x854" onclick=
+		  "resizeIframe('w480x854')" checked></td>
+
+		  <td><label for="w480x854">480 x 854 pixels (Droid)</label></td>
+
+		  <td><input type="radio" name="size" id="w480x800" value="w480x800" onclick=
+		  "resizeIframe('w480x800')"></td>
+
+		  <td><label for="w480x800">480 x 800 pixels (Nexus S, Nexus
+		  One)</label></td>
+
+		  <td><input type="radio" name="size" id="w720x1280" value="w720x1280"
+		  onclick="resizeIframe('w720x1280')"></td>
+
+		  <td><label for="w720x1280">720 x 1280 pixels (Galaxy Nexus)</label></td>
+		</tr>
+
+		<tr>
+		  <td><input type="radio" name="size" id="w768x1280" value="w768x1280"
+		  onclick="resizeIframe('w768x1280')"></td>
+
+		  <td><label for="w768x1280">768 x 1280 pixels (Nexus 4)</label></td>
+
+		  <td><input type="radio" name="size" id="w800x1280" value="w800x1280"
+		  onclick="resizeIframe('w800x1280')"></td>
+
+		  <td><label for="w800x1280">800 x 1280 pixels (Nexus 7)</label></td>
+
+		  <td><input type="radio" name="size" id="w1024x600" value="w1024x600"
+		  onclick="resizeIframe('w1024x600')"></td>
+
+		  <td><label for="w1024x600">1024 x 600 pixels (7" Tablet)</label></td>
+		</tr>
+
+		<tr>
+		  <td><input type="radio" name="size" id="w1280x800" value="w1280x800"
+		  onclick="resizeIframe('w1280x800')"></td>
+
+		  <td><label for="w1280x800">1280 x 800 pixels (10.1" Tablet)</label></td>
+
+		  <td><input type="radio" name="size" id="w2560x1600" value="w2560x1600"
+		  onclick="resizeIframe('w2560x1600')"></td>
+
+		  <td><label for="w2560x1600">2560 x 1600 pixels (Nexus 10)</label></td>
+		</tr>
+	  </table>
+	</div>
+	<div class="flowright">
+	  <button class="pbutton" name="purge" id="purge" onclick="purge()" type="button">Purge Database</button>
+	</div>
+	<div class="flowcancel">
+	  <p><font color="blue">NOTE: vertical scrollbars incorrectly shrink the visible
+	width w.r.t. the behavior on an Android device</font></p>
+
+	  <div class="bland">
+	    <iframe id="screen" src="../app/framework/index.html?" name="screen"/>
+	  </div>
+	</div>
+  </div>
+</body>
+</html>

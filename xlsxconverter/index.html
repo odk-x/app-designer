@@ -1,10 +1,18 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OpenDataKit XLSXConverter</title>
+<!-- Author: mitchellsundt@gmail.com -->
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<title>Generate Stub XForm for Upload to ODK Aggregate</title>
+<!-- Conversion script for generating ODK1 Aggregate XForms definitions that 
+will allow ODK Survey to upload submissions to the ODK1 Aggregate server
+data processing path.  This enables forward migration of the device application
+to ODK Survey for flat forms without repeat groups. 
+
+To use, place your formDef.json files in separate directories ending in '-media'
+The script will search for formDef.json files in each such named directory, open
+that file, parse it, and synthesize a directoryName.xml file. The resulting 
+processed files can be uploaded using FormUploader into ODK1 Aggregate.
+-->
 <style type="text/css">
 /*<![CDATA[*/
 body {
@@ -12,15 +20,6 @@ body {
     margin: 0;
     font-size: 15pt;
     font-family: "Times New Roman";
-}
-.fullheight {
-	position:fixed !important;
-	position:absolute;
-	top:0;
-	right:0;
-	bottom:0;
-	left:0;
-	overflow: auto;
 }
 #drop{
     background-color: white;
@@ -39,10 +38,9 @@ body {
     padding: 1em;
 }
 #out{
-	overflow: auto;
-	width: 99.5%;
-	margin: 0 auto;
-	max-height:50%;
+    clear: both;
+    height: 500px;
+    width: 100%;
 }
 #save {
     float: right;
@@ -62,14 +60,8 @@ body {
     margin-bottom: 1em;
     padding: .5em;
 }
-.bottompanel.panel {
-	border-bottom: 0px;
-}
 .panel {
     background-color: #f5f5f5;
-    border: 1px solid lightgray;
-	margin: 0 auto;
-	height: inherit;
     padding: 1em;
     padding-top: .5em;
     padding-bottom: .5em;
@@ -142,9 +134,9 @@ function handleSave(e) {
     document.body.appendChild(downloader);
 }
 
-var drop = document.getElementById('drop');
 //TODO: Test multiple forms
 function handleDrop(e) {
+    var drop = document.getElementById('drop');
     document.getElementById('browsefile').value = '';
     e.stopPropagation();
     e.preventDefault();
@@ -159,9 +151,9 @@ function handleDrop(e) {
     }
 }
 
-var browse = document.getElementById("browsefile");
 var wasClicked = false;
 function handleFileChooserClick(e) {
+	var browse = document.getElementById("browsefile");
 
     // reset the value so that re-selecting the file will trigger a change event...
     browse.value = '';
@@ -193,6 +185,8 @@ function handleFileSelect(e) {
     }
 }
 function enableActions() {
+	var browse = document.getElementById("browsefile");
+    var drop = document.getElementById('drop');
     browse.disabled = false;
     drop.disabled = false;
 }
@@ -249,6 +243,10 @@ function makeReader(f) {
             }
         }
     };
+	
+	var browse = document.getElementById("browsefile");
+	var drop = document.getElementById('drop');
+
     try {
         browse.disabled = true;
         drop.disabled = true;
@@ -266,33 +264,34 @@ function handleDragover(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'copy';
 }
-browse.addEventListener('click', handleFileChooserClick, false);
-browse.addEventListener('change', handleFileSelect, false);
-drop.addEventListener('dragover', handleDragover, false);
-drop.addEventListener('drop', handleDrop, false);
-browse.disabled = false;
+
+
+window.onload = function() {
+	var browse = document.getElementById("browsefile");
+	var drop = document.getElementById('drop');
+	browse.addEventListener('click', handleFileChooserClick, false);
+	browse.addEventListener('change', handleFileSelect, false);
+	drop.addEventListener('dragover', handleDragover, false);
+	drop.addEventListener('drop', handleDrop, false);
+	browse.disabled = false;
+}
 //]]>
 </script>
 </head>
 <body>
-<div class="fullheight">
-<noscript>This page requires javascript and has only been tested in a Chrome browser</noscript>
-<div class="panel">
+  <div class="panel">
     <div id="drop">Drop an XLSX file here to convert to JSON.</div>
-</div>
-<div id="browse">
+  </div>
+  <div id="browse">
     Select a file to convert to JSON<input class="input" type="file" id="browsefile" disabled="true"/>
-</div>
-<div>
-<div id="errors"></div>
-<div id="warnings"></div>
-</div>
-<div class="panel bottompanel">
+  </div>
+  <div id="errors"></div>
+  <div id="warnings"></div>
+
+  <div class="panel">
     <button onclick="handleSave();" id="save">Save</button>
     <p>Output:</p>
-	<textarea id="out" rows="40"></textarea>
-</div>
-</div>
-</div>
+    <textarea id="out"></textarea>
+  </div>
 </body>
 </html>
