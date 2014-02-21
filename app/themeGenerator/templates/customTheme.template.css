@@ -23,7 +23,7 @@
 .ui-btn-up-a,.ui-btn-hover-a,.ui-btn-down-a{font-family:inherit;text-decoration:none}
 .ui-btn-up-d {border:1px solid {{button-border-color}};background-image:linear-gradient({{button-color}}, {{button-color}});font-weight:bold;color:#fff;}
 .ui-btn-down-d {border:1px solid {{button-border-color}};background-image:linear-gradient({{button-selected-color}}, {{button-selected-color}});font-weight:bold;color:#fff;}
-
+.ui-checkbox-on, .ui-radio-on {border:1px solid {{button-border-color}};background-image:linear-gradient({{button-selected-color}}, {{button-selected-color}});font-weight:bold;color:#fff;}
 
 /* Navbar styles */
 .ui-bar-c{border:1px solid {{navbar-color}} ;background:{{navbar-color}};color:{{navbar-font-color}};font-weight:bold;font-family:inherit;}
