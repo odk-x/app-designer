@@ -1,6 +1,22 @@
-<style>
+<html>
+<head>
+<!-- Author: mitchellsundt@gmail.com -->
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<title>Generate Stub XForm for Upload to ODK Aggregate</title>
+<!-- Conversion script for generating ODK1 Aggregate XForms definitions that 
+will allow ODK Survey to upload submissions to the ODK1 Aggregate server
+data processing path.  This enables forward migration of the device application
+to ODK Survey for flat forms without repeat groups. 
+
+To use, place your formDef.json files in separate directories ending in '-media'
+The script will search for formDef.json files in each such named directory, open
+that file, parse it, and synthesize a directoryName.xml file. The resulting 
+processed files can be uploaded using FormUploader into ODK1 Aggregate.
+-->
+<style type="text/css">
+/*<![CDATA[*/
 body {
-    background-color: black;
+    background-color: #f5f5f5;
     margin: 0;
     font-size: 15pt;
     font-family: "Times New Roman";
@@ -46,7 +62,6 @@ body {
 }
 .panel {
     background-color: #f5f5f5;
-    border: 1px solid lightgray;
     padding: 1em;
     padding-top: .5em;
     padding-bottom: .5em;
@@ -54,31 +69,15 @@ body {
 .input {
     padding-left: .5em;
 }
-
+/*]]>*/
 </style>
-<div class="panel">
-    <div id="drop">Drop an XLSX file here to convert to JSON.</div>
-</div>
-<div id="browse">
-    Select a file to convert to JSON<input class="input" type="file" id="browsefile" disabled="true"/>
-</div>
-<div id="errors"></div>
-<div id="warnings"></div>
-
-<div class="panel">
-    <button onclick="handleSave();" id="save">Save</button>
-    <p>Output:</p>
-    <textarea id="out"></textarea>
-</div>
-
-<script src="js-xlsx/jszip.js"></script>
-<script src="js-xlsx/xlsx.js"></script>
-<script src="XRegExp-All-3.0.0-pre-2013-08-27.js"></script>
-<script src="underscore.js"></script>
-<script src="XLSXConverter.js"></script>
-<script>
-
-
+<script type="text/javascript" src="js-xlsx/jszip.js"></script>
+<script type="text/javascript" src="js-xlsx/xlsx.js"></script>
+<script type="text/javascript" src="XRegExp-All-3.0.0-pre-2013-08-27.js"></script>
+<script type="text/javascript" src="underscore.js"></script>
+<script type="text/javascript" src="XLSXConverter.js"></script>
+<script type="text/javascript">
+//<![CDATA[
 function removeEmptyStrings(rObjArr){
     var outArr = [];
     _.each(rObjArr, function(row){
@@ -135,9 +134,9 @@ function handleSave(e) {
     document.body.appendChild(downloader);
 }
 
-var drop = document.getElementById('drop');
 //TODO: Test multiple forms
 function handleDrop(e) {
+    var drop = document.getElementById('drop');
     document.getElementById('browsefile').value = '';
     e.stopPropagation();
     e.preventDefault();
@@ -152,9 +151,9 @@ function handleDrop(e) {
     }
 }
 
-var browse = document.getElementById("browsefile");
 var wasClicked = false;
 function handleFileChooserClick(e) {
+	var browse = document.getElementById("browsefile");
 
     // reset the value so that re-selecting the file will trigger a change event...
     browse.value = '';
@@ -186,6 +185,8 @@ function handleFileSelect(e) {
     }
 }
 function enableActions() {
+	var browse = document.getElementById("browsefile");
+    var drop = document.getElementById('drop');
     browse.disabled = false;
     drop.disabled = false;
 }
@@ -242,6 +243,10 @@ function makeReader(f) {
             }
         }
     };
+	
+	var browse = document.getElementById("browsefile");
+	var drop = document.getElementById('drop');
+
     try {
         browse.disabled = true;
         drop.disabled = true;
@@ -259,9 +264,34 @@ function handleDragover(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'copy';
 }
-browse.addEventListener('click', handleFileChooserClick, false);
-browse.addEventListener('change', handleFileSelect, false);
-drop.addEventListener('dragover', handleDragover, false);
-drop.addEventListener('drop', handleDrop, false);
-browse.disabled = false;
+
+
+window.onload = function() {
+	var browse = document.getElementById("browsefile");
+	var drop = document.getElementById('drop');
+	browse.addEventListener('click', handleFileChooserClick, false);
+	browse.addEventListener('change', handleFileSelect, false);
+	drop.addEventListener('dragover', handleDragover, false);
+	drop.addEventListener('drop', handleDrop, false);
+	browse.disabled = false;
+}
+//]]>
 </script>
+</head>
+<body>
+  <div class="panel">
+    <div id="drop">Drop an XLSX file here to convert to JSON.</div>
+  </div>
+  <div id="browse">
+    Select a file to convert to JSON<input class="input" type="file" id="browsefile" disabled="true"/>
+  </div>
+  <div id="errors"></div>
+  <div id="warnings"></div>
+
+  <div class="panel">
+    <button onclick="handleSave();" id="save">Save</button>
+    <p>Output:</p>
+    <textarea id="out"></textarea>
+  </div>
+</body>
+</html>
