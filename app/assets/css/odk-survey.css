@@ -1,4 +1,5 @@
 body {
+	overflow: auto;
 	min-width: 100%;
 	min-height: 100%;
 	width: 100%;
@@ -153,4 +154,7 @@ It may be best to set the view-port scale instead of messing with the jQm styles
 }
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label {
     font-size: 1em;
+}
+.ui-page {
+	min-height: 100%;
 }

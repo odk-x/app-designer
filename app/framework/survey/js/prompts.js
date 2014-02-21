@@ -684,10 +684,11 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedFormId();
+		var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
-                             extras: { url: shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) }}));
+                             extras: { url: expandedUrl }}));
         ctxt.log('D','linked_table.openInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             ctxt.log('W','linked_table.openInstance',"Should be OK got >" + outcome + "<");
@@ -770,11 +771,11 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                 auxHash = '&' + auxHash;
             }
         }
-        var fullUrl = shim.getBaseUrl() + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
+		var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash,
-                             extras: { url: fullUrl }}));
+                             extras: { url: expandedUrl }}));
         ctxt.log('D','linked_table.addInstance', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             ctxt.log('W','linked_table.addInstance',"Should be OK got >" + outcome + "<");
@@ -808,12 +809,19 @@ promptTypes.external_link = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         var fullUrl = that.url();
+		var expandedUrl;
+		if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
+			expandedUrl = fullUrl;
+		} else {
+			expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
+		}
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'openLink', that.launchAction, 
-            JSON.stringify({ uri: fullUrl }));
+            JSON.stringify({ uri: fullUrl,
+				extras: { url: expandedUrl }}));
         ctxt.log('D','external_link.openLink', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             ctxt.log('W','external_link.openLink',"Should be OK got >" + outcome + "<");

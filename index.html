@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=us-ascii">
+<!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="app/framework/libs/jquery.1.10.2.js"></script>
+<link rel='stylesheet' type='text/css'href='devEnv/css/animate.css' />
+<link rel="stylesheet" type="text/css" href="devEnv/css/style.css" />
+  <script type="text/javascript">
+//<![CDATA[
+  function loadPage(value) {
+        var cw = document.getElementById('screen').contentWindow;
+        cw.location = value;
+  }
+  //]]>   
+  </script>
+<title>OpenDataKit Development Environment Homepage</title>
+</head>
+
+<body class="absolute">
+  <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
+  <ul class="tabs">
+    <li>
+      <input type="radio" name="tabs" checked id="tab1"/>
+	  <label for="tab1">Preview</label>
+        <iframe class="content-tab" src="devEnv/tab1.html" frameborder="0" ></iframe>
+    </li>
+    <li>
+      <input type="radio" name="tabs" id="tab2"/><label for="tab2">Customize</label>
+      <iframe class="content-tab" src="devEnv/tab2.html" frameborder="0" ></iframe>
+    </li>
+    <li>
+      <input type="radio" name="tabs" id="tab3"/><label for="tab3">XLSX Converter</label>
+	  <iframe class="content-tab" src="devEnv/tab3.html" frameborder="0" ></iframe>
+      </div>
+    </li>
+    <li>
+      <input type="radio" name="tabs" id="tab4"/><label for="tab4">Legacy XML</label>
+	  <iframe class="content-tab" src="devEnv/tab4.html" frameborder="0" ></iframe>
+      </div>
+    </li>
+    <li>
+      <input type="radio" name="tabs" id="tab5"/><label for="tab5">File Browser</label>
+	  <iframe class="content-tab" src="devEnv/tab5.html" frameborder="0" ></iframe>
+      </div>
+    </li>
+  </ul>
+  <script type="text/javascript">
+//<![CDATA[
+	if ( !window.openDatabase ) {
+		document.body.innerHTML="<p><font color=\"red\">You must use a Chrome or Safari browser (note: this is tested only on Chrome)</font></p>";
+	}
+  //]]>   
+  </script>
+  </body>
+</html>
