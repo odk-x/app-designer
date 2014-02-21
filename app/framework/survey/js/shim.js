@@ -336,7 +336,7 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/tests/venice.jpg",' + 
+                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/venice.jpg",' + 
                                                     '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
@@ -344,7 +344,7 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/tests/bali.3gp",' + 
+                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/bali.3gp",' + 
                                                     '"contentType": "video/3gp" } }' );
             }, 100);
             return "OK";
@@ -352,7 +352,7 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/tests/raven.wav",' + 
+                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/raven.wav",' + 
                                                     '"contentType": "audio/wav" } }' );
             }, 100);
             return "OK";
@@ -360,7 +360,7 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseImageActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/tests/venice.jpg",' + 
+                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/venice.jpg",' + 
                                                     '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
@@ -368,7 +368,7 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/tests/bali.3gp",' + 
+                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/bali.3gp",' + 
                                                     '"contentType": "video/3gp" } }' );
             }, 100);
             return "OK";
@@ -376,7 +376,7 @@ window.shim = window.shim || {
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity' ) {
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/tests/raven.wav",' + 
+                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/raven.wav",' + 
                                                     '"contentType": "audio/wav" } }' );
             }, 100);
             return "OK";

@@ -684,7 +684,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedFormId();
-		var expandedUrl = platInfo.baseUri + 'framework' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
+		var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
@@ -771,7 +771,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                 auxHash = '&' + auxHash;
             }
         }
-		var expandedUrl = platInfo.baseUri + 'framework' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
+		var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash,
@@ -812,8 +812,8 @@ promptTypes.external_link = promptTypes.base.extend({
 		var expandedUrl;
 		if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
 			expandedUrl = fullUrl;
-		} {
-			expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework' + fullUrl;
+		} else {
+			expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
 		}
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
