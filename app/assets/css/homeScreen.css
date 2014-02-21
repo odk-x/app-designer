@@ -11,13 +11,11 @@ html, body {
 }
 
 body {
-    /*background: url(../img/teaBackground.jpg);*/
     font-family: arial;
     margin: 0;
     text-align: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /*background-attachment: fixed;*/
     background-position: center;
 }
 
