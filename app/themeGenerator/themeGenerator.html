@@ -12,6 +12,14 @@
     <script src="./themeGenerator.js"></script>
   </head>
   <body>
+  <div id="iframe-size">
+    <label>Select Screen Size:</label>
+    <select id="select-screen-size" class="update-styles" name="select-screen-size">
+    <option value="Google_Nexus_5"> Google Nexus 5 </option>
+    <option value = "Samsung_Galaxy_S4"> Samsung Galaxy S4 </option>
+    <option value = "Google_Nexus_7"> Google Nexus 7 </option>
+    </select>
+  </div>
   <div id="toolbar" class="accordion ui-widget-content">
     <h3>General</h3>
     <div class="toobar-section">
@@ -60,7 +68,7 @@
         <div class="pull-right">
           <input id='button-selected-color' type="text" class="colorpicker update-styles" name="button-selected-color" value="#f4dd29"></input>
         </div>
-      </div>
+      </div>  
       <div class="nowrap">
         <label for="button-border-color">Border color</label>
         <div class="pull-right">
@@ -71,6 +79,18 @@
         <label for="button-radius">Rounded Edges</label>
         <div class="pull-right">
           <input id='button-radius' type="text" class="numberslider update-styles" name="button-radius" value="6px"></input>
+        </div>  
+      </div>
+      <div class="nowrap">
+        <label for="button-height">Button Height</label>
+        <div class="pull-right">
+          <input id='button-height' type="text" class="numberslider update-styles" name="button-height" value="50px"></input>
+        </div>  
+      </div>
+      <div class="nowrap">
+        <label for="button-height">Button Text Size</label>
+        <div class="pull-right">
+          <input id='button-text-size' type="text" class="numberslider update-styles" name="button-text-size" value="16px"></input>
         </div>  
       </div>
     </div>
@@ -105,8 +125,8 @@
   </div>
       
      <iframe id="odk_view" 
-      src='http://localhost:8000/app/framework/?#formPath=../tables/exampleForm/forms/exampleForm/&screenPath=initial/6&refId=uuid%3A5017f58b-1898-4726-9201-e9bd5090d004'
-      style="width: 800px; height: 600px;">
+      src='http://localhost:8000/app/framework/index.html?#formPath=../tables/exampleForm/forms/exampleForm/&screenPath=initial/6&refId=uuid%3Af15ff590-56b1-481f-99a4-0a052454ab54' class="iframe-view"
+      >
     </iframe>
   </body>
 </html>

@@ -4,7 +4,7 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-connect": "~0.6.0",
     "grunt-contrib-watch": "~0.5.2",
     "grunt-open": "~0.2.0",
     "load-grunt-tasks": "~0.1.0",
