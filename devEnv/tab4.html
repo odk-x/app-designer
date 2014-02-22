@@ -11,14 +11,14 @@
 //<![CDATA[
   function resizeIframe(value) {
         var parts = value.substring(1).split('x');
-        var $el = $('#screen');
+        var $el = $('#convertlegacyscreen');
         $el.width(parseInt(parts[0]));
         $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('convertlegacyscreen').contentWindow;
         cw.location.reload();
   }
   function loadPage(value) {
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('convertlegacyscreen').contentWindow;
         cw.location = value;
   }
   //]]>   
@@ -29,6 +29,6 @@
 <body  class="fullembedded">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
   <p>Process your <code>formDef.json</code> file into an XForms XML form definition file for defining the data model in ODK Aggregate to which your survey will be published.</p>
-  <iframe class="bigviewport" src="../convertToLegacy/index.html"/>
+  <iframe id="convertlegacyscreen" class="bigviewport" src="../convertToLegacy/index.html"/>
 </body>
 </html>

@@ -32,19 +32,30 @@
 	float: none;
 	clear: both;
 }
+.flowcenter {
+	text-align: center;
+	margin: 0 auto;
+}
 .flowleft {
 	float: left;
 }
+.backbutton {
+	display: block;
+	float: right;
+	font-size: 16px;
+	padding: 16px;
+	margin-bottom: 10px;
+}
 .pbutton {
+	display: inline-block;
 	font-size: 24px;
 	margin-top: 36px;
-	margin-right: 100px;
 	padding: 24px;
 }
 .flowright {
 	float: right;
 }
-#screen {
+.resizeablescreen {
 	margin: 0 auto;
 	width: 480px;
 	height: 855px;
@@ -55,8 +66,13 @@
 	border-bottom-width: 0px;
 	border-left-width: 0px;
 }
-.bigviewport {
+
+.backviewport {
 	margin: 0 auto;
+	display: block;
+}
+
+.bigviewport {
 	width: 1024px;
 	height: 1000px;
 	display: block;
@@ -68,8 +84,8 @@
 }
 .themeviewport {
 	margin: 0 auto;
-	width: 1280px;
-	height: 900px;
+	width: 1068px;
+	height: 1000px;
 	display: block;
 	background-color: white;
 	border-top-width: 0px;

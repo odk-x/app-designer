@@ -13,19 +13,19 @@
   var pageStack = [];
   function resizeIframe(value) {
         var parts = value.substring(1).split('x');
-        var $el = $('#screen');
+        var $el = $('#previewscreen');
         $el.width(parseInt(parts[0]));
         $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('previewscreen').contentWindow;
         cw.location.reload();
   }
   function loadPage(value) {
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('previewscreen').contentWindow;
 		cw.history.go(value);
 		cw.location = value;
 		cw.location.src = cw.location.src;
 		setTimeout(function() {
-			var cw = document.getElementById('screen').contentWindow;
+			var cw = document.getElementById('previewscreen').contentWindow;
 			cw.location.reload();
 		}, 100);
   }
@@ -53,13 +53,17 @@
 		});
 	}, function(error) {
 		alert(String(error));
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('previewscreen').contentWindow;
         cw.location.reload();
 	}, function() {
 		alert('Database Tables Purged');
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('previewscreen').contentWindow;
         cw.location.reload();
 	});
+  }
+  function backbutton() {
+        var cw = document.getElementById('previewscreen').contentWindow;
+        cw.history.back();
   }
   //]]>   
   </script>
@@ -92,7 +96,7 @@
 		  "framework/surveyTest.html" onclick=
 		  "loadPage('../app/framework/surveyTest.html')"/></td>
 
-		  <td><label for="surveyTest">ODK Survey Advancing-Through-Example Test Page
+		  <td><label for="surveyTest">ODK Survey Stepping Test Page
 		  (Silly)</label></td>
 		</tr>
 
@@ -107,7 +111,7 @@
 	<div class="flowright">
 	  <p>Device Dimension</p>
 
-	  <!-- 3 across -->
+	  <!-- 2 across -->
 	  <table >
 		<tr>
 		  <td><input type="radio" name="size" id="w480x854" value="w480x854" onclick=
@@ -120,19 +124,21 @@
 
 		  <td><label for="w480x800">480 x 800 pixels (Nexus S, Nexus
 		  One)</label></td>
+		</tr>
 
+		<tr>
 		  <td><input type="radio" name="size" id="w720x1280" value="w720x1280"
 		  onclick="resizeIframe('w720x1280')"></td>
 
 		  <td><label for="w720x1280">720 x 1280 pixels (Galaxy Nexus)</label></td>
-		</tr>
 
-		<tr>
 		  <td><input type="radio" name="size" id="w768x1280" value="w768x1280"
 		  onclick="resizeIframe('w768x1280')"></td>
 
 		  <td><label for="w768x1280">768 x 1280 pixels (Nexus 4)</label></td>
-
+		</tr>
+		
+		<tr>
 		  <td><input type="radio" name="size" id="w800x1280" value="w800x1280"
 		  onclick="resizeIframe('w800x1280')"></td>
 
@@ -157,7 +163,7 @@
 		</tr>
 	  </table>
 	</div>
-	<div class="flowright">
+	<div class="flowcenter">
 	  <button class="pbutton" name="purge" id="purge" onclick="purge()" type="button">Purge Database</button>
 	</div>
 	<div class="flowcancel">
@@ -165,7 +171,10 @@
 	width w.r.t. the behavior on an Android device</font></p>
 
 	  <div class="bland">
-	    <iframe id="screen" src="../app/framework/index.html?" name="screen"/>
+		<div class="backviewport">
+		  <button class="backbutton" name="backbutton" id="backbutton" onclick="backbutton()" type="button">Back Button</button>
+		  <iframe class="resizeablescreen" id="previewscreen" src="../app/framework/index.html?" name="screen" />
+		</div>
 	  </div>
 	</div>
   </div>

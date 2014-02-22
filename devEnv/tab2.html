@@ -11,14 +11,14 @@
 //<![CDATA[
   function resizeIframe(value) {
         var parts = value.substring(1).split('x');
-        var $el = $('#screen');
+        var $el = $('#themescreen');
         $el.width(parseInt(parts[0]));
         $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('themescreen').contentWindow;
         cw.location.reload();
   }
   function loadPage(value) {
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('themescreen').contentWindow;
         cw.location = value;
   }
   //]]>   
@@ -32,6 +32,6 @@
 
   <p>This tool generates custom CSS style and theme files for giving your forms a
 customized appearance.  Save them in the folder that contains your <code>formDef.json</code>.</p>
-  <iframe class="themeviewport" src="../themeGenerator/themeGenerator.html"/>
+  <iframe id="themescreen" class="themeviewport" src="../themeGenerator/themeGenerator.html"/>
 </body>
 </html>

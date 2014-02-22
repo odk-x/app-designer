@@ -11,15 +11,19 @@
 //<![CDATA[
   function resizeIframe(value) {
         var parts = value.substring(1).split('x');
-        var $el = $('#screen');
+        var $el = $('#filescreen');
         $el.width(parseInt(parts[0]));
         $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('filescreen').contentWindow;
         cw.location.reload();
   }
   function loadPage(value) {
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('filescreen').contentWindow;
         cw.location = value;
+  }
+  function backbutton() {
+        var cw = document.getElementById('filescreen').contentWindow;
+        cw.history.back();
   }
   //]]>   
   </script>
@@ -29,6 +33,9 @@
 <body  class="fullembedded">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
   <p>View and open files that would be pushed to your Android device.</p>
-  <iframe class="bigviewport" src="../app/"/>
+  <div class="backviewport">
+  <button class="backbutton" name="backbutton" id="backbutton" onclick="backbutton()" type="button">Back Button</button>
+  <iframe id="filescreen" class="bigviewport" src="../app/"/>
+  </div>
 </body>
 </html>

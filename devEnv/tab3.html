@@ -11,14 +11,14 @@
 //<![CDATA[
   function resizeIframe(value) {
         var parts = value.substring(1).split('x');
-        var $el = $('#screen');
+        var $el = $('#xlsxscreen');
         $el.width(parseInt(parts[0]));
         $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('xlsxscreen').contentWindow;
         cw.location.reload();
   }
   function loadPage(value) {
-        var cw = document.getElementById('screen').contentWindow;
+        var cw = document.getElementById('xlsxscreen').contentWindow;
         cw.location = value;
   }
   //]]>   
@@ -29,6 +29,6 @@
 <body  class="fullembedded">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
   <p>Process your XLSX file into a formDef.json file.</p>
-  <iframe class="bigviewport" src="../xlsxconverter/index.html"/>
+  <iframe id="xlsxscreen" class="bigviewport" src="../xlsxconverter/index.html"/>
 </body>
 </html>
