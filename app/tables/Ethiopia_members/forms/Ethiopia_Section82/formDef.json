@@ -15,7 +15,7 @@
         "type": "integer",
         "name": "hours_collecting",
         "display": {
-          "text": "How many hours did {{name}} spend collecting or preparing fuel in the last 7 days?",
+          "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?",
           "hint": "(Hours)"
         },
         "_row_num": 2
@@ -24,7 +24,7 @@
         "type": "integer",
         "name": "hours_fuel_materials",
         "display": {
-          "text": "How many hours in the last 7 days did {{name}} collect or prepare fuel materials specifically for household cooking use?",
+          "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?",
           "hint": "(Hours)"
         },
         "_row_num": 3
@@ -33,7 +33,7 @@
         "type": "integer",
         "name": "hours_fuel_sale",
         "display": {
-          "text": "How many hours in the last 7 days did {{name}} collect, transport, or prepare fuel materials for sale and not for household use?",
+          "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?",
           "hint": "(Hours)"
         },
         "_row_num": 4
@@ -1265,7 +1265,7 @@
             "type": "integer",
             "name": "hours_collecting",
             "display": {
-              "text": "How many hours did {{name}} spend collecting or preparing fuel in the last 7 days?",
+              "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?",
               "hint": "(Hours)"
             },
             "_row_num": 2,
@@ -1279,7 +1279,7 @@
             "type": "integer",
             "name": "hours_fuel_materials",
             "display": {
-              "text": "How many hours in the last 7 days did {{name}} collect or prepare fuel materials specifically for household cooking use?",
+              "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?",
               "hint": "(Hours)"
             },
             "_row_num": 3,
@@ -1293,7 +1293,7 @@
             "type": "integer",
             "name": "hours_fuel_sale",
             "display": {
-              "text": "How many hours in the last 7 days did {{name}} collect, transport, or prepare fuel materials for sale and not for household use?",
+              "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?",
               "hint": "(Hours)"
             },
             "_row_num": 4,

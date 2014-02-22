@@ -557,7 +557,7 @@
             "display": {
               "title": "Common Javascript Framework"
             },
-            "_branch_label_enclosing_screen": "survey/_contents"
+            "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "_token_type": "prompt",
@@ -590,11 +590,12 @@
             "_row_num": 3,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 2
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 3,
             "operationIdx": 3
           },
@@ -603,6 +604,9 @@
             "clause": "validate finalize",
             "_sweep_name": "finalize",
             "_row_num": 3,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 4
           },
           {
@@ -610,11 +614,14 @@
             "clause": "save and terminate",
             "calculation": true,
             "_row_num": 3,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 5
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 3,
             "operationIdx": 6
           }
@@ -1033,11 +1040,12 @@
             "_row_num": 44,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
             "operationIdx": 31
           },
           {
-            "_token_type": "back_in_history",
-            "clause": "back",
+            "_token_type": "resume",
+            "clause": "resume",
             "_row_num": 44,
             "operationIdx": 32
           }

@@ -5,9 +5,9 @@
 		<li data-shadow="false" data-icon-shadow="true" data-theme="d" data-icon="arrow-r" data-iconpos="right" class="select-contents-item" label="{{_branch_label_enclosing_screen}}">
             <a class="select-contents-item-btn">
 				{{#if display.title}}
-					<h3 class="ui-li-heading">{{#if display.title}}{{#substitute}}{{localize display.title}} {{/substitute}}{{/if}}</h3>
+					<h3 class="ui-li-heading">{{#if display.title}}{{{localize display.title}}}{{/if}}</h3>
 				{{else}}
-					<h3 class="ui-li-heading">{{#if display.text}}{{#substitute}}{{localize display.text}} {{/substitute}}{{/if}}</h3>
+					<h3 class="ui-li-heading">{{#if display.text}}{{{localize display.text}}}{{/if}}</h3>
 				{{/if}}
                 <p class="ui-li-desc">{{formattedValueForContentsDisplay}}</p>
             </a>

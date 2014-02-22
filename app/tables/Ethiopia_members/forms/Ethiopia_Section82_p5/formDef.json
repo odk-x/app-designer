@@ -15,7 +15,7 @@
         "type": "integer",
         "name": "hours_spent_collecting_water",
         "display": {
-          "text": "How many hours in the last 7 days did {{name}} collect water?"
+          "text": "How many hours in the last 7 days did {{data.name}} collect water?"
         },
         "_row_num": 2
       }
@@ -1238,7 +1238,7 @@
             "type": "integer",
             "name": "hours_spent_collecting_water",
             "display": {
-              "text": "How many hours in the last 7 days did {{name}} collect water?"
+              "text": "How many hours in the last 7 days did {{data.name}} collect water?"
             },
             "_row_num": 2,
             "__rowNum__": 1,

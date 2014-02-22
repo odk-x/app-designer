@@ -1213,7 +1213,7 @@
             "default": "Determine grade of malnutrition by plotting weight for age on the graph",
             "hindi": "वज़न को ग्रोत चार्ट पर दर्शा कर कुपोषण का ग्रेड निधारित करें."
           },
-          "hint": "Weight: {{weight.value}}kg"
+          "hint": "Weight: {{data.weight.value}}kg"
         },
         "_row_num": 9
       }
@@ -12690,7 +12690,7 @@
                 "default": "Determine grade of malnutrition by plotting weight for age on the graph",
                 "hindi": "वज़न को ग्रोत चार्ट पर दर्शा कर कुपोषण का ग्रेड निधारित करें."
               },
-              "hint": "Weight: {{weight.value}}kg"
+              "hint": "Weight: {{data.weight.value}}kg"
             },
             "_row_num": 9,
             "__rowNum__": 8,

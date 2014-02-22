@@ -20,7 +20,7 @@
         "values_list": "smoker_type",
         "name": "is_smoker",
         "display": {
-          "text": "Does {{name}} smoke or has {{name}} smoked tobacco or other substances?"
+          "text": "Does {{data.name}} smoke or has {{data.name}} smoked tobacco or other substances?"
         },
         "_row_num": 2
       },
@@ -33,7 +33,7 @@
         "type": "integer",
         "name": "smoked_years_ago",
         "display": {
-          "text": "How long ago did {{name}} quit smoking?",
+          "text": "How long ago did {{data.name}} quit smoking?",
           "hint": "Year"
         },
         "_row_num": 4
@@ -42,7 +42,7 @@
         "type": "integer",
         "name": "began_smoke_age",
         "display": {
-          "text": "How old was {{name}} when s/he began smoking?",
+          "text": "How old was {{data.name}} when s/he began smoking?",
           "hint": "Age"
         },
         "_row_num": 5
@@ -60,7 +60,7 @@
         "type": "integer",
         "name": "number_cigarettes",
         "display": {
-          "text": "What is the typical number of cigarette {{name}} smokes in a day?"
+          "text": "What is the typical number of cigarette {{data.name}} smokes in a day?"
         },
         "_row_num": 8
       },
@@ -69,7 +69,7 @@
         "values_list": "smokes_frequency",
         "name": "smokes_in_house",
         "display": {
-          "text": "Does {{name}} smoke inside the house?"
+          "text": "Does {{data.name}} smoke inside the house?"
         },
         "_row_num": 9
       },
@@ -1444,7 +1444,7 @@
             "values_list": "smoker_type",
             "name": "is_smoker",
             "display": {
-              "text": "Does {{name}} smoke or has {{name}} smoked tobacco or other substances?"
+              "text": "Does {{data.name}} smoke or has {{data.name}} smoked tobacco or other substances?"
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1457,7 +1457,7 @@
             "type": "integer",
             "name": "smoked_years_ago",
             "display": {
-              "text": "How long ago did {{name}} quit smoking?",
+              "text": "How long ago did {{data.name}} quit smoking?",
               "hint": "Year"
             },
             "_row_num": 4,
@@ -1471,7 +1471,7 @@
             "type": "integer",
             "name": "began_smoke_age",
             "display": {
-              "text": "How old was {{name}} when s/he began smoking?",
+              "text": "How old was {{data.name}} when s/he began smoking?",
               "hint": "Age"
             },
             "_row_num": 5,
@@ -1485,7 +1485,7 @@
             "type": "integer",
             "name": "number_cigarettes",
             "display": {
-              "text": "What is the typical number of cigarette {{name}} smokes in a day?"
+              "text": "What is the typical number of cigarette {{data.name}} smokes in a day?"
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1499,7 +1499,7 @@
             "values_list": "smokes_frequency",
             "name": "smokes_in_house",
             "display": {
-              "text": "Does {{name}} smoke inside the house?"
+              "text": "Does {{data.name}} smoke inside the house?"
             },
             "_row_num": 9,
             "__rowNum__": 8,

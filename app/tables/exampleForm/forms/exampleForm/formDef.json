@@ -99,7 +99,7 @@
       {
         "type": "note",
         "display": {
-          "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}",
+          "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}",
           "hint": "Handlebars templates allow labels to change depending on the values previously entered."
         },
         "hideInContents": true,
@@ -1298,7 +1298,7 @@
           {
             "type": "note",
             "display": {
-              "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if name}}\nHello {{name}}!\n{{else}}\nName not entered.\n{{/if}}",
+              "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}",
               "hint": "Handlebars templates allow labels to change depending on the values previously entered."
             },
             "hideInContents": true,

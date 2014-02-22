@@ -15,7 +15,7 @@
         "type": "integer",
         "name": "hours_spent_wood",
         "display": {
-          "text": "How many hours did {{name}} spend transporting purchased wood?"
+          "text": "How many hours did {{data.name}} spend transporting purchased wood?"
         },
         "_row_num": 2
       }
@@ -1238,7 +1238,7 @@
             "type": "integer",
             "name": "hours_spent_wood",
             "display": {
-              "text": "How many hours did {{name}} spend transporting purchased wood?"
+              "text": "How many hours did {{data.name}} spend transporting purchased wood?"
             },
             "_row_num": 2,
             "__rowNum__": 1,

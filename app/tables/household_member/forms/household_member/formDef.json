@@ -4,7 +4,7 @@
       {
         "type": "note",
         "display": {
-          "text": "Data for household: {{household_id}}"
+          "text": "Data for household: {{data.household_id}}"
         },
         "_row_num": 2
       },
@@ -20,7 +20,7 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Enter age of {{member_name}}:"
+          "text": "Enter age of {{data.member_name}}:"
         },
         "_row_num": 4
       },
@@ -29,14 +29,14 @@
         "values_list": "sexes",
         "name": "sex",
         "display": {
-          "text": "Enter sex of {{member_name}}:"
+          "text": "Enter sex of {{data.member_name}}:"
         },
         "_row_num": 5
       },
       {
         "type": "note",
         "display": {
-          "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
+          "text": "{{data.member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
         },
         "hideInContents": true,
         "_row_num": 6
@@ -46,7 +46,7 @@
         "values_list": "yesno",
         "name": "income_contribution",
         "display": {
-          "text": "Does {{member_name}} contribute to the household income?"
+          "text": "Does {{data.member_name}} contribute to the household income?"
         },
         "_row_num": 7
       },
@@ -378,7 +378,7 @@
           {
             "type": "note",
             "display": {
-              "text": "Data for household: {{household_id}}"
+              "text": "Data for household: {{data.household_id}}"
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -404,7 +404,7 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Enter age of {{member_name}}:"
+              "text": "Enter age of {{data.member_name}}:"
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -418,7 +418,7 @@
             "values_list": "sexes",
             "name": "sex",
             "display": {
-              "text": "Enter sex of {{member_name}}:"
+              "text": "Enter sex of {{data.member_name}}:"
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -430,7 +430,7 @@
           {
             "type": "note",
             "display": {
-              "text": "{{member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
+              "text": "{{data.member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
             },
             "hideInContents": true,
             "_row_num": 6,
@@ -445,7 +445,7 @@
             "values_list": "yesno",
             "name": "income_contribution",
             "display": {
-              "text": "Does {{member_name}} contribute to the household income?"
+              "text": "Does {{data.member_name}} contribute to the household income?"
             },
             "_row_num": 7,
             "__rowNum__": 6,
