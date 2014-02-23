@@ -107,10 +107,10 @@ describe('Survey Methods', function() {
         assert.include(column, target, 'not present: ' + column);
     });
 
-    it('#add custom screenpath: State contains screenpath', function() {
+    it('#add custom screenPath: State contains screenPath', function() {
         var columnStr = data.getColumnData('State');
         var column = JSON.parse(columnStr);
-        assert.include(column, 'screenpath', 'not present: ' + column);
+        assert.include(column, 'screenPath', 'not present: ' + column);
     });
 
     it('#edit default: State contains eta', function() {
