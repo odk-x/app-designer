@@ -27,6 +27,19 @@ describe('Collect Methods', function() {
         assert.include(column, 'beta', 'not present: ' + column);
     });
 
+    it('#add values: Name contains collectNameDefault', function() {
+        var columnStr = data.getColumnData('Name');
+        var column = JSON.parse(columnStr);
+        assert.include(column, 'collectNameDefault', 'not present: ' + column);
+    });
+
+    it('#add values: Customers contains 987', function() {
+        var columnStr = data.getColumnData('Customers');
+        var column = JSON.parse(columnStr);
+        assert.include(column, '987', 'not present: ' + column);
+    });
+
+
     it('#add values: Name contains collectName', function() {
         var columnStr = data.getColumnData('Name');
         var column = JSON.parse(columnStr);

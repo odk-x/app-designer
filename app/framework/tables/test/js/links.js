@@ -96,9 +96,29 @@ addCollectCustom.click(function() {
 appendElement(addCollectCustom);
 
 // Tests that we can add some prepopulated values.
+// With the default form.
 var addCollectValues = getAnchor();
 addCollectValues.text('ADD ROW COLLECT VALUES: save');
 addCollectValues.click(function() {
+    // The test is that Name = collectNameDefault and Customers = 987,
+    // so prepopulate those values.
+    var values = {};
+    values.Name = 'collectNameDefault';
+    values.Customers = '987';
+    var valuesStr = JSON.stringify(values);
+    control.addRowWithCollect(
+        'Tea_houses_editable',
+        null,
+        null,
+        null,
+        valuesStr);
+});
+appendElement(addCollectValues);
+
+// With a custom form.
+var addCollectValuesCustom = getAnchor();
+addCollectValuesCustom.text('ADD ROW CUSTOM COLLECT VALUES: save');
+addCollectValuesCustom.click(function() {
     // The test is that Name = collectName and Customers = 333, so prepopulate
     // those values.
     var values = {};
@@ -112,7 +132,7 @@ addCollectValues.click(function() {
         null,
         valuesStr);
 });
-appendElement(addCollectValues);
+appendElement(addCollectValuesCustom);
 
 var addCollectUnicode = getAnchor();
 addCollectUnicode.text('ADD ROW COLLECT UNICODE: save');
