@@ -55,7 +55,7 @@ describe('Collect Methods', function() {
     it('#add unicode saves correctly', function() {
         var columnStr = data.getColumnData('Name');
         var column = JSON.parse(columnStr);
-        var target = 'Testing Collect «ταБЬℓσ»: 1<2 & 4+1>3, now 20% off!';
+        var target = 'Testing Collect «ταБЬℓσ»: 1<2 & 4+1>3, now" 20% off!';
         assert.include(column, target, 'unicode not present: ' + column);
     });
 

@@ -129,7 +129,7 @@ addCollectValuesCustom.click(function() {
         'Tea_houses_editable',
         'Tea_houses_editable_form',
         null,
-        null,
+        'Tea_houses_editable_form',
         valuesStr);
 });
 appendElement(addCollectValuesCustom);
@@ -147,7 +147,7 @@ addCollectUnicode.click(function() {
         'Tea_houses_editable',
         'Tea_houses_editable_form',
         null,
-        null,
+        'Tea_houses_editable_form',
         valuesStr);
 });
 appendElement(addCollectUnicode);
@@ -169,7 +169,7 @@ editCollectCustom.click(function() {
         rowId,
         'Tea_houses_editable_form',
         null,
-        null);
+        'Tea_houses_editable_form');
 });
 appendElement(editCollectCustom);
 
