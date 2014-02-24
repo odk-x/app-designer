@@ -296,7 +296,7 @@ editSurveyCustomScreenPath.click(function() {
         'Tea_houses_editable',
         rowId,
         'Tea_houses_editable_form',
-        'survey/info');
+        'survey/location');
 });
 appendElement(editSurveyCustomScreenPath);
 
