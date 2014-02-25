@@ -158,3 +158,17 @@ It may be best to set the view-port scale instead of messing with the jQm styles
 .ui-page {
 	min-height: 100%;
 }
+
+.instanceRowControl{
+  float: right;
+}
+
+.instanceList.layout-zebra li:nth-child(even) {
+  background: #f5f5f5;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+  -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+}
+
+.instanceListGrid.ui-grid-a .ui-block-a { width: 59.95%; }
+.instanceListGrid.ui-grid-a .ui-block-b { width: 39.95%; }

@@ -391,9 +391,9 @@ promptTypes.instances = promptTypes.base.extend({
     type:"instances",
     hideInContents: true,
     valid: true,
-    savepoint_type_finalized_text: 'finalized',
-    savepoint_type_incomplete_text: 'incomplete',
-    savepoint_type_checkpoint_text: 'checkpoint',
+    savepoint_type_finalized_text: 'Finalized',
+    savepoint_type_incomplete_text: 'Incomplete',
+    savepoint_type_checkpoint_text: 'Checkpoint',
     templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
