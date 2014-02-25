@@ -1681,50 +1681,36 @@ promptTypes.time = promptTypes.datetime.extend({
     },
     modification: function(evt) {
         var that = this;
-        var value = that.$('input').mobiscroll('getDate');
-        var ref = that.getValue();
-        var rerender = ((ref === undefined || ref === null || value === undefined || value === null) && (ref != value )) ||
-                (ref != null && value != null && that.sameTime(ref,value));
-        var ctxt = that.controller.newContext(evt);
-        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
-        var renderContext = that.renderContext;
-        if ( value === undefined || value === null ) {
-            renderContext.value = '';
-        } else {
-            renderContext.value = that.$('input').val();
-        }
-        // track original value
-        var originalValue = that.getValue();
-        that.setValueDeferredChange(value);
-        renderContext.invalid = !that.validateValue();
-        if ( renderContext.invalid ) {
-            value = originalValue;
-            // restore it...
-            that.setValueDeferredChange(originalValue);
-            rerender = true;
-        }
-        renderContext.value = value;
-        if ( rerender ) {
-            that.reRender(ctxt);
-        } else {
-            ctxt.success();
-        }
-    },
-    afterRender: function() {
-        var that = this;
-        if(this.useMobiscroll){
-            that.$('input').mobiscroll()[that.scrollerAttributes.preset](that.scrollerAttributes);
-            var value = that.getValue();
+        if ( !that.insideAfterRender ) {
+            var value = that.$('input').mobiscroll('getDate');
+            var ref = that.getValue();
+            var rerender = ((ref === undefined || ref === null || value === undefined || value === null) && (ref != value )) ||
+                    (ref != null && value != null && that.sameTime(ref,value));
+            var ctxt = that.controller.newContext(evt);
+            ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
+            var renderContext = that.renderContext;
             if ( value === undefined || value === null ) {
-                that.$('input').mobiscroll('setDate',new Date(),false);
+                renderContext.value = '';
             } else {
-                that.$('input').mobiscroll('setDate',value, true);
+                renderContext.value = that.$('input').val();
+            }
+            // track original value
+            var originalValue = that.getValue();
+            that.setValueDeferredChange(value);
+            renderContext.invalid = !that.validateValue();
+            if ( renderContext.invalid ) {
+                value = originalValue;
+                // restore it...
+                that.setValueDeferredChange(originalValue);
+                rerender = true;
+            }
+            renderContext.value = value;
+            if ( rerender ) {
+                that.reRender(ctxt);
+            } else {
+                ctxt.success();
             }
         }
-    },
-    beforeMove: function() {
-        // the spinner will have already saved the value
-        return null;
     }
 });
 /**
