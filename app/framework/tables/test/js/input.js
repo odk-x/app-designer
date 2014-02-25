@@ -27,6 +27,19 @@ describe('Collect Methods', function() {
         assert.include(column, 'beta', 'not present: ' + column);
     });
 
+    it('#add values: Name contains collectNameDefault', function() {
+        var columnStr = data.getColumnData('Name');
+        var column = JSON.parse(columnStr);
+        assert.include(column, 'collectNameDefault', 'not present: ' + column);
+    });
+
+    it('#add values: Customers contains 987', function() {
+        var columnStr = data.getColumnData('Customers');
+        var column = JSON.parse(columnStr);
+        assert.include(column, '987', 'not present: ' + column);
+    });
+
+
     it('#add values: Name contains collectName', function() {
         var columnStr = data.getColumnData('Name');
         var column = JSON.parse(columnStr);
@@ -42,7 +55,7 @@ describe('Collect Methods', function() {
     it('#add unicode saves correctly', function() {
         var columnStr = data.getColumnData('Name');
         var column = JSON.parse(columnStr);
-        var target = 'Testing Collect «ταБЬℓσ»: 1<2 & 4+1>3, now 20% off!';
+        var target = 'Testing Collect «ταБЬℓσ»: 1<2 & 4+1>3, now" 20% off!';
         assert.include(column, target, 'unicode not present: ' + column);
     });
 
@@ -107,10 +120,10 @@ describe('Survey Methods', function() {
         assert.include(column, target, 'not present: ' + column);
     });
 
-    it('#add custom screenpath: State contains screenpath', function() {
+    it('#add custom screenPath: State contains screenPath', function() {
         var columnStr = data.getColumnData('State');
         var column = JSON.parse(columnStr);
-        assert.include(column, 'screenpath', 'not present: ' + column);
+        assert.include(column, 'screenPath', 'not present: ' + column);
     });
 
     it('#edit default: State contains eta', function() {
