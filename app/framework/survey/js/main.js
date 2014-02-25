@@ -80,7 +80,8 @@ requirejs.config({
             exports: 'Handlebars'
         },
         'mobiscroll': {
-            deps: ['jquery','jqmobile']
+            deps: ['jquery','jqmobile'],
+			exports: '$.mobiscroll',
         },
         'jquery-csv' : {
             deps: ['jquery']
