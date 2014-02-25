@@ -75,7 +75,6 @@ module.exports = function (grunt) {
     };
 
     grunt.initConfig({
-
         // Here we have to set the objects for the exec task. We are using
         // grunt-exec to execute the adb push and adb pull commands.
         // cmd is the command that is run when calling this task with the
@@ -158,20 +157,22 @@ module.exports = function (grunt) {
         },
         open: {
             server: {
-                path: 'http://localhost:<%= connect.options.port %>',
-                app: function() {
+                path: 'http://localhost:<%= connect.options.port %>/index.html',
+                app: (function() {
                     var platform = require('os').platform();
                     // windows: *win*
                     // mac: darwin
                     if (platform.search('win') >= 0) {
                         // Windows expects chrome.
+                        grunt.log.writeln('detected Windows environment');
                         return 'chrome';
                     } else {
                         // Mac (and maybe others--add as discovered), expects
                         // Google Chrome
+                        grunt.log.writeln('detected non-Windows environment');
                         return 'Google Chrome';
                     }
-                }
+                })()
             }
         },
     });
