@@ -3,11 +3,11 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            translations, _hh) {
+define(['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
+function(mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh) {
 verifyLoad('database',
-    ['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
-    [mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,   Handlebars,  promptTypes,  $,       _,            translations, _hh]);
+    ['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
+    [mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,   Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh]);
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -684,7 +684,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedFormId();
-		var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
+        var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
@@ -771,7 +771,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                 auxHash = '&' + auxHash;
             }
         }
-		var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
+        var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash,
@@ -809,19 +809,19 @@ promptTypes.external_link = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         var fullUrl = that.url();
-		var expandedUrl;
-		if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
-			expandedUrl = fullUrl;
-		} else {
-			expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
-		}
+        var expandedUrl;
+        if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
+            expandedUrl = fullUrl;
+        } else {
+            expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
+        }
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'openLink', that.launchAction, 
             JSON.stringify({ uri: fullUrl,
-				extras: { url: expandedUrl }}));
+                extras: { url: expandedUrl }}));
         ctxt.log('D','external_link.openLink', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             ctxt.log('W','external_link.openLink',"Should be OK got >" + outcome + "<");
@@ -1583,27 +1583,25 @@ promptTypes.datetime = promptTypes.input_type.extend({
             this.useMobiscroll = false;
             ctxt.success();
         } else {
-            require(["mobiscroll"], function() {
-                $.mobiscroll.themes.jqm.defaults = {
-                    jqmBody: 'd',
-                    jqmHeader:'d',
-                    jqmWheel: 'd',
-                    jqmClickPick: 'd',
-                    jqmSet: 'd',
-                    jqmCancel: 'd'
-                };
-                //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
-                //This is a problem because users may click twice while they wait for the date
-                //picker to open inadvertantly causing it to close.
+            $.mobiscroll.themes.jqm.defaults = {
+                jqmBody: 'd',
+                jqmHeader:'d',
+                jqmWheel: 'd',
+                jqmClickPick: 'd',
+                jqmSet: 'd',
+                jqmCancel: 'd'
+            };
+            //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
+            //This is a problem because users may click twice while they wait for the date
+            //picker to open inadvertantly causing it to close.
 /*                var originalJqmInit = $.mobiscroll.themes.jqm.init;
-                $.mobiscroll.themes.jqm.init = function(elm, inst) {
-                    originalJqmInit(elm, inst);
-                    $('.dwo', elm).off('click');
-                    $('.dwo').css("background-color", "white");
-                    $('.dwo').css("opacity", ".5");
-                }; */
-                ctxt.success();
-            });
+            $.mobiscroll.themes.jqm.init = function(elm, inst) {
+                originalJqmInit(elm, inst);
+                $('.dwo', elm).off('click');
+                $('.dwo').css("background-color", "white");
+                $('.dwo').css("opacity", ".5");
+            }; */
+            ctxt.success();
         }
     },
     modification: function(evt) {
