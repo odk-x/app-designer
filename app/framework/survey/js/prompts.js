@@ -3,11 +3,11 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            translations, _hh) {
-verifyLoad('database',
-    ['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'translations', 'handlebarsHelpers'],
-    [mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,   Handlebars,  promptTypes,  $,       _,            translations, _hh]);
+define(['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
+function(mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh) {
+verifyLoad('prompts',
+    ['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
+    [ mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh]);
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -684,7 +684,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedFormId();
-		var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
+        var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
@@ -771,7 +771,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                 auxHash = '&' + auxHash;
             }
         }
-		var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
+        var expandedUrl = platInfo.baseUri + 'framework/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash,
@@ -809,19 +809,19 @@ promptTypes.external_link = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         var fullUrl = that.url();
-		var expandedUrl;
-		if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
-			expandedUrl = fullUrl;
-		} else {
-			expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
-		}
+        var expandedUrl;
+        if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
+            expandedUrl = fullUrl;
+        } else {
+            expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
+        }
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'openLink', that.launchAction, 
             JSON.stringify({ uri: fullUrl,
-				extras: { url: expandedUrl }}));
+                extras: { url: expandedUrl }}));
         ctxt.log('D','external_link.openLink', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             ctxt.log('W','external_link.openLink',"Should be OK got >" + outcome + "<");
@@ -1542,6 +1542,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
     useMobiscroll: true,
+    insideAfterRender: false,
     scrollerAttributes: {
         preset: 'datetime',
         theme: 'jqm',
@@ -1583,58 +1584,58 @@ promptTypes.datetime = promptTypes.input_type.extend({
             this.useMobiscroll = false;
             ctxt.success();
         } else {
-            require(["mobiscroll"], function() {
-                $.mobiscroll.themes.jqm.defaults = {
-                    jqmBody: 'd',
-                    jqmHeader:'d',
-                    jqmWheel: 'd',
-                    jqmClickPick: 'd',
-                    jqmSet: 'd',
-                    jqmCancel: 'd'
-                };
-                //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
-                //This is a problem because users may click twice while they wait for the date
-                //picker to open inadvertantly causing it to close.
+            $.mobiscroll.themes.jqm.defaults = {
+                jqmBody: 'd',
+                jqmHeader:'d',
+                jqmWheel: 'd',
+                jqmClickPick: 'd',
+                jqmSet: 'd',
+                jqmCancel: 'd'
+            };
+            //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
+            //This is a problem because users may click twice while they wait for the date
+            //picker to open inadvertantly causing it to close.
 /*                var originalJqmInit = $.mobiscroll.themes.jqm.init;
-                $.mobiscroll.themes.jqm.init = function(elm, inst) {
-                    originalJqmInit(elm, inst);
-                    $('.dwo', elm).off('click');
-                    $('.dwo').css("background-color", "white");
-                    $('.dwo').css("opacity", ".5");
-                }; */
-                ctxt.success();
-            });
+            $.mobiscroll.themes.jqm.init = function(elm, inst) {
+                originalJqmInit(elm, inst);
+                $('.dwo', elm).off('click');
+                $('.dwo').css("background-color", "white");
+                $('.dwo').css("opacity", ".5");
+            }; */
+            ctxt.success();
         }
     },
     modification: function(evt) {
         var that = this;
-        var value = that.$('input').mobiscroll('getDate');
-        var ref = that.getValue();
-        var rerender = ((ref == null || value == null) && (ref != value )) ||
-                (ref != null && value != null && ref.valueOf() != value.valueOf());
-        var ctxt = that.controller.newContext(evt);
-        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
-        var renderContext = that.renderContext;
-        if ( value === undefined || value === null ) {
-            renderContext.value = '';
-        } else {
-            renderContext.value = that.$('input').val();
-        }
-        // track original value
-        var originalValue = that.getValue();
-        that.setValueDeferredChange(value);
-        renderContext.invalid = !that.validateValue();
-        if ( renderContext.invalid ) {
-            value = originalValue;
-            // restore it...
-            that.setValueDeferredChange(originalValue);
-            rerender = true;
-        }
-        renderContext.value = value;
-        if ( rerender ) {
-            that.reRender(ctxt);
-        } else {
-            ctxt.success();
+        if ( !that.insideAfterRender ) {
+            var value = that.$('input').mobiscroll('getDate');
+            var ref = that.getValue();
+            var rerender = ((ref == null || value == null) && (ref != value )) ||
+                    (ref != null && value != null && ref.valueOf() != value.valueOf());
+            var ctxt = that.controller.newContext(evt);
+            ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
+            var renderContext = that.renderContext;
+            if ( value === undefined || value === null ) {
+                renderContext.value = '';
+            } else {
+                renderContext.value = that.$('input').val();
+            }
+            // track original value
+            var originalValue = that.getValue();
+            that.setValueDeferredChange(value);
+            renderContext.invalid = !that.validateValue();
+            if ( renderContext.invalid ) {
+                value = originalValue;
+                // restore it...
+                that.setValueDeferredChange(originalValue);
+                rerender = true;
+            }
+            renderContext.value = value;
+            if ( rerender ) {
+                that.reRender(ctxt);
+            } else {
+                ctxt.success();
+            }
         }
     },
     
@@ -1643,11 +1644,13 @@ promptTypes.datetime = promptTypes.input_type.extend({
         if(this.useMobiscroll){
             that.$('input').mobiscroll()[that.scrollerAttributes.preset](that.scrollerAttributes);
             var value = that.getValue();
+            that.insideAfterRender = true;
             if ( value === undefined || value === null ) {
                 that.$('input').mobiscroll('setDate',new Date(),false);
             } else {
                 that.$('input').mobiscroll('setDate',value, true);
             }
+            that.insideAfterRender = false;
         }
     },
     beforeMove: function() {
