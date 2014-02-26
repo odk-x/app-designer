@@ -37,7 +37,7 @@ function displayGroup() {
         var src = '';
         if (srcMimeUri !== null ) {
             var mimeUriObject = JSON.parse(srcMimeUri);
-            var uriRelative = mimeUriObject.uri;
+            var uriRelative = mimeUriObject.uriFragment;
             var uriAbsolute = control.getFileAsUrl(uriRelative);
             src = uriAbsolute;
         }
