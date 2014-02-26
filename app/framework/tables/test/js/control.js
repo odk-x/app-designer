@@ -117,15 +117,18 @@ describe('control', function() {
             assert.isArray(tableIds, 'did not return an array');
         });
 
-        it('#result is correct size', function() {
-            // There are potentially 5 tables. The 4 tea tables:
+        it('#result is LOOSELY correct size', function() {
+            // There are potentially 10 tables. The 4 tea tables:
             // Tea_inventory, Tea_types, Tea_houses, Tea_houses_editable
-            // as well as, if we have loaded a form using Survey already, a
-            // Common Javascript Framework table. Since we don't want this test
-            // to be dependent on a particular loading order, we're going to
-            // accept both as passing tests.
+            // as well as:
+            // geotagger, Myna_birds, Milk_bank.
+            // Plus if we've loaded a form using survey we have
+            // Common Javascript Framework and the two household tables, which
+            // ship with the demo. So, include those as well.
+            // Since we don't want this test to be dependent on a particular
+            // loading order, we're going to make this a loose test.
             assert.include(
-                [4, 5],
+                [7, 9, 10],
                 tableIds.length,
                 'result was not correct size');
         });
