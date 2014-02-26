@@ -2,8 +2,21 @@
 <html>
     <head>
         <link href="../css/geo_detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
         <script type="text/javascript">
         function display() {
+          if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
+              console.log('Welcome to Tables debugging in Chrome!');
+              $.ajax({
+                  url: control.getFileAsUrl('output/debug/geotagger_data.json'),
+                  async: false,  // do it first
+                  success: function(dataObj) {
+                      window.data.setBackingObject(dataObj);
+                  }
+              });
+          }
           var srcMimeUri = data.get("Image");
           var src = "";
           if (srcMimeUri != null ) {
