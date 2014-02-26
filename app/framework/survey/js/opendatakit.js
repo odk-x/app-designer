@@ -56,9 +56,21 @@ return {
         });
         return id;
     },
-    
-    getHashString:function(formPath, instanceId, screenPath) {
+    getSameRefIdHashString:function(formPath, instanceId, screenPath) {
         var refId = this.getRefId();
+        if ( formPath === undefined || formPath === null ) {
+            formPath = shim.getBaseUrl() + "/";
+        }
+        var qpl =
+            '#formPath=' + escape(formPath) +
+            ((instanceId === undefined || instanceId === null) ? '' : ('&instanceId=' + escape(instanceId))) +
+            '&screenPath=' + escape((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
+            ((refId === undefined || refId === null) ? '' : ('&refId=' + escape(refId)));
+        return qpl;
+    },
+
+    getHashString:function(formPath, instanceId, screenPath) {
+        var refId = this.genUUID();
         if ( formPath === undefined || formPath === null ) {
             formPath = shim.getBaseUrl() + "/";
         }

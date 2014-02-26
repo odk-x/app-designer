@@ -1,5 +1,16 @@
 {
   "xlsx": {
+    "initial": [
+      {
+        "clause": "do section survey",
+        "_row_num": 2
+      },
+      {
+        "clause": "goto _finalize",
+        "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
+        "_row_num": 3
+      }
+    ],
     "survey": [
       {
         "type": "note",
@@ -10,7 +21,7 @@
       },
       {
         "type": "text",
-        "name": "member_name",
+        "name": "name",
         "display": {
           "text": "Enter the name of the household member:"
         },
@@ -20,7 +31,7 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Enter age of {{data.member_name}}:"
+          "text": "Enter age of {{data.name}}:"
         },
         "_row_num": 4
       },
@@ -29,14 +40,14 @@
         "values_list": "sexes",
         "name": "sex",
         "display": {
-          "text": "Enter sex of {{data.member_name}}:"
+          "text": "Enter sex of {{data.name}}:"
         },
         "_row_num": 5
       },
       {
         "type": "note",
         "display": {
-          "text": "{{data.member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
+          "text": "{{data.name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
         },
         "hideInContents": true,
         "_row_num": 6
@@ -46,33 +57,9 @@
         "values_list": "yesno",
         "name": "income_contribution",
         "display": {
-          "text": "Does {{data.member_name}} contribute to the household income?"
+          "text": "Does {{data.name}} contribute to the household income?"
         },
         "_row_num": 7
-      },
-      {
-        "type": "text",
-        "name": "children",
-        "display": {
-          "text": "Which household members are children of this household member?"
-        },
-        "_row_num": 8
-      },
-      {
-        "type": "text",
-        "name": "siblings",
-        "display": {
-          "text": "Which household members are siblings of this household member?"
-        },
-        "_row_num": 9
-      },
-      {
-        "type": "text",
-        "name": "cousins",
-        "display": {
-          "text": "Which household members are cousins of this household member?"
-        },
-        "_row_num": 10
       }
     ],
     "choices": [
@@ -112,7 +99,7 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "household_member",
+        "value": "member",
         "_row_num": 2
       },
       {
@@ -128,28 +115,101 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Household Member Survey"
+          "title": "Household Members"
         },
         "_row_num": 5
       },
       {
         "setting_name": "instance_name",
-        "value": "member_name",
+        "value": "name",
         "_row_num": 6
       }
     ],
     "model": [
       {
         "name": "household_id",
-        "type": "string",
-        "joins": [
-          {
-            "table_id": "household",
-            "element_name": "household_id"
-          }
-        ],
-        "comments": "This inserts a 'joins' entry into the column_definitions table for the household_id column of the household_member table_id of the form: \n\n\"[ { table_id: household, element_name: household_id } ]\"",
+        "type": "text",
         "_row_num": 2
+      },
+      {
+        "name": "num_rooms",
+        "type": "integer",
+        "_row_num": 3
+      },
+      {
+        "name": "electricity",
+        "type": "select_one",
+        "_row_num": 4
+      },
+      {
+        "name": "water",
+        "type": "select_one",
+        "_row_num": 5
+      },
+      {
+        "name": "location",
+        "type": "geopoint",
+        "_row_num": 6
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "_row_num": 7
+      },
+      {
+        "name": "age",
+        "type": "integer",
+        "_row_num": 8
+      },
+      {
+        "name": "sex",
+        "type": "select_one",
+        "_row_num": 9
+      },
+      {
+        "name": "income_contribution",
+        "type": "select_one",
+        "_row_num": 10
+      },
+      {
+        "name": "owner",
+        "type": "select_one",
+        "_row_num": 11
+      },
+      {
+        "name": "youngest",
+        "type": "select_multiple",
+        "_row_num": 12
+      },
+      {
+        "name": "write_language",
+        "type": "select_one",
+        "_row_num": 13
+      },
+      {
+        "name": "attend_school",
+        "type": "select_one",
+        "_row_num": 14
+      },
+      {
+        "name": "school_type",
+        "type": "select_multiple",
+        "_row_num": 15
+      },
+      {
+        "name": "grade_level",
+        "type": "select_one",
+        "_row_num": 16
+      },
+      {
+        "name": "post_secondary",
+        "type": "select_one",
+        "_row_num": 17
+      },
+      {
+        "name": "currently_school",
+        "type": "select_one",
+        "_row_num": 18
       }
     ],
     "calculates": [
@@ -181,7 +241,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "household_member",
+        "value": "member",
         "_row_num": 2
       },
       "form_version": {
@@ -197,13 +257,13 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Household Member Survey"
+          "title": "Household Members"
         },
         "_row_num": 5
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "member_name",
+        "value": "name",
         "_row_num": 6
       },
       "_locales": {
@@ -226,7 +286,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Household Member Survey"
+          "title": "Household Members"
         },
         "_row_num": 5
       }
@@ -286,83 +346,213 @@
             "section_name": "model"
           }
         ],
-        "joins": [
-          {
-            "table_id": "household",
-            "element_name": "household_id"
-          }
-        ],
         "elementKey": "household_id"
       },
-      "member_name": {
+      "num_rooms": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "num_rooms"
+      },
+      "electricity": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "electricity"
+      },
+      "water": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "water"
+      },
+      "location": {
+        "name": "geopoint",
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "location_latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "location_longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "location_altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "location_accuracy"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location"
+      },
+      "name": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 3,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 7,
+            "section_name": "model"
           }
         ],
-        "type": "string",
-        "elementKey": "member_name"
+        "elementKey": "name"
       },
       "age": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 4,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
           }
         ],
-        "type": "integer",
         "elementKey": "age"
       },
       "sex": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 5,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "sex"
       },
       "income_contribution": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 7,
             "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "income_contribution"
-      },
-      "children": {
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "children"
-      },
-      "siblings": {
-        "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "siblings"
-      },
-      "cousins": {
-        "_defn": [
+          },
           {
             "_row_num": 10,
-            "section_name": "survey"
+            "section_name": "model"
           }
         ],
+        "elementKey": "income_contribution"
+      },
+      "owner": {
         "type": "string",
-        "elementKey": "cousins"
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "owner"
+      },
+      "youngest": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "youngest_items"
+        },
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "youngest"
+      },
+      "write_language": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "write_language"
+      },
+      "attend_school": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "attend_school"
+      },
+      "school_type": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "school_type_items"
+        },
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "school_type"
+      },
+      "grade_level": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "grade_level"
+      },
+      "post_secondary": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "post_secondary"
+      },
+      "currently_school": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "currently_school"
       }
     },
     "section_names": [
@@ -370,6 +560,110 @@
       "survey"
     ],
     "sections": {
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 0,
+            "display": {
+              "title": "Household Members"
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 4,
+            "_branch_label_enclosing_screen": "initial/_screen4",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 0
+          },
+          {
+            "clause": "goto _finalize",
+            "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "goto_label",
+            "_branch_label": "_finalize",
+            "operationIdx": 1
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 4,
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "hideInBackHistory": true,
+            "operationIdx": 3
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 4,
+            "operationIdx": 4
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 4,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 4,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 4,
+            "operationIdx": 7
+          }
+        ],
+        "branch_label_map": {
+          "_contents": 3,
+          "_screen4": 3,
+          "_finalize": 5
+        }
+      },
       "survey": {
         "section_name": "survey",
         "nested_sections": {},
@@ -389,7 +683,7 @@
           },
           {
             "type": "text",
-            "name": "member_name",
+            "name": "name",
             "display": {
               "text": "Enter the name of the household member:"
             },
@@ -404,7 +698,7 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Enter age of {{data.member_name}}:"
+              "text": "Enter age of {{data.name}}:"
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -418,7 +712,7 @@
             "values_list": "sexes",
             "name": "sex",
             "display": {
-              "text": "Enter sex of {{data.member_name}}:"
+              "text": "Enter sex of {{data.name}}:"
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -430,7 +724,7 @@
           {
             "type": "note",
             "display": {
-              "text": "{{data.member_name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
+              "text": "{{data.name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
             },
             "hideInContents": true,
             "_row_num": 6,
@@ -445,7 +739,7 @@
             "values_list": "yesno",
             "name": "income_contribution",
             "display": {
-              "text": "Does {{data.member_name}} contribute to the household income?"
+              "text": "Does {{data.name}} contribute to the household income?"
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -455,51 +749,12 @@
             "promptIdx": 5
           },
           {
-            "type": "text",
-            "name": "children",
-            "display": {
-              "text": "Which household members are children of this household member?"
-            },
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "prompt",
-            "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen8",
-            "promptIdx": 6
-          },
-          {
-            "type": "text",
-            "name": "siblings",
-            "display": {
-              "text": "Which household members are siblings of this household member?"
-            },
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 7
-          },
-          {
-            "type": "text",
-            "name": "cousins",
-            "display": {
-              "text": "Which household members are cousins of this household member?"
-            },
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 8
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 11,
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 9
+            "_row_num": 8,
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 6
           }
         ],
         "validation_tag_map": {
@@ -543,41 +798,23 @@
             "operationIdx": 5
           },
           {
+            "_token_type": "exit_section",
+            "clause": "exit section",
             "_row_num": 8,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
-          },
-          {
-            "_row_num": 10,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 11,
-            "operationIdx": 9
-          },
-          {
-            "_row_num": 11,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "hideInBackHistory": true,
-            "operationIdx": 10
+            "operationIdx": 7
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 11,
-            "operationIdx": 11
+            "_row_num": 8,
+            "operationIdx": 8
           }
         ],
         "branch_label_map": {
@@ -587,184 +824,8 @@
           "_screen5": 3,
           "_screen6": 4,
           "_screen7": 5,
-          "_screen8": 6,
-          "_screen9": 7,
-          "_screen10": 8,
-          "_contents": 10,
-          "_screen11": 10
-        }
-      },
-      "initial": {
-        "section_name": "initial",
-        "nested_sections": {
-          "survey": true
-        },
-        "reachable_sections": {
-          "survey": true
-        },
-        "prompts": [
-          {
-            "_row_num": 3,
-            "type": "opening",
-            "display": {
-              "text": "Edit form"
-            },
-            "_token_type": "prompt",
-            "_type": "opening",
-            "_branch_label_enclosing_screen": "initial/_screen3",
-            "promptIdx": 0
-          },
-          {
-            "_row_num": 4,
-            "clause": "do section survey",
-            "_token_type": "prompt",
-            "_do_section_name": "survey",
-            "_type": "_section",
-            "promptIdx": 1,
-            "display": {
-              "title": "Household Member Survey"
-            },
-            "_branch_label_enclosing_screen": "survey/0"
-          },
-          {
-            "_row_num": 5,
-            "type": "finalize",
-            "display": {
-              "text": "Save form"
-            },
-            "_token_type": "prompt",
-            "_type": "finalize",
-            "_branch_label_enclosing_screen": "initial/_screen5",
-            "promptIdx": 2
-          },
-          {
-            "_row_num": 7,
-            "type": "instances",
-            "display": {
-              "text": "Saved instances"
-            },
-            "_token_type": "prompt",
-            "_type": "instances",
-            "_branch_label_enclosing_screen": "initial/_screen7",
-            "promptIdx": 3
-          },
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 9,
-            "_branch_label_enclosing_screen": "initial/_screen9",
-            "promptIdx": 4
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": []
-        },
-        "operations": [
-          {
-            "_row_num": 2,
-            "clause": "if // start",
-            "condition": "(opendatakit.getCurrentInstanceId() != null)",
-            "_token_type": "goto_label",
-            "_tag_name": "start",
-            "_branch_label": "_then2",
-            "operationIdx": 0
-          },
-          {
-            "clause": "else // start",
-            "_token_type": "goto_label",
-            "_branch_label": "_else6",
-            "_row_num": 6,
-            "operationIdx": 1
-          },
-          {
-            "_row_num": 3,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
-          },
-          {
-            "_row_num": 4,
-            "clause": "do section survey",
-            "_token_type": "do_section",
-            "_do_section_name": "survey",
-            "operationIdx": 3
-          },
-          {
-            "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "clause": "end if // start",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif8",
-            "_row_num": 8,
-            "operationIdx": 5
-          },
-          {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 9,
-            "operationIdx": 7
-          },
-          {
-            "_row_num": 9,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
-            "operationIdx": 8
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 9
-          },
-          {
-            "_token_type": "validate",
-            "clause": "validate finalize",
-            "_sweep_name": "finalize",
-            "_row_num": 9,
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 10
-          },
-          {
-            "_token_type": "save_and_terminate",
-            "clause": "save and terminate",
-            "calculation": true,
-            "_row_num": 9,
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 11
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 12
-          }
-        ],
-        "branch_label_map": {
-          "_then2": 2,
-          "_screen3": 2,
-          "_screen5": 4,
-          "_else6": 6,
-          "_screen7": 6,
-          "_endif8": 7,
-          "_contents": 8,
-          "_screen9": 8,
-          "_finalize": 10
+          "_contents": 7,
+          "_screen8": 7
         }
       }
     }

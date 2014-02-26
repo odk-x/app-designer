@@ -138,7 +138,7 @@ return {
         var sameTable = (opendatakit.getCurrentTableId() == table_id);
         var sameForm = sameTable && (opendatakit.getSettingValue('form_id') == form_id) && (opendatakit.getCurrentFormPath() == formPath);
         var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() == instanceId) && (instanceId != null);
-        var qpl = opendatakit.getHashString(formPath, instanceId, screenPath);
+        var qpl = opendatakit.getSameRefIdHashString(formPath, instanceId, screenPath);
 
         if ( !sameTable ) {
             ctxt.log('D',"parsequery._parseQueryParameterContinuation.differentTable");
@@ -316,7 +316,7 @@ return {
         if ( hash === '#' ) {
             // this is bogus transition due to jquery mobile widgets
             ctxt.log('W','parsequery.changeUrlHash.emptyHash - bad jqueryMobile interaction!!');
-            qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.getCurrentScreenPath());
+            qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), that.controller.getCurrentScreenPath());
             ctxt.log('D','parsequery.changeUrlHash.emptyHash.reset', qpl);
             window.location.hash = qpl;
             ctxt.failure({message: "Internal error: invalid hash (restoring)"});
@@ -339,7 +339,7 @@ return {
         that._parseParameters($.extend({},ctxtNext,{success:function() {
                 // and update the hash to refer to this page...
                 var screenPath = that.controller.getCurrentScreenPath();
-                var newhash = opendatakit.getHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), screenPath);
+                var newhash = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), opendatakit.getCurrentInstanceId(), screenPath);
                 if ( newhash != window.location.hash ) {
                     window.location.hash = newhash;
                 }

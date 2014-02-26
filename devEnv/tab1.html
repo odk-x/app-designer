@@ -19,6 +19,33 @@
         var cw = document.getElementById('previewscreen').contentWindow;
         cw.location.reload();
   }
+  function pushPageAndOpen(value) {
+        var ps = document.getElementById('previewscreen');
+		var parent = ps.parentNode;
+		ps.id = 'previewscreen-' + pageStack.length;
+		pageStack.push(ps.contentWindow.shim.refId);
+		ps.style.display = 'none';
+		var newIframe = document.createElement('iframe');
+		newIframe.className = 'resizeablescreen';
+		newIframe.setAttribute('name', 'screen');
+		newIframe.id = 'previewscreen';
+		newIframe.src = value;
+		parent.appendChild(newIframe);
+  }
+  function closeAndPopPage() {
+		// this should remove the current iframe and raise the prior one to the foreground
+		if ( pageStack.length > 0 ) {
+			var priorRefId = pageStack.pop();
+			var priorIframe = document.getElementById('previewscreen-' + pageStack.length);
+			var ps = document.getElementById('previewscreen');
+			var parent = ps.parentNode;
+			priorIframe.style.display = 'block';
+			parent.removeChild(ps);
+			priorIframe.id = 'previewscreen';
+			priorIframe.contentWindow.shim.refId = priorRefId;
+			priorIframe.contentWindow.redrawHook();
+		}
+  }
   function loadPage(value) {
         var cw = document.getElementById('previewscreen').contentWindow;
 		cw.history.go(value);
