@@ -162,7 +162,8 @@ module.exports = function (grunt) {
                     var platform = require('os').platform();
                     // windows: *win*
                     // mac: darwin
-                    if (platform.search('win') >= 0) {
+                    if (platform.search('win') >= 0 &&
+                        platform.search('darwin') < 0) {
                         // Windows expects chrome.
                         grunt.log.writeln('detected Windows environment');
                         return 'chrome';
