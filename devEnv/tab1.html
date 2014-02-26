@@ -4,11 +4,9 @@
 <meta http-equiv="content-type" content="text/html; charset=us-ascii">
 <!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel='stylesheet' href='./lib/jquery-ui-1.10.3.custom.min.css'/>
 <link  rel='stylesheet' type='text/css'href='css/animate.css' />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <script type="text/javascript" src="../app/framework/libs/jquery.1.10.2.js"></script>
-<script type="text/javascript" src="./lib/jquery-ui-1.10.3.custom.min.js"></script>
 <script type="text/javascript" src="../app/framework/survey/js/shim.js"></script>
   <script type="text/javascript">
 //<![CDATA[
@@ -103,7 +101,7 @@
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
 	<div class="flowleft">
 	  <div>
-	  <p>Launch page:</p>
+	  <p class="pb">Launch page:</p>
   	  <select name="page" onchange="loadPage(this.value)">
 		<option id="survey" value="../app/framework/index.html?" selected ><label for="survey">ODK Survey Framework Page</label></option>
 		<option id="graph" value="../app/framework/optionspane.html" ><label for="graph">ODK Tables Graph Page</label></option>
@@ -114,7 +112,7 @@
 	</div>
 	<div class="flowright">
 	  <div>
-	  <p>Device Dimension</p>
+	  <p class="pb">Device Dimension</p>
 	  <select name="size" onchange="resizeIframe(this.value)">
 		<option id="w480x854" value="w480x854" selected><label for="w480x854">480 x 854 pixels (Droid)</label></option>
 		<option id="w480x800" value="w480x800" ><label for="w480x800">480 x 800 pixels (Nexus S, Nexus One)</label></option>
@@ -132,7 +130,7 @@
 	</div>
 	<div class="flowcancel">
 	  <p><font color="blue">NOTE: vertical scrollbars incorrectly shrink the visible
-	width w.r.t. the behavior on an Android device</font></p>
+	width<br/>w.r.t. the behavior on an Android device</font></p>
 
 	  <div class="bland">
 		<div class="backviewport">
