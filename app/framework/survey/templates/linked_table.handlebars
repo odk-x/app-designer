@@ -1,5 +1,8 @@
 <div class="linkedTable layout-zebra rounded">
   {{> labelHint}}
+  {{#unless display.hide_add_instance}}
+    <a class="addInstance" data-role="button" data-inline="true" data-icon="plus">{{new_instance_text}}</a>
+  {{/unless}}
   <table class="linked-table">
     <thead>
       <tr class="tableGrid">
@@ -26,7 +29,4 @@
     {{/each}}
     </tbody>
   </table>
-  {{#unless display.hide_add_instance}}
-  <a class="addInstance" data-role="button" data-inline="true" data-icon="plus">{{new_instance_text}}</a>
-  {{/unless}}
 </div>
