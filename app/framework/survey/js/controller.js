@@ -228,8 +228,10 @@ return {
         var path = null;
         var state = null;
         var repop = false;
+        var clearState = true;
         var oldScreenPath = that.getCurrentScreenPath();
         while (shim.hasScreenHistory(opendatakit.getRefId())) {
+            clearState = false;
             path = shim.popScreenHistory(opendatakit.getRefId());
             state = shim.getControllerState(opendatakit.getRefId());
             // possible 'state' values:
@@ -299,7 +301,12 @@ return {
                 if ( isResume ) {
                     break;
                 }
+                // clear the state unless we can pop off...
+                clearState = true;
             }
+        }
+        if ( clearState ) {
+            state = '';
         }
         return { path: path, state: state, repop: repop};
     },
@@ -427,6 +434,7 @@ return {
                 case "save_and_terminate":
                     var complete = ('calculation' in op) ? op.calculation() : false;
                     database.save_all_changes($.extend({},ctxt,{success:function() {
+                            that.screenManager.hideSpinnerOverlay();
                             shim.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), complete);
                             // the shim should terminate the window... if not, at least leave the instance.
                             that.leaveInstance(ctxt);
@@ -673,6 +681,15 @@ return {
             ctxt.failure({message: "Possible goto loop."});
         }
     },
+    /**
+     * used by Application Designer environment. see main.js redrawHook() function.
+     */
+    redrawHook: function() {
+        var ctxt = this.newCallbackContext();
+        var path = this.getCurrentScreenPath();
+        var operation = this.getOperation(path);
+        this.setScreen(ctxt, operation);
+    },
     setScreen: function(ctxt, operation, inOptions){
         var that = this;
         ctxt.log('D','controller.setScreen', "nextPx: " + operation.operationIdx);
@@ -725,7 +742,7 @@ return {
 
         that.screenManager.setScreen($.extend({},ctxt,{
             success: function() {
-                var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
+                var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), 
                             opendatakit.getCurrentInstanceId(), that.getCurrentScreenPath());
                 window.location.hash = qpl;
                 ctxt.success();
@@ -1045,9 +1062,9 @@ return {
     },
     // exit the page
     leaveInstance:function(ctxt) {
-		ctxt.success();
-		// this would reset to the main page.
-		// this.openInstance(ctxt, null);
+        ctxt.success();
+        // this would reset to the main page.
+        // this.openInstance(ctxt, null);
     },
     createInstance: function(ctxt){
         var id = opendatakit.genUUID();
@@ -1090,7 +1107,7 @@ return {
                         kvList = kvList + "&" + f + "=" + escape(v);
                     }
                 }
-                var qpl = opendatakit.getHashString(opendatakit.getCurrentFormPath(), 
+                var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), 
                             id, opendatakit.initialScreenPath);
                 
 

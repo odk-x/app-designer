@@ -6,12 +6,31 @@ It will be replaced by one injected by Android Java code.
 */
 window.shim = window.shim || {
     showAlerts: false,
+    logLevel: 'D',
     refId: null,
     enforceRefIdMatch: true,
-    instanceId: null,
-    sectionStateScreenHistory: [],
-    sessionVariables: {},
-    logLevel: 'D',
+    /**
+     * The shim now remembers an entire history of refId values.
+     * 
+     * The manipulators below access the values for their respective refId
+     * via refIdMap[refId]. The values tracked per refId are:
+     *   instanceId
+     *   sectionStateScreenHistory
+     *   sessionVariables
+     */
+    refIdMap: {}, // map indexed by refId
+    lookupRefIdData: function(refId) {
+        var settings = this.refIdMap[refId];
+        if ( settings === undefined || settings === null ) {
+            settings = {
+                instanceId: null,
+                sectionStateScreenHistory: [],
+                sessionVariables: {}
+            };
+            this.refIdMap[refId] = settings;
+        }
+        return settings;
+    },
     getBaseUrl: function() {
         return '../framework';
     },
@@ -75,7 +94,8 @@ window.shim = window.shim || {
             return;
         }
         this.log("D","shim: DO: clearInstanceId(" + refId + ")");
-        this.instanceId = null;
+        var settings = this.lookupRefIdData(refId);
+        settings.instanceId = null;
     },
     setInstanceId: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -86,7 +106,8 @@ window.shim = window.shim || {
         // needed so that callbacks, etc. can properly track the instanceId 
         // currently being worked on.
         this.log("D","shim: DO: setInstanceId(" + refId + ", " + instanceId + ")");
-        this.instanceId = instanceId;
+        var settings = this.lookupRefIdData(refId);
+        settings.instanceId = instanceId;
     },
     getInstanceId: function( refId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -97,16 +118,17 @@ window.shim = window.shim || {
         // needed so that callbacks, etc. can properly track the instanceId 
         // currently being worked on.
         this.log("D","shim: DO: getInstanceId(" + refId + ")");
-        return this.instanceId;
+        var settings = this.lookupRefIdData(refId);
+        return settings.instanceId;
     },
-    _dumpScreenStateHistory : function() {
+    _dumpScreenStateHistory : function(settings) {
         this.log("D","shim -------------*start* dumpScreenStateHistory--------------------");
-        if ( this.sectionStateScreenHistory.length === 0 ) {
+        if ( settings.sectionStateScreenHistory.length === 0 ) {
             this.log("D","shim sectionScreenStateHistory EMPTY");
         } else {
             var i;
-            for ( i = this.sectionStateScreenHistory.length-1 ; i >= 0 ; --i ) {
-                var thisSection = this.sectionStateScreenHistory[i];
+            for ( i = settings.sectionStateScreenHistory.length-1 ; i >= 0 ; --i ) {
+                var thisSection = settings.sectionStateScreenHistory[i];
                 this.log("D","shim [" + i + "] screenPath: " + thisSection.screen );
                 this.log("D","shim [" + i + "] state:      " + thisSection.state );
                 if ( thisSection.history.length === 0 ) {
@@ -130,12 +152,13 @@ window.shim = window.shim || {
         }
 
         this.log("D","shim: DO: pushSectionScreenState(" + refId + ")");
+        var settings = this.lookupRefIdData(refId);
 
-        if ( this.sectionStateScreenHistory.length === 0 ) {
+        if ( settings.sectionStateScreenHistory.length === 0 ) {
             return;
         }
         
-        var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
         lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
     },
     setSectionScreenState: function( refId, screenPath, state) {
@@ -145,6 +168,7 @@ window.shim = window.shim || {
         }
 
         this.log("D","shim: DO: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
+        var settings = this.lookupRefIdData(refId);
         if ( screenPath === undefined || screenPath === null ) {
             alert("setSectionScreenState received a null screen path!");
             this.log("E","setSectionScreenState received a null screen path!");
@@ -152,15 +176,15 @@ window.shim = window.shim || {
         } else {
             var splits = screenPath.split('/');
             var sectionName = splits[0] + "/";
-            if (this.sectionStateScreenHistory.length === 0) {
-                this.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
+            if (settings.sectionStateScreenHistory.length === 0) {
+                settings.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
             } else {
-                var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+                var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
                 if ( lastSection.screen.substring(0,sectionName.length) === sectionName ) {
                     lastSection.screen = screenPath;
                     lastSection.state = state;
                 } else {
-                    this.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
+                    settings.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
                 }
             }
         }
@@ -172,7 +196,8 @@ window.shim = window.shim || {
         }
 
         this.log("D","shim: DO: clearSectionScreenState(" + refId + ")");
-        this.sectionStateScreenHistory = [ { history: [], screen: 'initial/0', state: null } ];
+        var settings = this.lookupRefIdData(refId);
+        settings.sectionStateScreenHistory = [ { history: [], screen: 'initial/0', state: null } ];
     },
     getControllerState: function( refId ) {
         if (this.enforceRefIdMatch && refId != this.refId) {
@@ -180,12 +205,13 @@ window.shim = window.shim || {
             return null;
         }
         this.log("D","shim: DO: getControllerState(" + refId + ")");
+        var settings = this.lookupRefIdData(refId);
         
-        if ( this.sectionStateScreenHistory.length === 0 ) {
+        if ( settings.sectionStateScreenHistory.length === 0 ) {
             this.log("D","shim: getControllerState: NULL!");
             return null;
         }
-        var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
         return lastSection.state;
     },
     getScreenPath: function(refId) {
@@ -194,13 +220,14 @@ window.shim = window.shim || {
             return null;
         }
         this.log("D","shim: DO: getScreenPath(" + refId + ")");
-        this._dumpScreenStateHistory();
+        var settings = this.lookupRefIdData(refId);
+        this._dumpScreenStateHistory(settings);
         
-        if ( this.sectionStateScreenHistory.length === 0 ) {
+        if ( settings.sectionStateScreenHistory.length === 0 ) {
             this.log("D","shim: getScreenPath: NULL!");
             return null;
         }
-        var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
         return lastSection.screen;
     },
     hasScreenHistory: function( refId ) {
@@ -209,16 +236,17 @@ window.shim = window.shim || {
             return false;
         }
         this.log("D","shim: DO: hasScreenHistory(" + refId + ")");
+        var settings = this.lookupRefIdData(refId);
         // two or more sections -- there must be history!
-        if ( this.sectionStateScreenHistory.length > 1 ) {
+        if ( settings.sectionStateScreenHistory.length > 1 ) {
             return true;
         }
         // nothing at all -- no history
-        if ( this.sectionStateScreenHistory.length === 0 ) {
+        if ( settings.sectionStateScreenHistory.length === 0 ) {
             return false;
         }
         // just one section -- is there any screen history within it?
-        var thisSection = this.sectionStateScreenHistory[0];
+        var thisSection = settings.sectionStateScreenHistory[0];
         return ( thisSection.history.length !== 0 );
     },
     popScreenHistory: function( refId ) {
@@ -227,14 +255,15 @@ window.shim = window.shim || {
             return null;
         }
         this.log("D","shim: DO: popScreenHistory(" + refId + ")");
+        var settings = this.lookupRefIdData(refId);
         
-        if ( this.sectionStateScreenHistory.length === 0 ) {
+        if ( settings.sectionStateScreenHistory.length === 0 ) {
             return null;
         }
         
         var lastSection;
         
-        lastSection    = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
         if ( lastSection.history.length !== 0 ) {
             // pop history from within this section
             var lastHistory = lastSection.history.pop();
@@ -244,13 +273,13 @@ window.shim = window.shim || {
         }
 
         // pop to an enclosing section
-        this.sectionStateScreenHistory.pop();
-        if ( this.sectionStateScreenHistory.length === 0 ) {
+        settings.sectionStateScreenHistory.pop();
+        if ( settings.sectionStateScreenHistory.length === 0 ) {
             return null;
         }
         
         // return the screen from that last section... (do not pop the history)
-        lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
         return lastSection.screen;
     },
     /**
@@ -262,7 +291,8 @@ window.shim = window.shim || {
             return false;
         }
         this.log("D","shim: DO: hasSectionStack(" + refId + ")");
-        return this.sectionStateScreenHistory.length !== 0;
+        var settings = this.lookupRefIdData(refId);
+        return settings.sectionStateScreenHistory.length !== 0;
     },
     popSectionStack: function( refId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -270,12 +300,13 @@ window.shim = window.shim || {
             return null;
         }
         this.log("D","shim: DO: popSectionStack(" + refId + ")");
-        if ( this.sectionStateScreenHistory.length !== 0 ) {
-            this.sectionStateScreenHistory.pop();
+        var settings = this.lookupRefIdData(refId);
+        if ( settings.sectionStateScreenHistory.length !== 0 ) {
+            settings.sectionStateScreenHistory.pop();
         }
         
-        if ( this.sectionStateScreenHistory.length !== 0 ) {
-            var lastSection = this.sectionStateScreenHistory[this.sectionStateScreenHistory.length-1];
+        if ( settings.sectionStateScreenHistory.length !== 0 ) {
+            var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
             return lastSection.screen;
         }
 
@@ -288,10 +319,11 @@ window.shim = window.shim || {
                 ", " + value + ")");
             return;
         }
+        var settings = this.lookupRefIdData(refId);
         var parts = elementPath.split('.');
         var i;
-        var pterm = that.sessionVariables;
-        var term = that.sessionVariables;
+        var pterm = settings.sessionVariables;
+        var term = settings.sessionVariables;
         for ( i = 0 ; i < parts.length ; ++i ) {
             if ( parts[i] in term ) {
                 pterm = term;
@@ -311,9 +343,10 @@ window.shim = window.shim || {
                 ")");
             return undefined;
         }
+        var settings = this.lookupRefIdData(refId);
         var parts = elementPath.split('.');
         var i;
-        var term = that.sessionVariables;
+        var term = settings.sessionVariables;
         for ( i = 0 ; i < parts.length ; ++i ) {
             if ( parts[i] in term ) {
                 term = term[parts[i]];
@@ -325,7 +358,7 @@ window.shim = window.shim || {
     },
     doAction: function( refId, promptPath, internalPromptContext, action, jsonObj ) {
         var that = this;
-		var value;
+        var value;
         if (that.enforceRefIdMatch && refId !== this.refId) {
             that.log("D","shim: IGNORED: doAction(" + refId + ", " + promptPath + 
                 ", " + internalPromptContext + ", " + action + ", ...)");
@@ -426,14 +459,13 @@ window.shim = window.shim || {
         }
         if ( action === 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
             value = JSON.parse(jsonObj);
-			if ( window.parent === window ) {
-				// naked
-				window.open(value.extras.url,'_blank', null, false);
-			} else {
-				// inside tab1
-				window.parent.pageStack.push(window.location.href);
-				window.parent.loadPage(value.extras.url);
-			}
+            if ( window.parent === window ) {
+                // naked
+                window.open(value.extras.url,'_blank', null, false);
+            } else {
+                // inside tab1
+                window.parent.pushPageAndOpen(value.extras.url);
+            }
             setTimeout(function() {
                 that.log("D","Opened new browser window for Survey content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
@@ -443,14 +475,13 @@ window.shim = window.shim || {
         }
         if ( action === 'android.content.Intent.ACTION_VIEW' ) {
             value = JSON.parse(jsonObj);
-			if ( window.parent === window ) {
-				// naked
-				window.open(value.extras.url,'_blank', null, false);
-			} else {
-				// inside tab1
-				window.parent.pageStack.push(window.location.href);
-				window.parent.loadPage(value.extras.url);
-			}
+            if ( window.parent === window ) {
+                // naked
+                window.open(value.extras.url,'_blank', null, false);
+            } else {
+                // inside tab1
+                window.parent.pushPageAndOpen(value.extras.url);
+            }
             setTimeout(function() {
                 that.log("D","Opened new browser window for 3rd party content. Close to continue");
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
@@ -474,14 +505,11 @@ window.shim = window.shim || {
         }
         this.log("D","shim: DO: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
         if ( this.showAlerts ) alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
-		if ( window.parent === window ) {
-			window.close();
-		} else {
-			if ( window.parent.pageStack.length > 0 ) {
-				var prior = window.parent.pageStack.pop();
-				window.parent.loadPage(prior);
-			}
-		}
+        if ( window.parent === window ) {
+            window.close();
+        } else {
+            window.parent.closeAndPopPage();
+        }
     },
     saveAllChangesFailed: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
@@ -498,14 +526,11 @@ window.shim = window.shim || {
         }
         this.log("D","shim: DO: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
         if ( this.showAlerts ) alert("notify container OK ignore all changes.");
-		if ( window.parent === window ) {
-			window.close();
-		} else {
-			if ( window.parent.pageStack.length > 0 ) {
-				var prior = window.parent.pageStack.pop();
-				window.parent.loadPage(prior);
-			}
-		}
+        if ( window.parent === window ) {
+            window.close();
+        } else {
+            window.parent.closeAndPopPage();
+        }
     },
     ignoreAllChangesFailed: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {

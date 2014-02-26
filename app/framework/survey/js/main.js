@@ -90,6 +90,13 @@ requirejs.config({
 });
 
 /**
+ * This function is called by the Application Designer environment to trigger a 
+ * re-draw of the current screen when returning from a linked table (sub-form).
+ */
+function redrawHook() {
+	require('controller').redrawHook();
+}
+/**
  * Test to confirm that all required dependencies have
  * been loaded. If there is a circular dependency, it will
  * be null. If so, log the error.
