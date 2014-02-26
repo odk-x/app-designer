@@ -42,13 +42,27 @@
 .backbutton {
 	display: block;
 	float: right;
-	font-size: 16px;
+	font-size: 20px;
+	font-weight: bold;
 	padding: 16px;
 	margin-bottom: 10px;
+}
+select {
+	font-size: 20px;
+}
+label {
+	font-size: 20px;
+}
+p {
+	font-size: 20px;
+}
+span {
+	font-size: 20px;
 }
 .pbutton {
 	display: inline-block;
 	font-size: 24px;
+	font-weight: bold;
 	margin-top: 36px;
 	padding: 24px;
 }
@@ -84,7 +98,7 @@
 }
 .themeviewport {
 	margin: 0 auto;
-	width: 1068px;
+	width: 1024px;
 	height: 1000px;
 	display: block;
 	background-color: white;
@@ -121,7 +135,7 @@
     border-radius: 2px 2px 0 0;
     color: black;
     font-size: 24px;
-    font-weight: normal;
+    font-weight: bold;
     cursor: pointer;
     position: relative;
     top: 3px;
