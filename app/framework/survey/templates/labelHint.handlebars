@@ -1,0 +1,9 @@
+{{#if display.image}}<div style="text-align: center;">
+        <img class="odk-label-image" src="{{formDirectory}}{{localize display.image}}"></img>
+</div>{{/if}}
+{{#if display.audio}}<div><{{#if pre4Android}}video{{else}}audio{{/if}} src="{{formDirectory}}{{localize display.audio}}"
+	audio="true"{{#if pre4Android}} onclick="play()"{{/if}} controls="controls">audio control not supported</{{#if pre4Android}}video{{else}}audio{{/if}}></div>{{/if}}
+{{#if display.video}}<div><video src="{{formDirectory}}{{localize display.video}}"
+	{{#if pre4Android}} onclick="play()"{{/if}} video="true" controls="controls">video control not supported</video></div>{{/if}}
+{{#if display.text}}<p class="odk-label">{{{localize display.text}}}</p>{{/if}}
+{{#if display.hint}}<p class="odk-hint">{{{localize display.hint}}}</p>{{/if}}

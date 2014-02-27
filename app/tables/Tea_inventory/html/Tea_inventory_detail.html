@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- TBL_IV_REF Detailed View -->
+<html>
+    <head>
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/Tea_inventory_detail.js"></script>
+        <h1><span id="TITLE"></span></h1>
+        <!-- To query and link to the result, replace the placeholders and put the following around the <span></span> tags.
+        <a href="#" onclick="control.openTable('TABLE_NAME', 'COL_NAME:' + data.get('COL_NAME'));"></a>
+        
+        Example:<a href="#" onclick="control.openTable('TABLE_NAME', 'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
+        -->
+        <p>Type: <span id="FIELD_1"></span></p>
+        <p>8oz: <span id="FIELD_2"></span>
+        <br>12oz: <span id="FIELD_3"></span>
+        <br>16oz: <span id="FIELD_4"></span></p>
+        <fieldset>
+            <legend>Offered:</legend>
+            <input id="FIELD_8" type="checkbox" name="hot" /> Hot
+            </br>
+            <input id="FIELD_9" type="checkbox" name="iced" /> Iced
+            </br>
+            <input id="FIELD_11" type="checkbox" name="loose" /> Loose Leaf
+            </br>
+            <input id="FIELD_12" type="checkbox" name="bags" /> Bags
+        </fieldset>    
+        <script>
+            $(display());
+        </script>
+    </body>
+</html>

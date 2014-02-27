@@ -1,0 +1,299 @@
+<html>
+<head>
+<!-- Author: mitchellsundt@gmail.com -->
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<title>Generate Stub XForm for Upload to ODK Aggregate</title>
+<!-- Conversion script for generating ODK1 Aggregate XForms definitions that 
+will allow ODK Survey to upload submissions to the ODK1 Aggregate server
+data processing path.  This enables forward migration of the device application
+to ODK Survey for flat forms without repeat groups. 
+
+To use, place your formDef.json files in separate directories ending in '-media'
+The script will search for formDef.json files in each such named directory, open
+that file, parse it, and synthesize a directoryName.xml file. The resulting 
+processed files can be uploaded using FormUploader into ODK1 Aggregate.
+-->
+<style type="text/css">
+/*<![CDATA[*/
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    font-size: 20px;
+}
+#drop{
+    background-color: white;
+    border:2px dashed #bbb;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    padding:25px;
+    text-align:center;
+    font:20pt bold;
+    color:#bbb
+}
+#browse {
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 1em;
+}
+#out{
+    clear: both;
+    height: 500px;
+    width: 100%;
+}
+#save {
+    float: right;
+    font-size: 20px;
+	font-weight: bold;
+    margin-top: 15px;
+}
+#errors p {
+    background-color: pink;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: .5em;
+}
+#warnings p {
+    background-color: orange;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: .5em;
+}
+.panel {
+    background-color: #f5f5f5;
+    padding: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+.input {
+	margin-top: 10px;
+    padding-left: .5em;
+    font-size: 20px;
+}
+/*]]>*/
+</style>
+<script type="text/javascript" src="js-xlsx/jszip.js"></script>
+<script type="text/javascript" src="js-xlsx/xlsx.js"></script>
+<script type="text/javascript" src="XRegExp-All-3.0.0-pre-2013-08-27.js"></script>
+<script type="text/javascript" src="underscore.js"></script>
+<script type="text/javascript" src="XLSXConverter.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+function removeEmptyStrings(rObjArr){
+    var outArr = [];
+    _.each(rObjArr, function(row){
+        var outRow = Object.create(row.__proto__);
+        _.each(row, function(value, key){
+            if(_.isString(value) && value.trim() === "") {
+                return;
+            }
+            outRow[key] = value;
+        });
+        if(_.keys(outRow).length > 0) {
+            outArr.push(outRow);
+        }
+    });
+    return outArr;
+}
+
+function to_json(workbook) {
+    var result = {};
+    _.each(workbook.SheetNames, function(sheetName) {
+        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+        rObjArr = removeEmptyStrings(rObjArr);
+        if(rObjArr.length > 0){
+            result[sheetName] =  rObjArr;
+        }
+    });
+    return result;
+}
+
+function clear_output() {
+    var out = document.getElementById("out");
+    if(out.innerHTML === undefined){
+        out.textContent = 'Loading...';
+    } else {
+        out.innerHTML = 'Loading...';
+    }
+}
+
+function print_output(output) {
+    var out = document.getElementById("out");
+    if(out.innerHTML === undefined){
+        out.textContent = output;
+    } else {
+        out.innerHTML = output;
+    }
+}
+
+
+function handleSave(e) {
+    var uriContent = "data:application/octet-stream," + encodeURIComponent(document.getElementById("out").value);
+    var downloader = document.createElement("iframe");
+    downloader.style.display = "none";
+    downloader.src = uriContent;
+    document.body.appendChild(downloader);
+}
+
+//TODO: Test multiple forms
+function handleDrop(e) {
+    var drop = document.getElementById('drop');
+    document.getElementById('browsefile').value = '';
+    e.stopPropagation();
+    e.preventDefault();
+    if ( !drop.disabled ) {
+        var files = e.dataTransfer.files;
+        var f = files[0];
+        if ( f ) {
+            makeReader(f);
+        }
+    } else {
+        alert("drop ignored -- conversion in progress!");
+    }
+}
+
+var wasClicked = false;
+function handleFileChooserClick(e) {
+	var browse = document.getElementById("browsefile");
+
+    // reset the value so that re-selecting the file will trigger a change event...
+    browse.value = '';
+    
+    if ( browse.disabled ) {
+        e.stopPropagation();
+        e.preventDefault();
+        alert("choose file ignored -- conversion in progress!");
+        return;
+    }
+
+    // debounce the file chooser...
+    if ( wasClicked ) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    wasClicked = true;
+    setTimeout(function() {
+        wasClicked = false;
+    }, 1000);
+    return wasClicked;
+}
+
+function handleFileSelect(e) {
+    var files = e.target.files;
+    var f = files[0];
+    if ( f ) {
+        makeReader(f);
+    }
+}
+function enableActions() {
+	var browse = document.getElementById("browsefile");
+    var drop = document.getElementById('drop');
+    browse.disabled = false;
+    drop.disabled = false;
+}
+function makeReader(f) {
+    var reader = new FileReader();
+    var name = f.name;
+    //Clear the warnings and errors:
+    var errorsEl = document.getElementById('errors');
+    while (errorsEl.hasChildNodes()) {
+        errorsEl.removeChild(errorsEl.lastChild);
+    }
+    var warnings = document.getElementById('warnings');
+    while (warnings.hasChildNodes()) {
+        warnings.removeChild(warnings.lastChild);
+    }
+
+    reader.onload = function(e) {
+        var data = e.target.result;
+        var errorEl = document.createElement("p");
+        if(f.name.slice(-3) === "xls"){
+            errorEl.innerHTML = "Sorry, XLS files are not supported.<br />";
+            errorEl.innerHTML += "You can convert your XLS file to XLSX using libreOffice or Google Docs.";
+            errorsEl.appendChild(errorEl);
+            enableActions();
+            /*
+            var cfb = CFB.read(data, {type:'binary'})
+            window.cfbs[name] = cfb;
+            //cfb.Paths.forEach(function(x){console.log(x); out.innerHTML+=x+"\n";});
+            var wb = parse_xlscfb(cfb);
+            var ws = wb.Sheets[wb.Directory[0]]
+            var csv = make_csv(ws);
+            var cmds = get_formulae(ws).join("\n");
+            out.innerHTML+=csv+"\n";
+            */
+        } else {
+             try {
+                var xlsx = XLSX.read(data, {type: 'binary'});
+                var jsonWorkbook = to_json(xlsx);
+                //console.log(jsonWorkbook);
+                var processedWorkbook = XLSXConverter.processJSONWorkbook(jsonWorkbook);
+                print_output(JSON.stringify(processedWorkbook, 2, 2));
+                _.each(XLSXConverter.getWarnings(), function(warning){
+                    var warningEl = document.createElement("p");
+                    warningEl.innerHTML = warning;
+                    console.log(warning);
+                    warnings.appendChild(warningEl);
+                });
+                enableActions();
+            } catch(e) {
+                enableActions();
+                errorEl.innerHTML = String(e);
+                errorsEl.appendChild(errorEl);
+                throw e;
+            }
+        }
+    };
+	
+	var browse = document.getElementById("browsefile");
+	var drop = document.getElementById('drop');
+
+    try {
+        browse.disabled = true;
+        drop.disabled = true;
+        clear_output();
+        reader.readAsBinaryString(f);
+    } catch(e) {
+        enableActions();
+        errorEl.innerHTML = "Could not read file.";
+        throw e;
+    }    
+}
+
+function handleDragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+}
+
+
+window.onload = function() {
+	var browse = document.getElementById("browsefile");
+	var drop = document.getElementById('drop');
+	browse.addEventListener('click', handleFileChooserClick, false);
+	browse.addEventListener('change', handleFileSelect, false);
+	drop.addEventListener('dragover', handleDragover, false);
+	drop.addEventListener('drop', handleDrop, false);
+	browse.disabled = false;
+}
+//]]>
+</script>
+</head>
+<body>
+  <div class="panel">
+	<p>Process your XLSX file into a <tt>formDef.json</tt> file.</p>
+    <div id="drop">Drop an XLSX file here to convert to JSON.</div>
+  </div>
+  <div id="browse">
+    Select an XLSX file from which to generate a <tt>formDef.json</tt> file<br/><input class="input" type="file" id="browsefile" disabled="true"/>
+  </div>
+  <div id="errors"></div>
+  <div id="warnings"></div>
+
+  <div class="panel">
+    <button onclick="handleSave();" id="save">Save</button>
+    <p>Output (to be saved as <tt>formDef.json</tt>):</p>
+    <textarea id="out"></textarea>
+  </div>
+</body>
+</html>

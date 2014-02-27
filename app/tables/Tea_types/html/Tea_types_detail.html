@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- beninTeaTypes Detailed View -->
+<html>
+    <head>
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+    </head>
+    <body onload="display();">
+        <script type="text/javascript" src="../js/Tea_types_detail.js"></script>
+        <h1><span id="TITLE"></span></h1>
+        <p>id: <span id="FIELD_1"></span></p>
+        <p>Origin: <span id="FIELD_2"></span></p>
+        <fieldset>
+            <legend>Details:</legend>
+            <input id="FIELD_3" type="checkbox" name="caffeinated" /> Caffeinated
+            <br>
+            <input id="FIELD_4" type="checkbox" name="fermented" /> Fermented
+            <br>
+        </fieldset>
+        <script>
+            $(display());
+        </script>
+    </body>
+</html>

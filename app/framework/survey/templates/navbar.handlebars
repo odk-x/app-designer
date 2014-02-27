@@ -1,0 +1,37 @@
+<div class="odk-screen{{#unless disableSwipeNavigation}}{{#if enableNavigation}}{{#if enableForwardNavigation}} swipeForwardEnabled{{/if}}{{#if enableBackNavigation}} swipeBackEnabled{{/if}}{{/if}}{{/unless}}" >
+    {{#if showHeader}}
+        <div class="odk-header" data-role="header" data-theme="c">
+            <div class="ui-grid-b my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
+                <div class="ui-block-a">
+                    <div class="odk-options-btn">
+                        <a data-role="button">{{localize form_title}}</a>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <a class="odk-prev-btn
+                    {{#unless enableBackNavigation}}ui-disabled{{/unless}}"
+                    data-role="button" data-icon="arrow-l" data-iconpos="left">{{#unless hideNavigationButtonText}}back{{/unless}}</a> 
+                </div>
+                <div class="ui-block-c">   
+                    <a class="odk-next-btn
+                    {{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
+                    data-role="button" data-icon="arrow-r" data-iconpos="right">{{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}continue{{else}}next{{/if}}{{/unless}}</a>               
+                </div>
+            </div>
+        </div>
+    {{/if}}
+    <div data-role="content" class="odk-scroll"><div class="odk-container"></div></div>
+	{{! emit the footer always -- so that we get full-screen content area }}
+	<div class="odk-footer" data-role="footer" data-theme="d">
+		{{#if showFooter}}
+			<div class="footerNavBtns">
+				<a class="odk-prev-btn
+				{{#unless enableBackNavigation}}ui-disabled{{/unless}}"
+				data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">back</a>     
+				<a class="odk-next-btn
+				{{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
+				data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">{{#if showAsContinueButton}}continue{{else}}next{{/if}}</a>
+			</div>
+		{{/if}}
+	</div>
+</div>
