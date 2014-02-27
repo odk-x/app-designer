@@ -4,10 +4,12 @@
 <meta http-equiv="content-type" content="text/html; charset=us-ascii">
 <!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="../app/framework/libs/jquery.1.10.2.js"></script>
-<script type="text/javascript" src="../app/framework/survey/js/shim.js"></script>
+<link rel='stylesheet' href='./lib/jquery-ui-1.10.3.custom.min.css'/>
 <link  rel='stylesheet' type='text/css'href='css/animate.css' />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="../app/framework/libs/jquery.1.10.2.js"></script>
+<script type="text/javascript" src="./lib/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="../app/framework/survey/js/shim.js"></script>
   <script type="text/javascript">
 //<![CDATA[
   var pageStack = [];
@@ -100,95 +102,30 @@
 <body class="fullembedded">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
 	<div class="flowleft">
+	  <div>
 	  <p>Launch page:</p>
-	  <table>
-		<tr>
-		  <td><input type="radio" name="page" id="survey" value=
-		  "framework/index.html?" onclick="loadPage('../app/framework/index.html?')" checked
-		  /></td>
-
-		  <td><label for="survey">ODK Survey Framework Page</label></td>
-		</tr>
-
-		<tr>
-		  <td><input type="radio" name="page" id="graph" value=
-		  "framework/optionspane.html" onclick=
-		  "loadPage('../app/framework/optionspane.html')"/></td>
-
-		  <td><label for="graph">ODK Tables Graph Page</label></td>
-		</tr>
-
-		<tr>
-		  <td><input type="radio" name="page" id="surveyTest" value=
-		  "framework/surveyTest.html" onclick=
-		  "loadPage('../app/framework/surveyTest.html')"/></td>
-
-		  <td><label for="surveyTest">ODK Survey Stepping Test Page
-		  (Silly)</label></td>
-		</tr>
-
-		<tr>
-		  <td><input type="radio" name="page" id="tablesTest" value=
-		  "../test/index.html" onclick="loadPage('../test/index.html')"/></td>
-
-		  <td><label for="tablesTest">ODK Tables API Test Page</label></td>
-		</tr>
-	  </table>
+  	  <select name="page" onchange="loadPage(this.value)">
+		<option id="survey" value="../app/framework/index.html?" selected ><label for="survey">ODK Survey Framework Page</label></option>
+		<option id="graph" value="../app/framework/optionspane.html" ><label for="graph">ODK Tables Graph Page</label></option>
+		<option id="surveyTest" value="../app/framework/surveyTest.html" ><label for="surveyTest">ODK Survey Step-Through Test</label></option>
+		<option id="tablesTest" value="../test/index.html" ><label for="tablesTest">ODK Tables API Test Page</label></option>
+	  </select>
+	  </div>
 	</div>
 	<div class="flowright">
+	  <div>
 	  <p>Device Dimension</p>
-
-	  <!-- 2 across -->
-	  <table >
-		<tr>
-		  <td><input type="radio" name="size" id="w480x854" value="w480x854" onclick=
-		  "resizeIframe('w480x854')" checked></td>
-
-		  <td><label for="w480x854">480 x 854 pixels (Droid)</label></td>
-
-		  <td><input type="radio" name="size" id="w480x800" value="w480x800" onclick=
-		  "resizeIframe('w480x800')"></td>
-
-		  <td><label for="w480x800">480 x 800 pixels (Nexus S, Nexus
-		  One)</label></td>
-		</tr>
-
-		<tr>
-		  <td><input type="radio" name="size" id="w720x1280" value="w720x1280"
-		  onclick="resizeIframe('w720x1280')"></td>
-
-		  <td><label for="w720x1280">720 x 1280 pixels (Galaxy Nexus)</label></td>
-
-		  <td><input type="radio" name="size" id="w768x1280" value="w768x1280"
-		  onclick="resizeIframe('w768x1280')"></td>
-
-		  <td><label for="w768x1280">768 x 1280 pixels (Nexus 4)</label></td>
-		</tr>
-		
-		<tr>
-		  <td><input type="radio" name="size" id="w800x1280" value="w800x1280"
-		  onclick="resizeIframe('w800x1280')"></td>
-
-		  <td><label for="w800x1280">800 x 1280 pixels (Nexus 7)</label></td>
-
-		  <td><input type="radio" name="size" id="w1024x600" value="w1024x600"
-		  onclick="resizeIframe('w1024x600')"></td>
-
-		  <td><label for="w1024x600">1024 x 600 pixels (7" Tablet)</label></td>
-		</tr>
-
-		<tr>
-		  <td><input type="radio" name="size" id="w1280x800" value="w1280x800"
-		  onclick="resizeIframe('w1280x800')"></td>
-
-		  <td><label for="w1280x800">1280 x 800 pixels (10.1" Tablet)</label></td>
-
-		  <td><input type="radio" name="size" id="w2560x1600" value="w2560x1600"
-		  onclick="resizeIframe('w2560x1600')"></td>
-
-		  <td><label for="w2560x1600">2560 x 1600 pixels (Nexus 10)</label></td>
-		</tr>
-	  </table>
+	  <select name="size" onchange="resizeIframe(this.value)">
+		<option id="w480x854" value="w480x854" selected><label for="w480x854">480 x 854 pixels (Droid)</label></option>
+		<option id="w480x800" value="w480x800" ><label for="w480x800">480 x 800 pixels (Nexus S, Nexus One)</label></option>
+		<option id="w720x1280" value="w720x1280" ><label for="w720x1280">720 x 1280 pixels (Galaxy Nexus)</label></option>
+		<option  id="w768x1280" value="w768x1280" ><label for="w768x1280">768 x 1280 pixels (Nexus 4)</label></option>
+		<option id="w800x1280" value="w800x1280" ><label for="w800x1280">800 x 1280 pixels (Nexus 7)</label></option>
+		<option id="w1024x600" value="w1024x600" ><label for="w1024x600">1024 x 600 pixels (7" Tablet)</label></option>
+		<option id="w1280x800" value="w1280x800" ><label for="w1280x800">1280 x 800 pixels (10.1" Tablet)</label></option>
+		<option id="w2560x1600" value="w2560x1600" ><label for="w2560x1600">2560 x 1600 pixels (Nexus 10)</label></option>
+	  </select>
+	  </div>
 	</div>
 	<div class="flowcenter">
 	  <button class="pbutton" name="purge" id="purge" onclick="purge()" type="button">Purge Database</button>
