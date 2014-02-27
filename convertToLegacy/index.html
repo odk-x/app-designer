@@ -1,7 +1,6 @@
 <html>
 <head>
 <!-- Author: mitchellsundt@gmail.com -->
-<meta http-equiv="X-UA-Compatible" content="IE=8"/>
 <title>Generate Stub XForm for Upload to ODK Aggregate</title>
 <!-- Conversion script for generating ODK1 Aggregate XForms definitions that 
 will allow ODK Survey to upload submissions to the ODK1 Aggregate server
@@ -18,8 +17,7 @@ processed files can be uploaded using FormUploader into ODK1 Aggregate.
 body {
     background-color: #f5f5f5;
     margin: 0;
-    font-size: 15pt;
-    font-family:Verdana;
+    font-size: 20px;
 }
 .fullheight {
 	position:fixed !important;
@@ -63,9 +61,9 @@ body {
 }
 #save {
     float: right;
-    font-size: 15pt;
+    font-size: 20px;
+	font-weight: bold;
     margin-top: 15px;
-    font-family: "Times New Roman";
 }
 .bottompanel.panel {
 	border-bottom: 0px;
@@ -80,10 +78,9 @@ body {
     padding-bottom: .5em;
 }
 .input {
+	margin-top: 10px;
     padding-left: .5em;
-}
-#id {
-    font-family:"Courier New";
+    font-size: 20px;
 }
 /*]]>*/
 </style>
@@ -519,13 +516,13 @@ window.onload = function() {
   <div>
   <noscript>This page requires javascript and has only been tested in a Chrome browser</noscript>
   <div class="panel">
-    <p>The generated <em>Stub XML Form Definition</em> can be uploaded to ODK Aggregate so that 
-	you can submit your form data from ODK Survey into ODK Aggregate. </p>
-	<p><font color="blue">This <em>Stub XML Form Definition</em> cannot be used by ODK Collect.</font></p>
-	<div id="drop">Drop a formDef.json file here to convert to Stub XML Form Definition.</div>
+    <p>A <em>Stub Form Definition</em> can be uploaded into ODK Aggregate to enable 
+	ODK Survey to send submissions into ODK Aggregate's XForms XML submissions path (the one used by ODK Collect). </p>
+	<p><font color="blue">This <em>Stub Form Definition</em> cannot be used by ODK Collect.</font></p>
+	<div id="drop">Drop a formDef.json file here to generate a Stub Form Definition.</div>
   </div>
   <div id="browse">
- Select a formDef.json file to convert to Stub XML Form Definition<input class="input" type="file" id="browsefile" disabled="true"/>
+ Select a formDef.json file from which to generate a Stub Form Definition<br/><input class="input" type="file" id="browsefile" disabled="true"/>
   </div>
   <div class="panel">
   <p id="changeable">Status</p>
@@ -534,8 +531,8 @@ window.onload = function() {
   </div>
   <div class="panel bottompanel">
     <button onclick="handleSave();" id="save">Save</button>
-    <p>Output:</p>
-	<textarea id="out" rows="20"></textarea>
+    <p>Output (the <em>Stub Form Definition</em>):</p>
+	<textarea id="out" rows="18"></textarea>
   </div>
 </body>
 </html>
