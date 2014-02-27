@@ -271,7 +271,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask(
         'adbpush-tables-demo-alpha2',
-        'Push everything for tables to the device',
+        'Push everything for the tables alpha2 demo to the device',
         function() {
             // In the alpha demo we want Tables and Survey, so we need all the
             // framework files. We only want a subset of the app/tables files,
