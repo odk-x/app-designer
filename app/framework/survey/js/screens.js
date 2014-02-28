@@ -449,5 +449,88 @@ screenTypes.columns_2 = screenTypes.base.extend({
     }
 });
 
+screenTypes.table_screen = screenTypes.base.extend({
+    type: "table_screen",
+    templatePath: "templates/table_screen.handlebars",
+    render: function(ctxt) {
+
+        var that = this;
+
+        try {
+            var tmplt = that.template(that._renderContext);
+            that.$el.html(tmplt);
+            that.$el.attr('data-theme', that._renderContext.dataTheme);
+            that.$el.attr('data-content-theme', that._renderContext.dataTheme);
+            that.$el.attr('data-role','page');
+        } catch(e) {
+            console.error("screens." + that.type + ".render.exception: " +
+                            String(e) + ' px: ' + that.promptIdx);
+            console.error(that);
+            alert("Error in template.");
+        }
+
+        $.each(that.activePrompts, function(idx, prompt){
+            prompt._render();
+            if(!prompt.$el){
+                console.error("render px: " + that.promptIdx + 
+                    " Prompts must have synchronous render functions. " +
+                    "Don't debounce them or launch async calls before el is set.");
+                console.error(prompt);
+                alert("Sub-prompt has not been rendered. See console for details.");
+            }
+
+        });
+
+        
+        that.$('.odk-container').find("div").each(function() {
+            var t = this;
+            var text = $(t).html();
+            for (var i = 0; i < that.activePrompts.length; i++) {
+                var prompt = that.activePrompts[i];
+                if (prompt.name == text) {
+                    if (prompt.$el) {
+                        $(t).html((prompt.$el).wrap("<div></div>"));
+                    }
+                    break;
+                }
+            }
+            
+         });
+         
+        ctxt.success();
+    },
+    configureRenderContext: function(ctxt) {
+        var that = this;
+        if ( that.activePrompts.length == 0 ) {
+            ctxt.log('D','configureRenderContext.noActivePrompts.success');
+            ctxt.success();
+        } else {
+            var onceCtxt = $.extend({}, ctxt, {
+                success:_.after(that.activePrompts.length, function() {
+                    ctxt.log('D','configureRenderContext.onceCtxt.success');
+                    ctxt.success();
+                }),
+                failure: _.once(function(m) {
+                    ctxt.log('D','configureRenderContext.onceCtxt.failure');
+                    ctxt.failure(m);
+                })
+            });
+            try {
+                // We do not support dependent default values within screen groups.
+                // If we are to do so, we will need to add code here to ensure
+                // their on activate functions are called in the right order.
+                _.each(that.activePrompts, function(prompt){
+                    prompt.buildRenderContext(onceCtxt);
+                });
+                that._renderContext.prompts = that.activePrompts;
+            } catch (ex) {
+                ctxt.log('E','screen.configureRenderContext.exception', 
+                    "exception: " + ex.message + " stack: " + ex.stack );
+                ctxt.failure({message: "Exception while initializing screen: " + ex.message});
+            }
+        }
+    }
+});
+
 return screenTypes;
 });

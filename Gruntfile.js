@@ -245,7 +245,7 @@ module.exports = function (grunt) {
 
 
     grunt.registerTask(
-        'adbpush-app',
+        'adbpush-tables-app',
         'Push everything in the app directory to the device',
         function() {
             var src = tablesConfig.appDir;
@@ -256,72 +256,87 @@ module.exports = function (grunt) {
 
     grunt.registerTask(
         'adbpush-tables',
-        'Push everything for tables to the device',
+        'Push everything for tables only to the device',
         function() {
-            var src = tablesConfig.appDir;
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName;
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            // We do not need all the Survey framework files. 
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'.  
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!framework/survey/**');
 
-            // Then delete the framework/suvey directory under tables
-            var deleteCmd = 'rm -r ' + dest + '/framework/' + surveyConfig.appName;
-            grunt.log.writeln('adb shell ' + deleteCmd);
-            grunt.task.run('exec:adbshell:' + deleteCmd);
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+            // And then we want to put the collect forms in the right place.
+            // This will push the collect forms for ALL the tables, but since
+            // only the files used in the Tables demo follows the convention
+            // required by the adbpush-collect task, that is ok.
+            grunt.task.run('adbpush-collect');
+
         });
 
     grunt.registerTask(
         'adbpush-tables-demo-alpha2',
-        'Push everything for tables to the device',
+        'Push everything for tables demo to the device',
         function() {
-            var src = tablesConfig.appDir;
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName;
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            // In the alpha demo we want Tables and Survey, so we need all the
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!tables/**',
+                'tables/geotagger/**',
+                'tables/Tea_houses/**',
+                'tables/Tea_types/**',
+                'tables/Tea_inventory/**',
+                'tables/Tea_houses_editable/**',
+                'tables/household/**',
+                'tables/household_member/**');
 
-            // Then delete the framework/suvey directory under tables
-            var deleteCmd = 'rm -r ' + dest + '/framework/' + surveyConfig.appName;
-            grunt.log.writeln('adb shell ' + deleteCmd);
-            grunt.task.run('exec:adbshell:' + deleteCmd);
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
 
-            // Then delete the tables directory under tables
-            var deleteCmd = 'rm -r ' + dest + '/' + tablesConfig.appName;
-            grunt.log.writeln('adb shell ' + deleteCmd);
-            grunt.task.run('exec:adbshell:' + deleteCmd);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/geotagger';
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName + '/' + tablesConfig.appName + '/geotagger';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/household';
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName + '/' + tablesConfig.appName + '/household';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/household_member';
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName + '/' + tablesConfig.appName + '/household_member';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/Tea_houses';
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName + '/' + tablesConfig.appName + '/Tea_houses';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/Tea_houses_editable';
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName + '/' + tablesConfig.appName + '/Tea_houses_editable';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/Tea_inventory';
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName + '/' + tablesConfig.appName + '/Tea_inventory';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/Tea_types';
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName + '/' + tablesConfig.appName + '/Tea_types';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            // And then we want to put the collect forms in the right place.
+            // This will push the collect forms for ALL the tables, but since
+            // only the files used in the Tables demo follows the convention
+            // required by the adbpush-collect task, that is ok.
+            grunt.task.run('adbpush-collect');
 
         });
 
@@ -329,15 +344,31 @@ module.exports = function (grunt) {
         'adbpush-survey',
         'Push everything for survey to the device',
         function() {
-            var src = surveyConfig.appDir;
-            var dest = surveyConfig.deviceMount + '/' + surveyConfig.appName;
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            // We do not need all the Tables framework files. 
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'.  
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!framework/tables/**');
 
-            // Then delete the framework/suvey directory under tables
-            var deleteCmd = 'rm -r ' + dest + '/framework/' + tablesConfig.appName;
-            grunt.log.writeln('adb shell ' + deleteCmd);
-            grunt.task.run('exec:adbshell:' + deleteCmd);
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.appDir + '/' + fileName;
+                var dest =
+                    surveyConfig.deviceMount +
+                    '/' +
+                    surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
 
         });
 
@@ -345,40 +376,40 @@ module.exports = function (grunt) {
         'adbpush-survey-demo-beta2',
         'Push everything for survey to the device',
         function() {
-            var src = surveyConfig.appDir;
-            var dest = surveyConfig.deviceMount + '/' + surveyConfig.appName;
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            // In the beta demo we only want Survey, so we do NOT need all the tables
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!framework/tables/**',
+                '!tables/**',
+                'tables/exampleForm/**',
+                'tables/household/**',
+                'tables/household_member/**',
+                'tables/selects/**');
 
-            // Then delete the framework/suvey directory under tables
-            var deleteCmd = 'rm -r ' + dest + '/framework/' + tablesConfig.appName;
-            grunt.log.writeln('adb shell ' + deleteCmd);
-            grunt.task.run('exec:adbshell:' + deleteCmd);
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.appDir + '/' + fileName;
+                var dest =
+                    surveyConfig.deviceMount +
+                    '/' +
+                    surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
 
-            // Then delete the survey/tables directory under tables
-            var deleteCmd = 'rm -r ' + dest + '/' + tablesConfig.appName;
-            grunt.log.writeln('adb shell ' + deleteCmd);
-            grunt.task.run('exec:adbshell:' + deleteCmd);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/exampleForm';
-            var dest = tablesConfig.deviceMount + '/' + surveyConfig.appName + '/' + tablesConfig.appName + '/exampleForm';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/household';
-            var dest = tablesConfig.deviceMount + '/' + surveyConfig.appName + '/' + tablesConfig.appName + '/household';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/household_member';
-            var dest = tablesConfig.deviceMount + '/' + surveyConfig.appName + '/' + tablesConfig.appName + '/household_member';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
-            var src = tablesConfig.appDir + '/' + tablesConfig.appName + '/selects';
-            var dest = tablesConfig.deviceMount + '/' + surveyConfig.appName + '/' + tablesConfig.appName + '/selects';
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
         });
 
     grunt.registerTask(
@@ -503,6 +534,23 @@ module.exports = function (grunt) {
                 });
             }
 
+        });
+
+    grunt.registerTask('testglob',
+        function() {
+            var dirs = grunt.file.expand(
+                'app/**',
+                '!app/tables/**',
+                'app/tables/geotagger/**',
+                'app/tables/Tea_houses/**',
+                'app/tables/Tea_types/**',
+                'app/tables/Tea_inventory/**',
+                'app/tables/Tea_houses_editable/**',
+                'app/tables/household/**',
+                'app/tables/household_member/**');
+            dirs.forEach(function(d) {
+                grunt.log.writeln(d);
+            });
         });
 
     grunt.registerTask('server', function (target) {
