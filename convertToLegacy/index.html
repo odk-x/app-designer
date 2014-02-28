@@ -380,7 +380,7 @@ function processFormDef(formDef) {
 };
 
 function handleSave(e) {
-    var uriContent = "data:application/xml," + encodeURIComponent(document.getElementById("out").value);
+    var uriContent = "data:application/octet-stream," + encodeURIComponent(document.getElementById("out").value);
     var downloader = document.createElement("iframe");
     downloader.style.display = "none";
     downloader.src = uriContent;
