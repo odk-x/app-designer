@@ -207,7 +207,7 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpush',
         'Perform all the adbpush tasks',
-        ['adbpush-collect', 'adbpush-app']);
+        ['adbpush-collect', 'adbpush-tables-app']);
 
     grunt.registerTask(
         'adbpull-debug',
