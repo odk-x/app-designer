@@ -4,7 +4,8 @@
       {
         "clause": "begin screen",
         "screen": {
-          "screen_type": "table_screen"
+          "screen_type": "custom",
+          "templatePath": "../tables/gridScreen/forms/gridScreen/comparison_screen.handlebars"
         },
         "_row_num": 2
       },
@@ -271,6 +272,16 @@
       {
         "clause": "end screen",
         "_row_num": 36
+      },
+      {
+        "screen": {
+          "screen_type": "custom"
+        },
+        "type": "note",
+        "display": {
+          "text": "This is a test"
+        },
+        "_row_num": 37
       }
     ],
     "calculates": [
@@ -1531,12 +1542,24 @@
             "promptIdx": 29
           },
           {
+            "type": "note",
+            "display": {
+              "text": "This is a test"
+            },
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen37",
+            "promptIdx": 30
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 37,
-            "_branch_label_enclosing_screen": "survey/_screen37",
-            "promptIdx": 30
+            "_row_num": 38,
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 31
           }
         ],
         "validation_tag_map": {
@@ -1546,7 +1569,8 @@
           {
             "clause": "begin screen",
             "screen": {
-              "screen_type": "table_screen"
+              "screen_type": "custom",
+              "templatePath": "../tables/gridScreen/forms/gridScreen/comparison_screen.handlebars"
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1561,29 +1585,41 @@
             "operationIdx": 0
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 37,
-            "operationIdx": 1
-          },
-          {
             "_row_num": 37,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "screen_type": "custom"
+            },
+            "operationIdx": 1
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 38,
             "operationIdx": 2
+          },
+          {
+            "_row_num": 38,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 3
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 37,
-            "operationIdx": 3
+            "_row_num": 38,
+            "operationIdx": 4
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_contents": 2,
-          "_screen37": 2
+          "_screen37": 1,
+          "_contents": 3,
+          "_screen38": 3
         }
       },
       "initial": {
@@ -1711,7 +1747,9 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 8
           },
           {
