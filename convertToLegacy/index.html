@@ -195,7 +195,7 @@ function buildFormStructures( instanceBodyPrefix, bindPrefix, bodyPrefix, model 
                     bindBody += bindPrefix + element + '" type="date"/>\n';
                 } else if ( defn.elementType === "dateTime" ) {
                     instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
-                    bindBody += bindPrefix + element + '" type="datetime"/>\n';
+                    bindBody += bindPrefix + element + '" type="dateTime"/>\n';
                 } else if ( defn.elementType === "time" ) {
                     instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
                     bindBody += bindPrefix + element + '" type="time"/>\n';
@@ -353,7 +353,7 @@ function processFormDef(formDef) {
 			if ( xmlUserIdPropertyName != null) {
 				bindBody += bindPrefix + 'meta/userID" type="string"/>\n';
 			}
-			bindBody += bindPrefix + 'meta/timeEnd" type="datetime"/>\n';
+			bindBody += bindPrefix + 'meta/timeEnd" type="dateTime"/>\n';
 			bindBody += bindPrefix + 'meta/instanceName" type="string"/>\n';
 			bindBody += bindPrefix + 'meta/formID" type="string"/>\n';
 			bindBody += bindPrefix + 'meta/savepointType" type="string"/>\n';
