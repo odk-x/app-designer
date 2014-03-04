@@ -449,9 +449,9 @@ screenTypes.columns_2 = screenTypes.base.extend({
     }
 });
 
-screenTypes.table_screen = screenTypes.base.extend({
-    type: "table_screen",
-    templatePath: "templates/table_screen.handlebars",
+screenTypes.custom = screenTypes.base.extend({
+    type: "custom",
+    templatePath: "templates/custom_screen.handlebars",
     render: function(ctxt) {
 
         var that = this;
@@ -484,7 +484,7 @@ screenTypes.table_screen = screenTypes.base.extend({
         
         that.$('.odk-container').find("div").each(function() {
             var t = this;
-            var text = $(t).html();
+            var text = $(t).attr('field-name');
             for (var i = 0; i < that.activePrompts.length; i++) {
                 var prompt = that.activePrompts[i];
                 if (prompt.name == text) {
