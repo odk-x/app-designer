@@ -2560,7 +2560,9 @@
             "_row_num": 18,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 9
           },
           {
@@ -2667,7 +2669,9 @@
             "_row_num": 5,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 4
           },
           {
@@ -2752,7 +2756,9 @@
             "_row_num": 4,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 3
           },
           {
@@ -2999,7 +3005,9 @@
             "_row_num": 12,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 11
           },
           {
@@ -3242,7 +3250,9 @@
             "_row_num": 15,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 16
           },
           {
@@ -3726,7 +3736,9 @@
             "_row_num": 28,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 33
           },
           {
@@ -4378,7 +4390,9 @@
             "_row_num": 39,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 41
           },
           {
@@ -4708,7 +4722,9 @@
             "_row_num": 23,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 13
           },
           {
@@ -4867,7 +4883,9 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 8
           },
           {

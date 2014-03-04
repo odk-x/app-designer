@@ -817,7 +817,9 @@
             "_row_num": 16,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 5
           },
           {
@@ -960,7 +962,9 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "hideInBackHistory": true,
+            "screen": {
+              "hideInBackHistory": true
+            },
             "operationIdx": 8
           },
           {
