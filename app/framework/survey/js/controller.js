@@ -716,7 +716,7 @@ return {
         
         if ( options.popHistoryOnExit ) {
             stateString = 'popHistoryOnExit';
-        } else if ( operation.hideInBackHistory ) {
+        } else if ( operation.screen && operation.screen.hideInBackHistory ) {
             stateString = 'hideInBackHistory';
         }
         
