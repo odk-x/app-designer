@@ -207,7 +207,7 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpush',
         'Perform all the adbpush tasks',
-        ['adbpush-collect', 'adbpush-app']);
+        ['adbpush-collect', 'adbpush-tables-app']);
 
     grunt.registerTask(
         'adbpull-debug',
@@ -535,23 +535,6 @@ module.exports = function (grunt) {
                 });
             }
 
-        });
-
-    grunt.registerTask('testglob',
-        function() {
-            var dirs = grunt.file.expand(
-                'app/**',
-                '!app/tables/**',
-                'app/tables/geotagger/**',
-                'app/tables/Tea_houses/**',
-                'app/tables/Tea_types/**',
-                'app/tables/Tea_inventory/**',
-                'app/tables/Tea_houses_editable/**',
-                'app/tables/household/**',
-                'app/tables/household_member/**');
-            dirs.forEach(function(d) {
-                grunt.log.writeln(d);
-            });
         });
 
     grunt.registerTask('server', function (target) {
