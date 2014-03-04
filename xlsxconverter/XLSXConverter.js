@@ -1301,7 +1301,7 @@
                     _screen_block: defn };
                 if ( 'screen' in clause ) {
                     // copy the 'screen' settings into the clause
-                    _.extend(bsb, clause.screen );
+                    bsb.screen = clause.screen;
                     delete clause.screen;
                 }
                 flattened.push(bsb);
