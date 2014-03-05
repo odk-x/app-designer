@@ -75,6 +75,8 @@
 .ui-checkbox-on, .ui-radio-on {border:1px solid {{button-border-color}};
 	background-image:-webkit-linear-gradient({{button-selected-color-start}}, {{button-selected-color-end}});
 	font-weight:bold;color:{{button-selected-color-start}};}
+
+
 .ui-controlgroup-vertical .ui-radio .ui-btn-inner, .ui-controlgroup-vertical .ui-checkbox .ui-btn-inner  {height: {{button-height}};}
 .ui-controlgroup-vertical .ui-radio .ui-btn-text, .ui-controlgroup-vertical .ui-checkbox .ui-btn-text {
     font-size: {{button-text-size}};

@@ -54,11 +54,11 @@ function generateCustomTheme(){
   var bgColor = $("#background-color").val();
   var fontColor = $("#font-color").val();
   var buttonColorStart = $("#button-color").val();
-  var buttonColorEnd = reduceColor(buttonColorStart);
+  var buttonColorEnd = reduceColor(buttonColorStart,1);
   var buttonSelectedColorStart = $("#button-selected-color").val();
-  var buttonSelectedColorEnd = reduceColor(buttonSelectedColorStart);
+  var buttonSelectedColorEnd = reduceColor(buttonSelectedColorStart, 1);
   var navbarColorStart = $("#navbar-background-color").val();
-  var navbarColorEnd = reduceColor(navbarColorStart);
+  var navbarColorEnd = reduceColor(navbarColorStart,1);
   var navbarFontColor = $("#navbar-font-color").val();
   var navbarButtonColor= $("#navbar-button-color").val();
   var navbarButtonSelectedColor= $("#navbar-button-selected-color").val();
@@ -93,9 +93,9 @@ function generateCustomStyles(){
   var buttonTextColor = $("#button-text-color").val();
   var fontFamily = $("#select-font-family").val();
   var buttonColorStart = $("#button-color").val();
-  var buttonColorEnd = reduceColor(buttonColorStart);
+  var buttonColorEnd = reduceColor(buttonColorStart,1);
   var buttonSelectedColorStart = $("#button-selected-color").val();
-  var buttonSelectedColorEnd = reduceColor(buttonSelectedColorStart);
+  var buttonSelectedColorEnd = reduceColor(buttonSelectedColorStart,1);
     var buttonBorderColor = $("#button-border-color").val();
   var buttonRadius = $("#button-radius").val();
   var buttonHeight = $("#button-height").val();
@@ -138,19 +138,19 @@ function selectFontFamily(){
   
 }
 
-function reduceColor(start) {
+function reduceColor(start, factor) {
   var red = start.substring(1, 3);
   var green = start.substring(3, 5);
   var blue = start.substring(5, 7);
-  red = Math.max(parseInt(red, 16) - 16, 0).toString(16);
+  red = Math.max(parseInt(red, 16) - 16*factor, 0).toString(16);
   if (red.length < 2) {
     red = "0" + red;
   }
-  blue = Math.max(parseInt(blue, 16) - 16, 0).toString(16);
+  blue = Math.max(parseInt(blue, 16) - 16*factor, 0).toString(16);
   if (blue.length < 2) {
     blue = "0" + blue;
   }
-  green = Math.max(parseInt(green, 16) - 16, 0).toString(16);
+  green = Math.max(parseInt(green, 16) - 16*factor, 0).toString(16);
     if (green.length < 2) {
     green = "0" + green;
   }
