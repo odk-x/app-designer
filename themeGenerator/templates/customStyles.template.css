@@ -2,7 +2,7 @@
 	color: {{font-color}};
 	background: {{background-color}}; 
 	text-shadow: 0 /*{d-body-shadow-x}*/ 0 /*{d-body-shadow-y}*/ 0 /*{d-body-shadow-radius}*/ #000 /*{d-body-shadow-color}*/;
-  font-family:  {{font-family}};
+ /* currently not working ----- font-family:  {{font-family}}; */
   
 }
 .odk-label {
@@ -16,11 +16,47 @@
     font-style: italic;
 }
 
+/* Navbar styles */  /* in progress */
+.ui-bar-c{border:1px solid {{navbar-background-color-start}} ;background: -webkit-linear-gradient({{navbar-background-color-start}}, {{navbar-background-color-end}});color:{{navbar-font-color}};font-weight:bold;font-family:inherit;}
+.ui-bar-c .ui-link-inherit{color:#3e3e3e}
+.ui-bar-c a.ui-link{color:#7cc4e7;font-weight:bold;}
+.ui-bar-c a.ui-link:visited{color:#2489ce}
+.ui-bar-c a.ui-link:hover{color:#2489ce}
+.ui-bar-c a.ui-link:active{color:#2489ce}
+.ui-bar-c input,.ui-bar-c select,.ui-bar-c textarea,.ui-bar-c button{font-family:inherit}
+.ui-body-c,.ui-overlay-c{border:2px solid #f2f2f2;color:#34495e;background:#fff;background-image:none}
+.ui-body-c{font-family:inherit;}
+.ui-body-c input,.ui-body-c select,.ui-body-c textarea,.ui-body-c button{font-family:inherit}
+.ui-body-c .ui-link-inherit{color:#333}
+.ui-body-c .ui-link{color:#2c3e50;font-weight:bold;}
+.ui-body-c .ui-link:visited,.ui-body-c .ui-link:hover,.ui-body-c .ui-link:active{color:#eee}
+.ui-body-c.ui-input-text{border:2px solid #eee;}
+.ui-body-c.ui-input-text.ui-focus{border:2px solid #eee;-webkit-transition:border linear .2s;-moz-transition:border linear .2s;-o-transition:border linear .2s;transition:border linear .2s}
+.ui-btn-up-c{/*border:1px solid {{button-border-color}};*/background-image: -webkit-linear-gradient({{navbar-button-color-start}}, {{navbar-button-color-end}});font-weight:bold;color:#000;}
+.ui-btn-up-c:visited,.ui-btn-up-c a.ui-link-inherit{color:#000}
+.ui-btn-hover-c{border:1px solid {{button-border-color}} ;background:{{navbar-button-selected-color}};font-weight:bold;color:{{navbar-font-color}};}
+.ui-btn-hover-c:visited,.ui-btn-hover-c:hover,.ui-btn-hover-c a.ui-link-inherit{color:#000}
+.ui-btn-down-c{/*border:1px solid {{button-border-color}};*/background:{{navbar-button-selected-color}};font-weight:bold;color:{{navbar-font-color}};}
+.ui-btn-down-c:visited,.ui-btn-down-c:hover,.ui-btn-down-c a.ui-link-inherit{color:{{navbar-font-color}};}
+.ui-btn-up-c,.ui-btn-hover-c,.ui-btn-down-c{font-family:inherit;text-decoration:none}
+.ui-header .ui-btn-inner .ui-btn-text {color : {{navbar-font-color}};}
+
+/* sets the text color for buttons */
 .ui-btn-text {
-	color:  {{button-text-color}};
+	/*color:  {{button-text-color}};*/
     font-size: 1em;
 }
 
+/*other buttons*/
+.ui-btn-up-d, .ui-btn-down-d {border:1px solid {{other-button-border-color}}; font-weight:bold; color: {{other-button-text-color}} }
+.ui-btn-up-d {background-image: -webkit-linear-gradient({{other-button-color-start}}, {{other-button-color-end}});}
+.ui-btn-down-d {background-image: -webkit-linear-gradient({{other-button-selected-color-start}},{{other-button-selected-color-end}});}
+
+.ui-radio-off .ui-btn-text, .ui-radio-on .ui-btn-text, .ui-checkbox-on .ui-btn-text, .ui-checkbox-off {
+	color : {{button-text-color}};
+}
+
+/* sets the text color in the navbar */
 .ui-btn-text .ui-bar-c {
 	color: #000;
 }
@@ -34,15 +70,26 @@
 }
 
 .ui-header .ui-btn-inner, .ui-footer .ui-btn-inner, .ui-mini .ui-btn-inner, .ui-header .ui-btn-inner .ui-btn-text {
-	color:  #000000;
+	/*color:  #000000;*/
     font-size: 1em;
 }
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label {
     font-size: 1em;
 }
 
+/* fixes the zebra coloring on the main page */
+.instanceList.layout-zebra .ui-btn-up-d {
+	background-image : -webkit-linear-gradient({{background-color}}, {{background-color}});
+	color: {{font-color}};
+}
+.instanceList.layout-zebra li:nth-child(even) .ui-btn-up-d, .instanceList.layout-zebra li:nth-child(even) {
+	background-image : -webkit-linear-gradient({{background-color-reduce}}, {{background-color-reduce}});
+	color: {{font-color}};
+}
+
+
 /* Form element styles */
-.ui-bar-a{border:1px solid {{button-color}};background:{{button-color}};color:#fff;font-weight:bold;font-family:inherit;}
+/*.ui-bar-a{border:1px solid {{button-color}};background:{{button-color}};color:#fff;font-weight:bold;font-family:inherit;}*/
 .ui-bar-a .ui-link-inherit{color:{{font-color}}}
 .ui-bar-a a.ui-link{color:{{font-color}};font-weight:bold;}
 .ui-bar-a a.ui-link:visited{color:#2489ce}
@@ -64,17 +111,13 @@
 .ui-btn-down-a{border:1px solid {{button-border-color}};background:{{button-selected-color}};font-weight:bold;color:#fff;}
 .ui-btn-down-a:visited,.ui-btn-down-a:hover,.ui-btn-down-a a.ui-link-inherit{color:#fff}
 .ui-btn-up-a,.ui-btn-hover-a,.ui-btn-down-a{font-family:inherit;text-decoration:none}
-.ui-btn-up-d {border:1px solid {{button-border-color}};
+.ui-radio-off, .ui-checkbox-off {border:1px solid {{button-border-color}};
 	background-image:-webkit-linear-gradient({{button-color-start}}, {{button-color-end}});
 	font-weight:bold;
-	color:{{button-color-start}};}
-.ui-btn-down-d {border:1px solid {{button-border-color}};
-	background-image:-webkit-linear-gradient({{button-selected-color-start}}, {{button-selected-color-end}});
-	font-weight:bold;
-	color:{{button-selected-color-start}};}
+	}
 .ui-checkbox-on, .ui-radio-on {border:1px solid {{button-border-color}};
 	background-image:-webkit-linear-gradient({{button-selected-color-start}}, {{button-selected-color-end}});
-	font-weight:bold;color:{{button-selected-color-start}};}
+	font-weight:bold;}
 
 
 .ui-controlgroup-vertical .ui-radio .ui-btn-inner, .ui-controlgroup-vertical .ui-checkbox .ui-btn-inner  {height: {{button-height}};}
@@ -89,13 +132,28 @@
 	padding-left: 0px;
 }
 
-.ui-corner-all {
-	-webkit-border-radius:  {{button-radius}}; /*{global-radii-blocks}*/
-	border-radius: {{button-radius}} /*{global-radii-blocks}*/;
-}
-
-
 .ui-btn-up-c .ui-btn-text, .ui-btn-down-c .ui-btn-text {
 	-webkit-color: #000;
 }
+
+/*  Corner rounding class */
+.ui-corner-all {
+	-webkit-border-radius:  {{button-radius}}; 
+	border-radius: {{button-radius}};
+}
+
+/*  Corner rounding class */
+.ui-controlgroup-horizontal {
+	-webkit-border-radius:  13px; 
+	border-radius: 13px;
+}
+
+.ui-input-text {
+	-webkit-border-radius:  .6em; /*{global-radii-blocks}*/
+	border-radius: .6em; /*{global-radii-blocks}*/
+}
+/*--------------*/
+
+
+
 
