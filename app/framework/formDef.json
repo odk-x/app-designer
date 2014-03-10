@@ -231,6 +231,38 @@
       {
         "clause": "exit section",
         "_row_num": 43
+      },
+      {
+        "branch_label": "adult_coverage",
+        "_row_num": 44
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/adult_coverage/forms/adult_coverage/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 45
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 46
+      },
+      {
+        "branch_label": "child_coverage",
+        "_row_num": 47
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/child_coverage/forms/child_coverage/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 48
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 49
       }
     ],
     "settings": [
@@ -352,6 +384,22 @@
           "text": "gridScreen"
         },
         "_row_num": 13
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "child_coverage",
+        "display": {
+          "text": "Child Coverage Immunizations"
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "adult_coverage",
+        "display": {
+          "text": "Adult Coverage Immunizations"
+        },
+        "_row_num": 15
       }
     ]
   },
@@ -526,6 +574,22 @@
             "text": "gridScreen"
           },
           "_row_num": 13
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "child_coverage",
+          "display": {
+            "text": "Child Coverage Immunizations"
+          },
+          "_row_num": 14
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "adult_coverage",
+          "display": {
+            "text": "Adult Coverage Immunizations"
+          },
+          "_row_num": 15
         }
       ]
     },
@@ -822,12 +886,38 @@
             "promptIdx": 13
           },
           {
+            "url": "'?' + opendatakit.getHashString('../tables/adult_coverage/forms/adult_coverage/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 45,
+            "__rowNum__": 44,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen45",
+            "promptIdx": 14
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/child_coverage/forms/child_coverage/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen48",
+            "promptIdx": 15
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 44,
-            "_branch_label_enclosing_screen": "survey/_screen44",
-            "promptIdx": 14
+            "_row_num": 50,
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 16
           }
         ],
         "validation_tag_map": {
@@ -1033,25 +1123,51 @@
             "operationIdx": 29
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 44,
+            "_row_num": 45,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 30
           },
           {
-            "_row_num": 44,
+            "clause": "exit section",
+            "_row_num": 46,
+            "__rowNum__": 45,
+            "_token_type": "exit_section",
+            "operationIdx": 31
+          },
+          {
+            "_row_num": 48,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 32
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 49,
+            "__rowNum__": 48,
+            "_token_type": "exit_section",
+            "operationIdx": 33
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 50,
+            "operationIdx": 34
+          },
+          {
+            "_row_num": 50,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 31
+            "operationIdx": 35
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 44,
-            "operationIdx": 32
+            "_row_num": 50,
+            "operationIdx": 36
           }
         ],
         "branch_label_map": {
@@ -1084,8 +1200,12 @@
           "_screen39": 26,
           "gridScreen": 28,
           "_screen42": 28,
-          "_contents": 31,
-          "_screen44": 31
+          "adult_coverage": 30,
+          "_screen45": 30,
+          "child_coverage": 32,
+          "_screen48": 32,
+          "_contents": 35,
+          "_screen50": 35
         }
       }
     }
