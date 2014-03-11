@@ -31,6 +31,8 @@ $(document).ready(function (){
 
 });
 
+var numWindows = 0;
+
 function showSource(text){ 
   var newWindow = window.open();
   newWindow.document.write(text);
@@ -181,19 +183,22 @@ function generateCustomStyles(){
 }
 
 function addToIFrame(customStyle, customTheme){
-  var oldStyles = frames[0].document.getElementById("customStyle");
-  if (oldStyles)
-    oldStyles.remove();
+  //var oldStyles = frames[0].document.getElementById("customStyle");
+  for (var i = 0; i <= numWindows; i++) {
+    var oldStyles = frames[i].document.getElementById("customStyle");
+    if (oldStyles)
+      oldStyles.remove();
 
-  var newStyles = $("<style id='customStyle'>" + customStyle + "</style>")[0];
-  frames[0].document.body.appendChild(newStyles); 
+    var newStyles = $("<style id='customStyle'>" + customStyle + "</style>")[0];
+    frames[i].document.body.appendChild(newStyles); 
 
-  oldStyles = frames[0].document.getElementById("customTheme");
-  if (oldStyles)
-    oldStyles.remove();
+    oldStyles = frames[i].document.getElementById("customTheme");
+    if (oldStyles)
+      oldStyles.remove();
 
-  newStyles = $("<style id='customTheme'>" + customTheme + "</style>")[0];
-  frames[0].document.body.appendChild(newStyles); 
+    newStyles = $("<style id='customTheme'>" + customTheme + "</style>")[0];
+    frames[i].document.body.appendChild(newStyles); 
+  }
 }
 
 function selectFontFamily(){
