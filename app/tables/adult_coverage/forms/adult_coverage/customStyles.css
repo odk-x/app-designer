@@ -183,4 +183,9 @@ td, th {
 .ui-btn-text {
     padding: 0;
 }
+
+.screen-overflow {
+    clear: both;
+    overflow-x: scroll;
+}
  
