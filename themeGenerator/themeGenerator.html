@@ -6,6 +6,45 @@
     <script src="./lib/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="./lib/colorpicker/spectrum.js"></script>
     <script src="./lib/FileSaver.js"></script>
+    <script type="text/javascript" src="../app/framework/survey/js/shim.js"></script>
+    <script type="text/javascript">
+      var pageStack = [];
+      function pushPageAndOpen(value) {
+        var ps = document.getElementById('odk_view');
+        // var customStyle = generateCustomStyles();
+        // var customTheme = generateCustomTheme();
+        var parent = ps.parentNode;
+        ps.id = 'odk_view-' + pageStack.length;
+        pageStack.push(ps.contentWindow.shim.refId);
+        ps.style.display = 'none';
+        var newIframe = document.createElement('iframe');
+        newIframe.className = 'iframe-view';
+        newIframe.setAttribute('name', 'odk_view');
+        newIframe.id = 'odk_view';
+        newIframe.src = value;
+        parent.appendChild(newIframe);
+        numWindows++;
+        setTimeout(function(){
+        addToIFrame(generateCustomStyles(), generateCustomTheme());
+      },500);
+      }
+      function closeAndPopPage() {
+        // this should remove the current iframe and raise the prior one to the foreground
+        if ( pageStack.length > 0 ) {
+          var priorRefId = pageStack.pop();
+          numWindows--;
+          var priorIframe = document.getElementById('odk_view-' + pageStack.length);
+          var ps = document.getElementById('odk_view');
+          var parent = ps.parentNode;
+          priorIframe.style.display = 'block';
+          parent.removeChild(ps); 
+          priorIframe.id = 'odk_view';
+          priorIframe.contentWindow.shim.refId = priorRefId;
+          priorIframe.contentWindow.redrawHook();
+        }
+      }
+
+    </script>
     <link rel='stylesheet' href='./lib/colorpicker/spectrum.css'/>
     <link rel='stylesheet' href='./lib/jquery-ui-1.10.3.custom.min.css'/>
     <link rel='stylesheet' href='./generateStyle.css'/>
@@ -176,7 +215,7 @@
   </div>
       
      <iframe id="odk_view" 
-      src='http://localhost:8000/app/framework/index.html?#formPath=../tables/exampleForm/forms/exampleForm/&screenPath=initial/6&refId=uuid%3Af15ff590-56b1-481f-99a4-0a052454ab54' class="iframe-view"
+      src='../app/framework/index.html?' class="iframe-view"
       >
     </iframe>
   </body>
