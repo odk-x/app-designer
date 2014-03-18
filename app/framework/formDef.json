@@ -263,6 +263,22 @@
       {
         "clause": "exit section",
         "_row_num": 49
+      },
+      {
+        "branch_label": "graphExample",
+        "_row_num": 50
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/graphExample/forms/graphExample/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 51
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 52
       }
     ],
     "settings": [
@@ -400,6 +416,14 @@
           "text": "Adult Coverage Immunizations"
         },
         "_row_num": 15
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "graphExample",
+        "display": {
+          "text": "Graph Examples"
+        },
+        "_row_num": 16
       }
     ]
   },
@@ -590,6 +614,14 @@
             "text": "Adult Coverage Immunizations"
           },
           "_row_num": 15
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "graphExample",
+          "display": {
+            "text": "Graph Examples"
+          },
+          "_row_num": 16
         }
       ]
     },
@@ -912,12 +944,25 @@
             "promptIdx": 15
           },
           {
+            "url": "'?' + opendatakit.getHashString('../tables/graphExample/forms/graphExample/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 51,
+            "__rowNum__": 50,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen51",
+            "promptIdx": 16
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 50,
-            "_branch_label_enclosing_screen": "survey/_screen50",
-            "promptIdx": 16
+            "_row_num": 53,
+            "_branch_label_enclosing_screen": "survey/_screen53",
+            "promptIdx": 17
           }
         ],
         "validation_tag_map": {
@@ -1149,25 +1194,38 @@
             "operationIdx": 33
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 50,
+            "_row_num": 51,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 34
           },
           {
-            "_row_num": 50,
+            "clause": "exit section",
+            "_row_num": 52,
+            "__rowNum__": 51,
+            "_token_type": "exit_section",
+            "operationIdx": 35
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 53,
+            "operationIdx": 36
+          },
+          {
+            "_row_num": 53,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 35
+            "operationIdx": 37
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 50,
-            "operationIdx": 36
+            "_row_num": 53,
+            "operationIdx": 38
           }
         ],
         "branch_label_map": {
@@ -1204,8 +1262,10 @@
           "_screen45": 30,
           "child_coverage": 32,
           "_screen48": 32,
-          "_contents": 35,
-          "_screen50": 35
+          "graphExample": 34,
+          "_screen51": 34,
+          "_contents": 37,
+          "_screen53": 37
         }
       }
     }

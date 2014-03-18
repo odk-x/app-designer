@@ -296,6 +296,11 @@
         "instances": null,
         "finalize": null,
         "contents": null,
+        "bargraph": null,
+        "linegraph": null,
+        "piechart": null,
+        "scatterplot": null,
+        "boxplot": null,
         "image": {
             "type": "object",
             "elementType": "mimeUri",

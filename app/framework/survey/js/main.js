@@ -45,8 +45,9 @@ requirejs.config({
         jqmConfig : 'survey/js/jqmConfig',
         handlebarsHelpers : 'survey/js/handlebarsHelpers',
         formulaFunctions : 'survey/js/formulaFunctions',
-        'jquery-csv' : 'libs/jquery-csv/src/jquery.csv',
-        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2013-08-27'
+        jqueryCsv : 'libs/jquery-csv/src/jquery.csv',
+        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2013-08-27',
+        d3 : 'libs/d3-amd/d3'
     },
     shim: {
         'jqmobile': {
@@ -83,7 +84,7 @@ requirejs.config({
             deps: ['jquery','jqmobile'],
 			exports: '$.mobiscroll',
         },
-        'jquery-csv' : {
+        'jqueryCsv' : {
             deps: ['jquery']
         }
     }
@@ -130,14 +131,14 @@ require(['jquery'],
                 
             // and launch the framework...
             require(['mdl','opendatakit', 'database','parsequery',
-                            'builder', 'controller'], 
+                            'builder', 'controller', 'd3', 'jqueryCsv'], 
             function(   mdl,  opendatakit,   database,  parsequery,
-                             builder,   controller) {
+                             builder,   controller, d3, jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
                     ['mdl','opendatakit', 'database','parsequery',
-                            'builder', 'controller'],
+                            'builder', 'controller', 'd3', 'jqueryCsv'],
                     [ mdl,  opendatakit,   database,  parsequery,
-                             builder,   controller]);
+                             builder,   controller, d3, jqueryCsv]);
 
                 
                 // define a function that waits until jquery mobile is initialized
