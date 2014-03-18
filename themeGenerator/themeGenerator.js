@@ -4,19 +4,15 @@ $(document).ready(function (){
     clickoutFiresChanges: true
   });   
 
+  // $("#button-radius").slider();
+
   $("#toolbar-tabs").tabs();
   $(".accordion").accordion();
 
   $.get("./templates/customStyles.template.css", function(data){
     window.customStyle = data;
-    $.get("./templates/customTheme.template.css", function(data){
-      window.customTheme = data;
       $(".update-styles").bind('change',function(){
-        addToIFrame(generateCustomStyles(), generateCustomTheme());
-      });
-
-      $("#generateTheme").click(function(){
-        downloadSource("customTheme.css", generateCustomTheme());
+        addToIFrame(generateCustomStyles());
       });
       $("#generateStyles").click(function(){
         downloadSource("customStyles.css", generateCustomStyles());
@@ -24,14 +20,11 @@ $(document).ready(function (){
 
       //wait a few seconds the load the initial CSS
       setTimeout(function(){
-        addToIFrame(generateCustomStyles(), generateCustomTheme());
+        addToIFrame(generateCustomStyles());
       },2000);
     });
   });
 
-});
-
-var numWindows = 0;
 
 function showSource(text){ 
   var newWindow = window.open();
@@ -44,84 +37,31 @@ function downloadSource(filename, contents){
 }
 
 
-function generateCustomTheme(){
+// generates the Custom Style sheet
+function generateCustomStyles(){
+  // object that contains the pixel sizes for each kind of phone 
   var screenSizeChoices = {
-    Google_Nexus_5 : ["600px", "800px"],
-    Google_Nexus_7 : ["800px", "1050px"],
-    Samsung_Galaxy_S4 : ["300px", "550px"]
+    Droid : ["480px", "854px"], 
+    Nexus_S : ["480px", "800"],
+    Galaxy_Nexus : ["720px", "1280px"],
+    Nexus_4 : ["768px", "1280px"],
+    Nexus_7 : ["800px", "1280px"],
+    Tablet_7: ["1024px", "600px"],
+    Tablet_10 : ["1280px", "800px"],
+    Nexus_10 : ["2560px", "1600px"]
   }
+  //updates the iframe size
   var screenSize = $("#select-screen-size").val();
   $("#odk_view").css("width", screenSizeChoices[screenSize][0]);
   $("#odk_view").css("height", screenSizeChoices[screenSize][1]);
+  // background color
   var bgColor = $("#background-color").val();
   var bgColorReduce = reduceColor(bgColor, 2);
+  // font settings
   var fontColor = $("#font-color").val();
-  var buttonTextColor = $("#button-text-color").val();
-  var buttonColorStart = $("#button-color").val();
-  var buttonColorEnd = reduceColor(buttonColorStart,1);
-  var buttonSelectedColorStart = $("#button-selected-color").val();
-  var buttonSelectedColorEnd = reduceColor(buttonSelectedColorStart, 1);
-  var navbarBackgroundColorStart = $("#navbar-background-color").val();
-  var navbarBackgroundColorEnd = reduceColor(navbarBackgroundColorStart, 2);
-  var navbarFontColor = $("#navbar-font-color").val();
-  var navbarButtonColorStart= $("#navbar-button-color").val();
-  var navbarButtonColorEnd = reduceColor(navbarButtonColorStart, 1);
-  var navbarButtonSelectedColor= $("#navbar-button-selected-color").val();
-  var buttonBorderColor = $("#button-border-color").val();
-  var buttonRadius = $("#button-radius").val();
-  var buttonHeight = $("#button-height").val();
-  var buttonTextSize = $("#button-text-size").val();
-
-  var otherButtonTextColor = $("#other-button-text-color").val();
-  var otherButtonColorStart = $("#other-button-color").val();
-  var otherButtonColorEnd = reduceColor(otherButtonColorStart,1);
-  var otherButtonSelectedColorStart = $("#other-button-selected-color").val();
-  var otherButtonSelectedColorEnd = reduceColor(otherButtonSelectedColorStart, 1);
-  var otherButtonBorderColor = $("#other-button-border-color").val();
-  var otherButtonRadius = $("#other-button-radius").val();
-  var otherButtonHeight = $("#other-button-height").val();
-  var otherButtonTextSize = $("#other-button-text-size").val();
-
-  var buttonOffset = (parseInt(buttonHeight.substr(0, buttonHeight.length -2)) - parseInt(buttonTextSize.substr(0,buttonTextSize.length - 2)))/2 + "px";
-  var themes = window.customTheme.replace(/{{button-color-start}}/g, buttonColorStart);
-  themes = themes.replace(/{{button-color-end}}/g, buttonColorEnd);
-  themes = themes.replace(/{{button-selected-color-start}}/g, buttonSelectedColorStart);
-  themes = themes.replace(/{{button-selected-color-end}}/g, buttonSelectedColorEnd);  
-  themes = themes.replace(/{{button-border-color}}/g, buttonBorderColor);
-  themes = themes.replace(/{{background-color}}/g, bgColor);
-  themes = themes.replace(/{{button-text-color}}/g, buttonTextColor);
-  themes = themes.replace(/{{background-color-reduce}}/g, bgColorReduce);
-  themes = themes.replace(/{{font-color}}/g, fontColor);
-  themes = themes.replace(/{{navbar-button-color-start}}/g, navbarButtonColorStart);
-  themes = themes.replace(/{{navbar-button-color-end}}/g, navbarButtonColorEnd);
-  themes = themes.replace(/{{navbar-font-color}}/g, navbarFontColor);
-  themes = themes.replace(/{{navbar-background-color-start}}/g, navbarBackgroundColorStart);
-  themes = themes.replace(/{{navbar-background-color-end}}/g, navbarBackgroundColorEnd);
-  themes = themes.replace(/{{navbar-button-selected-color}}/g, navbarButtonSelectedColor);
-  themes = themes.replace(/{{button-radius}}/g, buttonRadius);
-  themes = themes.replace(/{{button-text-size}}/g, buttonTextSize);
-  themes = themes.replace(/{{button-height}}/g, buttonHeight);
-  themes = themes.replace(/{{button-offset}}/g, buttonOffset);
-  themes = themes.replace(/{{iframe-width}}/g, screenSizeChoices[screenSize][0]);
-  themes = themes.replace(/{{iframe-height}}/g, screenSizeChoices[screenSize][1]);
-  themes = themes.replace(/{{other-button-text-color}}/g, otherButtonTextColor);
-  themes = themes.replace(/{{other-button-color-start}}/g, otherButtonColorStart);
-  themes = themes.replace(/{{other-button-color-end}}/g, otherButtonColorEnd);
-  themes = themes.replace(/{{other-button-color-selected-color-start}}/g, otherButtonSelectedColorStart);
-  themes = themes.replace(/{{other-button-color-selected-color-end}}/g, otherButtonSelectedColorEnd);
-  themes = themes.replace(/{{other-button-border-color-start}}/g, otherButtonBorderColor);  
-  themes = themes.replace(/{{other-button-radius}}/g, otherButtonRadius);
-  themes = themes.replace(/{{other-button-height}}/g, otherButtonHeight);
-  themes = themes.replace(/{{other-button-text-size}}/g, otherButtonTextSize);
-  return themes;
-}
-
-function generateCustomStyles(){
-  var bgColor = $("#background-color").val();
-  var bgColorReduce = reduceColor(bgColor, 2);
-  var fontColor = $("#font-color").val();
-  var buttonTextColor = $("#button-text-color").val();
-  var fontFamily = $("#select-font-family").val();
+  var fontColorReduce = reduceColor(fontColor, 1);
+  var fontFamily = $("#select-font-family").val();  // still to be implemented
+  // select button settings
   var buttonColorStart = $("#button-color").val();
   var buttonColorEnd = reduceColor(buttonColorStart,1);
   var buttonSelectedColorStart = $("#button-selected-color").val();
@@ -130,14 +70,16 @@ function generateCustomStyles(){
   var buttonRadius = $("#button-radius").val();
   var buttonHeight = $("#button-height").val();
   var buttonTextSize = $("#button-text-size").val();
+  var buttonTextColor = $("#button-text-color").val();
+  // navbar settings
   var navbarBackgroundColorStart = $("#navbar-background-color").val();
   var navbarBackgroundColorEnd = reduceColor(navbarBackgroundColorStart, 2);
   var navbarFontColor = $("#navbar-font-color").val();
   var navbarButtonColorStart= $("#navbar-button-color").val();
   var navbarButtonColorEnd = reduceColor(navbarButtonColorStart, 1);
   var navbarButtonSelectedColor= $("#navbar-button-selected-color").val();
-  var buttonOffset = (parseInt(buttonHeight.substr(0, buttonHeight.length -2)) - parseInt(buttonTextSize.substr(0,buttonTextSize.length - 2)))/2 + "px";
-  
+  var navbarButtonSelectedColorEnd = reduceColor(navbarButtonSelectedColor, 1);
+  // other button settings
   var otherButtonTextColor = $("#other-button-text-color").val();
   var otherButtonColorStart = $("#other-button-color").val();
   var otherButtonColorEnd = reduceColor(otherButtonColorStart,1);
@@ -147,7 +89,10 @@ function generateCustomStyles(){
   var otherButtonRadius = $("#other-button-radius").val();
   var otherButtonHeight = $("#other-button-height").val();
   var otherButtonTextSize = $("#other-button-text-size").val();
-
+  // calculates the margin for button text so that it always stays centered in the button
+  var buttonOffset = (parseInt(buttonHeight.substr(0, buttonHeight.length -2)) - parseInt(buttonTextSize.substr(0,buttonTextSize.length - 2)))/2 + "px";
+  
+  // updates customStyles.template.css with all the new settings
   var styles = window.customStyle.replace(/{{background-color}}/g,bgColor)
   styles = styles.replace(/{{font-color}}/g,fontColor)
   styles = styles.replace(/{{font-family}}/g, fontFamily);
@@ -169,7 +114,8 @@ function generateCustomStyles(){
   styles = styles.replace(/{{navbar-background-color-start}}/g, navbarBackgroundColorStart);
   styles = styles.replace(/{{navbar-background-color-end}}/g, navbarBackgroundColorEnd);
   styles = styles.replace(/{{navbar-button-selected-color}}/g, navbarButtonSelectedColor);
-
+  styles = styles.replace(/{{navbar-button-selected-color-end}}/g, navbarButtonSelectedColorEnd);
+  styles = styles.replace(/{{font-shadow}}/g, fontColorReduce);
   styles = styles.replace(/{{other-button-text-color}}/g, otherButtonTextColor);
   styles = styles.replace(/{{other-button-color-start}}/g, otherButtonColorStart);
   styles = styles.replace(/{{other-button-color-end}}/g, otherButtonColorEnd);
@@ -182,29 +128,25 @@ function generateCustomStyles(){
   return styles;
 }
 
-function addToIFrame(customStyle, customTheme){
-  //var oldStyles = frames[0].document.getElementById("customStyle");
-  for (var i = 0; i <= numWindows; i++) {
+// adds the updated themes and styles to the iframe
+function addToIFrame(customStyle){
+  for (var i = 0; i <= pageStack.length; i++) {
     var oldStyles = frames[i].document.getElementById("customStyle");
     if (oldStyles)
       oldStyles.remove();
 
     var newStyles = $("<style id='customStyle'>" + customStyle + "</style>")[0];
     frames[i].document.body.appendChild(newStyles); 
-
-    oldStyles = frames[i].document.getElementById("customTheme");
-    if (oldStyles)
-      oldStyles.remove();
-
-    newStyles = $("<style id='customTheme'>" + customTheme + "</style>")[0];
-    frames[i].document.body.appendChild(newStyles); 
-  }
+   }
 }
 
+// chooses the appropriate font family. still to be implemented
 function selectFontFamily(){
   
 }
 
+// takes in a hex color and returns a slightly reduced version. Is used to create button gradients.
+// param start is the starting color, and factor is the factor to reduce it by (1 would subtract 080808)
 function reduceColor(start, factor) {
   if (start.substring(0,1) == "#") {
     var red = start.substring(1, 3);
@@ -231,7 +173,7 @@ function reduceColor(start, factor) {
   } else if (start == "black") {
     return "#191616";
   } else if (start == "white") {
-    return "#ede8e8";
+    return "#f5f5f5";
   } else {
     return start;
   }
