@@ -1,7 +1,5 @@
 "use strict";
 
-var GlobFontChoice = 0;
-
  // Returns a function to compute the interquartile range.
  function iqr(k) {
    return function(d, i) {
@@ -16,7 +14,8 @@ var GlobFontChoice = 0;
    };
  }
 
-function drawBox(dataJ, xString, yString, targetBody, isCount) {
+function drawBox(dataJ, targetBody) {
+	var colNameCallCount = 0;
 	var w = 160,
       h = 650,
       m = [20, 50, 40, 80], // top right bottom left
@@ -30,8 +29,11 @@ function drawBox(dataJ, xString, yString, targetBody, isCount) {
 	  
 	  
   var data = [];
- 
+  var columnNames = [];
   dataJ.forEach(function(x) {
+	 if(!(x.Name in columnNames)) {
+			columnNames[~~x.Expt] = x.Name;
+		}
      var e = ~~x.Expt - 1,
          r = ~~x.Run - 1,
          s = ~~x.Speed,
@@ -60,15 +62,8 @@ function drawBox(dataJ, xString, yString, targetBody, isCount) {
 		.style("font-size", "1.5em")
 		.style("text-anchor", "start")
 		.text(function(d){
-			if(GlobFontChoice == 0) {
-				GlobFontChoice++;
-				return "Milk A";
-			} else if(GlobFontChoice == 1) {
-				GlobFontChoice++;
-				return "Milk B";
-			} else {
-				return "Milk C";
-			}
+			colNameCallCount++;
+			return columnNames[colNameCallCount];
 		});
 }
  

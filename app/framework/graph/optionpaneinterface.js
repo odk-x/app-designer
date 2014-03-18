@@ -2,49 +2,29 @@
 
 var paramHeight = Math.round(screen.height * .58);
 var paramWidth = Math.round(screen.width * .75);
+
+$(document).ready(setup);
 //handles events from html page
 
 var selections;
 var currentTab;
 var graphSelection;
 
-
-$(document).on('ready', function () {
+function setup() {
 	var info = data.getColumns();
 	selections = jQuery.parseJSON(info);
 	InitialMenuOptions(); 
 	$('#scaling_buttons').hide();
 	$('#scaling_button_pie_chart').hide();
 	$('.observe_panel').hide();
-	$("#title").on('click', function() {
-		if ( $("#title").hasClass('rolled_up') ) {
-			$("#title").removeClass('rolled_up');
-			$("#title").siblings().slideDown('slow', function() {
-				if(graphSelection == "Pie Chart") {
-					$('#scaling_button_pie_chart').slideUp('fast', function() {});
-				} else {
-					$('#scaling_buttons').slideUp('fast', function() {});
-				}
-			});
-		} else {
-			$("#title").addClass('rolled_up');
-			$("#title").siblings().slideUp('slow', function() {
-				if(graphSelection == "Pie Chart") {
-					$('#scaling_button_pie_chart').slideDown('fast', function() {});
-				} else {
-					$('#scaling_buttons').slideDown('fast', function() {});
-				}
-			});
-		}
-	});
 	//$('#color_selection').hide();
-});
+}
 
 //First option menu: Select a graph type
 function InitialMenuOptions() {
 	currentTab = "selectgraph";
 	$("#selectgraph").hide();
-	$("#selectgraph").addClass("defaultoption");
+	$("#selectgraph").addClass("essential");
 	$("#selectgraph").addClass("category");
 	$('#title').html("Select a graph type");
 	$("#selectgraph").append($(createTitle("Graph Type")));
@@ -76,6 +56,24 @@ function populateOperationSettings() {
 		$($("#operation").children()).hide();
 		var graphOperation = graph_data.getGraphOp();
 		loadFromKeyValueStore($("#operation"), graphOperation);
+		return true;
+	}
+	return false;
+}
+
+function populateBoxOperationSettings() {
+	if($("#box_operation").children().length == 0) {
+		$("#box_operation").hide();
+		$("#box_operation").addClass("box_plot_component");
+		$("#box_operation").addClass("category");
+		currentTab = "box_operation";
+		$('#title').html("Select a box");
+		$("#box_operation").append($(createTitle("Operation")));
+		$("#box_operation").append($(createItem("Single Column", "box_operation", "box_operation")));
+		$("#box_operation").append($(createItem("Comparison Plot", "box_operation", "box_operation")));
+		$($("#box_operation").children()).hide();
+		var graphOperation = graph_data.getBoxOperation();
+		loadFromKeyValueStore($("#box_operation"), graphOperation);
 		return true;
 	}
 	return false;
@@ -119,7 +117,6 @@ function populateYSettings() {
 		}
 		$($("#selecty").children()).hide();
 		manageInvalidInputs();
-		
 		var graphY = graph_data.getGraphYAxis();
 		loadFromKeyValueStore($("#selecty"), graphY);	
 		return true;
@@ -150,6 +147,71 @@ function populateRSettings() {
 	return false;
 }
 
+//Select Box source
+function populateBoxLabelSettings() {
+	if($("#box_source").children().length == 0) {
+		$("#box_source").hide();
+		$("#box_source").addClass("box_plot_component");
+		$("#box_source").addClass("category");
+		currentTab = "box_source";
+		$('#title').html("Select Labels");
+		$("#box_source").empty();
+		$("#box_source").append($(createTitle("Box Labels")));
+		for(var k in selections) {
+			$("#box_source").append($(createItem(k, selections[k], "box_source")));
+		}
+		$($("#box_source").children()).hide();
+		manageInvalidInputs();
+		var boxSource = graph_data.getBoxSource();
+		loadFromKeyValueStore($("#box_source"), boxSource);
+		return true;
+	}
+	return false;
+}
+
+// Select Box values
+function populateBoxValueSettings() {	
+	if($("#box_values").children().length == 0) {
+		$('#box_values').hide();
+		$("#box_values").addClass("box_plot_component");
+		$("#box_values").addClass("category");
+		currentTab = "box_values";
+		$('#title').html("Select values");
+		$("#box_values").empty();
+		$("#box_values").append($(createTitle("Select Values")));
+		for(var k in selections) {
+			$("#box_values").append($(createItem(k, selections[k], "box_values")));
+		}
+		$($("#box_values").children()).hide();
+		manageInvalidInputs();
+		var boxValues = graph_data.getBoxValues();
+		loadFromKeyValueStore($("#box_values"), boxValues);	
+		return true;
+	}
+	return false;
+}
+
+// Select Iteration count
+function populateBoxIterationSettings() {	
+	if($("#iteration_counter").children().length == 0) {
+		$('#iteration_counter').hide();
+		$("#iteration_counter").addClass("box_plot_component");
+		$("#iteration_counter").addClass("category");
+		currentTab = "iteration_counter";
+		$('#title').html("Select an iteration column");
+		$("#iteration_counter").empty();
+		$("#iteration_counter").append($(createTitle("Select Iteration Column")));
+		for(var k in selections) {
+			$("#iteration_counter").append($(createItem(k, selections[k], "iteration_counter")));
+		}
+		$($("#iteration_counter").children()).hide();
+		manageInvalidInputs();
+		var boxIterationColumn = graph_data.getBoxIterations();
+		loadFromKeyValueStore($("#iteration_counter"), boxIterationColumn);	
+		return true;
+	}
+	return false;
+}
 //Call to the native app and attempt to recover saved options for
 //particular key
 function loadFromKeyValueStore(category, key) {
@@ -206,58 +268,57 @@ function createItem(text, type, kvstoreval) {
 	$(div).addClass("unselected");
 	$(div).attr('id', text);
 	$(div).append("<p class=\"label\">" + text + "</p>");
-	$(div).on('click',function() {
-		if ( $(div).hasClass('unselected') ) {
-			//closing file
-			if($("#title").hasClass("edit_button")) {
-				$("#title").html("Edit");
-			}
-			currentTab = "none";
-			$(div).removeClass("unselected");
-			$(div).addClass("selected");
-			//Save the selection in Key Value Store
-			graph_data.saveSelection(kvstoreval, text);
-			$(div).siblings(".unselected").slideUp('slow');
-			$(div).promise().done(function() {
-				$(div).siblings(".unselected").removeClass("previous");
-				$(div).animate({
-					fontSize: '14pt',
-				}, 200, function() {});
-				deactivateTitle($(div).siblings(".title"));
-				if(!$(div).hasClass("previous")) {
-					dispatchNextFolder($(div).parent().attr('id'), $(div).attr('id'));
-				}
-			});
-		} else {
-			//opening file
-			//if the tab being opened is not the current tab, select a default
-			//value in that tab and open the new one.
-			$(div).animate({
-				fontSize: '24pt',
-			}, 200, function() {
-				$(div).siblings(":not(.invalid)").slideDown('slow');
-				if(currentTab != "none" && currentTab != $(div).parent().attr('id')) {
-					if($("#" + currentTab).find('.previous').length > 0) {
-						$("#" + currentTab).find('.previous').click();
-					}
-					else {
-						var noneDiv = $(createItem("none", currentTab, kvstoreval));
-						$("#" + currentTab).children(".title").after(noneDiv);
-						$(noneDiv).addClass("none");
-						$(noneDiv).click();
-					}
-				}
-				currentTab = $(div).parent().attr('id');
-				selectTitle();
-				if($(div).hasClass("none")) {
-					$(div).remove();
-				}
-			});
-			activateTitle($(div).siblings(".title"));
-			$(div).removeClass("selected");
-			$(div).addClass("unselected");
-			$(div).addClass("previous");
+	$(div).toggle(function() {
+		//closing file
+		if($("#title").hasClass("edit_button")) {
+			$("#title").html("Edit");
 		}
+		currentTab = "none";
+		$(div).removeClass("unselected");
+		$(div).addClass("selected");
+		//Save the selection in Key Value Store
+		graph_data.saveSelection(kvstoreval, text);
+		$(div).siblings(".unselected").slideUp('slow');
+		$(div).promise().done(function() {
+			$(div).siblings(".unselected").removeClass("previous");
+			$(div).animate({
+				fontSize: '14pt',
+			}, 200, function() {});
+			deactivateTitle($(div).siblings(".title"));
+			if(!$(div).hasClass("previous")) {
+				dispatchNextFolder($(div).parent().attr('id'), $(div).attr('id'));
+			}
+		});
+		
+	}, function() {
+		//opening file
+		//if the tab being opened is not the current tab, select a default
+		//value in that tab and open the new one.
+		$(div).animate({
+			fontSize: '24pt',
+		}, 200, function() {
+			$(div).siblings(":not(.invalid)").slideDown('slow');
+			if(currentTab != "none" && currentTab != $(div).parent().attr('id')) {
+				if($("#" + currentTab).find('.previous').length > 0) {
+					$("#" + currentTab).find('.previous').click();
+				}
+				else {
+					var noneDiv = $(createItem("none", currentTab, kvstoreval));
+					$("#" + currentTab).children(".title").after(noneDiv);
+					$(noneDiv).addClass("none");
+					$(noneDiv).click();
+				}
+			}
+			currentTab = $(div).parent().attr('id');
+			selectTitle();
+			if($(div).hasClass("none")) {
+				$(div).remove();
+			}
+		});
+		activateTitle($(div).siblings(".title"));
+		$(div).removeClass("selected");
+		$(div).addClass("unselected");
+		$(div).addClass("previous");
 	});
 	return div;
 }
@@ -287,11 +348,10 @@ function dispatchNextFolder(form, folder) {
 	if($('#selectgraph').children('.selected').length != 0) {
 		graphSelection = $('#selectgraph').children('.selected')[0].id;
 	}
-	manageInvalidInputs();
 	if($('.none').length == 0) {
-		if(graphSelection == "Bar Graph" || graphSelection == "Pie Chart") {
-			$(".category:not(.defaultoption)").hide();
-			if(folder == "Bar Graph" || folder == "Pie Chart") {
+		if(graphSelection == "Bar Graph") {
+			$(".category:not(.defaultoption, .essential)").hide();
+			if(folder == "Bar Graph") {
 				if(!populateOperationSettings()) {
 					form = "operation";
 				}
@@ -305,7 +365,8 @@ function dispatchNextFolder(form, folder) {
 				if($("#operation").children(".selected")[0].id == "Count") {
 					$("#selecty").hide();
 					packageEditMenu();
-				} else if(!populateYSettings()) {
+				}
+				else if(!populateYSettings()) {
 					form = "selecty";
 				}
 			}
@@ -313,9 +374,8 @@ function dispatchNextFolder(form, folder) {
 				$("#selecty").show();
 				packageEditMenu();
 			}
-		}
-		else if(graphSelection == "Scatter Plot") {
-			$(".category:not(.defaultoption, .scatterplot)").hide();
+		} else if(graphSelection == "Scatter Plot") {
+			$(".category:not(.defaultoption, .scatterplot, .essential)").hide();
 			if($("#title").hasClass("edit_button")) {
 				$(".scatterplot").show();
 			}
@@ -332,14 +392,13 @@ function dispatchNextFolder(form, folder) {
 			if(form == "selectx") {
 				var operation = $("#operation").children(".selected")[0].id;
 				if(operation == "Count") {
-					$("#selecty").hide();
 					packageEditMenu();
-				} else if(!populateYSettings()) {
+				}
+				else if(!populateYSettings()) {
 					form = "selecty";
 				}
 			}
 			if(form == "selecty") {
-				$("#selecty").show();
 				if(!populateRSettings()) {
 					form = "selectr";
 				}
@@ -348,10 +407,38 @@ function dispatchNextFolder(form, folder) {
 				packageEditMenu();
 			}
 		} else if(graphSelection == "Box Plot") {
-			$(".category:not(.defaultoption)").hide();
-			packageEditMenu();
+			$(".category:not(.box_plot_component, .essential)").hide();
+			if(folder == "Box Plot") {
+				if(!populateBoxOperationSettings()) {
+					form = "box_operation";
+				}
+			}
+			if(form == "box_operation") {
+				var operation = $("#box_operation").children(".selected")[0].id;
+				if(operation == "Single Column") {
+					form = "iteration_counter";
+				} else {
+					if(!populateBoxLabelSettings()) {
+						form = "box_source";
+					}
+				}
+			}
+			if(form == "box_source") {
+				if(!populateBoxIterationSettings()) {
+					form = "iteration_counter";
+				}
+			}
+			if(form == "iteration_counter") {
+				if(!populateBoxValueSettings()) {
+					form = "box_values";
+				}
+			}
+			if(form == "box_values") {
+				$("#box_values").show();
+				packageEditMenu();
+			}
 		} else if(graphSelection == "Line Graph") {
-			$(".category:not(.defaultoption)").hide();
+			$(".category:not(.defaultoption, .essential)").hide();
 			if(folder == "Line Graph") {
 				if(!populateXSettings()) {
 					form = "selectx";
@@ -375,17 +462,36 @@ function dispatchNextFolder(form, folder) {
 //When pressed again it closes the menu. Inversely zoom function appear and dissappear
 //when the menu is hidden and not hidden
 function packageEditMenu() {
-	$("#title").html("Edit");
-	$("#title").addClass("edit_button");
-	$("#title").addClass("rolled_up");
-	$("#title").siblings().slideUp('slow', function() {
-		if(graphSelection == "Pie Chart") {
-			$('#scaling_button_pie_chart').slideDown('fast', function() {});
-		} else {
-			$('#scaling_buttons').slideDown('fast', function() {});
-		}
-	});
-	selectGraph();
+	if(!$("#title").hasClass("edit_button")) {
+		$("#title").html("Edit");
+		$("#title").addClass("edit_button");
+		$("#title").toggle(function() {
+			$("#title").html("Edit");
+			
+			$("#title").siblings().slideUp('slow', function() {
+				$('#scaling_buttons').slideDown('fast', function() {});
+			});
+		
+		},
+		function() {
+			$("#title").html("Edit");
+			$("#title").siblings().slideDown('slow', function() {});
+			if(graphSelection == "Pie Chart") {
+				$('#scaling_button_pie_chart').slideUp('slow', function() {});
+			} else {
+				$('#scaling_buttons').slideUp('slow', function() {});
+			}
+		});
+		$("#title").click();
+	}
+	if(!graph_data.isModifiable()) {
+		$("#title").hide();
+	}
+	if($("#title").hasClass("edit_button")) {
+		$("#title").promise().done(function() {
+			selectGraph();
+		});
+	}
 }
 
 //Determines which columns should be selected and listed in a given menu. Determined
@@ -396,16 +502,20 @@ function manageInvalidInputs() {
 	if($("#operation").children(".selected").length > 0) {
 		operation = $("#operation").children(".selected")[0].id;
 	}
-	if (operation == "Bar Graph" || operation == "Pie Chart") {
+	var itemId = $("#selectgraph").children(".selected")[0].id;
+	if (itemId == "Bar Graph") {
 		if (operation != "Count") {
 			$("#selecty").children(':not(.Number, .title)').addClass("invalid");
 		}
-	} else if (operation == "Scatter Plot") {
+	} else if (itemId == "Scatter Plot") {
 		if(operation != "Count") {
 			$("#selectx").children(':not(.Number, .title)').addClass("invalid");
 			$("#selecty").children(':not(.Number, .title)').addClass("invalid");
 			$("#selectr").children(':not(.Number, .title)').addClass("invalid");
 		}
+	} else if (itemId == "Box Plot") {
+		$("#iteration_counter").children(':not(.Number, .title)').addClass("invalid");
+		$("#box_values").children(':not(.Number, .title)').addClass("invalid");
 	}
 }
 
@@ -415,26 +525,10 @@ function selectGraph() {
 	$('#svg_body').html("");
 	$('.scale_button').off('click');
 	var graphType = $("#selectgraph").children(".selected")[0].id;
-	//temporary code:
-	if(graphType == "Box Plot") {
-		var run = JSON.parse(data.getColumnData("Time"));
-		var speed = JSON.parse(data.getColumnData("Temperature"));
-		var dataJ = new Array();
-		var count = 0;
-		for(var i = 0; i < run.length; i++) {
-			if(0 == +run[i]) {
-				count++;
-			}
-			dataJ[i] = {Expt:count, Run:run[i], Speed:speed[i]};
-		}		
-		drawBox(dataJ, "x", "s", "svg_body", 1);
-		return 1;
-	}
 	
-	//end of temporary code
-	var xString = $('#selectx').children('.selected')[0].id;
-	var names = JSON.parse(data.getColumnData(xString));
 	if(graphType == "Bar Graph") {
+		var xString = $('#selectx').children('.selected')[0].id;
+		var names = JSON.parse(data.getColumnData(xString));
 		var operation = $("#operation").children(".selected")[0].id;
 		if(operation == "Count") {
 			drawGraph(countGraphData(names), xString, "Count", "svg_body", "count");
@@ -455,6 +549,8 @@ function selectGraph() {
 		}
 	}
 	else if(graphType == "Scatter Plot") {
+		var xString = $('#selectx').children('.selected')[0].id;
+		var names = JSON.parse(data.getColumnData(xString));
 		var operation = $("#operation").children(".selected")[0].id;
 		var yString = $('#selecty').children('.selected')[0].id;
 		var rString = $('#selectr').children('.selected')[0].id;
@@ -484,26 +580,19 @@ function selectGraph() {
 					$('#selectr').children('.selected')[0].id, xString, yString, "svg_body");
 			}
 		}
-	} else if(graphType == "Pie Chart") {
-		var operation = $("#operation").children(".selected")[0].id;
-		if (operation == "Count") {
-			drawPieChart(countGraphData(names), xString, yString);
+	} else if(graphType == "Box Plot") {
+		var operation = $("#box_operation").children(".selected")[0].id;
+		var values = JSON.parse(data.getColumnData($("#box_values").children(".selected")[0].id));
+		if (operation == "Single Column") {
+			drawBox(simpleWhiskerBox(values), "svg_body");
 		} else {
-			var yString = $('#selecty').children('.selected')[0].id;
-			var values = JSON.parse(data.getColumnData(yString));
-			if (operation == "Min") {
-				drawPieChart(minGraphData(names, values), xString, yString, "svg_body");
-			} else if (operation == "Max") {
-				drawPieChart(maxGraphData(names, values), xString, yString, "svg_body");
-			} else if (operation == "Sum") {
-				drawPieChart(sumGraphData(names, values), xString, yString, "svg_body");
-			} else if (operation == "Average") {
-				drawPieChart(avgGraphData(names, values), xString, yString, "svg_body");
-			} else {
-				drawPieChart(avgGraphData(names, values), xString, yString, "svg_body");
-			}
+			var iterations = JSON.parse(data.getColumnData($("#iteration_counter").children(".selected")[0].id));
+			var type = JSON.parse(data.getColumnData($("#box_source").children(".selected")[0].id));
+			drawBox(comparisonWhiskerBox(type, iterations, values), "svg_body");
 		}
 	} else if(graphType == "Line Graph") {
+		var xString = $('#selectx').children('.selected')[0].id;
+		var names = JSON.parse(data.getColumnData(xString));
 		var yString = $('#selecty').children('.selected')[0].id;
 		var values = JSON.parse(data.getColumnData(yString));
 		drawLineGraph(avgGraphData(names, values), xString, yString, "svg_body", 0, minGraphData(names, values), maxGraphData(names, values));

@@ -146,3 +146,78 @@ function drawGraph(dataJ, xString, yString, targetBody, isCount) {
 		draw(0, 0);
 	});
 }
+
+/*
+	// pinch zoom function
+	var waitDraw = _.throttle(function(hasMoved) {
+			var v = diffN;
+			var y = diffY;
+			if(vWidth + v > 0 && vHeight + y > 0) {
+				draw(v, y);
+			} else if(hasMoved) {
+				draw();
+			}
+		}, 100);
+	
+	var prevRupx = Number.NaN;
+	var prevRupy = Number.NaN;
+	var diffN = 0;
+	var diffY = 0;
+	var prevDiffN = 0;
+	var prevDiffY = 0;
+	var eventTime = 0;
+	
+	var hammertime = Hammer(document.body).on("pinch", function(event) {
+		event.gesture.stopPropagation();
+		var direction = event.gesture.direction;
+		data.logData("" + event.gesture.scale);
+		var rupx = Math.round((width*event.gesture.scale)/2);
+			if(isNaN(prevRupx)) {
+				prevRupx = rupx;
+			}
+			var relDiff = rupx - prevRupx;
+			if(!isNaN(relDiff) && prevRupx != rupx) {
+				diffN += relDiff;
+				diffY += relDiff;
+				prevRupx = rupx;
+			}
+		*//*if(direction == "right" || direction == "left") {
+			var rupx = Math.round((width*event.gesture.scale)/2);
+			if(isNaN(prevRupx)) {
+				prevRupx = rupx;
+			}
+			var relDiff = rupx - prevRupx;
+			if(!isNaN(relDiff) && prevRupx != rupx) {
+				diffN += relDiff;
+				prevRupx = rupx;
+			}
+		} if(direction == "up" || direction == "down") {
+			var rupy = Math.round((width*event.gesture.scale)/2);
+			if(isNaN(prevRupy)) {
+				prevRupy = rupy;
+			}
+			var relDiff = rupy - prevRupy;
+			if(!isNaN(relDiff) && prevRupy != rupy) {
+				diffY += relDiff;
+				prevRupy = rupy;
+			}
+		}*//*
+		waitDraw();
+    }).on("release", function(event) {
+		prevRupx = Number.NaN;
+		prevRupy = Number.NaN;
+		vWidth += diffN;
+		vHeight += diffY;
+		diffN = 0;
+		diffY = 0;
+		event.gesture.stopDetect();
+		
+	});*//*.on("drag", function(event) {
+		lMarg += Math.round(event.gesture.deltaX/30);
+		tMarg += Math.round(event.gesture.deltaY/30);
+		if(lMarg + margin.left <= margin.left && tMarg + margin.top >= margin.top) {
+			waitDraw(true);
+		}
+	});*/
+	
+	//waitDraw();
