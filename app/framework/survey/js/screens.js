@@ -457,37 +457,6 @@ screenTypes.custom = screenTypes.base.extend({
     step: 100,
     maximum: 0,
     horizontalFocusScrollPos: null,
-    events: {
-        "swipeleft .screen-overflow": "scrollScreenRight",
-        "swiperight .screen-overflow": "scrollScreenLeft"
-    },
-    scrollScreenLeft: function(evt) {
-        var that = this;
-        if (that.maximum == 0) {
-            var overflow = that.$(that.screenOverflowClass).get(0);
-            that.maximum = overflow.scrollWidth;
-        }
-        shim.log('D',"screens." + that.type + " got swipe right evt: " + evt.timeStamp);
-        if(that.current - that.step < 0) {return; }
-        else {
-            that.current = that.current - that.step;
-            that.$(that.screenOverflowClass).scrollLeft(that.current);
-        }
-        
-    },
-   scrollScreenRight: function(evt) {
-        var that = this;
-        if (that.maximum == 0) {
-            var overflow = that.$(that.screenOverflowClass).get(0);
-            that.maximum = overflow.scrollWidth;
-        }
-        shim.log('D',"screens." + that.type + " got swipe left evt: " + evt.timeStamp);
-        if(that.current + that.step > that.maximum) {return; }
-        else {
-            that.current = that.current + that.step;
-            that.$(that.screenOverflowClass).scrollLeft(that.current);
-        }
-    },
     render: function(ctxt) {
 
         var that = this;

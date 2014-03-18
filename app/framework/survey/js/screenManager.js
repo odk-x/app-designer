@@ -40,8 +40,6 @@ return Backbone.View.extend({
         "click .save-incomplete-and-exit": "saveChanges",
         "click .finalize-and-exit": "finalizeChanges",
         "click .show-contents": "showContents",
-        "swipeleft .swipeForwardEnabled": "gotoNextScreen",
-        "swiperight .swipeBackEnabled": "gotoPreviousScreen",
         "pagechange": "handlePagechange",
         "dragstart img": "disableImageDrag",
         "click #ok-btn": "closeScreenPopup",
@@ -56,6 +54,55 @@ return Backbone.View.extend({
         this.pageChangeActionLockout = false;
         this.savedCtxt = null;
         this.displayWaiting(ctxt);
+    },
+    enableSwipeNavigation: function() {
+        var that = this;
+        var needToDelete = false;
+        var swipeLeftEvent = "swipeleft";
+        var swipeRightEvent = "swiperight";
+
+        if (!that.events.hasOwnProperty(swipeLeftEvent)) {
+            that.events[swipeLeftEvent] = "gotoNextScreen";
+            needToDelete = true;
+        }
+
+        if (!that.events.hasOwnProperty(swipeRightEvent)) {
+            that.events[swipeRightEvent] = "gotoPreviousScreen";
+            needToDelete = true;
+        }
+
+        if (needToDelete) {
+            for (var propName in that.events){
+                shim.log('D',"screenManager.enableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);    
+            }
+            
+            // Need to redelegate the swipe events here
+            that.delegateEvents();
+        }
+    },
+    disableSwipeNavigation: function() {
+        var that = this;
+        var needToDelete = false;
+
+        var swipeLeftEvent = "swipeleft";
+        var swipeRightEvent = "swiperight";
+
+        if (that.events.hasOwnProperty(swipeLeftEvent)) {
+            delete that.events[swipeLeftEvent];
+            needToDelete = true;
+        } 
+        
+        if (that.events.hasOwnProperty(swipeRightEvent)) {
+            delete that.events[swipeRightEvent];
+            needToDelete = true;
+        } 
+        if (needToDelete) {
+            for (var propName in that.events){
+                shim.log('D',"screenManager.disableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);    
+            }
+            // Need to redelegate the swipe events here
+            that.delegateEvents();
+        }
     },
     displayWaiting: function(ctxt){
         var that = this;
@@ -96,6 +143,14 @@ return Backbone.View.extend({
         // This requires additional info from controller as to what
         // direction we are going (forward or backward).
         var transition = 'none'; // 'slide' with data-direction="reverse" or not...;
+
+        if (screen.type != "waiting") {
+            if (opendatakit.getSettingValue('disableSwipeNavigation')) {
+                that.disableSwipeNavigation();
+            } else {
+                that.enableSwipeNavigation();
+            }
+        } 
         
         that.commonDrawScreen(ctxt, screen, transition);
     },
@@ -117,7 +172,7 @@ return Backbone.View.extend({
             form_version: opendatakit.getSettingValue('form_version'),
             form_title: opendatakit.getCurrentSectionTitle(screen._section_name),
             locales: locales,
-            dataTheme: "d",
+            dataTheme: "a",
             hasTranslations: (locales.length > 1),
             showHeader: true,
             showFooter: false,
@@ -320,6 +375,7 @@ return Backbone.View.extend({
         evt.preventDefault();
     },
     ignoreChanges: function(evt) {
+        $( "#optionsPopup" ).popup( "close" );
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
@@ -331,6 +387,7 @@ return Backbone.View.extend({
             }}));
     },
     saveChanges: function(evt) {
+        $( "#optionsPopup" ).popup( "close" );
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
@@ -342,6 +399,7 @@ return Backbone.View.extend({
             }}), false);
     },
     finalizeChanges: function(evt) {
+        $( "#optionsPopup" ).popup( "close" );
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
@@ -362,6 +420,7 @@ return Backbone.View.extend({
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         that.activeScreen.$el.append(that.optionsTemplate(rc)).trigger('pagecreate');
+         $('#optionsPopup').enhanceWithin().popup();
         $( "#optionsPopup" ).popup( "open" );
     },
     openLanguagePopup: function(evt) {
@@ -377,6 +436,7 @@ return Backbone.View.extend({
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         that.activeScreen.$el.append(that.languageTemplate(rc)).trigger('pagecreate');
+        $('#languagePopup').enhanceWithin().popup();
         $( "#languagePopup" ).popup( "open" );
     },
     setLanguage: function(evt) {
@@ -403,6 +463,7 @@ return Backbone.View.extend({
         var rcWithMsg = $.extend({message: msg.message}, rc);
         that.activeScreen.$el.append(that.screenTemplate(rcWithMsg)).trigger('pagecreate');
         var $screenPopup = $( "#screenPopup" );
+        $('#screenPopup').enhanceWithin().popup();
         $screenPopup.popup( "open" );
     },
     closeScreenPopup: function() {
@@ -423,6 +484,7 @@ return Backbone.View.extend({
         var rcWithMsg = $.extend({message: msg.message}, rc);
         that.activeScreen.$el.append(that.confirmationTemplate(rcWithMsg)).trigger('pagecreate');
         var $confirmationPopup = $( "#confirmationPopup" );
+        $('#confirmationPopup').enhanceWithin().popup();
         $confirmationPopup.popup( "open" );
     },
     handleConfirmation: function() {

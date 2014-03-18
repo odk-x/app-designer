@@ -300,7 +300,7 @@ verifyLoad('builder',
                     var theme = opendatakit.getSettingObject(surveyJson, "theme");
                     if ( theme === null || theme.value == null ) {
                         var jqmVersion = window.$.mobile.version;
-                        theme = 'jquery.mobile.theme-' + jqmVersion;
+                        theme = 'jquery.mobile-' + jqmVersion + '.min';
                         url = requirejs.toUrl('libs/jquery.mobile-' + jqmVersion + '/' + theme + '.css');
                     } else {
                         theme = theme.value;

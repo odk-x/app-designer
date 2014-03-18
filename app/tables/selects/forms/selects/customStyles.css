@@ -1,4 +1,6 @@
-.odk-container, .odk-screen, .odk-scroll, .ui-page, .ui-li, .ui-page  {
+.odk-container, .odk-screen, .odk-scroll, .ui-page, .ui-li, .ui-page,
+.ui-overlay-a,
+.ui-body-a{
 	color: #ffffff;
 	background: #6262A3; 
 	text-shadow: 0 /*{d-body-shadow-x}*/ 0 /*{d-body-shadow-y}*/ 0 /*{d-body-shadow-radius}*/ #000 /*{d-body-shadow-color}*/;
