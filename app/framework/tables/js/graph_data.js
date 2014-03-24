@@ -44,20 +44,30 @@ window.__getTableGraphData = function() {
 
 	var dataObj = {
 		isModified: false,
+		is_modifiable: true,
 		graphtype: '',
 		selectx: '',
 		selecty: '',
 		selectr: '',
 		operation: '',
+		box_operation: '',
+		box_source: '',
+		box_values: '',
+		box_iterations: '',
 		potentialGraphName: 'un-named-graph-1',
 		graphName: 'un-named-graph-1',
 		graphs: {
 			'un-named-graph-1' : {
 				graphtype: '',
+				is_modifiable: true,
 				selectx: '',
 				selecty: '',
 				selectr: '',
 				operation: '',
+				box_operation: '',
+				box_source: '',
+				box_values: '',
+				box_iterations: ''
 				}
 			}
 	};
@@ -70,6 +80,31 @@ window.__getTableGraphData = function() {
 		return dataObj.graphs[graph] !== undefined;
 	};
 
+	pub.isModifiable = function() {
+		var ref = dataObj.is_modifiable;
+		if ( ref === null || ref === undefined ) {
+			ref = true;
+		}
+		return ref;
+	};
+
+	pub.setPermissions = function(name, modifiable) {
+		var graph = dataObj.graphs[name];
+		if ( graph == null || graph === undefined ) {
+			graph = { is_modifiable: modifiable };
+			dataObj.graphs[name] = graph;
+		} else {
+			graph.is_modifiable = modifiable;
+		}
+	};
+	
+	pub.getGraphType = function() {
+		var ref = dataObj.graphtype;
+		if ( ref === null || ref === undefined || ref === "unset type" ) {
+			ref = "";
+		}
+		return ref;
+	};
 	pub.getGraphType = function() {
 		var ref = dataObj.graphtype;
 		if ( ref === null || ref === undefined || ref === "unset type" ) {
@@ -104,6 +139,38 @@ window.__getTableGraphData = function() {
 
 	pub.getGraphOp = function() {
 		var ref = dataObj.operation;
+		if ( ref === null || ref === undefined ) {
+			ref = "";
+		}
+		return ref;
+	};
+
+	pub.getBoxOperation = function() {
+		var ref = dataObj.box_operation;
+		if ( ref === null || ref === undefined ) {
+			ref = "";
+		}
+		return ref;
+	};
+
+	pub.getBoxSource = function() {
+		var ref = dataObj.box_source;
+		if ( ref === null || ref === undefined ) {
+			ref = "";
+		}
+		return ref;
+	};
+
+	pub.getBoxValues = function() {
+		var ref = dataObj.box_values;
+		if ( ref === null || ref === undefined ) {
+			ref = "";
+		}
+		return ref;
+	};
+
+	pub.getBoxIterations = function() {
+		var ref = dataObj.box_iterations;
 		if ( ref === null || ref === undefined ) {
 			ref = "";
 		}

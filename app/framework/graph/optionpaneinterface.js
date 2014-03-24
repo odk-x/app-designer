@@ -3,22 +3,41 @@
 var paramHeight = Math.round(screen.height * .58);
 var paramWidth = Math.round(screen.width * .75);
 
-$(document).ready(setup);
 //handles events from html page
-
 var selections;
 var currentTab;
 var graphSelection;
 
-function setup() {
+$(document).on('ready', function () {
 	var info = data.getColumns();
 	selections = jQuery.parseJSON(info);
 	InitialMenuOptions(); 
 	$('#scaling_buttons').hide();
 	$('#scaling_button_pie_chart').hide();
 	$('.observe_panel').hide();
+	$("#title").on('click', function() {
+		if ( $("#title").hasClass('rolled_up') ) {
+			$("#title").removeClass('rolled_up');
+			$("#title").siblings().slideDown('slow', function() {
+				if(graphSelection == "Pie Chart") {
+					$('#scaling_button_pie_chart').slideUp('fast', function() {});
+				} else {
+					$('#scaling_buttons').slideUp('fast', function() {});
+				}
+			});
+		} else {
+			$("#title").addClass('rolled_up');
+			$("#title").siblings().slideUp('slow', function() {
+				if(graphSelection == "Pie Chart") {
+					$('#scaling_button_pie_chart').slideDown('fast', function() {});
+				} else {
+					$('#scaling_buttons').slideDown('fast', function() {});
+				}
+			});
+		}
+	});
 	//$('#color_selection').hide();
-}
+});
 
 //First option menu: Select a graph type
 function InitialMenuOptions() {
@@ -29,6 +48,7 @@ function InitialMenuOptions() {
 	$('#title').html("Select a graph type");
 	$("#selectgraph").append($(createTitle("Graph Type")));
 	$("#selectgraph").append($(createItem("Bar Graph", "graphtype", "graphtype")));
+	$("#selectgraph").append($(createItem("Pie Chart", "graphtype", "graphtype")));
 	$("#selectgraph").append($(createItem("Box Plot", "graphtype", "graphtype")));
 	$("#selectgraph").append($(createItem("Line Graph", "graphtype", "graphtype")));
 	$("#selectgraph").append($(createItem("Scatter Plot", "graphtype", "graphtype")));
@@ -64,6 +84,7 @@ function populateOperationSettings() {
 function populateBoxOperationSettings() {
 	if($("#box_operation").children().length == 0) {
 		$("#box_operation").hide();
+		$("#box_operation").addClass("defaultoption");
 		$("#box_operation").addClass("box_plot_component");
 		$("#box_operation").addClass("category");
 		currentTab = "box_operation";
@@ -93,8 +114,6 @@ function populateXSettings() {
 			$("#selectx").append($(createItem(k, selections[k], "selectx")));
 		}
 		$($("#selectx").children()).hide();
-		manageInvalidInputs();
-		
 		var graphX = graph_data.getGraphXAxis();
 		loadFromKeyValueStore($("#selectx"), graphX);
 		return true;
@@ -116,7 +135,6 @@ function populateYSettings() {
 			$("#selecty").append($(createItem(k, selections[k], "selecty")));
 		}
 		$($("#selecty").children()).hide();
-		manageInvalidInputs();
 		var graphY = graph_data.getGraphYAxis();
 		loadFromKeyValueStore($("#selecty"), graphY);	
 		return true;
@@ -128,6 +146,7 @@ function populateYSettings() {
 function populateRSettings() {	
 	if($("#selectr").children().length == 0) {
 		$('#selectr').hide();
+		$("#selectr").addClass("defaultoption");
 		$("#selectr").addClass("scatterplot");
 		$("#selectr").addClass("category");
 		currentTab = "selectr";
@@ -139,7 +158,6 @@ function populateRSettings() {
 			$("#selectr").append($(createItem(k, selections[k], "selectr")));
 		}
 		$($("#selectr").children()).hide();
-		manageInvalidInputs();
 		var graphR = graph_data.getGraphRAxis();
 		loadFromKeyValueStore($("#selectr"), graphR);	
 		return true;
@@ -151,6 +169,7 @@ function populateRSettings() {
 function populateBoxLabelSettings() {
 	if($("#box_source").children().length == 0) {
 		$("#box_source").hide();
+		$("#box_source").addClass("defaultoption");
 		$("#box_source").addClass("box_plot_component");
 		$("#box_source").addClass("category");
 		currentTab = "box_source";
@@ -161,7 +180,6 @@ function populateBoxLabelSettings() {
 			$("#box_source").append($(createItem(k, selections[k], "box_source")));
 		}
 		$($("#box_source").children()).hide();
-		manageInvalidInputs();
 		var boxSource = graph_data.getBoxSource();
 		loadFromKeyValueStore($("#box_source"), boxSource);
 		return true;
@@ -173,6 +191,7 @@ function populateBoxLabelSettings() {
 function populateBoxValueSettings() {	
 	if($("#box_values").children().length == 0) {
 		$('#box_values').hide();
+		$("#box_values").addClass("defaultoption");
 		$("#box_values").addClass("box_plot_component");
 		$("#box_values").addClass("category");
 		currentTab = "box_values";
@@ -183,7 +202,6 @@ function populateBoxValueSettings() {
 			$("#box_values").append($(createItem(k, selections[k], "box_values")));
 		}
 		$($("#box_values").children()).hide();
-		manageInvalidInputs();
 		var boxValues = graph_data.getBoxValues();
 		loadFromKeyValueStore($("#box_values"), boxValues);	
 		return true;
@@ -195,6 +213,7 @@ function populateBoxValueSettings() {
 function populateBoxIterationSettings() {	
 	if($("#iteration_counter").children().length == 0) {
 		$('#iteration_counter').hide();
+		$("#iteration_counter").addClass("defaultoption");
 		$("#iteration_counter").addClass("box_plot_component");
 		$("#iteration_counter").addClass("category");
 		currentTab = "iteration_counter";
@@ -205,7 +224,6 @@ function populateBoxIterationSettings() {
 			$("#iteration_counter").append($(createItem(k, selections[k], "iteration_counter")));
 		}
 		$($("#iteration_counter").children()).hide();
-		manageInvalidInputs();
 		var boxIterationColumn = graph_data.getBoxIterations();
 		loadFromKeyValueStore($("#iteration_counter"), boxIterationColumn);	
 		return true;
@@ -268,57 +286,58 @@ function createItem(text, type, kvstoreval) {
 	$(div).addClass("unselected");
 	$(div).attr('id', text);
 	$(div).append("<p class=\"label\">" + text + "</p>");
-	$(div).toggle(function() {
-		//closing file
-		if($("#title").hasClass("edit_button")) {
-			$("#title").html("Edit");
-		}
-		currentTab = "none";
-		$(div).removeClass("unselected");
-		$(div).addClass("selected");
-		//Save the selection in Key Value Store
-		graph_data.saveSelection(kvstoreval, text);
-		$(div).siblings(".unselected").slideUp('slow');
-		$(div).promise().done(function() {
-			$(div).siblings(".unselected").removeClass("previous");
+	$(div).on('click',function() {
+		if ( $(div).hasClass('unselected') ) {
+			//closing file
+			if($("#title").hasClass("edit_button")) {
+				$("#title").html("Edit");
+			}
+			currentTab = "none";
+			$(div).removeClass("unselected");
+			$(div).addClass("selected");
+			//Save the selection in Key Value Store
+			graph_data.saveSelection(kvstoreval, text);
+			$(div).siblings(".unselected").slideUp('slow');
+			$(div).promise().done(function() {
+				$(div).siblings(".unselected").removeClass("previous");
+				$(div).animate({
+					fontSize: '14pt',
+				}, 200, function() {});
+				deactivateTitle($(div).siblings(".title"));
+				if(!$(div).hasClass("previous")) {
+					dispatchNextFolder($(div).parent().attr('id'), $(div).attr('id'));
+				}
+			});
+		} else {
+			//opening file
+			//if the tab being opened is not the current tab, select a default
+			//value in that tab and open the new one.
 			$(div).animate({
-				fontSize: '14pt',
-			}, 200, function() {});
-			deactivateTitle($(div).siblings(".title"));
-			if(!$(div).hasClass("previous")) {
-				dispatchNextFolder($(div).parent().attr('id'), $(div).attr('id'));
-			}
-		});
-		
-	}, function() {
-		//opening file
-		//if the tab being opened is not the current tab, select a default
-		//value in that tab and open the new one.
-		$(div).animate({
-			fontSize: '24pt',
-		}, 200, function() {
-			$(div).siblings(":not(.invalid)").slideDown('slow');
-			if(currentTab != "none" && currentTab != $(div).parent().attr('id')) {
-				if($("#" + currentTab).find('.previous').length > 0) {
-					$("#" + currentTab).find('.previous').click();
+				fontSize: '24pt',
+			}, 200, function() {
+				$(div).siblings(":not(.invalid)").slideDown('slow');
+				if(currentTab != "none" && currentTab != $(div).parent().attr('id')) {
+					if($("#" + currentTab).find('.previous').length > 0) {
+						$("#" + currentTab).find('.previous').click();
+					}
+					else {
+						var noneDiv = $(createItem("none", currentTab, kvstoreval));
+						$("#" + currentTab).children(".title").after(noneDiv);
+						$(noneDiv).addClass("none");
+						$(noneDiv).click();
+					}
 				}
-				else {
-					var noneDiv = $(createItem("none", currentTab, kvstoreval));
-					$("#" + currentTab).children(".title").after(noneDiv);
-					$(noneDiv).addClass("none");
-					$(noneDiv).click();
+				currentTab = $(div).parent().attr('id');
+				selectTitle();
+				if($(div).hasClass("none")) {
+					$(div).remove();
 				}
-			}
-			currentTab = $(div).parent().attr('id');
-			selectTitle();
-			if($(div).hasClass("none")) {
-				$(div).remove();
-			}
-		});
-		activateTitle($(div).siblings(".title"));
-		$(div).removeClass("selected");
-		$(div).addClass("unselected");
-		$(div).addClass("previous");
+			});
+			activateTitle($(div).siblings(".title"));
+			$(div).removeClass("selected");
+			$(div).addClass("unselected");
+			$(div).addClass("previous");
+		}
 	});
 	return div;
 }
@@ -340,6 +359,18 @@ function selectTitle() {
 	else if(currentTab == "operation") {
 		$('#title').html("Select an operation");
 	}
+	else if(currentTab == "box_operation") {
+		$('#title').html("Select a box plot Type");
+	}
+	else if(currentTab == "box_source") {
+		$('#title').html("Box Labels");
+	}
+	else if(currentTab == "box_values") {
+		$('#title').html("Select Values");
+	}
+	else if(currentTab == "iteration_counter") {
+		$('#title').html("Select Iteration Column");
+	}
 }
 
 //Determines which menu item should be displayed next, this assumes that the
@@ -349,9 +380,9 @@ function dispatchNextFolder(form, folder) {
 		graphSelection = $('#selectgraph').children('.selected')[0].id;
 	}
 	if($('.none').length == 0) {
-		if(graphSelection == "Bar Graph") {
+		if(graphSelection == "Bar Graph" || graphSelection == "Pie Chart") {
 			$(".category:not(.defaultoption, .essential)").hide();
-			if(folder == "Bar Graph") {
+			if(folder == "Bar Graph" || folder == "Pie Chart") {
 				if(!populateOperationSettings()) {
 					form = "operation";
 				}
@@ -365,8 +396,7 @@ function dispatchNextFolder(form, folder) {
 				if($("#operation").children(".selected")[0].id == "Count") {
 					$("#selecty").hide();
 					packageEditMenu();
-				}
-				else if(!populateYSettings()) {
+				} else if(!populateYSettings()) {
 					form = "selecty";
 				}
 			}
@@ -392,6 +422,7 @@ function dispatchNextFolder(form, folder) {
 			if(form == "selectx") {
 				var operation = $("#operation").children(".selected")[0].id;
 				if(operation == "Count") {
+					$("#selecty").hide();
 					packageEditMenu();
 				}
 				else if(!populateYSettings()) {
@@ -399,6 +430,7 @@ function dispatchNextFolder(form, folder) {
 				}
 			}
 			if(form == "selecty") {
+				$('#selecty').show();
 				if(!populateRSettings()) {
 					form = "selectr";
 				}
@@ -407,7 +439,7 @@ function dispatchNextFolder(form, folder) {
 				packageEditMenu();
 			}
 		} else if(graphSelection == "Box Plot") {
-			$(".category:not(.box_plot_component, .essential)").hide();
+			$(".category:not(.defaultoption, .box_plot_component, .essential)").hide();
 			if(folder == "Box Plot") {
 				if(!populateBoxOperationSettings()) {
 					form = "box_operation";
@@ -454,44 +486,25 @@ function dispatchNextFolder(form, folder) {
 				packageEditMenu();
 			}
 		}
-		manageInvalidInputs();
 	}
+	manageInvalidInputs();
 }
 
 //This shrinks the menu into an edit button, when pressed it reexpands
 //When pressed again it closes the menu. Inversely zoom function appear and dissappear
 //when the menu is hidden and not hidden
 function packageEditMenu() {
-	if(!$("#title").hasClass("edit_button")) {
-		$("#title").html("Edit");
-		$("#title").addClass("edit_button");
-		$("#title").toggle(function() {
-			$("#title").html("Edit");
-			
-			$("#title").siblings().slideUp('slow', function() {
-				$('#scaling_buttons').slideDown('fast', function() {});
-			});
-		
-		},
-		function() {
-			$("#title").html("Edit");
-			$("#title").siblings().slideDown('slow', function() {});
-			if(graphSelection == "Pie Chart") {
-				$('#scaling_button_pie_chart').slideUp('slow', function() {});
-			} else {
-				$('#scaling_buttons').slideUp('slow', function() {});
-			}
-		});
-		$("#title").click();
-	}
-	if(!graph_data.isModifiable()) {
-		$("#title").hide();
-	}
-	if($("#title").hasClass("edit_button")) {
-		$("#title").promise().done(function() {
-			selectGraph();
-		});
-	}
+	$("#title").html("Edit");
+	$("#title").addClass("edit_button");
+	$("#title").addClass("rolled_up");
+	$("#title").siblings().slideUp('slow', function() {
+		if(graphSelection == "Pie Chart") {
+			$('#scaling_button_pie_chart').slideDown('fast', function() {});
+		} else {
+			$('#scaling_buttons').slideDown('fast', function() {});
+		}
+	});
+	selectGraph();
 }
 
 //Determines which columns should be selected and listed in a given menu. Determined
@@ -503,7 +516,7 @@ function manageInvalidInputs() {
 		operation = $("#operation").children(".selected")[0].id;
 	}
 	var itemId = $("#selectgraph").children(".selected")[0].id;
-	if (itemId == "Bar Graph") {
+	if (itemId == "Bar Graph" || itemId == "Pie Chart") {
 		if (operation != "Count") {
 			$("#selecty").children(':not(.Number, .title)').addClass("invalid");
 		}
@@ -578,6 +591,27 @@ function selectGraph() {
 			} else {
 				drawScatter(getSimplePlotScatterData(names, values, size),
 					$('#selectr').children('.selected')[0].id, xString, yString, "svg_body");
+			}
+		}
+	} else if(graphType == "Pie Chart") {
+		var xString = $('#selectx').children('.selected')[0].id;
+		var names = JSON.parse(data.getColumnData(xString));
+		var operation = $("#operation").children(".selected")[0].id;
+		if (operation == "Count") {
+			drawPieChart(countGraphData(names), xString, yString);
+		} else {
+			var yString = $('#selecty').children('.selected')[0].id;
+			var values = JSON.parse(data.getColumnData(yString));
+			if (operation == "Min") {
+				drawPieChart(minGraphData(names, values), xString, yString, "svg_body");
+			} else if (operation == "Max") {
+				drawPieChart(maxGraphData(names, values), xString, yString, "svg_body");
+			} else if (operation == "Sum") {
+				drawPieChart(sumGraphData(names, values), xString, yString, "svg_body");
+			} else if (operation == "Average") {
+				drawPieChart(avgGraphData(names, values), xString, yString, "svg_body");
+			} else {
+				drawPieChart(avgGraphData(names, values), xString, yString, "svg_body");
 			}
 		}
 	} else if(graphType == "Box Plot") {
