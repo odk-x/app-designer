@@ -34,7 +34,7 @@ test {
         <div id="edit_pane">
 			<p id="title"></p>
 
-			<form id="selectgraph"> 
+			<form id="graphtype"> 
 				
 			</form>
 			<form id="operation"> 
@@ -44,6 +44,9 @@ test {
 				
 			</form>
 			<form id="selectx">
+
+			</form>
+			<form id="selectslice">
 
 			</form>
 			<form id="selecty">
@@ -92,7 +95,7 @@ test {
 	<script type="text/javascript">
 	// Initialize the global data object...
 	(function() {
-		var tableId = 'myna_bird';
+		var tableId = 'Myna_birds';
 		if ( data.setBackingObject !== undefined ) {
 			$.ajax({
 				url: getUrl('output/debug/' + tableId + '_data.json'),
