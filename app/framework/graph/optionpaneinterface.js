@@ -11,16 +11,32 @@ var graphSelection;
 $(document).on('ready', function () {
 	var info = data.getColumns();
 	selections = jQuery.parseJSON(info);
+	populateOperationSettings();
+	populateBoxOperationSettings();
+	populateXSettings();
+	populateSliceSettings();
+	populateYSettings();
+	populateRSettings();
+	populateBoxLabelSettings();
+	populateBoxValueSettings();
+	populateBoxIterationSettings();
 	InitialMenuOptions(); 
+	$(".category:not("+appropriateFolders()+")").hide();
 	$('#scaling_buttons').hide();
 	$('#scaling_button_pie_chart').hide();
 	$('.observe_panel').hide();
 	$("#title").on('click', function() {
+		var graphSelection = "";
+		if($('#graphtype').children('.selected').length != 0) {
+			graphSelection = $('#graphtype').children('.selected')[0].id;
+		}
 		$("#title").siblings().removeClass("previous");
 		if ( $("#title").hasClass('rolled_up') ) {
 			$("#title").removeClass('rolled_up');
 			$("#title").html("Edit");
-			$("#title").siblings(appropriateFolders()).slideDown('slow', function() {
+			var selector = appropriateFolders();
+			$("#title").siblings(":not("+selector+")").hide();
+			$("#title").siblings(selector).slideDown('slow', function() {
 				if(graphSelection == "Pie Chart") {
 					$('#scaling_button_pie_chart').slideUp('fast', function() {});
 				} else {
@@ -33,9 +49,11 @@ $(document).on('ready', function () {
 			   currentTab !== "none") {
 				// do not make any selection changes for the tab that is open
 				// just close it.
-				$("#" + currentTab).css('fontSize', '14pt');
+				$("#" + currentTab).children(".selected").css('fontSize', '14pt');
+				deactivateTitle($("#" + currentTab).children(".title"));
+				deactivateTitle($("#" + currentTab + ":first-child").siblings(".title"));
 				$("#" + currentTab).children(".unselected").slideUp('fast');
-				deactivateTitle($("#" + currentTab).siblings(".title"));
+				currentTab = "none";
 			}
 			$("#title").addClass('rolled_up');
 			$("#title").html("Click to Edit");
@@ -46,6 +64,7 @@ $(document).on('ready', function () {
 					$('#scaling_buttons').slideDown('fast', function() {});
 				}
 			});
+			selectGraph();
 		}
 	});
 	//$('#color_selection').hide();
@@ -142,6 +161,7 @@ function populateSliceSettings() {
 	var category = $("#"+currentTab);
 	category.hide();
 	category.addClass("piechart");
+	category.addClass("notOperationCount");
 	category.addClass("category");
 	category.empty();
 	category.append($(createTitle("Pie Slices")));
@@ -164,6 +184,7 @@ function populateYSettings() {
 	category.addClass("piechart");
 	category.addClass("linegraph");
 	category.addClass("scatterplot");
+	category.addClass("notOperationCount");
 	category.addClass("category");
 	category.empty();
 	category.append($(createTitle("Y axis")));
@@ -203,6 +224,7 @@ function populateBoxLabelSettings() {
 	var category = $("#"+currentTab);
 	category.hide();
 	category.addClass("box_plot_component");
+	category.addClass("notBoxOperationSingle");
 	category.addClass("category");
 	category.empty();
 	category.append($(createTitle("Box Labels")));
@@ -309,18 +331,29 @@ function createItem(text, type, kvstoreval) {
 	$(div).attr('id', text);
 	$(div).append("<p class=\"label\">" + text + "</p>");
 	$(div).on('click',function() {
-		if ( $(div).hasClass('unselected') ) {
-			//closing file
-			currentTab = "none";
-			$(div).removeClass("unselected");
-			$(div).siblings(".selected").addClass("unselected");
-			$(div).siblings(".selected").removeClass("selected");
-			$(div).addClass("selected");
-			//Save the selection in Key Value Store
-			graph_data.saveSelection(kvstoreval, text);
-			// and update previous to record that setting...
-			$(div).siblings(".previous").removeClass("previous");
-			$(div).addClass("previous");
+		if ( currentTab !== null && currentTab !== undefined &&
+			 currentTab === $(div).parent().attr('id') ) {
+			// we clicked within the current folder.
+			// update that folder's selection if it 
+			// has changed, close that folder and 
+			// advance to the new folder.
+			if ( $(div).hasClass('unselected') ) {
+				// remove unselected from current
+				// add unselected to formerly selected
+				// remove formerly selected
+				// add selected to current 
+				$(div).removeClass("unselected");
+				$(div).siblings(".selected").addClass("unselected");
+				$(div).siblings(".selected").removeClass("selected");
+				$(div).addClass("selected");
+				//Save the selection in Key Value Store
+				graph_data.saveSelection(kvstoreval, text);
+				// remove formerly previous
+				// add previous to current 
+				$(div).siblings(".previous").removeClass("previous");
+				$(div).addClass("previous");
+			}
+			// roll everything up
 			$(div).siblings(".unselected").slideUp('slow');
 			$(div).promise().done(function() {
 				$(div).animate({
@@ -330,18 +363,24 @@ function createItem(text, type, kvstoreval) {
 				dispatchNextFolder($(div).parent().attr('id'), $(div).attr('id'));
 			});
 		} else {
+			// we clicked outside the current folder.
+			// leave existing selection unchanged and
+			// switch to that new folder.
 			//opening file
 			//if the tab being opened is not the current tab, select a default
 			//value in that tab and open the new one.
 			$(div).animate({
 				fontSize: '24pt',
 			}, 200, function() {
-				if(currentTab !== null && currentTab !== undefined &&
-				   currentTab !== "none" && currentTab !== $(div).parent().attr('id')) {
+				if(currentTab !== null &&
+				   currentTab !== undefined &&
+				   currentTab !== "none") {
 					// do not make any selection changes for the tab that is open
 					// just close it.
+					$("#" + currentTab).children(".selected").css('fontSize', '14pt');
+					deactivateTitle($("#" + currentTab).children(".title"));
+					deactivateTitle($("#" + currentTab + ":first-child").siblings(".title"));
 					$("#" + currentTab).children(".unselected").slideUp('fast');
-					deactivateTitle($("#" + currentTab).siblings(".title"));
 				}
 				// change to the selected tab...
 				currentTab = $(div).parent().attr('id');
@@ -386,23 +425,32 @@ function selectTitle() {
 	else if(currentTab == "iteration_counter") {
 		$('#title').html("Select Iteration Column");
 	}
+	else {
+		$('#title').html("Edit");
+	}
 }
 
 
 //Determines which menu item should be displayed next, this assumes that the
 //calling function has finished with all preceding menus and is ready to display the new one
 var navMap = {
-   "Bar Graph" : { antiSelector: ".category:not(.bargraph, .essential)",
-		selector: ".bargraph, .essential",
+   "Bar Graph" : {
+		selector: function() {
+			var selectedOp = $("#operation").children(".selected");
+			if(selectedOp.length > 0 && selectedOp[0].id == "Count") {
+				return ".essential, .bargraph:not(.notOperationCount)";
+			} else {
+				return ".essential, .bargraph";
+			}
+		},
 		nextState : { 
 			'graphtype' : 'operation',
 			'operation' : 'selectx',
 			'selectx' : function() { 
-				if($("#operation").children(".selected")[0].id == "Count") {
-					$("#selecty").hide();
+				var selectedOp = $("#operation").children(".selected");
+				if(selectedOp.length > 0 && selectedOp[0].id == "Count") {
 					return null;
 				} else {
-					$("#selecty").show();
 					return 'selecty';
 				}
 			}
@@ -414,17 +462,23 @@ var navMap = {
 			'selecty': populateYSettings
 		}
 	},
-	"Pie Chart": { antiSelector: ".category:not(.piechart, .essential)",
-		selector: ".piechart, .essential",
+	"Pie Chart": {
+		selector: function() {
+			var selectedOp = $("#operation").children(".selected");
+			if(selectedOp.length > 0 && selectedOp[0].id == "Count") {
+				return ".essential, .piechart:not(.notOperationCount)";
+			} else {
+				return ".essential, .piechart";
+			}
+		},
 		nextState: {
 			'graphtype' : 'operation',
 			'operation' : 'selectslice',
 			'selectslice' : function() { 
-				if($("#operation").children(".selected")[0].id == "Count") {
-					$("#selecty").hide();
+				var selectedOp = $("#operation").children(".selected");
+				if(selectedOp.length > 0 && selectedOp[0].id == "Count") {
 					return null;
 				} else {
-					$("#selecty").show();
 					return 'selecty';
 				}
 			}
@@ -436,17 +490,23 @@ var navMap = {
 			'selecty': populateYSettings
 		}
 	},
-	"Scatter Plot" : { antiSelector: ".category:not(.scatterplot, .essential)",
-		selector: ".scatterplot, .essential",
+	"Scatter Plot" : {
+		selector: function() {
+			var selectedOp = $("#operation").children(".selected");
+			if(selectedOp.length > 0 && selectedOp[0].id == "Count") {
+				return ".essential, .scatterplot:not(.notOperationCount)";
+			} else {
+				return ".essential, .scatterplot";
+			}
+		},
 		nextState: {
 			'graphtype' : 'operation',
 			'operation' : 'selectx',
 			'selectx' : function() { 
-				if($("#operation").children(".selected")[0].id == "Count") {
-					$("#selecty").hide();
+				var selectedOp = $("#operation").children(".selected");
+				if(selectedOp.length > 0 && selectedOp[0].id == "Count") {
 					return 'selectr';
 				} else {
-					$("#selecty").show();
 					return 'selecty';
 				}
 			},
@@ -460,16 +520,22 @@ var navMap = {
 			'selectr': populateRSettings
 		}
 	},
-	"Box Plot" : { antiSelector: ".category:not(.box_plot_component, .essential)",
-		selector: ".box_plot_component, .essential",
+	"Box Plot" : {
+		selector: function() {
+			var selectedOp = $("#box_operation").children(".selected");
+			if(selectedOp.length > 0 && selectedOp[0].id == "Single Column") {
+				return ".essential, .box_plot_component:not(.notBoxOperationSingle)";
+			} else {
+				return ".essential, .box_plot_component";
+			}
+		},
 		nextState : { 
 			'graphtype' : 'box_operation',
 			'box_operation' : function() { 
-				if($("#box_operation").children(".selected")[0].id == "Single Column") {
-					$("#box_source").show();
+				var selectedOp = $("#box_operation").children(".selected");
+				if(selectedOp.length > 0 && selectedOp[0].id == "Single Column") {
 					return 'iteration_counter';
 				} else {
-					$("#box_source").show();
 					return 'box_source';
 				}
 			},
@@ -485,17 +551,23 @@ var navMap = {
 			'box_values': populateBoxValueSettings
 		}
 	},
-	"Line Graph" : { antiSelector: ".category:not(.linegraph, .essential)",
-		selector: ".linegraph, .essential",
+	"Line Graph" : {
+		selector: function() {
+			var selectedOp = $("#operation").children(".selected");
+			if(selectedOp.length > 0 && selectedOp[0].id == "Count") {
+				return ".essential, .linegraph:not(.notOperationCount)";
+			} else {
+				return ".essential, .linegraph";
+			}
+		},
 		nextState : { 
 			'graphtype' : 'operation',
 			'operation' : 'selectx',
 			'selectx' : function() { 
-				if($("#operation").children(".selected")[0].id == "Count") {
-					$("#selecty").hide();
+				var selectedOp = $("#operation").children(".selected");
+				if(selectedOp.length > 0 && selectedOp[0].id == "Count") {
 					return null;
 				} else {
-					$("#selecty").show();
 					return 'selecty';
 				}
 			}
@@ -517,10 +589,11 @@ function appropriateFolders() {
 		   
 	var graphType = navMap[graphSelection];
 	if ( graphType === null || graphType === undefined ) {
-		return '.graphtype';
+		return '.essential';
 	}
 	
-	return graphType.selector;
+	var selector = (graphType.selector)();
+	return selector;
 }
 
 function dispatchNextFolder(currentState, folder) {
@@ -534,7 +607,9 @@ function dispatchNextFolder(currentState, folder) {
 		return;
 	}
 	
-	$(graphType.antiSelector).hide();
+	var selector = (graphType.selector)();
+	$(selector).show();
+	$(".category:not("+selector+")").hide();
 	var nextState = graphType.nextState[currentState];
 	if ( nextState !== null && nextState !== undefined &&
 		 $.isFunction(nextState) ) {
@@ -563,7 +638,9 @@ function dispatchCurrentFolder(currentState, folder) {
 		return;
 	}
 	
-	$(graphType.antiSelector).hide();
+	var selector = (graphType.selector)();
+	$(selector).show();
+	$(".category:not("+selector+")").hide();
 	if ( currentState === null || currentState === undefined ) {
 		packageEditMenu();
 	} else {
