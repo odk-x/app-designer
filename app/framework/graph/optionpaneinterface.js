@@ -166,7 +166,7 @@ function populateSliceSettings() {
 	category.empty();
 	category.append($(createTitle("Pie Slices")));
 	for(var k in selections) {
-		category.append($(createItem(k, selections[k], currentTab)));
+		category.append($(createItem(k, selections[k], "selectx")));
 	}
 	$(category.children()).hide();
 	var graphSlice = graph_data.getGraphXAxis();
