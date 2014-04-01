@@ -231,6 +231,8 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
                 updates[f] = {"elementPath" : elementPath, "value": v};
             } else if ( f === "_savepoint_type" ) {
                 stmt += "null";
+            } else if ( f === "_sync_state" ) {
+                stmt += "case when _sync_state='inserting' then 'inserting' else 'updating' end";
             } else {
                 if ( !defElement.isSessionVariable ) {
                     stmt += '"' + f + '"';
@@ -399,7 +401,7 @@ selectAllFromDataTableStmt:function(dbTableName, instanceId) {
  *
  * Requires: no globals
  */
-  selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArgs) {
+selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArgs) {
     if ( selection != null ) {
         var args = ['COMPLETE'];
         if ( selectionArgs != null ) {
