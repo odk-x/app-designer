@@ -279,6 +279,38 @@
       {
         "clause": "exit section",
         "_row_num": 52
+      },
+      {
+        "branch_label": "visit",
+        "_row_num": 53
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/visit/forms/visit/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 54
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 55
+      },
+      {
+        "branch_label": "plot",
+        "_row_num": 56
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/plot/forms/plot/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 57
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 58
       }
     ],
     "settings": [
@@ -424,6 +456,22 @@
           "text": "Graph Examples"
         },
         "_row_num": 16
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "visit",
+        "display": {
+          "text": "Visit"
+        },
+        "_row_num": 17
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "plot",
+        "display": {
+          "text": "Plot"
+        },
+        "_row_num": 18
       }
     ]
   },
@@ -622,6 +670,22 @@
             "text": "Graph Examples"
           },
           "_row_num": 16
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "visit",
+          "display": {
+            "text": "Visit"
+          },
+          "_row_num": 17
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "plot",
+          "display": {
+            "text": "Plot"
+          },
+          "_row_num": 18
         }
       ]
     },
@@ -957,12 +1021,38 @@
             "promptIdx": 16
           },
           {
+            "url": "'?' + opendatakit.getHashString('../tables/visit/forms/visit/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 54,
+            "__rowNum__": 53,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen54",
+            "promptIdx": 17
+          },
+          {
+            "url": "'?' + opendatakit.getHashString('../tables/plot/forms/plot/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 57,
+            "__rowNum__": 56,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen57",
+            "promptIdx": 18
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 53,
-            "_branch_label_enclosing_screen": "survey/_screen53",
-            "promptIdx": 17
+            "_row_num": 59,
+            "_branch_label_enclosing_screen": "survey/_screen59",
+            "promptIdx": 19
           }
         ],
         "validation_tag_map": {
@@ -1207,25 +1297,51 @@
             "operationIdx": 35
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 53,
+            "_row_num": 54,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 36
           },
           {
-            "_row_num": 53,
+            "clause": "exit section",
+            "_row_num": 55,
+            "__rowNum__": 54,
+            "_token_type": "exit_section",
+            "operationIdx": 37
+          },
+          {
+            "_row_num": 57,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 38
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 58,
+            "__rowNum__": 57,
+            "_token_type": "exit_section",
+            "operationIdx": 39
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 59,
+            "operationIdx": 40
+          },
+          {
+            "_row_num": 59,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 37
+            "operationIdx": 41
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 53,
-            "operationIdx": 38
+            "_row_num": 59,
+            "operationIdx": 42
           }
         ],
         "branch_label_map": {
@@ -1264,8 +1380,12 @@
           "_screen48": 32,
           "graphExample": 34,
           "_screen51": 34,
-          "_contents": 37,
-          "_screen53": 37
+          "visit": 36,
+          "_screen54": 36,
+          "plot": 38,
+          "_screen57": 38,
+          "_contents": 41,
+          "_screen59": 41
         }
       }
     }
