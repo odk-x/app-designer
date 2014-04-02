@@ -18,8 +18,8 @@
         <br>
         <a href="#" onclick="control.openTableToListView(
           'visit',
-          'plotId = ?',
-          [data.get('plotId')],
+          'plot_name = ?',
+          [data.get('plot_name')],
           'tables/visit/html/visit_list.html');"><span id="visits"></span> Visits</a>
         <script>
             $(display());  // calls the detail display function when ready

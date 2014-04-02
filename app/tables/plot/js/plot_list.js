@@ -84,7 +84,7 @@ var displayGroup = function(idxStart) {
         var item = $('<li>');
         item.attr('rowId', data.getRowId(i));
         item.attr('class', 'item_space');
-        item.text(data.getData(i, 'name'));
+        item.text(data.getData(i, 'plot_name'));
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
@@ -94,7 +94,7 @@ var displayGroup = function(idxStart) {
 
         var idItem = $('<li>');
         idItem.attr('class', 'detail');
-        idItem.text('Crop: ' + data.getData(i, 'plant_type'));
+        idItem.text('Crop: ' + data.getData(i, 'planting'));
         item.append(idItem);
 
         // Add any other details in your list item here.

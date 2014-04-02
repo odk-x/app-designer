@@ -35,9 +35,10 @@ function display() {
     var BUG_CUTWORM = 'cutworm';
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
+    $('#plot-name').text(data.get('plot_name'));
     $('#DATE').text(data.get('date'));
     // Get the plant health.
-    var ph = data.get('plantHealth');
+    var ph = data.get('plant_health');
     if (ph === PH_GOOD) {
         $('#plant-health-good').attr('checked', true);
     } else if (ph === PH_FAIR) {
