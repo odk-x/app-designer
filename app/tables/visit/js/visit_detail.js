@@ -29,21 +29,23 @@ function display() {
     var SOIL_FINE_SAND = 'fine_sand';
     var SOIL_SANDY_LOAM = 'sandy_loam';
     var SOIL_LOAM = 'loam';
-    var BUG_EARWORM = 'earmworm';
+    var BUG_EARWORM = 'earworm';
     var BUG_STINK = 'stink_bug';
     var BUG_BEETLE = 'beetle';
     var BUG_CUTWORM = 'cutworm';
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
+    $('#plot-name').text(data.get('plot_name'));
     $('#DATE').text(data.get('date'));
+
     // Get the plant health.
-    var ph = data.get('plantHealth');
+    var ph = data.get('plant_health');
     if (ph === PH_GOOD) {
         $('#plant-health-good').attr('checked', true);
     } else if (ph === PH_FAIR) {
         $('#plant-health-fair').attr('checked', true);
     } else if (ph === PH_BAD) {
-        $('#plan-health-bad').attr('checked', true);
+        $('#plant-health-bad').attr('checked', true);
     } else {
         console.log('unrecognized plant health: ' + ph);
     }
@@ -53,29 +55,30 @@ function display() {
     if (soil === SOIL_MEDIUM_SAND) {
         $('#medium-sand').attr('checked', true);
     } else if (soil === SOIL_FINE_SAND) {
-        $('#fine_sand').attr('checked', true);
+        $('#fine-sand').attr('checked', true);
     } else if (soil === SOIL_SANDY_LOAM) {
-        $('#sandy_loam').attr('checked', true);
+        $('#sandy-loam').attr('checked', true);
     } else if (soil === SOIL_LOAM) {
         $('#loam').attr('checked', true);
     } else {
         console.log('unrecognized soil type: ' + soil);
     }
 
-    // Now do the bugs.
-    var bugs = data.get('bugs');
-    if (bugs !== undefined) {
-        bugs = bugs.split(',');
-        if (bugs.indexOf(BUG_EARWORM) > 0) {
-            $('#bugs-lady').attr('checked', true);
+    // Now do the pests.
+    var bugs = data.get('pests');
+	var bugArray = (bugs !== null && bugs !== undefined) ? JSON.parse(bugs) : [];
+	for ( var i = 0 ; i < bugArray.length ; ++i ) {
+		var bug = bugArray[i];
+        if (bug===BUG_EARWORM) {
+            $('#bugs-earworm').attr('checked', true);
         }
-        if (bugs.indexOf(BUG_STINK) > 0) {
-            $('#bugs-stick').attr('checked', true);
+        if (bug===BUG_STINK) {
+            $('#bugs-stink').attr('checked', true);
         }
-        if (bugs.indexOf(BUG_BEETLE) > 0) {
+        if (bug===BUG_BEETLE) {
             $('#bugs-beetle').attr('checked', true);
         }
-        if (bugs.indexOf(BUG_CUTWORM) > 0) {
+        if (bug===BUG_CUTWORM) {
             $('#bugs-cutworm').attr('checked', true);
         }
     }

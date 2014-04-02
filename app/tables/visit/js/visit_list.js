@@ -94,7 +94,7 @@ var displayGroup = function(idxStart) {
 
         var plotItem = $('<li>');
         plotItem.attr('class', 'detail');
-        plotItem.text('Plot id: ' + data.getData(i, 'plotId'));
+        plotItem.text('Plot name: ' + data.getData(i, 'plot_name'));
         item.append(plotItem);
 
         // Add any other details in your list item here.

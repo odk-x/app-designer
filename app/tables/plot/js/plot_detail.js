@@ -22,11 +22,13 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
 function display() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
-    $('#NAME').text(data.get('name'));
-    $('#plot-id').text(data.get('plotId'));
-    $('#crop').text(data.get('plant_type'));
+    $('#NAME').text(data.get('plot_name'));
+    $('#plot-id').text(data.get('plot_id'));
+    $('#lat').text(data.get('location.latitude'));
+    $('#long').text(data.get('location.longitude'));
+    $('#crop').text(data.get('planting'));
     // We want to get the count.
-    var table = control.query('visit', 'plotId = ?', [data.get('plotId')]);
+    var table = control.query('visit', 'plot_name = ?', [data.get('plot_name')]);
     $('#visits').text(table.getCount());
 }
 
