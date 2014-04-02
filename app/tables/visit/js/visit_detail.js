@@ -37,7 +37,7 @@ function display() {
     // the body of your .html file.
     $('#plot-name').text(data.get('plot_name'));
     $('#DATE').text(data.get('date'));
-    $('#plot-id').text(data.get('plot_id'));
+
     // Get the plant health.
     var ph = data.get('plant_health');
     if (ph === PH_GOOD) {
@@ -55,9 +55,9 @@ function display() {
     if (soil === SOIL_MEDIUM_SAND) {
         $('#medium-sand').attr('checked', true);
     } else if (soil === SOIL_FINE_SAND) {
-        $('#fine_sand').attr('checked', true);
+        $('#fine-sand').attr('checked', true);
     } else if (soil === SOIL_SANDY_LOAM) {
-        $('#sandy_loam').attr('checked', true);
+        $('#sandy-loam').attr('checked', true);
     } else if (soil === SOIL_LOAM) {
         $('#loam').attr('checked', true);
     } else {
