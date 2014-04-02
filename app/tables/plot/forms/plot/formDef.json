@@ -28,7 +28,7 @@
       {
         "type": "select_one",
         "values_list": "plant_type",
-        "name": "plants",
+        "name": "planting",
         "display": {
           "text": "What type of plant is in this plot?"
         },
@@ -238,7 +238,7 @@
         },
         "elementKey": "location"
       },
-      "plants": {
+      "planting": {
         "_defn": [
           {
             "_row_num": 5,
@@ -246,7 +246,7 @@
           }
         ],
         "type": "string",
-        "elementKey": "plants"
+        "elementKey": "planting"
       }
     },
     "section_names": [
@@ -301,7 +301,7 @@
           {
             "type": "select_one",
             "values_list": "plant_type",
-            "name": "plants",
+            "name": "planting",
             "display": {
               "text": "What type of plant is in this plot?"
             },

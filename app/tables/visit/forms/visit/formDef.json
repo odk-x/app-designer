@@ -4,7 +4,7 @@
       {
         "type": "select_one",
         "values_list": "select_linked_plot",
-        "name": "selected_plot",
+        "name": "plot_id",
         "display": {
           "text": "Which plot are you observing?"
         },
@@ -495,7 +495,7 @@
     },
     "calculates": {},
     "model": {
-      "selected_plot": {
+      "plot_id": {
         "_defn": [
           {
             "_row_num": 2,
@@ -503,7 +503,7 @@
           }
         ],
         "type": "string",
-        "elementKey": "selected_plot"
+        "elementKey": "plot_id"
       },
       "date": {
         "_defn": [
@@ -608,7 +608,7 @@
           {
             "type": "select_one",
             "values_list": "select_linked_plot",
-            "name": "selected_plot",
+            "name": "plot_id",
             "display": {
               "text": "Which plot are you observing?"
             },
