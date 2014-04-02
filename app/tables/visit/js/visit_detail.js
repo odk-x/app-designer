@@ -37,6 +37,7 @@ function display() {
     // the body of your .html file.
     $('#plot-name').text(data.get('plot_name'));
     $('#DATE').text(data.get('date'));
+    $('#plot-id').text(data.get('plot_id'));
     // Get the plant health.
     var ph = data.get('plant_health');
     if (ph === PH_GOOD) {
@@ -63,7 +64,7 @@ function display() {
         console.log('unrecognized soil type: ' + soil);
     }
 
-    // Now do the bugs.
+    // Now do the pests.
     var bugs = data.get('pests');
 	var bugArray = (bugs !== null && bugs !== undefined) ? JSON.parse(bugs) : [];
 	for ( var i = 0 ; i < bugArray.length ; ++i ) {

@@ -26,7 +26,7 @@ function display() {
     $('#plot-id').text(data.get('plot_id'));
     $('#lat').text(data.get('location.latitude'));
     $('#long').text(data.get('location.longitude'));
-    $('#crop').text(data.get('plant_type'));
+    $('#crop').text(data.get('planting'));
     // We want to get the count.
     var table = control.query('visit', 'plot_name = ?', [data.get('plot_name')]);
     $('#visits').text(table.getCount());
