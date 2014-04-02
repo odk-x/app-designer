@@ -29,11 +29,11 @@ function display() {
     viewTeasButton.on(
         'click',
         function() {
-            control.openTable(
+            control.openTableToListView(
                 'visit',
                 null,
                 null,
-                'visit/plot/html/visit_list.html');
+                'tables/visit/html/visit_list.html');
         }
     );
     $('#wrapper').append(viewTeasButton);

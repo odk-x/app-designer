@@ -84,7 +84,13 @@ var displayGroup = function(idxStart) {
         var item = $('<li>');
         item.attr('rowId', data.getRowId(i));
         item.attr('class', 'item_space');
-        item.text('Visit on ' + data.getData(i, 'date'));
+        var displayDate = data.getData(i, 'date');
+        // We only want to display the date, not the time and 'T', which are
+        // important to the db representation
+        if (displayDate !== undefined && displayDate !== null) {
+            displayDate = displayDate.substring(0, 10);
+        }
+        item.text('Visit on ' + displayDate);
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');

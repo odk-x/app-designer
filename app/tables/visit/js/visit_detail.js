@@ -36,7 +36,13 @@ function display() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
     $('#plot-name').text(data.get('plot_name'));
-    $('#DATE').text(data.get('date'));
+    // We need to fiddle with the date a little bit to get back a more
+    // human-readable value.
+    var displayDate = data.get('date');
+    if (displayDate !== null && displayDate !== undefined) {
+        displayDate = displayDate.substring(0, 10);
+    }
+    $('#DATE').text(displayDate);
 
     // Get the plant health.
     var ph = data.get('plant_health');
