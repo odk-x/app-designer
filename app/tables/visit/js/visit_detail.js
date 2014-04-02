@@ -36,8 +36,9 @@ function display() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
     $('#DATE').text(data.get('date'));
+    $('#plot-id').text(data.get('plot_id'));
     // Get the plant health.
-    var ph = data.get('plantHealth');
+    var ph = data.get('plant_health');
     if (ph === PH_GOOD) {
         $('#plant-health-good').attr('checked', true);
     } else if (ph === PH_FAIR) {
@@ -62,20 +63,20 @@ function display() {
         console.log('unrecognized soil type: ' + soil);
     }
 
-    // Now do the bugs.
-    var bugs = data.get('bugs');
-    if (bugs !== undefined) {
-        bugs = bugs.split(',');
-        if (bugs.indexOf(BUG_EARWORM) > 0) {
-            $('#bugs-lady').attr('checked', true);
+    // Now do the pests.
+    var pests = data.get('pests');
+    if (pests !== undefined) {
+        pests = pests.split(',');
+        if (pests.indexOf(BUG_EARWORM) > 0) {
+            $('#bugs-earworm').attr('checked', true);
         }
-        if (bugs.indexOf(BUG_STINK) > 0) {
-            $('#bugs-stick').attr('checked', true);
+        if (pests.indexOf(BUG_STINK) > 0) {
+            $('#bugs-stink').attr('checked', true);
         }
-        if (bugs.indexOf(BUG_BEETLE) > 0) {
+        if (pests.indexOf(BUG_BEETLE) > 0) {
             $('#bugs-beetle').attr('checked', true);
         }
-        if (bugs.indexOf(BUG_CUTWORM) > 0) {
+        if (pests.indexOf(BUG_CUTWORM) > 0) {
             $('#bugs-cutworm').attr('checked', true);
         }
     }

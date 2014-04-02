@@ -23,10 +23,10 @@ function display() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
     $('#NAME').text(data.get('name'));
-    $('#plot-id').text(data.get('plotId'));
-    $('#crop').text(data.get('plant_type'));
+    $('#plot-id').text(data.get('plot_id'));
+    $('#crop').text(data.get('planting'));
     // We want to get the count.
-    var table = control.query('visit', 'plotId = ?', [data.get('plotId')]);
+    var table = control.query('visit', 'plot_id = ?', [data.get('plot_id')]);
     $('#visits').text(table.getCount());
 }
 
