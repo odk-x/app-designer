@@ -11,7 +11,7 @@
       },
       {
         "type": "text",
-        "name": "name",
+        "name": "plot_name",
         "display": {
           "text": "Enter the name of the plot:"
         },
@@ -81,7 +81,7 @@
       },
       {
         "setting_name": "instance_name",
-        "value": "name",
+        "value": "plot_name",
         "_row_num": 5
       }
     ]
@@ -124,7 +124,7 @@
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "name",
+        "value": "plot_name",
         "_row_num": 5
       },
       "table_id": {
@@ -199,7 +199,7 @@
         "type": "integer",
         "elementKey": "plot_id"
       },
-      "name": {
+      "plot_name": {
         "_defn": [
           {
             "_row_num": 3,
@@ -207,7 +207,7 @@
           }
         ],
         "type": "string",
-        "elementKey": "name"
+        "elementKey": "plot_name"
       },
       "location": {
         "_defn": [
@@ -274,7 +274,7 @@
           },
           {
             "type": "text",
-            "name": "name",
+            "name": "plot_name",
             "display": {
               "text": "Enter the name of the plot:"
             },
