@@ -24,6 +24,8 @@ function display() {
     // the body of your .html file.
     $('#NAME').text(data.get('plot_name'));
     $('#plot-id').text(data.get('plot_id'));
+    $('#lat').text(data.get('location.latitude'));
+    $('#long').text(data.get('location.longitude'));
     $('#crop').text(data.get('plant_type'));
     // We want to get the count.
     var table = control.query('visit', 'plot_name = ?', [data.get('plot_name')]);
