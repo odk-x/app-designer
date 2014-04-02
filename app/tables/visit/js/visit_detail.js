@@ -20,14 +20,19 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
 }
  
 function display() {
+    // We don't want any of the input elements to be editable.
+    $('input').attr('disabled', true);
     var PH_GOOD = 'good';
-    var PH_FAIR = 'ok';
+    var PH_FAIR = 'fair';
     var PH_BAD = 'bad';
-    var SOIL_WET = 'wet';
-    var SOIL_DRY = 'dry';
-    var BUG_LADY = 'lady';
-    var BUG_STICK = 'stick';
+    var SOIL_MEDIUM_SAND = 'medium_sand';
+    var SOIL_FINE_SAND = 'fine_sand';
+    var SOIL_SANDY_LOAM = 'sandy_loam';
+    var SOIL_LOAM = 'loam';
+    var BUG_EARWORM = 'earmworm';
+    var BUG_STINK = 'stink_bug';
     var BUG_BEETLE = 'beetle';
+    var BUG_CUTWORM = 'cutworm';
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
     $('#DATE').text(data.get('date'));
@@ -45,10 +50,14 @@ function display() {
 
     // Now do the soil.
     var soil = data.get('soil');
-    if (soil === SOIL_WET) {
-        $('#soil-wet').attr('checked', true);
-    } else if (soil === SOIL_DRY) {
-        $('#soil-dry').attr('checked', true);
+    if (soil === SOIL_MEDIUM_SAND) {
+        $('#medium-sand').attr('checked', true);
+    } else if (soil === SOIL_FINE_SAND) {
+        $('#fine_sand').attr('checked', true);
+    } else if (soil === SOIL_SANDY_LOAM) {
+        $('#sandy_loam').attr('checked', true);
+    } else if (soil === SOIL_LOAM) {
+        $('#loam').attr('checked', true);
     } else {
         console.log('unrecognized soil type: ' + soil);
     }
@@ -57,14 +66,17 @@ function display() {
     var bugs = data.get('bugs');
     if (bugs !== undefined) {
         bugs = bugs.split(',');
-        if (bugs.indexOf(BUG_LADY) > 0) {
+        if (bugs.indexOf(BUG_EARWORM) > 0) {
             $('#bugs-lady').attr('checked', true);
         }
-        if (bugs.indexOf(BUG_STICK) > 0) {
+        if (bugs.indexOf(BUG_STINK) > 0) {
             $('#bugs-stick').attr('checked', true);
         }
         if (bugs.indexOf(BUG_BEETLE) > 0) {
             $('#bugs-beetle').attr('checked', true);
+        }
+        if (bugs.indexOf(BUG_CUTWORM) > 0) {
+            $('#bugs-cutworm').attr('checked', true);
         }
     }
 

@@ -24,6 +24,7 @@ function display() {
     // the body of your .html file.
     $('#NAME').text(data.get('name'));
     $('#plot-id').text(data.get('plotId'));
+    $('#crop').text(data.get('plant_type'));
     // We want to get the count.
     var table = control.query('visit', 'plotId = ?', [data.get('plotId')]);
     $('#visits').text(table.getCount());

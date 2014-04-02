@@ -94,7 +94,7 @@ var displayGroup = function(idxStart) {
 
         var idItem = $('<li>');
         idItem.attr('class', 'detail');
-        idItem.text('Plot id: ' + data.getData(i, 'plotId'));
+        idItem.text('Crop: ' + data.getData(i, 'plant_type'));
         item.append(idItem);
 
         // Add any other details in your list item here.
