@@ -1,6 +1,6 @@
-plot_id,name,location,plants
-1,Rosario,,bean
-2,Miraflores,,bean
-3,Puerto Madero,,corn
-4,Palermo,,corn
-5,La Boca,,cotton
+plot_id,name,latitude,longitude,altitude,accuracy,planting
+1,Rosario,"","","","",bean
+2,Miraflores,"","","","",bean
+3,Puerto Madero,"","","","",corn
+4,Palermo,"","","","",corn
+5,La Boca,"","","","",cotton

@@ -1,16 +1,16 @@
-date,plotId,plant_height,plant_health,plant_picture,pests,soil,observations
-2014-01-10,1,10,fair,,"earworm,stink_bug",medium_sand,Lots of bugs
-2014-01-20,1,20,fair,,earworm,medium_sand,Looking good
-2014-01-30,1,30,good,,,medium_sand,Still good
-2014-03-01,2,2.5,good,,beetle,fine_sand,beetles!
-2014-03-03,2,5,fair,,"earworm,beetle",fine_sand,Earworms and beetles!
-2014-03-05,2,7.5,fair,,beetle,fine_sand,Just beetles
-2014-02-05,3,10,fair,,,sandy_loam,nothing to report
-2014-02-10,3,10,bad,,,sandy_loam,Looks dry
-2014-02-15,3,11,bad,,beetle,loam,Beetles arrived this time.
-2014-02-14,4,55,good,,cutworm,loam,Soil seems well taken care of.
-2014-02-20,4,80,good,,cutworm,loam,Appears to have gotten cutworms.
-2014-03-02,4,99,good,,cutworm,loam,Great crop.
-2014-01-01,5,50,bad,,"earworm,cutworm",sandy_loam,Things are looking dire.
-2014-02-01,5,75,fair,,"earworm,cutworm",sandy_loam,Seems to have made a turn around.
-2014-03-01,5,80,good,,cutworm,sandy_loam,Looking great.
+date,plot_id,plant_height,plant_health,plant_picture,pests,soil,observations
+2014-01-10,1,10,fair,"","earworm,stink_bug",medium_sand,Lots of bugs
+2014-01-20,1,20,fair,"",earworm,medium_sand,Looking good
+2014-01-30,1,30,good,"","",medium_sand,Still good
+2014-03-01,2,2.5,good,"",beetle,fine_sand,beetles!
+2014-03-03,2,5,fair,"","earworm,beetle",fine_sand,Earworms and beetles!
+2014-03-05,2,7.5,fair,"",beetle,fine_sand,Just beetles
+2014-02-05,3,10,fair,"","",sandy_loam,nothing to report
+2014-02-10,3,10,bad,"","",sandy_loam,Looks dry
+2014-02-15,3,11,bad,"",beetle,loam,Beetles arrived this time.
+2014-02-14,4,55,good,"",cutworm,loam,Soil seems well taken care of.
+2014-02-20,4,80,good,"",cutworm,loam,Appears to have gotten cutworms.
+2014-03-02,4,99,good,"",cutworm,loam,Great crop.
+2014-01-01,5,50,bad,"","earworm,cutworm",sandy_loam,Things are looking dire.
+2014-02-01,5,75,fair,"","earworm,cutworm",sandy_loam,Seems to have made a turn around.
+2014-03-01,5,80,good,"",cutworm,sandy_loam,Looking great.
