@@ -82,10 +82,15 @@ requirejs.config({
         },
         'mobiscroll': {
             deps: ['jquery','jqmobile'],
-			exports: '$.mobiscroll',
+            exports: '$.mobiscroll'
         },
         'jqueryCsv' : {
-            deps: ['jquery']
+            deps: ['jquery'],
+            exports: '$.csv'
+        },
+        'd3' : {
+            deps: [],
+            exports: 'd3'
         }
     }
 });
@@ -95,7 +100,7 @@ requirejs.config({
  * re-draw of the current screen when returning from a linked table (sub-form).
  */
 function redrawHook() {
-	require('controller').redrawHook();
+    require('controller').redrawHook();
 }
 /**
  * Test to confirm that all required dependencies have

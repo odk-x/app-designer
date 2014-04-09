@@ -5,7 +5,6 @@ verifyLoad('database',
     ['mdl','opendatakit','databaseUtils','databaseSchema','jquery'],
     [mdl,opendatakit,databaseUtils,databaseSchema,$]);
 return {
-  submissionDb:false,
   pendingChanges: [],
   withDb:function(ctxt, transactionBody) {
     var inContinuation = false;
@@ -13,8 +12,8 @@ return {
     ctxt.sqlStatement = null;
     var that = this;
     try {
-        if ( that.submissionDb ) {
-            that.submissionDb.transaction(transactionBody, function(error,a) {
+        if ( dbif.w3cSqlIsOpen() ) {
+            dbif.w3cSqlTransaction(transactionBody, function(error) {
                     if ( ctxt.sqlStatement != null ) {
                         ctxt.log('E',"withDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
                         ctxt.log('E',"withDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
@@ -22,22 +21,22 @@ return {
                     ctxt.log('E',"withDb.transaction.error", error.message);
                     ctxt.log('E',"withDb.transaction.error.transactionBody", transactionBody.toString());
                     inContinuation = true;
-                    that.submissionDb = null;
                     ctxt.failure({message: "Error while accessing or saving values to the database."});
                     }, function() {
                         ctxt.log('D',"withDb.transaction.success");
                         inContinuation = true;
                         ctxt.success();
                     });
-        } else if(!window.openDatabase) {
+        } else if(dbif.w3cSqlIsUnsupported() ) {
             ctxt.log('E','database.withDb.notSupported w3c SQL interface is not supported');
             inContinuation = true;
             ctxt.failure({message: "Web client does not support the W3C SQL database standard."});
         } else {
             var settings = opendatakit.getDatabaseSettings();
-            var w3cDatabase = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
-              // create the database...
-            w3cDatabase.transaction(function(transaction) {
+            dbif.w3cSqlOpenAndInitializeDatabase(
+                settings.shortName, settings.version, settings.displayName, settings.maxSize,
+                // initialize the database...
+                function(transaction) {
                     var td;
                     td = databaseSchema.createTableStmt('_column_definitions', 
                                                 databaseSchema.columnDefinitionsPredefinedColumns,
@@ -53,7 +52,11 @@ return {
                                                 databaseSchema.tableDefinitionsPredefinedColumns);
                     ctxt.sqlStatement = td;
                     transaction.executeSql(td.stmt, td.bind);
-                }, function(error) {
+                    ctxt.sqlStatement = null;
+                }, 
+                // transaction to invoke...
+                transactionBody,
+                function(error) {
                     if ( ctxt.sqlStatement != null ) {
                         ctxt.log('E',"withDb.createDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
                         ctxt.log('E',"withDb.createDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
@@ -63,29 +66,13 @@ return {
                     inContinuation = true;
                     ctxt.failure({message: "Error while initializing database tables."});
                 }, function() {
-                    // DB is created -- record the submissionDb and initiate the transaction...
-                    that.submissionDb = w3cDatabase;
-                    ctxt.log('D',"withDb.createDb.transacton.success");
-                    ctxt.sqlStatement = null;
-                    that.submissionDb.transaction(transactionBody, function(error) {
-                                if ( ctxt.sqlStatement != null ) {
-                                    ctxt.log('E',"withDb.afterCreateDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
-                                    ctxt.log('E',"withDb.afterCreateDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
-                                }
-                                ctxt.log('E',"withDb.afterCreateDb.transaction.error", error.message);
-                                ctxt.log('E',"withDb.afterCreateDb.transaction.error.transactionBody", transactionBody.toString());
-                                that.submissionDb = null;
-                                inContinuation = true;
-                                ctxt.failure({message: "Error while accessing or saving values to the database."});
-                            }, function() {
-                                ctxt.log('D',"withDb.afterCreateDb.transaction.success");
-                                inContinuation = true;
-                                ctxt.success();
-                            });
+                    ctxt.log('D',"withDb.afterCreateDb.transaction.success");
+                    inContinuation = true;
+                    ctxt.success();
                 });
         }
     } catch(e) {
-        that.submissionDb = null;
+        dbif.w3cSqlCloseDatabase();
         // Error handling code goes here.
         if ( ctxt.sqlStatement != null ) {
             ctxt.log('E',"withDb.exception.sqlStmt", ctxt.sqlStatement.stmt);
