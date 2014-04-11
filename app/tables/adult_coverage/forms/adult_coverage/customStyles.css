@@ -1,5 +1,14 @@
+/* html {
+      overflow: scroll;
+} */
 
-.regrigerator-container h3 {
+
+.refrigerator-container {
+    /* overflow-x: scroll; */
+    width: 100%;
+}
+
+.refrigerator-container h3 {
     margin-top: 10px;
     font-weight: normal
 }
@@ -8,7 +17,7 @@
     float: right;
 }
     
-.regrigerator-container h3 input {
+.refrigerator-container h3 input {
     margin-top: 10px;
     font-weight: normal;
 }
@@ -19,18 +28,25 @@ h3 {
     font-weight: bold;
 }
 
+.odk-container {
+    /*padding-left: 1em;
+    padding right: 1em;*/
+    padding: 0;
+}
+
 table {
-    max-width: 100%;
+    /* max-width: 100%; */
+    width: 100%;
+    height: 100%;
     background-color: transparent;
     border-spacing:0;
     border-color: rgb(131,131,131);
-    border-spacing: 2px;
+    /*border-spacing: 2px;*/
 }
     
-.table {
-    width: 100%;
-    margin-bottom: 20px;
-}
+/* .table {
+    width: 120%;
+} */
 
 .table-bordered {
     border: 1px solid #ddd;
@@ -49,7 +65,7 @@ thead {
 tr {
     display: table-row;
 }
-    
+   
 .table-bordered thead:first-child tr:first-child th:first-child, .table-bordered tbody:first-child tr:first-child td:first_child {
     border-top-left-radius: 4px;
 }
@@ -157,13 +173,17 @@ td, th {
     height: 50px;
 }
 
+#adultCoverageTable {
+    width: 100%;
+}
+
 .vertical-middle-aligned {
     vertical-align: middle !important;
 }
 
 .refrigerator-container {
-    width: 75%;
-    margin:0 auto 0 auto;
+    width: 100%;
+    overflow: auto;
 }
 
 .ui-checkbox .ui-btn-inner {
@@ -182,5 +202,13 @@ td, th {
 
 .ui-btn-text {
     padding: 0;
+}
+
+.ui-content {
+    padding-right: 3px;
+}
+
+body.ui-mobile-viewport, div.ui-mobile-viewport {
+    overflow-x: scroll;
 }
  
