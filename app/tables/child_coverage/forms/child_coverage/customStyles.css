@@ -1,14 +1,17 @@
-
-.regrigerator-container h3 {
+body {
+  overflow: scroll;
+}
+.refrigerator-container h3 {
     margin-top: 10px;
-    font-weight: normal
+    margin-left: 10px;
+    font-weight: bold;
 }
     
 .pull-right {
     float: right;
 }
     
-.regrigerator-container h3 input {
+.refrigerator-container h3 input {
     margin-top: 10px;
     font-weight: normal;
 }
@@ -16,22 +19,24 @@
 h3 {
     font-size: 1.3em;
     line-height: 40px;
-    font-weight: bold;
+    padding-left: 3px;
+}
+
+.odk-container {
+    margin-bottom: 32px;
+    padding-left: 0;
+    padding-right: 0;
+    padding: 0;
 }
 
 table {
-    max-width: 100%;
     background-color: transparent;
     border-spacing:0;
     border-color: rgb(131,131,131);
-    border-spacing: 2px;
+    table-layout:fixed;
+    margin-bottom:3px;
 }
     
-.table {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
 .table-bordered {
     border: 1px solid #ddd;
     border-collapse: separate;
@@ -77,7 +82,7 @@ tr {
 }
     
 .coverage-table td:first-child, #communityCell {
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: bold;
     background: linear-gradient(to bottom, #f9f9f9 0%, #e0e0e0 100%) !important;
     text-shadow: 0 1px 0 #FFF;
@@ -114,7 +119,7 @@ td, th {
 .facility-distribution-form-table th {
     text-align: left;
     min-height: 62px;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: bold;
     text-shadow: 0 1px 1 #fff;
     padding: 10px;
@@ -123,17 +128,17 @@ td, th {
     
 .facility-distribution-form-table td {
     min-height: 71px;
-    padding: 10px 10px 6px;
+    padding: 10px 8px 6px;
 }
     
 .facility-distribution-form-table td .input-error-parent-cell{
     position: relative;
 }
     
-.facility-distribution-form-table td label {
+/* .facility-distribution-form-table td label {
     margin-right: 15px;
-    font-size: 0.9em;
-}
+    font-size: 0.8em;
+} */
     
 .facility-distribution-form-table table tr:nth-child(even) td {
     background: #f9f9f9;
@@ -153,17 +158,12 @@ td, th {
     margin-bottom: 3px;
 }
 
-#adultCoverageTable tr:last-child td:first-child {
+.facility-distribution-form-table tr:last-child td:first-child {
     height: 50px;
 }
 
 .vertical-middle-aligned {
     vertical-align: middle !important;
-}
-
-.refrigerator-container {
-    width: 75%;
-    margin:0 auto 0 auto;
 }
 
 .ui-checkbox .ui-btn-inner {
@@ -182,5 +182,11 @@ td, th {
 
 .ui-btn-text {
     padding: 0;
+}
+
+.ui-content {
+    padding-left: 0px;
+    padding-right: 3px;
+    overflow: auto;
 }
  

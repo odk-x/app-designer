@@ -175,7 +175,7 @@ return Backbone.View.extend({
             dataTheme: "a",
             hasTranslations: (locales.length > 1),
             showHeader: true,
-            showFooter: false,
+            showFooter: (opendatakit.getSettingValue('showFooter') ? opendatakit.getSettingValue('showFooter') : false),
             showContents: (!that.popScreenOnExit && opendatakit.getCurrentSectionShowContents(screen._section_name)),
             enableForwardNavigation: true,
             enableBackNavigation: true,

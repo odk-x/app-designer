@@ -10,7 +10,9 @@
             {{property}}="{{value}}"
         {{/eachProperty}}>
         {{#each choices}}
-            <label>
+            <label  {{#if checked}}{{#if display.color}}
+                        style="background-color:{{display.color}};border-color: {{display.color}};"
+                    {{/if}}{{/if}}>
                 <input
                     {{#if ../select_one}}
                         type="radio"

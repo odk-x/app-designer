@@ -5448,14 +5448,11 @@
             "_row_num": 144,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(140);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
             "operationIdx": 2
           },
           {
-            "_token_type": "resume",
-            "clause": "resume",
+            "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 144,
             "operationIdx": 3
           }
@@ -5496,7 +5493,7 @@
             "display": {
               "title": "Child Coverage"
             },
-            "_branch_label_enclosing_screen": "survey/0"
+            "_branch_label_enclosing_screen": "survey/_contents"
           },
           {
             "_row_num": 5,
@@ -5591,14 +5588,11 @@
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
             "operationIdx": 8
           },
           {
-            "_token_type": "resume",
-            "clause": "resume",
+            "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 9,
             "operationIdx": 9
           },
@@ -5607,9 +5601,6 @@
             "clause": "validate finalize",
             "_sweep_name": "finalize",
             "_row_num": 9,
-            "screen": {
-              "hideInBackHistory": true
-            },
             "operationIdx": 10
           },
           {
@@ -5617,14 +5608,11 @@
             "clause": "save and terminate",
             "calculation": true,
             "_row_num": 9,
-            "screen": {
-              "hideInBackHistory": true
-            },
             "operationIdx": 11
           },
           {
-            "_token_type": "resume",
-            "clause": "resume",
+            "_token_type": "back_in_history",
+            "clause": "back",
             "_row_num": 9,
             "operationIdx": 12
           }

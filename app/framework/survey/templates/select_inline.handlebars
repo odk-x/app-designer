@@ -16,7 +16,9 @@
     {{/eachProperty}}
     >
         {{#each choices}}
-            <label>
+            <label  {{#if checked}}{{#if display.color}}
+                        style="background-color:{{display.color}};border-color: {{display.color}};"
+                    {{/if}}{{/if}}>
                 <input
                     {{#if ../select_one}}
                         type="radio"
@@ -26,7 +28,7 @@
                     {{#if checked}}
                         checked="checked"
                     {{/if}}
-                        
+
                     {{! the name attribue has to be the same for all the options}}
                     name="{{../name}}"
                     id="{{data_value}}"
