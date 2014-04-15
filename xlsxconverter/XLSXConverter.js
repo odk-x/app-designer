@@ -1082,11 +1082,18 @@
 
     var parseTopLevelBlock = function(sheetName, flow ) {
         var i = 0;
+        var hasContents = false;
         var blockFlow = [];
         while (i < flow.length) {
             var clause = flow[i];
             switch (clause._token_type) {
             case "branch_label":
+                if ( clause.branch_label === '_contents' ) {
+                    hasContents = true;
+                }
+                blockFlow.push(clause);
+                ++i;
+                break;
             case "assign":
             case "prompt":
             case "goto_label":
@@ -1138,11 +1145,13 @@
                            _row_num: rowNum };
         blockFlow.push(exitEnding);
 
-        /** emit the _contents branch label (for the contents prompt) */
-        blockFlow.push({ _token_type: "branch_label", branch_label: "_contents", _row_num: rowNum });
-        blockFlow.push({ _token_type: "prompt", type: "contents", _type: "contents", _row_num: rowNum, screen: { hideInBackHistory: true } });
-        // this should never be reached....
-        blockFlow.push({ _token_type: "resume", clause: "resume", _row_num: rowNum });
+        if ( !hasContents ) {
+            /** emit the _contents branch label (for the contents prompt) */
+            blockFlow.push({ _token_type: "branch_label", branch_label: "_contents", _row_num: rowNum });
+            blockFlow.push({ _token_type: "prompt", type: "contents", _type: "contents", _row_num: rowNum, screen: { hideInBackHistory: true } });
+            // this should never be reached....
+            blockFlow.push({ _token_type: "resume", clause: "resume", _row_num: rowNum });
+        }
 
         if ( sheetName == 'initial' ) {
             blockFlow.push({ _token_type: "branch_label", branch_label: "_finalize", _row_num: rowNum });
