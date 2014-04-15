@@ -103,7 +103,7 @@ Eventually we should make a jqm theme for this.
 }
 .inline-label-container {
     float:left;
-    width:33%;
+    width:50%;
 }
 .inline-label-container > :first-child {
     margin-top: .5em;
