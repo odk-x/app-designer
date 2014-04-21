@@ -32,7 +32,7 @@ var resumeFn = function(idxStart) {
     // The first time through we're going to make a map of typeId to
     // typeName so that we can display the name of each shop's specialty.
     if (idxStart === 0) {
-        var typeData = control.query('Tea_types', null, null);
+        var typeData = control.query('Tea_types', null, null, null, null, null, null);
         for (var typeCntr = 0; typeCntr < typeData.getCount(); typeCntr++) {
             typeNameMap[typeData.getData(typeCntr, 'Type_id')] =
                 typeData.getData(typeCntr, 'Name');
