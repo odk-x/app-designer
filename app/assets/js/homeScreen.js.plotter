@@ -17,9 +17,7 @@ function display() {
         function() {
             control.openTableToListView(
                 'plot',
-                null,
-                null,
-                'tables/plot/html/plot_list.html');
+				'tables/plot/html/plot_list.html');
         }
     );
     $('#wrapper').append(viewPlotsButton);
@@ -29,11 +27,9 @@ function display() {
     viewTeasButton.on(
         'click',
         function() {
-            control.openTable(
+            control.openTableToListView(
                 'visit',
-                null,
-                null,
-                'visit/plot/html/visit_list.html');
+				'tables/visit/html/visit_list.html');
         }
     );
     $('#wrapper').append(viewTeasButton);

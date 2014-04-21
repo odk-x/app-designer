@@ -28,7 +28,7 @@ function display() {
     $('#long').text(data.get('location.longitude'));
     $('#crop').text(data.get('planting'));
     // We want to get the count.
-    var table = control.query('visit', 'plot_name = ?', [data.get('plot_name')]);
+    var table = control.query('visit', 'plot_name = ?', [data.get('plot_name')], null, null, null, null);
     $('#visits').text(table.getCount());
     var margin = {
         top: 20,
@@ -39,7 +39,7 @@ function display() {
     var width = 300 - margin.left - margin.right;
     var height = 500 - margin.top - margin.bottom;
     // Set up the scales.
-    var visitData = control.query('visit', 'plot_name = ?', [data.get('plot_name')]);
+    var visitData = control.query('visit', 'plot_name = ?', [data.get('plot_name')], null, null, null, null);
     var xValues = JSON.parse(visitData.getColumnData('date'));
     xValues = [xValues[0], xValues[1], xValues[2]];
     // because d3 domain expects an array of ints, make a map.

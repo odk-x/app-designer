@@ -27,7 +27,8 @@ function display() {
     var typeData = control.query(
             'Tea_types',
             'Type_id = ?',
-            [data.get('Specialty_Type_id')]);
+            [data.get('Specialty_Type_id')],
+			null, null, null, null);
 
     $('#FIELD_6').text(typeData.getData(0, 'Name'));
 
@@ -64,7 +65,8 @@ function display() {
     var results = control.query(
             'Tea_inventory',
             'House_id = ?',
-            [data.get('House_id')]);
+            [data.get('House_id')],
+			null, null, null, null);
     $('#FIELD_16').text(results.getCount());
 
 }

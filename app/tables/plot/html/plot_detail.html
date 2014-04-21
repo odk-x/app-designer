@@ -37,11 +37,11 @@
         <br>
         <p>Crop: <span id="crop"></span></p>
         <br>
-        <a href="#" onclick="control.openTableToListView(
-          'visit',
+        <a href="#" onclick="control.openTableToListViewWithSql(
+          'visit', 'tables/visit/html/visit_list.html',
           'plot_name = ?',
-          [data.get('plot_name')],
-          'tables/visit/html/visit_list.html');"><span id="visits"></span> Visits</a>
+          [data.get('name')],
+          null, null, null, null);"><span id="visits"></span> Visits</a>
         <div id="graph-div"></div>
         <script>
             $(display());  // calls the detail display function when ready

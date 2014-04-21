@@ -45,7 +45,8 @@ if (!window.control) {
      * methods that take the tableId, sqlWhereClause, sqlSelectionArgs, and
      * relativePath parameters.
      */
-    var assertOpenTypes = function(fnName, tableId, where, args, path) {
+    var assertOpenTypes = function(fnName, tableId, where, args, 
+			groups, having, orderByElementKey, orderByDirection, path) {
         if (!isString(tableId)) {
             throw fnName + '--tableId not a string';
         }
@@ -54,6 +55,18 @@ if (!window.control) {
         }
         if (!isArray(args) && args !== null && args !== undefined) {
             throw fnName + '--sqlSelectionArgs not an array';
+        }
+        if (!isArray(groups) && groups !== null && groups !== undefined) {
+            throw fnName + '--sqlGroupByArgs not an array';
+        }
+        if (!isString(having) && having !== null && having !== undefined) {
+            throw having + '--sqlHavingClause not a string';
+        }
+        if (!isString(orderByElementKey) && orderByElementKey !== null && orderByElementKey !== undefined) {
+            throw fnName + '--sqlOrderByElementKey not a string';
+        }
+        if (!isString(orderByDirection) && orderByDirection !== null && orderByDirection !== undefined) {
+            throw fnName + '--sqlOrderByDirection not a string';
         }
         if (!isString(path) && path !== null && path !== undefined) {
             throw fnName + '--relativePath not a string';
@@ -100,44 +113,45 @@ if (!window.control) {
         controlObj = jsonObj;
     };
 
-    pub.openTable = function(tableId, sqlWhereClause, sqlSelectionArgs) {
-        if (!isString(tableId)) {
-            throw 'openTable()--tableId not a string';
-        }
-        // We're checking for null and undefined because it isn't specified
-        // what the Android WebKit passes in to us in the event of null or
-        // overloading objects.
-        if (!isString(sqlWhereClause) &&
-                sqlWhereClause !== null &&
-                sqlWhereClause !== undefined) {
-            throw 'openTable()--sqlWhereClause not a string';
-        }
-        if (!isArray(sqlSelectionArgs) &&
-                sqlSelectionArgs !== null &&
-                sqlSelectionArgs !== undefined) {
-            throw 'openTable()--sqlSelectionArgs not an array';
-        }
-        if (arguments.length > 3) {
-            throw 'openTable()--too many arguments';
+    pub.openTable = function(tableId) {
+        assertOpenTypes('openTable()',
+                tableId, null, null, null, null, null, null, null );
+        if (arguments.length != 1) {
+            throw 'openTable()-- takes only one argument!';
         }
         console.log('called openTable(). Unclear where to navigate,' +
                 ' so opening list view.');
         pub.openTableToListView(
-                tableId,
-                sqlWhereClause,
-                sqlSelectionArgs,
-                null);
+                tableId, null);
     };
 
-    pub.openTableToListView = function(tableId, sqlWhereClause,
-        sqlSelectionArgs, relativePath) {
-        assertOpenTypes('openTableToListView()',
+    pub.openTableWithSql = function(tableId, sqlWhereClause, sqlSelectionArgs,
+		sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection) {
+        assertOpenTypes('openTableWithSql()',
+                tableId, sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection, null );
+        if (arguments.length != 7) {
+            throw 'openTableWithSql()--missing arguments';
+        }
+        console.log('called openTableWithSql(). Unclear where to navigate,' +
+                ' so opening list view.');
+        pub.openTableToListViewWithSql(
                 tableId,
+				null,
                 sqlWhereClause,
                 sqlSelectionArgs,
-                relativePath);
-        if (arguments.length > 4) {
-            throw 'openTableToListView()--too many arguments';
+                sqlGroupByArgs,
+				sqlHavingClause,
+				sqlOrderByElementKey,
+				sqlOrderByDirection);
+    };
+
+    pub.openTableToListView = function(tableId, relativePath) {
+        assertOpenTypes('openTableToListView()',
+                tableId, null, null,
+				null, null, null, null, relativePath );
+        if (arguments.length != 2) {
+            throw 'openTableToListView()--mismatched arguments';
         }
         if (relativePath === null) {
             // then we need the default
@@ -147,48 +161,71 @@ if (!window.control) {
         window.location.href = relativePath;
     };
 
-    pub.openTableToMapView = function(tableId, sqlWhereClause,
-        sqlSelectionArgs, relativePath) {
+    pub.openTableToListViewWithSql = function(tableId, relativePath,
+				sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection) {
+        assertOpenTypes('openTableToListViewWithSql()',
+                tableId, sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection, relativePath );
+        if (arguments.length != 8) {
+            throw 'openTableToListView()--mismatched arguments';
+        }
+        if (relativePath === null) {
+            // then we need the default
+            relativePath = controlObj.tables[tableId].defaultListFile;
+        }
+        relativePath = pub.getFileAsUrl(relativePath);
+        window.location.href = relativePath;
+    };
+
+    pub.openTableToMapView = function(tableId, relativePath) {
         assertOpenTypes('openTableToMapView()',
-                tableId,
-                sqlWhereClause,
-                sqlSelectionArgs,
-                relativePath);
-        if (arguments.length > 4) {
-            throw 'openTableToMapView()--too many arguments';
+                tableId, null, null,
+				null, null, null, null, relativePath );
+        if (arguments.length != 2) {
+            throw 'openTableToMapView()--mismatched arguments';
         }
     };
 
-    pub.openTableToSpreadsheetView = function(tableId, sqlWhereClause,
-        sqlSelectionArgs) {
-        // We're going to rely on the fact that the path can be nullable and
-        // thus use the assertHelper, just passing in null.
+    pub.openTableToMapViewWithSql = function(tableId, relativePath,
+				sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection) {
+        assertOpenTypes('openTableToMapViewWithSql()',
+                tableId, sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection, relativePath );
+        if (arguments.length != 8) {
+            throw 'openTableToMapViewWithSql()--mismatched arguments';
+        }
+    };
+
+    pub.openTableToSpreadsheetView = function(tableId) {
         assertOpenTypes('openTableToSpreadsheetView()',
-                tableId,
-                sqlWhereClause,
-                sqlSelectionArgs,
-                null);
-        if (arguments.length > 3 ) {
-            throw 'openTableToSpreadsheetView()--too many arguments';
+                tableId, null, null,
+				null, null, null, null, null );
+        if (arguments.length != 1) {
+            throw 'openTableToSpreadsheetView()--mismatched arguments';
         }
     };
 
-    pub.query = function(tableId, sqlWhereClause, sqlSelectionArgs) {
-        if (!isString(tableId)) {
-            throw 'query()--tableId not a string';
+    pub.openTableToSpreadsheetViewWithSql = function(tableId, relativePath,
+				sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection) {
+        assertOpenTypes('openTableToSpreadsheetViewWithSql()',
+                tableId, sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection, relativePath );
+        if (arguments.length != 8) {
+            throw 'openTableToSpreadsheetViewWithSql()--mismatched arguments';
         }
-        if (!isString(sqlWhereClause) &&
-                sqlWhereClause !== null &&
-                sqlWhereClause !== undefined) {
-            throw 'query()--sqlWhereClause not a string';
-        }
-        if (!isArray(sqlSelectionArgs) &&
-                sqlSelectionArgs !== null &&
-                sqlSelectionArgs !== undefined) {
-            throw 'query()--sqlSelectionArgs not an array';
-        }
-        if (arguments.length > 3) {
-            throw 'query()--too many arguments';
+    };
+	
+    pub.query = function(tableId,
+				sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection) {
+        assertOpenTypes('query()',
+                tableId, sqlWhereClause, sqlSelectionArgs,
+				sqlGroupByArgs, sqlHavingClause, sqlOrderByElementKey, sqlOrderByDirection, null );
+        if (arguments.length != 7) {
+            throw 'query()--mismatched arguments';
         }
         // Now we need to get the object.
         var newTableData = window.__getTableData();

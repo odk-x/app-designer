@@ -107,10 +107,34 @@ window.__getTableData = function() {
         return colors[len % colors.length];
     };
 
+	pub.getWhereClause = function() {
+		return null;
+	};
+
+	pub.getSelectionArgs = function() {
+		return null;
+	};
+
     pub.isGroupedBy = function() {
         return dataObj.isGroupedBy;
     };
 
+	pub.getGroupByArgs = function() {
+		return null;
+	};
+
+	pub.getHavingClause = function() {
+		return null;
+	};
+
+	pub.getOrderByElementKey = function() {
+		return null;
+	};
+
+	pub.getOrderByDirection = function() {
+		return null;
+	};
+	
     pub.getData = function(rowNumber, elementPath) {
         return dataObj.data[rowNumber][elementPath];
     };

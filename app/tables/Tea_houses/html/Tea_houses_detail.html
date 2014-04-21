@@ -46,7 +46,7 @@
         <p>Owner: <span id="FIELD_14"></span></p>
         <p>Mobile number: <span id="FIELD_15"></span></p>
         </br>
-        <a href="#" onclick="control.openTable('Tea_inventory', 'House_id = ?', [data.get('House_id')]);"><span id="FIELD_16"></span> Teas</a>
+        <a href="#" onclick="control.openTableWithSql('Tea_inventory', 'House_id = ?', [data.get('House_id')], null, null, null, null);"><span id="FIELD_16"></span> Teas</a>
         
         <script>
             $(display());  // calls the detail display function when ready
