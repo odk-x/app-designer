@@ -8,30 +8,36 @@ function display() {
 
     var body = $('#main');
     // Set the background to be a picture.
-    body.css('background-image', 'url(img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg)');
+    body.css('background-image', 'url(img/teaBackground.jpg)');
 
-    var viewPlotsButton = $('<button>');
-    viewPlotsButton.text('View Plots');
-    viewPlotsButton.on(
+    var viewHousesButton = $('<button>');
+    viewHousesButton.text('View Tea Houses');
+    viewHousesButton.on(
         'click',
         function() {
-            control.openTableToListView(
-                'plot',
-				'tables/plot/html/plot_list.html');
+            control.openTable('Tea_houses', null, null);
         }
     );
-    $('#wrapper').append(viewPlotsButton);
+    $('#wrapper').append(viewHousesButton);
 
     var viewTeasButton = $('<button>');
-    viewTeasButton.text('View Visits');
+    viewTeasButton.text('View Teas');
     viewTeasButton.on(
         'click',
         function() {
-            control.openTableToListView(
-                'visit',
-				'tables/visit/html/visit_list.html');
+            control.openTable('Tea_inventory', null, null);
         }
     );
     $('#wrapper').append(viewTeasButton);
+
+    var viewTeaTypesButton = $('<button>');
+    viewTeaTypesButton.text('Tea Types');
+    viewTeaTypesButton.on(
+        'click',
+        function() {
+            control.openTable('Tea_types', null, null);
+        }
+    );
+    $('#wrapper').append(viewTeaTypesButton);
 
 }

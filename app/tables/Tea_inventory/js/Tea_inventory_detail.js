@@ -23,7 +23,7 @@ var display = function() {
     var typeData = control.query(
             'Tea_types',
             'Type_id = ?',
-            [data.get('Type_id')], null, null, null, null);
+            [data.get('Type_id')]);
     $('#FIELD_1').text(typeData.getData(0, 'Name'));
     $('#FIELD_2').text(data.get('Price_8oz'));
     $('#FIELD_3').text(data.get('Price_12oz'));
