@@ -24,14 +24,14 @@ var resumeFn = function(idxStart) {
     // The first time through we're going to make a map of typeId to
     // typeName so that we can display the name of each shop's specialty.
     if (idxStart === 0) {
-        var houseData = control.query('Tea_houses', null, null, null, null, null, null);
+        var houseData = control.query('Tea_houses', null, null);
         for (var i = 0; i < houseData.getCount(); i++) {
             console.log('should be triggering line 30');
             console.log('houseData.getData: ' + houseData.getData(i, 'House_id'));
             houseNameMap[houseData.getData(i, 'House_id')] =
                 houseData.getData(i, 'Name');
         }
-        var typeData = control.query('Tea_types', null, null, null, null, null, null);
+        var typeData = control.query('Tea_types', null, null);
         for (i = 0; i < typeData.getCount(); i++) {
             typeNameMap[typeData.getData(i, 'Type_id')] =
                 typeData.getData(i, 'Name');
