@@ -1,0 +1,6 @@
+_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,plot_id,plot_name,location_latitude,location_longitude,location_altitude,location_accuracy,planting,_row_etag
+e3e405b8-aa9a-41c8-9fa1-165c1ea1c515,,,COMPLETE,2014-04-02T04:32:47.070000000,,1,Rosario,47.65824883,-122.3131459,45,15,bean,
+9ad65272-08e2-4af0-be9d-49efe5436f96,,,COMPLETE,2014-04-02T04:32:47.127000000,,2,Miraflores,47.64540379,-122.3363659,23,10,bean,
+6df1ef62-31f1-4468-8708-df1ac13cf589,,,COMPLETE,2014-04-02T04:32:47.158000000,,3,Puerto Madero,47.68999464,-122.3554331,50,5,corn,
+39328e1c-bcb7-4345-bf9a-0fbf40a1ad0b,,,COMPLETE,2014-04-02T04:32:47.188000000,,4,Palermo,47.65434975,-122.3049898,22,7,corn,
+7577b6cb-6486-4ba5-b97f-3cd1495a9e1b,,,COMPLETE,2014-04-02T04:32:47.225000000,,5,La Boca,47.6611747,-122.3501364,5,15,cotton,

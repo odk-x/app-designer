@@ -1,0 +1,10 @@
+_id,plot_name,date,plant_height,plant_health,plant_picture,pests,soil,observations
+ba,Puerto Madero,2/5/2014,10,fair,,,sandy_loam,nothing to report
+bb,Puerto Madero,2/10/2014,10,bad,,,sandy_loam,Looks dry
+bc,Puerto Madero,2/15/2014,11,bad,,"[""beetle""]",loam,Beetles arrived this time.
+bd,Palermo,2/14/2014,55,good,,"[""cutworm""]",loam,Soil seems well taken care of.
+be,Palermo,2/20/2014,80,good,,"[""cutworm""]",loam,Appears to have gotten cutworms.
+bf,Palermo,3/2/2014,99,good,,"[""cutworm""]",loam,Great crop.
+bg,La Boca,1/1/2014,50,bad,,"[""earworm"",""cutworm""]",sandy_loam,Things are looking dire.
+bh,La Boca,2/1/2014,75,fair,,"[""earworm"",""cutworm""]",sandy_loam,Seems to have made a turn around.
+bi,La Boca,3/1/2014,80,good,,"[""cutworm""]",sandy_loam,Looking great.
