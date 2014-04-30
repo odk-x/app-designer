@@ -1,0 +1,11 @@
+_element_key,_element_name,_element_type,_is_unit_of_retention,_list_child_element_keys
+House_id,House_id,none,TRUE,[]
+Name,Name,none,TRUE,[]
+Type_id,Type_id,none,TRUE,[]
+Loose_Leaf,Loose_Leaf,none,TRUE,[]
+Price_8oz,Price_8oz,none,TRUE,[]
+Cold,Cold,none,TRUE,[]
+Hot,Hot,none,TRUE,[]
+Bags,Bags,none,TRUE,[]
+Price_16oz,Price_16oz,none,TRUE,[]
+Price_12oz,Price_12oz,none,TRUE,[]

@@ -1,0 +1,13 @@
+_element_key,_element_name,_element_type,_is_unit_of_retention,_list_child_element_keys
+water,water,string,TRUE,[]
+location,location,geopoint,FALSE,"[""location_latitude"",""location_longitude"",""location_altitude"",""location_accuracy""]"
+location_latitude,latitude,number,TRUE,[]
+location_accuracy,accuracy,number,TRUE,[]
+location_altitude,altitude,number,TRUE,[]
+location_longitude,longitude,number,TRUE,[]
+num_rooms,num_rooms,integer,TRUE,[]
+household_id,household_id,string,TRUE,[]
+owner,owner,string,TRUE,[]
+youngest,youngest,array,TRUE,"[""youngest_items""]"
+youngest_items,items,string,FALSE,[]
+electricity,electricity,string,TRUE,[]
