@@ -1794,6 +1794,12 @@ promptTypes.media = promptTypes.base.extend({
         }
     }
 });
+promptTypes.read_only_image = promptTypes.media.extend({
+    type: "read_only_image",
+    extension: "jpg",
+    contentType: "image/*",
+    templatePath: "templates/read_only_image.handlebars",
+});
 promptTypes.image = promptTypes.media.extend({
     type: "image",
     extension: "jpg",
