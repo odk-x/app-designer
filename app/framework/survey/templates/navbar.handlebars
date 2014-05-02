@@ -27,14 +27,12 @@
     <div class="odk-footer">
         <div class="ui-grid-b my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
             <div class="ui-block-a">
-                <div >
-                    <a data-role="button" data-rel="popup" style="display:block;">{{localize form_title}}</a>
-                </div>
-            </div>
-            <div class="ui-block-b">
                 <a class="odk-prev-btn
                 {{#unless enableBackNavigation}}ui-disabled{{/unless}}"
                 data-role="button" data-icon="carat-l" data-iconpos="left" style="display:block;">{{#unless hideNavigationButtonText}}back{{/unless}}</a> 
+            </div>
+            <div class="ui-block-b">
+
             </div>
             <div class="ui-block-c">   
                 <a class="odk-next-btn
