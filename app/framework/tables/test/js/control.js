@@ -118,17 +118,13 @@ describe('control', function() {
         });
 
         it('#result is LOOSELY correct size', function() {
-            // There are potentially 10 tables. The 4 tea tables:
-            // Tea_inventory, Tea_types, Tea_houses, Tea_houses_editable
-            // as well as:
-            // geotagger, Myna_birds, Milk_bank.
-            // Plus if we've loaded a form using survey we have
-            // Common Javascript Framework and the two household tables, which
-            // ship with the demo. So, include those as well.
-            // Since we don't want this test to be dependent on a particular
-            // loading order, we're going to make this a loose test.
+            // This is a variable number of tables, depending on what has been
+            // loaded. It assumes you import based on the tables.properties
+            // file and have 11 tables. This changes with the default
+            // configuration, however. As more options become standard, add
+            // them here.
             assert.include(
-                [7, 9, 10],
+                [11],
                 tableIds.length,
                 'result was not correct size');
         });

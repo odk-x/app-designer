@@ -1,0 +1,12 @@
+_element_key,_element_name,_element_type,_is_unit_of_retention,_list_child_element_keys
+plot_name,plot_name,string,TRUE,[]
+pests,pests,array,TRUE,"[""pests_items""]"
+pests_items,items,string,FALSE,[]
+plant_height,plant_height,number,TRUE,[]
+plant_health,plant_health,string,TRUE,[]
+date,date,dateTime,TRUE,[]
+plant_picture,plant_picture,mimeUri,TRUE,"[""plant_picture_uriFragment"",""plant_picture_contentType""]"
+plant_picture_uriFragment,uriFragment,string,FALSE,[]
+plant_picture_contentType,contentType,string,FALSE,[]
+observations,observations,string,TRUE,[]
+soil,soil,string,TRUE,[]

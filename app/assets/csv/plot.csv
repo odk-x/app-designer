@@ -1,6 +1,0 @@
-plot_id,plot_name,planting,latitude,longitude,altitude,accuracy
-1,Rosario,bean,47.65824883,-122.3131459,45,15
-2,Miraflores,bean,47.64540379,-122.3363659,23,10
-3,Puerto Madero,corn,47.68999464,-122.3554331,50,5
-4,Palermo,corn,47.65434975,-122.3049898,22,7
-5,La Boca,cotton,47.6611747,-122.3501364,5,15
