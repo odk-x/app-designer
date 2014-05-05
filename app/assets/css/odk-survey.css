@@ -24,6 +24,14 @@ body {
     .my-breakpoint.ui-grid-b .ui-block-b, 
     .my-breakpoint.ui-grid-b .ui-block-c { width: 24.925%; } 
 }
+
+@media all and (min-width: 26em) {
+    .odk-footer .my-breakpoint.ui-grid-b  .ui-block-a { width: 24.925%; } 
+    .odk-footer .my-breakpoint.ui-grid-b  .ui-block-b { width: 49.95%; } 
+    .odk-footer .my-breakpoint.ui-grid-b  .ui-block-c { width: 24.925%; } 
+}
+
+
 .odk-screen {
 	min-height: inherit;
 	min-width: inherit;

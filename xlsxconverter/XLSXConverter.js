@@ -301,6 +301,20 @@
         "piechart": null,
         "scatterplot": null,
         "boxplot": null,
+        "read_only_image": {
+            "type": "object",
+            "elementType": "mimeUri",
+            "isUnitOfRetention": true,
+            "properties": {
+                "uriFragment": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string",
+                    "default": "image/*"
+                }
+            }
+        },
         "image": {
             "type": "object",
             "elementType": "mimeUri",
