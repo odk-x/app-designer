@@ -31,14 +31,8 @@
 
           document.getElementById("TITLE").innerHTML = data.get("Description");
           
-          var loc = data.get("Location");
-          var lat = "";
-          var lng = "";
-          if ( loc != null ) {
-            var splitLoc = loc.split(",");
-            lat = splitLoc[0];
-            lng = splitLoc[1];
-          }
+          var lat = data.get("Location_latitude");
+          var lng = data.get("Location_longitude");
           document.getElementById("FIELD_1").innerHTML = lat;
           document.getElementById("FIELD_2").innerHTML = lng;
     

@@ -57,14 +57,8 @@ function displayGroup() {
         detailContainer.attr('id', 'item_' + i);
         $(detailContainer).hide();
                   
-        var loc = data.getData(i,'Location');
-        var lat = '';
-        var lng = '';
-        if ( loc !== null ) {
-            var splitLoc = loc.split(',');
-            lat = splitLoc[0];
-            lng = splitLoc[1];
-        }
+        var lat = data.getData(i,'Location_latitude');
+        var lng = data.getData(i,'Location_longitude');
 
         var field1 = $('<p>');
         field1.text('Latitude: ' + lat);
