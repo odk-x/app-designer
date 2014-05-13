@@ -62,11 +62,10 @@ function display() {
     jsonMap = JSON.stringify(jsonMap);
 
     waypoint.onclick = function() {
-        data.addRowWithCollectAndSpecificFormAndPrepopulatedValues(
+        data.addRowWithSurvey(
                 'geopoints',
-                'geoPoint',
+                'geopoints',
                 null,
-                'geoPoint',
                 jsonMap);
     };
     waypoint.innerHTML = 'Add Waypoint';
