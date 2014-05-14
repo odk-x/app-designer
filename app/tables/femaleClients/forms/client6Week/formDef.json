@@ -406,7 +406,7 @@
     "choices": [
       {
         "choice_list_name": "happen",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Miscarriage"
         },
@@ -414,7 +414,7 @@
       },
       {
         "choice_list_name": "happen",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Stillbirth"
         },
@@ -422,7 +422,7 @@
       },
       {
         "choice_list_name": "happen",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Other"
         },
@@ -430,7 +430,7 @@
       },
       {
         "choice_list_name": "happen",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -438,7 +438,7 @@
       },
       {
         "choice_list_name": "birthplace",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Your home"
         },
@@ -446,7 +446,7 @@
       },
       {
         "choice_list_name": "birthplace",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Other home"
         },
@@ -454,7 +454,7 @@
       },
       {
         "choice_list_name": "birthplace",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Hospital"
         },
@@ -462,7 +462,7 @@
       },
       {
         "choice_list_name": "birthplace",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Other government facility"
         },
@@ -470,7 +470,7 @@
       },
       {
         "choice_list_name": "birthplace",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Private facility"
         },
@@ -478,7 +478,7 @@
       },
       {
         "choice_list_name": "birthplace",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Other"
         },
@@ -486,7 +486,7 @@
       },
       {
         "choice_list_name": "birthplace",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -494,7 +494,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Cost too much"
         },
@@ -502,7 +502,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Facility not open"
         },
@@ -510,7 +510,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Too far/no transportation"
         },
@@ -518,7 +518,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Don’t trust facility/poor quality service"
         },
@@ -526,7 +526,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "No female provider at facility"
         },
@@ -534,7 +534,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Partner did not allow it"
         },
@@ -542,7 +542,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Family did not allow it"
         },
@@ -550,7 +550,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 8,
+        "data_value": "a8",
         "display": {
           "text": "Not necessary"
         },
@@ -558,7 +558,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 9,
+        "data_value": "a9",
         "display": {
           "text": "Not customary"
         },
@@ -566,7 +566,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 10,
+        "data_value": "a10",
         "display": {
           "text": "Other"
         },
@@ -574,7 +574,7 @@
       },
       {
         "choice_list_name": "issues",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -582,7 +582,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Traditional birth attendant"
         },
@@ -590,7 +590,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Skilled birth attendant (nurse/midwife)"
         },
@@ -598,7 +598,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Doctor"
         },
@@ -606,7 +606,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Male partner"
         },
@@ -614,7 +614,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Family member(s)"
         },
@@ -622,7 +622,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Friend(s)"
         },
@@ -630,7 +630,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Community health worker"
         },
@@ -638,7 +638,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 8,
+        "data_value": "a8",
         "display": {
           "text": "Other"
         },
@@ -646,7 +646,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 9,
+        "data_value": "a9",
         "display": {
           "text": "No one"
         },
@@ -654,7 +654,7 @@
       },
       {
         "choice_list_name": "attendant",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -662,7 +662,7 @@
       },
       {
         "choice_list_name": "complication",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "None"
         },
@@ -670,7 +670,7 @@
       },
       {
         "choice_list_name": "complication",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Premature rupture of membranes"
         },
@@ -678,7 +678,7 @@
       },
       {
         "choice_list_name": "complication",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Obstructed labor/breech"
         },
@@ -686,7 +686,7 @@
       },
       {
         "choice_list_name": "complication",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Pre-eclampsia/eclampsia"
         },
@@ -694,7 +694,7 @@
       },
       {
         "choice_list_name": "complication",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Postpartum hemorrhage"
         },
@@ -702,7 +702,7 @@
       },
       {
         "choice_list_name": "complication",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Other"
         },
@@ -710,7 +710,7 @@
       },
       {
         "choice_list_name": "complication",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -718,7 +718,7 @@
       },
       {
         "choice_list_name": "HIVpartner",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "HIV positive"
         },
@@ -726,7 +726,7 @@
       },
       {
         "choice_list_name": "HIVpartner",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "HIV negative"
         },
@@ -734,7 +734,7 @@
       },
       {
         "choice_list_name": "HIVpartner",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Partner declined HIV testing"
         },
@@ -742,7 +742,7 @@
       },
       {
         "choice_list_name": "HIVpartner",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -750,7 +750,7 @@
       },
       {
         "choice_list_name": "HIV",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "HIV negative"
         },
@@ -758,7 +758,7 @@
       },
       {
         "choice_list_name": "HIV",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "HIV positive"
         },
@@ -766,7 +766,7 @@
       },
       {
         "choice_list_name": "HIV",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Client declined previous testing"
         },
@@ -774,7 +774,7 @@
       },
       {
         "choice_list_name": "HIV",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Client has not been tested for study yet"
         },
@@ -782,7 +782,7 @@
       },
       {
         "choice_list_name": "rapid",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Client accepted testing, blood drawn"
         },
@@ -790,7 +790,7 @@
       },
       {
         "choice_list_name": "rapid",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Client declined testing, blood not drawn"
         },
@@ -798,7 +798,7 @@
       },
       {
         "choice_list_name": "wheretest",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Antenatal clinic (MCH)"
         },
@@ -806,7 +806,7 @@
       },
       {
         "choice_list_name": "wheretest",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Home"
         },
@@ -814,7 +814,7 @@
       },
       {
         "choice_list_name": "wheretest",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "VCT"
         },
@@ -822,7 +822,7 @@
       },
       {
         "choice_list_name": "wheretest",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Delivery ward"
         },
@@ -830,7 +830,7 @@
       },
       {
         "choice_list_name": "wheretest",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Other"
         },
@@ -838,7 +838,7 @@
       },
       {
         "choice_list_name": "wheretest",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -846,7 +846,7 @@
       },
       {
         "choice_list_name": "yes_noanswer",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -854,7 +854,7 @@
       },
       {
         "choice_list_name": "yes_noanswer",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -862,7 +862,7 @@
       },
       {
         "choice_list_name": "yes_noanswer",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -870,7 +870,7 @@
       },
       {
         "choice_list_name": "resulttest",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -878,7 +878,7 @@
       },
       {
         "choice_list_name": "resulttest",
-        "data_value": 666,
+        "data_value": "a666",
         "display": {
           "text": "Test not done"
         },
@@ -886,7 +886,7 @@
       },
       {
         "choice_list_name": "resulttest",
-        "data_value": 777,
+        "data_value": "a777",
         "display": {
           "text": "Did not receive results"
         },
@@ -894,7 +894,7 @@
       },
       {
         "choice_list_name": "resulttest",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -902,7 +902,7 @@
       },
       {
         "choice_list_name": "resulttest",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -910,7 +910,7 @@
       },
       {
         "choice_list_name": "recentHIV",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "HIV negative"
         },
@@ -918,7 +918,7 @@
       },
       {
         "choice_list_name": "recentHIV",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "HIV positive"
         },
@@ -926,7 +926,7 @@
       },
       {
         "choice_list_name": "recentHIV",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Client has never been tested"
         },
@@ -934,7 +934,7 @@
       },
       {
         "choice_list_name": "recentHIV",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -942,7 +942,7 @@
       },
       {
         "choice_list_name": "yes_notsure",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -950,7 +950,7 @@
       },
       {
         "choice_list_name": "yes_notsure",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -958,7 +958,7 @@
       },
       {
         "choice_list_name": "yes_notsure",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -966,7 +966,7 @@
       },
       {
         "choice_list_name": "yes_notsure",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -974,7 +974,7 @@
       },
       {
         "choice_list_name": "yes_no",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -982,7 +982,7 @@
       },
       {
         "choice_list_name": "yes_no",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -990,7 +990,7 @@
       },
       {
         "choice_list_name": "long",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Indefinitely"
         },
@@ -998,7 +998,7 @@
       },
       {
         "choice_list_name": "long",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Only during pregnancy and breastfeeding"
         },
@@ -1006,7 +1006,7 @@
       },
       {
         "choice_list_name": "long",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1014,7 +1014,7 @@
       },
       {
         "choice_list_name": "long",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -1022,7 +1022,7 @@
       },
       {
         "choice_list_name": "miss",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes, I miss one or more doses but took some"
         },
@@ -1030,7 +1030,7 @@
       },
       {
         "choice_list_name": "miss",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No, I took all my doses"
         },
@@ -1038,7 +1038,7 @@
       },
       {
         "choice_list_name": "miss",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "I did not take any of the medication"
         },
@@ -1046,7 +1046,7 @@
       },
       {
         "choice_list_name": "miss",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1054,7 +1054,7 @@
       },
       {
         "choice_list_name": "miss",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -1062,7 +1062,7 @@
       },
       {
         "choice_list_name": "advise",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "My decision"
         },
@@ -1070,7 +1070,7 @@
       },
       {
         "choice_list_name": "advise",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Provider advised to discontiue"
         },
@@ -1078,7 +1078,7 @@
       },
       {
         "choice_list_name": "advise",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Ran out of medication"
         },
@@ -1086,7 +1086,7 @@
       },
       {
         "choice_list_name": "advise",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Other"
         },
@@ -1094,7 +1094,7 @@
       },
       {
         "choice_list_name": "advise",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1102,7 +1102,7 @@
       },
       {
         "choice_list_name": "advise",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -1110,7 +1110,7 @@
       },
       {
         "choice_list_name": "misschild",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes, child missed one or more doses but took some"
         },
@@ -1118,7 +1118,7 @@
       },
       {
         "choice_list_name": "misschild",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No, the child took all doses"
         },
@@ -1126,7 +1126,7 @@
       },
       {
         "choice_list_name": "misschild",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "The child did not take any of the medication"
         },
@@ -1134,7 +1134,7 @@
       },
       {
         "choice_list_name": "misschild",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1142,7 +1142,7 @@
       },
       {
         "choice_list_name": "misschild",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -1150,7 +1150,7 @@
       },
       {
         "choice_list_name": "foodlist",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Infant formula"
         },
@@ -1158,7 +1158,7 @@
       },
       {
         "choice_list_name": "foodlist",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Milk (other than breast milk)"
         },
@@ -1166,7 +1166,7 @@
       },
       {
         "choice_list_name": "foodlist",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Sugar or glucose water"
         },
@@ -1174,7 +1174,7 @@
       },
       {
         "choice_list_name": "foodlist",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Plain water"
         },
@@ -1182,7 +1182,7 @@
       },
       {
         "choice_list_name": "foodlist",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Fruit juice"
         },
@@ -1190,7 +1190,7 @@
       },
       {
         "choice_list_name": "foodlist",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Tea/infusions"
         },
@@ -1198,7 +1198,7 @@
       },
       {
         "choice_list_name": "foodlist",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Other"
         },
@@ -1206,7 +1206,7 @@
       },
       {
         "choice_list_name": "foodlist",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1214,7 +1214,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Infant formula"
         },
@@ -1222,7 +1222,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Milk (other than breast milk)"
         },
@@ -1230,7 +1230,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Sugar or glucose water"
         },
@@ -1238,7 +1238,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Plain water"
         },
@@ -1246,7 +1246,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Fruit juice"
         },
@@ -1254,7 +1254,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Tea/infusions"
         },
@@ -1262,7 +1262,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Other"
         },
@@ -1270,7 +1270,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 8,
+        "data_value": "a8",
         "display": {
           "text": "None of the above were fed regularly to the child"
         },
@@ -1278,7 +1278,7 @@
       },
       {
         "choice_list_name": "foodmany",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1286,7 +1286,7 @@
       },
       {
         "choice_list_name": "children",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -1294,7 +1294,7 @@
       },
       {
         "choice_list_name": "children",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -1302,7 +1302,7 @@
       },
       {
         "choice_list_name": "children",
-        "data_value": 666,
+        "data_value": "a666",
         "display": {
           "text": "Says she can't get pregnant again"
         },
@@ -1310,7 +1310,7 @@
       },
       {
         "choice_list_name": "children",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1318,7 +1318,7 @@
       },
       {
         "choice_list_name": "children",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -1342,7 +1342,7 @@
       },
       {
         "choice_list_name": "timewait",
-        "data_value": 777,
+        "data_value": "a777",
         "display": {
           "text": "After marriage (no specific time frame)"
         },
@@ -1350,7 +1350,7 @@
       },
       {
         "choice_list_name": "timewait",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1358,7 +1358,7 @@
       },
       {
         "choice_list_name": "timewait",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -1366,7 +1366,7 @@
       },
       {
         "choice_list_name": "childnumber",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Same number"
         },
@@ -1374,7 +1374,7 @@
       },
       {
         "choice_list_name": "childnumber",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "More children"
         },
@@ -1382,7 +1382,7 @@
       },
       {
         "choice_list_name": "childnumber",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Fewer children"
         },
@@ -1390,7 +1390,7 @@
       },
       {
         "choice_list_name": "childnumber",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1398,7 +1398,7 @@
       },
       {
         "choice_list_name": "childnumber",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -1406,7 +1406,7 @@
       },
       {
         "choice_list_name": "influence",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Mainly respondent"
         },
@@ -1414,7 +1414,7 @@
       },
       {
         "choice_list_name": "influence",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Mainly partner"
         },
@@ -1422,7 +1422,7 @@
       },
       {
         "choice_list_name": "influence",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Both respondent and partner together"
         },
@@ -1430,7 +1430,7 @@
       },
       {
         "choice_list_name": "influence",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Mainly parents"
         },
@@ -1438,7 +1438,7 @@
       },
       {
         "choice_list_name": "influence",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Mainly partner’s parents"
         },
@@ -1446,7 +1446,7 @@
       },
       {
         "choice_list_name": "influence",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Other"
         },
@@ -1454,7 +1454,7 @@
       },
       {
         "choice_list_name": "influence",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1462,7 +1462,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Female sterilization"
         },
@@ -1470,7 +1470,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Male sterilization"
         },
@@ -1478,7 +1478,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Pill"
         },
@@ -1486,7 +1486,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Injectable"
         },
@@ -1494,7 +1494,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Implants"
         },
@@ -1502,7 +1502,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "IUD"
         },
@@ -1510,7 +1510,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Male condom"
         },
@@ -1518,7 +1518,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 8,
+        "data_value": "a8",
         "display": {
           "text": "Female condom"
         },
@@ -1526,7 +1526,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 9,
+        "data_value": "a9",
         "display": {
           "text": "Lactational amenorrhea method"
         },
@@ -1534,7 +1534,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 10,
+        "data_value": "a10",
         "display": {
           "text": "Natural, rhythm or calendar method"
         },
@@ -1542,7 +1542,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 11,
+        "data_value": "a11",
         "display": {
           "text": "Withdrawal (man pulls out penis before end)"
         },
@@ -1550,7 +1550,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 12,
+        "data_value": "a12",
         "display": {
           "text": "Emergency contraception"
         },
@@ -1558,7 +1558,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 13,
+        "data_value": "a13",
         "display": {
           "text": "Herbs or other traditional method"
         },
@@ -1566,7 +1566,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 14,
+        "data_value": "a14",
         "display": {
           "text": "Abstaining from sex"
         },
@@ -1574,7 +1574,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 15,
+        "data_value": "a15",
         "display": {
           "text": "Other"
         },
@@ -1582,7 +1582,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 16,
+        "data_value": "a16",
         "display": {
           "text": "None of the above"
         },
@@ -1590,7 +1590,7 @@
       },
       {
         "choice_list_name": "FP",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1598,7 +1598,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Not having sex / partner is absent"
         },
@@ -1606,7 +1606,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Hysterectomy"
         },
@@ -1614,7 +1614,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Breastfeeding – it provides enough protection"
         },
@@ -1622,7 +1622,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Breastfeeding –  afraid that using those methods may harm my baby"
         },
@@ -1630,7 +1630,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "I want more children"
         },
@@ -1638,7 +1638,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "I am opposed"
         },
@@ -1646,7 +1646,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "My partner is opposed"
         },
@@ -1654,7 +1654,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 8,
+        "data_value": "a8",
         "display": {
           "text": "I believe current method is effective enough"
         },
@@ -1662,7 +1662,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 9,
+        "data_value": "a9",
         "display": {
           "text": "My religion does not allow"
         },
@@ -1670,7 +1670,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 10,
+        "data_value": "a10",
         "display": {
           "text": "I do not know about methods or where to get the methods"
         },
@@ -1678,7 +1678,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 11,
+        "data_value": "a11",
         "display": {
           "text": "I am worried about health or side effects"
         },
@@ -1686,7 +1686,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 12,
+        "data_value": "a12",
         "display": {
           "text": "The method I want to use is not available"
         },
@@ -1694,7 +1694,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 13,
+        "data_value": "a13",
         "display": {
           "text": "Too far to go"
         },
@@ -1702,7 +1702,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 14,
+        "data_value": "a14",
         "display": {
           "text": "Cost"
         },
@@ -1710,7 +1710,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 15,
+        "data_value": "a15",
         "display": {
           "text": "Other"
         },
@@ -1718,7 +1718,7 @@
       },
       {
         "choice_list_name": "hormone",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1726,7 +1726,7 @@
       },
       {
         "choice_list_name": "influencedelay",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Mainly respondent"
         },
@@ -1734,7 +1734,7 @@
       },
       {
         "choice_list_name": "influencedelay",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Mainly partner"
         },
@@ -1742,7 +1742,7 @@
       },
       {
         "choice_list_name": "influencedelay",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Both respondent and partner together"
         },
@@ -1750,7 +1750,7 @@
       },
       {
         "choice_list_name": "influencedelay",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Mainly parents"
         },
@@ -1758,7 +1758,7 @@
       },
       {
         "choice_list_name": "influencedelay",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Mainly partner’s parents"
         },
@@ -1766,7 +1766,7 @@
       },
       {
         "choice_list_name": "influencedelay",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Other"
         },
@@ -1774,7 +1774,7 @@
       },
       {
         "choice_list_name": "influencedelay",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1782,7 +1782,7 @@
       },
       {
         "choice_list_name": "approval",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Approves"
         },
@@ -1790,7 +1790,7 @@
       },
       {
         "choice_list_name": "approval",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Disapproves"
         },
@@ -1798,7 +1798,7 @@
       },
       {
         "choice_list_name": "approval",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1806,7 +1806,7 @@
       },
       {
         "choice_list_name": "approval",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -1814,7 +1814,7 @@
       },
       {
         "choice_list_name": "talkFP",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Never"
         },
@@ -1822,7 +1822,7 @@
       },
       {
         "choice_list_name": "talkFP",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Once or twice"
         },
@@ -1830,7 +1830,7 @@
       },
       {
         "choice_list_name": "talkFP",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "More often"
         },
@@ -1838,7 +1838,7 @@
       },
       {
         "choice_list_name": "talkFP",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1846,7 +1846,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "None"
         },
@@ -1854,7 +1854,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Female sterilization"
         },
@@ -1862,7 +1862,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Male sterilization"
         },
@@ -1870,7 +1870,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Pill"
         },
@@ -1878,7 +1878,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Injectable"
         },
@@ -1886,7 +1886,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Implants"
         },
@@ -1894,7 +1894,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "IUD"
         },
@@ -1902,7 +1902,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Male condom"
         },
@@ -1910,7 +1910,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 8,
+        "data_value": "a8",
         "display": {
           "text": "Female condom"
         },
@@ -1918,7 +1918,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 9,
+        "data_value": "a9",
         "display": {
           "text": "Lactational amenorrhea method"
         },
@@ -1926,7 +1926,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 10,
+        "data_value": "a10",
         "display": {
           "text": "Natural, rhythm or calendar method"
         },
@@ -1934,7 +1934,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 11,
+        "data_value": "a11",
         "display": {
           "text": "Withdrawal (man pulls out penis before end)"
         },
@@ -1942,7 +1942,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 12,
+        "data_value": "a12",
         "display": {
           "text": "Emergency contraception"
         },
@@ -1950,7 +1950,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 13,
+        "data_value": "a13",
         "display": {
           "text": "Herbs or other traditional method"
         },
@@ -1958,7 +1958,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 14,
+        "data_value": "a14",
         "display": {
           "text": "Other"
         },
@@ -1966,7 +1966,7 @@
       },
       {
         "choice_list_name": "Fpchoice",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -1974,7 +1974,7 @@
       },
       {
         "choice_list_name": "condom",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Always"
         },
@@ -1982,7 +1982,7 @@
       },
       {
         "choice_list_name": "condom",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "On most occasions"
         },
@@ -1990,7 +1990,7 @@
       },
       {
         "choice_list_name": "condom",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Sometimes"
         },
@@ -1998,7 +1998,7 @@
       },
       {
         "choice_list_name": "condom",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Rarely"
         },
@@ -2006,7 +2006,7 @@
       },
       {
         "choice_list_name": "condom",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Never"
         },
@@ -2014,7 +2014,7 @@
       },
       {
         "choice_list_name": "condom",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2022,7 +2022,7 @@
       },
       {
         "choice_list_name": "testsite",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Antenatal clinic (He came with me)"
         },
@@ -2030,7 +2030,7 @@
       },
       {
         "choice_list_name": "testsite",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Antenatal clinic (He visited alone)"
         },
@@ -2038,7 +2038,7 @@
       },
       {
         "choice_list_name": "testsite",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Home (Not related to the study)"
         },
@@ -2046,7 +2046,7 @@
       },
       {
         "choice_list_name": "testsite",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "VCT"
         },
@@ -2054,7 +2054,7 @@
       },
       {
         "choice_list_name": "testsite",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Delivery ward"
         },
@@ -2062,7 +2062,7 @@
       },
       {
         "choice_list_name": "testsite",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Other"
         },
@@ -2070,7 +2070,7 @@
       },
       {
         "choice_list_name": "testsite",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2078,7 +2078,7 @@
       },
       {
         "choice_list_name": "testsite",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -2086,7 +2086,7 @@
       },
       {
         "choice_list_name": "typetest",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Tested alone"
         },
@@ -2094,7 +2094,7 @@
       },
       {
         "choice_list_name": "typetest",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Tested together"
         },
@@ -2102,7 +2102,7 @@
       },
       {
         "choice_list_name": "typetest",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2110,7 +2110,7 @@
       },
       {
         "choice_list_name": "testresult",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "HIV positive"
         },
@@ -2118,7 +2118,7 @@
       },
       {
         "choice_list_name": "testresult",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "HIV negative"
         },
@@ -2126,7 +2126,7 @@
       },
       {
         "choice_list_name": "testresult",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Inconclusive result"
         },
@@ -2134,7 +2134,7 @@
       },
       {
         "choice_list_name": "testresult",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2142,7 +2142,7 @@
       },
       {
         "choice_list_name": "gotoCCC",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes, during the pregnancy"
         },
@@ -2150,7 +2150,7 @@
       },
       {
         "choice_list_name": "gotoCCC",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Yes, after delivery"
         },
@@ -2158,7 +2158,7 @@
       },
       {
         "choice_list_name": "gotoCCC",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Yes, both before and after delivery"
         },
@@ -2166,7 +2166,7 @@
       },
       {
         "choice_list_name": "gotoCCC",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -2174,7 +2174,7 @@
       },
       {
         "choice_list_name": "gotoCCC",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2182,7 +2182,7 @@
       },
       {
         "choice_list_name": "gotoCCC",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -2190,7 +2190,7 @@
       },
       {
         "choice_list_name": "changerelat",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No change"
         },
@@ -2198,7 +2198,7 @@
       },
       {
         "choice_list_name": "changerelat",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "You were married"
         },
@@ -2206,7 +2206,7 @@
       },
       {
         "choice_list_name": "changerelat",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "This partner is no longer living with you"
         },
@@ -2214,7 +2214,7 @@
       },
       {
         "choice_list_name": "changerelat",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "You are no longer in a relationship"
         },
@@ -2222,7 +2222,7 @@
       },
       {
         "choice_list_name": "changerelat",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Other"
         },
@@ -2230,7 +2230,7 @@
       },
       {
         "choice_list_name": "changerelat",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2238,7 +2238,7 @@
       },
       {
         "choice_list_name": "relationend",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Respondent tested HIV+"
         },
@@ -2246,7 +2246,7 @@
       },
       {
         "choice_list_name": "relationend",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Partner tested HIV+"
         },
@@ -2254,7 +2254,7 @@
       },
       {
         "choice_list_name": "relationend",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Education received"
         },
@@ -2262,7 +2262,7 @@
       },
       {
         "choice_list_name": "relationend",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Partner did not approve of participation"
         },
@@ -2270,7 +2270,7 @@
       },
       {
         "choice_list_name": "relationend",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Other"
         },
@@ -2278,7 +2278,7 @@
       },
       {
         "choice_list_name": "relationend",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2286,7 +2286,7 @@
       },
       {
         "choice_list_name": "relationend",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -2294,7 +2294,7 @@
       },
       {
         "choice_list_name": "qualitychange",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No change"
         },
@@ -2302,7 +2302,7 @@
       },
       {
         "choice_list_name": "qualitychange",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Improved"
         },
@@ -2310,7 +2310,7 @@
       },
       {
         "choice_list_name": "qualitychange",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Worsened"
         },
@@ -2318,7 +2318,7 @@
       },
       {
         "choice_list_name": "qualitychange",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2326,7 +2326,7 @@
       },
       {
         "choice_list_name": "qualitychange",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -2334,7 +2334,7 @@
       },
       {
         "choice_list_name": "pretest",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Client accepted testing, blood drawn"
         },
@@ -2342,7 +2342,7 @@
       },
       {
         "choice_list_name": "pretest",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Client declined testing, blood not drawn"
         },
@@ -2350,7 +2350,7 @@
       },
       {
         "choice_list_name": "hiv_status",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "HIV negative"
         },
@@ -2358,7 +2358,7 @@
       },
       {
         "choice_list_name": "hiv_status",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "HIV positive"
         },
@@ -2366,7 +2366,7 @@
       },
       {
         "choice_list_name": "testinfant",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Client accepted testing, blood drawn"
         },
@@ -2374,7 +2374,7 @@
       },
       {
         "choice_list_name": "testinfant",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Client declined testing, blood not drawn"
         },
@@ -2382,7 +2382,7 @@
       },
       {
         "choice_list_name": "testinfant",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Infant already tested HIV positive"
         },
@@ -2390,7 +2390,7 @@
       },
       {
         "choice_list_name": "discordant",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -2398,7 +2398,7 @@
       },
       {
         "choice_list_name": "discordant",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -2406,7 +2406,7 @@
       },
       {
         "choice_list_name": "discordant",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Male HIV status is unknown"
         },
@@ -2414,7 +2414,7 @@
       },
       {
         "choice_list_name": "acknowledge",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Continue"
         },
@@ -2422,7 +2422,7 @@
       },
       {
         "choice_list_name": "date_nr",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Enter date"
         },
@@ -2430,7 +2430,7 @@
       },
       {
         "choice_list_name": "date_nr",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -2532,7 +2532,7 @@
       "happen": [
         {
           "choice_list_name": "happen",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Miscarriage"
           },
@@ -2540,7 +2540,7 @@
         },
         {
           "choice_list_name": "happen",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Stillbirth"
           },
@@ -2548,7 +2548,7 @@
         },
         {
           "choice_list_name": "happen",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Other"
           },
@@ -2556,7 +2556,7 @@
         },
         {
           "choice_list_name": "happen",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -2566,7 +2566,7 @@
       "birthplace": [
         {
           "choice_list_name": "birthplace",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Your home"
           },
@@ -2574,7 +2574,7 @@
         },
         {
           "choice_list_name": "birthplace",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Other home"
           },
@@ -2582,7 +2582,7 @@
         },
         {
           "choice_list_name": "birthplace",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Hospital"
           },
@@ -2590,7 +2590,7 @@
         },
         {
           "choice_list_name": "birthplace",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Other government facility"
           },
@@ -2598,7 +2598,7 @@
         },
         {
           "choice_list_name": "birthplace",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Private facility"
           },
@@ -2606,7 +2606,7 @@
         },
         {
           "choice_list_name": "birthplace",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Other"
           },
@@ -2614,7 +2614,7 @@
         },
         {
           "choice_list_name": "birthplace",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -2624,7 +2624,7 @@
       "issues": [
         {
           "choice_list_name": "issues",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Cost too much"
           },
@@ -2632,7 +2632,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Facility not open"
           },
@@ -2640,7 +2640,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Too far/no transportation"
           },
@@ -2648,7 +2648,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Don’t trust facility/poor quality service"
           },
@@ -2656,7 +2656,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "No female provider at facility"
           },
@@ -2664,7 +2664,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Partner did not allow it"
           },
@@ -2672,7 +2672,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Family did not allow it"
           },
@@ -2680,7 +2680,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 8,
+          "data_value": "a8",
           "display": {
             "text": "Not necessary"
           },
@@ -2688,7 +2688,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 9,
+          "data_value": "a9",
           "display": {
             "text": "Not customary"
           },
@@ -2696,7 +2696,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 10,
+          "data_value": "a10",
           "display": {
             "text": "Other"
           },
@@ -2704,7 +2704,7 @@
         },
         {
           "choice_list_name": "issues",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -2714,7 +2714,7 @@
       "attendant": [
         {
           "choice_list_name": "attendant",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Traditional birth attendant"
           },
@@ -2722,7 +2722,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Skilled birth attendant (nurse/midwife)"
           },
@@ -2730,7 +2730,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Doctor"
           },
@@ -2738,7 +2738,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Male partner"
           },
@@ -2746,7 +2746,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Family member(s)"
           },
@@ -2754,7 +2754,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Friend(s)"
           },
@@ -2762,7 +2762,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Community health worker"
           },
@@ -2770,7 +2770,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 8,
+          "data_value": "a8",
           "display": {
             "text": "Other"
           },
@@ -2778,7 +2778,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 9,
+          "data_value": "a9",
           "display": {
             "text": "No one"
           },
@@ -2786,7 +2786,7 @@
         },
         {
           "choice_list_name": "attendant",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -2796,7 +2796,7 @@
       "complication": [
         {
           "choice_list_name": "complication",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "None"
           },
@@ -2804,7 +2804,7 @@
         },
         {
           "choice_list_name": "complication",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Premature rupture of membranes"
           },
@@ -2812,7 +2812,7 @@
         },
         {
           "choice_list_name": "complication",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Obstructed labor/breech"
           },
@@ -2820,7 +2820,7 @@
         },
         {
           "choice_list_name": "complication",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Pre-eclampsia/eclampsia"
           },
@@ -2828,7 +2828,7 @@
         },
         {
           "choice_list_name": "complication",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Postpartum hemorrhage"
           },
@@ -2836,7 +2836,7 @@
         },
         {
           "choice_list_name": "complication",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Other"
           },
@@ -2844,7 +2844,7 @@
         },
         {
           "choice_list_name": "complication",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -2854,7 +2854,7 @@
       "HIVpartner": [
         {
           "choice_list_name": "HIVpartner",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "HIV positive"
           },
@@ -2862,7 +2862,7 @@
         },
         {
           "choice_list_name": "HIVpartner",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "HIV negative"
           },
@@ -2870,7 +2870,7 @@
         },
         {
           "choice_list_name": "HIVpartner",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Partner declined HIV testing"
           },
@@ -2878,7 +2878,7 @@
         },
         {
           "choice_list_name": "HIVpartner",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -2888,7 +2888,7 @@
       "HIV": [
         {
           "choice_list_name": "HIV",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "HIV negative"
           },
@@ -2896,7 +2896,7 @@
         },
         {
           "choice_list_name": "HIV",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "HIV positive"
           },
@@ -2904,7 +2904,7 @@
         },
         {
           "choice_list_name": "HIV",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Client declined previous testing"
           },
@@ -2912,7 +2912,7 @@
         },
         {
           "choice_list_name": "HIV",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Client has not been tested for study yet"
           },
@@ -2922,7 +2922,7 @@
       "rapid": [
         {
           "choice_list_name": "rapid",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Client accepted testing, blood drawn"
           },
@@ -2930,7 +2930,7 @@
         },
         {
           "choice_list_name": "rapid",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Client declined testing, blood not drawn"
           },
@@ -2940,7 +2940,7 @@
       "wheretest": [
         {
           "choice_list_name": "wheretest",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Antenatal clinic (MCH)"
           },
@@ -2948,7 +2948,7 @@
         },
         {
           "choice_list_name": "wheretest",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Home"
           },
@@ -2956,7 +2956,7 @@
         },
         {
           "choice_list_name": "wheretest",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "VCT"
           },
@@ -2964,7 +2964,7 @@
         },
         {
           "choice_list_name": "wheretest",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Delivery ward"
           },
@@ -2972,7 +2972,7 @@
         },
         {
           "choice_list_name": "wheretest",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Other"
           },
@@ -2980,7 +2980,7 @@
         },
         {
           "choice_list_name": "wheretest",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -2990,7 +2990,7 @@
       "yes_noanswer": [
         {
           "choice_list_name": "yes_noanswer",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -2998,7 +2998,7 @@
         },
         {
           "choice_list_name": "yes_noanswer",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -3006,7 +3006,7 @@
         },
         {
           "choice_list_name": "yes_noanswer",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3016,7 +3016,7 @@
       "resulttest": [
         {
           "choice_list_name": "resulttest",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -3024,7 +3024,7 @@
         },
         {
           "choice_list_name": "resulttest",
-          "data_value": 666,
+          "data_value": "a666",
           "display": {
             "text": "Test not done"
           },
@@ -3032,7 +3032,7 @@
         },
         {
           "choice_list_name": "resulttest",
-          "data_value": 777,
+          "data_value": "a777",
           "display": {
             "text": "Did not receive results"
           },
@@ -3040,7 +3040,7 @@
         },
         {
           "choice_list_name": "resulttest",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3048,7 +3048,7 @@
         },
         {
           "choice_list_name": "resulttest",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3058,7 +3058,7 @@
       "recentHIV": [
         {
           "choice_list_name": "recentHIV",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "HIV negative"
           },
@@ -3066,7 +3066,7 @@
         },
         {
           "choice_list_name": "recentHIV",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "HIV positive"
           },
@@ -3074,7 +3074,7 @@
         },
         {
           "choice_list_name": "recentHIV",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Client has never been tested"
           },
@@ -3082,7 +3082,7 @@
         },
         {
           "choice_list_name": "recentHIV",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3092,7 +3092,7 @@
       "yes_notsure": [
         {
           "choice_list_name": "yes_notsure",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -3100,7 +3100,7 @@
         },
         {
           "choice_list_name": "yes_notsure",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -3108,7 +3108,7 @@
         },
         {
           "choice_list_name": "yes_notsure",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3116,7 +3116,7 @@
         },
         {
           "choice_list_name": "yes_notsure",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3126,7 +3126,7 @@
       "yes_no": [
         {
           "choice_list_name": "yes_no",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -3134,7 +3134,7 @@
         },
         {
           "choice_list_name": "yes_no",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -3144,7 +3144,7 @@
       "long": [
         {
           "choice_list_name": "long",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Indefinitely"
           },
@@ -3152,7 +3152,7 @@
         },
         {
           "choice_list_name": "long",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Only during pregnancy and breastfeeding"
           },
@@ -3160,7 +3160,7 @@
         },
         {
           "choice_list_name": "long",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3168,7 +3168,7 @@
         },
         {
           "choice_list_name": "long",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3178,7 +3178,7 @@
       "miss": [
         {
           "choice_list_name": "miss",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes, I miss one or more doses but took some"
           },
@@ -3186,7 +3186,7 @@
         },
         {
           "choice_list_name": "miss",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No, I took all my doses"
           },
@@ -3194,7 +3194,7 @@
         },
         {
           "choice_list_name": "miss",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "I did not take any of the medication"
           },
@@ -3202,7 +3202,7 @@
         },
         {
           "choice_list_name": "miss",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3210,7 +3210,7 @@
         },
         {
           "choice_list_name": "miss",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3220,7 +3220,7 @@
       "advise": [
         {
           "choice_list_name": "advise",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "My decision"
           },
@@ -3228,7 +3228,7 @@
         },
         {
           "choice_list_name": "advise",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Provider advised to discontiue"
           },
@@ -3236,7 +3236,7 @@
         },
         {
           "choice_list_name": "advise",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Ran out of medication"
           },
@@ -3244,7 +3244,7 @@
         },
         {
           "choice_list_name": "advise",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Other"
           },
@@ -3252,7 +3252,7 @@
         },
         {
           "choice_list_name": "advise",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3260,7 +3260,7 @@
         },
         {
           "choice_list_name": "advise",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3270,7 +3270,7 @@
       "misschild": [
         {
           "choice_list_name": "misschild",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes, child missed one or more doses but took some"
           },
@@ -3278,7 +3278,7 @@
         },
         {
           "choice_list_name": "misschild",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No, the child took all doses"
           },
@@ -3286,7 +3286,7 @@
         },
         {
           "choice_list_name": "misschild",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "The child did not take any of the medication"
           },
@@ -3294,7 +3294,7 @@
         },
         {
           "choice_list_name": "misschild",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3302,7 +3302,7 @@
         },
         {
           "choice_list_name": "misschild",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3312,7 +3312,7 @@
       "foodlist": [
         {
           "choice_list_name": "foodlist",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Infant formula"
           },
@@ -3320,7 +3320,7 @@
         },
         {
           "choice_list_name": "foodlist",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Milk (other than breast milk)"
           },
@@ -3328,7 +3328,7 @@
         },
         {
           "choice_list_name": "foodlist",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Sugar or glucose water"
           },
@@ -3336,7 +3336,7 @@
         },
         {
           "choice_list_name": "foodlist",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Plain water"
           },
@@ -3344,7 +3344,7 @@
         },
         {
           "choice_list_name": "foodlist",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Fruit juice"
           },
@@ -3352,7 +3352,7 @@
         },
         {
           "choice_list_name": "foodlist",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Tea/infusions"
           },
@@ -3360,7 +3360,7 @@
         },
         {
           "choice_list_name": "foodlist",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Other"
           },
@@ -3368,7 +3368,7 @@
         },
         {
           "choice_list_name": "foodlist",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3378,7 +3378,7 @@
       "foodmany": [
         {
           "choice_list_name": "foodmany",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Infant formula"
           },
@@ -3386,7 +3386,7 @@
         },
         {
           "choice_list_name": "foodmany",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Milk (other than breast milk)"
           },
@@ -3394,7 +3394,7 @@
         },
         {
           "choice_list_name": "foodmany",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Sugar or glucose water"
           },
@@ -3402,7 +3402,7 @@
         },
         {
           "choice_list_name": "foodmany",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Plain water"
           },
@@ -3410,7 +3410,7 @@
         },
         {
           "choice_list_name": "foodmany",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Fruit juice"
           },
@@ -3418,7 +3418,7 @@
         },
         {
           "choice_list_name": "foodmany",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Tea/infusions"
           },
@@ -3426,7 +3426,7 @@
         },
         {
           "choice_list_name": "foodmany",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Other"
           },
@@ -3434,7 +3434,7 @@
         },
         {
           "choice_list_name": "foodmany",
-          "data_value": 8,
+          "data_value": "a8",
           "display": {
             "text": "None of the above were fed regularly to the child"
           },
@@ -3442,7 +3442,7 @@
         },
         {
           "choice_list_name": "foodmany",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3452,7 +3452,7 @@
       "children": [
         {
           "choice_list_name": "children",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -3460,7 +3460,7 @@
         },
         {
           "choice_list_name": "children",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -3468,7 +3468,7 @@
         },
         {
           "choice_list_name": "children",
-          "data_value": 666,
+          "data_value": "a666",
           "display": {
             "text": "Says she can't get pregnant again"
           },
@@ -3476,7 +3476,7 @@
         },
         {
           "choice_list_name": "children",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3484,7 +3484,7 @@
         },
         {
           "choice_list_name": "children",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3510,7 +3510,7 @@
         },
         {
           "choice_list_name": "timewait",
-          "data_value": 777,
+          "data_value": "a777",
           "display": {
             "text": "After marriage (no specific time frame)"
           },
@@ -3518,7 +3518,7 @@
         },
         {
           "choice_list_name": "timewait",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3526,7 +3526,7 @@
         },
         {
           "choice_list_name": "timewait",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3536,7 +3536,7 @@
       "childnumber": [
         {
           "choice_list_name": "childnumber",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Same number"
           },
@@ -3544,7 +3544,7 @@
         },
         {
           "choice_list_name": "childnumber",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "More children"
           },
@@ -3552,7 +3552,7 @@
         },
         {
           "choice_list_name": "childnumber",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Fewer children"
           },
@@ -3560,7 +3560,7 @@
         },
         {
           "choice_list_name": "childnumber",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3568,7 +3568,7 @@
         },
         {
           "choice_list_name": "childnumber",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3578,7 +3578,7 @@
       "influence": [
         {
           "choice_list_name": "influence",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Mainly respondent"
           },
@@ -3586,7 +3586,7 @@
         },
         {
           "choice_list_name": "influence",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Mainly partner"
           },
@@ -3594,7 +3594,7 @@
         },
         {
           "choice_list_name": "influence",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Both respondent and partner together"
           },
@@ -3602,7 +3602,7 @@
         },
         {
           "choice_list_name": "influence",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Mainly parents"
           },
@@ -3610,7 +3610,7 @@
         },
         {
           "choice_list_name": "influence",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Mainly partner’s parents"
           },
@@ -3618,7 +3618,7 @@
         },
         {
           "choice_list_name": "influence",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Other"
           },
@@ -3626,7 +3626,7 @@
         },
         {
           "choice_list_name": "influence",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3636,7 +3636,7 @@
       "FP": [
         {
           "choice_list_name": "FP",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Female sterilization"
           },
@@ -3644,7 +3644,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Male sterilization"
           },
@@ -3652,7 +3652,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Pill"
           },
@@ -3660,7 +3660,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Injectable"
           },
@@ -3668,7 +3668,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Implants"
           },
@@ -3676,7 +3676,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "IUD"
           },
@@ -3684,7 +3684,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Male condom"
           },
@@ -3692,7 +3692,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 8,
+          "data_value": "a8",
           "display": {
             "text": "Female condom"
           },
@@ -3700,7 +3700,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 9,
+          "data_value": "a9",
           "display": {
             "text": "Lactational amenorrhea method"
           },
@@ -3708,7 +3708,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 10,
+          "data_value": "a10",
           "display": {
             "text": "Natural, rhythm or calendar method"
           },
@@ -3716,7 +3716,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 11,
+          "data_value": "a11",
           "display": {
             "text": "Withdrawal (man pulls out penis before end)"
           },
@@ -3724,7 +3724,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 12,
+          "data_value": "a12",
           "display": {
             "text": "Emergency contraception"
           },
@@ -3732,7 +3732,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 13,
+          "data_value": "a13",
           "display": {
             "text": "Herbs or other traditional method"
           },
@@ -3740,7 +3740,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 14,
+          "data_value": "a14",
           "display": {
             "text": "Abstaining from sex"
           },
@@ -3748,7 +3748,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 15,
+          "data_value": "a15",
           "display": {
             "text": "Other"
           },
@@ -3756,7 +3756,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 16,
+          "data_value": "a16",
           "display": {
             "text": "None of the above"
           },
@@ -3764,7 +3764,7 @@
         },
         {
           "choice_list_name": "FP",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3774,7 +3774,7 @@
       "hormone": [
         {
           "choice_list_name": "hormone",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Not having sex / partner is absent"
           },
@@ -3782,7 +3782,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Hysterectomy"
           },
@@ -3790,7 +3790,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Breastfeeding – it provides enough protection"
           },
@@ -3798,7 +3798,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Breastfeeding –  afraid that using those methods may harm my baby"
           },
@@ -3806,7 +3806,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "I want more children"
           },
@@ -3814,7 +3814,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "I am opposed"
           },
@@ -3822,7 +3822,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "My partner is opposed"
           },
@@ -3830,7 +3830,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 8,
+          "data_value": "a8",
           "display": {
             "text": "I believe current method is effective enough"
           },
@@ -3838,7 +3838,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 9,
+          "data_value": "a9",
           "display": {
             "text": "My religion does not allow"
           },
@@ -3846,7 +3846,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 10,
+          "data_value": "a10",
           "display": {
             "text": "I do not know about methods or where to get the methods"
           },
@@ -3854,7 +3854,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 11,
+          "data_value": "a11",
           "display": {
             "text": "I am worried about health or side effects"
           },
@@ -3862,7 +3862,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 12,
+          "data_value": "a12",
           "display": {
             "text": "The method I want to use is not available"
           },
@@ -3870,7 +3870,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 13,
+          "data_value": "a13",
           "display": {
             "text": "Too far to go"
           },
@@ -3878,7 +3878,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 14,
+          "data_value": "a14",
           "display": {
             "text": "Cost"
           },
@@ -3886,7 +3886,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 15,
+          "data_value": "a15",
           "display": {
             "text": "Other"
           },
@@ -3894,7 +3894,7 @@
         },
         {
           "choice_list_name": "hormone",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3904,7 +3904,7 @@
       "influencedelay": [
         {
           "choice_list_name": "influencedelay",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Mainly respondent"
           },
@@ -3912,7 +3912,7 @@
         },
         {
           "choice_list_name": "influencedelay",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Mainly partner"
           },
@@ -3920,7 +3920,7 @@
         },
         {
           "choice_list_name": "influencedelay",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Both respondent and partner together"
           },
@@ -3928,7 +3928,7 @@
         },
         {
           "choice_list_name": "influencedelay",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Mainly parents"
           },
@@ -3936,7 +3936,7 @@
         },
         {
           "choice_list_name": "influencedelay",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Mainly partner’s parents"
           },
@@ -3944,7 +3944,7 @@
         },
         {
           "choice_list_name": "influencedelay",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Other"
           },
@@ -3952,7 +3952,7 @@
         },
         {
           "choice_list_name": "influencedelay",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3962,7 +3962,7 @@
       "approval": [
         {
           "choice_list_name": "approval",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Approves"
           },
@@ -3970,7 +3970,7 @@
         },
         {
           "choice_list_name": "approval",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Disapproves"
           },
@@ -3978,7 +3978,7 @@
         },
         {
           "choice_list_name": "approval",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -3986,7 +3986,7 @@
         },
         {
           "choice_list_name": "approval",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -3996,7 +3996,7 @@
       "talkFP": [
         {
           "choice_list_name": "talkFP",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Never"
           },
@@ -4004,7 +4004,7 @@
         },
         {
           "choice_list_name": "talkFP",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Once or twice"
           },
@@ -4012,7 +4012,7 @@
         },
         {
           "choice_list_name": "talkFP",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "More often"
           },
@@ -4020,7 +4020,7 @@
         },
         {
           "choice_list_name": "talkFP",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4030,7 +4030,7 @@
       "Fpchoice": [
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "None"
           },
@@ -4038,7 +4038,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Female sterilization"
           },
@@ -4046,7 +4046,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Male sterilization"
           },
@@ -4054,7 +4054,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Pill"
           },
@@ -4062,7 +4062,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Injectable"
           },
@@ -4070,7 +4070,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Implants"
           },
@@ -4078,7 +4078,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "IUD"
           },
@@ -4086,7 +4086,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Male condom"
           },
@@ -4094,7 +4094,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 8,
+          "data_value": "a8",
           "display": {
             "text": "Female condom"
           },
@@ -4102,7 +4102,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 9,
+          "data_value": "a9",
           "display": {
             "text": "Lactational amenorrhea method"
           },
@@ -4110,7 +4110,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 10,
+          "data_value": "a10",
           "display": {
             "text": "Natural, rhythm or calendar method"
           },
@@ -4118,7 +4118,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 11,
+          "data_value": "a11",
           "display": {
             "text": "Withdrawal (man pulls out penis before end)"
           },
@@ -4126,7 +4126,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 12,
+          "data_value": "a12",
           "display": {
             "text": "Emergency contraception"
           },
@@ -4134,7 +4134,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 13,
+          "data_value": "a13",
           "display": {
             "text": "Herbs or other traditional method"
           },
@@ -4142,7 +4142,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 14,
+          "data_value": "a14",
           "display": {
             "text": "Other"
           },
@@ -4150,7 +4150,7 @@
         },
         {
           "choice_list_name": "Fpchoice",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4160,7 +4160,7 @@
       "condom": [
         {
           "choice_list_name": "condom",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Always"
           },
@@ -4168,7 +4168,7 @@
         },
         {
           "choice_list_name": "condom",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "On most occasions"
           },
@@ -4176,7 +4176,7 @@
         },
         {
           "choice_list_name": "condom",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Sometimes"
           },
@@ -4184,7 +4184,7 @@
         },
         {
           "choice_list_name": "condom",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Rarely"
           },
@@ -4192,7 +4192,7 @@
         },
         {
           "choice_list_name": "condom",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Never"
           },
@@ -4200,7 +4200,7 @@
         },
         {
           "choice_list_name": "condom",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4210,7 +4210,7 @@
       "testsite": [
         {
           "choice_list_name": "testsite",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Antenatal clinic (He came with me)"
           },
@@ -4218,7 +4218,7 @@
         },
         {
           "choice_list_name": "testsite",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Antenatal clinic (He visited alone)"
           },
@@ -4226,7 +4226,7 @@
         },
         {
           "choice_list_name": "testsite",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Home (Not related to the study)"
           },
@@ -4234,7 +4234,7 @@
         },
         {
           "choice_list_name": "testsite",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "VCT"
           },
@@ -4242,7 +4242,7 @@
         },
         {
           "choice_list_name": "testsite",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Delivery ward"
           },
@@ -4250,7 +4250,7 @@
         },
         {
           "choice_list_name": "testsite",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Other"
           },
@@ -4258,7 +4258,7 @@
         },
         {
           "choice_list_name": "testsite",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4266,7 +4266,7 @@
         },
         {
           "choice_list_name": "testsite",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -4276,7 +4276,7 @@
       "typetest": [
         {
           "choice_list_name": "typetest",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Tested alone"
           },
@@ -4284,7 +4284,7 @@
         },
         {
           "choice_list_name": "typetest",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Tested together"
           },
@@ -4292,7 +4292,7 @@
         },
         {
           "choice_list_name": "typetest",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4302,7 +4302,7 @@
       "testresult": [
         {
           "choice_list_name": "testresult",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "HIV positive"
           },
@@ -4310,7 +4310,7 @@
         },
         {
           "choice_list_name": "testresult",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "HIV negative"
           },
@@ -4318,7 +4318,7 @@
         },
         {
           "choice_list_name": "testresult",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Inconclusive result"
           },
@@ -4326,7 +4326,7 @@
         },
         {
           "choice_list_name": "testresult",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4336,7 +4336,7 @@
       "gotoCCC": [
         {
           "choice_list_name": "gotoCCC",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes, during the pregnancy"
           },
@@ -4344,7 +4344,7 @@
         },
         {
           "choice_list_name": "gotoCCC",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Yes, after delivery"
           },
@@ -4352,7 +4352,7 @@
         },
         {
           "choice_list_name": "gotoCCC",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Yes, both before and after delivery"
           },
@@ -4360,7 +4360,7 @@
         },
         {
           "choice_list_name": "gotoCCC",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -4368,7 +4368,7 @@
         },
         {
           "choice_list_name": "gotoCCC",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4376,7 +4376,7 @@
         },
         {
           "choice_list_name": "gotoCCC",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -4386,7 +4386,7 @@
       "changerelat": [
         {
           "choice_list_name": "changerelat",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No change"
           },
@@ -4394,7 +4394,7 @@
         },
         {
           "choice_list_name": "changerelat",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "You were married"
           },
@@ -4402,7 +4402,7 @@
         },
         {
           "choice_list_name": "changerelat",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "This partner is no longer living with you"
           },
@@ -4410,7 +4410,7 @@
         },
         {
           "choice_list_name": "changerelat",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "You are no longer in a relationship"
           },
@@ -4418,7 +4418,7 @@
         },
         {
           "choice_list_name": "changerelat",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Other"
           },
@@ -4426,7 +4426,7 @@
         },
         {
           "choice_list_name": "changerelat",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4436,7 +4436,7 @@
       "relationend": [
         {
           "choice_list_name": "relationend",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Respondent tested HIV+"
           },
@@ -4444,7 +4444,7 @@
         },
         {
           "choice_list_name": "relationend",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Partner tested HIV+"
           },
@@ -4452,7 +4452,7 @@
         },
         {
           "choice_list_name": "relationend",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Education received"
           },
@@ -4460,7 +4460,7 @@
         },
         {
           "choice_list_name": "relationend",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Partner did not approve of participation"
           },
@@ -4468,7 +4468,7 @@
         },
         {
           "choice_list_name": "relationend",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Other"
           },
@@ -4476,7 +4476,7 @@
         },
         {
           "choice_list_name": "relationend",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4484,7 +4484,7 @@
         },
         {
           "choice_list_name": "relationend",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -4494,7 +4494,7 @@
       "qualitychange": [
         {
           "choice_list_name": "qualitychange",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No change"
           },
@@ -4502,7 +4502,7 @@
         },
         {
           "choice_list_name": "qualitychange",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Improved"
           },
@@ -4510,7 +4510,7 @@
         },
         {
           "choice_list_name": "qualitychange",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Worsened"
           },
@@ -4518,7 +4518,7 @@
         },
         {
           "choice_list_name": "qualitychange",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -4526,7 +4526,7 @@
         },
         {
           "choice_list_name": "qualitychange",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -4536,7 +4536,7 @@
       "pretest": [
         {
           "choice_list_name": "pretest",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Client accepted testing, blood drawn"
           },
@@ -4544,7 +4544,7 @@
         },
         {
           "choice_list_name": "pretest",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Client declined testing, blood not drawn"
           },
@@ -4554,7 +4554,7 @@
       "hiv_status": [
         {
           "choice_list_name": "hiv_status",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "HIV negative"
           },
@@ -4562,7 +4562,7 @@
         },
         {
           "choice_list_name": "hiv_status",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "HIV positive"
           },
@@ -4572,7 +4572,7 @@
       "testinfant": [
         {
           "choice_list_name": "testinfant",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Client accepted testing, blood drawn"
           },
@@ -4580,7 +4580,7 @@
         },
         {
           "choice_list_name": "testinfant",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Client declined testing, blood not drawn"
           },
@@ -4588,7 +4588,7 @@
         },
         {
           "choice_list_name": "testinfant",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Infant already tested HIV positive"
           },
@@ -4598,7 +4598,7 @@
       "discordant": [
         {
           "choice_list_name": "discordant",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -4606,7 +4606,7 @@
         },
         {
           "choice_list_name": "discordant",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -4614,7 +4614,7 @@
         },
         {
           "choice_list_name": "discordant",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Male HIV status is unknown"
           },
@@ -4624,7 +4624,7 @@
       "acknowledge": [
         {
           "choice_list_name": "acknowledge",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Continue"
           },
@@ -4634,7 +4634,7 @@
       "date_nr": [
         {
           "choice_list_name": "date_nr",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Enter date"
           },
@@ -4642,7 +4642,7 @@
         },
         {
           "choice_list_name": "date_nr",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },

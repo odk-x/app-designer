@@ -267,7 +267,7 @@
     "choices": [
       {
         "choice_list_name": "yes_no",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -275,7 +275,7 @@
       },
       {
         "choice_list_name": "yes_no",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -283,7 +283,7 @@
       },
       {
         "choice_list_name": "no_response",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -291,7 +291,7 @@
       },
       {
         "choice_list_name": "yes_no_nr",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -299,7 +299,7 @@
       },
       {
         "choice_list_name": "yes_no_nr",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -307,7 +307,7 @@
       },
       {
         "choice_list_name": "yes_no_nr",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -315,7 +315,7 @@
       },
       {
         "choice_list_name": "unknown_nr",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -323,7 +323,7 @@
       },
       {
         "choice_list_name": "unknown_nr",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Don't know"
         },
@@ -331,7 +331,7 @@
       },
       {
         "choice_list_name": "study_arm_options",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "HOPE Intervention"
         },
@@ -339,7 +339,7 @@
       },
       {
         "choice_list_name": "study_arm_options",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "6 month follow-up"
         },
@@ -347,7 +347,7 @@
       },
       {
         "choice_list_name": "ethnic_groups",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Luo"
         },
@@ -355,7 +355,7 @@
       },
       {
         "choice_list_name": "ethnic_groups",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Luhya"
         },
@@ -363,7 +363,7 @@
       },
       {
         "choice_list_name": "ethnic_groups",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Kalenjin"
         },
@@ -371,7 +371,7 @@
       },
       {
         "choice_list_name": "ethnic_groups",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Kisii"
         },
@@ -379,7 +379,7 @@
       },
       {
         "choice_list_name": "ethnic_groups",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Kuria"
         },
@@ -387,7 +387,7 @@
       },
       {
         "choice_list_name": "ethnic_groups",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Nandi"
         },
@@ -395,7 +395,7 @@
       },
       {
         "choice_list_name": "ethnic_groups",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Other"
         },
@@ -403,7 +403,7 @@
       },
       {
         "choice_list_name": "ethnic_groups",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -411,7 +411,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Anglican"
         },
@@ -419,7 +419,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Catholic"
         },
@@ -427,7 +427,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Pentecostal"
         },
@@ -435,7 +435,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Seventh Day Adventist"
         },
@@ -443,7 +443,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "African Independent Churches"
         },
@@ -451,7 +451,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "African Inland Church"
         },
@@ -459,7 +459,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Protestant"
         },
@@ -467,7 +467,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 8,
+        "data_value": "a8",
         "display": {
           "text": "Muslim"
         },
@@ -475,7 +475,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 9,
+        "data_value": "a9",
         "display": {
           "text": "No religion"
         },
@@ -483,7 +483,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 10,
+        "data_value": "a10",
         "display": {
           "text": "Other"
         },
@@ -491,7 +491,7 @@
       },
       {
         "choice_list_name": "religion",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -499,7 +499,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Not employed"
         },
@@ -507,7 +507,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Casual laborer"
         },
@@ -515,7 +515,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Small business"
         },
@@ -523,7 +523,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Salaried position"
         },
@@ -531,7 +531,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Farmer/pastoralist"
         },
@@ -539,7 +539,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Fishing business"
         },
@@ -547,7 +547,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Pastor/religious leader"
         },
@@ -555,7 +555,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 7,
+        "data_value": "a7",
         "display": {
           "text": "Other"
         },
@@ -563,7 +563,7 @@
       },
       {
         "choice_list_name": "employment",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -571,7 +571,7 @@
       },
       {
         "choice_list_name": "earnings",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "None"
         },
@@ -579,7 +579,7 @@
       },
       {
         "choice_list_name": "earnings",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Less than 1000 Ksh"
         },
@@ -587,7 +587,7 @@
       },
       {
         "choice_list_name": "earnings",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "1000-4999 Ksh"
         },
@@ -595,7 +595,7 @@
       },
       {
         "choice_list_name": "earnings",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "5000-9999 Ksh"
         },
@@ -603,7 +603,7 @@
       },
       {
         "choice_list_name": "earnings",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "10000 Ksh and above"
         },
@@ -611,7 +611,7 @@
       },
       {
         "choice_list_name": "earnings",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -619,7 +619,7 @@
       },
       {
         "choice_list_name": "education_level_options",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No formal education"
         },
@@ -627,7 +627,7 @@
       },
       {
         "choice_list_name": "education_level_options",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Lower primary 1-3"
         },
@@ -635,7 +635,7 @@
       },
       {
         "choice_list_name": "education_level_options",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Upper primary 4-8"
         },
@@ -643,7 +643,7 @@
       },
       {
         "choice_list_name": "education_level_options",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Secondary - not completed"
         },
@@ -651,7 +651,7 @@
       },
       {
         "choice_list_name": "education_level_options",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Secondary completed"
         },
@@ -659,7 +659,7 @@
       },
       {
         "choice_list_name": "education_level_options",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Above secondary"
         },
@@ -667,7 +667,7 @@
       },
       {
         "choice_list_name": "education_level_options",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -675,7 +675,7 @@
       },
       {
         "choice_list_name": "relationship_status_options",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Married, living together"
         },
@@ -683,7 +683,7 @@
       },
       {
         "choice_list_name": "relationship_status_options",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Married, not living together"
         },
@@ -691,7 +691,7 @@
       },
       {
         "choice_list_name": "relationship_status_options",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Not married, living together"
         },
@@ -699,7 +699,7 @@
       },
       {
         "choice_list_name": "relationship_status_options",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Not married, not living together"
         },
@@ -707,7 +707,7 @@
       },
       {
         "choice_list_name": "circumcision_options",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "As an infant"
         },
@@ -715,7 +715,7 @@
       },
       {
         "choice_list_name": "circumcision_options",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "As a child/youth"
         },
@@ -723,7 +723,7 @@
       },
       {
         "choice_list_name": "circumcision_options",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "As an adult"
         },
@@ -731,7 +731,7 @@
       },
       {
         "choice_list_name": "circumcision_options",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -739,7 +739,7 @@
       },
       {
         "choice_list_name": "hiv_status",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "HIV negative"
         },
@@ -747,7 +747,7 @@
       },
       {
         "choice_list_name": "hiv_status",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "HIV positive"
         },
@@ -755,7 +755,7 @@
       },
       {
         "choice_list_name": "hiv_status",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -763,7 +763,7 @@
       },
       {
         "choice_list_name": "hiv_status",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -771,7 +771,7 @@
       },
       {
         "choice_list_name": "yes_no_ns",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -779,7 +779,7 @@
       },
       {
         "choice_list_name": "yes_no_ns",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -787,7 +787,7 @@
       },
       {
         "choice_list_name": "yes_no_ns",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -795,7 +795,7 @@
       },
       {
         "choice_list_name": "yes_no_ns",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -803,7 +803,7 @@
       },
       {
         "choice_list_name": "cd4_test_options",
-        "data_value": -777,
+        "data_value": "a-777",
         "display": {
           "text": "Test not done"
         },
@@ -811,7 +811,7 @@
       },
       {
         "choice_list_name": "cd4_test_options",
-        "data_value": -888,
+        "data_value": "a-888",
         "display": {
           "text": "Did not receive results"
         },
@@ -819,7 +819,7 @@
       },
       {
         "choice_list_name": "cd4_test_options",
-        "data_value": -999,
+        "data_value": "a-999",
         "display": {
           "text": "Not sure"
         },
@@ -827,7 +827,7 @@
       },
       {
         "choice_list_name": "art_dose_options",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes, I missed one or more doses, but I took some medication"
         },
@@ -835,7 +835,7 @@
       },
       {
         "choice_list_name": "art_dose_options",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No, I took all my doses"
         },
@@ -843,7 +843,7 @@
       },
       {
         "choice_list_name": "art_dose_options",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "I did not take any of the medication"
         },
@@ -851,7 +851,7 @@
       },
       {
         "choice_list_name": "art_dose_options",
-        "data_value": 999,
+        "data_value": "a999",
         "display": {
           "text": "Not sure"
         },
@@ -859,7 +859,7 @@
       },
       {
         "choice_list_name": "art_decision",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "My decision"
         },
@@ -867,7 +867,7 @@
       },
       {
         "choice_list_name": "art_decision",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Provider advised to discontinue"
         },
@@ -875,7 +875,7 @@
       },
       {
         "choice_list_name": "art_decision",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Not sure"
         },
@@ -883,7 +883,7 @@
       },
       {
         "choice_list_name": "no_participation_reasons",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "No time"
         },
@@ -891,7 +891,7 @@
       },
       {
         "choice_list_name": "no_participation_reasons",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Does not want to be tested with partner"
         },
@@ -899,7 +899,7 @@
       },
       {
         "choice_list_name": "no_participation_reasons",
-        "data_value": 3,
+        "data_value": "a3",
         "display": {
           "text": "Does not want to be tested at home"
         },
@@ -907,7 +907,7 @@
       },
       {
         "choice_list_name": "no_participation_reasons",
-        "data_value": 4,
+        "data_value": "a4",
         "display": {
           "text": "Feels he does not need the testing"
         },
@@ -915,7 +915,7 @@
       },
       {
         "choice_list_name": "no_participation_reasons",
-        "data_value": 5,
+        "data_value": "a5",
         "display": {
           "text": "Feels he does not need the education"
         },
@@ -923,7 +923,7 @@
       },
       {
         "choice_list_name": "no_participation_reasons",
-        "data_value": 6,
+        "data_value": "a6",
         "display": {
           "text": "Other"
         },
@@ -931,7 +931,7 @@
       },
       {
         "choice_list_name": "no_participation_reasons",
-        "data_value": 888,
+        "data_value": "a888",
         "display": {
           "text": "Prefer not to respond"
         },
@@ -939,7 +939,7 @@
       },
       {
         "choice_list_name": "hiv_test_results",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "HIV negative"
         },
@@ -947,7 +947,7 @@
       },
       {
         "choice_list_name": "hiv_test_results",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "HIV positive"
         },
@@ -955,7 +955,7 @@
       },
       {
         "choice_list_name": "acknowledge",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Continue"
         },
@@ -963,7 +963,7 @@
       },
       {
         "choice_list_name": "study_participation",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Wants to participate in full study"
         },
@@ -971,7 +971,7 @@
       },
       {
         "choice_list_name": "study_participation",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Does not want to participate"
         },
@@ -979,7 +979,7 @@
       },
       {
         "choice_list_name": "blood_draw_options",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Client accepted testing, blood drawn"
         },
@@ -987,7 +987,7 @@
       },
       {
         "choice_list_name": "blood_draw_options",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "Client declined testing, blood not drawn"
         },
@@ -995,7 +995,7 @@
       },
       {
         "choice_list_name": "discordant_options",
-        "data_value": 1,
+        "data_value": "a1",
         "display": {
           "text": "Yes"
         },
@@ -1003,7 +1003,7 @@
       },
       {
         "choice_list_name": "discordant_options",
-        "data_value": 0,
+        "data_value": "a0",
         "display": {
           "text": "No"
         },
@@ -1011,7 +1011,7 @@
       },
       {
         "choice_list_name": "discordant_options",
-        "data_value": 2,
+        "data_value": "a2",
         "display": {
           "text": "Unclear"
         },
@@ -1113,7 +1113,7 @@
       "yes_no": [
         {
           "choice_list_name": "yes_no",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -1121,7 +1121,7 @@
         },
         {
           "choice_list_name": "yes_no",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -1131,7 +1131,7 @@
       "no_response": [
         {
           "choice_list_name": "no_response",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1141,7 +1141,7 @@
       "yes_no_nr": [
         {
           "choice_list_name": "yes_no_nr",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -1149,7 +1149,7 @@
         },
         {
           "choice_list_name": "yes_no_nr",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -1157,7 +1157,7 @@
         },
         {
           "choice_list_name": "yes_no_nr",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1167,7 +1167,7 @@
       "unknown_nr": [
         {
           "choice_list_name": "unknown_nr",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1175,7 +1175,7 @@
         },
         {
           "choice_list_name": "unknown_nr",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Don't know"
           },
@@ -1185,7 +1185,7 @@
       "study_arm_options": [
         {
           "choice_list_name": "study_arm_options",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "HOPE Intervention"
           },
@@ -1193,7 +1193,7 @@
         },
         {
           "choice_list_name": "study_arm_options",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "6 month follow-up"
           },
@@ -1203,7 +1203,7 @@
       "ethnic_groups": [
         {
           "choice_list_name": "ethnic_groups",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Luo"
           },
@@ -1211,7 +1211,7 @@
         },
         {
           "choice_list_name": "ethnic_groups",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Luhya"
           },
@@ -1219,7 +1219,7 @@
         },
         {
           "choice_list_name": "ethnic_groups",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Kalenjin"
           },
@@ -1227,7 +1227,7 @@
         },
         {
           "choice_list_name": "ethnic_groups",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Kisii"
           },
@@ -1235,7 +1235,7 @@
         },
         {
           "choice_list_name": "ethnic_groups",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Kuria"
           },
@@ -1243,7 +1243,7 @@
         },
         {
           "choice_list_name": "ethnic_groups",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Nandi"
           },
@@ -1251,7 +1251,7 @@
         },
         {
           "choice_list_name": "ethnic_groups",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Other"
           },
@@ -1259,7 +1259,7 @@
         },
         {
           "choice_list_name": "ethnic_groups",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1269,7 +1269,7 @@
       "religion": [
         {
           "choice_list_name": "religion",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Anglican"
           },
@@ -1277,7 +1277,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Catholic"
           },
@@ -1285,7 +1285,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Pentecostal"
           },
@@ -1293,7 +1293,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Seventh Day Adventist"
           },
@@ -1301,7 +1301,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "African Independent Churches"
           },
@@ -1309,7 +1309,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "African Inland Church"
           },
@@ -1317,7 +1317,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Protestant"
           },
@@ -1325,7 +1325,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 8,
+          "data_value": "a8",
           "display": {
             "text": "Muslim"
           },
@@ -1333,7 +1333,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 9,
+          "data_value": "a9",
           "display": {
             "text": "No religion"
           },
@@ -1341,7 +1341,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 10,
+          "data_value": "a10",
           "display": {
             "text": "Other"
           },
@@ -1349,7 +1349,7 @@
         },
         {
           "choice_list_name": "religion",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1359,7 +1359,7 @@
       "employment": [
         {
           "choice_list_name": "employment",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Not employed"
           },
@@ -1367,7 +1367,7 @@
         },
         {
           "choice_list_name": "employment",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Casual laborer"
           },
@@ -1375,7 +1375,7 @@
         },
         {
           "choice_list_name": "employment",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Small business"
           },
@@ -1383,7 +1383,7 @@
         },
         {
           "choice_list_name": "employment",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Salaried position"
           },
@@ -1391,7 +1391,7 @@
         },
         {
           "choice_list_name": "employment",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Farmer/pastoralist"
           },
@@ -1399,7 +1399,7 @@
         },
         {
           "choice_list_name": "employment",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Fishing business"
           },
@@ -1407,7 +1407,7 @@
         },
         {
           "choice_list_name": "employment",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Pastor/religious leader"
           },
@@ -1415,7 +1415,7 @@
         },
         {
           "choice_list_name": "employment",
-          "data_value": 7,
+          "data_value": "a7",
           "display": {
             "text": "Other"
           },
@@ -1423,7 +1423,7 @@
         },
         {
           "choice_list_name": "employment",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1433,7 +1433,7 @@
       "earnings": [
         {
           "choice_list_name": "earnings",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "None"
           },
@@ -1441,7 +1441,7 @@
         },
         {
           "choice_list_name": "earnings",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Less than 1000 Ksh"
           },
@@ -1449,7 +1449,7 @@
         },
         {
           "choice_list_name": "earnings",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "1000-4999 Ksh"
           },
@@ -1457,7 +1457,7 @@
         },
         {
           "choice_list_name": "earnings",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "5000-9999 Ksh"
           },
@@ -1465,7 +1465,7 @@
         },
         {
           "choice_list_name": "earnings",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "10000 Ksh and above"
           },
@@ -1473,7 +1473,7 @@
         },
         {
           "choice_list_name": "earnings",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1483,7 +1483,7 @@
       "education_level_options": [
         {
           "choice_list_name": "education_level_options",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No formal education"
           },
@@ -1491,7 +1491,7 @@
         },
         {
           "choice_list_name": "education_level_options",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Lower primary 1-3"
           },
@@ -1499,7 +1499,7 @@
         },
         {
           "choice_list_name": "education_level_options",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Upper primary 4-8"
           },
@@ -1507,7 +1507,7 @@
         },
         {
           "choice_list_name": "education_level_options",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Secondary - not completed"
           },
@@ -1515,7 +1515,7 @@
         },
         {
           "choice_list_name": "education_level_options",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Secondary completed"
           },
@@ -1523,7 +1523,7 @@
         },
         {
           "choice_list_name": "education_level_options",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Above secondary"
           },
@@ -1531,7 +1531,7 @@
         },
         {
           "choice_list_name": "education_level_options",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1541,7 +1541,7 @@
       "relationship_status_options": [
         {
           "choice_list_name": "relationship_status_options",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Married, living together"
           },
@@ -1549,7 +1549,7 @@
         },
         {
           "choice_list_name": "relationship_status_options",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Married, not living together"
           },
@@ -1557,7 +1557,7 @@
         },
         {
           "choice_list_name": "relationship_status_options",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Not married, living together"
           },
@@ -1565,7 +1565,7 @@
         },
         {
           "choice_list_name": "relationship_status_options",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Not married, not living together"
           },
@@ -1575,7 +1575,7 @@
       "circumcision_options": [
         {
           "choice_list_name": "circumcision_options",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "As an infant"
           },
@@ -1583,7 +1583,7 @@
         },
         {
           "choice_list_name": "circumcision_options",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "As a child/youth"
           },
@@ -1591,7 +1591,7 @@
         },
         {
           "choice_list_name": "circumcision_options",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "As an adult"
           },
@@ -1599,7 +1599,7 @@
         },
         {
           "choice_list_name": "circumcision_options",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -1609,7 +1609,7 @@
       "hiv_status": [
         {
           "choice_list_name": "hiv_status",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "HIV negative"
           },
@@ -1617,7 +1617,7 @@
         },
         {
           "choice_list_name": "hiv_status",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "HIV positive"
           },
@@ -1625,7 +1625,7 @@
         },
         {
           "choice_list_name": "hiv_status",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1633,7 +1633,7 @@
         },
         {
           "choice_list_name": "hiv_status",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -1643,7 +1643,7 @@
       "yes_no_ns": [
         {
           "choice_list_name": "yes_no_ns",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -1651,7 +1651,7 @@
         },
         {
           "choice_list_name": "yes_no_ns",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -1659,7 +1659,7 @@
         },
         {
           "choice_list_name": "yes_no_ns",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1667,7 +1667,7 @@
         },
         {
           "choice_list_name": "yes_no_ns",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -1677,7 +1677,7 @@
       "cd4_test_options": [
         {
           "choice_list_name": "cd4_test_options",
-          "data_value": -777,
+          "data_value": "a-777",
           "display": {
             "text": "Test not done"
           },
@@ -1685,7 +1685,7 @@
         },
         {
           "choice_list_name": "cd4_test_options",
-          "data_value": -888,
+          "data_value": "a-888",
           "display": {
             "text": "Did not receive results"
           },
@@ -1693,7 +1693,7 @@
         },
         {
           "choice_list_name": "cd4_test_options",
-          "data_value": -999,
+          "data_value": "a-999",
           "display": {
             "text": "Not sure"
           },
@@ -1703,7 +1703,7 @@
       "art_dose_options": [
         {
           "choice_list_name": "art_dose_options",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes, I missed one or more doses, but I took some medication"
           },
@@ -1711,7 +1711,7 @@
         },
         {
           "choice_list_name": "art_dose_options",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No, I took all my doses"
           },
@@ -1719,7 +1719,7 @@
         },
         {
           "choice_list_name": "art_dose_options",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "I did not take any of the medication"
           },
@@ -1727,7 +1727,7 @@
         },
         {
           "choice_list_name": "art_dose_options",
-          "data_value": 999,
+          "data_value": "a999",
           "display": {
             "text": "Not sure"
           },
@@ -1737,7 +1737,7 @@
       "art_decision": [
         {
           "choice_list_name": "art_decision",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "My decision"
           },
@@ -1745,7 +1745,7 @@
         },
         {
           "choice_list_name": "art_decision",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Provider advised to discontinue"
           },
@@ -1753,7 +1753,7 @@
         },
         {
           "choice_list_name": "art_decision",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Not sure"
           },
@@ -1763,7 +1763,7 @@
       "no_participation_reasons": [
         {
           "choice_list_name": "no_participation_reasons",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "No time"
           },
@@ -1771,7 +1771,7 @@
         },
         {
           "choice_list_name": "no_participation_reasons",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Does not want to be tested with partner"
           },
@@ -1779,7 +1779,7 @@
         },
         {
           "choice_list_name": "no_participation_reasons",
-          "data_value": 3,
+          "data_value": "a3",
           "display": {
             "text": "Does not want to be tested at home"
           },
@@ -1787,7 +1787,7 @@
         },
         {
           "choice_list_name": "no_participation_reasons",
-          "data_value": 4,
+          "data_value": "a4",
           "display": {
             "text": "Feels he does not need the testing"
           },
@@ -1795,7 +1795,7 @@
         },
         {
           "choice_list_name": "no_participation_reasons",
-          "data_value": 5,
+          "data_value": "a5",
           "display": {
             "text": "Feels he does not need the education"
           },
@@ -1803,7 +1803,7 @@
         },
         {
           "choice_list_name": "no_participation_reasons",
-          "data_value": 6,
+          "data_value": "a6",
           "display": {
             "text": "Other"
           },
@@ -1811,7 +1811,7 @@
         },
         {
           "choice_list_name": "no_participation_reasons",
-          "data_value": 888,
+          "data_value": "a888",
           "display": {
             "text": "Prefer not to respond"
           },
@@ -1821,7 +1821,7 @@
       "hiv_test_results": [
         {
           "choice_list_name": "hiv_test_results",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "HIV negative"
           },
@@ -1829,7 +1829,7 @@
         },
         {
           "choice_list_name": "hiv_test_results",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "HIV positive"
           },
@@ -1839,7 +1839,7 @@
       "acknowledge": [
         {
           "choice_list_name": "acknowledge",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Continue"
           },
@@ -1849,7 +1849,7 @@
       "study_participation": [
         {
           "choice_list_name": "study_participation",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Wants to participate in full study"
           },
@@ -1857,7 +1857,7 @@
         },
         {
           "choice_list_name": "study_participation",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Does not want to participate"
           },
@@ -1867,7 +1867,7 @@
       "blood_draw_options": [
         {
           "choice_list_name": "blood_draw_options",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Client accepted testing, blood drawn"
           },
@@ -1875,7 +1875,7 @@
         },
         {
           "choice_list_name": "blood_draw_options",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "Client declined testing, blood not drawn"
           },
@@ -1885,7 +1885,7 @@
       "discordant_options": [
         {
           "choice_list_name": "discordant_options",
-          "data_value": 1,
+          "data_value": "a1",
           "display": {
             "text": "Yes"
           },
@@ -1893,7 +1893,7 @@
         },
         {
           "choice_list_name": "discordant_options",
-          "data_value": 0,
+          "data_value": "a0",
           "display": {
             "text": "No"
           },
@@ -1901,7 +1901,7 @@
         },
         {
           "choice_list_name": "discordant_options",
-          "data_value": 2,
+          "data_value": "a2",
           "display": {
             "text": "Unclear"
           },
