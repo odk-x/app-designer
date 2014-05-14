@@ -30,12 +30,16 @@ function display() {
     // The client id should have been passed to us as the hash.
     var hash = window.location.hash;
     console.log('window.location.href is: ' + window.location.href);
+    var clientId = null;
     if (hash === '') {
         console.log('The hash containing the client id was not present!');
+        console.log('Inferring client id');
+        clientId = data.get(0);
+    } else {
+        // The hash begins with a physical hash. Strip it.
+        clientId = hash.substring(1);
+        console.log('client id is: ' + clientId);
     }
-    // The hash begins with a physical hash. Strip it.
-    var clientId = hash.substring(1);
-    console.log('client id is: ' + clientId);
 
     /* Create item to launch map view display */
     var mapView = document.createElement('p');
@@ -80,7 +84,7 @@ function display() {
             item.setAttribute('class', 'item_space');
             item.setAttribute(
                 'onClick',
-                'handleClick(' + data.getRowId(i) + ')');
+                'handleClick("' + data.getRowId(i) + '")');
             item.innerHTML = clientId;
             document.getElementById('list').appendChild(item);
 
