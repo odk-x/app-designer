@@ -20,12 +20,30 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
     });
 }
 
-function createFormLauncher(tableName, formId, jsonMap, label, element) {
+function createFormLauncherForEdit(tableId, formId, rowId, label, element) {
     var formLauncher = document.createElement('p');
     formLauncher.setAttribute('class', 'forms');
     formLauncher.innerHTML = label;
     formLauncher.onclick = function() {
-        control.addRowWithSurvey(tableName, formId, null, jsonMap);
+        control.editRowWithSurvey(
+                tableId,
+                rowId,
+                formId,
+                null);
+    };
+    element.appendChild(formLauncher);
+}
+
+function createFormLauncherForAdd(tableId, formId, jsonMap, label, element) {
+    var formLauncher = document.createElement('p');
+    formLauncher.setAttribute('class', 'forms');
+    formLauncher.innerHTML = label;
+    formLauncher.onclick = function() {
+        control.addRowWithSurvey(
+                tableId,
+                formId,
+                null,
+                jsonMap);
     };
     element.appendChild(formLauncher);
 }
@@ -47,7 +65,6 @@ function display() {
 
     // Creates key-to-value map that can be interpreted by the specified
     // Collect form - to prepopulate forms with client id
-    var mapFemaleId = JSON.stringify({'_client_id':clientId});
     var mapMaleId = JSON.stringify({'_client_id': clientId});
 
     // Create item that displays links to all female forms when clicked
@@ -74,14 +91,16 @@ function display() {
     });
     fContainer.appendChild(homeLocator);
 
-    createFormLauncher('femaleClients',
+    createFormLauncherForEdit(
+            'femaleClients',
             'client6Week',
-            mapFemaleId,
+            clientId,
             'Six Week Follow-Up',
             fContainer);
-    createFormLauncher('femaleClients',
+    createFormLauncherForEdit(
+            'femaleClients',
             'client6Month',
-            mapFemaleId,
+            clientId,
             'Six Month Follow-Up',
             fContainer);
 
@@ -102,16 +121,16 @@ function display() {
 
     var mContainer = document.createElement('div');
     mContainer.setAttribute('class', 'detail_container');
-    createFormLauncher(
+    createFormLauncherForAdd(
             'maleClients',
             'screenPartner',
             mapMaleId,
             'Partner Screening',
             mContainer);
-    createFormLauncher(
+    createFormLauncherForEdit(
             'maleClients',
             'partner6Month',
-            mapMaleId,
+            clientId,
             'Six Month Follow-Up',
             mContainer);
 

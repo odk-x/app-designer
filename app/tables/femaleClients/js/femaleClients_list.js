@@ -40,7 +40,7 @@ function getResults() {
                 'femaleClients',
                 'client_id = ?',
                 [searchText],
-                'clients_list.html');
+                '/tables/FemaleClients/html/femaleClients_list.html');
     } else {
         // open 'client not found' page
         control.openTableToListView(
