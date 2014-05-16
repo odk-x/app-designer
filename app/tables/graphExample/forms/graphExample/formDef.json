@@ -34,280 +34,48 @@
         "_row_num": 5
       }
     ],
-    "choices": [
-      {
-        "choice_list_name": "birds",
-        "data_value": "blackbird",
-        "display": {
-          "image": "media/blackbird.png"
-        },
-        "_row_num": 2
-      },
-      {
-        "choice_list_name": "birds",
-        "data_value": "bluethroat",
-        "display": {
-          "image": "media/bluethroat.png"
-        },
-        "_row_num": 3
-      },
-      {
-        "choice_list_name": "birds",
-        "data_value": "crow",
-        "display": {
-          "image": "media/crow.png"
-        },
-        "_row_num": 4
-      },
-      {
-        "choice_list_name": "birds",
-        "data_value": "eagle",
-        "display": {
-          "image": "media/eagle.png"
-        },
-        "_row_num": 5
-      },
-      {
-        "choice_list_name": "birds",
-        "data_value": "egret",
-        "display": {
-          "image": "media/egret.png"
-        },
-        "_row_num": 6
-      },
-      {
-        "choice_list_name": "birds",
-        "data_value": "kingfisher",
-        "display": {
-          "image": "media/kingfisher.png"
-        },
-        "_row_num": 7
-      },
-      {
-        "choice_list_name": "birds",
-        "data_value": "gull",
-        "display": {
-          "image": "media/gull.png"
-        },
-        "_row_num": 8
-      },
-      {
-        "choice_list_name": "birds",
-        "data_value": "hawfinch",
-        "display": {
-          "image": "media/hawfinch.png"
-        },
-        "_row_num": 9
-      },
-      {
-        "choice_list_name": "birds",
-        "data_value": "robin",
-        "display": {
-          "image": "media/robin.png"
-        },
-        "_row_num": 10
-      },
-      {
-        "choice_list_name": "yes_no",
-        "data_value": "yes",
-        "display": {
-          "text": "Yes"
-        },
-        "_row_num": 12
-      },
-      {
-        "choice_list_name": "yes_no",
-        "data_value": "no",
-        "display": {
-          "text": "No"
-        },
-        "_row_num": 13
-      },
-      {
-        "choice_list_name": "colors",
-        "data_value": "red",
-        "display": {
-          "text": "Red"
-        },
-        "_row_num": 15
-      },
-      {
-        "choice_list_name": "colors",
-        "data_value": "green",
-        "display": {
-          "text": "Green"
-        },
-        "_row_num": 16
-      },
-      {
-        "choice_list_name": "colors",
-        "data_value": "blue",
-        "display": {
-          "text": "Blue"
-        },
-        "_row_num": 17
-      },
-      {
-        "choice_list_name": "colors",
-        "data_value": "grey",
-        "display": {
-          "text": "Grey"
-        },
-        "_row_num": 18
-      },
-      {
-        "choice_list_name": "colors",
-        "data_value": "brown",
-        "display": {
-          "text": "White"
-        },
-        "_row_num": 19
-      },
-      {
-        "choice_list_name": "holidays",
-        "data_value": "kwanzaa",
-        "display": {
-          "text": "Kwanzaa"
-        },
-        "_row_num": 21
-      },
-      {
-        "choice_list_name": "holidays",
-        "data_value": "christmas",
-        "display": {
-          "text": "Christmas"
-        },
-        "_row_num": 22
-      },
-      {
-        "choice_list_name": "holidays",
-        "data_value": "hannukah",
-        "display": {
-          "text": "Hannukah"
-        },
-        "_row_num": 23
-      },
-      {
-        "choice_list_name": "holidays",
-        "data_value": "diwali",
-        "display": {
-          "text": "Diwali"
-        },
-        "_row_num": 24
-      },
-      {
-        "choice_list_name": "foods",
-        "data_value": "milk",
-        "display": {
-          "text": "Milk"
-        },
-        "_row_num": 26
-      },
-      {
-        "choice_list_name": "foods",
-        "data_value": "bread",
-        "display": {
-          "text": "Bread"
-        },
-        "_row_num": 27
-      },
-      {
-        "choice_list_name": "foods",
-        "data_value": "fruit",
-        "display": {
-          "text": "Fruit"
-        },
-        "_row_num": 28
-      },
-      {
-        "choice_list_name": "foods",
-        "data_value": "vegetable",
-        "display": {
-          "text": "Vegetable"
-        },
-        "_row_num": 29
-      },
-      {
-        "choice_list_name": "foods",
-        "data_value": "meat",
-        "display": {
-          "text": "Meat"
-        },
-        "_row_num": 30
-      },
-      {
-        "choice_list_name": "sexes",
-        "data_value": "male",
-        "display": {
-          "text": "male"
-        },
-        "_row_num": 32
-      },
-      {
-        "choice_list_name": "sexes",
-        "data_value": "female",
-        "display": {
-          "text": "female"
-        },
-        "_row_num": 33
-      }
-    ],
     "queries": [
-      {
-        "query_name": "countries",
-        "query_type": "ajax",
-        "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
-        "_row_num": 2
-      },
-      {
-        "query_name": "states",
-        "query_type": "ajax",
-        "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
-        "_row_num": 3
-      },
       {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
         "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
-        "_row_num": 4
+        "_row_num": 2
       },
       {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
         "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
-        "_row_num": 5
+        "_row_num": 3
       },
       {
         "query_name": "graph_csv",
         "query_type": "csv",
         "uri": "\"graph.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 6
+        "_row_num": 4
       },
       {
         "query_name": "linegraph_csv",
         "query_type": "csv",
         "uri": "\"linegraph.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 7
+        "_row_num": 5
       },
       {
         "query_name": "piechart_csv",
         "query_type": "csv",
         "uri": "\"piechart.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 8
+        "_row_num": 6
       },
       {
         "query_name": "scatterplot_csv",
         "query_type": "csv",
         "uri": "\"scatterplot.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 9
+        "_row_num": 7
       }
     ],
     "settings": [
@@ -407,292 +175,49 @@
         "_row_num": 4
       }
     },
-    "choices": {
-      "birds": [
-        {
-          "choice_list_name": "birds",
-          "data_value": "blackbird",
-          "display": {
-            "image": "media/blackbird.png"
-          },
-          "_row_num": 2
-        },
-        {
-          "choice_list_name": "birds",
-          "data_value": "bluethroat",
-          "display": {
-            "image": "media/bluethroat.png"
-          },
-          "_row_num": 3
-        },
-        {
-          "choice_list_name": "birds",
-          "data_value": "crow",
-          "display": {
-            "image": "media/crow.png"
-          },
-          "_row_num": 4
-        },
-        {
-          "choice_list_name": "birds",
-          "data_value": "eagle",
-          "display": {
-            "image": "media/eagle.png"
-          },
-          "_row_num": 5
-        },
-        {
-          "choice_list_name": "birds",
-          "data_value": "egret",
-          "display": {
-            "image": "media/egret.png"
-          },
-          "_row_num": 6
-        },
-        {
-          "choice_list_name": "birds",
-          "data_value": "kingfisher",
-          "display": {
-            "image": "media/kingfisher.png"
-          },
-          "_row_num": 7
-        },
-        {
-          "choice_list_name": "birds",
-          "data_value": "gull",
-          "display": {
-            "image": "media/gull.png"
-          },
-          "_row_num": 8
-        },
-        {
-          "choice_list_name": "birds",
-          "data_value": "hawfinch",
-          "display": {
-            "image": "media/hawfinch.png"
-          },
-          "_row_num": 9
-        },
-        {
-          "choice_list_name": "birds",
-          "data_value": "robin",
-          "display": {
-            "image": "media/robin.png"
-          },
-          "_row_num": 10
-        }
-      ],
-      "yes_no": [
-        {
-          "choice_list_name": "yes_no",
-          "data_value": "yes",
-          "display": {
-            "text": "Yes"
-          },
-          "_row_num": 12
-        },
-        {
-          "choice_list_name": "yes_no",
-          "data_value": "no",
-          "display": {
-            "text": "No"
-          },
-          "_row_num": 13
-        }
-      ],
-      "colors": [
-        {
-          "choice_list_name": "colors",
-          "data_value": "red",
-          "display": {
-            "text": "Red"
-          },
-          "_row_num": 15
-        },
-        {
-          "choice_list_name": "colors",
-          "data_value": "green",
-          "display": {
-            "text": "Green"
-          },
-          "_row_num": 16
-        },
-        {
-          "choice_list_name": "colors",
-          "data_value": "blue",
-          "display": {
-            "text": "Blue"
-          },
-          "_row_num": 17
-        },
-        {
-          "choice_list_name": "colors",
-          "data_value": "grey",
-          "display": {
-            "text": "Grey"
-          },
-          "_row_num": 18
-        },
-        {
-          "choice_list_name": "colors",
-          "data_value": "brown",
-          "display": {
-            "text": "White"
-          },
-          "_row_num": 19
-        }
-      ],
-      "holidays": [
-        {
-          "choice_list_name": "holidays",
-          "data_value": "kwanzaa",
-          "display": {
-            "text": "Kwanzaa"
-          },
-          "_row_num": 21
-        },
-        {
-          "choice_list_name": "holidays",
-          "data_value": "christmas",
-          "display": {
-            "text": "Christmas"
-          },
-          "_row_num": 22
-        },
-        {
-          "choice_list_name": "holidays",
-          "data_value": "hannukah",
-          "display": {
-            "text": "Hannukah"
-          },
-          "_row_num": 23
-        },
-        {
-          "choice_list_name": "holidays",
-          "data_value": "diwali",
-          "display": {
-            "text": "Diwali"
-          },
-          "_row_num": 24
-        }
-      ],
-      "foods": [
-        {
-          "choice_list_name": "foods",
-          "data_value": "milk",
-          "display": {
-            "text": "Milk"
-          },
-          "_row_num": 26
-        },
-        {
-          "choice_list_name": "foods",
-          "data_value": "bread",
-          "display": {
-            "text": "Bread"
-          },
-          "_row_num": 27
-        },
-        {
-          "choice_list_name": "foods",
-          "data_value": "fruit",
-          "display": {
-            "text": "Fruit"
-          },
-          "_row_num": 28
-        },
-        {
-          "choice_list_name": "foods",
-          "data_value": "vegetable",
-          "display": {
-            "text": "Vegetable"
-          },
-          "_row_num": 29
-        },
-        {
-          "choice_list_name": "foods",
-          "data_value": "meat",
-          "display": {
-            "text": "Meat"
-          },
-          "_row_num": 30
-        }
-      ],
-      "sexes": [
-        {
-          "choice_list_name": "sexes",
-          "data_value": "male",
-          "display": {
-            "text": "male"
-          },
-          "_row_num": 32
-        },
-        {
-          "choice_list_name": "sexes",
-          "data_value": "female",
-          "display": {
-            "text": "female"
-          },
-          "_row_num": 33
-        }
-      ]
-    },
+    "choices": {},
     "queries": {
-      "countries": {
-        "query_name": "countries",
-        "query_type": "ajax",
-        "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
-        "_row_num": 2
-      },
-      "states": {
-        "query_name": "states",
-        "query_type": "ajax",
-        "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
-        "_row_num": 3
-      },
       "regions_csv": {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
         "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
-        "_row_num": 4
+        "_row_num": 2
       },
       "countries_csv": {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
         "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
-        "_row_num": 5
+        "_row_num": 3
       },
       "graph_csv": {
         "query_name": "graph_csv",
         "query_type": "csv",
         "uri": "\"graph.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 6
+        "_row_num": 4
       },
       "linegraph_csv": {
         "query_name": "linegraph_csv",
         "query_type": "csv",
         "uri": "\"linegraph.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 7
+        "_row_num": 5
       },
       "piechart_csv": {
         "query_name": "piechart_csv",
         "query_type": "csv",
         "uri": "\"piechart.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 8
+        "_row_num": 6
       },
       "scatterplot_csv": {
         "query_name": "scatterplot_csv",
         "query_type": "csv",
         "uri": "\"scatterplot.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 9
+        "_row_num": 7
       }
     },
     "calculates": {},

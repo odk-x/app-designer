@@ -2016,8 +2016,8 @@ promptTypes.bargraph = promptTypes.base.extend({
     afterRender: function() {
         var that = this;
 
-        var paramWidth = 500;
-        var paramHeight = 500;
+        var paramWidth = 400;
+        var paramHeight = 450;
         
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
@@ -2031,8 +2031,8 @@ promptTypes.bargraph = promptTypes.base.extend({
         });
 
         var margin = {top: 50, right: 20, bottom: 50, left: 50},
-            width = 400 - margin.left - margin.right,
-            height = 450 - margin.top - margin.bottom;
+            width = paramWidth - margin.left - margin.right,
+            height = paramHeight - margin.top - margin.bottom;
 
         var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
 
@@ -2188,9 +2188,12 @@ promptTypes.linegraph = promptTypes.base.extend({
     },
     afterRender: function() {
         var that = this;
+        var xString = "x-axis";
+        var yString = "y-axis";
+        var legendString = "y-value"
 
-        var paramWidth = 500;
-        var paramHeight = 500;
+        var paramWidth = 450;
+        var paramHeight = 400;
         
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
@@ -2199,11 +2202,24 @@ promptTypes.linegraph = promptTypes.base.extend({
             shim.log("E","prompts." + that.type + ".afterRender - no data to graph");
             return; 
         } 
+
+        if (that.x_axis_label) {
+            xString = that.x_axis_label;
+        }
+
+        if (that.y_axis_label) {
+            yString = that.y_axis_label;
+        }
+
+        if (that.legend_text) {
+            legendString = that.legend_text;
+        }
+
         var dataJ = _.map(that.renderContext.choices, function(choice){
             return choice;
         });
 
-	    var margin = {top: 20, right: 20, bottom: 40, left: 50},
+	    var margin = {top: 50, right: 20, bottom: 40, left: 50},
 	        width = paramWidth - margin.left - margin.right,
 	        height = paramHeight - margin.top - margin.bottom;
 
@@ -2293,7 +2309,7 @@ promptTypes.linegraph = promptTypes.base.extend({
             .attr("pointer-events", "all")
             .style("font-size", "1.5em")
             .style("text-anchor", "start")
-            .text("x-axis");  // This should be customizable
+            .text(xString);  // This should be customizable
 
         svg.append("g")
             .attr("class", "y_axis")
@@ -2305,14 +2321,48 @@ promptTypes.linegraph = promptTypes.base.extend({
             .attr("x", -1 * tempHeight/2)
             .style("font-size", "1.5em")
             .style("text-anchor", "end")
-            .text("y-axis");  // This should be customizable
+            .text(yString);  // This should be customizable
 
 		svg.append("path")
 			.datum(dataJ)
 			.attr("class", "line")
             .attr("fill", "none")
-            .attr("stroke", "#000")
+            .attr("stroke", "blue")
 			.attr("d", line);
+
+        // add legend   
+        var legend = svg.append("g")
+            .attr("class", "legend")
+            .attr("height", 50)
+            .attr("width", 100);
+    
+        legend
+            .append("rect")
+            .attr("x", -10 )
+            .attr("y", -30)
+            .attr("width", 10)
+            .attr("height", 10)
+            .style("fill", 'blue');
+      
+        legend
+        .append("text")
+        .attr("x", 10)
+        .attr("y", -20)
+        .text(legendString);
+
+        if (that.x_value && that.y_value) {
+            var x_val = database.getDataValue(that.x_value);
+            var y_val = database.getDataValue(that.y_value);
+            svg.append("circle")
+                .attr("class", "dot")
+                .attr("r", 8)
+                .attr("fill", "none")
+                .attr("stroke", "#0a0")
+                .attr("stroke-width", "1.5px")
+                .attr("cx", function(d) { return x(x_val); })
+                .attr("cy", function(d) { return y(y_val); });
+    }
+
  
         return;
     }
@@ -2512,8 +2562,8 @@ promptTypes.scatterplot = promptTypes.base.extend({
     afterRender: function() {
         var that = this;
 
-        var paramWidth = 500;
-        var paramHeight = 500;
+        var paramWidth = 450;
+        var paramHeight = 400;
 
         var margin = {top: 20, right: 20, bottom: 40, left: 50},
 	        width = paramWidth - margin.left - margin.right,
