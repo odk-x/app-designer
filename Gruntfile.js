@@ -466,7 +466,7 @@ module.exports = function (grunt) {
         });
 
     grunt.registerTask(
-        'adbpush-survey-demo-bmg05152013',
+        'adbpush-survey-demo-bmg05152014',
         'Push everything for survey demo to the device',
         function() {
             // In the demo we only want Survey, so we do NOT need all the tables

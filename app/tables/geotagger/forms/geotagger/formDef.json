@@ -37,6 +37,7 @@
           "text": "Location",
           "hint": "Capture the GPS coordinates of this location"
         },
+        "buttonLabel": "Record Location",
         "_row_num": 5
       }
     ],
@@ -270,6 +271,7 @@
               "text": "Location",
               "hint": "Capture the GPS coordinates of this location"
             },
+            "buttonLabel": "Record Location",
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",

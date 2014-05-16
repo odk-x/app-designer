@@ -43,6 +43,7 @@
         "display": {
           "text": "Capture your location"
         },
+        "buttonLabel": "Record Location",
         "_row_num": 7
       },
       {
@@ -1348,6 +1349,7 @@
             "display": {
               "text": "Capture your location"
             },
+            "buttonLabel": "Record Location",
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
