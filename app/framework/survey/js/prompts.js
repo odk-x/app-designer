@@ -1912,6 +1912,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
 /* Save only the SCAN_RESULT */
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
+    buttonLabel: 'Get Barcode',
     intentString: 'com.google.zxing.client.android.SCAN',
      extractDataValue: function(jsonObject) {
         return jsonObject.result.SCAN_RESULT;
@@ -1919,6 +1920,7 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
+    buttonLabel: 'Record Location',
     templatePath: "templates/geopoint.handlebars",
     intentString: 'org.opendatakit.survey.android.activities.GeoPointActivity',
     extractDataValue: function(jsonObject) {
