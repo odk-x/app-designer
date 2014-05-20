@@ -43,6 +43,7 @@
         "display": {
           "text": "Capture your location"
         },
+        "buttonLabel": "Record Location",
         "_row_num": 7
       },
       {
@@ -446,16 +447,50 @@
         "_row_num": 66
       },
       {
-        "type": "note",
-        "inputAttributes": {
-          "data-type": "specialTemplateTest"
-        },
-        "display": {
-          "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
-        },
-        "hideInContents": true,
-        "templatePath": "ageWeightPlot.handlebars",
+        "clause": "if",
+        "condition": "selected(data('sex'), 'male')",
         "_row_num": 67
+      },
+      {
+        "type": "linegraph",
+        "values_list": "male_linegraph_csv",
+        "display": {
+          "text": "Male Bird Age vs. Weight Graph"
+        },
+        "x_axis_label": "age(yrs)",
+        "y_axis_label": "weight(oz)",
+        "x_value": "age",
+        "y_value": "weight",
+        "legend_text": "male median weight for age",
+        "hideInContents": true,
+        "_row_num": 68
+      },
+      {
+        "clause": "end if",
+        "_row_num": 69
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sex'), 'female')",
+        "_row_num": 70
+      },
+      {
+        "type": "linegraph",
+        "values_list": "female_linegraph_csv",
+        "display": {
+          "text": "Female Bird Age vs. Weight Graph"
+        },
+        "x_axis_label": "age(yrs)",
+        "y_axis_label": "weight(oz)",
+        "x_value": "age",
+        "y_value": "weight",
+        "legend_text": "female median weight for age",
+        "hideInContents": true,
+        "_row_num": 71
+      },
+      {
+        "clause": "end if",
+        "_row_num": 72
       }
     ],
     "choices": [
@@ -704,6 +739,27 @@
         "uri": "\"regions.csv\"",
         "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
         "_row_num": 5
+      },
+      {
+        "query_name": "linegraph_csv",
+        "query_type": "csv",
+        "uri": "\"linegraph.csv\"",
+        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "_row_num": 6
+      },
+      {
+        "query_name": "male_linegraph_csv",
+        "query_type": "csv",
+        "uri": "\"maleLinegraph.csv\"",
+        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "_row_num": 7
+      },
+      {
+        "query_name": "female_linegraph_csv",
+        "query_type": "csv",
+        "uri": "\"femaleLinegraph.csv\"",
+        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "_row_num": 8
       }
     ],
     "settings": [
@@ -1051,6 +1107,27 @@
         "uri": "\"regions.csv\"",
         "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
         "_row_num": 5
+      },
+      "linegraph_csv": {
+        "query_name": "linegraph_csv",
+        "query_type": "csv",
+        "uri": "\"linegraph.csv\"",
+        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "_row_num": 6
+      },
+      "male_linegraph_csv": {
+        "query_name": "male_linegraph_csv",
+        "query_type": "csv",
+        "uri": "\"maleLinegraph.csv\"",
+        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "_row_num": 7
+      },
+      "female_linegraph_csv": {
+        "query_name": "female_linegraph_csv",
+        "query_type": "csv",
+        "uri": "\"femaleLinegraph.csv\"",
+        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "_row_num": 8
       }
     },
     "calculates": {},
@@ -1272,6 +1349,7 @@
             "display": {
               "text": "Capture your location"
             },
+            "buttonLabel": "Record Location",
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
@@ -1527,29 +1605,50 @@
             "promptIdx": 21
           },
           {
-            "type": "note",
-            "inputAttributes": {
-              "data-type": "specialTemplateTest"
-            },
+            "type": "linegraph",
+            "values_list": "male_linegraph_csv",
             "display": {
-              "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+              "text": "Male Bird Age vs. Weight Graph"
             },
+            "x_axis_label": "age(yrs)",
+            "y_axis_label": "weight(oz)",
+            "x_value": "age",
+            "y_value": "weight",
+            "legend_text": "male median weight for age",
             "hideInContents": true,
-            "templatePath": "ageWeightPlot.handlebars",
-            "_row_num": 67,
-            "__rowNum__": 66,
+            "_row_num": 68,
+            "__rowNum__": 67,
             "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen67",
+            "_type": "linegraph",
+            "_branch_label_enclosing_screen": "survey/_screen68",
             "promptIdx": 22
+          },
+          {
+            "type": "linegraph",
+            "values_list": "female_linegraph_csv",
+            "display": {
+              "text": "Female Bird Age vs. Weight Graph"
+            },
+            "x_axis_label": "age(yrs)",
+            "y_axis_label": "weight(oz)",
+            "x_value": "age",
+            "y_value": "weight",
+            "legend_text": "female median weight for age",
+            "hideInContents": true,
+            "_row_num": 71,
+            "__rowNum__": 70,
+            "_token_type": "prompt",
+            "_type": "linegraph",
+            "_branch_label_enclosing_screen": "survey/_screen71",
+            "promptIdx": 23
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 68,
-            "_branch_label_enclosing_screen": "survey/_screen68",
-            "promptIdx": 23
+            "_row_num": 73,
+            "_branch_label_enclosing_screen": "survey/_screen73",
+            "promptIdx": 24
           }
         ],
         "validation_tag_map": {
@@ -1628,31 +1727,83 @@
             "operationIdx": 5
           },
           {
+            "clause": "if",
+            "condition": "selected(data('sex'), 'male')",
             "_row_num": 67,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 66,
+            "_token_type": "goto_label",
+            "_branch_label": "_then67",
             "operationIdx": 6
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 68,
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else69",
+            "_row_num": 69,
             "operationIdx": 7
           },
           {
             "_row_num": 68,
             "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif69",
+            "_row_num": 69,
+            "operationIdx": 9
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('sex'), 'female')",
+            "_row_num": 70,
+            "__rowNum__": 69,
+            "_token_type": "goto_label",
+            "_branch_label": "_then70",
+            "operationIdx": 10
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else72",
+            "_row_num": 72,
+            "operationIdx": 11
+          },
+          {
+            "_row_num": 71,
+            "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 12
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif72",
+            "_row_num": 72,
+            "operationIdx": 13
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 73,
+            "operationIdx": 14
+          },
+          {
+            "_row_num": 73,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 8
+            "operationIdx": 15
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 68,
-            "operationIdx": 9
+            "_row_num": 73,
+            "operationIdx": 16
           }
         ],
         "branch_label_map": {
@@ -1662,9 +1813,16 @@
           "_screen9": 3,
           "_screen39": 4,
           "_screen61": 5,
-          "_screen67": 6,
-          "_contents": 8,
-          "_screen68": 8
+          "_then67": 8,
+          "_screen68": 8,
+          "_else69": 10,
+          "_endif69": 10,
+          "_then70": 12,
+          "_screen71": 12,
+          "_else72": 14,
+          "_endif72": 14,
+          "_contents": 15,
+          "_screen73": 15
         }
       },
       "initial": {

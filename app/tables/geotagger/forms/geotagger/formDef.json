@@ -2,103 +2,66 @@
   "xlsx": {
     "survey": [
       {
-        "type": "bargraph",
-        "values_list": "graph_csv",
+        "type": "datetime",
+        "name": "Date_and_Time",
         "display": {
-          "text": "Bar Graph"
+          "text": "Date and Time",
+          "hint": "The date and time of this observation"
         },
+        "required": "true",
         "_row_num": 2
       },
       {
-        "type": "linegraph",
-        "values_list": "linegraph_csv",
+        "type": "string",
+        "name": "Description",
         "display": {
-          "text": "Line Graph"
+          "text": "Description",
+          "hint": "A brief description of this location"
         },
+        "required": "true",
         "_row_num": 3
       },
       {
-        "type": "piechart",
-        "values_list": "piechart_csv",
+        "type": "image",
+        "name": "Image",
         "display": {
-          "text": "PieChart"
+          "text": "Image",
+          "hint": "Take an image of this location"
         },
         "_row_num": 4
       },
       {
-        "type": "scatterplot",
-        "values_list": "scatterplot_csv",
+        "type": "geopoint",
+        "name": "Location",
         "display": {
-          "text": "Scatterplot"
+          "text": "Location",
+          "hint": "Capture the GPS coordinates of this location"
         },
+        "buttonLabel": "Record Location",
         "_row_num": 5
-      }
-    ],
-    "queries": [
-      {
-        "query_name": "regions_csv",
-        "query_type": "csv",
-        "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
-        "_row_num": 2
-      },
-      {
-        "query_name": "countries_csv",
-        "query_type": "csv",
-        "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
-        "_row_num": 3
-      },
-      {
-        "query_name": "graph_csv",
-        "query_type": "csv",
-        "uri": "\"graph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 4
-      },
-      {
-        "query_name": "linegraph_csv",
-        "query_type": "csv",
-        "uri": "\"linegraph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 5
-      },
-      {
-        "query_name": "piechart_csv",
-        "query_type": "csv",
-        "uri": "\"piechart.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 6
-      },
-      {
-        "query_name": "scatterplot_csv",
-        "query_type": "csv",
-        "uri": "\"scatterplot.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 7
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "graphExample",
+        "value": "geotagger",
         "_row_num": 2
       },
       {
         "setting_name": "form_version",
-        "value": 20130408,
+        "value": 20140514,
         "_row_num": 3
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": "Geotagger"
         },
         "_row_num": 4
       },
       {
-        "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "setting_name": "table_id",
+        "value": "geotagger",
         "_row_num": 5
       }
     ]
@@ -124,31 +87,25 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "graphExample",
+        "value": "geotagger",
         "_row_num": 2
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20130408,
+        "value": 20140514,
         "_row_num": 3
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": "Geotagger"
         },
         "_row_num": 4
       },
-      "disableSwipeNavigation": {
-        "setting_name": "disableSwipeNavigation",
-        "value": true,
-        "_row_num": 5
-      },
       "table_id": {
         "setting_name": "table_id",
-        "value": "graphExample",
-        "_row_num": 2,
-        "__rowNum__": 1
+        "value": "geotagger",
+        "_row_num": 5
       },
       "_locales": {
         "setting_name": "_locales",
@@ -170,58 +127,89 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": "Geotagger"
         },
         "_row_num": 4
       }
     },
     "choices": {},
-    "queries": {
-      "regions_csv": {
-        "query_name": "regions_csv",
-        "query_type": "csv",
-        "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
-        "_row_num": 2
+    "queries": {},
+    "calculates": {},
+    "model": {
+      "Date_and_Time": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "dateTime",
+        "elementKey": "Date_and_Time"
       },
-      "countries_csv": {
-        "query_name": "countries_csv",
-        "query_type": "csv",
-        "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
-        "_row_num": 3
+      "Description": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Description"
       },
-      "graph_csv": {
-        "query_name": "graph_csv",
-        "query_type": "csv",
-        "uri": "\"graph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 4
+      "Image": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "isUnitOfRetention": true,
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementKey": "Image_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "Image_contentType"
+          }
+        },
+        "elementKey": "Image"
       },
-      "linegraph_csv": {
-        "query_name": "linegraph_csv",
-        "query_type": "csv",
-        "uri": "\"linegraph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 5
-      },
-      "piechart_csv": {
-        "query_name": "piechart_csv",
-        "query_type": "csv",
-        "uri": "\"piechart.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 6
-      },
-      "scatterplot_csv": {
-        "query_name": "scatterplot_csv",
-        "query_type": "csv",
-        "uri": "\"scatterplot.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 7
+      "Location": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "Location_latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "Location_longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "Location_altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "Location_accuracy"
+          }
+        },
+        "elementKey": "Location"
       }
     },
-    "calculates": {},
-    "model": {},
     "section_names": [
       "initial",
       "survey"
@@ -233,54 +221,61 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "bargraph",
-            "values_list": "graph_csv",
+            "type": "datetime",
+            "name": "Date_and_Time",
             "display": {
-              "text": "Bar Graph"
+              "text": "Date and Time",
+              "hint": "The date and time of this observation"
             },
+            "required": "true",
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "bargraph",
+            "_type": "datetime",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
-            "type": "linegraph",
-            "values_list": "linegraph_csv",
+            "type": "string",
+            "name": "Description",
             "display": {
-              "text": "Line Graph"
+              "text": "Description",
+              "hint": "A brief description of this location"
             },
+            "required": "true",
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
-            "_type": "linegraph",
+            "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 1
           },
           {
-            "type": "piechart",
-            "values_list": "piechart_csv",
+            "type": "image",
+            "name": "Image",
             "display": {
-              "text": "PieChart"
+              "text": "Image",
+              "hint": "Take an image of this location"
             },
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
-            "_type": "piechart",
+            "_type": "image",
             "_branch_label_enclosing_screen": "survey/_screen4",
             "promptIdx": 2
           },
           {
-            "type": "scatterplot",
-            "values_list": "scatterplot_csv",
+            "type": "geopoint",
+            "name": "Location",
             "display": {
-              "text": "Scatterplot"
+              "text": "Location",
+              "hint": "Capture the GPS coordinates of this location"
             },
+            "buttonLabel": "Record Location",
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
-            "_type": "scatterplot",
+            "_type": "geopoint",
             "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 3
           },
@@ -294,7 +289,10 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            0,
+            1
+          ]
         },
         "operations": [
           {
@@ -380,7 +378,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Graph Examples"
+              "title": "Geotagger"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },

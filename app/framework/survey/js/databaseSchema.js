@@ -685,38 +685,6 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _table_id: protoMdl.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
-                _key: "smsIn",
-                _type: "boolean",
-                _value: true
-            } );
-            fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
-                _partition: "Column",
-                _aspect: dbColumnName,
-                _key: "smsOut",
-                _type: "boolean",
-                _value: true
-            } );
-            fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
-                _partition: "Column",
-                _aspect: dbColumnName,
-                _key: "smsLabel",
-                _type: "string",
-                _value: ""
-            } );
-            fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
-                _partition: "Column",
-                _aspect: dbColumnName,
-                _key: "footerMode",
-                _type: "string",
-                _value: 'none'
-            } );
-            fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
-                _partition: "Column",
-                _aspect: dbColumnName,
                 _key: "joins",
                 _type: "object",
                 _value: ""
@@ -733,16 +701,13 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
         _transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'tableType', _type: 'string', _value: 'data' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'accessControlTableId', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'object', _value: JSON.stringify(formTitle) } );
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'object', _value: JSON.stringify(displayColumnOrder) } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'primeCols', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'defaultViewType', _type: 'string', _value: 'SPREADSHEET' } );
+    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'object', _value: JSON.stringify(formTitle) } );
+    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'groupByCols', _type: 'object', _value: '[]' } );
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'indexCol', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'currentViewType', _type: 'string', _value: 'Spreadsheet' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'summaryDisplayFormat', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'currentQuery', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortOrder', _type: 'string', _value: '' } );
 
     protoMdl.dataTableModel = dataTableModel;
     return fullDef;

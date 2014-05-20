@@ -70,7 +70,8 @@ module.exports = function (grunt) {
         outputDebugDir: 'output/debug',
         // The db path on the phone. %APP% should be replaced by app name
         deviceDbPath: '/sdcard/opendatakit/%APP%/metadata/webDb/' +
-            'http_localhost_8635/0000000000000001.db'
+            'http_localhost_8635/0000000000000001.db',
+        xlsxDir: 'xlsxconverter'
         
     };
 
@@ -393,6 +394,23 @@ module.exports = function (grunt) {
                 //  Have to add app back into the file name for the adb push
                 var src = surveyConfig.xlsxDir + '/' + fileName;
                 var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    tablesConfig.xlsxDir +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+
+            });
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.xlsxDir + '/' + fileName;
+                var dest =
                     surveyConfig.deviceMount +
                     '/' +
                     surveyConfig.appName +
@@ -426,6 +444,46 @@ module.exports = function (grunt) {
                 '!framework/tables/**',
                 '!tables/**',
                 'tables/exampleForm/**',
+                'tables/household/**',
+                'tables/household_member/**',
+                'tables/selects/**',
+                'tables/gridScreen/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.appDir + '/' + fileName;
+                var dest =
+                    surveyConfig.deviceMount +
+                    '/' +
+                    surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+    grunt.registerTask(
+        'adbpush-survey-demo-bmg05152014',
+        'Push everything for survey demo to the device',
+        function() {
+            // In the demo we only want Survey, so we do NOT need all the tables
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!framework/tables/**',
+                '!tables/**',
                 'tables/household/**',
                 'tables/household_member/**',
                 'tables/selects/**',

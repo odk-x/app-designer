@@ -155,6 +155,7 @@
         "display": {
           "text": "Capture the household location."
         },
+        "buttonLabel": "Record Location",
         "_row_num": 6
       }
     ],
@@ -646,6 +647,7 @@
             "display": {
               "text": "Capture the household location."
             },
+            "buttonLabel": "Record Location",
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
