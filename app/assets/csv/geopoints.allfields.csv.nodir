@@ -1,0 +1,3 @@
+_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,client_id,coordinates_accuracy,coordinates_altitude,coordinates_latitude,coordinates_longitude,description,step,transportation_mode,transportation_mode_other,_row_etag,_filter_type,_filter_value
+uuid:06a1d40f-8339-4962-a804-e8507dc60fd4,geopoints,default,COMPLETE,2014-05-22T20:28:07.604000000,null,11111,23.072999954223633,0.0,47.6535939,-122.3056717,Office,1,Walk,"","","",""
+uuid:8ba5d1b5-a561-49a9-b753-002a63b95863,geopoints,default,COMPLETE,2014-05-22T20:30:27.387000000,null,11111,21.89800071716309,0.0,47.6535677,-122.3056343,Sidewalk,2,Tuk-tuk,"","","",""
