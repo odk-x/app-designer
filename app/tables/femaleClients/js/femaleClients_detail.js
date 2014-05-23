@@ -91,16 +91,18 @@ function display() {
     });
     fContainer.appendChild(homeLocator);
 
+    var rowId = data.getRowId(0);
+    console.log('rowId: ' + rowId);
     createFormLauncherForEdit(
             'femaleClients',
             'client6Week',
-            clientId,
+            rowId,
             'Six Week Follow-Up',
             fContainer);
     createFormLauncherForEdit(
             'femaleClients',
             'client6Month',
-            clientId,
+            rowId,
             'Six Month Follow-Up',
             fContainer);
 
@@ -127,6 +129,8 @@ function display() {
             mapMaleId,
             'Partner Screening',
             mContainer);
+    // TODO: this should be passing the rowId of the entry in the client table,
+    // as filtered by the clientId.
     createFormLauncherForEdit(
             'maleClients',
             'partner6Month',
