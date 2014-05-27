@@ -352,13 +352,15 @@ promptTypes.opening = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
-        that.renderContext.last_save_date = opendatakit.convertNanosToDateTime(lastSave);
+        var ts = that.renderContext.last_save_date = opendatakit.convertNanosToDateTime(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName != null ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
         } else {
-            that.renderContext.display_field = null;
+            // Now we are always going to display instance id
+            // unless this decision changes ...
+            that.renderContext.display_field = ts.toISOString();
         }
         if ( that._screen && that._screen._renderContext ) {
             that._screen._renderContext.enableBackNavigation = false;
@@ -394,12 +396,16 @@ promptTypes.finalize = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
+        var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
+        var ts = opendatakit.convertNanosToDateTime(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName != null ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
         } else {
-            that.renderContext.display_field = null;
+            // Now we are always going to display instance id
+            // unless this decision changes ...
+            that.renderContext.display_field = ts.toISOString();
         }
         if ( that._screen && that._screen._renderContext ) {
             that._screen._renderContext.enableForwardNavigation = false;

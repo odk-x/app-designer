@@ -44,3 +44,7 @@
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label {
     font-size: 1em;
 }
+
+.instanceFormDivider {
+	background: #ffffff;
+}

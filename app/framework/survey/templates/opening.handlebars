@@ -1,9 +1,31 @@
 <div>
-    <center>
-        <img src="{{ headerImg }}" class="odk-formlogo" />
-        <p>You are at the start of:</p>
-        <p>"{{localize form_title}}".</p>
-        <!-- 
+    <div>
+        <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
+        <hr class="logoDivider">
+    </div>
+
+    <table class="instanceForm">
+        <tr>
+            <td class="instanceFormHeading">
+                <p>ODK Survey</p>
+                <p>Form</p>
+            </td>
+            <td class="instanceFormDivider"><BR></td>
+            <td class="instanceFormData">
+                <p>{{localize form_title}}</p>
+                <p>{{#if form_version}}{{form_version}}{{/if}}</p>
+            </td>
+        </tr>
+    </table>
+
+    <div class="instanceClearDiv"></div>
+
+    <div>
+        <hr>
+        <p>You are at the start of Instance: </p>
+        <p>"{{display_field}}"</p> 
+        <hr>
+        <!--
         <p>Swipe the screen as shown below to begin.</p>
         <div>
             <span style="width:0;float:left;">
@@ -16,6 +38,18 @@
             </span>
         </div>
         -->
-		<p>{{#if display_field}}Instance: {{display_field}}{{else}}{{#if last_save_date}}Time of last save: {{last_save_date}}{{/if}}{{/if}}</p>
-    </center>
+        {{#if last_save_date}}
+            <p>Last saved:</p> 
+            <p>{{last_save_date}}</p>
+        {{/if}}
+        <hr>
+        <fieldset class="openingNew ui-grid-a">
+            <div class="ui-block-a">
+                <p>Go to next prompt</p>
+            </div>
+            <div class="openingNew ui-block-b">
+                <button class="odk-next-btn" data-role="button" data-icon="carat-r" data-iconpos="top"></a>               
+            </div>
+        </fieldset>
+    </div>
 </div>
