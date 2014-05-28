@@ -1,7 +1,7 @@
 /* CSS Stylesheet - Homescreen*/
 
 #wrapper { 
-    overflow: scroll;
+    overflow: auto;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -11,7 +11,6 @@
 body {
     font-family: arial;
     margin: 0;
-
 }
 
 div { 
@@ -33,6 +32,10 @@ button {
     text-align: left;
     padding: 15px;
     color: #5C5C5C;
+}
+
+button:active {
+    background-color: lightskyblue;
 }
 
 #button1 {

@@ -38,6 +38,10 @@ p {
     padding: 2px;
 }
 
+.forms:active {
+    background-color: lightskyblue;
+}
+
 .heading {
     font-size: 20pt;
     max-width: 500px;
