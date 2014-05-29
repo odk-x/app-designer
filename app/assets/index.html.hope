@@ -1,7 +1,7 @@
 <!--Menu-->
 <html>
     <head>
-        <link href="css/homescreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/hope-homescreen.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
         <script type="text/javascript" src="../framework/tables/js/control.js"></script>
         <script type="text/javascript">
@@ -14,11 +14,10 @@
             newClient.setAttribute("id", "button1");
             newClient.innerHTML = "Screen Female Client";
             newClient.onclick = function() {
-                control.addRowWithCollect(
+                control.addRowWithSurvey(
                     'femaleClients',
                     'screenClient',
                     null,
-                    'screenClient',
                     null);
             }
             document.getElementById("wrapper").appendChild(newClient);    
@@ -43,8 +42,8 @@
             sendData.setAttribute("id", "button3");
             sendData.innerHTML = "Send Data";
             sendData.onclick = function() {
-                // requires a custom Tables
-                control.sendData();
+              // nothing for now
+              console.log("not plugged in, but should launch sync");
             }
             document.getElementById("wrapper").appendChild(sendData);    
         }
