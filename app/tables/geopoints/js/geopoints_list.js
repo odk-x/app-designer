@@ -45,7 +45,6 @@ function display() {
     var mapView = document.createElement('p');
     mapView.setAttribute('class', 'launchForm');
     mapView.innerHTML = 'Map View';
-    mapView.style.backgroundColor = '#66A3C2';
     mapView.onclick = function() {
         control.openTableToMapView(
                 'geopoints',
