@@ -1,27 +1,23 @@
 <div>
     <div>
         <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
-        <hr class="logoDivider">
+        <hr>
     </div>
 
-    <table class="instanceForm">
-        <tr>
-            <td class="instanceFormHeading">
-                <p>ODK Survey</p>
-                <p>Form</p>
-            </td>
-            <td class="instanceFormDivider"><BR></td>
-            <td class="instanceFormData">
-                <p>{{localize form_title}}</p>
-                <p>{{#if form_version}}{{form_version}}{{/if}}</p>
-            </td>
-        </tr>
-    </table>
+    <div>
+        <center><p>ODK SURVEY</p></center>
+        <hr>
+    </div>
+
+    <div>
+        <p>Form Name: {{localize form_title}}</p>
+        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
+        <hr>
+    </div>
 
     <div class="instanceClearDiv"></div>
 
     <div>
-        <hr>
         <p>You are at the start of Instance: </p>
         <p>"{{display_field}}"</p> 
         <hr>
@@ -47,8 +43,10 @@
             <div class="ui-block-a">
                 <p>Go to next prompt</p>
             </div>
-            <div class="openingNew ui-block-b">
-                <button class="odk-next-btn" data-role="button" data-icon="carat-r" data-iconpos="top"></a>               
+            <div class="ui-block-b">
+                <div class="openingRowControl" data-role="controlgroup" data-type="horizontal">
+                    <button class="odk-next-btn" data-role="button" data-icon="carat-r" data-inline="true" data-iconpos="notext"></button>
+                </div>
             </div>
         </fieldset>
     </div>

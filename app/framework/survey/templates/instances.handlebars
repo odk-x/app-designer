@@ -1,32 +1,30 @@
 <div>
     <div>
         <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
-        <hr class="logoDivider">
+        <hr>
     </div>
 
-    <table class="instanceForm">
-        <tr>
-            <td class="instanceFormHeading">
-                <p>ODK Survey</p>
-                <p>Form</p>
-            </td>
-            <td class="instanceFormDivider"><BR></td>
-            <td class="instanceFormData">
-                <p>{{localize form_title}}</p>
-                <p>{{#if form_version}}{{form_version}}{{/if}}</p>
-            </td>
-        </tr>
-    </table>
+    <div>
+        <center><p>ODK SURVEY</center>
+        <hr>
+    </div>
+
+    <div>
+        <p>Form Name: {{localize form_title}}</p>
+        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
+        <hr>
+    </div>
 
     <div class="instanceClearDiv"></div>
     <div>
-        <hr>
         <fieldset class="instanceNew ui-grid-a">
             <div class="ui-block-a">
-                <p>New</p>
+                <p>Create new instance</p>
             </div>
-            <div class="instanceNew ui-block-b">
-                <button class="createInstance" data-role="button" data-icon="plus" data-iconpos="top"></button>
+            <div class="ui-block-b">
+                <div class="instanceRowControl" data-role="controlgroup" data-type="horizontal">
+                    <button class="createInstance" data-role="button" data-icon="plus" data-inline="true" data-iconpos="notext"></button>
+                </div>
             </div>
         </fieldset>
         <hr>

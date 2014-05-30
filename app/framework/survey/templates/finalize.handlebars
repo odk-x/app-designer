@@ -1,29 +1,25 @@
 <div>
     <div>
         <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
-        <hr class="logoDivider">
+        <hr>
     </div>
 
-    <table class="instanceForm">
-        <tr>
-            <td class="instanceFormHeading">
-                <p>ODK Survey</p>
-                <p>Form</p>
-            </td>
-            <td class="instanceFormDivider"><BR></td>
-            <td class="instanceFormData">
-                <p>{{localize form_title}}</p>
-                <p>{{#if form_version}}{{form_version}}{{/if}}</p>
-            </td>
-        </tr>
-    </table>
+    <div>
+        <center><p>ODK SURVEY</p></center>
+        <hr>
+    </div>
+
+    <div>
+        <p>Form Name: {{localize form_title}}</p>
+        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
+        <hr>
+    </div>
 
     <div class="instanceClearDiv"></div>
+        <p>You are at the end of instance: 
+        <p>"{{display_field}}"</p>
+        <hr>
         <center>
-            <hr>
-            <p>You are at the end of instance: 
-            <p>"{{display_field}}"</p>
-            <hr>
             <fieldset class="finalizeButtons ui-grid-a">
                 <div class="ui-block-a">
                     <button class="finalize">Finalize</button>

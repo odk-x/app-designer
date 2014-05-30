@@ -188,6 +188,10 @@ It may be best to set the view-port scale instead of messing with the jQm styles
   float: right;
 }
 
+.openingRowControl{
+  float: right;
+}
+
 .instanceList.layout-zebra li:nth-child(even) {
   background: #f5f5f5;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
@@ -200,33 +204,6 @@ It may be best to set the view-port scale instead of messing with the jQm styles
 
 .instanceNew.ui-grid-a .ui-block-a { width: 73%; }
 .instanceNew.ui-grid-a .ui-block-b { width: 23%; }
-
-.logoDivider {
-  width: 75%;
-}
-
-.instanceForm {
-  border: 0px;
-  border-spacing: 0;
-  padding: 0px;
-  width: 95%;
-}
-
-.instanceFormHeading {
-  text-align: left;
-
-}
-
-.instanceFormDivider {
-  width: 1px;
-  background: #000000;
-  padding: 0px;
-}
-
-.instanceFormData {
-  text-align: right;
-  width: 50%;
-}
 
 .instanceClearDiv {
   clear: both;
