@@ -157,7 +157,7 @@ Eventually we should make a jqm theme for this.
 }
 
 .odk-formlogo {
-    width: 50%;
+    width: 100%;
 }
 .odk-label-image {
     width: 100%;
@@ -188,6 +188,10 @@ It may be best to set the view-port scale instead of messing with the jQm styles
   float: right;
 }
 
+.openingRowControl{
+  float: right;
+}
+
 .instanceList.layout-zebra li:nth-child(even) {
   background: #f5f5f5;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
@@ -195,5 +199,18 @@ It may be best to set the view-port scale instead of messing with the jQm styles
   box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
 }
 
-.instanceListGrid.ui-grid-a .ui-block-a { width: 59.95%; }
-.instanceListGrid.ui-grid-a .ui-block-b { width: 39.95%; }
+.instanceListGrid.ui-grid-a .ui-block-a { width: 59%; }
+.instanceListGrid.ui-grid-a .ui-block-b { width: 39%; }
+
+.instanceNew.ui-grid-a .ui-block-a { width: 73%; }
+.instanceNew.ui-grid-a .ui-block-b { width: 23%; }
+
+.instanceClearDiv {
+  clear: both;
+}
+
+.openingNew.ui-grid-a .ui-block-a { width: 73%; }
+.openingNew.ui-grid-a .ui-block-b { width: 23%; }
+
+.finalizeButtons.ui-grid-a .ui-block-a { width: 50%; }
+.finalizeButtons.ui-grid-a .ui-block-b { width: 50%; }
