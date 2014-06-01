@@ -18,15 +18,15 @@ function display() {
         updateForTab(currentTab);
     });
 
-    $('#appImage').on(
+    $('#all-screen').on(
             'click',
             function() {
                 if (currentTab === 0) {
-                    alert('time for tea!');
+                    control.launchHTML('assets/teatime.html');
                 } else if (currentTab === 1) {
-                    alert('hope!');
+                    control.launchHTML('assets/hope.html');
                 } else if (currentTab === 2) {
-                    alert('I am plotting something');
+                    control.launchHTML('assets/plotter.html');
                 } else {
                     console.log('trouble, unrecognized tab');
                 }
@@ -54,7 +54,8 @@ function updateForTab(tab) {
     } else {
         console.log('unrecognized tab index: ' + tab);
     }
-    $('#appImage').attr('src', fileUri);
+    //$('#appImage').attr('src', fileUri);
+    $('body').css('background-image', 'url(' + fileUri + ')');
     // Make the tab highlighted as active.
     tabItem.addClass('active');
 }
