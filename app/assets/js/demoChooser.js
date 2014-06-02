@@ -17,6 +17,10 @@ function display() {
         currentTab = 2;
         updateForTab(currentTab);
     });
+    $('#geotaggerTab').on('click', function() {
+        currentTab = 3;
+        updateForTab(currentTab);
+    });
 
     $('#all-screen').on(
             'click',
@@ -27,6 +31,13 @@ function display() {
                     control.launchHTML('assets/hope.html');
                 } else if (currentTab === 2) {
                     control.launchHTML('assets/plotter.html');
+                } else if (currentTab === 3) {
+                    // Note we're relying on geotagger's list view to be set.
+                    control.openTableToListView(
+                        'geotagger',
+                        null,
+                        null,
+                        null);
                 } else {
                     console.log('trouble, unrecognized tab');
                 }
@@ -49,6 +60,10 @@ function updateForTab(tab) {
         fileUri = control.getFileAsUrl(
                 'assets/img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg');
         tabItem = $('#plotterTab');
+    } else if (tab === 3) {
+        fileUri = control.getFileAsUrl(
+                'assets/img/spaceNeedle_CCLicense_goCardUSA.jpg');
+        tabItem = $('#geotaggerTab');
     } else {
         console.log('unrecognized tab index: ' + tab);
     }
