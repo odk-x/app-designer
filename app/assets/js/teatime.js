@@ -15,7 +15,11 @@ function display() {
     viewHousesButton.on(
         'click',
         function() {
-            control.openTable('Tea_houses', null, null);
+            control.openTableToListView(
+                'Tea_houses',
+                null,
+                null,
+                'tables/Tea_houses/html/Tea_houses_list.html');
         }
     );
     $('#wrapper').append(viewHousesButton);
@@ -25,7 +29,11 @@ function display() {
     viewTeasButton.on(
         'click',
         function() {
-            control.openTable('Tea_inventory', null, null);
+            control.openTableToListView(
+                'Tea_inventory',
+                null,
+                null,
+                'tables/Tea_inventory/html/Tea_inventory_list.html');
         }
     );
     $('#wrapper').append(viewTeasButton);
@@ -35,7 +43,11 @@ function display() {
     viewTeaTypesButton.on(
         'click',
         function() {
-            control.openTable('Tea_types', null, null);
+            control.openTableToListView(
+                'Tea_types',
+                null,
+                null,
+                'tables/Tea_types/html/Tea_types_list.html');
         }
     );
     $('#wrapper').append(viewTeaTypesButton);
