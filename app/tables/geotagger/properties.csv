@@ -50,9 +50,11 @@ Column,Location_longitude,displayName,string,"""Location Longitude"""
 Column,Location_longitude,displayVisible,boolean,TRUE
 Column,Location_longitude,joins,object,""
 DetailDisplayActivity,default,filename,string,tables/geotagger/html/geo_detail.html
+FormType,default,FormType.formType,string,SURVEY
 ListDisplayActivity,default,nameOfListView,string,List View 0
 ListDisplayActivity.views,List Thumbnail,filename,string,tables/geotagger/html/geo_list_thumbnail.html
 ListDisplayActivity.views,List View 0,filename,string,tables/geotagger/html/geo_list.html
+SurveyUtil,default,SurveyUtil.formId,string,geotagger
 Table,default,_transactioning,integer,0
 Table,default,colOrder,string,"[""Description"",""Image"",""Location_latitude"",""Location_longitude"",""Date_and_Time""]"
 Table,default,defaultViewType,string,MAP
