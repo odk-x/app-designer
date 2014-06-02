@@ -21,6 +21,10 @@ function display() {
         currentTab = 3;
         updateForTab(currentTab);
     });
+    $('#scanTab').on('click', function() {
+        currentTab = 4;
+        updateForTab(currentTab);
+    });
 
     $('#all-screen').on(
             'click',
@@ -33,9 +37,13 @@ function display() {
                     control.launchHTML('assets/plotter.html');
                 } else if (currentTab === 3) {
                     // Note we're relying on geotagger's list view to be set.
-                    control.openTableToListView(
+                    control.openTable(
                         'geotagger',
                         null,
+                        null);
+                } else if (currentTab === 4) {
+                    control.openTable(
+                        'scan_example',
                         null,
                         null);
                 } else {
@@ -64,6 +72,10 @@ function updateForTab(tab) {
         fileUri = control.getFileAsUrl(
                 'assets/img/spaceNeedle_CCLicense_goCardUSA.jpg');
         tabItem = $('#geotaggerTab');
+    } else if (tab === 4) {
+        fileUri = control.getFileAsUrl(
+                'assets/img/odkScanPic.jpg');
+        tabItem = $('#scanTab');
     } else {
         console.log('unrecognized tab index: ' + tab);
     }
