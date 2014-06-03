@@ -217,44 +217,11 @@
       },
       {
         "type": "note",
-        "name": "ineligible_list",
-        "display": {
-          "text": "Client is INELIGIBLE for the following reasons:",
-          "hint": "If client is eligible for study, review previous questions and responses"
-        },
-        "_row_num": 27
-      },
-      {
-        "type": "note",
-        "name": "list_curr_rel",
-        "display": {
-          "text": "- ${_ineligible_curr_relationship}"
-        },
-        "_row_num": 28
-      },
-      {
-        "type": "note",
-        "name": "list_partner_age",
-        "display": {
-          "text": "- ${_ineligible_partner_age}"
-        },
-        "_row_num": 29
-      },
-      {
-        "type": "note",
-        "name": "list_clinic_prox",
-        "display": {
-          "text": "- ${_ineligible_clinic_proximity}"
-        },
-        "_row_num": 30
-      },
-      {
-        "type": "note",
         "name": "ineligible_statement",
         "display": {
           "text": "Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at this clinic. Can I answer any questions you may have?"
         },
-        "_row_num": 31
+        "_row_num": 27
       },
       {
         "type": "note",
@@ -263,7 +230,7 @@
           "text": "Client is ELIGIBLE",
           "hint": "If client is NOT eligible for study, review previous questions and responses."
         },
-        "_row_num": 32
+        "_row_num": 28
       },
       {
         "type": "select_one",
@@ -273,7 +240,7 @@
           "text": "Say: Thank you for your time in answering these questions. Based on the answers you gave, you are eligible to be a part of the study. Would you like to participate in the study?",
           "hint": "Read consent form with participant and go through written consent process."
         },
-        "_row_num": 33
+        "_row_num": 29
       },
       {
         "type": "integer",
@@ -283,7 +250,7 @@
           "hint": "5 Digit ID, cannot include 0. \nex: 12345"
         },
         "required": "true",
-        "_row_num": 34
+        "_row_num": 30
       },
       {
         "type": "select_one",
@@ -293,7 +260,7 @@
           "text": "Open Randomization Envelope. What is the client’s randomization arm?"
         },
         "required": "true",
-        "_row_num": 35
+        "_row_num": 31
       },
       {
         "type": "select_multiple",
@@ -302,7 +269,7 @@
         "display": {
           "text": "I understand you do not want to participate in this study. Could you let me know why you would not like to participate? Check all that apply:"
         },
-        "_row_num": 36
+        "_row_num": 32
       },
       {
         "type": "text",
@@ -310,7 +277,7 @@
         "display": {
           "text": "Specify other reason."
         },
-        "_row_num": 37
+        "_row_num": 33
       },
       {
         "type": "note",
@@ -318,7 +285,7 @@
         "display": {
           "text": "Say: Thank you for letting me know why you do not want to participate. It is important for us to know why women may feel this way. This will in no way affect the care that you, your children, or your partner will receive at the clinic."
         },
-        "_row_num": 38
+        "_row_num": 34
       },
       {
         "type": "note",
@@ -326,7 +293,7 @@
         "display": {
           "text": "The screening is now complete, please go to the next page to finalize your responses."
         },
-        "_row_num": 40
+        "_row_num": 36
       }
     ],
     "choices": [
@@ -2030,7 +1997,7 @@
       "client_consent": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -2040,7 +2007,7 @@
       "client_id": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -2050,7 +2017,7 @@
       "randomization": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -2060,7 +2027,7 @@
       "refusal_reasons": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
@@ -2075,7 +2042,7 @@
       "refusal_reasons_other": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -2416,10 +2383,9 @@
           },
           {
             "type": "note",
-            "name": "ineligible_list",
+            "name": "ineligible_statement",
             "display": {
-              "text": "Client is INELIGIBLE for the following reasons:",
-              "hint": "If client is eligible for study, review previous questions and responses"
+              "text": "Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at this clinic. Can I answer any questions you may have?"
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -2430,9 +2396,10 @@
           },
           {
             "type": "note",
-            "name": "list_curr_rel",
+            "name": "client_eligible",
             "display": {
-              "text": "- ${_ineligible_curr_relationship}"
+              "text": "Client is ELIGIBLE",
+              "hint": "If client is NOT eligible for study, review previous questions and responses."
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -2442,59 +2409,6 @@
             "promptIdx": 24
           },
           {
-            "type": "note",
-            "name": "list_partner_age",
-            "display": {
-              "text": "- ${_ineligible_partner_age}"
-            },
-            "_row_num": 29,
-            "__rowNum__": 28,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 25
-          },
-          {
-            "type": "note",
-            "name": "list_clinic_prox",
-            "display": {
-              "text": "- ${_ineligible_clinic_proximity}"
-            },
-            "_row_num": 30,
-            "__rowNum__": 29,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 26
-          },
-          {
-            "type": "note",
-            "name": "ineligible_statement",
-            "display": {
-              "text": "Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at this clinic. Can I answer any questions you may have?"
-            },
-            "_row_num": 31,
-            "__rowNum__": 30,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 27
-          },
-          {
-            "type": "note",
-            "name": "client_eligible",
-            "display": {
-              "text": "Client is ELIGIBLE",
-              "hint": "If client is NOT eligible for study, review previous questions and responses."
-            },
-            "_row_num": 32,
-            "__rowNum__": 31,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen32",
-            "promptIdx": 28
-          },
-          {
             "type": "select_one",
             "values_list": "study_participation",
             "name": "client_consent",
@@ -2502,12 +2416,12 @@
               "text": "Say: Thank you for your time in answering these questions. Based on the answers you gave, you are eligible to be a part of the study. Would you like to participate in the study?",
               "hint": "Read consent form with participant and go through written consent process."
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 29
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 25
           },
           {
             "type": "integer",
@@ -2517,12 +2431,12 @@
               "hint": "5 Digit ID, cannot include 0. \nex: 12345"
             },
             "required": "true",
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen34",
-            "promptIdx": 30
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 26
           },
           {
             "type": "select_one",
@@ -2532,12 +2446,12 @@
               "text": "Open Randomization Envelope. What is the client’s randomization arm?"
             },
             "required": "true",
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen35",
-            "promptIdx": 31
+            "_branch_label_enclosing_screen": "survey/_screen31",
+            "promptIdx": 27
           },
           {
             "type": "select_multiple",
@@ -2546,12 +2460,12 @@
             "display": {
               "text": "I understand you do not want to participate in this study. Could you let me know why you would not like to participate? Check all that apply:"
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 32
+            "_branch_label_enclosing_screen": "survey/_screen32",
+            "promptIdx": 28
           },
           {
             "type": "text",
@@ -2559,12 +2473,12 @@
             "display": {
               "text": "Specify other reason."
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen37",
-            "promptIdx": 33
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 29
           },
           {
             "type": "note",
@@ -2572,12 +2486,12 @@
             "display": {
               "text": "Say: Thank you for letting me know why you do not want to participate. It is important for us to know why women may feel this way. This will in no way affect the care that you, your children, or your partner will receive at the clinic."
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen38",
-            "promptIdx": 34
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 30
           },
           {
             "type": "note",
@@ -2585,20 +2499,20 @@
             "display": {
               "text": "The screening is now complete, please go to the next page to finalize your responses."
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen40",
-            "promptIdx": 35
+            "_branch_label_enclosing_screen": "survey/_screen36",
+            "promptIdx": 31
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 41,
-            "_branch_label_enclosing_screen": "survey/_screen41",
-            "promptIdx": 36
+            "_row_num": 37,
+            "_branch_label_enclosing_screen": "survey/_screen37",
+            "promptIdx": 32
           }
         ],
         "validation_tag_map": {
@@ -2609,8 +2523,8 @@
             16,
             17,
             20,
-            30,
-            31
+            26,
+            27
           ]
         },
         "operations": [
@@ -2773,55 +2687,31 @@
             "operationIdx": 24
           },
           {
-            "_row_num": 35,
+            "_row_num": 36,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 25
           },
           {
-            "_row_num": 36,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(32);\n\nreturn activePromptIndicies;\n}\n",
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 37,
             "operationIdx": 26
           },
           {
             "_row_num": 37,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(33);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 27
-          },
-          {
-            "_row_num": 38,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(34);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 28
-          },
-          {
-            "_row_num": 40,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(35);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 29
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 41,
-            "operationIdx": 30
-          },
-          {
-            "_row_num": 41,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(36);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(32);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 31
+            "operationIdx": 27
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 41,
-            "operationIdx": 32
+            "_row_num": 37,
+            "operationIdx": 28
           }
         ],
         "branch_label_map": {
@@ -2850,13 +2740,9 @@
           "_screen32": 22,
           "_screen33": 23,
           "_screen34": 24,
-          "_screen35": 25,
-          "_screen36": 26,
-          "_screen37": 27,
-          "_screen38": 28,
-          "_screen40": 29,
-          "_contents": 31,
-          "_screen41": 31
+          "_screen36": 25,
+          "_contents": 27,
+          "_screen37": 27
         }
       },
       "initial": {
