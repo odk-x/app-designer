@@ -1359,7 +1359,7 @@ promptTypes.input_type = promptTypes.base.extend({
     type: "input_type",
     templatePath: "templates/input_type.handlebars",
     inputAttributes: {
-        'placeholder':'not specified'
+        'placeholder':'press here to enter'
     },
     displayed: false,
     modified: false,
@@ -1606,7 +1606,8 @@ promptTypes.date = promptTypes.datetime.extend({
     scrollerAttributes: {
         preset: 'date',
         theme: 'jqm',
-        display: 'modal'
+        display: 'modal',
+        dateOrder: 'ddmmy'
     }
 });
 promptTypes.time = promptTypes.datetime.extend({

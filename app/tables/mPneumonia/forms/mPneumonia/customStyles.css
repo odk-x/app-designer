@@ -1,0 +1,247 @@
+/**
+ * TODO make the sizes relative
+ **/
+
+
+ /******** date widget ***************/
+.dwbw {
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}
+
+
+.dw {
+	background-color:white;
+}
+
+.dwwr {
+	font-size: 20px;
+}
+
+/****************************************/
+
+/************ Instance List ********************/
+.instanceListGrid {
+	font-size: 1.1em !important;
+}
+
+.createInstance {
+	background-color: #FF0000 !important;    /* start button color */
+}
+
+.openInstance {
+	background-color: #00FF00 !important;	/*edit button color */
+	color: #FFFFFF !important;				/*edit button text color */
+}
+
+.deleteInstance {
+	background-color: #FF0000 !important; /*delete button color */
+	color: #FFFFFF !important;				/*edit button text color */
+}
+
+.deleteInstance, .openInstance {
+	font-size: .75em !important; 	/*edit and delete button font size */
+}
+/******************************************/
+
+/********* NavBar ********************/
+.odk-header, .odk-footer {
+	/*background-color: #000000 !important; */    /* sets the navbar background color. uncomment to use */
+}
+
+.odk-options-btn .ui-link, .odk-prev-btn, .odk-next-btn {
+	/*background-color: #000000 !important;/* /* sets the navbar buttons color. uncomment to use */
+	
+	/* Can't seem to figure out the proper pattern of what to set these as. 
+	   For now just use trial and error */
+	height: 30px;
+	padding-top: 20px;
+
+}
+
+/* Launch button Settings. Experiment with these */
+button.launch.ui-btn.ui-shadow.ui-corner-all {
+	height: 70px;
+	font-size: 17px;
+}
+
+
+/*********** Vertical button settings ****************/
+/* changes the width of ALL the vertical select buttons. You have to hard code the width for all of them. 
+	Make sure that the width fits the largest button text you have */
+
+	
+.ui-controlgroup-vertical .ui-radio, .ui-controlgroup-vertical .ui-checkbox {
+	width: 50%;
+}
+
+.odk-options-btn .ui-link, .odk-prev-btn, .odk-next-btn {
+	background-color: #YourColorHere !important;
+}
+/********** BUTTON HEIGHT SETTINGS *****************/
+/* Whenever you change 1 button height setting, make sure to adjust the other ones accordingly */
+
+/* 	changes the height of ALL the select buttons. You have to hard code the height for all of them. 
+	Leave as inherit to have them stay the same. */
+
+.ui-controlgroup-vertical .ui-radio .ui-btn-inner, .ui-controlgroup-vertical .ui-checkbox .ui-btn-inner  {
+	height: 70px;
+}
+/*
+/* Changes the font size inside of the buttons */
+
+.ui-controlgroup-vertical .ui-radio .ui-btn-text, .ui-controlgroup-vertical .ui-checkbox .ui-btn-text {
+    font-size: 24px;
+}
+
+/* changes the location of the text within the button. leave position as absolute. set height equal to the font size.
+	top = (height of the button - font-size) / 2. Leave padding-top as inherit */
+
+
+.ui-controlgroup-vertical .ui-radio .ui-btn-text, .ui-controlgroup-vertical .ui-checkbox .ui-btn-text {
+	position: absolute;
+	height: 24px;
+	top: 23px;
+	padding-top: inherit;
+}
+
+/***********************************************/
+/******* End vertical button settings **********/
+
+
+/******** inline button settings ***************/
+
+/* adjust gap between inline buttons */
+.ui-controlgroup-horizontal .ui-radio {
+	padding-right: 5px;
+}
+
+/******** end inline button settings **********/
+
+
+/********** BUTTON HEIGHT SETTINGS *****************/
+/* Whenever you change 1 button height setting, make sure to adjust the other ones accordingly */
+
+/* 	changes the height of ALL the select inline buttons. You have to hard code the height for all of them. 
+	Leave as inherit to have them stay the same. */
+
+.ui-controlgroup-horizontal .ui-radio .ui-btn-inner, .ui-controlgroup-horizontal .ui-checkbox .ui-btn-inner  {
+	height: 70px;
+}
+
+/* Changes the font size inside of the buttons */
+/* top = (height - font-size) / 2 */
+.ui-controlgroup-horizontal .ui-radio .ui-btn-text, .ui-controlgroup-horizontal .ui-checkbox .ui-btn-text {
+	top: 23px;
+    font-size: 24px;
+}
+
+/***************** End inline settings **********/
+
+
+/* changes the question text */
+.odk-label {
+    font-size: x-large;
+}
+
+/* changes the hint text */
+.odk-hint {
+	font-size: 95%;
+    font-style: italic;
+}
+
+
+/* changes the font size inside the navbar buttons */
+.ui-grid-b .ui-btn-text {
+	font-size : x-large;
+}
+
+/* changes the font size inside the input fields */
+input.ui-input-text {
+	font-size: x-large;
+}
+
+.odk-container, .odk-screen, .ui-page, .ui-li, .ui-page  {
+	color: #000000;
+	background: #ffffff; 
+	text-shadow: 0 /*{d-body-shadow-x}*/ 1px /*{d-body-shadow-y}*/ 0 /*{d-body-shadow-radius}*/ #fff /*{d-body-shadow-color}*/;
+}
+
+.ui-btn-up-d a.ui-link-inherit{
+	color: #000000;
+}
+
+.ui-btn-up-a {
+	background: #ffffff;
+}
+
+.ui-btn-hover-a {
+	background: #FBF2EF;
+}
+
+.ui-header .ui-btn-inner, .ui-footer .ui-btn-inner, .ui-mini .ui-btn-inner {
+    font-size: 1em;
+}
+.ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label {
+    font-size: 1em;
+}
+
+
+
+
+
+.menu{
+	width: 100%;
+}
+.menu-title{
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.5em;
+	border-bottom: 2px solid black;	
+}
+.menu-button{
+	padding: 5px;
+	background-color: #FAFAFA;
+	border-bottom: 1px solid #ABABAB;
+	clear: both;
+}
+
+.menu-button:active{
+	background-color: #CBCBCB;
+}
+
+.clear-div{
+	clear: both;
+}
+.menu-right{
+	float: right;
+	padding: 10px 5px;;
+	text-align: right;
+  font-size: 1.25em;
+  width: 20%;
+}
+.menu-left{
+	padding: 5px 5px;
+	width: 70%;
+	float: left;
+}
+
+.menu-left .menu-text{
+	display: block;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.menu-subtext{
+	display: block;
+	font-style: italic;
+}
+.danger{
+	color: red;
+}
+.warning{
+	color: #FFA500;
+}
+.good{
+	color: green;
+}

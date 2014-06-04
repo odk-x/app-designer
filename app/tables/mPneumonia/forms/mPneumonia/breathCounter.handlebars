@@ -1,0 +1,15 @@
+<div>
+    {{> labelHint}}
+    {{#if value}}
+        <ul data-role="listview" data-inset="true">
+        {{#eachProperty value}}
+            <li style="color:{{localize ../display.color}};">{{property}} : {{value}}</li>
+            <!-- <li >{{property}} : {{value}}</li>  -->
+        {{else}}
+            <li{{#if ../display.color}}style="color:{{../display.color}};"{{/if}}>{{value}}</li> 
+           <!-- <li>{{value}}</li> -->
+        {{/eachProperty}}
+        </ul>
+    {{/if}}
+    <button class="launch">{{localize buttonLabel}}</button>
+<div>
