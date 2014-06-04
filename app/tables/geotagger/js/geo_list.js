@@ -64,7 +64,7 @@ function displayGroup() {
         
         var srcMimeUri = data.getData(i, 'Image');
         var src = '';
-        if (srcMimeUri !== null ) {
+        if (srcMimeUri !== null  && srcMimeUri !== "") {
             var mimeUriObject = JSON.parse(srcMimeUri);
             var uriRelative = mimeUriObject.uriFragment;
             var uriAbsolute = control.getFileAsUrl(uriRelative);
