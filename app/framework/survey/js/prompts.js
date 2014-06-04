@@ -1612,7 +1612,8 @@ promptTypes.date = promptTypes.datetime.extend({
     scrollerAttributes: {
         preset: 'date',
         theme: 'jqm',
-        display: 'modal'
+        display: 'modal',
+        dateOrder: 'ddmmy'
     }
 });
 promptTypes.time = promptTypes.datetime.extend({
