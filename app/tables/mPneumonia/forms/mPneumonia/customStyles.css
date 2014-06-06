@@ -3,16 +3,19 @@
  **/
 
  /******** date widget ***************/
+
+ /* changes the height of the date widget buttons */
 .dwbw {
 	padding-top: 10px !important;
 	padding-bottom: 10px !important;
 }
 
-
+/* don't change this */
 .dw {
 	background-color:white;
 }
 
+/* font size for the date widget text */
 .dwwr {
 	font-size: 20px;
 }
