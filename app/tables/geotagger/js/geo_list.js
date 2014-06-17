@@ -12,9 +12,6 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
     });
 }
 
-$(document).ready(setup);
-//handles events from html page
-    
 function setup() {
     displayGroup();
 }
