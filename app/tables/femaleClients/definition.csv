@@ -45,7 +45,6 @@ induced_labor,induced_labor,string,TRUE,null
 infant_test,infant_test,string,TRUE,null
 interviewer_id,interviewer_id,integer,TRUE,null
 interviewer_init,interviewer_init,string,TRUE,null
-interviewerw_init,interviewerw_init,string,TRUE,null
 labor_meds,labor_meds,string,TRUE,null
 living_children,living_children,integer,TRUE,null
 meds_after_deliv,meds_after_deliv,string,TRUE,null

@@ -993,6 +993,328 @@
         "value": "femaleClients",
         "_row_num": 5
       }
+    ],
+    "model": [
+      {
+        "type": "integer",
+        "name": "client_id",
+        "_row_num": 2
+      },
+      {
+        "type": "integer",
+        "name": "age",
+        "_row_num": 3
+      },
+      {
+        "type": "select_one",
+        "name": "randomization",
+        "_row_num": 4
+      },
+      {
+        "type": "text",
+        "name": "interviewer_init",
+        "_row_num": 5
+      },
+      {
+        "type": "integer",
+        "name": "interviewer_id",
+        "_row_num": 6
+      },
+      {
+        "type": "date",
+        "name": "date",
+        "_row_num": 7
+      },
+      {
+        "type": "date",
+        "name": "delivery_date",
+        "_row_num": 8
+      },
+      {
+        "type": "select_one",
+        "name": "baby_alive",
+        "_row_num": 9
+      },
+      {
+        "type": "decimal",
+        "name": "baby_weight",
+        "_row_num": 10
+      },
+      {
+        "type": "select_one",
+        "name": "baby_alive_now",
+        "_row_num": 11
+      },
+      {
+        "type": "decimal",
+        "name": "baby_weight_now",
+        "_row_num": 12
+      },
+      {
+        "type": "text",
+        "name": "delivery_location_other",
+        "_row_num": 13
+      },
+      {
+        "type": "select_one",
+        "name": "delivery_assisted",
+        "_row_num": 14
+      },
+      {
+        "type": "text",
+        "name": "delivery_assisted_other",
+        "_row_num": 15
+      },
+      {
+        "type": "select_one",
+        "name": "induced_labor",
+        "_row_num": 16
+      },
+      {
+        "type": "select_one",
+        "name": "c_section",
+        "_row_num": 17
+      },
+      {
+        "type": "select_multiple",
+        "name": "complications",
+        "_row_num": 18
+      },
+      {
+        "type": "text",
+        "name": "complications_other",
+        "_row_num": 19
+      },
+      {
+        "type": "select_one",
+        "name": "bf_after_deliv",
+        "_row_num": 20
+      },
+      {
+        "type": "select_one",
+        "name": "still_bf",
+        "_row_num": 21
+      },
+      {
+        "type": "integer",
+        "name": "bf_duration",
+        "_row_num": 22
+      },
+      {
+        "type": "select_one",
+        "name": "hiv_tested",
+        "_row_num": 23
+      },
+      {
+        "type": "select_multiple",
+        "name": "test_location",
+        "_row_num": 24
+      },
+      {
+        "type": "text",
+        "name": "test_location_other",
+        "_row_num": 25
+      },
+      {
+        "type": "select_one",
+        "name": "test_result",
+        "_row_num": 26
+      },
+      {
+        "type": "select_one",
+        "name": "ccc",
+        "_row_num": 27
+      },
+      {
+        "type": "select_one",
+        "name": "cd4_known",
+        "_row_num": 28
+      },
+      {
+        "type": "integer",
+        "name": "cd4_count",
+        "_row_num": 29
+      },
+      {
+        "type": "select_one",
+        "name": "prescr_meds",
+        "_row_num": 30
+      },
+      {
+        "type": "select_one",
+        "name": "art",
+        "_row_num": 31
+      },
+      {
+        "type": "select_one",
+        "name": "azt",
+        "_row_num": 32
+      },
+      {
+        "type": "select_one",
+        "name": "art_duration",
+        "_row_num": 33
+      },
+      {
+        "type": "select_one",
+        "name": "art_curr",
+        "_row_num": 34
+      },
+      {
+        "type": "select_one",
+        "name": "labor_meds",
+        "_row_num": 35
+      },
+      {
+        "type": "select_one",
+        "name": "meds_after_deliv",
+        "_row_num": 36
+      },
+      {
+        "type": "select_one",
+        "name": "child_meds",
+        "_row_num": 37
+      },
+      {
+        "type": "select_one",
+        "name": "child_curr_meds",
+        "_row_num": 38
+      },
+      {
+        "type": "select_one",
+        "name": "child_missed_doses",
+        "_row_num": 39
+      },
+      {
+        "type": "select_multiple",
+        "name": "rel_change",
+        "_row_num": 40
+      },
+      {
+        "type": "text",
+        "name": "rel_change_other",
+        "_row_num": 41
+      },
+      {
+        "type": "select_one",
+        "name": "rel_end_study",
+        "_row_num": 42
+      },
+      {
+        "type": "select_multiple",
+        "name": "rel_end_reason",
+        "_row_num": 43
+      },
+      {
+        "type": "text",
+        "name": "Rel_OtherEnd",
+        "_row_num": 44
+      },
+      {
+        "type": "text",
+        "name": "comments",
+        "_row_num": 45
+      },
+      {
+        "type": "select_one",
+        "name": "delivery_location",
+        "_row_num": 46
+      },
+      {
+        "type": "select_one",
+        "name": "infant_test",
+        "_row_num": 47
+      },
+      {
+        "type": "select_one",
+        "name": "agree_screening",
+        "_row_num": 48
+      },
+      {
+        "type": "select_one",
+        "name": "pregnant",
+        "_row_num": 49
+      },
+      {
+        "type": "integer",
+        "name": "gestational_age",
+        "_row_num": 50
+      },
+      {
+        "type": "select_one",
+        "name": "ethnic_group",
+        "_row_num": 51
+      },
+      {
+        "type": "text",
+        "name": "ethnic_group_other",
+        "_row_num": 52
+      },
+      {
+        "type": "select_one",
+        "name": "education_level",
+        "_row_num": 53
+      },
+      {
+        "type": "select_one",
+        "name": "religion",
+        "_row_num": 54
+      },
+      {
+        "type": "text",
+        "name": "religion_other",
+        "_row_num": 55
+      },
+      {
+        "type": "select_multiple",
+        "name": "employment",
+        "_row_num": 56
+      },
+      {
+        "type": "text",
+        "name": "employment_other",
+        "_row_num": 57
+      },
+      {
+        "type": "select_one",
+        "name": "curr_relationship",
+        "_row_num": 58
+      },
+      {
+        "type": "integer",
+        "name": "partner_age",
+        "_row_num": 59
+      },
+      {
+        "type": "integer",
+        "name": "times_pregnant",
+        "_row_num": 60
+      },
+      {
+        "type": "integer",
+        "name": "living_children",
+        "_row_num": 61
+      },
+      {
+        "type": "select_one",
+        "name": "clinic_proximity",
+        "_row_num": 62
+      },
+      {
+        "type": "select_one",
+        "name": "client_consent",
+        "_row_num": 63
+      },
+      {
+        "type": "select_multiple",
+        "name": "refusal_reasons",
+        "_row_num": 64
+      },
+      {
+        "type": "text",
+        "name": "refusal_reasons_other",
+        "_row_num": 65
+      }
     ]
   },
   "specification": {
@@ -1778,275 +2100,780 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "interviewer_init": {
+      "client_id": {
+        "type": "integer",
         "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "survey"
+          },
           {
             "_row_num": 2,
-            "section_name": "survey"
+            "section_name": "model"
           }
         ],
-        "type": "string",
-        "elementKey": "interviewer_init"
-      },
-      "interviewer_id": {
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "elementKey": "interviewer_id"
-      },
-      "date": {
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "date",
-        "elementKey": "date"
-      },
-      "agree_screening": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "agree_screening"
+        "elementKey": "client_id"
       },
       "age": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 8,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
           }
         ],
-        "type": "integer",
         "elementKey": "age"
       },
+      "randomization": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "randomization"
+      },
+      "interviewer_init": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "interviewer_init"
+      },
+      "interviewer_id": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "interviewer_id"
+      },
+      "date": {
+        "type": "object",
+        "elementType": "date",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "date"
+      },
+      "delivery_date": {
+        "type": "object",
+        "elementType": "date",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_date"
+      },
+      "baby_alive": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "baby_alive"
+      },
+      "baby_weight": {
+        "type": "number",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "baby_weight"
+      },
+      "baby_alive_now": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "baby_alive_now"
+      },
+      "baby_weight_now": {
+        "type": "number",
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "baby_weight_now"
+      },
+      "delivery_location_other": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_location_other"
+      },
+      "delivery_assisted": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_assisted"
+      },
+      "delivery_assisted_other": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_assisted_other"
+      },
+      "induced_labor": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "induced_labor"
+      },
+      "c_section": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "c_section"
+      },
+      "complications": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "complications_items"
+        },
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "complications"
+      },
+      "complications_other": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "complications_other"
+      },
+      "bf_after_deliv": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "bf_after_deliv"
+      },
+      "still_bf": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "still_bf"
+      },
+      "bf_duration": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "bf_duration"
+      },
+      "hiv_tested": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 23,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "hiv_tested"
+      },
+      "test_location": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "test_location_items"
+        },
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "test_location"
+      },
+      "test_location_other": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "test_location_other"
+      },
+      "test_result": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 26,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "test_result"
+      },
+      "ccc": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "ccc"
+      },
+      "cd4_known": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cd4_known"
+      },
+      "cd4_count": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cd4_count"
+      },
+      "prescr_meds": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "prescr_meds"
+      },
+      "art": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "art"
+      },
+      "azt": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "azt"
+      },
+      "art_duration": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 33,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "art_duration"
+      },
+      "art_curr": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "art_curr"
+      },
+      "labor_meds": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "labor_meds"
+      },
+      "meds_after_deliv": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "meds_after_deliv"
+      },
+      "child_meds": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 37,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "child_meds"
+      },
+      "child_curr_meds": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "child_curr_meds"
+      },
+      "child_missed_doses": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 39,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "child_missed_doses"
+      },
+      "rel_change": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "rel_change_items"
+        },
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "rel_change"
+      },
+      "rel_change_other": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "rel_change_other"
+      },
+      "rel_end_study": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 42,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "rel_end_study"
+      },
+      "rel_end_reason": {
+        "type": "array",
+        "isUnitOfRetention": true,
+        "items": {
+          "type": "string",
+          "elementKey": "rel_end_reason_items"
+        },
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "rel_end_reason"
+      },
+      "Rel_OtherEnd": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "Rel_OtherEnd"
+      },
+      "comments": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 45,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "comments"
+      },
+      "delivery_location": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_location"
+      },
+      "infant_test": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "infant_test"
+      },
+      "agree_screening": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 48,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "agree_screening"
+      },
       "pregnant": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 9,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 49,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "pregnant"
       },
       "gestational_age": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 10,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 50,
+            "section_name": "model"
           }
         ],
-        "type": "integer",
         "elementKey": "gestational_age"
       },
       "ethnic_group": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 12,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 51,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "ethnic_group"
       },
       "ethnic_group_other": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 13,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 52,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "ethnic_group_other"
       },
       "education_level": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 14,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 53,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "education_level"
       },
       "religion": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 15,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 54,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "religion"
       },
       "religion_other": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 16,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 55,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "religion_other"
       },
       "employment": {
-        "_defn": [
-          {
-            "_row_num": 17,
-            "section_name": "survey"
-          }
-        ],
         "type": "array",
         "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "employment_items"
         },
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 56,
+            "section_name": "model"
+          }
+        ],
         "elementKey": "employment"
       },
       "employment_other": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 18,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 57,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "employment_other"
       },
       "curr_relationship": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 20,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 58,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "curr_relationship"
       },
       "partner_age": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 21,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 59,
+            "section_name": "model"
           }
         ],
-        "type": "integer",
         "elementKey": "partner_age"
       },
       "times_pregnant": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 22,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 60,
+            "section_name": "model"
           }
         ],
-        "type": "integer",
         "elementKey": "times_pregnant"
       },
       "living_children": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 23,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 61,
+            "section_name": "model"
           }
         ],
-        "type": "integer",
         "elementKey": "living_children"
       },
       "clinic_proximity": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 24,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 62,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "clinic_proximity"
       },
-      "hiv_tested": {
-        "_defn": [
-          {
-            "_row_num": 25,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "hiv_tested"
-      },
-      "test_result": {
-        "_defn": [
-          {
-            "_row_num": 26,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "test_result"
-      },
       "client_consent": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 29,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 63,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "client_consent"
       },
-      "client_id": {
-        "_defn": [
-          {
-            "_row_num": 30,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "elementKey": "client_id"
-      },
-      "randomization": {
-        "_defn": [
-          {
-            "_row_num": 31,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "randomization"
-      },
       "refusal_reasons": {
-        "_defn": [
-          {
-            "_row_num": 32,
-            "section_name": "survey"
-          }
-        ],
         "type": "array",
         "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "refusal_reasons_items"
         },
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 64,
+            "section_name": "model"
+          }
+        ],
         "elementKey": "refusal_reasons"
       },
       "refusal_reasons_other": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 33,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 65,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "refusal_reasons_other"
       }
     },
