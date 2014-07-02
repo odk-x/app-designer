@@ -93,7 +93,7 @@ var displayGroup = function(idxStart) {
         chevron.attr('class', 'chevron');
         item.append(chevron);
 
-        var addrMimeUri = data.get('address_image_0');
+        var addrMimeUri = data.getData(i, 'address_image_0');
         var addrSrc = '';
         if (addrMimeUri !== null && addrMimeUri !== "") {
             var addrMimeUriObject = JSON.parse(addrMimeUri);
