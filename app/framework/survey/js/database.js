@@ -178,6 +178,46 @@ putDataKeyValueMap:function(ctxt, kvMap) {
             });
     }
 },
+/*
+ * Used by csv loader to load data directly in from a csv file that is assumed
+ * to have exactly the right data columns for this formId.
+ * kvMap is: { 'keyname' : {value: 'val', isInstanceMetadata: false }, ... }
+ *
+ * Requires: mdl to be initialized -- e.g., mdl.tableMetadata, mdl.dataTableModel
+ */
+loadDataKeyValueMap:function(ctxt, kvMap) {
+    if ($.isEmptyObject(kvMap)) {
+        ctxt.success();
+    } else {
+          var that = this;
+          var property;
+          var names = '';
+          for ( property in kvMap ) {
+            names += "," + property;
+          }
+          names = names.substring(1);
+          ctxt.log('D','database.loadDataKeyValueMap.initiated', names );
+
+          var updates = {};
+          var tmpctxt = $.extend({}, ctxt, {success:function() {
+                    ctxt.log('D','database.loadDataKeyValueMap.updatingCache');
+                    ctxt.success();
+                }});
+
+          var instanceIdEntry = kvMap._id;
+          delete kvMap._id;
+          var instanceId = instanceIdEntry.value;
+          
+          that.withDb( tmpctxt, function(transaction) {
+                var formId = opendatakit.getSettingValue('form_id');
+                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, instanceId, kvMap);
+                transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
+                    updates = is.updates;
+                    tmpctxt.log('D',"loadDataKeyValueMap.success", names);
+                });
+            });
+    }
+},
 getAllData:function(ctxt, mdl, instanceId) {
       var that = this;
       mdl.data = {};
