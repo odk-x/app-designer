@@ -2078,7 +2078,7 @@
                         if (operation._data_type == null ) {
                             // no explicit type -- hope that the field gets a value somewhere else...
                             // record name to verify that is the case.
-                            assigns.push(operation);
+                            assigns.push({ operation: operation, section: section });
                         } else if(operation._data_type in promptTypes) {
                             var schema = promptTypes[operation._data_type];
                             if(schema){
@@ -2155,10 +2155,11 @@
 
         // ensure that all the untyped assigns have types via either a model entry, an assign or a prompt...
         for ( var i = 0 ; i < assigns.length ; ++i ) {
-            var op = assigns[i];
-            if ( !(op.name in model) ) {
-                throw Error("Assign 'name' does not have a defined storage type. Clause: '" + operation.type + "' at row " +
-                        operation._row_num + " on sheet: " + section.section_name);
+            var section = assigns[i].section;
+            var operation = assigns[i].operation;
+            if ( !(operation.name in model) ) {
+                throw Error("Field name '" + operation.name + "' does not have a defined storage type. Clause: '" + operation.type + "' at row " +
+                        operation._row_num + " on sheet: " + section.section_name + ". Declare the type on the model sheet or in a model.type column.");
             }
         }
 

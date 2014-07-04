@@ -187,6 +187,13 @@ return {
             return null;
         }
         
+        // Do not allow empty strings. 
+        // Strings are either NULL or non-zero-length.
+        //
+        if ( value === "" ) {
+            throw new Error("unexpected empty (zero-length string) value for field");
+        }
+        
         if ( jsonType.type === 'array' ) {
             value = JSON.parse(value);
             // TODO: ensure object spec conformance on read?
