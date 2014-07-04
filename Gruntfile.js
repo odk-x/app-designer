@@ -21,6 +21,34 @@ var mountDirectory = function(connect, dir) {
     );
 };
 
+var postHandler = function(req, res, next) {
+    if (req.method === 'POST') {
+        //debugger;
+        var content = '';
+        console.log('received a POST request');
+        req.addListener('data', function(chunk) {
+            content += chunk;
+        });
+        req.addListener('end', function() {
+            // We don't want the leading /, or else the file system will think
+            // we're writing to root, which we don't have permission to. Should
+            // really be dealing with the path more gracefully.
+            var path = req.url.substring(1);
+            //debugger;
+            require('fs').writeFile(path, content, function(err) {
+                if (err) {
+                    console.log('got an error writing content');
+                    console.log('error : ' + err);
+                } else {
+                    //debugger;
+                    console.log('posted to ' + path + ' successfully.');
+                }
+            });
+        });
+    }
+    return next();
+};
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -152,6 +180,7 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
+                            postHandler,
                             lrSnippet,
                             mountFolder(connect, baseDirForServer),
                             mountDirectory(connect, baseDirForServer)
@@ -164,6 +193,7 @@ module.exports = function (grunt) {
                     port: 8001,
                     middleware: function (connect) {
                         return [
+                            postHandler,
                             lrSnippet,
                             mountFolder(connect, 'test'),
                             mountFolder(connect, baseDirForServer),
