@@ -90,7 +90,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 2
       },
       {
@@ -100,7 +100,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 3
       },
       {
@@ -110,7 +110,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 4
       }
     ],
@@ -337,7 +337,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 2
       },
       "linked_members_education": {
@@ -347,7 +347,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 3
       },
       "select_linked_data": {
@@ -357,7 +357,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 4
       }
     },

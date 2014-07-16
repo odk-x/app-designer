@@ -62,26 +62,66 @@ return {
             formPath = shim.getBaseUrl() + "/";
         }
         var qpl =
-            '#formPath=' + escape(formPath) +
-            ((instanceId === undefined || instanceId === null) ? '' : ('&instanceId=' + escape(instanceId))) +
-            '&screenPath=' + escape((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
-            ((refId === undefined || refId === null) ? '' : ('&refId=' + escape(refId)));
+            '#formPath=' + encodeURIComponent(formPath) +
+            ((instanceId === undefined || instanceId === null) ? '' : ('&instanceId=' + encodeURIComponent(instanceId))) +
+            '&screenPath=' + encodeURIComponent((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
+            ((refId === undefined || refId === null) ? '' : ('&refId=' + encodeURIComponent(refId)));
         return qpl;
     },
-
     getHashString:function(formPath, instanceId, screenPath) {
         var refId = this.genUUID();
         if ( formPath === undefined || formPath === null ) {
             formPath = shim.getBaseUrl() + "/";
         }
         var qpl =
-            '#formPath=' + escape(formPath) +
-            ((instanceId === undefined || instanceId === null) ? '' : ('&instanceId=' + escape(instanceId))) +
-            '&screenPath=' + escape((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
-            ((refId === undefined || refId === null) ? '' : ('&refId=' + escape(refId)));
+            '#formPath=' + encodeURIComponent(formPath) +
+            ((instanceId === undefined || instanceId === null) ? '' : ('&instanceId=' + encodeURIComponent(instanceId))) +
+            '&screenPath=' + encodeURIComponent((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
+            ((refId === undefined || refId === null) ? '' : ('&refId=' + encodeURIComponent(refId)));
         return qpl;
     },
-
+    convertHashStringToSurveyUri: function(hashString) {
+        // assume we have a hashString:
+        // #formPath=...&instanceId=...&...
+        // reformat it into a URI suitable for invoking ODK Survey
+        var that = this;
+        var keyValues = hashString.split("&");
+        var reconstitutedKeyValues = "";
+        var formPath = null;
+        var instanceId = null;
+        var i;
+        var parts;
+        for ( i = 0 ; i < keyValues.length ; ++i ) {
+            parts = keyValues[i].split('=');
+            if ( parts.length > 2 ) {
+                throw new Error('parsing of hashString failed - incorrect &key=value sequence');
+            }
+            var key = parts[0];
+            if ( key === 'formPath' ) {
+                formPath = parts[1];
+            } else if ( key === 'instanceId' ) {
+                instanceId = parts[1];
+            } else {
+                reconstitutedKeyValues = reconstitutedKeyValues + 
+                    "&" + keyValues[i];
+            }
+        }
+        if ( instanceId !== null ) {
+            reconstitutedKeyValues = 
+                "&instanceId=" + encodeURIComponent(instanceId) + 
+                reconstitutedKeyValues;
+        }
+        if ( formPath === null ) {
+            throw new Error('parsing of hashString failed - no formPath found');
+        }
+        parts = decodeURIComponent(formPath).split("/");
+        var formId = parts[parts.length-1];
+        
+        var uri = "content://org.opendatakit.common.android.provider.forms/" + 
+            this.getPlatformInfo().appName + "/" + formId + "/#" +
+            reconstitutedKeyValues.substring(1);
+        return uri;
+    },
     setCurrentFormDef:function(formDef) {
         mdl.formDef = formDef;
     },

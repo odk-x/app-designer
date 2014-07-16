@@ -63,7 +63,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 2
       }
     ],
@@ -546,7 +546,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 2
       }
     },

@@ -220,7 +220,7 @@ return {
             {
                 var tmp = params[i].split("=");
                 var key = tmp[0];
-                var value = unescape(tmp[1]);
+                var value = decodeURIComponent(tmp[1]);
                 if ( key === 'formPath' ) {
                     formPath = value;
                 } else if ( key === 'instanceId' ) {
@@ -296,7 +296,7 @@ return {
     /**
      *
      * window.location.hash is an ampersand-separated list of 
-     * key=value pairs. The key and value are escaped.
+     * key=value pairs. The key and value are encodeURIComponent()'d.
      * The main values are:
      *    formPath=relative path from the default/index.html to 
      *             the form definition directory (formPath/formDef.json).
@@ -328,10 +328,10 @@ return {
             landing.setController(ctxt, that.controller, opendatakit.getRefId());
           }, failure: function(m) {
             ctxt.log('E','parsequery.changeUrlHash unable to transition to ' + hash, m);
-            if ( hash === '#formPath=' + escape(shim.getBaseUrl() + '/') ) {
+            if ( hash === '#formPath=' + encodeURIComponent(shim.getBaseUrl() + '/') ) {
                 landing.setController(ctxt, that.controller, opendatakit.getRefId(), m || { message: 'failed to load page'});
             } else {
-                window.location.hash = '#formPath=' + escape(shim.getBaseUrl() + '/');
+                window.location.hash = '#formPath=' + encodeURIComponent(shim.getBaseUrl() + '/');
                 that.changeUrlHash($.extend({},ctxt,{success:function() { ctxt.failure(m); }}));
             }
           }});

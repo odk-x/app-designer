@@ -295,7 +295,7 @@
         "linked_form_id": "plot",
         "selection": "plot_id >= ?",
         "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'plot_id>='+escape(0)",
+        "auxillaryHash": "'plot_id>='+encodeURIComponent(0)",
         "_row_num": 2
       }
     ],
@@ -489,7 +489,7 @@
         "linked_form_id": "plot",
         "selection": "plot_id >= ?",
         "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'plot_id>='+escape(0)",
+        "auxillaryHash": "'plot_id>='+encodeURIComponent(0)",
         "_row_num": 2
       }
     },

@@ -1104,7 +1104,7 @@ return {
                 if ( instanceMetadataKeyValueMap != null ) {
                     for ( var f in instanceMetadataKeyValueMap ) {
                         var v = instanceMetadataKeyValueMap[f];
-                        kvList = kvList + "&" + f + "=" + escape(v);
+                        kvList = kvList + "&" + f + "=" + encodeURIComponent(v);
                     }
                 }
                 var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), 

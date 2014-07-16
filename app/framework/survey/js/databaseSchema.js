@@ -433,18 +433,21 @@ selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArg
  * Requires: no globals
  */
 selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
-    if ( selection != null ) {
+    if ( selectionArgs === undefined || selectionArgs === null ) {
+        selectionArgs = [];
+    }
+    if ( selection === undefined || selection === null ) {
+        return {
+                stmt : 'select * from "' + dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
+                        ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
+                bind : []    
+            };
+    } else {
         return {
                 stmt :  'select * from (select * from "' + dbTableName +
                         '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)) where ' + selection +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
                 bind : selectionArgs
-            };
-    } else {
-        return {
-                stmt : 'select * from "' + dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
-                        ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : []    
             };
     }
 },

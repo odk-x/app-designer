@@ -256,7 +256,7 @@ window.dbif = window.dbif || {
                     activeTransaction._takeNextAction(0);
                 },
                 changeVersion: function() {
-                    throw  new Error("unsupported");
+                    throw new Error("unsupported");
                 }
             };
         }

@@ -412,31 +412,10 @@ delete_all:function(ctxt, instanceId) {
             transaction.executeSql(cs.stmt, cs.bind);
         });
 },
-get_all_instances:function(ctxt) {
+get_all_instances:function(ctxt, selection, selectionArgs, orderBy) {
       var that = this;
-      var instanceList = [];
-      ctxt.log('D','get_all_instances');
-      that.withDb($.extend({},ctxt,{success: function() {
-            ctxt.success(instanceList);
-        }}), function(transaction) {
-            var displayElementName = opendatakit.getSettingValue('instance_name');
-            var ss = databaseSchema.getAllInstancesDataTableStmt(mdl.tableMetadata.dbTableName, displayElementName);
-            ctxt.sqlStatement = ss;
-            transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
-                for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
-                    var instance = result.rows.item(i);
-                    var ts = opendatakit.convertNanosToDateTime(instance._savepoint_timestamp);
-                    instanceList.push({
-                        display_field: (displayElementName === undefined || displayElementName === null) ? ((ts == null) ? "" : ts.toISOString()): instance[displayElementName],
-                        instance_id: instance._id,
-                        savepoint_timestamp: ts,
-                        savepoint_type: instance._savepoint_type,
-                        savepoint_creator: instance._savepoint_creator,
-                        locale: instance._locale
-                    });
-                }
-            });
-        });
+      var displayElementName = opendatakit.getSettingValue('instance_name');
+      that.get_linked_instances(ctxt, mdl.tableMetadata.dbTableName, selection, selectionArgs, displayElementName, orderBy);
 },
 delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
       var that = this;
@@ -463,7 +442,7 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
                     var instance = result.rows.item(i);
                     var ts = opendatakit.convertNanosToDateTime(instance._savepoint_timestamp);
                     instanceList.push({
-                        display_field: (displayElementName === undefined || displayElementName === null) ? ts.toISOString(): instance[displayElementName],
+                        display_field: (displayElementName === undefined || displayElementName === null) ? ((ts == null) ? "" : ts.toISOString()): instance[displayElementName],
                         instance_id: instance._id,
                         savepoint_timestamp: ts,
                         savepoint_type: instance._savepoint_type,

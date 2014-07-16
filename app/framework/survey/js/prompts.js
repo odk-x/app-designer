@@ -463,9 +463,56 @@ promptTypes.instances = promptTypes.base.extend({
         "click .deleteInstance": "deleteInstance",
         "click .createInstance": "createInstance"
     },
+    _cachedSelection: null,
+    convertSelection: function() {
+        var that = this;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
+            return null;
+        }
+        if ( that._cachedSelection != null ) {
+            return that._cachedSelection;
+        }
+        that._cachedSelection = database.convertSelectionString(mdl, queryDefn.selection);
+        return that._cachedSelection;
+    },
+    _cachedOrderBy : null,
+    convertOrderBy: function() {
+        var that = this;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
+            return null;
+        }
+        if ( that._cachedOrderBy != null ) {
+            return that._cachedOrderBy;
+        }
+        that._cachedOrderBy = database.convertOrderByString(mdl, queryDefn.order_by);
+        return that._cachedOrderBy;
+    },
     configureRenderContext: function(ctxt) {
         var that = this;
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
+        
+        // see if we are supposed to apply a query filter to this...
+        var selection = null;
+        var selectionArgs = null;
+        var orderBy = null;
+        if ( that.values_list !== undefined && that.values_list !== null ) {
+            var queryDefn = null;
+            queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+            if ( queryDefn === undefined || queryDefn === null ) {
+                ctxt.failure({message: "Error displaying instances: could not retrieve query definition"});
+                return;
+            } else 
+            if ( queryDefn.linked_table_id !== opendatakit.getCurrentTableId() ) {
+                ctxt.failure({message: "Error displaying instances: tableId of value_list query does not match current tableId"});
+                return;
+            }
+            selection = that.convertSelection(mdl);
+            selectionArgs = queryDefn.selectionArgs();
+            orderBy = that.convertOrderBy(mdl);
+        }
+
         database.get_all_instances($.extend({},ctxt,{success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
                     var savepoint_type = term.savepoint_type;
@@ -489,7 +536,7 @@ promptTypes.instances = promptTypes.base.extend({
                 }
                 ctxt.success();
             }
-        }));
+        }), selection, selectionArgs, orderBy);
     },
     createInstance: function(evt){
       var ctxt = this.controller.newContext(evt);
@@ -876,7 +923,9 @@ promptTypes.external_link = promptTypes.base.extend({
         if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
             expandedUrl = fullUrl;
         } else {
+            // relative URL. Assume this stays within Survey
             expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
+            fullUrl = opendatakit.convertHashStringToSurveyUri(fullUrl);
         }
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
@@ -1977,30 +2026,30 @@ promptTypes.bargraph = promptTypes.base.extend({
         "click .x_down": "scale_x_down"
     },
     templatePath: "templates/graph.handlebars",
-	scale_y_up: function(evt){
+    scale_y_up: function(evt){
         var that = this;
-		that.vHeight = that.vHeight + (that.vHeight * .2);
+        that.vHeight = that.vHeight + (that.vHeight * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_y_down: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_y_down: function(evt){
         var that = this;
-		that.vHeight = that.vHeight - (that.vHeight * .2);
+        that.vHeight = that.vHeight - (that.vHeight * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_x_up: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_x_up: function(evt){
         var that = this;
-		that.vWidth = that.vWidth + (that.vWidth * .2);
+        that.vWidth = that.vWidth + (that.vWidth * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_x_down: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_x_down: function(evt){
         var that = this;
-		that.vWidth = that.vWidth - (that.vWidth * .2);
-        var ctxt = that.controller.newContext(evt);	
-		that.reRender(ctxt);
-	},
+        that.vWidth = that.vWidth - (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);    
+        that.reRender(ctxt);
+    },
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
@@ -2150,30 +2199,30 @@ promptTypes.linegraph = promptTypes.base.extend({
         "click .x_down": "scale_x_down"
     },
     templatePath: "templates/graph.handlebars",
-	scale_y_up: function(evt){
+    scale_y_up: function(evt){
         var that = this;
-		that.vHeight = that.vHeight + (that.vHeight * .2);
+        that.vHeight = that.vHeight + (that.vHeight * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_y_down: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_y_down: function(evt){
         var that = this;
-		that.vHeight = that.vHeight - (that.vHeight * .2);
+        that.vHeight = that.vHeight - (that.vHeight * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_x_up: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_x_up: function(evt){
         var that = this;
-		that.vWidth = that.vWidth + (that.vWidth * .2);
+        that.vWidth = that.vWidth + (that.vWidth * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_x_down: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_x_down: function(evt){
         var that = this;
-		that.vWidth = that.vWidth - (that.vWidth * .2);
-        var ctxt = that.controller.newContext(evt);	
-		that.reRender(ctxt);
-	},
+        that.vWidth = that.vWidth - (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);    
+        that.reRender(ctxt);
+    },
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
@@ -2227,51 +2276,51 @@ promptTypes.linegraph = promptTypes.base.extend({
             return choice;
         });
 
-	    var margin = {top: 50, right: 20, bottom: 40, left: 50},
-	        width = paramWidth - margin.left - margin.right,
-	        height = paramHeight - margin.top - margin.bottom;
+        var margin = {top: 50, right: 20, bottom: 40, left: 50},
+            width = paramWidth - margin.left - margin.right,
+            height = paramHeight - margin.top - margin.bottom;
 
         var x = d3.scale.linear().range([0, width]);
 
         var y = d3.scale.linear().range([height, 0]);
 
-	    var xAxis = d3.svg.axis()
-		    .scale(x)
-		    .orient("bottom")
-		    .tickSubdivide(true);
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+            .tickSubdivide(true);
 
- 	    var yAxis = d3.svg.axis()
-		    .scale(y)
-		    .orient("left")
-		    .tickSubdivide(true);
+         var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .tickSubdivide(true);
 
         dataJ.forEach(function(d) {
-			d.y = +d.y;
-			d.x = +d.x;
-	    });
+            d.y = +d.y;
+            d.x = +d.x;
+        });
 
         /* When dataMin and dataMax gets implemented
         dataMin.forEach(function(d) {
-			d.y = +d.y;
-			d.x = +d.x;
-	    });
-	
-	    dataMax.forEach(function(d) {
-			d.y = +d.y;
-			d.x = +d.x;
-	    });
+            d.y = +d.y;
+            d.x = +d.x;
+        });
+    
+        dataMax.forEach(function(d) {
+            d.y = +d.y;
+            d.x = +d.x;
+        });
         */
 
         
         var line = d3.svg.line()
-		    .x(function(d) { return x(d.x); })
-		    .y(function(d) { return y(d.y); });
+            .x(function(d) { return x(d.x); })
+            .y(function(d) { return y(d.y); });
 
         // Don't have a dataMax of dataMin yet
         // Also setting this to a fixed range and domain for now
         // These will probably need to be settings 
-	    x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
-	    y.domain([d3.min(dataJ, function(d) { return d.y; }), d3.max(dataJ, function(d) { return d.y; })]);
+        x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
+        y.domain([d3.min(dataJ, function(d) { return d.y; }), d3.max(dataJ, function(d) { return d.y; })]);
 
         if (that.vWidth == 0) {
             that.vWidth = width;
@@ -2331,12 +2380,12 @@ promptTypes.linegraph = promptTypes.base.extend({
             .style("text-anchor", "end")
             .text(yString);  // This should be customizable
 
-		svg.append("path")
-			.datum(dataJ)
-			.attr("class", "line")
+        svg.append("path")
+            .datum(dataJ)
+            .attr("class", "line")
             .attr("fill", "none")
             .attr("stroke", "blue")
-			.attr("d", line);
+            .attr("d", line);
 
         // add legend   
         var legend = svg.append("g")
@@ -2386,22 +2435,22 @@ promptTypes.piechart = promptTypes.base.extend({
         "click .scale_down": "scale_down",
     },
     templatePath: "templates/graph.handlebars",
-	scale_up: function(evt){
+    scale_up: function(evt){
         var that = this;
-		that.vHeight = that.vHeight + (that.vHeight * .1);
-		that.vWidth = that.vWidth + (that.vWidth * .1);
-		that.vRadius = that.vRadius * 1.1;
+        that.vHeight = that.vHeight + (that.vHeight * .1);
+        that.vWidth = that.vWidth + (that.vWidth * .1);
+        that.vRadius = that.vRadius * 1.1;
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_down: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_down: function(evt){
         var that = this;
-		that.vHeight = that.vHeight - (that.vHeight * .1);
-		that.vWidth = that.vWidth - (that.vWidth * .1);
-		that.vRadius = that.vRadius * 0.9;
+        that.vHeight = that.vHeight - (that.vHeight * .1);
+        that.vWidth = that.vWidth - (that.vWidth * .1);
+        that.vRadius = that.vRadius * 0.9;
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
+        that.reRender(ctxt);
+    },
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
@@ -2429,8 +2478,8 @@ promptTypes.piechart = promptTypes.base.extend({
         var paramHeight = 500;
 
         var margin = {top: 20, right: 20, bottom: 40, left: 80},
-	        width = paramWidth - margin.left - margin.right,
-	        height = paramHeight - margin.top - margin.bottom,
+            width = paramWidth - margin.left - margin.right,
+            height = paramHeight - margin.top - margin.bottom,
             radius = Math.min(width, height) / 2;
         
         // In configureRenderContext getting data via the CSV
@@ -2454,31 +2503,31 @@ promptTypes.piechart = promptTypes.base.extend({
             that.vRadius = radius;
         }
 
-		dataJ.forEach(function(d) {
-			d.y = +d.y;
-		});
+        dataJ.forEach(function(d) {
+            d.y = +d.y;
+        });
 
 
-		var arc = d3.svg.arc()
-			.outerRadius(that.vRadius - 10)
-			.innerRadius(0);
+        var arc = d3.svg.arc()
+            .outerRadius(that.vRadius - 10)
+            .innerRadius(0);
 
-		var pie = d3.layout.pie()
-			.sort(null)
-			.value(function(d) { return d.y; });
+        var pie = d3.layout.pie()
+            .sort(null)
+            .value(function(d) { return d.y; });
 
-		var svg = d3.select(that.$("#plot").get(0)).append("svg")
-			.attr("class", "wholeBody")
-			.data([dataJ])
-			.attr("width", that.vWidth)
-			.attr("height", that.vHeight)
-		    .append("g")
-			.attr("transform", "translate(" + that.vWidth / 2 + "," + that.vHeight / 2 + ")");
+        var svg = d3.select(that.$("#plot").get(0)).append("svg")
+            .attr("class", "wholeBody")
+            .data([dataJ])
+            .attr("width", that.vWidth)
+            .attr("height", that.vHeight)
+            .append("g")
+            .attr("transform", "translate(" + that.vWidth / 2 + "," + that.vHeight / 2 + ")");
 
         var g = svg.selectAll(".arc")
-		    .data(pie(dataJ))
-			.enter().append("g")
-			.attr("class", "arc");
+            .data(pie(dataJ))
+            .enter().append("g")
+            .attr("class", "arc");
 
         g.append("path")
             .attr("d", arc)
@@ -2523,30 +2572,30 @@ promptTypes.scatterplot = promptTypes.base.extend({
         "click .x_down": "scale_x_down"
     },
     templatePath: "templates/graph.handlebars",
-	scale_y_up: function(evt){
+    scale_y_up: function(evt){
         var that = this;
-		that.vHeight = that.vHeight + (that.vHeight * .2);
+        that.vHeight = that.vHeight + (that.vHeight * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_y_down: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_y_down: function(evt){
         var that = this;
-		that.vHeight = that.vHeight - (that.vHeight * .2);
+        that.vHeight = that.vHeight - (that.vHeight * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_x_up: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_x_up: function(evt){
         var that = this;
-		that.vWidth = that.vWidth + (that.vWidth * .2);
+        that.vWidth = that.vWidth + (that.vWidth * .2);
         var ctxt = that.controller.newContext(evt);
-		that.reRender(ctxt);
-	},
-	scale_x_down: function(evt){
+        that.reRender(ctxt);
+    },
+    scale_x_down: function(evt){
         var that = this;
-		that.vWidth = that.vWidth - (that.vWidth * .2);
-        var ctxt = that.controller.newContext(evt);	
-		that.reRender(ctxt);
-	},
+        that.vWidth = that.vWidth - (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);    
+        that.reRender(ctxt);
+    },
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
@@ -2574,8 +2623,8 @@ promptTypes.scatterplot = promptTypes.base.extend({
         var paramHeight = 400;
 
         var margin = {top: 20, right: 20, bottom: 40, left: 50},
-	        width = paramWidth - margin.left - margin.right,
-	        height = paramHeight - margin.top - margin.bottom,
+            width = paramWidth - margin.left - margin.right,
+            height = paramHeight - margin.top - margin.bottom,
             padding = 30;
 
         if (that.vWidth == 0) {
@@ -2603,16 +2652,16 @@ promptTypes.scatterplot = promptTypes.base.extend({
             d.r = +d.r;
         });
 
-	    var x = d3.scale.ordinal()
-		    .rangeRoundBands([0, that.vWidth], .1);
+        var x = d3.scale.ordinal()
+            .rangeRoundBands([0, that.vWidth], .1);
 
-	    var y = d3.scale.linear()
-		    .range([that.vHeight, 0]);
+        var y = d3.scale.linear()
+            .range([that.vHeight, 0]);
 
         x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
         y.domain([0, d3.max(dataJ, function(d) { return d.y; })]);
 
-        //	Create scale functions
+        //    Create scale functions
         var xScale = d3.scale.linear()
             .domain([0, d3.max(dataJ, function(d) { return d.x; })])
             .range([padding, that.vWidth - padding * 2]);
@@ -2625,36 +2674,36 @@ promptTypes.scatterplot = promptTypes.base.extend({
             .domain([0, d3.max(dataJ, function(d) { return d.y; })])
             .range([2, 5]);
 
-	    // Define X axis
-	    var xAxis = d3.svg.axis()
-	        .scale(xScale)
-	        .orient("bottom")
-	        .ticks(5);
+        // Define X axis
+        var xAxis = d3.svg.axis()
+            .scale(xScale)
+            .orient("bottom")
+            .ticks(5);
 
         // Define Y axis
-	    var yAxis = d3.svg.axis()
-	        .scale(yScale)
-	        .orient("left")
-	        .ticks(5);
+        var yAxis = d3.svg.axis()
+            .scale(yScale)
+            .orient("left")
+            .ticks(5);
 
     
         // Drawing
-		d3.selectAll(".wholeBody").remove();
-		
-	    //	Create SVG element
-		var svg = d3.select(that.$("#plot").get(0))
-		    .append("svg")
-		    .attr("class", "wholeBody")
-		    .attr("width", that.vWidth + margin.left + margin.right)
-		    .attr("height", that.vHeight + margin.top + margin.bottom)
-		    .append("g")
-		    .attr("transform", "translate(" + (margin.left) + "," + (margin.top) + ")");
-		
-		x.rangeRoundBands([0, that.vWidth], .1);
-		y.range([that.vHeight, 0]);
-		
-		yScale.range([that.vHeight - padding, padding]);
-		xScale.range([padding, that.vWidth - padding * 2]);
+        d3.selectAll(".wholeBody").remove();
+        
+        //    Create SVG element
+        var svg = d3.select(that.$("#plot").get(0))
+            .append("svg")
+            .attr("class", "wholeBody")
+            .attr("width", that.vWidth + margin.left + margin.right)
+            .attr("height", that.vHeight + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + (margin.left) + "," + (margin.top) + ")");
+        
+        x.rangeRoundBands([0, that.vWidth], .1);
+        y.range([that.vHeight, 0]);
+        
+        yScale.range([that.vHeight - padding, padding]);
+        xScale.range([padding, that.vWidth - padding * 2]);
 
         // For now hardcode these values for colors
         var rString = "x";
@@ -2668,53 +2717,53 @@ promptTypes.scatterplot = promptTypes.base.extend({
             var colors = ['blue','red','yellow','orange','green'];
             return colors[parseInt(len) % colors.length];
         };
-		
-	    //		Create circles
-		svg.selectAll("circle")
-		    .data(dataJ)
-		    .enter()
-		    .append("circle")
-		    .attr("cx", function(d) {
-			    return xScale(d.x);
-	    	})
-		    .attr("cy", function(d) {
-			    return yScale(d.y);
-		    })
-		    .attr("r", function(d) {
-			    return rScale(4);
-		    })
-		    .attr("fill", function(d) {
-			    if(rString != "No Scaling") {
-				    return getForegroundColor(d.r);
-			    } else {
-				    return "black";
-			    }
-		    });
+        
+        //        Create circles
+        svg.selectAll("circle")
+            .data(dataJ)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d) {
+                return xScale(d.x);
+            })
+            .attr("cy", function(d) {
+                return yScale(d.y);
+            })
+            .attr("r", function(d) {
+                return rScale(4);
+            })
+            .attr("fill", function(d) {
+                if(rString != "No Scaling") {
+                    return getForegroundColor(d.r);
+                } else {
+                    return "black";
+                }
+            });
 
-	    //		Create X axis
-		svg.append("g")
-		    .attr("class", "axis")
-		    .attr("transform", "translate(0," + (that.vHeight - padding) + ")")
-		    .call(xAxis)
-		    .append("text")
-		    .attr("x", that.vWidth/2-50)
-		    .attr("y", 35)
-		    .style("font-size", "1.5em")
-		    .style("text-anchor", "start")
-		    .text("x-axis");  // Need to be able to pass a string in
+        //        Create X axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + (that.vHeight - padding) + ")")
+            .call(xAxis)
+            .append("text")
+            .attr("x", that.vWidth/2-50)
+            .attr("y", 35)
+            .style("font-size", "1.5em")
+            .style("text-anchor", "start")
+            .text("x-axis");  // Need to be able to pass a string in
 
-	    //		Create Y axis
-		svg.append("g")
-		    .attr("class", "axis")
-		    .attr("transform", "translate(" + padding + ",0)")
-		    .call(yAxis)
-		    .append("text")
-		    .attr("transform", "rotate(-90)")
-		    .attr("y", -35)
-		    .attr("x", -1 * that.vHeight/2)
-		    .style("font-size", "1.5em")
-		    .style("text-anchor", "end")
-		    .text("y-axis");  // Need to be able to pass a string in
+        //        Create Y axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(" + padding + ",0)")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -35)
+            .attr("x", -1 * that.vHeight/2)
+            .style("font-size", "1.5em")
+            .style("text-anchor", "end")
+            .text("y-axis");  // Need to be able to pass a string in
         }
 });
 

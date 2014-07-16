@@ -26,9 +26,9 @@ function(opendatakit,  database,   _) {
                 return textOrLangMap['default'];
             } else {
                 shim.log('E',"Could not localize object. Locale '" + locale + 
-					"' and 'default' missing from " + textOrLangMap);
-                throw Error("Could not localize object. Locale '" + locale + 
-					"' and 'default' missing from: " + textOrLangMap );
+                    "' and 'default' missing from " + textOrLangMap);
+                throw new Error("Could not localize object. Locale '" + locale + 
+                    "' and 'default' missing from: " + textOrLangMap );
             }
         },
         selected: function(promptValue, qValue) {
