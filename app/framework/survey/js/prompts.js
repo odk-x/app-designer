@@ -919,6 +919,7 @@ promptTypes.external_link = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         var fullUrl = that.url();
+        var launchAction = that.launchAction;
         var expandedUrl;
         if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
             expandedUrl = fullUrl;
@@ -926,12 +927,15 @@ promptTypes.external_link = promptTypes.base.extend({
             // relative URL. Assume this stays within Survey
             expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
             fullUrl = opendatakit.convertHashStringToSurveyUri(fullUrl);
+            // implicit intents are not working?
+            // launchAction = 'android.content.Intent.ACTION_EDIT';
+            launchAction = 'org.opendatakit.survey.android.activities.SplashScreenActivity';
         }
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
-            'openLink', that.launchAction, 
+            'openLink', launchAction, 
             JSON.stringify({ uri: fullUrl,
                 extras: { url: expandedUrl }}));
         ctxt.log('D','external_link.openLink', platInfo.container + " outcome is " + outcome);

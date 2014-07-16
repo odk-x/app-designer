@@ -85,6 +85,18 @@ return {
         // #formPath=...&instanceId=...&...
         // reformat it into a URI suitable for invoking ODK Survey
         var that = this;
+        shim.log("D","convertHashStringToSurveyUri: hash " + hashString);
+        if ( !hashString.match(/^(\??#).*/) ) {
+            throw new Error('parsing of hashString failed - not a relative path (does not begin with ?# or #');
+        }
+        
+        // we expect it to start with ?# or # 
+        if ( hashString.charAt(0) === '?' ) {
+            hashString = hashString.substring(1);
+        }
+        if ( hashString.charAt(0) === '#' ) {
+            hashString = hashString.substring(1);
+        }
         var keyValues = hashString.split("&");
         var reconstitutedKeyValues = "";
         var formPath = null;
@@ -115,11 +127,16 @@ return {
             throw new Error('parsing of hashString failed - no formPath found');
         }
         parts = decodeURIComponent(formPath).split("/");
-        var formId = parts[parts.length-1];
+        // the formPath ends in a slash, so we want the entry before the last one...
+        var formId = parts[parts.length-2];
+        
+        var appName = that.getPlatformInfo().appName;
         
         var uri = "content://org.opendatakit.common.android.provider.forms/" + 
             this.getPlatformInfo().appName + "/" + formId + "/#" +
             reconstitutedKeyValues.substring(1);
+
+        shim.log("D","convertHashStringToSurveyUri: as Uri " + uri);
         return uri;
     },
     setCurrentFormDef:function(formDef) {
