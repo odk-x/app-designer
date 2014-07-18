@@ -473,6 +473,22 @@ window.shim = window.shim || {
             }, 1000);
             return "OK";
         }
+        if ( action === 'org.opendatakit.survey.android.activities.SplashScreenActivity' ) {
+            value = JSON.parse(jsonObj);
+            if ( window.parent === window ) {
+                // naked
+                window.open(value.extras.url,'_blank', null, false);
+            } else {
+                // inside tab1
+                window.parent.pushPageAndOpen(value.extras.url);
+            }
+            setTimeout(function() {
+                that.log("D","Opened new browser window for link to another ODK Survey page. Close to continue");
+                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
+                    '{ "status": -1, "result": { } }' );
+            }, 1000);
+            return "OK";
+        }
         if ( action === 'android.content.Intent.ACTION_VIEW' ) {
             value = JSON.parse(jsonObj);
             if ( window.parent === window ) {
