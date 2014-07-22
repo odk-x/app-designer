@@ -244,7 +244,6 @@
         "select_one" : {"type":"string"},
         "select_multiple": {
             "type": "array",
-            "isUnitOfRetention": true,
             "items" : {
                 "type":"string"
             }
@@ -255,14 +254,12 @@
         "select_one_dropdown" : {"type":"string"},
         "select_multiple_grid": {
             "type": "array",
-            "isUnitOfRetention": true,
             "items" : {
                 "type":"string"
             }
         },
         "select_multiple_inline": {
             "type": "array",
-            "isUnitOfRetention": true,
             "items" : {
                 "type":"string"
             }
@@ -304,7 +301,6 @@
         "read_only_image": {
             "type": "object",
             "elementType": "mimeUri",
-            "isUnitOfRetention": true,
             "properties": {
                 "uriFragment": {
                     "type": "string"
@@ -318,7 +314,6 @@
         "image": {
             "type": "object",
             "elementType": "mimeUri",
-            "isUnitOfRetention": true,
             "properties": {
                 "uriFragment": {
                     "type": "string"
@@ -332,7 +327,6 @@
         "audio": {
             "type": "object",
             "elementType": "mimeUri",
-            "isUnitOfRetention": true,
             "properties": {
                 "uriFragment": {
                     "type": "string"
@@ -346,7 +340,6 @@
         "video": {
             "type": "object",
             "elementType": "mimeUri",
-            "isUnitOfRetention": true,
             "properties": {
                 "uriFragment": {
                     "type": "string"

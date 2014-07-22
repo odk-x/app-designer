@@ -175,6 +175,14 @@ return {
         }
         return true;
     },
+	isUnitOfRetention: function(jsonDefn) {
+		var elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
+		var listChildren = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
+		
+		if ( elementType === "array" ) return true;
+		if ( listChildren.length === 0 ) return true;
+		return false;
+	},
     _fromDatabaseToElementType: function( jsonType, value ) {
         var that = this;
         // date conversion elements...
@@ -346,7 +354,7 @@ reconstructModelDataFromElementPathValueUpdates: function(mdl, updates) {
     for (var dbKey in updates) {
         var elementPathValue = updates[dbKey];
         var de = mdl.dataTableModel[dbKey];
-        if (de.isUnitOfRetention) {
+        if (that.isUnitOfRetention(de)) {
             var elementPath = de.elementPath || elementPathValue.elementPath;
             if ( de.elementSet === 'instanceMetadata' ) {
                 that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, mdl.metadata );
@@ -432,22 +440,6 @@ processPassedInKeyValueMap: function(dataTablePredefinedColumns, kvMap, instance
         shim.log('I',"Extra arguments found in instanceMetadataKeyValueMap" + propList);
     }
 },
-_clearUnitOfRetentionFlag: function( dbKeyMap, listChildElementKeys) {
-    var that = this;
-    var i;
-    if ( listChildElementKeys != null ) {
-        for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
-            var f = listChildElementKeys[i];
-            var jsonType = dbKeyMap[f];
-            jsonType.isUnitOfRetention = false;
-            if ( jsonType.type === 'array' ) {
-                that._clearUnitOfRetentionFlag(dbKeyMap, jsonType.listChildElementKeys);
-            } else if ( jsonType.type === 'object' ) {
-                that._clearUnitOfRetentionFlag(dbKeyMap, jsonType.listChildElementKeys);
-            }
-        }
-    }
-},
 _setSessionVariableFlag: function( dbKeyMap, listChildElementKeys) {
     var that = this;
     var i;
@@ -500,18 +492,6 @@ flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementK
         throw new Error("supplied elementKey starts with underscore");
     }
 
-    // assume the primitive types are units-of-retention.
-    // this will be updated if there is an outer array or object
-    // that is itself a unit-of-retention (below).
-    if ( jsonType.type === 'string' || 
-            jsonType.type === 'number' || 
-            jsonType.type === 'integer' ||
-            jsonType.type === 'boolean' ) {
-        // these should be retained
-        // as their own column values...
-        jsonType.isUnitOfRetention = true;
-    }
-
     // remember the elementKey we have chosen...
     dbKeyMap[elementKey] = jsonType;
 
@@ -520,29 +500,16 @@ flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementK
         // explode with subordinate elements
         f = that.flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
         jsonType.listChildElementKeys = [ f.elementKey ];
-        jsonType.isUnitOfRetention = true;
     } else if ( jsonType.type === 'object' ) {
         // object...
-        var hasProperties = false;
         var e;
         var f;
         var listChildElementKeys = [];
         for ( e in jsonType.properties ) {
-            hasProperties = true;
             f = that.flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
             listChildElementKeys.push(f.elementKey);
         }
         jsonType.listChildElementKeys = listChildElementKeys;
-        if ( !hasProperties ) {
-            jsonType.isUnitOfRetention = true;
-        }
-    }
-
-    if ( jsonType.isUnitOfRetention && (jsonType.listChildElementKeys != null)) {
-        // we have some sort of structure that is written out as 
-        // a JSON serialization. Clear the isUnitOfRetention tags
-        // on the nested elements
-        that._clearUnitOfRetentionFlag(dbKeyMap, jsonType.listChildElementKeys);
     }
 
     if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys != null)) {

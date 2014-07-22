@@ -9,7 +9,6 @@ return {
         //   dbColumnName : { 
         //      type: databaseType, 
         //      isNotNullable: false/true, 
-        //      isUnitOfRetention: false/true,
         //      isSessionVariable: false/true,
         //      'default': defaultValue,
         //      elementPath: exposedName }
@@ -21,41 +20,40 @@ return {
         //
 dataTablePredefinedColumns: { 
                      // these have leading underscores because they are hidden from the user and not directly manipulable
-                     _id: {type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _row_etag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _sync_state: { type: 'string', isNotNullable: true, 'default': 'inserting', isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _conflict_type: { type: 'integer', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _filter_type: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _filter_value: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _form_id: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _locale: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _savepoint_type: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _savepoint_timestamp: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _savepoint_creator: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' } },
+                     _id: {type: 'string', isNotNullable: true, elementSet: 'instanceMetadata' },
+                     _row_etag: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _sync_state: { type: 'string', isNotNullable: true, 'default': 'inserting', elementSet: 'instanceMetadata' },
+                     _conflict_type: { type: 'integer', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _filter_type: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _filter_value: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _form_id: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _locale: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _savepoint_type: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _savepoint_timestamp: { type: 'string', isNotNullable: true, elementSet: 'instanceMetadata' },
+                     _savepoint_creator: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' } },
 tableDefinitionsPredefinedColumns: {
-                    _table_id: { type: 'string', isNotNullable: true, isUnitOfRetention: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
-                    _db_table_name: { type: 'string', isNotNullable: true, isUnitOfRetention: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
-                    _sync_tag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'tableMetadata' },
-                    _last_sync_time: { type: 'integer', isNotNullable: true, isUnitOfRetention: true, elementSet: 'tableMetadata' },
-                    _sync_state: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'tableMetadata' },
-                    _transactioning: { type: 'integer', isNotNullable: true, isUnitOfRetention: true, elementSet: 'tableMetadata' } },
+                    _table_id: { type: 'string', isNotNullable: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
+                    _db_table_name: { type: 'string', isNotNullable: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
+                    _sync_tag: { type: 'string', isNotNullable: false, elementSet: 'tableMetadata' },
+                    _last_sync_time: { type: 'integer', isNotNullable: true, elementSet: 'tableMetadata' },
+                    _sync_state: { type: 'string', isNotNullable: true, elementSet: 'tableMetadata' },
+                    _transactioning: { type: 'integer', isNotNullable: true, elementSet: 'tableMetadata' } },
 columnDefinitionsTableConstraint: 'PRIMARY KEY ( "_table_id", "_element_key" )',
 columnDefinitionsPredefinedColumns: {
-                    _table_id: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementPath: 'table_id', elementSet: 'columnMetadata' },
-                    _element_key: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementPath: 'elementKey', elementSet: 'columnMetadata' },
-                    _element_name: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementPath: 'elementName', elementSet: 'columnMetadata' },
-                    _element_type: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementPath: 'elementType', elementSet: 'columnMetadata' },
-                    _list_child_element_keys: { type: 'array', items: { type: 'string' }, isNotNullable: false, elementPath: 'listChildElementKeys', isUnitOfRetention: true, elementSet: 'columnMetadata' },
-                    _is_unit_of_retention: { type: 'boolean', isNotNullable: true, isUnitOfRetention: true, elementPath: 'isUnitOfRetention', elementSet: 'columnMetadata' } },
+                    _table_id: { type: 'string', isNotNullable: true, elementPath: 'table_id', elementSet: 'columnMetadata' },
+                    _element_key: { type: 'string', isNotNullable: true, elementPath: 'elementKey', elementSet: 'columnMetadata' },
+                    _element_name: { type: 'string', isNotNullable: true, elementPath: 'elementName', elementSet: 'columnMetadata' },
+                    _element_type: { type: 'string', isNotNullable: false, elementPath: 'elementType', elementSet: 'columnMetadata' },
+                    _list_child_element_keys: { type: 'array', items: { type: 'string' }, isNotNullable: false, elementPath: 'listChildElementKeys', elementSet: 'columnMetadata' } },
 // key value stores are fairly straightforward...
 keyValueStoreActiveTableConstraint: 'PRIMARY KEY ("_table_id", "_partition", "_aspect", "_key")',
 keyValueStoreActivePredefinedColumns: {
-                    _table_id: { type: 'string', isNotNullable: true, isUnitOfRetention: true },
-                    _partition: { type: 'string', isNotNullable: true, isUnitOfRetention: true },
-                    _aspect: { type: 'string', isNotNullable: true, isUnitOfRetention: true },
-                    _key: { type: 'string', isNotNullable: true, isUnitOfRetention: true },
-                    _type: { type: 'string', isNotNullable: false, isUnitOfRetention: true },
-                    _value: { type: 'string', isNotNullable: false, isUnitOfRetention: true } },
+                    _table_id: { type: 'string', isNotNullable: true },
+                    _partition: { type: 'string', isNotNullable: true },
+                    _aspect: { type: 'string', isNotNullable: true },
+                    _key: { type: 'string', isNotNullable: true },
+                    _type: { type: 'string', isNotNullable: false },
+                    _value: { type: 'string', isNotNullable: false } },
 _tableKeyValueStoreActiveAccessibleKeys: {
             // keys we are allowing the user to access from within Javascript
             // _partition: table
@@ -79,12 +77,13 @@ getAccessibleColumnKeyDefinition: function( key ) {
         return that._columnKeyValueStoreActiveAccessibleKeys[key];
     },
 createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
+		var that = this;
         // TODO: verify that dbTableName is not already in use...
         var createTableCmd = 'CREATE TABLE IF NOT EXISTS "' + dbTableName + '"(';
         var comma = '';
         for ( var dbColumnName in kvMap ) {
             var f = kvMap[dbColumnName];
-            if ( f.isUnitOfRetention && !f.isSessionVariable ) {
+            if ( databaseUtils.isUnitOfRetention(f) && !f.isSessionVariable ) {
                 createTableCmd += comma + dbColumnName + " ";
                 comma = ',';
                 if ( f.type === "string" ) {
@@ -158,6 +157,7 @@ deleteEntireTableContentsTableStmt: function(dbTableName) {
  * Requires: No global dependencies
  */
 insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, instanceId, kvMap) {
+	var that = this;
     var nowNano = opendatakit.convertDateTimeToNanos();
     var activeUser = opendatakit.getPlatformInfo().activeUser;
 
@@ -170,7 +170,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
     var stmt = 'insert into "' + dbTableName + '" (';
     for ( f in dataTableModel ) {
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention && !defElement.isSessionVariable ) {
+        if ( databaseUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
             stmt += comma;
             comma = ', ';
             stmt += '"' + f + '"';
@@ -181,7 +181,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
     var updates = {};
     for (f in dataTableModel) {
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention ) {
+        if ( databaseUtils.isUnitOfRetention(defElement) ) {
             if ( !defElement.isSessionVariable ) {
                 stmt += comma;
                 comma = ', ';
@@ -268,8 +268,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
  * 
  * jsonSchemaMap : { 'columnName' : { type: 'elementType', 
  *                            'default': 'defaultValue',
- *                            isInstanceMetadata: false,
- *                            isUnitOfRetention: true } ... }
+ *                            isInstanceMetadata: false } ... }
  *
  * NON_CONFORMANCE NOTE: rather than express everything as a list of 
  * types ['elementType', 'null'] we assume that 'null' is implicitly 
@@ -286,6 +285,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
  * Requires: No global context
  */
 insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, kvMap) {
+    var that = this;
     var nowNano = opendatakit.convertDateTimeToNanos();
     var activeUser = opendatakit.getPlatformInfo().activeUser;
 
@@ -298,7 +298,7 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
     var stmt = 'insert into "' + dbTableName + '" (';
     for ( f in dataTableModel ) {
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention && !defElement.isSessionVariable ) {
+        if ( databaseUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
             stmt += comma;
             comma = ', ';
             stmt += '"' + f + '"';
@@ -308,7 +308,7 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
     comma = '';
     for (f in dataTableModel) {    
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention ) {
+        if ( databaseUtils.isUnitOfRetention(defElement) ) {
             if ( !defElement.isSessionVariable ) {
                 stmt += comma;
                 comma = ', ';
@@ -605,7 +605,6 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     //
     // with the addition of:
     //    isSessionVariable : true if this is not retained across sessions
-    //    isUnitOfRetention : true if elementKey is a dbColumnName
     //    elementPath : pathToElement
     //    elementSet : 'data'
     //    listChildElementKeys : ['key1', 'key2' ...]
@@ -643,12 +642,11 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _element_key: dbColumnName,
                 _element_name: jsonDefn.elementName,
                 _element_type: (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType),
-                _list_child_element_keys : ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
-                _is_unit_of_retention : (jsonDefn.isUnitOfRetention ? 1 : 0)
+                _list_child_element_keys : ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? JSON.stringify([]) : JSON.stringify(jsonDefn.listChildElementKeys))
             } );
             
             // displayed columns within Tables, at least for now, are just the unit-of-retention columns.
-            if ( jsonDefn.isUnitOfRetention ) {
+            if ( databaseUtils.isUnitOfRetention(jsonDefn) ) {
                 displayColumnOrder.push(dbColumnName);
             }
 

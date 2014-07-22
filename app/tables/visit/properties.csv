@@ -59,7 +59,7 @@ FormType,default,FormType.formType,string,SURVEY
 ListDisplayActivity,default,nameOfListView,string,Plot visits
 ListDisplayActivity.views,Plot visits,filename,string,tables/visit/html/visit_list.html
 SurveyUtil,default,SurveyUtil.formId,string,visit
-Table,default,colOrder,object,"[""plot_name"",""date"",""plant_height"",""plant_health"",""plant_picture"",""pests"",""soil"",""observations""]"
+Table,default,colOrder,object,"[""plot_name"",""date"",""plant_height"",""plant_health"",""plant_picture_uriFragment"",""pests"",""soil"",""observations""]"
 Table,default,defaultViewType,string,List
 Table,default,displayName,object,"""Plot Visits"""
 Table,default,groupByCols,string,[]

@@ -248,7 +248,7 @@ getAllData:function(ctxt, mdl, instanceId) {
                 // and then just snarf the fields...
                 for ( dbKey in mdl.dataTableModel ) {
                     jsonType = mdl.dataTableModel[dbKey];
-                    if ( jsonType.isUnitOfRetention ) {
+                    if ( databaseUtils.isUnitOfRetention(jsonType) ) {
                         elementPath = jsonType.elementPath;
                         if ( jsonType.isSessionVariable ) {
                             var jsValue = shim.getSessionVariable(opendatakit.getRefId(), elementPath );
