@@ -77,7 +77,7 @@ getAccessibleColumnKeyDefinition: function( key ) {
         return that._columnKeyValueStoreActiveAccessibleKeys[key];
     },
 createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
-		var that = this;
+        var that = this;
         // TODO: verify that dbTableName is not already in use...
         var createTableCmd = 'CREATE TABLE IF NOT EXISTS "' + dbTableName + '"(';
         var comma = '';
@@ -157,7 +157,7 @@ deleteEntireTableContentsTableStmt: function(dbTableName) {
  * Requires: No global dependencies
  */
 insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, instanceId, kvMap) {
-	var that = this;
+    var that = this;
     var nowNano = opendatakit.convertDateTimeToNanos();
     var activeUser = opendatakit.getPlatformInfo().activeUser;
 
@@ -710,8 +710,47 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortOrder', _type: 'string', _value: '' } );
 
+    var settings = protoMdl.formDef.specification.settings;
+    var xmlInstanceName = getSettingValue(settings, 'xml_instance_name');
+    var xmlRootElementName = that.getSettingValue(settings, 'xml_root_element_name');
+    var xmlDeviceIdPropertyName = that.getSettingValue(settings, 'xml_device_id_property_name');
+    var xmlUserIdPropertyName = that.getSettingValue(settings, 'xml_user_id_property_name');
+    var xmlBase64RsaPublicKey = that.getSettingValue(settings, 'xml_base64_rsa_public_key');
+    var xmlSubmissionUrl = that.getSettingValue(settings, 'xml_submission_url');
+
+    if ( xmlInstanceName !== undefined && xmlInstanceName !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlInstanceName', _type: 'string', _value: xmlInstanceName } );
+    }
+    if ( xmlRootElementName !== undefined && xmlRootElementName !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlRootElementName', _type: 'string', _value: xmlRootElementName } );
+    }
+    if ( xmlDeviceIdPropertyName !== undefined && xmlDeviceIdPropertyName !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlDeviceIdPropertyName', _type: 'string', _value: xmlDeviceIdPropertyName } );
+    }
+    if ( xmlUserIdPropertyName !== undefined && xmlUserIdPropertyName !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlUserIdPropertyName', _type: 'string', _value: xmlUserIdPropertyName } );
+    }
+    if ( xmlBase64RsaPublicKey !== undefined && xmlBase64RsaPublicKey !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlBase64RsaPublicKey', _type: 'string', _value: xmlBase64RsaPublicKey } );
+    }
+    if ( xmlSubmissionUrl !== undefined && xmlSubmissionUrl !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlSubmissionUrl', _type: 'string', _value: xmlSubmissionUrl } );
+    }
+    
     protoMdl.dataTableModel = dataTableModel;
     return fullDef;
+},
+getSettingsValue: function(settings, id) {
+    var entry = settings[id];
+    if ( entry !== undefined && entry !== null ) {
+        var value = entry.value;
+        if ( value === undefined ) {
+            return null;
+        }
+        return value;
+    } else {
+        return null;
+    }
 }
 };
 });
