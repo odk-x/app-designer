@@ -1808,6 +1808,13 @@
             }
         }
 
+        // if the prompt has a value_list, propagate that into the model
+        // for entry as metadata for the displayChoices value in the KVS.
+        //
+        if ( "values_list" in promptOrAction ) {
+            mdef.valuesList = promptOrAction.values_list;
+        }
+        
         if ( name in model ) {
             var defn = model[name];
             var amodb = deepExtendObject( deepExtendObject(

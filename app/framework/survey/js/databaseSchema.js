@@ -666,13 +666,24 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _type: "object",
                 _value: JSON.stringify(surveyDisplayName) // this is a localizable string...
             } );
+            var choicesJson;
+            if ( jsonDefn.valuesList === undefined || jsonDefn.valuesList === null ) {
+                choicesJson = "";
+            } else {
+                var ref = protoMdl.formDef.specification.choices[jsonDefn.valuesList];
+                if ( ref === undefined || ref === null ) {
+                    choicesJson = "";
+                } else {
+                    choicesJson = JSON.stringify(ref);
+                }
+            }
             fullDef._key_value_store_active.push( {
                 _table_id: protoMdl.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayChoicesList",
                 _type: "object",
-                _value: ((jsonDefn.choicesList === undefined || jsonDefn.choicesList === null) ? "" : JSON.stringify(protoMdl.formDef.specification.choices[jsonDefn.choicesList]))
+                _value: choicesJson
             } );
             fullDef._key_value_store_active.push( {
                 _table_id: protoMdl.table_id,
@@ -711,7 +722,11 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortOrder', _type: 'string', _value: '' } );
 
     var settings = protoMdl.formDef.specification.settings;
-    var xmlInstanceName = getSettingValue(settings, 'xml_instance_name');
+    var formInstanceName = that.getSettingValue(settings, 'instance_name');
+    var xmlInstanceName = that.getSettingValue(settings, 'xml_instance_name');
+    if ( xmlInstanceName === undefined || xmlInstanceName === null ) {
+        xmlInstanceName = formInstanceName;
+    }
     var xmlRootElementName = that.getSettingValue(settings, 'xml_root_element_name');
     var xmlDeviceIdPropertyName = that.getSettingValue(settings, 'xml_device_id_property_name');
     var xmlUserIdPropertyName = that.getSettingValue(settings, 'xml_user_id_property_name');
@@ -740,7 +755,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     protoMdl.dataTableModel = dataTableModel;
     return fullDef;
 },
-getSettingsValue: function(settings, id) {
+getSettingValue: function(settings, id) {
     var entry = settings[id];
     if ( entry !== undefined && entry !== null ) {
         var value = entry.value;

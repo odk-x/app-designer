@@ -263,86 +263,85 @@ function processFormDef(formDef) {
         // Legacy forms use the tableId as the formId.
         // Legacy forms use a synthesized uuid for the instanceId.
         // They supply the formId, formVersion and rowId as metadata.
-            
-            var file;
-            // create empty output file
-            write_output('<h:html xmlns="http://www.w3.org/2002/xforms" \n'+
-                    '  xmlns:h="http://www.w3.org/1999/xhtml" \n'+
-                    '  xmlns:ev="http://www.w3.org/2001/xml-events" \n'+
-                    '  xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n'+
-                    '  xmlns:jr="http://openrosa.org/javarosa" \n'+
-                    '  xmlns:orx="http://openrosa.org/xforms/" \n'+
-                    '  xmlns:odk="http://www.opendatakit.org/xforms">\n'+
-                    ' <h:head>\n'+
-                    '  <h:title>' + formName + '</h:title>\n'+
-                    '  <model>\n'+
-                    '    <instance>\n'+
-                    '      <'+xmlRootElementName+' id="'+tableId+'>\n'+
-                    '        <orx:meta>\n'+
-                    '          <orx:instanceID/>\n'+
-                    ((xmlDeviceIdPropertyName === null) ? '' : 
-                    '          <orx:deviceID/>\n') +
-                    ((xmlUserIdPropertyName === null) ? '' : 
-                    '          <orx:userID/>\n') +
-                    '          <orx:timeEnd/>\n' +
-                    '          <instanceName/>\n' +
-                    '          <rowID/>\n'+
-                    '          <rowETag/>\n'+
-                    '          <filterType/>\n'+
-                    '          <filterValue/>\n'+
-                    '          <formID/>\n'+
-                    '          <locale/>\n'+
-                    '          <savepointType/>\n'+
-                    '          <savepointCreator/>\n'+
-                    '          <savepointTimestamp/>\n'+
-                    '        </orx:meta>');
-            instanceBody = "\n";
-            bindBody = "";
-            bodyBody = "";
-            var bindPrefix = '    <bind nodeset="/' + xmlRootElementName + '/';
-            var instanceBodyPrefix = '        <';
-            
-            wlog("before model analysis");
-            
-            bindBody += bindPrefix + 'meta/instanceID" type="string"/>\n';
-            if ( xmlDeviceIdPropertyName !== null) {
-                bindBody += bindPrefix + 'meta/deviceID" type="string"/>\n';
-            }
-            if ( xmlUserIdPropertyName !== null) {
-                bindBody += bindPrefix + 'meta/userID" type="string"/>\n';
-            }
-            bindBody += bindPrefix + 'meta/timeEnd" type="dateTime"/>\n';
-            bindBody += bindPrefix + 'meta/instanceName" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/rowID" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/rowETag" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/filterType" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/filterValue" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/formID" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/locale" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/savepointType" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/savepointCreator" type="string"/>\n';
-            bindBody += bindPrefix + 'meta/savepointTimestamp" type="string"/>\n';
-            
-            var model = jsonDef.model;
-            buildFormStructures( instanceBodyPrefix, bindPrefix, '', model );
-            write_output(instanceBody +
-                    '      </'+xmlRootElementName+'> \n'+
-                    '    </instance> \n');
-            write_output(bindBody);
-            if ( xmlSubmissionUrl !== null ) {
-                if ( xmlBase64RsaPublicKey !== null ) {
-                    write_output('    <submission method="form-data-post" ref="/' + xmlRootElementName + '" action="' + xmlSubmissionUrl + '"  base64RsaPublicKey="' + xmlBase64RsaPublicKey + '" />\n');
-                } else {
-                    write_output('    <submission method="form-data-post" ref="/' + xmlRootElementName + '" action="' + xmlSubmissionUrl + '" />\n');
-                }
-            }
-            write_output('  </model> \n'+
-                    ' </h:head> \n'+
-                    ' <h:body> \n'+
-                    bodyBody +
-                    ' </h:body> \n'+
-                    '</h:html>\n');
-        }
+		
+		var file;
+		// create empty output file
+		write_output('<h:html xmlns="http://www.w3.org/2002/xforms" \n'+
+				'  xmlns:h="http://www.w3.org/1999/xhtml" \n'+
+				'  xmlns:ev="http://www.w3.org/2001/xml-events" \n'+
+				'  xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n'+
+				'  xmlns:jr="http://openrosa.org/javarosa" \n'+
+				'  xmlns:orx="http://openrosa.org/xforms/" \n'+
+				'  xmlns:odk="http://www.opendatakit.org/xforms">\n'+
+				' <h:head>\n'+
+				'  <h:title>' + formName + '</h:title>\n'+
+				'  <model>\n'+
+				'    <instance>\n'+
+				'      <'+xmlRootElementName+' id="'+tableId+'>\n'+
+				'        <orx:meta>\n'+
+				'          <orx:instanceID/>\n'+
+				((xmlDeviceIdPropertyName === null) ? '' : 
+				'          <orx:deviceID/>\n') +
+				((xmlUserIdPropertyName === null) ? '' : 
+				'          <orx:userID/>\n') +
+				'          <orx:timeEnd/>\n' +
+				'          <instanceName/>\n' +
+				'          <rowID/>\n'+
+				'          <rowETag/>\n'+
+				'          <filterType/>\n'+
+				'          <filterValue/>\n'+
+				'          <formID/>\n'+
+				'          <locale/>\n'+
+				'          <savepointType/>\n'+
+				'          <savepointCreator/>\n'+
+				'          <savepointTimestamp/>\n'+
+				'        </orx:meta>');
+		instanceBody = "\n";
+		bindBody = "";
+		bodyBody = "";
+		var bindPrefix = '    <bind nodeset="/' + xmlRootElementName + '/';
+		var instanceBodyPrefix = '        <';
+		
+		wlog("before model analysis");
+		
+		bindBody += bindPrefix + 'meta/instanceID" type="string"/>\n';
+		if ( xmlDeviceIdPropertyName !== null) {
+			bindBody += bindPrefix + 'meta/deviceID" type="string"/>\n';
+		}
+		if ( xmlUserIdPropertyName !== null) {
+			bindBody += bindPrefix + 'meta/userID" type="string"/>\n';
+		}
+		bindBody += bindPrefix + 'meta/timeEnd" type="dateTime"/>\n';
+		bindBody += bindPrefix + 'meta/instanceName" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/rowID" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/rowETag" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/filterType" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/filterValue" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/formID" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/locale" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointType" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointCreator" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointTimestamp" type="string"/>\n';
+		
+		var model = jsonDef.model;
+		buildFormStructures( instanceBodyPrefix, bindPrefix, '', model );
+		write_output(instanceBody +
+				'      </'+xmlRootElementName+'> \n'+
+				'    </instance> \n');
+		write_output(bindBody);
+		if ( xmlSubmissionUrl !== null ) {
+			if ( xmlBase64RsaPublicKey !== null ) {
+				write_output('    <submission method="form-data-post" ref="/' + xmlRootElementName + '" action="' + xmlSubmissionUrl + '"  base64RsaPublicKey="' + xmlBase64RsaPublicKey + '" />\n');
+			} else {
+				write_output('    <submission method="form-data-post" ref="/' + xmlRootElementName + '" action="' + xmlSubmissionUrl + '" />\n');
+			}
+		}
+		write_output('  </model> \n'+
+				' </h:head> \n'+
+				' <h:body> \n'+
+				bodyBody +
+				' </h:body> \n'+
+				'</h:html>\n');
     } catch(e) {
         wlog("error: parsing failed for formDef.json file: " + String(e));
     }
