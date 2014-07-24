@@ -840,6 +840,7 @@
       },
       "write_language": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 2,
@@ -855,6 +856,7 @@
       },
       "attend_school": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 3,
@@ -869,11 +871,11 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"
         },
+        "valuesList": "school_types",
         "_defn": [
           {
             "_row_num": 5,
@@ -888,6 +890,7 @@
       },
       "grade_level": {
         "type": "string",
+        "valuesList": "grade_levels",
         "_defn": [
           {
             "_row_num": 8,
@@ -902,6 +905,7 @@
       },
       "post_secondary": {
         "type": "string",
+        "valuesList": "post_secondary_types",
         "_defn": [
           {
             "_row_num": 10,
@@ -926,6 +930,7 @@
       },
       "currently_school": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 16,
@@ -1077,7 +1082,6 @@
       },
       "where_medical_attention": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "where_medical_attention_items"

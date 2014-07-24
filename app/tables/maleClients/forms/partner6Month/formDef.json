@@ -8056,6 +8056,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "prev_hiv_status",
         "elementKey": "hiv_status"
       },
       "pretest": {
@@ -8066,6 +8067,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "rapid",
         "elementKey": "pretest"
       },
       "still_relationship": {
@@ -8076,6 +8078,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "still_relationship"
       },
       "preg_want_children": {
@@ -8086,6 +8089,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "wanted_pregnancy_time",
         "elementKey": "preg_want_children"
       },
       "more_children": {
@@ -8096,6 +8100,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "want_more_children",
         "elementKey": "more_children"
       },
       "partner_want_children": {
@@ -8106,6 +8111,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "partner_wants_children",
         "elementKey": "partner_want_children"
       },
       "influences": {
@@ -8116,6 +8122,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "influences_having_children",
         "elementKey": "influences"
       },
       "influences_other": {
@@ -8136,6 +8143,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "hiv_test_results",
         "elementKey": "test_result"
       },
       "ccc": {
@@ -8146,6 +8154,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no_ns",
         "elementKey": "ccc"
       },
       "prescr_tmp": {
@@ -8156,6 +8165,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no_nr",
         "elementKey": "prescr_tmp"
       },
       "curr_tmp": {
@@ -8166,6 +8176,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no_nr",
         "elementKey": "curr_tmp"
       },
       "prescr_art": {
@@ -8176,6 +8187,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no_nr",
         "elementKey": "prescr_art"
       },
       "curr_taking_art": {
@@ -8186,6 +8198,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no_nr",
         "elementKey": "curr_taking_art"
       },
       "determine": {
@@ -8196,6 +8209,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "hiv_status",
         "elementKey": "determine"
       },
       "advise_second": {
@@ -8206,6 +8220,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "pretest",
         "elementKey": "advise_second"
       },
       "unigold": {
@@ -8216,6 +8231,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "hiv_status",
         "elementKey": "unigold"
       },
       "elisa_blood_drawn": {
@@ -8226,6 +8242,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "elisa_blood_drawn"
       },
       "discordant": {
@@ -8236,6 +8253,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "discordant",
         "elementKey": "discordant"
       },
       "return_disc_retest": {
@@ -8246,6 +8264,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "return_disc_retest"
       },
       "comments": {

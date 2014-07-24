@@ -246,6 +246,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "plant_type",
         "elementKey": "planting"
       }
     },

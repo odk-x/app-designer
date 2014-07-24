@@ -166,7 +166,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",

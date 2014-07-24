@@ -515,6 +515,7 @@
       },
       "randomization": {
         "type": "string",
+        "valuesList": "randomization_arms",
         "_defn": [
           {
             "_row_num": 4,
@@ -661,7 +662,6 @@
       },
       "complications": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "complications_items"
@@ -726,7 +726,6 @@
       },
       "test_location": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "test_location_items"
@@ -891,7 +890,6 @@
       },
       "rel_change": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "rel_change_items"
@@ -926,7 +924,6 @@
       },
       "rel_end_reason": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "rel_end_reason_items"
@@ -1061,7 +1058,6 @@
       },
       "employment": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "employment_items"
@@ -1146,7 +1142,6 @@
       },
       "refusal_reasons": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "refusal_reasons_items"

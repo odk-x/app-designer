@@ -569,11 +569,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "visited_continents_items"
         },
+        "valuesList": "continents",
         "elementKey": "visited_continents"
       },
       "visited_seattle": {
@@ -584,6 +584,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "visited_seattle"
       },
       "age": {
@@ -604,6 +605,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "sexes",
         "elementKey": "sex"
       },
       "weight": {

@@ -279,6 +279,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "transportation",
         "elementKey": "transportation_mode"
       },
       "transportation_mode_other": {

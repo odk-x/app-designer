@@ -1449,12 +1449,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "PW1_HC_NR_checkbox_items"
         },
         "displayName": "PW1_HC_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "PW1_HC_NR_checkbox"
       },
       "Dose1_PregnantWoman_Outreach": {
@@ -1476,12 +1476,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "PW1_O_NR_checkbox_items"
         },
         "displayName": "PW1_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "PW1_O_NR_checkbox"
       },
       "Dose2_PregnantWoman_HealthCenter": {
@@ -1503,12 +1503,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "PW2_HC_NR_checkbox_items"
         },
         "displayName": "PW2_HC_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "PW2_HC_NR_checkbox"
       },
       "Dose2_PregnantWoman_Outreach": {
@@ -1530,12 +1530,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "PW2_O_NR_checkbox_items"
         },
         "displayName": "PW2_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "PW2_O_NR_checkbox"
       },
       "Dose1_MIFComm_HealthCenter": {
@@ -1557,12 +1557,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "MIFCOMM1_HC_NR_checkbox_items"
         },
         "displayName": "MIFCOMM1_HC_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "MIFCOMM1_HC_NR_checkbox"
       },
       "Dose1_MIFComm_Outreach": {
@@ -1584,12 +1584,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "MIFCOMM1_O_NR_checkbox_items"
         },
         "displayName": "MIFCOMM1_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "MIFCOMM1_O_NR_checkbox"
       },
       "Dose2_MIFComm_HealthCenter": {
@@ -1611,12 +1611,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "MIFCOMM2_HC_NR_checkbox_items"
         },
         "displayName": "MIFCOMM2_HC_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "MIFCOMM2_HC_NR_checkbox"
       },
       "Dose2_MIFComm_Outreach": {
@@ -1638,12 +1638,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "MIFCOMM2_O_NR_checkbox_items"
         },
         "displayName": "MIFCOMM2_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "MIFCOMM2_O_NR_checkbox"
       },
       "Dose1_MIFStudents_Outreach": {
@@ -1665,12 +1665,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "MIFS1_O_NR_checkbox_items"
         },
         "displayName": "MIFS1_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "MIFS1_O_NR_checkbox"
       },
       "Dose2_MIFStudents_Outreach": {
@@ -1692,12 +1692,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "MIFS2_O_NR_checkbox_items"
         },
         "displayName": "MIFS2_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "MIFS2_O_NR_checkbox"
       },
       "Dose1_MIFWorkers_Outreach": {
@@ -1719,12 +1719,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "MIFW1_O_NR_checkbox_items"
         },
         "displayName": "MIFW1_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "MIFW1_O_NR_checkbox"
       },
       "Dose2_MIFWorkers_Outreach": {
@@ -1746,12 +1746,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "MIFW2_O_NR_checkbox_items"
         },
         "displayName": "MIFW2_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "MIFW2_O_NR_checkbox"
       },
       "OpenedVials": {
@@ -1773,12 +1773,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "OV_NR_checkbox_items"
         },
         "displayName": "OV_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "OV_NR_checkbox"
       },
       "Dose1_Students_notMIF_Outreach": {
@@ -1800,12 +1800,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "S1_O_NR_checkbox_items"
         },
         "displayName": "S1_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "S1_O_NR_checkbox"
       },
       "Dose2_Students_notMIF_Outreach": {
@@ -1827,12 +1827,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "S2_O_NR_checkbox_items"
         },
         "displayName": "S2_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "S2_O_NR_checkbox"
       },
       "Dose1_Workers_notMIF_Outreach": {
@@ -1854,12 +1854,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "W1_O_NR_checkbox_items"
         },
         "displayName": "W1_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "W1_O_NR_checkbox"
       },
       "Dose2_Workers_notMIF_Outreach": {
@@ -1881,12 +1881,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "W2_O_NR_checkbox_items"
         },
         "displayName": "W2_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "W2_O_NR_checkbox"
       },
       "Dose1_Other_notMIF_HealthCenter": {
@@ -1908,12 +1908,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "O1_HC_NR_checkbox_items"
         },
         "displayName": "O1_HC_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "O1_HC_NR_checkbox"
       },
       "Dose1_Other_notMIF_Outreach": {
@@ -1935,12 +1935,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "O1_O_NR_checkbox_items"
         },
         "displayName": "O1_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "O1_O_NR_checkbox"
       },
       "Dose2_Other_notMIF_HealthCenter": {
@@ -1962,12 +1962,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "O2_HC_NR_checkbox_items"
         },
         "displayName": "O2_HC_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "O2_HC_NR_checkbox"
       },
       "Dose2_Other_notMIF_Outreach": {
@@ -1989,12 +1989,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "O2_O_NR_checkbox_items"
         },
         "displayName": "O2_O_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "O2_O_NR_checkbox"
       }
     },

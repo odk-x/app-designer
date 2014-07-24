@@ -442,6 +442,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "Iced"
       },
       "Hot": {
@@ -452,6 +453,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "Hot"
       },
       "WiFi": {
@@ -462,6 +464,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "WiFi"
       },
       "Owner": {

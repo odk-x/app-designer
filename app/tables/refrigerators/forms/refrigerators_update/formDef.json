@@ -285,6 +285,7 @@
       },
       "refrigerator_condition": {
         "type": "string",
+        "valuesList": "conditions",
         "_defn": [
           {
             "_row_num": 3,

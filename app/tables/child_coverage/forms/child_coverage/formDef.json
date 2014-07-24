@@ -2109,12 +2109,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "BCG_HC_NR_checkbox1_items"
         },
         "displayName": "BCG_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "BCG_HC_NR_checkbox1"
       },
       "BCG_0_11_Outreach": {
@@ -2136,12 +2136,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "BCG_O_NR_checkbox1_items"
         },
         "displayName": "BCG_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "BCG_O_NR_checkbox1"
       },
       "BCG_12_23_HealthCenter": {
@@ -2163,12 +2163,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "BCG_HC_NR_checkbox2_items"
         },
         "displayName": "BCG_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "BCG_HC_NR_checkbox2"
       },
       "BCG_12_23_Outreach": {
@@ -2190,12 +2190,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "BCG_O_NR_checkbox2_items"
         },
         "displayName": "BCG_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "BCG_O_NR_checkbox2"
       },
       "BCG_OpenedVials": {
@@ -2217,12 +2217,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "BCG_OV_NR_checkbox_items"
         },
         "displayName": "BCG_OV_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "BCG_OV_NR_checkbox"
       },
       "Polio_Newborn_0_11_HealthCenter": {
@@ -2244,12 +2244,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "PN_HC_NR_checkbox1_items"
         },
         "displayName": "PN_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "PN_HC_NR_checkbox1"
       },
       "Polio_Newborn_0_11_Outreach": {
@@ -2271,12 +2271,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "PN_O_NR_checkbox1_items"
         },
         "displayName": "PN_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "PN_O_NR_checkbox1"
       },
       "Polio_Dose1_0_11_HealthCenter": {
@@ -2298,12 +2298,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P1_HC_NR_checkbox1_items"
         },
         "displayName": "P1_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "P1_HC_NR_checkbox1"
       },
       "Polio_Dose1_0_11_Outreach": {
@@ -2325,12 +2325,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P1_O_NR_checkbox1_items"
         },
         "displayName": "P1_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "P1_O_NR_checkbox1"
       },
       "Polio_Dose1_12_23_HealthCenter": {
@@ -2352,12 +2352,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P1_HC_NR_checkbox2_items"
         },
         "displayName": "P1_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "P1_HC_NR_checkbox2"
       },
       "Polio_Dose1_12_23_Outreach": {
@@ -2379,12 +2379,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P1_O_NR_checkbox2_items"
         },
         "displayName": "P1_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "P1_O_NR_checkbox2"
       },
       "Polio_Dose2_0_11_HealthCenter": {
@@ -2406,12 +2406,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P2_HC_NR_checkbox1_items"
         },
         "displayName": "P2_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "P2_HC_NR_checkbox1"
       },
       "Polio_Dose2_0_11_Outreach": {
@@ -2433,12 +2433,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P2_O_NR_checkbox1_items"
         },
         "displayName": "P2_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "P2_O_NR_checkbox1"
       },
       "Polio_Dose2_12_23_HealthCenter": {
@@ -2460,12 +2460,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P2_HC_NR_checkbox2_items"
         },
         "displayName": "P2_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "P2_HC_NR_checkbox2"
       },
       "Polio_Dose2_12_23_Outreach": {
@@ -2487,12 +2487,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P2_O_NR_checkbox2_items"
         },
         "displayName": "P2_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "P2_O_NR_checkbox2"
       },
       "Polio_Dose3_0_11_HealthCenter": {
@@ -2514,12 +2514,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P3_HC_NR_checkbox1_items"
         },
         "displayName": "P3_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "P3_HC_NR_checkbox1"
       },
       "Polio_Dose3_0_11_Outreach": {
@@ -2541,12 +2541,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P3_O_NR_checkbox1_items"
         },
         "displayName": "P3_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "P3_O_NR_checkbox1"
       },
       "Polio_Dose3_12_23_HealthCenter": {
@@ -2568,12 +2568,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P3_HC_NR_checkbox2_items"
         },
         "displayName": "P3_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "P3_HC_NR_checkbox2"
       },
       "Polio_Dose3_12_23_Outreach": {
@@ -2595,12 +2595,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P3_O_NR_checkbox2_items"
         },
         "displayName": "P3_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "P3_O_NR_checkbox2"
       },
       "Polio10_OpenedVials": {
@@ -2633,12 +2633,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "P20_OV_NR_checkbox_items"
         },
         "displayName": "P20_OV_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "P20_OV_NR_checkbox"
       },
       "Penta_Dose1_0_11_HealthCenter": {
@@ -2660,12 +2660,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe1_HC_NR_checkbox1_items"
         },
         "displayName": "Pe1_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pe1_HC_NR_checkbox1"
       },
       "Penta_Dose1_0_11_Outreach": {
@@ -2687,12 +2687,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe1_O_NR_checkbox1_items"
         },
         "displayName": "Pe1_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pe1_O_NR_checkbox1"
       },
       "Penta_Dose1_12_23_HealthCenter": {
@@ -2714,12 +2714,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe1_HC_NR_checkbox2_items"
         },
         "displayName": "Pe1_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pe1_HC_NR_checkbox2"
       },
       "Penta_Dose1_12_23_Outreach": {
@@ -2741,12 +2741,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe1_O_NR_checkbox2_items"
         },
         "displayName": "Pe1_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pe1_O_NR_checkbox2"
       },
       "Penta_Dose2_0_11_HealthCenter": {
@@ -2768,12 +2768,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe2_HC_NR_checkbox1_items"
         },
         "displayName": "Pe2_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pe2_HC_NR_checkbox1"
       },
       "Penta_Dose2_0_11_Outreach": {
@@ -2795,12 +2795,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe2_O_NR_checkbox1_items"
         },
         "displayName": "Pe2_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pe2_O_NR_checkbox1"
       },
       "Penta_Dose2_12_23_HealthCenter": {
@@ -2822,12 +2822,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe2_HC_NR_checkbox2_items"
         },
         "displayName": "Pe2_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pe2_HC_NR_checkbox2"
       },
       "Penta_Dose2_12_23_Outreach": {
@@ -2849,12 +2849,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe2_O_NR_checkbox2_items"
         },
         "displayName": "Pe2_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pe2_O_NR_checkbox2"
       },
       "Penta_Dose3_0_11_HealthCenter": {
@@ -2876,12 +2876,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe3_HC_NR_checkbox1_items"
         },
         "displayName": "Pe3_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pe3_HC_NR_checkbox1"
       },
       "Penta_Dose3_0_11_Outreach": {
@@ -2903,12 +2903,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe3_O_NR_checkbox1_items"
         },
         "displayName": "Pe3_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pe3_O_NR_checkbox1"
       },
       "Penta_Dose3_12_23_HealthCenter": {
@@ -2930,12 +2930,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe3_HC_NR_checkbox2_items"
         },
         "displayName": "Pe3_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pe3_HC_NR_checkbox2"
       },
       "Penta_Dose3_12_23_Outreach": {
@@ -2957,12 +2957,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pe3_O_NR_checkbox2_items"
         },
         "displayName": "Pe3_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pe3_O_NR_checkbox2"
       },
       "Penta1_OpenedVials": {
@@ -2995,12 +2995,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Penta10_OV_NR_checkbox_items"
         },
         "displayName": "Penta10_OV_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "Penta10_OV_NR_checkbox"
       },
       "PCV10_Dose1_0_11_HealthCenter": {
@@ -3022,12 +3022,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc1_HC_NR_checkbox1_items"
         },
         "displayName": "Pc1_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pc1_HC_NR_checkbox1"
       },
       "PCV10_Dose1_0_11_Outreach": {
@@ -3049,12 +3049,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc1_O_NR_checkbox1_items"
         },
         "displayName": "Pc1_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pc1_O_NR_checkbox1"
       },
       "PCV10_Dose1_12_23_HealthCenter": {
@@ -3076,12 +3076,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc1_HC_NR_checkbox2_items"
         },
         "displayName": "Pc1_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pc1_HC_NR_checkbox2"
       },
       "PCV10_Dose1_12_23_Outreach": {
@@ -3103,12 +3103,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc1_O_NR_checkbox2_items"
         },
         "displayName": "Pc1_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pc1_O_NR_checkbox2"
       },
       "PCV10_Dose2_0_11_HealthCenter": {
@@ -3130,12 +3130,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc2_HC_NR_checkbox1_items"
         },
         "displayName": "Pc2_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pc2_HC_NR_checkbox1"
       },
       "PCV10_Dose2_0_11_Outreach": {
@@ -3157,12 +3157,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc2_O_NR_checkbox1_items"
         },
         "displayName": "Pc2_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pc2_O_NR_checkbox1"
       },
       "PCV10_Dose2_12_23_HealthCenter": {
@@ -3184,12 +3184,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc2_HC_NR_checkbox2_items"
         },
         "displayName": "Pc2_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pc2_HC_NR_checkbox2"
       },
       "PCV10_Dose2_12_23_Outreach": {
@@ -3211,12 +3211,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc2_O_NR_checkbox2_items"
         },
         "displayName": "Pc2_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pc2_O_NR_checkbox2"
       },
       "PCV10_Dose3_0_11_HealthCenter": {
@@ -3238,12 +3238,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc3_HC_NR_checkbox1_items"
         },
         "displayName": "Pc3_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pc3_HC_NR_checkbox1"
       },
       "PCV10_Dose3_0_11_Outreach": {
@@ -3265,12 +3265,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc3_O_NR_checkbox1_items"
         },
         "displayName": "Pc3_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Pc3_O_NR_checkbox1"
       },
       "PCV10_Dose3_12_23_HealthCenter": {
@@ -3292,12 +3292,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc3_HC_NR_checkbox2_items"
         },
         "displayName": "Pc3_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pc3_HC_NR_checkbox2"
       },
       "PCV10_Dose3_12_23_Outreach": {
@@ -3319,12 +3319,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Pc3_O_NR_checkbox2_items"
         },
         "displayName": "Pc3_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Pc3_O_NR_checkbox2"
       },
       "PCV_OpenedVials": {
@@ -3336,6 +3336,7 @@
         ],
         "type": "integer",
         "displayName": "PCV_OpenedVials",
+        "valuesList": "one_choice",
         "elementKey": "PCV_OpenedVials"
       },
       "PCV_OV_NR_checkbox": {
@@ -3346,12 +3347,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "PCV_OV_NR_checkbox_items"
         },
         "displayName": "PCV_OV_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "PCV_OV_NR_checkbox"
       },
       "Measles_0_11_HealthCenter": {
@@ -3373,12 +3374,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Measles_HC_NR_checkbox1_items"
         },
         "displayName": "Measles_HC_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Measles_HC_NR_checkbox1"
       },
       "Measles_0_11_Outreach": {
@@ -3400,12 +3401,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Measles_O_NR_checkbox1_items"
         },
         "displayName": "Measles_O_NR_checkbox1",
+        "valuesList": "one_choice",
         "elementKey": "Measles_O_NR_checkbox1"
       },
       "Measles_12_23_HealthCenter": {
@@ -3427,12 +3428,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Measles_HC_NR_checkbox2_items"
         },
         "displayName": "Measles_HC_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Measles_HC_NR_checkbox2"
       },
       "Measles_12_23_Outreach": {
@@ -3454,12 +3455,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Measles_O_NR_checkbox2_items"
         },
         "displayName": "Measles_O_NR_checkbox2",
+        "valuesList": "one_choice",
         "elementKey": "Measles_O_NR_checkbox2"
       },
       "Measles_OpenedVials": {
@@ -3481,12 +3482,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "Measles_OV_NR_checkbox_items"
         },
         "displayName": "Measles_OV_NR_checkbox",
+        "valuesList": "one_choice",
         "elementKey": "Measles_OV_NR_checkbox"
       }
     },

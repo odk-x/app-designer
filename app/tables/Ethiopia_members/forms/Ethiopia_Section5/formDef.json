@@ -752,7 +752,6 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"
@@ -818,6 +817,7 @@
       },
       "is_smoker": {
         "type": "string",
+        "valuesList": "smoker_type",
         "_defn": [
           {
             "_row_num": 2,
@@ -875,6 +875,7 @@
       },
       "smokes_in_house": {
         "type": "string",
+        "valuesList": "smokes_frequency",
         "_defn": [
           {
             "_row_num": 9,
@@ -964,7 +965,6 @@
       },
       "where_medical_attention": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "where_medical_attention_items"

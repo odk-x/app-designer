@@ -792,7 +792,6 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"
@@ -984,7 +983,6 @@
       },
       "where_medical_attention": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "where_medical_attention_items"
@@ -1123,6 +1121,7 @@
       },
       "answering_for_self": {
         "type": "string",
+        "valuesList": "self",
         "_defn": [
           {
             "_row_num": 2,
@@ -1138,6 +1137,7 @@
       },
       "shortness_of_breath": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 3,
@@ -1166,6 +1166,7 @@
       },
       "month_short_of_breath": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 7,
@@ -1180,6 +1181,7 @@
       },
       "cough": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 9,
@@ -1194,6 +1196,7 @@
       },
       "cough_frequency": {
         "type": "string",
+        "valuesList": "frequency",
         "_defn": [
           {
             "_row_num": 11,
@@ -1208,6 +1211,7 @@
       },
       "dry_cough": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 13,
@@ -1222,6 +1226,7 @@
       },
       "productive_cough": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 14,
@@ -1236,6 +1241,7 @@
       },
       "sore_throat": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 15,
@@ -1264,6 +1270,7 @@
       },
       "month_sore_throat": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 19,

@@ -5069,6 +5069,7 @@
       },
       "baby_alive": {
         "type": "string",
+        "valuesList": "yes_noanswer",
         "_defn": [
           {
             "_row_num": 8,
@@ -5097,6 +5098,7 @@
       },
       "baby_alive_now": {
         "type": "string",
+        "valuesList": "yes_noanswer",
         "_defn": [
           {
             "_row_num": 11,
@@ -5139,6 +5141,7 @@
       },
       "delivery_assisted": {
         "type": "string",
+        "valuesList": "attendant",
         "_defn": [
           {
             "_row_num": 17,
@@ -5167,6 +5170,7 @@
       },
       "induced_labor": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 19,
@@ -5181,6 +5185,7 @@
       },
       "c_section": {
         "type": "string",
+        "valuesList": "yes_noanswer",
         "_defn": [
           {
             "_row_num": 20,
@@ -5195,11 +5200,11 @@
       },
       "complications": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "complications_items"
         },
+        "valuesList": "complication",
         "_defn": [
           {
             "_row_num": 21,
@@ -5228,6 +5233,7 @@
       },
       "bf_after_deliv": {
         "type": "string",
+        "valuesList": "yes_noanswer",
         "_defn": [
           {
             "_row_num": 25,
@@ -5242,6 +5248,7 @@
       },
       "still_bf": {
         "type": "string",
+        "valuesList": "yes_noanswer",
         "_defn": [
           {
             "_row_num": 26,
@@ -5270,6 +5277,7 @@
       },
       "hiv_tested": {
         "type": "string",
+        "valuesList": "yes_noanswer",
         "_defn": [
           {
             "_row_num": 29,
@@ -5284,11 +5292,11 @@
       },
       "test_location": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "test_location_items"
         },
+        "valuesList": "wheretest",
         "_defn": [
           {
             "_row_num": 30,
@@ -5317,6 +5325,7 @@
       },
       "test_result": {
         "type": "string",
+        "valuesList": "recentHIV",
         "_defn": [
           {
             "_row_num": 32,
@@ -5331,6 +5340,7 @@
       },
       "ccc": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 33,
@@ -5345,6 +5355,7 @@
       },
       "cd4_known": {
         "type": "string",
+        "valuesList": "resulttest",
         "_defn": [
           {
             "_row_num": 34,
@@ -5373,6 +5384,7 @@
       },
       "prescr_meds": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 36,
@@ -5387,6 +5399,7 @@
       },
       "art": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 38,
@@ -5401,6 +5414,7 @@
       },
       "azt": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 39,
@@ -5415,6 +5429,7 @@
       },
       "art_duration": {
         "type": "string",
+        "valuesList": "long",
         "_defn": [
           {
             "_row_num": 40,
@@ -5429,6 +5444,7 @@
       },
       "art_curr": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 41,
@@ -5443,6 +5459,7 @@
       },
       "labor_meds": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 42,
@@ -5457,6 +5474,7 @@
       },
       "meds_after_deliv": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 43,
@@ -5471,6 +5489,7 @@
       },
       "child_meds": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 44,
@@ -5485,6 +5504,7 @@
       },
       "child_curr_meds": {
         "type": "string",
+        "valuesList": "yes_notsure",
         "_defn": [
           {
             "_row_num": 45,
@@ -5499,6 +5519,7 @@
       },
       "child_missed_doses": {
         "type": "string",
+        "valuesList": "misschild",
         "_defn": [
           {
             "_row_num": 46,
@@ -5513,7 +5534,6 @@
       },
       "rel_change": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "rel_change_items"
@@ -5548,7 +5568,6 @@
       },
       "rel_end_reason": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "rel_end_reason_items"
@@ -5587,6 +5606,7 @@
       },
       "delivery_location": {
         "type": "string",
+        "valuesList": "birthplace",
         "_defn": [
           {
             "_row_num": 15,
@@ -5601,6 +5621,7 @@
       },
       "infant_test": {
         "type": "string",
+        "valuesList": "rapid",
         "_defn": [
           {
             "_row_num": 49,
@@ -5695,7 +5716,6 @@
       },
       "employment": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "employment_items"
@@ -5780,7 +5800,6 @@
       },
       "refusal_reasons": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "refusal_reasons_items"

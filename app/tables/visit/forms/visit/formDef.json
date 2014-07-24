@@ -503,6 +503,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "select_linked_plot",
         "elementKey": "plot_name"
       },
       "date": {
@@ -534,6 +535,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "plant_health_type",
         "elementKey": "plant_health"
       },
       "plant_picture": {
@@ -545,7 +547,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -567,11 +568,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "pests_items"
         },
+        "valuesList": "pest_type",
         "elementKey": "pests"
       },
       "soil": {
@@ -582,6 +583,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "soil_texture",
         "elementKey": "soil"
       },
       "observations": {

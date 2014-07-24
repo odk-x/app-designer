@@ -1150,6 +1150,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "regions_csv",
         "elementKey": "region"
       },
       "country_csv": {
@@ -1160,6 +1161,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "countries_csv",
         "elementKey": "country_csv"
       },
       "location": {
@@ -1200,7 +1202,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -1222,6 +1223,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "birds",
         "elementKey": "bird"
       },
       "color": {
@@ -1232,6 +1234,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "colors",
         "elementKey": "color"
       },
       "secondaryColor": {
@@ -1242,11 +1245,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "secondaryColor_items"
         },
+        "valuesList": "colors",
         "elementKey": "secondaryColor"
       },
       "confirmTeal": {
@@ -1287,6 +1290,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "sexes",
         "elementKey": "sex"
       }
     },

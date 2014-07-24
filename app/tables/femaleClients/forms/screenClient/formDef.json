@@ -2130,6 +2130,7 @@
       },
       "randomization": {
         "type": "string",
+        "valuesList": "randomization_arms",
         "_defn": [
           {
             "_row_num": 31,
@@ -2288,7 +2289,6 @@
       },
       "complications": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "complications_items"
@@ -2343,6 +2343,7 @@
       },
       "hiv_tested": {
         "type": "string",
+        "valuesList": "yes_no_nr",
         "_defn": [
           {
             "_row_num": 25,
@@ -2357,7 +2358,6 @@
       },
       "test_location": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "test_location_items"
@@ -2382,6 +2382,7 @@
       },
       "test_result": {
         "type": "string",
+        "valuesList": "hiv_status",
         "_defn": [
           {
             "_row_num": 26,
@@ -2526,7 +2527,6 @@
       },
       "rel_change": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "rel_change_items"
@@ -2561,7 +2561,6 @@
       },
       "rel_end_reason": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "rel_end_reason_items"
@@ -2616,6 +2615,7 @@
       },
       "agree_screening": {
         "type": "string",
+        "valuesList": "yes_no",
         "_defn": [
           {
             "_row_num": 6,
@@ -2630,6 +2630,7 @@
       },
       "pregnant": {
         "type": "string",
+        "valuesList": "yes_no",
         "_defn": [
           {
             "_row_num": 9,
@@ -2658,6 +2659,7 @@
       },
       "ethnic_group": {
         "type": "string",
+        "valuesList": "ethnic_groups",
         "_defn": [
           {
             "_row_num": 12,
@@ -2686,6 +2688,7 @@
       },
       "education_level": {
         "type": "string",
+        "valuesList": "education_level_options",
         "_defn": [
           {
             "_row_num": 14,
@@ -2700,6 +2703,7 @@
       },
       "religion": {
         "type": "string",
+        "valuesList": "religion",
         "_defn": [
           {
             "_row_num": 15,
@@ -2728,11 +2732,11 @@
       },
       "employment": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "employment_items"
         },
+        "valuesList": "employment_options",
         "_defn": [
           {
             "_row_num": 17,
@@ -2761,6 +2765,7 @@
       },
       "curr_relationship": {
         "type": "string",
+        "valuesList": "yes_no",
         "_defn": [
           {
             "_row_num": 20,
@@ -2817,6 +2822,7 @@
       },
       "clinic_proximity": {
         "type": "string",
+        "valuesList": "yes_no",
         "_defn": [
           {
             "_row_num": 24,
@@ -2831,6 +2837,7 @@
       },
       "client_consent": {
         "type": "string",
+        "valuesList": "study_participation",
         "_defn": [
           {
             "_row_num": 29,
@@ -2845,11 +2852,11 @@
       },
       "refusal_reasons": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "refusal_reasons_items"
         },
+        "valuesList": "no_participation_reasons",
         "_defn": [
           {
             "_row_num": 32,

@@ -1191,6 +1191,7 @@
       },
       "relation": {
         "type": "string",
+        "valuesList": "relation_to_house_head",
         "_defn": [
           {
             "_row_num": 2,
@@ -1206,6 +1207,7 @@
       },
       "gender": {
         "type": "string",
+        "valuesList": "gender",
         "_defn": [
           {
             "_row_num": 3,
@@ -1234,6 +1236,7 @@
       },
       "marital_status": {
         "type": "string",
+        "valuesList": "marital_options",
         "_defn": [
           {
             "_row_num": 6,
@@ -1262,6 +1265,7 @@
       },
       "region_born": {
         "type": "string",
+        "valuesList": "regions",
         "_defn": [
           {
             "_row_num": 11,
@@ -1276,6 +1280,7 @@
       },
       "religion": {
         "type": "string",
+        "valuesList": "religions",
         "_defn": [
           {
             "_row_num": 13,
@@ -1311,7 +1316,6 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"
@@ -1503,7 +1507,6 @@
       },
       "where_medical_attention": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "where_medical_attention_items"

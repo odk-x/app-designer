@@ -391,6 +391,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "electricity"
       },
       "water": {
@@ -401,6 +402,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "water"
       },
       "location": {
@@ -440,6 +442,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "select_linked_data",
         "elementKey": "owner"
       },
       "youngest": {
@@ -450,11 +453,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "youngest_items"
         },
+        "valuesList": "select_linked_data",
         "elementKey": "youngest"
       }
     },
