@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/jgiNewFollow.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+    </head>
+
+    <body id="main">
+    <!-- Here we'll just collect some data to about the follow we're about to
+    begin. -->
+    <div class="container">
+    <div class="description-text" id="description">New Follow</div>
+
+      <form>
+        <input id="FOL_date" type="text" placeholder="Date of Follow">
+        <input id="FOL_B_AnimID" type="text" placeholder="ID of Focal Chimp">
+        <input id="FOL_CL_community_id" type="text" placeholder="Community ID">
+        <input id="FOL_begin_time" type="text" placeholder="Begin Time (hh:mm)">
+        <input id="FOL_am_observer_1" type="text" placeholder="Name of Researcher">
+      </form>
+
+      <!-- Note that this button cannot go inside the form. I should probably
+      figure out why. -->
+      <button id="begin-follow" class="btn-launch btn btn-positive btn-block">Begin</button>
+  </div> <!-- .container -->
+        <script type="text/javascript">
+            $(display());
+        </script>
+    </body>
+</html>
