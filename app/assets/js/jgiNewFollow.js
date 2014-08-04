@@ -16,11 +16,11 @@ function display() {
             beginTime,
             researcher) {
         var struct = {};
-        struct.FOL_date = date;
-        struct.FOL_B_AnimID = focalChimpId;
-        struct.FOL_CL_community_id = communityId;
-        struct.FOL_begin_time = beginTime;
-        struct.FOL_am_observe_1 = researcher;
+        struct['FOL_date'] = date;
+        struct['FOL_B_AnimID'] = focalChimpId;
+        struct['FOL_CL_community_id'] = communityId;
+        struct['FOL_time_begin'] = beginTime;
+        struct['FOL_am_observer1'] = researcher;
 
         // Now we'll stringify the object and write it into the database.
         var stringified = JSON.stringify(struct);

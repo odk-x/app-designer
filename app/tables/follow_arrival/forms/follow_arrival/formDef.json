@@ -2,7 +2,7 @@
   "xlsx": {
     "survey": [
       {
-        "type": "date",
+        "type": "text",
         "name": "FA_FOL_date",
         "display": {
           "text": "Date of follow"
@@ -58,7 +58,7 @@
         "_row_num": 8
       },
       {
-        "type": "time",
+        "type": "text",
         "name": "FA_time_start",
         "display": {
           "text": "Time the arrival started"
@@ -66,7 +66,7 @@
         "_row_num": 9
       },
       {
-        "type": "time",
+        "type": "text",
         "name": "FA_time_end",
         "display": {
           "text": "Time the arrival ended"
@@ -180,8 +180,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
-        "elementType": "date",
+        "type": "string",
         "elementKey": "FA_FOL_date"
       },
       "FA_FOL_B_focal_AnimID": {
@@ -251,8 +250,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
-        "elementType": "time",
+        "type": "string",
         "elementKey": "FA_time_start"
       },
       "FA_time_end": {
@@ -262,8 +260,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
-        "elementType": "time",
+        "type": "string",
         "elementKey": "FA_time_end"
       },
       "FA_duration_of_obs": {
@@ -288,7 +285,7 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "date",
+            "type": "text",
             "name": "FA_FOL_date",
             "display": {
               "text": "Date of follow"
@@ -296,7 +293,7 @@
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "date",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -379,7 +376,7 @@
             "promptIdx": 6
           },
           {
-            "type": "time",
+            "type": "text",
             "name": "FA_time_start",
             "display": {
               "text": "Time the arrival started"
@@ -387,12 +384,12 @@
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
-            "_type": "time",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 7
           },
           {
-            "type": "time",
+            "type": "text",
             "name": "FA_time_end",
             "display": {
               "text": "Time the arrival ended"
@@ -400,7 +397,7 @@
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
-            "_type": "time",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 8
           },

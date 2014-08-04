@@ -2,7 +2,7 @@
   "xlsx": {
     "survey": [
       {
-        "type": "date",
+        "type": "text",
         "name": "GRM_FOL_date",
         "display": {
           "text": "date on which grooming bout occurred"
@@ -18,7 +18,7 @@
         "_row_num": 3
       },
       {
-        "type": "time",
+        "type": "text",
         "name": "GRM_time_begin",
         "display": {
           "text": "Time that grooming bout began"
@@ -34,7 +34,7 @@
         "_row_num": 5
       },
       {
-        "type": "time",
+        "type": "text",
         "name": "GRM_time_end",
         "display": {
           "text": "Time that grooming bout ended"
@@ -172,8 +172,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
-        "elementType": "date",
+        "type": "string",
         "elementKey": "GRM_FOL_date"
       },
       "GRM_FOL_B_focal_AnimID": {
@@ -193,8 +192,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
-        "elementType": "time",
+        "type": "string",
         "elementKey": "GRM_time_begin"
       },
       "GRM_B_partner_AnimID": {
@@ -214,8 +212,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
-        "elementType": "time",
+        "type": "string",
         "elementKey": "GRM_time_end"
       },
       "GRM_dur": {
@@ -270,7 +267,7 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "date",
+            "type": "text",
             "name": "GRM_FOL_date",
             "display": {
               "text": "date on which grooming bout occurred"
@@ -278,7 +275,7 @@
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "date",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -296,7 +293,7 @@
             "promptIdx": 1
           },
           {
-            "type": "time",
+            "type": "text",
             "name": "GRM_time_begin",
             "display": {
               "text": "Time that grooming bout began"
@@ -304,7 +301,7 @@
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
-            "_type": "time",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen4",
             "promptIdx": 2
           },
@@ -322,7 +319,7 @@
             "promptIdx": 3
           },
           {
-            "type": "time",
+            "type": "text",
             "name": "GRM_time_end",
             "display": {
               "text": "Time that grooming bout ended"
@@ -330,7 +327,7 @@
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
-            "_type": "time",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 4
           },

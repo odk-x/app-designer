@@ -2,7 +2,7 @@
   "xlsx": {
     "survey": [
       {
-        "type": "date",
+        "type": "text",
         "name": "FMP_FOL_date",
         "display": {
           "text": "Date of follow"
@@ -172,8 +172,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
-        "elementType": "date",
+        "type": "string",
         "elementKey": "FMP_FOL_date"
       },
       "FMP_FOL_B_focal_AnimID": {
@@ -268,7 +267,7 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "date",
+            "type": "text",
             "name": "FMP_FOL_date",
             "display": {
               "text": "Date of follow"
@@ -276,7 +275,7 @@
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "date",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
