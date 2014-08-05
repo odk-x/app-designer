@@ -1,6 +1,20 @@
 /* global control, util, alert */
 'use strict';
 
+if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
+    console.log('Welcome to Tables debugging in Chrome!');
+    $.ajax({
+        url: control.getFileAsUrl('output/debug/follow_data.json'),
+        async: false,  // do it first
+        success: function(dataObj) {
+            if (dataObj === undefined || dataObj === null) {
+                console.log('Could not load data json for table: follow');
+            }
+            window.data.setBackingObject(dataObj);
+        }
+    });
+}
+
 function display() {
 
     // We're expecting the follow time to be present as a url parameter,
@@ -25,7 +39,7 @@ function display() {
 
     var updateOlderMenu = function() {
 
-        var dropdownMenu = $('#older-times-menu');
+        var dropdownMenu = $('#older-items-menu');
         // First, get the older times.
         var existingTimes = util.getExistingTimesForDate(
                 followDate,
@@ -34,6 +48,22 @@ function display() {
         console.log('existing timepoints: ' + existingTimes);
 
         var baseUrl = 'assets/jgiFollowScreen.html';
+
+        // handle the case where there are no timepoints yet.
+        if (existingTimes.length === 0) {
+            var noTimesItem = $('<li>').eq(0);
+            // we also need to create an anchor to get bootstrap to style the
+            // item correctly
+            var anchor = $('<a>');
+            anchor.prop('href', '#');  // we don't want it to go anywhere
+            anchor.html('No Other Time Points');
+            noTimesItem.append(anchor);
+            // Remove any older items that are somehow hanging around. This
+            // should always be unnecessary, I think.
+            dropdownMenu.empty();
+            dropdownMenu.append(noTimesItem);
+            return;
+        }
 
         for (var i = 0; i < existingTimes.length; i++) {
             var olderFollowTime = existingTimes[i];
@@ -54,14 +84,7 @@ function display() {
         }
     };
 
-    // Update the dropdown menu.
-    // THIS LINE MUST BE COMMENTED OUT TO RUN IN THE BROWSER, because a query
-    // method is failing for some reason.
-    //updateOlderMenu();
-    console.log(
-            'if you are not seeing any checkboxes in the browser, make' +
-            'sure you have commented out the call to updateOlderMenu');
-
+    updateOlderMenu();
 
     // These are the suffixes we'll use for the ids of the checkboxes. A whole
     // id would thus consist of something along the lines of:
