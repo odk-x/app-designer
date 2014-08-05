@@ -51,7 +51,7 @@ function display() {
 
         console.log('existing timepoints: ' + existingTimes);
 
-        var baseUrl = 'assets/jgiFollowScreen.html';
+        var baseUrl = 'assets/followScreen.html';
 
         // handle the case where there are no timepoints yet.
         if (existingTimes.length === 0) {
@@ -75,8 +75,25 @@ function display() {
                     olderFollowTime,
                     focalChimpId);
             var anchor = $('<a>');
-            anchor.prop('href', control.getFileAsUrl(baseUrl + queryString));
+            //anchor.prop('href', control.getFileAsUrl(baseUrl + queryString));
             anchor.html(olderFollowTime);
+            // Ok, and now yet another annoyance of dealing with the current
+            // setup. We can't let the links launch themselves, as this
+            // wouldn't inject the correct objects. We need to launch the page
+            // using our own method.
+            // Note that weirdness of adding the click handler in a closure is
+            // due to the way that javascript scope works--it only has function
+            // scope, so without the closure we only ever call the last value,
+            // which obviously isn't correct. Assigning the correct query
+            // string in the closure solves this.
+            (function(queryStr) {
+                anchor.on('click', function() {
+                    control.launchHTML(baseUrl + queryStr);
+                });
+            })(queryString);
+            //anchor.on('click', function() {
+                //control.launchHTML(baseUrl + queryString);
+            //});
             var menuItem = $('<li>');
             menuItem.append(anchor);
             
