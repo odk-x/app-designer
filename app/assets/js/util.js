@@ -57,7 +57,11 @@ util.getExistingTimesForDate = function(date, focalChimpId) {
 
     var times = [];
     for (var i = 0; i < tableData.getCount(); i++) {
-        times[i] = tableData.getData(i, 'FA_time_start');
+        var dataPoint = tableData.getData(i, 'FA_time_start');
+        // now see if we already have this value, in which case we won't add it
+        if (times.indexOf(dataPoint) < 0) {
+            times[i] = dataPoint;
+        }
     }
 
     return times;

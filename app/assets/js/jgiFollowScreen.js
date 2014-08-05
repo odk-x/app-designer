@@ -40,6 +40,10 @@ function display() {
     var updateOlderMenu = function() {
 
         var dropdownMenu = $('#older-items-menu');
+        // Remove any older items that are somehow hanging around. This
+        // should always be unnecessary, I think.
+        dropdownMenu.empty();
+        
         // First, get the older times.
         var existingTimes = util.getExistingTimesForDate(
                 followDate,
@@ -58,9 +62,6 @@ function display() {
             anchor.prop('href', '#');  // we don't want it to go anywhere
             anchor.html('No Other Time Points');
             noTimesItem.append(anchor);
-            // Remove any older items that are somehow hanging around. This
-            // should always be unnecessary, I think.
-            dropdownMenu.empty();
             dropdownMenu.append(noTimesItem);
             return;
         }
@@ -74,13 +75,13 @@ function display() {
                     olderFollowTime,
                     focalChimpId);
             var anchor = $('<a>');
-            anchor.prop('href', control.getFileAsURL(baseUrl + queryString));
+            anchor.prop('href', control.getFileAsUrl(baseUrl + queryString));
             anchor.html(olderFollowTime);
             var menuItem = $('<li>');
-            menuItem.appendChild(anchor);
+            menuItem.append(anchor);
             
             // And now append the menu item.
-            dropdownMenu.appendChild(menuItem);
+            dropdownMenu.append(menuItem);
         }
     };
 
