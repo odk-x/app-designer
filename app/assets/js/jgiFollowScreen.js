@@ -265,9 +265,10 @@ function display() {
         for (var i = 0; i < allChimps.length; i++) {
             var chimp = allChimps[i];
             var chimpId = chimp.id;
-            writeRowForChimp(false, null, chimpId, false);
+            var presentCheckbox = $('#' + chimpId + presentSuffix);
+            var isChecked = presentCheckbox.prop('checked');
+            writeRowForChimp(false, null, chimpId, isChecked);
         }
-
     };
 
     /**
@@ -415,16 +416,20 @@ function display() {
 
     // Now handle the first pass of the screen.
     if (isNewTimePoint(followTime)) {
-        // Then all the checkboxes are empty. We'll generate a row for every
-        // chimp with this call, which is important for establishing the
-        // invariants we're going to use later.
-        initDatabaseFromUI();
-
-        // Now we might have to update the UI from the previous time point.
+        // Might have to update the UI from the previous time point.
         // We'll do this if the previous time exists.
         var previousTime = decrementTime(followTime);
         if (!isNewTimePoint(previousTime)) {
             initUIFromDatabaseForTime(previousTime);
+            // And now generate entries for all the rows. This will also
+            // establish a row for every chimp, which is important for our
+            // assumptions down the line.
+            initDatabaseFromUI();
+        } else {
+            // Then all the checkboxes are empty. We'll generate a row for
+            // every chimp with this call, which is important for establishing
+            // the invariants we're going to use later.
+            initDatabaseFromUI();
         }
     } else {
         // We're returning to an existing timepoint, so update the UI to
