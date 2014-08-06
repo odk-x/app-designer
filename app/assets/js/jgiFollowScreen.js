@@ -343,6 +343,36 @@ function display() {
         return result;
     };
 
+    /**
+     * Set up the ui to show the focal chimp.
+     */
+    var initUIForFocalChimp = function() {
+        // There are four items pertaining to the focal chimp:
+        // its id, present, 5m, and closest.
+        // we are going to hide the three checkboxes and create a new td
+        // spanning its space saying "Focal"
+        var present = $('#' + focalChimpId + presentSuffix);
+        var fiveMeters = $('#' + focalChimpId + fiveMeterSuffix);
+        var closest = $('#' + focalChimpId + closestSuffix);
+        
+        // We have selected the inputs, but we actually need to remove their
+        // parents to keep the correct number of td elements.
+        present.parent().remove();
+        fiveMeters.parent().remove();
+        closest.parent().remove();
+
+        // Now add the new element.
+        var focalTd = $('<td colspan=3>');
+        focalTd.html('Focal');
+        var chimp = $('#' + focalChimpId)[0];
+        // we're passing the first element because we want the HTML object, not
+        // the jquery object.
+        insertAfter(focalTd[0], chimp);
+
+        // and assign the focal-chimp class to the chimp.
+        $('#' + focalChimpId).addClass('focal-chimp');
+    };
+
     /*****  end function declaractions  *****/
 
     // First we'll add the dynamic UI elements.
@@ -369,6 +399,7 @@ function display() {
     $('#time-label').eq(0).html(followTimeUserFriendly);
 
     updateOlderMenu();
+    initUIForFocalChimp();
 
 
     // Now we'll attach a click listener that rights the state of the checkbox
