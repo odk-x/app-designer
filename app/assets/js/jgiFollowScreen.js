@@ -391,6 +391,24 @@ function display() {
         writeRowForChimp(true, rowId, chimpId, isChecked);
     });
 
+    // We also want a click listener on each of the chimp names, which will
+    // mark that it is closest to the active chimp.
+    $('.chimp').on('click', function() {
+        var chimp = $(this);
+        if (chimp.hasClass('focal-chimp')) {
+            // do nothing
+            return;
+        }
+        if (chimp.hasClass('active-chimp')){ 
+            chimp.removeClass('active-chimp');
+        } else {
+            // We want to eliminate the active-chimp class on anything else
+            // that has it, lest we end up with two active chimps.
+            $('.active-chimp').removeClass('active-chimp');
+            chimp.addClass('active-chimp');
+        }
+    });
+
     $('#next-button').on('click', function() {
         console.log('clicked next');
 
