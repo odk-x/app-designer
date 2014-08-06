@@ -15,7 +15,7 @@ input[type='checkbox'] {
     border: 2px solid #555;
 }
 
-.active-chimp {
+.closest-chimp {
     background-color: #5cb85c;
     border-color: #5cb85c;
     border-radius: 4px;

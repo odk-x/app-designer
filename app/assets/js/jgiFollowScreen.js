@@ -399,13 +399,13 @@ function display() {
             // do nothing
             return;
         }
-        if (chimp.hasClass('active-chimp')){ 
-            chimp.removeClass('active-chimp');
+        if (chimp.hasClass('closest-chimp')){ 
+            chimp.removeClass('closest-chimp');
         } else {
-            // We want to eliminate the active-chimp class on anything else
+            // We want to eliminate the closest-chimp class on anything else
             // that has it, lest we end up with two active chimps.
-            $('.active-chimp').removeClass('active-chimp');
-            chimp.addClass('active-chimp');
+            $('.closest-chimp').removeClass('closest-chimp');
+            chimp.addClass('closest-chimp');
         }
     });
 
