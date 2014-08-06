@@ -166,12 +166,12 @@ function display() {
             // string in the closure solves this.
             (function(queryStr) {
                 anchor.on('click', function() {
-                    control.launchHTML(baseUrl + queryStr);
+                    var url = control.getFileAsUrl(baseUrl + queryStr);
+                    console.log('url: ' + url);
+                    window.location.href = url;
                 });
             })(queryString);
-            //anchor.on('click', function() {
-                //control.launchHTML(baseUrl + queryString);
-            //});
+            
             var menuItem = $('<li>');
             menuItem.append(anchor);
             
@@ -500,7 +500,10 @@ function display() {
             followDate,
             nextTime,
             focalChimpId);
-        control.launchHTML('assets/followScreen.html' + queryString);
+        var url =
+            control.getFileAsUrl('assets/followScreen.html' + queryString);
+        console.log('url: ' + url);
+        window.location.href = url;
 
     });
 

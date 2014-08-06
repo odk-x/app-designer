@@ -49,7 +49,9 @@ function display() {
             date,
             beginTime,
             focalChimpId);
-        control.launchHTML('assets/followScreen.html' + queryString);
+        var url = control.getFileAsUrl(
+                'assets/followScreen.html' + queryString);
+        window.location.href = url;
     });
 
 }
