@@ -362,7 +362,7 @@ function display() {
         closest.parent().remove();
 
         // Now add the new element.
-        var focalTd = $('<td colspan=3>');
+        var focalTd = $('<td colspan=3 class="focal-label">');
         focalTd.html('Focal');
         var chimp = $('#' + focalChimpId)[0];
         // we're passing the first element because we want the HTML object, not
