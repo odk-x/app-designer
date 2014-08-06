@@ -55,11 +55,11 @@ function display() {
      * retrieve the existing data and update the checkboxes with the
      * appropriate contents.
      */
-    var initUIFromDatabase = function() {
+    var initUIFromDatabaseForTime = function(time) {
         // First get all the data for the table.
         var tableData = util.getTableDataForTimePoint(
                 followDate,
-                followTime,
+                time,
                 focalChimpId);
         for (var i = 0; i < tableData.getCount(); i++) {
             // First get the ids of the chimp. These are stored in the
@@ -82,12 +82,12 @@ function display() {
 
     };
 
-    var isNewTimePoint = function() {
+    var isNewTimePoint = function(time) {
         // just query for any rows in the db. This is an extra call that we
         // might be able to cache the results of if performance is bad
         var tableData = util.getTableDataForTimePoint(
                 followDate,
-                followTime,
+                time,
                 focalChimpId);
         return tableData.getCount() === 0;
     };
@@ -327,18 +327,47 @@ function display() {
         }
 
         // Format these strings to be two digits.
-        var hoursStr;
-        var minsStr;
-        if (hours < 10) {
-            hoursStr = '0' + hours;
+        var hoursStr = convertToStringWithTwoZeros(hours);
+        var minsStr = convertToStringWithTwoZeros(mins);
+        var result = hoursStr + ':' + minsStr;
+        return result;
+    };
+
+    /**
+     * Take an integer and return a correctly formatted string--i.e. one with
+     * two zeros.
+     */
+    var convertToStringWithTwoZeros = function(time) {
+        var result;
+        if (time < 10) {
+            result = '0' + time;
         } else {
-            hoursStr = hours.toString();
+            result = time.toString();
         }
-        if (mins < 10) {
-            minsStr = '0' + mins.toString();
+        return result;
+    };
+
+    /**
+     * Get the time point for the interval before this one. Does NOT consider
+     * hour overflows/underflows (if an underflow is when it goes below 0...
+     */
+    var decrementTime = function(time) {
+        var interval = 15;
+        var parts = time.split(':');
+        var hours = parseInt(parts[0]);
+        var mins = parseInt(parts[1]);
+        var maybeTooSmall = mins - interval;
+
+        if (maybeTooSmall < 0) {
+            mins = maybeTooSmall % 60 * -1;
+            hours = hours - 1;
         } else {
-            minsStr = mins.toString();
+            mins = maybeTooSmall;
         }
+
+        // Format these strings to be two digits.
+        var minsStr = convertToStringWithTwoZeros(mins);
+        var hoursStr = convertToStringWithTwoZeros(hours);
         var result = hoursStr + ':' + minsStr;
         return result;
     };
@@ -385,13 +414,22 @@ function display() {
     appendCheckBoxes(femaleChimps);
 
     // Now handle the first pass of the screen.
-    if (isNewTimePoint()) {
+    if (isNewTimePoint(followTime)) {
         // Then all the checkboxes are empty. We'll generate a row for every
         // chimp with this call, which is important for establishing the
         // invariants we're going to use later.
         initDatabaseFromUI();
+
+        // Now we might have to update the UI from the previous time point.
+        // We'll do this if the previous time exists.
+        var previousTime = decrementTime(followTime);
+        if (!isNewTimePoint(previousTime)) {
+            initUIFromDatabaseForTime(previousTime);
+        }
     } else {
-        initUIFromDatabase();
+        // We're returning to an existing timepoint, so update the UI to
+        // reflect this.
+        initUIFromDatabaseForTime(followTime);
     }
 
     var rowIdCache = createIdCache();
