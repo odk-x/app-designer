@@ -360,7 +360,7 @@ function display() {
         var maybeTooSmall = mins - interval;
 
         if (maybeTooSmall < 0) {
-            mins = maybeTooSmall % 60 * -1;
+            mins = maybeTooSmall + 60;
             hours = hours - 1;
         } else {
             mins = maybeTooSmall;
@@ -419,7 +419,14 @@ function display() {
         // Might have to update the UI from the previous time point.
         // We'll do this if the previous time exists.
         var previousTime = decrementTime(followTime);
+        console.log(
+                'this time is: ' +
+                followTime +
+                ', previous time is: ' +
+                previousTime);
         if (!isNewTimePoint(previousTime)) {
+            console.log(
+                    'there is a previous time point, updating ui for that');
             initUIFromDatabaseForTime(previousTime);
             // And now generate entries for all the rows. This will also
             // establish a row for every chimp, which is important for our
