@@ -25,6 +25,20 @@ function display() {
     var followDate = util.getQueryParameter(util.dateKey);
     var focalChimpId = util.getQueryParameter(util.focalChimpKey);
 
+    // These flags correspond to the values of the FA_type_of_certainty column
+    // in the follow_arrival table. They don't have a type 2, while we do. This
+    // is going to mean "not present", as we're going to have a row per chimp
+    // per time point, even if they're not there, just to simplify the logic.
+    var flag_chimpPresent = 1;
+    var flag_chimpAbsent = 2;
+
+    // These are the suffixes we'll use for the ids of the checkboxes. A whole
+    // id would thus consist of something along the lines of:
+    // chimpId + present_suffix
+    var presentSuffix = '_present';
+    var fiveMeterSuffix = '_5m';
+    var closestSuffix = '_closest';
+    
     var followTimeUserFriendly;
     if (followTime === null) {
         // notify the user if we haven't specified a follow time. This will be
@@ -35,7 +49,71 @@ function display() {
         followTimeUserFriendly = followTime.replace('_', ':');
     }
 
-    $('#time-label').eq(0).html(followTimeUserFriendly);
+    /**
+     * Update the state of the UI to reflect what is stored in the database.
+     * I.e. if someone goes back to look at an earlier time, this method will
+     * retrieve the existing data and update the checkboxes with the
+     * appropriate contents.
+     */
+    var initUIFromDatabase = function() {
+        // First get all the data for the table.
+        var tableData = util.getTableDataForTimePoint(
+                followDate,
+                followTime,
+                focalChimpId);
+        for (var i = 0; i < tableData.getCount(); i++) {
+            // First get the ids of the chimp. These are stored in the
+            // FA_B_arr_AnimID column.
+            var id = tableData.getData(i, 'FA_B_arr_AnimID');
+            // The "present" checkbox id is the combination of the id and the
+            // suffix defined above.
+            var presentCheckboxId = id + presentSuffix;
+            var checkbox = $('#' + presentCheckboxId);
+            var valueOfPresent = tableData.getData(i, 'FA_type_of_certainty');
+            if (valueOfPresent !== undefined && valueOfPresent !== '') {
+                valueOfPresent = parseInt(valueOfPresent);
+            }
+            if (valueOfPresent === flag_chimpPresent) {
+                checkbox.prop('checked', true);
+            } else {
+                checkbox.prop('checked', false);
+            }
+        }
+
+    };
+
+    var isNewTimePoint = function() {
+        // just query for any rows in the db. This is an extra call that we
+        // might be able to cache the results of if performance is bad
+        var tableData = util.getTableDataForTimePoint(
+                followDate,
+                followTime,
+                focalChimpId);
+        return tableData.getCount() === 0;
+    };
+
+    // The way we interact with the database can lead to a bit of wonkiness
+    // here. Essentially, we want to be able to update rows, but to do that we
+    // need their row ids. We're going to do a query once to get all the data
+    // at this time point and build the row ids out of that to try and speed
+    // things up.
+    /**
+     * Create an object that serves as a cache for the row id for each chimp.
+     * Row ids will be stored keyed against the chimp id.
+     */
+    var createIdCache = function() {
+        var tableData = util.getTableDataForTimePoint(
+                followDate,
+                followTime,
+                focalChimpId);
+        var result = {};
+        for (var i = 0; i < tableData.getCount(); i++) {
+            var chimpId = tableData.getData(i, 'FA_B_arr_AnimID');
+            var rowId = tableData.getRowId(i);
+            result[chimpId] = rowId;
+        }
+        return result;
+    };
 
     var updateOlderMenu = function() {
 
@@ -102,15 +180,6 @@ function display() {
         }
     };
 
-    updateOlderMenu();
-
-    // These are the suffixes we'll use for the ids of the checkboxes. A whole
-    // id would thus consist of something along the lines of:
-    // chimpId + present_suffix
-    var presentSuffix = '_present';
-    var fiveMeterSuffix = '_5m';
-    var closestSuffix = '_closest';
-    
     /**
      * Annoyingly, js has an 'insertBefore' but not an 'insertAfter' function.
      * Why, I could not begin to explain. Maybe because you can do something
@@ -140,7 +209,8 @@ function display() {
             var closestTD = $('<td>')[0];
 
             // The checkboxes that will go in each row.
-            var presentCB = $('<input type="checkbox">')[0];
+            var presentCB =
+                $('<input type="checkbox" class="present-checkbox">')[0];
             var fiveMetersCB = $('<input type="checkbox">')[0];
             var closestCB = $('<input type="checkbox">')[0];
 
@@ -175,18 +245,11 @@ function display() {
     };
 
 
-    // First get all the male chimps, which     var maleChimps = $('.male-chimp');
-    var maleChimps = getMaleChimps();
-    appendCheckBoxes(maleChimps);
-
-    // and now take care of the ladies.
-    var femaleChimps = getFemaleChimps();
-    appendCheckBoxes(femaleChimps);
-
     /**
-     * Update the contents of the database.
+     * Update the contents of the database based on the state of the UI.
+     * Creates rows, does not update rows.
      */
-    var updateDatabase = function() {
+    var initDatabaseFromUI = function() {
         // Update the database with the contents of the boxes that are
         // checked. This is complicated slightly by the fact that the database
         // structure we currently have doesn't match perfectly with the way
@@ -202,25 +265,44 @@ function display() {
         for (var i = 0; i < allChimps.length; i++) {
             var chimp = allChimps[i];
             var chimpId = chimp.id;
-            // JGI wanted three checkboxes. However, it isn't obvious to me how
-            // we'll be persisting those checkboxes. So, let's just use the 
-            // 'present' checkbox and persist a row if they are there.
-            var presentId = chimpId + presentSuffix;
-            var presentCB = $('#' + presentId).eq(0);
-            if (presentCB.prop('checked')) {
-                var struct = {};
-                struct['FA_FOL_date'] = followDate;
-                struct['FA_FOL_B_focal_AnimID'] = focalChimpId;
-                struct['FA_B_arr_AnimID'] = chimpId;
-                struct['FA_time_start'] = followTime;
-                var stringified = JSON.stringify(struct);
-                control.addRow('follow_arrival', stringified);
-            } else {
-                // do nothing.
-            }
+            writeRowForChimp(false, null, chimpId, false);
         }
 
     };
+
+    /**
+     * Update the row for the given chimp. As we start persisting more data
+     * this function should grow.
+     *
+     * isUpdate is true if we are updating the database rather than writing a
+     * new row. If true, rowId cannot be null. If false, rowId is ignored.
+     */
+    var writeRowForChimp = function(isUpdate, rowId, chimpId, isPresent) {
+        var struct = {};
+        // JGI wanted three checkboxes. However, it isn't obvious to me how
+        // we'll be persisting those checkboxes. So, let's just use the 
+        // 'present' checkbox and persist a row if they are there.
+        // We're also going to be using the FA_type_of_certainty column to
+        // indicate the state of the chimp. They have in the data tables
+        // document that 1 is chimp definitely seen, 0 is expected to be
+        // nearby. We're also going to say 2 is not present.
+        struct['FA_FOL_date'] = followDate;
+        struct['FA_FOL_B_focal_AnimID'] = focalChimpId;
+        struct['FA_B_arr_AnimID'] = chimpId;
+        struct['FA_time_start'] = followTime;
+        if (isPresent) {
+            struct['FA_type_of_certainty'] = flag_chimpPresent;
+        } else {
+            struct['FA_type_of_certainty'] = flag_chimpAbsent;
+        }
+        var stringified = JSON.stringify(struct);
+        if (isUpdate) {
+            control.updateRow('follow_arrival', stringified, rowId);
+        } else {
+            control.addRow('follow_arrival', stringified);
+        }
+    };
+
 
     /**
      * Increment the time for the next interval. time is expected to be of the
@@ -261,10 +343,56 @@ function display() {
         return result;
     };
 
+    /*****  end function declaractions  *****/
+
+    // First we'll add the dynamic UI elements.
+    // First get all the male chimps
+    var maleChimps = getMaleChimps();
+    appendCheckBoxes(maleChimps);
+
+    // and now take care of the ladies.
+    var femaleChimps = getFemaleChimps();
+    appendCheckBoxes(femaleChimps);
+
+    // Now handle the first pass of the screen.
+    if (isNewTimePoint()) {
+        // Then all the checkboxes are empty. We'll generate a row for every
+        // chimp with this call, which is important for establishing the
+        // invariants we're going to use later.
+        initDatabaseFromUI();
+    } else {
+        initUIFromDatabase();
+    }
+
+    var rowIdCache = createIdCache();
+
+    $('#time-label').eq(0).html(followTimeUserFriendly);
+
+    updateOlderMenu();
+
+
+    // Now we'll attach a click listener that rights the state of the checkbox
+    // into the database. Note that for now we're only using the present
+    // checkboxes, as those are the only ones we're bothering to persist atm
+    // until we get a better sense of the database schema.
+    $('.present-checkbox').on('click', function() {
+        // Get the id of the chimp this box is associated with. Note that the
+        // id of the checkbox is the chimp's id + presentSuffix, so we can
+        // reclaim the chimp id without issue.
+        var indexOfSuffix = this.id.indexOf(presentSuffix);
+        var chimpId = this.id.substr(0, indexOfSuffix);
+        // now we have the chimp id. Now we need the id of the row for this
+        // chimp, which we've cached above.
+        var rowId = rowIdCache[chimpId];
+        // log it for a sanity check
+        console.log('clicked chimp id: ' + chimpId + ' with row id: ' + rowId);
+        // And now write the value into the database.
+        var isChecked = this.checked;
+        writeRowForChimp(true, rowId, chimpId, isChecked);
+    });
+
     $('#next-button').on('click', function() {
         console.log('clicked next');
-
-        updateDatabase();
 
         // And now launch the next screen
         var nextTime = incrementTime(followTime);

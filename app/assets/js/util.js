@@ -69,6 +69,24 @@ util.getExistingTimesForDate = function(date, focalChimpId) {
 };
 
 /**
+ * Get a query for all the data at the given date and time for the specified
+ * focal chimp. Together this specifies a unique time point in a follow.
+ */
+util.getTableDataForTimePoint = function(date, time, focalChimpId) {
+    
+    var whereClause =
+        'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ? AND FA_time_start = ?';
+    var selectionArgs = [date, focalChimpId, time];
+
+    var result = control.query(
+            'follow_arrival',
+            whereClause,
+            selectionArgs);
+
+    return result;
+};
+
+/**
  * Get a string to append to a url that will contain information the date and
  * time. The values can then be retrieved using getQueryParameter.
  */
