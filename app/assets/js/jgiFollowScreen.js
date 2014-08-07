@@ -326,7 +326,13 @@ function display() {
                 isClosest = true;
             }
                 
-            writeRowForChimp(false, null, chimpId, isChecked, isWithinFive, isClosest);
+            writeRowForChimp(
+                    false,
+                    null,
+                    chimpId,
+                    isChecked,
+                    isWithinFive,
+                    isClosest);
         }
     };
 
@@ -337,7 +343,13 @@ function display() {
      * isUpdate is true if we are updating the database rather than writing a
      * new row. If true, rowId cannot be null. If false, rowId is ignored.
      */
-    var writeRowForChimp = function(isUpdate, rowId, chimpId, isPresent, isWithin5, isClosest) {
+    var writeRowForChimp = function(
+            isUpdate,
+            rowId,
+            chimpId,
+            isPresent,
+            isWithin5,
+            isClosest) {
         var struct = {};
         // JGI wanted three checkboxes. However, it isn't obvious to me how
         // we'll be persisting those checkboxes. So, let's just use the 
@@ -566,7 +578,7 @@ function display() {
             // do nothing
             return;
         }
-        if (chimp.hasClass('closest-chimp')){ 
+        if (chimp.hasClass('closest-chimp')){
             chimp.removeClass('closest-chimp');
         } else {
             // We want to eliminate the closest-chimp class on anything else
@@ -574,7 +586,9 @@ function display() {
             $('.closest-chimp').removeClass('closest-chimp');
             chimp.addClass('closest-chimp');
             var chimpId = $('.closest-chimp').prop('id');
+            var rowId = rowIdCache[chimpId];
             console.log('chimp id: ' + chimpId + ' is closest');
+            console.log('row id of cloest chimp is: ' + rowId);
             writeRowForChimp(true, rowId, chimpId, true, true, true);
         }
     });
