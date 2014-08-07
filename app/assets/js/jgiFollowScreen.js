@@ -473,7 +473,19 @@ function display() {
         closest.parent().remove();
 
         // Now add the new element.
-        var focalTd = $('<td colspan=3 class="focal-label">');
+        // If the focal chimp is male, we only have two checkboxes, so we'll
+        // need to set a colspan to 2. If it's a female, we want three.
+        var focalChimp = $('#' + focalChimpId);
+        var colSpan;
+        if (focalChimp.hasClass('male-chimp')) {
+            colSpan = 2;
+            console.log ('focal chimp is male');
+        } else {
+            colSpan= 3;
+            console.log('focal chimp is female');
+        }
+        var focalTd = $('<td class="focal-label">');
+        focalTd.prop('colspan', colSpan);
         focalTd.html('Focal');
         var chimp = $('#' + focalChimpId)[0];
         // we're passing the first element because we want the HTML object, not
