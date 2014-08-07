@@ -28,6 +28,10 @@ input[type='checkbox'] {
     border-bottom-left-radius: 4px;
 }
 
+.sexual-state {
+    font-weight: bold;
+}
+
 .focal-label {
     background-color: #5bc0de;
     border-color: #5bc0de;

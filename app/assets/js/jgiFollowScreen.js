@@ -37,7 +37,9 @@ function display() {
     // chimpId + present_suffix
     var presentSuffix = '_present';
     var fiveMeterSuffix = '_5m';
-    var closestSuffix = '_closest';
+    var sexualStateSuffix = '_sexual-state';
+
+    var sexualStates = ['H', 'S', 'R', 'T'];
     
     var followTimeUserFriendly;
     if (followTime === null) {
@@ -255,28 +257,28 @@ function display() {
             // past, but apparently you usually do. Hmm.
             var presentTD = $('<td>')[0];
             var fiveMetersTD = $('<td>')[0];
-            var closestTD = $('<td>')[0];
+            var sexualState = $('<td class="sexual-state">')[0];
+            // update the sexual state to be the first value, just so there's
+            // always something there.
+            $(sexualState).html(sexualStates[0]);
 
             // The checkboxes that will go in each row.
             var presentCB =
                 $('<input type="checkbox" class="present-checkbox">')[0];
             var fiveMetersCB =
                 $('<input type="checkbox" class="five-checkbox">')[0];
-            var closestCB =
-                $('<input type="checkbox" class="estrous-checkbox">')[0];
 
             // Set the ids so we can retrieve and save the data later.
             presentCB.id = chimpId + presentSuffix;
             fiveMetersCB.id = chimpId + fiveMeterSuffix;
-            closestCB.id = chimpId + closestSuffix;
+            sexualState.id = chimpId + sexualStateSuffix;
 
             // Add the checkboxes to the td elements.
             presentTD.appendChild(presentCB);
             fiveMetersTD.appendChild(fiveMetersCB);
-            closestTD.appendChild(closestCB);
 
             // And then add the td to the table.
-            insertAfter(closestTD, chimpNode);
+            insertAfter(sexualState, chimpNode);
             insertAfter(fiveMetersTD, chimpNode);
             insertAfter(presentTD, chimpNode);
         }
@@ -474,13 +476,13 @@ function display() {
         // spanning its space saying "Focal"
         var present = $('#' + focalChimpId + presentSuffix);
         var fiveMeters = $('#' + focalChimpId + fiveMeterSuffix);
-        var closest = $('#' + focalChimpId + closestSuffix);
+        var sexualState = $('#' + focalChimpId + sexualStateSuffix);
         
         // We have selected the inputs, but we actually need to remove their
         // parents to keep the correct number of td elements.
         present.parent().remove();
         fiveMeters.parent().remove();
-        closest.parent().remove();
+        sexualState.parent().remove();
 
         // Now add the new element.
         // If the focal chimp is male, we only have two checkboxes, so we'll
@@ -654,6 +656,21 @@ function display() {
         console.log('url: ' + url);
         window.location.href = url;
 
+    });
+
+    $('.sexual-state').on('click', function() {
+        console.log('clicked sexual state');
+        // find the current sexual state, just as a sanity check.
+        var chimpId = this.id;
+        var currentState = $(this).html();
+        console.log(
+            'sexual state for chimp ' + chimpId + ' is ' + currentState);
+        // now update it to be the next one.
+        var nextIndex =
+            (sexualStates.indexOf(currentState) + 1) % sexualStates.length;
+        var nextState = sexualStates[nextIndex];
+        console.log('next sexual state is: ' + nextState);
+        $(this).html(nextState);
     });
 
 }
