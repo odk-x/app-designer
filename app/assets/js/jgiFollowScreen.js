@@ -342,6 +342,8 @@ function display() {
      *
      * isUpdate is true if we are updating the database rather than writing a
      * new row. If true, rowId cannot be null. If false, rowId is ignored.
+     *
+     * If isWithin5 is null, no update is performed.
      */
     var writeRowForChimp = function(
             isUpdate,
@@ -367,10 +369,14 @@ function display() {
         } else {
             struct['FA_type_of_certainty'] = flag_chimpAbsent;
         }
-        if (isWithin5) {
-            struct['FA_within_five_meters'] = flag_chimpPresent;
+        if (isWithin5 !== null) {
+            if (isWithin5) {
+                struct['FA_within_five_meters'] = flag_chimpPresent;
+            } else {
+                struct['FA_within_five_meters'] = flag_chimpAbsent;
+            }
         } else {
-            struct['FA_within_five_meters'] = flag_chimpAbsent;
+            console.log('not updating is within five meters');
         }
         if (isClosest) {
             struct['FA_closest_to_focal'] = flag_chimpPresent;
@@ -379,9 +385,13 @@ function display() {
         }
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
-            control.updateRow('follow_arrival', stringified, rowId);
+            var updateSuccessfully =
+                control.updateRow('follow_arrival', stringified, rowId);
+            console.log('updateSuccessfully: ' + updateSuccessfully);
         } else {
-            control.addRow('follow_arrival', stringified);
+            var addedSuccessfully =
+                control.addRow('follow_arrival', stringified);
+            console.log('added successfully: ' + addedSuccessfully);
         }
     };
 
@@ -496,6 +506,27 @@ function display() {
         $('#' + focalChimpId).addClass('focal-chimp');
     };
 
+    /**
+     * This updates the database to say that the chimp currently marked as
+     * closest to the focal chimp is no longer closest. This is impotant so
+     * that we don't end up with numerous closest chimps. This doesn't update
+     * anything in the UI.
+     */
+    var writeClosestChimpNoLongerClosest = function() {
+        // First we have to find the closest chimp.
+        var closestChimp = $('.closest-chimp');
+        if (closestChimp.size() === 0) {
+            // then there wasn't a previous closest.
+            console.log('there was no previous closest chimp');
+            return;
+        }
+        var chimpId = closestChimp.prop('id');
+        var rowId = rowIdCache[chimpId];
+        console.log('the id of the formerly closest chimp is: ' + chimpId);
+        console.log('the row id of the formerly closest chimp is: ' + rowId);
+        writeRowForChimp(true, rowId, chimpId, true, null, false);
+    };
+
     /*****  end function declaractions  *****/
 
     // First we'll add the dynamic UI elements.
@@ -592,7 +623,10 @@ function display() {
         }
         if (chimp.hasClass('closest-chimp')){
             chimp.removeClass('closest-chimp');
+            writeClosestChimpNoLongerClosest();
         } else {
+            // first remove the fact that the oldest closest is closest.
+            writeClosestChimpNoLongerClosest();
             // We want to eliminate the closest-chimp class on anything else
             // that has it, lest we end up with two active chimps.
             $('.closest-chimp').removeClass('closest-chimp');
@@ -601,7 +635,7 @@ function display() {
             var rowId = rowIdCache[chimpId];
             console.log('chimp id: ' + chimpId + ' is closest');
             console.log('row id of cloest chimp is: ' + rowId);
-            writeRowForChimp(true, rowId, chimpId, true, true, true);
+            writeRowForChimp(true, rowId, chimpId, true, null, true);
         }
     });
 
