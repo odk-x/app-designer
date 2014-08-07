@@ -14,6 +14,11 @@ Column,FA_FOL_date,displayFormat,string,""
 Column,FA_FOL_date,displayName,object,"""FA_FOL_date"""
 Column,FA_FOL_date,displayVisible,boolean,true
 Column,FA_FOL_date,joins,object,""
+Column,FA_closest_to_focal,displayChoicesList,object,""
+Column,FA_closest_to_focal,displayFormat,string,""
+Column,FA_closest_to_focal,displayName,object,"""FA_closest_to_focal"""
+Column,FA_closest_to_focal,displayVisible,boolean,true
+Column,FA_closest_to_focal,joins,object,""
 Column,FA_duration_of_obs,displayChoicesList,object,""
 Column,FA_duration_of_obs,displayFormat,string,""
 Column,FA_duration_of_obs,displayName,object,"""FA_duration_of_obs"""
@@ -49,9 +54,12 @@ Column,FA_type_of_nesting,displayFormat,string,""
 Column,FA_type_of_nesting,displayName,object,"""FA_type_of_nesting"""
 Column,FA_type_of_nesting,displayVisible,boolean,true
 Column,FA_type_of_nesting,joins,object,""
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,follow_arrival
-Table,default,colOrder,object,"[""FA_FOL_date"",""FA_FOL_B_focal_AnimID"",""FA_B_arr_AnimID"",""FA_seq_num"",""FA_type_of_certainty"",""FA_type_of_nesting"",""FA_type_of_cycle"",""FA_time_start"",""FA_time_end"",""FA_duration_of_obs""]"
+Column,FA_within_five_meters,displayChoicesList,object,""
+Column,FA_within_five_meters,displayFormat,string,""
+Column,FA_within_five_meters,displayName,object,"""FA_within_five_meters"""
+Column,FA_within_five_meters,displayVisible,boolean,true
+Column,FA_within_five_meters,joins,object,""
+Table,default,colOrder,object,"[""FA_FOL_date"",""FA_FOL_B_focal_AnimID"",""FA_B_arr_AnimID"",""FA_seq_num"",""FA_type_of_certainty"",""FA_type_of_nesting"",""FA_type_of_cycle"",""FA_time_start"",""FA_time_end"",""FA_duration_of_obs"",""FA_within_five_meters"",""FA_closest_to_focal""]"
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"""Follow Arrival"""
 Table,default,groupByCols,object,[]

@@ -78,6 +78,20 @@ function display() {
             } else {
                 checkbox.prop('checked', false);
             }
+			
+			// The "within5meter" checkbox id is the combination of the id and the
+            // suffix defined above.
+            var fiveCheckboxId = id + fiveMeterSuffix;
+            var checkbox5m = $('#' + fiveCheckboxId);
+            var valueOfFive = tableData.getData(i, 'FA_within_five_meters');
+            if (valueOfFive !== undefined && valueOfPresent !== '') {
+                valueOfFive = parseInt(valueOfFive);
+            }
+            if (valueOfFive === flag_chimpPresent) {
+                checkbox5m.prop('checked', true);
+            } else {
+                checkbox5m.prop('checked', false);
+            }
         }
 
     };
@@ -193,9 +207,44 @@ function display() {
     };
 
     /**
-     * Add the requesite checkboxes for the chimps.
+     * Add the requesite checkboxes for the male chimps.
      */
-    var appendCheckBoxes = function(chimpTDArray) {
+    var appendMaleCheckBoxes = function(chimpTDArray) {
+        // We're assuming that we have two checkboxes each, in the order:
+        // present, within five meters
+        for (var i = 0; i < chimpTDArray.length; i++) {
+            var chimpNode = chimpTDArray[i];
+            var chimpId = chimpNode.id;
+            
+            // make the td elements. I don't remember having to do [0] in the
+            // past, but apparently you usually do. Hmm.
+            var presentTD = $('<td>')[0];
+            var fiveMetersTD = $('<td>')[0];
+            
+            // The checkboxes that will go in each row.
+            var presentCB =
+            $('<input type="checkbox" class="present-checkbox">')[0];
+            var fiveMetersCB =
+            $('<input type="checkbox" class="five-checkbox">')[0];
+            
+            // Set the ids so we can retrieve and save the data later.
+            presentCB.id = chimpId + presentSuffix;
+            fiveMetersCB.id = chimpId + fiveMeterSuffix;
+            
+            // Add the checkboxes to the td elements.
+            presentTD.appendChild(presentCB);
+            fiveMetersTD.appendChild(fiveMetersCB);
+            
+            // And then add the td to the table.
+            insertAfter(fiveMetersTD, chimpNode);
+            insertAfter(presentTD, chimpNode);
+        }
+    };
+    
+    /**
+     * Add the requesite checkboxes for the female chimps.
+     */
+    var appendFemaleCheckBoxes = function(chimpTDArray) {
         // We're assuming that we have three checkboxes each, in the order:
         // present, within five meters, closest to primary chimp
         for (var i = 0; i < chimpTDArray.length; i++) {
@@ -211,8 +260,10 @@ function display() {
             // The checkboxes that will go in each row.
             var presentCB =
                 $('<input type="checkbox" class="present-checkbox">')[0];
-            var fiveMetersCB = $('<input type="checkbox">')[0];
-            var closestCB = $('<input type="checkbox">')[0];
+            var fiveMetersCB =
+                $('<input type="checkbox" class="five-checkbox">')[0];
+            var closestCB =
+                $('<input type="checkbox" class="estrous-checkbox">')[0];
 
             // Set the ids so we can retrieve and save the data later.
             presentCB.id = chimpId + presentSuffix;
@@ -267,7 +318,15 @@ function display() {
             var chimpId = chimp.id;
             var presentCheckbox = $('#' + chimpId + presentSuffix);
             var isChecked = presentCheckbox.prop('checked');
-            writeRowForChimp(false, null, chimpId, isChecked);
+            var within5Checkbox = $('#' + chimpId + fiveMeterSuffix);
+            var isWithinFive = within5Checkbox.prop('checked');
+            
+            var isClosest = false;
+            if ($('.closest-chimp').prop('id') == chimpId) {
+                isClosest = true;
+            }
+                
+            writeRowForChimp(false, null, chimpId, isChecked, isWithinFive, isClosest);
         }
     };
 
@@ -278,7 +337,7 @@ function display() {
      * isUpdate is true if we are updating the database rather than writing a
      * new row. If true, rowId cannot be null. If false, rowId is ignored.
      */
-    var writeRowForChimp = function(isUpdate, rowId, chimpId, isPresent) {
+    var writeRowForChimp = function(isUpdate, rowId, chimpId, isPresent, isWithin5, isClosest) {
         var struct = {};
         // JGI wanted three checkboxes. However, it isn't obvious to me how
         // we'll be persisting those checkboxes. So, let's just use the 
@@ -295,6 +354,16 @@ function display() {
             struct['FA_type_of_certainty'] = flag_chimpPresent;
         } else {
             struct['FA_type_of_certainty'] = flag_chimpAbsent;
+        }
+        if (isWithin5) {
+            struct['FA_within_five_meters'] = flag_chimpPresent;
+        } else {
+            struct['FA_within_five_meters'] = flag_chimpAbsent;
+        }
+        if (isClosest) {
+            struct['FA_closest_to_focal'] = flag_chimpPresent;
+        } else {
+            struct['FA_closest_to_focal'] = flag_chimpAbsent;
         }
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
@@ -408,11 +477,11 @@ function display() {
     // First we'll add the dynamic UI elements.
     // First get all the male chimps
     var maleChimps = getMaleChimps();
-    appendCheckBoxes(maleChimps);
+    appendMaleCheckBoxes(maleChimps);
 
     // and now take care of the ladies.
     var femaleChimps = getFemaleChimps();
-    appendCheckBoxes(femaleChimps);
+    appendFemaleCheckBoxes(femaleChimps);
 
     // Now handle the first pass of the screen.
     if (isNewTimePoint(followTime)) {
@@ -466,12 +535,29 @@ function display() {
         // chimp, which we've cached above.
         var rowId = rowIdCache[chimpId];
         // log it for a sanity check
-        console.log('clicked chimp id: ' + chimpId + ' with row id: ' + rowId);
+        console.log('chimp id: ' + chimpId + ' is present with row id: ' + rowId);
         // And now write the value into the database.
         var isChecked = this.checked;
-        writeRowForChimp(true, rowId, chimpId, isChecked);
+        writeRowForChimp(true, rowId, chimpId, isChecked, false, false);
     });
-
+    
+    $('.five-checkbox').on('click', function() {
+        // Get the id of the chimp this box is associated with. Note that the
+        // id of the checkbox is the chimp's id + presentSuffix, so we can
+        // reclaim the chimp id without issue.
+        var indexOfSuffix = this.id.indexOf(fiveMeterSuffix);
+        var chimpId = this.id.substr(0, indexOfSuffix);
+        // now we have the chimp id. Now we need the id of the row for this
+        // chimp, which we've cached above.
+        var rowId = rowIdCache[chimpId];
+        // log it for a sanity check
+        console.log('chimp id: ' + chimpId + ' is within 5m with row id: ' + rowId);
+        // And now write the value into the database.
+        var isChecked = this.checked;
+        // Assuming that if a chimp is within 5m then it is also present
+        writeRowForChimp(true, rowId, chimpId, isChecked, isChecked, false);
+    });
+    
     // We also want a click listener on each of the chimp names, which will
     // mark that it is closest to the active chimp.
     $('.chimp').on('click', function() {
@@ -487,6 +573,9 @@ function display() {
             // that has it, lest we end up with two active chimps.
             $('.closest-chimp').removeClass('closest-chimp');
             chimp.addClass('closest-chimp');
+            var chimpId = $('.closest-chimp').prop('id');
+            console.log('chimp id: ' + chimpId + ' is closest');
+            writeRowForChimp(true, rowId, chimpId, true, true, true);
         }
     });
 

@@ -80,6 +80,22 @@
           "text": "FA_time_end - FA_time_start"
         },
         "_row_num": 11
+      },
+      {
+        "type": "integer",
+        "name": "FA_within_five_meters",
+        "display": {
+          "text": "Within 5 meters"
+        },
+        "_row_num": 12
+      },
+      {
+        "type": "integer",
+        "name": "FA_closest_to_focal",
+        "display": {
+          "text": "Closest to focal"
+        },
+        "_row_num": 13
       }
     ],
     "settings": [
@@ -272,6 +288,26 @@
         ],
         "type": "integer",
         "elementKey": "FA_duration_of_obs"
+      },
+      "FA_within_five_meters": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FA_within_five_meters"
+      },
+      "FA_closest_to_focal": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FA_closest_to_focal"
       }
     },
     "section_names": [
@@ -415,12 +451,38 @@
             "promptIdx": 9
           },
           {
+            "type": "integer",
+            "name": "FA_within_five_meters",
+            "display": {
+              "text": "Within 5 meters"
+            },
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 10
+          },
+          {
+            "type": "integer",
+            "name": "FA_closest_to_focal",
+            "display": {
+              "text": "Closest to focal"
+            },
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 11
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 12,
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 10
+            "_row_num": 14,
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 12
           }
         ],
         "validation_tag_map": {
@@ -488,25 +550,37 @@
             "operationIdx": 9
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 12,
-            "operationIdx": 10
-          },
-          {
             "_row_num": 12,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
+          },
+          {
+            "_row_num": 13,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 14,
+            "operationIdx": 12
+          },
+          {
+            "_row_num": 14,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 13
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 12,
-            "operationIdx": 12
+            "_row_num": 14,
+            "operationIdx": 14
           }
         ],
         "branch_label_map": {
@@ -520,8 +594,10 @@
           "_screen9": 7,
           "_screen10": 8,
           "_screen11": 9,
-          "_contents": 11,
-          "_screen12": 11
+          "_screen12": 10,
+          "_screen13": 11,
+          "_contents": 13,
+          "_screen14": 13
         }
       },
       "initial": {
