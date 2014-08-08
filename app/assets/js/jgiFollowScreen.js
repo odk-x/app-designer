@@ -482,7 +482,9 @@ function display() {
         // parents to keep the correct number of td elements.
         present.parent().remove();
         fiveMeters.parent().remove();
-        sexualState.parent().remove();
+        if (sexualState) {
+            sexualState.remove();
+        }
 
         // Now add the new element.
         // If the focal chimp is male, we only have two checkboxes, so we'll
