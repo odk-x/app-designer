@@ -135,6 +135,18 @@ function handleSave(e) {
     document.body.appendChild(downloader);
 }
 
+/**
+ * Post the form def to the correct location on the file system.
+ */
+function postFormDef() {
+    var formDef = document.getElementById('out').value;
+    if (formDef === undefined || formDef === '') {
+      console.log('no formDef content to post.');
+      return;
+    }
+
+}
+
 //TODO: Test multiple forms
 function handleDrop(e) {
     var drop = document.getElementById('drop');

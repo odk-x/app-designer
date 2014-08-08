@@ -23,18 +23,19 @@ var mountDirectory = function(connect, dir) {
 
 var postHandler = function(req, res, next) {
     if (req.method === 'POST') {
-        //debugger;
+        debugger;
         var content = '';
         console.log('received a POST request');
         req.addListener('data', function(chunk) {
             content += chunk;
         });
         req.addListener('end', function() {
+            res.end();
             // We don't want the leading /, or else the file system will think
             // we're writing to root, which we don't have permission to. Should
             // really be dealing with the path more gracefully.
             var path = req.url.substring(1);
-            //debugger;
+            debugger;
             require('fs').writeFile(path, content, function(err) {
                 if (err) {
                     console.log('got an error writing content');
@@ -45,8 +46,12 @@ var postHandler = function(req, res, next) {
                 }
             });
         });
+    } else {
+        // We only want to hand this off to the other middleware if this
+        // is not a POST, as we're expecting to be the only ones to
+        // handle POSTs.
+        return next();
     }
-    return next();
 };
 
 // # Globbing
