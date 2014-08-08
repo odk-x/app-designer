@@ -29,23 +29,36 @@ var postHandler = function(req, res, next) {
         req.addListener('data', function(chunk) {
             content += chunk;
         });
-        req.addListener('end', function() {
+        var fs = require('fs');
+        // We don't want the leading /, or else the file system will think
+        // we're writing to root, which we don't have permission to. Should
+        // really be dealing with the path more gracefully.
+        var path = req.url.substring(1);
+        var file = fs.createWriteStream(path);
+        req.pipe(file);
+
+        req.on('end', function() {
+            res.write('uploaded file!');
             res.end();
-            // We don't want the leading /, or else the file system will think
-            // we're writing to root, which we don't have permission to. Should
-            // really be dealing with the path more gracefully.
-            var path = req.url.substring(1);
-            debugger;
-            require('fs').writeFile(path, content, function(err) {
-                if (err) {
-                    console.log('got an error writing content');
-                    console.log('error : ' + err);
-                } else {
-                    //debugger;
-                    console.log('posted to ' + path + ' successfully.');
-                }
-            });
         });
+
+        //req.addListener('end', function() {
+            //res.end();
+            //// We don't want the leading /, or else the file system will think
+            //// we're writing to root, which we don't have permission to. Should
+            //// really be dealing with the path more gracefully.
+            //var path = req.url.substring(1);
+            //debugger;
+            //require('fs').writeFile(path, content, function(err) {
+                //if (err) {
+                    //console.log('got an error writing content');
+                    //console.log('error : ' + err);
+                //} else {
+                    ////debugger;
+                    //console.log('posted to ' + path + ' successfully.');
+                //}
+            //});
+        //});
     } else {
         // We only want to hand this off to the other middleware if this
         // is not a POST, as we're expecting to be the only ones to
