@@ -527,40 +527,57 @@ exports.defaultResponseFunction = function(error, response, body) {
  */
 exports.postFile = function(path, content, callback) {
 
+    if (callback === undefined) {
+        callback = exports.defaultResponseFunction;
+    }
+
     request.post(
         {
-            uri: 'http://localhost:8000/testFromPost.txt',
-            body: 'this is some test content'
+            uri: exports.rootpath + '/' + path,
+            body: content
         },
-        function (error, response, body) {
-            if (error) {
-                throw error;
-            }
-            console.log('status code is: ' + response.statusCode);
-            console.log('response: ' + response);
-            console.log('body: ' + body);
-        });
-    //'http://localhost:8000/testFromPost.txt',
-    //{ json: {content: "hello from grunt"} },
-    //function (error, response, body) {
-        //if (error) {
-            //throw error;
-        //}
-        //console.log('status code is: ' + response.statusCode);
-        //console.log('response: ' + response);
-        //console.log('body: ' + body);
-    //});
+        callback);
 
-    //if (callback === undefined) {
-        //callback = exports.defaultResponseFunction;
-    //}
+};
 
-    //var fullPath = exports.rootpath + '/' + path;
+var getValueOfSetting = function(formDef, settingName) {
 
-    //request.post(
-            //fullPath,
-            //{ 'body': body },
-            //callback);
+    var settings = formDef.xlsx.settings;
+
+    for (var i = 0; i < settings.length; i++) {
+        var setting = settings[i];
+        if (setting.setting_name === settingName) {
+            return setting.value;
+        }
+    }
+
+    console.log('could not find setting with name: ' + settingName);
+
+    return null;
+
+};
+
+/**
+ * Get the table id from the formDef json object. This is intended mostly as
+ * a placeholder until I see if there is a standardized way to do this with the
+ * xlsxconverter code.
+ */
+exports.getTableIdFromFormDef = function(formDef) {
+
+    var result = getValueOfSetting(formDef, 'table_id');
+    return result;
+
+};
+
+/**
+ * Get the form id from the formDef json object. This is intended mostly as a
+ * placeholder until I see if there is a standardized way to do this with the
+ * xlsxconverter code.
+ */
+exports.getFormIdFromFormDef = function(formDef) {
+
+    var result = getValueOfSetting(formDef, 'form_id');
+    return result;
 
 };
 

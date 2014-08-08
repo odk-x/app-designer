@@ -134,6 +134,7 @@ function handleSave(e) {
     downloader.style.display = "none";
     downloader.src = uriContent;
     document.body.appendChild(downloader);
+    postFormDef();
 }
 
 /**
@@ -145,7 +146,18 @@ function postFormDef() {
       console.log('no formDef content to post.');
       return;
     }
-
+    var util = require('devenv-util');
+    var formDefJson = JSON.parse(formDef);
+    var tableId = util.getTableIdFromFormDef(formDefJson);
+    var formId = util.getFormIdFromFormDef(formDefJson);
+    if (tableId === null || formId === null) {
+      console.log('form id or table id could not be found, not posting file.');
+    } else {
+      var path =
+        'app/tables/' + tableId + '/forms/' + formId + '/formDef.json';
+      console.log('going to write formDef to: ' + path);
+      util.postFile(path, formDef);
+    }
 }
 
 //TODO: Test multiple forms
