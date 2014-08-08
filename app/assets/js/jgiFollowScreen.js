@@ -96,12 +96,14 @@ function display() {
             }
 			
 			// Retrieve closest to focal chimp if there is one
+			var name = $('#' + id);
 			var valueOfClosest = tableData.getData(i, 'FA_closest_to_focal');
 			if (valueOfClosest !== undefined && valueOfClosest !== '') {
                 valueOfClosest = parseInt(valueOfClosest);
             }
 			if (valueOfClosest === flag_chimpPresent) {
-                //How do I get the UI element for the chimp name??
+                $('.closest-chimp').removeClass('closest-chimp');
+				name.addClass('closest-chimp');
             }
 
 			// Retrieve sexual state from database if it exists
