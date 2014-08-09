@@ -54,7 +54,6 @@ var postHandler = function(req, res, next) {
             res.statusCode = 500;
         });
 
-        console.log('piped');
         req.on('end', function() {
             res.write('uploaded file!');
             res.end();
