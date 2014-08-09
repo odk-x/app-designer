@@ -39,7 +39,7 @@ function display() {
     var fiveMeterSuffix = '_5m';
     var sexualStateSuffix = '_sexual-state';
 
-    var sexualStates = ['H', 'S', 'R', 'T'];
+    var sexualStates = ['0.25', '0.5', '0.75', '1.0', 'U'];
     
     var followTimeUserFriendly;
     if (followTime === null) {
@@ -94,6 +94,25 @@ function display() {
             } else {
                 checkbox5m.prop('checked', false);
             }
+			
+			// Retrieve closest to focal chimp if there is one
+			var name = $('#' + id);
+			var valueOfClosest = tableData.getData(i, 'FA_closest_to_focal');
+			if (valueOfClosest !== undefined && valueOfClosest !== '') {
+                valueOfClosest = parseInt(valueOfClosest);
+            }
+			if (valueOfClosest === flag_chimpPresent) {
+                $('.closest-chimp').removeClass('closest-chimp');
+				name.addClass('closest-chimp');
+            }
+
+			// Retrieve sexual state from database if it exists
+			var sexualStateId = id + sexualStateSuffix;
+			var sexualState = $('#' + sexualStateId);
+			var valueOfSexualState = tableData.getData(i, 'FA_type_of_cycle');
+			if (sexualState !== undefined) {
+				$(sexualState).html(valueOfSexualState);
+			}
         }
 
     };
@@ -327,14 +346,21 @@ function display() {
             if ($('.closest-chimp').prop('id') == chimpId) {
                 isClosest = true;
             }
-                
+            
+			var sexualState = $('#' + chimpId + sexualStateSuffix);
+			var sexState = $(sexualState).html();
+			if (sexState == null) {
+				sexState = 'N/A';
+			}
+
             writeRowForChimp(
                     false,
                     null,
                     chimpId,
                     isChecked,
                     isWithinFive,
-                    isClosest);
+                    isClosest,
+                    sexState);
         }
     };
 
@@ -353,7 +379,8 @@ function display() {
             chimpId,
             isPresent,
             isWithin5,
-            isClosest) {
+            isClosest,
+            sState) {
         var struct = {};
         // JGI wanted three checkboxes. However, it isn't obvious to me how
         // we'll be persisting those checkboxes. So, let's just use the 
@@ -366,10 +393,21 @@ function display() {
         struct['FA_FOL_B_focal_AnimID'] = focalChimpId;
         struct['FA_B_arr_AnimID'] = chimpId;
         struct['FA_time_start'] = followTime;
-        if (isPresent) {
-            struct['FA_type_of_certainty'] = flag_chimpPresent;
-        } else {
-            struct['FA_type_of_certainty'] = flag_chimpAbsent;
+        
+		if (sState !== null) {
+            struct['FA_type_of_cycle'] = sState;
+        }
+		else {
+			console.log('not updating sexual state');;
+		}
+        if (isPresent !== null) {
+			if (isPresent) {
+            	struct['FA_type_of_certainty'] = flag_chimpPresent;
+        	} else {
+            	struct['FA_type_of_certainty'] = flag_chimpAbsent;
+        	}
+		} else {
+            console.log('not updating is present');
         }
         if (isWithin5 !== null) {
             if (isWithin5) {
@@ -380,12 +418,18 @@ function display() {
         } else {
             console.log('not updating is within five meters');
         }
-        if (isClosest) {
-            struct['FA_closest_to_focal'] = flag_chimpPresent;
-        } else {
-            struct['FA_closest_to_focal'] = flag_chimpAbsent;
+		if (isClosest !== null) {
+			if (isClosest) {
+				struct['FA_closest_to_focal'] = flag_chimpPresent;
+			} else {
+				struct['FA_closest_to_focal'] = flag_chimpAbsent;
+			}
+		} else {
+            console.log('not updating is closest');
         }
-        var stringified = JSON.stringify(struct);
+        
+		
+		var stringified = JSON.stringify(struct);
         if (isUpdate) {
             var updateSuccessfully =
                 control.updateRow('follow_arrival', stringified, rowId);
@@ -512,7 +556,7 @@ function display() {
 
     /**
      * This updates the database to say that the chimp currently marked as
-     * closest to the focal chimp is no longer closest. This is impotant so
+     * closest to the focal chimp is no longer closest. This is important so
      * that we don't end up with numerous closest chimps. This doesn't update
      * anything in the UI.
      */
@@ -526,9 +570,10 @@ function display() {
         }
         var chimpId = closestChimp.prop('id');
         var rowId = rowIdCache[chimpId];
+        
         console.log('the id of the formerly closest chimp is: ' + chimpId);
         console.log('the row id of the formerly closest chimp is: ' + rowId);
-        writeRowForChimp(true, rowId, chimpId, true, null, false);
+        writeRowForChimp(true, rowId, chimpId, true, null, false, null);
     };
 
     /*****  end function declaractions  *****/
@@ -597,7 +642,7 @@ function display() {
         console.log('chimp id: ' + chimpId + ' is present with row id: ' + rowId);
         // And now write the value into the database.
         var isChecked = this.checked;
-        writeRowForChimp(true, rowId, chimpId, isChecked, false, false);
+        writeRowForChimp(true, rowId, chimpId, isChecked, false, false, null);
     });
     
     $('.five-checkbox').on('click', function() {
@@ -614,7 +659,7 @@ function display() {
         // And now write the value into the database.
         var isChecked = this.checked;
         // Assuming that if a chimp is within 5m then it is also present
-        writeRowForChimp(true, rowId, chimpId, isChecked, isChecked, false);
+        writeRowForChimp(true, rowId, chimpId, isChecked, isChecked, false, null);
     });
     
     // We also want a click listener on each of the chimp names, which will
@@ -639,7 +684,7 @@ function display() {
             var rowId = rowIdCache[chimpId];
             console.log('chimp id: ' + chimpId + ' is closest');
             console.log('row id of cloest chimp is: ' + rowId);
-            writeRowForChimp(true, rowId, chimpId, true, null, true);
+            writeRowForChimp(true, rowId, chimpId, true, null, true, null);
         }
     });
 
@@ -664,15 +709,23 @@ function display() {
         console.log('clicked sexual state');
         // find the current sexual state, just as a sanity check.
         var chimpId = this.id;
+		
+		var indexOfSuffix = this.id.indexOf(sexualStateSuffix);
+        var chimpName = this.id.substr(0, indexOfSuffix);
+		
         var currentState = $(this).html();
         console.log(
-            'sexual state for chimp ' + chimpId + ' is ' + currentState);
+            'sexual state for chimp ' + chimpName + ' is ' + currentState);
         // now update it to be the next one.
         var nextIndex =
             (sexualStates.indexOf(currentState) + 1) % sexualStates.length;
         var nextState = sexualStates[nextIndex];
-        console.log('next sexual state is: ' + nextState);
         $(this).html(nextState);
+		var rowId = rowIdCache[chimpName];
+		
+		writeRowForChimp(true, rowId, chimpName, null, null, null, nextState);
+		console.log('next sexual state for ' + chimpName + ' is: ' + nextState);
+					
     });
 
 }

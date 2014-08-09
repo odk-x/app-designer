@@ -318,7 +318,7 @@ module.exports = function (grunt) {
                 {filter: 'isFile',
                  cwd: 'app' },
                 '**',
-                '!framework/survey/**');
+                '!framework/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -404,7 +404,7 @@ module.exports = function (grunt) {
                 {filter: 'isFile',
                  cwd: 'app' },
                 '**',
-                '!framework/tables/**');
+                '!framework/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -530,8 +530,53 @@ module.exports = function (grunt) {
                 {filter: 'isFile',
                  cwd: 'app' },
                 '**',
-                '!framework/tables/**',
+                '!framework/**',
                 '!tables/**',
+                'tables/household/**',
+                'tables/household_member/**',
+                'tables/selects/**',
+                'tables/gridScreen/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.appDir + '/' + fileName;
+                var dest =
+                    surveyConfig.deviceMount +
+                    '/' +
+                    surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+    grunt.registerTask(
+        'adbpush-survey-demo-beta3',
+        'Push everything for survey to the device',
+        function() {
+            // In the beta demo we only want Survey, so we do NOT need all the tables
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!assets/**',
+                '!framework/**',
+                '!output/csv/**',
+                '!output/db/**',
+                '!output/debug/**',
+                '!tables/**',
+                'tables/exampleForm/**',
                 'tables/household/**',
                 'tables/household_member/**',
                 'tables/selects/**',
