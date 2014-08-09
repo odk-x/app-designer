@@ -155,7 +155,13 @@ function postFormDef() {
       var path =
         'app/tables/' + tableId + '/forms/' + formId + '/formDef.json';
       console.log('going to write formDef to: ' + path);
-      util.postFile(path, formDef);
+      util.postFile(path, formDef, function(err, response, body) {
+            if (err || response.statusCode !== 200) {
+                alert('Something went wrong! Please save the file manually.');
+            } else {
+                alert('Saved the file!');
+            }
+          });
     }
 }
 
