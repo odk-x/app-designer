@@ -39,7 +39,7 @@ function display() {
     var fiveMeterSuffix = '_5m';
     var sexualStateSuffix = '_sexual-state';
 
-    var sexualStates = ['0.25', '0.5', '0.75', '1.0', 'U'];
+    var sexualStates = ['0', '0.25', '0.5', '0.75', '1.0', 'U'];
     
     var followTimeUserFriendly;
     if (followTime === null) {
@@ -642,7 +642,7 @@ function display() {
         console.log('chimp id: ' + chimpId + ' is present with row id: ' + rowId);
         // And now write the value into the database.
         var isChecked = this.checked;
-        writeRowForChimp(true, rowId, chimpId, isChecked, false, false, null);
+        writeRowForChimp(true, rowId, chimpId, isChecked, null, null, null);
     });
     
     $('.five-checkbox').on('click', function() {
@@ -659,7 +659,7 @@ function display() {
         // And now write the value into the database.
         var isChecked = this.checked;
         // Assuming that if a chimp is within 5m then it is also present
-        writeRowForChimp(true, rowId, chimpId, isChecked, isChecked, false, null);
+        writeRowForChimp(true, rowId, chimpId, null, isChecked, null, null);
     });
     
     // We also want a click listener on each of the chimp names, which will
@@ -684,7 +684,7 @@ function display() {
             var rowId = rowIdCache[chimpId];
             console.log('chimp id: ' + chimpId + ' is closest');
             console.log('row id of cloest chimp is: ' + rowId);
-            writeRowForChimp(true, rowId, chimpId, true, null, true, null);
+            writeRowForChimp(true, rowId, chimpId, null, null, true, null);
         }
     });
 

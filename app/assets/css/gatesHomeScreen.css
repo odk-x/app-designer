@@ -30,6 +30,8 @@ input[type='checkbox'] {
 
 .sexual-state {
     font-weight: bold;
+	font-size:18px;
+	color:#FF00FF;
 }
 
 .focal-label {
