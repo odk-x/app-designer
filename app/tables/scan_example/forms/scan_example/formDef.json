@@ -348,7 +348,7 @@
         "_row_num": null
       },
       {
-        "value": "20140602",
+        "value": "20140810",
         "setting_name": "form_version",
         "_row_num": null
       },
@@ -420,7 +420,7 @@
         "_row_num": null
       },
       "form_version": {
-        "value": "20140602",
+        "value": "20140810",
         "setting_name": "form_version",
         "_row_num": null
       },
@@ -519,7 +519,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -552,7 +551,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -585,7 +583,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -618,7 +615,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -651,7 +647,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -684,7 +679,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -706,6 +700,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "chores",
         "elementKey": "mon_chores"
       },
       "tues_chores_image_0": {
@@ -717,7 +712,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -739,6 +733,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "chores",
         "elementKey": "tues_chores"
       },
       "wed_chores_image_0": {
@@ -750,7 +745,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -772,6 +766,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "chores",
         "elementKey": "wed_chores"
       },
       "thurs_chores_image_0": {
@@ -783,7 +778,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -805,6 +799,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "chores",
         "elementKey": "thurs_chores"
       },
       "fri_chores_image_0": {
@@ -816,7 +811,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -838,6 +832,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "chores",
         "elementKey": "fri_chores"
       },
       "sat_chores_image_0": {
@@ -849,7 +844,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -871,6 +865,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "chores",
         "elementKey": "sat_chores"
       },
       "sun_chores_image_0": {
@@ -882,7 +877,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
@@ -904,6 +898,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "chores",
         "elementKey": "sun_chores"
       },
       "comments_image_0": {
@@ -915,7 +910,6 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
             "type": "string",
