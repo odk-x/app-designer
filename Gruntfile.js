@@ -24,29 +24,47 @@ var mountDirectory = function(connect, dir) {
 var postHandler = function(req, res, next) {
     if (req.method === 'POST') {
         //debugger;
-        var content = '';
+
         console.log('received a POST request');
-        req.addListener('data', function(chunk) {
-            content += chunk;
+
+        var mkdirp = require('mkdirp');
+        var fs = require('fs');
+
+        // We don't want the leading /, or else the file system will think
+        // we're writing to root, which we don't have permission to. Should
+        // really be dealing with the path more gracefully.
+        var path = req.url.substring(1);
+        
+        // First make sure the directory exists, or else the following call to
+        // createWriteStream fails. We don't want to include the file name as
+        // part of the directory, or else our post will be trying to change the
+        // directory to become a file with content, which will fail.
+        var lastDelimiter = path.lastIndexOf('/');
+        if (lastDelimiter >= 0) {
+            var directories = path.substring(0, lastDelimiter);
+            mkdirp.sync(directories);
+        }
+
+        var file = fs.createWriteStream(path);
+        req.pipe(file);
+
+        file.on('error', function(err) {
+            res.write('error uploading the file');
+            res.write(JSON.stringify(err));
+            res.statusCode = 500;
         });
-        req.addListener('end', function() {
-            // We don't want the leading /, or else the file system will think
-            // we're writing to root, which we don't have permission to. Should
-            // really be dealing with the path more gracefully.
-            var path = req.url.substring(1);
-            //debugger;
-            require('fs').writeFile(path, content, function(err) {
-                if (err) {
-                    console.log('got an error writing content');
-                    console.log('error : ' + err);
-                } else {
-                    //debugger;
-                    console.log('posted to ' + path + ' successfully.');
-                }
-            });
+
+        req.on('end', function() {
+            res.write('uploaded file!');
+            res.end();
         });
+
+    } else {
+        // We only want to hand this off to the other middleware if this
+        // is not a POST, as we're expecting to be the only ones to
+        // handle POSTs.
+        return next();
     }
-    return next();
 };
 
 // # Globbing

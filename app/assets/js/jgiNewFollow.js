@@ -15,6 +15,7 @@ function display() {
             communityId,
             beginTime,
             researcher) {
+		
         var struct = {};
         struct['FOL_date'] = date;
         struct['FOL_B_AnimID'] = focalChimpId;
@@ -30,7 +31,7 @@ function display() {
     $('#begin-follow').on('click', function() {
         // First retrieve the information from the form.
         var date = $('#FOL_date').val();
-        var focalChimpId = $('#FOL_B_AnimID').val();
+        var focalChimpId = $('#FOL_B_AnimID').val().toLowerCase();
         var communityId = $('#FOL_CL_community_id').val();
         var beginTime = $('#FOL_begin_time').val();
         var researcher = $('#FOL_am_observer_1').val();

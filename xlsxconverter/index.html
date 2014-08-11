@@ -41,7 +41,7 @@ body {
     height: 500px;
     width: 100%;
 }
-#save {
+.save-button {
     float: right;
     font-size: 20px;
 	font-weight: bold;
@@ -77,6 +77,7 @@ body {
 <script type="text/javascript" src="XRegExp-All-3.0.0-pre-2013-08-27.js"></script>
 <script type="text/javascript" src="underscore.js"></script>
 <script type="text/javascript" src="XLSXConverter.js"></script>
+<script type="text/javascript" src="/devEnv/js/devenv.js"></script>
 <script type="text/javascript">
 //<![CDATA[
 function removeEmptyStrings(rObjArr){
@@ -133,6 +134,35 @@ function handleSave(e) {
     downloader.style.display = "none";
     downloader.src = uriContent;
     document.body.appendChild(downloader);
+}
+
+/**
+ * Post the form def to the correct location on the file system.
+ */
+function postFormDef() {
+    var formDef = document.getElementById('out').value;
+    if (formDef === undefined || formDef === '') {
+      console.log('no formDef content to post.');
+      return;
+    }
+    var util = require('devenv-util');
+    var formDefJson = JSON.parse(formDef);
+    var tableId = util.getTableIdFromFormDef(formDefJson);
+    var formId = util.getFormIdFromFormDef(formDefJson);
+    if (tableId === null || formId === null) {
+      console.log('form id or table id could not be found, not posting file.');
+    } else {
+      var path =
+        'app/tables/' + tableId + '/forms/' + formId + '/formDef.json';
+      console.log('going to write formDef to: ' + path);
+      util.postFile(path, formDef, function(err, response, body) {
+            if (err || response.statusCode !== 200) {
+                alert('Something went wrong! Please save the file manually.');
+            } else {
+                alert('Saved the file!');
+            }
+          });
+    }
 }
 
 //TODO: Test multiple forms
@@ -291,7 +321,8 @@ window.onload = function() {
   <div id="warnings"></div>
 
   <div class="panel">
-    <button onclick="handleSave();" id="save">Save</button>
+    <button class="save-button" onclick="postFormDef();" id="write-formdef">Save to File System</button>
+    <button class="save-button" onclick="handleSave();" id="save">Save</button>
     <p>Output (to be saved as <tt>formDef.json</tt>):</p>
     <textarea id="out"></textarea>
   </div>
