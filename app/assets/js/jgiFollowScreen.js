@@ -226,10 +226,13 @@ function display() {
             var isPresent = foodData.getData(
                     i,
                     'FB_duration');
-            if (isPresent === 'true') {
+            if (isPresent === '1') {
                 isPresent = true;
-            } else {
+            } else if (isPresent === '0') {
                 isPresent = false;
+            } else {
+                console.log(
+                        'unrecognized value of food present: ' + isPresent);
             }
             setFoodIsPresent(foodId, isPresent);
 
@@ -465,12 +468,12 @@ function display() {
     var getSpecies = function() {
         var result = $('.species');
         return result;
-    }
+    };
 
     var getFoods = function() {
         var result = $('.food');
         return result;
-    }
+    };
 
     var getFemaleChimps = function() {
         var result = $('.female-chimp');
@@ -558,7 +561,7 @@ function display() {
         var struct = {};
         struct['OS_FOL_date'] = followDate;
         struct['OS_time_begin'] = followTime;
-        struct['OS_FOL_B_focal_AnimId'] = focalChimpId;
+        struct['OS_FOL_B_focal_AnimID'] = focalChimpId;
 
         struct['OS_local_species_name_written'] = speciesId;
         var numPresentStr = numPresent.toString();
@@ -585,10 +588,11 @@ function display() {
         var struct = {};
         struct['FB_FOL_date'] = followDate;
         struct['FB_begin_feed_time'] = followTime;
-        struct['FB_FOL_B_AnimId'] = focalChimpId;
+        struct['FB_FOL_B_AnimID'] = focalChimpId;
 
         struct['FB_FL_local_food_name'] = foodId;
-        var isPresentStr = isPresent ? 'true' : 'false';
+        // this column is an integer in the database.
+        var isPresentStr = isPresent ? '1' : '0';
         struct['FB_duration'] = isPresentStr;
 
         var stringified = JSON.stringify(struct);

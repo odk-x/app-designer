@@ -89,7 +89,7 @@ util.getTableDataForTimePoint = function(date, time, focalChimpId) {
 util.getFoodDataForTimePoint = function(date, time, focalChimpId) {
 
     var whereClause =
-        'FB_FOL_date = ? AND FB_FOL_B_AnimId = ? AND FB_begin_feed_time = ?';
+        'FB_FOL_date = ? AND FB_FOL_B_AnimID = ? AND FB_begin_feed_time = ?';
 
     var selectionArgs = [date, time, focalChimpId];
 
@@ -105,7 +105,7 @@ util.getFoodDataForTimePoint = function(date, time, focalChimpId) {
 util.getSpeciesDataForTimePoint = function(date, time, focalChimpId) {
 
     var whereClause =
-        'OS_FOL_date = ? AND OS_FOL_B_focal_AnimId = ? AND OS_time_begin = ?';
+        'OS_FOL_date = ? AND OS_FOL_B_focal_AnimID = ? AND OS_time_begin = ?';
 
     var selectionArgs = [date, time, focalChimpId];
 
