@@ -15,6 +15,16 @@ input[type='checkbox'] {
     border: 2px solid #555;
 }
 
+#extras-container {
+    position: absolute;
+    width: 300px;
+    left: 400px;
+}
+
+#table-container {
+    float: left;
+}
+
 .closest-chimp {
     background-color: #5cb85c;
     border-color: #5cb85c;
