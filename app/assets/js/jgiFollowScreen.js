@@ -653,6 +653,41 @@ function display() {
         writeRowForChimp(true, rowId, chimpId, true, null, false, null);
     };
 
+    var updateUIForFood = function() {
+
+        var bananas = $('#bananas');
+        var berries = $('#berries');
+        var flesh = $('#flesh');
+
+        updateFoodAnchor(bananas);
+        updateFoodAnchor(berries);
+        updateFoodAnchor(flesh);
+
+    };
+
+    /**
+     * Update the individual anchor for a food item according to whether or not
+     * it is present.
+     */
+    var updateFoodAnchor = function(anchor) {
+        var id = anchor.prop('id');
+        var isPresent = foodIsPresent(id);
+        var check = $('#' + id + '-check');
+        var label = $('#' + id + '-text');
+        if (isPresent) {
+            // we want to add the checkbox glyphicon and add a space to the
+            // label to maintain padding.
+            var text = ' ' + label.text().trim();
+            label.text(text);
+            check.addClass('glyphicon');
+            check.addClass('glyphicon-ok');
+        } else {
+            label.text(label.text().trim());
+            check.removeClass('glyphicon');
+            check.removeClass('glyphicon-ok');
+        }
+    };
+
     var updateUIForSpecies = function() {
         // Wow, I am loving that these three variables have the same length.
         // Happy accident.
@@ -777,7 +812,7 @@ function display() {
     });
 
     $('.food').on('click', function() {
-        var food = $(this).id;
+        var food = $(this).prop('id');
         console.log('clicked food: ' + food);
         // toggle the food.
         if (foodIsPresent(food)) {
@@ -785,6 +820,8 @@ function display() {
         } else {
             setFoodIsPresent(food, true);
         }
+        console.log(foodPresent);
+        updateUIForFood();
     });
     
     // We also want a click listener on each of the chimp names, which will
