@@ -28,10 +28,14 @@ input[type='checkbox'] {
     border-bottom-left-radius: 4px;
 }
 
+#observation-table {
+    float: left;
+}
+
 .sexual-state {
     font-weight: bold;
-	font-size:18px;
-	color:#FF00FF;
+    font-size:18px;
+    color:#FF00FF;
 }
 
 .focal-label {
