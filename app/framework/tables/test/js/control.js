@@ -159,6 +159,22 @@ describe('control', function() {
 
     });
 
+    describe('addRow', function() {
+
+        it('#is function', function() {
+            assert.isFunction(control.addRow);
+        });
+
+    });
+
+    describe('updateRow', function() {
+
+        it('#is function', function() {
+            assert.isFunction(control.updateRow);
+        });
+
+    });
+
     describe('addRowWithCollectDefault', function() {
 
         it('#is function', function() {

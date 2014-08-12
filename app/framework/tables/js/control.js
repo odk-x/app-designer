@@ -74,6 +74,16 @@ if (!window.control) {
                 stringified);
     };
 
+    pub.updateRow = function(tableId, rowId, stringified) {
+        var parsed = JSON.parse(stringified);
+        console.log('parsed for update: ' + parsed);
+
+        console.log(
+                'trying to update rowId: ' + rowId +
+                ' in table id: ' + tableId +
+                stringified);
+    };
+
 
     pub.getPlatformInfo = function() {
         // 9000 b/c that's what grunt is running on. Perhaps should configure

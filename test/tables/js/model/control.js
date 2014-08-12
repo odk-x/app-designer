@@ -75,6 +75,22 @@ $.getScript('/app/framework/tables/js/control.js',
 
             });
 
+            describe('addRow', function() {
+
+                it('#is function', function() {
+                    assert.isFunction(control.addRow);
+                });
+
+            });
+
+            describe('updateRow', function() {
+
+                it('#is function', function() {
+                    assert.isFunction(control.updateRow);
+                });
+            
+            });
+
             describe('openTableToListView', function() {
                 
                 it('#is function', function() {
