@@ -677,7 +677,7 @@ function display() {
         if (isPresent) {
             // we want to add the checkbox glyphicon and add a space to the
             // label to maintain padding.
-            var text = ' ' + label.text().trim();
+            var text = label.text().trim() + ' ';
             label.text(text);
             check.addClass('glyphicon');
             check.addClass('glyphicon-ok');
