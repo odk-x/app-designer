@@ -42,6 +42,30 @@
         <h1 class="title" id="time-label">07:00</h1>
       </header>
 
+      <div id="extras-container">
+        <div id="species-group" class="btn-group">
+          <button type="button" id="species-button" class="btn btn-success dropdown-toggle pull-left" data-toggle="dropdown">
+            <span id="total-species-count" class="badge"></span> Species<span class="caret"></span>
+          </button>
+          <ul id="species-menu" class="dropdown-menu" role="menu">
+            <li><a id="baboon" class="species" href="#"><span id="baboon-count" class="badge"></span> Baboon</a></li>
+            <li><a id="vervet" class="species" href="#"><span id="vervet-count" class="badge"></span> Vervet Monkey</a></li>
+            <li><a id="tailed" class="species" href="#"><span id="tailed-count" class="badge"></span> Red-Tailed Monkey</a></li>
+          </ul>
+        </div>
+
+        <div id="food-group" class="btn-group">
+          <button type="button" id="food-button" class="btn btn-success dropdown-toggle pull-left" data-toggle="dropdown">
+            Food<span class="caret"></span>
+          </button>
+          <ul id="food-menu" class="dropdown-menu" role="menu">
+            <li><a id="bananas" class="food" href="#"><span id="bananas-text">Bananas</span><span id="bananas-check"></span></a></li>
+            <li><a id="berries" class="food" href="#"><span id="berries-text">Berries</span><span id="berries-check"></span></a></li>
+            <li><a id="flesh" class="food" href="#"><span id="flesh-text">Flesh</span><span id="flesh-check"></span></a></li>
+          </ul>
+        </div>
+
+      </div>
       <table id="observation-table">
 
         <tr>
@@ -156,30 +180,6 @@
         </tr>
 
       </table>
-      <div id="extras-container">
-        <div id="species-group" class="btn-group">
-          <button type="button" id="species-button" class="btn btn-success dropdown-toggle pull-left" data-toggle="dropdown">
-            <span id="total-species-count" class="badge"></span> Species<span class="caret"></span>
-          </button>
-          <ul id="species-menu" class="dropdown-menu" role="menu">
-            <li><a id="baboon" class="species" href="#"><span id="baboon-count" class="badge"></span> Baboon</a></li>
-            <li><a id="vervet" class="species" href="#"><span id="vervet-count" class="badge"></span> Vervet Monkey</a></li>
-            <li><a id="tailed" class="species" href="#"><span id="tailed-count" class="badge"></span> Red-Tailed Monkey</a></li>
-          </ul>
-        </div>
-
-        <div id="food-group" class="btn-group">
-          <button type="button" id="food-button" class="btn btn-success dropdown-toggle pull-left" data-toggle="dropdown">
-            Food<span class="caret"></span>
-          </button>
-          <ul id="food-menu" class="dropdown-menu" role="menu">
-            <li><a id="bananas" class="food" href="#"><span id="bananas-text">Bananas</span><span id="bananas-check"></span></a></li>
-            <li><a id="berries" class="food" href="#"><span id="berries-text">Berries</span><span id="berries-check"></span></a></li>
-            <li><a id="flesh" class="food" href="#"><span id="flesh-text">Flesh</span><span id="flesh-check"></span></a></li>
-          </ul>
-        </div>
-
-      </div>
 
 
   </div> <!-- .container -->
