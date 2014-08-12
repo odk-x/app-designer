@@ -86,6 +86,38 @@ util.getTableDataForTimePoint = function(date, time, focalChimpId) {
     return result;
 };
 
+util.getFoodDataForTimePoint = function(date, time, focalChimpId) {
+
+    var whereClause =
+        'FB_FOL_date = ? AND FB_FOL_B_AnimId = ? AND FB_begin_feed_time = ?';
+
+    var selectionArgs = [date, time, focalChimpId];
+
+    var result = control.query(
+            'food_bout',
+            whereClause,
+            selectionArgs);
+
+    return result;
+
+};
+
+util.getSpeciesDataForTimePoint = function(date, time, focalChimpId) {
+
+    var whereClause =
+        'OS_FOL_date = ? AND OS_FOL_B_focal_AnimId = ? AND OS_time_begin = ?';
+
+    var selectionArgs = [date, time, focalChimpId];
+
+    var result = control.query(
+            'other_species',
+            whereClause,
+            selectionArgs);
+
+    return result;
+
+};
+
 /**
  * Get a string to append to a url that will contain information the date and
  * time. The values can then be retrieved using getQueryParameter.

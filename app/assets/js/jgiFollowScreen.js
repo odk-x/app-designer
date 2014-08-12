@@ -135,11 +135,11 @@ function display() {
      * appropriate contents.
      */
     var initUIFromDatabaseForTime = function(time) {
-        // First get all the data for the table.
         var tableData = util.getTableDataForTimePoint(
                 followDate,
                 time,
                 focalChimpId);
+        // First get all the data for the chimp table.
         for (var i = 0; i < tableData.getCount(); i++) {
             // First get the ids of the chimp. These are stored in the
             // FA_B_arr_AnimID column.
@@ -192,6 +192,50 @@ function display() {
             }
         }
 
+        // Now update the food and species lists.
+        var speciesData = util.getFoodDataForTimePoint(
+                followDate,
+                time,
+                focalChimpId);
+        for (i = 0; i < speciesData.getCount(); i++) {
+            var speciesId = speciesData.getData(
+                    i,
+                    'OS_local_species_name_written');
+            // there isn't an obvious 'count' field in the db schema. for now
+            // I'm going to overload the duration field.
+            var speciesCount = speciesData.getData(
+                    i,
+                    'OS_duration');
+            if (speciesCount !== '') {
+                speciesCount = parseInt(speciesCount);
+            }
+            if (isValidSpecies(speciesId)) {
+                setNumberOfSpecies(speciesId, speciesCount);
+            }
+
+        }
+
+        var foodData = util.getSpeciesDataForTimePoint(
+                followDate,
+                time,
+                focalChimpId);
+        for (i = 0; i < foodData.getCount(); i++) {
+            var foodId = foodData.getData(
+                    i,
+                    'FB_FL_local_food_name');
+            var isPresent = foodData.getData(
+                    i,
+                    'FB_duration');
+            if (isPresent === 'true') {
+                isPresent = true;
+            } else {
+                isPresent = false;
+            }
+            setFoodIsPresent(foodId, isPresent);
+
+        }
+
+
     };
 
     var isNewTimePoint = function(time) {
@@ -223,6 +267,36 @@ function display() {
             var chimpId = tableData.getData(i, 'FA_B_arr_AnimID');
             var rowId = tableData.getRowId(i);
             result[chimpId] = rowId;
+        }
+        return result;
+    };
+
+    var createFoodRowIdCache = function() {
+        var foodData = util.getFoodDataForTimePoint(
+                followDate,
+                followTime,
+                focalChimpId);
+        var result = {};
+        for (var i = 0; i < foodData.getCount(); i++) {
+            var foodId = foodData.getData(i, 'FB_FL_local_food_name');
+            var rowId = foodData.getRowId(i);
+            result[foodId] = rowId;
+        }
+        return result;
+    };
+
+    var createSpeciesRowIdCache = function() {
+        var speciesData = util.getSpeciesDataForTimePoint(
+                followDate,
+                followTime,
+                focalChimpId);
+        var result = {};
+        for (var i = 0; i < speciesData.getCount(); i++) {
+            var speciesId = speciesData.getData(
+                    i,
+                    'OS_local_species_name_written');
+            var rowId = speciesData.getRowId(i);
+            result[speciesId] = rowId;
         }
         return result;
     };
@@ -388,6 +462,16 @@ function display() {
         return result;
     };
 
+    var getSpecies = function() {
+        var result = $('.species');
+        return result;
+    }
+
+    var getFoods = function() {
+        var result = $('.food');
+        return result;
+    }
+
     var getFemaleChimps = function() {
         var result = $('.female-chimp');
         return result;
@@ -439,6 +523,88 @@ function display() {
                     isClosest,
                     sexState);
         }
+
+        // add rows for the species
+        var species = getSpecies();
+        
+        for (var i = 0; i < species.length; i++) {
+
+            var id = species.eq(i).prop('id');
+            var numPresent = getNumberOfSpeciesPresent(id);
+            writeForSpecies(
+                    false,
+                    null,
+                    id,
+                    numPresent);
+        }
+        
+        // add rows for the foods
+        var foods = getFoods();
+        for (var i = 0; i < foods.length; i++) {
+            var id = foods.eq(i).prop('id');
+            var isPresent = foodIsPresent(id);
+            writeForFood(
+                    false,
+                    null,
+                    id,
+                    isPresent);
+        }
+
+
+    };
+
+    var writeForSpecies = function(isUpdate, rowId, speciesId, numPresent) {
+
+        var struct = {};
+        struct['OS_FOL_date'] = followDate;
+        struct['OS_time_begin'] = followTime;
+        struct['OS_FOL_B_focal_AnimId'] = focalChimpId;
+
+        struct['OS_local_species_name_written'] = speciesId;
+        var numPresentStr = numPresent.toString();
+        struct['OS_duration'] = numPresentStr;
+
+        var stringified = JSON.stringify(struct);
+        if (isUpdate) {
+            var updateSuccessfully = control.updateRow(
+                    'other_species',
+                    stringified,
+                    rowId);
+            console.log('updated species successfully: ' + updateSuccessfully);
+        } else {
+            var addSuccessfully = control.addRow(
+                    'other_species',
+                    stringified);
+            console.log('added species successfully: ' + addSuccessfully);
+        }
+
+    };
+
+    var writeForFood = function(isUpdate, rowId, foodId, isPresent) {
+
+        var struct = {};
+        struct['FB_FOL_date'] = followDate;
+        struct['FB_begin_feed_time'] = followTime;
+        struct['FB_FOL_B_AnimId'] = focalChimpId;
+
+        struct['FB_FL_local_food_name'] = foodId;
+        var isPresentStr = isPresent ? 'true' : 'false';
+        struct['FB_duration'] = isPresentStr;
+
+        var stringified = JSON.stringify(struct);
+        if (isUpdate) {
+            var updateSuccessfully = control.updateRow(
+                    'food_bout',
+                    stringified,
+                    rowId);
+            console.log('updated food successfully: ' + updateSuccessfully);
+        } else {
+            var addSuccessfully = control.addRow(
+                    'food_bout',
+                    stringified);
+            console.log('added food successfully: ' + addSuccessfully);
+        }
+
     };
 
     /**
@@ -736,22 +902,21 @@ function display() {
             // establish a row for every chimp, which is important for our
             // assumptions down the line.
             initDatabaseFromUI();
-            updateUIForSpecies();
         } else {
             // Then all the checkboxes are empty. We'll generate a row for
             // every chimp with this call, which is important for establishing
             // the invariants we're going to use later.
             initDatabaseFromUI();
-            updateUIForSpecies();
         }
     } else {
         // We're returning to an existing timepoint, so update the UI to
         // reflect this.
         initUIFromDatabaseForTime(followTime);
-        updateUIForSpecies();
     }
 
     var rowIdCache = createIdCache();
+    var speciesRowIdCache = createSpeciesRowIdCache();
+    var foodRowIdCache = createFoodRowIdCache();
 
     $('#time-label').eq(0).html(followTimeUserFriendly);
 
@@ -789,7 +954,11 @@ function display() {
         // chimp, which we've cached above.
         var rowId = rowIdCache[chimpId];
         // log it for a sanity check
-        console.log('chimp id: ' + chimpId + ' is within 5m with row id: ' + rowId);
+        console.log(
+            'chimp id: ' +
+            chimpId +
+            ' is within 5m with row id: ' +
+            rowId);
         // And now write the value into the database.
         var isChecked = this.checked;
         // Assuming that if a chimp is within 5m then it is also present
@@ -806,21 +975,30 @@ function display() {
         if (enteredNum !== null) {
             var intValue = parseInt(enteredNum);
             setNumberOfSpecies(species, intValue);
+            console.log(speciesCounts);
+            var rowId = speciesRowIdCache[species];
+            writeForSpecies(true, rowId, species, intValue);
+            updateUIForSpecies();
+        } else {
+            console.log('invalid number of species: ' + enteredNum);
         }
-        console.log(speciesCounts);
-        updateUIForSpecies();
     });
 
     $('.food').on('click', function() {
         var food = $(this).prop('id');
         console.log('clicked food: ' + food);
         // toggle the food.
+        var isPresent;
         if (foodIsPresent(food)) {
             setFoodIsPresent(food, false);
+            isPresent = false;
         } else {
             setFoodIsPresent(food, true);
+            isPresent = true;
         }
         console.log(foodPresent);
+        var rowId = foodRowIdCache[food];
+        writeForFood(true, rowId, food, isPresent);
         updateUIForFood();
     });
     
