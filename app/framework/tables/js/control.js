@@ -72,9 +72,11 @@ if (!window.control) {
                 tableId +
                 ' data: ' +
                 stringified);
+
+        return true;
     };
 
-    pub.updateRow = function(tableId, rowId, stringified) {
+    pub.updateRow = function(tableId, stringified, rowId)  {
         var parsed = JSON.parse(stringified);
         console.log('parsed for update: ' + parsed);
 
@@ -82,6 +84,8 @@ if (!window.control) {
                 'trying to update rowId: ' + rowId +
                 ' in table id: ' + tableId +
                 stringified);
+
+        return true;
     };
 
 
