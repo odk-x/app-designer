@@ -40,6 +40,20 @@ function display() {
     var sexualStateSuffix = '_sexual-state';
 
     var sexualStates = ['0', '0.25', '0.5', '0.75', '1.0', 'U'];
+
+    // This will hold the values for the numbers of species present;
+    var speciesCounts = {};
+    speciesCounts.baboon = 0;
+    speciesCounts.vervet = 0;
+    speciesCounts.tailed = 0;
+
+    // This will hold whether or not food is present. This is just binary
+    // like this, or should we actually be tallying them as in the species
+    // case?
+    var foodPresent = {};
+    foodPresent.bananas = false;
+    foodPresent.berries = false;
+    foodPresent.flesh = false;
     
     var followTimeUserFriendly;
     if (followTime === null) {
@@ -50,6 +64,69 @@ function display() {
     } else {
         followTimeUserFriendly = followTime.replace('_', ':');
     }
+
+    /**
+     * Return true if a valid species else false.
+     */
+    var isValidSpecies = function(species) {
+        // First make sure this is a valid key.
+        if (!(species in speciesCounts)) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    var isValidFood = function(food) {
+        // First make sure this is a valid key.
+        if (!(food in foodPresent)) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    /**
+     * Get the number present for a species.
+     */
+    var getNumberOfSpeciesPresent = function(species) {
+        // First make sure this is a valid key.
+        if (!isValidSpecies(species)) {
+            alert('unrecognized species: ' + species);
+            return;
+        }
+        var result = speciesCounts[species];
+        return result;
+    };
+
+    /**
+     * True if the food is present, else false
+     */
+    var foodIsPresent = function(food) {
+        // First make sure this is a valid key.
+        if (!isValidFood(food)) {
+            alert('unrecognized food: ' + food);
+            return;
+        }
+        var result = foodPresent[food];
+        return result;
+    };
+
+    var setFoodIsPresent = function(food, isPresent) {
+        if (!isValidFood(food)) {
+            alert('unrecognized food: ' + food);
+            return;
+        }
+        foodPresent[food] = isPresent;
+    };
+
+    var setNumberOfSpecies = function(species, count) {
+        if (!isValidSpecies(species)) {
+            alert('unrecognized species: ' + species);
+            return;
+        }
+        speciesCounts[species] = count;
+    };
 
     /**
      * Update the state of the UI to reflect what is stored in the database.
@@ -80,8 +157,8 @@ function display() {
             } else {
                 checkbox.prop('checked', false);
             }
-			
-			// The "within5meter" checkbox id is the combination of the id and the
+
+            // The "within5meter" checkbox id is the combination of the id and the
             // suffix defined above.
             var fiveCheckboxId = id + fiveMeterSuffix;
             var checkbox5m = $('#' + fiveCheckboxId);
@@ -94,25 +171,25 @@ function display() {
             } else {
                 checkbox5m.prop('checked', false);
             }
-			
-			// Retrieve closest to focal chimp if there is one
-			var name = $('#' + id);
-			var valueOfClosest = tableData.getData(i, 'FA_closest_to_focal');
-			if (valueOfClosest !== undefined && valueOfClosest !== '') {
+
+            // Retrieve closest to focal chimp if there is one
+            var name = $('#' + id);
+            var valueOfClosest = tableData.getData(i, 'FA_closest_to_focal');
+            if (valueOfClosest !== undefined && valueOfClosest !== '') {
                 valueOfClosest = parseInt(valueOfClosest);
             }
-			if (valueOfClosest === flag_chimpPresent) {
+            if (valueOfClosest === flag_chimpPresent) {
                 $('.closest-chimp').removeClass('closest-chimp');
-				name.addClass('closest-chimp');
+                name.addClass('closest-chimp');
             }
 
-			// Retrieve sexual state from database if it exists
-			var sexualStateId = id + sexualStateSuffix;
-			var sexualState = $('#' + sexualStateId);
-			var valueOfSexualState = tableData.getData(i, 'FA_type_of_cycle');
-			if (sexualState !== undefined) {
-				$(sexualState).html(valueOfSexualState);
-			}
+            // Retrieve sexual state from database if it exists
+            var sexualStateId = id + sexualStateSuffix;
+            var sexualState = $('#' + sexualStateId);
+            var valueOfSexualState = tableData.getData(i, 'FA_type_of_cycle');
+            if (sexualState !== undefined) {
+                $(sexualState).html(valueOfSexualState);
+            }
         }
 
     };
@@ -347,11 +424,11 @@ function display() {
                 isClosest = true;
             }
             
-			var sexualState = $('#' + chimpId + sexualStateSuffix);
-			var sexState = $(sexualState).html();
-			if (sexState == null) {
-				sexState = 'N/A';
-			}
+            var sexualState = $('#' + chimpId + sexualStateSuffix);
+            var sexState = $(sexualState).html();
+            if (sexState == null) {
+                sexState = 'N/A';
+            }
 
             writeRowForChimp(
                     false,
@@ -394,19 +471,19 @@ function display() {
         struct['FA_B_arr_AnimID'] = chimpId;
         struct['FA_time_start'] = followTime;
         
-		if (sState !== null) {
+        if (sState !== null) {
             struct['FA_type_of_cycle'] = sState;
         }
-		else {
-			console.log('not updating sexual state');;
-		}
+        else {
+            console.log('not updating sexual state');;
+        }
         if (isPresent !== null) {
-			if (isPresent) {
-            	struct['FA_type_of_certainty'] = flag_chimpPresent;
-        	} else {
-            	struct['FA_type_of_certainty'] = flag_chimpAbsent;
-        	}
-		} else {
+            if (isPresent) {
+                struct['FA_type_of_certainty'] = flag_chimpPresent;
+            } else {
+                struct['FA_type_of_certainty'] = flag_chimpAbsent;
+            }
+        } else {
             console.log('not updating is present');
         }
         if (isWithin5 !== null) {
@@ -418,18 +495,18 @@ function display() {
         } else {
             console.log('not updating is within five meters');
         }
-		if (isClosest !== null) {
-			if (isClosest) {
-				struct['FA_closest_to_focal'] = flag_chimpPresent;
-			} else {
-				struct['FA_closest_to_focal'] = flag_chimpAbsent;
-			}
-		} else {
+        if (isClosest !== null) {
+            if (isClosest) {
+                struct['FA_closest_to_focal'] = flag_chimpPresent;
+            } else {
+                struct['FA_closest_to_focal'] = flag_chimpAbsent;
+            }
+        } else {
             console.log('not updating is closest');
         }
         
-		
-		var stringified = JSON.stringify(struct);
+        
+        var stringified = JSON.stringify(struct);
         if (isUpdate) {
             var updateSuccessfully =
                 control.updateRow('follow_arrival', stringified, rowId);
@@ -576,6 +653,25 @@ function display() {
         writeRowForChimp(true, rowId, chimpId, true, null, false, null);
     };
 
+    var updateUIForSpecies = function() {
+        // Wow, I am loving that these three variables have the same length.
+        // Happy accident.
+        var baboonBadge = $('#baboon-count');
+        var vervetBadge = $('#vervet-count');
+        var tailedBadge = $('#tailed-count');
+        var totalBadge = $('#total-species-count');
+
+        var baboonCount = getNumberOfSpeciesPresent('baboon');
+        var vervetCount = getNumberOfSpeciesPresent('vervet');
+        var tailedCount = getNumberOfSpeciesPresent('tailed');
+        var totalCount = baboonCount + vervetCount + tailedCount;
+
+        baboonBadge.html(baboonCount);
+        vervetBadge.html(vervetCount);
+        tailedBadge.html(tailedCount);
+        totalBadge.html(totalCount);
+    };
+
     /*****  end function declaractions  *****/
 
     // First we'll add the dynamic UI elements.
@@ -605,16 +701,19 @@ function display() {
             // establish a row for every chimp, which is important for our
             // assumptions down the line.
             initDatabaseFromUI();
+            updateUIForSpecies();
         } else {
             // Then all the checkboxes are empty. We'll generate a row for
             // every chimp with this call, which is important for establishing
             // the invariants we're going to use later.
             initDatabaseFromUI();
+            updateUIForSpecies();
         }
     } else {
         // We're returning to an existing timepoint, so update the UI to
         // reflect this.
         initUIFromDatabaseForTime(followTime);
+        updateUIForSpecies();
     }
 
     var rowIdCache = createIdCache();
@@ -660,6 +759,32 @@ function display() {
         var isChecked = this.checked;
         // Assuming that if a chimp is within 5m then it is also present
         writeRowForChimp(true, rowId, chimpId, null, isChecked, null, null);
+    });
+
+    $('.species').on('click', function() {
+        var species = $(this).prop('id');
+        console.log('clicked species ' + species);
+        var existing = getNumberOfSpeciesPresent(species);
+        var enteredNum = window.prompt(
+            'How many are Present?',
+            existing);
+        if (enteredNum !== null) {
+            var intValue = parseInt(enteredNum);
+            setNumberOfSpecies(species, intValue);
+        }
+        console.log(speciesCounts);
+        updateUIForSpecies();
+    });
+
+    $('.food').on('click', function() {
+        var food = $(this).id;
+        console.log('clicked food: ' + food);
+        // toggle the food.
+        if (foodIsPresent(food)) {
+            setFoodIsPresent(food, false);
+        } else {
+            setFoodIsPresent(food, true);
+        }
     });
     
     // We also want a click listener on each of the chimp names, which will
@@ -709,10 +834,10 @@ function display() {
         console.log('clicked sexual state');
         // find the current sexual state, just as a sanity check.
         var chimpId = this.id;
-		
-		var indexOfSuffix = this.id.indexOf(sexualStateSuffix);
+        
+        var indexOfSuffix = this.id.indexOf(sexualStateSuffix);
         var chimpName = this.id.substr(0, indexOfSuffix);
-		
+        
         var currentState = $(this).html();
         console.log(
             'sexual state for chimp ' + chimpName + ' is ' + currentState);
@@ -721,11 +846,11 @@ function display() {
             (sexualStates.indexOf(currentState) + 1) % sexualStates.length;
         var nextState = sexualStates[nextIndex];
         $(this).html(nextState);
-		var rowId = rowIdCache[chimpName];
-		
-		writeRowForChimp(true, rowId, chimpName, null, null, null, nextState);
-		console.log('next sexual state for ' + chimpName + ' is: ' + nextState);
-					
+        var rowId = rowIdCache[chimpName];
+        
+        writeRowForChimp(true, rowId, chimpName, null, null, null, nextState);
+        console.log('next sexual state for ' + chimpName + ' is: ' + nextState);
+                    
     });
 
 }

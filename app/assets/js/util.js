@@ -15,7 +15,7 @@ util.focalChimpKey = 'focal_chimp';
  * implementation that will fail if the key string appears more than once, etc.
  */
 util.getQueryParameter = function(key) {
-    var href = document.location.href;
+    var href = document.location.search;
     var startIndex = href.search(key);
     if (startIndex < 0) {
         console.log('requested query parameter not found: ' + key);
