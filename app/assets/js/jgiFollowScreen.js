@@ -193,10 +193,11 @@ function display() {
         }
 
         // Now update the food and species lists.
-        var speciesData = util.getFoodDataForTimePoint(
+        var speciesData = util.getSpeciesDataForTimePoint(
                 followDate,
                 time,
                 focalChimpId);
+        console.log('species count before updating from db: ' + speciesCount);
         for (i = 0; i < speciesData.getCount(); i++) {
             var speciesId = speciesData.getData(
                     i,
@@ -214,11 +215,13 @@ function display() {
             }
 
         }
+        console.log('species count after updating from db: ' + speciesCount);
 
-        var foodData = util.getSpeciesDataForTimePoint(
+        var foodData = util.getFoodDataForTimePoint(
                 followDate,
                 time,
                 focalChimpId);
+        console.log('food present before updating from db: ' + foodPresent);
         for (i = 0; i < foodData.getCount(); i++) {
             var foodId = foodData.getData(
                     i,
@@ -237,7 +240,10 @@ function display() {
             setFoodIsPresent(foodId, isPresent);
 
         }
+        console.log('food present after updating from db: ' + foodPresent);
 
+        updateUIForSpecies();
+        updateUIForFood();
 
     };
 
