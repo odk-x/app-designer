@@ -92,7 +92,8 @@ function display() {
     var getNumberOfSpeciesPresent = function(species) {
         // First make sure this is a valid key.
         if (!isValidSpecies(species)) {
-            alert('unrecognized species: ' + species);
+            console.trace();
+            alert('get number unrecognized species: ' + species);
             return;
         }
         var result = speciesCounts[species];
@@ -105,6 +106,7 @@ function display() {
     var foodIsPresent = function(food) {
         // First make sure this is a valid key.
         if (!isValidFood(food)) {
+            console.trace();
             alert('unrecognized food: ' + food);
             return;
         }
@@ -118,8 +120,6 @@ function display() {
             return;
         }
         foodPresent[foodId] = isPresent;
-        var rowId = foodRowIdCache[foodId];
-        writeForFood(true, rowId, foodId, false);
     };
 
     var setNumberOfSpecies = function(speciesId, count) {
@@ -128,8 +128,6 @@ function display() {
             return;
         }
         speciesCounts[speciesId] = count;
-        var rowId = speciesRowIdCache[speciesId];
-        writeForSpecies(true, rowId, speciesId, count);
     };
 
     /**
@@ -201,7 +199,7 @@ function display() {
                 followDate,
                 time,
                 focalChimpId);
-        console.log('species count before updating from db: ' + speciesCount);
+        console.log('species count before updating from db: ' + speciesCounts);
         for (i = 0; i < speciesData.getCount(); i++) {
             var speciesId = speciesData.getData(
                     i,
@@ -246,7 +244,7 @@ function display() {
         }
         console.log('food present after updating from db: ' + foodPresent);
 
-        updateUIForSpecies();
+        updateUIForAllSpecies();
         updateUIForFood();
 
     };
@@ -517,7 +515,7 @@ function display() {
             var isWithinFive = within5Checkbox.prop('checked');
             
             var isClosest = false;
-            if ($('.closest-chimp').prop('id') == chimpId) {
+            if ($('.closest-chimp').prop('id') === chimpId) {
                 isClosest = true;
             }
             
@@ -542,12 +540,12 @@ function display() {
         
         for (var i = 0; i < species.length; i++) {
 
-            var id = species.eq(i).prop('id');
-            var numPresent = getNumberOfSpeciesPresent(id);
+            var speciesId = species.eq(i).prop('id');
+            var numPresent = getNumberOfSpeciesPresent(speciesId);
             writeForSpecies(
                     false,
                     null,
-                    id,
+                    speciesId,
                     numPresent);
         }
         
@@ -865,7 +863,7 @@ function display() {
     var updateUIForSpeciesCount = function(speciesId) {
         
         if (!(isValidSpecies(speciesId))) {
-            alert('unrecognized species: ' + speciesId);
+            alert('update ui for count unrecognized species: ' + speciesId);
             return;
         }
 
@@ -884,7 +882,7 @@ function display() {
 
     };
 
-    var updateUIForSpecies = function() {
+    var updateUIForAllSpecies = function() {
 
         // We're going to flag the food user lists as visible or not.
         var speciesIds = ['baboon', 'vervet', 'tailed'];
@@ -944,6 +942,8 @@ function display() {
 
     updateOlderMenu();
     initUIForFocalChimp();
+    updateUIForAllSpecies();
+    updateUIForFood();
 
 
     // Now we'll attach a click listener that rights the state of the checkbox
@@ -992,7 +992,7 @@ function display() {
         console.log('clicked species ' + speciesId);
         setNumberOfSpecies(speciesId, 1);
 
-        updateUIForSpecies();
+        updateUIForAllSpecies();
     });
 
     $('.food-show').on('click', function() {
@@ -1002,6 +1002,9 @@ function display() {
         setFoodIsPresent(foodId, true);
 
         updateUIForFood();
+
+        var rowId = foodRowIdCache[foodId];
+        writeForFood(true, rowId, foodId, true);
 
     });
 
@@ -1013,7 +1016,12 @@ function display() {
         // toggle the food.
         setFoodIsPresent(foodId, false);
         console.log('after food update: ' + foodPresent);
+
         updateUIForFood();
+
+        var rowId = foodRowIdCache[foodId];
+        writeForFood(true, rowId, foodId, false);
+
     });
 
     $('.species-plus').on('click', function() {
@@ -1024,7 +1032,10 @@ function display() {
         var numberPresent = getNumberOfSpeciesPresent(speciesId) + 1;
         setNumberOfSpecies(speciesId, numberPresent);
         
-        updateUIForSpecies();
+        updateUIForAllSpecies();
+
+        var rowId = speciesRowIdCache[speciesId];
+        writeForSpecies(true, rowId, speciesId, numberPresent);
     });
 
     $('.species-minus').on('click', function(e) {
@@ -1039,7 +1050,10 @@ function display() {
         var numberPresent = getNumberOfSpeciesPresent(speciesId) - 1;
         setNumberOfSpecies(speciesId, numberPresent);
 
-        updateUIForSpecies();
+        updateUIForAllSpecies();
+
+        var rowId = speciesRowIdCache[speciesId];
+        writeForSpecies(true, rowId, speciesId, numberPresent);
     });
     
     // We also want a click listener on each of the chimp names, which will

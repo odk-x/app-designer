@@ -19,6 +19,7 @@ input[type='checkbox'] {
     position: absolute;
     width: 300px;
     left: 450px;
+    padding-right: 10px;
 }
 
 .user-list {
