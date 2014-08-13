@@ -112,12 +112,14 @@ function display() {
         return result;
     };
 
-    var setFoodIsPresent = function(food, isPresent) {
-        if (!isValidFood(food)) {
-            alert('unrecognized food: ' + food);
+    var setFoodIsPresent = function(foodId, isPresent) {
+        if (!isValidFood(foodId)) {
+            alert('unrecognized food: ' + foodId);
             return;
         }
-        foodPresent[food] = isPresent;
+        foodPresent[foodId] = isPresent;
+        var rowId = foodRowIdCache[foodId];
+        writeForFood(true, rowId, foodId, false);
     };
 
     var setNumberOfSpecies = function(species, count) {
@@ -1007,6 +1009,7 @@ function display() {
         var foodId = $(this).prop('id');
 
         setFoodIsPresent(foodId, true);
+
         updateUIForFood();
 
     });
@@ -1019,8 +1022,6 @@ function display() {
         // toggle the food.
         setFoodIsPresent(foodId, false);
         console.log('after food update: ' + foodPresent);
-        var rowId = foodRowIdCache[foodId];
-        writeForFood(true, rowId, foodId, false);
         updateUIForFood();
     });
     
