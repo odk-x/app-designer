@@ -15,8 +15,17 @@
         var parts = value.substring(1).split('x');
         var $el = $('#previewscreen');
         $el.width(parseInt(parts[0]));
-        $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
+		var internalHeight = parseInt(parts[1])+1;
+        $el.height(internalHeight); // we somehow lose a pixel?
         var cw = document.getElementById('previewscreen').contentWindow;
+		var $bland = $('#blandviewport');
+        var top = $bland.offset().top;
+		var internalHeight = top + 20 + internalHeight + 40 + 30;
+		if ( internalHeight < 1600 ) {
+			internalHeight = 1600;
+		}
+		$bland.height(internalHeight-$bland.offset().top-20-40-30);
+		parent.autoResize(internalHeight);
         cw.location.reload();
   }
   function pushPageAndOpen(value) {
@@ -97,7 +106,7 @@
   <title>OpenDataKit Common Javascript Framework Launcher</title>
 </head>
 
-<body class="fullembedded">
+<body class="fullembedded" onresize="resizeIframe($('#screenchoice').val())" onload="resizeIframe('w480x854')">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
 	<div class="flowleft">
 	  <div>
@@ -113,7 +122,7 @@
 	<div class="flowright">
 	  <div>
 	  <p class="pb">Device Dimension</p>
-	  <select name="size" onchange="resizeIframe(this.value)">
+	  <select id="screenchoice" name="size" onchange="resizeIframe(this.value)">
 		<option id="w480x854" value="w480x854" selected><label for="w480x854">480 x 854 pixels (Droid)</label></option>
 		<option id="w480x800" value="w480x800" ><label for="w480x800">480 x 800 pixels (Nexus S, Nexus One)</label></option>
 		<option id="w720x1280" value="w720x1280" ><label for="w720x1280">720 x 1280 pixels (Galaxy Nexus)</label></option>
@@ -132,7 +141,7 @@
 	  <p><font color="blue">NOTE: vertical scrollbars incorrectly shrink the visible
 	width<br/>w.r.t. the behavior on an Android device</font></p>
 
-	  <div class="bland">
+	  <div id="blandviewport" class="bland">
 		<div class="backviewport">
 		  <button class="backbutton" name="backbutton" id="backbutton" onclick="backbutton()" type="button">Back Button</button>
 		  <iframe class="resizeablescreen" id="previewscreen" src="../app/framework/index.html?" name="screen" />
