@@ -831,56 +831,64 @@ function display() {
 
     var updateUIForFood = function() {
 
-        var bananas = $('#bananas');
-        var berries = $('#berries');
-        var flesh = $('#flesh');
-
-        updateFoodAnchor(bananas);
-        updateFoodAnchor(berries);
-        updateFoodAnchor(flesh);
+        var foodIds = ['bananas', 'berries', 'flesh'];
+        foodIds.forEach(function(foodId) {
+            updateUIForFoodPresence(foodId);
+        });
 
     };
 
     /**
-     * Update the individual anchor for a food item according to whether or not
-     * it is present.
+     *  Update the food with the ID to show that it is visible.
      */
-    var updateFoodAnchor = function(anchor) {
-        var id = anchor.prop('id');
-        var isPresent = foodIsPresent(id);
-        var check = $('#' + id + '-check');
-        var label = $('#' + id + '-text');
-        if (isPresent) {
-            // we want to add the checkbox glyphicon and add a space to the
-            // label to maintain padding.
-            var text = label.text().trim() + ' ';
-            label.text(text);
-            check.addClass('glyphicon');
-            check.addClass('glyphicon-ok');
-        } else {
-            label.text(label.text().trim());
-            check.removeClass('glyphicon');
-            check.removeClass('glyphicon-ok');
+    var updateUIForFoodPresence = function(foodId) {
+        // in this iteration we're just showing the -user-list element.
+        // we're expecting the id to be foodId-user-list
+        var item = $('#' + foodId + '-user-list');
+        if (!(isValidFood(foodId))) {
+            alert('invalid food selected: ' + foodId);
+            return;
         }
+        var isPresent = foodIsPresent(foodId);
+        if (isPresent) {
+            item.css('display', 'block');
+        } else {
+            item.css('display', 'none');
+        }
+
+    };
+
+    var updateUIForSpeciesCount = function(speciesId) {
+        
+        if (!(isValidSpecies(speciesId))) {
+            alert('unrecognized species: ' + speciesId);
+            return;
+        }
+
+        var numPresent = getNumberOfSpeciesPresent(speciesId);
+
+        var countBadge = $('#' + speciesId + '-count');
+        countBadge.html(numPresent);
+
+        // now show or hide the user item depending on the count.
+        var item = $('#' + speciesId + '-user-list');
+        if (numPresent === 0) {
+            item.css('display', 'none');
+        } else {
+            item.css('display', 'block');
+        }
+
     };
 
     var updateUIForSpecies = function() {
-        // Wow, I am loving that these three variables have the same length.
-        // Happy accident.
-        var baboonBadge = $('#baboon-count');
-        var vervetBadge = $('#vervet-count');
-        var tailedBadge = $('#tailed-count');
-        var totalBadge = $('#total-species-count');
 
-        var baboonCount = getNumberOfSpeciesPresent('baboon');
-        var vervetCount = getNumberOfSpeciesPresent('vervet');
-        var tailedCount = getNumberOfSpeciesPresent('tailed');
-        var totalCount = baboonCount + vervetCount + tailedCount;
+        // We're going to flag the food user lists as visible or not.
+        var speciesIds = ['baboon', 'vervet', 'tailed'];
 
-        baboonBadge.html(baboonCount);
-        vervetBadge.html(vervetCount);
-        tailedBadge.html(tailedCount);
-        totalBadge.html(totalCount);
+        speciesIds.forEach(function(speciesId) {
+            updateUIForSpeciesCount(speciesId);
+        });
+
     };
 
     /*****  end function declaractions  *****/

@@ -160,23 +160,47 @@
     </div> <!-- .col-lg-6 -->
 
       <div id="extras-container">
-        <div id="species-group" class="list-group">
-            <a id="baboon" class="species list-group-item" href="">
-              Baboon<span id="baboon-count" class="badge">0</span></a>
-            <a id="vervet" class="species list-group-item" href="">
-              Vervet Monkey<span id="vervet-count" class="badge">0</span></a>
-            <a id="tailed" class="species list-group-item" href="">
-              Red-Tailed Monkey<span id="tailed-count" class="badge">0</span></a>
+
+      <div id="species-group" class="btn-group">
+          <button type="button" id="species-button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+            Species <span class="caret">
+          </button>
+          <ul id="species-menu" class="dropdown-menu" role="menu">
+            <li><a id="baboon" class="species" href="#">Baboon</a></li>
+            <li><a id="vervet" class="species" href="#">Vervet Monkey</a></li>
+            <li><a id="tailed" class="species" href="#">Red-Tailed Monkey</a></li>
+          </ul>
         </div>
 
-        <div id="food-group" class="list-group">
-            <a id="bananas" class="food list-group-item" href="">
-              Bananas<span id="bananas-check" class="pull-right"></span></a>
-            <a id="berries" class="food list-group-item" href="">
-              Berries<span id="berries-check" class="pull-right"></span></a>
-            <a id="flesh" class="food list-group-item" href="">
-              Flesh<span id="flesh-check" class="pull-right"></span></a>
+        <div id="food-group" class="btn-group">
+          <button type="button" id="food-button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+            Food <span class="caret"></span>
+          </button>
+          <ul id="food-menu" class="dropdown-menu" role="menu">
+            <li><a id="bananas" class="food" href="#">Bananas</a></li>
+            <li><a id="berries" class="food" href="#">Berries</a></li>
+            <li><a id="flesh" class="food" href="#">Flesh</a></li>
+          </ul>
         </div>
+
+
+        <ul id="species-group" class="list-group">
+            <li id="baboon-user-list" class="species list-group-item">
+              Baboon<span id="baboon-count" class="badge">0</span></li>
+            <li id="vervet-user-list" class="species list-group-item">
+              Vervet Monkey<span id="vervet-count" class="badge">0</span></li>
+            <li id="tailed-user-list" class="species list-group-item">
+              Red-Tailed Monkey<span id="tailed-count" class="badge">0</span></li>
+        </ul>
+
+        <ul id="food-group" class="list-group">
+            <li id="bananas-user-list" class="food list-group-item">
+              Bananas<span id="bananas-check" class="pull-right"></span></li>
+            <li id="berries-user-list" class="food list-group-item">
+              Berries<span id="berries-check" class="pull-right"></span></li>
+            <li id="flesh-user-list" class="food list-group-item">
+              Flesh<span id="flesh-check" class="pull-right"></span></li>
+        </ul>
 
       </div>
 
