@@ -985,23 +985,12 @@ function display() {
         writeRowForChimp(true, rowId, chimpId, null, isChecked, null, null);
     });
 
-    $('.species').on('click', function() {
-        var species = $(this).prop('id');
-        console.log('clicked species ' + species);
-        var existing = getNumberOfSpeciesPresent(species);
-        var enteredNum = window.prompt(
-            'How many are Present?',
-            existing);
-        if (enteredNum !== null) {
-            var intValue = parseInt(enteredNum);
-            setNumberOfSpecies(species, intValue);
-            console.log(speciesCounts);
-            var rowId = speciesRowIdCache[species];
-            writeForSpecies(true, rowId, species, intValue);
-            updateUIForSpecies();
-        } else {
-            console.log('invalid number of species: ' + enteredNum);
-        }
+    $('.species-show').on('click', function() {
+        var speciesId = $(this).prop('id');
+        console.log('clicked species ' + speciesId);
+        setNumberOfSpecies(speciesId, 1);
+
+        updateUIForSpecies();
     });
 
     $('.food-show').on('click', function() {
@@ -1023,6 +1012,32 @@ function display() {
         setFoodIsPresent(foodId, false);
         console.log('after food update: ' + foodPresent);
         updateUIForFood();
+    });
+
+    $('.species-plus').on('click', function() {
+        var itemId = $(this).prop('id');
+        var indexDash = itemId.indexOf('-');
+        var speciesId = itemId.substring(0, indexDash);
+
+        var numberPresent = getNumberOfSpeciesPresent(speciesId) + 1;
+        setNumberOfSpecies(speciesId, numberPresent);
+        
+        updateUIForSpecies();
+    });
+
+    $('.species-minus').on('click', function(e) {
+        // We don't want the event to propagate up, or else it will hit the
+        // plus button as well, which is, quite obviously, wrong.
+        e.stopPropagation();
+
+        var itemId = $(this).prop('id');
+        var indexDash = itemId.indexOf('-');
+        var speciesId = itemId.substring(0, indexDash);
+
+        var numberPresent = getNumberOfSpeciesPresent(speciesId) - 1;
+        setNumberOfSpecies(speciesId, numberPresent);
+
+        updateUIForSpecies();
     });
     
     // We also want a click listener on each of the chimp names, which will

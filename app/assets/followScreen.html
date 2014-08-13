@@ -166,9 +166,9 @@
             Species <span class="caret">
           </button>
           <ul id="species-menu" class="dropdown-menu" role="menu">
-            <li><a id="baboon" class="species" href="#">Baboon</a></li>
-            <li><a id="vervet" class="species" href="#">Vervet Monkey</a></li>
-            <li><a id="tailed" class="species" href="#">Red-Tailed Monkey</a></li>
+            <li><a id="baboon" class="species species-show" href="#">Baboon</a></li>
+            <li><a id="vervet" class="species species-show" href="#">Vervet Monkey</a></li>
+            <li><a id="tailed" class="species species-show" href="#">Red-Tailed Monkey</a></li>
           </ul>
         </div>
 
@@ -185,12 +185,18 @@
 
 
         <ul id="species-group" class="list-group">
-            <li id="baboon-user-list" class="species list-group-item">
-              Baboon<span id="baboon-count" class="badge">0</span></li>
-            <li id="vervet-user-list" class="species list-group-item">
-              Vervet Monkey<span id="vervet-count" class="badge">0</span></li>
-            <li id="tailed-user-list" class="species list-group-item">
-              Red-Tailed Monkey<span id="tailed-count" class="badge">0</span></li>
+            <li id="baboon-user-list" class="species species-plus list-group-item">
+            <span id="baboon-minus" class="species-minus glyphicon glyphicon-minus pull-left"></span>
+              Baboon
+              <span id="baboon-count" class="badge">0</span></li>
+            <li id="vervet-user-list" class="species species-plus list-group-item">
+            <span id="vervet-minus" class="species-minus glyphicon glyphicon-minus pull-left"></span>
+              Vervet Monkey
+              <span id="vervet-count" class="badge">0</span></li>
+            <li id="tailed-user-list" class="species species-plus list-group-item">
+            <span id="tailed-minus" class="species-minus glyphicon glyphicon-minus pull-left"></span>
+              Red-Tailed Monkey
+              <span id="tailed-count" class="badge">0</span></li>
         </ul>
 
         <ul id="food-group" class="list-group">
