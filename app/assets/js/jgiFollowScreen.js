@@ -1002,21 +1002,25 @@ function display() {
         }
     });
 
-    $('.food').on('click', function() {
-        var food = $(this).prop('id');
-        console.log('clicked food: ' + food);
+    $('.food-show').on('click', function() {
+
+        var foodId = $(this).prop('id');
+
+        setFoodIsPresent(foodId, true);
+        updateUIForFood();
+
+    });
+
+    $('.food-remove').on('click', function() {
+        var removeId = $(this).prop('id');
+        var dashIndex = removeId.indexOf('-');
+        var foodId = removeId.substring(0, dashIndex);
+        console.log('clicked food remove: ' + foodId);
         // toggle the food.
-        var isPresent;
-        if (foodIsPresent(food)) {
-            setFoodIsPresent(food, false);
-            isPresent = false;
-        } else {
-            setFoodIsPresent(food, true);
-            isPresent = true;
-        }
-        console.log(foodPresent);
-        var rowId = foodRowIdCache[food];
-        writeForFood(true, rowId, food, isPresent);
+        setFoodIsPresent(foodId, false);
+        console.log('after food update: ' + foodPresent);
+        var rowId = foodRowIdCache[foodId];
+        writeForFood(true, rowId, foodId, false);
         updateUIForFood();
     });
     
