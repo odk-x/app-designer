@@ -21,8 +21,13 @@ input[type='checkbox'] {
     left: 400px;
 }
 
+.user-list {
+    padding-top: 20px;
+}
+
 #table-container {
-    float: left;
+    position: absolute;
+    left: 40px;
 }
 
 .closest-chimp {

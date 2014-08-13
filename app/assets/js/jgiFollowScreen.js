@@ -122,12 +122,14 @@ function display() {
         writeForFood(true, rowId, foodId, false);
     };
 
-    var setNumberOfSpecies = function(species, count) {
-        if (!isValidSpecies(species)) {
-            alert('unrecognized species: ' + species);
+    var setNumberOfSpecies = function(speciesId, count) {
+        if (!isValidSpecies(speciesId)) {
+            alert('unrecognized species: ' + speciesId);
             return;
         }
-        speciesCounts[species] = count;
+        speciesCounts[speciesId] = count;
+        var rowId = speciesRowIdCache[speciesId];
+        writeForSpecies(true, rowId, speciesId, count);
     };
 
     /**
