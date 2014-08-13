@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/immunizationCoverageRatesVaccines.js"></script>
+        <script type="text/javascript" src="js/scanQueries.js"></script>
+    </head>
+    
+	<body id="main">
+    <header class="bar bar-nav">
+      <h1 class="title">ODK Scan</h1>
+    </header>
+    <div id="content-container">
+
+    <div class="description-text" id="description">Select Report</div>
+    <ul id="navigation-buttons">
+        <li><button class="btn btn-primary btn-block btn-launch" id="bcg">
+          BCG
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="polio">
+          Polio
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="penta">
+          Penta
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="pcv">
+          PCV
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="rota">
+          Rota
+        </button>
+        <li><button class="btn btn-primary btn-block btn-launch" id="measles">
+          Measles
+        </button>
+        </li>
+    </ul>
+  </div>
+        <script type="text/javascript">
+            $(display());
+        </script>
+    </body>
+</html>

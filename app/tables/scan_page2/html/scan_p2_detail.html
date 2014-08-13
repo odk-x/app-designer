@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<!-- Detailed View -->
+    <head>
+        <link href="../../../assets/css/scan_p2_detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../../framework/libs/d3-amd/d3.js"></script>
+    </head>
+    <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
+    <body>
+        <script type="text/javascript" src="../js/scan_p2_detail.js"></script>
+        <!-- Define any HTML structure you rely on in your js files here, above
+        the call to display. -->
+
+        <h1>Vaccines Given At Birth</h1>
+        <p>Date of Next Vaccine: <span id="next_vac"></span></p>
+        <div id="nextvac_pic"></div>
+        <br>
+        <p>Date of OPV 0: <span id="opv_date"></span></p>
+        <div id='opvdate_pic'></div>
+        <br>
+        <p>Initials of OPV 0: <span id="opv_init"></span></p>
+        <div id='opvinitials_pic'></div>
+        <br>
+        <p>Notes of OPV 0: <span id="opv_note"></span></p>
+        <div id="opvnote_pic"></div>
+        <br>
+        <p>Date of Hep B 0: <span id= "hepb_date"></span></p>
+        <div id="hepbdate_pic"></div>
+        <br>
+        <p>Initials of Hep B 0: <span id="hepb_init"></span></p>
+        <div id="hepbinitials_pic"></div>
+        <br>
+        <p>Notes of Hep B 0: <span id="hepb_note"></span></p>
+        <div id="hepbnote_pic"></div>
+        <br>
+        <p>First Additional Vaccine: <span id="vac1"></span></p>
+        <div id="vac1_pic"></div>
+        <br>
+        <p>Date of First Additional Vaccine: <span id="vac1_date"></span></p>
+        <div id="vac1date_pic"></div>
+        <br>
+        <p>Initials of First Additional Vaccine: <span id="vac1_init"></span></p>
+        <div id="vac1init_pic"></div>
+        <br>
+        <p>Notes of First Additional Vaccine: <span id="vac1_note"></span></p>
+        <div id="vac1note_pic"></div>
+        <br>
+        <p>Second Additional Vaccine: <span id="vac2"></span></p>
+        <div id="vac2_pic"></div>
+        <br>
+        <p>Date of Second Additional Vaccine: <span id="vac2_date"></span></p>
+        <div id="vac2date_pic"></div>
+        <br>
+        <p>Initials of Second Additional Vaccine: <span id="vac2_init"></span></p>
+        <div id="vac2init_pic"></div>
+        <br>
+        <p>Notes of Second Additional Vaccine: <span id="vac2_note"></span></p>
+        <div id="vac2note_pic"></div>
+        <br>
+        <p>Child's QR Patient Code: <span id="patient_code"></span></p>
+        <div id="patientcode_pic"></div>
+        <br>
+        <script>
+            $(display());  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

@@ -10,7 +10,7 @@ function display() {
         alert('Not yet implemented');
     });
     $('#coverage-rates').on('click', function() {
-        alert('Not yet implemented');
+        control.launchHTML('assets/immunizationCoverageRatesVaccines.html');
     });
 
     $('#find-record').on('click', function() {
