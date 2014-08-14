@@ -296,12 +296,34 @@ module.exports = function (grunt) {
 
     grunt.registerTask(
         'adbpush-tables-app',
-        'Push everything in the app directory to the device',
+        'Push everything in the app directory (except framework) to the device',
         function() {
-            var src = tablesConfig.appDir;
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName;
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            // Do not push any framework or output files.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'.  
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!framework/**',
+				'!output/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
         });
 
     grunt.registerTask(
@@ -318,7 +340,8 @@ module.exports = function (grunt) {
                 {filter: 'isFile',
                  cwd: 'app' },
                 '**',
-                '!framework/**');
+                '!framework/**',
+				'!output/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
