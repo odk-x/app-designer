@@ -41,7 +41,7 @@ function display() {
             dataJ.push({x:i, y:yValues[i]});
         } 
         
-        var margin = {top: 50, right: 20, bottom: 40, left: 90},
+        var margin = {top: 50, right: 20, bottom: 60, left: 90},
             width = paramWidth - margin.left - margin.right,
             height = paramHeight - margin.top - margin.bottom;
 
@@ -72,7 +72,7 @@ function display() {
         // Also setting this to a fixed range and domain for now
         // These will probably need to be settings 
         x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
-        y.domain([d3.min(dataJ, function(d) { return d.y; }), d3.max(dataJ, function(d) { return d.y; })]);
+        y.domain([d3.min(dataJ, function(d) { return d.y; })-1, d3.max(dataJ, function(d) { return d.y; })+1]);
 
         // vWidth and wHeight were used for scaling
         /*if (that.vWidth == 0) {
@@ -108,7 +108,7 @@ function display() {
             .call(xAxis)
             .append("text")
             .attr("x", vWidth/2-50)
-            .attr("y", 35)
+            .attr("y", 50)
             .attr("dx", ".71em")
             .attr("pointer-events", "all")
             .style("font-size", "1em")
