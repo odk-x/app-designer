@@ -26,7 +26,11 @@
 	if ( maxHeight < 1600 ) {
 		maxHeight = 1600;
 	}
-    $('.content-tab').height(maxHeight+3);
+	var old = $('.content-tab').offset().height;
+	if ( old != maxHeight + 3 ) {
+		console.log('resizing from ' + old + ' to new ' + (maxHeight + 3) );
+		$('.content-tab').height(maxHeight+3);
+	}
   }
 //]]>   
   </script>
