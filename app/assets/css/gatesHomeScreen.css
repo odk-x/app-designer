@@ -15,6 +15,22 @@ input[type='checkbox'] {
     border: 2px solid #555;
 }
 
+#extras-container {
+    position: absolute;
+    width: 300px;
+    left: 450px;
+    padding-right: 10px;
+}
+
+.user-list {
+    padding-top: 20px;
+}
+
+#table-container {
+    position: absolute;
+    left: 40px;
+}
+
 .closest-chimp {
     background-color: #5cb85c;
     border-color: #5cb85c;
@@ -26,10 +42,6 @@ input[type='checkbox'] {
     border-color: #5bc0de;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-}
-
-#observation-table {
-    float: left;
 }
 
 .sexual-state {

@@ -92,7 +92,8 @@ function display() {
     var getNumberOfSpeciesPresent = function(species) {
         // First make sure this is a valid key.
         if (!isValidSpecies(species)) {
-            alert('unrecognized species: ' + species);
+            console.trace();
+            alert('get number unrecognized species: ' + species);
             return;
         }
         var result = speciesCounts[species];
@@ -105,6 +106,7 @@ function display() {
     var foodIsPresent = function(food) {
         // First make sure this is a valid key.
         if (!isValidFood(food)) {
+            console.trace();
             alert('unrecognized food: ' + food);
             return;
         }
@@ -112,20 +114,20 @@ function display() {
         return result;
     };
 
-    var setFoodIsPresent = function(food, isPresent) {
-        if (!isValidFood(food)) {
-            alert('unrecognized food: ' + food);
+    var setFoodIsPresent = function(foodId, isPresent) {
+        if (!isValidFood(foodId)) {
+            alert('unrecognized food: ' + foodId);
             return;
         }
-        foodPresent[food] = isPresent;
+        foodPresent[foodId] = isPresent;
     };
 
-    var setNumberOfSpecies = function(species, count) {
-        if (!isValidSpecies(species)) {
-            alert('unrecognized species: ' + species);
+    var setNumberOfSpecies = function(speciesId, count) {
+        if (!isValidSpecies(speciesId)) {
+            alert('unrecognized species: ' + speciesId);
             return;
         }
-        speciesCounts[species] = count;
+        speciesCounts[speciesId] = count;
     };
 
     /**
@@ -197,7 +199,7 @@ function display() {
                 followDate,
                 time,
                 focalChimpId);
-        console.log('species count before updating from db: ' + speciesCount);
+        console.log('species count before updating from db: ' + speciesCounts);
         for (i = 0; i < speciesData.getCount(); i++) {
             var speciesId = speciesData.getData(
                     i,
@@ -242,7 +244,7 @@ function display() {
         }
         console.log('food present after updating from db: ' + foodPresent);
 
-        updateUIForSpecies();
+        updateUIForAllSpecies();
         updateUIForFood();
 
     };
@@ -513,7 +515,7 @@ function display() {
             var isWithinFive = within5Checkbox.prop('checked');
             
             var isClosest = false;
-            if ($('.closest-chimp').prop('id') == chimpId) {
+            if ($('.closest-chimp').prop('id') === chimpId) {
                 isClosest = true;
             }
             
@@ -538,12 +540,12 @@ function display() {
         
         for (var i = 0; i < species.length; i++) {
 
-            var id = species.eq(i).prop('id');
-            var numPresent = getNumberOfSpeciesPresent(id);
+            var speciesId = species.eq(i).prop('id');
+            var numPresent = getNumberOfSpeciesPresent(speciesId);
             writeForSpecies(
                     false,
                     null,
-                    id,
+                    speciesId,
                     numPresent);
         }
         
@@ -831,56 +833,64 @@ function display() {
 
     var updateUIForFood = function() {
 
-        var bananas = $('#bananas');
-        var berries = $('#berries');
-        var flesh = $('#flesh');
-
-        updateFoodAnchor(bananas);
-        updateFoodAnchor(berries);
-        updateFoodAnchor(flesh);
+        var foodIds = ['bananas', 'berries', 'flesh'];
+        foodIds.forEach(function(foodId) {
+            updateUIForFoodPresence(foodId);
+        });
 
     };
 
     /**
-     * Update the individual anchor for a food item according to whether or not
-     * it is present.
+     *  Update the food with the ID to show that it is visible.
      */
-    var updateFoodAnchor = function(anchor) {
-        var id = anchor.prop('id');
-        var isPresent = foodIsPresent(id);
-        var check = $('#' + id + '-check');
-        var label = $('#' + id + '-text');
-        if (isPresent) {
-            // we want to add the checkbox glyphicon and add a space to the
-            // label to maintain padding.
-            var text = label.text().trim() + ' ';
-            label.text(text);
-            check.addClass('glyphicon');
-            check.addClass('glyphicon-ok');
-        } else {
-            label.text(label.text().trim());
-            check.removeClass('glyphicon');
-            check.removeClass('glyphicon-ok');
+    var updateUIForFoodPresence = function(foodId) {
+        // in this iteration we're just showing the -user-list element.
+        // we're expecting the id to be foodId-user-list
+        var item = $('#' + foodId + '-user-list');
+        if (!(isValidFood(foodId))) {
+            alert('invalid food selected: ' + foodId);
+            return;
         }
+        var isPresent = foodIsPresent(foodId);
+        if (isPresent) {
+            item.css('display', 'block');
+        } else {
+            item.css('display', 'none');
+        }
+
     };
 
-    var updateUIForSpecies = function() {
-        // Wow, I am loving that these three variables have the same length.
-        // Happy accident.
-        var baboonBadge = $('#baboon-count');
-        var vervetBadge = $('#vervet-count');
-        var tailedBadge = $('#tailed-count');
-        var totalBadge = $('#total-species-count');
+    var updateUIForSpeciesCount = function(speciesId) {
+        
+        if (!(isValidSpecies(speciesId))) {
+            alert('update ui for count unrecognized species: ' + speciesId);
+            return;
+        }
 
-        var baboonCount = getNumberOfSpeciesPresent('baboon');
-        var vervetCount = getNumberOfSpeciesPresent('vervet');
-        var tailedCount = getNumberOfSpeciesPresent('tailed');
-        var totalCount = baboonCount + vervetCount + tailedCount;
+        var numPresent = getNumberOfSpeciesPresent(speciesId);
 
-        baboonBadge.html(baboonCount);
-        vervetBadge.html(vervetCount);
-        tailedBadge.html(tailedCount);
-        totalBadge.html(totalCount);
+        var countBadge = $('#' + speciesId + '-count');
+        countBadge.html(numPresent);
+
+        // now show or hide the user item depending on the count.
+        var item = $('#' + speciesId + '-user-list');
+        if (numPresent === 0) {
+            item.css('display', 'none');
+        } else {
+            item.css('display', 'block');
+        }
+
+    };
+
+    var updateUIForAllSpecies = function() {
+
+        // We're going to flag the food user lists as visible or not.
+        var speciesIds = ['baboon', 'vervet', 'tailed'];
+
+        speciesIds.forEach(function(speciesId) {
+            updateUIForSpeciesCount(speciesId);
+        });
+
     };
 
     /*****  end function declaractions  *****/
@@ -932,6 +942,8 @@ function display() {
 
     updateOlderMenu();
     initUIForFocalChimp();
+    updateUIForAllSpecies();
+    updateUIForFood();
 
 
     // Now we'll attach a click listener that rights the state of the checkbox
@@ -975,41 +987,73 @@ function display() {
         writeRowForChimp(true, rowId, chimpId, null, isChecked, null, null);
     });
 
-    $('.species').on('click', function() {
-        var species = $(this).prop('id');
-        console.log('clicked species ' + species);
-        var existing = getNumberOfSpeciesPresent(species);
-        var enteredNum = window.prompt(
-            'How many are Present?',
-            existing);
-        if (enteredNum !== null) {
-            var intValue = parseInt(enteredNum);
-            setNumberOfSpecies(species, intValue);
-            console.log(speciesCounts);
-            var rowId = speciesRowIdCache[species];
-            writeForSpecies(true, rowId, species, intValue);
-            updateUIForSpecies();
-        } else {
-            console.log('invalid number of species: ' + enteredNum);
-        }
+    $('.species-show').on('click', function() {
+        var speciesId = $(this).prop('id');
+        console.log('clicked species ' + speciesId);
+        setNumberOfSpecies(speciesId, 1);
+
+        updateUIForAllSpecies();
     });
 
-    $('.food').on('click', function() {
-        var food = $(this).prop('id');
-        console.log('clicked food: ' + food);
-        // toggle the food.
-        var isPresent;
-        if (foodIsPresent(food)) {
-            setFoodIsPresent(food, false);
-            isPresent = false;
-        } else {
-            setFoodIsPresent(food, true);
-            isPresent = true;
-        }
-        console.log(foodPresent);
-        var rowId = foodRowIdCache[food];
-        writeForFood(true, rowId, food, isPresent);
+    $('.food-show').on('click', function() {
+
+        var foodId = $(this).prop('id');
+
+        setFoodIsPresent(foodId, true);
+
         updateUIForFood();
+
+        var rowId = foodRowIdCache[foodId];
+        writeForFood(true, rowId, foodId, true);
+
+    });
+
+    $('.food-remove').on('click', function() {
+        var removeId = $(this).prop('id');
+        var dashIndex = removeId.indexOf('-');
+        var foodId = removeId.substring(0, dashIndex);
+        console.log('clicked food remove: ' + foodId);
+        // toggle the food.
+        setFoodIsPresent(foodId, false);
+        console.log('after food update: ' + foodPresent);
+
+        updateUIForFood();
+
+        var rowId = foodRowIdCache[foodId];
+        writeForFood(true, rowId, foodId, false);
+
+    });
+
+    $('.species-plus').on('click', function() {
+        var itemId = $(this).prop('id');
+        var indexDash = itemId.indexOf('-');
+        var speciesId = itemId.substring(0, indexDash);
+
+        var numberPresent = getNumberOfSpeciesPresent(speciesId) + 1;
+        setNumberOfSpecies(speciesId, numberPresent);
+        
+        updateUIForAllSpecies();
+
+        var rowId = speciesRowIdCache[speciesId];
+        writeForSpecies(true, rowId, speciesId, numberPresent);
+    });
+
+    $('.species-minus').on('click', function(e) {
+        // We don't want the event to propagate up, or else it will hit the
+        // plus button as well, which is, quite obviously, wrong.
+        e.stopPropagation();
+
+        var itemId = $(this).prop('id');
+        var indexDash = itemId.indexOf('-');
+        var speciesId = itemId.substring(0, indexDash);
+
+        var numberPresent = getNumberOfSpeciesPresent(speciesId) - 1;
+        setNumberOfSpecies(speciesId, numberPresent);
+
+        updateUIForAllSpecies();
+
+        var rowId = speciesRowIdCache[speciesId];
+        writeForSpecies(true, rowId, speciesId, numberPresent);
     });
     
     // We also want a click listener on each of the chimp names, which will
