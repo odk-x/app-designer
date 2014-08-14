@@ -3,10 +3,12 @@
 <!-- Detailed View -->
     <head>
         <link href="../../../assets/css/scan_p1_detail.css" type="text/css" rel="stylesheet" />
+        <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
         <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
         <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
         <script type="text/javascript" src="../../../framework/libs/d3-amd/d3.js"></script>
+        <script type="text/javascript" src="../../../assets/js/scanQueries.js"></script>
     </head>
     <style>
     .axis path,
@@ -104,11 +106,13 @@
         <p>Patient Code: <span id="patient_code"></span></p>
         <div id="patientcode_pic"></div>
         <br>
-        <a href="#" onclick="control.openDetailView(
+        
+        <button id="display-detail" class="btn-launch btn btn-positive btn-block">View vaccination history</button>
+        <!--a href="#" onclick="control.openDetailView(
                         'scan_page2',
                         rowId,
                         'tables/scan_page2/html/scan_p2_detail.html'
-                        );">View vaccines given at birth</a>
+                        );">View vaccination history</a-->
         <script>
             $(display());  // calls the detail display function when ready
         </script>

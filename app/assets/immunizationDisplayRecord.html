@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/immunizationDisplayRecord.js"></script>
+        <script type="text/javascript" src="js/scanQueries.js"></script>
+    </head>
+
+    <body id="main">
+
+    <div class="container">
+
+    <div class="description-text" id="description">Child Vaccination History</div>
+      
+      <p>Name: <span id="name"></span></p>
+      <p>ID: <span id="id"></span></p>
+      <p>Birth date: <span id="birthdate"></span></p>
+
+      <table id="vaccine-table">
+
+        <tr>
+          <th class="table-title" >Visit</th>
+          <th class="table-title" >Vaccine</th>
+          <th class="table-title" >Delivery Date</th>
+        </tr>
+        <tr>
+          <th>Birth</th>
+          <th>OPV 0</th>
+          <th class="not-delivered" id="opv0">Not delivered</th>
+        </tr>
+          <th> </th>
+          <th>HEP B 0</th>
+          <th class="not-delivered" id="hepb0">Not delivered</th>
+        </tr>
+        </tr>
+          <th>6 Weeks</th>
+          <th>OPV 1</th>
+          <th class="not-delivered" id="opv1">Not delivered</th>
+        </tr>
+        </tr>
+          <th> </th>
+          <th>PCV 1</th>
+          <th class="not-delivered" id="pcv1">Not delivered</th>
+        </tr>
+        </tr>
+          <th> </th>
+          <th>Rota 1</th>
+          <th class="not-delivered" id="rota1">Not delivered</th>
+        </tr>
+        </tr>
+          <th> </th>
+          <th>Penta 1</th>
+          <th class="not-delivered" id="penta1">Not delivered</th>
+        </tr>  
+          <th>10 Weeks</th>
+          <th>OPV 2</th>
+          <th class="not-delivered" id="opv2">Not delivered</th>
+        </tr>
+        </tr>
+          <th> </th>
+          <th>PCV 2</th>
+          <th class="not-delivered" id="pcv2">Not delivered</th>
+        </tr>
+        </tr>
+          <th> </th>
+          <th>Rota 2</th>
+          <th class="not-delivered" id="rota2">Not delivered</th>
+        </tr>
+        </tr>
+          <th> </th>
+          <th>Penta 2</th>
+          <th class="not-delivered" id="penta2">Not delivered</th>
+        </tr>                
+      </table>
+    </div> <!-- .container -->
+        <script type="text/javascript">
+            $(display());
+        </script>
+    </body>
+</html>
