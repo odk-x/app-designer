@@ -15,7 +15,7 @@
   }
   function autoResize(newBaseHeight){
 	var tabBodies = document.getElementsByClassName('content-tab');
-	var maxHeight = newBaseHeight;
+	var maxHeight = 0;
 	for ( var i = 0 ; i < tabBodies.length ; ++i ) {
 		var tabBody = tabBodies[i];
 		var height = tabBody.scrollHeight;
@@ -26,7 +26,11 @@
 	if ( maxHeight < 1600 ) {
 		maxHeight = 1600;
 	}
-    $('.content-tab').height(maxHeight+3);
+
+	if ( newBaseHeight > maxHeight + 3 ) {
+		console.log('resizing from ' + maxHeight + ' to new ' + (newBaseHeight + 3) );
+		$('.content-tab').height(newBaseHeight+3);
+	}
   }
 //]]>   
   </script>

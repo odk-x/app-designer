@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<!-- Detailed View -->
+    <head>
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/libs/underscore.1.4.4.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../../framework/libs/d3-amd/d3.js"></script>
+    </head>
+    <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
+    <body>
+        <script type="text/javascript" src="../js/temperatureSensor_detail.js"></script>
+        <!-- Define any HTML structure you rely on in your js files here, above
+        the call to display. -->
+        <h1><span id="SENSOR-ID"></span></h1>
+        <p>Sensor Type: <span id="sensor-type"></span></p>
+        <p>Message Type: <span id="msg-type"></span></p>
+        <br>
+        <div id="graph-div"></div>
+        <script>
+            $(display());  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

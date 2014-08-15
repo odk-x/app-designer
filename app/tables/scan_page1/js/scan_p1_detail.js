@@ -49,7 +49,6 @@ function display() {
     $('#other_reasons').text(data.get('specialcare'));
     $('#patient_code').text(data.get('patientcode'));
 
-
     //image for card number
     var cardMimeUri = data.get('cardnum_image_0');
     var cardSrc = '';
@@ -440,7 +439,7 @@ function display() {
     $('#patientcode_pic').append(patcThumbnail);
 
     //Prefetch the next page of the child's record
-    var patientcode = data.get('patientcode');
+    /*var patientcode = data.get('patientcode');
     var whereClause = 'qr_patientcode = ?';
     var selectionArgs = [patientcode];
     var results = control.query(
@@ -459,6 +458,18 @@ function display() {
     }
     else {
         console.log("More than one record found");
-    }
+    }*/
+
+    $('#display-detail').on('click', function() {
+        var pcode = data.get('patientcode');
+        var pid = data.get('childid');
+        var pname = data.get('name');
+        var pbirthdate = data.get('birthdate');
+
+        var queryString = scanQueries.getKeysToAppendToURL(pcode, pid, pname, pbirthdate);
+        var url = control.getFileAsUrl(
+                'assets/immunizationDisplayRecord.html' + queryString);
+        window.location.href = url;
+    });
 }
 
