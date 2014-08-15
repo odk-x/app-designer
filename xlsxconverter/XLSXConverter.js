@@ -2078,6 +2078,7 @@
                         if (operation._data_type == null ) {
                             // no explicit type -- hope that the field gets a value somewhere else...
                             // record name to verify that is the case.
+                            updateModel( section, operation, model, {} );
                             assigns.push({ operation: operation, section: section });
                         } else if(operation._data_type in promptTypes) {
                             var schema = promptTypes[operation._data_type];
