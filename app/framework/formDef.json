@@ -327,6 +327,22 @@
       {
         "clause": "exit section",
         "_row_num": 61
+      },
+      {
+        "branch_label": "geoweather",
+        "_row_num": 62
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/geoweather/forms/geoweather/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 63
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 64
       }
     ],
     "settings": [
@@ -496,6 +512,14 @@
           "text": "Plot"
         },
         "_row_num": 19
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "geoweather",
+        "display": {
+          "text": "geoweather"
+        },
+        "_row_num": 20
       }
     ]
   },
@@ -718,6 +742,14 @@
             "text": "Plot"
           },
           "_row_num": 19
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "geoweather",
+          "display": {
+            "text": "geoweather"
+          },
+          "_row_num": 20
         }
       ]
     },
@@ -1092,12 +1124,25 @@
             "promptIdx": 19
           },
           {
+            "url": "'?' + opendatakit.getHashString('../tables/geoweather/forms/geoweather/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 63,
+            "__rowNum__": 62,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen63",
+            "promptIdx": 20
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 62,
-            "_branch_label_enclosing_screen": "survey/_screen62",
-            "promptIdx": 20
+            "_row_num": 65,
+            "_branch_label_enclosing_screen": "survey/_screen65",
+            "promptIdx": 21
           }
         ],
         "validation_tag_map": {
@@ -1381,25 +1426,38 @@
             "operationIdx": 41
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 62,
+            "_row_num": 63,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 42
           },
           {
-            "_row_num": 62,
+            "clause": "exit section",
+            "_row_num": 64,
+            "__rowNum__": 63,
+            "_token_type": "exit_section",
+            "operationIdx": 43
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 65,
+            "operationIdx": 44
+          },
+          {
+            "_row_num": 65,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 43
+            "operationIdx": 45
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 62,
-            "operationIdx": 44
+            "_row_num": 65,
+            "operationIdx": 46
           }
         ],
         "branch_label_map": {
@@ -1444,8 +1502,10 @@
           "_screen57": 38,
           "plot": 40,
           "_screen60": 40,
-          "_contents": 43,
-          "_screen62": 43
+          "geoweather": 42,
+          "_screen63": 42,
+          "_contents": 45,
+          "_screen65": 45
         }
       }
     }
