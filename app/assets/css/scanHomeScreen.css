@@ -36,6 +36,9 @@ input[type='checkbox'] {
     background-color: #FF8888;
 }
 
+.delivered {
+    background-color: #00CC99;
+}
 .table-title {
     font-weight: bold;
     font-size:28px;

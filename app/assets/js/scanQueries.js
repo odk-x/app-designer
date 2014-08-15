@@ -6,7 +6,10 @@
 
 var scanQueries = {};
 
-scanQueries.id = 'patientcode';
+scanQueries.p_code = 'patientcode';
+scanQueries.childid = 'childid';
+scanQueries.name = 'name';
+scanQueries.birthdate = 'birthdate';
 
 scanQueries.getExistingRecordById = function(id) {
     var whereClause =
@@ -23,7 +26,7 @@ scanQueries.getExistingRecordById = function(id) {
 
 scanQueries.getExistingRecordByPatientCode = function(patientcode, table) {
     var whereClause =
-        'patientcode = ?';
+        'qr_patientcode = ?';
     var selectionArgs = [patientcode];
     
     var records = control.query(
@@ -60,12 +63,24 @@ scanQueries.getExistingRecordByBirthDate = function(birthdate) {
     return records;
 };
 
-scanQueries.getKeysToAppendToURL = function(newId) {
+scanQueries.getKeysToAppendToURL = function(new_code, newChildid, newName, newBirthdate) {
     var result =
         '?' +
-        scanQueries.id +
+        scanQueries.p_code +
         '=' +
-        encodeURIComponent(newId);   
+        encodeURIComponent(new_code) +
+        '&' +
+        scanQueries.childid +
+        '=' +
+        encodeURIComponent(newChildid) +
+        '&' +
+        scanQueries.name +
+        '=' +
+        encodeURIComponent(newName) + 
+        '&' +
+        scanQueries.birthdate +
+        '=' +
+        encodeURIComponent(newBirthdate);
     return result;
 };
 
