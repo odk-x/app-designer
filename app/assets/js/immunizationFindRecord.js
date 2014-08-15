@@ -30,7 +30,7 @@ function display() {
                 'scan_page1',
                 'childid = ?',
                 [id],
-                'tables/scan_page1/html/scan_p1_.list.html');
+                'tables/scan_page1/html/scan_p1_list.html');
             }
         }
         else if (!name==""){
@@ -51,7 +51,7 @@ function display() {
                 'scan_page1',
                 'name = ?',
                 [name],
-                'tables/scan_page1/html/scan_p1_.list.html');
+                'tables/scan_page1/html/scan_p1_list.html');
             }
         }
         else if (!birthdate==""){
@@ -72,7 +72,7 @@ function display() {
                 'scan_page1',
                 'birthdate = ?',
                 [birthdate],
-                'tables/scan_page1/html/scan_p1_.list.html');
+                'tables/scan_page1/html/scan_p1_list.html');
             }
         }
 		console.log('Done finding ' + id);

@@ -462,7 +462,11 @@ function display() {
 
     $('#display-detail').on('click', function() {
         var pcode = data.get('patientcode');
-        var queryString = scanQueries.getKeysToAppendToURL(pcode);
+        var pid = data.get('childid');
+        var pname = data.get('name');
+        var pbirthdate = data.get('birthdate');
+
+        var queryString = scanQueries.getKeysToAppendToURL(pcode, pid, pname, pbirthdate);
         var url = control.getFileAsUrl(
                 'assets/immunizationDisplayRecord.html' + queryString);
         window.location.href = url;
