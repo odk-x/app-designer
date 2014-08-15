@@ -21,8 +21,8 @@ var uniqueSensorIdToRowIdMap = {};
 /* Called when page loads to display things (Nothing to edit here) */
 var resumeFn = function(idxStart) {
     console.log('resumeFn called. idxStart: ' + idxStart);
-    // The first time through we're going to make a map of typeId to
-    // typeName so that we can display the name of each shop's specialty.
+    // The first time through we're going to make a map sensorId and
+    // a rowId for that sensorId
     var sensorIdMap = [];
     if (idxStart === 0) {
         var tempData = control.query('temperatureSensor', null, null);
@@ -46,7 +46,7 @@ var resumeFn = function(idxStart) {
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
             var tableId = data.getTableId();
-            // We set the rowId while as the li id. However, we may have
+            // We set the rowId for the li. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
             // method. First, however, we need to wrap up the target
@@ -92,7 +92,6 @@ var displayGroup = function(idxStart) {
 
         /* Creates the item space */
         // We're going to select the ul and then start adding things to it.
-        //var item = $('#list').append('<li>');
         var item = $('<li>');
         item.attr('rowId', data.getRowId(rowId));
         item.attr('class', 'item_space');

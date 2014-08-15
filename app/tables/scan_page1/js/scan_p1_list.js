@@ -53,7 +53,7 @@ var resumeFn = function(idxStart) {
                 control.openDetailView(
                     tableId,
                     rowId,
-                    'tables/scan_p1/html/scan_p1_detail.html');
+                    'tables/scan_page1/html/scan_p1_detail.html');
             }
         });
     }
