@@ -175,14 +175,14 @@ return {
         }
         return true;
     },
-	isUnitOfRetention: function(jsonDefn) {
-		var elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
-		var listChildren = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
-		
-		if ( elementType === "array" ) return true;
-		if ( listChildren.length === 0 ) return true;
-		return false;
-	},
+    isUnitOfRetention: function(jsonDefn) {
+        var elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
+        var listChildren = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
+        
+        if ( elementType === "array" ) return true;
+        if ( listChildren.length === 0 ) return true;
+        return false;
+    },
     _fromDatabaseToElementType: function( jsonType, value ) {
         var that = this;
         // date conversion elements...

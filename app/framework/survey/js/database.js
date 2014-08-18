@@ -403,14 +403,29 @@ ignore_all_changes:function(ctxt) {
             mdl.loaded = false;
         });
 },
+_common_delete_linked_instance_all:function(ctxt, dbTableName, fnname, instanceId) {
+      var that = this;
+      ctxt.log('I',fnname);
+      that.withDb( ctxt, function(transaction) {
+            // delete unsaved revisions
+            var cs = databaseSchema.deleteUnsavedChangesDataTableStmt(dbTableName, instanceId);
+            ctxt.sqlStatement = cs;
+            transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+                // delete the record outright if it is 'inserting'
+                var cs = databaseSchema.deleteInsertingDataTableStmt(dbTableName, instanceId);
+                ctxt.sqlStatement = cs;
+                transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
+                    // update the record to 'deleting' if it is not 'inserting'
+                    var cs = databaseSchema.deleteMarkDeletingDataTableStmt(dbTableName, instanceId);
+                    ctxt.sqlStatement = cs;
+                    transaction.executeSql(cs.stmt, cs.bind);
+                });
+            });
+        });
+},
 delete_all:function(ctxt, instanceId) {
       var that = this;
-      ctxt.log('I','delete_all');
-      that.withDb( ctxt, function(transaction) {
-            var cs = databaseSchema.deleteDataTableStmt(mdl.tableMetadata.dbTableName, instanceId);
-            ctxt.sqlStatement = cs;
-            transaction.executeSql(cs.stmt, cs.bind);
-        });
+      that._common_delete_linked_instance_all(ctxt, mdl.tableMetadata.dbTableName, 'delete_all', instanceId);
 },
 get_all_instances:function(ctxt, selection, selectionArgs, orderBy) {
       var that = this;
@@ -419,12 +434,7 @@ get_all_instances:function(ctxt, selection, selectionArgs, orderBy) {
 },
 delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
       var that = this;
-      ctxt.log('I','delete_linked_instance_all');
-      that.withDb( ctxt, function(transaction) {
-            var cs = databaseSchema.deleteDataTableStmt(dbTableName, instanceId);
-            ctxt.sqlStatement = cs;
-            transaction.executeSql(cs.stmt, cs.bind);
-        });
+      that._common_delete_linked_instance_all(ctxt, dbTableName, 'delete_linked_instance_all', instanceId);
 },
 get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displayElementName, orderBy) {
       var that = this;

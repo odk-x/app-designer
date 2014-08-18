@@ -494,14 +494,26 @@ deleteUnsavedChangesDataTableStmt:function(dbTableName, instanceId) {
     };
 },
 /**
- * Delete the instanceId entirely from the table (all savepoints).
+ * Delete the instanceId entirely from the table (all savepoints) 
+ * if its sync_state is 'inserting'
  *
  * Requires: no globals
  */
-deleteDataTableStmt:function(dbTableName, instanceid) {
+deleteInsertingDataTableStmt:function(dbTableName, instanceid) {
     return {
-        stmt : 'delete from "' + dbTableName + '" where _id=?;',
-        bind : [instanceid]
+        stmt : 'delete from "' + dbTableName + '" where _id=? and _sync_state=?;',
+        bind : [instanceid, 'inserting']
+    };
+},
+/**
+ * Mark the record as deleting if the _sync_state is not 'inserting'.
+ *
+ * Requires: no globals
+ */
+deleteMarkDeletingDataTableStmt:function(dbTableName, instanceid) {
+    return {
+        stmt : 'update "' + dbTableName + '" set _sync_state=? where _id=?;',
+        bind : ['deleting', instanceid]
     };
 },
 /**
