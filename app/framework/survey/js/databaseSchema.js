@@ -438,9 +438,9 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
     }
     if ( selection === undefined || selection === null ) {
         return {
-                stmt : 'select * from "' + dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
+                stmt : 'select * from "' + dbTableName + '" where _sync_state is null or _sync_state != ? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : []    
+                bind : ['deleting']    
             };
     } else {
         return {
@@ -494,14 +494,26 @@ deleteUnsavedChangesDataTableStmt:function(dbTableName, instanceId) {
     };
 },
 /**
- * Delete the instanceId entirely from the table (all savepoints).
+ * Delete the instanceId entirely from the table (all savepoints) 
+ * if its sync_state is 'inserting'
  *
  * Requires: no globals
  */
-deleteDataTableStmt:function(dbTableName, instanceid) {
+deleteInsertingDataTableStmt:function(dbTableName, instanceid) {
     return {
-        stmt : 'delete from "' + dbTableName + '" where _id=?;',
-        bind : [instanceid]
+        stmt : 'delete from "' + dbTableName + '" where _id=? and _sync_state=?;',
+        bind : [instanceid, 'inserting']
+    };
+},
+/**
+ * Mark the record as deleting if the _sync_state is not 'inserting'.
+ *
+ * Requires: no globals
+ */
+deleteMarkDeletingDataTableStmt:function(dbTableName, instanceid) {
+    return {
+        stmt : 'update "' + dbTableName + '" set _sync_state=? where _id=?;',
+        bind : ['deleting', instanceid]
     };
 },
 /**
