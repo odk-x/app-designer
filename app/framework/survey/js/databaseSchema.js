@@ -438,9 +438,9 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
     }
     if ( selection === undefined || selection === null ) {
         return {
-                stmt : 'select * from "' + dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
+                stmt : 'select * from "' + dbTableName + '" where _sync_state is null or _sync_state != ? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : []    
+                bind : ['deleting']    
             };
     } else {
         return {
