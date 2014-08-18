@@ -664,6 +664,48 @@ module.exports = function (grunt) {
 
         });
 
+
+    grunt.registerTask(
+        'adbpush-survey-beta3-opendatakit-surveydemo',
+        'Push everything for the opendatakit-surveydemo.appspot.com site to the device',
+        function() {
+            // These are the files that are uploaded to the opendatakit-surveydemo
+			// appspot instance. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!assets/**',
+                '!framework/**',
+                '!output/csv/**',
+                '!output/db/**',
+                '!output/debug/**',
+                '!tables/**',
+                'tables/geoweather/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.appDir + '/' + fileName;
+                var dest =
+                    surveyConfig.deviceMount +
+                    '/' +
+                    surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
     grunt.registerTask(
         'adbpush-collect',
         'Push Collect forms to the device',
