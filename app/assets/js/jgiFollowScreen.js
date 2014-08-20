@@ -51,8 +51,8 @@ function display() {
     speciesCounts.nyani = 0;
     speciesCounts.nyoka = 0;
     speciesCounts.pongo = 0;
-    speciesCounts.unknown = 0;
     speciesCounts.vyondi = 0;
+    speciesCounts.unknown = 0;
 
     // This will hold whether or not food is present. This is just binary
     // like this, or should we actually be tallying them as in the species
@@ -61,7 +61,7 @@ function display() {
     foodPresent.bananas = false;
     foodPresent.berries = false;
     foodPresent.flesh = false;
-    
+
     var followTimeUserFriendly;
     if (followTime === null) {
         // notify the user if we haven't specified a follow time. This will be
@@ -572,11 +572,7 @@ function display() {
         for (var i = 0; i < foods.length; i++) {
             var id = foods.eq(i).prop('id');
             var isPresent = foodIsPresent(id);
-            writeForFood(
-                    false,
-                    null,
-                    id,
-                    isPresent);
+            writeForFood(false, null, id, isPresent, null, null);
         }
 
 
@@ -609,17 +605,28 @@ function display() {
 
     };
 
-    var writeForFood = function(isUpdate, rowId, foodId, isPresent) {
+    var writeForFood = function(isUpdate, rowId, foodId, isPresent, foodPart1, foodPart2) {
 
         var struct = {};
         struct['FB_FOL_date'] = followDate;
         struct['FB_begin_feed_time'] = followTime;
         struct['FB_FOL_B_AnimID'] = focalChimpId;
 
-        struct['FB_FL_local_food_name'] = foodId;
+        if (foodId !== null) {
+            struct['FB_FL_local_food_name'] = foodId;
+        }
+        if (foodId !== null) {
+            struct['FB_FPL_local_food_part'] = foodPart1;
+        }
+        if (foodId !== null) {
+            struct['FB_FPL_local_food_part2'] = foodPart2;
+        }
+
         // this column is an integer in the database.
-        var isPresentStr = isPresent ? '1' : '0';
-        struct['FB_duration'] = isPresentStr;
+        if (isPresent !== null) {
+            var isPresentStr = isPresent ? '1' : '0';
+            struct['FB_duration'] = isPresentStr;
+        }
 
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
@@ -848,7 +855,6 @@ function display() {
         foodIds.forEach(function(foodId) {
             updateUIForFoodPresence(foodId);
         });
-
     };
 
     /**
@@ -868,7 +874,6 @@ function display() {
         } else {
             item.css('display', 'none');
         }
-
     };
 
     var updateUIForSpeciesCount = function(speciesId) {
@@ -956,7 +961,6 @@ function display() {
     updateUIForAllSpecies();
     updateUIForFood();
 
-
     // Now we'll attach a click listener that rights the state of the checkbox
     // into the database. Note that for now we're only using the present
     // checkboxes, as those are the only ones we're bothering to persist atm
@@ -1010,15 +1014,11 @@ function display() {
     });
 
     $('.food-show').on('click', function() {
-
         var foodId = $(this).prop('id');
-
         setFoodIsPresent(foodId, true);
-
         updateUIForFood();
-
         var rowId = foodRowIdCache[foodId];
-        writeForFood(true, rowId, foodId, true);
+        writeForFood(true, rowId, foodId, true, null, null);
 
     });
 
@@ -1026,15 +1026,10 @@ function display() {
         var removeId = $(this).prop('id');
         var dashIndex = removeId.indexOf('-');
         var foodId = removeId.substring(0, dashIndex);
-        console.log('clicked food remove: ' + foodId);
-        // toggle the food.
         setFoodIsPresent(foodId, false);
-        console.log('after food update: ' + foodPresent);
-
         updateUIForFood();
-
         var rowId = foodRowIdCache[foodId];
-        writeForFood(true, rowId, foodId, false);
+        writeForFood(true, rowId, foodId, false, null, null);
 
     });
 
