@@ -110,6 +110,7 @@ Table,default,displayName,object,"""Tea houses"""
 Table,default,groupByCols,object,[]
 Table,default,indexCol,string,""
 Table,default,listViewFileName,string,tables/Tea_houses/html/Tea_houses_list.html
+Table,default,mapListViewFileName,string,tables/Tea_houses/html/Tea_houses_list.html
 Table,default,sortCol,string,""
 Table,default,sortOrder,string,""
 TableColorRuleGroup,default,StatusColumn.ruleList,object,"[{""mValue"":""rest"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""syncStateRest"",""mForeground"":-16777216,""mBackground"":-1},{""mValue"":""inserting"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateInserting"",""mForeground"":-16777216,""mBackground"":-16711936},{""mValue"":""updating"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateUpdating"",""mForeground"":-16777216,""mBackground"":-935891},{""mValue"":""conflicting"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateConflicting"",""mForeground"":-16777216,""mBackground"":-65536},{""mValue"":""deleting"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateDeleting"",""mForeground"":-16777216,""mBackground"":-12303292}]"
