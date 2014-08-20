@@ -43,9 +43,16 @@ function display() {
 
     // This will hold the values for the numbers of species present;
     var speciesCounts = {};
-    speciesCounts.baboon = 0;
-    speciesCounts.vervet = 0;
-    speciesCounts.tailed = 0;
+    speciesCounts.chatu = 0;
+    speciesCounts.kenge = 0;
+    speciesCounts.kima = 0;
+    speciesCounts.nguruwe = 0;
+    speciesCounts.nkunge = 0;
+    speciesCounts.nyani = 0;
+    speciesCounts.nyoka = 0;
+    speciesCounts.pongo = 0;
+    speciesCounts.unknown = 0;
+    speciesCounts.vyondi = 0;
 
     // This will hold whether or not food is present. This is just binary
     // like this, or should we actually be tallying them as in the species
@@ -136,7 +143,7 @@ function display() {
      * retrieve the existing data and update the checkboxes with the
      * appropriate contents.
      */
-    var initUIFromDatabaseForTime = function(time) {
+    var initUIFromDatabaseForTime = function(time, isNew) {
         var tableData = util.getTableDataForTimePoint(
                 followDate,
                 time,
@@ -164,25 +171,36 @@ function display() {
             // suffix defined above.
             var fiveCheckboxId = id + fiveMeterSuffix;
             var checkbox5m = $('#' + fiveCheckboxId);
-            var valueOfFive = tableData.getData(i, 'FA_within_five_meters');
-            if (valueOfFive !== undefined && valueOfPresent !== '') {
-                valueOfFive = parseInt(valueOfFive);
-            }
-            if (valueOfFive === flag_chimpPresent) {
-                checkbox5m.prop('checked', true);
-            } else {
+
+            if (isNew) {
                 checkbox5m.prop('checked', false);
+            }
+            else {
+                var valueOfFive = tableData.getData(i, 'FA_within_five_meters');
+                if (valueOfFive !== undefined && valueOfPresent !== '') {
+                    valueOfFive = parseInt(valueOfFive);
+                }
+                if (valueOfFive === flag_chimpPresent) {
+                    checkbox5m.prop('checked', true);
+                } else {
+                    checkbox5m.prop('checked', false);
+                }
             }
 
             // Retrieve closest to focal chimp if there is one
-            var name = $('#' + id);
-            var valueOfClosest = tableData.getData(i, 'FA_closest_to_focal');
-            if (valueOfClosest !== undefined && valueOfClosest !== '') {
-                valueOfClosest = parseInt(valueOfClosest);
-            }
-            if (valueOfClosest === flag_chimpPresent) {
+            if (isNew) {
                 $('.closest-chimp').removeClass('closest-chimp');
-                name.addClass('closest-chimp');
+            }
+            else {
+                var name = $('#' + id);
+                var valueOfClosest = tableData.getData(i, 'FA_closest_to_focal');
+                if (valueOfClosest !== undefined && valueOfClosest !== '') {
+                    valueOfClosest = parseInt(valueOfClosest);
+                }
+                if (valueOfClosest === flag_chimpPresent) {
+                    $('.closest-chimp').removeClass('closest-chimp');
+                    name.addClass('closest-chimp');
+                }
             }
 
             // Retrieve sexual state from database if it exists
@@ -586,7 +604,7 @@ function display() {
             var addSuccessfully = control.addRow(
                     'other_species',
                     stringified);
-            console.log('added species successfully: ' + addSuccessfully);
+            //console.log('added species successfully: ' + addSuccessfully);
         }
 
     };
@@ -652,47 +670,40 @@ function display() {
         if (sState !== null) {
             struct['FA_type_of_cycle'] = sState;
         }
-        else {
-            console.log('not updating sexual state');;
-        }
+        
         if (isPresent !== null) {
             if (isPresent) {
                 struct['FA_type_of_certainty'] = flag_chimpPresent;
             } else {
                 struct['FA_type_of_certainty'] = flag_chimpAbsent;
             }
-        } else {
-            console.log('not updating is present');
-        }
+        } 
+
         if (isWithin5 !== null) {
             if (isWithin5) {
                 struct['FA_within_five_meters'] = flag_chimpPresent;
             } else {
                 struct['FA_within_five_meters'] = flag_chimpAbsent;
             }
-        } else {
-            console.log('not updating is within five meters');
-        }
+        } 
+
         if (isClosest !== null) {
             if (isClosest) {
                 struct['FA_closest_to_focal'] = flag_chimpPresent;
             } else {
                 struct['FA_closest_to_focal'] = flag_chimpAbsent;
             }
-        } else {
-            console.log('not updating is closest');
-        }
-        
+        } 
         
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
             var updateSuccessfully =
                 control.updateRow('follow_arrival', stringified, rowId);
-            console.log('updateSuccessfully: ' + updateSuccessfully);
+            //console.log('updateSuccessfully: ' + updateSuccessfully);
         } else {
             var addedSuccessfully =
                 control.addRow('follow_arrival', stringified);
-            console.log('added successfully: ' + addedSuccessfully);
+            //console.log('added successfully: ' + addedSuccessfully);
         }
     };
 
@@ -885,7 +896,7 @@ function display() {
     var updateUIForAllSpecies = function() {
 
         // We're going to flag the food user lists as visible or not.
-        var speciesIds = ['baboon', 'vervet', 'tailed'];
+        var speciesIds = ['chatu', 'kenge', 'kima', 'nguruwe', 'nkunge', 'nyani', 'nyoka', 'pongo', 'unknown', 'vyondi'];
 
         speciesIds.forEach(function(speciesId) {
             updateUIForSpeciesCount(speciesId);
@@ -917,7 +928,7 @@ function display() {
         if (!isNewTimePoint(previousTime)) {
             console.log(
                     'there is a previous time point, updating ui for that');
-            initUIFromDatabaseForTime(previousTime);
+            initUIFromDatabaseForTime(previousTime, true);
             // And now generate entries for all the rows. This will also
             // establish a row for every chimp, which is important for our
             // assumptions down the line.
@@ -931,7 +942,7 @@ function display() {
     } else {
         // We're returning to an existing timepoint, so update the UI to
         // reflect this.
-        initUIFromDatabaseForTime(followTime);
+        initUIFromDatabaseForTime(followTime, false);
     }
 
     var rowIdCache = createIdCache();
@@ -993,6 +1004,9 @@ function display() {
         setNumberOfSpecies(speciesId, 1);
 
         updateUIForAllSpecies();
+
+        var rowId = speciesRowIdCache[speciesId];
+        writeForSpecies(true, rowId, speciesId, 1);
     });
 
     $('.food-show').on('click', function() {
@@ -1085,18 +1099,49 @@ function display() {
     $('#next-button').on('click', function() {
         console.log('clicked next');
 
-        // And now launch the next screen
-        var nextTime = incrementTime(followTime);
+        //Check if we have a closest to focal checked
+        var closestId = $('.closest-chimp').prop('id');
+        var noClosestOk = false;
+        //If no closest to focal, give an alert. 
+        if (closestId == undefined) {
+            noClosestOk = confirm("No nearest to focal. Are you sure?");
+        }
+        else {
+            noClosestOk = true;
+        }
 
-        var queryString = util.getKeysToAppendToURL(
-            followDate,
-            nextTime,
-            focalChimpId);
-        var url =
-            control.getFileAsUrl('assets/followScreen.html' + queryString);
-        console.log('url: ' + url);
-        window.location.href = url;
+        //Check if we have any chimps within 5m
+        var maleChimps = getMaleChimps();
+        var femaleChimps = getFemaleChimps();
+        var allChimps = maleChimps.toArray().concat(femaleChimps.toArray());
+        
+        var noneWithin5ok = false;
+        for (var i = 0; i < allChimps.length; i++) {
+            var chimpId = allChimps[i].id;
+            var within5Checkbox = $('#' + chimpId + fiveMeterSuffix);
+            if (within5Checkbox.prop('checked') == true) {
+                noneWithin5ok = true;
+            }
+        }
+        //If none within 5m of focal, give an alert. 
+        if (noneWithin5ok == false) {
+            noneWithin5ok = confirm("No chimps within 5m. Are you sure?");
+        }
 
+        if ((noClosestOk == true) && (noneWithin5ok == true)) {
+            // And now launch the next screen
+            var nextTime = incrementTime(followTime);
+
+            var queryString = util.getKeysToAppendToURL(
+                followDate,
+                nextTime,
+                focalChimpId);
+            var url =
+                control.getFileAsUrl('assets/followScreen.html' + queryString);
+            console.log('url: ' + url);
+            window.location.href = url;
+        }
+        
     });
 
     $('.sexual-state').on('click', function() {
