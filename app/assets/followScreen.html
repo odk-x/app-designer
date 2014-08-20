@@ -159,44 +159,102 @@
       </table>
     </div> <!-- .col-lg-6 -->
 
-      <div id="extras-container">
+    <div id="extras-container">
+
+      <div id="food-group" class="btn-group">
+        <button type="button" id="food-button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+          Food <span class="caret"></span>
+        </button>
+        <ul id="food-menu" class="dropdown-menu" role="menu">
+          <li><a id="bananas" class="food food-show" href="#">Bananas</a></li>
+          <li><a id="berries" class="food food-show" href="#">Berries</a></li>
+          <li><a id="flesh" class="food food-show" href="#">Flesh</a></li>
+        </ul>
+      </div>
+
+      <div id="foodPart-group" class="btn-group">
+        <button type="button" id="foodPart-button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+          Food Part <span class="caret"></span>
+        </button>
+        <ul id="foodPart-menu" class="dropdown-menu" role="menu">
+          <li><a id="chipukiza" class="food food-show" href="#">Chipukiza</a></li>
+          <li><a id="mabua" class="food food-show" href="#">Mabua</a></li>
+          <li><a id="magoma" class="food food-show" href="#">Magoma</a></li>
+          <li><a id="majani" class="food food-show" href="#">Majani</a></li>
+          <li><a id="matunda" class="food food-show" href="#">Matunda</a></li>
+          <li><a id="maua" class="food food-show" href="#">Maua</a></li>
+          <li><a id="mbegu" class="food food-show" href="#">Mbegu</a></li>
+          <li><a id="mchwa" class="food food-show" href="#">Mchwa</a></li>
+          <li><a id="mifupa" class="food food-show" href="#">Mifupa</a></li>                    
+          <li><a id="miti" class="food food-show" href="#">Miti</a></li>
+          <li><a id="mizizi" class="food food-show" href="#">Mizizi</a></li>
+          <li><a id="nyama" class="food food-show" href="#">Nyama</a></li>
+          <li><a id="utomvu" class="food food-show" href="#">Utomvu</a></li>
+          <li><a id="wadudu" class="food food-show" href="#">Wadudu</a></li>
+          <li><a id="unknown" class="food food-show" href="#">Unknown</a></li>            
+        </ul>
+      </div>
 
       <div id="species-group" class="btn-group">
           <button type="button" id="species-button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
             Species <span class="caret">
           </button>
           <ul id="species-menu" class="dropdown-menu" role="menu">
-            <li><a id="baboon" class="species species-show" href="#">Baboon</a></li>
-            <li><a id="vervet" class="species species-show" href="#">Vervet Monkey</a></li>
-            <li><a id="tailed" class="species species-show" href="#">Red-Tailed Monkey</a></li>
-          </ul>
-        </div>
-
-        <div id="food-group" class="btn-group">
-          <button type="button" id="food-button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-            Food <span class="caret"></span>
-          </button>
-          <ul id="food-menu" class="dropdown-menu" role="menu">
-            <li><a id="bananas" class="food food-show" href="#">Bananas</a></li>
-            <li><a id="berries" class="food food-show" href="#">Berries</a></li>
-            <li><a id="flesh" class="food food-show" href="#">Flesh</a></li>
+            <li><a id="chatu" class="species species-show" href="#">Chatu</a></li>
+            <li><a id="kenge" class="species species-show" href="#">Kenge</a></li>
+            <li><a id="kima" class="species species-show" href="#">Kima</a></li>
+            <li><a id="nguruwe" class="species species-show" href="#">Nguruwe</a></li>
+            <li><a id="nkunge" class="species species-show" href="#">Nkunge</a></li>
+            <li><a id="nyani" class="species species-show" href="#">Nyani</a></li>
+            <li><a id="nyoka" class="species species-show" href="#">Nyoka</a></li>
+            <li><a id="pongo" class="species species-show" href="#">Pongo</a></li>
+            <li><a id="vyondi" class="species species-show" href="#">Vyondi</a></li>
+            <li><a id="unknown" class="species species-show" href="#">Unknown</a></li>
           </ul>
         </div>
 
 
         <ul id="species-group" class="user-list list-group">
-            <li id="baboon-user-list" class="species-plus list-group-item">
-              <span id="baboon-count" class="badge pull-left">0</span>
-              Baboon
-              <span id="baboon-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
-            <li id="vervet-user-list" class="species-plus list-group-item">
-              <span id="vervet-count" class="badge pull-left">0</span>
-              Vervet Monkey
-              <span id="vervet-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
-            <li id="tailed-user-list" class="species-plus list-group-item">
-              <span id="tailed-count" class="badge pull-left">0</span>
-              Red-Tailed Monkey
-              <span id="tailed-minus" class="species-minus pull-right glyphicon glyphicon-minus"></span></li>
+            <li id="chatu-user-list" class="species-plus list-group-item">
+              <span id="chatu-count" class="badge pull-left">0</span>
+              Chatu
+              <span id="chatu-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+            <li id="kenge-user-list" class="species-plus list-group-item">
+              <span id="kenge-count" class="badge pull-left">0</span>
+              Kenge
+              <span id="kenge-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+           <li id="kima-user-list" class="species-plus list-group-item">
+              <span id="kima-count" class="badge pull-left">0</span>
+              Kima
+              <span id="kima-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+           <li id="nguruwe-user-list" class="species-plus list-group-item">
+              <span id="nguruwe-count" class="badge pull-left">0</span>
+              Nguruwe
+              <span id="nguruwe-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+           <li id="nkunge-user-list" class="species-plus list-group-item">
+              <span id="nkunge-count" class="badge pull-left">0</span>
+              Nkunge
+              <span id="nkunge-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+           <li id="nyani-user-list" class="species-plus list-group-item">
+              <span id="nyani-count" class="badge pull-left">0</span>
+              Nyani
+              <span id="nyani-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+           <li id="nyoka-user-list" class="species-plus list-group-item">
+              <span id="nyoka-count" class="badge pull-left">0</span>
+              Nyoka
+              <span id="nyoka-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+           <li id="pongo-user-list" class="species-plus list-group-item">
+              <span id="pongo-count" class="badge pull-left">0</span>
+              Pongo
+              <span id="pongo-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+           <li id="unknown-user-list" class="species-plus list-group-item">
+              <span id="unknown-count" class="badge pull-left">0</span>
+              Unknown
+              <span id="unknown-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
+          <li id="vyondi-user-list" class="species-plus list-group-item">
+              <span id="vyondi-count" class="badge pull-left">0</span>
+              Vyondi
+              <span id="vyondi-minus" class="species-minus glyphicon glyphicon-minus pull-right"></span></li>
         </ul>
 
         <ul id="food-group" class="user-list list-group">
@@ -208,8 +266,12 @@
               Flesh<span id="flesh-remove" class="food-remove pull-right glyphicon glyphicon-remove"></span></li>
         </ul>
 
-      </div>
+        <ul id="foodPart-group" class="user-list list-group">
+            <li id="foodPart-user-list" class="list-group-item">
+              majani<span id="foodPart-remove" class="food-remove pull-right glyphicon glyphicon-remove"></span></li>
+        </ul>
 
+      </div>
 
   </div> <!-- .container -->
         <script type="text/javascript">
