@@ -14,11 +14,11 @@ Column,District,displayFormat,string,
 Column,District,displayName,object,"""District"""
 Column,District,displayVisible,boolean,TRUE
 Column,District,joins,object,
-Column,GeoPoint,displayChoicesList,object,[]
-Column,GeoPoint,displayFormat,string,
-Column,GeoPoint,displayName,object,"""GeoPoint"""
-Column,GeoPoint,displayVisible,boolean,TRUE
-Column,GeoPoint,joins,object,
+Column,Location,displayChoicesList,object,[]
+Column,Location,displayFormat,string,
+Column,Location,displayName,object,"""Location"""
+Column,Location,displayVisible,boolean,FALSE
+Column,Location,joins,object,
 Column,Hot,displayChoicesList,object,[]
 Column,Hot,displayFormat,string,
 Column,Hot,displayName,object,"""Hot"""
@@ -34,16 +34,26 @@ Column,Iced,displayFormat,string,
 Column,Iced,displayName,object,"""Iced"""
 Column,Iced,displayVisible,boolean,TRUE
 Column,Iced,joins,object,
-Column,Latitude,displayChoicesList,object,[]
-Column,Latitude,displayFormat,string,
-Column,Latitude,displayName,object,"""Latitude"""
-Column,Latitude,displayVisible,boolean,TRUE
-Column,Latitude,joins,object,
-Column,Longitude,displayChoicesList,object,[]
-Column,Longitude,displayFormat,string,
-Column,Longitude,displayName,object,"""Longitude"""
-Column,Longitude,displayVisible,boolean,TRUE
-Column,Longitude,joins,object,
+Column,Location_accuracy,displayChoicesList,object,[]
+Column,Location_accuracy,displayFormat,string,
+Column,Location_accuracy,displayName,object,"""Accuracy"""
+Column,Location_accuracy,displayVisible,boolean,TRUE
+Column,Location_accuracy,joins,object,
+Column,Location_altitude,displayChoicesList,object,[]
+Column,Location_altitude,displayFormat,string,
+Column,Location_altitude,displayName,object,"""Altitude"""
+Column,Location_altitude,displayVisible,boolean,TRUE
+Column,Location_altitude,joins,object,
+Column,Location_latitude,displayChoicesList,object,[]
+Column,Location_latitude,displayFormat,string,
+Column,Location_latitude,displayName,object,"""Latitude"""
+Column,Location_latitude,displayVisible,boolean,TRUE
+Column,Location_latitude,joins,object,
+Column,Location_longitude,displayChoicesList,object,[]
+Column,Location_longitude,displayFormat,string,
+Column,Location_longitude,displayName,object,"""Longitude"""
+Column,Location_longitude,displayVisible,boolean,TRUE
+Column,Location_longitude,joins,object,
 Column,Name,displayChoicesList,object,[]
 Column,Name,displayFormat,string,
 Column,Name,displayName,object,"""Name"""
@@ -91,7 +101,7 @@ Column,WiFi,displayVisible,boolean,TRUE
 Column,WiFi,joins,object,
 ListDisplayActivity,default,nameOfListView,string,input tests
 ListDisplayActivity.views,input tests,filename,string,framework/tables/test/html/inputTests.html
-Table,default,colOrder,object,"[""House_id"",""State"",""Region"",""District"",""Neighborhood"",""Specialty_Type_id"",""Name"",""Customers"",""Visits"",""Iced"",""Hot"",""WiFi"",""Latitude"",""Longitude"",""Date_Opened"",""Owner"",""Phone_Number"",""GeoPoint""]"
+Table,default,colOrder,object,"[""House_id"",""State"",""Region"",""District"",""Neighborhood"",""Specialty_Type_id"",""Name"",""Customers"",""Visits"",""Iced"",""Hot"",""WiFi"",""Location_latitude"",""Location_longitude"",""Location_altitude"",""Location_accuracy"",""Date_Opened"",""Owner"",""Phone_Number""]"
 Table,default,defaultViewType,string,List
 Table,default,displayName,object,"""Tea houses editable"""
 Table,default,groupByCols,object,[]
