@@ -1,10 +1,10 @@
-_id,plot_name,date,plant_height,plant_health,plant_picture,pests,soil,observations
-ba,Puerto Madero,2014-02-05T20:28:07.604000000,10,fair,,,sandy_loam,nothing to report
-bb,Puerto Madero,2014-02-10T10:00:00.000000000,10,bad,,,sandy_loam,Looks dry
-bc,Puerto Madero,2014-02-15T08:32:07.000000000,11,bad,,"[""beetle""]",loam,Beetles arrived this time.
-bd,Palermo,2014-02-14T04:22:22.000000000,55,good,,"[""cutworm""]",loam,Soil seems well taken care of.
-be,Palermo,2014-02-20T12:10:10.000000000,80,good,,"[""cutworm""]",loam,Appears to have gotten cutworms.
-bf,Palermo,2014-03-02T12:10:10.000000000,99,good,,"[""cutworm""]",loam,Great crop.
-bg,La Boca,2014-01-01T10:10:10.000000000,50,bad,,"[""earworm"",""cutworm""]",sandy_loam,Things are looking dire.
-bh,La Boca,2014-02-01T14:14:07.000000000,75,fair,,"[""earworm"",""cutworm""]",sandy_loam,Seems to have made a turn around.
-bi,La Boca,2014-03-01T16:33:10.000000000,80,good,,"[""cutworm""]",sandy_loam,Looking great.
+_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,date,observations,pests,pests_items,plant_health,plant_height,plant_picture_contentType,plant_picture_uriFragment,plot_name,soil,_row_etag,_filter_type,_filter_value
+ba,,default,COMPLETE,2014-08-20T17:42:08.888000000,anonymous,2014-02-05T20:28:07.604000000,nothing to report,,,fair,10.0,,,Puerto Madero,sandy_loam,,,
+bb,,default,COMPLETE,2014-08-20T17:42:08.909000000,anonymous,2014-02-10T10:00:00.000000000,Looks dry,,,bad,10.0,,,Puerto Madero,sandy_loam,,,
+bc,,default,COMPLETE,2014-08-20T17:42:08.933000000,anonymous,2014-02-15T08:32:07.000000000,Beetles arrived this time.,"[""beetle""]",,bad,11.0,,,Puerto Madero,loam,,,
+bd,,default,COMPLETE,2014-08-20T17:42:08.957000000,anonymous,2014-02-14T04:22:22.000000000,Soil seems well taken care of.,"[""cutworm""]",,good,55.0,,,Palermo,loam,,,
+be,,default,COMPLETE,2014-08-20T17:42:08.983000000,anonymous,2014-02-20T12:10:10.000000000,Appears to have gotten cutworms.,"[""cutworm""]",,good,80.0,,,Palermo,loam,,,
+bf,,default,COMPLETE,2014-08-20T17:42:09.013000000,anonymous,2014-03-02T12:10:10.000000000,Great crop.,"[""cutworm""]",,good,99.0,,,Palermo,loam,,,
+bg,,default,COMPLETE,2014-08-20T17:42:09.040000000,anonymous,2014-01-01T10:10:10.000000000,Things are looking dire.,"[""earworm"",""cutworm""]",,bad,50.0,,,La Boca,sandy_loam,,,
+bh,,default,COMPLETE,2014-08-20T17:42:09.067000000,anonymous,2014-02-01T14:14:07.000000000,Seems to have made a turn around.,"[""earworm"",""cutworm""]",,fair,75.0,,,La Boca,sandy_loam,,,
+bi,,default,COMPLETE,2014-08-20T17:42:09.092000000,anonymous,2014-03-01T16:33:10.000000000,Looking great.,"[""cutworm""]",,good,80.0,,,La Boca,sandy_loam,,,
