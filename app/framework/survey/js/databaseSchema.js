@@ -637,6 +637,10 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
         jsonDefn = databaseUtils.flattenElementPath( dataTableModel, null, f, null, protoMdl.formDef.specification.model[f] );
     }
 
+    // traverse the dataTableModel marking which elements are 
+    // not units of retention.
+    databaseUtils.markUnitOfRetention(dataTableModel);
+    
     // and now traverse the dataTableModel making sure all the
     // elementSet: 'data' values have columnDefinitions entries.
     //
