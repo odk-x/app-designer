@@ -411,12 +411,12 @@ _common_delete_linked_instance_all:function(ctxt, dbTableName, fnname, instanceI
             var cs = databaseSchema.deleteUnsavedChangesDataTableStmt(dbTableName, instanceId);
             ctxt.sqlStatement = cs;
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-                // delete the record outright if it is 'inserting'
-                var cs = databaseSchema.deleteInsertingDataTableStmt(dbTableName, instanceId);
+                // delete the record outright if it is 'new_row'
+                var cs = databaseSchema.deleteNewRowDataTableStmt(dbTableName, instanceId);
                 ctxt.sqlStatement = cs;
                 transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
-                    // update the record to 'deleting' if it is not 'inserting'
-                    var cs = databaseSchema.deleteMarkDeletingDataTableStmt(dbTableName, instanceId);
+                    // update the record to 'deleted' if it is not 'new_row'
+                    var cs = databaseSchema.deleteMarkDeletedDataTableStmt(dbTableName, instanceId);
                     ctxt.sqlStatement = cs;
                     transaction.executeSql(cs.stmt, cs.bind);
                 });

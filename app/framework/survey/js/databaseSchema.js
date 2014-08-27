@@ -22,7 +22,7 @@ dataTablePredefinedColumns: {
                      // these have leading underscores because they are hidden from the user and not directly manipulable
                      _id: {type: 'string', isNotNullable: true, elementSet: 'instanceMetadata' },
                      _row_etag: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
-                     _sync_state: { type: 'string', isNotNullable: true, 'default': 'inserting', elementSet: 'instanceMetadata' },
+                     _sync_state: { type: 'string', isNotNullable: true, 'default': 'new_row', elementSet: 'instanceMetadata' },
                      _conflict_type: { type: 'integer', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _filter_type: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _filter_value: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
@@ -234,7 +234,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
             } else if ( f === "_savepoint_type" ) {
                 stmt += "null";
             } else if ( f === "_sync_state" ) {
-                stmt += "case when _sync_state='inserting' then 'inserting' else 'updating' end";
+                stmt += "case when _sync_state='new_row' then 'new_row' else 'changed' end";
             } else {
                 if ( !defElement.isSessionVariable ) {
                     stmt += '"' + f + '"';
@@ -440,7 +440,7 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
         return {
                 stmt : 'select * from "' + dbTableName + '" where _sync_state is null or _sync_state != ? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : ['deleting']    
+                bind : ['deleted']    
             };
     } else {
         return {
@@ -495,25 +495,25 @@ deleteUnsavedChangesDataTableStmt:function(dbTableName, instanceId) {
 },
 /**
  * Delete the instanceId entirely from the table (all savepoints) 
- * if its sync_state is 'inserting'
+ * if its sync_state is 'new_row'
  *
  * Requires: no globals
  */
-deleteInsertingDataTableStmt:function(dbTableName, instanceid) {
+deleteNewRowDataTableStmt:function(dbTableName, instanceid) {
     return {
         stmt : 'delete from "' + dbTableName + '" where _id=? and _sync_state=?;',
-        bind : [instanceid, 'inserting']
+        bind : [instanceid, 'new_row']
     };
 },
 /**
- * Mark the record as deleting if the _sync_state is not 'inserting'.
+ * Mark the record as deleted if the _sync_state is not 'new_row'.
  *
  * Requires: no globals
  */
-deleteMarkDeletingDataTableStmt:function(dbTableName, instanceid) {
+deleteMarkDeletedDataTableStmt:function(dbTableName, instanceid) {
     return {
         stmt : 'update "' + dbTableName + '" set _sync_state=? where _id=?;',
-        bind : ['deleting', instanceid]
+        bind : ['deleted', instanceid]
     };
 },
 /**
@@ -725,7 +725,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
         _db_table_name: dbTableName, 
         _sync_tag: "", 
         _last_sync_time: -1, 
-        _sync_state: 'inserting', 
+        _sync_state: 'new_row', 
         _transactioning: 0 } );
 
     // construct the kvPairs to insert into kvstore
