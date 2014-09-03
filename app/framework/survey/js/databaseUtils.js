@@ -175,13 +175,64 @@ return {
         }
         return true;
     },
-    isUnitOfRetention: function(jsonDefn) {
-        var elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
-        var listChildren = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
+    markUnitOfRetention: function(dataTableModel) {
+        // for all arrays, mark all descendants of the array as not-retained
+        // because they are all folded up into the json representation of the array
+        var startKey;
+        var jsonDefn;
+        var elementType;
+        var key;
+        var jsonSubDefn;
         
-        if ( elementType === "array" ) return true;
-        if ( listChildren.length === 0 ) return true;
-        return false;
+        for ( startKey in dataTableModel ) {
+            jsonDefn = dataTableModel[startKey];
+            if ( jsonDefn.notUnitOfRetention ) {
+                // this has already been processed
+                continue;
+            }
+            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
+            if ( elementType === "array" ) {
+                var descendantsOfArray = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
+                var scratchArray = [];
+                while ( descendantsOfArray.length !== 0 ) {
+                    var i;
+                    for ( i = 0 ; i < descendantsOfArray.length ; ++i ) {
+                        key = descendantsOfArray[i];
+                        jsonSubDefn = dataTableModel[key];
+                        if ( jsonSubDefn !== null && jsonSubDefn !== undefined ) {
+                            if ( jsonSubDefn.notUnitOfRetention ) {
+                                // this has already been processed
+                                continue;
+                            }
+                            jsonSubDefn.notUnitOfRetention = true;
+                            var listChildren = ((jsonSubDefn.listChildElementKeys === undefined || jsonSubDefn.listChildElementKeys === null) ? [] : jsonSubDefn.listChildElementKeys);
+                            scratchArray = scratchArray.concat(listChildren);
+                        }
+                    }
+                    descendantsOfArray = scratchArray;
+                }
+            }
+        }
+        // and mark any non-arrays with multiple fields as not retained
+        for ( startKey in dataTableModel ) {
+            jsonDefn = dataTableModel[startKey];
+            if ( jsonDefn.notUnitOfRetention ) {
+                // this has already been processed
+                continue;
+            }
+            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
+            if ( elementType !== "array" ) {
+                if (jsonDefn.listChildElementKeys !== undefined &&
+                    jsonDefn.listChildElementKeys !== null &&
+                    jsonDefn.listChildElementKeys.length !== 0 ) {
+                    jsonDefn.notUnitOfRetention = true;
+                }
+            }
+        }
+    },
+    isUnitOfRetention: function(jsonDefn) {
+        if (jsonDefn.notUnitOfRetention) return false;
+        return true;
     },
     _fromDatabaseToElementType: function( jsonType, value ) {
         var that = this;
