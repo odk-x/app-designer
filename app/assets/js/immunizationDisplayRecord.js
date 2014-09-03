@@ -18,8 +18,8 @@ function display() {
     $(birthdateCell).html(birthdate);
     
 
-    if (!id=="") {
-        var page2 = scanQueries.getExistingRecordByPatientCode(patientcode, 'scan_page2');
+    if (!childid=="") {
+        var page2 = scanQueries.getExistingRecordByPatientCode(patientcode, 'scan_childvacc_822a_page2');
         //We only found one record associated with this id so use that
         if (page2.getCount()==1)
         {
@@ -41,10 +41,10 @@ function display() {
         else if (page2.getCount() > 1)
         {
             //Figure out what to do if more than one record. Shouldn't happen in theory. 
-            console.log("Oops. More than one record found with patient code " + id);
+            console.log("Oops. More than one record found with patient code " + childid);
         }
 
-        var page3 = scanQueries.getExistingRecordByPatientCode(patientcode, 'scan_page3');
+        var page3 = scanQueries.getExistingRecordByPatientCode(patientcode, 'scan_childvacc_825_pg3');
         //We only found one record associated with this id so use that
         if (page3.getCount()==1)
         {
@@ -78,10 +78,10 @@ function display() {
         else if (page3.getCount() > 1)
         {
             //Figure out what to do if more than one record. Shouldn't happen in theory. 
-            console.log("Oops. More than one record found with patient code " + id);
+            console.log("Oops. More than one record found with patient code " + childid);
         }
 
-        var page4 = scanQueries.getExistingRecordByPatientCode(patientcode, 'scan_page4');
+        var page4 = scanQueries.getExistingRecordByPatientCode(patientcode, 'scan_childvacc_825_pg4');
         //We only found one record associated with this id so use that
         if (page4.getCount()==1)
         {
@@ -114,7 +114,7 @@ function display() {
         else if (page4.getCount() > 1)
         {
             //Figure out what to do if more than one record. Shouldn't happen in theory. 
-            console.log("Oops. More than one record found with patient code " + id);
+            console.log("Oops. More than one record found with patient code " + childid);
         }
     }
 
