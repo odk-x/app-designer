@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<!-- Detailed View -->
+    <head>
+        <link href="../../../assets/css/scan_p1_detail.css" type="text/css" rel="stylesheet" />
+        <!--<link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />-->
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../../framework/libs/d3-amd/d3.js"></script>
+        <script type="text/javascript" src="../../../assets/js/hiv_scanQueries.js"></script>
+    </head>
+    <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
+    <body>
+        <script type="text/javascript" src="../js/scan_HIV_Patient_Record_detail.js"></script>
+        <!-- Define any HTML structure you rely on in your js files here, above
+        the call to display. -->
+
+        <p>Patient Name: <span id="patient_name"></span></p>
+        <div id="name_pic"></div>
+        <br>
+        <p>Patient's Sex: <span id="patient_sex"></span></p>
+        <div id="sex_pic"></div>
+        <br>
+        <p>Date of Registration: <span id="registration_date"></span></p>
+        <div id="registration_pic"></div>
+        <br>
+        <p>Patient ID Number: <span id="patient_id"></span></p>
+        <div id="patientid_pic"></div>
+        <br>
+        <p>Patient Birthdate: <span id="patient_birthday"></span></p>
+        <div id="birthdate_pic"></div>
+        <br>
+        <p>Home Village: <span id="home_village"></span></p>
+        <div id="village_pic"></div>
+        <br>
+        <p>Patient's GSM #: <span id="patient_gsm"></span></p>
+        <div id="patient_gsm_pic"></div>
+        <br>
+        <p>Refferend from: <span id="reffered_from"></span></p>
+        <div id="reffered_from_pic"></div>
+        <br>
+        <p>Refferend from other: <span id="reffered_from_other"></span></p>
+        <div id="reffered_from_other_pic"></div>
+        <br>
+        <p>Transfer From HU? <span id="transfer_from"></span></p>
+        <div id="transfer_from_pic"></div>
+        <br>
+        <p>Screened For TB? <span id="tb_screen"></span></p>
+        <div id="tb_screen_pic"></div>
+        <br>
+        <p>Screened For STIs? <span id="stis_screen"></span></p>
+        <div id="stis_screen_pic"></div>
+        <br>
+        <p>Service Reffered For Clinical: <span id="clinical_service"></span></p>
+        <div id="clinical_service_pic"></div>
+        <br>
+        <p>Service Reffered For Clinical Other: <span id="clinical_service_other"></span></p>
+        <div id="clinical_service__other_pic"></div>
+        <br>
+        <p>Service Reffered For Community: <span id="community_service"></span></p>
+        <div id="community_service_pic"></div>
+        <br>
+        <p>Service Reffered For Community Other: <span id="community_service_other"></span></p>
+        <div id="community_service_other_pic"></div>
+        <br>
+        <!--<button id="display-detail" class="btn-launch btn btn-positive btn-block">View vaccination history</button>-->
+        <!--a href="#" onclick="control.openDetailView(
+                        'scan_page2',
+                        rowId,
+                        'tables/scan_page2/html/scan_p2_detail.html'
+                        );">View vaccination history</a-->
+        <script>
+            $(display());  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/findRecordForHivPatient.js"></script>
+        <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
+    </head>
+
+    <body id="main">
+    <!-- Here we'll just collect some data to about the follow we're about to
+    begin. -->
+    <div class="container">
+    <div class="description-text" id="description">Locate a Record</div>
+
+      <form>
+        <input id="patient_id" type="text" placeholder="Patient ID">
+      </form>
+
+      <!-- Note that this button cannot go inside the form. I should probably
+      figure out why. -->
+      <button id="begin-search" class="btn-launch btn btn-positive btn-block">Search</button>
+  </div> <!-- .container -->
+        <script type="text/javascript">
+            $(display());
+        </script>
+    </body>
+</html>

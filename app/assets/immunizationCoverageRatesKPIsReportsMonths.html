@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/immunizationCoverageRatesKPIsReportsMonths.js"></script>
+        <script type="text/javascript" src="js/scanQueries.js"></script>
+    </head>
+    
+	<body id="main">
+    <header class="bar bar-nav">
+      <h1 class="title">ODK Scan</h1>
+    </header>
+    <div id="content-container">
+
+    <div class="description-text" id="description">Select Month</div>
+    <ul id="navigation-buttons">
+        <li><button class="btn btn-primary btn-block btn-launch" id="april">
+          April
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="may">
+          May
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="june">
+          June
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="july">
+          July
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="august">
+          August
+        </button>
+        </li>
+        <li><button class="btn btn-primary btn-block btn-launch" id="september">
+          September
+        </button>
+        </li>
+    </ul>
+  </div>
+        <script type="text/javascript">
+            $(display());
+        </script>
+    </body>
+</html>
