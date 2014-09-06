@@ -33,7 +33,6 @@ dataTablePredefinedColumns: {
                      _savepoint_creator: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' } },
 tableDefinitionsPredefinedColumns: {
                     _table_id: { type: 'string', isNotNullable: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
-                    _db_table_name: { type: 'string', isNotNullable: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
                     _sync_tag: { type: 'string', isNotNullable: false, elementSet: 'tableMetadata' },
                     _last_sync_time: { type: 'integer', isNotNullable: true, elementSet: 'tableMetadata' },
                     _sync_state: { type: 'string', isNotNullable: true, elementSet: 'tableMetadata' },
@@ -556,7 +555,7 @@ selectTableDefinitionsDataStmt:function(table_id) {
 },
 selectAllTableDbNamesAndIdsDataStmt: function() {
     return {
-            stmt: 'select _db_table_name, _table_id from _table_definitions',
+            stmt: 'select _table_id from _table_definitions',
             bind: []
         };
 },
@@ -722,7 +721,6 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
 
     fullDef._table_definitions.push( { 
         _table_id: protoMdl.table_id, 
-        _db_table_name: dbTableName, 
         _sync_tag: "", 
         _last_sync_time: -1, 
         _sync_state: 'new_row', 
