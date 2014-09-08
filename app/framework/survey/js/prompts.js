@@ -1995,11 +1995,14 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
             return '';
         } else {
             var displayObject = this.getValue();
+            if (displayObject === null || displayObject === undefined ) {
+                return null;
+            }
             if (displayObject.latitude != null && displayObject.longitude != null) {
                 return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
             }
             else {
-                return '';
+                return null;
             }
         }
     }
@@ -2007,11 +2010,29 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
     type: "geopointmap",
     intentString: 'org.opendatakit.survey.android.activities.GeoPointMapActivity',
-     extractDataValue: function(jsonObject) {
-        return { latitude: jsonObject.result.latitude, 
-                 longitude: jsonObject.result.longitude, 
-                 altitude: jsonObject.result.altitude, 
-                 accuracy: jsonObject.result.accuracy };
+    extractDataValue: function(jsonObject) {
+        return {
+            latitude: jsonObject.result.latitude,
+            longitude: jsonObject.result.longitude,
+            altitude: jsonObject.result.altitude,
+            accuracy: jsonObject.result.accuracy
+        };
+    },
+    formattedValueForContentsDisplay: function() {
+        if ( !this.name ) {
+            return '';
+        } else {
+            var displayObject = this.getValue();
+            if (displayObject === null || displayObject === undefined ) {
+                return null;
+            }
+            if (displayObject.latitude != null && displayObject.longitude != null) {
+                return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
+            }
+            else {
+                return null;
+            }
+        }
     }
 });
 promptTypes.note = promptTypes.base.extend({
