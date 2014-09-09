@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<!-- Detailed View -->
+    <head>
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../../framework/libs/d3-amd/d3.js"></script>
+    </head>
+    <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
+    <body>
+        <script type="text/javascript" src="../js/plot_detail.js"></script>
+        <!-- Define any HTML structure you rely on in your js files here, above
+        the call to display. -->
+        <h1><span id="NAME"></span></h1>
+        <p>Plot ID: <span id="plot-id"></span></p>
+        <p>Latitude: <span id="lat"></span></p>
+        <p>Longitude: <span id="long"></span></p>
+        <br>
+        <p>Crop: <span id="crop"></span></p>
+        <br>
+        <a href="#" onclick="control.openTableToListView(
+          'visit',
+          'plot_name = ?',
+          [data.get('plot_name')],
+          'tables/visit/html/visit_list.html');"><span id="visits"></span> Visits</a>
+        <div id="graph-div"></div>
+        <script>
+            $(display());  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

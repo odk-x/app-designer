@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/filteringHivPatient.js"></script>
+        <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
+    </head>
+    <style>
+        #months, #ages, #tests, #sexs {
+            background-color: #00CCFF;
+            width: 21em !important;
+            height: 2em !important;
+        }
+       body, #months, #ages, #tests, #sexs, option{
+            font-size: 24px;
+       }
+    </style>
+	<body id="main">
+    <header class="bar bar-nav">
+      <h1 class="title">ODK Scan</h1>
+    </header>
+    <div id="content-container">
+
+    <div class="description-text" id="description">Filter Your Search</div>
+    <ul id="navigation-buttons">
+        <li>Select Month:
+        <br>
+        <select id="months">
+            <!--<option value="select month" select="selected"> Select Month</option>-->
+            <option value="all"> All </option>
+            <option value="4" > April </option>
+            <option value="5" > May </option>
+            <option value="6" > June </option>
+            <option value="7" > July </option>
+            <option value="8" > August</option>
+            <option value="9" > September </option>
+            <option value="12"> December </option>  
+        </select>
+        </li>
+        <li>Select Age:
+        <br>
+        <select id="ages">
+
+           <!-- <option value="select ages" select="selected"> Select Ages </option>-->
+            <option value="all" > All </option>
+            <option value="less"> < 15 </option>
+            <option value="greater" > >15 </option>
+        </select>
+        </li>
+        <li>Select Sex:
+        <br>
+        <select id="sexs">
+
+            <!--<option value="Select sex" select="selected"> Select Sex </option>-->
+            <option value="both" > Both </option>
+            <option value="M" > Male </option>
+            <option value="F" > Female </option>
+        </select>
+        </li>
+        <li>Select Criteria:
+        <br>
+        <select id="tests">
+
+            <!--<option value="Select test" select="selected"> Select Test Criteria</option>-->
+            <option value="TB_screen" > Screened TB </option>
+            <option value="STI_screen" > Screened STIs </option>
+            <option value="Care_adherence_edu" > Adherence to care? </option>
+            <option value="TB_screen_No" > Not Screened TB </option>
+            <option value="STI_screen_No" > Not Screened STIs </option>
+            <option value="Care_adherence_edu_No" > Not Adherence to care? </option>
+        </select>
+        </li>
+    </ul>
+    <button id="begin-search" class="btn-launch btn btn-positive btn-block">Submit</button>
+  </div>
+        <script type="text/javascript">
+            $(display());
+        </script>
+    </body>
+</html>

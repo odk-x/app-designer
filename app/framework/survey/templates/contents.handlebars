@@ -1,0 +1,19 @@
+<h3>Contents</h3>
+<ul data-role="listview" data-inset="true">
+    {{#each prompts}}
+        {{#unless hideInContents}}
+		<li data-shadow="false" data-icon-shadow="true" data-theme="a" data-icon="carat-r" data-iconpos="right" class="select-contents-item" label="{{_branch_label_enclosing_screen}}">
+            <a class="select-contents-item-btn">
+				{{#if display.title}}
+					<h3 class="ui-li-heading">{{#if display.title}}{{{localize display.title}}}{{/if}}</h3>
+				{{else}}
+					<h3 class="ui-li-heading">{{#if display.text}}{{{localize display.text}}}{{/if}}</h3>
+				{{/if}}
+                <p class="ui-li-desc">{{formattedValueForContentsDisplay}}</p>
+            </a>
+		</li>
+        {{/unless}}
+    {{else}}
+        <li><span>No prompts</span></li>
+    {{/each}}
+</ul>

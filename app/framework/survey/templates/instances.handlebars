@@ -1,0 +1,71 @@
+<div>
+    <div>
+        <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
+        <hr>
+    </div>
+
+    <div>
+        <center><p>ODK SURVEY</center>
+        <hr>
+    </div>
+
+    <div>
+        <p>Form Name: {{localize form_title}}</p>
+        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
+        <hr>
+    </div>
+
+    <div class="instanceClearDiv"></div>
+    <div>
+        <fieldset class="instanceNew ui-grid-a">
+            <div class="ui-block-a">
+                <p>Create new instance</p>
+            </div>
+            <div class="ui-block-b">
+                <div class="instanceRowControl" data-role="controlgroup" data-type="horizontal">
+                    <button class="createInstance" data-role="button" data-icon="plus" data-inline="true" data-iconpos="notext"></button>
+                </div>
+            </div>
+        </fieldset>
+        <hr>
+    </div>
+
+    <p>Previously created instances:</p>
+    <hr>
+    <div class="instanceList">
+        <ul data-role="listview">
+            {{#each instances}}
+                {{#if dateDivider}}
+                    <li data-role="list-divider">{{dateDivider}}</li>
+                {{/if}}
+                <li>
+                    <fieldset class="instanceListGrid ui-grid-a">
+                    <div class="ui-block-a">
+                        <p><strong>{{display_field}}</strong></p>
+                        <p><strong>Last Save Date:</strong></p>
+                        <p>{{savepoint_timestamp}}</p>
+                        {{#if savepoint_type}}
+                            {{#ifEqual savepoint_type_text "Finalized"}}
+                                <p><strong>{{savepoint_type_text}}</strong></p>
+                            {{else}}
+                                <p><strong>Incomplete</strong></p>
+                            {{/ifEqual}}
+                        {{else}}
+                            <p><strong>Incomplete</strong></p>
+                            <img class="ui-icon ui-icon-alert"/>
+                        {{/if}}
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="instanceRowControl" data-role="controlgroup" data-type="horizontal">
+                            <button id="{{instance_id}}" class="odk openInstance" data-icon="edit" data-inline="true" data-iconpos="notext" ></button>
+                            <button id="{{instance_id}}" class="odk deleteInstance" data-icon="delete" data-inline="true" data-iconpos="notext"></button>
+                        </div>
+                    </div>
+                    </fieldset>
+                </li>
+            {{else}}
+                <li>No saved instances.</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

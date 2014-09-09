@@ -1,0 +1,12 @@
+<div>
+    {{> labelHint}}
+    {{#if value}}
+        <ul data-role="listview" data-inset="true">
+        <li>Latitude : {{value.latitude}}</li>
+        <li>Longitude : {{value.longitude}}</li>
+        <li>Altitude : {{value.altitude}}</li>
+        <li>Accuracy : {{value.accuracy}}</li>
+        </ul>
+    {{/if}}
+    <button class="launch">{{localize buttonLabel}}</button>
+</div>

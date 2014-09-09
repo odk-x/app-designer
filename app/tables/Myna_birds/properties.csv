@@ -1,0 +1,50 @@
+_partition,_aspect,_key,_type,_value
+Column,City,displayChoicesList,string,[]
+Column,City,displayFormat,string,""
+Column,City,displayName,string,"""City"""
+Column,City,displayVisible,boolean,TRUE
+Column,City,joins,string,""
+Column,Day,displayChoicesList,string,[]
+Column,Day,displayFormat,string,""
+Column,Day,displayName,string,"""Day"""
+Column,Day,displayVisible,boolean,TRUE
+Column,Day,joins,string,""
+Column,Male_Myna_sightings,displayChoicesList,string,[]
+Column,Male_Myna_sightings,displayFormat,string,""
+Column,Male_Myna_sightings,displayName,string,"""Male_Myna_sightings"""
+Column,Male_Myna_sightings,displayVisible,boolean,TRUE
+Column,Male_Myna_sightings,joins,string,""
+Column,State,displayChoicesList,string,[]
+Column,State,displayFormat,string,""
+Column,State,displayName,string,"""State"""
+Column,State,displayVisible,boolean,TRUE
+Column,State,joins,string,""
+Column,Temperature,displayChoicesList,string,[]
+Column,Temperature,displayFormat,string,""
+Column,Temperature,displayName,string,"""Temperature"""
+Column,Temperature,displayVisible,boolean,TRUE
+Column,Temperature,joins,string,""
+ColumnColorRuleGroup,Male_Myna_sightings,ColumnColorRuleGroup.ruleList,object,"[{""mValue"":""200"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""4c7a35ef-093d-4f4d-b94c-323a1e1f93a8"",""mForeground"":-3695081,""mBackground"":-1},{""mValue"":""150"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""c12b4ae1-0ccc-4c0f-bd54-f4b6f459ca57"",""mForeground"":-5708750,""mBackground"":-1},{""mValue"":""100"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""e98e8093-d3ba-4d21-913f-474219175b33"",""mForeground"":-7615561,""mBackground"":-1},{""mValue"":""50"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""fc44c93d-a4f8-4bd5-8cfe-412d4241bcb1"",""mForeground"":-12621627,""mBackground"":-1},{""mValue"":""14"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""a93fda42-767e-493b-bf1d-3cc3f092f192"",""mForeground"":-1429479,""mBackground"":-1},{""mValue"":""13"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""cd6afac2-ac9f-40fa-bb86-6b8fb42db936"",""mForeground"":-3900908,""mBackground"":-1},{""mValue"":""12"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""93231b83-ee84-4a98-87e0-fa5b9480c0e0"",""mForeground"":-1715881,""mBackground"":-1},{""mValue"":""11"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""c85021a7-4fdb-414a-961b-459be949c9ab"",""mForeground"":-6962059,""mBackground"":-1},{""mValue"":""10"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""d4511044-1795-4da4-947d-a9b64c125d1c"",""mForeground"":-12562998,""mBackground"":-1},{""mValue"":""9"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""362a8286-9250-4b43-af4d-eeeb48bee308"",""mForeground"":-9223734,""mBackground"":-1},{""mValue"":""8"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""8b86b737-842a-41b7-bd6b-56e5fcec91d9"",""mForeground"":-4113201,""mBackground"":-1},{""mValue"":""7"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""533af764-029f-43ed-af1d-6c12de83e42d"",""mForeground"":-4443514,""mBackground"":-1},{""mValue"":""6"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""ef50819a-54c8-416a-a144-a25c390bf000"",""mForeground"":-6479852,""mBackground"":-1},{""mValue"":""5"",""mElementKey"":""Male_Myna_sightings"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""daf717f1-7357-46e2-b479-a5dbe1e2e5ae"",""mForeground"":-10863324,""mBackground"":-1}]"
+ColumnColorRuleGroup,Temperature,ColumnColorRuleGroup.ruleList,object,"[{""mValue"":""90"",""mElementKey"":""Temperature"",""mOperator"":""GREATER_THAN"",""mId"":""e2cfcd2c-1c1e-49b7-a543-bc489f7998aa"",""mForeground"":-3131336,""mBackground"":-1},{""mValue"":""60"",""mElementKey"":""Temperature"",""mOperator"":""LESS_THAN"",""mId"":""24a9bd29-fa9b-4a94-a16e-1d484dd15747"",""mForeground"":-8005429,""mBackground"":-1},{""mValue"":""75"",""mElementKey"":""Temperature"",""mOperator"":""GREATER_THAN_OR_EQUAL"",""mId"":""244725d9-770b-44db-b85a-fa9deaf734b6"",""mForeground"":-5276665,""mBackground"":-1},{""mValue"":""75"",""mElementKey"":""Temperature"",""mOperator"":""LESS_THAN"",""mId"":""568e1932-37c9-4c7e-9285-bf634b89de75"",""mForeground"":-7020667,""mBackground"":-1}]"
+GraphDisplayActivity.views,average_sightings_per_day_per_city,graphtype,string,Bar Graph
+GraphDisplayActivity.views,average_sightings_per_day_per_city,operation,string,Average
+GraphDisplayActivity.views,average_sightings_per_day_per_city,selectx,string,City
+GraphDisplayActivity.views,average_sightings_per_day_per_city,selecty,string,Male_Myna_sightings
+GraphDisplayActivity.views,sightings_vs_temperature,graphtype,string,Scatter Plot
+GraphDisplayActivity.views,sightings_vs_temperature,operation,string,Simple Plot
+GraphDisplayActivity.views,sightings_vs_temperature,selectr,string,Temperature
+GraphDisplayActivity.views,sightings_vs_temperature,selectx,string,Temperature
+GraphDisplayActivity.views,sightings_vs_temperature,selecty,string,Male_Myna_sightings
+GraphDisplayActivity.views,total_sightings_per_state,graphtype,string,Bar Graph
+GraphDisplayActivity.views,total_sightings_per_state,operation,string,Sum
+GraphDisplayActivity.views,total_sightings_per_state,selectx,string,State
+GraphDisplayActivity.views,total_sightings_per_state,selecty,string,Male_Myna_sightings
+Table,default,colOrder,string,"[""State"",""City"",""Day"",""Temperature"",""Male_Myna_sightings""]"
+Table,default,defaultViewType,string,Graph
+Table,default,displayName,string,"""Myna birds"""
+Table,default,groupByCols,string,[]
+Table,default,indexCol,string,""
+Table,default,primeCols,string,""
+Table,default,sortCol,string,""
+Table,default,sortOrder,string,""
+TableColorRuleGroup,default,StatusColumn.ruleList,object,"[{""mValue"":""synced"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""syncStateSynced"",""mForeground"":-16777216,""mBackground"":-1},{""mValue"":""synced_pending_files"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""syncStateSyncedPendingFiles"",""mForeground"":-16777216,""mBackground"":-1},{""mValue"":""new_row"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateNewRow"",""mForeground"":-16777216,""mBackground"":-16711936},{""mValue"":""changed"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateChanged"",""mForeground"":-16777216,""mBackground"":-935891},{""mValue"":""in_conflict"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateInConflict"",""mForeground"":-16777216,""mBackground"":-65536},{""mValue"":""deleted"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateDeleted"",""mForeground"":-16777216,""mBackground"":-12303292}]"

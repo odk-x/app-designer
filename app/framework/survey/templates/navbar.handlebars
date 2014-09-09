@@ -1,0 +1,46 @@
+<div class="odk-screen{{#unless disableSwipeNavigation}}{{#if enableNavigation}}{{#if enableForwardNavigation}} swipeForwardEnabled{{/if}}{{#if enableBackNavigation}} swipeBackEnabled{{/if}}{{/if}}{{/unless}}" >
+    {{#if showHeader}}
+        <div class="odk-header">
+            <div class="ui-grid-b my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
+                <div class="ui-block-a">
+                    <div class="odk-options-btn">
+                        <a data-role="button" data-rel="popup">{{localize form_title}}</a>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <a class="odk-prev-btn
+                    {{#unless enableBackNavigation}}ui-disabled{{/unless}}"
+                    data-role="button" data-icon="carat-l" data-iconpos="left">{{#unless hideNavigationButtonText}}back{{/unless}}</a> 
+                </div>
+                <div class="ui-block-c">   
+                    <a class="odk-next-btn
+                    {{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
+                    data-role="button" data-icon="carat-r" data-iconpos="right">{{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}continue{{else}}next{{/if}}{{/unless}}</a>               
+                </div>
+            </div>
+        </div>
+    {{/if}}
+    <div data-role="content" class="odk-scroll"><div class="odk-container"></div>
+</div>
+
+{{#if showFooter}} 
+    <div class="odk-footer">
+        <div class="ui-grid-b my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
+            <div class="ui-block-a">
+                <a class="odk-prev-btn
+                {{#unless enableBackNavigation}}ui-disabled{{/unless}}"
+                data-role="button" data-icon="carat-l" data-iconpos="left" style="display:block;">{{#unless hideNavigationButtonText}}back{{/unless}}</a> 
+            </div>
+            <div class="ui-block-b">
+
+            </div>
+            <div class="ui-block-c">   
+                <a class="odk-next-btn
+                {{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
+                data-role="button" data-icon="carat-r" data-iconpos="right" style="display:block;">{{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}continue{{else}}next{{/if}}{{/unless}}</a>               
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+

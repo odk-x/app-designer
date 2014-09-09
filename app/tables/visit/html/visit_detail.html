@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<!-- Detailed View -->
+    <head>
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/visit_detail.js"></script>
+        <!-- Define any HTML structure you rely on in your js files here, above
+        the call to display. -->
+        <h1>Visit on <span id="DATE"></span></h1>
+
+        <p>Plot name: <span id="plot-name"></span></p>
+        <p>Plant height: <span id="plant-height"></span></p>
+        <fieldset>
+            <legend>Plant Health:</legend>
+            <form>
+              <input type="radio" id="plant-health-good"/>Good</br>
+              <input type="radio" id="plant-health-fair"/>Fair</br>
+              <input type="radio" id="plant-health-bad"/>Bad</br>
+            </form>
+        </fieldset>
+
+        <fieldset>
+          <legend>Soil:</legend>
+          <form>
+            <input type="radio" id="medium-sand"/>Medium Sand</br>
+            <input type="radio" id="fine-sand"/>Fine Sand</br>
+            <input type="radio" id="sandy-loam"/>Sandy Loam</br>
+            <input type="radio" id="loam"/>Loam</br>
+          </form>
+        </fieldset>
+
+        <fieldset>
+          <legend>Bugs:</legend>
+          <input type="checkbox" id="bugs-earworm"/>Earworm</br>
+          <input type="checkbox" id="bugs-stink"/>Stink Bug</br>
+          <input type="checkbox" id="bugs-beetle"/>Beetle</br>
+          <input type="checkbox" id="bugs-cutworm"/>Cutworm</br>
+        </fieldset>
+
+        <h2>Observations:</h2>
+        <p id="observations"></p>
+        <script>
+            $(display());  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

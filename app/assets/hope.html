@@ -1,0 +1,58 @@
+<!--Menu-->
+<html>
+    <head>
+        <link href="css/hope-homescreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript">
+
+        // Displays homescreen
+        function display() {
+
+            /*    Screen new client option that launches new client list view */
+            var newClient = document.createElement("button");
+            newClient.setAttribute("id", "button1");
+            newClient.innerHTML = "Screen Female Client";
+            newClient.onclick = function() {
+                control.addRowWithSurvey(
+                    'femaleClients',
+                    'screenClient',
+                    null,
+                    null);
+            }
+            document.getElementById("wrapper").appendChild(newClient);    
+
+            // Follow up with existing client option that launches
+            // 'femaleClients' table list view
+            var followUp = document.createElement("button");
+            followUp.setAttribute("id", "button2");
+            followUp.innerHTML = "Follow Up with Existing Client";
+            followUp.onclick = function() {
+                control.openTableToListView(
+                    'femaleClients',
+                    null,
+                    null,
+                    'tables/femaleClients/html/femaleClients_list.html');
+            }
+            document.getElementById("wrapper").appendChild(followUp);    
+
+            // Send data option that luanches send finalized forms screen in
+            // Collect
+            var sendData = document.createElement("button");
+            sendData.setAttribute("id", "button3");
+            sendData.innerHTML = "Send Data";
+            sendData.onclick = function() {
+              // nothing for now
+              console.log("not plugged in, but should launch sync");
+            }
+            document.getElementById("wrapper").appendChild(sendData);    
+        }
+        
+        </script>
+    </head>
+
+    <body onload="display();">
+        <h1>Hope Study</h1>
+        <div id="wrapper"></div>
+    </body>
+</html>

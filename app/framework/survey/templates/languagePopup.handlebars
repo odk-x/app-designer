@@ -1,0 +1,7 @@
+<div data-role="popup" data-theme="a" data-overlay-theme="a" id="languagePopup">
+	<ul data-role="listview" data-inset="true" data-theme="a">
+		{{#each locales}}
+			<li><a id="{{name}}" class="language" data-rel="popup">{{localize display.text}}</a></li>
+		{{/each}}
+	</ul>
+</div>

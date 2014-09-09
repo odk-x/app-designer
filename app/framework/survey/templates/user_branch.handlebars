@@ -1,0 +1,24 @@
+{{#if passiveError}}
+    <div class="ui-bar ui-bar-a">
+        {{passiveError}}
+    </div>
+{{/if}}
+
+{{> labelHint}}
+<ul data-role="listview" data-inset="true">
+    {{#each choices}}
+        <li data-shadow="false" data-icon-shadow="true" data-theme="a" data-icon="carat-r" data-iconpos="right"class="branch-select-item" label="{{data_value}}" >
+            <a class="launch">
+            {{#if display.image}}
+                <center>
+                    <img style="max-width: 100%;max-height: 100%;" src="{{formDirectory}}{{localize display.image}}"></img>
+                </center>
+            {{/if}}
+            {{#if display.text}}
+                <h3 class="ui-li-heading">{{{localize display.text}}}</h3>
+            {{/if}}
+            </a>
+        </li>
+    {{/each}}
+</ul>
+

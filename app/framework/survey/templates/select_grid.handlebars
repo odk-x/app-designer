@@ -1,0 +1,52 @@
+{{#if passiveError}}
+    <div class="ui-bar ui-bar-a">
+        {{passiveError}}
+    </div>
+{{/if}}
+<form>
+    {{> labelHint}}
+        <div class="ui-grid-b">
+        {{#each choices}}
+            <div class="ui-block-{{colLetter}}">
+                <div class="ui-bar
+                {{#if checked}}
+                    ui-bar-b
+                {{else}}
+                    ui-bar-a
+                {{/if}} grid-select-item">
+                    <input
+                        {{#if ../select_one}}
+                            type="radio"
+                        {{else}}
+                            type="checkbox"
+                        {{/if}}
+                        {{#if checked}}
+                            checked="checked"
+                        {{/if}}
+                            
+                        {{! the name attribue has to be the same for all the options}}
+                        style="display:none;"
+                        name="{{../name}}"
+                        id="{{data_value}}"
+                        value="{{data_value}}" />
+                {{#if display.image}}
+                    <center>
+                        <img  style="max-width: 100%;max-height: 100%;" src="{{formDirectory}}{{localize display.image}}"></img>
+                    </center>
+                {{/if}}
+                {{#if display.text}}
+                    {{{localize display.text}}}
+                {{/if}}
+                </div>
+            </div>
+        {{/each}}
+        </div><!-- /grid-b -->
+    {{#unless required}}
+        {{#if false}}
+        {{#if display.deselect}}
+            <a data-role="button" data-mini="true" class="deselect">{{localize display.deselect}}</a>
+        {{/if}}
+        {{/if}}
+    {{/unless}}
+    <div style="clear:both;"></div>
+</form>

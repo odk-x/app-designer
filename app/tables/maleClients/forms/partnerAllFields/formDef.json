@@ -1,0 +1,10 @@
+Exception: Error: prompt 'name' is defined more than once with different data types. Clause: 'select_one' at row 48 on sheet: survey and at row: 23 on sheet: survey
+updateModel@xlsxconverter/XLSXConverter.js:1835:124
+xlsxconverter/XLSXConverter.js:2043:40
+forEach@[native code]
+forEach@xlsxconverter/underscore.js:78:18
+xlsxconverter/XLSXConverter.js:2027:19
+forEach@xlsxconverter/underscore.js:86:28
+developDataModel@xlsxconverter/XLSXConverter.js:2026:15
+processJSONWorkbook@xlsxconverter/XLSXConverter.js:2551:29
+global code@macGenConverter.js:46:62

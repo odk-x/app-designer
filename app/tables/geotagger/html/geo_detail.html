@@ -1,0 +1,49 @@
+<!-- GEO Example Detailed View -->
+<html>
+    <head>
+        <link href="../css/geo_detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+        <script type="text/javascript">
+        function display() {
+          if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
+              console.log('Welcome to Tables debugging in Chrome!');
+              $.ajax({
+                  url: control.getFileAsUrl('output/debug/geotagger_data.json'),
+                  async: false,  // do it first
+                  success: function(dataObj) {
+                      window.data.setBackingObject(dataObj);
+                  }
+              });
+          }
+          var srcMimeUri = data.get("Image");
+          var src = "";
+          if (srcMimeUri != null ) {
+              var mimeUriObject = JSON.parse(srcMimeUri);
+              var uriRelative = mimeUriObject.uriFragment;
+              var uriAbsolute = control.getFileAsUrl(uriRelative);
+              src = uriAbsolute;
+          }
+          
+          var body = document.getElementById("main");
+          body.style.background = "url(" + src + ")";
+
+          document.getElementById("TITLE").innerHTML = data.get("Description");
+          
+          var lat = data.get("Location_latitude");
+          var lng = data.get("Location_longitude");
+          document.getElementById("FIELD_1").innerHTML = lat;
+          document.getElementById("FIELD_2").innerHTML = lng;
+    
+        }
+        </script>
+    </head>
+<body id="main" onload="display();">
+    <div class="transparent">
+        <h1><span id="TITLE"></span></h1>
+        <p>Latitude: <span id="FIELD_1"></span></p>
+        <p>Longitude: <span id="FIELD_2"></span></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<style>
+
+.y_axis path{ 
+  display: none; 
+} 
+.y_axis line{ 
+  stroke: black; 
+} 
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+#plot {
+	clear: both;
+	overflow: auto;
+    font: 10px sans-serif;
+}
+</style>
+<div>{{> labelHint}}</div>
+{{#ifEqual graphType "piechart"}}
+<div>
+    <div>
+        Scale<a class="scale_up" data-role="button" data-inline="true">+</a><a class="scale_down" data-role="button" data-inline="true">-</a>
+    </div>
+</div>
+{{else}}
+<div>
+    y axis<a class="y_up" data-role="button" data-inline="true">+</a><a class="y_down" data-role="button" data-inline="true">-</a>
+    x axis<a class="x_up" data-role="button" data-inline="true">+</a><a class="x_down" data-role="button" data-inline="true">-</a>
+</div>
+{{/ifEqual}}
+<div id="plot"></div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<!-- Detailed View -->
+    <head>
+        <link href="../../../assets/css/scan_p1_detail.css" type="text/css" rel="stylesheet" />
+        <!--<link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />-->
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../../framework/libs/d3-amd/d3.js"></script>
+        <script type="text/javascript" src="../../../assets/js/scanQueries.js"></script>
+    </head>
+    <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
+    <body>
+        <script type="text/javascript" src="../js/scan_childvacc_822_pg1_detail.js"></script>
+        <!-- Define any HTML structure you rely on in your js files here, above
+        the call to display. -->
+
+        <h1>Child Emergency Contact</h1>
+        <p>Emergency Contact: <span id="emergency_contact"></span></p>
+        <div id="emergency_pic"></div>
+        <br>
+        <p>Child Name: <span id="CHILD_NAME"></span></p>
+        <div id="name_pic"></div>
+        <br>
+        <p>Child ID Number: <span id="CHILD_ID"></span></p>
+        <div id="childid_pic"></div>
+        <br>
+        <p>Child Birthdate: <span id="CHILD_BIRTHDATE"></span></p>
+        <div id="birthdate_pic"></div>
+        <br>
+        <p>Child's Sex: <span id="child_sex"></span></p>
+        <div id="sex_pic"></div>
+        <br>
+        <p>House Number: <span id="house_number"></span></p>
+        <div id="housenum_pic"></div>
+        <br>
+        <p>Village/Settlement: <span id="village_settlement"></span></p>
+        <div id="village_pic"></div>
+        <br>
+        <p>Town/City: <span id="town_city"></span></p>
+        <div id="city_pic"></div>
+        <br>
+        <p>Ward: <span id="ward_name"></span></p>
+        <div id="ward_pic"></div>
+        <br>
+        <p>LGA: <span id="lga_name"></span></p>
+        <div id="lga_pic"></div>
+        <br>
+        <p>State: <span id="state_name"></span></p>
+        <div id="state_pic"></div>
+        <br>
+        <p>Mother's Name: <span id="mom_name"></span></p>
+        <div id="mother_name_pic"></div>
+        <br>
+        <p>Mother's GSM #: <span id="mom_gsm"></span></p>
+        <div id="mother_gsm_pic"></div>
+        <br>
+        <p>Father's Name: <span id="dad_name"></span></p>
+        <div id="father_name_pic"></div>
+        <br>
+        <p>Father's GSM #: <span id="dad_gsm"></span></p>
+        <div id="father_gsm_pic"></div>
+        <br>
+        <p>Weight at Birth (kg): <span id="birth_weight"></span></p>
+        <div id="birth_weight_pic"></div>
+        <br>
+        <p>Reasons for extra care: <span id="other_reasons"></span></p>
+        <div id="otherreason_pic"></div>
+        <br>
+        <p>Patient Code: <span id="patient_code"></span></p>
+        <div id="patientcode_pic"></div>
+        <br>
+        
+        <!--<button id="display-detail" class="btn-launch btn btn-positive btn-block">View vaccination history</button>-->
+        <!--a href="#" onclick="control.openDetailView(
+                        'scan_page2',
+                        rowId,
+                        'tables/scan_page2/html/scan_p2_detail.html'
+                        );">View vaccination history</a-->
+        <script>
+            $(display());  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

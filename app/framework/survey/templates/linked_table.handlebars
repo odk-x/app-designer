@@ -1,0 +1,32 @@
+<div class="linkedTable layout-zebra rounded">
+  {{> labelHint}}
+  {{#unless display.hide_add_instance}}
+    <a class="addInstance" data-role="button" data-inline="true" data-icon="plus">{{new_instance_text}}</a>
+  {{/unless}}
+  <table class="linked-table">
+    <thead>
+      <tr class="tableGrid">
+        {{#each columns}}
+          <th> {{title}}</th>
+        {{/each}}
+      </tr>
+    </thead>
+    <tbody>
+    {{#each instances}}
+      <tr class="tableGrid">
+          <td class="tableGrid"><span>{{savepoint_timestamp}}</span></td>
+          <td class="tableGrid"><span>{{display_field}}</span></td>
+          <td class="tableGrid"><img class="ui-icon {{icon_class}}"/></td>
+          <td class="tableGrid rowControls">
+            <div class="rowControls" data-role="controlgroup" data-type="horizontal">
+              <a instance-id="{{instance_id}}" title="edit" class="openInstance" data-role="button" data-icon="edit" data-iconpos="notext" data-inline="true"/> 
+              {{#unless ../display.hide_delete_button}}
+              <a instance-id="{{instance_id}}" instance-name="{{display_field}}" title="delete" class="deleteInstance" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true"/> 
+              {{/unless}}
+            </div>
+          </td>
+      </tr>  
+    {{/each}}
+    </tbody>
+  </table>
+</div>

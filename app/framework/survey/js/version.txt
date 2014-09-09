@@ -1,0 +1,15 @@
+Versions:
+
+require: 2.0.8
+
+text: 2.0.10
+
+Underscore: 1.4.4
+
+Backbone: 1.0.0
+
+jquery: 1.9.1
+
+jquery.mobile: 1.4.2 
+
+Handlebars: 1.0.0.rc.4

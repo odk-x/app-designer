@@ -1,0 +1,21 @@
+{{#if passiveError}}
+    <div class="ui-bar ui-bar-a">
+        {{passiveError}}
+    </div>
+{{/if}}
+<form>
+    {{> labelHint}}
+    <select name="{{name}}">        
+        {{#each choices}}
+            <option 
+                {{#if checked}}
+                    selected="selected"
+                {{/if}}
+                value="{{data_value}}">
+                {{#if display.text}}
+                    {{{localize display.text}}}
+                {{/if}}
+            </option>
+        {{/each}}
+    </select>
+</form>

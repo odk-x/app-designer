@@ -1,0 +1,41 @@
+
+html, body {
+    height: 100%;
+}
+
+body {
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#all-screen {
+    height: 100%;
+    width: 100%:
+}
+
+#content-table {
+    height:80%;
+    width: 90%;
+    max-width: 500px;
+    margin: 80px auto 35px;
+    border-collapse: collapse;
+    top: 60px;
+}
+
+.description-text {
+    font-size: 24px;
+    width:100%;
+    max-width: 500px;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    text-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.btn-launch {
+   width: 100%;
+   max-width: 500px;
+   margin: 0 auto 35px;
+}

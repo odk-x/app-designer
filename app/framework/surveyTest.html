@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenDataKit Common Javascript Framework</title>
+    <link rel="stylesheet" type="text/css" id="theme" href="libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" />
+    <link rel="stylesheet" type="text/css" href="libs/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/odk-survey.css" />
+    <link rel="stylesheet" type="text/css" href="libs/mobiscroll-2.5.4/css/mobiscroll.core.css" />
+    <link rel="stylesheet" type="text/css" href="libs/mobiscroll-2.5.4/css/mobiscroll.animation.css" />
+    <link rel="stylesheet" type="text/css" href="libs/mobiscroll-2.5.4/css/mobiscroll.jqm.css" />
+    <link rel="stylesheet" type="text/css" id="custom-styles" />
+    <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
+    <script type="text/javascript" src="survey/js/shim.js"></script>
+    <script type="text/javascript" src="survey/js/landing.js"></script>
+</head>
+<body>
+<div id="block-ui"></div>
+<div data-theme="a" data-content-theme="a" data-role="page" >
+<div class="odk-screen">
+	<div data-role="header" class="odk-toolbar"></div>
+	<div data-role="content" class="odk-scroll">
+		<div class="odk-container">Please wait...</div>
+	</div>
+	<div data-role="footer" class="odk-footer"></div>
+</div>
+</div>
+<!-- move load of main.js to body since it is now dependent on shim.js having been loaded -->
+<script type="text/javascript" data-main="survey/test/autopilotMain" src="libs/require.2.1.8.js"></script>
+</body>
+</html>

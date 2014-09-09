@@ -1,0 +1,89 @@
+{{#if passiveError}}
+    <div class="ui-bar ui-bar-a">
+        {{passiveError}}
+    </div>
+{{/if}}
+<form>
+	<div class="inline-label-container">
+        {{> labelHint}}
+    </div>
+    <fieldset
+    data-role="controlgroup"
+    data-type="horizontal"
+    style="float:right;margin-left:1em;display:block;"
+    {{#eachProperty inputAttributes}}
+        {{property}}="{{value}}"
+    {{/eachProperty}}
+    >
+        {{#each choices}}
+            <label  
+                {{#unless checked}}
+                    {{#if display.fontColor.default}}
+                        {{#if display.backgroundColor.default}}
+                            style="background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
+                        {{else}}
+                            style="color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
+                        {{/if}}
+                    {{else}}
+                        {{#if display.backgroundColor.default}} 
+                            style="background-color:{{display.backgroundColor.default}};border-color:{{display.color}};"
+                        {{/if}}
+                    {{/if}}
+                {{else}}
+                    {{#if display.fontColor.selected}}
+                        {{#if display.backgroundColor.selected}}
+                            style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};"
+                        {{else}}
+                            {{#if display.backgroundColor.default}}
+                                style="color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};"
+                            {{else}}
+                                style="color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};"
+                            {{/if}} 
+                        {{/if}}
+                    {{else}}
+                        {{#if display.backgroundColor.selected}}
+                            {{#if display.fontColor.default}}
+                                style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
+                            {{else}}
+                                style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};"
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                {{/unless}}
+                >
+
+                <input
+                    {{#if ../select_one}}
+                        type="radio"
+                    {{else}}
+                        type="checkbox"
+                    {{/if}}
+                    {{#if checked}}
+                        checked="checked"
+                    {{/if}}
+
+                    {{! the name attribue has to be the same for all the options}}
+                    name="{{../name}}"
+                    id="{{data_value}}"
+                    value="{{data_value}}" />
+            {{#if display.image}}
+                <div>
+                    <img src="{{formDirectory}}{{localize display.image}}"></img>
+                </div>
+            {{/if}}
+            {{#if display.text}}
+                {{{localize display.text}}}
+            {{/if}}
+            </label>
+        {{/each}}
+    </fieldset>
+    {{#unless required}}
+        {{#if false}}
+        {{#if display.deselect}}
+            <div style="clear:both;"></div>
+            <a data-role="button" data-mini="true" class="deselect inline-deselect">{{localize display.deselect}}</a>
+        {{/if}}
+    	{{/if}}
+    {{/unless}}
+    <div style="clear:both;"></div>
+</form>

@@ -1,0 +1,39 @@
+_partition,_aspect,_key,_type,_value
+Column,Caffeinated,displayChoicesList,object,[]
+Column,Caffeinated,displayFormat,string,""
+Column,Caffeinated,displayName,string,"""Caffeinated"""
+Column,Caffeinated,displayVisible,boolean,TRUE
+Column,Caffeinated,joins,object,""
+Column,Fermented,displayChoicesList,object,[]
+Column,Fermented,displayFormat,string,""
+Column,Fermented,displayName,string,"""Fermented"""
+Column,Fermented,displayVisible,boolean,TRUE
+Column,Fermented,joins,object,""
+Column,Name,displayChoicesList,object,[]
+Column,Name,displayFormat,string,""
+Column,Name,displayName,string,"""Name"""
+Column,Name,displayVisible,boolean,TRUE
+Column,Name,joins,object,""
+Column,Origin,displayChoicesList,object,[]
+Column,Origin,displayFormat,string,""
+Column,Origin,displayName,string,"""Origin"""
+Column,Origin,displayVisible,boolean,TRUE
+Column,Origin,joins,object,""
+Column,Type_id,displayChoicesList,object,[]
+Column,Type_id,displayFormat,string,""
+Column,Type_id,displayName,string,"""Type_id"""
+Column,Type_id,displayVisible,boolean,TRUE
+Column,Type_id,joins,object,""
+DetailDisplayActivity,default,filename,string,tables/Tea_types/html/Tea_types_detail.html
+ListDisplayActivity,default,nameOfListView,string,List View 0
+ListDisplayActivity.views,List View 0,filename,string,tables/Tea_types/html/Tea_types_list.html
+Table,default,colOrder,string,"[""Type_id"",""Name"",""Caffeinated"",""Origin"",""Fermented""]"
+Table,default,defaultViewType,string,LIST
+Table,default,detailViewFileName,string,tables/Tea_types/html/Tea_types_detail.html
+Table,default,displayName,object,"""Tea types"""
+Table,default,groupByCols,object,[]
+Table,default,indexCol,string,""
+Table,default,listViewFileName,string,tables/Tea_types/html/Tea_types_list.html
+Table,default,sortCol,string,""
+Table,default,sortOrder,string,""
+TableColorRuleGroup,default,StatusColumn.ruleList,object,"[{""mValue"":""synced"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""syncStateSynced"",""mForeground"":-16777216,""mBackground"":-1},{""mValue"":""synced_pending_files"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""syncStateSyncedPendingFiles"",""mForeground"":-16777216,""mBackground"":-1},{""mValue"":""new_row"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateNewRow"",""mForeground"":-16777216,""mBackground"":-16711936},{""mValue"":""changed"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateChanged"",""mForeground"":-16777216,""mBackground"":-935891},{""mValue"":""in_conflict"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateInConflict"",""mForeground"":-16777216,""mBackground"":-65536},{""mValue"":""deleted"",""mElementKey"":""_sync_state"",""mOperator"":""EQUAL"",""mId"":""defaultRule_syncStateDeleted"",""mForeground"":-16777216,""mBackground"":-12303292}]"

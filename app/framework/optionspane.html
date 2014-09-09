@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<head>
+    <title>d3 test suite</title>
+    <link href="graph/css/d3css.css" type="text/css" rel="stylesheet" />
+    <link href="graph/css/line.css" type="text/css" rel="stylesheet" />
+    <link href="graph/css/box.css" type="text/css" rel="stylesheet" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="libs/jquery.1.10.2.js" type="text/javascript"></script>
+    <script src="libs/d3-amd/d3.js" type="text/javascript"></script>
+    <script src="libs/d3_chart_box.js" type="text/javascript"></script>
+    <script src="tables/js/utils.js" type="text/javascript"></script>
+    <script src="tables/js/data.js" type="text/javascript"></script>
+    <script src="tables/js/graph_data.js" type="text/javascript"></script>
+    <script src="tables/js/control.js" type="text/javascript"></script>
+    <script src="graph/bargraph/bargraph.js" type="text/javascript"></script>
+    <script src="graph/bargraph/bargraph_functions.js" type="text/javascript"></script>
+    <script src="graph/scatterplot/scatterplot.js" type="text/javascript"></script>
+    <script src="graph/scatterplot/scatterplot_functions.js" type="text/javascript"></script>
+    <script src="graph/box/boxplot.js" type="text/javascript"></script>
+    <script src="graph/box/box_plot_functions.js" type="text/javascript"></script>
+    <script src="graph/linegraph/linegraph.js" type="text/javascript"></script>
+    <script src="graph/piechart/piechart.js" type="text/javascript"></script>
+    <script src="graph/optionpaneinterface.js" type="text/javascript"></script>
+	<style>
+test {
+	min-height: 100%;
+	height: 100%;
+	width: 100%;
+}
+	</style>
+</head>
+<body>
+<div id="test"> </div>
+        <div id="edit_pane">
+			<p id="title"></p>
+
+			<form id="graphtype"> 
+				
+			</form>
+			<form id="operation"> 
+				
+			</form>
+			<form id="box_operation"> 
+				
+			</form>
+			<form id="selectx">
+
+			</form>
+			<form id="selectslice">
+
+			</form>
+			<form id="selecty">
+
+			</form>
+			<form id="selectr">
+
+			</form>
+			<form id="box_source">
+
+			</form>
+			<form id="iteration_counter">
+
+			</form>
+			<form id="box_values">
+
+			</form>
+        </div>
+        <div id = "scaling_button_pie_chart">
+            <div class = "button_set">
+                Scale
+                <button class="scale_button" id ="scale_up" type="button">+</button>
+                <button class="scale_button" id ="scale_down" type="button">-</button>
+            </div>
+        </div>
+        <div id = "scaling_buttons">
+            <div class = "button_set">
+                y axis
+                <button class="scale_button" id ="y_up" type="button">+</button>
+                <button class="scale_button" id ="y_down" type="button">-</button>
+            </div>
+                
+            <div class = "button_set">
+                x axis
+                <button class="scale_button" id ="x_up" type="button">+</button>
+                <button class="scale_button" id ="x_down" type="button">-</button>
+            </div>
+        </div>
+    <div id="svg_body">
+    </div>
+    <div class="observe_panel">
+        Column: <input type="text" size="16" id="observe_column">
+        Value: <input type="text" size="8" id="observe_value">
+        <!--Color: <div id="current_color"></div>-->
+    </div>
+	<script type="text/javascript">
+	// Initialize the global data object...
+	(function() {
+		var tableId = 'Myna_birds';
+		if ( data.setBackingObject !== undefined ) {
+			$.ajax({
+				url: getUrl('output/debug/' + tableId + '_data.json'),
+				success: function(dataObj) {
+					data.setBackingObject(dataObj);
+				},
+				async: false
+			});
+		}
+	})();
+	</script>
+</body>

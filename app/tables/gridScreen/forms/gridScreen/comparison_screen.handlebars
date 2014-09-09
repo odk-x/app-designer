@@ -1,0 +1,160 @@
+<div class="odk-screen{{#unless disableSwipeNavigation}}{{#if enableNavigation}}{{#if enableForwardNavigation}} swipeForwardEnabled{{/if}}{{#if enableBackNavigation}} swipeBackEnabled{{/if}}{{/if}}{{/unless}}" >
+    {{#if showHeader}}
+        <div class="odk-header">
+            <div class="ui-grid-b my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
+                <div class="ui-block-a">
+                    <div class="odk-options-btn">
+                        <a data-role="button" data-rel="popup">{{localize form_title}}</a>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <a class="odk-prev-btn
+                    {{#unless enableBackNavigation}}ui-disabled{{/unless}}"
+                    data-role="button" data-icon="carat-l" data-iconpos="left">{{#unless hideNavigationButtonText}}back{{/unless}}</a> 
+                </div>
+                <div class="ui-block-c">   
+                    <a class="odk-next-btn
+                    {{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
+                    data-role="button" data-icon="carat-r" data-iconpos="right">{{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}continue{{else}}next{{/if}}{{/unless}}</a>               
+                </div>
+            </div>
+        </div>
+    {{/if}}
+
+<style>
+    table {
+        padding: 15px; 
+        border-collapse:collapse; 
+        width:100%;
+        border-radius: 5px 5px 5px 5px;}
+    td:not(.not_this){
+        border-top: 2px solid #000000}
+    td:not(.tabs), .whichstore {
+        text-align:center;
+        -moz-border-radius:2px;
+        -webkit-border-radius:2px;
+        border-radius:2px}
+    img {
+        width: 20px; 
+        height: 20px; 
+        float:left;}
+    th{ 
+        background-color:white;
+        border-radius: 5px 5px 5px 5px;
+        padding:5px;
+        border-bottom: 3px solid #000000}
+    tr, .whichstore{
+        background-color:white;
+        border-radius: 5px 5px 5px 5px;}
+    h2 {padding-top:15px;
+        padding-bottom:0px}
+    p {
+        font-style:italic}
+    .mycontainer { 
+        padding: 15px;
+        border-radius: 10px 10px 10px 10px;
+        background: #3388cc}
+    span {
+        text-align:center}
+    .item {
+        width:40%}
+    .w {
+        background-color: white; padding 10px; border-radius: 5px 5px 5px 5px}
+    .odk-container {
+        background-color: #e6e6e6; 
+        width:70%; 
+        margin:0 auto 0 auto;
+        border-bottom:15px solid #e6e6e6}
+</style>
+
+
+
+<div data-role="content" class="odk-scroll"><div class="odk-container">
+
+<h2>Price Comparisons</h2>
+<p>Please enter items and their prices.</p>
+
+<div class="mycontainer">
+<table class="mytable">
+  <colgroup>
+    <col span="3" style="border-right:2px solid #000000">
+  </colgroup>
+  <tr class="w">
+    <th>Items</th>
+    <th class="tabs"><img src="http://www.frugallivingnw.com/wp-content/uploads/2012/01/qfc-logo.png"> <span>QFC</span></th>
+    <th class="tabs"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT2PYU-5WGRu0-de4DGwwVqGPpZ4gWqSWqHgfWdaPtg10ge10OY"> <span>Safeway</span></th>
+    <th class="tabs"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAK_M2MrioIeIHZNZCEIbOblzgjrBaNnAz9bWZtZjP7eO5eaqc"> <span>Target</span></th>
+  </tr>
+
+  <tr>
+    <td class="item"><div field-name="item_1"></div></td>
+    <td><div field-name="QFC_item_1"></div></td>
+    <td><div field-name="Safeway_item_1"></div></td>
+    <td><div field-name="Target_item_1"></div></td>
+  </tr>
+  <tr>
+    <td class="item"><div field-name="item_2"></div></td>
+    <td><div field-name="QFC_item_2"></div></td>
+    <td><div field-name="Safeway_item_2"></div></td>
+    <td><div field-name="Target_item_2"></div></td>
+  </tr>
+  <tr>
+    <td class="item"><div field-name="item_3"></div></td>
+    <td><div field-name="QFC_item_3"></div></td>
+    <td><div field-name="Safeway_item_3"></div></td>
+    <td><div field-name="Target_item_3"></div></td>
+  </tr>
+  <tr>
+    <td class="item"><div field-name="item_4"></div></td>
+    <td><div field-name="QFC_item_4"></div></td>
+    <td><div field-name="Safeway_item_4"></div></td>
+    <td><div field-name="Target_item_4"></div></td>
+  </tr>
+  <tr>
+    <td class="item"><div field-name="item_5"></div></td>
+    <td><div field-name="QFC_item_5"></div></td>
+    <td><div field-name="Safeway_item_5"></div></td>
+    <td><div field-name="Target_item_5"></div></td>
+  </tr>
+  <tr>
+    <td class="item"><div field-name="item_6"></div></td>
+    <td><div field-name="QFC_item_6"></div></td>
+    <td><div field-name="Safeway_item_6"></div></td>
+    <td><div field-name="Target_item_6"></div></td>
+  </tr>
+  <tr>
+    <td class="item"><div field-name="Total"></div></td>
+    <td><div field-name="QFC_sum"></div></td>
+    <td><div field-name="Safeway_sum"></div></td>
+    <td><div field-name="Target_sum"></div></td>
+  </tr>
+</table>  
+
+</div>
+<div class="mycontainer" style="margin-top:15px">
+  <div class="whichstore" field-name="selected_store"></div>
+</div>
+
+</div></div>
+  
+
+{{! emit the footer always -- so that we get full-screen content area }}
+{{#if showFooter}} 
+    <div class="odk-footer">
+        <div class="ui-grid-b my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
+            <div class="ui-block-a">
+                <a class="odk-prev-btn
+                {{#unless enableBackNavigation}}ui-disabled{{/unless}}"
+                data-role="button" data-icon="carat-l" data-iconpos="left" style="display:block;">{{#unless hideNavigationButtonText}}back{{/unless}}</a> 
+            </div>
+            <div class="ui-block-b">
+
+            </div>
+            <div class="ui-block-c">   
+                <a class="odk-next-btn
+                {{#unless enableForwardNavigation}}ui-disabled{{/unless}}"
+                data-role="button" data-icon="carat-r" data-iconpos="right" style="display:block;">{{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}continue{{else}}next{{/if}}{{/unless}}</a>               
+            </div>
+        </div>
+    </div>
+{{/if}}

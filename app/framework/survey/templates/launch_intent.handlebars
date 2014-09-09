@@ -1,0 +1,45 @@
+<div>
+    {{> labelHint}}
+    {{#if value}}
+        <ul data-role="listview" data-inset="true">
+        {{#eachProperty value}}
+            <li>{{property}} : {{value}}</li>
+        {{else}}
+            <li>{{value}}</li>
+        {{/eachProperty}}
+        </ul>
+    {{/if}}
+    <button class="launch" {{#unless checked}}
+                    {{#if display.fontColor.default}}
+                        {{#if display.backgroundColor.default}}
+                            style="background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
+                        {{else}}
+                            style="color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
+                        {{/if}}
+                    {{else}}
+                        {{#if display.backgroundColor.default}} 
+                            style="background-color:{{display.backgroundColor.default}};border-color:{{display.color}};"
+                        {{/if}}
+                    {{/if}}
+                {{else}}
+                    {{#if display.fontColor.selected}}
+                        {{#if display.backgroundColor.selected}}
+                            style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};"
+                        {{else}}
+                            {{#if display.backgroundColor.default}}
+                                style="color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};"
+                            {{else}}
+                                style="color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};"
+                            {{/if}} 
+                        {{/if}}
+                    {{else}}
+                        {{#if display.backgroundColor.selected}}
+                            {{#if display.fontColor.default}}
+                                style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
+                            {{else}}
+                                style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};"
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                {{/unless}}">{{localize buttonLabel}}</button>
+<div>
