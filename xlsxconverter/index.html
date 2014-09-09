@@ -88,6 +88,10 @@ function removeEmptyStrings(rObjArr){
         _.each(row, function(value, key){
             if(_.isString(value) && value.trim() === "") {
                 return;
+            } else if (_.isString(value) && value == "NaN") {
+                return;
+            }  else if (!_.isString(value) && isNaN(value)) {
+                return;
             }
             outRow[key] = value;
         });
