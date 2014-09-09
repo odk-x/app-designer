@@ -1,0 +1,507 @@
+<html>
+<head>
+<!-- Author: mitchellsundt@gmail.com -->
+<title>Generate Stub XForm for Upload to ODK Aggregate</title>
+<!-- Conversion script for generating ODK1 Aggregate XForms definitions that 
+will allow ODK Survey to upload submissions to the ODK1 Aggregate server
+data processing path.  This enables forward migration of the device application
+to ODK Survey for flat forms without repeat groups. 
+
+To use, place your formDef.json files in separate directories ending in '-media'
+The script will search for formDef.json files in each such named directory, open
+that file, parse it, and synthesize a directoryName.xml file. The resulting 
+processed files can be uploaded using FormUploader into ODK1 Aggregate.
+-->
+<style type="text/css">
+/*<![CDATA[*/
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    font-size: 20px;
+}
+.fullheight {
+    position:fixed !important;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    overflow: auto;
+}
+#drop{
+    background-color: white;
+    border:2px dashed #bbb;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    padding:25px;
+    text-align:center;
+    font:20pt bold;
+    color:#bbb
+}
+#browse {
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 1em;
+}
+#logging {
+    background-color: white;
+    width:99.5%;
+    margin: 0 auto;
+    height: 15%;
+    overflow: auto;
+    border: 1px solid grey;
+}
+#out{
+    overflow: auto;
+    width: 99.5%;
+	height:20%;
+    margin: 0 auto;
+    max-height:50%;
+    border: 1px solid grey;
+}
+#save {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.bottompanel.panel {
+    border-bottom: 0px;
+}
+.panel {
+    background-color: #f5f5f5;
+    border: 1px solid lightgray;
+    margin: 0 auto;
+    height: inherit;
+    padding: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+.input {
+    margin-top: 10px;
+    padding-left: .5em;
+    font-size: 20px;
+}
+/*]]>*/
+</style>
+<script type="text/javascript" src="underscore.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+var logContainsError = 0; // count the occurances of 'rror' in logging output
+
+function wlogBase(logString, color) {
+    var errorEl = document.createElement("p");
+    if ( color !== undefined ) {
+        logString = "<font color='" + color + "'>" + logString + "</font>";
+    }
+    errorEl.innerHTML = logString;
+    var preElement = document.getElementById('logging');
+    // add logging entry
+    preElement.appendChild(errorEl);
+    // adjust scrolling to show last line of logging output...
+    var sh = preElement.scrollHeight;
+    if ( sh > 0 ) {
+        preElement.scrollTop = sh;
+    } else {
+        preElement.scrollTop = preElement.offsetHeight;
+    }
+}
+
+function wlog(logString) {
+    if ( logString.indexOf('rror:') !== -1 ) {
+        logContainsError = logContainsError + 1;
+        wlogBase(logString, "red");
+    } else {
+        wlogBase(logString);
+    }
+}
+
+function clear_log() {
+    //Clear the warnings and errors:
+    var errorsEl = document.getElementById('logging');
+    while (errorsEl.hasChildNodes()) {
+        errorsEl.removeChild(errorsEl.lastChild);
+    }
+}
+
+function write_output(output) {
+    var existing = document.getElementById("out").value;
+    output = existing + output;
+    var out = document.getElementById("out");
+    if(out.innerHTML === undefined){
+        out.textContent = output;
+    } else {
+        out.innerHTML = output;
+    }
+}
+
+function clear_output() {
+    var out = document.getElementById("out");
+    if(out.innerHTML === undefined){
+        out.textContent = '';
+    } else {
+        out.innerHTML = '';
+    }
+}
+
+// needed for recursive structures...
+var instanceBody = '';
+var bindBody = '';
+var bodyBody = '';
+
+function generate(data) {
+    wlog("beginning processing");
+
+    document.getElementById('changeable').innerHTML = "Conversion progress:";
+
+    document.getElementById('out').innerHTML = '';
+    processFormDef(data);
+
+    if ( logContainsError > 0 ) {
+        wlogBase("FAILURE!", "red");
+    } else {
+        wlogBase("SUCCESS!", "green");
+    }
+}
+    
+function buildFormStructures( instanceBodyPrefix, bindPrefix, bodyPrefix, model ) { 
+    var enames = [];
+    var i, element, defn;
+    var contentType, bindPrefix2, bodyPrefix2; 
+    for ( element in model ) {
+        enames.push(element);
+    }
+    enames.sort();
+    for ( i = 0 ; i < enames.length ; ++i ) {
+        element = enames[i];
+        wlog("element: " + element);
+        defn = model[element];
+        if ( !defn.isSessionVariable ) {
+            if ( defn.type === "string" ) {
+                instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                bindBody += bindPrefix + element + '" type="string"/>\n';
+            } else if ( defn.type === "integer" ) {
+                instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                bindBody += bindPrefix + element + '" type="int"/>\n';
+            } else if ( defn.type === "number" ) {
+                instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                bindBody += bindPrefix + element + '" type="decimal"/>\n';
+            } else if ( defn.type === "array" ) {
+                instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                bindBody += bindPrefix + element + '" type="select"/>\n';
+            } else if ( defn.type === "object" ) {
+                if ( defn.elementType === "date" ) {
+                    instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                    bindBody += bindPrefix + element + '" type="date"/>\n';
+                } else if ( defn.elementType === "dateTime" ) {
+                    instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                    bindBody += bindPrefix + element + '" type="dateTime"/>\n';
+                } else if ( defn.elementType === "time" ) {
+                    instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                    bindBody += bindPrefix + element + '" type="time"/>\n';
+                } else if ( defn.elementType === "geopoint" ) {
+                    instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                    bindBody += bindPrefix + element + '" type="geopoint"/>\n';
+                } else if ( defn.elementType === "mimeUri" ) {
+                    instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                    contentType = defn.properties.contentType['default'];
+                    bindBody += bindPrefix + element + '" type="binary"/>\n';
+                    bodyBody += '<upload ref="' + bodyPrefix + element + '" mediatype="' + contentType + '"><label>Dummy</label></upload>\n';
+                } else if ( defn.isUnitOfRetention ) {
+                    instanceBody = instanceBody + instanceBodyPrefix + element + '/>\n';
+                    bindBody += bindPrefix + element + '" type="string"/>\n';
+                } else {
+                    // it is a recursive structure
+                    bindPrefix2 = bindPrefix + element + '/';
+                    bodyPrefix2 = bodyPrefix + element + '/';
+                    instanceBody = instanceBody + instanceBodyPrefix + element + '>\n';
+                    buildFormStructures( '  ' + instanceBodyPrefix, bindPrefix2, bodyPrefix2, defn.properties );
+                    instanceBody = instanceBody + instanceBodyPrefix + '/' + element + '>\n';
+                }
+            }
+        }
+    }
+}
+function getSettingValue( settings, id ) {
+    var entry = settings[id];
+    if ( entry != null ) {
+        return entry.value;
+    } else {
+        return null;
+    }
+}
+
+function processFormDef(formDef) {                    
+    var outputFile = "";
+    wlog("start of formDef file: " + formDef.substring(0,40));
+    try {
+        var jsonDefTopLevel = JSON.parse(formDef);
+        
+        var jsonDef = jsonDefTopLevel.specification;
+        var settings = jsonDef.settings;
+
+        var tableId = getSettingValue(settings, 'table_id');
+        var formName = 'ODK 2.0 ' + tableId;
+        var formId = getSettingValue(settings, 'form_id');
+        var formVersion = getSettingValue(settings, 'form_version');
+        var xmlInstanceName = getSettingValue(settings, 'xml_instance_name');
+        var xmlRootElementName = getSettingValue(settings, 'xml_root_element_name');
+        var xmlDeviceIdPropertyName = getSettingValue(settings, 'xml_device_id_property_name');
+        var xmlUserIdPropertyName = getSettingValue(settings, 'xml_user_id_property_name');
+        var xmlBase64RsaPublicKey = getSettingValue(settings, 'xml_base64_rsa_public_key');
+        var xmlSubmissionUrl = getSettingValue(settings, 'xml_submission_url');
+        
+        wlog("processing json file -- survey title: " + formName);
+        
+        if ( xmlRootElementName === null ) {
+            xmlRootElementName = 'data';
+        }
+        
+        // OK. we should have tableId, formId, formVersion, formName, xmlRootElementName
+        // 
+        // Now we can generate the XML form...
+        // Legacy forms use the tableId as the formId.
+        // Legacy forms use a synthesized uuid for the instanceId.
+        // They supply the formId, formVersion and rowId as metadata.
+		
+		var file;
+		// create empty output file
+		write_output('<h:html xmlns="http://www.w3.org/2002/xforms" \n'+
+				'  xmlns:h="http://www.w3.org/1999/xhtml" \n'+
+				'  xmlns:ev="http://www.w3.org/2001/xml-events" \n'+
+				'  xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n'+
+				'  xmlns:jr="http://openrosa.org/javarosa" \n'+
+				'  xmlns:orx="http://openrosa.org/xforms/" \n'+
+				'  xmlns:odk="http://www.opendatakit.org/xforms">\n'+
+				' <h:head>\n'+
+				'  <h:title>' + formName + '</h:title>\n'+
+				'  <model>\n'+
+				'    <instance>\n'+
+				'      <'+xmlRootElementName+' id="'+tableId+'">\n'+
+				'        <orx:meta>\n'+
+				'          <orx:instanceID/>\n'+
+				((xmlDeviceIdPropertyName === null) ? '' : 
+				'          <orx:deviceID/>\n') +
+				((xmlUserIdPropertyName === null) ? '' : 
+				'          <orx:userID/>\n') +
+				'          <orx:timeEnd/>\n' +
+				'          <instanceName/>\n' +
+				'          <rowID/>\n'+
+				'          <rowETag/>\n'+
+				'          <filterType/>\n'+
+				'          <filterValue/>\n'+
+				'          <formID/>\n'+
+				'          <locale/>\n'+
+				'          <savepointType/>\n'+
+				'          <savepointCreator/>\n'+
+				'          <savepointTimestamp/>\n'+
+				'        </orx:meta>');
+		instanceBody = "\n";
+		bindBody = "";
+		bodyBody = "";
+		var bindPrefix = '    <bind nodeset="/' + xmlRootElementName + '/';
+		var instanceBodyPrefix = '        <';
+		
+		wlog("before model analysis");
+		
+		bindBody += bindPrefix + 'meta/instanceID" type="string"/>\n';
+		if ( xmlDeviceIdPropertyName !== null) {
+			bindBody += bindPrefix + 'meta/deviceID" type="string"/>\n';
+		}
+		if ( xmlUserIdPropertyName !== null) {
+			bindBody += bindPrefix + 'meta/userID" type="string"/>\n';
+		}
+		bindBody += bindPrefix + 'meta/timeEnd" type="dateTime"/>\n';
+		bindBody += bindPrefix + 'meta/instanceName" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/rowID" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/rowETag" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/filterType" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/filterValue" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/formID" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/locale" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointType" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointCreator" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointTimestamp" type="string"/>\n';
+		
+		var model = jsonDef.model;
+		buildFormStructures( instanceBodyPrefix, bindPrefix, '', model );
+		write_output(instanceBody +
+				'      </'+xmlRootElementName+'> \n'+
+				'    </instance> \n');
+		write_output(bindBody);
+		if ( xmlSubmissionUrl !== null ) {
+			if ( xmlBase64RsaPublicKey !== null ) {
+				write_output('    <submission method="form-data-post" ref="/' + xmlRootElementName + '" action="' + xmlSubmissionUrl + '"  base64RsaPublicKey="' + xmlBase64RsaPublicKey + '" />\n');
+			} else {
+				write_output('    <submission method="form-data-post" ref="/' + xmlRootElementName + '" action="' + xmlSubmissionUrl + '" />\n');
+			}
+		}
+		write_output('  </model> \n'+
+				' </h:head> \n'+
+				' <h:body> \n'+
+				bodyBody +
+				' </h:body> \n'+
+				'</h:html>\n');
+    } catch(e) {
+        wlog("error: parsing failed for formDef.json file: " + String(e));
+    }
+};
+
+function handleSave(e) {
+    var uriContent = "data:application/octet-stream," + encodeURIComponent(document.getElementById("out").value);
+    var downloader = document.createElement("iframe");
+    downloader.style.display = "none";
+    downloader.src = uriContent;
+    document.body.appendChild(downloader);
+}
+
+
+//TODO: Test multiple forms
+function handleDrop(e) {
+    var drop = document.getElementById('drop');
+    document.getElementById('browsefile').value = '';
+    e.stopPropagation();
+    e.preventDefault();
+    if ( !drop.disabled ) {
+        var files = e.dataTransfer.files;
+        var f = files[0];
+        if ( f ) {
+            makeReader(f);
+        }
+    } else {
+        alert("drop ignored -- conversion in progress!");
+    }
+}
+
+var wasClicked = false;
+function handleFileChooserClick(e) {
+
+    var browse = document.getElementById("browsefile");
+    // reset the value so that re-selecting the file will trigger a change event...
+    browse.value = '';
+    
+    if ( browse.disabled ) {
+        e.stopPropagation();
+        e.preventDefault();
+        alert("choose file ignored -- conversion in progress!");
+        return;
+    }
+
+    // debounce the file chooser...
+    if ( wasClicked ) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    wasClicked = true;
+    setTimeout(function() {
+        wasClicked = false;
+    }, 1000);
+    return wasClicked;
+}
+
+function handleFileSelect(e) {
+    var files = e.target.files;
+    var f = files[0];
+    if ( f ) {
+        makeReader(f);
+    }
+}
+function enableActions() {
+    var browse = document.getElementById("browsefile");
+    browse.disabled = false;
+    var drop = document.getElementById('drop');
+    drop.disabled = false;
+    logContainsError = 0;
+}
+function makeReader(f) {
+    var browse = document.getElementById("browsefile");
+    var drop = document.getElementById('drop');
+    var reader = new FileReader();
+    var name = f.name;
+    //Clear the warnings and errors:
+    clear_log();
+
+    reader.onload = function(e) {
+        var data = e.target.result;
+        if(f.name.slice(-4) !== "json"){
+            wlog("Error: You must select the formDef.json file.");
+            wlog("You can convert your XLSX file to formDef.json using the XLSXConverter.");
+            enableActions();
+            /*
+            var cfb = CFB.read(data, {type:'binary'})
+            window.cfbs[name] = cfb;
+            //cfb.Paths.forEach(function(x){console.log(x); out.innerHTML+=x+"\n";});
+            var wb = parse_xlscfb(cfb);
+            var ws = wb.Sheets[wb.Directory[0]]
+            var csv = make_csv(ws);
+            var cmds = get_formulae(ws).join("\n");
+            out.innerHTML+=csv+"\n";
+            */
+        } else {
+             try {
+                generate(data);
+                enableActions();
+            } catch(e) {
+                wlog("Error: " + String(e));
+                enableActions();
+                throw e;
+            }
+        }
+    };
+    try {
+        browse.disabled = true;
+        drop.disabled = true;
+        clear_output();
+        reader.readAsText(f);
+    } catch(e) {
+        wlog("Error: Could not read file.");
+        enableActions();
+        throw e;
+    }    
+}
+
+function handleDragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+}
+
+window.onload = function() {
+    var browse = document.getElementById("browsefile");
+    var drop = document.getElementById('drop');
+
+    browse.addEventListener('click', handleFileChooserClick, false);
+    browse.addEventListener('change', handleFileSelect, false);
+    drop.addEventListener('dragover', handleDragover, false);
+    drop.addEventListener('drop', handleDrop, false);
+    browse.disabled = false;
+    drop.disabled = false;
+}
+//]]>
+</script>
+</head>
+<body class="fullembedded" >
+  <div>
+  <noscript>This page requires javascript and has only been tested in a Chrome browser</noscript>
+  <div class="panel">
+    <p>A <em>Stub Form Definition</em> can be uploaded into ODK Aggregate to enable 
+    ODK Survey to send submissions into ODK Aggregate's XForms XML submissions path (the one used by ODK Collect). </p>
+    <p><font color="blue">This <em>Stub Form Definition</em> cannot be used by ODK Collect.</font></p>
+    <div id="drop">Drop a formDef.json file here to generate a Stub Form Definition.</div>
+  </div>
+  <div id="browse">
+ Select a formDef.json file from which to generate a Stub Form Definition<br/><input class="input" type="file" id="browsefile" disabled="true"/>
+  </div>
+  <div class="panel">
+  <p id="changeable">Status</p>
+  <div id="logging">
+  </div>
+  </div>
+  <div class="panel bottompanel">
+    <button onclick="handleSave();" id="save">Save</button>
+    <p>Output (the <em>Stub Form Definition</em>):</p>
+    <textarea id="out" rows="18"></textarea>
+  </div>
+</body>
+</html>

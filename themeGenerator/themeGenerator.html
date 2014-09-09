@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Theme Generator</title>
+    <script src="./lib/jquery.1.10.2.js"></script>
+    <script src="./lib/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="./lib/colorpicker/spectrum.js"></script>
+    <script src="./lib/FileSaver.js"></script>
+    <script type="text/javascript" src="../app/framework/survey/js/shim.js"></script>
+    <script type="text/javascript">
+
+      var pageStack = []; // keeps track of nested open pages
+
+      // opens a new form from the current screen within the iframe
+      function pushPageAndOpen(value) {
+        var ps = document.getElementById('odk_view');
+        var parent = ps.parentNode;
+        ps.id = 'odk_view-' + pageStack.length;
+        pageStack.push(ps.contentWindow.shim.refId);
+        ps.style.display = 'none';
+        var newIframe = document.createElement('iframe');
+        newIframe.className = 'iframe-view';
+        newIframe.setAttribute('name', 'odk_view');
+        newIframe.id = 'odk_view';
+        newIframe.src = value;
+        parent.appendChild(newIframe);
+        setTimeout(function(){
+        addToIFrame(generateCustomStyles());
+      },500);
+      }
+
+      // this should remove the current iframe and raise the prior one to the foreground
+      function closeAndPopPage() {
+        if ( pageStack.length > 0 ) {
+          var priorRefId = pageStack.pop();
+          var priorIframe = document.getElementById('odk_view-' + pageStack.length);
+          var ps = document.getElementById('odk_view');
+          var parent = ps.parentNode;
+          priorIframe.style.display = 'block';
+          parent.removeChild(ps); 
+          priorIframe.id = 'odk_view';
+          priorIframe.contentWindow.shim.refId = priorRefId;
+          priorIframe.contentWindow.redrawHook();
+        }
+      }
+
+    </script>
+    <link rel='stylesheet' href='./lib/colorpicker/spectrum.css'/>
+    <link rel='stylesheet' href='./lib/jquery-ui-1.10.3.custom.min.css'/>
+    <link rel='stylesheet' href='./generateStyle.css'/>
+    <script src="./themeGenerator.js"></script>
+  </head>
+  <body class="fullembedded" >
+  <div id="themeviewport">
+  <div id="iframe-size">
+    <label>Select Screen Size:</label>
+    <select id="select-screen-size"  name="select-screen-size" class="update-styles">
+      <option id="Droid" value="Droid" selected><label for="Droid">480 x 854 pixels (Droid)</label></option>
+      <option id="Nexus_S" value="Nexus_S" ><label for="Nexus_S">480 x 800 pixels (Nexus S, Nexus One)</label></option>
+      <option id="Galaxy_Nexus" value="Galaxy_Nexus" ><label for="Galaxy_Nexus">720 x 1280 pixels (Galaxy Nexus)</label></option>
+      <option  id="Nexus_4" value="Nexus_4" ><label for="Nexus_4">768 x 1280 pixels (Nexus 4)</label></option>
+      <option id="Nexus_7" value="Nexus_7" ><label for="Nexus_7">800 x 1280 pixels (Nexus 7)</label></option>
+      <option id="Tablet_7" value="Tablet_7" ><label for="Tablet_7">1024 x 600 pixels (7" Tablet)</label></option>
+      <option id="Tablet_10" value="Tablet_10" ><label for="Tablet_10">1280 x 800 pixels (10.1" Tablet)</label></option>
+      <option id="Nexus_10" value="Nexus_10" ><label for="Nexus_10">2560 x 1600 pixels (Nexus 10)</label></option>
+    </select>
+  </div>
+  <div id="toolbar" class="accordion ui-widget-content">
+    <h3>General</h3>
+    <div class="toobar-section">
+      <div class='nowrap'>
+        <label for="background-color">Background</label>
+        <div class="pull-right">
+          <input id='background-color' type="text" class="colorpicker update-styles" name="background-color" value="white"></input>
+        </div>
+      </div>
+      <div class='nowrap'>
+        <label for="font-color">Text</label>
+        <div class="pull-right">
+          <input id='font-color' type="text" class="colorpicker update-styles" name="font-color" value="#333"></input>
+        </div>
+      </div>
+      <!-- Fonts still need to be implemented -->
+      <div class='nowrap'>
+        <label for="font-family">Font</label>
+        <div class="pull-right">
+          <select id="select-font-family" class="update-styles" name="select-font-family">
+          <option> Serif </option>
+          <option> Arial </option>
+          <option> Sans-Serif </option>                                  
+          <option> Tahoma </option>
+          <option> Verdana </option>
+          <option> Lucida Sans Unicode </option>                               
+          </select>
+        </div>
+      </div>
+    </div>
+    <h3>Select Button Styles </h3>
+    <div class="toolbar-section">
+      <div class= "nowrap">
+        <label for="button-text-color">Text Color</label>
+        <div class="pull-right">
+          <input id='button-text-color' type="text" class="colorpicker update-styles" name="button-text-color" value="#333"></input>
+        </div>
+      </div>
+      <div class="nowrap"> 
+        <label for="button-color">Color</label>
+        <div class="pull-right">
+          <input id='button-color' type="text" class="colorpicker update-styles" name="button-color" value="#fafafa"></input>
+        </div>
+      </div>
+      <div class="nowrap">
+        <label for="button-selected-color">Selected color</label>
+        <div class="pull-right">
+          <input id='button-selected-color' type="text" class="colorpicker update-styles" name="button-selected-color" value="#fafafa"></input>
+        </div>
+      </div>  
+      <div class="nowrap">
+        <label for="button-border-color">Border color</label>
+        <div class="pull-right">
+          <input id='button-border-color' type="text" class="colorpicker update-styles" name="button-border-color" value="#bbb"></input>
+        </div>
+      </div>
+      <div class="nowrap">
+        <label for="button-radius">Rounded Edges</label>
+        <div class="pull-right">
+          <input id='button-radius' type="text" class="numberslider update-styles" name="button-radius" value="13px"></input>
+        </div>  
+      </div>
+      <div class="nowrap">
+        <label for="button-height">Button Height</label>
+        <div class="pull-right">
+          <input id='button-height' type="text" class="numberslider update-styles" name="button-height" value="20px" disabled></input>
+        </div>  
+      </div>
+      <div class="nowrap">
+        <label for="button-height">Button Text Size</label>
+        <div class="pull-right">
+          <input id='button-text-size' type="text" class="numberslider update-styles" name="button-text-size" value="16px" disabled></input>
+        </div>  
+      </div>
+    </div>
+        <h3>Other Button Styles </h3>
+    <div class="toolbar-section">
+      <div class= "nowrap">
+        <label for="other-button-text-color">Text Color</label>
+        <div class="pull-right">
+          <input id='other-button-text-color' type="text" class="colorpicker update-styles" name="other-button-text-color" value="#333" disabled></input>
+        </div>
+      </div>
+      <div class="nowrap"> 
+        <label for="other-button-color">Color</label>
+        <div class="pull-right">
+          <input id='other-button-color' type="text" class="colorpicker update-styles" name="other-button-color" value="#fafafa" disabled></input>
+        </div>
+      </div>
+      <div class="nowrap">
+        <label for="other-button-selected-color">Selected color</label>
+        <div class="pull-right">
+          <input id='other-button-selected-color' type="text" class="colorpicker update-styles" name="other-button-selected-color" value="#fafafa" disabled></input>
+        </div>
+      </div>  
+      <div class="nowrap">
+        <label for="other-button-border-color">Border color</label>
+        <div class="pull-right">
+          <input id='other-button-border-color' type="text" class="colorpicker update-styles" name="other-button-border-color" value="#bbb" disabled></input>
+        </div>
+      </div>
+      <div class="nowrap">
+        <label for="other-button-radius">Rounded Edges</label>
+        <div class="pull-right">
+          <input id='other-button-radius' type="text" class="numberslider update-styles" name="other-button-radius" value="16px" disabled></input>
+        </div>  
+      </div>
+      <div class="nowrap">
+        <label for="other-button-height">Button Height</label>
+        <div class="pull-right">
+          <input id='other-button-height' type="text" class="numberslider update-styles" name="other-button-height" value="20px" disabled></input>
+        </div>  
+      </div>
+      <div class="nowrap">
+        <label for="other-button-height">Button Text Size</label>
+        <div class="pull-right">
+          <input id='other-button-text-size' type="text" class="numberslider update-styles" name="other-button-text-size" value="16px" disabled></input>
+        </div>  
+      </div>
+    </div>
+    <h3>Navbar Styles</h3>
+    <div>
+      <div class='nowrap'>
+        <label for="navbar-background-color">Background</label>
+        <div class="pull-right">
+          <input id='navbar-background-color' type="text" class="colorpicker update-styles" name="navbar-background-color" value="#f0f0f0"></input>
+        </div>
+      </div>
+      <div class='nowrap'>
+        <label for="navbar-button-color">Button Color</label>
+        <div class="pull-right">
+          <input id='navbar-button-color' type="text" class="colorpicker update-styles" name="navbar-button-color" value="#fafafa"></input>
+        </div>
+      </div>
+      <div class='nowrap'>
+        <label for="navbar-button-selected-color">Button selected Color</label>
+        <div class="pull-right">
+          <input id='navbar-button-selected-color' type="text" class="colorpicker update-styles" name="navbar-button-selected-color" value="#f0f0f0"></input>
+        </div>
+      </div>
+      <div class='nowrap'>
+        <label for="navbar-font-color">Font Color</label>
+        <div class="pull-right">
+          <input id='navbar-font-color' type="text" class="colorpicker update-styles" name="navbar-font-color" value="#333"></input>
+        </div>
+      </div>
+    </div>
+    <h3>Finish</h3>
+    <div>
+      <p>Press the button below to generate the neccesary CSS file</p> 
+      <button id="generateStyles">Generate Styles</button>
+    </div>
+  </div>
+      
+     <iframe id="odk_view" 
+      src='../app/framework/index.html?' class="iframe-view" width="480px" height = "854px"
+      >
+    </iframe>
+	</div>
+  </body>
+</html>

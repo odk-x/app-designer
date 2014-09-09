@@ -1,0 +1,113 @@
+/* Sets background color throughout the form and text color throughout the form */
+.odk-container, .odk-screen, .odk-scroll, .ui-page, .ui-li, .ui-page  {
+	color: {{font-color}};
+	background: {{background-color}}; 
+	text-shadow: 0 /*{d-body-shadow-x}*/ 1px /*{d-body-shadow-y}*/ 0 /*{d-body-shadow-radius}*/ {{background-color-reduce}} /*{d-body-shadow-color}*/;
+  
+}
+/* Sets question text color and size */
+.odk-label {
+	color: {{font-color}};
+    font-size: large;
+}
+
+/* Sets hint text font color, size, and italic */
+.odk-hint {
+	color: {{font-color}};
+	font-size: 95%;
+    font-style: italic;
+}
+
+/********************* Navbar styles */  /* out of date ***************************************/
+.odk-header{
+	border:1px solid {{navbar-background-color-start}};
+	background-image: -webkit-linear-gradient({{navbar-background-color-start}}, {{navbar-background-color-end}});
+	color:{{navbar-font-color}};
+	font-weight:bold;
+	font-family:inherit;
+}
+.odk-options-btn .ui-link, .odk-prev-btn, .odk-next-btn {
+	background-image: -webkit-linear-gradient({{navbar-button-color-start}}, {{navbar-button-color-end}});
+	font-weight:bold;
+	color:{{navbar-font-color}};
+}
+
+.odk-options-btn .ui-link:hover, .odk-prev-btn:hover, .odk-next-btn:hover {
+	background-image: -webkit-linear-gradient({{navbar-button-selected-color}}, {{navbar-button-selected-color-end}});
+	font-weight:bold;
+	color:{{navbar-font-color}};
+}
+/********************* End Navbar Styles ***************************************/
+
+
+
+
+/************ other buttons settings *********/
+.ui-btn-up-d, .ui-btn-down-d {
+	border:1px solid {{other-button-border-color}}; 
+	font-weight:bold; color: {{other-button-text-color}}; 
+}
+.ui-btn-up-d {
+	background-image: -webkit-linear-gradient({{other-button-color-start}}, {{other-button-color-end}});
+}
+.ui-btn-down-d {
+	background-image: -webkit-linear-gradient({{other-button-selected-color-start}},{{other-button-selected-color-end}});
+}
+/******** End other buttons settings *********/
+
+/************* Select Button Settings ************************/
+.ui-radio-off, .ui-checkbox-off {
+	border:1px solid {{button-border-color}} !important;
+	background-image:-webkit-linear-gradient({{button-color-start}}, {{button-color-end}});
+	font-weight:bold;
+	color: {{button-text-color}} !important;
+	text-shadow: 0 1px 0 {{button-color-start}} !important;
+}
+.ui-checkbox-on, .ui-radio-on {
+	border:1px solid {{button-border-color}} !important;
+	background-image:-webkit-linear-gradient({{button-selected-color-start}}, {{button-selected-color-end}});
+	font-weight:bold;
+	color: {{button-text-color}} !important;
+	text-shadow: 0 1px 0 {{button-selected-color-start}} !important;
+}
+
+/******* end select button setttings *******/
+
+/******* fixes the zebra coloring on the main page *******/
+.instanceList.layout-zebra .ui-li-static {
+	background-image : -webkit-linear-gradient({{background-color}}, {{background-color}}) !important;
+	color: {{font-color}} !important;
+	text-shadow: 0 1px 0 {{background-color-reduce}} !important;
+}
+.instanceList.layout-zebra li:nth-child(even) {
+	background-image : -webkit-linear-gradient({{background-color-reduce}}, {{background-color-reduce}}) !important;
+}
+/********* end Zebra coloring *********/
+
+
+/******** Corner Rounding ***************/
+
+/* Corner Rounding for vertical lists */
+.ui-corner-all {
+	-webkit-border-radius:  {{button-radius}}; 
+	border-radius: {{button-radius}};
+}
+
+/*  Corner rounding for horizontal lists */
+.ui-controlgroup-horizontal {
+	-webkit-border-radius:  13px; 
+	border-radius: 13px;
+}
+
+/* Corner Rounding for text input boxes */
+.ui-input-text {
+	-webkit-border-radius:  .6em; /*{global-radii-blocks}*/
+	border-radius: .6em; /*{global-radii-blocks}*/
+}
+/************ End Corner Rounding ************/
+
+/*--------------*/
+
+
+
+

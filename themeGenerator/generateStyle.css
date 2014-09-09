@@ -1,0 +1,49 @@
+#toolbar {
+  margin : 10px;
+  background-color: #f2f2f2;
+  float: right;
+  clear: none;
+  width: 20%;
+  height: 100%;
+  padding: 0px;
+}
+
+#generate{
+  margin: 5px;
+  clear: none;
+}
+
+
+#toolbar label {
+  margin: 5px;
+  font-size: 10pt;
+  float: left;
+}
+
+#toolbar > div{
+  padding: 0px;
+}
+
+#select-font-family{
+  width: 70%;
+  float: right;
+  margin: 5px;
+}
+
+.toolbar-section{
+  height: 400px;
+}
+
+.nowrap {
+  width: 100%;
+  white-space: nowrap;
+  clear: both;
+  margin: 10px;
+}
+
+.pull-right{
+  float: right;
+  margin: 10px;
+}
+
+
