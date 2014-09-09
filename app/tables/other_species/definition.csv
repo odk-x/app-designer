@@ -1,9 +1,0 @@
-_element_key,_element_name,_element_type,_list_child_element_keys
-OS_FOL_B_focal_AnimID,OS_FOL_B_focal_AnimID,string,[]
-OS_FOL_date,OS_FOL_date,string,[]
-OS_OSL_local_species_name,OS_OSL_local_species_name,string,[]
-OS_comments,OS_comments,string,[]
-OS_duration,OS_duration,integer,[]
-OS_local_species_name_written,OS_local_species_name_written,string,[]
-OS_time_begin,OS_time_begin,string,[]
-OS_time_end,OS_time_end,string,[]
