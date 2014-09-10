@@ -7,7 +7,8 @@ function display() {
     });
 
     $('#follow-up').on('click', function() {
-        alert('Not yet implemented');
+        //alert('Not yet implemented');
+        control.launchHTML('assets/immunizationFindFollow-UP.html');
     });
     $('#coverage-rates').on('click', function() {
         control.launchHTML('assets/immunizationCoverageRatesVaccines.html');
@@ -15,5 +16,9 @@ function display() {
 
     $('#find-record').on('click', function() {
         control.launchHTML('assets/immunizationFindRecord.html');
+    });
+
+    $('#kpis-report').on('click', function() {
+        control.launchHTML('assets/immunizationCoverageRatesKPIsReportsMonths.html');
     });
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/hivPatientDisplayRecord.js"></script>
+        <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
+    </head>
+    <style>
+      .eachCell{
+         background-color: #E8E8E8;
+      }
+      .table-title {
+        background-color: steelblue;
+        color: white;
+      }
+      th {
+        text-align: center;
+        border: 2px solid white;
+      }
+      #button_id > .btn_style {
+        background-color: steelblue;
+        color: white;
+        width: 10em !important;
+      }
+    </style>
+    <body id="main">
+
+    <div class="container">
+
+    <div class="description-text" id="description">Pre-ARV Visit Details</div>
+      
+      <p>Name: <span id="name"></span></p>
+      <p>ID: <span id="id"></span></p>
+
+      <table id="hiv-table">
+
+        <tr>
+          <th class="table-title" >Visit Date</th>
+          <th class="table-title" >CD4 Count</th>
+          <th class="table-title" >CD4%</th>
+          <th class="table-title" >WHO Stage</th>
+          <th class="table-title" >TB</th>
+          <th class="table-title" >CTZ</th>
+          <th class="table-title" >INH</th>
+        </tr>     
+      </table>
+      <div id="button_id"></div>
+    </div> <!-- .container -->
+        <script type="text/javascript">
+            $(display());
+        </script>
+    </body>
+</html>

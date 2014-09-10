@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/findHivPatientForFollow-UP.js"></script>
+        <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
+    </head>
+    <body id="main">
+
+    <div class="container">
+
+      <div class="description-text" id="description">Follow Up Report</div>
+      <p>Patients Needing Follow-Up</p>
+
+      <table id="hiv-table">
+        <tr>
+          <th class="table-title" >Name</th>
+          <th class="table-title" >Village</th>
+          <th class="table-title" >Last Visit Date</th>
+          <th class="table-title" >Last CD4 Count</th>
+          <th class="table-title" >Days Overdue for Visit</th>
+          <th class="table-title" >View Detail</th>
+        </tr>
+        </tr>
+      </table>
+      <button id="go_home" class="btn-launch btn btn-positive btn-block">Home Page</button>
+    </div>  
+    <script type="text/javascript">
+      $(display());
+      $('#go_home').on('click', function() {
+        control.launchHTML('assets/demoForHivReport.html');
+      });
+    </script>
+    </body>
+    <style>
+    
+      .table-title {
+        text-align: center;
+        font-size: 24px;
+        padding-left: 10px !important;
+        padding-right:10px !important; 
+      }
+      .textAllign{
+        text-align: center;
+      }
+       
+    </style>
+</html>
