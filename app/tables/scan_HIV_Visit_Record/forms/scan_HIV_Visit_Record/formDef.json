@@ -7,15 +7,15 @@
       },
       {
         "type": "read_only_image",
-        "name": "patient_name_image0",
+        "name": "date_of_record_image0",
         "hideInContents": true,
         "_row_num": 3
       },
       {
         "type": "string",
-        "name": "patient_name",
+        "name": "date_of_record",
         "display": {
-          "text": "patient_name"
+          "text": "date_of_record"
         },
         "_row_num": 4
       },
@@ -29,15 +29,15 @@
       },
       {
         "type": "read_only_image",
-        "name": "GSM_num_image0",
+        "name": "patient_ID_image0",
         "hideInContents": true,
         "_row_num": 7
       },
       {
-        "type": "string",
-        "name": "GSM_num",
+        "type": "integer",
+        "name": "patient_ID",
         "display": {
-          "text": "GSM_num"
+          "text": "patient_ID"
         },
         "_row_num": 8
       },
@@ -51,15 +51,15 @@
       },
       {
         "type": "read_only_image",
-        "name": "date_of_record_image0",
+        "name": "patient_name_image0",
         "hideInContents": true,
         "_row_num": 11
       },
       {
         "type": "string",
-        "name": "date_of_record",
+        "name": "patient_name",
         "display": {
-          "text": "date_of_record"
+          "text": "patient_name"
         },
         "_row_num": 12
       },
@@ -73,15 +73,15 @@
       },
       {
         "type": "read_only_image",
-        "name": "patient_ID_image0",
+        "name": "GSM_num_image0",
         "hideInContents": true,
         "_row_num": 15
       },
       {
-        "type": "integer",
-        "name": "patient_ID",
+        "type": "string",
+        "name": "GSM_num",
         "display": {
-          "text": "patient_ID"
+          "text": "GSM_num"
         },
         "_row_num": 16
       },
@@ -95,15 +95,15 @@
       },
       {
         "type": "read_only_image",
-        "name": "date_next_visit_image0",
+        "name": "CD4_count_image0",
         "hideInContents": true,
         "_row_num": 19
       },
       {
-        "type": "string",
-        "name": "date_next_visit",
+        "type": "integer",
+        "name": "CD4_count",
         "display": {
-          "text": "date_next_visit"
+          "text": "CD4_count"
         },
         "_row_num": 20
       },
@@ -117,15 +117,15 @@
       },
       {
         "type": "read_only_image",
-        "name": "CD4_count_image0",
+        "name": "CD4_percent_image0",
         "hideInContents": true,
         "_row_num": 23
       },
       {
         "type": "integer",
-        "name": "CD4_count",
+        "name": "CD4_percent",
         "display": {
-          "text": "CD4_count"
+          "text": "CD4_percent"
         },
         "_row_num": 24
       },
@@ -139,16 +139,17 @@
       },
       {
         "type": "read_only_image",
-        "name": "CD4_percent_image0",
+        "name": "screen_for_tb_image0",
         "hideInContents": true,
         "_row_num": 27
       },
       {
-        "type": "integer",
-        "name": "CD4_percent",
+        "type": "select_one",
+        "name": "screen_for_tb",
         "display": {
-          "text": "CD4_percent"
+          "text": "screen_for_tb"
         },
+        "values_list": "screen_for_tb_grid_values",
         "_row_num": 28
       },
       {
@@ -161,17 +162,17 @@
       },
       {
         "type": "read_only_image",
-        "name": "TB_treatment_status_image0",
+        "name": "WHO_stage_image0",
         "hideInContents": true,
         "_row_num": 31
       },
       {
         "type": "select_one",
-        "name": "TB_treatment_status",
+        "name": "WHO_stage",
         "display": {
-          "text": "TB_treatment_status"
+          "text": "WHO_stage"
         },
-        "values_list": "TB_treatment_status_grid_values",
+        "values_list": "WHO_stage_grid_values",
         "_row_num": 32
       },
       {
@@ -184,17 +185,16 @@
       },
       {
         "type": "read_only_image",
-        "name": "INH_treatment_status_image0",
+        "name": "date_next_visit_image0",
         "hideInContents": true,
         "_row_num": 35
       },
       {
-        "type": "select_one",
-        "name": "INH_treatment_status",
+        "type": "string",
+        "name": "date_next_visit",
         "display": {
-          "text": "INH_treatment_status"
+          "text": "date_next_visit"
         },
-        "values_list": "INH_treatment_status_grid_values",
         "_row_num": 36
       },
       {
@@ -207,17 +207,17 @@
       },
       {
         "type": "read_only_image",
-        "name": "CTZ_treatment_status_image0",
+        "name": "TB_treatment_status_image0",
         "hideInContents": true,
         "_row_num": 39
       },
       {
         "type": "select_one",
-        "name": "CTZ_treatment_status",
+        "name": "TB_treatment_status",
         "display": {
-          "text": "CTZ_treatment_status"
+          "text": "TB_treatment_status"
         },
-        "values_list": "CTZ_treatment_status_grid_values",
+        "values_list": "TB_treatment_status_grid_values",
         "_row_num": 40
       },
       {
@@ -230,16 +230,17 @@
       },
       {
         "type": "read_only_image",
-        "name": "Name_HU_transferred_to_image0",
+        "name": "INH_treatment_status_image0",
         "hideInContents": true,
         "_row_num": 43
       },
       {
-        "type": "string",
-        "name": "Name_HU_transferred_to",
+        "type": "select_one",
+        "name": "INH_treatment_status",
         "display": {
-          "text": "Name_HU_transferred_to"
+          "text": "INH_treatment_status"
         },
+        "values_list": "INH_treatment_status_grid_values",
         "_row_num": 44
       },
       {
@@ -252,17 +253,17 @@
       },
       {
         "type": "read_only_image",
-        "name": "screen_for_tb_image0",
+        "name": "CTZ_treatment_status_image0",
         "hideInContents": true,
         "_row_num": 47
       },
       {
         "type": "select_one",
-        "name": "screen_for_tb",
+        "name": "CTZ_treatment_status",
         "display": {
-          "text": "screen_for_tb"
+          "text": "CTZ_treatment_status"
         },
-        "values_list": "screen_for_tb_grid_values",
+        "values_list": "CTZ_treatment_status_grid_values",
         "_row_num": 48
       },
       {
@@ -275,17 +276,17 @@
       },
       {
         "type": "read_only_image",
-        "name": "WHO_stage_image0",
+        "name": "permanent_status_image0",
         "hideInContents": true,
         "_row_num": 51
       },
       {
         "type": "select_one",
-        "name": "WHO_stage",
+        "name": "permanent_status",
         "display": {
-          "text": "WHO_stage"
+          "text": "permanent_status"
         },
-        "values_list": "WHO_stage_grid_values",
+        "values_list": "permanent_status_grid_values",
         "_row_num": 52
       },
       {
@@ -298,17 +299,16 @@
       },
       {
         "type": "read_only_image",
-        "name": "permanent_status_image0",
+        "name": "Name_HU_transferred_to_image0",
         "hideInContents": true,
         "_row_num": 55
       },
       {
-        "type": "select_one",
-        "name": "permanent_status",
+        "type": "string",
+        "name": "Name_HU_transferred_to",
         "display": {
-          "text": "permanent_status"
+          "text": "Name_HU_transferred_to"
         },
-        "values_list": "permanent_status_grid_values",
         "_row_num": 56
       },
       {
@@ -318,84 +318,12 @@
     ],
     "choices": [
       {
-        "choice_list_name": "TB_treatment_status_grid_values",
-        "data_value": "started",
-        "display": {
-          "text": "started"
-        },
-        "_row_num": 2
-      },
-      {
-        "choice_list_name": "TB_treatment_status_grid_values",
-        "data_value": "ongoing",
-        "display": {
-          "text": "ongoing"
-        },
-        "_row_num": 3
-      },
-      {
-        "choice_list_name": "TB_treatment_status_grid_values",
-        "data_value": "ended",
-        "display": {
-          "text": "ended"
-        },
-        "_row_num": 4
-      },
-      {
-        "choice_list_name": "INH_treatment_status_grid_values",
-        "data_value": "started",
-        "display": {
-          "text": "started"
-        },
-        "_row_num": 5
-      },
-      {
-        "choice_list_name": "INH_treatment_status_grid_values",
-        "data_value": "ongoing",
-        "display": {
-          "text": "ongoing"
-        },
-        "_row_num": 6
-      },
-      {
-        "choice_list_name": "INH_treatment_status_grid_values",
-        "data_value": "ended",
-        "display": {
-          "text": "ended"
-        },
-        "_row_num": 7
-      },
-      {
-        "choice_list_name": "CTZ_treatment_status_grid_values",
-        "data_value": "started",
-        "display": {
-          "text": "started"
-        },
-        "_row_num": 8
-      },
-      {
-        "choice_list_name": "CTZ_treatment_status_grid_values",
-        "data_value": "ongoing",
-        "display": {
-          "text": "ongoing"
-        },
-        "_row_num": 9
-      },
-      {
-        "choice_list_name": "CTZ_treatment_status_grid_values",
-        "data_value": "ended",
-        "display": {
-          "text": "ended"
-        },
-        "_row_num": 10
-      },
-      {
         "choice_list_name": "screen_for_tb_grid_values",
         "data_value": "yes",
         "display": {
           "text": "yes"
         },
-        "_row_num": 11
+        "_row_num": 2
       },
       {
         "choice_list_name": "screen_for_tb_grid_values",
@@ -403,7 +331,7 @@
         "display": {
           "text": "no"
         },
-        "_row_num": 12
+        "_row_num": 3
       },
       {
         "choice_list_name": "screen_for_tb_grid_values",
@@ -411,7 +339,7 @@
         "display": {
           "text": "n/a"
         },
-        "_row_num": 13
+        "_row_num": 4
       },
       {
         "choice_list_name": "WHO_stage_grid_values",
@@ -419,7 +347,7 @@
         "display": {
           "text": "I"
         },
-        "_row_num": 14
+        "_row_num": 5
       },
       {
         "choice_list_name": "WHO_stage_grid_values",
@@ -427,7 +355,7 @@
         "display": {
           "text": "II"
         },
-        "_row_num": 15
+        "_row_num": 6
       },
       {
         "choice_list_name": "WHO_stage_grid_values",
@@ -435,13 +363,85 @@
         "display": {
           "text": "III"
         },
-        "_row_num": 16
+        "_row_num": 7
       },
       {
         "choice_list_name": "WHO_stage_grid_values",
         "data_value": "IV",
         "display": {
           "text": "IV"
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "TB_treatment_status_grid_values",
+        "data_value": "started",
+        "display": {
+          "text": "started"
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "TB_treatment_status_grid_values",
+        "data_value": "ongoing",
+        "display": {
+          "text": "ongoing"
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "TB_treatment_status_grid_values",
+        "data_value": "ended",
+        "display": {
+          "text": "ended"
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "INH_treatment_status_grid_values",
+        "data_value": "started",
+        "display": {
+          "text": "started"
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "INH_treatment_status_grid_values",
+        "data_value": "ongoing",
+        "display": {
+          "text": "ongoing"
+        },
+        "_row_num": 13
+      },
+      {
+        "choice_list_name": "INH_treatment_status_grid_values",
+        "data_value": "ended",
+        "display": {
+          "text": "ended"
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "CTZ_treatment_status_grid_values",
+        "data_value": "started",
+        "display": {
+          "text": "started"
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "CTZ_treatment_status_grid_values",
+        "data_value": "ongoing",
+        "display": {
+          "text": "ongoing"
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "CTZ_treatment_status_grid_values",
+        "data_value": "ended",
+        "display": {
+          "text": "ended"
         },
         "_row_num": 17
       },
@@ -573,84 +573,6 @@
       }
     },
     "choices": {
-      "TB_treatment_status_grid_values": [
-        {
-          "choice_list_name": "TB_treatment_status_grid_values",
-          "data_value": "started",
-          "display": {
-            "text": "started"
-          },
-          "_row_num": 2
-        },
-        {
-          "choice_list_name": "TB_treatment_status_grid_values",
-          "data_value": "ongoing",
-          "display": {
-            "text": "ongoing"
-          },
-          "_row_num": 3
-        },
-        {
-          "choice_list_name": "TB_treatment_status_grid_values",
-          "data_value": "ended",
-          "display": {
-            "text": "ended"
-          },
-          "_row_num": 4
-        }
-      ],
-      "INH_treatment_status_grid_values": [
-        {
-          "choice_list_name": "INH_treatment_status_grid_values",
-          "data_value": "started",
-          "display": {
-            "text": "started"
-          },
-          "_row_num": 5
-        },
-        {
-          "choice_list_name": "INH_treatment_status_grid_values",
-          "data_value": "ongoing",
-          "display": {
-            "text": "ongoing"
-          },
-          "_row_num": 6
-        },
-        {
-          "choice_list_name": "INH_treatment_status_grid_values",
-          "data_value": "ended",
-          "display": {
-            "text": "ended"
-          },
-          "_row_num": 7
-        }
-      ],
-      "CTZ_treatment_status_grid_values": [
-        {
-          "choice_list_name": "CTZ_treatment_status_grid_values",
-          "data_value": "started",
-          "display": {
-            "text": "started"
-          },
-          "_row_num": 8
-        },
-        {
-          "choice_list_name": "CTZ_treatment_status_grid_values",
-          "data_value": "ongoing",
-          "display": {
-            "text": "ongoing"
-          },
-          "_row_num": 9
-        },
-        {
-          "choice_list_name": "CTZ_treatment_status_grid_values",
-          "data_value": "ended",
-          "display": {
-            "text": "ended"
-          },
-          "_row_num": 10
-        }
-      ],
       "screen_for_tb_grid_values": [
         {
           "choice_list_name": "screen_for_tb_grid_values",
@@ -658,7 +580,7 @@
           "display": {
             "text": "yes"
           },
-          "_row_num": 11
+          "_row_num": 2
         },
         {
           "choice_list_name": "screen_for_tb_grid_values",
@@ -666,7 +588,7 @@
           "display": {
             "text": "no"
           },
-          "_row_num": 12
+          "_row_num": 3
         },
         {
           "choice_list_name": "screen_for_tb_grid_values",
@@ -674,7 +596,7 @@
           "display": {
             "text": "n/a"
           },
-          "_row_num": 13
+          "_row_num": 4
         }
       ],
       "WHO_stage_grid_values": [
@@ -684,7 +606,7 @@
           "display": {
             "text": "I"
           },
-          "_row_num": 14
+          "_row_num": 5
         },
         {
           "choice_list_name": "WHO_stage_grid_values",
@@ -692,7 +614,7 @@
           "display": {
             "text": "II"
           },
-          "_row_num": 15
+          "_row_num": 6
         },
         {
           "choice_list_name": "WHO_stage_grid_values",
@@ -700,13 +622,91 @@
           "display": {
             "text": "III"
           },
-          "_row_num": 16
+          "_row_num": 7
         },
         {
           "choice_list_name": "WHO_stage_grid_values",
           "data_value": "IV",
           "display": {
             "text": "IV"
+          },
+          "_row_num": 8
+        }
+      ],
+      "TB_treatment_status_grid_values": [
+        {
+          "choice_list_name": "TB_treatment_status_grid_values",
+          "data_value": "started",
+          "display": {
+            "text": "started"
+          },
+          "_row_num": 9
+        },
+        {
+          "choice_list_name": "TB_treatment_status_grid_values",
+          "data_value": "ongoing",
+          "display": {
+            "text": "ongoing"
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "TB_treatment_status_grid_values",
+          "data_value": "ended",
+          "display": {
+            "text": "ended"
+          },
+          "_row_num": 11
+        }
+      ],
+      "INH_treatment_status_grid_values": [
+        {
+          "choice_list_name": "INH_treatment_status_grid_values",
+          "data_value": "started",
+          "display": {
+            "text": "started"
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "INH_treatment_status_grid_values",
+          "data_value": "ongoing",
+          "display": {
+            "text": "ongoing"
+          },
+          "_row_num": 13
+        },
+        {
+          "choice_list_name": "INH_treatment_status_grid_values",
+          "data_value": "ended",
+          "display": {
+            "text": "ended"
+          },
+          "_row_num": 14
+        }
+      ],
+      "CTZ_treatment_status_grid_values": [
+        {
+          "choice_list_name": "CTZ_treatment_status_grid_values",
+          "data_value": "started",
+          "display": {
+            "text": "started"
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "CTZ_treatment_status_grid_values",
+          "data_value": "ongoing",
+          "display": {
+            "text": "ongoing"
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "CTZ_treatment_status_grid_values",
+          "data_value": "ended",
+          "display": {
+            "text": "ended"
           },
           "_row_num": 17
         }
@@ -759,74 +759,10 @@
         ],
         "elementKey": "scan_output_directory"
       },
-      "patient_name_image0": {
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementKey": "patient_name_image0_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "default": "image/*",
-            "elementKey": "patient_name_image0_contentType"
-          }
-        },
-        "elementKey": "patient_name_image0"
-      },
-      "patient_name": {
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "patient_name"
-      },
-      "GSM_num_image0": {
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementKey": "GSM_num_image0_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "default": "image/*",
-            "elementKey": "GSM_num_image0_contentType"
-          }
-        },
-        "elementKey": "GSM_num_image0"
-      },
-      "GSM_num": {
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "GSM_num"
-      },
       "date_of_record_image0": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 3,
             "section_name": "survey"
           }
         ],
@@ -848,7 +784,7 @@
       "date_of_record": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 4,
             "section_name": "survey"
           }
         ],
@@ -858,7 +794,7 @@
       "patient_ID_image0": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -880,17 +816,17 @@
       "patient_ID": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
         "type": "integer",
         "elementKey": "patient_ID"
       },
-      "date_next_visit_image0": {
+      "patient_name_image0": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 11,
             "section_name": "survey"
           }
         ],
@@ -899,30 +835,62 @@
         "properties": {
           "uriFragment": {
             "type": "string",
-            "elementKey": "date_next_visit_image0_uriFragment"
+            "elementKey": "patient_name_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "date_next_visit_image0_contentType"
+            "elementKey": "patient_name_image0_contentType"
           }
         },
-        "elementKey": "date_next_visit_image0"
+        "elementKey": "patient_name_image0"
       },
-      "date_next_visit": {
+      "patient_name": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
         "type": "string",
-        "elementKey": "date_next_visit"
+        "elementKey": "patient_name"
+      },
+      "GSM_num_image0": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementKey": "GSM_num_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "GSM_num_image0_contentType"
+          }
+        },
+        "elementKey": "GSM_num_image0"
+      },
+      "GSM_num": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "GSM_num"
       },
       "CD4_count_image0": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -944,7 +912,7 @@
       "CD4_count": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -954,7 +922,7 @@
       "CD4_percent_image0": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -976,148 +944,17 @@
       "CD4_percent": {
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
         "type": "integer",
         "elementKey": "CD4_percent"
       },
-      "TB_treatment_status_image0": {
-        "_defn": [
-          {
-            "_row_num": 31,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementKey": "TB_treatment_status_image0_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "default": "image/*",
-            "elementKey": "TB_treatment_status_image0_contentType"
-          }
-        },
-        "elementKey": "TB_treatment_status_image0"
-      },
-      "TB_treatment_status": {
-        "_defn": [
-          {
-            "_row_num": 32,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "TB_treatment_status_grid_values",
-        "elementKey": "TB_treatment_status"
-      },
-      "INH_treatment_status_image0": {
-        "_defn": [
-          {
-            "_row_num": 35,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementKey": "INH_treatment_status_image0_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "default": "image/*",
-            "elementKey": "INH_treatment_status_image0_contentType"
-          }
-        },
-        "elementKey": "INH_treatment_status_image0"
-      },
-      "INH_treatment_status": {
-        "_defn": [
-          {
-            "_row_num": 36,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "INH_treatment_status_grid_values",
-        "elementKey": "INH_treatment_status"
-      },
-      "CTZ_treatment_status_image0": {
-        "_defn": [
-          {
-            "_row_num": 39,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementKey": "CTZ_treatment_status_image0_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "default": "image/*",
-            "elementKey": "CTZ_treatment_status_image0_contentType"
-          }
-        },
-        "elementKey": "CTZ_treatment_status_image0"
-      },
-      "CTZ_treatment_status": {
-        "_defn": [
-          {
-            "_row_num": 40,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "CTZ_treatment_status_grid_values",
-        "elementKey": "CTZ_treatment_status"
-      },
-      "Name_HU_transferred_to_image0": {
-        "_defn": [
-          {
-            "_row_num": 43,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementKey": "Name_HU_transferred_to_image0_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "default": "image/*",
-            "elementKey": "Name_HU_transferred_to_image0_contentType"
-          }
-        },
-        "elementKey": "Name_HU_transferred_to_image0"
-      },
-      "Name_HU_transferred_to": {
-        "_defn": [
-          {
-            "_row_num": 44,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "Name_HU_transferred_to"
-      },
       "screen_for_tb_image0": {
         "_defn": [
           {
-            "_row_num": 47,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -1139,7 +976,7 @@
       "screen_for_tb": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 28,
             "section_name": "survey"
           }
         ],
@@ -1150,7 +987,7 @@
       "WHO_stage_image0": {
         "_defn": [
           {
-            "_row_num": 51,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -1172,7 +1009,7 @@
       "WHO_stage": {
         "_defn": [
           {
-            "_row_num": 52,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
@@ -1180,10 +1017,141 @@
         "valuesList": "WHO_stage_grid_values",
         "elementKey": "WHO_stage"
       },
+      "date_next_visit_image0": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementKey": "date_next_visit_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "date_next_visit_image0_contentType"
+          }
+        },
+        "elementKey": "date_next_visit_image0"
+      },
+      "date_next_visit": {
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "date_next_visit"
+      },
+      "TB_treatment_status_image0": {
+        "_defn": [
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementKey": "TB_treatment_status_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "TB_treatment_status_image0_contentType"
+          }
+        },
+        "elementKey": "TB_treatment_status_image0"
+      },
+      "TB_treatment_status": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "TB_treatment_status_grid_values",
+        "elementKey": "TB_treatment_status"
+      },
+      "INH_treatment_status_image0": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementKey": "INH_treatment_status_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "INH_treatment_status_image0_contentType"
+          }
+        },
+        "elementKey": "INH_treatment_status_image0"
+      },
+      "INH_treatment_status": {
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "INH_treatment_status_grid_values",
+        "elementKey": "INH_treatment_status"
+      },
+      "CTZ_treatment_status_image0": {
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementKey": "CTZ_treatment_status_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "CTZ_treatment_status_image0_contentType"
+          }
+        },
+        "elementKey": "CTZ_treatment_status_image0"
+      },
+      "CTZ_treatment_status": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "CTZ_treatment_status_grid_values",
+        "elementKey": "CTZ_treatment_status"
+      },
       "permanent_status_image0": {
         "_defn": [
           {
-            "_row_num": 55,
+            "_row_num": 51,
             "section_name": "survey"
           }
         ],
@@ -1205,13 +1173,45 @@
       "permanent_status": {
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "valuesList": "permanent_status_grid_values",
         "elementKey": "permanent_status"
+      },
+      "Name_HU_transferred_to_image0": {
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementKey": "Name_HU_transferred_to_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "Name_HU_transferred_to_image0_contentType"
+          }
+        },
+        "elementKey": "Name_HU_transferred_to_image0"
+      },
+      "Name_HU_transferred_to": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Name_HU_transferred_to"
       }
     },
     "section_names": [
@@ -1226,7 +1226,7 @@
         "prompts": [
           {
             "type": "read_only_image",
-            "name": "patient_name_image0",
+            "name": "date_of_record_image0",
             "hideInContents": true,
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1237,9 +1237,9 @@
           },
           {
             "type": "string",
-            "name": "patient_name",
+            "name": "date_of_record",
             "display": {
-              "text": "patient_name"
+              "text": "date_of_record"
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -1250,7 +1250,7 @@
           },
           {
             "type": "read_only_image",
-            "name": "GSM_num_image0",
+            "name": "patient_ID_image0",
             "hideInContents": true,
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1260,21 +1260,21 @@
             "promptIdx": 2
           },
           {
-            "type": "string",
-            "name": "GSM_num",
+            "type": "integer",
+            "name": "patient_ID",
             "display": {
-              "text": "GSM_num"
+              "text": "patient_ID"
             },
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
-            "_type": "string",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 3
           },
           {
             "type": "read_only_image",
-            "name": "date_of_record_image0",
+            "name": "patient_name_image0",
             "hideInContents": true,
             "_row_num": 11,
             "__rowNum__": 10,
@@ -1285,9 +1285,9 @@
           },
           {
             "type": "string",
-            "name": "date_of_record",
+            "name": "patient_name",
             "display": {
-              "text": "date_of_record"
+              "text": "patient_name"
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -1298,7 +1298,7 @@
           },
           {
             "type": "read_only_image",
-            "name": "patient_ID_image0",
+            "name": "GSM_num_image0",
             "hideInContents": true,
             "_row_num": 15,
             "__rowNum__": 14,
@@ -1308,21 +1308,21 @@
             "promptIdx": 6
           },
           {
-            "type": "integer",
-            "name": "patient_ID",
+            "type": "string",
+            "name": "GSM_num",
             "display": {
-              "text": "patient_ID"
+              "text": "GSM_num"
             },
             "_row_num": 16,
             "__rowNum__": 15,
             "_token_type": "prompt",
-            "_type": "integer",
+            "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 7
           },
           {
             "type": "read_only_image",
-            "name": "date_next_visit_image0",
+            "name": "CD4_count_image0",
             "hideInContents": true,
             "_row_num": 19,
             "__rowNum__": 18,
@@ -1332,21 +1332,21 @@
             "promptIdx": 8
           },
           {
-            "type": "string",
-            "name": "date_next_visit",
+            "type": "integer",
+            "name": "CD4_count",
             "display": {
-              "text": "date_next_visit"
+              "text": "CD4_count"
             },
             "_row_num": 20,
             "__rowNum__": 19,
             "_token_type": "prompt",
-            "_type": "string",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen18",
             "promptIdx": 9
           },
           {
             "type": "read_only_image",
-            "name": "CD4_count_image0",
+            "name": "CD4_percent_image0",
             "hideInContents": true,
             "_row_num": 23,
             "__rowNum__": 22,
@@ -1357,9 +1357,9 @@
           },
           {
             "type": "integer",
-            "name": "CD4_count",
+            "name": "CD4_percent",
             "display": {
-              "text": "CD4_count"
+              "text": "CD4_percent"
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -1370,7 +1370,7 @@
           },
           {
             "type": "read_only_image",
-            "name": "CD4_percent_image0",
+            "name": "screen_for_tb_image0",
             "hideInContents": true,
             "_row_num": 27,
             "__rowNum__": 26,
@@ -1380,21 +1380,22 @@
             "promptIdx": 12
           },
           {
-            "type": "integer",
-            "name": "CD4_percent",
+            "type": "select_one",
+            "name": "screen_for_tb",
             "display": {
-              "text": "CD4_percent"
+              "text": "screen_for_tb"
             },
+            "values_list": "screen_for_tb_grid_values",
             "_row_num": 28,
             "__rowNum__": 27,
             "_token_type": "prompt",
-            "_type": "integer",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen26",
             "promptIdx": 13
           },
           {
             "type": "read_only_image",
-            "name": "TB_treatment_status_image0",
+            "name": "WHO_stage_image0",
             "hideInContents": true,
             "_row_num": 31,
             "__rowNum__": 30,
@@ -1405,11 +1406,11 @@
           },
           {
             "type": "select_one",
-            "name": "TB_treatment_status",
+            "name": "WHO_stage",
             "display": {
-              "text": "TB_treatment_status"
+              "text": "WHO_stage"
             },
-            "values_list": "TB_treatment_status_grid_values",
+            "values_list": "WHO_stage_grid_values",
             "_row_num": 32,
             "__rowNum__": 31,
             "_token_type": "prompt",
@@ -1419,7 +1420,7 @@
           },
           {
             "type": "read_only_image",
-            "name": "INH_treatment_status_image0",
+            "name": "date_next_visit_image0",
             "hideInContents": true,
             "_row_num": 35,
             "__rowNum__": 34,
@@ -1429,22 +1430,21 @@
             "promptIdx": 16
           },
           {
-            "type": "select_one",
-            "name": "INH_treatment_status",
+            "type": "string",
+            "name": "date_next_visit",
             "display": {
-              "text": "INH_treatment_status"
+              "text": "date_next_visit"
             },
-            "values_list": "INH_treatment_status_grid_values",
             "_row_num": 36,
             "__rowNum__": 35,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen34",
             "promptIdx": 17
           },
           {
             "type": "read_only_image",
-            "name": "CTZ_treatment_status_image0",
+            "name": "TB_treatment_status_image0",
             "hideInContents": true,
             "_row_num": 39,
             "__rowNum__": 38,
@@ -1455,11 +1455,11 @@
           },
           {
             "type": "select_one",
-            "name": "CTZ_treatment_status",
+            "name": "TB_treatment_status",
             "display": {
-              "text": "CTZ_treatment_status"
+              "text": "TB_treatment_status"
             },
-            "values_list": "CTZ_treatment_status_grid_values",
+            "values_list": "TB_treatment_status_grid_values",
             "_row_num": 40,
             "__rowNum__": 39,
             "_token_type": "prompt",
@@ -1469,7 +1469,7 @@
           },
           {
             "type": "read_only_image",
-            "name": "Name_HU_transferred_to_image0",
+            "name": "INH_treatment_status_image0",
             "hideInContents": true,
             "_row_num": 43,
             "__rowNum__": 42,
@@ -1479,21 +1479,22 @@
             "promptIdx": 20
           },
           {
-            "type": "string",
-            "name": "Name_HU_transferred_to",
+            "type": "select_one",
+            "name": "INH_treatment_status",
             "display": {
-              "text": "Name_HU_transferred_to"
+              "text": "INH_treatment_status"
             },
+            "values_list": "INH_treatment_status_grid_values",
             "_row_num": 44,
             "__rowNum__": 43,
             "_token_type": "prompt",
-            "_type": "string",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen42",
             "promptIdx": 21
           },
           {
             "type": "read_only_image",
-            "name": "screen_for_tb_image0",
+            "name": "CTZ_treatment_status_image0",
             "hideInContents": true,
             "_row_num": 47,
             "__rowNum__": 46,
@@ -1504,11 +1505,11 @@
           },
           {
             "type": "select_one",
-            "name": "screen_for_tb",
+            "name": "CTZ_treatment_status",
             "display": {
-              "text": "screen_for_tb"
+              "text": "CTZ_treatment_status"
             },
-            "values_list": "screen_for_tb_grid_values",
+            "values_list": "CTZ_treatment_status_grid_values",
             "_row_num": 48,
             "__rowNum__": 47,
             "_token_type": "prompt",
@@ -1518,7 +1519,7 @@
           },
           {
             "type": "read_only_image",
-            "name": "WHO_stage_image0",
+            "name": "permanent_status_image0",
             "hideInContents": true,
             "_row_num": 51,
             "__rowNum__": 50,
@@ -1529,11 +1530,11 @@
           },
           {
             "type": "select_one",
-            "name": "WHO_stage",
+            "name": "permanent_status",
             "display": {
-              "text": "WHO_stage"
+              "text": "permanent_status"
             },
-            "values_list": "WHO_stage_grid_values",
+            "values_list": "permanent_status_grid_values",
             "_row_num": 52,
             "__rowNum__": 51,
             "_token_type": "prompt",
@@ -1543,7 +1544,7 @@
           },
           {
             "type": "read_only_image",
-            "name": "permanent_status_image0",
+            "name": "Name_HU_transferred_to_image0",
             "hideInContents": true,
             "_row_num": 55,
             "__rowNum__": 54,
@@ -1553,16 +1554,15 @@
             "promptIdx": 26
           },
           {
-            "type": "select_one",
-            "name": "permanent_status",
+            "type": "string",
+            "name": "Name_HU_transferred_to",
             "display": {
-              "text": "permanent_status"
+              "text": "Name_HU_transferred_to"
             },
-            "values_list": "permanent_status_grid_values",
             "_row_num": 56,
             "__rowNum__": 55,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen54",
             "promptIdx": 27
           },

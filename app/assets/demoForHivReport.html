@@ -1,3 +1,6 @@
+<!-- This page contains the html view for the report for hiv patients
+    It has contains four button like HMIS Report, Follow-Up, Search, and Filter 
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,8 +44,11 @@
   </div>
         <script type="text/javascript">
             $(display());
+            // attaching click event for the Home page button which will take the user to the home page relative
+            // to thispage
             $('#go_home').on('click', function() {
-                control.launchHTML('assets/index.html');
+                var url = control.getFileAsUrl('assets/index.html');
+                window.location.href = url;
              });
         </script>
     </body>

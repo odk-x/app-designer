@@ -49,8 +49,12 @@
   </div>
         <script type="text/javascript">
             $(display());
+            // attaching event to the Home Page button which will bring the user to the
+            // Home page of the reoprt relative to this page
             $('#go_home').on('click', function() {
-                control.launchHTML('assets/index.html');
+                //control.launchHTML('assets/index.html');
+                var url = control.getFileAsUrl('assets/index.html');
+                window.location.href = url;
             });
 
         </script>

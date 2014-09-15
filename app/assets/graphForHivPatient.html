@@ -120,7 +120,9 @@
         .attr("class", 'line')
         .attr('d', line);
     $('#go_home').on('click', function() {
-        control.launchHTML('assets/demoForHivReport.html');
+        //control.launchHTML('assets/demoForHivReport.html');
+        var url = control.getFileAsUrl('assets/demoForHivReport.html');
+        window.location.href = url;
     });
     </script>
   </body>

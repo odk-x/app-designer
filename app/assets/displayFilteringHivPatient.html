@@ -1,3 +1,5 @@
+<!-- This file displays the filtered result
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,23 +14,6 @@
         <script type="text/javascript" src="js/displayFilteringHivPatient.js"></script>
         <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
     </head>
-    <style>
-    p{
-      text-align: center;
-    }
-
-    body{
-      font-size: 24px;
-      text-align: center;
-    }
-    .table-title {
-      text-align: center;
-      font-size: 24px;
-      padding-left: 10px !important;
-      padding-right:10px !important; 
-    }
-    </style>
-
     <body id="main">
 
     <div class="container">
@@ -51,9 +36,37 @@
     </div>  
     <script type="text/javascript">
       $(display());
+      // attaching clink event to the Home Page button which will take the user to the home page relative to this page
       $('#go_home').on('click', function() {
-        control.launchHTML('assets/demoForHivReport.html');
+        var url = control.getFileAsUrl('assets/demoForHivReport.html');
+        window.location.href = url;
       });
     </script>
     </body>
+    <!-- Styling part for this page-->
+    <style>
+      p{
+        text-align: center;
+      }
+
+      body{
+        font-size: 16px;
+        text-align: center;
+      }
+      .table-title {
+        text-align: center;
+        font-size: 24px;
+        padding-left: 10px !important;
+        padding-right:10px !important; 
+      }
+      th {
+        text-align: center;
+      }
+      input {
+        height: 26px;
+        text-align: center;
+        width: 6em !important;
+        font-size: 16px;
+      }
+  </style>
 </html>

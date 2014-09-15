@@ -307,7 +307,8 @@ function display() {
     var btn = document.createElement("input");
     btn.type = 'button';
     btn.value = 'View Patient Data';
-    document.body.appendChild(btn);
+    var div = document.getElementById("button");
+    div.appendChild(btn);
     btn.onclick = function() {
         console.log("I am here");
         var pid = data.get('Patient_ID');

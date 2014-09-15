@@ -341,7 +341,9 @@ function display() {
     var btn = document.createElement("input");
     btn.type = 'button';
     btn.value = 'View vaccination history';
-    document.body.appendChild(btn);
+    var div = document.getElementById("button");
+    //document.body.appendChild(btn);
+    div.appendChild(btn);
     btn.onclick = function() {
         console.log("I am here");
         var pcode = data.get('patient_QRcode');

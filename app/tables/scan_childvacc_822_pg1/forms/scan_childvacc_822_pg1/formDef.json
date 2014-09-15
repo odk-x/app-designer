@@ -365,7 +365,7 @@
         "_row_num": 67
       },
       {
-        "type": "select_multiple",
+        "type": "select_one",
         "name": "reasonsforcare",
         "display": {
           "text": "reasonsforcare"
@@ -419,9 +419,9 @@
       },
       {
         "choice_list_name": "reasonsforcare_grid_values",
-        "data_value": "Less than 2.5kg at birth",
+        "data_value": "Less than 2kg at birth",
         "display": {
-          "text": "Less than 2.5kg at birth"
+          "text": "Less than 2kg at birth"
         },
         "_row_num": 4
       },
@@ -435,9 +435,9 @@
       },
       {
         "choice_list_name": "reasonsforcare_grid_values",
-        "data_value": "Baby is bottle-fed",
+        "data_value": "Baby is bottle fed",
         "display": {
-          "text": "Baby is bottle-fed"
+          "text": "Baby is bottle fed"
         },
         "_row_num": 6
       },
@@ -459,9 +459,9 @@
       },
       {
         "choice_list_name": "reasonsforcare_grid_values",
-        "data_value": "Other reasons (TB, leprosy, social issue, etc.)",
+        "data_value": "Other reasons",
         "display": {
-          "text": "Other reasons (TB, leprosy, social issue, etc.)"
+          "text": "Other reasons"
         },
         "_row_num": 9
       }
@@ -582,9 +582,9 @@
       "reasonsforcare_grid_values": [
         {
           "choice_list_name": "reasonsforcare_grid_values",
-          "data_value": "Less than 2.5kg at birth",
+          "data_value": "Less than 2kg at birth",
           "display": {
-            "text": "Less than 2.5kg at birth"
+            "text": "Less than 2kg at birth"
           },
           "_row_num": 4
         },
@@ -598,9 +598,9 @@
         },
         {
           "choice_list_name": "reasonsforcare_grid_values",
-          "data_value": "Baby is bottle-fed",
+          "data_value": "Baby is bottle fed",
           "display": {
-            "text": "Baby is bottle-fed"
+            "text": "Baby is bottle fed"
           },
           "_row_num": 6
         },
@@ -622,9 +622,9 @@
         },
         {
           "choice_list_name": "reasonsforcare_grid_values",
-          "data_value": "Other reasons (TB, leprosy, social issue, etc.)",
+          "data_value": "Other reasons",
           "display": {
-            "text": "Other reasons (TB, leprosy, social issue, etc.)"
+            "text": "Other reasons"
           },
           "_row_num": 9
         }
@@ -1185,11 +1185,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "reasonsforcare_items"
-        },
+        "type": "string",
         "valuesList": "reasonsforcare_grid_values",
         "elementKey": "reasonsforcare"
       },
@@ -1633,7 +1629,7 @@
             "promptIdx": 32
           },
           {
-            "type": "select_multiple",
+            "type": "select_one",
             "name": "reasonsforcare",
             "display": {
               "text": "reasonsforcare"
@@ -1642,7 +1638,7 @@
             "_row_num": 68,
             "__rowNum__": 67,
             "_token_type": "prompt",
-            "_type": "select_multiple",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen66",
             "promptIdx": 33
           },

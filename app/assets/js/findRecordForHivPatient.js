@@ -13,10 +13,11 @@ function display() {
 
         if (!id=="") {
             var results = hiv_scanQueries.getExistingRecordById(id);
-            //We only found one record associated with this id so use that
-            if (results.getCount()==1) {
+            // We could find multiple record with the same patient, but we will use the first record that
+            // we have found (Its because of demo purpose)
+            if (results.getCount() > 0) {
                 var rowId = results.getRowId(0);
-                //Open the list view for the found record
+                //Open the detail view for the found record
                 control.openDetailView(
                         'scan_HIV_Patient_Record',
                         rowId,
@@ -31,9 +32,11 @@ function display() {
             }
         } else if (!name==""){
             var results = hiv_scanQueries.getExistingRecordByName(name);
-            if (results.getCount()==1) {
+            // We could find multiple record with the same patient, but we will use the first record that
+            // we have found (Its because of demo purpose)
+            if (results.getCount() > 0) {
                 var rowId = results.getRowId(0);
-                //Open the list view for the found record
+                //Open the detail view for the found record
                 control.openDetailView(
                         'scan_HIV_Patient_Record',
                         rowId,
@@ -48,9 +51,11 @@ function display() {
             }
         } else if (!birthdate==""){
             var results = hiv_scanQueries.getExistingRecordByBirthDate(birthdate);
-            if (results.getCount()==1) {
+             // We could find multiple record with the same patient, but we will use the first record that
+            // we have found (Its because of demo purpose)
+            if (results.getCount() > 0) {
                 var rowId = results.getRowId(0);
-                //Open the list view for the found record
+                //Open the detail view for the found record
                 control.openDetailView(
                         'scan_HIV_Patient_Record',
                         rowId,

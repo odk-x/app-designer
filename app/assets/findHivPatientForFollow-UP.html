@@ -1,3 +1,7 @@
+<!-- This page contains the html view for the follow  up of the hiv patients. 
+It displays a table with Name, Village, Last visit date, Days overdue and View detail for
+each patinet who is late for her/his next visit
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +39,10 @@
     <script type="text/javascript">
       $(display());
       $('#go_home').on('click', function() {
-        control.launchHTML('assets/demoForHivReport.html');
+        //control.launchHTML('assets/demoForHivReport.html');
+        var url = control.getFileAsUrl('assets/demoForHivReport.html');
+        console.log('url: ' + url);
+        window.location.href = url;
       });
     </script>
     </body>
@@ -50,6 +57,17 @@
       .textAllign{
         text-align: center;
       }
+      th {
+      text-align: center;
+      padding-left: 10px !important;
+      padding-right:10px !important; 
+      }
+     input {
+      height: 2em;
+      text-align: center;
+      width: 6em !important;
+      font-size: 14px;
+     }
        
     </style>
 </html>

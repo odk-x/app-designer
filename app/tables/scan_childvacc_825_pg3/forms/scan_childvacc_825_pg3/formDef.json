@@ -329,6 +329,7 @@
         "display": {
           "text": "addtlvacc_1_name"
         },
+        "hideInContents": true,
         "_row_num": 60
       },
       {
@@ -351,6 +352,7 @@
         "display": {
           "text": "addtlvacc_2_name"
         },
+        "hideInContents": true,
         "_row_num": 64
       },
       {
@@ -374,6 +376,7 @@
           "text": "given_addtlvacc_1"
         },
         "values_list": "given_addtlvacc_1_grid_values",
+        "hideInContents": true,
         "_row_num": 68
       },
       {
@@ -397,6 +400,7 @@
           "text": "given_addtlvacc_2"
         },
         "values_list": "given_addtlvacc_2_grid_values",
+        "hideInContents": true,
         "_row_num": 72
       },
       {
@@ -419,6 +423,7 @@
         "display": {
           "text": "addtlvacc_1_dategiven"
         },
+        "hideInContents": true,
         "_row_num": 76
       },
       {
@@ -441,6 +446,7 @@
         "display": {
           "text": "addtlvacc_2_dategiven"
         },
+        "hideInContents": true,
         "_row_num": 80
       },
       {
@@ -463,6 +469,7 @@
         "display": {
           "text": "addtlvacc_1_initials"
         },
+        "hideInContents": true,
         "_row_num": 84
       },
       {
@@ -485,6 +492,7 @@
         "display": {
           "text": "addtlvacc_2_initials"
         },
+        "hideInContents": true,
         "_row_num": 88
       },
       {
@@ -517,49 +525,49 @@
     "choices": [
       {
         "choice_list_name": "given_opv1_grid_values",
-        "data_value": 1,
+        "data_value": "yes",
         "display": {
-          "text": 1
+          "text": "yes"
         },
         "_row_num": 2
       },
       {
         "choice_list_name": "given_penta1_grid_values",
-        "data_value": 1,
+        "data_value": "yes",
         "display": {
-          "text": 1
+          "text": "yes"
         },
         "_row_num": 3
       },
       {
         "choice_list_name": "given_pcv1_grid_values",
-        "data_value": 1,
+        "data_value": "yes",
         "display": {
-          "text": 1
+          "text": "yes"
         },
         "_row_num": 4
       },
       {
         "choice_list_name": "given_rota1_grid_values",
-        "data_value": 1,
+        "data_value": "yes",
         "display": {
-          "text": 1
+          "text": "yes"
         },
         "_row_num": 5
       },
       {
         "choice_list_name": "given_addtlvacc_1_grid_values",
-        "data_value": 1,
+        "data_value": "yes",
         "display": {
-          "text": 1
+          "text": "yes"
         },
         "_row_num": 6
       },
       {
         "choice_list_name": "given_addtlvacc_2_grid_values",
-        "data_value": 1,
+        "data_value": "yes",
         "display": {
-          "text": 1
+          "text": "yes"
         },
         "_row_num": 7
       }
@@ -662,9 +670,9 @@
       "given_opv1_grid_values": [
         {
           "choice_list_name": "given_opv1_grid_values",
-          "data_value": 1,
+          "data_value": "yes",
           "display": {
-            "text": 1
+            "text": "yes"
           },
           "_row_num": 2
         }
@@ -672,9 +680,9 @@
       "given_penta1_grid_values": [
         {
           "choice_list_name": "given_penta1_grid_values",
-          "data_value": 1,
+          "data_value": "yes",
           "display": {
-            "text": 1
+            "text": "yes"
           },
           "_row_num": 3
         }
@@ -682,9 +690,9 @@
       "given_pcv1_grid_values": [
         {
           "choice_list_name": "given_pcv1_grid_values",
-          "data_value": 1,
+          "data_value": "yes",
           "display": {
-            "text": 1
+            "text": "yes"
           },
           "_row_num": 4
         }
@@ -692,9 +700,9 @@
       "given_rota1_grid_values": [
         {
           "choice_list_name": "given_rota1_grid_values",
-          "data_value": 1,
+          "data_value": "yes",
           "display": {
-            "text": 1
+            "text": "yes"
           },
           "_row_num": 5
         }
@@ -702,9 +710,9 @@
       "given_addtlvacc_1_grid_values": [
         {
           "choice_list_name": "given_addtlvacc_1_grid_values",
-          "data_value": 1,
+          "data_value": "yes",
           "display": {
-            "text": 1
+            "text": "yes"
           },
           "_row_num": 6
         }
@@ -712,9 +720,9 @@
       "given_addtlvacc_2_grid_values": [
         {
           "choice_list_name": "given_addtlvacc_2_grid_values",
-          "data_value": 1,
+          "data_value": "yes",
           "display": {
-            "text": 1
+            "text": "yes"
           },
           "_row_num": 7
         }
@@ -1843,6 +1851,7 @@
             "display": {
               "text": "addtlvacc_1_name"
             },
+            "hideInContents": true,
             "_row_num": 60,
             "__rowNum__": 59,
             "_token_type": "prompt",
@@ -1867,6 +1876,7 @@
             "display": {
               "text": "addtlvacc_2_name"
             },
+            "hideInContents": true,
             "_row_num": 64,
             "__rowNum__": 63,
             "_token_type": "prompt",
@@ -1892,6 +1902,7 @@
               "text": "given_addtlvacc_1"
             },
             "values_list": "given_addtlvacc_1_grid_values",
+            "hideInContents": true,
             "_row_num": 68,
             "__rowNum__": 67,
             "_token_type": "prompt",
@@ -1917,6 +1928,7 @@
               "text": "given_addtlvacc_2"
             },
             "values_list": "given_addtlvacc_2_grid_values",
+            "hideInContents": true,
             "_row_num": 72,
             "__rowNum__": 71,
             "_token_type": "prompt",
@@ -1941,6 +1953,7 @@
             "display": {
               "text": "addtlvacc_1_dategiven"
             },
+            "hideInContents": true,
             "_row_num": 76,
             "__rowNum__": 75,
             "_token_type": "prompt",
@@ -1965,6 +1978,7 @@
             "display": {
               "text": "addtlvacc_2_dategiven"
             },
+            "hideInContents": true,
             "_row_num": 80,
             "__rowNum__": 79,
             "_token_type": "prompt",
@@ -1989,6 +2003,7 @@
             "display": {
               "text": "addtlvacc_1_initials"
             },
+            "hideInContents": true,
             "_row_num": 84,
             "__rowNum__": 83,
             "_token_type": "prompt",
@@ -2013,6 +2028,7 @@
             "display": {
               "text": "addtlvacc_2_initials"
             },
+            "hideInContents": true,
             "_row_num": 88,
             "__rowNum__": 87,
             "_token_type": "prompt",
