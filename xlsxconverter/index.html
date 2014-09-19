@@ -150,17 +150,38 @@ function postFormDef() {
     var formDefJson = JSON.parse(formDef);
     var tableId = util.getTableIdFromFormDef(formDefJson);
     var formId = util.getFormIdFromFormDef(formDefJson);
-    if (tableId === null || formId === null) {
+    var canWriteFile =
+      formId === util.getFrameworkFormId() ||
+      (tableId !== null && formId !== null);
+    if (!canWriteFile) {
       console.log('form id or table id could not be found, not posting file.');
+      alert(
+          'Cannot post file, invalid tableId or formId.  tableId: ' +
+          tableId +
+          ' and formId: ' +
+          formId);
     } else {
-      var path =
-        'app/tables/' + tableId + '/forms/' + formId + '/formDef.json';
+      var path;
+      if (formId === util.getFrameworkFormId()) {
+        // a special case for the framework file, which is reserved.
+        path = util.getRelativePathToFrameworkFormDef();
+      } else {
+        // we're dealing with a formdef that we're assuming must be for a
+        // particular table, if we're going to be saving it automatically.
+        path =
+          'app/tables/' +
+          tableId +
+          '/forms/' +
+          formId +
+          '/formDef.json';
+      }
       console.log('going to write formDef to: ' + path);
       util.postFile(path, formDef, function(err, response, body) {
             if (err || response.statusCode !== 200) {
-                alert('Something went wrong! Please save the file manually.');
+                alert(
+                  'Something went wrong! Please save the file manually.');
             } else {
-                alert('Saved the file!');
+                alert('Saved the file to: ' + path);
             }
           });
     }
