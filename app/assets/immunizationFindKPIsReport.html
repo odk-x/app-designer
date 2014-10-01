@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width" />
+    <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+    <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/ratchet.js"></script>
+    <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+    <script type="text/javascript" src="js/scanQueries.js"></script>
+  </head>
+  <style>
+  #graph{
+    border: 2px solid steelblue;
+    border-radius: 25px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  .bar {
+    fill: steelblue;
+  }
+
+  .axis text {
+    font: 10px sans-serif;
+  }
+
+  .bar:hover {
+    fill: yellow;
+  }
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .x.axis path {
+    display: none;
+  }
+ 
+  p, div{
+    text-align: center;
+  }
+  #chart{
+    color: green;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  </style>
+  <body id="main">
+    <div class="description-text" id="description">Monthly Coverage Rates Report 2014
+    <!--<p>September - 2014</p>-->
+    </div>
+    <div id="graph">
+      <div>
+        <p>Children Vaccinated This Month: 254 &uArr;</p>
+        <p>Lost This Month: 42 &dArr;</p>
+        <p>Fully Vaccinated On Time: 55% &uArr;</p>
+      </div>
+      <p><span id ="chart">Fully Vaccinated by Month</p>
+      <svg class="chart"></svg>
+    </div>
+    <script type="text/javascript" src="../framework/libs/d3-amd/d3.min.js"></script>
+    <script>
+    var count = 3;
+    //var data = [.35, .39, .42, .49, .4, .49];
+    var data=[{"date":new Date(2014,09,3), "value": .35},
+            {"date":new Date(2014,09,4), "value": .39},
+            {"date":new Date(2014,09,5), "value": .42},   
+            {"date":new Date(2014,09,6), "value": .49},
+            {"date":new Date(2014,09,7), "value": .4}];
+    var margin = {top: 20, right: 30, bottom: 30, left: 40},
+        width = 300 - margin.left - margin.right,
+        height = 200 - margin.top - margin.bottom;
+
+    var x = d3.scale.ordinal()
+        .rangeRoundBands([0, width], .1);
+
+    var y = d3.scale.linear()
+        .range([height, 0]);
+    var format = d3.time.format("%d-%Y");
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(format);
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(6, "%");
+
+    var chart = d3.select(".chart")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    
+    x.domain(data.map(function(d) { return d.date; }));
+   
+    //y.domain([0, d3.max(data)]);
+    y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+    chart.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    chart.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    chart.selectAll(".bar")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.date); })
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); })
+        .attr("width", x.rangeBand());
+
+    </script>
+  </body>
+</html>

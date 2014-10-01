@@ -7,6 +7,6 @@ function display() {
     });
 
     $('#register-demo-button').on('click', function() {
-        alert('Not yet implemented');
+        control.launchHTML('assets/demoForHivReport.html');
     });
 }

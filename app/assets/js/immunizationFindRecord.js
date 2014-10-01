@@ -19,18 +19,18 @@ function display() {
                 var rowId = results.getRowId(0);
                 //Open the list view for the found record
                 control.openDetailView(
-                        'scan_page1',
+                        'scan_childvacc_822_pg1',
                         rowId,
-                        'tables/scan_page1/html/scan_p1_detail.html');
+                        'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
             }
             //We found multiple records associated with this id so let's look for more identifiers
             else
             {
                 control.openTableToListView(
-                'scan_page1',
-                'childid = ?',
+                'scan_childvacc_822_pg1',
+                'Child_patient_ID = ?',
                 [id],
-                'tables/scan_page1/html/scan_p1_list.html');
+                'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
             }
         }
         else if (!name==""){
@@ -40,18 +40,18 @@ function display() {
                 var rowId = results.getRowId(0);
                 //Open the list view for the found record
                 control.openDetailView(
-                        'scan_page1',
+                        'scan_childvacc_822_pg1',
                         rowId,
-                        'tables/scan_page1/html/scan_p1_detail.html');
+                        'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
             }
             //We found multiple records associated with this id so let's look for more identifiers
             else
             {
                 control.openTableToListView(
-                'scan_page1',
-                'name = ?',
+                'scan_childvacc_822_pg1',
+                'Child_name = ?',
                 [name],
-                'tables/scan_page1/html/scan_p1_list.html');
+                'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
             }
         }
         else if (!birthdate==""){
@@ -61,18 +61,18 @@ function display() {
                 var rowId = results.getRowId(0);
                 //Open the list view for the found record
                 control.openDetailView(
-                        'scan_page1',
+                        'scan_childvacc_822_pg1',
                         rowId,
-                        'tables/scan_page1/html/scan_p1_detail.html');
+                        'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
             }
             //We found multiple records associated with this id so let's look for more identifiers
             else
             {
                 control.openTableToListView(
-                'scan_page1',
-                'birthdate = ?',
+                'scan_childvacc_822_pg1',
+                'Child_DOB = ?',
                 [birthdate],
-                'tables/scan_page1/html/scan_p1_list.html');
+                'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
             }
         }
 		console.log('Done finding ' + id);

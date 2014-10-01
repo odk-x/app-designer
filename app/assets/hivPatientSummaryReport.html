@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/scanQueries.js"></script>
+    </head>
+    <style>
+      .table-title, .first_col{
+        background-color: steelblue;
+      }
+      .table-title {
+        font-size: 10px;
+        color: white;
+      }
+      #odd_col {
+        background-color: #E8E8E8;
+      }
+      th {
+        text-align: center;
+        border: 2px solid white;
+      }
+       #row1 > #no_border{
+        border-bottom: none;
+      }
+      #row2 > #no_border{
+        border-top: none;
+      }
+      #row1 > #no_border_left{
+         border-left: none;
+      }
+      #row1 > #no_border_right{
+        border-right: none;
+      }
+
+      #protocol-table > .table-title, .first_col{
+        background-color: steelblue;
+      }
+      #protocol-table > .table-title {
+        color: white;
+      }
+       #protocol-table > #odd_col {
+        background-color: #E8E8E8;
+      }
+      #protocol-table > th {
+        text-align: center;
+        border: 2px solid white !important;
+      }
+    </style>
+    <body id="main">
+    <div class="container">
+    <div class="description-text" id="description">Patient Summary</div>
+      <table id="summary-table">
+        <tr id="row1">
+          <th class="table-title" id="no_border"></th>
+          <th class="table-title" id="no_border_right"> 0-14</th>
+          <th class="table-title" id="no_border_left"></th>
+          <th class="table-title" id="no_border_right"> >14</th>
+          <th class="table-title" id="no_border_left"></th>
+          <th class="table-title" >Total</th>
+        </tr>
+        <tr id="row2">
+          <th class="table-title" id="no_border"></th>
+          <th class="table-title" >M</th>
+          <th class="table-title" >F</th>
+          <th class="table-title" >M</th>
+          <th class="table-title" >F</th>
+          <th class="table-title" ></th>
+        </tr>
+        <tr>
+          <th class="first_col">Total Active Pre_ARV Patients</th>
+          <th>75</th>
+          <th>64</th>
+          <th>132</th>
+          <th>161</th>
+          <th>432</th>
+        </tr>
+        <tr>
+          <th class="first_col">Patients Added this Month</th>
+          <th id="odd_col">1</th>
+          <th id="odd_col">5</th>
+          <th id="odd_col">3</th>
+          <th id="odd_col">2</th>
+          <th id="odd_col">11</th>
+        </tr>
+        <tr>
+          <th class="first_col">Transfer From Other Facilities</th>
+          <th >0</th>
+          <th >2</th>
+          <th >1</th>
+          <th >0</th>
+          <th >3</th>
+        </tr>
+        <tr>
+          <th class="first_col">Newly Diagonsed Patients</th>
+          <th id="odd_col">1</th>
+          <th id="odd_col">3</th>
+          <th id="odd_col">2</th>
+          <th id="odd_col">2</th>
+          <th id="odd_col">8</th>
+        </tr>
+        <tr>
+          <th class="first_col">Patients Exited This Month</th>
+          <th >4</th>
+          <th >4</th>
+          <th >11</th>
+          <th >22</th>
+          <th >41</th>
+        </tr>  
+        <tr >
+          <th class="first_col">Patients Tranfered To Another Facility</th>
+          <th id="odd_col">1</th>
+          <th id="odd_col">1</th>
+          <th id="odd_col">0</th>
+          <th id="odd_col">2</th>
+          <th id="odd_col">4</th>
+        </tr>  
+        <tr>
+          <th class="first_col">Patients Lost</th>
+          <th >2</th>
+          <th >2</th>
+          <th >7</th>
+          <th >11</th>
+          <th >22</th>
+        </tr> 
+        <tr>
+          <th class="first_col">Patients Deceased</th>
+          <th id="odd_col">0</th>
+          <th id="odd_col">0</th>
+          <th id="odd_col">1</th>
+          <th id="odd_col">0</th>
+          <th id="odd_col">1</th>
+        </tr>  
+        <tr>
+          <th class="first_col">Patients Started on ARVs</th>
+          <th>1</th>
+          <th>1</th>
+          <th>3</th>
+          <th>9</th>
+          <th>14</th>
+        </tr>  
+      </table>
+      <div class="description-text" id="description">Protocol Adherence</div>
+      <table id="protocol-table">
+        <tr>
+          <th class="table-title" ></th>
+          <th class="table-title" >Total</th>
+          <th class="table-title" >%</th>
+        </tr>
+        <tr>
+          <th class="first_col">New Patients Screened for TB</th>
+          <th id="odd_col">10</th>
+          <th id="odd_col">91%</th>
+        </tr>
+        <tr>
+          <th class="first_col">New Patients Screened for STIs</th>
+          <th>11</th>
+          <th>100%</th>
+        </tr>
+        <tr>
+          <th class="first_col">New Patients Treated with INH</th>
+          <th id="odd_col">4</th>
+          <th id="odd_col">36%</th>
+        </tr>
+        <tr>
+          <th class="first_col">New Patients Treated CTZ </th>
+          <th>5</th>
+          <th>46%</th>
+        </tr>   
+      </table>
+    </div> 
+
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/immunizationFindFollow-UP.js"></script>
+        <script type="text/javascript" src="js/scanQueries.js"></script>
+    </head>
+
+    <body id="main">
+
+    <div class="container">
+
+      <div class="description-text" id="description">Follow Up Report</div>
+      <p>Children Needing Follow-Up</p>
+
+      <table id="vaccine-table">
+        <tr>
+          <th class="table-title" >Name</th>
+          <th class="table-title" >Child ID</th>
+          <th class="table-title" >Village</th>
+          <th class="table-title" >Last Session</th>
+          <th class="table-title" >Days Overdue</th>
+          <th class="table-title" >View Information</th>
+        </tr>
+      </table>
+    </div>  
+    <script type="text/javascript">
+      $(display());
+    </script>
+    </body>
+</html>

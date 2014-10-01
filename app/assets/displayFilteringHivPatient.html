@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/displayFilteringHivPatient.js"></script>
+        <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
+    </head>
+    <style>
+      p{
+        text-align: center;
+      }
+    </style>
+
+    <body id="main">
+
+    <div class="container">
+
+      <div class="description-text" id="description">Query Result</div>
+      <p>Month: <span id="month"></span></p>
+      <p>Age: <span id="age"></span></p>
+      <p>Sex: <span id="sex"></span></p>
+      <p>Test: <span id="test"></span></p>
+      <table id="report-table">
+        <tr>
+          <th class="table-title" >ID</th>
+          <th class="table-title" >Name</th>
+          <th class="table-title" >Date of Birth</th>
+          <th class="table-title" >Sex</th>
+        </tr>
+      </table>
+    </div>  
+    <script type="text/javascript">
+      console.log("I am here");
+      $(display());
+    </script>
+    </body>
+</html>

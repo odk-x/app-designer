@@ -7,7 +7,7 @@
 if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
     console.log('Welcome to Tables debugging in Chrome!');
     $.ajax({
-        url: control.getFileAsUrl('output/debug/scan_p1_data.json'),
+        url: control.getFileAsUrl('output/debug/scan_childvacc_822_pg1_data.json'),
         async: false,  // do it first
         success: function(dataObj) {
             if (dataObj === undefined || dataObj === null) {
@@ -53,7 +53,7 @@ var resumeFn = function(idxStart) {
                 control.openDetailView(
                     tableId,
                     rowId,
-                    'tables/scan_page1/html/scan_p1_detail.html');
+                    'tables/scan_page1/html/scan_childvacc_822_pg1_detail.html');
             }
         });
     }

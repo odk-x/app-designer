@@ -6,27 +6,43 @@
 
 var scanQueries = {};
 
-scanQueries.p_code = 'patientcode';
-scanQueries.childid = 'childid';
-scanQueries.name = 'name';
-scanQueries.birthdate = 'birthdate';
+scanQueries.p_code = 'patient_QRcode';  // before it was patientcode
+scanQueries.childid = 'Child_patient_ID';  // before it was childid
+scanQueries.name = 'Child_name';  // before it was name
+scanQueries.birthdate = 'Child_DOB';  // before it was birthdate
 
 scanQueries.getExistingRecordById = function(id) {
     var whereClause =
-        'childid = ?';
+        'Child_patient_ID = ?';  // before it was childid
     var selectionArgs = [id];
     
     var records = control.query(
-            'scan_page1',
+            'scan_childvacc_822_pg1',
             whereClause,
             selectionArgs);
 
     return records;
 };
-
-scanQueries.getExistingRecordByPatientCode = function(patientcode, table) {
+scanQueries.getExistingRecordByColumnID = function(column_id) {
     var whereClause =
-        'qr_patientcode = ?';
+        null; 
+    var selectionArgs = null;
+    
+    var records = control.query(
+            'scan_childvacc_822_pg1',
+            whereClause,
+            selectionArgs);
+
+    return records;
+};
+scanQueries.getExistingRecordByPatientCode = function(patientcode, table) {
+    if (table == "scan_childvacc_822_pg1") {
+        var whereClause =
+            'patient_QRcode = ?';  // before it was qe_patientcode, I have changed it to patient_QRcode
+    } else {
+        var whereClause =
+            'qr_patientcode = ?';  // before it was qe_patientcode, I have changed it to patient_QRcode
+    }
     var selectionArgs = [patientcode];
     
     var records = control.query(
@@ -39,11 +55,11 @@ scanQueries.getExistingRecordByPatientCode = function(patientcode, table) {
 
 scanQueries.getExistingRecordByName = function(name) {
     var whereClause =
-        'name = ?';
+        'Child_name = ?';  // before it was name
     var selectionArgs = [name];
     
     var records = control.query(
-            'scan_page1',
+            'scan_childvacc_822_pg1',
             whereClause,
             selectionArgs);
 
@@ -52,11 +68,11 @@ scanQueries.getExistingRecordByName = function(name) {
 
 scanQueries.getExistingRecordByBirthDate = function(birthdate) {
     var whereClause =
-        'birthdate = ?';
+        'Child_DOB = ?';  // before it was birthdate
     var selectionArgs = [birthdate];
     
     var records = control.query(
-            'scan_page1',
+            'scan_childvacc_822_pg1',
             whereClause,
             selectionArgs);
 
