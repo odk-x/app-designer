@@ -170,7 +170,7 @@ putDataKeyValueMap:function(ctxt, kvMap) {
 
           that.withDb( tmpctxt, function(transaction) {
                 var formId = opendatakit.getSettingValue('form_id');
-                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), kvMap);
+                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), kvMap);
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                     updates = is.updates;
                     tmpctxt.log('D',"putDataKeyValueMap.success", names);
@@ -210,7 +210,7 @@ loadDataKeyValueMap:function(ctxt, kvMap) {
           
           that.withDb( tmpctxt, function(transaction) {
                 var formId = opendatakit.getSettingValue('form_id');
-                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, instanceId, kvMap);
+                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, instanceId, kvMap);
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                     updates = is.updates;
                     tmpctxt.log('D',"loadDataKeyValueMap.success", names);
@@ -231,7 +231,7 @@ getAllData:function(ctxt, mdl, instanceId) {
         return;
       }
       that.withDb( ctxt, function(transaction) {
-        var ss = databaseSchema.selectAllFromDataTableStmt(mdl.tableMetadata.dbTableName, instanceId);
+        var ss = databaseSchema.selectAllFromDataTableStmt(mdl.table_id, instanceId);
         ctxt.sqlStatement = ss;
         transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
             var len = result.rows.length;
@@ -381,12 +381,12 @@ save_all_changes:function(ctxt, asComplete) {
                 var formId = opendatakit.getSettingValue('form_id');
                 var kvMap = {};
                 kvMap['_savepoint_type'] = {value: (asComplete ? 'COMPLETE' : 'INCOMPLETE'), isInstanceMetadata: true };
-                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), kvMap);
+                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), kvMap);
                 tmpctxt.sqlStatement = is;
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                     ctxt.log('D','save_all_changes.cleanup');
                     // and now delete the change history...
-                    var cs = databaseSchema.deletePriorChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
+                    var cs = databaseSchema.deletePriorChangesDataTableStmt(mdl.table_id, opendatakit.getCurrentInstanceId());
                     tmpctxt.sqlStatement = cs;
                     transaction.executeSql(cs.stmt, cs.bind);
                 });
@@ -397,7 +397,7 @@ ignore_all_changes:function(ctxt) {
       var that = this;
       ctxt.log('I','database.ignore_all_changes');
       that.withDb( ctxt, function(transaction) {
-            var cs = databaseSchema.deleteUnsavedChangesDataTableStmt(mdl.tableMetadata.dbTableName, opendatakit.getCurrentInstanceId());
+            var cs = databaseSchema.deleteUnsavedChangesDataTableStmt(mdl.table_id, opendatakit.getCurrentInstanceId());
             ctxt.sqlStatement = cs;
             transaction.executeSql(cs.stmt, cs.bind);
             mdl.loaded = false;
@@ -425,12 +425,12 @@ _common_delete_linked_instance_all:function(ctxt, dbTableName, fnname, instanceI
 },
 delete_all:function(ctxt, instanceId) {
       var that = this;
-      that._common_delete_linked_instance_all(ctxt, mdl.tableMetadata.dbTableName, 'delete_all', instanceId);
+      that._common_delete_linked_instance_all(ctxt, mdl.table_id, 'delete_all', instanceId);
 },
 get_all_instances:function(ctxt, selection, selectionArgs, orderBy) {
       var that = this;
       var displayElementName = opendatakit.getSettingValue('instance_name');
-      that.get_linked_instances(ctxt, mdl.tableMetadata.dbTableName, selection, selectionArgs, displayElementName, orderBy);
+      that.get_linked_instances(ctxt, mdl.table_id, selection, selectionArgs, displayElementName, orderBy);
 },
 delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
       var that = this;
@@ -480,7 +480,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                 that.cacheAllData(ctxt, instanceId);
             }});
         that.withDb( tmpctxt, function(transaction) {
-            var cs = databaseSchema.selectDataTableCountStmt(mdl.tableMetadata.dbTableName, instanceId);
+            var cs = databaseSchema.selectDataTableCountStmt(mdl.table_id, instanceId);
             tmpctxt.sqlStatement = cs;
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
                 var count = 0;
@@ -502,7 +502,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     // overwrite these with anything that was passed in...
                     databaseUtils.processPassedInKeyValueMap(databaseSchema.dataTablePredefinedColumns, kvMap, instanceMetadataKeyValueMap);
                     
-                    cs = databaseSchema.insertNewKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, kvMap);
+                    cs = databaseSchema.insertNewKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, kvMap);
                     tmpctxt.sqlStatement = cs;
                     transaction.executeSql(cs.stmt, cs.bind);
                 } else {
@@ -510,7 +510,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     // gather anything that was passed in...
                     databaseUtils.processPassedInKeyValueMap(databaseSchema.dataTablePredefinedColumns, kvMap, instanceMetadataKeyValueMap);
                     if ( !$.isEmptyObject(kvMap) ) {
-                        cs = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, mdl.dataTableModel, formId, instanceId, kvMap);
+                        cs = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, instanceId, kvMap);
                         tmpctxt.sqlStatement = cs;
                         transaction.executeSql(cs.stmt, cs.bind);
                     }
@@ -695,7 +695,7 @@ purge:function(ctxt) {
                 var i, sql, tableEntry;
                 for ( i = 0 ; i < tableSets.length ; ++i ) {
                     tableEntry = tableSets[i];
-                    sql = databaseSchema.dropTableStmt(tableEntry.dbTableName);
+                    sql = databaseSchema.dropTableStmt(tableEntry.table_id);
                     ctxt.sqlStatement = sql;
                     transaction.executeSql(sql.stmt, sql.bind);
                 }
@@ -719,7 +719,7 @@ purge:function(ctxt) {
             var i, row, tableEntry;
             for ( i = 0 ; i < len ; ++i ) {
                 row = result.rows.item(i);
-                tableEntry = { dbTableName: row['_db_table_name'], table_id: row['_table_id'] };
+                tableEntry = { table_id: row['_table_id'] };
                 tableSets.push(tableEntry);
             }
         });
@@ -732,7 +732,7 @@ setValueDeferredChange: function( name, value ) {
     that.pendingChanges[name] = {value: value, isInstanceMetadata: false };
     var formId = opendatakit.getSettingValue('form_id');
     // apply the change immediately...
-    var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.tableMetadata.dbTableName, 
+    var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, 
                     mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), justChange);
     
     databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, is.updates);

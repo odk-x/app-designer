@@ -731,7 +731,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
         that.renderContext.new_instance_text = ((that.display.new_instance_text != null) ? that.display.new_instance_text : "New");
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
-            var dbTableName = linkedMdl.tableMetadata.dbTableName;
+            var dbTableName = linkedMdl.table_id;
             var selString = that.convertSelection(linkedMdl);
             var selArgs = queryDefn.selectionArgs();
             var ordBy = that.convertOrderBy(linkedMdl);
@@ -852,7 +852,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
 
         that.disableButtons();
         that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
-            var dbTableName = linkedMdl.tableMetadata.dbTableName;
+            var dbTableName = linkedMdl.table_id;
             database.delete_linked_instance_all($.extend({},ctxt,{success:function() {
                     that.enableButtons();
                     that.reRender(ctxt);
@@ -1195,7 +1195,7 @@ promptTypes.select = promptTypes._linked_type.extend({
          var populateChoicesViaQueryUsingLinkedTable = function(query, newctxt){
             newctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
             that.getLinkedMdl($.extend({},newctxt,{success:function(linkedMdl) {
-                var dbTableName = linkedMdl.tableMetadata.dbTableName;
+                var dbTableName = linkedMdl.table_id;
                 var selString = that.convertSelection(linkedMdl);
                 var selArgs = query.selectionArgs();
                 var ordBy = that.convertOrderBy(linkedMdl);
