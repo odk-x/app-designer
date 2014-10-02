@@ -21,7 +21,7 @@ function display() {
         currentTab = 3;
         updateForTab(currentTab);
     });
-    $('#scanTab').on('click', function() {
+    $('#jgiTab').on('click', function() {
         currentTab = 4;
         updateForTab(currentTab);
     });
@@ -42,10 +42,7 @@ function display() {
                         null,
                         null);
                 } else if (currentTab === 4) {
-                    control.openTable(
-                        'scan_example',
-                        null,
-                        null);
+                    control.launchHTML('assets/jgiIndex.html');
                 } else {
                     console.log('trouble, unrecognized tab');
                 }
@@ -84,9 +81,9 @@ function updateForTab(tab) {
     } else if (tab === 4) {
         // scan
         fileUri = control.getFileAsUrl(
-                'assets/img/odkScanPic.jpg');
-        descriptionDiv.text('Launch ODK Scan and see it integrate into a local database.');
-        tabItem = $('#scanTab');
+                'assets/img/chimp.png');
+        descriptionDiv.text('Follow a troop of chimps through the jungle.');
+        tabItem = $('#jgiTab');
     } else {
         console.log('unrecognized tab index: ' + tab);
     }
