@@ -240,7 +240,8 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
             }
         }
     }
-    stmt += ' from "' + dbTableName + '" where _id=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)'; 
+    stmt += ' from "' + dbTableName + '" as T where _id=? and ' +
+        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)'; 
     bindings.push(instanceId);
     
     for ( f in kvMap ) {
@@ -386,7 +387,8 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
  * Requires: no globals
  */
 selectAllFromDataTableStmt:function(dbTableName, instanceId) {
-    var stmt = 'select * from "' + dbTableName + '" where _id=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)'; 
+    var stmt = 'select * from "' + dbTableName + '" as T where _id=? and ' + 
+            'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)'; 
     return {
         stmt : stmt,
         bind : [instanceId]
@@ -408,13 +410,15 @@ selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArg
             args = args.concat(selectionArgs);
         }
         return {
-                stmt : 'select * from (select * from "' + dbTableName +
-                        '" where _savepoint_type=?  group by _id having _savepoint_timestamp = max(_savepoint_timestamp)) where ' + selection,
+                stmt : 'select * from (select * from "' + dbTableName + '" as T where _savepoint_type=? and ' + 
+                        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)) where ' +
+                        selection,
                 bind : args
             };
     } else {
         return {
-                stmt : 'select * from "' + dbTableName + '" where _savepoint_type=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)',
+                stmt : 'select * from "' + dbTableName + '" as T where _savepoint_type=? and ' + 
+                   'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)',
                 bind : ['COMPLETE']    
             };
     }
@@ -436,16 +440,19 @@ selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs
     }
     if ( selection === undefined || selection === null ) {
         return {
-                stmt : 'select * from "' + dbTableName + '" where _sync_state is null or _sync_state != ? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
+                stmt : 'select * from "' + dbTableName + '" as T where (_sync_state is null or _sync_state != ?) and ' + 
+                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)' +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
                 bind : ['deleted']    
             };
     } else {
+        var args = ['deleted'];
+        args = args.concat(selectionArgs);
         return {
-                stmt :  'select * from (select * from "' + dbTableName +
-                        '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)) where ' + selection +
+                stmt :  'select * from (select * from "' + dbTableName + '" as T where (_sync_state is null or _sync_state != ?) and ' + 
+                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)) where ' + selection +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : selectionArgs
+                bind : args
             };
     }
 },
@@ -473,10 +480,11 @@ selectDataTableCountStmt:function(dbTableName, instanceId) {
  */
 deletePriorChangesDataTableStmt:function(dbTableName, instanceId) {
     
-    var stmt = 'delete from "' + dbTableName + '" where _id=? and _savepoint_timestamp not in (select max(_savepoint_timestamp) from "' + dbTableName + '" where _id=?);';
+    var stmt = 'delete from "' + dbTableName + '" as T where T._id=? and ' + 
+        'T._savepoint_timestamp not in (select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id);';
     return {
         stmt : stmt,
-        bind : [instanceId, instanceId]
+        bind : [instanceId]
     };
 },
 /**
@@ -528,7 +536,9 @@ getAllInstancesDataTableStmt:function(dbTableName, displayElementName) {
     }
     return {
             stmt : 'select ' + displayElementName + ' _savepoint_timestamp, _savepoint_type, _locale, _id from "' +
-                    dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp) order by _savepoint_timestamp desc;',
+                    dbTableName + '" as T where ' + 
+                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                    '" as V where V._id=T._id) order by _savepoint_timestamp desc;',
             bind : []
             };
 },
@@ -720,8 +730,8 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
 
     fullDef._table_definitions.push( { 
         _table_id: protoMdl.table_id, 
-		_schema_etag: null,
-		_last_data_etag: null,
+        _schema_etag: null,
+        _last_data_etag: null,
         _last_sync_time: -1 } );
 
     // construct the kvPairs to insert into kvstore

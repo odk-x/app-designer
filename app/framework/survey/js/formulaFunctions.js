@@ -77,6 +77,10 @@ function(opendatakit,  database,   _) {
         now: function() {
             return new Date();
         },
+        isFinalized: function() {
+            var datavalue = database.getInstanceMetaDataValue('_savepoint_type');
+            return ( 'COMPLETE' === datavalue );
+        },
         //data gets a value by name.
         data: function(valueName) {
             var datavalue = database.getDataValue(valueName);
