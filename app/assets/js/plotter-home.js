@@ -10,8 +10,7 @@ function display() {
     // Set the background to be a picture.
     body.css('background-image', 'url(img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg)');
 
-    var viewPlotsButton = $('<button>');
-    viewPlotsButton.text('View Plots');
+    var viewPlotsButton = $('#view-plots');
     viewPlotsButton.on(
         'click',
         function() {
@@ -22,10 +21,8 @@ function display() {
                 'tables/plot/html/plot_list.html');
         }
     );
-    $('#wrapper').append(viewPlotsButton);
 
-    var viewTeasButton = $('<button>');
-    viewTeasButton.text('View Visits');
+    var viewTeasButton = $('#view-visits');
     viewTeasButton.on(
         'click',
         function() {
@@ -36,6 +33,5 @@ function display() {
                 'tables/visit/html/visit_list.html');
         }
     );
-    $('#wrapper').append(viewTeasButton);
 
 }

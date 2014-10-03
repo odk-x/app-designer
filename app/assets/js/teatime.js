@@ -10,8 +10,7 @@ function display() {
     // Set the background to be a picture.
     body.css('background-image', 'url(img/teaBackground.jpg)');
 
-    var viewHousesButton = $('<button>');
-    viewHousesButton.text('View Tea Houses');
+    var viewHousesButton = $('#view-houses');
     viewHousesButton.on(
         'click',
         function() {
@@ -22,10 +21,8 @@ function display() {
                 'tables/Tea_houses/html/Tea_houses_list.html');
         }
     );
-    $('#wrapper').append(viewHousesButton);
 
-    var viewTeasButton = $('<button>');
-    viewTeasButton.text('View Teas');
+    var viewTeasButton = $('#view-teas');
     viewTeasButton.on(
         'click',
         function() {
@@ -36,10 +33,8 @@ function display() {
                 'tables/Tea_inventory/html/Tea_inventory_list.html');
         }
     );
-    $('#wrapper').append(viewTeasButton);
 
-    var viewTeaTypesButton = $('<button>');
-    viewTeaTypesButton.text('Tea Types');
+    var viewTeaTypesButton = $('#view-types');
     viewTeaTypesButton.on(
         'click',
         function() {
@@ -50,6 +45,5 @@ function display() {
                 'tables/Tea_types/html/Tea_types_list.html');
         }
     );
-    $('#wrapper').append(viewTeaTypesButton);
 
 }

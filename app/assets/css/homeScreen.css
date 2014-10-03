@@ -5,7 +5,7 @@ html, body {
 }
 
 #wrapper { 
-    margin: 0;
+    margin: 10px 0 0 0;
     padding: 0;
 }
 
@@ -26,17 +26,23 @@ div {
     position: relative; 
 }
 
-button {
-    width: 275px;
-    height: 70px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border: 2px solid #DEDEDE;
-    font-size: 14pt;
-    text-align: center;
-    display: block;
+/*button {*/
+    /*width: 275px;*/
+    /*height: 70px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*margin-top: 10px;*/
+    /*margin-bottom: 20px;*/
+    /*border: 2px solid #DEDEDE;*/
+    /*font-size: 14pt;*/
+    /*text-align: center;*/
+    /*display: block;*/
+/*}*/
+
+.btn-launch {
+   width: 80%;
+   max-width: 500px;
+   margin: 0 auto 35px;
 }
 
 h1 {

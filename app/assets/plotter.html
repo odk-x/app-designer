@@ -2,7 +2,9 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width" />
-        <link href="css/homescreen.css" type="text/css" rel="stylesheet" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" />
+        <link href="css/homeScreen.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
         <script type="text/javascript" src="../framework/tables/js/control.js"></script>
         <script type="text/javascript" src="js/plotter-home.js"></script>
@@ -11,6 +13,11 @@
     <body id="main">
         <div id="wrapper">    
             <h1 class="app-title">Plotter</h1>
+
+            <button id="view-plots" class="btn btn-launch btn-primary btn-block">View Plots</button>
+
+            <button id="view-visits" class="btn btn-launch btn-primary btn-block">View Visits</button>
+
         </div>
         <script type="text/javascript">
             $(display());
