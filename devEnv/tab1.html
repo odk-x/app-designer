@@ -78,11 +78,11 @@
 		transaction.executeSql('drop table if exists _key_value_store_active');
 		transaction.executeSql('drop table if exists _key_value_store_server');
 		transaction.executeSql('drop table if exists _key_value_store_sync');
-		transaction.executeSql('select _db_table_name from _table_definitions', null, function(transaction, result) {
+		transaction.executeSql('select _table_id from _table_definitions', null, function(transaction, result) {
 			var len = result.rows.length;
 			for ( var i = 0 ; i < len ; ++i ) {
 				var row = result.rows.item(0);
-				var tableName = row['_db_table_name'];
+				var tableName = row['_table_id'];
 				transaction.executeSql('drop table if exists ' + tableName);
 			}
 			transaction.executeSql('drop table if exists _table_definitions');
