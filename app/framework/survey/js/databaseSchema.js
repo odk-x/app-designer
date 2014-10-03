@@ -480,11 +480,11 @@ selectDataTableCountStmt:function(dbTableName, instanceId) {
  */
 deletePriorChangesDataTableStmt:function(dbTableName, instanceId) {
     
-    var stmt = 'delete from "' + dbTableName + '" as T where T._id=? and ' + 
-        'T._savepoint_timestamp not in (select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id);';
+    var stmt = 'delete from "' + dbTableName + '" where _id=? and ' + 
+        '_savepoint_timestamp not in (select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=?);';
     return {
         stmt : stmt,
-        bind : [instanceId]
+        bind : [instanceId, instanceId]
     };
 },
 /**
