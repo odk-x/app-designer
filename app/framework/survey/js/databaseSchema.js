@@ -404,22 +404,24 @@ selectAllFromDataTableStmt:function(dbTableName, instanceId) {
  * Requires: no globals
  */
 selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArgs) {
-    if ( selection != null ) {
-        var args = ['COMPLETE'];
-        if ( selectionArgs != null ) {
+    var args = ['COMPLETE','COMPLETE'];
+    if ( selection === null || selection === undefined ) {
+        return {
+                stmt : 'select * from "' + dbTableName + '" as T where _savepoint_type=? and ' + 
+                   'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                       '" as V where V._id=T._id and V._savepoint_type=?)',
+                bind : args
+            };
+    } else {
+        if ( selectionArgs !== null && selectionArgs !=== undefined ) {
             args = args.concat(selectionArgs);
         }
         return {
                 stmt : 'select * from (select * from "' + dbTableName + '" as T where _savepoint_type=? and ' + 
-                        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)) where ' +
+                        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                           '" as V where V._id=T._id and V._savepoint_type=?)) where ' +
                         selection,
                 bind : args
-            };
-    } else {
-        return {
-                stmt : 'select * from "' + dbTableName + '" as T where _savepoint_type=? and ' + 
-                   'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)',
-                bind : ['COMPLETE']    
             };
     }
 },
@@ -435,22 +437,23 @@ selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArg
  * Requires: no globals
  */
 selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
-    if ( selectionArgs === undefined || selectionArgs === null ) {
-        selectionArgs = [];
-    }
-    if ( selection === undefined || selection === null ) {
+    var args = ['deleted','deleted'];
+    if ( selection === null || selection === undefined ) {
         return {
                 stmt : 'select * from "' + dbTableName + '" as T where (_sync_state is null or _sync_state != ?) and ' + 
-                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)' +
+                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName +
+                           '" as V where V._id=T._id and (V._sync_state is null or V._sync_state != ?))' +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : ['deleted']    
+                bind : ['deleted','deleted']    
             };
     } else {
-        var args = ['deleted'];
-        args = args.concat(selectionArgs);
+        if (selectionArgs !== null && selectionArgs !== undefined ) {
+            args = args.concat(selectionArgs);
+        }
         return {
                 stmt :  'select * from (select * from "' + dbTableName + '" as T where (_sync_state is null or _sync_state != ?) and ' + 
-                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)) where ' + selection +
+                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                        '" as V where V._id=T._id and (V._sync_state is null or V._sync_state != ?))) where ' + selection +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
                 bind : args
             };
