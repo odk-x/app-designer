@@ -413,7 +413,7 @@ selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArg
                 bind : args
             };
     } else {
-        if ( selectionArgs !== null && selectionArgs !=== undefined ) {
+        if ( selectionArgs !== null && selectionArgs !== undefined ) {
             args = args.concat(selectionArgs);
         }
         return {
