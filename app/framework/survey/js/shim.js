@@ -88,6 +88,10 @@ window.shim = window.shim || {
             }
         }
     },
+    getProperty: function( propertyId ) {
+        this.log("D","shim: DO: getProperty(" + propertyId + ")");
+        return "property-of(" + propertyId + ")";
+    },
     clearInstanceId: function( refId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {
             this.log("D","shim: IGNORED: clearInstanceId(" + refId + ")");

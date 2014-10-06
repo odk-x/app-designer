@@ -47,6 +47,10 @@ return {
         return this.databaseSettings;
     },
 
+    getProperty:function(propertyId) {
+        return shim.getProperty(propertyId);
+    },
+    
     genUUID:function() {
         // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
         var id = "uuid:" + 
