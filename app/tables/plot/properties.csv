@@ -29,11 +29,6 @@ Column,planting,displayFormat,string,""
 Column,planting,displayName,string,"""planting"""
 Column,planting,displayVisible,boolean,TRUE
 Column,planting,joins,object,""
-Column,plot_id,displayChoicesList,object,""
-Column,plot_id,displayFormat,string,""
-Column,plot_id,displayName,string,"""plot_id"""
-Column,plot_id,displayVisible,boolean,TRUE
-Column,plot_id,joins,object,""
 Column,plot_name,displayChoicesList,object,""
 Column,plot_name,displayFormat,string,""
 Column,plot_name,displayName,string,"""plot_name"""
@@ -44,7 +39,7 @@ FormType,default,FormType.formType,string,SURVEY
 ListDisplayActivity,default,nameOfListView,string,plots
 ListDisplayActivity.views,plots,filename,string,tables/plot/html/plot_list.html
 SurveyUtil,default,SurveyUtil.formId,string,plot
-Table,default,colOrder,object,"[""plot_id"",""plot_name"",""location_latitude"",""location_longitude"",""location_altitude"",""location_accuracy"",""planting""]"
+Table,default,colOrder,object,"[""plot_name"",""location_latitude"",""location_longitude"",""location_altitude"",""location_accuracy"",""planting""]"
 Table,default,defaultViewType,string,Spreadsheet
 Table,default,displayName,object,"""Plot"""
 Table,default,groupByCols,string,[]

@@ -18,6 +18,17 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
     });
 }
 
+// we need plot names.
+var plotIdToName = {};
+var plots = control.query('plot', null, null);
+
+for (var rowI = 0; rowI < plots.getCount(); rowI++) {
+    var rowId = plots.getRowId(rowI);
+    var plotName = plots.getData(rowI, 'plot_name');
+
+    plotIdToName[rowId] = plotName;
+}
+
 // Use chunked list view for larger tables: We want to chunk the displays so
 // that there is less load time.
             
@@ -26,6 +37,37 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
  * displayed at this iteration through the loop.
  */
 var resumeFn = function(idxStart) {
+
+    if (idxStart === 0) {
+        // We want to be able to drag and drop without the drop triggering a click.
+        // Idea for this taken from:
+        // http://stackoverflow.com/questions/14301026/how-do-i-avoid-a-click-event-firing-after-dragging-a-gridster-js-widget-with-cli
+
+        var preventClick = function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        };
+
+        $('.gridster ul').gridster({
+            widget_margins: [10, 10],
+            widget_base_dimensions: [140, 140],
+            draggable: {
+                start: function(event, ui) {
+                    // stop propagating in the capture phase.
+                    ui.$player[0].addEventListener('click', preventClick, true);
+                },
+                stop: function(event, ui) {
+                    var player = ui.$player;
+                    setTimeout(function() {
+                        player[0].removeEventListener(
+                          'click',
+                          preventClick,
+                          true);
+                    });
+                }
+            }
+        });
+    }
 
     console.log('resumeFn called. idxStart: ' + idxStart);
     // The first time through construct any constants you need to refer to
@@ -71,6 +113,9 @@ var resumeFn = function(idxStart) {
  * a detail view on the clicked row.
  */
 var displayGroup = function(idxStart) {
+
+    var gridster = $('.gridster ul').gridster().data('gridster');
+
     // Number of rows displayed per chunk
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
@@ -82,30 +127,45 @@ var displayGroup = function(idxStart) {
         // an attribute so that the click handler set in resumeFn knows which
         // row was clicked.
         var item = $('<li>');
-        item.attr('rowId', data.getRowId(i));
-        item.attr('class', 'item_space');
+
+        var containerDiv = $('<div>');
+        containerDiv.addClass('content-holder');
+        
         var displayDate = data.getData(i, 'date');
         // We only want to display the date, not the time and 'T', which are
         // important to the db representation
         if (displayDate !== undefined && displayDate !== null) {
             displayDate = displayDate.substring(0, 10);
         }
-        item.text('Visit on ' + displayDate);
-                
-        /* Creates arrow icon (Nothing to edit here) */
-        var chevron = $('<img>');
-        chevron.attr('src', '../../../assets/img/little_arrow.png');
-        chevron.attr('class', 'chevron');
-        item.append(chevron);
+        containerDiv.text(displayDate);
 
+        item.attr('rowId', data.getRowId(i));
+        item.addClass('item_space');
+        item.addClass('grid-item');
+        item.append(containerDiv);
+                
         var plotItem = $('<li>');
         plotItem.attr('class', 'detail');
-        plotItem.text('Plot name: ' + data.getData(i, 'plot_name'));
+
+        var plotId = data.getData(i, 'plot_id');
+        var plotName = plotIdToName[plotId];
+        if (!plotName) {
+            console.log('could not find plot name for id: ' + plotId);
+            plotName = plotId;
+        }
+
+        plotItem.text(plotName);
         item.append(plotItem);
 
-        // Add any other details in your list item here.
+        gridster.add_widget(item, 1, 1);
                 
-        $('#list').append(item);
+        //$('#list').append(item);
+
+        // don't append the last one to avoid the fencepost problem
+        //var borderDiv = $('<div>');
+        //borderDiv.addClass('divider');
+        //$('#list').append(borderDiv);
+
     }
     if (i < data.getCount()) {
         setTimeout(resumeFn, 0, i);

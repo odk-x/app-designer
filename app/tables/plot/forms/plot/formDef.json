@@ -2,20 +2,12 @@
   "xlsx": {
     "survey": [
       {
-        "type": "integer",
-        "name": "plot_id",
-        "display": {
-          "text": "Enter the id of plot:"
-        },
-        "_row_num": 2
-      },
-      {
         "type": "text",
         "name": "plot_name",
         "display": {
           "text": "Enter the name of the plot:"
         },
-        "_row_num": 3
+        "_row_num": 2
       },
       {
         "type": "geopoint",
@@ -23,7 +15,7 @@
         "display": {
           "text": "Capture location:"
         },
-        "_row_num": 4
+        "_row_num": 3
       },
       {
         "type": "select_one",
@@ -32,7 +24,7 @@
         "display": {
           "text": "What type of plant is in this plot?"
         },
-        "_row_num": 5
+        "_row_num": 4
       }
     ],
     "choices": [
@@ -83,6 +75,16 @@
         "setting_name": "instance_name",
         "value": "plot_name",
         "_row_num": 5
+      },
+      {
+        "setting_name": "table_id",
+        "value": "plot",
+        "_row_num": 6
+      },
+      {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 7
       }
     ]
   },
@@ -130,8 +132,12 @@
       "table_id": {
         "setting_name": "table_id",
         "value": "plot",
-        "_row_num": 2,
-        "__rowNum__": 1
+        "_row_num": 6
+      },
+      "disableSwipeNavigation": {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 7
       },
       "_locales": {
         "setting_name": "_locales",
@@ -189,20 +195,10 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "plot_id": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "elementKey": "plot_id"
-      },
       "plot_name": {
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 2,
             "section_name": "survey"
           }
         ],
@@ -212,7 +208,7 @@
       "location": {
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "survey"
           }
         ],
@@ -241,7 +237,7 @@
       "planting": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "survey"
           }
         ],
@@ -261,30 +257,17 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "integer",
-            "name": "plot_id",
-            "display": {
-              "text": "Enter the id of plot:"
-            },
-            "_row_num": 2,
-            "__rowNum__": 1,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 0
-          },
-          {
             "type": "text",
             "name": "plot_name",
             "display": {
               "text": "Enter the name of the plot:"
             },
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "_row_num": 2,
+            "__rowNum__": 1,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 1
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
           },
           {
             "type": "geopoint",
@@ -292,12 +275,12 @@
             "display": {
               "text": "Capture location:"
             },
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 1
           },
           {
             "type": "select_one",
@@ -306,20 +289,20 @@
             "display": {
               "text": "What type of plant is in this plot?"
             },
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen5",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "survey/_screen4",
+            "promptIdx": 2
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 6,
-            "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 4
+            "_row_num": 5,
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 3
           }
         ],
         "validation_tag_map": {
@@ -345,40 +328,33 @@
             "operationIdx": 2
           },
           {
+            "_token_type": "exit_section",
+            "clause": "exit section",
             "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 6,
-            "operationIdx": 4
-          },
-          {
-            "_row_num": 6,
+            "_row_num": 5,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 5
+            "operationIdx": 4
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 6,
-            "operationIdx": 6
+            "_row_num": 5,
+            "operationIdx": 5
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen3": 1,
           "_screen4": 2,
-          "_screen5": 3,
-          "_contents": 5,
-          "_screen6": 5
+          "_contents": 4,
+          "_screen5": 4
         }
       },
       "initial": {

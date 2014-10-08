@@ -1,7 +1,7 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control */
+/* global $, control, data */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
@@ -35,7 +35,17 @@ function display() {
     var BUG_CUTWORM = 'cutworm';
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
-    $('#plot-name').text(data.get('plot_name'));
+
+    var plotId = data.get('plot_id');
+
+    var plots = control.query(
+        'plot',
+        '_id = ?',
+        [plotId]);
+
+    var plotName = plots.get('plot_name');
+
+    $('#plot-name').text(plotName);
     $('#plant-height').text(data.get('plant_height'));
     // We need to fiddle with the date a little bit to get back a more
     // human-readable value.

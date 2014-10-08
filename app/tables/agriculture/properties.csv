@@ -1,0 +1,36 @@
+_partition,_aspect,_key,_type,_value
+Column,Date_and_Time,displayChoicesList,array,""
+Column,Date_and_Time,displayFormat,string,""
+Column,Date_and_Time,displayName,object,"""Date_and_Time"""
+Column,Date_and_Time,displayVisible,boolean,true
+Column,Date_and_Time,joins,array,""
+Column,Sample,displayChoicesList,array,""
+Column,Sample,displayFormat,string,""
+Column,Sample,displayName,object,"""Sample"""
+Column,Sample,displayVisible,boolean,true
+Column,Sample,joins,array,""
+Column,plot_name,displayChoicesList,array,""
+Column,plot_name,displayFormat,string,""
+Column,plot_name,displayName,object,"""plot_name"""
+Column,plot_name,displayVisible,boolean,true
+Column,plot_name,joins,array,""
+Column,soil_condition,displayChoicesList,array,"[{""choice_list_name"":""soil_type"",""data_value"":""dry"",""display"":{""text"":""Dry""},""_row_num"":2},{""choice_list_name"":""soil_type"",""data_value"":""damp"",""display"":{""text"":""Damp""},""_row_num"":3},{""choice_list_name"":""soil_type"",""data_value"":""moist"",""display"":{""text"":""Moist""},""_row_num"":4},{""choice_list_name"":""soil_type"",""data_value"":""wet"",""display"":{""text"":""Wet""},""_row_num"":5}]"
+Column,soil_condition,displayFormat,string,""
+Column,soil_condition,displayName,object,"""soil_condition"""
+Column,soil_condition,displayVisible,boolean,true
+Column,soil_condition,joins,array,""
+Table,default,colOrder,array,"[""Date_and_Time"",""plot_name"",""soil_condition"",""Sample""]"
+DetailDisplayActivity,default,filename,string,tables/agriculture/html/agriculture_detail.html
+ListDisplayActivity,default,nameOfListView,string,List View 0
+ListDisplayActivity.views,List View 0,filename,string,tables/agriculture/html/agriculture_list.html
+Table,default,defaultViewType,string,LIST
+Table,default,detailViewFileName,string,tables/agriculture/html/agriculture_detail.html
+Table,default,listViewFileName,string,tables/agriculture/html/agriculture_list.html
+Table,default,displayName,object,"""Agriculture"""
+Table,default,groupByCols,array,[]
+Table,default,indexCol,string,""
+Table,default,sortCol,object,""
+Table,default,sortOrder,object,""
+Table,default,xmlInstanceName,string,plot_name
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,agriculture

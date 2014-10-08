@@ -22,13 +22,22 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
 function display() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
+    
+    var i;
+    var plotId = data.getRowId(0);
+
     $('#NAME').text(data.get('plot_name'));
-    $('#plot-id').text(data.get('plot_id'));
+    $('#plot-id').text(plotId);
     $('#lat').text(data.get('location.latitude'));
     $('#long').text(data.get('location.longitude'));
     $('#crop').text(data.get('planting'));
+
     // We want to get the count.
-    var table = control.query('visit', 'plot_name = ?', [data.get('plot_name')]);
+    var table = control.query(
+        'visit',
+        'plot_id = ?',
+        [plotId]);
+
     $('#visits').text(table.getCount());
     var margin = {
         top: 20,
@@ -39,19 +48,23 @@ function display() {
     var width = 300 - margin.left - margin.right;
     var height = 500 - margin.top - margin.bottom;
     // Set up the scales.
-    var visitData = control.query('visit', 'plot_name = ?', [data.get('plot_name')]);
+    var visitData = control.query('visit', 'plot_id = ?', [plotId]);
     var xValues = JSON.parse(visitData.getColumnData('date'));
-    xValues = [xValues[0], xValues[1], xValues[2]];
+
+    //xValues = [xValues[0], xValues[1], xValues[2]];
+
     // because d3 domain expects an array of ints, make a map.
     var labelToValue = {};
-    for (var i = 0; i < xValues.length; i++) {
+    for (i = 0; i < xValues.length; i++) {
         labelToValue[xValues[i]] = i;
     }
-    var x = d3.scale.ordinal().domain(d3.values(labelToValue)).rangePoints([0, width], 1);
+    var x = d3.scale.ordinal().domain(d3.values(labelToValue)).rangePoints(
+        [0, width],
+        1);
     var yValues = JSON.parse(visitData.getColumnData('plant_height'));
     var newYs = [];
     // Now parse to strings.
-    for (var i = 0; i < yValues.length; i++) {
+    for (i = 0; i < yValues.length; i++) {
         newYs.push(parseInt(yValues[i]));
     }
     yValues = newYs;
@@ -68,7 +81,7 @@ function display() {
         .x(function(d) { return x(String(labelToValue[d.date])); })
         .y(function(d) { return y(d.plant_height); });
     var combinedData = [];
-    for (var i = 0; i < xValues.length; i++) {
+    for (i = 0; i < xValues.length; i++) {
         var d = {};
         d.date = xValues[i];
         d.plant_height = yValues[i];

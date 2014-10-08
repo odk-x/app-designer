@@ -8,5 +8,5 @@ plant_height,plant_height,number,[]
 plant_picture,plant_picture,mimeUri,"[""plant_picture_uriFragment"",""plant_picture_contentType""]"
 plant_picture_contentType,contentType,string,[]
 plant_picture_uriFragment,uriFragment,string,[]
-plot_name,plot_name,string,[]
+plot_id,plot_id,string,[]
 soil,soil,string,[]
