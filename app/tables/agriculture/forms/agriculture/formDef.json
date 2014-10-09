@@ -31,7 +31,6 @@
       },
       {
         "branch_label": "Sample_screen",
-        "clause": "begin screen",
         "_row_num": 7
       },
       {
@@ -44,6 +43,10 @@
         "_row_num": 8
       },
       {
+        "clause": "begin screen",
+        "_row_num": 9
+      },
+      {
         "type": "select_one",
         "name": "soil_condition",
         "values_list": "soil_type",
@@ -51,7 +54,7 @@
           "text": "Select the condition of the soil"
         },
         "required": true,
-        "_row_num": 9
+        "_row_num": 10
       },
       {
         "type": "async_assign_min",
@@ -60,7 +63,7 @@
         "display": {
           "debug": false
         },
-        "_row_num": 10
+        "_row_num": 11
       },
       {
         "type": "async_assign_max",
@@ -69,11 +72,11 @@
         "display": {
           "debug": false
         },
-        "_row_num": 11
+        "_row_num": 12
       },
       {
         "clause": "end screen",
-        "_row_num": 12
+        "_row_num": 13
       },
       {
         "type": "number",
@@ -85,12 +88,12 @@
           "image": "img/weedsfig1.jpg"
         },
         "required": true,
-        "_row_num": 13
+        "_row_num": 14
       },
       {
         "clause": "if // check_outlier",
         "condition": "! calculates.between_min_max()",
-        "_row_num": 14
+        "_row_num": 15
       },
       {
         "type": "acknowledge",
@@ -100,28 +103,28 @@
           "hint": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
         },
         "constraint": "data('ack_ok') || calculates.between_min_max()",
-        "_row_num": 15
+        "_row_num": 16
       },
       {
         "clause": "if // branch_fail",
         "condition": "! data('ack_ok')",
-        "_row_num": 16
-      },
-      {
-        "clause": "goto Sample_screen",
         "_row_num": 17
       },
       {
-        "clause": "end if // branch_fail",
+        "clause": "goto Sample_screen",
         "_row_num": 18
       },
       {
-        "clause": "end if // check_outlier",
+        "clause": "end if // branch_fail",
         "_row_num": 19
       },
       {
-        "clause": "exit section",
+        "clause": "end if // check_outlier",
         "_row_num": 20
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 21
       }
     ],
     "settings": [
@@ -422,7 +425,7 @@
         "type": "boolean",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
@@ -443,7 +446,7 @@
         "valuesList": "min_max",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -464,7 +467,7 @@
         "valuesList": "min_max",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -492,7 +495,7 @@
       "soil_condition": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -503,7 +506,7 @@
       "Sample": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -533,7 +536,7 @@
             "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 0
           },
           {
@@ -544,11 +547,11 @@
               "text": "Select the condition of the soil"
             },
             "required": true,
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 1
           },
           {
@@ -558,11 +561,11 @@
             "display": {
               "debug": false
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "async_assign_min",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 2
           },
           {
@@ -572,11 +575,11 @@
             "display": {
               "debug": false
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "async_assign_max",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 3
           },
           {
@@ -589,11 +592,11 @@
               "image": "img/weedsfig1.jpg"
             },
             "required": true,
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen13",
+            "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 4
           },
           {
@@ -604,19 +607,19 @@
               "hint": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
             },
             "constraint": "data('ack_ok') || calculates.between_min_max()",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "acknowledge",
-            "_branch_label_enclosing_screen": "survey/_screen15",
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 5
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 21,
-            "_branch_label_enclosing_screen": "survey/_screen21",
+            "_row_num": 22,
+            "_branch_label_enclosing_screen": "survey/_screen22",
             "promptIdx": 6
           }
         ],
@@ -674,129 +677,136 @@
             "operationIdx": 4
           },
           {
-            "clause": "begin screen",
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 8,
             "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 12,
-              "__rowNum__": 11,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
-            "_row_num": 13,
+            "clause": "begin screen",
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 13,
+              "__rowNum__": 12,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 14,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
+            "operationIdx": 7
           },
           {
             "clause": "if // check_outlier",
             "condition": "! calculates.between_min_max()",
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "goto_label",
             "_tag_name": "check_outlier",
-            "_branch_label": "_then14",
-            "operationIdx": 7
+            "_branch_label": "_then15",
+            "operationIdx": 8
           },
           {
             "clause": "end if // check_outlier",
             "_token_type": "goto_label",
-            "_branch_label": "_else19",
-            "_row_num": 19,
-            "operationIdx": 8
+            "_branch_label": "_else20",
+            "_row_num": 20,
+            "operationIdx": 9
           },
           {
-            "_row_num": 15,
+            "_row_num": 16,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
+            "operationIdx": 10
           },
           {
             "clause": "if // branch_fail",
             "condition": "! data('ack_ok')",
-            "_row_num": 16,
-            "__rowNum__": 15,
-            "_token_type": "goto_label",
-            "_tag_name": "branch_fail",
-            "_branch_label": "_then16",
-            "operationIdx": 10
-          },
-          {
-            "clause": "end if // branch_fail",
-            "_token_type": "goto_label",
-            "_branch_label": "_else18",
-            "_row_num": 18,
-            "operationIdx": 11
-          },
-          {
-            "clause": "goto Sample_screen",
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "goto_label",
-            "_branch_label": "Sample_screen",
-            "operationIdx": 12
+            "_tag_name": "branch_fail",
+            "_branch_label": "_then17",
+            "operationIdx": 11
           },
           {
             "clause": "end if // branch_fail",
             "_token_type": "goto_label",
-            "_branch_label": "_endif18",
+            "_branch_label": "_else19",
+            "_row_num": 19,
+            "operationIdx": 12
+          },
+          {
+            "clause": "goto Sample_screen",
             "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "goto_label",
+            "_branch_label": "Sample_screen",
             "operationIdx": 13
           },
           {
-            "clause": "end if // check_outlier",
+            "clause": "end if // branch_fail",
             "_token_type": "goto_label",
             "_branch_label": "_endif19",
             "_row_num": 19,
             "operationIdx": 14
           },
           {
-            "clause": "exit section",
+            "clause": "end if // check_outlier",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif20",
             "_row_num": 20,
-            "__rowNum__": 19,
-            "_token_type": "exit_section",
             "operationIdx": 15
           },
           {
-            "_token_type": "exit_section",
             "clause": "exit section",
             "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "exit_section",
             "operationIdx": 16
           },
           {
-            "_row_num": 21,
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 22,
+            "operationIdx": 17
+          },
+          {
+            "_row_num": 22,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 17
+            "operationIdx": 18
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 21,
-            "operationIdx": 18
+            "_row_num": 22,
+            "operationIdx": 19
           }
         ],
         "branch_label_map": {
           "Sample_screen": 5,
-          "_screen7": 5,
-          "_screen13": 6,
-          "_then14": 9,
-          "_screen15": 9,
-          "_then16": 12,
-          "_else18": 14,
-          "_endif18": 14,
+          "_screen8": 5,
+          "_screen9": 6,
+          "_screen14": 7,
+          "_then15": 10,
+          "_screen16": 10,
+          "_then17": 13,
           "_else19": 15,
           "_endif19": 15,
-          "_contents": 17,
-          "_screen21": 17
+          "_else20": 16,
+          "_endif20": 16,
+          "_contents": 18,
+          "_screen22": 18
         }
       },
       "initial": {
