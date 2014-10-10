@@ -359,6 +359,22 @@
       {
         "clause": "exit section",
         "_row_num": 67
+      },
+      {
+        "branch_label": "send_sms",
+        "_row_num": 68
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/send_sms/forms/send_sms/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 69
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 70
       }
     ],
     "settings": [
@@ -544,6 +560,14 @@
           "text": "geoweather"
         },
         "_row_num": 21
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "send_sms",
+        "display": {
+          "text": "Send SMS"
+        },
+        "_row_num": 22
       }
     ]
   },
@@ -782,6 +806,14 @@
             "text": "geoweather"
           },
           "_row_num": 21
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "send_sms",
+          "display": {
+            "text": "Send SMS"
+          },
+          "_row_num": 22
         }
       ]
     },
@@ -1182,12 +1214,25 @@
             "promptIdx": 21
           },
           {
+            "url": "'?' + opendatakit.getHashString('../tables/send_sms/forms/send_sms/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 69,
+            "__rowNum__": 68,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen69",
+            "promptIdx": 22
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 68,
-            "_branch_label_enclosing_screen": "survey/_screen68",
-            "promptIdx": 22
+            "_row_num": 71,
+            "_branch_label_enclosing_screen": "survey/_screen71",
+            "promptIdx": 23
           }
         ],
         "validation_tag_map": {
@@ -1497,25 +1542,38 @@
             "operationIdx": 45
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 68,
+            "_row_num": 69,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 46
           },
           {
-            "_row_num": 68,
+            "clause": "exit section",
+            "_row_num": 70,
+            "__rowNum__": 69,
+            "_token_type": "exit_section",
+            "operationIdx": 47
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 71,
+            "operationIdx": 48
+          },
+          {
+            "_row_num": 71,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 47
+            "operationIdx": 49
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 68,
-            "operationIdx": 48
+            "_row_num": 71,
+            "operationIdx": 50
           }
         ],
         "branch_label_map": {
@@ -1564,8 +1622,10 @@
           "_screen63": 42,
           "geoweather": 44,
           "_screen66": 44,
-          "_contents": 47,
-          "_screen68": 47
+          "send_sms": 46,
+          "_screen69": 46,
+          "_contents": 49,
+          "_screen71": 49
         }
       }
     }

@@ -2,13 +2,21 @@
   "xlsx": {
     "survey": [
       {
+        "type": "text",
+        "name": "subject_name",
+        "display": {
+          "text": "Enter the subject's name."
+        },
+        "_row_num": 2
+      },
+      {
         "type": "send_sms",
         "name": "send_sms",
         "display": {
           "text": "This will send an sms to 360.430.1468.",
           "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
         },
-        "_row_num": 2
+        "_row_num": 3
       }
     ],
     "prompt_types": [
@@ -113,10 +121,20 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "send_sms": {
+      "subject_name": {
         "_defn": [
           {
             "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "subject_name"
+      },
+      "send_sms": {
+        "_defn": [
+          {
+            "_row_num": 3,
             "section_name": "survey"
           }
         ],
@@ -136,26 +154,39 @@
         "reachable_sections": {},
         "prompts": [
           {
+            "type": "text",
+            "name": "subject_name",
+            "display": {
+              "text": "Enter the subject's name."
+            },
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
             "type": "send_sms",
             "name": "send_sms",
             "display": {
               "text": "This will send an sms to 360.430.1468.",
               "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
             },
-            "_row_num": 2,
-            "__rowNum__": 1,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "send_sms",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 0
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 1
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 3,
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 1
+            "_row_num": 4,
+            "_branch_label_enclosing_screen": "survey/_screen4",
+            "promptIdx": 2
           }
         ],
         "validation_tag_map": {
@@ -169,31 +200,38 @@
             "operationIdx": 0
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 3,
-            "operationIdx": 1
-          },
-          {
             "_row_num": 3,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 4,
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 2
+            "operationIdx": 3
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 3,
-            "operationIdx": 3
+            "_row_num": 4,
+            "operationIdx": 4
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_contents": 2,
-          "_screen3": 2
+          "_screen3": 1,
+          "_contents": 3,
+          "_screen4": 3
         }
       },
       "initial": {
