@@ -1,9 +1,9 @@
 'use strict';
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
-define(['mdl','opendatakit','databaseUtils','databaseSchema','jquery'], function(mdl,opendatakit,databaseUtils,databaseSchema,$) {
+define(['opendatakit','databaseUtils','databaseSchema','jquery'], function(opendatakit,databaseUtils,databaseSchema,$) {
 verifyLoad('database',
-    ['mdl','opendatakit','databaseUtils','databaseSchema','jquery'],
-    [mdl,opendatakit,databaseUtils,databaseSchema,$]);
+    ['opendatakit','databaseUtils','databaseSchema','jquery'],
+    [opendatakit,databaseUtils,databaseSchema,$]);
 return {
   pendingChanges: [],
   withDb:function(ctxt, transactionBody) {
@@ -111,44 +111,45 @@ return {
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-putInstanceMetaData:function(ctxt, name, value) {
-      var that = this;
-      var dbColumnName;
-      var f;
-      ctxt.log('D','putInstanceMetaData', 'name: ' + name);
-      for ( f in databaseSchema.dataTablePredefinedColumns ) {
-        var defn = databaseSchema.dataTablePredefinedColumns[f];
-        if (  defn.elementSet === 'instanceMetadata' &&
-              ( defn.elementPath === name ||
-                (defn.elementPath ===undefined || defn.elementPath === null && f === name) ) ) {
-            dbColumnName = f;
-            break;
-        }
+/**
+ * Does not depend upon global state.
+ */
+putInstanceMetaData:function(ctxt, model, formId, instanceId, name, value) {
+    var that = this;
+    var dbColumnName;
+    var f;
+    ctxt.log('D','putInstanceMetaData', 'name: ' + name);
+    for ( f in databaseSchema.dataTablePredefinedColumns ) {
+      var defn = databaseSchema.dataTablePredefinedColumns[f];
+      if (  defn.elementSet === 'instanceMetadata' &&
+          ( defn.elementPath === name ||
+            (defn.elementPath ===undefined || defn.elementPath === null && f === name) ) ) {
+        dbColumnName = f;
+        break;
       }
-      if ( dbColumnName === undefined || dbColumnName === null ) {
-        ctxt.log('E','putInstanceMetaData.elementPath.missing', 'name: ' + name);
-        ctxt.failure({message:"Unrecognized instance metadata"});
-        return;
-      }
-      // and still use the elementPath for the lookup.
-      // this simply ensures that the name is exported above 
-      // the database layer. 
-      // The database layer uses putDataKeyValueMap()
-      // for lower-level manipulations.
+    }
+    if ( dbColumnName === undefined || dbColumnName === null ) {
+       ctxt.log('E','putInstanceMetaData.elementPath.missing', 'name: ' + name);
+      ctxt.failure({message:"Unrecognized instance metadata"});
+      return;
+    }
+    // and still use the elementPath for the lookup.
+    // this simply ensures that the name is exported above 
+    // the database layer. 
+    // The database layer uses putDataKeyValueMap()
+    // for lower-level manipulations.
 
-      // flush any pending changes too...
-      var changes = that.pendingChanges;
-      that.pendingChanges = {};
-      changes[name] = {value: value, isInstanceMetadata: true };
-
-      that.putDataKeyValueMap(ctxt, changes );
+    // flush any pending changes too...
+    var changes = that.pendingChanges;
+    that.pendingChanges = {};
+    changes[name] = {value: value, isInstanceMetadata: true };
+    that.putDataKeyValueMap(ctxt, model, formId, instanceId, changes );
 },
 /**
  * kvMap is: { 'keyname' : {value: 'val', isInstanceMetadata: false }, ... }
- *
- * Requires: mdl to be initialized -- e.g., mdl.tableMetadata, mdl.dataTableModel
+ * Does not depend upon global state.
  */
-putDataKeyValueMap:function(ctxt, kvMap) {
+putDataKeyValueMap:function(ctxt, model, formId, instanceId, kvMap) {
     if ($.isEmptyObject(kvMap)) {
         ctxt.success();
     } else {
@@ -164,13 +165,12 @@ putDataKeyValueMap:function(ctxt, kvMap) {
           var updates = {};
           var tmpctxt = $.extend({}, ctxt, {success:function() {
                     ctxt.log('D','database.putDataKeyValueMap.updatingCache');
-                    databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, updates);
+                    databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
                     ctxt.success();
                 }});
 
           that.withDb( tmpctxt, function(transaction) {
-                var formId = opendatakit.getSettingValue('form_id');
-                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), kvMap);
+                var is = databaseSchema.insertKeyValueMapDataTableStmt(model.table_id, model.dataTableModel, formId, instanceId, kvMap);
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                     updates = is.updates;
                     tmpctxt.log('D',"putDataKeyValueMap.success", names);
@@ -178,14 +178,15 @@ putDataKeyValueMap:function(ctxt, kvMap) {
             });
     }
 },
-/*
+/**
  * Used by csv loader to load data directly in from a csv file that is assumed
  * to have exactly the right data columns for this formId.
  * kvMap is: { 'keyname' : {value: 'val', isInstanceMetadata: false }, ... }
  *
- * Requires: mdl to be initialized -- e.g., mdl.tableMetadata, mdl.dataTableModel
+ * Does not depend upon global state.
  */
-loadDataKeyValueMap:function(ctxt, kvMap) {
+loadDataKeyValueMap:function(ctxt, model, formId, kvMap) {
+
     if ($.isEmptyObject(kvMap)) {
         ctxt.success();
     } else {
@@ -209,8 +210,7 @@ loadDataKeyValueMap:function(ctxt, kvMap) {
           var instanceId = instanceIdEntry.value;
           
           that.withDb( tmpctxt, function(transaction) {
-                var formId = opendatakit.getSettingValue('form_id');
-                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, instanceId, kvMap);
+                var is = databaseSchema.insertKeyValueMapDataTableStmt(model.table_id, model.dataTableModel, formId, instanceId, kvMap);
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                     updates = is.updates;
                     tmpctxt.log('D',"loadDataKeyValueMap.success", names);
@@ -218,20 +218,25 @@ loadDataKeyValueMap:function(ctxt, kvMap) {
             });
     }
 },
-getAllData:function(ctxt, mdl, instanceId) {
+/**
+ * Relies upon opendatakit.getRefId() to fetch session variable values 
+ * (to ensure we don't contaminate session variables across forms/instances)
+ * but otherwise does not depend upon global state.
+ */
+getAllData:function(ctxt, model, instanceId) {
       var that = this;
-      mdl.data = {};
-      mdl.metadata = {};
-      mdl.loaded = false;
+      model.data = {};
+      model.metadata = {};
+      model.loaded = false;
       ctxt.log('D','getAllData');
       if ( instanceId === undefined || instanceId === null ) {
         ctxt.log('D',"getAllData.instanceId.null");
-        mdl.loaded = true;
+        model.loaded = true;
         ctxt.success();
         return;
       }
       that.withDb( ctxt, function(transaction) {
-        var ss = databaseSchema.selectAllFromDataTableStmt(mdl.table_id, instanceId);
+        var ss = databaseSchema.selectAllFromDataTableStmt(model.table_id, instanceId);
         ctxt.sqlStatement = ss;
         transaction.executeSql(ss.stmt, ss.bind, function(transaction, result) {
             var len = result.rows.length;
@@ -246,8 +251,8 @@ getAllData:function(ctxt, mdl, instanceId) {
                 
                 var updates = {};
                 // and then just snarf the fields...
-                for ( dbKey in mdl.dataTableModel ) {
-                    jsonType = mdl.dataTableModel[dbKey];
+                for ( dbKey in model.dataTableModel ) {
+                    jsonType = model.dataTableModel[dbKey];
                     if ( databaseUtils.isUnitOfRetention(jsonType) ) {
                         elementPath = jsonType.elementPath;
                         if ( jsonType.isSessionVariable ) {
@@ -260,18 +265,21 @@ getAllData:function(ctxt, mdl, instanceId) {
                     }
                 }
     
-                databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, updates);
-                mdl.loaded = true;
+                databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+                model.loaded = true;
             }
         });
       });
 },
-cacheAllData:function(ctxt, instanceId) {
+/**
+ * Does not depend upon global state.
+ */
+cacheAllData:function(ctxt, model, instanceId) {
     var that = this;
-    if (mdl.loaded) {
+    if (model.loaded) {
         ctxt.success();
     } else {
-        this.getAllData(ctxt, mdl, instanceId);
+        this.getAllData(ctxt, model, instanceId);
     }
 },
 /////////////////////////////////////////////////////////////////////////
@@ -367,45 +375,54 @@ _coreGetAllTableMetadata:function(transaction, ctxt, tlo) {
         });
     });
 },
-save_all_changes:function(ctxt, asComplete) {
+/**
+ * Does not depend upon global state
+ */
+save_all_changes:function(ctxt, model, formId, instanceId, asComplete) {
       var that = this;
+      
     // TODO: if called from Java, ensure that all data on the current page is saved...
       ctxt.log('D','save_all_changes');
       var tmpctxt = $.extend({}, ctxt, {success:function() {
                 ctxt.log('I','save_all_changes.markCurrentStateSaved.success', 
-                opendatakit.getSettingValue('form_id') + " instanceId: " + opendatakit.getCurrentInstanceId() + " asComplete: " + asComplete);
+                formId + " instanceId: " + instanceId + " asComplete: " + asComplete);
                 ctxt.success();
             }});
       that.withDb( tmpctxt, 
             function(transaction) {
-                var formId = opendatakit.getSettingValue('form_id');
                 var kvMap = {};
                 kvMap['_savepoint_type'] = {value: (asComplete ? 'COMPLETE' : 'INCOMPLETE'), isInstanceMetadata: true };
-                var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), kvMap);
+                var is = databaseSchema.insertKeyValueMapDataTableStmt(model.table_id, model.dataTableModel, formId, instanceId, kvMap);
                 tmpctxt.sqlStatement = is;
                 transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
                     ctxt.log('D','save_all_changes.cleanup');
                     // and now delete the change history...
-                    var cs = databaseSchema.deletePriorChangesDataTableStmt(mdl.table_id, opendatakit.getCurrentInstanceId());
+                    var cs = databaseSchema.deletePriorChangesDataTableStmt(model.table_id, instanceId);
                     tmpctxt.sqlStatement = cs;
                     transaction.executeSql(cs.stmt, cs.bind);
                 });
             }
         );
 },
-ignore_all_changes:function(ctxt) {
+/**
+ * Does not depend upon global state
+ */
+ignore_all_changes:function(ctxt, model, formId, instanceId) {
       var that = this;
       ctxt.log('I','database.ignore_all_changes');
       that.withDb( ctxt, function(transaction) {
-            var cs = databaseSchema.deleteUnsavedChangesDataTableStmt(mdl.table_id, opendatakit.getCurrentInstanceId());
+            var cs = databaseSchema.deleteUnsavedChangesDataTableStmt(model.table_id, instanceId);
             ctxt.sqlStatement = cs;
             transaction.executeSql(cs.stmt, cs.bind);
-            mdl.loaded = false;
+            model.loaded = false;
         });
 },
-_common_delete_linked_instance_all:function(ctxt, dbTableName, fnname, instanceId) {
+/**
+ * Does not depend upon global state
+ */
+delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
       var that = this;
-      ctxt.log('I',fnname);
+      ctxt.log('I','delete_linked_instance_all');
       that.withDb( ctxt, function(transaction) {
             // delete unsaved revisions
             var cs = databaseSchema.deleteUnsavedChangesDataTableStmt(dbTableName, instanceId);
@@ -422,19 +439,6 @@ _common_delete_linked_instance_all:function(ctxt, dbTableName, fnname, instanceI
                 });
             });
         });
-},
-delete_all:function(ctxt, instanceId) {
-      var that = this;
-      that._common_delete_linked_instance_all(ctxt, mdl.table_id, 'delete_all', instanceId);
-},
-get_all_instances:function(ctxt, selection, selectionArgs, orderBy) {
-      var that = this;
-      var displayElementName = opendatakit.getSettingValue('instance_name');
-      that.get_linked_instances(ctxt, mdl.table_id, selection, selectionArgs, displayElementName, orderBy);
-},
-delete_linked_instance_all:function(ctxt, dbTableName, instanceId) {
-      var that = this;
-      that._common_delete_linked_instance_all(ctxt, dbTableName, 'delete_linked_instance_all', instanceId);
 },
 get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displayElementName, orderBy) {
       var that = this;
@@ -467,20 +471,21 @@ get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displ
 },
 initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
     var that = this;
+    var model = opendatakit.getCurrentModel();
     instanceMetadataKeyValueMap = instanceMetadataKeyValueMap || {};
     if ( instanceId === undefined || instanceId === null ) {
         ctxt.log('D','initializeInstance.noInstance');
-        mdl.metadata = {};
-        mdl.data = {};
-        mdl.loaded = false;
+        model.metadata = {};
+        model.data = {};
+        model.loaded = false;
         ctxt.success();
     } else {
         ctxt.log('D','initializeInstance.access', instanceId);
         var tmpctxt = $.extend({},ctxt,{success:function() {
-                that.cacheAllData(ctxt, instanceId);
+                that.cacheAllData(ctxt, model, instanceId);
             }});
         that.withDb( tmpctxt, function(transaction) {
-            var cs = databaseSchema.selectDataTableCountStmt(mdl.table_id, instanceId);
+            var cs = databaseSchema.selectDataTableCountStmt(model.table_id, instanceId);
             tmpctxt.sqlStatement = cs;
             transaction.executeSql(cs.stmt, cs.bind, function(transaction, result) {
                 var count = 0;
@@ -496,13 +501,13 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     // construct a friendly name for this new form...
                     var date = new Date();
                     var dateStr = date.toISOString();
-                    var locale = opendatakit.getDefaultFormLocale(mdl.formDef);
+                    var locale = opendatakit.getDefaultFormLocale(model.formDef);
                     kvMap._id = { value: instanceId, isInstanceMetadata: true };
                     kvMap._locale = { value: locale, isInstanceMetadata: true };
                     // overwrite these with anything that was passed in...
                     databaseUtils.processPassedInKeyValueMap(databaseSchema.dataTablePredefinedColumns, kvMap, instanceMetadataKeyValueMap);
                     
-                    cs = databaseSchema.insertNewKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, kvMap);
+                    cs = databaseSchema.insertNewKeyValueMapDataTableStmt(model.table_id, model.dataTableModel, formId, kvMap);
                     tmpctxt.sqlStatement = cs;
                     transaction.executeSql(cs.stmt, cs.bind);
                 } else {
@@ -510,7 +515,7 @@ initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
                     // gather anything that was passed in...
                     databaseUtils.processPassedInKeyValueMap(databaseSchema.dataTablePredefinedColumns, kvMap, instanceMetadataKeyValueMap);
                     if ( !$.isEmptyObject(kvMap) ) {
-                        cs = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, mdl.dataTableModel, formId, instanceId, kvMap);
+                        cs = databaseSchema.insertKeyValueMapDataTableStmt(model.table_id, model.dataTableModel, formId, instanceId, kvMap);
                         tmpctxt.sqlStatement = cs;
                         transaction.executeSql(cs.stmt, cs.bind);
                     }
@@ -525,11 +530,12 @@ initializeTables:function(ctxt, formDef, table_id, formPath) {
         ctxt.log('D','getAllTableMetaData.success');
         // these values come from the current webpage
         // update table_id and qp
-        mdl.formDef = tlo.formDef;
-        mdl.dataTableModel = tlo.dataTableModel;
-        mdl.tableMetadata = tlo.tableMetadata;
-        mdl.columnMetadata = tlo.columnMetadata;
-        mdl.data = tlo.data;
+        var model = opendatakit.getCurrentModel();
+        model.formDef = tlo.formDef;
+        model.dataTableModel = tlo.dataTableModel;
+        model.tableMetadata = tlo.tableMetadata;
+        model.columnMetadata = tlo.columnMetadata;
+        model.data = tlo.data;
         opendatakit.setCurrentTableId(table_id);
         opendatakit.setCurrentFormPath(formPath);
         ctxt.success();
@@ -662,27 +668,35 @@ fullDefHelper:function(transaction, ctxt, tableToUpdate, idx, fullDef, tlo) {
 },
 getDataValue:function(name) {
     var that = this;
-    return databaseUtils.getElementPathValue(mdl.data, name);
+    var model = opendatakit.getCurrentModel();
+    return databaseUtils.getElementPathValue(model.data, name);
 },
 getInstanceMetaDataValue:function(name) {
     var that = this;
-    return databaseUtils.getElementPathValue(mdl.metadata, name);
+    var model = opendatakit.getCurrentModel();
+    return databaseUtils.getElementPathValue(model.metadata, name);
 },
 setInstanceMetaData:function(ctxt, name, value) {
     ctxt.log('I','setInstanceMetaData: ' + name);
     var that = this;
+    var formId = opendatakit.getSettingValue('form_id');
+    var model = opendatakit.getCurrentModel();
+    var instanceId = opendatakit.getCurrentInstanceId();
+
     that.putInstanceMetaData($.extend({}, ctxt, {success: function() {
-                that.cacheAllData(ctxt, opendatakit.getCurrentInstanceId());
-            }}), name, value);
+                that.cacheAllData(ctxt, model, instanceId);
+            }}), model, formId, instanceId, name, value);
 },
-// TODO: table metadata is under mdl.tableMetadata
-// TODO: column metadata is under mdl.columnMetadata
+// TODO: table metadata is under model.tableMetadata
+// TODO: column metadata is under model.columnMetadata
 getTableMetaDataValue:function(name) {
     var that = this;
-    return databaseUtils.getElementPathValue(mdl.tableMetadata, name);
+    var model = opendatakit.getCurrentModel();
+    return databaseUtils.getElementPathValue(model.tableMetadata, name);
 },
 getAllDataValues:function() {
-    return mdl.data;
+    var model = opendatakit.getCurrentModel();
+    return model.data;
 },
 purge:function(ctxt) {
     var that = this;
@@ -731,31 +745,36 @@ setValueDeferredChange: function( name, value ) {
     justChange[name] = {value: value, isInstanceMetadata: false };
     that.pendingChanges[name] = {value: value, isInstanceMetadata: false };
     var formId = opendatakit.getSettingValue('form_id');
+    var model = opendatakit.getCurrentModel();
+    var instanceId = opendatakit.getCurrentInstanceId();
     // apply the change immediately...
-    var is = databaseSchema.insertKeyValueMapDataTableStmt(mdl.table_id, 
-                    mdl.dataTableModel, formId, opendatakit.getCurrentInstanceId(), justChange);
+    var is = databaseSchema.insertKeyValueMapDataTableStmt(model.table_id, 
+                    model.dataTableModel, formId, instanceId, justChange);
     
-    databaseUtils.reconstructModelDataFromElementPathValueUpdates(mdl, is.updates);
+    databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, is.updates);
 },
 applyDeferredChanges: function(ctxt) {
     var that = this;
     var changes = that.pendingChanges;
     that.pendingChanges = {};
+    var formId = opendatakit.getSettingValue('form_id');
+    var model = opendatakit.getCurrentModel();
+    var instanceId = opendatakit.getCurrentInstanceId();
     that.putDataKeyValueMap($.extend({},ctxt,{failure:function(m) {
         // a failure happened during writing -- reload state from db
-        mdl.loaded = false;
+        model.loaded = false;
         that.cacheAllData($.extend({},ctxt,{success:function() {
                 ctxt.failure(m);
             }, failure:function(m2) {
                 ctxt.failure(m);
-            }}), opendatakit.getCurrentInstanceId());
-        }}), changes );
+            }}), model, instanceId);
+        }}), model, formId, instanceId, changes );
 },
-convertSelectionString: function(linkedMdl, selection) {
-    return databaseUtils.convertSelectionString(linkedMdl, selection);
+convertSelectionString: function(linkedModel, selection) {
+    return databaseUtils.convertSelectionString(linkedModel, selection);
 },
-convertOrderByString: function(linkedMdl, order_by) {
-    return databaseUtils.convertOrderByString(linkedMdl, order_by);
+convertOrderByString: function(linkedModel, order_by) {
+    return databaseUtils.convertOrderByString(linkedModel, order_by);
 }
 };
 });

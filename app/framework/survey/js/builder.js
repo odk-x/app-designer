@@ -151,8 +151,6 @@ verifyLoad('builder',
             surveyJson.specification.currentScreenTypes = currentScreenTypes;
         
             // define the requirejs_path action on the property parser.
-            // this is the only property parser that depends upon a 
-            // current mdl value.
             propertyParsers.requirejs_path = function(content) {
                 return formPath + content;
             };

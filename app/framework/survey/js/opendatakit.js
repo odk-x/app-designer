@@ -151,6 +151,10 @@ return {
         return mdl.formDef;
     },
     
+    getCurrentModel:function() {
+        return mdl;
+    },
+    
     getQueriesDefinition: function(query_name) {
         return mdl.formDef.specification.queries[query_name];
     },
