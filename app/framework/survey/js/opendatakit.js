@@ -6,15 +6,41 @@
  * provide useful parsing or interpretation of localization details.
  *
  */
-define(['mdl','underscore'],function(mdl,_) {
+define(['underscore'],function(_) {
 verifyLoad('opendatakit',
-    ['mdl','underscore'],
-    [ mdl,  _]);
+    ['underscore'],
+    [ _]);
 return {
     initialScreenPath: "initial/0",
     savepoint_type_complete: 'COMPLETE',
     savepoint_type_incomplete: 'INCOMPLETE',
     baseDir: '',
+    /**
+     * Global object that is the container for 
+     * - formDef
+     * - model structure metadata
+     * - instance metadata
+     * - survey instance data
+     *
+     * The data is accessed via the database.js utilities.
+     * Those utilities are responsible for write-through
+     * update of the database.  Data is cached here to 
+     * simplify Javascript user-defined expression coding.
+     * 
+     * The W3C SQLite database has an asynchronous 
+     * interaction model.
+     * 
+     */
+    mdl: {data: {},  // dataTable instance data values: (...)
+        metadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
+        tableMetadata: {}, // table_definitions and key_value_store_active("table","global") values: table_id, tableKey, dbTableName
+        columnMetadata: {},// column_definitions and key_value_store_active("column",elementKey) values: none...
+        dataTableModel: {},// inverted and extended formDef.model for representing data store
+        formDef: null, 
+        formPath: null, 
+        instanceId: null, 
+        table_id: null
+        },
     databaseSettings: null,
     platformInfo: null,
     
@@ -144,50 +170,50 @@ return {
         return uri;
     },
     setCurrentFormDef:function(formDef) {
-        mdl.formDef = formDef;
+        this.mdl.formDef = formDef;
     },
     
     getCurrentFormDef:function() {
-        return mdl.formDef;
+        return this.mdl.formDef;
     },
     
     getCurrentModel:function() {
-        return mdl;
+        return this.mdl;
     },
     
     getQueriesDefinition: function(query_name) {
-        return mdl.formDef.specification.queries[query_name];
+        return this.mdl.formDef.specification.queries[query_name];
     },
     
     getChoicesDefinition: function(choice_list_name) {
-        return mdl.formDef.specification.choices[choice_list_name];
+        return this.mdl.formDef.specification.choices[choice_list_name];
     },
     
     setCurrentFormPath:function(formPath) {
-        mdl.formPath = formPath;
+        this.mdl.formPath = formPath;
     },
     
     getCurrentFormPath:function() {
-        return mdl.formPath;
+        return this.mdl.formPath;
     },
     
     setRefId:function(refId) {
-        mdl.ref_id = refId;
+        this.mdl.ref_id = refId;
     },
     
     getRefId:function() {
-        return mdl.ref_id;
+        return this.mdl.ref_id;
     },
     
     clearLocalInfo:function(type) {
         // wipe the ref_id --
         // this prevents saves into the shim from succeeding...
-        mdl.ref_id = this.genUUID();
+        this.mdl.ref_id = this.genUUID();
         if ( type === "table" ) {
-            mdl.table_id = null;
-            mdl.formPath = null;
+            this.mdl.table_id = null;
+            this.mdl.formPath = null;
         } else if ( type === "form" ) {
-            mdl.formPath = null;
+            this.mdl.formPath = null;
         } else if ( type === "instance" ) {
           // do not alter instance id
           return;
@@ -211,11 +237,11 @@ return {
     },
     
     setCurrentTableId:function(table_id) {
-        mdl.table_id = table_id;
+        this.mdl.table_id = table_id;
     },
     
     getCurrentTableId:function() {
-        return mdl.table_id;
+        return this.mdl.table_id;
     },
     
     getSectionTitle:function(formDef, sectionName) {

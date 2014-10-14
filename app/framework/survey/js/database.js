@@ -545,7 +545,7 @@ initializeTables:function(ctxt, formDef, table_id, formPath) {
 /**
  * Process the formDef into a table definition.
  *
- * On success, invoke ctxt.success(tlo); where tlo is what will become the mdl
+ * On success, invoke ctxt.success(tlo); where tlo is what will become the opendatakit.getModel()
  *
  */
 readTableDefinition:function(ctxt, formDef, table_id, formPath) {
