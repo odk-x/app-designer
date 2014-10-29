@@ -44,11 +44,11 @@ Column,plant_picture_uriFragment,displayFormat,string,""
 Column,plant_picture_uriFragment,displayName,string,"""uriFragment"""
 Column,plant_picture_uriFragment,displayVisible,boolean,TRUE
 Column,plant_picture_uriFragment,joins,object,""
-Column,plot_name,displayChoicesList,object,""
-Column,plot_name,displayFormat,string,""
-Column,plot_name,displayName,string,"""plot_name"""
-Column,plot_name,displayVisible,boolean,TRUE
-Column,plot_name,joins,object,""
+Column,plot_id,displayChoicesList,object,""
+Column,plot_id,displayFormat,string,""
+Column,plot_id,displayName,string,"""plot_id"""
+Column,plot_id,displayVisible,boolean,TRUE
+Column,plot_id,joins,object,""
 Column,soil,displayChoicesList,object,""
 Column,soil,displayFormat,string,""
 Column,soil,displayName,string,"""soil"""
@@ -59,7 +59,7 @@ FormType,default,FormType.formType,string,SURVEY
 ListDisplayActivity,default,nameOfListView,string,Plot visits
 ListDisplayActivity.views,Plot visits,filename,string,tables/visit/html/visit_list.html
 SurveyUtil,default,SurveyUtil.formId,string,visit
-Table,default,colOrder,object,"[""plot_name"",""date"",""plant_height"",""plant_health"",""plant_picture_uriFragment"",""pests"",""soil"",""observations""]"
+Table,default,colOrder,object,"[""plot_id"",""date"",""plant_height"",""plant_health"",""plant_picture_uriFragment"",""pests"",""soil"",""observations""]"
 Table,default,defaultViewType,string,List
 Table,default,displayName,object,"""Plot Visits"""
 Table,default,groupByCols,string,[]

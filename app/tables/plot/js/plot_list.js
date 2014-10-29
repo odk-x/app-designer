@@ -27,6 +27,37 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
  */
 var resumeFn = function(idxStart) {
 
+    if (idxStart === 0) {
+        // We want to be able to drag and drop without the drop triggering a click.
+        // Idea for this taken from:
+        // http://stackoverflow.com/questions/14301026/how-do-i-avoid-a-click-event-firing-after-dragging-a-gridster-js-widget-with-cli
+
+        var preventClick = function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        };
+
+        $('.gridster ul').gridster({
+            widget_margins: [10, 10],
+            widget_base_dimensions: [140, 140],
+            draggable: {
+                start: function(event, ui) {
+                    // stop propagating in the capture phase.
+                    ui.$player[0].addEventListener('click', preventClick, true);
+                },
+                stop: function(event, ui) {
+                    var player = ui.$player;
+                    setTimeout(function() {
+                        player[0].removeEventListener(
+                          'click',
+                          preventClick,
+                          true);
+                    });
+                }
+            }
+        });
+    }
+
     console.log('resumeFn called. idxStart: ' + idxStart);
     // The first time through construct any constants you need to refer to
     // and set the click handler on the list elements.
@@ -47,7 +78,7 @@ var resumeFn = function(idxStart) {
             var containingDiv = jqueryObject.closest('.item_space');
             var rowId = containingDiv.attr('rowId');
             console.log('clicked with rowId: ' + rowId);
-            // make sure we retrieved the rowId
+          // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 control.openDetailView(
@@ -71,8 +102,11 @@ var resumeFn = function(idxStart) {
  * a detail view on the clicked row.
  */
 var displayGroup = function(idxStart) {
+    var gridster = $('.gridster ul').gridster().data('gridster');
+
     // Number of rows displayed per chunk
     var chunk = 50;
+
     for (var i = idxStart; i < idxStart + chunk; i++) {
         if (i >= data.getCount()) {
             break;
@@ -82,24 +116,30 @@ var displayGroup = function(idxStart) {
         // an attribute so that the click handler set in resumeFn knows which
         // row was clicked.
         var item = $('<li>');
+
+        var containerDiv = $('<div>');
+        containerDiv.text(data.getData(i, 'plot_name'));
+        containerDiv.addClass('content-holder');
+
         item.attr('rowId', data.getRowId(i));
         item.attr('class', 'item_space');
-        item.text(data.getData(i, 'plot_name'));
+        item.addClass('grid-item');
+
+        item.append(containerDiv);
                 
         /* Creates arrow icon (Nothing to edit here) */
-        var chevron = $('<img>');
-        chevron.attr('src', '../../../assets/img/little_arrow.png');
-        chevron.attr('class', 'chevron');
-        item.append(chevron);
+        //var chevron = $('<img>');
+        //chevron.attr('src', '../../../assets/img/little_arrow.png');
+        //chevron.attr('class', 'chevron');
+        //item.append(chevron);
 
-        var idItem = $('<li>');
+        var idItem = $('<div>');
         idItem.attr('class', 'detail');
         idItem.text('Crop: ' + data.getData(i, 'planting'));
-        item.append(idItem);
+        containerDiv.append(idItem);
 
-        // Add any other details in your list item here.
-                
-        $('#list').append(item);
+        gridster.add_widget(item, 1, 1);
+        
     }
     if (i < data.getCount()) {
         setTimeout(resumeFn, 0, i);

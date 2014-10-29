@@ -117,6 +117,12 @@ var displayGroup = function(idxStart) {
         item.append(field2);
 
         $('#list').append(item);
+
+        // don't append the last one to avoid the fencepost problem
+        var borderDiv = $('<div>');
+        borderDiv.addClass('divider');
+        $('#list').append(borderDiv);
+
     }
     if (i < data.getCount()) {
         setTimeout(resumeFn, 0, i);

@@ -1,5 +1,12 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-family: arial;
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -12,19 +19,24 @@ h1 {
   overflow: auto;
 }
 
-ul {
+li {
   list-style-type: none;
-  margin: 0;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+ul {
   padding: 0;
 }
 
 .item_space {
+  margin: 10px 10px 10px 10px;
   font-size: 20pt;
-  font-weight: bold;
   padding: 5px;
   width: 95%;
-  padding: 10px; 
-  border-bottom: 2px solid  #38c0f4;
+  /*padding: 20px; */
+  padding-top: 8px;
+  padding-bottom: 12px;
 }
 
 .item_space:active {
@@ -33,6 +45,7 @@ ul {
 
 .detail {
   font-size: 16pt;
+  color: darkgray;
   font-weight: normal;
 }
  
@@ -42,4 +55,12 @@ ul {
   padding-top: 15px;
   margin: 0;  
   height: 40px;
+}
+
+.divider {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #38c0f4; 
+  width: 95%;
+  height: 10px;
 }

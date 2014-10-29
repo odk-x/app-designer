@@ -4,7 +4,7 @@
       {
         "type": "select_one",
         "values_list": "select_linked_plot",
-        "name": "plot_name",
+        "name": "plot_id",
         "display": {
           "text": "Which plot are you observing?"
         },
@@ -293,7 +293,7 @@
         "query_name": "select_linked_plot",
         "query_type": "linked_table",
         "linked_form_id": "plot",
-        "selection": "plot_id >= ?",
+        "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
         "auxillaryHash": "'plot_id>='+encodeURIComponent(0)",
         "_row_num": 2
@@ -316,6 +316,11 @@
           "title": "Plot Visits"
         },
         "_row_num": 4
+      },
+      {
+        "setting_name": "table_id",
+        "value": "visit",
+        "_row_num": 5
       }
     ]
   },
@@ -358,8 +363,7 @@
       "table_id": {
         "setting_name": "table_id",
         "value": "visit",
-        "_row_num": 2,
-        "__rowNum__": 1
+        "_row_num": 5
       },
       "_locales": {
         "setting_name": "_locales",
@@ -487,7 +491,7 @@
         "query_name": "select_linked_plot",
         "query_type": "linked_table",
         "linked_form_id": "plot",
-        "selection": "plot_id >= ?",
+        "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
         "auxillaryHash": "'plot_id>='+encodeURIComponent(0)",
         "_row_num": 2
@@ -495,7 +499,7 @@
     },
     "calculates": {},
     "model": {
-      "plot_name": {
+      "plot_id": {
         "_defn": [
           {
             "_row_num": 2,
@@ -504,7 +508,7 @@
         ],
         "type": "string",
         "valuesList": "select_linked_plot",
-        "elementKey": "plot_name"
+        "elementKey": "plot_id"
       },
       "date": {
         "_defn": [
@@ -610,7 +614,7 @@
           {
             "type": "select_one",
             "values_list": "select_linked_plot",
-            "name": "plot_name",
+            "name": "plot_id",
             "display": {
               "text": "Which plot are you observing?"
             },

@@ -9,7 +9,7 @@
     </head>
     <body>
         <script type="text/javascript" src="../js/Tea_houses_detail.js"></script>
-        <h1><span id="TITLE"></span></h1>
+        <h1><span id="TITLE" class="main-text"></span></h1>
         <!-- To query and link to the result, replace the placeholders and put the
         following around the <span></span> tags.
         <a href="#" onclick="control.openTable('TABLE_NAME', 'COL_NAME:' +
@@ -51,7 +51,7 @@
           'House_id = ?',
           [data.get('House_id')],
           'tables/Tea_inventory/html/Tea_inventory_list.html');">
-          <span id="FIELD_16"></span> Teas</a>
+          <span id="FIELD_16" class="main-text"></span> Teas</a>
         
         <script>
             $(display());  // calls the detail display function when ready
