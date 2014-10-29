@@ -3,9 +3,9 @@
     "survey": [
       {
         "type": "text",
-        "name": "subject_name",
+        "name": "name",
         "display": {
-          "text": "Enter the subject's name."
+          "text": "Enter a Name"
         },
         "_row_num": 2
       },
@@ -13,34 +13,17 @@
         "type": "text",
         "name": "phone_number",
         "display": {
-          "text": "Enter the phone number to which to send the text."
+          "text": "Enter a Phone Number"
         },
         "_row_num": 3
       },
       {
         "type": "send_sms",
-        "name": "send_sms",
+        "name": "send_message",
         "display": {
-          "text": "This will send an sms to 360.430.1468.",
-          "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+          "text": "Send an SMS"
         },
         "_row_num": 4
-      },
-      {
-        "type": "odk_sms",
-        "name": "odk_sms",
-        "display": {
-          "text": "This will send an sms via the sms bridge."
-        },
-        "_row_num": 5
-      },
-      {
-        "type": "odk_sms_automatic",
-        "name": "odk_sms_automatic",
-        "display": {
-          "text": "This will send an sms without requiring confirmation."
-        },
-        "_row_num": 6
       }
     ],
     "prompt_types": [
@@ -48,39 +31,29 @@
         "prompt_type_name": "send_sms",
         "type": "integer",
         "_row_num": 2
-      },
-      {
-        "prompt_type_name": "odk_sms",
-        "type": "integer",
-        "_row_num": 3
-      },
-      {
-        "prompt_type_name": "odk_sms_automatic",
-        "type": "integer",
-        "_row_num": 4
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "send_sms",
+        "value": "sms_example",
         "_row_num": 2
       },
       {
         "setting_name": "form_version",
-        "value": 20141008,
+        "value": 20141011,
         "_row_num": 3
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Send SMS"
+          "title": "SMS Example"
         },
         "_row_num": 4
       },
       {
         "setting_name": "table_id",
-        "value": "send_sms",
+        "value": "sms_example",
         "_row_num": 5
       }
     ]
@@ -106,24 +79,24 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "send_sms",
+        "value": "sms_example",
         "_row_num": 2
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20141008,
+        "value": 20141011,
         "_row_num": 3
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Send SMS"
+          "title": "SMS Example"
         },
         "_row_num": 4
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "send_sms",
+        "value": "sms_example",
         "_row_num": 5
       },
       "_locales": {
@@ -146,7 +119,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Send SMS"
+          "title": "SMS Example"
         },
         "_row_num": 4
       }
@@ -155,7 +128,7 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "subject_name": {
+      "name": {
         "_defn": [
           {
             "_row_num": 2,
@@ -163,7 +136,7 @@
           }
         ],
         "type": "string",
-        "elementKey": "subject_name"
+        "elementKey": "name"
       },
       "phone_number": {
         "_defn": [
@@ -175,7 +148,7 @@
         "type": "string",
         "elementKey": "phone_number"
       },
-      "send_sms": {
+      "send_message": {
         "_defn": [
           {
             "_row_num": 4,
@@ -184,29 +157,7 @@
         ],
         "prompt_type_name": "send_sms",
         "type": "integer",
-        "elementKey": "send_sms"
-      },
-      "odk_sms": {
-        "_defn": [
-          {
-            "_row_num": 5,
-            "section_name": "survey"
-          }
-        ],
-        "prompt_type_name": "odk_sms",
-        "type": "integer",
-        "elementKey": "odk_sms"
-      },
-      "odk_sms_automatic": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "prompt_type_name": "odk_sms_automatic",
-        "type": "integer",
-        "elementKey": "odk_sms_automatic"
+        "elementKey": "send_message"
       }
     },
     "section_names": [
@@ -221,9 +172,9 @@
         "prompts": [
           {
             "type": "text",
-            "name": "subject_name",
+            "name": "name",
             "display": {
-              "text": "Enter the subject's name."
+              "text": "Enter a Name"
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -236,7 +187,7 @@
             "type": "text",
             "name": "phone_number",
             "display": {
-              "text": "Enter the phone number to which to send the text."
+              "text": "Enter a Phone Number"
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -247,10 +198,9 @@
           },
           {
             "type": "send_sms",
-            "name": "send_sms",
+            "name": "send_message",
             "display": {
-              "text": "This will send an sms to 360.430.1468.",
-              "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+              "text": "Send an SMS"
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -260,38 +210,12 @@
             "promptIdx": 2
           },
           {
-            "type": "odk_sms",
-            "name": "odk_sms",
-            "display": {
-              "text": "This will send an sms via the sms bridge."
-            },
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "odk_sms",
-            "_branch_label_enclosing_screen": "survey/_screen5",
-            "promptIdx": 3
-          },
-          {
-            "type": "odk_sms_automatic",
-            "name": "odk_sms_automatic",
-            "display": {
-              "text": "This will send an sms without requiring confirmation."
-            },
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "prompt",
-            "_type": "odk_sms_automatic",
-            "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 4
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 7,
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 5
+            "_row_num": 5,
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 3
           }
         ],
         "validation_tag_map": {
@@ -317,47 +241,33 @@
             "operationIdx": 2
           },
           {
+            "_token_type": "exit_section",
+            "clause": "exit section",
             "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 7,
-            "operationIdx": 5
-          },
-          {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 4
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 7,
-            "operationIdx": 7
+            "_row_num": 5,
+            "operationIdx": 5
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen3": 1,
           "_screen4": 2,
-          "_screen5": 3,
-          "_screen6": 4,
-          "_contents": 6,
-          "_screen7": 6
+          "_contents": 4,
+          "_screen5": 4
         }
       },
       "initial": {
@@ -388,7 +298,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Send SMS"
+              "title": "SMS Example"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
