@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<!-- Detailed View -->
+    <head>
+        <link href="../css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../framework/libs/underscore.1.4.4.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../../framework/libs/d3-amd/d3.js"></script>
+        <script type="text/javascript" src="../js/detail.js"></script>
+    </head>
+    <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
+    <body>
+        <!-- Define any HTML structure you rely on in your js files here, above
+        the call to display. -->
+        <h1><span id="PLOT-NAME"></span></h1>
+        <p>Soil condition: <span id="soil-condition"></span></p>
+        <p>Sample: <span id="sample"></span></p>
+        <br>
+        <script>
+            $(display());  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

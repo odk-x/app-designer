@@ -80,6 +80,11 @@
         "setting_name": "table_id",
         "value": "plot",
         "_row_num": 6
+      },
+      {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 7
       }
     ]
   },
@@ -128,6 +133,11 @@
         "setting_name": "table_id",
         "value": "plot",
         "_row_num": 6
+      },
+      "disableSwipeNavigation": {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 7
       },
       "_locales": {
         "setting_name": "_locales",

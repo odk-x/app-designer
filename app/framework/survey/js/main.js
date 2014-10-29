@@ -27,7 +27,6 @@ requirejs.config({
         templates : 'survey/templates',
         translations : 'translations',
         // top-level objects
-        mdl : 'survey/js/mdl',
         screenTypes : 'survey/js/screenTypes',
         promptTypes : 'survey/js/promptTypes',
         // shim.js -- stub directly loaded
@@ -135,14 +134,14 @@ require(['jquery'],
         setTimeout( function() {
                 
             // and launch the framework...
-            require(['mdl','opendatakit', 'database','parsequery',
+            require(['opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'], 
-            function(   mdl,  opendatakit,   database,  parsequery,
+            function( opendatakit,   database,  parsequery,
                              builder,   controller, d3, jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
-                    ['mdl','opendatakit', 'database','parsequery',
+                    ['opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'],
-                    [ mdl,  opendatakit,   database,  parsequery,
+                    [ opendatakit,   database,  parsequery,
                              builder,   controller, d3, jqueryCsv]);
 
                 

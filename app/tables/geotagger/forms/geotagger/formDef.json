@@ -63,6 +63,11 @@
         "setting_name": "table_id",
         "value": "geotagger",
         "_row_num": 5
+      },
+      {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 6
       }
     ]
   },
@@ -106,6 +111,11 @@
         "setting_name": "table_id",
         "value": "geotagger",
         "_row_num": 5
+      },
+      "disableSwipeNavigation": {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",

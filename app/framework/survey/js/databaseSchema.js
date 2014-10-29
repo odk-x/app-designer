@@ -1,9 +1,9 @@
 'use strict';
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
-define(['mdl','databaseUtils','opendatakit'], function(mdl, databaseUtils,opendatakit) {
+define(['databaseUtils','opendatakit'], function(databaseUtils,opendatakit) {
 verifyLoad('databaseSchema',
-    ['mdl','databaseUtils','opendatakit'],
-    [mdl,databaseUtils,opendatakit]);
+    ['databaseUtils','opendatakit'],
+    [ databaseUtils,  opendatakit]);
 return {
         // maps of:
         //   dbColumnName : { 
@@ -604,12 +604,12 @@ selectAllColumnMetaDataStmt:function(table_id) {
         };
 },
 /**
- * Flesh out the protoMdl with a dataTableModel constructed from its formDef
+ * Flesh out the protoModel with a dataTableModel constructed from its formDef
  * 
  * Return the set of database table inserts needed for saving this data table model to the database.
  * This returned set does not include sessionVariable fields.
  */
-updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
+updateDataTableModelAndReturnDatabaseInsertLists:function(protoModel, formTitle) {
     var that = this;
     var fullDef = {
         _table_definitions: [],
@@ -621,8 +621,8 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...
-    var dbTableName = protoMdl.table_id;
-    // dataTableModel holds an inversion of the protoMdl.formDef.model
+    var dbTableName = protoModel.table_id;
+    // dataTableModel holds an inversion of the protoModel.formDef.model
     //
     //  elementKey : jsonSchemaType
     //
@@ -641,11 +641,11 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
         dataTableModel[f] = that.dataTablePredefinedColumns[f];
     }
     
-    // go through the supplied protoMdl.formDef model
+    // go through the supplied protoModel.formDef model
     // and invert it into the dataTableModel
     var jsonDefn;
-    for ( f in protoMdl.formDef.specification.model ) {
-        jsonDefn = databaseUtils.flattenElementPath( dataTableModel, null, f, null, protoMdl.formDef.specification.model[f] );
+    for ( f in protoModel.formDef.specification.model ) {
+        jsonDefn = databaseUtils.flattenElementPath( dataTableModel, null, f, null, protoModel.formDef.specification.model[f] );
     }
 
     // traverse the dataTableModel marking which elements are 
@@ -665,7 +665,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
             var surveyDisplayName = (jsonDefn.displayName === undefined || jsonDefn.displayName === null) ? surveyElementName : jsonDefn.displayName;
             
             fullDef._column_definitions.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _element_key: dbColumnName,
                 _element_name: jsonDefn.elementName,
                 _element_type: (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType),
@@ -678,7 +678,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
             }
 
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayVisible",
@@ -686,7 +686,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _value: true
             } );
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayName",
@@ -697,7 +697,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
             if ( jsonDefn.valuesList === undefined || jsonDefn.valuesList === null ) {
                 choicesJson = "";
             } else {
-                var ref = protoMdl.formDef.specification.choices[jsonDefn.valuesList];
+                var ref = protoModel.formDef.specification.choices[jsonDefn.valuesList];
                 if ( ref === undefined || ref === null ) {
                     choicesJson = "";
                 } else {
@@ -705,7 +705,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 }
             }
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayChoicesList",
@@ -713,7 +713,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _value: choicesJson
             } );
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayFormat",
@@ -721,7 +721,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _value: (jsonDefn.displayFormat === undefined || jsonDefn.displayFormat === null) ? "" : jsonDefn.displayFormat
             } );
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "joins",
@@ -732,21 +732,21 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     }
 
     fullDef._table_definitions.push( { 
-        _table_id: protoMdl.table_id, 
+        _table_id: protoModel.table_id, 
         _schema_etag: null,
         _last_data_etag: null,
         _last_sync_time: -1 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'object', _value: JSON.stringify(displayColumnOrder) } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'defaultViewType', _type: 'string', _value: 'SPREADSHEET' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'object', _value: JSON.stringify(formTitle) } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'groupByCols', _type: 'object', _value: '[]' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'indexCol', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortOrder', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'object', _value: JSON.stringify(displayColumnOrder) } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'defaultViewType', _type: 'string', _value: 'SPREADSHEET' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'object', _value: JSON.stringify(formTitle) } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'groupByCols', _type: 'object', _value: '[]' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'indexCol', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'sortOrder', _type: 'string', _value: '' } );
 
-    var settings = protoMdl.formDef.specification.settings;
+    var settings = protoModel.formDef.specification.settings;
     var formInstanceName = that.getSettingValue(settings, 'instance_name');
     var xmlInstanceName = that.getSettingValue(settings, 'xml_instance_name');
     if ( xmlInstanceName === undefined || xmlInstanceName === null ) {
@@ -759,25 +759,25 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     var xmlSubmissionUrl = that.getSettingValue(settings, 'xml_submission_url');
 
     if ( xmlInstanceName !== undefined && xmlInstanceName !== null ) {
-        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlInstanceName', _type: 'string', _value: xmlInstanceName } );
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlInstanceName', _type: 'string', _value: xmlInstanceName } );
     }
     if ( xmlRootElementName !== undefined && xmlRootElementName !== null ) {
-        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlRootElementName', _type: 'string', _value: xmlRootElementName } );
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlRootElementName', _type: 'string', _value: xmlRootElementName } );
     }
     if ( xmlDeviceIdPropertyName !== undefined && xmlDeviceIdPropertyName !== null ) {
-        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlDeviceIdPropertyName', _type: 'string', _value: xmlDeviceIdPropertyName } );
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlDeviceIdPropertyName', _type: 'string', _value: xmlDeviceIdPropertyName } );
     }
     if ( xmlUserIdPropertyName !== undefined && xmlUserIdPropertyName !== null ) {
-        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlUserIdPropertyName', _type: 'string', _value: xmlUserIdPropertyName } );
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlUserIdPropertyName', _type: 'string', _value: xmlUserIdPropertyName } );
     }
     if ( xmlBase64RsaPublicKey !== undefined && xmlBase64RsaPublicKey !== null ) {
-        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlBase64RsaPublicKey', _type: 'string', _value: xmlBase64RsaPublicKey } );
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlBase64RsaPublicKey', _type: 'string', _value: xmlBase64RsaPublicKey } );
     }
     if ( xmlSubmissionUrl !== undefined && xmlSubmissionUrl !== null ) {
-        fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'xmlSubmissionUrl', _type: 'string', _value: xmlSubmissionUrl } );
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlSubmissionUrl', _type: 'string', _value: xmlSubmissionUrl } );
     }
     
-    protoMdl.dataTableModel = dataTableModel;
+    protoModel.dataTableModel = dataTableModel;
     return fullDef;
 },
 getSettingValue: function(settings, id) {

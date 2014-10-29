@@ -3,11 +3,11 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh) {
+define(['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
+function(database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh) {
 verifyLoad('prompts',
-    ['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
-    [ mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh]);
+    ['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
+    [ database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh]);
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -279,6 +279,37 @@ promptTypes.base = Backbone.View.extend({
     getCallback: function(promptPath, internalPromptContext, action) {
         throw new Error("prompts." + this.type, "px: " + this.promptIdx + " unimplemented promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
     },
+    /**
+     * Useful routines to convert a selection string and an order by string
+     * into a proper database query string. These strings are cached after
+     * the conversion.  Used by the instances and linked_type prompts
+     */
+    _cachedSelection: null,
+    convertSelection: function(model) {
+        var that = this;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
+            return null;
+        }
+        if ( that._cachedSelection != null ) {
+            return that._cachedSelection;
+        }
+        that._cachedSelection = database.convertSelectionString(model, queryDefn.selection);
+        return that._cachedSelection;
+    },
+    _cachedOrderBy : null,
+    convertOrderBy: function(model) {
+        var that = this;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
+            return null;
+        }
+        if ( that._cachedOrderBy != null ) {
+            return that._cachedOrderBy;
+        }
+        that._cachedOrderBy = database.convertOrderByString(model, queryDefn.order_by);
+        return that._cachedOrderBy;
+    },
     populateChoicesViaQueryUsingAjax : function(query, newctxt){
         var that = this;
         var queryUri = query.uri();
@@ -463,37 +494,13 @@ promptTypes.instances = promptTypes.base.extend({
         "click .deleteInstance": "deleteInstance",
         "click .createInstance": "createInstance"
     },
-    _cachedSelection: null,
-    convertSelection: function() {
-        var that = this;
-        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
-            return null;
-        }
-        if ( that._cachedSelection != null ) {
-            return that._cachedSelection;
-        }
-        that._cachedSelection = database.convertSelectionString(mdl, queryDefn.selection);
-        return that._cachedSelection;
-    },
-    _cachedOrderBy : null,
-    convertOrderBy: function() {
-        var that = this;
-        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
-            return null;
-        }
-        if ( that._cachedOrderBy != null ) {
-            return that._cachedOrderBy;
-        }
-        that._cachedOrderBy = database.convertOrderByString(mdl, queryDefn.order_by);
-        return that._cachedOrderBy;
-    },
     configureRenderContext: function(ctxt) {
         var that = this;
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
         
         // see if we are supposed to apply a query filter to this...
+        var model = opendatakit.getCurrentModel();
+        var displayElementName = opendatakit.getSettingValue('instance_name');
         var selection = null;
         var selectionArgs = null;
         var orderBy = null;
@@ -508,12 +515,13 @@ promptTypes.instances = promptTypes.base.extend({
                 ctxt.failure({message: "Error displaying instances: tableId of value_list query does not match current tableId"});
                 return;
             }
-            selection = that.convertSelection(mdl);
+            selection = that.convertSelection(model);
             selectionArgs = queryDefn.selectionArgs();
-            orderBy = that.convertOrderBy(mdl);
+            orderBy = that.convertOrderBy(model);
         }
 
-        database.get_all_instances($.extend({},ctxt,{success:function(instanceList) {
+        // in this case, we are our own 'linked' table.
+        database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
                     var savepoint_type = term.savepoint_type;
                     if ( savepoint_type === opendatakit.savepoint_type_complete ) {
@@ -536,7 +544,7 @@ promptTypes.instances = promptTypes.base.extend({
                 }
                 ctxt.success();
             }
-        }), selection, selectionArgs, orderBy);
+        }), model.table_id, selection, selectionArgs, displayElementName, orderBy);
     },
     createInstance: function(evt){
       var ctxt = this.controller.newContext(evt);
@@ -555,11 +563,14 @@ promptTypes.instances = promptTypes.base.extend({
     deleteInstance: function(evt){
         var that = this;
         var ctxt = that.controller.newContext(evt);
+        var model = opendatakit.getCurrentModel();
         ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
-        database.delete_all($.extend({}, ctxt, {success: function() {
+
+        // in this case, we are our own 'linked' table.
+        database.delete_linked_instance_all($.extend({}, ctxt, {success: function() {
                 that.reRender(ctxt);
             }}),
-        $(evt.target).attr('id'));
+        model.table_id, $(evt.target).attr('id'));
     }
 });
 promptTypes.contents = promptTypes.base.extend({
@@ -594,8 +605,6 @@ promptTypes.contents = promptTypes.base.extend({
 });
 promptTypes._linked_type = promptTypes.base.extend({
     type: "_linked_type",
-    _cachedSelection: null,
-    _cachedOrderBy: null,
     getLinkedTableId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         if ( queryDefn != null )
@@ -623,39 +632,15 @@ promptTypes._linked_type = promptTypes.base.extend({
     getFormPath: function() {
         return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
     },
-    convertSelection: function(linkedMdl) {
-        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        var that = this;
-        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
-            return null;
-        }
-        if ( that._cachedSelection != null ) {
-            return that._cachedSelection;
-        }
-        that._cachedSelection = database.convertSelectionString(linkedMdl, queryDefn.selection);
-        return that._cachedSelection;
-    },
-    convertOrderBy: function(linkedMdl) {
-        var that = this;
-        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
-            return null;
-        }
-        if ( that._cachedOrderBy != null ) {
-            return that._cachedOrderBy;
-        }
-        that._cachedOrderBy = database.convertOrderByString(linkedMdl, queryDefn.order_by);
-        return that._cachedOrderBy;
-    },
-    _linkedCachedMdl: null,
+    _linkedCachedModel: null,
     _linkedCachedInstanceName: null,
     getLinkedInstanceName: function() {
         return this._linkedCachedInstanceName;
     },
-    getLinkedMdl: function(ctxt) {
+    getlinkedModel: function(ctxt) {
         var that = this;
-        if ( that._linkedCachedMdl != null ) {
-            ctxt.success(that._linkedCachedMdl);
+        if ( that._linkedCachedModel != null ) {
+            ctxt.success(that._linkedCachedModel);
             return;
         }
         var filePath = that.getFormPath() + 'formDef.json';
@@ -668,8 +653,8 @@ promptTypes._linked_type = promptTypes.base.extend({
             }
             database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
                 ctxt.log('D',"prompts." + that.type + 
-                    'getLinkedMdl.readTableDefinition.success', "px: " + that.promptIdx );
-                that._linkedCachedMdl = tlo;
+                    'getlinkedModel.readTableDefinition.success', "px: " + that.promptIdx );
+                that._linkedCachedModel = tlo;
                 ctxt.success(tlo);
             }}), formDef, that.getLinkedTableId(), filePath);
         }}), filePath );
@@ -730,11 +715,11 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
         that.renderContext.new_instance_text = ((that.display.new_instance_text != null) ? that.display.new_instance_text : "New");
-        that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
-            var dbTableName = linkedMdl.table_id;
-            var selString = that.convertSelection(linkedMdl);
+        that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
+            var dbTableName = linkedModel.table_id;
+            var selString = that.convertSelection(linkedModel);
             var selArgs = queryDefn.selectionArgs();
-            var ordBy = that.convertOrderBy(linkedMdl);
+            var ordBy = that.convertOrderBy(linkedModel);
             var displayElementName = that.getLinkedInstanceName();
             ctxt.log('D',"prompts." + that.type + ".configureRenderContext.before.get_linked_instances", "px: " + that.promptIdx);
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
@@ -851,8 +836,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             tableRow.remove();
 
         that.disableButtons();
-        that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
-            var dbTableName = linkedMdl.table_id;
+        that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
+            var dbTableName = linkedModel.table_id;
             database.delete_linked_instance_all($.extend({},ctxt,{success:function() {
                     that.enableButtons();
                     that.reRender(ctxt);
@@ -1194,11 +1179,11 @@ promptTypes.select = promptTypes._linked_type.extend({
 
          var populateChoicesViaQueryUsingLinkedTable = function(query, newctxt){
             newctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
-            that.getLinkedMdl($.extend({},newctxt,{success:function(linkedMdl) {
-                var dbTableName = linkedMdl.table_id;
-                var selString = that.convertSelection(linkedMdl);
+            that.getlinkedModel($.extend({},newctxt,{success:function(linkedModel) {
+                var dbTableName = linkedModel.table_id;
+                var selString = that.convertSelection(linkedModel);
                 var selArgs = query.selectionArgs();
-                var ordBy = that.convertOrderBy(linkedMdl);
+                var ordBy = that.convertOrderBy(linkedModel);
                 var displayElementName = that.getLinkedInstanceName();
                 database.get_linked_instances($.extend({},newctxt,{success:function(instanceList) {
                     that.renderContext.choices = _.map(instanceList, function(instance) {

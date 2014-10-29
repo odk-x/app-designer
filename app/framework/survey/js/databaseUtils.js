@@ -2,11 +2,15 @@
 /**
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
+ *
+ * NOTE: all usage of the opendatakit object is stateless -- we are just using
+ * simple conversion methods defined in that object and are not accessing any 
+ * other state.
  */
-define(['mdl','opendatakit','XRegExp'], function(mdl,opendatakit,XRegExp) {
+define(['opendatakit','XRegExp'], function(opendatakit,XRegExp) {
 verifyLoad('databaseUtils',
-    ['mdl','opendatakit','XRegExp'],
-    [mdl,opendatakit,XRegExp]);
+    ['opendatakit','XRegExp'],
+    [ opendatakit,  XRegExp]);
 return {
     _reservedFieldNames: {
         /**
@@ -400,17 +404,17 @@ reconstructElementPath: function(elementPath, jsonType, dbValue, topLevelObject)
         }
         e[term] = value;
     },
-reconstructModelDataFromElementPathValueUpdates: function(mdl, updates) {
+reconstructModelDataFromElementPathValueUpdates: function(model, updates) {
     var that = this;
     for (var dbKey in updates) {
         var elementPathValue = updates[dbKey];
-        var de = mdl.dataTableModel[dbKey];
+        var de = model.dataTableModel[dbKey];
         if (that.isUnitOfRetention(de)) {
             var elementPath = de.elementPath || elementPathValue.elementPath;
             if ( de.elementSet === 'instanceMetadata' ) {
-                that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, mdl.metadata );
+                that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, model.metadata );
             } else {
-                that.reconstructElementPath(elementPath, de, elementPathValue.value, mdl.data );
+                that.reconstructElementPath(elementPath, de, elementPathValue.value, model.data );
             }
         }
     }
@@ -581,7 +585,7 @@ getElementPathValue:function(data,pathName) {
     }
     return v;
 },
-convertSelectionString: function(linkedMdl, selection) {
+convertSelectionString: function(linkedModel, selection) {
     // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     var that = this;
     if ( selection == null || selection.length === 0 ) {
@@ -599,8 +603,8 @@ convertSelectionString: function(linkedMdl, selection) {
             // map e back to elementKey
             var found = false;
             var f;
-            for (f in linkedMdl.dataTableModel) {
-                var defElement = linkedMdl.dataTableModel[f];
+            for (f in linkedModel.dataTableModel) {
+                var defElement = linkedModel.dataTableModel[f];
                 var elementPath = defElement['elementPath'];
                 if ( elementPath == null ) elementPath = f;
                 if ( elementPath == e ) {
@@ -618,7 +622,7 @@ convertSelectionString: function(linkedMdl, selection) {
     }
     return remapped;
 },
-convertOrderByString: function(linkedMdl, order_by) {
+convertOrderByString: function(linkedModel, order_by) {
     // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     var that = this;
     if ( order_by == null || order_by.length === 0 ) {
@@ -635,7 +639,7 @@ convertOrderByString: function(linkedMdl, order_by) {
             // map e back to elementKey
             var found = false;
             var f;
-            for (f in linkedMdl.dataTableModel) {
+            for (f in linkedModel.dataTableModel) {
                 var defElement = dataTableModel[f];
                 var elementPath = defElement['elementPath'];
                 if ( elementPath == null ) elementPath = f;
