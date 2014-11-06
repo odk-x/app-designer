@@ -116,13 +116,13 @@ var displayGroup = function(idxStart) {
         field1.text('Sensor Type: ' + sensorType);
         item.append(field1);
 
-        var field2 = $('<li>');
-        var msgType = data.getData(rowId, 'msgtype');
-        field2.attr('class', 'detail');
-        field2.text('Sensor Message Type: ' + msgType);
-        item.append(field2);
-
         $('#list').append(item);
+
+        // don't append the last one to avoid the fencepost problem
+        var borderDiv = $('<div>');
+        borderDiv.addClass('divider');
+        $('#list').append(borderDiv);
+
     }
     if (i < uniqueSensorIds.length) {
         setTimeout(resumeFn, 0, i);
