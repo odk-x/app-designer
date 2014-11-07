@@ -26,15 +26,25 @@ function display() {
     $('#sensor-type').text(data.get('sensortype'));
     $('#msg-type').text(data.get('msgtype'));
 
+    // Format the time to show on the bottom axis
+    var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
+    var formatTime = d3.time.format("%m-%d %H:%M:%S");
+
     // Get the data to graph from the database
     var tempData = control.query('temperatureSensor', 'sensorid = ?', [data.get('sensorid')]);
+    var xValues = JSON.parse(tempData.getColumnData('timestamp'));
     var yValues = JSON.parse(tempData.getColumnData('sample'));
 
     // Map the values so that they can be used by d3
-    var dataJ = new Array();
+    var dataI = new Array();
     for (var i = 0; i < yValues.length; i++) {
-        dataJ.push({x:i, y:yValues[i]});
+        // Parse the date here
+        var dateParts = xValues[i].split(".");
+        var convertedDate = parseDate(dateParts[0]);
+        dataI.push({x:convertedDate, y:yValues[i]});
     } 
+
+    var dataJ = _.sortBy(dataI, function(o) {return o.x;});
 
     var xString = "time";
     var yString = "degrees Celsius";
@@ -43,18 +53,18 @@ function display() {
     var paramWidth = 450;
     var paramHeight = 400;
     
-    var margin = {top: 50, right: 20, bottom: 60, left: 90},
+    var margin = {top: 50, right: 20, bottom: 120, left: 90},
         width = paramWidth - margin.left - margin.right,
         height = paramHeight - margin.top - margin.bottom;
 
-    var x = d3.scale.linear().range([0, width]);
-
+    var x = d3.time.scale().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
-        .tickSubdivide(true);
+        .tickFormat(formatTime)
+        .ticks(7);
 
      var yAxis = d3.svg.axis()
         .scale(y)
@@ -64,7 +74,6 @@ function display() {
     // Making sure that these values are numbers
     dataJ.forEach(function(d) {
         d.y = +d.y;
-        d.x = +d.x;
     });
 
     // Setting up x and y values for the line
@@ -73,7 +82,7 @@ function display() {
         .y(function(d) { return y(d.y); });
 
     // Setting up the x and y domain values
-    x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
+    x.domain(d3.extent(dataJ, function(d) { return d.x; }));
     y.domain([d3.min(dataJ, function(d) { return d.y; })-1, d3.max(dataJ, function(d) { return d.y; })+1]);
 
     // vWidth and wHeight were used for scaling
@@ -110,14 +119,13 @@ function display() {
         .attr("z-index", 4)
         .attr("transform", "translate(0," + vHeight + ")")
         .call(xAxis)
-        .append("text")
-        .attr("x", vWidth/2-50)
-        .attr("y", 50)
-        .attr("dx", ".71em")
-        .attr("pointer-events", "all")
-        .style("font-size", "1em")
-        .style("text-anchor", "start")
-        .text(xString);  
+        .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+            });  
 
     // Setting up y-axis parameters
     svg.append("g")
@@ -138,7 +146,7 @@ function display() {
         .attr("class", "line")
         .attr("fill", "none")
         .attr("stroke", "blue")
-        .attr("d", line);
+        .attr("d", line);		
 
     // add legend   
     var legend = svg.append("g")
