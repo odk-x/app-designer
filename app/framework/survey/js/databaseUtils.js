@@ -295,7 +295,8 @@ return {
         } else if ( jsonType.type === 'string' ) {
             return '' + value;
         } else {
-            throw new Error("unrecognized JSON schema type");
+            shim.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            return '' + value;
         }
     },
 toDatabaseFromElementType: function( jsonType, value ) {
@@ -379,7 +380,8 @@ toDatabaseFromElementType: function( jsonType, value ) {
         } else if ( jsonType.type === 'string' ) {
             return '' + value;
         } else {
-            throw new Error("unrecognized JSON schema type");
+            shim.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            return '' + value;
         }
     },
 reconstructElementPath: function(elementPath, jsonType, dbValue, topLevelObject) {

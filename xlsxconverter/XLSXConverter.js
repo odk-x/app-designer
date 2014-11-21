@@ -303,7 +303,7 @@
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "string"
+                    "type": "rowpath"
                 },
                 "contentType": {
                     "type": "string",
@@ -316,7 +316,7 @@
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "string"
+                    "type": "rowpath"
                 },
                 "contentType": {
                     "type": "string",
@@ -329,7 +329,7 @@
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "string"
+                    "type": "rowpath"
                 },
                 "contentType": {
                     "type": "string",
@@ -342,7 +342,7 @@
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "string"
+                    "type": "rowpath"
                 },
                 "contentType": {
                     "type": "string",

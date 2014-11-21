@@ -11,7 +11,7 @@ location_latitude,latitude,number,[]
 location_longitude,longitude,number,[]
 picture,picture,mimeUri,"[""picture_uriFragment"",""picture_contentType""]"
 picture_contentType,contentType,string,[]
-picture_uriFragment,uriFragment,string,[]
+picture_uriFragment,uriFragment,rowpath,[]
 region,region,string,[]
 secondaryColor,secondaryColor,array,"[""secondaryColor_items""]"
 secondaryColor_items,items,string,[]
