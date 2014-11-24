@@ -619,13 +619,17 @@
         "elementKey": "weight"
       },
       "rating": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 15,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "survey"
           }
         ],
-        "type": "integer",
         "elementKey": "rating"
       }
     },

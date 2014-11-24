@@ -210,8 +210,8 @@
         "values_list": "linked_members_education",
         "display": {
           "text": "Questions are asked to members of the household who are at least 5 years old.",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 3
       }
@@ -884,8 +884,8 @@
             "values_list": "linked_members_education",
             "display": {
               "text": "Questions are asked to members of the household who are at least 5 years old.",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 3,
             "__rowNum__": 2,

@@ -32,7 +32,7 @@
           "text": "Client ID:",
           "hint": "5 Digit ID, cannot include 0. \nex: 12345"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 5
       },
       {
@@ -5879,7 +5879,7 @@
               "text": "Client ID:",
               "hint": "5 Digit ID, cannot include 0. \nex: 12345"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",

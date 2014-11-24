@@ -40,7 +40,7 @@
         "display": {
           "text": "Client agreed to be screened for eligibility?"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 6
       },
       {
@@ -59,7 +59,7 @@
           "text": "How old were you on your last birthday?",
           "hint": "If younger than 14 years old, client is ineligible. Screening will not continue."
         },
-        "required": "true",
+        "required": true,
         "_row_num": 8
       },
       {
@@ -70,7 +70,7 @@
           "text": "Are you pregnant?",
           "hint": "If no, client is ineligible to be in the study. Screening will not continue."
         },
-        "required": "true",
+        "required": true,
         "_row_num": 9
       },
       {
@@ -157,7 +157,7 @@
           "text": "Are you currently in a relationship?",
           "hint": "If not currently in a relationship, client is ineligible but continue screening"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 20
       },
       {
@@ -167,7 +167,7 @@
           "text": "How old was your partner on their last birthday?",
           "hint": "If study partner is younger than 18 years old, client is ineligible to be in the study; however, continue screening to capture responses to all questions"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 21
       },
       {
@@ -194,7 +194,7 @@
           "text": "Do you plan to live within 20 kilometers of this clinic from now until 9 months after you deliver?",
           "hint": "If no, client is ineligible; however, continue screening to capture responses to all questions"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 24
       },
       {
@@ -249,7 +249,7 @@
           "text": "Enter Client ID from randomization envelopes.",
           "hint": "5 Digit ID, cannot include 0. \nex: 12345"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 30
       },
       {
@@ -259,7 +259,7 @@
         "display": {
           "text": "Open Randomization Envelope. What is the client’s randomization arm?"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 31
       },
       {
@@ -2953,7 +2953,7 @@
             "display": {
               "text": "Client agreed to be screened for eligibility?"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -2982,7 +2982,7 @@
               "text": "How old were you on your last birthday?",
               "hint": "If younger than 14 years old, client is ineligible. Screening will not continue."
             },
-            "required": "true",
+            "required": true,
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -2998,7 +2998,7 @@
               "text": "Are you pregnant?",
               "hint": "If no, client is ineligible to be in the study. Screening will not continue."
             },
-            "required": "true",
+            "required": true,
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -3122,7 +3122,7 @@
               "text": "Are you currently in a relationship?",
               "hint": "If not currently in a relationship, client is ineligible but continue screening"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 20,
             "__rowNum__": 19,
             "_token_type": "prompt",
@@ -3137,7 +3137,7 @@
               "text": "How old was your partner on their last birthday?",
               "hint": "If study partner is younger than 18 years old, client is ineligible to be in the study; however, continue screening to capture responses to all questions"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 21,
             "__rowNum__": 20,
             "_token_type": "prompt",
@@ -3179,7 +3179,7 @@
               "text": "Do you plan to live within 20 kilometers of this clinic from now until 9 months after you deliver?",
               "hint": "If no, client is ineligible; however, continue screening to capture responses to all questions"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 24,
             "__rowNum__": 23,
             "_token_type": "prompt",
@@ -3264,7 +3264,7 @@
               "text": "Enter Client ID from randomization envelopes.",
               "hint": "5 Digit ID, cannot include 0. \nex: 12345"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 30,
             "__rowNum__": 29,
             "_token_type": "prompt",
@@ -3279,7 +3279,7 @@
             "display": {
               "text": "Open Randomization Envelope. What is the client’s randomization arm?"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 31,
             "__rowNum__": 30,
             "_token_type": "prompt",

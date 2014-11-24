@@ -8,7 +8,7 @@
           "text": "Client ID:",
           "hint": "5 Digit ID, cannot include 0. \nex: 12345"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 2
       },
       {
@@ -17,7 +17,7 @@
         "display": {
           "text": "Age:"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 3
       },
       {
@@ -27,7 +27,7 @@
         "display": {
           "text": "Randomization Arm:"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 4
       }
     ],
@@ -1182,7 +1182,7 @@
               "text": "Client ID:",
               "hint": "5 Digit ID, cannot include 0. \nex: 12345"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -1196,7 +1196,7 @@
             "display": {
               "text": "Age:"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -1211,7 +1211,7 @@
             "display": {
               "text": "Randomization Arm:"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",

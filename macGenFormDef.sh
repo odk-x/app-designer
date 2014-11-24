@@ -7,7 +7,8 @@ if [ "$1" ]; then
         if [ -f $TEMP2$TEMP ]; then
             rm $TEMP2$TEMP
         fi
-        base64 $f | /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc macGenConverter.js  >> $TEMP2$TEMP
+        #base64 $f | /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc macGenConverter.js  >> $TEMP2$TEMP
+        node macGenConverter.js $f >> $TEMP2$TEMP
     done   
 else
     for f in app/tables/*/forms/*/*.xlsx
@@ -22,7 +23,8 @@ else
             if [ -f $TEMP2$TEMP ]; then
                 rm $TEMP2$TEMP
             fi
-            base64 $f | /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc macGenConverter.js  >> $TEMP2$TEMP
+            #base64 $f | /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc macGenConverter.js  >> $TEMP2$TEMP
+            node macGenConverter.js $f >> $TEMP2$TEMP
         fi
     done
     for f in app/framework/framework.xlsx
@@ -32,6 +34,7 @@ else
         if [ -f $TEMP2$TEMP ]; then
             rm $TEMP2$TEMP
         fi
-        base64 $f | /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc macGenConverter.js  >> $TEMP2$TEMP
+        #base64 $f | /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc macGenConverter.js  >> $TEMP2$TEMP
+        node macGenConverter.js $f >> $TEMP2$TEMP
     done        
 fi
