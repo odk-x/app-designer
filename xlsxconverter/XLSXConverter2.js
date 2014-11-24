@@ -719,7 +719,7 @@ exports.processJSONWb = processJSONWb;
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "string"
+                    "type": "rowpath"
                 },
                 "contentType": {
                     "type": "string",
@@ -732,7 +732,7 @@ exports.processJSONWb = processJSONWb;
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "string"
+                    "type": "rowpath"
                 },
                 "contentType": {
                     "type": "string",
@@ -745,7 +745,7 @@ exports.processJSONWb = processJSONWb;
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "string"
+                    "type": "rowpath"
                 },
                 "contentType": {
                     "type": "string",
@@ -758,7 +758,7 @@ exports.processJSONWb = processJSONWb;
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "string"
+                    "type": "rowpath"
                 },
                 "contentType": {
                     "type": "string",

@@ -563,7 +563,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "plant_picture_uriFragment"
           },
           "contentType": {

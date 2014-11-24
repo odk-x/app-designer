@@ -96,6 +96,8 @@ createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else if ( f.type === "array" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
+                } else if ( f.type === "rowpath" ) {
+                    createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else {
                     throw new Error("unhandled type: " + f.type);
                 }

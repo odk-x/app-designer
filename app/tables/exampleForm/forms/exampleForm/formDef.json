@@ -897,7 +897,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "picture_uriFragment"
           },
           "contentType": {
@@ -919,7 +919,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "recording_uriFragment"
           },
           "contentType": {
@@ -1059,7 +1059,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "audio_test_uriFragment"
           },
           "contentType": {
@@ -1081,7 +1081,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "video_test_uriFragment"
           },
           "contentType": {
@@ -1103,7 +1103,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "image_test_uriFragment"
           },
           "contentType": {
