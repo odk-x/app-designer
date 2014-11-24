@@ -178,7 +178,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
             "elementKey": "Image_uriFragment"
           },
           "contentType": {

@@ -22,7 +22,7 @@
         "type": "decimal",
         "name": "plant_height",
         "display": {
-          "text": "What is the height of the plant in feet?"
+          "text": "What is the height of the plant in inches?"
         },
         "_row_num": 4
       },
@@ -321,6 +321,11 @@
         "setting_name": "table_id",
         "value": "visit",
         "_row_num": 5
+      },
+      {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 6
       }
     ]
   },
@@ -364,6 +369,11 @@
         "setting_name": "table_id",
         "value": "visit",
         "_row_num": 5
+      },
+      "disableSwipeNavigation": {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
@@ -553,7 +563,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
             "elementKey": "plant_picture_uriFragment"
           },
           "contentType": {
@@ -642,7 +652,7 @@
             "type": "decimal",
             "name": "plant_height",
             "display": {
-              "text": "What is the height of the plant in feet?"
+              "text": "What is the height of the plant in inches?"
             },
             "_row_num": 4,
             "__rowNum__": 3,
