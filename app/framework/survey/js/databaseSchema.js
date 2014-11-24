@@ -740,7 +740,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoModel, formTitle)
         _last_sync_time: -1 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'object', _value: JSON.stringify(displayColumnOrder) } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'array', _value: JSON.stringify(displayColumnOrder) } );
     fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'defaultViewType', _type: 'string', _value: 'SPREADSHEET' } );
     fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'object', _value: JSON.stringify(formTitle) } );
     fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'groupByCols', _type: 'object', _value: '[]' } );
