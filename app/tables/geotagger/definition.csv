@@ -3,7 +3,7 @@ Date_and_Time,Date_and_Time,dateTime,[]
 Description,Description,string,[]
 Image,Image,imageUri,"[""Image_uriFragment"",""Image_contentType""]"
 Image_contentType,contentType,string,[]
-Image_uriFragment,uriFragment,string,[]
+Image_uriFragment,uriFragment,rowpath,[]
 Location,Location,geopoint,"[""Location_latitude"",""Location_longitude"",""Location_altitude"",""Location_accuracy""]"
 Location_accuracy,accuracy,number,[]
 Location_altitude,altitude,number,[]
