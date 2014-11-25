@@ -8,7 +8,7 @@
           "text": "Date and Time",
           "hint": "The date and time of this observation"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 2
       },
       {
@@ -18,7 +18,7 @@
           "text": "Description",
           "hint": "A brief description of this location"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 3
       },
       {
@@ -178,7 +178,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Image_uriFragment"
           },
           "contentType": {
@@ -236,7 +236,7 @@
               "text": "Date and Time",
               "hint": "The date and time of this observation"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -251,7 +251,7 @@
               "text": "Description",
               "hint": "A brief description of this location"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",

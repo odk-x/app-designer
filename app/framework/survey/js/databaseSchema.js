@@ -96,6 +96,8 @@ createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else if ( f.type === "array" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
+                } else if ( f.type === "rowpath" ) {
+                    createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else {
                     throw new Error("unhandled type: " + f.type);
                 }
@@ -738,7 +740,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoModel, formTitle)
         _last_sync_time: -1 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'object', _value: JSON.stringify(displayColumnOrder) } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'array', _value: JSON.stringify(displayColumnOrder) } );
     fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'defaultViewType', _type: 'string', _value: 'SPREADSHEET' } );
     fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'object', _value: JSON.stringify(formTitle) } );
     fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'groupByCols', _type: 'object', _value: '[]' } );

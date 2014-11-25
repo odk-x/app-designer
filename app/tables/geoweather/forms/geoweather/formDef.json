@@ -30,7 +30,7 @@
           "text": "Description",
           "hint": "A brief description of this location"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 5
       },
       {
@@ -73,7 +73,7 @@
           "type": "string"
         },
         "calculation": "data('Description') + ' @ ' + data('Date_and_Time').toLocaleDateString()",
-        "required": "true",
+        "required": true,
         "_row_num": 10
       }
     ],
@@ -427,7 +427,7 @@
               "text": "Description",
               "hint": "A brief description of this location"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
@@ -528,7 +528,7 @@
               "type": "string"
             },
             "calculation": "data('Description') + ' @ ' + data('Date_and_Time').toLocaleDateString()",
-            "required": "true",
+            "required": true,
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "assign",

@@ -8,7 +8,7 @@
           "text": "Client ID",
           "hint": "5 Digit ID, cannot include 0. \nex: 12345"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 2
       },
       {
@@ -17,7 +17,7 @@
         "display": {
           "text": "Step:"
         },
-        "required": "true",
+        "required": true,
         "_row_num": 3
       },
       {
@@ -349,7 +349,7 @@
               "text": "Client ID",
               "hint": "5 Digit ID, cannot include 0. \nex: 12345"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -363,7 +363,7 @@
             "display": {
               "text": "Step:"
             },
-            "required": "true",
+            "required": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",

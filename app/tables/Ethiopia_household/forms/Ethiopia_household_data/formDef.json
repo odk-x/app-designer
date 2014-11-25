@@ -529,8 +529,8 @@
         "values_list": "section2_other",
         "display": {
           "text": "Enter other info for specified person:",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 4
       }
@@ -548,8 +548,8 @@
         "values_list": "section3",
         "display": {
           "text": "Ask for members aged 5 years and above",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 3
       }
@@ -567,8 +567,8 @@
         "values_list": "section4",
         "display": {
           "text": "Ask all questions to all members of the house",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 3
       },
@@ -725,8 +725,8 @@
         "values_list": "section5",
         "display": {
           "text": "Ask for all house members who were reported as ever smoking",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "choice_filter": "_.contains(data('who_smoked'), choice_item.instance_id)",
         "_row_num": 13
@@ -966,8 +966,8 @@
         "values_list": "section91",
         "display": {
           "text": "Ask for all people listed as having received medical assistance",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "choice_filter": "_.contains(data('who_received_med_assistance'), choice_item.instance_id)",
         "_row_num": 6
@@ -1017,8 +1017,8 @@
         "values_list": "section91_p2",
         "display": {
           "text": "Ask for all people listed as having faced health problems",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "choice_filter": "_.contains(data('who_faced_health_problems'), choice_item.instance_id)",
         "_row_num": 13
@@ -1131,8 +1131,8 @@
         "values_list": "section93",
         "display": {
           "text": "Specify injury",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 32
       },
@@ -1147,8 +1147,8 @@
         "display": {
           "text": "For all members who report cooking or being located in the cooking space when the fire is lit.",
           "hint": "For individuals <10 or who are not present, an adult or caregiver can answer for them",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 34
       },
@@ -2635,8 +2635,8 @@
             "values_list": "section2_other",
             "display": {
               "text": "Enter other info for specified person:",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -2728,8 +2728,8 @@
             "values_list": "section3",
             "display": {
               "text": "Ask for members aged 5 years and above",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -2814,8 +2814,8 @@
             "values_list": "section4",
             "display": {
               "text": "Ask all questions to all members of the house",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -3128,8 +3128,8 @@
             "values_list": "section5",
             "display": {
               "text": "Ask for all house members who were reported as ever smoking",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "choice_filter": "_.contains(data('who_smoked'), choice_item.instance_id)",
             "_row_num": 13,
@@ -3852,8 +3852,8 @@
             "values_list": "section91",
             "display": {
               "text": "Ask for all people listed as having received medical assistance",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "choice_filter": "_.contains(data('who_received_med_assistance'), choice_item.instance_id)",
             "_row_num": 6,
@@ -3910,8 +3910,8 @@
             "values_list": "section91_p2",
             "display": {
               "text": "Ask for all people listed as having faced health problems",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "choice_filter": "_.contains(data('who_faced_health_problems'), choice_item.instance_id)",
             "_row_num": 13,
@@ -4033,8 +4033,8 @@
             "values_list": "section93",
             "display": {
               "text": "Specify injury",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -4050,8 +4050,8 @@
             "display": {
               "text": "For all members who report cooking or being located in the cooking space when the fire is lit.",
               "hint": "For individuals <10 or who are not present, an adult or caregiver can answer for them",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 34,
             "__rowNum__": 33,

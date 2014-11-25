@@ -88,7 +88,7 @@ function removeEmptyStrings(rObjArr){
         _.each(row, function(value, key){
             if(_.isString(value) && value.trim() === "") {
                 return;
-            }
+            } 
             outRow[key] = value;
         });
         if(_.keys(outRow).length > 0) {
@@ -101,7 +101,7 @@ function removeEmptyStrings(rObjArr){
 function to_json(workbook) {
     var result = {};
     _.each(workbook.SheetNames, function(sheetName) {
-        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName],{raw:true});
         rObjArr = removeEmptyStrings(rObjArr);
         if(rObjArr.length > 0){
             result[sheetName] =  rObjArr;

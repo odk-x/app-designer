@@ -1,10 +1,12 @@
-Exception: Error: prompt 'name' is defined more than once with different data types. Clause: 'select_one' at row 48 on sheet: survey and at row: 23 on sheet: survey
-updateModel@xlsxconverter/XLSXConverter.js:1835
-@xlsxconverter/XLSXConverter.js:2043
-forEach@[native code]
-forEach@xlsxconverter/underscore.js:78
-@xlsxconverter/XLSXConverter.js:2056
-forEach@xlsxconverter/underscore.js:86
-developDataModel@xlsxconverter/XLSXConverter.js:2107
-processJSONWorkbook@xlsxconverter/XLSXConverter.js:2552
-global code@macGenConverter.js:46
+Error: prompt 'name' is defined more than once with different data types. Clause: 'select_one' at row 48 on sheet: survey and at row: 23 on sheet: survey
+    at Error (<anonymous>)
+    at updateModel (/Users/clarice/opendatakit.survey-js/xlsxconverter/XLSXConverter2.js:2250:23)
+    at /Users/clarice/opendatakit.survey-js/xlsxconverter/XLSXConverter2.js:2459:29
+    at Array.forEach (native)
+    at Function._.each._.forEach (/Users/clarice/opendatakit.survey-js/xlsxconverter/underscore.js:78:11)
+    at /Users/clarice/opendatakit.survey-js/xlsxconverter/XLSXConverter2.js:2443:15
+    at Function._.each._.forEach (/Users/clarice/opendatakit.survey-js/xlsxconverter/underscore.js:86:24)
+    at developDataModel (/Users/clarice/opendatakit.survey-js/xlsxconverter/XLSXConverter2.js:2442:11)
+    at Object.processJSONWb (/Users/clarice/opendatakit.survey-js/xlsxconverter/XLSXConverter2.js:380:13)
+    at Object.<anonymous> (/Users/clarice/opendatakit.survey-js/macGenConverter.js:70:43)
+
