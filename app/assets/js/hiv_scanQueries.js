@@ -1,22 +1,22 @@
 /* global control */
 /**
- * Various functions that we might need across screens.
+ * Various functions that we might need across screens for hiv patient report.
  */
 'use strict';
 
 var hiv_scanQueries = {};
 
-hiv_scanQueries.patientid = 'Patient_ID';  // before it was childid
-hiv_scanQueries.name = 'Patient_name';  // before it was name
-hiv_scanQueries.birthdate = 'Patient_DOB';  // before it was birthdate
-hiv_scanQueries.month = "month";  // before it was childid
-hiv_scanQueries.age = 'age';  // before it was name
+hiv_scanQueries.patientid = 'Patient_ID';
+hiv_scanQueries.name = 'Patient_name';
+hiv_scanQueries.birthdate = 'Patient_DOB';
+hiv_scanQueries.month = "month";
+hiv_scanQueries.age = 'age';
 hiv_scanQueries.sex = 'sex';
 hiv_scanQueries.test = 'test';
 
 hiv_scanQueries.getExistingRecordById = function(id) {
     var whereClause =
-        'Patient_ID = ?';  // before it was childid
+        'Patient_ID = ?';
     var selectionArgs = [id];
     
     var records = control.query(
@@ -41,10 +41,10 @@ hiv_scanQueries.getExistingRecordByColumnID = function(column_id) {
 hiv_scanQueries.getExistingRecordByPatientCode = function(patientcode, table) {
     if (table == 'scan_HIV_Patient_Record') {
         var whereClause =
-            'Patient_ID = ?';  // before it was qe_patientcode, I have changed it to patient_QRcode
+            'Patient_ID = ?';  // for scan_HIV_Patient_Record the column name is that
     } else {
         var whereClause =
-            'patient_ID = ?';  // before it was qe_patientcode, I have changed it to patient_QRcode
+            'patient_ID = ?';  // for visiting record column name is that
     }
     var selectionArgs = [patientcode];
     
@@ -83,12 +83,21 @@ hiv_scanQueries.getExistingRecordByBirthDate = function(birthdate) {
     return records;
 };
 
-hiv_scanQueries.getKeysToAppendToURL = function(newPatientid) {
+hiv_scanQueries.getKeysToAppendToURL = function(newPatientid, newName, newBirthdate) {
     var result =
         '?' +
         hiv_scanQueries.patientid +
         '=' +
-        encodeURIComponent(newPatientid);
+        encodeURIComponent(newPatientid) +
+        '&' +
+        hiv_scanQueries.name +
+        '=' +
+        encodeURIComponent(newName) +
+        '&' +
+        hiv_scanQueries.birthdate +
+        '=' +
+        encodeURIComponent(newBirthdate);
+
     return result;
 };
 hiv_scanQueries.getKeyToAppendToURL = function(month, age, sex, test) {

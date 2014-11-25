@@ -1,3 +1,6 @@
+<!-- This file displays Pre_ARV vist detail of the hiv patient in a table from the patient's record
+  It also displays a line graph for the CD4 count trending of the hiv patient with the hard coded data
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,35 +15,14 @@
         <script type="text/javascript" src="js/hivPatientDisplayRecord.js"></script>
         <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
     </head>
-    <style>
-      .eachCell{
-         background-color: #E8E8E8;
-      }
-      .table-title {
-        background-color: steelblue;
-        color: white;
-      }
-      th {
-        text-align: center;
-        border: 2px solid white;
-      }
-      #button_id > .btn_style {
-        background-color: steelblue;
-        color: white;
-        width: 10em !important;
-      }
-    </style>
     <body id="main">
 
     <div class="container">
-
-    <div class="description-text" id="description">Pre-ARV Visit Details</div>
-      
+    <h1>Pre-ARV Visit Details</h1>
       <p>Name: <span id="name"></span></p>
       <p>ID: <span id="id"></span></p>
 
       <table id="hiv-table">
-
         <tr>
           <th class="table-title" >Visit Date</th>
           <th class="table-title" >CD4 Count</th>
@@ -51,10 +33,79 @@
           <th class="table-title" >INH</th>
         </tr>     
       </table>
-      <div id="button_id"></div>
+      <script type="text/javascript" src="../framework/libs/d3-amd/d3.min.js"></script>
+      <div id="graph">
+        <h2>CD4 Count Trending</h2>
+          <svg class="chart"></svg>
+      </div>
+      <button id="go_home" class="btn-launch btn btn-positive btn-block">Home Page</button>
     </div> <!-- .container -->
         <script type="text/javascript">
             $(display());
         </script>
     </body>
+    <!-- Styling this page as well as the line graph-->
+    <style>
+      .eachCell{
+         background-color: #E8E8E8;
+      }
+      .table-title {
+        background-color: #00CCFF;
+        text-align: center;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        font-size: 18px;
+      }
+      th {
+        text-align: center;
+        border: 2px solid white;
+      }
+      #button_id > .btn_style {
+        background-color: steelblue;
+        color: white;
+        width: 10em !important;
+      }
+      #graph{
+        border: 2px solid steelblue;
+        border-radius: 25px;
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        padding-left: 0px;
+        padding-right: 0px;
+     }
+    .axis text {
+      font: 10px sans-serif;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+   
+    p, div{
+      text-align: center;
+    }
+    #chart{
+      color: green;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    .line{
+      fill: none;
+      stroke: red;
+      stroke-width: 2px;
+    }
+    h1, h2{
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
 </html>

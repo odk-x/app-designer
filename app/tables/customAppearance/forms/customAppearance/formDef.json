@@ -382,13 +382,17 @@
         "elementKey": "visited_seattle"
       },
       "rating": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 12,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "survey"
           }
         ],
-        "type": "integer",
         "elementKey": "rating"
       }
     },

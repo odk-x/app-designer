@@ -1,3 +1,6 @@
+<!-- This file contains the html page for searching hiv patient. It contains three buttons such as
+  Patient ID, Patient Name and Patient Date of Birth
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +12,7 @@
         <script type="text/javascript" src="js/ratchet.js"></script>
         <script type="text/javascript" src="../framework/tables/js/control.js"></script>
         <script type="text/javascript" src="js/findRecordForHivPatient.js"></script>
-        <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
+        <script type="text/javascript" src="js/hiv_scanQueries.js"></script> 
     </head>
 
     <body id="main">
@@ -20,6 +23,8 @@
 
       <form>
         <input id="patient_id" type="text" placeholder="Patient ID">
+        <input id="patient_name" type="text" placeholder="Patient Name">
+        <input id="patient_birth_date" type="text" placeholder="Birth Date">
       </form>
 
       <!-- Note that this button cannot go inside the form. I should probably

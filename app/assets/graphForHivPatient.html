@@ -23,18 +23,10 @@
     padding-left: 0px;
     padding-right: 0px;
   }
-  
-  /*.bar {
-    fill: steelblue;
-  }*/
-
   .axis text {
     font: 10px sans-serif;
   }
 
-  /*.bar:hover {
-    fill: yellow;
-  }*/
   .axis path,
   .axis line {
     fill: none;
@@ -62,15 +54,18 @@
   </style>
   <body id="main">
     <div class="description-text" id="description">CD4 Count Trending
-    <!--<p>September - 2014</p>-->
+   
     </div>
-    <div id="graph">
-      <svg class="chart"></svg>
+    <div class="container">
+      <div id="graph">
+        <svg class="chart"></svg>
+      </div>
+      <button id="go_home" class="btn-launch btn btn-positive btn-block">Home Page</button>
     </div>
     <script type="text/javascript" src="../framework/libs/d3-amd/d3.min.js"></script>
     <script>
     var count = 3;
-    //var data = [.35, .39, .42, .49, .4, .49];
+   
     var data=[{"date":new Date(2013,09,6), "value": 4.6},
             {"date":new Date(2013,09,12), "value": 3.9},
             {"date":new Date(2014,09,6), "value": 3.8},   
@@ -124,7 +119,11 @@
         .datum(data)
         .attr("class", 'line')
         .attr('d', line);
-
+    $('#go_home').on('click', function() {
+        //control.launchHTML('assets/demoForHivReport.html');
+        var url = control.getFileAsUrl('assets/demoForHivReport.html');
+        window.location.href = url;
+    });
     </script>
   </body>
 </html>

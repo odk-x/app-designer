@@ -1,3 +1,8 @@
+<!--
+  It is the Follow up page for the patients who did not come for thier required vaccination
+  corresponding javascript such as immunizationFindFollow-UP.js will dynamically make as many rows as
+  needed for the number of patient who missed thier next appointment
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +17,6 @@
         <script type="text/javascript" src="js/immunizationFindFollow-UP.js"></script>
         <script type="text/javascript" src="js/scanQueries.js"></script>
     </head>
-
     <body id="main">
 
     <div class="container">
@@ -27,12 +31,36 @@
           <th class="table-title" >Village</th>
           <th class="table-title" >Last Session</th>
           <th class="table-title" >Days Overdue</th>
-          <th class="table-title" >View Information</th>
+          <th class="table-title" >View Detail</th>
         </tr>
       </table>
+      <button id="go_home" class="btn-launch btn btn-positive btn-block">Home Page</button>
     </div>  
     <script type="text/javascript">
       $(display());
     </script>
+    <style>
+      body{
+        font-size: 16px;
+        
+      }
+      .table-title {
+        text-align: center;
+        font-size: 18px;
+        padding-left: 10px !important;
+        padding-right:10px !important; 
+      }
+      th {
+      text-align: center;
+      padding-left: 10px !important;
+      padding-right:10px !important; 
+      }
+     input {
+      height: 2em;
+      text-align: center;
+      width: 6em !important;
+      font-size: 14px;
+     }
+    </style>
     </body>
 </html>

@@ -1,3 +1,8 @@
+<!--
+    This is the Home page for Vaccination card report. It will show the user to three option to choose which
+    is Find Record, Follow-Up and KPIs. Selectiong any of them will take them to the respective page for the r
+    respective report.
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,9 +45,18 @@
           KPIs
         </button>
     </ul>
+    <button id="go_home" class="btn-launch btn btn-positive btn-block">Home Page</button>
   </div>
         <script type="text/javascript">
             $(display());
+            // attaching event to the Home Page button which will bring the user to the
+            // Home page of the reoprt relative to this page
+            $('#go_home').on('click', function() {
+                //control.launchHTML('assets/index.html');
+                var url = control.getFileAsUrl('assets/index.html');
+                window.location.href = url;
+            });
+
         </script>
     </body>
 </html>
