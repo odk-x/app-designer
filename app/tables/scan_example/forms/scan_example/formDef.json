@@ -2,396 +2,357 @@
   "xlsx": {
     "survey": [
       {
-        "__rowNum__": 1,
         "clause": "begin screen",
         "_row_num": 2
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 2,
-        "name": "qrcode_image_0",
+        "name": "qrcode_image0",
+        "hideInContents": true,
         "_row_num": 3
       },
       {
         "type": "text",
+        "name": "qrcode",
         "display": {
           "text": "This text is encoded in the QR code."
         },
-        "__rowNum__": 3,
-        "name": "qrcode",
         "_row_num": 4
       },
       {
-        "__rowNum__": 4,
         "clause": "end screen",
         "_row_num": 5
       },
       {
-        "__rowNum__": 5,
         "clause": "begin screen",
         "_row_num": 6
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 6,
-        "name": "stay_image_0",
+        "name": "stay_image0",
+        "hideInContents": true,
         "_row_num": 7
       },
       {
         "type": "integer",
+        "name": "stay",
         "display": {
           "text": "Length of Stay (days):"
         },
-        "__rowNum__": 7,
-        "name": "stay",
         "_row_num": 8
       },
       {
-        "__rowNum__": 8,
         "clause": "end screen",
         "_row_num": 9
       },
       {
-        "__rowNum__": 9,
         "clause": "begin screen",
         "_row_num": 10
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 10,
-        "name": "name_image_0",
+        "name": "name_image0",
+        "hideInContents": true,
         "_row_num": 11
       },
       {
         "type": "text",
+        "name": "name",
         "display": {
           "text": "Name:"
         },
-        "__rowNum__": 11,
-        "name": "name",
         "_row_num": 12
       },
       {
-        "__rowNum__": 12,
         "clause": "end screen",
         "_row_num": 13
       },
       {
-        "__rowNum__": 13,
         "clause": "begin screen",
         "_row_num": 14
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 14,
-        "name": "roomNum_image_0",
+        "name": "roomNum_image0",
+        "hideInContents": true,
         "_row_num": 15
       },
       {
         "type": "integer",
+        "name": "roomNum",
         "display": {
           "text": "Room Number:"
         },
-        "__rowNum__": 15,
-        "name": "roomNum",
         "_row_num": 16
       },
       {
-        "__rowNum__": 16,
         "clause": "end screen",
         "_row_num": 17
       },
       {
-        "__rowNum__": 17,
         "clause": "begin screen",
         "_row_num": 18
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 18,
-        "name": "address_image_0",
+        "name": "address_image0",
+        "hideInContents": true,
         "_row_num": 19
       },
       {
         "type": "text",
+        "name": "address",
         "display": {
           "text": "Home Address:"
         },
-        "__rowNum__": 19,
-        "name": "address",
         "_row_num": 20
       },
       {
-        "__rowNum__": 20,
         "clause": "end screen",
         "_row_num": 21
       },
       {
-        "__rowNum__": 21,
         "clause": "begin screen",
         "_row_num": 22
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 22,
-        "name": "mon_chores_image_0",
+        "name": "mon_chores_image0",
+        "hideInContents": true,
         "_row_num": 23
       },
       {
-        "values_list": "chores",
+        "type": "select_one",
+        "name": "mon_chores",
         "display": {
           "text": "Monday Chores"
         },
-        "__rowNum__": 23,
-        "type": "select_one",
-        "name": "mon_chores",
+        "values_list": "chores",
         "_row_num": 24
       },
       {
-        "__rowNum__": 24,
         "clause": "end screen",
         "_row_num": 25
       },
       {
-        "__rowNum__": 25,
         "clause": "begin screen",
         "_row_num": 26
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 26,
-        "name": "tues_chores_image_0",
+        "name": "tues_chores_image0",
+        "hideInContents": true,
         "_row_num": 27
       },
       {
-        "values_list": "chores",
+        "type": "select_one",
+        "name": "tues_chores",
         "display": {
           "text": "Tuesday Chores"
         },
-        "__rowNum__": 27,
-        "type": "select_one",
-        "name": "tues_chores",
+        "values_list": "chores",
         "_row_num": 28
       },
       {
-        "__rowNum__": 28,
         "clause": "end screen",
         "_row_num": 29
       },
       {
-        "__rowNum__": 29,
         "clause": "begin screen",
         "_row_num": 30
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 30,
-        "name": "wed_chores_image_0",
+        "name": "wed_chores_image0",
+        "hideInContents": true,
         "_row_num": 31
       },
       {
-        "values_list": "chores",
+        "type": "select_one",
+        "name": "wed_chores",
         "display": {
           "text": "Wed. Chores"
         },
-        "__rowNum__": 31,
-        "type": "select_one",
-        "name": "wed_chores",
+        "values_list": "chores",
         "_row_num": 32
       },
       {
-        "__rowNum__": 32,
         "clause": "end screen",
         "_row_num": 33
       },
       {
-        "__rowNum__": 33,
         "clause": "begin screen",
         "_row_num": 34
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 34,
-        "name": "thurs_chores_image_0",
+        "name": "thurs_chores_image0",
+        "hideInContents": true,
         "_row_num": 35
       },
       {
-        "values_list": "chores",
+        "type": "select_one",
+        "name": "thurs_chores",
         "display": {
           "text": "Thursday Chores"
         },
-        "__rowNum__": 35,
-        "type": "select_one",
-        "name": "thurs_chores",
+        "values_list": "chores",
         "_row_num": 36
       },
       {
-        "__rowNum__": 36,
         "clause": "end screen",
         "_row_num": 37
       },
       {
-        "__rowNum__": 37,
         "clause": "begin screen",
         "_row_num": 38
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 38,
-        "name": "fri_chores_image_0",
+        "name": "fri_chores_image0",
+        "hideInContents": true,
         "_row_num": 39
       },
       {
-        "values_list": "chores",
+        "type": "select_one",
+        "name": "fri_chores",
         "display": {
           "text": "Friday Chores"
         },
-        "__rowNum__": 39,
-        "type": "select_one",
-        "name": "fri_chores",
+        "values_list": "chores",
         "_row_num": 40
       },
       {
-        "__rowNum__": 40,
         "clause": "end screen",
         "_row_num": 41
       },
       {
-        "__rowNum__": 41,
         "clause": "begin screen",
         "_row_num": 42
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 42,
-        "name": "sat_chores_image_0",
+        "name": "sat_chores_image0",
+        "hideInContents": true,
         "_row_num": 43
       },
       {
-        "values_list": "chores",
+        "type": "select_one",
+        "name": "sat_chores",
         "display": {
           "text": "Saturday Chores"
         },
-        "__rowNum__": 43,
-        "type": "select_one",
-        "name": "sat_chores",
+        "values_list": "chores",
         "_row_num": 44
       },
       {
-        "__rowNum__": 44,
         "clause": "end screen",
         "_row_num": 45
       },
       {
-        "__rowNum__": 45,
         "clause": "begin screen",
         "_row_num": 46
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 46,
-        "name": "sun_chores_image_0",
+        "name": "sun_chores_image0",
+        "hideInContents": true,
         "_row_num": 47
       },
       {
-        "values_list": "chores",
+        "type": "select_one",
+        "name": "sun_chores",
         "display": {
           "text": "Sunday Chores"
         },
-        "__rowNum__": 47,
-        "type": "select_one",
-        "name": "sun_chores",
+        "values_list": "chores",
         "_row_num": 48
       },
       {
-        "__rowNum__": 48,
         "clause": "end screen",
         "_row_num": 49
       },
       {
-        "__rowNum__": 49,
         "clause": "begin screen",
         "_row_num": 50
       },
       {
         "type": "read_only_image",
-        "__rowNum__": 50,
-        "name": "comments_image_0",
+        "name": "comments_image0",
+        "hideInContents": true,
         "_row_num": 51
       },
       {
         "type": "text",
+        "name": "comments",
         "display": {
           "text": "Comments:"
         },
-        "__rowNum__": 51,
-        "name": "comments",
         "_row_num": 52
       },
       {
-        "__rowNum__": 52,
         "clause": "end screen",
         "_row_num": 53
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "chores",
+        "data_value": "dishes",
+        "display": {
+          "text": "Wash dishes"
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "chores",
+        "data_value": "sweep",
+        "display": {
+          "text": "Sweep patio"
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "chores",
+        "data_value": "cook",
+        "display": {
+          "text": "Cook dinner"
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "chores",
+        "data_value": "roomba",
+        "display": {
+          "text": "Program roomba"
+        },
+        "_row_num": 5
       }
     ],
     "model": [
       {
         "type": "string",
         "name": "scan_output_directory",
-        "_row_num": null
+        "_row_num": 2
       }
     ],
     "settings": [
       {
-        "value": "scan_example",
         "setting_name": "form_id",
-        "_row_num": null
+        "value": "scan_example",
+        "_row_num": 2
       },
       {
-        "value": "20140810",
         "setting_name": "form_version",
-        "_row_num": null
+        "value": 20140810,
+        "_row_num": 3
       },
       {
+        "setting_name": "survey",
         "display": {
           "title": "scan_example"
         },
-        "setting_name": "survey",
-        "_row_num": null
-      }
-    ],
-    "choices": [
-      {
-        "display": {
-          "text": "Wash dishes"
-        },
-        "choice_list_name": "chores",
-        "data_value": "dishes",
-        "_row_num": null
-      },
-      {
-        "display": {
-          "text": "Sweep patio"
-        },
-        "choice_list_name": "chores",
-        "data_value": "sweep",
-        "_row_num": null
-      },
-      {
-        "display": {
-          "text": "Cook dinner"
-        },
-        "choice_list_name": "chores",
-        "data_value": "cook",
-        "_row_num": null
-      },
-      {
-        "display": {
-          "text": "Program roomba"
-        },
-        "choice_list_name": "chores",
-        "data_value": "roomba",
-        "_row_num": null
+        "_row_num": 4
       }
     ]
   },
@@ -415,30 +376,31 @@
     },
     "settings": {
       "form_id": {
-        "value": "scan_example",
         "setting_name": "form_id",
-        "_row_num": null
+        "value": "scan_example",
+        "_row_num": 2
       },
       "form_version": {
-        "value": "20140810",
         "setting_name": "form_version",
-        "_row_num": null
+        "value": 20140810,
+        "_row_num": 3
       },
       "survey": {
+        "setting_name": "survey",
         "display": {
           "title": "scan_example"
         },
-        "setting_name": "survey",
-        "_row_num": null
+        "_row_num": 4
       },
       "table_id": {
-        "value": "scan_example",
         "setting_name": "table_id",
-        "_row_num": null
+        "value": "scan_example",
+        "_row_num": 2,
+        "__rowNum__": 1
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": null,
+        "_row_num": 4,
         "value": [
           {
             "display": {
@@ -450,50 +412,50 @@
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": null,
+        "_row_num": 4,
         "value": "default"
       },
       "initial": {
+        "setting_name": "survey",
         "display": {
           "title": "scan_example"
         },
-        "setting_name": "survey",
-        "_row_num": null
+        "_row_num": 4
       }
     },
     "choices": {
       "chores": [
         {
+          "choice_list_name": "chores",
+          "data_value": "dishes",
           "display": {
             "text": "Wash dishes"
           },
-          "choice_list_name": "chores",
-          "data_value": "dishes",
-          "_row_num": null
+          "_row_num": 2
         },
         {
+          "choice_list_name": "chores",
+          "data_value": "sweep",
           "display": {
             "text": "Sweep patio"
           },
-          "choice_list_name": "chores",
-          "data_value": "sweep",
-          "_row_num": null
+          "_row_num": 3
         },
         {
+          "choice_list_name": "chores",
+          "data_value": "cook",
           "display": {
             "text": "Cook dinner"
           },
-          "choice_list_name": "chores",
-          "data_value": "cook",
-          "_row_num": null
+          "_row_num": 4
         },
         {
+          "choice_list_name": "chores",
+          "data_value": "roomba",
           "display": {
             "text": "Program roomba"
           },
-          "choice_list_name": "chores",
-          "data_value": "roomba",
-          "_row_num": null
+          "_row_num": 5
         }
       ]
     },
@@ -504,13 +466,13 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": null,
+            "_row_num": 2,
             "section_name": "model"
           }
         ],
         "elementKey": "scan_output_directory"
       },
-      "qrcode_image_0": {
+      "qrcode_image0": {
         "_defn": [
           {
             "_row_num": 3,
@@ -521,16 +483,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "qrcode_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "qrcode_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "qrcode_image_0_contentType"
+            "elementKey": "qrcode_image0_contentType"
           }
         },
-        "elementKey": "qrcode_image_0"
+        "elementKey": "qrcode_image0"
       },
       "qrcode": {
         "_defn": [
@@ -542,7 +504,7 @@
         "type": "string",
         "elementKey": "qrcode"
       },
-      "stay_image_0": {
+      "stay_image0": {
         "_defn": [
           {
             "_row_num": 7,
@@ -553,16 +515,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "stay_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "stay_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "stay_image_0_contentType"
+            "elementKey": "stay_image0_contentType"
           }
         },
-        "elementKey": "stay_image_0"
+        "elementKey": "stay_image0"
       },
       "stay": {
         "_defn": [
@@ -574,7 +536,7 @@
         "type": "integer",
         "elementKey": "stay"
       },
-      "name_image_0": {
+      "name_image0": {
         "_defn": [
           {
             "_row_num": 11,
@@ -585,16 +547,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "name_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "name_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "name_image_0_contentType"
+            "elementKey": "name_image0_contentType"
           }
         },
-        "elementKey": "name_image_0"
+        "elementKey": "name_image0"
       },
       "name": {
         "_defn": [
@@ -606,7 +568,7 @@
         "type": "string",
         "elementKey": "name"
       },
-      "roomNum_image_0": {
+      "roomNum_image0": {
         "_defn": [
           {
             "_row_num": 15,
@@ -617,16 +579,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "roomNum_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "roomNum_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "roomNum_image_0_contentType"
+            "elementKey": "roomNum_image0_contentType"
           }
         },
-        "elementKey": "roomNum_image_0"
+        "elementKey": "roomNum_image0"
       },
       "roomNum": {
         "_defn": [
@@ -638,7 +600,7 @@
         "type": "integer",
         "elementKey": "roomNum"
       },
-      "address_image_0": {
+      "address_image0": {
         "_defn": [
           {
             "_row_num": 19,
@@ -649,16 +611,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "address_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "address_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "address_image_0_contentType"
+            "elementKey": "address_image0_contentType"
           }
         },
-        "elementKey": "address_image_0"
+        "elementKey": "address_image0"
       },
       "address": {
         "_defn": [
@@ -670,7 +632,7 @@
         "type": "string",
         "elementKey": "address"
       },
-      "mon_chores_image_0": {
+      "mon_chores_image0": {
         "_defn": [
           {
             "_row_num": 23,
@@ -681,16 +643,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "mon_chores_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "mon_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "mon_chores_image_0_contentType"
+            "elementKey": "mon_chores_image0_contentType"
           }
         },
-        "elementKey": "mon_chores_image_0"
+        "elementKey": "mon_chores_image0"
       },
       "mon_chores": {
         "_defn": [
@@ -703,7 +665,7 @@
         "valuesList": "chores",
         "elementKey": "mon_chores"
       },
-      "tues_chores_image_0": {
+      "tues_chores_image0": {
         "_defn": [
           {
             "_row_num": 27,
@@ -714,16 +676,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "tues_chores_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "tues_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "tues_chores_image_0_contentType"
+            "elementKey": "tues_chores_image0_contentType"
           }
         },
-        "elementKey": "tues_chores_image_0"
+        "elementKey": "tues_chores_image0"
       },
       "tues_chores": {
         "_defn": [
@@ -736,7 +698,7 @@
         "valuesList": "chores",
         "elementKey": "tues_chores"
       },
-      "wed_chores_image_0": {
+      "wed_chores_image0": {
         "_defn": [
           {
             "_row_num": 31,
@@ -747,16 +709,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "wed_chores_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "wed_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "wed_chores_image_0_contentType"
+            "elementKey": "wed_chores_image0_contentType"
           }
         },
-        "elementKey": "wed_chores_image_0"
+        "elementKey": "wed_chores_image0"
       },
       "wed_chores": {
         "_defn": [
@@ -769,7 +731,7 @@
         "valuesList": "chores",
         "elementKey": "wed_chores"
       },
-      "thurs_chores_image_0": {
+      "thurs_chores_image0": {
         "_defn": [
           {
             "_row_num": 35,
@@ -780,16 +742,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "thurs_chores_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "thurs_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "thurs_chores_image_0_contentType"
+            "elementKey": "thurs_chores_image0_contentType"
           }
         },
-        "elementKey": "thurs_chores_image_0"
+        "elementKey": "thurs_chores_image0"
       },
       "thurs_chores": {
         "_defn": [
@@ -802,7 +764,7 @@
         "valuesList": "chores",
         "elementKey": "thurs_chores"
       },
-      "fri_chores_image_0": {
+      "fri_chores_image0": {
         "_defn": [
           {
             "_row_num": 39,
@@ -813,16 +775,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "fri_chores_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "fri_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "fri_chores_image_0_contentType"
+            "elementKey": "fri_chores_image0_contentType"
           }
         },
-        "elementKey": "fri_chores_image_0"
+        "elementKey": "fri_chores_image0"
       },
       "fri_chores": {
         "_defn": [
@@ -835,7 +797,7 @@
         "valuesList": "chores",
         "elementKey": "fri_chores"
       },
-      "sat_chores_image_0": {
+      "sat_chores_image0": {
         "_defn": [
           {
             "_row_num": 43,
@@ -846,16 +808,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "sat_chores_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "sat_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "sat_chores_image_0_contentType"
+            "elementKey": "sat_chores_image0_contentType"
           }
         },
-        "elementKey": "sat_chores_image_0"
+        "elementKey": "sat_chores_image0"
       },
       "sat_chores": {
         "_defn": [
@@ -868,7 +830,7 @@
         "valuesList": "chores",
         "elementKey": "sat_chores"
       },
-      "sun_chores_image_0": {
+      "sun_chores_image0": {
         "_defn": [
           {
             "_row_num": 47,
@@ -879,16 +841,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "sun_chores_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "sun_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "sun_chores_image_0_contentType"
+            "elementKey": "sun_chores_image0_contentType"
           }
         },
-        "elementKey": "sun_chores_image_0"
+        "elementKey": "sun_chores_image0"
       },
       "sun_chores": {
         "_defn": [
@@ -901,7 +863,7 @@
         "valuesList": "chores",
         "elementKey": "sun_chores"
       },
-      "comments_image_0": {
+      "comments_image0": {
         "_defn": [
           {
             "_row_num": 51,
@@ -912,16 +874,16 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
-            "elementKey": "comments_image_0_uriFragment"
+            "type": "rowpath",
+            "elementKey": "comments_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
             "default": "image/*",
-            "elementKey": "comments_image_0_contentType"
+            "elementKey": "comments_image0_contentType"
           }
         },
-        "elementKey": "comments_image_0"
+        "elementKey": "comments_image0"
       },
       "comments": {
         "_defn": [
@@ -946,9 +908,10 @@
         "prompts": [
           {
             "type": "read_only_image",
-            "__rowNum__": 2,
-            "name": "qrcode_image_0",
+            "name": "qrcode_image0",
+            "hideInContents": true,
             "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen2",
@@ -956,12 +919,12 @@
           },
           {
             "type": "text",
+            "name": "qrcode",
             "display": {
               "text": "This text is encoded in the QR code."
             },
-            "__rowNum__": 3,
-            "name": "qrcode",
             "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen2",
@@ -969,9 +932,10 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 6,
-            "name": "stay_image_0",
+            "name": "stay_image0",
+            "hideInContents": true,
             "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen6",
@@ -979,12 +943,12 @@
           },
           {
             "type": "integer",
+            "name": "stay",
             "display": {
               "text": "Length of Stay (days):"
             },
-            "__rowNum__": 7,
-            "name": "stay",
             "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen6",
@@ -992,9 +956,10 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 10,
-            "name": "name_image_0",
+            "name": "name_image0",
+            "hideInContents": true,
             "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen10",
@@ -1002,12 +967,12 @@
           },
           {
             "type": "text",
+            "name": "name",
             "display": {
               "text": "Name:"
             },
-            "__rowNum__": 11,
-            "name": "name",
             "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen10",
@@ -1015,9 +980,10 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 14,
-            "name": "roomNum_image_0",
+            "name": "roomNum_image0",
+            "hideInContents": true,
             "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen14",
@@ -1025,12 +991,12 @@
           },
           {
             "type": "integer",
+            "name": "roomNum",
             "display": {
               "text": "Room Number:"
             },
-            "__rowNum__": 15,
-            "name": "roomNum",
             "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen14",
@@ -1038,9 +1004,10 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 18,
-            "name": "address_image_0",
+            "name": "address_image0",
+            "hideInContents": true,
             "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen18",
@@ -1048,12 +1015,12 @@
           },
           {
             "type": "text",
+            "name": "address",
             "display": {
               "text": "Home Address:"
             },
-            "__rowNum__": 19,
-            "name": "address",
             "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen18",
@@ -1061,23 +1028,24 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 22,
-            "name": "mon_chores_image_0",
+            "name": "mon_chores_image0",
+            "hideInContents": true,
             "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen22",
             "promptIdx": 10
           },
           {
-            "values_list": "chores",
+            "type": "select_one",
+            "name": "mon_chores",
             "display": {
               "text": "Monday Chores"
             },
-            "__rowNum__": 23,
-            "type": "select_one",
-            "name": "mon_chores",
+            "values_list": "chores",
             "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen22",
@@ -1085,23 +1053,24 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 26,
-            "name": "tues_chores_image_0",
+            "name": "tues_chores_image0",
+            "hideInContents": true,
             "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen26",
             "promptIdx": 12
           },
           {
-            "values_list": "chores",
+            "type": "select_one",
+            "name": "tues_chores",
             "display": {
               "text": "Tuesday Chores"
             },
-            "__rowNum__": 27,
-            "type": "select_one",
-            "name": "tues_chores",
+            "values_list": "chores",
             "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen26",
@@ -1109,23 +1078,24 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 30,
-            "name": "wed_chores_image_0",
+            "name": "wed_chores_image0",
+            "hideInContents": true,
             "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen30",
             "promptIdx": 14
           },
           {
-            "values_list": "chores",
+            "type": "select_one",
+            "name": "wed_chores",
             "display": {
               "text": "Wed. Chores"
             },
-            "__rowNum__": 31,
-            "type": "select_one",
-            "name": "wed_chores",
+            "values_list": "chores",
             "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen30",
@@ -1133,23 +1103,24 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 34,
-            "name": "thurs_chores_image_0",
+            "name": "thurs_chores_image0",
+            "hideInContents": true,
             "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen34",
             "promptIdx": 16
           },
           {
-            "values_list": "chores",
+            "type": "select_one",
+            "name": "thurs_chores",
             "display": {
               "text": "Thursday Chores"
             },
-            "__rowNum__": 35,
-            "type": "select_one",
-            "name": "thurs_chores",
+            "values_list": "chores",
             "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen34",
@@ -1157,23 +1128,24 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 38,
-            "name": "fri_chores_image_0",
+            "name": "fri_chores_image0",
+            "hideInContents": true,
             "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 18
           },
           {
-            "values_list": "chores",
+            "type": "select_one",
+            "name": "fri_chores",
             "display": {
               "text": "Friday Chores"
             },
-            "__rowNum__": 39,
-            "type": "select_one",
-            "name": "fri_chores",
+            "values_list": "chores",
             "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen38",
@@ -1181,23 +1153,24 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 42,
-            "name": "sat_chores_image_0",
+            "name": "sat_chores_image0",
+            "hideInContents": true,
             "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen42",
             "promptIdx": 20
           },
           {
-            "values_list": "chores",
+            "type": "select_one",
+            "name": "sat_chores",
             "display": {
               "text": "Saturday Chores"
             },
-            "__rowNum__": 43,
-            "type": "select_one",
-            "name": "sat_chores",
+            "values_list": "chores",
             "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen42",
@@ -1205,23 +1178,24 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 46,
-            "name": "sun_chores_image_0",
+            "name": "sun_chores_image0",
+            "hideInContents": true,
             "_row_num": 47,
+            "__rowNum__": 46,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen46",
             "promptIdx": 22
           },
           {
-            "values_list": "chores",
+            "type": "select_one",
+            "name": "sun_chores",
             "display": {
               "text": "Sunday Chores"
             },
-            "__rowNum__": 47,
-            "type": "select_one",
-            "name": "sun_chores",
+            "values_list": "chores",
             "_row_num": 48,
+            "__rowNum__": 47,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen46",
@@ -1229,9 +1203,10 @@
           },
           {
             "type": "read_only_image",
-            "__rowNum__": 50,
-            "name": "comments_image_0",
+            "name": "comments_image0",
+            "hideInContents": true,
             "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "prompt",
             "_type": "read_only_image",
             "_branch_label_enclosing_screen": "survey/_screen50",
@@ -1239,12 +1214,12 @@
           },
           {
             "type": "text",
+            "name": "comments",
             "display": {
               "text": "Comments:"
             },
-            "__rowNum__": 51,
-            "name": "comments",
             "_row_num": 52,
+            "__rowNum__": 51,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen50",
@@ -1264,182 +1239,182 @@
         },
         "operations": [
           {
-            "__rowNum__": 1,
             "clause": "begin screen",
             "_row_num": 2,
+            "__rowNum__": 1,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 4,
               "clause": "end screen",
               "_row_num": 5,
+              "__rowNum__": 4,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
-            "__rowNum__": 5,
             "clause": "begin screen",
             "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 8,
               "clause": "end screen",
               "_row_num": 9,
+              "__rowNum__": 8,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
-            "__rowNum__": 9,
             "clause": "begin screen",
             "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 12,
               "clause": "end screen",
               "_row_num": 13,
+              "__rowNum__": 12,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
-            "__rowNum__": 13,
             "clause": "begin screen",
             "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 16,
               "clause": "end screen",
               "_row_num": 17,
+              "__rowNum__": 16,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
-            "__rowNum__": 17,
             "clause": "begin screen",
             "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 20,
               "clause": "end screen",
               "_row_num": 21,
+              "__rowNum__": 20,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
-            "__rowNum__": 21,
             "clause": "begin screen",
             "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 24,
               "clause": "end screen",
               "_row_num": 25,
+              "__rowNum__": 24,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
-            "__rowNum__": 25,
             "clause": "begin screen",
             "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 28,
               "clause": "end screen",
               "_row_num": 29,
+              "__rowNum__": 28,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
-            "__rowNum__": 29,
             "clause": "begin screen",
             "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 32,
               "clause": "end screen",
               "_row_num": 33,
+              "__rowNum__": 32,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
-            "__rowNum__": 33,
             "clause": "begin screen",
             "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 36,
               "clause": "end screen",
               "_row_num": 37,
+              "__rowNum__": 36,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
-            "__rowNum__": 37,
             "clause": "begin screen",
             "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 40,
               "clause": "end screen",
               "_row_num": 41,
+              "__rowNum__": 40,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 9
           },
           {
-            "__rowNum__": 41,
             "clause": "begin screen",
             "_row_num": 42,
+            "__rowNum__": 41,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 44,
               "clause": "end screen",
               "_row_num": 45,
+              "__rowNum__": 44,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 10
           },
           {
-            "__rowNum__": 45,
             "clause": "begin screen",
             "_row_num": 46,
+            "__rowNum__": 45,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 48,
               "clause": "end screen",
               "_row_num": 49,
+              "__rowNum__": 48,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 11
           },
           {
-            "__rowNum__": 49,
             "clause": "begin screen",
             "_row_num": 50,
+            "__rowNum__": 49,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
-              "__rowNum__": 52,
               "clause": "end screen",
               "_row_num": 53,
+              "__rowNum__": 52,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",

@@ -998,7 +998,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Date_of_registration_image0_uriFragment"
           },
           "contentType": {
@@ -1030,7 +1030,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Patient_ID_image0_uriFragment"
           },
           "contentType": {
@@ -1062,7 +1062,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Patient_name_image0_uriFragment"
           },
           "contentType": {
@@ -1094,7 +1094,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Patient_sex_image0_uriFragment"
           },
           "contentType": {
@@ -1127,7 +1127,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Patient_DOB_image0_uriFragment"
           },
           "contentType": {
@@ -1159,7 +1159,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "GSM_number_image0_uriFragment"
           },
           "contentType": {
@@ -1191,7 +1191,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Home_village_image0_uriFragment"
           },
           "contentType": {
@@ -1223,7 +1223,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Referred_from_image0_uriFragment"
           },
           "contentType": {
@@ -1256,7 +1256,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Referred_from_other_image0_uriFragment"
           },
           "contentType": {
@@ -1288,7 +1288,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Name_ANC_or_TB_clinic_image0_uriFragment"
           },
           "contentType": {
@@ -1320,7 +1320,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Transf_from_HU_image0_uriFragment"
           },
           "contentType": {
@@ -1353,7 +1353,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Name_HU_transf_from_image0_uriFragment"
           },
           "contentType": {
@@ -1385,7 +1385,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "TB_screen_image0_uriFragment"
           },
           "contentType": {
@@ -1418,7 +1418,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "STI_screen_image0_uriFragment"
           },
           "contentType": {
@@ -1451,7 +1451,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Care_adherence_edu_image0_uriFragment"
           },
           "contentType": {
@@ -1484,7 +1484,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Clinical_serv_ref_for_image0_uriFragment"
           },
           "contentType": {
@@ -1517,7 +1517,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Other_clinical_serv_image0_uriFragment"
           },
           "contentType": {
@@ -1549,7 +1549,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Comm_serv_referred_for_image0_uriFragment"
           },
           "contentType": {
@@ -1582,7 +1582,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Other_comm_serv_image0_uriFragment"
           },
           "contentType": {

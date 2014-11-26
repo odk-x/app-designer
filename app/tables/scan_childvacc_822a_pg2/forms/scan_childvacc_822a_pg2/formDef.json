@@ -667,7 +667,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "opv0_initials_image0_uriFragment"
           },
           "contentType": {
@@ -699,7 +699,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "bcg_initials_image0_uriFragment"
           },
           "contentType": {
@@ -731,7 +731,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "hepb0_initials_image0_uriFragment"
           },
           "contentType": {
@@ -763,7 +763,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_1_name_image0_uriFragment"
           },
           "contentType": {
@@ -795,7 +795,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_2_name_image0_uriFragment"
           },
           "contentType": {
@@ -827,7 +827,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_1_initials_image0_uriFragment"
           },
           "contentType": {
@@ -859,7 +859,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_2_initials_image0_uriFragment"
           },
           "contentType": {
@@ -891,7 +891,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_1_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -923,7 +923,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_2_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -955,7 +955,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_bcg_image0_uriFragment"
           },
           "contentType": {
@@ -988,7 +988,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_opv0_image0_uriFragment"
           },
           "contentType": {
@@ -1021,7 +1021,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_hepb0_image0_uriFragment"
           },
           "contentType": {
@@ -1054,7 +1054,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_addtlvacc_1_image0_uriFragment"
           },
           "contentType": {
@@ -1087,7 +1087,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "nextvaccination_at6weeks_image0_uriFragment"
           },
           "contentType": {
@@ -1119,7 +1119,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "bcg_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -1151,7 +1151,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "opv0_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -1183,7 +1183,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "hepb0_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -1215,7 +1215,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_addtlvacc_2_image0_uriFragment"
           },
           "contentType": {
@@ -1248,7 +1248,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "nurse_notes_image0_uriFragment"
           },
           "contentType": {
@@ -1280,7 +1280,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "qr_patientcode_image0_uriFragment"
           },
           "contentType": {

@@ -744,7 +744,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "nextvaccination_at14weeks_image0_uriFragment"
           },
           "contentType": {
@@ -776,7 +776,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_opv2_image0_uriFragment"
           },
           "contentType": {
@@ -809,7 +809,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "opv2_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -841,7 +841,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "opv2_initials_image0_uriFragment"
           },
           "contentType": {
@@ -873,7 +873,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_penta2_image0_uriFragment"
           },
           "contentType": {
@@ -906,7 +906,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "penta2_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -938,7 +938,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "penta2_initials_image0_uriFragment"
           },
           "contentType": {
@@ -970,7 +970,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_pcv2_image0_uriFragment"
           },
           "contentType": {
@@ -1003,7 +1003,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "pcv2_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -1035,7 +1035,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "pcv2_initials_image0_uriFragment"
           },
           "contentType": {
@@ -1067,7 +1067,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_rota2_image0_uriFragment"
           },
           "contentType": {
@@ -1100,7 +1100,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "rota2_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -1132,7 +1132,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "rota2_initials_image0_uriFragment"
           },
           "contentType": {
@@ -1164,7 +1164,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_1_name_image0_uriFragment"
           },
           "contentType": {
@@ -1196,7 +1196,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_2_name_image0_uriFragment"
           },
           "contentType": {
@@ -1228,7 +1228,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_addtlvacc_1_image0_uriFragment"
           },
           "contentType": {
@@ -1261,7 +1261,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "given_addtlvacc_2_image0_uriFragment"
           },
           "contentType": {
@@ -1294,7 +1294,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_1_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -1326,7 +1326,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_2_dategiven_image0_uriFragment"
           },
           "contentType": {
@@ -1358,7 +1358,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_1_initials_image0_uriFragment"
           },
           "contentType": {
@@ -1390,7 +1390,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "addtlvacc_2_initials_image0_uriFragment"
           },
           "contentType": {
@@ -1422,7 +1422,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "nurse_notes_image0_uriFragment"
           },
           "contentType": {
@@ -1454,7 +1454,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "qr_patientcode_image0_uriFragment"
           },
           "contentType": {

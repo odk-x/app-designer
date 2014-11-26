@@ -36,7 +36,7 @@ function display() {
     $('#sun_chores').text(data.get('sun_chores'));
     $('#comments').text(data.get('comments'));
 
-    var addrMimeUri = data.get('address_image_0');
+    var addrMimeUri = data.get('address_image0');
     var addrSrc = '';
     if (addrMimeUri !== null && addrMimeUri !== "") {
         var addrMimeUriObject = JSON.parse(addrMimeUri);
@@ -48,10 +48,10 @@ function display() {
     var addrThumbnail = $('<img>');
     addrThumbnail.attr('src', addrSrc);
     addrThumbnail.attr('class', 'thumbnail');
-    addrThumbnail.attr('id', 'address_image_0');
+    addrThumbnail.attr('id', 'address_image0');
     $('#homeAddress').append(addrThumbnail);
 
-    var stayMimeUri = data.get('stay_image_0');
+    var stayMimeUri = data.get('stay_image0');
     var staySrc = '';
     if (stayMimeUri !== null && stayMimeUri !== "") {
         var stayMimeUriObject = JSON.parse(stayMimeUri);
@@ -63,11 +63,11 @@ function display() {
     var stayThumbnail = $('<img>');
     stayThumbnail.attr('src', staySrc);
     stayThumbnail.attr('class', 'thumbnail');
-    stayThumbnail.attr('id', 'stay_image_0');
+    stayThumbnail.attr('id', 'stay_image0');
     $('#lengthOfStay').append(stayThumbnail);
 
 
-    var commentsMimeUri = data.get('comments_image_0');
+    var commentsMimeUri = data.get('comments_image0');
     var commentsSrc = '';
     if (commentsMimeUri !== null && commentsMimeUri !== "") {
         var commentsMimeUriObject = JSON.parse(commentsMimeUri);
@@ -79,7 +79,7 @@ function display() {
     var commentsThumbnail = $('<img>');
     commentsThumbnail.attr('src', commentsSrc);
     commentsThumbnail.attr('class', 'thumbnail');
-    commentsThumbnail.attr('id', 'comments_image_0');
+    commentsThumbnail.attr('id', 'comments_image0');
     $('#handComments').append(commentsThumbnail);
 }
 

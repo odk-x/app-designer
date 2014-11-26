@@ -654,7 +654,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "village_image0_uriFragment"
           },
           "contentType": {
@@ -686,7 +686,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "city_image0_uriFragment"
           },
           "contentType": {
@@ -718,7 +718,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "ward_image0_uriFragment"
           },
           "contentType": {
@@ -750,7 +750,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "lga_image0_uriFragment"
           },
           "contentType": {
@@ -782,7 +782,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "state_image0_uriFragment"
           },
           "contentType": {
@@ -814,7 +814,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "fathersname_image0_uriFragment"
           },
           "contentType": {
@@ -846,7 +846,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "mothersname_image0_uriFragment"
           },
           "contentType": {
@@ -878,7 +878,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "housenum_image0_uriFragment"
           },
           "contentType": {
@@ -910,7 +910,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Child_patient_ID_image0_uriFragment"
           },
           "contentType": {
@@ -942,7 +942,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Emergency_contact_image0_uriFragment"
           },
           "contentType": {
@@ -974,7 +974,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Child_name_image0_uriFragment"
           },
           "contentType": {
@@ -1006,7 +1006,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Child_DOB_image0_uriFragment"
           },
           "contentType": {
@@ -1038,7 +1038,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "Birth_weight_image0_uriFragment"
           },
           "contentType": {
@@ -1070,7 +1070,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "sex_image0_uriFragment"
           },
           "contentType": {
@@ -1103,7 +1103,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "mom_gsm_image0_uriFragment"
           },
           "contentType": {
@@ -1135,7 +1135,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "dad_gsm_image0_uriFragment"
           },
           "contentType": {
@@ -1167,7 +1167,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "reasonsforcare_image0_uriFragment"
           },
           "contentType": {
@@ -1200,7 +1200,7 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "patient_QRcode_image0_uriFragment"
           },
           "contentType": {
