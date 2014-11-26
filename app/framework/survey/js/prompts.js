@@ -1828,9 +1828,13 @@ promptTypes.media = promptTypes.base.extend({
             return '';
         } else {
             var displayObject = this.getValue();
-            if (displayObject != null) {
+            if (displayObject != null && displayObject.uriFragment != null) {
                 var ind = displayObject.uriFragment.lastIndexOf("/") + 1;
-                return displayObject.uriFragment.substring(ind);
+                if (ind < displayObject.uriFragment.length) {
+                    return displayObject.uriFragment.substring(ind);
+                } else {
+                    return '';
+                }
             }
             else {
                 return '';

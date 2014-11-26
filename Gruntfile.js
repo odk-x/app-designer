@@ -340,7 +340,7 @@ module.exports = function (grunt) {
                 {filter: 'isFile',
                  cwd: 'app' },
                 '**',
-                'framework/**',
+                '!framework/**',
 				'!output/**');
 
             // Now push these files to the phone.
@@ -469,7 +469,8 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
-                '**');
+                '**',
+                '!framework/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
