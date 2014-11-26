@@ -546,19 +546,19 @@ function constructTable(id, name, birth, sex) {
     //We are expecting to find record associated with this id so use that,
     // but we can get multiple record associated with the same id which is only for the
     // demo purpose
-    if (results.getCount() > 0) {
+    if (results.getCount() > 1) {
+      control.openTableToListView(
+      'scan_HIV_Patient_Record',
+      'Patient_ID = ?',
+      [id],
+      'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
+    } else {
       var rowId = results.getRowId(0);
       //Open the list view for the found record
       control.openDetailView(
         'scan_HIV_Patient_Record',
          rowId,
          'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
-    } else {
-      control.openTableToListView(
-      'scan_HIV_Patient_Record',
-      'Patient_ID = ?',
-      [id],
-      'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
     }
   };
   newRow.appendChild(newcell5)
