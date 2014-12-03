@@ -11,27 +11,104 @@
         <script type="text/javascript" src="../framework/tables/js/control.js"></script>
         <script type="text/javascript" src="js/jgiNewFollow.js"></script>
         <script type="text/javascript" src="js/util.js"></script>
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <script src="js/jquery-1.10.2.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <link rel="stylesheet" href="css/jquery.timepicker.css">
+        <script src="js/jquery.timepicker.js"></script>
     </head>
+    <style>
+        select:First{
+           color: gray !important;  
+        }
+        #FOL_B_AnimID{
+            width: 36em !important;
+            height: 2.5em !important;
+            background-color: white; 
+        }    
+    </style>
 
     <body id="main">
     <!-- Here we'll just collect some data to about the follow we're about to
     begin. -->
     <div class="container">
     <div class="description-text" id="description">New Follow</div>
-
-      <form>
+    <form>
         <input id="FOL_date" type="text" placeholder="Date of Follow">
-        <input id="FOL_B_AnimID" type="text" placeholder="ID of Focal Chimp">
+        <!--<input id="FOL_B_AnimID" type="text" placeholder="ID of Focal Chimp">-->
+        <select id = "FOL_B_AnimID" class="text">
+            <option>ID of Focal Chimp</option>
+            <option><a id="fd" >FD</a></option>
+            <option><a id="kp" >KP</a></option>
+            <option><a id="wl" >WL</a></option>
+            <option><a id="fam" >FAM</a></option>
+            <option><a id="kea" >KEA</a></option>
+            <option><a id="fr" >FR</a></option>
+            <option><a id="jf" >JF</a></option>
+            <option><a id="px" >PX</a></option>
+            <option><a id="gm" >GM</a></option>
+            <option><a id="tg" >TG</a></option>
+            <option><a id="fo">FO</a></option>
+            <option><a id="goption">Goption</a></option>
+            <option><a id="nas">NAS</a></option>
+            <option><a id="fe">FE</a></option>
+            <option><a id="sw">SW</a></option>
+            <option><a id="nur">NUR</a></option>
+            <option><a id="za">ZA</a></option>
+            <option><a id="sa">SA</a></option>
+            <option><a id="eza">EZA</a></option>
+            <option><a id="tn">TN</a></option>
+            <option><a id="si">SI</a></option>
+            <option><a id="eri">ERI</a></option>
+            <option><a id="sn">SN</a></option>
+            <option><a id="sam" >SAM</a></option>
+            <option><a id="sif" >SIF</a></option>
+            <option><a id="fu" >FU</a></option>
+            <option><a id="tz" >TZ</a></option>
+            <option> <a id="ao">AO</a></option>
+            <option> <a id="ga">GA</a></option>
+            <option><a id="ima">IMA</a></option>
+            <option><a id="sl">SL</a><option>
+            <option><a id="gld">GLD</a></option>
+            <option><a id="bah">BAH</a></option>
+            <option><a id="eow" >EOW</a></option>
+            <option><a id="tzn" >TZN</a></option>
+            <option><a id="zel" >ZEL</a></option>
+            <option><a id="rum" >RUM</a></option>
+            <option><a id="fnd" >FND</a></option>
+            <option><a id="zin" >ZIN</a></option>
+            <option><a id="mkw" >MKW</a></option>
+            <option><a id="tom" >TOM</a></option>
+            <option><a id="dl" >DL</a></option>
+            <option><a id="yam" >YAM</a></option>
+            <option><a id="sdb" >SDB</a></option>
+            <option><a id="dia" >DIA</a></option>
+            <option><a id="van" >VAN</a></option>  
+        </select>
         <input id="FOL_CL_community_id" type="text" placeholder="Community ID">
         <input id="FOL_begin_time" type="text" placeholder="Begin Time (hh:mm)">
         <input id="FOL_am_observer_1" type="text" placeholder="Name of Researcher">
-      </form>
+    </form>
 
       <!-- Note that this button cannot go inside the form. I should probably
       figure out why. -->
       <button id="begin-follow" class="btn-launch btn btn-positive btn-block">Begin</button>
   </div> <!-- .container -->
         <script type="text/javascript">
+            // for date formation
+            $(function() {
+                $( "#FOL_date" ).datepicker();
+            });
+            // for 15 minutes time interval
+            $(document).ready(function(){
+                $('#FOL_begin_time').timepicker({
+                timeFormat: 'HH:mm',
+                minTime: '1:00:00',
+                maxHour: 20,
+                maxMinutes: 30,
+                interval: 15 // 15 minutes
+                });
+            });
             $(display());
         </script>
     </body>

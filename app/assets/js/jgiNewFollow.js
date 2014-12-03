@@ -35,6 +35,7 @@ function display() {
         var communityId = $('#FOL_CL_community_id').val();
         var beginTime = $('#FOL_begin_time').val();
         var researcher = $('#FOL_am_observer_1').val();
+        //$("#jqxDateTimeInput").jqxDateTimeInput({ width: '300px', height: '25px', formatString: 'd'});
 
         // Update the database.
         writeNewFollow(

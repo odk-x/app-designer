@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta name="viewport" content="width=device-width" />
+      <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+      <link href="../framework/libs/combo_box/jquery-ui.css" rel="stylesheet" type="text/css" />
+      <link href="../framework/libs/combo_box/combo.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+      <script type="text/javascript" src="../framework/libs/combo_box/jquery-ui.js"></script>
+      <script type="text/javascript" src="../framework/libs/combo_box/combo.js"></script>
+      <script type="text/javascript" src="js/speciesPageForFocalChimp.js"></script>
+      <script type="text/javascript" src="js/util.js"></script>
+    <style>
+      .pull-middle{
+        position: relative;
+        left: 160px;
+        margin-top: 20px;
+      }
+      #times-input-species{
+       position: relative;
+       left: 70px !important;
+       clear: both;
+      }
+      #start_time_species, #end_time_species, #species_number{
+        width: 9em !important;
+        height: 2.5em !important;
+        border-radius: .5em;
+        margin-top: 40px;
+        color: black !important;
+      }
+      .pull-left{
+        position: relative;
+        left: 70px !important;
+        margin-top: 20px;;
+      }
+    </style>
+    <script>
+      // for searchable combo box
+      $(function() {
+        $( "#species" ).combobox();
+      });
+    </script>
+    <body id="main">
+      <div>
+        <button id="saving_species" class="btn btn-primary pull-left">Done</button>
+        <button id="goBack" class="btn btn-primary pull-middle">Cancel</button>
+      </div>
+      <div id="times-input-species">
+        <form>
+          <input id="species_number" type="text" placeholder="Number">
+          <input id="start_time_species" type="text" placeholder="Start Time">
+          <input id="end_time_species" type="text" placeholder="End Time">
+        </form>
+      </div>
+      <div class="ui-widget">
+      <select id="species">
+        <option selected disabled> Select Species</option>  
+        <option><a id="chatu" class="species species-show" href="#">Chatu</a></option>
+        <option><a id="kenge" class="species species-show" href="#">Kenge</a></option>
+        <option><a id="kima" class="species species-show" href="#">Kima</a></option>
+        <option><a id="nguruwe" class="species species-show" href="#">Nguruwe</a></option>
+        <option><a id="nkunge" class="species species-show" href="#">Nkunge</a></option>
+        <option><a id="nyani" class="species species-show" href="#">Nyani</a></option>
+        <option><a id="nyoka" class="species species-show" href="#">Nyoka</a></option>
+        <option><a id="pongo" class="species species-show" href="#">Pongo</a></option>
+        <option><a id="vyondi" class="species species-show" href="#">Vyondi</a></option>
+        <option><a id="unknown" class="species species-show" href="#">Unknown-Species</a></option> 
+      </select>
+    </div>
+  </div> <!-- .container -->
+  <script type="text/javascript">
+    display();
+      
+  </script>
+  </body>
+</html>

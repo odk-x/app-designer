@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta name="viewport" content="width=device-width" />
+      <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+      <link href="../framework/libs/combo_box/jquery-ui.css" rel="stylesheet" type="text/css" />
+      <link href="../framework/libs/combo_box/combo.css" rel="stylesheet" type="text/css" />
+       <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+       <script type="text/javascript" src="../framework/libs/combo_box/jquery-ui.js"></script>
+       <script type="text/javascript" src="../framework/libs/combo_box/combo.js"></script><!--searchable comboBox-->
+       <script type="text/javascript" src="js/foodPageForFocalChimp.js"></script>
+       <script type="text/javascript" src="js/util.js"></script>
+    <style>
+      .pull-middle{
+        position: relative;
+        left: 160px;
+        margin-top: 20px;
+      }
+      .times-input{
+       position: relative;
+       left: 70px !important;
+       clear: both;
+      }
+      
+      #start_time_food, #end_time_food{
+        width: 9em !important;
+        height: 2.5em !important;
+        border-radius: .5em;
+        margin-top: 40px;
+        color: black !important;
+      }
+      .pull-left{
+        position: relative;
+        left: 70px !important;
+        margin-top: 20px;
+      }
+  </style>
+  <script>
+    // searchable combobox for foods
+    $(function() {
+      $( "#foods" ).combobox();
+    });
+    //searchable combobox for food part
+    $(function() {
+      $( "#food-part" ).combobox();
+  });
+  </script>
+    
+  <body id="main">
+    <div>
+      <button id="saving_food" class="btn btn-primary pull-left">Done</button>
+      <button id="go_back" class="btn btn-primary pull-middle">Cancel</button>
+    </div>
+    <div class="times-input">
+      <form>
+        <input id="start_time_food" type="text" placeholder="Start Time">
+        <input id="end_time_food" type="text" placeholder="End Time">
+      </form>
+    </div>
+    <div class="ui-widget">
+      <select id="foods" placeholder="Foods" class="foods">
+        <option selected disabled>Select Food</option>    
+        <option><a id="bananas" class="food food-show" href="#">Bananas</a></option>
+        <option><a id="berries" class="food food-show" href="#">Berries</a></option>
+        <option><a id="flesh" class="food food-show" href="#">Flesh</a></option>
+        <option><a id="asali" class="food food-show" href="#">ASALI</a></option>
+        <option><a id="augoro" class="food food-show" href="#">AUGORO</a></option>
+        <option><a id="bihuhula" class="food food-show" href="#">BIHUHULA </a></option>
+        <option><a id="bucheli" class="food food-show" href="#"> BUCHELI</a></option>
+        <option> <a id="budyankede" class="food food-show" href="#">BUDYANKENDE</a></option>
+        <option> <a id="buliga" class="food food-show" href="#">BULIGA</a></option>
+        <option> <a id="buliga kubwa" class="food food-show" href="#">BULIGA KUBWA</a></option>
+        <option> <a id="buliga ndogo" class="food food-show" href="#">BULIGA NDOGO</option>
+        <option> <a id="bulinda nkwavu" class="food food-show" href="#">BULINDA NKWAVU</a></option>
+        <option> <a id="butura" class="food food-show" href="#">BUTURA</a></option>
+        <option> <a id="bwoya" class="food food-show" href="#">BWOYA</a></option>
+        <option> <a id="chondi" class="food food-show" href="#">CHONDI</a></option>
+        <option> <a id="embe mwenbe" class="food food-show" href="#">EMBE MWENBE</a></option>
+        <option> <a id="embipori" class="food food-show" href="#">EMBIPORI</a></option>
+        <option> <a id="gologombe" class="food food-show" href="#">GOLOGOMBE</a></option>
+        <option> <a id="insana" class="food food-show" href="#">INSANA</a></option>
+        <option> <a id="kachinda nfizi" class="food food-show" href="#">KACHINDA NFIZI</a></option>
+        <option> <a id="kahawa mwitu" class="food food-show" href="#">KAHAWA MWITU</a></option>
+        <option> <a id="kamasi" class="food food-show" href="#">KAMASI</a></option>
+        <option> <a id="kamebe" class="food food-show" href="#">KAMEMBE</a></option>
+        <option> <a id="karusambwa" class="food food-show" href="#">KARUSAMBWA</a></option>
+        <option> <a id="kibolela" class="food food-show" href="#">KIBOLELA</a></option>
+        <option> <a id="kibozanda" class="food food-show" href="#">KIBOZANDA</a></option>
+        <option> <a id="kifumbe" class="food food-show" href="#">KIFUMBE</a></option>
+        <option> <a id="kifumufumu" class="food food-show" href="#">KIFUMUFUMU</a></option>
+        <option> <a id="kihama" class="food food-show" href="#">KIHAMA</a></option>
+        <option> <a id="kihololo" class="food food-show" href="#">KIHOLOLO</a></option>
+        <option> <a id="kihondogori" class="food food-show" href="#">KIHONDOGORI</a></option>
+        <option> <a id="kihonyamlango" class="food food-show" href="#">KIHONYAMLANGO</a></option>
+        <option> <a id="kihungere" class="food food-show" href="#">KIHUNGERE</a></option>
+        <option> <a id="kijigojigo" class="food food-show" href="#">KIJIGOJIGO</a></option>
+        <option> <a id="kikali" class="food food-show" href="#">KIKALI</a></option>
+        <option> <a id="kilufia" class="food food-show" href="#">KILUFIA</a></option>
+        <option> <a id="kima" class="food food-show" href="#">KIMA</a></option>
+        <option> <a id="kinuke" class="food food-show" href="#">KINUKE</a></option>
+        <option> <a id="kinyesi" class="food food-show" href="#">KINYESI</a></option>
+        <option value="Unknown-Food" id="Unknown-Food" class="food food-show">Unknown-Food</option> 
+      </select>
+    </div>
+
+    <div class="ui-widget">
+      <select id="food-part" class="food_part">
+        <option selected disabled>Select Food Part</option>  
+        <option><a id="Chipukiza" class="foodPart foodPart-show" href="#">Chipukiza</a></option>
+        <option><a id="Mabua" class="foodPart foodPart-show" href="#">Mabua</a></option>
+        <option><a id="Magoma" class="foodPart foodPart-show" href="#">Magoma</a></option>
+        <option><a id="Majani" class="foodPart foodPart-show" href="#">Majani</a></option>
+        <option><a id="Matunda" class="foodPart foodPart-show" href="#">Matunda</a></option>
+        <option><a id="Maua" class="foodPart foodPart-show" href="#">Maua</a></option>
+        <option><a id="Mbegu" class="foodPart foodPart-show" href="#">Mbegu</a></option>
+        <option><a id="Mchwa" class="foodPart foodPart-show" href="#">Mchwa</a></option>
+        <option><a id="Mifupa" class="foodPart foodPart-show" href="#">Mifupa</a></option>                    
+        <option><a id="Miti" class="foodPart foodPart-show" href="#">Miti</a></option>
+        <option><a id="Mizizi" class="foodPart foodPart-show" href="#">Mizizi</a></option>
+        <option><a id="Nyama" class="foodPart foodPart-show" href="#">Nyama</a></option>
+        <option><a id="Utomvu" class="foodPart foodPart-show" href="#">Utomvu</a></option>
+        <option><a id="Wadudu" class="foodPart foodPart-show" href="#">Wadudu</a></option>
+        <option><a id="UnknownFoodPart" class="foodPart foodPart-show" href="#">Unknown-Part</a></option>   
+      </select>
+    </div>
+
+  </div> <!-- .container -->
+  <script type="text/javascript">
+    display();   
+  </script>
+</body>
+</html>

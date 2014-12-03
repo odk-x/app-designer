@@ -404,7 +404,9 @@ function display() {
      * http://stackoverflow.com/questions/4793604/how-to-do-insert-after-in-javascript-without-using-a-library
      */
     var insertAfter = function(newNode, node) {
-        node.parentNode.insertBefore(newNode, node.nextSibling);
+        if (node != undefined && node.parentNode != undefined) {
+            node.parentNode.insertBefore(newNode, node.nextSibling);
+        }
     };
 
     /**
@@ -1029,7 +1031,7 @@ function display() {
         setFoodIsPresent(foodId, false);
         updateUIForFood();
         var rowId = foodRowIdCache[foodId];
-        writeForFood(true, rowId, foodId, false, null, null);
+         writeForFood(true, rowId, foodId, false, null, null);
 
     });
 
@@ -1162,4 +1164,26 @@ function display() {
                     
     });
 
+    // taking to the food page
+    $('#button-food').on('click', function() {
+        //control.launchHTML('assets/foodPageForFocalChimp.html');
+        var queryString = util.getKeysToAppendToURL(
+           followDate,
+           followTime,
+           focalChimpId);
+        var url = control.getFileAsUrl(
+                'assets/foodPageForFocalChimp.html' + queryString);
+        window.location.href = url;
+    });
+
+    // taking to the species page
+    $('#button-species').on('click', function() {
+        var queryString = util.getKeysToAppendToURL(
+           followDate,
+           followTime,
+           focalChimpId);
+        var url = control.getFileAsUrl(
+                'assets/speciesPageForFocalChimp.html' + queryString);
+        window.location.href = url;
+    });
 }
