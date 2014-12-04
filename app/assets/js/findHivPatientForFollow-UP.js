@@ -52,7 +52,7 @@ function display() {
           var next_year = parseInt(rest_date.substring(ind_2nd_slash + 1));
 
           // figuring out the most recent date for the next visit
-          if (next_year == 14){
+          if (max_year < next_year){
             if (max_month < next_month) {
                max_month = next_month;
                max_year = next_year;
