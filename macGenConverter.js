@@ -14,14 +14,7 @@ function removeEmptyStrings(rObjArr){
         _.each(row, function(value, key){
             if(_.isString(value) && value.trim() === "") {
                 return;
-            } else if (_.isString(value)) {
-                var lowerCase = value.toLowerCase();
-                if (lowerCase === "false") {
-                    value = false;
-                } else if (lowerCase === "true") {
-                    value = true;
-                }
-            }
+            } 
             outRow[key] = value;
         });
         if(_.keys(outRow).length > 0) {

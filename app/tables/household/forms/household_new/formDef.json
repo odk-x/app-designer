@@ -121,6 +121,7 @@
         "display": {
           "text": "Unique barcode ID or locator designation for this household"
         },
+        "required": true,
         "_row_num": 2
       },
       {
@@ -596,6 +597,7 @@
             "display": {
               "text": "Unique barcode ID or locator designation for this household"
             },
+            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -668,7 +670,9 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            0
+          ]
         },
         "operations": [
           {
