@@ -17,7 +17,11 @@
  */
 'use strict';
 
-var request = require('browser-request');
+if (typeof XMLHttpRequest !== 'undefined'){
+    var request = require('browser-request');
+} else {
+    var request = {};
+}
 
 console.log('in devenv-util');
 
@@ -75,13 +79,14 @@ exports.postFile = function(path, content, callback) {
         callback = exports.defaultResponseFunction;
     }
 
-    request.post(
-        {
-            uri: exports.rootpath + '/' + path,
-            body: content
-        },
-        callback);
-
+    if (request.post !== undefined) {
+        request.post(
+            {
+                uri: exports.rootpath + '/' + path,
+                body: content
+            },
+            callback);
+    }
 };
 
 var getValueOfSetting = function(formDef, settingName) {
