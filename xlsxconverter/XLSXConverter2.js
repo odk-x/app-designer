@@ -13,424 +13,6 @@
  */
 var XLSXConverter = {};
 (function(XLSXConverter){
-    var processJSONWb = function(wbJson){
-        warnings.clear();
-
-        // Need to add this in when node is being used to run this 
-        if (typeof exports !== 'undefined') {
-            if(typeof require !== 'undefined') _ = require('./underscore.js');
-        }
-        
-        _.each(wbJson, function(sheet, sheetName){
-            _.each(sheet, function(row, rowIdx){
-                var rowObject = groupColumnHeaders(cleanValues(row));
-                var idx = rowObject.__rowNum__;
-                rowObject._row_num = idx + 1; /* excel uses 1-based index */
-                sheet[rowIdx] = rowObject;
-            });
-        });
-
-        // we have done the standard conversions on all the sheets.
-
-        var specification = {};
-
-        // COLUMN_TYPES
-        var processedColumnTypes = columnTypeMap;
-        if("column_types" in wbJson) {
-            var userDefColumnTypes = wbJson['column_types'];
-            if (userDefColumnTypes.length !== 1) {
-                throw Error("Expected only one row in the 'column_types' sheet");
-            }
-            // NOTE: we allow override of default data type definitions...
-            processedColumnTypes = _.extend({}, columnTypeMap, userDefColumnTypes[0]);
-        }
-        specification.column_types = processedColumnTypes;
-
-        // Compute Processed intermediaries
-
-        // SETTINGS
-        var processedSettings = {};
-        if ('settings' in wbJson) {
-            var cleanSet = wbJson['settings'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'setting_name');
-            processedSettings = _.groupBy(cleanSet, 'setting_name');
-            _.each(processedSettings, function(value, name) {
-                if(_.isArray(value)){
-                    if (value.length !== 1) {
-                        throw Error("Duplicate definitions of '" + name + "' on 'settings' sheet");
-                    }
-                    processedSettings[name] = value[0];
-                } else {
-                    throw Error("Unexpected non-array for '" + name + "' on 'settings' sheet");
-                }
-            });
-        }
-        if ( !('form_id' in processedSettings) ) {
-            throw Error("Please define a 'form_id' setting_name on the settings sheet and specify the unique form id for the form");
-        }
-        if ( !('table_id' in processedSettings) ) {
-            var entry = _.extend({},processedSettings['form_id']);
-            entry.setting_name = "table_id";
-            processedSettings['table_id'] = entry;
-        }
-
-        // restrict the table_id and form_id to be no more than 50 characters long.
-        // This allows for versioning on the server and for auxillary shadow status tables.
-        
-        if ( processedSettings.form_id.value.length > 50 ) {
-            throw Error("The value of the 'form_id' setting_name on the settings sheet cannot be more than 50 characters long");
-        }
-
-        if ( processedSettings.table_id.value.length > 50 ) {
-            throw Error("The value of the 'table_id' setting_name on the settings sheet cannot be more than 50 characters long");
-        }
-
-        assertValidUserDefinedName("The value of the 'form_id' setting_name on the settings sheet",
-                                    processedSettings.form_id.value);
-
-        assertValidUserDefinedName("The value of the 'table_id' setting_name on the settings sheet",
-                                    processedSettings.table_id.value);
-        
-        if ( !('survey' in processedSettings) ) {
-            throw Error("Please define a 'survey' setting_name on the settings sheet and specify the survey title under display.title");
-        }
-        if ( !('display' in processedSettings.survey) ) {
-            throw Error("Please specify the survey title under the display.title column for the 'survey' setting_name on the settings sheet");
-        }
-        if ( _.isEmpty(processedSettings.survey.display) ||
-                (processedSettings.survey.display.title == null && processedSettings.survey.display.text != null) ) {
-            throw Error("Please specify the survey title under the display.title column for the 'survey' setting_name on the settings sheet");
-        }
-
-        // construct the list of all available form locales and the default locale.
-        // Relies upon the title translations of the 'survey' sheet.
-        // If
-        //   settings.survey.display.title = { 'en' : 'Joy of life', 'fr' : 'Joi de vivre'}
-        // and if
-        //   settings.en.display = { text: {'en' : 'English', 'fr' : 'Anglais'} }
-        //   settings.fr.display = { text: {'en' : 'French', 'fr', 'Francais' } }
-        // then we compose
-        //
-        //   settings._locales = [ { name: 'en', display: { text: { 'en' : 'English' , 'fr': 'Anglais' }}},
-        //                         { name: 'fr', display: { text: { 'en' : 'French', 'fr': 'Francais' }}} ]
-        //
-        // If the localizations for the language tags are missing (e.g., no settings.en, settings.fr)
-        // then we just use the tag as the display string for that translation:
-        //
-        //   settings._locales = [ { name: 'en', display: { text: 'en'} },
-        //                         { name: 'fr', display: { text: 'fr'} } ]
-        //
-        // The default locale is the first locale in the settings sheet.
-        // i.e., if you have two languages, settings.en and settings.fr,
-        // if (settings.en._row_num < settings.fr._row_num) then
-        // en is the default locale.
-        // If the languages are not defined in the settings sheet but
-        // are simply referenced in the survey title, then the default
-        // is the first in javascript attribute-iteration order.
-        //
-
-        {
-            var locales = [];
-            var defaultLocale = null;
-
-            // assume all the locales are specified by the title...
-            var form_title = processedSettings.survey.display.title;
-            if ( _.isUndefined(form_title) || _.isString(form_title) ) {
-                // no internationalization -- just default choice
-                locales.push({display: {text: 'default'}, name: 'default'});
-                defaultLocale = 'default';
-            } else {
-                // we have localization -- find all the tags
-                var firstTranslation = null;
-
-                for ( var f in form_title ) {
-                    // If the tag value is defined in the settings page, use its
-                    // display value as the display string for the language.
-                    // Otherwise, use the tag itself as the name for that language.
-                    var translations = processedSettings[f];
-                    if ( translations == null || translations.display == null ) {
-                        locales.push( { display: {text: f},
-                                        name: f } );
-                        if ( defaultLocale == null ) {
-                            defaultLocale = f;
-                        }
-                    } else {
-                        locales.push( { display: translations.display,
-                                        _row_num: translations._row_num,
-                                        name: f } );
-                        if ( firstTranslation == null ||
-                             firstTranslation > translations._row_num) {
-                            defaultLocale = f;
-                            firstTranslation = translations._row_num;
-                        }
-                    }
-                }
-
-                // Order by _row_num, if not null...
-                // If some are defined and some are not,
-                // place the defined ones first.
-                locales = locales.sort( function(a,b) {
-                    if ( '_row_num' in b ) {
-                        if ( '_row_num' in a ) {
-                            return a._row_num - b._row_num;
-                        } else {
-                            return 1;
-                        }
-                    } else if ( '_row_num' in a ) {
-                        return -1;
-                    } else if ( a.name > b.name ) {
-                        return 1;
-                    } else if ( a.name == b.name ) {
-                        return 0;
-                    } else {
-                        return -1;
-                    }
-                });
-            }
-
-            var entry = { setting_name: "_locales",
-                          _row_num: processedSettings.survey._row_num,
-                          value: locales };
-            processedSettings['_locales'] = entry;
-
-            var entry = { setting_name: "_default_locale",
-                          _row_num: processedSettings.survey._row_num,
-                          value: defaultLocale };
-            processedSettings['_default_locale'] = entry;
-        }
-
-        if ( !('initial' in processedSettings) ) {
-            processedSettings.initial = processedSettings.survey;
-        }
-
-        specification.settings = processedSettings;
-
-        // CHOICES
-        var processedChoices = {};
-        if ('choices' in wbJson) {
-            var cleanSet = wbJson['choices'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'choice_list_name');
-            errorIfFieldMissing('choices',cleanSet,'data_value', true);
-            errorIfFieldMissing('choices',cleanSet, 'display', true);
-            processedChoices = _.groupBy(cleanSet, 'choice_list_name');
-        }
-        specification.choices = processedChoices;
-
-        // QUERIES
-        var processedQueries = {};
-        if ('queries' in wbJson) {
-            var cleanSet = wbJson['queries'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'query_name');
-            errorIfFieldMissing('queries',cleanSet,'query_type', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'csv', 'uri', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'csv', 'callback', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'ajax', 'uri', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'ajax', 'callback', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'linked_form_id', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'selection', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'selectionArgs', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'auxillaryHash', true);
-            processedQueries = _.groupBy(cleanSet, 'query_name');
-            _.each(processedQueries, function(value, name) {
-                if(_.isArray(value)){
-                    if (value.length !== 1) {
-                        throw Error("Duplicate definitions of '" + name + "' on 'queries' sheet");
-                    }
-                    processedQueries[name] = value[0];
-                } else {
-                    throw Error("Unexpected non-array for '" + name + "' on 'queries' sheet");
-                }
-            });
-        }
-        specification.queries = processedQueries;
-
-        // verify that queries and choices don't share the same names
-        for (var key in processedQueries ) {
-            if ( key in processedChoices ) {
-                throw Error("Reuse of the name '" + key + "'. The 'choice_list_name' on 'choices' sheet and 'query_name' on 'queries' sheet cannot be identical.");
-            }
-        }
-
-        // CALCULATES
-        var processedCalculates = {};
-        if ('calculates' in wbJson) {
-            var cleanSet = wbJson['calculates'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'calculation_name');
-            errorIfFieldMissing('calculates',cleanSet,'calculation', true);
-            processedCalculates = _.groupBy(cleanSet, 'calculation_name');
-            _.each(processedCalculates, function(value, name) {
-                if(_.isArray(value)){
-                    if (value.length !== 1) {
-                        throw Error("Duplicate definitions of '" + name + "' on 'calculates' sheet");
-                    }
-                    processedCalculates[name] = value[0];
-                } else {
-                    throw Error("Unexpected non-array for '" + name + "' on 'calculates' sheet");
-                }
-            });
-        }
-        specification.calculates = processedCalculates;
-
-        // PROMPT_TYPES
-        // NOTE: does NOT have any column_type processing
-        var processedPromptTypes = promptTypeMap;
-        if("prompt_types" in wbJson) {
-            var cleanSet = wbJson['prompt_types'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'prompt_type_name');
-            errorIfFieldMissing('prompt_types',cleanSet,'type', true);
-            var userDefPrompts = {};
-            userDefPrompts = _.groupBy(cleanSet, "prompt_type_name");
-            _.each(userDefPrompts, function(value, key){
-                if(_.isArray(value)){
-                    if (value.length !== 1) {
-                        throw Error("Duplicate definitions of '" + key + "' on 'prompt_types' sheet");
-                    }
-                    var schema = value[0];
-                    if ( schema.type === "null" ) {
-                        // to enable 'note' prompt types that don't have any backing data value
-                        userDefPrompts[key] = null;
-                    } else {
-                        userDefPrompts[key] = schema; // TODO: ???
-                    }
-                }
-            });
-            // NOTE: we allow override of default data type definitions...
-            processedPromptTypes = _.extend({}, promptTypeMap, userDefPrompts);
-        }
-
-        // MODEL
-        // NOTE: does NOT have any column_type processing
-        var processedModel = {};
-        if("model" in wbJson){
-            var cleanSet = wbJson['model'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'name');
-            errorIfFieldMissing('model',cleanSet,'type', true);
-            processedModel = _.groupBy(cleanSet, "name");
-            _.each(processedModel, function(value, key){
-                if(_.isArray(value)){
-                    if (value.length !== 1) {
-                        throw Error("Duplicate definitions of '" + key + "' on 'model' sheet");
-                    }
-                    processedModel[key] = _.extend({_defn: [{ _row_num : value[0]._row_num, section_name: 'model' }] }, value[0] );
-                    removeIgnorableModelFields(processedModel[key]);
-                }
-            });
-        }
-        specification.model = processedModel;
-
-        // Find the sheets that are survey sheets
-        // (not one of the reserved names and not beginning with '-')
-        var sections = {};
-        var sectionNames = [];
-        _.each(wbJson, function(sheet, sheetName){
-            if ( sheetName.indexOf('.') !== -1 ) {
-                throw Error("Dots are not allowed in sheet names.");
-            }
-            if ( sheetName.indexOf('_') === 0 ) {
-                throw Error("Sheet names cannot begin with '_'.");
-            }
-            if ( sheetName.indexOf('-') !== 0 && ! _.contains(reservedSheetNames, sheetName) ) {
-                sections[sheetName] = sheet;
-                sectionNames.push(sheetName);
-            }
-        });
-        if ( !("initial" in sections) ) {
-            sections["initial"] = default_initial;
-            sectionNames.push("initial");
-        }
-
-        sectionNames.sort();
-
-        if(!('survey' in sections)){
-            throw Error("Missing survey sheet");
-        }
-
-        // if a section of the survey does not have a settings entry, add it.
-        // and if its settings entry does not have a display entry, use the
-        // values in the 'survey' settings.
-
-        _.each(sectionNames, function(name) {
-            if (! (name in specification.settings) ) {
-                specification.settings[name] = {};
-            }
-            if (! ('display' in specification.settings[name]) ) {
-                specification.settings[name].display = specification.settings.survey.display;
-            }
-        });
-
-        _.each(specification.settings, function(value, name) {
-            sanityCheckFieldTypes(value, 'settings', specification.column_types);
-        });
-        _.each(specification.choices, function(value, name) {
-            sanityCheckFieldTypes(value, 'choices', specification.column_types);
-        });
-        _.each(specification.queries, function(value, name) {
-            sanityCheckFieldTypes(value, 'queries', specification.column_types);
-        });
-        _.each(specification.calculates, function(value, name) {
-            sanityCheckFieldTypes(value, 'calculates', specification.column_types);
-        });
-        _.each(specification.queries, function(value, name) {
-            sanityCheckFieldTypes(value, 'queries', specification.column_types);
-        });
-
-        // construct the json sheet for the interpreter
-        var parsedSections = parseSections(sectionNames, sections, specification.settings, specification.column_types);
-
-        specification.section_names = sectionNames; // in alphabetical order
-
-        specification.sections = parsedSections;
-
-        // flesh out model based upon prompts and assign statements
-        developDataModel(specification, processedPromptTypes);
-
-        // ensure that all values_list names have a backing choices or queries definition
-        _.each(specification.sections, function(section){
-            _.each(section.prompts, function(prompt){
-                if ("values_list" in prompt) {
-                    var name = prompt.values_list;
-                    if ( !((name in specification.choices) || (name in specification.queries)) ) {
-                        throw Error("Unrecognized 'values_list' name: '" + name + "'. Prompt: '" + prompt.type + "' at row " +
-                                prompt._row_num + " on sheet: " + section.section_name);
-                    }
-                }
-            });
-        });
-
-        // TODO: deal with column_types
-        // column types are applied to ALL sheets.
-        specification.column_types
-
-        /*
-         * // INCOMING:
-         * specification = {
-         *
-         *    settings: { setting_name : ... }
-         *    choices: { choice_list_name : ... }
-         *    queries: { query_name : ... }
-         *    calculates: { calculation_name : ... }
-         *
-         *    section_names : [ alphabetical list of sections ]
-         *
-         *    sections : { sectionName : {
-         *                        section_name: sheetName,
-         *                        nested_sections: { sectionNameA : true, ... },
-         *                        reachable_sections: { sectionNameA : true, ... },
-         *                        prompts: [ { extend promptDefinition with _branch_label_enclosing_screen }, ... ],
-         *                        validation_tag_map: { tagA : [ promptidx1, promptidx2, ... ], tagB : [...], ... },
-         *                        operations: [ opA, opB, ... ],
-         *                        branch_label_map: { branchLabelA: opidx1, branchLabelB: opidx2, ... }
-         *                    },
-         *                    ... }
-         *
-         *  // TODO: flesh out
-         *    model: model tab pivoted by name, merged with prompts data info. (partial)
-         *
-         *  };
-         */
-
-        return { xlsx: wbJson, specification: specification };
-    };
 
     // Establish the root object, `window` in the browser, or `global` on the server.
     var root = this;
@@ -2605,6 +2187,425 @@ var XLSXConverter = {};
                 assignItemsElementKey( name, name, fullSetOfElementKeys, entry );
             }
         });
+    };
+
+    var processJSONWb = function(wbJson){
+        warnings.clear();
+
+        // Need to add this in when node is being used to run this 
+        if (typeof exports !== 'undefined') {
+            if(typeof require !== 'undefined') _ = require('./underscore.js');
+        }
+        
+        _.each(wbJson, function(sheet, sheetName){
+            _.each(sheet, function(row, rowIdx){
+                var rowObject = groupColumnHeaders(cleanValues(row));
+                var idx = rowObject.__rowNum__;
+                rowObject._row_num = idx + 1; /* excel uses 1-based index */
+                sheet[rowIdx] = rowObject;
+            });
+        });
+
+        // we have done the standard conversions on all the sheets.
+
+        var specification = {};
+
+        // COLUMN_TYPES
+        var processedColumnTypes = columnTypeMap;
+        if("column_types" in wbJson) {
+            var userDefColumnTypes = wbJson['column_types'];
+            if (userDefColumnTypes.length !== 1) {
+                throw Error("Expected only one row in the 'column_types' sheet");
+            }
+            // NOTE: we allow override of default data type definitions...
+            processedColumnTypes = _.extend({}, columnTypeMap, userDefColumnTypes[0]);
+        }
+        specification.column_types = processedColumnTypes;
+
+        // Compute Processed intermediaries
+
+        // SETTINGS
+        var processedSettings = {};
+        if ('settings' in wbJson) {
+            var cleanSet = wbJson['settings'];
+            cleanSet = omitRowsWithMissingField(cleanSet, 'setting_name');
+            processedSettings = _.groupBy(cleanSet, 'setting_name');
+            _.each(processedSettings, function(value, name) {
+                if(_.isArray(value)){
+                    if (value.length !== 1) {
+                        throw Error("Duplicate definitions of '" + name + "' on 'settings' sheet");
+                    }
+                    processedSettings[name] = value[0];
+                } else {
+                    throw Error("Unexpected non-array for '" + name + "' on 'settings' sheet");
+                }
+            });
+        }
+        if ( !('form_id' in processedSettings) ) {
+            throw Error("Please define a 'form_id' setting_name on the settings sheet and specify the unique form id for the form");
+        }
+        if ( !('table_id' in processedSettings) ) {
+            var entry = _.extend({},processedSettings['form_id']);
+            entry.setting_name = "table_id";
+            processedSettings['table_id'] = entry;
+        }
+
+        // restrict the table_id and form_id to be no more than 50 characters long.
+        // This allows for versioning on the server and for auxillary shadow status tables.
+        
+        if ( processedSettings.form_id.value.length > 50 ) {
+            throw Error("The value of the 'form_id' setting_name on the settings sheet cannot be more than 50 characters long");
+        }
+
+        if ( processedSettings.table_id.value.length > 50 ) {
+            throw Error("The value of the 'table_id' setting_name on the settings sheet cannot be more than 50 characters long");
+        }
+
+        assertValidUserDefinedName("The value of the 'form_id' setting_name on the settings sheet",
+                                    processedSettings.form_id.value);
+
+        assertValidUserDefinedName("The value of the 'table_id' setting_name on the settings sheet",
+                                    processedSettings.table_id.value);
+        
+        if ( !('survey' in processedSettings) ) {
+            throw Error("Please define a 'survey' setting_name on the settings sheet and specify the survey title under display.title");
+        }
+        if ( !('display' in processedSettings.survey) ) {
+            throw Error("Please specify the survey title under the display.title column for the 'survey' setting_name on the settings sheet");
+        }
+        if ( _.isEmpty(processedSettings.survey.display) ||
+                (processedSettings.survey.display.title == null && processedSettings.survey.display.text != null) ) {
+            throw Error("Please specify the survey title under the display.title column for the 'survey' setting_name on the settings sheet");
+        }
+
+        // construct the list of all available form locales and the default locale.
+        // Relies upon the title translations of the 'survey' sheet.
+        // If
+        //   settings.survey.display.title = { 'en' : 'Joy of life', 'fr' : 'Joi de vivre'}
+        // and if
+        //   settings.en.display = { text: {'en' : 'English', 'fr' : 'Anglais'} }
+        //   settings.fr.display = { text: {'en' : 'French', 'fr', 'Francais' } }
+        // then we compose
+        //
+        //   settings._locales = [ { name: 'en', display: { text: { 'en' : 'English' , 'fr': 'Anglais' }}},
+        //                         { name: 'fr', display: { text: { 'en' : 'French', 'fr': 'Francais' }}} ]
+        //
+        // If the localizations for the language tags are missing (e.g., no settings.en, settings.fr)
+        // then we just use the tag as the display string for that translation:
+        //
+        //   settings._locales = [ { name: 'en', display: { text: 'en'} },
+        //                         { name: 'fr', display: { text: 'fr'} } ]
+        //
+        // The default locale is the first locale in the settings sheet.
+        // i.e., if you have two languages, settings.en and settings.fr,
+        // if (settings.en._row_num < settings.fr._row_num) then
+        // en is the default locale.
+        // If the languages are not defined in the settings sheet but
+        // are simply referenced in the survey title, then the default
+        // is the first in javascript attribute-iteration order.
+        //
+
+        {
+            var locales = [];
+            var defaultLocale = null;
+
+            // assume all the locales are specified by the title...
+            var form_title = processedSettings.survey.display.title;
+            if ( _.isUndefined(form_title) || _.isString(form_title) ) {
+                // no internationalization -- just default choice
+                locales.push({display: {text: 'default'}, name: 'default'});
+                defaultLocale = 'default';
+            } else {
+                // we have localization -- find all the tags
+                var firstTranslation = null;
+
+                for ( var f in form_title ) {
+                    // If the tag value is defined in the settings page, use its
+                    // display value as the display string for the language.
+                    // Otherwise, use the tag itself as the name for that language.
+                    var translations = processedSettings[f];
+                    if ( translations == null || translations.display == null ) {
+                        locales.push( { display: {text: f},
+                                        name: f } );
+                        if ( defaultLocale == null ) {
+                            defaultLocale = f;
+                        }
+                    } else {
+                        locales.push( { display: translations.display,
+                                        _row_num: translations._row_num,
+                                        name: f } );
+                        if ( firstTranslation == null ||
+                             firstTranslation > translations._row_num) {
+                            defaultLocale = f;
+                            firstTranslation = translations._row_num;
+                        }
+                    }
+                }
+
+                // Order by _row_num, if not null...
+                // If some are defined and some are not,
+                // place the defined ones first.
+                locales = locales.sort( function(a,b) {
+                    if ( '_row_num' in b ) {
+                        if ( '_row_num' in a ) {
+                            return a._row_num - b._row_num;
+                        } else {
+                            return 1;
+                        }
+                    } else if ( '_row_num' in a ) {
+                        return -1;
+                    } else if ( a.name > b.name ) {
+                        return 1;
+                    } else if ( a.name == b.name ) {
+                        return 0;
+                    } else {
+                        return -1;
+                    }
+                });
+            }
+
+            var entry = { setting_name: "_locales",
+                          _row_num: processedSettings.survey._row_num,
+                          value: locales };
+            processedSettings['_locales'] = entry;
+
+            var entry = { setting_name: "_default_locale",
+                          _row_num: processedSettings.survey._row_num,
+                          value: defaultLocale };
+            processedSettings['_default_locale'] = entry;
+        }
+
+        if ( !('initial' in processedSettings) ) {
+            processedSettings.initial = processedSettings.survey;
+        }
+
+        specification.settings = processedSettings;
+
+        // CHOICES
+        var processedChoices = {};
+        if ('choices' in wbJson) {
+            var cleanSet = wbJson['choices'];
+            cleanSet = omitRowsWithMissingField(cleanSet, 'choice_list_name');
+            errorIfFieldMissing('choices',cleanSet,'data_value', true);
+            errorIfFieldMissing('choices',cleanSet, 'display', true);
+            processedChoices = _.groupBy(cleanSet, 'choice_list_name');
+        }
+        specification.choices = processedChoices;
+
+        // QUERIES
+        var processedQueries = {};
+        if ('queries' in wbJson) {
+            var cleanSet = wbJson['queries'];
+            cleanSet = omitRowsWithMissingField(cleanSet, 'query_name');
+            errorIfFieldMissing('queries',cleanSet,'query_type', true);
+            errorIfFieldsMissingForQueryType('queries',cleanSet,'csv', 'uri', true);
+            errorIfFieldsMissingForQueryType('queries',cleanSet,'csv', 'callback', true);
+            errorIfFieldsMissingForQueryType('queries',cleanSet,'ajax', 'uri', true);
+            errorIfFieldsMissingForQueryType('queries',cleanSet,'ajax', 'callback', true);
+            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'linked_form_id', true);
+            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'selection', true);
+            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'selectionArgs', true);
+            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'auxillaryHash', true);
+            processedQueries = _.groupBy(cleanSet, 'query_name');
+            _.each(processedQueries, function(value, name) {
+                if(_.isArray(value)){
+                    if (value.length !== 1) {
+                        throw Error("Duplicate definitions of '" + name + "' on 'queries' sheet");
+                    }
+                    processedQueries[name] = value[0];
+                } else {
+                    throw Error("Unexpected non-array for '" + name + "' on 'queries' sheet");
+                }
+            });
+        }
+        specification.queries = processedQueries;
+
+        // verify that queries and choices don't share the same names
+        for (var key in processedQueries ) {
+            if ( key in processedChoices ) {
+                throw Error("Reuse of the name '" + key + "'. The 'choice_list_name' on 'choices' sheet and 'query_name' on 'queries' sheet cannot be identical.");
+            }
+        }
+
+        // CALCULATES
+        var processedCalculates = {};
+        if ('calculates' in wbJson) {
+            var cleanSet = wbJson['calculates'];
+            cleanSet = omitRowsWithMissingField(cleanSet, 'calculation_name');
+            errorIfFieldMissing('calculates',cleanSet,'calculation', true);
+            processedCalculates = _.groupBy(cleanSet, 'calculation_name');
+            _.each(processedCalculates, function(value, name) {
+                if(_.isArray(value)){
+                    if (value.length !== 1) {
+                        throw Error("Duplicate definitions of '" + name + "' on 'calculates' sheet");
+                    }
+                    processedCalculates[name] = value[0];
+                } else {
+                    throw Error("Unexpected non-array for '" + name + "' on 'calculates' sheet");
+                }
+            });
+        }
+        specification.calculates = processedCalculates;
+
+        // PROMPT_TYPES
+        // NOTE: does NOT have any column_type processing
+        var processedPromptTypes = promptTypeMap;
+        if("prompt_types" in wbJson) {
+            var cleanSet = wbJson['prompt_types'];
+            cleanSet = omitRowsWithMissingField(cleanSet, 'prompt_type_name');
+            errorIfFieldMissing('prompt_types',cleanSet,'type', true);
+            var userDefPrompts = {};
+            userDefPrompts = _.groupBy(cleanSet, "prompt_type_name");
+            _.each(userDefPrompts, function(value, key){
+                if(_.isArray(value)){
+                    if (value.length !== 1) {
+                        throw Error("Duplicate definitions of '" + key + "' on 'prompt_types' sheet");
+                    }
+                    var schema = value[0];
+                    if ( schema.type === "null" ) {
+                        // to enable 'note' prompt types that don't have any backing data value
+                        userDefPrompts[key] = null;
+                    } else {
+                        userDefPrompts[key] = schema; // TODO: ???
+                    }
+                }
+            });
+            // NOTE: we allow override of default data type definitions...
+            processedPromptTypes = _.extend({}, promptTypeMap, userDefPrompts);
+        }
+
+        // MODEL
+        // NOTE: does NOT have any column_type processing
+        var processedModel = {};
+        if("model" in wbJson){
+            var cleanSet = wbJson['model'];
+            cleanSet = omitRowsWithMissingField(cleanSet, 'name');
+            errorIfFieldMissing('model',cleanSet,'type', true);
+            processedModel = _.groupBy(cleanSet, "name");
+            _.each(processedModel, function(value, key){
+                if(_.isArray(value)){
+                    if (value.length !== 1) {
+                        throw Error("Duplicate definitions of '" + key + "' on 'model' sheet");
+                    }
+                    processedModel[key] = _.extend({_defn: [{ _row_num : value[0]._row_num, section_name: 'model' }] }, value[0] );
+                    removeIgnorableModelFields(processedModel[key]);
+                }
+            });
+        }
+        specification.model = processedModel;
+
+        // Find the sheets that are survey sheets
+        // (not one of the reserved names and not beginning with '-')
+        var sections = {};
+        var sectionNames = [];
+        _.each(wbJson, function(sheet, sheetName){
+            if ( sheetName.indexOf('.') !== -1 ) {
+                throw Error("Dots are not allowed in sheet names.");
+            }
+            if ( sheetName.indexOf('_') === 0 ) {
+                throw Error("Sheet names cannot begin with '_'.");
+            }
+            if ( sheetName.indexOf('-') !== 0 && ! _.contains(reservedSheetNames, sheetName) ) {
+                sections[sheetName] = sheet;
+                sectionNames.push(sheetName);
+            }
+        });
+        if ( !("initial" in sections) ) {
+            sections["initial"] = default_initial;
+            sectionNames.push("initial");
+        }
+
+        sectionNames.sort();
+
+        if(!('survey' in sections)){
+            throw Error("Missing survey sheet");
+        }
+
+        // if a section of the survey does not have a settings entry, add it.
+        // and if its settings entry does not have a display entry, use the
+        // values in the 'survey' settings.
+
+        _.each(sectionNames, function(name) {
+            if (! (name in specification.settings) ) {
+                specification.settings[name] = {};
+            }
+            if (! ('display' in specification.settings[name]) ) {
+                specification.settings[name].display = specification.settings.survey.display;
+            }
+        });
+
+        _.each(specification.settings, function(value, name) {
+            sanityCheckFieldTypes(value, 'settings', specification.column_types);
+        });
+        _.each(specification.choices, function(value, name) {
+            sanityCheckFieldTypes(value, 'choices', specification.column_types);
+        });
+        _.each(specification.queries, function(value, name) {
+            sanityCheckFieldTypes(value, 'queries', specification.column_types);
+        });
+        _.each(specification.calculates, function(value, name) {
+            sanityCheckFieldTypes(value, 'calculates', specification.column_types);
+        });
+        _.each(specification.queries, function(value, name) {
+            sanityCheckFieldTypes(value, 'queries', specification.column_types);
+        });
+
+        // construct the json sheet for the interpreter
+        var parsedSections = parseSections(sectionNames, sections, specification.settings, specification.column_types);
+
+        specification.section_names = sectionNames; // in alphabetical order
+
+        specification.sections = parsedSections;
+
+        // flesh out model based upon prompts and assign statements
+        developDataModel(specification, processedPromptTypes);
+
+        // ensure that all values_list names have a backing choices or queries definition
+        _.each(specification.sections, function(section){
+            _.each(section.prompts, function(prompt){
+                if ("values_list" in prompt) {
+                    var name = prompt.values_list;
+                    if ( !((name in specification.choices) || (name in specification.queries)) ) {
+                        throw Error("Unrecognized 'values_list' name: '" + name + "'. Prompt: '" + prompt.type + "' at row " +
+                                prompt._row_num + " on sheet: " + section.section_name);
+                    }
+                }
+            });
+        });
+
+        // TODO: deal with column_types
+        // column types are applied to ALL sheets.
+        specification.column_types
+
+        /*
+         * // INCOMING:
+         * specification = {
+         *
+         *    settings: { setting_name : ... }
+         *    choices: { choice_list_name : ... }
+         *    queries: { query_name : ... }
+         *    calculates: { calculation_name : ... }
+         *
+         *    section_names : [ alphabetical list of sections ]
+         *
+         *    sections : { sectionName : {
+         *                        section_name: sheetName,
+         *                        nested_sections: { sectionNameA : true, ... },
+         *                        reachable_sections: { sectionNameA : true, ... },
+         *                        prompts: [ { extend promptDefinition with _branch_label_enclosing_screen }, ... ],
+         *                        validation_tag_map: { tagA : [ promptidx1, promptidx2, ... ], tagB : [...], ... },
+         *                        operations: [ opA, opB, ... ],
+         *                        branch_label_map: { branchLabelA: opidx1, branchLabelB: opidx2, ... }
+         *                    },
+         *                    ... }
+         *
+         *  // TODO: flesh out
+         *    model: model tab pivoted by name, merged with prompts data info. (partial)
+         *
+         *  };
+         */
+
+        return { xlsx: wbJson, specification: specification };
     };
 
     root.XLSXConverter = {
