@@ -290,7 +290,7 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "twoColulmn",
+        "value": "twoColumn",
         "_row_num": 2
       },
       {
@@ -328,7 +328,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "twoColulmn",
+        "value": "twoColumn",
         "_row_num": 2
       },
       "form_version": {
@@ -345,7 +345,7 @@
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "twoColulmn",
+        "value": "twoColumn",
         "_row_num": 2,
         "__rowNum__": 1
       },
