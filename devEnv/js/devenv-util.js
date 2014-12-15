@@ -23,8 +23,6 @@ if (typeof XMLHttpRequest !== 'undefined'){
     var request = {};
 }
 
-console.log('in devenv-util');
-
 exports.rootpath = 'http://localhost:8000';
 
 /**
@@ -91,12 +89,13 @@ exports.postFile = function(path, content, callback) {
 
 var getValueOfSetting = function(formDef, settingName) {
 
-    var settings = formDef.xlsx.settings;
+    var settings = formDef.specification.settings;
 
-    for (var i = 0; i < settings.length; i++) {
-        var setting = settings[i];
-        if (setting.setting_name === settingName) {
-            return setting.value;
+    for(var prop in settings) {
+        if(settings.hasOwnProperty(prop)) {
+            if (prop === settingName) {
+                return settings[prop].value;
+            }
         }
     }
 

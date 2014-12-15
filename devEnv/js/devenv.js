@@ -494,9 +494,11 @@ module.exports = request;
  */
 'use strict';
 
-var request = require('browser-request');
-
-console.log('in devenv-util');
+if (typeof XMLHttpRequest !== 'undefined'){
+    var request = require('browser-request');
+} else {
+    var request = {};
+}
 
 exports.rootpath = 'http://localhost:8000';
 
@@ -552,23 +554,25 @@ exports.postFile = function(path, content, callback) {
         callback = exports.defaultResponseFunction;
     }
 
-    request.post(
-        {
-            uri: exports.rootpath + '/' + path,
-            body: content
-        },
-        callback);
-
+    if (request.post !== undefined) {
+        request.post(
+            {
+                uri: exports.rootpath + '/' + path,
+                body: content
+            },
+            callback);
+    }
 };
 
 var getValueOfSetting = function(formDef, settingName) {
 
-    var settings = formDef.xlsx.settings;
+    var settings = formDef.specification.settings;
 
-    for (var i = 0; i < settings.length; i++) {
-        var setting = settings[i];
-        if (setting.setting_name === settingName) {
-            return setting.value;
+    for(var prop in settings) {
+        if(settings.hasOwnProperty(prop)) {
+            if (prop === settingName) {
+                return settings[prop].value;
+            }
         }
     }
 
