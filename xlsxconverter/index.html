@@ -96,6 +96,7 @@ function to_json(workbook) {
 }
 
 function clear_output() {
+    window.formDef = null;
     var out = document.getElementById("out");
     if(out.innerHTML === undefined){
         out.textContent = 'Loading...';
@@ -115,7 +116,11 @@ function print_output(output) {
 
 
 function handleSave(e) {
-    var formDefStr = document.getElementById("out").value 
+    var formDefStr = window.formDef;
+
+    if (formDefStr === undefined || formDefStr === null) {
+      formDefStr = '';
+    }
 
     var uriContent = "data:application/octet-stream," + encodeURIComponent(formDefStr);
     var downloader = document.createElement("iframe");
@@ -146,8 +151,8 @@ function handleSave(e) {
  * Post the form def to the correct location on the file system.
  */
 function postFormDef() {
-    var formDef = document.getElementById('out').value;
-    if (formDef === undefined || formDef === '') {
+    var formDef = window.formDef;
+    if (formDef === undefined || formDef === null || formDef === '') {
       console.log('no formDef content to post.');
       return;
     }
@@ -328,7 +333,8 @@ function makeReader(f) {
                 var jsonWorkbook = to_json(xlsx);
                 //console.log(jsonWorkbook);
                 var processedWorkbook = XLSXConverter.processJSONWorkbook(jsonWorkbook);
-                print_output(JSON.stringify(processedWorkbook, 2, 2));
+                window.formDef = JSON.stringify(processedWorkbook, 2, 2);
+                print_output(window.formDef);
                 _.each(XLSXConverter.getWarnings(), function(warning){
                     var warningEl = document.createElement("p");
                     warningEl.innerHTML = warning;
