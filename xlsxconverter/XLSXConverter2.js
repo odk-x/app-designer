@@ -2135,7 +2135,7 @@ var XLSXConverter = {};
                     _.each( defn._defn, function( def) {
                         formatted = formatted + ", at row: " + def._row_num + " on sheet: " + def.section_name;
                     });
-                    warning.warn(name + " has different definitions at row " +
+                    warnings.warn(name + " has different definitions at row " +
                             mdef._defn[0]._row_num + " on " + mdef._defn[0].section_name +
                             " sheet than " + formatted.substring(2) + " " + mdef._defn[0].section_name +
                             " sheet takes precedence." );
