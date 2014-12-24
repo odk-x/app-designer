@@ -60,7 +60,7 @@ return {
         return this.platformInfo;
     },
     
-    _forbiddenInstanceDirCharsPattern: XRegExp('[\\p{P}\\p{Z}]', 'A'),
+    _forbiddenInstanceDirCharsPattern: XRegExp('(\\p{P}|\\p{Z})', 'A'),
     
     /**
      * Matches the API of the same name under the control class

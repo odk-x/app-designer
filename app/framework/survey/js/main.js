@@ -45,7 +45,7 @@ requirejs.config({
         handlebarsHelpers : 'survey/js/handlebarsHelpers',
         formulaFunctions : 'survey/js/formulaFunctions',
         jqueryCsv : 'libs/jquery-csv/src/jquery.csv',
-        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2013-08-27',
+        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2014-12-24',
         d3 : 'libs/d3-amd/d3'
     },
     shim: {

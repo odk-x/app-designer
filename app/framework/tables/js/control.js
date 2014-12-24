@@ -6,7 +6,7 @@
  * version of the code. It corresponds to
  * org.opendatakit.tables.view.webkits.ControlIf.
  */
-'use strict';
+//'use strict';
 // don't warn about unused parameters, since all of these methods are stubs
 /* jshint unused: vars */
 /* global $ */
@@ -18,7 +18,6 @@
  */
 if (!window.control) {
     
-    // from http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
     var importSynchronous = function(script) {
         // script is appName-relative -- need to prepend the appName.
         
@@ -30,24 +29,23 @@ if (!window.control) {
             path = path.substr(0,path.length-1);
         }
         var parts = path.split('/');
-        var urlScript = '//' + parts[0] + '/' + script;
+        // IMPORTANT: ajax doesn't like the explicit 
+        // scheme and hostname. Drop those, and just
+        // specify an absolute URL (starting with /).
+        var urlScript = '/' + parts[0] + '/' + script;
         
-        $.ajax({
+        // get the script body
+        var jqxhr = $.ajax({
+            type: "GET",
             url: urlScript,
-            dataType: "script",
-            async: false,           // <-- This is the key
-            success: function () {
-                // all good...
-            },
-            error: function () {
-                throw new Error("Could not load script " + urlScript);
-            }
+            dataType: "json",
+            async: false
         });
-    }
-    
-    // Require that XRegExp is loaded...
-    if ( XRegExp === null || XRegExp === undefined ) {
-        importSynchronous('framework/libs/XRegExp-All-3.0.0-pre-2013-08-27.js');
+        
+        // and eval it in the context of window
+        with (window) {
+            eval(jqxhr.responseText);
+        }
     }
     
     // This will be the object specified in control.json. It is not set until
@@ -145,8 +143,6 @@ if (!window.control) {
         return result;
     }
 
-    pub._forbiddenInstanceDirCharsPattern = XRegExp('[\\p{P}\\p{Z}]', 'A');
-    
     pub.getRowFileAsUrl = function(tableId, rowId, relativePath) {
         if ( tableId === null || tableId === undefined ) return null;
         if ( rowId === null || rowId === undefined ) return null;
@@ -157,16 +153,27 @@ if (!window.control) {
         }
         var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
 
+        var result = null;
+        
+        if ( pub._forbiddenInstanceDirCharsPattern === null ||
+             pub._forbiddenInstanceDirCharsPattern === undefined ) {
+            // defer loading this until we try to use it
+            importSynchronous('framework/libs/XRegExp-All-3.0.0-pre-2014-12-24.js');
+            pub._forbiddenInstanceDirCharsPattern = window.XRegExp('(\\p{P}|\\p{Z})', 'A');
+        }
+
         var iDirName = XRegExp.replace(rowId, 
                         pub._forbiddenInstanceDirCharsPattern, '_', 'all');
 
         var prefix = 'tables/' + tableId + '/instances/' + iDirName + '/';
         if ( relativePath.length > prefix.length && relativePath.substring(0,prefix.length) === prefix ) {
             console.error("getRowFileAsUrl - detected filepath in rowpath data");
-            return baseUri + relativePath;
+            result = baseUri + relativePath;
         } else {
-            return baseUri + prefix + relativePath;
+            result = baseUri + prefix + relativePath;
         }
+        
+        return result;
     };
     
     /**
