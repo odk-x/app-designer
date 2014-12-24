@@ -18,6 +18,38 @@
  */
 if (!window.control) {
     
+    // from http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
+    var importSynchronous = function(script) {
+        // script is appName-relative -- need to prepend the appName.
+        
+        var path = window.location.pathname;
+        if ( path[0] === '/' ) {
+            path = path.substr(1);
+        }
+        if ( path[path.length-1] === '/' ) {
+            path = path.substr(0,path.length-1);
+        }
+        var parts = path.split('/');
+        var urlScript = '//' + parts[0] + '/' + script;
+        
+        $.ajax({
+            url: urlScript,
+            dataType: "script",
+            async: false,           // <-- This is the key
+            success: function () {
+                // all good...
+            },
+            error: function () {
+                throw new Error("Could not load script " + urlScript);
+            }
+        });
+    }
+    
+    // Require that XRegExp is loaded...
+    if ( XRegExp === null || XRegExp === undefined ) {
+        importSynchronous('framework/libs/XRegExp-All-3.0.0-pre-2013-08-27.js');
+    }
+    
     // This will be the object specified in control.json. It is not set until
     // setBackingObject is called.
     var controlObj = null;
@@ -113,6 +145,8 @@ if (!window.control) {
         return result;
     }
 
+    pub._forbiddenInstanceDirCharsPattern = XRegExp('[\\p{P}\\p{Z}]', 'A');
+    
     pub.getRowFileAsUrl = function(tableId, rowId, relativePath) {
         if ( tableId === null || tableId === undefined ) return null;
         if ( rowId === null || rowId === undefined ) return null;
@@ -122,7 +156,11 @@ if (!window.control) {
             relativePath = relativePath.substring(1);
         }
         var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
-        var prefix = 'tables/' + tableId + '/instances/' + rowId + '/';
+
+        var iDirName = XRegExp.replace(rowId, 
+                        pub._forbiddenInstanceDirCharsPattern, '_', 'all');
+
+        var prefix = 'tables/' + tableId + '/instances/' + iDirName + '/';
         if ( relativePath.length > prefix.length && relativePath.substring(0,prefix.length) === prefix ) {
             console.error("getRowFileAsUrl - detected filepath in rowpath data");
             return baseUri + relativePath;
