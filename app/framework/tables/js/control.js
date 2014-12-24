@@ -106,14 +106,31 @@ if (!window.control) {
     };
 
     pub.getFileAsUrl = function(relativePath) {
+        // strip off backslashes
         var cleanedStr = relativePath.replace(/\\/g, '');
-        // We can't use pub, b/c for some reason that is being overwritten
-        // by the data object's pub. 
         var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
         var result = baseUri + cleanedStr;
         return result;
-    };
+    }
 
+    pub.getRowFileAsUrl = function(tableId, rowId, relativePath) {
+        if ( tableId === null || tableId === undefined ) return null;
+        if ( rowId === null || rowId === undefined ) return null;
+        if ( relativePath === null || relativePath === undefined ) return null;
+
+        if ( relativePath.charAt(0) === '/' ) {
+            relativePath = relativePath.substring(1);
+        }
+        var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
+        var prefix = 'tables/' + tableId + '/instances/' + rowId + '/';
+        if ( relativePath.length > prefix.length && relativePath.substring(0,prefix.length) === prefix ) {
+            console.error("getRowFileAsUrl - detected filepath in rowpath data");
+            return baseUri + relativePath;
+        } else {
+            return baseUri + prefix + relativePath;
+        }
+    };
+    
     /**
      * This is the only function that is exposed to the caller that is NOT a 
      * function exposed to the android object. It is intended only for use on

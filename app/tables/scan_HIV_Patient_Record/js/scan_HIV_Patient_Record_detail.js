@@ -47,7 +47,7 @@ function display() {
     if (nameMimeUri !== null && nameMimeUri !== "") {
         var nameMimeUriObject = JSON.parse(nameMimeUri);
         var nameUriRelative = nameMimeUriObject.uriFragment;
-        var nameUriAbsolute = control.getFileAsUrl(nameUriRelative);
+        var nameUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), nameUriRelative);
         nameSrc = nameUriAbsolute;
     }
 
@@ -63,7 +63,7 @@ function display() {
     if (seMimeUri !== null && seMimeUri !== "") {
         var seMimeUriObject = JSON.parse(seMimeUri);
         var seUriRelative = seMimeUriObject.uriFragment;
-        var seUriAbsolute = control.getFileAsUrl(seUriRelative);
+        var seUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), seUriRelative);
         seSrc = seUriAbsolute;
     }
 
@@ -79,7 +79,7 @@ function display() {
     if (regMimeUri !== null && regMimeUri !== "") {
         var regMimeUriObject = JSON.parse(regMimeUri);
         var regUriRelative = regMimeUriObject.uriFragment;
-        var regUriAbsolute = control.getFileAsUrl(regUriRelative);
+        var regUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), regUriRelative);
         regSrc = regUriAbsolute;
     }
 
@@ -95,7 +95,7 @@ function display() {
     if (idMimeUri !== null && idMimeUri !== "") {
         var idMimeUriObject = JSON.parse(idMimeUri);
         var idUriRelative = idMimeUriObject.uriFragment;
-        var idUriAbsolute = control.getFileAsUrl(idUriRelative);
+        var idUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), idUriRelative);
         idSrc = idUriAbsolute;
     }
 
@@ -111,7 +111,7 @@ function display() {
     if (birthMimeUri !== null && birthMimeUri !== "") {
         var birthMimeUriObject = JSON.parse(birthMimeUri);
         var birthUriRelative = birthMimeUriObject.uriFragment;
-        var birthUriAbsolute = control.getFileAsUrl(birthUriRelative);
+        var birthUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), birthUriRelative);
         birthSrc = birthUriAbsolute;
     }
 
@@ -127,7 +127,7 @@ function display() {
     if (viMimeUri !== null && viMimeUri !== "") {
         var viMimeUriObject = JSON.parse(viMimeUri);
         var viUriRelative = viMimeUriObject.uriFragment;
-        var viUriAbsolute = control.getFileAsUrl(viUriRelative);
+        var viUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), viUriRelative);
         viSrc = viUriAbsolute;
     }
 
@@ -143,7 +143,7 @@ function display() {
     if (msmMimeUri !== null && msmMimeUri !== "") {
         var msmMimeUriObject = JSON.parse(msmMimeUri);
         var msmUriRelative = msmMimeUriObject.uriFragment;
-        var msmUriAbsolute = control.getFileAsUrl(msmUriRelative);
+        var msmUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), msmUriRelative);
         msmSrc = msmUriAbsolute;
     }
 
@@ -159,7 +159,7 @@ function display() {
     if (refMimeUri !== null && refMimeUri !== "") {
         var refMimeUriObject = JSON.parse(refMimeUri);
         var refUriRelative = refMimeUriObject.uriFragment;
-        var refUriAbsolute = control.getFileAsUrl(refUriRelative);
+        var refUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), refUriRelative);
         refSrc = refUriAbsolute;
     }
 
@@ -175,7 +175,7 @@ function display() {
     if (orefMimeUri !== null && orefMimeUri !== "") {
         var orefMimeUriObject = JSON.parse(orefMimeUri);
         var orefUriRelative = orefMimeUriObject.uriFragment;
-        var orefUriAbsolute = control.getFileAsUrl(orefUriRelative);
+        var orefUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), orefUriRelative);
         orefSrc = orefUriAbsolute;
     }
 
@@ -191,7 +191,7 @@ function display() {
     if (trMimeUri !== null && trMimeUri !== "") {
         var trMimeUriObject = JSON.parse(trMimeUri);
         var trUriRelative = trMimeUriObject.uriFragment;
-        var trUriAbsolute = control.getFileAsUrl(trUriRelative);
+        var trUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), trUriRelative);
         trSrc = trUriAbsolute;
     }
 
@@ -209,7 +209,7 @@ function display() {
     if (tbMimeUri !== null && tbMimeUri !== "") {
         var tbMimeUriObject = JSON.parse(tbMimeUri);
         var tbUriRelative = tbMimeUriObject.uriFragment;
-        var tbUriAbsolute = control.getFileAsUrl(tbUriRelative);
+        var tbUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), tbUriRelative);
         tbSrc = tbUriAbsolute;
     }
 
@@ -225,7 +225,7 @@ function display() {
     if (stMimeUri !== null && stMimeUri !== "") {
         var stMimeUriObject = JSON.parse(stMimeUri);
         var stUriRelative = stMimeUriObject.uriFragment;
-        var stUriAbsolute = control.getFileAsUrl(stUriRelative);
+        var stUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), stUriRelative);
         stSrc = stUriAbsolute;
     }
 
@@ -241,7 +241,7 @@ function display() {
     if (sclMimeUri !== null && sclMimeUri !== "") {
         var sclMimeUriObject = JSON.parse(sclMimeUri);
         var sclUriRelative = sclMimeUriObject.uriFragment;
-        var sclUriAbsolute = control.getFileAsUrl(sclUriRelative);
+        var sclUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), sclUriRelative);
         sclSrc = sclUriAbsolute;
     }
 
@@ -257,7 +257,7 @@ function display() {
     if (osclMimeUri !== null && osclMimeUri !== "") {
         var osclMimeUriObject = JSON.parse(osclMimeUri);
         var osclUriRelative = osclMimeUriObject.uriFragment;
-        var osclUriAbsolute = control.getFileAsUrl(osclUriRelative);
+        var osclUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), osclUriRelative);
         osclSrc = osclUriAbsolute;
     }
 
@@ -275,7 +275,7 @@ function display() {
     if (scomMimeUri !== null && scomMimeUri !== "") {
         var scomMimeUriObject = JSON.parse(scomMimeUri);
         var scomUriRelative = scomMimeUriObject.uriFragment;
-        var scomUriAbsolute = control.getFileAsUrl(scomUriRelative);
+        var scomUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), scomUriRelative);
         scomSrc = scomUriAbsolute;
     }
 
@@ -293,7 +293,7 @@ function display() {
     if (oscomMimeUri !== null && oscomMimeUri !== "") {
         var oscomMimeUriObject = JSON.parse(oscomMimeUri);
         var oscomUriRelative = oscomMimeUriObject.uriFragment;
-        var oscomUriAbsolute = control.getFileAsUrl(oscomUriRelative);
+        var oscomUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), oscomUriRelative);
         oscomSrc = oscomUriAbsolute;
     }
 
@@ -313,8 +313,7 @@ function display() {
         console.log("I am here");
         var pid = data.get('Patient_ID');
         var queryString = hiv_scanQueries.getKeysToAppendToURL(pid);
-        var url = control.getFileAsUrl(
-                'assets/hivPatientDisplayRecord.html' + queryString);
+        var url = control.getFileAsUrl('assets/hivPatientDisplayRecord.html') + queryString;
         window.location.href = url;
     };
 

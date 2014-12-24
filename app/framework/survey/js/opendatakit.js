@@ -6,10 +6,10 @@
  * provide useful parsing or interpretation of localization details.
  *
  */
-define(['underscore'],function(_) {
+define(['underscore', 'XRegExp'],function(_,XRegExp) {
 verifyLoad('opendatakit',
-    ['underscore'],
-    [ _]);
+    ['underscore', 'XRegExp'],
+    [ _,            XRegExp]);
 return {
     initialScreenPath: "initial/0",
     savepoint_type_complete: 'COMPLETE',
@@ -58,6 +58,74 @@ return {
             this.platformInfo = JSON.parse(jsonString);
         }
         return this.platformInfo;
+    },
+    
+    _forbiddenInstanceDirCharsPattern: XRegExp('[\\p{P}\\p{Z}]', 'A'),
+    
+    /**
+     * Matches the API of the same name under the control class
+     *
+     */
+    getRowFileAsUrl:function(tableId, instanceId, rowpath) {
+        if ( tableId === null || tableId === undefined ) return null;
+        if ( instanceId === null || instanceId === undefined ) return null;
+        if ( rowpath === null || rowpath === undefined ) return null;
+        
+        var uriFragment = rowpath;
+        if ( rowpath.charAt(0) === '/' ) {
+            uriFragment = rowpath.substring(1);
+        }
+        
+        var iDirName = XRegExp.replace(instanceId, 
+                        this._forbiddenInstanceDirCharsPattern, '_', 'all');
+
+        var prefix = 'tables/' + 
+            tableId + '/instances/' + iDirName + '/';
+
+        if ( prefix.length < uriFragment.length && uriFragment.substring(0,prefix.length) === prefix ) {
+            shim.log('e','transitional rowpath with prefixed path!');
+            return this.getPlatformInfo().baseUri + uriFragment;
+        } else {
+            return this.getPlatformInfo().baseUri + prefix + uriFragment;
+        }
+    },
+    
+    /**
+     * constructs a full URI to a specified rowpath attachment under
+     * the current tableId and instanceId.
+     *
+     * Handles the case where the rowpath is fully qualified vs. assuming
+     * the rowpath is under the .../tables/tableId/instances/instanceId/
+     * directory path.
+     */
+    getUriFromRowpath:function(rowpath) {
+        return this.getRowFileAsUrl(this.getCurrentTableId(), this.getCurrentInstanceId(), rowpath);
+    },
+    
+    /**
+     * Given a uriFragment underneath this appName, reduce it to 
+     * a rowpath under the .../tables/tableId/instances/instanceId/
+     * directory path, or, if it cannot be reduced, return the 
+     * full uriFragment.
+     */
+    getRowpathFromUriFragment:function(incomingFragment) {
+        if ( incomingFragment === null || incomingFragment === undefined ) return null;
+        
+        var uriFragment = incomingFragment;
+        if ( incomingFragment.charAt(0) === '/' ) {
+            uriFragment = incomingFragment.substring(1);
+        }
+        
+        var prefix = 'tables/' + 
+            this.getCurrentTableId() + '/instances/' + this.getCurrentInstanceId() + '/';
+
+        if ( prefix.length < uriFragment.length && uriFragment.substring(0,prefix.length) === prefix ) {
+            // trim off the prefix path
+            return uriFragment.substring(prefix.length+1);
+        } else {
+            // already a rowpath that is under the prefix path.
+            return uriFragment;
+        }
     },
     
     /**

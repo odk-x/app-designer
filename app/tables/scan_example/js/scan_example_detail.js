@@ -41,7 +41,7 @@ function display() {
     if (addrMimeUri !== null && addrMimeUri !== "") {
         var addrMimeUriObject = JSON.parse(addrMimeUri);
         var addrUriRelative = addrMimeUriObject.uriFragment;
-        var addrUriAbsolute = control.getFileAsUrl(addrUriRelative);
+        var addrUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), addrUriRelative);
         addrSrc = addrUriAbsolute;
     }
 
@@ -56,7 +56,7 @@ function display() {
     if (stayMimeUri !== null && stayMimeUri !== "") {
         var stayMimeUriObject = JSON.parse(stayMimeUri);
         var stayUriRelative = stayMimeUriObject.uriFragment;
-        var stayUriAbsolute = control.getFileAsUrl(stayUriRelative);
+        var stayUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), stayUriRelative);
         staySrc = stayUriAbsolute;
     }
 
@@ -72,7 +72,7 @@ function display() {
     if (commentsMimeUri !== null && commentsMimeUri !== "") {
         var commentsMimeUriObject = JSON.parse(commentsMimeUri);
         var commentsUriRelative = commentsMimeUriObject.uriFragment;
-        var commentsUriAbsolute = control.getFileAsUrl(commentsUriRelative);
+        var commentsUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), commentsUriRelative);
         commentsSrc = commentsUriAbsolute;
     }
 

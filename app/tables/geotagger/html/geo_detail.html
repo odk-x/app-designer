@@ -2,7 +2,7 @@
 <html>
     <head>
         <link href="../css/geo_detail.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
         <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
         <script type="text/javascript">
@@ -22,7 +22,7 @@
           if (srcMimeUri != null ) {
               var mimeUriObject = JSON.parse(srcMimeUri);
               var uriRelative = mimeUriObject.uriFragment;
-              var uriAbsolute = control.getFileAsUrl(uriRelative);
+              var uriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), uriRelative);
               src = uriAbsolute;
           }
           

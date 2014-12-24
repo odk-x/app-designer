@@ -89,7 +89,7 @@ var displayGroup = function(idxStart) {
         
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
-        chevron.attr('src', '../../../assets/img/little_arrow.png');
+        chevron.attr('src', control.getFileAsUrl('assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
 
@@ -98,7 +98,7 @@ var displayGroup = function(idxStart) {
         if (nameMimeUri !== null && nameMimeUri !== "") {
             var nameMimeUriObject = JSON.parse(nameMimeUri);
             var nameUriRelative = nameMimeUriObject.uriFragment;
-            var nameUriAbsolute = control.getFileAsUrl(nameUriRelative);
+            var nameUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(i), nameUriRelative);
             nameSrc = nameUriAbsolute;
         }
 

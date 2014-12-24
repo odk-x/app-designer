@@ -388,20 +388,35 @@ describe('control', function() {
     describe('getFileAsUrl', function() {
 
         it('#returns a string', function() {
-            var result = control.getFileAsUrl('relativePath');
+            var result = control.getFileAsUrl('assets/libs/jquery.js');
             assert.isString(result, 'was not string: ' + result);
         });
 
-        it('#relativePath returns full url', function() {
-            var result = control.getFileAsUrl('relativePath');
+        it('#assets/libs/jquery.js returns full url', function() {
+            var result = control.getFileAsUrl('assets/libs/jquery.js');
             assert.equal(
-                'http://localhost:8635/tables/relativePath',
+                'http://localhost:8635/tables/assets/libs/jquery.js',
+                result,
+                'did not match: ' + result);
+        });
+    });
+
+    describe('getRowFileAsUrl', function() {
+
+        it('#returns a string', function() {
+            var result = control.getRowFileAsUrl('tableId','rowId','relative/Path');
+            assert.isString(result, 'was not string: ' + result);
+        });
+
+        it('#tableId rowId relativePath returns full url', function() {
+            var result = control.getRowFileAsUrl('tableId','rowId','relative/Path');
+            assert.equal(
+                'http://localhost:8635/tables/tableId/instances/rowId/relative/Path',
                 result,
                 'did not match: ' + result);
         });
 
-        // TODO: probably a correct escaping of a url
-
+        // TODO: test for the correct escaping of the rowId in the url?
     });
 
     describe('getPlatformInfo', function() {

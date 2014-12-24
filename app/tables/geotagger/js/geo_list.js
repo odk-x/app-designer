@@ -64,7 +64,9 @@ function displayGroup() {
         if (srcMimeUri !== null  && srcMimeUri !== "") {
             var mimeUriObject = JSON.parse(srcMimeUri);
             var uriRelative = mimeUriObject.uriFragment;
-            var uriAbsolute = control.getFileAsUrl(uriRelative);
+            var tableId = data.getTableId();
+            var rowId = data.getRowId(i);
+            var uriAbsolute = control.getRowFileAsUrl(tableId, rowId, uriRelative);
             src = uriAbsolute;
         }
 

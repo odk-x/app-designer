@@ -1779,15 +1779,15 @@ promptTypes.media = promptTypes.base.extend({
                 var uriFragment = (jsonObject.result != null) ? jsonObject.result.uriFragment : null;
                 var contentType = (jsonObject.result != null) ? jsonObject.result.contentType : null;
                 if (uriFragment != null && contentType != null) {
-                    var oldPath = that.getValue();
-                    if ( uriFragment != oldPath) {
-                        // TODO: delete old??? Or leave until marked as finalized?
-                        that.setValueDeferredChange({ uriFragment : uriFragment, contentType: contentType });
-                        that.enableButtons();
-                        that.updateRenderContext();
-                        that.reRender(ctxt);
-                    }
+                    var oldMediaStruct = that.getValue();
+                    var newPath = opendatakit.getRowpathFromUriFragment(uriFragment);
+                    // TODO: delete old??? Or leave until marked as finalized?
+                    that.setValueDeferredChange({ uriFragment : newPath, contentType: contentType });
                 }
+                // TODO: should null returns indicate a clearing of this value?
+                that.enableButtons();
+                that.updateRenderContext();
+                that.reRender(ctxt);
             }
             else {
                 ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
@@ -1806,7 +1806,7 @@ promptTypes.media = promptTypes.base.extend({
         var that = this;
         var mediaUri = that.getValue();
         var uriFragment = (mediaUri != null && mediaUri.uriFragment != null) ? mediaUri.uriFragment : null;
-        var uri = (uriFragment == null) ? null : opendatakit.getPlatformInfo().baseUri + uriFragment;
+        var uri = (uriFragment == null) ? null : opendatakit.getUriFromRowPath(uriFragment);
         var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
         var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
         var platinfo = opendatakit.getPlatformInfo();
@@ -1829,12 +1829,7 @@ promptTypes.media = promptTypes.base.extend({
         } else {
             var displayObject = this.getValue();
             if (displayObject != null && displayObject.uriFragment != null) {
-                var ind = displayObject.uriFragment.lastIndexOf("/") + 1;
-                if (ind < displayObject.uriFragment.length) {
-                    return displayObject.uriFragment.substring(ind);
-                } else {
-                    return '';
-                }
+                return displayObject.uriFragment;
             }
             else {
                 return '';

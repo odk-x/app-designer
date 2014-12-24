@@ -90,7 +90,7 @@ function display() {
             var chevron = document.createElement('img');
             chevron.setAttribute(
                 'src',
-                '../../../assets/img/little_arrow.png');
+                control.getFileAsUrl('assets/img/little_arrow.png'));
             chevron.setAttribute('class', 'chevron');
             item.appendChild(chevron);
 
