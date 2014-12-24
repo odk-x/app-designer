@@ -2,14 +2,13 @@ requirejs.config({
     baseUrl: '../../',
     paths: {
         // third-party libraries we depend upon 
-        jqmobile : 'libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0',
-        jquery : 'libs/jquery.1.8.2',
-        backbone : 'libs/backbone.0.9.2',
-        handlebars : 'libs/handlebars.1.0.0.beta.6',
-        underscore : 'libs/underscore.1.4.2',
-        //underscore : 'libs/underscore.1.3.3',
-        text : 'libs/text.2.0.3',
-        mobiscroll : 'libs/mobiscroll/js/mobiscroll-2.0.3.custom.min',
+        jqmobile : 'libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2',
+        jquery : 'libs/jquery.1.10.2',
+        backbone : 'libs/backbone.1.0.0',
+        handlebars : 'libs/handlebars.1.0.0.rc.4',
+        underscore : 'libs/underscore.1.4.4',
+        text : 'libs/text.2.0.10',
+        mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
         // directory paths for resources
         img : 'img',
         templates : 'templates',
