@@ -59,11 +59,9 @@ function displayGroup() {
         var field2 = $('<p>');
         field2.text('Longitude: ' + lng);
         
-        var srcMimeUri = data.getData(i, 'Image');
+        var uriRelative = data.getData(i, 'Image.uriFragment');
         var src = '';
-        if (srcMimeUri !== null  && srcMimeUri !== "") {
-            var mimeUriObject = JSON.parse(srcMimeUri);
-            var uriRelative = mimeUriObject.uriFragment;
+        if (uriRelative !== null  && uriRelative !== "") {
             var tableId = data.getTableId();
             var rowId = data.getRowId(i);
             var uriAbsolute = control.getRowFileAsUrl(tableId, rowId, uriRelative);

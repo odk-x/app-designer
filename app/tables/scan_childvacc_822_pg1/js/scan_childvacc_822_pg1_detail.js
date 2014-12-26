@@ -45,11 +45,9 @@ function display() {
     $('#patient_code').text(data.get('patient_QRcode'));
 
     //image for emergency contact
-    var emMimeUri = data.get('Emergency_contact_image0');
+    var emUriRelative = data.get('Emergency_contact_image0.uriFragment');
     var emSrc = '';
-    if (emMimeUri !== null && emMimeUri !== "") {
-        var emMimeUriObject = JSON.parse(emMimeUri);
-        var emUriRelative = emMimeUriObject.uriFragment;
+    if (emUriRelative !== null && emUriRelative !== "") {
         var emUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), emUriRelative);
         emSrc = emUriAbsolute;
     }
@@ -62,11 +60,9 @@ function display() {
 
 
     //image for child name
-    var nameMimeUri = data.get('Child_name_image0');
+    var nameUriRelative = data.get('Child_name_image0.uriFragment');
     var nameSrc = '';
-    if (nameMimeUri !== null && nameMimeUri !== "") {
-        var nameMimeUriObject = JSON.parse(nameMimeUri);
-        var nameUriRelative = nameMimeUriObject.uriFragment;
+    if (nameUriRelative !== null && nameUriRelative !== "") {
         var nameUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), nameUriRelative);
         nameSrc = nameUriAbsolute;
     }
@@ -78,11 +74,9 @@ function display() {
     $('#name_pic').append(nameThumbnail);
 
     //image for child id
-    var idMimeUri = data.get('Child_patient_ID_image0');
+    var idUriRelative = data.get('Child_patient_ID_image0.uriFragment');
     var idSrc = '';
-    if (idMimeUri !== null && idMimeUri !== "") {
-        var idMimeUriObject = JSON.parse(idMimeUri);
-        var idUriRelative = idMimeUriObject.uriFragment;
+    if (idUriRelative !== null && idUriRelative !== "") {
         var idUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), idUriRelative);
         idSrc = idUriAbsolute;
     }
@@ -94,11 +88,9 @@ function display() {
     $('#childid_pic').append(idThumbnail);
 
     //image for child birthdate
-    var birthMimeUri = data.get('Child_DOB_image0');
+    var birthUriRelative = data.get('Child_DOB_image0.uriFragment');
     var birthSrc = '';
-    if (birthMimeUri !== null && birthMimeUri !== "") {
-        var birthMimeUriObject = JSON.parse(birthMimeUri);
-        var birthUriRelative = birthMimeUriObject.uriFragment;
+    if (birthUriRelative !== null && birthUriRelative !== "") {
         var birthUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), birthUriRelative);
         birthSrc = birthUriAbsolute;
     }
@@ -110,11 +102,9 @@ function display() {
     $('#birthdate_pic').append(birthThumbnail);
 
     //image for child weight
-    var weMimeUri = data.get('Birth_weight_image0');
+    var weUriRelative = data.get('Birth_weight_image0.uriFragment');
     var weSrc = '';
-    if (weMimeUri !== null && weMimeUri !== "") {
-        var weMimeUriObject = JSON.parse(weMimeUri);
-        var weUriRelative = weMimeUriObject.uriFragment;
+    if (weUriRelative !== null && weUriRelative !== "") {
         var weUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), weUriRelative);
         weSrc = weUriAbsolute;
     }
@@ -126,11 +116,9 @@ function display() {
     $('#birth_weight_pic').append(weThumbnail);
 
     //image for child sex
-    var seMimeUri = data.get('sex_image0');
+    var seUriRelative = data.get('sex_image0.uriFragment');
     var seSrc = '';
-    if (seMimeUri !== null && seMimeUri !== "") {
-        var seMimeUriObject = JSON.parse(seMimeUri);
-        var seUriRelative = seMimeUriObject.uriFragment;
+    if (seUriRelative !== null && seUriRelative !== "") {
         var seUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), seUriRelative);
         seSrc = seUriAbsolute;
     }
@@ -142,11 +130,9 @@ function display() {
     $('#sex_pic').append(seThumbnail);
 
     //image for house number
-    var hnMimeUri = data.get('housenum_image0');
+    var hnUriRelative = data.get('housenum_image0.uriFragment');
     var hnSrc = '';
-    if (hnMimeUri !== null && hnMimeUri !== "") {
-        var hnMimeUriObject = JSON.parse(hnMimeUri);
-        var hnUriRelative = hnMimeUriObject.uriFragment;
+    if (hnUriRelative !== null && hnUriRelative !== "") {
         var hnUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), hnUriRelative);
         hnSrc = hnUriAbsolute;
     }
@@ -158,11 +144,9 @@ function display() {
     $('#housenum_pic').append(hnThumbnail);
 
     //image for village/settlement
-    var viMimeUri = data.get('village_image0');
+    var viUriRelative = data.get('village_image0.uriFragment');
     var viSrc = '';
-    if (viMimeUri !== null && viMimeUri !== "") {
-        var viMimeUriObject = JSON.parse(viMimeUri);
-        var viUriRelative = viMimeUriObject.uriFragment;
+    if (viUriRelative !== null && viUriRelative !== "") {
         var viUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), viUriRelative);
         viSrc = viUriAbsolute;
     }
@@ -174,11 +158,9 @@ function display() {
     $('#village_pic').append(viThumbnail);
 
     //image for town/city
-    var tcMimeUri = data.get('city_image0');
+    var tcUriRelative = data.get('city_image0.uriFragment');
     var tcSrc = '';
-    if (tcMimeUri !== null && tcMimeUri !== "") {
-        var tcMimeUriObject = JSON.parse(tcMimeUri);
-        var tcUriRelative = tcMimeUriObject.uriFragment;
+    if (tcUriRelative !== null && tcUriRelative !== "") {
         var tcUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), tcUriRelative);
         tcSrc = tcUriAbsolute;
     }
@@ -190,11 +172,9 @@ function display() {
     $('#city_pic').append(tcThumbnail);
 
     //image for ward
-    var waMimeUri = data.get('ward_image0');
+    var waUriRelative = data.get('ward_image0.uriFragment');
     var waSrc = '';
-    if (waMimeUri !== null && waMimeUri !== "") {
-        var waMimeUriObject = JSON.parse(waMimeUri);
-        var waUriRelative = waMimeUriObject.uriFragment;
+    if (waUriRelative !== null && waUriRelative !== "") {
         var waUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), waUriRelative);
         waSrc = waUriAbsolute;
     }
@@ -206,11 +186,9 @@ function display() {
     $('#ward_pic').append(waThumbnail);
 
     //image for lga
-    var lgMimeUri = data.get('lga_image0');
+    var lgUriRelative = data.get('lga_image0.uriFragment');
     var lgSrc = '';
-    if (idMimeUri !== null && idMimeUri !== "") {
-        var lgMimeUriObject = JSON.parse(lgMimeUri);
-        var lgUriRelative = lgMimeUriObject.uriFragment;
+    if (lgUriRelative !== null && lgUriRelative !== "") {
         var lgUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), lgUriRelative);
         lgSrc = lgUriAbsolute;
     }
@@ -222,11 +200,9 @@ function display() {
     $('#lga_pic').append(lgThumbnail);
 
     //image for state
-    var staMimeUri = data.get('state_image0');
+    var staUriRelative = data.get('state_image0.uriFragment');
     var staSrc = '';
-    if (staMimeUri !== null && staMimeUri !== "") {
-        var staMimeUriObject = JSON.parse(staMimeUri);
-        var staUriRelative = staMimeUriObject.uriFragment;
+    if (staUriRelative !== null && staUriRelative !== "") {
         var staUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), staUriRelative);
         staSrc = staUriAbsolute;
     }
@@ -240,11 +216,9 @@ function display() {
 
 
     //image for mother name
-    var momMimeUri = data.get('mothersname_image0');
+    var momUriRelative = data.get('mothersname_image0.uriFragment');
     var momSrc = '';
-    if (momMimeUri !== null && momMimeUri !== "") {
-        var momMimeUriObject = JSON.parse(momMimeUri);
-        var momUriRelative = momMimeUriObject.uriFragment;
+    if (momUriRelative !== null && momUriRelative !== "") {
         var momUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), momUriRelative);
         momSrc = momUriAbsolute;
     }
@@ -256,11 +230,9 @@ function display() {
     $('#mother_name_pic').append(momThumbnail);
 
     //image for mother gsm
-    var msmMimeUri = data.get('mom_gsm_image0');
+    var msmUriRelative = data.get('mom_gsm_image0.uriFragment');
     var msmSrc = '';
-    if (msmMimeUri !== null && msmMimeUri !== "") {
-        var msmMimeUriObject = JSON.parse(msmMimeUri);
-        var msmUriRelative = msmMimeUriObject.uriFragment;
+    if (msmUriRelative !== null && msmUriRelative !== "") {
         var msmUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), msmUriRelative);
         msmSrc = msmUriAbsolute;
     }
@@ -272,11 +244,9 @@ function display() {
     $('#mother_gsm_pic').append(msmThumbnail);
 
     //image for father name
-    var dadMimeUri = data.get('fathersname_image0');
+    var dadUriRelative = data.get('fathersname_image0.uriFragment');
     var dadSrc = '';
-    if (dadMimeUri !== null && dadMimeUri !== "") {
-        var dadMimeUriObject = JSON.parse(dadMimeUri);
-        var dadUriRelative = dadMimeUriObject.uriFragment;
+    if (dadUriRelative !== null && dadUriRelative !== "") {
         var dadUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), dadUriRelative);
         dadSrc = dadUriAbsolute;
     }
@@ -288,11 +258,9 @@ function display() {
     $('#father_name_pic').append(dadThumbnail);
 
     //image for father gsm
-    var dsmMimeUri = data.get('dad_gsm_image0');
+    var dsmUriRelative = data.get('dad_gsm_image0.uriFragment');
     var dsmSrc = '';
-    if (dsmMimeUri !== null && dsmMimeUri !== "") {
-        var dsmMimeUriObject = JSON.parse(dsmMimeUri);
-        var dsmUriRelative = dsmMimeUriObject.uriFragment;
+    if (dsmUriRelative !== null && dsmUriRelative !== "") {
         var dsmUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), dsmUriRelative);
         dsmSrc = dsmUriAbsolute;
     }
@@ -306,11 +274,9 @@ function display() {
     
 
     //image for other reason bubble
-    var orMimeUri = data.get('reasonsforcare_image0');
+    var orUriRelative = data.get('reasonsforcare_image0.uriFragment');
     var orSrc = '';
-    if (orMimeUri !== null && orMimeUri !== "") {
-        var orMimeUriObject = JSON.parse(orMimeUri);
-        var orUriRelative = orMimeUriObject.uriFragment;
+    if (orUriRelative !== null && orUriRelative !== "") {
         var orUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), orUriRelative);
         orSrc = orUriAbsolute;
     }
@@ -323,11 +289,9 @@ function display() {
 
 
     //image for patient code
-    var patcMimeUri = data.get('patient_QRcode_image0');
+    var patcUriRelative = data.get('patient_QRcode_image0.uriFragment');
     var patcSrc = '';
-    if (patcMimeUri !== null && patcMimeUri !== "") {
-        var patcMimeUriObject = JSON.parse(patcMimeUri);
-        var patcUriRelative = patcMimeUriObject.uriFragment;
+    if (patcUriRelative !== null && patcUriRelative !== "") {
         var patcUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), patcUriRelative);
         patcSrc = patcUriAbsolute;
     }

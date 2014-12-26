@@ -93,11 +93,9 @@ var displayGroup = function(idxStart) {
         chevron.attr('class', 'chevron');
         item.append(chevron);
 
-        var nameMimeUri = data.getData(i, 'Child_name_image0');
+        var nameUriRelative = data.getData(i, 'Child_name_image0.uriFragment');
         var nameSrc = '';
-        if (nameMimeUri !== null && nameMimeUri !== "") {
-            var nameMimeUriObject = JSON.parse(nameMimeUri);
-            var nameUriRelative = nameMimeUriObject.uriFragment;
+        if (nameUriRelative !== null && nameUriRelative !== "") {
             var nameUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(i), nameUriRelative);
             nameSrc = nameUriAbsolute;
         }

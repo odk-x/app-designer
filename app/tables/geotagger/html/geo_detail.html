@@ -17,11 +17,9 @@
                   }
               });
           }
-          var srcMimeUri = data.get("Image");
+          var uriRelative = data.get("Image.uriFragment");
           var src = "";
-          if (srcMimeUri != null ) {
-              var mimeUriObject = JSON.parse(srcMimeUri);
-              var uriRelative = mimeUriObject.uriFragment;
+          if (uriRelative !== null && uriRelative !== '') {
               var uriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), uriRelative);
               src = uriAbsolute;
           }

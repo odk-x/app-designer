@@ -42,11 +42,9 @@ function display() {
     $('#community_service_other').text(data.get('Other_comm_serv'));
 
     //image for child name
-    var nameMimeUri = data.get('Patient_name_image0');
+    var nameUriRelative = data.get('Patient_name_image0.uriFragment');
     var nameSrc = '';
-    if (nameMimeUri !== null && nameMimeUri !== "") {
-        var nameMimeUriObject = JSON.parse(nameMimeUri);
-        var nameUriRelative = nameMimeUriObject.uriFragment;
+    if (nameUriRelative !== null && nameUriRelative !== "") {
         var nameUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), nameUriRelative);
         nameSrc = nameUriAbsolute;
     }
@@ -58,11 +56,9 @@ function display() {
     $('#name_pic').append(nameThumbnail);
 
     //image for child sex
-    var seMimeUri = data.get('Patient_sex_image0');
+    var seUriRelative = data.get('Patient_sex_image0.uriFragment');
     var seSrc = '';
-    if (seMimeUri !== null && seMimeUri !== "") {
-        var seMimeUriObject = JSON.parse(seMimeUri);
-        var seUriRelative = seMimeUriObject.uriFragment;
+    if (seUriRelative !== null && seUriRelative !== "") {
         var seUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), seUriRelative);
         seSrc = seUriAbsolute;
     }
@@ -74,11 +70,9 @@ function display() {
     $('#sex_pic').append(seThumbnail);
 
     //image for child registration date
-    var regMimeUri = data.get('Date_of_registration_image0');
+    var regUriRelative = data.get('Date_of_registration_image0.uriFragment');
     var regSrc = '';
-    if (regMimeUri !== null && regMimeUri !== "") {
-        var regMimeUriObject = JSON.parse(regMimeUri);
-        var regUriRelative = regMimeUriObject.uriFragment;
+    if (regUriRelative !== null && regUriRelative !== "") {
         var regUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), regUriRelative);
         regSrc = regUriAbsolute;
     }
@@ -90,11 +84,9 @@ function display() {
     $('#registration_pic').append(regThumbnail);
 
     //image for child id
-    var idMimeUri = data.get('Patient_ID_image0');
+    var idUriRelative = data.get('Patient_ID_image0.uriFragment');
     var idSrc = '';
-    if (idMimeUri !== null && idMimeUri !== "") {
-        var idMimeUriObject = JSON.parse(idMimeUri);
-        var idUriRelative = idMimeUriObject.uriFragment;
+    if (idUriRelative !== null && idUriRelative !== "") {
         var idUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), idUriRelative);
         idSrc = idUriAbsolute;
     }
@@ -106,11 +98,9 @@ function display() {
     $('#patientid_pic').append(idThumbnail);
 
     //image for child registration date
-    var birthMimeUri = data.get('Patient_DOB_image0');
+    var birthUriRelative = data.get('Patient_DOB_image0.uriFragment');
     var birthSrc = '';
-    if (birthMimeUri !== null && birthMimeUri !== "") {
-        var birthMimeUriObject = JSON.parse(birthMimeUri);
-        var birthUriRelative = birthMimeUriObject.uriFragment;
+    if (birthUriRelative !== null && birthUriRelative !== "") {
         var birthUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), birthUriRelative);
         birthSrc = birthUriAbsolute;
     }
@@ -122,11 +112,9 @@ function display() {
     $('#birthdate_pic').append(birthThumbnail);
 
     //image for village/settlement
-    var viMimeUri = data.get('Home_village_image0');
+    var viUriRelative = data.get('Home_village_image0.uriFragment');
     var viSrc = '';
-    if (viMimeUri !== null && viMimeUri !== "") {
-        var viMimeUriObject = JSON.parse(viMimeUri);
-        var viUriRelative = viMimeUriObject.uriFragment;
+    if (viUriRelative !== null && viUriRelative !== "") {
         var viUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), viUriRelative);
         viSrc = viUriAbsolute;
     }
@@ -138,11 +126,9 @@ function display() {
     $('#village_pic').append(viThumbnail);
 
     //image for patient's gsm
-    var msmMimeUri = data.get('GSM_number_image0');
+    var msmUriRelative = data.get('GSM_number_image0.uriFragment');
     var msmSrc = '';
-    if (msmMimeUri !== null && msmMimeUri !== "") {
-        var msmMimeUriObject = JSON.parse(msmMimeUri);
-        var msmUriRelative = msmMimeUriObject.uriFragment;
+    if (msmUriRelative !== null && msmUriRelative !== "") {
         var msmUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), msmUriRelative);
         msmSrc = msmUriAbsolute;
     }
@@ -154,11 +140,9 @@ function display() {
     $('#patient_gsm_pic').append(msmThumbnail);
     
     //image for refference from
-    var refMimeUri = data.get('Referred_from_image0');
+    var refUriRelative = data.get('Referred_from_image0.uriFragment');
     var refSrc = '';
-    if (refMimeUri !== null && refMimeUri !== "") {
-        var refMimeUriObject = JSON.parse(refMimeUri);
-        var refUriRelative = refMimeUriObject.uriFragment;
+    if (refUriRelative !== null && refUriRelative !== "") {
         var refUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), refUriRelative);
         refSrc = refUriAbsolute;
     }
@@ -170,11 +154,9 @@ function display() {
     $('#reffered_from_pic').append(refThumbnail);
 
     //image for refference from other
-    var orefMimeUri = data.get('Referred_from_other_image0');
+    var orefUriRelative = data.get('Referred_from_other_image0.uriFragment');
     var orefSrc = '';
-    if (orefMimeUri !== null && orefMimeUri !== "") {
-        var orefMimeUriObject = JSON.parse(orefMimeUri);
-        var orefUriRelative = orefMimeUriObject.uriFragment;
+    if (orefUriRelative !== null && orefUriRelative !== "") {
         var orefUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), orefUriRelative);
         orefSrc = orefUriAbsolute;
     }
@@ -186,11 +168,9 @@ function display() {
     $('#reffered_from_other_pic').append(orefThumbnail);
 
     //image for transfer from
-    var trMimeUri = data.get('Transf_from_HU_image0');
+    var trUriRelative = data.get('Transf_from_HU_image0.uriFragment');
     var trSrc = '';
-    if (trMimeUri !== null && trMimeUri !== "") {
-        var trMimeUriObject = JSON.parse(trMimeUri);
-        var trUriRelative = trMimeUriObject.uriFragment;
+    if (trUriRelative !== null && trUriRelative !== "") {
         var trUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), trUriRelative);
         trSrc = trUriAbsolute;
     }
@@ -204,11 +184,9 @@ function display() {
     
 
     //image screened for TB
-    var tbMimeUri = data.get('TB_screen_image0');
+    var tbUriRelative = data.get('TB_screen_image0.uriFragment');
     var tbSrc = '';
-    if (tbMimeUri !== null && tbMimeUri !== "") {
-        var tbMimeUriObject = JSON.parse(tbMimeUri);
-        var tbUriRelative = tbMimeUriObject.uriFragment;
+    if (tbUriRelative !== null && tbUriRelative !== "") {
         var tbUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), tbUriRelative);
         tbSrc = tbUriAbsolute;
     }
@@ -220,11 +198,9 @@ function display() {
     $('#tb_screen_pic').append(tbThumbnail);
 
     //image for screening of STIs
-    var stMimeUri = data.get('STI_screen_image0');
+    var stUriRelative = data.get('STI_screen_image0.uriFragment');
     var stSrc = '';
-    if (stMimeUri !== null && stMimeUri !== "") {
-        var stMimeUriObject = JSON.parse(stMimeUri);
-        var stUriRelative = stMimeUriObject.uriFragment;
+    if (stUriRelative !== null && stUriRelative !== "") {
         var stUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), stUriRelative);
         stSrc = stUriAbsolute;
     }
@@ -236,11 +212,9 @@ function display() {
     $('#stis_screen_pic').append(stThumbnail);
 
     //image for service refferd for clinic
-    var sclMimeUri = data.get('Clinical_serv_ref_for_image0');
+    var sclUriRelative = data.get('Clinical_serv_ref_for_image0.uriFragment');
     var sclSrc = '';
-    if (sclMimeUri !== null && sclMimeUri !== "") {
-        var sclMimeUriObject = JSON.parse(sclMimeUri);
-        var sclUriRelative = sclMimeUriObject.uriFragment;
+    if (sclUriRelative !== null && sclUriRelative !== "") {
         var sclUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), sclUriRelative);
         sclSrc = sclUriAbsolute;
     }
@@ -252,11 +226,9 @@ function display() {
     $('#clinical_service_pic').append(sclThumbnail);
 
     //image for service reffered for clonical other
-    var osclMimeUri = data.get('Other_clinical_serv_image0');
+    var osclUriRelative = data.get('Other_clinical_serv_image0.uriFragment');
     var osclSrc = '';
-    if (osclMimeUri !== null && osclMimeUri !== "") {
-        var osclMimeUriObject = JSON.parse(osclMimeUri);
-        var osclUriRelative = osclMimeUriObject.uriFragment;
+    if (osclUriRelative !== null && osclUriRelative !== "") {
         var osclUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), osclUriRelative);
         osclSrc = osclUriAbsolute;
     }
@@ -270,11 +242,9 @@ function display() {
 
 
     //image for service reffered for community
-    var scomMimeUri = data.get('Comm_serv_referred_for_image0');
+    var scomUriRelative = data.get('Comm_serv_referred_for_image0.uriFragment');
     var scomSrc = '';
-    if (scomMimeUri !== null && scomMimeUri !== "") {
-        var scomMimeUriObject = JSON.parse(scomMimeUri);
-        var scomUriRelative = scomMimeUriObject.uriFragment;
+    if (scomUriRelative !== null && scomUriRelative !== "") {
         var scomUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), scomUriRelative);
         scomSrc = scomUriAbsolute;
     }
@@ -288,11 +258,9 @@ function display() {
     
 
     //image for service reffered for community other
-    var oscomMimeUri = data.get('Other_comm_serv_image0');
+    var oscomUriRelative = data.get('Other_comm_serv_image0.uriFragment');
     var oscomSrc = '';
-    if (oscomMimeUri !== null && oscomMimeUri !== "") {
-        var oscomMimeUriObject = JSON.parse(oscomMimeUri);
-        var oscomUriRelative = oscomMimeUriObject.uriFragment;
+    if (oscomUriRelative !== null && oscomUriRelative !== "") {
         var oscomUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), oscomUriRelative);
         oscomSrc = oscomUriAbsolute;
     }

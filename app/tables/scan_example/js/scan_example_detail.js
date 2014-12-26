@@ -36,11 +36,9 @@ function display() {
     $('#sun_chores').text(data.get('sun_chores'));
     $('#comments').text(data.get('comments'));
 
-    var addrMimeUri = data.get('address_image0');
+    var addrUriRelative = data.get('address_image0.uriFragment');
     var addrSrc = '';
-    if (addrMimeUri !== null && addrMimeUri !== "") {
-        var addrMimeUriObject = JSON.parse(addrMimeUri);
-        var addrUriRelative = addrMimeUriObject.uriFragment;
+    if (addrUriRelative !== null && addrUriRelative !== "") {
         var addrUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), addrUriRelative);
         addrSrc = addrUriAbsolute;
     }
@@ -51,11 +49,9 @@ function display() {
     addrThumbnail.attr('id', 'address_image0');
     $('#homeAddress').append(addrThumbnail);
 
-    var stayMimeUri = data.get('stay_image0');
+    var stayUriRelative = data.get('stay_image0.uriFragment');
     var staySrc = '';
-    if (stayMimeUri !== null && stayMimeUri !== "") {
-        var stayMimeUriObject = JSON.parse(stayMimeUri);
-        var stayUriRelative = stayMimeUriObject.uriFragment;
+    if (stayUriRelative !== null && stayUriRelative !== "") {
         var stayUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), stayUriRelative);
         staySrc = stayUriAbsolute;
     }
@@ -67,11 +63,9 @@ function display() {
     $('#lengthOfStay').append(stayThumbnail);
 
 
-    var commentsMimeUri = data.get('comments_image0');
+    var commentsUriRelative = data.get('comments_image0.uriFragment');
     var commentsSrc = '';
-    if (commentsMimeUri !== null && commentsMimeUri !== "") {
-        var commentsMimeUriObject = JSON.parse(commentsMimeUri);
-        var commentsUriRelative = commentsMimeUriObject.uriFragment;
+    if (commentsUriRelative !== null && commentsUriRelative !== "") {
         var commentsUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), commentsUriRelative);
         commentsSrc = commentsUriAbsolute;
     }
