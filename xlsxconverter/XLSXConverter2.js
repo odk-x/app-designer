@@ -178,7 +178,7 @@ var XLSXConverter = {};
 
     // Unicode extensions to standard RegExp...
     if (typeof exports !== 'undefined') {
-        if(typeof require !== 'undefined') XRegExp = require('./XRegExp-All-3.0.0-pre-2013-08-27.js');
+        if(typeof require !== 'undefined') XRegExp = require('./XRegExp-All-3.0.0-pre-2014-12-24.js');
     }
     var pattern_valid_user_defined_name =
         XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)*$', 'A');
