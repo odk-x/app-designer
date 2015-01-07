@@ -1,17 +1,20 @@
-<div>
+<form role="form">
+<div class="form-group">
     {{> labelHint}}
-    <input type="text" name="{{name}}" value="{{mediaPath}}"
+    <input class="form-control" type="text" name="{{name}}" value="{{mediaPath}}"
             style="background-color:lightgray;"
             disabled="true"
         />
     {{#if invalid}}
         <p>invalid</p>
     {{/if}}
-    <button class="captureAction">Take Picture</button>
-    <button class="chooseAction">Choose Picture</button>
-    <div class="mediaContainer">
-        {{#if uriFragmentValue}}
-            <img width="200" src="{{mediaPath}}"/>
-        {{/if}}
-    </div>
-<div>
+    <button type="button" class="captureAction btn btn-default btn-lg">Take Picture</button>
+    <button type="button" class="chooseAction btn btn-default btn-lg">Choose Picture</button> 
+</div>
+</form>
+
+<div class="mediaContainer">
+    {{#if uriFragmentValue}}
+        <img width="200" src="{{mediaPath}}"/>
+    {{/if}}
+</div>

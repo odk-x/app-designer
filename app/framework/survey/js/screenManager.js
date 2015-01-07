@@ -9,15 +9,15 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
-define(['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'handlebarsHelpers', 'translations'], 
-function(opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, confirmationPopup,
-     optionsPopup,                             languagePopup, jqmobile, _hh, translations) {
+define(['opendatakit','backbone','jquery', 'spinner', 'handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers', 'translations'], 
+function(opendatakit,  Backbone,  $,        spinner,   Handlebars,  screenTypes,  screenPopup, confirmationPopup,
+     optionsPopup,                             languagePopup, _hh, translations) {
 verifyLoad('screenManager',
-    ['opendatakit','backbone','jquery','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' ,'jqmobile', 'handlebarsHelpers', 'translations'],
-    [opendatakit,  Backbone,  $,       Handlebars,  screenTypes,  screenPopup, confirmationPopup,
-     optionsPopup,                             languagePopup, jqmobile, _hh, translations]);
+    ['opendatakit','backbone','jquery','spinner','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' , 'handlebarsHelpers', 'translations'],
+    [opendatakit,  Backbone,  $,        spinner,  Handlebars,  screenTypes,  screenPopup, confirmationPopup,
+     optionsPopup,                             languagePopup, _hh, translations]);
 
 return Backbone.View.extend({
     el: "body",
@@ -248,28 +248,27 @@ return Backbone.View.extend({
                 var screenRenderCtxt = $.extend({},cleanupCtxt,{success: function() {
                     
                     cleanupCtxt.log('D', "screenManager.commonDrawScreen.screen.render.success");
-                    if ( that.currentPageEl == screen.$el ) {
-                        // overwrites the old $el in the DOM at this point...
-                        that.currentPageEl.replaceWith(screen.$el);
-                    } else {
-                        // record previous screen so we can delete it after moving on...
-                        that.previousPageEl = that.currentPageEl;
-                        that.currentPageEl = screen.$el;
-                        window.$.mobile.pageContainer.append(that.currentPageEl);
-                    }
-                    
+					// find the previous screen...
+					var oldCurrentEl = that.$el.find(".odk-page");
                     // make the new screen the active screen (...no-op if redraw).
                     that.activeScreen = screen;
+					that.currentPageEl = screen.$el;
+					if ( oldCurrentEl[0] === that.currentPageEl[0] ) {
+						that.previousPageEl = null;
+						oldCurrentEl.replaceWith(that.currentPageEl);
+					} else {
+						that.previousPageEl = oldCurrentEl;
+						that.currentPageEl.insertAfter(that.previousPageEl);
+					}
+
                     // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
                     that.savedCtxt = cleanupCtxt;
                     // turn first child into a page...
                     //append it to the page container
                     // maybe need to drop spinner for jqMobile?: window.clearTimeout(activateTimeout);
-                    window.$.mobile.changePage(that.currentPageEl, {
-                        changeHash: false,
-                        transition: transition,
-                        allowSamePageTransition: true
-                    });
+                    setTimeout(function() {
+						that.handlePagechange();
+					}, 0);
                 }});
                 screen.render(screenRenderCtxt);
             }});
@@ -375,7 +374,7 @@ return Backbone.View.extend({
         evt.preventDefault();
     },
     ignoreChanges: function(evt) {
-        $( "#optionsPopup" ).popup( "close" );
+        $( "#optionsPopup" ).modal( "hide" );
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
@@ -387,7 +386,7 @@ return Backbone.View.extend({
             }}));
     },
     saveChanges: function(evt) {
-        $( "#optionsPopup" ).popup( "close" );
+        $( "#optionsPopup" ).modal( "hide" );
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
@@ -399,7 +398,7 @@ return Backbone.View.extend({
             }}), false);
     },
     finalizeChanges: function(evt) {
-        $( "#optionsPopup" ).popup( "close" );
+        $( "#optionsPopup" ).modal( "hide" );
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
@@ -420,12 +419,13 @@ return Backbone.View.extend({
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         that.activeScreen.$el.append(that.optionsTemplate(rc)).trigger('pagecreate');
-         $('#optionsPopup').enhanceWithin().popup();
-        $( "#optionsPopup" ).popup( "open" );
+        //$('#optionsPopup').enhanceWithin().popup();
+        //$( "#optionsPopup" ).popup( "open" );
+        $( "#optionsPopup" ).modal();
     },
     openLanguagePopup: function(evt) {
         var that = this;
-        $( "#optionsPopup" ).popup( "close" );
+        $( "#optionsPopup" ).modal( "hide" );
         var $contentArea = $('#languagePopup');
         $contentArea.empty().remove();
         if ( that.activeScreen == null ) {
@@ -436,8 +436,9 @@ return Backbone.View.extend({
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         that.activeScreen.$el.append(that.languageTemplate(rc)).trigger('pagecreate');
-        $('#languagePopup').enhanceWithin().popup();
-        $( "#languagePopup" ).popup( "open" );
+        //$('#languagePopup').enhanceWithin().popup(); 
+        //$( "#languagePopup" ).popup( "open" );
+        $( "#languagePopup" ).modal();
     },
     setLanguage: function(evt) {
         var that = this;
@@ -446,7 +447,7 @@ return Backbone.View.extend({
             ((that.activeScreen != null) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         //Closing popups is important,
         //they will not open in the future if one is not closed.
-        $( "#languagePopup" ).popup( "close" );
+        $( "#languagePopup" ).modal( "hide" );
         this.controller.setLocale(ctxt, $(evt.target).attr("id"));
     },
     showScreenPopup: function(msg) {
@@ -462,12 +463,13 @@ return Backbone.View.extend({
             that.activeScreen._renderContext : that.renderContext;
         var rcWithMsg = $.extend({message: msg.message}, rc);
         that.activeScreen.$el.append(that.screenTemplate(rcWithMsg)).trigger('pagecreate');
-        var $screenPopup = $( "#screenPopup" );
-        $('#screenPopup').enhanceWithin().popup();
-        $screenPopup.popup( "open" );
+        //var $screenPopup = $( "#screenPopup" );
+        //$('#screenPopup').enhanceWithin().popup();  // calling the popup plugin
+        //$screenPopup.popup( "open" );       // opening the popup
+        $('#screenPopup').modal();
     },
     closeScreenPopup: function() {
-        $( "#screenPopup" ).popup( "close" );
+        $( "#screenPopup" ).modal( "hide" );   // closing the popup
     },
     showConfirmationPopup: function(msg) {
         var that = this;
@@ -484,27 +486,37 @@ return Backbone.View.extend({
         var rcWithMsg = $.extend({message: msg.message}, rc);
         that.activeScreen.$el.append(that.confirmationTemplate(rcWithMsg)).trigger('pagecreate');
         var $confirmationPopup = $( "#confirmationPopup" );
-        $('#confirmationPopup').enhanceWithin().popup();
-        $confirmationPopup.popup( "open" );
+        //$('#confirmationPopup').enhanceWithin().popup();
+        //$confirmationPopup.popup( "open" );
+        $confirmationPopup.modal();
     },
     handleConfirmation: function() {
         var that = this;
         if ( that.activeScreen != null ) {
             that.activeScreen.handleConfirmation(that.promptIndex);
         }
-        $( "#confirmationPopup" ).popup( "close" );
+        $( "#confirmationPopup" ).modal( "hide" );
     },
     closeConfirmationPopup: function() {
-        $( "#confirmationPopup" ).popup( "close" );
+        $( "#confirmationPopup" ).modal( "hide" );
     },
     showSpinnerOverlay: function(msg) {
-        window.$.mobile.loading( 'show', {
-            text: msg.text,
-            textVisible: true
-        });
+        // window.$.mobile.loading( 'show', {
+            // text: msg.text,
+            // textVisible: true
+        // });
+        $('body').waitMe({
+			effect: 'roundBounce',
+			text: 'Loading ...',
+			bg: 'rgba(255,255,255,0.7)',
+			color:'#000',
+			sizeW:'',
+			sizeH:''
+		});
     },
     hideSpinnerOverlay: function() {
-        window.$.mobile.loading( 'hide' );
+        //window.$.mobile.loading( 'hide' );
+        $('body').waitMe('hide');
     },
     removePreviousPageEl: function() {
         if( this.previousPageEl){

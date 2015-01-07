@@ -1,20 +1,31 @@
-
-<div data-role="popup" id="optionsPopup" data-overlay-theme="a" data-theme="a">
-    <ul data-role="listview" data-inset="true">
-        <li><a data-rel="popup"
-            class="languageMenu
-            {{#unless hasTranslations}}ui-disabled{{/unless}}">
-            Language
-            </a>
-        </li>
-        <li><a data-rel="popup" 
-            class="show-contents
-            {{#unless showContents}}ui-disabled{{/unless}}">
-            Contents
-            </a>
-        </li>
-        <li><a data-rel="popup" class="ignore-changes-and-exit">Ignore Changes + Exit</a></li>
-        <li><a data-rel="popup" class="save-incomplete-and-exit">Save Changes + Exit</a></li>
-        <li><a data-rel="popup" class="finalize-and-exit">Finalize Changes + Exit</a></li>
-    </ul>
+<div class="modal" id="optionsPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="optionsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="btn-group-vertical">
+                    <a href="#" class="languageMenu btn btn-default" role="button" 
+                                data-toggle="modal" data-target="languagePopup"
+                                {{#unless hasTranslations}}disabled="disabled"{{/unless}}">
+                        Language
+                    </a>
+                    <a href="#" class="show-contents btn btn-default" role="button" 
+                                data-toggle="modal" data-target="languagePopup"
+                                {{#unless hasTranslations}}disabled="disabled"{{/unless}}">
+                        Contents
+                    </a>
+                    <a href="#" class="ignore-changes-and-exit btn btn-default" role="button">
+                        Ignore Changes + Exit
+                    </a>
+                    <a href="#" class="save-incomplete-and-exit btn btn-default" role="button">
+                        Save Changes + Exit
+                    </a>
+                    <a href="#" class="finalize-and-exit btn btn-default" role="button">
+                        Finalize Changes + Exit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

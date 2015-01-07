@@ -1,12 +1,12 @@
 <div>
     {{> labelHint}}
     {{#if value}}
-        <ul data-role="listview" data-inset="true">
-        <li>Latitude : {{value.latitude}}</li>
-        <li>Longitude : {{value.longitude}}</li>
-        <li>Altitude : {{value.altitude}}</li>
-        <li>Accuracy : {{value.accuracy}}</li>
+        <ul class="list-group">
+        <li class="list-group-item">Latitude : {{value.latitude}}</li>
+        <li class="list-group-item">Longitude : {{value.longitude}}</li>
+        <li class="list-group-item">Altitude : {{value.altitude}}</li>
+        <li class="list-group-item">Accuracy : {{value.accuracy}}</li>
         </ul>
     {{/if}}
-    <button class="launch">{{localize buttonLabel}}</button>
+    <button type="button" class="launch btn btn-default btn-lg">{{localize buttonLabel}}</button>
 </div>

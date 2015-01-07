@@ -1,46 +1,52 @@
 {{#if passiveError}}
-    <div class="ui-bar ui-bar-a">
+    <div>
         {{passiveError}}
     </div>
 {{/if}}
 <form>
     {{> labelHint}}
-        <div class="ui-grid-b">
+    <table class="table table-bordered">
+        <tbody>
         {{#each choices}}
-            <div class="ui-block-{{colLetter}}">
-                <div class="ui-bar
-                {{#if checked}}
-                    ui-bar-b
-                {{else}}
-                    ui-bar-a
-                {{/if}} grid-select-item">
-                    <input
-                        {{#if ../select_one}}
-                            type="radio"
-                        {{else}}
-                            type="checkbox"
+            {{#if isFirstInRow}}
+                <tr>
+            {{/if}}  
+                    <td class="grid-select-item"
+                    {{#if checked}}
+                        style="background-color:black;"
+                    {{else}}
+                        style="background-color:white;"
+                    {{/if}}>
+                
+                        <input
+                            {{#if ../select_one}}
+                                type="radio"
+                            {{else}}
+                                type="checkbox"
+                            {{/if}}
+                            {{#if checked}}
+                                checked="checked"
+                            {{/if}}
+                                
+                            {{! the name attribute has to be the same for all the options}}
+                            name="{{../name}}"
+                            id="{{data_value}}"
+                            value="{{data_value}}" />
+                        {{#if display.image}}
+                            <center>
+                                <img src="{{formDirectory}}{{localize display.image}}"></img>
+                            </center>
                         {{/if}}
-                        {{#if checked}}
-                            checked="checked"
+                        {{#if display.text}}
+                            {{{localize display.text}}}
                         {{/if}}
-                            
-                        {{! the name attribue has to be the same for all the options}}
-                        style="display:none;"
-                        name="{{../name}}"
-                        id="{{data_value}}"
-                        value="{{data_value}}" />
-                {{#if display.image}}
-                    <center>
-                        <img  style="max-width: 100%;max-height: 100%;" src="{{formDirectory}}{{localize display.image}}"></img>
-                    </center>
-                {{/if}}
-                {{#if display.text}}
-                    {{{localize display.text}}}
-                {{/if}}
-                </div>
-            </div>
+                    </td>
+            {{#if isLastInRow}}
+                </tr><!-- row -->
+            {{/if}}
         {{/each}}
-        </div><!-- /grid-b -->
+        </tbody>
+    </table><!-- container -->
     {{#unless required}}
         {{#if false}}
         {{#if display.deselect}}

@@ -3,11 +3,11 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
-function(database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh) {
+define(['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'datetimepicker','translations', 'handlebarsHelpers'],
+function(database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            datetimepicker,  translations,   _hh) {
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
-    [ database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh]);
+    ['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore','datetimepicker','translations', 'handlebarsHelpers'],
+    [ database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           datetimepicker,  translations,   _hh]);
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -736,10 +736,10 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                     }
                     
                     if (instanceList[i]["savepoint_type"] == "COMPLETE"){
-                        instanceList[i]["icon_class"] = "ui-icon-check";
+                        instanceList[i]["icon_class"] = "glyphicon-ok";
                     }  
                     else{
-                        instanceList[i]["icon_class"] = "ui-icon-alert";
+                        instanceList[i]["icon_class"] = "glyphicon-warning-sign";
                     }
                     //make the date more readable
                     instanceList[i]["savepoint_timestamp"] = opendatakit.getShortDateFormat(instanceList[i]["savepoint_timestamp"]);          
@@ -1312,6 +1312,14 @@ promptTypes.select_one_grid = promptTypes.select_one.extend({
         filteredChoices = _.map(filteredChoices, function(choice, idx) {
             var columns = 3;
             choice.colLetter = String.fromCharCode(97 + (idx % columns));
+            choice.isFirstInRow = false;
+            choice.isLastInRow = false;
+            if (idx % 3 === 0) {
+                choice.isFirstInRow = true;
+            }
+            if (idx % 3 === 2) {
+                choice.isLastInRow = true;
+            }
             return choice;
         });
 
@@ -1363,6 +1371,14 @@ promptTypes.select_multiple_grid = promptTypes.select_multiple.extend({
         filteredChoices = _.map(filteredChoices, function(choice, idx) {
             var columns = 3;
             choice.colLetter = String.fromCharCode(97 + (idx % columns));
+            choice.isFirstInRow = false;
+            choice.isLastInRow = false;
+            if (idx % 3 === 0) {
+                choice.isFirstInRow = true;
+            }
+            if (idx % 3 === 2) {
+                choice.isLastInRow = true;
+            }
             return choice;
         });
 
@@ -1528,9 +1544,10 @@ promptTypes.decimal = promptTypes.input_type.extend({
 });
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
-    useMobiscroll: true,
+    templatePath: "templates/datetimepicker.handlebars",  //TODO make template
+    usePicker: true,
     insideAfterRender: false,
-    scrollerAttributes: {
+    /* scrollerAttributes: {
         preset: 'datetime',
         theme: 'jqm',
         display: 'modal'
@@ -1538,7 +1555,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         //can be some debouncing issues.
         //Warning: mixed/clickpick mode doesn't work on galaxy nexus.
         //mode: 'scroll'
-    },
+    }, */
     events: {
         "change input": "modification",
         "swipeleft input": "stopPropagation",
@@ -1568,17 +1585,17 @@ promptTypes.datetime = promptTypes.input_type.extend({
         var renderContext = this.renderContext;
         if(this.detectNativeDatePicker()){
             renderContext.inputAttributes.type = this.type;
-            this.useMobiscroll = false;
+            this.usePicker = false;
             ctxt.success();
         } else {
-            $.mobiscroll.themes.jqm.defaults = {
+            /* $.mobiscroll.themes.jqm.defaults = {
                 jqmBody: 'd',
                 jqmHeader:'d',
                 jqmWheel: 'd',
                 jqmClickPick: 'd',
                 jqmSet: 'd',
                 jqmCancel: 'd'
-            };
+            }; */
             //This is a monkey patch to disable hiding the datepicker when clicking outside of it.
             //This is a problem because users may click twice while they wait for the date
             //picker to open inadvertantly causing it to close.
@@ -1595,8 +1612,8 @@ promptTypes.datetime = promptTypes.input_type.extend({
     modification: function(evt) {
         var that = this;
         if ( !that.insideAfterRender ) {
-            var value = that.$('input').mobiscroll('getDate');
-            var ref = that.getValue();
+            var value = that.$('input').datetimepicker('getDate'); 
+            var ref = that.getValue();  
             var rerender = ((ref == null || value == null) && (ref != value )) ||
                     (ref != null && value != null && ref.valueOf() != value.valueOf());
             var ctxt = that.controller.newContext(evt);
@@ -1605,7 +1622,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
             if ( value === undefined || value === null ) {
                 renderContext.value = '';
             } else {
-                renderContext.value = that.$('input').val();
+                renderContext.value = that.$('input').val(); 
             }
             // track original value
             var originalValue = that.getValue();
@@ -1625,17 +1642,25 @@ promptTypes.datetime = promptTypes.input_type.extend({
             }
         }
     },
-    
     afterRender: function() {
         var that = this;
-        if(this.useMobiscroll){
-            that.$('input').mobiscroll()[that.scrollerAttributes.preset](that.scrollerAttributes);
-            var value = that.getValue();
+        if(this.usePicker){
+            /* that.$('input').mobiscroll()[that.scrollerAttributes.preset](that.scrollerAttributes); 
+            var value = that.getValue();        // new date that is now saved in database
             that.insideAfterRender = true;
             if ( value === undefined || value === null ) {
-                that.$('input').mobiscroll('setDate',new Date(),false);
+                that.$('input').mobiscroll('setDate',new Date(),false); 
             } else {
-                that.$('input').mobiscroll('setDate',value, true);
+                that.$('input').mobiscroll('setDate',value, true); 
+            }
+            that.insideAfterRender = false; */
+            that.$('input').datetimepicker({useCurrent: false});
+            var value = that.getValue();      
+            that.insideAfterRender = true;
+            if ( value === undefined || value === null ) {
+                that.$('input').datetimepicker('setDate', new Date()); 
+            } else {
+                that.$('input').datetimepicker('setDate', value); 
             }
             that.insideAfterRender = false;
         }
@@ -1647,19 +1672,28 @@ promptTypes.datetime = promptTypes.input_type.extend({
 });
 promptTypes.date = promptTypes.datetime.extend({
     type: "date",
-    scrollerAttributes: {
-        preset: 'date',
-        theme: 'jqm',
-        display: 'modal'
+    afterRender: function() {
+        var that = this;
+        if(this.usePicker){
+            that.$('input').datetimepicker({pickTime: false, useCurrent: false});
+            var value = that.getValue();
+            that.insideAfterRender = true;
+            if ( value === undefined || value === null ) {
+                that.$('input').datetimepicker('setDate', new Date());
+            } else {
+                that.$('input').datetimepicker('setDate', value);
+            }
+            that.insideAfterRender = false;
+        }
     }
 });
 promptTypes.time = promptTypes.datetime.extend({
     type: "time",
-    scrollerAttributes: {
+    /* scrollerAttributes: {
         preset: 'time',
         theme: 'jqm',
         display: 'modal'
-    },
+    }, */
     sameTime: function(ref, value) {
         // these are milliseconds relative to Jan 1 1970...
         var ref_tod = (ref.valueOf() % 86400000);
@@ -1669,17 +1703,17 @@ promptTypes.time = promptTypes.datetime.extend({
     modification: function(evt) {
         var that = this;
         if ( !that.insideAfterRender ) {
-            var value = that.$('input').mobiscroll('getDate');
+            var value = that.$('input').datetimepicker('getDate');
             var ref = that.getValue();
             var rerender = ((ref === undefined || ref === null || value === undefined || value === null) && (ref != value )) ||
                     (ref != null && value != null && that.sameTime(ref,value));
             var ctxt = that.controller.newContext(evt);
             ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
-            var renderContext = that.renderContext;
+            var renderContext = that.renderContext; 
             if ( value === undefined || value === null ) {
                 renderContext.value = '';
             } else {
-                renderContext.value = that.$('input').val();
+                renderContext.value = that.$('input').val(); 
             }
             // track original value
             var originalValue = that.getValue();
@@ -1697,6 +1731,20 @@ promptTypes.time = promptTypes.datetime.extend({
             } else {
                 ctxt.success();
             }
+        }
+    },
+    afterRender: function() {
+        var that = this;
+        if(this.usePicker){
+            that.$('input').datetimepicker({pickDate: false});
+            var value = that.getValue();      
+            that.insideAfterRender = true;
+            if ( value === undefined || value === null ) {
+                that.$('input').datetimepicker('setDate', new Date()); 
+            } else {
+                that.$('input').datetimepicker('setDate', value); 
+            }
+            that.insideAfterRender = false;
         }
     }
 });

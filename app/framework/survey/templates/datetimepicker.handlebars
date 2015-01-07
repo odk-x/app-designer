@@ -1,0 +1,20 @@
+<form role="form">
+<div class="form-group">
+    <div class="container">
+        <label for="picker-{{promptId}}">{{> labelHint}}</label>
+        <input id="picker-{{promptId}}" 
+            class="form-control"
+            name="{{name}}"
+            value="{{value}}"
+            type="text"
+            {{#eachProperty inputAttributes}}
+                {{property}}="{{value}}"
+            {{/eachProperty}}
+            {{#if disabled}}
+                style="background-color:lightgray;"
+                disabled="true"
+            {{/if}}
+        />
+    </div>
+</div>
+</form>

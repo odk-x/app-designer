@@ -1,14 +1,9 @@
-<form>
-    <label>{{localize display.text}}</label>
-    <select name="{{name}}">        
-        {{#each choices}}
-            <option 
-                {{#if selected}}
-                    selected
-                {{/if}}
-                value="{{value}}">
-                {{localize display.text}}
-            </option>
-        {{/each}}
-    </select>
-</form>
+<p>{{localize display.text}}</p>
+<select class="form-control" >
+    {{#each choices}}
+        <option 
+            value="{{value}}">
+            {{localize display.text}}
+        </option>
+    {{/each}}
+</select>

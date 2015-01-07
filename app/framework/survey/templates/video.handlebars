@@ -1,18 +1,21 @@
-<div>
+<form role="form">
+<div class="form-group">
     {{> labelHint}}
-    <input type="text" name="{{name}}" value="{{mediaPath}}"
+    <input class="form-control" type="text" name="{{name}}" value="{{mediaPath}}"
         style="background-color:lightgray;"
         disabled="true"
         />
     {{#if invalid}}
         <p>invalid</p>
     {{/if}}
-    <button class="captureAction">Take Video</button>
-    <button class="chooseAction">Choose Video</button>
-    <div class="mediaContainer">
-        {{#if uriFragmentValue}}
-            <video id="{{safeIdentity}}" src="{{mediaPath}}" type="{{contentType}}" {{#if videoPoster}}poster="{{videoPoster}}"{{/if}}
-				{{#if pre4Android}} onclick="play()"{{/if}} video="true" controls="controls">video control not supported</video>
-        {{/if}}
-    </div>
-<div>
+    <button type="button" class="captureAction btn btn-default btn-lg">Take Video</button>
+    <button type="button" class="chooseAction btn btn-default btn-lg">Choose Video</button>
+</div>
+</form>
+
+<div class="mediaContainer">
+    {{#if uriFragmentValue}}
+        <video id="{{safeIdentity}}" src="{{mediaPath}}" type="{{contentType}}" {{#if videoPoster}}poster="{{videoPoster}}"{{/if}}
+            {{#if pre4Android}} onclick="play()"{{/if}} video="true" controls="controls">video control not supported</video>
+    {{/if}}
+</div>

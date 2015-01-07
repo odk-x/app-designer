@@ -1,75 +1,81 @@
 {{#if passiveError}}
-    <div class="ui-bar ui-bar-a">
+    <div>
         {{passiveError}}
     </div>
 {{/if}}
-<form>
+<form role="form">
+    <div class="form-group">
     {{> labelHint}}
-    <fieldset data-role="controlgroup"
+    <fieldset
         {{#eachProperty inputAttributes}}
             {{property}}="{{value}}"
         {{/eachProperty}}>
+
         {{#each choices}}
-            <label  {{#unless checked}}
-                    {{#if display.fontColor.default}}
-                        {{#if display.backgroundColor.default}}
-                            style="background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
-                        {{else}}
-                            style="color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
-                        {{/if}}
-                    {{else}}
-                        {{#if display.backgroundColor.default}} 
-                            style="background-color:{{display.backgroundColor.default}};border-color:{{display.color}};"
-                        {{/if}}
-                    {{/if}}
-                {{else}}
-                    {{#if display.fontColor.selected}}
-                        {{#if display.backgroundColor.selected}}
-                            style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};"
-                        {{else}}
+                <label class="btn btn-default btn-lg select-label" 
+                    {{#unless checked}}
+                        {{#if display.fontColor.default}}
                             {{#if display.backgroundColor.default}}
-                                style="color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};"
+                                style="background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
                             {{else}}
-                                style="color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};"
-                            {{/if}} 
-                        {{/if}}
-                    {{else}}
-                        {{#if display.backgroundColor.selected}}
-                            {{#if display.fontColor.default}}
-                                style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
-                            {{else}}
-                                style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};"
+                                style="color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
+                            {{/if}}
+                        {{else}}
+                            {{#if display.backgroundColor.default}} 
+                                style="background-color:{{display.backgroundColor.default}};border-color:{{display.color}};"
                             {{/if}}
                         {{/if}}
-                    {{/if}}
-                {{/unless}}>
-                <input
-                    {{#if ../select_one}}
-                        type="radio"
                     {{else}}
-                        type="checkbox"
-                    {{/if}}
-                    {{#if checked}}
-                        checked="checked"
-                    {{/if}}
-                        
-                    {{! the name attribue has to be the same for all the options}}
-                    name="{{../name}}"
-                    id="{{data_value}}"
-                    value="{{data_value}}" />
-            {{#if display.image}}
-                <div>
-                    <img src="{{formDirectory}}{{localize display.image}}"></img>
-                </div>
-            {{/if}}
-            {{#if display.text}}
-                {{{localize display.text}}}
-            {{/if}}
-            </label>
+                        {{#if display.fontColor.selected}}
+                            {{#if display.backgroundColor.selected}}
+                                style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};"
+                            {{else}}
+                                {{#if display.backgroundColor.default}}
+                                    style="color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};"
+                                {{else}}
+                                    style="color:{{display.fontColor.selected}};text-shadow:0 0px 0 {{display.fontColor.selected}};"
+                                {{/if}} 
+                            {{/if}}
+                        {{else}}
+                            {{#if display.backgroundColor.selected}}
+                                {{#if display.fontColor.default}}
+                                    style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
+                                {{else}}
+                                    style="background-color:{{display.backgroundColor.selected}};border-color:{{display.backgroundColor.selected}};"
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    {{/unless}}>
+                    
+                    <input class="select-input"
+                        {{#if ../select_one}}
+                            type="radio"
+                        {{else}}
+                            type="checkbox"
+                        {{/if}}
+                        {{#if checked}}
+                            checked="checked"
+                        {{/if}}
+                            
+                        {{! the name attribute has to be the same for all the options}}
+                        name="{{../name}}"
+                        id="{{data_value}}"
+                        value="{{data_value}}" 
+                    />
+                {{#if display.image}}
+                    <div>
+                        <img src="{{formDirectory}}{{localize display.image}}"></img>
+                    </div>
+                {{/if}}
+                {{#if display.text}}
+                    <span class="select-text">{{{localize display.text}}}</span>
+                {{/if}}
+                </label>
+            
         {{/each}}
         {{#if withOther}}
-            <label>
-                <input
+            <label class="btn btn-default btn-lg select-label">
+                <input class="select-input"
                     {{#if select_one}}
                         type="radio"
                     {{else}}
@@ -81,13 +87,12 @@
                     name="{{name}}"
                     id="other"
                     value="other"/>
-                    <label for="other">
-                        Other:
+                    <label for="other" style="float:left">
+                        <span class="select-text">Other:</span>
                         {{#if other.checked}}
-                        <input
+                        <input class="input-other"
                             name="otherValue"
-                            value="{{other.value}}"
-                            style="height:36px;position:initial;"/>
+                            value="{{other.value}}"/>
                         {{/if}}
                     </label>
             </label>
@@ -101,4 +106,5 @@
         {{/if}}
     {{/unless}}
     <div style="clear:both;"></div>
+    </div><!-- form-group -->
 </form>

@@ -28,13 +28,13 @@
 {{#ifEqual graphType "piechart"}}
 <div>
     <div>
-        Scale<a class="scale_up" data-role="button" data-inline="true">+</a><a class="scale_down" data-role="button" data-inline="true">-</a>
+        Scale<a class="scale_up btn btn-default btn-lg active" role="button">+</a><a class="scale_down btn btn-default btn-lg active" role="button">-</a>
     </div>
 </div>
 {{else}}
 <div>
-    y axis<a class="y_up" data-role="button" data-inline="true">+</a><a class="y_down" data-role="button" data-inline="true">-</a>
-    x axis<a class="x_up" data-role="button" data-inline="true">+</a><a class="x_down" data-role="button" data-inline="true">-</a>
+    y axis<a class="y_up btn btn-default btn-lg active" role="button">+</a><a class="y_down btn btn-default btn-lg active" role="button">-</a>
+    x axis<a class="x_up btn btn-default btn-lg active" role="button">+</a><a class="x_down btn btn-default btn-lg active" role="button">-</a>
 </div>
 {{/ifEqual}}
 <div id="plot"></div>

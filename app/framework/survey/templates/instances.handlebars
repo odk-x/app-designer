@@ -17,13 +17,15 @@
 
     <div class="instanceClearDiv"></div>
     <div>
-        <fieldset class="instanceNew ui-grid-a">
-            <div class="ui-block-a">
-                <p>Create new instance</p>
-            </div>
-            <div class="ui-block-b">
-                <div class="instanceRowControl" data-role="controlgroup" data-type="horizontal">
-                    <button class="createInstance" data-role="button" data-icon="plus" data-inline="true" data-iconpos="notext"></button>
+        <fieldset class="instanceNew">
+            <div class="row">
+                <div class="col-xs-8">
+                    Create new instance
+                </div>
+                <div class="col-xs-4">
+                    <button type="button" class="createInstance btn btn-default">
+                        <span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"></span>
+                    </button>
                 </div>
             </div>
         </fieldset>
@@ -33,34 +35,40 @@
     <p>Previously created instances:</p>
     <hr>
     <div class="instanceList">
-        <ul data-role="listview">
+        <ul class="list-group">
             {{#each instances}}
                 {{#if dateDivider}}
-                    <li data-role="list-divider">{{dateDivider}}</li>
+                    <li class="list-group-item">{{dateDivider}}</li>
                 {{/if}}
-                <li>
-                    <fieldset class="instanceListGrid ui-grid-a">
-                    <div class="ui-block-a">
-                        <p><strong>{{display_field}}</strong></p>
-                        <p><strong>Last Save Date:</strong></p>
-                        <p>{{savepoint_timestamp}}</p>
-                        {{#if savepoint_type}}
-                            {{#ifEqual savepoint_type_text "Finalized"}}
-                                <p><strong>{{savepoint_type_text}}</strong></p>
-                            {{else}}
-                                <p><strong>Incomplete</strong></p>
-                            {{/ifEqual}}
-                        {{else}}
-                            <p><strong>Incomplete</strong></p>
-                            <img class="ui-icon ui-icon-alert"/>
-                        {{/if}}
-                    </div>
-                    <div class="ui-block-b">
-                        <div class="instanceRowControl" data-role="controlgroup" data-type="horizontal">
-                            <button id="{{instance_id}}" class="odk openInstance" data-icon="edit" data-inline="true" data-iconpos="notext" ></button>
-                            <button id="{{instance_id}}" class="odk deleteInstance" data-icon="delete" data-inline="true" data-iconpos="notext"></button>
+                <li class="list-group-item">
+                    <fieldset class="instanceListGrid">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <p><strong>{{display_field}}</strong></p>
+                                <p><strong>Last Save Date:</strong></p>
+                                <p>{{savepoint_timestamp}}</p>
+                                {{#if savepoint_type}}
+                                    {{#ifEqual savepoint_type_text "Finalized"}}
+                                        <p><strong>{{savepoint_type_text}}</strong></p>
+                                    {{else}}
+                                        <p><strong>Incomplete</strong></p>
+                                    {{/ifEqual}}
+                                {{else}}
+                                    <p><strong>Incomplete</strong>
+                                    <span class="glyphicon glyphicon-warning-sign"></span></p>
+                                {{/if}}
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="instanceRowControl btn-group">
+                                    <button type="button" id="{{instance_id}}" class="odk openInstance btn btn-default">
+                                        <span class="glyphicon glyphicon-pencil" style="font-size:20px;">
+                                    </button>
+                                    <button type="button" id="{{instance_id}}" class="odk deleteInstance btn btn-default">
+                                        <span class="glyphicon glyphicon-remove-sign" style="font-size:20px;">
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                     </fieldset>
                 </li>
             {{else}}

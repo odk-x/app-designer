@@ -15,13 +15,16 @@ requirejs.config({
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon 
-        jqmobile : 'libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2',
         jquery : 'libs/jquery.1.10.2',
+        bootstrap : 'libs/bootstrap-3.1.1-dist/js/bootstrap.min',
+        moment : 'libs/eonasdan/moment',     
+        datetimepicker : 'libs/eonasdan/bootstrap-datetimepicker',
+        spinner : 'libs/spinner/waitMe.min',
         backbone : 'libs/backbone.1.0.0',
         handlebars : 'libs/handlebars.1.0.0.rc.4',
         underscore : 'libs/underscore.1.4.4',
         text : 'libs/text.2.0.10',
-        mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
+        //mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
         // directory paths for resources
         img : 'img',
         templates : 'survey/templates',
@@ -41,7 +44,7 @@ requirejs.config({
         screenManager : 'survey/js/screenManager',
         parsequery : 'survey/js/parsequery',
         opendatakit : 'survey/js/opendatakit',
-        jqmConfig : 'survey/js/jqmConfig',
+        //jqmConfig : 'survey/js/jqmConfig',
         handlebarsHelpers : 'survey/js/handlebarsHelpers',
         formulaFunctions : 'survey/js/formulaFunctions',
         jqueryCsv : 'libs/jquery-csv/src/jquery.csv',
@@ -49,11 +52,20 @@ requirejs.config({
         d3 : 'libs/d3-amd/d3'
     },
     shim: {
-        'jqmobile': {
-            // Slimmer drop-in replacement for jquery
-            //These script dependencies should be loaded before loading
-            //jqmobile.js
-            deps: ['jquery', 'jqmConfig']
+        'bootstrap': {
+            deps: ['jquery'],
+            exports: '$.fn'
+        },
+        'moment': {
+            deps: [],
+        },
+        'datetimepicker': {                      
+            deps: ['jquery', 'bootstrap', 'moment'],
+            exports: '$.fn.datetimepicker'
+        },
+        'spinner': {                      
+            deps: ['jquery'],
+            exports: '$.fn.waitMe'
         },
         'underscore': {
             //These script dependencies should be loaded before loading
@@ -78,10 +90,6 @@ requirejs.config({
             //Once loaded, use the global 'Handlebars' as the
             //module value.
             exports: 'Handlebars'
-        },
-        'mobiscroll': {
-            deps: ['jquery','jqmobile'],
-            exports: '$.mobiscroll'
         },
         'jqueryCsv' : {
             deps: ['jquery'],
@@ -121,28 +129,19 @@ require(['jquery'],
             ['jquery'],
             [$]);
 
-    shim.log('I','main.require.jquery.loaded establish mobileinit action');
-    window.$(document).on("mobileinit", function () {
-    
-        window.$.mobile.ajaxEnabled = false;
-        window.$.mobile.allowCrossDomainPages = false;
-        window.$.mobile.linkBindingEnabled = false;
-        window.$.mobile.hashListeningEnabled = false;
-        window.$.mobile.pushStateEnabled = false;
-
-        // unwind require then launch the framework...
-        setTimeout( function() {
+  
+        shim.log('I','main.require.jquery.loaded establish mobileinit action');
                 
             // and launch the framework...
-            require(['opendatakit', 'database','parsequery',
+            require(['bootstrap', 'moment', 'datetimepicker', 'spinner', 'opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'], 
-            function( opendatakit,   database,  parsequery,
-                             builder,   controller, d3, jqueryCsv) {
+            function( bootstrap,   moment,   datetimepicker,   spinner,   opendatakit,   database,  parsequery,
+                             builder,   controller,   d3,   jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
-                    ['opendatakit', 'database','parsequery',
+                    ['bootstrap', 'moment', 'datetimepicker', 'spinner', 'opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'],
-                    [ opendatakit,   database,  parsequery,
-                             builder,   controller, d3, jqueryCsv]);
+                    [ bootstrap,   moment,   datetimepicker,   spinner,   opendatakit,   database,  parsequery,
+                             builder,   controller,   d3,   jqueryCsv]);
 
                 
                 // define a function that waits until jquery mobile is initialized
@@ -212,20 +211,6 @@ require(['jquery'],
             }, function(err) {
                 shim.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
             });
-        }, 0);
-
-        });
-
-    
-    require(['jqmobile'], 
-      function(_jqmobile) {
-        verifyLoad('main.require.jqmobile.loaded',
-            ['jqmobile'],
-            [_jqmobile]);
-    }, function(err) {
-        shim.log('E','main.require.jqmobile.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
-    });
-        
 
 }, function(err) {
     shim.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());

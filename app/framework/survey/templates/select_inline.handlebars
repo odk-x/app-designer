@@ -1,5 +1,5 @@
 {{#if passiveError}}
-    <div class="ui-bar ui-bar-a">
+    <div>
         {{passiveError}}
     </div>
 {{/if}}
@@ -7,17 +7,15 @@
 	<div class="inline-label-container">
         {{> labelHint}}
     </div>
-    <fieldset
-    data-role="controlgroup"
-    data-type="horizontal"
-    style="float:right;margin-left:1em;display:block;"
-    {{#eachProperty inputAttributes}}
-        {{property}}="{{value}}"
-    {{/eachProperty}}
-    >
-        {{#each choices}}
-            <label  
-                {{#unless checked}}
+    <fieldset class="inline-fieldset"
+        {{#eachProperty inputAttributes}}
+            {{property}}="{{value}}"
+        {{/eachProperty}}
+        >
+        <div class="btn-group" data-toggle="buttons">
+            {{#each choices}}
+                <label class="btn btn-default btn-lg {{#if checked}}active{{/if}}"
+                    {{#unless checked}}
                     {{#if display.fontColor.default}}
                         {{#if display.backgroundColor.default}}
                             style="background-color:{{display.backgroundColor.default}};border-color:{{display.backgroundColor.default}};color:{{display.fontColor.default}};text-shadow:0 0px 0 {{display.fontColor.default}};"
@@ -49,33 +47,33 @@
                             {{/if}}
                         {{/if}}
                     {{/if}}
-                {{/unless}}
-                >
+                {{/unless}}>
+                    
+                    <input
+                        {{#if ../select_one}}
+                            type="radio"
+                        {{else}}
+                            type="checkbox"
+                        {{/if}}
+                        {{#if checked}}
+                            checked="checked"
+                        {{/if}}
 
-                <input
-                    {{#if ../select_one}}
-                        type="radio"
-                    {{else}}
-                        type="checkbox"
+                        {{! the name attribue has to be the same for all the options}}
+                        name="{{../name}}"
+                        id="{{data_value}}"
+                        value="{{data_value}}" />
+                    {{#if display.image}}
+                        <div>
+                            <img src="{{formDirectory}}{{localize display.image}}"></img>
+                        </div>
                     {{/if}}
-                    {{#if checked}}
-                        checked="checked"
+                    {{#if display.text}}
+                        {{{localize display.text}}}
                     {{/if}}
-
-                    {{! the name attribue has to be the same for all the options}}
-                    name="{{../name}}"
-                    id="{{data_value}}"
-                    value="{{data_value}}" />
-            {{#if display.image}}
-                <div>
-                    <img src="{{formDirectory}}{{localize display.image}}"></img>
-                </div>
-            {{/if}}
-            {{#if display.text}}
-                {{{localize display.text}}}
-            {{/if}}
-            </label>
-        {{/each}}
+                </label>
+            {{/each}}
+        </div>
     </fieldset>
     {{#unless required}}
         {{#if false}}

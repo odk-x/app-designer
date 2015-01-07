@@ -39,13 +39,15 @@
             <p>{{last_save_date}}</p>
         {{/if}}
         <hr>
-        <fieldset class="openingNew ui-grid-a">
-            <div class="ui-block-a">
-                <p>Go to next prompt</p>
-            </div>
-            <div class="ui-block-b">
-                <div class="openingRowControl" data-role="controlgroup" data-type="horizontal">
-                    <button class="odk-next-btn" data-role="button" data-icon="carat-r" data-inline="true" data-iconpos="notext"></button>
+        <fieldset class="openingNew">
+            <div class="row">
+                <div class="col-xs-8">
+                    Go to next prompt
+                </div>
+                <div class="col-xs-4">
+                    <button class="odk-next-btn btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-chevron-right" style="font-size:20px;"></span>
+                    </button>
                 </div>
             </div>
         </fieldset>

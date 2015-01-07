@@ -375,6 +375,22 @@
       {
         "clause": "exit section",
         "_row_num": 70
+      },
+      {
+        "branch_label": "eonasdan",
+        "_row_num": 71
+      },
+      {
+        "url": "'?' + opendatakit.getHashString('../tables/eonasdan/forms/eonasdan/',null)",
+        "type": "external_link",
+        "display": {
+          "text": "Open form"
+        },
+        "_row_num": 72
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 73
       }
     ],
     "settings": [
@@ -568,6 +584,14 @@
           "text": "Send SMS"
         },
         "_row_num": 22
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "eonasdan",
+        "display": {
+          "text": "DateTime Picker"
+        },
+        "_row_num": 23
       }
     ]
   },
@@ -814,6 +838,14 @@
             "text": "Send SMS"
           },
           "_row_num": 22
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "eonasdan",
+          "display": {
+            "text": "DateTime Picker"
+          },
+          "_row_num": 23
         }
       ]
     },
@@ -1227,12 +1259,25 @@
             "promptIdx": 22
           },
           {
+            "url": "'?' + opendatakit.getHashString('../tables/eonasdan/forms/eonasdan/',null)",
+            "type": "external_link",
+            "display": {
+              "text": "Open form"
+            },
+            "_row_num": 72,
+            "__rowNum__": 71,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen72",
+            "promptIdx": 23
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 71,
-            "_branch_label_enclosing_screen": "survey/_screen71",
-            "promptIdx": 23
+            "_row_num": 74,
+            "_branch_label_enclosing_screen": "survey/_screen74",
+            "promptIdx": 24
           }
         ],
         "validation_tag_map": {
@@ -1555,25 +1600,38 @@
             "operationIdx": 47
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 71,
+            "_row_num": 72,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 48
           },
           {
-            "_row_num": 71,
+            "clause": "exit section",
+            "_row_num": 73,
+            "__rowNum__": 72,
+            "_token_type": "exit_section",
+            "operationIdx": 49
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 74,
+            "operationIdx": 50
+          },
+          {
+            "_row_num": 74,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 49
+            "operationIdx": 51
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 71,
-            "operationIdx": 50
+            "_row_num": 74,
+            "operationIdx": 52
           }
         ],
         "branch_label_map": {
@@ -1624,8 +1682,10 @@
           "_screen66": 44,
           "send_sms": 46,
           "_screen69": 46,
-          "_contents": 49,
-          "_screen71": 49
+          "eonasdan": 48,
+          "_screen72": 48,
+          "_contents": 51,
+          "_screen74": 51
         }
       }
     }

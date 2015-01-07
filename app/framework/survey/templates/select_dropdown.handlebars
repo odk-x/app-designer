@@ -1,11 +1,11 @@
 {{#if passiveError}}
-    <div class="ui-bar ui-bar-a">
+    <div>
         {{passiveError}}
     </div>
 {{/if}}
 <form>
     {{> labelHint}}
-    <select name="{{name}}">        
+    <select class="form-control" name="{{name}}">        
         {{#each choices}}
             <option 
                 {{#if checked}}

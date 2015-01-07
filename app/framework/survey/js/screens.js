@@ -8,11 +8,11 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
-define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','jqmobile','handlebarsHelpers', 'translations'], 
-function(screenTypes,  opendatakit,  controller,  Backbone,  $,       _,           Handlebars, _jqmobile, _hh, translations) {
+define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers', 'translations'], 
+function(screenTypes,  opendatakit,  controller,  Backbone,  $,       _,           Handlebars, _hh, translations) {
 verifyLoad('screens',
-    ['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','jqmobile','handlebarsHelpers', 'translations'],
-    [screenTypes,   opendatakit,  controller,  Backbone,  $,       _,           Handlebars,  _jqmobile, _hh, translations]);
+    ['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers', 'translations'],
+    [screenTypes,   opendatakit,  controller,  Backbone,  $,       _,           Handlebars,  _hh, translations]);
 
 screenTypes.base = Backbone.View.extend({
     /**
@@ -352,6 +352,7 @@ screenTypes.waiting = screenTypes.base.extend({
             that.$el.attr('data-theme', that._renderContext.dataTheme);
             that.$el.attr('data-content-theme', that._renderContext.dataTheme);
             that.$el.attr('data-role','page');
+            that.$el.attr('class','odk-page');
         } catch(e) {
             console.error("screens." + that.type + ".render.exception: " +
                             String(e) + ' px: ' + that.promptIdx);
@@ -374,6 +375,7 @@ screenTypes.screen = screenTypes.base.extend({
             that.$el.attr('data-theme', that._renderContext.dataTheme);
             that.$el.attr('data-content-theme', that._renderContext.dataTheme);
             that.$el.attr('data-role','page');
+            that.$el.attr('class','odk-page');
         } catch(e) {
             console.error("screens." + that.type + ".render.exception: " +
                             String(e) + ' px: ' + that.promptIdx);
@@ -409,6 +411,7 @@ screenTypes.columns_2 = screenTypes.base.extend({
             that.$el.attr('data-theme', that._renderContext.dataTheme);
             that.$el.attr('data-content-theme', that._renderContext.dataTheme);
             that.$el.attr('data-role','page');
+            that.$el.attr('class','odk-page');
         } catch(e) {
             console.error("screens." + that.type + ".render.exception: " +
                             String(e) + ' px: ' + that.promptIdx);
@@ -418,9 +421,9 @@ screenTypes.columns_2 = screenTypes.base.extend({
         var $container = that.$('.odk-container');
 
         // Create columns
-        var grid = $('<div class="ui-grid-a">');
-        var col_a = $('<div class="ui-block-a">');
-        var col_b = $('<div class="ui-block-b">');
+        var grid = $('<div class="row">');
+        var col_a = $('<div class="col-xs-6">');
+        var col_b = $('<div class="col-xs-6">');
 
         $.each(that.activePrompts, function(idx, prompt){
             prompt._render();
@@ -467,6 +470,7 @@ screenTypes.custom = screenTypes.base.extend({
             that.$el.attr('data-theme', that._renderContext.dataTheme);
             that.$el.attr('data-content-theme', that._renderContext.dataTheme);
             that.$el.attr('data-role','page');
+            that.$el.attr('class','odk-page');
         } catch(e) {
             console.error("screens." + that.type + ".render.exception: " +
                             String(e) + ' px: ' + that.promptIdx);

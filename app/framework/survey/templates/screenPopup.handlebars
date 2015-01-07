@@ -1,4 +1,16 @@
-<div data-role="popup" data-theme="b" data-overlay-theme="a" id="screenPopup" data-dismissible="false">
-	<h3>{{{localize message}}}</h3>
-	<button data-theme="b" id="ok-btn">OK</button>
-</div>
+
+<div class="modal" id="screenPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="screenPopupLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3 style="margin:0">{{{localize message}}}</h3>
+                <div class="btn-group-vertical" style="width:100%">
+                    <button type="button" class="btn btn-default close"
+                        data-dismiss="modal">OK
+                    </button>
+                </div>
+            </div>
+        </div><!-- .modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  

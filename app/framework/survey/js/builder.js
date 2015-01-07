@@ -296,15 +296,11 @@ verifyLoad('builder',
                     //predefined theme specified in the settings sheet, use that.
                     var url = null;
                     var theme = opendatakit.getSettingObject(surveyJson, "theme");
-                    if ( theme === null || theme.value == null ) {
-                        var jqmVersion = window.$.mobile.version;
-                        theme = 'jquery.mobile-' + jqmVersion + '.min';
-                        url = requirejs.toUrl('libs/jquery.mobile-' + jqmVersion + '/' + theme + '.css');
-                    } else {
+                    if ( theme !== null && theme.value != null ) {
                         theme = theme.value;
                         url = requirejs.toUrl('../assets/css/' + theme + '.css');
+						$('#theme').attr('href', url);
                     }
-                    $('#theme').attr('href', url);
                     var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
                     if ( fontSize !== null && fontSize.value != null) {
                         $('body').css("font-size", fontSize.value);

@@ -1,7 +1,18 @@
-<div data-role="popup" id="confirmationPopup" data-overlay-theme="a" data-theme="b" data-dismissible="false">
-    <h3>{{{localize message}}}</h3>
-    <fieldset class="ui-grid-a">
-	    <div class="ui-block-a"><button data-theme="b" id="yes-btn" data-inline="true">YES</button></div>
-	    <div class="ui-block-b"><button data-theme="b" id="no-btn" data-inline="true">NO</button></div>	   
-    </fieldset>
-</div>
+<div class="modal" id="confirmationPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="confirmationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3 style="margin:0">{{{localize message}}}</h3>
+                <div class="btn-group-vertical" style="width:100%">
+                    <button type="button" class="btn btn-default" id="yes-btn"
+                        data-dismiss="modal">YES
+                    </button>
+                    <button type="button" class="btn btn-default" id="no-btn"
+                        data-dismiss="modal">NO
+                    </button>
+                </div>
+            </div>
+        </div><!-- .modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  

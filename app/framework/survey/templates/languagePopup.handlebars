@@ -1,7 +1,16 @@
-<div data-role="popup" data-theme="a" data-overlay-theme="a" id="languagePopup">
-	<ul data-role="listview" data-inset="true" data-theme="a">
-		{{#each locales}}
-			<li><a id="{{name}}" class="language" data-rel="popup">{{localize display.text}}</a></li>
-		{{/each}}
-	</ul>
+<div class="modal" id="languagePopup" tabindex="-1" role="dialog" 
+        aria-labelledby="languageModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="btn-group-vertical" style="display:block;">
+                    {{#each locales}}
+                        <a href="#" id="{{name}}" class="language btn btn-default" role="button" > 
+                            {{localize display.text}}
+                        </a>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

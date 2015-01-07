@@ -5,13 +5,10 @@
     <!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OpenDataKit Common Javascript Framework</title>
-    <link rel="stylesheet" type="text/css" id="theme" href="libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" />
-    <link rel="stylesheet" type="text/css" href="libs/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/css/odk-survey.css" />
-    <link rel="stylesheet" type="text/css" href="libs/mobiscroll-2.5.4/css/mobiscroll.core.css" />
-    <link rel="stylesheet" type="text/css" href="libs/mobiscroll-2.5.4/css/mobiscroll.animation.css" />
-    <link rel="stylesheet" type="text/css" href="libs/mobiscroll-2.5.4/css/mobiscroll.jqm.css" />
     <link rel="stylesheet" type="text/css" id="custom-styles" />
+    <link rel="stylesheet" type="text/css" id="theme" href="libs\bootstrap-3.1.1-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/odk-survey.css" />
+    <link rel="stylesheet" type="text/css" id="theme" href="libs\spinner/waitMe.css" />
     <script type="text/javascript" src="survey/js/dbif.js"></script>
     <script type="text/javascript" src="survey/js/shim.js"></script>
     <script type="text/javascript" src="survey/js/landing.js"></script>
@@ -19,13 +16,13 @@
 </head>
 <body>
 <div id="block-ui"></div>
-<div data-theme="a" data-content-theme="a" data-role="page">
+<div class="odk-page">
 <div class="odk-screen">
 	<div class="odk-toolbar"></div>
-	<div data-role="content" class="odk-scroll">
+	<div class="odk-scroll">
 		<div class="odk-container">Please wait...</div>
 	</div>
-	<div data-role="footer" class="odk-footer"></div>
+	<div class="odk-footer"></div>
 </div>
 </div>
 <!-- move load of main.js to body since it is now dependent on shim.js having been loaded -->
