@@ -76,7 +76,7 @@ function getCurrentFileLocation() {
  * object.
  */
 if (!window.control) {
-    
+
     var importSynchronous = function(script) {
         // script is appName-relative -- need to prepend the appName.
         
@@ -90,7 +90,7 @@ if (!window.control) {
         var parts = path.split('/');
         // IMPORTANT: ajax doesn't like the explicit 
         // scheme and hostname. Drop those, and just
-        // specify an absolute URL (starting with /).
+        // specify a URL (starting with /).
         var urlScript = '/' + parts[0] + '/' + script;
         
         // get the script body
@@ -342,7 +342,7 @@ if (!window.control) {
         // Now we need to get the object.
         var newTableData = window.__getTableData();
         $.ajax({
-            url: pub.getFileAsUrl('output/debug/' + tableId + '_data.json'),
+            url: pub.getFileAsUrl('../app/output/debug/' + tableId + '_data.json'),
             success: function(dataObj) {
                 newTableData.setBackingObject(dataObj);
             },
@@ -472,7 +472,7 @@ if (!window.control) {
     // Now we also need to set the backing object we are going to use. We
     // assume it is in the output/debug directory.
     $.ajax({
-        url: pub.getFileAsUrl('output/debug/control.json'),
+        url: pub.getFileAsUrl('../app/output/debug/control.json'),
         success: function(data) {
             var controlObject = data;
             pub.setBackingObject(controlObject);
