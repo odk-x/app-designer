@@ -1806,7 +1806,7 @@ promptTypes.media = promptTypes.base.extend({
         var that = this;
         var mediaUri = that.getValue();
         var uriFragment = (mediaUri != null && mediaUri.uriFragment != null) ? mediaUri.uriFragment : null;
-        var uri = (uriFragment == null) ? null : opendatakit.getUriFromRowPath(uriFragment);
+        var uri = (uriFragment == null) ? null : opendatakit.getUriFromRowpath(uriFragment);
         var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
         var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
         var platinfo = opendatakit.getPlatformInfo();
