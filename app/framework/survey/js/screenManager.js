@@ -343,6 +343,9 @@ return Backbone.View.extend({
                 }}));
     },
     showContents: function(evt) {
+        $( "#optionsPopup" ).modal( "hide" );
+        evt.stopPropagation();
+        evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt);
         ctxt.log('D','screenManager.showContents', 

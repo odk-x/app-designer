@@ -3,11 +3,11 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'datetimepicker','translations', 'handlebarsHelpers'],
-function(database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            datetimepicker,  translations,   _hh) {
+define(['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore','translations','handlebarsHelpers','datetimepicker'],
+function(database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           translations,   _hh) {
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore','datetimepicker','translations', 'handlebarsHelpers'],
-    [ database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           datetimepicker,  translations,   _hh]);
+    ['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore','translations', 'handlebarsHelpers','datetimepicker'],
+    [ database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           translations,   _hh,           $.fn.datetimepicker]);
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -1557,7 +1557,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         //mode: 'scroll'
     }, */
     events: {
-        "change input": "modification",
+        "dp.hide": "modification",
         "swipeleft input": "stopPropagation",
         "swiperight input": "stopPropagation"
     },
@@ -1582,10 +1582,10 @@ promptTypes.datetime = promptTypes.input_type.extend({
     },
     configureRenderContext: function(ctxt) {
         var that = this;
-        var renderContext = this.renderContext;
+        var renderContext = that.renderContext;
         if(this.detectNativeDatePicker()){
-            renderContext.inputAttributes.type = this.type;
-            this.usePicker = false;
+            renderContext.inputAttributes.type = that.type;
+            that.usePicker = false;
             ctxt.success();
         } else {
             /* $.mobiscroll.themes.jqm.defaults = {
@@ -1606,13 +1606,18 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 $('.dwo').css("background-color", "white");
                 $('.dwo').css("opacity", ".5");
             }; */
+            var dateValue = that.getValue();
+            if (dateValue !== undefined && dateValue !== null) {
+                renderContext.value = moment(dateValue).format("MM/DD/YYYY h:mm A");
+            }
             ctxt.success();
         }
     },
     modification: function(evt) {
         var that = this;
         if ( !that.insideAfterRender ) {
-            var value = that.$('input').datetimepicker('getDate'); 
+            var date_value = that.$('input').data("DateTimePicker").getDate()
+            var value = date_value.toDate(); 
             var ref = that.getValue();  
             var rerender = ((ref == null || value == null) && (ref != value )) ||
                     (ref != null && value != null && ref.valueOf() != value.valueOf());
@@ -1654,14 +1659,17 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 that.$('input').mobiscroll('setDate',value, true); 
             }
             that.insideAfterRender = false; */
-            that.$('input').datetimepicker({useCurrent: false});
+            that.$('input').datetimepicker();
             var value = that.getValue();      
             that.insideAfterRender = true;
-            if ( value === undefined || value === null ) {
-                that.$('input').datetimepicker('setDate', new Date()); 
-            } else {
-                that.$('input').datetimepicker('setDate', value); 
-            }
+            /*var dtp = that.$('input').data("DateTimePicker");
+            if (dtp === undefined || dtp === null) {
+                if ( value === undefined || value === null ) {
+                    that.$('input').datetimepicker({useCurrent:true});
+                } else {
+                    that.$('input').datetimepicker({useCurrent:true});
+                }
+            }*/
             that.insideAfterRender = false;
         }
     },
@@ -1854,7 +1862,7 @@ promptTypes.media = promptTypes.base.extend({
         var that = this;
         var mediaUri = that.getValue();
         var uriFragment = (mediaUri != null && mediaUri.uriFragment != null) ? mediaUri.uriFragment : null;
-        var uri = (uriFragment == null) ? null : opendatakit.getUriFromRowPath(uriFragment);
+        var uri = (uriFragment == null) ? null : opendatakit.getUriFromRowpath(uriFragment);
         var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
         var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
         var platinfo = opendatakit.getPlatformInfo();

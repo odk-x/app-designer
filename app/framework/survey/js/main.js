@@ -59,10 +59,12 @@ requirejs.config({
         'moment': {
             deps: [],
         },
-        'datetimepicker': {                      
-            deps: ['jquery', 'bootstrap', 'moment'],
-            exports: '$.fn.datetimepicker'
-        },
+        // datetimepicker already uses requirejs if it
+        // is available so it doesn't need to be shimmed
+        //'datetimepicker': {                      
+        //    deps: ['jquery', 'bootstrap', 'moment'],
+        //    exports: '$.fn.datetimepicker'
+        //},
         'spinner': {                      
             deps: ['jquery'],
             exports: '$.fn.waitMe'
@@ -129,18 +131,24 @@ require(['jquery'],
             ['jquery'],
             [$]);
 
-  
         shim.log('I','main.require.jquery.loaded establish mobileinit action');
+
+        require(['bootstrap','moment'], 
+            function(bootstrap, moment) {
+                verifyLoad('main.require.bootstrap.moment',
+                    ['bootstrap','moment'],
+                    [bootstrap,   moment]);
+                shim.log('I','main.require.bootstrap.moment.loaded establish mobileinit action');
                 
             // and launch the framework...
-            require(['bootstrap', 'moment', 'datetimepicker', 'spinner', 'opendatakit', 'database','parsequery',
-                            'builder', 'controller', 'd3', 'jqueryCsv'], 
-            function( bootstrap,   moment,   datetimepicker,   spinner,   opendatakit,   database,  parsequery,
+            require([ 'spinner', 'opendatakit', 'database', 'parsequery',
+                            'builder', 'controller', 'd3', 'jqueryCsv', 'datetimepicker'], 
+            function(spinner,   opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
-                    ['bootstrap', 'moment', 'datetimepicker', 'spinner', 'opendatakit', 'database','parsequery',
+                    ['datetimepicker', 'spinner', 'opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'],
-                    [ bootstrap,   moment,   datetimepicker,   spinner,   opendatakit,   database,  parsequery,
+                    [ $.fn.datetimepicker,   spinner,   opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv]);
 
                 
@@ -211,6 +219,9 @@ require(['jquery'],
             }, function(err) {
                 shim.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
             });
+    }, function(err) {
+        shim.log('E','main.require.bootstrap.moment.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+    });
 
 }, function(err) {
     shim.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());

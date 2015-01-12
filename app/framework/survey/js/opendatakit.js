@@ -6,6 +6,7 @@
  * provide useful parsing or interpretation of localization details.
  *
  */
+
 define(['underscore', 'XRegExp'],function(_,XRegExp) {
 verifyLoad('opendatakit',
     ['underscore', 'XRegExp'],
