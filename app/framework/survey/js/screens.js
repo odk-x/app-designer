@@ -349,9 +349,9 @@ screenTypes.waiting = screenTypes.base.extend({
         try {
             var tmplt = that.template(that._renderContext);
             that.$el.html(tmplt);
-            that.$el.attr('data-theme', that._renderContext.dataTheme);
-            that.$el.attr('data-content-theme', that._renderContext.dataTheme);
-            that.$el.attr('data-role','page');
+            //that.$el.attr('data-theme', that._renderContext.dataTheme);
+            //that.$el.attr('data-content-theme', that._renderContext.dataTheme);
+            //that.$el.attr('data-role','page');
             that.$el.attr('class','odk-page');
         } catch(e) {
             console.error("screens." + that.type + ".render.exception: " +
@@ -372,9 +372,9 @@ screenTypes.screen = screenTypes.base.extend({
         try {
             var tmplt = that.template(that._renderContext);
             that.$el.html(tmplt);
-            that.$el.attr('data-theme', that._renderContext.dataTheme);
-            that.$el.attr('data-content-theme', that._renderContext.dataTheme);
-            that.$el.attr('data-role','page');
+            //that.$el.attr('data-theme', that._renderContext.dataTheme);
+            //that.$el.attr('data-content-theme', that._renderContext.dataTheme);
+            //that.$el.attr('data-role','page');
             that.$el.attr('class','odk-page');
         } catch(e) {
             console.error("screens." + that.type + ".render.exception: " +
