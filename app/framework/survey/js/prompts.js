@@ -558,7 +558,7 @@ promptTypes.instances = promptTypes.base.extend({
       evt.stopPropagation(true);
       evt.stopImmediatePropagation();
       ctxt.log('D',"prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
-      this.controller.openInstance(ctxt, $(evt.target).attr('id'));
+      this.controller.openInstance(ctxt, $(evt.currentTarget).attr('id'));
     },
     deleteInstance: function(evt){
         var that = this;
@@ -570,7 +570,7 @@ promptTypes.instances = promptTypes.base.extend({
         database.delete_linked_instance_all($.extend({}, ctxt, {success: function() {
                 that.reRender(ctxt);
             }}),
-        model.table_id, $(evt.target).attr('id'));
+        model.table_id, $(evt.currentTarget).attr('id'));
     }
 });
 promptTypes.contents = promptTypes.base.extend({
