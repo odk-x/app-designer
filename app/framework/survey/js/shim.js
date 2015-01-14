@@ -1,3 +1,63 @@
+/**
+ * The shim object is something we use to mock out some functionality for
+ * testing in the browser. See the `window.shim` definition below for more
+ * information.
+ */
+
+/**
+ * Compute and return the base URI for this machine. This will allow the code
+ * to function independently of the host name.
+ * 
+ * Returns a string representing the base uri in the format:
+ * http://DOMAIN/DIRS/. Note the trailing slash.
+ */
+function computeBaseUri() {
+  // To compute this we are going to rely on the location of the containing
+  // file relative to the location we are serving as are root. If this is
+  // changed, this file must be updated appropriately.
+  // Since we are expecting this file to live in app/framework/survey/js/, we
+  // can look for the first occurrence and take everything before it.
+
+  var expectedFileLocation = 'framework/survey/js/shim.js';
+
+  var fileLocation = getCurrentFileLocation();
+
+  var indexToFile = fileLocation.indexOf(expectedFileLocation);
+
+  var result = fileLocation.substring(0, indexToFile);
+
+  return result;
+
+}
+
+/**
+ * Return the location of the currently executing file.
+ */
+function getCurrentFileLocation() {
+  // We need to get the location of the currently
+  // executing file. This is not readily exposed, and it is not as simple as
+  // finding the current script tag, since callers might be loading the file
+  // using RequireJS or some other loading library. We're going to instead
+  // pull the file location out of a stack trace.
+  var error = new Error();
+  var stack = error.stack;
+  
+  // We expect the stack to look something like:
+  // TypeError: undefined is not a function
+  //     at Object.window.shim.window.shim.getPlatformInfo
+  //     (http://homes.cs.washington.edu/~sudars/odk/survey-js-adaptr/app/framework/survey/js/shim.js:45:29)
+  //     blah blah blah
+  // So now we'll extract the file location. We'll do this by assuming that
+  // the location occurs in the first parentheses.
+  var openParen = stack.indexOf('(');
+  var closedParen = stack.indexOf(')');
+
+  var fileLocation = stack.substring(openParen + 1, closedParen);
+
+  return fileLocation;
+}
+
+
 /*
 This shim  object is just a facade for browser testing.
 It defines the interface that ODK Survey or other container apps 
@@ -37,7 +97,10 @@ window.shim = window.shim || {
     getPlatformInfo: function() {
         // container identifies the WebKit or browser context.
         // version should identify the capabilities of that context.
-        return '{"container":"Chrome","version":"21.0.1180.83 m","activeUser":"username:badger","baseUri":"http://localhost:8000/app/","formsUri":"content://org.opendatakit.common.android.provider.forms/","appName":"testing","logLevel":"' + this.logLevel + '"}';
+        
+        var baseUri = computeBaseUri();
+        console.log('computed base uri: ' + baseUri);
+        return '{"container":"Chrome","version":"21.0.1180.83 m","activeUser":"username:badger","baseUri":"' + baseUri + '","formsUri":"content://org.opendatakit.common.android.provider.forms/","appName":"testing","logLevel":"' + this.logLevel + '"}';
     },
     getDatabaseSettings: function() {
         // version identifies the database schema that the database layer should use.
