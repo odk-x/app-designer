@@ -540,3 +540,16 @@ Eventually we should make a jqm theme for this.
   top: 40%;
   right: 5%;
 }
+
+.contents-heading {
+    text-align:left;
+    overflow:hidden;
+    margin-right:50px;
+    font-weight:bold;
+}
+
+.contents-description {
+    text-align:left;
+    overflow:hidden;
+    margin-right:50px;
+}

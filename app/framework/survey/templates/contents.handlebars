@@ -4,14 +4,16 @@
         {{#unless hideInContents}}
             <a href="#" class="select-contents-item launch btn btn-default" role="button" label="{{_branch_label_enclosing_screen}}" style="padding:10px">
                 {{#if display.title}}
-                    <h4>{{#if display.title}}{{{localize display.title}}}{{/if}}</h4>
+                    <h4 class="contents-heading">{{#if display.title}}{{{localize display.title}}}{{/if}}</h4>
                 {{else}}
-                    <h4 style="font-weight:bold;text-align:left">
-                        {{{localize display.text}}}
-                    </h4>
+                    {{#if display.text}}
+                        <h4 class="contents-heading">
+                            {{{localize display.text}}}
+                        </h4>
+                    {{/if}}
                 {{/if}}
                 <span class="glyphicon glyphicon-chevron-right pull-right center-in-contents"></span> 
-                <p style="text-align:left">{{formattedValueForContentsDisplay}}</p>
+                <p class="contents-description">{{formattedValueForContentsDisplay}}</p>
             </a>
         {{/unless}}
     {{/each}}
