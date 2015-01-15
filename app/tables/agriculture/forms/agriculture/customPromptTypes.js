@@ -3,12 +3,12 @@ function(promptTypes, $,       _, opendatakit, database) {
 // custom functions are placed under 'window' to be visible in calculates...
 // note that you need to be careful about naming -- should probably go somewhere else?
 window.is_finalized = function() {
-	return ('COMPLETE' === database.getInstanceMetaDataValue('_savepoint_type'));
+    return ('COMPLETE' === database.getInstanceMetaDataValue('_savepoint_type'));
 };
 
 var async_assign = promptTypes.base.extend({
     type: "async_assign",
-	debug: false,
+    debug: false,
     valid: true,
     templatePath: '../tables/agriculture/forms/agriculture/templates/async_assign.handlebars',
     _cachedSelection: null,
@@ -36,7 +36,7 @@ var async_assign = promptTypes.base.extend({
             return null;
         }
     },
-	getLinkedFieldName: function() {
+    getLinkedFieldName: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         if ( queryDefn != null )
         {
@@ -45,9 +45,13 @@ var async_assign = promptTypes.base.extend({
             shim.log('E',"query definiton is null for " + this.type + " in getLinkedFieldName");
             return null;
         }
-	},
+    },
     getFormPath: function() {
-        return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
+        if ( this.getLinkedFormId() === "framework" ) {
+            return '../assets/'; 
+        } else {
+            return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
+        }
     },
     convertSelection: function(linkedMdl) {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
@@ -105,48 +109,48 @@ var async_assign = promptTypes.base.extend({
                     return that.choice_filter(instance);
                 });
                 instanceList = filteredInstanceList;
-				// get the value we are aggregating
-				var valueList = _.map(instanceList, function(instance) {
-				    return instance['display_field'];
-					});
-				// discard any nulls or undefineds
-				valueList = _.filter(valueList, function(value) {
-					return value !== null && value !== undefined;
-				});
-				
-				var aggValue;
-				if ( valueList.length === 0 ) {
-					// set aggValue to null
-					aggValue = null;
-					if ( that.type === "async_assign_total" ) {
-						aggValue = 0.0;
-					} else if ( that.type === "async_assign_count" ) {
-						aggValue = 0;
-					}
-				} else {
-					if ( that.type === "async_assign_max" ) {
-						aggValue = _.max(valueList);
-					} else if ( that.type === "async_assign_min" ) {
-						aggValue = _.min(valueList);
-					} else if ( that.type === "async_assign_avg" ) {
-						var sum = _.reduce(valueList, function(memo, value) { return memo + value; }, 0.0);
-						aggValue = sum / valueList.length;
-					} else if ( that.type === "async_assign_sum"  || that.type === "async_assign_total" ) {
-						var sum = _.reduce(valueList, function(memo, value) { return memo + value; }, 0.0);
-						aggValue = sum;
-					} else if ( that.type === "async_assign_count" ) {
-						aggValue = valueList.length;
-					} else {
-						ctxt.log('E',"prompts." + that.type + ".configureRenderContext.unrecognizedPromptType", "px: " + that.promptIdx);
-						aggValue = null;
-					}
-				}
+                // get the value we are aggregating
+                var valueList = _.map(instanceList, function(instance) {
+                    return instance['display_field'];
+                    });
+                // discard any nulls or undefineds
+                valueList = _.filter(valueList, function(value) {
+                    return value !== null && value !== undefined;
+                });
+                
+                var aggValue;
+                if ( valueList.length === 0 ) {
+                    // set aggValue to null
+                    aggValue = null;
+                    if ( that.type === "async_assign_total" ) {
+                        aggValue = 0.0;
+                    } else if ( that.type === "async_assign_count" ) {
+                        aggValue = 0;
+                    }
+                } else {
+                    if ( that.type === "async_assign_max" ) {
+                        aggValue = _.max(valueList);
+                    } else if ( that.type === "async_assign_min" ) {
+                        aggValue = _.min(valueList);
+                    } else if ( that.type === "async_assign_avg" ) {
+                        var sum = _.reduce(valueList, function(memo, value) { return memo + value; }, 0.0);
+                        aggValue = sum / valueList.length;
+                    } else if ( that.type === "async_assign_sum"  || that.type === "async_assign_total" ) {
+                        var sum = _.reduce(valueList, function(memo, value) { return memo + value; }, 0.0);
+                        aggValue = sum;
+                    } else if ( that.type === "async_assign_count" ) {
+                        aggValue = valueList.length;
+                    } else {
+                        ctxt.log('E',"prompts." + that.type + ".configureRenderContext.unrecognizedPromptType", "px: " + that.promptIdx);
+                        aggValue = null;
+                    }
+                }
 
-				that.setValueDeferredChange(aggValue);
-				that.renderContext.type = that.type;
-				that.renderContext.valueList = JSON.stringify(valueList);
-				that.renderContext.aggValue = (aggValue === null) ? "null" : ((aggValue === undefined) ? "undefined" : aggValue);
-				
+                that.setValueDeferredChange(aggValue);
+                that.renderContext.type = that.type;
+                that.renderContext.valueList = JSON.stringify(valueList);
+                that.renderContext.aggValue = (aggValue === null) ? "null" : ((aggValue === undefined) ? "undefined" : aggValue);
+                
                 ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances.success", "px: " + that.promptIdx + " instanceList: " + instanceList.length);
                 ctxt.success();
             }}), dbTableName, selString, selArgs, displayElementName, null);
@@ -158,26 +162,26 @@ return {
 "async_assign" : async_assign,
 "async_assign_max" : async_assign.extend({
     type: "async_assign_max",
-	datatype: "number"
+    datatype: "number"
 }),
 "async_assign_min" : async_assign.extend({
     type: "async_assign_min",
-	datatype: "number"
+    datatype: "number"
 }),
 "async_assign_avg" : async_assign.extend({
     type: "async_assign_avg",
-	datatype: "number"
+    datatype: "number"
 }),
 "async_assign_sum" : async_assign.extend({
     type: "async_assign_sum",
-	datatype: "number"
+    datatype: "number"
 }),
 "async_assign_total" : async_assign.extend({
     type: "async_assign_total",
-	datatype: "number"
+    datatype: "number"
 }),
 "async_assign_count" : async_assign.extend({
     type: "async_assign_count",
-	datatype: "integer"
+    datatype: "integer"
 })
 }});

@@ -1734,12 +1734,12 @@ exports.rootpath = 'http://localhost:8000';
 
 /**
  * Get the path to the framework's formDef.json file. Returns something like:
- * app/framework/formDef.json. Includes the file name and does not begin with
+ * app/assets/formDef.json. Includes the file name and does not begin with
  * a slash.
  */
 exports.getRelativePathToFrameworkFormDef = function() {
 
-    var result = 'app/framework/formDef.json';
+    var result = 'app/assets/formDef.json';
     return result;
 
 };

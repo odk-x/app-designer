@@ -630,7 +630,11 @@ promptTypes._linked_type = promptTypes.base.extend({
         }
     },
     getFormPath: function() {
-        return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
+        if ( this.getLinkedFormId() === "framework" ) {
+            return '../assets/'; 
+        } else {
+            return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
+        }
     },
     _linkedCachedModel: null,
     _linkedCachedInstanceName: null,

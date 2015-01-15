@@ -16,7 +16,7 @@
         "type": "user_branch",
         "values_list": "test_forms",
         "display": {
-          "text": "Choose a test form"
+          "text": "Choose a test form (there are many)"
         },
         "_row_num": 3
       },
@@ -963,7 +963,7 @@
             "type": "user_branch",
             "values_list": "test_forms",
             "display": {
-              "text": "Choose a test form"
+              "text": "Choose a test form (there are many)"
             },
             "_row_num": 3,
             "__rowNum__": 2,

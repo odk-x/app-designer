@@ -240,8 +240,8 @@ return {
         }
 
         if ( formPath == null ) {
-            // do the prompts and widget warmup form...
-            formPath = shim.getBaseUrl() + '/';
+            // do the user-configured framework form...
+            formPath = '../assets/';
             instanceId = null;
             screenPath = null;
         }
