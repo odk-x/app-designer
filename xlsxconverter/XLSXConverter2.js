@@ -243,6 +243,7 @@ var XLSXConverter = {};
         "object" : {"type":"object"}, // database primitive
         "array" : {"type":"array"}, // database primitive
         "text" : {"type":"string"},
+        "textarea" : {"type":"string"},
         "decimal" : {"type":"number"},
         "acknowledge" : {"type":"boolean"},
         "select_one" : {"type":"string"},
@@ -256,6 +257,7 @@ var XLSXConverter = {};
         "select_one_grid" : {"type":"string"},
         "select_one_inline" : {"type":"string"},
         "select_one_dropdown" : {"type":"string"},
+        "select_one_integer" : {"type":"integer"},
         "select_multiple_grid": {
             "type": "array",
             "items" : {
