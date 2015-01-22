@@ -1,0 +1,17 @@
+<div>
+    <label for="slider-{{promptId}}">{{> labelHint}}</label>
+    <div class="input-container">{{! used to prevent swiping on sliders}}
+    <textarea id="slider-{{promptId}}"
+        class="odk"
+        name="{{name}}"
+        value="{{value}}"
+        {{#eachProperty inputAttributes}}
+            {{property}}="{{value}}"
+        {{/eachProperty}}
+        {{#if disabled}}
+            style="background-color:lightgray;"
+            disabled="true"
+        {{/if}}
+    >{{value}}</textarea>
+</div>
+</div>

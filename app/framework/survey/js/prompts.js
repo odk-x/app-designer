@@ -1289,6 +1289,72 @@ promptTypes.select_one = promptTypes.select.extend({
         }
     }
 });
+promptTypes.select_one_integer = promptTypes.select_one.extend({
+    modification: function(evt) {
+        var ctxt = this.controller.newContext(evt);
+        ctxt.log('D',"prompts." + this.type + ".modification", "px: " + this.promptIdx + " val: " + $(evt.target).attr('value'));
+        var that = this;
+        if(this.withOther) {
+            //This hack is needed to prevent rerendering
+            //causing the other input to loose focus when clicked.
+            if( $(evt.target).val() === 'other' &&
+                $(evt.target).prop('checked') &&
+                //The next two lines determine if the checkbox was already checked.
+                this.renderContext.other &&
+                this.renderContext.other.checked) {
+                ctxt.log('D',"prompts." + this.type + ".modification.withOther.hack", "px: " + this.promptIdx);
+                ctxt.success();
+                return;
+            }
+        }
+        if(this.appearance === 'grid') {
+            //Make selection more reponsive by providing visual feedback before
+            //the template is re-rendered.
+            this.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
+            this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
+        }
+        var formValue = (this.$('form').serializeArray()); 
+        // cast all values in formValue to ints
+        for (var i = 0; i < formValue.length; i++) {
+            formValue[i].value = parseInt(formValue[i].value);
+        }
+        that.setValueDeferredChange(that.generateSaveValue(formValue));
+        that.updateRenderValue(formValue);
+        that.reRender(ctxt);
+    },
+    /**
+     * Parse a saved string value into the format
+     * returned by jQuery's serializeArray function.
+     */
+    parseSaveValue: function(savedValue){
+        //Note that this function expects to run after renderContext.choices
+        //has been initilized.
+        var valInChoices = false;
+        if(!_.isNumber(savedValue)) {
+            return null;
+        }
+        if(this.renderContext.choices) {
+            valInChoices = _.any(this.renderContext.choices, function(choice){
+                return (choice.data_value === savedValue);
+            });
+        }
+        if (valInChoices) {
+            return [{
+                "name": this.name,
+                "value": savedValue
+            }];
+        }
+        else {
+            return [{
+                "name": this.name,
+                "value": "other"
+            }, {
+                "name": "otherValue",
+                "value": savedValue
+            }];
+        }
+    }
+});
 //TODO:
 //Since multiple choices are possible should it be possible
 //to add arbitrary many other values to a select_with_other?
@@ -1491,6 +1557,22 @@ promptTypes.text = promptTypes.input_type.extend({
     type: "text",
     renderContext: {
         "type": "text"
+    }
+});
+promptTypes.textarea = promptTypes.input_type.extend({
+    type: "textarea",
+    templatePath: "templates/textarea.handlebars",
+    renderContext: {
+        "type": "textarea"
+    },
+    beforeMove: function() {
+        var that = this;
+        var isInvalid = that.setValueAndValidate(this.$('textarea').val());
+        if ( isInvalid ) {
+            return { message: that.invalid_value_message };
+        } else {
+            return null;
+        }
     }
 });
 promptTypes.integer = promptTypes.input_type.extend({
