@@ -272,6 +272,11 @@ return Backbone.View.extend({
                 }});
                 screen.render(screenRenderCtxt);
             }});
+
+        // In case there was a modal popup active before
+        // the drawing this screen get rid of the modal-backdrop
+        that.removeBootstrapModalBackdrop();
+
         screen.buildRenderContext(buildCtxt);
     },
     gotoNextScreen: function(evt) {
@@ -520,6 +525,10 @@ return Backbone.View.extend({
     hideSpinnerOverlay: function() {
         //window.$.mobile.loading( 'hide' );
         $('body').waitMe('hide');
+    },
+    removeBootstrapModalBackdrop: function() {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
     },
     removePreviousPageEl: function() {
         if( this.previousPageEl){
