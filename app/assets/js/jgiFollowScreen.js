@@ -1094,7 +1094,7 @@ function display() {
     });
 
     $('#next-button').on('click', function() {
-        console.log('clicked next');
+        console.log('clicked next');        
 
         //Check if we have a closest to focal checked
         var closestId = $('.closest-chimp').prop('id');
@@ -1127,6 +1127,8 @@ function display() {
 
         if ((noClosestOk == true) && (noneWithin5ok == true)) {
             // And now launch the next screen
+            document.getElementById("loading").style.visibility = 'visible'; // shows loading screen        
+            
             var nextTime = incrementTime(followTime);
 
             var queryString = util.getKeysToAppendToURL(

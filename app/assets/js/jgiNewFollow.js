@@ -29,6 +29,9 @@ function display() {
     };
 
     $('#begin-follow').on('click', function() {
+        document.getElementById("formsubmitbutton").style.display = "none"; // to undisplay
+        document.getElementById("buttonreplacement").style.display = ""; // to display 
+
         // First retrieve the information from the form.
         var date = $('#FOL_date').val();
         var focalChimpId = $('#FOL_B_AnimID').val().toLowerCase();
@@ -45,6 +48,7 @@ function display() {
             beginTime,
             researcher);
 
+
         // Now we'll launch the follow screen. The follow screen needs to know
         // what date we're on, as well as the time it should be using.
         var queryString = util.getKeysToAppendToURL(
@@ -55,5 +59,4 @@ function display() {
                 'assets/followScreen.html' + queryString);
         window.location.href = url;
     });
-
 }

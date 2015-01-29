@@ -30,7 +30,7 @@
 
     <body id="main">
     <!-- Here we'll just collect some data to about the follow we're about to
-    begin. -->
+    -. -->
     <div class="container">
     <div class="description-text" id="description">New Follow</div>
     <form>
@@ -92,7 +92,14 @@
 
       <!-- Note that this button cannot go inside the form. I should probably
       figure out why. -->
-      <button id="begin-follow" class="btn-launch btn btn-positive btn-block">Begin</button>
+      <div id="formsubmitbutton">
+      <button id="begin-follow" class="btn-launch btn btn-positive btn-block">Begin</button></div>
+
+
+    <div id="buttonreplacement" style="display:none;">
+    <img src="./img/loading.gif" alt="loading...">
+    </div>
+
   </div> <!-- .container -->
         <script type="text/javascript">
             // for date formation
@@ -111,5 +118,5 @@
             });
             $(display());
         </script>
-    </body>
+    </body>  
 </html>
