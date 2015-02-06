@@ -334,6 +334,8 @@ function makeReader(f) {
                 //console.log(jsonWorkbook);
                 var processedWorkbook = XLSXConverter.processJSONWorkbook(jsonWorkbook);
                 window.formDef = JSON.stringify(processedWorkbook, 2, 2);
+                // Add an extra new line character to make output consistent with script
+                window.formDef += '\n';
                 print_output(window.formDef);
                 _.each(XLSXConverter.getWarnings(), function(warning){
                     var warningEl = document.createElement("p");
