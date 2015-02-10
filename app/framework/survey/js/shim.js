@@ -434,49 +434,55 @@ window.shim = window.shim || {
         that.log("D","shim: DO: doAction(" + refId + ", " + promptPath + 
             ", " + internalPromptContext + ", " + action + ", ...)");
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
+		    /* this is a hack -- please don't rely on relative paths anywhere else! */
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/venice.jpg",' + 
+                    '{ "status": -1, "result": { "uriFragment": "../../../../framework/survey/test/venice.jpg",' + 
                                                     '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity' ) {
+		    /* this is a hack -- please don't rely on relative paths anywhere else! */
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/bali.3gp",' + 
+                    '{ "status": -1, "result": { "uriFragment": "../../../../framework/survey/test/bali.3gp",' + 
                                                     '"contentType": "video/3gp" } }' );
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity' ) {
+		    /* this is a hack -- please don't rely on relative paths anywhere else! */
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/raven.wav",' + 
+                    '{ "status": -1, "result": { "uriFragment": "../../../../framework/survey/test/raven.wav",' + 
                                                     '"contentType": "audio/wav" } }' );
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseImageActivity' ) {
+		    /* this is a hack -- please don't rely on relative paths anywhere else! */
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/venice.jpg",' + 
+                    '{ "status": -1, "result": { "uriFragment": "../../../../framework/survey/test/venice.jpg",' + 
                                                     '"contentType": "image/jpg" } }' );
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity' ) {
+		    /* this is a hack -- please don't rely on relative paths anywhere else! */
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/bali.3gp",' + 
+                    '{ "status": -1, "result": { "uriFragment": "../../../../framework/survey/test/bali.3gp",' + 
                                                     '"contentType": "video/3gp" } }' );
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity' ) {
+		    /* this is a hack -- please don't rely on relative paths anywhere else! */
             setTimeout(function() {
                 landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/raven.wav",' + 
+                    '{ "status": -1, "result": { "uriFragment": "../../../../framework/survey/test/raven.wav",' + 
                                                     '"contentType": "audio/wav" } }' );
             }, 100);
             return "OK";
