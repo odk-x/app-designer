@@ -33,7 +33,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 9
       },
       {
@@ -43,7 +43,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 10
       },
       {
@@ -53,7 +53,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 11
       },
       {
@@ -64,7 +64,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 12
       },
       {
@@ -74,7 +74,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 13
       },
       {
@@ -84,7 +84,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 14
       },
       {
@@ -94,7 +94,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 15
       },
       {
@@ -104,7 +104,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 16
       },
       {
@@ -114,7 +114,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 17
       },
       {
@@ -124,7 +124,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 18
       },
       {
@@ -134,7 +134,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 19
       },
       {
@@ -144,7 +144,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 20
       },
       {
@@ -154,7 +154,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 21
       },
       {
@@ -164,7 +164,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 22
       },
       {
@@ -174,7 +174,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 23
       },
       {
@@ -184,7 +184,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 24
       },
       {
@@ -194,7 +194,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 25
       }
     ],
@@ -529,8 +529,8 @@
         "values_list": "section2_other",
         "display": {
           "text": "Enter other info for specified person:",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 4
       }
@@ -548,8 +548,8 @@
         "values_list": "section3",
         "display": {
           "text": "Ask for members aged 5 years and above",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 3
       }
@@ -567,8 +567,8 @@
         "values_list": "section4",
         "display": {
           "text": "Ask all questions to all members of the house",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 3
       },
@@ -725,8 +725,8 @@
         "values_list": "section5",
         "display": {
           "text": "Ask for all house members who were reported as ever smoking",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "choice_filter": "_.contains(data('who_smoked'), choice_item.instance_id)",
         "_row_num": 13
@@ -966,8 +966,8 @@
         "values_list": "section91",
         "display": {
           "text": "Ask for all people listed as having received medical assistance",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "choice_filter": "_.contains(data('who_received_med_assistance'), choice_item.instance_id)",
         "_row_num": 6
@@ -1017,8 +1017,8 @@
         "values_list": "section91_p2",
         "display": {
           "text": "Ask for all people listed as having faced health problems",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "choice_filter": "_.contains(data('who_faced_health_problems'), choice_item.instance_id)",
         "_row_num": 13
@@ -1131,8 +1131,8 @@
         "values_list": "section93",
         "display": {
           "text": "Specify injury",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 32
       },
@@ -1147,8 +1147,8 @@
         "display": {
           "text": "For all members who report cooking or being located in the cooking space when the fire is lit.",
           "hint": "For individuals <10 or who are not present, an adult or caregiver can answer for them",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 34
       },
@@ -1662,7 +1662,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 9
       },
       "section2": {
@@ -1672,7 +1672,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 10
       },
       "section2_other": {
@@ -1682,7 +1682,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 11
       },
       "section3": {
@@ -1693,7 +1693,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 12
       },
       "section4": {
@@ -1703,7 +1703,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 13
       },
       "section5": {
@@ -1713,7 +1713,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 14
       },
       "section8": {
@@ -1723,7 +1723,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 15
       },
       "section8_p2": {
@@ -1733,7 +1733,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 16
       },
       "section8_p3": {
@@ -1743,7 +1743,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 17
       },
       "section8_p4": {
@@ -1753,7 +1753,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 18
       },
       "section8_p5": {
@@ -1763,7 +1763,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 19
       },
       "section91": {
@@ -1773,7 +1773,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 20
       },
       "section91_p2": {
@@ -1783,7 +1783,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 21
       },
       "section93": {
@@ -1793,7 +1793,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 22
       },
       "section93_p2": {
@@ -1803,7 +1803,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 23
       },
       "section94": {
@@ -1813,7 +1813,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 24
       },
       "section95": {
@@ -1823,7 +1823,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 25
       }
     },
@@ -1847,6 +1847,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "roster",
         "elementKey": "primary_cook"
       },
       "qa_cooking_1": {
@@ -1857,11 +1858,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "qa_cooking_1_items"
         },
+        "valuesList": "roster",
         "elementKey": "qa_cooking_1"
       },
       "qa_cooking_2": {
@@ -1872,11 +1873,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "qa_cooking_2_items"
         },
+        "valuesList": "roster",
         "elementKey": "qa_cooking_2"
       },
       "qa_food_expense_1": {
@@ -1887,11 +1888,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "qa_food_expense_1_items"
         },
+        "valuesList": "roster",
         "elementKey": "qa_food_expense_1"
       },
       "qa_food_expense_2": {
@@ -1902,11 +1903,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "qa_food_expense_2_items"
         },
+        "valuesList": "roster",
         "elementKey": "qa_food_expense_2"
       },
       "qa_fuel_1": {
@@ -1917,11 +1918,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "qa_fuel_1_items"
         },
+        "valuesList": "roster",
         "elementKey": "qa_fuel_1"
       },
       "qa_fuel_2": {
@@ -1932,11 +1933,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "qa_fuel_2_items"
         },
+        "valuesList": "roster",
         "elementKey": "qa_fuel_2"
       },
       "qa_fuel_purchase": {
@@ -1947,11 +1948,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "qa_fuel_purchase_items"
         },
+        "valuesList": "roster",
         "elementKey": "qa_fuel_purchase"
       },
       "ever_smoked": {
@@ -1962,6 +1963,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "ever_smoked"
       },
       "who_smoked": {
@@ -1972,11 +1974,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "who_smoked_items"
         },
+        "valuesList": "roster",
         "elementKey": "who_smoked"
       },
       "in_room_smoke": {
@@ -1987,6 +1989,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "in_room_smoke"
       },
       "who_in_room": {
@@ -1997,11 +2000,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "who_in_room_items"
         },
+        "valuesList": "roster",
         "elementKey": "who_in_room"
       },
       "spent_time_fuel_collection": {
@@ -2012,11 +2015,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "spent_time_fuel_collection_items"
         },
+        "valuesList": "roster",
         "elementKey": "spent_time_fuel_collection"
       },
       "fuel_sold": {
@@ -2027,6 +2030,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "fuel_sold"
       },
       "fuel_income": {
@@ -2047,11 +2051,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "made_fuel_purchases_items"
         },
+        "valuesList": "roster",
         "elementKey": "made_fuel_purchases"
       },
       "spent_time_transport_wood": {
@@ -2062,11 +2066,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "spent_time_transport_wood_items"
         },
+        "valuesList": "roster",
         "elementKey": "spent_time_transport_wood"
       },
       "spent_time_cooking": {
@@ -2077,11 +2081,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "spent_time_cooking_items"
         },
+        "valuesList": "roster",
         "elementKey": "spent_time_cooking"
       },
       "spent_time_collecting_water": {
@@ -2092,11 +2096,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "spent_time_collecting_water_items"
         },
+        "valuesList": "roster",
         "elementKey": "spent_time_collecting_water"
       },
       "received_medical_care": {
@@ -2107,6 +2111,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "received_medical_care"
       },
       "who_received_med_assistance": {
@@ -2117,11 +2122,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "who_received_med_assistance_items"
         },
+        "valuesList": "roster",
         "elementKey": "who_received_med_assistance"
       },
       "reasons_not": {
@@ -2132,6 +2137,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "reasons",
         "elementKey": "reasons_not"
       },
       "faced_health_problems": {
@@ -2142,6 +2148,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "faced_health_problems"
       },
       "who_faced_health_problems": {
@@ -2152,11 +2159,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "who_faced_health_problems_items"
         },
+        "valuesList": "roster",
         "elementKey": "who_faced_health_problems"
       },
       "cooking_injuries": {
@@ -2167,6 +2174,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "cooking_injuries"
       },
       "cooking_injury_type": {
@@ -2177,11 +2185,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "cooking_injury_type_items"
         },
+        "valuesList": "cooking_injury_types",
         "elementKey": "cooking_injury_type"
       },
       "cooking_injury_severity": {
@@ -2192,6 +2200,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "severity",
         "elementKey": "cooking_injury_severity"
       },
       "burn_type": {
@@ -2202,11 +2211,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "burn_type_items"
         },
+        "valuesList": "burn_types",
         "elementKey": "burn_type"
       },
       "stove_type": {
@@ -2227,6 +2236,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "fuel_injuries"
       },
       "primary_languages": {
@@ -2237,11 +2247,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "primary_languages_items"
         },
+        "valuesList": "languages",
         "elementKey": "primary_languages"
       },
       "religions_practiced": {
@@ -2262,6 +2272,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "religion_affects_habits"
       },
       "fasting": {
@@ -2272,6 +2283,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "fasting"
       },
       "injera_eat": {
@@ -2282,6 +2294,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "injera_eat"
       },
       "injera_buy_bake": {
@@ -2292,6 +2305,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "buy_bake",
         "elementKey": "injera_buy_bake"
       },
       "celebrate_holiday": {
@@ -2302,6 +2316,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "celebrate_holiday"
       },
       "which_holiday": {
@@ -2322,6 +2337,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "cooking_commercial"
       },
       "produce_charcoal": {
@@ -2332,6 +2348,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_yes",
         "elementKey": "produce_charcoal"
       }
     },
@@ -2618,8 +2635,8 @@
             "values_list": "section2_other",
             "display": {
               "text": "Enter other info for specified person:",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -2711,8 +2728,8 @@
             "values_list": "section3",
             "display": {
               "text": "Ask for members aged 5 years and above",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -2797,8 +2814,8 @@
             "values_list": "section4",
             "display": {
               "text": "Ask all questions to all members of the house",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -3111,8 +3128,8 @@
             "values_list": "section5",
             "display": {
               "text": "Ask for all house members who were reported as ever smoking",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "choice_filter": "_.contains(data('who_smoked'), choice_item.instance_id)",
             "_row_num": 13,
@@ -3835,8 +3852,8 @@
             "values_list": "section91",
             "display": {
               "text": "Ask for all people listed as having received medical assistance",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "choice_filter": "_.contains(data('who_received_med_assistance'), choice_item.instance_id)",
             "_row_num": 6,
@@ -3893,8 +3910,8 @@
             "values_list": "section91_p2",
             "display": {
               "text": "Ask for all people listed as having faced health problems",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "choice_filter": "_.contains(data('who_faced_health_problems'), choice_item.instance_id)",
             "_row_num": 13,
@@ -4016,8 +4033,8 @@
             "values_list": "section93",
             "display": {
               "text": "Specify injury",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -4033,8 +4050,8 @@
             "display": {
               "text": "For all members who report cooking or being located in the cooking space when the fire is lit.",
               "hint": "For individuals <10 or who are not present, an adult or caregiver can answer for them",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 34,
             "__rowNum__": 33,

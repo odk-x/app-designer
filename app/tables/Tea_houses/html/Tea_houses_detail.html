@@ -3,13 +3,13 @@
 <!-- beninTeaHouses Detailed View -->
     <head>
         <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
         <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
     </head>
     <body>
         <script type="text/javascript" src="../js/Tea_houses_detail.js"></script>
-        <h1><span id="TITLE"></span></h1>
+        <h1><span id="TITLE" class="main-text"></span></h1>
         <!-- To query and link to the result, replace the placeholders and put the
         following around the <span></span> tags.
         <a href="#" onclick="control.openTable('TABLE_NAME', 'COL_NAME:' +
@@ -46,7 +46,12 @@
         <p>Owner: <span id="FIELD_14"></span></p>
         <p>Mobile number: <span id="FIELD_15"></span></p>
         </br>
-        <a href="#" onclick="control.openTable('Tea_inventory', 'House_id = ?', [data.get('House_id')]);"><span id="FIELD_16"></span> Teas</a>
+        <a href="#" onclick="control.openTableToListView(
+          'Tea_inventory',
+          'House_id = ?',
+          [data.get('House_id')],
+          'tables/Tea_inventory/html/Tea_inventory_list.html');">
+          <span id="FIELD_16" class="main-text"></span> Teas</a>
         
         <script>
             $(display());  // calls the detail display function when ready

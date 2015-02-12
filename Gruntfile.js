@@ -21,6 +21,52 @@ var mountDirectory = function(connect, dir) {
     );
 };
 
+var postHandler = function(req, res, next) {
+    if (req.method === 'POST') {
+        //debugger;
+
+        console.log('received a POST request');
+
+        var mkdirp = require('mkdirp');
+        var fs = require('fs');
+
+        // We don't want the leading /, or else the file system will think
+        // we're writing to root, which we don't have permission to. Should
+        // really be dealing with the path more gracefully.
+        var path = req.url.substring(1);
+        
+        // First make sure the directory exists, or else the following call to
+        // createWriteStream fails. We don't want to include the file name as
+        // part of the directory, or else our post will be trying to change the
+        // directory to become a file with content, which will fail.
+        var lastDelimiter = path.lastIndexOf('/');
+        if (lastDelimiter >= 0) {
+            var directories = path.substring(0, lastDelimiter);
+            mkdirp.sync(directories);
+        }
+
+        var file = fs.createWriteStream(path);
+        req.pipe(file);
+
+        file.on('error', function(err) {
+            res.write('error uploading the file');
+            res.write(JSON.stringify(err));
+            res.statusCode = 500;
+        });
+
+        req.on('end', function() {
+            res.write('uploaded file!');
+            res.end();
+        });
+
+    } else {
+        // We only want to hand this off to the other middleware if this
+        // is not a POST, as we're expecting to be the only ones to
+        // handle POSTs.
+        return next();
+    }
+};
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -70,7 +116,8 @@ module.exports = function (grunt) {
         outputDebugDir: 'output/debug',
         // The db path on the phone. %APP% should be replaced by app name
         deviceDbPath: '/sdcard/opendatakit/%APP%/metadata/webDb/' +
-            'http_localhost_8635/0000000000000001.db'
+            'http_localhost_8635/0000000000000001.db',
+        xlsxDir: 'xlsxconverter'
         
     };
 
@@ -81,7 +128,8 @@ module.exports = function (grunt) {
         appDir: 'app',
         appName: 'survey',
         // The mount point of the device. Should allow adb push/pull.
-        deviceMount: '/sdcard/opendatakit'
+        deviceMount: '/sdcard/opendatakit',
+        xlsxDir: 'xlsxconverter'
         
     };
 
@@ -121,7 +169,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= tables.appDir %>/*.html',
                     '<%= tables.appDir %>/framework/formDef.json',
-                    '<%= tables.appDir %>/tables/*/{forms,js,html}/**',
+                    '<%= tables.appDir %>/tables/*/{forms,js,html}/*/*.{json,css,js,handlebars}',
                     '<%= tables.appDir %>/styles/{,*/}*.css',
                     '<%= tables.appDir %>/scripts/{,*/}*.js',
 
@@ -150,6 +198,7 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
+                            postHandler,
                             lrSnippet,
                             mountFolder(connect, baseDirForServer),
                             mountDirectory(connect, baseDirForServer)
@@ -162,6 +211,7 @@ module.exports = function (grunt) {
                     port: 8001,
                     middleware: function (connect) {
                         return [
+                            postHandler,
                             lrSnippet,
                             mountFolder(connect, 'test'),
                             mountFolder(connect, baseDirForServer),
@@ -246,12 +296,34 @@ module.exports = function (grunt) {
 
     grunt.registerTask(
         'adbpush-tables-app',
-        'Push everything in the app directory to the device',
+        'Push everything in the app directory (except framework) to the device',
         function() {
-            var src = tablesConfig.appDir;
-            var dest = tablesConfig.deviceMount + '/' + tablesConfig.appName;
-            grunt.log.writeln('adb push ' + src + ' ' + dest);
-            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            // Do not push any framework or output files.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'.  
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!framework/**',
+				'!output/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
         });
 
     grunt.registerTask(
@@ -268,7 +340,8 @@ module.exports = function (grunt) {
                 {filter: 'isFile',
                  cwd: 'app' },
                 '**',
-                '!framework/survey/**');
+                '!framework/**',
+				'!output/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -341,6 +414,49 @@ module.exports = function (grunt) {
         });
 
     grunt.registerTask(
+        'adbpush-tables-demo-JGI',
+        'Push everything for tables JGI demo to the device',
+        function() {
+            // In the alpha demo we want Tables and Survey, so we need all the
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!tables/**',
+                'tables/follow/**',
+                'tables/follow_arrival/**',
+                'tables/follow_map_position/**',
+                'tables/follow_map_time/**',
+                'tables/food_bout/**',
+                'tables/groom_bout/**',
+                'tables/mating_event/**',
+                'tables/other_species/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+    grunt.registerTask(
         'adbpush-survey',
         'Push everything for survey to the device',
         function() {
@@ -354,7 +470,7 @@ module.exports = function (grunt) {
                 {filter: 'isFile',
                  cwd: 'app' },
                 '**',
-                '!framework/tables/**');
+                '!framework/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -369,6 +485,66 @@ module.exports = function (grunt) {
                 grunt.log.writeln('adb push ' + src + ' ' + dest);
                 grunt.task.run('exec:adbpush:' + src + ':' + dest);
             });
+
+        });
+
+    grunt.registerTask(
+        'adbpush-scan',
+        'Push only scan demo',
+        function() {
+            // In the beta demo we only want Survey, so we do NOT need all the tables
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                'assets/**',
+                '!framework/**',
+                '!output/**',
+                '!tables/**',
+                'tables/scan_childvacc_822_pg1/**',
+                'tables/scan_childvacc_822a_pg2/**',
+                'tables/scan_childvacc_825_pg3/**',
+                'tables/scan_childvacc_825_pg4/**',
+                'tables/scan_example/**',
+                'tables/scan_HIV_Patient_Record/**',
+                'tables/scan_HIV_Visit_Record/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+            // Change the tables.init to be applicable for scan
+            var srcTablesInit = 'app/assets/tables.init.scan';
+            var srcTablesIndex = 'app/assets/index_Scan.html';
+            var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/assets/';
+            grunt.log.writeln('adb push ' + srcTablesInit + ' ' + dest + 'tables.init');
+            grunt.task.run('exec:adbpush:' + srcTablesInit + ':' + dest + 'tables.init');
+
+            // Change the index.html to be applicable for scan
+            grunt.log.writeln('adb push ' + srcTablesIndex + ' ' + dest + 'index.html');
+            grunt.task.run('exec:adbpush:' + srcTablesIndex + ':' + dest + 'index.html');
 
         });
 
@@ -396,6 +572,230 @@ module.exports = function (grunt) {
                 'tables/household_member/**',
                 'tables/selects/**',
                 'tables/gridScreen/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.appDir + '/' + fileName;
+                var dest =
+                    surveyConfig.deviceMount +
+                    '/' +
+                    surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+    grunt.registerTask(
+        'adbpush-survey-demo-bmg05152014',
+        'Push everything for survey demo to the device',
+        function() {
+            // In the demo we only want Survey, so we do NOT need all the tables
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!framework/**',
+                '!tables/**',
+                'tables/household/**',
+                'tables/household_member/**',
+                'tables/selects/**',
+                'tables/gridScreen/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.appDir + '/' + fileName;
+                var dest =
+                    surveyConfig.deviceMount +
+                    '/' +
+                    surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+    grunt.registerTask(
+        'adbpush-survey-demo-bmg10092014',
+        'Push everything for survey demo to the device',
+        function() {
+            // In the demo we only want Survey, so we do NOT need all the tables
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            //
+            // For this demo selects had to be modified due to select_one_with_other
+            // and the media player not working for video
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!assets/**',
+                'assets/csv/**',
+                'assets/tables.init',
+                '!framework/**',
+                '!output/**',
+                '!tables/**',
+                'tables/plot/**',
+                'tables/visit/**',
+                'tables/selects_demo/**',
+                'tables/geotagger/**',
+                'tables/agriculture/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+    grunt.registerTask(
+        'adbpush-survey-demo-techCon2014',
+        'Push everything for survey demo to the device',
+        function() {
+            // In the demo we only want Survey, so we do NOT need all the tables
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            //
+            // For this demo selects had to be modified due to select_one_with_other
+            // and the media player not working for video
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!assets/**',
+                'assets/csv/**',
+                'assets/tables.init',
+                '!framework/**',
+                '!output/**',
+                '!tables/**',
+                'tables/plot/**',
+                'tables/visit/**',
+                'tables/selects_demo/**',
+                'tables/geotagger/**',
+                'tables/agriculture/**',
+                'tables/temperatureSensor/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+    grunt.registerTask(
+        'adbpush-survey-demo-beta3',
+        'Push everything for survey to the device',
+        function() {
+            // In the beta demo we only want Survey, so we do NOT need all the tables
+            // framework files. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!assets/**',
+                '!framework/**',
+                '!output/csv/**',
+                '!output/db/**',
+                '!output/debug/**',
+                '!tables/**',
+                'tables/exampleForm/**',
+                'tables/household/**',
+                'tables/household_member/**',
+                'tables/selects/**',
+                'tables/gridScreen/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = surveyConfig.appDir + '/' + fileName;
+                var dest =
+                    surveyConfig.deviceMount +
+                    '/' +
+                    surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+
+    grunt.registerTask(
+        'adbpush-survey-beta3-opendatakit-surveydemo',
+        'Push everything for the opendatakit-surveydemo.appspot.com site to the device',
+        function() {
+            // These are the files that are uploaded to the opendatakit-surveydemo
+			// appspot instance. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!assets/**',
+                '!framework/**',
+                '!output/csv/**',
+                '!output/db/**',
+                '!output/debug/**',
+                '!tables/**',
+                'tables/geoweather/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {

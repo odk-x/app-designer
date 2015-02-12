@@ -1,6 +1,6 @@
 /* global mocha, describe, it, chai */
 'use strict';
-$.getScript('/app/framework/tables/js/data.js',
+$.getScript('../app/framework/tables/js/data.js',
     function() {
 
         var data = window.data;

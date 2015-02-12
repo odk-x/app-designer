@@ -13,13 +13,33 @@
         var cw = document.getElementById('screen').contentWindow;
         cw.location = value;
   }
-  //]]>   
+  function autoResize(newBaseHeight){
+	var tabBodies = document.getElementsByClassName('content-tab');
+	var maxHeight = 0;
+	for ( var i = 0 ; i < tabBodies.length ; ++i ) {
+		var tabBody = tabBodies[i];
+		var height = tabBody.scrollHeight;
+		if ( maxHeight < height ) {
+			maxHeight = height;
+		}
+	}
+	if ( maxHeight < 1600 ) {
+		maxHeight = 1600;
+	}
+
+	if ( newBaseHeight > maxHeight + 3 ) {
+		console.log('resizing from ' + maxHeight + ' to new ' + (newBaseHeight + 3) );
+		$('.content-tab').height(newBaseHeight+3);
+	}
+  }
+//]]>   
   </script>
 <title>OpenDataKit Development Environment Homepage</title>
 </head>
 
 <body class="absolute">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
+  <div class="topversion">ODK 2.0 rev 126</div>
   <ul class="tabs">
     <li>
       <input type="radio" name="tabs" checked id="tab1"/>

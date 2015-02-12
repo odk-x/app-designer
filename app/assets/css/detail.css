@@ -1,29 +1,49 @@
 /* CSS Stylesheet - TBL_FACILITIES Detail View*/
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: arial;
+}
+
 fieldset {
-	border: 1px solid black;
-	margin:	6px;
-	padding: 4px;
+  border: 1px solid black;
+  margin:  6px;
+  padding: 4px;
+  width: 80%;
 }
 
 fieldset > p {
-	padding: 2px;
-	margin: 2px;
+  padding: 2px;
+  margin: 2px;
 }
 
 div {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 p {
-	padding: 0px;
-	margin: 0px;
+  padding: 0px;
+  margin: 0px;
+  color: black;
+}
+
+.main-text {
+  color: black;
+}
+
+span {
+  color: darkgray;
 }
 
 h3 { 
-	font-size: 15pt; 
-	margin: 2px;
+  font-size: 15pt; 
+  margin: 2px;
 }
 
 #picture {
-	text-align: center;
+  text-align: center;
 }

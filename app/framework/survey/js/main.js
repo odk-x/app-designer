@@ -15,7 +15,7 @@ requirejs.config({
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon 
-        jqmobile : 'libs/jquery.mobile-1.3.2/jquery.mobile-1.3.2',
+        jqmobile : 'libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2',
         jquery : 'libs/jquery.1.10.2',
         backbone : 'libs/backbone.1.0.0',
         handlebars : 'libs/handlebars.1.0.0.rc.4',
@@ -27,7 +27,6 @@ requirejs.config({
         templates : 'survey/templates',
         translations : 'translations',
         // top-level objects
-        mdl : 'survey/js/mdl',
         screenTypes : 'survey/js/screenTypes',
         promptTypes : 'survey/js/promptTypes',
         // shim.js -- stub directly loaded
@@ -45,8 +44,9 @@ requirejs.config({
         jqmConfig : 'survey/js/jqmConfig',
         handlebarsHelpers : 'survey/js/handlebarsHelpers',
         formulaFunctions : 'survey/js/formulaFunctions',
-        'jquery-csv' : 'libs/jquery-csv/src/jquery.csv',
-        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2013-08-27'
+        jqueryCsv : 'libs/jquery-csv/src/jquery.csv',
+        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2014-12-24',
+        d3 : 'libs/d3-amd/d3'
     },
     shim: {
         'jqmobile': {
@@ -81,10 +81,15 @@ requirejs.config({
         },
         'mobiscroll': {
             deps: ['jquery','jqmobile'],
-			exports: '$.mobiscroll',
+            exports: '$.mobiscroll'
         },
-        'jquery-csv' : {
-            deps: ['jquery']
+        'jqueryCsv' : {
+            deps: ['jquery'],
+            exports: '$.csv'
+        },
+        'd3' : {
+            deps: [],
+            exports: 'd3'
         }
     }
 });
@@ -94,7 +99,7 @@ requirejs.config({
  * re-draw of the current screen when returning from a linked table (sub-form).
  */
 function redrawHook() {
-	require('controller').redrawHook();
+    require('controller').redrawHook();
 }
 /**
  * Test to confirm that all required dependencies have
@@ -129,15 +134,15 @@ require(['jquery'],
         setTimeout( function() {
                 
             // and launch the framework...
-            require(['mdl','opendatakit', 'database','parsequery',
-                            'builder', 'controller'], 
-            function(   mdl,  opendatakit,   database,  parsequery,
-                             builder,   controller) {
+            require(['opendatakit', 'database','parsequery',
+                            'builder', 'controller', 'd3', 'jqueryCsv'], 
+            function( opendatakit,   database,  parsequery,
+                             builder,   controller, d3, jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
-                    ['mdl','opendatakit', 'database','parsequery',
-                            'builder', 'controller'],
-                    [ mdl,  opendatakit,   database,  parsequery,
-                             builder,   controller]);
+                    ['opendatakit', 'database','parsequery',
+                            'builder', 'controller', 'd3', 'jqueryCsv'],
+                    [ opendatakit,   database,  parsequery,
+                             builder,   controller, d3, jqueryCsv]);
 
                 
                 // define a function that waits until jquery mobile is initialized

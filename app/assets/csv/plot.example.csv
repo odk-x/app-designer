@@ -1,0 +1,6 @@
+_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,location_accuracy,location_altitude,location_latitude,location_longitude,planting,plot_name,_row_etag,_filter_type,_filter_value
+1,,default,COMPLETE,2014-04-02T04:32:47.070000000,anonymous,15,45,47.65824883,-122.3131459,bean,Rosario,,,
+2,,default,COMPLETE,2014-04-02T04:32:47.127000000,anonymous,10,23,47.64540379,-122.3363659,bean,Miraflores,,,
+3,,default,COMPLETE,2014-04-02T04:32:47.158000000,anonymous,5,50,47.68999464,-122.3554331,corn,Puerto Madero,,,
+4,,default,COMPLETE,2014-04-02T04:32:47.188000000,anonymous,7,22,47.65434975,-122.3049898,corn,Palermo,,,
+5,,default,COMPLETE,2014-04-02T04:32:47.225000000,anonymous,15,5,47.6611747,-122.3501364,cotton,La Boca,,,

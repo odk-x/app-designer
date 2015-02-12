@@ -37,10 +37,8 @@ function display() {
 
     // The latitude and longitude are stored in a single column as GeoPoint.
     // We need to extract the lat/lon from the GeoPoint.
-    var geopoint = data.get('GeoPoint');
-    var latLon = geopoint.split(',');
-    var lat = latLon[0];
-    var lon = latLon[1];
+    var lat = data.get('Location.latitude');
+    var lon = data.get('Location.longitude');
     $('#FIELD_8').text(lat);
     $('#FIELD_9').text(lon);
     $('#FIELD_17').text(data.get('House_id'));

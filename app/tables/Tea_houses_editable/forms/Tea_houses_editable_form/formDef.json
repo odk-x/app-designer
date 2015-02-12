@@ -67,32 +67,51 @@
         "_row_num": 11
       },
       {
-        "clause": "begin screen",
+        "type": "assign",
+        "name": "lat",
+        "calculation": "data('Location.latitude')",
         "_row_num": 12
       },
       {
-        "type": "decimal",
-        "name": "Latitude",
-        "display": {
-          "text": "Latitude to edit"
-        },
+        "type": "assign",
+        "name": "lon",
+        "calculation": "data('Location.longitude')",
         "_row_num": 13
       },
       {
-        "type": "decimal",
-        "name": "Longitude",
-        "display": {
-          "text": "Longitude to edit"
-        },
+        "clause": "begin screen",
         "_row_num": 14
       },
       {
-        "clause": "end screen",
+        "type": "decimal",
+        "name": "lat",
+        "display": {
+          "text": "Latitude to edit"
+        },
         "_row_num": 15
       },
       {
-        "clause": "begin screen",
+        "type": "decimal",
+        "name": "lon",
+        "display": {
+          "text": "Longitude to edit"
+        },
         "_row_num": 16
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 17
+      },
+      {
+        "type": "note",
+        "display": {
+          "text": "TODO: enable saving with <em>assign Location_latitude data('lat')</em> etc."
+        },
+        "_row_num": 18
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 19
       },
       {
         "type": "text",
@@ -100,7 +119,7 @@
         "display": {
           "text": "Id of Specialty Type of Tea"
         },
-        "_row_num": 17
+        "_row_num": 20
       },
       {
         "type": "integer",
@@ -108,7 +127,7 @@
         "display": {
           "text": "Customers"
         },
-        "_row_num": 18
+        "_row_num": 21
       },
       {
         "type": "integer",
@@ -116,7 +135,7 @@
         "display": {
           "text": "Visits"
         },
-        "_row_num": 19
+        "_row_num": 22
       },
       {
         "type": "select_one",
@@ -125,7 +144,7 @@
         "display": {
           "text": "Tea Available Iced"
         },
-        "_row_num": 20
+        "_row_num": 23
       },
       {
         "type": "select_one",
@@ -134,7 +153,7 @@
         "display": {
           "text": "Tea Available Hot"
         },
-        "_row_num": 21
+        "_row_num": 24
       },
       {
         "type": "select_one",
@@ -143,15 +162,15 @@
         "display": {
           "text": "WiFi Available"
         },
-        "_row_num": 22
+        "_row_num": 25
       },
       {
         "clause": "end screen",
-        "_row_num": 23
+        "_row_num": 26
       },
       {
         "clause": "begin screen",
-        "_row_num": 24
+        "_row_num": 27
       },
       {
         "type": "text",
@@ -159,7 +178,7 @@
         "display": {
           "text": "Owner"
         },
-        "_row_num": 25
+        "_row_num": 28
       },
       {
         "type": "integer",
@@ -167,7 +186,7 @@
         "display": {
           "text": "Phone Number"
         },
-        "_row_num": 26
+        "_row_num": 29
       },
       {
         "type": "date",
@@ -175,11 +194,11 @@
         "display": {
           "text": "Date Opened"
         },
-        "_row_num": 27
+        "_row_num": 30
       },
       {
         "clause": "end screen",
-        "_row_num": 28
+        "_row_num": 31
       }
     ],
     "choices": [
@@ -227,6 +246,29 @@
         "setting_name": "instance_name",
         "value": "Name",
         "_row_num": 6
+      }
+    ],
+    "model": [
+      {
+        "name": "Location",
+        "type": "geopoint",
+        "_row_num": 2
+      },
+      {
+        "name": "lat",
+        "type": "number",
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 3
+      },
+      {
+        "name": "lon",
+        "type": "number",
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 4
       }
     ]
   },
@@ -324,6 +366,78 @@
     "queries": {},
     "calculates": {},
     "model": {
+      "Location": {
+        "name": "geopoint",
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "Location_latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "Location_longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "Location_altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "Location_accuracy"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "Location"
+      },
+      "lat": {
+        "type": "number",
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "model": {
+          "isSessionVariable": true
+        },
+        "elementKey": "lat"
+      },
+      "lon": {
+        "type": "number",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "model": {
+          "isSessionVariable": true
+        },
+        "elementKey": "lon"
+      },
       "House_id": {
         "_defn": [
           {
@@ -384,30 +498,10 @@
         "type": "string",
         "elementKey": "Neighborhood"
       },
-      "Latitude": {
-        "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "survey"
-          }
-        ],
-        "type": "number",
-        "elementKey": "Latitude"
-      },
-      "Longitude": {
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "survey"
-          }
-        ],
-        "type": "number",
-        "elementKey": "Longitude"
-      },
       "Specialty_Type_id": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -417,7 +511,7 @@
       "Customers": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -427,7 +521,7 @@
       "Visits": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -437,37 +531,40 @@
       "Iced": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "Iced"
       },
       "Hot": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "Hot"
       },
       "WiFi": {
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "WiFi"
       },
       "Owner": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 28,
             "section_name": "survey"
           }
         ],
@@ -477,7 +574,7 @@
       "Phone_Number": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -487,7 +584,7 @@
       "Date_Opened": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -586,29 +683,41 @@
           },
           {
             "type": "decimal",
-            "name": "Latitude",
+            "name": "lat",
             "display": {
               "text": "Latitude to edit"
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 6
           },
           {
             "type": "decimal",
-            "name": "Longitude",
+            "name": "lon",
             "display": {
               "text": "Longitude to edit"
             },
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 7
+          },
+          {
+            "type": "note",
+            "display": {
+              "text": "TODO: enable saving with <em>assign Location_latitude data('lat')</em> etc."
+            },
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 8
           },
           {
             "type": "text",
@@ -616,12 +725,12 @@
             "display": {
               "text": "Id of Specialty Type of Tea"
             },
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 9
           },
           {
             "type": "integer",
@@ -629,12 +738,12 @@
             "display": {
               "text": "Customers"
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 10
           },
           {
             "type": "integer",
@@ -642,12 +751,12 @@
             "display": {
               "text": "Visits"
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 11
           },
           {
             "type": "select_one",
@@ -656,12 +765,12 @@
             "display": {
               "text": "Tea Available Iced"
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 12
           },
           {
             "type": "select_one",
@@ -670,12 +779,12 @@
             "display": {
               "text": "Tea Available Hot"
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 13
           },
           {
             "type": "select_one",
@@ -684,12 +793,12 @@
             "display": {
               "text": "WiFi Available"
             },
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 14
           },
           {
             "type": "text",
@@ -697,12 +806,12 @@
             "display": {
               "text": "Owner"
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 15
           },
           {
             "type": "integer",
@@ -710,12 +819,12 @@
             "display": {
               "text": "Phone Number"
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 16
           },
           {
             "type": "date",
@@ -723,20 +832,20 @@
             "display": {
               "text": "Date Opened"
             },
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 17
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 29,
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 17
+            "_row_num": 32,
+            "_branch_label_enclosing_screen": "survey/_screen32",
+            "promptIdx": 18
           }
         ],
         "validation_tag_map": {
@@ -772,78 +881,103 @@
             "operationIdx": 1
           },
           {
-            "clause": "begin screen",
+            "type": "assign",
+            "name": "lat",
+            "calculation": "data('Location.latitude')",
             "_row_num": 12,
             "__rowNum__": 11,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 15,
-              "__rowNum__": 14,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_token_type": "assign",
             "operationIdx": 2
           },
           {
-            "clause": "begin screen",
-            "_row_num": 16,
-            "__rowNum__": 15,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 23,
-              "__rowNum__": 22,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "type": "assign",
+            "name": "lon",
+            "calculation": "data('Location.longitude')",
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "assign",
             "operationIdx": 3
           },
           {
             "clause": "begin screen",
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 28,
-              "__rowNum__": 27,
+              "_row_num": 17,
+              "__rowNum__": 16,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
+          },
+          {
+            "_row_num": 18,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 26,
+              "__rowNum__": 25,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 31,
+              "__rowNum__": 30,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 29,
-            "operationIdx": 5
+            "_row_num": 32,
+            "operationIdx": 8
           },
           {
-            "_row_num": 29,
+            "_row_num": 32,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 9
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 29,
-            "operationIdx": 7
+            "_row_num": 32,
+            "operationIdx": 10
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "location": 1,
           "_screen6": 1,
-          "_screen12": 2,
-          "_screen16": 3,
-          "_screen24": 4,
-          "_contents": 6,
-          "_screen29": 6
+          "_screen14": 4,
+          "_screen18": 5,
+          "_screen19": 6,
+          "_screen27": 7,
+          "_contents": 9,
+          "_screen32": 9
         }
       },
       "initial": {

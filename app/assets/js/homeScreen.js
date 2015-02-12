@@ -15,7 +15,7 @@ function display() {
     viewHousesButton.on(
         'click',
         function() {
-            control.openTable('Tea_houses', null, null);
+            control.openTableToListView('Tea_houses', null, null, null);
         }
     );
     $('#wrapper').append(viewHousesButton);

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script type="text/javascript" src="js-xlsx/jszip.js"></script>
+<script type="text/javascript" src="js-xlsx/xlsx.js"></script>
+<script type="text/javascript" src="XRegExp-All-3.0.0-pre-2014-12-24.js"></script>
+<script type="text/javascript" src="underscore.js"></script>
+<script type="text/javascript" src="XLSXConverter2.js"></script>
+<script type="text/javascript">
+
+function convert(jsonStr) {
+var result = "";
+try {
+    var jsonObj = JSON.parse(jsonStr);
+    var processedWorkbook = XLSXConverter.processJSONWb(jsonObj);
+    result = JSON.stringify(processedWorkbook, 2, 2);
+} catch(e) {
+    result = result + "Exception ";
+    throw e;
+}
+
+window.MyHandler.setResult(result);
+}
+
+</script>

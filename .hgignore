@@ -3,3 +3,9 @@ syntax: glob
 app/output/db/*
 **/.DS_Store
 .DS_Store
+
+# opencsv lock files
+.~lock*
+
+# excel lock files
+~$*

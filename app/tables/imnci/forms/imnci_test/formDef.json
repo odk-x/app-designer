@@ -9477,12 +9477,12 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "basic_q_items"
         },
         "displayName": "Which symptoms does the child have?",
+        "valuesList": "basic_four_questions",
         "elementKey": "basic_q"
       },
       "anaemia_check": {
@@ -9493,6 +9493,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "no_some_severe",
         "elementKey": "anaemia_check"
       },
       "needed_vaccinations": {
@@ -9503,11 +9504,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "needed_vaccinations_items"
         },
+        "valuesList": "vaccinations",
         "elementKey": "needed_vaccinations"
       },
       "other_problems": {
@@ -9518,6 +9519,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "other_problems"
       },
       "refer_for_other_problems": {
@@ -9548,6 +9550,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "birthdayKnown"
       },
       "birthday": {
@@ -9600,6 +9603,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "visit_type",
         "elementKey": "visit_type"
       },
       "able_to_drink": {
@@ -9610,6 +9614,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "able_to_drink"
       },
       "vomit_everything": {
@@ -9620,6 +9625,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "vomit_everything"
       },
       "convulsions": {
@@ -9630,6 +9636,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "convulsions"
       },
       "lethargic": {
@@ -9640,6 +9647,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "lethargic"
       },
       "pulseox": {
@@ -9721,6 +9729,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "chest_indrawing"
       },
       "stridor": {
@@ -9731,6 +9740,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "stridor"
       },
       "diarrhoea_days": {
@@ -9751,6 +9761,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "blood_in_stool"
       },
       "restless": {
@@ -9761,6 +9772,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "restless"
       },
       "sunken_eyes": {
@@ -9771,6 +9783,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "sunken_eyes"
       },
       "drinking_poorly": {
@@ -9781,6 +9794,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "drinking_poorly"
       },
       "drinking_eagerly": {
@@ -9791,6 +9805,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "drinking_eagerly"
       },
       "skin_elasticity": {
@@ -9801,6 +9816,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "skin_elasticity",
         "elementKey": "skin_elasticity"
       },
       "axillary_temperature_possible": {
@@ -9811,6 +9827,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "axillary_temperature_possible"
       },
       "axillary_temperature": {
@@ -9831,6 +9848,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "feel_for_fever"
       },
       "fever_days": {
@@ -9851,6 +9869,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "fever_present_every_day"
       },
       "malaria_risk": {
@@ -9861,6 +9880,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "high_low",
         "elementKey": "malaria_risk"
       },
       "measles_three_month": {
@@ -9871,6 +9891,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "measles_three_month"
       },
       "stiff_neck": {
@@ -9881,6 +9902,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "stiff_neck"
       },
       "bulging_fontanelle": {
@@ -9891,6 +9913,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "bulging_fontanelle"
       },
       "rash_generalized": {
@@ -9901,6 +9924,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "rash_generalized"
       },
       "runny_nose": {
@@ -9911,6 +9935,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "runny_nose"
       },
       "red_eyes": {
@@ -9921,6 +9946,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "red_eyes"
       },
       "eye_pus": {
@@ -9931,6 +9957,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "eye_pus"
       },
       "cornea_clouding": {
@@ -9941,6 +9968,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "cornea_clouding"
       },
       "mouth_ulcers": {
@@ -9951,6 +9979,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "mouth_ulcers"
       },
       "mouth_ulcers_deep": {
@@ -9961,6 +9990,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "mouth_ulcers_deep"
       },
       "ear_pain": {
@@ -9971,6 +10001,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "ear_pain"
       },
       "ear_discharge_reported": {
@@ -9981,6 +10012,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "ear_discharge_reported"
       },
       "ear_discharge_days": {
@@ -10001,6 +10033,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "ear_discharge_observed"
       },
       "ear_swelling": {
@@ -10011,6 +10044,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "ear_swelling"
       },
       "wasting": {
@@ -10021,6 +10055,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "wasting"
       },
       "oedema": {
@@ -10031,6 +10066,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "present",
         "elementKey": "oedema"
       },
       "malnutrition_grade": {
@@ -10041,6 +10077,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "malnutrition_grade",
         "elementKey": "malnutrition_grade"
       },
       "acknowledge_severe_condition_referral_begin_red": {
@@ -10071,6 +10108,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "cotrimoxazole_type",
         "elementKey": "cotrimoxazole_type_red"
       },
       "acknowledge_give_cotrimoxazole_red": {
@@ -10143,6 +10181,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "going_to_hospital"
       },
       "acknowledge_keep_warm_on_way_red": {
@@ -10163,6 +10202,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "cotrimoxazole_type",
         "elementKey": "cotrimoxazole_type"
       },
       "acknowledge_give_cotrimoxazole": {
@@ -10195,11 +10235,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "given_vaccinations_items"
         },
+        "valuesList": "vaccinations",
         "elementKey": "given_vaccinations"
       },
       "acknowledge_give_gentian_violet": {
@@ -10220,6 +10260,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "tablet_syrup",
         "elementKey": "zinc_type"
       },
       "acknowledge_refer_for_assessment": {
@@ -10240,6 +10281,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "antimalarial",
         "elementKey": "antimalarial"
       },
       "acknowledge_continue_feeding": {
@@ -10260,6 +10302,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "breastfed"
       },
       "breastfeedings_per_day": {
@@ -10280,6 +10323,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "breastfed_at_night"
       },
       "takes_other_foods": {
@@ -10290,6 +10334,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "takes_other_foods"
       },
       "other_foods_types": {
@@ -10300,11 +10345,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "other_foods_types_items"
         },
+        "valuesList": "food",
         "elementKey": "other_foods_types"
       },
       "other_foods_per_day": {
@@ -10335,6 +10380,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "katori_teaspoon",
         "elementKey": "serving_unit"
       },
       "separate_serving": {
@@ -10345,6 +10391,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "separate_serving"
       },
       "who_feeds_how": {
@@ -10365,6 +10412,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "change_in_feeding"
       },
       "change_in_feeding_how": {
@@ -10415,6 +10463,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "cholera_in_area"
       },
       "acknowledge_give_doxycycline": {
@@ -10445,6 +10494,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yes_no",
         "elementKey": "leave_before_treatment_end"
       }
     },

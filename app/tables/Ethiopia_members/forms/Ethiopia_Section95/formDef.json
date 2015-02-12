@@ -751,7 +751,6 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"
@@ -943,7 +942,6 @@
       },
       "where_medical_attention": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "where_medical_attention_items"
@@ -1193,6 +1191,7 @@
       },
       "answering_self_95": {
         "type": "string",
+        "valuesList": "self",
         "_defn": [
           {
             "_row_num": 2,
@@ -1208,6 +1207,7 @@
       },
       "stuffy_nose": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 3,
@@ -1236,6 +1236,7 @@
       },
       "month_stuffy_nose": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 7,
@@ -1250,6 +1251,7 @@
       },
       "fever": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 9,
@@ -1278,6 +1280,7 @@
       },
       "month_fever": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 13,
@@ -1292,6 +1295,7 @@
       },
       "eye_problem": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 15,
@@ -1320,6 +1324,7 @@
       },
       "month_eye_problem": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 19,

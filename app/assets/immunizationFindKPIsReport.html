@@ -1,0 +1,163 @@
+<!--
+  It is a hardcoded bar chart for the child vaccination report. All the CSS and javascript for this
+  html page are here.
+  All the date are hard coded only for the purpose of the demo
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width" />
+    <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+    <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/ratchet.js"></script>
+    <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+  </head>
+  <!-- Styling the bar chart -->
+  <style>
+  #graph{
+    border: 2px solid steelblue;
+    border-radius: 25px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  .bar {
+    fill: steelblue;
+  }
+
+  .axis text {
+    font: 10px sans-serif;
+  }
+
+  .bar:hover {
+    fill: yellow;
+  }
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .x.axis path {
+    display: none;
+  }
+ 
+  p, div{
+    text-indent: 50px;
+  }
+  #chart{
+    color: green;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  p{
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .first {
+    color: green;
+  }
+  .second {
+    color: red;
+  }
+  .third {
+    color: orange;
+  }
+  </style>
+  <body id="main">
+    <div class="description-text" id="description">Monthly Coverage Rates Report 2014
+
+    </div>
+    <div id="graph" class="container">
+      <div>
+        <p>Children Vaccinated This Month: <span class="first">254</span> &uArr;</p>
+        <p>Lost This Month: <span class="second">42</span> &dArr;</p>
+        <p>Fully Vaccinated On Time: <span class="third">55%</span> &uArr;</p>
+      </div>
+      <p><span id ="chart">Fully Vaccinated by Month</p>
+      <svg class="chart"></svg>
+    </div>
+    <button id="go_home" class="btn-launch btn btn-positive btn-block">Home Page</button>
+  
+    <script type="text/javascript" src="../assets/libs/d3-amd/d3.js"></script>
+    <script>
+    var count = 3;
+    //dates are for x axis and values are for y axis
+    var data=[{"date":new Date(2014,09,3), "value": .35},
+            {"date":new Date(2014,09,4), "value": .39},
+            {"date":new Date(2014,09,5), "value": .42},   
+            {"date":new Date(2014,09,6), "value": .49},
+            {"date":new Date(2014,09,7), "value": .4}];
+    var margin = {top: 20, right: 30, bottom: 30, left: 40},
+        width = 300 - margin.left - margin.right,
+        height = 200 - margin.top - margin.bottom;
+    // X scale will fit all values from data within pixels [0, width] with
+    // padding .1
+    var x = d3.scale.ordinal()
+        .rangeRoundBands([0, width], .1);
+
+    // Y scale will fit all the values from data within pixels[height, 0]
+    var y = d3.scale.linear()
+        .range([height, 0]);
+
+    // format for the date on the x axis like 09-2014
+    var format = d3.time.format("%d-%Y");
+    // creating x axis
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(format);
+    // creating y axis
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(6, "%");
+    // Adding a SVG element with the desired dimensions and margin 
+    var chart = d3.select(".chart")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    
+    // specifying the dates from data[] are for x axis and the corresponding
+    // values are for y axis 
+    x.domain(data.map(function(d) { return d.date; }));
+   
+    //y.domain([0, d3.max(data)]);
+    y.domain([0, d3.max(data, function(d) { return d.value; })]);
+    // adding x axis
+    chart.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+    // adding y axis
+    chart.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+    // adding all the bars respectively with the required data
+    chart.selectAll(".bar")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.date); })
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); })
+        .attr("width", x.rangeBand());
+    // adding the click event to the Home Page button which will take the user to the home page relative to this page
+    $('#go_home').on('click', function() {
+        var url = control.getFileAsUrl('assets/immunizationDemo.html');
+        window.location.href = url;
+    });
+   </script>
+  </body>
+</html>

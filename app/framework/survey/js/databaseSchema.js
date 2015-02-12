@@ -1,15 +1,14 @@
 'use strict';
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
-define(['mdl','databaseUtils','opendatakit'], function(mdl, databaseUtils,opendatakit) {
+define(['databaseUtils','opendatakit'], function(databaseUtils,opendatakit) {
 verifyLoad('databaseSchema',
-    ['mdl','databaseUtils','opendatakit'],
-    [mdl,databaseUtils,opendatakit]);
+    ['databaseUtils','opendatakit'],
+    [ databaseUtils,  opendatakit]);
 return {
         // maps of:
         //   dbColumnName : { 
         //      type: databaseType, 
         //      isNotNullable: false/true, 
-        //      isUnitOfRetention: false/true,
         //      isSessionVariable: false/true,
         //      'default': defaultValue,
         //      elementPath: exposedName }
@@ -21,39 +20,38 @@ return {
         //
 dataTablePredefinedColumns: { 
                      // these have leading underscores because they are hidden from the user and not directly manipulable
-                     _id: {type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _row_etag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _sync_state: { type: 'string', isNotNullable: true, 'default': 'inserting', isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _conflict_type: { type: 'integer', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _savepoint_timestamp: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _savepoint_creator: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _savepoint_type: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _form_id: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' },
-                     _locale: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'instanceMetadata' } },
+                     _id: {type: 'string', isNotNullable: true, elementSet: 'instanceMetadata' },
+                     _row_etag: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _sync_state: { type: 'string', isNotNullable: true, 'default': 'new_row', elementSet: 'instanceMetadata' },
+                     _conflict_type: { type: 'integer', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _filter_type: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _filter_value: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _form_id: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _locale: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _savepoint_type: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _savepoint_timestamp: { type: 'string', isNotNullable: true, elementSet: 'instanceMetadata' },
+                     _savepoint_creator: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' } },
 tableDefinitionsPredefinedColumns: {
-                    _table_id: { type: 'string', isNotNullable: true, isUnitOfRetention: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
-                    _db_table_name: { type: 'string', isNotNullable: true, isUnitOfRetention: true, dbColumnConstraint: 'UNIQUE', elementPath: 'dbTableName', elementSet: 'tableMetadata' },
-                    _sync_tag: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementSet: 'tableMetadata' },
-                    _last_sync_time: { type: 'integer', isNotNullable: true, isUnitOfRetention: true, elementSet: 'tableMetadata' },
-                    _sync_state: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementSet: 'tableMetadata' },
-                    _transactioning: { type: 'integer', isNotNullable: true, isUnitOfRetention: true, elementSet: 'tableMetadata' } },
+                    _table_id: { type: 'string', isNotNullable: true, dbColumnConstraint: 'PRIMARY KEY', elementPath: 'table_id', elementSet: 'tableMetadata' },
+                    _schema_etag: { type: 'string', isNotNullable: false, elementSet: 'tableMetadata' },
+                    _last_data_etag: { type: 'string', isNotNullable: false, elementSet: 'tableMetadata' },
+                    _last_sync_time: { type: 'integer', isNotNullable: true, elementSet: 'tableMetadata' } },
 columnDefinitionsTableConstraint: 'PRIMARY KEY ( "_table_id", "_element_key" )',
 columnDefinitionsPredefinedColumns: {
-                    _table_id: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementPath: 'table_id', elementSet: 'columnMetadata' },
-                    _element_key: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementPath: 'elementKey', elementSet: 'columnMetadata' },
-                    _element_name: { type: 'string', isNotNullable: true, isUnitOfRetention: true, elementPath: 'elementName', elementSet: 'columnMetadata' },
-                    _element_type: { type: 'string', isNotNullable: false, isUnitOfRetention: true, elementPath: 'elementType', elementSet: 'columnMetadata' },
-                    _list_child_element_keys: { type: 'array', items: { type: 'string' }, isNotNullable: false, elementPath: 'listChildElementKeys', isUnitOfRetention: true, elementSet: 'columnMetadata' },
-                    _is_unit_of_retention: { type: 'boolean', isNotNullable: true, isUnitOfRetention: true, elementPath: 'isUnitOfRetention', elementSet: 'columnMetadata' } },
+                    _table_id: { type: 'string', isNotNullable: true, elementPath: 'table_id', elementSet: 'columnMetadata' },
+                    _element_key: { type: 'string', isNotNullable: true, elementPath: 'elementKey', elementSet: 'columnMetadata' },
+                    _element_name: { type: 'string', isNotNullable: true, elementPath: 'elementName', elementSet: 'columnMetadata' },
+                    _element_type: { type: 'string', isNotNullable: false, elementPath: 'elementType', elementSet: 'columnMetadata' },
+                    _list_child_element_keys: { type: 'array', items: { type: 'string' }, isNotNullable: false, elementPath: 'listChildElementKeys', elementSet: 'columnMetadata' } },
 // key value stores are fairly straightforward...
 keyValueStoreActiveTableConstraint: 'PRIMARY KEY ("_table_id", "_partition", "_aspect", "_key")',
 keyValueStoreActivePredefinedColumns: {
-                    _table_id: { type: 'string', isNotNullable: true, isUnitOfRetention: true },
-                    _partition: { type: 'string', isNotNullable: true, isUnitOfRetention: true },
-                    _aspect: { type: 'string', isNotNullable: true, isUnitOfRetention: true },
-                    _key: { type: 'string', isNotNullable: true, isUnitOfRetention: true },
-                    _type: { type: 'string', isNotNullable: false, isUnitOfRetention: true },
-                    _value: { type: 'string', isNotNullable: false, isUnitOfRetention: true } },
+                    _table_id: { type: 'string', isNotNullable: true },
+                    _partition: { type: 'string', isNotNullable: true },
+                    _aspect: { type: 'string', isNotNullable: true },
+                    _key: { type: 'string', isNotNullable: true },
+                    _type: { type: 'string', isNotNullable: false },
+                    _value: { type: 'string', isNotNullable: false } },
 _tableKeyValueStoreActiveAccessibleKeys: {
             // keys we are allowing the user to access from within Javascript
             // _partition: table
@@ -77,12 +75,13 @@ getAccessibleColumnKeyDefinition: function( key ) {
         return that._columnKeyValueStoreActiveAccessibleKeys[key];
     },
 createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
+        var that = this;
         // TODO: verify that dbTableName is not already in use...
         var createTableCmd = 'CREATE TABLE IF NOT EXISTS "' + dbTableName + '"(';
         var comma = '';
         for ( var dbColumnName in kvMap ) {
             var f = kvMap[dbColumnName];
-            if ( f.isUnitOfRetention && !f.isSessionVariable ) {
+            if ( databaseUtils.isUnitOfRetention(f) && !f.isSessionVariable ) {
                 createTableCmd += comma + dbColumnName + " ";
                 comma = ',';
                 if ( f.type === "string" ) {
@@ -96,6 +95,8 @@ createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
                 } else if ( f.type === "object" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else if ( f.type === "array" ) {
+                    createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
+                } else if ( f.type === "rowpath" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else {
                     throw new Error("unhandled type: " + f.type);
@@ -156,6 +157,7 @@ deleteEntireTableContentsTableStmt: function(dbTableName) {
  * Requires: No global dependencies
  */
 insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, instanceId, kvMap) {
+    var that = this;
     var nowNano = opendatakit.convertDateTimeToNanos();
     var activeUser = opendatakit.getPlatformInfo().activeUser;
 
@@ -168,7 +170,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
     var stmt = 'insert into "' + dbTableName + '" (';
     for ( f in dataTableModel ) {
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention && !defElement.isSessionVariable ) {
+        if ( databaseUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
             stmt += comma;
             comma = ', ';
             stmt += '"' + f + '"';
@@ -179,7 +181,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
     var updates = {};
     for (f in dataTableModel) {
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention ) {
+        if ( databaseUtils.isUnitOfRetention(defElement) ) {
             if ( !defElement.isSessionVariable ) {
                 stmt += comma;
                 comma = ', ';
@@ -231,6 +233,8 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
                 updates[f] = {"elementPath" : elementPath, "value": v};
             } else if ( f === "_savepoint_type" ) {
                 stmt += "null";
+            } else if ( f === "_sync_state" ) {
+                stmt += "case when _sync_state='new_row' then 'new_row' else 'changed' end";
             } else {
                 if ( !defElement.isSessionVariable ) {
                     stmt += '"' + f + '"';
@@ -238,7 +242,8 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
             }
         }
     }
-    stmt += ' from "' + dbTableName + '" where _id=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)'; 
+    stmt += ' from "' + dbTableName + '" as T where _id=? and ' +
+        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)'; 
     bindings.push(instanceId);
     
     for ( f in kvMap ) {
@@ -264,8 +269,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
  * 
  * jsonSchemaMap : { 'columnName' : { type: 'elementType', 
  *                            'default': 'defaultValue',
- *                            isInstanceMetadata: false,
- *                            isUnitOfRetention: true } ... }
+ *                            isInstanceMetadata: false } ... }
  *
  * NON_CONFORMANCE NOTE: rather than express everything as a list of 
  * types ['elementType', 'null'] we assume that 'null' is implicitly 
@@ -282,6 +286,7 @@ insertKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, ins
  * Requires: No global context
  */
 insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, kvMap) {
+    var that = this;
     var nowNano = opendatakit.convertDateTimeToNanos();
     var activeUser = opendatakit.getPlatformInfo().activeUser;
 
@@ -294,7 +299,7 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
     var stmt = 'insert into "' + dbTableName + '" (';
     for ( f in dataTableModel ) {
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention && !defElement.isSessionVariable ) {
+        if ( databaseUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
             stmt += comma;
             comma = ', ';
             stmt += '"' + f + '"';
@@ -304,7 +309,7 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
     comma = '';
     for (f in dataTableModel) {    
         defElement = dataTableModel[f];
-        if ( defElement.isUnitOfRetention ) {
+        if ( databaseUtils.isUnitOfRetention(defElement) ) {
             if ( !defElement.isSessionVariable ) {
                 stmt += comma;
                 comma = ', ';
@@ -384,7 +389,8 @@ insertNewKeyValueMapDataTableStmt:function(dbTableName, dataTableModel, formId, 
  * Requires: no globals
  */
 selectAllFromDataTableStmt:function(dbTableName, instanceId) {
-    var stmt = 'select * from "' + dbTableName + '" where _id=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)'; 
+    var stmt = 'select * from "' + dbTableName + '" as T where _id=? and ' + 
+            'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)'; 
     return {
         stmt : stmt,
         bind : [instanceId]
@@ -399,21 +405,25 @@ selectAllFromDataTableStmt:function(dbTableName, instanceId) {
  *
  * Requires: no globals
  */
-  selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArgs) {
-    if ( selection != null ) {
-        var args = ['COMPLETE'];
-        if ( selectionArgs != null ) {
-            args = args.concat(selectionArgs);
-        }
+selectAllCompleteFromDataTableStmt:function(dbTableName, selection, selectionArgs) {
+    var args = ['COMPLETE','COMPLETE'];
+    if ( selection === null || selection === undefined ) {
         return {
-                stmt : 'select * from (select * from "' + dbTableName +
-                        '" where _savepoint_type=?  group by _id having _savepoint_timestamp = max(_savepoint_timestamp)) where ' + selection,
+                stmt : 'select * from "' + dbTableName + '" as T where _savepoint_type=? and ' + 
+                   'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                       '" as V where V._id=T._id and V._savepoint_type=?)',
                 bind : args
             };
     } else {
+        if ( selectionArgs !== null && selectionArgs !== undefined ) {
+            args = args.concat(selectionArgs);
+        }
         return {
-                stmt : 'select * from "' + dbTableName + '" where _savepoint_type=? group by _id having _savepoint_timestamp = max(_savepoint_timestamp)',
-                bind : ['COMPLETE']    
+                stmt : 'select * from (select * from "' + dbTableName + '" as T where _savepoint_type=? and ' + 
+                        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                           '" as V where V._id=T._id and V._savepoint_type=?)) where ' +
+                        selection,
+                bind : args
             };
     }
 },
@@ -429,18 +439,25 @@ selectAllFromDataTableStmt:function(dbTableName, instanceId) {
  * Requires: no globals
  */
 selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
-    if ( selection != null ) {
+    var args = ['deleted','deleted'];
+    if ( selection === null || selection === undefined ) {
         return {
-                stmt :  'select * from (select * from "' + dbTableName +
-                        '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)) where ' + selection +
+                stmt : 'select * from "' + dbTableName + '" as T where (_sync_state is null or _sync_state != ?) and ' + 
+                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName +
+                           '" as V where V._id=T._id and (V._sync_state is null or V._sync_state != ?))' +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : selectionArgs
+                bind : ['deleted','deleted']    
             };
     } else {
+        if (selectionArgs !== null && selectionArgs !== undefined ) {
+            args = args.concat(selectionArgs);
+        }
         return {
-                stmt : 'select * from "' + dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp)' +
+                stmt :  'select * from (select * from "' + dbTableName + '" as T where (_sync_state is null or _sync_state != ?) and ' + 
+                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                        '" as V where V._id=T._id and (V._sync_state is null or V._sync_state != ?))) where ' + selection +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : []    
+                bind : args
             };
     }
 },
@@ -468,7 +485,8 @@ selectDataTableCountStmt:function(dbTableName, instanceId) {
  */
 deletePriorChangesDataTableStmt:function(dbTableName, instanceId) {
     
-    var stmt = 'delete from "' + dbTableName + '" where _id=? and _savepoint_timestamp not in (select max(_savepoint_timestamp) from "' + dbTableName + '" where _id=?);';
+    var stmt = 'delete from "' + dbTableName + '" where _id=? and ' + 
+        '_savepoint_timestamp not in (select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=?);';
     return {
         stmt : stmt,
         bind : [instanceId, instanceId]
@@ -487,14 +505,26 @@ deleteUnsavedChangesDataTableStmt:function(dbTableName, instanceId) {
     };
 },
 /**
- * Delete the instanceId entirely from the table (all savepoints).
+ * Delete the instanceId entirely from the table (all savepoints) 
+ * if its sync_state is 'new_row'
  *
  * Requires: no globals
  */
-deleteDataTableStmt:function(dbTableName, instanceid) {
+deleteNewRowDataTableStmt:function(dbTableName, instanceid) {
     return {
-        stmt : 'delete from "' + dbTableName + '" where _id=?;',
-        bind : [instanceid]
+        stmt : 'delete from "' + dbTableName + '" where _id=? and _sync_state=?;',
+        bind : [instanceid, 'new_row']
+    };
+},
+/**
+ * Mark the record as deleted if the _sync_state is not 'new_row'.
+ *
+ * Requires: no globals
+ */
+deleteMarkDeletedDataTableStmt:function(dbTableName, instanceid) {
+    return {
+        stmt : 'update "' + dbTableName + '" set _sync_state=? where _id=?;',
+        bind : ['deleted', instanceid]
     };
 },
 /**
@@ -511,7 +541,9 @@ getAllInstancesDataTableStmt:function(dbTableName, displayElementName) {
     }
     return {
             stmt : 'select ' + displayElementName + ' _savepoint_timestamp, _savepoint_type, _locale, _id from "' +
-                    dbTableName + '" group by _id having _savepoint_timestamp = max(_savepoint_timestamp) order by _savepoint_timestamp desc;',
+                    dbTableName + '" as T where ' + 
+                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                    '" as V where V._id=T._id) order by _savepoint_timestamp desc;',
             bind : []
             };
 },
@@ -537,7 +569,7 @@ selectTableDefinitionsDataStmt:function(table_id) {
 },
 selectAllTableDbNamesAndIdsDataStmt: function() {
     return {
-            stmt: 'select _db_table_name, _table_id from _table_definitions',
+            stmt: 'select _table_id from _table_definitions',
             bind: []
         };
 },
@@ -574,12 +606,12 @@ selectAllColumnMetaDataStmt:function(table_id) {
         };
 },
 /**
- * Flesh out the protoMdl with a dataTableModel constructed from its formDef
+ * Flesh out the protoModel with a dataTableModel constructed from its formDef
  * 
  * Return the set of database table inserts needed for saving this data table model to the database.
  * This returned set does not include sessionVariable fields.
  */
-updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
+updateDataTableModelAndReturnDatabaseInsertLists:function(protoModel, formTitle) {
     var that = this;
     var fullDef = {
         _table_definitions: [],
@@ -591,14 +623,13 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...
-    var dbTableName = protoMdl.table_id;
-    // dataTableModel holds an inversion of the protoMdl.formDef.model
+    var dbTableName = protoModel.table_id;
+    // dataTableModel holds an inversion of the protoModel.formDef.model
     //
     //  elementKey : jsonSchemaType
     //
     // with the addition of:
     //    isSessionVariable : true if this is not retained across sessions
-    //    isUnitOfRetention : true if elementKey is a dbColumnName
     //    elementPath : pathToElement
     //    elementSet : 'data'
     //    listChildElementKeys : ['key1', 'key2' ...]
@@ -612,13 +643,17 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
         dataTableModel[f] = that.dataTablePredefinedColumns[f];
     }
     
-    // go through the supplied protoMdl.formDef model
+    // go through the supplied protoModel.formDef model
     // and invert it into the dataTableModel
     var jsonDefn;
-    for ( f in protoMdl.formDef.specification.model ) {
-        jsonDefn = databaseUtils.flattenElementPath( dataTableModel, null, f, null, protoMdl.formDef.specification.model[f] );
+    for ( f in protoModel.formDef.specification.model ) {
+        jsonDefn = databaseUtils.flattenElementPath( dataTableModel, null, f, null, protoModel.formDef.specification.model[f] );
     }
 
+    // traverse the dataTableModel marking which elements are 
+    // not units of retention.
+    databaseUtils.markUnitOfRetention(dataTableModel);
+    
     // and now traverse the dataTableModel making sure all the
     // elementSet: 'data' values have columnDefinitions entries.
     //
@@ -632,21 +667,20 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
             var surveyDisplayName = (jsonDefn.displayName === undefined || jsonDefn.displayName === null) ? surveyElementName : jsonDefn.displayName;
             
             fullDef._column_definitions.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _element_key: dbColumnName,
                 _element_name: jsonDefn.elementName,
                 _element_type: (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType),
-                _list_child_element_keys : ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? null : JSON.stringify(jsonDefn.listChildElementKeys)),
-                _is_unit_of_retention : (jsonDefn.isUnitOfRetention ? 1 : 0)
+                _list_child_element_keys : ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? JSON.stringify([]) : JSON.stringify(jsonDefn.listChildElementKeys))
             } );
             
             // displayed columns within Tables, at least for now, are just the unit-of-retention columns.
-            if ( jsonDefn.isUnitOfRetention ) {
+            if ( databaseUtils.isUnitOfRetention(jsonDefn) ) {
                 displayColumnOrder.push(dbColumnName);
             }
 
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayVisible",
@@ -654,23 +688,34 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _value: true
             } );
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayName",
-                _type: "json",
+                _type: "object",
                 _value: JSON.stringify(surveyDisplayName) // this is a localizable string...
             } );
+            var choicesJson;
+            if ( jsonDefn.valuesList === undefined || jsonDefn.valuesList === null ) {
+                choicesJson = "";
+            } else {
+                var ref = protoModel.formDef.specification.choices[jsonDefn.valuesList];
+                if ( ref === undefined || ref === null ) {
+                    choicesJson = "";
+                } else {
+                    choicesJson = JSON.stringify(ref);
+                }
+            }
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayChoicesList",
-                _type: "json",
-                _value: ((jsonDefn.choicesList === undefined || jsonDefn.choicesList === null) ? "" : JSON.stringify(protoMdl.formDef.specification.choices[jsonDefn.choicesList]))
+                _type: "object",
+                _value: choicesJson
             } );
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "displayFormat",
@@ -678,70 +723,76 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoMdl, formTitle) {
                 _value: (jsonDefn.displayFormat === undefined || jsonDefn.displayFormat === null) ? "" : jsonDefn.displayFormat
             } );
             fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
-                _partition: "Column",
-                _aspect: dbColumnName,
-                _key: "smsIn",
-                _type: "boolean",
-                _value: true
-            } );
-            fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
-                _partition: "Column",
-                _aspect: dbColumnName,
-                _key: "smsOut",
-                _type: "boolean",
-                _value: true
-            } );
-            fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
-                _partition: "Column",
-                _aspect: dbColumnName,
-                _key: "smsLabel",
-                _type: "string",
-                _value: ""
-            } );
-            fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
-                _partition: "Column",
-                _aspect: dbColumnName,
-                _key: "footerMode",
-                _type: "string",
-                _value: 'none'
-            } );
-            fullDef._key_value_store_active.push( {
-                _table_id: protoMdl.table_id,
+                _table_id: protoModel.table_id,
                 _partition: "Column",
                 _aspect: dbColumnName,
                 _key: "joins",
-                _type: "json",
+                _type: "object",
                 _value: ""
             } );
         }
     }
 
     fullDef._table_definitions.push( { 
-        _table_id: protoMdl.table_id, 
-        _db_table_name: dbTableName, 
-        _sync_tag: "", 
-        _last_sync_time: -1, 
-        _sync_state: 'inserting', 
-        _transactioning: 0 } );
+        _table_id: protoModel.table_id, 
+        _schema_etag: null,
+        _last_data_etag: null,
+        _last_sync_time: -1 } );
 
     // construct the kvPairs to insert into kvstore
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'tableType', _type: 'string', _value: 'data' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'accessControlTableId', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'json', _value: JSON.stringify(formTitle) } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'json', _value: JSON.stringify(displayColumnOrder) } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'primeCols', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'indexCol', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'currentViewType', _type: 'string', _value: 'Spreadsheet' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'summaryDisplayFormat', _type: 'string', _value: '' } );
-    fullDef._key_value_store_active.push( { _table_id: protoMdl.table_id, _partition: "Table", _aspect: "default", _key: 'currentQuery', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'colOrder', _type: 'array', _value: JSON.stringify(displayColumnOrder) } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'defaultViewType', _type: 'string', _value: 'SPREADSHEET' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'displayName', _type: 'object', _value: JSON.stringify(formTitle) } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'groupByCols', _type: 'object', _value: '[]' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'indexCol', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'sortCol', _type: 'string', _value: '' } );
+    fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'sortOrder', _type: 'string', _value: '' } );
 
-    protoMdl.dataTableModel = dataTableModel;
+    var settings = protoModel.formDef.specification.settings;
+    var formInstanceName = that.getSettingValue(settings, 'instance_name');
+    var xmlInstanceName = that.getSettingValue(settings, 'xml_instance_name');
+    if ( xmlInstanceName === undefined || xmlInstanceName === null ) {
+        xmlInstanceName = formInstanceName;
+    }
+    var xmlRootElementName = that.getSettingValue(settings, 'xml_root_element_name');
+    var xmlDeviceIdPropertyName = that.getSettingValue(settings, 'xml_device_id_property_name');
+    var xmlUserIdPropertyName = that.getSettingValue(settings, 'xml_user_id_property_name');
+    var xmlBase64RsaPublicKey = that.getSettingValue(settings, 'xml_base64_rsa_public_key');
+    var xmlSubmissionUrl = that.getSettingValue(settings, 'xml_submission_url');
+
+    if ( xmlInstanceName !== undefined && xmlInstanceName !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlInstanceName', _type: 'string', _value: xmlInstanceName } );
+    }
+    if ( xmlRootElementName !== undefined && xmlRootElementName !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlRootElementName', _type: 'string', _value: xmlRootElementName } );
+    }
+    if ( xmlDeviceIdPropertyName !== undefined && xmlDeviceIdPropertyName !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlDeviceIdPropertyName', _type: 'string', _value: xmlDeviceIdPropertyName } );
+    }
+    if ( xmlUserIdPropertyName !== undefined && xmlUserIdPropertyName !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlUserIdPropertyName', _type: 'string', _value: xmlUserIdPropertyName } );
+    }
+    if ( xmlBase64RsaPublicKey !== undefined && xmlBase64RsaPublicKey !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlBase64RsaPublicKey', _type: 'string', _value: xmlBase64RsaPublicKey } );
+    }
+    if ( xmlSubmissionUrl !== undefined && xmlSubmissionUrl !== null ) {
+        fullDef._key_value_store_active.push( { _table_id: protoModel.table_id, _partition: "Table", _aspect: "default", _key: 'xmlSubmissionUrl', _type: 'string', _value: xmlSubmissionUrl } );
+    }
+    
+    protoModel.dataTableModel = dataTableModel;
     return fullDef;
+},
+getSettingValue: function(settings, id) {
+    var entry = settings[id];
+    if ( entry !== undefined && entry !== null ) {
+        var value = entry.value;
+        if ( value === undefined ) {
+            return null;
+        }
+        return value;
+    } else {
+        return null;
+    }
 }
 };
 });

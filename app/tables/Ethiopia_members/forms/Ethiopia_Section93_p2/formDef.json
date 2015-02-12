@@ -716,7 +716,6 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"
@@ -908,7 +907,6 @@
       },
       "where_medical_attention": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "where_medical_attention_items"
@@ -976,6 +974,7 @@
       },
       "answering": {
         "type": "string",
+        "valuesList": "self",
         "_defn": [
           {
             "_row_num": 2,
@@ -991,6 +990,7 @@
       },
       "headache_7days": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 3,
@@ -1019,6 +1019,7 @@
       },
       "headache_2months": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 7,
@@ -1033,6 +1034,7 @@
       },
       "dizziness_7days": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 9,
@@ -1061,6 +1063,7 @@
       },
       "dizziness_2months": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 13,

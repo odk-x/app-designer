@@ -2,11 +2,15 @@
 /**
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
+ *
+ * NOTE: all usage of the opendatakit object is stateless -- we are just using
+ * simple conversion methods defined in that object and are not accessing any 
+ * other state.
  */
-define(['mdl','opendatakit','XRegExp'], function(mdl,opendatakit,XRegExp) {
+define(['opendatakit','XRegExp'], function(opendatakit,XRegExp) {
 verifyLoad('databaseUtils',
-    ['mdl','opendatakit','XRegExp'],
-    [mdl,opendatakit,XRegExp]);
+    ['opendatakit','XRegExp'],
+    [ opendatakit,  XRegExp]);
 return {
     _reservedFieldNames: {
         /**
@@ -175,6 +179,65 @@ return {
         }
         return true;
     },
+    markUnitOfRetention: function(dataTableModel) {
+        // for all arrays, mark all descendants of the array as not-retained
+        // because they are all folded up into the json representation of the array
+        var startKey;
+        var jsonDefn;
+        var elementType;
+        var key;
+        var jsonSubDefn;
+        
+        for ( startKey in dataTableModel ) {
+            jsonDefn = dataTableModel[startKey];
+            if ( jsonDefn.notUnitOfRetention ) {
+                // this has already been processed
+                continue;
+            }
+            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
+            if ( elementType === "array" ) {
+                var descendantsOfArray = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
+                var scratchArray = [];
+                while ( descendantsOfArray.length !== 0 ) {
+                    var i;
+                    for ( i = 0 ; i < descendantsOfArray.length ; ++i ) {
+                        key = descendantsOfArray[i];
+                        jsonSubDefn = dataTableModel[key];
+                        if ( jsonSubDefn !== null && jsonSubDefn !== undefined ) {
+                            if ( jsonSubDefn.notUnitOfRetention ) {
+                                // this has already been processed
+                                continue;
+                            }
+                            jsonSubDefn.notUnitOfRetention = true;
+                            var listChildren = ((jsonSubDefn.listChildElementKeys === undefined || jsonSubDefn.listChildElementKeys === null) ? [] : jsonSubDefn.listChildElementKeys);
+                            scratchArray = scratchArray.concat(listChildren);
+                        }
+                    }
+                    descendantsOfArray = scratchArray;
+                }
+            }
+        }
+        // and mark any non-arrays with multiple fields as not retained
+        for ( startKey in dataTableModel ) {
+            jsonDefn = dataTableModel[startKey];
+            if ( jsonDefn.notUnitOfRetention ) {
+                // this has already been processed
+                continue;
+            }
+            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
+            if ( elementType !== "array" ) {
+                if (jsonDefn.listChildElementKeys !== undefined &&
+                    jsonDefn.listChildElementKeys !== null &&
+                    jsonDefn.listChildElementKeys.length !== 0 ) {
+                    jsonDefn.notUnitOfRetention = true;
+                }
+            }
+        }
+    },
+    isUnitOfRetention: function(jsonDefn) {
+        if (jsonDefn.notUnitOfRetention) return false;
+        return true;
+    },
     _fromDatabaseToElementType: function( jsonType, value ) {
         var that = this;
         // date conversion elements...
@@ -185,6 +248,13 @@ return {
                 throw new Error("unexpected null value for non-nullable field");
             }
             return null;
+        }
+        
+        // Do not allow empty strings. 
+        // Strings are either NULL or non-zero-length.
+        //
+        if ( value === "" ) {
+            throw new Error("unexpected empty (zero-length string) value for field");
         }
         
         if ( jsonType.type === 'array' ) {
@@ -225,7 +295,8 @@ return {
         } else if ( jsonType.type === 'string' ) {
             return '' + value;
         } else {
-            throw new Error("unrecognized JSON schema type");
+            shim.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            return '' + value;
         }
     },
 toDatabaseFromElementType: function( jsonType, value ) {
@@ -309,7 +380,8 @@ toDatabaseFromElementType: function( jsonType, value ) {
         } else if ( jsonType.type === 'string' ) {
             return '' + value;
         } else {
-            throw new Error("unrecognized JSON schema type");
+            shim.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            return '' + value;
         }
     },
 reconstructElementPath: function(elementPath, jsonType, dbValue, topLevelObject) {
@@ -334,17 +406,17 @@ reconstructElementPath: function(elementPath, jsonType, dbValue, topLevelObject)
         }
         e[term] = value;
     },
-reconstructModelDataFromElementPathValueUpdates: function(mdl, updates) {
+reconstructModelDataFromElementPathValueUpdates: function(model, updates) {
     var that = this;
     for (var dbKey in updates) {
         var elementPathValue = updates[dbKey];
-        var de = mdl.dataTableModel[dbKey];
-        if (de.isUnitOfRetention) {
+        var de = model.dataTableModel[dbKey];
+        if (that.isUnitOfRetention(de)) {
             var elementPath = de.elementPath || elementPathValue.elementPath;
             if ( de.elementSet === 'instanceMetadata' ) {
-                that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, mdl.metadata );
+                that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, model.metadata );
             } else {
-                that.reconstructElementPath(elementPath, de, elementPathValue.value, mdl.data );
+                that.reconstructElementPath(elementPath, de, elementPathValue.value, model.data );
             }
         }
     }
@@ -425,22 +497,6 @@ processPassedInKeyValueMap: function(dataTablePredefinedColumns, kvMap, instance
         shim.log('I',"Extra arguments found in instanceMetadataKeyValueMap" + propList);
     }
 },
-_clearUnitOfRetentionFlag: function( dbKeyMap, listChildElementKeys) {
-    var that = this;
-    var i;
-    if ( listChildElementKeys != null ) {
-        for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
-            var f = listChildElementKeys[i];
-            var jsonType = dbKeyMap[f];
-            jsonType.isUnitOfRetention = false;
-            if ( jsonType.type === 'array' ) {
-                that._clearUnitOfRetentionFlag(dbKeyMap, jsonType.listChildElementKeys);
-            } else if ( jsonType.type === 'object' ) {
-                that._clearUnitOfRetentionFlag(dbKeyMap, jsonType.listChildElementKeys);
-            }
-        }
-    }
-},
 _setSessionVariableFlag: function( dbKeyMap, listChildElementKeys) {
     var that = this;
     var i;
@@ -493,18 +549,6 @@ flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementK
         throw new Error("supplied elementKey starts with underscore");
     }
 
-    // assume the primitive types are units-of-retention.
-    // this will be updated if there is an outer array or object
-    // that is itself a unit-of-retention (below).
-    if ( jsonType.type === 'string' || 
-            jsonType.type === 'number' || 
-            jsonType.type === 'integer' ||
-            jsonType.type === 'boolean' ) {
-        // these should be retained
-        // as their own column values...
-        jsonType.isUnitOfRetention = true;
-    }
-
     // remember the elementKey we have chosen...
     dbKeyMap[elementKey] = jsonType;
 
@@ -513,29 +557,16 @@ flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementK
         // explode with subordinate elements
         f = that.flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
         jsonType.listChildElementKeys = [ f.elementKey ];
-        jsonType.isUnitOfRetention = true;
     } else if ( jsonType.type === 'object' ) {
         // object...
-        var hasProperties = false;
         var e;
         var f;
         var listChildElementKeys = [];
         for ( e in jsonType.properties ) {
-            hasProperties = true;
             f = that.flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
             listChildElementKeys.push(f.elementKey);
         }
         jsonType.listChildElementKeys = listChildElementKeys;
-        if ( !hasProperties ) {
-            jsonType.isUnitOfRetention = true;
-        }
-    }
-
-    if ( jsonType.isUnitOfRetention && (jsonType.listChildElementKeys != null)) {
-        // we have some sort of structure that is written out as 
-        // a JSON serialization. Clear the isUnitOfRetention tags
-        // on the nested elements
-        that._clearUnitOfRetentionFlag(dbKeyMap, jsonType.listChildElementKeys);
     }
 
     if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys != null)) {
@@ -556,7 +587,7 @@ getElementPathValue:function(data,pathName) {
     }
     return v;
 },
-convertSelectionString: function(linkedMdl, selection) {
+convertSelectionString: function(linkedModel, selection) {
     // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     var that = this;
     if ( selection == null || selection.length === 0 ) {
@@ -574,8 +605,8 @@ convertSelectionString: function(linkedMdl, selection) {
             // map e back to elementKey
             var found = false;
             var f;
-            for (f in linkedMdl.dataTableModel) {
-                var defElement = linkedMdl.dataTableModel[f];
+            for (f in linkedModel.dataTableModel) {
+                var defElement = linkedModel.dataTableModel[f];
                 var elementPath = defElement['elementPath'];
                 if ( elementPath == null ) elementPath = f;
                 if ( elementPath == e ) {
@@ -593,7 +624,7 @@ convertSelectionString: function(linkedMdl, selection) {
     }
     return remapped;
 },
-convertOrderByString: function(linkedMdl, order_by) {
+convertOrderByString: function(linkedModel, order_by) {
     // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
     var that = this;
     if ( order_by == null || order_by.length === 0 ) {
@@ -610,7 +641,7 @@ convertOrderByString: function(linkedMdl, order_by) {
             // map e back to elementKey
             var found = false;
             var f;
-            for (f in linkedMdl.dataTableModel) {
+            for (f in linkedModel.dataTableModel) {
                 var defElement = dataTableModel[f];
                 var elementPath = defElement['elementPath'];
                 if ( elementPath == null ) elementPath = f;

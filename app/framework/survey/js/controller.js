@@ -11,11 +11,11 @@
  * screens and thereby to the prompts within those screens.
  *
  */
-define(['screenManager','opendatakit','database', 'mdl', 'parsequery', 'jquery' ],
-function(ScreenManager,  opendatakit,  database,   mdl,   parsequery,  $ ) {
+define(['screenManager','opendatakit','database', 'parsequery', 'jquery' ],
+function(ScreenManager,  opendatakit,  database,   parsequery,  $ ) {
 verifyLoad('controller',
-    ['screenManager','opendatakit','database', 'mdl', 'parsequery', 'jquery' ],
-    [ScreenManager,  opendatakit,  database,   mdl,   parsequery,  $]);
+    ['screenManager','opendatakit','database', 'parsequery', 'jquery' ],
+    [ScreenManager,  opendatakit,  database,    parsequery,  $]);
 return {
     eventCount: 0,
     moveFailureMessage: { message: "Internal Error: Unable to determine next prompt." },
@@ -433,6 +433,9 @@ return {
                     break;
                 case "save_and_terminate":
                     var complete = ('calculation' in op) ? op.calculation() : false;
+                    var siformId = opendatakit.getSettingValue('form_id');
+                    var simodel = opendatakit.getCurrentModel();
+                    var siinstanceId = opendatakit.getCurrentInstanceId();
                     database.save_all_changes($.extend({},ctxt,{success:function() {
                             that.screenManager.hideSpinnerOverlay();
                             shim.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), complete);
@@ -449,7 +452,7 @@ return {
                             } else {
                                 ctxt.failure(that.moveFailureMessage);
                             }
-                        }}), complete);
+                        }}), simodel, siformId, siinstanceId, complete);
                     return;
                 case "validate":
                     var validationTag = op._sweep_name;
@@ -985,14 +988,17 @@ return {
      * Failure: we were unable to delete the records.
      */
     ignoreAllChanges:function(ctxt) {
+         var model = opendatakit.getCurrentModel();
+        var formId = opendatakit.getSettingValue('form_id');
+        var instanceId = opendatakit.getCurrentInstanceId();
         database.ignore_all_changes($.extend({},ctxt,{success:function() {
-                shim.ignoreAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
+                shim.ignoreAllChangesCompleted( opendatakit.getRefId(), instanceId);
                 ctxt.success();
             },
             failure:function(m) {
-                shim.ignoreAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
+                shim.ignoreAllChangesFailed( opendatakit.getRefId(), instanceId);
                 ctxt.failure(m);
-            }}));
+            }}), model, formId, instanceId);
     },
     /*
      * Execute a save-as-incomplete write of all database changes
@@ -1008,14 +1014,17 @@ return {
      */
     saveIncomplete:function(ctxt) {
         var that = this;
+        var model = opendatakit.getCurrentModel();
+        var formId = opendatakit.getSettingValue('form_id');
+        var instanceId = opendatakit.getCurrentInstanceId();
         database.save_all_changes($.extend({},ctxt,{success:function() {
-                shim.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), false);
+                shim.saveAllChangesCompleted( opendatakit.getRefId(), instanceId, false);
                 ctxt.success();
             },
             failure:function(m) {
-                shim.saveAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
+                shim.saveAllChangesFailed( opendatakit.getRefId(), instanceId);
                 ctxt.failure(m);
-            }}), false);
+            }}), model, formId, instanceId, false);
     },
     /*
      * Callback interface from ODK Survey (or other container apps) into javascript.
@@ -1104,7 +1113,7 @@ return {
                 if ( instanceMetadataKeyValueMap != null ) {
                     for ( var f in instanceMetadataKeyValueMap ) {
                         var v = instanceMetadataKeyValueMap[f];
-                        kvList = kvList + "&" + f + "=" + escape(v);
+                        kvList = kvList + "&" + f + "=" + encodeURIComponent(v);
                     }
                 }
                 var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), 

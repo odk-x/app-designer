@@ -1131,11 +1131,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "selected_store_items"
         },
+        "valuesList": "stores",
         "elementKey": "selected_store"
       }
     },

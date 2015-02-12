@@ -438,6 +438,7 @@
       },
       "sex": {
         "type": "string",
+        "valuesList": "sexes",
         "_defn": [
           {
             "_row_num": 5,
@@ -452,6 +453,7 @@
       },
       "income_contribution": {
         "type": "string",
+        "valuesList": "yesno",
         "_defn": [
           {
             "_row_num": 7,
@@ -476,7 +478,6 @@
       },
       "youngest": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "youngest_items"
@@ -511,7 +512,6 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"

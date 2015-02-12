@@ -26,9 +26,9 @@ function(opendatakit,  database,   _) {
                 return textOrLangMap['default'];
             } else {
                 shim.log('E',"Could not localize object. Locale '" + locale + 
-					"' and 'default' missing from " + textOrLangMap);
-                throw Error("Could not localize object. Locale '" + locale + 
-					"' and 'default' missing from: " + textOrLangMap );
+                    "' and 'default' missing from " + textOrLangMap);
+                throw new Error("Could not localize object. Locale '" + locale + 
+                    "' and 'default' missing from: " + textOrLangMap );
             }
         },
         selected: function(promptValue, qValue) {
@@ -76,6 +76,10 @@ function(opendatakit,  database,   _) {
         },
         now: function() {
             return new Date();
+        },
+        isFinalized: function() {
+            var datavalue = database.getInstanceMetaDataValue('_savepoint_type');
+            return ( 'COMPLETE' === datavalue );
         },
         //data gets a value by name.
         data: function(valueName) {

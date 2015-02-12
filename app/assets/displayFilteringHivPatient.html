@@ -1,0 +1,72 @@
+<!-- This file displays the filtered result
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/scanHomeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/displayFilteringHivPatient.js"></script>
+        <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
+    </head>
+    <body id="main">
+
+    <div class="container">
+
+      <div class="description-text" id="description">Query Result</div>
+      <p>Month: <span id="month"></span></p>
+      <p>Age: <span id="age"></span></p>
+      <p>Sex: <span id="sex"></span></p>
+      <p>Test: <span id="test"></span></p>
+      <table id="report-table">
+        <tr>
+          <th class="table-title" >ID</th>
+          <th class="table-title" >Name</th>
+          <th class="table-title" >Date of Birth</th>
+          <th class="table-title" >Sex</th>
+          <th class="table-title" >View Detail</th>
+        </tr>
+      </table>
+      <button id="go_home" class="btn-launch btn btn-positive btn-block">Home Page</button>
+    </div>  
+    <script type="text/javascript">
+      $(display());
+      // attaching clink event to the Home Page button which will take the user to the home page relative to this page
+      $('#go_home').on('click', function() {
+        var url = control.getFileAsUrl('assets/demoForHivReport.html');
+        window.location.href = url;
+      });
+    </script>
+    </body>
+    <!-- Styling part for this page-->
+    <style>
+      p{
+        text-align: center;
+      }
+
+      body{
+        font-size: 16px;
+        text-align: center;
+      }
+      .table-title {
+        text-align: center;
+        font-size: 24px;
+        padding-left: 10px !important;
+        padding-right:10px !important; 
+      }
+      th {
+        text-align: center;
+      }
+      input {
+        height: 26px;
+        text-align: center;
+        width: 6em !important;
+        font-size: 16px;
+      }
+  </style>
+</html>

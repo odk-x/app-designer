@@ -1,0 +1,10 @@
+_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,date,observations,pests,plant_health,plant_height,plant_picture_contentType,plant_picture_uriFragment,plot_id,soil,_row_etag,_filter_type,_filter_value
+ba,,default,COMPLETE,2014-08-20T17:42:08.888000000,anonymous,2014-02-05T20:28:07.604000000,nothing to report,,fair,10,,,3,sandy_loam,,,
+bb,,default,COMPLETE,2014-08-20T17:42:08.909000000,anonymous,2014-02-10T10:00:00.000000000,Looks dry,,bad,10,,,3,sandy_loam,,,
+bc,,default,COMPLETE,2014-08-20T17:42:08.933000000,anonymous,2014-02-15T08:32:07.000000000,Beetles arrived this time.,"[""beetle""]",bad,11,,,3,loam,,,
+bd,,default,COMPLETE,2014-08-20T17:42:08.957000000,anonymous,2014-02-14T04:22:22.000000000,Soil seems well taken care of.,"[""cutworm""]",good,55,,,4,loam,,,
+be,,default,COMPLETE,2014-08-20T17:42:08.983000000,anonymous,2014-02-20T12:10:10.000000000,Appears to have gotten cutworms.,"[""cutworm""]",good,80,,,4,loam,,,
+bf,,default,COMPLETE,2014-08-20T17:42:09.013000000,anonymous,2014-03-02T12:10:10.000000000,Great crop.,"[""cutworm""]",good,99,,,4,loam,,,
+bg,,default,COMPLETE,2014-08-20T17:42:09.040000000,anonymous,2014-01-01T10:10:10.000000000,Things are looking dire.,"[""earworm"",""cutworm""]",bad,50,,,5,sandy_loam,,,
+bh,,default,COMPLETE,2014-08-20T17:42:09.067000000,anonymous,2014-02-01T14:14:07.000000000,Seems to have made a turn around.,"[""earworm"",""cutworm""]",fair,75,,,5,sandy_loam,,,
+bi,,default,COMPLETE,2014-08-20T17:42:09.092000000,anonymous,2014-03-01T16:33:10.000000000,Looking great.,"[""cutworm""]",good,80,,,5,sandy_loam,,,

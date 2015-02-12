@@ -3,11 +3,11 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
-function(mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh) {
+define(['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
+function(database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh) {
 verifyLoad('prompts',
-    ['mdl','database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
-    [ mdl,  database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh]);
+    ['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore', 'mobiscroll', 'translations', 'handlebarsHelpers'],
+    [ database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,            mobiscroll,   translations, _hh]);
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -279,6 +279,94 @@ promptTypes.base = Backbone.View.extend({
     getCallback: function(promptPath, internalPromptContext, action) {
         throw new Error("prompts." + this.type, "px: " + this.promptIdx + " unimplemented promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
     },
+    /**
+     * Useful routines to convert a selection string and an order by string
+     * into a proper database query string. These strings are cached after
+     * the conversion.  Used by the instances and linked_type prompts
+     */
+    _cachedSelection: null,
+    convertSelection: function(model) {
+        var that = this;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
+            return null;
+        }
+        if ( that._cachedSelection != null ) {
+            return that._cachedSelection;
+        }
+        that._cachedSelection = database.convertSelectionString(model, queryDefn.selection);
+        return that._cachedSelection;
+    },
+    _cachedOrderBy : null,
+    convertOrderBy: function(model) {
+        var that = this;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
+            return null;
+        }
+        if ( that._cachedOrderBy != null ) {
+            return that._cachedOrderBy;
+        }
+        that._cachedOrderBy = database.convertOrderByString(model, queryDefn.order_by);
+        return that._cachedOrderBy;
+    },
+    populateChoicesViaQueryUsingAjax : function(query, newctxt){
+        var that = this;
+        var queryUri = query.uri();
+        if(queryUri.search('//') < 0){
+            //If the uri is not a content provider or web resource,
+            //assume the path  is relative to the form directory.
+            queryUri = opendatakit.getCurrentFormPath() + queryUri;
+        }
+
+        var ajaxOptions = {
+            "type": 'GET',
+            "url": queryUri,
+            "dataType": 'json',
+            "data": {},
+            "success": function(result){
+                that.renderContext.choices = query.callback(result);
+                newctxt.success("success");
+            },
+            "error": function(e) {
+                //This is a passive error because there could just be a problem
+                //with the content provider/network/remote service rather than with
+                //the form.
+                newctxt.log('W',"prompts." + this.type + ".configureRenderContext.error", 
+                            "px: " + this.promptIdx + " Error fetching choices " + e);
+                that.renderContext.passiveError = "Error fetching choices.\n";
+                if(e.statusText) {
+                    that.renderContext.passiveError += e.statusText;
+                }
+                // TODO: verify how this error should be handled...
+                newctxt.failure({message: "Error fetching choices via ajax."});
+            }
+        };
+
+        //TODO: It might also be desireable to make it so queries can reference
+        //datasheets in the XLSX file.
+        var queryUriExt = queryUri.split('.').pop();
+        if(queryUriExt === 'csv') {
+            ajaxOptions.dataType = 'text';
+            ajaxOptions.success = function(result) {
+                try {
+                    //require(['jquery-csv'], function(){
+                        that.renderContext.choices = query.callback($.csv.toObjects(result));
+                        newctxt.success("success");
+                    //},
+                    //function (err) {
+                    //    newctxt.log('E',"prompts."+that.type+".require.failure " + err.requireType + ' modules: ',
+                    //        err.requireModules.toString() + " px: " + that.promptIdx);
+                    //    newctxt.failure({message: "Error fetching choices from csv data."});
+                    //});
+                } catch (e) {
+                    newctxt.log('E',"promptType." + that.type, "exception: " + e.message + " e: " + e.toString());
+                    newctxt.failure({message: "Error reading choices from csv data."});
+                }
+            };
+        }
+        $.ajax(ajaxOptions);
+    },
     __test__: function(evt){
         //This is a utility function for checking to make sure event maps are working.
         shim.log('T',evt);
@@ -295,13 +383,15 @@ promptTypes.opening = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
-        that.renderContext.last_save_date = opendatakit.convertNanosToDateTime(lastSave);
+        var ts = that.renderContext.last_save_date = opendatakit.convertNanosToDateTime(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName != null ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
         } else {
-            that.renderContext.display_field = null;
+            // Now we are always going to display instance id
+            // unless this decision changes ...
+            that.renderContext.display_field = ts.toISOString();
         }
         if ( that._screen && that._screen._renderContext ) {
             that._screen._renderContext.enableBackNavigation = false;
@@ -337,12 +427,16 @@ promptTypes.finalize = promptTypes.base.extend({
         if(formLogo){
             this.renderContext.headerImg = formLogo;
         }
+        var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
+        var ts = opendatakit.convertNanosToDateTime(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName != null ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
         } else {
-            that.renderContext.display_field = null;
+            // Now we are always going to display instance id
+            // unless this decision changes ...
+            that.renderContext.display_field = ts.toISOString();
         }
         if ( that._screen && that._screen._renderContext ) {
             that._screen._renderContext.enableForwardNavigation = false;
@@ -403,7 +497,31 @@ promptTypes.instances = promptTypes.base.extend({
     configureRenderContext: function(ctxt) {
         var that = this;
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
-        database.get_all_instances($.extend({},ctxt,{success:function(instanceList) {
+        
+        // see if we are supposed to apply a query filter to this...
+        var model = opendatakit.getCurrentModel();
+        var displayElementName = opendatakit.getSettingValue('instance_name');
+        var selection = null;
+        var selectionArgs = null;
+        var orderBy = null;
+        if ( that.values_list !== undefined && that.values_list !== null ) {
+            var queryDefn = null;
+            queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+            if ( queryDefn === undefined || queryDefn === null ) {
+                ctxt.failure({message: "Error displaying instances: could not retrieve query definition"});
+                return;
+            } else 
+            if ( queryDefn.linked_table_id !== opendatakit.getCurrentTableId() ) {
+                ctxt.failure({message: "Error displaying instances: tableId of value_list query does not match current tableId"});
+                return;
+            }
+            selection = that.convertSelection(model);
+            selectionArgs = queryDefn.selectionArgs();
+            orderBy = that.convertOrderBy(model);
+        }
+
+        // in this case, we are our own 'linked' table.
+        database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
                 that.renderContext.instances = _.map(instanceList, function(term) {
                     var savepoint_type = term.savepoint_type;
                     if ( savepoint_type === opendatakit.savepoint_type_complete ) {
@@ -426,7 +544,7 @@ promptTypes.instances = promptTypes.base.extend({
                 }
                 ctxt.success();
             }
-        }));
+        }), model.table_id, selection, selectionArgs, displayElementName, orderBy);
     },
     createInstance: function(evt){
       var ctxt = this.controller.newContext(evt);
@@ -445,11 +563,14 @@ promptTypes.instances = promptTypes.base.extend({
     deleteInstance: function(evt){
         var that = this;
         var ctxt = that.controller.newContext(evt);
+        var model = opendatakit.getCurrentModel();
         ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
-        database.delete_all($.extend({}, ctxt, {success: function() {
+
+        // in this case, we are our own 'linked' table.
+        database.delete_linked_instance_all($.extend({}, ctxt, {success: function() {
                 that.reRender(ctxt);
             }}),
-        $(evt.target).attr('id'));
+        model.table_id, $(evt.target).attr('id'));
     }
 });
 promptTypes.contents = promptTypes.base.extend({
@@ -484,8 +605,6 @@ promptTypes.contents = promptTypes.base.extend({
 });
 promptTypes._linked_type = promptTypes.base.extend({
     type: "_linked_type",
-    _cachedSelection: null,
-    _cachedOrderBy: null,
     getLinkedTableId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         if ( queryDefn != null )
@@ -513,39 +632,15 @@ promptTypes._linked_type = promptTypes.base.extend({
     getFormPath: function() {
         return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
     },
-    convertSelection: function(linkedMdl) {
-        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        var that = this;
-        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
-            return null;
-        }
-        if ( that._cachedSelection != null ) {
-            return that._cachedSelection;
-        }
-        that._cachedSelection = database.convertSelectionString(linkedMdl, queryDefn.selection);
-        return that._cachedSelection;
-    },
-    convertOrderBy: function(linkedMdl) {
-        var that = this;
-        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
-            return null;
-        }
-        if ( that._cachedOrderBy != null ) {
-            return that._cachedOrderBy;
-        }
-        that._cachedOrderBy = database.convertOrderByString(linkedMdl, queryDefn.order_by);
-        return that._cachedOrderBy;
-    },
-    _linkedCachedMdl: null,
+    _linkedCachedModel: null,
     _linkedCachedInstanceName: null,
     getLinkedInstanceName: function() {
         return this._linkedCachedInstanceName;
     },
-    getLinkedMdl: function(ctxt) {
+    getlinkedModel: function(ctxt) {
         var that = this;
-        if ( that._linkedCachedMdl != null ) {
-            ctxt.success(that._linkedCachedMdl);
+        if ( that._linkedCachedModel != null ) {
+            ctxt.success(that._linkedCachedModel);
             return;
         }
         var filePath = that.getFormPath() + 'formDef.json';
@@ -558,8 +653,8 @@ promptTypes._linked_type = promptTypes.base.extend({
             }
             database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
                 ctxt.log('D',"prompts." + that.type + 
-                    'getLinkedMdl.readTableDefinition.success', "px: " + that.promptIdx );
-                that._linkedCachedMdl = tlo;
+                    'getlinkedModel.readTableDefinition.success', "px: " + that.promptIdx );
+                that._linkedCachedModel = tlo;
                 ctxt.success(tlo);
             }}), formDef, that.getLinkedTableId(), filePath);
         }}), filePath );
@@ -620,11 +715,11 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
         that.renderContext.new_instance_text = ((that.display.new_instance_text != null) ? that.display.new_instance_text : "New");
-        that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
-            var dbTableName = linkedMdl.tableMetadata.dbTableName;
-            var selString = that.convertSelection(linkedMdl);
+        that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
+            var dbTableName = linkedModel.table_id;
+            var selString = that.convertSelection(linkedModel);
             var selArgs = queryDefn.selectionArgs();
-            var ordBy = that.convertOrderBy(linkedMdl);
+            var ordBy = that.convertOrderBy(linkedModel);
             var displayElementName = that.getLinkedInstanceName();
             ctxt.log('D',"prompts." + that.type + ".configureRenderContext.before.get_linked_instances", "px: " + that.promptIdx);
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
@@ -741,8 +836,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             tableRow.remove();
 
         that.disableButtons();
-        that.getLinkedMdl($.extend({},ctxt,{success:function(linkedMdl) {
-            var dbTableName = linkedMdl.tableMetadata.dbTableName;
+        that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
+            var dbTableName = linkedModel.table_id;
             database.delete_linked_instance_all($.extend({},ctxt,{success:function() {
                     that.enableButtons();
                     that.reRender(ctxt);
@@ -809,17 +904,23 @@ promptTypes.external_link = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt);
         var fullUrl = that.url();
+        var launchAction = that.launchAction;
         var expandedUrl;
         if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
             expandedUrl = fullUrl;
         } else {
+            // relative URL. Assume this stays within Survey
             expandedUrl = opendatakit.getPlatformInfo().baseUri + 'framework/index.html' + fullUrl;
+            fullUrl = opendatakit.convertHashStringToSurveyUri(fullUrl);
+            // implicit intents are not working?
+            // launchAction = 'android.content.Intent.ACTION_EDIT';
+            launchAction = 'org.opendatakit.survey.android.activities.SplashScreenActivity';
         }
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
-            'openLink', that.launchAction, 
+            'openLink', launchAction, 
             JSON.stringify({ uri: fullUrl,
                 extras: { url: expandedUrl }}));
         ctxt.log('D','external_link.openLink', platInfo.container + " outcome is " + outcome);
@@ -893,69 +994,12 @@ promptTypes.user_branch = promptTypes.base.extend({
                         "px: " + that.promptIdx);
             ctxt.success();
         }});
-        var populateChoicesViaQuery = function(query, newctxt){
-            var queryUri = query.uri();
-            if(queryUri.search('//') < 0){
-                //If the uri is not a content provider or web resource,
-                //assume the path  is relative to the form directory.
-                queryUri = opendatakit.getCurrentFormPath() + queryUri;
-            }
-            
-            var ajaxOptions = {
-                "type": 'GET',
-                "url": queryUri,
-                "dataType": 'json',
-                "data": {},
-                "success": function(result){
-                    that.renderContext.choices = query.callback(result);
-                    newctxt.success("success");
-                },
-                "error": function(e) {
-                    //This is a passive error because there could just be a problem
-                    //with the content provider/network/remote service rather than with
-                    //the form.
-                    newctxt.log('W',"prompts." + this.type + ".configureRenderContext.error", 
-                                "px: " + this.promptIdx + " Error fetching choices " + e);
-                    that.renderContext.passiveError = "Error fetching choices.\n";
-                    if(e.statusText) {
-                        that.renderContext.passiveError += e.statusText;
-                    }
-                    // TODO: verify how this error should be handled...
-                    newctxt.failure({message: "Error fetching choices via ajax."});
-                }
-            };
- 
-            //TODO: It might also be desireable to make it so queries can refrence
-            //datasheets in the XLSX file.
-            var queryUriExt = queryUri.split('.').pop();
-            if(queryUriExt === 'csv') {
-                ajaxOptions.dataType = 'text';
-                ajaxOptions.success = function(result) {
-                    try {
-                        require(['jquery-csv'], function(){
-                            that.renderContext.choices = query.callback($.csv.toObjects(result));
-                            newctxt.success("success");
-                        },
-                        function (err) {
-                            newctxt.log('E',"prompts."+that.type+".require.failure " + err.requireType + ' modules: ',
-                                err.requireModules.toString() + " px: " + that.promptIdx);
-                            newctxt.failure({message: "Error fetching choices from csv data."});
-                        });
-                    } catch (e) {
-                        newctxt.log('E',"promptType.select.require.exception", "exception: " + e.message + " e: " + e.toString());
-                        newctxt.failure({message: "Error reading choices from csv data."});
-                    }
-                };
-            }
-            
-            $.ajax(ajaxOptions);
-        };
         
         that.renderContext.passiveError = null;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
         var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
         if(queryDefn != null) {
-            populateChoicesViaQuery(queryDefn, newctxt);
+            that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
         } else if (choiceListDefn != null) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
@@ -1132,71 +1176,14 @@ promptTypes.select = promptTypes._linked_type.extend({
         failure:function(m) {
             ctxt.failure(m);
         }});
-        var populateChoicesViaQueryUsingAjax = function(query, newctxt){
-            var queryUri = query.uri();
-            if(queryUri.search('//') < 0){
-                //If the uri is not a content provider or web resource,
-                //assume the path  is relative to the form directory.
-                queryUri = opendatakit.getCurrentFormPath() + queryUri;
-            }
-            
-            var ajaxOptions = {
-                "type": 'GET',
-                "url": queryUri,
-                "dataType": 'json',
-                "data": {},
-                "success": function(result){
-                    that.renderContext.choices = query.callback(result);
-                    newctxt.success("success");
-                },
-                "error": function(e) {
-                    //This is a passive error because there could just be a problem
-                    //with the content provider/network/remote service rather than with
-                    //the form.
-                    newctxt.log('W',"prompts." + this.type + ".configureRenderContext.error", 
-                                "px: " + this.promptIdx + " Error fetching choices");
-                    that.renderContext.passiveError = "Error fetching choices.\n";
-                    if(e.statusText) {
-                        that.renderContext.passiveError += e.statusText;
-                    }
-                    // TODO: verify how this error should be handled...
-                    newctxt.failure({message: "Error fetching choices via ajax."});
-                }
-            };
- 
-            //TODO: It might also be desireable to make it so queries can refrence
-            //datasheets in the XLSX file.
-            var queryUriExt = queryUri.split('.').pop();
-            if(queryUriExt === 'csv') {
-                ajaxOptions.dataType = 'text';
-                ajaxOptions.success = function(result) {
-                    try {
-                        require(['jquery-csv'], function(){
-                            that.renderContext.choices = query.callback($.csv.toObjects(result));
-                            newctxt.success("success");
-                        },
-                        function (err) {
-                            newctxt.log('E',"prompts."+that.type+".require.failure " + err.requireType + ' modules: ', 
-                                err.requireModules.toString() + " px: " + that.promptIdx);
-                            newctxt.failure({message: "Error fetching choices from csv data."});
-                        });
-                    } catch (e) {
-                        newctxt.log('E',"promptType.select.require.exception", "exception: " + e.message + " e: " + e.toString());
-                        newctxt.failure({message: "Error reading choices from csv data."});
-                    }
-                    };
-            }
-            
-            $.ajax(ajaxOptions);
-        };
 
          var populateChoicesViaQueryUsingLinkedTable = function(query, newctxt){
             newctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
-            that.getLinkedMdl($.extend({},newctxt,{success:function(linkedMdl) {
-                var dbTableName = linkedMdl.tableMetadata.dbTableName;
-                var selString = that.convertSelection(linkedMdl);
+            that.getlinkedModel($.extend({},newctxt,{success:function(linkedModel) {
+                var dbTableName = linkedModel.table_id;
+                var selString = that.convertSelection(linkedModel);
                 var selArgs = query.selectionArgs();
-                var ordBy = that.convertOrderBy(linkedMdl);
+                var ordBy = that.convertOrderBy(linkedModel);
                 var displayElementName = that.getLinkedInstanceName();
                 database.get_linked_instances($.extend({},newctxt,{success:function(instanceList) {
                     that.renderContext.choices = _.map(instanceList, function(instance) {
@@ -1212,7 +1199,7 @@ promptTypes.select = promptTypes._linked_type.extend({
         var populateChoicesViaQuery = function(query, newctxt){
             if (query.query_type == 'csv' || query.query_type == 'ajax')
             {
-                populateChoicesViaQueryUsingAjax(query, newctxt);
+                that.populateChoicesViaQueryUsingAjax(query, newctxt);
             }
             else if (query.query_type == 'linked_table')
             {
@@ -1278,6 +1265,72 @@ promptTypes.select_one = promptTypes.select.extend({
         //has been initilized.
         var valInChoices = false;
         if(!_.isString(savedValue)) {
+            return null;
+        }
+        if(this.renderContext.choices) {
+            valInChoices = _.any(this.renderContext.choices, function(choice){
+                return (choice.data_value === savedValue);
+            });
+        }
+        if (valInChoices) {
+            return [{
+                "name": this.name,
+                "value": savedValue
+            }];
+        }
+        else {
+            return [{
+                "name": this.name,
+                "value": "other"
+            }, {
+                "name": "otherValue",
+                "value": savedValue
+            }];
+        }
+    }
+});
+promptTypes.select_one_integer = promptTypes.select_one.extend({
+    modification: function(evt) {
+        var ctxt = this.controller.newContext(evt);
+        ctxt.log('D',"prompts." + this.type + ".modification", "px: " + this.promptIdx + " val: " + $(evt.target).attr('value'));
+        var that = this;
+        if(this.withOther) {
+            //This hack is needed to prevent rerendering
+            //causing the other input to loose focus when clicked.
+            if( $(evt.target).val() === 'other' &&
+                $(evt.target).prop('checked') &&
+                //The next two lines determine if the checkbox was already checked.
+                this.renderContext.other &&
+                this.renderContext.other.checked) {
+                ctxt.log('D',"prompts." + this.type + ".modification.withOther.hack", "px: " + this.promptIdx);
+                ctxt.success();
+                return;
+            }
+        }
+        if(this.appearance === 'grid') {
+            //Make selection more reponsive by providing visual feedback before
+            //the template is re-rendered.
+            this.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
+            this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
+        }
+        var formValue = (this.$('form').serializeArray()); 
+        // cast all values in formValue to ints
+        for (var i = 0; i < formValue.length; i++) {
+            formValue[i].value = parseInt(formValue[i].value);
+        }
+        that.setValueDeferredChange(that.generateSaveValue(formValue));
+        that.updateRenderValue(formValue);
+        that.reRender(ctxt);
+    },
+    /**
+     * Parse a saved string value into the format
+     * returned by jQuery's serializeArray function.
+     */
+    parseSaveValue: function(savedValue){
+        //Note that this function expects to run after renderContext.choices
+        //has been initilized.
+        var valInChoices = false;
+        if(!_.isNumber(savedValue)) {
             return null;
         }
         if(this.renderContext.choices) {
@@ -1504,6 +1557,22 @@ promptTypes.text = promptTypes.input_type.extend({
     type: "text",
     renderContext: {
         "type": "text"
+    }
+});
+promptTypes.textarea = promptTypes.input_type.extend({
+    type: "textarea",
+    templatePath: "templates/textarea.handlebars",
+    renderContext: {
+        "type": "textarea"
+    },
+    beforeMove: function() {
+        var that = this;
+        var isInvalid = that.setValueAndValidate(this.$('textarea').val());
+        if ( isInvalid ) {
+            return { message: that.invalid_value_message };
+        } else {
+            return null;
+        }
     }
 });
 promptTypes.integer = promptTypes.input_type.extend({
@@ -1792,15 +1861,15 @@ promptTypes.media = promptTypes.base.extend({
                 var uriFragment = (jsonObject.result != null) ? jsonObject.result.uriFragment : null;
                 var contentType = (jsonObject.result != null) ? jsonObject.result.contentType : null;
                 if (uriFragment != null && contentType != null) {
-                    var oldPath = that.getValue();
-                    if ( uriFragment != oldPath) {
-                        // TODO: delete old??? Or leave until marked as finalized?
-                        that.setValueDeferredChange({ uriFragment : uriFragment, contentType: contentType });
-                        that.enableButtons();
-                        that.updateRenderContext();
-                        that.reRender(ctxt);
-                    }
+                    var oldMediaStruct = that.getValue();
+                    var newPath = opendatakit.getRowpathFromUriFragment(uriFragment);
+                    // TODO: delete old??? Or leave until marked as finalized?
+                    that.setValueDeferredChange({ uriFragment : newPath, contentType: contentType });
                 }
+                // TODO: should null returns indicate a clearing of this value?
+                that.enableButtons();
+                that.updateRenderContext();
+                that.reRender(ctxt);
             }
             else {
                 ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
@@ -1819,7 +1888,7 @@ promptTypes.media = promptTypes.base.extend({
         var that = this;
         var mediaUri = that.getValue();
         var uriFragment = (mediaUri != null && mediaUri.uriFragment != null) ? mediaUri.uriFragment : null;
-        var uri = (uriFragment == null) ? null : opendatakit.getPlatformInfo().baseUri + uriFragment;
+        var uri = (uriFragment == null) ? null : opendatakit.getUriFromRowpath(uriFragment);
         var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
         var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
         var platinfo = opendatakit.getPlatformInfo();
@@ -1841,15 +1910,20 @@ promptTypes.media = promptTypes.base.extend({
             return '';
         } else {
             var displayObject = this.getValue();
-            if (displayObject != null) {
-                var ind = displayObject.uriFragment.lastIndexOf("/") + 1;
-                return displayObject.uriFragment.substring(ind);
+            if (displayObject != null && displayObject.uriFragment != null) {
+                return displayObject.uriFragment;
             }
             else {
                 return '';
             }          
         }
     }
+});
+promptTypes.read_only_image = promptTypes.media.extend({
+    type: "read_only_image",
+    extension: "jpg",
+    contentType: "image/*",
+    templatePath: "templates/read_only_image.handlebars",
 });
 promptTypes.image = promptTypes.media.extend({
     type: "image",
@@ -1963,6 +2037,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
 /* Save only the SCAN_RESULT */
 promptTypes.barcode = promptTypes.launch_intent.extend({
     type: "barcode",
+    buttonLabel: 'Get Barcode',
     intentString: 'com.google.zxing.client.android.SCAN',
      extractDataValue: function(jsonObject) {
         return jsonObject.result.SCAN_RESULT;
@@ -1970,6 +2045,7 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
+    buttonLabel: 'Record Location',
     templatePath: "templates/geopoint.handlebars",
     intentString: 'org.opendatakit.survey.android.activities.GeoPointActivity',
     extractDataValue: function(jsonObject) {
@@ -1985,11 +2061,14 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
             return '';
         } else {
             var displayObject = this.getValue();
+            if (displayObject === null || displayObject === undefined ) {
+                return null;
+            }
             if (displayObject.latitude != null && displayObject.longitude != null) {
                 return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
             }
             else {
-                return '';
+                return null;
             }
         }
     }
@@ -1997,17 +2076,788 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
     type: "geopointmap",
     intentString: 'org.opendatakit.survey.android.activities.GeoPointMapActivity',
-     extractDataValue: function(jsonObject) {
-        return { latitude: jsonObject.result.latitude, 
-                 longitude: jsonObject.result.longitude, 
-                 altitude: jsonObject.result.altitude, 
-                 accuracy: jsonObject.result.accuracy };
+    extractDataValue: function(jsonObject) {
+        return {
+            latitude: jsonObject.result.latitude,
+            longitude: jsonObject.result.longitude,
+            altitude: jsonObject.result.altitude,
+            accuracy: jsonObject.result.accuracy
+        };
+    },
+    formattedValueForContentsDisplay: function() {
+        if ( !this.name ) {
+            return '';
+        } else {
+            var displayObject = this.getValue();
+            if (displayObject === null || displayObject === undefined ) {
+                return null;
+            }
+            if (displayObject.latitude != null && displayObject.longitude != null) {
+                return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
+            }
+            else {
+                return null;
+            }
+        }
     }
 });
 promptTypes.note = promptTypes.base.extend({
     type: "note",
     templatePath: "templates/note.handlebars"
 });
+
+promptTypes.bargraph = promptTypes.base.extend({
+    type: "bargraph",
+    vHeight: 0,
+    vWidth: 0,
+    events: {
+        "click .y_up": "scale_y_up",
+        "click .y_down": "scale_y_down",
+        "click .x_up": "scale_x_up",
+        "click .x_down": "scale_x_down"
+    },
+    templatePath: "templates/graph.handlebars",
+    scale_y_up: function(evt){
+        var that = this;
+        that.vHeight = that.vHeight + (that.vHeight * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_y_down: function(evt){
+        var that = this;
+        that.vHeight = that.vHeight - (that.vHeight * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_x_up: function(evt){
+        var that = this;
+        that.vWidth = that.vWidth + (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_x_down: function(evt){
+        var that = this;
+        that.vWidth = that.vWidth - (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);    
+        that.reRender(ctxt);
+    },
+    configureRenderContext: function(ctxt) {
+        var that = this;
+        var newctxt = $.extend({}, ctxt, {success: function(outcome) {
+            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+                        "px: " + that.promptIdx);
+            ctxt.success();
+        },
+        failure:function(m) {
+            ctxt.failure(m);
+        }});
+        
+        that.renderContext.passiveError = null;
+        that.renderContext.graphType = that.type;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if(queryDefn != null) {
+            that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
+        } else {
+            newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
+        }
+    },
+    afterRender: function() {
+        var that = this;
+
+        var paramWidth = 400;
+        var paramHeight = 450;
+        
+        // In configureRenderContext getting data via the CSV
+        // fetched data should now be in the renderContext.choices array
+        if (that.renderContext.choices.length == 0)
+        {
+            shim.log("E","prompts." + that.type + ".afterRender - no data to graph");
+            return; 
+        } 
+        var dataJ = _.map(that.renderContext.choices, function(choice){
+            return choice;
+        });
+
+        var margin = {top: 50, right: 20, bottom: 50, left: 50},
+            width = paramWidth - margin.left - margin.right,
+            height = paramHeight - margin.top - margin.bottom;
+
+        var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+
+        var y = d3.scale.linear().range([height, 0]);
+
+        var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+        var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .tickSubdivide(true)
+        dataJ.forEach(function(d) {
+                d.y = +d.y;
+            });
+
+        x.domain(dataJ.map(function(d) { return d.x; }));
+        y.domain([0, d3.max(dataJ, function(d) { return d.y; })]);
+        if (that.vWidth == 0) {
+            that.vWidth = width;
+        }
+        if (that.vHeight == 0) {
+            that.vHeight = height;
+        }
+
+        var downx = 0;
+        var downy = Math.NaN;
+        var isClicked = 0;
+        var downscalex;
+        var downscaley;
+        var clickX;
+        var clickY;
+        var lMarg = 0;
+        var tMarg = 0;
+
+        var tempHeight = that.vHeight + 0;
+        x.rangeRoundBands([0, that.vWidth + 0], .2);
+        y.range([tempHeight, 0]);
+        yAxis.ticks(tempHeight/30);
+
+        that.$("#plot").bind('pinch', function(){
+            that.scale_y_down();
+        });
+
+        var svg = d3.select(that.$("#plot").get(0)).append("svg")
+            .attr("id", "svgElement")
+            .attr("class", "wholeBody")
+            .attr("z-index", 1)
+            .attr("width", that.vWidth + margin.left + margin.right + 0)
+            .attr("height", that.vHeight + margin.top + margin.bottom + 0)
+            .append("g")
+            .attr("transform", "translate(" + (margin.left + lMarg) + "," + (margin.top + tMarg) + ")");
+
+            svg.append("g")
+            .attr("class", "x-axis")
+            .attr("z-index", 4)
+            .attr("transform", "translate(0," + tempHeight + ")")
+            .call(xAxis)
+            .append("text")
+            .attr("x", that.vWidth/2-50)
+            .attr("y", 35)
+            .attr("dx", ".71em")
+            .attr("pointer-events", "all")
+            .style("font-size", "1.5em")
+            .style("text-anchor", "start")
+            .text("x-axis");
+
+            svg.append("g")
+            .attr("class", "y_axis")
+            .attr("z-index", 4)
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -35)
+            .attr("x", -1 * tempHeight/2)
+            .style("font-size", "1.5em")
+            .style("text-anchor", "end")
+            .text("y-axis");
+             var lines = svg.selectAll(".bar")
+              .data(dataJ);
+
+          lines.enter()
+            .append("rect")
+              .attr("class", "bar")
+              .attr("width", x.rangeBand())
+              .attr("fill", function(d) {
+                return 'red';// change this using d.y with 'if' statements to hard code color values
+                });
+          lines
+              .attr("x", function(d) { return x(d.x); })
+              .attr("y", function(d) { return y(d.y); })
+              .attr("height", function(d) { return tempHeight - y(d.y); });
+ 
+        return;
+    }
+});
+
+promptTypes.linegraph = promptTypes.base.extend({
+    type: "linegraph",
+    vHeight: 0,
+    vWidth: 0,
+    events: {
+        "click .y_up": "scale_y_up",
+        "click .y_down": "scale_y_down",
+        "click .x_up": "scale_x_up",
+        "click .x_down": "scale_x_down"
+    },
+    templatePath: "templates/graph.handlebars",
+    scale_y_up: function(evt){
+        var that = this;
+        that.vHeight = that.vHeight + (that.vHeight * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_y_down: function(evt){
+        var that = this;
+        that.vHeight = that.vHeight - (that.vHeight * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_x_up: function(evt){
+        var that = this;
+        that.vWidth = that.vWidth + (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_x_down: function(evt){
+        var that = this;
+        that.vWidth = that.vWidth - (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);    
+        that.reRender(ctxt);
+    },
+    configureRenderContext: function(ctxt) {
+        var that = this;
+        var newctxt = $.extend({}, ctxt, {success: function(outcome) {
+            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+                        "px: " + that.promptIdx);
+            ctxt.success();
+        },
+        failure:function(m) {
+            ctxt.failure(m);
+        }});
+        
+        that.renderContext.passiveError = null;
+        that.renderContext.graphType = that.type;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if(queryDefn != null) {
+            that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
+        } else {
+            newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
+        }
+    },
+    afterRender: function() {
+        var that = this;
+        var xString = "x-axis";
+        var yString = "y-axis";
+        var legendString = "y-value"
+
+        var paramWidth = 450;
+        var paramHeight = 400;
+        
+        // In configureRenderContext getting data via the CSV
+        // fetched data should now be in the renderContext.choices array
+        if (that.renderContext.choices.length == 0)
+        {
+            shim.log("E","prompts." + that.type + ".afterRender - no data to graph");
+            return; 
+        } 
+
+        if (that.x_axis_label) {
+            xString = that.x_axis_label;
+        }
+
+        if (that.y_axis_label) {
+            yString = that.y_axis_label;
+        }
+
+        if (that.legend_text) {
+            legendString = that.legend_text;
+        }
+
+        var dataJ = _.map(that.renderContext.choices, function(choice){
+            return choice;
+        });
+
+        var margin = {top: 50, right: 20, bottom: 40, left: 50},
+            width = paramWidth - margin.left - margin.right,
+            height = paramHeight - margin.top - margin.bottom;
+
+        var x = d3.scale.linear().range([0, width]);
+
+        var y = d3.scale.linear().range([height, 0]);
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+            .tickSubdivide(true);
+
+         var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .tickSubdivide(true);
+
+        dataJ.forEach(function(d) {
+            d.y = +d.y;
+            d.x = +d.x;
+        });
+
+        /* When dataMin and dataMax gets implemented
+        dataMin.forEach(function(d) {
+            d.y = +d.y;
+            d.x = +d.x;
+        });
+    
+        dataMax.forEach(function(d) {
+            d.y = +d.y;
+            d.x = +d.x;
+        });
+        */
+
+        
+        var line = d3.svg.line()
+            .x(function(d) { return x(d.x); })
+            .y(function(d) { return y(d.y); });
+
+        // Don't have a dataMax of dataMin yet
+        // Also setting this to a fixed range and domain for now
+        // These will probably need to be settings 
+        x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
+        y.domain([d3.min(dataJ, function(d) { return d.y; }), d3.max(dataJ, function(d) { return d.y; })]);
+
+        if (that.vWidth == 0) {
+            that.vWidth = width;
+        }
+        if (that.vHeight == 0) {
+            that.vHeight = height;
+        }
+
+        var downx = 0;
+        var downy = Math.NaN;
+        var isClicked = 0;
+        var downscalex;
+        var downscaley;
+        var clickX;
+        var clickY;
+        var lMarg = 0;
+        var tMarg = 0;
+
+        var tempHeight = that.vHeight + 0;
+        //x.rangeRoundBands([0, that.vWidth + 0], .2);
+        x.range([0, that.vWidth]);
+        y.range([tempHeight, 0]);
+        yAxis.ticks(tempHeight/30);
+
+        var svg = d3.select(that.$("#plot").get(0)).append("svg")
+            .attr("id", "svgElement")
+            .attr("class", "wholeBody")
+            .attr("z-index", 1)
+            .attr("width", that.vWidth + margin.left + margin.right + 0)
+            .attr("height", that.vHeight + margin.top + margin.bottom + 0)
+            .append("g")
+            .attr("transform", "translate(" + (margin.left + lMarg) + "," + (margin.top + tMarg) + ")");
+
+        svg.append("g")
+            .attr("class", "x-axis")
+            .attr("z-index", 4)
+            .attr("transform", "translate(0," + tempHeight + ")")
+            .call(xAxis)
+            .append("text")
+            .attr("x", that.vWidth/2-50)
+            .attr("y", 35)
+            .attr("dx", ".71em")
+            .attr("pointer-events", "all")
+            .style("font-size", "1.5em")
+            .style("text-anchor", "start")
+            .text(xString);  // This should be customizable
+
+        svg.append("g")
+            .attr("class", "y_axis")
+            .attr("z-index", 4)
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -35)
+            .attr("x", -1 * tempHeight/2)
+            .style("font-size", "1.5em")
+            .style("text-anchor", "end")
+            .text(yString);  // This should be customizable
+
+        svg.append("path")
+            .datum(dataJ)
+            .attr("class", "line")
+            .attr("fill", "none")
+            .attr("stroke", "blue")
+            .attr("d", line);
+
+        // add legend   
+        var legend = svg.append("g")
+            .attr("class", "legend")
+            .attr("height", 50)
+            .attr("width", 100);
+    
+        legend
+            .append("rect")
+            .attr("x", -10 )
+            .attr("y", -30)
+            .attr("width", 10)
+            .attr("height", 10)
+            .style("fill", 'blue');
+      
+        legend
+        .append("text")
+        .attr("x", 10)
+        .attr("y", -20)
+        .text(legendString);
+
+        if (that.x_value && that.y_value) {
+            var x_val = database.getDataValue(that.x_value);
+            var y_val = database.getDataValue(that.y_value);
+            svg.append("circle")
+                .attr("class", "dot")
+                .attr("r", 8)
+                .attr("fill", "none")
+                .attr("stroke", "#0a0")
+                .attr("stroke-width", "1.5px")
+                .attr("cx", function(d) { return x(x_val); })
+                .attr("cy", function(d) { return y(y_val); });
+    }
+
+ 
+        return;
+    }
+});
+
+promptTypes.piechart = promptTypes.base.extend({
+    type: "piechart",
+    vHeight: 0,
+    vWidth: 0,
+    vRadius: 0,
+    events: {
+        "click .scale_up": "scale_up",
+        "click .scale_down": "scale_down",
+    },
+    templatePath: "templates/graph.handlebars",
+    scale_up: function(evt){
+        var that = this;
+        that.vHeight = that.vHeight + (that.vHeight * .1);
+        that.vWidth = that.vWidth + (that.vWidth * .1);
+        that.vRadius = that.vRadius * 1.1;
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_down: function(evt){
+        var that = this;
+        that.vHeight = that.vHeight - (that.vHeight * .1);
+        that.vWidth = that.vWidth - (that.vWidth * .1);
+        that.vRadius = that.vRadius * 0.9;
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    configureRenderContext: function(ctxt) {
+        var that = this;
+        var newctxt = $.extend({}, ctxt, {success: function(outcome) {
+            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+                        "px: " + that.promptIdx);
+            ctxt.success();
+        },
+        failure:function(m) {
+            ctxt.failure(m);
+        }});
+        
+        that.renderContext.passiveError = null;
+        that.renderContext.graphType = that.type;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if(queryDefn != null) {
+            that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
+        } else {
+            newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
+        }
+    },
+    afterRender: function() {
+        var that = this;
+
+        var paramWidth = 500;
+        var paramHeight = 500;
+
+        var margin = {top: 20, right: 20, bottom: 40, left: 80},
+            width = paramWidth - margin.left - margin.right,
+            height = paramHeight - margin.top - margin.bottom,
+            radius = Math.min(width, height) / 2;
+        
+        // In configureRenderContext getting data via the CSV
+        // fetched data should now be in the renderContext.choices array
+        if (that.renderContext.choices.length == 0)
+        {
+            shim.log("E","prompts." + that.type + ".afterRender - no data to graph");
+            return; 
+        } 
+        var dataJ = _.map(that.renderContext.choices, function(choice){
+            return choice;
+        });
+
+        if (that.vWidth == 0) {
+            that.vWidth = width;
+        }
+        if (that.vHeight == 0) {
+            that.vHeight = height;
+        }
+        if (that.vRadius == 0) {
+            that.vRadius = radius;
+        }
+
+        dataJ.forEach(function(d) {
+            d.y = +d.y;
+        });
+
+
+        var arc = d3.svg.arc()
+            .outerRadius(that.vRadius - 10)
+            .innerRadius(0);
+
+        var pie = d3.layout.pie()
+            .sort(null)
+            .value(function(d) { return d.y; });
+
+        var svg = d3.select(that.$("#plot").get(0)).append("svg")
+            .attr("class", "wholeBody")
+            .data([dataJ])
+            .attr("width", that.vWidth)
+            .attr("height", that.vHeight)
+            .append("g")
+            .attr("transform", "translate(" + that.vWidth / 2 + "," + that.vHeight / 2 + ")");
+
+        var g = svg.selectAll(".arc")
+            .data(pie(dataJ))
+            .enter().append("g")
+            .attr("class", "arc");
+
+        g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d, i) {
+                // Switch to a case statement 
+                // Maybe these colors should be available in a library or something
+                if(i == 0) {
+                    return "green";
+                } else if(i == 1) {
+                    return "yellow";
+                } else if(i == 2){
+                    return "blue";
+                } else if(i == 3){
+                    return "red";
+                } else if(i == 4){
+                    return "orange";
+                } else if(i == 5){
+                    return "purple";
+                } else if(i == 6){
+                    return "pink";
+                } else if(i == 7){
+                    return "teal";
+                }
+            });
+
+        g.append("text")
+            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+            .attr("dy", "2em")
+            .style("text-anchor", "middle")
+            .text(function(d, i) { return dataJ[i].x; });        
+    }
+});
+
+promptTypes.scatterplot = promptTypes.base.extend({
+    type: "scatterplot",
+    vHeight: 0,
+    vWidth: 0,
+    events: {
+        "click .y_up": "scale_y_up",
+        "click .y_down": "scale_y_down",
+        "click .x_up": "scale_x_up",
+        "click .x_down": "scale_x_down"
+    },
+    templatePath: "templates/graph.handlebars",
+    scale_y_up: function(evt){
+        var that = this;
+        that.vHeight = that.vHeight + (that.vHeight * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_y_down: function(evt){
+        var that = this;
+        that.vHeight = that.vHeight - (that.vHeight * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_x_up: function(evt){
+        var that = this;
+        that.vWidth = that.vWidth + (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);
+        that.reRender(ctxt);
+    },
+    scale_x_down: function(evt){
+        var that = this;
+        that.vWidth = that.vWidth - (that.vWidth * .2);
+        var ctxt = that.controller.newContext(evt);    
+        that.reRender(ctxt);
+    },
+    configureRenderContext: function(ctxt) {
+        var that = this;
+        var newctxt = $.extend({}, ctxt, {success: function(outcome) {
+            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+                        "px: " + that.promptIdx);
+            ctxt.success();
+        },
+        failure:function(m) {
+            ctxt.failure(m);
+        }});
+        
+        that.renderContext.passiveError = null;
+        that.renderContext.graphType = that.type;
+        var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
+        if(queryDefn != null) {
+            that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
+        } else {
+            newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
+        }
+    },
+    afterRender: function() {
+        var that = this;
+
+        var paramWidth = 450;
+        var paramHeight = 400;
+
+        var margin = {top: 20, right: 20, bottom: 40, left: 50},
+            width = paramWidth - margin.left - margin.right,
+            height = paramHeight - margin.top - margin.bottom,
+            padding = 30;
+
+        if (that.vWidth == 0) {
+            that.vWidth = width;
+        }
+        if (that.vHeight == 0) {
+            that.vHeight = height;
+        }
+        
+        // In configureRenderContext getting data via the CSV
+        // fetched data should now be in the renderContext.choices array
+        if (that.renderContext.choices.length == 0)
+        {
+            shim.log("E","prompts." + that.type + ".afterRender - no data to graph");
+            return; 
+        } 
+
+        var dataJ = _.map(that.renderContext.choices, function(choice){
+            return choice;
+        });
+
+        dataJ.forEach(function(d) {
+            d.x = +d.x;
+            d.y = +d.y;
+            d.r = +d.r;
+        });
+
+        var x = d3.scale.ordinal()
+            .rangeRoundBands([0, that.vWidth], .1);
+
+        var y = d3.scale.linear()
+            .range([that.vHeight, 0]);
+
+        x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
+        y.domain([0, d3.max(dataJ, function(d) { return d.y; })]);
+
+        //    Create scale functions
+        var xScale = d3.scale.linear()
+            .domain([0, d3.max(dataJ, function(d) { return d.x; })])
+            .range([padding, that.vWidth - padding * 2]);
+
+        var yScale = d3.scale.linear()
+            .domain([0, d3.max(dataJ, function(d) { return d.y; })])
+            .range([that.vHeight - padding, padding]);
+
+        var rScale = d3.scale.linear()
+            .domain([0, d3.max(dataJ, function(d) { return d.y; })])
+            .range([2, 5]);
+
+        // Define X axis
+        var xAxis = d3.svg.axis()
+            .scale(xScale)
+            .orient("bottom")
+            .ticks(5);
+
+        // Define Y axis
+        var yAxis = d3.svg.axis()
+            .scale(yScale)
+            .orient("left")
+            .ticks(5);
+
+    
+        // Drawing
+        d3.selectAll(".wholeBody").remove();
+        
+        //    Create SVG element
+        var svg = d3.select(that.$("#plot").get(0))
+            .append("svg")
+            .attr("class", "wholeBody")
+            .attr("width", that.vWidth + margin.left + margin.right)
+            .attr("height", that.vHeight + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + (margin.left) + "," + (margin.top) + ")");
+        
+        x.rangeRoundBands([0, that.vWidth], .1);
+        y.range([that.vHeight, 0]);
+        
+        yScale.range([that.vHeight - padding, padding]);
+        xScale.range([padding, that.vWidth - padding * 2]);
+
+        // For now hardcode these values for colors
+        var rString = "x";
+        var getForegroundColor = function(value) {
+            var len = 0;
+            if (value !== null && value !== undefined) {
+                len = parseInt(value) / 10;
+            }
+            console.log('getForegroundColor() called');
+            // we need to return a string, so we'll just bring back a dummy value
+            var colors = ['blue','red','yellow','orange','green'];
+            return colors[parseInt(len) % colors.length];
+        };
+        
+        //        Create circles
+        svg.selectAll("circle")
+            .data(dataJ)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d) {
+                return xScale(d.x);
+            })
+            .attr("cy", function(d) {
+                return yScale(d.y);
+            })
+            .attr("r", function(d) {
+                return rScale(4);
+            })
+            .attr("fill", function(d) {
+                if(rString != "No Scaling") {
+                    return getForegroundColor(d.r);
+                } else {
+                    return "black";
+                }
+            });
+
+        //        Create X axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + (that.vHeight - padding) + ")")
+            .call(xAxis)
+            .append("text")
+            .attr("x", that.vWidth/2-50)
+            .attr("y", 35)
+            .style("font-size", "1.5em")
+            .style("text-anchor", "start")
+            .text("x-axis");  // Need to be able to pass a string in
+
+        //        Create Y axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(" + padding + ",0)")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -35)
+            .attr("x", -1 * that.vHeight/2)
+            .style("font-size", "1.5em")
+            .style("text-anchor", "end")
+            .text("y-axis");  // Need to be able to pass a string in
+        }
+});
+
 // psuedo-prompt emitted by do_section so that sections appear in contents list
 promptTypes._section = promptTypes.base.extend({
     type: "_section",

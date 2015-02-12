@@ -38,10 +38,11 @@ body {
 }
 #out{
     clear: both;
-    height: 500px;
+	padding: 10px;
+    height: 60%;
     width: 100%;
 }
-#save {
+.save-button {
     float: right;
     font-size: 20px;
 	font-weight: bold;
@@ -74,33 +75,19 @@ body {
 </style>
 <script type="text/javascript" src="js-xlsx/jszip.js"></script>
 <script type="text/javascript" src="js-xlsx/xlsx.js"></script>
-<script type="text/javascript" src="XRegExp-All-3.0.0-pre-2013-08-27.js"></script>
+<script type="text/javascript" src="XRegExp-All-3.0.0-pre-2014-12-24.js"></script>
 <script type="text/javascript" src="underscore.js"></script>
-<script type="text/javascript" src="XLSXConverter.js"></script>
+<script type="text/javascript" src="XLSXConverter2.js"></script>
+<script type="text/javascript" src="../devEnv/js/devenv.js"></script>
 <script type="text/javascript">
 //<![CDATA[
-function removeEmptyStrings(rObjArr){
-    var outArr = [];
-    _.each(rObjArr, function(row){
-        var outRow = Object.create(row.__proto__);
-        _.each(row, function(value, key){
-            if(_.isString(value) && value.trim() === "") {
-                return;
-            }
-            outRow[key] = value;
-        });
-        if(_.keys(outRow).length > 0) {
-            outArr.push(outRow);
-        }
-    });
-    return outArr;
-}
+var util = require('devenv-util');
 
 function to_json(workbook) {
     var result = {};
     _.each(workbook.SheetNames, function(sheetName) {
-        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-        rObjArr = removeEmptyStrings(rObjArr);
+        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName],{raw:true});
+        rObjArr = util.removeEmptyStrings(rObjArr);
         if(rObjArr.length > 0){
             result[sheetName] =  rObjArr;
         }
@@ -109,6 +96,7 @@ function to_json(workbook) {
 }
 
 function clear_output() {
+    window.formDef = null;
     var out = document.getElementById("out");
     if(out.innerHTML === undefined){
         out.textContent = 'Loading...';
@@ -128,11 +116,128 @@ function print_output(output) {
 
 
 function handleSave(e) {
-    var uriContent = "data:application/octet-stream," + encodeURIComponent(document.getElementById("out").value);
+    var formDefStr = window.formDef;
+
+    if (formDefStr === undefined || formDefStr === null) {
+      formDefStr = '';
+    }
+
+    var uriContent = "data:application/octet-stream," + encodeURIComponent(formDefStr);
     var downloader = document.createElement("iframe");
     downloader.style.display = "none";
     downloader.src = uriContent;
     document.body.appendChild(downloader);
+
+    // Generate definition.csv and properties.csv if necessary
+    if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefStr)) {
+        var formDefJson = JSON.parse(formDefStr);
+
+        // Get the dataTableModel
+        var dtm = util.getDataTableModelFromFormDef(formDefJson);
+
+        // Create and write out definition.csv
+        var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
+        defCsv = "data:text/csv;charset=utf-8," + defCsv;
+        downloadCsvFile(defCsv, "definition.csv");
+
+        // Create and write out properties.csv
+        var propCsv = util.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
+        propCsv = "data:text/csv;charset=utf-8," + propCsv;
+        downloadCsvFile(propCsv, "properties.csv");
+    } 
+}
+
+/**
+ * Post the form def to the correct location on the file system.
+ */
+function postFormDef() {
+    var formDef = window.formDef;
+    if (formDef === undefined || formDef === null || formDef === '') {
+      console.log('no formDef content to post.');
+      return;
+    }
+
+    var formDefJson = JSON.parse(formDef);
+    var tableId = util.getTableIdFromFormDef(formDefJson);
+    var formId = util.getFormIdFromFormDef(formDefJson);
+    var canWriteFile =
+      formId === util.getFrameworkFormId() ||
+      (tableId !== null && formId !== null);
+    if (!canWriteFile) {
+      console.log('form id or table id could not be found, not posting file.');
+      alert(
+          'Cannot post file, invalid tableId or formId.  tableId: ' +
+          tableId +
+          ' and formId: ' +
+          formId);
+    } else {
+      var path;
+      var shouldWriteDefAndPropCsv = false;
+      if (formId === util.getFrameworkFormId()) {
+        // a special case for the framework file, which is reserved.
+        path = util.getRelativePathToFrameworkFormDef();
+      } else {
+        // we're dealing with a formdef that we're assuming must be for a
+        // particular table, if we're going to be saving it automatically.
+        path =
+          'app/tables/' +
+          tableId +
+          '/forms/' +
+          formId +
+          '/formDef.json';
+
+          if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDef)) {
+            shouldWriteDefAndPropCsv = true;
+          }
+      }
+      console.log('going to write formDef to: ' + path);
+
+      util.postFile(path, formDef, function(err, response, body) {
+        if (err || response.statusCode !== 200) {
+            alert(
+              'Something went wrong! Please save the file manually.');
+        } else {
+            alert('Saved the file to: ' + path);
+        }
+      });
+
+      // Post the definition.csv and properties.csv files 
+      // if necessary
+      if (shouldWriteDefAndPropCsv) {
+        // Get the dataTableModel
+        var dtm = util.getDataTableModelFromFormDef(formDefJson);
+
+        var defPath = 'app/tables/' + tableId + '/definition.csv';
+        var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
+        util.postFile(defPath, defCsv, function(err, response, body) {
+            if (err || response.statusCode !== 200) {
+                alert(
+                  'Something went wrong! Please save the file manually.');
+            } else {
+                alert('Saved the file to: ' + defPath);
+            }
+        });
+
+        var propPath = 'app/tables/' + tableId + '/properties.csv';
+        var propCsv = util.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
+        util.postFile(propPath, propCsv, function(err, response, body) {
+            if (err || response.statusCode !== 200) {
+                alert(
+                  'Something went wrong! Please save the file manually.');
+            } else {
+                alert('Saved the file to: ' + propPath);
+            }
+        });
+      }
+    }
+}
+
+function downloadCsvFile (csvContent, fileName) {
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", fileName);
+    link.click();
 }
 
 //TODO: Test multiple forms
@@ -228,7 +333,10 @@ function makeReader(f) {
                 var jsonWorkbook = to_json(xlsx);
                 //console.log(jsonWorkbook);
                 var processedWorkbook = XLSXConverter.processJSONWorkbook(jsonWorkbook);
-                print_output(JSON.stringify(processedWorkbook, 2, 2));
+                window.formDef = JSON.stringify(processedWorkbook, 2, 2);
+                // Add an extra new line character to make output consistent with script
+                window.formDef += '\n';
+                print_output(window.formDef);
                 _.each(XLSXConverter.getWarnings(), function(warning){
                     var warningEl = document.createElement("p");
                     warningEl.innerHTML = warning;
@@ -279,7 +387,7 @@ window.onload = function() {
 //]]>
 </script>
 </head>
-<body>
+<body class="fullembedded" >
   <div class="panel">
 	<p>Process your XLSX file into a <tt>formDef.json</tt> file.</p>
     <div id="drop">Drop an XLSX file here to convert to JSON.</div>
@@ -291,7 +399,8 @@ window.onload = function() {
   <div id="warnings"></div>
 
   <div class="panel">
-    <button onclick="handleSave();" id="save">Save</button>
+    <button class="save-button" onclick="postFormDef();" id="write-formdef">Save to File System</button>
+    <button class="save-button" onclick="handleSave();" id="save">Save</button>
     <p>Output (to be saved as <tt>formDef.json</tt>):</p>
     <textarea id="out"></textarea>
   </div>

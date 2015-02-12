@@ -363,11 +363,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "visited_continents_items"
         },
+        "valuesList": "continents",
         "elementKey": "visited_continents"
       },
       "visited_seattle": {
@@ -378,16 +378,21 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "visited_seattle"
       },
       "rating": {
+        "type": "integer",
         "_defn": [
           {
             "_row_num": 12,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "survey"
           }
         ],
-        "type": "integer",
         "elementKey": "rating"
       }
     },

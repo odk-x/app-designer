@@ -12,9 +12,6 @@ if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
     });
 }
 
-$(document).ready(setup);
-//handles events from html page
-    
 function setup() {
     displayGroup();
 }
@@ -54,26 +51,20 @@ function displayGroup() {
         detailContainer.attr('id', 'item_' + i);
         $(detailContainer).hide();
                   
-        var loc = data.getData(i,'Location');
-        var lat = '';
-        var lng = '';
-        if ( loc !== null ) {
-            var splitLoc = loc.split(',');
-            lat = splitLoc[0];
-            lng = splitLoc[1];
-        }
+        var lat = data.getData(i,'Location_latitude');
+        var lng = data.getData(i,'Location_longitude');
 
         var field1 = $('<p>');
         field1.text('Latitude: ' + lat);
         var field2 = $('<p>');
         field2.text('Longitude: ' + lng);
         
-        var srcMimeUri = data.getData(i, 'Image');
+        var uriRelative = data.getData(i, 'Image.uriFragment');
         var src = '';
-        if (srcMimeUri !== null ) {
-            var mimeUriObject = JSON.parse(srcMimeUri);
-            var uriRelative = mimeUriObject.uriFragment;
-            var uriAbsolute = control.getFileAsUrl(uriRelative);
+        if (uriRelative !== null  && uriRelative !== "") {
+            var tableId = data.getTableId();
+            var rowId = data.getRowId(i);
+            var uriAbsolute = control.getRowFileAsUrl(tableId, rowId, uriRelative);
             src = uriAbsolute;
         }
 

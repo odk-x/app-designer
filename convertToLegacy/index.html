@@ -20,13 +20,13 @@ body {
     font-size: 20px;
 }
 .fullheight {
-	position:fixed !important;
-	position:absolute;
-	top:0;
-	right:0;
-	bottom:0;
-	left:0;
-	overflow: auto;
+    position:fixed !important;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    overflow: auto;
 }
 #drop{
     background-color: white;
@@ -45,40 +45,41 @@ body {
     padding: 1em;
 }
 #logging {
-	background-color: white;
+    background-color: white;
     width:99.5%;
-	margin: 0 auto;
+    margin: 0 auto;
     height: 15%;
     overflow: auto;
     border: 1px solid grey;
 }
 #out{
-	overflow: auto;
-	width: 99.5%;
-	margin: 0 auto;
-	max-height:50%;
+    overflow: auto;
+    width: 99.5%;
+	height:20%;
+    margin: 0 auto;
+    max-height:50%;
     border: 1px solid grey;
 }
 #save {
     float: right;
     font-size: 20px;
-	font-weight: bold;
+    font-weight: bold;
     margin-top: 15px;
 }
 .bottompanel.panel {
-	border-bottom: 0px;
+    border-bottom: 0px;
 }
 .panel {
     background-color: #f5f5f5;
     border: 1px solid lightgray;
-	margin: 0 auto;
-	height: inherit;
+    margin: 0 auto;
+    height: inherit;
     padding: 1em;
     padding-top: .5em;
     padding-bottom: .5em;
 }
 .input {
-	margin-top: 10px;
+    margin-top: 10px;
     padding-left: .5em;
     font-size: 20px;
 }
@@ -90,14 +91,14 @@ body {
 var logContainsError = 0; // count the occurances of 'rror' in logging output
 
 function wlogBase(logString, color) {
-	var errorEl = document.createElement("p");
-	if ( color !== undefined ) {
-		logString = "<font color='" + color + "'>" + logString + "</font>";
-	}
-	errorEl.innerHTML = logString;
+    var errorEl = document.createElement("p");
+    if ( color !== undefined ) {
+        logString = "<font color='" + color + "'>" + logString + "</font>";
+    }
+    errorEl.innerHTML = logString;
     var preElement = document.getElementById('logging');
-	// add logging entry
-	preElement.appendChild(errorEl);
+    // add logging entry
+    preElement.appendChild(errorEl);
     // adjust scrolling to show last line of logging output...
     var sh = preElement.scrollHeight;
     if ( sh > 0 ) {
@@ -108,12 +109,12 @@ function wlogBase(logString, color) {
 }
 
 function wlog(logString) {
-	if ( logString.indexOf('rror:') !== -1 ) {
-		logContainsError = logContainsError + 1;
-		wlogBase(logString, "red");
-	} else {
-		wlogBase(logString);
-	}
+    if ( logString.indexOf('rror:') !== -1 ) {
+        logContainsError = logContainsError + 1;
+        wlogBase(logString, "red");
+    } else {
+        wlogBase(logString);
+    }
 }
 
 function clear_log() {
@@ -125,8 +126,8 @@ function clear_log() {
 }
 
 function write_output(output) {
-	var existing = document.getElementById("out").value;
-	output = existing + output;
+    var existing = document.getElementById("out").value;
+    output = existing + output;
     var out = document.getElementById("out");
     if(out.innerHTML === undefined){
         out.textContent = output;
@@ -157,11 +158,11 @@ function generate(data) {
     document.getElementById('out').innerHTML = '';
     processFormDef(data);
 
-	if ( logContainsError > 0 ) {
-		wlogBase("FAILURE!", "red");
-	} else {
-		wlogBase("SUCCESS!", "green");
-	}
+    if ( logContainsError > 0 ) {
+        wlogBase("FAILURE!", "red");
+    } else {
+        wlogBase("SUCCESS!", "green");
+    }
 }
     
 function buildFormStructures( instanceBodyPrefix, bindPrefix, bodyPrefix, model ) { 
@@ -232,151 +233,119 @@ function getSettingValue( settings, id ) {
 }
 
 function processFormDef(formDef) {                    
-	var outputFile = "";
-	wlog("start of formDef file: " + formDef.substring(0,40));
-	try {
-		var jsonDefTopLevel = JSON.parse(formDef);
+    var outputFile = "";
+    wlog("start of formDef file: " + formDef.substring(0,40));
+    try {
+        var jsonDefTopLevel = JSON.parse(formDef);
+        
+        var jsonDef = jsonDefTopLevel.specification;
+        var settings = jsonDef.settings;
+
+        var tableId = getSettingValue(settings, 'table_id');
+        var formName = 'ODK 2.0 ' + tableId;
+        var formId = getSettingValue(settings, 'form_id');
+        var formVersion = getSettingValue(settings, 'form_version');
+        var xmlInstanceName = getSettingValue(settings, 'xml_instance_name');
+        var xmlRootElementName = getSettingValue(settings, 'xml_root_element_name');
+        var xmlDeviceIdPropertyName = getSettingValue(settings, 'xml_device_id_property_name');
+        var xmlUserIdPropertyName = getSettingValue(settings, 'xml_user_id_property_name');
+        var xmlBase64RsaPublicKey = getSettingValue(settings, 'xml_base64_rsa_public_key');
+        var xmlSubmissionUrl = getSettingValue(settings, 'xml_submission_url');
+        
+        wlog("processing json file -- survey title: " + formName);
+        
+        if ( xmlRootElementName === null ) {
+            xmlRootElementName = 'data';
+        }
+        
+        // OK. we should have tableId, formId, formVersion, formName, xmlRootElementName
+        // 
+        // Now we can generate the XML form...
+        // Legacy forms use the tableId as the formId.
+        // Legacy forms use a synthesized uuid for the instanceId.
+        // They supply the formId, formVersion and rowId as metadata.
 		
-		var jsonDef = jsonDefTopLevel.specification;
-		var settings = jsonDef.settings;
-		var formId = getSettingValue(settings, 'form_id');
-		var tableId = getSettingValue(settings, 'table_id');
-		var formVersion = getSettingValue(settings, 'form_version');
-		var defaultLocale = getSettingValue(settings, '_default_locale');
-		var xmlRootElementName = getSettingValue(settings, 'xml_root_element_name');
-		var xmlSubmissionUrl = getSettingValue(settings, 'xml_submission_url');
-		var xmlBase64RsaPublicKey = getSettingValue(settings, 'xml_base64_rsa_public_key');
-		var xmlDeviceIdPropertyName = getSettingValue(settings, 'xml_device_id_property_name');
-		var xmlUserIdPropertyName = getSettingValue(settings, 'xml_user_id_property_name');
+		var file;
+		// create empty output file
+		write_output('<h:html xmlns="http://www.w3.org/2002/xforms" \n'+
+				'  xmlns:h="http://www.w3.org/1999/xhtml" \n'+
+				'  xmlns:ev="http://www.w3.org/2001/xml-events" \n'+
+				'  xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n'+
+				'  xmlns:jr="http://openrosa.org/javarosa" \n'+
+				'  xmlns:orx="http://openrosa.org/xforms/" \n'+
+				'  xmlns:odk="http://www.opendatakit.org/xforms">\n'+
+				' <h:head>\n'+
+				'  <h:title>' + formName + '</h:title>\n'+
+				'  <model>\n'+
+				'    <instance>\n'+
+				'      <'+xmlRootElementName+' id="'+tableId+'">\n'+
+				'        <orx:meta>\n'+
+				'          <orx:instanceID/>\n'+
+				((xmlDeviceIdPropertyName === null) ? '' : 
+				'          <orx:deviceID/>\n') +
+				((xmlUserIdPropertyName === null) ? '' : 
+				'          <orx:userID/>\n') +
+				'          <orx:timeEnd/>\n' +
+				'          <instanceName/>\n' +
+				'          <rowID/>\n'+
+				'          <rowETag/>\n'+
+				'          <filterType/>\n'+
+				'          <filterValue/>\n'+
+				'          <formID/>\n'+
+				'          <locale/>\n'+
+				'          <savepointType/>\n'+
+				'          <savepointCreator/>\n'+
+				'          <savepointTimestamp/>\n'+
+				'        </orx:meta>');
+		instanceBody = "\n";
+		bindBody = "";
+		bodyBody = "";
+		var bindPrefix = '    <bind nodeset="/' + xmlRootElementName + '/';
+		var instanceBodyPrefix = '        <';
 		
-		var formTitle = settings.survey.display.title;
-		var formName = null;
-		if ( typeof formTitle === "string" ) {
-			formName = formTitle;
-		} else {
-			formName = formTitle[defaultLocale];
+		wlog("before model analysis");
+		
+		bindBody += bindPrefix + 'meta/instanceID" type="string"/>\n';
+		if ( xmlDeviceIdPropertyName !== null) {
+			bindBody += bindPrefix + 'meta/deviceID" type="string"/>\n';
 		}
-		
-		if (formName == null) {
-			formName = 'Form without a Survey Title';
+		if ( xmlUserIdPropertyName !== null) {
+			bindBody += bindPrefix + 'meta/userID" type="string"/>\n';
 		}
-		wlog("processing json file -- survey title: " + formName);
+		bindBody += bindPrefix + 'meta/timeEnd" type="dateTime"/>\n';
+		bindBody += bindPrefix + 'meta/instanceName" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/rowID" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/rowETag" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/filterType" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/filterValue" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/formID" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/locale" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointType" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointCreator" type="string"/>\n';
+		bindBody += bindPrefix + 'meta/savepointTimestamp" type="string"/>\n';
 		
-		if ( xmlRootElementName == null ) {
-			xmlRootElementName = 'data';
-		}
-		
-		// OK. we should have formId, formVersion, formName, xmlRootElementName
-		// 
-		// Now we can generate the XML form...
-		if ( xmlBase64RsaPublicKey != null ) {
-			// create empty output file
-			write_output("<?xml version=\"1.0\"?>\n" +
-			  "<h:html xmlns=\"http://www.w3.org/2002/xforms\" xmlns:h=\"http://www.w3.org/1999/xhtml\" " +
-					  "xmlns:ev=\"http://www.w3.org/2001/xml-events\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" " + 
-					  "xmlns:odk=\"http://www.opendatakit.org/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\">\n" +
-			  "<h:head>\n" +
-			  "<h:title>Encrypted " + formName + "</h:title>\n" +
-			  "<model>\n" +
-			  "<instance>\n" +
-			  "<data id=\"encrypted\" xmlns=\"http://www.opendatakit.org/xforms/encrypted\" xmlns:orx=\"http://openrosa.org/xforms\">\n" +
-			  "<base64EncryptedKey/>\n" +
-			  "<orx:meta>\n" +
-			  "<orx:instanceID/>\n" +
-			  "</orx:meta>\n" +
-			  "<media>\n" +
-			  "<file/>\n" +
-			  "</media>\n" +
-			  "<encryptedXmlFile/>\n" +
-			  "<base64EncryptedElementSignature/>\n" +
-			  "</data>\n" +
-			  "</instance>\n" +
-			  "<bind nodeset=\"/data/base64EncryptedKey\" type=\"string\" odk:length=\"2048\" />\n" +
-			  "<bind nodeset=\"/data/meta/instanceID\" type=\"string\"/>\n" +
-			  "<bind nodeset=\"/data/media/file\" type=\"binary\"/>\n" +
-			  "<bind nodeset=\"/data/encryptedXmlFile\" type=\"binary\"/>\n" +
-			  "<bind nodeset=\"/data/base64EncryptedElementSignature\" type=\"string\" odk:length=\"2048\" />\n" +
-			  "</model>\n" +
-			  "</h:head>\n" +
-			  "<h:body>\n" +
-			  "<input ref=\"base64EncryptedKey\"><label>Encrypted Symmetric Key</label></input>\n" +
-			  "<input ref=\"meta/instanceID\"><label>InstanceID</label></input>\n" +
-			  "<repeat nodeset=\"/data/media\">\n" +
-			  "<upload ref=\"file\" mediatype=\"image/*\"><label>media file</label></upload>\n" +
-			  "</repeat>\n" +
-			  "<upload ref=\"encryptedXmlFile\" mediatype=\"image/*\"><label>submission</label></upload>\n" +
-			  "<input ref=\"base64EncryptedElementSignature\"><label>Encrypted Element Signature</label></input>\n" +
-			  "</h:body>\n" +
-			  "</h:html>");
-		 } else {
-			// Legacy forms always use formId, formVersion.
-			// TODO: should produce table definition file for published-as forms...
-			
-			var file;
-			// create empty output file
-			write_output('<h:html xmlns="http://www.w3.org/2002/xforms" \n'+
-					'  xmlns:h="http://www.w3.org/1999/xhtml" \n'+
-					'  xmlns:ev="http://www.w3.org/2001/xml-events" \n'+
-					'  xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n'+
-					'  xmlns:jr="http://openrosa.org/javarosa" \n'+
-					'  xmlns:orx="http://openrosa.org/xforms/" \n'+
-					'  xmlns:odk="http://www.opendatakit.org/xforms">\n'+
-					' <h:head>\n'+
-					'  <h:title>' + formName + '</h:title>\n'+
-					'  <model>\n'+
-					'    <instance>\n'+
-					'      <'+xmlRootElementName+' id="'+formId+
-							((formVersion==null)?'"':('" version="'+formVersion+'"')) + '>\n'+
-					'        <orx:meta>\n'+
-					'          <orx:instanceID/>\n'+
-					((xmlDeviceIdPropertyName == null) ? '' : 
-					'          <orx:deviceID/>\n') +
-					((xmlUserIdPropertyName == null) ? '' : 
-					'          <orx:userID/>\n') +
-					'          <orx:timeEnd/>\n' +
-					'          <instanceName/>\n' +
-					'          <formID/>\n'+
-					'          <savepointType/>\n' +
-					'        </orx:meta>');
-			instanceBody = "\n";
-			bindBody = "";
-			bodyBody = "";
-			var bindPrefix = '    <bind nodeset="/' + xmlRootElementName + '/';
-			var instanceBodyPrefix = '        <';
-			
-			wlog("before model analysis");
-			
-			bindBody += bindPrefix + 'meta/instanceID" type="string"/>\n';
-			if ( xmlDeviceIdPropertyName != null) {
-				bindBody += bindPrefix + 'meta/deviceID" type="string"/>\n';
-			}
-			if ( xmlUserIdPropertyName != null) {
-				bindBody += bindPrefix + 'meta/userID" type="string"/>\n';
-			}
-			bindBody += bindPrefix + 'meta/timeEnd" type="dateTime"/>\n';
-			bindBody += bindPrefix + 'meta/instanceName" type="string"/>\n';
-			bindBody += bindPrefix + 'meta/formID" type="string"/>\n';
-			bindBody += bindPrefix + 'meta/savepointType" type="string"/>\n';
-			
-			var model = jsonDef.model;
-			buildFormStructures( instanceBodyPrefix, bindPrefix, '', model );
-			write_output(instanceBody +
-					'      </'+xmlRootElementName+'> \n'+
-					'    </instance> \n');
-			write_output(bindBody);
-			if ( xmlSubmissionUrl != null ) {
+		var model = jsonDef.model;
+		buildFormStructures( instanceBodyPrefix, bindPrefix, '', model );
+		write_output(instanceBody +
+				'      </'+xmlRootElementName+'> \n'+
+				'    </instance> \n');
+		write_output(bindBody);
+		if ( xmlSubmissionUrl !== null ) {
+			if ( xmlBase64RsaPublicKey !== null ) {
+				write_output('    <submission method="form-data-post" ref="/' + xmlRootElementName + '" action="' + xmlSubmissionUrl + '"  base64RsaPublicKey="' + xmlBase64RsaPublicKey + '" />\n');
+			} else {
 				write_output('    <submission method="form-data-post" ref="/' + xmlRootElementName + '" action="' + xmlSubmissionUrl + '" />\n');
 			}
-			write_output('  </model> \n'+
-					' </h:head> \n'+
-					' <h:body> \n'+
-					bodyBody +
-					' </h:body> \n'+
-					'</h:html>\n');
 		}
-	} catch(e) {
-		wlog("error: parsing failed for formDef.json file: " + String(e));
-	}
+		write_output('  </model> \n'+
+				' </h:head> \n'+
+				' <h:body> \n'+
+				bodyBody +
+				' </h:body> \n'+
+				'</h:html>\n');
+    } catch(e) {
+        wlog("error: parsing failed for formDef.json file: " + String(e));
+    }
 };
 
 function handleSave(e) {
@@ -390,7 +359,7 @@ function handleSave(e) {
 
 //TODO: Test multiple forms
 function handleDrop(e) {
-	var drop = document.getElementById('drop');
+    var drop = document.getElementById('drop');
     document.getElementById('browsefile').value = '';
     e.stopPropagation();
     e.preventDefault();
@@ -408,7 +377,7 @@ function handleDrop(e) {
 var wasClicked = false;
 function handleFileChooserClick(e) {
 
-	var browse = document.getElementById("browsefile");
+    var browse = document.getElementById("browsefile");
     // reset the value so that re-selecting the file will trigger a change event...
     browse.value = '';
     
@@ -439,19 +408,19 @@ function handleFileSelect(e) {
     }
 }
 function enableActions() {
-	var browse = document.getElementById("browsefile");
+    var browse = document.getElementById("browsefile");
     browse.disabled = false;
-	var drop = document.getElementById('drop');
+    var drop = document.getElementById('drop');
     drop.disabled = false;
-	logContainsError = 0;
+    logContainsError = 0;
 }
 function makeReader(f) {
-	var browse = document.getElementById("browsefile");
-	var drop = document.getElementById('drop');
+    var browse = document.getElementById("browsefile");
+    var drop = document.getElementById('drop');
     var reader = new FileReader();
     var name = f.name;
     //Clear the warnings and errors:
-	clear_log();
+    clear_log();
 
     reader.onload = function(e) {
         var data = e.target.result;
@@ -471,7 +440,7 @@ function makeReader(f) {
             */
         } else {
              try {
-				generate(data);
+                generate(data);
                 enableActions();
             } catch(e) {
                 wlog("Error: " + String(e));
@@ -499,27 +468,27 @@ function handleDragover(e) {
 }
 
 window.onload = function() {
-	var browse = document.getElementById("browsefile");
-	var drop = document.getElementById('drop');
+    var browse = document.getElementById("browsefile");
+    var drop = document.getElementById('drop');
 
-	browse.addEventListener('click', handleFileChooserClick, false);
-	browse.addEventListener('change', handleFileSelect, false);
-	drop.addEventListener('dragover', handleDragover, false);
-	drop.addEventListener('drop', handleDrop, false);
-	browse.disabled = false;
-	drop.disabled = false;
+    browse.addEventListener('click', handleFileChooserClick, false);
+    browse.addEventListener('change', handleFileSelect, false);
+    drop.addEventListener('dragover', handleDragover, false);
+    drop.addEventListener('drop', handleDrop, false);
+    browse.disabled = false;
+    drop.disabled = false;
 }
 //]]>
 </script>
 </head>
-<body>
+<body class="fullembedded" >
   <div>
   <noscript>This page requires javascript and has only been tested in a Chrome browser</noscript>
   <div class="panel">
     <p>A <em>Stub Form Definition</em> can be uploaded into ODK Aggregate to enable 
-	ODK Survey to send submissions into ODK Aggregate's XForms XML submissions path (the one used by ODK Collect). </p>
-	<p><font color="blue">This <em>Stub Form Definition</em> cannot be used by ODK Collect.</font></p>
-	<div id="drop">Drop a formDef.json file here to generate a Stub Form Definition.</div>
+    ODK Survey to send submissions into ODK Aggregate's XForms XML submissions path (the one used by ODK Collect). </p>
+    <p><font color="blue">This <em>Stub Form Definition</em> cannot be used by ODK Collect.</font></p>
+    <div id="drop">Drop a formDef.json file here to generate a Stub Form Definition.</div>
   </div>
   <div id="browse">
  Select a formDef.json file from which to generate a Stub Form Definition<br/><input class="input" type="file" id="browsefile" disabled="true"/>
@@ -532,7 +501,7 @@ window.onload = function() {
   <div class="panel bottompanel">
     <button onclick="handleSave();" id="save">Save</button>
     <p>Output (the <em>Stub Form Definition</em>):</p>
-	<textarea id="out" rows="18"></textarea>
+    <textarea id="out" rows="18"></textarea>
   </div>
 </body>
 </html>

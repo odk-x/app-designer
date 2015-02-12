@@ -90,7 +90,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 2
       },
       {
@@ -100,7 +100,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 3
       },
       {
@@ -110,7 +110,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 4
       }
     ],
@@ -121,6 +121,7 @@
         "display": {
           "text": "Unique barcode ID or locator designation for this household"
         },
+        "required": true,
         "_row_num": 2
       },
       {
@@ -155,6 +156,7 @@
         "display": {
           "text": "Capture the household location."
         },
+        "buttonLabel": "Record Location",
         "_row_num": 6
       }
     ],
@@ -209,8 +211,8 @@
         "values_list": "linked_members_education",
         "display": {
           "text": "Questions are asked to members of the household who are at least 5 years old.",
-          "hide_add_instance": "TRUE",
-          "hide_delete_button": "TRUE"
+          "hide_add_instance": true,
+          "hide_delete_button": true
         },
         "_row_num": 3
       }
@@ -336,7 +338,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 2
       },
       "linked_members_education": {
@@ -346,7 +348,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 3
       },
       "select_linked_data": {
@@ -356,7 +358,7 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 4
       }
     },
@@ -390,6 +392,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "electricity"
       },
       "water": {
@@ -400,6 +403,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "water"
       },
       "location": {
@@ -439,6 +443,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "select_linked_data",
         "elementKey": "owner"
       },
       "youngest": {
@@ -449,11 +454,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "youngest_items"
         },
+        "valuesList": "select_linked_data",
         "elementKey": "youngest"
       }
     },
@@ -592,6 +597,7 @@
             "display": {
               "text": "Unique barcode ID or locator designation for this household"
             },
+            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -646,6 +652,7 @@
             "display": {
               "text": "Capture the household location."
             },
+            "buttonLabel": "Record Location",
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -663,7 +670,9 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            0
+          ]
         },
         "operations": [
           {
@@ -879,8 +888,8 @@
             "values_list": "linked_members_education",
             "display": {
               "text": "Questions are asked to members of the household who are at least 5 years old.",
-              "hide_add_instance": "TRUE",
-              "hide_delete_button": "TRUE"
+              "hide_add_instance": true,
+              "hide_delete_button": true
             },
             "_row_num": 3,
             "__rowNum__": 2,

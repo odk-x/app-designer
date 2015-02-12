@@ -1,0 +1,1996 @@
+{
+  "xlsx": {
+    "survey": [
+      {
+        "clause": "begin screen",
+        "_row_num": 2
+      },
+      {
+        "type": "read_only_image",
+        "name": "date_of_record_image0",
+        "hideInContents": true,
+        "_row_num": 3
+      },
+      {
+        "type": "string",
+        "name": "date_of_record",
+        "display": {
+          "text": "date_of_record"
+        },
+        "_row_num": 4
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 5
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 6
+      },
+      {
+        "type": "read_only_image",
+        "name": "patient_ID_image0",
+        "hideInContents": true,
+        "_row_num": 7
+      },
+      {
+        "type": "integer",
+        "name": "patient_ID",
+        "display": {
+          "text": "patient_ID"
+        },
+        "_row_num": 8
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 9
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 10
+      },
+      {
+        "type": "read_only_image",
+        "name": "patient_name_image0",
+        "hideInContents": true,
+        "_row_num": 11
+      },
+      {
+        "type": "string",
+        "name": "patient_name",
+        "display": {
+          "text": "patient_name"
+        },
+        "_row_num": 12
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 13
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 14
+      },
+      {
+        "type": "read_only_image",
+        "name": "GSM_num_image0",
+        "hideInContents": true,
+        "_row_num": 15
+      },
+      {
+        "type": "string",
+        "name": "GSM_num",
+        "display": {
+          "text": "GSM_num"
+        },
+        "_row_num": 16
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 17
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 18
+      },
+      {
+        "type": "read_only_image",
+        "name": "CD4_count_image0",
+        "hideInContents": true,
+        "_row_num": 19
+      },
+      {
+        "type": "integer",
+        "name": "CD4_count",
+        "display": {
+          "text": "CD4_count"
+        },
+        "_row_num": 20
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 21
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 22
+      },
+      {
+        "type": "read_only_image",
+        "name": "CD4_percent_image0",
+        "hideInContents": true,
+        "_row_num": 23
+      },
+      {
+        "type": "integer",
+        "name": "CD4_percent",
+        "display": {
+          "text": "CD4_percent"
+        },
+        "_row_num": 24
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 25
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 26
+      },
+      {
+        "type": "read_only_image",
+        "name": "screen_for_tb_image0",
+        "hideInContents": true,
+        "_row_num": 27
+      },
+      {
+        "type": "select_one",
+        "name": "screen_for_tb",
+        "display": {
+          "text": "screen_for_tb"
+        },
+        "values_list": "screen_for_tb_grid_values",
+        "_row_num": 28
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 29
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 30
+      },
+      {
+        "type": "read_only_image",
+        "name": "WHO_stage_image0",
+        "hideInContents": true,
+        "_row_num": 31
+      },
+      {
+        "type": "select_one",
+        "name": "WHO_stage",
+        "display": {
+          "text": "WHO_stage"
+        },
+        "values_list": "WHO_stage_grid_values",
+        "_row_num": 32
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 33
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 34
+      },
+      {
+        "type": "read_only_image",
+        "name": "date_next_visit_image0",
+        "hideInContents": true,
+        "_row_num": 35
+      },
+      {
+        "type": "string",
+        "name": "date_next_visit",
+        "display": {
+          "text": "date_next_visit"
+        },
+        "_row_num": 36
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 37
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 38
+      },
+      {
+        "type": "read_only_image",
+        "name": "TB_treatment_status_image0",
+        "hideInContents": true,
+        "_row_num": 39
+      },
+      {
+        "type": "select_one",
+        "name": "TB_treatment_status",
+        "display": {
+          "text": "TB_treatment_status"
+        },
+        "values_list": "TB_treatment_status_grid_values",
+        "_row_num": 40
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 41
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 42
+      },
+      {
+        "type": "read_only_image",
+        "name": "INH_treatment_status_image0",
+        "hideInContents": true,
+        "_row_num": 43
+      },
+      {
+        "type": "select_one",
+        "name": "INH_treatment_status",
+        "display": {
+          "text": "INH_treatment_status"
+        },
+        "values_list": "INH_treatment_status_grid_values",
+        "_row_num": 44
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 45
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 46
+      },
+      {
+        "type": "read_only_image",
+        "name": "CTZ_treatment_status_image0",
+        "hideInContents": true,
+        "_row_num": 47
+      },
+      {
+        "type": "select_one",
+        "name": "CTZ_treatment_status",
+        "display": {
+          "text": "CTZ_treatment_status"
+        },
+        "values_list": "CTZ_treatment_status_grid_values",
+        "_row_num": 48
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 49
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 50
+      },
+      {
+        "type": "read_only_image",
+        "name": "permanent_status_image0",
+        "hideInContents": true,
+        "_row_num": 51
+      },
+      {
+        "type": "select_one",
+        "name": "permanent_status",
+        "display": {
+          "text": "permanent_status"
+        },
+        "values_list": "permanent_status_grid_values",
+        "_row_num": 52
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 53
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 54
+      },
+      {
+        "type": "read_only_image",
+        "name": "Name_HU_transferred_to_image0",
+        "hideInContents": true,
+        "_row_num": 55
+      },
+      {
+        "type": "string",
+        "name": "Name_HU_transferred_to",
+        "display": {
+          "text": "Name_HU_transferred_to"
+        },
+        "_row_num": 56
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 57
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "screen_for_tb_grid_values",
+        "data_value": "yes",
+        "display": {
+          "text": "yes"
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "screen_for_tb_grid_values",
+        "data_value": "no",
+        "display": {
+          "text": "no"
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "screen_for_tb_grid_values",
+        "data_value": "n/a",
+        "display": {
+          "text": "n/a"
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "WHO_stage_grid_values",
+        "data_value": "I",
+        "display": {
+          "text": "I"
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "WHO_stage_grid_values",
+        "data_value": "II",
+        "display": {
+          "text": "II"
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "WHO_stage_grid_values",
+        "data_value": "III",
+        "display": {
+          "text": "III"
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "WHO_stage_grid_values",
+        "data_value": "IV",
+        "display": {
+          "text": "IV"
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "TB_treatment_status_grid_values",
+        "data_value": "started",
+        "display": {
+          "text": "started"
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "TB_treatment_status_grid_values",
+        "data_value": "ongoing",
+        "display": {
+          "text": "ongoing"
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "TB_treatment_status_grid_values",
+        "data_value": "ended",
+        "display": {
+          "text": "ended"
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "INH_treatment_status_grid_values",
+        "data_value": "started",
+        "display": {
+          "text": "started"
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "INH_treatment_status_grid_values",
+        "data_value": "ongoing",
+        "display": {
+          "text": "ongoing"
+        },
+        "_row_num": 13
+      },
+      {
+        "choice_list_name": "INH_treatment_status_grid_values",
+        "data_value": "ended",
+        "display": {
+          "text": "ended"
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "CTZ_treatment_status_grid_values",
+        "data_value": "started",
+        "display": {
+          "text": "started"
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "CTZ_treatment_status_grid_values",
+        "data_value": "ongoing",
+        "display": {
+          "text": "ongoing"
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "CTZ_treatment_status_grid_values",
+        "data_value": "ended",
+        "display": {
+          "text": "ended"
+        },
+        "_row_num": 17
+      },
+      {
+        "choice_list_name": "permanent_status_grid_values",
+        "data_value": "Began ARV",
+        "display": {
+          "text": "Began ARV"
+        },
+        "_row_num": 18
+      },
+      {
+        "choice_list_name": "permanent_status_grid_values",
+        "data_value": "Lost",
+        "display": {
+          "text": "Lost"
+        },
+        "_row_num": 19
+      },
+      {
+        "choice_list_name": "permanent_status_grid_values",
+        "data_value": "Died",
+        "display": {
+          "text": "Died"
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "permanent_status_grid_values",
+        "data_value": "Transferred",
+        "display": {
+          "text": "Transferred"
+        },
+        "_row_num": 21
+      }
+    ],
+    "model": [
+      {
+        "type": "string",
+        "name": "scan_output_directory",
+        "_row_num": 2
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "scan_HIV_Visit_Record",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 201493,
+        "_row_num": 3
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": "scan_HIV_Visit_Record"
+        },
+        "_row_num": 4
+      }
+    ]
+  },
+  "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "auxillaryHash": "formula",
+      "selectionArgs": "formula",
+      "url": "formula",
+      "uri": "formula",
+      "callback": "formula(context)",
+      "choice_filter": "formula(choice_item)",
+      "templatePath": "requirejs_path",
+      "image": "app_path_localized",
+      "audio": "app_path_localized",
+      "video": "app_path_localized"
+    },
+    "settings": {
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "scan_HIV_Visit_Record",
+        "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 201493,
+        "_row_num": 3
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": "scan_HIV_Visit_Record"
+        },
+        "_row_num": 4
+      },
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "scan_HIV_Visit_Record",
+        "_row_num": 2,
+        "__rowNum__": 1
+      },
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "display": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": "scan_HIV_Visit_Record"
+        },
+        "_row_num": 4
+      }
+    },
+    "choices": {
+      "screen_for_tb_grid_values": [
+        {
+          "choice_list_name": "screen_for_tb_grid_values",
+          "data_value": "yes",
+          "display": {
+            "text": "yes"
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "screen_for_tb_grid_values",
+          "data_value": "no",
+          "display": {
+            "text": "no"
+          },
+          "_row_num": 3
+        },
+        {
+          "choice_list_name": "screen_for_tb_grid_values",
+          "data_value": "n/a",
+          "display": {
+            "text": "n/a"
+          },
+          "_row_num": 4
+        }
+      ],
+      "WHO_stage_grid_values": [
+        {
+          "choice_list_name": "WHO_stage_grid_values",
+          "data_value": "I",
+          "display": {
+            "text": "I"
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "WHO_stage_grid_values",
+          "data_value": "II",
+          "display": {
+            "text": "II"
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "WHO_stage_grid_values",
+          "data_value": "III",
+          "display": {
+            "text": "III"
+          },
+          "_row_num": 7
+        },
+        {
+          "choice_list_name": "WHO_stage_grid_values",
+          "data_value": "IV",
+          "display": {
+            "text": "IV"
+          },
+          "_row_num": 8
+        }
+      ],
+      "TB_treatment_status_grid_values": [
+        {
+          "choice_list_name": "TB_treatment_status_grid_values",
+          "data_value": "started",
+          "display": {
+            "text": "started"
+          },
+          "_row_num": 9
+        },
+        {
+          "choice_list_name": "TB_treatment_status_grid_values",
+          "data_value": "ongoing",
+          "display": {
+            "text": "ongoing"
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "TB_treatment_status_grid_values",
+          "data_value": "ended",
+          "display": {
+            "text": "ended"
+          },
+          "_row_num": 11
+        }
+      ],
+      "INH_treatment_status_grid_values": [
+        {
+          "choice_list_name": "INH_treatment_status_grid_values",
+          "data_value": "started",
+          "display": {
+            "text": "started"
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "INH_treatment_status_grid_values",
+          "data_value": "ongoing",
+          "display": {
+            "text": "ongoing"
+          },
+          "_row_num": 13
+        },
+        {
+          "choice_list_name": "INH_treatment_status_grid_values",
+          "data_value": "ended",
+          "display": {
+            "text": "ended"
+          },
+          "_row_num": 14
+        }
+      ],
+      "CTZ_treatment_status_grid_values": [
+        {
+          "choice_list_name": "CTZ_treatment_status_grid_values",
+          "data_value": "started",
+          "display": {
+            "text": "started"
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "CTZ_treatment_status_grid_values",
+          "data_value": "ongoing",
+          "display": {
+            "text": "ongoing"
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "CTZ_treatment_status_grid_values",
+          "data_value": "ended",
+          "display": {
+            "text": "ended"
+          },
+          "_row_num": 17
+        }
+      ],
+      "permanent_status_grid_values": [
+        {
+          "choice_list_name": "permanent_status_grid_values",
+          "data_value": "Began ARV",
+          "display": {
+            "text": "Began ARV"
+          },
+          "_row_num": 18
+        },
+        {
+          "choice_list_name": "permanent_status_grid_values",
+          "data_value": "Lost",
+          "display": {
+            "text": "Lost"
+          },
+          "_row_num": 19
+        },
+        {
+          "choice_list_name": "permanent_status_grid_values",
+          "data_value": "Died",
+          "display": {
+            "text": "Died"
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "permanent_status_grid_values",
+          "data_value": "Transferred",
+          "display": {
+            "text": "Transferred"
+          },
+          "_row_num": 21
+        }
+      ]
+    },
+    "queries": {},
+    "calculates": {},
+    "model": {
+      "scan_output_directory": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "scan_output_directory"
+      },
+      "date_of_record_image0": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "date_of_record_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "date_of_record_image0_contentType"
+          }
+        },
+        "elementKey": "date_of_record_image0"
+      },
+      "date_of_record": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "date_of_record"
+      },
+      "patient_ID_image0": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "patient_ID_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "patient_ID_image0_contentType"
+          }
+        },
+        "elementKey": "patient_ID_image0"
+      },
+      "patient_ID": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "patient_ID"
+      },
+      "patient_name_image0": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "patient_name_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "patient_name_image0_contentType"
+          }
+        },
+        "elementKey": "patient_name_image0"
+      },
+      "patient_name": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "patient_name"
+      },
+      "GSM_num_image0": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "GSM_num_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "GSM_num_image0_contentType"
+          }
+        },
+        "elementKey": "GSM_num_image0"
+      },
+      "GSM_num": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "GSM_num"
+      },
+      "CD4_count_image0": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "CD4_count_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "CD4_count_image0_contentType"
+          }
+        },
+        "elementKey": "CD4_count_image0"
+      },
+      "CD4_count": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "CD4_count"
+      },
+      "CD4_percent_image0": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "CD4_percent_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "CD4_percent_image0_contentType"
+          }
+        },
+        "elementKey": "CD4_percent_image0"
+      },
+      "CD4_percent": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "CD4_percent"
+      },
+      "screen_for_tb_image0": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "screen_for_tb_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "screen_for_tb_image0_contentType"
+          }
+        },
+        "elementKey": "screen_for_tb_image0"
+      },
+      "screen_for_tb": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "screen_for_tb_grid_values",
+        "elementKey": "screen_for_tb"
+      },
+      "WHO_stage_image0": {
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "WHO_stage_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "WHO_stage_image0_contentType"
+          }
+        },
+        "elementKey": "WHO_stage_image0"
+      },
+      "WHO_stage": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "WHO_stage_grid_values",
+        "elementKey": "WHO_stage"
+      },
+      "date_next_visit_image0": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "date_next_visit_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "date_next_visit_image0_contentType"
+          }
+        },
+        "elementKey": "date_next_visit_image0"
+      },
+      "date_next_visit": {
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "date_next_visit"
+      },
+      "TB_treatment_status_image0": {
+        "_defn": [
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "TB_treatment_status_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "TB_treatment_status_image0_contentType"
+          }
+        },
+        "elementKey": "TB_treatment_status_image0"
+      },
+      "TB_treatment_status": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "TB_treatment_status_grid_values",
+        "elementKey": "TB_treatment_status"
+      },
+      "INH_treatment_status_image0": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "INH_treatment_status_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "INH_treatment_status_image0_contentType"
+          }
+        },
+        "elementKey": "INH_treatment_status_image0"
+      },
+      "INH_treatment_status": {
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "INH_treatment_status_grid_values",
+        "elementKey": "INH_treatment_status"
+      },
+      "CTZ_treatment_status_image0": {
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "CTZ_treatment_status_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "CTZ_treatment_status_image0_contentType"
+          }
+        },
+        "elementKey": "CTZ_treatment_status_image0"
+      },
+      "CTZ_treatment_status": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "CTZ_treatment_status_grid_values",
+        "elementKey": "CTZ_treatment_status"
+      },
+      "permanent_status_image0": {
+        "_defn": [
+          {
+            "_row_num": 51,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "permanent_status_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "permanent_status_image0_contentType"
+          }
+        },
+        "elementKey": "permanent_status_image0"
+      },
+      "permanent_status": {
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "permanent_status_grid_values",
+        "elementKey": "permanent_status"
+      },
+      "Name_HU_transferred_to_image0": {
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "Name_HU_transferred_to_image0_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "Name_HU_transferred_to_image0_contentType"
+          }
+        },
+        "elementKey": "Name_HU_transferred_to_image0"
+      },
+      "Name_HU_transferred_to": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Name_HU_transferred_to"
+      }
+    },
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "read_only_image",
+            "name": "date_of_record_image0",
+            "hideInContents": true,
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "string",
+            "name": "date_of_record",
+            "display": {
+              "text": "date_of_record"
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 1
+          },
+          {
+            "type": "read_only_image",
+            "name": "patient_ID_image0",
+            "hideInContents": true,
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 2
+          },
+          {
+            "type": "integer",
+            "name": "patient_ID",
+            "display": {
+              "text": "patient_ID"
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 3
+          },
+          {
+            "type": "read_only_image",
+            "name": "patient_name_image0",
+            "hideInContents": true,
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 4
+          },
+          {
+            "type": "string",
+            "name": "patient_name",
+            "display": {
+              "text": "patient_name"
+            },
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 5
+          },
+          {
+            "type": "read_only_image",
+            "name": "GSM_num_image0",
+            "hideInContents": true,
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 6
+          },
+          {
+            "type": "string",
+            "name": "GSM_num",
+            "display": {
+              "text": "GSM_num"
+            },
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 7
+          },
+          {
+            "type": "read_only_image",
+            "name": "CD4_count_image0",
+            "hideInContents": true,
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 8
+          },
+          {
+            "type": "integer",
+            "name": "CD4_count",
+            "display": {
+              "text": "CD4_count"
+            },
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 9
+          },
+          {
+            "type": "read_only_image",
+            "name": "CD4_percent_image0",
+            "hideInContents": true,
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 10
+          },
+          {
+            "type": "integer",
+            "name": "CD4_percent",
+            "display": {
+              "text": "CD4_percent"
+            },
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 11
+          },
+          {
+            "type": "read_only_image",
+            "name": "screen_for_tb_image0",
+            "hideInContents": true,
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen26",
+            "promptIdx": 12
+          },
+          {
+            "type": "select_one",
+            "name": "screen_for_tb",
+            "display": {
+              "text": "screen_for_tb"
+            },
+            "values_list": "screen_for_tb_grid_values",
+            "_row_num": 28,
+            "__rowNum__": 27,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen26",
+            "promptIdx": 13
+          },
+          {
+            "type": "read_only_image",
+            "name": "WHO_stage_image0",
+            "hideInContents": true,
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 14
+          },
+          {
+            "type": "select_one",
+            "name": "WHO_stage",
+            "display": {
+              "text": "WHO_stage"
+            },
+            "values_list": "WHO_stage_grid_values",
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 15
+          },
+          {
+            "type": "read_only_image",
+            "name": "date_next_visit_image0",
+            "hideInContents": true,
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 16
+          },
+          {
+            "type": "string",
+            "name": "date_next_visit",
+            "display": {
+              "text": "date_next_visit"
+            },
+            "_row_num": 36,
+            "__rowNum__": 35,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 17
+          },
+          {
+            "type": "read_only_image",
+            "name": "TB_treatment_status_image0",
+            "hideInContents": true,
+            "_row_num": 39,
+            "__rowNum__": 38,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 18
+          },
+          {
+            "type": "select_one",
+            "name": "TB_treatment_status",
+            "display": {
+              "text": "TB_treatment_status"
+            },
+            "values_list": "TB_treatment_status_grid_values",
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 19
+          },
+          {
+            "type": "read_only_image",
+            "name": "INH_treatment_status_image0",
+            "hideInContents": true,
+            "_row_num": 43,
+            "__rowNum__": 42,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 20
+          },
+          {
+            "type": "select_one",
+            "name": "INH_treatment_status",
+            "display": {
+              "text": "INH_treatment_status"
+            },
+            "values_list": "INH_treatment_status_grid_values",
+            "_row_num": 44,
+            "__rowNum__": 43,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 21
+          },
+          {
+            "type": "read_only_image",
+            "name": "CTZ_treatment_status_image0",
+            "hideInContents": true,
+            "_row_num": 47,
+            "__rowNum__": 46,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen46",
+            "promptIdx": 22
+          },
+          {
+            "type": "select_one",
+            "name": "CTZ_treatment_status",
+            "display": {
+              "text": "CTZ_treatment_status"
+            },
+            "values_list": "CTZ_treatment_status_grid_values",
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen46",
+            "promptIdx": 23
+          },
+          {
+            "type": "read_only_image",
+            "name": "permanent_status_image0",
+            "hideInContents": true,
+            "_row_num": 51,
+            "__rowNum__": 50,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 24
+          },
+          {
+            "type": "select_one",
+            "name": "permanent_status",
+            "display": {
+              "text": "permanent_status"
+            },
+            "values_list": "permanent_status_grid_values",
+            "_row_num": 52,
+            "__rowNum__": 51,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 25
+          },
+          {
+            "type": "read_only_image",
+            "name": "Name_HU_transferred_to_image0",
+            "hideInContents": true,
+            "_row_num": 55,
+            "__rowNum__": 54,
+            "_token_type": "prompt",
+            "_type": "read_only_image",
+            "_branch_label_enclosing_screen": "survey/_screen54",
+            "promptIdx": 26
+          },
+          {
+            "type": "string",
+            "name": "Name_HU_transferred_to",
+            "display": {
+              "text": "Name_HU_transferred_to"
+            },
+            "_row_num": 56,
+            "__rowNum__": 55,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen54",
+            "promptIdx": 27
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 58,
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 28
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 5,
+              "__rowNum__": 4,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 9,
+              "__rowNum__": 8,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 13,
+              "__rowNum__": 12,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 17,
+              "__rowNum__": 16,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 21,
+              "__rowNum__": 20,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 25,
+              "__rowNum__": 24,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 26,
+            "__rowNum__": 25,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 29,
+              "__rowNum__": 28,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 30,
+            "__rowNum__": 29,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 33,
+              "__rowNum__": 32,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 34,
+            "__rowNum__": 33,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 37,
+              "__rowNum__": 36,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 38,
+            "__rowNum__": 37,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 41,
+              "__rowNum__": 40,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 9
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 42,
+            "__rowNum__": 41,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 45,
+              "__rowNum__": 44,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 46,
+            "__rowNum__": 45,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 49,
+              "__rowNum__": 48,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 11
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 50,
+            "__rowNum__": 49,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 53,
+              "__rowNum__": 52,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 12
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 54,
+            "__rowNum__": 53,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 57,
+              "__rowNum__": 56,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 13
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 58,
+            "operationIdx": 14
+          },
+          {
+            "_row_num": 58,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 15
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 58,
+            "operationIdx": 16
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_screen6": 1,
+          "_screen10": 2,
+          "_screen14": 3,
+          "_screen18": 4,
+          "_screen22": 5,
+          "_screen26": 6,
+          "_screen30": 7,
+          "_screen34": 8,
+          "_screen38": 9,
+          "_screen42": 10,
+          "_screen46": 11,
+          "_screen50": 12,
+          "_screen54": 13,
+          "_contents": 15,
+          "_screen58": 15
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "_row_num": 3,
+            "type": "opening",
+            "display": {
+              "text": "Edit form"
+            },
+            "_token_type": "prompt",
+            "_type": "opening",
+            "_branch_label_enclosing_screen": "initial/_screen3",
+            "promptIdx": 0
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 1,
+            "display": {
+              "title": "scan_HIV_Visit_Record"
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_row_num": 5,
+            "type": "finalize",
+            "display": {
+              "text": "Save form"
+            },
+            "_token_type": "prompt",
+            "_type": "finalize",
+            "_branch_label_enclosing_screen": "initial/_screen5",
+            "promptIdx": 2
+          },
+          {
+            "_row_num": 7,
+            "type": "instances",
+            "display": {
+              "text": "Saved instances"
+            },
+            "_token_type": "prompt",
+            "_type": "instances",
+            "_branch_label_enclosing_screen": "initial/_screen7",
+            "promptIdx": 3
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "initial/_screen9",
+            "promptIdx": 4
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "clause": "if // start",
+            "condition": "(opendatakit.getCurrentInstanceId() != null)",
+            "_token_type": "goto_label",
+            "_tag_name": "start",
+            "_branch_label": "_then2",
+            "operationIdx": 0
+          },
+          {
+            "clause": "else // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_else6",
+            "_row_num": 6,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "end if // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 9,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 9,
+            "operationIdx": 9
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 10
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 9,
+            "operationIdx": 12
+          }
+        ],
+        "branch_label_map": {
+          "_then2": 2,
+          "_screen3": 2,
+          "_screen5": 4,
+          "_else6": 6,
+          "_screen7": 6,
+          "_endif8": 7,
+          "_contents": 8,
+          "_screen9": 8,
+          "_finalize": 10
+        }
+      }
+    }
+  }
+}

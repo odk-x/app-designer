@@ -973,7 +973,6 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"
@@ -1165,7 +1164,6 @@
       },
       "where_medical_attention": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "where_medical_attention_items"
@@ -1181,6 +1179,7 @@
       },
       "injury_faced": {
         "type": "string",
+        "valuesList": "injuries",
         "_defn": [
           {
             "_row_num": 2,
@@ -1210,6 +1209,7 @@
       },
       "diagnosis": {
         "type": "string",
+        "valuesList": "no_yes",
         "_defn": [
           {
             "_row_num": 4,
@@ -1224,6 +1224,7 @@
       },
       "diagnosis_by_whom": {
         "type": "string",
+        "valuesList": "diagnosis_source",
         "_defn": [
           {
             "_row_num": 6,

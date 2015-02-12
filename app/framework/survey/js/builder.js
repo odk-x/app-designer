@@ -151,8 +151,6 @@ verifyLoad('builder',
             surveyJson.specification.currentScreenTypes = currentScreenTypes;
         
             // define the requirejs_path action on the property parser.
-            // this is the only property parser that depends upon a 
-            // current mdl value.
             propertyParsers.requirejs_path = function(content) {
                 return formPath + content;
             };
@@ -300,7 +298,7 @@ verifyLoad('builder',
                     var theme = opendatakit.getSettingObject(surveyJson, "theme");
                     if ( theme === null || theme.value == null ) {
                         var jqmVersion = window.$.mobile.version;
-                        theme = 'jquery.mobile.theme-' + jqmVersion;
+                        theme = 'jquery.mobile-' + jqmVersion + '.min';
                         url = requirejs.toUrl('libs/jquery.mobile-' + jqmVersion + '/' + theme + '.css');
                     } else {
                         theme = theme.value;

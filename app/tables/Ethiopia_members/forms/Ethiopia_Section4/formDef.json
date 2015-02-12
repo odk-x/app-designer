@@ -63,7 +63,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 2
       }
     ],
@@ -546,7 +546,7 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+escape(data('household_id'))",
+        "auxillaryHash": "'household_id='+encodeURIComponent(data('household_id'))",
         "_row_num": 2
       }
     },
@@ -668,7 +668,6 @@
       },
       "school_type": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "school_type_items"
@@ -723,6 +722,7 @@
       },
       "primary_occupation": {
         "type": "string",
+        "valuesList": "occupations",
         "_defn": [
           {
             "_row_num": 2,
@@ -864,7 +864,6 @@
       },
       "where_medical_attention": {
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "where_medical_attention_items"

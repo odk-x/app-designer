@@ -840,11 +840,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "examples_items"
         },
+        "valuesList": "examples",
         "elementKey": "examples"
       },
       "barcode": {
@@ -895,10 +895,9 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "picture_uriFragment"
           },
           "contentType": {
@@ -918,10 +917,9 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "recording_uriFragment"
           },
           "contentType": {
@@ -1032,11 +1030,11 @@
           }
         ],
         "type": "array",
-        "isUnitOfRetention": true,
         "items": {
           "type": "string",
           "elementKey": "visited_continents_items"
         },
+        "valuesList": "continents",
         "elementKey": "visited_continents"
       },
       "visited_seattle": {
@@ -1047,6 +1045,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "yesno",
         "elementKey": "visited_seattle"
       },
       "audio_test": {
@@ -1058,10 +1057,9 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "audio_test_uriFragment"
           },
           "contentType": {
@@ -1081,10 +1079,9 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "video_test_uriFragment"
           },
           "contentType": {
@@ -1104,10 +1101,9 @@
         ],
         "type": "object",
         "elementType": "mimeUri",
-        "isUnitOfRetention": true,
         "properties": {
           "uriFragment": {
-            "type": "string",
+            "type": "rowpath",
             "elementKey": "image_test_uriFragment"
           },
           "contentType": {
@@ -1146,6 +1142,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "sexes",
         "elementKey": "sex"
       },
       "rating": {

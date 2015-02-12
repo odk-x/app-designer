@@ -58,6 +58,7 @@ window.__getTableData = function() {
         if (!isString(elementPath)) {
             throw 'getColumnData()--elementPath not a string';
         }
+        var elementPath = elementPath.replace(/\./g,'_');
         if (arguments.length !== 1) {
             throw 'getColumnData()--incorrect number of arguments';
         }
@@ -94,6 +95,7 @@ window.__getTableData = function() {
         if (!isString(elementPath)) {
             throw 'getForegroundColor()--elementPath must be string';
         }
+        var elementPath = elementPath.replace(/\./g,'_');
         if (!isString(value) && !isNumber(value)) {
             throw 'getForegroundColor()--value must be string or number';
         }
@@ -112,6 +114,7 @@ window.__getTableData = function() {
     };
 
     pub.getData = function(rowNumber, elementPath) {
+        var elementPath = elementPath.replace(/\./g,'_');
         return dataObj.data[rowNumber][elementPath];
     };
 

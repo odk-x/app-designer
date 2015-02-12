@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<!-- Detailed View -->
+    <head>
+        <link href="../css/scan_register_patient_row_detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../libs/jquery.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../libs/d3-amd/d3.js"></script>
+    </head>
+    <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
+    <body>
+        <script type="text/javascript" src="../js/scan_register_patient_row_detail.js"></script>
+        <!-- Define any HTML structure you rely on in your js files here, above
+        the call to display. -->
+
+        <p>Name: <span id="NAME"></span></p>
+        <div id="Name_image"></div>
+        <p>Age: <span id="Age"></span></p>
+        <div id="Age_image"></div>
+        <p>Sex: <span id="sex"></span></p>
+        <div id="sex_image"></div>
+        <br>
+
+        <br>
+        <p>Albendazole: <span id="albendazole"></span></p>
+        <div id="albendazole_image"></div>
+        <p>Septrin Tablets: <span id="septrin_tablets"></span></p>
+        <div id="septrin_tablets_image"></div>
+        <p>Septrin Syrup: <span id="septrin_syrup"></span></p>
+        <div id="septrin_syrup_image"></div>
+        <p>Benzyl Benzoate: <span id="benzyl_benzoate"></span></p>
+        <div id="benzyl_benzoate_image"></div>
+        <p>Iron And Folic Acid: <span id="iron_folicacid"></span></p>
+        <div id="iron_folicacid_image"></div>
+        <p>Multivitamin: <span id="multivitamin"></span></p>
+        <div id="multivitamin_image"></div>
+        <p>MMT: <span id="MMT"></span></p>
+        <div id="MMT_image"></div>
+        <p>ORS: <span id="ORS"></span></p>
+        <div id="ORS_image"></div>
+        <p>Paracetamol Tablets: <span id="paracet_tablets"></span></p>
+        <div id="paracet_tablets_image"></div>
+        <p>Paracetamol Syrup: <span id="paracet_syrup"></span></p>
+        <div id="paracet_syrup_image"></div>
+        <p>ACT - pack 12 tabs: <span id="ACT_pack12"></span></p>
+        <div id="ACT_pack12_image"></div>
+        <p>ACT - pack 6 tabs: <span id="ACT_pack6"></span></p>
+        <div id="ACT_pack6_image"></div>
+        <br>
+
+        <br>
+        <p>Comments: <span id="referral_symptoms"></span></p>
+        <div id="referral_symptoms_image"></div>
+        <script>
+            $(display());  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

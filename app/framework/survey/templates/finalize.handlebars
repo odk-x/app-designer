@@ -1,10 +1,33 @@
 <div>
-    <center>
-        <img src="{{ headerImg }}" class="odk-formlogo" />
-        <p>You are at the end of:</p>
-        <p>"{{localize form_title}}"</p>
-        {{#if display_field}}<p>Instance Name: {{display_field}}</p>{{/if}}
-        <button class="finalize">Finalize</button>
-        <button class="incomplete">Save as Incomplete</button>
-    </center>
+    <div>
+        <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
+        <hr>
+    </div>
+
+    <div>
+        <center><p>ODK SURVEY</p></center>
+        <hr>
+    </div>
+
+    <div>
+        <p>Form Name: {{localize form_title}}</p>
+        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
+        <hr>
+    </div>
+
+    <div class="instanceClearDiv"></div>
+        <p>You are at the end of instance: 
+        <p>"{{display_field}}"</p>
+        <hr>
+        <center>
+            <fieldset class="finalizeButtons ui-grid-a">
+                <div class="ui-block-a">
+                    <button class="finalize">Finalize</button>
+                </div>
+                <div class="finalizeButtons ui-block-b">
+                    <button class="incomplete">Incomplete</button>              
+                </div>
+            </fieldset>
+        </center>
+    </div>
 </div>

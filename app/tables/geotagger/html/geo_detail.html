@@ -2,7 +2,7 @@
 <html>
     <head>
         <link href="../css/geo_detail.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="../../../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../framework/tables/js/control.js"></script>
         <script type="text/javascript" src="../../../framework/tables/js/data.js"></script>
         <script type="text/javascript">
@@ -17,12 +17,10 @@
                   }
               });
           }
-          var srcMimeUri = data.get("Image");
+          var uriRelative = data.get("Image.uriFragment");
           var src = "";
-          if (srcMimeUri != null ) {
-              var mimeUriObject = JSON.parse(srcMimeUri);
-              var uriRelative = mimeUriObject.uriFragment;
-              var uriAbsolute = control.getFileAsUrl(uriRelative);
+          if (uriRelative !== null && uriRelative !== '') {
+              var uriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), uriRelative);
               src = uriAbsolute;
           }
           
@@ -31,14 +29,8 @@
 
           document.getElementById("TITLE").innerHTML = data.get("Description");
           
-          var loc = data.get("Location");
-          var lat = "";
-          var lng = "";
-          if ( loc != null ) {
-            var splitLoc = loc.split(",");
-            lat = splitLoc[0];
-            lng = splitLoc[1];
-          }
+          var lat = data.get("Location_latitude");
+          var lng = data.get("Location_longitude");
           document.getElementById("FIELD_1").innerHTML = lat;
           document.getElementById("FIELD_2").innerHTML = lng;
     

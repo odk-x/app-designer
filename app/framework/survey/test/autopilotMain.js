@@ -14,7 +14,7 @@ requirejs.config({
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon 
-        jqmobile : 'libs/jquery.mobile-1.3.2/jquery.mobile-1.3.2',
+        jqmobile : 'libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2',
         jquery : 'libs/jquery.1.10.2',
         backbone : 'libs/backbone.1.0.0',
         handlebars : 'libs/handlebars.1.0.0.rc.4',
@@ -45,7 +45,7 @@ requirejs.config({
         handlebarsHelpers : 'survey/js/handlebarsHelpers',
         formulaFunctions : 'survey/js/formulaFunctions',
         'jquery-csv' : 'libs/jquery-csv/src/jquery.csv',
-        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2013-08-27'
+        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2014-12-24'
     },
     shim: {
         'jqmobile': {
