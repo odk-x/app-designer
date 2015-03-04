@@ -241,8 +241,8 @@ return {
 
         if ( formPath == null ) {
             // do the user-configured framework form...
-            formPath = '../assets/';
-            instanceId = null;
+            formPath = '../assets/framework/forms/framework/';
+			instanceId = null;
             screenPath = null;
         }
         
@@ -258,6 +258,12 @@ return {
             ctxt.log('W','parsequery._parseParameters.shim.refId assignment failed (ok if embedded)');
         }
         ctxt.log('D','parsequery._parseParameters.shim.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
+		
+		if ( formPath == '../assets/framework/forms/framework/' ) {
+		    // instanceId is always specified and invariant on the framework form.
+		    instanceId = 'invariant:0';
+			shim.setInstanceId(refId, instanceId);
+		}
         
         var formDef = opendatakit.getCurrentFormDef();
         var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);

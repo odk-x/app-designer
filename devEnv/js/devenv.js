@@ -1733,13 +1733,15 @@ var _ = require('../libs/underscore.js');
 exports.rootpath = 'http://localhost:8000';
 
 /**
- * Get the path to the framework's formDef.json file. Returns something like:
- * app/assets/formDef.json. Includes the file name and does not begin with
- * a slash.
+ * Get the path to the framework's formDef.json file. Returns:
+ *
+ * app/assets/framework/forms/framework/formDef.json
+ *
+ * Includes the file name and does not begin with a slash.
  */
 exports.getRelativePathToFrameworkFormDef = function() {
 
-    var result = 'app/assets/formDef.json';
+    var result = 'app/assets/framework/forms/framework/formDef.json';
     return result;
 
 };

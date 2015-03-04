@@ -168,7 +168,7 @@ module.exports = function (grunt) {
                 },
                 files: [
                     '<%= tables.appDir %>/*.html',
-                    '<%= tables.appDir %>/assets/formDef.json',
+                    '<%= tables.appDir %>/assets/framework/forms/framework/formDef.json',
                     '<%= tables.appDir %>/tables/*/{forms,js,html}/*/*.{json,css,js,handlebars}',
                     '<%= tables.appDir %>/styles/{,*/}*.css',
                     '<%= tables.appDir %>/scripts/{,*/}*.js',

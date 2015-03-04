@@ -27,7 +27,7 @@ else
             node macGenConverter.js $f >> $TEMP2$TEMP
         fi
     done
-    for f in app/assets/framework.xlsx
+    for f in app/assets/framework/forms/framework/framework.xlsx
     do
 
         TEMP2="${f%/*.xlsx}"

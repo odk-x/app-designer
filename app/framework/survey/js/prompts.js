@@ -631,7 +631,7 @@ promptTypes._linked_type = promptTypes.base.extend({
     },
     getFormPath: function() {
         if ( this.getLinkedFormId() === "framework" ) {
-            return '../assets/'; 
+            return '../assets/framework/forms/framework/'; 
         } else {
             return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
         }
