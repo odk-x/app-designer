@@ -68,6 +68,10 @@ util.getExistingTimesForDate = function(date, focalChimpId) {
 
 };
 
+util.updateCurrentChimps = function(date, time) {
+     
+}
+
 /**
  * Get a query for all the data at the given date and time for the specified
  * focal chimp. Together this specifies a unique time point in a follow.
