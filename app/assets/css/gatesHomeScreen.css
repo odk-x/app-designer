@@ -7,9 +7,28 @@ td {
     padding: 2px;
 }
 
-input[type='checkbox'] {
-    width: 30px;
-    height: 30px;
+#time * {
+  vertical-align: middle;
+}
+
+#loading {
+    width: 100%;
+    height: 100%;
+    background-color: #333333;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    visibility: hidden;
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+    z-index: 998;
+    text-align: center;    
+}
+
+
+input{/*[type='checkbox'] {*/
+    width: 15px; /*it was 30*/
+    height: 15px;
     background: white;
     border-radius: 5px;
     border: 2px solid #555;
@@ -22,6 +41,47 @@ input[type='checkbox'] {
     padding-right: 10px;
 }
 
+#buttons{
+      position: relative !important;
+      left: 170px !important;
+      font-size: 100% !important;
+      padding-left: 210px !important;
+      width: 410px;
+}
+#info_div{
+    position: relative;
+    width:570px;
+    height:150px; /*For Eden's tablet it is 120px*/
+    border:1px solid #000;
+    padding-right: 5px;
+    padding-left: 5px;
+    top: 670px; /*For Eden's tablet it is 510px*/
+    text-align: center;
+    position: fixed;
+   
+}
+.chimp{
+     width: 4em !important;
+     height: 2em !important;
+     /*font-size: 5px !important;*/
+
+}
+#time, #certainty, #distance, #state, #close_focal{
+    float: left;
+    overflow: hidden;
+
+}
+.save_bottom_div{
+    clear: both;
+    float: right;  
+
+}
+span{
+    font-weight: bold;
+    padding-left: .3em;
+    padding-right: .2em;
+    
+}
 .user-list {
     padding-top: 20px;
 }
@@ -78,6 +138,32 @@ ul {
     list-style-type: none;
     padding-left: 0px;
 }
+.input_hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.selected {
+    background-color: #ccc;
+}
+
+#time label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+#time label:hover {
+    background-color: #efefef;
+}
+
+#time label img {
+    padding: 3px;
+    
+}
+
+
+
 
 #all-screen {
     height: 100%;
