@@ -76,6 +76,12 @@ function display() {
      *  page as well as when user updates the elements from the bottom div.
      */
     var updateUI = function(update, chimpId, time, certain, distance, sState, closest_to_focal) {
+        console.log("chimpId " + chimpId);
+        console.log("time " + time);
+        console.log("certain " + certain);
+        console.log("distance " + distance);
+        console.log("sState " + sState);
+        console.log("closest_to_focal " + closest_to_focal);
         if (time != null || time != undefined) {
             if (time == "5") {
                 document.getElementById(chimpId+"_time_img").src = "./img/timeBottom.gif";
@@ -135,29 +141,55 @@ function display() {
             if (update) {
                  document.getElementById(chimpId+"_close").style.backgroundColor = "#3399FF";
             }    
-        }       
+        }    
     };
 
     /* Updates the bottom div when user selects any of the chimp. It updates the 
      * div according to that's chimp.
      */
     var updateBottomDiv = function(time, certain, distance, sState, closest_to_focal) {
-        $("input[name=time][value="+time+"]").attr('checked', true);
+       /* $("input[name=time][value="+time+"]").attr('checked', true);
         $("input[name=certain][value="+certain+"]").attr('checked', true);
         $("input[name=distance][value="+distance+"]").attr('checked', true);
         $("input[name=sex_state][value="+sState+"]").attr('checked', true);
-        $("input[name=close][value="+closest_to_focal+"]").attr('checked', true);
-    };
-
-    /* Updates the bottom div when user finish updaing everything
-     */
-    var uncheckedRadioButton = function(time, certain, distance, sState, closest_to_focal) {
-        $("input[name=time][value="+time+"]").attr('checked', false);
-        $("input[name=certain][value="+certain+"]").attr('checked', false);
-        $("input[name=distance][value="+distance+"]").attr('checked', false);
-        $("input[name=close][value="+closest_to_focal+"]").attr('checked', false);
-        $("input[name=sex_state][value="+sState+"]").attr('checked', false);
-        
+        $("input[name=close][value="+closest_to_focal+"]").attr('checked', true);*/
+        console.log("Why are you messing up stupid " + certain + "your time " + (typeof certain));
+        if (time == "0") {
+            console.log("I am here uhuu");
+            document.getElementById("time1").checked = true;
+        } else if (time == "5") {
+            document.getElementById("time2").checked = true;
+        } else if (time == "10") {
+            document.getElementById("time3").checked = true;
+        } else if (time == "15") {
+            document.getElementById("time4").checked = true;
+        }
+        if (certain == "0") {
+             document.getElementById("certain1").checked = true;
+        } else if (certain == "1") {
+            document.getElementById("certain2").checked = true;
+        } else if (certain == "2") {
+            document.getElementById("certain3").checked = true;
+        }
+        if (distance == "0") {
+             document.getElementById("distance1").checked = true;
+        } else if (certain == "1") {
+            document.getElementById("distance2").checked = true;
+        }
+         if (sState == "0") {
+            document.getElementById("sex1").checked = true;
+        } else if (sState == "0.25") {
+            document.getElementById("sex2").checked = true;
+        } else if (sState == "0.5") {
+            document.getElementById("sex3").checked = true;
+        } else if (sState == "0.75") {
+           document.getElementById("sex4").checked = true;
+        }
+        if (closest_to_focal == "0") {
+             document.getElementById("close1").checked = true;
+        } else if (certain == "1") {
+           document.getElementById("close2").checked = true;
+        }
     };
 
     var followTimeUserFriendly;
@@ -324,12 +356,15 @@ function display() {
         // }
         
     });
-
     
     // It helps the user to update ui and save the new information to
     // the database
-    $('.chimp').on('click', function() {
+    var updateChimpInfo = function(){
         var chimpId = $(this).prop('id');
+        console.log("in event handeler " + chimpId);
+        // removing event handeler from all other chimps right now since we want the
+        // user to be able update one chimp at a time.
+        $('.chimp').unbind("click", updateChimpInfo);
         document.getElementById(chimpId).style.backgroundColor = "green";
 
         var chimpList = util.getTableDataForTimePoint(
@@ -356,12 +391,17 @@ function display() {
        
         // getting the information from the div and saving it to the database and
         // updates the ui
+        var time = null;
+        var certain = null;
+        var distance = null;
+        var sex_state = null;
+        var close = null;
         $('.save_bottom_div').on('click', function() {
-            var time = $('input[name="time"]:checked').val();
-            var certain = $('input[name="certain"]:checked').val();
-            var distance = $('input[name="distance"]:checked').val();
-            var sex_state = $('input[name="sex_state"]:checked').val();
-            var close = $('input[name="close"]:checked').val();
+            time = $('input[name="time"]:checked').val();
+            certain = $('input[name="certain"]:checked').val();
+            distance = $('input[name="distance"]:checked').val();
+            sex_state = $('input[name="sex_state"]:checked').val();
+            close = $('input[name="close"]:checked').val();
             updateUI(true, chimpId,
             time,
             certain,
@@ -383,9 +423,13 @@ function display() {
                 console.log("There is no Chimp with this name in the database!!!!");
                 return;
             }
-        });
-        //uncheckedRadioButton(time, certain, distance, sex_state, close);
-    });
+            // we are done with updating the current chimp. so we can re bind the
+            // all the chimps to the event handeler
+            $('.chimp').bind("click", updateChimpInfo);
+        }); 
+    };       
+   // binding event handler to all the chimps
+   $('.chimp').bind("click", updateChimpInfo);
     
     // Updates the follow page according to the current information regarding foods
     var foodData = util.getFoodDataForDatePoint(

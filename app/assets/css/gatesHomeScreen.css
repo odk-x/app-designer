@@ -51,12 +51,14 @@ input{/*[type='checkbox'] {*/
 #info_div{
     position: relative;
     width:570px;
-    height:120px;
+    height:120px; /*For Eden's tablet it is 120px*/
     border:1px solid #000;
+    padding-top: 7px;
     padding-right: 5px;
     padding-left: 5px;
-    top: 510px;
+    top: 695px; /*For Eden's tablet it is 510px*/
     text-align: center;
+    position: fixed;
    
 }
 .chimp{
@@ -68,13 +70,19 @@ input{/*[type='checkbox'] {*/
 #time, #certainty, #distance, #state, #close_focal{
     float: left;
     overflow: hidden;
-
 }
+
 .save_bottom_div{
     clear: both;
-    float: right;  
-
+    float: right;
+    position: relative;
+    top: -20px;
 }
+
+label {
+    display: inline;
+}
+
 span{
     font-weight: bold;
     padding-left: .3em;
