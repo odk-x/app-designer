@@ -50,19 +50,19 @@
      
     
       <div id="table-container">
-        <table id="observation-table" style="font-size: 10px;">
+        <table id="observation-table" style="font-size: 10.5px;">
           <tr>
             <td></td>
             <td></td>
             <td>C</td>
-            <td>5m?</td>
+            <td>5m</td>
             <td>SS</td>
             <td>Cl</td>
             <td style="padding-right: 1.3em;"></td>
             <td></td>
             <td></td>
             <td>C</td>
-            <td>5m?</td>
+            <td>5m</td>
             <td>SS</td>
             <td>Cl</td>            
           </tr>
@@ -483,35 +483,45 @@
      <div id="info_div" style="font-size: 16px;">
       <ul id="inside_div">
         <div id="time">
-          <input type="radio" id="time1" name="time" value="0"><label for="so"><img src="./img/timeEmpty.gif" style="width: 60px; height: 80px;"/></label>
-          <input type="radio" id="time2" name="time" value="5"><label for="sf"> <img src="./img/timeBottom.gif" style="width: 60px; height: 80px;"/></label>
-          <input type="radio" id="time3" name="time" value="10"><label for="su"><img src="./img/timeMiddle.gif" style="width: 60px; height: 80px;"/></label>
-          <input type="radio" id="time3" name="time" value="10"><label for="su"><img src="./img/timeTop.gif" style="width: 60px; height: 80px;"/></label>    
-        </div>
-        <div id="certainty"><span>Certainty:</span>
-          <input type="radio" id="certain1" name="certain" value="0">0 
-          <input type="radio" id="certain2" name="certain" value="1">| 
-          <input type="radio" id="certain3" name="certain" value="2">&#x2717;
+          <label for="so"><img src="./img/timeEmpty.gif" style="width: 50px; height: 60px;"/></label>
+          <label for="sf"> <img src="./img/timeBottom.gif" style="width: 50px; height: 60px;"/></label>
+          <label for="su"><img src="./img/timeMiddle.gif" style="width: 50px; height: 60px;"/></label>
+          <label for="su"><img src="./img/timeTop.gif" style="width: 50px; height: 60px;"/></label>    
+
+          <br />
+
+          <input type="radio" id="time1" name="time" value="0" style="margin-left:30px; margin-right:35px">
+          <input type="radio" id="time2" name="time" value="5" style="margin-right: 35px">
+          <input type="radio" id="time3" name="time" value="10" style="margin-right: 35px">
+          <input type="radio" id="time3" name="time" value="10" style="margin-right: 35px">
         </div>
 
-        <div id="distance"><span>Distance:</span>
-          <input type="radio" id="distance1" name="distance" value="0">CL 
-          <input type="radio" id="distance2" name="distance" value="1">5m
+
+ 
+        <div id="certainty" style="padding-bottom: 1.5px; background-color: #F0F0F0"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Certainty:</span>
+          <label><input type="radio" id="certain1" name="certain" value="0">0</label>
+          <label><input type="radio" id="certain2" name="certain" value="1" style="margin-left: 15px">|</label>
+          <label><input type="radio" id="certain3" name="certain" value="2" style="margin-left: 15px">&#x2717;</label>
         </div>
-        <div id="state"><span>State:</span>
-          <input type="radio" id="sex1" name="sex_state" value="0">0
-          <input type="radio" id="sex2" name="sex_state" value="0.25">0.25
-          <input type="radio" id="sex3" name="sex_state" value="0.5">0.5
-          <input type="radio" id="sex4" name="sex_state" value="0.75">0.75
+
+        <div id="distance" style="padding-bottom: 1.5px;"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Within 5m: </span>
+          <label><input type="radio" id="distance1" name="distance" value="0">&#x2717;</label>
+          <label><input type="radio" id="distance2" name="distance" value="1" style="margin-left: 15px">&#x2713;</label>
+        </div>
+        <div id="state" style="padding-bottom: 1.5px; padding-left: 1px; background-color: #F0F0F0"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;State:</span>
+          <label><input type="radio" id="sex1" name="sex_state" value="0">0</label>
+          <label><input type="radio" id="sex2" name="sex_state" value="0.25" style="margin-left: 5px">0.25</label>
+          <label><input type="radio" id="sex3" name="sex_state" value="0.5" style="margin-left: 5px">0.5</label>
+          <label><input type="radio" id="sex4" name="sex_state" value="0.75" style="margin-left: 5px">0.75</label>
         </div>
         <div id="close_focal"><span>Close To Focal:</span>
-          <input type="radio" id="close1" name="close" value="0">&#x2717;
-          <input type="radio" id="close2" name="close" value="1">&#x2713;
-        </div>
-        <div>
-          <button class="save_bottom_div" id="save_bottom_div"style="font-size: 10px;">SAVE</button>
-        </div>
-      </ul> 
+          <label><input type="radio" id="close1" name="close" value="0">&#x2717;</label>
+          </label><input type="radio" id="close2" name="close" value="1" style="margin-left: 15px">&#x2713;</label>     
+        </div>  
+      </ul>   
+
+        <button class="save_bottom_div btn btn-default" id="save_bottom_div"style="font-size: 10px;">SAVE</button>   
+
      </div>
   </div> <!-- .container -->
 
