@@ -8,6 +8,28 @@
           "text": "Date and Time"
         },
         "_row_num": 2
+      },
+      {
+        "type": "date",
+        "name": "example2",
+        "display": {
+          "text": "Date"
+        },
+        "inputAttributes": {
+          "timeFormat": "YYYY/DD/MM"
+        },
+        "_row_num": 3
+      },
+      {
+        "type": "time",
+        "name": "example3",
+        "display": {
+          "text": "Time"
+        },
+        "inputAttributes": {
+          "timeFormat": "HH:mm"
+        },
+        "_row_num": 4
       }
     ],
     "settings": [
@@ -125,6 +147,28 @@
         "type": "object",
         "elementType": "dateTime",
         "elementKey": "example1"
+      },
+      "example2": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "date",
+        "elementKey": "example2"
+      },
+      "example3": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "time",
+        "elementKey": "example3"
       }
     },
     "section_names": [
@@ -151,12 +195,44 @@
             "promptIdx": 0
           },
           {
+            "type": "date",
+            "name": "example2",
+            "display": {
+              "text": "Date"
+            },
+            "inputAttributes": {
+              "timeFormat": "YYYY/DD/MM"
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "date",
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 1
+          },
+          {
+            "type": "time",
+            "name": "example3",
+            "display": {
+              "text": "Time"
+            },
+            "inputAttributes": {
+              "timeFormat": "HH:mm"
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "time",
+            "_branch_label_enclosing_screen": "survey/_screen4",
+            "promptIdx": 2
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 3,
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 1
+            "_row_num": 5,
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 3
           }
         ],
         "validation_tag_map": {
@@ -170,31 +246,45 @@
             "operationIdx": 0
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 3,
-            "operationIdx": 1
-          },
-          {
             "_row_num": 3,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 4,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 5,
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 2
+            "operationIdx": 4
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 3,
-            "operationIdx": 3
+            "_row_num": 5,
+            "operationIdx": 5
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_contents": 2,
-          "_screen3": 2
+          "_screen3": 1,
+          "_screen4": 2,
+          "_contents": 4,
+          "_screen5": 4
         }
       },
       "initial": {

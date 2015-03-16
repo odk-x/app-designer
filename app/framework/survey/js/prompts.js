@@ -1293,6 +1293,72 @@ promptTypes.select_one = promptTypes.select.extend({
         }
     }
 });
+promptTypes.select_one_integer = promptTypes.select_one.extend({
+    modification: function(evt) {
+        var ctxt = this.controller.newContext(evt);
+        ctxt.log('D',"prompts." + this.type + ".modification", "px: " + this.promptIdx + " val: " + $(evt.target).attr('value'));
+        var that = this;
+        if(this.withOther) {
+            //This hack is needed to prevent rerendering
+            //causing the other input to loose focus when clicked.
+            if( $(evt.target).val() === 'other' &&
+                $(evt.target).prop('checked') &&
+                //The next two lines determine if the checkbox was already checked.
+                this.renderContext.other &&
+                this.renderContext.other.checked) {
+                ctxt.log('D',"prompts." + this.type + ".modification.withOther.hack", "px: " + this.promptIdx);
+                ctxt.success();
+                return;
+            }
+        }
+        if(this.appearance === 'grid') {
+            //Make selection more reponsive by providing visual feedback before
+            //the template is re-rendered.
+            this.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
+            this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
+        }
+        var formValue = (this.$('form').serializeArray()); 
+        // cast all values in formValue to ints
+        for (var i = 0; i < formValue.length; i++) {
+            formValue[i].value = parseInt(formValue[i].value);
+        }
+        that.setValueDeferredChange(that.generateSaveValue(formValue));
+        that.updateRenderValue(formValue);
+        that.reRender(ctxt);
+    },
+    /**
+     * Parse a saved string value into the format
+     * returned by jQuery's serializeArray function.
+     */
+    parseSaveValue: function(savedValue){
+        //Note that this function expects to run after renderContext.choices
+        //has been initilized.
+        var valInChoices = false;
+        if(!_.isNumber(savedValue)) {
+            return null;
+        }
+        if(this.renderContext.choices) {
+            valInChoices = _.any(this.renderContext.choices, function(choice){
+                return (choice.data_value === savedValue);
+            });
+        }
+        if (valInChoices) {
+            return [{
+                "name": this.name,
+                "value": savedValue
+            }];
+        }
+        else {
+            return [{
+                "name": this.name,
+                "value": "other"
+            }, {
+                "name": "otherValue",
+                "value": savedValue
+            }];
+        }
+    }
+});
 //TODO:
 //Since multiple choices are possible should it be possible
 //to add arbitrary many other values to a select_with_other?
@@ -1501,6 +1567,22 @@ promptTypes.input_type = promptTypes.base.extend({
         return true;
     }
 });
+promptTypes.textarea = promptTypes.input_type.extend({
+    type: "textarea",
+    templatePath: "templates/textarea.handlebars",
+    renderContext: {
+        "type": "textarea"
+    },
+    beforeMove: function() {
+        var that = this;
+        var isInvalid = that.setValueAndValidate(this.$('textarea').val());
+        if ( isInvalid ) {
+            return { message: that.invalid_value_message };
+        } else {
+            return null;
+        }
+    }
+});
 promptTypes.string = promptTypes.input_type.extend({
     type: "string",
     renderContext: {
@@ -1548,12 +1630,13 @@ promptTypes.decimal = promptTypes.input_type.extend({
 });
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
-    templatePath: "templates/datetimepicker.handlebars",  //TODO make template
+    templatePath: "templates/datetimepicker.handlebars", 
     usePicker: true,
     insideAfterRender: false,
     timeFormat: "MM/DD/YYYY h:mm A",
     showDate: true,
     showTime: true,
+    dtp: null,
     events: {
         "dp.hide": "modification",
         "swipeleft input": "stopPropagation",
@@ -1594,6 +1677,10 @@ promptTypes.datetime = promptTypes.input_type.extend({
             ctxt.success();
         } else {
             var dateValue = that.getValue();
+            var userTimeFormat  = renderContext.inputAttributes.timeFormat;
+            if (userTimeFormat !== null && userTimeFormat !== undefined) {
+                that.timeFormat = userTimeFormat;
+            }
             if (dateValue !== undefined && dateValue !== null) {
                 renderContext.value = moment(dateValue).format(that.timeFormat);
             }
@@ -1603,30 +1690,37 @@ promptTypes.datetime = promptTypes.input_type.extend({
     modification: function(evt) {
         var that = this;
         if ( !that.insideAfterRender ) {
-            var date_value = that.$('input').data("DateTimePicker").getDate()
-            var value = (date_value === undefined || date_value === null) ? null : date_value.toDate(); 
+            var date_value = that.$('input').data('DateTimePicker').getDate()
+            var value = (date_value === undefined || date_value === null) ? null : date_value.toDate();
+            var formattedDateValue = moment(value).format(that.timeFormat);
             var ref = that.getValue();  
+
             var rerender = ((ref == null || value == null) && (ref != value )) ||
                 (ref != null && value != null && !that.sameValue(ref, value));
+
             var ctxt = that.controller.newContext(evt);
             ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
+
             var renderContext = that.renderContext;
             if ( value === undefined || value === null ) {
                 renderContext.value = '';
             } else {
-                renderContext.value = that.$('input').val(); 
+                renderContext.value = formattedDateValue; 
             }
+
             // track original value
             var originalValue = that.getValue();
             that.setValueDeferredChange(value);
             renderContext.invalid = !that.validateValue();
             if ( renderContext.invalid ) {
                 value = originalValue;
+                formattedDateValue = moment(value).format(that.timeFormat);
                 // restore it...
                 that.setValueDeferredChange(originalValue);
                 rerender = true;
             }
-            renderContext.value = value;
+ 
+           renderContext.value = formattedDateValue;
             if ( rerender ) {
                 that.reRender(ctxt);
             } else {
@@ -1637,27 +1731,32 @@ promptTypes.datetime = promptTypes.input_type.extend({
     afterRender: function() {
         var that = this;
         if(this.usePicker){
-            if (that.showDate && !that.showTime) {
-                that.$('input').datetimepicker({pickTime: false});
-            } else if (!that.showDate && that.showTime) {
-                that.$('input').datetimepicker({pickDate: false});
-            } else {
-                that.$('input').datetimepicker();
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
             }
 
-            var value = that.getValue();      
-            that.insideAfterRender = true;
+            if (that.showDate && !that.showTime) {
+                that.$('input').datetimepicker({pickTime: false, format: this.timeFormat});
+            } else if (!that.showDate && that.showTime) {
+                that.$('input').datetimepicker({pickDate: false, format: this.timeFormat});
+            } else {
+                that.$('input').datetimepicker({format: this.timeFormat});
+            }
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+      
             that.insideAfterRender = false;
         }
     },
     beforeMove: function() {
         // the spinner will have already saved the value
-
-        // hide the datetimepicker in case it is still up
+        // destroy the datetimepicker if it is still present
         var that = this;
-        var dtp = that.$('input').data("DateTimePicker");
-        if (dtp) {
-            dtp.hide();
+
+        if (that.dtp) {
+            that.dtp.destroy();
         }
         return null;
     }
