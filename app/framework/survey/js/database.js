@@ -150,6 +150,7 @@ putInstanceMetaData:function(ctxt, model, formId, instanceId, name, value) {
  * Does not depend upon global state.
  */
 putDataKeyValueMap:function(ctxt, model, formId, instanceId, kvMap) {
+    ctxt.log('D','database.putDataKeyValueMap.entered');
     if ($.isEmptyObject(kvMap)) {
         ctxt.success();
     } else {

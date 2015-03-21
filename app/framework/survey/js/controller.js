@@ -336,6 +336,7 @@ return {
      */
     // NOTE: this is only here to avoid having screen depend upon database.
     commitChanges: function(ctxt) {
+        ctxt.log('D','controller.commitChanges applying deferred changes');
         database.applyDeferredChanges(ctxt);
     },
     /**

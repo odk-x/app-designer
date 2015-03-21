@@ -234,15 +234,16 @@ return {
                 }
             }
             
-            if ( formPath != null && formPath.length > 0 && formPath[formPath.length-1] !== '/' ) {
+            if ( formPath !== null &&  formPath !== undefined &&
+                 formPath.length > 0 && formPath[formPath.length-1] !== '/' ) {
                 formPath[formPath.length] = '/';
             }
         }
 
-        if ( formPath == null ) {
+        if ( formPath === null || formPath === undefined ) {
             // do the user-configured framework form...
             formPath = '../assets/framework/forms/framework/';
-			instanceId = null;
+            instanceId = null;
             screenPath = null;
         }
         
@@ -258,12 +259,12 @@ return {
             ctxt.log('W','parsequery._parseParameters.shim.refId assignment failed (ok if embedded)');
         }
         ctxt.log('D','parsequery._parseParameters.shim.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
-		
-		if ( formPath == '../assets/framework/forms/framework/' ) {
-		    // instanceId is always specified and invariant on the framework form.
-		    instanceId = 'invariant:0';
-			shim.setInstanceId(refId, instanceId);
-		}
+        
+        if ( formPath === '../assets/framework/forms/framework/' ) {
+            // instanceId is always specified and invariant on the framework form.
+            instanceId = 'invariant:0';
+            shim.setInstanceId(refId, instanceId);
+        }
         
         var formDef = opendatakit.getCurrentFormDef();
         var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);

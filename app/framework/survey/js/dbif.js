@@ -38,12 +38,38 @@ window.dbif = window.dbif || {
     return resultSet;
   },
   dbshimCleanupCallback: function(generation) {
-    // The indicated generation was cleaned up on the Java side.
-    // Hopefully, we don't need to do anything special here...
-    if ( this._submissionDb && this._submissionDb._generation === generation ) {
+    // Everything but the indicated generation was cleaned up on 
+    // the Java side; if we have any outstanding transactions for 
+    // any generations not matching 'generation', then fire the 
+    // error handler for them.
+    if ( this._submissionDb && this._submissionDb._generation !== generation ) {
         this._submissionDb = false;
     }
-    delete this._dbshimDbMap[generation];
+    var genList = [];
+    for ( var candidateGeneration in this._dbshimDbMap ) {
+        if ( this._dbshimDbMap.hasOwnProperty(candidateGeneration) ) {
+            if ( candidateGeneration !== generation ) {
+                genList.push(this._dbshimDbMap[candidateGeneration]);
+            }
+        }
+    }
+    for ( var db in genList ) {
+        delete this._dbshimDbMap[db._generation];
+        for ( var transaction in db._transactionMap ) {
+            if ( !db._transactionMap.hasOwnProperty(transaction) ) {
+                continue;
+            }
+            transaction._error = { code: 0, message: 'aborted' };
+            try {
+                // call error handler
+                if ( transaction._errorHandler !== null && transaction._errorHandler !== undefined ) {
+                    (transaction._errorHandler)(transaction._error);
+                }
+            } catch (e) {
+                shim.log('E',"exception during transaction error handler: " + String(e));
+            }
+        }
+    }
   },
   dbshimTransactionCallback: function(generation, transactionGeneration, resultOutcome) {
     var that = this;
@@ -63,29 +89,51 @@ window.dbif = window.dbif || {
                 }
             }
             
-            if ( transaction._error ) {
-                try {
-                    // call error handler
-                    if ( transaction._errorHandler !== null && transaction._errorHandler !== undefined ) {
-                        (transaction._errorHandler)(transaction._error);
+            try {
+                if ( transaction._error ) {
+                    try {
+                        // call error handler
+                        if ( transaction._errorHandler !== null && transaction._errorHandler !== undefined ) {
+                            (transaction._errorHandler)(transaction._error);
+                        }
+                    } catch (e) {
+                        shim.log('E',"exception during transaction error handler: " + String(e));
+                        throw e;
+                    } finally {
+                        delete db._transactionMap[transactionGeneration];
                     }
-                } catch (e) {
-                    shim.log('E',"exception during transaction error handler: " + String(e));
-                    throw e;
-                } finally {
-                    delete db._transactionMap[transactionGeneration];
+                } else {
+                    try {
+                        // call success handler
+                        if ( transaction._successHandler !== null && transaction._successHandler !== undefined ) {
+                            (transaction._successHandler)();
+                        }
+                    } catch (e) {
+                        shim.log('E',"exception during transaction success handler: " + String(e));
+                        throw e;
+                    } finally {
+                        delete db._transactionMap[transactionGeneration];
+                    }
                 }
-            } else {
-                try {
-                    // call success handler
-                    if ( transaction._successHandler !== null && transaction._successHandler !== undefined ) {
-                        (transaction._successHandler)();
-                    }
-                } catch (e) {
-                    shim.log('E',"exception during transaction success handler: " + String(e));
-                    throw e;
-                } finally {
-                    delete db._transactionMap[transactionGeneration];
+            } finally {
+                // we are queuing transactions to execute sequentially
+                // now that this transaction is complete, fire the next one.
+                shim.log('I',"active trans gen " + db._activeTransactionGeneration + 
+                            " prev gen: " + transactionGeneration );
+                var curTransaction = null;
+                if ( db._activeTransactionGeneration <= db._transactionGeneration ) {
+                    do {
+                        db._activeTransactionGeneration = db._activeTransactionGeneration + 1;
+                        curTransaction = db._transactionMap[db._activeTransactionGeneration];
+                    } while ( (curTransaction === undefined || curTransaction === null) && 
+                              db._activeTransactionGeneration < db._transactionGeneration );
+                }
+                if ( curTransaction !== null && curTransaction !== undefined ) {
+                    shim.log('I',"trans callback: active trans gen " + db._activeTransactionGeneration + " cur gen: " + 
+                                    curTransaction._transactionGeneration );
+                    shim.log('I',"dbif: trigger first action in transaction: " + 
+                        db._activeTransactionGeneration + " after outcome handler" );
+                    curTransaction._takeNextAction(0);
                 }
             }
         }
@@ -195,6 +243,7 @@ window.dbif = window.dbif || {
             window.dbshim.confirmSettings(thisGen);
             w3cDatabase = {
                 _generation: thisGen,
+                _activeTransactionGeneration: 0,
                 _transactionGeneration: 0,
                 _transactionMap: {},
                 transaction: function (transactionBody, errorHandler, successHandler) {
@@ -252,8 +301,13 @@ window.dbif = window.dbif || {
                         window.dbshim.rollback(that._generation, activeTransaction._transactionGeneration);
                         return;
                     }
-                    // and now execute all the statements in a transaction...
-                    activeTransaction._takeNextAction(0);
+                    // defer actions if we are not the active transaction.
+                    shim.log('I',"active trans gen " + that._activeTransactionGeneration + " cur gen: " + 
+                                    activeTransaction._transactionGeneration );
+                    if ( that._activeTransactionGeneration === activeTransaction._transactionGeneration ) {
+                        // and now execute all the statements in a transaction...
+                        activeTransaction._takeNextAction(0);
+                    }
                 },
                 changeVersion: function() {
                     throw new Error("unsupported");
