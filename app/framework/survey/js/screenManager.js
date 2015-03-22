@@ -51,9 +51,6 @@ return Backbone.View.extend({
     },
     cleanUpScreenManager: function(ctxt){
         this.pageChangeActionLockout = false;
-        if ( this.refId !== opendatakit.getRefId() ) {
-            this.savedCtxt = null;
-        }
         this.displayWaiting(ctxt);
     },
     enableSwipeNavigation: function() {
@@ -203,15 +200,22 @@ return Backbone.View.extend({
         screen._screenManager = that;
 
         var cleanupCtxt = $.extend({}, ctxt, {success: function() {
-                ctxt.log('D', "screenManager.commonDrawScreen.ultimate.success (should be from within handlePageChange)");
-                that.savedCtxt = null;
+                ctxt.log('D', "screenManager.commonDrawScreen.ultimate.success (via terminalContext)");
+                if ( that.activeScreen ) {
+                    // TODO: unclear what proper action should be for a failure
+                    // during afterRender(). For now, the display ends up in an 
+                    // inconsistent state.
+                    that.activeScreen.afterRender();
+                    that.activeScreen.recursiveDelegateEvents();
+                }
+                that.removePreviousPageEl();
                 window.clearTimeout(activateTimeout);
                 that.hideSpinnerOverlay();
                 that.pageChangeActionLockout = false;
                 ctxt.success();
             }, failure: function(m) {
-                ctxt.log('D', "screenManager.commonDrawScreen.ultimate.failure");
-                that.savedCtxt = null;
+                ctxt.log('D', "screenManager.commonDrawScreen.ultimate.failure (via terminalContext)");
+                that.removePreviousPageEl();
                 window.clearTimeout(activateTimeout);
                 that.hideSpinnerOverlay();
                 that.pageChangeActionLockout = false;
@@ -226,9 +230,11 @@ return Backbone.View.extend({
         // 
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
-        var buildCtxt = $.extend({render:true},cleanupCtxt,{success:function(){
+        var bcBase = that.controller.newCallbackContext();
         
-                cleanupCtxt.log('D', "screenManager.commonDrawScreen.screen.buildRenderContext.success");
+        var buildCtxt = $.extend({render:true},bcBase,{success:function(){
+        
+                bcBase.log('D', "screenManager.commonDrawScreen.screen.buildRenderContext.success");
                 // patch up navigation settings for the screen...
                 // if neither forward or backward navigation is enabled, disable all navigations.
                 if ( !screen._renderContext.enableNavigation ) {
@@ -245,10 +251,10 @@ return Backbone.View.extend({
                 }
 
                 // render screen
-                cleanupCtxt.log('D', "screenManager.commonDrawScreen.screen.before.render");
-                var screenRenderCtxt = $.extend({},cleanupCtxt,{success: function() {
+                bcBase.log('D', "screenManager.commonDrawScreen.screen.before.render");
+                var screenRenderCtxt = $.extend({},bcBase,{success: function() {
                     
-                    cleanupCtxt.log('D', "screenManager.commonDrawScreen.screen.render.success");
+                    bcBase.log('D', "screenManager.commonDrawScreen.screen.render.success");
                     // find the previous screen...
                     var oldCurrentEl = that.$el.find(".odk-page");
                     // make the new screen the active screen (...no-op if redraw).
@@ -262,15 +268,7 @@ return Backbone.View.extend({
                         that.currentPageEl.insertAfter(that.previousPageEl);
                     }
 
-                    // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
-                    that.refId = opendatakit.getRefId();
-                    that.savedCtxt = cleanupCtxt;
-                    // turn first child into a page...
-                    //append it to the page container
-                    // maybe need to drop spinner for jqMobile?: window.clearTimeout(activateTimeout);
-                    setTimeout(function() {
-                        that.handlePagechange();
-                    }, 0);
+                    bcBase.success();
                 }});
                 screen.render(screenRenderCtxt);
             }});
@@ -279,6 +277,8 @@ return Backbone.View.extend({
         // the drawing this screen get rid of the modal-backdrop
         that.removeBootstrapModalBackdrop();
 
+        buildCtxt.setTerminalContext(cleanupCtxt);
+        
         screen.buildRenderContext(buildCtxt);
     },
     gotoNextScreen: function(evt) {
@@ -537,33 +537,6 @@ return Backbone.View.extend({
             var pg = this.previousPageEl;
             this.previousPageEl = null;
             pg.empty().remove();
-        }
-    },
-    handlePagechange: function(){
-        var that = this;
-        var ctxt = that.savedCtxt;
-        that.savedCtxt = null;
-        
-        if ( ctxt != null ) {
-            ctxt.log('I','screenManager.handlePageChange.linked');
-            if ( that.activeScreen ) {
-                // TODO: unclear what proper action should be for a failure
-                // during afterRender(). For now, the display ends up in an 
-                // inconsistent state.
-                that.activeScreen.afterRender();
-                that.activeScreen.recursiveDelegateEvents();
-                that.removePreviousPageEl();
-                ctxt.success();
-            } else {
-                that.removePreviousPageEl();
-                ctxt.success();
-            }
-        } else {
-            try {
-                throw new Error('dummy');
-            } catch (e) {
-                shim.log('E', "no savedCtxt when handling change event: " + e.stack );
-            }
         }
     },
     disableImageDrag: function(evt){

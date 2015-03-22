@@ -52,12 +52,12 @@ window.landing = window.landing || {
                 if ( typeof action === 'string' || action instanceof String) {
                     var ctxt = that.controller.newCallbackContext();
                     ctxt.setTerminalContext(terminateCtxt);
-                    ctxt.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (immediate)", action);
+                    ctxt.log('I', "landing.signalQueuedActionAvailable.changeUrlHash (immediate)", action);
                     that.controller.changeUrlHash(ctxt,action);
                 } else {
                     var ctxt = that.controller.newCallbackContext();
                     ctxt.setTerminalContext(terminateCtxt);
-                    ctxt.log('I', "landing.opendatakitCallback.actionCallback (immediate)", action.action);
+                    ctxt.log('I', "landing.signalQueuedActionAvailable.actionCallback (immediate)", action.action);
                     that.controller.actionCallback( ctxt, action.page, action.path, action.action, action.jsonValue );
                 }
             }

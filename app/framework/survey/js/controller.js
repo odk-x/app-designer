@@ -614,10 +614,7 @@ return {
                 if ( m && m.message ) {
                     popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath + " message: " + m.message);
                     // schedule a timer to show the message after the page has rendered
-                    setTimeout(function() {
-                        popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.setTimeout", "px: " + that.getCurrentScreenPath());
-                        that.screenManager.showScreenPopup(m);
-                    }, 500);
+                    that.screenManager.showScreenPopup(m);
                 }
                 popupbasectxt.success();
             },
@@ -627,26 +624,22 @@ return {
                 if ( m2 && m2.message ) {
                     popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup", "px: " + opPath + " message: " + m2.message);
                     // schedule a timer to show the mesage after the page has rendered
-                    setTimeout(function() {
-                        popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.setTimeout", "px: " + that.getCurrentScreenPath());
-                        that.screenManager.showScreenPopup(m2);
-                    }, 500);
+                    that.screenManager.showScreenPopup(m2);
                 }
                 popupbasectxt.success();
         }});
 
+        ctxt.setChainedContext(popupctxt);
         /**
          * And now display the requested screen.
          */
         that.setScreen( $.extend({}, ctxt, {
                 success: function() {
                     that.screenManager.hideSpinnerOverlay();
-                    ctxt.setChainedContext(popupctxt);
                     ctxt.success();
                 }, 
                 failure: function(m3) {
                     that.screenManager.hideSpinnerOverlay();
-                    ctxt.setChainedContext(popupctxt);
                     ctxt.failure(m3);
                 }}), op, options );
     },
@@ -1196,9 +1189,15 @@ return {
                 }
             }
             if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
-                this.chainedCtxt.ctxt.success();
+                var cctxt = this.chainedCtxt.ctxt;
+                setTimeout(function() {
+                    cctxt.success();
+                    }, 10);
             } else if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
-                this.terminalCtxt.ctxt.success();
+                var cctxt = this.terminalCtxt.ctxt;
+                setTimeout(function() {
+                    cctxt.success();
+                    }, 10);
             }
         },
         
@@ -1215,13 +1214,20 @@ return {
                 }
             }
             if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
-                this.chainedCtxt.ctxt.failure(m);
+                var cctxt = this.chainedCtxt.ctxt;
+                setTimeout(function() {
+                    cctxt.failure(m);
+                    }, 10);
             } else if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
-                this.terminalCtxt.ctxt.failure(m);
+                var cctxt = this.terminalCtxt.ctxt;
+                setTimeout(function() {
+                    cctxt.failure(m);
+                    }, 10);
             }
         },
         
         setChainedContext: function(ctxt) {
+            // move our terminalCtxt to be the terminalCtxt of the ctxt being chained-to.
             if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
                 ctxt.setTerminalContext(this.terminalCtxt.ctxt);
                 this.terminalCtxt.ctxt = null;
@@ -1234,9 +1240,15 @@ return {
         },
         
         setTerminalContext: function(ctxt) {
+            // find the termination of our chain...
             var cur = this;
             while ( cur.chainedCtxt.ctxt !== null && cur.chainedCtxt.ctxt !== undefined ) {
                 cur = cur.chainedCtxt.ctxt;
+            }
+            // if that already has a terminal context, insert this terminal
+            // context in front of it.
+            if ( cur.terminalCtxt.ctxt !== null && cur.terminalCtxt.ctxt !== undefined ) {
+                ctxt.setTerminalContext(cur.terminalCtxt.ctxt);
             }
             cur.terminalCtxt.ctxt = ctxt;
         },
