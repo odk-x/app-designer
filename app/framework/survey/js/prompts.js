@@ -668,10 +668,9 @@ promptTypes._linked_type = promptTypes.base.extend({
         if ( that.getPromptPath() != promptPath ) {
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
-        return function(ctxt, internalPromptContext, action, jsonString) {
+        return function(ctxt, internalPromptContext, action, jsonObject) {
             ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-            var jsonObject = JSON.parse(jsonString);
             if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
                 ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
@@ -681,7 +680,7 @@ promptTypes._linked_type = promptTypes.base.extend({
             else {
                 ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent', 
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + 
-                    internalPromptContext + " action: " + action + " jsonString: " + jsonString);
+                    internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
                     failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
@@ -819,7 +818,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     handleConfirmation: function() {
         var that = this;
 
-        if (that._cachedEvent == null) {
+        if (that._cachedEvent === null || that._cachedEvent === undefined ) {
             shim.log('E',"In linked_table.handleConfirmation _cachedEvent is null"); 
             return ({message:"In linked_table.deleteInstance _cachedEvent is null"});
         }
@@ -941,10 +940,9 @@ promptTypes.external_link = promptTypes.base.extend({
         if ( that.getPromptPath() != promptPath ) {
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
-        return function(ctxt, internalPromptContext, action, jsonString) {
+        return function(ctxt, internalPromptContext, action, jsonObject) {
             ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-            var jsonObject = JSON.parse(jsonString);
             if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
                 ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
@@ -954,7 +952,7 @@ promptTypes.external_link = promptTypes.base.extend({
             else {
                 ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent:',
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + 
-                    internalPromptContext + " action: " + action + " jsonString: " + jsonString);
+                    internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
                     failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
@@ -1846,10 +1844,9 @@ promptTypes.media = promptTypes.base.extend({
         if ( that.getPromptPath() != promptPath ) {
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
-        return function(ctxt, internalPromptContext, action, jsonString) {
+        return function(ctxt, internalPromptContext, action, jsonObject) {
             ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-            var jsonObject = JSON.parse(jsonString);
             if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
                 ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
@@ -1869,7 +1866,7 @@ promptTypes.media = promptTypes.base.extend({
             else {
                 ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
                     "px: " + that.promptIdx +
-                    " failure returned from intent: " + jsonString + 
+                    " failure returned from intent" + 
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.updateRenderContext();
@@ -1995,19 +1992,10 @@ promptTypes.launch_intent = promptTypes.base.extend({
         if ( that.getPromptPath() != promptPath ) {
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
-        return function(ctxt, internalPromptContext, action, jsonString) {
-            var jsonObject;
+        return function(ctxt, internalPromptContext, action, jsonObject) {
             ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', 
                 "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                 internalPromptContext + " action: " + action);
-            try {
-                jsonObject = JSON.parse(jsonString);
-            } catch (e) {
-                ctxt.log('E',"prompts." + that.type + 'getCallback.actionFn.JSONparse.exception', 
-                    "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
-                    internalPromptContext + " action: " + action + ' exception ' + e.message + " e: " + String(e));
-                ctxt.failure({message: "Action response could not be parsed."});
-            }
             if (jsonObject.status === -1 ) { // Activity.RESULT_OK
                 ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK',
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +

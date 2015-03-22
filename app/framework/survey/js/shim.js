@@ -68,6 +68,7 @@ window.shim = window.shim || {
     showAlerts: false,
     logLevel: 'D',
     refId: null,
+    queuedActions: [],
     enforceRefIdMatch: true,
     /**
      * The shim now remembers an entire history of refId values.
@@ -434,97 +435,132 @@ window.shim = window.shim || {
         that.log("D","shim: DO: doAction(" + refId + ", " + promptPath + 
             ", " + internalPromptContext + ", " + action + ", ...)");
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { uriFragment: "framework/survey/test/venice.jpg", 
+                                                   contentType: "image/jpg" } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/venice.jpg",' + 
-                                                    '"contentType": "image/jpg" } }' );
+                landing.signalQueuedActionAvailable();
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { uriFragment: "framework/survey/test/bali.3gp", 
+                                                   contentType: "video/3gp" } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/bali.3gp",' + 
-                                                    '"contentType": "video/3gp" } }' );
+                landing.signalQueuedActionAvailable();
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { uriFragment: "framework/survey/test/raven.wav",
+                                                   contentType: "audio/wav" } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/raven.wav",' + 
-                                                    '"contentType": "audio/wav" } }' );
+                landing.signalQueuedActionAvailable();
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseImageActivity' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { uriFragment: "framework/survey/test/venice.jpg",
+                                                   contentType: "image/jpg" } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/venice.jpg",' + 
-                                                    '"contentType": "image/jpg" } }' );
+                landing.signalQueuedActionAvailable();
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { uriFragment: "framework/survey/test/bali.3gp",
+                                                   contentType: "video/3gp" } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/bali.3gp",' + 
-                                                    '"contentType": "video/3gp" } }' );
+                landing.signalQueuedActionAvailable();
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { uriFragment: "framework/survey/test/raven.wav",
+                                                   contentType: "audio/wav" } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "uriFragment": "framework/survey/test/raven.wav",' + 
-                                                    '"contentType": "audio/wav" } }' );
+                landing.signalQueuedActionAvailable();
             }, 100);
             return "OK";
         }
         if ( action === 'org.opendatakit.sensors.PULSEOX' ) {
+            var oxValue = prompt("Enter ox:");
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { pulse: 100,
+                                                   ox: oxValue } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "pulse": 100, "ox": ' + prompt("Enter ox:") + ' } }' );
+                landing.signalQueuedActionAvailable();
             }, 1000);
             return "OK";
         }
         if ( action === 'change.uw.android.BREATHCOUNT' ) {
+            var breathCount = prompt("Enter breath count:");
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: {  value: breathCount } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "value": ' + prompt("Enter breath count:") + ' } }' );
+                landing.signalQueuedActionAvailable();
             }, 1000);
             return "OK";
         }
         if ( action === 'com.google.zxing.client.android.SCAN' ) {
+            var barcode = prompt("Enter barcode:");
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: {  SCAN_RESULT: barcode } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "SCAN_RESULT": "' + prompt("Enter barcode:") + '" } }' );
+                landing.signalQueuedActionAvailable();
             }, 1000);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.GeoPointMapActivity' ) {
+            var lat = prompt("Enter latitude:");
+            var lng = prompt("Enter longitude:");
+            var alt = prompt("Enter altitude:");
+            var acc = prompt("Enter accuracy:");
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { latitude: lat,
+                                                   longitude: lng,
+                                                   altitude: alt,
+                                                   accuracy: acc } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "latitude": ' + prompt("Enter latitude:") + 
-                                                ', "longitude": ' + prompt("Enter longitude:") +
-                                                ', "altitude": ' + prompt("Enter altitude:") +
-                                                ', "accuracy": ' + prompt("Enter accuracy:") +
-                                                ' } }' );
+                landing.signalQueuedActionAvailable();
             }, 1000);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.GeoPointActivity' ) {
+            var lat = prompt("Enter latitude:");
+            var lng = prompt("Enter longitude:");
+            var alt = prompt("Enter altitude:");
+            var acc = prompt("Enter accuracy:");
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1, result: { latitude: lat,
+                                                   longitude: lng,
+                                                   altitude: alt,
+                                                   accuracy: acc } } }));
             setTimeout(function() {
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { "latitude": ' + prompt("Enter latitude:") + 
-                                                ', "longitude": ' + prompt("Enter longitude:") +
-                                                ', "altitude": ' + prompt("Enter altitude:") +
-                                                ', "accuracy": ' + prompt("Enter accuracy:") +
-                                                ' } }' );
+                landing.signalQueuedActionAvailable();
             }, 1000);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1 } }));
             value = JSON.parse(jsonObj);
             if ( window.parent === window ) {
                 // naked
@@ -535,12 +571,14 @@ window.shim = window.shim || {
             }
             setTimeout(function() {
                 that.log("D","Opened new browser window for Survey content. Close to continue");
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { } }' );
+                landing.signalQueuedActionAvailable();
             }, 1000);
             return "OK";
         }
         if ( action === 'org.opendatakit.survey.android.activities.SplashScreenActivity' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1 } }));
             value = JSON.parse(jsonObj);
             if ( window.parent === window ) {
                 // naked
@@ -551,12 +589,14 @@ window.shim = window.shim || {
             }
             setTimeout(function() {
                 that.log("D","Opened new browser window for link to another ODK Survey page. Close to continue");
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { } }' );
+                landing.signalQueuedActionAvailable();
             }, 1000);
             return "OK";
         }
         if ( action === 'android.content.Intent.ACTION_VIEW' ) {
+            that.queuedActions.push(
+              JSON.stringify({ page: promptPath, path: internalPromptContext, action: action, 
+                jsonValue: { status: -1 } }));
             value = JSON.parse(jsonObj);
             if ( window.parent === window ) {
                 // naked
@@ -567,11 +607,21 @@ window.shim = window.shim || {
             }
             setTimeout(function() {
                 that.log("D","Opened new browser window for 3rd party content. Close to continue");
-                landing.opendatakitCallback( promptPath, internalPromptContext, action, 
-                    '{ "status": -1, "result": { } }' );
+                landing.signalQueuedActionAvailable();
             }, 1000);
             return "OK";
         }
+    },
+    getFirstQueuedAction: function(refId) {
+        if (this.enforceRefIdMatch && refId !== this.refId) {
+            this.log("D","shim: IGNORED: getFirstQueuedAction(" + refId + ")");
+            return null;
+        }
+        if ( this.queuedActions.length != 0 ) {
+            var result = this.queuedActions.shift();
+            return result;
+        }
+        return null;
     },
     frameworkHasLoaded: function(refId, outcome) {
         if (this.enforceRefIdMatch && refId !== this.refId) {

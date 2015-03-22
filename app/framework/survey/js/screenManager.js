@@ -40,7 +40,6 @@ return Backbone.View.extend({
         "click .save-incomplete-and-exit": "saveChanges",
         "click .finalize-and-exit": "finalizeChanges",
         "click .show-contents": "showContents",
-        "pagechange": "handlePagechange",
         "dragstart img": "disableImageDrag",
         "click #ok-btn": "closeScreenPopup",
         "click #yes-btn": "handleConfirmation",
@@ -52,7 +51,9 @@ return Backbone.View.extend({
     },
     cleanUpScreenManager: function(ctxt){
         this.pageChangeActionLockout = false;
-        this.savedCtxt = null;
+        if ( this.refId !== opendatakit.getRefId() ) {
+            this.savedCtxt = null;
+        }
         this.displayWaiting(ctxt);
     },
     enableSwipeNavigation: function() {
@@ -248,27 +249,28 @@ return Backbone.View.extend({
                 var screenRenderCtxt = $.extend({},cleanupCtxt,{success: function() {
                     
                     cleanupCtxt.log('D', "screenManager.commonDrawScreen.screen.render.success");
-					// find the previous screen...
-					var oldCurrentEl = that.$el.find(".odk-page");
+                    // find the previous screen...
+                    var oldCurrentEl = that.$el.find(".odk-page");
                     // make the new screen the active screen (...no-op if redraw).
                     that.activeScreen = screen;
-					that.currentPageEl = screen.$el;
-					if ( oldCurrentEl[0] === that.currentPageEl[0] ) {
-						that.previousPageEl = null;
-						oldCurrentEl.replaceWith(that.currentPageEl);
-					} else {
-						that.previousPageEl = oldCurrentEl;
-						that.currentPageEl.insertAfter(that.previousPageEl);
-					}
+                    that.currentPageEl = screen.$el;
+                    if ( oldCurrentEl[0] === that.currentPageEl[0] ) {
+                        that.previousPageEl = null;
+                        oldCurrentEl.replaceWith(that.currentPageEl);
+                    } else {
+                        that.previousPageEl = oldCurrentEl;
+                        that.currentPageEl.insertAfter(that.previousPageEl);
+                    }
 
                     // this might double-reset the pageChangeActionLockout flag, but it does ensure it is reset
+                    that.refId = opendatakit.getRefId();
                     that.savedCtxt = cleanupCtxt;
                     // turn first child into a page...
                     //append it to the page container
                     // maybe need to drop spinner for jqMobile?: window.clearTimeout(activateTimeout);
                     setTimeout(function() {
-						that.handlePagechange();
-					}, 0);
+                        that.handlePagechange();
+                    }, 0);
                 }});
                 screen.render(screenRenderCtxt);
             }});
@@ -514,13 +516,13 @@ return Backbone.View.extend({
             // textVisible: true
         // });
         $('body').waitMe({
-			effect: 'roundBounce',
-			text: 'Loading ...',
-			bg: 'rgba(255,255,255,0.7)',
-			color:'#000',
-			sizeW:'',
-			sizeH:''
-		});
+            effect: 'roundBounce',
+            text: 'Loading ...',
+            bg: 'rgba(255,255,255,0.7)',
+            color:'#000',
+            sizeW:'',
+            sizeH:''
+        });
     },
     hideSpinnerOverlay: function() {
         //window.$.mobile.loading( 'hide' );
@@ -537,7 +539,7 @@ return Backbone.View.extend({
             pg.empty().remove();
         }
     },
-    handlePagechange: function(evt){
+    handlePagechange: function(){
         var that = this;
         var ctxt = that.savedCtxt;
         that.savedCtxt = null;
@@ -557,10 +559,11 @@ return Backbone.View.extend({
                 ctxt.success();
             }
         } else {
-            ctxt = this.controller.newContext(evt);
-            ctxt.log('E','screenManager.handlePageChange.error');
-            this.pageChangeActionLockout = false;
-            ctxt.failure({message: "Internal error. Unexpected triggering of page change event."});
+            try {
+                throw new Error('dummy');
+            } catch (e) {
+                shim.log('E', "no savedCtxt when handling change event: " + e.stack );
+            }
         }
     },
     disableImageDrag: function(evt){

@@ -20,6 +20,11 @@ return {
     eventCount: 0,
     moveFailureMessage: { message: "Internal Error: Unable to determine next prompt." },
     screenManager : null,
+    getFirstQueuedAction: function() {
+        var action = shim.getFirstQueuedAction(opendatakit.getRefId());
+        if ( action === undefined ) return null;
+        return action;
+    },
     getCurrentScreenPath: function() {
         var path = shim.getScreenPath(opendatakit.getRefId());
         if ( path === undefined ) return null;
@@ -1031,7 +1036,7 @@ return {
      * Callback interface from ODK Survey (or other container apps) into javascript.
      * Handles all dispatching back into javascript from external intents
     */
-    actionCallback:function(ctxt, promptPath, internalPromptContext, action, jsonString) {
+    actionCallback:function(ctxt, promptPath, internalPromptContext, action, jsonObject) {
         var that = this;
         var screenPath = that.getCurrentScreenPath();
         ctxt.log('I','controller.actionCallback', ((screenPath != null) ? ("px: " + screenPath) : "no current prompt"));
@@ -1045,7 +1050,7 @@ return {
                 // ask this page to then get the appropriate handler
                 var handler = prompt.getCallback(promptPath, internalPromptContext, action);
                 if ( handler != null ) {
-                    handler( ctxt, internalPromptContext, action, jsonString );
+                    handler( ctxt, internalPromptContext, action, jsonObject );
                 } else {
                     ctxt.log('E','controller.actionCallback.noHandler: ERROR - NO HANDLER ON PROMPT!', 
                         promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
@@ -1190,8 +1195,10 @@ return {
                     this._log('T', e.stack);
                 }
             }
-            if ( this.chainedCtxt.ctxt != null ) {
+            if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
                 this.chainedCtxt.ctxt.success();
+            } else if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
+                this.terminalCtxt.ctxt.success();
             }
         },
         
@@ -1207,17 +1214,31 @@ return {
                     this._log('T', e.stack);
                 }
             }
-            if ( this.chainedCtxt.ctxt != null ) {
+            if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
                 this.chainedCtxt.ctxt.failure(m);
+            } else if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
+                this.terminalCtxt.ctxt.failure(m);
             }
         },
         
         setChainedContext: function(ctxt) {
+            if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
+                ctxt.setTerminalContext(this.terminalCtxt.ctxt);
+                this.terminalCtxt.ctxt = null;
+            }
             var cur = this;
-            while ( cur.chainedCtxt.ctxt != null ) {
+            while ( cur.chainedCtxt.ctxt !== null && cur.chainedCtxt.ctxt !== undefined ) {
                 cur = cur.chainedCtxt.ctxt;
             }
             cur.chainedCtxt.ctxt = ctxt;
+        },
+        
+        setTerminalContext: function(ctxt) {
+            var cur = this;
+            while ( cur.chainedCtxt.ctxt !== null && cur.chainedCtxt.ctxt !== undefined ) {
+                cur = cur.chainedCtxt.ctxt;
+            }
+            cur.terminalCtxt.ctxt = ctxt;
         },
 
         _log: function( severity, contextMsg ) {
@@ -1292,7 +1313,8 @@ return {
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
-              chainedCtxt: { ctxt: null } }, actionHandlers );
+              chainedCtxt: { ctxt: null },
+              terminalCtxt: { ctxt: null } }, actionHandlers );
         ctxt.log('D','callback', detail);
         return ctxt;
     },
@@ -1308,7 +1330,8 @@ return {
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
-              chainedCtxt: { ctxt: null } }, actionHandlers );
+              chainedCtxt: { ctxt: null },
+              terminalCtxt: { ctxt: null } }, actionHandlers );
         ctxt.log('D','fatal_error', detail);
         return ctxt;
     },
@@ -1324,7 +1347,8 @@ return {
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
-              chainedCtxt: { ctxt: null } }, actionHandlers );
+              chainedCtxt: { ctxt: null },
+              terminalCtxt: { ctxt: null } }, actionHandlers );
         ctxt.log('D','startup', detail);
         return ctxt;
     },
@@ -1333,22 +1357,36 @@ return {
         that.eventCount = 1 + that.eventCount;
         var count = that.eventCount;
         that.outstandingContexts.push(count);
-        var detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid;
-        var evtActual;
-        var evtTarget;
-        if ( 'currentTarget' in evt ) {
-            detail += ' curTgt: ';
-            evtActual = evt.currentTarget;
+        var detail;
+        var type;
+        if ( evt === null || evt === undefined ) {
+            try {
+                throw new Error('dummy');
+            } catch (e) {
+                shim.log('E',"no event passed into newContext call: " + e.stack);
+            }
+            detail =  "seq: " + count + " <no event>";
+            type = "<no event>";
         } else {
-            detail += ' tgt: ';
-            evtActual = evt.target;
-        }
-        
-        if ( evtActual == window) {
-            detail += 'Window';
-        } else {
-            evtTarget = ('innerHTML' in evtActual) ? evtActual.innerHTML : evtActual.activeElement.innerHTML;
-            detail += evtTarget.replace(/\s+/g, ' ').substring(0,80);
+            detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid;
+
+            var evtActual;
+            var evtTarget;
+            if ( 'currentTarget' in evt ) {
+                detail += ' curTgt: ';
+                evtActual = evt.currentTarget;
+            } else {
+                detail += ' tgt: ';
+                evtActual = evt.target;
+            }
+            
+            if ( evtActual == window) {
+                detail += 'Window';
+            } else {
+                evtTarget = ('innerHTML' in evtActual) ? evtActual.innerHTML : evtActual.activeElement.innerHTML;
+                detail += evtTarget.replace(/\s+/g, ' ').substring(0,80);
+            }
+            type = evt.type;
         }
         
         var ctxt = $.extend({}, that.baseContext, 
@@ -1356,8 +1394,9 @@ return {
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
-              chainedCtxt: { ctxt: null } }, actionHandlers );
-        ctxt.log('D', evt.type, detail);
+              chainedCtxt: { ctxt: null },
+              terminalCtxt: { ctxt: null } }, actionHandlers );
+        ctxt.log('D', type, detail);
         return ctxt;
     }
 

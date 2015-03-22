@@ -1,154 +1,68 @@
 /*
 The landing object is loaded very early in the page-load process
-and is used by the container app to publish a doAction() response
-back into the javascript application. 
+and is used by the container app to signal when doAction() 
+responses are available, or when the java application wants 
+to change the Url hash.
 
 If the javascript application has a controller registered, then 
-the publishing is an immediate pass-through to the controller. 
-Otherwise, the callback data sits here until the parsequery logic 
-completes, and the page rendering settles, at which point the 
-controller value is passed to this object and the callback information
-is flushed to the controller.
+the signalling triggers a fetch of the data from the Java side and
+immediately passes-through to the controller. 
 
-Since the parsequery logic is now invoked explicitly, we 
-do that via an opendatakitChangeUrlHash(...) method. The
-semantics are that calling that method from Java, if the 
-controller is not present, will ignore any previous call to
-that method and will clear any pending opendatakitCallback(...)
-actions.  Once the controller is defined, the changeUrlHash
-is applied, followed by any pending opendatakitCallback(...)
-action.
+Otherwise, the callback action information sits on the Java side
+until the parsequery logic completes, and the page rendering 
+settles, at which point the controller value is passed to this
+object and the callback information is flushed to the controller.
 
 This allows the container to hand data off to the script 
 without worrying about the state of the script and its 
 ability to handle the information at that moment of execution.
 */
 window.landing = window.landing || {
-    /**
-     * Array of { description: 'blah', evaluator: function() {...} }
-     * The evaluator should be evaluated to obtain the contexts 
-     * that should be executed.
-     */
-    _chainedContextEvaluators: [],
-    /**
-     * Work through the _chainedContextEvaluators, if any.
-     * Upon the first failure, clear that array.
-     */
-    _getChainingContext: function() {
+    delay: 400,
+    insideQueue: false,
+    insideCallbackCtxt: false,
+    signalQueuedActionAvailable: function() {
         var that = this;
-        var ctxt = that.controller.newStartContext();
-        var ref = $.extend({},ctxt,{success: function() {
-            ctxt.log('D','setChaining.wrapper.success');
-            if ( that._chainedContextEvaluators.length !== 0 ) {
-                var i;
-                for ( i = 0 ; i < that._chainedContextEvaluators.length ; ++i ) {
-                    ctxt.log('D','setChaining.wrapper.success.beforeChaining', 
-                        '_chainedContextEvaluators[' + i + ']' +
-                        that._chainedContextEvaluators[i].description );
+        if ( this.insideQueue || this.insideCallbackCtxt ) return;
+        try {
+            this.insideQueue = true;
+            if ( that.controller !== undefined && that.controller !== null ) {
+                // TODO: 
+                // need to guard against multiple running requests...
+                var value = that.controller.getFirstQueuedAction();
+                if ( value === null || value === undefined ) {
+                    return;
                 }
-                var realChain = that._chainedContextEvaluators.shift();
-                var chainCtxt = (realChain.evaluator)();
-                ctxt.setChainedContext(chainCtxt);
-            } else {
-                ctxt.log('D','setChaining.wrapper.success - no pending actions');
+                var action = JSON.parse(value);
+                that.insideCallbackCtxt = true;
+                var baseCtxt = that.controller.newCallbackContext();
+                var terminateCtxt = $.extend({},baseCtxt,{success: function() {
+                        that.insideCallbackCtxt = false;
+                        baseCtxt.success();
+                        setTimeout(function() {
+                            that.signalQueuedActionAvailable();
+                            }, that.delay);
+                    }, failure: function() {
+                        that.insideCallbackCtxt = false;
+                        baseCtxt.failure();
+                        setTimeout(function() {
+                            that.signalQueuedActionAvailable();
+                            }, that.delay);
+                    }});
+                if ( typeof action === 'string' || action instanceof String) {
+                    var ctxt = that.controller.newCallbackContext();
+                    ctxt.setTerminalContext(terminateCtxt);
+                    ctxt.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (immediate)", action);
+                    that.controller.changeUrlHash(ctxt,action);
+                } else {
+                    var ctxt = that.controller.newCallbackContext();
+                    ctxt.setTerminalContext(terminateCtxt);
+                    ctxt.log('I', "landing.opendatakitCallback.actionCallback (immediate)", action.action);
+                    that.controller.actionCallback( ctxt, action.page, action.path, action.action, action.jsonValue );
+                }
             }
-            ctxt.success();
-        }, 
-        failure: function(m) {
-            ctxt.log('E','setChaining.wrapper.failure - flush action');
-            that._chainedContextEvaluators = [];
-            ctxt.failure(m);
-        }});
-        return ref;
-    },
-    /**
-     * Called from the Java side. If the framework has not completed
-     * loading, the controller will not be set. In that case, or if 
-     * there are other actions queued, the url hash change will be 
-     * added to that queue and performed once the framework has been
-     * initialized and the preceding actions in the queue have executed.
-     */
-    opendatakitChangeUrlHash: function(hash) {
-        var that = this;
-        if ( that.controller === undefined || that.controller === null || that._chainedContextEvaluators.length !== 0 ) {
-            // not initialized, or there are other queued requests
-            shim.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (queued)");
-            var now = new Date().getTime();
-            var txt = "landing.opendatakitChangeUrlHash original timestamp: " + now;
-            var fn = function() {
-                var ctxt = that.controller.newCallbackContext();
-                ctxt.log('D',txt);
-                var ref = $.extend({},ctxt,{ success: function() {
-                    ctxt.log('D',"landing.opendatakitChangeUrlHash.changeUrlHash (executing queued request)", hash);
-                    that.controller.changeUrlHash($.extend({}, ctxt,{success: function() {
-                        ctxt.log('D',"landing.setController.changeUrlHash done!", hash);
-                        // attached chaining
-                        ctxt.setChainedContext(that._getChainingContext());
-                        ctxt.success();
-                    }, failure: function(m) {
-                        ctxt.log('E',"landing.setController.changeUrlHash flushed all pending actions!", hash);
-                        // attached chaining
-                        ctxt.setChainedContext(that._getChainingContext());
-                        ctxt.failure(m);
-                    }}), hash);
-                }, failure: function(m) {
-                    ctxt.log('E',"landing.setController.changeUrlHash flushed all pending actions!", hash);
-                    // attached chaining
-                    ctxt.setChainedContext(that._getChainingContext());
-                    ctxt.failure(m);
-                }});
-                return ref;
-            };
-            that._chainedContextEvaluators.push({ description: 'changeUrlHash: ' + hash, evaluator: fn });
-        } else {
-            var ctxt = that.controller.newCallbackContext();
-            ctxt.log('I', "landing.opendatakitChangeUrlHash.changeUrlHash (immediate)", hash);
-            that.controller.changeUrlHash(ctxt,hash);
-        }
-    },
-    /**
-     * Called from the Java side. If the framework has not completed
-     * loading, the controller will not be set. In that case, or if 
-     * there are other actions queued, the action callback will be 
-     * added to that queue and performed once the framework has been
-     * initialized and the preceding actions in the queue have executed.
-     */
-    opendatakitCallback: function( promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject ) {
-        var that = this;
-        if ( that.controller === undefined || that.controller === null || that._chainedContextEvaluators.length !== 0 ) {
-            shim.log('I', "landing.opendatakitCallback.actionCallback (queued)");
-            var now = new Date().getTime();
-            var txt = "landing.opendatakitCallback original timestamp: " + now;
-            var fn = function() {
-                var ctxt = that.controller.newCallbackContext();
-                ctxt.log('D',txt);
-                var ref = $.extend({},ctxt,{ success: function() {
-                    ctxt.log('I',"landing.opendatakitCallback.actionCallback (executing queued request)", action);
-                    that.controller.actionCallback( $.extend({}, ctxt, { success: function() {
-                        ctxt.log('D',"landing.opendatakitCallback.actionCallback (executing queued request) success!", action);
-                        // attached chaining
-                        ctxt.setChainedContext(that._getChainingContext());
-                        ctxt.success();
-                    }, failure: function(m) {
-                        ctxt.log('E',"landing.opendatakitCallback.actionCallback (executing queued request) flushed all pending actions!", action);
-                        // attached chaining
-                        ctxt.setChainedContext(that._getChainingContext());
-                        ctxt.failure(m);
-                    }}), 
-                        promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
-                }, failure: function(m) {
-                    ctxt.log('E',"landing.opendatakitCallback.actionCallback (executing queued request) flushed all pending actions!", action);
-                    // attached chaining
-                    ctxt.setChainedContext(that._getChainingContext());
-                    ctxt.failure(m);
-                }});
-                return ref;
-            };
-            that._chainedContextEvaluators.push({ description: 'actionCallback: ' + action, evaluator: fn });
-        } else {
-            var ctxt = that.controller.newCallbackContext();
-            ctxt.log('I', "landing.opendatakitCallback.actionCallback (immediate)", actionWaitingForData);
-            that.controller.actionCallback( ctxt, promptWaitingForData, pathWaitingForData, actionWaitingForData, jsonObject );
+        } finally {
+            this.insideQueue = false;
         }
     },
     /**
@@ -158,14 +72,28 @@ window.landing = window.landing || {
      */
     setController: function(ctxt, controller, refId, m) {
         var that = this;
+        that.insideCallbackCtxt = true;
         that.controller = controller;
+        var baseCtxt = that.controller.newCallbackContext();
+        var terminateCtxt = $.extend({},baseCtxt,{success: function() {
+                that.insideCallbackCtxt = false;
+                baseCtxt.success();
+                setTimeout(function() {
+                    that.signalQueuedActionAvailable();
+                    }, that.delay);
+            }, failure: function() {
+                that.insideCallbackCtxt = false;
+                baseCtxt.failure();
+                setTimeout(function() {
+                    that.signalQueuedActionAvailable();
+                    }, that.delay);
+            }});
+        ctxt.setTerminalContext(terminateCtxt);
         if ( m === undefined || m === null ) {
             shim.frameworkHasLoaded(refId, true );
-            ctxt.setChainedContext(that._getChainingContext());
             ctxt.success();
         } else {
             shim.frameworkHasLoaded(refId, false );
-            that._chainedContextEvaluators = [];
             ctxt.failure(m);
         }
     }

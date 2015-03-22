@@ -294,6 +294,10 @@ return {
             return Number(value);
         } else if ( jsonType.type === 'string' ) {
             return '' + value;
+        } else if ( jsonType.type === 'rowpath' ) {
+            return '' + value;
+        } else if ( jsonType.type === 'configpath' ) {
+            return '' + value;
         } else {
             shim.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
             return '' + value;
@@ -378,6 +382,10 @@ toDatabaseFromElementType: function( jsonType, value ) {
         } else if ( jsonType.type === 'number' ) {
             return '' + value;
         } else if ( jsonType.type === 'string' ) {
+            return '' + value;
+        } else if ( jsonType.type === 'rowpath' ) {
+            return '' + value;
+        } else if ( jsonType.type === 'configpath' ) {
             return '' + value;
         } else {
             shim.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
