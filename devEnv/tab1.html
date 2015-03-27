@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link  rel='stylesheet' type='text/css'href='css/animate.css' />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
-<script type="text/javascript" src="../app/framework/libs/jquery.1.10.2.js"></script>
-<script type="text/javascript" src="../app/framework/survey/js/shim.js"></script>
+<script type="text/javascript" src="../app/system/libs/jquery.1.10.2.js"></script>
+<script type="text/javascript" src="../app/system/survey/js/shim.js"></script>
   <script type="text/javascript">
 //<![CDATA[
   var pageStack = [];
@@ -112,9 +112,9 @@
 	  <div>
 	  <p class="pb">Launch page:</p>
   	  <select name="page" onchange="loadPage(this.value)">
-		<option id="survey" value="../app/framework/index.html?" selected ><label for="survey">ODK Survey Framework Page</label></option>
-		<option id="graph" value="../app/framework/optionspane.html" ><label for="graph">ODK Tables Graph Page</label></option>
-		<option id="surveyTest" value="../app/framework/surveyTest.html" ><label for="surveyTest">ODK Survey Step-Through Test</label></option>
+		<option id="survey" value="../app/system/index.html?" selected ><label for="survey">ODK Survey Framework Page</label></option>
+		<option id="graph" value="../app/system/optionspane.html" ><label for="graph">ODK Tables Graph Page</label></option>
+		<option id="surveyTest" value="../app/system/surveyTest.html" ><label for="surveyTest">ODK Survey Step-Through Test</label></option>
 		<option id="tablesTest" value="../test/index.html" ><label for="tablesTest">ODK Tables API Test Page</label></option>
 	  </select>
 	  </div>
@@ -144,7 +144,7 @@
 	  <div id="blandviewport" class="bland">
 		<div class="backviewport">
 		  <button class="backbutton" name="backbutton" id="backbutton" onclick="backbutton()" type="button">Back Button</button>
-		  <iframe class="resizeablescreen" id="previewscreen" src="../app/framework/index.html?" name="screen" />
+		  <iframe class="resizeablescreen" id="previewscreen" src="../app/system/index.html?" name="screen" />
 		</div>
 	  </div>
 	</div>

@@ -180,7 +180,7 @@ function postFormDef() {
         // we're dealing with a formdef that we're assuming must be for a
         // particular table, if we're going to be saving it automatically.
         path =
-          'app/tables/' +
+          'app/config/tables/' +
           tableId +
           '/forms/' +
           formId +
@@ -207,7 +207,7 @@ function postFormDef() {
         // Get the dataTableModel
         var dtm = util.getDataTableModelFromFormDef(formDefJson);
 
-        var defPath = 'app/tables/' + tableId + '/definition.csv';
+        var defPath = 'app/config/tables/' + tableId + '/definition.csv';
         var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
         util.postFile(defPath, defCsv, function(err, response, body) {
             if (err || response.statusCode !== 200) {
@@ -218,7 +218,7 @@ function postFormDef() {
             }
         });
 
-        var propPath = 'app/tables/' + tableId + '/properties.csv';
+        var propPath = 'app/config/tables/' + tableId + '/properties.csv';
         var propCsv = util.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
         util.postFile(propPath, propCsv, function(err, response, body) {
             if (err || response.statusCode !== 200) {

@@ -93,7 +93,7 @@ console.log(result);
 // Write out the definition.csv if necessary
 var writeOutDefAndProp = util.shouldWriteOutDefinitionAndPropertiesCsv(result);
 var tableId = util.getTableIdFromFormDef(processedWorkbook);
-var defPath = 'app/tables/' + tableId + '/definition.csv';
+var defPath = 'app/config/tables/' + tableId + '/definition.csv';
 try {
     if (writeOutDefAndProp) {
         writeOutDef(result);
@@ -103,7 +103,7 @@ try {
 }
 
 // Write out the properties.csv if necessary
-var propPath = 'app/tables/' + tableId + '/properties.csv';
+var propPath = 'app/config/tables/' + tableId + '/properties.csv';
 try {
     if (util.shouldWriteOutDefinitionAndPropertiesCsv(result)) {
         writeOutProp(result);
