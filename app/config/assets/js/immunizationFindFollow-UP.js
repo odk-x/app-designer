@@ -68,7 +68,7 @@ function display() {
   }
   $('#go_home').on('click', function() {
         //control.launchHTML('assets/immunizationDemo.html');
-        var url = control.getFileAsUrl('assets/immunizationDemo.html');
+        var url = control.getFileAsUrl('config/assets/immunizationDemo.html');
         console.log('url: ' + url);
         window.location.href = url;
   });
@@ -152,13 +152,13 @@ function addInfoToList(next_date, patientcode, last_session, btn_no) {
             control.openDetailView(
               'scan_childvacc_822_pg1',
                rowId,
-               'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
+               'config/tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
           } else {
             control.openTableToListView(
             'scan_childvacc_822_pg1',
             'Child_patient_ID = ?',
             [patientcode],
-            'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
+            'config/tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
           }
         };
         newRow.appendChild(newcell6);

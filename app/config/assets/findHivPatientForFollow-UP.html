@@ -12,7 +12,7 @@ each patinet who is late for her/his next visit
         <script type="text/javascript" src="libs/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/ratchet.js"></script>
-        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/control.js"></script>
         <script type="text/javascript" src="js/findHivPatientForFollow-UP.js"></script>
         <script type="text/javascript" src="js/hiv_scanQueries.js"></script>
     </head>
@@ -40,7 +40,7 @@ each patinet who is late for her/his next visit
       $(display());
       $('#go_home').on('click', function() {
         //control.launchHTML('assets/demoForHivReport.html');
-        var url = control.getFileAsUrl('assets/demoForHivReport.html');
+        var url = control.getFileAsUrl('config/assets/demoForHivReport.html');
         console.log('url: ' + url);
         window.location.href = url;
       });

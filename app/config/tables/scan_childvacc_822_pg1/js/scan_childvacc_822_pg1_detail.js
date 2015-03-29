@@ -316,7 +316,7 @@ function display() {
         var pbirthdate = data.get('Child_DOB');
 
         var queryString = scanQueries.getKeysToAppendToURL(pcode, pid, pname, pbirthdate);
-        var url = control.getFileAsUrl('assets/immunizationDisplayRecord.html') + queryString;
+        var url = control.getFileAsUrl('config/assets/immunizationDisplayRecord.html') + queryString;
         window.location.href = url;
     };
 }

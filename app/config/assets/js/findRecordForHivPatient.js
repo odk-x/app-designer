@@ -21,14 +21,14 @@ function display() {
                 control.openDetailView(
                         'scan_HIV_Patient_Record',
                         rowId,
-                        'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
+                        'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
             } else{
                 //We found multiple records associated with this id so let's look for more identifiers
                 control.openTableToListView(
                 'scan_HIV_Patient_Record',
                 'Patient_ID = ?',
                 [id],
-                'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
+                'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
             }
         } else if (!name==""){
             var results = hiv_scanQueries.getExistingRecordByName(name);
@@ -40,14 +40,14 @@ function display() {
                 control.openDetailView(
                         'scan_HIV_Patient_Record',
                         rowId,
-                        'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
+                        'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
             } else {
                 //We found multiple records associated with this id so let's look for more identifiers
                 control.openTableToListView(
                 'scan_HIV_Patient_Record',
                 'Patient_name = ?',
                 [name],
-                'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
+                'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
             }
         } else if (!birthdate==""){
             var results = hiv_scanQueries.getExistingRecordByBirthDate(birthdate);
@@ -59,13 +59,13 @@ function display() {
                 control.openDetailView(
                         'scan_HIV_Patient_Record',
                         rowId,
-                         'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
+                         'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
             } else {
                 control.openTableToListView(
                 'scan_HIV_Patient_Record',
                 'Patient_DOB = ?',
                 [birthdate],
-                'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
+                'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
             }
         }
         console.log('Done finding ' + id);

@@ -24,7 +24,7 @@ function handleClick(index) {
     control.openDetailView(
             data.getTableId(),
             index,
-            'tables/femaleClients/html/femaleClients_detail.html');
+            'config/tables/femaleClients/html/femaleClients_detail.html');
 }
 
 // filters list view by client id entered by user
@@ -40,14 +40,14 @@ function getResults() {
                 'femaleClients',
                 'client_id = ?',
                 [searchText],
-                '/tables/FemaleClients/html/femaleClients_list.html');
+                'config/tables/FemaleClients/html/femaleClients_list.html');
     } else {
         // open 'client not found' page
         control.openTableToListView(
                 'femaleClients',
                 null,
                 null,
-                'assets/clients_not_found_list.html');
+                'config/assets/clients_not_found_list.html');
     }
 }
 
@@ -75,7 +75,7 @@ function display() {
                 'femaleClients',
                 null,
                 null,
-                'tables/femaleClients/html/graph_view.html');
+                'config/tables/femaleClients/html/graph_view.html');
     };
     graphView.setAttribute('class', 'launchForm');
     graphView.innerHTML = 'Graph View';
@@ -106,7 +106,7 @@ function display() {
             var chevron = document.createElement('img');
             chevron.setAttribute(
                     'src',
-                    control.getFileAsUrl('assets/img/little_arrow.png'));
+                    control.getFileAsUrl('config/assets/img/little_arrow.png'));
             chevron.setAttribute('class', 'chevron');
             item.appendChild(chevron);
 

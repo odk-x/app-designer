@@ -51,7 +51,7 @@ function display() {
             beginTime,
             focalChimpId);
         var url = control.getFileAsUrl(
-                'assets/followScreen.html' + queryString);
+                'config/assets/followScreen.html' + queryString);
         window.location.href = url;
     });
 

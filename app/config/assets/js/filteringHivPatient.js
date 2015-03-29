@@ -14,7 +14,7 @@ function display() {
 		sex = $("#sexs").val();
 		test = $("#tests").val();
 		var queryString = hiv_scanQueries.getKeyToAppendToURL(month, age, sex, test);
-		var url = control.getFileAsUrl('assets/displayFilteringHivPatient.html'+ queryString);
+		var url = control.getFileAsUrl('config/assets/displayFilteringHivPatient.html'+ queryString);
 		window.location.href = url;
 	});
 }

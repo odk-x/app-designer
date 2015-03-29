@@ -9,10 +9,10 @@
         <meta name="viewport" content="width=device-width" />
         <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
         <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../../system/libs/jquery.1.10.2.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/ratchet.js"></script>
-        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/control.js"></script>
         <script type="text/javascript" src="js/immunizationDemo.js"></script>
         <script type="text/javascript" src="js/util.js"></script>
     </head>
@@ -53,7 +53,7 @@
             // Home page of the reoprt relative to this page
             $('#go_home').on('click', function() {
                 //control.launchHTML('assets/index.html');
-                var url = control.getFileAsUrl('assets/index.html');
+                var url = control.getFileAsUrl('config/assets/index.html');
                 window.location.href = url;
             });
 

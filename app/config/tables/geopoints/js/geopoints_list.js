@@ -22,7 +22,7 @@ function handleClick(rowId) {
     control.openDetailView(
         data.getTableId(),
         rowId,
-        'tables/geopoints/html/geopoints_detail.html');
+        'config/tables/geopoints/html/geopoints_detail.html');
 }
 
 function display() {
@@ -90,7 +90,7 @@ function display() {
             var chevron = document.createElement('img');
             chevron.setAttribute(
                 'src',
-                control.getFileAsUrl('assets/img/little_arrow.png'));
+                control.getFileAsUrl('config/assets/img/little_arrow.png'));
             chevron.setAttribute('class', 'chevron');
             item.appendChild(chevron);
 

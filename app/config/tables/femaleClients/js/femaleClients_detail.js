@@ -87,7 +87,7 @@ function display() {
             'geopoints',
             'client_id = ?',
             [clientId],
-            'tables/geopoints/html/geopoints_list.html#' + clientId);
+            'config/tables/geopoints/html/geopoints_list.html#' + clientId);
     });
     fContainer.appendChild(homeLocator);
 

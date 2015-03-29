@@ -5,20 +5,20 @@
 
 function display() {
     $('#hmis-report').on('click', function() {
-        var url = control.getFileAsUrl('assets/MonthListForHivPatientReport.html');
+        var url = control.getFileAsUrl('config/assets/MonthListForHivPatientReport.html');
         window.location.href = url;
     });
 
     $('#h_ollow-up').on('click', function() {
-        var url = control.getFileAsUrl('assets/findHivPatientForFollow-UP.html');
+        var url = control.getFileAsUrl('config/assets/findHivPatientForFollow-UP.html');
         window.location.href = url;
     });
     $('#search').on('click', function() {
-        var url = control.getFileAsUrl('assets/findRecordForHivPatient.html');
+        var url = control.getFileAsUrl('config/assets/findRecordForHivPatient.html');
         window.location.href = url;
     });
     $('#filter').on('click', function() {
-       var url = control.getFileAsUrl('assets/filteringHivPatient.html');
+       var url = control.getFileAsUrl('config/assets/filteringHivPatient.html');
        window.location.href = url;
     });
 }

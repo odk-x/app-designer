@@ -133,7 +133,7 @@ function display() {
     }
      $('#go_home').on('click', function() {
         //control.launchHTML('assets/immunizationDemo.html');
-        var url = control.getFileAsUrl('assets/immunizationDemo.html');
+        var url = control.getFileAsUrl('config/assets/immunizationDemo.html');
         window.location.href = url;
       });
 

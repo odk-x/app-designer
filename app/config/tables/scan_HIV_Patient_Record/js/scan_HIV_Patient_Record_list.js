@@ -53,7 +53,7 @@ var resumeFn = function(idxStart) {
                 control.openDetailView(
                     tableId,
                     rowId,
-                    'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
+                    'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
             }
         });
     }
@@ -89,7 +89,7 @@ var displayGroup = function(idxStart) {
         
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
-        chevron.attr('src', control.getFileAsUrl('assets/img/little_arrow.png'));
+        chevron.attr('src', control.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
 

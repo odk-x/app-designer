@@ -18,7 +18,7 @@ function display() {
                 'Tea_houses',
                 null,
                 null,
-                'tables/Tea_houses/html/Tea_houses_list.html');
+                'config/tables/Tea_houses/html/Tea_houses_list.html');
         }
     );
 
@@ -30,7 +30,7 @@ function display() {
                 'Tea_inventory',
                 null,
                 null,
-                'tables/Tea_inventory/html/Tea_inventory_list.html');
+                'config/tables/Tea_inventory/html/Tea_inventory_list.html');
         }
     );
 
@@ -42,7 +42,7 @@ function display() {
                 'Tea_types',
                 null,
                 null,
-                'tables/Tea_types/html/Tea_types_list.html');
+                'config/tables/Tea_types/html/Tea_types_list.html');
         }
     );
 

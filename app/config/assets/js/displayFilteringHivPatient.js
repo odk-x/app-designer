@@ -551,14 +551,14 @@ function constructTable(id, name, birth, sex) {
       'scan_HIV_Patient_Record',
       'Patient_ID = ?',
       [id],
-      'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
+      'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
     } else {
       var rowId = results.getRowId(0);
       //Open the list view for the found record
       control.openDetailView(
         'scan_HIV_Patient_Record',
          rowId,
-         'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
+         'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
     }
   };
   newRow.appendChild(newcell5)

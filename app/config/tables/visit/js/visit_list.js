@@ -95,7 +95,7 @@ var resumeFn = function(idxStart) {
                 control.openDetailView(
                     tableId,
                     rowId,
-                    'tables/visit/html/visit_detail.html');
+                    'config/tables/visit/html/visit_detail.html');
             }
         });
     }

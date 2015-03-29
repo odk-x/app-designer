@@ -281,7 +281,7 @@ function display() {
         console.log("I am here");
         var pid = data.get('Patient_ID');
         var queryString = hiv_scanQueries.getKeysToAppendToURL(pid);
-        var url = control.getFileAsUrl('assets/hivPatientDisplayRecord.html') + queryString;
+        var url = control.getFileAsUrl('config/assets/hivPatientDisplayRecord.html') + queryString;
         window.location.href = url;
     };
 

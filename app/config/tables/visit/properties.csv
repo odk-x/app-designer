@@ -54,10 +54,10 @@ Column,soil,displayFormat,string,""
 Column,soil,displayName,string,"""soil"""
 Column,soil,displayVisible,boolean,TRUE
 Column,soil,joins,object,""
-DetailDisplayActivity,default,filename,string,tables/visit/html/visit_detail.html
+DetailDisplayActivity,default,filename,string,config/tables/visit/html/visit_detail.html
 FormType,default,FormType.formType,string,SURVEY
 ListDisplayActivity,default,nameOfListView,string,Plot visits
-ListDisplayActivity.views,Plot visits,filename,string,tables/visit/html/visit_list.html
+ListDisplayActivity.views,Plot visits,filename,string,config/tables/visit/html/visit_list.html
 SurveyUtil,default,SurveyUtil.formId,string,visit
 Table,default,colOrder,object,"[""plot_id"",""date"",""plant_height"",""plant_health"",""plant_picture_uriFragment"",""pests"",""soil"",""observations""]"
 Table,default,defaultViewType,string,List

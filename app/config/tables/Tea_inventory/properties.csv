@@ -49,16 +49,16 @@ Column,Type_id,displayFormat,string,""
 Column,Type_id,displayName,string,"""Type_id"""
 Column,Type_id,displayVisible,boolean,TRUE
 Column,Type_id,joins,object,""
-DetailDisplayActivity,default,filename,string,tables/Tea_inventory/html/Tea_inventory_detail.html
+DetailDisplayActivity,default,filename,string,config/tables/Tea_inventory/html/Tea_inventory_detail.html
 ListDisplayActivity,default,nameOfListView,string,List View 0
-ListDisplayActivity.views,List View 0,filename,string,tables/Tea_inventory/html/Tea_inventory_list.html
+ListDisplayActivity.views,List View 0,filename,string,config/tables/Tea_inventory/html/Tea_inventory_list.html
 Table,default,colOrder,string,"[""Type_id"",""House_id"",""Name"",""Price_8oz"",""Price_12oz"",""Price_16oz"",""Hot"",""Cold"",""Loose_Leaf"",""Bags""]"
 Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,tables/Tea_inventory/html/Tea_inventory_detail.html
+Table,default,detailViewFileName,string,config/tables/Tea_inventory/html/Tea_inventory_detail.html
 Table,default,displayName,object,"""Tea inventory"""
 Table,default,groupByCols,string,[]
 Table,default,indexCol,string,""
-Table,default,listViewFileName,string,tables/Tea_inventory/html/Tea_inventory_list.html
+Table,default,listViewFileName,string,config/tables/Tea_inventory/html/Tea_inventory_list.html
 Table,default,primeCols,string,""
 Table,default,sortCol,string,""
 Table,default,sortOrder,string,""

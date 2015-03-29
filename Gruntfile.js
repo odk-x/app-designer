@@ -288,7 +288,7 @@ module.exports = function (grunt) {
         'adbpush-tables-app',
         'Push everything in the app directory (except system) to the device',
         function() {
-            // Do not push any system or output files.
+            // Do not push any system, data or output files.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
@@ -299,6 +299,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
                 '!system/**',
+				'!data/**',
 				'!output/**');
 
             // Now push these files to the phone.
@@ -320,7 +321,7 @@ module.exports = function (grunt) {
         'adbpush-tables',
         'Push everything for tables only to the device',
         function() {
-            // We do not need any system files. 
+            // We do not need any system, data or output files. 
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
@@ -331,6 +332,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
                 '!system/**',
+				'!data/**',
 				'!output/**');
 
             // Now push these files to the phone.
@@ -374,6 +376,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
 				'!system/**',
+				'!data/**',
 				'!output/**',
                 '!config/tables/**',
                 'config/tables/geotagger/**',
@@ -425,6 +428,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
 				'!system/**',
+				'!data/**',
 				'!output/**',
                 '!config/tables/**',
                 'config/tables/follow/**',
@@ -467,6 +471,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
                 '!system/**',
+				'!data/**',
 				'!output/**');
 
             // Now push these files to the phone.
@@ -504,6 +509,7 @@ module.exports = function (grunt) {
                 '**',
                 'config/assets/**',
                 '!system/**',
+				'!data/**',
                 '!output/**',
                 '!config/tables/**',
                 'config/tables/scan_childvacc_822_pg1/**',
@@ -563,6 +569,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
                 '!system/**',
+				'!data/**',
 				'!output/**',
                 '!config/tables/**',
                 'config/tables/exampleForm/**',
@@ -605,6 +612,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
                 '!system/**',
+				'!data/**',
 				'!output/**',
                 '!config/tables/**',
                 'config/tables/household/**',
@@ -649,6 +657,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
 				'!system/**',
+				'!data/**',
 				'!output/**',
                 '!config/assets/**',
                 'config/assets/csv/**',
@@ -697,6 +706,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
                 '!system/**',
+				'!data/**',
                 '!output/**',
                 '!config/assets/**',
                 'config/assets/csv/**',
@@ -743,6 +753,7 @@ module.exports = function (grunt) {
                  cwd: 'app' },
                 '**',
                 '!system/**',
+				'!data/**',
                 '!output/**',
                 '!config/assets/**',
                 '!config/tables/**',
@@ -788,9 +799,8 @@ module.exports = function (grunt) {
                 '**',
                 '!config/assets/**',
                 '!system/**',
-                '!output/csv/**',
-                '!output/db/**',
-                '!output/debug/**',
+				'!data/**',
+                '!output/**',
                 '!config/tables/**',
                 'config/tables/geoweather/**');
 

@@ -160,7 +160,7 @@ function display() {
             .attr('d', line);
         // button at the end of the page to go back to the home page.
         $('#go_home').on('click', function() {
-            var url = control.getFileAsUrl('assets/demoForHivReport.html');
+            var url = control.getFileAsUrl('config/assets/demoForHivReport.html');
             window.location.href = url;
         });
         

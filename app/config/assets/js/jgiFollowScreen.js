@@ -344,7 +344,7 @@ function display() {
 
         console.log('existing timepoints: ' + existingTimes);
 
-        var baseUrl = 'assets/followScreen.html';
+        var baseUrl = 'config/assets/followScreen.html';
 
         // handle the case where there are no timepoints yet.
         if (existingTimes.length === 0) {
@@ -1132,7 +1132,7 @@ function display() {
                 nextTime,
                 focalChimpId);
             var url =
-                control.getFileAsUrl('assets/followScreen.html' + queryString);
+                control.getFileAsUrl('config/assets/followScreen.html' + queryString);
             console.log('url: ' + url);
             window.location.href = url;
         }

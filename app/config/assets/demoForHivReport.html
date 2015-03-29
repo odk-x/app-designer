@@ -10,7 +10,7 @@
         <script type="text/javascript" src="libs/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/ratchet.js"></script>
-        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/control.js"></script>
         <script type="text/javascript" src="js/demoForHivReport.js"></script>
         <script type="text/javascript" src="js/util.js"></script>
     </head>
@@ -47,7 +47,7 @@
             // attaching click event for the Home page button which will take the user to the home page relative
             // to thispage
             $('#go_home').on('click', function() {
-                var url = control.getFileAsUrl('assets/index.html');
+                var url = control.getFileAsUrl('config/assets/index.html');
                 window.location.href = url;
              });
         </script>

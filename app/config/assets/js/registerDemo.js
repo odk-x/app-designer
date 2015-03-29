@@ -11,6 +11,6 @@ function display() {
     });
 
     $('#find-patient-button').on('click', function() {
-        control.launchHTML('assets/registerFindPatient.html');
+        control.launchHTML('config/assets/registerFindPatient.html');
     });
 }

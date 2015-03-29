@@ -21,7 +21,7 @@ function display() {
                 control.openDetailView(
                         'scan_childvacc_822_pg1',
                         rowId,
-                        'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
+                        'config/tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
             }
             //We found multiple records associated with this id so let's look for more identifiers
             else
@@ -30,7 +30,7 @@ function display() {
                 'scan_childvacc_822_pg1',
                 'Child_patient_ID = ?',
                 [id],
-                'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
+                'config/tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
             }
         }
         else if (!name==""){
@@ -42,7 +42,7 @@ function display() {
                 control.openDetailView(
                         'scan_childvacc_822_pg1',
                         rowId,
-                        'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
+                        'config/tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
             }
             //We found multiple records associated with this id so let's look for more identifiers
             else
@@ -51,7 +51,7 @@ function display() {
                 'scan_childvacc_822_pg1',
                 'Child_name = ?',
                 [name],
-                'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
+                'config/tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
             }
         }
         else if (!birthdate==""){
@@ -63,7 +63,7 @@ function display() {
                 control.openDetailView(
                         'scan_childvacc_822_pg1',
                         rowId,
-                        'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
+                        'config/tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_detail.html');
             }
             //We found multiple records associated with this id so let's look for more identifiers
             else
@@ -72,7 +72,7 @@ function display() {
                 'scan_childvacc_822_pg1',
                 'Child_DOB = ?',
                 [birthdate],
-                'tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
+                'config/tables/scan_childvacc_822_pg1/html/scan_childvacc_822_pg1_list.html');
             }
         }
 		console.log('Done finding ' + id);

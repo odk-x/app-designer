@@ -100,7 +100,7 @@ Column,WiFi,displayName,string,"""WiFi"""
 Column,WiFi,displayVisible,boolean,TRUE
 Column,WiFi,joins,object,""
 ListDisplayActivity,default,nameOfListView,string,input tests
-ListDisplayActivity.views,input tests,filename,string,framework/tables/test/html/inputTests.html
+ListDisplayActivity.views,input tests,filename,string,system/tables/test/html/inputTests.html
 Table,default,colOrder,object,"[""House_id"",""State"",""Region"",""District"",""Neighborhood"",""Specialty_Type_id"",""Name"",""Customers"",""Visits"",""Iced"",""Hot"",""WiFi"",""Location_latitude"",""Location_longitude"",""Location_altitude"",""Location_accuracy"",""Date_Opened"",""Owner"",""Phone_Number""]"
 Table,default,defaultViewType,string,List
 Table,default,displayName,object,"""Tea houses editable"""

@@ -151,13 +151,13 @@ function addInfoToList(next_date, patientcode, last_session, last_cd4) {
         control.openDetailView(
           'scan_HIV_Patient_Record',
            rowId,
-           'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
+           'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_detail.html');
       } else {
         control.openTableToListView(
         'scan_HIV_Patient_Record',
         'Patient_ID = ?',
         [patientcode],
-        'tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
+        'config/tables/scan_HIV_Patient_Record/html/scan_HIV_Patient_Record_list.html');
       }
     };
     newcell6.className = "textAllign";

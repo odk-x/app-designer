@@ -18,7 +18,7 @@ function display() {
                 'plot',
                 null,
                 null,
-                'tables/plot/html/plot_list.html');
+                'config/tables/plot/html/plot_list.html');
         }
     );
 
@@ -30,7 +30,7 @@ function display() {
                 'visit',
                 null,
                 null,
-                'tables/visit/html/visit_list.html');
+                'config/tables/visit/html/visit_list.html');
         }
     );
 

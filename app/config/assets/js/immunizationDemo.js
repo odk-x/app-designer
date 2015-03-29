@@ -9,24 +9,24 @@ function display() {
     });
 
     $('#follow-up').on('click', function() {
-        var url = control.getFileAsUrl('assets/immunizationFindFollow-UP.html');
+        var url = control.getFileAsUrl('config/assets/immunizationFindFollow-UP.html');
         window.location.href = url;
         
     });
     
     $('#coverage-rates').on('click', function() {
-        var url = control.getFileAsUrl('assets/immunizationCoverageRatesVaccines.html');
+        var url = control.getFileAsUrl('config/assets/immunizationCoverageRatesVaccines.html');
         window.location.href = url;
     });
 
     $('#find-record').on('click', function() {
-        var url = control.getFileAsUrl('assets/immunizationFindRecord.html');
+        var url = control.getFileAsUrl('config/assets/immunizationFindRecord.html');
         window.location.href = url;
         
     });
 
     $('#kpis-report').on('click', function() {
-        var url = control.getFileAsUrl('assets/immunizationCoverageRatesKPIsReportsMonths.html');
+        var url = control.getFileAsUrl('config/assets/immunizationCoverageRatesKPIsReportsMonths.html');
         window.location.href = url;
        
     });

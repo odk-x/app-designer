@@ -20,12 +20,12 @@ Column,soil_condition,displayName,object,"""soil_condition"""
 Column,soil_condition,displayVisible,boolean,true
 Column,soil_condition,joins,array,""
 Table,default,colOrder,array,"[""Date_and_Time"",""plot_name"",""soil_condition"",""Sample""]"
-DetailDisplayActivity,default,filename,string,tables/agriculture/html/agriculture_detail.html
+DetailDisplayActivity,default,filename,string,config/tables/agriculture/html/agriculture_detail.html
 ListDisplayActivity,default,nameOfListView,string,List View 0
-ListDisplayActivity.views,List View 0,filename,string,tables/agriculture/html/agriculture_list.html
+ListDisplayActivity.views,List View 0,filename,string,config/tables/agriculture/html/agriculture_list.html
 Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,tables/agriculture/html/agriculture_detail.html
-Table,default,listViewFileName,string,tables/agriculture/html/agriculture_list.html
+Table,default,detailViewFileName,string,config/tables/agriculture/html/agriculture_detail.html
+Table,default,listViewFileName,string,config/tables/agriculture/html/agriculture_list.html
 Table,default,displayName,object,"""Agriculture"""
 Table,default,groupByCols,array,[]
 Table,default,indexCol,string,""
