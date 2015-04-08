@@ -29,12 +29,16 @@ function display() {
     };
 
     $('#begin-follow').on('click', function() {
+        document.getElementById("formsubmitbutton").style.display = "none"; // to undisplay
+        document.getElementById("buttonreplacement").style.display = ""; // to display 
+
         // First retrieve the information from the form.
         var date = $('#FOL_date').val();
         var focalChimpId = $('#FOL_B_AnimID').val().toLowerCase();
         var communityId = $('#FOL_CL_community_id').val();
         var beginTime = $('#FOL_begin_time').val();
         var researcher = $('#FOL_am_observer_1').val();
+        //$("#jqxDateTimeInput").jqxDateTimeInput({ width: '300px', height: '25px', formatString: 'd'});
 
         // Update the database.
         writeNewFollow(
@@ -43,6 +47,7 @@ function display() {
             communityId,
             beginTime,
             researcher);
+
 
         // Now we'll launch the follow screen. The follow screen needs to know
         // what date we're on, as well as the time it should be using.
@@ -54,5 +59,4 @@ function display() {
                 'assets/followScreen.html' + queryString);
         window.location.href = url;
     });
-
 }

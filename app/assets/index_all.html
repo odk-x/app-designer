@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" />
+        <link href="css/demo-chooser.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/demoChooser.js"></script>
+    </head>
+
+    <body id="main">
+        <nav class="bar bar-tab">
+          <a id="teaTimeTab" class="tab-item active" href="#">
+            Tea
+          </a>
+          <a id="hopeTab" class="tab-item" href="#">
+            Hope
+          </a>
+          <a id="plotterTab" class="tab-item" href="#">
+            Plot
+          </a>
+          <a id="geotaggerTab" class="tab-item" href="#">
+            Geo
+          </a>
+          <a id="jgiTab" class="tab-item" href="#">
+            JGI
+          </a>
+        </nav>
+
+        <table id="content-table">
+          <tr>
+            <td valign="top">
+              <div class="description-text" id="description">This is a description</div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="bottom">
+              <button class="btn btn-primary btn-block btn-launch" id="launch-button">
+                Launch Demo
+              </button>
+            </td>
+          </tr>
+        </table>
+        <script type="text/javascript">
+            $(display());
+        </script>
+    </body>
+</html>
