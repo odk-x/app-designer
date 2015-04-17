@@ -4,7 +4,7 @@ html, body {
 }
 
 td {
-    padding: 2px;
+    padding: 2px;/*before it was 2px*/
 }
 
 #time * {
@@ -56,22 +56,25 @@ input{/*[type='checkbox'] {*/
     padding-top: 7px;
     padding-right: 5px;
     padding-left: 5px;
-    top: 695px; /*For Eden's tablet it is 510px*/
+    top: 699px; /*For Eden's tablet it is 510px*/
     text-align: center;
     position: fixed;
    
 }
 .chimp{
      width: 4em !important;
-     height: 2em !important;
+     height: 2em !important;  /*before it was 2em*/
      /*font-size: 5px !important;*/
+     padding-bottom: 3px; 
 
 }
 #time, #certainty, #distance, #state, #close_focal{
     float: left;
     overflow: hidden;
 }
-
+.5-meter, .sexual_state, .closeness, .time_point, .certainity{
+    width: 4em !important;
+}
 .save_bottom_div{
     clear: both;
     float: right;
