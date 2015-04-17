@@ -563,11 +563,12 @@ function display() {
             var chimpList = util.getTableDataForTimePoint(
             followDate, followTime,
             focalChimpId);
+            var id = $(this).prop('id');
            $('#distance').css ("visibility", 'visible');
            $('#save_bottom_div').css ("visibility", 'visible');
            $('.save_bottom_div').on('click', function() {
                var curDist = $('input[name="distance"]:checked').val();
-               var id = $(this).prop('id');
+               
                var ids = id.split("_");
                var chimpId = ids[0];
                var rowId = getRowId(chimpId);
@@ -608,12 +609,12 @@ function display() {
 
        
         $('.sexual_state').on('click', function() {
-
+            var id = $(this).prop('id');
             $('#state').css ("visibility", 'visible');
             $('#save_bottom_div').css ("visibility", 'visible');
             $('.save_bottom_div').on('click', function() {
                 var curS = $('input[name="sex_state"]:checked').val();
-                var id = $(this).prop('id');
+                
                 var ids = id.split("_");
                 var chimpId = ids[0];
                 var rowId = getRowId(chimpId);
@@ -655,6 +656,7 @@ function display() {
             });
          });
         $('.closeness').on('click', function() {
+            var id = $(this).prop('id');
             var chimpList = util.getTableDataForTimePoint(
             followDate, followTime,
             focalChimpId);
@@ -662,7 +664,7 @@ function display() {
             $('#save_bottom_div').css ("visibility", 'visible');
             $('.save_bottom_div').on('click', function() {
                 var curClose = $('input[name="close"]:checked').val();
-                var id = $(this).prop('id');
+                
                 var ids = id.split("_");
                 var chimpId = ids[0];
                 var rowId = getRowId(chimpId);
