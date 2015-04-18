@@ -37,6 +37,23 @@ function endOfInterval() {
 }
 
 function display() {
+    // hiding the initial ui
+    $('.time_point').css("visibility", 'hidden');
+    //console.log("Am I messing things up " + $('.visible'));
+    $('.5-meter').css ("visibility", 'hidden');
+    $('.certainity').css ("visibility", 'hidden');
+    $('.sexual_state').css ("visibility", 'hidden');
+    $('.closeness').css ("visibility", 'hidden');
+
+    $('#time').css ("visibility", 'hidden');
+
+    $('#certainty').css ("visibility", 'hidden');
+    $('#distance').css ("visibility", 'hidden');
+    $('#state').css ("visibility", 'hidden');
+    $('#close_focal').css ("visibility", 'hidden');
+    //save_bottom_div
+    $('#save_bottom_div').css ("visibility", 'hidden');
+
 
     // Kick off a call to complete in our interval.
     window.setTimeout(endOfInterval, INTERVAL_DURATION);
@@ -64,22 +81,22 @@ function display() {
         struct['FA_B_arr_AnimID'] = chimpId;
         struct['FA_time_start'] = followTime;
 
-        if (time != null || time != undefined) {
+        if (time != undefined) {
             struct['FA_duration_of_obs'] = time;
         }
-        if (sState !== null || sState != undefined) {
+        if (sState != undefined) {
             struct['FA_type_of_cycle'] = sState;
         }
         
-        if (certain !== null || certain != undefined) {
+        if (certain != undefined) {
             struct['FA_type_of_certainty'] = certain;
         } 
 
-        if (distance !== null || distance != undefined) {
+        if (distance != undefined) {
             struct['FA_within_five_meters'] = distance;
         } 
 
-        if (closest_to_focal !== null || closest_to_focal != undefined) {
+        if (closest_to_focal != undefined) {
             struct['FA_closest_to_focal'] = closest_to_focal;
         } 
         
@@ -106,14 +123,17 @@ function display() {
         console.log("sState " + sState);
         console.log("closest_to_focal " + closest_to_focal);
         if (time != null || time != undefined) {
-            if (time == "5") {
+            if (time == "15") {
                 document.getElementById(chimpId+"_time_img").src = "./img/timeBottom.gif";
             }else if(time == "10") {
                 document.getElementById(chimpId+"_time_img").src = "./img/timeMiddle.gif";
-            } else if (time == "15") {
+            } else if (time == "5") {
                 document.getElementById(chimpId+"_time_img").src = "./img/timeTop.gif";
             } else if (time == "0") {
                 document.getElementById(chimpId+"_time_img").src = "./img/timeEmpty.gif";
+            } else if (time == "1") {
+                document.getElementById(chimpId+"_time_img").src = "./img/timeFull.gif";
+
             }
         }
         if (certain != null || certain != undefined) {
@@ -142,6 +162,7 @@ function display() {
         }
 
         if (sState != null || sState != undefined) {
+            console.log("I am the stupid one messing with up " + sState);
             if (sState == "0") {
                 document.getElementById(chimpId+"_sexState").innerHTML = "0";
             }else if(sState == "0.25") {
@@ -170,13 +191,13 @@ function display() {
     /* Updates the bottom div when user selects any of the chimp. It updates the 
      * div according to that's chimp.
      */
-    var updateBottomDiv = function(time, certain, distance, sState, closest_to_focal) {
+    //var updateBottomDiv = function(time, certain, distance, sState, closest_to_focal) {
        /* $("input[name=time][value="+time+"]").attr('checked', true);
         $("input[name=certain][value="+certain+"]").attr('checked', true);
         $("input[name=distance][value="+distance+"]").attr('checked', true);
         $("input[name=sex_state][value="+sState+"]").attr('checked', true);
         $("input[name=close][value="+closest_to_focal+"]").attr('checked', true);*/
-        console.log("Why are you messing up stupid " + certain + "your time " + (typeof certain));
+       /* console.log("Why are you messing up stupid " + certain + "your time " + (typeof certain));
         if (time == "0") {
             console.log("I am here uhuu");
             document.getElementById("time1").checked = true;
@@ -213,7 +234,7 @@ function display() {
         } else if (certain == "1") {
            document.getElementById("close2").checked = true;
         }
-    };
+    };*/
 
     var followTimeUserFriendly;
     if (followTime === null) {
@@ -379,17 +400,9 @@ function display() {
         // }
         
     });
-    
-    // It helps the user to update ui and save the new information to
-    // the database
-    var updateChimpInfo = function(){
-        var chimpId = $(this).prop('id');
-        console.log("in event handeler " + chimpId);
-        // removing event handeler from all other chimps right now since we want the
-        // user to be able update one chimp at a time.
-        $('.chimp').unbind("click", updateChimpInfo);
-        document.getElementById(chimpId).style.backgroundColor = "green";
 
+    var getRowId = function(chimId) {
+    // returns rowId
         var chimpList = util.getTableDataForTimePoint(
         followDate, followTime,
         focalChimpId);
@@ -400,13 +413,43 @@ function display() {
                 break;
             }
         }
+        return rowId;
+    }
+    
+    // It helps the user to update ui and save the new information to
+    // the database
+    //var updateChimpInfo = function(){
+        
+        // removing event handeler from all other chimps right now since we want the
+        // user to be able update one chimp at a time.
+    $('.chimp').on('click', function() {//unbind("click", updateChimpInfo);
+        $('#time').css ("visibility", 'visible'); // hidden div visible
+
+        var chimpId = $(this).prop('id');
+        console.log("in event handeler " + chimpId);
+        document.getElementById(chimpId).style.backgroundColor = "green";
+        var chimpList = util.getTableDataForTimePoint(
+        followDate, followTime,
+        focalChimpId);
+        var rowId = null;
+        for(var i = 0; i < chimpList.getCount(); i++) {
+            if (chimpList.getData(i, 'FA_B_arr_AnimID').trim() == chimpId.trim()) {
+                rowId = chimpList.getRowId(i);
+                break;
+            }
+        }
+        var curCertain = null;
+        var curDist = null;
+        var curS = null;
+        var curClose = null;
+        var curTime = null;
         if (rowId != null) {
-            var curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
-            var curCertain = chimpList.getData(rowId, 'FA_type_of_certainty').trim();
-            var curDist = chimpList.getData(rowId, 'FA_within_five_meters').trim();
-            var curS = chimpList.getData(rowId, 'FA_type_of_cycle').trim(); 
-            var curClose = chimpList.getData(rowId, 'FA_closest_to_focal').trim();
-            updateBottomDiv(curTime, curCertain, curDist, curS, curClose);
+            curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
+            curCertain = chimpList.getData(rowId, 'FA_type_of_certainty').trim();
+            curDist = chimpList.getData(rowId, 'FA_within_five_meters').trim();
+            curS = chimpList.getData(rowId, 'FA_type_of_cycle').trim(); 
+            curClose = chimpList.getData(rowId, 'FA_closest_to_focal').trim();
+            //updateBottomDiv(curTime, curCertain, curDist, curS, curClose);
         } else {
              console.log("There is no Chimp with this name in the database!!!!");
              return;
@@ -414,12 +457,12 @@ function display() {
        
         // getting the information from the div and saving it to the database and
         // updates the ui
-        var time = null;
+       /* var time = null;
         var certain = null;
         var distance = null;
         var sex_state = null;
         var close = null;
-        $('.save_bottom_div').on('click', function() {
+       $('.save_bottom_div').on('click', function() {
             time = $('input[name="time"]:checked').val();
             certain = $('input[name="certain"]:checked').val();
             distance = $('input[name="distance"]:checked').val();
@@ -448,11 +491,246 @@ function display() {
             }
             // we are done with updating the current chimp. so we can re bind the
             // all the chimps to the event handeler
-            $('.chimp').bind("click", updateChimpInfo);
-        }); 
-    };       
+            //$('.chimp').bind("click", updateChimpInfo);
+        });*/
+        $('.time').on('click', function() {
+            console.log("Am I the right one " + $(this).prop('id'));
+            // writing the about the time in the database
+            var time = $(this).prop('id');
+
+            if (rowId != null) {
+                writeRowForChimp(
+                    true,
+                    rowId,
+                    chimpId,
+                    time,
+                    curCertain,
+                    curDist,
+                    curS,
+                    curClose);
+            } else {
+                console.log("There is no Chimp with this name in the database!!!!");
+                return;
+            }
+
+            $('#'+chimpId+'_time').css("visibility", 'visible');
+            //console.log("Am I messing things up " + $('.visible'));
+
+            $('#'+chimpId+'_cer').css ("visibility", 'visible');
+            $('#'+chimpId+'_five').css ("visibility", 'visible');
+
+            $('#'+chimpId+'_sexState').css ("visibility", 'visible');
+            $('#' + chimpId + '_close').css ("visibility", 'visible');
+            updateUI(true, chimpId, time, null, null, null, null);
+            $('#time').css ("visibility", 'hidden');
+
+
+        });
+         
+//console.log("Am I messing things up " + $('.visible'));
+
+    });
+
+        $('.certainity').on('click', function() {
+           console.log("I am stupid and i am inside of .5-meter");
+          // var id = 
+            var id = $(this).prop('id');
+           $('#certainty').css ("visibility", 'visible');
+           $('#save_bottom_div').css ("visibility", 'visible');
+           $('.save_bottom_div').on('click', function() {
+               var certain = $('input[name="certain"]:checked').val();
+              
+               var ids = id.split("_");
+               var chimpId = ids[0];
+               var rowId = getRowId(chimpId);
+               var curCertain = null;
+               var curDist = null;
+               var curS = null;
+               var curClose = null;
+               var curTime = null;
+               var chimpList = util.getTableDataForTimePoint(
+                followDate, followTime,
+                focalChimpId);
+               if (rowId != null) {
+                    curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
+                    curDist = chimpList.getData(rowId, 'FA_within_five_meters').trim();
+                    curS = chimpList.getData(rowId, 'FA_type_of_cycle').trim(); 
+                    curClose = chimpList.getData(rowId, 'FA_closest_to_focal').trim();
+                //updateBottomDiv(curTime, curCertain, curDist, curS, curClose);
+                } else {
+                    console.log("There is no Chimp with this name in the database!!!!");
+                    return;
+                }
+                if (rowId != null) {
+                    writeRowForChimp(
+                        true,
+                        rowId,
+                        chimpId,
+                        curTime,
+                        curCertain,
+                        curDist,
+                        curS,
+                        curClose);
+                } else {
+                    console.log("There is no Chimp with this name in the database!!!!");
+                    return;
+                }
+                updateUI(true, chimpId, null, certain, null, null, null);
+                $('#certainty').css ("visibility", 'hidden');
+                $('#save_bottom_div').css ("visibility", 'hidden');
+            });
+        });
+
+        $('.5-meter').on('click', function() {
+           console.log("I am stupid and i am inside of .5-meter");
+            var chimpList = util.getTableDataForTimePoint(
+            followDate, followTime,
+            focalChimpId);
+            var id = $(this).prop('id');
+           $('#distance').css ("visibility", 'visible');
+           $('#save_bottom_div').css ("visibility", 'visible');
+           $('.save_bottom_div').on('click', function() {
+               var curDist = $('input[name="distance"]:checked').val();
+               
+               var ids = id.split("_");
+               var chimpId = ids[0];
+               var rowId = getRowId(chimpId);
+               var curCertain = null;
+               var curS = null;
+               var curClose = null;
+               var curTime = null;
+               if (rowId != null) {
+                    curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
+                    curS = chimpList.getData(rowId, 'FA_type_of_cycle').trim(); 
+                    curClose = chimpList.getData(rowId, 'FA_closest_to_focal').trim();
+                    curCertain = chimpList.getData(rowId, 'FA_type_of_certainty').trim();
+                //updateBottomDiv(curTime, curCertain, curDist, curS, curClose);
+                } else {
+                    console.log("There is no Chimp with this name in the database!!!!");
+                    return;
+                }
+                if (rowId != null) {
+                    writeRowForChimp(
+                        true,
+                        rowId,
+                        chimpId,
+                        curTime,
+                        curCertain,
+                        curDist,
+                        curS,
+                        curClose);
+                } else {
+                    console.log("There is no Chimp with this name in the database!!!!");
+                    return;
+                }
+                updateUI(true, chimpId, null, null, curDist, null, null);
+                $('#distance').css ("visibility", 'hidden');
+                $('#save_bottom_div').css ("visibility", 'hidden');
+           });
+
+        });
+
+       
+        $('.sexual_state').on('click', function() {
+            var id = $(this).prop('id');
+            $('#state').css ("visibility", 'visible');
+            $('#save_bottom_div').css ("visibility", 'visible');
+            $('.save_bottom_div').on('click', function() {
+                var curS = $('input[name="sex_state"]:checked').val();
+                
+                var ids = id.split("_");
+                var chimpId = ids[0];
+                var rowId = getRowId(chimpId);
+                var curTime = null;
+                var curCertain = null;
+                var curDist = null;
+                var curCertain = null;
+                var curClose = null;
+                var chimpList = util.getTableDataForTimePoint(
+                followDate, followTime,
+                focalChimpId);
+                if (rowId != null) {
+                    curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
+                    curDist = chimpList.getData(rowId, 'FA_within_five_meters').trim();
+                    curCertain = chimpList.getData(rowId, 'FA_type_of_certainty').trim();
+                    curClose = chimpList.getData(rowId, 'FA_closest_to_focal').trim();
+                //updateBottomDiv(curTime, curCertain, curDist, curS, curClose);
+                } else {
+                    console.log("There is no Chimp with this name in the database!!!!");
+                    return;
+                }
+                if (rowId != null) {
+                    writeRowForChimp(
+                        true,
+                        rowId,
+                        chimpId,
+                        curTime,
+                        curCertain,
+                        curDist,
+                        curS,
+                        curClose);
+                } else {
+                    console.log("There is no Chimp with this name in the database!!!!");
+                    return;
+                }
+                updateUI(true, chimpId, null, null, null, curS, null);
+                $('#state').css ("visibility", 'visible');
+                $('#save_bottom_div').css ("visibility", 'hidden');
+            });
+         });
+        $('.closeness').on('click', function() {
+            var id = $(this).prop('id');
+            var chimpList = util.getTableDataForTimePoint(
+            followDate, followTime,
+            focalChimpId);
+            $('#close_focal').css ("visibility", 'visible');
+            $('#save_bottom_div').css ("visibility", 'visible');
+            $('.save_bottom_div').on('click', function() {
+                var curClose = $('input[name="close"]:checked').val();
+                
+                var ids = id.split("_");
+                var chimpId = ids[0];
+                var rowId = getRowId(chimpId);
+                var curTime = null;
+                var curCertain = null;
+                var curDist = null;
+                var curCertain = null;
+                if (rowId != null) {
+                    curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
+                    curDist = chimpList.getData(rowId, 'FA_within_five_meters').trim();
+                    curCertain = chimpList.getData(rowId, 'FA_type_of_certainty').trim();
+                    curS = chimpList.getData(rowId, 'FA_type_of_cycle').trim(); 
+                   
+                //updateBottomDiv(curTime, curCertain, curDist, curS, curClose);
+                } else {
+                    console.log("There is no Chimp with this name in the database!!!!");
+                    return;
+                }
+                if (rowId != null) {
+                    writeRowForChimp(
+                        true,
+                        rowId,
+                        chimpId,
+                        curTime,
+                        curCertain,
+                        curDist,
+                        curS,
+                        curClose);
+                } else {
+                    console.log("There is no Chimp with this name in the database!!!!");
+                    return;
+                }
+                updateUI(true, chimpId, null, null, null,null, curClose);
+                $('#close_focal').css ("visibility", 'hidden');
+                $('#save_bottom_div').css ("visibility", 'hidden');
+            });
+         });
+
+
+   // };       
    // binding event handler to all the chimps
-   $('.chimp').bind("click", updateChimpInfo);
+  // $('.chimp').bind("click", updateChimpInfo);
+           
     
     // Updates the follow page according to the current information regarding foods
     var foodData = util.getFoodDataForDatePoint(
