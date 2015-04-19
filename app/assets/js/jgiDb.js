@@ -29,7 +29,7 @@ exports.createWhereClause = function createWhereClause(columns) {
  */
 exports.getTableDataForTimePoint = function(date, time, focalChimpId) {
 
-  var table = tables.followArrival;
+  var table = tables.chimpObservations;
 
   var whereClause = exports.createWhereClause(
     [
