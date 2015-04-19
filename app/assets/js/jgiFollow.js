@@ -157,6 +157,10 @@ var closestLabelsUser = {
 exports.updateUiForChimp = function(chimp) {
   assertIsChimp(chimp);
 
+  // We're putting the rowId on each of the chimps.
+  var $chimp = $('#' + chimp.chimpId);
+  $chimp.attr('rowId', chimp.rowId);
+
   exports.updateIconForChimp(chimp);
   exports.updateCertaintyUiForChimp(chimp);
   exports.updateWithinFiveUiForChimp(chimp);
@@ -180,8 +184,13 @@ exports.updateIconForChimp = function(chimp) {
     full: './img/timeEmpty.gif'
   };
 
-  var id = getIdForTimeImage(chimp);
+  // Store the arrival/departure time in the UI.
+  // For now we're storing it in the td that holds the image.
+  var $time = $('#' + chimp.chimpId + '_time');
+  $time.attr('__data', chimp.time);
 
+  // And now update the image.
+  var id = getIdForTimeImage(chimp);
   var $img = $('#' + id);
 
   switch (chimp.time) {
@@ -213,10 +222,15 @@ exports.updateIconForChimp = function(chimp) {
 exports.updateCertaintyUiForChimp = function(chimp) {
   assertIsChimp(chimp);
 
+  // Store the value in the UI.
+  // For now we're storing it in the td. Note that we COULD get this stuff by
+  // going backwards from the user-facing label. This would be reasonable, but
+  // this feels cleaner and better separates UI from behavior, imo.
   var id = getIdForCertainty(chimp);
-
   var $certainty = $('#' + id);
+  $certainty.attr('__data', chimp.certainty);
 
+  // And now update the user facing label.
   switch (chimp.certainty) {
     case certaintyLabels.notApplicable:
       $certainty.text(certaintyLabelsUser.notApplicable);
@@ -238,8 +252,9 @@ exports.updateWithinFiveUiForChimp = function(chimp) {
   assertIsChimp(chimp);
 
   var id = getIdForWithinFiveMeters(chimp);
-
   var $withinFive = $('#' + id);
+  // And store the value in the ui.
+  $withinFive.attr('__data', chimp.withinFive);
 
   switch (chimp.withinFive) {
     case withinFiveLabels.yes:
@@ -259,8 +274,9 @@ exports.updateEstrusUiForChimp = function(chimp) {
   assertIsChimp(chimp);
 
   var id = getIdForEstrus(chimp);
-
   var $estrus = $('#' + id);
+  // Store the value in the UI.
+  $estrus.attr('__data', chimp.estrus);
 
   switch (chimp.estrus) {
     case estrusLabels.a:
@@ -286,8 +302,9 @@ exports.updateClosestUiForChimp = function(chimp) {
   assertIsChimp(chimp);
 
   var id = getIdForClosest(chimp);
-
   var $closest = $('#' + id);
+  // Store the value in the UI.
+  $closest.attr('__data', chimp.closest);
 
   switch (chimp.closest) {
     case closestLabels.no:
@@ -423,21 +440,20 @@ exports.initializeListeners = function(control) {
 
 
   $('.chimp').on('click', function() {
-
-    exports.showTimeIndicators(true);
-
     var chimpId = $(this).prop('id');
-    
     var chimp = exports.getChimpFromUi(chimpId);
-
-    // show that chimp has been selected
-    exports.showChimpIsSelected(chimp);
-
     if (!chimp) {
       console.log(
         'could not find chimp represented in UI with id: ' + chimpId
       );
     }
+
+    exports.showChimpIsSelected(chimp);
+
+    exports.showTimeIndicators(true, chimp);
+
+    // show that chimp has been selected
+
   });
 
   // Add listeners to the elements important for each chimp
@@ -606,9 +622,31 @@ exports.showLoadingScreen = function(show) {
  */
 exports.getChimpFromUi = function(chimpId) {
 
-  chimpId.foo();
-  throw new Error('getChimpFromUi not implemented');
+  var $time = $('#' + chimpId + '_time');
+  var $certainty = $('#' + chimpId + '_cer');
+  var $withinFive = $('#' + chimpId + '_five');
+  var $estrus = $('#' + chimpId + '_sexState');
+  var $closest = $('#' + chimpId + '_close');
 
+  var rowId = $('#' + chimpId).attr('rowId');
+  var date = urls.getFollowDateFromUrl();
+  var followStartTime = urls.getFollowTimeFromUrl();
+  var focalChimpId = urls.getFocalChimpIdFromUrl();
+
+  var result = new models.Chimp(
+      rowId,
+      date,
+      followStartTime,
+      focalChimpId,
+      chimpId,
+      $time.attr('__data'),
+      $certainty.attr('__data'),
+      $withinFive.attr('__data'),
+      $estrus.attr('__data'),
+      $closest.attr('__data')
+  );
+
+  return result;
 };
 
 
@@ -625,18 +663,17 @@ exports.initializeUi = function(control) {
   // when wea re sure the chimp is present (either by receiving manual input
   // from a user or by querying the database and restoring a previous
   // timepoint.
-  $('.time_point').css('visibility', 'hidden');
-  $('.5-meter').css ('visibility', 'hidden');
-  $('.certainty').css ('visibility', 'hidden');
-  $('.sexual_state').css ('visibility', 'hidden');
-  $('.closeness').css ('visibility', 'hidden');
+  // $('.time_point').css('visibility', 'hidden');
+  // $('.5-meter').css ('visibility', 'hidden');
+  // $('.certainty').css ('visibility', 'hidden');
+  // $('.sexual_state').css ('visibility', 'hidden');
+  // $('.closeness').css ('visibility', 'hidden');
 
-  $('#time').css ('visibility', 'hidden');
-
-  $('#certainty').css ('visibility', 'hidden');
-  $('#distance').css ('visibility', 'hidden');
-  $('#state').css ('visibility', 'hidden');
-  $('#close_focal').css ('visibility', 'hidden');
+  $('#time').addClass('hidden');
+  $('#certainty').addClass('hidden');
+  $('#distance').addClass('hidden');
+  $('#state').addClass('hidden');
+  $('#close_focal').addClass('hidden');
 
   //save_bottom_div
   $('#save_bottom_div').css ('visibility', 'hidden');
@@ -679,11 +716,24 @@ exports.handleFirstTime = function(
     followStartTime,
     focalChimpId
 ) {
+  // We are seeing a timepoint for the first time. The general idea is this:
+  // 1) Create Chimp objects for all the chimps we're going to need. These are
+  // not going to have rowId objects, but just be 'default' chimp observations.
+  //
+  // 2) Write these default chimps to the database.
+  //
+  // 3) Read back out the chimps for this timepoint from the database. This
+  // will be the values we just created, except that these will also have
+  // rowIds for each of the chimps. We assume all chimps in the UI have rowIds,
+  // so this is important.
+  //
+  // 4) update the ui for the chimps
 
   var chimpIds = exports.getChimpIdsFromUi();
 
   var chimps = [];
 
+  // 1) create the chimps
   chimpIds.forEach(function(value) {
     var newChimp = models.createNewChimp(
       date,
@@ -696,14 +746,26 @@ exports.handleFirstTime = function(
     chimps
   );
 
+  // 2) write the chimps
+  chimps.forEach(function(chimp) {
+    db.writeRowForChimp(control, chimp, false);
+  });
+
+  // 3) read the chimps back in for this time point.
+  var tableData = db.getTableDataForTimePoint(
+      control,
+      date,
+      followStartTime,
+      focalChimpId
+  );
+
+  chimps = db.convertTableDataToChimps(tableData);
   
+  // 4) update the UI for the chimps
   chimps.forEach(function(chimp) {
     exports.updateUiForChimp(chimp);
   });
 
-  chimps.forEach(function(chimp) {
-    db.writeRowForChimp(control, chimp, false);
-  });
 
 };
 

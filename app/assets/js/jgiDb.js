@@ -30,7 +30,7 @@ exports.createWhereClause = function createWhereClause(columns) {
 exports.getTableDataForTimePoint = function(
     control,
     date,
-    time,
+    followStartTime,
     focalChimpId
 ) {
 
@@ -40,11 +40,11 @@ exports.getTableDataForTimePoint = function(
     [
       table.columns.date,
       table.columns.focalId,
-      table.columns.time
+      table.columns.followStartTime
     ]
   );
 
-  var selectionArgs = [date, focalChimpId, time];
+  var selectionArgs = [date, focalChimpId, followStartTime];
 
   var result = control.query(
       table.tableId,
@@ -262,12 +262,12 @@ exports.writeRowForChimp = function(control, chimp, isUpdate) {
   var struct = {};
   struct[cols.date] = chimp.date;
   struct[cols.followStartTime] = chimp.followStartTime;
-  struct[cols.time] = chimp.time;
+  struct[cols.time] = parseInt(chimp.time);
   struct[cols.focalId] = chimp.focalChimpId;
   struct[cols.chimpId] = chimp.chimpId;
-  struct[cols.certainty] = chimp.certainty;
-  struct[cols.withinFive] = chimp.distance;
-  struct[cols.closest] = chimp.closest;
+  struct[cols.certainty] = parseInt(chimp.certainty);
+  struct[cols.withinFive] = parseInt(chimp.withinFive);
+  struct[cols.closest] = parseInt(chimp.closest);
   struct[cols.estrus] = chimp.estrus;
 
   var stringified = JSON.stringify(struct);
