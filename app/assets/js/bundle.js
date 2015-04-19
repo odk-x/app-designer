@@ -28,7 +28,12 @@ exports.createWhereClause = function createWhereClause(columns) {
  * Get a query for all the data at the given date and time for the specified
  * focal chimp. Together this specifies a unique time point in a follow.
  */
-exports.getTableDataForTimePoint = function(date, time, focalChimpId) {
+exports.getTableDataForTimePoint = function(
+    control,
+    date,
+    time,
+    focalChimpId
+) {
 
   var table = tables.chimpObservation;
 
@@ -595,6 +600,70 @@ exports.getFocalChimpIdFromUrl = function() {
 };
 
 },{}],5:[function(require,module,exports){
+'use strict';
+
+// var chimpIsPresent = function chimpIsPresent(chimpId) {
+
+// };
+
+// /**
+//  * Get the default state for a chimp that nothing is known about. I.e. this
+//  * would be the state of the chimp when the follow begins.
+//  */
+// var getDefaultChimpState = function getDefaultChimpState() {
+
+// };
+
+// // Mutate chimp states
+
+
+exports.incrementTime = function(time) {
+
+  var interval = 15;
+  var parts = time.split(':');
+  var hours = parseInt(parts[0]);
+  var mins = parseInt(parts[1]);
+  var maybeTooLarge = mins + interval;
+
+  if (maybeTooLarge > 59) {
+    // then we've overflowed our time system.
+    mins = maybeTooLarge % 60;
+    // Don't worry about overflowing hours. Not going to worry about
+    // late night chimp monitoring.
+    hours = hours + 1;
+  } else {
+    mins = maybeTooLarge;
+  }
+
+  // Format these strings to be two digits.
+  var hoursStr = exports.convertToStringWithTwoZeros(hours);
+  var minsStr = exports.convertToStringWithTwoZeros(mins);
+  var result = hoursStr + ':' + minsStr;
+  return result;
+
+};
+
+
+/**
+ * Convert an integer to a string, padded to two zeros.
+ */
+exports.convertToStringWithTwoZeros = function(intTime) {
+
+  if (intTime > 59) {
+    throw new Error('invalid intTime: ' + intTime);
+  }
+
+  var result;
+  if (intTime < 10) {
+    result = '0' + intTime;
+  } else {
+    result = intTime.toString();
+  }
+  return result;
+
+};
+
+},{}],6:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.3
  * http://jquery.com/
@@ -9810,8 +9879,9 @@ return jQuery;
 
 var urls = require('./jgiUrls');
 var models = require('./jgiModels');
-var db = require('./jgiDb.js');
+var db = require('./jgiDb');
 var $ = require('jquery');
+var util = require('./jgiUtil');
 
 
 function assertIsChimp(chimp) {
@@ -10147,6 +10217,275 @@ exports.updateUiForEndOfInterval = function() {
 
 
 /**
+ * Add the listeners to the elements relating to each chimp. 
+ */
+exports.initializeChimpListeners = function() {
+  // The .time objects are the things we click to demonstrate when a chimp
+  // arrives or leaves. This might be the image icons, for instance.
+  $('.time').on('click', function() {
+    var time = $(this).prop('id');
+
+    var chimp = exports.getSelectedChimp();
+
+    // The id is the value we want to persist in the database.
+    chimp.time = time;
+
+    exports.updateUiForChimp(chimp);
+    exports.writeRowForChimp(chimp);
+  });
+
+
+  $('.certainty').on('click', function() {
+    // Mark this chimp as selected.
+    var chimp = exports.getChimpFromElement($(this));
+    exports.showChimpIsSelected(chimp);
+    // Make the certainty editable.
+    exports.showCertaintyEditable(true, chimp);
+  });
+
+
+  $('.5-meter').on('click', function() {
+    // Mark this chimp as selected.
+    var chimp = exports.getChimpFromElement($(this));
+    exports.showChimpIsSelected(chimp);
+    // Make the within five meters as editable.
+    exports.showWithinFiveEditable(true, chimp);
+  });
+
+
+  $('.sexual_state').on('click', function() {
+    // Mark this chimp as selected
+    var chimp = exports.getChimpIdFromElement($(this));
+    exports.showChimpIsSelected(chimp);
+    // Make the estrus state editable.
+    exports.showEstrusEditable(true, chimp);
+  });
+
+  
+  $('.closeness').on('click', function() {
+    // mark this chimp as selected
+    var chimp = exports.getChimpIdFromElement($(this));
+    exports.showChimpIsSelected(chimp);
+    // Make the closeness editable
+    exports.showCloseEditable(true, chimp);
+  });
+
+};
+
+
+/**
+ * Plug in the click listeners in the UI.
+ */
+exports.initializeListeners = function(control) {
+
+  $('#next-button').on('click', function() {
+    exports.showLoadingScreen(true);
+
+    // Prepare the url we're going to use for the next timepoint.
+    var nextTime = util.incrementTime(urls.getFollowTimeFromUrl());
+    var queryString = urls.createParamsForFollow(
+      urls.getFollowDateFromUrl(),
+      nextTime,
+      urls.getFocalChimpIdFromUrl()
+    );
+    var url = control.getFileAsUrl('assets/followScreen.html' + queryString);
+
+    // Navigate to that url to move to the next timepoint.
+    window.location.href = url;
+  });
+
+
+  $('.chimp').on('click', function() {
+
+    exports.showTimeIndicators(true);
+
+    var chimpId = $(this).prop('id');
+    
+    var chimp = exports.getChimpFromUi(chimpId);
+
+    // show that chimp has been selected
+    exports.showChimpIsSelected(chimp);
+
+    if (!chimp) {
+      console.log(
+        'could not find chimp represented in UI with id: ' + chimpId
+      );
+    }
+  });
+
+  // Add listeners to the elements important for each chimp
+  exports.initializeChimpListeners();
+
+};
+
+
+/**
+ * Show the time (arrival/departure) indicators in the save div.
+ */
+exports.showTimeIndicators = function(show, chimp) {
+  var $timeIndicators = $('#time');
+
+  if (show) {
+    $timeIndicators.removeClass('hidden');
+  } else {
+    $timeIndicators.addClass('hidden');
+  }
+
+  // TODO: select the correct image as selected
+  chimp();
+
+};
+
+
+/**
+ * Show the certainty as editable for the given chimp. if show is falsey, hide
+ * the ui instead.
+ */
+exports.showCertaintyEditable = function(show, chimp) {
+  var $certaintyIndicator = $('#certainty');
+
+  if (show) {
+    $certaintyIndicator.removeClass('hidden');
+  } else {
+    $certaintyIndicator.addClass('hidden');
+  }
+
+  // TODO: check the correct certainty
+  chimp();
+  throw new Error('certainty editable not supported');
+};
+
+
+exports.showWithinFiveEditable = function(show, chimp) {
+  var $withinFiveIndicator = $('#distance');
+
+  if (show) {
+    $withinFiveIndicator.removeClass('hidden');
+  } else {
+    $withinFiveIndicator.addClass('hidden');
+  }
+  show();
+  chimp();
+  // show the ui (hide of show === false);
+  // select the values for the chimp.
+  throw new Error('withi nfive editable not supported');
+};
+
+
+exports.showEstrusEditable = function(show, chimp) {
+  var $estrusIndicator = $('#state');
+
+  if (show) {
+    $estrusIndicator.removeClass('hidden');
+  } else {
+    $estrusIndicator.addClass('hidden');
+  }
+  show();
+  chimp();
+  // show the ui for estrus editable (hide if !show)
+  // mark the current selected values for the chimp
+  throw new Error('estrus editable not supported');
+};
+
+
+exports.showCloseEditable = function(show, chimp) {
+  var $closestIndicator = $('#close_focal');
+
+  if (show) {
+    $closestIndicator.removeClass('hidden');
+  } else {
+    $closestIndicator.addClass('hidden');
+  }
+  show();
+  chimp();
+  // show the ui for estrus editable (hide if !show)
+  // mark the current selected values for the chimp
+  throw new Error('close editable not supported');
+};
+
+
+/**
+ * Get the chimp id from the element relating to a chimp's observation. E.g.
+ * the within five meters, arrival/departure, certainty, etc elements.
+ */
+exports.getChimpIdFromElement = function($element) {
+  var id = $element.prop('id');
+  var chimpId = id.split('_')[0];
+  return chimpId;
+};
+
+
+/**
+ * Get the Chimp from the element relating to a chimp's observation. E.g. the
+ * within five meters, arrival/departure, certainty, etc elements.
+ *
+ * This is a convenience method for calling getChimpIdFromElement and
+ * getChimpFromUi.
+ */
+exports.getChimpFromElement = function($element) {
+  var id = exports.getChimpIdFromElement($element);
+  var chimp = exports.getChimpFromUi(id);
+  return chimp;
+};
+
+
+/**
+ * Get the selected Chimp by querying the UI. 
+ */
+exports.getSelectedChimp = function() {
+
+  // We're going to use the '.selected-chimp' class.
+  var $chimpElement = $('.selected-chimp');
+
+  var chimpId = $chimpElement.prop('id');
+
+  var chimp = exports.getChimpFromUi(chimpId);
+
+  return chimp;
+
+};
+
+
+/**
+ * Show that the current chimp has been selected.
+ */
+exports.showChimpIsSelected = function(chimp) {
+
+  // The chimp as represented as elements for the user.
+  var $chimpUser = $('#' + chimp.chimpId);
+
+  $chimpUser.addClass('selected-chimp');
+
+};
+
+
+/**
+ * Show or hide the loading screen.
+ */
+exports.showLoadingScreen = function(show) {
+  var $loading = $('#loading');
+
+  if (show) {
+    $loading.css('visibility', 'visible');
+  } else {
+    $loading.css('visibility', 'hidden');
+  }
+};
+
+
+/**
+ * Return the Chimp with the matching chimpId by querying the UI. This does NOT
+ * query the database for a chimp, making it a fast call.
+ */
+exports.getChimpFromUi = function(chimpId) {
+
+  chimpId.foo();
+  throw new Error('getChimpFromUi not implemented');
+
+};
+
+
+/**
  * Updates the UI after loading a page.
  * 
  * This used to be called 'display', in case you're looking for that method.
@@ -10175,6 +10514,8 @@ exports.initializeUi = function(control) {
   //save_bottom_div
   $('#save_bottom_div').css ('visibility', 'hidden');
 
+  exports.initializeListeners();
+
   // And now we need to deal with the actual chimps themselves. There are two
   // possibilities here:
   //  1) we are recovering an existing timepoint, in which case we will be
@@ -10182,6 +10523,7 @@ exports.initializeUi = function(control) {
   //  2) we are starting a new time point, in which case we need to create a
   //     bunch of new entries
   var existingData = db.getTableDataForTimePoint(
+      control,
       urls.getFollowDateFromUrl(),
       urls.getFollowTimeFromUrl(),
       urls.getFocalChimpIdFromUrl()
@@ -10195,7 +10537,7 @@ exports.initializeUi = function(control) {
         urls.getFocalChimpIdFromUrl()
     );
   } else {
-    exports.handleRepeatTime(existingData);
+    exports.handleExistingTime(existingData);
   }
 
 };
@@ -10277,4 +10619,4 @@ exports.getChimpIdsFromUi = function() {
 
 };
 
-},{"./jgiDb.js":1,"./jgiModels":2,"./jgiUrls":4,"jquery":5}]},{},[1,2,4]);
+},{"./jgiDb":1,"./jgiModels":2,"./jgiUrls":4,"./jgiUtil":5,"jquery":6}]},{},[1,2,4]);

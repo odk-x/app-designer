@@ -144,6 +144,10 @@ body {
     background-position: center;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 ul {
     list-style-type: none;
     padding-left: 0px;
@@ -155,6 +159,11 @@ ul {
 
 .selected {
     background-color: #ccc;
+}
+
+
+.selected-chimp {
+  background-color: green;
 }
 
 #time label {
