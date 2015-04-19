@@ -378,6 +378,7 @@ exports.initializeUi = function(control) {
   //  2) we are starting a new time point, in which case we need to create a
   //     bunch of new entries
   var existingData = db.getTableDataForTimePoint(
+      control,
       urls.getFollowDateFromUrl(),
       urls.getFollowTimeFromUrl(),
       urls.getFocalChimpIdFromUrl()
@@ -391,7 +392,7 @@ exports.initializeUi = function(control) {
         urls.getFocalChimpIdFromUrl()
     );
   } else {
-    exports.handleRepeatTime(existingData);
+    exports.handleExistingTime(existingData);
   }
 
 };

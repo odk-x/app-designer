@@ -27,7 +27,12 @@ exports.createWhereClause = function createWhereClause(columns) {
  * Get a query for all the data at the given date and time for the specified
  * focal chimp. Together this specifies a unique time point in a follow.
  */
-exports.getTableDataForTimePoint = function(date, time, focalChimpId) {
+exports.getTableDataForTimePoint = function(
+    control,
+    date,
+    time,
+    focalChimpId
+) {
 
   var table = tables.chimpObservation;
 
