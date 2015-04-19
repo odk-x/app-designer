@@ -11,7 +11,7 @@ var $ = require('jquery');
 
 
 function assertIsChimp(chimp) {
-  if (chimp.constructor.name === 'Chimp') {
+  if (chimp.constructor.name !== 'Chimp') {
     throw new Error('parameter must be a chimp');
   }
 }

@@ -30,7 +30,7 @@ exports.createWhereClause = function createWhereClause(columns) {
  */
 exports.getTableDataForTimePoint = function(date, time, focalChimpId) {
 
-  var table = tables.followArrival;
+  var table = tables.chimpObservation;
 
   var whereClause = exports.createWhereClause(
     [
@@ -60,7 +60,7 @@ exports.convertTableDataToChimps = function(data) {
 
   var result = [];
 
-  var cols = tables.chimpObservations.columns;
+  var cols = tables.chimpObservation.columns;
 
   for (var i = 0; i < data.getCount(); i++) {
 
@@ -9815,7 +9815,7 @@ var $ = require('jquery');
 
 
 function assertIsChimp(chimp) {
-  if (chimp.constructor.name === 'Chimp') {
+  if (chimp.constructor.name !== 'Chimp') {
     throw new Error('parameter must be a chimp');
   }
 }
