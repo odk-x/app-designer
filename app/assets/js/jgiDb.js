@@ -3,8 +3,7 @@
 
 // The schemae of our tables
 var tables = require('./jgiTables');
-var db = require('./jgiDb');
-db.noop();
+var models = require('./jgiModels');
 
 /**
  * Create a where clause for use in a Tables query. columns must be an array
@@ -49,6 +48,52 @@ exports.getTableDataForTimePoint = function(date, time, focalChimpId) {
   );
 
   return result;
+};
+
+
+/**
+ * Convert a table data (eg as returned by getTableDataForTimepoint) to an
+ * array of Chimp objects.
+ */
+exports.convertTableDataToChimps = function(data) {
+
+  var result = [];
+
+  var cols = tables.chimpObservations.columns;
+
+  for (var i = 0; i < data.getCount(); i++) {
+
+    var rowId = data.getRowId(i);
+
+    var chimpId = data.getData(i, cols.chimpId).trim();
+    var time = data.getData(i, cols.time).trim();
+    var certainty = data.getData(i, cols.certainty).trim();
+    var withinFive = data.getData(i, cols.withinFive).trim();
+    var estrus = data.getData(i, cols.estrus).trim();
+    var closest = data.getData(i, cols.closest).trim();
+    var focalChimpId = data.getData(i, cols.focalId).trim();
+    var date = data.getData(i, cols.date).trim();
+    var followStartTime = data.getData(i, cols.followStartTime).trim();
+
+    var newChimp = new models.Chimp(
+        rowId,
+        date,
+        followStartTime,
+        focalChimpId,
+        chimpId,
+        time,
+        certainty,
+        withinFive,
+        estrus,
+        closest
+    );
+
+    result.push(newChimp);
+
+  }
+
+  return result;
+
 };
 
 exports.getFoodDataForTimePoint = function(date, timeBegin, focalChimpId) {

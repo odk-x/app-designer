@@ -121,3 +121,27 @@ exports.createParamsForSpecies = function(
   return result;
 
 };
+
+
+exports.getFollowTimeFromUrl = function() {
+
+  var result = exports.getQueryParameter(exports.queryParameters.time);
+  return result;
+
+};
+
+
+exports.getFollowDateFromUrl = function() {
+
+  var result = exports.getQueryParameter(exports.queryParameters.date);
+  return result;
+
+};
+
+
+exports.getFocalChimpIdFromUrl = function() {
+
+  var result = exports.getQueryParameter(exports.queryParameters.focalChimp);
+  return result;
+
+};
