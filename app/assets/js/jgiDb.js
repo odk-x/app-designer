@@ -171,3 +171,65 @@ exports.getUpdateAboutAllChimps = function(date, time) {
   return result;
 
 };
+
+/**
+ * Write a follow object (as defined in the models module).
+ */
+exports.writeNewFollow = function(control, follow) {
+
+  var table = tables.follow;
+  var cols = table.columns;
+  
+  var struct = {};
+
+  struct[cols.date] = follow.date;
+  struct[cols.beginTime] = follow.beginTime;
+  struct[cols.focalId] = follow.focalId;
+  struct[cols.communityId] = follow.communityId;
+  struct[cols.researcher] = follow.researcher;
+
+  var stringified = JSON.stringify(struct);
+
+  control.addRow(table.tableId, stringified);
+
+};
+
+
+/**
+ * Write a row for the chimp into the database.
+ *
+ * If isUpdate is truthy, it instead updates, rather than adds a rwo, and the
+ * rowId property of the chimp must be valid.
+ */
+exports.writeRowForChimp = function(control, chimp, isUpdate) {
+
+  var table = tables.chimpObservation;
+  var cols = table.columns;
+
+  // We're going to assume that all variable have a value. In otherwords, there
+  // can be no defaults that are cannot be written to the database. We write
+  // every value.
+  var struct = {};
+  struct[cols.date] = chimp.date;
+  struct[cols.followStartTime] = chimp.followStartTime;
+  struct[cols.time] = chimp.time;
+  struct[cols.focalId] = chimp.focalChimpId;
+  struct[cols.chimpId] = chimp.chimpId;
+  struct[cols.certainty] = chimp.certainty;
+  struct[cols.withinFive] = chimp.distance;
+  struct[cols.closest] = chimp.closest;
+  struct[cols.estrus] = chimp.estrus;
+
+  var stringified = JSON.stringify(struct);
+
+  if (isUpdate) {
+    var rowId = chimp.rowId;
+    if (!rowId) {
+      throw new Error('chimp.rowId was falsey!');
+    }
+    control.updateRow(table.tableId, stringified, rowId);
+  } else {
+    control.addRow(table.tableId, stringified);
+  }
+
+};

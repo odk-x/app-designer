@@ -38,7 +38,10 @@ function display() {
         var communityId = $('#FOL_CL_community_id').val();
         var beginTime = $('#FOL_begin_time').val();
         var researcher = $('#FOL_am_observer_1').val();
-        //$("#jqxDateTimeInput").jqxDateTimeInput({ width: '300px', height: '25px', formatString: 'd'});
+
+        // TODO: browserify
+        // create new follow object
+        // write new follow object
 
         // Update the database.
         writeNewFollow(
@@ -47,6 +50,9 @@ function display() {
             communityId,
             beginTime,
             researcher);
+
+        // TODO: browserify
+        // use URLs to create query parameters and launch screen.
 
 
         // Now we'll launch the follow screen. The follow screen needs to know
