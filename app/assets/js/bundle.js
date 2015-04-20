@@ -9891,12 +9891,29 @@ function assertIsChimp(chimp) {
 }
 
 
+function assertFoundChimp(chimp) {
+  if (!chimp) {
+    console.log('could not find selected chimp!');
+    window.alert('could not find selected chimp!');
+    throw new Error('could not find selected chimp');
+  }
+}
+
+
 /**
  * Create the id for the element representing the chimp's presence.
- *
  */
 function getIdForTimeImage(chimp) {
   return chimp.chimpId + '_time_img';
+}
+
+
+/**
+ * Create the id for the element containing the image showing
+ * arrival/departure.
+ */
+function getIdForTime(chimp) {
+  return chimp.chimpId + '_time';
 }
 
 
@@ -9939,11 +9956,14 @@ function getIdForClosest(chimp) {
  * chimp arrived.
  */
 var timeLabels = {
-  bottom: '15',
-  middle: '10',
-  top: '5',
-  empty: '0',
-  full: '1'
+  absent: '0',
+  continuing: '1',
+  arriveFirst: '5',
+  arriveSecond: '10',
+  arriveThird: '15',
+  departFirst: '-5',
+  departSecond: '-10',
+  departThird: '-15'
 };
 
 
@@ -10040,6 +10060,9 @@ exports.updateUiForChimp = function(chimp) {
   exports.updateEstrusUiForChimp(chimp);
   exports.updateClosestUiForChimp(chimp);
 
+  // And now make visible as necessary.
+  exports.updateVisiblityForChimp(chimp);
+
 };
 
 
@@ -10050,16 +10073,20 @@ exports.updateIconForChimp = function(chimp) {
   assertIsChimp(chimp);
 
   var imagePaths = {
-    bottom: './img/timeBottom.gif',
-    middle: './img/timeMiddle.gif',
-    top: './img/timeTop.gif',
-    empty: './img/timeEmpty.gif',
-    full: './img/timeEmpty.gif'
+    absent: './img/time_empty.png',
+    continuing: './img/time_continues.png',
+    arriveFirst: './img/time_arriveFirst.png',
+    arriveSecond: './img/time_arriveSecond.png',
+    arriveThird: './img/time_arriveThird.png',
+    departFirst: './img/time_departFirst.png',
+    departSecond: './img/time_departSecond.png',
+    departThird: './img/time_departThird.png'
   };
 
   // Store the arrival/departure time in the UI.
   // For now we're storing it in the td that holds the image.
-  var $time = $('#' + chimp.chimpId + '_time');
+  var timeId = getIdForTime(chimp);
+  var $time = $('#' + timeId);
   $time.attr('__data', chimp.time);
 
   // And now update the image.
@@ -10067,20 +10094,29 @@ exports.updateIconForChimp = function(chimp) {
   var $img = $('#' + id);
 
   switch (chimp.time) {
-    case timeLabels.bottom:
-      $img.src = imagePaths.bottom;
+    case timeLabels.absent:
+      $img.src = imagePaths.absent;
       break;
-    case timeLabels.middle:
-      $img.src = imagePaths.middle;
+    case timeLabels.continuing:
+      $img.src = imagePaths.continuing;
       break;
-    case timeLabels.top:
-      $img.src = imagePaths.top;
+    case timeLabels.arriveFirst:
+      $img.src = imagePaths.arriveFirst;
       break;
-    case timeLabels.empty:
-      $img.src = imagePaths.empty;
+    case timeLabels.arriveSecond:
+      $img.src = imagePaths.arriveSecond;
       break;
-    case timeLabels.full:
-      $img.src = imagePaths.full;
+    case timeLabels.arriveThird:
+      $img.src = imagePaths.arriveThird;
+      break;
+    case timeLabels.departFirst:
+      $img.src = imagePaths.departFirst;
+      break;
+    case timeLabels.departSecond:
+      $img.src = imagePaths.departSecond;
+      break;
+    case timeLabels.departThird:
+      $img.src = imagePaths.departThird;
       break;
     default:
       console.log('unrecognized time label: ' + chimp.time);
@@ -10211,17 +10247,6 @@ exports.updateUiForFollowTime = function() {
 };
 
 
-/**
- * Add a row_id property to each of the chimps in the UI. This will let us use
- * the UI instead of going to the database every single time we need info.
- */
-exports.populateRowIds = function() {
-
-  exports.foo();
-
-};
-
-
 exports.updateUiForEndOfInterval = function() {
 
   // update the UI to show time has expired
@@ -10234,30 +10259,190 @@ exports.updateUiForEndOfInterval = function() {
 
 
 /**
- * Add the listeners to the elements relating to each chimp. 
+ * Add the listeners for the items that update a chimp's records.
  */
-exports.initializeChimpListeners = function() {
+exports.initializeEditListeners = function(control) {
+ 
   // The .time objects are the things we click to demonstrate when a chimp
   // arrives or leaves. This might be the image icons, for instance.
   $('.time').on('click', function() {
-    var time = $(this).prop('id');
+    var valueFromUi = $(this).prop('id');
+
+    var valueForDb;
+    switch (valueFromUi) {
+      case timeLabels.absent:
+        valueForDb = timeLabels.absent;
+        break;
+      case timeLabels.continuing:
+        valueForDb = timeLabels.continuing;
+        break;
+      case timeLabels.arriveFirst:
+        valueForDb = timeLabels.arriveFirst;
+        break;
+      case timeLabels.arriveSecond:
+        valueForDb = timeLabels.arriveSecond;
+        break;
+      case timeLabels.arriveThird:
+        valueForDb = timeLabels.arriveThird;
+        break;
+      case timeLabels.departFirst:
+        valueForDb = timeLabels.departFirst;
+        break;
+      case timeLabels.departSecond:
+        valueForDb = timeLabels.departSecond;
+        break;
+      case timeLabels.departThird:
+        valueForDb = timeLabels.departThird;
+        break;
+      default:
+        console.log('unrecognized time from ui: ' + valueFromUi);
+        window.alert('unrecognized time from ui: ' + valueFromUi);
+    }
 
     var chimp = exports.getSelectedChimp();
-
-    // The id is the value we want to persist in the database.
-    chimp.time = time;
+    assertFoundChimp(chimp);
+    chimp.time = valueForDb;
 
     exports.updateUiForChimp(chimp);
-    exports.writeRowForChimp(chimp);
+    db.writeRowForChimp(control, chimp, true);
+
+    exports.showTimeIndicatorsToEdit(false);
   });
 
+  // Certainty
+  $('input[name=certain]:radio').on('change', function() {
+    var value = $(this).val();
+
+    var valueForDb;
+    switch (value) {
+      case certaintyLabels.notApplicable:
+        valueForDb = certaintyLabels.notApplicable;
+        break;
+      case certaintyLabels.certain:
+        valueForDb = certaintyLabels.certain;
+        break;
+      case certaintyLabels.uncertain:
+        valueForDb = certaintyLabels.uncertain;
+        break;
+      default:
+        console.log('unrecognized chimp certainty value from ui: ' + value);
+        window.alert('unrecognized chimp certainty value from ui: ' + value);
+        return;
+    }
+
+    var chimp = exports.getSelectedChimp();
+    assertFoundChimp(chimp);
+    chimp.certainty = valueForDb;
+
+    exports.updateUiForChimp(chimp);
+    db.writeRowForChimp(control, chimp, true);
+
+    exports.showCertaintyToEdit(false);
+  });
+
+  // Within five meters
+  $('input[name=distance]:radio').on('change', function() {
+    var valueFromUi = $(this).val();
+
+    var valueForDb;
+    switch (valueFromUi) {
+      case withinFiveLabels.no:
+        valueForDb = withinFiveLabels.no;
+        break;
+      case withinFiveLabels.yes:
+        valueForDb = withinFiveLabels.yes;
+        break;
+      default:
+        console.log('unrecognized within five value from ui: ' + valueFromUi);
+        window.alert('unrecognized within five value from ui: ' + valueFromUi);
+        return;
+    }
+  
+    var chimp = exports.getSelectedChimp();
+    assertFoundChimp(chimp);
+    chimp.withinFive = valueForDb;
+
+    exports.updateUiForChimp(chimp);
+    db.writeRowForChimp(control, chimp, true);
+
+    exports.showWithinFiveToEdit(false);
+  });
+
+  // Estrus
+  $('input[name=sex_state]:radio').on('change', function() {
+    var valueFromUi = $(this).val();
+
+    var valueForDb;
+    switch (valueFromUi) {
+      case estrusLabels.a:
+        valueForDb = estrusLabels.a;
+        break;
+      case estrusLabels.b:
+        valueForDb = estrusLabels.b;
+        break;
+      case estrusLabels.c:
+        valueForDb = estrusLabels.c;
+        break;
+      case estrusLabels.d:
+        valueForDb = estrusLabels.d;
+        break;
+      default:
+        console.log('unrecognized estrus value from ui: ' + valueFromUi);
+        window.alert('unrecognized estrus value from ui: ' + valueFromUi);
+    }
+
+    var chimp = exports.getSelectedChimp();
+    assertFoundChimp(chimp);
+    chimp.estrus = valueForDb;
+
+    exports.updateUiForChimp(chimp);
+    db.writeRowForChimp(control, chimp, true);
+
+    exports.showEstrusToEdit(false);
+  });
+
+  // Closest to focal
+  $('input[name=close]:radio').on('change', function() {
+    var valueFromUi = $(this).val();
+
+    var valueForDb;
+    switch (valueFromUi) {
+      case closestLabels.no:
+        valueForDb = closestLabels.no;
+        break;
+      case closestLabels.yes:
+        valueForDb = closestLabels.yes;
+        break;
+      default:
+        console.log('unrecognized closest value from ui: ' + valueFromUi);
+        window.alert('unrecognized closest value from ui: ' + valueFromUi);
+    }
+
+    var chimp = exports.getSelectedChimp();
+    assertFoundChimp(chimp);
+    chimp.closest = valueForDb;
+
+    exports.updateUiForChimp(chimp);
+    db.writeRowForChimp(control, chimp, true);
+
+    exports.showClosestToEdit(false);
+  });
+
+
+};
+
+
+/**
+ * Add the listeners to the elements relating to each chimp. 
+ */
+exports.initializeChimpListeners = function() {
 
   $('.certainty').on('click', function() {
     // Mark this chimp as selected.
     var chimp = exports.getChimpFromElement($(this));
     exports.showChimpIsSelected(chimp);
     // Make the certainty editable.
-    exports.showCertaintyEditable(true, chimp);
+    exports.showCertaintyToEdit(true, chimp);
   });
 
 
@@ -10266,25 +10451,25 @@ exports.initializeChimpListeners = function() {
     var chimp = exports.getChimpFromElement($(this));
     exports.showChimpIsSelected(chimp);
     // Make the within five meters as editable.
-    exports.showWithinFiveEditable(true, chimp);
+    exports.showWithinFiveToEdit(true, chimp);
   });
 
 
   $('.sexual_state').on('click', function() {
     // Mark this chimp as selected
-    var chimp = exports.getChimpIdFromElement($(this));
+    var chimp = exports.getChimpFromElement($(this));
     exports.showChimpIsSelected(chimp);
     // Make the estrus state editable.
-    exports.showEstrusEditable(true, chimp);
+    exports.showEstrusToEdit(true, chimp);
   });
 
   
   $('.closeness').on('click', function() {
     // mark this chimp as selected
-    var chimp = exports.getChimpIdFromElement($(this));
+    var chimp = exports.getChimpFromElement($(this));
     exports.showChimpIsSelected(chimp);
     // Make the closeness editable
-    exports.showCloseEditable(true, chimp);
+    exports.showClosestToEdit(true, chimp);
   });
 
 };
@@ -10323,7 +10508,7 @@ exports.initializeListeners = function(control) {
 
     exports.showChimpIsSelected(chimp);
 
-    exports.showTimeIndicators(true, chimp);
+    exports.showTimeIndicatorsToEdit(true, chimp);
 
     // show that chimp has been selected
 
@@ -10332,23 +10517,27 @@ exports.initializeListeners = function(control) {
   // Add listeners to the elements important for each chimp
   exports.initializeChimpListeners();
 
+  // Add listeners for the editing items
+  exports.initializeEditListeners(control);
+
 };
 
 
 /**
  * Show the time (arrival/departure) indicators in the save div.
  */
-exports.showTimeIndicators = function(show, chimp) {
+exports.showTimeIndicatorsToEdit = function(show, chimp) {
   var $timeIndicators = $('#time');
 
   if (show) {
-    $timeIndicators.removeClass('hidden');
+    $timeIndicators.removeClass('novisibility');
   } else {
-    $timeIndicators.addClass('hidden');
+    $timeIndicators.addClass('novisibility');
+    return;
   }
 
   // TODO: select the correct image as selected
-  chimp();
+  console.log('need to indicate the correct time in the save div: ' + chimp);
 
 };
 
@@ -10357,66 +10546,99 @@ exports.showTimeIndicators = function(show, chimp) {
  * Show the certainty as editable for the given chimp. if show is falsey, hide
  * the ui instead.
  */
-exports.showCertaintyEditable = function(show, chimp) {
+exports.showCertaintyToEdit = function(show, chimp) {
   var $certaintyIndicator = $('#certainty');
 
   if (show) {
-    $certaintyIndicator.removeClass('hidden');
+    $certaintyIndicator.removeClass('novisibility');
   } else {
-    $certaintyIndicator.addClass('hidden');
+    $certaintyIndicator.addClass('novisibility');
+    return;
   }
 
-  // TODO: check the correct certainty
-  chimp();
-  throw new Error('certainty editable not supported');
+  // Get all the certainty radio buttons, then filter for the one with the
+  // matching value and set it to checked.
+  var $allCertainty = $('input[name=certain]:radio');
+  var $targetButton = $allCertainty.filter('[value=' + chimp.certainty + ']');
+
+  if ($targetButton.length === 0) {
+    console.log('Did not find radio certainty button for chimp: ' + chimp);
+    return;
+  }
+  
+  $targetButton.prop('checked', true);
 };
 
 
-exports.showWithinFiveEditable = function(show, chimp) {
+exports.showWithinFiveToEdit = function(show, chimp) {
   var $withinFiveIndicator = $('#distance');
 
   if (show) {
-    $withinFiveIndicator.removeClass('hidden');
+    $withinFiveIndicator.removeClass('novisibility');
   } else {
-    $withinFiveIndicator.addClass('hidden');
+    $withinFiveIndicator.addClass('novisibility');
+    return;
   }
-  show();
-  chimp();
-  // show the ui (hide of show === false);
+
   // select the values for the chimp.
-  throw new Error('withi nfive editable not supported');
+  var $allWithinFive = $('input[name=distance]:radio');
+  var $targetButton = $allWithinFive.filter(
+      '[value=' + chimp.withinFive + ']'
+  );
+
+  if ($targetButton.length === 0) {
+    console.log('Did not find radio w/in 5 for chimp: ' + chimp);
+  }
+
+  $targetButton.prop('checked', true);
 };
 
 
-exports.showEstrusEditable = function(show, chimp) {
+exports.showEstrusToEdit = function(show, chimp) {
   var $estrusIndicator = $('#state');
 
   if (show) {
-    $estrusIndicator.removeClass('hidden');
+    $estrusIndicator.removeClass('novisibility');
   } else {
-    $estrusIndicator.addClass('hidden');
+    $estrusIndicator.addClass('novisibility');
+    return;
   }
-  show();
-  chimp();
-  // show the ui for estrus editable (hide if !show)
-  // mark the current selected values for the chimp
-  throw new Error('estrus editable not supported');
+
+  // select the values for the chimp.
+  var $allEstrus = $('input[name=sex_state]:radio');
+  var $targetButton = $allEstrus.filter(
+      '[value=' + chimp.estrus + ']'
+  );
+
+  if ($targetButton.length === 0) {
+    console.log('Did not find radio estrus for chimp: ' + chimp);
+  }
+
+  $targetButton.prop('checked', true);
 };
 
 
-exports.showCloseEditable = function(show, chimp) {
+exports.showClosestToEdit = function(show, chimp) {
   var $closestIndicator = $('#close_focal');
 
   if (show) {
-    $closestIndicator.removeClass('hidden');
+    $closestIndicator.removeClass('novisibility');
   } else {
-    $closestIndicator.addClass('hidden');
+    $closestIndicator.addClass('novisibility');
+    return;
   }
-  show();
-  chimp();
-  // show the ui for estrus editable (hide if !show)
-  // mark the current selected values for the chimp
-  throw new Error('close editable not supported');
+
+  // select the values for the chimp.
+  var $allClosest = $('input[name=close]:radio');
+  var $targetButton = $allClosest.filter(
+      '[value=' + chimp.closest + ']'
+  );
+
+  if ($targetButton.length === 0) {
+    console.log('Did not find radio closest for chimp: ' + chimp);
+  }
+
+  $targetButton.prop('checked', true);
 };
 
 
@@ -10466,12 +10688,14 @@ exports.getSelectedChimp = function() {
  * Show that the current chimp has been selected.
  */
 exports.showChimpIsSelected = function(chimp) {
-
+  // first unselect all other chimps, as we can only ever have one selected.
+  $('*').removeClass('selected-chimp');
+  
+  // Then select the passed in chimp.
   // The chimp as represented as elements for the user.
   var $chimpUser = $('#' + chimp.chimpId);
 
   $chimpUser.addClass('selected-chimp');
-
 };
 
 
@@ -10494,6 +10718,12 @@ exports.showLoadingScreen = function(show) {
  * query the database for a chimp, making it a fast call.
  */
 exports.getChimpFromUi = function(chimpId) {
+
+  if (!chimpId) {
+    console.log('chimp id not defined: ' + chimpId);
+    window.alert('chimp id not defined: ' + chimpId);
+    throw new Error('chimp id not defind: ' + chimpId);
+  }
 
   var $time = $('#' + chimpId + '_time');
   var $certainty = $('#' + chimpId + '_cer');
@@ -10524,34 +10754,58 @@ exports.getChimpFromUi = function(chimpId) {
 
 
 /**
+ * Make chimp-specific items visible as necessary. E.g. if the chimp is
+ * present, it should be possible to edit the certainty, etc. To be editble
+ * they have to be visible.
+ */
+exports.updateVisiblityForChimp = function(chimp) {
+  var timeId = getIdForTime(chimp);
+  var $time = $('#' + timeId);
+
+  var withinFiveId = getIdForWithinFiveMeters(chimp);
+  var $withinFive = $('#' + withinFiveId);
+
+  var certaintyId = getIdForCertainty(chimp);
+  var $certainty = $('#' + certaintyId);
+
+  var estrusId = getIdForEstrus(chimp);
+  var $estrus = $('#' + estrusId);
+
+  var closestId = getIdForClosest(chimp);
+  var $closest = $('#' + closestId);
+
+  // We want to make things editable in every instance except absence.
+  if (chimp.time !== timeLabels.absent) {
+    $time.removeClass('novisibility');
+    $withinFive.removeClass('novisibility');
+    $certainty.removeClass('novisibility');
+    $estrus.removeClass('novisibility');
+    $closest.removeClass('novisibility');
+  } else {
+    $time.addClass('novisibility');
+    $withinFive.addClass('novisibility');
+    $certainty.addClass('novisibility');
+    $estrus.addClass('novisibility');
+    $closest.addClass('novisibility');
+  }
+};
+
+
+/**
  * Updates the UI after loading a page.
  * 
  * This used to be called 'display', in case you're looking for that method.
  */
 exports.initializeUi = function(control) {
 
-  // We want to show the detailed UI indicators (eg estrus, whether or not they
-  // are within five meters, etc) only for the chimps that are present. To do
-  // this we're going to start by hiding all the UI and making it visible only
-  // when wea re sure the chimp is present (either by receiving manual input
-  // from a user or by querying the database and restoring a previous
-  // timepoint.
-  // $('.time_point').css('visibility', 'hidden');
-  // $('.5-meter').css ('visibility', 'hidden');
-  // $('.certainty').css ('visibility', 'hidden');
-  // $('.sexual_state').css ('visibility', 'hidden');
-  // $('.closeness').css ('visibility', 'hidden');
+  // Hide the editing UI to start with.
+  $('#time').addClass('novisibility');
+  $('#certainty').addClass('novisibility');
+  $('#distance').addClass('novisibility');
+  $('#state').addClass('novisibility');
+  $('#close_focal').addClass('novisibility');
 
-  $('#time').addClass('hidden');
-  $('#certainty').addClass('hidden');
-  $('#distance').addClass('hidden');
-  $('#state').addClass('hidden');
-  $('#close_focal').addClass('hidden');
-
-  //save_bottom_div
-  $('#save_bottom_div').css ('visibility', 'hidden');
-
-  exports.initializeListeners();
+  exports.initializeListeners(control);
 
   // And now we need to deal with the actual chimps themselves. There are two
   // possibilities here:

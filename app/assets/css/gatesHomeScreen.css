@@ -144,7 +144,7 @@ body {
     background-position: center;
 }
 
-.hidden {
+.novisibility {
   visibility: hidden;
 }
 
