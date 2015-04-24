@@ -9,7 +9,7 @@ var models = require('./jgiModels');
 var db = require('./jgiDb');
 var $ = require('jquery');
 var util = require('./jgiUtil');
-
+//var chimpid = "";
 
 function assertIsChimp(chimp) {
   if (chimp.constructor.name !== 'Chimp') {
@@ -384,7 +384,60 @@ exports.updateUiForEndOfInterval = function() {
 
 };
 
-
+/**
+ * update the icon for selected chimp
+ */
+exports.updateIconForSelectedChimp = function(chimp, chimpid, timeid) {
+  var imagePaths = {
+  absent: './img/time_empty.png',
+  continuing: './img/time_continues.png',
+  arriveFirst: './img/time_arriveFirst.png',
+  arriveSecond: './img/time_arriveSecond.png',
+  arriveThird: './img/time_arriveThird.png',
+  departFirst: './img/time_departFirst.png',
+  departSecond: './img/time_departSecond.png',
+  departThird: './img/time_departThird.png'
+  };
+  var imageId = chimpid + "_img";  
+  var $img = $('#' + imageId);
+  switch (chimp.time) {
+    case timeLabels.absent:
+      document.getElementById(chimpid+"_img").src = imagePaths.absent;
+      //$img.src = imagePaths.absent;
+      break;
+    case timeLabels.continuing:
+      console.log("I am here " + imagePaths.continuing);
+      document.getElementById(imageId).src = imagePaths.continuing;
+      //$img.src = imagePaths.continuing;
+      break;
+    case timeLabels.arriveFirst:
+      document.getElementById(imageId).src = imagePaths.arriveFirst;
+      //$img.src = imagePaths.arriveFirst;
+      break;
+    case timeLabels.arriveSecond:
+      document.getElementById(imageId).src = imagePaths.arriveSecond;
+      //$img.src = imagePaths.arriveSecond;
+      break;
+    case timeLabels.arriveThird:
+      document.getElementById(imageId).src = imagePaths.arriveThird;
+      //$img.src = imagePaths.arriveThird;
+      break;
+    case timeLabels.departFirst:
+      document.getElementById(imageId).src = imagePaths.departFirst;
+      //$img.src = imagePaths.departFirst;
+      break;
+    case timeLabels.departSecond:
+      document.getElementById(imageId).src = imagePaths.departSecond;
+      //$img.src = imagePaths.departSecond;
+      break;
+    case timeLabels.departThird:
+      document.getElementById(imageId).src = imagePaths.departThird;
+      //$img.src = imagePaths.departThird;
+      break;
+    default:
+      console.log('unrecognized time label: ' + chimp.time);
+  }
+};
 /**
  * Add the listeners for the items that update a chimp's records.
  */
@@ -394,7 +447,6 @@ exports.initializeEditListeners = function(control) {
   // arrives or leaves. This might be the image icons, for instance.
   $('.time').on('click', function() {
     var valueFromUi = $(this).prop('id');
-
     var valueForDb;
     switch (valueFromUi) {
       case timeLabels.absent:
@@ -427,13 +479,14 @@ exports.initializeEditListeners = function(control) {
     }
 
     var chimp = exports.getSelectedChimp();
+    var chimpid = getIdForTime(chimp);
     assertFoundChimp(chimp);
     chimp.time = valueForDb;
-
     exports.updateUiForChimp(chimp);
     db.writeRowForChimp(control, chimp, true);
 
     exports.showTimeIndicatorsToEdit(false);
+    exports.updateIconForSelectedChimp(chimp, chimpid, valueFromUi);
   });
 
   // Certainty
@@ -623,9 +676,10 @@ exports.initializeListeners = function(control) {
     window.location.href = url;
   });
 
-
+ 
   $('.chimp').on('click', function() {
     var chimpId = $(this).prop('id');
+    //chimpid = chimpId;
     var chimp = exports.getChimpFromUi(chimpId);
     if (!chimp) {
       console.log(
@@ -924,6 +978,8 @@ exports.updateVisiblityForChimp = function(chimp) {
  * This used to be called 'display', in case you're looking for that method.
  */
 exports.initializeUi = function(control) {
+
+  //window.alert('hello from script');
 
   // Hide the editing UI to start with.
   $('#time').addClass('novisibility');

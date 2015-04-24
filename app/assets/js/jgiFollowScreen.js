@@ -124,16 +124,21 @@ function display() {
         console.log("closest_to_focal " + closest_to_focal);
         if (time != null || time != undefined) {
             if (time == "15") {
-                document.getElementById(chimpId+"_time_img").src = "./img/timeBottom.gif";
+                document.getElementById(chimpId+"_img").src = "./img/time_arriveThird.png";
             }else if(time == "10") {
-                document.getElementById(chimpId+"_time_img").src = "./img/timeMiddle.gif";
+                document.getElementById(chimpId+"_img").src = "./img/time_arriveSecond.png";
             } else if (time == "5") {
-                document.getElementById(chimpId+"_time_img").src = "./img/timeTop.gif";
+                document.getElementById(chimpId+"_img").src = "./img/time_arriveFirst.png";
             } else if (time == "0") {
-                document.getElementById(chimpId+"_time_img").src = "./img/timeEmpty.gif";
+                document.getElementById(chimpId+"_img").src = "./img/time_empty.png";
             } else if (time == "1") {
-                document.getElementById(chimpId+"_time_img").src = "./img/timeFull.gif";
-
+                document.getElementById(chimpId+"_img").src = "./img/time_continues.png";
+            } else if (time == "-5") {
+                 document.getElementById(chimpId+"_img").src = "./img/time_departFirst.png";
+            } else if (time == "-10") {
+                 document.getElementById(chimpId+"_img").src = "./img/time_departSecond.png";
+            } else if (time == "-15") {
+                 document.getElementById(chimpId+"_img").src = "./img/time_departThird.png";
             }
         }
         if (certain != null || certain != undefined) {
