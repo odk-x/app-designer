@@ -988,6 +988,8 @@ exports.initializeUi = function(control) {
   $('#state').addClass('novisibility');
   $('#close_focal').addClass('novisibility');
 
+  exports.updateUiForFollowTime();
+
   exports.initializeListeners(control);
 
   // And now we need to deal with the actual chimps themselves. There are two
