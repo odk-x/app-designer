@@ -31,6 +31,32 @@ exports.Follow = function Follow(
 
 
 /**
+ * Represents an interval in a follow. This is essentially a subset of the
+ * information pertaining to a particular chimp during the follow. A
+ * FollowInterval might represent the time between 7:15 and 7:30 of a
+ * particular longer Follow, for instance.
+ *
+ * In an effort to make this even clearer, this object has been fabricated in
+ * order to allow someone to view a list of the timepoints they've seen during
+ * their Follow in order to quickly jump between them or resume where they left
+ * off in event of an app crash.
+ */
+exports.FollowInterval = function FollowInterval(
+    date,
+    beginTime,
+    focalId
+) {
+  if (!(this instanceof FollowInterval)) {
+    throw new Error('must use new');
+  }
+
+  this.date = date;
+  this.beginTime = beginTime;
+  this.focalId = focalId;
+};
+
+
+/**
  * The observation of a chimp in the a particular timepoint.
  */
 exports.Chimp = function Chimp(

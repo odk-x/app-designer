@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<!--Chunked List View-->
+    <head>
+        <link href="css/list.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/data.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="list"></div>
+        </div>
+        <script type="text/javascript" src="js/followIntervalListBundle.js"></script>
+        <script>
+            var followIntervalList = require('jgiFollowIntervalList');
+            followIntervalList.initializeUi(window.control);
+        </script>
+    </body>
+</html>

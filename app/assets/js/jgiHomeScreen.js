@@ -7,8 +7,7 @@ function display() {
     });
 
     $('#existing-follow-button').on('click', function() {
-        //alert('Not yet implemented');
-        control.launchHTML('assets/followScreen.html');
+        control.launchHTML('assets/followList.html');
     });
 
     // Set up the background image.
