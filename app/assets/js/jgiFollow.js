@@ -1000,6 +1000,13 @@ exports.handleFirstTime = function(
     chimps
   );
 
+  // update chimp for previous timepoint
+  var previousTime = util.decrementTime(followStartTime); 
+  var table = exports.getTableDataforTimePoint(control, date, previousTime, focalChimpId);
+  var prevChimps = exports.convertTableDataToChimps(table); 
+
+  chimps = exports.updateChimpsForPreviousTimepoint(prevChimps, chimps); 
+
   // 2) write the chimps
   chimps.forEach(function(chimp) {
     db.writeRowForChimp(control, chimp, false);

@@ -64,7 +64,8 @@ function display() {
     var followTime = util.getQueryParameter(util.timeKey);
 
     var followDate = util.getQueryParameter(util.dateKey);
-    var focalChimpId = util.getQueryParameter(util.focalChimpKey);
+    var focalChimpId = util.getQueryParameter(util.focalChimpKey);  
+
     /**
      * Update the row for the given chimp. As we start persisting more data
      * this function should grow.
@@ -267,7 +268,7 @@ function display() {
         var result = $('.female-chimp');
         return result;
     };
-
+e
     /* It updates the ui while page is loading. If this new time point, then it 
     * updates the ui with default values, otherwise it retrieves the data from database and
     * updates the ui according to that. It also writes a each row for each chimp for
@@ -401,7 +402,7 @@ function display() {
         
     });
 
-    var getRowId = function(chimId) {
+    var getRowId = function(chimpId) {
     // returns rowId
         var chimpList = util.getTableDataForTimePoint(
         followDate, followTime,

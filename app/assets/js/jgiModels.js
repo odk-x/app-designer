@@ -66,6 +66,21 @@ exports.Chimp = function Chimp(
 
 };
 
+/**
+ * The observation of Food in the a particular timepoint.
+ */
+exports.Food = function Food(
+    rowId, 
+    date, 
+    focalChimpId,
+    beginEating,
+    foodEaten,
+    foodPartEaten,
+
+) {
+
+}
+
 
 /**
  * Create a chimp with the default values. This is ok to represent a chimp that
@@ -108,5 +123,7 @@ exports.createNewChimp = function(
   return result;
 
 };
+
+
 
 

@@ -10920,4 +10920,4 @@ exports.getChimpIdsFromUi = function() {
 
 };
 
-},{"./jgiDb":1,"./jgiModels":2,"./jgiUrls":4,"./jgiUtil":5,"jquery":6}]},{},[1,2,4]);
+},{"./jgiDb":1,"./jgiModels":2,"./jgiUrls":4,"./jgiUtil":5,"jquery":6}]},{},[]);
