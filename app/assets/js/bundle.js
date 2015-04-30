@@ -10257,14 +10257,15 @@ exports.updateIconForSelectedChimp = function(chimp, chimpid, timeid) {
   departThird: './img/time_departThird.png'
   };
   var imageId = chimpid + "_img";  
-  var $img = $('#' + imageId);
+  //var $img = $('#' + imageId);
+  //imageId.setAttribute("id", timeid);
+
   switch (chimp.time) {
     case timeLabels.absent:
-      document.getElementById(chimpid+"_img").src = imagePaths.absent;
+      document.getElementById(imageId).src = imagePaths.absent;
       //$img.src = imagePaths.absent;
       break;
     case timeLabels.continuing:
-      console.log("I am here " + imagePaths.continuing);
       document.getElementById(imageId).src = imagePaths.continuing;
       //$img.src = imagePaths.continuing;
       break;
@@ -10343,7 +10344,7 @@ exports.initializeEditListeners = function(control) {
     exports.updateUiForChimp(chimp);
     db.writeRowForChimp(control, chimp, true);
 
-    exports.showTimeIndicatorsToEdit(false);
+    exports.showTimeIndicatorsToEdit(false, chimp);  // added chimp
     exports.updateIconForSelectedChimp(chimp, chimpid, valueFromUi);
   });
 
@@ -10566,11 +10567,24 @@ exports.initializeListeners = function(control) {
  * Show the time (arrival/departure) indicators in the save div.
  */
 exports.showTimeIndicatorsToEdit = function(show, chimp) {
-  var $timeIndicators = $('#time');
-
+  var $timeIndicators = null; 
+  var chimpid =getIdForTimeImage(chimp);
+  var img_source = document.getElementById(chimpid).src;
+  var array_splitting_with_slash = img_source.split("/");
+  var current_img = array_splitting_with_slash[array_splitting_with_slash.length - 1];
+  
+  
+  if (current_img == "time_empty.png") {
+    $timeIndicators = $('.arrival');
+  } else {
+    $timeIndicators = $('.depart');
+  }
   if (show) {
     $timeIndicators.removeClass('novisibility');
-  } else {
+  } 
+  
+  
+  if (!show) {
     $timeIndicators.addClass('novisibility');
     return;
   }
@@ -10840,7 +10854,9 @@ exports.initializeUi = function(control) {
   //window.alert('hello from script');
 
   // Hide the editing UI to start with.
-  $('#time').addClass('novisibility');
+  //$('#time').addClass('novisibility');
+  $('.arrival').addClass('novisibility');
+  $('.depart').addClass('novisibility');
   $('#certainty').addClass('novisibility');
   $('#distance').addClass('novisibility');
   $('#state').addClass('novisibility');

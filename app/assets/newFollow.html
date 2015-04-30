@@ -71,10 +71,10 @@
   </style>        
     </head>
     <style>
-        select:First{
+        span{
            color: gray !important;  
         }
-        #FOL_B_AnimID{
+        #FOL_B_AnimID, #FOL_begin_time{
             width: 36em !important;
             height: 2.5em !important;
             background-color: white; 
@@ -90,7 +90,7 @@
         <input id="FOL_date" type="text" placeholder="Date of Follow">
         <!--<input id="FOL_B_AnimID" type="text" placeholder="ID of Focal Chimp">-->
         <select id = "FOL_B_AnimID" class="text">
-            <option>ID of Focal Chimp</option>
+            <option class="first"><span>ID of Focal Chimp</span></option>
             <option><a id="fd" >FD</a></option>
             <option><a id="kp" >KP</a></option>
             <option><a id="wl" >WL</a></option>
@@ -138,8 +138,11 @@
             <option><a id="dia" >DIA</a></option>
             <option><a id="van" >VAN</a></option>  
         </select>
+        <select id="FOL_begin_time" type="text">
+           <option class="first"><span style="color: grey;">Begin Time (hh:mm)</span></option>
+        </select>
         <input id="FOL_CL_community_id" type="text" placeholder="Community ID">
-        <input id="FOL_begin_time" type="text" placeholder="Begin Time (hh:mm)">
+        <!--<input id="FOL_begin_time" type="text" placeholder="Begin Time (hh:mm)">-->
         <input id="FOL_am_observer_1" type="text" placeholder="Name of Researcher">
     </form>
 
@@ -161,7 +164,7 @@
                 $( "#FOL_date" ).datepicker();
             });
             // for 15 minutes time interval
-            $(document).ready(function(){
+           /* $(document).ready(function(){
                 $('#FOL_begin_time').timepicker({
                 timeFormat: 'HH:mm',
                 minTime: '0:00:00',
@@ -169,7 +172,31 @@
                 maxMinutes: 30,
                 interval: 15 // 15 minutes
                 });
-            });
+            });*/
+            var getSelectForTime = document.getElementById("FOL_begin_time");
+            var min = 0;
+            var hour = 0;
+
+            for (var i = 0; i < 97; i++) {
+              var option = document.createElement("option");
+              if (min == 60) {
+                min = 0;
+                hour += 1;
+              }
+              var strMin = min.toString();
+              var strHour = hour.toString();
+              if (min == 0) {
+                strMin = strMin + "0";
+              }
+              if (hour < 10) {
+                strHour = "0" + strHour;
+              }
+              var text = strHour + ":" + strMin;
+              option.text = text;
+              getSelectForTime.add(option);
+              min += 15;
+            }
+            
             $(display());
         </script>
     </body>  
