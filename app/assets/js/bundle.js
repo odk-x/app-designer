@@ -24,6 +24,50 @@ exports.createWhereClause = function createWhereClause(columns) {
   return result;
 };
 
+
+/**
+ * Get an array of FollowInterval objects for the Follow specified by the date,
+ * beginTime, and focalId.
+ */
+exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
+    control,
+    date,
+    beginTime,
+    focalId
+) {
+  // We don't have a straight forward way of getting FollowInterval objects out
+  // of the database, as we've had to create the notion for our own purposes.
+  // Since a FollowInterval is a subset of the information in a Chimp, we're
+  // going to just query for a Chimp known to be present that day (which thus
+  // might break as we try to generalize this function), and then pull the
+  // necessary data out of the Chimp.
+  var table = tables.chimpObservation;
+  var cols = table.columns;
+
+  var knownChimpId = 'sam';
+
+  var whereClause = exports.createWhereClause(
+    [
+      cols.date,
+      cols.focalId,
+      cols.followStartTime,
+      cols.chimpId
+    ]
+  );
+
+  var selectionArgs = [date, focalId, beginTime, knownChimpId];
+
+  var tableData = control.query(
+      table.tableId,
+      whereClause,
+      selectionArgs
+  );
+
+  var result = exports.convertTableDataToFollowIntervals(tableData);
+  return result;
+};
+
+
 /**
  * Get a query for all the data at the given date and time for the specified
  * focal chimp. Together this specifies a unique time point in a follow.
@@ -52,6 +96,29 @@ exports.getTableDataForTimePoint = function(
       whereClause,
       selectionArgs
   );
+
+  return result;
+};
+
+
+/**
+ * Convert a TableData object that has queried the chimpObservation table to an
+ * array of FollowInterval objects.
+ */
+exports.convertTableDataToFollowIntervals = function(data) {
+  var result = [];
+
+  var cols = tables.chimpObservation.columns;
+
+  for (var i = 0; i < data.getCount(); i++) {
+    var date = data.getData(i, cols.date);
+    var beginTime = data.getData(i, cols.followStartTime);
+    var focalId = data.getData(i, cols.focalId);
+
+    var followInterval = new models.FollowInterval(date, beginTime, focalId);
+
+    result.push(followInterval);
+  }
 
   return result;
 };
@@ -101,6 +168,37 @@ exports.convertTableDataToChimps = function(data) {
   return result;
 
 };
+
+
+/**
+ * Convert a TableData object to a list of Follow objects.
+ */
+exports.convertTableDataToFollows = function convertTableDataToFollows(data) {
+  var result = [];
+
+  var cols = tables.follow.columns;
+
+  for (var i = 0; i < data.getCount(); i++) {
+    var date = data.getData(i, cols.date);
+    var beginTime = data.getData(i, cols.beginTime);
+    var focalId = data.getData(i, cols.focalId);
+    var communityId = data.getData(i, cols.communityId);
+    var researcher = data.getData(i, cols.researcher);
+
+    var follow = new models.Follow(
+        date,
+        beginTime,
+        focalId,
+        communityId,
+        researcher
+    );
+
+    result.push(follow);
+  }
+
+  return result;
+};
+
 
 exports.getFoodDataForTimePoint = function(date, timeBegin, focalChimpId) {
 
@@ -223,6 +321,22 @@ exports.getUpdateAboutAllChimps = function(date, time) {
 
 };
 
+
+/**
+ * Return an array of all the Follow objects in the database.
+ *
+ * Note that this returns actual Follow objects, NOT a TableData object
+ * containing all follows.
+ */
+exports.getAllFollows = function getAllFollows(control) {
+  var table = tables.follow;
+
+  var tableData = control.query(table.tableId, null, null);
+
+  var result = exports.convertTableDataToFollows(tableData);
+  return result;
+};
+
 /**
  * Write a follow object (as defined in the models module).
  */
@@ -315,6 +429,32 @@ exports.Follow = function Follow(
   this.communityId = communityId;
   this.researcher = researcher;
 
+};
+
+
+/**
+ * Represents an interval in a follow. This is essentially a subset of the
+ * information pertaining to a particular chimp during the follow. A
+ * FollowInterval might represent the time between 7:15 and 7:30 of a
+ * particular longer Follow, for instance.
+ *
+ * In an effort to make this even clearer, this object has been fabricated in
+ * order to allow someone to view a list of the timepoints they've seen during
+ * their Follow in order to quickly jump between them or resume where they left
+ * off in event of an app crash.
+ */
+exports.FollowInterval = function FollowInterval(
+    date,
+    beginTime,
+    focalId
+) {
+  if (!(this instanceof FollowInterval)) {
+    throw new Error('must use new');
+  }
+
+  this.date = date;
+  this.beginTime = beginTime;
+  this.focalId = focalId;
 };
 
 
@@ -9957,7 +10097,7 @@ var timeLabels = {
  * labels we use internally, not the ones shown to the user.
  */
 var certaintyLabels = {
-  notApplicable: '0',
+  notApplicable: ' ',
   certain: '1',
   uncertain: '2'
 };
@@ -9967,9 +10107,9 @@ var certaintyLabels = {
  * The labels for certainty that are shown to a user.
  */
 var certaintyLabelsUser = {
-  notApplicable: '0',
-  certain: 'C',
-  uncertain: 'U'
+  notApplicable: ' ',
+  certain: '✓',
+  uncertain: '•'
 };
 
 
@@ -9986,8 +10126,8 @@ var withinFiveLabels = {
  * The labels we show users if for whether or not a chimp is within 5 meters.
  */
 var withinFiveLabelsUser = {
-  no: 'N',
-  yes: 'Y'
+  no: 'X',
+  yes: '✓'
 };
 
 
@@ -10845,6 +10985,8 @@ exports.initializeUi = function(control) {
   $('#distance').addClass('novisibility');
   $('#state').addClass('novisibility');
   $('#close_focal').addClass('novisibility');
+
+  exports.updateUiForFollowTime();
 
   exports.initializeListeners(control);
 

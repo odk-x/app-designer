@@ -99,7 +99,7 @@ var timeLabels = {
  * labels we use internally, not the ones shown to the user.
  */
 var certaintyLabels = {
-  notApplicable: '0',
+  notApplicable: ' ',
   certain: '1',
   uncertain: '2'
 };
@@ -109,9 +109,9 @@ var certaintyLabels = {
  * The labels for certainty that are shown to a user.
  */
 var certaintyLabelsUser = {
-  notApplicable: '0',
-  certain: 'C',
-  uncertain: 'U'
+  notApplicable: ' ',
+  certain: '✓',
+  uncertain: '•'
 };
 
 
@@ -128,8 +128,8 @@ var withinFiveLabels = {
  * The labels we show users if for whether or not a chimp is within 5 meters.
  */
 var withinFiveLabelsUser = {
-  no: 'N',
-  yes: 'Y'
+  no: 'X',
+  yes: '✓'
 };
 
 
