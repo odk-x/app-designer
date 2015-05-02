@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/jgi-follow.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/ratchet.js"></script>
+        <script type="text/javascript" src="../framework/tables/js/control.js"></script>
+        <script type="text/javascript" src="js/jgiNewFollow.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <script src="js/jquery-1.10.2.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <link rel="stylesheet" href="css/jquery.timepicker.css">
+        <script src="js/jquery.timepicker.js"></script>
+
+<style type="text/css">
+    /*
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-three-bounce">
+ *      <div class="sk-bounce1"></div>
+ *      <div class="sk-bounce2"></div>
+ *      <div class="sk-bounce3"></div>
+ *    </div>
+ *
+ */
+.sk-spinner-three-bounce.sk-spinner {
+  margin: 0 auto;
+  width: 70px;
+  text-align: center; }
+.sk-spinner-three-bounce div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
+          animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both; }
+.sk-spinner-three-bounce .sk-bounce1 {
+  -webkit-animation-delay: -0.32s;
+          animation-delay: -0.32s; }
+.sk-spinner-three-bounce .sk-bounce2 {
+  -webkit-animation-delay: -0.16s;
+          animation-delay: -0.16s; }
+
+@-webkit-keyframes sk-threeBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); }
+
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@keyframes sk-threeBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); }
+
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+  </style>        
+    </head>
+    <style>
+        select:First{
+           color: gray !important;  
+        }
+        #FOL_B_AnimID{
+            width: 36em !important;
+            height: 2.5em !important;
+            background-color: white; 
+        }    
+    </style>
+
+    <body id="main">
+    <!-- Here we'll just collect some data to about the follow we're about to
+    -. -->
+    <div class="container">
+    <div class="description-text" id="description">New Follow</div>
+    <form>
+        <input id="FOL_date" type="text" placeholder="Date of Follow">
+        <!--<input id="FOL_B_AnimID" type="text" placeholder="ID of Focal Chimp">-->
+        <select id = "FOL_B_AnimID" class="text">
+            <option>ID of Focal Chimp</option>
+            <option><a id="fd" >FD</a></option>
+            <option><a id="kp" >KP</a></option>
+            <option><a id="wl" >WL</a></option>
+            <option><a id="fam" >FAM</a></option>
+            <option><a id="kea" >KEA</a></option>
+            <option><a id="fr" >FR</a></option>
+            <option><a id="jf" >JF</a></option>
+            <option><a id="px" >PX</a></option>
+            <option><a id="gm" >GM</a></option>
+            <option><a id="tg" >TG</a></option>
+            <option><a id="fo">FO</a></option>
+            <option><a id="goption">Goption</a></option>
+            <option><a id="nas">NAS</a></option>
+            <option><a id="fe">FE</a></option>
+            <option><a id="sw">SW</a></option>
+            <option><a id="nur">NUR</a></option>
+            <option><a id="za">ZA</a></option>
+            <option><a id="sa">SA</a></option>
+            <option><a id="eza">EZA</a></option>
+            <option><a id="tn">TN</a></option>
+            <option><a id="si">SI</a></option>
+            <option><a id="eri">ERI</a></option>
+            <option><a id="sn">SN</a></option>
+            <option><a id="sam" >SAM</a></option>
+            <option><a id="sif" >SIF</a></option>
+            <option><a id="fu" >FU</a></option>
+            <option><a id="tz" >TZ</a></option>
+            <option> <a id="ao">AO</a></option>
+            <option> <a id="ga">GA</a></option>
+            <option><a id="ima">IMA</a></option>
+            <option><a id="sl">SL</a><option>
+            <option><a id="gld">GLD</a></option>
+            <option><a id="bah">BAH</a></option>
+            <option><a id="eow" >EOW</a></option>
+            <option><a id="tzn" >TZN</a></option>
+            <option><a id="zel" >ZEL</a></option>
+            <option><a id="rum" >RUM</a></option>
+            <option><a id="fnd" >FND</a></option>
+            <option><a id="zin" >ZIN</a></option>
+            <option><a id="mkw" >MKW</a></option>
+            <option><a id="tom" >TOM</a></option>
+            <option><a id="dl" >DL</a></option>
+            <option><a id="yam" >YAM</a></option>
+            <option><a id="sdb" >SDB</a></option>
+            <option><a id="dia" >DIA</a></option>
+            <option><a id="van" >VAN</a></option>  
+        </select>
+        <input id="FOL_CL_community_id" type="text" placeholder="Community ID">
+        <input id="FOL_begin_time" type="text" placeholder="Begin Time (hh:mm)">
+        <input id="FOL_am_observer_1" type="text" placeholder="Name of Researcher">
+    </form>
+
+      <!-- Note that this button cannot go inside the form. I should probably
+      figure out why. -->
+      <div id="formsubmitbutton">
+      <button id="begin-follow" class="btn-launch btn btn-positive btn-block">Begin</button></div>
+
+    <div class="sk-spinner sk-spinner-three-bounce" id="buttonreplacement" style="display:none;">
+      <div class="sk-bounce1"></div>
+      <div class="sk-bounce2"></div>
+      <div class="sk-bounce3"></div>
+    </div>    
+
+  </div> <!-- .container -->
+        <script type="text/javascript">
+            // for date formation
+            $(function() {
+                $( "#FOL_date" ).datepicker();
+            });
+            // for 15 minutes time interval
+            $(document).ready(function(){
+                $('#FOL_begin_time').timepicker({
+                timeFormat: 'HH:mm',
+                minTime: '0:00:00',
+                maxHour: 20,
+                maxMinutes: 30,
+                interval: 15 // 15 minutes
+                });
+            });
+            $(display());
+        </script>
+    </body>  
+</html>
