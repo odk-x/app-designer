@@ -5,6 +5,7 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 // The schemae of our tables
 var tables = require('./jgiTables');
 var models = require('./jgiModels');
+var util = require('./jgiUtil.js'); 
 
 /**
  * Create a where clause for use in a Tables query. columns must be an array
@@ -285,7 +286,126 @@ exports.writeRowForChimp = function(control, chimp, isUpdate) {
 
 };
 
-},{"./jgiModels":2,"./jgiTables":3}],2:[function(require,module,exports){
+// updates the current set of chimps to presist data from the previous set of chimps
+// returns an array filled with the updated chimps containing persistent data
+exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
+  if (prev.length == 0) {
+    return curr; 
+  } else if (prev.length != curr.length) {
+    throw new Error("not the same set of chimps, previous chimps with size: " + prev.length + ", curr chimps with size: " + curr.length);
+  }
+
+  var prevMap = {}; 
+  var currMap = {}; 
+  var result = []; 
+
+  // mapping the previous and current arrays where the Keys are chimpIDs
+  for (var i = 0; i < prev.length; i++) { 
+    prevMap[prev[i].chimpId] = prev[i]; 
+    currMap[curr[i].chimpId] = curr[i];    
+  }
+
+  for (var chimpId in currMap) {
+      var updatedChimp = exports.updateChimpForPreviousTimepoint(prevMap[chimpId], currMap[chimpId]);
+      result.push(updatedChimp);
+  }
+
+  return result; 
+};
+
+// updates the current chimp to presist data from its previous information
+// returns the updated current chimp
+exports.updateChimpForPreviousTimepoint = function(prev, curr) {
+  if (prev.chimpId != curr.chimpId) {
+    throw new Error('chimps must have same ID to compare'); 
+  }
+
+  curr.certainty = prev.certainty; 
+  curr.estrus = prev.estrus; 
+
+  // chimp was there in the last time slot, update to full colored block
+  if (prev.time == 15 || prev.time == 10 || prev.time == 5 || prev.time == 1) {
+    curr.time = 1; 
+  }
+
+  console.log(prev.chimpId + "- from: [" + prev.certainty + ", " + prev.estrus + ", " + prev.time + "]");
+  console.log("  " + curr.chimpId + "- to: [" + curr.certainty + ", " + curr.estrus + ", " + curr.time + "]");
+
+  return curr; 
+};
+
+/**
+ * Write a row for the food item into the database.
+ *
+ * If isUpdate is truthy, it instead updates, rather than adds a rwo, and the
+ * rowId property of the food must be valid.
+ */
+exports.writeRowForFood = function(control, food, isUpdate) {
+
+  var table = tables.food;
+  var cols = table.columns;
+
+  // We're going to assume that all variable have a value. In otherwords, there
+  // can be no defaults that are cannot be written to the database. We write
+  // every value.
+  var struct = {}; 
+  struct[cols.focalId] = food.focalId; 
+  struct[cols.date] = food.date; 
+  struct[cols.foodName] = food.foodName; 
+  struct[cols.foodPart] = food.foodPart; 
+  struct[cols.startTime] = parseInt(food.startTime); 
+  struct[cols.endTime] = parseInt(food.endTime);
+
+
+  var stringified = JSON.stringify(struct);
+
+  if (isUpdate) {
+    var rowId = food.rowId;
+    if (!rowId) {
+      throw new Error('food.rowId was falsey!');
+    }
+    control.updateRow(table.tableId, stringified, rowId);
+  } else {
+    control.addRow(table.tableId, stringified);
+  }
+};
+
+/**
+ * Write a row for the species item into the database.
+ *
+ * If isUpdate is truthy, it instead updates, rather than adds a rwo, and the
+ * rowId property of the species must be valid.
+ */
+exports.writeRowForSpecies = function(control, species, isUpdate) {
+
+  var table = tables.species;
+  var cols = table.columns;
+
+  // We're going to assume that all variable have a value. In otherwords, there
+  // can be no defaults that are cannot be written to the database. We write
+  // every value.
+  var struct = {}; 
+  struct[cols.focalId] = food.focalChimpId; 
+  struct[cols.date] = food.date; 
+  struct[cols.speciesName] = food.speciesName; 
+  struct[cols.speciesCount] = food.number; 
+  struct[cols.startTime] = parseInt(food.startTime); 
+  struct[cols.endTime] = parseInt(food.endTime);
+
+
+  var stringified = JSON.stringify(struct);
+
+  if (isUpdate) {
+    var rowId = food.rowId;
+    if (!rowId) {
+      throw new Error('species.rowId was falsey!');
+    }
+    control.updateRow(table.tableId, stringified, rowId);
+  } else {
+    control.addRow(table.tableId, stringified);
+  }
+};
+},{"./jgiModels":2,"./jgiTables":3,"./jgiUtil.js":5}],2:[function(require,module,exports){
 'use strict';
 
 /**
@@ -319,7 +439,7 @@ exports.Follow = function Follow(
 
 
 /**
- * The observation of a chimp in the a particular timepoint.
+ * The observation of food item in the a particular timepoint.
  */
 exports.Chimp = function Chimp(
     rowId,
@@ -353,7 +473,6 @@ exports.Chimp = function Chimp(
   this.closest = closest;
 
 };
-
 
 /**
  * Create a chimp with the default values. This is ok to represent a chimp that
@@ -399,6 +518,115 @@ exports.createNewChimp = function(
 
 
 
+/**
+ * The observation of a food item at particular date & starttime.
+ */
+exports.Food = function Food(
+  rowId, 
+  date, 
+  focalChimpId,
+  startTime,
+  endTime,
+  foodName,
+  foodPartEaten
+) {
+
+  if (!(this instanceof Food)) {
+    throw new Error('must use new');
+  }  
+
+  // for our model only--can be undefined
+  this.rowId = rowId; 
+
+  // data that we must set.
+  this.date = date; 
+  this.startTime = startTime; 
+  this.foodName = foodName; 
+  this.foodPartEaten = foodPartEaten; 
+  this.endTime = endTime; 
+  this.focalChimpId = focalChimpId; 
+};
+
+/**
+ * Create a food object with the given values
+ */
+exports.createNewFood = function(
+  date, 
+  focalChimpId,
+  startTime,
+  endTime,
+  foodName,
+  foodPartEaten
+) {
+  var rowId = null; 
+  var result = new exports.Food(
+    rowId, 
+    date, 
+    focalChimpId,
+    startTime,
+    endTime,
+    foodName,
+    foodPartEaten
+  );
+
+  return result; 
+};
+
+/**
+ * The observation of a species at particular date.
+ */
+exports.Species = function Species(
+  rowId, 
+  date, 
+  focalChimpId,
+  startTime,
+  endTime,
+  speciesName,
+  number
+) {
+
+  if (!(this instanceof Species)) {
+    throw new Error('must use new');
+  }  
+
+  // for our model only--can be undefined
+  this.rowId = rowId; 
+
+  // data that we must set.
+  this.date = date; 
+  this.focalChimpId = focalChimpId;   
+  this.startTime = startTime; 
+  this.endTime = endTime;   
+  this.speciesName = speciesName; 
+  this.number = number; 
+};
+
+/**
+ * Create a species object with the given values
+ */
+exports.createNewSpecies = function(
+  date, 
+  focalChimpId,
+  startTime,
+  endTime,
+  speciesName,
+  number
+) {
+  var rowId = null; 
+  var result = new exports.Species(
+    rowId, 
+    date, 
+    focalChimpId,
+    startTime,
+    endTime,
+    speciesName,
+    number
+  );
+
+  return result; 
+};
+
+
 },{}],3:[function(require,module,exports){
 'use strict';
 
@@ -425,8 +653,11 @@ exports.species = {
   tableId: 'other_species',
   columns: {
     date: 'OS_FOL_date',
-    timeBegin: 'OS_time_begin',
-    focalId: 'OS_FOL_B_focal_AnimID'
+    startTime: 'OS_time_begin',
+    endTime: 'OS_time_end',
+    focalId: 'OS_FOL_B_focal_AnimID',
+    speciesName: 'OS_local_species_name_written',
+    speciesCount: 'OS_duration'
   }
 };
 
@@ -435,7 +666,10 @@ exports.food = {
   columns: {
     date: 'FB_FOL_date',
     focalId: 'FB_FOL_B_AnimID',
-    timeBegin: 'FB_begin_feed_time'
+    foodName: 'FB_FL_local_food_name',
+    foodPart: 'FB_FPL_local_food_part',
+    startTime: 'FB_begin_feed_time',
+    endTime: 'FB_end_feed_time'
   }
 };
 
@@ -626,6 +860,27 @@ exports.incrementTime = function(time) {
   var result = hoursStr + ':' + minsStr;
   return result;
 
+};
+
+exports.decrementTime = function(time) {
+  var interval = 15;
+  var parts = time.split(':');
+  var hours = parseInt(parts[0]);
+  var mins = parseInt(parts[1]);
+  var maybeTooSmall = mins - interval;
+
+  if (maybeTooSmall < 0) { // negative time
+    mins = 60 + maybeTooSmall; 
+    hours = (hours == 24) ? 0 : (hours - 1); 
+  } else {
+    mins = maybeTooSmall;
+  }
+
+  // Format these strings to be two digits.
+  var hoursStr = exports.convertToStringWithTwoZeros(hours);
+  var minsStr = exports.convertToStringWithTwoZeros(mins);
+  var result = hoursStr + ':' + minsStr;
+  return result;  
 };
 
 
@@ -10056,7 +10311,6 @@ exports.updateUiForChimp = function(chimp) {
  */
 exports.updateIconForChimp = function(chimp) {
   assertIsChimp(chimp);
-
   var imagePaths = {
     absent: './img/time_empty.png',
     continuing: './img/time_continues.png',
@@ -10106,6 +10360,9 @@ exports.updateIconForChimp = function(chimp) {
     default:
       console.log('unrecognized time label: ' + chimp.time);
   }
+
+  $('#' + id).attr('src', $img.src); 
+
 
 };
 
@@ -10513,11 +10770,71 @@ exports.initializeChimpListeners = function() {
 
 };
 
+  // Food
+  $('#button-food').on('click', function() {
+    console.log("food button clicked"); 
+    $('.container').addClass('nodisplay');
+    $('.food-container').removeClass('nodisplay');
+  });
+
+
+  // goes back to the page without saving any food or species data
+  $('.go-back').on('click', function() {
+    console.log("back to main follow screen"); 
+    $('.container').removeClass('nodisplay');
+    $('.food-container').addClass('nodisplay');
+    $('.species-container').addClass('nodisplay');
+  });
+
+  // Species
+  $('#button-species').on('click', function() {
+    console.log("species button clicked")
+    $('.container').addClass('nodisplay');
+    $('.species-container').removeClass('nodisplay');
+
+  });  
+
 
 /**
  * Plug in the click listeners in the UI.
  */
 exports.initializeListeners = function(control) {
+
+  // saving the food item
+  $('#saving_food').on('click', function() {
+    console.log("food being saved button clicked"); 
+
+    // makes main display visibile and food page visible
+    $('.container').removeClass('nodisplay');
+    $('.food-species-container').addClass('nodisplay');
+
+    // retrieve food data from form
+    var foodVal = $('#foods').val();
+    var foodPartVal = $('#food-part').val();
+    var startTime =  $('#start_time_food').val();
+    var endTime = $('#end_time_food').val();
+    var date = urls.getFollowDateFromUrl(); 
+    var focalChimpId = urls.getFocalChimpIdFromUrl();
+
+    if (foodPartVal != null) {
+      foodPartVal = foodPartVal.toLowerCase(); 
+    }   
+
+    var food = models.createNewFood(
+      date, 
+      focalChimpId,
+      startTime,
+      endTime,
+      foodVal,
+      foodPartVal
+    );
+
+    if (endTime == null || endTime == undefined || endTime.length == 0) {
+      db.writeRowForFood(control, food, false); 
+    } else {
+      db.writeRowForFood(control, food, true); 
+    }
+  });  
 
   $('#next-button').on('click', function() {
     exports.showLoadingScreen(true);
@@ -10572,8 +10889,6 @@ exports.showTimeIndicatorsToEdit = function(show, chimp) {
   var img_source = document.getElementById(chimpid).src;
   var array_splitting_with_slash = img_source.split("/");
   var current_img = array_splitting_with_slash[array_splitting_with_slash.length - 1];
-  
-  
   if (current_img == "time_empty.png") {
     $timeIndicators = $('.arrival');
   } else {
@@ -10851,6 +11166,29 @@ exports.updateVisiblityForChimp = function(chimp) {
  */
 exports.initializeUi = function(control) {
 
+  // initializing food and species containers
+  $('.food-container').addClass('nodisplay');
+  $('.species-container').addClass('nodisplay');  
+  // $( "#foods" ).combobox();
+  // $( "#food-part" ).combobox();
+
+  // $('#start_time_food').timepicker({
+  //   timeFormat: 'HH:mm',
+  //   minTime: '0:00:00',
+  //   maxHour: 20,
+  //   maxMinutes: 30,
+  //   interval: 1 // 15 minutes
+  // });  
+
+  // $('#end_time_food').timepicker({
+  //   timeFormat: 'HH:mm',
+  //   minTime: '0:00:00',
+  //   maxHour: 20,
+  //   maxMinutes: 30,
+  //   interval: 1 // 15 minutes
+  // });  
+
+
   //window.alert('hello from script');
 
   // Hide the editing UI to start with.
@@ -10911,7 +11249,7 @@ exports.handleFirstTime = function(
   // rowIds for each of the chimps. We assume all chimps in the UI have rowIds,
   // so this is important.
   //
-  // 4) update the ui for the chimps
+  // 4) update the ui for the chimps 
 
   var chimpIds = exports.getChimpIdsFromUi();
 
@@ -10929,6 +11267,18 @@ exports.handleFirstTime = function(
   },
     chimps
   );
+
+  // update chimp for previous timepoint
+  var previousTime = util.decrementTime(followStartTime); 
+  var previousTableData = db.getTableDataForTimePoint(
+    control,
+    date,
+    previousTime,
+    focalChimpId
+  );
+  var prevChimps = db.convertTableDataToChimps(previousTableData); 
+
+  chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps); 
 
   // 2) write the chimps
   chimps.forEach(function(chimp) {

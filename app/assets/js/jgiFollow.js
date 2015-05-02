@@ -198,7 +198,6 @@ exports.updateUiForChimp = function(chimp) {
  */
 exports.updateIconForChimp = function(chimp) {
   assertIsChimp(chimp);
-
   var imagePaths = {
     absent: './img/time_empty.png',
     continuing: './img/time_continues.png',
@@ -248,6 +247,9 @@ exports.updateIconForChimp = function(chimp) {
     default:
       console.log('unrecognized time label: ' + chimp.time);
   }
+
+  $('#' + id).attr('src', $img.src); 
+
 
 };
 
@@ -655,11 +657,107 @@ exports.initializeChimpListeners = function() {
 
 };
 
+  // Food
+  $('#button-food').on('click', function() {
+    console.log("food button clicked"); 
+    $('.container').addClass('nodisplay');
+    $('.food-container').removeClass('nodisplay');
+  });
+
+
+  // goes back to the page without saving any food or species data
+  $('.go-back').on('click', function() {
+    console.log("back to main follow screen"); 
+    $('.container').removeClass('nodisplay');
+    $('.food-container').addClass('nodisplay');
+    $('.species-container').addClass('nodisplay');
+  });
+
+  // Species
+  $('#button-species').on('click', function() {
+    console.log("species button clicked")
+    $('.container').addClass('nodisplay');
+    $('.species-container').removeClass('nodisplay');
+
+  });  
+
 
 /**
  * Plug in the click listeners in the UI.
  */
 exports.initializeListeners = function(control) {
+
+  // saving the food item
+  $('#saving_food').on('click', function() {
+    console.log("food being saved button clicked"); 
+
+    // makes main display visibile and food page visible
+    $('.container').removeClass('nodisplay');
+    $('.food-container').addClass('nodisplay');
+
+    // retrieve food data from form
+    var foodVal = $('#foods').val();
+    var foodPartVal = $('#food-part').val();
+    var startTime =  $('#start_time_food').val();
+    var endTime = $('#end_time_food').val();
+    var date = urls.getFollowDateFromUrl(); 
+    var focalChimpId = urls.getFocalChimpIdFromUrl();
+
+    if (foodPartVal != null) {
+      foodPartVal = foodPartVal.toLowerCase(); 
+    }   
+
+    var food = models.createNewFood(
+      date, 
+      focalChimpId,
+      startTime,
+      endTime,
+      foodVal,
+      foodPartVal
+    );
+
+    if (endTime == null || endTime == undefined || endTime.length == 0) {
+      db.writeRowForFood(control, food, false); 
+    } else {
+      db.writeRowForFood(control, food, true); 
+    }
+  });  
+
+  // saving the species item
+  $('#saving_species').on('click', function() {
+    console.log("species being saved button clicked"); 
+
+    // makes main display visibile and food page visible
+    $('.container').removeClass('nodisplay');
+    $('.species-container').addClass('nodisplay');
+
+    // retrieve food data from form
+    var speciesName = $('#species').val();
+    var startTime = $('#start_time_species').val();
+    var endTime =  $('#end_time_species').val();
+    var speciesNumber = $('#species_number').val();
+    var date = urls.getFollowDateFromUrl(); 
+    var focalChimpId = urls.getFocalChimpIdFromUrl();
+
+    if (speciesName != null) {
+      speciesName = foodPartVal.toLowerCase(); 
+    }   
+
+    var species = models.createNewSpecies(
+      date, 
+      focalChimpId,
+      startTime,
+      endTime,
+      speciesName,
+      speciesNumber
+    );
+
+    if (endTime == null || endTime == undefined || endTime.length == 0) {
+      db.writeRowForSpecies(control, species, false); 
+    } else {
+      db.writeRowForSpecies(control, species, true); 
+    }
+  });    
 
   $('#next-button').on('click', function() {
     exports.showLoadingScreen(true);
@@ -991,6 +1089,29 @@ exports.updateVisiblityForChimp = function(chimp) {
  */
 exports.initializeUi = function(control) {
 
+  // initializing food and species containers
+  $('.food-container').addClass('nodisplay');
+  $('.species-container').addClass('nodisplay');  
+  // $( "#foods" ).combobox();
+  // $( "#food-part" ).combobox();
+
+  // $('#start_time_food').timepicker({
+  //   timeFormat: 'HH:mm',
+  //   minTime: '0:00:00',
+  //   maxHour: 20,
+  //   maxMinutes: 30,
+  //   interval: 1 // 15 minutes
+  // });  
+
+  // $('#end_time_food').timepicker({
+  //   timeFormat: 'HH:mm',
+  //   minTime: '0:00:00',
+  //   maxHour: 20,
+  //   maxMinutes: 30,
+  //   interval: 1 // 15 minutes
+  // });  
+
+
   //window.alert('hello from script');
 
   // Hide the editing UI to start with.
@@ -1051,7 +1172,7 @@ exports.handleFirstTime = function(
   // rowIds for each of the chimps. We assume all chimps in the UI have rowIds,
   // so this is important.
   //
-  // 4) update the ui for the chimps
+  // 4) update the ui for the chimps 
 
   var chimpIds = exports.getChimpIdsFromUi();
 
@@ -1069,6 +1190,18 @@ exports.handleFirstTime = function(
   },
     chimps
   );
+
+  // update chimp for previous timepoint
+  var previousTime = util.decrementTime(followStartTime); 
+  var previousTableData = db.getTableDataForTimePoint(
+    control,
+    date,
+    previousTime,
+    focalChimpId
+  );
+  var prevChimps = db.convertTableDataToChimps(previousTableData); 
+
+  chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps); 
 
   // 2) write the chimps
   chimps.forEach(function(chimp) {
