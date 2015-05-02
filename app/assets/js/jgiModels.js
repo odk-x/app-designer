@@ -66,6 +66,25 @@ exports.Chimp = function Chimp(
 
 };
 
+<<<<<<< local
+=======
+/**
+ * The observation of Food in the a particular timepoint.
+ */
+exports.Food = function Food(
+    rowId, 
+    date, 
+    focalChimpId,
+    beginEating,
+    foodEaten,
+    foodPartEaten,
+
+) {
+
+}
+
+
+>>>>>>> other
 /**
  * Create a chimp with the default values. This is ok to represent a chimp that
  * has not been observed at a given timepoint.
@@ -109,6 +128,7 @@ exports.createNewChimp = function(
 };
 
 
+<<<<<<< local
 
 /**
  * The observation of a food item at particular date & starttime.
@@ -218,3 +238,7 @@ exports.createNewSpecies = function(
   return result; 
 };
 
+=======
+
+
+>>>>>>> other
