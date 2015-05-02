@@ -398,39 +398,6 @@ exports.writeRowForChimp = function(control, chimp, isUpdate) {
   }
 };
 
-  // var previousTime = util.decrementTime(time); 
-
-  // var table = exports.getTableDataforTimePoint(control, date, previousTime, focalChimpId)
-
-// updates the current set of chimps to presist data from the previous set of chimps
-// returns an array filled with the updated chimps containing persistent data
-exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
-  if (prev.length !== curr.length) {
-    throw new Error('not the same set of chimps');
-  }
-
-  var prevMap = {};
-  var currMap = {};
-  var result = {};
-
-  // mapping the previous and current arrays where the Keys are chimpIDs
-  for (var i = 0; i < prev.length; i++) {
-    prevMap[prev[i].chimpId] = prev[i];
-    currMap[curr[i].chimpId] = curr[i];
-  }
-
-  for (var chimpId in currMap) {
-    if (currMap.hasOwnProperty(chimpId)) {
-      var updatedChimp = exports.updateChimpsForPreviousTimepoint(
-          prevMap[chimpId],
-          currMap[chimpId]
-      );
-      result.push(updatedChimp);
-    }
-  }
-
-  return result;
-};
 
 // updates the current set of chimps to presist data from the previous set of chimps
 // returns an array filled with the updated chimps containing persistent data
@@ -581,34 +548,6 @@ exports.writeRowForSpecies = function(control, species, isUpdate) {
   } else {
     control.addRow(table.tableId, stringified);
   }
-};
-
-// updates the current chimp to presist data from its previous information
-// returns the updated current chimp
-exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
-  if (prev.chimpId !== curr.chimpId) {
-    throw new Error('chimps must have same ID to compare');
-  }
-
-  curr.defCertainty = prev.defCertainty;
-  curr.defEstrus = prev.defEstrus;
-
-  switch(prev.defTime) {
-    case 15:
-    case 10:
-    case 5:
-    case 1:
-      curr.defTime = 1; // chimps arrived at prev timepoint 
-      break;
-    case 0:
-    case -5:
-    case -10:
-    case -15:
-      curr.defTime = 0; // chimps never arrived or left
-      break;
-  }
-
-  return curr;
 };
 
 },{"./jgiModels":2,"./jgiTables":3}],2:[function(require,module,exports){
@@ -11432,33 +11371,16 @@ exports.updateVisiblityForChimp = function(chimp) {
  */
 exports.initializeUi = function(control) {
 
+  console.log('in initializeui');
+
   // initializing food and species containers
   $('.food-container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');
-  // $( "#foods" ).combobox();
-  // $( "#food-part" ).combobox();
 
-  // $('#start_time_food').timepicker({
-  //   timeFormat: 'HH:mm',
-  //   minTime: '0:00:00',
-  //   maxHour: 20,
-  //   maxMinutes: 30,
-  //   interval: 1 // 15 minutes
-  // });  
-
-  // $('#end_time_food').timepicker({
-  //   timeFormat: 'HH:mm',
-  //   minTime: '0:00:00',
-  //   maxHour: 20,
-  //   maxMinutes: 30,
-  //   interval: 1 // 15 minutes
-  // });  
-
-
-  //window.alert('hello from script');
+  console.log('added nodisplay classes');
 
   // Hide the editing UI to start with.
-  //$('#time').addClass('novisibility');
+  $('#time').addClass('novisibility');
   $('.arrival').addClass('novisibility');
   $('.depart').addClass('novisibility');
   $('#certainty').addClass('novisibility');
@@ -11537,16 +11459,16 @@ exports.handleFirstTime = function(
   );
 
   // update chimp for previous timepoint
-  var previousTime = util.decrementTime(followStartTime);
-  var previousTableData = db.getTableDataForTimePoint(
-    control,
-    date,
-    previousTime,
-    focalChimpId
-  );
-  var prevChimps = db.convertTableDataToChimps(previousTableData);
+  // var previousTime = util.decrementTime(followStartTime);
+  // var previousTableData = db.getTableDataForTimePoint(
+  //   control,
+  //   date,
+  //   previousTime,
+  //   focalChimpId
+  // );
+  // var prevChimps = db.convertTableDataToChimps(previousTableData);
 
-  chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps);
+  // chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps);
 
   // 2) write the chimps
   chimps.forEach(function(chimp) {

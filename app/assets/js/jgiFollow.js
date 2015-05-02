@@ -1088,33 +1088,16 @@ exports.updateVisiblityForChimp = function(chimp) {
  */
 exports.initializeUi = function(control) {
 
+  console.log('in initializeui');
+
   // initializing food and species containers
   $('.food-container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');
-  // $( "#foods" ).combobox();
-  // $( "#food-part" ).combobox();
 
-  // $('#start_time_food').timepicker({
-  //   timeFormat: 'HH:mm',
-  //   minTime: '0:00:00',
-  //   maxHour: 20,
-  //   maxMinutes: 30,
-  //   interval: 1 // 15 minutes
-  // });  
-
-  // $('#end_time_food').timepicker({
-  //   timeFormat: 'HH:mm',
-  //   minTime: '0:00:00',
-  //   maxHour: 20,
-  //   maxMinutes: 30,
-  //   interval: 1 // 15 minutes
-  // });  
-
-
-  //window.alert('hello from script');
+  console.log('added nodisplay classes');
 
   // Hide the editing UI to start with.
-  //$('#time').addClass('novisibility');
+  $('#time').addClass('novisibility');
   $('.arrival').addClass('novisibility');
   $('.depart').addClass('novisibility');
   $('#certainty').addClass('novisibility');

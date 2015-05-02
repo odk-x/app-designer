@@ -645,10 +645,20 @@
      </div>
   </div> <!-- .container -->
 
+  <script type="text/javascript">
+console.log('before import');
+  </script>
         <script type="text/javascript" src="js/bundle.js"></script>
+  <script type="text/javascript">
+console.log('after import');
+  </script>
+
         <script type="text/javascript">
+console.log('before require');
           var jf = require('jgiFollow');
+console.log('after require');
           jf.initializeUi(window.control);
+console.log('after initialize');
         </script>     
     </body>
 </html>
