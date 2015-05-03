@@ -99,7 +99,7 @@ var timeLabels = {
  * labels we use internally, not the ones shown to the user.
  */
 var certaintyLabels = {
-  notApplicable: ' ',
+  notApplicable: '0',
   certain: '1',
   uncertain: '2'
 };
@@ -219,35 +219,38 @@ exports.updateIconForChimp = function(chimp) {
   // And now update the image.
   var id = getIdForTimeImage(chimp);
   var $img = $('#' + id);
+  var path = imagePaths.absent;
 
   switch (chimp.time) {
     case timeLabels.absent:
-      $img.src = imagePaths.absent;
+      path = imagePaths.absent;
       break;
     case timeLabels.continuing:
-      $img.src = imagePaths.continuing;
+      path = imagePaths.continuing;
       break;
     case timeLabels.arriveFirst:
-      $img.src = imagePaths.arriveFirst;
+      path = imagePaths.arriveFirst;
       break;
     case timeLabels.arriveSecond:
-      $img.src = imagePaths.arriveSecond;
+      path = imagePaths.arriveSecond;
       break;
     case timeLabels.arriveThird:
-      $img.src = imagePaths.arriveThird;
+      path = imagePaths.arriveThird;
       break;
     case timeLabels.departFirst:
-      $img.src = imagePaths.departFirst;
+      path = imagePaths.departFirst;
       break;
     case timeLabels.departSecond:
-      $img.src = imagePaths.departSecond;
+      path = imagePaths.departSecond;
       break;
     case timeLabels.departThird:
-      $img.src = imagePaths.departThird;
+      path = imagePaths.departThird;
       break;
     default:
       console.log('unrecognized time label: ' + chimp.time);
   }
+
+  $img.prop('src', path);
 
 };
 
@@ -1072,6 +1075,18 @@ exports.handleFirstTime = function(
   },
     chimps
   );
+
+
+  // update the chimps for the previous timepoint
+  var previousTime = util.decrementTime(followStartTime);
+  var previousTableData = db.getTableDataForTimePoint(
+      control,
+      date,
+      previousTime,
+      focalChimpId
+  );
+  var prevChimps = db.convertTableDataToChimps(previousTableData);
+  chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps);
 
   // 2) write the chimps
   chimps.forEach(function(chimp) {

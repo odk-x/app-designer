@@ -425,7 +425,7 @@ exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
       throw new Error('did not find prev or curr chimp with id: ' + chimpId);
     }
 
-    result.push(exports.updateChimpForPreviousTimepoint(prev, curr));
+    result.push(exports.updateChimpForPreviousTimepoint(prevChimp, currChimp));
   });
 
   return result;

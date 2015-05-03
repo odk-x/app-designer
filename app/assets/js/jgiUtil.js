@@ -27,6 +27,28 @@ exports.incrementTime = function(time) {
 };
 
 
+exports.decrementTime = function(time) {
+  var interval = 15;
+  var parts = time.split(':');
+  var hours = parseInt(parts[0]);
+  var mins = parseInt(parts[1]);
+  var maybeTooSmall = mins - interval;
+
+  if (maybeTooSmall < 0) {
+    // negative time
+    mins = 60 + maybeTooSmall;
+    hours = (hours === 24) ? 0 : (hours - 1);
+  } else {
+    mins = maybeTooSmall;
+  }
+
+  var hoursStr = exports.convertToStringWithTwoZeros(hours);
+  var minsStr = exports.convertToStringWithTwoZeros(mins);
+  var result = hoursStr + ':' + minsStr;
+  return result;
+};
+
+
 /**
  * Convert an integer to a string, padded to two zeros.
  */
