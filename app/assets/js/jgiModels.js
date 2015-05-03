@@ -4,6 +4,8 @@
  * The models we will use for rows in the database.
  */
 
+var util = require('./jgiUtil');
+
 
 /**
  * A follow, which includes a set of timepoints, where each time point has a
@@ -164,11 +166,14 @@ exports.Food = function Food(
 };
 
 
+/**
+ * Create a new food observation. Sets rowId to null and endTime to the not
+ * set flag.
+ */
 exports.createNewFood = function(
     date,
     focalChimpId,
     startTime,
-    endTime,
     foodName,
     foodPartEaten
 ) {
@@ -178,7 +183,7 @@ exports.createNewFood = function(
       date,
       focalChimpId,
       startTime,
-      endTime,
+      util.flagEndTimeNotSet,
       foodName,
       foodPartEaten
   );
@@ -213,11 +218,14 @@ exports.Species = function Species(
 };
 
 
+/**
+ * Create a new species observation. Sets rowId to null and endTime to the not
+ * set flag.
+ */
 exports.createNewSpecies = function(
     date,
     focalChimpId,
     startTime,
-    endTime,
     speciesName,
     number
 ) {
@@ -227,7 +235,7 @@ exports.createNewSpecies = function(
       date,
       focalChimpId,
       startTime,
-      endTime,
+      util.flagEndTimeNotSet,
       speciesName,
       number
   );

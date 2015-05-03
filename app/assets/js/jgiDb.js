@@ -473,8 +473,8 @@ exports.writeRowForFood = function(control, food, isUpdate) {
   struct[cols.date] = food.date;
   struct[cols.foodName] = food.foodName;
   struct[cols.foodPart] = food.foodPart;
-  struct[cols.startTime] = parseInt(food.startTime);
-  struct[cols.endTime] = parseInt(food.endTime);
+  struct[cols.startTime] = food.startTime;
+  struct[cols.endTime] = food.endTime;
 
   var stringified = JSON.stringify(struct);
 
@@ -505,8 +505,8 @@ exports.writeRowForSpecies = function(control, species, isUpdate) {
   struct[cols.date] = species.date;
   struct[cols.speciesName] = species.speciesName;
   struct[cols.speciesCount] = species.number;
-  struct[cols.startTime] = parseInt(species.startTime);
-  struct[cols.endTime] = parseInt(species.endTime);
+  struct[cols.startTime] = species.startTime;
+  struct[cols.endTime] = species.endTime;
 
   var stringified = JSON.stringify(struct);
 

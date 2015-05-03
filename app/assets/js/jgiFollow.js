@@ -28,6 +28,34 @@ function assertFoundChimp(chimp) {
 
 
 /**
+ * Append all minutes as options to the select element.
+ */
+function appendMinsToSelect($select) {
+  var mins = util.getAllMinutes();
+  mins.forEach(function(minute) {
+    var option = $('<option></option>');
+    option.attr('value', minute);
+    option.text(minute);
+    $select.append(option);
+  });
+}
+
+
+/**
+ * Append all hours as options to the select element.
+ */
+function appendHoursToSelect($select) {
+  var hours = util.getAllHours();
+  hours.forEach(function(hour) {
+    var option = $('<option></option>');
+    option.attr('value', hour);
+    option.text(hour);
+    $select.append(option);
+  });
+}
+
+
+/**
  * Create the id for the element representing the chimp's presence.
  */
 function getIdForTimeImage(chimp) {
@@ -85,6 +113,7 @@ function showFood() {
   $('.container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');
   $('.food-container').removeClass('nodisplay');
+  exports.updateFoodAfterEdit();
 }
 
 
@@ -95,6 +124,7 @@ function showSpecies() {
   $('.container').addClass('nodisplay');
   $('.food-container').addClass('nodisplay');
   $('.species-container').removeClass('nodisplay');
+  exports.updateSpeciesAfterEdit();
 }
 
 
@@ -106,6 +136,177 @@ function showChimps() {
   $('.species-container').addClass('nodisplay');
   $('.container').removeClass('nodisplay');
 }
+
+
+/**
+ * Clear the UI of food and species editing of whatever had previous been
+ * selected. That way we won't populate with old state when a new item is set
+ * to be entered.
+ */
+function clearSpeciesAndFoodSelected() {
+  $('.food-select option').prop('selected', false);
+  $('.species-select option').prop('selected', false);
+
+  $('.food-summary').text('?');
+  $('.species-summary').text('?');
+
+  $('#food-summary').attr('rowid', '');
+  $('#species-summary').attr('rowid', '');
+}
+
+
+function timeIsValid(time) {
+  // hh:mm is the default input. Faking begins with and ends with here.
+  return (
+      time.lastIndexOf('hh', 0) !== 0 &&
+      time.lastIndexOf('mm') !== time.length - 2
+  );
+}
+
+
+/**
+ * True if the food can be persisted. This means all is valid except rowId and
+ * end time.
+ */
+function foodCanBePersisted(food) {
+  return (
+      timeIsValid(food.startTime) &&
+      food.foodName !== '0' &&
+      food.foorPartEaten !== '0'
+  );
+}
+
+
+/**
+ * True if the species can be persisted. This means all is valid except rowId
+ * and end time.
+ */
+function speciesCanBePersisted(species) {
+  return (
+      timeIsValid(species.startTime) &&
+      species.speciesName !== '0' &&
+      util.isInt(species.number)
+  );
+}
+
+
+/**
+ * True if a valid food can be selected from the UI (i.e. if it can be saved).
+ */
+function validFoodSelected() {
+  // A valid food means food and part selected, begin hh and mm selected. Not
+  // necessarily an end time selected.
+  var food = exports.getFoodFromUi();
+  return foodCanBePersisted(food);
+}
+
+
+/**
+ * True if a valid food can be selected from the UI (i.e. if it can be saved).
+ */
+function validSpeciesSelected() {
+  // A valid food means food and part selected, begin hh and mm selected. Not
+  // necessarily an end time selected.
+  var species = exports.getSpeciesFromUi();
+  return speciesCanBePersisted(species);
+}
+
+
+exports.refreshSpeciesList = function(control) {
+};
+
+
+exports.refreshFoodList = function(control) {
+};
+
+
+/**
+ * Update the UI after an edit to a food has taken place.
+ */
+exports.updateFoodAfterEdit = function() {
+  var $saveFood = $('#saving_food');
+  var $foodSummaryStart = $('#food-summary-start-time');
+  var $foodSummaryEnd = $('#food-summary-end-time');
+  var $foodSummaryFood = $('#food-summary-food');
+  var $foodSummaryPart = $('#food-summary-part');
+
+  if (validFoodSelected()) {
+    $saveFood.prop('disabled', false);
+  } else {
+    $saveFood.prop('disabled', true);
+  }
+
+  var food = exports.getFoodFromUi();
+
+  if (timeIsValid(food.startTime)) {
+    $foodSummaryStart.text(food.startTime);
+  } else {
+    $foodSummaryStart.text('?');
+  }
+
+  if (timeIsValid(food.endTime)) {
+    $foodSummaryEnd.text(food.endTime);
+  } else {
+    $foodSummaryEnd.text('?');
+  }
+
+  if (food.foodName !== '0') {
+    $foodSummaryFood.text(food.foodName);
+  } else {
+    $foodSummaryFood.text('?');
+  }
+
+  if (food.foodPartEaten !== '0') {
+    $foodSummaryPart.text(food.foodPartEaten);
+  } else {
+    $foodSummaryPart.text('?');
+  }
+};
+
+
+/**
+ * Update the UI after an edit to a species has taken place.
+ */
+exports.updateSpeciesAfterEdit = function() {
+  var $saveSpecies = $('#saving_species');
+  var $speciesSummaryStart = $('#species-summary-start-time');
+  var $speciesSummaryEnd = $('#species-summary-end-time');
+  var $speciesSummaryName = $('#species-summary-name');
+  var $speciesSummaryNumber = $('#species-summary-number');
+
+  if (validSpeciesSelected()) {
+    $saveSpecies.prop('disabled', false);
+  } else {
+    $saveSpecies.prop('disabled', true);
+  }
+
+  var species = exports.getSpeciesFromUi();
+
+  if (timeIsValid(species.startTime)) {
+    $speciesSummaryStart.text(species.startTime);
+  } else {
+    $speciesSummaryStart.text('?');
+  }
+
+  if (timeIsValid(species.endTime)) {
+    $speciesSummaryEnd.text(species.endTime);
+  } else {
+    $speciesSummaryEnd.text('?');
+  }
+
+  if (species.speciesName !== '0') {
+    $speciesSummaryName.text(species.speciesName);
+  } else {
+    $speciesSummaryName.text('?');
+  }
+
+  if (species.number !== '0') {
+    $speciesSummaryNumber.text(species.number);
+  } else {
+    $speciesSummaryNumber.text('?');
+  }
+};
+
 
 /**
  * Labels that are used to indicate at what point in a 15 minute interval a
@@ -430,7 +631,7 @@ exports.updateIconForSelectedChimp = function(chimp, chimpid, timeid) {
     departSecond: './img/time_departSecond.png',
     departThird: './img/time_departThird.png'
   };
-  var imageId = chimpid + "_img";  
+  var imageId = chimpid + '_img';
   //var $img = $('#' + imageId);
   //imageId.setAttribute("id", timeid);
 
@@ -645,6 +846,60 @@ exports.initializeEditListeners = function(control) {
 };
 
 
+exports.initializeFoodListeners = function(control) {
+  $('.food-edit').change(exports.updateFoodAfterEdit);
+
+  $('#saving_food').click(function() {
+    console.log('save food');
+    showChimps();
+    clearSpeciesAndFoodSelected();
+    var activeFood = exports.getFoodFromUi();
+    // We can save something if it doesn't have a valid end time, but we want
+    // to flag it as invalid.
+    if (!timeIsValid(activeFood.endTime)) {
+      activeFood.endTime = util.flagEndTimeNotSet;
+    }
+
+    if (activeFood.rowId) {
+      // update
+      db.writeRowForFood(control, activeFood, true);
+    } else {
+      // add
+      db.writeRowForFood(control, activeFood, false);
+    }
+
+    exports.refreshFoodList(control);
+  });
+};
+
+
+exports.initializeSpeciesListeners = function(control) {
+  $('.species-edit').change(exports.updateSpeciesAfterEdit);
+
+  $('#saving_species').click(function() {
+    console.log('save species');
+    showChimps();
+    clearSpeciesAndFoodSelected();
+    var activeSpecies = exports.getSpeciesFromUi();
+    // We can save something if it doesn't have a valid end time, but we want
+    // to flag it as invalid.
+    if (!timeIsValid(activeSpecies.endTime)) {
+      activeSpecies.endTime = util.flagEndTimeNotSet;
+    }
+
+    if (activeSpecies.rowId) {
+      // update
+      db.writeRowForSpecies(control, activeSpecies, true);
+    } else {
+      // add
+      db.writeRowForSpecies(control, activeSpecies, false);
+    }
+
+    exports.refreshSpeciesList(control);
+  });
+};
+
+
 /**
  * Add the listeners to the elements relating to each chimp. 
  */
@@ -688,6 +943,44 @@ exports.initializeChimpListeners = function() {
 };
 
 
+exports.initializeFood = function(control) {
+  var $startHours = $('#start-time-food-hours');
+  var $startMins = $('#start-time-food-mins');
+  var $endHours = $('#end-time-food-hours');
+  var $endMins = $('#end-time-food-mins');
+
+  appendHoursToSelect($startHours);
+  appendHoursToSelect($endHours);
+  appendMinsToSelect($startMins);
+  appendMinsToSelect($endMins);
+
+  // We'll start with the save button disabled. You have to select valid food
+  // times to enable it.
+  $('#saving_food').prop('disabled', true);
+
+  exports.initializeFoodListeners(control);
+
+};
+
+
+exports.initializeSpecies = function(control) {
+  var $startHours = $('#start-time-species-hours');
+  var $startMins = $('#start-time-species-mins');
+  var $endHours = $('#end-time-species-hours');
+  var $endMins = $('#end-time-species-mins');
+
+  appendHoursToSelect($startHours);
+  appendHoursToSelect($endHours);
+  appendMinsToSelect($startMins);
+  appendMinsToSelect($endMins);
+
+  // Start with the save button disabled.
+  $('#saving_species').prop('disabled', true);
+
+  exports.initializeSpeciesListeners(control);
+};
+
+
 /**
  * Plug in the click listeners in the UI.
  */
@@ -710,11 +1003,18 @@ exports.initializeListeners = function(control) {
   });
 
   $('#button-food').on('click', function() {
-
-
+    showFood();
   });
 
- 
+  $('.go-back').on('click', function() {
+    showChimps();
+    clearSpeciesAndFoodSelected();
+  });
+
+  $('#button-species').on('click', function() {
+    showSpecies();
+  });
+
   $('.chimp').on('click', function() {
     var chimpId = $(this).prop('id');
     //chimpid = chimpId;
@@ -746,19 +1046,19 @@ exports.initializeListeners = function(control) {
  * Show the time (arrival/departure) indicators in the save div.
  */
 exports.showTimeIndicatorsToEdit = function(show, chimp) {
-  var $timeIndicators = null; 
+  var $timeIndicators = null;
   var chimpid =getIdForTimeImage(chimp);
-  var img_source = document.getElementById(chimpid).src;
-  var array_splitting_with_slash = img_source.split("/");
-  var current_img = array_splitting_with_slash[array_splitting_with_slash.length - 1];
-  if (current_img == "time_empty.png") {
+  var imgSource = document.getElementById(chimpid).src;
+  var arraySplittingWithSlash = imgSource.split('/');
+  var currentImg = arraySplittingWithSlash[arraySplittingWithSlash.length - 1];
+  if (currentImg === 'time_empty.png') {
     $timeIndicators = $('.arrival');
   } else {
     $timeIndicators = $('.depart');
   }
   if (show) {
     $timeIndicators.removeClass('novisibility');
-  } 
+  }
   
   
   if (!show) {
@@ -984,6 +1284,82 @@ exports.getChimpFromUi = function(chimpId) {
 
 
 /**
+ * Return the active food from the UI. Does NOT have to be a valid food that
+ * can be saved. For instance, at first it might return 'mm' as the start time
+ * place holder.
+ */
+exports.getFoodFromUi = function() {
+  var startHours = $('#start-time-food-hours').val();
+  var startMins = $('#start-time-food-mins').val();
+  var startTime = startHours + ':' + startMins;
+
+  var endHours = $('#end-time-food-hours').val();
+  var endMins = $('#end-time-food-mins').val();
+  var endTime = endHours + ':' + endMins;
+
+  var food = $('#foods').val();
+  var foodPart = $('#food-part').val();
+
+  var date = urls.getFollowDateFromUrl();
+  var focalId = urls.getFocalChimpIdFromUrl();
+
+  var rowId = $('#food-summary').attr('rowid');
+  if (rowId === '') {
+    rowId = null;
+  }
+
+  var result = new models.Food(
+      rowId,
+      date,
+      focalId,
+      startTime,
+      endTime,
+      food,
+      foodPart
+  );
+  
+  return result;
+};
+
+
+/**
+ * Return the active species from the UI.
+ */
+exports.getSpeciesFromUi = function() {
+  var startHours = $('#start-time-species-hours').val();
+  var startMins = $('#start-time-species-mins').val();
+  var startTime = startHours + ':' + startMins;
+
+  var endHours = $('#end-time-species-hours').val();
+  var endMins = $('#end-time-species-mins').val();
+  var endTime = endHours + ':' + endMins;
+
+  var species = $('#species').val();
+  var number = $('#species_number').val();
+
+  var date = urls.getFollowDateFromUrl();
+  var focalId = urls.getFocalChimpIdFromUrl();
+
+  var rowId = $('#species-summary').attr('rowid');
+  if (rowId === '') {
+    rowId = null;
+  }
+
+  var result = new models.Species(
+      rowId,
+      date,
+      focalId,
+      startTime,
+      endTime,
+      species,
+      number
+  );
+  
+  return result;
+};
+
+
+/**
  * Make chimp-specific items visible as necessary. E.g. if the chimp is
  * present, it should be possible to edit the certainty, etc. To be editble
  * they have to be visible.
@@ -1043,6 +1419,8 @@ exports.initializeUi = function(control) {
   exports.updateUiForFollowTime();
 
   exports.initializeListeners(control);
+  exports.initializeFood(control);
+  exports.initializeSpecies(control);
 
   // And now we need to deal with the actual chimps themselves. There are two
   // possibilities here:
