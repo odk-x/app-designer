@@ -397,3 +397,126 @@ exports.writeRowForChimp = function(control, chimp, isUpdate) {
   }
 
 };
+
+
+exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
+  if (prev.length === 0) {
+    return curr;
+  } else if (prev.length !== curr.length) {
+    throw new Error('previous and current chimps not the same size');
+  }
+
+  var prevMap = {};
+  var currMap = {};
+
+  for (var i = 0; i < prev.length; i++) {
+    var prevChimpId = prev[i].chimpId;
+    var currChimpId = curr[i].chimpId;
+    prevMap[prevChimpId] = prev[i];
+    currMap[currChimpId] = curr[i];
+  }
+
+  var result = [];
+  prev.forEach(function(chimp) {
+    var chimpId = chimp.chimpId;
+    var prevChimp = prevMap[chimpId];
+    var currChimp = currMap[chimpId];
+    if (!prevChimp || !currChimp) {
+      throw new Error('did not find prev or curr chimp with id: ' + chimpId);
+    }
+
+    result.push(exports.updateChimpForPreviousTimepoint(prev, curr));
+  });
+
+  return result;
+};
+
+
+exports.updateChimpForPreviousTimepoint = function(prev, curr) {
+  if (!prev || !curr) {
+    throw new Error('prev and curr chimps must be truthy');
+  }
+
+  if (prev.chimpId !== curr.chimpId) {
+    throw new Error('chimp ids must be identical to update');
+  }
+
+  curr.certainty = prev.certainty;
+  curr.estrus = prev.estrus;
+
+  // chimp was there in the last time slot, update to continuing
+  if (prev.time === '15' ||
+      prev.time === '10' ||
+      prev.time === '5' ||
+      prev.time === '1'
+  ) {
+    // Must match timeLabels in jgiFollow.js.
+    curr.time = '1';
+  }
+
+  return curr;
+};
+
+
+/**
+ * Write a row for the food item into the database.
+ *
+ * If isUpdate is truthy, it instead updates, rather than adds, a row, and the
+ * rowId property of the food must be valid.
+ */
+exports.writeRowForFood = function(control, food, isUpdate) {
+  var table = tables.food;
+  var cols = table.columns;
+
+  var struct = {};
+  struct[cols.focalId] = food.focalId;
+  struct[cols.date] = food.date;
+  struct[cols.foodName] = food.foodName;
+  struct[cols.foodPart] = food.foodPart;
+  struct[cols.startTime] = parseInt(food.startTime);
+  struct[cols.endTime] = parseInt(food.endTime);
+
+  var stringified = JSON.stringify(struct);
+
+  if (isUpdate) {
+    var rowId = food.rowId;
+    if (!rowId) {
+      throw new Error('food.rowId was falsey!');
+    }
+    control.updateRow(table.tableId, stringified, rowId);
+  } else {
+    control.addRow(table.tableId, stringified);
+  }
+};
+
+
+/**
+ * Write a row for the species into the database.
+ *
+ * If isUpdate is truthy, update, rather than add a row. In the case of an
+ * update the rowId property of the species must be valid.
+ */
+exports.writeRowForSpecies = function(control, species, isUpdate) {
+  var table = tables.species;
+  var cols = table.columns;
+
+  var struct = {};
+  struct[cols.focalId] = species.focalChimpId;
+  struct[cols.date] = species.date;
+  struct[cols.speciesName] = species.speciesName;
+  struct[cols.speciesCount] = species.number;
+  struct[cols.startTime] = parseInt(species.startTime);
+  struct[cols.endTime] = parseInt(species.endTime);
+
+  var stringified = JSON.stringify(struct);
+
+  if (isUpdate) {
+    var rowId = species.rowId;
+    if (!rowId) {
+      throw new Error('species.foodId was falsey');
+    }
+    control.updateRow(table.tableId, stringified, rowId);
+  } else {
+    control.addRow(table.tableId, stringified);
+  }
+};
