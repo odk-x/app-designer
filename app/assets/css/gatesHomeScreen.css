@@ -148,6 +148,10 @@ body {
   visibility: hidden;
 }
 
+.nodisplay {
+  display: none;
+}
+
 ul {
     list-style-type: none;
     padding-left: 0px;

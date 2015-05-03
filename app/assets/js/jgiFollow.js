@@ -389,14 +389,14 @@ exports.updateUiForEndOfInterval = function() {
  */
 exports.updateIconForSelectedChimp = function(chimp, chimpid, timeid) {
   var imagePaths = {
-  absent: './img/time_empty.png',
-  continuing: './img/time_continues.png',
-  arriveFirst: './img/time_arriveFirst.png',
-  arriveSecond: './img/time_arriveSecond.png',
-  arriveThird: './img/time_arriveThird.png',
-  departFirst: './img/time_departFirst.png',
-  departSecond: './img/time_departSecond.png',
-  departThird: './img/time_departThird.png'
+    absent: './img/time_empty.png',
+    continuing: './img/time_continues.png',
+    arriveFirst: './img/time_arriveFirst.png',
+    arriveSecond: './img/time_arriveSecond.png',
+    arriveThird: './img/time_arriveThird.png',
+    departFirst: './img/time_departFirst.png',
+    departSecond: './img/time_departSecond.png',
+    departThird: './img/time_departThird.png'
   };
   var imageId = chimpid + "_img";  
   //var $img = $('#' + imageId);
@@ -991,7 +991,8 @@ exports.updateVisiblityForChimp = function(chimp) {
  */
 exports.initializeUi = function(control) {
 
-  //window.alert('hello from script');
+  $('.food-container').addClass('nodisplay');
+  $('.species-container').addClass('nodisplay');
 
   // Hide the editing UI to start with.
   //$('#time').addClass('novisibility');
