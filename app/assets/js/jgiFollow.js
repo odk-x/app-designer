@@ -79,6 +79,35 @@ function getIdForClosest(chimp) {
 
 
 /**
+ * Show the food editing div, hiding the species and chimps.
+ */
+function showFood() {
+  $('.container').addClass('nodisplay');
+  $('.species-container').addClass('nodisplay');
+  $('.food-container').removeClass('nodisplay');
+}
+
+
+/**
+ * Show the species editing div, hiding the food and chimps.
+ */
+function showSpecies() {
+  $('.container').addClass('nodisplay');
+  $('.food-container').addClass('nodisplay');
+  $('.species-container').removeClass('nodisplay');
+}
+
+
+/**
+ * Show the chimps, hiding the species and food.
+ */
+function showChimps() {
+  $('.food-container').addClass('nodisplay');
+  $('.species-container').addClass('nodisplay');
+  $('.container').removeClass('nodisplay');
+}
+
+/**
  * Labels that are used to indicate at what point in a 15 minute interval a
  * chimp arrived.
  */
@@ -678,6 +707,11 @@ exports.initializeListeners = function(control) {
 
     // Navigate to that url to move to the next timepoint.
     window.location.href = url;
+  });
+
+  $('#button-food').on('click', function() {
+
+
   });
 
  

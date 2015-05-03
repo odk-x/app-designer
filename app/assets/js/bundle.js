@@ -661,6 +661,103 @@ exports.createNewChimp = function(
 };
 
 
+/**
+ * The observation of a food item.
+ */
+exports.Food = function Food(
+    rowId,
+    date,
+    focalChimpId,
+    startTime,
+    endTime,
+    foodName,
+    foodPartEaten
+) {
+  if (!(this instanceof Food)) {
+    throw new Error('must use new');
+  }
+
+  // Can be undefined as long as creating a row for the first time
+  this.rowId = rowId;
+
+  this.date = date;
+  this.startTime = startTime;
+  this.foodName = foodName;
+  this.foodPartEaten = foodPartEaten;
+  this.endTime = endTime;
+  this.focalChimpId = focalChimpId;
+};
+
+
+exports.createNewFood = function(
+    date,
+    focalChimpId,
+    startTime,
+    endTime,
+    foodName,
+    foodPartEaten
+) {
+  var rowId = null;
+  var result = new exports.Food(
+      rowId,
+      date,
+      focalChimpId,
+      startTime,
+      endTime,
+      foodName,
+      foodPartEaten
+  );
+  return result;
+};
+
+
+/**
+ * The observation of a species.
+ */
+exports.Species = function Species(
+    rowId,
+    date,
+    focalChimpId,
+    startTime,
+    endTime,
+    speciesName,
+    number
+) {
+  if (!(this instanceof Species)) {
+    throw new Error('must use new');
+  }
+
+  this.rowId = rowId;
+
+  this.date = date;
+  this.focalChimpId = focalChimpId;
+  this.startTime = startTime;
+  this.endTime = endTime;
+  this.speciesName = speciesName;
+  this.number = number;
+};
+
+
+exports.createNewSpecies = function(
+    date,
+    focalChimpId,
+    startTime,
+    endTime,
+    speciesName,
+    number
+) {
+  var rowId = null;
+  var result = new exports.Species(
+      rowId,
+      date,
+      focalChimpId,
+      startTime,
+      endTime,
+      speciesName,
+      number
+  );
+  return result;
+};
 
 },{}],3:[function(require,module,exports){
 'use strict';
@@ -687,9 +784,11 @@ exports.chimpObservation = {
 exports.species = {
   tableId: 'other_species',
   columns: {
-    date: 'OS_FOL_date',
-    timeBegin: 'OS_time_begin',
-    focalId: 'OS_FOL_B_focal_AnimID'
+    startTime: 'OS_time_begin',
+    endTime: 'OS_time_end',
+    focalId: 'OS_FOL_B_focal_AnimID',
+    speciesName: 'OS_local_species_name_written',
+    speciesCount: 'OS_duration'
   }
 };
 
@@ -698,7 +797,10 @@ exports.food = {
   columns: {
     date: 'FB_FOL_date',
     focalId: 'FB_FOL_B_AnimID',
-    timeBegin: 'FB_begin_feed_time'
+    foodName: 'FB_FL_local_food_name',
+    foodPart: 'FB_FPL_local_food_part',
+    startTime: 'FB_begin_feed_time',
+    endTime: 'FB_end_feed_time'
   }
 };
 
@@ -10222,6 +10324,35 @@ function getIdForClosest(chimp) {
 
 
 /**
+ * Show the food editing div, hiding the species and chimps.
+ */
+function showFood() {
+  $('.container').addClass('nodisplay');
+  $('.species-container').addClass('nodisplay');
+  $('.food-container').removeClass('nodisplay');
+}
+
+
+/**
+ * Show the species editing div, hiding the food and chimps.
+ */
+function showSpecies() {
+  $('.container').addClass('nodisplay');
+  $('.food-container').addClass('nodisplay');
+  $('.species-container').removeClass('nodisplay');
+}
+
+
+/**
+ * Show the chimps, hiding the species and food.
+ */
+function showChimps() {
+  $('.food-container').addClass('nodisplay');
+  $('.species-container').addClass('nodisplay');
+  $('.container').removeClass('nodisplay');
+}
+
+/**
  * Labels that are used to indicate at what point in a 15 minute interval a
  * chimp arrived.
  */
@@ -10821,6 +10952,11 @@ exports.initializeListeners = function(control) {
 
     // Navigate to that url to move to the next timepoint.
     window.location.href = url;
+  });
+
+  $('#button-food').on('click', function() {
+
+
   });
 
  
