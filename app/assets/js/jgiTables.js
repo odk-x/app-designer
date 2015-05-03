@@ -22,9 +22,11 @@ exports.chimpObservation = {
 exports.species = {
   tableId: 'other_species',
   columns: {
-    date: 'OS_FOL_date',
-    timeBegin: 'OS_time_begin',
-    focalId: 'OS_FOL_B_focal_AnimID'
+    startTime: 'OS_time_begin',
+    endTime: 'OS_time_end',
+    focalId: 'OS_FOL_B_focal_AnimID',
+    speciesName: 'OS_local_species_name_written',
+    speciesCount: 'OS_duration'
   }
 };
 
@@ -33,7 +35,10 @@ exports.food = {
   columns: {
     date: 'FB_FOL_date',
     focalId: 'FB_FOL_B_AnimID',
-    timeBegin: 'FB_begin_feed_time'
+    foodName: 'FB_FL_local_food_name',
+    foodPart: 'FB_FPL_local_food_part',
+    startTime: 'FB_begin_feed_time',
+    endTime: 'FB_end_feed_time'
   }
 };
 
