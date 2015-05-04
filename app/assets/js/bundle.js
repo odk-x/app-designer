@@ -11657,9 +11657,6 @@ exports.initializeListeners = function(control) {
     exports.showChimpIsSelected(chimp);
 
     exports.showTimeIndicatorsToEdit(true, chimp);
-
-    // show that chimp has been selected
-
   });
 
   // Add listeners to the elements important for each chimp
