@@ -10901,7 +10901,7 @@ var certaintyLabels = {
  * The labels for certainty that are shown to a user.
  */
 var certaintyLabelsUser = {
-  notApplicable: ' ',
+  notApplicable: 'X',
   certain: '✓',
   uncertain: '•'
 };
