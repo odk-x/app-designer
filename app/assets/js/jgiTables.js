@@ -26,7 +26,8 @@ exports.species = {
     endTime: 'OS_time_end',
     focalId: 'OS_FOL_B_focal_AnimID',
     speciesName: 'OS_local_species_name_written',
-    speciesCount: 'OS_duration'
+    speciesCount: 'OS_duration',
+    date: 'OS_FOL_date'
   }
 };
 

@@ -123,6 +123,67 @@ exports.convertTableDataToFollowIntervals = function(data) {
 };
 
 
+exports.convertTableDataToSpecies = function(data) {
+  var result = [];
+  var cols = tables.species.columns;
+
+  for (var i = 0; i < data.getCount(); i++) {
+    var date = data.getData(i, cols.date);
+    var startTime = data.getData(i, cols.startTime);
+    var endTime = data.getData(i, cols.endTime);
+    var focalId = data.getData(i, cols.focalId);
+    var speciesName = data.getData(i, cols.speciesName);
+    var speciesCount = data.getData(i, cols.speciesCount);
+    var rowId = data.getRowId(i);
+
+    var species = new models.Species(
+        rowId,
+        date,
+        focalId,
+        startTime,
+        endTime,
+        speciesName,
+        speciesCount
+    );
+
+    result.push(species);
+  }
+
+  return result;
+};
+
+
+exports.convertTableDataToFood = function(data) {
+  var result = [];
+  var cols = tables.food.columns;
+
+  for (var i = 0; i < data.getCount(); i++) {
+    var rowId = data.getRowId(i);
+
+    var date = data.getData(i, cols.date);
+    var focalId = data.getData(i, cols.focalId);
+    var foodName = data.getData(i, cols.foodName);
+    var foodPart = data.getData(i, cols.foodPart);
+    var startTime = data.getData(i, cols.startTime);
+    var endTime = data.getData(i, cols.endTime);
+
+    var food = new models.Food(
+        rowId,
+        date,
+        focalId,
+        startTime,
+        endTime,
+        foodName,
+        foodPart
+    );
+
+    result.push(food);
+  }
+
+  return result;
+};
+
+
 /**
  * Convert a table data (eg as returned by getTableDataForTimepoint) to an
  * array of Chimp objects.
@@ -223,7 +284,7 @@ exports.getFoodDataForTimePoint = function(date, timeBegin, focalChimpId) {
 
 };
 
-exports.getFoodDataForDatePoint = function(date, focalChimpId) {
+exports.getFoodDataForDate = function(control, date, focalChimpId) {
 
   var table = tables.food;
 
@@ -270,7 +331,7 @@ exports.getSpeciesDataForTimePoint = function(date, timeBegin, focalChimpId) {
 
 };
 
-exports.getSpeciesDataForTimePoints = function(date, focalChimpId) {
+exports.getSpeciesDataForDate = function(control, date, focalChimpId) {
 
   var table = tables.species;
 

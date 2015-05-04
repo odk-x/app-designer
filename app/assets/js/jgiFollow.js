@@ -172,7 +172,7 @@ function foodCanBePersisted(food) {
   return (
       timeIsValid(food.startTime) &&
       food.foodName !== '0' &&
-      food.foorPartEaten !== '0'
+      food.foodPartEaten !== '0'
   );
 }
 
@@ -212,11 +212,107 @@ function validSpeciesSelected() {
 }
 
 
+/**
+ * Add the Species in the species array to a select list as options.
+ */
+exports.addSpeciesToList = function(speciesArr, $list) {
+  speciesArr.forEach(function(species) {
+    var option = $('<option></option>');
+    option.attr('value', species.speciesName);
+    option.addClass('dynamic');
+    option.text(species.number + ' ' + species.speciesName);
+
+    option.attr('__rowId', species.rowId);
+    option.attr('__date', species.date);
+    option.attr('__focalId', species.focalChimpId);
+    option.attr('__startTime', species.startTime);
+    option.attr('__endTime', species.endTime);
+    option.attr('__number', species.number);
+
+    $list.append(option);
+  });
+};
+
+
+/**
+ * Add the Food in the food array to a select list as options.
+ */
+exports.addFoodToList = function(foodArr, $list) {
+  foodArr.forEach(function(food) {
+    var option = $('<option></option>');
+    option.attr('value', food.foodName);
+    option.addClass('dynamic');
+    option.text(food.foodName + ' ' + food.foodPartEaten);
+
+    option.attr('__rowId', food.rowId);
+    option.attr('__date', food.date);
+    option.attr('__focalId', food.focalChimpId);
+    option.attr('__startTime', food.startTime);
+    option.attr('__endTime', food.endTime);
+    option.attr('__name', food.foodName);
+    option.attr('__part', food.foodPartEaten);
+
+    $list.append(option);
+  });
+
+};
+
+
 exports.refreshSpeciesList = function(control) {
+  // remove the existing dynamic items from both lists.
+  $('.species-spec-list .dynamic').remove();
+  
+  var date = urls.getFollowDateFromUrl();
+  var focalId = urls.getFocalChimpIdFromUrl();
+  var speciesTableData = db.getSpeciesDataForDate(control, date, focalId);
+  
+  var allSpecies = db.convertTableDataToSpecies(speciesTableData);
+
+  var activeSpecies = [];
+  var completedSpecies = [];
+
+  allSpecies.forEach(function(species) {
+    if (species.endTime === util.flagEndTimeNotSet) {
+      activeSpecies.push(species);
+    } else {
+      completedSpecies.push(species);
+    }
+  });
+
+  var $activeList = $('#active-species');
+  var $completedList = $('#finished-speces');
+
+  exports.addSpeciesToList(activeSpecies, $activeList);
+  exports.addSpeciesToList(completedSpecies, $completedList);
 };
 
 
 exports.refreshFoodList = function(control) {
+  // remove the existing dynamic items from both lists.
+  $('.food-spec-list .dynamic').remove();
+  
+  var date = urls.getFollowDateFromUrl();
+  var focalId = urls.getFocalChimpIdFromUrl();
+  var foodTableData = db.getFoodDataForDate(control, date, focalId);
+  
+  var allFood = db.convertTableDataToFood(foodTableData);
+
+  var activeFood = [];
+  var completedFood = [];
+
+  allFood.forEach(function(food) {
+    if (food.endTime === util.flagEndTimeNotSet) {
+      activeFood.push(food);
+    } else {
+      completedFood.push(food);
+    }
+  });
+
+  var $activeList = $('#active-food');
+  var $completedList = $('#finished-food');
+
+  exports.addFoodToList(activeFood, $activeList);
+  exports.addFoodToList(completedFood, $completedList);
 };
 
 

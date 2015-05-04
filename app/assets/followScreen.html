@@ -617,20 +617,35 @@
         </table>
       </div>
 
-      <div id='extras-container'>
-        <ul id='food-list' class='user-list list-group'>
-          <li class='list-group-item'>Item 1</li>
-        </ul>
-
-        <ul id='species-list' class='user-list list-group'>
-          <li class='list-group-item'>Species 1</li>
-        </ul>
-      </div>
-
-    <div id="buttons">
-      <button id="button-food">Foods</button>
-      <button id="button-species">Species</button>
-    </div>
+    <ul id="buttons">
+      <li>
+        <button id="button-food">Add Food</button>
+      </li>
+      <li>
+        <select id='active-food' class='active-list food-spec-select'>
+          <option value='0' class='default' disabled selected>Active Foods</option>
+        </select>
+      </li>
+      <li>
+        <select id='finished-food' class='active-list food-spec-select'>
+          <option value='0' class='default' disabled selected>Finished Foods</option>
+        </select>
+      </li>
+        
+      <li>
+        <button id="button-species">Add Species</button>
+      </li>
+      <li>
+        <select id='active-species' class='active-list species-spec-select'>
+          <option value='0' class='default' disabled selected>Active Species</option>
+        </select>
+      </li>
+      <li>
+        <select id='finished-species' class='active-list species-spec-select'>
+          <option value='0' class='default' disabled selected>Finished Species</option>
+        </select>
+      </li>
+    </ul>
      <div id="info_div" style="font-size: 16px;">
       <!--<ul id="inside_div">-->
        <div id="time">
