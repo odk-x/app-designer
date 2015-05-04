@@ -10537,11 +10537,14 @@ function clearSpeciesAndFoodSelected() {
   $('.food-select option').prop('selected', false);
   $('.species-select option').prop('selected', false);
 
+  $('.food-spec-select').val('0');
+  $('.species-spec-select').val('0');
+
   $('.food-summary').text('?');
   $('.species-summary').text('?');
 
-  $('#food-summary').attr('rowid', '');
-  $('#species-summary').attr('rowid', '');
+  $('#food-summary').attr('__rowid', '');
+  $('#species-summary').attr('__rowid', '');
 }
 
 
@@ -10612,12 +10615,13 @@ exports.addSpeciesToList = function(speciesArr, $list) {
     option.addClass('dynamic');
     option.text(species.number + ' ' + species.speciesName);
 
-    option.attr('__rowId', species.rowId);
+    option.attr('__rowid', species.rowId);
     option.attr('__date', species.date);
     option.attr('__focalId', species.focalChimpId);
     option.attr('__startTime', species.startTime);
     option.attr('__endTime', species.endTime);
     option.attr('__number', species.number);
+    option.attr('__name', species.speciesName);
 
     $list.append(option);
   });
@@ -10634,7 +10638,7 @@ exports.addFoodToList = function(foodArr, $list) {
     option.addClass('dynamic');
     option.text(food.foodName + ' ' + food.foodPartEaten);
 
-    option.attr('__rowId', food.rowId);
+    option.attr('__rowid', food.rowId);
     option.attr('__date', food.date);
     option.attr('__focalId', food.focalChimpId);
     option.attr('__startTime', food.startTime);
@@ -10650,7 +10654,7 @@ exports.addFoodToList = function(foodArr, $list) {
 
 exports.refreshSpeciesList = function(control) {
   // remove the existing dynamic items from both lists.
-  $('.species-spec-list .dynamic').remove();
+  $('.species-spec-select .dynamic').remove();
   
   var date = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
@@ -10670,7 +10674,7 @@ exports.refreshSpeciesList = function(control) {
   });
 
   var $activeList = $('#active-species');
-  var $completedList = $('#finished-speces');
+  var $completedList = $('#finished-species');
 
   exports.addSpeciesToList(activeSpecies, $activeList);
   exports.addSpeciesToList(completedSpecies, $completedList);
@@ -10679,7 +10683,7 @@ exports.refreshSpeciesList = function(control) {
 
 exports.refreshFoodList = function(control) {
   // remove the existing dynamic items from both lists.
-  $('.food-spec-list .dynamic').remove();
+  $('.food-spec-select .dynamic').remove();
   
   var date = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
@@ -10703,6 +10707,78 @@ exports.refreshFoodList = function(control) {
 
   exports.addFoodToList(activeFood, $activeList);
   exports.addFoodToList(completedFood, $completedList);
+};
+
+
+exports.editExistingFood = function(food) {
+  var timeParts = food.startTime.split(':');
+  var startHours = timeParts[0];
+  var startMins = timeParts[1];
+
+  var endHours;
+  var endMins;
+  if (food.endTime === util.flagEndTimeNotSet) {
+    endHours = 'hh';
+    endMins = 'mm';
+  } else {
+    var endParts = food.endTime.split(':');
+    endHours = endParts[0];
+    endMins = endParts[1];
+  }
+
+  var $startHours = $('#start-time-food-hours');
+  var $startMins = $('#start-time-food-mins');
+  var $endHours = $('#end-time-food-hours');
+  var $endMins = $('#end-time-food-mins');
+  var $food = $('#foods');
+  var $foodPart = $('#food-part');
+  var $foodSummary = $('#food-summary');
+
+  $startHours.val(startHours);
+  $startMins.val(startMins);
+  $endHours.val(endHours);
+  $endMins.val(endMins);
+  $food.val(food.foodName);
+  $foodPart.val(food.foodPartEaten);
+  $foodSummary.attr('__rowid', food.rowId);
+
+  showFood();
+};
+
+
+exports.editExistingSpecies = function(species) {
+  var timeParts = species.startTime.split(':');
+  var startHours = timeParts[0];
+  var startMins = timeParts[1];
+
+  var endHours;
+  var endMins;
+  if (species.endTime === util.flagEndTimeNotSet) {
+    endHours = 'hh';
+    endMins = 'mm';
+  } else {
+    var endParts = species.endTime.split(':');
+    endHours = endParts[0];
+    endMins = endParts[1];
+  }
+
+  var $startHours = $('#start-time-species-hours');
+  var $startMins = $('#start-time-species-mins');
+  var $endHours = $('#end-time-species-hours');
+  var $endMins = $('#end-time-species-mins');
+  var $species = $('#species');
+  var $speciesNumber = $('#species_number');
+  var $speciesSummary = $('#species-summary');
+
+  $startHours.val(startHours);
+  $startMins.val(startMins);
+  $endHours.val(endHours);
+  $endMins.val(endMins);
+  $species.val(species.speciesName);
+  $speciesNumber.val(species.number);
+  $speciesSummary.attr('__rowid', species.rowId);
+
+  showSpecies();
 };
 
 
@@ -11356,6 +11432,20 @@ exports.initializeFoodListeners = function(control) {
     showChimps();
     clearSpeciesAndFoodSelected();
   });
+
+  $('.food-spec-select').change(function() {
+    var $option = $('option:selected', this);
+    var food = new models.Food(
+      $option.attr('__rowid'),
+      $option.attr('__date'),
+      $option.attr('__focalId'),
+      $option.attr('__startTime'),
+      $option.attr('__endTime'),
+      $option.attr('__name'),
+      $option.attr('__part')
+    );
+    exports.editExistingFood(food);
+  });
 };
 
 
@@ -11382,6 +11472,20 @@ exports.initializeSpeciesListeners = function(control) {
     showChimps();
     clearSpeciesAndFoodSelected();
     exports.refreshSpeciesList(control);
+  });
+
+  $('.species-spec-select').change(function() {
+    var $option = $('option:selected', this);
+    var species = new models.Species(
+      $option.attr('__rowid'),
+      $option.attr('__date'),
+      $option.attr('__focalId'),
+      $option.attr('__startTime'),
+      $option.attr('__endTime'),
+      $option.attr('__name'),
+      $option.attr('__number')
+    );
+    exports.editExistingSpecies(species);
   });
 };
 
@@ -11789,7 +11893,7 @@ exports.getFoodFromUi = function() {
   var date = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
 
-  var rowId = $('#food-summary').attr('rowid');
+  var rowId = $('#food-summary').attr('__rowid');
   if (rowId === '') {
     rowId = null;
   }
@@ -11826,7 +11930,7 @@ exports.getSpeciesFromUi = function() {
   var date = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
 
-  var rowId = $('#species-summary').attr('rowid');
+  var rowId = $('#species-summary').attr('__rowid');
   if (rowId === '') {
     rowId = null;
   }
