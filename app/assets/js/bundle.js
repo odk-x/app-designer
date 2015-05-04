@@ -11636,29 +11636,34 @@ exports.initializeListeners = function(control) {
  * Show the time (arrival/departure) indicators in the save div.
  */
 exports.showTimeIndicatorsToEdit = function(show, chimp) {
-  var $timeIndicators = null;
-  var chimpid =getIdForTimeImage(chimp);
-  var imgSource = document.getElementById(chimpid).src;
-  var arraySplittingWithSlash = imgSource.split('/');
-  var currentImg = arraySplittingWithSlash[arraySplittingWithSlash.length - 1];
-  if (currentImg === 'time_empty.png') {
-    $timeIndicators = $('.arrival');
-  } else {
-    $timeIndicators = $('.depart');
-  }
-  if (show) {
-    $timeIndicators.removeClass('novisibility');
-  }
-  
-  
   if (!show) {
-    $timeIndicators.addClass('novisibility');
+    $('.time').addClass('novisibility');
     return;
   }
-
+  // If a chimp has arrived or is empty, we want to display the arrival
+  // options. This means that a chimp won't be able to arrive and leave in the
+  // same interval, but this was told to be ok. It simplifies our db logic for
+  // sure, as we can stick to the 'single record per chimp per interval' model.
+  var $timeIndicators;
+  switch (chimp.time) {
+    case timeLabels.absent:
+    case timeLabels.arriveFirst:
+    case timeLabels.arriveSecond:
+    case timeLabels.arriveThird:
+      $timeIndicators = $('.arrival');
+      break;
+    case timeLabels.continuing:
+    case timeLabels.departFirst:
+    case timeLabels.departSecond:
+    case timeLabels.departThird:
+      $timeIndicators = $('.depart');
+      break;
+    default:
+      console.log('unrecognized chimp.time: ' + chimp.time);
+  }
+  $timeIndicators.removeClass('novisibility');
   // TODO: select the correct image as selected
   console.log('need to indicate the correct time in the save div: ' + chimp);
-
 };
 
 
@@ -11810,6 +11815,13 @@ exports.getSelectedChimp = function() {
 exports.showChimpIsSelected = function(chimp) {
   // first unselect all other chimps, as we can only ever have one selected.
   $('*').removeClass('selected-chimp');
+
+  // also remove all existing editing options
+  exports.showCertaintyToEdit(false);
+  exports.showWithinFiveToEdit(false);
+  exports.showEstrusToEdit(false);
+  exports.showClosestToEdit(false);
+  exports.showTimeIndicatorsToEdit(false);
   
   // Then select the passed in chimp.
   // The chimp as represented as elements for the user.
