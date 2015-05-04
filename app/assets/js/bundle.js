@@ -10862,7 +10862,7 @@ exports.updateSpeciesAfterEdit = function() {
     $speciesSummaryName.text('?');
   }
 
-  if (species.number !== '0') {
+  if (species.number !== '') {
     $speciesSummaryNumber.text(species.number);
   } else {
     $speciesSummaryNumber.text('?');
