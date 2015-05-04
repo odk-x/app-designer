@@ -469,10 +469,10 @@ exports.writeRowForFood = function(control, food, isUpdate) {
   var cols = table.columns;
 
   var struct = {};
-  struct[cols.focalId] = food.focalId;
+  struct[cols.focalId] = food.focalChimpId;
   struct[cols.date] = food.date;
   struct[cols.foodName] = food.foodName;
-  struct[cols.foodPart] = food.foodPart;
+  struct[cols.foodPart] = food.foodPartEaten;
   struct[cols.startTime] = food.startTime;
   struct[cols.endTime] = food.endTime;
 

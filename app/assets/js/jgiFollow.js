@@ -851,8 +851,6 @@ exports.initializeFoodListeners = function(control) {
 
   $('#saving_food').click(function() {
     console.log('save food');
-    showChimps();
-    clearSpeciesAndFoodSelected();
     var activeFood = exports.getFoodFromUi();
     // We can save something if it doesn't have a valid end time, but we want
     // to flag it as invalid.
@@ -869,6 +867,8 @@ exports.initializeFoodListeners = function(control) {
     }
 
     exports.refreshFoodList(control);
+    showChimps();
+    clearSpeciesAndFoodSelected();
   });
 };
 
@@ -878,8 +878,6 @@ exports.initializeSpeciesListeners = function(control) {
 
   $('#saving_species').click(function() {
     console.log('save species');
-    showChimps();
-    clearSpeciesAndFoodSelected();
     var activeSpecies = exports.getSpeciesFromUi();
     // We can save something if it doesn't have a valid end time, but we want
     // to flag it as invalid.
@@ -895,6 +893,8 @@ exports.initializeSpeciesListeners = function(control) {
       db.writeRowForSpecies(control, activeSpecies, false);
     }
 
+    showChimps();
+    clearSpeciesAndFoodSelected();
     exports.refreshSpeciesList(control);
   });
 };

@@ -470,12 +470,12 @@ exports.writeRowForFood = function(control, food, isUpdate) {
   var cols = table.columns;
 
   var struct = {};
-  struct[cols.focalId] = food.focalId;
+  struct[cols.focalId] = food.focalChimpId;
   struct[cols.date] = food.date;
   struct[cols.foodName] = food.foodName;
   struct[cols.foodPart] = food.foodPart;
-  struct[cols.startTime] = parseInt(food.startTime);
-  struct[cols.endTime] = parseInt(food.endTime);
+  struct[cols.startTime] = food.startTime;
+  struct[cols.endTime] = food.endTime;
 
   var stringified = JSON.stringify(struct);
 
@@ -506,8 +506,8 @@ exports.writeRowForSpecies = function(control, species, isUpdate) {
   struct[cols.date] = species.date;
   struct[cols.speciesName] = species.speciesName;
   struct[cols.speciesCount] = species.number;
-  struct[cols.startTime] = parseInt(species.startTime);
-  struct[cols.endTime] = parseInt(species.endTime);
+  struct[cols.startTime] = species.startTime;
+  struct[cols.endTime] = species.endTime;
 
   var stringified = JSON.stringify(struct);
 
@@ -990,7 +990,7 @@ function convertToTime(hours, mins) {
  * A flag to be used for end time on species and food observations in the case
  * that an end time has not yet been set.
  */
-exports.flagEndTimeNotSet = '-1';
+exports.flagEndTimeNotSet = 'ongoing';
 
 exports.incrementTime = function(time) {
 
@@ -10477,6 +10477,9 @@ function clearSpeciesAndFoodSelected() {
 
   $('.food-summary').text('?');
   $('.species-summary').text('?');
+
+  $('#food-summary').attr('rowid', '');
+  $('#species-summary').attr('rowid', '');
 }
 
 
@@ -10537,6 +10540,14 @@ function validSpeciesSelected() {
 }
 
 
+exports.refreshSpeciesList = function(control) {
+};
+
+
+exports.refreshFoodList = function(control) {
+};
+
+
 /**
  * Update the UI after an edit to a food has taken place.
  */
@@ -10545,7 +10556,7 @@ exports.updateFoodAfterEdit = function() {
   var $foodSummaryStart = $('#food-summary-start-time');
   var $foodSummaryEnd = $('#food-summary-end-time');
   var $foodSummaryFood = $('#food-summary-food');
-  var $foodSummaryPart = $('#food-summarh-part');
+  var $foodSummaryPart = $('#food-summary-part');
 
   if (validFoodSelected()) {
     $saveFood.prop('disabled', false);
@@ -11168,6 +11179,24 @@ exports.initializeFoodListeners = function(control) {
 
   $('#saving_food').click(function() {
     console.log('save food');
+    var activeFood = exports.getFoodFromUi();
+    // We can save something if it doesn't have a valid end time, but we want
+    // to flag it as invalid.
+    if (!timeIsValid(activeFood.endTime)) {
+      activeFood.endTime = util.flagEndTimeNotSet;
+    }
+
+    if (activeFood.rowId) {
+      // update
+      db.writeRowForFood(control, activeFood, true);
+    } else {
+      // add
+      db.writeRowForFood(control, activeFood, false);
+    }
+
+    exports.refreshFoodList(control);
+    showChimps();
+    clearSpeciesAndFoodSelected();
   });
 };
 
@@ -11177,6 +11206,24 @@ exports.initializeSpeciesListeners = function(control) {
 
   $('#saving_species').click(function() {
     console.log('save species');
+    var activeSpecies = exports.getSpeciesFromUi();
+    // We can save something if it doesn't have a valid end time, but we want
+    // to flag it as invalid.
+    if (!timeIsValid(activeSpecies.endTime)) {
+      activeSpecies.endTime = util.flagEndTimeNotSet;
+    }
+
+    if (activeSpecies.rowId) {
+      // update
+      db.writeRowForSpecies(control, activeSpecies, true);
+    } else {
+      // add
+      db.writeRowForSpecies(control, activeSpecies, false);
+    }
+
+    showChimps();
+    clearSpeciesAndFoodSelected();
+    exports.refreshSpeciesList(control);
   });
 };
 
@@ -11296,20 +11343,6 @@ exports.initializeListeners = function(control) {
     showSpecies();
   });
 
-  $('#saving-food').on('click', function() {
-    showChimps();
-    clearSpeciesAndFoodSelected();
-    var activeFood = getFoodFromUi();
-    // TODO
-  });
-
-  $('#saving_species').on('click', function() {
-    showChimps();
-    clearSpeciesAndFoodSelected();
-    var activeSpecies = getSpeciesFromUi();
-    // TODO
-  });
- 
   $('.chimp').on('click', function() {
     var chimpId = $(this).prop('id');
     //chimpid = chimpId;
@@ -11598,8 +11631,13 @@ exports.getFoodFromUi = function() {
   var date = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
 
+  var rowId = $('#food-summary').attr('rowid');
+  if (rowId === '') {
+    rowId = null;
+  }
+
   var result = new models.Food(
-      null,
+      rowId,
       date,
       focalId,
       startTime,
@@ -11630,8 +11668,13 @@ exports.getSpeciesFromUi = function() {
   var date = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
 
+  var rowId = $('#species-summary').attr('rowid');
+  if (rowId === '') {
+    rowId = null;
+  }
+
   var result = new models.Species(
-      null,
+      rowId,
       date,
       focalId,
       startTime,
