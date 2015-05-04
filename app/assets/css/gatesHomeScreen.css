@@ -34,6 +34,10 @@ input{/*[type='checkbox'] {*/
     border: 2px solid #555;
 }
 
+.male-female-divider {
+  border-bottom: 1px solid #000;
+}
+
 #extras-container {
     position: absolute;
     width: 300px;
