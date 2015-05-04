@@ -11323,6 +11323,14 @@ exports.initializeEditListeners = function(control) {
     exports.showCertaintyToEdit(false);
   });
 
+  $('input[name=certain]:radio').click(function() {
+    var chimp = exports.getSelectedChimp();
+    if (chimp.certainty === $(this).val()) {
+      // then we've reselected the same value. hide the buttons
+      exports.showCertaintyToEdit(false);
+    }
+  });
+
   // Within five meters
   $('input[name=distance]:radio').on('change', function() {
     var valueFromUi = $(this).val();
@@ -11349,6 +11357,14 @@ exports.initializeEditListeners = function(control) {
     db.writeRowForChimp(control, chimp, true);
 
     exports.showWithinFiveToEdit(false);
+  });
+
+  $('input[name=distance]:radio').click(function() {
+    var chimp = exports.getSelectedChimp();
+    if (chimp.withinFive === $(this).val()) {
+      // then we've reselected the same value. hide the buttons
+      exports.showWithinFiveToEdit(false);
+    }
   });
 
   // Estrus
@@ -11384,6 +11400,14 @@ exports.initializeEditListeners = function(control) {
     exports.showEstrusToEdit(false);
   });
 
+  $('input[name=sex_state]:radio').click(function() {
+    var chimp = exports.getSelectedChimp();
+    if (chimp.estrus === $(this).val()) {
+      // then we've reselected the same value. hide the buttons
+      exports.showEstrusToEdit(false);
+    }
+  });
+
   // Closest to focal
   $('input[name=close]:radio').on('change', function() {
     var valueFromUi = $(this).val();
@@ -11409,6 +11433,14 @@ exports.initializeEditListeners = function(control) {
     db.writeRowForChimp(control, chimp, true);
 
     exports.showClosestToEdit(false);
+  });
+
+  $('input[name=close]:radio').click(function() {
+    var chimp = exports.getSelectedChimp();
+    if (chimp.closest === $(this).val()) {
+      // then we've reselected the same value. hide the buttons
+      exports.showClosestToEdit(false);
+    }
   });
 
 
