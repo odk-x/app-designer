@@ -15,7 +15,7 @@ function display() {
             communityId,
             beginTime,
             researcher) {
-		
+
         var struct = {};
         struct['FOL_date'] = date;
         struct['FOL_B_AnimID'] = focalChimpId;
@@ -28,16 +28,34 @@ function display() {
         control.addRow('follow', stringified);
     };
 
-    $('#begin-follow').on('click', function() {
-        document.getElementById("formsubmitbutton").style.display = "none"; // to undisplay
-        document.getElementById("buttonreplacement").style.display = ""; // to display 
+    var invalidDataToStart = function(data) {
+      if (!data || data === '') {
+        return true;
+      } else {
+        return false;
+      }
+    };
 
+    $('#begin-follow').on('click', function() {
         // First retrieve the information from the form.
         var date = $('#FOL_date').val();
         var focalChimpId = $('#FOL_B_AnimID').val().toLowerCase();
         var communityId = $('#FOL_CL_community_id').val();
         var beginTime = $('#FOL_begin_time').val();
         var researcher = $('#FOL_am_observer_1').val();
+
+        if (
+          invalidDataToStart(date) ||
+          invalidDataToStart(focalChimpId) ||
+          invalidDataToStart(beginTime) ||
+          invalidDataToStart(researcher)
+        ) {
+          alert('Date, Focal Chimp, Start Time, and Researcher Required');
+          return;
+        }
+
+        document.getElementById("formsubmitbutton").style.display = "none"; // to undisplay
+        document.getElementById("buttonreplacement").style.display = ""; // to display 
 
         // TODO: browserify
         // create new follow object
