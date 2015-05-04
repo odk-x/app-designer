@@ -11157,7 +11157,7 @@ exports.updateUiForFollowTime = function() {
 
   var followTimeUser;
 
-  if (!followTime) {
+  if (!followTime || followTime === '') {
     console.log('No follow time has been specified!');
     followTimeUser = 'N/A';
   } else {
@@ -11166,6 +11166,13 @@ exports.updateUiForFollowTime = function() {
 
   $('#time-label').text(followTimeUser);
 
+};
+
+
+exports.updateUiForFocalId = function() {
+  var focalId = urls.getFocalChimpIdFromUrl();
+  var $focalButton = $('#' + focalId);
+  $focalButton.addClass('focal-chimp');
 };
 
 
@@ -12019,6 +12026,7 @@ exports.initializeUi = function(control) {
   $('#close_focal').addClass('novisibility');
 
   exports.updateUiForFollowTime();
+  exports.updateUiForFocalId();
 
   exports.initializeListeners(control);
   exports.initializeFood(control);
