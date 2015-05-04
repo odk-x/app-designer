@@ -110,6 +110,11 @@ label {
     border-color: #5bc0de;
 }
 
+.manual-entry {
+  width: 35px;
+  height: 35px;
+}
+
 .sexual-state {
     font-weight: bold;
     font-size:18px;
