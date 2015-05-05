@@ -26,11 +26,21 @@
           Continue Follow
         </button>
         </li>
+        <li>
+          <button class="btn btn-primary btn-block btn-launch" id="most-recent-follow-button">
+          Continue Last Follow
+          </button>
+        </li>
     </ul>
 
   </div>
         <script type="text/javascript">
             $(display());
+        </script>
+        <script type="text/javascript" src="js/homeScreenBundle.js"></script>
+        <script>
+          var jgiHomeScreen = require('jgiHomeScreen');
+          jgiHomeScreen.initializeUi(window.control);
         </script>
     </body>
 </html>

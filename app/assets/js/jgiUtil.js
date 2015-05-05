@@ -11,11 +11,37 @@ function convertToTime(hours, mins) {
   return hoursStr + ':' + minsStr;
 }
 
+
+function sortItemsWithDate(objects) {
+  objects.sort(function(a, b) {
+    if (a.date < b.date) {
+      return -1;
+    } else if (a.date > b.date) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
 /**
  * A flag to be used for end time on species and food observations in the case
  * that an end time has not yet been set.
  */
 exports.flagEndTimeNotSet = 'ongoing';
+
+
+/**
+ * Sort the array of Follow objects.
+ */
+exports.sortFollows = function(follows) {
+  sortItemsWithDate(follows);
+};
+
+
+exports.sortFollowIntervals = function(intervals) {
+  sortItemsWithDate(intervals);
+};
 
 exports.incrementTime = function(time) {
 
