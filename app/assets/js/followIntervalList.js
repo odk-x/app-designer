@@ -43,14 +43,12 @@ exports.initializeUi = function initializeUi(control) {
  * Populate the list of Follows.
  */
 exports.displayFollowIntervals = function displayFollowIntervals(control) {
-  var followTime = urls.getFollowTimeFromUrl();
   var followDate = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
 
   var followIntervals = db.getFollowIntervalsForFollow(
       control,
       followDate,
-      followTime,
       focalId
   );
 

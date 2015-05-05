@@ -32,7 +32,6 @@ exports.createWhereClause = function createWhereClause(columns) {
 exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
     control,
     date,
-    beginTime,
     focalId
 ) {
   // We don't have a straight forward way of getting FollowInterval objects out
@@ -50,12 +49,11 @@ exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
     [
       cols.date,
       cols.focalId,
-      cols.followStartTime,
       cols.chimpId
     ]
   );
 
-  var selectionArgs = [date, focalId, beginTime, knownChimpId];
+  var selectionArgs = [date, focalId, knownChimpId];
 
   var tableData = control.query(
       table.tableId,
@@ -118,6 +116,67 @@ exports.convertTableDataToFollowIntervals = function(data) {
     var followInterval = new models.FollowInterval(date, beginTime, focalId);
 
     result.push(followInterval);
+  }
+
+  return result;
+};
+
+
+exports.convertTableDataToSpecies = function(data) {
+  var result = [];
+  var cols = tables.species.columns;
+
+  for (var i = 0; i < data.getCount(); i++) {
+    var date = data.getData(i, cols.date);
+    var startTime = data.getData(i, cols.startTime);
+    var endTime = data.getData(i, cols.endTime);
+    var focalId = data.getData(i, cols.focalId);
+    var speciesName = data.getData(i, cols.speciesName);
+    var speciesCount = data.getData(i, cols.speciesCount);
+    var rowId = data.getRowId(i);
+
+    var species = new models.Species(
+        rowId,
+        date,
+        focalId,
+        startTime,
+        endTime,
+        speciesName,
+        speciesCount
+    );
+
+    result.push(species);
+  }
+
+  return result;
+};
+
+
+exports.convertTableDataToFood = function(data) {
+  var result = [];
+  var cols = tables.food.columns;
+
+  for (var i = 0; i < data.getCount(); i++) {
+    var rowId = data.getRowId(i);
+
+    var date = data.getData(i, cols.date);
+    var focalId = data.getData(i, cols.focalId);
+    var foodName = data.getData(i, cols.foodName);
+    var foodPart = data.getData(i, cols.foodPart);
+    var startTime = data.getData(i, cols.startTime);
+    var endTime = data.getData(i, cols.endTime);
+
+    var food = new models.Food(
+        rowId,
+        date,
+        focalId,
+        startTime,
+        endTime,
+        foodName,
+        foodPart
+    );
+
+    result.push(food);
   }
 
   return result;
@@ -224,7 +283,7 @@ exports.getFoodDataForTimePoint = function(date, timeBegin, focalChimpId) {
 
 };
 
-exports.getFoodDataForDatePoint = function(date, focalChimpId) {
+exports.getFoodDataForDate = function(control, date, focalChimpId) {
 
   var table = tables.food;
 
@@ -271,7 +330,7 @@ exports.getSpeciesDataForTimePoint = function(date, timeBegin, focalChimpId) {
 
 };
 
-exports.getSpeciesDataForTimePoints = function(date, focalChimpId) {
+exports.getSpeciesDataForDate = function(control, date, focalChimpId) {
 
   var table = tables.species;
 
@@ -399,12 +458,137 @@ exports.writeRowForChimp = function(control, chimp, isUpdate) {
 
 };
 
+
+exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
+  if (prev.length === 0) {
+    return curr;
+  } else if (prev.length !== curr.length) {
+    throw new Error('previous and current chimps not the same size');
+  }
+
+  var prevMap = {};
+  var currMap = {};
+
+  for (var i = 0; i < prev.length; i++) {
+    var prevChimpId = prev[i].chimpId;
+    var currChimpId = curr[i].chimpId;
+    prevMap[prevChimpId] = prev[i];
+    currMap[currChimpId] = curr[i];
+  }
+
+  var result = [];
+  prev.forEach(function(chimp) {
+    var chimpId = chimp.chimpId;
+    var prevChimp = prevMap[chimpId];
+    var currChimp = currMap[chimpId];
+    if (!prevChimp || !currChimp) {
+      throw new Error('did not find prev or curr chimp with id: ' + chimpId);
+    }
+
+    result.push(exports.updateChimpForPreviousTimepoint(prevChimp, currChimp));
+  });
+
+  return result;
+};
+
+
+exports.updateChimpForPreviousTimepoint = function(prev, curr) {
+  if (!prev || !curr) {
+    throw new Error('prev and curr chimps must be truthy');
+  }
+
+  if (prev.chimpId !== curr.chimpId) {
+    throw new Error('chimp ids must be identical to update');
+  }
+
+  curr.certainty = prev.certainty;
+  curr.estrus = prev.estrus;
+
+  // chimp was there in the last time slot, update to continuing
+  if (prev.time === '15' ||
+      prev.time === '10' ||
+      prev.time === '5' ||
+      prev.time === '1'
+  ) {
+    // Must match timeLabels in jgiFollow.js.
+    curr.time = '1';
+  }
+
+  return curr;
+};
+
+
+/**
+ * Write a row for the food item into the database.
+ *
+ * If isUpdate is truthy, it instead updates, rather than adds, a row, and the
+ * rowId property of the food must be valid.
+ */
+exports.writeRowForFood = function(control, food, isUpdate) {
+  var table = tables.food;
+  var cols = table.columns;
+
+  var struct = {};
+  struct[cols.focalId] = food.focalChimpId;
+  struct[cols.date] = food.date;
+  struct[cols.foodName] = food.foodName;
+  struct[cols.foodPart] = food.foodPartEaten;
+  struct[cols.startTime] = food.startTime;
+  struct[cols.endTime] = food.endTime;
+
+  var stringified = JSON.stringify(struct);
+
+  if (isUpdate) {
+    var rowId = food.rowId;
+    if (!rowId) {
+      throw new Error('food.rowId was falsey!');
+    }
+    control.updateRow(table.tableId, stringified, rowId);
+  } else {
+    control.addRow(table.tableId, stringified);
+  }
+};
+
+
+/**
+ * Write a row for the species into the database.
+ *
+ * If isUpdate is truthy, update, rather than add a row. In the case of an
+ * update the rowId property of the species must be valid.
+ */
+exports.writeRowForSpecies = function(control, species, isUpdate) {
+  var table = tables.species;
+  var cols = table.columns;
+
+  var struct = {};
+  struct[cols.focalId] = species.focalChimpId;
+  struct[cols.date] = species.date;
+  struct[cols.speciesName] = species.speciesName;
+  struct[cols.speciesCount] = species.number;
+  struct[cols.startTime] = species.startTime;
+  struct[cols.endTime] = species.endTime;
+
+  var stringified = JSON.stringify(struct);
+
+  if (isUpdate) {
+    var rowId = species.rowId;
+    if (!rowId) {
+      throw new Error('species.foodId was falsey');
+    }
+    control.updateRow(table.tableId, stringified, rowId);
+  } else {
+    control.addRow(table.tableId, stringified);
+  }
+};
+
 },{"./jgiModels":2,"./jgiTables":3}],2:[function(require,module,exports){
 'use strict';
 
 /**
  * The models we will use for rows in the database.
  */
+
+var util = require('./jgiUtil');
 
 
 /**
@@ -538,8 +722,111 @@ exports.createNewChimp = function(
 };
 
 
+/**
+ * The observation of a food item.
+ */
+exports.Food = function Food(
+    rowId,
+    date,
+    focalChimpId,
+    startTime,
+    endTime,
+    foodName,
+    foodPartEaten
+) {
+  if (!(this instanceof Food)) {
+    throw new Error('must use new');
+  }
 
-},{}],3:[function(require,module,exports){
+  // Can be undefined as long as creating a row for the first time
+  this.rowId = rowId;
+
+  this.date = date;
+  this.startTime = startTime;
+  this.foodName = foodName;
+  this.foodPartEaten = foodPartEaten;
+  this.endTime = endTime;
+  this.focalChimpId = focalChimpId;
+};
+
+
+/**
+ * Create a new food observation. Sets rowId to null and endTime to the not
+ * set flag.
+ */
+exports.createNewFood = function(
+    date,
+    focalChimpId,
+    startTime,
+    foodName,
+    foodPartEaten
+) {
+  var rowId = null;
+  var result = new exports.Food(
+      rowId,
+      date,
+      focalChimpId,
+      startTime,
+      util.flagEndTimeNotSet,
+      foodName,
+      foodPartEaten
+  );
+  return result;
+};
+
+
+/**
+ * The observation of a species.
+ */
+exports.Species = function Species(
+    rowId,
+    date,
+    focalChimpId,
+    startTime,
+    endTime,
+    speciesName,
+    number
+) {
+  if (!(this instanceof Species)) {
+    throw new Error('must use new');
+  }
+
+  this.rowId = rowId;
+
+  this.date = date;
+  this.focalChimpId = focalChimpId;
+  this.startTime = startTime;
+  this.endTime = endTime;
+  this.speciesName = speciesName;
+  this.number = number;
+};
+
+
+/**
+ * Create a new species observation. Sets rowId to null and endTime to the not
+ * set flag.
+ */
+exports.createNewSpecies = function(
+    date,
+    focalChimpId,
+    startTime,
+    speciesName,
+    number
+) {
+  var rowId = null;
+  var result = new exports.Species(
+      rowId,
+      date,
+      focalChimpId,
+      startTime,
+      util.flagEndTimeNotSet,
+      speciesName,
+      number
+  );
+  return result;
+};
+
+},{"./jgiUtil":5}],3:[function(require,module,exports){
 'use strict';
 
 /**
@@ -564,9 +851,12 @@ exports.chimpObservation = {
 exports.species = {
   tableId: 'other_species',
   columns: {
-    date: 'OS_FOL_date',
-    timeBegin: 'OS_time_begin',
-    focalId: 'OS_FOL_B_focal_AnimID'
+    startTime: 'OS_time_begin',
+    endTime: 'OS_time_end',
+    focalId: 'OS_FOL_B_focal_AnimID',
+    speciesName: 'OS_local_species_name_written',
+    speciesCount: 'OS_duration',
+    date: 'OS_FOL_date'
   }
 };
 
@@ -575,7 +865,10 @@ exports.food = {
   columns: {
     date: 'FB_FOL_date',
     focalId: 'FB_FOL_B_AnimID',
-    timeBegin: 'FB_begin_feed_time'
+    foodName: 'FB_FL_local_food_name',
+    foodPart: 'FB_FPL_local_food_part',
+    startTime: 'FB_begin_feed_time',
+    endTime: 'FB_end_feed_time'
   }
 };
 
@@ -740,6 +1033,178 @@ exports.getFocalChimpIdFromUrl = function() {
 };
 
 },{}],5:[function(require,module,exports){
+'use strict';
+
+
+/**
+ * Convert hours an mins integers to a zero-padded string. 1,5, would become:
+ * '01:05'.
+ */
+function convertToTime(hours, mins) {
+  var hoursStr = exports.convertToStringWithTwoZeros(hours);
+  var minsStr = exports.convertToStringWithTwoZeros(mins);
+  return hoursStr + ':' + minsStr;
+}
+
+
+function sortItemsWithDate(objects) {
+  objects.sort(function(a, b) {
+    if (a.date < b.date) {
+      return -1;
+    } else if (a.date > b.date) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
+/**
+ * A flag to be used for end time on species and food observations in the case
+ * that an end time has not yet been set.
+ */
+exports.flagEndTimeNotSet = 'ongoing';
+
+
+/**
+ * Sort the array of Follow objects.
+ */
+exports.sortFollows = function(follows) {
+  sortItemsWithDate(follows);
+};
+
+
+exports.sortFollowIntervals = function(intervals) {
+  sortItemsWithDate(intervals);
+};
+
+exports.incrementTime = function(time) {
+
+  var interval = 15;
+  var parts = time.split(':');
+  var hours = parseInt(parts[0]);
+  var mins = parseInt(parts[1]);
+  var maybeTooLarge = mins + interval;
+
+  if (maybeTooLarge > 59) {
+    // then we've overflowed our time system.
+    mins = maybeTooLarge % 60;
+    // Don't worry about overflowing hours. Not going to worry about
+    // late night chimp monitoring.
+    hours = hours + 1;
+  } else {
+    mins = maybeTooLarge;
+  }
+
+  // Format these strings to be two digits.
+  var hoursStr = exports.convertToStringWithTwoZeros(hours);
+  var minsStr = exports.convertToStringWithTwoZeros(mins);
+  var result = hoursStr + ':' + minsStr;
+  return result;
+
+};
+
+
+/**
+ * Get an array of the times that fall within an interval. If you passed
+ * '7:00', this would return an array of ['mm', '7:00', '7:01', ..., '7:14'].
+ */
+exports.getTimesInInterval = function(time) {
+  var interval = 15;
+  var parts = time.split(':');
+  var hours = parseInt(parts[0]);
+  var mins = parseInt(parts[1]);
+
+  var result = ['mm'];
+  // Fow now, assume our start times begin at 0, 15, 30, 45. This will prevent
+  // us having to worry about overflowing.
+  for (var i = 0; i < mins + interval; i++) {
+    var newMins = mins + i;
+    var nextTime = convertToTime(hours, newMins);
+    result.push(nextTime);
+  }
+  
+  return result;
+};
+
+
+/**
+ * Return ['hh', '00', '01', ..., '23'].
+ */
+exports.getAllHours = function() {
+  var result = ['hh'];
+  for (var i = 0; i < 24; i++) {
+    var hour = exports.convertToStringWithTwoZeros(i);
+    result.push(hour);
+  }
+  return result;
+};
+
+
+/**
+ * Return ['mm', '01', '02', ..., '59']
+ */
+exports.getAllMinutes = function() {
+  var result = ['mm'];
+  for (var i = 0; i < 60; i++) {
+    var mins = exports.convertToStringWithTwoZeros(i);
+    result.push(mins);
+  }
+  return result;
+};
+
+
+/**
+ * True if parseInt will succeed.
+ */
+exports.isInt = function(val) {
+  // This is kind of hacky, but it will do for converting from user input.
+  return val !== '' && !isNaN(val);
+};
+
+
+exports.decrementTime = function(time) {
+  var interval = 15;
+  var parts = time.split(':');
+  var hours = parseInt(parts[0]);
+  var mins = parseInt(parts[1]);
+  var maybeTooSmall = mins - interval;
+
+  if (maybeTooSmall < 0) {
+    // negative time
+    mins = 60 + maybeTooSmall;
+    hours = (hours === 24) ? 0 : (hours - 1);
+  } else {
+    mins = maybeTooSmall;
+  }
+
+  var hoursStr = exports.convertToStringWithTwoZeros(hours);
+  var minsStr = exports.convertToStringWithTwoZeros(mins);
+  var result = hoursStr + ':' + minsStr;
+  return result;
+};
+
+
+/**
+ * Convert an integer to a string, padded to two zeros.
+ */
+exports.convertToStringWithTwoZeros = function(intTime) {
+
+  if (intTime > 59) {
+    throw new Error('invalid intTime: ' + intTime);
+  }
+
+  var result;
+  if (intTime < 10) {
+    result = '0' + intTime;
+  } else {
+    result = intTime.toString();
+  }
+  return result;
+
+};
+
+},{}],6:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.3
  * http://jquery.com/
@@ -9992,14 +10457,12 @@ exports.initializeUi = function initializeUi(control) {
  * Populate the list of Follows.
  */
 exports.displayFollowIntervals = function displayFollowIntervals(control) {
-  var followTime = urls.getFollowTimeFromUrl();
   var followDate = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
 
   var followIntervals = db.getFollowIntervalsForFollow(
       control,
       followDate,
-      followTime,
       focalId
   );
 
@@ -10022,4 +10485,4 @@ exports.displayFollowIntervals = function displayFollowIntervals(control) {
   });
 };
 
-},{"./jgiDb.js":1,"./jgiUrls.js":4,"jquery":5}]},{},[]);
+},{"./jgiDb.js":1,"./jgiUrls.js":4,"jquery":6}]},{},[]);

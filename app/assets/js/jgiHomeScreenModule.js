@@ -26,7 +26,6 @@ exports.initializeListeners = function(control) {
     var intervals = db.getFollowIntervalsForFollow(
         control,
         mostRecentFollow.date,
-        mostRecentFollow.beginTime,
         mostRecentFollow.focalId
     );
 
@@ -44,11 +43,7 @@ exports.initializeListeners = function(control) {
         lastInterval.focalId
     );
 
-    var url = control.getFileAsUrl(
-      'assets/followScreen.html' + queryParams
-    );
-
-    control.launchHTML(url);
+    control.launchHTML('assets/followScreen.html' + queryParams);
   });
 };
 

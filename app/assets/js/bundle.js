@@ -32,7 +32,6 @@ exports.createWhereClause = function createWhereClause(columns) {
 exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
     control,
     date,
-    beginTime,
     focalId
 ) {
   // We don't have a straight forward way of getting FollowInterval objects out
@@ -50,12 +49,11 @@ exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
     [
       cols.date,
       cols.focalId,
-      cols.followStartTime,
       cols.chimpId
     ]
   );
 
-  var selectionArgs = [date, focalId, beginTime, knownChimpId];
+  var selectionArgs = [date, focalId, knownChimpId];
 
   var tableData = control.query(
       table.tableId,
@@ -1048,11 +1046,37 @@ function convertToTime(hours, mins) {
   return hoursStr + ':' + minsStr;
 }
 
+
+function sortItemsWithDate(objects) {
+  objects.sort(function(a, b) {
+    if (a.date < b.date) {
+      return -1;
+    } else if (a.date > b.date) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
 /**
  * A flag to be used for end time on species and food observations in the case
  * that an end time has not yet been set.
  */
 exports.flagEndTimeNotSet = 'ongoing';
+
+
+/**
+ * Sort the array of Follow objects.
+ */
+exports.sortFollows = function(follows) {
+  sortItemsWithDate(follows);
+};
+
+
+exports.sortFollowIntervals = function(intervals) {
+  sortItemsWithDate(intervals);
+};
 
 exports.incrementTime = function(time) {
 

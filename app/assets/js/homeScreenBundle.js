@@ -32,7 +32,6 @@ exports.createWhereClause = function createWhereClause(columns) {
 exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
     control,
     date,
-    beginTime,
     focalId
 ) {
   // We don't have a straight forward way of getting FollowInterval objects out
@@ -50,12 +49,11 @@ exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
     [
       cols.date,
       cols.focalId,
-      cols.followStartTime,
       cols.chimpId
     ]
   );
 
-  var selectionArgs = [date, focalId, beginTime, knownChimpId];
+  var selectionArgs = [date, focalId, knownChimpId];
 
   var tableData = control.query(
       table.tableId,
@@ -10442,7 +10440,6 @@ exports.initializeListeners = function(control) {
     var intervals = db.getFollowIntervalsForFollow(
         control,
         mostRecentFollow.date,
-        mostRecentFollow.beginTime,
         mostRecentFollow.focalId
     );
 
@@ -10460,11 +10457,7 @@ exports.initializeListeners = function(control) {
         lastInterval.focalId
     );
 
-    var url = control.getFileAsUrl(
-      'assets/followScreen.html' + queryParams
-    );
-
-    control.launchHTML(url);
+    control.launchHTML('assets/followScreen.html' + queryParams);
   });
 };
 

@@ -1,12 +1,2 @@
-table_keys=teaHouses, teaTypes, teaInventory, teaHousesEditable, geotagger, plot, plotVisits, femaleClients, maleClients, geopoints, follow
-teaHouses.filename=assets/csv/Tea_houses.updated.csv
-teaTypes.filename=assets/csv/Tea_types.updated.csv
-teaInventory.filename=assets/csv/Tea_inventory.updated.csv
-teaHousesEditable.filename=assets/csv/Tea_houses_editable.updated.csv
-geotagger.filename=assets/csv/geotagger.updated.csv
-plotVisits.filename=assets/csv/visit.example.csv
-plot.filename=assets/csv/plot.example.csv
-femaleClients.filename=assets/csv/femaleClients.allfields.csv
-maleClients.filename=assets/csv/maleClients.allfields.csv
-geopoints.filename=assets/csv/geopoints.allfields.csv
+table_keys=follow
 follow.filename=assets/csv/follow.updated.csv
