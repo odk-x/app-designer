@@ -1739,6 +1739,10 @@ exports.initializeUi = function(control) {
     exports.handleExistingTime(existingData);
   }
 
+  // 15 minutes
+  var intervalDuration = 1000 * 60 * 15;
+  window.setTimeout(exports.updateUiForEndOfInterval, intervalDuration);
+
 };
 
 
