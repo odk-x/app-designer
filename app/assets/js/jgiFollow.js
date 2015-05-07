@@ -189,7 +189,8 @@ function speciesCanBePersisted(species) {
   return (
       timeIsValid(species.startTime) &&
       species.speciesName !== '0' &&
-      util.isInt(species.number)
+      util.isInt(species.number) &&
+      species.number > 0
   );
 }
 
@@ -473,7 +474,8 @@ exports.updateSpeciesAfterEdit = function() {
     $speciesSummaryName.text('?');
   }
 
-  if (species.number !== '') {
+  if (species.number !== '0') {
+    // 0 is the default, illegal, unselectable value
     $speciesSummaryNumber.text(species.number);
   } else {
     $speciesSummaryNumber.text('?');
