@@ -162,6 +162,10 @@ body {
   visibility: hidden;
 }
 
+.permanent-no-vis {
+  visibility: hidden;
+}
+
 .nodisplay {
   display: none;
 }
