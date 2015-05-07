@@ -58,6 +58,7 @@ input{/*[type='checkbox'] {*/
   border-color: #357ebd;
   margin-bottom: 15px;
   width: 100%;
+  max-width: 156px; /* hard-coded for nexus 7 tablets */
 }
 
 #buttons button {
