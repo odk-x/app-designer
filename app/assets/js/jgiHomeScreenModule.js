@@ -7,6 +7,7 @@ var db = require('./jgiDb');
 var $ = require('jquery');
 var util = require('./jgiUtil');
 var urls = require('./jgiUrls');
+var logging = require('./jgiLogging');
 
 exports.initializeListeners = function(control) {
   var $mostRecentFollow = $('#most-recent-follow-button');
@@ -48,5 +49,7 @@ exports.initializeListeners = function(control) {
 };
 
 exports.initializeUi = function(control) {
+  logging.initializeClickLogger();
+
   exports.initializeListeners(control);
 };

@@ -10,6 +10,7 @@ var models = require('./jgiModels');
 var db = require('./jgiDb');
 var $ = require('jquery');
 var util = require('./jgiUtil');
+var logging = require('./jgiLogging');
 //var chimpid = "";
 
 function assertIsChimp(chimp) {
@@ -1743,6 +1744,8 @@ exports.updateVisiblityForChimp = function(chimp) {
  * This used to be called 'display', in case you're looking for that method.
  */
 exports.initializeUi = function(control) {
+
+  logging.initializeLogging();
 
   $('.food-container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');
