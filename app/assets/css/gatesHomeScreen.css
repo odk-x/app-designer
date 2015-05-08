@@ -183,6 +183,16 @@ ul {
     background-color: #ccc;
 }
 
+.species-select {
+  margin: 20px;
+  font-size: 30px;
+}
+
+.food-select {
+  margin: 20px;
+  font-size: 30px;
+}
+
 
 .selected-chimp {
   background-color: green;
