@@ -11018,7 +11018,8 @@ var estrusLabels = {
   a: '0',
   b: '25',
   c: '50',
-  d: '75'
+  d: '75',
+  e: '100'
 };
 
 
@@ -11029,7 +11030,8 @@ var estrusLabelsUser = {
   a: '.00',
   b: '.25',
   c: '.50',
-  d: '.75'
+  d: '.75',
+  e: '1.0'
 };
 
 
@@ -11207,6 +11209,9 @@ exports.updateEstrusUiForChimp = function(chimp) {
       break;
     case estrusLabels.d:
       $estrus.text(estrusLabelsUser.d);
+      break;
+    case estrusLabels.e:
+      $estrus.text(estrusLabelsUser.e);
       break;
     default:
       console.log('unrecognized chimp estrus state: ' + chimp);
@@ -11516,6 +11521,9 @@ exports.initializeEditListeners = function(control) {
         break;
       case estrusLabels.d:
         valueForDb = estrusLabels.d;
+        break;
+      case estrusLabels.e:
+        valueForDb = estrusLabels.e;
         break;
       default:
         console.log('unrecognized estrus value from ui: ' + valueFromUi);
