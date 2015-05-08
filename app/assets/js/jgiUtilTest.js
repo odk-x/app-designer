@@ -57,3 +57,43 @@ test('incrementTime 09:45', function(t) {
   var actual = util.incrementTime('09:45');
   t.equal(actual, '10:00');
 });
+
+
+test('decrementTime 07:00', function(t) {
+  t.plan(1);
+
+  var actual = util.decrementTime('07:00');
+  t.equal(actual, '06:45');
+});
+
+
+test('decrementTime 07:15', function(t) {
+  t.plan(1);
+
+  var actual = util.decrementTime('07:15');
+  t.equal(actual, '07:00');
+});
+
+
+test('decrementTime 07:30', function(t) {
+  t.plan(1);
+
+  var actual = util.decrementTime('07:30');
+  t.equal(actual, '07:15');
+});
+
+
+test('decrementTime 07:45', function(t) {
+  t.plan(1);
+
+  var actual = util.decrementTime('07:45');
+  t.equal(actual, '07:30');
+});
+
+
+test('decrementTime 08:00', function(t) {
+  t.plan(1);
+
+  var actual = util.decrementTime('08:00');
+  t.equal(actual, '07:45');
+});
