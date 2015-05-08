@@ -782,6 +782,54 @@ exports.updateUiForFollowTime = function() {
 };
 
 
+/**
+ * Update the UI for the "previous" button.
+ */
+exports.initializePreviousButton = function(control) {
+  // Hide the button if there is no previous instance. Otherwise, go back in
+  // time 15 minutes. We will determine if there is a previous instance by
+  // whether or not the current time is the start time of the follow.
+  var focalId = urls.getFocalChimpIdFromUrl();
+  var date = urls.getFollowDateFromUrl();
+  var currentTime = urls.getFollowTimeFromUrl();
+  var previousTime = util.decrementTime(currentTime);
+
+  var $prevButton = $('#previous-button');
+
+  var arrThisFollow = db.getFollowForDateAndChimp(control, date, focalId);
+  if (arrThisFollow.length === 0) {
+    // No follow for this day. Trouble!!!
+    console.log('no follow found for this day! this is a bug.');
+    $prevButton.addClass('nodisplay');
+    return;
+  }
+  var thisFollow = arrThisFollow[0];
+
+  if (thisFollow.beginTime === currentTime) {
+    // We're at the first interval.
+    $prevButton.addClass('nodisplay');
+    return;
+  }
+
+  // Otherwise we have a valid previous time.
+  $prevButton.click(function() {
+    exports.showLoadingScreen(true);
+
+    // Prepare the url we're going to use for the next timepoint.
+    var queryString = urls.createParamsForFollow(
+      date,
+      previousTime,
+      focalId
+    );
+    var url = control.getFileAsUrl('assets/followScreen.html' + queryString);
+
+    // Navigate to that url to move to the next timepoint.
+    window.location.href = url;
+  });
+
+};
+
+
 exports.updateUiForFocalId = function() {
   var focalId = urls.getFocalChimpIdFromUrl();
   var $focalButton = $('#' + focalId);
@@ -790,13 +838,11 @@ exports.updateUiForFocalId = function() {
 
 
 exports.updateUiForEndOfInterval = function() {
-
   // update the UI to show time has expired
   var $nextButton = $('#next-button');
   $nextButton.removeClass('btn-primary');
   $nextButton.addClass('btn-danger');
   $nextButton.text('Time Up!');
-
 };
 
 /**
@@ -1712,6 +1758,7 @@ exports.initializeUi = function(control) {
 
   exports.updateUiForFollowTime();
   exports.updateUiForFocalId();
+  exports.initializePreviousButton(control);
 
   exports.initializeListeners(control);
   exports.initializeFood(control);

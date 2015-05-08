@@ -395,6 +395,32 @@ exports.getAllFollows = function getAllFollows(control) {
   return result;
 };
 
+
+/**
+ * Get the Follow for the given date and focal chimp.
+ */
+exports.getFollowForDateAndChimp = function(control, date, focalId) {
+  var table = tables.follow;
+  var cols = table.columns;
+
+  var whereClause = exports.createWhereClause(
+    [
+      cols.date,
+      cols.focalId
+    ]
+  );
+  var selectionArgs = [date, focalId];
+
+  var tableData = control.query(
+      table.tableId,
+      whereClause,
+      selectionArgs
+  );
+
+  var result = exports.convertTableDataToFollows(tableData);
+  return result;
+};
+
 /**
  * Write a follow object (as defined in the models module).
  */
