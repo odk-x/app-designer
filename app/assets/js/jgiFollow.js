@@ -505,7 +505,6 @@ var timeLabels = {
  * labels we use internally, not the ones shown to the user.
  */
 var certaintyLabels = {
-  notApplicable: '0',
   certain: '1',
   uncertain: '2'
 };
@@ -515,7 +514,6 @@ var certaintyLabels = {
  * The labels for certainty that are shown to a user.
  */
 var certaintyLabelsUser = {
-  notApplicable: 'X',
   certain: '✓',
   uncertain: '•'
 };
@@ -679,9 +677,6 @@ exports.updateCertaintyUiForChimp = function(chimp) {
 
   // And now update the user facing label.
   switch (chimp.certainty) {
-    case certaintyLabels.notApplicable:
-      $certainty.text(certaintyLabelsUser.notApplicable);
-      break;
     case certaintyLabels.certain:
       $certainty.text(certaintyLabelsUser.certain);
       break;
@@ -963,9 +958,6 @@ exports.initializeEditListeners = function(control) {
 
     var valueForDb;
     switch (value) {
-      case certaintyLabels.notApplicable:
-        valueForDb = certaintyLabels.notApplicable;
-        break;
       case certaintyLabels.certain:
         valueForDb = certaintyLabels.certain;
         break;

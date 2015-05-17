@@ -764,7 +764,7 @@ exports.createNewChimp = function(
     chimpId
 ) {
   var defTime = '0';
-  var defCertainty = '0';
+  var defCertainty = '1';
   var defWithinFive = '0';
   var defEstrus = '0';
   var defClosest = '0';
