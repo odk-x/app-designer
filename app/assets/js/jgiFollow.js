@@ -506,7 +506,8 @@ var timeLabels = {
  */
 var certaintyLabels = {
   certain: '1',
-  uncertain: '2'
+  uncertain: '2',
+  nest: '3'
 };
 
 
@@ -515,7 +516,8 @@ var certaintyLabels = {
  */
 var certaintyLabelsUser = {
   certain: '✓',
-  uncertain: '•'
+  uncertain: '•',
+  nest: 'N'
 };
 
 
@@ -682,6 +684,9 @@ exports.updateCertaintyUiForChimp = function(chimp) {
       break;
     case certaintyLabels.uncertain:
       $certainty.text(certaintyLabelsUser.uncertain);
+      break;
+    case certaintyLabels.nest:
+      $certainty.text(certaintyLabelsUser.nest);
       break;
     default:
       console.log('unrecognized chimp certainty: ' + chimp);
@@ -963,6 +968,9 @@ exports.initializeEditListeners = function(control) {
         break;
       case certaintyLabels.uncertain:
         valueForDb = certaintyLabels.uncertain;
+        break;
+      case certaintyLabels.nest:
+        valueForDb = certaintyLabels.nest;
         break;
       default:
         console.log('unrecognized chimp certainty value from ui: ' + value);
