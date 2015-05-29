@@ -3,11 +3,14 @@
 var db = require('./jgiDb.js');
 var urls = require('./jgiUrls.js');
 var $ = require('jquery');
+var logger = require('./jgiLogging');
 
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
 exports.initializeUi = function initializeUi(control) {
+
+  logger.initializeLogging();
 
   $('#list').click(function(e) {
     // We set the attributes we need in the li id. However, we may have
@@ -28,6 +31,13 @@ exports.initializeUi = function initializeUi(control) {
     // create url and launch list
     var queryParams = urls.createParamsForFollow(date, beginTime, focalId);
     var isReviewSet = urls.isReviewMode();
+    console.log(
+      ' jgiLogging: showIntervals with params: ' +
+      queryParams
+    );
+    var url = control.getFileAsUrl(
+      'assets/followIntervalList.html' + queryParams
+    );
 
     if (!isReviewSet) {
         console.log("I am here where review mode is false");

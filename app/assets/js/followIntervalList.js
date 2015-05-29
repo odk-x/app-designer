@@ -3,11 +3,14 @@
 var db = require('./jgiDb.js');
 var urls = require('./jgiUrls.js');
 var $ = require('jquery');
+var logger = require('./jgiLogging');
 
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
 exports.initializeUi = function initializeUi(control) {
+
+  logger.initializeLogging();
 
   $('#list').click(function(e) {
     // We set the attributes we need in the li id. However, we may have
@@ -27,6 +30,10 @@ exports.initializeUi = function initializeUi(control) {
 
     // create url and launch list
     var queryParams = urls.createParamsForFollow(date, beginTime, focalId);
+    console.log(
+      ' jgiLogging: launchFollowScreenFromList with params: ' +
+      queryParams
+    );
     var url = control.getFileAsUrl(
       'assets/followScreen.html' + queryParams
     );

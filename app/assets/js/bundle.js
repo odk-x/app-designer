@@ -607,7 +607,55 @@ exports.writeRowForSpecies = function(control, species, isUpdate) {
   }
 };
 
-},{"./jgiModels":2,"./jgiTables":3}],2:[function(require,module,exports){
+},{"./jgiModels":3,"./jgiTables":4}],2:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+var urls = require('./jgiUrls');
+
+
+exports.DO_LOGGING = true;
+
+
+exports.getFollowRepresentation = function() {
+  var followDate = urls.getFollowDateFromUrl();
+  var focalId = urls.getFocalChimpIdFromUrl();
+  var intervalStart = urls.getFollowTimeFromUrl();
+  var result = followDate + ' ' + focalId + ' ' + intervalStart;
+  return result;
+};
+
+
+
+exports.initializeClickLogger = function() {
+  $('button, select, option, input').click(function() {
+    if (!exports.DO_LOGGING) {
+      return;
+    }
+
+    var followRepresentation = exports.getFollowRepresentation();
+
+    var $thisObj = $(this);
+    var now = new Date().toISOString();
+    console.log(
+      ' jgiLogging: ' +
+      now +
+      ' clickId: ' +
+      $thisObj.prop('id') +
+      ' elementName: ' +
+      $thisObj.get(0).tagName +
+      ' followInfo: ' +
+      followRepresentation
+    );
+  });
+
+};
+
+exports.initializeLogging = function() {
+  exports.initializeClickLogger();
+};
+
+},{"./jgiUrls":5,"jquery":7}],3:[function(require,module,exports){
 'use strict';
 
 /**
@@ -716,7 +764,7 @@ exports.createNewChimp = function(
     chimpId
 ) {
   var defTime = '0';
-  var defCertainty = '0';
+  var defCertainty = '1';
   var defWithinFive = '0';
   var defEstrus = '0';
   var defClosest = '0';
@@ -852,7 +900,7 @@ exports.createNewSpecies = function(
   return result;
 };
 
-},{"./jgiUtil":5}],3:[function(require,module,exports){
+},{"./jgiUtil":6}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -909,7 +957,7 @@ exports.follow = {
   }
 };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1071,7 +1119,7 @@ exports.getFocalChimpIdFromUrl = function() {
 
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 
@@ -1243,7 +1291,7 @@ exports.convertToStringWithTwoZeros = function(intTime) {
 
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.3
  * http://jquery.com/
@@ -10463,6 +10511,7 @@ var models = require('./jgiModels');
 var db = require('./jgiDb');
 var $ = require('jquery');
 var util = require('./jgiUtil');
+var logging = require('./jgiLogging');
 //var chimpid = "";
 
 function assertIsChimp(chimp) {
@@ -10957,9 +11006,9 @@ var timeLabels = {
  * labels we use internally, not the ones shown to the user.
  */
 var certaintyLabels = {
-  notApplicable: '0',
   certain: '1',
-  uncertain: '2'
+  uncertain: '2',
+  nest: '3'
 };
 
 
@@ -10967,9 +11016,9 @@ var certaintyLabels = {
  * The labels for certainty that are shown to a user.
  */
 var certaintyLabelsUser = {
-  notApplicable: 'X',
   certain: '✓',
-  uncertain: '•'
+  uncertain: '•',
+  nest: 'N'
 };
 
 
@@ -10998,7 +11047,8 @@ var estrusLabels = {
   a: '0',
   b: '25',
   c: '50',
-  d: '75'
+  d: '75',
+  e: '100'
 };
 
 
@@ -11009,7 +11059,8 @@ var estrusLabelsUser = {
   a: '.00',
   b: '.25',
   c: '.50',
-  d: '.75'
+  d: '.75',
+  e: '1.0'
 };
 
 
@@ -11129,14 +11180,14 @@ exports.updateCertaintyUiForChimp = function(chimp) {
 
   // And now update the user facing label.
   switch (chimp.certainty) {
-    case certaintyLabels.notApplicable:
-      $certainty.text(certaintyLabelsUser.notApplicable);
-      break;
     case certaintyLabels.certain:
       $certainty.text(certaintyLabelsUser.certain);
       break;
     case certaintyLabels.uncertain:
       $certainty.text(certaintyLabelsUser.uncertain);
+      break;
+    case certaintyLabels.nest:
+      $certainty.text(certaintyLabelsUser.nest);
       break;
     default:
       console.log('unrecognized chimp certainty: ' + chimp);
@@ -11187,6 +11238,9 @@ exports.updateEstrusUiForChimp = function(chimp) {
       break;
     case estrusLabels.d:
       $estrus.text(estrusLabelsUser.d);
+      break;
+    case estrusLabels.e:
+      $estrus.text(estrusLabelsUser.e);
       break;
     default:
       console.log('unrecognized chimp estrus state: ' + chimp);
@@ -11410,14 +11464,14 @@ exports.initializeEditListeners = function(control) {
 
     var valueForDb;
     switch (value) {
-      case certaintyLabels.notApplicable:
-        valueForDb = certaintyLabels.notApplicable;
-        break;
       case certaintyLabels.certain:
         valueForDb = certaintyLabels.certain;
         break;
       case certaintyLabels.uncertain:
         valueForDb = certaintyLabels.uncertain;
+        break;
+      case certaintyLabels.nest:
+        valueForDb = certaintyLabels.nest;
         break;
       default:
         console.log('unrecognized chimp certainty value from ui: ' + value);
@@ -11496,6 +11550,9 @@ exports.initializeEditListeners = function(control) {
         break;
       case estrusLabels.d:
         valueForDb = estrusLabels.d;
+        break;
+      case estrusLabels.e:
+        valueForDb = estrusLabels.e;
         break;
       default:
         console.log('unrecognized estrus value from ui: ' + valueFromUi);
@@ -12197,6 +12254,8 @@ exports.updateVisiblityForChimp = function(chimp) {
  */
 exports.initializeUi = function(control) {
 
+  logging.initializeLogging();
+
   $('.food-container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');
 
@@ -12364,4 +12423,4 @@ exports.getChimpIdsFromUi = function() {
 
 };
 
-},{"./jgiDb":1,"./jgiModels":2,"./jgiUrls":4,"./jgiUtil":5,"jquery":6}]},{},[1,2,4]);
+},{"./jgiDb":1,"./jgiLogging":2,"./jgiModels":3,"./jgiUrls":5,"./jgiUtil":6,"jquery":7}]},{},[1,3,5]);

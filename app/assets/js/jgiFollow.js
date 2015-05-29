@@ -10,6 +10,7 @@ var models = require('./jgiModels');
 var db = require('./jgiDb');
 var $ = require('jquery');
 var util = require('./jgiUtil');
+var logging = require('./jgiLogging');
 //var chimpid = "";
 
 function assertIsChimp(chimp) {
@@ -504,9 +505,9 @@ var timeLabels = {
  * labels we use internally, not the ones shown to the user.
  */
 var certaintyLabels = {
-  notApplicable: '0',
   certain: '1',
-  uncertain: '2'
+  uncertain: '2',
+  nest: '3'
 };
 
 
@@ -514,9 +515,9 @@ var certaintyLabels = {
  * The labels for certainty that are shown to a user.
  */
 var certaintyLabelsUser = {
-  notApplicable: 'X',
   certain: '✓',
-  uncertain: '•'
+  uncertain: '•',
+  nest: 'N'
 };
 
 
@@ -545,7 +546,8 @@ var estrusLabels = {
   a: '0',
   b: '25',
   c: '50',
-  d: '75'
+  d: '75',
+  e: '100'
 };
 
 
@@ -556,7 +558,8 @@ var estrusLabelsUser = {
   a: '.00',
   b: '.25',
   c: '.50',
-  d: '.75'
+  d: '.75',
+  e: '1.0'
 };
 
 
@@ -676,14 +679,14 @@ exports.updateCertaintyUiForChimp = function(chimp) {
 
   // And now update the user facing label.
   switch (chimp.certainty) {
-    case certaintyLabels.notApplicable:
-      $certainty.text(certaintyLabelsUser.notApplicable);
-      break;
     case certaintyLabels.certain:
       $certainty.text(certaintyLabelsUser.certain);
       break;
     case certaintyLabels.uncertain:
       $certainty.text(certaintyLabelsUser.uncertain);
+      break;
+    case certaintyLabels.nest:
+      $certainty.text(certaintyLabelsUser.nest);
       break;
     default:
       console.log('unrecognized chimp certainty: ' + chimp);
@@ -734,6 +737,9 @@ exports.updateEstrusUiForChimp = function(chimp) {
       break;
     case estrusLabels.d:
       $estrus.text(estrusLabelsUser.d);
+      break;
+    case estrusLabels.e:
+      $estrus.text(estrusLabelsUser.e);
       break;
     default:
       console.log('unrecognized chimp estrus state: ' + chimp);
@@ -957,14 +963,14 @@ exports.initializeEditListeners = function(control) {
 
     var valueForDb;
     switch (value) {
-      case certaintyLabels.notApplicable:
-        valueForDb = certaintyLabels.notApplicable;
-        break;
       case certaintyLabels.certain:
         valueForDb = certaintyLabels.certain;
         break;
       case certaintyLabels.uncertain:
         valueForDb = certaintyLabels.uncertain;
+        break;
+      case certaintyLabels.nest:
+        valueForDb = certaintyLabels.nest;
         break;
       default:
         console.log('unrecognized chimp certainty value from ui: ' + value);
@@ -1043,6 +1049,9 @@ exports.initializeEditListeners = function(control) {
         break;
       case estrusLabels.d:
         valueForDb = estrusLabels.d;
+        break;
+      case estrusLabels.e:
+        valueForDb = estrusLabels.e;
         break;
       default:
         console.log('unrecognized estrus value from ui: ' + valueFromUi);
@@ -1743,6 +1752,8 @@ exports.updateVisiblityForChimp = function(chimp) {
  * This used to be called 'display', in case you're looking for that method.
  */
 exports.initializeUi = function(control) {
+
+  logging.initializeLogging();
 
   $('.food-container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');

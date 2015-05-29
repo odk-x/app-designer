@@ -30,7 +30,7 @@
     <div class="food-container">
       <div id="food-buttons">
           <button id="saving_food" class="btn btn-primary pull-left">Done</button>
-          <button class="btn btn-primary pull-right go-back">Cancel</button>
+          <button id="cancel-food" class="btn btn-primary pull-right go-back">Cancel</button>
       </div>
 
       <div id='food-summary'>
@@ -60,41 +60,236 @@
           <option value ="0">Select Food</option>    
           <option value="asali"><a id="asali" class="food food-show" href="#">ASALI</a></option>
           <option value="augoro"><a id="augoro" class="food food-show" href="#">AUGORO</a></option>
-          <option value="bihuhula"><a id="bihuhula" class="food food-show" href="#">BIHUHULA </a></option>
-          <option value="bucheli"><a id="bucheli" class="food food-show" href="#"> BUCHELI</a></option>
-          <option value="budyankende"> <a id="budyankede" class="food food-show" href="#">BUDYANKENDE</a></option>
-          <option value="buliga"> <a id="buliga" class="food food-show" href="#">BULIGA</a></option>
-          <option value="buliga_kubwa"> <a id="buliga kubwa" class="food food-show" href="#">BULIGA KUBWA</a></option>
-          <option value="buliga_ndogo"> <a id="buliga ndogo" class="food food-show" href="#">BULIGA NDOGO</option>
-          <option value="bulinda_nkwavu"> <a id="bulinda nkwavu" class="food food-show" href="#">BULINDA NKWAVU</a></option>
-          <option value="butura"> <a id="butura" class="food food-show" href="#">BUTURA</a></option>
-          <option value="bwoya"> <a id="bwoya" class="food food-show" href="#">BWOYA</a></option>
-          <option value="chondi"> <a id="chondi" class="food food-show" href="#">CHONDI</a></option>
-          <option value="embe_mwenbe"> <a id="embe_mwenbe" class="food food-show" href="#">EMBE MWENBE</a></option>
-          <option value="embipori"> <a id="embipori" class="food food-show" href="#">EMBIPORI</a></option>
-          <option value="gologombe"> <a id="gologombe" class="food food-show" href="#">GOLOGOMBE</a></option>
-          <option value="insana"> <a id="insana" class="food food-show" href="#">INSANA</a></option>
-          <option value="kachinda_nfizi"> <a id="kachinda nfizi" class="food food-show" href="#">KACHINDA NFIZI</a></option>
-          <option value="kahawa_mwitu"> <a id="kahawa_mwitu" class="food food-show" href="#">KAHAWA MWITU</a></option>
-          <option value="kamasi"> <a id="kamasi" class="food food-show" href="#">KAMASI</a></option>
-          <option value="kamembe"> <a id="kamebe" class="food food-show" href="#">KAMEMBE</a></option>
-          <option value="karusambwa"> <a id="karusambwa" class="food food-show" href="#">KARUSAMBWA</a></option>
-          <option value="kibolela"> <a id="kibolela" class="food food-show" href="#">KIBOLELA</a></option>
-          <option value="kibozanda"> <a id="kibozanda" class="food food-show" href="#">KIBOZANDA</a></option>
-          <option value="kifumbe"> <a id="kifumbe" class="food food-show" href="#">KIFUMBE</a></option>
-          <option value="kifumufumu"> <a id="kifumufumu" class="food food-show" href="#">KIFUMUFUMU</a></option>
-          <option value="kihama"> <a id="kihama" class="food food-show" href="#">KIHAMA</a></option>
-          <option value="kihololo"> <a id="kihololo" class="food food-show" href="#">KIHOLOLO</a></option>
-          <option value="kihondogori"> <a id="kihondogori" class="food food-show" href="#">KIHONDOGORI</a></option>
-          <option value="kihonyamlango"> <a id="kihonyamlango" class="food food-show" href="#">KIHONYAMLANGO</a></option>
-          <option value="kihungere"> <a id="kihungere" class="food food-show" href="#">KIHUNGERE</a></option>
-          <option value="kijigojigo"> <a id="kijigojigo" class="food food-show" href="#">KIJIGOJIGO</a></option>
-          <option value="kikali"> <a id="kikali" class="food food-show" href="#">KIKALI</a></option>
-          <option value="kilufia"> <a id="kilufia" class="food food-show" href="#">KILUFIA</a></option>
-          <option value="kima"> <a id="kima" class="food food-show" href="#">KIMA</a></option>
-          <option value="kinuke"> <a id="kinuke" class="food food-show" href="#">KINUKE</a></option>
-          <option value="kinyesi"> <a id="kinyesi" class="food food-show" href="#">KINYESI</a></option>
-          <option value="unknown-food" id="Unknown-Food" class="food food-show">Unknown-Food</option> 
+          <option value="bihuhula"><a id="bihuhula" class="food food-show" href="#">BIHUHULA</a></option>
+          <option value="bucheli"><a id="bucheli" class="food food-show" href="#">BUCHELI</a></option>
+          <option value="budyankende"><a id="budyankende" class="food food-show" href="#">BUDYANKENDE</a></option>
+          <option value="buliga"><a id="buliga" class="food food-show" href="#">BULIGA</a></option>
+          <option value="buliga_kubwa"><a id="buliga_kubwa" class="food food-show" href="#">BULIGA KUBWA</a></option>
+          <option value="buliga_ndogo"><a id="buliga_ndogo" class="food food-show" href="#">BULIGA NDOGO</a></option>
+          <option value="bulinda_nkwavu"><a id="bulinda_nkwavu" class="food food-show" href="#">BULINDA NKWAVU</a></option>
+          <option value="butura"><a id="butura" class="food food-show" href="#">BUTURA</a></option>
+          <option value="bwoya"><a id="bwoya" class="food food-show" href="#">BWOYA</a></option>
+          <option value="chondi"><a id="chondi" class="food food-show" href="#">CHONDI</a></option>
+          <option value="embe_mwenbe"><a id="embe_mwenbe" class="food food-show" href="#">EMBE MWENBE</a></option>
+          <option value="embipori"><a id="embipori" class="food food-show" href="#">EMBIPORI</a></option>
+          <option value="gologombe"><a id="gologombe" class="food food-show" href="#">GOLOGOMBE</a></option>
+          <option value="insana"><a id="insana" class="food food-show" href="#">INSANA</a></option>
+          <option value="kachinda_nfizi"><a id="kachinda_nfizi" class="food food-show" href="#">KACHINDA NFIZI</a></option>
+          <option value="kahawa_mwitu"><a id="kahawa_mwitu" class="food food-show" href="#">KAHAWA MWITU</a></option>
+          <option value="kamasi"><a id="kamasi" class="food food-show" href="#">KAMASI</a></option>
+          <option value="kamembe"><a id="kamembe" class="food food-show" href="#">KAMEMBE</a></option>
+          <option value="karusambwa"><a id="karusambwa" class="food food-show" href="#">KARUSAMBWA</a></option>
+          <option value="kibolela"><a id="kibolela" class="food food-show" href="#">KIBOLELA</a></option>
+          <option value="kibozanda"><a id="kibozanda" class="food food-show" href="#">KIBOZANDA</a></option>
+          <option value="kifumbe"><a id="kifumbe" class="food food-show" href="#">KIFUMBE</a></option>
+          <option value="kifumufumu"><a id="kifumufumu" class="food food-show" href="#">KIFUMUFUMU</a></option>
+          <option value="kihama"><a id="kihama" class="food food-show" href="#">KIHAMA</a></option>
+          <option value="kihololo"><a id="kihololo" class="food food-show" href="#">KIHOLOLO</a></option>
+          <option value="kihondogori"><a id="kihondogori" class="food food-show" href="#">KIHONDOGORI</a></option>
+          <option value="kihonyamlango"><a id="kihonyamlango" class="food food-show" href="#">KIHONYAMLANGO</a></option>
+          <option value="kihungere"><a id="kihungere" class="food food-show" href="#">KIHUNGERE</a></option>
+          <option value="kijigojigo"><a id="kijigojigo" class="food food-show" href="#">KIJIGOJIGO</a></option>
+          <option value="kikali"><a id="kikali" class="food food-show" href="#">KIKALI</a></option>
+          <option value="kilufia"><a id="kilufia" class="food food-show" href="#">KILUFIA</a></option>
+          <option value="kima"><a id="kima" class="food food-show" href="#">KIMA</a></option>
+          <option value="kinuke"><a id="kinuke" class="food food-show" href="#">KINUKE</a></option>
+          <option value="kinyesi"><a id="kinyesi" class="food food-show" href="#">KINYESI</a></option>
+          <option value="kirukamseke"><a id="kirukamseke" class="food food-show" href="#">KIRUKAMSEKE</a></option>
+          <option value="kirukia"><a id="kirukia" class="food food-show" href="#">KIRUKIA</a></option>
+          <option value="kisunzu_pori"><a id="kisunzu_pori" class="food food-show" href="#">KISUNZU PORI</a></option>
+          <option value="kitabalu"><a id="kitabalu" class="food food-show" href="#">KITABALU</a></option>
+          <option value="kitakata"><a id="kitakata" class="food food-show" href="#">KITAKATA</a></option>
+          <option value="kitota"><a id="kitota" class="food food-show" href="#">KITOTA</a></option>
+          <option value="kivumu"><a id="kivumu" class="food food-show" href="#">KIVUMU</a></option>
+          <option value="kiwuke"><a id="kiwuke" class="food food-show" href="#">KIWUKE</a></option>
+          <option value="kulimwonga"><a id="kulimwonga" class="food food-show" href="#">KULIMWONGA</a></option>
+          <option value="kumbi_kumbi"><a id="kumbi_kumbi" class="food food-show" href="#">KUMBI KUMBI</a></option>
+          <option value="kwale"><a id="kwale" class="food food-show" href="#">KWALE</a></option>
+          <option value="lubaba"><a id="lubaba" class="food food-show" href="#">LUBABA</a></option>
+          <option value="lusieno"><a id="lusieno" class="food food-show" href="#">LUSIENO</a></option>
+          <option value="lusieno_makubwa"><a id="lusieno_makubwa" class="food food-show" href="#">LUSIENO MAKUBWA</a></option>
+          <option value="lusieno_ndogo"><a id="lusieno_ndogo" class="food food-show" href="#">LUSIENO NDOGO</a></option>
+          <option value="luzu"><a id="luzu" class="food food-show" href="#">LUZU</a></option>
+          <option value="mabungo"><a id="mabungo" class="food food-show" href="#">MABUNGO</a></option>
+          <option value="mabungo_katikati"><a id="mabungo_katikati" class="food food-show" href="#">MABUNGO KATIKATI</a></option>
+          <option value="mabungo_madogo"><a id="mabungo_madogo" class="food food-show" href="#">MABUNGO MADOGO</a></option>
+          <option value="mabungo_makavu"><a id="mabungo_makavu" class="food food-show" href="#">MABUNGO MAKAVU</a></option>
+          <option value="mabungo_makubwa"><a id="mabungo_makubwa" class="food food-show" href="#">MABUNGO MAKUBWA</a></option>
+          <option value="mabungo_mgege"><a id="mabungo_mgege" class="food food-show" href="#">MABUNGO MGEGE</a></option>
+          <option value="magusu"><a id="magusu" class="food food-show" href="#">MAGUSU</a></option>
+          <option value="magusuhande"><a id="magusuhande" class="food food-show" href="#">MAGUSUHANDE</a></option>
+          <option value="maji_moto"><a id="maji_moto" class="food food-show" href="#">MAJI MOTO</a></option>
+          <option value="makome"><a id="makome" class="food food-show" href="#">MAKOME</a></option>
+          <option value="makuti"><a id="makuti" class="food food-show" href="#">MAKUTI</a></option>
+          <option value="malando_poli"><a id="malando_poli" class="food food-show" href="#">MALANDO POLI</a></option>
+          <option value="manyashe"><a id="manyashe" class="food food-show" href="#">MANYASHE</a></option>
+          <option value="masagenya"><a id="masagenya" class="food food-show" href="#">MASAGENYA</a></option>
+          <option value="masagolo_poli"><a id="masagolo_poli" class="food food-show" href="#">MASAGOLO POLI</a></option>
+          <option value="masegenya"><a id="masegenya" class="food food-show" href="#">MASEGENYA</a></option>
+          <option value="mashindwe"><a id="mashindwe" class="food food-show" href="#">MASHINDWE</a></option>
+          <option value="matete"><a id="matete" class="food food-show" href="#">MATETE</a></option>
+          <option value="matovu"><a id="matovu" class="food food-show" href="#">MATOVU</a></option>
+          <option value="matunguru"><a id="matunguru" class="food food-show" href="#">MATUNGURU</a></option>
+          <option value="mbanga"><a id="mbanga" class="food food-show" href="#">MBANGA</a></option>
+          <option value="mbilabila"><a id="mbilabila" class="food food-show" href="#">MBILABILA</a></option>
+          <option value="mbonbo"><a id="mbonbo" class="food food-show" href="#">MBONBO</a></option>
+          <option value="mbula"><a id="mbula" class="food food-show" href="#">MBULA</a></option>
+          <option value="mchwa"><a id="mchwa" class="food food-show" href="#">MCHWA</a></option>
+          <option value="mfulufulu"><a id="mfulufulu" class="food food-show" href="#">MFULUFULU</a></option>
+          <option value="mgalula"><a id="mgalula" class="food food-show" href="#">MGALULA</a></option>
+          <option value="mgalula_matete"><a id="mgalula_matete" class="food food-show" href="#">MGALULA MATETE</a></option>
+          <option value="mgege"><a id="mgege" class="food food-show" href="#">MGEGE</a></option>
+          <option value="mgimbu"><a id="mgimbu" class="food food-show" href="#">MGIMBU</a></option>
+          <option value="mgongo"><a id="mgongo" class="food food-show" href="#">MGONGO</a></option>
+          <option value="mgugangoma"><a id="mgugangoma" class="food food-show" href="#">MGUGANGOMA</a></option>
+          <option value="mgugunwa"><a id="mgugunwa" class="food food-show" href="#">MGUGUNWA</a></option>
+          <option value="mguruka"><a id="mguruka" class="food food-show" href="#">MGURUKA</a></option>
+          <option value="mgwiza"><a id="mgwiza" class="food food-show" href="#">MGWIZA</a></option>
+          <option value="mhande_hande"><a id="mhande_hande" class="food food-show" href="#">MHANDE HANDE</a></option>
+          <option value="mhenya"><a id="mhenya" class="food food-show" href="#">MHENYA</a></option>
+          <option value="mhongolo"><a id="mhongolo" class="food food-show" href="#">MHONGOLO</a></option>
+          <option value="mihasha"><a id="mihasha" class="food food-show" href="#">MIHASHA</a></option>
+          <option value="mikele"><a id="mikele" class="food food-show" href="#">MIKELE</a></option>
+          <option value="milumbulumbu"><a id="milumbulumbu" class="food food-show" href="#">MILUMBULUMBU</a></option>
+          <option value="minunila"><a id="minunila" class="food food-show" href="#">MINUNILA</a></option>
+          <option value="minywa"><a id="minywa" class="food food-show" href="#">MINYWA</a></option>
+          <option value="miombo"><a id="miombo" class="food food-show" href="#">MIOMBO</a></option>
+          <option value="mirala"><a id="mirala" class="food food-show" href="#">MIRALA</a></option>
+          <option value="mise"><a id="mise" class="food food-show" href="#">MISE</a></option>
+          <option value="mishai_shai"><a id="mishai_shai" class="food food-show" href="#">MISHAI SHAI</a></option>
+          <option value="mishigula"><a id="mishigula" class="food food-show" href="#">MISHIGULA</a></option>
+          <option value="misongati"><a id="misongati" class="food food-show" href="#">MISONGATI</a></option>
+          <option value="misuni"><a id="misuni" class="food food-show" href="#">MISUNI</a></option>
+          <option value="mitabungwa"><a id="mitabungwa" class="food food-show" href="#">MITABUNGWA</a></option>
+          <option value="mitati"><a id="mitati" class="food food-show" href="#">MITATI</a></option>
+          <option value="mitati_kubwa"><a id="mitati_kubwa" class="food food-show" href="#">MITATI KUBWA</a></option>
+          <option value="mitati_mweupe"><a id="mitati_mweupe" class="food food-show" href="#">MITATI MWEUPE</a></option>
+          <option value="mitati_ndogo"><a id="mitati_ndogo" class="food food-show" href="#">MITATI NDOGO</a></option>
+          <option value="mitobo"><a id="mitobo" class="food food-show" href="#">MITOBO</a></option>
+          <option value="mka"><a id="mka" class="food food-show" href="#">MKA</a></option>
+          <option value="mkamba"><a id="mkamba" class="food food-show" href="#">MKAMBA</a></option>
+          <option value="mkanda"><a id="mkanda" class="food food-show" href="#">MKANDA</a></option>
+          <option value="mkarye"><a id="mkarye" class="food food-show" href="#">MKARYE</a></option>
+          <option value="mkaza"><a id="mkaza" class="food food-show" href="#">MKAZA</a></option>
+          <option value="mkola"><a id="mkola" class="food food-show" href="#">MKOLA</a></option>
+          <option value="mkoyoyo"><a id="mkoyoyo" class="food food-show" href="#">MKOYOYO</a></option>
+          <option value="mkungwe"><a id="mkungwe" class="food food-show" href="#">MKUNGWE</a></option>
+          <option value="mkuyu"><a id="mkuyu" class="food food-show" href="#">MKUYU</a></option>
+          <option value="mlalangwe"><a id="mlalangwe" class="food food-show" href="#">MLALANGWE</a></option>
+          <option value="mlama"><a id="mlama" class="food food-show" href="#">MLAMA</a></option>
+          <option value="mlumba"><a id="mlumba" class="food food-show" href="#">MLUMBA</a></option>
+          <option value="mlungambale"><a id="mlungambale" class="food food-show" href="#">MLUNGAMBALE</a></option>
+          <option value="mmanda"><a id="mmanda" class="food food-show" href="#">MMANDA</a></option>
+          <option value="mnafu"><a id="mnafu" class="food food-show" href="#">MNAFU</a></option>
+          <option value="mnazi"><a id="mnazi" class="food food-show" href="#">MNAZI</a></option>
+          <option value="mnege"><a id="mnege" class="food food-show" href="#">MNEGE</a></option>
+          <option value="mninga"><a id="mninga" class="food food-show" href="#">MNINGA</a></option>
+          <option value="mnoso"><a id="mnoso" class="food food-show" href="#">MNOSO</a></option>
+          <option value="mnyani"><a id="mnyani" class="food food-show" href="#">MNYANI</a></option>
+          <option value="mnyanya"><a id="mnyanya" class="food food-show" href="#">MNYANYA</a></option>
+          <option value="mnyeleza_nkende"><a id="mnyeleza_nkende" class="food food-show" href="#">MNYELEZA NKENDE</a></option>
+          <option value="mnziganziga"><a id="mnziganziga" class="food food-show" href="#">MNZIGANZIGA</a></option>
+          <option value="monkey"><a id="monkey" class="food food-show" href="#">MONKEY</a></option>
+          <option value="mpapa"><a id="mpapa" class="food food-show" href="#">MPAPA</a></option>
+          <option value="mparamushi"><a id="mparamushi" class="food food-show" href="#">MPARAMUSHI</a></option>
+          <option value="mpele"><a id="mpele" class="food food-show" href="#">MPELE</a></option>
+          <option value="msaalu"><a id="msaalu" class="food food-show" href="#">MSAALU</a></option>
+          <option value="msabei"><a id="msabei" class="food food-show" href="#">MSABEI</a></option>
+          <option value="msagala"><a id="msagala" class="food food-show" href="#">MSAGALA</a></option>
+          <option value="msagamba"><a id="msagamba" class="food food-show" href="#">MSAGAMBA</a></option>
+          <option value="msagera"><a id="msagera" class="food food-show" href="#">MSAGERA</a></option>
+          <option value="msalala"><a id="msalala" class="food food-show" href="#">MSALALA</a></option>
+          <option value="msalasi"><a id="msalasi" class="food food-show" href="#">MSALASI</a></option>
+          <option value="msalenda"><a id="msalenda" class="food food-show" href="#">MSALENDA</a></option>
+          <option value="msange"><a id="msange" class="food food-show" href="#">MSANGE</a></option>
+          <option value="msarassa"><a id="msarassa" class="food food-show" href="#">MSARASSA</a></option>
+          <option value="msasa"><a id="msasa" class="food food-show" href="#">MSASA</a></option>
+          <option value="msha"><a id="msha" class="food food-show" href="#">MSHA</a></option>
+          <option value="mshehe"><a id="mshehe" class="food food-show" href="#">MSHEHE</a></option>
+          <option value="mshiha"><a id="mshiha" class="food food-show" href="#">MSHIHA</a></option>
+          <option value="mshongo"><a id="mshongo" class="food food-show" href="#">MSHONGO</a></option>
+          <option value="mshongo_mdogo"><a id="mshongo_mdogo" class="food food-show" href="#">MSHONGO MDOGO</a></option>
+          <option value="mshongo_mkome"><a id="mshongo_mkome" class="food food-show" href="#">MSHONGO MKOME</a></option>
+          <option value="mshongo_mkubwa"><a id="mshongo_mkubwa" class="food food-show" href="#">MSHONGO MKUBWA</a></option>
+          <option value="msiloti"><a id="msiloti" class="food food-show" href="#">MSILOTI</a></option>
+          <option value="msonpoti"><a id="msonpoti" class="food food-show" href="#">MSONPOTI</a></option>
+          <option value="msula"><a id="msula" class="food food-show" href="#">MSULA</a></option>
+          <option value="msuli"><a id="msuli" class="food food-show" href="#">MSULI</a></option>
+          <option value="msulula"><a id="msulula" class="food food-show" href="#">MSULULA</a></option>
+          <option value="mswankala"><a id="mswankala" class="food food-show" href="#">MSWANKALA</a></option>
+          <option value="mtakataka"><a id="mtakataka" class="food food-show" href="#">MTAKATAKA</a></option>
+          <option value="mtaturana"><a id="mtaturana" class="food food-show" href="#">MTATURANA</a></option>
+          <option value="mteraama"><a id="mteraama" class="food food-show" href="#">MTERAAMA</a></option>
+          <option value="mtobogoro"><a id="mtobogoro" class="food food-show" href="#">MTOBOGORO</a></option>
+          <option value="mtopetope"><a id="mtopetope" class="food food-show" href="#">MTOPETOPE</a></option>
+          <option value="mtwetwe"><a id="mtwetwe" class="food food-show" href="#">MTWETWE</a></option>
+          <option value="mububa"><a id="mububa" class="food food-show" href="#">MUBUBA</a></option>
+          <option value="mufe"><a id="mufe" class="food food-show" href="#">MUFE</a></option>
+          <option value="mufumia"><a id="mufumia" class="food food-show" href="#">MUFUMIA</a></option>
+          <option value="mufumufumu"><a id="mufumufumu" class="food food-show" href="#">MUFUMUFUMU</a></option>
+          <option value="muganasha"><a id="muganasha" class="food food-show" href="#">MUGANASHA</a></option>
+          <option value="muhwa"><a id="muhwa" class="food food-show" href="#">MUHWA</a></option>
+          <option value="mukome"><a id="mukome" class="food food-show" href="#">MUKOME</a></option>
+          <option value="mukundambasa"><a id="mukundambasa" class="food food-show" href="#">MUKUNDAMBASA</a></option>
+          <option value="mulila"><a id="mulila" class="food food-show" href="#">MULILA</a></option>
+          <option value="munembo"><a id="munembo" class="food food-show" href="#">MUNEMBO</a></option>
+          <option value="mununila"><a id="mununila" class="food food-show" href="#">MUNUNILA</a></option>
+          <option value="murulunguja"><a id="murulunguja" class="food food-show" href="#">MURULUNGUJA</a></option>
+          <option value="murungambale"><a id="murungambale" class="food food-show" href="#">MURUNGAMBALE</a></option>
+          <option value="musakenkanya"><a id="musakenkanya" class="food food-show" href="#">MUSAKENKANYA</a></option>
+          <option value="muviru"><a id="muviru" class="food food-show" href="#">MUVIRU</a></option>
+          <option value="mviruhege"><a id="mviruhege" class="food food-show" href="#">MVIRUHEGE</a></option>
+          <option value="mvule"><a id="mvule" class="food food-show" href="#">MVULE</a></option>
+          <option value="mvumvu"><a id="mvumvu" class="food food-show" href="#">MVUMVU</a></option>
+          <option value="mwakumbe"><a id="mwakumbe" class="food food-show" href="#">MWAKUMBE</a></option>
+          <option value="mwenge"><a id="mwenge" class="food food-show" href="#">MWENGE</a></option>
+          <option value="mwilonge"><a id="mwilonge" class="food food-show" href="#">MWILONGE</a></option>
+          <option value="mwinamila"><a id="mwinamila" class="food food-show" href="#">MWINAMILA</a></option>
+          <option value="myogoro"><a id="myogoro" class="food food-show" href="#">MYOGORO</a></option>
+          <option value="mzingati"><a id="mzingati" class="food food-show" href="#">MZINGATI</a></option>
+          <option value="ndege"><a id="ndege" class="food food-show" href="#">NDEGE</a></option>
+          <option value="ndizi"><a id="ndizi" class="food food-show" href="#">NDIZI</a></option>
+          <option value="ndulakigina"><a id="ndulakigina" class="food food-show" href="#">NDULAKIGINA</a></option>
+          <option value="ngazi"><a id="ngazi" class="food food-show" href="#">NGAZI</a></option>
+          <option value="ngoyi"><a id="ngoyi" class="food food-show" href="#">NGOYI</a></option>
+          <option value="ngulusi"><a id="ngulusi" class="food food-show" href="#">NGULUSI</a></option>
+          <option value="ngunga"><a id="ngunga" class="food food-show" href="#">NGUNGA</a></option>
+          <option value="nguruwe"><a id="nguruwe" class="food food-show" href="#">NGURUWE</a></option>
+          <option value="nkonzi"><a id="nkonzi" class="food food-show" href="#">NKONZI</a></option>
+          <option value="nkonzi_kitota"><a id="nkonzi_kitota" class="food food-show" href="#">NKONZI KITOTA</a></option>
+          <option value="nkonzi_minywa"><a id="nkonzi_minywa" class="food food-show" href="#">NKONZI MINYWA</a></option>
+          <option value="nkulungu"><a id="nkulungu" class="food food-show" href="#">NKULUNGU</a></option>
+          <option value="nkunge"><a id="nkunge" class="food food-show" href="#">NKUNGE</a></option>
+          <option value="nsatembwa"><a id="nsatembwa" class="food food-show" href="#">NSATEMBWA</a></option>
+          <option value="nteerema"><a id="nteerema" class="food food-show" href="#">NTEEREMA</a></option>
+          <option value="ntuligwa"><a id="ntuligwa" class="food food-show" href="#">NTULIGWA</a></option>
+          <option value="nyababa"><a id="nyababa" class="food food-show" href="#">NYABABA</a></option>
+          <option value="nyani"><a id="nyani" class="food food-show" href="#">NYANI</a></option>
+          <option value="nyasi"><a id="nyasi" class="food food-show" href="#">NYASI</a></option>
+          <option value="nyoka"><a id="nyoka" class="food food-show" href="#">NYOKA</a></option>
+          <option value="nyuki"><a id="nyuki" class="food food-show" href="#">NYUKI</a></option>
+          <option value="panya"><a id="panya" class="food food-show" href="#">PANYA</a></option>
+          <option value="pongo"><a id="pongo" class="food food-show" href="#">PONGO</a></option>
+          <option value="rengi"><a id="rengi" class="food food-show" href="#">RENGI</a></option>
+          <option value="rubogobogo"><a id="rubogobogo" class="food food-show" href="#">RUBOGOBOGO</a></option>
+          <option value="rukungu"><a id="rukungu" class="food food-show" href="#">RUKUNGU</a></option>
+          <option value="rukuta"><a id="rukuta" class="food food-show" href="#">RUKUTA</a></option>
+          <option value="rusha"><a id="rusha" class="food food-show" href="#">RUSHA</a></option>
+          <option value="shike"><a id="shike" class="food food-show" href="#">SHIKE</a></option>
+          <option value="siafu"><a id="siafu" class="food food-show" href="#">SIAFU</a></option>
+          <option value="sisimizi"><a id="sisimizi" class="food food-show" href="#">SISIMIZI</a></option>
+          <option value="sokwe"><a id="sokwe" class="food food-show" href="#">SOKWE</a></option>
+          <option value="tumbili"><a id="tumbili" class="food food-show" href="#">TUMBILI</a></option>
+          <option value="ukurazo"><a id="ukurazo" class="food food-show" href="#">UKURAZO</a></option>
+          <option value="umkole"><a id="umkole" class="food food-show" href="#">UMKOLE</a></option>
+          <option value="umunyegera"><a id="umunyegera" class="food food-show" href="#">UMUNYEGERA</a></option>
+          <option value="unrecorded"><a id="unrecorded" class="food food-show" href="#">UNRECORDED</a></option>
+          <option value="viazi_poli"><a id="viazi_poli" class="food food-show" href="#">VIAZI POLI</a></option>
+          <option value="viluwiluwi"><a id="viluwiluwi" class="food food-show" href="#">VILUWILUWI</a></option>
+          <option value="vimonyo"><a id="vimonyo" class="food food-show" href="#">VIMONYO</a></option>
+          <option value="vines"><a id="vines" class="food food-show" href="#">VINES</a></option>
+          <option value="vipepeo"><a id="vipepeo" class="food food-show" href="#">VIPEPEO</a></option>
+          <option value="vishurushuru"><a id="vishurushuru" class="food food-show" href="#">VISHURUSHURU</a></option>
         </select>
       </div>      
 
@@ -123,7 +318,7 @@
     <div class="species-container">
       <div>
         <button id="saving_species" class="btn btn-primary pull-left">Done</button>
-        <button class="btn btn-primary pull-right go-back">Cancel</button>
+        <button id="cancel-species" class="btn btn-primary pull-right go-back">Cancel</button>
       </div>
 
       <div id='species-summary'>
@@ -244,15 +439,15 @@
             <td></td>
             <td></td>
             <td>C</td>
-            <td>5m</td>
             <td>SS</td>
+            <td>5m</td>
             <td>Cl</td>
             <td style="padding-right: 1.3em;"></td>
             <td></td>
             <td></td>
             <td>C</td>
-            <td>5m</td>
             <td>SS</td>
+            <td>5m</td>
             <td>Cl</td>            
           </tr>
 
@@ -262,8 +457,8 @@
             <td><button id="bah" class="female-chimp chimp">BAH</button></td>
             <td class="time_point" id="bah_time"><img src="./img/time_empty.png" id="bah_time_img"/></td>
             <td><button class="certainty" id="bah_cer">X</button></td>
-            <td><button class="5-meter" id="bah_five">&#x2717;</button></td>
             <td><button class="sexual_state" id="bah_sexState">SS</button></td>
+            <td><button class="5-meter" id="bah_five">&#x2717;</button></td>
             <td><button class="closeness" id="bah_close">&#x2717;</button></td>
             <td></td>
 
@@ -271,9 +466,9 @@
 
             <td><button id="che" class="female-chimp chimp">CHE</button></td>
             <td class="time_point" id="che_time"><img src="./img/time_empty.png" id="che_time_img"/></td>
-            <td><button class="certainty" id="che_cer">X</button></td>
-            <td><button class="5-meter" id="che_five">&#x2717;</button></td>
+            <td><button class="certainty" id="che_cer">✓</button></td>
             <td><button class="sexual_state" id="che_sexState">SS</button></td>
+            <td><button class="5-meter" id="che_five">&#x2717;</button></td>
             <td><button class="closeness" id="che_close">&#x2717;</button></td>
 
 
@@ -282,9 +477,9 @@
 
             <td><button id="dia" class="female-chimp chimp">DIA</button></td>
             <td class="time_point" id="dia_time"><img src="./img/time_empty.png" id="dia_time_img"/></td>
-            <td><button class="certainty" id="dia_cer">X</button></td>
-            <td><button class="5-meter" id="dia_five">&#x2717;</button></td>
+            <td><button class="certainty" id="dia_cer">✓</button></td>
             <td><button class="sexual_state" id="dia_sexState">SS</button></td>
+            <td><button class="5-meter" id="dia_five">&#x2717;</button></td>
             <td><button class="closeness" id="dia_close">&#x2717;</button></td>
             <td></td>
 
@@ -292,9 +487,9 @@
 
             <td><button id="dl" class="female-chimp chimp">DL</button></td>
             <td class="time_point" id="dl_time"><img src="./img/time_empty.png" id="dl_time_img"/></td>
-            <td><button class="certainty" id="dl_cer">X</button></td>
-            <td><button class="5-meter" id="dl_five">&#x2717;</button></td>
+            <td><button class="certainty" id="dl_cer">✓</button></td>
             <td><button class="sexual_state" id="dl_sexState">SS</button></td>
+            <td><button class="5-meter" id="dl_five">&#x2717;</button></td>
             <td><button class="closeness" id="dl_close">&#x2717;</button></td>
 
 
@@ -303,9 +498,9 @@
 
             <td><button id="eow" class="female-chimp chimp">EOW</button></td>
             <td class="time_point" id="eow_time"><img src="./img/time_empty.png" id="eow_time_img"/></td>
-            <td><button class="certainty" id="eow_cer">X</button></td>
-            <td><button class="5-meter" id="eow_five">&#x2717;</button></td>
+            <td><button class="certainty" id="eow_cer">✓</button></td>
             <td><button class="sexual_state" id="eow_sexState">SS</button></td>
+            <td><button class="5-meter" id="eow_five">&#x2717;</button></td>
             <td><button class="closeness" id="eow_close">&#x2717;</button></td>
             <td></td>
 
@@ -313,9 +508,9 @@
 
             <td><button id="eza" class="female-chimp chimp">EZA</button></td>
             <td class="time_point" id="eza_time"><img src="./img/time_empty.png" id="eza_time_img"/></td>
-            <td><button class="certainty" id="eza_cer">X</button></td>
-            <td><button class="5-meter" id="eza_five">&#x2717;</button></td>
+            <td><button class="certainty" id="eza_cer">✓</button></td>
             <td><button class="sexual_state" id="eza_sexState">SS</button></td>
+            <td><button class="5-meter" id="eza_five">&#x2717;</button></td>
             <td><button class="closeness" id="eza_close">&#x2717;</button></td>
 
 
@@ -324,9 +519,9 @@
 
             <td><button id="fad" class="female-chimp chimp">FAD</button></td>
             <td class="time_point" id="fad_time"><img src="./img/time_empty.png" id="fad_time_img"/></td>
-            <td><button class="certainty" id="fad_cer">X</button></td>
-            <td><button class="5-meter" id="fad_five">&#x2717;</button></td>
+            <td><button class="certainty" id="fad_cer">✓</button></td>
             <td><button class="sexual_state" id="fad_sexState">SS</button></td>
+            <td><button class="5-meter" id="fad_five">&#x2717;</button></td>
             <td><button class="closeness" id="fad_close">&#x2717;</button></td>
             <td></td>
 
@@ -334,9 +529,9 @@
 
             <td><button id="fn" class="female-chimp chimp">FN</button></td>
             <td class="time_point" id="fn_time"><img src="./img/time_empty.png" id="fn_time_img"/></td>
-            <td><button class="certainty" id="fn_cer">X</button></td>
-            <td><button class="5-meter" id="fn_five">&#x2717;</button></td>
+            <td><button class="certainty" id="fn_cer">✓</button></td>
             <td><button class="sexual_state" id="fn_sexState">SS</button></td>
+            <td><button class="5-meter" id="fn_five">&#x2717;</button></td>
             <td><button class="closeness" id="fn_close">&#x2717;</button></td>
 
 
@@ -345,9 +540,9 @@
 
             <td><button id="ga" class="female-chimp chimp">GA</button></td>
             <td class="time_point" id="ga_time"><img src="./img/time_empty.png" id="ga_time_img"/></td>
-            <td><button class="certainty" id="ga_cer">X</button></td>
-            <td><button class="5-meter" id="ga_five">&#x2717;</button></td>
+            <td><button class="certainty" id="ga_cer">✓</button></td>
             <td><button class="sexual_state" id="ga_sexState">SS</button></td>
+            <td><button class="5-meter" id="ga_five">&#x2717;</button></td>
             <td><button class="closeness" id="ga_close">&#x2717;</button></td>
             <td></td>
 
@@ -355,9 +550,9 @@
 
             <td><button id="gld" class="female-chimp chimp">GLD</button></td>
             <td class="time_point" id="gld_time"><img src="./img/time_empty.png" id="gld_time_img"/></td>
-            <td><button class="certainty" id="gld_cer">X</button></td>
-            <td><button class="5-meter" id="gld_five">&#x2717;</button></td>
+            <td><button class="certainty" id="gld_cer">✓</button></td>
             <td><button class="sexual_state" id="gld_sexState">SS</button></td>
+            <td><button class="5-meter" id="gld_five">&#x2717;</button></td>
             <td><button class="closeness" id="gld_close">&#x2717;</button></td>
 
 
@@ -366,9 +561,9 @@
 
             <td><button id="gli" class="female-chimp chimp">GLI</button></td>
             <td class="time_point" id="gli_time"><img src="./img/time_empty.png" id="gli_time_img"/></td>
-            <td><button class="certainty" id="gli_cer">X</button></td>
-            <td><button class="5-meter" id="gli_five">&#x2717;</button></td>
+            <td><button class="certainty" id="gli_cer">✓</button></td>
             <td><button class="sexual_state" id="gli_sexState">SS</button></td>
+            <td><button class="5-meter" id="gli_five">&#x2717;</button></td>
             <td><button class="closeness" id="gli_close">&#x2717;</button></td>
             <td></td>
 
@@ -376,9 +571,9 @@
 
             <td><button id="gm" class="female-chimp chimp">GM</button></td>
             <td class="time_point" id="gm_time"><img src="./img/time_empty.png" id="gm_time_img"/></td>
-            <td><button class="certainty" id="gm_cer">X</button></td>
-            <td><button class="5-meter" id="gm_five">&#x2717;</button></td>
+            <td><button class="certainty" id="gm_cer">✓</button></td>
             <td><button class="sexual_state" id="gm_sexState">SS</button></td>
+            <td><button class="5-meter" id="gm_five">&#x2717;</button></td>
             <td><button class="closeness" id="gm_close">&#x2717;</button></td>
 
 
@@ -387,9 +582,9 @@
 
             <td><button id="ima" class="female-chimp chimp">IMA</button></td>
             <td class="time_point" id="ima_time"><img src="./img/time_empty.png" id="ima_time_img"/></td>
-            <td><button class="certainty" id="ima_cer">X</button></td>
-            <td><button class="5-meter" id="ima_five">&#x2717;</button></td>
+            <td><button class="certainty" id="ima_cer">✓</button></td>
             <td><button class="sexual_state" id="ima_sexState">SS</button></td>
+            <td><button class="5-meter" id="ima_five">&#x2717;</button></td>
             <td><button class="closeness" id="ima_close">&#x2717;</button></td>
             <td></td>
 
@@ -397,9 +592,9 @@
 
             <td><button id="jf" class="female-chimp chimp">JF</button></td>
             <td class="time_point" id="jf_time"><img src="./img/time_empty.png" id="jf_time_img"/></td>
-            <td><button class="certainty" id="jf_cer">X</button></td>
-            <td><button class="5-meter" id="jf_five">&#x2717;</button></td>
+            <td><button class="certainty" id="jf_cer">✓</button></td>
             <td><button class="sexual_state" id="jf_sexState">SS</button></td>
+            <td><button class="5-meter" id="jf_five">&#x2717;</button></td>
             <td><button class="closeness" id="jf_close">&#x2717;</button></td>
 
 
@@ -408,9 +603,9 @@
 
             <td><button id="kat" class="female-chimp chimp">KAT</button></td>
             <td class="time_point" id="kat_time"><img src="./img/time_empty.png" id="kat_time_img"/></td>
-            <td><button class="certainty" id="kat_cer">X</button></td>
-            <td><button class="5-meter" id="kat_five">&#x2717;</button></td>
+            <td><button class="certainty" id="kat_cer">✓</button></td>
             <td><button class="sexual_state" id="kat_sexState">SS</button></td>
+            <td><button class="5-meter" id="kat_five">&#x2717;</button></td>
             <td><button class="closeness" id="kat_close">&#x2717;</button></td>
             <td></td>
 
@@ -418,9 +613,9 @@
 
             <td><button id="kea" class="female-chimp chimp">KEA</button></td>
             <td class="time_point" id="kea_time"><img src="./img/time_empty.png" id="kea_time_img"/></td>
-            <td><button class="certainty" id="kea_cer">X</button></td>
-            <td><button class="5-meter" id="kea_five">&#x2717;</button></td>
+            <td><button class="certainty" id="kea_cer">✓</button></td>
             <td><button class="sexual_state" id="kea_sexState">SS</button></td>
+            <td><button class="5-meter" id="kea_five">&#x2717;</button></td>
             <td><button class="closeness" id="kea_close">&#x2717;</button></td>
 
 
@@ -429,9 +624,9 @@
 
             <td><button id="mkw" class="female-chimp chimp">MKW</button></td>
             <td class="time_point" id="mkw_time"><img src="./img/time_empty.png" id="mkw_time_img"/></td>
-            <td><button class="certainty" id="mkw_cer">X</button></td>
-            <td><button class="5-meter" id="mkw_five">&#x2717;</button></td>
+            <td><button class="certainty" id="mkw_cer">✓</button></td>
             <td><button class="sexual_state" id="mkw_sexState">SS</button></td>
+            <td><button class="5-meter" id="mkw_five">&#x2717;</button></td>
             <td><button class="closeness" id="mkw_close">&#x2717;</button></td>
             <td></td>
 
@@ -439,9 +634,9 @@
 
             <td><button id="nas" class="female-chimp chimp">NAS</button></td>
             <td class="time_point" id="nas_time"><img src="./img/time_empty.png" id="nas_time_img"/></td>
-            <td><button class="certainty" id="nas_cer">X</button></td>
-            <td><button class="5-meter" id="nas_five">&#x2717;</button></td>
+            <td><button class="certainty" id="nas_cer">✓</button></td>
             <td><button class="sexual_state" id="nas_sexState">SS</button></td>
+            <td><button class="5-meter" id="nas_five">&#x2717;</button></td>
             <td><button class="closeness" id="nas_close">&#x2717;</button></td>
 
 
@@ -450,9 +645,9 @@
 
             <td><button id="nur" class="female-chimp chimp">NUR</button></td>
             <td class="time_point" id="nur_time"><img src="./img/time_empty.png" id="nur_time_img"/></td>
-            <td><button class="certainty" id="nur_cer">X</button></td>
-            <td><button class="5-meter" id="nur_five">&#x2717;</button></td>
+            <td><button class="certainty" id="nur_cer">✓</button></td>
             <td><button class="sexual_state" id="nur_sexState">SS</button></td>
+            <td><button class="5-meter" id="nur_five">&#x2717;</button></td>
             <td><button class="closeness" id="nur_close">&#x2717;</button></td>
             <td></td>
 
@@ -460,9 +655,9 @@
 
             <td><button id="obe" class="female-chimp chimp">OBE</button></td>
             <td class="time_point" id="obe_time"><img src="./img/time_empty.png" id="obe_time_img"/></td>
-            <td><button class="certainty" id="obe_cer">X</button></td>
-            <td><button class="5-meter" id="obe_five">&#x2717;</button></td>
+            <td><button class="certainty" id="obe_cer">✓</button></td>
             <td><button class="sexual_state" id="obe_sexState">SS</button></td>
+            <td><button class="5-meter" id="obe_five">&#x2717;</button></td>
             <td><button class="closeness" id="obe_close">&#x2717;</button></td>
 
 
@@ -471,9 +666,9 @@
 
             <td><button id="rum" class="female-chimp chimp">RUM</button></td>
             <td class="time_point" id="rum_time"><img src="./img/time_empty.png" id="rum_time_img"/></td>
-            <td><button class="certainty" id="rum_cer">X</button></td>
-            <td><button class="5-meter" id="rum_five">&#x2717;</button></td>
+            <td><button class="certainty" id="rum_cer">✓</button></td>
             <td><button class="sexual_state" id="rum_sexState">SS</button></td>
+            <td><button class="5-meter" id="rum_five">&#x2717;</button></td>
             <td><button class="closeness" id="rum_close">&#x2717;</button></td>
             <td></td>
 
@@ -481,9 +676,9 @@
 
             <td><button id="sa" class="female-chimp chimp">SA</button></td>
             <td class="time_point" id="sa_time"><img src="./img/time_empty.png" id="sa_time_img"/></td>
-            <td><button class="certainty" id="sa_cer">X</button></td>
-            <td><button class="5-meter" id="sa_five">&#x2717;</button></td>
+            <td><button class="certainty" id="sa_cer">✓</button></td>
             <td><button class="sexual_state" id="sa_sexState">SS</button></td>
+            <td><button class="5-meter" id="sa_five">&#x2717;</button></td>
             <td><button class="closeness" id="sa_close">&#x2717;</button></td>
 
 
@@ -492,9 +687,9 @@
 
             <td><button id="sam" class="female-chimp chimp">SAM</button></td>
             <td class="time_point" id="sam_time"><img src="./img/time_empty.png" id="sam_time_img"/></td>
-            <td><button class="certainty" id="sam_cer">X</button></td>
-            <td><button class="5-meter" id="sam_five">&#x2717;</button></td>
+            <td><button class="certainty" id="sam_cer">✓</button></td>
             <td><button class="sexual_state" id="sam_sexState">SS</button></td>
+            <td><button class="5-meter" id="sam_five">&#x2717;</button></td>
             <td><button class="closeness" id="sam_close">&#x2717;</button></td>
             <td></td>
 
@@ -502,9 +697,9 @@
 
             <td><button id="si" class="female-chimp chimp">SI</button></td>
             <td class="time_point" id="si_time"><img src="./img/time_empty.png" id="si_time_img"/></td>
-            <td><button class="certainty" id="si_cer">X</button></td>
-            <td><button class="5-meter" id="si_five">&#x2717;</button></td>
+            <td><button class="certainty" id="si_cer">✓</button></td>
             <td><button class="sexual_state" id="si_sexState">SS</button></td>
+            <td><button class="5-meter" id="si_five">&#x2717;</button></td>
             <td><button class="closeness" id="si_close">&#x2717;</button></td>
 
 
@@ -513,9 +708,9 @@
 
             <td><button id="sif" class="female-chimp chimp">SIF</button></td>
             <td class="time_point" id="sif_time"><img src="./img/time_empty.png" id="sif_time_img"/></td>
-            <td><button class="certainty" id="sif_cer">X</button></td>
-            <td><button class="5-meter" id="sif_five">&#x2717;</button></td>
+            <td><button class="certainty" id="sif_cer">✓</button></td>
             <td><button class="sexual_state" id="sif_sexState">SS</button></td>
+            <td><button class="5-meter" id="sif_five">&#x2717;</button></td>
             <td><button class="closeness" id="sif_close">&#x2717;</button></td>
             <td></td>
 
@@ -523,9 +718,9 @@
 
             <td><button id="sw" class="female-chimp chimp">SW</button></td>
             <td class="time_point" id="sw_time"><img src="./img/time_empty.png" id="sw_time_img"/></td>
-            <td><button class="certainty" id="sw_cer">X</button></td>
-            <td><button class="5-meter" id="sw_five">&#x2717;</button></td>
+            <td><button class="certainty" id="sw_cer">✓</button></td>
             <td><button class="sexual_state" id="sw_sexState">SS</button></td>
+            <td><button class="5-meter" id="sw_five">&#x2717;</button></td>
             <td><button class="closeness" id="sw_close">&#x2717;</button></td>
 
 
@@ -534,9 +729,9 @@
 
             <td><button id="tab" class="female-chimp chimp">TAB</button></td>
             <td class="time_point" id="tab_time"><img src="./img/time_empty.png" id="tab_time_img"/></td>
-            <td><button class="certainty" id="tab_cer">X</button></td>
-            <td><button class="5-meter" id="tab_five">&#x2717;</button></td>
+            <td><button class="certainty" id="tab_cer">✓</button></td>
             <td><button class="sexual_state" id="tab_sexState">SS</button></td>
+            <td><button class="5-meter" id="tab_five">&#x2717;</button></td>
             <td><button class="closeness" id="tab_close">&#x2717;</button></td>
             <td></td>
 
@@ -544,9 +739,9 @@
 
             <td><button id="tg" class="female-chimp chimp">TG</button></td>
             <td class="time_point" id="tg_time"><img src="./img/time_empty.png" id="tg_time_img"/></td>
-            <td><button class="certainty" id="tg_cer">X</button></td>
-            <td><button class="5-meter" id="tg_five">&#x2717;</button></td>
+            <td><button class="certainty" id="tg_cer">✓</button></td>
             <td><button class="sexual_state" id="tg_sexState">SS</button></td>
+            <td><button class="5-meter" id="tg_five">&#x2717;</button></td>
             <td><button class="closeness" id="tg_close">&#x2717;</button></td>
 
 
@@ -555,9 +750,9 @@
 
             <td><button id="tz" class="female-chimp chimp">TZ</button></td>
             <td class="time_point" id="tz_time"><img src="./img/time_empty.png" id="tz_time_img"/></td>
-            <td><button class="certainty" id="tz_cer">X</button></td>
-            <td><button class="5-meter" id="tz_five">&#x2717;</button></td>
+            <td><button class="certainty" id="tz_cer">✓</button></td>
             <td><button class="sexual_state" id="tz_sexState">SS</button></td>
+            <td><button class="5-meter" id="tz_five">&#x2717;</button></td>
             <td><button class="closeness" id="tz_close">&#x2717;</button></td>
             <td></td>
 
@@ -565,9 +760,9 @@
 
             <td><button id="van" class="female-chimp chimp">VAN</button></td>
             <td class="time_point" id="van_time"><img src="./img/time_empty.png" id="van_time_img"/></td>
-            <td><button class="certainty" id="van_cer">X</button></td>
-            <td><button class="5-meter" id="van_five">&#x2717;</button></td>
+            <td><button class="certainty" id="van_cer">✓</button></td>
             <td><button class="sexual_state" id="van_sexState">SS</button></td>
+            <td><button class="5-meter" id="van_five">&#x2717;</button></td>
             <td><button class="closeness" id="van_close">&#x2717;</button></td>
 
 
@@ -576,9 +771,9 @@
 
             <td><button id="mgeni" class="female-chimp chimp">MGENI</button></td>
             <td class="time_point" id="mgeni_time"><img src="./img/time_empty.png" id="mgeni_time_img"/></td>
-            <td><button class="certainty" id="mgeni_cer">X</button></td>
-            <td><button class="5-meter" id="mgeni_five">&#x2717;</button></td>
+            <td><button class="certainty" id="mgeni_cer">✓</button></td>
             <td><button class="sexual_state" id="mgeni_sexState">SS</button></td>
+            <td><button class="5-meter" id="mgeni_five">&#x2717;</button></td>
             <td><button class="closeness" id="mgeni_close">&#x2717;</button></td>
             <td></td>
 
@@ -588,9 +783,9 @@
 
             <td><button id="fe" class="male-chimp chimp">FE</button></td>
             <td class="time_point" id="fe_time"><img src="./img/time_empty.png" id="fe_time_img"/></td>
-            <td><button class="certainty" id="fe_cer">X</button></td>
-            <td><button class="5-meter" id="fe_five">&#x2717;</button></td>
+            <td><button class="certainty" id="fe_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="fe_sexState">SS</button></td>
+            <td><button class="5-meter" id="fe_five">&#x2717;</button></td>
             <td><button class="closeness" id="fe_close">&#x2717;</button></td>
             <td></td>
 
@@ -598,9 +793,9 @@
 
             <td><button id="fnd" class="male-chimp chimp">FND</button></td>
             <td class="time_point" id="fnd_time"><img src="./img/time_empty.png" id="fnd_time_img"/></td>
-            <td><button class="certainty" id="fnd_cer">X</button></td>
-            <td><button class="5-meter" id="fnd_five">&#x2717;</button></td>
+            <td><button class="certainty" id="fnd_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="fnd_sexState">SS</button></td>
+            <td><button class="5-meter" id="fnd_five">&#x2717;</button></td>
             <td><button class="closeness" id="fnd_close">&#x2717;</button></td>
 
 
@@ -609,9 +804,9 @@
 
             <td><button id="fo" class="male-chimp chimp">FO</button></td>
             <td class="time_point" id="fo_time"><img src="./img/time_empty.png" id="fo_time_img"/></td>
-            <td><button class="certainty" id="fo_cer">X</button></td>
-            <td><button class="5-meter" id="fo_five">&#x2717;</button></td>
+            <td><button class="certainty" id="fo_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="fo_sexState">SS</button></td>
+            <td><button class="5-meter" id="fo_five">&#x2717;</button></td>
             <td><button class="closeness" id="fo_close">&#x2717;</button></td>
             <td></td>
 
@@ -619,9 +814,9 @@
 
             <td><button id="fu" class="male-chimp chimp">FU</button></td>
             <td class="time_point" id="fu_time"><img src="./img/time_empty.png" id="fu_time_img"/></td>
-            <td><button class="certainty" id="fu_cer">X</button></td>
-            <td><button class="5-meter" id="fu_five">&#x2717;</button></td>
+            <td><button class="certainty" id="fu_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="fu_sexState">SS</button></td>
+            <td><button class="5-meter" id="fu_five">&#x2717;</button></td>
             <td><button class="closeness" id="fu_close">&#x2717;</button></td>
 
 
@@ -630,9 +825,9 @@
 
             <td><button id="ggl" class="male-chimp chimp">GGL</button></td>
             <td class="time_point" id="ggl_time"><img src="./img/time_empty.png" id="ggl_time_img"/></td>
-            <td><button class="certainty" id="ggl_cer">X</button></td>
-            <td><button class="5-meter" id="ggl_five">&#x2717;</button></td>
+            <td><button class="certainty" id="ggl_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="ggl_sexState">SS</button></td>
+            <td><button class="5-meter" id="ggl_five">&#x2717;</button></td>
             <td><button class="closeness" id="ggl_close">&#x2717;</button></td>
             <td></td>
 
@@ -640,9 +835,9 @@
 
             <td><button id="gim" class="male-chimp chimp">GIM</button></td>
             <td class="time_point" id="gim_time"><img src="./img/time_empty.png" id="gim_time_img"/></td>
-            <td><button class="certainty" id="gim_cer">X</button></td>
-            <td><button class="5-meter" id="gim_five">&#x2717;</button></td>
+            <td><button class="certainty" id="gim_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="gim_sexState">SS</button></td>
+            <td><button class="5-meter" id="gim_five">&#x2717;</button></td>
             <td><button class="closeness" id="gim_close">&#x2717;</button></td>
 
 
@@ -651,9 +846,9 @@
 
             <td><button id="giz" class="male-chimp chimp">GIZ</button></td>
             <td class="time_point" id="giz_time"><img src="./img/time_empty.png" id="giz_time_img"/></td>
-            <td><button class="certainty" id="giz_cer">X</button></td>
-            <td><button class="5-meter" id="giz_five">&#x2717;</button></td>
+            <td><button class="certainty" id="giz_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="giz_sexState">SS</button></td>
+            <td><button class="5-meter" id="giz_five">&#x2717;</button></td>
             <td><button class="closeness" id="giz_close">&#x2717;</button></td>
             <td></td>
 
@@ -661,9 +856,9 @@
 
             <td><button id="ipo" class="male-chimp chimp">IPO</button></td>
             <td class="time_point" id="ipo_time"><img src="./img/time_empty.png" id="ipo_time_img"/></td>
-            <td><button class="certainty" id="ipo_cer">X</button></td>
-            <td><button class="5-meter" id="ipo_five">&#x2717;</button></td>
+            <td><button class="certainty" id="ipo_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="ipo_sexState">SS</button></td>
+            <td><button class="5-meter" id="ipo_five">&#x2717;</button></td>
             <td><button class="closeness" id="ipo_close">&#x2717;</button></td>
 
 
@@ -672,9 +867,9 @@
 
             <td><button id="kaz" class="male-chimp chimp">KAZ</button></td>
             <td class="time_point" id="kaz_time"><img src="./img/time_empty.png" id="kaz_time_img"/></td>
-            <td><button class="certainty" id="kaz_cer">X</button></td>
-            <td><button class="5-meter" id="kaz_five">&#x2717;</button></td>
+            <td><button class="certainty" id="kaz_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="kaz_sexState">SS</button></td>
+            <td><button class="5-meter" id="kaz_five">&#x2717;</button></td>
             <td><button class="closeness" id="kaz_close">&#x2717;</button></td>
             <td></td>
 
@@ -682,9 +877,9 @@
 
             <td><button id="px" class="male-chimp chimp">PX</button></td>
             <td class="time_point" id="px_time"><img src="./img/time_empty.png" id="px_time_img"/></td>
-            <td><button class="certainty" id="px_cer">X</button></td>
-            <td><button class="5-meter" id="px_five">&#x2717;</button></td>
+            <td><button class="certainty" id="px_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="px_sexState">SS</button></td>
+            <td><button class="5-meter" id="px_five">&#x2717;</button></td>
             <td><button class="closeness" id="px_close">&#x2717;</button></td>
 
 
@@ -693,9 +888,9 @@
 
             <td><button id="sir" class="male-chimp chimp">SIR</button></td>
             <td class="time_point" id="sir_time"><img src="./img/time_empty.png" id="sir_time_img"/></td>
-            <td><button class="certainty" id="sir_cer">X</button></td>
-            <td><button class="5-meter" id="sir_five">&#x2717;</button></td>
+            <td><button class="certainty" id="sir_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="sir_sexState">SS</button></td>
+            <td><button class="5-meter" id="sir_five">&#x2717;</button></td>
             <td><button class="closeness" id="sir_close">&#x2717;</button></td>
             <td></td>
 
@@ -703,9 +898,9 @@
 
             <td><button id="sl" class="male-chimp chimp">SL</button></td>
             <td class="time_point" id="sl_time"><img src="./img/time_empty.png" id="sl_time_img"/></td>
-            <td><button class="certainty" id="sl_cer">X</button></td>
-            <td><button class="5-meter" id="sl_five">&#x2717;</button></td>
+            <td><button class="certainty" id="sl_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="sl_sexState">SS</button></td>
+            <td><button class="5-meter" id="sl_five">&#x2717;</button></td>
             <td><button class="closeness" id="sl_close">&#x2717;</button></td>
 
 
@@ -714,9 +909,9 @@
 
             <td><button id="sn" class="male-chimp chimp">SN</button></td>
             <td class="time_point" id="sn_time"><img src="./img/time_empty.png" id="sn_time_img"/></td>
-            <td><button class="certainty" id="sn_cer">X</button></td>
-            <td><button class="5-meter" id="sn_five">&#x2717;</button></td>
+            <td><button class="certainty" id="sn_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="sn_sexState">SS</button></td>
+            <td><button class="5-meter" id="sn_five">&#x2717;</button></td>
             <td><button class="closeness" id="sn_close">&#x2717;</button></td>
             <td></td>
 
@@ -724,9 +919,9 @@
 
             <td><button id="tn" class="male-chimp chimp">TN</button></td>
             <td class="time_point" id="tn_time"><img src="./img/time_empty.png" id="tn_time_img"/></td>
-            <td><button class="certainty" id="tn_cer">X</button></td>
-            <td><button class="5-meter" id="tn_five">&#x2717;</button></td>
+            <td><button class="certainty" id="tn_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="tn_sexState">SS</button></td>
+            <td><button class="5-meter" id="tn_five">&#x2717;</button></td>
             <td><button class="closeness" id="tn_close">&#x2717;</button></td>
 
 
@@ -735,9 +930,9 @@
 
             <td><button id="tom" class="male-chimp chimp">TOM</button></td>
             <td class="time_point" id="tom_time"><img src="./img/time_empty.png" id="tom_time_img"/></td>
-            <td><button class="certainty" id="tom_cer">X</button></td>
-            <td><button class="5-meter" id="tom_five">&#x2717;</button></td>
+            <td><button class="certainty" id="tom_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="tom_sexState">SS</button></td>
+            <td><button class="5-meter" id="tom_five">&#x2717;</button></td>
             <td><button class="closeness" id="tom_close">&#x2717;</button></td>
             <td></td>
 
@@ -745,9 +940,9 @@
 
             <td><button id="zs" class="male-chimp chimp">ZS</button></td>
             <td class="time_point" id="zs_time"><img src="./img/time_empty.png" id="zs_time_img"/></td>
-            <td><button class="certainty" id="zs_cer">X</button></td>
-            <td><button class="5-meter" id="zs_five">&#x2717;</button></td>
+            <td><button class="certainty" id="zs_cer">✓</button></td>
             <td><button class="sexual_state permanent-no-vis" id="zs_sexState">SS</button></td>
+            <td><button class="5-meter" id="zs_five">&#x2717;</button></td>
             <td><button class="closeness" id="zs_close">&#x2717;</button></td>
 
 
@@ -810,9 +1005,9 @@
 
  
         <div id="certainty" style="padding-bottom: 1.5px; background-color: #F0F0F0"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Certainty:</span>
-          <label class='nodisplay' ><input type="radio" id="certain1" name="certain" value="0">X</label>
           <label><input type="radio" id="certain2" name="certain" value="1" style="margin-left: 15px">✓</label>
           <label><input type="radio" id="certain3" name="certain" value="2" style="margin-left: 15px">•</label>
+          <label><input type="radio" id="certain3" name="certain" value="3" style="margin-left: 15px">N</label>
         </div>
 
         <div id="distance" style="padding-bottom: 1.5px;"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Within 5m: </span>
@@ -824,6 +1019,7 @@
           <label><input type="radio" id="sex2" name="sex_state" value="25" style="margin-left: 5px">.25</label>
           <label><input type="radio" id="sex3" name="sex_state" value="50" style="margin-left: 5px">.50</label>
           <label><input type="radio" id="sex4" name="sex_state" value="75" style="margin-left: 5px">.75</label>
+          <label><input type="radio" id="sex5" name="sex_state" value="100" style="margin-left: 5px">1.0</label>
         </div>
         <div id="close_focal"><span>Close To Focal:</span>
           <label><input type="radio" id="close1" name="close" value="0">N</label>

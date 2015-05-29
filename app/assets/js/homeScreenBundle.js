@@ -607,7 +607,55 @@ exports.writeRowForSpecies = function(control, species, isUpdate) {
   }
 };
 
-},{"./jgiModels":2,"./jgiTables":3}],2:[function(require,module,exports){
+},{"./jgiModels":3,"./jgiTables":4}],2:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+var urls = require('./jgiUrls');
+
+
+exports.DO_LOGGING = true;
+
+
+exports.getFollowRepresentation = function() {
+  var followDate = urls.getFollowDateFromUrl();
+  var focalId = urls.getFocalChimpIdFromUrl();
+  var intervalStart = urls.getFollowTimeFromUrl();
+  var result = followDate + ' ' + focalId + ' ' + intervalStart;
+  return result;
+};
+
+
+
+exports.initializeClickLogger = function() {
+  $('button, select, option, input').click(function() {
+    if (!exports.DO_LOGGING) {
+      return;
+    }
+
+    var followRepresentation = exports.getFollowRepresentation();
+
+    var $thisObj = $(this);
+    var now = new Date().toISOString();
+    console.log(
+      ' jgiLogging: ' +
+      now +
+      ' clickId: ' +
+      $thisObj.prop('id') +
+      ' elementName: ' +
+      $thisObj.get(0).tagName +
+      ' followInfo: ' +
+      followRepresentation
+    );
+  });
+
+};
+
+exports.initializeLogging = function() {
+  exports.initializeClickLogger();
+};
+
+},{"./jgiUrls":5,"jquery":7}],3:[function(require,module,exports){
 'use strict';
 
 /**
@@ -716,7 +764,7 @@ exports.createNewChimp = function(
     chimpId
 ) {
   var defTime = '0';
-  var defCertainty = '0';
+  var defCertainty = '1';
   var defWithinFive = '0';
   var defEstrus = '0';
   var defClosest = '0';
@@ -852,7 +900,7 @@ exports.createNewSpecies = function(
   return result;
 };
 
-},{"./jgiUtil":5}],3:[function(require,module,exports){
+},{"./jgiUtil":6}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -909,7 +957,7 @@ exports.follow = {
   }
 };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1075,7 +1123,7 @@ exports.getFocalChimpIdFromUrl = function() {
 
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 
@@ -1247,7 +1295,7 @@ exports.convertToStringWithTwoZeros = function(intTime) {
 
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.3
  * http://jquery.com/
@@ -10464,6 +10512,7 @@ var db = require('./jgiDb');
 var $ = require('jquery');
 var util = require('./jgiUtil');
 var urls = require('./jgiUrls');
+var logging = require('./jgiLogging');
 
 exports.initializeListeners = function(control) {
   var $mostRecentFollow = $('#most-recent-follow-button');
@@ -10534,7 +10583,9 @@ exports.initializeListeners = function(control) {
 };
 
 exports.initializeUi = function(control) {
+  logging.initializeClickLogger();
+
   exports.initializeListeners(control);
 };
 
-},{"./jgiDb":1,"./jgiUrls":4,"./jgiUtil":5,"jquery":6}]},{},[]);
+},{"./jgiDb":1,"./jgiLogging":2,"./jgiUrls":5,"./jgiUtil":6,"jquery":7}]},{},[]);
