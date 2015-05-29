@@ -1,13 +1,27 @@
 /* global control */
 'use strict';
 
+var urls = require('./jgiUrls');
 function display() {
     $('#begin-follow-button').on('click', function() {
         control.launchHTML('assets/newFollow.html');
     });
 
-    $('#existing-follow-button').on('click', function() {
-        control.launchHTML('assets/followList.html');
+   $('#existing-follow-button').on('click', function() {
+        var queryParams = urls.createParamsForIsReview(false);
+        var url = control.getFileAsUrl(
+            'assets/followList.html' + queryParams
+        );
+        window.location.href = url;
+        //control.launchHTML('assets/followList.html');
+    });
+    $('#review-follow-button').on('click', function() {
+        var queryParams = urls.createParamsForIsReview(true);
+        var url = control.getFileAsUrl(
+            'assets/followList.html' + queryParams
+        );
+        window.location.href = url;
+       // control.launchHTML('assets/followList.html');
     });
 
     // Set up the background image.

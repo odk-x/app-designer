@@ -930,7 +930,8 @@ exports.queryParameters = {
 
   timeOfPresence: 'time_presence',
   speciesName: 'name_species',
-  numOfSpecies: 'num_of_species'
+  numOfSpecies: 'num_of_species',
+  isReview: 'review'
 };
 
 
@@ -977,7 +978,19 @@ exports.createParamsForFollow = function(date, time, focalChimp) {
   return result;
 
 };
+exports.createParamsForIsReview = function(isReview) {
+  var result =
+    '?' +
+    exports.queryParameters.isReview +
+    '=' +
+    encodeURIComponent(isReview);
+    return result;
 
+};
+exports.isReviewMode = function(){
+  var result = exports.getQueryParameter(exports.queryParameters.isReview);
+  return result;
+}
 exports.createParamsForFood = function(
     date,
     time,

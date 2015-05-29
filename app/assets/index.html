@@ -7,7 +7,6 @@
         <link href="css/gatesHomeScreen.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../framework/libs/jquery.1.10.2.js"></script>
         <script type="text/javascript" src="../framework/tables/js/control.js"></script>
-        <script type="text/javascript" src="js/jgiHomeScreen.js"></script>
     </head>
 
     <body id="main">
@@ -30,17 +29,20 @@
           <button class="btn btn-primary btn-block btn-launch" id="most-recent-follow-button">
           Continue Last Follow
           </button>
+          <button class="btn btn-primary btn-block btn-launch" id="review-follow-button">
+          Review All Follows
+          </button>
         </li>
     </ul>
 
   </div>
-        <script type="text/javascript">
-            $(display());
-        </script>
         <script type="text/javascript" src="js/homeScreenBundle.js"></script>
         <script>
           var jgiHomeScreen = require('jgiHomeScreen');
           jgiHomeScreen.initializeUi(window.control);
         </script>
+       
+
+       
     </body>
 </html>

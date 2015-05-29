@@ -27,11 +27,26 @@ exports.initializeUi = function initializeUi(control) {
 
     // create url and launch list
     var queryParams = urls.createParamsForFollow(date, beginTime, focalId);
-    var url = control.getFileAsUrl(
-      'assets/followIntervalList.html' + queryParams
-    );
+    var isReviewSet = urls.isReviewMode();
 
-    window.location.href = url;
+    if (!isReviewSet) {
+        console.log("I am here where review mode is false");
+        console.log("isReviewSet  is " + isReviewSet);
+        var url = control.getFileAsUrl(
+            'assets/followIntervalList.html' + queryParams
+        );
+        window.location.href = url;
+
+    } else {
+        console.log("I am here where review mode is true");
+        console.log("isReviewSet  is " + isReviewSet);
+        var url = control.getFileAsUrl(
+            'assets/jgiFollowReview.html' + queryParams
+        );
+        window.location.href = url;
+    }
+
+    //window.location.href = url;
   });
 
   exports.displayFollows(control);

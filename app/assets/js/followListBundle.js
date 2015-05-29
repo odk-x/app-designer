@@ -396,6 +396,32 @@ exports.getAllFollows = function getAllFollows(control) {
   return result;
 };
 
+
+/**
+ * Get the Follow for the given date and focal chimp.
+ */
+exports.getFollowForDateAndChimp = function(control, date, focalId) {
+  var table = tables.follow;
+  var cols = table.columns;
+
+  var whereClause = exports.createWhereClause(
+    [
+      cols.date,
+      cols.focalId
+    ]
+  );
+  var selectionArgs = [date, focalId];
+
+  var tableData = control.query(
+      table.tableId,
+      whereClause,
+      selectionArgs
+  );
+
+  var result = exports.convertTableDataToFollows(tableData);
+  return result;
+};
+
 /**
  * Write a follow object (as defined in the models module).
  */
@@ -904,7 +930,8 @@ exports.queryParameters = {
 
   timeOfPresence: 'time_presence',
   speciesName: 'name_species',
-  numOfSpecies: 'num_of_species'
+  numOfSpecies: 'num_of_species',
+  isReview: 'review'
 };
 
 
@@ -951,7 +978,19 @@ exports.createParamsForFollow = function(date, time, focalChimp) {
   return result;
 
 };
+exports.createParamsForIsReview = function(isReview) {
+  var result =
+    '?' +
+    exports.queryParameters.isReview +
+    '=' +
+    encodeURIComponent(isReview);
+    return result;
 
+};
+exports.isReviewMode = function(){
+  var result = exports.getQueryParameter(exports.queryParameters.isReview);
+  return result;
+}
 exports.createParamsForFood = function(
     date,
     time,
@@ -10441,11 +10480,26 @@ exports.initializeUi = function initializeUi(control) {
 
     // create url and launch list
     var queryParams = urls.createParamsForFollow(date, beginTime, focalId);
-    var url = control.getFileAsUrl(
-      'assets/followIntervalList.html' + queryParams
-    );
+    var isReviewSet = urls.isReviewMode();
 
-    window.location.href = url;
+    if (!isReviewSet) {
+        console.log("I am here where review mode is false");
+        console.log("isReviewSet  is " + isReviewSet);
+        var url = control.getFileAsUrl(
+            'assets/followIntervalList.html' + queryParams
+        );
+        window.location.href = url;
+
+    } else {
+        console.log("I am here where review mode is true");
+        console.log("isReviewSet  is " + isReviewSet);
+        var url = control.getFileAsUrl(
+            'assets/jgiFollowReview.html' + queryParams
+        );
+        window.location.href = url;
+    }
+
+    //window.location.href = url;
   });
 
   exports.displayFollows(control);
