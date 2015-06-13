@@ -229,10 +229,12 @@ return {
         // the formPath ends in a slash, so we want the entry before the last one...
         var formId = parts[parts.length-2];
         
+        var tableId = parts[parts.length-4];
+        
         var appName = that.getPlatformInfo().appName;
         
         var uri = "content://org.opendatakit.common.android.provider.forms/" + 
-            this.getPlatformInfo().appName + "/" + formId + "/#" +
+            this.getPlatformInfo().appName + "/" + tableId + "/" + formId + "/#" +
             reconstitutedKeyValues.substring(1);
 
         shim.log("D","convertHashStringToSurveyUri: as Uri " + uri);
