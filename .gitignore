@@ -1,0 +1,9 @@
+.metadata
+.DS_Store
+app/output/db
+
+# opencsv lock files
+.~lock*
+
+# excel lock files
+~$*
