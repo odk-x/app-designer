@@ -47,6 +47,68 @@ body {
     padding-bottom: 3em;
 }
 
+/* sliders*/
+
+input[type="range"] {
+    -webkit-appearance: none;
+    background: linear-gradient(to right, rgba(175, 175, 175, 0.3) 0%, rgba(175, 175, 175, 0.3) 100%);
+    background-position: center;
+    background-size: 100% 4px;
+    background-repeat: no-repeat;
+    width: 87.5%;
+    height: 50px;
+    border: none;
+    -webkit-box-shadow: none;
+    overflow: hidden;
+    float: left;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background-color: #ecf0f1;
+	border: 1px solid #bdc3c7;
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	cursor: pointer;
+    pointer-events: none;
+    position: relative;
+} 
+
+input[type="range"]::-webkit-slider-thumb:before {
+  position: absolute;
+  top: 12px;
+  left: -9999px;
+  width: 9999px;
+  height: 4px;
+  background: #272727;
+  content: ' ';
+}
+
+.value-box {
+    float: left;
+    position:relative;
+    font-size: 30px;
+    text-align: center;
+    text-indent: -9px;
+    color: #ffffff;
+    background-color: #272727; 
+    width: 7.5%;
+    height:40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    float:right;
+}
+
+.value-box:before {
+    border-style: solid;
+    border-width: 20px 18px 20px 0;
+    border-color: transparent #272727 transparent transparent;
+    position: absolute;
+    left: -17px;
+    content: ' ';
+}
+
 /* navbars */
 .odk-header {
     overflow: hidden;

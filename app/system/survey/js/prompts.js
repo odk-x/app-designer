@@ -1595,10 +1595,43 @@ promptTypes.text = promptTypes.input_type.extend({
 });
 promptTypes.integer = promptTypes.input_type.extend({
     type: "integer",
+    templatePath: "templates/integer.handlebars",
     _baseInputAttributes: {
         'type':'number'
     },
     invalid_value_message: "Integer value expected",
+    configureRenderContext: function(ctxt) {
+        var that = this;
+        var renderContext = that.renderContext;
+        var value = that.getValue();
+        renderContext.value = value;
+        renderContext.isSlider = (that.inputAttributes && that.inputAttributes.type === "range");
+        if (ctxt.render == true) {
+            that.displayed = true;
+        }
+        ctxt.success();
+    },
+    modification: function(evt) {
+        var value = $(evt.target).val();
+        var that = this;
+        that.modified = false;
+        if ( that.lastEventTimestamp == evt.timeStamp ) {
+            shim.log("D","prompts." + that.type + ".modification duplicate event ignored");
+            return;
+        }
+        that.lastEventTimestamp = evt.timeStamp;
+        shim.log("D","prompts." + that.type + ".modification event being processed");
+        var isSlider = (that.inputAttributes && that.inputAttributes.type === "range");
+        if (isSlider) {
+            var valueBox = document.getElementById("value-" + that.getPromptId());
+            valueBox.innerHTML = value;
+        }
+        var renderContext = that.renderContext;
+        // track original value
+        renderContext.invalid = that.setValueAndValidate(value);
+        that.modified = true;
+        renderContext.value = value;
+    },
     validateValue: function() {
         var value = this.getValue();
         if ( value === null) {
