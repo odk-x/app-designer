@@ -47,6 +47,10 @@ body {
     padding-bottom: 3em;
 }
 
+.input-container {
+    display: flex;
+}
+
 /* sliders*/
 
 input[type="range"] {
@@ -55,12 +59,14 @@ input[type="range"] {
     background-position: center;
     background-size: 100% 4px;
     background-repeat: no-repeat;
-    width: 87.5%;
     height: 50px;
     border: none;
     -webkit-box-shadow: none;
     overflow: hidden;
     float: left;
+    position: relative;
+    flex: auto;
+    margin-right: 35px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -86,14 +92,14 @@ input[type="range"]::-webkit-slider-thumb:before {
 }
 
 .value-box {
-    float: left;
+    flex: none;
     position:relative;
+    right:0;
     font-size: 30px;
     text-align: center;
     text-indent: -9px;
     color: #ffffff;
-    background-color: #272727; 
-    width: 7.5%;
+    background-color: #272727;
     height:40px;
     margin-top: 5px;
     margin-bottom: 5px;

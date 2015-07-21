@@ -1606,6 +1606,10 @@ promptTypes.integer = promptTypes.input_type.extend({
         var value = that.getValue();
         renderContext.value = value;
         renderContext.isSlider = (that.inputAttributes && that.inputAttributes.type === "range");
+        // calculate width of value-box, based on max possible size of string (dynamic resizing would be bad)
+        var longestNum = that.inputAttributes.max.toString().length >= that.inputAttributes.min.toString().length ? that.inputAttributes.max : that.inputAttributes.min;
+        renderContext.boxWidth = formulaFunctions.width(longestNum) + 20; // +20 for padding 
+        
         if (ctxt.render == true) {
             that.displayed = true;
         }
@@ -1702,7 +1706,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     configureRenderContext: function(ctxt) {
         var that = this;
         var renderContext = that.renderContext;
-        if(this.detectNativeDatePicker()){
+        if(that.detectNativeDatePicker()){
             renderContext.inputAttributes.type = that.type;
             that.usePicker = false;
             ctxt.success();
@@ -1761,7 +1765,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     },
     afterRender: function() {
         var that = this;
-        if(this.usePicker){
+        if(that.usePicker){
             that.insideAfterRender = true;
 
             if (that.dtp !== null && that.dtp !== undefined) {

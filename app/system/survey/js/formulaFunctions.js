@@ -114,6 +114,16 @@ function(opendatakit,  database,   _) {
             with(this){
                 return eval(code);
             }
+        },
+        width: function(string) {
+            var f = '30px sans-serif', // TODO: Use document's actual font
+            testDiv = $('<div>' + string + '</div>')
+            .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font': f})
+            .appendTo($('body')),
+            
+            width = testDiv.width();
+            testDiv.remove();
+            return width;
         }
     };
 });
