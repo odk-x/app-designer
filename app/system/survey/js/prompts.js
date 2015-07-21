@@ -636,6 +636,11 @@ promptTypes._linked_type = promptTypes.base.extend({
             return '../config/tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
         }
     },
+    getLinkedUri: function(platInfo) {
+        var that = this;
+        var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedTableId() + '/' + that.getLinkedFormId();
+        return uri;
+    },
     _linkedCachedModel: null,
     _linkedCachedInstanceName: null,
     getLinkedInstanceName: function() {
@@ -781,7 +786,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedFormId();
+        var uri = that.getLinkedUri(platInfo);
         var expandedUrl = platInfo.baseUri + 'system/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'launchSurvey', that.launchAction, 
@@ -861,7 +866,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedFormId();
+        var uri = that.getLinkedUri(platInfo);
         var auxHash = '';
         if ( queryDefn.auxillaryHash ) {
             auxHash = queryDefn.auxillaryHash();
@@ -1607,8 +1612,10 @@ promptTypes.integer = promptTypes.input_type.extend({
         renderContext.value = value;
         renderContext.isSlider = (that.inputAttributes && that.inputAttributes.type === "range");
         // calculate width of value-box, based on max possible size of string (dynamic resizing would be bad)
-        var longestNum = that.inputAttributes.max.toString().length >= that.inputAttributes.min.toString().length ? that.inputAttributes.max : that.inputAttributes.min;
-        renderContext.boxWidth = formulaFunctions.width(longestNum) + 20; // +20 for padding 
+        if (renderContext.isSlider) {
+            var longestNum = that.inputAttributes.max.toString().length >= that.inputAttributes.min.toString().length ? that.inputAttributes.max : that.inputAttributes.min;
+            renderContext.boxWidth = formulaFunctions.width(longestNum) + 20; // +20 for padding
+        }            
         
         if (ctxt.render == true) {
             that.displayed = true;
