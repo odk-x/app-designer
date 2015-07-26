@@ -2,9 +2,31 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 /* global control */
 'use strict';
 
-// The schemae of our tables
 var tables = require('./jgiTables');
 var models = require('./jgiModels');
+
+exports.certaintyLabels = {
+  certain: '1',
+  uncertain: '2',
+  nestCertain: '3',
+  nestUncertain: '4'
+};
+
+
+/**
+ * Database-facing labels for arrival and departures.
+ */
+exports.timeLabels = {
+  absent: '0',
+  continuing: '1',
+  arriveFirst: '5',
+  arriveSecond: '10',
+  arriveThird: '15',
+  departFirst: '-5',
+  departSecond: '-10',
+  departThird: '-15'
+};
+
 
 /**
  * Create a where clause for use in a Tables query. columns must be an array
@@ -485,7 +507,18 @@ exports.writeRowForChimp = function(control, chimp, isUpdate) {
 };
 
 
-exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
+/**
+ * Update an array of Chimp objects based on an existing time point. If
+ * isRetroactive is true, it implies that this is being performed after a time
+ * point has already had data filled out manually, rather than being seen for
+ * the first time. In this case the chimp is updated ONLY if the chimp current
+ * chimp was absent.
+ */
+exports.updateChimpsForPreviousTimepoint = function(
+    prev,
+    curr,
+    isRetroactive
+) {
   if (prev.length === 0) {
     return curr;
   } else if (prev.length !== curr.length) {
@@ -511,7 +544,24 @@ exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
       throw new Error('did not find prev or curr chimp with id: ' + chimpId);
     }
 
-    result.push(exports.updateChimpForPreviousTimepoint(prevChimp, currChimp));
+    // Handle the case for going back in time and adding a chimp retroactively.
+    // In this case we want to overwrite ONLY the chimps that are not present
+    // now but were present in the previous timepoint. This will prevent
+    // overwriting previously manually entered data, which would happen if we
+    // did a raw update.
+    if (isRetroactive) {
+      if (currChimp.time === exports.timeLabels.absent) {
+        result.push(
+          exports.updateChimpForPreviousTimepoint(prevChimp, currChimp)
+        );
+      } else {
+        result.push(currChimp);
+      }
+    } else {
+      result.push(
+          exports.updateChimpForPreviousTimepoint(prevChimp, currChimp)
+      );
+    }
   });
 
   return result;
@@ -527,17 +577,34 @@ exports.updateChimpForPreviousTimepoint = function(prev, curr) {
     throw new Error('chimp ids must be identical to update');
   }
 
-  curr.certainty = prev.certainty;
+  // The mapping for certainty updates is basically that they remain the same,
+  // except that if it is a nest observation it updates to no nest.
+  var prevCertainty = prev.certainty;
+  var currCertainty = prevCertainty; // sensible default in case of error
+  if (prevCertainty === exports.certaintyLabels.certain) {
+    currCertainty = prevCertainty;
+  } else if (prevCertainty === exports.certaintyLabels.uncertain) {
+    currCertainty = prevCertainty;
+  } else if (prevCertainty === exports.certaintyLabels.nestCertain) {
+    currCertainty = exports.certaintyLabels.certain;
+  } else if (prevCertainty === exports.certaintyLabels.nestUncertain) {
+    currCertainty = exports.certaintyLabels.uncertain;
+  } else {
+    console.log('E: previous certainty not handled: ' + prevCertainty);
+    currCertainty = prevCertainty;
+  }
+  curr.certainty = currCertainty;
+
   curr.estrus = prev.estrus;
 
   // chimp was there in the last time slot, update to continuing
-  if (prev.time === '15' ||
-      prev.time === '10' ||
-      prev.time === '5' ||
-      prev.time === '1'
+  if (prev.time === exports.timeLabels.arriveThird ||
+      prev.time === exports.timeLabels.arriveSecond ||
+      prev.time === exports.timeLabels.arriveFirst ||
+      prev.time === exports.timeLabels.continuing
   ) {
     // Must match timeLabels in jgiFollow.js.
-    curr.time = '1';
+    curr.time = exports.timeLabels.continuing;
   }
 
   return curr;
@@ -1238,16 +1305,13 @@ exports.getDbTimeFromUserTime = function(userTime) {
 };
 
 
+/**
+ * Convert a time like '14.01-12:12J' to a completely user-facing time.
+ */
 exports.getUserTimeFromDbTime = function(dbTime) {
-  var userTimes = exports.getAllTimesForUser();
-  var dbTimes = exports.getAllTimesForDb();
-
-  var index = dbTimes.indexOf(dbTime);
-  if (index < 0) {
-    throw 'Unrecognized db time: ' + dbTime;
-  }
-
-  return userTimes[index];
+  var dashIndex = dbTime.indexOf('-');
+  var result = dbTime.substring(dashIndex + 1);
+  return result;
 };
 
 
@@ -1317,43 +1381,62 @@ exports.getDbAndUserTimesInInterval = function(dbTime) {
 
   var prefix = dbTime.substring(0, dashIndex);
   var hour = dbTime.substring(dashIndex + 1, colonIndex);
+  var mins = dbTime.substring(colonIndex + 1, colonIndex + 3);
   // Everything at the end.
-  var period = dbTime.substring(colonIndex + 2);
-
-  // Keeping these as arrays is kind of lazy, but it is foolproof until we
-  // change the intervals.
-  var minutes = [
-    '00',
-    '01',
-    '02',
-    '03',
-    '04',
-    '05',
-    '06',
-    '07',
-    '08',
-    '09',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14'
-  ];
+  var period = dbTime.substring(colonIndex + 3);
 
   var result = [];
 
-  minutes.forEach(function(val) {
-    var newUserTime = hour + ':' + val + period;
-    var newPrefix = prefix + '.' + val;
-    var newDbTime = newPrefix + newUserTime;
+  for (var i = 0; i < 15; i++) {
+    var minsNum = Number(mins);
+    minsNum += i;
+    
+    var newMins;
+    if (minsNum < 10) {
+      newMins = '0' + String(minsNum);
+    } else {
+      newMins = String(minsNum);
+    }
+
+    var suffix;
+    if (i < 10) {
+      suffix = '0' + String(i);
+    } else {
+      suffix = String(i);
+    }
+
+    var newUserTime = hour + ':' + newMins + period;
+    var newPrefix = prefix + '.' + suffix;
+    var newDbTime = newPrefix + '-' + newUserTime;
 
     var timePoint = {};
     timePoint.dbTime = newDbTime;
     timePoint.userTime = newUserTime;
     result.push(timePoint);
-  });
+  }
 
   return result;
+};
+
+
+/**
+ * True if the two times represent a negative duration, else False. Returns
+ * true also if either startDb or endDb is not truthy.
+ *
+ * Expects times to be in their db format, e.g. 13.01-12:00J.
+ */
+exports.isNegativeDuration = function(startDb, endDb) {
+  if (!startDb || !endDb) {
+    return true;
+  }
+  
+  var startPrefix = startDb.substring(0, startDb.indexOf('-'));
+  var endPrefix = endDb.substring(0, endDb.indexOf('-'));
+
+  var startNum = Number(startPrefix);
+  var endNum = Number(endPrefix);
+
+  return endNum < startNum;
 };
 
 
