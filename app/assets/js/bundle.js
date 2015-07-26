@@ -10959,6 +10959,12 @@ exports.refreshSpeciesList = function(control) {
   var $activeList = $('#active-species');
   var $completedList = $('#finished-species');
 
+  if (activeSpecies.length === 0) {
+    $activeList.removeClass('ongoing-list');
+  } else {
+    $activeList.addClass('ongoing-list');
+  }
+
   exports.addSpeciesToList(activeSpecies, $activeList);
   exports.addSpeciesToList(completedSpecies, $completedList);
 };
@@ -10987,6 +10993,12 @@ exports.refreshFoodList = function(control) {
 
   var $activeList = $('#active-food');
   var $completedList = $('#finished-food');
+
+  if (activeFood.length === 0) {
+    $activeList.removeClass('ongoing-list');
+  } else {
+    $activeList.addClass('ongoing-list');
+  }
 
   exports.addFoodToList(activeFood, $activeList);
   exports.addFoodToList(completedFood, $completedList);

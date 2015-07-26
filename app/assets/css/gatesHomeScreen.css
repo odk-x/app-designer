@@ -263,3 +263,9 @@ ul {
    max-width: 500px;
    margin: 0 auto 35px;
 }
+
+
+.ongoing-list {
+  background-color: #d9534f !important;
+  border-color: #d9534f !important;
+}
