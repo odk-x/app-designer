@@ -1083,7 +1083,7 @@ exports.queryParameters = {
   numOfSpecies: 'num_of_species',
   isReview: 'review'
 };
-var review = false;
+
 
 /**
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy
@@ -1129,22 +1129,20 @@ exports.createParamsForFollow = function(date, time, focalChimp) {
 
 };
 exports.createParamsForIsReview = function(isReview) {
-  if (isReview) {
-    review = true;
-  } else {
-    review = false;
-  }
   var result =
     '?' +
     exports.queryParameters.isReview +
     '=' +
     encodeURIComponent(isReview);
-    return result;
 
+  return result;
 };
+
 exports.isReviewMode = function(){
-  return review;
-}
+  var result = exports.getQueryParameter(exports.queryParameters.isReview);
+  return result;
+};
+
 exports.createParamsForFood = function(
     date,
     time,
@@ -10819,33 +10817,24 @@ exports.initializeListeners = function(control) {
     control.launchHTML('assets/followScreen.html' + queryParams);
   });
 
-      $('#begin-follow-button').on('click', function() {
-        control.launchHTML('assets/newFollow.html');
-    });
+  $('#begin-follow-button').on('click', function() {
+    control.launchHTML('assets/newFollow.html');
+  });
 
-   $('#existing-follow-button').on('click', function() {
-        var queryParams = urls.createParamsForIsReview(false);
-        var url = control.getFileAsUrl(
-            'assets/followList.html' + queryParams
-        );
-        window.location.href = url;
-        //control.launchHTML('assets/followList.html');
-    });
-   
-    $('#review-follow-button').on('click', function() {
-        var queryParams = urls.createParamsForIsReview(true);
-        var url = control.getFileAsUrl(
-            'assets/followList.html' + queryParams
-        );
-        window.location.href = url;
-       // control.launchHTML('assets/followList.html');
-    });
+  $('#existing-follow-button').on('click', function() {
+    var queryParams = urls.createParamsForIsReview(false);
+    var url = control.getFileAsUrl(
+      'assets/followList.html' + queryParams
+      );
+    window.location.href = url;
+    //control.launchHTML('assets/followList.html');
+  });
 
-    // Set up the background image.
-    // First we need the url as parsed by the ODK framework so that it works
-    // in both the browser and on the device.
-    var fileUri = control.getFileAsUrl('assets/img/chimp.png');
-    $('body').css('background-image', 'url(' + fileUri + ')');
+  // Set up the background image.
+  // First we need the url as parsed by the ODK framework so that it works
+  // in both the browser and on the device.
+  var fileUri = control.getFileAsUrl('assets/img/chimp.png');
+  $('body').css('background-image', 'url(' + fileUri + ')');
 
 };
 

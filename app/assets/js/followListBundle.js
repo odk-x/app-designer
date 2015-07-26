@@ -1134,13 +1134,15 @@ exports.createParamsForIsReview = function(isReview) {
     exports.queryParameters.isReview +
     '=' +
     encodeURIComponent(isReview);
-    return result;
 
+  return result;
 };
+
 exports.isReviewMode = function(){
   var result = exports.getQueryParameter(exports.queryParameters.isReview);
   return result;
-}
+};
+
 exports.createParamsForFood = function(
     date,
     time,
@@ -10807,24 +10809,18 @@ exports.initializeUi = function initializeUi(control) {
       'assets/followIntervalList.html' + queryParams
     );
 
-    if (isReviewSet == "false") {
-        //console.log("I am here where review mode is false");
-       // console.log("isReviewSet  is " + isReviewSet);
-        var url = control.getFileAsUrl(
-            'assets/followIntervalList.html' + queryParams
-        );
-        window.location.href = url;
+    if (isReviewSet === 'false') {
+      url = control.getFileAsUrl(
+          'assets/followIntervalList.html' + queryParams
+      );
+      window.location.href = url;
 
     } else {
-        //console.log("I am here where review mode is true");
-       // console.log("isReviewSet  is " + isReviewSet);
-        var url = control.getFileAsUrl(
-            'assets/jgiFollowReview.html' + queryParams
-        );
-        window.location.href = url;
+      url = control.getFileAsUrl(
+          'assets/jgiFollowReview.html' + queryParams
+      );
+      window.location.href = url;
     }
-
-    //window.location.href = url;
   });
 
   exports.displayFollows(control);

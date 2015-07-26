@@ -1134,13 +1134,15 @@ exports.createParamsForIsReview = function(isReview) {
     exports.queryParameters.isReview +
     '=' +
     encodeURIComponent(isReview);
-    return result;
 
+  return result;
 };
+
 exports.isReviewMode = function(){
   var result = exports.getQueryParameter(exports.queryParameters.isReview);
   return result;
-}
+};
+
 exports.createParamsForFood = function(
     date,
     time,
