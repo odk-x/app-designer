@@ -1127,16 +1127,6 @@ var times = [
   '56-2:45J'
 ];
 
-/**
- * Convert hours an mins integers to a zero-padded string. 1,5, would become:
- * '01:05'.
- */
-function convertToTime(hours, mins) {
-  var hoursStr = exports.convertToStringWithTwoZeros(hours);
-  var minsStr = exports.convertToStringWithTwoZeros(mins);
-  return hoursStr + ':' + minsStr;
-}
-
 
 function sortItemsWithDate(objects) {
   objects.sort(function(a, b) {
@@ -1226,52 +1216,78 @@ exports.sortFollowIntervals = function(intervals) {
   sortItemsWithDate(intervals);
 };
 
+
+/**
+ * Return the next time point from the given database-facing time. Throws an
+ * error if canIncrementTime returns false.
+ */
 exports.incrementTime = function(time) {
-
-  var interval = 15;
-  var parts = time.split(':');
-  var hours = parseInt(parts[0]);
-  var mins = parseInt(parts[1]);
-  var maybeTooLarge = mins + interval;
-
-  if (maybeTooLarge > 59) {
-    // then we've overflowed our time system.
-    mins = maybeTooLarge % 60;
-    // Don't worry about overflowing hours. Not going to worry about
-    // late night chimp monitoring.
-    hours = hours + 1;
-  } else {
-    mins = maybeTooLarge;
+  if (!exports.canIncrementTime(time)) {
+    throw 'cannot increment time: ' + time;
   }
-
-  // Format these strings to be two digits.
-  var hoursStr = exports.convertToStringWithTwoZeros(hours);
-  var minsStr = exports.convertToStringWithTwoZeros(mins);
-  var result = hoursStr + ':' + minsStr;
+  var index = times.indexOf(time);
+  var result = times[index + 1];
   return result;
-
 };
 
 
 /**
- * Get an array of the times that fall within an interval. If you passed
- * '7:00', this would return an array of ['mm', '7:00', '7:01', ..., '7:14'].
+ * Take a database-facing time (e.g. 05-12:12J) and return an array of objects
+ * with a 'dbTime' and 'userTime' value, corresponding to time points in the
+ * interval specified by the dbTime parameter.
+ *
+ * The dbTime keys will have the prefix include '.00' to '.14' to accommodate
+ * direct string comparisons. For instance, the time '00-12:00A' would return
+ * an array like:
+ * [
+ *   {dbTime: 00.00-12:00A, userTime: 12:00A},
+ *   {dbTime: 00.01-12:01A, userTime: 12:01A},
+ *   ...
+ *   {dbTime: 00.14-12:14A, userTime: 12:14A}
+ * ]
  */
-exports.getTimesInInterval = function(time) {
-  var interval = 15;
-  var parts = time.split(':');
-  var hours = parseInt(parts[0]);
-  var mins = parseInt(parts[1]);
+exports.getDbAndUserTimesInInterval = function(dbTime) {
+  var dashIndex = dbTime.indexOf('-');
+  var colonIndex = dbTime.indexOf(':');
 
-  var result = ['mm'];
-  // Fow now, assume our start times begin at 0, 15, 30, 45. This will prevent
-  // us having to worry about overflowing.
-  for (var i = 0; i < mins + interval; i++) {
-    var newMins = mins + i;
-    var nextTime = convertToTime(hours, newMins);
-    result.push(nextTime);
-  }
-  
+  var prefix = dbTime.substring(0, dashIndex);
+  var hour = dbTime.substring(dashIndex + 1, colonIndex);
+  // Everything at the end.
+  var period = dbTime.substring(colonIndex + 2);
+
+  // Keeping these as arrays is kind of lazy, but it is foolproof until we
+  // change the intervals.
+  var minutes = [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14'
+  ];
+
+  var result = [];
+
+  minutes.forEach(function(val) {
+    var newUserTime = hour + ':' + val + period;
+    var newPrefix = prefix + '.' + val;
+    var newDbTime = newPrefix + newUserTime;
+
+    var timePoint = {};
+    timePoint.dbTime = newDbTime;
+    timePoint.userTime = newUserTime;
+    result.push(timePoint);
+  });
+
   return result;
 };
 
@@ -1311,25 +1327,36 @@ exports.isInt = function(val) {
 };
 
 
-exports.decrementTime = function(time) {
-  var interval = 15;
-  var parts = time.split(':');
-  var hours = parseInt(parts[0]);
-  var mins = parseInt(parts[1]);
-  var maybeTooSmall = mins - interval;
-
-  if (maybeTooSmall < 0) {
-    // negative time
-    mins = 60 + maybeTooSmall;
-    hours = (hours === 24) ? 0 : (hours - 1);
+exports.canIncrementTime = function(time) {
+  var index = times.indexOf(time);
+  if (index < 0 || index === times.length) {
+    return false;
   } else {
-    mins = maybeTooSmall;
+    return true;
   }
+};
 
-  var hoursStr = exports.convertToStringWithTwoZeros(hours);
-  var minsStr = exports.convertToStringWithTwoZeros(mins);
-  var result = hoursStr + ':' + minsStr;
-  return result;
+
+exports.canDecrementTime = function(time) {
+  var index = times.indexOf(time);
+  if (index < 0 || index === 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+
+/**
+ * Return the previous time point for the given database-facing time. Throws an
+ * error if canDecrementTime returns False.
+ */
+exports.decrementTime = function(time) {
+  if (!exports.canDecrementTime(time)) {
+    throw 'cannot decrement time: ' + time;
+  }
+  var index = times.indexOf(time);
+  return times[index - 1];
 };
 
 

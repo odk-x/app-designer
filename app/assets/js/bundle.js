@@ -1188,16 +1188,6 @@ var times = [
   '56-2:45J'
 ];
 
-/**
- * Convert hours an mins integers to a zero-padded string. 1,5, would become:
- * '01:05'.
- */
-function convertToTime(hours, mins) {
-  var hoursStr = exports.convertToStringWithTwoZeros(hours);
-  var minsStr = exports.convertToStringWithTwoZeros(mins);
-  return hoursStr + ':' + minsStr;
-}
-
 
 function sortItemsWithDate(objects) {
   objects.sort(function(a, b) {
@@ -1244,16 +1234,13 @@ exports.getDbTimeFromUserTime = function(userTime) {
 };
 
 
+/**
+ * Convert a time like '14.01-12:12J' to a completely user-facing time.
+ */
 exports.getUserTimeFromDbTime = function(dbTime) {
-  var userTimes = exports.getAllTimesForUser();
-  var dbTimes = exports.getAllTimesForDb();
-
-  var index = dbTimes.indexOf(dbTime);
-  if (index < 0) {
-    throw 'Unrecognized db time: ' + dbTime;
-  }
-
-  return userTimes[index];
+  var dashIndex = dbTime.indexOf('-');
+  var result = dbTime.substring(dashIndex + 1);
+  return result;
 };
 
 
@@ -1303,24 +1290,62 @@ exports.incrementTime = function(time) {
 
 
 /**
- * Get an array of the times that fall within an interval. If you passed
- * '7:00', this would return an array of ['mm', '7:00', '7:01', ..., '7:14'].
+ * Take a database-facing time (e.g. 05-12:12J) and return an array of objects
+ * with a 'dbTime' and 'userTime' value, corresponding to time points in the
+ * interval specified by the dbTime parameter.
+ *
+ * The dbTime keys will have the prefix include '.00' to '.14' to accommodate
+ * direct string comparisons. For instance, the time '00-12:00A' would return
+ * an array like:
+ * [
+ *   {dbTime: 00.00-12:00A, userTime: 12:00A},
+ *   {dbTime: 00.01-12:01A, userTime: 12:01A},
+ *   ...
+ *   {dbTime: 00.14-12:14A, userTime: 12:14A}
+ * ]
  */
-exports.getTimesInInterval = function(time) {
-  var interval = 15;
-  var parts = time.split(':');
-  var hours = parseInt(parts[0]);
-  var mins = parseInt(parts[1]);
+exports.getDbAndUserTimesInInterval = function(dbTime) {
+  var dashIndex = dbTime.indexOf('-');
+  var colonIndex = dbTime.indexOf(':');
 
-  var result = ['mm'];
-  // Fow now, assume our start times begin at 0, 15, 30, 45. This will prevent
-  // us having to worry about overflowing.
-  for (var i = 0; i < mins + interval; i++) {
-    var newMins = mins + i;
-    var nextTime = convertToTime(hours, newMins);
-    result.push(nextTime);
-  }
-  
+  var prefix = dbTime.substring(0, dashIndex);
+  var hour = dbTime.substring(dashIndex + 1, colonIndex);
+  // Everything at the end.
+  var period = dbTime.substring(colonIndex + 3);
+
+  // Keeping these as arrays is kind of lazy, but it is foolproof until we
+  // change the intervals.
+  var minutes = [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14'
+  ];
+
+  var result = [];
+
+  minutes.forEach(function(val) {
+    var newUserTime = hour + ':' + val + period;
+    var newPrefix = prefix + '.' + val;
+    var newDbTime = newPrefix + '-' + newUserTime;
+
+    var timePoint = {};
+    timePoint.dbTime = newDbTime;
+    timePoint.userTime = newUserTime;
+    result.push(timePoint);
+  });
+
   return result;
 };
 
@@ -10634,6 +10659,8 @@ var $ = require('jquery');
 var util = require('./jgiUtil');
 var logging = require('./jgiLogging');
 
+var FLAG_PLACE_HOLDER_TIME = 'hh:mm';
+
 function assertIsChimp(chimp) {
   if (chimp.constructor.name !== 'Chimp') {
     throw new Error('parameter must be a chimp');
@@ -10651,28 +10678,20 @@ function assertFoundChimp(chimp) {
 
 
 /**
- * Append all minutes as options to the select element.
+ * Append all valid minutes for this time as options to the $select.
  */
-function appendMinsToSelect($select) {
-  var mins = util.getAllMinutes();
-  mins.forEach(function(minute) {
+function appendTimesToSelect($select) {
+  var currentTime = urls.getFollowTimeFromUrl();
+  var validTimes = util.getDbAndUserTimesInInterval(currentTime);
+  // The first value we want to be the place holder time.
+  var placeHolderTime = {};
+  placeHolderTime.dbTime = FLAG_PLACE_HOLDER_TIME;
+  placeHolderTime.userTime = FLAG_PLACE_HOLDER_TIME;
+  validTimes.unshift(placeHolderTime);
+  validTimes.forEach(function(time) {
     var option = $('<option></option>');
-    option.attr('value', minute);
-    option.text(minute);
-    $select.append(option);
-  });
-}
-
-
-/**
- * Append all hours as options to the select element.
- */
-function appendHoursToSelect($select) {
-  var hours = util.getAllHours();
-  hours.forEach(function(hour) {
-    var option = $('<option></option>');
-    option.attr('value', hour);
-    option.text(hour);
+    option.attr('value', time.dbTime);
+    option.text(time.userTime);
     $select.append(option);
   });
 }
@@ -10736,7 +10755,6 @@ function showFood() {
   $('.container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');
   $('.food-container').removeClass('nodisplay');
-  exports.updateFoodAfterEdit();
 }
 
 
@@ -10747,7 +10765,6 @@ function showSpecies() {
   $('.container').addClass('nodisplay');
   $('.food-container').addClass('nodisplay');
   $('.species-container').removeClass('nodisplay');
-  exports.updateSpeciesAfterEdit();
 }
 
 
@@ -10778,14 +10795,18 @@ function clearSpeciesAndFoodSelected() {
 
   $('#food-summary').attr('__rowid', '');
   $('#species-summary').attr('__rowid', '');
+
+  $('.food-summary').removeAttr('__data');
+  $('.species-summary').removeAttr('__data');
 }
 
 
 function timeIsValid(time) {
   // hh:mm is the default input. Faking begins with and ends with here.
   return (
-      time.lastIndexOf('hh', 0) !== 0 &&
-      time.lastIndexOf('mm') !== time.length - 2
+    time &&
+    time !==
+    FLAG_PLACE_HOLDER_TIME && time !== ''
   );
 }
 
@@ -10797,8 +10818,10 @@ function timeIsValid(time) {
 function foodCanBePersisted(food) {
   return (
       timeIsValid(food.startTime) &&
-      food.foodName !== '0' &&
-      food.foodPartEaten !== '0'
+      food.foodName &&
+      food.foodName !== '' &&
+      food.foodPartEaten &&
+      food.foodPartEaten !== ''
   );
 }
 
@@ -10808,11 +10831,13 @@ function foodCanBePersisted(food) {
  * and end time.
  */
 function speciesCanBePersisted(species) {
+  // TODO: handle new species numbers.
   return (
       timeIsValid(species.startTime) &&
-      species.speciesName !== '0' &&
+      species.speciesName &&
+      species.number &&
       util.isInt(species.number) &&
-      species.number > 0
+      species.number !== 0
   );
 }
 
@@ -10945,71 +10970,69 @@ exports.refreshFoodList = function(control) {
 
 
 exports.editExistingFood = function(food) {
-  var timeParts = food.startTime.split(':');
-  var startHours = timeParts[0];
-  var startMins = timeParts[1];
-
-  var endHours;
-  var endMins;
-  if (food.endTime === util.flagEndTimeNotSet) {
-    endHours = 'hh';
-    endMins = 'mm';
-  } else {
-    var endParts = food.endTime.split(':');
-    endHours = endParts[0];
-    endMins = endParts[1];
-  }
-
-  var $startHours = $('#start-time-food-hours');
-  var $startMins = $('#start-time-food-mins');
-  var $endHours = $('#end-time-food-hours');
-  var $endMins = $('#end-time-food-mins');
-  var $food = $('#foods');
-  var $foodPart = $('#food-part');
+  var $sumStartTime = $('#food-summary-start-time');
+  var $sumEndTime = $('#food-summary-end-time');
+  var $sumName = $('#food-summary-food');
+  var $sumPart = $('#food-summary-part');
   var $foodSummary = $('#food-summary');
 
-  $startHours.val(startHours);
-  $startMins.val(startMins);
-  $endHours.val(endHours);
-  $endMins.val(endMins);
-  $food.val(food.foodName);
-  $foodPart.val(food.foodPartEaten);
+  var $editName = $('#foods');
+  var $editPart = $('#food-part');
+
+  var userStartTime = util.getUserTimeFromDbTime(food.startTime);
+  $sumStartTime.attr('__data', food.startTime);
+  $sumStartTime.text(userStartTime);
+
+  if (food.endTime !== util.flagEndTimeNotSet) {
+    var userEndTime = util.getUserTimeFromDbTime(food.endTime);
+    $sumEndTime.attr('__data', food.endTime);
+    $sumEndTime.text(userEndTime);
+  }
+
+  $sumName.text(food.foodName);
+  $sumName.attr('__data',food.foodName);
+  $editName.val(food.foodName);
+
+  $sumPart.text(food.foodPartEaten);
+  $sumPart.attr('__data',food.foodPartEaten);
+  $editPart.val(food.foodPartEaten);
+
   $foodSummary.attr('__rowid', food.rowId);
+
+  exports.updateSaveFoodButton();
 
   showFood();
 };
 
 
 exports.editExistingSpecies = function(species) {
-  var timeParts = species.startTime.split(':');
-  var startHours = timeParts[0];
-  var startMins = timeParts[1];
-
-  var endHours;
-  var endMins;
-  if (species.endTime === util.flagEndTimeNotSet) {
-    endHours = 'hh';
-    endMins = 'mm';
-  } else {
-    var endParts = species.endTime.split(':');
-    endHours = endParts[0];
-    endMins = endParts[1];
-  }
-
-  var $startHours = $('#start-time-species-hours');
-  var $startMins = $('#start-time-species-mins');
-  var $endHours = $('#end-time-species-hours');
-  var $endMins = $('#end-time-species-mins');
-  var $species = $('#species');
-  var $speciesNumber = $('#species_number');
+  var $sumStartTime = $('#species-summary-start-time');
+  var $sumEndTime = $('#species-summary-end-time');
+  var $sumName = $('#species-summary-name');
+  var $sumNumber = $('#species-summary-number');
   var $speciesSummary = $('#species-summary');
 
-  $startHours.val(startHours);
-  $startMins.val(startMins);
-  $endHours.val(endHours);
-  $endMins.val(endMins);
-  $species.val(species.speciesName);
-  $speciesNumber.val(species.number);
+  var $editName = $('#species');
+  var $editPart = $('#species_number');
+
+  var userStartTime = util.getUserTimeFromDbTime(species.startTime);
+  $sumStartTime.attr('__data', species.startTime);
+  $sumStartTime.text(userStartTime);
+
+  if (species.endTime !== util.flagEndTimeNotSet) {
+    var userEndTime = util.getUserTimeFromDbTime(species.endTime);
+    $sumEndTime.attr('__data', species.endTime);
+    $sumEndTime.text(userEndTime);
+  }
+
+  $sumName.text(species.speciesName);
+  $sumName.attr('__data', species.speciesName);
+  $editName.val(species.speciesName);
+
+  $sumNumber.text(species.number);
+  $sumNumber.attr('__data', species.number);
+  $editPart.val(species.number);
+
   $speciesSummary.attr('__rowid', species.rowId);
 
   showSpecies();
@@ -11017,45 +11040,15 @@ exports.editExistingSpecies = function(species) {
 
 
 /**
- * Update the UI after an edit to a food has taken place.
+ * Enable or disable the food save button as appropriate.
  */
-exports.updateFoodAfterEdit = function() {
+exports.updateSaveFoodButton = function() {
   var $saveFood = $('#saving_food');
-  var $foodSummaryStart = $('#food-summary-start-time');
-  var $foodSummaryEnd = $('#food-summary-end-time');
-  var $foodSummaryFood = $('#food-summary-food');
-  var $foodSummaryPart = $('#food-summary-part');
 
   if (validFoodSelected()) {
     $saveFood.prop('disabled', false);
   } else {
     $saveFood.prop('disabled', true);
-  }
-
-  var food = exports.getFoodFromUi();
-
-  if (timeIsValid(food.startTime)) {
-    $foodSummaryStart.text(food.startTime);
-  } else {
-    $foodSummaryStart.text('?');
-  }
-
-  if (timeIsValid(food.endTime)) {
-    $foodSummaryEnd.text(food.endTime);
-  } else {
-    $foodSummaryEnd.text('?');
-  }
-
-  if (food.foodName !== '0') {
-    $foodSummaryFood.text(food.foodName);
-  } else {
-    $foodSummaryFood.text('?');
-  }
-
-  if (food.foodPartEaten !== '0') {
-    $foodSummaryPart.text(food.foodPartEaten);
-  } else {
-    $foodSummaryPart.text('?');
   }
 };
 
@@ -11063,44 +11056,13 @@ exports.updateFoodAfterEdit = function() {
 /**
  * Update the UI after an edit to a species has taken place.
  */
-exports.updateSpeciesAfterEdit = function() {
+exports.updateSaveSpeciesButton = function() {
   var $saveSpecies = $('#saving_species');
-  var $speciesSummaryStart = $('#species-summary-start-time');
-  var $speciesSummaryEnd = $('#species-summary-end-time');
-  var $speciesSummaryName = $('#species-summary-name');
-  var $speciesSummaryNumber = $('#species-summary-number');
 
   if (validSpeciesSelected()) {
     $saveSpecies.prop('disabled', false);
   } else {
     $saveSpecies.prop('disabled', true);
-  }
-
-  var species = exports.getSpeciesFromUi();
-
-  if (timeIsValid(species.startTime)) {
-    $speciesSummaryStart.text(species.startTime);
-  } else {
-    $speciesSummaryStart.text('?');
-  }
-
-  if (timeIsValid(species.endTime)) {
-    $speciesSummaryEnd.text(species.endTime);
-  } else {
-    $speciesSummaryEnd.text('?');
-  }
-
-  if (species.speciesName !== '0') {
-    $speciesSummaryName.text(species.speciesName);
-  } else {
-    $speciesSummaryName.text('?');
-  }
-
-  if (species.number !== '0') {
-    // 0 is the default, illegal, unselectable value
-    $speciesSummaryNumber.text(species.number);
-  } else {
-    $speciesSummaryNumber.text('?');
   }
 };
 
@@ -11475,7 +11437,7 @@ exports.updateUiForEndOfInterval = function() {
 /**
  * update the icon for selected chimp
  */
-exports.updateIconForSelectedChimp = function(chimp, chimpid, timeid) {
+exports.updateIconForSelectedChimp = function(chimp, chimpid) {
   var imagePaths = {
     absent: './img/time_empty.png',
     continuing: './img/time_continues.png',
@@ -11759,7 +11721,68 @@ exports.initializeEditListeners = function(control) {
 
 
 exports.initializeFoodListeners = function(control) {
-  $('.food-edit').change(exports.updateFoodAfterEdit);
+
+  $('#start-time-food').change(function() {
+    var $foodSummaryStart = $('#food-summary-start-time');
+    var $foodEditStart = $('#start-time-food');
+    var foodEditStartDb = $foodEditStart.val();
+
+    if (timeIsValid(foodEditStartDb)) {
+      var userStartTime = util.getUserTimeFromDbTime(foodEditStartDb);
+      $foodSummaryStart.text(userStartTime);
+      $foodSummaryStart.attr('__data', foodEditStartDb);
+    } else {
+      $foodSummaryStart.text('?');
+      $foodSummaryStart.removeAttr('__data');
+    }
+    exports.updateSaveFoodButton();
+  });
+
+  $('#end-time-food').change(function() {
+    var $foodSummaryEnd = $('#food-summary-end-time');
+    var $foodEditEnd = $('#end-time-food');
+    var foodEditEndDb = $foodEditEnd.val();
+
+    if (timeIsValid(foodEditEndDb)) {
+      var userEndtime = util.getUserTimeFromDbTime(foodEditEndDb);
+      $foodSummaryEnd.text(userEndtime);
+      $foodSummaryEnd.attr('__data', foodEditEndDb);
+    } else {
+      $foodSummaryEnd.text('?');
+      $foodSummaryEnd.removeAttr('__data');
+    }
+    exports.updateSaveFoodButton();
+  });
+
+  $('#foods').change(function() {
+    var $foodSummaryFood = $('#food-summary-food');
+    var $foodEditName = $('#foods');
+    var foodEditName = $foodEditName.val();
+
+    if (foodEditName !== '0') {
+      $foodSummaryFood.text(foodEditName);
+      $foodSummaryFood.attr('__data', foodEditName);
+    } else {
+      $foodSummaryFood.text('?');
+      $foodSummaryFood.removeAttr('__data');
+    }
+    exports.updateSaveFoodButton();
+  });
+
+  $('#food-part').change(function() {
+    var $foodSummaryPart = $('#food-summary-part');
+    var $foodEditPart = $('#food-part');
+    var foodEditPart = $foodEditPart.val();
+
+    if (foodEditPart !== '0') {
+      $foodSummaryPart.text(foodEditPart);
+      $foodSummaryPart.attr('__data', foodEditPart);
+    } else {
+      $foodSummaryPart.text('?');
+      $foodSummaryPart.removeAttr('__data');
+    }
+    exports.updateSaveFoodButton();
+  });
 
   $('#saving_food').click(function() {
     console.log('save food');
@@ -11800,7 +11823,68 @@ exports.initializeFoodListeners = function(control) {
 
 
 exports.initializeSpeciesListeners = function(control) {
-  $('.species-edit').change(exports.updateSpeciesAfterEdit);
+  $('#start-time-species').change(function() {
+    var $speciesSummaryStart = $('#species-summary-start-time');
+    var $speciesEditStart = $('#start-time-species');
+    var speciesEditStartDb = $speciesEditStart.val();
+
+    if (timeIsValid(speciesEditStartDb)) {
+      var userStartTime = util.getUserTimeFromDbTime(speciesEditStartDb);
+      $speciesSummaryStart.text(userStartTime);
+      $speciesSummaryStart.attr('__data', speciesEditStartDb);
+    } else {
+      $speciesSummaryStart.text('?');
+      $speciesSummaryStart.removeAttr('__data');
+    }
+    exports.updateSaveSpeciesButton();
+  });
+
+  $('#end-time-species').change(function() {
+    var $speciesSummaryEnd = $('#species-summary-end-time');
+    var $speciesEditEnd = $('#end-time-species');
+    var speciesEditEndDb = $speciesEditEnd.val();
+
+    if (timeIsValid(speciesEditEndDb)) {
+      var userTime = util.getUserTimeFromDbTime(speciesEditEndDb);
+      $speciesSummaryEnd.text(userTime);
+      $speciesSummaryEnd.attr('__data', speciesEditEndDb);
+    } else {
+      $speciesSummaryEnd.text('?');
+      $speciesSummaryEnd.removeAttr('__data');
+    }
+    exports.updateSaveSpeciesButton();
+  });
+
+  $('#species').change(function() {
+    var $speciesSummaryName = $('#species-summary-name');
+    var $speciesEditName = $('#species');
+    var speciesName = $speciesEditName.val();
+
+    if (speciesName !== '0') {
+      $speciesSummaryName.text(speciesName);
+      $speciesSummaryName.attr('__data', speciesName);
+    } else {
+      $speciesSummaryName.text('?');
+      $speciesSummaryName.removeAttr('__data');
+    }
+    exports.updateSaveSpeciesButton();
+  });
+
+  $('#species_number').change(function() {
+    var $speciesSummaryNumber = $('#species-summary-number');
+    var $speciesEditNumber = $('#species_number');
+    var speciesNumber = $speciesEditNumber.val();
+
+    if (speciesNumber !== '0') {
+      // 0 is the default, illegal, unselectable value
+      $speciesSummaryNumber.text(speciesNumber);
+      $speciesSummaryNumber.attr('__data', speciesNumber);
+    } else {
+      $speciesSummaryNumber.text('?');
+      $speciesSummaryNumber.removeAttr('__data');
+    }
+    exports.updateSaveSpeciesButton();
+  });
 
   $('#saving_species').click(function() {
     console.log('save species');
@@ -11884,35 +11968,26 @@ exports.initializeChimpListeners = function() {
 
 
 exports.initializeFood = function(control) {
-  var $startHours = $('#start-time-food-hours');
-  var $startMins = $('#start-time-food-mins');
-  var $endHours = $('#end-time-food-hours');
-  var $endMins = $('#end-time-food-mins');
+  var $startTime = $('#start-time-food');
+  var $endTime = $('#end-time-food');
 
-  appendHoursToSelect($startHours);
-  appendHoursToSelect($endHours);
-  appendMinsToSelect($startMins);
-  appendMinsToSelect($endMins);
+  appendTimesToSelect($startTime);
+  appendTimesToSelect($endTime);
 
   // We'll start with the save button disabled. You have to select valid food
   // times to enable it.
   $('#saving_food').prop('disabled', true);
 
   exports.initializeFoodListeners(control);
-
 };
 
 
 exports.initializeSpecies = function(control) {
-  var $startHours = $('#start-time-species-hours');
-  var $startMins = $('#start-time-species-mins');
-  var $endHours = $('#end-time-species-hours');
-  var $endMins = $('#end-time-species-mins');
+  var $startTime = $('#start-time-species');
+  var $endTime = $('#end-time-species');
 
-  appendHoursToSelect($startHours);
-  appendHoursToSelect($endHours);
-  appendMinsToSelect($startMins);
-  appendMinsToSelect($endMins);
+  appendTimesToSelect($startTime);
+  appendTimesToSelect($endTime);
 
   // Start with the save button disabled.
   $('#saving_species').prop('disabled', true);
@@ -12254,21 +12329,14 @@ exports.getChimpFromUi = function(chimpId) {
 
 
 /**
- * Return the active food from the UI. Does NOT have to be a valid food that
- * can be saved. For instance, at first it might return 'mm' as the start time
- * place holder.
+ * Return the active food from the summary UI. Does NOT have to be a valid food
+ * that can be saved.
  */
 exports.getFoodFromUi = function() {
-  var startHours = $('#start-time-food-hours').val();
-  var startMins = $('#start-time-food-mins').val();
-  var startTime = startHours + ':' + startMins;
-
-  var endHours = $('#end-time-food-hours').val();
-  var endMins = $('#end-time-food-mins').val();
-  var endTime = endHours + ':' + endMins;
-
-  var food = $('#foods').val();
-  var foodPart = $('#food-part').val();
+  var startTime = $('#food-summary-start-time').attr('__data');
+  var endTime = $('#food-summary-end-time').attr('__data');
+  var food = $('#food-summary-food').attr('__data');
+  var foodPart = $('#food-summary-part').attr('__data');
 
   var date = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();
@@ -12293,19 +12361,13 @@ exports.getFoodFromUi = function() {
 
 
 /**
- * Return the active species from the UI.
+ * Return the active species from the summary UI.
  */
 exports.getSpeciesFromUi = function() {
-  var startHours = $('#start-time-species-hours').val();
-  var startMins = $('#start-time-species-mins').val();
-  var startTime = startHours + ':' + startMins;
-
-  var endHours = $('#end-time-species-hours').val();
-  var endMins = $('#end-time-species-mins').val();
-  var endTime = endHours + ':' + endMins;
-
-  var species = $('#species').val();
-  var number = $('#species_number').val();
+  var startTime = $('#species-summary-start-time').attr('__data');
+  var endTime = $('#species-summary-end-time').attr('__data');
+  var species = $('#species-summary-name').attr('__data');
+  var number = $('#species-summary-number').attr('__data');
 
   var date = urls.getFollowDateFromUrl();
   var focalId = urls.getFocalChimpIdFromUrl();

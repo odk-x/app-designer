@@ -66,16 +66,6 @@ var times = [
   '56-2:45J'
 ];
 
-/**
- * Convert hours an mins integers to a zero-padded string. 1,5, would become:
- * '01:05'.
- */
-function convertToTime(hours, mins) {
-  var hoursStr = exports.convertToStringWithTwoZeros(hours);
-  var minsStr = exports.convertToStringWithTwoZeros(mins);
-  return hoursStr + ':' + minsStr;
-}
-
 
 function sortItemsWithDate(objects) {
   objects.sort(function(a, b) {
@@ -122,16 +112,13 @@ exports.getDbTimeFromUserTime = function(userTime) {
 };
 
 
+/**
+ * Convert a time like '14.01-12:12J' to a completely user-facing time.
+ */
 exports.getUserTimeFromDbTime = function(dbTime) {
-  var userTimes = exports.getAllTimesForUser();
-  var dbTimes = exports.getAllTimesForDb();
-
-  var index = dbTimes.indexOf(dbTime);
-  if (index < 0) {
-    throw 'Unrecognized db time: ' + dbTime;
-  }
-
-  return userTimes[index];
+  var dashIndex = dbTime.indexOf('-');
+  var result = dbTime.substring(dashIndex + 1);
+  return result;
 };
 
 
@@ -181,24 +168,62 @@ exports.incrementTime = function(time) {
 
 
 /**
- * Get an array of the times that fall within an interval. If you passed
- * '7:00', this would return an array of ['mm', '7:00', '7:01', ..., '7:14'].
+ * Take a database-facing time (e.g. 05-12:12J) and return an array of objects
+ * with a 'dbTime' and 'userTime' value, corresponding to time points in the
+ * interval specified by the dbTime parameter.
+ *
+ * The dbTime keys will have the prefix include '.00' to '.14' to accommodate
+ * direct string comparisons. For instance, the time '00-12:00A' would return
+ * an array like:
+ * [
+ *   {dbTime: 00.00-12:00A, userTime: 12:00A},
+ *   {dbTime: 00.01-12:01A, userTime: 12:01A},
+ *   ...
+ *   {dbTime: 00.14-12:14A, userTime: 12:14A}
+ * ]
  */
-exports.getTimesInInterval = function(time) {
-  var interval = 15;
-  var parts = time.split(':');
-  var hours = parseInt(parts[0]);
-  var mins = parseInt(parts[1]);
+exports.getDbAndUserTimesInInterval = function(dbTime) {
+  var dashIndex = dbTime.indexOf('-');
+  var colonIndex = dbTime.indexOf(':');
 
-  var result = ['mm'];
-  // Fow now, assume our start times begin at 0, 15, 30, 45. This will prevent
-  // us having to worry about overflowing.
-  for (var i = 0; i < mins + interval; i++) {
-    var newMins = mins + i;
-    var nextTime = convertToTime(hours, newMins);
-    result.push(nextTime);
-  }
-  
+  var prefix = dbTime.substring(0, dashIndex);
+  var hour = dbTime.substring(dashIndex + 1, colonIndex);
+  // Everything at the end.
+  var period = dbTime.substring(colonIndex + 3);
+
+  // Keeping these as arrays is kind of lazy, but it is foolproof until we
+  // change the intervals.
+  var minutes = [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14'
+  ];
+
+  var result = [];
+
+  minutes.forEach(function(val) {
+    var newUserTime = hour + ':' + val + period;
+    var newPrefix = prefix + '.' + val;
+    var newDbTime = newPrefix + '-' + newUserTime;
+
+    var timePoint = {};
+    timePoint.dbTime = newDbTime;
+    timePoint.userTime = newUserTime;
+    result.push(timePoint);
+  });
+
   return result;
 };
 
