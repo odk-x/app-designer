@@ -14,6 +14,21 @@ exports.certaintyLabels = {
 
 
 /**
+ * Database-facing labels for arrival and departures.
+ */
+exports.timeLabels = {
+  absent: '0',
+  continuing: '1',
+  arriveFirst: '5',
+  arriveSecond: '10',
+  arriveThird: '15',
+  departFirst: '-5',
+  departSecond: '-10',
+  departThird: '-15'
+};
+
+
+/**
  * Create a where clause for use in a Tables query. columns must be an array
  * of strings.
  *
@@ -492,7 +507,18 @@ exports.writeRowForChimp = function(control, chimp, isUpdate) {
 };
 
 
-exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
+/**
+ * Update an array of Chimp objects based on an existing time point. If
+ * isRetroactive is true, it implies that this is being performed after a time
+ * point has already had data filled out manually, rather than being seen for
+ * the first time. In this case the chimp is updated ONLY if the chimp current
+ * chimp was absent.
+ */
+exports.updateChimpsForPreviousTimepoint = function(
+    prev,
+    curr,
+    isRetroactive
+) {
   if (prev.length === 0) {
     return curr;
   } else if (prev.length !== curr.length) {
@@ -518,7 +544,24 @@ exports.updateChimpsForPreviousTimepoint = function(prev, curr) {
       throw new Error('did not find prev or curr chimp with id: ' + chimpId);
     }
 
-    result.push(exports.updateChimpForPreviousTimepoint(prevChimp, currChimp));
+    // Handle the case for going back in time and adding a chimp retroactively.
+    // In this case we want to overwrite ONLY the chimps that are not present
+    // now but were present in the previous timepoint. This will prevent
+    // overwriting previously manually entered data, which would happen if we
+    // did a raw update.
+    if (isRetroactive) {
+      if (currChimp.time === exports.timeLabels.absent) {
+        result.push(
+          exports.updateChimpForPreviousTimepoint(prevChimp, currChimp)
+        );
+      } else {
+        result.push(currChimp);
+      }
+    } else {
+      result.push(
+          exports.updateChimpForPreviousTimepoint(prevChimp, currChimp)
+      );
+    }
   });
 
   return result;
@@ -555,13 +598,13 @@ exports.updateChimpForPreviousTimepoint = function(prev, curr) {
   curr.estrus = prev.estrus;
 
   // chimp was there in the last time slot, update to continuing
-  if (prev.time === '15' ||
-      prev.time === '10' ||
-      prev.time === '5' ||
-      prev.time === '1'
+  if (prev.time === exports.timeLabels.arriveThird ||
+      prev.time === exports.timeLabels.arriveSecond ||
+      prev.time === exports.timeLabels.arriveFirst ||
+      prev.time === exports.timeLabels.continuing
   ) {
     // Must match timeLabels in jgiFollow.js.
-    curr.time = '1';
+    curr.time = exports.timeLabels.continuing;
   }
 
   return curr;
@@ -10731,6 +10774,27 @@ function assertIsChimp(chimp) {
 }
 
 
+/**
+ * Return an array of Chimp objects for the time before this one, returns an
+ * empty array if no data or if can't be decremented.
+ */
+function getChimpsForPreviousTimepoint(control, currentTime, date, focalId) {
+  if (!util.canDecrementTime(currentTime)) {
+    return [];
+  }
+  var prevTime = util.decrementTime(currentTime);
+  var prevTableData = db.getTableDataForTimePoint(
+      control,
+      date,
+      prevTime,
+      focalId
+  );
+
+  var result = db.convertTableDataToChimps(prevTableData);
+  return result;
+}
+
+
 function assertFoundChimp(chimp) {
   if (!chimp) {
     console.log('could not find selected chimp!');
@@ -11211,17 +11275,7 @@ exports.updateSaveSpeciesButton = function() {
  * Labels that are used to indicate at what point in a 15 minute interval a
  * chimp arrived.
  */
-var timeLabels = {
-  absent: '0',
-  continuing: '1',
-  arriveFirst: '5',
-  arriveSecond: '10',
-  arriveThird: '15',
-  departFirst: '-5',
-  departSecond: '-10',
-  departThird: '-15'
-};
-
+var timeLabels = db.timeLabels;
 
 /**
  * The labels we use to indicate certainty of an observation. These are the
@@ -12604,7 +12658,13 @@ exports.initializeUi = function(control) {
         urls.getFocalChimpIdFromUrl()
     );
   } else {
-    exports.handleExistingTime(existingData);
+    exports.handleExistingTime(
+        control,
+        urls.getFollowDateFromUrl(),
+        urls.getFollowTimeFromUrl(),
+        urls.getFocalChimpIdFromUrl(),
+        existingData
+    );
   }
 
   exports.refreshSpeciesList(control);
@@ -12658,15 +12718,13 @@ exports.handleFirstTime = function(
 
 
   // update the chimps for the previous timepoint
-  var previousTime = util.decrementTime(followStartTime);
-  var previousTableData = db.getTableDataForTimePoint(
+  var prevChimps = getChimpsForPreviousTimepoint(
       control,
+      followStartTime,
       date,
-      previousTime,
       focalChimpId
   );
-  var prevChimps = db.convertTableDataToChimps(previousTableData);
-  chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps);
+  chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps, false);
 
   // 2) write the chimps
   chimps.forEach(function(chimp) {
@@ -12695,11 +12753,38 @@ exports.handleFirstTime = function(
 /**
  * Set up the screen for a time point we've already visited.
  */
-exports.handleExistingTime = function(existingData) {
+exports.handleExistingTime = function(
+    control,
+    date,
+    startTime,
+    focalId,
+    existingData
+) {
 
-  var chimps = db.convertTableDataToChimps(existingData);
+  // Find previous data and update the chimps in case one was added
+  // retroActively.
+  var currChimps = db.convertTableDataToChimps(existingData);
+  var prevChimps = getChimpsForPreviousTimepoint(
+      control,
+      startTime,
+      date,
+      focalId
+  );
 
-  chimps.forEach(function(chimp) {
+  currChimps = db.updateChimpsForPreviousTimepoint(
+      prevChimps,
+      currChimps,
+      true
+  );
+
+  // Now write them. We don't have to read them back in because we are writing
+  // what we currently have as ground truth, we don't need to create row ids
+  // like we do for handleFirstTime.
+  currChimps.forEach(function(chimp) {
+    db.writeRowForChimp(control, chimp, true);
+  });
+
+  currChimps.forEach(function(chimp) {
     exports.updateUiForChimp(chimp);
   });
 

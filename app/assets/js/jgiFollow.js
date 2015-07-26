@@ -41,6 +41,27 @@ function assertIsChimp(chimp) {
 }
 
 
+/**
+ * Return an array of Chimp objects for the time before this one, returns an
+ * empty array if no data or if can't be decremented.
+ */
+function getChimpsForPreviousTimepoint(control, currentTime, date, focalId) {
+  if (!util.canDecrementTime(currentTime)) {
+    return [];
+  }
+  var prevTime = util.decrementTime(currentTime);
+  var prevTableData = db.getTableDataForTimePoint(
+      control,
+      date,
+      prevTime,
+      focalId
+  );
+
+  var result = db.convertTableDataToChimps(prevTableData);
+  return result;
+}
+
+
 function assertFoundChimp(chimp) {
   if (!chimp) {
     console.log('could not find selected chimp!');
@@ -521,17 +542,7 @@ exports.updateSaveSpeciesButton = function() {
  * Labels that are used to indicate at what point in a 15 minute interval a
  * chimp arrived.
  */
-var timeLabels = {
-  absent: '0',
-  continuing: '1',
-  arriveFirst: '5',
-  arriveSecond: '10',
-  arriveThird: '15',
-  departFirst: '-5',
-  departSecond: '-10',
-  departThird: '-15'
-};
-
+var timeLabels = db.timeLabels;
 
 /**
  * The labels we use to indicate certainty of an observation. These are the
@@ -1914,7 +1925,13 @@ exports.initializeUi = function(control) {
         urls.getFocalChimpIdFromUrl()
     );
   } else {
-    exports.handleExistingTime(existingData);
+    exports.handleExistingTime(
+        control,
+        urls.getFollowDateFromUrl(),
+        urls.getFollowTimeFromUrl(),
+        urls.getFocalChimpIdFromUrl(),
+        existingData
+    );
   }
 
   exports.refreshSpeciesList(control);
@@ -1968,15 +1985,13 @@ exports.handleFirstTime = function(
 
 
   // update the chimps for the previous timepoint
-  var previousTime = util.decrementTime(followStartTime);
-  var previousTableData = db.getTableDataForTimePoint(
+  var prevChimps = getChimpsForPreviousTimepoint(
       control,
+      followStartTime,
       date,
-      previousTime,
       focalChimpId
   );
-  var prevChimps = db.convertTableDataToChimps(previousTableData);
-  chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps);
+  chimps = db.updateChimpsForPreviousTimepoint(prevChimps, chimps, false);
 
   // 2) write the chimps
   chimps.forEach(function(chimp) {
@@ -2005,11 +2020,38 @@ exports.handleFirstTime = function(
 /**
  * Set up the screen for a time point we've already visited.
  */
-exports.handleExistingTime = function(existingData) {
+exports.handleExistingTime = function(
+    control,
+    date,
+    startTime,
+    focalId,
+    existingData
+) {
 
-  var chimps = db.convertTableDataToChimps(existingData);
+  // Find previous data and update the chimps in case one was added
+  // retroActively.
+  var currChimps = db.convertTableDataToChimps(existingData);
+  var prevChimps = getChimpsForPreviousTimepoint(
+      control,
+      startTime,
+      date,
+      focalId
+  );
 
-  chimps.forEach(function(chimp) {
+  currChimps = db.updateChimpsForPreviousTimepoint(
+      prevChimps,
+      currChimps,
+      true
+  );
+
+  // Now write them. We don't have to read them back in because we are writing
+  // what we currently have as ground truth, we don't need to create row ids
+  // like we do for handleFirstTime.
+  currChimps.forEach(function(chimp) {
+    db.writeRowForChimp(control, chimp, true);
+  });
+
+  currChimps.forEach(function(chimp) {
     exports.updateUiForChimp(chimp);
   });
 
