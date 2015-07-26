@@ -188,41 +188,39 @@ exports.getDbAndUserTimesInInterval = function(dbTime) {
 
   var prefix = dbTime.substring(0, dashIndex);
   var hour = dbTime.substring(dashIndex + 1, colonIndex);
+  var mins = dbTime.substring(colonIndex + 1, colonIndex + 3);
   // Everything at the end.
   var period = dbTime.substring(colonIndex + 3);
 
-  // Keeping these as arrays is kind of lazy, but it is foolproof until we
-  // change the intervals.
-  var minutes = [
-    '00',
-    '01',
-    '02',
-    '03',
-    '04',
-    '05',
-    '06',
-    '07',
-    '08',
-    '09',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14'
-  ];
-
   var result = [];
 
-  minutes.forEach(function(val) {
-    var newUserTime = hour + ':' + val + period;
-    var newPrefix = prefix + '.' + val;
+  for (var i = 0; i < 15; i++) {
+    var minsNum = Number(mins);
+    minsNum += i;
+    
+    var newMins;
+    if (minsNum < 10) {
+      newMins = '0' + String(minsNum);
+    } else {
+      newMins = String(minsNum);
+    }
+
+    var suffix;
+    if (i < 10) {
+      suffix = '0' + String(i);
+    } else {
+      suffix = String(i);
+    }
+
+    var newUserTime = hour + ':' + newMins + period;
+    var newPrefix = prefix + '.' + suffix;
     var newDbTime = newPrefix + '-' + newUserTime;
 
     var timePoint = {};
     timePoint.dbTime = newDbTime;
     timePoint.userTime = newUserTime;
     result.push(timePoint);
-  });
+  }
 
   return result;
 };
