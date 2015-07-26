@@ -1287,30 +1287,18 @@ exports.sortFollowIntervals = function(intervals) {
   sortItemsWithDate(intervals);
 };
 
+
+/**
+ * Return the next time point from the given database-facing time. Throws an
+ * error if canIncrementTime returns false.
+ */
 exports.incrementTime = function(time) {
-
-  var interval = 15;
-  var parts = time.split(':');
-  var hours = parseInt(parts[0]);
-  var mins = parseInt(parts[1]);
-  var maybeTooLarge = mins + interval;
-
-  if (maybeTooLarge > 59) {
-    // then we've overflowed our time system.
-    mins = maybeTooLarge % 60;
-    // Don't worry about overflowing hours. Not going to worry about
-    // late night chimp monitoring.
-    hours = hours + 1;
-  } else {
-    mins = maybeTooLarge;
+  if (!exports.canIncrementTime(time)) {
+    throw 'cannot increment time: ' + time;
   }
-
-  // Format these strings to be two digits.
-  var hoursStr = exports.convertToStringWithTwoZeros(hours);
-  var minsStr = exports.convertToStringWithTwoZeros(mins);
-  var result = hoursStr + ':' + minsStr;
+  var index = times.indexOf(time);
+  var result = times[index + 1];
   return result;
-
 };
 
 
@@ -1372,25 +1360,36 @@ exports.isInt = function(val) {
 };
 
 
-exports.decrementTime = function(time) {
-  var interval = 15;
-  var parts = time.split(':');
-  var hours = parseInt(parts[0]);
-  var mins = parseInt(parts[1]);
-  var maybeTooSmall = mins - interval;
-
-  if (maybeTooSmall < 0) {
-    // negative time
-    mins = 60 + maybeTooSmall;
-    hours = (hours === 24) ? 0 : (hours - 1);
+exports.canIncrementTime = function(time) {
+  var index = times.indexOf(time);
+  if (index < 0 || index === times.length) {
+    return false;
   } else {
-    mins = maybeTooSmall;
+    return true;
   }
+};
 
-  var hoursStr = exports.convertToStringWithTwoZeros(hours);
-  var minsStr = exports.convertToStringWithTwoZeros(mins);
-  var result = hoursStr + ':' + minsStr;
-  return result;
+
+exports.canDecrementTime = function(time) {
+  var index = times.indexOf(time);
+  if (index < 0 || index === 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+
+/**
+ * Return the previous time point for the given database-facing time. Throws an
+ * error if canDecrementTime returns False.
+ */
+exports.decrementTime = function(time) {
+  if (!exports.canDecrementTime(time)) {
+    throw 'cannot decrement time: ' + time;
+  }
+  var index = times.indexOf(time);
+  return times[index - 1];
 };
 
 
