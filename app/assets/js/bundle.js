@@ -10820,6 +10820,9 @@ function clearSpeciesAndFoodSelected() {
 
   $('.food-summary').removeAttr('__data');
   $('.species-summary').removeAttr('__data');
+
+  exports.updateSaveFoodButton();
+  exports.updateSaveSpeciesButton();
 }
 
 
@@ -10853,13 +10856,12 @@ function foodCanBePersisted(food) {
  * and end time.
  */
 function speciesCanBePersisted(species) {
-  // TODO: handle new species numbers.
   return (
       timeIsValid(species.startTime) &&
       species.speciesName &&
       species.number &&
-      util.isInt(species.number) &&
-      species.number !== 0
+      species.number !== 0 &&
+      species.number !== '0'
   );
 }
 
