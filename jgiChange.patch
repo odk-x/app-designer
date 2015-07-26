@@ -1,6 +1,25 @@
 diff --git a/app/assets/js/bundle.js b/app/assets/js/bundle.js
 --- a/app/assets/js/bundle.js
 +++ b/app/assets/js/bundle.js
+@@ -12802,4 +12802,4 @@
+ 
+ };
+ 
+-},{"./jgiDb":1,"./jgiLogging":2,"./jgiModels":3,"./jgiUrls":5,"./jgiUtil":6,"jquery":7}]},{},[1,3,5]);
++},{"./jgiDb":1,"./jgiLogging":2,"./jgiModels":3,"./jgiUrls":5,"./jgiUtil":6,"jquery":7}]},{},[]);
+diff --git a/app/assets/js/createBundles.sh b/app/assets/js/createBundles.sh
+new file mode 100644
+--- /dev/null
++++ b/app/assets/js/createBundles.sh
+@@ -0,0 +1,5 @@
++browserify -r ./jgiFollow.js:jgiFollow >bundle.js
++browserify -r ./followIntervalList.js:jgiFollowIntervalList >followIntervalListBundle.js
++browserify -r ./followList.js:jgiFollowList >followListBundle.js
++browserify -r ./jgiHomeScreenModule.js:jgiHomeScreen >homeScreenBundle.js
++browserify -r ./jgiNewFollowModule.js:jgiNewFollow >jgiNewFollowBundle.js
+diff --git a/app/assets/js/followIntervalListBundle.js b/app/assets/js/followIntervalListBundle.js
+--- a/app/assets/js/followIntervalListBundle.js
++++ b/app/assets/js/followIntervalListBundle.js
 @@ -1204,42 +1204,42 @@
    '21-5:15A',
    '22-5:30A',
@@ -80,9 +99,9 @@ diff --git a/app/assets/js/bundle.js b/app/assets/js/bundle.js
  ];
  
  
-diff --git a/app/assets/js/followListBundle.js b/app/assets/js/followListBundle.js
---- a/app/assets/js/followListBundle.js
-+++ b/app/assets/js/followListBundle.js
+diff --git a/app/assets/js/homeScreenBundle.js b/app/assets/js/homeScreenBundle.js
+--- a/app/assets/js/homeScreenBundle.js
++++ b/app/assets/js/homeScreenBundle.js
 @@ -1204,42 +1204,42 @@
    '21-5:15A',
    '22-5:30A',
@@ -162,10 +181,10 @@ diff --git a/app/assets/js/followListBundle.js b/app/assets/js/followListBundle.
  ];
  
  
-diff --git a/app/assets/js/jgiUtil.js b/app/assets/js/jgiUtil.js
---- a/app/assets/js/jgiUtil.js
-+++ b/app/assets/js/jgiUtil.js
-@@ -28,42 +28,42 @@
+diff --git a/app/assets/js/jgiNewFollowBundle.js b/app/assets/js/jgiNewFollowBundle.js
+--- a/app/assets/js/jgiNewFollowBundle.js
++++ b/app/assets/js/jgiNewFollowBundle.js
+@@ -1156,42 +1156,42 @@
    '21-5:15A',
    '22-5:30A',
    '23-5:45A',
