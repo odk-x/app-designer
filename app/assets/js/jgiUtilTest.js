@@ -47,3 +47,38 @@ test('getDbAndUserTimesInInterval 14-12:30J', function(t) {
   t.deepEqual(actual, target);
 });
 
+
+test('isNegativeDuration equal', function(t) {
+  t.plan(1);
+
+  var start = '12.01-12:01J';
+  var end = '12.01-12:01J';
+
+  var actual = util.isNegativeDuration(start, end);
+
+  t.equal(actual, false);
+});
+
+
+test('isNegativeDuration negative', function(t) {
+  t.plan(1);
+
+  var start = '12.01-12:01J';
+  var end = '12.00-12:01J';
+
+  var actual = util.isNegativeDuration(start, end);
+
+  t.equal(actual, true);
+});
+
+
+test('isNegativeDuration positive', function(t) {
+  t.plan(1);
+
+  var start = '12.01-12:01J';
+  var end = '13.00-13:00J';
+
+  var actual = util.isNegativeDuration(start, end);
+
+  t.equal(actual, false);
+});

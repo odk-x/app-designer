@@ -227,6 +227,27 @@ exports.getDbAndUserTimesInInterval = function(dbTime) {
 
 
 /**
+ * True if the two times represent a negative duration, else False. Returns
+ * true also if either startDb or endDb is not truthy.
+ *
+ * Expects times to be in their db format, e.g. 13.01-12:00J.
+ */
+exports.isNegativeDuration = function(startDb, endDb) {
+  if (!startDb || !endDb) {
+    return true;
+  }
+  
+  var startPrefix = startDb.substring(0, startDb.indexOf('-'));
+  var endPrefix = endDb.substring(0, endDb.indexOf('-'));
+
+  var startNum = Number(startPrefix);
+  var endNum = Number(endPrefix);
+
+  return endNum < startNum;
+};
+
+
+/**
  * Return ['hh', '00', '01', ..., '23'].
  */
 exports.getAllHours = function() {

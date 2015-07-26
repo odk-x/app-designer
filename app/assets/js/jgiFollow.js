@@ -152,6 +152,9 @@ function clearSpeciesAndFoodSelected() {
   $('.food-summary').removeAttr('__data');
   $('.species-summary').removeAttr('__data');
 
+  $('.food-negative-message').addClass('nodisplay');
+  $('.species-negative-message').addClass('nodisplay');
+
   exports.updateSaveFoodButton();
   exports.updateSaveSpeciesButton();
 }
@@ -167,11 +170,40 @@ function timeIsValid(time) {
 }
 
 
+function foodIsNegativeDuration(food) {
+  if (timeIsValid(food.startTime)) {
+    if (food.endTime !== util.flagEndTimeNotSet && timeIsValid(food.endTime)) {
+      if (util.isNegativeDuration(food.startTime, food.endTime)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function speciesIsNegativeDuration(species) {
+  if (timeIsValid(species.startTime)) {
+    if (
+        species.endTime !== util.flagEndTimeNotSet &&
+        timeIsValid(species.endTime))
+    {
+      if (util.isNegativeDuration(species.startTime, species.endTime)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+
 /**
  * True if the food can be persisted. This means all is valid except rowId and
  * end time.
  */
 function foodCanBePersisted(food) {
+  if (foodIsNegativeDuration(food)) {
+    return false;
+  }
   return (
       timeIsValid(food.startTime) &&
       food.foodName &&
@@ -187,6 +219,9 @@ function foodCanBePersisted(food) {
  * and end time.
  */
 function speciesCanBePersisted(species) {
+  if (speciesIsNegativeDuration(species)) {
+    return false;
+  }
   return (
       timeIsValid(species.startTime) &&
       species.speciesName &&
@@ -403,6 +438,30 @@ exports.editExistingSpecies = function(species) {
   $speciesSummary.attr('__rowid', species.rowId);
 
   showSpecies();
+};
+
+
+exports.updateNegativeFoodDurationMessage = function() {
+  var food = exports.getFoodFromUi();
+  var $foodMsg = $('#food-negative-message');
+
+  if (foodIsNegativeDuration(food)) {
+    $foodMsg.removeClass('nodisplay');
+  } else {
+    $foodMsg.addClass('nodisplay');
+  }
+};
+
+
+exports.updateNegativeSpeciesDurationMessage = function() {
+  var species = exports.getSpeciesFromUi();
+  var $speciesMsg = $('#species-negative-message');
+
+  if (speciesIsNegativeDuration(species)) {
+    $speciesMsg.removeClass('nodisplay');
+  } else {
+    $speciesMsg.addClass('nodisplay');
+  }
 };
 
 
@@ -1083,6 +1142,7 @@ exports.initializeFoodListeners = function(control) {
       $foodSummaryStart.text('?');
       $foodSummaryStart.removeAttr('__data');
     }
+    exports.updateNegativeFoodDurationMessage();
     exports.updateSaveFoodButton();
   });
 
@@ -1099,6 +1159,7 @@ exports.initializeFoodListeners = function(control) {
       $foodSummaryEnd.text('?');
       $foodSummaryEnd.removeAttr('__data');
     }
+    exports.updateNegativeFoodDurationMessage();
     exports.updateSaveFoodButton();
   });
 
@@ -1184,6 +1245,7 @@ exports.initializeSpeciesListeners = function(control) {
       $speciesSummaryStart.text('?');
       $speciesSummaryStart.removeAttr('__data');
     }
+    exports.updateNegativeSpeciesDurationMessage();
     exports.updateSaveSpeciesButton();
   });
 
@@ -1200,6 +1262,7 @@ exports.initializeSpeciesListeners = function(control) {
       $speciesSummaryEnd.text('?');
       $speciesSummaryEnd.removeAttr('__data');
     }
+    exports.updateNegativeSpeciesDurationMessage();
     exports.updateSaveSpeciesButton();
   });
 
