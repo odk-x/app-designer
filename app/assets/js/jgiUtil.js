@@ -1,5 +1,70 @@
 'use strict';
 
+// This is the strange list of times that Ian wants to use. A and J for am/pm
+// but in the Swahili form. The strange looping of times is something to do
+// with how local time is kept.
+var times = [
+  '00-12:00A',
+  '01-12:15A',
+  '02-12:30A',
+  '03-12:45A',
+  '04-1:00A',
+  '05-1:15A',
+  '06-1:30A',
+  '07-1:45A',
+  '08-2:00A',
+  '09-2:15A',
+  '10-2:30A',
+  '11-2:45A',
+  '12-3:00A',
+  '13-3:15A',
+  '14-3:30A',
+  '15-3:45A',
+  '16-4:00A',
+  '17-4:15A',
+  '18-4:30A',
+  '19-4:45A',
+  '20-5:00A',
+  '21-5:15A',
+  '22-5:30A',
+  '23-5:45A',
+  '21-6:00J',
+  '22-6:15J',
+  '23-6:30J',
+  '24-6:45J',
+  '25-7:00J',
+  '26-7:15J',
+  '27-7:30J',
+  '28-7:45J',
+  '29-8:00J',
+  '30-8:15J',
+  '31-8:30J',
+  '32-8:45J',
+  '33-9:00J',
+  '34-9:15J',
+  '35-9:30J',
+  '36-9:45J',
+  '37-10:00J',
+  '38-10:15J',
+  '39-10:30J',
+  '40-10:45J',
+  '41-11:00J',
+  '42-11:15J',
+  '43-11:30J',
+  '44-11:45J',
+  '45-12:00J',
+  '46-12:15J',
+  '47-12:30J',
+  '48-12:45J',
+  '49-1:00J',
+  '50-1:15J',
+  '51-1:30J',
+  '52-1:45J',
+  '53-2:00J',
+  '54-2:15J',
+  '55-2:30J',
+  '56-2:45J'
+];
 
 /**
  * Convert hours an mins integers to a zero-padded string. 1,5, would become:
@@ -29,6 +94,63 @@ function sortItemsWithDate(objects) {
  * that an end time has not yet been set.
  */
 exports.flagEndTimeNotSet = 'ongoing';
+
+
+/**
+ * Return an array of all the times that will be stored in the database. These
+ * are not user-facing, but are intended to be stored in the database
+ * representing a particular time.
+ */
+exports.getAllTimesForDb = function() {
+  // return a defensive copy
+  return times.slice();
+};
+
+
+/**
+ * Convert a user time to its db representation.
+ */
+exports.getDbTimeFromUserTime = function(userTime) {
+  var userTimes = exports.getAllTimesForUser();
+
+  var index = userTimes.indexOf(userTime);
+  if (index < 0) {
+    throw 'cannot find user time: ' + userTime;
+  }
+
+  return exports.getAllTimesForDb()[index];
+};
+
+
+exports.getUserTimeFromDbTime = function(dbTime) {
+  var userTimes = exports.getAllTimesForUser();
+  var dbTimes = exports.getAllTimesForDb();
+
+  var index = dbTimes.indexOf(dbTime);
+  if (index < 0) {
+    throw 'Unrecognized db time: ' + dbTime;
+  }
+
+  return userTimes[index];
+};
+
+
+/**
+ * Return an array of all user-facing time labels. These are the user-facing
+ * strings corresponding to the database-facing strings returned by
+ * getAllTimesForDb.
+ */
+exports.getAllTimesForUser = function() {
+  var result = [];
+  times.forEach(function(val) {
+    // We expect something like 01-12:00J, so find the first - and take
+    // everything after that.
+    var dashIndex = val.indexOf('-');
+    var userTime = val.substring(dashIndex + 1);
+    result.push(userTime);
+  });
+  return result;
+};
 
 
 /**

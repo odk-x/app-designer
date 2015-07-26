@@ -11,7 +11,6 @@ var db = require('./jgiDb');
 var $ = require('jquery');
 var util = require('./jgiUtil');
 var logging = require('./jgiLogging');
-//var chimpid = "";
 
 function assertIsChimp(chimp) {
   if (chimp.constructor.name !== 'Chimp') {
@@ -780,7 +779,7 @@ exports.updateUiForFollowTime = function() {
     console.log('No follow time has been specified!');
     followTimeUser = 'N/A';
   } else {
-    followTimeUser = followTime.replace('_', ':');
+    followTimeUser = util.getUserTimeFromDbTime(followTime);
   }
 
   $('#time-label').text(followTimeUser);

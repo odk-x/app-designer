@@ -9,8 +9,6 @@
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/ratchet.js"></script>
         <script type="text/javascript" src="../framework/tables/js/control.js"></script>
-        <script type="text/javascript" src="js/jgiNewFollow.js"></script>
-        <script type="text/javascript" src="js/util.js"></script>
         <link rel="stylesheet" href="css/jquery-ui.css">
         <script src="js/jquery-1.10.2.js"></script>
         <script src="js/jquery-ui.js"></script>
@@ -157,46 +155,17 @@
     </div>    
 
   </div> <!-- .container -->
-        <script type="text/javascript">
-            // for date formation
-            $(function() {
-                $( "#FOL_date" ).datepicker();
-            });
-            // for 15 minutes time interval
-           /* $(document).ready(function(){
-                $('#FOL_begin_time').timepicker({
-                timeFormat: 'HH:mm',
-                minTime: '0:00:00',
-                maxHour: 20,
-                maxMinutes: 30,
-                interval: 15 // 15 minutes
-                });
-            });*/
-            var getSelectForTime = document.getElementById("FOL_begin_time");
-            var min = 0;
-            var hour = 0;
+  <script type="text/javascript">
+    // we have to do this by hand, can't include it in the js bundle.
+    $(function() {
+        $( "#FOL_date" ).datepicker();
+    });
+  </script>
 
-            for (var i = 0; i < 97; i++) {
-              var option = document.createElement("option");
-              if (min == 60) {
-                min = 0;
-                hour += 1;
-              }
-              var strMin = min.toString();
-              var strHour = hour.toString();
-              if (min == 0) {
-                strMin = strMin + "0";
-              }
-              if (hour < 10) {
-                strHour = "0" + strHour;
-              }
-              var text = strHour + ":" + strMin;
-              option.text = text;
-              getSelectForTime.add(option);
-              min += 15;
-            }
-            
-            $(display());
-        </script>
+  <script type="text/javascript" src="js/jgiNewFollowBundle.js"></script>
+  <script type="text/javascript">
+    var newFollow = require('jgiNewFollow');
+    newFollow.initializeUi(window.control);
+  </script>
     </body>  
 </html>
