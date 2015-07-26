@@ -14,6 +14,27 @@ exports.certaintyLabels = {
 
 
 /**
+ * True if the chimp has departed or is absent, else false.
+ */
+function chimpIsDepartedOrAbsent(chimp) {
+  return chimp.time === exports.timeLabels.absent ||
+    chimp.time === exports.timeLabels.departFirst ||
+    chimp.time === exports.timeLabels.departSecond ||
+    chimp.time === exports.timeLabels.departThird;
+}
+
+
+/**
+ * True if the chimp has arrived, else false.
+ */
+function chimpIsArrived(chimp) {
+  return chimp.time === exports.timeLabels.arriveFirst ||
+    chimp.time === exports.timeLabels.arriveSecond ||
+    chimp.time === exports.timeLabels.arriveThird;
+}
+
+
+/**
  * Database-facing labels for arrival and departures.
  */
 exports.timeLabels = {
@@ -511,8 +532,10 @@ exports.writeRowForChimp = function(control, chimp, isUpdate) {
  * Update an array of Chimp objects based on an existing time point. If
  * isRetroactive is true, it implies that this is being performed after a time
  * point has already had data filled out manually, rather than being seen for
- * the first time. In this case the chimp is updated ONLY if the chimp current
- * chimp was absent.
+ * the first time. In this case the chimp is updated if:
+ * 1) the current chimp was absent
+ * 2) prev is absent or departed and curr is not arrived (b/c a chimp must
+ * arrive before it can be present)
  */
 exports.updateChimpsForPreviousTimepoint = function(
     prev,
@@ -553,6 +576,13 @@ exports.updateChimpsForPreviousTimepoint = function(
       if (currChimp.time === exports.timeLabels.absent) {
         result.push(
           exports.updateChimpForPreviousTimepoint(prevChimp, currChimp)
+        );
+      } else if (
+          chimpIsDepartedOrAbsent(prevChimp) &&
+          !chimpIsArrived(currChimp)
+      ) {
+        result.push(
+            exports.updateChimpForPreviousTimepoint(prevChimp, currChimp)
         );
       } else {
         result.push(currChimp);
@@ -603,8 +633,13 @@ exports.updateChimpForPreviousTimepoint = function(prev, curr) {
       prev.time === exports.timeLabels.arriveFirst ||
       prev.time === exports.timeLabels.continuing
   ) {
-    // Must match timeLabels in jgiFollow.js.
     curr.time = exports.timeLabels.continuing;
+  } else if (chimpIsDepartedOrAbsent(prev) && !chimpIsArrived(curr)) {
+    // A chimp must be absent if it was previously absent or departed, and  the
+    // current chimp is NOT arrived. This prevents valid data from being
+    // overridden. E.g. without the !arrived check, you would overwrite all
+    // valid original arrivals
+    curr.time = exports.timeLabels.absent;
   }
 
   return curr;
