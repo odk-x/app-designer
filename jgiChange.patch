@@ -1,387 +1,122 @@
-diff --git a/app/assets/followScreen.html b/app/assets/followScreen.html
---- a/app/assets/followScreen.html
-+++ b/app/assets/followScreen.html
-@@ -42,6 +42,8 @@
-           <span id='food-summary-food' class='food-summary'>?</span>
-           <br>
-           <span id='food-summary-part' class='food-summary'>?</span>
-+          <br>
-+          <span id='food-negative-message' class='nodisplay'>Negative Duration</span>
-         </h1>
-       </div>
- 
-@@ -328,6 +330,8 @@
-           <span id='species-summary-name' class='species-summary'>?</span>
-           <br>
-           <span id='species-summary-number' class='species-summary'>?</span>
-+          <br>
-+          <span id='species-negative-message' class='nodisplay'>Negative Duration</span>
-         </h1>
-       </div>
- 
-@@ -358,8 +362,8 @@
-         <select id="species_number" class='species-select species-edit' placeholder="Number">
-           <option value='0' class='default'>?</option>
-           <option value="1">1</option>
--          <option value="2-9">2-9</option>
--          <option value="10-19">10-19</option>
-+          <option value="2">2-9</option>
-+          <option value="10">10-19</option>
-           <option value="20">20+</option>
-         </select>
-       </div>
 diff --git a/app/assets/js/bundle.js b/app/assets/js/bundle.js
 --- a/app/assets/js/bundle.js
 +++ b/app/assets/js/bundle.js
-@@ -1360,6 +1360,27 @@
+@@ -10691,6 +10691,26 @@
  
+ var FLAG_PLACE_HOLDER_TIME = 'hh:mm';
  
- /**
-+ * True if the two times represent a negative duration, else False. Returns
-+ * true also if either startDb or endDb is not truthy.
-+ *
-+ * Expects times to be in their db format, e.g. 13.01-12:00J.
++
++/**
++ * We have to store the actual number of the species in the db as integers, but
++ * we want to represent ranges.
 + */
-+exports.isNegativeDuration = function(startDb, endDb) {
-+  if (!startDb || !endDb) {
-+    return true;
-+  }
-+  
-+  var startPrefix = startDb.substring(0, startDb.indexOf('-'));
-+  var endPrefix = endDb.substring(0, endDb.indexOf('-'));
-+
-+  var startNum = Number(startPrefix);
-+  var endNum = Number(endPrefix);
-+
-+  return endNum < startNum;
++var speciesNumberLabelsUser = {
++  '1': '1',
++  '2': '2-9',
++  '10': '10-19',
++  '20': '20+'
 +};
 +
 +
 +/**
-  * Return ['hh', '00', '01', ..., '23'].
-  */
- exports.getAllHours = function() {
-@@ -10808,6 +10829,9 @@
-   $('.food-summary').removeAttr('__data');
-   $('.species-summary').removeAttr('__data');
- 
-+  $('.food-negative-message').addClass('nodisplay');
-+  $('.species-negative-message').addClass('nodisplay');
-+
-   exports.updateSaveFoodButton();
-   exports.updateSaveSpeciesButton();
- }
-@@ -10823,11 +10847,40 @@
- }
- 
- 
-+function foodIsNegativeDuration(food) {
-+  if (timeIsValid(food.startTime)) {
-+    if (food.endTime !== util.flagEndTimeNotSet && timeIsValid(food.endTime)) {
-+      if (util.isNegativeDuration(food.startTime, food.endTime)) {
-+        return true;
-+      }
-+    }
-+  }
-+  return false;
++ * Get the user-facing label for a given db-safe species number.
++ */
++function getSpeciesNumberUserLabel(dbNumber) {
++  return speciesNumberLabelsUser[dbNumber];
 +}
 +
-+function speciesIsNegativeDuration(species) {
-+  if (timeIsValid(species.startTime)) {
-+    if (
-+        species.endTime !== util.flagEndTimeNotSet &&
-+        timeIsValid(species.endTime))
-+    {
-+      if (util.isNegativeDuration(species.startTime, species.endTime)) {
-+        return true;
-+      }
-+    }
-+  }
-+  return false;
-+}
-+
-+
- /**
-  * True if the food can be persisted. This means all is valid except rowId and
-  * end time.
-  */
- function foodCanBePersisted(food) {
-+  if (foodIsNegativeDuration(food)) {
-+    return false;
-+  }
-   return (
-       timeIsValid(food.startTime) &&
-       food.foodName &&
-@@ -10843,6 +10896,9 @@
-  * and end time.
-  */
- function speciesCanBePersisted(species) {
-+  if (speciesIsNegativeDuration(species)) {
-+    return false;
-+  }
-   return (
-       timeIsValid(species.startTime) &&
-       species.speciesName &&
-@@ -11062,6 +11118,30 @@
- };
+ function assertIsChimp(chimp) {
+   if (chimp.constructor.name !== 'Chimp') {
+     throw new Error('parameter must be a chimp');
+@@ -10939,7 +10959,11 @@
+     var option = $('<option></option>');
+     option.attr('value', species.speciesName);
+     option.addClass('dynamic');
+-    option.text(species.number + ' ' + species.speciesName);
++    option.text(
++      getSpeciesNumberUserLabel(species.number) +
++      ' ' +
++      species.speciesName
++    );
  
+     option.attr('__rowid', species.rowId);
+     option.attr('__date', species.date);
+@@ -11108,7 +11132,7 @@
+   $sumName.attr('__data', species.speciesName);
+   $editName.val(species.speciesName);
  
-+exports.updateNegativeFoodDurationMessage = function() {
-+  var food = exports.getFoodFromUi();
-+  var $foodMsg = $('#food-negative-message');
-+
-+  if (foodIsNegativeDuration(food)) {
-+    $foodMsg.removeClass('nodisplay');
-+  } else {
-+    $foodMsg.addClass('nodisplay');
-+  }
-+};
-+
-+
-+exports.updateNegativeSpeciesDurationMessage = function() {
-+  var species = exports.getSpeciesFromUi();
-+  var $speciesMsg = $('#species-negative-message');
-+
-+  if (speciesIsNegativeDuration(species)) {
-+    $speciesMsg.removeClass('nodisplay');
-+  } else {
-+    $speciesMsg.addClass('nodisplay');
-+  }
-+};
-+
-+
- /**
-  * Enable or disable the food save button as appropriate.
-  */
-@@ -11739,6 +11819,7 @@
-       $foodSummaryStart.text('?');
-       $foodSummaryStart.removeAttr('__data');
-     }
-+    exports.updateNegativeFoodDurationMessage();
-     exports.updateSaveFoodButton();
-   });
+-  $sumNumber.text(species.number);
++  $sumNumber.text(getSpeciesNumberUserLabel(species.number));
+   $sumNumber.attr('__data', species.number);
+   $editPart.val(species.number);
  
-@@ -11755,6 +11836,7 @@
-       $foodSummaryEnd.text('?');
-       $foodSummaryEnd.removeAttr('__data');
-     }
-+    exports.updateNegativeFoodDurationMessage();
-     exports.updateSaveFoodButton();
-   });
+@@ -11965,7 +11989,7 @@
  
-@@ -11840,6 +11922,7 @@
-       $speciesSummaryStart.text('?');
-       $speciesSummaryStart.removeAttr('__data');
-     }
-+    exports.updateNegativeSpeciesDurationMessage();
-     exports.updateSaveSpeciesButton();
-   });
- 
-@@ -11856,6 +11939,7 @@
-       $speciesSummaryEnd.text('?');
-       $speciesSummaryEnd.removeAttr('__data');
-     }
-+    exports.updateNegativeSpeciesDurationMessage();
-     exports.updateSaveSpeciesButton();
-   });
- 
+     if (speciesNumber !== '0') {
+       // 0 is the default, illegal, unselectable value
+-      $speciesSummaryNumber.text(speciesNumber);
++      $speciesSummaryNumber.text(getSpeciesNumberUserLabel(speciesNumber));
+       $speciesSummaryNumber.attr('__data', speciesNumber);
+     } else {
+       $speciesSummaryNumber.text('?');
 diff --git a/app/assets/js/jgiFollow.js b/app/assets/js/jgiFollow.js
 --- a/app/assets/js/jgiFollow.js
 +++ b/app/assets/js/jgiFollow.js
-@@ -152,6 +152,9 @@
-   $('.food-summary').removeAttr('__data');
-   $('.species-summary').removeAttr('__data');
+@@ -14,6 +14,26 @@
  
-+  $('.food-negative-message').addClass('nodisplay');
-+  $('.species-negative-message').addClass('nodisplay');
+ var FLAG_PLACE_HOLDER_TIME = 'hh:mm';
+ 
 +
-   exports.updateSaveFoodButton();
-   exports.updateSaveSpeciesButton();
- }
-@@ -167,11 +170,40 @@
- }
- 
- 
-+function foodIsNegativeDuration(food) {
-+  if (timeIsValid(food.startTime)) {
-+    if (food.endTime !== util.flagEndTimeNotSet && timeIsValid(food.endTime)) {
-+      if (util.isNegativeDuration(food.startTime, food.endTime)) {
-+        return true;
-+      }
-+    }
-+  }
-+  return false;
-+}
-+
-+function speciesIsNegativeDuration(species) {
-+  if (timeIsValid(species.startTime)) {
-+    if (
-+        species.endTime !== util.flagEndTimeNotSet &&
-+        timeIsValid(species.endTime))
-+    {
-+      if (util.isNegativeDuration(species.startTime, species.endTime)) {
-+        return true;
-+      }
-+    }
-+  }
-+  return false;
-+}
-+
-+
- /**
-  * True if the food can be persisted. This means all is valid except rowId and
-  * end time.
-  */
- function foodCanBePersisted(food) {
-+  if (foodIsNegativeDuration(food)) {
-+    return false;
-+  }
-   return (
-       timeIsValid(food.startTime) &&
-       food.foodName &&
-@@ -187,6 +219,9 @@
-  * and end time.
-  */
- function speciesCanBePersisted(species) {
-+  if (speciesIsNegativeDuration(species)) {
-+    return false;
-+  }
-   return (
-       timeIsValid(species.startTime) &&
-       species.speciesName &&
-@@ -406,6 +441,30 @@
- };
- 
- 
-+exports.updateNegativeFoodDurationMessage = function() {
-+  var food = exports.getFoodFromUi();
-+  var $foodMsg = $('#food-negative-message');
-+
-+  if (foodIsNegativeDuration(food)) {
-+    $foodMsg.removeClass('nodisplay');
-+  } else {
-+    $foodMsg.addClass('nodisplay');
-+  }
-+};
-+
-+
-+exports.updateNegativeSpeciesDurationMessage = function() {
-+  var species = exports.getSpeciesFromUi();
-+  var $speciesMsg = $('#species-negative-message');
-+
-+  if (speciesIsNegativeDuration(species)) {
-+    $speciesMsg.removeClass('nodisplay');
-+  } else {
-+    $speciesMsg.addClass('nodisplay');
-+  }
-+};
-+
-+
- /**
-  * Enable or disable the food save button as appropriate.
-  */
-@@ -1083,6 +1142,7 @@
-       $foodSummaryStart.text('?');
-       $foodSummaryStart.removeAttr('__data');
-     }
-+    exports.updateNegativeFoodDurationMessage();
-     exports.updateSaveFoodButton();
-   });
- 
-@@ -1099,6 +1159,7 @@
-       $foodSummaryEnd.text('?');
-       $foodSummaryEnd.removeAttr('__data');
-     }
-+    exports.updateNegativeFoodDurationMessage();
-     exports.updateSaveFoodButton();
-   });
- 
-@@ -1184,6 +1245,7 @@
-       $speciesSummaryStart.text('?');
-       $speciesSummaryStart.removeAttr('__data');
-     }
-+    exports.updateNegativeSpeciesDurationMessage();
-     exports.updateSaveSpeciesButton();
-   });
- 
-@@ -1200,6 +1262,7 @@
-       $speciesSummaryEnd.text('?');
-       $speciesSummaryEnd.removeAttr('__data');
-     }
-+    exports.updateNegativeSpeciesDurationMessage();
-     exports.updateSaveSpeciesButton();
-   });
- 
-diff --git a/app/assets/js/jgiUtil.js b/app/assets/js/jgiUtil.js
---- a/app/assets/js/jgiUtil.js
-+++ b/app/assets/js/jgiUtil.js
-@@ -227,6 +227,27 @@
- 
- 
- /**
-+ * True if the two times represent a negative duration, else False. Returns
-+ * true also if either startDb or endDb is not truthy.
-+ *
-+ * Expects times to be in their db format, e.g. 13.01-12:00J.
++/**
++ * We have to store the actual number of the species in the db as integers, but
++ * we want to represent ranges.
 + */
-+exports.isNegativeDuration = function(startDb, endDb) {
-+  if (!startDb || !endDb) {
-+    return true;
-+  }
-+  
-+  var startPrefix = startDb.substring(0, startDb.indexOf('-'));
-+  var endPrefix = endDb.substring(0, endDb.indexOf('-'));
-+
-+  var startNum = Number(startPrefix);
-+  var endNum = Number(endPrefix);
-+
-+  return endNum < startNum;
++var speciesNumberLabelsUser = {
++  '1': '1',
++  '2': '2-9',
++  '10': '10-19',
++  '20': '20+'
 +};
 +
 +
 +/**
-  * Return ['hh', '00', '01', ..., '23'].
-  */
- exports.getAllHours = function() {
-diff --git a/app/assets/js/jgiUtilTest.js b/app/assets/js/jgiUtilTest.js
---- a/app/assets/js/jgiUtilTest.js
-+++ b/app/assets/js/jgiUtilTest.js
-@@ -47,3 +47,38 @@
-   t.deepEqual(actual, target);
- });
++ * Get the user-facing label for a given db-safe species number.
++ */
++function getSpeciesNumberUserLabel(dbNumber) {
++  return speciesNumberLabelsUser[dbNumber];
++}
++
+ function assertIsChimp(chimp) {
+   if (chimp.constructor.name !== 'Chimp') {
+     throw new Error('parameter must be a chimp');
+@@ -262,7 +282,11 @@
+     var option = $('<option></option>');
+     option.attr('value', species.speciesName);
+     option.addClass('dynamic');
+-    option.text(species.number + ' ' + species.speciesName);
++    option.text(
++      getSpeciesNumberUserLabel(species.number) +
++      ' ' +
++      species.speciesName
++    );
  
-+
-+test('isNegativeDuration equal', function(t) {
-+  t.plan(1);
-+
-+  var start = '12.01-12:01J';
-+  var end = '12.01-12:01J';
-+
-+  var actual = util.isNegativeDuration(start, end);
-+
-+  t.equal(actual, false);
-+});
-+
-+
-+test('isNegativeDuration negative', function(t) {
-+  t.plan(1);
-+
-+  var start = '12.01-12:01J';
-+  var end = '12.00-12:01J';
-+
-+  var actual = util.isNegativeDuration(start, end);
-+
-+  t.equal(actual, true);
-+});
-+
-+
-+test('isNegativeDuration positive', function(t) {
-+  t.plan(1);
-+
-+  var start = '12.01-12:01J';
-+  var end = '13.00-13:00J';
-+
-+  var actual = util.isNegativeDuration(start, end);
-+
-+  t.equal(actual, false);
-+});
+     option.attr('__rowid', species.rowId);
+     option.attr('__date', species.date);
+@@ -431,7 +455,7 @@
+   $sumName.attr('__data', species.speciesName);
+   $editName.val(species.speciesName);
+ 
+-  $sumNumber.text(species.number);
++  $sumNumber.text(getSpeciesNumberUserLabel(species.number));
+   $sumNumber.attr('__data', species.number);
+   $editPart.val(species.number);
+ 
+@@ -1288,7 +1312,7 @@
+ 
+     if (speciesNumber !== '0') {
+       // 0 is the default, illegal, unselectable value
+-      $speciesSummaryNumber.text(speciesNumber);
++      $speciesSummaryNumber.text(getSpeciesNumberUserLabel(speciesNumber));
+       $speciesSummaryNumber.attr('__data', speciesNumber);
+     } else {
+       $speciesSummaryNumber.text('?');

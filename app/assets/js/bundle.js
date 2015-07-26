@@ -10704,6 +10704,26 @@ var logging = require('./jgiLogging');
 
 var FLAG_PLACE_HOLDER_TIME = 'hh:mm';
 
+
+/**
+ * We have to store the actual number of the species in the db as integers, but
+ * we want to represent ranges.
+ */
+var speciesNumberLabelsUser = {
+  '1': '1',
+  '2': '2-9',
+  '10': '10-19',
+  '20': '20+'
+};
+
+
+/**
+ * Get the user-facing label for a given db-safe species number.
+ */
+function getSpeciesNumberUserLabel(dbNumber) {
+  return speciesNumberLabelsUser[dbNumber];
+}
+
 function assertIsChimp(chimp) {
   if (chimp.constructor.name !== 'Chimp') {
     throw new Error('parameter must be a chimp');
@@ -10952,7 +10972,11 @@ exports.addSpeciesToList = function(speciesArr, $list) {
     var option = $('<option></option>');
     option.attr('value', species.speciesName);
     option.addClass('dynamic');
-    option.text(species.number + ' ' + species.speciesName);
+    option.text(
+      getSpeciesNumberUserLabel(species.number) +
+      ' ' +
+      species.speciesName
+    );
 
     option.attr('__rowid', species.rowId);
     option.attr('__date', species.date);
@@ -11121,7 +11145,7 @@ exports.editExistingSpecies = function(species) {
   $sumName.attr('__data', species.speciesName);
   $editName.val(species.speciesName);
 
-  $sumNumber.text(species.number);
+  $sumNumber.text(getSpeciesNumberUserLabel(species.number));
   $sumNumber.attr('__data', species.number);
   $editPart.val(species.number);
 
@@ -11978,7 +12002,7 @@ exports.initializeSpeciesListeners = function(control) {
 
     if (speciesNumber !== '0') {
       // 0 is the default, illegal, unselectable value
-      $speciesSummaryNumber.text(speciesNumber);
+      $speciesSummaryNumber.text(getSpeciesNumberUserLabel(speciesNumber));
       $speciesSummaryNumber.attr('__data', speciesNumber);
     } else {
       $speciesSummaryNumber.text('?');
