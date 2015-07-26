@@ -1,250 +1,220 @@
+diff --git a/app/assets/followScreen.html b/app/assets/followScreen.html
+--- a/app/assets/followScreen.html
++++ b/app/assets/followScreen.html
+@@ -994,9 +994,10 @@
+ 
+  
+         <div id="certainty" style="padding-bottom: 1.5px; background-color: #F0F0F0"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Certainty:</span>
+-          <label><input type="radio" id="certain2" name="certain" value="1" style="margin-left: 15px">✓</label>
+-          <label><input type="radio" id="certain3" name="certain" value="2" style="margin-left: 15px">•</label>
+-          <label><input type="radio" id="certain3" name="certain" value="3" style="margin-left: 15px">N</label>
++          <label><input type="radio" id="certain1" name="certain" value="1" style="margin-left: 15px">✓</label>
++          <label><input type="radio" id="certain2" name="certain" value="2" style="margin-left: 15px">•</label>
++          <label><input type="radio" id="certain3" name="certain" value="3" style="margin-left: 15px">N✓</label>
++          <label><input type="radio" id="certain4" name="certain" value="4" style="margin-left: 15px">N•</label>
+         </div>
+ 
+         <div id="distance" style="padding-bottom: 1.5px;"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Within 5m: </span>
 diff --git a/app/assets/js/bundle.js b/app/assets/js/bundle.js
 --- a/app/assets/js/bundle.js
 +++ b/app/assets/js/bundle.js
-@@ -1297,41 +1297,39 @@
+@@ -2,10 +2,17 @@
+ /* global control */
+ 'use strict';
  
-   var prefix = dbTime.substring(0, dashIndex);
-   var hour = dbTime.substring(dashIndex + 1, colonIndex);
-+  var mins = dbTime.substring(colonIndex + 1, colonIndex + 3);
-   // Everything at the end.
-   var period = dbTime.substring(colonIndex + 3);
+-// The schemae of our tables
+ var tables = require('./jgiTables');
+ var models = require('./jgiModels');
  
--  // Keeping these as arrays is kind of lazy, but it is foolproof until we
--  // change the intervals.
--  var minutes = [
--    '00',
--    '01',
--    '02',
--    '03',
--    '04',
--    '05',
--    '06',
--    '07',
--    '08',
--    '09',
--    '10',
--    '11',
--    '12',
--    '13',
--    '14'
--  ];
--
-   var result = [];
- 
--  minutes.forEach(function(val) {
--    var newUserTime = hour + ':' + val + period;
--    var newPrefix = prefix + '.' + val;
-+  for (var i = 0; i < 15; i++) {
-+    var minsNum = Number(mins);
-+    minsNum += i;
-+    
-+    var newMins;
-+    if (minsNum < 10) {
-+      newMins = '0' + String(minsNum);
-+    } else {
-+      newMins = String(minsNum);
-+    }
++exports.certaintyLabels = {
++  certain: '1',
++  uncertain: '2',
++  nestCertain: '3',
++  nestUncertain: '4'
++};
 +
-+    var suffix;
-+    if (i < 10) {
-+      suffix = '0' + String(i);
-+    } else {
-+      suffix = String(i);
-+    }
 +
-+    var newUserTime = hour + ':' + newMins + period;
-+    var newPrefix = prefix + '.' + suffix;
-     var newDbTime = newPrefix + '-' + newUserTime;
+ /**
+  * Create a where clause for use in a Tables query. columns must be an array
+  * of strings.
+@@ -527,7 +534,24 @@
+     throw new Error('chimp ids must be identical to update');
+   }
  
-     var timePoint = {};
-     timePoint.dbTime = newDbTime;
-     timePoint.userTime = newUserTime;
-     result.push(timePoint);
--  });
+-  curr.certainty = prev.certainty;
++  // The mapping for certainty updates is basically that they remain the same,
++  // except that if it is a nest observation it updates to no nest.
++  var prevCertainty = prev.certainty;
++  var currCertainty = prevCertainty; // sensible default in case of error
++  if (prevCertainty === exports.certaintyLabels.certain) {
++    currCertainty = prevCertainty;
++  } else if (prevCertainty === exports.certaintyLabels.uncertain) {
++    currCertainty = prevCertainty;
++  } else if (prevCertainty === exports.certaintyLabels.nestCertain) {
++    currCertainty = exports.certaintyLabels.certain;
++  } else if (prevCertainty === exports.certaintyLabels.nestUncertain) {
++    currCertainty = exports.certaintyLabels.uncertain;
++  } else {
++    console.log('E: previous certainty not handled: ' + prevCertainty);
++    currCertainty = prevCertainty;
 +  }
++  curr.certainty = currCertainty;
++
+   curr.estrus = prev.estrus;
  
-   return result;
- };
-diff --git a/app/assets/js/jgiUtil.js b/app/assets/js/jgiUtil.js
---- a/app/assets/js/jgiUtil.js
-+++ b/app/assets/js/jgiUtil.js
-@@ -188,41 +188,39 @@
- 
-   var prefix = dbTime.substring(0, dashIndex);
-   var hour = dbTime.substring(dashIndex + 1, colonIndex);
-+  var mins = dbTime.substring(colonIndex + 1, colonIndex + 3);
-   // Everything at the end.
-   var period = dbTime.substring(colonIndex + 3);
- 
--  // Keeping these as arrays is kind of lazy, but it is foolproof until we
--  // change the intervals.
--  var minutes = [
--    '00',
--    '01',
--    '02',
--    '03',
--    '04',
--    '05',
--    '06',
--    '07',
--    '08',
--    '09',
--    '10',
--    '11',
--    '12',
--    '13',
--    '14'
--  ];
+   // chimp was there in the last time slot, update to continuing
+@@ -11072,12 +11096,7 @@
+  * The labels we use to indicate certainty of an observation. These are the
+  * labels we use internally, not the ones shown to the user.
+  */
+-var certaintyLabels = {
+-  certain: '1',
+-  uncertain: '2',
+-  nest: '3'
+-};
 -
-   var result = [];
++var certaintyLabels = db.certaintyLabels;
  
--  minutes.forEach(function(val) {
--    var newUserTime = hour + ':' + val + period;
--    var newPrefix = prefix + '.' + val;
-+  for (var i = 0; i < 15; i++) {
-+    var minsNum = Number(mins);
-+    minsNum += i;
-+    
-+    var newMins;
-+    if (minsNum < 10) {
-+      newMins = '0' + String(minsNum);
-+    } else {
-+      newMins = String(minsNum);
-+    }
-+
-+    var suffix;
-+    if (i < 10) {
-+      suffix = '0' + String(i);
-+    } else {
-+      suffix = String(i);
-+    }
-+
-+    var newUserTime = hour + ':' + newMins + period;
-+    var newPrefix = prefix + '.' + suffix;
-     var newDbTime = newPrefix + '-' + newUserTime;
+ /**
+  * The labels for certainty that are shown to a user.
+@@ -11085,7 +11104,8 @@
+ var certaintyLabelsUser = {
+   certain: '✓',
+   uncertain: '•',
+-  nest: 'N'
++  nestCertain: 'N✓',
++  nestUncertain: 'N•'
+ };
  
-     var timePoint = {};
-     timePoint.dbTime = newDbTime;
-     timePoint.userTime = newUserTime;
-     result.push(timePoint);
--  });
+ 
+@@ -11253,8 +11273,11 @@
+     case certaintyLabels.uncertain:
+       $certainty.text(certaintyLabelsUser.uncertain);
+       break;
+-    case certaintyLabels.nest:
+-      $certainty.text(certaintyLabelsUser.nest);
++    case certaintyLabels.nestCertain:
++      $certainty.text(certaintyLabelsUser.nestCertain);
++      break;
++    case certaintyLabels.nestUncertain:
++      $certainty.text(certaintyLabelsUser.nestUncertain);
+       break;
+     default:
+       console.log('unrecognized chimp certainty: ' + chimp);
+@@ -11537,8 +11560,11 @@
+       case certaintyLabels.uncertain:
+         valueForDb = certaintyLabels.uncertain;
+         break;
+-      case certaintyLabels.nest:
+-        valueForDb = certaintyLabels.nest;
++      case certaintyLabels.nestCertain:
++        valueForDb = certaintyLabels.nestCertain;
++        break;
++      case certaintyLabels.nestUncertain:
++        valueForDb = certaintyLabels.nestUncertain;
+         break;
+       default:
+         console.log('unrecognized chimp certainty value from ui: ' + value);
+diff --git a/app/assets/js/jgiDb.js b/app/assets/js/jgiDb.js
+--- a/app/assets/js/jgiDb.js
++++ b/app/assets/js/jgiDb.js
+@@ -1,10 +1,17 @@
+ /* global control */
+ 'use strict';
+ 
+-// The schemae of our tables
+ var tables = require('./jgiTables');
+ var models = require('./jgiModels');
+ 
++exports.certaintyLabels = {
++  certain: '1',
++  uncertain: '2',
++  nestCertain: '3',
++  nestUncertain: '4'
++};
++
++
+ /**
+  * Create a where clause for use in a Tables query. columns must be an array
+  * of strings.
+@@ -526,7 +533,24 @@
+     throw new Error('chimp ids must be identical to update');
+   }
+ 
+-  curr.certainty = prev.certainty;
++  // The mapping for certainty updates is basically that they remain the same,
++  // except that if it is a nest observation it updates to no nest.
++  var prevCertainty = prev.certainty;
++  var currCertainty = prevCertainty; // sensible default in case of error
++  if (prevCertainty === exports.certaintyLabels.certain) {
++    currCertainty = prevCertainty;
++  } else if (prevCertainty === exports.certaintyLabels.uncertain) {
++    currCertainty = prevCertainty;
++  } else if (prevCertainty === exports.certaintyLabels.nestCertain) {
++    currCertainty = exports.certaintyLabels.certain;
++  } else if (prevCertainty === exports.certaintyLabels.nestUncertain) {
++    currCertainty = exports.certaintyLabels.uncertain;
++  } else {
++    console.log('E: previous certainty not handled: ' + prevCertainty);
++    currCertainty = prevCertainty;
 +  }
- 
-   return result;
- };
-diff --git a/app/assets/js/jgiUtilTest.js b/app/assets/js/jgiUtilTest.js
---- a/app/assets/js/jgiUtilTest.js
-+++ b/app/assets/js/jgiUtilTest.js
-@@ -15,85 +15,35 @@
- });
- 
- 
--test('incrementTime 00:00', function(t) {
-+function getTimePointObj(dbTime, userTime) {
-+  var result = {};
-+  result.dbTime = dbTime;
-+  result.userTime = userTime;
-+  return result;
-+}
++  curr.certainty = currCertainty;
 +
-+test('getDbAndUserTimesInInterval 14-12:30J', function(t) {
-   t.plan(1);
+   curr.estrus = prev.estrus;
  
--  var actual = util.incrementTime('00:00');
--  t.equal(actual, '00:15');
-+  var actual = util.getDbAndUserTimesInInterval('14-12:30J');
+   // chimp was there in the last time slot, update to continuing
+diff --git a/app/assets/js/jgiFollow.js b/app/assets/js/jgiFollow.js
+--- a/app/assets/js/jgiFollow.js
++++ b/app/assets/js/jgiFollow.js
+@@ -440,12 +440,7 @@
+  * The labels we use to indicate certainty of an observation. These are the
+  * labels we use internally, not the ones shown to the user.
+  */
+-var certaintyLabels = {
+-  certain: '1',
+-  uncertain: '2',
+-  nest: '3'
+-};
+-
++var certaintyLabels = db.certaintyLabels;
  
-+  var target = [];
-+  target.push(getTimePointObj('14.00-12:30J', '12:30J'));
-+  target.push(getTimePointObj('14.01-12:31J', '12:31J'));
-+  target.push(getTimePointObj('14.02-12:32J', '12:32J'));
-+  target.push(getTimePointObj('14.03-12:33J', '12:33J'));
-+  target.push(getTimePointObj('14.04-12:34J', '12:34J'));
-+  target.push(getTimePointObj('14.05-12:35J', '12:35J'));
-+  target.push(getTimePointObj('14.06-12:36J', '12:36J'));
-+  target.push(getTimePointObj('14.07-12:37J', '12:37J'));
-+  target.push(getTimePointObj('14.08-12:38J', '12:38J'));
-+  target.push(getTimePointObj('14.09-12:39J', '12:39J'));
-+  target.push(getTimePointObj('14.10-12:40J', '12:40J'));
-+  target.push(getTimePointObj('14.11-12:41J', '12:41J'));
-+  target.push(getTimePointObj('14.12-12:42J', '12:42J'));
-+  target.push(getTimePointObj('14.13-12:43J', '12:43J'));
-+  target.push(getTimePointObj('14.14-12:44J', '12:44J'));
-+    
-+  t.deepEqual(actual, target);
- });
+ /**
+  * The labels for certainty that are shown to a user.
+@@ -453,7 +448,8 @@
+ var certaintyLabelsUser = {
+   certain: '✓',
+   uncertain: '•',
+-  nest: 'N'
++  nestCertain: 'N✓',
++  nestUncertain: 'N•'
+ };
  
--
--test('incrementTime 00:15', function(t) {
--  t.plan(1);
--
--  var actual = util.incrementTime('00:15');
--  t.equal(actual, '00:30');
--
--});
--
--
--test('incrementTime 00:30', function(t) {
--  t.plan(1);
--
--  var actual = util.incrementTime('00:30');
--  t.equal(actual, '00:45');
--
--});
--
--
--test('incrementTime 00:45', function(t) {
--  t.plan(1);
--
--  var actual = util.incrementTime('00:45');
--  t.equal(actual, '01:00');
--
--});
--
--
--test('incrementTime 09:45', function(t) {
--  t.plan(1);
--
--  var actual = util.incrementTime('09:45');
--  t.equal(actual, '10:00');
--});
--
--
--test('decrementTime 07:00', function(t) {
--  t.plan(1);
--
--  var actual = util.decrementTime('07:00');
--  t.equal(actual, '06:45');
--});
--
--
--test('decrementTime 07:15', function(t) {
--  t.plan(1);
--
--  var actual = util.decrementTime('07:15');
--  t.equal(actual, '07:00');
--});
--
--
--test('decrementTime 07:30', function(t) {
--  t.plan(1);
--
--  var actual = util.decrementTime('07:30');
--  t.equal(actual, '07:15');
--});
--
--
--test('decrementTime 07:45', function(t) {
--  t.plan(1);
--
--  var actual = util.decrementTime('07:45');
--  t.equal(actual, '07:30');
--});
--
--
--test('decrementTime 08:00', function(t) {
--  t.plan(1);
--
--  var actual = util.decrementTime('08:00');
--  t.equal(actual, '07:45');
--});
+ 
+@@ -621,8 +617,11 @@
+     case certaintyLabels.uncertain:
+       $certainty.text(certaintyLabelsUser.uncertain);
+       break;
+-    case certaintyLabels.nest:
+-      $certainty.text(certaintyLabelsUser.nest);
++    case certaintyLabels.nestCertain:
++      $certainty.text(certaintyLabelsUser.nestCertain);
++      break;
++    case certaintyLabels.nestUncertain:
++      $certainty.text(certaintyLabelsUser.nestUncertain);
+       break;
+     default:
+       console.log('unrecognized chimp certainty: ' + chimp);
+@@ -905,8 +904,11 @@
+       case certaintyLabels.uncertain:
+         valueForDb = certaintyLabels.uncertain;
+         break;
+-      case certaintyLabels.nest:
+-        valueForDb = certaintyLabels.nest;
++      case certaintyLabels.nestCertain:
++        valueForDb = certaintyLabels.nestCertain;
++        break;
++      case certaintyLabels.nestUncertain:
++        valueForDb = certaintyLabels.nestUncertain;
+         break;
+       default:
+         console.log('unrecognized chimp certainty value from ui: ' + value);

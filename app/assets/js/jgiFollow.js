@@ -440,12 +440,7 @@ var timeLabels = {
  * The labels we use to indicate certainty of an observation. These are the
  * labels we use internally, not the ones shown to the user.
  */
-var certaintyLabels = {
-  certain: '1',
-  uncertain: '2',
-  nest: '3'
-};
-
+var certaintyLabels = db.certaintyLabels;
 
 /**
  * The labels for certainty that are shown to a user.
@@ -453,7 +448,8 @@ var certaintyLabels = {
 var certaintyLabelsUser = {
   certain: '✓',
   uncertain: '•',
-  nest: 'N'
+  nestCertain: 'N✓',
+  nestUncertain: 'N•'
 };
 
 
@@ -621,8 +617,11 @@ exports.updateCertaintyUiForChimp = function(chimp) {
     case certaintyLabels.uncertain:
       $certainty.text(certaintyLabelsUser.uncertain);
       break;
-    case certaintyLabels.nest:
-      $certainty.text(certaintyLabelsUser.nest);
+    case certaintyLabels.nestCertain:
+      $certainty.text(certaintyLabelsUser.nestCertain);
+      break;
+    case certaintyLabels.nestUncertain:
+      $certainty.text(certaintyLabelsUser.nestUncertain);
       break;
     default:
       console.log('unrecognized chimp certainty: ' + chimp);
@@ -905,8 +904,11 @@ exports.initializeEditListeners = function(control) {
       case certaintyLabels.uncertain:
         valueForDb = certaintyLabels.uncertain;
         break;
-      case certaintyLabels.nest:
-        valueForDb = certaintyLabels.nest;
+      case certaintyLabels.nestCertain:
+        valueForDb = certaintyLabels.nestCertain;
+        break;
+      case certaintyLabels.nestUncertain:
+        valueForDb = certaintyLabels.nestUncertain;
         break;
       default:
         console.log('unrecognized chimp certainty value from ui: ' + value);

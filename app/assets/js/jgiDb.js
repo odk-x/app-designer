@@ -1,9 +1,16 @@
 /* global control */
 'use strict';
 
-// The schemae of our tables
 var tables = require('./jgiTables');
 var models = require('./jgiModels');
+
+exports.certaintyLabels = {
+  certain: '1',
+  uncertain: '2',
+  nestCertain: '3',
+  nestUncertain: '4'
+};
+
 
 /**
  * Create a where clause for use in a Tables query. columns must be an array
@@ -526,7 +533,24 @@ exports.updateChimpForPreviousTimepoint = function(prev, curr) {
     throw new Error('chimp ids must be identical to update');
   }
 
-  curr.certainty = prev.certainty;
+  // The mapping for certainty updates is basically that they remain the same,
+  // except that if it is a nest observation it updates to no nest.
+  var prevCertainty = prev.certainty;
+  var currCertainty = prevCertainty; // sensible default in case of error
+  if (prevCertainty === exports.certaintyLabels.certain) {
+    currCertainty = prevCertainty;
+  } else if (prevCertainty === exports.certaintyLabels.uncertain) {
+    currCertainty = prevCertainty;
+  } else if (prevCertainty === exports.certaintyLabels.nestCertain) {
+    currCertainty = exports.certaintyLabels.certain;
+  } else if (prevCertainty === exports.certaintyLabels.nestUncertain) {
+    currCertainty = exports.certaintyLabels.uncertain;
+  } else {
+    console.log('E: previous certainty not handled: ' + prevCertainty);
+    currCertainty = prevCertainty;
+  }
+  curr.certainty = currCertainty;
+
   curr.estrus = prev.estrus;
 
   // chimp was there in the last time slot, update to continuing

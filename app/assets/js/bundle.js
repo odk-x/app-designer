@@ -2,9 +2,16 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 /* global control */
 'use strict';
 
-// The schemae of our tables
 var tables = require('./jgiTables');
 var models = require('./jgiModels');
+
+exports.certaintyLabels = {
+  certain: '1',
+  uncertain: '2',
+  nestCertain: '3',
+  nestUncertain: '4'
+};
+
 
 /**
  * Create a where clause for use in a Tables query. columns must be an array
@@ -527,7 +534,24 @@ exports.updateChimpForPreviousTimepoint = function(prev, curr) {
     throw new Error('chimp ids must be identical to update');
   }
 
-  curr.certainty = prev.certainty;
+  // The mapping for certainty updates is basically that they remain the same,
+  // except that if it is a nest observation it updates to no nest.
+  var prevCertainty = prev.certainty;
+  var currCertainty = prevCertainty; // sensible default in case of error
+  if (prevCertainty === exports.certaintyLabels.certain) {
+    currCertainty = prevCertainty;
+  } else if (prevCertainty === exports.certaintyLabels.uncertain) {
+    currCertainty = prevCertainty;
+  } else if (prevCertainty === exports.certaintyLabels.nestCertain) {
+    currCertainty = exports.certaintyLabels.certain;
+  } else if (prevCertainty === exports.certaintyLabels.nestUncertain) {
+    currCertainty = exports.certaintyLabels.uncertain;
+  } else {
+    console.log('E: previous certainty not handled: ' + prevCertainty);
+    currCertainty = prevCertainty;
+  }
+  curr.certainty = currCertainty;
+
   curr.estrus = prev.estrus;
 
   // chimp was there in the last time slot, update to continuing
@@ -11085,12 +11109,7 @@ var timeLabels = {
  * The labels we use to indicate certainty of an observation. These are the
  * labels we use internally, not the ones shown to the user.
  */
-var certaintyLabels = {
-  certain: '1',
-  uncertain: '2',
-  nest: '3'
-};
-
+var certaintyLabels = db.certaintyLabels;
 
 /**
  * The labels for certainty that are shown to a user.
@@ -11098,7 +11117,8 @@ var certaintyLabels = {
 var certaintyLabelsUser = {
   certain: '✓',
   uncertain: '•',
-  nest: 'N'
+  nestCertain: 'N✓',
+  nestUncertain: 'N•'
 };
 
 
@@ -11266,8 +11286,11 @@ exports.updateCertaintyUiForChimp = function(chimp) {
     case certaintyLabels.uncertain:
       $certainty.text(certaintyLabelsUser.uncertain);
       break;
-    case certaintyLabels.nest:
-      $certainty.text(certaintyLabelsUser.nest);
+    case certaintyLabels.nestCertain:
+      $certainty.text(certaintyLabelsUser.nestCertain);
+      break;
+    case certaintyLabels.nestUncertain:
+      $certainty.text(certaintyLabelsUser.nestUncertain);
       break;
     default:
       console.log('unrecognized chimp certainty: ' + chimp);
@@ -11550,8 +11573,11 @@ exports.initializeEditListeners = function(control) {
       case certaintyLabels.uncertain:
         valueForDb = certaintyLabels.uncertain;
         break;
-      case certaintyLabels.nest:
-        valueForDb = certaintyLabels.nest;
+      case certaintyLabels.nestCertain:
+        valueForDb = certaintyLabels.nestCertain;
+        break;
+      case certaintyLabels.nestUncertain:
+        valueForDb = certaintyLabels.nestUncertain;
         break;
       default:
         console.log('unrecognized chimp certainty value from ui: ' + value);
