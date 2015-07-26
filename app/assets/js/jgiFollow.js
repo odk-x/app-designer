@@ -1,4 +1,4 @@
-/* global alert, confirm */
+/* global confirm */
 'use strict';
 
 /**
@@ -1031,31 +1031,10 @@ exports.initializeEditListeners = function(control) {
         window.alert('unrecognized closest value from ui: ' + valueFromUi);
     }
 
-    // We're using this as a makeshift radio button, so handle that ourselves
-    // by deselecting and writing to the db the currently closest chimp.
-    
-    // First deselect the existing closest chimp and write.
-    var $closestChimp = $('.closeness[__data=1]');
-    if ($closestChimp.length > 1) {
-      alert('More than one chimp marked as closest!');
-    } else if ($closestChimp.length === 0) {
-      // Nothing to do.
-      console.log('no closest chimp selected already');
-    } else {
-      var closestIdElement = $closestChimp.prop('id');
-      var indexOfClosestSuffix = closestIdElement.indexOf('_close');
-      var closestChimpId = closestIdElement.substring(0, indexOfClosestSuffix);
-      var closestChimp = exports.getChimpFromUi(closestChimpId);
-      closestChimp.closest = closestLabels.no;
-      db.writeRowForChimp(control, closestChimp, true);
-      exports.updateUiForChimp(closestChimp);
-    }
-
     // Then handle the existing chimp.
     var chimp = exports.getSelectedChimp();
     assertFoundChimp(chimp);
     chimp.closest = valueForDb;
-
     
     exports.updateUiForChimp(chimp);
     db.writeRowForChimp(control, chimp, true);

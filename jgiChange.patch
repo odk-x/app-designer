@@ -1,220 +1,85 @@
-diff --git a/app/assets/followScreen.html b/app/assets/followScreen.html
---- a/app/assets/followScreen.html
-+++ b/app/assets/followScreen.html
-@@ -994,9 +994,10 @@
- 
-  
-         <div id="certainty" style="padding-bottom: 1.5px; background-color: #F0F0F0"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Certainty:</span>
--          <label><input type="radio" id="certain2" name="certain" value="1" style="margin-left: 15px">✓</label>
--          <label><input type="radio" id="certain3" name="certain" value="2" style="margin-left: 15px">•</label>
--          <label><input type="radio" id="certain3" name="certain" value="3" style="margin-left: 15px">N</label>
-+          <label><input type="radio" id="certain1" name="certain" value="1" style="margin-left: 15px">✓</label>
-+          <label><input type="radio" id="certain2" name="certain" value="2" style="margin-left: 15px">•</label>
-+          <label><input type="radio" id="certain3" name="certain" value="3" style="margin-left: 15px">N✓</label>
-+          <label><input type="radio" id="certain4" name="certain" value="4" style="margin-left: 15px">N•</label>
-         </div>
- 
-         <div id="distance" style="padding-bottom: 1.5px;"><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Within 5m: </span>
 diff --git a/app/assets/js/bundle.js b/app/assets/js/bundle.js
 --- a/app/assets/js/bundle.js
 +++ b/app/assets/js/bundle.js
-@@ -2,10 +2,17 @@
- /* global control */
+@@ -10654,7 +10654,7 @@
+ }));
+ 
+ },{}],"jgiFollow":[function(require,module,exports){
+-/* global alert, confirm */
++/* global confirm */
  'use strict';
  
--// The schemae of our tables
- var tables = require('./jgiTables');
- var models = require('./jgiModels');
- 
-+exports.certaintyLabels = {
-+  certain: '1',
-+  uncertain: '2',
-+  nestCertain: '3',
-+  nestUncertain: '4'
-+};
-+
-+
  /**
-  * Create a where clause for use in a Tables query. columns must be an array
-  * of strings.
-@@ -527,7 +534,24 @@
-     throw new Error('chimp ids must be identical to update');
-   }
+@@ -11687,31 +11687,10 @@
+         window.alert('unrecognized closest value from ui: ' + valueFromUi);
+     }
  
--  curr.certainty = prev.certainty;
-+  // The mapping for certainty updates is basically that they remain the same,
-+  // except that if it is a nest observation it updates to no nest.
-+  var prevCertainty = prev.certainty;
-+  var currCertainty = prevCertainty; // sensible default in case of error
-+  if (prevCertainty === exports.certaintyLabels.certain) {
-+    currCertainty = prevCertainty;
-+  } else if (prevCertainty === exports.certaintyLabels.uncertain) {
-+    currCertainty = prevCertainty;
-+  } else if (prevCertainty === exports.certaintyLabels.nestCertain) {
-+    currCertainty = exports.certaintyLabels.certain;
-+  } else if (prevCertainty === exports.certaintyLabels.nestUncertain) {
-+    currCertainty = exports.certaintyLabels.uncertain;
-+  } else {
-+    console.log('E: previous certainty not handled: ' + prevCertainty);
-+    currCertainty = prevCertainty;
-+  }
-+  curr.certainty = currCertainty;
-+
-   curr.estrus = prev.estrus;
- 
-   // chimp was there in the last time slot, update to continuing
-@@ -11072,12 +11096,7 @@
-  * The labels we use to indicate certainty of an observation. These are the
-  * labels we use internally, not the ones shown to the user.
-  */
--var certaintyLabels = {
--  certain: '1',
--  uncertain: '2',
--  nest: '3'
--};
+-    // We're using this as a makeshift radio button, so handle that ourselves
+-    // by deselecting and writing to the db the currently closest chimp.
+-    
+-    // First deselect the existing closest chimp and write.
+-    var $closestChimp = $('.closeness[__data=1]');
+-    if ($closestChimp.length > 1) {
+-      alert('More than one chimp marked as closest!');
+-    } else if ($closestChimp.length === 0) {
+-      // Nothing to do.
+-      console.log('no closest chimp selected already');
+-    } else {
+-      var closestIdElement = $closestChimp.prop('id');
+-      var indexOfClosestSuffix = closestIdElement.indexOf('_close');
+-      var closestChimpId = closestIdElement.substring(0, indexOfClosestSuffix);
+-      var closestChimp = exports.getChimpFromUi(closestChimpId);
+-      closestChimp.closest = closestLabels.no;
+-      db.writeRowForChimp(control, closestChimp, true);
+-      exports.updateUiForChimp(closestChimp);
+-    }
 -
-+var certaintyLabels = db.certaintyLabels;
- 
- /**
-  * The labels for certainty that are shown to a user.
-@@ -11085,7 +11104,8 @@
- var certaintyLabelsUser = {
-   certain: '✓',
-   uncertain: '•',
--  nest: 'N'
-+  nestCertain: 'N✓',
-+  nestUncertain: 'N•'
- };
- 
- 
-@@ -11253,8 +11273,11 @@
-     case certaintyLabels.uncertain:
-       $certainty.text(certaintyLabelsUser.uncertain);
-       break;
--    case certaintyLabels.nest:
--      $certainty.text(certaintyLabelsUser.nest);
-+    case certaintyLabels.nestCertain:
-+      $certainty.text(certaintyLabelsUser.nestCertain);
-+      break;
-+    case certaintyLabels.nestUncertain:
-+      $certainty.text(certaintyLabelsUser.nestUncertain);
-       break;
-     default:
-       console.log('unrecognized chimp certainty: ' + chimp);
-@@ -11537,8 +11560,11 @@
-       case certaintyLabels.uncertain:
-         valueForDb = certaintyLabels.uncertain;
-         break;
--      case certaintyLabels.nest:
--        valueForDb = certaintyLabels.nest;
-+      case certaintyLabels.nestCertain:
-+        valueForDb = certaintyLabels.nestCertain;
-+        break;
-+      case certaintyLabels.nestUncertain:
-+        valueForDb = certaintyLabels.nestUncertain;
-         break;
-       default:
-         console.log('unrecognized chimp certainty value from ui: ' + value);
-diff --git a/app/assets/js/jgiDb.js b/app/assets/js/jgiDb.js
---- a/app/assets/js/jgiDb.js
-+++ b/app/assets/js/jgiDb.js
-@@ -1,10 +1,17 @@
- /* global control */
- 'use strict';
- 
--// The schemae of our tables
- var tables = require('./jgiTables');
- var models = require('./jgiModels');
- 
-+exports.certaintyLabels = {
-+  certain: '1',
-+  uncertain: '2',
-+  nestCertain: '3',
-+  nestUncertain: '4'
-+};
-+
-+
- /**
-  * Create a where clause for use in a Tables query. columns must be an array
-  * of strings.
-@@ -526,7 +533,24 @@
-     throw new Error('chimp ids must be identical to update');
-   }
- 
--  curr.certainty = prev.certainty;
-+  // The mapping for certainty updates is basically that they remain the same,
-+  // except that if it is a nest observation it updates to no nest.
-+  var prevCertainty = prev.certainty;
-+  var currCertainty = prevCertainty; // sensible default in case of error
-+  if (prevCertainty === exports.certaintyLabels.certain) {
-+    currCertainty = prevCertainty;
-+  } else if (prevCertainty === exports.certaintyLabels.uncertain) {
-+    currCertainty = prevCertainty;
-+  } else if (prevCertainty === exports.certaintyLabels.nestCertain) {
-+    currCertainty = exports.certaintyLabels.certain;
-+  } else if (prevCertainty === exports.certaintyLabels.nestUncertain) {
-+    currCertainty = exports.certaintyLabels.uncertain;
-+  } else {
-+    console.log('E: previous certainty not handled: ' + prevCertainty);
-+    currCertainty = prevCertainty;
-+  }
-+  curr.certainty = currCertainty;
-+
-   curr.estrus = prev.estrus;
- 
-   // chimp was there in the last time slot, update to continuing
+     // Then handle the existing chimp.
+     var chimp = exports.getSelectedChimp();
+     assertFoundChimp(chimp);
+     chimp.closest = valueForDb;
+-
+     
+     exports.updateUiForChimp(chimp);
+     db.writeRowForChimp(control, chimp, true);
 diff --git a/app/assets/js/jgiFollow.js b/app/assets/js/jgiFollow.js
 --- a/app/assets/js/jgiFollow.js
 +++ b/app/assets/js/jgiFollow.js
-@@ -440,12 +440,7 @@
-  * The labels we use to indicate certainty of an observation. These are the
-  * labels we use internally, not the ones shown to the user.
-  */
--var certaintyLabels = {
--  certain: '1',
--  uncertain: '2',
--  nest: '3'
--};
--
-+var certaintyLabels = db.certaintyLabels;
+@@ -1,4 +1,4 @@
+-/* global alert, confirm */
++/* global confirm */
+ 'use strict';
  
  /**
-  * The labels for certainty that are shown to a user.
-@@ -453,7 +448,8 @@
- var certaintyLabelsUser = {
-   certain: '✓',
-   uncertain: '•',
--  nest: 'N'
-+  nestCertain: 'N✓',
-+  nestUncertain: 'N•'
- };
+@@ -1031,31 +1031,10 @@
+         window.alert('unrecognized closest value from ui: ' + valueFromUi);
+     }
  
- 
-@@ -621,8 +617,11 @@
-     case certaintyLabels.uncertain:
-       $certainty.text(certaintyLabelsUser.uncertain);
-       break;
--    case certaintyLabels.nest:
--      $certainty.text(certaintyLabelsUser.nest);
-+    case certaintyLabels.nestCertain:
-+      $certainty.text(certaintyLabelsUser.nestCertain);
-+      break;
-+    case certaintyLabels.nestUncertain:
-+      $certainty.text(certaintyLabelsUser.nestUncertain);
-       break;
-     default:
-       console.log('unrecognized chimp certainty: ' + chimp);
-@@ -905,8 +904,11 @@
-       case certaintyLabels.uncertain:
-         valueForDb = certaintyLabels.uncertain;
-         break;
--      case certaintyLabels.nest:
--        valueForDb = certaintyLabels.nest;
-+      case certaintyLabels.nestCertain:
-+        valueForDb = certaintyLabels.nestCertain;
-+        break;
-+      case certaintyLabels.nestUncertain:
-+        valueForDb = certaintyLabels.nestUncertain;
-         break;
-       default:
-         console.log('unrecognized chimp certainty value from ui: ' + value);
+-    // We're using this as a makeshift radio button, so handle that ourselves
+-    // by deselecting and writing to the db the currently closest chimp.
+-    
+-    // First deselect the existing closest chimp and write.
+-    var $closestChimp = $('.closeness[__data=1]');
+-    if ($closestChimp.length > 1) {
+-      alert('More than one chimp marked as closest!');
+-    } else if ($closestChimp.length === 0) {
+-      // Nothing to do.
+-      console.log('no closest chimp selected already');
+-    } else {
+-      var closestIdElement = $closestChimp.prop('id');
+-      var indexOfClosestSuffix = closestIdElement.indexOf('_close');
+-      var closestChimpId = closestIdElement.substring(0, indexOfClosestSuffix);
+-      var closestChimp = exports.getChimpFromUi(closestChimpId);
+-      closestChimp.closest = closestLabels.no;
+-      db.writeRowForChimp(control, closestChimp, true);
+-      exports.updateUiForChimp(closestChimp);
+-    }
+-
+     // Then handle the existing chimp.
+     var chimp = exports.getSelectedChimp();
+     assertFoundChimp(chimp);
+     chimp.closest = valueForDb;
+-
+     
+     exports.updateUiForChimp(chimp);
+     db.writeRowForChimp(control, chimp, true);
