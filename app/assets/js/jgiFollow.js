@@ -149,6 +149,23 @@ function showFood() {
   $('.container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');
   $('.food-container').removeClass('nodisplay');
+
+  fetchFoods();
+}
+
+/**
+ * Read the food list from the config file.
+ */
+function fetchFoods() {
+  var foodData = $.ajax({type: "GET", url: "config/foodList.txt", async:false}).responseText;
+  var foodItem = foodData.split("\n");
+  for (var i = 0; i < foodItem.length; i++) {
+    if (foodItem[i]) {
+      var foodValue = foodItem[i].toLowerCase().replace(" ", "_");
+      $(".foods").append("<option value=\"" + foodValue + "\"><a id=\"" + foodValue +
+                         "\" class=\"food food-show\" href=\"#\">" + foodItem[i] + "</option>");
+    }
+  }
 }
 
 
