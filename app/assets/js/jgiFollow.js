@@ -151,23 +151,38 @@ function showFood() {
   $('.food-container').removeClass('nodisplay');
 
   fetchFoods();
+  fetchFoodParts();
 }
 
 /**
- * Read the food list from the config file.
+ * Read the food list from the config file and populate the UI.
  */
 function fetchFoods() {
   var foodData = $.ajax({type: "GET", url: "config/foodList.txt", async:false}).responseText;
-  var foodItem = foodData.split("\n");
-  for (var i = 0; i < foodItem.length; i++) {
-    if (foodItem[i]) {
-      var foodValue = foodItem[i].toLowerCase().replace(" ", "_");
+  var foodItems = foodData.split("\n");
+  for (var i = 0; i < foodItems.length; i++) {
+    if (foodItems[i]) {
+      var foodValue = foodItems[i].toLowerCase().replace(" ", "_");
       $(".foods").append("<option value=\"" + foodValue + "\"><a id=\"" + foodValue +
-                         "\" class=\"food food-show\" href=\"#\">" + foodItem[i] + "</option>");
+                         "\" class=\"food food-show\" href=\"#\">" + foodItems[i] + "</option>");
     }
   }
 }
 
+/**
+ * Read the food part list from the config file and populate the UI.
+ */
+function fetchFoodParts() {
+  var foodPartData = $.ajax({type: "GET", url: "config/foodPartList.txt", async:false}).responseText;
+  var foodParts = foodPartData.split("\n");
+  for (var i = 0; i < foodParts.length; i++) {
+    if (foodParts[i]) {
+      var foodPartValue = foodParts[i].toLowerCase().replace(" ", "_");
+      $(".food-part").append("<option value=\"" + foodPartValue + "\"><a id=\"" + foodPartValue +
+                         "\" class=\"foodPart foodPart-show\" href=\"#\">" + foodParts[i] + "</option>");
+    }
+  }
+}
 
 /**
  * Show the species editing div, hiding the food and chimps.
