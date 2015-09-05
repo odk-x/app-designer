@@ -10782,7 +10782,7 @@ var $ = require('jquery');
 var util = require('./jgiUtil');
 var logging = require('./jgiLogging');
 
-var FLAG_PLACE_HOLDER_TIME = 'hh:mm';
+var FLAG_PLACE_HOLDER_TIME = 's:dk';
 
 
 /**
@@ -12254,7 +12254,7 @@ exports.initializeListeners = function(control) {
     var $closestElement = $('.closeness[__data=1]');
     var noClosestOk = false;
     if ($closestElement.length === 0) {
-      noClosestOk = confirm('No nearest to focal. Are you sure?');
+      noClosestOk = confirm('Hakuna sokwe jirani. Una uhakika?');
     } else {
       noClosestOk = true;
     }
@@ -12262,7 +12262,7 @@ exports.initializeListeners = function(control) {
     var $withinFiveElement = $('.5-meter[__data=1]');
     var noneWithin5Ok = false;
     if ($withinFiveElement.length === 0) {
-      noneWithin5Ok = confirm('No chimps within 5m. Are you sure?');
+      noneWithin5Ok = confirm('Hakuna sokwe ndani ya 5m. Una uhakika?');
     } else {
       noneWithin5Ok = true;
     }
