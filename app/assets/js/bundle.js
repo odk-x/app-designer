@@ -10783,6 +10783,7 @@ var util = require('./jgiUtil');
 var logging = require('./jgiLogging');
 
 var FLAG_PLACE_HOLDER_TIME = 's:dk';
+var FOOD_LIST_COOKIE = "JGIRecentFoodsList";
 
 
 /**
@@ -10928,13 +10929,28 @@ function showFood() {
  * Read the food list from the config file and populate the UI.
  */
 function fetchFoods() {
+  var foodsNode = $(".foods");
+
+  // Clear old list and start fresh
+  foodsNode.empty();
+  foodsNode.append("<option value=\"0\">Chagua Chakula</option>");
+
+  // Check for recent foods in the cookies
+  var recentFoods = getRecentFoods();
+  for (var i = 0; i < recentFoods.length; i++) {
+    var food = recentFoods[i];
+    foodsNode.append("<option value=\"" + food + "\"><a id=\"" + food +
+                     "\" class=\"food food-show\" href=\"#\">" + food + "</option>");
+  }
+
+  // Retrieve the full list from the text file
   var foodData = $.ajax({type: "GET", url: "config/foodList.txt", async:false}).responseText;
   var foodItems = foodData.split("\n");
   for (var i = 0; i < foodItems.length; i++) {
     if (foodItems[i]) {
-      var foodValue = foodItems[i].toLowerCase().replace(" ", "_");
-      $(".foods").append("<option value=\"" + foodValue + "\"><a id=\"" + foodValue +
-                         "\" class=\"food food-show\" href=\"#\">" + foodItems[i] + "</option>");
+      var foodValue = foodItems[i].trim().toLowerCase().replace(" ", "_");
+      foodsNode.append("<option value=\"" + foodValue + "\"><a id=\"" + foodValue +
+                       "\" class=\"food food-show\" href=\"#\">" + foodItems[i] + "</option>");
     }
   }
 }
@@ -10943,15 +10959,57 @@ function fetchFoods() {
  * Read the food part list from the config file and populate the UI.
  */
 function fetchFoodParts() {
+  var foodPartNode = $(".food-part");
+
   var foodPartData = $.ajax({type: "GET", url: "config/foodPartList.txt", async:false}).responseText;
   var foodParts = foodPartData.split("\n");
   for (var i = 0; i < foodParts.length; i++) {
     if (foodParts[i]) {
-      var foodPartValue = foodParts[i].toLowerCase().replace(" ", "_");
-      $(".food-part").append("<option value=\"" + foodPartValue + "\"><a id=\"" + foodPartValue +
-                         "\" class=\"foodPart foodPart-show\" href=\"#\">" + foodParts[i] + "</option>");
+      var foodPartValue = foodParts[i].trim().toLowerCase().replace(" ", "_");
+      foodPartNode.append("<option value=\"" + foodPartValue + "\"><a id=\"" + foodPartValue +
+                          "\" class=\"foodPart foodPart-show\" href=\"#\">" + foodParts[i] + "</option>");
     }
   }
+}
+
+/**
+ * Stores a food at the top of the most recent foods list in the cookie
+ */
+function addToRecentFoods(newFood) {
+  var foodList, foodCookie, index;
+  foodList = getRecentFoods();
+
+  // If the food is already in the list, remove it to prevent a duplicate
+  index = foodList.indexOf(newFood);
+  if (index >= 0) {
+    foodList.splice(index, 1);
+  }
+
+  // Prepend the food to the front of the list
+  foodList.unshift(newFood);
+
+  if (foodList.length > 5) {
+    foodList.splice(5, foodList.length);
+  }
+
+  // Repackage as a string
+  foodCookie = foodList.join(',');
+  docCookies.setItem(FOOD_LIST_COOKIE, foodCookie, Infinity);
+}
+
+/**
+ * Retrieves the recent food list cookie contents
+ */
+function getRecentFoods() {
+  var foodList;
+  if (docCookies.hasItem(FOOD_LIST_COOKIE)) {
+    foodList = docCookies.getItem(FOOD_LIST_COOKIE);
+    foodList = foodList.split(",");
+  } else {
+    foodList = [];
+  }
+
+  return foodList;
 }
 
 /**
@@ -12047,6 +12105,8 @@ exports.initializeFoodListeners = function(control) {
       db.writeRowForFood(control, activeFood, false);
     }
 
+    addToRecentFoods(activeFood.foodName);
+
     exports.refreshFoodList(control);
     showChimps();
     clearSpeciesAndFoodSelected();
@@ -12882,6 +12942,77 @@ exports.getChimpIdsFromUi = function() {
 
   return chimpIds;
 
+};
+
+
+/**
+ * Below is Firefox's cookies library.
+ * TODO: This should be converted to browserify made available to the rest of the
+ * project.
+ */
+
+/*\
+|*|
+|*|  :: cookies.js ::
+|*|
+|*|  A complete cookies reader/writer framework with full unicode support.
+|*|
+|*|  Revision #1 - September 4, 2014
+|*|
+|*|  https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
+|*|  https://developer.mozilla.org/User:fusionchess
+|*|
+|*|  This framework is released under the GNU Public License, version 3 or later.
+|*|  http://www.gnu.org/licenses/gpl-3.0-standalone.html
+|*|
+|*|  Syntaxes:
+|*|
+|*|  * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+|*|  * docCookies.getItem(name)
+|*|  * docCookies.removeItem(name[, path[, domain]])
+|*|  * docCookies.hasItem(name)
+|*|  * docCookies.keys()
+|*|
+\*/
+
+var docCookies = {
+  getItem: function (sKey) {
+    if (!sKey) { return null; }
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+  },
+  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+    var sExpires = "";
+    if (vEnd) {
+      switch (vEnd.constructor) {
+        case Number:
+          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+          break;
+        case String:
+          sExpires = "; expires=" + vEnd;
+          break;
+        case Date:
+          sExpires = "; expires=" + vEnd.toUTCString();
+          break;
+      }
+    }
+    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+    return true;
+  },
+  removeItem: function (sKey, sPath, sDomain) {
+    if (!this.hasItem(sKey)) { return false; }
+    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+    return true;
+  },
+  hasItem: function (sKey) {
+    if (!sKey) { return false; }
+    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+  },
+  keys: function () {
+    var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+    for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+    return aKeys;
+  }
 };
 
 },{"./jgiDb":1,"./jgiLogging":2,"./jgiModels":3,"./jgiUrls":5,"./jgiUtil":6,"jquery":7}]},{},[]);
