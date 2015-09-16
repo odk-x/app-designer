@@ -151,6 +151,10 @@ exports.convertTableDataToFollowIntervals = function(data) {
 
   var cols = tables.chimpObservation.columns;
 
+  if (!data) {
+    return result;
+  }
+
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);
     var beginTime = data.getData(i, cols.followStartTime);
@@ -168,6 +172,10 @@ exports.convertTableDataToFollowIntervals = function(data) {
 exports.convertTableDataToSpecies = function(data) {
   var result = [];
   var cols = tables.species.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);
@@ -198,6 +206,10 @@ exports.convertTableDataToSpecies = function(data) {
 exports.convertTableDataToFood = function(data) {
   var result = [];
   var cols = tables.food.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var rowId = data.getRowId(i);
@@ -235,6 +247,10 @@ exports.convertTableDataToChimps = function(data) {
   var result = [];
 
   var cols = tables.chimpObservation.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
 
@@ -279,6 +295,10 @@ exports.convertTableDataToFollows = function convertTableDataToFollows(data) {
   var result = [];
 
   var cols = tables.follow.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);
@@ -1033,7 +1053,9 @@ exports.queryParameters = {
   timeOfPresence: 'time_presence',
   speciesName: 'name_species',
   numOfSpecies: 'num_of_species',
-  isReview: 'review'
+  isReview: 'review',
+
+  community: 'community',
 };
 
 
@@ -1062,7 +1084,7 @@ exports.getQueryParameter = function(key) {
   }
 };
 
-exports.createParamsForFollow = function(date, time, focalChimp) {
+exports.createParamsForFollow = function(date, time, focalChimp, community) {
 
   var result =
     '?' +
@@ -1076,7 +1098,11 @@ exports.createParamsForFollow = function(date, time, focalChimp) {
     '&' +
     exports.queryParameters.focalChimp +
     '=' +
-    encodeURIComponent(focalChimp);
+    encodeURIComponent(focalChimp) +
+    '&' +
+    exports.queryParameters.community +
+    '=' +
+    encodeURIComponent(community);
   return result;
 
 };
@@ -1120,7 +1146,7 @@ exports.createParamsForFood = function(
     encodeURIComponent(foodPart);
 
   return result;
-  
+
 };
 
 exports.createParamsForSpecies = function(
@@ -1174,6 +1200,12 @@ exports.getFocalChimpIdFromUrl = function() {
   return result;
 
 };
+
+exports.getCommunityFromUrl = function() {
+
+  var result = exports.getQueryParameter(exports.queryParameters.community);
+  return result;
+}
 
 },{}],5:[function(require,module,exports){
 'use strict';
@@ -10729,6 +10761,8 @@ var urls = require('./jgiUrls');
 var util = require('./jgiUtil');
 var models = require('./jgiModels');
 
+var chimpData;
+
 function invalidDataToStart(data) {
   if (!data || data === '') {
     return true;
@@ -10737,8 +10771,71 @@ function invalidDataToStart(data) {
   }
 }
 
+/*
+ *
+
+/**
+ * Read the chimp list from the config file.
+ */
+function fetchChimpList() {
+  Papa.parse("config/chimpList.csv", {
+    header: true,
+    download: true,
+    complete: function(results) {
+      chimpData = results["data"];
+      var communityList = [];
+
+      // Create a list of all communities
+      for (var i = 0; i < chimpData.length; i++) {
+        var community = chimpData[i]["Community"];
+        if (community && communityList.indexOf(community) < 0) {
+          communityList.push(community);
+        }
+      }
+
+      var $communities = $("#FOL_CL_community_id");
+
+      // Clear the UI element and add all communities to it
+      $communities.empty();
+      $communities.append("<option class=\"first\"><span>Kundi</span></option>");
+
+      for (var i = 0; i < communityList.length; i++) {
+        var communityVal = communityList[i].trim().toLowerCase().replace(" ", "_");
+        $communities.append("<option><a id=\"" + communityVal + "\">" + communityList[i] + "</a></option>");
+      }
+
+    },
+    error: function() {
+      alert("Error reading chimp list");
+    }
+  });
+}
+
 
 exports.initializeListeners = function(control) {
+
+  $("#FOL_CL_community_id").change(function() {
+    var $chimps = $("#FOL_B_AnimID");
+    var community = $("#FOL_CL_community_id").val();
+
+    // Clear old entries
+    $chimps.empty();
+    $chimps.append("<option class=\"first\"><span>Target</span></option>");
+
+    // Add all chimps with a matching community to the dropdown
+    for (var i = 0; i < chimpData.length; i++) {
+      var currChimp = chimpData[i]["Chimp"];
+      var currCommunity = chimpData[i]["Community"];
+      if (currChimp && currCommunity === community) {
+        var chimpVal = currChimp.trim().toLowerCase().replace(" ", "_");
+        $chimps.append("<option><a id=\"" + chimpVal + "\">" + currChimp + "</a></option>");
+      }
+    }
+
+    // Enable chimp selection
+    $chimps.prop("disabled", false);
+
+  });
 
   $('#begin-follow').on('click', function() {
     // First retrieve the information from the form.
@@ -10760,7 +10857,7 @@ exports.initializeListeners = function(control) {
     }
 
     $('#formsubmitbutton').css('display', 'none'); // to undisplay
-    $('#buttonreplacement').css('display', 'block'); // to display 
+    $('#buttonreplacement').css('display', 'block'); // to display
 
     var follow = new models.Follow(
         date,
@@ -10781,7 +10878,8 @@ exports.initializeListeners = function(control) {
     var queryString = urls.createParamsForFollow(
         date,
         beginTimeDb,
-        focalChimpId
+        focalChimpId,
+        communityId
         );
     var url = control.getFileAsUrl(
         'assets/followScreen.html' + queryString);
@@ -10811,6 +10909,8 @@ exports.initializeUi = function(control) {
 
     $beginTime.append(option);
   });
+
+  fetchChimpList();
 
 };
 

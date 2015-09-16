@@ -159,18 +159,18 @@ function showFood() {
  * Read the food list from the config file and populate the UI.
  */
 function fetchFoods() {
-  var foodsNode = $(".foods");
+  var $foodsNode = $(".foods");
 
   // Clear old list and start fresh
-  foodsNode.empty();
-  foodsNode.append("<option value=\"0\">Chagua Chakula</option>");
+  $foodsNode.empty();
+  $foodsNode.append("<option value=\"0\">Chagua Chakula</option>");
 
   // Check for recent foods in the cookies
   var recentFoods = getRecentFoods();
   for (var i = 0; i < recentFoods.length; i++) {
     var food = recentFoods[i];
-    foodsNode.append("<option value=\"" + food + "\"><a id=\"" + food +
-                     "\" class=\"food food-show\" href=\"#\">" + food + "</option>");
+    $foodsNode.append("<option value=\"" + food + "\"><a id=\"" + food +
+                      "\" class=\"food food-show\" href=\"#\">" + food + "</option>");
   }
 
   // Retrieve the full list from the text file
@@ -179,8 +179,8 @@ function fetchFoods() {
   for (var i = 0; i < foodItems.length; i++) {
     if (foodItems[i]) {
       var foodValue = foodItems[i].trim().toLowerCase().replace(" ", "_");
-      foodsNode.append("<option value=\"" + foodValue + "\"><a id=\"" + foodValue +
-                       "\" class=\"food food-show\" href=\"#\">" + foodItems[i] + "</option>");
+      $foodsNode.append("<option value=\"" + foodValue + "\"><a id=\"" + foodValue +
+                        "\" class=\"food food-show\" href=\"#\">" + foodItems[i] + "</option>");
     }
   }
 }
@@ -189,14 +189,14 @@ function fetchFoods() {
  * Read the food part list from the config file and populate the UI.
  */
 function fetchFoodParts() {
-  var foodPartNode = $(".food-part");
+  var $foodPartNode = $(".food-part");
 
   var foodPartData = $.ajax({type: "GET", url: "config/foodPartList.txt", async:false}).responseText;
   var foodParts = foodPartData.split("\n");
   for (var i = 0; i < foodParts.length; i++) {
     if (foodParts[i]) {
       var foodPartValue = foodParts[i].trim().toLowerCase().replace(" ", "_");
-      foodPartNode.append("<option value=\"" + foodPartValue + "\"><a id=\"" + foodPartValue +
+      $foodPartNode.append("<option value=\"" + foodPartValue + "\"><a id=\"" + foodPartValue +
                           "\" class=\"foodPart foodPart-show\" href=\"#\">" + foodParts[i] + "</option>");
     }
   }
@@ -920,6 +920,119 @@ exports.updateUiForFollowTime = function() {
 
 };
 
+exports.updateUiForCommunity = function() {
+
+  var community = urls.getCommunityFromUrl();
+  var $chimps = $("#table-container");
+
+  if (!community || community === '') {
+    console.log('No community has been specified!');
+    return;
+  }
+
+  initializeChimpTable($chimps);
+
+  var chimpListCSV = $.ajax({type: "GET", url: "config/chimpList.csv", async:false}).responseText;
+
+  // Fetch chimps in this community
+  Papa.parse(chimpListCSV, {
+    header: true,
+    complete: function(results) {
+      var chimpData = results["data"];
+      var femaleChimps = [];
+      var maleChimps = [];
+      var tableData = "";
+
+      // Collect all chimps and organize them into gender lists
+      for (var i = 0; i < chimpData.length; i++) {
+        var currChimp = chimpData[i]["Chimp"];
+        var currCommunity = chimpData[i]["Community"];
+        var currGender = chimpData[i]["Sex"];
+        if (currChimp && currCommunity === community) {
+          if (currGender === "F") {
+            femaleChimps.push(currChimp);
+          } else if (currGender === "M") {
+            maleChimps.push(currChimp);
+          }
+        }
+      }
+
+      $chimps.empty();
+      tableData = initializeChimpTable();
+
+      tableData += addGenderListToTable(femaleChimps, true);
+      tableData += addGenderListToTable(maleChimps, false);
+
+      tableData += "</table>";
+
+      $chimps.append(tableData);
+    },
+    error: function() {
+      alert("Error reading chimp list");
+    }
+  });
+
+};
+
+function addGenderListToTable(genderList, isFemale) {
+  var tableData = "";
+  var lastRowIndex = genderList.length - (genderList.length % 2 === 0 ? 2 : 1);
+
+  for (var i = 0; i < genderList.length; i++) {
+    var isLeftColumn = (i % 2 === 0);
+
+    // The last row in the female portion gets a css class to delineate the border
+    if (isFemale && (i === lastRowIndex)) {
+      tableData += "<tr class=\"male-female-divider\">";
+    } else if (isLeftColumn) {
+      tableData +="<tr>";
+    }
+
+    tableData += generateChimpTableData(genderList[i], isFemale);
+
+    // If there are an odd number of chimps, end the row with only one column
+    if (!isLeftColumn || (i === lastRowIndex && i % 2 !== 0)) {
+      tableData += "</tr>";
+    } else {
+      tableData += "<td></td>";
+    }
+
+  }
+
+  return tableData;
+}
+
+function initializeChimpTable() {
+  return ("<table id=\"observation-table\" style=\"font-size: 10.5px;\">" +
+          "<tr>" +
+          "<td></td>" +
+          "<td></td>" +
+          "<td>C</td>" +
+          "<td>U</td>" +
+          "<td>5m</td>" +
+          "<td>JK</td>" +
+          "<td style=\"padding-right: 1.3em;\"></td>" +
+          "<td></td>" +
+          "<td></td>" +
+          "<td>C</td>" +
+          "<td>U</td>" +
+          "<td>5m</td>" +
+          "<td>JK</td>" +
+          "</tr>");
+}
+
+function generateChimpTableData(chimp, isFemale) {
+  var chimpVal = chimp.trim().toLowerCase().replace(" ", "_");
+
+  return ("<td><button id=\"" + chimpVal + "\" class=\"" +
+          (isFemale ? "female" : "male") + "-chimp chimp\">" + chimp + "</button></td>" +
+          "<td class=\"time_point\" id=\"" + chimpVal + "_time\">" +
+          "<img src=\"./img/time_empty.png\" id=\"" + chimpVal + "_time_img\"/></td>" +
+          "<td><button class=\"certainty\" id=\"" + chimpVal + "_cer\">✓</button></td>" +
+          "<td><button class=\"sexual_state\" id=\"" + chimpVal + "_sexState\">U</button></td>" +
+          "<td><button class=\"5-meter\" id=\"" + chimpVal + "_five\">&#x2717;</button></td>" +
+          "<td><button class=\"closeness\" id=\"" + chimpVal + "_close\">&#x2717;</button></td>");
+}
 
 /**
  * Update the UI for the "previous" button.
@@ -1463,7 +1576,7 @@ exports.initializeSpeciesListeners = function(control) {
 
 
 /**
- * Add the listeners to the elements relating to each chimp. 
+ * Add the listeners to the elements relating to each chimp.
  */
 exports.initializeChimpListeners = function() {
 
@@ -1493,7 +1606,7 @@ exports.initializeChimpListeners = function() {
     exports.showEstrusToEdit(true, chimp);
   });
 
-  
+
   $('.closeness').on('click', function() {
     // mark this chimp as selected
     var chimp = exports.getChimpFromElement($(this));
@@ -1893,7 +2006,7 @@ exports.getFoodFromUi = function() {
       food,
       foodPart
   );
-  
+
   return result;
 };
 
@@ -1924,7 +2037,7 @@ exports.getSpeciesFromUi = function() {
       species,
       number
   );
-  
+
   return result;
 };
 
@@ -1969,7 +2082,7 @@ exports.updateVisiblityForChimp = function(chimp) {
 
 /**
  * Updates the UI after loading a page.
- * 
+ *
  * This used to be called 'display', in case you're looking for that method.
  */
 exports.initializeUi = function(control) {
@@ -1978,6 +2091,8 @@ exports.initializeUi = function(control) {
 
   $('.food-container').addClass('nodisplay');
   $('.species-container').addClass('nodisplay');
+
+  exports.updateUiForCommunity();
 
   // Hide the editing UI to start with.
   //$('#time').addClass('novisibility');
@@ -2009,7 +2124,7 @@ exports.initializeUi = function(control) {
       urls.getFocalChimpIdFromUrl()
   );
 
-  if (existingData.getCount() === 0) {
+  if (!existingData || existingData.getCount() === 0) {
     exports.handleFirstTime(
         control,
         urls.getFollowDateFromUrl(),

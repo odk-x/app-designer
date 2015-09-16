@@ -150,6 +150,10 @@ exports.convertTableDataToFollowIntervals = function(data) {
 
   var cols = tables.chimpObservation.columns;
 
+  if (!data) {
+    return result;
+  }
+
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);
     var beginTime = data.getData(i, cols.followStartTime);
@@ -167,6 +171,10 @@ exports.convertTableDataToFollowIntervals = function(data) {
 exports.convertTableDataToSpecies = function(data) {
   var result = [];
   var cols = tables.species.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);
@@ -197,6 +205,10 @@ exports.convertTableDataToSpecies = function(data) {
 exports.convertTableDataToFood = function(data) {
   var result = [];
   var cols = tables.food.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var rowId = data.getRowId(i);
@@ -234,6 +246,10 @@ exports.convertTableDataToChimps = function(data) {
   var result = [];
 
   var cols = tables.chimpObservation.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
 
@@ -278,6 +294,10 @@ exports.convertTableDataToFollows = function convertTableDataToFollows(data) {
   var result = [];
 
   var cols = tables.follow.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);

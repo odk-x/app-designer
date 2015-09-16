@@ -151,6 +151,10 @@ exports.convertTableDataToFollowIntervals = function(data) {
 
   var cols = tables.chimpObservation.columns;
 
+  if (!data) {
+    return result;
+  }
+
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);
     var beginTime = data.getData(i, cols.followStartTime);
@@ -168,6 +172,10 @@ exports.convertTableDataToFollowIntervals = function(data) {
 exports.convertTableDataToSpecies = function(data) {
   var result = [];
   var cols = tables.species.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);
@@ -198,6 +206,10 @@ exports.convertTableDataToSpecies = function(data) {
 exports.convertTableDataToFood = function(data) {
   var result = [];
   var cols = tables.food.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var rowId = data.getRowId(i);
@@ -235,6 +247,10 @@ exports.convertTableDataToChimps = function(data) {
   var result = [];
 
   var cols = tables.chimpObservation.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
 
@@ -279,6 +295,10 @@ exports.convertTableDataToFollows = function convertTableDataToFollows(data) {
   var result = [];
 
   var cols = tables.follow.columns;
+
+  if (!data) {
+    return result;
+  }
 
   for (var i = 0; i < data.getCount(); i++) {
     var date = data.getData(i, cols.date);
@@ -1081,7 +1101,9 @@ exports.queryParameters = {
   timeOfPresence: 'time_presence',
   speciesName: 'name_species',
   numOfSpecies: 'num_of_species',
-  isReview: 'review'
+  isReview: 'review',
+
+  community: 'community',
 };
 
 
@@ -1110,7 +1132,7 @@ exports.getQueryParameter = function(key) {
   }
 };
 
-exports.createParamsForFollow = function(date, time, focalChimp) {
+exports.createParamsForFollow = function(date, time, focalChimp, community) {
 
   var result =
     '?' +
@@ -1124,7 +1146,11 @@ exports.createParamsForFollow = function(date, time, focalChimp) {
     '&' +
     exports.queryParameters.focalChimp +
     '=' +
-    encodeURIComponent(focalChimp);
+    encodeURIComponent(focalChimp) +
+    '&' +
+    exports.queryParameters.community +
+    '=' +
+    encodeURIComponent(community);
   return result;
 
 };
@@ -1168,7 +1194,7 @@ exports.createParamsForFood = function(
     encodeURIComponent(foodPart);
 
   return result;
-  
+
 };
 
 exports.createParamsForSpecies = function(
@@ -1222,6 +1248,12 @@ exports.getFocalChimpIdFromUrl = function() {
   return result;
 
 };
+
+exports.getCommunityFromUrl = function() {
+
+  var result = exports.getQueryParameter(exports.queryParameters.community);
+  return result;
+}
 
 },{}],6:[function(require,module,exports){
 'use strict';

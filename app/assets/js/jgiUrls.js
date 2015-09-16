@@ -19,7 +19,9 @@ exports.queryParameters = {
   timeOfPresence: 'time_presence',
   speciesName: 'name_species',
   numOfSpecies: 'num_of_species',
-  isReview: 'review'
+  isReview: 'review',
+
+  community: 'community',
 };
 
 
@@ -48,7 +50,7 @@ exports.getQueryParameter = function(key) {
   }
 };
 
-exports.createParamsForFollow = function(date, time, focalChimp) {
+exports.createParamsForFollow = function(date, time, focalChimp, community) {
 
   var result =
     '?' +
@@ -62,7 +64,11 @@ exports.createParamsForFollow = function(date, time, focalChimp) {
     '&' +
     exports.queryParameters.focalChimp +
     '=' +
-    encodeURIComponent(focalChimp);
+    encodeURIComponent(focalChimp) +
+    '&' +
+    exports.queryParameters.community +
+    '=' +
+    encodeURIComponent(community);
   return result;
 
 };
@@ -106,7 +112,7 @@ exports.createParamsForFood = function(
     encodeURIComponent(foodPart);
 
   return result;
-  
+
 };
 
 exports.createParamsForSpecies = function(
@@ -160,3 +166,9 @@ exports.getFocalChimpIdFromUrl = function() {
   return result;
 
 };
+
+exports.getCommunityFromUrl = function() {
+
+  var result = exports.getQueryParameter(exports.queryParameters.community);
+  return result;
+}
