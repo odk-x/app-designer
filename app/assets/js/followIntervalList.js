@@ -27,9 +27,10 @@ exports.initializeUi = function initializeUi(control) {
     var date = urls.getFollowDateFromUrl();
     var focalId = urls.getFocalChimpIdFromUrl();
     var beginTime = containingDiv.attr('time');
+    var communityId = urls.getCommunityFromUrl();
 
     // create url and launch list
-    var queryParams = urls.createParamsForFollow(date, beginTime, focalId);
+    var queryParams = urls.createParamsForFollow(date, beginTime, focalId, communityId);
     console.log(
       ' jgiLogging: launchFollowScreenFromList with params: ' +
       queryParams

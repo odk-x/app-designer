@@ -10825,6 +10825,7 @@ exports.initializeListeners = function(control) {
     util.sortFollows(follows);
 
     var mostRecentFollow = follows[follows.length - 1];
+    var communityId = mostRecentFollow.communityId;
 
     var intervals = db.getFollowIntervalsForFollow(
         control,
@@ -10843,7 +10844,8 @@ exports.initializeListeners = function(control) {
     var queryParams = urls.createParamsForFollow(
         lastInterval.date,
         lastInterval.beginTime,
-        lastInterval.focalId
+        lastInterval.focalId,
+        communityId
     );
 
     control.launchHTML('assets/followScreen.html' + queryParams);

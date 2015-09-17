@@ -27,9 +27,10 @@ exports.initializeUi = function initializeUi(control) {
     var date = containingDiv.attr('date');
     var focalId = containingDiv.attr('focal-id');
     var beginTime = containingDiv.attr('begin-time');
+    var communityId = containingDiv.attr('community-id');
 
     // create url and launch list
-    var queryParams = urls.createParamsForFollow(date, beginTime, focalId);
+    var queryParams = urls.createParamsForFollow(date, beginTime, focalId, communityId);
     var isReviewSet = urls.isReviewMode();
     console.log(
       ' jgiLogging: showIntervals with params: ' +
@@ -56,7 +57,7 @@ exports.initializeUi = function initializeUi(control) {
   exports.displayFollows(control);
 
 };
-            
+
 
 /**
  * Populate the list of Follows.
@@ -69,6 +70,7 @@ exports.displayFollows = function displayFollows(control) {
     item.attr('date', follow.date);
     item.attr('focal-id', follow.focalId);
     item.attr('begin-time', follow.beginTime);
+    item.attr('community-id', follow.communityId);
     item.addClass('item_space');
     item.text(follow.date + ' ' + follow.beginTime);
 

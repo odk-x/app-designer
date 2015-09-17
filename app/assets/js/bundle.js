@@ -11847,6 +11847,7 @@ exports.initializePreviousButton = function(control) {
   var date = urls.getFollowDateFromUrl();
   var currentTime = urls.getFollowTimeFromUrl();
   var previousTime = util.decrementTime(currentTime);
+  var communityId = urls.getCommunityFromUrl();
 
   var $prevButton = $('#previous-button');
 
@@ -11873,7 +11874,8 @@ exports.initializePreviousButton = function(control) {
     var queryString = urls.createParamsForFollow(
       date,
       previousTime,
-      focalId
+      focalId,
+      communityId
     );
     var url = control.getFileAsUrl('assets/followScreen.html' + queryString);
 
@@ -12483,7 +12485,8 @@ exports.initializeListeners = function(control) {
     var queryString = urls.createParamsForFollow(
       urls.getFollowDateFromUrl(),
       nextTime,
-      urls.getFocalChimpIdFromUrl()
+      urls.getFocalChimpIdFromUrl(),
+      urls.getCommunityFromUrl()
     );
     var url = control.getFileAsUrl('assets/followScreen.html' + queryString);
 
