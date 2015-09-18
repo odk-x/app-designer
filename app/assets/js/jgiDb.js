@@ -76,12 +76,8 @@ exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
     date,
     focalId
 ) {
-  // We don't have a straight forward way of getting FollowInterval objects out
-  // of the database, as we've had to create the notion for our own purposes.
-  // Since a FollowInterval is a subset of the information in a Chimp, we're
-  // going to just query for a Chimp known to be present that day (which thus
-  // might break as we try to generalize this function), and then pull the
-  // necessary data out of the Chimp.
+  // The query requires a paired chimp. Currently, there's always a row that
+  // pairs a chimp with itself, so we will depend on that row for this query.
   var table = tables.chimpObservation;
   var cols = table.columns;
 
