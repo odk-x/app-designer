@@ -45,7 +45,6 @@ exports.initializeUi = function initializeUi(control) {
   exports.displayFollowIntervals(control);
 
 };
-            
 
 /**
  * Populate the list of Follows.

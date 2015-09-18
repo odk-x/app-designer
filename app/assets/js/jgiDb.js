@@ -85,8 +85,6 @@ exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
   var table = tables.chimpObservation;
   var cols = table.columns;
 
-  var knownChimpId = 'sam';
-
   var whereClause = exports.createWhereClause(
     [
       cols.date,
@@ -95,7 +93,7 @@ exports.getFollowIntervalsForFollow = function getFollowIntervalsForFollow(
     ]
   );
 
-  var selectionArgs = [date, focalId, knownChimpId];
+  var selectionArgs = [date, focalId, focalId];
 
   var tableData = control.query(
       table.tableId,
