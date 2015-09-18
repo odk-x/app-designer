@@ -14,6 +14,7 @@ var logging = require('./jgiLogging');
 
 var FLAG_PLACE_HOLDER_TIME = 's:dk';
 var FOOD_LIST_COOKIE = "JGIRecentFoodsList";
+var RECENT_FOODS_MAX = 10;
 
 
 /**
@@ -218,8 +219,8 @@ function addToRecentFoods(newFood) {
   // Prepend the food to the front of the list
   foodList.unshift(newFood);
 
-  if (foodList.length > 5) {
-    foodList.splice(5, foodList.length);
+  if (foodList.length > RECENT_FOODS_MAX) {
+    foodList.splice(RECENT_FOODS_MAX, foodList.length);
   }
 
   // Repackage as a string
