@@ -1854,6 +1854,8 @@ promptTypes.media = promptTypes.base.extend({
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'capture', that.captureAction, JSON.stringify({ extras: { 
                 appName: opendatakit.getPlatformInfo().appName, 
+				tableId: opendatakit.getCurrentTableId(),
+				instanceId: opendatakit.getCurrentInstanceId(),
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
         ctxt.log('D','media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
@@ -1873,6 +1875,8 @@ promptTypes.media = promptTypes.base.extend({
         var outcome = shim.doAction( opendatakit.getRefId(), that.getPromptPath(), 
             'choose', that.chooseAction,  JSON.stringify({ extras: { 
                 appName: opendatakit.getPlatformInfo().appName, 
+				tableId: opendatakit.getCurrentTableId(),
+				instanceId: opendatakit.getCurrentInstanceId(),
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
         ctxt.log('D','media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
@@ -1883,6 +1887,7 @@ promptTypes.media = promptTypes.base.extend({
             ctxt.success();
         }
     },
+	// TODO: support deletion of the media files??
     getCallback: function(promptPath, byinternalPromptContext, byaction) {
         var that = this;
         if ( that.getPromptPath() != promptPath ) {
