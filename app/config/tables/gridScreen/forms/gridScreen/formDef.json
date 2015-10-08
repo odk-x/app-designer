@@ -5,7 +5,7 @@
         "clause": "begin screen",
         "screen": {
           "screen_type": "custom",
-          "templatePath": "../tables/gridScreen/forms/gridScreen/comparison_screen.handlebars"
+          "templatePath": "../config/tables/gridScreen/forms/gridScreen/comparison_screen.handlebars"
         },
         "_row_num": 2
       },
@@ -262,11 +262,11 @@
       },
       {
         "type": "select_multiple",
-        "values_list": "stores",
         "name": "selected_store",
         "display": {
           "text": "Which store will you visit?"
         },
+        "values_list": "stores",
         "_row_num": 35
       },
       {
@@ -1529,11 +1529,11 @@
           },
           {
             "type": "select_multiple",
-            "values_list": "stores",
             "name": "selected_store",
             "display": {
               "text": "Which store will you visit?"
             },
+            "values_list": "stores",
             "_row_num": 35,
             "__rowNum__": 34,
             "_token_type": "prompt",
@@ -1570,7 +1570,7 @@
             "clause": "begin screen",
             "screen": {
               "screen_type": "custom",
-              "templatePath": "../tables/gridScreen/forms/gridScreen/comparison_screen.handlebars"
+              "templatePath": "../config/tables/gridScreen/forms/gridScreen/comparison_screen.handlebars"
             },
             "_row_num": 2,
             "__rowNum__": 1,

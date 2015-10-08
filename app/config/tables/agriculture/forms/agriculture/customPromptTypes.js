@@ -10,7 +10,7 @@ var async_assign = promptTypes.base.extend({
     type: "async_assign",
     debug: false,
     valid: true,
-    templatePath: '../tables/agriculture/forms/agriculture/templates/async_assign.handlebars',
+    templatePath: '../config/tables/agriculture/forms/agriculture/templates/async_assign.handlebars',
     _cachedSelection: null,
     getLinkedTableId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
@@ -48,9 +48,9 @@ var async_assign = promptTypes.base.extend({
     },
     getFormPath: function() {
         if ( this.getLinkedFormId() === "framework" ) {
-            return '../assets/framework/forms/framework/'; 
+            return '../config/assets/framework/forms/framework/'; 
         } else {
-            return '../tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
+            return '../config/tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
         }
     },
     convertSelection: function(linkedMdl) {
