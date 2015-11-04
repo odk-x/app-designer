@@ -1,52 +1,52 @@
 _partition,_aspect,_key,_type,_value
 Column,Date_and_Time,displayChoicesList,object,[]
 Column,Date_and_Time,displayFormat,string,""
-Column,Date_and_Time,displayName,string,"""Date and Time"""
+Column,Date_and_Time,displayName,object,"""Date and Time"""
 Column,Date_and_Time,displayVisible,boolean,TRUE
 Column,Date_and_Time,joins,object,""
 Column,Description,displayChoicesList,object,[]
 Column,Description,displayFormat,string,""
-Column,Description,displayName,string,"""Description"""
+Column,Description,displayName,object,"""Description"""
 Column,Description,displayVisible,boolean,TRUE
 Column,Description,joins,object,""
 Column,Image,displayChoicesList,object,[]
 Column,Image,displayFormat,string,""
-Column,Image,displayName,string,"""Image"""
+Column,Image,displayName,object,"""Image"""
 Column,Image,displayVisible,boolean,TRUE
 Column,Image,joins,object,""
 Column,Image_contentType,displayChoicesList,string,[]
 Column,Image_contentType,displayFormat,string,""
-Column,Image_contentType,displayName,string,"""Image contentType"""
+Column,Image_contentType,displayName,object,"""Image contentType"""
 Column,Image_contentType,displayVisible,boolean,FALSE
 Column,Image_contentType,joins,string,[]
 Column,Image_uriFragment,displayChoicesList,string,[]
 Column,Image_uriFragment,displayFormat,string,""
-Column,Image_uriFragment,displayName,string,"""Image uriFragment"""
+Column,Image_uriFragment,displayName,object,"""Image uriFragment"""
 Column,Image_uriFragment,displayVisible,boolean,FALSE
 Column,Image_uriFragment,joins,string,[]
 Column,Location,displayChoicesList,string,[]
 Column,Location,displayFormat,string,""
-Column,Location,displayName,string,"""Location"""
+Column,Location,displayName,object,"""Location"""
 Column,Location,displayVisible,boolean,FALSE
 Column,Location,joins,string,[]
 Column,Location_accuracy,displayChoicesList,object,[]
 Column,Location_accuracy,displayFormat,string,""
-Column,Location_accuracy,displayName,string,"""Location Accuracy"""
+Column,Location_accuracy,displayName,object,"""Location Accuracy"""
 Column,Location_accuracy,displayVisible,boolean,FALSE
 Column,Location_accuracy,joins,object,""
 Column,Location_altitude,displayChoicesList,object,[]
 Column,Location_altitude,displayFormat,string,""
-Column,Location_altitude,displayName,string,"""Location Altitude"""
+Column,Location_altitude,displayName,object,"""Location Altitude"""
 Column,Location_altitude,displayVisible,boolean,FALSE
 Column,Location_altitude,joins,object,""
 Column,Location_latitude,displayChoicesList,object,[]
 Column,Location_latitude,displayFormat,string,""
-Column,Location_latitude,displayName,string,"""Location Latitude"""
+Column,Location_latitude,displayName,object,"""Location Latitude"""
 Column,Location_latitude,displayVisible,boolean,TRUE
 Column,Location_latitude,joins,object,""
 Column,Location_longitude,displayChoicesList,object,[]
 Column,Location_longitude,displayFormat,string,""
-Column,Location_longitude,displayName,string,"""Location Longitude"""
+Column,Location_longitude,displayName,object,"""Location Longitude"""
 Column,Location_longitude,displayVisible,boolean,TRUE
 Column,Location_longitude,joins,object,""
 DetailDisplayActivity,default,filename,string,config/tables/geotagger/html/geo_detail.html

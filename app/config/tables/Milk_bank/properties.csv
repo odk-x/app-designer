@@ -1,28 +1,28 @@
 _partition,_aspect,_key,_type,_value
 Column,Procedure_id,displayChoicesList,string,[]
 Column,Procedure_id,displayFormat,string,""
-Column,Procedure_id,displayName,string,"""Procedure_id"""
+Column,Procedure_id,displayName,object,"""Procedure_id"""
 Column,Procedure_id,displayVisible,boolean,TRUE
 Column,Procedure_id,joins,string,""
 Column,Source,displayChoicesList,string,[]
 Column,Source,displayFormat,string,""
-Column,Source,displayName,string,"""Source"""
+Column,Source,displayName,object,"""Source"""
 Column,Source,displayVisible,boolean,TRUE
 Column,Source,joins,string,""
 Column,Temperature,displayChoicesList,string,[]
 Column,Temperature,displayFormat,string,""
-Column,Temperature,displayName,string,"""Temperature"""
+Column,Temperature,displayName,object,"""Temperature"""
 Column,Temperature,displayVisible,boolean,TRUE
 Column,Temperature,joins,string,""
 Column,Time,displayChoicesList,string,[]
 Column,Time,displayFormat,string,""
-Column,Time,displayName,string,"""Time"""
+Column,Time,displayName,object,"""Time"""
 Column,Time,displayVisible,boolean,TRUE
 Column,Time,joins,string,""
 GraphDisplayActivity.views,boxplot,graphtype,string,Box Plot
 Table,default,colOrder,string,"[""Source"",""Procedure_id"",""Time"",""Temperature""]"
 Table,default,defaultViewType,string,Graph
-Table,default,displayName,string,"""Milk bank"""
+Table,default,displayName,object,"""Milk bank"""
 Table,default,groupByCols,string,[]
 Table,default,indexCol,string,""
 Table,default,sortCol,string,""
