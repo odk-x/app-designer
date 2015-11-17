@@ -1,39 +1,53 @@
-/* global $, control, data */
+/* global $, control */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/geotagger_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            window.data.setBackingObject(dataObj);
-        }
-    });
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/geotagger_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
+
+var geoListThumbResultSet = {};
+
+function cbSuccess(result) {
+    geoListThumbResultSet = result;
+
+    displayGroup();
+
+}
+
+function cbFailure(error) {
+
+    console.log('geo_list_thumbnail: cbFailure failed with error: ' + error);
 }
 
 function setup() {
-    displayGroup();
+    datarsp.getViewData(cbSuccess, cbFailure);
 }
         
 function handleClick(index) {
-    var tableId = data.getTableId();
-    var rowId = data.getRowId(index);
+    var tableId = geoListThumbResultSet.getTableId();
+    var rowId = geoListThumbResultSet.getRowId(index);
     control.openDetailView(tableId, rowId, null);
 }
 
 function displayGroup() {
-    for (var i = 0; i < data.getCount(); i++) {
+    for (var i = 0; i < geoListThumbResultSet.getCount(); i++) {
         /*    Creating the item space    */
         var itemHeading = $('<div>');
         var headingText = $('<p>');
-        headingText.text(data.getData(i, 'Description'));
+        headingText.text(geoListThumbResultSet.getData(i, 'Description'));
         itemHeading.attr('class', 'heading');
         
-        var uriRelative = data.getData(i, 'Image.uriFragment');
+        var uriRelative = geoListThumbResultSet.getData(i, 'Image.uriFragment');
         var src = '';
-        if (uriRelative !== null && uriRelative !== "") {
-            var uriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(i), uriRelative);
+        if (uriRelative !== null && uriRelative !== '') {
+            var uriAbsolute = common.getRowFileAsUrl(geoListThumbResultSet.getTableId(), geoListThumbResultSet.getRowId(i), uriRelative);
             src = uriAbsolute;
         }
 
@@ -52,8 +66,8 @@ function displayGroup() {
         detailContainer.attr('id', 'item_' + i);
         $(detailContainer).hide();
                   
-        var lat = data.getData(i,'Location_latitude');
-        var lng = data.getData(i,'Location_longitude');
+        var lat = geoListThumbResultSet.getData(i,'Location_latitude');
+        var lng = geoListThumbResultSet.getData(i,'Location_longitude');
 
         var field1 = $('<p>');
         field1.text('Latitude: ' + lat);

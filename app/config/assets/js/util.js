@@ -1,4 +1,4 @@
-/* global control */
+/* global */
 /**
  * Various functions that we might need across screens.
  */
@@ -35,25 +35,7 @@ util.getQueryParameter = function(key) {
     }
 };
 
-/**
- * Get all the timepoints that exist for a given date and focal chimp.
- * These will create a key that defines a specific point during a follow.
- *
- * Returns an array of times that have been previously recorded.
- */
-util.getExistingTimesForDate = function(date, focalChimpId) {
-    // So, we're just going to query for all the rows in follow_arrival
-    // matching this date.
-    
-    // Our where clause is just going to be for this date.
-    var whereClause =
-        'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ?';
-    var selectionArgs = [date, focalChimpId];
-    
-    var tableData = control.query(
-            'follow_arrival',
-            whereClause,
-            selectionArgs);
+util.formatExistingTimes = function(tableData) {
 
     var times = [];
     for (var i = 0; i < tableData.getCount(); i++) {
@@ -67,54 +49,98 @@ util.getExistingTimesForDate = function(date, focalChimpId) {
     return times;
 
 };
+/**
+ * Get all the timepoints that exist for a given date and focal chimp.
+ * These will create a key that defines a specific point during a follow.
+ *
+ * Returns an array of times that have been previously recorded.
+ */
+util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure) {
+    // So, we're just going to query for all the rows in follow_arrival
+    // matching this date.
+    
+    // Our where clause is just going to be for this date.
+    var whereClause =
+        'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ?';
+    var selectionArgs = [date, focalChimpId];
+    
+//     var tableData = control.query(
+//             'follow_arrival',
+//             whereClause,
+//             selectionArgs);
+
+    window.datarsp.query('follow_arrival', whereClause, selectionArgs, 
+        null, null, null, null, true, cbSuccess, cbFailure, null, false);
+
+//     var times = [];
+//     for (var i = 0; i < tableData.getCount(); i++) {
+//         var dataPoint = tableData.getData(i, 'FA_time_start');
+//         // now see if we already have this value, in which case we won't add it
+//         if (times.indexOf(dataPoint) < 0) {
+//             times.push(dataPoint);
+//         }
+//     }
+// 
+//     return times;
+
+};
 
 /**
  * Get a query for all the data at the given date and time for the specified
  * focal chimp. Together this specifies a unique time point in a follow.
  */
-util.getTableDataForTimePoint = function(date, time, focalChimpId) {
+util.getTableDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
     
     var whereClause =
         'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ? AND FA_time_start = ?';
     var selectionArgs = [date, focalChimpId, time];
 
-    var result = control.query(
-            'follow_arrival',
-            whereClause,
-            selectionArgs);
+    window.datarsp.query('follow_arrival', whereClause, selectionArgs, 
+        null, null, null, null, true, cbSuccess, cbFailure, null, false);
 
-    return result;
+//     var result = control.query(
+//             'follow_arrival',
+//             whereClause,
+//             selectionArgs);
+// 
+//     return result;
 };
 
-util.getFoodDataForTimePoint = function(date, time, focalChimpId) {
+util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
 
     var whereClause =
         'FB_FOL_date = ? AND FB_FOL_B_AnimID = ? AND FB_begin_feed_time = ?';
 
     var selectionArgs = [date, focalChimpId, time];
 
-    var result = control.query(
-            'food_bout',
-            whereClause,
-            selectionArgs);
+    window.datarsp.query('food_bout', whereClause, selectionArgs, 
+        null, null, null, null, true, cbSuccess, cbFailure, null, false);
 
-    return result;
+//     var result = control.query(
+//             'food_bout',
+//             whereClause,
+//             selectionArgs);
+// 
+//     return result;
 
 };
 
-util.getSpeciesDataForTimePoint = function(date, time, focalChimpId) {
+util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
 
     var whereClause =
         'OS_FOL_date = ? AND OS_FOL_B_focal_AnimID = ? AND OS_time_begin = ?';
 
     var selectionArgs = [date, focalChimpId, time];
 
-    var result = control.query(
-            'other_species',
-            whereClause,
-            selectionArgs);
+    window.datarsp.query('other_species', whereClause, selectionArgs, 
+        null, null, null, null, true, cbSuccess, cbFailure, null, false);
 
-    return result;
+//     var result = control.query(
+//             'other_species',
+//             whereClause,
+//             selectionArgs);
+// 
+//     return result;
 
 };
 
@@ -141,7 +167,7 @@ util.getKeysToAppendToURL = function(date, time, focalChimp) {
 
 util.genUUID = function() {
     // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
-    var id = "uuid:" + 
+    var id = 'uuid:' + 
     'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random()*16|0, v = (c === 'x') ? r : (r&0x3|0x8);
         return v.toString(16);

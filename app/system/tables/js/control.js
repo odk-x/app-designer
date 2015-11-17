@@ -39,6 +39,30 @@ function computeBaseUri() {
 
 }
 
+function getPlatformInfo() {
+    // 9000 b/c that's what grunt is running on. Perhaps should configure
+    // this
+    var platformInfo = {
+        container: 'Chrome',
+        version: '31.0.1650.63',
+        appName: 'Tables-test',
+        baseUri: baseUri,
+        logLevel: 'D'
+    };
+    // Because the phone returns a String, we too are going to return a
+    // string here.
+    var result = JSON.stringify(platformInfo);
+    return result;
+};
+
+function getFileAsUrl(relativePath) {
+    // strip off backslashes
+    var cleanedStr = relativePath.replace(/\\/g, '');
+    var baseUri = JSON.parse(getPlatformInfo()).baseUri;
+    var result = baseUri + cleanedStr;
+    return result;
+}
+
 
 /**
  * Return the location of the currently executing file.
@@ -152,90 +176,91 @@ if (!window.control) {
     // The module object.
     var pub = {};
 
-    pub.addRow = function(tableId, stringified) {
-        var parsed = JSON.parse(stringified);
-        console.log('parsed: ' + parsed);
-
-        console.log(
-                'trying to add to table: ' +
-                tableId +
-                ' data: ' +
-                stringified);
-
-        return true;
-    };
-
-    pub.updateRow = function(tableId, stringified, rowId)  {
-        var parsed = JSON.parse(stringified);
-        console.log('parsed for update: ' + parsed);
-
-        console.log(
-                'trying to update rowId: ' + rowId +
-                ' in table id: ' + tableId +
-                stringified);
-
-        return true;
-    };
-
-    // Compute the base uri.
-    var baseUri = computeBaseUri();
-
-    pub.getPlatformInfo = function() {
-        // 9000 b/c that's what grunt is running on. Perhaps should configure
-        // this
-        var platformInfo = {
-            container: 'Chrome',
-            version: '31.0.1650.63',
-            appName: 'Tables-test',
-            baseUri: baseUri,
-            logLevel: 'D'
-        };
-        // Because the phone returns a String, we too are going to return a
-        // string here.
-        var result = JSON.stringify(platformInfo);
-        return result;
-    };
-
-    pub.getFileAsUrl = function(relativePath) {
-        // strip off backslashes
-        var cleanedStr = relativePath.replace(/\\/g, '');
-        var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
-        var result = baseUri + cleanedStr;
-        return result;
-    }
-
-    pub.getRowFileAsUrl = function(tableId, rowId, relativePath) {
-        if ( tableId === null || tableId === undefined ) return null;
-        if ( rowId === null || rowId === undefined ) return null;
-        if ( relativePath === null || relativePath === undefined ) return null;
-
-        if ( relativePath.charAt(0) === '/' ) {
-            relativePath = relativePath.substring(1);
-        }
-        var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
-
-        var result = null;
-        
-        if ( pub._forbiddenInstanceDirCharsPattern === null ||
-             pub._forbiddenInstanceDirCharsPattern === undefined ) {
-            // defer loading this until we try to use it
-            importSynchronous('system/libs/XRegExp-All-3.0.0-pre-2014-12-24.js');
-            pub._forbiddenInstanceDirCharsPattern = window.XRegExp('(\\p{P}|\\p{Z})', 'A');
-        }
-
-        var iDirName = XRegExp.replace(rowId, 
-                        pub._forbiddenInstanceDirCharsPattern, '_', 'all');
-
-        var prefix = 'data/tables/' + tableId + '/instances/' + iDirName + '/';
-        if ( relativePath.length > prefix.length && relativePath.substring(0,prefix.length) === prefix ) {
-            console.error("getRowFileAsUrl - detected filepath in rowpath data");
-            result = baseUri + relativePath;
-        } else {
-            result = baseUri + prefix + relativePath;
-        }
-        
-        return result;
-    };
+// CAL: Can delete these once I know that everything is working
+//     pub.addRow = function(tableId, stringified) {
+//         var parsed = JSON.parse(stringified);
+//         console.log('parsed: ' + parsed);
+// 
+//         console.log(
+//                 'trying to add to table: ' +
+//                 tableId +
+//                 ' data: ' +
+//                 stringified);
+// 
+//         return true;
+//     };
+// 
+//     pub.updateRow = function(tableId, stringified, rowId)  {
+//         var parsed = JSON.parse(stringified);
+//         console.log('parsed for update: ' + parsed);
+// 
+//         console.log(
+//                 'trying to update rowId: ' + rowId +
+//                 ' in table id: ' + tableId +
+//                 stringified);
+// 
+//         return true;
+//     };
+// 
+//     // Compute the base uri.
+//     var baseUri = computeBaseUri();
+// 
+//     pub.getPlatformInfo = function() {
+//         // 9000 b/c that's what grunt is running on. Perhaps should configure
+//         // this
+//         var platformInfo = {
+//             container: 'Chrome',
+//             version: '31.0.1650.63',
+//             appName: 'Tables-test',
+//             baseUri: baseUri,
+//             logLevel: 'D'
+//         };
+//         // Because the phone returns a String, we too are going to return a
+//         // string here.
+//         var result = JSON.stringify(platformInfo);
+//         return result;
+//     };
+// 
+//     pub.getFileAsUrl = function(relativePath) {
+//         // strip off backslashes
+//         var cleanedStr = relativePath.replace(/\\/g, '');
+//         var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
+//         var result = baseUri + cleanedStr;
+//         return result;
+//     }
+// 
+//     pub.getRowFileAsUrl = function(tableId, rowId, relativePath) {
+//         if ( tableId === null || tableId === undefined ) return null;
+//         if ( rowId === null || rowId === undefined ) return null;
+//         if ( relativePath === null || relativePath === undefined ) return null;
+// 
+//         if ( relativePath.charAt(0) === '/' ) {
+//             relativePath = relativePath.substring(1);
+//         }
+//         var baseUri = JSON.parse(pub.getPlatformInfo()).baseUri;
+// 
+//         var result = null;
+//         
+//         if ( pub._forbiddenInstanceDirCharsPattern === null ||
+//              pub._forbiddenInstanceDirCharsPattern === undefined ) {
+//             // defer loading this until we try to use it
+//             importSynchronous('system/libs/XRegExp-All-3.0.0-pre-2014-12-24.js');
+//             pub._forbiddenInstanceDirCharsPattern = window.XRegExp('(\\p{P}|\\p{Z})', 'A');
+//         }
+// 
+//         var iDirName = XRegExp.replace(rowId, 
+//                         pub._forbiddenInstanceDirCharsPattern, '_', 'all');
+// 
+//         var prefix = 'data/tables/' + tableId + '/instances/' + iDirName + '/';
+//         if ( relativePath.length > prefix.length && relativePath.substring(0,prefix.length) === prefix ) {
+//             console.error("getRowFileAsUrl - detected filepath in rowpath data");
+//             result = baseUri + relativePath;
+//         } else {
+//             result = baseUri + prefix + relativePath;
+//         }
+//         
+//         return result;
+//     };
     
     /**
      * This is the only function that is exposed to the caller that is NOT a 
@@ -322,51 +347,52 @@ if (!window.control) {
         }
     };
 
-    pub.query = function(tableId, sqlWhereClause, sqlSelectionArgs) {
-        if (!isString(tableId)) {
-            throw 'query()--tableId not a string';
-        }
-        if (!isString(sqlWhereClause) &&
-                sqlWhereClause !== null &&
-                sqlWhereClause !== undefined) {
-            throw 'query()--sqlWhereClause not a string';
-        }
-        if (!isArray(sqlSelectionArgs) &&
-                sqlSelectionArgs !== null &&
-                sqlSelectionArgs !== undefined) {
-            throw 'query()--sqlSelectionArgs not an array';
-        }
-        if (arguments.length > 3) {
-            throw 'query()--too many arguments';
-        }
-        // Now we need to get the object.
-        var newTableData = window.__getTableData();
-        $.ajax({
-            url: pub.getFileAsUrl('../app/output/debug/' + tableId + '_data.json'),
-            success: function(dataObj) {
-                newTableData.setBackingObject(dataObj);
-            },
-            async: false
-        });
-        return newTableData;
-    };
-
-    pub.releaseQueryResources = function(tableId) {
-        if (!isString(tableId)) {
-            throw 'releaseQueryResources()--tableId not a string';
-        }
-        if (arguments.length > 1) {
-            throw 'releaseQueryResources()--too many arguments';
-        }
-    };
-
-    pub.getAllTableIds = function() {
-        var tableIds = [];
-        $.map(controlObj.tableIdToDisplayName, function(value, key) {
-            tableIds.push(key);
-        });
-        return tableIds;
-    };
+// CAL: Can delete this once I am done
+//     pub.query = function(tableId, sqlWhereClause, sqlSelectionArgs) {
+//         if (!isString(tableId)) {
+//             throw 'query()--tableId not a string';
+//         }
+//         if (!isString(sqlWhereClause) &&
+//                 sqlWhereClause !== null &&
+//                 sqlWhereClause !== undefined) {
+//             throw 'query()--sqlWhereClause not a string';
+//         }
+//         if (!isArray(sqlSelectionArgs) &&
+//                 sqlSelectionArgs !== null &&
+//                 sqlSelectionArgs !== undefined) {
+//             throw 'query()--sqlSelectionArgs not an array';
+//         }
+//         if (arguments.length > 3) {
+//             throw 'query()--too many arguments';
+//         }
+//         // Now we need to get the object.
+//         var newTableData = window.__getTableData();
+//         $.ajax({
+//             url: pub.getFileAsUrl('../app/output/debug/' + tableId + '_data.json'),
+//             success: function(dataObj) {
+//                 newTableData.setBackingObject(dataObj);
+//             },
+//             async: false
+//         });
+//         return newTableData;
+//     };
+// 
+//     pub.releaseQueryResources = function(tableId) {
+//         if (!isString(tableId)) {
+//             throw 'releaseQueryResources()--tableId not a string';
+//         }
+//         if (arguments.length > 1) {
+//             throw 'releaseQueryResources()--too many arguments';
+//         }
+//     };
+// 
+//     pub.getAllTableIds = function() {
+//         var tableIds = [];
+//         $.map(controlObj.tableIdToDisplayName, function(value, key) {
+//             tableIds.push(key);
+//         });
+//         return tableIds;
+//     };
 
     pub.launchHTML = function(relativePath) {
         if (!isString(relativePath)) {
@@ -434,45 +460,46 @@ if (!window.control) {
 
     };
 
-    pub.getElementKey = function(tableId, elementPath) {
-        // This we get through the control object.
-        // We first need to check to make sure that this tableId even exists.
-        // If it does not, we return undefined, which is the behavior on the
-        // phone.
-        if (!controlObj.tables.hasOwnProperty(tableId)) {
-            return undefined;
-        }
-        return controlObj.tables[tableId].pathToKey[elementPath];
-    };
-
-    pub.getColumnDisplayName = function(tableId, elementPath) {
-        // This we just get through the control object.
-        // We first need to check that the tableId even exists. If not, we will
-        // return undefined, as is the behavior on the phone.
-        if (!controlObj.tables.hasOwnProperty(tableId)) {
-            return undefined;
-        }
-        return controlObj.tables[tableId].pathToName[elementPath];
-    };
-
-    pub.getTableDisplayName = function(tableId) {
-        // just pass it through the control object.
-        // Return undefined if the table id doesn't exist, which is the
-        // behavior on the phone.
-        if (!controlObj.tableIdToDisplayName.hasOwnProperty(tableId)) {
-            return undefined;
-        }
-        return controlObj.tableIdToDisplayName[tableId];
-    };
-
-    pub.columnExists = function(tableId, elementPath) {
-        return pub.getElementKey(tableId, elementPath) !== undefined;
-    };
+// CAL: Can delete all of this once done with everything
+//     pub.getElementKey = function(tableId, elementPath) {
+//         // This we get through the control object.
+//         // We first need to check to make sure that this tableId even exists.
+//         // If it does not, we return undefined, which is the behavior on the
+//         // phone.
+//         if (!controlObj.tables.hasOwnProperty(tableId)) {
+//             return undefined;
+//         }
+//         return controlObj.tables[tableId].pathToKey[elementPath];
+//     };
+// 
+//     pub.getColumnDisplayName = function(tableId, elementPath) {
+//         // This we just get through the control object.
+//         // We first need to check that the tableId even exists. If not, we will
+//         // return undefined, as is the behavior on the phone.
+//         if (!controlObj.tables.hasOwnProperty(tableId)) {
+//             return undefined;
+//         }
+//         return controlObj.tables[tableId].pathToName[elementPath];
+//     };
+// 
+//     pub.getTableDisplayName = function(tableId) {
+//         // just pass it through the control object.
+//         // Return undefined if the table id doesn't exist, which is the
+//         // behavior on the phone.
+//         if (!controlObj.tableIdToDisplayName.hasOwnProperty(tableId)) {
+//             return undefined;
+//         }
+//         return controlObj.tableIdToDisplayName[tableId];
+//     };
+// 
+//     pub.columnExists = function(tableId, elementPath) {
+//         return pub.getElementKey(tableId, elementPath) !== undefined;
+//     };
 
     // Now we also need to set the backing object we are going to use. We
     // assume it is in the output/debug directory.
     $.ajax({
-        url: pub.getFileAsUrl('../app/output/debug/control.json'),
+        url: getFileAsUrl('../app/output/debug/control.json'),
         success: function(data) {
             var controlObject = data;
             pub.setBackingObject(controlObject);

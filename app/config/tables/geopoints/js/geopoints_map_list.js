@@ -5,19 +5,19 @@
 /* exported display, handleClick */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/geopoints_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: geopoints');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/geopoints_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             if (dataObj === undefined || dataObj === null) {
+//                 console.log('Could not load data json for table: geopoints');
+//             }
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
 
 function handleClick(rowId) {
     control.openDetailView(

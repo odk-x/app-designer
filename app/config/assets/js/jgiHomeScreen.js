@@ -14,7 +14,7 @@ function display() {
     // Set up the background image.
     // First we need the url as parsed by the ODK framework so that it works
     // in both the browser and on the device.
-    var fileUri = control.getFileAsUrl('config/assets/img/chimp.png');
+    var fileUri = common.getFileAsUrl('config/assets/img/chimp.png');
     $('body').css('background-image', 'url(' + fileUri + ')');
 
 }

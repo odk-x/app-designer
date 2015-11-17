@@ -5,7 +5,8 @@
         <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/control.js"></script>
-        <script type="text/javascript" src="../../../../system/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/datarsp.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/androidData.js"></script>
     </head>
     <body>
         <script type="text/javascript" src="../js/Tea_houses_detail.js"></script>
@@ -46,11 +47,7 @@
         <p>Owner: <span id="FIELD_14"></span></p>
         <p>Mobile number: <span id="FIELD_15"></span></p>
         </br>
-        <a href="#" onclick="control.openTableToListView(
-          'Tea_inventory',
-          'House_id = ?',
-          [data.get('House_id')],
-          'config/tables/Tea_inventory/html/Tea_inventory_list.html');">
+        <a href="#" onclick="onLinkClick()">
           <span id="FIELD_16" class="main-text"></span> Teas</a>
         
         <script>

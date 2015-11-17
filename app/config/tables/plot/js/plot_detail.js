@@ -1,22 +1,52 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control, d3, data */
+/* global $, control, d3 */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/plot_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: plot');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/plot_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             if (dataObj === undefined || dataObj === null) {
+//                 console.log('Could not load data json for table: plot');
+//             }
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
+
+var plotDetailResultSet = {};
+var visitData = {};
+var plotId;
+
+function visitCBSuccess(result) {
+    visitData = result;
+
+    display();
+}
+
+function visitCBFailure(error) {
+
+    console.log('plot_detail: visitCBFailure failed with error: ' + error);
+}
+
+function cbSuccess(result) {
+    
+    plotDetailResultSet = result;
+
+    plotId = plotDetailResultSet.getRowId(0); 
+
+    datarsp.query('visit', 'plot_id = ?', [plotId], null, null,
+        null, null, true, visitCBSuccess, visitCBFailure, null, false);
+}
+
+function cbFailure(error) {
+
+    console.log('plot_detail: cbFailure failed with error: ' + error);
 }
  
 function display() {
@@ -24,21 +54,21 @@ function display() {
     // the body of your .html file.
     
     var i;
-    var plotId = data.getRowId(0);
+    var plotId = plotDetailResultSet.getRowId(0);
 
-    $('#NAME').text(data.get('plot_name'));
+    $('#NAME').text(plotDetailResultSet.get('plot_name'));
     $('#plot-id').text(plotId);
-    $('#lat').text(data.get('location.latitude'));
-    $('#long').text(data.get('location.longitude'));
-    $('#crop').text(data.get('planting'));
+    $('#lat').text(plotDetailResultSet.get('location.latitude'));
+    $('#long').text(plotDetailResultSet.get('location.longitude'));
+    $('#crop').text(plotDetailResultSet.get('planting'));
 
-    // We want to get the count.
-    var table = control.query(
-        'visit',
-        'plot_id = ?',
-        [plotId]);
+// We want to get the count.
+//     var table = control.query(
+//         'visit',
+//         'plot_id = ?',
+//         [plotId]);
 
-    $('#visits').text(table.getCount());
+    $('#visits').text(visitData.getCount());
     var margin = {
         top: 20,
         right: 20,
@@ -48,7 +78,7 @@ function display() {
     var width = 300 - margin.left - margin.right;
     var height = 500 - margin.top - margin.bottom;
     // Set up the scales.
-    var visitData = control.query('visit', 'plot_id = ?', [plotId]);
+    //var visitData = control.query('visit', 'plot_id = ?', [plotId]);
     var xValues = JSON.parse(visitData.getColumnData('date'));
 
     //xValues = [xValues[0], xValues[1], xValues[2]];
@@ -104,5 +134,10 @@ function display() {
         .attr('class', 'line')
         .attr('d', line);
 
+}
+
+function setup() {
+
+    datarsp.getViewData(cbSuccess, cbFailure);
 }
 

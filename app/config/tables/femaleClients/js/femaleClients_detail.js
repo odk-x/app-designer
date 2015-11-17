@@ -1,24 +1,25 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control, data */
+/* global $, control */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/femaleClients_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log(
-                    'Could not load data json for table: femaleClients');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/femaleClients_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             if (dataObj === undefined || dataObj === null) {
+//                 console.log(
+//                     'Could not load data json for table: femaleClients');
+//             }
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
+var clientId;
 
 function createFormLauncherForEdit(tableId, formId, rowId, label, element) {
     var formLauncher = document.createElement('p');
@@ -49,13 +50,13 @@ function createFormLauncherForAdd(tableId, formId, jsonMap, label, element) {
 }
 
 // Displays details about client and links to various forms
-function display() {
+function display(result) {
 
     // Details - Client id, age, randomization arm
-    var clientId = data.get('client_id');
+    clientId = result.get('client_id');
     document.getElementById('title').innerHTML = clientId;
-    document.getElementById('age').innerHTML = data.get('age');
-    var armText = data.get('randomization');
+    document.getElementById('age').innerHTML = result.get('age');
+    var armText = result.get('randomization');
     if(armText === '1') {
         armText = 'HOPE';
     } else if(armText === '2') {
@@ -65,7 +66,7 @@ function display() {
 
     // Creates key-to-value map that can be interpreted by the specified
     // Collect form - to prepopulate forms with client id
-    var mapMaleId = JSON.stringify({'_client_id': clientId});
+    var mapMaleId = JSON.stringify({'client_id': clientId});
 
     // Create item that displays links to all female forms when clicked
     var fItem = document.createElement('p');
@@ -83,15 +84,16 @@ function display() {
     // this using a hash.
     console.log('in this particularly XXXXXXXXX file!');
     $(homeLocator).click(function() {
+        console.log('In homeLocator click client_id is ' + clientId);
         control.openTableToListView(
             'geopoints',
             'client_id = ?',
-            [clientId],
+            ['' + clientId],
             'config/tables/geopoints/html/geopoints_list.html#' + clientId);
     });
     fContainer.appendChild(homeLocator);
 
-    var rowId = data.getRowId(0);
+    var rowId = result.getRowId(0);
     console.log('rowId: ' + rowId);
     createFormLauncherForEdit(
             'femaleClients',
@@ -156,9 +158,17 @@ function display() {
 
 }
 
+function cbSuccess(result) {
+    display(result);
+}
+
+function cbFailure(error) {
+    console.log('femaleClients_detail: failed with error: ' + error);
+}
+
 // handles events from html page
 function setup() {
-    display();
+    datarsp.getViewData(cbSuccess, cbFailure);
 }
 
 $(document).ready(setup);

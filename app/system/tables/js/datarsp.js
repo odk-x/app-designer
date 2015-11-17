@@ -6,10 +6,21 @@
 'use strict';
 /* jshint unused: vars */
 
+// TODO: Remove exposing user-level transaction
+
 window.datarsp = {
     _requestMap: [],
     _transactionId: 0,
     _callbackId: 0,
+
+    getViewData : function (successCallbackFn, failureCallbackFn) {
+        var that = this;
+        var transId = null;
+
+        var req = that.queueRequest('getViewData', false, transId, successCallbackFn, failureCallbackFn);
+
+        dataif.getViewData(req._callbackId);
+    },
 
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
             orderByElementKey, orderByDirection, includeKVS, successCallbackFn, 

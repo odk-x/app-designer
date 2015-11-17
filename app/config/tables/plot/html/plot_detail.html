@@ -7,7 +7,8 @@
         <link href="../../../assets/css/plot-detail.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/control.js"></script>
-        <script type="text/javascript" src="../../../../system/tables/js/data.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/androidData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/datarsp.js"></script>
         <script type="text/javascript" src="../../../assets/libs/d3-amd/d3.js"></script>
     </head>
     <body>
@@ -24,11 +25,11 @@
         <a href="#" onclick="control.openTableToListView(
           'visit',
           'plot_id = ?',
-          [data.getRowId(0)],
-          'tables/visit/html/visit_list.html');"><span id="visits" class="main-text"></span> Visits</a>
+          [plotDetailResultSet.getRowId(0)],
+          'config/tables/visit/html/visit_list.html');"><span id="visits" class="main-text"></span> Visits</a>
         <div id="graph-div"></div>
         <script>
-            $(display());  // calls the detail display function when ready
+            $(setup());  // calls the detail display function when ready
         </script>
     </body>
 </html>

@@ -4,28 +4,34 @@
 /* global $, control, data */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/geopoints_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: geopoints');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/geopoints_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             if (dataObj === undefined || dataObj === null) {
+//                 console.log('Could not load data json for table: geopoints');
+//             }
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
+
+var geopoints = {};
 
 function handleClick(rowId) {
-    control.openDetailView(
-        data.getTableId(),
-        rowId,
-        'config/tables/geopoints/html/geopoints_detail.html');
+    if (!$.isEmptyObject(geopoints)) {
+        control.openDetailView(
+            geopoints.getTableId(),
+            rowId,
+            'config/tables/geopoints/html/geopoints_detail.html');
+    }
 }
 
-function display() {
+function render(result) {
+    geopoints = result;
+    console.log('The number of results is ' + result.getCount());
 
     // The client id should have been passed to us as the hash.
     var hash = window.location.hash;
@@ -34,7 +40,7 @@ function display() {
     if (hash === '') {
         console.log('The hash containing the client id was not present!');
         console.log('Inferring client id');
-        clientId = data.get(0);
+        clientId = result.get(0);
     } else {
         // The hash begins with a physical hash. Strip it.
         clientId = hash.substring(1);
@@ -61,7 +67,7 @@ function display() {
     // Prepopulate client id
     jsonMap.client_id = clientId;
     // Add step every time you launch waypoint form.
-    jsonMap.step = data.getCount() + 1;
+    jsonMap.step = result.getCount() + 1;
     jsonMap = JSON.stringify(jsonMap);
 
     waypoint.onclick = function() {
@@ -74,7 +80,7 @@ function display() {
     waypoint.innerHTML = 'Add Waypoint';
     document.getElementById('header').appendChild(waypoint);
 
-    for (var i = 0; i < data.getCount(); i++) {
+    for (var i = 0; i < result.getCount(); i++) {
 
         /*    Make list entry only if client id exists */
         if(clientId !== null && clientId !== '') {
@@ -83,7 +89,7 @@ function display() {
             item.setAttribute('class', 'item_space');
             item.setAttribute(
                 'onClick',
-                'handleClick("' + data.getRowId(i) + '")');
+                'handleClick("' + result.getRowId(i) + '")');
             item.innerHTML = clientId;
             document.getElementById('list').appendChild(item);
 
@@ -98,15 +104,23 @@ function display() {
 
             var step = document.createElement('li');
             step.setAttribute('class', 'detail');
-            step.innerHTML = 'Step: ' + data.getData(i, 'step');
+            step.innerHTML = 'Step: ' + result.getData(i, 'step');
             item.appendChild(step);
 
             var transportation = document.createElement('li');
             transportation.setAttribute('class', 'detail');
             transportation.innerHTML =
                 'Transportation: ' +
-                data.getData(i, 'transportation_mode');
+                result.getData(i, 'transportation_mode');
             item.appendChild(transportation);
         }
     }
+}
+
+function cbFailure(error) {
+    console.log('geopoints_list: cbFailure failed with error: ' + error);
+}
+
+function display() {
+    datarsp.getViewData(render, cbFailure);
 }

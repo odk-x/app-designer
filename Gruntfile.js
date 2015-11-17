@@ -167,10 +167,7 @@ module.exports = function (grunt) {
                 },
                 files: [
                     '<%= tables.appDir %>/*.html',
-                    'test/tables/**/*.js',
                     '<%= tables.appDir %>/system/**',
-                    '<%= tables.appDir %>/config/**',
-                    '<%= tables.appDir %>/themeGenerator/*'
                 ]
             },
             test: {
@@ -334,6 +331,48 @@ module.exports = function (grunt) {
                 '!system/**',
 				'!data/**',
 				'!output/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+            // And then we want to put the collect forms in the right place.
+            // This will push the collect forms for ALL the tables, but since
+            // only the files used in the Tables demo follows the convention
+            // required by the adbpush-collect task, that is ok.
+            grunt.task.run('adbpush-collect');
+
+        });
+
+    grunt.registerTask(
+        'adbpush-clarice',
+        'Push everything for tables only to the device',
+        function() {
+            // We do not need any system, data or output files. 
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'.  
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!system/**',
+                'system/tables/js/**',
+				'!data/**',
+				'!output/**',
+                '!config/tables/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {

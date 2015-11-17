@@ -1,24 +1,36 @@
-/* global $, control, data */
+/* global $, control */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/geotagger_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            window.data.setBackingObject(dataObj);
-        }
-    });
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/geotagger_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
+
+var geoListResultSet = {};
+
+function cbSuccess(result) {
+    geoListResultSet = result;
+
+    displayGroup();
+}
+
+function cbFailure(error) {
+    console.log('gelo_list: cbFailure failed with error: ' + error);
 }
 
 function setup() {
-    displayGroup();
+    datarsp.getViewData(cbSuccess, cbFailure);
 }
         
 function handleClick(index) {
-    var tableId = data.getTableId();
-    var rowId = data.getRowId(index);
+    var tableId = geoListResultSet.getTableId();
+    var rowId = geoListResultSet.getRowId(index);
     control.openDetailView(tableId, rowId, null);
 }
 
@@ -39,10 +51,10 @@ function showImage(imgPath) {
 }
 
 function displayGroup() {
-    for (var i = 0; i < data.getCount(); i++) {
+    for (var i = 0; i < geoListResultSet.getCount(); i++) {
         /*    Creating the item space    */
         var itemHeading = $('<p>');
-        itemHeading.text(data.getData(i, 'Description'));
+        itemHeading.text(geoListResultSet.getData(i, 'Description'));
         itemHeading.attr('class', 'heading');
         
         var detailContainer = $('<div>');
@@ -51,20 +63,20 @@ function displayGroup() {
         detailContainer.attr('id', 'item_' + i);
         $(detailContainer).hide();
                   
-        var lat = data.getData(i,'Location_latitude');
-        var lng = data.getData(i,'Location_longitude');
+        var lat = geoListResultSet.getData(i,'Location_latitude');
+        var lng = geoListResultSet.getData(i,'Location_longitude');
 
         var field1 = $('<p>');
         field1.text('Latitude: ' + lat);
         var field2 = $('<p>');
         field2.text('Longitude: ' + lng);
         
-        var uriRelative = data.getData(i, 'Image.uriFragment');
+        var uriRelative = geoListResultSet.getData(i, 'Image.uriFragment');
         var src = '';
-        if (uriRelative !== null  && uriRelative !== "") {
-            var tableId = data.getTableId();
-            var rowId = data.getRowId(i);
-            var uriAbsolute = control.getRowFileAsUrl(tableId, rowId, uriRelative);
+        if (uriRelative !== null  && uriRelative !== '') {
+            var tableId = geoListResultSet.getTableId();
+            var rowId = geoListResultSet.getRowId(i);
+            var uriAbsolute = common.getRowFileAsUrl(tableId, rowId, uriRelative);
             src = uriAbsolute;
         }
 

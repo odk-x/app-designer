@@ -1,6 +1,29 @@
 /* global control, util */
 'use strict';
 
+function cbSuccess(result) {
+    console.log('jgiNewFollow: cbSuccess addRow with result: ' + result);
+
+    var date = $('#FOL_date').val();
+    var focalChimpId = $('#FOL_B_AnimID').val().toLowerCase();
+    var beginTime = $('#FOL_begin_time').val();
+
+    // Now we'll launch the follow screen. The follow screen needs to know
+    // what date we're on, as well as the time it should be using.
+    var queryString = util.getKeysToAppendToURL(
+        date,
+        beginTime,
+        focalChimpId);
+    var url = common.getFileAsUrl(
+            'config/assets/followScreen.html' + queryString);
+
+    // There seems to be an issue with the way window.location is set here
+    window.location.href = url;
+}
+
+function cbFailure(error) {
+    console.log('jgiNewFollow: cbFailure failed with error: ' + error);
+}
 function display() {
 
     // Here we are expecting just to add a row with the data elements into
@@ -25,7 +48,9 @@ function display() {
 
         // Now we'll stringify the object and write it into the database.
         var stringified = JSON.stringify(struct);
-        control.addRow('follow', stringified);
+
+        var rowId = util.genUUID();
+        datarsp.addRow('follow', stringified, rowId, cbSuccess, cbFailure, null, false);
     };
 
     $('#begin-follow').on('click', function() {
@@ -46,13 +71,15 @@ function display() {
 
         // Now we'll launch the follow screen. The follow screen needs to know
         // what date we're on, as well as the time it should be using.
-        var queryString = util.getKeysToAppendToURL(
-            date,
-            beginTime,
-            focalChimpId);
-        var url = control.getFileAsUrl(
-                'config/assets/followScreen.html' + queryString);
-        window.location.href = url;
+//         var queryString = util.getKeysToAppendToURL(
+//             date,
+//             beginTime,
+//             focalChimpId);
+//         var url = common.getFileAsUrl(
+//                 'config/assets/followScreen.html' + queryString);
+//         // There seems to be an issue with the way window.location is set here
+//         //window.location.href = url;
+//         control.launchHTML('assets/followScreen.html' + queryString);
     });
 
 }

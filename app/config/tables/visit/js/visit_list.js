@@ -1,32 +1,60 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, control, data */
+/* global $, control */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/visit_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: visit');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/visit_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             if (dataObj === undefined || dataObj === null) {
+//                 console.log('Could not load data json for table: visit');
+//             }
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
 
 // we need plot names.
+var idxStart = -1;
 var plotIdToName = {};
-var plots = control.query('plot', null, null);
+var plots = {};
+var visitResultSet = {};
 
-for (var rowI = 0; rowI < plots.getCount(); rowI++) {
-    var rowId = plots.getRowId(rowI);
-    var plotName = plots.getData(rowI, 'plot_name');
+function plotCBSuccess(result) {
+    plots = result;
 
-    plotIdToName[rowId] = plotName;
+    for (var rowI = 0; rowI < plots.getCount(); rowI++) {
+        var rowId = plots.getRowId(rowI);
+        var plotName = plots.getData(rowI, 'plot_name');
+
+        plotIdToName[rowId] = plotName;
+    }
+
+    return (function() {
+        displayGroup(idxStart);
+    }());
+}
+
+function plotCBFailure(error) {
+
+    console.log('visit_list: plotCBFailure failed with error: ' + error);
+}
+
+function cbSuccess(result)  {
+
+    visitResultSet = result;
+
+    datarsp.query('plot', null, null, null, null, null,
+         null, true, plotCBSuccess, plotCBFailure, null, false);
+}
+
+function cbFailure(error) {
+
+    console.log('visit_list: cbFailure failed with error: ' + error);
 }
 
 // Use chunked list view for larger tables: We want to chunk the displays so
@@ -36,8 +64,10 @@ for (var rowI = 0; rowI < plots.getCount(); rowI++) {
  * Called when page loads. idxStart is the index of the row that should be
  * displayed at this iteration through the loop.
  */
-var resumeFn = function(idxStart) {
+var resumeFn = function(fidxStart) {
+    datarsp.getViewData(cbSuccess, cbFailure);
 
+    idxStart = fidxStart;
     if (idxStart === 0) {
         // We want to be able to drag and drop without the drop triggering a click.
         // Idea for this taken from:
@@ -76,7 +106,7 @@ var resumeFn = function(idxStart) {
         // This add a click handler on the wrapper ul that will handle all of
         // the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = data.getTableId();
+            var tableId = visitResultSet.getTableId();
             // We have set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -100,9 +130,6 @@ var resumeFn = function(idxStart) {
         });
     }
     
-    return (function() {
-        displayGroup(idxStart);
-    }());
 };
             
 /**
@@ -119,7 +146,7 @@ var displayGroup = function(idxStart) {
     // Number of rows displayed per chunk
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-        if (i >= data.getCount()) {
+        if (i >= visitResultSet.getCount()) {
             break;
         }
 
@@ -131,7 +158,7 @@ var displayGroup = function(idxStart) {
         var containerDiv = $('<div>');
         containerDiv.addClass('content-holder');
         
-        var displayDate = data.getData(i, 'date');
+        var displayDate = visitResultSet.getData(i, 'date');
         // We only want to display the date, not the time and 'T', which are
         // important to the db representation
         if (displayDate !== undefined && displayDate !== null) {
@@ -139,7 +166,7 @@ var displayGroup = function(idxStart) {
         }
         containerDiv.text(displayDate);
 
-        item.attr('rowId', data.getRowId(i));
+        item.attr('rowId', visitResultSet.getRowId(i));
         item.addClass('item_space');
         item.addClass('grid-item');
         item.append(containerDiv);
@@ -147,7 +174,7 @@ var displayGroup = function(idxStart) {
         var plotItem = $('<li>');
         plotItem.attr('class', 'detail');
 
-        var plotId = data.getData(i, 'plot_id');
+        var plotId = visitResultSet.getData(i, 'plot_id');
         var plotName = plotIdToName[plotId];
         if (!plotName) {
             console.log('could not find plot name for id: ' + plotId);
@@ -167,7 +194,7 @@ var displayGroup = function(idxStart) {
         //$('#list').append(borderDiv);
 
     }
-    if (i < data.getCount()) {
+    if (i < visitResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };

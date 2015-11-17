@@ -5,41 +5,41 @@
 /*exported display, handleClick, getResults */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/femaleClients_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: femaleClients');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/femaleClients_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             if (dataObj === undefined || dataObj === null) {
+//                 console.log('Could not load data json for table: femaleClients');
+//             }
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
+
+var femaleClients = {};
 
 /** Handles clicking on a list item. Applied via a string. */
 function handleClick(index) {
-    control.openDetailView(
-            data.getTableId(),
+    if (!$.isEmptyObject(femaleClients)) {
+        control.openDetailView(
+            femaleClients.getTableId(),
             index,
             'config/tables/femaleClients/html/femaleClients_detail.html');
+    }
+
 }
 
-// filters list view by client id entered by user
-function getResults() {
-    var searchText = document.getElementById('search').value;
-    var searchData = control.query(
-            'femaleClients',
-            'client_id = ?',
-            [searchText]);
+function cbSRSuccess(searchData) {
     if(searchData.getCount() > 0) {
         // open filtered list view if client found
+        var clientId = searchData.get('client_id');
         control.openTableToListView(
                 'femaleClients',
                 'client_id = ?',
-                [searchText],
+                [clientId],
                 'config/tables/FemaleClients/html/femaleClients_list.html');
     } else {
         // open 'client not found' page
@@ -51,8 +51,25 @@ function getResults() {
     }
 }
 
+function cbSRFailure(error) {
+    console.log('femaleClients_list: cbSRFailure failed with error: ' + error);
+}
+
+// filters list view by client id entered by user
+function getResults() {
+    searchText = document.getElementById('search').value;
+
+//     var searchData = control.query(
+//             'femaleClients',
+//             'client_id = ?',
+//             [searchText]);
+
+    datarsp.query('femaleClients', 'client_id = ?', [searchText], 
+        null, null, null, null, true, cbSRSuccess, cbSRFailure, null, false);
+}
+
 // displays list view of clients
-function display() {
+function render() {
 
     // create button that adds enrolled client to the system - launches mini
     // 'add client' form
@@ -81,11 +98,11 @@ function display() {
     graphView.innerHTML = 'Graph View';
     document.getElementById('searchBox').appendChild(graphView);
 
-    for (var i = 0; i < data.getCount(); i++) {
+    for (var i = 0; i < femaleClients.getCount(); i++) {
 
-        var clientId = data.getData(i, 'client_id');
-        var ageEntered = data.getData(i, 'age');
-        var armText = data.getData(i, 'randomization');
+        var clientId = femaleClients.getData(i, 'client_id');
+        var ageEntered = femaleClients.getData(i, 'age');
+        var armText = femaleClients.getData(i, 'randomization');
 
         // make list entry only if client id, age, randomization arm exists
         if (clientId !== null &&
@@ -99,7 +116,7 @@ function display() {
             item.setAttribute('class', 'item_space');
             item.setAttribute(
                     'onClick',
-                    'handleClick("' + data.getRowId(i) + '")');
+                    'handleClick("' + femaleClients.getRowId(i) + '")');
             item.innerHTML = clientId;
             document.getElementById('list').appendChild(item);
 
@@ -129,4 +146,17 @@ function display() {
             item.appendChild(arm);
         }
     }
+}
+
+function cbSuccess(result) {
+    femaleClients = result;
+    render();
+}
+
+function cbFailure(error) {
+    console.log('femaleClients_list: failed with error: ' + error);
+}
+
+function display() {
+    datarsp.getViewData(cbSuccess, cbFailure);
 }

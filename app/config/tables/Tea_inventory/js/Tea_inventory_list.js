@@ -4,42 +4,96 @@
 /* global $, control, data */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/Tea_inventory_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/Tea_inventory_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
 
+var teaInvResultSet = {};
+var houseData = {};
+var typeData = {};
 var houseNameMap = {};
 var typeNameMap = {};
+var idxStart = -1;
+
+function teaTypesCBSuccess(result) {
+
+    typeData = result;
+
+    for (var i = 0; i < typeData.getCount(); i++) {
+        typeNameMap[typeData.getData(i, 'Type_id')] =
+            typeData.getData(i, 'Name');
+    }
+
+    return (function() {
+        displayGroup(idxStart);
+    }());
+
+}
+
+function teaTypesCBFailure(error) {
+
+    console.log('teaTypesCBFailure: failed with error: ' + error);
+
+}
+
+function teaHousesCBSuccess(result) {
+
+    houseData = result;
+
+    for (var i = 0; i < houseData.getCount(); i++) {
+        console.log('should be triggering line 30');
+        console.log('houseData.getData: ' + houseData.getData(i, 'House_id'));
+        houseNameMap[houseData.getData(i, 'House_id')] =
+            houseData.getData(i, 'Name');
+    }
+
+}
+
+function teaHousesCBFailure(error) {
+
+    console.log('teaHousesCBFailure: failed with error: ' + error);
+
+}
+
+function cbSuccess(result) {
+
+    teaInvResultSet = result;
+
+    datarsp.query('Tea_houses', null, null, null, null, null, null, true, 
+        teaHousesCBSuccess, teaHousesCBFailure, null, false);
+
+    datarsp.query('Tea_types', null, null, null, null, null, null, true, 
+        teaTypesCBSuccess, teaTypesCBFailure, null, false);
+
+}
+
+function cbFailure(error) {
+
+    console.log('getViewData failed with error: ' + error);
+
+}
 
 /* Called when page loads to display things (Nothing to edit here) */
-var resumeFn = function(idxStart) {
+var resumeFn = function(fIdxStart) {
+    datarsp.getViewData(cbSuccess, cbFailure);
+
+    idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
     // The first time through we're going to make a map of typeId to
     // typeName so that we can display the name of each shop's specialty.
     if (idxStart === 0) {
-        var houseData = control.query('Tea_houses', null, null);
-        for (var i = 0; i < houseData.getCount(); i++) {
-            console.log('should be triggering line 30');
-            console.log('houseData.getData: ' + houseData.getData(i, 'House_id'));
-            houseNameMap[houseData.getData(i, 'House_id')] =
-                houseData.getData(i, 'Name');
-        }
-        var typeData = control.query('Tea_types', null, null);
-        for (i = 0; i < typeData.getCount(); i++) {
-            typeNameMap[typeData.getData(i, 'Type_id')] =
-                typeData.getData(i, 'Name');
-        }
+
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = data.getTableId();
+            var tableId = teaInvResultSet.getTableId();
             // We set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -59,10 +113,6 @@ var resumeFn = function(idxStart) {
             }
         });
     }
-    
-    return (function() {
-        displayGroup(idxStart);
-    }());
 };
 
 
@@ -78,20 +128,20 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-        if (i >= data.getCount()) {
+        if (i >= teaInvResultSet.getCount()) {
             break;
         }
         /* Creates the item space */
         // We're going to select the ul and then start adding things to it.
         //var item = $('#list').append('<li>');
         var item = $('<li>');
-        item.attr('rowId', data.getRowId(i));
+        item.attr('rowId', teaInvResultSet.getRowId(i));
         item.attr('class', 'item_space');
-        item.text(data.getData(i, 'Name'));
+        item.text(teaInvResultSet.getData(i, 'Name'));
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
-        chevron.attr('src', control.getFileAsUrl('config/assets/img/little_arrow.png'));
+        chevron.attr('src', common.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
                 
@@ -103,14 +153,14 @@ var displayGroup = function(idxStart) {
          * 'field1' with new, specific label that are more meaningful to you
          */
         var field1 = $('<li>');
-        var houseId = data.getData(i, 'House_id');
+        var houseId = teaInvResultSet.getData(i, 'House_id');
         var houseName = houseNameMap[houseId];
         field1.attr('class', 'detail');
         field1.text('Tea House: ' + houseName);
         item.append(field1);
 
         var field2 = $('<li>');
-        var typeId = data.getData(i, 'Type_id');
+        var typeId = teaInvResultSet.getData(i, 'Type_id');
         var typeName = typeNameMap[typeId];
         field2.attr('class', 'detail');
         field2.text('Type: ' + typeName);
@@ -124,7 +174,7 @@ var displayGroup = function(idxStart) {
         $('#list').append(borderDiv);
 
     }
-    if (i < data.getCount()) {
+    if (i < teaInvResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 

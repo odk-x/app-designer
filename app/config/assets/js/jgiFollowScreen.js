@@ -1,18 +1,48 @@
-/* global control, util, alert */
+/* global common, util, alert */
+/* jshint camelcase:false */ 
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/follow_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: follow');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/follow_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             if (dataObj === undefined || dataObj === null) {
+//                 console.log('Could not load data json for table: follow');
+//             }
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
+var previousTime;
+var rowIdCache = {};
+var speciesRowIdCache = {};
+var foodRowIdCache = {};
+var isNew = true;
+
+function cbAddRowOSSuccess(result) {
+    console.log('jgiFollowScreen: cbAddRowOSSuccess with result: ' + result);
+}
+
+function cbAddRowOSFail(error) {
+    console.log('jgiFollowScreen: cbAddRowOSFail with error: ' + error);
+}
+
+function cbAddRowFASuccess(result) {
+    console.log('jgiFollowScreen: cbAddRowFASuccess with result: ' + result);
+}
+
+function cbAddRowFAFail(error) {
+    console.log('jgiFollowScreen: cbAddRowFAFail with error: ' + error);
+}
+
+function cbAddRowFBSuccess(result) {
+    console.log('jgiFollowScreen: cbAddRowFBSuccess with result: ' + result);
+}
+
+function cbAddRowFBFail(error) {
+    console.log('jgiFollowScreen: cbAddRowFBFail with error: ' + error);
 }
 
 function display() {
@@ -137,17 +167,8 @@ function display() {
         speciesCounts[speciesId] = count;
     };
 
-    /**
-     * Update the state of the UI to reflect what is stored in the database.
-     * I.e. if someone goes back to look at an earlier time, this method will
-     * retrieve the existing data and update the checkboxes with the
-     * appropriate contents.
-     */
-    var initUIFromDatabaseForTime = function(time, isNew) {
-        var tableData = util.getTableDataForTimePoint(
-                followDate,
-                time,
-                focalChimpId);
+    var cbSuccessTimePoint = function (result) {
+        var tableData = result;
         // First get all the data for the chimp table.
         for (var i = 0; i < tableData.getCount(); i++) {
             // First get the ids of the chimp. These are stored in the
@@ -211,13 +232,15 @@ function display() {
                 $(sexualState).html(valueOfSexualState);
             }
         }
+    };
+    var cbFailTimePoint = function (error) {
+        console.log('jgiFollowScreen: cbFailTimePoint from initUIFromDatabaseForTime failed with error: ' + error);
+    };
 
-        // Now update the food and species lists.
-        var speciesData = util.getSpeciesDataForTimePoint(
-                followDate,
-                time,
-                focalChimpId);
+    var cbSuccessSpeciesData = function (result) {
+        var speciesData = result;
         console.log('species count before updating from db: ' + speciesCounts);
+        var i = 0;
         for (i = 0; i < speciesData.getCount(); i++) {
             var speciesId = speciesData.getData(
                     i,
@@ -235,13 +258,17 @@ function display() {
             }
 
         }
-        console.log('species count after updating from db: ' + speciesCount);
+        console.log('species count after updating from db: ' + speciesData.getCount());
 
-        var foodData = util.getFoodDataForTimePoint(
-                followDate,
-                time,
-                focalChimpId);
+    };
+    var cbFailSpeciesData = function (error) {
+        console.log('jgiFollowScreen: cbFailSpeciesData from initUIFromDatabaseForTime failed with error: ' + error);
+    };
+
+    var cbSuccessFoodData = function (result) {
+        var foodData = result;
         console.log('food present before updating from db: ' + foodPresent);
+        var i = 0;
         for (i = 0; i < foodData.getCount(); i++) {
             var foodId = foodData.getData(
                     i,
@@ -265,16 +292,133 @@ function display() {
         updateUIForAllSpecies();
         updateUIForFood();
 
+        // Now need to init the db since the UI should be all SET!!
+        initDatabaseFromUI();
     };
 
-    var isNewTimePoint = function(time) {
-        // just query for any rows in the db. This is an extra call that we
-        // might be able to cache the results of if performance is bad
-        var tableData = util.getTableDataForTimePoint(
+    var cbSuccessFoodDataFullyInit = function (result) {
+        var foodData = result;
+        console.log('food present before updating from db: ' + foodPresent);
+        var i = 0;
+        for (i = 0; i < foodData.getCount(); i++) {
+            var foodId = foodData.getData(
+                    i,
+                    'FB_FL_local_food_name');
+            var isPresent = foodData.getData(
+                    i,
+                    'FB_duration');
+            if (isPresent === '1') {
+                isPresent = true;
+            } else if (isPresent === '0') {
+                isPresent = false;
+            } else {
+                console.log(
+                        'unrecognized value of food present: ' + isPresent);
+            }
+            setFoodIsPresent(foodId, isPresent);
+
+        }
+        console.log('food present after updating from db: ' + foodPresent);
+
+        console.log('initUIFromDatabaseForTime called with false so initialize has to happen');
+
+        updateUIForAllSpecies();
+        updateUIForFood();
+
+        datarsp.query('food_bout', null, null, null, null,
+            null, null, true, dbInitCBSuccess, 
+            dbInitCBFail, null, false);
+    };
+
+    var cbFailFoodData = function (error) {
+        console.log('jgiFollowScreen: cbFailFoodData from initUIFromDatabaseForTime failed with error: ' + error);
+    };
+
+    /**
+     * Update the state of the UI to reflect what is stored in the database.
+     * I.e. if someone goes back to look at an earlier time, this method will
+     * retrieve the existing data and update the checkboxes with the
+     * appropriate contents.
+     */
+    var initUIFromDatabaseForTime = function(time, isNewVar) {
+        isNew = isNewVar;
+
+        util.getTableDataForTimePoint(
                 followDate,
                 time,
-                focalChimpId);
-        return tableData.getCount() === 0;
+                focalChimpId,
+                cbSuccessTimePoint,
+                cbFailTimePoint);
+        
+        // Now update the food and species lists.
+        util.getSpeciesDataForTimePoint(
+                followDate,
+                time,
+                focalChimpId,
+                cbSuccessSpeciesData,
+                cbFailSpeciesData);
+
+        if (isNew == false) {
+            // Fixes the back button issues
+            // Ensures caches and time are set as appropriate 
+            util.getFoodDataForTimePoint(
+                followDate,
+                time,
+                focalChimpId,
+                cbSuccessFoodDataFullyInit,
+                cbFailFoodData);
+        } else {
+            util.getFoodDataForTimePoint(
+                followDate,
+                time,
+                focalChimpId,
+                cbSuccessFoodData,
+                cbFailFoodData);
+            // On new we only want to 
+        }
+
+
+
+//         updateUIForAllSpecies();
+//         updateUIForFood();
+
+        // CAL: When this is used to initialize from a previous time point
+        // Other initializations don't happen
+        // I need a callback function that will tell me once all of 
+        // this initialization is done - also in initDatabaseFromUI
+        // Init after food init is done instead
+//         if (isNew == false) {
+//             console.log('initUIFromDatabaseForTime called with false so initialize has to happen');
+//             datarsp.query('food_bout', null, null, null, null,
+//                 null, null, true, dbInitCBSuccess, 
+//                 dbInitCBFail, null, false);
+//         }
+
+    };
+
+    var isNewTimePoint = function(time, cbSuccess, cbFailure) {
+        // just query for any rows in the db. This is an extra call that we
+        // might be able to cache the results of if performance is bad
+        util.getTableDataForTimePoint(
+                followDate,
+                time,
+                focalChimpId, cbSuccess, cbFailure);
+        //return tableData.getCount() === 0;
+    };
+
+    var createIdCacheSuccess = function (tableData) {
+        var result = {};
+        for (var i = 0; i < tableData.getCount(); i++) {
+            var chimpId = tableData.getData(i, 'FA_B_arr_AnimID');
+            var rowId = tableData.getRowId(i);
+            result[chimpId] = rowId;
+        }
+        //return result;
+        rowIdCache = result;
+    };
+
+    var createIdCacheFailure = function (error) {
+        console.log('jgiFollowScreen: createIdCacheFailure failed with error: ' + error);
     };
 
     // The way we interact with the database can lead to a bit of wonkiness
@@ -287,38 +431,39 @@ function display() {
      * Row ids will be stored keyed against the chimp id.
      */
     var createIdCache = function() {
-        var tableData = util.getTableDataForTimePoint(
-                followDate,
-                followTime,
-                focalChimpId);
-        var result = {};
-        for (var i = 0; i < tableData.getCount(); i++) {
-            var chimpId = tableData.getData(i, 'FA_B_arr_AnimID');
-            var rowId = tableData.getRowId(i);
-            result[chimpId] = rowId;
-        }
-        return result;
+        util.getTableDataForTimePoint(
+        followDate,
+        followTime,
+        focalChimpId,
+        createIdCacheSuccess,
+        createIdCacheFailure);
     };
 
-    var createFoodRowIdCache = function() {
-        var foodData = util.getFoodDataForTimePoint(
-                followDate,
-                followTime,
-                focalChimpId);
+    var createFoodRowIdCacheSuccess = function (foodData) {
         var result = {};
         for (var i = 0; i < foodData.getCount(); i++) {
             var foodId = foodData.getData(i, 'FB_FL_local_food_name');
             var rowId = foodData.getRowId(i);
             result[foodId] = rowId;
         }
-        return result;
+        //return result;
+        foodRowIdCache = result;
     };
 
-    var createSpeciesRowIdCache = function() {
-        var speciesData = util.getSpeciesDataForTimePoint(
-                followDate,
-                followTime,
-                focalChimpId);
+    var createFoodRowIdCacheFailure = function (error) {
+        console.log('jgiFollowScreen: createFoodRowIdCacheFailure failed with error: ' + error);
+    };
+
+    var createFoodRowIdCache = function() {
+        util.getFoodDataForTimePoint(
+            followDate,
+            followTime,
+            focalChimpId,
+            createFoodRowIdCacheSuccess,
+            createFoodRowIdCacheFailure);
+    };
+
+    var createSpeciesRowIdCacheSuccess = function (speciesData) {
         var result = {};
         for (var i = 0; i < speciesData.getCount(); i++) {
             var speciesId = speciesData.getData(
@@ -327,22 +472,33 @@ function display() {
             var rowId = speciesData.getRowId(i);
             result[speciesId] = rowId;
         }
-        return result;
+        //return result;
+        speciesRowIdCache = result;
     };
 
-    var updateOlderMenu = function() {
-
-        var dropdownMenu = $('#older-items-menu');
-        // Remove any older items that are somehow hanging around. This
-        // should always be unnecessary, I think.
-        dropdownMenu.empty();
-        
-        // First, get the older times.
-        var existingTimes = util.getExistingTimesForDate(
+    var createSpeciesRowIdCacheFailure = function (error) {
+        console.log('jgiFollowScreen: createSpeciesRowIdCacheFailure failed with error: ' + error);
+    };
+    var createSpeciesRowIdCache = function() {
+        util.getSpeciesDataForTimePoint(
                 followDate,
-                focalChimpId);
+                followTime,
+                focalChimpId,
+                createSpeciesRowIdCacheSuccess,
+                createSpeciesRowIdCacheFailure);
+    };
 
-        console.log('existing timepoints: ' + existingTimes);
+    var getExistingTimeSuccess = function(tableData) {
+        var dropdownMenu = $('#older-items-menu');
+        var existingTimes = [];
+        var i;
+        for (i = 0; i < tableData.getCount(); i++) {
+            var dataPoint = tableData.getData(i, 'FA_time_start');
+            // now see if we already have this value, in which case we won't add it
+            if (existingTimes.indexOf(dataPoint) < 0) {
+                existingTimes.push(dataPoint);
+            }
+        }
 
         var baseUrl = 'config/assets/followScreen.html';
 
@@ -359,7 +515,7 @@ function display() {
             return;
         }
 
-        for (var i = 0; i < existingTimes.length; i++) {
+        for (i = 0; i < existingTimes.length; i++) {
             var olderFollowTime = existingTimes[i];
             // The url these will launch is ths jgiFollowScreen plus the query
             // parameters defining the unique moment (date, time, and chimp).
@@ -368,7 +524,7 @@ function display() {
                     olderFollowTime,
                     focalChimpId);
             var anchor = $('<a>');
-            //anchor.prop('href', control.getFileAsUrl(baseUrl + queryString));
+            //anchor.prop('href', common.getFileAsUrl(baseUrl + queryString));
             anchor.html(olderFollowTime);
             // Ok, and now yet another annoyance of dealing with the current
             // setup. We can't let the links launch themselves, as this
@@ -381,7 +537,7 @@ function display() {
             // string in the closure solves this.
             (function(queryStr) {
                 anchor.on('click', function() {
-                    var url = control.getFileAsUrl(baseUrl + queryStr);
+                    var url = common.getFileAsUrl(baseUrl + queryStr);
                     console.log('url: ' + url);
                     window.location.href = url;
                 });
@@ -393,6 +549,24 @@ function display() {
             // And now append the menu item.
             dropdownMenu.append(menuItem);
         }
+    };
+
+    var getExistingTimeFailure = function(error) {
+        console.log('jgiFollowScreen: getExistingTimeFailure with error: ' + error);
+    };
+
+    var updateOlderMenu = function() {
+        var dropdownMenu = $('#older-items-menu');
+        // Remove any older items that are somehow hanging around. This
+        // should always be unnecessary, I think.
+        dropdownMenu.empty();
+        
+        // First, get the older times.
+        util.getExistingTimesForDate(
+                followDate,
+                focalChimpId,
+                getExistingTimeSuccess,
+                getExistingTimeFailure);
     };
 
     /**
@@ -523,8 +697,8 @@ function display() {
         var femaleChimps = getFemaleChimps();
         
         var allChimps = maleChimps.toArray().concat(femaleChimps.toArray());
-        
-        for (var i = 0; i < allChimps.length; i++) {
+        var i = 0;
+        for (i = 0; i < allChimps.length; i++) {
             var chimp = allChimps[i];
             var chimpId = chimp.id;
             var presentCheckbox = $('#' + chimpId + presentSuffix);
@@ -556,7 +730,7 @@ function display() {
         // add rows for the species
         var species = getSpecies();
         
-        for (var i = 0; i < species.length; i++) {
+        for (i = 0; i < species.length; i++) {
 
             var speciesId = species.eq(i).prop('id');
             var numPresent = getNumberOfSpeciesPresent(speciesId);
@@ -569,13 +743,63 @@ function display() {
         
         // add rows for the foods
         var foods = getFoods();
-        for (var i = 0; i < foods.length; i++) {
+        for (i = 0; i < foods.length; i++) {
             var id = foods.eq(i).prop('id');
             var isPresent = foodIsPresent(id);
             writeForFood(false, null, id, isPresent, null, null);
         }
 
+        // I need a callback function that will tell me once all of 
+        // this initialization is done
+        datarsp.query('food_bout', null, null, null, null,
+            null, null, true, dbInitCBSuccess, 
+            dbInitCBFail, null, false);
+    };
 
+    var dbInitCBSuccess = function(result) {
+        console.log('After initDatabaseFromUI succeeded with result count: ' +result.getCount());
+        setupUI();
+    };
+
+    var dbInitCBFail = function(error) {
+        console.log('After initDatabaseFromUI failed with error: ' + error);
+    };
+
+    var cacheInitCBSuccess = function(result) {
+        console.log('After createFoodRowIdCache succeeded with result count: ' +result.getCount());
+        afterCacheInit();
+    };
+
+    var cacheInitCBFail = function(error) {
+        console.log('After createFoodRowIdCache failed with error: ' + error);
+    };
+
+    var afterCacheInit = function() {
+        $('#time-label').eq(0).html(followTimeUserFriendly);
+
+        updateOlderMenu();
+        initUIForFocalChimp();
+        updateUIForAllSpecies();
+        updateUIForFood();
+    };
+
+    var setupUI = function() {
+        createIdCache();
+        createSpeciesRowIdCache();
+        createFoodRowIdCache();
+
+        // I need a callback function that will tell me once 
+        // the caches are done
+        datarsp.query('food_bout', null, null, null, null,
+            null, null, true, cacheInitCBSuccess, 
+            cacheInitCBFail, null, false);
+
+//         $('#time-label').eq(0).html(followTimeUserFriendly);
+// 
+//         updateOlderMenu();
+//         initUIForFocalChimp();
+//         updateUIForAllSpecies();
+//         updateUIForFood();
     };
 
     var writeForSpecies = function(isUpdate, rowId, speciesId, numPresent) {
@@ -589,18 +813,30 @@ function display() {
         var numPresentStr = numPresent.toString();
         struct['OS_duration'] = numPresentStr;
 
+
+
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
-            var updateSuccessfully = control.updateRow(
+            window.datarsp.updateRow(
                     'other_species',
                     stringified,
-                    rowId);
-            console.log('updated species successfully: ' + updateSuccessfully);
+                    rowId,
+                    cbAddRowOSSuccess,
+                    cbAddRowOSFail,
+                    null,
+                    false);
+            console.log('called updated species: ' + speciesId);
         } else {
-            var addSuccessfully = control.addRow(
+            var newRowId = util.genUUID();
+            window.datarsp.addRow(
                     'other_species',
-                    stringified);
-            //console.log('added species successfully: ' + addSuccessfully);
+                    stringified,
+                    newRowId,
+                    cbAddRowOSSuccess,
+                    cbAddRowOSFail,
+                    null,
+                    false);
+            console.log('called added species: ' + speciesId);
         }
 
     };
@@ -629,17 +865,28 @@ function display() {
         }
 
         var stringified = JSON.stringify(struct);
+
         if (isUpdate) {
-            var updateSuccessfully = control.updateRow(
+            window.datarsp.updateRow(
                     'food_bout',
                     stringified,
-                    rowId);
-            console.log('updated food successfully: ' + updateSuccessfully);
+                    rowId, 
+                    cbAddRowFBSuccess, 
+                    cbAddRowFBFail,
+                    null,
+                    false);
+            console.log('called updated food: ' + foodId);
         } else {
-            var addSuccessfully = control.addRow(
+            var newRowId = util.genUUID();
+            window.datarsp.addRow(
                     'food_bout',
-                    stringified);
-            console.log('added food successfully: ' + addSuccessfully);
+                    stringified,
+                    newRowId,
+                    cbAddRowFBSuccess,
+                    cbAddRowFBFail, 
+                    null,
+                    false);
+            console.log('called added food: ' + foodId);
         }
 
     };
@@ -704,13 +951,14 @@ function display() {
         
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
-            var updateSuccessfully =
-                control.updateRow('follow_arrival', stringified, rowId);
-            //console.log('updateSuccessfully: ' + updateSuccessfully);
+            window.datarsp.updateRow('follow_arrival', stringified, rowId,
+                    cbAddRowFASuccess, cbAddRowFAFail, null, false);
+            console.log('called update chimp: ' + chimpId);
         } else {
-            var addedSuccessfully =
-                control.addRow('follow_arrival', stringified);
-            //console.log('added successfully: ' + addedSuccessfully);
+            var newRowId = util.genUUID();
+            window.datarsp.addRow('follow_arrival', stringified, newRowId, 
+                    cbAddRowFASuccess, cbAddRowFAFail, null, false);
+            console.log('called added chimp: ' + chimpId);
         }
     };
 
@@ -909,6 +1157,66 @@ function display() {
 
     };
 
+    var cbPrevNewTimePointSuccess = function(result) {
+        // previous time is not a new time point
+        if (!(result.getCount() === 0)) {
+            console.log(
+                    'there is a previous time point, updating ui for that');
+            initUIFromDatabaseForTime(previousTime, true);
+            // And now generate entries for all the rows. This will also
+            // establish a row for every chimp, which is important for our
+            // assumptions down the line.
+
+            // Have to make sure that the UI is done before this can be done correctly!!
+            //initDatabaseFromUI();
+        } else {
+            // Then all the checkboxes are empty. We'll generate a row for
+            // every chimp with this call, which is important for establishing
+            // the invariants we're going to use later.
+            initDatabaseFromUI();
+        }
+
+//         createIdCache();
+//         createSpeciesRowIdCache();
+//         createFoodRowIdCache();
+// 
+//         $('#time-label').eq(0).html(followTimeUserFriendly);
+// 
+//         updateOlderMenu();
+//         initUIForFocalChimp();
+//         updateUIForAllSpecies();
+//         updateUIForFood();
+        
+    };
+
+    var cbPrevNewTimePointFail = function(error) {
+        console.log('jgiFollowScreen: cbPrevNewTimePointFail failed with error: ' + error);
+    };
+
+    var cbNewTimePointSuccess = function(result) {
+        var tableData = result;
+        if(tableData.getCount() === 0) {
+            // Might have to update the UI from the previous time point.
+            // We'll do this if the previous time exists.
+            previousTime = decrementTime(followTime);
+            console.log(
+                    'this time is: ' +
+                    followTime +
+                    ', previous time is: ' +
+                    previousTime);
+            isNewTimePoint(previousTime, cbPrevNewTimePointSuccess, cbPrevNewTimePointFail);
+        } else {
+            // We're returning to an existing timepoint, so update the UI to
+            // reflect this.
+            console.log('Initializing the UI from an existing time');
+            initUIFromDatabaseForTime(followTime, false);
+        }
+    };
+
+    var cbNewTimePointFail = function(error) {
+        console.log('jgiFollowScreen: cbNewTimePointFail failed with error: ' + error);
+    };
+
     /*****  end function declaractions  *****/
 
     // First we'll add the dynamic UI elements.
@@ -920,46 +1228,23 @@ function display() {
     var femaleChimps = getFemaleChimps();
     appendFemaleCheckBoxes(femaleChimps);
 
+
     // Now handle the first pass of the screen.
-    if (isNewTimePoint(followTime)) {
-        // Might have to update the UI from the previous time point.
-        // We'll do this if the previous time exists.
-        var previousTime = decrementTime(followTime);
-        console.log(
-                'this time is: ' +
-                followTime +
-                ', previous time is: ' +
-                previousTime);
-        if (!isNewTimePoint(previousTime)) {
-            console.log(
-                    'there is a previous time point, updating ui for that');
-            initUIFromDatabaseForTime(previousTime, true);
-            // And now generate entries for all the rows. This will also
-            // establish a row for every chimp, which is important for our
-            // assumptions down the line.
-            initDatabaseFromUI();
-        } else {
-            // Then all the checkboxes are empty. We'll generate a row for
-            // every chimp with this call, which is important for establishing
-            // the invariants we're going to use later.
-            initDatabaseFromUI();
-        }
-    } else {
-        // We're returning to an existing timepoint, so update the UI to
-        // reflect this.
-        initUIFromDatabaseForTime(followTime, false);
-    }
+    // CAL: Moved this line here 
+    previousTime = decrementTime(followTime);
+    isNewTimePoint(followTime, cbNewTimePointSuccess, cbNewTimePointFail);
 
-    var rowIdCache = createIdCache();
-    var speciesRowIdCache = createSpeciesRowIdCache();
-    var foodRowIdCache = createFoodRowIdCache();
-
-    $('#time-label').eq(0).html(followTimeUserFriendly);
-
-    updateOlderMenu();
-    initUIForFocalChimp();
-    updateUIForAllSpecies();
-    updateUIForFood();
+    // CAL: Do all of this only after things have been initialized
+//     createIdCache();
+//     createSpeciesRowIdCache();
+//     createFoodRowIdCache();
+// 
+//     $('#time-label').eq(0).html(followTimeUserFriendly);
+// 
+//     updateOlderMenu();
+//     initUIForFocalChimp();
+//     updateUIForAllSpecies();
+//     updateUIForFood();
 
     // Now we'll attach a click listener that rights the state of the checkbox
     // into the database. Note that for now we're only using the present
@@ -1099,7 +1384,7 @@ function display() {
         var noClosestOk = false;
         //If no closest to focal, give an alert. 
         if (closestId == undefined) {
-            noClosestOk = confirm("No nearest to focal. Are you sure?");
+            noClosestOk = confirm('No nearest to focal. Are you sure?');
         }
         else {
             noClosestOk = true;
@@ -1120,7 +1405,7 @@ function display() {
         }
         //If none within 5m of focal, give an alert. 
         if (noneWithin5ok == false) {
-            noneWithin5ok = confirm("No chimps within 5m. Are you sure?");
+            noneWithin5ok = confirm('No chimps within 5m. Are you sure?');
         }
 
         if ((noClosestOk == true) && (noneWithin5ok == true)) {
@@ -1132,7 +1417,7 @@ function display() {
                 nextTime,
                 focalChimpId);
             var url =
-                control.getFileAsUrl('config/assets/followScreen.html' + queryString);
+                common.getFileAsUrl('config/assets/followScreen.html' + queryString);
             console.log('url: ' + url);
             window.location.href = url;
         }

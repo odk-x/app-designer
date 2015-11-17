@@ -379,6 +379,42 @@ window.__getResultData = function() {
         return pub.getData(0, elementKey);
     };
 
+    pub.getElementKey = function(elementPath) {
+        var hackPath = elementPath.replace(/\./g, "_");
+        return hackPath;
+    };
+
+    pub.getColumnDisplayName = function(elementPath) {
+        var kvsLen = resultObj.metadata.keyValueStoreList.length;
+        var retVal = elementPath;
+
+        for (var i = 0; i < kvsLen; i++) {
+            var kvs = resultObj.metadata.keyValueStoreList[i];
+            if (kvs.aspect === elementPath && kvs.partition === 'column' &&
+                kvs.key === 'displayName') {
+                retVal = kvs.value;
+            }
+        }
+
+        return retVal;
+    };
+
+    pub.getTableDisplayName = function(tableId) {
+        var kvsLen = resultObj.metadata.keyValueStoreList.length;
+        var retVal = tableId;
+
+        for (var i = 0; i < kvsLen; i++) {
+            var kvs = resultObj.metadata.keyValueStoreList[i];
+            if (kvs.aspect === tableId && kvs.partition === 'table' &&
+                kvs.key === 'displayName') {
+                retVal = kvs.value;
+            }
+        }
+
+        return retVal;
+        
+    };
+
     return pub;
 };
 

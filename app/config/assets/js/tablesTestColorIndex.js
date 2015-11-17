@@ -20,6 +20,9 @@ var retObj = {};
 var cbFn = function (result) {
 
     retObj = result;
+
+    console.log('Metadata for the result is ' + retObj.metadata);
+
     for (var i = 0; i < result.getCount(); i++) {
         dataMap[i] = result.getData(i, 'Description');
         //console.log("dataMap[" + i + "] = " + dataMap[i]);

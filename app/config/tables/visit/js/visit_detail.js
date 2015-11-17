@@ -1,24 +1,28 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control, data */
+/* global $, control */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/visit_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: visit');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
+// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: common.getFileAsUrl('output/debug/visit_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             if (dataObj === undefined || dataObj === null) {
+//                 console.log('Could not load data json for table: visit');
+//             }
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
  
+var visitDetailResultSet = {};
+var plots = {};
+var plotId;
+
 function display() {
     // We don't want any of the input elements to be editable.
     $('input').attr('disabled', true);
@@ -36,27 +40,27 @@ function display() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
 
-    var plotId = data.get('plot_id');
+    var plotId = visitDetailResultSet.get('plot_id');
 
-    var plots = control.query(
-        'plot',
-        '_id = ?',
-        [plotId]);
+//     var plots = control.query(
+//         'plot',
+//         '_id = ?',
+//         [plotId]);
 
     var plotName = plots.get('plot_name');
 
     $('#plot-name').text(plotName);
-    $('#plant-height').text(data.get('plant_height'));
+    $('#plant-height').text(visitDetailResultSet.get('plant_height'));
     // We need to fiddle with the date a little bit to get back a more
     // human-readable value.
-    var displayDate = data.get('date');
+    var displayDate = visitDetailResultSet.get('date');
     if (displayDate !== null && displayDate !== undefined) {
         displayDate = displayDate.substring(0, 10);
     }
     $('#DATE').text(displayDate);
 
     // Get the plant health.
-    var ph = data.get('plant_health');
+    var ph = visitDetailResultSet.get('plant_health');
     if (ph === PH_GOOD) {
         $('#plant-health-good').attr('checked', true);
     } else if (ph === PH_FAIR) {
@@ -68,7 +72,7 @@ function display() {
     }
 
     // Now do the soil.
-    var soil = data.get('soil');
+    var soil = visitDetailResultSet.get('soil');
     if (soil === SOIL_MEDIUM_SAND) {
         $('#medium-sand').attr('checked', true);
     } else if (soil === SOIL_FINE_SAND) {
@@ -82,8 +86,8 @@ function display() {
     }
 
     // Now do the pests.
-    var bugs = data.get('pests');
-	var bugArray = (bugs !== null && bugs !== undefined) ? JSON.parse(bugs) : [];
+    var bugs = visitDetailResultSet.get('pests');
+	var bugArray = (bugs !== null && bugs !== undefined) ? bugs : [];
 	for ( var i = 0 ; i < bugArray.length ; ++i ) {
 		var bug = bugArray[i];
         if (bug===BUG_EARWORM) {
@@ -100,6 +104,37 @@ function display() {
         }
     }
 
-    $('#observations').text(data.get('observations'));
+    $('#observations').text(visitDetailResultSet.get('observations'));
 }
 
+function cbPlotSuccess(result) {
+    plots = result;
+
+    display();
+}
+
+function cbPlotFailure(error) {
+
+    console.log('visit_detail: cbPlotFailure failed with error: ' + error);
+}
+
+
+function cbSuccess(result) {
+
+    visitDetailResultSet = result;
+
+    plotId = visitDetailResultSet.get('plot_id');
+
+    datarsp.query('plot', '_id = ?', [plotId], null, null,
+        null, null, true, cbPlotSuccess, cbPlotFailure, null, false);
+}
+
+function cbFailure(error) {
+
+    console.log('visit_detail: cbFailure failed with error: ' + error);
+}
+
+function setup() {
+
+    datarsp.getViewData(cbSuccess, cbFailure);
+}

@@ -1,7 +1,7 @@
 /* CSS Stylesheet - GEO Example Detail View*/
 body {
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: cover !important;
 	background-attachment: fixed;
 	background-position: center;
 }
