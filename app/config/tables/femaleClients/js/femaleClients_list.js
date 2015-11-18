@@ -123,7 +123,7 @@ function render() {
             var chevron = document.createElement('img');
             chevron.setAttribute(
                     'src',
-                    control.getFileAsUrl('config/assets/img/little_arrow.png'));
+                    common.getFileAsUrl('config/assets/img/little_arrow.png'));
             chevron.setAttribute('class', 'chevron');
             item.appendChild(chevron);
 
