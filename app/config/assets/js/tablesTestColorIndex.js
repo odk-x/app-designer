@@ -51,35 +51,6 @@ var resumeFn = function(idxStart) {
         // Get the KVS when set to true
         // Original query
         datarsp.query('geotagger', null, null, null, null, null, null, true, cbFn, cbFnFailure, null, false);
-
-        //var typeData = control.query('Tea_types', null, null);
-        //for (var typeCntr = 0; typeCntr < typeData.getCount(); typeCntr++) {
-        //    typeNameMap[typeData.getData(typeCntr, 'Type_id')] =
-        //        typeData.getData(typeCntr, 'Name');
-        //}
-
-        // We're also going to add a click listener on the wrapper ul that will
-        // handle all of the clicks on its children.
-        //$('#list').click(function(e) {
-          //var tableId = data.getTableId();
-            // We set the rowId while as the li id. However, we may have
-            // clicked on the li or anything in the li. Thus we need to get
-            // the original li, which we'll do with jQuery's closest()
-            // method. First, however, we need to wrap up the target
-            // element in a jquery object.
-            // wrap up the object so we can call closest()
-        //var jqueryObject = $(e.target);
-            // we want the closest thing with class item_space, which we
-            // have set up to have the row id
-        //var containingDiv = jqueryObject.closest('.item_space');
-        //var rowId = containingDiv.attr('rowId');
-        //console.log('clicked with rowId: ' + rowId);
-            // make sure we retrieved the rowId
-        //if (rowId !== null && rowId !== undefined) {
-                // we'll pass null as the relative path to use the default file
-            //control.openDetailView(tableId, rowId, null);
-        //}
-        //});
     }
 };
 

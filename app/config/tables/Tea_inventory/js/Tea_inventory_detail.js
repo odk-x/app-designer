@@ -25,12 +25,6 @@ function cbTypeSuccess(result) {
 
     $('#TITLE').text(teaInvResultSet.get('Name'));
 
-    // We're going to get the type name from the Tea Types table.
-//     var typeData = control.query(
-//             'Tea_types',
-//             'Type_id = ?',
-//             [data.get('Type_id')]);
-
     $('#FIELD_1').text(typeData.getData(0, 'Name'));
     $('#FIELD_2').text(teaInvResultSet.get('Price_8oz'));
     $('#FIELD_3').text(teaInvResultSet.get('Price_12oz'));

@@ -63,26 +63,9 @@ util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure
     var whereClause =
         'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ?';
     var selectionArgs = [date, focalChimpId];
-    
-//     var tableData = control.query(
-//             'follow_arrival',
-//             whereClause,
-//             selectionArgs);
 
     window.datarsp.query('follow_arrival', whereClause, selectionArgs, 
         null, null, null, null, true, cbSuccess, cbFailure, null, false);
-
-//     var times = [];
-//     for (var i = 0; i < tableData.getCount(); i++) {
-//         var dataPoint = tableData.getData(i, 'FA_time_start');
-//         // now see if we already have this value, in which case we won't add it
-//         if (times.indexOf(dataPoint) < 0) {
-//             times.push(dataPoint);
-//         }
-//     }
-// 
-//     return times;
-
 };
 
 /**
@@ -97,13 +80,6 @@ util.getTableDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cb
 
     window.datarsp.query('follow_arrival', whereClause, selectionArgs, 
         null, null, null, null, true, cbSuccess, cbFailure, null, false);
-
-//     var result = control.query(
-//             'follow_arrival',
-//             whereClause,
-//             selectionArgs);
-// 
-//     return result;
 };
 
 util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
@@ -116,13 +92,6 @@ util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbF
     window.datarsp.query('food_bout', whereClause, selectionArgs, 
         null, null, null, null, true, cbSuccess, cbFailure, null, false);
 
-//     var result = control.query(
-//             'food_bout',
-//             whereClause,
-//             selectionArgs);
-// 
-//     return result;
-
 };
 
 util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
@@ -134,13 +103,6 @@ util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, 
 
     window.datarsp.query('other_species', whereClause, selectionArgs, 
         null, null, null, null, true, cbSuccess, cbFailure, null, false);
-
-//     var result = control.query(
-//             'other_species',
-//             whereClause,
-//             selectionArgs);
-// 
-//     return result;
 
 };
 

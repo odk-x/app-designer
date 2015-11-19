@@ -355,7 +355,7 @@ module.exports = function (grunt) {
         });
 
     grunt.registerTask(
-        'adbpush-clarice',
+        'adbpush-systemjs',
         'Push everything for tables only to the device',
         function() {
             // We do not need any system, data or output files. 

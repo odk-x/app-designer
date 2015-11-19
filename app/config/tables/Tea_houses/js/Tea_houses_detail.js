@@ -71,12 +71,6 @@ function teaInvCBSuccess(invData) {
     $('#FIELD_4').text(teaHouseResultSet.get('District'));
     $('#FIELD_5').text(teaHouseResultSet.get('Neighborhood'));
 
-    // We're going to get the type name from the Tea Types table.
-//     var typeData = control.query(
-//             'Tea_types',
-//             'Type_id = ?',
-//             [data.get('Specialty_Type_id')]);
-
     $('#FIELD_6').text(typeData.getData(0, 'Name'));
 
     $('#FIELD_13').text(teaHouseResultSet.get('Date_Opened'));
@@ -107,10 +101,7 @@ function teaInvCBSuccess(invData) {
     $('#FIELD_14').text(teaHouseResultSet.get('Owner'));
     $('#FIELD_15').text(teaHouseResultSet.get('Phone_Number'));
 
-//     var results = control.query(
-//             'Tea_inventory',
-//             'House_id = ?',
-//             [data.get('House_id')]);
+
     $('#FIELD_16').text(invData.getCount());
 
 }

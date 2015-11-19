@@ -339,6 +339,11 @@ function display() {
      * I.e. if someone goes back to look at an earlier time, this method will
      * retrieve the existing data and update the checkboxes with the
      * appropriate contents.
+     *
+     * NOTE: The order of the the util calls matter!  The cbSuccessFoodData*
+     * callback functions have some extra initialization in them.  They must be
+     * called last.  This should be re-worked to avoid such dependencies.  
+     *
      */
     var initUIFromDatabaseForTime = function(time, isNewVar) {
         isNew = isNewVar;
@@ -374,26 +379,7 @@ function display() {
                 focalChimpId,
                 cbSuccessFoodData,
                 cbFailFoodData);
-            // On new we only want to 
         }
-
-
-
-//         updateUIForAllSpecies();
-//         updateUIForFood();
-
-        // CAL: When this is used to initialize from a previous time point
-        // Other initializations don't happen
-        // I need a callback function that will tell me once all of 
-        // this initialization is done - also in initDatabaseFromUI
-        // Init after food init is done instead
-//         if (isNew == false) {
-//             console.log('initUIFromDatabaseForTime called with false so initialize has to happen');
-//             datarsp.query('food_bout', null, null, null, null,
-//                 null, null, true, dbInitCBSuccess, 
-//                 dbInitCBFail, null, false);
-//         }
-
     };
 
     var isNewTimePoint = function(time, cbSuccess, cbFailure) {
@@ -793,13 +779,6 @@ function display() {
         datarsp.query('food_bout', null, null, null, null,
             null, null, true, cacheInitCBSuccess, 
             cacheInitCBFail, null, false);
-
-//         $('#time-label').eq(0).html(followTimeUserFriendly);
-// 
-//         updateOlderMenu();
-//         initUIForFocalChimp();
-//         updateUIForAllSpecies();
-//         updateUIForFood();
     };
 
     var writeForSpecies = function(isUpdate, rowId, speciesId, numPresent) {
@@ -1175,18 +1154,6 @@ function display() {
             // the invariants we're going to use later.
             initDatabaseFromUI();
         }
-
-//         createIdCache();
-//         createSpeciesRowIdCache();
-//         createFoodRowIdCache();
-// 
-//         $('#time-label').eq(0).html(followTimeUserFriendly);
-// 
-//         updateOlderMenu();
-//         initUIForFocalChimp();
-//         updateUIForAllSpecies();
-//         updateUIForFood();
-        
     };
 
     var cbPrevNewTimePointFail = function(error) {
@@ -1228,23 +1195,7 @@ function display() {
     var femaleChimps = getFemaleChimps();
     appendFemaleCheckBoxes(femaleChimps);
 
-
-    // Now handle the first pass of the screen.
-    // CAL: Moved this line here 
-    previousTime = decrementTime(followTime);
     isNewTimePoint(followTime, cbNewTimePointSuccess, cbNewTimePointFail);
-
-    // CAL: Do all of this only after things have been initialized
-//     createIdCache();
-//     createSpeciesRowIdCache();
-//     createFoodRowIdCache();
-// 
-//     $('#time-label').eq(0).html(followTimeUserFriendly);
-// 
-//     updateOlderMenu();
-//     initUIForFocalChimp();
-//     updateUIForAllSpecies();
-//     updateUIForFood();
 
     // Now we'll attach a click listener that rights the state of the checkbox
     // into the database. Note that for now we're only using the present

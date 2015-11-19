@@ -68,18 +68,6 @@ function display() {
             communityId,
             beginTime,
             researcher);
-
-        // Now we'll launch the follow screen. The follow screen needs to know
-        // what date we're on, as well as the time it should be using.
-//         var queryString = util.getKeysToAppendToURL(
-//             date,
-//             beginTime,
-//             focalChimpId);
-//         var url = common.getFileAsUrl(
-//                 'config/assets/followScreen.html' + queryString);
-//         // There seems to be an issue with the way window.location is set here
-//         //window.location.href = url;
-//         control.launchHTML('assets/followScreen.html' + queryString);
     });
 
 }
