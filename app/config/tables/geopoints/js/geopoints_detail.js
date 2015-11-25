@@ -25,7 +25,7 @@ function cbSuccess(result) {
     document.getElementById('title').innerHTML = clientId;
 
     // handles case when 'other' transportation mode is specified
-    if(data.get('transportation_mode') !== 'Other') {
+    if(result.get('transportation_mode') !== 'Other') {
         document.getElementById('transportationMode').innerHTML =
             result.get('transportation_mode');
     } else {

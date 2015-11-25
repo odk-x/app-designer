@@ -53,7 +53,7 @@ function getPlatformInfo() {
     // string here.
     var result = JSON.stringify(platformInfo);
     return result;
-};
+}
 
 function getFileAsUrl(relativePath) {
     // strip off backslashes
@@ -119,9 +119,9 @@ if (!window.control) {
         
         // get the script body
         var jqxhr = $.ajax({
-            type: "GET",
+            type: 'GET',
             url: urlScript,
-            dataType: "json",
+            dataType: 'json',
             async: false
         });
         
@@ -129,7 +129,7 @@ if (!window.control) {
         with (window) {
             eval(jqxhr.responseText);
         }
-    }
+    };
     
     // This will be the object specified in control.json. It is not set until
     // setBackingObject is called.

@@ -26,15 +26,14 @@ function handleClick(rowId) {
         'config/tables/geopoints/html/geopoints_detail.html');
 }
 
-function display() {
-
+function render(result) {
     // The client id should have been passed to us as the hash.
     var hash = window.location.hash;
     var clientId = null;
     if (hash === '') {
         console.log('The hash containing the client id was not present!');
         console.log('Inferring from table');
-        clientId = data.get('client_id');
+        clientId = result.get('client_id');
     } else {
         // The has begins a physical hash. Strip it.
         clientId = hash.substring(1);
@@ -75,7 +74,7 @@ function display() {
     //waypoint.innerHTML = 'Add Waypoint';
     //document.getElementById('header').appendChild(waypoint);
 
-    for (var i = 0; i < data.getCount(); i++) {
+    for (var i = 0; i < result.getCount(); i++) {
 
         // Make list entry only if client id exists
         if(clientId !== null && clientId !== '') {
@@ -84,7 +83,7 @@ function display() {
             item.setAttribute('class', 'item_space');
             item.setAttribute(
                 'onClick',
-                'handleClick("' + data.getRowId(i) + '")');
+                'handleClick("' + result.getRowId(i) + '")');
             item.innerHTML = clientId;
             document.getElementById('list').appendChild(item);
 
@@ -99,15 +98,24 @@ function display() {
 
             var step = document.createElement('li');
             step.setAttribute('class', 'detail');
-            step.innerHTML = 'Step: ' + data.getData(i, 'step');
+            step.innerHTML = 'Step: ' + result.getData(i, 'step');
             item.appendChild(step);
 
             var transportation = document.createElement('li');
             transportation.setAttribute('class', 'detail');
             transportation.innerHTML =
                 'Transportation: ' +
-                data.getData(i, 'transportation_mode');
+                result.getData(i, 'transportation_mode');
             item.appendChild(transportation);
         }
     }
+}
+
+function cbFailure(error) {
+    console.log('geopoints_map_list: cbFailure failed with error: ' + error);
+}
+
+
+function display() {
+    datarsp.getViewData(render, cbFailure);
 }
