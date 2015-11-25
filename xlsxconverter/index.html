@@ -133,7 +133,7 @@ function handleSave(e) {
         var formDefJson = JSON.parse(formDefStr);
 
         // Get the dataTableModel
-        var dtm = util.getDataTableModelFromFormDef(formDefJson);
+        var dtm = formDefJson.specification.dataTableModel;
 
         // Create and write out definition.csv
         var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
@@ -205,7 +205,7 @@ function postFormDef() {
       // if necessary
       if (shouldWriteDefAndPropCsv) {
         // Get the dataTableModel
-        var dtm = util.getDataTableModelFromFormDef(formDefJson);
+        var dtm = formDefJson.specification.dataTableModel;
 
         var defPath = 'app/config/tables/' + tableId + '/definition.csv';
         var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);

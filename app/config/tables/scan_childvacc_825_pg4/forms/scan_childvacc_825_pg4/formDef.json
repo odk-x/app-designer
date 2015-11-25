@@ -573,7 +573,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "scan_childvacc_825_pg4",
         "_row_num": 2
       },
@@ -588,6 +588,16 @@
           "title": "scan_childvacc_825_pg4"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"scan_output_directory\",\"nextvaccination_at14weeks_image0_uriFragment\",\"nextvaccination_at14weeks_image0_contentType\",\"nextvaccination_at14weeks\",\"given_opv2_image0_uriFragment\",\"given_opv2_image0_contentType\",\"given_opv2\",\"opv2_dategiven_image0_uriFragment\",\"opv2_dategiven_image0_contentType\",\"opv2_dategiven\",\"opv2_initials_image0_uriFragment\",\"opv2_initials_image0_contentType\",\"opv2_initials\",\"given_penta2_image0_uriFragment\",\"given_penta2_image0_contentType\",\"given_penta2\",\"penta2_dategiven_image0_uriFragment\",\"penta2_dategiven_image0_contentType\",\"penta2_dategiven\",\"penta2_initials_image0_uriFragment\",\"penta2_initials_image0_contentType\",\"penta2_initials\",\"given_pcv2_image0_uriFragment\",\"given_pcv2_image0_contentType\",\"given_pcv2\",\"pcv2_dategiven_image0_uriFragment\",\"pcv2_dategiven_image0_contentType\",\"pcv2_dategiven\",\"pcv2_initials_image0_uriFragment\",\"pcv2_initials_image0_contentType\",\"pcv2_initials\",\"given_rota2_image0_uriFragment\",\"given_rota2_image0_contentType\",\"given_rota2\",\"rota2_dategiven_image0_uriFragment\",\"rota2_dategiven_image0_contentType\",\"rota2_dategiven\",\"rota2_initials_image0_uriFragment\",\"rota2_initials_image0_contentType\",\"rota2_initials\",\"addtlvacc_1_name_image0_uriFragment\",\"addtlvacc_1_name_image0_contentType\",\"addtlvacc_1_name\",\"addtlvacc_2_name_image0_uriFragment\",\"addtlvacc_2_name_image0_contentType\",\"addtlvacc_2_name\",\"given_addtlvacc_1_image0_uriFragment\",\"given_addtlvacc_1_image0_contentType\",\"given_addtlvacc_1\",\"given_addtlvacc_2_image0_uriFragment\",\"given_addtlvacc_2_image0_contentType\",\"given_addtlvacc_2\",\"addtlvacc_1_dategiven_image0_uriFragment\",\"addtlvacc_1_dategiven_image0_contentType\",\"addtlvacc_1_dategiven\",\"addtlvacc_2_dategiven_image0_uriFragment\",\"addtlvacc_2_dategiven_image0_contentType\",\"addtlvacc_2_dategiven\",\"addtlvacc_1_initials_image0_uriFragment\",\"addtlvacc_1_initials_image0_contentType\",\"addtlvacc_1_initials\",\"addtlvacc_2_initials_image0_uriFragment\",\"addtlvacc_2_initials_image0_contentType\",\"addtlvacc_2_initials\",\"nurse_notes_image0_uriFragment\",\"nurse_notes_image0_contentType\",\"nurse_notes\",\"qr_patientcode_image0_uriFragment\",\"qr_patientcode_image0_contentType\",\"qr_patientcode\"]",
+        "_row_num": 2
       }
     ]
   },
@@ -610,8 +620,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "scan_childvacc_825_pg4",
         "_row_num": 2
       },
@@ -627,8 +637,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "scan_childvacc_825_pg4",
         "_row_num": 2,
         "__rowNum__": 1
@@ -2604,6 +2614,1578 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "scan_output_directory": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "scan_output_directory",
+        "elementName": "scan_output_directory",
+        "elementSet": "data",
+        "elementPath": "scan_output_directory"
+      },
+      "nextvaccination_at14weeks_image0": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "nextvaccination_at14weeks_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "nextvaccination_at14weeks_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "nextvaccination_at14weeks_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "nextvaccination_at14weeks_image0.contentType"
+          }
+        },
+        "elementKey": "nextvaccination_at14weeks_image0",
+        "elementName": "nextvaccination_at14weeks_image0",
+        "elementSet": "data",
+        "elementPath": "nextvaccination_at14weeks_image0",
+        "listChildElementKeys": [
+          "nextvaccination_at14weeks_image0_uriFragment",
+          "nextvaccination_at14weeks_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "nextvaccination_at14weeks": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "nextvaccination_at14weeks",
+        "elementName": "nextvaccination_at14weeks",
+        "elementSet": "data",
+        "elementPath": "nextvaccination_at14weeks"
+      },
+      "given_opv2_image0": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "given_opv2_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "given_opv2_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "given_opv2_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "given_opv2_image0.contentType"
+          }
+        },
+        "elementKey": "given_opv2_image0",
+        "elementName": "given_opv2_image0",
+        "elementSet": "data",
+        "elementPath": "given_opv2_image0",
+        "listChildElementKeys": [
+          "given_opv2_image0_uriFragment",
+          "given_opv2_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "given_opv2": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "given_opv2_grid_values",
+        "elementKey": "given_opv2",
+        "elementName": "given_opv2",
+        "elementSet": "data",
+        "elementPath": "given_opv2"
+      },
+      "opv2_dategiven_image0": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "opv2_dategiven_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "opv2_dategiven_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "opv2_dategiven_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "opv2_dategiven_image0.contentType"
+          }
+        },
+        "elementKey": "opv2_dategiven_image0",
+        "elementName": "opv2_dategiven_image0",
+        "elementSet": "data",
+        "elementPath": "opv2_dategiven_image0",
+        "listChildElementKeys": [
+          "opv2_dategiven_image0_uriFragment",
+          "opv2_dategiven_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "opv2_dategiven": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "opv2_dategiven",
+        "elementName": "opv2_dategiven",
+        "elementSet": "data",
+        "elementPath": "opv2_dategiven"
+      },
+      "opv2_initials_image0": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "opv2_initials_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "opv2_initials_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "opv2_initials_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "opv2_initials_image0.contentType"
+          }
+        },
+        "elementKey": "opv2_initials_image0",
+        "elementName": "opv2_initials_image0",
+        "elementSet": "data",
+        "elementPath": "opv2_initials_image0",
+        "listChildElementKeys": [
+          "opv2_initials_image0_uriFragment",
+          "opv2_initials_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "opv2_initials": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "opv2_initials",
+        "elementName": "opv2_initials",
+        "elementSet": "data",
+        "elementPath": "opv2_initials"
+      },
+      "given_penta2_image0": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "given_penta2_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "given_penta2_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "given_penta2_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "given_penta2_image0.contentType"
+          }
+        },
+        "elementKey": "given_penta2_image0",
+        "elementName": "given_penta2_image0",
+        "elementSet": "data",
+        "elementPath": "given_penta2_image0",
+        "listChildElementKeys": [
+          "given_penta2_image0_uriFragment",
+          "given_penta2_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "given_penta2": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "given_penta2_grid_values",
+        "elementKey": "given_penta2",
+        "elementName": "given_penta2",
+        "elementSet": "data",
+        "elementPath": "given_penta2"
+      },
+      "penta2_dategiven_image0": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "penta2_dategiven_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "penta2_dategiven_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "penta2_dategiven_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "penta2_dategiven_image0.contentType"
+          }
+        },
+        "elementKey": "penta2_dategiven_image0",
+        "elementName": "penta2_dategiven_image0",
+        "elementSet": "data",
+        "elementPath": "penta2_dategiven_image0",
+        "listChildElementKeys": [
+          "penta2_dategiven_image0_uriFragment",
+          "penta2_dategiven_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "penta2_dategiven": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "penta2_dategiven",
+        "elementName": "penta2_dategiven",
+        "elementSet": "data",
+        "elementPath": "penta2_dategiven"
+      },
+      "penta2_initials_image0": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "penta2_initials_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "penta2_initials_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "penta2_initials_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "penta2_initials_image0.contentType"
+          }
+        },
+        "elementKey": "penta2_initials_image0",
+        "elementName": "penta2_initials_image0",
+        "elementSet": "data",
+        "elementPath": "penta2_initials_image0",
+        "listChildElementKeys": [
+          "penta2_initials_image0_uriFragment",
+          "penta2_initials_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "penta2_initials": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "penta2_initials",
+        "elementName": "penta2_initials",
+        "elementSet": "data",
+        "elementPath": "penta2_initials"
+      },
+      "given_pcv2_image0": {
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "given_pcv2_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "given_pcv2_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "given_pcv2_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "given_pcv2_image0.contentType"
+          }
+        },
+        "elementKey": "given_pcv2_image0",
+        "elementName": "given_pcv2_image0",
+        "elementSet": "data",
+        "elementPath": "given_pcv2_image0",
+        "listChildElementKeys": [
+          "given_pcv2_image0_uriFragment",
+          "given_pcv2_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "given_pcv2": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "given_pcv2_grid_values",
+        "elementKey": "given_pcv2",
+        "elementName": "given_pcv2",
+        "elementSet": "data",
+        "elementPath": "given_pcv2"
+      },
+      "pcv2_dategiven_image0": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "pcv2_dategiven_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "pcv2_dategiven_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "pcv2_dategiven_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "pcv2_dategiven_image0.contentType"
+          }
+        },
+        "elementKey": "pcv2_dategiven_image0",
+        "elementName": "pcv2_dategiven_image0",
+        "elementSet": "data",
+        "elementPath": "pcv2_dategiven_image0",
+        "listChildElementKeys": [
+          "pcv2_dategiven_image0_uriFragment",
+          "pcv2_dategiven_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "pcv2_dategiven": {
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "pcv2_dategiven",
+        "elementName": "pcv2_dategiven",
+        "elementSet": "data",
+        "elementPath": "pcv2_dategiven"
+      },
+      "pcv2_initials_image0": {
+        "_defn": [
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "pcv2_initials_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "pcv2_initials_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "pcv2_initials_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "pcv2_initials_image0.contentType"
+          }
+        },
+        "elementKey": "pcv2_initials_image0",
+        "elementName": "pcv2_initials_image0",
+        "elementSet": "data",
+        "elementPath": "pcv2_initials_image0",
+        "listChildElementKeys": [
+          "pcv2_initials_image0_uriFragment",
+          "pcv2_initials_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "pcv2_initials": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "pcv2_initials",
+        "elementName": "pcv2_initials",
+        "elementSet": "data",
+        "elementPath": "pcv2_initials"
+      },
+      "given_rota2_image0": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "given_rota2_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "given_rota2_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "given_rota2_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "given_rota2_image0.contentType"
+          }
+        },
+        "elementKey": "given_rota2_image0",
+        "elementName": "given_rota2_image0",
+        "elementSet": "data",
+        "elementPath": "given_rota2_image0",
+        "listChildElementKeys": [
+          "given_rota2_image0_uriFragment",
+          "given_rota2_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "given_rota2": {
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "given_rota2_grid_values",
+        "elementKey": "given_rota2",
+        "elementName": "given_rota2",
+        "elementSet": "data",
+        "elementPath": "given_rota2"
+      },
+      "rota2_dategiven_image0": {
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "rota2_dategiven_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "rota2_dategiven_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "rota2_dategiven_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "rota2_dategiven_image0.contentType"
+          }
+        },
+        "elementKey": "rota2_dategiven_image0",
+        "elementName": "rota2_dategiven_image0",
+        "elementSet": "data",
+        "elementPath": "rota2_dategiven_image0",
+        "listChildElementKeys": [
+          "rota2_dategiven_image0_uriFragment",
+          "rota2_dategiven_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "rota2_dategiven": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "rota2_dategiven",
+        "elementName": "rota2_dategiven",
+        "elementSet": "data",
+        "elementPath": "rota2_dategiven"
+      },
+      "rota2_initials_image0": {
+        "_defn": [
+          {
+            "_row_num": 51,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "rota2_initials_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "rota2_initials_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "rota2_initials_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "rota2_initials_image0.contentType"
+          }
+        },
+        "elementKey": "rota2_initials_image0",
+        "elementName": "rota2_initials_image0",
+        "elementSet": "data",
+        "elementPath": "rota2_initials_image0",
+        "listChildElementKeys": [
+          "rota2_initials_image0_uriFragment",
+          "rota2_initials_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "rota2_initials": {
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "rota2_initials",
+        "elementName": "rota2_initials",
+        "elementSet": "data",
+        "elementPath": "rota2_initials"
+      },
+      "addtlvacc_1_name_image0": {
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "addtlvacc_1_name_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_1_name_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "addtlvacc_1_name_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_1_name_image0.contentType"
+          }
+        },
+        "elementKey": "addtlvacc_1_name_image0",
+        "elementName": "addtlvacc_1_name_image0",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_name_image0",
+        "listChildElementKeys": [
+          "addtlvacc_1_name_image0_uriFragment",
+          "addtlvacc_1_name_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "addtlvacc_1_name": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "addtlvacc_1_name",
+        "elementName": "addtlvacc_1_name",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_name"
+      },
+      "addtlvacc_2_name_image0": {
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "addtlvacc_2_name_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_2_name_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "addtlvacc_2_name_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_2_name_image0.contentType"
+          }
+        },
+        "elementKey": "addtlvacc_2_name_image0",
+        "elementName": "addtlvacc_2_name_image0",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_name_image0",
+        "listChildElementKeys": [
+          "addtlvacc_2_name_image0_uriFragment",
+          "addtlvacc_2_name_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "addtlvacc_2_name": {
+        "_defn": [
+          {
+            "_row_num": 60,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "addtlvacc_2_name",
+        "elementName": "addtlvacc_2_name",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_name"
+      },
+      "given_addtlvacc_1_image0": {
+        "_defn": [
+          {
+            "_row_num": 63,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "given_addtlvacc_1_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "given_addtlvacc_1_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "given_addtlvacc_1_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "given_addtlvacc_1_image0.contentType"
+          }
+        },
+        "elementKey": "given_addtlvacc_1_image0",
+        "elementName": "given_addtlvacc_1_image0",
+        "elementSet": "data",
+        "elementPath": "given_addtlvacc_1_image0",
+        "listChildElementKeys": [
+          "given_addtlvacc_1_image0_uriFragment",
+          "given_addtlvacc_1_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "given_addtlvacc_1": {
+        "_defn": [
+          {
+            "_row_num": 64,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "given_addtlvacc_1_grid_values",
+        "elementKey": "given_addtlvacc_1",
+        "elementName": "given_addtlvacc_1",
+        "elementSet": "data",
+        "elementPath": "given_addtlvacc_1"
+      },
+      "given_addtlvacc_2_image0": {
+        "_defn": [
+          {
+            "_row_num": 67,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "given_addtlvacc_2_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "given_addtlvacc_2_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "given_addtlvacc_2_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "given_addtlvacc_2_image0.contentType"
+          }
+        },
+        "elementKey": "given_addtlvacc_2_image0",
+        "elementName": "given_addtlvacc_2_image0",
+        "elementSet": "data",
+        "elementPath": "given_addtlvacc_2_image0",
+        "listChildElementKeys": [
+          "given_addtlvacc_2_image0_uriFragment",
+          "given_addtlvacc_2_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "given_addtlvacc_2": {
+        "_defn": [
+          {
+            "_row_num": 68,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "given_addtlvacc_2_grid_values",
+        "elementKey": "given_addtlvacc_2",
+        "elementName": "given_addtlvacc_2",
+        "elementSet": "data",
+        "elementPath": "given_addtlvacc_2"
+      },
+      "addtlvacc_1_dategiven_image0": {
+        "_defn": [
+          {
+            "_row_num": 71,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "addtlvacc_1_dategiven_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_1_dategiven_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "addtlvacc_1_dategiven_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_1_dategiven_image0.contentType"
+          }
+        },
+        "elementKey": "addtlvacc_1_dategiven_image0",
+        "elementName": "addtlvacc_1_dategiven_image0",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_dategiven_image0",
+        "listChildElementKeys": [
+          "addtlvacc_1_dategiven_image0_uriFragment",
+          "addtlvacc_1_dategiven_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "addtlvacc_1_dategiven": {
+        "_defn": [
+          {
+            "_row_num": 72,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "addtlvacc_1_dategiven",
+        "elementName": "addtlvacc_1_dategiven",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_dategiven"
+      },
+      "addtlvacc_2_dategiven_image0": {
+        "_defn": [
+          {
+            "_row_num": 75,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "addtlvacc_2_dategiven_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_2_dategiven_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "addtlvacc_2_dategiven_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_2_dategiven_image0.contentType"
+          }
+        },
+        "elementKey": "addtlvacc_2_dategiven_image0",
+        "elementName": "addtlvacc_2_dategiven_image0",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_dategiven_image0",
+        "listChildElementKeys": [
+          "addtlvacc_2_dategiven_image0_uriFragment",
+          "addtlvacc_2_dategiven_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "addtlvacc_2_dategiven": {
+        "_defn": [
+          {
+            "_row_num": 76,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "addtlvacc_2_dategiven",
+        "elementName": "addtlvacc_2_dategiven",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_dategiven"
+      },
+      "addtlvacc_1_initials_image0": {
+        "_defn": [
+          {
+            "_row_num": 79,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "addtlvacc_1_initials_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_1_initials_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "addtlvacc_1_initials_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_1_initials_image0.contentType"
+          }
+        },
+        "elementKey": "addtlvacc_1_initials_image0",
+        "elementName": "addtlvacc_1_initials_image0",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_initials_image0",
+        "listChildElementKeys": [
+          "addtlvacc_1_initials_image0_uriFragment",
+          "addtlvacc_1_initials_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "addtlvacc_1_initials": {
+        "_defn": [
+          {
+            "_row_num": 80,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "addtlvacc_1_initials",
+        "elementName": "addtlvacc_1_initials",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_initials"
+      },
+      "addtlvacc_2_initials_image0": {
+        "_defn": [
+          {
+            "_row_num": 83,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "addtlvacc_2_initials_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_2_initials_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "addtlvacc_2_initials_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "addtlvacc_2_initials_image0.contentType"
+          }
+        },
+        "elementKey": "addtlvacc_2_initials_image0",
+        "elementName": "addtlvacc_2_initials_image0",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_initials_image0",
+        "listChildElementKeys": [
+          "addtlvacc_2_initials_image0_uriFragment",
+          "addtlvacc_2_initials_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "addtlvacc_2_initials": {
+        "_defn": [
+          {
+            "_row_num": 84,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "addtlvacc_2_initials",
+        "elementName": "addtlvacc_2_initials",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_initials"
+      },
+      "nurse_notes_image0": {
+        "_defn": [
+          {
+            "_row_num": 87,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "nurse_notes_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "nurse_notes_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "nurse_notes_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "nurse_notes_image0.contentType"
+          }
+        },
+        "elementKey": "nurse_notes_image0",
+        "elementName": "nurse_notes_image0",
+        "elementSet": "data",
+        "elementPath": "nurse_notes_image0",
+        "listChildElementKeys": [
+          "nurse_notes_image0_uriFragment",
+          "nurse_notes_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "nurse_notes": {
+        "_defn": [
+          {
+            "_row_num": 88,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "nurse_notes",
+        "elementName": "nurse_notes",
+        "elementSet": "data",
+        "elementPath": "nurse_notes"
+      },
+      "qr_patientcode_image0": {
+        "_defn": [
+          {
+            "_row_num": 91,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "qr_patientcode_image0_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "qr_patientcode_image0.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "qr_patientcode_image0_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "qr_patientcode_image0.contentType"
+          }
+        },
+        "elementKey": "qr_patientcode_image0",
+        "elementName": "qr_patientcode_image0",
+        "elementSet": "data",
+        "elementPath": "qr_patientcode_image0",
+        "listChildElementKeys": [
+          "qr_patientcode_image0_uriFragment",
+          "qr_patientcode_image0_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "qr_patientcode": {
+        "_defn": [
+          {
+            "_row_num": 92,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "qr_patientcode",
+        "elementName": "qr_patientcode",
+        "elementSet": "data",
+        "elementPath": "qr_patientcode"
+      },
+      "nextvaccination_at14weeks_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "nextvaccination_at14weeks_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "nextvaccination_at14weeks_image0.uriFragment"
+      },
+      "nextvaccination_at14weeks_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "nextvaccination_at14weeks_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "nextvaccination_at14weeks_image0.contentType"
+      },
+      "given_opv2_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "given_opv2_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "given_opv2_image0.uriFragment"
+      },
+      "given_opv2_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "given_opv2_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "given_opv2_image0.contentType"
+      },
+      "opv2_dategiven_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "opv2_dategiven_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "opv2_dategiven_image0.uriFragment"
+      },
+      "opv2_dategiven_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "opv2_dategiven_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "opv2_dategiven_image0.contentType"
+      },
+      "opv2_initials_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "opv2_initials_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "opv2_initials_image0.uriFragment"
+      },
+      "opv2_initials_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "opv2_initials_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "opv2_initials_image0.contentType"
+      },
+      "given_penta2_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "given_penta2_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "given_penta2_image0.uriFragment"
+      },
+      "given_penta2_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "given_penta2_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "given_penta2_image0.contentType"
+      },
+      "penta2_dategiven_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "penta2_dategiven_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "penta2_dategiven_image0.uriFragment"
+      },
+      "penta2_dategiven_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "penta2_dategiven_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "penta2_dategiven_image0.contentType"
+      },
+      "penta2_initials_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "penta2_initials_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "penta2_initials_image0.uriFragment"
+      },
+      "penta2_initials_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "penta2_initials_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "penta2_initials_image0.contentType"
+      },
+      "given_pcv2_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "given_pcv2_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "given_pcv2_image0.uriFragment"
+      },
+      "given_pcv2_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "given_pcv2_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "given_pcv2_image0.contentType"
+      },
+      "pcv2_dategiven_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "pcv2_dategiven_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "pcv2_dategiven_image0.uriFragment"
+      },
+      "pcv2_dategiven_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "pcv2_dategiven_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "pcv2_dategiven_image0.contentType"
+      },
+      "pcv2_initials_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "pcv2_initials_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "pcv2_initials_image0.uriFragment"
+      },
+      "pcv2_initials_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "pcv2_initials_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "pcv2_initials_image0.contentType"
+      },
+      "given_rota2_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "given_rota2_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "given_rota2_image0.uriFragment"
+      },
+      "given_rota2_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "given_rota2_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "given_rota2_image0.contentType"
+      },
+      "rota2_dategiven_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "rota2_dategiven_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "rota2_dategiven_image0.uriFragment"
+      },
+      "rota2_dategiven_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "rota2_dategiven_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "rota2_dategiven_image0.contentType"
+      },
+      "rota2_initials_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "rota2_initials_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "rota2_initials_image0.uriFragment"
+      },
+      "rota2_initials_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "rota2_initials_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "rota2_initials_image0.contentType"
+      },
+      "addtlvacc_1_name_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "addtlvacc_1_name_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_name_image0.uriFragment"
+      },
+      "addtlvacc_1_name_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "addtlvacc_1_name_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_name_image0.contentType"
+      },
+      "addtlvacc_2_name_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "addtlvacc_2_name_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_name_image0.uriFragment"
+      },
+      "addtlvacc_2_name_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "addtlvacc_2_name_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_name_image0.contentType"
+      },
+      "given_addtlvacc_1_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "given_addtlvacc_1_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "given_addtlvacc_1_image0.uriFragment"
+      },
+      "given_addtlvacc_1_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "given_addtlvacc_1_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "given_addtlvacc_1_image0.contentType"
+      },
+      "given_addtlvacc_2_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "given_addtlvacc_2_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "given_addtlvacc_2_image0.uriFragment"
+      },
+      "given_addtlvacc_2_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "given_addtlvacc_2_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "given_addtlvacc_2_image0.contentType"
+      },
+      "addtlvacc_1_dategiven_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "addtlvacc_1_dategiven_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_dategiven_image0.uriFragment"
+      },
+      "addtlvacc_1_dategiven_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "addtlvacc_1_dategiven_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_dategiven_image0.contentType"
+      },
+      "addtlvacc_2_dategiven_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "addtlvacc_2_dategiven_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_dategiven_image0.uriFragment"
+      },
+      "addtlvacc_2_dategiven_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "addtlvacc_2_dategiven_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_dategiven_image0.contentType"
+      },
+      "addtlvacc_1_initials_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "addtlvacc_1_initials_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_initials_image0.uriFragment"
+      },
+      "addtlvacc_1_initials_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "addtlvacc_1_initials_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_1_initials_image0.contentType"
+      },
+      "addtlvacc_2_initials_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "addtlvacc_2_initials_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_initials_image0.uriFragment"
+      },
+      "addtlvacc_2_initials_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "addtlvacc_2_initials_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "addtlvacc_2_initials_image0.contentType"
+      },
+      "nurse_notes_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "nurse_notes_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "nurse_notes_image0.uriFragment"
+      },
+      "nurse_notes_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "nurse_notes_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "nurse_notes_image0.contentType"
+      },
+      "qr_patientcode_image0_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "qr_patientcode_image0_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "qr_patientcode_image0.uriFragment"
+      },
+      "qr_patientcode_image0_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "qr_patientcode_image0_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "qr_patientcode_image0.contentType"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "given_addtlvacc_1",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"given_addtlvacc_1_grid_values\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":6}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "given_addtlvacc_2",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"given_addtlvacc_2_grid_values\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":7}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "given_opv2",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"given_opv2_grid_values\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "given_pcv2",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"given_pcv2_grid_values\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":4}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "given_penta2",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"given_penta2_grid_values\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "given_rota2",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"given_rota2_grid_values\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":5}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "scan_childvacc_825_pg4"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"scan_output_directory\",\"nextvaccination_at14weeks_image0_uriFragment\",\"nextvaccination_at14weeks_image0_contentType\",\"nextvaccination_at14weeks\",\"given_opv2_image0_uriFragment\",\"given_opv2_image0_contentType\",\"given_opv2\",\"opv2_dategiven_image0_uriFragment\",\"opv2_dategiven_image0_contentType\",\"opv2_dategiven\",\"opv2_initials_image0_uriFragment\",\"opv2_initials_image0_contentType\",\"opv2_initials\",\"given_penta2_image0_uriFragment\",\"given_penta2_image0_contentType\",\"given_penta2\",\"penta2_dategiven_image0_uriFragment\",\"penta2_dategiven_image0_contentType\",\"penta2_dategiven\",\"penta2_initials_image0_uriFragment\",\"penta2_initials_image0_contentType\",\"penta2_initials\",\"given_pcv2_image0_uriFragment\",\"given_pcv2_image0_contentType\",\"given_pcv2\",\"pcv2_dategiven_image0_uriFragment\",\"pcv2_dategiven_image0_contentType\",\"pcv2_dategiven\",\"pcv2_initials_image0_uriFragment\",\"pcv2_initials_image0_contentType\",\"pcv2_initials\",\"given_rota2_image0_uriFragment\",\"given_rota2_image0_contentType\",\"given_rota2\",\"rota2_dategiven_image0_uriFragment\",\"rota2_dategiven_image0_contentType\",\"rota2_dategiven\",\"rota2_initials_image0_uriFragment\",\"rota2_initials_image0_contentType\",\"rota2_initials\",\"addtlvacc_1_name_image0_uriFragment\",\"addtlvacc_1_name_image0_contentType\",\"addtlvacc_1_name\",\"addtlvacc_2_name_image0_uriFragment\",\"addtlvacc_2_name_image0_contentType\",\"addtlvacc_2_name\",\"given_addtlvacc_1_image0_uriFragment\",\"given_addtlvacc_1_image0_contentType\",\"given_addtlvacc_1\",\"given_addtlvacc_2_image0_uriFragment\",\"given_addtlvacc_2_image0_contentType\",\"given_addtlvacc_2\",\"addtlvacc_1_dategiven_image0_uriFragment\",\"addtlvacc_1_dategiven_image0_contentType\",\"addtlvacc_1_dategiven\",\"addtlvacc_2_dategiven_image0_uriFragment\",\"addtlvacc_2_dategiven_image0_contentType\",\"addtlvacc_2_dategiven\",\"addtlvacc_1_initials_image0_uriFragment\",\"addtlvacc_1_initials_image0_contentType\",\"addtlvacc_1_initials\",\"addtlvacc_2_initials_image0_uriFragment\",\"addtlvacc_2_initials_image0_contentType\",\"addtlvacc_2_initials\",\"nurse_notes_image0_uriFragment\",\"nurse_notes_image0_contentType\",\"nurse_notes\",\"qr_patientcode_image0_uriFragment\",\"qr_patientcode_image0_contentType\",\"qr_patientcode\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"scan_childvacc_825_pg4\""
+      }
+    ]
   }
 }

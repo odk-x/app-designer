@@ -737,6 +737,192 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "Description": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Description",
+        "elementName": "Description",
+        "elementSet": "data",
+        "elementPath": "Description"
+      },
+      "Weather": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "conditions",
+        "elementKey": "Weather",
+        "elementName": "Weather",
+        "elementSet": "data",
+        "elementPath": "Weather"
+      },
+      "Temperature": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "Temperature",
+        "elementName": "Temperature",
+        "elementSet": "data",
+        "elementPath": "Temperature"
+      },
+      "Location": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "Location_latitude",
+            "elementName": "latitude",
+            "elementSet": "data",
+            "elementPath": "Location.latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "Location_longitude",
+            "elementName": "longitude",
+            "elementSet": "data",
+            "elementPath": "Location.longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "Location_altitude",
+            "elementName": "altitude",
+            "elementSet": "data",
+            "elementPath": "Location.altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "Location_accuracy",
+            "elementName": "accuracy",
+            "elementSet": "data",
+            "elementPath": "Location.accuracy"
+          }
+        },
+        "elementKey": "Location",
+        "elementName": "Location",
+        "elementSet": "data",
+        "elementPath": "Location",
+        "listChildElementKeys": [
+          "Location_latitude",
+          "Location_longitude",
+          "Location_altitude",
+          "Location_accuracy"
+        ],
+        "notUnitOfRetention": true
+      },
+      "Date_and_Time": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "dateTime",
+        "elementKey": "Date_and_Time",
+        "elementName": "Date_and_Time",
+        "elementSet": "data",
+        "elementPath": "Date_and_Time",
+        "listChildElementKeys": []
+      },
+      "Description_Date": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Description_Date",
+        "elementName": "Description_Date",
+        "elementSet": "data",
+        "elementPath": "Description_Date"
+      },
+      "Location_latitude": {
+        "type": "number",
+        "elementKey": "Location_latitude",
+        "elementName": "latitude",
+        "elementSet": "data",
+        "elementPath": "Location.latitude"
+      },
+      "Location_longitude": {
+        "type": "number",
+        "elementKey": "Location_longitude",
+        "elementName": "longitude",
+        "elementSet": "data",
+        "elementPath": "Location.longitude"
+      },
+      "Location_altitude": {
+        "type": "number",
+        "elementKey": "Location_altitude",
+        "elementName": "altitude",
+        "elementSet": "data",
+        "elementPath": "Location.altitude"
+      },
+      "Location_accuracy": {
+        "type": "number",
+        "elementKey": "Location_accuracy",
+        "elementName": "accuracy",
+        "elementSet": "data",
+        "elementPath": "Location.accuracy"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "Weather",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"conditions\",\"data_value\":\"clear\",\"display\":{\"text\":\"Clear skies\"},\"_row_num\":2},{\"choice_list_name\":\"conditions\",\"data_value\":\"partly_clear\",\"display\":{\"text\":\"Partly clear skies\"},\"_row_num\":3},{\"choice_list_name\":\"conditions\",\"data_value\":\"overcast\",\"display\":{\"text\":\"Overcast (cloudy) skies\"},\"_row_num\":4},{\"choice_list_name\":\"conditions\",\"data_value\":\"foggy\",\"display\":{\"text\":\"Foggy\"},\"_row_num\":5},{\"choice_list_name\":\"conditions\",\"data_value\":\"drizzle\",\"display\":{\"text\":\"Light rain\"},\"_row_num\":6},{\"choice_list_name\":\"conditions\",\"data_value\":\"rain\",\"display\":{\"text\":\"Raining\"},\"_row_num\":7},{\"choice_list_name\":\"conditions\",\"data_value\":\"thunderstorm\",\"display\":{\"text\":\"Thunderstorms\"},\"_row_num\":8},{\"choice_list_name\":\"conditions\",\"data_value\":\"snow\",\"display\":{\"text\":\"Snowing\"},\"_row_num\":9}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "geoweather"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Simple Weather Survey\""
+      }
+    ]
   }
 }

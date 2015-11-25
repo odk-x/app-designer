@@ -462,6 +462,83 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "example1": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "dateTime",
+        "elementKey": "example1",
+        "elementName": "example1",
+        "elementSet": "data",
+        "elementPath": "example1",
+        "listChildElementKeys": []
+      },
+      "example2": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "date",
+        "elementKey": "example2",
+        "elementName": "example2",
+        "elementSet": "data",
+        "elementPath": "example2",
+        "listChildElementKeys": []
+      },
+      "example3": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "time",
+        "elementKey": "example3",
+        "elementName": "example3",
+        "elementSet": "data",
+        "elementPath": "example3",
+        "listChildElementKeys": []
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "eonasdan"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"DateTime Picker\""
+      }
+    ]
   }
 }

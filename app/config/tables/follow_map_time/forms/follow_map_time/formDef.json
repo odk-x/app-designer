@@ -60,7 +60,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "follow_map_time",
         "_row_num": 2
       },
@@ -75,6 +75,16 @@
           "title": "Follow Map Time"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"FMT_FOL_date\",\"FMT_FOL_B_focal_AnimID\",\"FMT_time\",\"FMT_FMP_seq_num\",\"FMT_notes\",\"FMT_fixed\",\"FMT_FOL_foll_num\"]",
+        "_row_num": 2
       }
     ]
   },
@@ -97,8 +107,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "follow_map_time",
         "_row_num": 2
       },
@@ -114,8 +124,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "follow_map_time",
         "_row_num": 2,
         "__rowNum__": 1
@@ -585,6 +595,136 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "FMT_FOL_date": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMT_FOL_date",
+        "elementName": "FMT_FOL_date",
+        "elementSet": "data",
+        "elementPath": "FMT_FOL_date"
+      },
+      "FMT_FOL_B_focal_AnimID": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMT_FOL_B_focal_AnimID",
+        "elementName": "FMT_FOL_B_focal_AnimID",
+        "elementSet": "data",
+        "elementPath": "FMT_FOL_B_focal_AnimID"
+      },
+      "FMT_time": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMT_time",
+        "elementName": "FMT_time",
+        "elementSet": "data",
+        "elementPath": "FMT_time"
+      },
+      "FMT_FMP_seq_num": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FMT_FMP_seq_num",
+        "elementName": "FMT_FMP_seq_num",
+        "elementSet": "data",
+        "elementPath": "FMT_FMP_seq_num"
+      },
+      "FMT_notes": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMT_notes",
+        "elementName": "FMT_notes",
+        "elementSet": "data",
+        "elementPath": "FMT_notes"
+      },
+      "FMT_fixed": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMT_fixed",
+        "elementName": "FMT_fixed",
+        "elementSet": "data",
+        "elementPath": "FMT_fixed"
+      },
+      "FMT_FOL_foll_num": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMT_FOL_foll_num",
+        "elementName": "FMT_FOL_foll_num",
+        "elementSet": "data",
+        "elementPath": "FMT_FOL_foll_num"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "follow_map_time"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"FMT_FOL_date\",\"FMT_FOL_B_focal_AnimID\",\"FMT_time\",\"FMT_FMP_seq_num\",\"FMT_notes\",\"FMT_fixed\",\"FMT_FOL_foll_num\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Follow Map Time\""
+      }
+    ]
   }
 }

@@ -1045,6 +1045,364 @@
           "_screen15": 9
         }
       }
+    },
+    "dataTableModel": {
+      "household_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "household_id",
+        "elementName": "household_id",
+        "elementSet": "data",
+        "elementPath": "household_id"
+      },
+      "num_rooms": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "num_rooms",
+        "elementName": "num_rooms",
+        "elementSet": "data",
+        "elementPath": "num_rooms"
+      },
+      "electricity": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "electricity",
+        "elementName": "electricity",
+        "elementSet": "data",
+        "elementPath": "electricity"
+      },
+      "water": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "water",
+        "elementName": "water",
+        "elementSet": "data",
+        "elementPath": "water"
+      },
+      "location": {
+        "name": "geopoint",
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "location_latitude",
+            "elementName": "latitude",
+            "elementSet": "data",
+            "elementPath": "location.latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "location_longitude",
+            "elementName": "longitude",
+            "elementSet": "data",
+            "elementPath": "location.longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "location_altitude",
+            "elementName": "altitude",
+            "elementSet": "data",
+            "elementPath": "location.altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "location_accuracy",
+            "elementName": "accuracy",
+            "elementSet": "data",
+            "elementPath": "location.accuracy"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location",
+        "elementName": "location",
+        "elementSet": "data",
+        "elementPath": "location",
+        "listChildElementKeys": [
+          "location_latitude",
+          "location_longitude",
+          "location_altitude",
+          "location_accuracy"
+        ],
+        "notUnitOfRetention": true
+      },
+      "name": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "name",
+        "elementName": "name",
+        "elementSet": "data",
+        "elementPath": "name"
+      },
+      "age": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "sex": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "sex",
+        "elementName": "sex",
+        "elementSet": "data",
+        "elementPath": "sex"
+      },
+      "income_contribution": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "income_contribution",
+        "elementName": "income_contribution",
+        "elementSet": "data",
+        "elementPath": "income_contribution"
+      },
+      "owner": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "owner",
+        "elementName": "owner",
+        "elementSet": "data",
+        "elementPath": "owner"
+      },
+      "youngest": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "youngest_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "youngest.items",
+          "notUnitOfRetention": true
+        },
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "youngest",
+        "elementName": "youngest",
+        "elementSet": "data",
+        "elementPath": "youngest",
+        "listChildElementKeys": [
+          "youngest_items"
+        ]
+      },
+      "write_language": {
+        "type": "string",
+        "valuesList": "no_yes",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "write_language",
+        "elementName": "write_language",
+        "elementSet": "data",
+        "elementPath": "write_language"
+      },
+      "attend_school": {
+        "type": "string",
+        "valuesList": "no_yes",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "attend_school",
+        "elementName": "attend_school",
+        "elementSet": "data",
+        "elementPath": "attend_school"
+      },
+      "school_type": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "school_type_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "school_type.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "school_types",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "school_type",
+        "elementName": "school_type",
+        "elementSet": "data",
+        "elementPath": "school_type",
+        "listChildElementKeys": [
+          "school_type_items"
+        ]
+      },
+      "grade_level": {
+        "type": "string",
+        "valuesList": "grade_levels",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "grade_level",
+        "elementName": "grade_level",
+        "elementSet": "data",
+        "elementPath": "grade_level"
+      },
+      "post_secondary": {
+        "type": "string",
+        "valuesList": "post_secondary_types",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "post_secondary",
+        "elementName": "post_secondary",
+        "elementSet": "data",
+        "elementPath": "post_secondary"
+      },
+      "currently_school": {
+        "type": "string",
+        "valuesList": "no_yes",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "currently_school",
+        "elementName": "currently_school",
+        "elementSet": "data",
+        "elementPath": "currently_school"
+      },
+      "location_latitude": {
+        "type": "number",
+        "elementKey": "location_latitude",
+        "elementName": "latitude",
+        "elementSet": "data",
+        "elementPath": "location.latitude"
+      },
+      "location_longitude": {
+        "type": "number",
+        "elementKey": "location_longitude",
+        "elementName": "longitude",
+        "elementSet": "data",
+        "elementPath": "location.longitude"
+      },
+      "location_altitude": {
+        "type": "number",
+        "elementKey": "location_altitude",
+        "elementName": "altitude",
+        "elementSet": "data",
+        "elementPath": "location.altitude"
+      },
+      "location_accuracy": {
+        "type": "number",
+        "elementKey": "location_accuracy",
+        "elementName": "accuracy",
+        "elementSet": "data",
+        "elementPath": "location.accuracy"
+      },
+      "youngest_items": {
+        "type": "string",
+        "elementKey": "youngest_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "youngest.items",
+        "notUnitOfRetention": true
+      },
+      "school_type_items": {
+        "type": "string",
+        "elementKey": "school_type_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "school_type.items",
+        "notUnitOfRetention": true
+      }
     }
   }
 }

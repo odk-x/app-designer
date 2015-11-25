@@ -205,7 +205,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "section_test",
         "_row_num": 2
       },
@@ -285,8 +285,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "section_test",
         "_row_num": 2
       },
@@ -345,8 +345,8 @@
         },
         "_row_num": 8
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "section_test",
         "_row_num": 2,
         "__rowNum__": 1
@@ -1111,6 +1111,64 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "section1"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "color": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "section2"
+          }
+        ],
+        "type": "string",
+        "elementKey": "color",
+        "elementName": "color",
+        "elementSet": "data",
+        "elementPath": "color"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "section_test"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"default\":\"Section Test\",\"hindi\":\"धारा टेस्ट\"}"
+      }
+    ]
   }
 }

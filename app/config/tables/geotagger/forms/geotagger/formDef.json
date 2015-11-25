@@ -41,6 +41,72 @@
         "_row_num": 5
       }
     ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"Description\",\"Image_uriFragment\",\"Location_latitude\",\"Location_longitude\",\"Date_and_Time\"]",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "MAP",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "configpath",
+        "value": "config/tables/geotagger/html/geo_detail.html",
+        "_row_num": 4
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "configpath",
+        "value": "config/tables/geotagger/html/geo_list.html",
+        "_row_num": 5
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "mapListViewFileName",
+        "type": "configpath",
+        "value": "config/tables/geotagger/html/geo_list.html",
+        "_row_num": 6
+      },
+      {
+        "partition": "TableMapFragment",
+        "aspect": "default",
+        "key": "keyColorRuleType",
+        "type": "string",
+        "value": "None",
+        "_row_num": 7
+      },
+      {
+        "partition": "TableMapFragment",
+        "aspect": "default",
+        "key": "keyMapLatCol",
+        "type": "string",
+        "value": "Location_latitude",
+        "_row_num": 8
+      },
+      {
+        "partition": "TableMapFragment",
+        "aspect": "default",
+        "key": "keyMapLongCol",
+        "type": "string",
+        "value": "Location_longitude",
+        "_row_num": 9
+      }
+    ],
     "settings": [
       {
         "setting_name": "form_id",
@@ -534,6 +600,245 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "Date_and_Time": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "dateTime",
+        "elementKey": "Date_and_Time",
+        "elementName": "Date_and_Time",
+        "elementSet": "data",
+        "elementPath": "Date_and_Time",
+        "listChildElementKeys": []
+      },
+      "Description": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Description",
+        "elementName": "Description",
+        "elementSet": "data",
+        "elementPath": "Description"
+      },
+      "Image": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "Image_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "Image.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "Image_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "Image.contentType"
+          }
+        },
+        "elementKey": "Image",
+        "elementName": "Image",
+        "elementSet": "data",
+        "elementPath": "Image",
+        "listChildElementKeys": [
+          "Image_uriFragment",
+          "Image_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "Location": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "Location_latitude",
+            "elementName": "latitude",
+            "elementSet": "data",
+            "elementPath": "Location.latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "Location_longitude",
+            "elementName": "longitude",
+            "elementSet": "data",
+            "elementPath": "Location.longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "Location_altitude",
+            "elementName": "altitude",
+            "elementSet": "data",
+            "elementPath": "Location.altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "Location_accuracy",
+            "elementName": "accuracy",
+            "elementSet": "data",
+            "elementPath": "Location.accuracy"
+          }
+        },
+        "elementKey": "Location",
+        "elementName": "Location",
+        "elementSet": "data",
+        "elementPath": "Location",
+        "listChildElementKeys": [
+          "Location_latitude",
+          "Location_longitude",
+          "Location_altitude",
+          "Location_accuracy"
+        ],
+        "notUnitOfRetention": true
+      },
+      "Image_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "Image_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "Image.uriFragment"
+      },
+      "Image_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "Image_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "Image.contentType"
+      },
+      "Location_latitude": {
+        "type": "number",
+        "elementKey": "Location_latitude",
+        "elementName": "latitude",
+        "elementSet": "data",
+        "elementPath": "Location.latitude"
+      },
+      "Location_longitude": {
+        "type": "number",
+        "elementKey": "Location_longitude",
+        "elementName": "longitude",
+        "elementSet": "data",
+        "elementPath": "Location.longitude"
+      },
+      "Location_altitude": {
+        "type": "number",
+        "elementKey": "Location_altitude",
+        "elementName": "altitude",
+        "elementSet": "data",
+        "elementPath": "Location.altitude"
+      },
+      "Location_accuracy": {
+        "type": "number",
+        "elementKey": "Location_accuracy",
+        "elementName": "accuracy",
+        "elementSet": "data",
+        "elementPath": "Location.accuracy"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "geotagger"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"Description\",\"Image_uriFragment\",\"Location_latitude\",\"Location_longitude\",\"Date_and_Time\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "MAP"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "configpath",
+        "_value": "config/tables/geotagger/html/geo_detail.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Geotagger\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "configpath",
+        "_value": "config/tables/geotagger/html/geo_list.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "mapListViewFileName",
+        "_type": "configpath",
+        "_value": "config/tables/geotagger/html/geo_list.html"
+      },
+      {
+        "_partition": "TableMapFragment",
+        "_aspect": "default",
+        "_key": "keyColorRuleType",
+        "_type": "string",
+        "_value": "None"
+      },
+      {
+        "_partition": "TableMapFragment",
+        "_aspect": "default",
+        "_key": "keyMapLatCol",
+        "_type": "string",
+        "_value": "Location_latitude"
+      },
+      {
+        "_partition": "TableMapFragment",
+        "_aspect": "default",
+        "_key": "keyMapLongCol",
+        "_type": "string",
+        "_value": "Location_longitude"
+      }
+    ]
   }
 }

@@ -5156,6 +5156,643 @@
           "_finalize": 10
         }
       }
+    },
+    "dataTableModel": {
+      "interviewerw_init": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 33,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "interviewerw_init",
+        "elementName": "interviewerw_init",
+        "elementSet": "data",
+        "elementPath": "interviewerw_init"
+      },
+      "interviewer_id": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 34,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "interviewer_id",
+        "elementName": "interviewer_id",
+        "elementSet": "data",
+        "elementPath": "interviewer_id"
+      },
+      "date": {
+        "type": "object",
+        "elementType": "date",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 35,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "date",
+        "elementName": "date",
+        "elementSet": "data",
+        "elementPath": "date",
+        "listChildElementKeys": []
+      },
+      "client_id": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "client_id",
+        "elementName": "client_id",
+        "elementSet": "data",
+        "elementPath": "client_id"
+      },
+      "agree_screening": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "agree_screening",
+        "elementName": "agree_screening",
+        "elementSet": "data",
+        "elementPath": "agree_screening"
+      },
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "ethnic_group": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "ethnic_groups",
+        "elementKey": "ethnic_group",
+        "elementName": "ethnic_group",
+        "elementSet": "data",
+        "elementPath": "ethnic_group"
+      },
+      "ethnic_group_other": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "ethnic_group_other",
+        "elementName": "ethnic_group_other",
+        "elementSet": "data",
+        "elementPath": "ethnic_group_other"
+      },
+      "education_level": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "education_level_options",
+        "elementKey": "education_level",
+        "elementName": "education_level",
+        "elementSet": "data",
+        "elementPath": "education_level"
+      },
+      "religion": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "religion",
+        "elementKey": "religion",
+        "elementName": "religion",
+        "elementSet": "data",
+        "elementPath": "religion"
+      },
+      "religion_other": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "religion_other",
+        "elementName": "religion_other",
+        "elementSet": "data",
+        "elementPath": "religion_other"
+      },
+      "employment": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "employment_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "employment.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "employment",
+        "elementKey": "employment",
+        "elementName": "employment",
+        "elementSet": "data",
+        "elementPath": "employment",
+        "listChildElementKeys": [
+          "employment_items"
+        ]
+      },
+      "employment_other": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "employment_other",
+        "elementName": "employment_other",
+        "elementSet": "data",
+        "elementPath": "employment_other"
+      },
+      "curr_relationship": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "curr_relationship",
+        "elementName": "curr_relationship",
+        "elementSet": "data",
+        "elementPath": "curr_relationship"
+      },
+      "living_children": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "living_children",
+        "elementName": "living_children",
+        "elementSet": "data",
+        "elementPath": "living_children"
+      },
+      "living_children_enrolled_female": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "living_children_enrolled_female",
+        "elementName": "living_children_enrolled_female",
+        "elementSet": "data",
+        "elementPath": "living_children_enrolled_female"
+      },
+      "hiv_tested": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no_nr",
+        "elementKey": "hiv_tested",
+        "elementName": "hiv_tested",
+        "elementSet": "data",
+        "elementPath": "hiv_tested"
+      },
+      "test_result": {
+        "type": "string",
+        "valuesList": "hiv_test_results",
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "test_result",
+        "elementName": "test_result",
+        "elementSet": "data",
+        "elementPath": "test_result"
+      },
+      "ineligible_statement": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "acknowledge",
+        "elementKey": "ineligible_statement",
+        "elementName": "ineligible_statement",
+        "elementSet": "data",
+        "elementPath": "ineligible_statement"
+      },
+      "client_consent": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "study_participation",
+        "elementKey": "client_consent",
+        "elementName": "client_consent",
+        "elementSet": "data",
+        "elementPath": "client_consent"
+      },
+      "refusal_reasons": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "refusal_reasons_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "refusal_reasons.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "no_participation_reasons",
+        "elementKey": "refusal_reasons",
+        "elementName": "refusal_reasons",
+        "elementSet": "data",
+        "elementPath": "refusal_reasons",
+        "listChildElementKeys": [
+          "refusal_reasons_items"
+        ]
+      },
+      "refusal_reasons_other": {
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "refusal_reasons_other",
+        "elementName": "refusal_reasons_other",
+        "elementSet": "data",
+        "elementPath": "refusal_reasons_other"
+      },
+      "hiv_status": {
+        "_defn": [
+          {
+            "_row_num": 37,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "prev_hiv_status",
+        "elementKey": "hiv_status",
+        "elementName": "hiv_status",
+        "elementSet": "data",
+        "elementPath": "hiv_status"
+      },
+      "pretest": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "rapid",
+        "elementKey": "pretest",
+        "elementName": "pretest",
+        "elementSet": "data",
+        "elementPath": "pretest"
+      },
+      "still_relationship": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "still_relationship",
+        "elementName": "still_relationship",
+        "elementSet": "data",
+        "elementPath": "still_relationship"
+      },
+      "preg_want_children": {
+        "_defn": [
+          {
+            "_row_num": 42,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "wanted_pregnancy_time",
+        "elementKey": "preg_want_children",
+        "elementName": "preg_want_children",
+        "elementSet": "data",
+        "elementPath": "preg_want_children"
+      },
+      "more_children": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "want_more_children",
+        "elementKey": "more_children",
+        "elementName": "more_children",
+        "elementSet": "data",
+        "elementPath": "more_children"
+      },
+      "partner_want_children": {
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "partner_wants_children",
+        "elementKey": "partner_want_children",
+        "elementName": "partner_want_children",
+        "elementSet": "data",
+        "elementPath": "partner_want_children"
+      },
+      "influences": {
+        "_defn": [
+          {
+            "_row_num": 45,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "influences_having_children",
+        "elementKey": "influences",
+        "elementName": "influences",
+        "elementSet": "data",
+        "elementPath": "influences"
+      },
+      "influences_other": {
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "influences_other",
+        "elementName": "influences_other",
+        "elementSet": "data",
+        "elementPath": "influences_other"
+      },
+      "ccc": {
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no_ns",
+        "elementKey": "ccc",
+        "elementName": "ccc",
+        "elementSet": "data",
+        "elementPath": "ccc"
+      },
+      "prescr_tmp": {
+        "_defn": [
+          {
+            "_row_num": 50,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no_nr",
+        "elementKey": "prescr_tmp",
+        "elementName": "prescr_tmp",
+        "elementSet": "data",
+        "elementPath": "prescr_tmp"
+      },
+      "curr_tmp": {
+        "_defn": [
+          {
+            "_row_num": 51,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no_nr",
+        "elementKey": "curr_tmp",
+        "elementName": "curr_tmp",
+        "elementSet": "data",
+        "elementPath": "curr_tmp"
+      },
+      "prescr_art": {
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no_nr",
+        "elementKey": "prescr_art",
+        "elementName": "prescr_art",
+        "elementSet": "data",
+        "elementPath": "prescr_art"
+      },
+      "curr_taking_art": {
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no_nr",
+        "elementKey": "curr_taking_art",
+        "elementName": "curr_taking_art",
+        "elementSet": "data",
+        "elementPath": "curr_taking_art"
+      },
+      "determine": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "hiv_status",
+        "elementKey": "determine",
+        "elementName": "determine",
+        "elementSet": "data",
+        "elementPath": "determine"
+      },
+      "advise_second": {
+        "_defn": [
+          {
+            "_row_num": 57,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "pretest",
+        "elementKey": "advise_second",
+        "elementName": "advise_second",
+        "elementSet": "data",
+        "elementPath": "advise_second"
+      },
+      "unigold": {
+        "_defn": [
+          {
+            "_row_num": 58,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "hiv_status",
+        "elementKey": "unigold",
+        "elementName": "unigold",
+        "elementSet": "data",
+        "elementPath": "unigold"
+      },
+      "elisa_blood_drawn": {
+        "_defn": [
+          {
+            "_row_num": 62,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "elisa_blood_drawn",
+        "elementName": "elisa_blood_drawn",
+        "elementSet": "data",
+        "elementPath": "elisa_blood_drawn"
+      },
+      "discordant": {
+        "_defn": [
+          {
+            "_row_num": 63,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "discordant",
+        "elementKey": "discordant",
+        "elementName": "discordant",
+        "elementSet": "data",
+        "elementPath": "discordant"
+      },
+      "return_disc_retest": {
+        "_defn": [
+          {
+            "_row_num": 64,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "return_disc_retest",
+        "elementName": "return_disc_retest",
+        "elementSet": "data",
+        "elementPath": "return_disc_retest"
+      },
+      "comments": {
+        "_defn": [
+          {
+            "_row_num": 65,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "comments",
+        "elementName": "comments",
+        "elementSet": "data",
+        "elementPath": "comments"
+      },
+      "employment_items": {
+        "type": "string",
+        "elementKey": "employment_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "employment.items",
+        "notUnitOfRetention": true
+      },
+      "refusal_reasons_items": {
+        "type": "string",
+        "elementKey": "refusal_reasons_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "refusal_reasons.items",
+        "notUnitOfRetention": true
+      }
     }
   }
 }

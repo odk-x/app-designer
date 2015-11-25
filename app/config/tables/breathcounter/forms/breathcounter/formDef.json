@@ -20,7 +20,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "breathcounter",
         "_row_num": 2
       },
@@ -57,8 +57,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "breathcounter",
         "_row_num": 2
       },
@@ -74,8 +74,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "breathcounter",
         "_row_num": 2,
         "__rowNum__": 1
@@ -367,6 +367,52 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "breath_count": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "prompt_type_name": "breathcounter",
+        "type": "integer",
+        "elementKey": "breath_count",
+        "elementName": "breath_count",
+        "elementSet": "data",
+        "elementPath": "breath_count"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "breathcounter"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Breathcounter\""
+      }
+    ]
   }
 }

@@ -502,7 +502,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "gridScreen",
         "_row_num": 2
       },
@@ -517,6 +517,16 @@
           "title": "Grid Screen Form"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"item_1\",\"item_2\",\"item_3\",\"item_4\",\"item_5\",\"item_6\",\"item_7\",\"QFC_item_1\",\"QFC_item_2\",\"QFC_item_3\",\"QFC_item_4\",\"QFC_item_5\",\"QFC_item_6\",\"QFC_sum\",\"Safeway_item_1\",\"Safeway_item_2\",\"Safeway_item_3\",\"Safeway_item_4\",\"Safeway_item_5\",\"Safeway_item_6\",\"Safeway_sum\",\"Target_item_1\",\"Target_item_2\",\"Target_item_3\",\"Target_item_4\",\"Target_item_5\",\"Target_item_6\",\"Target_sum\",\"selected_store\"]",
+        "_row_num": 2
       }
     ]
   },
@@ -539,8 +549,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "gridScreen",
         "_row_num": 2
       },
@@ -556,8 +566,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "gridScreen",
         "_row_num": 2,
         "__rowNum__": 1
@@ -1797,6 +1807,673 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "item_1": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": "item_1",
+        "elementKey": "item_1",
+        "elementName": "item_1",
+        "elementSet": "data",
+        "elementPath": "item_1"
+      },
+      "item_2": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": "item_2",
+        "elementKey": "item_2",
+        "elementName": "item_2",
+        "elementSet": "data",
+        "elementPath": "item_2"
+      },
+      "item_3": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": "item_3",
+        "elementKey": "item_3",
+        "elementName": "item_3",
+        "elementSet": "data",
+        "elementPath": "item_3"
+      },
+      "item_4": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": "item_4",
+        "elementKey": "item_4",
+        "elementName": "item_4",
+        "elementSet": "data",
+        "elementPath": "item_4"
+      },
+      "item_5": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": "item_5",
+        "elementKey": "item_5",
+        "elementName": "item_5",
+        "elementSet": "data",
+        "elementPath": "item_5"
+      },
+      "item_6": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": "item_6",
+        "elementKey": "item_6",
+        "elementName": "item_6",
+        "elementSet": "data",
+        "elementPath": "item_6"
+      },
+      "item_7": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": "item_7",
+        "elementKey": "item_7",
+        "elementName": "item_7",
+        "elementSet": "data",
+        "elementPath": "item_7"
+      },
+      "QFC_item_1": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "QFC_item_1",
+        "elementKey": "QFC_item_1",
+        "elementName": "QFC_item_1",
+        "elementSet": "data",
+        "elementPath": "QFC_item_1"
+      },
+      "QFC_item_2": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "QFC_item_2",
+        "elementKey": "QFC_item_2",
+        "elementName": "QFC_item_2",
+        "elementSet": "data",
+        "elementPath": "QFC_item_2"
+      },
+      "QFC_item_3": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "QFC_item_3",
+        "elementKey": "QFC_item_3",
+        "elementName": "QFC_item_3",
+        "elementSet": "data",
+        "elementPath": "QFC_item_3"
+      },
+      "QFC_item_4": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "QFC_item_4",
+        "elementKey": "QFC_item_4",
+        "elementName": "QFC_item_4",
+        "elementSet": "data",
+        "elementPath": "QFC_item_4"
+      },
+      "QFC_item_5": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "QFC_item_5",
+        "elementKey": "QFC_item_5",
+        "elementName": "QFC_item_5",
+        "elementSet": "data",
+        "elementPath": "QFC_item_5"
+      },
+      "QFC_item_6": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "QFC_item_6",
+        "elementKey": "QFC_item_6",
+        "elementName": "QFC_item_6",
+        "elementSet": "data",
+        "elementPath": "QFC_item_6"
+      },
+      "QFC_sum": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "QFC_item_7",
+        "elementKey": "QFC_sum",
+        "elementName": "QFC_sum",
+        "elementSet": "data",
+        "elementPath": "QFC_sum"
+      },
+      "Safeway_item_1": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Safeway_item_1",
+        "elementKey": "Safeway_item_1",
+        "elementName": "Safeway_item_1",
+        "elementSet": "data",
+        "elementPath": "Safeway_item_1"
+      },
+      "Safeway_item_2": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Safeway_item_2",
+        "elementKey": "Safeway_item_2",
+        "elementName": "Safeway_item_2",
+        "elementSet": "data",
+        "elementPath": "Safeway_item_2"
+      },
+      "Safeway_item_3": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Safeway_item_3",
+        "elementKey": "Safeway_item_3",
+        "elementName": "Safeway_item_3",
+        "elementSet": "data",
+        "elementPath": "Safeway_item_3"
+      },
+      "Safeway_item_4": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Safeway_item_4",
+        "elementKey": "Safeway_item_4",
+        "elementName": "Safeway_item_4",
+        "elementSet": "data",
+        "elementPath": "Safeway_item_4"
+      },
+      "Safeway_item_5": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Safeway_item_5",
+        "elementKey": "Safeway_item_5",
+        "elementName": "Safeway_item_5",
+        "elementSet": "data",
+        "elementPath": "Safeway_item_5"
+      },
+      "Safeway_item_6": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Safeway_item_6",
+        "elementKey": "Safeway_item_6",
+        "elementName": "Safeway_item_6",
+        "elementSet": "data",
+        "elementPath": "Safeway_item_6"
+      },
+      "Safeway_sum": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Safeway_item_7",
+        "elementKey": "Safeway_sum",
+        "elementName": "Safeway_sum",
+        "elementSet": "data",
+        "elementPath": "Safeway_sum"
+      },
+      "Target_item_1": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Target_item_1",
+        "elementKey": "Target_item_1",
+        "elementName": "Target_item_1",
+        "elementSet": "data",
+        "elementPath": "Target_item_1"
+      },
+      "Target_item_2": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Target_item_2",
+        "elementKey": "Target_item_2",
+        "elementName": "Target_item_2",
+        "elementSet": "data",
+        "elementPath": "Target_item_2"
+      },
+      "Target_item_3": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Target_item_3",
+        "elementKey": "Target_item_3",
+        "elementName": "Target_item_3",
+        "elementSet": "data",
+        "elementPath": "Target_item_3"
+      },
+      "Target_item_4": {
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Target_item_4",
+        "elementKey": "Target_item_4",
+        "elementName": "Target_item_4",
+        "elementSet": "data",
+        "elementPath": "Target_item_4"
+      },
+      "Target_item_5": {
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Target_item_5",
+        "elementKey": "Target_item_5",
+        "elementName": "Target_item_5",
+        "elementSet": "data",
+        "elementPath": "Target_item_5"
+      },
+      "Target_item_6": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Target_item_6",
+        "elementKey": "Target_item_6",
+        "elementName": "Target_item_6",
+        "elementSet": "data",
+        "elementPath": "Target_item_6"
+      },
+      "Target_sum": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Target_item_7",
+        "elementKey": "Target_sum",
+        "elementName": "Target_sum",
+        "elementSet": "data",
+        "elementPath": "Target_sum"
+      },
+      "selected_store": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "selected_store_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "selected_store.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "stores",
+        "elementKey": "selected_store",
+        "elementName": "selected_store",
+        "elementSet": "data",
+        "elementPath": "selected_store",
+        "listChildElementKeys": [
+          "selected_store_items"
+        ]
+      },
+      "selected_store_items": {
+        "type": "string",
+        "elementKey": "selected_store_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "selected_store.items",
+        "notUnitOfRetention": true
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "QFC_item_1",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"QFC_item_1\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "QFC_item_2",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"QFC_item_2\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "QFC_item_3",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"QFC_item_3\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "QFC_item_4",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"QFC_item_4\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "QFC_item_5",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"QFC_item_5\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "QFC_item_6",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"QFC_item_6\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "QFC_sum",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"QFC_item_7\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Safeway_item_1",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Safeway_item_1\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Safeway_item_2",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Safeway_item_2\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Safeway_item_3",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Safeway_item_3\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Safeway_item_4",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Safeway_item_4\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Safeway_item_5",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Safeway_item_5\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Safeway_item_6",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Safeway_item_6\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Safeway_sum",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Safeway_item_7\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Target_item_1",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Target_item_1\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Target_item_2",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Target_item_2\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Target_item_3",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Target_item_3\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Target_item_4",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Target_item_4\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Target_item_5",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Target_item_5\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Target_item_6",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Target_item_6\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Target_sum",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Target_item_7\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "item_1",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"item_1\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "item_2",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"item_2\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "item_3",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"item_3\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "item_4",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"item_4\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "item_5",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"item_5\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "item_6",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"item_6\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "item_7",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"item_7\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "selected_store",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"stores\",\"data_value\":\"QFC\",\"display\":{\"text\":\"QFC\"},\"_row_num\":26},{\"choice_list_name\":\"stores\",\"data_value\":\"Safeway\",\"display\":{\"text\":\"Safeway\"},\"_row_num\":27},{\"choice_list_name\":\"stores\",\"data_value\":\"FredMeyer\",\"display\":{\"text\":\"Target\"},\"_row_num\":28}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "gridScreen"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"item_1\",\"item_2\",\"item_3\",\"item_4\",\"item_5\",\"item_6\",\"item_7\",\"QFC_item_1\",\"QFC_item_2\",\"QFC_item_3\",\"QFC_item_4\",\"QFC_item_5\",\"QFC_item_6\",\"QFC_sum\",\"Safeway_item_1\",\"Safeway_item_2\",\"Safeway_item_3\",\"Safeway_item_4\",\"Safeway_item_5\",\"Safeway_item_6\",\"Safeway_sum\",\"Target_item_1\",\"Target_item_2\",\"Target_item_3\",\"Target_item_4\",\"Target_item_5\",\"Target_item_6\",\"Target_sum\",\"selected_store\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Grid Screen Form\""
+      }
+    ]
   }
 }

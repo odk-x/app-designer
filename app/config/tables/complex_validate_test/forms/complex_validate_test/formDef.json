@@ -251,7 +251,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "complex_validate_test",
         "_row_num": 2
       },
@@ -331,8 +331,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "complex_validate_test",
         "_row_num": 2
       },
@@ -391,8 +391,8 @@
         },
         "_row_num": 8
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "complex_validate_test",
         "_row_num": 2,
         "__rowNum__": 1
@@ -1262,6 +1262,90 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "section1"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "color": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "section1"
+          }
+        ],
+        "type": "string",
+        "elementKey": "color",
+        "elementName": "color",
+        "elementSet": "data",
+        "elementPath": "color"
+      },
+      "weight": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "section1"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "weight",
+        "elementName": "weight",
+        "elementSet": "data",
+        "elementPath": "weight"
+      },
+      "confirm_fact": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "section2"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "confirm_fact",
+        "elementName": "confirm_fact",
+        "elementSet": "data",
+        "elementPath": "confirm_fact"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "complex_validate_test"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"default\":\"Two Part Validation Test\",\"hindi\":\"दो भाग मान्यकरण टेस्ट\"}"
+      }
+    ]
   }
 }

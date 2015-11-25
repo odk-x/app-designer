@@ -11345,7 +11345,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "imgci",
         "_row_num": 2
       },
@@ -11718,8 +11718,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "imgci",
         "_row_num": 2
       },
@@ -11746,8 +11746,8 @@
         "setting_name": "deviceid",
         "_row_num": 6
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "imgci",
         "_row_num": 2,
         "__rowNum__": 1
@@ -28911,6 +28911,2238 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "basic_q": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "basic_q_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "basic_q.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "basic_four_questions",
+        "elementKey": "basic_q",
+        "elementName": "basic_q",
+        "elementSet": "data",
+        "elementPath": "basic_q",
+        "listChildElementKeys": [
+          "basic_q_items"
+        ]
+      },
+      "anaemia_check": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "no_some_severe",
+        "elementKey": "anaemia_check",
+        "elementName": "anaemia_check",
+        "elementSet": "data",
+        "elementPath": "anaemia_check"
+      },
+      "needed_vaccinations": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "needed_vaccinations_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "needed_vaccinations.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "vaccinations",
+        "elementKey": "needed_vaccinations",
+        "elementName": "needed_vaccinations",
+        "elementSet": "data",
+        "elementPath": "needed_vaccinations",
+        "listChildElementKeys": [
+          "needed_vaccinations_items"
+        ]
+      },
+      "other_problems": {
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "other_problems",
+        "elementName": "other_problems",
+        "elementSet": "data",
+        "elementPath": "other_problems"
+      },
+      "refer_for_other_problems": {
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "survey"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "refer_for_other_problems",
+        "elementName": "refer_for_other_problems",
+        "elementSet": "data",
+        "elementPath": "refer_for_other_problems"
+      },
+      "providername": {
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "providername",
+        "elementName": "providername",
+        "elementSet": "data",
+        "elementPath": "providername"
+      },
+      "name": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "string",
+        "elementKey": "name",
+        "elementName": "name",
+        "elementSet": "data",
+        "elementPath": "name"
+      },
+      "birthdayKnown": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "birthdayKnown",
+        "elementName": "birthdayKnown",
+        "elementSet": "data",
+        "elementPath": "birthdayKnown"
+      },
+      "birthday": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "object",
+        "elementType": "date",
+        "elementKey": "birthday",
+        "elementName": "birthday",
+        "elementSet": "data",
+        "elementPath": "birthday",
+        "listChildElementKeys": []
+      },
+      "monthsOld": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "monthsOld",
+        "elementName": "monthsOld",
+        "elementSet": "data",
+        "elementPath": "monthsOld"
+      },
+      "under_2_months": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "under_2_months",
+        "elementName": "under_2_months",
+        "elementSet": "data",
+        "elementPath": "under_2_months"
+      },
+      "weight": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "weight",
+        "elementName": "weight",
+        "elementSet": "data",
+        "elementPath": "weight"
+      },
+      "able_to_drink": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "able_to_drink",
+        "elementName": "able_to_drink",
+        "elementSet": "data",
+        "elementPath": "able_to_drink"
+      },
+      "vomit_everything": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "vomit_everything",
+        "elementName": "vomit_everything",
+        "elementSet": "data",
+        "elementPath": "vomit_everything"
+      },
+      "convulsions": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "convulsions",
+        "elementName": "convulsions",
+        "elementSet": "data",
+        "elementPath": "convulsions"
+      },
+      "convulsions_now": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "convulsions_now",
+        "elementName": "convulsions_now",
+        "elementSet": "data",
+        "elementPath": "convulsions_now"
+      },
+      "acknowledge_diazepam": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_diazepam",
+        "elementName": "acknowledge_diazepam",
+        "elementSet": "data",
+        "elementPath": "acknowledge_diazepam"
+      },
+      "lethargic": {
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "lethargic",
+        "elementName": "lethargic",
+        "elementSet": "data",
+        "elementPath": "lethargic"
+      },
+      "refer_urgently_to_hospital": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 66,
+            "section_name": "DangerSigns"
+          },
+          {
+            "_row_num": 30,
+            "section_name": "Respiratory"
+          },
+          {
+            "_row_num": 230,
+            "section_name": "RedTreatment"
+          },
+          {
+            "_row_num": 235,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "elementKey": "refer_urgently_to_hospital",
+        "elementName": "refer_urgently_to_hospital",
+        "elementSet": "data",
+        "elementPath": "refer_urgently_to_hospital"
+      },
+      "how_long_difficulty_breathing": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "Respiratory"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "how_long_difficulty_breathing",
+        "elementName": "how_long_difficulty_breathing",
+        "elementSet": "data",
+        "elementPath": "how_long_difficulty_breathing"
+      },
+      "breath_count": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "Respiratory"
+          }
+        ],
+        "prompt_type_name": "breathcounter",
+        "type": "integer",
+        "elementKey": "breath_count",
+        "elementName": "breath_count",
+        "elementSet": "data",
+        "elementPath": "breath_count"
+      },
+      "breath_count_2": {
+        "prompt_type_name": "breathcounter",
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "Respiratory"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "Respiratory"
+          }
+        ],
+        "elementKey": "breath_count_2",
+        "elementName": "breath_count_2",
+        "elementSet": "data",
+        "elementPath": "breath_count_2"
+      },
+      "chest_indrawing": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "Respiratory"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "chest_indrawing",
+        "elementName": "chest_indrawing",
+        "elementSet": "data",
+        "elementPath": "chest_indrawing"
+      },
+      "stridor": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "Respiratory"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "stridor",
+        "elementName": "stridor",
+        "elementSet": "data",
+        "elementPath": "stridor"
+      },
+      "pulseox": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "Respiratory"
+          }
+        ],
+        "prompt_type_name": "pulseox",
+        "type": "object",
+        "properties": {
+          "pulse": {
+            "type": "number",
+            "elementKey": "pulseox_pulse",
+            "elementName": "pulse",
+            "elementSet": "data",
+            "elementPath": "pulseox.pulse"
+          },
+          "ox": {
+            "type": "number",
+            "elementKey": "pulseox_ox",
+            "elementName": "ox",
+            "elementSet": "data",
+            "elementPath": "pulseox.ox"
+          }
+        },
+        "elementKey": "pulseox",
+        "elementName": "pulseox",
+        "elementSet": "data",
+        "elementPath": "pulseox",
+        "listChildElementKeys": [
+          "pulseox_pulse",
+          "pulseox_ox"
+        ],
+        "notUnitOfRetention": true
+      },
+      "diarrhoea_days": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "diarrhoea_days",
+        "elementName": "diarrhoea_days",
+        "elementSet": "data",
+        "elementPath": "diarrhoea_days"
+      },
+      "cholera": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "cholera",
+        "elementName": "cholera",
+        "elementSet": "data",
+        "elementPath": "cholera"
+      },
+      "rice_water": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "rice_water",
+        "elementName": "rice_water",
+        "elementSet": "data",
+        "elementPath": "rice_water"
+      },
+      "blood_in_stool": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "blood_in_stool",
+        "elementName": "blood_in_stool",
+        "elementSet": "data",
+        "elementPath": "blood_in_stool"
+      },
+      "restless": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "restless",
+        "elementName": "restless",
+        "elementSet": "data",
+        "elementPath": "restless"
+      },
+      "dry_mouth": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "dry_mouth",
+        "elementKey": "dry_mouth",
+        "elementName": "dry_mouth",
+        "elementSet": "data",
+        "elementPath": "dry_mouth"
+      },
+      "sunken_eyes": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "sunken_eyes",
+        "elementKey": "sunken_eyes",
+        "elementName": "sunken_eyes",
+        "elementSet": "data",
+        "elementPath": "sunken_eyes"
+      },
+      "drinking_poorly": {
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "drinking_poorly",
+        "elementName": "drinking_poorly",
+        "elementSet": "data",
+        "elementPath": "drinking_poorly"
+      },
+      "drinking_eagerly": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "drinking_eagerly",
+        "elementName": "drinking_eagerly",
+        "elementSet": "data",
+        "elementPath": "drinking_eagerly"
+      },
+      "skin_elasticity": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "skin_elasticity",
+        "elementKey": "skin_elasticity",
+        "elementName": "skin_elasticity",
+        "elementSet": "data",
+        "elementPath": "skin_elasticity"
+      },
+      "axillary_temperature_possible": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "axillary_temperature_possible",
+        "elementName": "axillary_temperature_possible",
+        "elementSet": "data",
+        "elementPath": "axillary_temperature_possible"
+      },
+      "axillary_temperature": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "number",
+        "elementKey": "axillary_temperature",
+        "elementName": "axillary_temperature",
+        "elementSet": "data",
+        "elementPath": "axillary_temperature"
+      },
+      "feel_for_fever": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "feel_for_fever",
+        "elementName": "feel_for_fever",
+        "elementSet": "data",
+        "elementPath": "feel_for_fever"
+      },
+      "fever_days": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "fever_days",
+        "elementName": "fever_days",
+        "elementSet": "data",
+        "elementPath": "fever_days"
+      },
+      "fever_present_every_day": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "fever_present_every_day",
+        "elementName": "fever_present_every_day",
+        "elementSet": "data",
+        "elementPath": "fever_present_every_day"
+      },
+      "malaria_risk": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "high_low",
+        "elementKey": "malaria_risk",
+        "elementName": "malaria_risk",
+        "elementSet": "data",
+        "elementPath": "malaria_risk"
+      },
+      "measles_three_month": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "measles_three_month",
+        "elementName": "measles_three_month",
+        "elementSet": "data",
+        "elementPath": "measles_three_month"
+      },
+      "stiff_neck": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "stiff_neck",
+        "elementName": "stiff_neck",
+        "elementSet": "data",
+        "elementPath": "stiff_neck"
+      },
+      "bulging_fontanelle": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "bulging_fontanelle",
+        "elementName": "bulging_fontanelle",
+        "elementSet": "data",
+        "elementPath": "bulging_fontanelle"
+      },
+      "rash_generalized": {
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "rash_generalized",
+        "elementName": "rash_generalized",
+        "elementSet": "data",
+        "elementPath": "rash_generalized"
+      },
+      "runny_nose": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "runny_nose",
+        "elementName": "runny_nose",
+        "elementSet": "data",
+        "elementPath": "runny_nose"
+      },
+      "red_eyes": {
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "red_eyes",
+        "elementName": "red_eyes",
+        "elementSet": "data",
+        "elementPath": "red_eyes"
+      },
+      "eye_pus": {
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "eye_pus",
+        "elementName": "eye_pus",
+        "elementSet": "data",
+        "elementPath": "eye_pus"
+      },
+      "cornea_clouding": {
+        "_defn": [
+          {
+            "_row_num": 64,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "cornea_clouding",
+        "elementName": "cornea_clouding",
+        "elementSet": "data",
+        "elementPath": "cornea_clouding"
+      },
+      "cornea_clouding_tx": {
+        "_defn": [
+          {
+            "_row_num": 68,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "cornea_clouding_tx",
+        "elementName": "cornea_clouding_tx",
+        "elementSet": "data",
+        "elementPath": "cornea_clouding_tx"
+      },
+      "mouth_ulcers": {
+        "_defn": [
+          {
+            "_row_num": 72,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "mouth_ulcers",
+        "elementName": "mouth_ulcers",
+        "elementSet": "data",
+        "elementPath": "mouth_ulcers"
+      },
+      "mouth_ulcers_deep": {
+        "_defn": [
+          {
+            "_row_num": 74,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "mouth_ulcers_deep",
+        "elementName": "mouth_ulcers_deep",
+        "elementSet": "data",
+        "elementPath": "mouth_ulcers_deep"
+      },
+      "ear_pain": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "EarProblem"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "ear_pain",
+        "elementName": "ear_pain",
+        "elementSet": "data",
+        "elementPath": "ear_pain"
+      },
+      "ear_discharge_reported": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "EarProblem"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "ear_discharge_reported",
+        "elementName": "ear_discharge_reported",
+        "elementSet": "data",
+        "elementPath": "ear_discharge_reported"
+      },
+      "ear_discharge_days": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "EarProblem"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "ear_discharge_days",
+        "elementName": "ear_discharge_days",
+        "elementSet": "data",
+        "elementPath": "ear_discharge_days"
+      },
+      "ear_discharge_observed": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "EarProblem"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "ear_discharge_observed",
+        "elementName": "ear_discharge_observed",
+        "elementSet": "data",
+        "elementPath": "ear_discharge_observed"
+      },
+      "ear_swelling": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "EarProblem"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "ear_swelling",
+        "elementName": "ear_swelling",
+        "elementSet": "data",
+        "elementPath": "ear_swelling"
+      },
+      "wasting": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "Malnutrition"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "wasting",
+        "elementName": "wasting",
+        "elementSet": "data",
+        "elementPath": "wasting"
+      },
+      "oedema": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "Malnutrition"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "oedema",
+        "elementName": "oedema",
+        "elementSet": "data",
+        "elementPath": "oedema"
+      },
+      "muac": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "Malnutrition"
+          }
+        ],
+        "type": "string",
+        "valuesList": "muac",
+        "elementKey": "muac",
+        "elementName": "muac",
+        "elementSet": "data",
+        "elementPath": "muac"
+      },
+      "malnutrition_grade": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "Malnutrition"
+          }
+        ],
+        "type": "string",
+        "valuesList": "malnutrition_grade",
+        "elementKey": "malnutrition_grade",
+        "elementName": "malnutrition_grade",
+        "elementSet": "data",
+        "elementPath": "malnutrition_grade"
+      },
+      "acknowledge_prevent_low_blood_sugar": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_prevent_low_blood_sugar",
+        "elementName": "acknowledge_prevent_low_blood_sugar",
+        "elementSet": "data",
+        "elementPath": "acknowledge_prevent_low_blood_sugar"
+      },
+      "acknowledge_keep_warm_on_way_red": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_keep_warm_on_way_red",
+        "elementName": "acknowledge_keep_warm_on_way_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_keep_warm_on_way_red"
+      },
+      "acknowledge_severePersistentDiarrhoea": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_severePersistentDiarrhoea",
+        "elementName": "acknowledge_severePersistentDiarrhoea",
+        "elementSet": "data",
+        "elementPath": "acknowledge_severePersistentDiarrhoea"
+      },
+      "acknowledge_vomiting": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_vomiting",
+        "elementName": "acknowledge_vomiting",
+        "elementSet": "data",
+        "elementPath": "acknowledge_vomiting"
+      },
+      "acknowledge_convulsions": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_convulsions",
+        "elementName": "acknowledge_convulsions",
+        "elementSet": "data",
+        "elementPath": "acknowledge_convulsions"
+      },
+      "amox_allergy": {
+        "type": "string",
+        "valuesList": "yes_no",
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "RedTreatment"
+          },
+          {
+            "_row_num": 40,
+            "section_name": "RespiratoryTX"
+          },
+          {
+            "_row_num": 22,
+            "section_name": "EarTX"
+          }
+        ],
+        "elementKey": "amox_allergy",
+        "elementName": "amox_allergy",
+        "elementSet": "data",
+        "elementPath": "amox_allergy"
+      },
+      "acknowledge_give_Amoxicillin_red": {
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_Amoxicillin_red",
+        "elementName": "acknowledge_give_Amoxicillin_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_Amoxicillin_red"
+      },
+      "altern_abx": {
+        "_defn": [
+          {
+            "_row_num": 65,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "altern_abx",
+        "elementKey": "altern_abx",
+        "elementName": "altern_abx",
+        "elementSet": "data",
+        "elementPath": "altern_abx"
+      },
+      "acknowledge_give_erythromycin": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 68,
+            "section_name": "RedTreatment"
+          },
+          {
+            "_row_num": 162,
+            "section_name": "DiarrhoeaTX"
+          }
+        ],
+        "elementKey": "acknowledge_give_erythromycin",
+        "elementName": "acknowledge_give_erythromycin",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_erythromycin"
+      },
+      "acknowledge_give_artemether": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 78,
+            "section_name": "RedTreatment"
+          },
+          {
+            "_row_num": 111,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "elementKey": "acknowledge_give_artemether",
+        "elementName": "acknowledge_give_artemether",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_artemether"
+      },
+      "malaria_treatment": {
+        "_defn": [
+          {
+            "_row_num": 93,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "malaria_treatment",
+        "elementKey": "malaria_treatment",
+        "elementName": "malaria_treatment",
+        "elementSet": "data",
+        "elementPath": "malaria_treatment"
+      },
+      "acknowledge_give_quinine_red": {
+        "_defn": [
+          {
+            "_row_num": 96,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_quinine_red",
+        "elementName": "acknowledge_give_quinine_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_quinine_red"
+      },
+      "acknowledge_give_artesunate": {
+        "_defn": [
+          {
+            "_row_num": 122,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_artesunate",
+        "elementName": "acknowledge_give_artesunate",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_artesunate"
+      },
+      "acknowledge_give_paracetamol_red": {
+        "_defn": [
+          {
+            "_row_num": 140,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_paracetamol_red",
+        "elementName": "acknowledge_give_paracetamol_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_paracetamol_red"
+      },
+      "acknowledge_planC": {
+        "_defn": [
+          {
+            "_row_num": 185,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_planC",
+        "elementName": "acknowledge_planC",
+        "elementSet": "data",
+        "elementPath": "acknowledge_planC"
+      },
+      "Dehyd_IV": {
+        "_defn": [
+          {
+            "_row_num": 186,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "Dehyd_IV",
+        "elementName": "Dehyd_IV",
+        "elementSet": "data",
+        "elementPath": "Dehyd_IV"
+      },
+      "acknowledge_referral_reminder_red": {
+        "_defn": [
+          {
+            "_row_num": 240,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_referral_reminder_red",
+        "elementName": "acknowledge_referral_reminder_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_referral_reminder_red"
+      },
+      "going_to_hospital": {
+        "_defn": [
+          {
+            "_row_num": 241,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "going_to_hospital",
+        "elementName": "going_to_hospital",
+        "elementSet": "data",
+        "elementPath": "going_to_hospital"
+      },
+      "acknowledge_severe_condition_referral_red": {
+        "_defn": [
+          {
+            "_row_num": 243,
+            "section_name": "RedTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_severe_condition_referral_red",
+        "elementName": "acknowledge_severe_condition_referral_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_severe_condition_referral_red"
+      },
+      "acknowledge_chroniccough": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "RespiratoryTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_chroniccough",
+        "elementName": "acknowledge_chroniccough",
+        "elementSet": "data",
+        "elementPath": "acknowledge_chroniccough"
+      },
+      "pneumonia_tx": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "RespiratoryTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "pneumonia_tx",
+        "elementKey": "pneumonia_tx",
+        "elementName": "pneumonia_tx",
+        "elementSet": "data",
+        "elementPath": "pneumonia_tx"
+      },
+      "acknowledge_fever_refer": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "FeverTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_fever_refer",
+        "elementName": "acknowledge_fever_refer",
+        "elementSet": "data",
+        "elementPath": "acknowledge_fever_refer"
+      },
+      "acknowledge_measles": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "FeverTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_measles",
+        "elementName": "acknowledge_measles",
+        "elementSet": "data",
+        "elementPath": "acknowledge_measles"
+      },
+      "acknowledge_continue_feeding": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "FeverTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_continue_feeding",
+        "elementName": "acknowledge_continue_feeding",
+        "elementSet": "data",
+        "elementPath": "acknowledge_continue_feeding"
+      },
+      "acknowledge_give_gentian_violet": {
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "FeverTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_gentian_violet",
+        "elementName": "acknowledge_give_gentian_violet",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_gentian_violet"
+      },
+      "acknowledge_antimalarials": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "FeverTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_antimalarials",
+        "elementName": "acknowledge_antimalarials",
+        "elementSet": "data",
+        "elementPath": "acknowledge_antimalarials"
+      },
+      "antimalarial": {
+        "_defn": [
+          {
+            "_row_num": 58,
+            "section_name": "FeverTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "antimalarial",
+        "elementKey": "antimalarial",
+        "elementName": "antimalarial",
+        "elementSet": "data",
+        "elementPath": "antimalarial"
+      },
+      "ArtAmod_dosing": {
+        "_defn": [
+          {
+            "_row_num": 62,
+            "section_name": "FeverTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "ArtAmod_dosing",
+        "elementKey": "ArtAmod_dosing",
+        "elementName": "ArtAmod_dosing",
+        "elementSet": "data",
+        "elementPath": "ArtAmod_dosing"
+      },
+      "coblister_dosing": {
+        "_defn": [
+          {
+            "_row_num": 71,
+            "section_name": "FeverTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "coblister_dosing",
+        "elementKey": "coblister_dosing",
+        "elementName": "coblister_dosing",
+        "elementSet": "data",
+        "elementPath": "coblister_dosing"
+      },
+      "stools_passed": {
+        "_defn": [
+          {
+            "_row_num": 33,
+            "section_name": "DiarrhoeaTX"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "stools_passed",
+        "elementName": "stools_passed",
+        "elementSet": "data",
+        "elementPath": "stools_passed"
+      },
+      "leave_before_treatment_end": {
+        "_defn": [
+          {
+            "_row_num": 42,
+            "section_name": "DiarrhoeaTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "leave_before_treatment_end",
+        "elementName": "leave_before_treatment_end",
+        "elementSet": "data",
+        "elementPath": "leave_before_treatment_end"
+      },
+      "acknowledge_zinc": {
+        "_defn": [
+          {
+            "_row_num": 146,
+            "section_name": "DiarrhoeaTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_zinc",
+        "elementName": "acknowledge_zinc",
+        "elementSet": "data",
+        "elementPath": "acknowledge_zinc"
+      },
+      "cipro": {
+        "_defn": [
+          {
+            "_row_num": 180,
+            "section_name": "DiarrhoeaTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "cipro",
+        "elementKey": "cipro",
+        "elementName": "cipro",
+        "elementSet": "data",
+        "elementPath": "cipro"
+      },
+      "amox_tx": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "EarTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "amox_tx",
+        "elementKey": "amox_tx",
+        "elementName": "amox_tx",
+        "elementSet": "data",
+        "elementPath": "amox_tx"
+      },
+      "otitis_tx": {
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "EarTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "otitis_tx",
+        "elementKey": "otitis_tx",
+        "elementName": "otitis_tx",
+        "elementSet": "data",
+        "elementPath": "otitis_tx"
+      },
+      "acknowledge_ENT": {
+        "_defn": [
+          {
+            "_row_num": 92,
+            "section_name": "EarTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_ENT",
+        "elementName": "acknowledge_ENT",
+        "elementSet": "data",
+        "elementPath": "acknowledge_ENT"
+      },
+      "acknowledge_give_prophylactic_vitamin_a": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "MalnutritionTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_prophylactic_vitamin_a",
+        "elementName": "acknowledge_give_prophylactic_vitamin_a",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_prophylactic_vitamin_a"
+      },
+      "acknowledge_give_iron": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "MalnutritionTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_iron",
+        "elementName": "acknowledge_give_iron",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_iron"
+      },
+      "acknowledge_give_folic_acid": {
+        "_defn": [
+          {
+            "_row_num": 45,
+            "section_name": "MalnutritionTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_folic_acid",
+        "elementName": "acknowledge_give_folic_acid",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_folic_acid"
+      },
+      "deworm": {
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "MalnutritionTX"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "deworm",
+        "elementName": "deworm",
+        "elementSet": "data",
+        "elementPath": "deworm"
+      },
+      "acknowledge_deworm": {
+        "_defn": [
+          {
+            "_row_num": 61,
+            "section_name": "MalnutritionTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_deworm",
+        "elementName": "acknowledge_deworm",
+        "elementSet": "data",
+        "elementPath": "acknowledge_deworm"
+      },
+      "acknowledge_malnutrition": {
+        "_defn": [
+          {
+            "_row_num": 67,
+            "section_name": "MalnutritionTX"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_malnutrition",
+        "elementName": "acknowledge_malnutrition",
+        "elementSet": "data",
+        "elementPath": "acknowledge_malnutrition"
+      },
+      "breastfed": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "breastfed",
+        "elementName": "breastfed",
+        "elementSet": "data",
+        "elementPath": "breastfed"
+      },
+      "breastfeedings_per_day": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "breastfeedings_per_day",
+        "elementName": "breastfeedings_per_day",
+        "elementSet": "data",
+        "elementPath": "breastfeedings_per_day"
+      },
+      "breastfed_at_night": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "breastfed_at_night",
+        "elementName": "breastfed_at_night",
+        "elementSet": "data",
+        "elementPath": "breastfed_at_night"
+      },
+      "takes_other_foods": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "takes_other_foods",
+        "elementName": "takes_other_foods",
+        "elementSet": "data",
+        "elementPath": "takes_other_foods"
+      },
+      "other_foods_types": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "other_foods_types_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "other_foods_types.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "food",
+        "elementKey": "other_foods_types",
+        "elementName": "other_foods_types",
+        "elementSet": "data",
+        "elementPath": "other_foods_types",
+        "listChildElementKeys": [
+          "other_foods_types_items"
+        ]
+      },
+      "other_foods_per_day": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "other_foods_per_day",
+        "elementName": "other_foods_per_day",
+        "elementSet": "data",
+        "elementPath": "other_foods_per_day"
+      },
+      "serving_size": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "number",
+        "elementKey": "serving_size",
+        "elementName": "serving_size",
+        "elementSet": "data",
+        "elementPath": "serving_size"
+      },
+      "serving_unit": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "string",
+        "valuesList": "katori_teaspoon",
+        "elementKey": "serving_unit",
+        "elementName": "serving_unit",
+        "elementSet": "data",
+        "elementPath": "serving_unit"
+      },
+      "separate_serving": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "separate_serving",
+        "elementName": "separate_serving",
+        "elementSet": "data",
+        "elementPath": "separate_serving"
+      },
+      "who_feeds_how": {
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "string",
+        "elementKey": "who_feeds_how",
+        "elementName": "who_feeds_how",
+        "elementSet": "data",
+        "elementPath": "who_feeds_how"
+      },
+      "change_in_feeding": {
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "change_in_feeding",
+        "elementName": "change_in_feeding",
+        "elementSet": "data",
+        "elementPath": "change_in_feeding"
+      },
+      "change_in_feeding_how": {
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "string",
+        "elementKey": "change_in_feeding_how",
+        "elementName": "change_in_feeding_how",
+        "elementSet": "data",
+        "elementPath": "change_in_feeding_how"
+      },
+      "acknowledge_feeding": {
+        "_defn": [
+          {
+            "_row_num": 209,
+            "section_name": "CounselFeeding"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_feeding",
+        "elementName": "acknowledge_feeding",
+        "elementSet": "data",
+        "elementPath": "acknowledge_feeding"
+      },
+      "acknowledge_vaccinations": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "VaccRef"
+          },
+          {
+            "_row_num": 56,
+            "section_name": "VaccRefER"
+          }
+        ],
+        "elementKey": "acknowledge_vaccinations",
+        "elementName": "acknowledge_vaccinations",
+        "elementSet": "data",
+        "elementPath": "acknowledge_vaccinations"
+      },
+      "acknowledge_refer_for_assessment": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "FollowUp"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_refer_for_assessment",
+        "elementName": "acknowledge_refer_for_assessment",
+        "elementSet": "data",
+        "elementPath": "acknowledge_refer_for_assessment"
+      },
+      "acknowledge_return": {
+        "_defn": [
+          {
+            "_row_num": 93,
+            "section_name": "FollowUp"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_return",
+        "elementName": "acknowledge_return",
+        "elementSet": "data",
+        "elementPath": "acknowledge_return"
+      },
+      "basic_q_items": {
+        "type": "string",
+        "elementKey": "basic_q_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "basic_q.items",
+        "notUnitOfRetention": true
+      },
+      "needed_vaccinations_items": {
+        "type": "string",
+        "elementKey": "needed_vaccinations_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "needed_vaccinations.items",
+        "notUnitOfRetention": true
+      },
+      "pulseox_pulse": {
+        "type": "number",
+        "elementKey": "pulseox_pulse",
+        "elementName": "pulse",
+        "elementSet": "data",
+        "elementPath": "pulseox.pulse"
+      },
+      "pulseox_ox": {
+        "type": "number",
+        "elementKey": "pulseox_ox",
+        "elementName": "ox",
+        "elementSet": "data",
+        "elementPath": "pulseox.ox"
+      },
+      "other_foods_types_items": {
+        "type": "string",
+        "elementKey": "other_foods_types_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "other_foods_types.items",
+        "notUnitOfRetention": true
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "ArtAmod_dosing",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"ArtAmod_dosing\",\"choice_list_name\":\"ArtAmod_dosing\",\"data_value\":\"FixedDose\",\"display\":{\"text\":\"Fixed Dose Combination Artesunate (AS) + Amodiaquine (AQ)  (Standard Regimen)\"},\"_row_num\":127},{\"choice_list_name\":\"ArtAmod_dosing\",\"data_value\":\"CoBlistered\",\"display\":{\"text\":\"Co-Blistered Tablets (50 mg Artesunate, 150 mg Amodiaquine) for ONCE or TWICE daily dosing regimen\"},\"_row_num\":128}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dehyd_IV",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "able_to_drink",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "altern_abx",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"amoxicillin alternatives\",\"choice_list_name\":\"altern_abx\",\"data_value\":\"eryth\",\"display\":{\"text\":\"Erythromycin, oral\"},\"_row_num\":22},{\"choice_list_name\":\"altern_abx\",\"data_value\":\"azith\",\"display\":{\"text\":\"Azithromycin, oral\"},\"_row_num\":23}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "amox_allergy",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "amox_tx",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"amox_tx\",\"choice_list_name\":\"amox_tx\",\"data_value\":\"amox\",\"display\":{\"text\":\"Amoxicillin, oral (125 mg/5 ml)\"},\"_row_num\":132},{\"choice_list_name\":\"amox_tx\",\"data_value\":\"amoxiclav\",\"display\":{\"text\":\"Co-amoxiclav, oral\"},\"_row_num\":133}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "anaemia_check",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":98},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"some\",\"display\":{\"text\":\"Some <i>(skin of the child's palm is pale)</i>\"},\"_row_num\":99},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"severe\",\"display\":{\"text\":\"Severe <i>(skin of the palm is so pale that it looks white)</i>\"},\"_row_num\":100}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "antimalarial",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"antimalarial\",\"choice_list_name\":\"antimalarial\",\"data_value\":\"ArtAmod\",\"display\":{\"text\":\"Artesunate-Amodiaquine, oral\"},\"_row_num\":124},{\"choice_list_name\":\"antimalarial\",\"data_value\":\"ArtLum\",\"display\":{\"text\":\"Artemether-Lumefantrine, oral  (Reserved for patients not tolerating Artesunate-Amodiaquine)\"},\"_row_num\":125},{\"choice_list_name\":\"antimalarial\",\"data_value\":\"DihydPip\",\"display\":{\"text\":\"Dihydroartemisinin-Piperaquine, oral\"},\"_row_num\":126}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "axillary_temperature_possible",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "basic_q",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"difficulty_breathing\",\"display\":{\"text\":\"Cough or difficulty breathing\"},\"_row_num\":119},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"diarrhoea\",\"display\":{\"text\":\"Diarrhoea\"},\"_row_num\":120},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"fever_reported\",\"display\":{\"text\":\"Fever\"},\"_row_num\":121},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"ear_problem\",\"display\":{\"text\":\"Ear problem\"},\"_row_num\":122}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "birthdayKnown",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "blood_in_stool",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "breastfed",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "breastfed_at_night",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "bulging_fontanelle",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "change_in_feeding",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "chest_indrawing",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "cholera",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "cipro",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"Cipro\",\"choice_list_name\":\"cipro\",\"data_value\":\"250mg\",\"display\":{\"text\":\"250 mg TABLET\"},\"_row_num\":8},{\"choice_list_name\":\"cipro\",\"data_value\":\"500mg\",\"display\":{\"text\":\"500 mg TABLET\"},\"_row_num\":9}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "coblister_dosing",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"coblister_dosing\",\"choice_list_name\":\"coblister_dosing\",\"data_value\":\"once\",\"display\":{\"text\":\"ONCE Daily\"},\"_row_num\":135},{\"choice_list_name\":\"coblister_dosing\",\"data_value\":\"twice\",\"display\":{\"text\":\"TWICE Daily\"},\"_row_num\":136}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "convulsions",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "convulsions_now",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "cornea_clouding",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "cornea_clouding_tx",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "deworm",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "drinking_eagerly",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "drinking_poorly",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "dry_mouth",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"inserted dry_mouth\",\"choice_list_name\":\"dry_mouth\",\"data_value\":\"moist\",\"display\":{\"text\":\"Moist\"},\"_row_num\":29},{\"choice_list_name\":\"dry_mouth\",\"data_value\":\"dry\",\"display\":{\"text\":\"Dry\"},\"_row_num\":30},{\"choice_list_name\":\"dry_mouth\",\"data_value\":\"very_dry\",\"display\":{\"text\":\"Very dry\"},\"_row_num\":31}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "ear_discharge_observed",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "ear_discharge_reported",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "ear_pain",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "ear_swelling",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "eye_pus",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "feel_for_fever",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "fever_present_every_day",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "going_to_hospital",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "leave_before_treatment_end",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "lethargic",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "malaria_risk",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"high_low\",\"data_value\":\"high\",\"display\":{\"text\":\"High Risk\"},\"_row_num\":113},{\"choice_list_name\":\"high_low\",\"data_value\":\"low\",\"display\":{\"text\":\"Low Risk\"},\"_row_num\":114}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "malaria_treatment",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"malaria_treatment\",\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"quinine\",\"display\":{\"text\":\"Quinine, IM\"},\"_row_num\":15},{\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"artemether\",\"display\":{\"text\":\"Artemether, IM\"},\"_row_num\":16},{\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"artesunate\",\"display\":{\"text\":\"Artesunate, rectal\"},\"_row_num\":17}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "malnutrition_grade",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"Normal\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:#00CC00\\\">Weight for age > 80% (Above the median)</span>\"},\"_row_num\":108},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"MildPEM\",\"display\":{\"text\":\"<strong><span style=\\\"background-color: #ffff66\\\">Weight for age < 80% but > 75% (Below median)</span>\"},\"_row_num\":109},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"ModPEM\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:orange\\\">Weight for age < 75% but > 60% (Below low weight for age)</span>\"},\"_row_num\":110},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"SeverePEM\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:red\\\">Weight for age < 60% expected weight for age (Below very low weight for age)</span>\"},\"_row_num\":111}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "measles_three_month",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "mouth_ulcers",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "mouth_ulcers_deep",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "muac",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"muac\",\"choice_list_name\":\"muac\",\"data_value\":\"green\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:#00CC00\\\">GREEN</strong></span> - MUAC > 13.5 cm\"},\"_row_num\":4},{\"choice_list_name\":\"muac\",\"data_value\":\"yellow\",\"display\":{\"text\":\"<strong><span style=\\\"background-color: #ffff66\\\">YELLOW</strong></span> - MUAC 12.5 - 13.5 cm\"},\"_row_num\":5},{\"choice_list_name\":\"muac\",\"data_value\":\"orange\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:orange\\\">ORANGE</strong></span> - MUAC 12.0 - 12.5 cm\"},\"_row_num\":6},{\"choice_list_name\":\"muac\",\"data_value\":\"red\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:red\\\">RED</strong></span> - MUAC < 12 cm\"},\"_row_num\":7}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "needed_vaccinations",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"vaccinations\",\"data_value\":\"bcg\",\"display\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">BCG</span>\"},\"age_weeks\":0,\"_row_num\":50},{\"comments\":\"edited vaccination names\",\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_zero\",\"display\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">Polio 'O'</span>\"},\"age_weeks\":0,\"_row_num\":51},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">Polio '1'</span>\"},\"age_weeks\":6,\"_row_num\":52},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">\\\"Five in One\\\" 1</span>\"},\"age_weeks\":6,\"_row_num\":53},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD'>Pneumococcal '1'</span>\"},\"age_weeks\":6,\"_row_num\":54},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">Rotavirus  '1'</span>\"},\"age_weeks\":6,\"_row_num\":55},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Polio '2'</span>\"},\"age_weeks\":10,\"_row_num\":56},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">\\\"Five in One\\\" 2</span>\"},\"age_weeks\":10,\"_row_num\":57},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Pneumococcal '2'</span>\"},\"age_weeks\":10,\"_row_num\":58},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Rotavirus  '2'</span>\"},\"age_weeks\":10,\"_row_num\":59},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_three\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD; \\\"font color:white\\\">Polio '3'</span>\"},\"age_weeks\":14,\"_row_num\":60},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_three\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">\\\"Five in One\\\" 3</span>\"},\"age_weeks\":14,\"_row_num\":61},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_three\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">Pneumococcal '3'</span>\"},\"age_weeks\":14,\"_row_num\":62},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_three\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font-color:white\\\">Rotavirus  '3'</span>\"},\"age_weeks\":14,\"_row_num\":63},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\"; \\\"font color:white\\\">Measles '1'</span>\"},\"age_weeks\":36,\"_row_num\":64},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"yellow_fever\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\"; \\\"color:white\\\">Yellow Fever</span>\"},\"age_weeks\":36,\"_row_num\":65},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">Measles '2'</span>\"},\"age_weeks\":72,\"_row_num\":66},{\"comments\":\"ask doctor age appropriate weeks vitA\",\"choice_list_name\":\"vaccinations\",\"data_value\":\"vitA\",\"display\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">Vitamin A</span>\"},\"age_weeks\":0,\"_row_num\":67},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"uptodate\",\"display\":{\"text\":\"<i>Child is up to date on all vaccinations.</i>\"},\"age_weeks\":0,\"_row_num\":68}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "oedema",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "other_foods_types",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"food\",\"data_value\":\"milk\",\"display\":{\"text\":\"Milk\"},\"_row_num\":70},{\"choice_list_name\":\"food\",\"data_value\":\"juice\",\"display\":{\"text\":\"Juice\"},\"_row_num\":71},{\"choice_list_name\":\"food\",\"data_value\":\"water\",\"display\":{\"text\":\"Water\"},\"_row_num\":72},{\"choice_list_name\":\"food\",\"data_value\":\"formula\",\"display\":{\"text\":\"Formula\"},\"_row_num\":73},{\"choice_list_name\":\"food\",\"data_value\":\"cereal\",\"display\":{\"text\":\"Cereal\"},\"_row_num\":74},{\"choice_list_name\":\"food\",\"data_value\":\"milk_based_wheat/rice\",\"display\":{\"text\":\"Cooked wheat/rice based with undiluted milk and sugar\"},\"_row_num\":75},{\"choice_list_name\":\"food\",\"data_value\":\"water_based_wheat/rice\",\"display\":{\"text\":\"Cooked wheat/rice based with dal/lentil water\"},\"_row_num\":76},{\"choice_list_name\":\"food\",\"data_value\":\"khichri\",\"display\":{\"text\":\"Khichri (cooked rice+dal/lentil in thinned form)\"},\"_row_num\":77},{\"choice_list_name\":\"food\",\"data_value\":\"fruit\",\"display\":{\"text\":\"Mashed fruit\"},\"_row_num\":78},{\"choice_list_name\":\"food\",\"data_value\":\"vegetables\",\"display\":{\"text\":\"Boiled or cooked vegetables\"},\"_row_num\":79},{\"choice_list_name\":\"food\",\"data_value\":\"mixed_food\",\"display\":{\"text\":\"Normal mixed food as adults\"},\"_row_num\":80}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "other_problems",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "otitis_tx",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"otitis_tx\",\"choice_list_name\":\"otitis_tx\",\"data_value\":\"eryth\",\"display\":{\"text\":\"Erythromycin, oral\"},\"_row_num\":12},{\"choice_list_name\":\"otitis_tx\",\"data_value\":\"cotrimox\",\"display\":{\"text\":\"Co-trimoxazole, oral\"},\"_row_num\":13}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "pneumonia_tx",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"pneumonia_tx\",\"choice_list_name\":\"pneumonia_tx\",\"data_value\":\"eryth\",\"display\":{\"text\":\"Erythromycin, oral\"},\"_row_num\":10},{\"choice_list_name\":\"pneumonia_tx\",\"data_value\":\"azith\",\"display\":{\"text\":\"Azithromycin, oral\"},\"_row_num\":11}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "rash_generalized",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "red_eyes",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "restless",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "rice_water",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "runny_nose",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "separate_serving",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "serving_unit",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"katori\",\"display\":{\"text\":\"Katori\"},\"_row_num\":102},{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"teaspoon\",\"display\":{\"text\":\"Teaspoon\"},\"_row_num\":103}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "skin_elasticity",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"normal\",\"display\":{\"text\":\"Skin goes back normally\"},\"_row_num\":46},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"slow\",\"display\":{\"text\":\"Slowly\"},\"_row_num\":47},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"very_slow\",\"display\":{\"text\":\"Very slowly (longer than 2 seconds)\"},\"_row_num\":48}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "stiff_neck",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "stridor",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "sunken_eyes",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"comments\":\"inserted sunken_eyes\",\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"normal\",\"display\":{\"text\":\"Normal\"},\"_row_num\":25},{\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"sunken\",\"display\":{\"text\":\"Sunken\"},\"_row_num\":26},{\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"very_sunken\",\"display\":{\"text\":\"Very sunken and dry\"},\"_row_num\":27}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "takes_other_foods",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "vomit_everything",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "wasting",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "imgci"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"<b>IMCI Ghana</b>\""
+      }
+    ]
   }
 }

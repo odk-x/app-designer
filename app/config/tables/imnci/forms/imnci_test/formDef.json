@@ -20319,6 +20319,1395 @@
           "_finalize": 10
         }
       }
+    },
+    "dataTableModel": {
+      "basic_q": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "basic_q_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "basic_q.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "Which symptoms does the child have?",
+        "valuesList": "basic_four_questions",
+        "elementKey": "basic_q",
+        "elementName": "basic_q",
+        "elementSet": "data",
+        "elementPath": "basic_q",
+        "listChildElementKeys": [
+          "basic_q_items"
+        ]
+      },
+      "anaemia_check": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "no_some_severe",
+        "elementKey": "anaemia_check",
+        "elementName": "anaemia_check",
+        "elementSet": "data",
+        "elementPath": "anaemia_check"
+      },
+      "needed_vaccinations": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "needed_vaccinations_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "needed_vaccinations.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "vaccinations",
+        "elementKey": "needed_vaccinations",
+        "elementName": "needed_vaccinations",
+        "elementSet": "data",
+        "elementPath": "needed_vaccinations",
+        "listChildElementKeys": [
+          "needed_vaccinations_items"
+        ]
+      },
+      "other_problems": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "other_problems",
+        "elementName": "other_problems",
+        "elementSet": "data",
+        "elementPath": "other_problems"
+      },
+      "refer_for_other_problems": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "refer_for_other_problems",
+        "elementName": "refer_for_other_problems",
+        "elementSet": "data",
+        "elementPath": "refer_for_other_problems"
+      },
+      "name": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "string",
+        "elementKey": "name",
+        "elementName": "name",
+        "elementSet": "data",
+        "elementPath": "name"
+      },
+      "birthdayKnown": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "birthdayKnown",
+        "elementName": "birthdayKnown",
+        "elementSet": "data",
+        "elementPath": "birthdayKnown"
+      },
+      "birthday": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "object",
+        "elementType": "date",
+        "elementKey": "birthday",
+        "elementName": "birthday",
+        "elementSet": "data",
+        "elementPath": "birthday",
+        "listChildElementKeys": []
+      },
+      "monthsOld": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "monthsOld",
+        "elementName": "monthsOld",
+        "elementSet": "data",
+        "elementPath": "monthsOld"
+      },
+      "under_2_months": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "boolean",
+        "displayName": "Acknowledge that protocol does not support assessing a child under 2 months old.",
+        "elementKey": "under_2_months",
+        "elementName": "under_2_months",
+        "elementSet": "data",
+        "elementPath": "under_2_months"
+      },
+      "weight": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "number",
+        "elementKey": "weight",
+        "elementName": "weight",
+        "elementSet": "data",
+        "elementPath": "weight"
+      },
+      "visit_type": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "PatientDemographics"
+          }
+        ],
+        "type": "string",
+        "valuesList": "visit_type",
+        "elementKey": "visit_type",
+        "elementName": "visit_type",
+        "elementSet": "data",
+        "elementPath": "visit_type"
+      },
+      "able_to_drink": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "able_to_drink",
+        "elementName": "able_to_drink",
+        "elementSet": "data",
+        "elementPath": "able_to_drink"
+      },
+      "vomit_everything": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "vomit_everything",
+        "elementName": "vomit_everything",
+        "elementSet": "data",
+        "elementPath": "vomit_everything"
+      },
+      "convulsions": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "convulsions",
+        "elementName": "convulsions",
+        "elementSet": "data",
+        "elementPath": "convulsions"
+      },
+      "lethargic": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "lethargic",
+        "elementName": "lethargic",
+        "elementSet": "data",
+        "elementPath": "lethargic"
+      },
+      "pulseox": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "DangerSigns"
+          }
+        ],
+        "prompt_type_name": "pulseox",
+        "type": "object",
+        "properties": {
+          "pulse": {
+            "type": "number",
+            "elementKey": "pulseox_pulse",
+            "elementName": "pulse",
+            "elementSet": "data",
+            "elementPath": "pulseox.pulse"
+          },
+          "ox": {
+            "type": "number",
+            "elementKey": "pulseox_ox",
+            "elementName": "ox",
+            "elementSet": "data",
+            "elementPath": "pulseox.ox"
+          }
+        },
+        "elementKey": "pulseox",
+        "elementName": "pulseox",
+        "elementSet": "data",
+        "elementPath": "pulseox",
+        "listChildElementKeys": [
+          "pulseox_pulse",
+          "pulseox_ox"
+        ],
+        "notUnitOfRetention": true
+      },
+      "refer_urgently_to_hospital": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "DangerSigns"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "DehydrationTreatment"
+          },
+          {
+            "_row_num": 26,
+            "section_name": "DehydrationTreatment"
+          }
+        ],
+        "elementKey": "refer_urgently_to_hospital",
+        "elementName": "refer_urgently_to_hospital",
+        "elementSet": "data",
+        "elementPath": "refer_urgently_to_hospital"
+      },
+      "how_long_difficulty_breathing": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "Respitory"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "how_long_difficulty_breathing",
+        "elementName": "how_long_difficulty_breathing",
+        "elementSet": "data",
+        "elementPath": "how_long_difficulty_breathing"
+      },
+      "breath_count": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "Respitory"
+          }
+        ],
+        "prompt_type_name": "breathcounter",
+        "type": "integer",
+        "elementKey": "breath_count",
+        "elementName": "breath_count",
+        "elementSet": "data",
+        "elementPath": "breath_count"
+      },
+      "breath_count_2": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "Respitory"
+          }
+        ],
+        "prompt_type_name": "breathcounter",
+        "type": "integer",
+        "elementKey": "breath_count_2",
+        "elementName": "breath_count_2",
+        "elementSet": "data",
+        "elementPath": "breath_count_2"
+      },
+      "chest_indrawing": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "Respitory"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "chest_indrawing",
+        "elementName": "chest_indrawing",
+        "elementSet": "data",
+        "elementPath": "chest_indrawing"
+      },
+      "stridor": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "Respitory"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "stridor",
+        "elementName": "stridor",
+        "elementSet": "data",
+        "elementPath": "stridor"
+      },
+      "diarrhoea_days": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "diarrhoea_days",
+        "elementName": "diarrhoea_days",
+        "elementSet": "data",
+        "elementPath": "diarrhoea_days"
+      },
+      "blood_in_stool": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "blood_in_stool",
+        "elementName": "blood_in_stool",
+        "elementSet": "data",
+        "elementPath": "blood_in_stool"
+      },
+      "restless": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "restless",
+        "elementName": "restless",
+        "elementSet": "data",
+        "elementPath": "restless"
+      },
+      "sunken_eyes": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "sunken_eyes",
+        "elementName": "sunken_eyes",
+        "elementSet": "data",
+        "elementPath": "sunken_eyes"
+      },
+      "drinking_poorly": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "drinking_poorly",
+        "elementName": "drinking_poorly",
+        "elementSet": "data",
+        "elementPath": "drinking_poorly"
+      },
+      "drinking_eagerly": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "drinking_eagerly",
+        "elementName": "drinking_eagerly",
+        "elementSet": "data",
+        "elementPath": "drinking_eagerly"
+      },
+      "skin_elasticity": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "Diarrhoea"
+          }
+        ],
+        "type": "string",
+        "valuesList": "skin_elasticity",
+        "elementKey": "skin_elasticity",
+        "elementName": "skin_elasticity",
+        "elementSet": "data",
+        "elementPath": "skin_elasticity"
+      },
+      "axillary_temperature_possible": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "axillary_temperature_possible",
+        "elementName": "axillary_temperature_possible",
+        "elementSet": "data",
+        "elementPath": "axillary_temperature_possible"
+      },
+      "axillary_temperature": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "number",
+        "elementKey": "axillary_temperature",
+        "elementName": "axillary_temperature",
+        "elementSet": "data",
+        "elementPath": "axillary_temperature"
+      },
+      "feel_for_fever": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "feel_for_fever",
+        "elementName": "feel_for_fever",
+        "elementSet": "data",
+        "elementPath": "feel_for_fever"
+      },
+      "fever_days": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "fever_days",
+        "elementName": "fever_days",
+        "elementSet": "data",
+        "elementPath": "fever_days"
+      },
+      "fever_present_every_day": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "fever_present_every_day",
+        "elementName": "fever_present_every_day",
+        "elementSet": "data",
+        "elementPath": "fever_present_every_day"
+      },
+      "malaria_risk": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "high_low",
+        "elementKey": "malaria_risk",
+        "elementName": "malaria_risk",
+        "elementSet": "data",
+        "elementPath": "malaria_risk"
+      },
+      "measles_three_month": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "measles_three_month",
+        "elementName": "measles_three_month",
+        "elementSet": "data",
+        "elementPath": "measles_three_month"
+      },
+      "stiff_neck": {
+        "_defn": [
+          {
+            "_row_num": 33,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "stiff_neck",
+        "elementName": "stiff_neck",
+        "elementSet": "data",
+        "elementPath": "stiff_neck"
+      },
+      "bulging_fontanelle": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "bulging_fontanelle",
+        "elementName": "bulging_fontanelle",
+        "elementSet": "data",
+        "elementPath": "bulging_fontanelle"
+      },
+      "rash_generalized": {
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "rash_generalized",
+        "elementName": "rash_generalized",
+        "elementSet": "data",
+        "elementPath": "rash_generalized"
+      },
+      "runny_nose": {
+        "_defn": [
+          {
+            "_row_num": 42,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "runny_nose",
+        "elementName": "runny_nose",
+        "elementSet": "data",
+        "elementPath": "runny_nose"
+      },
+      "red_eyes": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "red_eyes",
+        "elementName": "red_eyes",
+        "elementSet": "data",
+        "elementPath": "red_eyes"
+      },
+      "eye_pus": {
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "eye_pus",
+        "elementName": "eye_pus",
+        "elementSet": "data",
+        "elementPath": "eye_pus"
+      },
+      "cornea_clouding": {
+        "_defn": [
+          {
+            "_row_num": 50,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "cornea_clouding",
+        "elementName": "cornea_clouding",
+        "elementSet": "data",
+        "elementPath": "cornea_clouding"
+      },
+      "mouth_ulcers": {
+        "_defn": [
+          {
+            "_row_num": 51,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "mouth_ulcers",
+        "elementName": "mouth_ulcers",
+        "elementSet": "data",
+        "elementPath": "mouth_ulcers"
+      },
+      "mouth_ulcers_deep": {
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "Fever"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "mouth_ulcers_deep",
+        "elementName": "mouth_ulcers_deep",
+        "elementSet": "data",
+        "elementPath": "mouth_ulcers_deep"
+      },
+      "ear_pain": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "Ear"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "ear_pain",
+        "elementName": "ear_pain",
+        "elementSet": "data",
+        "elementPath": "ear_pain"
+      },
+      "ear_discharge_reported": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "Ear"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "ear_discharge_reported",
+        "elementName": "ear_discharge_reported",
+        "elementSet": "data",
+        "elementPath": "ear_discharge_reported"
+      },
+      "ear_discharge_days": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "Ear"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "ear_discharge_days",
+        "elementName": "ear_discharge_days",
+        "elementSet": "data",
+        "elementPath": "ear_discharge_days"
+      },
+      "ear_discharge_observed": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "Ear"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "ear_discharge_observed",
+        "elementName": "ear_discharge_observed",
+        "elementSet": "data",
+        "elementPath": "ear_discharge_observed"
+      },
+      "ear_swelling": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "Ear"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "ear_swelling",
+        "elementName": "ear_swelling",
+        "elementSet": "data",
+        "elementPath": "ear_swelling"
+      },
+      "wasting": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "Malnutrition"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "wasting",
+        "elementName": "wasting",
+        "elementSet": "data",
+        "elementPath": "wasting"
+      },
+      "oedema": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "Malnutrition"
+          }
+        ],
+        "type": "string",
+        "valuesList": "present",
+        "elementKey": "oedema",
+        "elementName": "oedema",
+        "elementSet": "data",
+        "elementPath": "oedema"
+      },
+      "malnutrition_grade": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "Malnutrition"
+          }
+        ],
+        "type": "string",
+        "valuesList": "malnutrition_grade",
+        "elementKey": "malnutrition_grade",
+        "elementName": "malnutrition_grade",
+        "elementSet": "data",
+        "elementPath": "malnutrition_grade"
+      },
+      "acknowledge_severe_condition_referral_begin_red": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_severe_condition_referral_begin_red",
+        "elementName": "acknowledge_severe_condition_referral_begin_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_severe_condition_referral_begin_red"
+      },
+      "acknowledge_keep_warm_red": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_keep_warm_red",
+        "elementName": "acknowledge_keep_warm_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_keep_warm_red"
+      },
+      "cotrimoxazole_type_red": {
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "cotrimoxazole_type",
+        "elementKey": "cotrimoxazole_type_red",
+        "elementName": "cotrimoxazole_type_red",
+        "elementSet": "data",
+        "elementPath": "cotrimoxazole_type_red"
+      },
+      "acknowledge_give_cotrimoxazole_red": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "Treatment"
+          },
+          {
+            "_row_num": 46,
+            "section_name": "Treatment"
+          },
+          {
+            "_row_num": 49,
+            "section_name": "Treatment"
+          },
+          {
+            "_row_num": 52,
+            "section_name": "Treatment"
+          }
+        ],
+        "elementKey": "acknowledge_give_cotrimoxazole_red",
+        "elementName": "acknowledge_give_cotrimoxazole_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_cotrimoxazole_red"
+      },
+      "acknowledge_give_quinine_red": {
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_quinine_red",
+        "elementName": "acknowledge_give_quinine_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_quinine_red"
+      },
+      "acknowledge_give_paracetamol_red": {
+        "_defn": [
+          {
+            "_row_num": 81,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_paracetamol_red",
+        "elementName": "acknowledge_give_paracetamol_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_paracetamol_red"
+      },
+      "acknowledge_prevent_low_blood_sugar": {
+        "_defn": [
+          {
+            "_row_num": 115,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_prevent_low_blood_sugar",
+        "elementName": "acknowledge_prevent_low_blood_sugar",
+        "elementSet": "data",
+        "elementPath": "acknowledge_prevent_low_blood_sugar"
+      },
+      "acknowledge_referral_reminder_red": {
+        "_defn": [
+          {
+            "_row_num": 118,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_referral_reminder_red",
+        "elementName": "acknowledge_referral_reminder_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_referral_reminder_red"
+      },
+      "going_to_hospital": {
+        "_defn": [
+          {
+            "_row_num": 119,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "going_to_hospital",
+        "elementName": "going_to_hospital",
+        "elementSet": "data",
+        "elementPath": "going_to_hospital"
+      },
+      "acknowledge_keep_warm_on_way_red": {
+        "_defn": [
+          {
+            "_row_num": 123,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_keep_warm_on_way_red",
+        "elementName": "acknowledge_keep_warm_on_way_red",
+        "elementSet": "data",
+        "elementPath": "acknowledge_keep_warm_on_way_red"
+      },
+      "cotrimoxazole_type": {
+        "_defn": [
+          {
+            "_row_num": 136,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "cotrimoxazole_type",
+        "elementKey": "cotrimoxazole_type",
+        "elementName": "cotrimoxazole_type",
+        "elementSet": "data",
+        "elementPath": "cotrimoxazole_type"
+      },
+      "acknowledge_give_cotrimoxazole": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 138,
+            "section_name": "Treatment"
+          },
+          {
+            "_row_num": 141,
+            "section_name": "Treatment"
+          },
+          {
+            "_row_num": 144,
+            "section_name": "Treatment"
+          },
+          {
+            "_row_num": 147,
+            "section_name": "Treatment"
+          }
+        ],
+        "elementKey": "acknowledge_give_cotrimoxazole",
+        "elementName": "acknowledge_give_cotrimoxazole",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_cotrimoxazole"
+      },
+      "given_vaccinations": {
+        "_defn": [
+          {
+            "_row_num": 193,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "given_vaccinations_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "given_vaccinations.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "vaccinations",
+        "elementKey": "given_vaccinations",
+        "elementName": "given_vaccinations",
+        "elementSet": "data",
+        "elementPath": "given_vaccinations",
+        "listChildElementKeys": [
+          "given_vaccinations_items"
+        ]
+      },
+      "acknowledge_give_gentian_violet": {
+        "_defn": [
+          {
+            "_row_num": 196,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_gentian_violet",
+        "elementName": "acknowledge_give_gentian_violet",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_gentian_violet"
+      },
+      "zinc_type": {
+        "_defn": [
+          {
+            "_row_num": 228,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "tablet_syrup",
+        "elementKey": "zinc_type",
+        "elementName": "zinc_type",
+        "elementSet": "data",
+        "elementPath": "zinc_type"
+      },
+      "acknowledge_refer_for_assessment": {
+        "_defn": [
+          {
+            "_row_num": 276,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_refer_for_assessment",
+        "elementName": "acknowledge_refer_for_assessment",
+        "elementSet": "data",
+        "elementPath": "acknowledge_refer_for_assessment"
+      },
+      "antimalarial": {
+        "_defn": [
+          {
+            "_row_num": 290,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "antimalarial",
+        "elementKey": "antimalarial",
+        "elementName": "antimalarial",
+        "elementSet": "data",
+        "elementPath": "antimalarial"
+      },
+      "acknowledge_continue_feeding": {
+        "_defn": [
+          {
+            "_row_num": 392,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_continue_feeding",
+        "elementName": "acknowledge_continue_feeding",
+        "elementSet": "data",
+        "elementPath": "acknowledge_continue_feeding"
+      },
+      "breastfed": {
+        "_defn": [
+          {
+            "_row_num": 411,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "breastfed",
+        "elementName": "breastfed",
+        "elementSet": "data",
+        "elementPath": "breastfed"
+      },
+      "breastfeedings_per_day": {
+        "_defn": [
+          {
+            "_row_num": 413,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "breastfeedings_per_day",
+        "elementName": "breastfeedings_per_day",
+        "elementSet": "data",
+        "elementPath": "breastfeedings_per_day"
+      },
+      "breastfed_at_night": {
+        "_defn": [
+          {
+            "_row_num": 416,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "breastfed_at_night",
+        "elementName": "breastfed_at_night",
+        "elementSet": "data",
+        "elementPath": "breastfed_at_night"
+      },
+      "takes_other_foods": {
+        "_defn": [
+          {
+            "_row_num": 420,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "takes_other_foods",
+        "elementName": "takes_other_foods",
+        "elementSet": "data",
+        "elementPath": "takes_other_foods"
+      },
+      "other_foods_types": {
+        "_defn": [
+          {
+            "_row_num": 422,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "other_foods_types_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "other_foods_types.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "food",
+        "elementKey": "other_foods_types",
+        "elementName": "other_foods_types",
+        "elementSet": "data",
+        "elementPath": "other_foods_types",
+        "listChildElementKeys": [
+          "other_foods_types_items"
+        ]
+      },
+      "other_foods_per_day": {
+        "_defn": [
+          {
+            "_row_num": 425,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "other_foods_per_day",
+        "elementName": "other_foods_per_day",
+        "elementSet": "data",
+        "elementPath": "other_foods_per_day"
+      },
+      "serving_size": {
+        "_defn": [
+          {
+            "_row_num": 428,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "number",
+        "elementKey": "serving_size",
+        "elementName": "serving_size",
+        "elementSet": "data",
+        "elementPath": "serving_size"
+      },
+      "serving_unit": {
+        "_defn": [
+          {
+            "_row_num": 431,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "katori_teaspoon",
+        "elementKey": "serving_unit",
+        "elementName": "serving_unit",
+        "elementSet": "data",
+        "elementPath": "serving_unit"
+      },
+      "separate_serving": {
+        "_defn": [
+          {
+            "_row_num": 434,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "separate_serving",
+        "elementName": "separate_serving",
+        "elementSet": "data",
+        "elementPath": "separate_serving"
+      },
+      "who_feeds_how": {
+        "_defn": [
+          {
+            "_row_num": 437,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "elementKey": "who_feeds_how",
+        "elementName": "who_feeds_how",
+        "elementSet": "data",
+        "elementPath": "who_feeds_how"
+      },
+      "change_in_feeding": {
+        "_defn": [
+          {
+            "_row_num": 441,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "change_in_feeding",
+        "elementName": "change_in_feeding",
+        "elementSet": "data",
+        "elementPath": "change_in_feeding"
+      },
+      "change_in_feeding_how": {
+        "_defn": [
+          {
+            "_row_num": 443,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "string",
+        "elementKey": "change_in_feeding_how",
+        "elementName": "change_in_feeding_how",
+        "elementSet": "data",
+        "elementPath": "change_in_feeding_how"
+      },
+      "acknowledge_give_IFA_14_days": {
+        "_defn": [
+          {
+            "_row_num": 543,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_IFA_14_days",
+        "elementName": "acknowledge_give_IFA_14_days",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_IFA_14_days"
+      },
+      "acknowledge_give_prophylactic_vitamin_a": {
+        "_defn": [
+          {
+            "_row_num": 565,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_prophylactic_vitamin_a",
+        "elementName": "acknowledge_give_prophylactic_vitamin_a",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_prophylactic_vitamin_a"
+      },
+      "acknowledge_give_ifa_tablet": {
+        "_defn": [
+          {
+            "_row_num": 585,
+            "section_name": "Treatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_ifa_tablet",
+        "elementName": "acknowledge_give_ifa_tablet",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_ifa_tablet"
+      },
+      "cholera_in_area": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "DehydrationTreatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "cholera_in_area",
+        "elementName": "cholera_in_area",
+        "elementSet": "data",
+        "elementPath": "cholera_in_area"
+      },
+      "acknowledge_give_doxycycline": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "DehydrationTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_give_doxycycline",
+        "elementName": "acknowledge_give_doxycycline",
+        "elementSet": "data",
+        "elementPath": "acknowledge_give_doxycycline"
+      },
+      "acknowledge_severe_condition_referral": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "DehydrationTreatment"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "acknowledge_severe_condition_referral",
+        "elementName": "acknowledge_severe_condition_referral",
+        "elementSet": "data",
+        "elementPath": "acknowledge_severe_condition_referral"
+      },
+      "leave_before_treatment_end": {
+        "_defn": [
+          {
+            "_row_num": 63,
+            "section_name": "DehydrationTreatment"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "leave_before_treatment_end",
+        "elementName": "leave_before_treatment_end",
+        "elementSet": "data",
+        "elementPath": "leave_before_treatment_end"
+      },
+      "basic_q_items": {
+        "type": "string",
+        "elementKey": "basic_q_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "basic_q.items",
+        "notUnitOfRetention": true
+      },
+      "needed_vaccinations_items": {
+        "type": "string",
+        "elementKey": "needed_vaccinations_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "needed_vaccinations.items",
+        "notUnitOfRetention": true
+      },
+      "pulseox_pulse": {
+        "type": "number",
+        "elementKey": "pulseox_pulse",
+        "elementName": "pulse",
+        "elementSet": "data",
+        "elementPath": "pulseox.pulse"
+      },
+      "pulseox_ox": {
+        "type": "number",
+        "elementKey": "pulseox_ox",
+        "elementName": "ox",
+        "elementSet": "data",
+        "elementPath": "pulseox.ox"
+      },
+      "given_vaccinations_items": {
+        "type": "string",
+        "elementKey": "given_vaccinations_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "given_vaccinations.items",
+        "notUnitOfRetention": true
+      },
+      "other_foods_types_items": {
+        "type": "string",
+        "elementKey": "other_foods_types_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "other_foods_types.items",
+        "notUnitOfRetention": true
+      }
     }
   }
 }

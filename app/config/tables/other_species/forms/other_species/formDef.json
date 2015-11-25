@@ -68,7 +68,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "other_species",
         "_row_num": 2
       },
@@ -83,6 +83,16 @@
           "title": "Other Species"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"OS_FOL_date\",\"OS_FOL_B_focal_AnimID\",\"OS_time_begin\",\"OS_time_end\",\"OS_OSL_local_species_name\",\"OS_local_species_name_written\",\"OS_duration\",\"OS_comments\"]",
+        "_row_num": 2
       }
     ]
   },
@@ -105,8 +115,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "other_species",
         "_row_num": 2
       },
@@ -122,8 +132,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "other_species",
         "_row_num": 2,
         "__rowNum__": 1
@@ -623,6 +633,149 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "OS_FOL_date": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "OS_FOL_date",
+        "elementName": "OS_FOL_date",
+        "elementSet": "data",
+        "elementPath": "OS_FOL_date"
+      },
+      "OS_FOL_B_focal_AnimID": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "OS_FOL_B_focal_AnimID",
+        "elementName": "OS_FOL_B_focal_AnimID",
+        "elementSet": "data",
+        "elementPath": "OS_FOL_B_focal_AnimID"
+      },
+      "OS_time_begin": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "OS_time_begin",
+        "elementName": "OS_time_begin",
+        "elementSet": "data",
+        "elementPath": "OS_time_begin"
+      },
+      "OS_time_end": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "OS_time_end",
+        "elementName": "OS_time_end",
+        "elementSet": "data",
+        "elementPath": "OS_time_end"
+      },
+      "OS_OSL_local_species_name": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "OS_OSL_local_species_name",
+        "elementName": "OS_OSL_local_species_name",
+        "elementSet": "data",
+        "elementPath": "OS_OSL_local_species_name"
+      },
+      "OS_local_species_name_written": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "OS_local_species_name_written",
+        "elementName": "OS_local_species_name_written",
+        "elementSet": "data",
+        "elementPath": "OS_local_species_name_written"
+      },
+      "OS_duration": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "OS_duration",
+        "elementName": "OS_duration",
+        "elementSet": "data",
+        "elementPath": "OS_duration"
+      },
+      "OS_comments": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "OS_comments",
+        "elementName": "OS_comments",
+        "elementSet": "data",
+        "elementPath": "OS_comments"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "other_species"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"OS_FOL_date\",\"OS_FOL_B_focal_AnimID\",\"OS_time_begin\",\"OS_time_end\",\"OS_OSL_local_species_name\",\"OS_local_species_name_written\",\"OS_duration\",\"OS_comments\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Other Species\""
+      }
+    ]
   }
 }

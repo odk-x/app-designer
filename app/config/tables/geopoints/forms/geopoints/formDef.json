@@ -55,6 +55,56 @@
         "_row_num": 7
       }
     ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"client_id\",\"step\",\"transportation_mode\",\"transportation_mode_other\",\"description\",\"coordinates_latitude\",\"coordinates_longitude\",\"coordinates_altitude\",\"coordinates_accuracy\"]",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "mapListViewFileName",
+        "type": "configpath",
+        "value": "config/tables/geopoints/html/geopoints_map_list.html",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "MAP",
+        "_row_num": 4
+      },
+      {
+        "partition": "TableMapFragment",
+        "aspect": "default",
+        "key": "keyColorRuleType",
+        "type": "string",
+        "value": "None",
+        "_row_num": 5
+      },
+      {
+        "partition": "TableMapFragment",
+        "aspect": "default",
+        "key": "keyMapLatCol",
+        "type": "string",
+        "value": "coordinates_latitude",
+        "_row_num": 6
+      },
+      {
+        "partition": "TableMapFragment",
+        "aspect": "default",
+        "key": "keyMapLongCol",
+        "type": "string",
+        "value": "coordinates_longitude",
+        "_row_num": 7
+      }
+    ],
     "choices": [
       {
         "choice_list_name": "transportation",
@@ -685,6 +735,225 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "client_id": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "client_id",
+        "elementName": "client_id",
+        "elementSet": "data",
+        "elementPath": "client_id"
+      },
+      "step": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "step",
+        "elementName": "step",
+        "elementSet": "data",
+        "elementPath": "step"
+      },
+      "transportation_mode": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "transportation",
+        "elementKey": "transportation_mode",
+        "elementName": "transportation_mode",
+        "elementSet": "data",
+        "elementPath": "transportation_mode"
+      },
+      "transportation_mode_other": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "transportation_mode_other",
+        "elementName": "transportation_mode_other",
+        "elementSet": "data",
+        "elementPath": "transportation_mode_other"
+      },
+      "description": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "description",
+        "elementName": "description",
+        "elementSet": "data",
+        "elementPath": "description"
+      },
+      "coordinates": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "coordinates_latitude",
+            "elementName": "latitude",
+            "elementSet": "data",
+            "elementPath": "coordinates.latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "coordinates_longitude",
+            "elementName": "longitude",
+            "elementSet": "data",
+            "elementPath": "coordinates.longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "coordinates_altitude",
+            "elementName": "altitude",
+            "elementSet": "data",
+            "elementPath": "coordinates.altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "coordinates_accuracy",
+            "elementName": "accuracy",
+            "elementSet": "data",
+            "elementPath": "coordinates.accuracy"
+          }
+        },
+        "elementKey": "coordinates",
+        "elementName": "coordinates",
+        "elementSet": "data",
+        "elementPath": "coordinates",
+        "listChildElementKeys": [
+          "coordinates_latitude",
+          "coordinates_longitude",
+          "coordinates_altitude",
+          "coordinates_accuracy"
+        ],
+        "notUnitOfRetention": true
+      },
+      "coordinates_latitude": {
+        "type": "number",
+        "elementKey": "coordinates_latitude",
+        "elementName": "latitude",
+        "elementSet": "data",
+        "elementPath": "coordinates.latitude"
+      },
+      "coordinates_longitude": {
+        "type": "number",
+        "elementKey": "coordinates_longitude",
+        "elementName": "longitude",
+        "elementSet": "data",
+        "elementPath": "coordinates.longitude"
+      },
+      "coordinates_altitude": {
+        "type": "number",
+        "elementKey": "coordinates_altitude",
+        "elementName": "altitude",
+        "elementSet": "data",
+        "elementPath": "coordinates.altitude"
+      },
+      "coordinates_accuracy": {
+        "type": "number",
+        "elementKey": "coordinates_accuracy",
+        "elementName": "accuracy",
+        "elementSet": "data",
+        "elementPath": "coordinates.accuracy"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "transportation_mode",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"transportation\",\"data_value\":\"Walk\",\"display\":{\"text\":\"Walked\"},\"_row_num\":2},{\"choice_list_name\":\"transportation\",\"data_value\":\"Tuk-tuk\",\"display\":{\"text\":\"Tuk-tuk\"},\"_row_num\":3},{\"choice_list_name\":\"transportation\",\"data_value\":\"Boda-boda\",\"display\":{\"text\":\"Boda-boda\"},\"_row_num\":4},{\"choice_list_name\":\"transportation\",\"data_value\":\"Matatu\",\"display\":{\"text\":\"Matatu\"},\"_row_num\":5},{\"choice_list_name\":\"transportation\",\"data_value\":\"Taxi\",\"display\":{\"text\":\"Taxi car\"},\"_row_num\":6},{\"choice_list_name\":\"transportation\",\"data_value\":\"Other\",\"display\":{\"text\":\"Other\"},\"_row_num\":7}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "geopoints"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"client_id\",\"step\",\"transportation_mode\",\"transportation_mode_other\",\"description\",\"coordinates_latitude\",\"coordinates_longitude\",\"coordinates_altitude\",\"coordinates_accuracy\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "MAP"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Home Locator\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "mapListViewFileName",
+        "_type": "configpath",
+        "_value": "config/tables/geopoints/html/geopoints_map_list.html"
+      },
+      {
+        "_partition": "TableMapFragment",
+        "_aspect": "default",
+        "_key": "keyColorRuleType",
+        "_type": "string",
+        "_value": "None"
+      },
+      {
+        "_partition": "TableMapFragment",
+        "_aspect": "default",
+        "_key": "keyMapLatCol",
+        "_type": "string",
+        "_value": "coordinates_latitude"
+      },
+      {
+        "_partition": "TableMapFragment",
+        "_aspect": "default",
+        "_key": "keyMapLongCol",
+        "_type": "string",
+        "_value": "coordinates_longitude"
+      }
+    ]
   }
 }
