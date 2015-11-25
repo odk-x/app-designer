@@ -271,6 +271,16 @@
         },
         "_row_num": 5
       }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"Date_and_Time\",\"plot_name\",\"soil_condition\",\"Sample\"]",
+        "_row_num": 2
+      }
     ]
   },
   "specification": {
@@ -984,6 +994,189 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "Date_and_Time": {
+        "type": "object",
+        "elementType": "dateTime",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "Date_and_Time",
+        "elementName": "Date_and_Time",
+        "elementSet": "data",
+        "elementPath": "Date_and_Time",
+        "listChildElementKeys": []
+      },
+      "ack_ok": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "ack_ok",
+        "elementName": "ack_ok",
+        "elementSet": "data",
+        "elementPath": "ack_ok"
+      },
+      "min_sample": {
+        "prompt_type_name": "async_assign_min",
+        "type": "number",
+        "valuesList": "min_max",
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "min_sample",
+        "elementName": "min_sample",
+        "elementSet": "data",
+        "elementPath": "min_sample"
+      },
+      "max_sample": {
+        "prompt_type_name": "async_assign_max",
+        "type": "number",
+        "valuesList": "min_max",
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "max_sample",
+        "elementName": "max_sample",
+        "elementSet": "data",
+        "elementPath": "max_sample"
+      },
+      "plot_name": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "plot_name",
+        "elementName": "plot_name",
+        "elementSet": "data",
+        "elementPath": "plot_name"
+      },
+      "soil_condition": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "soil_type",
+        "elementKey": "soil_condition",
+        "elementName": "soil_condition",
+        "elementSet": "data",
+        "elementPath": "soil_condition"
+      },
+      "Sample": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": "Sample",
+        "elementKey": "Sample",
+        "elementName": "Sample",
+        "elementSet": "data",
+        "elementPath": "Sample"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "Sample",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Sample\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "soil_condition",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"soil_type\",\"data_value\":\"dry\",\"display\":{\"text\":\"Dry\"},\"_row_num\":2},{\"choice_list_name\":\"soil_type\",\"data_value\":\"damp\",\"display\":{\"text\":\"Damp\"},\"_row_num\":3},{\"choice_list_name\":\"soil_type\",\"data_value\":\"moist\",\"display\":{\"text\":\"Moist\"},\"_row_num\":4},{\"choice_list_name\":\"soil_type\",\"data_value\":\"wet\",\"display\":{\"text\":\"Wet\"},\"_row_num\":5}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "agriculture"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"Date_and_Time\",\"plot_name\",\"soil_condition\",\"Sample\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Agriculture\""
+      }
+    ]
   }
 }

@@ -76,7 +76,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "follow_map_position",
         "_row_num": 2
       },
@@ -91,6 +91,16 @@
           "title": "Follow Map Position"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"FMP_FOL_date\",\"FMP_FOL_B_focal_AnimID\",\"FMP_seq_num\",\"FMP_xcoord\",\"FMP_ycoord\",\"FMP_meters_to_next_seq_num\",\"FMP_community_id\",\"FMP_xcoord_old\",\"FMP_ycoord_old\"]",
+        "_row_num": 2
       }
     ]
   },
@@ -113,8 +123,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "follow_map_position",
         "_row_num": 2
       },
@@ -130,8 +140,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "follow_map_position",
         "_row_num": 2,
         "__rowNum__": 1
@@ -661,6 +671,162 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "FMP_FOL_date": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMP_FOL_date",
+        "elementName": "FMP_FOL_date",
+        "elementSet": "data",
+        "elementPath": "FMP_FOL_date"
+      },
+      "FMP_FOL_B_focal_AnimID": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMP_FOL_B_focal_AnimID",
+        "elementName": "FMP_FOL_B_focal_AnimID",
+        "elementSet": "data",
+        "elementPath": "FMP_FOL_B_focal_AnimID"
+      },
+      "FMP_seq_num": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FMP_seq_num",
+        "elementName": "FMP_seq_num",
+        "elementSet": "data",
+        "elementPath": "FMP_seq_num"
+      },
+      "FMP_xcoord": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FMP_xcoord",
+        "elementName": "FMP_xcoord",
+        "elementSet": "data",
+        "elementPath": "FMP_xcoord"
+      },
+      "FMP_ycoord": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FMP_ycoord",
+        "elementName": "FMP_ycoord",
+        "elementSet": "data",
+        "elementPath": "FMP_ycoord"
+      },
+      "FMP_meters_to_next_seq_num": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FMP_meters_to_next_seq_num",
+        "elementName": "FMP_meters_to_next_seq_num",
+        "elementSet": "data",
+        "elementPath": "FMP_meters_to_next_seq_num"
+      },
+      "FMP_community_id": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FMP_community_id",
+        "elementName": "FMP_community_id",
+        "elementSet": "data",
+        "elementPath": "FMP_community_id"
+      },
+      "FMP_xcoord_old": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FMP_xcoord_old",
+        "elementName": "FMP_xcoord_old",
+        "elementSet": "data",
+        "elementPath": "FMP_xcoord_old"
+      },
+      "FMP_ycoord_old": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FMP_ycoord_old",
+        "elementName": "FMP_ycoord_old",
+        "elementSet": "data",
+        "elementPath": "FMP_ycoord_old"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "follow_map_position"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"FMP_FOL_date\",\"FMP_FOL_B_focal_AnimID\",\"FMP_seq_num\",\"FMP_xcoord\",\"FMP_ycoord\",\"FMP_meters_to_next_seq_num\",\"FMP_community_id\",\"FMP_xcoord_old\",\"FMP_ycoord_old\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Follow Map Position\""
+      }
+    ]
   }
 }

@@ -565,7 +565,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "exampleForm",
         "_row_num": 2
       },
@@ -602,8 +602,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "exampleForm",
         "_row_num": 2
       },
@@ -619,8 +619,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "exampleForm",
         "_row_num": 2,
         "__rowNum__": 1
@@ -2228,6 +2228,723 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "default_rating": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "isSessionVariable": true,
+        "elementKey": "default_rating",
+        "elementName": "default_rating",
+        "elementSet": "data",
+        "elementPath": "default_rating"
+      },
+      "examples": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "examples_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "examples.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "examples",
+        "elementKey": "examples",
+        "elementName": "examples",
+        "elementSet": "data",
+        "elementPath": "examples",
+        "listChildElementKeys": [
+          "examples_items"
+        ]
+      },
+      "barcode": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "barcode",
+        "elementName": "barcode",
+        "elementSet": "data",
+        "elementPath": "barcode"
+      },
+      "geopoint": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "geopoint_latitude",
+            "elementName": "latitude",
+            "elementSet": "data",
+            "elementPath": "geopoint.latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "geopoint_longitude",
+            "elementName": "longitude",
+            "elementSet": "data",
+            "elementPath": "geopoint.longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "geopoint_altitude",
+            "elementName": "altitude",
+            "elementSet": "data",
+            "elementPath": "geopoint.altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "geopoint_accuracy",
+            "elementName": "accuracy",
+            "elementSet": "data",
+            "elementPath": "geopoint.accuracy"
+          }
+        },
+        "elementKey": "geopoint",
+        "elementName": "geopoint",
+        "elementSet": "data",
+        "elementPath": "geopoint",
+        "listChildElementKeys": [
+          "geopoint_latitude",
+          "geopoint_longitude",
+          "geopoint_altitude",
+          "geopoint_accuracy"
+        ],
+        "notUnitOfRetention": true
+      },
+      "picture": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "picture_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "picture.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "picture_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "picture.contentType"
+          }
+        },
+        "elementKey": "picture",
+        "elementName": "picture",
+        "elementSet": "data",
+        "elementPath": "picture",
+        "listChildElementKeys": [
+          "picture_uriFragment",
+          "picture_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "recording": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "recording_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "recording.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "audio/*",
+            "elementKey": "recording_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "recording.contentType"
+          }
+        },
+        "elementKey": "recording",
+        "elementName": "recording",
+        "elementSet": "data",
+        "elementPath": "recording",
+        "listChildElementKeys": [
+          "recording_uriFragment",
+          "recording_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "name": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "name",
+        "elementName": "name",
+        "elementSet": "data",
+        "elementPath": "name"
+      },
+      "avg_coffee": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "avg_coffee",
+        "elementName": "avg_coffee",
+        "elementSet": "data",
+        "elementPath": "avg_coffee"
+      },
+      "coffee_today": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "coffee_today",
+        "elementName": "coffee_today",
+        "elementSet": "data",
+        "elementPath": "coffee_today"
+      },
+      "born": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "date",
+        "elementKey": "born",
+        "elementName": "born",
+        "elementSet": "data",
+        "elementPath": "born",
+        "listChildElementKeys": []
+      },
+      "time": {
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "time",
+        "elementKey": "time",
+        "elementName": "time",
+        "elementSet": "data",
+        "elementPath": "time",
+        "listChildElementKeys": []
+      },
+      "datetime": {
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "dateTime",
+        "elementKey": "datetime",
+        "elementName": "datetime",
+        "elementSet": "data",
+        "elementPath": "datetime",
+        "listChildElementKeys": []
+      },
+      "location": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "location_latitude",
+            "elementName": "latitude",
+            "elementSet": "data",
+            "elementPath": "location.latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "location_longitude",
+            "elementName": "longitude",
+            "elementSet": "data",
+            "elementPath": "location.longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "location_altitude",
+            "elementName": "altitude",
+            "elementSet": "data",
+            "elementPath": "location.altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "location_accuracy",
+            "elementName": "accuracy",
+            "elementSet": "data",
+            "elementPath": "location.accuracy"
+          }
+        },
+        "elementKey": "location",
+        "elementName": "location",
+        "elementSet": "data",
+        "elementPath": "location",
+        "listChildElementKeys": [
+          "location_latitude",
+          "location_longitude",
+          "location_altitude",
+          "location_accuracy"
+        ],
+        "notUnitOfRetention": true
+      },
+      "visited_continents": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "visited_continents_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "visited_continents.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "continents",
+        "elementKey": "visited_continents",
+        "elementName": "visited_continents",
+        "elementSet": "data",
+        "elementPath": "visited_continents",
+        "listChildElementKeys": [
+          "visited_continents_items"
+        ]
+      },
+      "visited_seattle": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yesno",
+        "elementKey": "visited_seattle",
+        "elementName": "visited_seattle",
+        "elementSet": "data",
+        "elementPath": "visited_seattle"
+      },
+      "audio_test": {
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "audio_test_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "audio_test.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "audio/*",
+            "elementKey": "audio_test_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "audio_test.contentType"
+          }
+        },
+        "elementKey": "audio_test",
+        "elementName": "audio_test",
+        "elementSet": "data",
+        "elementPath": "audio_test",
+        "listChildElementKeys": [
+          "audio_test_uriFragment",
+          "audio_test_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "video_test": {
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "video_test_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "video_test.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "video/*",
+            "elementKey": "video_test_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "video_test.contentType"
+          }
+        },
+        "elementKey": "video_test",
+        "elementName": "video_test",
+        "elementSet": "data",
+        "elementPath": "video_test",
+        "listChildElementKeys": [
+          "video_test_uriFragment",
+          "video_test_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "image_test": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "image_test_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "image_test.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "image_test_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "image_test.contentType"
+          }
+        },
+        "elementKey": "image_test",
+        "elementName": "image_test",
+        "elementSet": "data",
+        "elementPath": "image_test",
+        "listChildElementKeys": [
+          "image_test_uriFragment",
+          "image_test_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 54,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "weight": {
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "weight",
+        "elementName": "weight",
+        "elementSet": "data",
+        "elementPath": "weight"
+      },
+      "sex": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "sexes",
+        "elementKey": "sex",
+        "elementName": "sex",
+        "elementSet": "data",
+        "elementPath": "sex"
+      },
+      "rating": {
+        "_defn": [
+          {
+            "_row_num": 62,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "rating",
+        "elementName": "rating",
+        "elementSet": "data",
+        "elementPath": "rating"
+      },
+      "examples_items": {
+        "type": "string",
+        "elementKey": "examples_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "examples.items",
+        "notUnitOfRetention": true
+      },
+      "geopoint_latitude": {
+        "type": "number",
+        "elementKey": "geopoint_latitude",
+        "elementName": "latitude",
+        "elementSet": "data",
+        "elementPath": "geopoint.latitude"
+      },
+      "geopoint_longitude": {
+        "type": "number",
+        "elementKey": "geopoint_longitude",
+        "elementName": "longitude",
+        "elementSet": "data",
+        "elementPath": "geopoint.longitude"
+      },
+      "geopoint_altitude": {
+        "type": "number",
+        "elementKey": "geopoint_altitude",
+        "elementName": "altitude",
+        "elementSet": "data",
+        "elementPath": "geopoint.altitude"
+      },
+      "geopoint_accuracy": {
+        "type": "number",
+        "elementKey": "geopoint_accuracy",
+        "elementName": "accuracy",
+        "elementSet": "data",
+        "elementPath": "geopoint.accuracy"
+      },
+      "picture_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "picture_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "picture.uriFragment"
+      },
+      "picture_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "picture_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "picture.contentType"
+      },
+      "recording_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "recording_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "recording.uriFragment"
+      },
+      "recording_contentType": {
+        "type": "string",
+        "default": "audio/*",
+        "elementKey": "recording_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "recording.contentType"
+      },
+      "location_latitude": {
+        "type": "number",
+        "elementKey": "location_latitude",
+        "elementName": "latitude",
+        "elementSet": "data",
+        "elementPath": "location.latitude"
+      },
+      "location_longitude": {
+        "type": "number",
+        "elementKey": "location_longitude",
+        "elementName": "longitude",
+        "elementSet": "data",
+        "elementPath": "location.longitude"
+      },
+      "location_altitude": {
+        "type": "number",
+        "elementKey": "location_altitude",
+        "elementName": "altitude",
+        "elementSet": "data",
+        "elementPath": "location.altitude"
+      },
+      "location_accuracy": {
+        "type": "number",
+        "elementKey": "location_accuracy",
+        "elementName": "accuracy",
+        "elementSet": "data",
+        "elementPath": "location.accuracy"
+      },
+      "visited_continents_items": {
+        "type": "string",
+        "elementKey": "visited_continents_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "visited_continents.items",
+        "notUnitOfRetention": true
+      },
+      "audio_test_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "audio_test_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "audio_test.uriFragment"
+      },
+      "audio_test_contentType": {
+        "type": "string",
+        "default": "audio/*",
+        "elementKey": "audio_test_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "audio_test.contentType"
+      },
+      "video_test_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "video_test_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "video_test.uriFragment"
+      },
+      "video_test_contentType": {
+        "type": "string",
+        "default": "video/*",
+        "elementKey": "video_test_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "video_test.contentType"
+      },
+      "image_test_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "image_test_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "image_test.uriFragment"
+      },
+      "image_test_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "image_test_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "image_test.contentType"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "examples",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"examples\",\"data_value\":\"intents\",\"display\":{\"text\":\"intent launching\"},\"_row_num\":12},{\"choice_list_name\":\"examples\",\"data_value\":\"label_features\",\"display\":{\"text\":\"label features\"},\"_row_num\":13},{\"choice_list_name\":\"examples\",\"data_value\":\"dynamic_defaults\",\"display\":{\"text\":\"computed assignment of initial values\"},\"_row_num\":14},{\"choice_list_name\":\"examples\",\"data_value\":\"datetime\",\"display\":{\"text\":\"datetime\"},\"_row_num\":15},{\"choice_list_name\":\"examples\",\"data_value\":\"geopoint\",\"display\":{\"text\":\"geopoint\"},\"_row_num\":16},{\"choice_list_name\":\"examples\",\"data_value\":\"media\",\"display\":{\"text\":\"media\"},\"_row_num\":17},{\"choice_list_name\":\"examples\",\"data_value\":\"screen_group\",\"display\":{\"text\":\"screen group with select and calculate\"},\"_row_num\":18},{\"choice_list_name\":\"examples\",\"data_value\":\"custom_template\",\"display\":{\"text\":\"custom template\"},\"_row_num\":19}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "sex",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"sexes\",\"data_value\":\"male\",\"display\":{\"text\":\"male\"},\"_row_num\":21},{\"choice_list_name\":\"sexes\",\"data_value\":\"female\",\"display\":{\"text\":\"female\"},\"_row_num\":22}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "visited_continents",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"text\":\"North America\"},\"_row_num\":4},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"text\":\"South America\"},\"_row_num\":5},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"text\":\"Europe\"},\"_row_num\":6},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"text\":\"Africa\"},\"_row_num\":7},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"text\":\"Asia\"},\"_row_num\":8},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"text\":\"Australia\"},\"_row_num\":9},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"text\":\"Antarctica\"},\"_row_num\":10}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "visited_seattle",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "exampleForm"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Example Form\""
+      }
+    ]
   }
 }

@@ -327,6 +327,32 @@
         "value": true,
         "_row_num": 6
       }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"plot_id\",\"date\",\"plant_height\",\"plant_health\",\"plant_picture_uriFragment\",\"pests\",\"soil\",\"observations\"]",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "configpath",
+        "value": "config/tables/visit/html/visit_list.html",
+        "_row_num": 4
+      }
     ]
   },
   "specification": {
@@ -1100,6 +1126,240 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "plot_id": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "select_linked_plot",
+        "elementKey": "plot_id",
+        "elementName": "plot_id",
+        "elementSet": "data",
+        "elementPath": "plot_id"
+      },
+      "date": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "dateTime",
+        "elementKey": "date",
+        "elementName": "date",
+        "elementSet": "data",
+        "elementPath": "date",
+        "listChildElementKeys": []
+      },
+      "plant_height": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "plant_height",
+        "elementName": "plant_height",
+        "elementSet": "data",
+        "elementPath": "plant_height"
+      },
+      "plant_health": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "plant_health_type",
+        "elementKey": "plant_health",
+        "elementName": "plant_health",
+        "elementSet": "data",
+        "elementPath": "plant_health"
+      },
+      "plant_picture": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "plant_picture_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "plant_picture.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "plant_picture_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "plant_picture.contentType"
+          }
+        },
+        "elementKey": "plant_picture",
+        "elementName": "plant_picture",
+        "elementSet": "data",
+        "elementPath": "plant_picture",
+        "listChildElementKeys": [
+          "plant_picture_uriFragment",
+          "plant_picture_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "pests": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "pests_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "pests.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "pest_type",
+        "elementKey": "pests",
+        "elementName": "pests",
+        "elementSet": "data",
+        "elementPath": "pests",
+        "listChildElementKeys": [
+          "pests_items"
+        ]
+      },
+      "soil": {
+        "_defn": [
+          {
+            "_row_num": 33,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "soil_texture",
+        "elementKey": "soil",
+        "elementName": "soil",
+        "elementSet": "data",
+        "elementPath": "soil"
+      },
+      "observations": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "observations",
+        "elementName": "observations",
+        "elementSet": "data",
+        "elementPath": "observations"
+      },
+      "plant_picture_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "plant_picture_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "plant_picture.uriFragment"
+      },
+      "plant_picture_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "plant_picture_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "plant_picture.contentType"
+      },
+      "pests_items": {
+        "type": "string",
+        "elementKey": "pests_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "pests.items",
+        "notUnitOfRetention": true
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "pests",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"pest_type\",\"data_value\":\"earworm\",\"display\":{\"image\":\"media/earworm.jpg\"},\"_row_num\":11},{\"choice_list_name\":\"pest_type\",\"data_value\":\"stink_bug\",\"display\":{\"image\":\"media/stink_bug.jpg\"},\"_row_num\":12},{\"choice_list_name\":\"pest_type\",\"data_value\":\"cutworm\",\"display\":{\"image\":\"media/cutworm.jpg\"},\"_row_num\":13},{\"choice_list_name\":\"pest_type\",\"data_value\":\"beetle\",\"display\":{\"image\":\"media/corn_flea_beetle.jpg\"},\"_row_num\":14}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "plant_health",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"bad\",\"display\":{\"image\":\"media/dying_corn_leaves.jpg\"},\"_row_num\":2},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"fair\",\"display\":{\"image\":\"media/fair_corn_leaves.jpeg\"},\"_row_num\":3},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"good\",\"display\":{\"image\":\"media/healthy_corn_leaves.jpg\"},\"_row_num\":4}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "soil",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"soil_texture\",\"data_value\":\"medium_sand\",\"display\":{\"text\":\"Medium Sand\"},\"_row_num\":6},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"fine_sand\",\"display\":{\"text\":\"Fine Sand\"},\"_row_num\":7},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"sandy_loam\",\"display\":{\"text\":\"Sandy Loam\"},\"_row_num\":8},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"loam\",\"display\":{\"text\":\"Loam\"},\"_row_num\":9}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "visit"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"plot_id\",\"date\",\"plant_height\",\"plant_health\",\"plant_picture_uriFragment\",\"pests\",\"soil\",\"observations\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "LIST"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Plot Visits\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "configpath",
+        "_value": "config/tables/visit/html/visit_list.html"
+      }
+    ]
   }
 }

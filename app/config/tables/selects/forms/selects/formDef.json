@@ -764,7 +764,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "selects",
         "_row_num": 2
       },
@@ -801,8 +801,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "selects",
         "_row_num": 2
       },
@@ -818,8 +818,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "selects",
         "_row_num": 2,
         "__rowNum__": 1
@@ -2004,6 +2004,351 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "user_name": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "user_name",
+        "elementName": "user_name",
+        "elementSet": "data",
+        "elementPath": "user_name"
+      },
+      "region": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "regions_csv",
+        "elementKey": "region",
+        "elementName": "region",
+        "elementSet": "data",
+        "elementPath": "region"
+      },
+      "country_csv": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "countries_csv",
+        "elementKey": "country_csv",
+        "elementName": "country_csv",
+        "elementSet": "data",
+        "elementPath": "country_csv"
+      },
+      "location": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "location_latitude",
+            "elementName": "latitude",
+            "elementSet": "data",
+            "elementPath": "location.latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "location_longitude",
+            "elementName": "longitude",
+            "elementSet": "data",
+            "elementPath": "location.longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "location_altitude",
+            "elementName": "altitude",
+            "elementSet": "data",
+            "elementPath": "location.altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "location_accuracy",
+            "elementName": "accuracy",
+            "elementSet": "data",
+            "elementPath": "location.accuracy"
+          }
+        },
+        "elementKey": "location",
+        "elementName": "location",
+        "elementSet": "data",
+        "elementPath": "location",
+        "listChildElementKeys": [
+          "location_latitude",
+          "location_longitude",
+          "location_altitude",
+          "location_accuracy"
+        ],
+        "notUnitOfRetention": true
+      },
+      "picture": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "rowpath",
+            "elementKey": "picture_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "picture.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "default": "image/*",
+            "elementKey": "picture_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "picture.contentType"
+          }
+        },
+        "elementKey": "picture",
+        "elementName": "picture",
+        "elementSet": "data",
+        "elementPath": "picture",
+        "listChildElementKeys": [
+          "picture_uriFragment",
+          "picture_contentType"
+        ],
+        "notUnitOfRetention": true
+      },
+      "bird": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "birds",
+        "elementKey": "bird",
+        "elementName": "bird",
+        "elementSet": "data",
+        "elementPath": "bird"
+      },
+      "color": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "colors",
+        "elementKey": "color",
+        "elementName": "color",
+        "elementSet": "data",
+        "elementPath": "color"
+      },
+      "secondaryColor": {
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "secondaryColor_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "secondaryColor.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "colors",
+        "elementKey": "secondaryColor",
+        "elementName": "secondaryColor",
+        "elementSet": "data",
+        "elementPath": "secondaryColor",
+        "listChildElementKeys": [
+          "secondaryColor_items"
+        ]
+      },
+      "confirmTeal": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          }
+        ],
+        "type": "boolean",
+        "elementKey": "confirmTeal",
+        "elementName": "confirmTeal",
+        "elementSet": "data",
+        "elementPath": "confirmTeal"
+      },
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 63,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "weight": {
+        "_defn": [
+          {
+            "_row_num": 64,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "weight",
+        "elementName": "weight",
+        "elementSet": "data",
+        "elementPath": "weight"
+      },
+      "sex": {
+        "_defn": [
+          {
+            "_row_num": 65,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "sexes",
+        "elementKey": "sex",
+        "elementName": "sex",
+        "elementSet": "data",
+        "elementPath": "sex"
+      },
+      "location_latitude": {
+        "type": "number",
+        "elementKey": "location_latitude",
+        "elementName": "latitude",
+        "elementSet": "data",
+        "elementPath": "location.latitude"
+      },
+      "location_longitude": {
+        "type": "number",
+        "elementKey": "location_longitude",
+        "elementName": "longitude",
+        "elementSet": "data",
+        "elementPath": "location.longitude"
+      },
+      "location_altitude": {
+        "type": "number",
+        "elementKey": "location_altitude",
+        "elementName": "altitude",
+        "elementSet": "data",
+        "elementPath": "location.altitude"
+      },
+      "location_accuracy": {
+        "type": "number",
+        "elementKey": "location_accuracy",
+        "elementName": "accuracy",
+        "elementSet": "data",
+        "elementPath": "location.accuracy"
+      },
+      "picture_uriFragment": {
+        "type": "rowpath",
+        "elementKey": "picture_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "picture.uriFragment"
+      },
+      "picture_contentType": {
+        "type": "string",
+        "default": "image/*",
+        "elementKey": "picture_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "picture.contentType"
+      },
+      "secondaryColor_items": {
+        "type": "string",
+        "elementKey": "secondaryColor_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "secondaryColor.items",
+        "notUnitOfRetention": true
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "bird",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"birds\",\"data_value\":\"blackbird\",\"display\":{\"image\":\"media/blackbird.png\"},\"_row_num\":2},{\"choice_list_name\":\"birds\",\"data_value\":\"bluethroat\",\"display\":{\"image\":\"media/bluethroat.png\"},\"_row_num\":3},{\"choice_list_name\":\"birds\",\"data_value\":\"crow\",\"display\":{\"image\":\"media/crow.png\"},\"_row_num\":4},{\"choice_list_name\":\"birds\",\"data_value\":\"eagle\",\"display\":{\"image\":\"media/eagle.png\"},\"_row_num\":5},{\"choice_list_name\":\"birds\",\"data_value\":\"egret\",\"display\":{\"image\":\"media/egret.png\"},\"_row_num\":6},{\"choice_list_name\":\"birds\",\"data_value\":\"kingfisher\",\"display\":{\"image\":\"media/kingfisher.png\"},\"_row_num\":7},{\"choice_list_name\":\"birds\",\"data_value\":\"gull\",\"display\":{\"image\":\"media/gull.png\"},\"_row_num\":8},{\"choice_list_name\":\"birds\",\"data_value\":\"hawfinch\",\"display\":{\"image\":\"media/hawfinch.png\"},\"_row_num\":9},{\"choice_list_name\":\"birds\",\"data_value\":\"robin\",\"display\":{\"image\":\"media/robin.png\"},\"_row_num\":10}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "color",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"colors\",\"data_value\":\"red\",\"display\":{\"text\":\"Red\"},\"_row_num\":15},{\"choice_list_name\":\"colors\",\"data_value\":\"green\",\"display\":{\"text\":\"Green\"},\"_row_num\":16},{\"choice_list_name\":\"colors\",\"data_value\":\"blue\",\"display\":{\"text\":\"Blue\"},\"_row_num\":17},{\"choice_list_name\":\"colors\",\"data_value\":\"grey\",\"display\":{\"text\":\"Grey\"},\"_row_num\":18},{\"choice_list_name\":\"colors\",\"data_value\":\"brown\",\"display\":{\"text\":\"White\"},\"_row_num\":19}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "secondaryColor",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"colors\",\"data_value\":\"red\",\"display\":{\"text\":\"Red\"},\"_row_num\":15},{\"choice_list_name\":\"colors\",\"data_value\":\"green\",\"display\":{\"text\":\"Green\"},\"_row_num\":16},{\"choice_list_name\":\"colors\",\"data_value\":\"blue\",\"display\":{\"text\":\"Blue\"},\"_row_num\":17},{\"choice_list_name\":\"colors\",\"data_value\":\"grey\",\"display\":{\"text\":\"Grey\"},\"_row_num\":18},{\"choice_list_name\":\"colors\",\"data_value\":\"brown\",\"display\":{\"text\":\"White\"},\"_row_num\":19}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "sex",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"sexes\",\"data_value\":\"male\",\"display\":{\"text\":\"male\"},\"_row_num\":32},{\"choice_list_name\":\"sexes\",\"data_value\":\"female\",\"display\":{\"text\":\"female\"},\"_row_num\":33}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "selects"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Select Examples\""
+      }
+    ]
   }
 }

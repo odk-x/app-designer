@@ -535,6 +535,106 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "subject_name": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "subject_name",
+        "elementName": "subject_name",
+        "elementSet": "data",
+        "elementPath": "subject_name"
+      },
+      "phone_number": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "phone_number",
+        "elementName": "phone_number",
+        "elementSet": "data",
+        "elementPath": "phone_number"
+      },
+      "send_sms": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "prompt_type_name": "send_sms",
+        "type": "integer",
+        "elementKey": "send_sms",
+        "elementName": "send_sms",
+        "elementSet": "data",
+        "elementPath": "send_sms"
+      },
+      "odk_sms": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "prompt_type_name": "odk_sms",
+        "type": "integer",
+        "elementKey": "odk_sms",
+        "elementName": "odk_sms",
+        "elementSet": "data",
+        "elementPath": "odk_sms"
+      },
+      "odk_sms_automatic": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "prompt_type_name": "odk_sms_automatic",
+        "type": "integer",
+        "elementKey": "odk_sms_automatic",
+        "elementName": "odk_sms_automatic",
+        "elementSet": "data",
+        "elementPath": "odk_sms_automatic"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "send_sms"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Send SMS\""
+      }
+    ]
   }
 }

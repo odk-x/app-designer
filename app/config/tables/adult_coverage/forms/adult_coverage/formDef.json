@@ -977,7 +977,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "adult_coverage",
         "_row_num": 2
       },
@@ -1019,8 +1019,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "adult_coverage",
         "_row_num": 2
       },
@@ -1041,8 +1041,8 @@
         "value": true,
         "_row_num": 5
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "adult_coverage",
         "_row_num": 2,
         "__rowNum__": 1
@@ -3214,6 +3214,1487 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "Dose1_PregnantWoman_HealthCenter": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_PregnantWoman_HealthCenter",
+        "elementKey": "Dose1_PregnantWoman_HealthCenter",
+        "elementName": "Dose1_PregnantWoman_HealthCenter",
+        "elementSet": "data",
+        "elementPath": "Dose1_PregnantWoman_HealthCenter"
+      },
+      "PW1_HC_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "PW1_HC_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "PW1_HC_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "PW1_HC_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "PW1_HC_NR_checkbox",
+        "elementName": "PW1_HC_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "PW1_HC_NR_checkbox",
+        "listChildElementKeys": [
+          "PW1_HC_NR_checkbox_items"
+        ]
+      },
+      "Dose1_PregnantWoman_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_PregnantWoman_Outreach",
+        "elementKey": "Dose1_PregnantWoman_Outreach",
+        "elementName": "Dose1_PregnantWoman_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose1_PregnantWoman_Outreach"
+      },
+      "PW1_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "PW1_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "PW1_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "PW1_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "PW1_O_NR_checkbox",
+        "elementName": "PW1_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "PW1_O_NR_checkbox",
+        "listChildElementKeys": [
+          "PW1_O_NR_checkbox_items"
+        ]
+      },
+      "Dose2_PregnantWoman_HealthCenter": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_PregnantWoman_HealthCenter",
+        "elementKey": "Dose2_PregnantWoman_HealthCenter",
+        "elementName": "Dose2_PregnantWoman_HealthCenter",
+        "elementSet": "data",
+        "elementPath": "Dose2_PregnantWoman_HealthCenter"
+      },
+      "PW2_HC_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "PW2_HC_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "PW2_HC_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "PW2_HC_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "PW2_HC_NR_checkbox",
+        "elementName": "PW2_HC_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "PW2_HC_NR_checkbox",
+        "listChildElementKeys": [
+          "PW2_HC_NR_checkbox_items"
+        ]
+      },
+      "Dose2_PregnantWoman_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_PregnantWoman_Outreach",
+        "elementKey": "Dose2_PregnantWoman_Outreach",
+        "elementName": "Dose2_PregnantWoman_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose2_PregnantWoman_Outreach"
+      },
+      "PW2_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "PW2_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "PW2_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "PW2_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "PW2_O_NR_checkbox",
+        "elementName": "PW2_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "PW2_O_NR_checkbox",
+        "listChildElementKeys": [
+          "PW2_O_NR_checkbox_items"
+        ]
+      },
+      "Dose1_MIFComm_HealthCenter": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_MIFComm_HealthCenter",
+        "elementKey": "Dose1_MIFComm_HealthCenter",
+        "elementName": "Dose1_MIFComm_HealthCenter",
+        "elementSet": "data",
+        "elementPath": "Dose1_MIFComm_HealthCenter"
+      },
+      "MIFCOMM1_HC_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "MIFCOMM1_HC_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "MIFCOMM1_HC_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "MIFCOMM1_HC_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "MIFCOMM1_HC_NR_checkbox",
+        "elementName": "MIFCOMM1_HC_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "MIFCOMM1_HC_NR_checkbox",
+        "listChildElementKeys": [
+          "MIFCOMM1_HC_NR_checkbox_items"
+        ]
+      },
+      "Dose1_MIFComm_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_MIFComm_Outreach",
+        "elementKey": "Dose1_MIFComm_Outreach",
+        "elementName": "Dose1_MIFComm_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose1_MIFComm_Outreach"
+      },
+      "MIFCOMM1_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "MIFCOMM1_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "MIFCOMM1_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "MIFCOMM1_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "MIFCOMM1_O_NR_checkbox",
+        "elementName": "MIFCOMM1_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "MIFCOMM1_O_NR_checkbox",
+        "listChildElementKeys": [
+          "MIFCOMM1_O_NR_checkbox_items"
+        ]
+      },
+      "Dose2_MIFComm_HealthCenter": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_MIFComm_HealthCenter",
+        "elementKey": "Dose2_MIFComm_HealthCenter",
+        "elementName": "Dose2_MIFComm_HealthCenter",
+        "elementSet": "data",
+        "elementPath": "Dose2_MIFComm_HealthCenter"
+      },
+      "MIFCOMM2_HC_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "MIFCOMM2_HC_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "MIFCOMM2_HC_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "MIFCOMM2_HC_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "MIFCOMM2_HC_NR_checkbox",
+        "elementName": "MIFCOMM2_HC_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "MIFCOMM2_HC_NR_checkbox",
+        "listChildElementKeys": [
+          "MIFCOMM2_HC_NR_checkbox_items"
+        ]
+      },
+      "Dose2_MIFComm_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_MIFComm_Outreach",
+        "elementKey": "Dose2_MIFComm_Outreach",
+        "elementName": "Dose2_MIFComm_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose2_MIFComm_Outreach"
+      },
+      "MIFCOMM2_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "MIFCOMM2_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "MIFCOMM2_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "MIFCOMM2_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "MIFCOMM2_O_NR_checkbox",
+        "elementName": "MIFCOMM2_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "MIFCOMM2_O_NR_checkbox",
+        "listChildElementKeys": [
+          "MIFCOMM2_O_NR_checkbox_items"
+        ]
+      },
+      "Dose1_MIFStudents_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_MIFStudents_Outreach",
+        "elementKey": "Dose1_MIFStudents_Outreach",
+        "elementName": "Dose1_MIFStudents_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose1_MIFStudents_Outreach"
+      },
+      "MIFS1_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "MIFS1_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "MIFS1_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "MIFS1_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "MIFS1_O_NR_checkbox",
+        "elementName": "MIFS1_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "MIFS1_O_NR_checkbox",
+        "listChildElementKeys": [
+          "MIFS1_O_NR_checkbox_items"
+        ]
+      },
+      "Dose2_MIFStudents_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_MIFStudents_Outreach",
+        "elementKey": "Dose2_MIFStudents_Outreach",
+        "elementName": "Dose2_MIFStudents_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose2_MIFStudents_Outreach"
+      },
+      "MIFS2_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "MIFS2_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "MIFS2_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "MIFS2_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "MIFS2_O_NR_checkbox",
+        "elementName": "MIFS2_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "MIFS2_O_NR_checkbox",
+        "listChildElementKeys": [
+          "MIFS2_O_NR_checkbox_items"
+        ]
+      },
+      "Dose1_MIFWorkers_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 33,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_MIFWorkers_Outreach",
+        "elementKey": "Dose1_MIFWorkers_Outreach",
+        "elementName": "Dose1_MIFWorkers_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose1_MIFWorkers_Outreach"
+      },
+      "MIFW1_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "MIFW1_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "MIFW1_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "MIFW1_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "MIFW1_O_NR_checkbox",
+        "elementName": "MIFW1_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "MIFW1_O_NR_checkbox",
+        "listChildElementKeys": [
+          "MIFW1_O_NR_checkbox_items"
+        ]
+      },
+      "Dose2_MIFWorkers_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_MIFWorkers_Outreach",
+        "elementKey": "Dose2_MIFWorkers_Outreach",
+        "elementName": "Dose2_MIFWorkers_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose2_MIFWorkers_Outreach"
+      },
+      "MIFW2_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 37,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "MIFW2_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "MIFW2_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "MIFW2_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "MIFW2_O_NR_checkbox",
+        "elementName": "MIFW2_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "MIFW2_O_NR_checkbox",
+        "listChildElementKeys": [
+          "MIFW2_O_NR_checkbox_items"
+        ]
+      },
+      "OpenedVials": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "OpenedVials",
+        "elementKey": "OpenedVials",
+        "elementName": "OpenedVials",
+        "elementSet": "data",
+        "elementPath": "OpenedVials"
+      },
+      "OV_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "OV_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "OV_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "OV_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "OV_NR_checkbox",
+        "elementName": "OV_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "OV_NR_checkbox",
+        "listChildElementKeys": [
+          "OV_NR_checkbox_items"
+        ]
+      },
+      "Dose1_Students_notMIF_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 42,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_Students_notMIF_Outreach",
+        "elementKey": "Dose1_Students_notMIF_Outreach",
+        "elementName": "Dose1_Students_notMIF_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose1_Students_notMIF_Outreach"
+      },
+      "S1_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "S1_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "S1_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "S1_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "S1_O_NR_checkbox",
+        "elementName": "S1_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "S1_O_NR_checkbox",
+        "listChildElementKeys": [
+          "S1_O_NR_checkbox_items"
+        ]
+      },
+      "Dose2_Students_notMIF_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 45,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_Students_notMIF_Outreach",
+        "elementKey": "Dose2_Students_notMIF_Outreach",
+        "elementName": "Dose2_Students_notMIF_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose2_Students_notMIF_Outreach"
+      },
+      "S2_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "S2_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "S2_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "S2_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "S2_O_NR_checkbox",
+        "elementName": "S2_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "S2_O_NR_checkbox",
+        "listChildElementKeys": [
+          "S2_O_NR_checkbox_items"
+        ]
+      },
+      "Dose1_Workers_notMIF_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_Workers_notMIF_Outreach",
+        "elementKey": "Dose1_Workers_notMIF_Outreach",
+        "elementName": "Dose1_Workers_notMIF_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose1_Workers_notMIF_Outreach"
+      },
+      "W1_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 50,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "W1_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "W1_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "W1_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "W1_O_NR_checkbox",
+        "elementName": "W1_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "W1_O_NR_checkbox",
+        "listChildElementKeys": [
+          "W1_O_NR_checkbox_items"
+        ]
+      },
+      "Dose2_Workers_notMIF_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_Workers_notMIF_Outreach",
+        "elementKey": "Dose2_Workers_notMIF_Outreach",
+        "elementName": "Dose2_Workers_notMIF_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose2_Workers_notMIF_Outreach"
+      },
+      "W2_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "W2_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "W2_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "W2_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "W2_O_NR_checkbox",
+        "elementName": "W2_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "W2_O_NR_checkbox",
+        "listChildElementKeys": [
+          "W2_O_NR_checkbox_items"
+        ]
+      },
+      "Dose1_Other_notMIF_HealthCenter": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_Other_notMIF_HealthCenter",
+        "elementKey": "Dose1_Other_notMIF_HealthCenter",
+        "elementName": "Dose1_Other_notMIF_HealthCenter",
+        "elementSet": "data",
+        "elementPath": "Dose1_Other_notMIF_HealthCenter"
+      },
+      "O1_HC_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 57,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "O1_HC_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "O1_HC_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "O1_HC_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "O1_HC_NR_checkbox",
+        "elementName": "O1_HC_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "O1_HC_NR_checkbox",
+        "listChildElementKeys": [
+          "O1_HC_NR_checkbox_items"
+        ]
+      },
+      "Dose1_Other_notMIF_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 58,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose1_Other_notMIF_Outreach",
+        "elementKey": "Dose1_Other_notMIF_Outreach",
+        "elementName": "Dose1_Other_notMIF_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose1_Other_notMIF_Outreach"
+      },
+      "O1_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "O1_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "O1_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "O1_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "O1_O_NR_checkbox",
+        "elementName": "O1_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "O1_O_NR_checkbox",
+        "listChildElementKeys": [
+          "O1_O_NR_checkbox_items"
+        ]
+      },
+      "Dose2_Other_notMIF_HealthCenter": {
+        "_defn": [
+          {
+            "_row_num": 61,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_Other_notMIF_HealthCenter",
+        "elementKey": "Dose2_Other_notMIF_HealthCenter",
+        "elementName": "Dose2_Other_notMIF_HealthCenter",
+        "elementSet": "data",
+        "elementPath": "Dose2_Other_notMIF_HealthCenter"
+      },
+      "O2_HC_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 62,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "O2_HC_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "O2_HC_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "O2_HC_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "O2_HC_NR_checkbox",
+        "elementName": "O2_HC_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "O2_HC_NR_checkbox",
+        "listChildElementKeys": [
+          "O2_HC_NR_checkbox_items"
+        ]
+      },
+      "Dose2_Other_notMIF_Outreach": {
+        "_defn": [
+          {
+            "_row_num": 63,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": "Dose2_Other_notMIF_Outreach",
+        "elementKey": "Dose2_Other_notMIF_Outreach",
+        "elementName": "Dose2_Other_notMIF_Outreach",
+        "elementSet": "data",
+        "elementPath": "Dose2_Other_notMIF_Outreach"
+      },
+      "O2_O_NR_checkbox": {
+        "_defn": [
+          {
+            "_row_num": 64,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "O2_O_NR_checkbox_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "O2_O_NR_checkbox.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": "O2_O_NR_checkbox",
+        "valuesList": "one_choice",
+        "elementKey": "O2_O_NR_checkbox",
+        "elementName": "O2_O_NR_checkbox",
+        "elementSet": "data",
+        "elementPath": "O2_O_NR_checkbox",
+        "listChildElementKeys": [
+          "O2_O_NR_checkbox_items"
+        ]
+      },
+      "PW1_HC_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "PW1_HC_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "PW1_HC_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "PW1_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "PW1_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "PW1_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "PW2_HC_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "PW2_HC_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "PW2_HC_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "PW2_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "PW2_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "PW2_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "MIFCOMM1_HC_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "MIFCOMM1_HC_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "MIFCOMM1_HC_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "MIFCOMM1_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "MIFCOMM1_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "MIFCOMM1_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "MIFCOMM2_HC_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "MIFCOMM2_HC_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "MIFCOMM2_HC_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "MIFCOMM2_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "MIFCOMM2_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "MIFCOMM2_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "MIFS1_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "MIFS1_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "MIFS1_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "MIFS2_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "MIFS2_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "MIFS2_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "MIFW1_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "MIFW1_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "MIFW1_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "MIFW2_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "MIFW2_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "MIFW2_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "OV_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "OV_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "OV_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "S1_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "S1_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "S1_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "S2_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "S2_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "S2_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "W1_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "W1_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "W1_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "W2_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "W2_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "W2_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "O1_HC_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "O1_HC_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "O1_HC_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "O1_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "O1_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "O1_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "O2_HC_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "O2_HC_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "O2_HC_NR_checkbox.items",
+        "notUnitOfRetention": true
+      },
+      "O2_O_NR_checkbox_items": {
+        "type": "string",
+        "elementKey": "O2_O_NR_checkbox_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "O2_O_NR_checkbox.items",
+        "notUnitOfRetention": true
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_MIFComm_HealthCenter",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_MIFComm_HealthCenter\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_MIFComm_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_MIFComm_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_MIFStudents_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_MIFStudents_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_MIFWorkers_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_MIFWorkers_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_Other_notMIF_HealthCenter",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_Other_notMIF_HealthCenter\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_Other_notMIF_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_Other_notMIF_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_PregnantWoman_HealthCenter",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_PregnantWoman_HealthCenter\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_PregnantWoman_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_PregnantWoman_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_Students_notMIF_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_Students_notMIF_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose1_Workers_notMIF_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose1_Workers_notMIF_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_MIFComm_HealthCenter",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_MIFComm_HealthCenter\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_MIFComm_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_MIFComm_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_MIFStudents_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_MIFStudents_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_MIFWorkers_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_MIFWorkers_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_Other_notMIF_HealthCenter",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_Other_notMIF_HealthCenter\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_Other_notMIF_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_Other_notMIF_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_PregnantWoman_HealthCenter",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_PregnantWoman_HealthCenter\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_PregnantWoman_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_PregnantWoman_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_Students_notMIF_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_Students_notMIF_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Dose2_Workers_notMIF_Outreach",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Dose2_Workers_notMIF_Outreach\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFCOMM1_HC_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFCOMM1_HC_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"MIFCOMM1_HC_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFCOMM1_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFCOMM1_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"MIFCOMM1_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFCOMM2_HC_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFCOMM2_HC_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"MIFCOMM2_HC_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFCOMM2_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFCOMM2_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"MIFCOMM2_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFS1_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFS1_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"MIFS1_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFS2_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFS2_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"MIFS2_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFW1_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFW1_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"MIFW1_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFW2_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "MIFW2_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"MIFW2_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "O1_HC_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "O1_HC_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"O1_HC_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "O1_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "O1_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"O1_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "O2_HC_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "O2_HC_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"O2_HC_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "O2_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "O2_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"O2_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "OV_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "OV_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"OV_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "OpenedVials",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"OpenedVials\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PW1_HC_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PW1_HC_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"PW1_HC_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PW1_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PW1_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"PW1_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PW2_HC_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PW2_HC_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"PW2_HC_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PW2_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PW2_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"PW2_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "S1_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "S1_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"S1_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "S2_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "S2_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"S2_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "W1_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "W1_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"W1_O_NR_checkbox\""
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "W2_O_NR_checkbox",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "W2_O_NR_checkbox",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"W2_O_NR_checkbox\""
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "adult_coverage"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Adult Coverage\""
+      }
+    ]
   }
 }

@@ -92,7 +92,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "food_bout",
         "_row_num": 2
       },
@@ -107,6 +107,16 @@
           "title": "Food Bout"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"FB_FOL_date\",\"FB_FOL_B_AnimID\",\"FB_begin_feed_time\",\"FB_end_feed_time\",\"FB_duration\",\"FB_FPL_local_food_part\",\"FB_FL_local_food_name\",\"FB_FPL_local_food_part2\",\"FB_FL_local_food_name2\",\"FB_local_food_part_written\",\"FB_local_food_name_written\"]",
+        "_row_num": 2
       }
     ]
   },
@@ -129,8 +139,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "food_bout",
         "_row_num": 2
       },
@@ -146,8 +156,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "food_bout",
         "_row_num": 2,
         "__rowNum__": 1
@@ -737,6 +747,188 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "FB_FOL_date": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_FOL_date",
+        "elementName": "FB_FOL_date",
+        "elementSet": "data",
+        "elementPath": "FB_FOL_date"
+      },
+      "FB_FOL_B_AnimID": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_FOL_B_AnimID",
+        "elementName": "FB_FOL_B_AnimID",
+        "elementSet": "data",
+        "elementPath": "FB_FOL_B_AnimID"
+      },
+      "FB_begin_feed_time": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_begin_feed_time",
+        "elementName": "FB_begin_feed_time",
+        "elementSet": "data",
+        "elementPath": "FB_begin_feed_time"
+      },
+      "FB_end_feed_time": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_end_feed_time",
+        "elementName": "FB_end_feed_time",
+        "elementSet": "data",
+        "elementPath": "FB_end_feed_time"
+      },
+      "FB_duration": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FB_duration",
+        "elementName": "FB_duration",
+        "elementSet": "data",
+        "elementPath": "FB_duration"
+      },
+      "FB_FPL_local_food_part": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_FPL_local_food_part",
+        "elementName": "FB_FPL_local_food_part",
+        "elementSet": "data",
+        "elementPath": "FB_FPL_local_food_part"
+      },
+      "FB_FL_local_food_name": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_FL_local_food_name",
+        "elementName": "FB_FL_local_food_name",
+        "elementSet": "data",
+        "elementPath": "FB_FL_local_food_name"
+      },
+      "FB_FPL_local_food_part2": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_FPL_local_food_part2",
+        "elementName": "FB_FPL_local_food_part2",
+        "elementSet": "data",
+        "elementPath": "FB_FPL_local_food_part2"
+      },
+      "FB_FL_local_food_name2": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_FL_local_food_name2",
+        "elementName": "FB_FL_local_food_name2",
+        "elementSet": "data",
+        "elementPath": "FB_FL_local_food_name2"
+      },
+      "FB_local_food_part_written": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_local_food_part_written",
+        "elementName": "FB_local_food_part_written",
+        "elementSet": "data",
+        "elementPath": "FB_local_food_part_written"
+      },
+      "FB_local_food_name_written": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FB_local_food_name_written",
+        "elementName": "FB_local_food_name_written",
+        "elementSet": "data",
+        "elementPath": "FB_local_food_name_written"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "food_bout"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"FB_FOL_date\",\"FB_FOL_B_AnimID\",\"FB_begin_feed_time\",\"FB_end_feed_time\",\"FB_duration\",\"FB_FPL_local_food_part\",\"FB_FL_local_food_name\",\"FB_FPL_local_food_part2\",\"FB_FL_local_food_name2\",\"FB_local_food_part_written\",\"FB_local_food_name_written\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Food Bout\""
+      }
+    ]
   }
 }

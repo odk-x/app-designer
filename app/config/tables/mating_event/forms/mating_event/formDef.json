@@ -92,7 +92,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "mating_event",
         "_row_num": 2
       },
@@ -107,6 +107,16 @@
           "title": "Mating Event"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"M_FOL_date\",\"M_FOL_B_focal_AnimID\",\"M_time\",\"M_male\",\"M_female\",\"M_fem_swelling\",\"M_fail_flag\",\"M_interference\",\"M_comments\",\"M_consort_flag\",\"M_mate_guard_flag\"]",
+        "_row_num": 2
       }
     ]
   },
@@ -129,8 +139,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "mating_event",
         "_row_num": 2
       },
@@ -146,8 +156,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "mating_event",
         "_row_num": 2,
         "__rowNum__": 1
@@ -737,6 +747,188 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "M_FOL_date": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_FOL_date",
+        "elementName": "M_FOL_date",
+        "elementSet": "data",
+        "elementPath": "M_FOL_date"
+      },
+      "M_FOL_B_focal_AnimID": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_FOL_B_focal_AnimID",
+        "elementName": "M_FOL_B_focal_AnimID",
+        "elementSet": "data",
+        "elementPath": "M_FOL_B_focal_AnimID"
+      },
+      "M_time": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_time",
+        "elementName": "M_time",
+        "elementSet": "data",
+        "elementPath": "M_time"
+      },
+      "M_male": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_male",
+        "elementName": "M_male",
+        "elementSet": "data",
+        "elementPath": "M_male"
+      },
+      "M_female": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_female",
+        "elementName": "M_female",
+        "elementSet": "data",
+        "elementPath": "M_female"
+      },
+      "M_fem_swelling": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_fem_swelling",
+        "elementName": "M_fem_swelling",
+        "elementSet": "data",
+        "elementPath": "M_fem_swelling"
+      },
+      "M_fail_flag": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_fail_flag",
+        "elementName": "M_fail_flag",
+        "elementSet": "data",
+        "elementPath": "M_fail_flag"
+      },
+      "M_interference": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_interference",
+        "elementName": "M_interference",
+        "elementSet": "data",
+        "elementPath": "M_interference"
+      },
+      "M_comments": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_comments",
+        "elementName": "M_comments",
+        "elementSet": "data",
+        "elementPath": "M_comments"
+      },
+      "M_consort_flag": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_consort_flag",
+        "elementName": "M_consort_flag",
+        "elementSet": "data",
+        "elementPath": "M_consort_flag"
+      },
+      "M_mate_guard_flag": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "M_mate_guard_flag",
+        "elementName": "M_mate_guard_flag",
+        "elementSet": "data",
+        "elementPath": "M_mate_guard_flag"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "mating_event"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"M_FOL_date\",\"M_FOL_B_focal_AnimID\",\"M_time\",\"M_male\",\"M_female\",\"M_fem_swelling\",\"M_fail_flag\",\"M_interference\",\"M_comments\",\"M_consort_flag\",\"M_mate_guard_flag\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Mating Event\""
+      }
+    ]
   }
 }

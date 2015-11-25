@@ -100,7 +100,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "follow_arrival",
         "_row_num": 2
       },
@@ -115,6 +115,16 @@
           "title": "Follow Arrival"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"FA_FOL_date\",\"FA_FOL_B_focal_AnimID\",\"FA_B_arr_AnimID\",\"FA_seq_num\",\"FA_type_of_certainty\",\"FA_type_of_nesting\",\"FA_type_of_cycle\",\"FA_time_start\",\"FA_time_end\",\"FA_duration_of_obs\",\"FA_within_five_meters\",\"FA_closest_to_focal\"]",
+        "_row_num": 2
       }
     ]
   },
@@ -137,8 +147,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "follow_arrival",
         "_row_num": 2
       },
@@ -154,8 +164,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "follow_arrival",
         "_row_num": 2,
         "__rowNum__": 1
@@ -775,6 +785,201 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "FA_FOL_date": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FA_FOL_date",
+        "elementName": "FA_FOL_date",
+        "elementSet": "data",
+        "elementPath": "FA_FOL_date"
+      },
+      "FA_FOL_B_focal_AnimID": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FA_FOL_B_focal_AnimID",
+        "elementName": "FA_FOL_B_focal_AnimID",
+        "elementSet": "data",
+        "elementPath": "FA_FOL_B_focal_AnimID"
+      },
+      "FA_B_arr_AnimID": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FA_B_arr_AnimID",
+        "elementName": "FA_B_arr_AnimID",
+        "elementSet": "data",
+        "elementPath": "FA_B_arr_AnimID"
+      },
+      "FA_seq_num": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FA_seq_num",
+        "elementName": "FA_seq_num",
+        "elementSet": "data",
+        "elementPath": "FA_seq_num"
+      },
+      "FA_type_of_certainty": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FA_type_of_certainty",
+        "elementName": "FA_type_of_certainty",
+        "elementSet": "data",
+        "elementPath": "FA_type_of_certainty"
+      },
+      "FA_type_of_nesting": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FA_type_of_nesting",
+        "elementName": "FA_type_of_nesting",
+        "elementSet": "data",
+        "elementPath": "FA_type_of_nesting"
+      },
+      "FA_type_of_cycle": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FA_type_of_cycle",
+        "elementName": "FA_type_of_cycle",
+        "elementSet": "data",
+        "elementPath": "FA_type_of_cycle"
+      },
+      "FA_time_start": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FA_time_start",
+        "elementName": "FA_time_start",
+        "elementSet": "data",
+        "elementPath": "FA_time_start"
+      },
+      "FA_time_end": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FA_time_end",
+        "elementName": "FA_time_end",
+        "elementSet": "data",
+        "elementPath": "FA_time_end"
+      },
+      "FA_duration_of_obs": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FA_duration_of_obs",
+        "elementName": "FA_duration_of_obs",
+        "elementSet": "data",
+        "elementPath": "FA_duration_of_obs"
+      },
+      "FA_within_five_meters": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FA_within_five_meters",
+        "elementName": "FA_within_five_meters",
+        "elementSet": "data",
+        "elementPath": "FA_within_five_meters"
+      },
+      "FA_closest_to_focal": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FA_closest_to_focal",
+        "elementName": "FA_closest_to_focal",
+        "elementSet": "data",
+        "elementPath": "FA_closest_to_focal"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "follow_arrival"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"FA_FOL_date\",\"FA_FOL_B_focal_AnimID\",\"FA_B_arr_AnimID\",\"FA_seq_num\",\"FA_type_of_certainty\",\"FA_type_of_nesting\",\"FA_type_of_cycle\",\"FA_time_start\",\"FA_time_end\",\"FA_duration_of_obs\",\"FA_within_five_meters\",\"FA_closest_to_focal\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Follow Arrival\""
+      }
+    ]
   }
 }

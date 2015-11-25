@@ -168,7 +168,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "follow",
         "_row_num": 2
       },
@@ -183,6 +183,40 @@
           "title": "Follow"
         },
         "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "colOrder",
+        "type": "array",
+        "value": "[\"FOL_date\",\"FOL_B_AnimID\",\"FOL_CL_community_id\",\"FOL_time_begin\",\"FOL_time_end\",\"FOL_flag_begin_in_nest\",\"FOL_flag_end_in_nest\",\"FOL_duration\",\"FOL_distance_traveled\",\"FOL_am_observer1\",\"FOL_am_observer2\",\"FOL_pm_observer1\",\"FOL_pm_observer2\",\"FOL_study_code1\",\"FOL_study_code2\",\"FOL_day\",\"FOL_month\",\"FOL_year\"]",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "configpath",
+        "value": "config/tables/follow/html/follow_detail.html",
+        "_row_num": 4
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "configpath",
+        "value": "config/tables/follow/html/follow_list.html",
+        "_row_num": 5
       }
     ]
   },
@@ -205,8 +239,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "follow",
         "_row_num": 2
       },
@@ -222,8 +256,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "follow",
         "_row_num": 2,
         "__rowNum__": 1
@@ -1046,6 +1080,309 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "FOL_date": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_date",
+        "elementName": "FOL_date",
+        "elementSet": "data",
+        "elementPath": "FOL_date"
+      },
+      "FOL_B_AnimID": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_B_AnimID",
+        "elementName": "FOL_B_AnimID",
+        "elementSet": "data",
+        "elementPath": "FOL_B_AnimID"
+      },
+      "FOL_CL_community_id": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_CL_community_id",
+        "elementName": "FOL_CL_community_id",
+        "elementSet": "data",
+        "elementPath": "FOL_CL_community_id"
+      },
+      "FOL_time_begin": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_time_begin",
+        "elementName": "FOL_time_begin",
+        "elementSet": "data",
+        "elementPath": "FOL_time_begin"
+      },
+      "FOL_time_end": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_time_end",
+        "elementName": "FOL_time_end",
+        "elementSet": "data",
+        "elementPath": "FOL_time_end"
+      },
+      "FOL_flag_begin_in_nest": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "FOL_flag_begin_in_nest",
+        "elementName": "FOL_flag_begin_in_nest",
+        "elementSet": "data",
+        "elementPath": "FOL_flag_begin_in_nest"
+      },
+      "FOL_flag_end_in_nest": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "FOL_flag_end_in_nest",
+        "elementName": "FOL_flag_end_in_nest",
+        "elementSet": "data",
+        "elementPath": "FOL_flag_end_in_nest"
+      },
+      "FOL_duration": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FOL_duration",
+        "elementName": "FOL_duration",
+        "elementSet": "data",
+        "elementPath": "FOL_duration"
+      },
+      "FOL_distance_traveled": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FOL_distance_traveled",
+        "elementName": "FOL_distance_traveled",
+        "elementSet": "data",
+        "elementPath": "FOL_distance_traveled"
+      },
+      "FOL_am_observer1": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_am_observer1",
+        "elementName": "FOL_am_observer1",
+        "elementSet": "data",
+        "elementPath": "FOL_am_observer1"
+      },
+      "FOL_am_observer2": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_am_observer2",
+        "elementName": "FOL_am_observer2",
+        "elementSet": "data",
+        "elementPath": "FOL_am_observer2"
+      },
+      "FOL_pm_observer1": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_pm_observer1",
+        "elementName": "FOL_pm_observer1",
+        "elementSet": "data",
+        "elementPath": "FOL_pm_observer1"
+      },
+      "FOL_pm_observer2": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_pm_observer2",
+        "elementName": "FOL_pm_observer2",
+        "elementSet": "data",
+        "elementPath": "FOL_pm_observer2"
+      },
+      "FOL_study_code1": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_study_code1",
+        "elementName": "FOL_study_code1",
+        "elementSet": "data",
+        "elementPath": "FOL_study_code1"
+      },
+      "FOL_study_code2": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "FOL_study_code2",
+        "elementName": "FOL_study_code2",
+        "elementSet": "data",
+        "elementPath": "FOL_study_code2"
+      },
+      "FOL_day": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FOL_day",
+        "elementName": "FOL_day",
+        "elementSet": "data",
+        "elementPath": "FOL_day"
+      },
+      "FOL_month": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FOL_month",
+        "elementName": "FOL_month",
+        "elementSet": "data",
+        "elementPath": "FOL_month"
+      },
+      "FOL_year": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "FOL_year",
+        "elementName": "FOL_year",
+        "elementSet": "data",
+        "elementPath": "FOL_year"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "FOL_flag_begin_in_nest",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "FOL_flag_end_in_nest",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "follow"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "colOrder",
+        "_type": "array",
+        "_value": "[\"FOL_date\",\"FOL_B_AnimID\",\"FOL_CL_community_id\",\"FOL_time_begin\",\"FOL_time_end\",\"FOL_flag_begin_in_nest\",\"FOL_flag_end_in_nest\",\"FOL_duration\",\"FOL_distance_traveled\",\"FOL_am_observer1\",\"FOL_am_observer2\",\"FOL_pm_observer1\",\"FOL_pm_observer2\",\"FOL_study_code1\",\"FOL_study_code2\",\"FOL_day\",\"FOL_month\",\"FOL_year\"]"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "LIST"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "configpath",
+        "_value": "config/tables/follow/html/follow_detail.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Follow\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "configpath",
+        "_value": "config/tables/follow/html/follow_list.html"
+      }
+    ]
   }
 }

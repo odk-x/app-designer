@@ -289,7 +289,7 @@
     ],
     "settings": [
       {
-        "setting_name": "form_id",
+        "setting_name": "table_id",
         "value": "twoColumn",
         "_row_num": 2
       },
@@ -326,8 +326,8 @@
       "video": "app_path_localized"
     },
     "settings": {
-      "form_id": {
-        "setting_name": "form_id",
+      "table_id": {
+        "setting_name": "table_id",
         "value": "twoColumn",
         "_row_num": 2
       },
@@ -343,8 +343,8 @@
         },
         "_row_num": 4
       },
-      "table_id": {
-        "setting_name": "table_id",
+      "form_id": {
+        "setting_name": "form_id",
         "value": "twoColumn",
         "_row_num": 2,
         "__rowNum__": 1
@@ -1018,6 +1018,163 @@
           "_finalize": 10
         }
       }
-    }
+    },
+    "dataTableModel": {
+      "visited_continents": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "visited_continents_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "visited_continents.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "continents",
+        "elementKey": "visited_continents",
+        "elementName": "visited_continents",
+        "elementSet": "data",
+        "elementPath": "visited_continents",
+        "listChildElementKeys": [
+          "visited_continents_items"
+        ]
+      },
+      "visited_seattle": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yesno",
+        "elementKey": "visited_seattle",
+        "elementName": "visited_seattle",
+        "elementSet": "data",
+        "elementPath": "visited_seattle"
+      },
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "sex": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "sexes",
+        "elementKey": "sex",
+        "elementName": "sex",
+        "elementSet": "data",
+        "elementPath": "sex"
+      },
+      "weight": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "weight",
+        "elementName": "weight",
+        "elementSet": "data",
+        "elementPath": "weight"
+      },
+      "rating": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "rating",
+        "elementName": "rating",
+        "elementSet": "data",
+        "elementPath": "rating"
+      },
+      "visited_continents_items": {
+        "type": "string",
+        "elementKey": "visited_continents_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "visited_continents.items",
+        "notUnitOfRetention": true
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "sex",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"sexes\",\"data_value\":\"male\",\"display\":{\"text\":\"male\"},\"_row_num\":23},{\"choice_list_name\":\"sexes\",\"data_value\":\"female\",\"display\":{\"text\":\"female\"},\"_row_num\":24}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "visited_continents",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"text\":\"North America\"},\"_row_num\":4},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"text\":\"South America\"},\"_row_num\":5},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"text\":\"Europe\"},\"_row_num\":6},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"text\":\"Africa\"},\"_row_num\":7},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"text\":\"Asia\"},\"_row_num\":8},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"text\":\"Australia\"},\"_row_num\":9},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"text\":\"Antarctica\"},\"_row_num\":10}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "visited_seattle",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "twoColumn"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Two Column Form\""
+      }
+    ]
   }
 }
