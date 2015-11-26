@@ -36,7 +36,8 @@ requirejs.config({
         // functionality
         screens : 'survey/js/screens',
         prompts : 'survey/js/prompts',
-        database : 'survey/js/database',
+		database : 'survey/js/database',
+        databaseImpl : 'survey/js/databaseImpl',
         databaseUtils : 'survey/js/databaseUtils',
         databaseSchema : 'survey/js/databaseSchema',
         controller : 'survey/js/controller',

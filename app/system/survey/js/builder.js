@@ -8,11 +8,11 @@
  * Major task is to construct function()s for the calculates, constraints and other equations.
  *
  */
-define(['controller', 'opendatakit', 'database', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore', 'screens', 'prompts'],
-function(controller,   opendatakit,   database,   $,        screenTypes,   promptTypes,   formulaFunctions,   _, _screens, _prompts) {
+define(['controller', 'opendatakit', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore', 'screens', 'prompts'],
+function(controller,   opendatakit,   $,        screenTypes,   promptTypes,   formulaFunctions,   _,           _screens,  _prompts) {
 verifyLoad('builder',
-    ['controller', 'opendatakit', 'database', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore', 'screens', 'prompts'],
-    [controller,   opendatakit,   database,   $,        screenTypes,   promptTypes,   formulaFunctions,   _, _screens, _prompts]);
+    ['controller', 'opendatakit', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore', 'screens', 'prompts'],
+    [controller,   opendatakit,    $,        screenTypes,   promptTypes,   formulaFunctions,   _,           _screens,  _prompts]);
 
     /**
      * evalFn takes a 'function(...) {}' definition ('fn') and evaluates it in the

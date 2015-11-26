@@ -619,7 +619,7 @@ updateDataTableModelAndReturnDatabaseInsertLists:function(protoModel, formTitle)
         _column_definitions: []
         };
 
-    shim.log('D','database._insertTableAndColumnProperties');
+    shim.log('D','databaseSchema.updateDataTableModelAndReturnDatabaseInsertLists');
     var displayColumnOrder = [];
     
     // TODO: synthesize dbTableName from some other source...

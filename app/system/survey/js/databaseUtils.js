@@ -624,8 +624,8 @@ convertSelectionString: function(linkedModel, selection) {
                 }
             }
             if ( found == false ) {
-                alert('database.convertSelectionString: unrecognized elementPath: ' + e );
-                shim.log('E',"database.convertSelectionString: unrecognized elementPath: " + e);
+                alert('databaseUtils.convertSelectionString: unrecognized elementPath: ' + e );
+                shim.log('E',"databaseUtils.convertSelectionString: unrecognized elementPath: " + e);
                 return null;
             }
         }
@@ -660,8 +660,8 @@ convertOrderByString: function(linkedModel, order_by) {
                 }
             }
             if ( found == false ) {
-                alert('database.convertOrderByString: unrecognized elementPath: ' + e );
-                shim.log('E',"database.convertOrderByString: unrecognized elementPath: " + e );
+                alert('databaseUtils.convertOrderByString: unrecognized elementPath: ' + e );
+                shim.log('E',"databaseUtils.convertOrderByString: unrecognized elementPath: " + e );
                 return null;
             }
         }

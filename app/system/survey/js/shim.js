@@ -103,11 +103,6 @@ window.shim = window.shim || {
         console.log('computed base uri: ' + baseUri);
         return '{"container":"Chrome","version":"21.0.1180.83 m","activeUser":"username:badger","baseUri":"' + baseUri + '","formsUri":"content://org.opendatakit.common.android.provider.forms/","appName":"testing","logLevel":"' + this.logLevel + '"}';
     },
-    getDatabaseSettings: function() {
-        // version identifies the database schema that the database layer should use.
-        // maxSize is in bytes
-        return '{"shortName":"odk","version":"1","displayName":"ODK Instances Database","maxSize":65536}';
-    },
     /*
      * severity - one of 'E' (error), 'W' (warn), 'S' (success), 'I' (info), 'D' (debug), 'T' (trace), 'A' (assert)
      * msg -- message to log

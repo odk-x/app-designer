@@ -567,7 +567,7 @@ promptTypes.instances = promptTypes.base.extend({
         ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
 
         // in this case, we are our own 'linked' table.
-        database.delete_linked_instance_all($.extend({}, ctxt, {success: function() {
+        database.delete_checkpoints_and_row($.extend({}, ctxt, {success: function() {
                 that.reRender(ctxt);
             }}),
         model.table_id, $(evt.currentTarget).attr('id'));
@@ -846,7 +846,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         that.disableButtons();
         that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
             var dbTableName = linkedModel.table_id;
-            database.delete_linked_instance_all($.extend({},ctxt,{success:function() {
+            database.delete_checkpoints_and_row($.extend({},ctxt,{success:function() {
                     that.enableButtons();
                     that.reRender(ctxt);
                 },

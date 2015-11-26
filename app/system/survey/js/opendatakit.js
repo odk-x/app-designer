@@ -42,7 +42,6 @@ return {
         instanceId: null, 
         table_id: null
         },
-    databaseSettings: null,
     platformInfo: null,
     
     logInitDone:function(pagename) {
@@ -127,19 +126,6 @@ return {
             // already a rowpath that is under the prefix path.
             return uriFragment;
         }
-    },
-    
-    /**
-     * immediate return: databaseSettings structure from ODK
-     */
-    getDatabaseSettings:function() {
-        // fetch these settings from ODK Survey (the container app)
-        if ( this.databaseSettings === undefined || this.databaseSettings === null ) {
-            var jsonString = shim.getDatabaseSettings();
-            shim.log("I",'opendatakit.getDatabaseSettings: ' + jsonString);
-            this.databaseSettings = JSON.parse(jsonString);
-        }
-        return this.databaseSettings;
     },
 
     getProperty:function(propertyId) {
