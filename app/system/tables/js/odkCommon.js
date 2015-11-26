@@ -4,7 +4,7 @@
 /* global $ */
 
 /**
- * This represents the Common object handed to the android web view in the
+ * This represents the OdkCommon object handed to the android web view in the
  * Tables code.
  *
  * It should provide all the functions available to the javascript at this
@@ -27,7 +27,7 @@ function computeBaseUri() {
   // Since we are expecting this file to live in app/system/tables/js/, we
   // can look for the first occurrence and take everything before it.
 
-  var expectedFileLocation = 'system/tables/js/common.js';
+  var expectedFileLocation = 'system/tables/js/odkCommon.js';
 
   var fileLocation = getCurrentFileLocation();
 
@@ -70,12 +70,12 @@ function getCurrentFileLocation() {
 
 
 /**
- * The idea of this call is that if we're on the phone, common will have been
+ * The idea of this call is that if we're on the phone, odkCommon will have been
  * set by the java framework. This script, however, should get run at the top
  * of the file no matter what. This way we're sure not to stomp on the java
  * object.
  */
-if (!window.common) {
+if (!window.odkCommon) {
 
     var importSynchronous = function(script) {
         // script is appName-relative -- need to prepend the appName.
@@ -107,7 +107,7 @@ if (!window.common) {
         }
     };
     
-    // This will be the object specified in common.json. It is not set until
+    // This will be the object specified in odkCommon.json. It is not set until
     // setBackingObject is called.
     var commonObj = null;
 
@@ -257,7 +257,7 @@ if (!window.common) {
     };
 
     pub.getProperty = function(propertyId) {
-        this.log('D','common: DO: getProperty(' + propertyId + ')');
+        this.log('D','odkCommon: DO: getProperty(' + propertyId + ')');
         return 'property-of(' + propertyId + ')';
     };
 
@@ -269,7 +269,7 @@ if (!window.common) {
      * This is the only function that is exposed to the caller that is NOT a 
      * function exposed to the android object. It is intended only for use on
      * framework testing in Chrome. This allows us to specify a different file
-     * when we want to test the functionality of the common object.
+     * when we want to test the functionality of the odkCommon object.
      *
      * jsonObj should be a JSON object.
      */
@@ -280,7 +280,7 @@ if (!window.common) {
     // Now we also need to set the backing object we are going to use. We
     // assume it is in the output/debug directory.
 //     $.ajax({
-//         url: pub.getFileAsUrl('../app/output/debug/common.json'),
+//         url: pub.getFileAsUrl('../app/output/debug/odkCommon.json'),
 //         success: function(data) {
 //             var commonObject = data;
 //             pub.setBackingObject(commonObject);
@@ -288,6 +288,6 @@ if (!window.common) {
 //         async: false
 //     });
 
-    window.common = window.common || pub;
+    window.odkCommon = window.odkCommon || pub;
 
 }

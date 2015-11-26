@@ -1,14 +1,14 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, control, data */
+/* global $, odkTables, data */
 /*exported display, handleClick, getResults */
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/femaleClients_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/femaleClients_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -24,7 +24,7 @@ var femaleClients = {};
 /** Handles clicking on a list item. Applied via a string. */
 function handleClick(index) {
     if (!$.isEmptyObject(femaleClients)) {
-        control.openDetailView(
+        odkTables.openDetailView(
             femaleClients.getTableId(),
             index,
             'config/tables/femaleClients/html/femaleClients_detail.html');
@@ -36,14 +36,14 @@ function cbSRSuccess(searchData) {
     if(searchData.getCount() > 0) {
         // open filtered list view if client found
         var clientId = searchData.get('client_id');
-        control.openTableToListView(
+        odkTables.openTableToListView(
                 'femaleClients',
                 'client_id = ?',
                 [clientId],
                 'config/tables/FemaleClients/html/femaleClients_list.html');
     } else {
         // open 'client not found' page
-        control.openTableToListView(
+        odkTables.openTableToListView(
                 'femaleClients',
                 null,
                 null,
@@ -59,12 +59,12 @@ function cbSRFailure(error) {
 function getResults() {
     searchText = document.getElementById('search').value;
 
-//     var searchData = control.query(
+//     var searchData = odkTables.query(
 //             'femaleClients',
 //             'client_id = ?',
 //             [searchText]);
 
-    datarsp.query('femaleClients', 'client_id = ?', [searchText], 
+    odkData.query('femaleClients', 'client_id = ?', [searchText], 
         null, null, null, null, true, cbSRSuccess, cbSRFailure, null, false);
 }
 
@@ -75,7 +75,7 @@ function render() {
     // 'add client' form
     var addClient = document.createElement('p');
     addClient.onclick = function() {
-        control.addRowWithSurvey(
+        odkTables.addRowWithSurvey(
                 'femaleClients',
                 'addClient',
                 null,
@@ -88,7 +88,7 @@ function render() {
     /* create button that launches graph display */
     var graphView = document.createElement('p');
     graphView.onclick = function() {
-        control.openTableToListView(
+        odkTables.openTableToListView(
                 'femaleClients',
                 null,
                 null,
@@ -123,7 +123,7 @@ function render() {
             var chevron = document.createElement('img');
             chevron.setAttribute(
                     'src',
-                    common.getFileAsUrl('config/assets/img/little_arrow.png'));
+                    odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
             chevron.setAttribute('class', 'chevron');
             item.appendChild(chevron);
 
@@ -158,5 +158,5 @@ function cbFailure(error) {
 }
 
 function display() {
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 }

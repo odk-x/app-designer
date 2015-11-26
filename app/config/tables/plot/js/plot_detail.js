@@ -1,14 +1,14 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control, d3 */
+/* global $, odkTables, d3 */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/plot_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/plot_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -40,7 +40,7 @@ function cbSuccess(result) {
 
     plotId = plotDetailResultSet.getRowId(0); 
 
-    datarsp.query('visit', 'plot_id = ?', [plotId], null, null,
+    odkData.query('visit', 'plot_id = ?', [plotId], null, null,
         null, null, true, visitCBSuccess, visitCBFailure, null, false);
 }
 
@@ -63,7 +63,7 @@ function display() {
     $('#crop').text(plotDetailResultSet.get('planting'));
 
 // We want to get the count.
-//     var table = control.query(
+//     var table = odkTables.query(
 //         'visit',
 //         'plot_id = ?',
 //         [plotId]);
@@ -78,7 +78,7 @@ function display() {
     var width = 300 - margin.left - margin.right;
     var height = 500 - margin.top - margin.bottom;
     // Set up the scales.
-    //var visitData = control.query('visit', 'plot_id = ?', [plotId]);
+    //var visitData = odkTables.query('visit', 'plot_id = ?', [plotId]);
     var xValues = JSON.parse(visitData.getColumnData('date'));
 
     //xValues = [xValues[0], xValues[1], xValues[2]];
@@ -138,6 +138,6 @@ function display() {
 
 function setup() {
 
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 }
 

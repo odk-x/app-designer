@@ -1,10 +1,10 @@
-/* global $, control */
+/* global $, odkTables */
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/geotagger_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/geotagger_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             window.data.setBackingObject(dataObj);
@@ -27,13 +27,13 @@ function cbFailure(error) {
 }
 
 function setup() {
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 }
         
 function handleClick(index) {
     var tableId = geoListThumbResultSet.getTableId();
     var rowId = geoListThumbResultSet.getRowId(index);
-    control.openDetailView(tableId, rowId, null);
+    odkTables.openDetailView(tableId, rowId, null);
 }
 
 function displayGroup() {
@@ -47,7 +47,7 @@ function displayGroup() {
         var uriRelative = geoListThumbResultSet.getData(i, 'Image.uriFragment');
         var src = '';
         if (uriRelative !== null && uriRelative !== '') {
-            var uriAbsolute = common.getRowFileAsUrl(geoListThumbResultSet.getTableId(), geoListThumbResultSet.getRowId(i), uriRelative);
+            var uriAbsolute = odkCommon.getRowFileAsUrl(geoListThumbResultSet.getTableId(), geoListThumbResultSet.getRowId(i), uriRelative);
             src = uriAbsolute;
         }
 

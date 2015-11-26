@@ -2,7 +2,7 @@
  * Responsible for rendering the home screen.
  */
 'use strict';
-/* global control */
+/* global odkTables */
 
 function display() {
 
@@ -15,7 +15,7 @@ function display() {
     viewHousesButton.on(
         'click',
         function() {
-            control.openTableToListView('Tea_houses', null, null, null);
+            odkTables.openTableToListView('Tea_houses', null, null, null);
         }
     );
     $('#wrapper').append(viewHousesButton);
@@ -25,7 +25,7 @@ function display() {
     viewTeasButton.on(
         'click',
         function() {
-            control.openTable('Tea_inventory', null, null);
+            odkTables.openTable('Tea_inventory', null, null);
         }
     );
     $('#wrapper').append(viewTeasButton);
@@ -35,7 +35,7 @@ function display() {
     viewTeaTypesButton.on(
         'click',
         function() {
-            control.openTable('Tea_types', null, null);
+            odkTables.openTable('Tea_types', null, null);
         }
     );
     $('#wrapper').append(viewTeaTypesButton);

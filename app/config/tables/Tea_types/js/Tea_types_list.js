@@ -1,13 +1,13 @@
 /**
  * This is the file that will create the list view for the tea types display.
  */
-/* global $, control, data */
+/* global $, odkTables, data */
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/Tea_types_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/Tea_types_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             window.data.setBackingObject(dataObj);
@@ -36,7 +36,7 @@ function cbFailure(error) {
  * Called when page loads to display things (Nothing to edit here)
  */
 var resumeFn = function(fIdxStart) {
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -62,7 +62,7 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                control.openDetailView(tableId, rowId, null);
+                odkTables.openDetailView(tableId, rowId, null);
             }
         });
     }
@@ -94,7 +94,7 @@ var displayGroup = function(idxStart) {
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
-        chevron.attr('src', common.getFileAsUrl('config/assets/img/little_arrow.png'));
+        chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
                 

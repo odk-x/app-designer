@@ -4,7 +4,7 @@
 /* global $ */
 
 /**
- * This represents the Control object handed to the android web view in the
+ * This represents the OdkTables object handed to the android web view in the
  * Tables code.
  *
  * It should provide all the functions available to the javascript at this
@@ -27,7 +27,7 @@ function computeBaseUri() {
   // Since we are expecting this file to live in app/framework/survey/js/, we
   // can look for the first occurrence and take everything before it.
 
-  var expectedFileLocation = 'system/tables/js/control.js';
+  var expectedFileLocation = 'system/tables/js/odkTables.js';
 
   var fileLocation = getCurrentFileLocation();
 
@@ -94,12 +94,12 @@ function getCurrentFileLocation() {
 
 
 /**
- * The idea of this call is that if we're on the phone, control will have been
+ * The idea of this call is that if we're on the phone, odkTables will have been
  * set by the java framework. This script, however, should get run at the top
  * of the file no matter what. This way we're sure not to stomp on the java
  * object.
  */
-if (!window.control) {
+if (!window.odkTables) {
 
     var importSynchronous = function(script) {
         // script is appName-relative -- need to prepend the appName.
@@ -131,9 +131,9 @@ if (!window.control) {
         }
     };
     
-    // This will be the object specified in control.json. It is not set until
+    // This will be the object specified in odkTables.json. It is not set until
     // setBackingObject is called.
-    var controlObj = null;
+    var odkTablesObj = null;
 
     /**
      * Returns true if a variable is an array.
@@ -180,12 +180,12 @@ if (!window.control) {
      * This is the only function that is exposed to the caller that is NOT a 
      * function exposed to the android object. It is intended only for use on
      * framework testing in Chrome. This allows us to specify a different file
-     * when we want to test the functionality of the control object.
+     * when we want to test the functionality of the odkTables object.
      *
      * jsonObj should be a JSON object.
      */
     pub.setBackingObject = function(jsonObj) {
-        controlObj = jsonObj;
+        odkTablesObj = jsonObj;
     };
 
     pub.openTable = function(tableId, sqlWhereClause, sqlSelectionArgs) {
@@ -229,7 +229,7 @@ if (!window.control) {
         }
         if (relativePath === null) {
             // then we need the default
-            relativePath = controlObj.tables[tableId].defaultListFile;
+            relativePath = odkTablesObj.tables[tableId].defaultListFile;
         }
         relativePath = pub.getFileAsUrl(relativePath);
         window.location.href = relativePath;
@@ -263,7 +263,7 @@ if (!window.control) {
 
     pub.getAllTableIds = function() {
         var tableIds = [];
-        $.map(controlObj.tableIdToDisplayName, function(value, key) {
+        $.map(odkTablesObj.tableIdToDisplayName, function(value, key) {
             tableIds.push(key);
         });
         return tableIds;
@@ -292,7 +292,7 @@ if (!window.control) {
         }
         if (relativePath === null) {
             // Then we need the default
-            relativePath = controlObj.tables[tableId].defaultDetailFile;
+            relativePath = odkTablesObj.tables[tableId].defaultDetailFile;
         }
         relativePath = pub.getFileAsUrl(relativePath);
         window.location.href = relativePath;
@@ -336,40 +336,40 @@ if (!window.control) {
     };
 
     pub.getElementKey = function(tableId, elementPath) {
-        // This we get through the control object.
+        // This we get through the odkTables object.
         // We first need to check to make sure that this tableId even exists.
         // If it does not, we return undefined, which is the behavior on the
         // phone.
-        if (!controlObj.tables.hasOwnProperty(tableId)) {
+        if (!odkTablesObj.tables.hasOwnProperty(tableId)) {
             return undefined;
         }
-        return controlObj.tables[tableId].pathToKey[elementPath];
+        return odkTablesObj.tables[tableId].pathToKey[elementPath];
     };
 
     pub.getColumnDisplayName = function(tableId, elementPath) {
-        // This we just get through the control object.
+        // This we just get through the odkTables object.
         // We first need to check that the tableId even exists. If not, we will
         // return undefined, as is the behavior on the phone.
-        if (!controlObj.tables.hasOwnProperty(tableId)) {
+        if (!odkTablesObj.tables.hasOwnProperty(tableId)) {
             return undefined;
         }
-        return controlObj.tables[tableId].pathToName[elementPath];
+        return odkTablesObj.tables[tableId].pathToName[elementPath];
     };
 
     pub.getTableDisplayName = function(tableId) {
-        // just pass it through the control object.
+        // just pass it through the odkTables object.
         // Return undefined if the table id doesn't exist, which is the
         // behavior on the phone.
-        if (!controlObj.tableIdToDisplayName.hasOwnProperty(tableId)) {
+        if (!odkTablesObj.tableIdToDisplayName.hasOwnProperty(tableId)) {
             return undefined;
         }
-        return controlObj.tableIdToDisplayName[tableId];
+        return odkTablesObj.tableIdToDisplayName[tableId];
     };
 
     // Now we also need to set the backing object we are going to use. We
     // assume it is in the output/debug directory.
     $.ajax({
-        url: getFileAsUrl('../app/output/debug/control.json'),
+        url: getFileAsUrl('../app/output/debug/odkTables.json'),
         success: function(data) {
             var controlObject = data;
             pub.setBackingObject(controlObject);
@@ -377,6 +377,6 @@ if (!window.control) {
         async: false
     });
 
-    window.control = window.control || pub;
+    window.odkTables = window.odkTables || pub;
 
 }

@@ -30,19 +30,19 @@ function display() {
             'click',
             function() {
                 if (currentTab === 0) {
-                    control.launchHTML('config/assets/teatime.html');
+                    odkTables.launchHTML('config/assets/teatime.html');
                 } else if (currentTab === 1) {
-                    control.launchHTML('config/assets/hope.html');
+                    odkTables.launchHTML('config/assets/hope.html');
                 } else if (currentTab === 2) {
-                    control.launchHTML('config/assets/plotter.html');
+                    odkTables.launchHTML('config/assets/plotter.html');
                 } else if (currentTab === 3) {
                     // Note we're relying on geotagger's list view to be set.
-                    control.openTable(
+                    odkTables.openTable(
                         'geotagger',
                         null,
                         null);
                 } else if (currentTab === 4) {
-                    control.launchHTML('config/assets/jgiIndex.html');
+                    odkTables.launchHTML('config/assets/jgiIndex.html');
                 } else {
                     console.log('trouble, unrecognized tab');
                 }
@@ -58,29 +58,29 @@ function updateForTab(tab) {
     // Now add the current tab to active and update the description.
     if (tab === 0) {
         // Tea time in benin
-        fileUri = common.getFileAsUrl('config/assets/img/teaBackground.jpg');
+        fileUri = odkCommon.getFileAsUrl('config/assets/img/teaBackground.jpg');
         descriptionDiv.text('Explore the hottest fictional tea houses in Benin.');
         tabItem = $('#teaTimeTab');
     } else if (tab === 1) {
         // Hope study
-        fileUri = common.getFileAsUrl('config/assets/img/hopePic.JPG');
+        fileUri = odkCommon.getFileAsUrl('config/assets/img/hopePic.JPG');
         descriptionDiv.text('View the app used by healthcare workers for over eight months to track subjects in a study on HIV discordant couples.');
         tabItem = $('#hopeTab');
     } else if (tab === 2) {
         // Plotter
-        fileUri = common.getFileAsUrl(
+        fileUri = odkCommon.getFileAsUrl(
                 'config/assets/img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg');
         descriptionDiv.text('Review records of plot visits and monitor their progress.');
         tabItem = $('#plotterTab');
     } else if (tab === 3) {
         // geotagger
-        fileUri = common.getFileAsUrl(
+        fileUri = odkCommon.getFileAsUrl(
                 'config/assets/img/spaceNeedle_CCLicense_goCardUSA.jpg');
         descriptionDiv.text('See sites around Seattle plotted using Google maps.');
         tabItem = $('#geotaggerTab');
     } else if (tab === 4) {
         // scan
-        fileUri = common.getFileAsUrl(
+        fileUri = odkCommon.getFileAsUrl(
                 'config/assets/img/chimp.png');
         descriptionDiv.text('Follow a troop of chimps through the jungle.');
         tabItem = $('#jgiTab');

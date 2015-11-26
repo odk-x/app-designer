@@ -6,9 +6,9 @@
         <link href="../../../assets/css/plot-graph.css" type="text/css" rel="stylesheet" />
         <link href="../../../assets/css/plot-detail.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
-        <script type="text/javascript" src="../../../../system/tables/js/control.js"></script>
-        <script type="text/javascript" src="../../../../system/tables/js/common.js"></script>
-        <script type="text/javascript" src="../../../../system/tables/js/datarsp.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkData.js"></script>
         <script type="text/javascript" src="../../../assets/libs/d3-amd/d3.js"></script>
     </head>
     <body>
@@ -22,7 +22,7 @@
         <br>
         <p>Crop: <span id="crop"></span></p>
         <br>
-        <a href="#" onclick="control.openTableToListView(
+        <a href="#" onclick="odkTables.openTableToListView(
           'visit',
           'plot_id = ?',
           [plotDetailResultSet.getRowId(0)],

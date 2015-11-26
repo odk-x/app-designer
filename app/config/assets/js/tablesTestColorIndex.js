@@ -1,7 +1,7 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, control, data */
+/* global $, odkTables */
 'use strict';
  
 // This will be used to store the geotagger locations.
@@ -50,7 +50,7 @@ var resumeFn = function(idxStart) {
 
         // Get the KVS when set to true
         // Original query
-        datarsp.query('geotagger', null, null, null, null, null, null, true, cbFn, cbFnFailure, null, false);
+        odkData.query('geotagger', null, null, null, null, null, null, true, cbFn, cbFnFailure, null, false);
     }
 };
 
@@ -79,7 +79,7 @@ function displayGroup(idxStart) {
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
-        chevron.attr('src', control.getFileAsUrl('config/assets/img/little_arrow.png'));
+        chevron.attr('src', odkTables.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
                 

@@ -1,14 +1,14 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control */
+/* global $, odkTables */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/femaleClients_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/femaleClients_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -26,7 +26,7 @@ function createFormLauncherForEdit(tableId, formId, rowId, label, element) {
     formLauncher.setAttribute('class', 'forms');
     formLauncher.innerHTML = label;
     formLauncher.onclick = function() {
-        control.editRowWithSurvey(
+        odkTables.editRowWithSurvey(
                 tableId,
                 rowId,
                 formId,
@@ -40,7 +40,7 @@ function createFormLauncherForAdd(tableId, formId, jsonMap, label, element) {
     formLauncher.setAttribute('class', 'forms');
     formLauncher.innerHTML = label;
     formLauncher.onclick = function() {
-        control.addRowWithSurvey(
+        odkTables.addRowWithSurvey(
                 tableId,
                 formId,
                 null,
@@ -60,7 +60,7 @@ function display(result) {
     if(armText === '1') {
         armText = 'HOPE';
     } else if(armText === '2') {
-        armText = 'Control';
+        armText = 'odkTables';
     }
     document.getElementById('arm').innerHTML = armText;
 
@@ -85,7 +85,7 @@ function display(result) {
     console.log('in this particularly XXXXXXXXX file!');
     $(homeLocator).click(function() {
         console.log('In homeLocator click client_id is ' + clientId);
-        control.openTableToListView(
+        odkTables.openTableToListView(
             'geopoints',
             'client_id = ?',
             ['' + clientId],
@@ -168,7 +168,7 @@ function cbFailure(error) {
 
 // handles events from html page
 function setup() {
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 }
 
 $(document).ready(setup);

@@ -1,4 +1,4 @@
-/* global control, util */
+/* global odkTables, util */
 'use strict';
 
 function cbSuccess(result) {
@@ -14,7 +14,7 @@ function cbSuccess(result) {
         date,
         beginTime,
         focalChimpId);
-    var url = common.getFileAsUrl(
+    var url = odkCommon.getFileAsUrl(
             'config/assets/followScreen.html' + queryString);
 
     // There seems to be an issue with the way window.location is set here
@@ -50,7 +50,7 @@ function display() {
         var stringified = JSON.stringify(struct);
 
         var rowId = util.genUUID();
-        datarsp.addRow('follow', stringified, rowId, cbSuccess, cbFailure, null, false);
+        odkData.addRow('follow', stringified, rowId, cbSuccess, cbFailure, null, false);
     };
 
     $('#begin-follow').on('click', function() {

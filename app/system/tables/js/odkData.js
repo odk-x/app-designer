@@ -1,5 +1,5 @@
 /**
- * The dataif injected interface will be used in conjunction with this class to 
+ * The odkDataIf injected interface will be used in conjunction with this class to 
  * create closures for callback functions to be invoked once a response is available
  * from the Java side.
  */
@@ -8,7 +8,7 @@
 
 // TODO: Remove exposing user-level transaction
 
-window.datarsp = {
+window.odkData = {
     _requestMap: [],
 //     _tableKVSCacheMap: [],
     _transactionId: 0,
@@ -20,7 +20,7 @@ window.datarsp = {
 
         var req = that.queueRequest('getViewData', false, transId, successCallbackFn, failureCallbackFn);
 
-        dataif.getViewData(req._callbackId);
+        odkDataIf.getViewData(req._callbackId);
     },
 
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
@@ -31,10 +31,10 @@ window.datarsp = {
         var req = that.queueRequest('query', leaveTransOpen, transId, successCallbackFn, failureCallbackFn);
 
 //         var needToIncludeKVS = that.needToIncludeKVSInQuery(tableId);
-//         console.log('datarsp: query: Need to include the KVS is ' + needToIncludeKVS);
+//         console.log('odkData: query: Need to include the KVS is ' + needToIncludeKVS);
 
         // Test always make this false
-        dataif.query(tableId, whereClause, sqlBindParams, groupBy, 
+        odkDataIf.query(tableId, whereClause, sqlBindParams, groupBy, 
             having, orderByElementKey, orderByDirection, includeKVS, req._callbackId, req._trxnId, leaveTransOpen);
 //             having, orderByElementKey, orderByDirection, false, req._callbackId, req._trxnId, leaveTransOpen);
     },
@@ -45,7 +45,7 @@ window.datarsp = {
         var req = that.queueRequest('rawQuery', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
 		console.log('rawQuery cbId=' + req._callbackId);
 
-        dataif.rawQuery(sqlCommand, sqlBindParams, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.rawQuery(sqlCommand, sqlBindParams, req._callbackId, req._trxnId, leaveTransactionOpen);
     },
 
     updateRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
@@ -53,7 +53,7 @@ window.datarsp = {
 
         var req = that.queueRequest('udpateRow', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
 
-        dataif.updateRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.updateRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
     },
 
     deleteRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
@@ -61,7 +61,7 @@ window.datarsp = {
 
         var req = that.queueRequest('deleteRow', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
 
-        dataif.deleteRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.deleteRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
     },
 
     addRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
@@ -69,7 +69,7 @@ window.datarsp = {
 
         var req = that.queueRequest('addRow', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
 
-        dataif.addRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.addRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
     },
 
     addCheckpoint: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
@@ -77,7 +77,7 @@ window.datarsp = {
 
         var req = that.queueRequest('addCheckpoint', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
 
-        dataif.addCheckpoint(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.addCheckpoint(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
     },
 
     saveCheckpointAsIncomplete: function(tableId, rowId, successCallbackFn, 
@@ -87,7 +87,7 @@ window.datarsp = {
         var req = that.queueRequest('saveCheckpointAsIncomplete', leaveTransactionOpen, transId, successCallbackFn, 
             failureCallbackFn);
 
-        dataif.saveCheckpointAsIncomplete(tableId, rowId, req._callbackId, req._trxnId, leaveTransactionOpen); 
+        odkDataIf.saveCheckpointAsIncomplete(tableId, rowId, req._callbackId, req._trxnId, leaveTransactionOpen); 
     },
 
     saveCheckpointAsComplete: function(tableId, rowId, successCallbackFn, failureCallbackFn,
@@ -96,7 +96,7 @@ window.datarsp = {
 
         var req = that.queueRequest('saveCheckpointAsComplete', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
 
-        dataif.saveCheckpointAsComplete(tableId, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.saveCheckpointAsComplete(tableId, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
     },
 
     deleteLastCheckpoint: function(tableId, rowId, deleteAllCheckpoints, successCallbackFn, failureCallbackFn, 
@@ -105,7 +105,7 @@ window.datarsp = {
 
         var req = that.queueRequest('deleteLastCheckpoint', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
 
-        dataif.deleteLastCheckpoint(tableId, rowId, deleteAllCheckpoints, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.deleteLastCheckpoint(tableId, rowId, deleteAllCheckpoints, req._callbackId, req._trxnId, leaveTransactionOpen);
     },
 
     closeTransaction: function(transId, commitTransaction, successCallbackFn, failureCallbackFn) {
@@ -115,7 +115,7 @@ window.datarsp = {
         // passed in is used
         var req = that.queueRequest('closeTransaction', false, transId, successCallbackFn, failureCallbackFn);
 
-        dataif.closeTransaction(req._trxnId, commitTransaction, req._callbackId);
+        odkDataIf.closeTransaction(req._trxnId, commitTransaction, req._callbackId);
     },
 
     queueRequest: function (type, leaveTransOpen, transId, successCallbackFn, failureCallbackFn) {
@@ -146,7 +146,7 @@ window.datarsp = {
     },
 
     invokeCallbackFn: function (jsonResult, cbId) {
-        console.log('datarsp: invokeCallbackFn called with cbId ' + cbId);
+        console.log('odkData: invokeCallbackFn called with cbId ' + cbId);
         var that = this;
         var found = false;
 
@@ -170,13 +170,13 @@ window.datarsp = {
                 var trxn = that._requestMap[i];
                 that._requestMap.splice(i, 1);
                 if (errorMsg !== null && errorMsg !== undefined) {
-                    console.log('datarsp invokeCallbackFn error - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
+                    console.log('odkData invokeCallbackFn error - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
                     ' transId: ' + txId + ' error: ' + errorMsg);
                     if(trxn._failureCbFn !== null && trxn._failureCbFn !== undefined) {
                         (trxn._failureCbFn)(errorMsg);
                     }
                 } else {
-                    console.log('datarsp invokeCallbackFn success - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
+                    console.log('odkData invokeCallbackFn success - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
                     ' transId: ' + txId);
                     
                     // Need to update the cached KVS if we have a query request type
@@ -195,7 +195,7 @@ window.datarsp = {
         }
         
         if (!found) {
-            console.log('datarsp invokeCallbackFn - no callback found for callbackId: ' + cbId);
+            console.log('odkData invokeCallbackFn - no callback found for callbackId: ' + cbId);
         }
     },
     
@@ -213,13 +213,13 @@ window.datarsp = {
 //         
 //         if (tableKVSCache === null) {
 //             if (jsonResult.metadata.keyValueStoreList !== null && jsonResult.metadata.keyValueStoreList !== undefined) {
-//                 console.log('datarsp: invokeCallbackFn: adding KVS for tableId: ' + jsonResult.metadata.tableId);
+//                 console.log('odkData: invokeCallbackFn: adding KVS for tableId: ' + jsonResult.metadata.tableId);
 //                 tableKVSCache = {};
 //                 tableKVSCache.tableId = jsonResult.metadata.tableId;
 //                 tableKVSCache.keyValueStoreList = jsonResult.metadata.keyValueStoreList; 
 //                 that._tableKVSCacheMap.push(tableKVSCache);
 //             } else {
-//                 throw new Error('datarsp: tableKVSCache does not contain metadata for table id: ' + jsonResult.metadata.tableId + ' but should');   
+//                 throw new Error('odkData: tableKVSCache does not contain metadata for table id: ' + jsonResult.metadata.tableId + ' but should');   
 //             }
 //         }
 // 
@@ -236,7 +236,7 @@ window.datarsp = {
 //         for (var i = 0; i < that._tableKVSCacheMap.length; i++) {
 //             if (that._tableKVSCacheMap[i].tableId === tableId) {
 //                 tableKVSMetadata = that._tableKVSCacheMap[i].keyValueStoreList;
-//                 console.log('datarsp: getCachedMetadataForTableId: found KVS for tableId: ' + tableId);
+//                 console.log('odkData: getCachedMetadataForTableId: found KVS for tableId: ' + tableId);
 //                 break;
 //             }
 //         }
@@ -256,13 +256,13 @@ window.datarsp = {
 	responseAvailable: function() {
         var that = this;
 		setTimeout(function() {
-			var resultJSON = window.dataif.getResponseJSON();
-			//console.log('datarsp: resultJSON is ' + resultJSON);
+			var resultJSON = window.odkDataIf.getResponseJSON();
+			//console.log('odkData: resultJSON is ' + resultJSON);
 
 			var result = JSON.parse(resultJSON);
 
             var callbackFnStr = result.callbackJSON;
-			console.log('datarsp: callbackJSON is ' + callbackFnStr);
+			console.log('odkData: callbackJSON is ' + callbackFnStr);
 
             that.invokeCallbackFn(result, callbackFnStr);
 

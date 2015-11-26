@@ -1,13 +1,13 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, control */
+/* global $, odkTables */
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/plot_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/plot_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -42,7 +42,7 @@ function cbFailure(error) {
  * displayed at this iteration through the loop.
  */
 var resumeFn = function(fidxStart) {
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fidxStart;
     if (idxStart === 0) {
@@ -99,7 +99,7 @@ var resumeFn = function(fidxStart) {
           // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                control.openDetailView(
+                odkTables.openDetailView(
                     tableId,
                     rowId,
                     'config/tables/plot/html/plot_detail.html');
@@ -144,7 +144,7 @@ var displayGroup = function(idxStart) {
                 
         /* Creates arrow icon (Nothing to edit here) */
         //var chevron = $('<img>');
-        //chevron.attr('src', control.getFileAsUrl('config/assets/img/little_arrow.png'));
+        //chevron.attr('src', odkTables.getFileAsUrl('config/assets/img/little_arrow.png'));
         //chevron.attr('class', 'chevron');
         //item.append(chevron);
 
