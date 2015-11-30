@@ -1,14 +1,14 @@
 /**
  * The file for displaying the detail views of the Tea Types table.
  */
-/* global $, control, data */
+/* global $, odkTables, data */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/Tea_types_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/Tea_types_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             window.data.setBackingObject(dataObj);
@@ -44,6 +44,6 @@ function cbFailure(error) {
 
 var display = function() {
 
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 
 };

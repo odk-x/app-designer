@@ -1,13 +1,13 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, control, data */
+/* global $, odkTables, data */
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/geopoints_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/geopoints_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -22,7 +22,7 @@ var geopoints = {};
 
 function handleClick(rowId) {
     if (!$.isEmptyObject(geopoints)) {
-        control.openDetailView(
+        odkTables.openDetailView(
             geopoints.getTableId(),
             rowId,
             'config/tables/geopoints/html/geopoints_detail.html');
@@ -52,7 +52,7 @@ function render(result) {
     mapView.setAttribute('class', 'launchForm');
     mapView.innerHTML = 'Map View';
     mapView.onclick = function() {
-        control.openTableToMapView(
+        odkTables.openTableToMapView(
                 'geopoints',
                 'client_id = ?',
                 [clientId],
@@ -71,7 +71,7 @@ function render(result) {
     jsonMap = JSON.stringify(jsonMap);
 
     waypoint.onclick = function() {
-        control.addRowWithSurvey(
+        odkTables.addRowWithSurvey(
                 'geopoints',
                 'geopoints',
                 null,
@@ -96,7 +96,7 @@ function render(result) {
             var chevron = document.createElement('img');
             chevron.setAttribute(
                 'src',
-                common.getFileAsUrl('config/assets/img/little_arrow.png'));
+                odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
             chevron.setAttribute('class', 'chevron');
             item.appendChild(chevron);
 
@@ -122,5 +122,5 @@ function cbFailure(error) {
 }
 
 function display() {
-    datarsp.getViewData(render, cbFailure);
+    odkData.getViewData(render, cbFailure);
 }

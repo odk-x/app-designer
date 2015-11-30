@@ -4,10 +4,9 @@
         <meta name="viewport" content="width=device-width" />
         <link href="css/list.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="libs/jquery.js"></script>
-        <script type="text/javascript" src="../../system/tables/js/datarsp.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkData.js"></script>
         <script type="text/javascript" src="../../config/assets/js/util.js"></script>
         <script type="text/javascript" src="../../config/assets/js/tablesAPITestIndex.js"></script>
-        <script type="text/javascript" src="../../system/tables/js/androidData.js"></script>
     </head>
 
     <body>

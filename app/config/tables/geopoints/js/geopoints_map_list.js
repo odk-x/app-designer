@@ -1,14 +1,14 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, control, data */
+/* global $, odkTables, data */
 /* exported display, handleClick */
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/geopoints_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/geopoints_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -18,28 +18,29 @@
 //         }
 //     });
 // }
-
+var tableId = null;
 function handleClick(rowId) {
-    control.openDetailView(
-        data.getTableId(),
+    odkTables.openDetailView(
+        tableId,
         rowId,
         'config/tables/geopoints/html/geopoints_detail.html');
 }
 
-function display() {
-
+function render(result) {
     // The client id should have been passed to us as the hash.
     var hash = window.location.hash;
     var clientId = null;
     if (hash === '') {
         console.log('The hash containing the client id was not present!');
         console.log('Inferring from table');
-        clientId = data.get('client_id');
+        clientId = result.get('client_id');
     } else {
         // The has begins a physical hash. Strip it.
         clientId = hash.substring(1);
         console.log('client id is: ' + clientId);
     }
+
+    tableId = result.getTableId();
 
     // Create item to launch map view display
     //var mapView = document.createElement('p');
@@ -47,7 +48,7 @@ function display() {
     //mapView.innerHTML = 'Map View';
     //mapView.style.backgroundColor = '#66A3C2';
     //mapView.onclick = function() {
-        //control.openTableToMapView(
+        //odkTables.openTableToMapView(
                 //'geopoints',
                 //'client_id = ?',
                 //[clientId],
@@ -75,7 +76,7 @@ function display() {
     //waypoint.innerHTML = 'Add Waypoint';
     //document.getElementById('header').appendChild(waypoint);
 
-    for (var i = 0; i < data.getCount(); i++) {
+    for (var i = 0; i < result.getCount(); i++) {
 
         // Make list entry only if client id exists
         if(clientId !== null && clientId !== '') {
@@ -84,14 +85,14 @@ function display() {
             item.setAttribute('class', 'item_space');
             item.setAttribute(
                 'onClick',
-                'handleClick("' + data.getRowId(i) + '")');
+                'handleClick("' + result.getRowId(i) + '")');
             item.innerHTML = clientId;
             document.getElementById('list').appendChild(item);
 
             var chevron = document.createElement('img');
             chevron.setAttribute(
                 'src',
-                common.getFileAsUrl('config/assets/img/little_arrow.png'));
+                odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
             chevron.setAttribute('class', 'chevron');
             item.appendChild(chevron);
 
@@ -99,15 +100,24 @@ function display() {
 
             var step = document.createElement('li');
             step.setAttribute('class', 'detail');
-            step.innerHTML = 'Step: ' + data.getData(i, 'step');
+            step.innerHTML = 'Step: ' + result.getData(i, 'step');
             item.appendChild(step);
 
             var transportation = document.createElement('li');
             transportation.setAttribute('class', 'detail');
             transportation.innerHTML =
                 'Transportation: ' +
-                data.getData(i, 'transportation_mode');
+                result.getData(i, 'transportation_mode');
             item.appendChild(transportation);
         }
     }
+}
+
+function cbFailure(error) {
+    console.log('geopoints_map_list: cbFailure failed with error: ' + error);
+}
+
+
+function display() {
+    odkData.getViewData(render, cbFailure);
 }

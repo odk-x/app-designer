@@ -3,7 +3,7 @@
     <head>
         <link href="css/hope-homescreen.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="libs/jquery.js"></script>
-        <script type="text/javascript" src="../../system/tables/js/control.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript">
 
         // Displays homescreen
@@ -14,7 +14,7 @@
             newClient.setAttribute("id", "button1");
             newClient.innerHTML = "Screen Female Client";
             newClient.onclick = function() {
-                control.addRowWithSurvey(
+                odkTables.addRowWithSurvey(
                     'femaleClients',
                     'screenClient',
                     null,
@@ -28,7 +28,7 @@
             followUp.setAttribute("id", "button2");
             followUp.innerHTML = "Follow Up with Existing Client";
             followUp.onclick = function() {
-                control.openTableToListView(
+                odkTables.openTableToListView(
                     'femaleClients',
                     null,
                     null,

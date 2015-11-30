@@ -1,14 +1,14 @@
 /**
  * The file for displaying detail views of the Tea Houses table.
  */
-/* global $, control */
+/* global $, odkTables */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/Tea_houses_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/Tea_houses_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             window.data.setBackingObject(dataObj);
@@ -23,7 +23,7 @@ function onLinkClick() {
 
     if (!$.isEmptyObject(teaHouseResultSet))
     {
-        control.openTableToListView(
+        odkTables.openTableToListView(
           'Tea_inventory',
           'House_id = ?',
           [teaHouseResultSet.get('House_id')],
@@ -35,10 +35,10 @@ function cbSuccess(result) {
 
     teaHouseResultSet = result;
 
-    datarsp.query('Tea_types', 'Type_id = ?', [teaHouseResultSet.get('Specialty_Type_id')], 
+    odkData.query('Tea_types', 'Type_id = ?', [teaHouseResultSet.get('Specialty_Type_id')], 
         null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure, null, false);
 
-    datarsp.query('Tea_inventory', 'House_id = ?', [teaHouseResultSet.get('House_id')], 
+    odkData.query('Tea_inventory', 'House_id = ?', [teaHouseResultSet.get('House_id')], 
         null, null, null, null, true, teaInvCBSuccess, teaInvCBFailure, null, false);
 }
 
@@ -49,7 +49,7 @@ function cbFailure(error) {
 
 var display = function() {
 
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 }
 
 function teaTypeCBSuccess(result) {

@@ -1,14 +1,14 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control */
+/* global $, odkTables */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/visit_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/visit_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -42,7 +42,7 @@ function display() {
 
     var plotId = visitDetailResultSet.get('plot_id');
 
-//     var plots = control.query(
+//     var plots = odkTables.query(
 //         'plot',
 //         '_id = ?',
 //         [plotId]);
@@ -125,7 +125,7 @@ function cbSuccess(result) {
 
     plotId = visitDetailResultSet.get('plot_id');
 
-    datarsp.query('plot', '_id = ?', [plotId], null, null,
+    odkData.query('plot', '_id = ?', [plotId], null, null,
         null, null, true, cbPlotSuccess, cbPlotFailure, null, false);
 }
 
@@ -136,5 +136,5 @@ function cbFailure(error) {
 
 function setup() {
 
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 }

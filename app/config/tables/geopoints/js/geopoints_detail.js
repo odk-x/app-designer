@@ -1,15 +1,15 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control, data */
+/* global $, odkTables, data */
 /*exported display */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/geopoints_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/geopoints_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -25,7 +25,7 @@ function cbSuccess(result) {
     document.getElementById('title').innerHTML = clientId;
 
     // handles case when 'other' transportation mode is specified
-    if(data.get('transportation_mode') !== 'Other') {
+    if(result.get('transportation_mode') !== 'Other') {
         document.getElementById('transportationMode').innerHTML =
             result.get('transportation_mode');
     } else {
@@ -44,6 +44,6 @@ function cbFailure(error) {
 }
 
 function display() {
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 }
 

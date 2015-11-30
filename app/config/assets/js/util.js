@@ -64,7 +64,7 @@ util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure
         'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ?';
     var selectionArgs = [date, focalChimpId];
 
-    window.datarsp.query('follow_arrival', whereClause, selectionArgs, 
+    window.odkData.query('follow_arrival', whereClause, selectionArgs, 
         null, null, null, null, true, cbSuccess, cbFailure, null, false);
 };
 
@@ -78,7 +78,7 @@ util.getTableDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cb
         'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ? AND FA_time_start = ?';
     var selectionArgs = [date, focalChimpId, time];
 
-    window.datarsp.query('follow_arrival', whereClause, selectionArgs, 
+    window.odkData.query('follow_arrival', whereClause, selectionArgs, 
         null, null, null, null, true, cbSuccess, cbFailure, null, false);
 };
 
@@ -89,7 +89,7 @@ util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbF
 
     var selectionArgs = [date, focalChimpId, time];
 
-    window.datarsp.query('food_bout', whereClause, selectionArgs, 
+    window.odkData.query('food_bout', whereClause, selectionArgs, 
         null, null, null, null, true, cbSuccess, cbFailure, null, false);
 
 };
@@ -101,7 +101,7 @@ util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, 
 
     var selectionArgs = [date, focalChimpId, time];
 
-    window.datarsp.query('other_species', whereClause, selectionArgs, 
+    window.odkData.query('other_species', whereClause, selectionArgs, 
         null, null, null, null, true, cbSuccess, cbFailure, null, false);
 
 };

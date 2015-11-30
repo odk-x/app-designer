@@ -1,13 +1,13 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, control */
+/* global $, odkTables */
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/visit_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/visit_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -48,7 +48,7 @@ function cbSuccess(result)  {
 
     visitResultSet = result;
 
-    datarsp.query('plot', null, null, null, null, null,
+    odkData.query('plot', null, null, null, null, null,
          null, true, plotCBSuccess, plotCBFailure, null, false);
 }
 
@@ -65,7 +65,7 @@ function cbFailure(error) {
  * displayed at this iteration through the loop.
  */
 var resumeFn = function(fidxStart) {
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fidxStart;
     if (idxStart === 0) {
@@ -122,7 +122,7 @@ var resumeFn = function(fidxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                control.openDetailView(
+                odkTables.openDetailView(
                     tableId,
                     rowId,
                     'config/tables/visit/html/visit_detail.html');

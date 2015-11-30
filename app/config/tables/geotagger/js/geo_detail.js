@@ -1,10 +1,10 @@
-/* global $, control */
+/* global $, odkTables */
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/geotagger_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/geotagger_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             window.data.setBackingObject(dataObj);
@@ -28,7 +28,7 @@ function display() {
     var uriRelative = geoDetailResultSet.get('Image.uriFragment');
     var src = '';
     if (uriRelative !== null && uriRelative !== '') {
-        var uriAbsolute = common.getRowFileAsUrl(geoDetailResultSet.getTableId(), geoDetailResultSet.getRowId(0), uriRelative);
+        var uriAbsolute = odkCommon.getRowFileAsUrl(geoDetailResultSet.getTableId(), geoDetailResultSet.getRowId(0), uriRelative);
         src = uriAbsolute;
     }
 
@@ -46,5 +46,5 @@ function display() {
 
 function setup() {
 
-    datarsp.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure);
 }

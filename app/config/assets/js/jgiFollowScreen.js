@@ -1,11 +1,11 @@
-/* global common, util, alert */
+/* global odkCommon, util, alert */
 /* jshint camelcase:false */ 
 'use strict';
 
-// if (JSON.parse(common.getPlatformInfo()).container === 'Chrome') {
+// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
 //     console.log('Welcome to Tables debugging in Chrome!');
 //     $.ajax({
-//         url: common.getFileAsUrl('output/debug/follow_data.json'),
+//         url: odkCommon.getFileAsUrl('output/debug/follow_data.json'),
 //         async: false,  // do it first
 //         success: function(dataObj) {
 //             if (dataObj === undefined || dataObj === null) {
@@ -325,7 +325,7 @@ function display() {
         updateUIForAllSpecies();
         updateUIForFood();
 
-        datarsp.query('food_bout', null, null, null, null,
+        odkData.query('food_bout', null, null, null, null,
             null, null, true, dbInitCBSuccess, 
             dbInitCBFail, null, false);
     };
@@ -510,7 +510,7 @@ function display() {
                     olderFollowTime,
                     focalChimpId);
             var anchor = $('<a>');
-            //anchor.prop('href', common.getFileAsUrl(baseUrl + queryString));
+            //anchor.prop('href', odkCommon.getFileAsUrl(baseUrl + queryString));
             anchor.html(olderFollowTime);
             // Ok, and now yet another annoyance of dealing with the current
             // setup. We can't let the links launch themselves, as this
@@ -523,7 +523,7 @@ function display() {
             // string in the closure solves this.
             (function(queryStr) {
                 anchor.on('click', function() {
-                    var url = common.getFileAsUrl(baseUrl + queryStr);
+                    var url = odkCommon.getFileAsUrl(baseUrl + queryStr);
                     console.log('url: ' + url);
                     window.location.href = url;
                 });
@@ -737,7 +737,7 @@ function display() {
 
         // I need a callback function that will tell me once all of 
         // this initialization is done
-        datarsp.query('food_bout', null, null, null, null,
+        odkData.query('food_bout', null, null, null, null,
             null, null, true, dbInitCBSuccess, 
             dbInitCBFail, null, false);
     };
@@ -776,7 +776,7 @@ function display() {
 
         // I need a callback function that will tell me once 
         // the caches are done
-        datarsp.query('food_bout', null, null, null, null,
+        odkData.query('food_bout', null, null, null, null,
             null, null, true, cacheInitCBSuccess, 
             cacheInitCBFail, null, false);
     };
@@ -796,7 +796,7 @@ function display() {
 
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
-            window.datarsp.updateRow(
+            window.odkData.updateRow(
                     'other_species',
                     stringified,
                     rowId,
@@ -807,7 +807,7 @@ function display() {
             console.log('called updated species: ' + speciesId);
         } else {
             var newRowId = util.genUUID();
-            window.datarsp.addRow(
+            window.odkData.addRow(
                     'other_species',
                     stringified,
                     newRowId,
@@ -846,7 +846,7 @@ function display() {
         var stringified = JSON.stringify(struct);
 
         if (isUpdate) {
-            window.datarsp.updateRow(
+            window.odkData.updateRow(
                     'food_bout',
                     stringified,
                     rowId, 
@@ -857,7 +857,7 @@ function display() {
             console.log('called updated food: ' + foodId);
         } else {
             var newRowId = util.genUUID();
-            window.datarsp.addRow(
+            window.odkData.addRow(
                     'food_bout',
                     stringified,
                     newRowId,
@@ -930,12 +930,12 @@ function display() {
         
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
-            window.datarsp.updateRow('follow_arrival', stringified, rowId,
+            window.odkData.updateRow('follow_arrival', stringified, rowId,
                     cbAddRowFASuccess, cbAddRowFAFail, null, false);
             console.log('called update chimp: ' + chimpId);
         } else {
             var newRowId = util.genUUID();
-            window.datarsp.addRow('follow_arrival', stringified, newRowId, 
+            window.odkData.addRow('follow_arrival', stringified, newRowId, 
                     cbAddRowFASuccess, cbAddRowFAFail, null, false);
             console.log('called added chimp: ' + chimpId);
         }
@@ -1368,7 +1368,7 @@ function display() {
                 nextTime,
                 focalChimpId);
             var url =
-                common.getFileAsUrl('config/assets/followScreen.html' + queryString);
+                odkCommon.getFileAsUrl('config/assets/followScreen.html' + queryString);
             console.log('url: ' + url);
             window.location.href = url;
         }
