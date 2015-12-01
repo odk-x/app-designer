@@ -50,7 +50,7 @@ function display() {
         var stringified = JSON.stringify(struct);
 
         var rowId = util.genUUID();
-        odkData.addRow('follow', stringified, rowId, cbSuccess, cbFailure, null, false);
+        odkData.addRow('follow', stringified, rowId, cbSuccess, cbFailure);
     };
 
     $('#begin-follow').on('click', function() {

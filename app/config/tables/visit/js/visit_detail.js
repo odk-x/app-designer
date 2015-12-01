@@ -126,7 +126,7 @@ function cbSuccess(result) {
     plotId = visitDetailResultSet.get('plot_id');
 
     odkData.query('plot', '_id = ?', [plotId], null, null,
-        null, null, true, cbPlotSuccess, cbPlotFailure, null, false);
+        null, null, true, cbPlotSuccess, cbPlotFailure);
 }
 
 function cbFailure(error) {

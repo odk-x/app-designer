@@ -67,10 +67,10 @@ function cbSuccess(result) {
     teaInvResultSet = result;
 
     odkData.query('Tea_houses', null, null, null, null, null, null, true, 
-        teaHousesCBSuccess, teaHousesCBFailure, null, false);
+        teaHousesCBSuccess, teaHousesCBFailure);
 
     odkData.query('Tea_types', null, null, null, null, null, null, true, 
-        teaTypesCBSuccess, teaTypesCBFailure, null, false);
+        teaTypesCBSuccess, teaTypesCBFailure);
 
 }
 

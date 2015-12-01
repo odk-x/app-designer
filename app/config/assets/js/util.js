@@ -65,7 +65,7 @@ util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure
     var selectionArgs = [date, focalChimpId];
 
     window.odkData.query('follow_arrival', whereClause, selectionArgs, 
-        null, null, null, null, true, cbSuccess, cbFailure, null, false);
+        null, null, null, null, true, cbSuccess, cbFailure);
 };
 
 /**
@@ -79,7 +79,7 @@ util.getTableDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cb
     var selectionArgs = [date, focalChimpId, time];
 
     window.odkData.query('follow_arrival', whereClause, selectionArgs, 
-        null, null, null, null, true, cbSuccess, cbFailure, null, false);
+        null, null, null, null, true, cbSuccess, cbFailure);
 };
 
 util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
@@ -90,7 +90,7 @@ util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbF
     var selectionArgs = [date, focalChimpId, time];
 
     window.odkData.query('food_bout', whereClause, selectionArgs, 
-        null, null, null, null, true, cbSuccess, cbFailure, null, false);
+        null, null, null, null, true, cbSuccess, cbFailure);
 
 };
 
@@ -102,7 +102,7 @@ util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, 
     var selectionArgs = [date, focalChimpId, time];
 
     window.odkData.query('other_species', whereClause, selectionArgs, 
-        null, null, null, null, true, cbSuccess, cbFailure, null, false);
+        null, null, null, null, true, cbSuccess, cbFailure);
 
 };
 

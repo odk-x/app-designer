@@ -25,114 +25,98 @@ window.odkData = {
 
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
             orderByElementKey, orderByDirection, includeKVS, successCallbackFn, 
-            failureCallbackFn, transId, leaveTransOpen) {
+            failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('query', leaveTransOpen, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('query', successCallbackFn, failureCallbackFn);
 
 //         var needToIncludeKVS = that.needToIncludeKVSInQuery(tableId);
 //         console.log('odkData: query: Need to include the KVS is ' + needToIncludeKVS);
 
         // Test always make this false
         odkDataIf.query(tableId, whereClause, sqlBindParams, groupBy, 
-            having, orderByElementKey, orderByDirection, includeKVS, req._callbackId, req._trxnId, leaveTransOpen);
-//             having, orderByElementKey, orderByDirection, false, req._callbackId, req._trxnId, leaveTransOpen);
+            having, orderByElementKey, orderByDirection, includeKVS, req._callbackId);
+//             having, orderByElementKey, orderByDirection, false, req._callbackId);
     },
 
-    rawQuery: function(sqlCommand, sqlBindParams, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
+    rawQuery: function(sqlCommand, sqlBindParams, successCallbackFn, failureCallbackFn) {
         var that = this;
         
-        var req = that.queueRequest('rawQuery', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('rawQuery', successCallbackFn, failureCallbackFn);
 		console.log('rawQuery cbId=' + req._callbackId);
 
-        odkDataIf.rawQuery(sqlCommand, sqlBindParams, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.rawQuery(sqlCommand, sqlBindParams, req._callbackId);
     },
 
-    updateRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
+    getRow: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('udpateRow', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('getRow', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.updateRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.getRow(tableId, rowId, req._callbackId);
     },
 
-    deleteRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
+    updateRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('deleteRow', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('updateRow', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.deleteRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.updateRow(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
-    addRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
+    deleteRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('addRow', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('deleteRow', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.addRow(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.deleteRow(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
-    addCheckpoint: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn, transId, leaveTransactionOpen) {
+    addRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('addCheckpoint', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('addRow', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.addCheckpoint(tableId, stringifiedJSON, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.addRow(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
-    saveCheckpointAsIncomplete: function(tableId, rowId, successCallbackFn, 
-        failureCallbackFn, transId, leaveTransactionOpen) {
+    addCheckpoint: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('saveCheckpointAsIncomplete', leaveTransactionOpen, transId, successCallbackFn, 
-            failureCallbackFn);
+        var req = that.queueRequest('addCheckpoint', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.saveCheckpointAsIncomplete(tableId, rowId, req._callbackId, req._trxnId, leaveTransactionOpen); 
+        odkDataIf.addCheckpoint(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
-    saveCheckpointAsComplete: function(tableId, rowId, successCallbackFn, failureCallbackFn,
-        transId, leaveTransactionOpen) {
+    saveCheckpointAsIncomplete: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('saveCheckpointAsComplete', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('saveCheckpointAsIncomplete', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.saveCheckpointAsComplete(tableId, rowId, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.saveCheckpointAsIncomplete(tableId, stringifiedJSON, rowId, req._callbackId); 
     },
 
-    deleteLastCheckpoint: function(tableId, rowId, deleteAllCheckpoints, successCallbackFn, failureCallbackFn, 
-        transId, leaveTransactionOpen) {
+    saveCheckpointAsComplete: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('deleteLastCheckpoint', leaveTransactionOpen, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('saveCheckpointAsComplete', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.deleteLastCheckpoint(tableId, rowId, deleteAllCheckpoints, req._callbackId, req._trxnId, leaveTransactionOpen);
+        odkDataIf.saveCheckpointAsComplete(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
-    closeTransaction: function(transId, commitTransaction, successCallbackFn, failureCallbackFn) {
+    deleteLastCheckpoint: function(tableId, rowId, deleteAllCheckpoints, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        // Set leaveTransactionOpen to false to ensure that the transId 
-        // passed in is used
-        var req = that.queueRequest('closeTransaction', false, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('deleteLastCheckpoint', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.closeTransaction(req._trxnId, commitTransaction, req._callbackId);
+        odkDataIf.deleteLastCheckpoint(tableId, rowId, deleteAllCheckpoints, req._callbackId);
     },
 
-    queueRequest: function (type, leaveTransOpen, transId, successCallbackFn, failureCallbackFn) {
+    queueRequest: function (type, successCallbackFn, failureCallbackFn) {
         var that = this;
-
-        var txId = transId;
-        if (leaveTransOpen) {
-            if (txId === undefined || txId === null) {
-                txId = that._transactionId;
-                that._transactionId = that._transactionId + 1;
-            }
-        }
-
         var cbId = that._callbackId;
 
         var activeRequest = {
-            _trxnId: txId,
             _callbackId: cbId, 
             _successCbFn: successCallbackFn,
             _failureCbFn: failureCallbackFn,
@@ -159,11 +143,6 @@ window.odkData = {
             errorMsg = jsonResult.error;
         }
 
-        var txId = null;
-        if (jsonResult.transId !== null && jsonResult.transId !== undefined) {
-            txId = jsonResult.transId;
-        }
-
         var cbIdNum = parseInt(cbId);
         for (var i = 0; i < that._requestMap.length; i++) {
             if (that._requestMap[i]._callbackId === cbIdNum) {
@@ -171,13 +150,12 @@ window.odkData = {
                 that._requestMap.splice(i, 1);
                 if (errorMsg !== null && errorMsg !== undefined) {
                     console.log('odkData invokeCallbackFn error - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
-                    ' transId: ' + txId + ' error: ' + errorMsg);
+                    ' error: ' + errorMsg);
                     if(trxn._failureCbFn !== null && trxn._failureCbFn !== undefined) {
                         (trxn._failureCbFn)(errorMsg);
                     }
                 } else {
-                    console.log('odkData invokeCallbackFn success - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
-                    ' transId: ' + txId);
+                    console.log('odkData invokeCallbackFn success - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId);
                     
                     // Need to update the cached KVS if we have a query request type
 //                     if (trxn._requestType === 'query') {

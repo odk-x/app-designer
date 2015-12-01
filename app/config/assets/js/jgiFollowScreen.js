@@ -327,7 +327,7 @@ function display() {
 
         odkData.query('food_bout', null, null, null, null,
             null, null, true, dbInitCBSuccess, 
-            dbInitCBFail, null, false);
+            dbInitCBFail);
     };
 
     var cbFailFoodData = function (error) {
@@ -739,7 +739,7 @@ function display() {
         // this initialization is done
         odkData.query('food_bout', null, null, null, null,
             null, null, true, dbInitCBSuccess, 
-            dbInitCBFail, null, false);
+            dbInitCBFail);
     };
 
     var dbInitCBSuccess = function(result) {
@@ -778,7 +778,7 @@ function display() {
         // the caches are done
         odkData.query('food_bout', null, null, null, null,
             null, null, true, cacheInitCBSuccess, 
-            cacheInitCBFail, null, false);
+            cacheInitCBFail);
     };
 
     var writeForSpecies = function(isUpdate, rowId, speciesId, numPresent) {
@@ -801,9 +801,7 @@ function display() {
                     stringified,
                     rowId,
                     cbAddRowOSSuccess,
-                    cbAddRowOSFail,
-                    null,
-                    false);
+                    cbAddRowOSFail);
             console.log('called updated species: ' + speciesId);
         } else {
             var newRowId = util.genUUID();
@@ -812,9 +810,7 @@ function display() {
                     stringified,
                     newRowId,
                     cbAddRowOSSuccess,
-                    cbAddRowOSFail,
-                    null,
-                    false);
+                    cbAddRowOSFail);
             console.log('called added species: ' + speciesId);
         }
 
@@ -851,9 +847,7 @@ function display() {
                     stringified,
                     rowId, 
                     cbAddRowFBSuccess, 
-                    cbAddRowFBFail,
-                    null,
-                    false);
+                    cbAddRowFBFail);
             console.log('called updated food: ' + foodId);
         } else {
             var newRowId = util.genUUID();
@@ -862,9 +856,7 @@ function display() {
                     stringified,
                     newRowId,
                     cbAddRowFBSuccess,
-                    cbAddRowFBFail, 
-                    null,
-                    false);
+                    cbAddRowFBFail);
             console.log('called added food: ' + foodId);
         }
 
@@ -931,12 +923,12 @@ function display() {
         var stringified = JSON.stringify(struct);
         if (isUpdate) {
             window.odkData.updateRow('follow_arrival', stringified, rowId,
-                    cbAddRowFASuccess, cbAddRowFAFail, null, false);
+                    cbAddRowFASuccess, cbAddRowFAFail);
             console.log('called update chimp: ' + chimpId);
         } else {
             var newRowId = util.genUUID();
             window.odkData.addRow('follow_arrival', stringified, newRowId, 
-                    cbAddRowFASuccess, cbAddRowFAFail, null, false);
+                    cbAddRowFASuccess, cbAddRowFAFail);
             console.log('called added chimp: ' + chimpId);
         }
     };

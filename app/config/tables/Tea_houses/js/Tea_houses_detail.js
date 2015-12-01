@@ -36,10 +36,10 @@ function cbSuccess(result) {
     teaHouseResultSet = result;
 
     odkData.query('Tea_types', 'Type_id = ?', [teaHouseResultSet.get('Specialty_Type_id')], 
-        null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure, null, false);
+        null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
 
     odkData.query('Tea_inventory', 'House_id = ?', [teaHouseResultSet.get('House_id')], 
-        null, null, null, null, true, teaInvCBSuccess, teaInvCBFailure, null, false);
+        null, null, null, null, true, teaInvCBSuccess, teaInvCBFailure);
 }
 
 function cbFailure(error) {

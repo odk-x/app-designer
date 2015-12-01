@@ -64,7 +64,7 @@ function cbSuccess(result) {
     teaInvResultSet = result;
     
     odkData.query('Tea_types', 'Type_id = ?', [teaInvResultSet.get('Type_id')],
-        null, null, null, null, true, cbTypeSuccess, cbTypeFailure, null, false);
+        null, null, null, null, true, cbTypeSuccess, cbTypeFailure);
 }
 
 function cbFailure(error) {

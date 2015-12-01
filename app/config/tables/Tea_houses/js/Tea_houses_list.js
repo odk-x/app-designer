@@ -52,7 +52,7 @@ var cbSuccess = function(result) {
     // typeName so that we can display the name of each shop's specialty.
     if (idxStart === 0) {
         odkData.query('Tea_types', null, null, 
-            null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure, null, false);
+            null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
     }
 };
 

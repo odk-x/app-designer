@@ -49,7 +49,7 @@ function cbSuccess(result)  {
     visitResultSet = result;
 
     odkData.query('plot', null, null, null, null, null,
-         null, true, plotCBSuccess, plotCBFailure, null, false);
+         null, true, plotCBSuccess, plotCBFailure);
 }
 
 function cbFailure(error) {
