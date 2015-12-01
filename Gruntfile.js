@@ -530,67 +530,6 @@ module.exports = function (grunt) {
         });
 
     grunt.registerTask(
-        'adbpush-scan',
-        'Push only scan demo',
-        function() {
-            // In the beta demo we only want Survey. It had needed the system
-			// files, but we won't push them here. We only want a subset of the
-			// app/config/tables files. So, we are going to get everything except
-            // that directory and then add back in the ones that we want.
-            // The first parameter is an options object where we specify that
-            // we only want files--this is important because otherwise when
-            // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
-            var dirs = grunt.file.expand(
-                {filter: 'isFile',
-                 cwd: 'app' },
-                '**',
-                'config/assets/**',
-                '!system/**',
-				'!data/**',
-                '!output/**',
-                '!config/tables/**',
-                'config/tables/scan_childvacc_822_pg1/**',
-                'config/tables/scan_childvacc_822a_pg2/**',
-                'config/tables/scan_childvacc_825_pg3/**',
-                'config/tables/scan_childvacc_825_pg4/**',
-                'config/tables/scan_example/**',
-                'config/tables/scan_HIV_Patient_Record/**',
-                'config/tables/scan_HIV_Visit_Record/**');
-
-            // Now push these files to the phone.
-            dirs.forEach(function(fileName) {
-                //  Have to add app back into the file name for the adb push
-                var src = tablesConfig.appDir + '/' + fileName;
-                var dest =
-                    tablesConfig.deviceMount +
-                    '/' +
-                    tablesConfig.appName +
-                    '/' +
-                    fileName;
-                grunt.log.writeln('adb push ' + src + ' ' + dest);
-                grunt.task.run('exec:adbpush:' + src + ':' + dest);
-            });
-
-            // Change the tables.init to be applicable for scan
-            var srcTablesInit = 'app/config/assets/tables.init.scan';
-            var srcTablesIndex = 'app/config/assets/index_Scan.html';
-            var dest =
-                    tablesConfig.deviceMount +
-                    '/' +
-                    tablesConfig.appName +
-                    '/assets/';
-            grunt.log.writeln('adb push ' + srcTablesInit + ' ' + dest + 'tables.init');
-            grunt.task.run('exec:adbpush:' + srcTablesInit + ':' + dest + 'tables.init');
-
-            // Change the index.html to be applicable for scan
-            grunt.log.writeln('adb push ' + srcTablesIndex + ' ' + dest + 'index.html');
-            grunt.task.run('exec:adbpush:' + srcTablesIndex + ':' + dest + 'index.html');
-
-        });
-
-    grunt.registerTask(
         'adbpush-survey-demo-beta2',
         'Push everything for survey to the device',
         function() {
