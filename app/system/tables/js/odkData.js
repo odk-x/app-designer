@@ -18,7 +18,7 @@ window.odkData = {
         var that = this;
         var transId = null;
 
-        var req = that.queueRequest('getViewData', false, transId, successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('getViewData', successCallbackFn, failureCallbackFn);
 
         odkDataIf.getViewData(req._callbackId);
     },
@@ -48,10 +48,18 @@ window.odkData = {
         odkDataIf.rawQuery(sqlCommand, sqlBindParams, req._callbackId);
     },
 
-    getRow: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
+    getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var req = that.queueRequest('getRow', successCallbackFn, failureCallbackFn);
+        var req = that.queueRequest('getRows', successCallbackFn, failureCallbackFn);
+
+        odkDataIf.getRows(tableId, rowId, req._callbackId);
+    },
+
+    getMostRecentRow: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('getMostRecentRow', successCallbackFn, failureCallbackFn);
 
         odkDataIf.getRow(tableId, rowId, req._callbackId);
     },
@@ -104,12 +112,20 @@ window.odkData = {
         odkDataIf.saveCheckpointAsComplete(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
-    deleteLastCheckpoint: function(tableId, rowId, deleteAllCheckpoints, successCallbackFn, failureCallbackFn) {
+    deleteAllCheckpoints: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('deleteLastCheckpoint', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.deleteLastCheckpoint(tableId, rowId, deleteAllCheckpoints, req._callbackId);
+        odkDataIf.deleteAllCheckpoints(tableId, rowId, req._callbackId);
+    },
+
+    deleteLastCheckpoint: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('deleteLastCheckpoint', successCallbackFn, failureCallbackFn);
+
+        odkDataIf.deleteLastCheckpoint(tableId, rowId, req._callbackId);
     },
 
     queueRequest: function (type, successCallbackFn, failureCallbackFn) {

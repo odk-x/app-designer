@@ -6,8 +6,9 @@ verifyLoad('database',
     [opendatakit,databaseImpl,databaseUtils,databaseSchema,$]);
 return {
     readTableDefinition:function(ctxt, formDef, table_id, formPath) {
-        // we can accomplish this via a DataIf.getLastCheckpoint() call with a new instanceId, and specifying that
-        // we don't want to create the row. This will fetch an empty UserTable.
+        // we can accomplish this via
+		//  UserTable t <= DataIf.getMostRecentRow(model.table_id, genUUID(), postprocessorcb)
+		// This will fetch an empty UserTable.
         // and we then can process the results of that fetch.
         //
         databaseImpl.readTableDefinition(ctxt, formDef, table_id, formPath);
@@ -23,11 +24,18 @@ return {
     
     initializeInstance:function(ctxt, instanceId, instanceMetadataKeyValueMap) {
         
-        // For atomicity, we need:
-        //
-        // UserTable t = DataIf.getLastCheckpoint(modle.table_id, instanceId, createIfNotPresent=true, initialMetadataValueMap (???));
+		// TODO: confirm semantics
+		// If this is always creating a new row, we can just call addRow() and rely on the user to never 
+		// confound things by re-using an instanceId.
+		//
+        // Otherwise, we first try to read the entry:
+		// UserTable t <== DataIf.getMostRecentRow(model.table_id, instanceId, postprocessorcb);
+		// if ( t.getNumberOfRows() == 0 ) {
+	    //    UserTable t <= DataIf.addRow(modle.table_id, initialMetadataValueMap, instanceId, postprocessorcb);
+		// }
+		// In post-processor, update model with t.
         // 
-        // This returns the last checkpoint row for an instanceId, or the row itself if there is no checkpoint, or zero-length UserTable if we are not to create the row.
+        // This returns the last checkpoint row for an instanceId, or the row itself if there is no checkpoint, or zero-length UserTable if the row does not exist.
         databaseImpl.initializeInstance(ctxt, instanceId, instanceMetadataKeyValueMap);
     },
 
@@ -61,21 +69,20 @@ return {
     },
     
     save_all_changes:function(ctxt, model, formId, instanceId, asComplete) {
-        // if ( asComplete ) {
-        //   DataIf.saveCheckpointAsComplete(model.table_id, instanceId, callbackwrapper(ctxt));
+        // UserTable t;
+		// if ( asComplete ) {
+        //   t = DataIf.saveCheckpointAsComplete(model.table_id, keyValueMap, instanceId, callbackwrapper(ctxt));
         // } else {
-        //   DataIf.saveCheckpointAsIncomplete(model.table_id, instanceId, callbackwrapper(ctxt));
+        //   t = DataIf.saveCheckpointAsIncomplete(model.table_id, keyValueMap, instanceId, callbackwrapper(ctxt));
         // }
-
+		// In post-processor, update model with t.
         // BUGS: ???        
-        // NOTE: does not apply pending changes (?)
         // NOTE: does not apply changes into model (and does not mark it as stale)
         databaseImpl.save_all_changes(ctxt, model, formId, instanceId, asComplete);
     },
     
     ignore_all_changes:function(ctxt, model, formId, instanceId) {
-        // DataIf.deleteLastCheckpoint(model.table_id, instanceId, true, callbackwrapper(ctxt));
-
+        // DataIf.deleteAllCheckpoints(model.table_id, instanceId, callbackwrapper(ctxt));
         // BUGS: ???        
         // NOTE: does not reload model (marks it as stale)
         databaseImpl.ignore_all_changes(ctxt, model, formId, instanceId);
@@ -84,25 +91,20 @@ return {
     delete_checkpoints_and_row:function(ctxt, dbTableName, instanceId) {
         // This is a 2-step process
         // 
-        // DataIf.deleteLastCheckpoint( dbTableName, instanceId, deleteAll=true);
-        // DataIf.deleteRow(dbTableName, instanceId);
+        // UserTable t <= DataIf.deleteAllCheckpoints( dbTableName, instanceId);
+		// if ( t.getNumberOfRows() != 0 ) {
+        //   DataIf.deleteRow(dbTableName, instanceId);
+		// }
         databaseImpl.delete_checkpoints_and_row(ctxt, dbTableName, instanceId);
     },
     
     // almost primitive...
     get_all_data:function(ctxt, model, instanceId) {
 
-        // perhaps want:
-        //  UserTable t = DataIf.getLastCheckpoint(model.table_id, instanceId, createIfNotExists = false, set/defaultContentValues = {})
-        // which would return the last checkpoint or the row content. And throw error if doesn't exist.
-        //
-        // DataIf.rawQuery('select * from "' + model.table_id + '" as T where _id=? and ' + 
-        //    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + model.table_id +
-        //    '" as V where V._id=T._id)', [ instanceId ], callbackwrapper(wrappedctxt)
-        
+        // UserTable t = DataIf.getMostRecentRow(model.table_id, instanceId)
         // wrappedctxt:
         // successs(userTable) {
-        // if ( rowcount != 1 ) {
+        // if ( t.getNumberOfRows() != 1 ) {
         //    ctxt.failure("no row or multiple rows!");
         // } else {
         //    apply returned row content PLUS sessionVariables to update model
