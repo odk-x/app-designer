@@ -34,7 +34,7 @@ function writeOutDef(formDefStr) {
     var formDefJson = JSON.parse(formDefStr);
     var tableId = util.getTableIdFromFormDef(formDefJson);
 
-    var dtm = util.getDataTableModelFromFormDef(formDefJson);
+    var dtm = formDefJson.specification.dataTableModel;
 
     if (!fs.existsSync(defPath)) {
         var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
@@ -47,7 +47,7 @@ function writeOutProp(formDefStr) {
     var formDefJson = JSON.parse(formDefStr);
     var tableId = util.getTableIdFromFormDef(formDefJson);
 
-    var dtm = util.getDataTableModelFromFormDef(formDefJson);
+    var dtm = formDefJson.specification.dataTableModel;
 
 
     if (!fs.existsSync(propPath)) {

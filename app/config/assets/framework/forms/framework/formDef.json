@@ -137,11 +137,11 @@
         "_row_num": 25
       },
       {
-        "branch_label": "household_new",
+        "branch_label": "household",
         "_row_num": 26
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/household/forms/household_new/',null)",
+        "url": "'?' + opendatakit.getHashString('../config/tables/household/forms/household/',null)",
         "type": "external_link",
         "display": {
           "text": "Open form"
@@ -395,16 +395,21 @@
     ],
     "settings": [
       {
+        "setting_name": "table_id",
+        "value": "framework",
+        "_row_num": 2
+      },
+      {
         "setting_name": "form_id",
         "value": "framework",
         "comments": "The unique form id.",
-        "_row_num": 2
+        "_row_num": 3
       },
       {
         "setting_name": "form_version",
         "value": 20130828,
         "comments": "The version of this form",
-        "_row_num": 3
+        "_row_num": 4
       },
       {
         "setting_name": "survey",
@@ -413,7 +418,7 @@
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
         "showContents": false,
-        "_row_num": 4
+        "_row_num": 5
       }
     ],
     "choices": [
@@ -459,9 +464,9 @@
       },
       {
         "choice_list_name": "test_forms",
-        "data_value": "household_new",
+        "data_value": "household",
         "display": {
-          "text": "household_new"
+          "text": "household"
         },
         "_row_num": 7
       },
@@ -614,17 +619,22 @@
       "video": "app_path_localized"
     },
     "settings": {
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "framework",
+        "_row_num": 2
+      },
       "form_id": {
         "setting_name": "form_id",
         "value": "framework",
         "comments": "The unique form id.",
-        "_row_num": 2
+        "_row_num": 3
       },
       "form_version": {
         "setting_name": "form_version",
         "value": 20130828,
         "comments": "The version of this form",
-        "_row_num": 3
+        "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
@@ -633,18 +643,11 @@
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
         "showContents": false,
-        "_row_num": 4
-      },
-      "table_id": {
-        "setting_name": "table_id",
-        "value": "framework",
-        "comments": "The unique form id.",
-        "_row_num": 2,
-        "__rowNum__": 1
+        "_row_num": 5
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": [
           {
             "display": {
@@ -656,7 +659,7 @@
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 4,
+        "_row_num": 5,
         "value": "default"
       },
       "initial": {
@@ -666,7 +669,7 @@
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
         "showContents": false,
-        "_row_num": 4
+        "_row_num": 5
       }
     },
     "choices": {
@@ -713,9 +716,9 @@
         },
         {
           "choice_list_name": "test_forms",
-          "data_value": "household_new",
+          "data_value": "household",
           "display": {
-            "text": "household_new"
+            "text": "household"
           },
           "_row_num": 7
         },
@@ -1064,7 +1067,7 @@
             "promptIdx": 7
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/household/forms/household_new/',null)",
+            "url": "'?' + opendatakit.getHashString('../config/tables/household/forms/household/',null)",
             "type": "external_link",
             "display": {
               "text": "Open form"
@@ -1652,7 +1655,7 @@
           "_screen21": 14,
           "exampleForm": 16,
           "_screen24": 16,
-          "household_new": 18,
+          "household": 18,
           "_screen27": 18,
           "imnci_test": 20,
           "_screen30": 20,
@@ -1688,6 +1691,37 @@
           "_screen74": 51
         }
       }
-    }
+    },
+    "dataTableModel": {},
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "framework"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Common Javascript Framework\""
+      }
+    ]
   }
 }
