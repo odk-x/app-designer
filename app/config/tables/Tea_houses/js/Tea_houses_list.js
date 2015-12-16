@@ -114,6 +114,7 @@ var displayGroup = function(idxStart) {
         // We're going to select the ul and then start adding things to it.
         //var item = $('#list').append('<li>');
         var item = $('<li>');
+        item.attr('id', teaHouseResultSet.getRowId(i));
         item.attr('rowId', teaHouseResultSet.getRowId(i));
         item.attr('class', 'item_space');
         item.text(teaHouseResultSet.getData(i, 'Name'));
