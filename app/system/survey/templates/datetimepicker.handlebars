@@ -1,4 +1,4 @@
-<form role="form">
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
 <div class="form-group">
     <div class="container">
         <label for="picker-{{promptId}}">{{> labelHint}}</label>
@@ -6,7 +6,8 @@
             class="form-control"
             name="{{name}}"
             value="{{value}}"
-            style="background-color:#ffffff"
+			tabindex="0"
+			style="background-color:#ffffff"
             readonly
             {{#eachProperty inputAttributes}}
                 {{property}}="{{value}}"

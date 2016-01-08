@@ -3,7 +3,7 @@
         {{passiveError}}
     </div>
 {{/if}}
-<form role="form">
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
     <div class="form-group">
     {{> labelHint}}
     <fieldset
@@ -61,6 +61,7 @@
                         name="{{../name}}"
                         id="{{data_value}}"
                         value="{{data_value}}" 
+						tabindex="0"
                     />
                 {{#if display.image}}
                     <div>
@@ -86,13 +87,15 @@
                     {{/if}}
                     name="{{name}}"
                     id="other"
-                    value="other"/>
+                    value="other"
+					tabindex="0"/>
                     <label for="other" style="float:left">
                         <span class="select-text">Other:</span>
                         {{#if other.checked}}
                         <input class="input-other"
                             name="otherValue"
-                            value="{{other.value}}"/>
+                            value="{{other.value}}"
+							tabindex="0"/>
                         {{/if}}
                     </label>
             </label>
@@ -101,7 +104,7 @@
     {{#unless required}}
         {{#if false}}
         {{#if display.deselect}}
-            <a data-role="button" data-mini="true" class="deselect">{{localize display.deselect}}</a>
+            <a data-role="button" data-mini="true" class="deselect" tabindex="0">{{localize display.deselect}}</a>
         {{/if}}
         {{/if}}
     {{/unless}}

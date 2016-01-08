@@ -1,4 +1,4 @@
-<form role="form">
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
 <div class="form-group">
     <label for="slider-{{promptId}}">{{> labelHint}}</label>
     <div class="input-container">{{! used to prevent swiping on sliders}}
@@ -6,6 +6,7 @@
         class="form-control"
         name="{{name}}"
         value="{{value}}"
+		tabindex="0"
         {{#eachProperty inputAttributes}}
             {{property}}="{{value}}"
         {{/eachProperty}}

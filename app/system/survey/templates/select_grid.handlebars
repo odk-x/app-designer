@@ -3,7 +3,7 @@
         {{passiveError}}
     </div>
 {{/if}}
-<form>
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
     {{> labelHint}}
     <table class="table table-bordered">
         <tbody>
@@ -31,7 +31,8 @@
                             {{! the name attribute has to be the same for all the options}}
                             name="{{../name}}"
                             id="{{data_value}}"
-                            value="{{data_value}}" />
+                            value="{{data_value}}"
+							tabindex="0"/>
                         {{#if display.image}}
                             <center>
                                 <img src="{{formDirectory}}{{localize display.image}}"></img>
@@ -50,7 +51,7 @@
     {{#unless required}}
         {{#if false}}
         {{#if display.deselect}}
-            <a data-role="button" data-mini="true" class="deselect">{{localize display.deselect}}</a>
+            <a data-role="button" data-mini="true" class="deselect" tabindex="0">{{localize display.deselect}}</a>
         {{/if}}
         {{/if}}
     {{/unless}}

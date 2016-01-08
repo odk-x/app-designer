@@ -3,7 +3,7 @@
         {{passiveError}}
     </div>
 {{/if}}
-<form>
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
 	<div class="inline-label-container">
         {{> labelHint}}
     </div>
@@ -62,7 +62,8 @@
                         {{! the name attribue has to be the same for all the options}}
                         name="{{../name}}"
                         id="{{data_value}}"
-                        value="{{data_value}}" />
+                        value="{{data_value}}"
+						tabindex="0"/>
                     {{#if display.image}}
                         <div>
                             <img src="{{formDirectory}}{{localize display.image}}"></img>
@@ -79,7 +80,7 @@
         {{#if false}}
         {{#if display.deselect}}
             <div style="clear:both;"></div>
-            <a data-role="button" data-mini="true" class="deselect inline-deselect">{{localize display.deselect}}</a>
+            <a data-role="button" data-mini="true" class="deselect inline-deselect" tabindex="0">{{localize display.deselect}}</a>
         {{/if}}
     	{{/if}}
     {{/unless}}

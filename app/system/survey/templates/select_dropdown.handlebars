@@ -3,9 +3,9 @@
         {{passiveError}}
     </div>
 {{/if}}
-<form>
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
     {{> labelHint}}
-    <select class="form-control" name="{{name}}">        
+    <select class="form-control" name="{{name}}" tabindex="0">        
         {{#each choices}}
             <option 
                 {{#if checked}}

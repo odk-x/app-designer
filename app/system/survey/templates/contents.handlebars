@@ -2,7 +2,7 @@
 <div class="btn-group-vertical" style="display:block; padding:5px">
     {{#each prompts}}
         {{#unless hideInContents}}
-            <a href="#" class="select-contents-item launch btn btn-default" role="button" label="{{_branch_label_enclosing_screen}}" style="padding:10px">
+            <a href="#" class="select-contents-item launch btn btn-default" label="{{_branch_label_enclosing_screen}}" tabindex="0" style="padding:10px">
                 {{#if display.title}}
                     <h4 class="contents-heading">{{#if display.title}}{{{localize display.title}}}{{/if}}</h4>
                 {{else}}

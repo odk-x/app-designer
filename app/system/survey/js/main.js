@@ -36,7 +36,7 @@ requirejs.config({
         // functionality
         screens : 'survey/js/screens',
         prompts : 'survey/js/prompts',
-		database : 'survey/js/database',
+        database : 'survey/js/database',
         databaseImpl : 'survey/js/databaseImpl',
         databaseUtils : 'survey/js/databaseUtils',
         databaseSchema : 'survey/js/databaseSchema',
@@ -112,6 +112,45 @@ requirejs.config({
 function redrawHook() {
     require('controller').redrawHook();
 }
+
+/**
+ * This function is the action for form tags that wrap input fields.
+ * It seeks to change focus off of the currently-in-focus element and 
+ * place the following object into focus.
+ */
+function odkLeaveField(theForm) {
+	/* Tabbing advances through the fields
+	 * provided there are tabindex attributes on them.
+	 * But hitting Enter, Next or Go does not.
+	 *
+	 * Try to make them behave similarly.
+	 *
+	 * The tabbing does not wrap, but we
+	 * will make Enter, Next or Go wrap.
+	 */
+	var $fields = $('body > * [tabindex]');
+    var $form = $(theForm);
+	var $formField = $(theForm).find('* * [tabindex]').filter(':last');
+	var idxFound = null;
+	$fields.each(function(idx,domElement) {
+		if ( $formField.is(domElement) ) {
+			idxFound = idx;
+			return false;
+		}
+		return true;
+	});
+	
+	var $next;
+	if ( idxFound !== null ) {
+		$next = $fields.eq(idxFound+1);
+	} else {
+		$next = $fields.eq(0);
+	}
+    if ( $next !== null && $next !== undefined ) {
+        $next.focus();
+    }
+}
+
 /**
  * Test to confirm that all required dependencies have
  * been loaded. If there is a circular dependency, it will

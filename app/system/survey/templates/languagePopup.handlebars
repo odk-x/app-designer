@@ -1,11 +1,10 @@
-<div class="modal" id="languagePopup" tabindex="-1" role="dialog" 
-        aria-labelledby="languageModal" aria-hidden="true">
+<div class="modal" id="languagePopup" tabindex="-1" aria-labelledby="languageModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="btn-group-vertical" style="display:block;">
                     {{#each locales}}
-                        <a href="#" id="{{name}}" class="language btn btn-default" role="button" > 
+                        <a href="#" id="{{name}}" class="language btn btn-default"> 
                             {{localize display.text}}
                         </a>
                     {{/each}}
