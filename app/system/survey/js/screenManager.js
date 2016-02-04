@@ -71,7 +71,7 @@ return Backbone.View.extend({
 
         if (needToDelete) {
             for (var propName in that.events){
-                shim.log('D',"screenManager.enableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);    
+                odkCommon.log('D',"screenManager.enableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);    
             }
             
             // Need to redelegate the swipe events here
@@ -96,7 +96,7 @@ return Backbone.View.extend({
         } 
         if (needToDelete) {
             for (var propName in that.events){
-                shim.log('D',"screenManager.disableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);    
+                odkCommon.log('D',"screenManager.disableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);    
             }
             // Need to redelegate the swipe events here
             that.delegateEvents();

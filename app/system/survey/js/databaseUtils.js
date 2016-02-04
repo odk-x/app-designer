@@ -4,7 +4,7 @@
  * and as serialized into and out of the database or session storage.
  *
  * NOTE: all usage of the opendatakit object is stateless -- we are just using
- * simple conversion methods defined in that object and are not accessing any 
+ * simple conversion methods defined in that object and are not accessing any
  * other state.
  */
 define(['opendatakit','XRegExp'], function(opendatakit,XRegExp) {
@@ -17,7 +17,7 @@ return {
          * ODK processor reserved names
          *
          * For template substitution, we reserve 'calculates' so that
-         * the {{#substitute}} directive can substitute values and 
+         * the {{#substitute}} directive can substitute values and
          * calculates into a display string.
          */
         calculates: true,
@@ -155,11 +155,11 @@ return {
         where: true
     },
     // Unicode extensions to standard RegExp...
-    _pattern_valid_user_defined_name: 
+    _pattern_valid_user_defined_name:
         XRegExp('^\\p{L}\\p{M}*(\\p{L}\\p{M}*|\\p{Nd}|_)*$', 'A'),
     _isValidElementPath: function(path) {
         var that = this;
-        if ( path == null ) {
+        if ( path === null || path === undefined ) {
             return false;
         }
         if ( path.length > 62 ) {
@@ -187,7 +187,7 @@ return {
         var elementType;
         var key;
         var jsonSubDefn;
-        
+
         for ( startKey in dataTableModel ) {
             jsonDefn = dataTableModel[startKey];
             if ( jsonDefn.notUnitOfRetention ) {
@@ -235,11 +235,21 @@ return {
         }
     },
     isUnitOfRetention: function(jsonDefn) {
-        if (jsonDefn.notUnitOfRetention) return false;
+        if (jsonDefn.notUnitOfRetention) {
+            return false;
+        }
         return true;
     },
-    _fromDatabaseToElementType: function( jsonType, value ) {
+    // jsonType == { isNotNullable:
+    //                    true/false,
+    //               type:
+    //                    one of array, object, string, boolean, number, integer, ...
+    _fromOdkDataInterfaceToElementType: function( jsonType, value ) {
         var that = this;
+        var refined;
+        var itemType;
+        var item;
+        var itemValue;
         // date conversion elements...
         var hh, min, sec, msec;
 
@@ -249,18 +259,132 @@ return {
             }
             return null;
         }
-        
-        // Do not allow empty strings. 
+
+        // Do not allow empty strings.
         // Strings are either NULL or non-zero-length.
         //
         if ( value === "" ) {
             throw new Error("unexpected empty (zero-length string) value for field");
         }
-        
+
         if ( jsonType.type === 'array' ) {
-            value = JSON.parse(value);
             // TODO: ensure object spec conformance on read?
+            if ( value instanceof Array ) {
+                refined = [];
+                itemType = jsonType.items;
+                if (itemType === undefined || itemType === null ) {
+                    return value;
+                } else {
+                    for ( item = 0 ; item < value.length ; ++item ) {
+                        itemValue = that._fromOdkDataInterfaceToElementType( itemType, value[item] );
+                        refined.push(itemValue);
+                    }
+                    return refined;
+                }
+            } else {
+                throw new Error("unexpected non-array value");
+            }
+        } else if ( jsonType.type === 'object' ) {
+            if ( jsonType.elementType === 'date' ||
+                 jsonType.elementType === 'dateTime' ) {
+                // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                // this does not preserve the nanosecond field...
+                return opendatakit.convertNanosToDateTime(value);
+            } else if ( jsonType.elementType === 'time' ) {
+                // convert from a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
+                // this does not preserve the nanosecond field...
+                var idx = value.indexOf(':');
+                hh = Number(value.substring(0,idx));
+                min = Number(value.substr(idx+1,2));
+                sec = Number(value.substr(idx+4,2));
+                msec = Number(value.substr(idx+7,3));
+                value = new Date();
+                value.setHours(hh,min,sec,msec);
+                return value;
+            } else if ( jsonType.properties ) {
+                // otherwise, enforce spec conformance...
+                // Only values in the properties list, and those
+                // must match the type definitions recursively.
+                refined = {};
+                for ( item in jsonType.properties ) {
+                    if ( value[item] !== null && value[item] !== undefined ) {
+                        itemType = jsonType.properties[item];
+                        itemValue = that._fromOdkDataInterfaceToElementType(itemType, value[item]);
+                        refined[item] = itemValue;
+                    }
+                }
+                return refined;
+            } else {
+                // opaque
+                return value;
+            }
+        } else if ( jsonType.type === 'boolean' ) {
+            return value; // should already be a boolean
+        } else if ( jsonType.type === 'integer' ) {
+            value = Number(value);
+            if ( Math.round(value) != value ) {
+                throw new Error("non-integer value for integer type");
+            }
             return value;
+        } else if ( jsonType.type === 'number' ) {
+            return Number(value);
+        } else if ( jsonType.type === 'string' ) {
+            return '' + value;
+        } else if ( jsonType.type === 'rowpath' ) {
+            return '' + value;
+        } else if ( jsonType.type === 'configpath' ) {
+            return '' + value;
+        } else {
+            odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            return '' + value;
+        }
+    },
+    _fromSerializationToElementType: function( jsonType, value, toplevel ) {
+        var that = this;
+        var refined;
+        var itemType;
+        var item;
+        var itemValue;
+        // date conversion elements...
+        var hh, min, sec, msec;
+
+        if ( value === undefined || value === null ) {
+            if ( jsonType.isNotNullable ) {
+                throw new Error("unexpected null value for non-nullable field");
+            }
+            return null;
+        }
+
+        // Do not allow empty strings.
+        // Strings are either NULL or non-zero-length.
+        //
+        if ( value === "" ) {
+            throw new Error("unexpected empty (zero-length string) value for field");
+        }
+
+        if ( jsonType.type === 'array' ) {
+            if ( toplevel ) {
+                value = JSON.parse(value);
+            }
+            if ( value === null || value === undefined ) {
+                return null;
+            }
+            // TODO: ensure object spec conformance on read?
+            if ( value instanceof Array ) {
+                refined = [];
+                itemType = jsonType.items;
+                if (itemType === undefined || itemType === null ) {
+                    return value;
+                } else {
+                    for ( item = 0 ; item < value.length ; ++item ) {
+                        itemValue = that._fromSerializationToElementType( itemType, value[item], false );
+                        refined.push(itemValue);
+                    }
+                    return refined;
+                }
+            } else {
+                throw new Error("unexpected non-array value");
+            }
         } else if ( jsonType.type === 'object' ) {
             if ( jsonType.elementType === 'date' ||
                  jsonType.elementType === 'dateTime' ) {
@@ -279,19 +403,45 @@ return {
                 value.setHours(hh,min,sec,msec);
                 return value;
             } else {
-                value = JSON.parse(value);
-                return value;
+                if ( toplevel ) {
+                    value = JSON.parse(value);
+                }
+                if ( value === null || value === undefined ) {
+                    return null;
+                }
+                if ( jsonType.properties ) {
+                    // otherwise, enforce spec conformance...
+                    // Only values in the properties list, and those
+                    // must match the type definitions recursively.
+                    refined = {};
+                    for ( item in jsonType.properties ) {
+                        if ( value[item] !== null && value[item] !== undefined ) {
+                            itemType = jsonType.properties[item];
+                            itemValue = that._fromSerializationToElementType( itemType, value[item], false );
+                            refined[item] = itemValue;
+                        }
+                    }
+                    return refined;
+                } else {
+                    // opaque
+                    return value;
+                }
             }
         } else if ( jsonType.type === 'boolean' ) {
-            return (value === undefined || value === null) ? null : (Number(value) !== 0); // '0' is false. 
+            if ( toplevel ) {
+                value = JSON.parse(value);
+            }
+            return value;
         } else if ( jsonType.type === 'integer' ) {
-            value = Number(value);
-            if ( Math.round(value) != value ) {
-                throw new Error("non-integer value for integer type");
+            if ( toplevel ) {
+                value = JSON.parse(value);
             }
             return value;
         } else if ( jsonType.type === 'number' ) {
-            return Number(value);
+            if ( toplevel ) {
+                value = JSON.parse(value);
+            }
+            return value;
         } else if ( jsonType.type === 'string' ) {
             return '' + value;
         } else if ( jsonType.type === 'rowpath' ) {
@@ -299,39 +449,201 @@ return {
         } else if ( jsonType.type === 'configpath' ) {
             return '' + value;
         } else {
-            shim.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
             return '' + value;
         }
     },
-toDatabaseFromElementType: function( jsonType, value ) {
+    //  type:  one of array, object, string, boolean, number, integer, ...
+    fromKVStoreToElementType: function( type, value ) {
+        var that = this;
+
+        if ( value === undefined || value === null ) {
+            return null;
+        }
+
+        // Do not allow empty strings.
+        // Strings are either NULL or non-zero-length.
+        //
+        if ( value === "" ) {
+            return null;
+        }
+
+        if ( type === 'array' ) {
+            return '' + value;
+        } else if ( type === 'object' ) {
+            return '' + value;
+        } else if ( type === 'boolean' ) {
+            return (value === undefined || value === null) ? null :
+                       ((typeof value === 'number') ? (Number(value) !== 0) : (value.toLowerCase() === 'true')); // '0' is false.
+        } else if ( type === 'integer' ) {
+            value = Number(value);
+            if ( Math.round(value) != value ) {
+                throw new Error("non-integer value for integer type");
+            }
+            return value;
+        } else if ( type === 'number' ) {
+            return Number(value);
+        } else if ( type === 'string' ) {
+            return '' + value;
+        } else if ( type === 'rowpath' ) {
+            return '' + value;
+        } else if ( type === 'configpath' ) {
+            return '' + value;
+        } else {
+            odkCommon.log('W',"unrecognized JSON schema type: " + type + " treated as string");
+            return '' + value;
+        }
+    },
+    toSerializationFromElementType: function( jsonType, value, toplevel ) {
         var that = this;
         var refined;
         var itemType;
         var item;
         var itemValue;
         // date conversion elements...
-        var yyyy, mm, dd, hh, min, sec, msec, zsign, zhh, zmm;
+        var hh, min, sec, msec;
 
         if ( value === undefined || value === null ) {
-            if ( jsontype.isNotNullable ) {
+            if ( jsonType.isNotNullable ) {
                 throw new Error("unexpected null value for non-nullable field");
             }
             return null;
         }
-        
+
         if ( jsonType.type === 'array' ) {
             // ensure that it is an array of the appropriate type...
             if ( value instanceof Array ) {
                 refined = [];
                 itemType = jsonType.items;
                 if (itemType === undefined || itemType === null ) {
-                    value = JSON.stringify(value);
+                    // leave as-is -- assume user did the correct conversions
                 } else {
                     for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that.toDatabaseFromElementType( itemType, value[item] );
+                        itemValue = that.toSerializationFromElementType( itemType, value[item], false );
                         refined.push(itemValue);
                     }
-                    value = JSON.stringify(refined);
+                    value = refined;
+                }
+            } else {
+                throw new Error("unexpected non-array value");
+            }
+            if ( toplevel ) {
+                return JSON.stringify(value);
+            } else {
+                return value;
+            }
+        } else if ( jsonType.type === 'object' ) {
+            if ( jsonType.elementType === 'dateTime' ||
+                 jsonType.elementType === 'date' ) {
+                if ( value instanceof String ) {
+                    return value;
+                } else {
+                    // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                    return opendatakit.convertDateTimeToNanos(value);
+                }
+            } else if ( jsonType.elementType === 'time' ) {
+                if ( value instanceof String ) {
+                    return value;
+                } else {
+                    // convert to a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
+                    // strip off the time-of-day and drop the rest...
+                    hh = value.getHours();
+                    min = value.getMinutes();
+                    sec = value.getSeconds();
+                    msec = value.getMilliseconds();
+                    value = opendatakit.padWithLeadingZeros(hh,2) + ':' +
+                            opendatakit.padWithLeadingZeros(min,2) + ':' +
+                            opendatakit.padWithLeadingZeros(sec,2) + '.' +
+                            opendatakit.padWithLeadingZeros(msec,3) + '000000';
+                    return value;
+                }
+            } else if ( !jsonType.properties ) {
+                // this is an opaque BLOB w.r.t. database layer
+                if ( toplevel ) {
+                    return JSON.stringify(value);
+                } else {
+                    return value;
+                }
+            } else {
+                // otherwise, enforce spec conformance...
+                // Only values in the properties list, and those
+                // must match the type definitions recursively.
+                refined = {};
+                for ( item in jsonType.properties ) {
+                    if ( value[item] !== null && value[item] !== undefined ) {
+                        itemType = jsonType.properties[item];
+                        itemValue = that.toSerializationFromElementType( itemType, value[item], false );
+                        refined[item] = itemValue;
+                    }
+                }
+                if ( toplevel ) {
+                    return JSON.stringify(refined);
+                } else {
+                    return refined;
+                }
+            }
+        } else if ( jsonType.type === 'boolean' ) {
+            value = value ? true : false; // make it a real boolean
+            if ( toplevel ) {
+                return JSON.stringify(value);
+            } else {
+                return value;
+            }
+        } else if ( jsonType.type === 'integer' ) {
+            value = Math.round(value);
+            if ( toplevel ) {
+                return JSON.stringify(value);
+            } else {
+                return value;
+            }
+        } else if ( jsonType.type === 'number' ) {
+            value = Number(value);
+            if ( toplevel ) {
+                return JSON.stringify(value);
+            } else {
+                return value;
+            }
+        } else if ( jsonType.type === 'string' ) {
+            return '' + value;
+        } else if ( jsonType.type === 'rowpath' ) {
+            return '' + value;
+        } else if ( jsonType.type === 'configpath' ) {
+            return '' + value;
+        } else {
+            odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            return '' + value;
+        }
+    },
+    toOdkDataInterfaceFromElementType: function( jsonType, value ) {
+        var that = this;
+        var refined;
+        var itemType;
+        var item;
+        var itemValue;
+        // date conversion elements...
+        var hh, min, sec, msec;
+
+        if ( value === undefined || value === null ) {
+            if ( jsonType.isNotNullable ) {
+                throw new Error("unexpected null value for non-nullable field");
+            }
+            return null;
+        }
+
+        if ( jsonType.type === 'array' ) {
+            // ensure that it is an array of the appropriate type...
+            if ( value instanceof Array ) {
+                refined = [];
+                itemType = jsonType.items;
+                if (itemType === undefined || itemType === null ) {
+                    // leave it as-is. This might screw up embedded datetimes, etc.
+                } else {
+                    // make sure the items are converted
+                    for ( item = 0 ; item < value.length ; ++item ) {
+                        itemValue = that.toOdkDataInterfaceFromElementType( itemType, value[item] );
+                        refined.push(itemValue);
+                    }
+                    value = refined;
                 }
             } else {
                 throw new Error("unexpected non-array value");
@@ -340,9 +652,17 @@ toDatabaseFromElementType: function( jsonType, value ) {
         } else if ( jsonType.type === 'object' ) {
             if ( jsonType.elementType === 'dateTime' ||
                  jsonType.elementType === 'date' ) {
+                // already a string? -- assume it is nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                if ( value instanceof String ) {
+                    return value;
+                }
                 // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
                 return opendatakit.convertDateTimeToNanos(value);
             } else if ( jsonType.elementType === 'time' ) {
+                // already a string? -- assume it is nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
+                if ( value instanceof String ) {
+                    return value;
+                }
                 // convert to a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
                 // strip off the time-of-day and drop the rest...
                 hh = value.getHours();
@@ -356,31 +676,30 @@ toDatabaseFromElementType: function( jsonType, value ) {
                 return value;
             } else if ( !jsonType.properties ) {
                 // this is an opaque BLOB w.r.t. database layer
-                return JSON.stringify(value);
+                // leave it as-is.
+                return value;
             } else {
                 // otherwise, enforce spec conformance...
                 // Only values in the properties list, and those
                 // must match the type definitions recursively.
                 refined = {};
                 for ( item in jsonType.properties ) {
-                    if ( value[item] != null ) {
+                    if ( value[item] !== null && value[item] !== undefined ) {
                         itemType = jsonType.properties[item];
-                        itemValue = that.toDatabaseFromElementType(itemType, value[item]);
-                        if ( itemValue != null ) {
-                            refined[item] = itemValue;
-                        }
+                        itemValue = that.toOdkDataInterfaceFromElementType( itemType, value[item] );
+                        refined[item] = itemValue;
                     }
                 }
-                value = JSON.stringify(refined);
+                value = refined;
                 return value;
             }
         } else if ( jsonType.type === 'boolean' ) {
-            return (value ? '1' : '0'); // make it a boolean
+            return value ? true : false; // force it to boolean
         } else if ( jsonType.type === 'integer' ) {
-            value = '' + Math.round(value);
+            value = Math.round(value);
             return value;
         } else if ( jsonType.type === 'number' ) {
-            return '' + value;
+            return value;
         } else if ( jsonType.type === 'string' ) {
             return '' + value;
         } else if ( jsonType.type === 'rowpath' ) {
@@ -388,17 +707,17 @@ toDatabaseFromElementType: function( jsonType, value ) {
         } else if ( jsonType.type === 'configpath' ) {
             return '' + value;
         } else {
-            shim.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
             return '' + value;
         }
     },
-reconstructElementPath: function(elementPath, jsonType, dbValue, topLevelObject) {
+    reconstructElementPath: function(elementPath, jsonType, value, topLevelObject) {
         var that = this;
-        var value = that._fromDatabaseToElementType( jsonType, dbValue );
         var path = elementPath.split('.');
         var e = topLevelObject;
         var term;
-        for (var j = 0 ; j < path.length-1 ; ++j) {
+		var j;
+        for (j = 0 ; j < path.length-1 ; ++j) {
             term = path[j];
             if ( term === undefined || term === null || term === "" ) {
                 throw new Error("unexpected empty string in dot-separated variable name");
@@ -414,259 +733,256 @@ reconstructElementPath: function(elementPath, jsonType, dbValue, topLevelObject)
         }
         e[term] = value;
     },
-reconstructModelDataFromElementPathValueUpdates: function(model, updates) {
-    var that = this;
-    for (var dbKey in updates) {
-        var elementPathValue = updates[dbKey];
-        var de = model.dataTableModel[dbKey];
-        if (that.isUnitOfRetention(de)) {
-            var elementPath = de.elementPath || elementPathValue.elementPath;
-            if ( de.elementSet === 'instanceMetadata' ) {
-                that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, model.metadata );
-            } else {
-                that.reconstructElementPath(elementPath, de, elementPathValue.value, model.data );
-            }
-        }
-    }
-},
-getElementPathPairFromKvMap: function(kvMap, elementPath) {
-    var path = elementPath.split('.');
-    var i, j, term, value, pathChain;
-    // work from most specific to least specific searching for a value match
-    for (j = path.length-1 ; j >= 0 ; --j) {
-        pathChain = '';
-        for (i = 0 ; i <= j ; ++i) {
-            pathChain = '.' + path[i] + pathChain;
-        }
-        pathChain = pathChain.substring(1);
-        if ( kvMap[pathChain] != null ) {
-            // found a definition...
-            term = kvMap[pathChain];
-            value = term.value;
-            // now find the definition for this element
-            // within the composite value
-            for ( i = j+1 ; i <= path.length-1 ; ++i ) {
-                value = value[path[i]];
-                if ( value === undefined || value === null ) break;
-            }
-            var e = {};
-            var f;
-            for ( f in term ) {
-                if ( f !== "value" ) {
-                    e[f] = term[f];
+    reconstructModelDataFromElementPathValueUpdates: function(model, updates) {
+        var that = this;
+		var dbKey;
+		var elementPath;
+		var elementPathValue;
+		var de;
+        for (dbKey in updates) {
+            elementPathValue = updates[dbKey];
+            de = model.dataTableModel[dbKey];
+            if (that.isUnitOfRetention(de)) {
+                elementPath = de.elementPath || elementPathValue.elementPath;
+                if ( de.elementSet === 'instanceMetadata' ) {
+                    that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, model.instanceMetadata );
+                } else {
+                    that.reconstructElementPath(elementPath, de, elementPathValue.value, model.data );
                 }
             }
-            e['value'] = value;
-            return {element: e, elementPath: pathChain};
         }
-    }
-    return null;
-},
-/**
- * Process instanceMetadataKeyValueMap and add entries to kvMap.
- * Common code to construct the update kvMap for arguments passed
- * in on the command line.
- */
-processPassedInKeyValueMap: function(dataTablePredefinedColumns, kvMap, instanceMetadataKeyValueMap) {
-    var that = this;
-    var propList = '';
-    var propertyCount = 0;
-    for ( var f in instanceMetadataKeyValueMap ) {
-        propList = propList + ' ' + f;
-        ++propertyCount;
-        // determine if f is metadata or not...
-        var metaField, isMetadata;
-        var found = false;
-        for ( var g in dataTablePredefinedColumns ) {
-            var eDefn = dataTablePredefinedColumns[g];
-            var eName = g;
-            if ( 'elementPath' in eDefn ) {
-                eName = eDefn.elementPath;
+    },
+    getElementPathPairFromKvMap: function(kvMap, elementPath) {
+        var path = elementPath.split('.');
+        var i, j, term, value, pathChain;
+		var e, f;
+        // work from most specific to least specific searching for a value match
+        for (j = path.length-1 ; j >= 0 ; --j) {
+            pathChain = '';
+            for (i = j ; i >= 0 ; --i) {
+                pathChain = '.' + path[i] + pathChain;
             }
-            if ( f === eName ) {
-                found = true;
-                metaField = g;
-                isMetadata = (eDefn.elementSet === 'instanceMetadata');
-                break;
+            pathChain = pathChain.substring(1);
+            if ( kvMap[pathChain] !== null && kvMap[pathChain] !== undefined ) {
+                // found a definition...
+                term = kvMap[pathChain];
+                value = term.value;
+                // now find the definition for this element
+                // within the composite value
+                for ( i = j+1 ; i <= path.length-1 ; ++i ) {
+                    value = value[path[i]];
+                    if ( value === undefined || value === null ) {
+						break;
+					}
+                }
+                e = {};
+                for ( f in term ) {
+                    if ( f !== "value" ) {
+                        e[f] = term[f];
+                    }
+                }
+                e['value'] = value;
+                return {element: e, elementPath: pathChain};
+            }
+            // try again with underscore substitution
+            pathChain = '';
+            for (i = j ; i >= 0 ; --i) {
+                pathChain = '_' + path[i] + pathChain;
+            }
+            pathChain = pathChain.substring(1);
+            if ( kvMap[pathChain] !== null && kvMap[pathChain] !== undefined ) {
+                // found a definition...
+                term = kvMap[pathChain];
+                value = term.value;
+                // now find the definition for this element
+                // within the composite value
+                for ( i = j+1 ; i <= path.length-1 ; ++i ) {
+                    value = value[path[i]];
+                    if ( value === undefined || value === null ) {
+						break;
+					}
+                }
+                e = {};
+                for ( f in term ) {
+                    if ( f !== "value" ) {
+                        e[f] = term[f];
+                    }
+                }
+                e['value'] = value;
+                return {element: e, elementPath: pathChain};
             }
         }
-        
-        if ( found ) {
-            kvMap[metaField] = { value: instanceMetadataKeyValueMap[f], 
-                                 isInstanceMetadata: isMetadata };
-        } else {
-            // TODO: convert f from elementPath into elementKey
-            kvMap[f] = { value: instanceMetadataKeyValueMap[f], 
-                                 isInstanceMetadata: false };
-        }
-    }
-    
-    if ( propertyCount !== 0 ) {
-        shim.log('I',"Extra arguments found in instanceMetadataKeyValueMap" + propList);
-    }
-},
-_setSessionVariableFlag: function( dbKeyMap, listChildElementKeys) {
-    var that = this;
-    var i;
-    if ( listChildElementKeys != null ) {
-        for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
-            var f = listChildElementKeys[i];
-            var jsonType = dbKeyMap[f];
-            jsonType.isSessionVariable = true;
-            if ( jsonType.type === 'array' ) {
-                that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
-            } else if ( jsonType.type === 'object' ) {
-                that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+        return null;
+    },
+    /**
+     * Process instanceMetadataKeyValueMap and add entries to kvMap.
+     * Common code to construct the update kvMap for arguments passed
+     * in on the command line.
+     */
+    _setSessionVariableFlag: function( dbKeyMap, listChildElementKeys) {
+        var that = this;
+        var i;
+        if ( listChildElementKeys !== null && listChildElementKeys !== undefined ) {
+            for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
+                var f = listChildElementKeys[i];
+                var jsonType = dbKeyMap[f];
+                jsonType.isSessionVariable = true;
+                if ( jsonType.type === 'array' ) {
+                    that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+                } else if ( jsonType.type === 'object' ) {
+                    that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+                }
             }
         }
-    }
-},
-flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementKeyPrefix, jsonType ) {
-    var that = this;
-    var fullPath;
-    var elementKey;
-    var i = 0;
+    },
+    flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementKeyPrefix, jsonType ) {
+        var that = this;
+        var elementKey;
+		var e;
+		var f;
 
-    // remember the element name...
-    jsonType.elementName = elementName;
-    // and the set is 'data' because it comes from the data model...
-    jsonType.elementSet = 'data';
-    
-    // update element path prefix for recursive elements
-    elementPathPrefix = ( elementPathPrefix === undefined || elementPathPrefix === null ) ? elementName : (elementPathPrefix + '.' + elementName);
-    // and our own element path is exactly just this prefix
-    jsonType.elementPath = elementPathPrefix;
+        // remember the element name...
+        jsonType.elementName = elementName;
+        // and the set is 'data' because it comes from the data model...
+        jsonType.elementSet = 'data';
 
-    // use the user's elementKey if specified
-    elementKey = jsonType.elementKey;
+        // update element path prefix for recursive elements
+        elementPathPrefix = ( elementPathPrefix === undefined || elementPathPrefix === null ) ? elementName : (elementPathPrefix + '.' + elementName);
+        // and our own element path is exactly just this prefix
+        jsonType.elementPath = elementPathPrefix;
 
-    if ( elementKey === undefined || elementKey === null ) {
-        throw new Error("elementKey is not defined for '" + jsonType.elementPath + "'.");
-    }
+        // use the user's elementKey if specified
+        elementKey = jsonType.elementKey;
 
-    // simple error tests...
-    // throw an error if the elementkey is longer than 62 characters
-    // or if it is already being used and not by myself...
-    if ( elementKey.length > 62 ) {
-        throw new Error("supplied elementKey is longer than 62 characters");
-    }
-    if ( dbKeyMap[elementKey] !== undefined && dbKeyMap[elementKey] !== null && dbKeyMap[elementKey] != jsonType ) {
-        throw new Error("supplied elementKey is already used (autogenerated?) for another model element");
-    }
-    if ( elementKey.charAt(0) === '_' ) {
-        throw new Error("supplied elementKey starts with underscore");
-    }
-
-    // remember the elementKey we have chosen...
-    dbKeyMap[elementKey] = jsonType;
-
-    // handle the recursive structures...
-    if ( jsonType.type === 'array' ) {
-        // explode with subordinate elements
-        f = that.flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
-        jsonType.listChildElementKeys = [ f.elementKey ];
-    } else if ( jsonType.type === 'object' ) {
-        // object...
-        var e;
-        var f;
-        var listChildElementKeys = [];
-        for ( e in jsonType.properties ) {
-            f = that.flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
-            listChildElementKeys.push(f.elementKey);
+        if ( elementKey === undefined || elementKey === null ) {
+            throw new Error("elementKey is not defined for '" + jsonType.elementPath + "'.");
         }
-        jsonType.listChildElementKeys = listChildElementKeys;
-    }
 
-    if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys != null)) {
-        // we have some sort of structure that is a sessionVariable
-        // Set the isSessionVariable tags on all its nested elements.
-        that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
-    }
-    return jsonType;
-},
-getElementPathValue:function(data,pathName) {
-    var path = pathName.split('.');
-    var v = data;
-    for ( var i = 0 ; i < path.length ; ++i ) {
-        v = v[path[i]];
-        if ( v === undefined || v === null ) {
+        // simple error tests...
+        // throw an error if the elementkey is longer than 62 characters
+        // or if it is already being used and not by myself...
+        if ( elementKey.length > 62 ) {
+            throw new Error("supplied elementKey is longer than 62 characters");
+        }
+        if ( dbKeyMap[elementKey] !== undefined && dbKeyMap[elementKey] !== null && dbKeyMap[elementKey] != jsonType ) {
+            throw new Error("supplied elementKey is already used (autogenerated?) for another model element");
+        }
+        if ( elementKey.charAt(0) === '_' ) {
+            throw new Error("supplied elementKey starts with underscore");
+        }
+
+        // remember the elementKey we have chosen...
+        dbKeyMap[elementKey] = jsonType;
+
+        // handle the recursive structures...
+        if ( jsonType.type === 'array' ) {
+            // explode with subordinate elements
+            f = that.flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
+            jsonType.listChildElementKeys = [ f.elementKey ];
+        } else if ( jsonType.type === 'object' ) {
+            // object...
+            var listChildElementKeys = [];
+            for ( e in jsonType.properties ) {
+                f = that.flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
+                listChildElementKeys.push(f.elementKey);
+            }
+            jsonType.listChildElementKeys = listChildElementKeys;
+        }
+
+        if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys !== null) && (jsonType.listChildElementKeys !== undefined)) {
+            // we have some sort of structure that is a sessionVariable
+            // Set the isSessionVariable tags on all its nested elements.
+            that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+        }
+        return jsonType;
+    },
+    getElementPathValue:function(data,pathName) {
+        var path = pathName.split('.');
+        var v = data;
+        for ( var i = 0 ; i < path.length ; ++i ) {
+            v = v[path[i]];
+            if ( v === undefined || v === null ) {
+                return null;
+            }
+        }
+        return v;
+    },
+    convertSelectionString: function(linkedModel, selection) {
+        // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
+        var that = this;
+        if ( selection === null || selection === undefined || selection.length === 0 ) {
             return null;
         }
-    }
-    return v;
-},
-convertSelectionString: function(linkedModel, selection) {
-    // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
-    var that = this;
-    if ( selection == null || selection.length === 0 ) {
-        return null;
-    }
-    var parts = selection.split(' ');
-    var remapped = '';
-    var i;
-    
-    for ( i = 0 ; i < parts.length ; ++i ) {
-        var e = parts[i];
-        if ( e.length === 0 || !that._isValidElementPath(e) ) {
-            remapped = remapped + ' ' + e;
-        } else {
-            // map e back to elementKey
-            var found = false;
-            var f;
-            for (f in linkedModel.dataTableModel) {
-                var defElement = linkedModel.dataTableModel[f];
-                var elementPath = defElement['elementPath'];
-                if ( elementPath == null ) elementPath = f;
-                if ( elementPath == e ) {
-                    remapped = remapped + ' "' + f + '"';
-                    found = true;
-                    break;
+        var parts = selection.split(' ');
+        var remapped = '';
+        var i;
+
+        for ( i = 0 ; i < parts.length ; ++i ) {
+            var e = parts[i];
+            if ( e.length === 0 || !that._isValidElementPath(e) ) {
+                remapped = remapped + ' ' + e;
+            } else {
+                // map e back to elementKey
+                var found = false;
+                var f;
+                for (f in linkedModel.dataTableModel) {
+                    var defElement = linkedModel.dataTableModel[f];
+                    var elementPath = defElement['elementPath'];
+                    if ( elementPath === null || elementPath === undefined ) {
+						elementPath = f;
+					}
+                    if ( elementPath === e ) {
+                        remapped = remapped + ' "' + f + '"';
+                        found = true;
+                        break;
+                    }
+                }
+                if ( found === false ) {
+                    alert('databaseUtils.convertSelectionString: unrecognized elementPath: ' + e );
+                    odkCommon.log('E',"databaseUtils.convertSelectionString: unrecognized elementPath: " + e);
+                    return null;
                 }
             }
-            if ( found == false ) {
-                alert('databaseUtils.convertSelectionString: unrecognized elementPath: ' + e );
-                shim.log('E',"databaseUtils.convertSelectionString: unrecognized elementPath: " + e);
-                return null;
-            }
         }
-    }
-    return remapped;
-},
-convertOrderByString: function(linkedModel, order_by) {
-    // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
-    var that = this;
-    if ( order_by == null || order_by.length === 0 ) {
-        return null;
-    }
-    var parts = order_by.split(' ');
-    var remapped = '';
-    var i;
-    for ( i = 0 ; i < parts.length ; ++i ) {
-        var e = parts[i];
-        if ( e.length === 0 || !that._isValidElementPath(e) ) {
-            remapped = remapped + ' ' + e;
-        } else {
-            // map e back to elementKey
-            var found = false;
-            var f;
-            for (f in linkedModel.dataTableModel) {
-                var defElement = dataTableModel[f];
-                var elementPath = defElement['elementPath'];
-                if ( elementPath == null ) elementPath = f;
-                if ( elementPath == e ) {
-                    remapped = remapped + ' "' + f + '"';
-                    found = true;
-                    break;
+        return remapped;
+    },
+    convertOrderByString: function(linkedModel, order_by) {
+        // must be space separated. Must be persisted primitive elementName -- Cannot be elementPath
+        var that = this;
+        if ( order_by === null || order_by === undefined || order_by.length === 0 ) {
+            return null;
+        }
+        var parts = order_by.split(' ');
+        var remapped = '';
+        var i;
+        for ( i = 0 ; i < parts.length ; ++i ) {
+            var e = parts[i];
+            if ( e.length === 0 || !that._isValidElementPath(e) ) {
+                remapped = remapped + ' ' + e;
+            } else {
+                // map e back to elementKey
+                var found = false;
+                var f;
+                for (f in linkedModel.dataTableModel) {
+                    var defElement = linkedModel.dataTableModel[f];
+                    var elementPath = defElement['elementPath'];
+                    if ( elementPath === null || elementPath === undefined ) {
+						elementPath = f;
+					}
+                    if ( elementPath === e ) {
+                        remapped = remapped + ' "' + f + '"';
+                        found = true;
+                        break;
+                    }
+                }
+                if ( found === false ) {
+                    alert('databaseUtils.convertOrderByString: unrecognized elementPath: ' + e );
+                    odkCommon.log('E',"databaseUtils.convertOrderByString: unrecognized elementPath: " + e );
+                    return null;
                 }
             }
-            if ( found == false ) {
-                alert('databaseUtils.convertOrderByString: unrecognized elementPath: ' + e );
-                shim.log('E',"databaseUtils.convertOrderByString: unrecognized elementPath: " + e );
-                return null;
-            }
         }
+        return remapped;
     }
-    return remapped;
-}
 };
 });

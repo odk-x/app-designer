@@ -66,8 +66,8 @@
 		}, 100);
   }
   function purge() {
-	var jsonString = shim.getDatabaseSettings();
-	var settings = JSON.parse(jsonString);
+    // settings must match those in mockImpl
+	var settings = {shortName: "odk", version: "1", displayName: "ODK Instance Database", maxSize: 65536};
 	var w3cDatabase = openDatabase(settings.shortName, settings.version, settings.displayName, settings.maxSize);
 	  // create the database...
 	w3cDatabase.transaction(function(transaction) {

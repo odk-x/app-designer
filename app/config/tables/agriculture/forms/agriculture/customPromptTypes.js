@@ -22,7 +22,7 @@ var async_assign = promptTypes.base.extend({
                 return queryDefn.linked_table_id;
             }
         } else {
-            shim.log('E',"query definiton is null for " + this.type + " in getLinkedTableId");
+            odkCommon.log('E',"query definiton is null for " + this.type + " in getLinkedTableId");
             return null;
         }
     },
@@ -32,7 +32,7 @@ var async_assign = promptTypes.base.extend({
         {
             return queryDefn.linked_form_id;
         } else {
-            shim.log('E',"query definiton is null for " + this.type + " in getLinkedFormId");
+            odkCommon.log('E',"query definiton is null for " + this.type + " in getLinkedFormId");
             return null;
         }
     },
@@ -42,7 +42,7 @@ var async_assign = promptTypes.base.extend({
         {
             return queryDefn.fieldName;
         } else {
-            shim.log('E',"query definiton is null for " + this.type + " in getLinkedFieldName");
+            odkCommon.log('E',"query definiton is null for " + this.type + " in getLinkedFieldName");
             return null;
         }
     },

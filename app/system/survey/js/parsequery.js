@@ -51,9 +51,15 @@ return {
         var that = this;
         // ensure initial empty record is written
         // cacheAllData
+		var model = opendatakit.getCurrentModel();
+		var formId = opendatakit.getSettingValue('form_id');
         database.initializeInstance($.extend({},ctxt,{success:function() {
+			// this will clear the auxillary key-value pairs in the URI.
+			// at this point, these initial values will have been applied to the 
+			// instance's initial values.
+			shim.clearAuxillaryHash();
             // fire the controller to render the first page.
-            ctxt.log('D',"parsequery._effectChange.startAtScreenPath." + (sameInstance ? "sameForm" : "differentForm"),
+            ctxt.log('D',"parsequery._effectChange.startAtScreenPath. " + (sameInstance ? "sameInstance" : "differentForm and/or differentInstance"),
                         "startAtScreenPath("+screenPath+") refId: " + refId + " ms: " + (+new Date()));
             // set the refId. From this point onward,
             // changes will be applied within the shim
@@ -70,7 +76,7 @@ return {
                 shim.clearSectionScreenState(refId);
             }
             that.controller.startAtScreenPath(ctxt, screenPath);
-        }}), instanceId, instanceMetadataKeyValueMap);
+        }}), model, formId, instanceId, sameInstance, instanceMetadataKeyValueMap);
     },
     /**
      * Saves all passed-in parameter values into the MetaData table.
@@ -132,7 +138,7 @@ return {
         // Seems like we would only need to create the KV entries for table_id, and otherwise not need to do anything?
         // E.g., to support multiple forms used within one table.
         
-        // we cannot write the instanceMetadata or the tableMetadata yet because the underlying tables may not yet exist.
+        // we cannot write the instanceMetadata or the metadata yet because the underlying tables may not yet exist.
 
         // on first starting, the database would not have any table_id, form_id or instanceId set...
         var sameTable = (opendatakit.getCurrentTableId() == table_id);
@@ -332,13 +338,14 @@ return {
         
         var ctxtNext = $.extend({}, ctxt, {success: function() {
             // and flush any pending doAction callback
-            landing.setController(ctxt, that.controller, opendatakit.getRefId());
+			that.controller.registerQueuedActionAvailableListener(ctxt, opendatakit.getRefId());
           }, failure: function(m) {
             ctxt.log('E','parsequery.changeUrlHash unable to transition to ' + hash, m);
-            if ( hash === '#formPath=' + encodeURIComponent(shim.getBaseUrl() + '/') ) {
-                landing.setController(ctxt, that.controller, opendatakit.getRefId(), m || { message: 'failed to load page'});
+            if ( hash === '#formPath=' + encodeURIComponent(odkCommon.getBaseUrl() + '/') ) {
+                that.controller.registerQueuedActionAvailableListener(ctxt, opendatakit.getRefId(),
+																		m || { message: 'failed to load page'});
             } else {
-                window.location.hash = '#formPath=' + encodeURIComponent(shim.getBaseUrl() + '/');
+                window.location.hash = '#formPath=' + encodeURIComponent(odkCommon.getBaseUrl() + '/');
                 that.changeUrlHash($.extend({},ctxt,{success:function() { ctxt.failure(m); }}));
             }
           }});

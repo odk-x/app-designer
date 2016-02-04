@@ -31,14 +31,14 @@ verifyLoad('builder',
                 } catch (e) {
                     var msg = "Exception: '" + e.message + "' in user-defined expression: " + fieldSource +
                         " on " + worksheet + " row " + rowNum + " column: " + columnPath;
-                    shim.log('E', msg);
+                    odkCommon.log('E', msg);
                     throw new Error(msg);
                 }
             };
         } catch (e) {
             var msg = "Exception: '" + e.message + "' when evaluating user-defined expression: " + fieldSource +
                 " on " + worksheet + " row " + rowNum + " column: " + columnPath;
-            shim.log('E', "builder.evalFn " + msg);
+            odkCommon.log('E', "builder.evalFn " + msg);
             alert(msg + '\nSee console for details.');
             throw new Error(msg + '\nSee console for details.');
         }
@@ -114,14 +114,14 @@ verifyLoad('builder',
         
         if (evalAs in propertyParsers) {
             var propertyParser = propertyParsers[evalAs];
-            shim.log("I",'Parsing: ' + property);
+            odkCommon.log("I",'Parsing: ' + property);
             parentObject[parentKey] = propertyParser(property, propertySource, worksheet, rowNum, columnPath);
             return;
         }
         else {
             var msg = "Could not parse property of type: " + columnType + " for user-defined expression: " + fieldSource +
                 " on " + worksheet + " row " + rowNum + " column: " + columnPath;
-            shim.log('E', "builder.evalFn " + msg);
+            odkCommon.log('E', "builder.evalFn " + msg);
             alert(msg + '\nSee console for details.');
             throw new Error(msg + '\nSee console for details.');
         }
@@ -225,14 +225,14 @@ verifyLoad('builder',
                     if (!('_type' in rowObject)) {
                         var msg = 'builder.initializePrompts: no _type specified for prompt in row ' +
                                     rowObject._row_num + ' section: ' + key;
-                        shim.log('E',msg);
+                        odkCommon.log('E',msg);
                         throw new Error(msg);
                     }
                     
                     if (rowObject._type in currentPromptTypes) {
                         PromptType = currentPromptTypes[rowObject._type];
                     } else {
-                        shim.log('W', 'builder.initializePrompts: unknown _type ' + rowObject._type +
+                        odkCommon.log('W', 'builder.initializePrompts: unknown _type ' + rowObject._type +
                             ' -- using text for prompt in row ' + rowObject._row_num + ' section: ' + key);
                         PromptType = currentPromptTypes['text'];
                     }
@@ -290,7 +290,7 @@ verifyLoad('builder',
                     ctxt.success();
                 },
                 error: function() {
-                    shim.log("W",'builder.buildSurvey: error loading ' +
+                    odkCommon.log("W",'builder.buildSurvey: error loading ' +
                             formPath + 'customTheme.css');
                     //Set the jQm theme to the defualt theme, or if there is a 
                     //predefined theme specified in the settings sheet, use that.
@@ -315,7 +315,7 @@ verifyLoad('builder',
             //This tries to load any user defined prompt types provided in customPromptTypes.js.
             //TODO: The approach to getting the current form path might need to change.
             require([formPath + 'customPromptTypes.js'], function (customPromptTypes) {
-                shim.log("I","builder.buildSurvey: customPromptTypes found");
+                odkCommon.log("I","builder.buildSurvey: customPromptTypes found");
                 //Ensure all custom prompt type names are lowercase.
                 _.each(_.keys(customPromptTypes), function(promptTypeName){
                     if(promptTypeName !== promptTypeName.toLowerCase()) {
@@ -326,13 +326,13 @@ verifyLoad('builder',
                 $.extend(currentPromptTypes, customPromptTypes);
                 afterCustomPromptsLoadAttempt();
             }, function (err) {
-                shim.log("W",'builder.buildSurvey: error loading ' +
+                odkCommon.log("W",'builder.buildSurvey: error loading ' +
                             formPath + 'customPromptTypes.js');
                 //The errback, error callback
                 if(err.requireModules) {
                     //The error has a list of modules that failed
                     _.each(err.requireModules, function(failedId){
-                        shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
+                        odkCommon.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
                         //I'm using undef to clear internal knowledge of the given module.
                         //I'm not sure if it is necessiary.
                         requirejs.undef(failedId);
@@ -345,7 +345,7 @@ verifyLoad('builder',
         //This tries to load any user defined prompt types provided in customPromptTypes.js.
         //TODO: The approach to getting the current form path might need to change.
         require([formPath + 'customScreenTypes.js'], function (customScreenTypes) {
-            shim.log("I","builder.buildSurvey: customScreenTypes found");
+            odkCommon.log("I","builder.buildSurvey: customScreenTypes found");
             //Ensure all custom prompt type names are lowercase.
             _.each(_.keys(customScreenTypes), function(screenTypeName){
                 if(screenTypeName !== screenTypeName.toLowerCase()) {
@@ -356,13 +356,13 @@ verifyLoad('builder',
             $.extend(currentScreenTypes, customScreenTypes);
             afterCustomScreensLoadAttempt();
         }, function (err) {
-            shim.log("W",'builder.buildSurvey: error loading ' +
+            odkCommon.log("W",'builder.buildSurvey: error loading ' +
                         formPath + 'customScreenTypes.js');
             //The errback, error callback
             if(err.requireModules) {
                 //The error has a list of modules that failed
                 _.each(err.requireModules, function(failedId){
-                    shim.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
+                    odkCommon.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
                     //I'm using undef to clear internal knowledge of the given module.
                     //I'm not sure if it is necessiary.
                     requirejs.undef(failedId);

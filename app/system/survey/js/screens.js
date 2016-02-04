@@ -85,7 +85,7 @@ screenTypes.base = Backbone.View.extend({
         var that = this; 
 
         that.pendingCtxt.push(ctxt);
-        shim.log("D","screens.reRender: called");
+        odkCommon.log("D","screens.reRender: called");
         that.debouncedReRender();
      },
     debouncedReRender: _.debounce(function() {
@@ -95,7 +95,7 @@ screenTypes.base = Backbone.View.extend({
         var ctxt = null;
 
         that.focusScrollPos = $(window).scrollTop();
-        shim.log("D","screens.reRender.debouncedReRender: focusScrollPos = " + that.focusScrollPos);
+        odkCommon.log("D","screens.reRender.debouncedReRender: focusScrollPos = " + that.focusScrollPos);
 
         // Find the element in focus
         that.$focusPromptTest = $(':focus');
@@ -103,11 +103,11 @@ screenTypes.base = Backbone.View.extend({
             that.$focusPromptTest = null;
         }
 
-        shim.log("D","screens.reRender.debouncedReRender: pendingCtxtLength: " + that.pendingCtxt.length);
+        odkCommon.log("D","screens.reRender.debouncedReRender: pendingCtxtLength: " + that.pendingCtxt.length);
         if (that.pendingCtxt.length > 0) {
             ctxt = that.pendingCtxt.pop();   
         } else {
-            shim.log("W","screens.reRender.debouncedReRender: no pendingCtxts");
+            odkCommon.log("W","screens.reRender.debouncedReRender: no pendingCtxts");
         }
 
         while (that.pendingCtxt.length > 0) {
@@ -235,7 +235,7 @@ screenTypes.base = Backbone.View.extend({
             }
 
             if (setFocus == true) {
-                shim.log("D","screens.afterRender: focusElementString = " + focusElementString);
+                odkCommon.log("D","screens.afterRender: focusElementString = " + focusElementString);
                 $(focusElementString).focus();
             }
         }        
@@ -522,8 +522,8 @@ screenTypes.custom = screenTypes.base.extend({
 
         that.focusScrollPos = $(window).scrollTop();
         that.horizontalFocusScrollPos = $(that.screenOverflowClass).scrollLeft();
-        shim.log("D","screens.reRender.debouncedReRender: focusScrollPos = " + that.focusScrollPos);
-        shim.log("D","screens.reRender.debouncedReRender: horizontalFocusScrollPos = " + that.horizontalFocusScrollPos);
+        odkCommon.log("D","screens.reRender.debouncedReRender: focusScrollPos = " + that.focusScrollPos);
+        odkCommon.log("D","screens.reRender.debouncedReRender: horizontalFocusScrollPos = " + that.horizontalFocusScrollPos);
 
         // Find the element in focus
         that.$focusPromptTest = $(':focus');
@@ -531,11 +531,11 @@ screenTypes.custom = screenTypes.base.extend({
             that.$focusPromptTest = null;
         }
 
-        shim.log("D","screens.reRender.debouncedReRender: pendingCtxtLength: " + that.pendingCtxt.length);
+        odkCommon.log("D","screens.reRender.debouncedReRender: pendingCtxtLength: " + that.pendingCtxt.length);
         if (that.pendingCtxt.length > 0) {
             ctxt = that.pendingCtxt.pop();   
         } else {
-            shim.log("W","screens.reRender.debouncedReRender: no pendingCtxts");
+            odkCommon.log("W","screens.reRender.debouncedReRender: no pendingCtxts");
         }
 
         while (that.pendingCtxt.length > 0) {
@@ -569,7 +569,7 @@ screenTypes.custom = screenTypes.base.extend({
             }
 
             if (setFocus == true) {
-                shim.log("D","screens.afterRender: focusElementString = " + focusElementString);
+                odkCommon.log("D","screens.afterRender: focusElementString = " + focusElementString);
                 $(focusElementString).focus();
             }
         }        

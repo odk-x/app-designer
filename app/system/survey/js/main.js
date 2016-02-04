@@ -11,7 +11,7 @@
  * interpretation of the formDef.json for the form).
  */
 requirejs.config({
-    baseUrl: shim.getBaseUrl(),
+    baseUrl: odkCommon.getBaseUrl(),
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon 
@@ -37,7 +37,6 @@ requirejs.config({
         screens : 'survey/js/screens',
         prompts : 'survey/js/prompts',
         database : 'survey/js/database',
-        databaseImpl : 'survey/js/databaseImpl',
         databaseUtils : 'survey/js/databaseUtils',
         databaseSchema : 'survey/js/databaseSchema',
         controller : 'survey/js/controller',
@@ -50,7 +49,12 @@ requirejs.config({
         formulaFunctions : 'survey/js/formulaFunctions',
         jqueryCsv : 'libs/jquery-csv/src/jquery.csv',
         XRegExp : 'libs/XRegExp-All-3.0.0-pre-2014-12-24',
-        d3 : 'libs/d3-amd/d3'
+        d3 : 'libs/d3-amd/d3',
+		mockDbif: 'js/mock/mockDbif',
+		mockImpl: 'js/mock/mockImpl',
+		mockUtils: 'js/mock/mockUtils',
+		mockSchema: 'js/mock/mockSchema',
+		odkDataIf: 'js/mock/odkDataIf'
     },
     shim: {
         'bootstrap': {
@@ -160,7 +164,7 @@ function verifyLoad( prefix, alist, args ) {
     var i;
     for ( i = 0 ; i < args.length ; ++i ) {
         if ( args[i] === undefined || args[i] === null ) {
-            shim.log('E',prefix + ' cyclic dependency prevented initialization of ' + alist[i]);
+            odkCommon.log('E',prefix + ' cyclic dependency prevented initialization of ' + alist[i]);
         }
     }
 }
@@ -171,14 +175,14 @@ require(['jquery'],
             ['jquery'],
             [$]);
 
-        shim.log('I','main.require.jquery.loaded establish mobileinit action');
+        odkCommon.log('I','main.require.jquery.loaded establish mobileinit action');
 
-        require(['bootstrap','moment'], 
-            function(bootstrap, moment) {
+		require(['bootstrap','moment', 'odkDataIf'], 
+            function(bootstrap, moment, odkDataIf) {
                 verifyLoad('main.require.bootstrap.moment',
-                    ['bootstrap','moment'],
-                    [bootstrap,   moment]);
-                shim.log('I','main.require.bootstrap.moment.loaded establish mobileinit action');
+                    ['bootstrap','moment', 'odkDataIf'],
+                    [bootstrap,   moment, odkDataIf]);
+                odkCommon.log('I','main.require.bootstrap.moment.loaded establish mobileinit action');
                 
             // and launch the framework...
             require([ 'spinner', 'opendatakit', 'database', 'parsequery',
@@ -221,21 +225,17 @@ require(['jquery'],
                             } else if ( hashIdx > 0 ) {
                                         newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                             }
-                            shim.log('W','jqmConfig.addSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
+                            odkCommon.log('W','jqmConfig.addEmptySearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
                             window.location.assign(newRef);
-                        } else if ( search !== undefined && search !== null && search.indexOf("purge") >= 0 ) {
-                            // remove the search string (?purge) and replace with ?
+                        } else if ( search !== undefined && search !== null && search.length > 0 ) {
+                            // remove the non-empty search string and replace with ?
                             if ( hashIdx < 0 ) {
                                 newRef = ref + '?';
                             } else if ( hashIdx > 0 ) {
                                 newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                             }
-                            ctxt.log('W',"jqmConfig.purge ref: " + ref + ' newRef: ' + newRef);
-                            database.purge($.extend({},ctxt,{success:function() {
-                                // we loose the ctxt action (page load restarts everything...)
-                                ctxt.log('W','jqmConfig.purge.reloadpage newRef: ' + newRef);
-                                window.location.assign(newRef);
-                            }}));
+                            ctxt.log('W',"jqmConfig.clearNonEmptySearchTerm.reloadpage ref: " + ref + ' newRef: ' + newRef);
+                            window.location.assign(newRef);
                         } else {
                             ctxt.log('D','jqmConfig.changeUrlHash ref: ' + ref);
                             parsequery.changeUrlHash(ctxt);
@@ -244,7 +244,7 @@ require(['jquery'],
                         // we have a '?' on the URL. Forcibly remove it.
                         hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
                         newRef = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
-                        shim.log('W','jqmConfig.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
+                        odkCommon.log('W','jqmConfig.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
                         window.location.assign(newRef);
                     } else {
                         // no search term -- pass through
@@ -257,13 +257,12 @@ require(['jquery'],
                     parsequery.changeUrlHash(ctxt);
                 }
             }, function(err) {
-                shim.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+                odkCommon.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
             });
     }, function(err) {
-        shim.log('E','main.require.bootstrap.moment.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+        odkCommon.log('E','main.require.bootstrap.moment.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
     });
-
 }, function(err) {
-    shim.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+    odkCommon.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
 });
                          

@@ -1,26 +1,29 @@
 /**
- * The odkDataIf injected interface will be used in conjunction with this class to 
+ * The that.getOdkDataIf() injected interface will be used in conjunction with this class to 
  * create closures for callback functions to be invoked once a response is available
  * from the Java side.
  */
 'use strict';
 /* jshint unused: vars */
 
-// TODO: Remove exposing user-level transaction
-
 window.odkData = {
     _requestMap: [],
 //     _tableKVSCacheMap: [],
     _transactionId: 0,
     _callbackId: 0,
+	
+	getOdkDataIf: function() {
+		return window.odkDataIf;
+	},
 
     getViewData : function (successCallbackFn, failureCallbackFn) {
         var that = this;
+		
         var transId = null;
 
         var req = that.queueRequest('getViewData', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.getViewData(req._callbackId);
+        that.getOdkDataIf().getViewData(req._callbackId);
     },
 
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
@@ -34,18 +37,18 @@ window.odkData = {
 //         console.log('odkData: query: Need to include the KVS is ' + needToIncludeKVS);
 
         // Test always make this false
-        odkDataIf.query(tableId, whereClause, sqlBindParams, groupBy, 
+        that.getOdkDataIf().query(tableId, whereClause, sqlBindParams, groupBy, 
             having, orderByElementKey, orderByDirection, includeKVS, req._callbackId);
 //             having, orderByElementKey, orderByDirection, false, req._callbackId);
     },
 
-    rawQuery: function(sqlCommand, sqlBindParams, successCallbackFn, failureCallbackFn) {
+    rawQuery: function(tableId, sqlCommand, sqlBindParams, successCallbackFn, failureCallbackFn) {
         var that = this;
         
         var req = that.queueRequest('rawQuery', successCallbackFn, failureCallbackFn);
 		console.log('rawQuery cbId=' + req._callbackId);
 
-        odkDataIf.rawQuery(sqlCommand, sqlBindParams, req._callbackId);
+        that.getOdkDataIf().rawQuery(tableId, sqlCommand, sqlBindParams, req._callbackId);
     },
 
     getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
@@ -53,7 +56,7 @@ window.odkData = {
 
         var req = that.queueRequest('getRows', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.getRows(tableId, rowId, req._callbackId);
+        that.getOdkDataIf().getRows(tableId, rowId, req._callbackId);
     },
 
     getMostRecentRow: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
@@ -61,7 +64,7 @@ window.odkData = {
 
         var req = that.queueRequest('getMostRecentRow', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.getRow(tableId, rowId, req._callbackId);
+        that.getOdkDataIf().getMostRecentRow(tableId, rowId, req._callbackId);
     },
 
     updateRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
@@ -69,7 +72,7 @@ window.odkData = {
 
         var req = that.queueRequest('updateRow', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.updateRow(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().updateRow(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
     deleteRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
@@ -77,7 +80,7 @@ window.odkData = {
 
         var req = that.queueRequest('deleteRow', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.deleteRow(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().deleteRow(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
     addRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
@@ -85,7 +88,7 @@ window.odkData = {
 
         var req = that.queueRequest('addRow', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.addRow(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().addRow(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
     addCheckpoint: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
@@ -93,7 +96,7 @@ window.odkData = {
 
         var req = that.queueRequest('addCheckpoint', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.addCheckpoint(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().addCheckpoint(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
     saveCheckpointAsIncomplete: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
@@ -101,7 +104,7 @@ window.odkData = {
 
         var req = that.queueRequest('saveCheckpointAsIncomplete', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.saveCheckpointAsIncomplete(tableId, stringifiedJSON, rowId, req._callbackId); 
+        that.getOdkDataIf().saveCheckpointAsIncomplete(tableId, stringifiedJSON, rowId, req._callbackId); 
     },
 
     saveCheckpointAsComplete: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
@@ -109,7 +112,7 @@ window.odkData = {
 
         var req = that.queueRequest('saveCheckpointAsComplete', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.saveCheckpointAsComplete(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().saveCheckpointAsComplete(tableId, stringifiedJSON, rowId, req._callbackId);
     },
 
     deleteAllCheckpoints: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
@@ -117,7 +120,7 @@ window.odkData = {
 
         var req = that.queueRequest('deleteLastCheckpoint', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.deleteAllCheckpoints(tableId, rowId, req._callbackId);
+        that.getOdkDataIf().deleteAllCheckpoints(tableId, rowId, req._callbackId);
     },
 
     deleteLastCheckpoint: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
@@ -125,11 +128,12 @@ window.odkData = {
 
         var req = that.queueRequest('deleteLastCheckpoint', successCallbackFn, failureCallbackFn);
 
-        odkDataIf.deleteLastCheckpoint(tableId, rowId, req._callbackId);
+        that.getOdkDataIf().deleteLastCheckpoint(tableId, rowId, req._callbackId);
     },
 
     queueRequest: function (type, successCallbackFn, failureCallbackFn) {
         var that = this;
+
         var cbId = that._callbackId;
 
         var activeRequest = {
@@ -250,7 +254,7 @@ window.odkData = {
 	responseAvailable: function() {
         var that = this;
 		setTimeout(function() {
-			var resultJSON = window.odkDataIf.getResponseJSON();
+			var resultJSON = that.getOdkDataIf().getResponseJSON();
 			//console.log('odkData: resultJSON is ' + resultJSON);
 
 			var result = JSON.parse(resultJSON);

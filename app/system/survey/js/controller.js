@@ -20,10 +20,13 @@ return {
     eventCount: 0,
     moveFailureMessage: { message: "Internal Error: Unable to determine next prompt." },
     screenManager : null,
-    getFirstQueuedAction: function() {
-        var action = shim.getFirstQueuedAction(opendatakit.getRefId());
+    viewFirstQueuedAction: function() {
+        var action = odkCommon.viewFirstQueuedAction();
         if ( action === undefined ) return null;
         return action;
+    },
+    removeFirstQueuedAction: function() {
+        odkCommon.removeFirstQueuedAction();
     },
     getCurrentScreenPath: function() {
         var path = shim.getScreenPath(opendatakit.getRefId());
@@ -33,12 +36,12 @@ return {
     getCurrentContentsScreenPath: function() {
         var currentPath = this.getCurrentScreenPath();
         if ( currentPath === null ) {
-            shim.log('E',"controller.getCurrentContentsScreenPath: null currentScreenPath!");
+            odkCommon.log('E',"controller.getCurrentContentsScreenPath: null currentScreenPath!");
             return null;
         }
         var parts = currentPath.split("/");
         if ( parts.length < 2 ) {
-            shim.log('E',"controller.getCurrentContentsScreenPath: invalid currentScreenPath: " + currentPath);
+            odkCommon.log('E',"controller.getCurrentContentsScreenPath: invalid currentScreenPath: " + currentPath);
             return null;
         }
  
@@ -47,20 +50,20 @@ return {
     getOperationPath: function(opPath) {
         
         if ( opPath === undefined || opPath === null ) {
-            shim.log('E',"invalid opPath: null");
+            odkCommon.log('E',"invalid opPath: null");
             return null;
         }
         
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
-            shim.log('E',"controller.getOperationPath: invalid opPath: " + opPath);
+            odkCommon.log('E',"controller.getOperationPath: invalid opPath: " + opPath);
             return null;
         }
         
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
-            shim.log('E',"controller.getOperationPath: no section matching opPath: " + opPath);
+            odkCommon.log('E',"controller.getOperationPath: no section matching opPath: " + opPath);
             return null;
         }
 
@@ -73,12 +76,12 @@ return {
         }
 
         if ( intIndex === undefined || intIndex === null ) {
-            shim.log('E',"controller.getOperationPath: no branch label matching opPath: " + opPath);
+            odkCommon.log('E',"controller.getOperationPath: no branch label matching opPath: " + opPath);
             return null;
         }
 
         if ( intIndex >= section.operations.length ) {
-            shim.log('E',"controller.getOperationPath: invalid opPath (beyond end of operations array): " + opPath);
+            odkCommon.log('E',"controller.getOperationPath: invalid opPath (beyond end of operations array): " + opPath);
             return null;
         }
         
@@ -88,20 +91,20 @@ return {
     getNextOperationPath: function(opPath) {
         
         if ( opPath === undefined || opPath === null ) {
-            shim.log('E',"invalid opPath: null");
+            odkCommon.log('E',"invalid opPath: null");
             return null;
         }
         
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
-            shim.log('E',"controller.getNextOperationPath: invalid opPath: " + opPath);
+            odkCommon.log('E',"controller.getNextOperationPath: invalid opPath: " + opPath);
             return null;
         }
         
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
-            shim.log('E',"controller.getNextOperationPath: no section matching opPath: " + opPath);
+            odkCommon.log('E',"controller.getNextOperationPath: no section matching opPath: " + opPath);
             return null;
         }
 
@@ -114,12 +117,12 @@ return {
         }
 
         if ( intIndex === undefined || intIndex === null ) {
-            shim.log('E',"controller.getNextOperationPath: no branch label matching opPath: " + opPath);
+            odkCommon.log('E',"controller.getNextOperationPath: no branch label matching opPath: " + opPath);
             return null;
         }
 
         if ( intIndex >= section.operations.length ) {
-            shim.log('E',"controller.getNextOperationPath: invalid opPath (beyond end of operations array): " + opPath);
+            odkCommon.log('E',"controller.getNextOperationPath: invalid opPath (beyond end of operations array): " + opPath);
             return null;
         }
         
@@ -127,7 +130,7 @@ return {
         var newPath = parts[0] + '/' + intIndex;
 
         if ( intIndex >= section.operations.length ) {
-            shim.log('E',"controller.getNextOperationPath: advancing beyond end of operations array: " + newPath);
+            odkCommon.log('E',"controller.getNextOperationPath: advancing beyond end of operations array: " + newPath);
             return null;
         }
         
@@ -135,20 +138,20 @@ return {
     },
     getOperation: function(opPath) {
         if ( opPath === undefined || opPath === null ) {
-            shim.log('E',"invalid opPath: null");
+            odkCommon.log('E',"invalid opPath: null");
             return null;
         }
         
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
-            shim.log('E',"controller.getOperation: invalid opPath: " + opPath);
+            odkCommon.log('E',"controller.getOperation: invalid opPath: " + opPath);
             return null;
         }
         
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
-            shim.log('E',"controller.getOperation: no section matching opPath: " + opPath);
+            odkCommon.log('E',"controller.getOperation: no section matching opPath: " + opPath);
             return null;
         }
         var intRegex = /^\d+$/;
@@ -160,12 +163,12 @@ return {
         }
 
         if ( intIndex === undefined || intIndex === null ) {
-            shim.log('E',"controller.getOperation: no branch label matching opPath: " + opPath);
+            odkCommon.log('E',"controller.getOperation: no branch label matching opPath: " + opPath);
             return null;
         }
 
         if ( intIndex >= section.operations.length ) {
-            shim.log('E',"controller.getOperation: invalid opPath (beyond end of operations array): " + opPath);
+            odkCommon.log('E',"controller.getOperation: invalid opPath (beyond end of operations array): " + opPath);
             return null;
         }
         var op = section.operations[intIndex];
@@ -194,20 +197,20 @@ return {
     },
     getPrompt: function(promptPath) {
         if ( promptPath === undefined || promptPath === null ) {
-            shim.log('E',"invalid promptPath: null");
+            odkCommon.log('E',"invalid promptPath: null");
             return null;
         }
         
         var parts = promptPath.split("/");
         if ( parts.length < 2 ) {
-            shim.log('E',"controller.getPrompt: invalid promptPath: " + promptPath);
+            odkCommon.log('E',"controller.getPrompt: invalid promptPath: " + promptPath);
             return null;
         }
         
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
-            shim.log('E',"controller.getPrompt: no section matching promptPath: " + promptPath);
+            odkCommon.log('E',"controller.getPrompt: no section matching promptPath: " + promptPath);
             return null;
         }
         var intRegex = /^\d+$/;
@@ -217,12 +220,12 @@ return {
         }
 
         if ( intIndex === undefined || intIndex === null ) {
-            shim.log('E',"controller.getPrompt: no branch label matching promptPath: " + promptPath);
+            odkCommon.log('E',"controller.getPrompt: no branch label matching promptPath: " + promptPath);
             return null;
         }
 
         if ( intIndex >= section.parsed_prompts.length ) {
-            shim.log('E',"controller.getPrompt: invalid promptPath (beyond end of operations array): " + promptPath);
+            odkCommon.log('E',"controller.getPrompt: invalid promptPath (beyond end of operations array): " + promptPath);
             return null;
         }
         var prompt = section.parsed_prompts[intIndex];
@@ -323,7 +326,7 @@ return {
                 return that.screenManager.beforeMove(isStrict, advancing, advancing && validateOnAdvance);
             } catch(ex) {
                 var opPath = that.getCurrentScreenPath();
-                shim.log('E','controller.beforeMove.exception ' + ex.message + " stack: " + ex.stack  + " px: " + opPath);
+                odkCommon.log('E','controller.beforeMove.exception ' + ex.message + " stack: " + ex.stack  + " px: " + opPath);
                 return {message: "Exception while advancing to next screen. " + ex.message};
             }
         } else {
@@ -583,13 +586,13 @@ return {
                     op = that.getOperation(path);
                     action = op._token_type;
                 } else {
-                    shim.log('E',"controller._doActionAtLoop.failure px: " + path);
+                    odkCommon.log('E',"controller._doActionAtLoop.failure px: " + path);
                     ctxt.failure(that.moveFailureMessage);
                     return;
                 }
                 
             } catch (e) {
-                shim.log('E', "controller._doActionAtLoop.exception px: " +
+                odkCommon.log('E', "controller._doActionAtLoop.exception px: " +
                                 path + ' exception: ' + String(e));
                 var mf = _.extend({}, that.moveFailureMessage);
                 mf.message = mf.message + ' ' + e.message;
@@ -975,8 +978,7 @@ return {
         that._doActionAt(ctxt, op, op._token_type, false);
     },
     /*
-     * Execute a purge of all database changes since the last
-     * user-initiated save.
+     * Remove all database changes since the last user-initiated save.
      *
      * Success: we have successfully deleted all checkpoint
      *   records for this instance the database.
@@ -1029,8 +1031,11 @@ return {
      * Callback interface from ODK Survey (or other container apps) into javascript.
      * Handles all dispatching back into javascript from external intents
     */
-    actionCallback:function(ctxt, promptPath, internalPromptContext, action, jsonObject) {
+    actionCallback:function(ctxt, dispatchString, action, jsonObject) {
         var that = this;
+		var dispatchObj = JSON.parse(dispatchString);
+		var promptPath = dispatchObj.promptPath;
+		var internalPromptContext = dispatchObj.userAction;
         var screenPath = that.getCurrentScreenPath();
         ctxt.log('I','controller.actionCallback', ((screenPath != null) ? ("px: " + screenPath) : "no current prompt"));
         
@@ -1068,6 +1073,85 @@ return {
         window.location.hash = url;
         parsequery.changeUrlHash(ctxt);
     },
+	// dispatch actions coming from odkCommon (Java code).
+	delay: 400,
+    insideQueue: false,
+    insideCallbackCtxt: false,
+    queuedActionAvailableListener: function() {
+        var that = this;
+        if ( this.insideQueue || this.insideCallbackCtxt ) return;
+        try {
+            this.insideQueue = true;
+			var value = that.viewFirstQueuedAction();
+			if ( value === null || value === undefined ) {
+				return;
+			}
+			var action = JSON.parse(value);
+			that.insideCallbackCtxt = true;
+			var baseCtxt = that.newCallbackContext();
+			var terminateCtxt = $.extend({},baseCtxt,{success: function() {
+					that.insideCallbackCtxt = false;
+					baseCtxt.success();
+					setTimeout(function() {
+						that.queuedActionAvailableListener();
+						}, that.delay);
+				}, failure: function() {
+					that.insideCallbackCtxt = false;
+					baseCtxt.failure();
+					setTimeout(function() {
+						that.queuedActionAvailableListener();
+						}, that.delay);
+				}});
+
+			var innerCtxt = that.newCallbackContext();
+			var ctxt = $.extend({}, innerCtxt, {success: function() {
+				// TODO: do we want to do this on failure?
+				// on success or failure, remove the queued action
+				that.removeFirstQueuedAction();
+				innerCtxt.success();
+			}, failure: function() {
+				// TODO: do we want to do pop up a toast on failure?
+				// on success or failure, remove the queued action
+				that.removeFirstQueuedAction();
+				innerCtxt.failure();
+			}});
+			ctxt.setTerminalContext(terminateCtxt);
+			if ( typeof action === 'string' || action instanceof String) {
+				ctxt.log('I', "controller.queuedActionAvailableListener.changeUrlHash (immediate)", action);
+				that.changeUrlHash(ctxt,action);
+			} else {
+				ctxt.log('I', "controller.queuedActionAvailableListener.actionCallback (immediate)", action.action);
+				that.actionCallback( ctxt, action.dispatchString, action.action, action.jsonValue );
+			}
+        } finally {
+            this.insideQueue = false;
+        }
+    },
+	
+    /**
+     * This notifies the Java layer that the framework has been loaded and 
+	 * will register a listener for all of the queued actions, if any.
+     */
+    registerQueuedActionAvailableListener: function(ctxt, refId, m) {
+        var that = this;
+        var baseCtxt = that.newCallbackContext();
+        var terminateCtxt = $.extend({},baseCtxt,{success: function() {
+			    odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
+                baseCtxt.success();
+            }, failure: function() {
+			    odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
+                baseCtxt.failure();
+            }});
+        ctxt.setTerminalContext(terminateCtxt);
+        if ( m === undefined || m === null ) {
+            shim.frameworkHasLoaded(refId, true );
+            ctxt.success();
+        } else {
+            shim.frameworkHasLoaded(refId, false );
+            ctxt.failure(m);
+        }
+    },
+
     // exit the page
     leaveInstance:function(ctxt) {
         ctxt.success();
@@ -1172,7 +1256,7 @@ return {
                 logger.timeStamp(method);
             }
             var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail == null) ? ")" : ") detail: " + detail);
-            shim.log(severity, dlog);
+            odkCommon.log(severity, dlog);
  
         },
 
@@ -1261,36 +1345,36 @@ return {
             var ll = (pi && pi.logLevel) ? pi.logLevel : 'D';
             switch(severity) {
             case 'S':
-                shim.log(severity, flattened);
+                odkCommon.log(severity, flattened);
                 break;
             case 'F':
-                shim.log(severity, flattened);
+                odkCommon.log(severity, flattened);
                 break;
             case 'E':
-                shim.log(severity, flattened);
+                odkCommon.log(severity, flattened);
                 break;
             case 'W':
                 if ( ll !== 'E' ) {
-                    shim.log(severity, flattened);
+                    odkCommon.log(severity, flattened);
                 }
                 break;
             case 'I':
                 if ( ll !== 'E' && ll !== 'W' ) {
-                    shim.log(severity, flattened);
+                    odkCommon.log(severity, flattened);
                 }
                 break;
             case 'D':
                 if ( ll !== 'E' && ll !== 'W' && ll !== 'I' ) {
-                    shim.log(severity, flattened);
+                    odkCommon.log(severity, flattened);
                 }
                 break;
             case 'T':
                 if ( ll !== 'E' && ll !== 'W' && ll !== 'I' && ll !== 'D' ) {
-                    shim.log(severity, flattened);
+                    odkCommon.log(severity, flattened);
                 }
                 break;
             default:
-                shim.log(severity, flattened);
+                odkCommon.log(severity, flattened);
                 break;
             }
         }
@@ -1375,7 +1459,7 @@ return {
             try {
                 throw new Error('dummy');
             } catch (e) {
-                shim.log('E',"no event passed into newContext call: " + e.stack);
+                odkCommon.log('E',"no event passed into newContext call: " + e.stack);
             }
             detail =  "seq: " + count + " <no event>";
             type = "<no event>";

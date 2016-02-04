@@ -434,7 +434,7 @@ var resumeFn = function(idxStart) {
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQuery, cbFnQueryFailure);
 
     // Not implemented
-    //odkData.rawQuery('select * from geotagger where Description = ?', ['The Ave'], cbFnRawQuery, cbFnRawQueryFail);
+    //odkData.rawQuery('geotagger', 'select * from geotagger where Description = ?', ['The Ave'], cbFnRawQuery, cbFnRawQueryFail);
 
     // Tea_types Query Test
     odkData.query('Tea_types', null, null, null, null, null, null, false, cbFnTeaTypesQuery, cbFnQueryTeaTypesFailure);

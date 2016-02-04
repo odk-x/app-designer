@@ -25,7 +25,7 @@ function(opendatakit,  database,   _) {
             } else if( 'default' in textOrLangMap ) {
                 return textOrLangMap['default'];
             } else {
-                shim.log('E',"Could not localize object. Locale '" + locale + 
+                odkCommon.log('E',"Could not localize object. Locale '" + locale + 
                     "' and 'default' missing from " + textOrLangMap);
                 throw new Error("Could not localize object. Locale '" + locale + 
                     "' and 'default' missing from: " + textOrLangMap );
@@ -50,7 +50,7 @@ function(opendatakit,  database,   _) {
                 return 0;
             }
             if(!_.isArray(promptValue)) {
-                shim.log('E','countSelected() expects an array. Received: ' + promptValue );
+                odkCommon.log('E','countSelected() expects an array. Received: ' + promptValue );
                 throw new Error("countSelected() expects an array.  Received: '" + promptValue + "'");
             }
             return promptValue.length;

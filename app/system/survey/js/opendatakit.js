@@ -32,20 +32,56 @@ return {
      * interaction model.
      * 
      */
-    mdl: {data: {},  // dataTable instance data values: (...)
-        metadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
-        tableMetadata: {}, // table_definitions and key_value_store_active("table","global") values: table_id, tableKey, dbTableName
-        columnMetadata: {},// column_definitions and key_value_store_active("column",elementKey) values: none...
-        dataTableModel: {},// inverted and extended formDef.model for representing data store
-        formDef: null, 
-        formPath: null, 
-        instanceId: null, 
-        table_id: null
-        },
+    mdl: {  data: {},  // dataTable instance data values: (...)
+			instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
+			// metadata: from the odkData interface...
+			//  {  tableId: TableDefinitionEntry.getTableId(),
+			//     schemaETag: TableDefinitionEntry.getSchemaETag(),
+			//     lastDataETag: TableDefinitionEntry.getLastDataETag(),
+			//     lastSyncTime: TableDefinitionEntry.getLastSyncTime(),
+			//
+			// NOTE: elementKeyMap is NOT AVAILABLE in Feb 2016 app-designer. Only available on device.
+			//     elementKeyMap: { columnElementKey: index-into-row[]-for-column-value },
+			// NOTE: orderedColumns is NOT AVAILABLE in Feb 2016 app-designer. Only available on device.
+			//     orderedColumns: {
+			//                 fieldElementNameA: {
+			//	                  type: elementDataType,
+			//					  elementType: elementType, // optional -- if different than type
+			//                    elementKey: fullyQualifiedName, // underscore-concatenated elementName ancestor_..._this path
+			//                    items: {  // only if type == 'array'
+			//                          recursive JSON schema type defn. (type, elementType, ...)
+			//                       },
+			//                    properties: { // only if type == 'object'
+			//                        nestedFieldElementNameA: {
+			//                          recursive JSON Schema type defn. (type, elementType, ...)
+			//                        },
+			//                        nestedFieldElementNameB...
+			//                      }
+			//                   },
+			//                 fieldElementNameB...
+			//              }
+			//     keyValueStoreList: [ 
+			//                     // 
+			//                     // value is one of bool, integer, number or, for all other types (e.g., array, object), a string. 
+			//                     // 
+			//              { partition: xxx, aspect: xxx, key: xxx, type: xxx, value: xxx },
+			//              ...
+			//          ]
+			//
+			//   other tools can add additional fields (these are just the common ones)
+			//   }
+			//
+			metadata: {},
+			dataTableModel: {},// inverted and extended formDef.model for representing data store
+			formDef: null, 
+			formPath: null, 
+			instanceId: null, 
+			table_id: null
+		},
     platformInfo: null,
     
     logInitDone:function(pagename) {
-        shim.log("I","logInitDone: doneInit ms: " + (+new Date()) + " page: " + pagename);
+        odkCommon.log("I","logInitDone: doneInit ms: " + (+new Date()) + " page: " + pagename);
     },
 
     /**
@@ -54,7 +90,7 @@ return {
     getPlatformInfo:function() {
         // fetch these settings from ODK Survey (the container app)
         if ( this.platformInfo === undefined || this.platformInfo === null ) {
-            var jsonString = shim.getPlatformInfo();
+            var jsonString = odkCommon.getPlatformInfo();
             this.platformInfo = JSON.parse(jsonString);
         }
         return this.platformInfo;
@@ -83,7 +119,7 @@ return {
             tableId + '/instances/' + iDirName + '/';
 
         if ( prefix.length < uriFragment.length && uriFragment.substring(0,prefix.length) === prefix ) {
-            shim.log('e','transitional rowpath with prefixed path!');
+            odkCommon.log('e','transitional rowpath with prefixed path!');
             return this.getPlatformInfo().baseUri + uriFragment;
         } else {
             return this.getPlatformInfo().baseUri + prefix + uriFragment;
@@ -129,7 +165,7 @@ return {
     },
 
     getProperty:function(propertyId) {
-        return shim.getProperty(propertyId);
+        return odkCommon.getProperty(propertyId);
     },
 
     genUUID:function() {
@@ -144,7 +180,7 @@ return {
     getSameRefIdHashString:function(formPath, instanceId, screenPath) {
         var refId = this.getRefId();
         if ( formPath === undefined || formPath === null ) {
-            formPath = shim.getBaseUrl() + "/";
+            formPath = odkCommon.getBaseUrl() + "/";
         }
         var qpl =
             '#formPath=' + encodeURIComponent(formPath) +
@@ -156,7 +192,7 @@ return {
     getHashString:function(formPath, instanceId, screenPath) {
         var refId = this.genUUID();
         if ( formPath === undefined || formPath === null ) {
-            formPath = shim.getBaseUrl() + "/";
+            formPath = odkCommon.getBaseUrl() + "/";
         }
         var qpl =
             '#formPath=' + encodeURIComponent(formPath) +
@@ -170,7 +206,7 @@ return {
         // #formPath=...&instanceId=...&...
         // reformat it into a URI suitable for invoking ODK Survey
         var that = this;
-        shim.log("D","convertHashStringToSurveyUri: hash " + hashString);
+        odkCommon.log("D","convertHashStringToSurveyUri: hash " + hashString);
         if ( !hashString.match(/^(\??#).*/) ) {
             throw new Error('parsing of hashString failed - not a relative path (does not begin with ?# or #');
         }
@@ -223,7 +259,7 @@ return {
             this.getPlatformInfo().appName + "/" + tableId + "/" + formId + "/#" +
             reconstitutedKeyValues.substring(1);
 
-        shim.log("D","convertHashStringToSurveyUri: as Uri " + uri);
+        odkCommon.log("D","convertHashStringToSurveyUri: as Uri " + uri);
         return uri;
     },
     setCurrentFormDef:function(formDef) {
