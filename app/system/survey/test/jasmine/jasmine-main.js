@@ -1,5 +1,5 @@
 requirejs.config({
-    baseUrl: '../../',
+    baseUrl: odkCommon.getBaseUrl(),
     paths: {
         // third-party libraries we depend upon 
         jqmobile : 'libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2',
@@ -15,7 +15,8 @@ requirejs.config({
         // top-level objects
         mdl : 'js/mdl',
         promptTypes : 'js/promptTypes',
-        // shim.js -- stub directly loaded
+        // odkCommon.js -- stub directly loaded
+		// odkSurvey.js -- stub directly loaded
         // functionality
         prompts : 'js/prompts',
         database : 'js/database',

@@ -32,7 +32,9 @@ requirejs.config({
         // top-level objects
         screenTypes : 'survey/js/screenTypes',
         promptTypes : 'survey/js/promptTypes',
-        // shim.js -- stub directly loaded
+		// odkCommon.js -- stub directly loaded
+		// odkData.js -- stub directly loaded
+        // odkSurvey.js -- stub directly loaded
         // functionality
         screens : 'survey/js/screens',
         prompts : 'survey/js/prompts',

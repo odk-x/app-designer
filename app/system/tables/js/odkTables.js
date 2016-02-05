@@ -12,87 +12,6 @@
  * org.opendatakit.tables.view.webkits.ControlIf.
  */
 
-
-/**
- * Compute and return the base URI for this machine. This will allow the code
- * to function independently of the host name.
- * 
- * Returns a string representing the base uri in the format:
- * http://DOMAIN/DIRS/. Note the trailing slash.
- */
-function computeBaseUri() {
-  // To compute this we are going to rely on the location of the containing
-  // file relative to the location we are serving as are root. If this is
-  // changed, this file must be updated appropriately.
-  // Since we are expecting this file to live in app/framework/survey/js/, we
-  // can look for the first occurrence and take everything before it.
-
-  var expectedFileLocation = 'system/tables/js/odkTables.js';
-
-  var fileLocation = getCurrentFileLocation();
-
-  var indexToFile = fileLocation.indexOf(expectedFileLocation);
-
-  var result = fileLocation.substring(0, indexToFile);
-
-  return result;
-
-}
-
-function getPlatformInfo() {
-    // 9000 b/c that's what grunt is running on. Perhaps should configure
-    // this
-    var platformInfo = {
-        container: 'Chrome',
-        version: '31.0.1650.63',
-        appName: 'Tables-test',
-        baseUri: baseUri,
-        logLevel: 'D'
-    };
-    // Because the phone returns a String, we too are going to return a
-    // string here.
-    var result = JSON.stringify(platformInfo);
-    return result;
-}
-
-function getFileAsUrl(relativePath) {
-    // strip off backslashes
-    var cleanedStr = relativePath.replace(/\\/g, '');
-    var baseUri = JSON.parse(getPlatformInfo()).baseUri;
-    var result = baseUri + cleanedStr;
-    return result;
-}
-
-
-/**
- * Return the location of the currently executing file.
- */
-function getCurrentFileLocation() {
-  // We need to get the location of the currently
-  // executing file. This is not readily exposed, and it is not as simple as
-  // finding the current script tag, since callers might be loading the file
-  // using RequireJS or some other loading library. We're going to instead
-  // pull the file location out of a stack trace.
-  var error = new Error();
-  var stack = error.stack;
-  
-  // We expect the stack to look something like:
-  // TypeError: undefined is not a function
-  //     at Object.window.shim.window.shim.getPlatformInfo
-  //     (http://homes.cs.washington.edu/~sudars/odk/survey-js-adaptr/app/framework/survey/js/shim.js:45:29)
-  //     blah blah blah
-  // So now we'll extract the file location. We'll do this by assuming that
-  // the location occurs in the first parentheses.
-  var openParen = stack.indexOf('(');
-  var closedParen = stack.indexOf(')');
-
-  var fileLocation = stack.substring(openParen + 1, closedParen);
-
-  return fileLocation;
-}
-
-
-
 /**
  * The idea of this call is that if we're on the phone, odkTables will have been
  * set by the java framework. This script, however, should get run at the top
@@ -100,37 +19,19 @@ function getCurrentFileLocation() {
  * object.
  */
 if (!window.odkTables) {
-
-    var importSynchronous = function(script) {
-        // script is appName-relative -- need to prepend the appName.
-        
-        var path = window.location.pathname;
-        if ( path[0] === '/' ) {
-            path = path.substr(1);
-        }
-        if ( path[path.length-1] === '/' ) {
-            path = path.substr(0,path.length-1);
-        }
-        var parts = path.split('/');
-        // IMPORTANT: ajax doesn't like the explicit 
-        // scheme and hostname. Drop those, and just
-        // specify a URL (starting with /).
-        var urlScript = '/' + parts[0] + '/' + script;
-        
-        // get the script body
-        var jqxhr = $.ajax({
-            type: 'GET',
-            url: urlScript,
-            dataType: 'json',
-            async: false
-        });
-        
-        // and eval it in the context of window
-        with (window) {
-            eval(jqxhr.responseText);
-        }
-    };
     
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	// TODO: this code does not really work
+	
     // This will be the object specified in odkTables.json. It is not set until
     // setBackingObject is called.
     var odkTablesObj = null;
@@ -231,7 +132,7 @@ if (!window.odkTables) {
             // then we need the default
             relativePath = odkTablesObj.tables[tableId].defaultListFile;
         }
-        relativePath = pub.getFileAsUrl(relativePath);
+        relativePath = odkCommon.getFileAsUrl(relativePath);
         window.location.href = relativePath;
     };
 
@@ -274,7 +175,7 @@ if (!window.odkTables) {
             throw 'launchHTML()--relativePath not a string';
         }
         // We don't have a default for this, so just launch it.
-        relativePath = pub.getFileAsUrl(relativePath);
+        relativePath = odkCommon.getFileAsUrl(relativePath);
         window.location.href = relativePath;
     };
 
@@ -294,7 +195,7 @@ if (!window.odkTables) {
             // Then we need the default
             relativePath = odkTablesObj.tables[tableId].defaultDetailFile;
         }
-        relativePath = pub.getFileAsUrl(relativePath);
+        relativePath = odkCommon.getFileAsUrl(relativePath);
         window.location.href = relativePath;
     };
 
@@ -369,7 +270,7 @@ if (!window.odkTables) {
     // Now we also need to set the backing object we are going to use. We
     // assume it is in the output/debug directory.
     $.ajax({
-        url: getFileAsUrl('../app/output/debug/odkTables.json'),
+        url: odkCommon.getFileAsUrl('../app/output/debug/odkTables.json'),
         success: function(data) {
             var controlObject = data;
             pub.setBackingObject(controlObject);

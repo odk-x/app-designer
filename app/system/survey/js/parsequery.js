@@ -57,12 +57,12 @@ return {
 			// this will clear the auxillary key-value pairs in the URI.
 			// at this point, these initial values will have been applied to the 
 			// instance's initial values.
-			shim.clearAuxillaryHash();
+			odkSurvey.clearAuxillaryHash();
             // fire the controller to render the first page.
             ctxt.log('D',"parsequery._effectChange.startAtScreenPath. " + (sameInstance ? "sameInstance" : "differentForm and/or differentInstance"),
                         "startAtScreenPath("+screenPath+") refId: " + refId + " ms: " + (+new Date()));
             // set the refId. From this point onward,
-            // changes will be applied within the shim
+            // changes will be applied within the odkSurvey
             opendatakit.setRefId(refId);
             if ( instanceId == null ) {
                 opendatakit.clearCurrentInstanceId();
@@ -72,8 +72,8 @@ return {
             // if we are not starting fresh, we will have 
             // something on the stack -- retain it, otherwise
             // reset the stack to the default content.
-            if ( !shim.hasSectionStack(refId) ) {
-                shim.clearSectionScreenState(refId);
+            if ( !odkSurvey.hasSectionStack(refId) ) {
+                odkSurvey.clearSectionScreenState(refId);
             }
             that.controller.startAtScreenPath(ctxt, screenPath);
         }}), model, formId, instanceId, sameInstance, instanceMetadataKeyValueMap);
@@ -254,22 +254,22 @@ return {
         }
         
         if ( refId == null ) {
-            ctxt.log('I','parsequery._parseParameters.shim.refId is null -- generating unique value');
+            ctxt.log('I','parsequery._parseParameters.odkSurvey.refId is null -- generating unique value');
             refId = opendatakit.genUUID();
         }
         
         // This may fail when embedded
         try {
-            shim.refId = refId;
+            odkSurvey.refId = refId;
         } catch(e) {
-            ctxt.log('W','parsequery._parseParameters.shim.refId assignment failed (ok if embedded)');
+            ctxt.log('W','parsequery._parseParameters.odkSurvey.refId assignment failed (ok if embedded)');
         }
-        ctxt.log('D','parsequery._parseParameters.shim.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
+        ctxt.log('D','parsequery._parseParameters.odkSurvey.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
         
         if ( formPath === '../config/assets/framework/forms/framework/' ) {
             // instanceId is always specified and invariant on the framework form.
             instanceId = 'invariant:0';
-            shim.setInstanceId(refId, instanceId);
+            odkSurvey.setInstanceId(refId, instanceId);
         }
         
         var formDef = opendatakit.getCurrentFormDef();

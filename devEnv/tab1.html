@@ -7,7 +7,9 @@
 <link  rel='stylesheet' type='text/css'href='css/animate.css' />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <script type="text/javascript" src="../app/system/libs/jquery.1.10.2.js"></script>
-<script type="text/javascript" src="../app/system/survey/js/shim.js"></script>
+  <script type="text/javascript" src="../app/system/js/odkCommon.js"></script>
+  <script type="text/javascript" src="../app/system/js/odkData.js"></script>
+  <script type="text/javascript" src="../app/system/survey/js/odkSurvey.js"></script>
   <script type="text/javascript">
 //<![CDATA[
   var pageStack = [];
@@ -32,7 +34,7 @@
         var ps = document.getElementById('previewscreen');
 		var parent = ps.parentNode;
 		ps.id = 'previewscreen-' + pageStack.length;
-		pageStack.push(ps.contentWindow.shim.refId);
+		pageStack.push(ps.contentWindow.odkSurvey.refId);
 		ps.style.display = 'none';
 		var newIframe = document.createElement('iframe');
 		newIframe.className = 'resizeablescreen';
@@ -51,7 +53,7 @@
 			priorIframe.style.display = 'block';
 			parent.removeChild(ps);
 			priorIframe.id = 'previewscreen';
-			priorIframe.contentWindow.shim.refId = priorRefId;
+			priorIframe.contentWindow.odkSurvey.refId = priorRefId;
 			priorIframe.contentWindow.redrawHook();
 		}
   }

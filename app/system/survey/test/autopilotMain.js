@@ -10,7 +10,7 @@
  * interpretation of the formDef.json for the form).
  */
 requirejs.config({
-    baseUrl: shim.getBaseUrl(),
+    baseUrl: odkCommon.getBaseUrl(),
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon 
@@ -29,7 +29,8 @@ requirejs.config({
         mdl : 'survey/js/mdl',
         screenTypes : 'survey/js/screenTypes',
         promptTypes : 'survey/js/promptTypes',
-        // shim.js -- stub directly loaded
+		// odkCommon.js -- stub directly loaded
+        // odkSurvey.js -- stub directly loaded
         // functionality
         screens : 'survey/js/screens',
         prompts : 'survey/js/prompts',
@@ -96,7 +97,7 @@ function verifyLoad( prefix, alist, args ) {
     var i;
     for ( i = 0 ; i < args.length ; ++i ) {
         if ( args[i] === undefined || args[i] === null ) {
-            shim.log('E',prefix + ' cyclic dependency prevented initialization of ' + alist[i]);
+            odkCommon.log('E',prefix + ' cyclic dependency prevented initialization of ' + alist[i]);
         }
     }
 }
@@ -179,7 +180,7 @@ require(['jquery'],
             ['jquery'],
             [$]);
 
-    shim.log('I','main.require.jquery.loaded establish mobileinit action');
+    odkCommon.log('I','main.require.jquery.loaded establish mobileinit action');
     window.$(document).on("mobileinit", function () {
     
         window.$.mobile.ajaxEnabled = false;
@@ -246,7 +247,7 @@ require(['jquery'],
                             } else if ( hashIdx > 0 ) {
                                         newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                             }
-                            shim.log('W','jqmConfig.addSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
+                            odkCommon.log('W','jqmConfig.addSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
                             window.location.assign(newRef);
                         } else if ( search !== undefined && search !== null && search.indexOf("purge") >= 0 ) {
                             // remove the search string (?purge) and replace with ?
@@ -269,7 +270,7 @@ require(['jquery'],
                         // we have a '?' on the URL. Forcibly remove it.
                         hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
                         newRef = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
-                        shim.log('W','jqmConfig.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
+                        odkCommon.log('W','jqmConfig.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
                         window.location.assign(newRef);
                     } else {
                         // no search term -- pass through
@@ -282,7 +283,7 @@ require(['jquery'],
                     parsequery.changeUrlHash(ctxt);
                 }
             }, function(err) {
-                shim.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+                odkCommon.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
             });
         }, 0);
 
@@ -295,10 +296,10 @@ require(['jquery'],
             ['jqmobile'],
             [_jqmobile]);
     }, function(err) {
-        shim.log('E','main.require.jqmobile.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+        odkCommon.log('E','main.require.jqmobile.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
     });
         
 
 }, function(err) {
-    shim.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+    odkCommon.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
 });

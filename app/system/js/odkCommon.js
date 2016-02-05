@@ -381,7 +381,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
 			var lat, lng, alt, acc;
 
             var value;
-            that.log("D","shim: DO: doAction(" + dispatchString + ", " + action + ", ...)");
+            that.log("D","odkCommon: DO: doAction(" + dispatchString + ", " + action + ", ...)");
             if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action, 

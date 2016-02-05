@@ -2,7 +2,7 @@
 /**
  * This is a random collection of methods that don't quite belong anywhere.
  *
- * A set of utilities, some of which wrap the Java interface (shim.js), and others
+ * A set of utilities, some of which wrap the Java interface (odkSurvey.js), and others
  * provide useful parsing or interpretation of localization details.
  *
  */
@@ -300,7 +300,7 @@ return {
     
     clearLocalInfo:function(type) {
         // wipe the ref_id --
-        // this prevents saves into the shim from succeeding...
+        // this prevents saves into odkSurvey from succeeding...
         this.mdl.ref_id = this.genUUID();
         if ( type === "table" ) {
             this.mdl.table_id = null;
@@ -316,17 +316,17 @@ return {
     clearCurrentInstanceId:function() {
         // Update container so that it can save media and auxillary data
         // under different directories...
-        shim.clearInstanceId(this.getRefId());
+        odkSurvey.clearInstanceId(this.getRefId());
     },
     
     setCurrentInstanceId:function(instanceId) {
         // Update container so that it can save media and auxillary data
         // under different directories...
-        shim.setInstanceId( this.getRefId(), instanceId);
+        odkSurvey.setInstanceId( this.getRefId(), instanceId);
     },
     
     getCurrentInstanceId:function() {
-        return shim.getInstanceId(this.getRefId());
+        return odkSurvey.getInstanceId(this.getRefId());
     },
     
     setCurrentTableId:function(table_id) {
