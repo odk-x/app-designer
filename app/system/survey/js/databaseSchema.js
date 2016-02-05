@@ -117,6 +117,8 @@ accumulateUnitOfRetentionUpdates:function(model, formId, instanceId, kvMap, accu
  * get the contents of the active data table row for a given table
  * for related forms (with filters).
  *
+ * NOTE: If the last update's _sync_state is 'deleted', then we do not return anything.
+ *
  * dbTableName
  * selection  e.g., 'name=? and age=?'
  * selectionArgs e.g., ['Tom',33]
@@ -125,23 +127,23 @@ accumulateUnitOfRetentionUpdates:function(model, formId, instanceId, kvMap, accu
  * Requires: no globals
  */
 selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
-    var args = ['deleted','deleted'];
+    var args = ['deleted'];
     if ( selection === null || selection === undefined ) {
         return {
-                stmt : 'select * from "' + dbTableName + '" as T where (_sync_state is null or _sync_state != ?) and ' + 
+                stmt : 'select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
                     'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName +
-                           '" as V where V._id=T._id and (V._sync_state is null or V._sync_state != ?))' +
+                           '" as V where V._id=T._id)' +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                bind : ['deleted','deleted']    
+                bind : args  
             };
     } else {
         if (selectionArgs !== null && selectionArgs !== undefined ) {
             args = args.concat(selectionArgs);
         }
         return {
-                stmt :  'select * from (select * from "' + dbTableName + '" as T where (_sync_state is null or _sync_state != ?) and ' + 
+                stmt :  'select * from (select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
                     'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
-                        '" as V where V._id=T._id and (V._sync_state is null or V._sync_state != ?))) where ' + selection +
+                        '" as V where V._id=T._id)) where ' + selection +
                         ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
                 bind : args
             };
