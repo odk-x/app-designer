@@ -139,7 +139,7 @@ return {
 		// values to their defaults then apply the instanceMetadataKeyValueMap for any session 
 		// variables to the data set (any settings for data table content are ignored).
 		//
-		if ( instanceId === null || instanceId === undefined ) {
+		if ( instanceId === null || instanceId === undefined || (model.table_id === "framework") ) {
 			ctxt.log('D','initializeInstance.noInstance');
 			model.instanceMetadata = {};
 			model.data = {};
@@ -246,9 +246,13 @@ return {
 						value = databaseUtils._fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
 						that.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
 					}
-
-					// apply all of these deferred changes into a checkpoint row
-					that._initializeInstanceWithPendingChanges(ctxt, model, formId, instanceId, accumulatedChanges );
+					
+					if ( $.isEmptyObject(accumulatedChanges)) {
+						ctxt.success();
+					} else {
+						// apply the accumulated changes - this will also refresh the model's data and instanceMetadata
+						that._initializeInstanceWithPendingChanges(ctxt, model, formId, instanceId, accumulatedChanges );
+					}
 					return;
 				} else {
 					// read data from the row and
@@ -289,8 +293,8 @@ return {
 					if ( $.isEmptyObject(accumulatedChanges)) {
 						ctxt.success();
 					} else {
-						// apply the accumulated changes
-						that._initializeInstanceWithPendingChanges(ctxt, model, formId, instanceId, accumulatedChanges )
+						// apply the accumulated changes - this will also refresh the model's data and instanceMetadata
+						that._initializeInstanceWithPendingChanges(ctxt, model, formId, instanceId, accumulatedChanges );
 					}
 				}
 			},
@@ -322,6 +326,11 @@ return {
         //  }
         //  ctxt.log('D','get_linked_instances.inside', dbTableName + " instanceList: " + instanceList.length);
         //  ctxt.success(instanceList);
+		if ( dbTableName === "framework" ) {
+			ctxt.success([]);
+			return;
+		}
+		
 		var ss = databaseSchema.selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
 		odkData.rawQuery(dbTableName, ss.stmt, ss.bind, 
 			function(reqData) {
@@ -542,6 +551,8 @@ return {
         var model = opendatakit.getCurrentModel();
         var instanceId = opendatakit.getCurrentInstanceId();
 		that.setModelDataValueDeferredChange( model, formId, instanceId, name, value, that.pendingChanges );
+
+        databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, that.pendingChanges);
     },
 
     /**
@@ -555,10 +566,7 @@ return {
         var justChange = {};
         justChange[name] = {value: value, isInstanceMetadata: false };
         // apply the change immediately...
-        databaseSchema.accumulateUnitOfRetentionUpdates(model.table_id, 
-                        model.dataTableModel, formId, instanceId, justChange, accumulatedChanges );
-
-        databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, accumulatedChanges);
+        databaseSchema.accumulateUnitOfRetentionUpdates(model, formId, instanceId, justChange, accumulatedChanges );
     },
 
     /**

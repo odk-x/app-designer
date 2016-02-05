@@ -183,6 +183,11 @@ var odkDataIf = {
             return;
         }
 
+        if ( tableId === "framework" ) {
+            defCtxt.failure({message: "tableId cannot be 'framework'"});
+            return;
+        }
+
         var def = that._tableDefs[tableId];
         if ( def !== null && def !== undefined ) {
             defCtxt.success(def);

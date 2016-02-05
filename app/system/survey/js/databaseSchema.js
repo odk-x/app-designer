@@ -58,13 +58,18 @@ dataTablePredefinedColumns: {
  *
  * Requires: No global dependencies
  */
-accumulateUnitOfRetentionUpdates:function(dbTableName, dataTableModel, formId, instanceId, kvMap, accumulatedChanges) {
+accumulateUnitOfRetentionUpdates:function(model, formId, instanceId, kvMap, accumulatedChanges) {
     var that = this;
-
+	var dbTableName = model.table_id;
+	var dataTableModel = model.dataTableModel;
+	
+	// track the values we have assigned. Useful for catching typos in the elementKey (field) names.
     var processSet = {};
     
     var f, defElement, elementPathPair, kvElement, v;
-
+	var changeElement;
+	var sessionVariableChanges = {};
+						
     for (f in dataTableModel) {
         defElement = dataTableModel[f];
         if ( databaseUtils.isUnitOfRetention(defElement) ) {
@@ -80,29 +85,27 @@ accumulateUnitOfRetentionUpdates:function(dbTableName, dataTableModel, formId, i
                 kvElement = elementPathPair.element;
                 // track that we matched the keyname...
                 processSet[elementPathPair.elementPath] = true;
+				// ensure that undefined are treated as null...
                 if (kvElement.value === undefined || kvElement.value === null) {
-                    if ( !defElement.isSessionVariable ) {
-                        if ( instanceId !== null && instanceId !== undefined ) {
-                            accumulatedChanges[f] = {"elementPath" : elementPath, "value": null};
-                        }
-                    } else {
-                        odkCommon.setSessionVariable(elementPath, JSON.stringify(null));
-                    }
-                } else {
-                    // the odkData layer works directly on the value
-                    // but session variables need the storage value...
-                    if ( !defElement.isSessionVariable ) {
-                        if ( instanceId !== null && instanceId !== undefined ) {
-                            accumulatedChanges[f] = {"elementPath" : elementPath, "value": kvElement.value};
-                        }
-                    } else {
-                        v = databaseUtils.toSerializationFromElementType(defElement, kvElement.value, true);
-                        odkCommon.setSessionVariable(elementPath, v);
-                    }
-                }
+					kvElement.value = null;
+				}
+				changeElement = {"elementPath": elementPath, "value": kvElement.value};
+				// the odkData layer works directly on the value
+				// but session variables need the storage value...
+				if ( !defElement.isSessionVariable ) {
+					if ( instanceId !== null && instanceId !== undefined ) {
+						accumulatedChanges[f] = changeElement;
+					}
+				} else {
+                    v = databaseUtils.toSerializationFromElementType(defElement, kvElement.value, true);
+					odkCommon.setSessionVariable(elementPath, v);
+					sessionVariableChanges[f] = changeElement;
+				}
             }
         }
-    }
+	}
+	// apply the session variable changes immediately to the model.
+	databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, sessionVariableChanges);
     
     for ( f in kvMap ) {
         if ( processSet[f] !== true ) {
