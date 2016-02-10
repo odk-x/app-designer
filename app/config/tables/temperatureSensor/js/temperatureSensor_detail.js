@@ -32,8 +32,8 @@ function display() {
 
     // Get the data to graph from the database
     var tempData = control.query('temperatureSensor', 'sensorid = ?', [data.get('sensorid')]);
-    var xValues = JSON.parse(tempData.getColumnData('timestamp'));
-    var yValues = JSON.parse(tempData.getColumnData('sample'));
+    var xValues = tempData.getColumnData('timestamp');
+    var yValues = tempData.getColumnData('sample');
 
     // Map the values so that they can be used by d3
     var dataI = new Array();

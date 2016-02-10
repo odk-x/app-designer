@@ -103,27 +103,7 @@ return {
      *
      */
     getRowFileAsUrl:function(tableId, instanceId, rowpath) {
-        if ( tableId === null || tableId === undefined ) return null;
-        if ( instanceId === null || instanceId === undefined ) return null;
-        if ( rowpath === null || rowpath === undefined ) return null;
-        
-        var uriFragment = rowpath;
-        if ( rowpath.charAt(0) === '/' ) {
-            uriFragment = rowpath.substring(1);
-        }
-        
-        var iDirName = XRegExp.replace(instanceId, 
-                        this._forbiddenInstanceDirCharsPattern, '_', 'all');
-
-        var prefix = 'data/tables/' + 
-            tableId + '/instances/' + iDirName + '/';
-
-        if ( prefix.length < uriFragment.length && uriFragment.substring(0,prefix.length) === prefix ) {
-            odkCommon.log('e','transitional rowpath with prefixed path!');
-            return this.getPlatformInfo().baseUri + uriFragment;
-        } else {
-            return this.getPlatformInfo().baseUri + prefix + uriFragment;
-        }
+		return odkCommon.getRowFileAsUrl(tableId, instanceId, rowpath);
     },
     
     /**

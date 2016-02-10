@@ -313,7 +313,7 @@ return {
         //
         // for ( var i = 0 ; i < result.rows.length ; i+=1 ) {
         //      var instance = result.rows.item(i);
-        //      var ts = opendatakit.convertNanosToDateTime(instance._savepoint_timestamp);
+        //      var ts = odkCommon.toDateFromOdkTimeStamp(instance._savepoint_timestamp);
         //      instanceList.push({
         //          display_field: (displayElementName === undefined || displayElementName === null) ? ((ts == null) ? "" : ts.toISOString()): instance[displayElementName],
         //          instance_id: instance._id,
@@ -336,7 +336,7 @@ return {
 			function(reqData) {
 				var instanceList = [];
 				for (var rowCntr = 0; rowCntr < reqData.getCount(); rowCntr++) {
-					var ts = opendatakit.convertNanosToDateTime(reqData.getData(rowCntr, '_savepoint_timestamp'));
+					var ts = odkCommon.toDateFromOdkTimeStamp(reqData.getData(rowCntr, '_savepoint_timestamp'));
 					instanceList.push({
 						display_field: (displayElementName === undefined || displayElementName === null) ?
 											((ts === null) ? "" : ts.toISOString()): reqData.getData(rowCntr, displayElementName),

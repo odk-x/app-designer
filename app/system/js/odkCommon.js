@@ -90,6 +90,285 @@ window.odkCommon = {
    getRowFileAsUrl: function(tableId, rowId, rowPathUri) {
       return odkCommonIf.getRowFileAsUrl(tableId, rowId, rowPathUri);
    },
+   
+    /**
+     * Convert an ODK Timestamp string to a Javascript Date() 
+     * object. The ODK Timestamp string is used to represent
+     * dateTime and date values. It is an iso8601-style UTC date
+     * extended to nanosecond precision:
+     *     yyyy-mm-ddTHH:MM:SS.sssssssss
+     * This value is assumed to be UTC.
+     * And the value is assumed to be in the AD calendar (no BC dates please!).
+     * 'date' types use T00:00:00.000000000 for the time portion of the timestamp.
+     *
+     * NOTE: this discards the nano fields...
+     */
+    toDateFromOdkTimeStamp:function(timestamp) {
+        if ( timestamp === undefined || timestamp === null ) {
+            return null;
+        }
+        timestamp = timestamp.substring(0,timestamp.length-6);
+        // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+        // yyyy-mm-ddTHH:MM:SS.sssssssss
+        // 01234567890123456789012345678
+        // to a Date object...
+        var yyyy,mm,dd,hh,min,sec,msec;
+        // NOTE: we toss out the nanoseconds field
+        yyyy = Number(timestamp.substr(0,4));
+        mm = Number(timestamp.substr(5,2))-1;// months are 0-11
+        dd = Number(timestamp.substr(8,2));
+        hh = Number(timestamp.substr(11,2));
+        min = Number(timestamp.substr(14,2));
+        sec = Number(timestamp.substr(17,2));
+        msec = Number(timestamp.substr(20,3));
+        var value = new Date(Date.UTC(yyyy,mm,dd,hh,min,sec,msec));
+        return value;
+    },
+    /**
+     * Time intervals are padded with leading zeros and 
+     * are of the form:
+     * 
+     * 
+     *  HHHHHHHH:MM:SS.sssssssss
+     *  HHHHHHHH:MM:SS.sssssssss-
+     *
+     * i.e., the negative sign, if present, is at the far right end. 
+     * 
+     * This conversion takes an incoming 'refJsDate' Date() object, 
+     * retrieves the UTC year, month, date from that object,
+     * then CONSTRUCTS A NEW DATE OBJECT beginning with that
+     * UTC date and applying the +/- time interval
+     * to that object and returns the adjusted Date() object.
+     *
+     * If the 'revJsDate' and 00:00:00.0000 for the time portion,
+     * if a timeInterval is positive, this produces a Date()
+     * with the time-of-day of the time interval.  I.e., 
+     * this works correctly for the 'time' data type.
+     *
+     * The padded precision of the hour allows representation 
+     * of the full 9999 year AD calendar range of time intervals.
+     */
+    toDateFromOdkTimeInterval:function(refJsDate, timeinterval) {
+        if ( refJsDate === undefined || refJsDate === null ) {
+            return null;
+        }
+        // convert from a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
+        // this does not preserve the nanosecond field...
+        if ( timeInterval === undefined || timeInterval === null ) {
+            return null;
+        }
+        var hh,min,sec,msec;
+        var sign = timeInterval.substring(timeInterval.length-1,1);
+        var idx = timeInterval.indexOf(':');
+        hh = Number(timeInterval.substring(0,idx).trim());
+        min = Number(timeInterval.substr(idx+1,2));
+        sec = Number(timeInterval.substr(idx+4,2));
+        msec = Number(timeInterval.substr(idx+7,3));
+        
+        var msecOffset;
+        msecOffset = ((hh * 60 + min) * 60 + sec) * 60 + msec;
+        if ( sign === '-' ) {
+            msecOffset = - msecOffset;
+        }
+        
+        var dateMilliseconds = refJsDate.valueOf();
+        dateMilliseconds += days*8640000;
+        var newJsDate = new Date(dateMilliseconds);
+        return newJsDate;
+    },
+    /**
+     * pad the indicated integer value with 
+     * leading zeros so that the string 
+     * representation ends up with at least 'places'
+     * number of characters (more if the value has 
+     * more significant digits than that).
+     *
+     * returns a string.
+     * e.g., 
+     * padWithLeadingZeros(45, 4) => '0045'
+     * padWithLeadingZeros(-45, 4) => '-0045'
+     */
+    padWithLeadingZeros: function( value, places ) {
+        if ( value === null || value === undefined ) {
+            // bad form...
+            return null;
+        }
+        if ( places === null || places === undefined ) {
+            // but this is catastrophic...
+            throw new Error("padWithLeadingZeros: places must be specified!");
+        }
+        
+        var digits = [];
+        var d, i, s;
+        var sign = (value >= 0);
+        value = Math.abs(value);
+        while ( value !== 0 ) {
+            d = (value % 10);
+            digits.push(d);
+            value = Math.floor(value/10);
+        }
+        while ( digits.length < places ) {
+            digits.push(0);
+        }
+        digits.reverse();
+        s = '';
+        for ( i = 0 ; i < digits.length ; ++i ) {
+            d = digits[i];
+            s += d;
+        }
+        return (sign ? '' : '-') + s;
+    },
+    /**
+     * pad the indicated integer value with 
+     * leading spaces so that the string 
+     * representation ends up with at least 'places'
+     * number of characters (more if the value has 
+     * more significant digits than that).
+     *
+     * Note the treatment of negative values!
+     *
+     * returns a string.
+     * e.g., 
+     * padWithLeadingSpaces(0, 4) => '   0'
+     * padWithLeadingSpaces(45, 4) => '  45'
+     * padWithLeadingSpaces(-45, 4) => '-  45'
+     */
+    padWithLeadingSpaces: function( value, places ) {
+        var that = this;
+        var zeroPad = that.padWithLeadingZeros(value, places);
+        if ( zeroPad === undefined || zeroPad === null ) {
+            return zeroPad;
+        }
+        
+        var isNegative = (zeroPad.charAt(0) === '-');
+        if ( isNegative ) {
+            zeroPad = zeroPad.substr(1);
+        }
+
+        // If somebody specifies one as the # of places
+        // then exit fast...
+        if ( zeroPad.length === 1 ) {
+            if ( isNegative ) {
+                return '-' + zeroPad;
+            } else {
+                return zeroPad;
+            }
+        }
+        
+        var i;
+        for ( i = 0 ; i < zeroPad.length - 1; ++i ) {
+            if ( zeroPad.charAt(i) !== '0' ) {
+                break;
+            }
+        }
+        // i is now the position we want to replace 
+        // all zeros to the left of with spaces.
+        //
+        // If the zeroPad is all zeros, then 
+        // i will be zeroPad.length-1 upon failing
+        // the loop predicate. So we will end up 
+        // with '    0'.
+        var firstPart = zeroPad.substring(0, i);
+        var remainingPart = zeroPad.substr(i);
+        
+        // reconstruct...
+        zeroPad = firstPart.replace(/0/g, ' ') + remainingPart;
+        if ( isNegative ) {
+            return '-' + zeroPad;
+        } else {
+            return zeroPad;
+        }
+    },
+    /**
+     * Converts a Javascript Date to an ODK Timestamp.
+     * see toDateFromOdkTimeStamp() for the format of a 
+     * timestamp. This zero-fills to extend the accuracy
+     * of the Javascript Date object to nanosecond accuracy.
+     *
+     * The UTC values of the supplied Javascript dateTime 
+     * object are used.
+     *
+     * This value is assumed to be UTC.
+     * And the value is assumed to be in the AD calendar (no BC dates please!).
+     * values destined for 'date' types should set the UTC time to all-zeros
+     * for the time portion of the timestamp.  Or adjust this after-the-fact
+     * in their own code.
+     */
+    toOdkTimeStampFromDate: function(jsDate) {
+        var that = this;
+        // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+        // yyyy-mm-ddTHH:MM:SS.sssssssss
+        // 01234567890123456789012345678
+        if ( jsDate === undefined || jsDate === null ) {
+            return null;
+        }
+        var yyyy,mm,dd,hh,min,sec,msec;
+        yyyy = jsDate.getUTCFullYear();
+        mm = jsDate.getUTCMonth() + 1; // months are 0-11
+        dd = jsDate.getUTCDate();
+        hh = jsDate.getUTCHours();
+        min = jsDate.getUTCMinutes();
+        sec = jsDate.getUTCSeconds();
+        msec = jsDate.getUTCMilliseconds();
+        var value;
+        value = that.padWithLeadingZeros(yyyy,4) + '-' +
+                that.padWithLeadingZeros(mm,2) + '-' +
+                that.padWithLeadingZeros(dd,2) + 'T' +
+                that.padWithLeadingZeros(hh,2) + ':' +
+                that.padWithLeadingZeros(min,2) + ':' +
+                that.padWithLeadingZeros(sec,2) + '.' +
+                that.padWithLeadingZeros(msec,3) + '000000';
+        return value;
+    },
+    /**
+     * Calculates the interval of time between two 
+     * Javascript Date objects and returns an OdkTimeInterval.
+     *
+     * Time intervals are padded with leading zeros and 
+     * are of the form:
+     * 
+     *  HHHHHHHH:MM:SS.sssssssss
+     *  HHHHHHHH:MM:SS.sssssssss-
+     *
+     * i.e., the negative sign, if present, is at the far right end. 
+     * 
+     * This conversion computes (newJsDate - refJsDate).
+     *
+     * The padded precision of the hour allows representation 
+     * of the full 9999 year AD calendar range of time intervals.
+     */
+    toOdkTimeIntervalFromDate:function(refJsDate, newJsDate) {
+        if ( refJsDate === undefined || refJsDate === null ) {
+            return null;
+        }
+        if ( newJsDate === undefined || newJsDate === null ) {
+            return null;
+        }
+        var refMilliseconds = refJsDate.valueOf();
+        var newMilliseconds = newJsDate.valueOf();
+        
+        var diffMilliseconds = newMilliseconds - refMilliseconds;
+        var sign = '';
+        if ( diffMilliseconds < 0 ) {
+            sign = '-';
+            diffMilliseconds = - diffMilliseconds;
+        }
+        
+        var hh,min,sec,msec;
+        
+        var diffSeconds = Math.floor(diffMilliseconds / 1000);
+        msec = diffMilliseconds - (diffSeconds * 1000);
+        var diffMinutes = Math.floor(diffSeconds / 60);
+        sec = diffSeconds - (diffMinutes * 60);
+        hh = Math.floor(diffMinutes / 60);
+        min = diffMinutes - (hh * 60);
+        
+        value = that.padWithLeadingSpaces(hh,8) + ':' +
+                that.padWithLeadingZeros(min,2) + ':' +
+                that.padWithLeadingZeros(sec,2) + '.' +
+                that.padWithLeadingZeros(msec,3) + '000000' + sign;
+        return value;
+    },
 
    /**
     * Log messages using WebLogger.
@@ -222,7 +501,7 @@ window.odkCommon = {
 };
 
 if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
-	window.odkCommonIf = {
+    window.odkCommonIf = {
         _sessionVariables: {},
         _queuedActions: [],
         _logLevel: 'D',
@@ -266,10 +545,10 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
 
             var result = null;
 
-			if ( !window.XRegExp ) {
-				throw new Error('XRegExp has not been loaded prior to first call to getRowFileAsUrl()');
-			}
-			
+            if ( !window.XRegExp ) {
+                throw new Error('XRegExp has not been loaded prior to first call to getRowFileAsUrl()');
+            }
+            
             if ( that._forbiddenInstanceDirCharsPattern === null ||
                  that._forbiddenInstanceDirCharsPattern === undefined ) {
                 // defer loading this until we try to use it
@@ -378,7 +657,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
         },
         doAction: function(dispatchString, action, jsonObj ) {
             var that = this;
-			var lat, lng, alt, acc;
+            var lat, lng, alt, acc;
 
             var value;
             that.log("D","odkCommon: DO: doAction(" + dispatchString + ", " + action + ", ...)");

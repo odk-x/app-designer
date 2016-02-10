@@ -384,7 +384,7 @@ promptTypes.opening = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
-        var ts = that.renderContext.last_save_date = opendatakit.convertNanosToDateTime(lastSave);
+        var ts = that.renderContext.last_save_date = odkCommon.toDateFromOdkTimeStamp(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName != null ) {
@@ -429,7 +429,7 @@ promptTypes.finalize = promptTypes.base.extend({
             this.renderContext.headerImg = formLogo;
         }
         var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
-        var ts = opendatakit.convertNanosToDateTime(lastSave);
+        var ts = odkCommon.toDateFromOdkTimeStamp(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName != null ) {

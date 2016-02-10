@@ -79,7 +79,7 @@ function display() {
     var height = 500 - margin.top - margin.bottom;
     // Set up the scales.
     //var visitData = odkTables.query('visit', 'plot_id = ?', [plotId]);
-    var xValues = JSON.parse(visitData.getColumnData('date'));
+    var xValues = visitData.getColumnData('date');
 
     //xValues = [xValues[0], xValues[1], xValues[2]];
 
@@ -91,7 +91,7 @@ function display() {
     var x = d3.scale.ordinal().domain(d3.values(labelToValue)).rangePoints(
         [0, width],
         1);
-    var yValues = JSON.parse(visitData.getColumnData('plant_height'));
+    var yValues = visitData.getColumnData('plant_height');
     var newYs = [];
     // Now parse to strings.
     for (i = 0; i < yValues.length; i++) {

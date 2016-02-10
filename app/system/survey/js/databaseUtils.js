@@ -289,7 +289,7 @@ return {
                  jsonType.elementType === 'dateTime' ) {
                 // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
                 // this does not preserve the nanosecond field...
-                return opendatakit.convertNanosToDateTime(value);
+                return odkCommon.toDateFromOdkTimeStamp(value);
             } else if ( jsonType.elementType === 'time' ) {
                 // convert from a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
                 // this does not preserve the nanosecond field...
