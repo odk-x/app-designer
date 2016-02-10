@@ -46,11 +46,10 @@ function display() {
         struct['FOL_time_begin'] = beginTime;
         struct['FOL_am_observer1'] = researcher;
 
-        // Now we'll stringify the object and write it into the database.
-        var stringified = JSON.stringify(struct);
+        // Now we'll write it into the database.
 
         var rowId = util.genUUID();
-        odkData.addRow('follow', stringified, rowId, cbSuccess, cbFailure);
+        odkData.addRow('follow', struct, rowId, cbSuccess, cbFailure);
     };
 
     $('#begin-follow').on('click', function() {

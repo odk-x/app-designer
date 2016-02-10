@@ -34,8 +34,7 @@ $.getScript('../app/system/tables/js/data.js',
                     'getColumnData()--incorrect number of arguments');
                 });
 
-                var houseIdColumnStr = data.getColumnData('House_id');
-                var houseIdColumn = JSON.parse(houseIdColumnStr);
+                var houseIdColumn = data.getColumnData('House_id');
 
                 it('#returns string for House_id', function() {
                     assert.isString(houseIdColumnStr);
@@ -91,8 +90,7 @@ $.getScript('../app/system/tables/js/data.js',
 
             describe('getColumns', function() {
 
-                var columnsStr = data.getColumns();
-                var columns = JSON.parse(columnsStr);
+                var columns = data.getColumns();
 
                 it('#returns string', function() {
                     assert.isString(columnsStr);

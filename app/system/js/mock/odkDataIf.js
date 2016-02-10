@@ -465,6 +465,14 @@ var odkDataIf = {
         });
     },
 
+    getAllTableIds: function(_callbackId) {
+        var that = this;
+
+        var ctxt = that.newStartContext(_callbackId);
+
+		throw new Error("Not implemented in app-designer");
+    },
+
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
             orderByElementKey, orderByDirection, includeKVS, _callbackId) {
         var that = this;
@@ -499,7 +507,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    rawQuery: function(tableId, sqlCommand, sqlBindParams, _callbackId) {
+    arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);

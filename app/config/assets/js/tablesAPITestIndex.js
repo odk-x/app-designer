@@ -434,7 +434,7 @@ var resumeFn = function(idxStart) {
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQuery, cbFnQueryFailure);
 
     // Not implemented
-    //odkData.rawQuery('geotagger', 'select * from geotagger where Description = ?', ['The Ave'], cbFnRawQuery, cbFnRawQueryFail);
+    //odkData.arbitraryQuery('geotagger', 'select * from geotagger where Description = ?', ['The Ave'], cbFnRawQuery, cbFnRawQueryFail);
 
     // Tea_types Query Test
     odkData.query('Tea_types', null, null, null, null, null, null, false, cbFnTeaTypesQuery, cbFnQueryTeaTypesFailure);
@@ -443,50 +443,43 @@ var resumeFn = function(idxStart) {
 
     // Geotagger Add Row Test
     struct['Description'] = 'Test location';
-    var stringified = JSON.stringify(struct);
     var rowId = util.genUUID();
-    odkData.addRow('geotagger', stringified, rowId, cbFnAddRow, cbFnAddRowFail);
+    odkData.addRow('geotagger', struct, rowId, cbFnAddRow, cbFnAddRowFail);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterAdd, cbFnQueryFailureAfterAdd);
 
     // Geotagger Update Row Test
     struct['Description'] = 'Test location 2';
-    stringified = JSON.stringify(struct);
-    odkData.updateRow('geotagger', stringified, rowId, cbFnUpdateRow, cbFnUpdateRowFailure);
+    odkData.updateRow('geotagger', struct, rowId, cbFnUpdateRow, cbFnUpdateRowFailure);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterUpdate, cbFnQueryFailureAfterUpdate);
 
     // Geotagger Add Checkpoint Test
     struct['Description'] = 'Add Checkpoint 1';
-    stringified = JSON.stringify(struct);
-    odkData.addCheckpoint('geotagger', stringified, rowId, cbFnAddCheckpt, cbFnAddCheckptFailure);
+    odkData.addCheckpoint('geotagger', struct, rowId, cbFnAddCheckpt, cbFnAddCheckptFailure);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterAddChkpt, cbFnQueryFailureAfterAddChkpt);
 
     // Geotagger Save Checkpoint As Incomplete Test
 	struct['Description'] = 'SaveAsIncomplete 1';
-    stringified = JSON.stringify(struct);
-    odkData.saveCheckpointAsIncomplete('geotagger', stringified, rowId, cbFnSaveCheckptInc, cbFnSaveCheckptIncFailure);
+    odkData.saveCheckpointAsIncomplete('geotagger', struct, rowId, cbFnSaveCheckptInc, cbFnSaveCheckptIncFailure);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterChkptInc, cbFnQueryFailureAfterChkptInc);
 
     // Geotagger Save Checkpoint As Incomplete Test
     struct['Description'] = 'Add Checkpoint 2';
-    stringified = JSON.stringify(struct);
-    odkData.addCheckpoint('geotagger', stringified, rowId, cbFnAddCheckpt2, cbFnAddCheckptFailure2);
+    odkData.addCheckpoint('geotagger', struct, rowId, cbFnAddCheckpt2, cbFnAddCheckptFailure2);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterAddChkpt2, cbFnQueryFailureAfterAddChkpt2);
 
 	struct['Description'] = 'SaveAsComplete 1';
-    stringified = JSON.stringify(struct);
-    odkData.saveCheckpointAsComplete('geotagger', stringified, rowId, cbFnSaveCheckptCom, cbFnSaveCheckptComFailure);
+    odkData.saveCheckpointAsComplete('geotagger', struct, rowId, cbFnSaveCheckptCom, cbFnSaveCheckptComFailure);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterChkptCom, cbFnQueryFailureAfterChkptCom);
 
     // Geotagger Delete Last Checkpoint Test
     struct['Description'] = 'Add Checkpoint 3';
-    stringified = JSON.stringify(struct);
-    odkData.addCheckpoint('geotagger', stringified, rowId, cbFnAddCheckpt3, cbFnAddCheckptFailure3);
+    odkData.addCheckpoint('geotagger', struct, rowId, cbFnAddCheckpt3, cbFnAddCheckptFailure3);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterAddChkpt3, cbFnQueryFailureAfterAddChkpt3);
 
     odkData.deleteLastCheckpoint('geotagger', rowId, false, cbFnDelLastCheckpt, cbFnDelLastCheckptFailure);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterDelChkpt, cbFnQueryFailureAfterDelChkpt);
 
     // Geotagger Delete Row Test
-    odkData.deleteRow('geotagger', stringified, rowId, cbFnDeleteRow, cbFnDeleteRowFailure);
+    odkData.deleteRow('geotagger', struct, rowId, cbFnDeleteRow, cbFnDeleteRowFailure);
     odkData.query('geotagger', null, null, null, null, null, null, false, cbFnQueryAfterDelete, cbFnQueryFailureAfterDelete);
 };

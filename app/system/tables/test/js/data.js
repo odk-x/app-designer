@@ -22,9 +22,8 @@ describe('data: Tea_houses', function() {
 
     describe('getColumnData', function() {
         
-        var houseIdColumnStr = data.getColumnData('House_id');
-        var houseIdColumn = JSON.parse(houseIdColumnStr);
-
+        var houseIdColumn = data.getColumnData('House_id');
+        
         it('#returns string for House_id', function() {
             assert.isString(houseIdColumnStr);
         });
@@ -88,8 +87,7 @@ describe('data: Tea_houses', function() {
 
     describe('getColumns', function() {
 
-        var columnsStr = data.getColumns();
-        var columns = JSON.parse(columnsStr);
+        var columns = data.getColumns();
 
         it('#returns a string', function() {
             assert.isString(columnsStr, 'not a string: ' + columnsStr);

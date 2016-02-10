@@ -9,8 +9,7 @@ var currentTab;
 var graphSelection;
 
 $(document).on('ready', function () {
-	var info = data.getColumns();
-	selections = jQuery.parseJSON(info);
+	selections = data.getColumns();
 	populateOperationSettings();
 	populateBoxOperationSettings();
 	populateXSettings();
@@ -727,13 +726,13 @@ function selectGraph() {
 	
 	if(graphType == "Bar Graph") {
 		var xString = $('#selectx').children('.selected')[0].id;
-		var names = JSON.parse(data.getColumnData(xString));
+		var names = data.getColumnData(xString);
 		var operation = $("#operation").children(".selected")[0].id;
 		if(operation == "Count") {
 			drawGraph(countGraphData(names), xString, "Count", "svg_body", "count");
 		} else {
 			var yString = $('#selecty').children('.selected')[0].id;
-			var values = JSON.parse(data.getColumnData(yString));
+			var values = data.getColumnData(yString);
 			if (operation == "Sum") {
 				drawGraph(sumGraphData(names, values), xString, yString, "svg_body");
 			} else if (operation == "Average") {
@@ -748,13 +747,13 @@ function selectGraph() {
 		}
 	} else if(graphType == "Pie Chart") {
 		var xString = $('#selectslice').children('.selected')[0].id;
-		var names = JSON.parse(data.getColumnData(xString));
+		var names = data.getColumnData(xString);
 		var operation = $("#operation").children(".selected")[0].id;
 		if (operation == "Count") {
 			drawPieChart(countGraphData(names), xString, "Count", "svg_body", "count");
 		} else {
 			var yString = $('#selecty').children('.selected')[0].id;
-			var values = JSON.parse(data.getColumnData(yString));
+			var values = data.getColumnData(yString);
 			if (operation == "Min") {
 				drawPieChart(minGraphData(names, values), xString, yString, "svg_body");
 			} else if (operation == "Max") {
@@ -769,13 +768,13 @@ function selectGraph() {
 		}
 	} else if(graphType == "Scatter Plot") {
 		var xString = $('#selectx').children('.selected')[0].id;
-		var names = JSON.parse(data.getColumnData(xString));
+		var names = data.getColumnData(xString);
 		var operation = $("#operation").children(".selected")[0].id;
 		var yString = $('#selecty').children('.selected')[0].id;
 		var rString = $('#selectr').children('.selected')[0].id;
 		var size;
 		if(rString != "No Scaling") {
-			size = JSON.parse(data.getColumnData(rString));
+			size = data.getColumnData(rString);
 		} else {
 			size = new Array();
 			for(var k = 0; k < names.length; k++) {
@@ -785,7 +784,7 @@ function selectGraph() {
 		if (operation == "Count") {
 			drawScatter(countScatterData(names), xString, yString, "svg_body");
 		} else {
-			var values = JSON.parse(data.getColumnData(yString));
+			var values = data.getColumnData(yString);
 			if (operation == "Min") {
 				drawScatter(minGraphData(names, values), "No Scaling", xString, yString, "svg_body");
 			} else if (operation == "Max") {
@@ -801,19 +800,19 @@ function selectGraph() {
 		}
 	} else if(graphType == "Box Plot") {
 		var operation = $("#box_operation").children(".selected")[0].id;
-		var values = JSON.parse(data.getColumnData($("#box_values").children(".selected")[0].id));
+		var values = data.getColumnData($("#box_values").children(".selected")[0].id);
 		if (operation == "Single Column") {
 			drawBox(simpleWhiskerBox(values), "svg_body");
 		} else {
-			var iterations = JSON.parse(data.getColumnData($("#iteration_counter").children(".selected")[0].id));
-			var type = JSON.parse(data.getColumnData($("#box_source").children(".selected")[0].id));
+			var iterations = data.getColumnData($("#iteration_counter").children(".selected")[0].id);
+			var type = data.getColumnData($("#box_source").children(".selected")[0].id);
 			drawBox(comparisonWhiskerBox(type, iterations, values), "svg_body");
 		}
 	} else if(graphType == "Line Graph") {
 		var xString = $('#selectx').children('.selected')[0].id;
-		var names = JSON.parse(data.getColumnData(xString));
+		var names = data.getColumnData(xString);
 		var yString = $('#selecty').children('.selected')[0].id;
-		var values = JSON.parse(data.getColumnData(yString));
+		var values = data.getColumnData(yString);
 		drawLineGraph(avgGraphData(names, values), xString, yString, "svg_body", 0, minGraphData(names, values), maxGraphData(names, values));
 	}
 }

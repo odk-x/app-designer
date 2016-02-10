@@ -793,12 +793,10 @@ function display() {
         struct['OS_duration'] = numPresentStr;
 
 
-
-        var stringified = JSON.stringify(struct);
         if (isUpdate) {
             window.odkData.updateRow(
                     'other_species',
-                    stringified,
+                    struct,
                     rowId,
                     cbAddRowOSSuccess,
                     cbAddRowOSFail);
@@ -807,7 +805,7 @@ function display() {
             var newRowId = util.genUUID();
             window.odkData.addRow(
                     'other_species',
-                    stringified,
+                    struct,
                     newRowId,
                     cbAddRowOSSuccess,
                     cbAddRowOSFail);
@@ -839,12 +837,10 @@ function display() {
             struct['FB_duration'] = isPresentStr;
         }
 
-        var stringified = JSON.stringify(struct);
-
         if (isUpdate) {
             window.odkData.updateRow(
                     'food_bout',
-                    stringified,
+                    struct,
                     rowId, 
                     cbAddRowFBSuccess, 
                     cbAddRowFBFail);
@@ -853,7 +849,7 @@ function display() {
             var newRowId = util.genUUID();
             window.odkData.addRow(
                     'food_bout',
-                    stringified,
+                    struct,
                     newRowId,
                     cbAddRowFBSuccess,
                     cbAddRowFBFail);
@@ -920,14 +916,13 @@ function display() {
             }
         } 
         
-        var stringified = JSON.stringify(struct);
         if (isUpdate) {
-            window.odkData.updateRow('follow_arrival', stringified, rowId,
+            window.odkData.updateRow('follow_arrival', struct, rowId,
                     cbAddRowFASuccess, cbAddRowFAFail);
             console.log('called update chimp: ' + chimpId);
         } else {
             var newRowId = util.genUUID();
-            window.odkData.addRow('follow_arrival', stringified, newRowId, 
+            window.odkData.addRow('follow_arrival', struct, newRowId, 
                     cbAddRowFASuccess, cbAddRowFAFail);
             console.log('called added chimp: ' + chimpId);
         }

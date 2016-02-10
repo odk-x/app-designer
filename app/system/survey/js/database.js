@@ -83,8 +83,8 @@ return {
 	_initializeInstanceWithPendingChanges:function(ctxt, model, formId, instanceId, accumulatedChanges ) {
 		var that = this;
 		
-		var stringifiedJSON = that._createStringifiedJSONPendingChanges(model.dataTableModel, accumulatedChanges, formId);
-		odkData.addCheckpoint(model.table_id, stringifiedJSON, instanceId,
+		var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, accumulatedChanges, formId);
+		odkData.addCheckpoint(model.table_id, simpleMap, instanceId,
 			function(reqData) {
 				// read data from the row and
 				// read any session variables into model.data
@@ -332,7 +332,7 @@ return {
 		}
 		
 		var ss = databaseSchema.selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
-		odkData.rawQuery(dbTableName, ss.stmt, ss.bind, 
+		odkData.arbitraryQuery(dbTableName, ss.stmt, ss.bind, 
 			function(reqData) {
 				var instanceList = [];
 				for (var rowCntr = 0; rowCntr < reqData.getCount(); rowCntr++) {
@@ -366,13 +366,13 @@ return {
 		var that = this;
 		var savedPendingChanges = that.pendingChanges;
 		that.pendingChanges = {};
-		var stringifiedJSON = that._createStringifiedJSONPendingChanges(model.dataTableModel, savedPendingChanges, formId);
+		var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, savedPendingChanges, formId);
 		if ( asComplete ) {
-			odkData.saveCheckpointAsComplete(model.table_id, stringifiedJSON, instanceId, 
+			odkData.saveCheckpointAsComplete(model.table_id, simpleMap, instanceId, 
 				function(reqData) { ctxt.success(); }, 
 				function(errorMsg) { that.pendingChanges = savedPendingChanges; ctxt.failure({message: errorMsg}); });
 		} else {
-			odkData.saveCheckpointAsIncomplete(model.table_id, stringifiedJSON, instanceId, 
+			odkData.saveCheckpointAsIncomplete(model.table_id, simpleMap, instanceId, 
 				function(reqData) { ctxt.success(); }, 
 				function(errorMsg) { that.pendingChanges = savedPendingChanges; ctxt.failure({message: errorMsg}); });
 		}
@@ -473,8 +473,8 @@ return {
         // updates == kvMap + any changes done within dbservice (e.g., metadata fields)
         // databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
         // model.loaded = true;
-		var stringifiedJSON = that._createStringifiedJSONPendingChanges(model.dataTableModel, changeMap, formId);
-		odkData.addCheckpoint(model.table_id, stringifiedJSON, instanceId, 
+		var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, changeMap, formId);
+		odkData.addCheckpoint(model.table_id, simpleMap, instanceId, 
 			function(reqData) {
 				if ( reqData.getCount() != 1 ) {
 					ctxt.failure({message: "no row or multiple rows!"});
@@ -520,11 +520,11 @@ return {
     pendingChanges: {},
     
     /**
-     * used by odkData interface to pass the stringified kvMap of fields to change
+     * used by odkData interface to pass the simple columnNameValueMap of fields to change
 	 *
  	 * accumulatedChanges[retentionColumn] = {"elementPath" : elementPath, "value": ???};
      */
-    _createStringifiedJSONPendingChanges:function(dataTableModel, accumulatedChanges, formId) {
+    _createSimpleMapPendingChanges:function(dataTableModel, accumulatedChanges, formId) {
         var simpleMap = {};
 		var key;
 		var jsonType;
@@ -536,7 +536,7 @@ return {
         // TODO: should current user also be enforced here??
         simpleMap._form_id = formId;
 		simpleMap._savepoint_creator = odkCommon.getActiveUser();
-        return JSON.stringify(simpleMap);
+        return simpleMap;
     },
 
     /**

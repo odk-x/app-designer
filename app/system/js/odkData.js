@@ -26,6 +26,15 @@ window.odkData = {
         that.getOdkDataIf().getViewData(req._callbackId);
     },
 
+    getAllTableIds: function(successCallbackFn, failureCallbackFn) {
+        var that = this;
+        
+        var req = that.queueRequest('getAllTableIds', successCallbackFn, failureCallbackFn);
+		console.log('getAllTableIds cbId=' + req._callbackId);
+
+        that.getOdkDataIf().getAllTableIds(req._callbackId);
+    },
+
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
             orderByElementKey, orderByDirection, includeKVS, successCallbackFn, 
             failureCallbackFn) {
@@ -42,13 +51,13 @@ window.odkData = {
 //             having, orderByElementKey, orderByDirection, false, req._callbackId);
     },
 
-    rawQuery: function(tableId, sqlCommand, sqlBindParams, successCallbackFn, failureCallbackFn) {
+    arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, successCallbackFn, failureCallbackFn) {
         var that = this;
         
-        var req = that.queueRequest('rawQuery', successCallbackFn, failureCallbackFn);
-		console.log('rawQuery cbId=' + req._callbackId);
+        var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
+		console.log('arbitraryQuery cbId=' + req._callbackId);
 
-        that.getOdkDataIf().rawQuery(tableId, sqlCommand, sqlBindParams, req._callbackId);
+        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParams, req._callbackId);
     },
 
     getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
@@ -67,52 +76,52 @@ window.odkData = {
         that.getOdkDataIf().getMostRecentRow(tableId, rowId, req._callbackId);
     },
 
-    updateRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
+    updateRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('updateRow', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().updateRow(tableId, stringifiedJSON, rowId, req._callbackId);
+	that.getOdkDataIf().updateRow(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
     },
 
-    deleteRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
+    deleteRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('deleteRow', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().deleteRow(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().deleteRow(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
     },
 
-    addRow: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
+    addRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('addRow', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().addRow(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().addRow(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
     },
 
-    addCheckpoint: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
+    addCheckpoint: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('addCheckpoint', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().addCheckpoint(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().addCheckpoint(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
     },
 
-    saveCheckpointAsIncomplete: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
+    saveCheckpointAsIncomplete: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('saveCheckpointAsIncomplete', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().saveCheckpointAsIncomplete(tableId, stringifiedJSON, rowId, req._callbackId); 
+        that.getOdkDataIf().saveCheckpointAsIncomplete(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId); 
     },
 
-    saveCheckpointAsComplete: function(tableId, stringifiedJSON, rowId, successCallbackFn, failureCallbackFn) {
+    saveCheckpointAsComplete: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('saveCheckpointAsComplete', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().saveCheckpointAsComplete(tableId, stringifiedJSON, rowId, req._callbackId);
+        that.getOdkDataIf().saveCheckpointAsComplete(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
     },
 
     deleteAllCheckpoints: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
@@ -335,14 +344,11 @@ window.odkData = {
 
             elementKey = elementKey.replace(/\./g,'_');
 
-            var result = [];
+            var colData = [];
             for (var i = 0; i < pub.getCount(); i ++) {
-                result.push(pub.getData(i, elementKey));
+                colData.push(pub.getData(i, elementKey));
             }
 
-            // We need to turn this into a string to mirror the phone api.
-            // Maybe this should change to just return the data structure
-            var colData = JSON.stringify(result);
             return colData;
         };
 
@@ -391,9 +397,7 @@ window.odkData = {
                 return null;
             }
 
-            // Have to return a string because the phone returns a string.
-            var result = JSON.stringify(resultObj.metadata.orderedColumns);
-            return result;
+            return resultObj.metadata.orderedColumns;
         };
 
         pub.getRowForegroundColor = function(rowNumber) {

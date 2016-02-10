@@ -162,14 +162,6 @@ if (!window.odkTables) {
         }
     };
 
-    pub.getAllTableIds = function() {
-        var tableIds = [];
-        $.map(odkTablesObj.tableIdToDisplayName, function(value, key) {
-            tableIds.push(key);
-        });
-        return tableIds;
-    };
-
     pub.launchHTML = function(relativePath) {
         if (!isString(relativePath)) {
             throw 'launchHTML()--relativePath not a string';
@@ -234,37 +226,6 @@ if (!window.odkTables) {
 
     pub.addRowWithSurvey = function(tableId, formId, screenPath, jsonMap) {
 
-    };
-
-    pub.getElementKey = function(tableId, elementPath) {
-        // This we get through the odkTables object.
-        // We first need to check to make sure that this tableId even exists.
-        // If it does not, we return undefined, which is the behavior on the
-        // phone.
-        if (!odkTablesObj.tables.hasOwnProperty(tableId)) {
-            return undefined;
-        }
-        return odkTablesObj.tables[tableId].pathToKey[elementPath];
-    };
-
-    pub.getColumnDisplayName = function(tableId, elementPath) {
-        // This we just get through the odkTables object.
-        // We first need to check that the tableId even exists. If not, we will
-        // return undefined, as is the behavior on the phone.
-        if (!odkTablesObj.tables.hasOwnProperty(tableId)) {
-            return undefined;
-        }
-        return odkTablesObj.tables[tableId].pathToName[elementPath];
-    };
-
-    pub.getTableDisplayName = function(tableId) {
-        // just pass it through the odkTables object.
-        // Return undefined if the table id doesn't exist, which is the
-        // behavior on the phone.
-        if (!odkTablesObj.tableIdToDisplayName.hasOwnProperty(tableId)) {
-            return undefined;
-        }
-        return odkTablesObj.tableIdToDisplayName[tableId];
     };
 
     // Now we also need to set the backing object we are going to use. We

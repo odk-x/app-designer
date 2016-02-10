@@ -86,8 +86,7 @@ describe('control', function() {
         });
 
         it('#SQL for green tea shops includes Whipplesnaith', function() {
-            var columnStr = tableSqlFunc.getColumnData('Name');
-            var column = JSON.parse(columnStr);
+            var column = tableSqlFunc.getColumnData('Name');
             assert.include(
                 column,
                 'Whipplesnaith',
