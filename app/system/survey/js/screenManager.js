@@ -535,10 +535,12 @@ return Backbone.View.extend({
         $('.modal-backdrop').remove();
     },
     removePreviousPageEl: function() {
-		var El = this.previousPageEl.shift();
-		if ( El !== null || El !== undefined ) {
-            El.empty().remove();
-        }
+		while ( this.previousPageEl.length > 0 ) {
+			var El = this.previousPageEl.shift();
+			if ( El !== null && El !== undefined ) {
+				El.empty().remove();
+			}
+		}
     },
     disableImageDrag: function(evt){
         evt.preventDefault();

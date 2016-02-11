@@ -3,11 +3,11 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore','translations','handlebarsHelpers','datetimepicker'],
-function(database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           translations,   _hh) {
+define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','translations','handlebarsHelpers','datetimepicker'],
+function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           translations,   _hh) {
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','formulaFunctions','handlebars','promptTypes','jquery','underscore','translations', 'handlebarsHelpers','datetimepicker'],
-    [ database,  opendatakit,  controller,  Backbone,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           translations,   _hh,           $.fn.datetimepicker]);
+    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','translations', 'handlebarsHelpers','datetimepicker'],
+    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           translations,   _hh,           $.fn.datetimepicker] );
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -571,7 +571,7 @@ promptTypes.instances = promptTypes.base.extend({
         database.delete_checkpoints_and_row($.extend({}, ctxt, {success: function() {
                 that.reRender(ctxt);
             }}),
-        model.table_id, $(evt.currentTarget).attr('id'));
+        model, $(evt.currentTarget).attr('id'));
     }
 });
 promptTypes.contents = promptTypes.base.extend({
@@ -846,7 +846,6 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
 
         that.disableButtons();
         that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
-            var dbTableName = linkedModel.table_id;
             database.delete_checkpoints_and_row($.extend({},ctxt,{success:function() {
                     that.enableButtons();
                     that.reRender(ctxt);
@@ -854,7 +853,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                 failure:function(m) {
                     that.enableButtons();
                     ctxt.failure(m);
-                }}), dbTableName, instanceId);
+                }}), linkedModel, instanceId);
         }}));
         that._cachedEvent = null;
         return null;
