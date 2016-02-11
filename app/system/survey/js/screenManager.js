@@ -30,6 +30,7 @@ return Backbone.View.extend({
     pageChangeActionLockout: false, // to control double-swiping...
     renderContext:{},
     promptIndex: -1,
+	previousPageEl: [],
     events: {
         "click .odk-next-btn": "gotoNextScreen",
         "click .odk-prev-btn": "gotoPreviousScreen",
@@ -261,11 +262,12 @@ return Backbone.View.extend({
                     that.activeScreen = screen;
                     that.currentPageEl = screen.$el;
                     if ( oldCurrentEl[0] === that.currentPageEl[0] ) {
-                        that.previousPageEl = null;
+						bcBase.log('D', "screenManager -- replaceWith()");
                         oldCurrentEl.replaceWith(that.currentPageEl);
                     } else {
-                        that.previousPageEl = oldCurrentEl;
-                        that.currentPageEl.insertAfter(that.previousPageEl);
+						bcBase.log('D', "screenManager -- insertAfter()");
+                        that.currentPageEl.insertAfter(oldCurrentEl);
+                        that.previousPageEl.push(oldCurrentEl);
                     }
 
                     bcBase.success();
@@ -533,10 +535,9 @@ return Backbone.View.extend({
         $('.modal-backdrop').remove();
     },
     removePreviousPageEl: function() {
-        if( this.previousPageEl){
-            var pg = this.previousPageEl;
-            this.previousPageEl = null;
-            pg.empty().remove();
+		var El = this.previousPageEl.shift();
+		if ( El !== null || El !== undefined ) {
+            El.empty().remove();
         }
     },
     disableImageDrag: function(evt){

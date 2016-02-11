@@ -2,15 +2,11 @@
 /**
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
- *
- * NOTE: all usage of the opendatakit object is stateless -- we are just using
- * simple conversion methods defined in that object and are not accessing any
- * other state.
  */
-define(['opendatakit','XRegExp'], function(opendatakit,XRegExp) {
+define(['XRegExp'], function(XRegExp) {
 verifyLoad('databaseUtils',
-    ['opendatakit','XRegExp'],
-    [ opendatakit,  XRegExp]);
+    ['XRegExp'],
+    [XRegExp]);
 return {
     _reservedFieldNames: {
         /**
@@ -179,61 +175,6 @@ return {
         }
         return true;
     },
-    markUnitOfRetention: function(dataTableModel) {
-        // for all arrays, mark all descendants of the array as not-retained
-        // because they are all folded up into the json representation of the array
-        var startKey;
-        var jsonDefn;
-        var elementType;
-        var key;
-        var jsonSubDefn;
-
-        for ( startKey in dataTableModel ) {
-            jsonDefn = dataTableModel[startKey];
-            if ( jsonDefn.notUnitOfRetention ) {
-                // this has already been processed
-                continue;
-            }
-            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
-            if ( elementType === "array" ) {
-                var descendantsOfArray = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
-                var scratchArray = [];
-                while ( descendantsOfArray.length !== 0 ) {
-                    var i;
-                    for ( i = 0 ; i < descendantsOfArray.length ; ++i ) {
-                        key = descendantsOfArray[i];
-                        jsonSubDefn = dataTableModel[key];
-                        if ( jsonSubDefn !== null && jsonSubDefn !== undefined ) {
-                            if ( jsonSubDefn.notUnitOfRetention ) {
-                                // this has already been processed
-                                continue;
-                            }
-                            jsonSubDefn.notUnitOfRetention = true;
-                            var listChildren = ((jsonSubDefn.listChildElementKeys === undefined || jsonSubDefn.listChildElementKeys === null) ? [] : jsonSubDefn.listChildElementKeys);
-                            scratchArray = scratchArray.concat(listChildren);
-                        }
-                    }
-                    descendantsOfArray = scratchArray;
-                }
-            }
-        }
-        // and mark any non-arrays with multiple fields as not retained
-        for ( startKey in dataTableModel ) {
-            jsonDefn = dataTableModel[startKey];
-            if ( jsonDefn.notUnitOfRetention ) {
-                // this has already been processed
-                continue;
-            }
-            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
-            if ( elementType !== "array" ) {
-                if (jsonDefn.listChildElementKeys !== undefined &&
-                    jsonDefn.listChildElementKeys !== null &&
-                    jsonDefn.listChildElementKeys.length !== 0 ) {
-                    jsonDefn.notUnitOfRetention = true;
-                }
-            }
-        }
-    },
     isUnitOfRetention: function(jsonDefn) {
         if (jsonDefn.notUnitOfRetention) {
             return false;
@@ -244,7 +185,7 @@ return {
     //                    true/false,
     //               type:
     //                    one of array, object, string, boolean, number, integer, ...
-    _fromOdkDataInterfaceToElementType: function( jsonType, value ) {
+    fromOdkDataInterfaceToElementType: function( jsonType, value ) {
         var that = this;
         var refined;
         var itemType;
@@ -276,7 +217,7 @@ return {
                     return value;
                 } else {
                     for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that._fromOdkDataInterfaceToElementType( itemType, value[item] );
+                        itemValue = that.fromOdkDataInterfaceToElementType( itemType, value[item] );
                         refined.push(itemValue);
                     }
                     return refined;
@@ -309,7 +250,7 @@ return {
                 for ( item in jsonType.properties ) {
                     if ( value[item] !== null && value[item] !== undefined ) {
                         itemType = jsonType.properties[item];
-                        itemValue = that._fromOdkDataInterfaceToElementType(itemType, value[item]);
+                        itemValue = that.fromOdkDataInterfaceToElementType(itemType, value[item]);
                         refined[item] = itemValue;
                     }
                 }
@@ -339,7 +280,7 @@ return {
             return '' + value;
         }
     },
-    _fromSerializationToElementType: function( jsonType, value, toplevel ) {
+    fromSerializationToElementType: function( jsonType, value, toplevel ) {
         var that = this;
         var refined;
         var itemType;
@@ -377,7 +318,7 @@ return {
                     return value;
                 } else {
                     for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that._fromSerializationToElementType( itemType, value[item], false );
+                        itemValue = that.fromSerializationToElementType( itemType, value[item], false );
                         refined.push(itemValue);
                     }
                     return refined;
@@ -390,7 +331,7 @@ return {
                  jsonType.elementType === 'dateTime' ) {
                 // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
                 // this does not preserve the nanosecond field...
-                return opendatakit.convertNanosToDateTime(value);
+                return odkCommon.toDateFromOdkTimeStamp(value);
             } else if ( jsonType.elementType === 'time' ) {
                 // convert from a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
                 // this does not preserve the nanosecond field...
@@ -417,7 +358,7 @@ return {
                     for ( item in jsonType.properties ) {
                         if ( value[item] !== null && value[item] !== undefined ) {
                             itemType = jsonType.properties[item];
-                            itemValue = that._fromSerializationToElementType( itemType, value[item], false );
+                            itemValue = that.fromSerializationToElementType( itemType, value[item], false );
                             refined[item] = itemValue;
                         }
                     }
@@ -494,7 +435,7 @@ return {
             return '' + value;
         }
     },
-    toSerializationFromElementType: function( jsonType, value, toplevel ) {
+    _toSerializationFromElementType: function( jsonType, value, toplevel ) {
         var that = this;
         var refined;
         var itemType;
@@ -519,7 +460,7 @@ return {
                     // leave as-is -- assume user did the correct conversions
                 } else {
                     for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that.toSerializationFromElementType( itemType, value[item], false );
+                        itemValue = that._toSerializationFromElementType( itemType, value[item], false );
                         refined.push(itemValue);
                     }
                     value = refined;
@@ -539,7 +480,7 @@ return {
                     return value;
                 } else {
                     // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
-                    return opendatakit.convertDateTimeToNanos(value);
+                    return odkCommon.toOdkTimeStampFromDate(value);
                 }
             } else if ( jsonType.elementType === 'time' ) {
                 if ( value instanceof String ) {
@@ -551,10 +492,10 @@ return {
                     min = value.getMinutes();
                     sec = value.getSeconds();
                     msec = value.getMilliseconds();
-                    value = opendatakit.padWithLeadingZeros(hh,2) + ':' +
-                            opendatakit.padWithLeadingZeros(min,2) + ':' +
-                            opendatakit.padWithLeadingZeros(sec,2) + '.' +
-                            opendatakit.padWithLeadingZeros(msec,3) + '000000';
+                    value = odkCommon.padWithLeadingZeros(hh,2) + ':' +
+                            odkCommon.padWithLeadingZeros(min,2) + ':' +
+                            odkCommon.padWithLeadingZeros(sec,2) + '.' +
+                            odkCommon.padWithLeadingZeros(msec,3) + '000000';
                     return value;
                 }
             } else if ( !jsonType.properties ) {
@@ -572,7 +513,7 @@ return {
                 for ( item in jsonType.properties ) {
                     if ( value[item] !== null && value[item] !== undefined ) {
                         itemType = jsonType.properties[item];
-                        itemValue = that.toSerializationFromElementType( itemType, value[item], false );
+                        itemValue = that._toSerializationFromElementType( itemType, value[item], false );
                         refined[item] = itemValue;
                     }
                 }
@@ -657,7 +598,7 @@ return {
                     return value;
                 }
                 // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
-                return opendatakit.convertDateTimeToNanos(value);
+                return odkCommon.toOdkTimeStampFromDate(value);
             } else if ( jsonType.elementType === 'time' ) {
                 // already a string? -- assume it is nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
                 if ( value instanceof String ) {
@@ -669,10 +610,10 @@ return {
                 min = value.getMinutes();
                 sec = value.getSeconds();
                 msec = value.getMilliseconds();
-                value = opendatakit.padWithLeadingZeros(hh,2) + ':' +
-                        opendatakit.padWithLeadingZeros(min,2) + ':' +
-                        opendatakit.padWithLeadingZeros(sec,2) + '.' +
-                        opendatakit.padWithLeadingZeros(msec,3) + '000000';
+                value = odkCommon.padWithLeadingZeros(hh,2) + ':' +
+                        odkCommon.padWithLeadingZeros(min,2) + ':' +
+                        odkCommon.padWithLeadingZeros(sec,2) + '.' +
+                        odkCommon.padWithLeadingZeros(msec,3) + '000000';
                 return value;
             } else if ( !jsonType.properties ) {
                 // this is an opaque BLOB w.r.t. database layer
@@ -711,7 +652,7 @@ return {
             return '' + value;
         }
     },
-    reconstructElementPath: function(elementPath, jsonType, value, topLevelObject) {
+    _reconstructElementPath: function(elementPath, jsonType, value, topLevelObject) {
         var that = this;
         var path = elementPath.split('.');
         var e = topLevelObject;
@@ -745,14 +686,14 @@ return {
             if (that.isUnitOfRetention(de)) {
                 elementPath = de.elementPath || elementPathValue.elementPath;
                 if ( de.elementSet === 'instanceMetadata' ) {
-                    that.reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, model.instanceMetadata );
+                    that._reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, model.instanceMetadata );
                 } else {
-                    that.reconstructElementPath(elementPath, de, elementPathValue.value, model.data );
+                    that._reconstructElementPath(elementPath, de, elementPathValue.value, model.data );
                 }
             }
         }
     },
-    getElementPathPairFromKvMap: function(kvMap, elementPath) {
+    _getElementPathPairFromKvMap: function(kvMap, elementPath) {
         var path = elementPath.split('.');
         var i, j, term, value, pathChain;
 		var e, f;
@@ -813,88 +754,6 @@ return {
             }
         }
         return null;
-    },
-    /**
-     * Process instanceMetadataKeyValueMap and add entries to kvMap.
-     * Common code to construct the update kvMap for arguments passed
-     * in on the command line.
-     */
-    _setSessionVariableFlag: function( dbKeyMap, listChildElementKeys) {
-        var that = this;
-        var i;
-        if ( listChildElementKeys !== null && listChildElementKeys !== undefined ) {
-            for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
-                var f = listChildElementKeys[i];
-                var jsonType = dbKeyMap[f];
-                jsonType.isSessionVariable = true;
-                if ( jsonType.type === 'array' ) {
-                    that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
-                } else if ( jsonType.type === 'object' ) {
-                    that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
-                }
-            }
-        }
-    },
-    flattenElementPath: function( dbKeyMap, elementPathPrefix, elementName, elementKeyPrefix, jsonType ) {
-        var that = this;
-        var elementKey;
-		var e;
-		var f;
-
-        // remember the element name...
-        jsonType.elementName = elementName;
-        // and the set is 'data' because it comes from the data model...
-        jsonType.elementSet = 'data';
-
-        // update element path prefix for recursive elements
-        elementPathPrefix = ( elementPathPrefix === undefined || elementPathPrefix === null ) ? elementName : (elementPathPrefix + '.' + elementName);
-        // and our own element path is exactly just this prefix
-        jsonType.elementPath = elementPathPrefix;
-
-        // use the user's elementKey if specified
-        elementKey = jsonType.elementKey;
-
-        if ( elementKey === undefined || elementKey === null ) {
-            throw new Error("elementKey is not defined for '" + jsonType.elementPath + "'.");
-        }
-
-        // simple error tests...
-        // throw an error if the elementkey is longer than 62 characters
-        // or if it is already being used and not by myself...
-        if ( elementKey.length > 62 ) {
-            throw new Error("supplied elementKey is longer than 62 characters");
-        }
-        if ( dbKeyMap[elementKey] !== undefined && dbKeyMap[elementKey] !== null && dbKeyMap[elementKey] != jsonType ) {
-            throw new Error("supplied elementKey is already used (autogenerated?) for another model element");
-        }
-        if ( elementKey.charAt(0) === '_' ) {
-            throw new Error("supplied elementKey starts with underscore");
-        }
-
-        // remember the elementKey we have chosen...
-        dbKeyMap[elementKey] = jsonType;
-
-        // handle the recursive structures...
-        if ( jsonType.type === 'array' ) {
-            // explode with subordinate elements
-            f = that.flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
-            jsonType.listChildElementKeys = [ f.elementKey ];
-        } else if ( jsonType.type === 'object' ) {
-            // object...
-            var listChildElementKeys = [];
-            for ( e in jsonType.properties ) {
-                f = that.flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
-                listChildElementKeys.push(f.elementKey);
-            }
-            jsonType.listChildElementKeys = listChildElementKeys;
-        }
-
-        if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys !== null) && (jsonType.listChildElementKeys !== undefined)) {
-            // we have some sort of structure that is a sessionVariable
-            // Set the isSessionVariable tags on all its nested elements.
-            that._setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
-        }
-        return jsonType;
     },
     getElementPathValue:function(data,pathName) {
         var path = pathName.split('.');
@@ -983,6 +842,88 @@ return {
             }
         }
         return remapped;
+    },
+	/**
+	 * take a kvMap and either immediately effect the change if it is to a 
+	 * session variable or add it to the set of accumulated changes to be applied
+	 * when the data record is next updated. 
+	 * 
+	 * This does not update the metadata fields of the record.
+	 *
+	 * kvMap : { 'fieldName' : { value: "foo name", isInstanceMetadata: false } ...}
+	 *
+	 * The 'fieldName' will be re-mapped to its retention units if it is a composite data value.
+	 *
+	 * Requires: No global dependencies
+	 */
+	_accumulateUnitOfRetentionUpdates:function(model, formId, instanceId, kvMap, accumulatedChanges) {
+		var that = this;
+		var dbTableName = model.table_id;
+		var dataTableModel = model.dataTableModel;
+		
+		// track the values we have assigned. Useful for catching typos in the elementKey (field) names.
+		var processSet = {};
+		
+		var f, defElement, elementPathPair, kvElement, v;
+		var changeElement;
+		var sessionVariableChanges = {};
+							
+		for (f in dataTableModel) {
+			defElement = dataTableModel[f];
+			if ( that.isUnitOfRetention(defElement) ) {
+				var elementPath = defElement['elementPath'];
+				// don't allow working with elementKey primitives if not manipulating metadata
+				if (( elementPath === undefined || elementPath === null ) && 
+					  defElement.elementSet === 'instanceMetadata') {
+					elementPath = f;
+				}
+				// TODO: get kvElement for this elementPath
+				elementPathPair = that._getElementPathPairFromKvMap(kvMap, elementPath);
+				if ( elementPathPair !== null && elementPathPair !== undefined ) {
+					kvElement = elementPathPair.element;
+					kvElement = elementPathPair.element;
+					// track that we matched the keyname...
+					processSet[elementPathPair.elementPath] = true;
+					// ensure that undefined are treated as null...
+					if (kvElement.value === undefined || kvElement.value === null) {
+						kvElement.value = null;
+					}
+					changeElement = {"elementPath": elementPath, "value": kvElement.value};
+					// the odkData layer works directly on the value
+					// but session variables need the storage value...
+					if ( !defElement.isSessionVariable ) {
+						if ( instanceId !== null && instanceId !== undefined ) {
+							accumulatedChanges[f] = changeElement;
+						}
+					} else {
+						v = that._toSerializationFromElementType(defElement, kvElement.value, true);
+						odkCommon.setSessionVariable(elementPath, v);
+						sessionVariableChanges[f] = changeElement;
+					}
+				}
+			}
+		}
+		// apply the session variable changes immediately to the model.
+		that.reconstructModelDataFromElementPathValueUpdates(model, sessionVariableChanges);
+		
+		for ( f in kvMap ) {
+			if ( processSet[f] !== true ) {
+				console.error("_accumulateUnitOfRetentionUpdates: kvMap contains unrecognized database column " + dbTableName + "." + f );
+			}
+		}
+	},
+    /**
+     * Does not depend upon any global values.
+     *
+     * updates the model and records the field changes in 
+     * this.pendingChanges
+     */
+    setModelDataValueDeferredChange:function( model, formId, instanceId, name, value, accumulatedChanges ) {
+        var that = this;
+        var justChange = {};
+        justChange[name] = {value: value, isInstanceMetadata: false };
+        // apply the change immediately...
+        that._accumulateUnitOfRetentionUpdates(model, formId, instanceId, justChange, accumulatedChanges );
     }
 };
 });

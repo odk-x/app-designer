@@ -76,6 +76,42 @@ return {
 				});
 		}
     },
+	_reconstructModelData:function(model, reqData) {
+		var that = this;
+		// read data from the row and
+		// read any session variables into model.data
+		var updates = {};
+		var jsonType;
+		var elementPath;
+		var jsValue;
+		var value;
+		var dbKey;
+		for ( dbKey in model.dataTableModel ) {
+			jsonType = model.dataTableModel[dbKey];
+			if ( databaseUtils.isUnitOfRetention(jsonType) ) {
+				elementPath = jsonType.elementPath;
+				if ( jsonType.isSessionVariable ) {
+					jsValue = odkCommon.getSessionVariable(elementPath );
+					value = (jsValue === null || jsValue === undefined) ? null : 
+							databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
+				} else {
+					value = reqData.getData(0, dbKey);
+					// mainly to convert datetime and time values...
+					value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value);
+				}
+				updates[dbKey] = { elementPath: elementPath, value: value };
+			}
+		}
+		// reconstruct the data and instanceMetadata fields.
+		model.data = {};
+		model.instanceMetadata = {};
+		databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+		
+		// and apply any pendingChanges
+		databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, that.pendingChanges);
+
+        model.loaded = true;
+	},
 	/**
 	 * accumulatedChanges[retentionColumn] = {"elementPath" : elementPath, "value": ???};
 	 *
@@ -86,34 +122,7 @@ return {
 		var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, accumulatedChanges, formId);
 		odkData.addCheckpoint(model.table_id, simpleMap, instanceId,
 			function(reqData) {
-				// read data from the row and
-				// read any session variables into model.data
-				var updates = {};
-				var jsonType;
-				var elementPath;
-				var jsValue;
-				var value;
-				var dbKey;
-				for ( dbKey in model.dataTableModel ) {
-					jsonType = model.dataTableModel[dbKey];
-					if ( databaseUtils.isUnitOfRetention(jsonType) ) {
-						elementPath = jsonType.elementPath;
-						if ( jsonType.isSessionVariable ) {
-							jsValue = odkCommon.getSessionVariable(elementPath );
-							value = (jsValue === null || jsValue === undefined) ? null : 
-									databaseUtils._fromSerializationToElementType(jsonType, jsValue, true);
-						} else {
-							value = reqData.getData(0, dbKey);
-							// mainly to convert datetime and time values...
-							value = databaseUtils._fromOdkDataInterfaceToElementType(jsonType, value);
-						}
-						updates[dbKey] = { elementPath: elementPath, value: value };
-					}
-				}
-				// reconstruct the data and instanceMetadata fields.
-				model.data = {};
-				model.instanceMetadata = {};
-				databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+				that._reconstructModelData(model, reqData);
 				ctxt.success();
 			}, 
 			function(errorMsg) {
@@ -156,7 +165,7 @@ return {
 				if ( jsonType['default'] !== undefined && jsonType['default'] !== null ) {
 					// otherwise, use the default for the session variable
 					value = jsonType['default'];
-					that.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
+					databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
 				}
 			}
 			// NOTE: setModelDataValueDeferredChange will not accept any data table changes if instanceId is null or undefined
@@ -167,9 +176,9 @@ return {
 					value = null;
 				} else {
 					jsonType = model.dataTableModel[elementPath];
-					value = databaseUtils._fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
+					value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
 				}
-				that.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
+				databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
 			}
 			// and discard the accumulated changes, since those relate to database column values and we don't have an instance.
 			// and clear the pending changes set.
@@ -236,15 +245,15 @@ return {
 						jsonType = model.dataTableModel[elementPath];
 						if ( jsonType['default'] !== undefined && jsonType['default'] !== null ) {
 							// otherwise, use the default for the session variable
-							that.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, jsonType['default'], accumulatedChanges);
+							databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, jsonType['default'], accumulatedChanges);
 						}
 					}
 					// and now apply any changes from the instanceMetadataKeyValueMap
 					// NOTE: this will have been cleared at the top of the method if sameInstance is true.
 					for ( elementPath in instanceMetadataKeyValueMap ) {
 						jsonType = model.dataTableModel[elementPath];
-						value = databaseUtils._fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
-						that.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
+						value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
+						databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
 					}
 					
 					if ( $.isEmptyObject(accumulatedChanges)) {
@@ -255,28 +264,7 @@ return {
 					}
 					return;
 				} else {
-					// read data from the row and
-					// read any session variables into model.data
-					var updates = {};
-					for ( dbKey in model.dataTableModel ) {
-						jsonType = model.dataTableModel[dbKey];
-						if ( databaseUtils.isUnitOfRetention(jsonType) ) {
-							elementPath = jsonType.elementPath;
-							if ( jsonType.isSessionVariable ) {
-								jsValue = odkCommon.getSessionVariable(elementPath );
-								value = (jsValue === null || jsValue === undefined) ? null :
-									databaseUtils._fromSerializationToElementType(jsonType, jsValue, true);
-							} else {
-								value = reqData.getData(0, dbKey);
-								// mainly to convert datetime and time values...
-								value = databaseUtils._fromOdkDataInterfaceToElementType(jsonType, value);
-							}
-							updates[dbKey] = { elementPath: elementPath, value: value };
-						}
-					}
-					model.data = {};
-					model.instanceMetadata = {};
-					databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+					that._reconstructModelData(model, reqData);
 					// and clear the pending changes set.
 					that.pendingChanges = {};
 					// and now apply any changes from the instanceMetadataKeyValueMap
@@ -286,9 +274,9 @@ return {
 							value = null;
 						} else {
 							jsonType = model.dataTableModel[elementPath];
-							value = databaseUtils._fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
+							value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
 						}
-						that.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
+						databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
 					}
 					if ( $.isEmptyObject(accumulatedChanges)) {
 						ctxt.success();
@@ -402,53 +390,13 @@ return {
     // almost primitive...
     get_all_data:function(ctxt, model, instanceId) {
 
-        // UserTable t = DataIf.getMostRecentRow(model.table_id, instanceId)
-        // wrappedctxt:
-        // successs(userTable) {
-        // if ( t.getNumberOfRows() != 1 ) {
-        //    ctxt.failure("no row or multiple rows!");
-        // } else {
-        //    apply returned row content PLUS sessionVariables to update model
-        //    i.e.,
-        //    updates == kvMap + any changes done within dbservice (e.g., metadata fields)
-        //                     + session variables from odkCommon
-        //    databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
-        //    model.loaded = true;
-        // },
-        // failure(m) {
-        //    ctxt.failure(m)
-        // }
 		odkData.getMostRecentRow(model.table_id, instanceId, 
 			function(reqData) {
 				if ( reqData.getCount() != 1 ) {
 					ctxt.failure({message: "no row or multiple rows!"});
 					return;
 				}
-				// read data from the row and
-				// read any session variables into model.data
-				var updates = {};
-				var jsonType;
-				var elementPath;
-				var jsValue;
-				var value;
-				var dbKey;
-				for ( dbKey in model.dataTableModel ) {
-					jsonType = model.dataTableModel[dbKey];
-					if ( databaseUtils.isUnitOfRetention(jsonType) ) {
-						elementPath = jsonType.elementPath;
-						if ( jsonType.isSessionVariable ) {
-							jsValue = odkCommon.getSessionVariable(elementPath );
-							value = (jsValue === null || jsValue === undefined) ? null : 
-								databaseUtils._fromSerializationToElementType(jsonType, jsValue, true);
-						} else {
-							value = reqData.getData(0, dbKey);
-							// mainly to convert datetime and time values...
-							value = databaseUtils._fromOdkDataInterfaceToElementType(jsonType, value);
-						}
-						updates[dbKey] = { elementPath: elementPath, value: value };
-					}
-				}
-				databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+				that._reconstructModelData(model, reqData);
 				ctxt.success();
 			},
 			function(errorMsg) { ctxt.failure({message: errorMsg}); });
@@ -461,18 +409,6 @@ return {
      */
     _add_checkpoint: function(ctxt, model, formId, instanceId, changeMap) {
         var that = this;
-
-        // DataIf.addCheckpoint( model.table_id, transform(kvMap, formId), instanceId, callbackwrapper(ctxt))
-
-        //
-        // checkpoint API should probably have a mechanism to return the new row values
-        // so that we can update the model immediately, rather than having to re-query.
-        //
-        // ON SUCCESS:
-        //
-        // updates == kvMap + any changes done within dbservice (e.g., metadata fields)
-        // databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
-        // model.loaded = true;
 		var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, changeMap, formId);
 		odkData.addCheckpoint(model.table_id, simpleMap, instanceId, 
 			function(reqData) {
@@ -480,33 +416,7 @@ return {
 					ctxt.failure({message: "no row or multiple rows!"});
 					return;
 				}
-				// read data from the row and
-				// read any session variables into model.data
-				var updates = {};
-				var jsonType;
-				var elementPath;
-				var jsValue;
-				var value;
-				var dbKey;
-				for ( dbKey in model.dataTableModel ) {
-					jsonType = model.dataTableModel[dbKey];
-					if ( databaseUtils.isUnitOfRetention(jsonType) ) {
-						elementPath = jsonType.elementPath;
-						if ( jsonType.isSessionVariable ) {
-							jsValue = odkCommon.getSessionVariable(elementPath );
-							value = (jsValue === null || jsValue === undefined) ? null : 
-								databaseUtils._fromSerializationToElementType(jsonType, jsValue, true);
-						} else {
-							value = reqData.getData(0, dbKey);
-							// mainly to convert datetime and time values...
-							value = databaseUtils._fromOdkDataInterfaceToElementType(jsonType, value);
-						}
-						updates[dbKey] = { elementPath: elementPath, value: value };
-					}
-				}
-				model.data = {};
-				model.instanceMetadata = {};
-				databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+				that._reconstructModelData(model, reqData);
 				ctxt.success();
 			}, 
 			function(errorMsg) {
@@ -550,23 +460,9 @@ return {
         var formId = opendatakit.getSettingValue('form_id');
         var model = opendatakit.getCurrentModel();
         var instanceId = opendatakit.getCurrentInstanceId();
-		that.setModelDataValueDeferredChange( model, formId, instanceId, name, value, that.pendingChanges );
+		databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, name, value, that.pendingChanges );
 
         databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, that.pendingChanges);
-    },
-
-    /**
-     * Does not depend upon any global values.
-     *
-     * updates the model and records the field changes in 
-     * this.pendingChanges
-     */
-    setModelDataValueDeferredChange:function( model, formId, instanceId, name, value, accumulatedChanges ) {
-        var that = this;
-        var justChange = {};
-        justChange[name] = {value: value, isInstanceMetadata: false };
-        // apply the change immediately...
-        databaseSchema.accumulateUnitOfRetentionUpdates(model, formId, instanceId, justChange, accumulatedChanges );
     },
 
     /**
@@ -591,14 +487,6 @@ return {
 			return;
 		}
         that._add_checkpoint($.extend({}, ctxt, {
-                success:function() {
-                    if (model.loaded) {
-                        // we don't need to fetch the row
-                        ctxt.success();
-                    } else {
-                        that.get_all_data(ctxt, model, instanceId);
-                    }
-                },
                 failure:function(m) {
                     // a failure happened during writing -- reload state from db
                     model.loaded = false;
@@ -628,7 +516,6 @@ return {
         var f;
         var defn;
         
-        ctxt.log('D','putInstanceMetaData', 'name: ' + name);
         for ( f in databaseSchema.dataTablePredefinedColumns ) {
           defn = databaseSchema.dataTablePredefinedColumns[f];
           if (  defn.elementSet === 'instanceMetadata' &&
@@ -639,7 +526,7 @@ return {
           }
         }
         if ( dbColumnName === undefined || dbColumnName === null ) {
-          ctxt.log('E','putInstanceMetaData.elementPath.missing', 'name: ' + name);
+          ctxt.log('E','setInstanceMetaData: Unrecognized instance metadata name: ' + name);
           ctxt.failure({message:"Unrecognized instance metadata"});
           return;
         }
@@ -655,14 +542,6 @@ return {
         that.pendingChanges = {};
         changes[name] = {value: value, isInstanceMetadata: true };
         that._add_checkpoint($.extend({}, ctxt, {
-                success:function() {
-                    if (model.loaded) {
-                        // we don't need to fetch the row
-                        ctxt.success();
-                    } else {
-                        that.get_all_data(ctxt, model, instanceId);
-                    }
-                },
                 failure:function(m) {
                     // a failure happened during writing -- reload state from db
                     model.loaded = false;
@@ -678,16 +557,15 @@ return {
     initializeTables:function(ctxt, formDef, table_id, formPath) {
         var that = this;
         var rectxt = $.extend({}, ctxt, {success:function(tlo) {
-            ctxt.log('D','getAllTableMetaData.success');
-            // these values come from the current webpage
-            // update table_id and qp
+            ctxt.log('D','initializeTables.readTableDefinition.success');
+            // overwrite the existing model with this one
             var model = opendatakit.getCurrentModel();
             model.formDef = tlo.formDef;
             model.dataTableModel = tlo.dataTableModel;
             model.metadata = tlo.metadata;
             model.instanceMetadata = tlo.instanceMetadata;
             model.data = tlo.data;
-            model.loaded = false;
+            model.loaded = false; // no instance data is loaded...
             that.pendingChanges = {};
 
             opendatakit.setCurrentTableId(table_id);
