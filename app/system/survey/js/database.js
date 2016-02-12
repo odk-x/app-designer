@@ -1,9 +1,9 @@
 'use strict';
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
-define(['opendatakit','databaseUtils','databaseSchema','jquery'], function(opendatakit,databaseUtils,databaseSchema,$) {
+define(['opendatakit','databaseUtils','jquery'], function(opendatakit,databaseUtils,$) {
 verifyLoad('database',
-    ['opendatakit','databaseUtils','databaseSchema','jquery'],
-    [opendatakit,databaseUtils,databaseSchema,$]);
+    ['opendatakit','databaseUtils','jquery'],
+    [opendatakit,databaseUtils,$]);
 return {
     readTableDefinition:function(ctxt, formDef, table_id, formPath) {
         // If table_id is 'framework' then we dummy-up a definition
@@ -26,13 +26,12 @@ return {
             var tlo = {data: {},      // dataTable instance data values
                 instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                 metadata: {},         // see definition in opendatakit.js
-                dataTableModel: {},   // inverted and extended formDef.model for representing data store
+                dataTableModel: formDef.specification.dataTableModel, // inverted and extended formDef.model for representing data store
                 formDef: formDef, 
                 formPath: formPath, 
                 instanceId: null, 
                 table_id: table_id
                 };
-            databaseSchema.constructDataTableModel(tlo);
             tlo.metadata.tableId = table_id;
             tlo.metadata.schemaETag = null;
             tlo.metadata.lastDataETag = null;
@@ -61,13 +60,12 @@ return {
                     var tlo = {data: {},      // dataTable instance data values
                         instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                         metadata: {},         // see definition in opendatakit.js
-                        dataTableModel: {},   // inverted and extended formDef.model for representing data store
+                        dataTableModel: formDef.specification.dataTableModel, // inverted and extended formDef.model for representing data store
                         formDef: formDef, 
                         formPath: formPath, 
                         instanceId: null, 
                         table_id: table_id
                         };
-                    databaseSchema.constructDataTableModel(tlo);
                     tlo.metadata = reqData.metadata;
                     ctxt.success(tlo);
                 }, 
@@ -76,6 +74,47 @@ return {
                 });
         }
     },
+	_applyPendingChangesToModelData:function(model, logWarning) {
+        var that = this;
+
+        var updates = {};
+        var jsonType;
+        var elementPath;
+        var jsValue;
+        var value;
+        var dbKey;
+		
+		// if requested, log a warning if not all pending changes have
+		// been applied. This indicates that the UI is faster than the
+		// db layer. It could potentially lead to loss of these updates.
+		var keys = [];
+
+        if ( ! $.isEmptyObject(that.pendingChanges)) {
+			
+			// apply any remaining pendingChanges
+			// these are already in the odkData interface format.
+			// we need to parse them back into their representation formats.
+			for (dbKey in that.pendingChanges ) {
+				// for logging...
+				keys.push(dbKey);
+				// get the type and the change entry
+				jsonType = model.dataTableModel[dbKey];
+				pendingChangeEntry = that.pendingChanges[dbKey];
+				if ( pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
+					// construct the data-update entry
+					updates[dbKey] = { elementPath: pendingChangeEntry.elementPath, value: pendingChangeEntry.value };
+				}
+			}
+			// apply the updates
+			databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+
+			if ( logWarning ) {
+				// log that we have a non-empty pendingChanges key-value set.
+				odkCommon.log('W','_reconstructModelData: pendingChanges is not empty! ' + 
+					model.table_id + ' _id: ' + updates._id.value + ' keys: ' + JSON.stringify(keys));
+			}
+        }
+	},
     _reconstructModelData:function(model, reqData) {
         var that = this;
 
@@ -113,7 +152,7 @@ return {
 			databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
             
             odkCommon.log('W','_reconstructModelData: no row returned -- clearing cached values: ' + 
-                            model.table_id + ' _id: ' + updates._id.value);
+                            model.table_id);
             return;
         }
         
@@ -146,11 +185,13 @@ return {
         var pendingChangeEntry, currentEntry;
         var keysToRemove = [];
         for (dbKey in that.pendingChanges ) {
+            jsonType = model.dataTableModel[dbKey];
             currentEntry = updates[dbKey];
             pendingChangeEntry = that.pendingChanges[dbKey];
             if ( currentEntry !== undefined && currentEntry !== null &&
                  pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
-                if ( currentEntry.value === pendingChangeEntry.value ) {
+				value = pendingChangeEntry.value;
+                if ( JSON.stringify(currentEntry.value) === JSON.stringify(value) ) {
                     keysToRemove.push(dbKey);
                 }
             }
@@ -162,26 +203,12 @@ return {
             delete that.pendingChanges[dbKey];
         }
 
-        if ( ! $.isEmptyObject(that.pendingChanges)) {
-			// log a warning if not all pending changes have been applied.
-			// This indicates that the UI is faster than the db layer.
-			// It could potentially lead to loss of these updates.
-            var keys = [];
-            for (dbKey in that.pendingChanges) {
-                keys.push(dbKey);
-            }
-            
-            odkCommon.log('W','_reconstructModelData: pendingChanges is not empty! ' + 
-                model.table_id + ' _id: ' + updates._id.value + ' keys: ' + JSON.stringify(keys));
-        }
-
         // reconstruct the data and instanceMetadata fields.
         model.data = {};
         model.instanceMetadata = {};
         databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
-        
-        // and apply any remaining pendingChanges
-        databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, that.pendingChanges);
+
+		that._applyPendingChangesToModelData(model, true);
     },
     /**
      * accumulatedChanges[retentionColumn] = {"elementPath" : elementPath, "value": ???};
@@ -376,6 +403,7 @@ return {
     ///////////////////////////////////////////////////
     
     get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displayElementName, orderBy) {
+		var that = this;
         // 
         // UserTable lt = DataIf.query( dbTableName, selection, selectionArgs, null, null, orderBy, "ASC", false, postprocessorcb
         //
@@ -401,7 +429,7 @@ return {
             return;
         }
         
-        var ss = databaseSchema.selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
+        var ss = that._selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
         odkData.arbitraryQuery(dbTableName, ss.stmt, ss.bind, 
             function(reqData) {
                 var instanceList = [];
@@ -569,7 +597,7 @@ return {
         var instanceId = opendatakit.getCurrentInstanceId();
         databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, name, value, that.pendingChanges );
 
-        databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, that.pendingChanges);
+		that._applyPendingChangesToModelData(model, false);
     },
 
     /**
@@ -624,8 +652,8 @@ return {
         var f;
         var defn;
         
-        for ( f in databaseSchema.dataTablePredefinedColumns ) {
-          defn = databaseSchema.dataTablePredefinedColumns[f];
+        for ( f in model.dataTableModel ) {
+          defn = model.dataTableModel[f];
           if (  defn.elementSet === 'instanceMetadata' &&
               ( (defn.elementPath === name) ||
                 ((defn.elementPath === undefined || defn.elementPath === null) && (f === name)) ) ) {
@@ -639,15 +667,10 @@ return {
           return;
         }
 
-        // and still use the elementPath for the lookup.
-        // this simply ensures that the name is exported above 
-        // the database layer. 
-        // The database layer uses putDataKeyValueMap()
-        // for lower-level manipulations.
+		// the elementPath and elementKey (dbColumnName) are the same for all instance metadata.
+		that.pendingChanges[dbColumnName] = {elementPath: dbColumnName, value: value, isInstanceMetadata: true };
 
-        // flush any pending changes too...
-        var changes = that.pendingChanges;
-        changes[name] = {value: value, isInstanceMetadata: true };
+        // flush this and any pending changes too...
         that._add_checkpoint($.extend({}, ctxt, {
                 failure:function(m) {
                     // a failure happened during writing -- reload state from db
@@ -655,7 +678,7 @@ return {
                             ctxt.failure(m);
                         }}), model, instanceId);
                 }
-            }), model, formId, instanceId, changes );
+            }), model, formId, instanceId, that.pendingChanges );
     },
 
     initializeTables:function(ctxt, formDef, table_id, formPath) {
@@ -712,7 +735,42 @@ return {
     },
     convertOrderByString:function(linkedModel, order_by) {
         return databaseUtils.convertOrderByString(linkedModel, order_by);
-    }
-    
+    },
+	/**
+	 * get the contents of the active data table row for a given table
+	 * for related forms (with filters).
+	 *
+	 * NOTE: If the last update's _sync_state is 'deleted', then we do not return anything.
+	 *
+	 * dbTableName
+	 * selection  e.g., 'name=? and age=?'
+	 * selectionArgs e.g., ['Tom',33]
+	 * orderBy  e.g., 'name asc, age desc'
+	 *
+	 * Requires: no globals
+	 */
+	_selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
+		var args = ['deleted'];
+		if ( selection === null || selection === undefined ) {
+			return {
+					stmt : 'select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
+						'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName +
+							   '" as V where V._id=T._id)' +
+							((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
+					bind : args  
+				};
+		} else {
+			if (selectionArgs !== null && selectionArgs !== undefined ) {
+				args = args.concat(selectionArgs);
+			}
+			return {
+					stmt :  'select * from (select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
+						'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+							'" as V where V._id=T._id)) where ' + selection +
+							((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
+					bind : args
+				};
+		}
+	}
 };
 });

@@ -789,6 +789,95 @@
         "elementName": "FMP_ycoord_old",
         "elementSet": "data",
         "elementPath": "FMP_ycoord_old"
+      },
+      "_id": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_id",
+        "elementName": "_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_id"
+      },
+      "_row_etag": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_etag",
+        "elementName": "_row_etag",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_etag"
+      },
+      "_sync_state": {
+        "type": "string",
+        "isNotNullable": true,
+        "default": "new_row",
+        "elementKey": "_sync_state",
+        "elementName": "_sync_state",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_sync_state"
+      },
+      "_conflict_type": {
+        "type": "integer",
+        "isNotNullable": false,
+        "elementKey": "_conflict_type",
+        "elementName": "_conflict_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_conflict_type"
+      },
+      "_filter_type": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_filter_type",
+        "elementName": "_filter_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_filter_type"
+      },
+      "_filter_value": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_filter_value",
+        "elementName": "_filter_value",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_filter_value"
+      },
+      "_form_id": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_form_id",
+        "elementName": "_form_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_form_id"
+      },
+      "_locale": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_locale",
+        "elementName": "_locale",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_locale"
+      },
+      "_savepoint_type": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_type",
+        "elementName": "_savepoint_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_type"
+      },
+      "_savepoint_timestamp": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_savepoint_timestamp",
+        "elementName": "_savepoint_timestamp",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_timestamp"
+      },
+      "_savepoint_creator": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_creator",
+        "elementName": "_savepoint_creator",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_creator"
       }
     },
     "properties": [
