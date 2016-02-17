@@ -598,7 +598,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "Date_Opened"
       }
@@ -1459,13 +1459,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "Date_Opened",
         "elementName": "Date_Opened",
         "elementSet": "data",
-        "elementPath": "Date_Opened",
-        "listChildElementKeys": []
+        "elementPath": "Date_Opened"
       },
       "Location_latitude": {
         "type": "number",

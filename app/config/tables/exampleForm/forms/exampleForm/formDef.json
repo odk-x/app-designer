@@ -897,11 +897,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "picture_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "picture_contentType"
           }
@@ -919,11 +921,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "recording_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "audio/*",
             "elementKey": "recording_contentType"
           }
@@ -967,7 +971,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "born"
       },
@@ -978,7 +982,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "time",
         "elementKey": "time"
       },
@@ -989,7 +993,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "elementKey": "datetime"
       },
@@ -1059,11 +1063,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "audio_test_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "audio/*",
             "elementKey": "audio_test_contentType"
           }
@@ -1081,11 +1087,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "video_test_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "video/*",
             "elementKey": "video_test_contentType"
           }
@@ -1103,11 +1111,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "image_test_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "image_test_contentType"
           }
@@ -2344,7 +2354,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "picture_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2352,6 +2363,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "picture_contentType",
             "elementName": "contentType",
@@ -2380,7 +2392,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "recording_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2388,6 +2401,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "audio/*",
             "elementKey": "recording_contentType",
             "elementName": "contentType",
@@ -2451,13 +2465,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "born",
         "elementName": "born",
         "elementSet": "data",
-        "elementPath": "born",
-        "listChildElementKeys": []
+        "elementPath": "born"
       },
       "time": {
         "_defn": [
@@ -2466,13 +2479,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "time",
         "elementKey": "time",
         "elementName": "time",
         "elementSet": "data",
-        "elementPath": "time",
-        "listChildElementKeys": []
+        "elementPath": "time"
       },
       "datetime": {
         "_defn": [
@@ -2481,13 +2493,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "elementKey": "datetime",
         "elementName": "datetime",
         "elementSet": "data",
-        "elementPath": "datetime",
-        "listChildElementKeys": []
+        "elementPath": "datetime"
       },
       "location": {
         "_defn": [
@@ -2590,7 +2601,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "audio_test_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2598,6 +2610,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "audio/*",
             "elementKey": "audio_test_contentType",
             "elementName": "contentType",
@@ -2626,7 +2639,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "video_test_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2634,6 +2648,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "video/*",
             "elementKey": "video_test_contentType",
             "elementName": "contentType",
@@ -2662,7 +2677,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "image_test_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2670,6 +2686,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "image_test_contentType",
             "elementName": "contentType",
@@ -2777,7 +2794,8 @@
         "elementPath": "geopoint.accuracy"
       },
       "picture_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "picture_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2785,6 +2803,7 @@
       },
       "picture_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "picture_contentType",
         "elementName": "contentType",
@@ -2792,7 +2811,8 @@
         "elementPath": "picture.contentType"
       },
       "recording_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "recording_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2800,6 +2820,7 @@
       },
       "recording_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "audio/*",
         "elementKey": "recording_contentType",
         "elementName": "contentType",
@@ -2843,7 +2864,8 @@
         "notUnitOfRetention": true
       },
       "audio_test_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "audio_test_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2851,6 +2873,7 @@
       },
       "audio_test_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "audio/*",
         "elementKey": "audio_test_contentType",
         "elementName": "contentType",
@@ -2858,7 +2881,8 @@
         "elementPath": "audio_test.contentType"
       },
       "video_test_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "video_test_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2866,6 +2890,7 @@
       },
       "video_test_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "video/*",
         "elementKey": "video_test_contentType",
         "elementName": "contentType",
@@ -2873,7 +2898,8 @@
         "elementPath": "video_test.contentType"
       },
       "image_test_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "image_test_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2881,6 +2907,7 @@
       },
       "image_test_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "image_test_contentType",
         "elementName": "contentType",

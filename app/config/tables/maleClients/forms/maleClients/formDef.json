@@ -3198,7 +3198,7 @@
         "elementKey": "interviewer_id"
       },
       "date": {
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "_defn": [
           {
@@ -5203,7 +5203,7 @@
         "elementPath": "interviewer_id"
       },
       "date": {
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "_defn": [
           {
@@ -5218,8 +5218,7 @@
         "elementKey": "date",
         "elementName": "date",
         "elementSet": "data",
-        "elementPath": "date",
-        "listChildElementKeys": []
+        "elementPath": "date"
       },
       "client_id": {
         "type": "integer",

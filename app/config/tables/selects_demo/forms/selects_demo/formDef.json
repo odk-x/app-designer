@@ -1344,11 +1344,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "picture_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "picture_contentType"
           }
@@ -2271,7 +2273,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "picture_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2279,6 +2282,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "picture_contentType",
             "elementName": "contentType",
@@ -2444,7 +2448,8 @@
         "elementPath": "location.accuracy"
       },
       "picture_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "picture_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2452,6 +2457,7 @@
       },
       "picture_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "picture_contentType",
         "elementName": "contentType",

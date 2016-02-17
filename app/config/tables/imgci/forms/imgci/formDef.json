@@ -13444,7 +13444,7 @@
             "section_name": "PatientDemographics"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "birthday"
       },
@@ -29051,13 +29051,12 @@
             "section_name": "PatientDemographics"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "birthday",
         "elementName": "birthday",
         "elementSet": "data",
-        "elementPath": "birthday",
-        "listChildElementKeys": []
+        "elementPath": "birthday"
       },
       "monthsOld": {
         "_defn": [

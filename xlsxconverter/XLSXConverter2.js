@@ -310,10 +310,12 @@ var XLSXConverter = {};
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "rowpath"
+					"type": "string",
+					"elementType": "rowpath"
                 },
                 "contentType": {
-                    "type": "string",
+					"type": "string",
+					"elementType": "mimeType",
                     "default": "image/*"
                 }
             }
@@ -323,10 +325,12 @@ var XLSXConverter = {};
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "rowpath"
+					"type": "string",
+					"elementType": "rowpath"
                 },
                 "contentType": {
-                    "type": "string",
+					"type": "string",
+					"elementType": "mimeType",
                     "default": "image/*"
                 }
             }
@@ -336,10 +340,12 @@ var XLSXConverter = {};
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "rowpath"
+					"type": "string",
+					"elementType": "rowpath"
                 },
                 "contentType": {
-                    "type": "string",
+					"type": "string",
+					"elementType": "mimeType",
                     "default": "audio/*"
                 }
             }
@@ -349,25 +355,30 @@ var XLSXConverter = {};
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "rowpath"
+					"type": "string",
+					"elementType": "rowpath"
                 },
                 "contentType": {
-                    "type": "string",
+					"type": "string",
+					"elementType": "mimeType",
                     "default": "video/*"
                 }
             }
         },
         "date": {
-            "type": "object",
-            "elementType": "date"
+			// odk time stamp -- UTC timestamp string with 00:00:00.000 time.
+            "type": "string",
+			"elementType": "date"
         },
         "time": {
-            "type": "object",
-            "elementType": "time"
+			// odk time -- LOCAL TIME ZONE hh:mm:ss.sss string
+            "type": "string",
+			"elementType": "time"
         },
         "datetime": {
-            "type": "object",
-            "elementType": "dateTime"
+			// odk time stamp -- UTC timestamp string
+            "type": "string",
+			"elementType": "dateTime"
         }
     };
     var warnings = {

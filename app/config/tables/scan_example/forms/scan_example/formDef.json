@@ -517,11 +517,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "qrcode_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "qrcode_image0_contentType"
           }
@@ -549,11 +551,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "stay_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "stay_image0_contentType"
           }
@@ -581,11 +585,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "name_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "name_image0_contentType"
           }
@@ -613,11 +619,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "roomNum_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "roomNum_image0_contentType"
           }
@@ -645,11 +653,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "address_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "address_image0_contentType"
           }
@@ -677,11 +687,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "mon_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "mon_chores_image0_contentType"
           }
@@ -710,11 +722,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "tues_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "tues_chores_image0_contentType"
           }
@@ -743,11 +757,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "wed_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "wed_chores_image0_contentType"
           }
@@ -776,11 +792,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "thurs_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "thurs_chores_image0_contentType"
           }
@@ -809,11 +827,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "fri_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "fri_chores_image0_contentType"
           }
@@ -842,11 +862,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "sat_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "sat_chores_image0_contentType"
           }
@@ -875,11 +897,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "sun_chores_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "sun_chores_image0_contentType"
           }
@@ -908,11 +932,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "comments_image0_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "comments_image0_contentType"
           }
@@ -1695,7 +1721,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "qrcode_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -1703,6 +1730,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "qrcode_image0_contentType",
             "elementName": "contentType",
@@ -1744,7 +1772,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "stay_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -1752,6 +1781,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "stay_image0_contentType",
             "elementName": "contentType",
@@ -1793,7 +1823,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "name_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -1801,6 +1832,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "name_image0_contentType",
             "elementName": "contentType",
@@ -1842,7 +1874,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "roomNum_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -1850,6 +1883,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "roomNum_image0_contentType",
             "elementName": "contentType",
@@ -1891,7 +1925,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "address_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -1899,6 +1934,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "address_image0_contentType",
             "elementName": "contentType",
@@ -1940,7 +1976,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "mon_chores_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -1948,6 +1985,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "mon_chores_image0_contentType",
             "elementName": "contentType",
@@ -1990,7 +2028,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "tues_chores_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -1998,6 +2037,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "tues_chores_image0_contentType",
             "elementName": "contentType",
@@ -2040,7 +2080,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "wed_chores_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2048,6 +2089,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "wed_chores_image0_contentType",
             "elementName": "contentType",
@@ -2090,7 +2132,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "thurs_chores_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2098,6 +2141,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "thurs_chores_image0_contentType",
             "elementName": "contentType",
@@ -2140,7 +2184,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "fri_chores_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2148,6 +2193,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "fri_chores_image0_contentType",
             "elementName": "contentType",
@@ -2190,7 +2236,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "sat_chores_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2198,6 +2245,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "sat_chores_image0_contentType",
             "elementName": "contentType",
@@ -2240,7 +2288,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "sun_chores_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2248,6 +2297,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "sun_chores_image0_contentType",
             "elementName": "contentType",
@@ -2290,7 +2340,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "comments_image0_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -2298,6 +2349,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "comments_image0_contentType",
             "elementName": "contentType",
@@ -2329,7 +2381,8 @@
         "elementPath": "comments"
       },
       "qrcode_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "qrcode_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2337,6 +2390,7 @@
       },
       "qrcode_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "qrcode_image0_contentType",
         "elementName": "contentType",
@@ -2344,7 +2398,8 @@
         "elementPath": "qrcode_image0.contentType"
       },
       "stay_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "stay_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2352,6 +2407,7 @@
       },
       "stay_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "stay_image0_contentType",
         "elementName": "contentType",
@@ -2359,7 +2415,8 @@
         "elementPath": "stay_image0.contentType"
       },
       "name_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "name_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2367,6 +2424,7 @@
       },
       "name_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "name_image0_contentType",
         "elementName": "contentType",
@@ -2374,7 +2432,8 @@
         "elementPath": "name_image0.contentType"
       },
       "roomNum_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "roomNum_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2382,6 +2441,7 @@
       },
       "roomNum_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "roomNum_image0_contentType",
         "elementName": "contentType",
@@ -2389,7 +2449,8 @@
         "elementPath": "roomNum_image0.contentType"
       },
       "address_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "address_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2397,6 +2458,7 @@
       },
       "address_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "address_image0_contentType",
         "elementName": "contentType",
@@ -2404,7 +2466,8 @@
         "elementPath": "address_image0.contentType"
       },
       "mon_chores_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "mon_chores_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2412,6 +2475,7 @@
       },
       "mon_chores_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "mon_chores_image0_contentType",
         "elementName": "contentType",
@@ -2419,7 +2483,8 @@
         "elementPath": "mon_chores_image0.contentType"
       },
       "tues_chores_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "tues_chores_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2427,6 +2492,7 @@
       },
       "tues_chores_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "tues_chores_image0_contentType",
         "elementName": "contentType",
@@ -2434,7 +2500,8 @@
         "elementPath": "tues_chores_image0.contentType"
       },
       "wed_chores_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "wed_chores_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2442,6 +2509,7 @@
       },
       "wed_chores_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "wed_chores_image0_contentType",
         "elementName": "contentType",
@@ -2449,7 +2517,8 @@
         "elementPath": "wed_chores_image0.contentType"
       },
       "thurs_chores_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "thurs_chores_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2457,6 +2526,7 @@
       },
       "thurs_chores_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "thurs_chores_image0_contentType",
         "elementName": "contentType",
@@ -2464,7 +2534,8 @@
         "elementPath": "thurs_chores_image0.contentType"
       },
       "fri_chores_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "fri_chores_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2472,6 +2543,7 @@
       },
       "fri_chores_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "fri_chores_image0_contentType",
         "elementName": "contentType",
@@ -2479,7 +2551,8 @@
         "elementPath": "fri_chores_image0.contentType"
       },
       "sat_chores_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "sat_chores_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2487,6 +2560,7 @@
       },
       "sat_chores_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "sat_chores_image0_contentType",
         "elementName": "contentType",
@@ -2494,7 +2568,8 @@
         "elementPath": "sat_chores_image0.contentType"
       },
       "sun_chores_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "sun_chores_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2502,6 +2577,7 @@
       },
       "sun_chores_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "sun_chores_image0_contentType",
         "elementName": "contentType",
@@ -2509,7 +2585,8 @@
         "elementPath": "sun_chores_image0.contentType"
       },
       "comments_image0_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "comments_image0_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -2517,6 +2594,7 @@
       },
       "comments_image0_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "comments_image0_contentType",
         "elementName": "contentType",

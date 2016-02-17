@@ -224,7 +224,7 @@ var odkDataIf = {
             }
 
             // and we need to fold in the admin columns to construct the data table model...
-            def.dataTableModel = mockSchema.reconstructDataTableModel(formDef.specification.model);
+            def.dataTableModel = formDef.specification.dataTableModel;
 
             var ctxt = $.extend({}, defCtxt, {
                 success: function() {
@@ -446,7 +446,7 @@ var odkDataIf = {
                                 rowArray.push(dbValue);
                             } else if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
                                 dbValue = row[f];
-                                value = mockUtils._fromDatabaseToOdkDataInterfaceElementType( defElement, dbValue );
+                                value = mockUtils.fromDatabaseToOdkDataInterfaceElementType( defElement, dbValue );
                                 rowArray.push(value);
                             }
                         }
@@ -628,6 +628,8 @@ var odkDataIf = {
                             that._getMostRecentRow(ctxt, tableDef, rowId);
                         }
                     }), function(transaction) {
+						// the mocked API will delete everything. 
+						// The device API may return a _sync_state = 'deleted' row.
                         var sqlCommand = "DELETE FROM " + tableId + " WHERE _id=?";
                         ctxt.sqlStatement = {
                                 stmt : sqlCommand,

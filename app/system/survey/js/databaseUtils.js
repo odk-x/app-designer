@@ -3,10 +3,10 @@
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
  */
-define(['XRegExp'], function(XRegExp) {
+define(['XRegExp','jquery'], function(XRegExp,$) {
 verifyLoad('databaseUtils',
-    ['XRegExp'],
-    [XRegExp]);
+    ['XRegExp','jquery'],
+    [ XRegExp,  $]);
 return {
     _reservedFieldNames: {
         /**
@@ -176,16 +176,48 @@ return {
         return true;
     },
     isUnitOfRetention: function(jsonDefn) {
+        var that = this;
         if (jsonDefn.notUnitOfRetention) {
             return false;
         }
         return true;
     },
-    // jsonType == { isNotNullable:
-    //                    true/false,
-    //               type:
-    //                    one of array, object, string, boolean, number, integer, ...
-    fromOdkDataInterfaceToElementType: function( jsonType, value ) {
+    ////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //   Conversion to/from session variable storage
+    /**
+     * Storage format for persisting data in a session variable
+     * is a cleaned-up JSON serialization of the data.
+     *
+     * The primary cleaned-up conversion is that of JS Date()
+     * objects used for date, datetime and time data types
+     * These are converted into a type-appropriate string.
+     *
+     * A secondary cleaned-up conversion is the clean-up of 
+     * boolean, integer and numeric types, ensuring that those
+     * values are represented as their primitive types.
+     *
+     * Arrays and objects are recursively traversed to ensure
+     * that all needed object conversions are performed.
+     *
+     * After all conversions are performed, the result is 
+     * JSON.stringify()'d and returned.
+     *
+     * Thus, on de-serialization, if the incoming value is 
+     * null, we return undefined, as that is not a valid
+     * JSON.stringify().
+     *
+     * De-serialization operates in reverse -- first calling
+     * JSON.parse() then traversing the data structure and 
+     * restoring the Date() objects within it. The boolean,
+     * integer and numeric fields are assumed to already be
+     * in their primitive data types (by virtue of the 
+     * original serialization action).
+     */
+    /**
+     * Serialize to ODK Survey session variable string from ODK Survey representation value
+     */
+    _toSerializationFromElementType: function( jsonType, value, topLevel ) {
         var that = this;
         var refined;
         var itemType;
@@ -193,6 +225,277 @@ return {
         var itemValue;
         // date conversion elements...
         var hh, min, sec, msec;
+
+        if ( topLevel ) {
+            if ( value === undefined ) {
+                return null;
+            }
+            // otherwise, convert it as if it were nested...
+            value = that._toSerializationFromElementType(jsonType, value, false);
+            // and stringify it...
+            return JSON.stringify(value);
+        }
+        
+        if ( value === undefined || value === null ) {
+            if ( jsonType.isNotNullable ) {
+                throw new Error("unexpected null value for non-nullable field");
+            }
+            return null;
+        }
+
+        if ( jsonType.type === 'array' ) {
+            // ensure that it is an array of the appropriate type...
+            if ( $.isArray(value) ) {
+                refined = [];
+                itemType = jsonType.items;
+                if (itemType === undefined || itemType === null ) {
+                    // leave as-is -- assume user did the correct conversions
+                    return value;
+                } else {
+                    for ( item = 0 ; item < value.length ; ++item ) {
+                        itemValue = that._toSerializationFromElementType( itemType, value[item], false );
+                        refined.push(itemValue);
+                    }
+                    return refined;
+                }
+            } else {
+                throw new Error("unexpected non-array value");
+            }
+        } else if ( jsonType.type === 'object' ) {
+            if ( !jsonType.properties ) {
+                // this is an opaque BLOB w.r.t. database layer
+                return value;
+            } else {
+                // otherwise, enforce spec conformance...
+                // Only values in the properties list, and those
+                // must match the type definitions recursively.
+                refined = {};
+                for ( item in jsonType.properties ) {
+                    if ( value[item] !== null && value[item] !== undefined ) {
+                        itemType = jsonType.properties[item];
+                        itemValue = that._toSerializationFromElementType( itemType, value[item], false );
+                        refined[item] = itemValue;
+                    }
+                }
+                return refined;
+            }
+        } else if ( jsonType.type === 'boolean' ) {
+            return value ? true : false; // make it a real boolean
+        } else if ( jsonType.type === 'integer' ) {
+            return Math.round(value);
+        } else if ( jsonType.type === 'number' ) {
+            return Number(value);
+        } else if ( jsonType.type === 'string' ) {
+            if ( jsonType.elementType === 'dateTime' ||
+                 jsonType.elementType === 'date' ) {
+                if ( value instanceof Date ) {
+                    // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                    return odkCommon.toOdkTimeStampFromDate(value);
+                }
+            } else if ( jsonType.elementType === 'time' ) {
+                if ( value instanceof Date ) {
+					// extract time of the local day.
+                    // convert to a nanosecond-extended iso8601-style LOCAL TIME ZONE time HH:MM:SS.sssssssss
+					return odkCommon.toOdkTimeFromDate(value);
+                }
+			}
+			return '' + value;
+		} else {
+			odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            return value;
+        }
+    },
+    /**
+     * Serialize to ODK Survey representation value from ODK Survey session variable string
+     */
+    fromSerializationToElementType: function( jsonType, value, topLevel ) {
+        var that = this;
+        var refined;
+        var itemType;
+        var item;
+        var itemValue;
+        // date conversion elements...
+        var hh, min, sec, msec;
+
+        if ( topLevel ) {
+            if ( value === undefined || value === null ) {
+                return undefined;
+            }
+            
+            // Do not allow empty strings.
+            // Strings are either NULL or non-zero-length.
+            //
+            if ( value === "" ) {
+                throw new Error("unexpected empty (zero-length string) value for field");
+            }
+
+            // de-stringify the value...
+            value = JSON.parse(value);
+        }
+
+        if ( value === undefined || value === null ) {
+            if ( jsonType.isNotNullable ) {
+                throw new Error("unexpected null value for non-nullable field");
+            }
+            return null;
+        }
+
+        if ( value === "" ) {
+            throw new Error("unexpected empty (zero-length string) value for field");
+        }
+
+        if ( jsonType.type === 'array' ) {
+            // TODO: ensure object spec conformance on read?
+            if ( $.isArray(value) ) {
+                refined = [];
+                itemType = jsonType.items;
+                if (itemType === undefined || itemType === null ) {
+                    return value;
+                } else {
+                    for ( item = 0 ; item < value.length ; ++item ) {
+                        itemValue = that.fromSerializationToElementType( itemType, value[item], false );
+                        refined.push(itemValue);
+                    }
+                    return refined;
+                }
+            } else {
+                throw new Error("unexpected non-array value");
+            }
+        } else if ( jsonType.type === 'object' ) {
+			if ( jsonType.properties ) {
+				// otherwise, enforce spec conformance...
+				// Only values in the properties list, and those
+				// must match the type definitions recursively.
+				refined = {};
+				for ( item in jsonType.properties ) {
+					if ( value[item] !== null && value[item] !== undefined ) {
+						itemType = jsonType.properties[item];
+						itemValue = that.fromSerializationToElementType( itemType, value[item], false );
+						refined[item] = itemValue;
+					}
+				}
+				return refined;
+			} else {
+				// opaque
+				return value;
+			}
+        } else if ( jsonType.type === 'boolean' ) {
+            return value;
+        } else if ( jsonType.type === 'integer' ) {
+            return value;
+        } else if ( jsonType.type === 'number' ) {
+            return value;
+        } else if ( jsonType.type === 'string' ) {
+            if ( jsonType.elementType === 'date' ||
+                 jsonType.elementType === 'dateTime' ) {
+                // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                // this does not preserve the nanosecond field...
+                return odkCommon.toDateFromOdkTimeStamp(value);
+            } else if ( jsonType.elementType === 'time' ) {
+				// retrieve hh:mm:ss.sss from the local day.
+                // convert from a nanosecond-extended iso8601-style LOCAL TIME ZONE time HH:MM:SS.sssssssss
+				return odkCommon.toDateFromOdkTime(new Date(), value);
+            } else {
+				return value;
+			}
+		} else {
+			odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            return value;
+        }
+    },
+    //               end conversion to/from session variable storage
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //   Conversion to/from odkData API representation
+    /**
+     * The odkData API representation is a clean-up of our 
+     * ODK Survey data representation. The primary clean-up
+     * is the conversion of the complex hierarchical data 
+     * model into a set of disjoint unit-of-retention 
+     * storage values. That is done outside of these routines.
+     *
+     * These routines then process the storage value prior
+     * to passing it into the odkData API. 
+     *
+     * If the column does not allow null values, and a null is 
+     * passed in, an Error is thrown (this is a bad situation).
+	 *
+     * The primary cleaned-up conversion is the conversion of JS Date()
+     * objects used for date, datetime and time data types
+     * These are converted into a type-appropriate formatted strings.
+	 * Date() does not have a JSON serialization, so this conversion
+	 * needs to be applied recursively throughout the value (when the 
+	 * value is an array or object).
+     *
+     * A secondary cleaned-up conversion is the clean-up of 
+     * boolean, integer and numeric types, ensuring that those
+     * values are represented as their primitive types. e.g.,
+	 * that a boolean field that holds a numeric 1 has that value 
+	 * properly converted to the Javascript true value (rather 
+	 * than being passed through as a numeric 1). Similarly, integers
+     * are forced to integer values, numeric values are converted 
+	 * to Number type, and string values are forced to be strings.
+     *
+     * Arrays and objects are recursively traversed to ensure
+     * that all needed object conversions are performed.
+     *
+     * Because the traversal is driven by the jsonType 
+     * information, this clean-up enforces data types prior to 
+     * invoking the odkData API.
+     *
+     * After all these clean-up conversions are performed:
+     *
+     * If the value is null or undefined:
+     *   return null.
+     *
+     * If the data value is an object or array, then:
+	 *   return the JSON.stringify() of that data value.
+	 *
+	 * Otherwise:
+     *   return the value.
+     *
+     * De-serialization also relies on the data type of the data column
+     * to determine what action to take. When de-serializing, the 
+	 * date, dateTime and time datatypes are converted into Date() objects.
+	 *
+	 * Note that time is represented as local time, and date/dateTime is UTC.
+     */
+    /**
+     * Serialize from odkData API representation to ODK Survey representation value
+     */
+    fromOdkDataInterfaceToElementType: function( jsonType, value, topLevel ) {
+        var that = this;
+        var refined;
+        var itemType;
+        var item;
+        var itemValue;
+        // date conversion elements...
+        var hh, min, sec, msec;
+
+        if ( topLevel ) {
+			
+			if ( value === undefined || value === null ) {
+				if ( jsonType.isNotNullable ) {
+					throw new Error("unexpected null value for non-nullable field");
+				}
+				return null;
+			}
+			
+            if ( jsonType.type === 'array' || jsonType.type === 'object' ) {
+				// parse it if it is a non-null array or object...
+				value = JSON.parse(value);
+			}
+
+            // convert it as if it were nested...
+            value = that.fromOdkDataInterfaceToElementType(jsonType, value, false);
+
+			return value;
+        }
+
 
         if ( value === undefined || value === null ) {
             if ( jsonType.isNotNullable ) {
@@ -210,14 +513,14 @@ return {
 
         if ( jsonType.type === 'array' ) {
             // TODO: ensure object spec conformance on read?
-            if ( value instanceof Array ) {
+            if ( $.isArray(value) ) {
                 refined = [];
                 itemType = jsonType.items;
                 if (itemType === undefined || itemType === null ) {
                     return value;
                 } else {
                     for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that.fromOdkDataInterfaceToElementType( itemType, value[item] );
+                        itemValue = that.fromOdkDataInterfaceToElementType( itemType, value[item], false );
                         refined.push(itemValue);
                     }
                     return refined;
@@ -226,23 +529,7 @@ return {
                 throw new Error("unexpected non-array value");
             }
         } else if ( jsonType.type === 'object' ) {
-            if ( jsonType.elementType === 'date' ||
-                 jsonType.elementType === 'dateTime' ) {
-                // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
-                // this does not preserve the nanosecond field...
-                return odkCommon.toDateFromOdkTimeStamp(value);
-            } else if ( jsonType.elementType === 'time' ) {
-                // convert from a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
-                // this does not preserve the nanosecond field...
-                var idx = value.indexOf(':');
-                hh = Number(value.substring(0,idx));
-                min = Number(value.substr(idx+1,2));
-                sec = Number(value.substr(idx+4,2));
-                msec = Number(value.substr(idx+7,3));
-                value = new Date();
-                value.setHours(hh,min,sec,msec);
-                return value;
-            } else if ( jsonType.properties ) {
+			if ( jsonType.properties ) {
                 // otherwise, enforce spec conformance...
                 // Only values in the properties list, and those
                 // must match the type definitions recursively.
@@ -250,7 +537,7 @@ return {
                 for ( item in jsonType.properties ) {
                     if ( value[item] !== null && value[item] !== undefined ) {
                         itemType = jsonType.properties[item];
-                        itemValue = that.fromOdkDataInterfaceToElementType(itemType, value[item]);
+                        itemValue = that.fromOdkDataInterfaceToElementType(itemType, value[item], false);
                         refined[item] = itemValue;
                     }
                 }
@@ -270,17 +557,24 @@ return {
         } else if ( jsonType.type === 'number' ) {
             return Number(value);
         } else if ( jsonType.type === 'string' ) {
-            return '' + value;
-        } else if ( jsonType.type === 'rowpath' ) {
-            return '' + value;
-        } else if ( jsonType.type === 'configpath' ) {
-            return '' + value;
+            if ( jsonType.elementType === 'date' ||
+                 jsonType.elementType === 'dateTime' ) {
+                // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                // this does not preserve the nanosecond field...
+                return odkCommon.toDateFromOdkTimeStamp(value);
+            } else if ( jsonType.elementType === 'time' ) {
+                // convert from a nanosecond-extended iso8601-style LOCAL TIME ZONE time HH:MM:SS.sssssssss
+                // this does not preserve the nanosecond field...
+				return odkCommon.toDateFromOdkTime(new Date(), value);
+			} else {
+				return value;
+			}
         } else {
             odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
-            return '' + value;
+            return value;
         }
     },
-    fromSerializationToElementType: function( jsonType, value, toplevel ) {
+    toOdkDataInterfaceFromElementType: function( jsonType, value, topLevel ) {
         var that = this;
         var refined;
         var itemType;
@@ -289,6 +583,23 @@ return {
         // date conversion elements...
         var hh, min, sec, msec;
 
+        if ( topLevel ) {
+            // convert it as if it were nested...
+            value = that.toOdkDataInterfaceFromElementType(jsonType, value, false);
+			
+			// null is always null...
+			if ( value === null ) {
+				return value;
+			}
+			
+            if ( jsonType.type === 'array' || jsonType.type === 'object' ) {
+				// and stringify it if it is a non-null array or object...
+				return JSON.stringify(value);
+			} else {
+				return value;
+			}
+        }
+
         if ( value === undefined || value === null ) {
             if ( jsonType.isNotNullable ) {
                 throw new Error("unexpected null value for non-nullable field");
@@ -296,29 +607,19 @@ return {
             return null;
         }
 
-        // Do not allow empty strings.
-        // Strings are either NULL or non-zero-length.
-        //
-        if ( value === "" ) {
-            throw new Error("unexpected empty (zero-length string) value for field");
-        }
-
         if ( jsonType.type === 'array' ) {
-            if ( toplevel ) {
-                value = JSON.parse(value);
-            }
-            if ( value === null || value === undefined ) {
-                return null;
-            }
-            // TODO: ensure object spec conformance on read?
-            if ( value instanceof Array ) {
+            // ensure that it is an array of the appropriate type...
+            if ( $.isArray(value) ) {
                 refined = [];
                 itemType = jsonType.items;
                 if (itemType === undefined || itemType === null ) {
-                    return value;
+					// unspecified array. 
+                    // This might screw up embedded datetimes, etc.
+					return value;
                 } else {
+                    // make sure the items are converted
                     for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that.fromSerializationToElementType( itemType, value[item], false );
+                        itemValue = that.toOdkDataInterfaceFromElementType( itemType, value[item], false );
                         refined.push(itemValue);
                     }
                     return refined;
@@ -327,74 +628,72 @@ return {
                 throw new Error("unexpected non-array value");
             }
         } else if ( jsonType.type === 'object' ) {
-            if ( jsonType.elementType === 'date' ||
-                 jsonType.elementType === 'dateTime' ) {
-                // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
-                // this does not preserve the nanosecond field...
-                return odkCommon.toDateFromOdkTimeStamp(value);
-            } else if ( jsonType.elementType === 'time' ) {
-                // convert from a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
-                // this does not preserve the nanosecond field...
-                var idx = value.indexOf(':');
-                hh = Number(value.substring(0,idx));
-                min = Number(value.substr(idx+1,2));
-                sec = Number(value.substr(idx+4,2));
-                msec = Number(value.substr(idx+7,3));
-                value = new Date();
-                value.setHours(hh,min,sec,msec);
+			if ( !jsonType.properties ) {
+                // this is an opaque BLOB w.r.t. database layer
+                // leave it as-is.
                 return value;
             } else {
-                if ( toplevel ) {
-                    value = JSON.parse(value);
-                }
-                if ( value === null || value === undefined ) {
-                    return null;
-                }
-                if ( jsonType.properties ) {
-                    // otherwise, enforce spec conformance...
-                    // Only values in the properties list, and those
-                    // must match the type definitions recursively.
-                    refined = {};
-                    for ( item in jsonType.properties ) {
-                        if ( value[item] !== null && value[item] !== undefined ) {
-                            itemType = jsonType.properties[item];
-                            itemValue = that.fromSerializationToElementType( itemType, value[item], false );
-                            refined[item] = itemValue;
-                        }
+                // otherwise, enforce spec conformance...
+                // Only values in the properties list, and those
+                // must match the type definitions recursively.
+                refined = {};
+                for ( item in jsonType.properties ) {
+                    if ( value[item] !== null && value[item] !== undefined ) {
+                        itemType = jsonType.properties[item];
+                        itemValue = that.toOdkDataInterfaceFromElementType( itemType, value[item], false );
+                        refined[item] = itemValue;
                     }
-                    return refined;
-                } else {
-                    // opaque
-                    return value;
                 }
+                return refined;
             }
         } else if ( jsonType.type === 'boolean' ) {
-            if ( toplevel ) {
-                value = JSON.parse(value);
-            }
-            return value;
+            return value ? true : false; // force it to boolean
         } else if ( jsonType.type === 'integer' ) {
-            if ( toplevel ) {
-                value = JSON.parse(value);
-            }
-            return value;
+            return Math.round(value);
         } else if ( jsonType.type === 'number' ) {
-            if ( toplevel ) {
-                value = JSON.parse(value);
-            }
             return value;
         } else if ( jsonType.type === 'string' ) {
-            return '' + value;
-        } else if ( jsonType.type === 'rowpath' ) {
-            return '' + value;
-        } else if ( jsonType.type === 'configpath' ) {
-            return '' + value;
+            if ( jsonType.elementType === 'dateTime' ||
+                 jsonType.elementType === 'date' ) {
+                // already a string? -- assume it is nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                if ( value instanceof Date ) {
+                    // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
+                    return odkCommon.toOdkTimeStampFromDate(value);
+				}
+            } else if ( jsonType.elementType === 'time' ) {
+                // already a string? -- assume it is nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
+                if ( value instanceof Date ) {
+					// convert to a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
+					return odkCommon.toOdkTimeFromDate(value);
+				}
+			}
+			return '' + value;
         } else {
             odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
             return '' + value;
         }
     },
-    //  type:  one of array, object, string, boolean, number, integer, ...
+    //               end conversion to/from odkData API representation
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //   Conversion to/from odkData API key-value-store representation
+	/**
+	 * This takes the '_type' column of the KVS entry and the '_value' column
+	 *
+	 * It produces the converted value for the column. 
+	 *
+     * type:  one of array, object, string, boolean, number, integer, ...
+	 *
+	 * The incoming value is null or a string.
+	 * 
+	 * The conversion is parsing the strings. The only tricky one is 
+	 * for boolean. That tests for either 'true' or a non-zero number
+	 * as true.
+	 */	 
     fromKVStoreToElementType: function( type, value ) {
         var that = this;
 
@@ -414,8 +713,11 @@ return {
         } else if ( type === 'object' ) {
             return '' + value;
         } else if ( type === 'boolean' ) {
-            return (value === undefined || value === null) ? null :
-                       ((typeof value === 'number') ? (Number(value) !== 0) : (value.toLowerCase() === 'true')); // '0' is false.
+			if ( value.toLowerCase() === 'true' ) {
+				return true;
+			}
+			value = Number(value);
+			return ( value !== NaN && value !== 0 );
         } else if ( type === 'integer' ) {
             value = Number(value);
             if ( Math.round(value) != value ) {
@@ -430,234 +732,32 @@ return {
             return '' + value;
         } else if ( type === 'configpath' ) {
             return '' + value;
+        } else if ( type === 'mimeType' ) {
+            return '' + value;
+        } else if ( type === 'date' ) {
+            return '' + value;
+        } else if ( type === 'dateTime' ) {
+            return '' + value;
+        } else if ( type === 'time' ) {
+            return '' + value;
+        } else if ( type === 'timeInterval' ) {
+            return '' + value;
         } else {
-            odkCommon.log('W',"unrecognized JSON schema type: " + type + " treated as string");
+            odkCommon.log('W',"fromKVStoreToElementType: unrecognized JSON schema type: " + type + " treated as string (typo or user-defined type?)");
             return '' + value;
         }
     },
-    _toSerializationFromElementType: function( jsonType, value, toplevel ) {
-        var that = this;
-        var refined;
-        var itemType;
-        var item;
-        var itemValue;
-        // date conversion elements...
-        var hh, min, sec, msec;
+    //               end conversion to/from odkData API key-value-store representation
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if ( value === undefined || value === null ) {
-            if ( jsonType.isNotNullable ) {
-                throw new Error("unexpected null value for non-nullable field");
-            }
-            return null;
-        }
 
-        if ( jsonType.type === 'array' ) {
-            // ensure that it is an array of the appropriate type...
-            if ( value instanceof Array ) {
-                refined = [];
-                itemType = jsonType.items;
-                if (itemType === undefined || itemType === null ) {
-                    // leave as-is -- assume user did the correct conversions
-                } else {
-                    for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that._toSerializationFromElementType( itemType, value[item], false );
-                        refined.push(itemValue);
-                    }
-                    value = refined;
-                }
-            } else {
-                throw new Error("unexpected non-array value");
-            }
-            if ( toplevel ) {
-                return JSON.stringify(value);
-            } else {
-                return value;
-            }
-        } else if ( jsonType.type === 'object' ) {
-            if ( jsonType.elementType === 'dateTime' ||
-                 jsonType.elementType === 'date' ) {
-                if ( value instanceof String ) {
-                    return value;
-                } else {
-                    // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
-                    return odkCommon.toOdkTimeStampFromDate(value);
-                }
-            } else if ( jsonType.elementType === 'time' ) {
-                if ( value instanceof String ) {
-                    return value;
-                } else {
-                    // convert to a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
-                    // strip off the time-of-day and drop the rest...
-                    hh = value.getHours();
-                    min = value.getMinutes();
-                    sec = value.getSeconds();
-                    msec = value.getMilliseconds();
-                    value = odkCommon.padWithLeadingZeros(hh,2) + ':' +
-                            odkCommon.padWithLeadingZeros(min,2) + ':' +
-                            odkCommon.padWithLeadingZeros(sec,2) + '.' +
-                            odkCommon.padWithLeadingZeros(msec,3) + '000000';
-                    return value;
-                }
-            } else if ( !jsonType.properties ) {
-                // this is an opaque BLOB w.r.t. database layer
-                if ( toplevel ) {
-                    return JSON.stringify(value);
-                } else {
-                    return value;
-                }
-            } else {
-                // otherwise, enforce spec conformance...
-                // Only values in the properties list, and those
-                // must match the type definitions recursively.
-                refined = {};
-                for ( item in jsonType.properties ) {
-                    if ( value[item] !== null && value[item] !== undefined ) {
-                        itemType = jsonType.properties[item];
-                        itemValue = that._toSerializationFromElementType( itemType, value[item], false );
-                        refined[item] = itemValue;
-                    }
-                }
-                if ( toplevel ) {
-                    return JSON.stringify(refined);
-                } else {
-                    return refined;
-                }
-            }
-        } else if ( jsonType.type === 'boolean' ) {
-            value = value ? true : false; // make it a real boolean
-            if ( toplevel ) {
-                return JSON.stringify(value);
-            } else {
-                return value;
-            }
-        } else if ( jsonType.type === 'integer' ) {
-            value = Math.round(value);
-            if ( toplevel ) {
-                return JSON.stringify(value);
-            } else {
-                return value;
-            }
-        } else if ( jsonType.type === 'number' ) {
-            value = Number(value);
-            if ( toplevel ) {
-                return JSON.stringify(value);
-            } else {
-                return value;
-            }
-        } else if ( jsonType.type === 'string' ) {
-            return '' + value;
-        } else if ( jsonType.type === 'rowpath' ) {
-            return '' + value;
-        } else if ( jsonType.type === 'configpath' ) {
-            return '' + value;
-        } else {
-            odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
-            return '' + value;
-        }
-    },
-    toOdkDataInterfaceFromElementType: function( jsonType, value ) {
-        var that = this;
-        var refined;
-        var itemType;
-        var item;
-        var itemValue;
-        // date conversion elements...
-        var hh, min, sec, msec;
-
-        if ( value === undefined || value === null ) {
-            if ( jsonType.isNotNullable ) {
-                throw new Error("unexpected null value for non-nullable field");
-            }
-            return null;
-        }
-
-        if ( jsonType.type === 'array' ) {
-            // ensure that it is an array of the appropriate type...
-            if ( value instanceof Array ) {
-                refined = [];
-                itemType = jsonType.items;
-                if (itemType === undefined || itemType === null ) {
-                    // leave it as-is. This might screw up embedded datetimes, etc.
-                } else {
-                    // make sure the items are converted
-                    for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that.toOdkDataInterfaceFromElementType( itemType, value[item] );
-                        refined.push(itemValue);
-                    }
-                    value = refined;
-                }
-            } else {
-                throw new Error("unexpected non-array value");
-            }
-            return value;
-        } else if ( jsonType.type === 'object' ) {
-            if ( jsonType.elementType === 'dateTime' ||
-                 jsonType.elementType === 'date' ) {
-                // already a string? -- assume it is nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
-                if ( value instanceof String ) {
-                    return value;
-                }
-                // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
-                return odkCommon.toOdkTimeStampFromDate(value);
-            } else if ( jsonType.elementType === 'time' ) {
-                // already a string? -- assume it is nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
-                if ( value instanceof String ) {
-                    return value;
-                }
-                // convert to a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
-                // strip off the time-of-day and drop the rest...
-                hh = value.getHours();
-                min = value.getMinutes();
-                sec = value.getSeconds();
-                msec = value.getMilliseconds();
-                value = odkCommon.padWithLeadingZeros(hh,2) + ':' +
-                        odkCommon.padWithLeadingZeros(min,2) + ':' +
-                        odkCommon.padWithLeadingZeros(sec,2) + '.' +
-                        odkCommon.padWithLeadingZeros(msec,3) + '000000';
-                return value;
-            } else if ( !jsonType.properties ) {
-                // this is an opaque BLOB w.r.t. database layer
-                // leave it as-is.
-                return value;
-            } else {
-                // otherwise, enforce spec conformance...
-                // Only values in the properties list, and those
-                // must match the type definitions recursively.
-                refined = {};
-                for ( item in jsonType.properties ) {
-                    if ( value[item] !== null && value[item] !== undefined ) {
-                        itemType = jsonType.properties[item];
-                        itemValue = that.toOdkDataInterfaceFromElementType( itemType, value[item] );
-                        refined[item] = itemValue;
-                    }
-                }
-                value = refined;
-                return value;
-            }
-        } else if ( jsonType.type === 'boolean' ) {
-            return value ? true : false; // force it to boolean
-        } else if ( jsonType.type === 'integer' ) {
-            value = Math.round(value);
-            return value;
-        } else if ( jsonType.type === 'number' ) {
-            return value;
-        } else if ( jsonType.type === 'string' ) {
-            return '' + value;
-        } else if ( jsonType.type === 'rowpath' ) {
-            return '' + value;
-        } else if ( jsonType.type === 'configpath' ) {
-            return '' + value;
-        } else {
-            odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
-            return '' + value;
-        }
-    },
     _reconstructElementPath: function(elementPath, jsonType, value, topLevelObject) {
         var that = this;
         var path = elementPath.split('.');
         var e = topLevelObject;
         var term;
-		var j;
+        var j;
         for (j = 0 ; j < path.length-1 ; ++j) {
             term = path[j];
             if ( term === undefined || term === null || term === "" ) {
@@ -676,10 +776,10 @@ return {
     },
     reconstructModelDataFromElementPathValueUpdates: function(model, updates) {
         var that = this;
-		var dbKey;
-		var elementPath;
-		var elementPathValue;
-		var de;
+        var dbKey;
+        var elementPath;
+        var elementPathValue;
+        var de;
         for (dbKey in updates) {
             elementPathValue = updates[dbKey];
             de = model.dataTableModel[dbKey];
@@ -694,9 +794,10 @@ return {
         }
     },
     _getElementPathPairFromKvMap: function(kvMap, elementPath) {
+        var that = this;
         var path = elementPath.split('.');
         var i, j, term, value, pathChain;
-		var e, f;
+        var e, f;
         // work from most specific to least specific searching for a value match
         for (j = path.length-1 ; j >= 0 ; --j) {
             pathChain = '';
@@ -713,8 +814,8 @@ return {
                 for ( i = j+1 ; i <= path.length-1 ; ++i ) {
                     value = value[path[i]];
                     if ( value === undefined || value === null ) {
-						break;
-					}
+                        break;
+                    }
                 }
                 e = {};
                 for ( f in term ) {
@@ -740,8 +841,8 @@ return {
                 for ( i = j+1 ; i <= path.length-1 ; ++i ) {
                     value = value[path[i]];
                     if ( value === undefined || value === null ) {
-						break;
-					}
+                        break;
+                    }
                 }
                 e = {};
                 for ( f in term ) {
@@ -756,6 +857,7 @@ return {
         return null;
     },
     getElementPathValue:function(data,pathName) {
+        var that = this;
         var path = pathName.split('.');
         var v = data;
         for ( var i = 0 ; i < path.length ; ++i ) {
@@ -788,8 +890,8 @@ return {
                     var defElement = linkedModel.dataTableModel[f];
                     var elementPath = defElement['elementPath'];
                     if ( elementPath === null || elementPath === undefined ) {
-						elementPath = f;
-					}
+                        elementPath = f;
+                    }
                     if ( elementPath === e ) {
                         remapped = remapped + ' "' + f + '"';
                         found = true;
@@ -826,8 +928,8 @@ return {
                     var defElement = linkedModel.dataTableModel[f];
                     var elementPath = defElement['elementPath'];
                     if ( elementPath === null || elementPath === undefined ) {
-						elementPath = f;
-					}
+                        elementPath = f;
+                    }
                     if ( elementPath === e ) {
                         remapped = remapped + ' "' + f + '"';
                         found = true;
@@ -843,75 +945,75 @@ return {
         }
         return remapped;
     },
-	/**
-	 * take a kvMap and either immediately effect the change if it is to a 
-	 * session variable or add it to the set of accumulated changes to be applied
-	 * when the data record is next updated. 
-	 * 
-	 * This does not update the metadata fields of the record.
-	 *
-	 * kvMap : { 'fieldName' : { value: "foo name", isInstanceMetadata: false } ...}
-	 *
-	 * The 'fieldName' will be re-mapped to its retention units if it is a composite data value.
-	 *
-	 * Requires: No global dependencies
-	 */
-	_accumulateUnitOfRetentionUpdates:function(model, formId, instanceId, kvMap, accumulatedChanges) {
-		var that = this;
-		var dbTableName = model.table_id;
-		var dataTableModel = model.dataTableModel;
-		
-		// track the values we have assigned. Useful for catching typos in the elementKey (field) names.
-		var processSet = {};
-		
-		var f, defElement, elementPathPair, kvElement, v;
-		var changeElement;
-		var sessionVariableChanges = {};
-							
-		for (f in dataTableModel) {
-			defElement = dataTableModel[f];
-			if ( that.isUnitOfRetention(defElement) ) {
-				var elementPath = defElement['elementPath'];
-				// don't allow working with elementKey primitives if not manipulating metadata
-				if (( elementPath === undefined || elementPath === null ) && 
-					  defElement.elementSet === 'instanceMetadata') {
-					elementPath = f;
-				}
-				// TODO: get kvElement for this elementPath
-				elementPathPair = that._getElementPathPairFromKvMap(kvMap, elementPath);
-				if ( elementPathPair !== null && elementPathPair !== undefined ) {
-					kvElement = elementPathPair.element;
-					kvElement = elementPathPair.element;
-					// track that we matched the keyname...
-					processSet[elementPathPair.elementPath] = true;
-					// ensure that undefined are treated as null...
-					if (kvElement.value === undefined || kvElement.value === null) {
-						kvElement.value = null;
-					}
-					changeElement = {"elementPath": elementPath, "value": kvElement.value};
-					// the odkData layer works directly on the value
-					// but session variables need the storage value...
-					if ( !defElement.isSessionVariable ) {
-						if ( instanceId !== null && instanceId !== undefined ) {
-							accumulatedChanges[f] = changeElement;
-						}
-					} else {
-						v = that._toSerializationFromElementType(defElement, kvElement.value, true);
-						odkCommon.setSessionVariable(elementPath, v);
-						sessionVariableChanges[f] = changeElement;
-					}
-				}
-			}
-		}
-		// apply the session variable changes immediately to the model.
-		that.reconstructModelDataFromElementPathValueUpdates(model, sessionVariableChanges);
-		
-		for ( f in kvMap ) {
-			if ( processSet[f] !== true ) {
-				console.error("_accumulateUnitOfRetentionUpdates: kvMap contains unrecognized database column " + dbTableName + "." + f );
-			}
-		}
-	},
+    /**
+     * take a kvMap and either immediately effect the change if it is to a 
+     * session variable or add it to the set of accumulated changes to be applied
+     * when the data record is next updated. 
+     * 
+     * This does not update the metadata fields of the record.
+     *
+     * kvMap : { 'fieldName' : { value: "foo name", isInstanceMetadata: false } ...}
+     *
+     * The 'fieldName' will be re-mapped to its retention units if it is a composite data value.
+     *
+     * Requires: No global dependencies
+     */
+    _accumulateUnitOfRetentionUpdates:function(model, formId, instanceId, kvMap, accumulatedChanges) {
+        var that = this;
+        var dbTableName = model.table_id;
+        var dataTableModel = model.dataTableModel;
+        
+        // track the values we have assigned. Useful for catching typos in the elementKey (field) names.
+        var processSet = {};
+        
+        var f, defElement, elementPathPair, kvElement, v;
+        var changeElement;
+        var sessionVariableChanges = {};
+                            
+        for (f in dataTableModel) {
+            defElement = dataTableModel[f];
+            if ( that.isUnitOfRetention(defElement) ) {
+                var elementPath = defElement['elementPath'];
+                // don't allow working with elementKey primitives if not manipulating metadata
+                if (( elementPath === undefined || elementPath === null ) && 
+                      defElement.elementSet === 'instanceMetadata') {
+                    elementPath = f;
+                }
+                // TODO: get kvElement for this elementPath
+                elementPathPair = that._getElementPathPairFromKvMap(kvMap, elementPath);
+                if ( elementPathPair !== null && elementPathPair !== undefined ) {
+                    kvElement = elementPathPair.element;
+                    kvElement = elementPathPair.element;
+                    // track that we matched the keyname...
+                    processSet[elementPathPair.elementPath] = true;
+                    // ensure that undefined are treated as null...
+                    if (kvElement.value === undefined || kvElement.value === null) {
+                        kvElement.value = null;
+                    }
+                    changeElement = {"elementPath": elementPath, "value": kvElement.value};
+                    // the odkData layer works directly on the value
+                    // but session variables need the storage value...
+                    if ( !defElement.isSessionVariable ) {
+                        if ( instanceId !== null && instanceId !== undefined ) {
+                            accumulatedChanges[f] = changeElement;
+                        }
+                    } else {
+                        v = that._toSerializationFromElementType(defElement, kvElement.value, true);
+                        odkCommon.setSessionVariable(elementPath, v);
+                        sessionVariableChanges[f] = changeElement;
+                    }
+                }
+            }
+        }
+        // apply the session variable changes immediately to the model.
+        that.reconstructModelDataFromElementPathValueUpdates(model, sessionVariableChanges);
+        
+        for ( f in kvMap ) {
+            if ( processSet[f] !== true ) {
+                console.error("_accumulateUnitOfRetentionUpdates: kvMap contains unrecognized database column " + dbTableName + "." + f );
+            }
+        }
+    },
     /**
      * Does not depend upon any global values.
      *

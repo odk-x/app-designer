@@ -1,9 +1,9 @@
 'use strict';
 // depends upon mockUtils, mockSchema, jquery
-define(['mockUtils', 'mockSchema', 'mockDbif'],function(mockUtils,  mockSchema, mockDbif) {
+define(['mockSchema', 'mockDbif'],function(mockSchema, mockDbif) {
 verifyLoad('mockImpl',
-    ['mockUtils', 'mockSchema', 'mockDbif'],
-    [mockUtils,    mockSchema,   mockDbif]);
+    ['mockSchema', 'mockDbif'],
+    [ mockSchema,   mockDbif]);
 return {
   pendingChanges: {},
   withDb:function(ctxt, transactionBody) {

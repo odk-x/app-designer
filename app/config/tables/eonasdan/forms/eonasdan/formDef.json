@@ -144,7 +144,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "elementKey": "example1"
       },
@@ -155,7 +155,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "example2"
       },
@@ -166,7 +166,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "time",
         "elementKey": "example3"
       }
@@ -471,13 +471,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "elementKey": "example1",
         "elementName": "example1",
         "elementSet": "data",
-        "elementPath": "example1",
-        "listChildElementKeys": []
+        "elementPath": "example1"
       },
       "example2": {
         "_defn": [
@@ -486,13 +485,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "example2",
         "elementName": "example2",
         "elementSet": "data",
-        "elementPath": "example2",
-        "listChildElementKeys": []
+        "elementPath": "example2"
       },
       "example3": {
         "_defn": [
@@ -501,13 +499,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "time",
         "elementKey": "example3",
         "elementName": "example3",
         "elementSet": "data",
-        "elementPath": "example3",
-        "listChildElementKeys": []
+        "elementPath": "example3"
       },
       "_id": {
         "type": "string",

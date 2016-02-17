@@ -74,7 +74,7 @@ return {
                 });
         }
     },
-	_applyPendingChangesToModelData:function(model, logWarning) {
+	_applyPendingChangesToModelData:function(model, instanceId, logWarning) {
         var that = this;
 
         var updates = {};
@@ -83,6 +83,7 @@ return {
         var jsValue;
         var value;
         var dbKey;
+		var pendingChangeEntry;
 		
 		// if requested, log a warning if not all pending changes have
 		// been applied. This indicates that the UI is faster than the
@@ -111,7 +112,7 @@ return {
 			if ( logWarning ) {
 				// log that we have a non-empty pendingChanges key-value set.
 				odkCommon.log('W','_reconstructModelData: pendingChanges is not empty! ' + 
-					model.table_id + ' _id: ' + updates._id.value + ' keys: ' + JSON.stringify(keys));
+					model.table_id + ' _id: ' + instanceId + ' keys: ' + JSON.stringify(keys));
 			}
         }
 	},
@@ -175,7 +176,7 @@ return {
                 } else {
                     value = reqData.getData(0, dbKey);
                     // mainly to convert datetime and time values...
-                    value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value);
+                    value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value, true);
                 }
                 updates[dbKey] = { elementPath: elementPath, value: value };
             }
@@ -190,7 +191,10 @@ return {
             pendingChangeEntry = that.pendingChanges[dbKey];
             if ( currentEntry !== undefined && currentEntry !== null &&
                  pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
+				// the value in the values array may not be the correct data type -- force it to be converted
 				value = pendingChangeEntry.value;
+				value = databaseUtils.toOdkDataInterfaceFromElementType(jsonType, value, true);
+				value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value, true);
                 if ( JSON.stringify(currentEntry.value) === JSON.stringify(value) ) {
                     keysToRemove.push(dbKey);
                 }
@@ -208,7 +212,7 @@ return {
         model.instanceMetadata = {};
         databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
 
-		that._applyPendingChangesToModelData(model, true);
+		that._applyPendingChangesToModelData(model, updates._id.value, true);
     },
     /**
      * accumulatedChanges[retentionColumn] = {"elementPath" : elementPath, "value": ???};
@@ -501,25 +505,19 @@ return {
         var that = this;
         // clear the pending changes, since we are discarding the row
         that.pendingChanges = {};
-        odkData.deleteAllCheckpoints(model.table_id, instanceId, function(reqData) { 
-                that._reconstructModelData(model, reqData);
-				if (reqData.getCount() === 0) {
-					ctxt.success();
-					return;
-				}
-                odkData.deleteRow( model.table_id, null, instanceId, 
-                                    function(reqData) {
-                                        // clear the pending changes, since we are ignoring changes
-                                        that.pendingChanges = {};
-                                        that._reconstructModelData(model, reqData);
-										if (reqData.getCount() !== 0) {
-											ctxt.failure({message: "unable to delete row!"});
-										} else {
-											ctxt.success();
-										}
-                                    }, 
-                                    function(errorMsg) { ctxt.failure({message: errorMsg, rolledBack: true }); });
-                            }, function(errorMsg) { ctxt.failure({message: errorMsg, rolledBack: false }); });
+		odkData.deleteRow( model.table_id, null, instanceId, 
+							function(reqData) {
+								// clear the pending changes, since we are ignoring changes
+								that.pendingChanges = {};
+								that._reconstructModelData(model, reqData);
+								if (reqData.getCount() !== 0 && reqData.getData(0,'_sync_state') !== 'deleted' ) {
+									ctxt.failure({message: "unable to delete row!"});
+								} else {
+									ctxt.success();
+								}
+							}, 
+							function(errorMsg) { ctxt.failure({message: errorMsg, rolledBack: true }); });
+
     },
     
     // almost primitive...
@@ -570,12 +568,13 @@ return {
      * accumulatedChanges[retentionColumn] = {"elementPath" : elementPath, "value": ???};
      */
     _createSimpleMapPendingChanges:function(dataTableModel, accumulatedChanges, formId) {
+        var that = this;
         var simpleMap = {};
         var key;
         var jsonType;
         for ( key in accumulatedChanges ) {
             jsonType = dataTableModel[key];
-            simpleMap[key] = databaseUtils.toOdkDataInterfaceFromElementType(jsonType, accumulatedChanges[key].value);
+            simpleMap[key] = databaseUtils.toOdkDataInterfaceFromElementType(jsonType, accumulatedChanges[key].value, true);
         }
         // metadata fields other than formId and creator are managed in the service layer.
         // TODO: should current user also be enforced here??
@@ -597,7 +596,7 @@ return {
         var instanceId = opendatakit.getCurrentInstanceId();
         databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, name, value, that.pendingChanges );
 
-		that._applyPendingChangesToModelData(model, false);
+		that._applyPendingChangesToModelData(model, instanceId, false);
     },
 
     /**
@@ -750,6 +749,7 @@ return {
 	 * Requires: no globals
 	 */
 	_selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
+        var that = this;
 		var args = ['deleted'];
 		if ( selection === null || selection === undefined ) {
 			return {

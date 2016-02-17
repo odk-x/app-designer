@@ -1,7 +1,7 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
 age,age,integer,[]
 audio_test,audio_test,mimeUri,"[""audio_test_uriFragment"",""audio_test_contentType""]"
-audio_test_contentType,contentType,string,[]
+audio_test_contentType,contentType,mimeType,[]
 audio_test_uriFragment,uriFragment,rowpath,[]
 avg_coffee,avg_coffee,integer,[]
 barcode,barcode,string,[]
@@ -16,7 +16,7 @@ geopoint_altitude,altitude,number,[]
 geopoint_latitude,latitude,number,[]
 geopoint_longitude,longitude,number,[]
 image_test,image_test,mimeUri,"[""image_test_uriFragment"",""image_test_contentType""]"
-image_test_contentType,contentType,string,[]
+image_test_contentType,contentType,mimeType,[]
 image_test_uriFragment,uriFragment,rowpath,[]
 location,location,geopoint,"[""location_latitude"",""location_longitude"",""location_altitude"",""location_accuracy""]"
 location_accuracy,accuracy,number,[]
@@ -25,16 +25,16 @@ location_latitude,latitude,number,[]
 location_longitude,longitude,number,[]
 name,name,string,[]
 picture,picture,mimeUri,"[""picture_uriFragment"",""picture_contentType""]"
-picture_contentType,contentType,string,[]
+picture_contentType,contentType,mimeType,[]
 picture_uriFragment,uriFragment,rowpath,[]
 rating,rating,integer,[]
 recording,recording,mimeUri,"[""recording_uriFragment"",""recording_contentType""]"
-recording_contentType,contentType,string,[]
+recording_contentType,contentType,mimeType,[]
 recording_uriFragment,uriFragment,rowpath,[]
 sex,sex,string,[]
 time,time,time,[]
 video_test,video_test,mimeUri,"[""video_test_uriFragment"",""video_test_contentType""]"
-video_test_contentType,contentType,string,[]
+video_test_contentType,contentType,mimeType,[]
 video_test_uriFragment,uriFragment,rowpath,[]
 visited_continents,visited_continents,array,"[""visited_continents_items""]"
 visited_continents_items,items,string,[]

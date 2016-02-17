@@ -417,7 +417,7 @@
     },
     "model": {
       "Date_and_Time": {
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "_defn": [
           {
@@ -997,7 +997,7 @@
     },
     "dataTableModel": {
       "Date_and_Time": {
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "_defn": [
           {
@@ -1012,8 +1012,7 @@
         "elementKey": "Date_and_Time",
         "elementName": "Date_and_Time",
         "elementSet": "data",
-        "elementPath": "Date_and_Time",
-        "listChildElementKeys": []
+        "elementPath": "Date_and_Time"
       },
       "ack_ok": {
         "type": "boolean",

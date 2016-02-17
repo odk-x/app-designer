@@ -553,7 +553,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "elementKey": "date"
       },
@@ -589,11 +589,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "plant_picture_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "plant_picture_contentType"
           }
@@ -1149,13 +1151,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "elementKey": "date",
         "elementName": "date",
         "elementSet": "data",
-        "elementPath": "date",
-        "listChildElementKeys": []
+        "elementPath": "date"
       },
       "plant_height": {
         "_defn": [
@@ -1195,7 +1196,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "plant_picture_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -1203,6 +1205,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "plant_picture_contentType",
             "elementName": "contentType",
@@ -1273,7 +1276,8 @@
         "elementPath": "observations"
       },
       "plant_picture_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "plant_picture_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -1281,6 +1285,7 @@
       },
       "plant_picture_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "plant_picture_contentType",
         "elementName": "contentType",

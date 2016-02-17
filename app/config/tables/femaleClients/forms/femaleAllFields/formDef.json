@@ -7196,7 +7196,7 @@
         "elementKey": "interviewer_id"
       },
       "date": {
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "_defn": [
           {
@@ -7219,7 +7219,7 @@
         "elementKey": "date"
       },
       "delivery_date": {
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "_defn": [
           {
@@ -11132,7 +11132,7 @@
         "elementPath": "interviewer_id"
       },
       "date": {
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "_defn": [
           {
@@ -11155,11 +11155,10 @@
         "elementKey": "date",
         "elementName": "date",
         "elementSet": "data",
-        "elementPath": "date",
-        "listChildElementKeys": []
+        "elementPath": "date"
       },
       "delivery_date": {
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "_defn": [
           {
@@ -11178,8 +11177,7 @@
         "elementKey": "delivery_date",
         "elementName": "delivery_date",
         "elementSet": "data",
-        "elementPath": "delivery_date",
-        "listChildElementKeys": []
+        "elementPath": "delivery_date"
       },
       "baby_alive": {
         "type": "string",

@@ -52,13 +52,13 @@ keyValueStoreActivePredefinedColumns: {
                     _key: { type: 'string', isNotNullable: true },
                     _type: { type: 'string', isNotNullable: false },
                     _value: { type: 'string', isNotNullable: false } },
-createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
+createTableStmt: function( dbTableName, dataTableModel, tableConstraint ) {
         var that = this;
         // TODO: verify that dbTableName is not already in use...
         var createTableCmd = 'CREATE TABLE IF NOT EXISTS "' + dbTableName + '"(';
         var comma = '';
-        for ( var dbColumnName in kvMap ) {
-            var f = kvMap[dbColumnName];
+        for ( var dbColumnName in dataTableModel ) {
+            var f = dataTableModel[dbColumnName];
             if ( mockUtils.isUnitOfRetention(f) && !f.isSessionVariable ) {
                 createTableCmd += comma + dbColumnName + " ";
                 comma = ',';
@@ -73,8 +73,6 @@ createTableStmt: function( dbTableName, kvMap, tableConstraint ) {
                 } else if ( f.type === "object" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else if ( f.type === "array" ) {
-                    createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type === "rowpath" ) {
                     createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
                 } else {
                     throw new Error("unhandled type: " + f.type);
@@ -170,7 +168,7 @@ addChangesDataTableStmt:function(tableDef, changes, rowId) {
     var formId = changes.formId;
     delete changes.formId;
     var that = this;
-    var nowNano = mockUtils.convertDateTimeToNanos();
+    var nowNano = odkCommon.toOdkTimeStampFromDate(new Date());
     var activeUser = odkCommon.getActiveUser();
 
     var bindings = [];
@@ -250,7 +248,7 @@ updateChangesDataTableStmt:function(tableDef, changes, rowId) {
     var formId = changes.formId;
     delete changes.formId;
     var that = this;
-    var nowNano = mockUtils.convertDateTimeToNanos();
+    var nowNano = odkCommon.toOdkTimeStampFromDate(new Date());
     var activeUser = odkCommon.getActiveUser();
 
     var bindings = [];
@@ -320,7 +318,7 @@ insertCheckpointChangesDataTableStmt:function(tableDef, changes, rowId) {
     var formId = changes.formId;
     delete changes.formId;
     var that = this;
-    var nowNano = mockUtils.convertDateTimeToNanos();
+    var nowNano = odkCommon.toOdkTimeStampFromDate(new Date());
     var activeUser = odkCommon.getActiveUser();
 
     var bindings = [];
@@ -416,61 +414,6 @@ selectAllTableDbNamesAndIdsDataStmt: function() {
             stmt: 'select _table_id from _table_definitions',
             bind: []
         };
-},
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-//   COLUMN META DATA
-//   COLUMN META DATA
-//   COLUMN META DATA
-//   COLUMN META DATA
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/**
- * Flesh out the protoModel with a dataTableModel constructed from its formDef
- *
- * Return the set of database table inserts needed for saving this data table model to the database.
- * This returned set does not include sessionVariable fields.
- */
-reconstructDataTableModel:function(model) {
-    var that = this;
-    odkCommon.log('D','mockSchema.reconstructDataTableModel');
-
-    // dataTableModel holds an inversion of the formDef.specification.model
-    //
-    //  elementKey : jsonSchemaType
-    //
-    // with the addition of:
-    //    isSessionVariable : true if this is not retained across sessions
-    //    elementPath : pathToElement
-    //    elementSet : 'data'
-    //    listChildElementKeys : ['key1', 'key2' ...]
-    //
-    // within the jsonSchemaType to be used to transform to/from
-    // the model contents and data table representation.
-    //
-    var dataTableModel = {};
-    var f;
-    for ( f in that.dataTablePredefinedColumns ) {
-        dataTableModel[f] = that.dataTablePredefinedColumns[f];
-    }
-
-    // go through the supplied protoModel.formDef model
-    // and invert it into the dataTableModel
-    var jsonDefn;
-    for ( f in model ) {
-        jsonDefn = mockUtils.flattenElementPath( dataTableModel, null, f, null, model[f] );
-    }
-
-    // traverse the dataTableModel marking which elements are
-    // not units of retention.
-    mockUtils.markUnitOfRetention(dataTableModel);
-
-    return dataTableModel;
 }
 };
 });

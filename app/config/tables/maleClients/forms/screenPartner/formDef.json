@@ -1939,7 +1939,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "date"
       },
@@ -3000,13 +3000,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "date",
         "elementKey": "date",
         "elementName": "date",
         "elementSet": "data",
-        "elementPath": "date",
-        "listChildElementKeys": []
+        "elementPath": "date"
       },
       "client_id": {
         "_defn": [

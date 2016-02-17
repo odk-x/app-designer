@@ -219,7 +219,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "elementKey": "Date_and_Time"
       },
@@ -244,11 +244,13 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "Image_uriFragment"
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "Image_contentType"
           }
@@ -609,13 +611,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "object",
+        "type": "string",
         "elementType": "dateTime",
         "elementKey": "Date_and_Time",
         "elementName": "Date_and_Time",
         "elementSet": "data",
-        "elementPath": "Date_and_Time",
-        "listChildElementKeys": []
+        "elementPath": "Date_and_Time"
       },
       "Description": {
         "_defn": [
@@ -641,7 +642,8 @@
         "elementType": "mimeUri",
         "properties": {
           "uriFragment": {
-            "type": "rowpath",
+            "type": "string",
+            "elementType": "rowpath",
             "elementKey": "Image_uriFragment",
             "elementName": "uriFragment",
             "elementSet": "data",
@@ -649,6 +651,7 @@
           },
           "contentType": {
             "type": "string",
+            "elementType": "mimeType",
             "default": "image/*",
             "elementKey": "Image_contentType",
             "elementName": "contentType",
@@ -718,7 +721,8 @@
         "notUnitOfRetention": true
       },
       "Image_uriFragment": {
-        "type": "rowpath",
+        "type": "string",
+        "elementType": "rowpath",
         "elementKey": "Image_uriFragment",
         "elementName": "uriFragment",
         "elementSet": "data",
@@ -726,6 +730,7 @@
       },
       "Image_contentType": {
         "type": "string",
+        "elementType": "mimeType",
         "default": "image/*",
         "elementKey": "Image_contentType",
         "elementName": "contentType",

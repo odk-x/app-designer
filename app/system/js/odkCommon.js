@@ -104,6 +104,7 @@ window.odkCommon = {
      * NOTE: this discards the nano fields...
      */
     toDateFromOdkTimeStamp:function(timestamp) {
+        var that = this;
         if ( timestamp === undefined || timestamp === null ) {
             return null;
         }
@@ -124,6 +125,58 @@ window.odkCommon = {
         var value = new Date(Date.UTC(yyyy,mm,dd,hh,min,sec,msec));
         return value;
     },
+	/**
+	 * Time is 00-24hr nanosecond-extended iso8601-style representation:
+	 *
+     *  HH:MM:SS.sssssssss
+     * 
+     * This conversion takes an incoming 'refJsDate' Date() object, 
+     * retrieves the LOCAL TIME ZONE year, month, day from that object,
+     * then CONSTRUCTS A NEW DATE OBJECT beginning with that
+     * LOCAL TIME ZONE year, month, day and applying the time
+     * to that object and returns the adjusted Date() object.
+	 * The time is added to the zero hour, so that changes in 
+	 * daylight savings and standard time do not affect the 
+     * calculations (HH can reach 24 hr during "fall back" days).
+	 *
+     *
+	 * NOTE: this discards the nano field value... 
+	 */
+	toDateFromOdkTime:function(refJsDate, time) {
+        var that = this;
+        if ( refJsDate === undefined || refJsDate === null ) {
+            return null;
+        }
+        // convert from a nanosecond-extended iso8601-style 
+		// time HH:MM:SS.sssssssss
+        // this does not preserve the nanosecond field...
+        if ( time === undefined || time === null ) {
+            return null;
+        }
+        var hh,min,sec,msec;
+        var idx = time.indexOf(':');
+        hh = Number(time.substring(0,idx).trim());
+		if ( hh < 0 || hh > 24 ) {
+			throw new Error("hour cannot be negative or exceed 24");
+		}
+        min = Number(time.substr(idx+1,2));
+        sec = Number(time.substr(idx+4,2));
+        msec = Number(time.substr(idx+7,3));
+        
+		var msecOffset = ((hh * 60 + min) * 60 + sec) *1000 + msec;
+		
+		var yyyy,mm,dd;
+        yyyy = refJsDate.getFullYear();
+        mm = refJsDate.getMonth(); // months are 0-11
+        dd = refJsDate.getDate();
+
+        var baseJsDate = new Date(yyyy,mm,dd,0,0,0,0);
+		var dateMilliseconds = baseJsDate.valueOf();
+        dateMilliseconds += msecOffset;
+        var newJsDate = new Date(dateMilliseconds);
+		
+        return newJsDate;
+	},
     /**
      * Time intervals are padded with leading zeros and 
      * are of the form:
@@ -135,7 +188,6 @@ window.odkCommon = {
      * i.e., the negative sign, if present, is at the far right end. 
      * 
      * This conversion takes an incoming 'refJsDate' Date() object, 
-     * retrieves the UTC year, month, date from that object,
      * then CONSTRUCTS A NEW DATE OBJECT beginning with that
      * UTC date and applying the +/- time interval
      * to that object and returns the adjusted Date() object.
@@ -149,6 +201,7 @@ window.odkCommon = {
      * of the full 9999 year AD calendar range of time intervals.
      */
     toDateFromOdkTimeInterval:function(refJsDate, timeinterval) {
+        var that = this;
         if ( refJsDate === undefined || refJsDate === null ) {
             return null;
         }
@@ -172,7 +225,7 @@ window.odkCommon = {
         }
         
         var dateMilliseconds = refJsDate.valueOf();
-        dateMilliseconds += days*8640000;
+        dateMilliseconds += days*86400000;
         var newJsDate = new Date(dateMilliseconds);
         return newJsDate;
     },
@@ -189,6 +242,7 @@ window.odkCommon = {
      * padWithLeadingZeros(-45, 4) => '-0045'
      */
     padWithLeadingZeros: function( value, places ) {
+        var that = this;
         if ( value === null || value === undefined ) {
             // bad form...
             return null;
@@ -321,6 +375,48 @@ window.odkCommon = {
         return value;
     },
     /**
+     * Extract the LOCAL TIME of a Javascript Date object.
+     *
+     * Times are padded with leading zeros and are 00-23hr form:
+     * 
+     *  HH:MM:SS.sssssssss
+	 *
+	 * Time is extracted as the millisecond offset from the start
+	 * of the local day, and then converted to a string representation.
+	 * This ensures that changes in daylight savings time / standard
+	 * time are properly handled and can result in HH being 24 during
+	 * "fall back" days.
+     */
+    toOdkTimeFromDate:function(jsDate) {
+        var that = this;
+        if ( jsDate === undefined || jsDate === null ) {
+            return null;
+        }
+		var yyyy,mm,dd;
+        yyyy = jsDate.getFullYear();
+        mm = jsDate.getMonth(); // months are 0-11
+        dd = jsDate.getDate();
+
+        var baseJsDate = new Date(yyyy,mm,dd,0,0,0,0);
+		var diffMilliseconds = jsDate.valueOf() - baseJsDate.valueOf();
+		
+        var hh,min,sec,msec;
+
+        var diffSeconds = Math.floor(diffMilliseconds / 1000);
+        msec = diffMilliseconds - (diffSeconds * 1000);
+        var diffMinutes = Math.floor(diffSeconds / 60);
+        sec = diffSeconds - (diffMinutes * 60);
+        hh = Math.floor(diffMinutes / 60);
+        min = diffMinutes - (hh * 60);
+
+        var value;
+        value = that.padWithLeadingZeros(hh,2) + ':' +
+                that.padWithLeadingZeros(min,2) + ':' +
+                that.padWithLeadingZeros(sec,2) + '.' +
+                that.padWithLeadingZeros(msec,3) + '000000';
+        return value;
+    },
+    /**
      * Calculates the interval of time between two 
      * Javascript Date objects and returns an OdkTimeInterval.
      *
@@ -338,6 +434,7 @@ window.odkCommon = {
      * of the full 9999 year AD calendar range of time intervals.
      */
     toOdkTimeIntervalFromDate:function(refJsDate, newJsDate) {
+        var that = this;
         if ( refJsDate === undefined || refJsDate === null ) {
             return null;
         }
