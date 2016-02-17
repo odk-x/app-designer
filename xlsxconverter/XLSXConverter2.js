@@ -2424,7 +2424,7 @@ var XLSXConverter = {};
             //
             dataTableModel._id = { type: 'string', isNotNullable: true, elementKey: "_id", elementName: "_id", elementSet: 'instanceMetadata', elementPath: "_id" };
             dataTableModel._row_etag = { type: 'string', isNotNullable: false, elementKey: "_row_etag", elementName: "_row_etag", elementSet: 'instanceMetadata', elementPath: "_row_etag" };
-            dataTableModel._sync_state = { type: 'string', isNotNullable: true, 'default': 'new_row', elementKey: "_sync_state", elementName: "_sync_state", elementSet: 'instanceMetadata', elementPath: "_sync_state" };
+            dataTableModel._sync_state = { type: 'string', isNotNullable: true, elementKey: "_sync_state", elementName: "_sync_state", elementSet: 'instanceMetadata', elementPath: "_sync_state" };
             dataTableModel._conflict_type = { type: 'integer', isNotNullable: false, elementKey: "_conflict_type", elementName: "_conflict_type", elementSet: 'instanceMetadata', elementPath: "_conflict_type" };
             dataTableModel._filter_type = { type: 'string', isNotNullable: false, elementKey: "_filter_type", elementName: "_filter_type", elementSet: 'instanceMetadata', elementPath: "_filter_type" };
             dataTableModel._filter_value = { type: 'string', isNotNullable: false, elementKey: "_filter_value", elementName: "_filter_value", elementSet: 'instanceMetadata', elementPath: "_filter_value" };

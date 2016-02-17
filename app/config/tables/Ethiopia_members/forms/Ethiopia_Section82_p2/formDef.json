@@ -2193,7 +2193,6 @@
       "_sync_state": {
         "type": "string",
         "isNotNullable": true,
-        "default": "new_row",
         "elementKey": "_sync_state",
         "elementName": "_sync_state",
         "elementSet": "instanceMetadata",
