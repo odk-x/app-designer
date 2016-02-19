@@ -1,4 +1,3 @@
-//'use strict';
 /**
  * Main entry point: buildSurvey
  * 
@@ -51,9 +50,11 @@ verifyLoad('builder',
     var propertyParsers = {
         'function': evalFn,
         requirejs_path : function(content) {
+            'use strict';
             alert("Internal Error: this should already be substituted");
         },
         app_path_localized : function(content) {
+            'use strict';
             var fd = this.requirejs_path('');
             if ( content === undefined || content === null ) {
                 return content;
@@ -83,6 +84,7 @@ verifyLoad('builder',
      * Returns the adjusted 'field' contents.
      */
     var resolveOneField = function( field, parentObject, parentKey, columnType, worksheet, rowNum, columnPath, propertyParsers ) {
+        'use strict';
         if ( _.isArray(columnType) ) {
             throw Error("Unable to handle array-valued column_types enforcement: ", columnPath);
         }
@@ -119,7 +121,7 @@ verifyLoad('builder',
             return;
         }
         else {
-            var msg = "Could not parse property of type: " + columnType + " for user-defined expression: " + fieldSource +
+            var msg = "Could not parse property of type: " + columnType + " for user-defined expression: " + propertySource +
                 " on " + worksheet + " row " + rowNum + " column: " + columnPath;
             odkCommon.log('E', "builder.evalFn " + msg);
             alert(msg + '\nSee console for details.');
@@ -129,6 +131,7 @@ verifyLoad('builder',
 
     return {
     buildSurvey: function(ctxt, surveyJson, formPath) {
+        'use strict';
         if (surveyJson === undefined || surveyJson === null) {
             ctxt.log('E','builder.buildSurvey', 'no formDef!');
             ctxt.failure();
@@ -283,7 +286,7 @@ verifyLoad('builder',
                 success: function() {
                     $('#theme').attr('href', customTheme);
                     var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
-                    if ( fontSize !== null && fontSize.value != null) {
+                    if ( fontSize !== null && fontSize !== undefined && fontSize.value !== null && fontSize.value !== undefined) {
                         $('body').css("font-size", fontSize.value);
                     }
                     ctxt.log('D','builder.buildSurvey: completed load - starting form processing');
@@ -296,13 +299,13 @@ verifyLoad('builder',
                     //predefined theme specified in the settings sheet, use that.
                     var url = null;
                     var theme = opendatakit.getSettingObject(surveyJson, "theme");
-                    if ( theme !== null && theme.value != null ) {
+                    if ( theme !== null && theme !== undefined && theme.value !== null && theme.value !== undefined ) {
                         theme = theme.value;
                         url = requirejs.toUrl('../config/assets/css/' + theme + '.css');
-						$('#theme').attr('href', url);
+                        $('#theme').attr('href', url);
                     }
                     var fontSize = opendatakit.getSettingObject(surveyJson, "font-size");
-                    if ( fontSize !== null && fontSize.value != null) {
+                    if ( fontSize !== null && fontSize !== undefined && fontSize.value !== null && fontSize.value !== undefined) {
                         $('body').css("font-size", fontSize.value);
                     }
                     ctxt.log('D','builder.buildSurvey: completed load - starting form processing');

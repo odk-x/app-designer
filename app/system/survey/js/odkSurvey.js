@@ -14,9 +14,9 @@ window.odkSurvey = window.odkSurvey || {
     showAlerts: false,
     refId: null,
     enforceRefIdMatch: true,
-	clearAuxillaryHash: function() {
-		// this only makes sense for screen-rotation recovery actions.
-	},
+    clearAuxillaryHash: function() {
+        // this only makes sense for screen-rotation recovery actions.
+    },
     /**
      * The odkSurvey now remembers an entire history of refId values.
      * 
@@ -288,7 +288,7 @@ window.odkSurvey = window.odkSurvey || {
             return;
         }
         odkCommon.log("D","odkSurvey: DO: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
-        if ( this.showAlerts ) alert("notify container FAILED save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
+        if ( this.showAlerts ) alert("notify container FAILED save (unknown whether COMPLETE or INCOMPLETE was attempted).");
     },
     ignoreAllChangesCompleted: function( refId, instanceId ) {
         if (this.enforceRefIdMatch && refId !== this.refId) {

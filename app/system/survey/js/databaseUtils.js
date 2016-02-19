@@ -1,9 +1,9 @@
-'use strict';
 /**
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
  */
 define(['XRegExp','jquery'], function(XRegExp,$) {
+'use strict';
 verifyLoad('databaseUtils',
     ['XRegExp','jquery'],
     [ XRegExp,  $]);
@@ -223,8 +223,6 @@ return {
         var itemType;
         var item;
         var itemValue;
-        // date conversion elements...
-        var hh, min, sec, msec;
 
         if ( topLevel ) {
             if ( value === undefined ) {
@@ -294,14 +292,14 @@ return {
                 }
             } else if ( jsonType.elementType === 'time' ) {
                 if ( value instanceof Date ) {
-					// extract time of the local day.
+                    // extract time of the local day.
                     // convert to a nanosecond-extended iso8601-style LOCAL TIME ZONE time HH:MM:SS.sssssssss
-					return odkCommon.toOdkTimeFromDate(value);
+                    return odkCommon.toOdkTimeFromDate(value);
                 }
-			}
-			return '' + value;
-		} else {
-			odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+            }
+            return '' + value;
+        } else {
+            odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
             return value;
         }
     },
@@ -314,8 +312,6 @@ return {
         var itemType;
         var item;
         var itemValue;
-        // date conversion elements...
-        var hh, min, sec, msec;
 
         if ( topLevel ) {
             if ( value === undefined || value === null ) {
@@ -362,23 +358,23 @@ return {
                 throw new Error("unexpected non-array value");
             }
         } else if ( jsonType.type === 'object' ) {
-			if ( jsonType.properties ) {
-				// otherwise, enforce spec conformance...
-				// Only values in the properties list, and those
-				// must match the type definitions recursively.
-				refined = {};
-				for ( item in jsonType.properties ) {
-					if ( value[item] !== null && value[item] !== undefined ) {
-						itemType = jsonType.properties[item];
-						itemValue = that.fromSerializationToElementType( itemType, value[item], false );
-						refined[item] = itemValue;
-					}
-				}
-				return refined;
-			} else {
-				// opaque
-				return value;
-			}
+            if ( jsonType.properties ) {
+                // otherwise, enforce spec conformance...
+                // Only values in the properties list, and those
+                // must match the type definitions recursively.
+                refined = {};
+                for ( item in jsonType.properties ) {
+                    if ( value[item] !== null && value[item] !== undefined ) {
+                        itemType = jsonType.properties[item];
+                        itemValue = that.fromSerializationToElementType( itemType, value[item], false );
+                        refined[item] = itemValue;
+                    }
+                }
+                return refined;
+            } else {
+                // opaque
+                return value;
+            }
         } else if ( jsonType.type === 'boolean' ) {
             return value;
         } else if ( jsonType.type === 'integer' ) {
@@ -392,14 +388,14 @@ return {
                 // this does not preserve the nanosecond field...
                 return odkCommon.toDateFromOdkTimeStamp(value);
             } else if ( jsonType.elementType === 'time' ) {
-				// retrieve hh:mm:ss.sss from the local day.
+                // retrieve hh:mm:ss.sss from the local day.
                 // convert from a nanosecond-extended iso8601-style LOCAL TIME ZONE time HH:MM:SS.sssssssss
-				return odkCommon.toDateFromOdkTime(new Date(), value);
+                return odkCommon.toDateFromOdkTime(new Date(), value);
             } else {
-				return value;
-			}
-		} else {
-			odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
+                return value;
+            }
+        } else {
+            odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
             return value;
         }
     },
@@ -423,22 +419,22 @@ return {
      *
      * If the column does not allow null values, and a null is 
      * passed in, an Error is thrown (this is a bad situation).
-	 *
+     *
      * The primary cleaned-up conversion is the conversion of JS Date()
      * objects used for date, datetime and time data types
      * These are converted into a type-appropriate formatted strings.
-	 * Date() does not have a JSON serialization, so this conversion
-	 * needs to be applied recursively throughout the value (when the 
-	 * value is an array or object).
+     * Date() does not have a JSON serialization, so this conversion
+     * needs to be applied recursively throughout the value (when the 
+     * value is an array or object).
      *
      * A secondary cleaned-up conversion is the clean-up of 
      * boolean, integer and numeric types, ensuring that those
      * values are represented as their primitive types. e.g.,
-	 * that a boolean field that holds a numeric 1 has that value 
-	 * properly converted to the Javascript true value (rather 
-	 * than being passed through as a numeric 1). Similarly, integers
+     * that a boolean field that holds a numeric 1 has that value 
+     * properly converted to the Javascript true value (rather 
+     * than being passed through as a numeric 1). Similarly, integers
      * are forced to integer values, numeric values are converted 
-	 * to Number type, and string values are forced to be strings.
+     * to Number type, and string values are forced to be strings.
      *
      * Arrays and objects are recursively traversed to ensure
      * that all needed object conversions are performed.
@@ -453,16 +449,16 @@ return {
      *   return null.
      *
      * If the data value is an object or array, then:
-	 *   return the JSON.stringify() of that data value.
-	 *
-	 * Otherwise:
+     *   return the JSON.stringify() of that data value.
+     *
+     * Otherwise:
      *   return the value.
      *
      * De-serialization also relies on the data type of the data column
      * to determine what action to take. When de-serializing, the 
-	 * date, dateTime and time datatypes are converted into Date() objects.
-	 *
-	 * Note that time is represented as local time, and date/dateTime is UTC.
+     * date, dateTime and time datatypes are converted into Date() objects.
+     *
+     * Note that time is represented as local time, and date/dateTime is UTC.
      */
     /**
      * Serialize from odkData API representation to ODK Survey representation value
@@ -473,27 +469,25 @@ return {
         var itemType;
         var item;
         var itemValue;
-        // date conversion elements...
-        var hh, min, sec, msec;
 
         if ( topLevel ) {
-			
-			if ( value === undefined || value === null ) {
-				if ( jsonType.isNotNullable ) {
-					throw new Error("unexpected null value for non-nullable field");
-				}
-				return null;
-			}
-			
+            
+            if ( value === undefined || value === null ) {
+                if ( jsonType.isNotNullable ) {
+                    throw new Error("unexpected null value for non-nullable field");
+                }
+                return null;
+            }
+            
             if ( jsonType.type === 'array' || jsonType.type === 'object' ) {
-				// parse it if it is a non-null array or object...
-				value = JSON.parse(value);
-			}
+                // parse it if it is a non-null array or object...
+                value = JSON.parse(value);
+            }
 
             // convert it as if it were nested...
             value = that.fromOdkDataInterfaceToElementType(jsonType, value, false);
 
-			return value;
+            return value;
         }
 
 
@@ -529,7 +523,7 @@ return {
                 throw new Error("unexpected non-array value");
             }
         } else if ( jsonType.type === 'object' ) {
-			if ( jsonType.properties ) {
+            if ( jsonType.properties ) {
                 // otherwise, enforce spec conformance...
                 // Only values in the properties list, and those
                 // must match the type definitions recursively.
@@ -565,10 +559,10 @@ return {
             } else if ( jsonType.elementType === 'time' ) {
                 // convert from a nanosecond-extended iso8601-style LOCAL TIME ZONE time HH:MM:SS.sssssssss
                 // this does not preserve the nanosecond field...
-				return odkCommon.toDateFromOdkTime(new Date(), value);
-			} else {
-				return value;
-			}
+                return odkCommon.toDateFromOdkTime(new Date(), value);
+            } else {
+                return value;
+            }
         } else {
             odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
             return value;
@@ -580,24 +574,22 @@ return {
         var itemType;
         var item;
         var itemValue;
-        // date conversion elements...
-        var hh, min, sec, msec;
 
         if ( topLevel ) {
             // convert it as if it were nested...
             value = that.toOdkDataInterfaceFromElementType(jsonType, value, false);
-			
-			// null is always null...
-			if ( value === null ) {
-				return value;
-			}
-			
+            
+            // null is always null...
+            if ( value === null ) {
+                return value;
+            }
+            
             if ( jsonType.type === 'array' || jsonType.type === 'object' ) {
-				// and stringify it if it is a non-null array or object...
-				return JSON.stringify(value);
-			} else {
-				return value;
-			}
+                // and stringify it if it is a non-null array or object...
+                return JSON.stringify(value);
+            } else {
+                return value;
+            }
         }
 
         if ( value === undefined || value === null ) {
@@ -613,9 +605,9 @@ return {
                 refined = [];
                 itemType = jsonType.items;
                 if (itemType === undefined || itemType === null ) {
-					// unspecified array. 
+                    // unspecified array. 
                     // This might screw up embedded datetimes, etc.
-					return value;
+                    return value;
                 } else {
                     // make sure the items are converted
                     for ( item = 0 ; item < value.length ; ++item ) {
@@ -628,7 +620,7 @@ return {
                 throw new Error("unexpected non-array value");
             }
         } else if ( jsonType.type === 'object' ) {
-			if ( !jsonType.properties ) {
+            if ( !jsonType.properties ) {
                 // this is an opaque BLOB w.r.t. database layer
                 // leave it as-is.
                 return value;
@@ -659,15 +651,15 @@ return {
                 if ( value instanceof Date ) {
                     // convert to a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
                     return odkCommon.toOdkTimeStampFromDate(value);
-				}
+                }
             } else if ( jsonType.elementType === 'time' ) {
                 // already a string? -- assume it is nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
                 if ( value instanceof Date ) {
-					// convert to a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
-					return odkCommon.toOdkTimeFromDate(value);
-				}
-			}
-			return '' + value;
+                    // convert to a nanosecond-extended iso8601-style UTC time HH:MM:SS.sssssssss
+                    return odkCommon.toOdkTimeFromDate(value);
+                }
+            }
+            return '' + value;
         } else {
             odkCommon.log('W',"unrecognized JSON schema type: " + jsonType.type + " treated as string");
             return '' + value;
@@ -681,19 +673,19 @@ return {
     ////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
     //   Conversion to/from odkData API key-value-store representation
-	/**
-	 * This takes the '_type' column of the KVS entry and the '_value' column
-	 *
-	 * It produces the converted value for the column. 
-	 *
+    /**
+     * This takes the '_type' column of the KVS entry and the '_value' column
+     *
+     * It produces the converted value for the column. 
+     *
      * type:  one of array, object, string, boolean, number, integer, ...
-	 *
-	 * The incoming value is null or a string.
-	 * 
-	 * The conversion is parsing the strings. The only tricky one is 
-	 * for boolean. That tests for either 'true' or a non-zero number
-	 * as true.
-	 */	 
+     *
+     * The incoming value is null or a string.
+     * 
+     * The conversion is parsing the strings. The only tricky one is 
+     * for boolean. That tests for either 'true' or a non-zero number
+     * as true.
+     */  
     fromKVStoreToElementType: function( type, value ) {
         var that = this;
 
@@ -713,11 +705,11 @@ return {
         } else if ( type === 'object' ) {
             return '' + value;
         } else if ( type === 'boolean' ) {
-			if ( value.toLowerCase() === 'true' ) {
-				return true;
-			}
-			value = Number(value);
-			return ( value !== NaN && value !== 0 );
+            if ( value.toLowerCase() === 'true' ) {
+                return true;
+            }
+            value = Number(value);
+            return ( value !== 0 && !value.isNaN() );
         } else if ( type === 'integer' ) {
             value = Number(value);
             if ( Math.round(value) != value ) {

@@ -1,6 +1,6 @@
 Versions:
 
-require: 2.0.8
+require: 2.1.8
 
 text: 2.0.10
 
@@ -8,8 +8,8 @@ Underscore: 1.4.4
 
 Backbone: 1.0.0
 
-jquery: 1.9.1
+jquery: 1.10.2
 
-jquery.mobile: 1.4.2 
+bootstrap: 3.1.1
 
 Handlebars: 1.0.0.rc.4

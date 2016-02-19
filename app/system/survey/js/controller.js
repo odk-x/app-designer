@@ -1,4 +1,3 @@
-'use strict';
 /**
  * Manages the execution state and screen history of the overall survey, 
  * including form validation, saving and marking the form as 'complete'.
@@ -13,6 +12,7 @@
  */
 define(['screenManager','opendatakit','database', 'parsequery', 'jquery' ],
 function(ScreenManager,  opendatakit,  database,   parsequery,  $ ) {
+'use strict';
 verifyLoad('controller',
     ['screenManager','opendatakit','database', 'parsequery', 'jquery' ],
     [ScreenManager,  opendatakit,  database,    parsequery,  $]);
@@ -278,7 +278,8 @@ return {
                 // the contents screen of the section we are 
                 // re-entering.
                 var newScreenPath = that.getCurrentScreenPath();
-                if ( oldScreenPath != null && newScreenPath != null ) {
+                if ( oldScreenPath !== null &&  oldScreenPath !== undefined &&
+                     newScreenPath !== null && newScreenPath !== undefined ) {
                     var oldParts = oldScreenPath.split("/");
                     var newParts = newScreenPath.split("/");
                     if ( oldParts[0] != newParts[0] ) {
@@ -365,7 +366,8 @@ return {
         var action = inAction;
         var path = null;
         var state = '';
-        if ( action == null ) {
+        var combo;
+        if ( action === null || action === undefined ) {
             action = op._token_type;
         }
         for (;;) {
@@ -402,11 +404,11 @@ return {
                     // otherwise drop through...
                 case "back_in_history":
                     // pop the history stack, and render that screen.
-                    var combo = that.findPreviousScreenAndState(false);
+                    combo = that.findPreviousScreenAndState(false);
                     path = combo.path;
                     state = combo.state;
 
-                    if ( path == null ) {
+                    if ( path === null || path === undefined ) {
                         path = opendatakit.initialScreenPath;
                     }
                     // just for debugging...
@@ -414,10 +416,10 @@ return {
                     break;
                 case "resume":
                     // pop the history stack, and render the next screen.
-                    var combo = that.findPreviousScreenAndState(true);
+                    combo = that.findPreviousScreenAndState(true);
                     path = combo.path;
                     state = ''; // reset this, since we want to advance
-                    if ( path == null ) {
+                    if ( path === null || path === undefined ) {
                         path = opendatakit.initialScreenPath;
                     } else if ( !combo.repop ) {
                        path = that.getNextOperationPath(path);
@@ -436,7 +438,7 @@ return {
                     if ( odkSurvey.getControllerState(opendatakit.getRefId()) === 'advanceOnReturn' ) {
                         path = that.getNextOperationPath(path);
                     }
-                    if ( path == null ) {
+                    if ( path === null || path === undefined ) {
                         path = opendatakit.initialScreenPath;
                     }
                     break;
@@ -560,7 +562,7 @@ return {
                                 })
                             });
 
-                            if ( promptList.length == 0 ) {
+                            if ( promptList.length === 0 ) {
                                 buildRenderDoneCtxt.success();
                             } else {
                                 // refresh all render contexts (they may have constraint values
@@ -582,7 +584,7 @@ return {
                 
                 //
                 // advance to the 'op' specified by the path.
-                if ( path != null ) {
+                if ( path !== null &&  path !== undefined ) {
                     op = that.getOperation(path);
                     action = op._token_type;
                 } else {
@@ -731,7 +733,7 @@ return {
         var screen_attrs = operation.screen;
         var screen_type = 'screen';
         var ScreenType, ExtendedScreenType, ScreenInstance;
-        if (screen_attrs != null && ('screen_type' in screen_attrs)) {
+        if (screen_attrs !== null && screen_attrs !== undefined && ('screen_type' in screen_attrs)) {
             screen_type = screen_attrs.screen_type;
         }
         
@@ -796,7 +798,7 @@ return {
         var opPath = that.getCurrentScreenPath();
         
         var failureObject = that.beforeMove(true, false);
-        if ( failureObject != null ) {
+        if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoPreviousScreen.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
@@ -825,7 +827,7 @@ return {
         var opPath = that.getCurrentScreenPath();
 
         var failureObject = that.beforeMove(true, true);
-        if ( failureObject != null ) {
+        if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoNextScreen.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
@@ -861,7 +863,7 @@ return {
         var opPath = that.getCurrentScreenPath();
 
         var failureObject = that.beforeMove(true, false);
-        if ( failureObject != null ) {
+        if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
@@ -894,7 +896,7 @@ return {
         var opPath = that.getCurrentScreenPath();
 
         var failureObject = that.beforeMove(true, false);
-        if ( failureObject != null ) {
+        if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoFinalizeAction.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
@@ -927,7 +929,7 @@ return {
         var currentOp = that.getOperation(opPath);
         
         var failureObject = that.beforeMove(true, advancing);
-        if ( failureObject != null ) {
+        if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
             that.screenManager.showScreenPopup(failureObject); 
             ctxt.failure(failureObject);
@@ -944,7 +946,7 @@ return {
         //
         // do not push the current screen if we are changing sections,
         // as all section jumps implicitly save where they came from.
-        if ( currentOp != null && op._section_name === currentOp._section_name && advancing ) {
+        if ( currentOp !== null && currentOp !== undefined && op._section_name === currentOp._section_name && advancing ) {
             odkSurvey.pushSectionScreenState(opendatakit.getRefId());
         }    
         that._doActionAt(ctxt, op, op._token_type, advancing);
@@ -967,11 +969,11 @@ return {
         var that = this;
         ctxt.log('D','controller.startAtScreenPath');
         
-        if ( path == null ) {
+        if ( path === null || path === undefined ) {
             path = opendatakit.initialScreenPath;
         }
         var op = that.getOperation(path);
-        if ( op === null ) {
+        if ( op === null || op === undefined ) {
             ctxt.failure(that.moveFailureMessage);
             return;
         }
@@ -1033,21 +1035,21 @@ return {
     */
     actionCallback:function(ctxt, dispatchString, action, jsonObject) {
         var that = this;
-		var dispatchObj = JSON.parse(dispatchString);
-		var promptPath = dispatchObj.promptPath;
-		var internalPromptContext = dispatchObj.userAction;
+        var dispatchObj = JSON.parse(dispatchString);
+        var promptPath = dispatchObj.promptPath;
+        var internalPromptContext = dispatchObj.userAction;
         var screenPath = that.getCurrentScreenPath();
-        ctxt.log('I','controller.actionCallback', ((screenPath != null) ? ("px: " + screenPath) : "no current prompt"));
+        ctxt.log('I','controller.actionCallback', ((screenPath !== null && screenPath !== undefined) ? ("px: " + screenPath) : "no current prompt"));
         
         // promptPath is the path to the prompt issuing the doAction.
         // prompts know their enclosing screen, so we don't need to 
         // worry about that...
         var prompt = that.getPrompt(promptPath);
-        if ( prompt != null ) {
+        if ( prompt !== null && prompt !== undefined ) {
             try {
                 // ask this page to then get the appropriate handler
                 var handler = prompt.getCallback(promptPath, internalPromptContext, action);
-                if ( handler != null ) {
+                if ( handler !== null && handler !== undefined ) {
                     handler( ctxt, internalPromptContext, action, jsonObject );
                 } else {
                     ctxt.log('E','controller.actionCallback.noHandler: ERROR - NO HANDLER ON PROMPT!', 
@@ -1073,8 +1075,8 @@ return {
         window.location.hash = url;
         parsequery.changeUrlHash(ctxt);
     },
-	// dispatch actions coming from odkCommon (Java code).
-	delay: 400,
+    // dispatch actions coming from odkCommon (Java code).
+    delay: 400,
     insideQueue: false,
     insideCallbackCtxt: false,
     queuedActionAvailableListener: function() {
@@ -1082,64 +1084,64 @@ return {
         if ( this.insideQueue || this.insideCallbackCtxt ) return;
         try {
             this.insideQueue = true;
-			var value = that.viewFirstQueuedAction();
-			if ( value === null || value === undefined ) {
-				return;
-			}
-			var action = JSON.parse(value);
-			that.insideCallbackCtxt = true;
-			var baseCtxt = that.newCallbackContext();
-			var terminateCtxt = $.extend({},baseCtxt,{success: function() {
-					that.insideCallbackCtxt = false;
-					baseCtxt.success();
-					setTimeout(function() {
-						that.queuedActionAvailableListener();
-						}, that.delay);
-				}, failure: function() {
-					that.insideCallbackCtxt = false;
-					baseCtxt.failure();
-					setTimeout(function() {
-						that.queuedActionAvailableListener();
-						}, that.delay);
-				}});
+            var value = that.viewFirstQueuedAction();
+            if ( value === null || value === undefined ) {
+                return;
+            }
+            var action = JSON.parse(value);
+            that.insideCallbackCtxt = true;
+            var baseCtxt = that.newCallbackContext();
+            var terminateCtxt = $.extend({},baseCtxt,{success: function() {
+                    that.insideCallbackCtxt = false;
+                    baseCtxt.success();
+                    setTimeout(function() {
+                        that.queuedActionAvailableListener();
+                        }, that.delay);
+                }, failure: function() {
+                    that.insideCallbackCtxt = false;
+                    baseCtxt.failure();
+                    setTimeout(function() {
+                        that.queuedActionAvailableListener();
+                        }, that.delay);
+                }});
 
-			var innerCtxt = that.newCallbackContext();
-			var ctxt = $.extend({}, innerCtxt, {success: function() {
-				// TODO: do we want to do this on failure?
-				// on success or failure, remove the queued action
-				that.removeFirstQueuedAction();
-				innerCtxt.success();
-			}, failure: function() {
-				// TODO: do we want to do pop up a toast on failure?
-				// on success or failure, remove the queued action
-				that.removeFirstQueuedAction();
-				innerCtxt.failure();
-			}});
-			ctxt.setTerminalContext(terminateCtxt);
-			if ( typeof action === 'string' || action instanceof String) {
-				ctxt.log('I', "controller.queuedActionAvailableListener.changeUrlHash (immediate)", action);
-				that.changeUrlHash(ctxt,action);
-			} else {
-				ctxt.log('I', "controller.queuedActionAvailableListener.actionCallback (immediate)", action.action);
-				that.actionCallback( ctxt, action.dispatchString, action.action, action.jsonValue );
-			}
+            var innerCtxt = that.newCallbackContext();
+            var ctxt = $.extend({}, innerCtxt, {success: function() {
+                // TODO: do we want to do this on failure?
+                // on success or failure, remove the queued action
+                that.removeFirstQueuedAction();
+                innerCtxt.success();
+            }, failure: function() {
+                // TODO: do we want to do pop up a toast on failure?
+                // on success or failure, remove the queued action
+                that.removeFirstQueuedAction();
+                innerCtxt.failure();
+            }});
+            ctxt.setTerminalContext(terminateCtxt);
+            if ( typeof action === 'string' || action instanceof String) {
+                ctxt.log('I', "controller.queuedActionAvailableListener.changeUrlHash (immediate)", action);
+                that.changeUrlHash(ctxt,action);
+            } else {
+                ctxt.log('I', "controller.queuedActionAvailableListener.actionCallback (immediate)", action.action);
+                that.actionCallback( ctxt, action.dispatchString, action.action, action.jsonValue );
+            }
         } finally {
             this.insideQueue = false;
         }
     },
-	
+    
     /**
      * This notifies the Java layer that the framework has been loaded and 
-	 * will register a listener for all of the queued actions, if any.
+     * will register a listener for all of the queued actions, if any.
      */
     registerQueuedActionAvailableListener: function(ctxt, refId, m) {
         var that = this;
         var baseCtxt = that.newCallbackContext();
         var terminateCtxt = $.extend({},baseCtxt,{success: function() {
-			    odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
+                odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
                 baseCtxt.success();
             }, failure: function() {
-			    odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
+                odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
                 baseCtxt.failure();
             }});
         ctxt.setTerminalContext(terminateCtxt);
@@ -1187,16 +1189,18 @@ return {
 
         database.applyDeferredChanges($.extend({},ctxt,{success:function() {
             that.reset($.extend({},ctxt,{success:function() {
-                if ( id == null ) {
+                if ( id === null || id === undefined ) {
                     opendatakit.clearCurrentInstanceId();
                 } else {
                     opendatakit.setCurrentInstanceId(id);
                 }
                 var kvList = "";
-                if ( instanceMetadataKeyValueMap != null ) {
+                if ( instanceMetadataKeyValueMap !== null && instanceMetadataKeyValueMap !== undefined ) {
                     for ( var f in instanceMetadataKeyValueMap ) {
-                        var v = instanceMetadataKeyValueMap[f];
-                        kvList = kvList + "&" + f + "=" + encodeURIComponent(v);
+                        if (instanceMetadataKeyValueMap.hasOwnProperty(f)) {
+                            var v = instanceMetadataKeyValueMap[f];
+                            kvList = kvList + "&" + f + "=" + encodeURIComponent(v);
+                        }
                     }
                 }
                 var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), 
@@ -1216,16 +1220,17 @@ return {
         }}));
     },
     reset: function(ctxt,sameForm) {
+        var that = this;
         ctxt.log('I','controller.reset');
         odkSurvey.clearSectionScreenState(opendatakit.getRefId());
         opendatakit.clearCurrentInstanceId();
-        if ( this.screenManager != null ) {
+        if ( that.screenManager !== null && that.screenManager !== undefined) {
             // this asynchronously calls ctxt.success()...
-            this.screenManager.cleanUpScreenManager(ctxt);
+            that.screenManager.cleanUpScreenManager(ctxt);
         } else {
             ctxt.log('I','controller.reset.newScreenManager');
-            this.screenManager = new ScreenManager({controller: this});
-            this.screenManager.cleanUpScreenManager(ctxt);
+            that.screenManager = new ScreenManager({controller: that});
+            that.screenManager.cleanUpScreenManager(ctxt);
         }
     },
     setLocale: function(ctxt, locale) {
@@ -1255,7 +1260,7 @@ return {
             if (logger && logger.timeStamp ) {
                 logger.timeStamp(method);
             }
-            var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail == null) ? ")" : ") detail: " + detail);
+            var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail === null || detail === undefined) ? ")" : ") detail: " + detail);
             odkCommon.log(severity, dlog);
  
         },
@@ -1265,6 +1270,7 @@ return {
             this._log('S', 'success!');
             var pi = opendatakit.getPlatformInfo();
             var ll = (pi && pi.logLevel) ? pi.logLevel : 'D';
+            var cctxt;
             if ( ll === 'T' ) {
                 try {
                     throw Error("call stack details: ");
@@ -1273,12 +1279,12 @@ return {
                 }
             }
             if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
-                var cctxt = this.chainedCtxt.ctxt;
+                cctxt = this.chainedCtxt.ctxt;
                 setTimeout(function() {
                     cctxt.success();
                     }, 10);
             } else if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
-                var cctxt = this.terminalCtxt.ctxt;
+                cctxt = this.terminalCtxt.ctxt;
                 setTimeout(function() {
                     cctxt.success();
                     }, 10);
@@ -1287,9 +1293,10 @@ return {
         
         failure: function(m) {
             this.updateAndLogOutstandingContexts(this);
-            this._log('E', 'failure! ' + (( m != null && m.message != null) ? m.message : ""));
+            this._log('E', 'failure! ' + (( m !== null && m !== undefined && m.message !== null && m.message !== undefined) ? m.message : ""));
             var pi = opendatakit.getPlatformInfo();
             var ll = (pi && pi.logLevel) ? pi.logLevel : 'D';
+            var cctxt;
             if ( ll === 'T' ) {
                 try {
                     throw Error("call stack details: ");
@@ -1298,12 +1305,12 @@ return {
                 }
             }
             if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
-                var cctxt = this.chainedCtxt.ctxt;
+                cctxt = this.chainedCtxt.ctxt;
                 setTimeout(function() {
                     cctxt.failure(m);
                     }, 10);
             } else if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
-                var cctxt = this.terminalCtxt.ctxt;
+                cctxt = this.terminalCtxt.ctxt;
                 setTimeout(function() {
                     cctxt.failure(m);
                     }, 10);

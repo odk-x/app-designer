@@ -1,4 +1,3 @@
-'use strict';
 /**
  circular dependency upon: controller, builder (set via initialize)
  
@@ -10,6 +9,7 @@
 */
 define(['opendatakit','database','jquery'],
 function(opendatakit,  database,  $) {
+'use strict';
 verifyLoad('parsequery',
     ['opendatakit','database','jquery'],
     [opendatakit,  database,   $]);
@@ -51,20 +51,20 @@ return {
         var that = this;
         // ensure initial empty record is written
         // cacheAllData
-		var model = opendatakit.getCurrentModel();
-		var formId = opendatakit.getSettingValue('form_id');
+        var model = opendatakit.getCurrentModel();
+        var formId = opendatakit.getSettingValue('form_id');
         database.initializeInstance($.extend({},ctxt,{success:function() {
-			// this will clear the auxillary key-value pairs in the URI.
-			// at this point, these initial values will have been applied to the 
-			// instance's initial values.
-			odkSurvey.clearAuxillaryHash();
+            // this will clear the auxillary key-value pairs in the URI.
+            // at this point, these initial values will have been applied to the 
+            // instance's initial values.
+            odkSurvey.clearAuxillaryHash();
             // fire the controller to render the first page.
             ctxt.log('D',"parsequery._effectChange.startAtScreenPath. " + (sameInstance ? "sameInstance" : "differentForm and/or differentInstance"),
                         "startAtScreenPath("+screenPath+") refId: " + refId + " ms: " + (+new Date()));
             // set the refId. From this point onward,
             // changes will be applied within the odkSurvey
             opendatakit.setRefId(refId);
-            if ( instanceId == null ) {
+            if ( instanceId === null || instanceId === undefined ) {
                 opendatakit.clearCurrentInstanceId();
             } else {
                 opendatakit.setCurrentInstanceId(instanceId);
@@ -100,14 +100,14 @@ return {
         // IMPLEMENTATION NOTE: formDef is only used in the case where sameForm is false.
         // THIS IS AN ASSUMPTION OF THE CALLING FUNCTION!!!!
         
-        if ( formPath == null ) {
+        if ( formPath === null || formPath === undefined ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.nullFormPath");
             alert("Unexpected null formPath");
             ctxt.failure({message: "No form specified."});
             return;
         }
         
-        if ( formDef == null ) {
+        if ( formDef === null || formDef === undefined ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.nullFormDef");
             alert("Unexpected null formDef when changing forms");
             ctxt.failure({message: "Form definition is empty."});
@@ -115,7 +115,7 @@ return {
         }
         
         var fidObject = opendatakit.getSettingObject(formDef, 'form_id');
-        if ( fidObject === null || !('value' in fidObject) ) {
+        if ( fidObject === null || fidObject === undefined || !('value' in fidObject) ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.missingFormId");
             alert("Unexpected missing value for form_id setting when changing forms");
             ctxt.failure({message: "Form definition has no form_id."});
@@ -126,7 +126,7 @@ return {
         // defined by form definition's settings:
         var tidObject = opendatakit.getSettingObject(formDef, 'table_id');
         var table_id;
-        if ( tidObject === null || !('value' in tidObject) ) {
+        if ( tidObject === null || tidObject === undefined || !('value' in tidObject) ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.missingTableId");
             alert("No table_id specified in Form Definition!");
             ctxt.failure({message: "No table_id specified in form definition."});
@@ -141,9 +141,9 @@ return {
         // we cannot write the instanceMetadata or the metadata yet because the underlying tables may not yet exist.
 
         // on first starting, the database would not have any table_id, form_id or instanceId set...
-        var sameTable = (opendatakit.getCurrentTableId() == table_id);
-        var sameForm = sameTable && (opendatakit.getSettingValue('form_id') == form_id) && (opendatakit.getCurrentFormPath() == formPath);
-        var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() == instanceId) && (instanceId != null);
+        var sameTable = (opendatakit.getCurrentTableId() === table_id);
+        var sameForm = sameTable && (opendatakit.getSettingValue('form_id') === form_id) && (opendatakit.getCurrentFormPath() === formPath);
+        var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() === instanceId) && (instanceId !== null) && (instanceId !== undefined);
         var qpl = opendatakit.getSameRefIdHashString(formPath, instanceId, screenPath);
 
         if ( !sameTable ) {
@@ -253,7 +253,7 @@ return {
             screenPath = null;
         }
         
-        if ( refId == null ) {
+        if ( refId === null || refId === undefined ) {
             ctxt.log('I','parsequery._parseParameters.odkSurvey.refId is null -- generating unique value');
             refId = opendatakit.genUUID();
         }
@@ -273,8 +273,7 @@ return {
         }
         
         var formDef = opendatakit.getCurrentFormDef();
-        var sameForm = (opendatakit.getCurrentFormPath() == formPath) && (formDef != null);
-        var sameInstance = sameForm && (opendatakit.getCurrentInstanceId() == instanceId) && (instanceId != null);
+        var sameForm = (opendatakit.getCurrentFormPath() === formPath) && (formDef !== null) && (formDef !== undefined);
         
         // fetch the form definition (defered processing)
         var filename = formPath + 'formDef.json';
@@ -338,12 +337,12 @@ return {
         
         var ctxtNext = $.extend({}, ctxt, {success: function() {
             // and flush any pending doAction callback
-			that.controller.registerQueuedActionAvailableListener(ctxt, opendatakit.getRefId());
+            that.controller.registerQueuedActionAvailableListener(ctxt, opendatakit.getRefId());
           }, failure: function(m) {
             ctxt.log('E','parsequery.changeUrlHash unable to transition to ' + hash, m);
             if ( hash === '#formPath=' + encodeURIComponent(odkCommon.getBaseUrl() + '/') ) {
                 that.controller.registerQueuedActionAvailableListener(ctxt, opendatakit.getRefId(),
-																		m || { message: 'failed to load page'});
+                                                                        m || { message: 'failed to load page'});
             } else {
                 window.location.hash = '#formPath=' + encodeURIComponent(odkCommon.getBaseUrl() + '/');
                 that.changeUrlHash($.extend({},ctxt,{success:function() { ctxt.failure(m); }}));

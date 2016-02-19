@@ -51,7 +51,7 @@ promptTypes.base = Backbone.View.extend({
     /**
      * getPromptPath
      * retrieve the path to this prompt. This is used ONLY in 
-	 * constructing the dispatchString for the 
+     * constructing the dispatchString for the 
      * odkCommon.doAction(...) method and the corresponding 
      * controller.actionCallback(...) method to ensure that
      * the results of an intent execution (doAction) are routed
@@ -789,7 +789,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         // TODO: is this the right sequence?
         var uri = that.getLinkedUri(platInfo);
         var expandedUrl = platInfo.baseUri + 'system/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
-		var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launchSurvey'});
+        var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launchSurvey'});
         var outcome = odkCommon.doAction(dispatchString, that.launchAction, 
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
                              extras: { url: expandedUrl }}));
@@ -1853,10 +1853,10 @@ promptTypes.media = promptTypes.base.extend({
         // TODO: is this the right sequence?
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'capture'});
         var outcome = odkCommon.doAction( dispatchString, that.captureAction, 
-		    JSON.stringify({ extras: { 
+            JSON.stringify({ extras: { 
                 appName: opendatakit.getPlatformInfo().appName, 
-				tableId: opendatakit.getCurrentTableId(),
-				instanceId: opendatakit.getCurrentInstanceId(),
+                tableId: opendatakit.getCurrentTableId(),
+                instanceId: opendatakit.getCurrentInstanceId(),
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
         ctxt.log('D','media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
@@ -1875,10 +1875,10 @@ promptTypes.media = promptTypes.base.extend({
         // TODO: is this the right sequence?
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'choose'});
         var outcome = odkCommon.doAction( dispatchString, that.chooseAction,
-      		JSON.stringify({ extras: { 
+            JSON.stringify({ extras: { 
                 appName: opendatakit.getPlatformInfo().appName, 
-				tableId: opendatakit.getCurrentTableId(),
-				instanceId: opendatakit.getCurrentInstanceId(),
+                tableId: opendatakit.getCurrentTableId(),
+                instanceId: opendatakit.getCurrentInstanceId(),
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
         ctxt.log('D','media.capture', platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
@@ -1889,7 +1889,7 @@ promptTypes.media = promptTypes.base.extend({
             ctxt.success();
         }
     },
-	// TODO: support deletion of the media files??
+    // TODO: support deletion of the media files??
     getCallback: function(promptPath, byinternalPromptContext, byaction) {
         var that = this;
         if ( that.getPromptPath() != promptPath ) {
@@ -2014,7 +2014,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
         ctxt.success();
     },
     launch: function(evt) {
-		var that = this;
+        var that = this;
         var ctxt = that.controller.newContext(evt);
         var platInfo = opendatakit.getPlatformInfo();
         $('#block-ui').show().on('swipeleft swiperight click', function(evt) {

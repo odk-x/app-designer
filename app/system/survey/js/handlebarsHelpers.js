@@ -6,6 +6,7 @@
  */
 define(['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],
 function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                     $) {
+'use strict';
 verifyLoad('handlebarsHelpers',
     ['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],
     [database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                      $]);

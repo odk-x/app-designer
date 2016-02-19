@@ -32,8 +32,8 @@ requirejs.config({
         // top-level objects
         screenTypes : 'survey/js/screenTypes',
         promptTypes : 'survey/js/promptTypes',
-		// odkCommon.js -- stub directly loaded
-		// odkData.js -- stub directly loaded
+        // odkCommon.js -- stub directly loaded
+        // odkData.js -- stub directly loaded
         // odkSurvey.js -- stub directly loaded
         // functionality
         screens : 'survey/js/screens',
@@ -45,17 +45,16 @@ requirejs.config({
         screenManager : 'survey/js/screenManager',
         parsequery : 'survey/js/parsequery',
         opendatakit : 'survey/js/opendatakit',
-        //jqmConfig : 'survey/js/jqmConfig',
         handlebarsHelpers : 'survey/js/handlebarsHelpers',
         formulaFunctions : 'survey/js/formulaFunctions',
         jqueryCsv : 'libs/jquery-csv/src/jquery.csv',
         XRegExp : 'libs/XRegExp-All-3.0.0-pre-2014-12-24',
         d3 : 'libs/d3-amd/d3',
-		mockDbif: 'js/mock/mockDbif',
-		mockImpl: 'js/mock/mockImpl',
-		mockUtils: 'js/mock/mockUtils',
-		mockSchema: 'js/mock/mockSchema',
-		odkDataIf: 'js/mock/odkDataIf'
+        mockDbif: 'js/mock/mockDbif',
+        mockImpl: 'js/mock/mockImpl',
+        mockUtils: 'js/mock/mockUtils',
+        mockSchema: 'js/mock/mockSchema',
+        odkDataIf: 'js/mock/odkDataIf'
     },
     shim: {
         'bootstrap': {
@@ -124,33 +123,33 @@ function redrawHook() {
  * place the following object into focus.
  */
 function odkLeaveField(theForm) {
-	/* Tabbing advances through the fields
-	 * provided there are tabindex attributes on them.
-	 * But hitting Enter, Next or Go does not.
-	 *
-	 * Try to make them behave similarly.
-	 *
-	 * The tabbing does not wrap, but we
-	 * will make Enter, Next or Go wrap.
-	 */
-	var $fields = $('body > * [tabindex]');
+    /* Tabbing advances through the fields
+     * provided there are tabindex attributes on them.
+     * But hitting Enter, Next or Go does not.
+     *
+     * Try to make them behave similarly.
+     *
+     * The tabbing does not wrap, but we
+     * will make Enter, Next or Go wrap.
+     */
+    var $fields = $('body > * [tabindex]');
     var $form = $(theForm);
-	var $formField = $(theForm).find('* * [tabindex]').filter(':last');
-	var idxFound = null;
-	$fields.each(function(idx,domElement) {
-		if ( $formField.is(domElement) ) {
-			idxFound = idx;
-			return false;
-		}
-		return true;
-	});
-	
-	var $next;
-	if ( idxFound !== null ) {
-		$next = $fields.eq(idxFound+1);
-	} else {
-		$next = $fields.eq(0);
-	}
+    var $formField = $(theForm).find('* * [tabindex]').filter(':last');
+    var idxFound = null;
+    $fields.each(function(idx,domElement) {
+        if ( $formField.is(domElement) ) {
+            idxFound = idx;
+            return false;
+        }
+        return true;
+    });
+    
+    var $next;
+    if ( idxFound !== null ) {
+        $next = $fields.eq(idxFound+1);
+    } else {
+        $next = $fields.eq(0);
+    }
     if ( $next !== null && $next !== undefined ) {
         $next.focus();
     }
@@ -178,7 +177,7 @@ require(['jquery'],
 
         odkCommon.log('I','main.require.jquery.loaded establish mobileinit action');
 
-		require(['bootstrap','moment', 'odkDataIf'], 
+        require(['bootstrap','moment', 'odkDataIf'], 
             function(bootstrap, moment, odkDataIf) {
                 verifyLoad('main.require.bootstrap.moment',
                     ['bootstrap','moment', 'odkDataIf'],
@@ -226,7 +225,7 @@ require(['jquery'],
                             } else if ( hashIdx > 0 ) {
                                         newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                             }
-                            odkCommon.log('W','jqmConfig.addEmptySearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
+                            odkCommon.log('W','main.addEmptySearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
                             window.location.assign(newRef);
                         } else if ( search !== undefined && search !== null && search.length > 0 ) {
                             // remove the non-empty search string and replace with ?
@@ -235,26 +234,26 @@ require(['jquery'],
                             } else if ( hashIdx > 0 ) {
                                 newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                             }
-                            ctxt.log('W',"jqmConfig.clearNonEmptySearchTerm.reloadpage ref: " + ref + ' newRef: ' + newRef);
+                            ctxt.log('W',"main.clearNonEmptySearchTerm.reloadpage ref: " + ref + ' newRef: ' + newRef);
                             window.location.assign(newRef);
                         } else {
-                            ctxt.log('D','jqmConfig.changeUrlHash ref: ' + ref);
+                            ctxt.log('D','main.changeUrlHash ref: ' + ref);
                             parsequery.changeUrlHash(ctxt);
                         }
                     } else if ( searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx) ) {
                         // we have a '?' on the URL. Forcibly remove it.
                         hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
                         newRef = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
-                        odkCommon.log('W','jqmConfig.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
+                        odkCommon.log('W','main.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
                         window.location.assign(newRef);
                     } else {
                         // no search term -- pass through
-                        ctxt.log('D','jqmConfig.changeUrlHash ref: ' + ref);
+                        ctxt.log('D','main.changeUrlHash ref: ' + ref);
                         parsequery.changeUrlHash(ctxt);
                     }
                 } else {
                     // don't care -- do whatever...
-                    ctxt.log('D','jqmConfig.simple.changeUrlHash ref: ' + ref);
+                    ctxt.log('D','main.simple.changeUrlHash ref: ' + ref);
                     parsequery.changeUrlHash(ctxt);
                 }
             }, function(err) {

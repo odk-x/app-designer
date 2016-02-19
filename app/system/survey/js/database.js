@@ -1,6 +1,6 @@
-'use strict';
 // TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
 define(['opendatakit','databaseUtils','jquery'], function(opendatakit,databaseUtils,$) {
+'use strict';
 verifyLoad('database',
     ['opendatakit','databaseUtils','jquery'],
     [opendatakit,databaseUtils,$]);
@@ -74,48 +74,45 @@ return {
                 });
         }
     },
-	_applyPendingChangesToModelData:function(model, instanceId, logWarning) {
+    _applyPendingChangesToModelData:function(model, instanceId, logWarning) {
         var that = this;
 
         var updates = {};
         var jsonType;
-        var elementPath;
-        var jsValue;
-        var value;
         var dbKey;
-		var pendingChangeEntry;
-		
-		// if requested, log a warning if not all pending changes have
-		// been applied. This indicates that the UI is faster than the
-		// db layer. It could potentially lead to loss of these updates.
-		var keys = [];
+        var pendingChangeEntry;
+        
+        // if requested, log a warning if not all pending changes have
+        // been applied. This indicates that the UI is faster than the
+        // db layer. It could potentially lead to loss of these updates.
+        var keys = [];
 
         if ( ! $.isEmptyObject(that.pendingChanges)) {
-			
-			// apply any remaining pendingChanges
-			// these are already in the odkData interface format.
-			// we need to parse them back into their representation formats.
-			for (dbKey in that.pendingChanges ) {
-				// for logging...
-				keys.push(dbKey);
-				// get the type and the change entry
-				jsonType = model.dataTableModel[dbKey];
-				pendingChangeEntry = that.pendingChanges[dbKey];
-				if ( pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
-					// construct the data-update entry
-					updates[dbKey] = { elementPath: pendingChangeEntry.elementPath, value: pendingChangeEntry.value };
-				}
-			}
-			// apply the updates
-			databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+            
+            // apply any remaining pendingChanges
+            // these are already in the odkData interface format.
+            // we need to parse them back into their representation formats.
+            for (dbKey in that.pendingChanges ) {
+                // for logging...
+                keys.push(dbKey);
+                // get the type and the change entry
+                jsonType = model.dataTableModel[dbKey];
+                pendingChangeEntry = that.pendingChanges[dbKey];
+                if ( pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
+                    // construct the data-update entry
+                    updates[dbKey] = { elementPath: pendingChangeEntry.elementPath, value: pendingChangeEntry.value };
+                }
+            }
+            // apply the updates
+            databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
 
-			if ( logWarning ) {
-				// log that we have a non-empty pendingChanges key-value set.
-				odkCommon.log('W','_reconstructModelData: pendingChanges is not empty! ' + 
-					model.table_id + ' _id: ' + instanceId + ' keys: ' + JSON.stringify(keys));
-			}
+            if ( logWarning ) {
+                // log that we have a non-empty pendingChanges key-value set.
+                odkCommon.log('W','_reconstructModelData: pendingChanges is not empty! ' + 
+                    model.table_id + ' _id: ' + instanceId + ' keys: ' + JSON.stringify(keys));
+            }
         }
-	},
+    },
     _reconstructModelData:function(model, reqData) {
         var that = this;
 
@@ -126,31 +123,31 @@ return {
         var value;
         var dbKey;
         
-        if ( reqData.getCount() == 0 ) {
-			
-			// clear any row data, but retain session variable values.
+        if ( reqData.getCount() === 0 ) {
+            
+            // clear any row data, but retain session variable values.
 
-			// clear the pendingChanges, since no row exists.
+            // clear the pendingChanges, since no row exists.
             that.pendingChanges = {};
 
-			// read any session variables into updates
-			for ( dbKey in model.dataTableModel ) {
-				jsonType = model.dataTableModel[dbKey];
-				if ( databaseUtils.isUnitOfRetention(jsonType) ) {
-					elementPath = jsonType.elementPath;
-					if ( jsonType.isSessionVariable ) {
-						jsValue = odkCommon.getSessionVariable(elementPath );
-						value = (jsValue === null || jsValue === undefined) ? null : 
-								databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
-						updates[dbKey] = { elementPath: elementPath, value: value };
-					}
-				}
-			}
+            // read any session variables into updates
+            for ( dbKey in model.dataTableModel ) {
+                jsonType = model.dataTableModel[dbKey];
+                if ( databaseUtils.isUnitOfRetention(jsonType) ) {
+                    elementPath = jsonType.elementPath;
+                    if ( jsonType.isSessionVariable ) {
+                        jsValue = odkCommon.getSessionVariable(elementPath );
+                        value = (jsValue === null || jsValue === undefined) ? null : 
+                                databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
+                        updates[dbKey] = { elementPath: elementPath, value: value };
+                    }
+                }
+            }
 
-			// reconstruct the data and instanceMetadata fields.
-			model.data = {};
-			model.instanceMetadata = {};
-			databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
+            // reconstruct the data and instanceMetadata fields.
+            model.data = {};
+            model.instanceMetadata = {};
+            databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
             
             odkCommon.log('W','_reconstructModelData: no row returned -- clearing cached values: ' + 
                             model.table_id);
@@ -158,11 +155,11 @@ return {
         }
         
         if ( reqData.getCount() > 1 ) {
-			// this is a serious error -- stall the ODKSurvey webkit and throw an error when this happens.
+            // this is a serious error -- stall the ODKSurvey webkit and throw an error when this happens.
             throw new Error("_reconstructModelData: multiple rows were returned -- cannot process");
         }
         
-		// otherwise, we have a record...
+        // otherwise, we have a record...
         // read data from the row and
         // read any session variables into model.data
         for ( dbKey in model.dataTableModel ) {
@@ -182,7 +179,7 @@ return {
             }
         }
         
-		// if the pendingChanges are reflected in the updates[].value, then remove them
+        // if the pendingChanges are reflected in the updates[].value, then remove them
         var pendingChangeEntry, currentEntry;
         var keysToRemove = [];
         for (dbKey in that.pendingChanges ) {
@@ -191,10 +188,10 @@ return {
             pendingChangeEntry = that.pendingChanges[dbKey];
             if ( currentEntry !== undefined && currentEntry !== null &&
                  pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
-				// the value in the values array may not be the correct data type -- force it to be converted
-				value = pendingChangeEntry.value;
-				value = databaseUtils.toOdkDataInterfaceFromElementType(jsonType, value, true);
-				value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value, true);
+                // the value in the values array may not be the correct data type -- force it to be converted
+                value = pendingChangeEntry.value;
+                value = databaseUtils.toOdkDataInterfaceFromElementType(jsonType, value, true);
+                value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value, true);
                 if ( JSON.stringify(currentEntry.value) === JSON.stringify(value) ) {
                     keysToRemove.push(dbKey);
                 }
@@ -212,7 +209,7 @@ return {
         model.instanceMetadata = {};
         databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
 
-		that._applyPendingChangesToModelData(model, updates._id.value, true);
+        that._applyPendingChangesToModelData(model, updates._id.value, true);
     },
     /**
      * accumulatedChanges[retentionColumn] = {"elementPath" : elementPath, "value": ???};
@@ -225,11 +222,11 @@ return {
         odkData.addCheckpoint(model.table_id, simpleMap, instanceId,
             function(reqData) {
                 that._reconstructModelData(model, reqData);
-				if (reqData.getCount() !== 1) {
-					ctxt.failure({message: "unable to save pending changes!"});
-				} else {
-					ctxt.success();
-				}
+                if (reqData.getCount() !== 1) {
+                    ctxt.failure({message: "unable to save pending changes!"});
+                } else {
+                    ctxt.success();
+                }
             }, 
             function(errorMsg) {
                 ctxt.failure({message: errorMsg});
@@ -329,9 +326,7 @@ return {
                 
                 var elementPath;
                 var jsonType;
-                var jsValue;
                 var value;
-                var dbKey;
                 var accumulatedChanges = {};
                 
                 if ( reqData.getCount() > 1 ) {
@@ -407,7 +402,7 @@ return {
     ///////////////////////////////////////////////////
     
     get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displayElementName, orderBy) {
-		var that = this;
+        var that = this;
         // 
         // UserTable lt = DataIf.query( dbTableName, selection, selectionArgs, null, null, orderBy, "ASC", false, postprocessorcb
         //
@@ -462,23 +457,23 @@ return {
             odkData.saveCheckpointAsComplete(model.table_id, simpleMap, instanceId, 
                 function(reqData) { 
                     that._reconstructModelData(model, reqData);
-					if (reqData.getCount() !== 1) {
-						ctxt.failure({message: "unable to save pending changes!"});
-					} else {
-						ctxt.success();
-					}
-				}, 
+                    if (reqData.getCount() !== 1) {
+                        ctxt.failure({message: "unable to save pending changes!"});
+                    } else {
+                        ctxt.success();
+                    }
+                }, 
                 function(errorMsg) { ctxt.failure({message: errorMsg}); });
         } else {
             odkData.saveCheckpointAsIncomplete(model.table_id, simpleMap, instanceId, 
                 function(reqData) { 
                     that._reconstructModelData(model, reqData);
-					if (reqData.getCount() !== 1) {
-						ctxt.failure({message: "unable to save pending changes!"});
-					} else {
-						ctxt.success();
-					}
-				}, 
+                    if (reqData.getCount() !== 1) {
+                        ctxt.failure({message: "unable to save pending changes!"});
+                    } else {
+                        ctxt.success();
+                    }
+                }, 
                 function(errorMsg) { ctxt.failure({message: errorMsg}); });
         }
     },
@@ -492,12 +487,12 @@ return {
                     // clear the pending changes, since we are ignoring changes
                     that.pendingChanges = {};
                     that._reconstructModelData(model, reqData);
-					if (reqData.getCount() !== 1) {
-						ctxt.failure({message: "unable to save pending changes!"});
-					} else {
-						ctxt.success();
-					}
-				}, 
+                    if (reqData.getCount() !== 1) {
+                        ctxt.failure({message: "unable to save pending changes!"});
+                    } else {
+                        ctxt.success();
+                    }
+                }, 
                 function(errorMsg) { ctxt.failure({message: errorMsg}); });
     },
     
@@ -505,18 +500,18 @@ return {
         var that = this;
         // clear the pending changes, since we are discarding the row
         that.pendingChanges = {};
-		odkData.deleteRow( model.table_id, null, instanceId, 
-							function(reqData) {
-								// clear the pending changes, since we are ignoring changes
-								that.pendingChanges = {};
-								that._reconstructModelData(model, reqData);
-								if (reqData.getCount() !== 0 && reqData.getData(0,'_sync_state') !== 'deleted' ) {
-									ctxt.failure({message: "unable to delete row!"});
-								} else {
-									ctxt.success();
-								}
-							}, 
-							function(errorMsg) { ctxt.failure({message: errorMsg, rolledBack: true }); });
+        odkData.deleteRow( model.table_id, null, instanceId, 
+                            function(reqData) {
+                                // clear the pending changes, since we are ignoring changes
+                                that.pendingChanges = {};
+                                that._reconstructModelData(model, reqData);
+                                if (reqData.getCount() !== 0 && reqData.getData(0,'_sync_state') !== 'deleted' ) {
+                                    ctxt.failure({message: "unable to delete row!"});
+                                } else {
+                                    ctxt.success();
+                                }
+                            }, 
+                            function(errorMsg) { ctxt.failure({message: errorMsg, rolledBack: true }); });
 
     },
     
@@ -529,8 +524,8 @@ return {
                 if ( reqData.getCount() != 1 ) {
                     ctxt.failure({message: "no row or multiple rows!"});
                 } else {
-					ctxt.success();
-				}
+                    ctxt.success();
+                }
             },
             function(errorMsg) { ctxt.failure({message: errorMsg}); });
     },
@@ -549,8 +544,8 @@ return {
                 if ( reqData.getCount() != 1 ) {
                     ctxt.failure({message: "no row or multiple rows!"});
                 } else {
-					ctxt.success();
-				}
+                    ctxt.success();
+                }
             }, 
             function(errorMsg) {
                 ctxt.failure({message: errorMsg});
@@ -596,7 +591,7 @@ return {
         var instanceId = opendatakit.getCurrentInstanceId();
         databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, name, value, that.pendingChanges );
 
-		that._applyPendingChangesToModelData(model, instanceId, false);
+        that._applyPendingChangesToModelData(model, instanceId, false);
     },
 
     /**
@@ -610,15 +605,15 @@ return {
         var formId = opendatakit.getSettingValue('form_id');
         var model = opendatakit.getCurrentModel();
         if ( model.table_id === null || model.table_id === undefined || model.table_id === 'framework' ) {
-			// clear pendingChanges -- there is no table to update
-			that.pendingChanges = {};
+            // clear pendingChanges -- there is no table to update
+            that.pendingChanges = {};
             ctxt.success();
             return;
         }
         var instanceId = opendatakit.getCurrentInstanceId();
         if ( instanceId === null || instanceId === undefined ) {
-			// clear pendingChanges -- there is no row to update
-			that.pendingChanges = {};
+            // clear pendingChanges -- there is no row to update
+            that.pendingChanges = {};
             ctxt.success();
             return;
         }
@@ -666,8 +661,8 @@ return {
           return;
         }
 
-		// the elementPath and elementKey (dbColumnName) are the same for all instance metadata.
-		that.pendingChanges[dbColumnName] = {elementPath: dbColumnName, value: value, isInstanceMetadata: true };
+        // the elementPath and elementKey (dbColumnName) are the same for all instance metadata.
+        that.pendingChanges[dbColumnName] = {elementPath: dbColumnName, value: value, isInstanceMetadata: true };
 
         // flush this and any pending changes too...
         that._add_checkpoint($.extend({}, ctxt, {
@@ -735,42 +730,42 @@ return {
     convertOrderByString:function(linkedModel, order_by) {
         return databaseUtils.convertOrderByString(linkedModel, order_by);
     },
-	/**
-	 * get the contents of the active data table row for a given table
-	 * for related forms (with filters).
-	 *
-	 * NOTE: If the last update's _sync_state is 'deleted', then we do not return anything.
-	 *
-	 * dbTableName
-	 * selection  e.g., 'name=? and age=?'
-	 * selectionArgs e.g., ['Tom',33]
-	 * orderBy  e.g., 'name asc, age desc'
-	 *
-	 * Requires: no globals
-	 */
-	_selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
+    /**
+     * get the contents of the active data table row for a given table
+     * for related forms (with filters).
+     *
+     * NOTE: If the last update's _sync_state is 'deleted', then we do not return anything.
+     *
+     * dbTableName
+     * selection  e.g., 'name=? and age=?'
+     * selectionArgs e.g., ['Tom',33]
+     * orderBy  e.g., 'name asc, age desc'
+     *
+     * Requires: no globals
+     */
+    _selectMostRecentFromDataTableStmt:function(dbTableName, selection, selectionArgs, orderBy) {
         var that = this;
-		var args = ['deleted'];
-		if ( selection === null || selection === undefined ) {
-			return {
-					stmt : 'select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
-						'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName +
-							   '" as V where V._id=T._id)' +
-							((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-					bind : args  
-				};
-		} else {
-			if (selectionArgs !== null && selectionArgs !== undefined ) {
-				args = args.concat(selectionArgs);
-			}
-			return {
-					stmt :  'select * from (select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
-						'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
-							'" as V where V._id=T._id)) where ' + selection +
-							((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-					bind : args
-				};
-		}
-	}
+        var args = ['deleted'];
+        if ( selection === null || selection === undefined ) {
+            return {
+                    stmt : 'select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
+                        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName +
+                               '" as V where V._id=T._id)' +
+                            ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
+                    bind : args  
+                };
+        } else {
+            if (selectionArgs !== null && selectionArgs !== undefined ) {
+                args = args.concat(selectionArgs);
+            }
+            return {
+                    stmt :  'select * from (select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
+                        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                            '" as V where V._id=T._id)) where ' + selection +
+                            ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
+                    bind : args
+                };
+        }
+    }
 };
 });

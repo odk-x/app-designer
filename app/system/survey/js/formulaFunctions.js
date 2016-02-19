@@ -14,6 +14,7 @@ function(opendatakit,  database,   _) {
         calculates: {},
         opendatakit: opendatakit,
         localize: function(textOrLangMap, locale) {
+            'use strict';
             if(_.isUndefined(textOrLangMap)) {
                 return 'text_undefined';
             }
@@ -32,6 +33,7 @@ function(opendatakit,  database,   _) {
             }
         },
         selected: function(promptValue, qValue) {
+            'use strict';
             if(!promptValue) {
                 return false;
             }
@@ -45,6 +47,7 @@ function(opendatakit,  database,   _) {
             return promptValue == qValue;
         },
         countSelected: function(promptValue){
+            'use strict';
             // select_multiple promptValue is an array
             if(!promptValue) {
                 return 0;
@@ -57,6 +60,7 @@ function(opendatakit,  database,   _) {
         },
         //Check if the prompts have equivalent values.
         equivalent: function() {
+            'use strict';
             var parsedArgs = arguments;
             if(_.all(parsedArgs, _.isArray)) {
                 //We are probably dealing with a select. values is an array of the selected values.
@@ -72,17 +76,21 @@ function(opendatakit,  database,   _) {
             }
         },
         not: function(conditional) {
+            'use strict';
             return !conditional;
         },
         now: function() {
+            'use strict';
             return new Date();
         },
         isFinalized: function() {
+            'use strict';
             var datavalue = database.getInstanceMetaDataValue('_savepoint_type');
             return ( 'COMPLETE' === datavalue );
         },
         //data gets a value by name.
         data: function(valueName) {
+            'use strict';
             var datavalue = database.getDataValue(valueName);
             return datavalue;
         },
@@ -92,6 +100,7 @@ function(opendatakit,  database,   _) {
          * return the value 3 (for use in the remainder of the expression).
          */
         assign: function(valueName, value) {
+            'use strict';
             database.setValueDeferredChange(valueName, value);
             return value;
         },
@@ -116,6 +125,7 @@ function(opendatakit,  database,   _) {
             }
         },
         width: function(string) {
+            'use strict';
             var f = '30px sans-serif', // TODO: Use document's actual font
             testDiv = $('<div>' + string + '</div>')
             .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font': f})

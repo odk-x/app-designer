@@ -1,4 +1,3 @@
-'use strict';
 /**
 * circular dependency: 
 *
@@ -10,6 +9,7 @@
 */
 define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers', 'translations'], 
 function(screenTypes,  opendatakit,  controller,  Backbone,  $,       _,           Handlebars, _hh, translations) {
+'use strict';
 verifyLoad('screens',
     ['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers', 'translations'],
     [screenTypes,   opendatakit,  controller,  Backbone,  $,       _,           Handlebars,  _hh, translations]);
@@ -36,7 +36,7 @@ screenTypes.base = Backbone.View.extend({
         $.extend(this, args);
     },
     getActivePrompts: function(context) {
-        return activePrompts;
+        return this.activePrompts;
     },
     getScreenPath: function() {
         return this._section_name + '/' + this._op.operationIdx;
@@ -99,7 +99,7 @@ screenTypes.base = Backbone.View.extend({
 
         // Find the element in focus
         that.$focusPromptTest = $(':focus');
-        if (that.$focusPromptTest.length == 0) {
+        if (that.$focusPromptTest.length === 0) {
             that.$focusPromptTest = null;
         }
 
@@ -149,7 +149,7 @@ screenTypes.base = Backbone.View.extend({
     },
     configureRenderContext: function(ctxt) {
         var that = this;
-        if ( that.activePrompts.length == 0 ) {
+        if ( that.activePrompts.length === 0 ) {
             ctxt.log('D','configureRenderContext.noActivePrompts.success');
             ctxt.success();
         } else {
@@ -191,7 +191,7 @@ screenTypes.base = Backbone.View.extend({
                 var i;
                 for ( i = 0 ; i < activePromptIndices.length ; ++i ) {
                     var prompt = sectionPrompts[activePromptIndices[i]];
-                    if ( prompt == null ) {
+                    if ( prompt === null || prompt === undefined ) {
                         ctxt.log('E',"Error! unable to resolve prompt!");
                         ctxt.failure({message: "bad prompt index!"});
                         return;
@@ -220,7 +220,7 @@ screenTypes.base = Backbone.View.extend({
             prompt.afterRender();
         });
 
-        if (that.$focusPromptTest != null) 
+        if (that.$focusPromptTest !== null && that.$focusPromptTest !== undefined) 
         {   
             var focusElementAttr = {'id' : that.$focusPromptTest.attr('id'),
                                     'value' : that.$focusPromptTest.attr('value'),
@@ -234,13 +234,13 @@ screenTypes.base = Backbone.View.extend({
                 }
             }
 
-            if (setFocus == true) {
+            if (setFocus === true) {
                 odkCommon.log("D","screens.afterRender: focusElementString = " + focusElementString);
                 $(focusElementString).focus();
             }
         }        
             
-        if (that.focusScrollPos != null) {
+        if (that.focusScrollPos !== null && that.focusScrollPos !== undefined) {
             $(window).scrollTop(that.focusScrollPos);
         }
     },
@@ -286,28 +286,28 @@ screenTypes.base = Backbone.View.extend({
             }
         };
         
-		var i;
+        var i;
         var beforeMoveError;
         for ( i = 0; i < that.activePrompts.length; i ++)
         {
             beforeMoveError = that.activePrompts[i].beforeMove();
-            if ( beforeMoveError != null ) {
+            if ( beforeMoveError !== null && beforeMoveError !== undefined ) {
                 break;
             }
         }
         
-        if ( beforeMoveError == null )
+        if ( beforeMoveError === null || beforeMoveError === undefined )
         {
             if ( validateValues ) {
                 var validateError;
                 for ( i = 0; i < that.activePrompts.length; i++ )
                 {
                     validateError = that.activePrompts[i]._isValid(isStrict);
-                    if ( validateError != null ) { 
+                    if ( validateError !== null && validateError !== undefined ) { 
                         break; 
                     }
                 }
-                if ( validateError == null ) { 
+                if ( validateError === null || validateError === undefined ) { 
                     return allowMoveHandler(advancing); 
                 } else {
                     return validateError;
@@ -326,7 +326,7 @@ screenTypes.base = Backbone.View.extend({
         {
             if (that.activePrompts[i].promptIdx == promptIndex) {
                 var success = that.activePrompts[i].handleConfirmation();
-                if (success == null) {
+                if (success === null || success === undefined) {
                     break;
                 }
                 else {
@@ -496,7 +496,7 @@ screenTypes.custom = screenTypes.base.extend({
             var text = $(t).attr('field-name');
             for (var i = 0; i < that.activePrompts.length; i++) {
                 var prompt = that.activePrompts[i];
-                if (prompt.name == text) {
+                if (prompt.name === text) {
                     if (prompt.$el) {
                         $(t).html((prompt.$el).wrap("<div></div>"));
                     }
@@ -527,7 +527,7 @@ screenTypes.custom = screenTypes.base.extend({
 
         // Find the element in focus
         that.$focusPromptTest = $(':focus');
-        if (that.$focusPromptTest.length == 0) {
+        if (that.$focusPromptTest.length === 0) {
             that.$focusPromptTest = null;
         }
 
@@ -554,7 +554,7 @@ screenTypes.custom = screenTypes.base.extend({
             prompt.afterRender();
         });
 
-        if (that.$focusPromptTest != null) 
+        if (that.$focusPromptTest !== null && that.$focusPromptTest !== undefined) 
         {   
             var focusElementAttr = {'id' : that.$focusPromptTest.attr('id'),
                                     'value' : that.$focusPromptTest.attr('value'),
@@ -568,22 +568,22 @@ screenTypes.custom = screenTypes.base.extend({
                 }
             }
 
-            if (setFocus == true) {
+            if (setFocus === true) {
                 odkCommon.log("D","screens.afterRender: focusElementString = " + focusElementString);
                 $(focusElementString).focus();
             }
         }        
             
-        if (that.focusScrollPos != null) {
+        if (that.focusScrollPos !== null && that.focusScrollPos !== undefined) {
             $(window).scrollTop(that.focusScrollPos);
         }
-        if (that.horizontalFocusScrollPos != null) {
+        if (that.horizontalFocusScrollPos !== null && that.horizontalFocusScrollPos !== undefined) {
             that.$(that.screenOverflowClass).scrollLeft(that.horizontalFocusScrollPos);
         }
     },
     configureRenderContext: function(ctxt) {
         var that = this;
-        if ( that.activePrompts.length == 0 ) {
+        if ( that.activePrompts.length === 0 ) {
             ctxt.log('D','configureRenderContext.noActivePrompts.success');
             ctxt.success();
         } else {

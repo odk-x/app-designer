@@ -1,4 +1,3 @@
-'use strict';
 /**
  * This is a random collection of methods that don't quite belong anywhere.
  *
@@ -8,6 +7,7 @@
  */
 
 define(['underscore', 'XRegExp'],function(_,XRegExp) {
+'use strict';
 verifyLoad('opendatakit',
     ['underscore', 'XRegExp'],
     [ _,            XRegExp]);
@@ -33,51 +33,51 @@ return {
      * 
      */
     mdl: {  data: {},  // dataTable instance data values: (...)
-			instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
-			// metadata: from the odkData interface...
-			//  {  tableId: TableDefinitionEntry.getTableId(),
-			//     schemaETag: TableDefinitionEntry.getSchemaETag(),
-			//     lastDataETag: TableDefinitionEntry.getLastDataETag(),
-			//     lastSyncTime: TableDefinitionEntry.getLastSyncTime(),
-			//
-			// NOTE: elementKeyMap is NOT AVAILABLE in Feb 2016 app-designer. Only available on device.
-			//     elementKeyMap: { columnElementKey: index-into-row[]-for-column-value },
-			// NOTE: orderedColumns is NOT AVAILABLE in Feb 2016 app-designer. Only available on device.
-			//     orderedColumns: {
-			//                 fieldElementNameA: {
-			//	                  type: elementDataType,
-			//					  elementType: elementType, // optional -- if different than type
-			//                    elementKey: fullyQualifiedName, // underscore-concatenated elementName ancestor_..._this path
-			//                    items: {  // only if type == 'array'
-			//                          recursive JSON schema type defn. (type, elementType, ...)
-			//                       },
-			//                    properties: { // only if type == 'object'
-			//                        nestedFieldElementNameA: {
-			//                          recursive JSON Schema type defn. (type, elementType, ...)
-			//                        },
-			//                        nestedFieldElementNameB...
-			//                      }
-			//                   },
-			//                 fieldElementNameB...
-			//              }
-			//     keyValueStoreList: [ 
-			//                     // 
-			//                     // value is one of bool, integer, number or, for all other types (e.g., array, object), a string. 
-			//                     // 
-			//              { partition: xxx, aspect: xxx, key: xxx, type: xxx, value: xxx },
-			//              ...
-			//          ]
-			//
-			//   other tools can add additional fields (these are just the common ones)
-			//   }
-			//
-			metadata: {},
-			dataTableModel: {},// inverted and extended formDef.model for representing data store
-			formDef: null, 
-			formPath: null, 
-			instanceId: null, 
-			table_id: null
-		},
+            instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
+            // metadata: from the odkData interface...
+            //  {  tableId: TableDefinitionEntry.getTableId(),
+            //     schemaETag: TableDefinitionEntry.getSchemaETag(),
+            //     lastDataETag: TableDefinitionEntry.getLastDataETag(),
+            //     lastSyncTime: TableDefinitionEntry.getLastSyncTime(),
+            //
+            // NOTE: elementKeyMap is NOT AVAILABLE in Feb 2016 app-designer. Only available on device.
+            //     elementKeyMap: { columnElementKey: index-into-row[]-for-column-value },
+            // NOTE: orderedColumns is NOT AVAILABLE in Feb 2016 app-designer. Only available on device.
+            //     orderedColumns: {
+            //                 fieldElementNameA: {
+            //                    type: elementDataType,
+            //                    elementType: elementType, // optional -- if different than type
+            //                    elementKey: fullyQualifiedName, // underscore-concatenated elementName ancestor_..._this path
+            //                    items: {  // only if type == 'array'
+            //                          recursive JSON schema type defn. (type, elementType, ...)
+            //                       },
+            //                    properties: { // only if type == 'object'
+            //                        nestedFieldElementNameA: {
+            //                          recursive JSON Schema type defn. (type, elementType, ...)
+            //                        },
+            //                        nestedFieldElementNameB...
+            //                      }
+            //                   },
+            //                 fieldElementNameB...
+            //              }
+            //     keyValueStoreList: [ 
+            //                     // 
+            //                     // value is one of bool, integer, number or, for all other types (e.g., array, object), a string. 
+            //                     // 
+            //              { partition: xxx, aspect: xxx, key: xxx, type: xxx, value: xxx },
+            //              ...
+            //          ]
+            //
+            //   other tools can add additional fields (these are just the common ones)
+            //   }
+            //
+            metadata: {},
+            dataTableModel: {},// inverted and extended formDef.model for representing data store
+            formDef: null, 
+            formPath: null, 
+            instanceId: null, 
+            table_id: null
+        },
     platformInfo: null,
     
     logInitDone:function(pagename) {
@@ -103,7 +103,7 @@ return {
      *
      */
     getRowFileAsUrl:function(tableId, instanceId, rowpath) {
-		return odkCommon.getRowFileAsUrl(tableId, instanceId, rowpath);
+        return odkCommon.getRowFileAsUrl(tableId, instanceId, rowpath);
     },
     
     /**
@@ -149,10 +149,15 @@ return {
     },
 
     genUUID:function() {
+        /*jshint bitwise: false*/
         // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
         var id = "uuid:" + 
         'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = (c === 'x') ? r : (r&0x3|0x8);
+            // NOTE: the logical OR forces the number into an integer
+            var r = Math.random()*16|0;
+            // and the logical OR for 'y' values forces the number to be 8, 9, a or b.
+            // https://en.wikipedia.org/wiki/Universally_unique_identifier -- Version 4 (random)
+            var v = (c === 'x') ? r : (r&0x3|0x8);
             return v.toString(16);
         });
         return id;
@@ -236,7 +241,7 @@ return {
         var appName = that.getPlatformInfo().appName;
         
         var uri = "content://org.opendatakit.common.android.provider.forms/" + 
-            this.getPlatformInfo().appName + "/" + tableId + "/" + formId + "/#" +
+            appName + "/" + tableId + "/" + formId + "/#" +
             reconstitutedKeyValues.substring(1);
 
         odkCommon.log("D","convertHashStringToSurveyUri: as Uri " + uri);
@@ -399,9 +404,10 @@ return {
            { name: "fr", display: { text: {"en_us": "French", "fr": "Francais"}}} ]
     */
     getFormLocales:function(formDef) {
-        if ( formDef !== undefined && formDef !== null ) {
+        if ( formDef !== null && formDef !== undefined ) {
             var locales = this.getSettingObject(formDef, '_locales' );
-            if ( locales !== null && locales.value != null ) {
+            if ( locales !== null && locales !== undefined && 
+                 locales.value !== null && locales.value !== undefined ) {
                 return locales.value;
             }
             alert("_locales not present in form! See console:");
@@ -417,9 +423,10 @@ return {
         This is generally the first locale in the _locales list, above.
      */
     getDefaultFormLocale:function(formDef) {
-        if ( formDef != null ) {
+        if ( formDef !== null &&  formDef !== undefined ) {
             var localeObject = this.getSettingObject(formDef, '_default_locale');
-            if ( localeObject !== null && localeObject.value != null ) {
+            if ( localeObject !== null && localeObject !== undefined && 
+                 localeObject.value !== null && localeObject.value !== undefined ) {
                 return localeObject.value;
             }
             alert("_default_locales not present in form! See console:");
@@ -478,7 +485,7 @@ return {
     },
 
     getShortDateFormat:function(date) {
-        if (date == null || date.constructor.name != 'Date')
+        if (date === null || date === undefined || date.constructor.name !== 'Date')
             return null;
         
         var shortDate = (date.getMonth() + 1) + "/" + date.getDate()  + "/" + date.getFullYear();      
