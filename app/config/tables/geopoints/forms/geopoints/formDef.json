@@ -847,10 +847,10 @@
         "elementSet": "data",
         "elementPath": "coordinates",
         "listChildElementKeys": [
-          "coordinates_latitude",
-          "coordinates_longitude",
+          "coordinates_accuracy",
           "coordinates_altitude",
-          "coordinates_accuracy"
+          "coordinates_latitude",
+          "coordinates_longitude"
         ],
         "notUnitOfRetention": true
       },

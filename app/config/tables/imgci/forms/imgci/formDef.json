@@ -29308,8 +29308,8 @@
         "elementSet": "data",
         "elementPath": "pulseox",
         "listChildElementKeys": [
-          "pulseox_pulse",
-          "pulseox_ox"
+          "pulseox_ox",
+          "pulseox_pulse"
         ],
         "notUnitOfRetention": true
       },

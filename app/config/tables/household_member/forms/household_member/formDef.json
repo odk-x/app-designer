@@ -941,10 +941,10 @@
         "elementSet": "data",
         "elementPath": "location",
         "listChildElementKeys": [
-          "location_latitude",
-          "location_longitude",
+          "location_accuracy",
           "location_altitude",
-          "location_accuracy"
+          "location_latitude",
+          "location_longitude"
         ],
         "notUnitOfRetention": true
       },

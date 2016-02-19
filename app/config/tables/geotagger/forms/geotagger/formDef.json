@@ -664,8 +664,8 @@
         "elementSet": "data",
         "elementPath": "Image",
         "listChildElementKeys": [
-          "Image_uriFragment",
-          "Image_contentType"
+          "Image_contentType",
+          "Image_uriFragment"
         ],
         "notUnitOfRetention": true
       },
@@ -713,10 +713,10 @@
         "elementSet": "data",
         "elementPath": "Location",
         "listChildElementKeys": [
-          "Location_latitude",
-          "Location_longitude",
+          "Location_accuracy",
           "Location_altitude",
-          "Location_accuracy"
+          "Location_latitude",
+          "Location_longitude"
         ],
         "notUnitOfRetention": true
       },

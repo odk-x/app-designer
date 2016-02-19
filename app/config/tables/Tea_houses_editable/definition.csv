@@ -5,7 +5,7 @@ District,District,string,[]
 Hot,Hot,string,[]
 House_id,House_id,string,[]
 Iced,Iced,string,[]
-Location,Location,geopoint,"[""Location_latitude"",""Location_longitude"",""Location_altitude"",""Location_accuracy""]"
+Location,Location,geopoint,"[""Location_accuracy"",""Location_altitude"",""Location_latitude"",""Location_longitude""]"
 Location_accuracy,accuracy,number,[]
 Location_altitude,altitude,number,[]
 Location_latitude,latitude,number,[]

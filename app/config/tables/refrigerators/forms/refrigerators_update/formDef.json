@@ -671,10 +671,10 @@
         "elementSet": "data",
         "elementPath": "refrigerator_location",
         "listChildElementKeys": [
-          "refrigerator_location_latitude",
-          "refrigerator_location_longitude",
+          "refrigerator_location_accuracy",
           "refrigerator_location_altitude",
-          "refrigerator_location_accuracy"
+          "refrigerator_location_latitude",
+          "refrigerator_location_longitude"
         ],
         "notUnitOfRetention": true
       },

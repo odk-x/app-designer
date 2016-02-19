@@ -99,7 +99,7 @@ other_problems,other_problems,string,[]
 otitis_tx,otitis_tx,string,[]
 pneumonia_tx,pneumonia_tx,string,[]
 providername,providername,string,[]
-pulseox,pulseox,object,"[""pulseox_pulse"",""pulseox_ox""]"
+pulseox,pulseox,object,"[""pulseox_ox"",""pulseox_pulse""]"
 pulseox_ox,ox,number,[]
 pulseox_pulse,pulse,number,[]
 rash_generalized,rash_generalized,string,[]

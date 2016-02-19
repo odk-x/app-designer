@@ -72,7 +72,7 @@ other_foods_per_day,other_foods_per_day,integer,[]
 other_foods_types,other_foods_types,array,"[""other_foods_types_items""]"
 other_foods_types_items,items,string,[]
 other_problems,other_problems,string,[]
-pulseox,pulseox,object,"[""pulseox_pulse"",""pulseox_ox""]"
+pulseox,pulseox,object,"[""pulseox_ox"",""pulseox_pulse""]"
 pulseox_ox,ox,number,[]
 pulseox_pulse,pulse,number,[]
 rash_generalized,rash_generalized,string,[]

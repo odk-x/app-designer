@@ -1218,8 +1218,8 @@
         "elementSet": "data",
         "elementPath": "plant_picture",
         "listChildElementKeys": [
-          "plant_picture_uriFragment",
-          "plant_picture_contentType"
+          "plant_picture_contentType",
+          "plant_picture_uriFragment"
         ],
         "notUnitOfRetention": true
       },

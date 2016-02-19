@@ -4,12 +4,12 @@ bird,bird,string,[]
 color,color,string,[]
 confirmTeal,confirmTeal,boolean,[]
 country_csv,country_csv,string,[]
-location,location,geopoint,"[""location_latitude"",""location_longitude"",""location_altitude"",""location_accuracy""]"
+location,location,geopoint,"[""location_accuracy"",""location_altitude"",""location_latitude"",""location_longitude""]"
 location_accuracy,accuracy,number,[]
 location_altitude,altitude,number,[]
 location_latitude,latitude,number,[]
 location_longitude,longitude,number,[]
-picture,picture,mimeUri,"[""picture_uriFragment"",""picture_contentType""]"
+picture,picture,mimeUri,"[""picture_contentType"",""picture_uriFragment""]"
 picture_contentType,contentType,mimeType,[]
 picture_uriFragment,uriFragment,rowpath,[]
 region,region,string,[]

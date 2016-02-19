@@ -6,7 +6,7 @@ electricity,electricity,string,[]
 grade_level,grade_level,string,[]
 household_id,household_id,string,[]
 income_contribution,income_contribution,string,[]
-location,location,geopoint,"[""location_latitude"",""location_longitude"",""location_altitude"",""location_accuracy""]"
+location,location,geopoint,"[""location_accuracy"",""location_altitude"",""location_latitude"",""location_longitude""]"
 location_accuracy,accuracy,number,[]
 location_altitude,altitude,number,[]
 location_latitude,latitude,number,[]

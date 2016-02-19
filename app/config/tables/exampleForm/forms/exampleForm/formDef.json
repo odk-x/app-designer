@@ -2336,10 +2336,10 @@
         "elementSet": "data",
         "elementPath": "geopoint",
         "listChildElementKeys": [
-          "geopoint_latitude",
-          "geopoint_longitude",
+          "geopoint_accuracy",
           "geopoint_altitude",
-          "geopoint_accuracy"
+          "geopoint_latitude",
+          "geopoint_longitude"
         ],
         "notUnitOfRetention": true
       },
@@ -2376,8 +2376,8 @@
         "elementSet": "data",
         "elementPath": "picture",
         "listChildElementKeys": [
-          "picture_uriFragment",
-          "picture_contentType"
+          "picture_contentType",
+          "picture_uriFragment"
         ],
         "notUnitOfRetention": true
       },
@@ -2414,8 +2414,8 @@
         "elementSet": "data",
         "elementPath": "recording",
         "listChildElementKeys": [
-          "recording_uriFragment",
-          "recording_contentType"
+          "recording_contentType",
+          "recording_uriFragment"
         ],
         "notUnitOfRetention": true
       },
@@ -2544,10 +2544,10 @@
         "elementSet": "data",
         "elementPath": "location",
         "listChildElementKeys": [
-          "location_latitude",
-          "location_longitude",
+          "location_accuracy",
           "location_altitude",
-          "location_accuracy"
+          "location_latitude",
+          "location_longitude"
         ],
         "notUnitOfRetention": true
       },
@@ -2623,8 +2623,8 @@
         "elementSet": "data",
         "elementPath": "audio_test",
         "listChildElementKeys": [
-          "audio_test_uriFragment",
-          "audio_test_contentType"
+          "audio_test_contentType",
+          "audio_test_uriFragment"
         ],
         "notUnitOfRetention": true
       },
@@ -2661,8 +2661,8 @@
         "elementSet": "data",
         "elementPath": "video_test",
         "listChildElementKeys": [
-          "video_test_uriFragment",
-          "video_test_contentType"
+          "video_test_contentType",
+          "video_test_uriFragment"
         ],
         "notUnitOfRetention": true
       },
@@ -2699,8 +2699,8 @@
         "elementSet": "data",
         "elementPath": "image_test",
         "listChildElementKeys": [
-          "image_test_uriFragment",
-          "image_test_contentType"
+          "image_test_contentType",
+          "image_test_uriFragment"
         ],
         "notUnitOfRetention": true
       },
