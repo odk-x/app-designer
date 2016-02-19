@@ -30,7 +30,6 @@ return Backbone.View.extend({
     pageChangeActionLockout: false, // to control double-swiping...
     renderContext:{},
     promptIndex: -1,
-    previousPageEl: [],
     events: {
         "click .odk-next-btn": "gotoNextScreen",
         "click .odk-prev-btn": "gotoPreviousScreen",
@@ -209,14 +208,12 @@ return Backbone.View.extend({
                     that.activeScreen.afterRender();
                     that.activeScreen.recursiveDelegateEvents();
                 }
-                that.removePreviousPageEl();
                 window.clearTimeout(activateTimeout);
                 that.hideSpinnerOverlay();
                 that.pageChangeActionLockout = false;
                 ctxt.success();
             }, failure: function(m) {
                 ctxt.log('D', "screenManager.commonDrawScreen.ultimate.failure (via terminalContext)");
-                that.removePreviousPageEl();
                 window.clearTimeout(activateTimeout);
                 that.hideSpinnerOverlay();
                 that.pageChangeActionLockout = false;
@@ -265,9 +262,9 @@ return Backbone.View.extend({
                         bcBase.log('D', "screenManager -- replaceWith()");
                         oldCurrentEl.replaceWith(that.currentPageEl);
                     } else {
-                        bcBase.log('D', "screenManager -- insertAfter()");
-                        that.currentPageEl.insertAfter(oldCurrentEl);
-                        that.previousPageEl.push(oldCurrentEl);
+                        bcBase.log('D', "screenManager -- after()");
+                        oldCurrentEl.remove();
+                        that.$el.find("#block-ui").after(that.currentPageEl);
                     }
 
                     bcBase.success();
@@ -531,14 +528,6 @@ return Backbone.View.extend({
     removeBootstrapModalBackdrop: function() {
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
-    },
-    removePreviousPageEl: function() {
-        while ( this.previousPageEl.length > 0 ) {
-            var El = this.previousPageEl.shift();
-            if ( El !== null && El !== undefined ) {
-                El.empty().remove();
-            }
-        }
     },
     disableImageDrag: function(evt){
         evt.preventDefault();
