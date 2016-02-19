@@ -1,9 +1,8 @@
+define(['mockSchema', 'mockDbif', 'jquery'],function(mockSchema, mockDbif, $) {
 'use strict';
-// depends upon mockUtils, mockSchema, jquery
-define(['mockSchema', 'mockDbif'],function(mockSchema, mockDbif) {
 verifyLoad('mockImpl',
-    ['mockSchema', 'mockDbif'],
-    [ mockSchema,   mockDbif]);
+    ['mockSchema', 'mockDbif', 'jquery'],
+    [ mockSchema,   mockDbif,   $]);
 return {
   pendingChanges: {},
   withDb:function(ctxt, transactionBody) {
@@ -103,8 +102,8 @@ return {
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 purge:function(ctxt) {
-	throw new Error("this is never called -- see app-designer/devEnv/tab1.html -- that is the purge button (needs impl on appDesigner)");
-	
+    throw new Error("this is never called -- see app-designer/devEnv/tab1.html -- that is the purge button (needs impl on appDesigner)");
+    
     var that = this;
     ctxt.log('I','mockImpl.purge.initiated');
     var tableSets = [];

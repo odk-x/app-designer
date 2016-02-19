@@ -11,14 +11,14 @@ window.odkData = {
 //     _tableKVSCacheMap: [],
     _transactionId: 0,
     _callbackId: 0,
-	
-	getOdkDataIf: function() {
-		return window.odkDataIf;
-	},
+    
+    getOdkDataIf: function() {
+        return window.odkDataIf;
+    },
 
     getViewData : function (successCallbackFn, failureCallbackFn) {
         var that = this;
-		
+        
         var transId = null;
 
         var req = that.queueRequest('getViewData', successCallbackFn, failureCallbackFn);
@@ -30,7 +30,7 @@ window.odkData = {
         var that = this;
         
         var req = that.queueRequest('getAllTableIds', successCallbackFn, failureCallbackFn);
-		console.log('getAllTableIds cbId=' + req._callbackId);
+        console.log('getAllTableIds cbId=' + req._callbackId);
 
         that.getOdkDataIf().getAllTableIds(req._callbackId);
     },
@@ -55,7 +55,7 @@ window.odkData = {
         var that = this;
         
         var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
-		console.log('arbitraryQuery cbId=' + req._callbackId);
+        console.log('arbitraryQuery cbId=' + req._callbackId);
 
         that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParams, req._callbackId);
     },
@@ -81,7 +81,7 @@ window.odkData = {
 
         var req = that.queueRequest('updateRow', successCallbackFn, failureCallbackFn);
 
-	that.getOdkDataIf().updateRow(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
+    that.getOdkDataIf().updateRow(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
     },
 
     deleteRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
@@ -260,21 +260,21 @@ window.odkData = {
 //         return includeKVS;
 //     },
 
-	responseAvailable: function() {
+    responseAvailable: function() {
         var that = this;
-		setTimeout(function() {
-			var resultJSON = that.getOdkDataIf().getResponseJSON();
-			//console.log('odkData: resultJSON is ' + resultJSON);
+        setTimeout(function() {
+            var resultJSON = that.getOdkDataIf().getResponseJSON();
+            //console.log('odkData: resultJSON is ' + resultJSON);
 
-			var result = JSON.parse(resultJSON);
+            var result = JSON.parse(resultJSON);
 
             var callbackFnStr = result.callbackJSON;
-			console.log('odkData: callbackJSON is ' + callbackFnStr);
+            console.log('odkData: callbackJSON is ' + callbackFnStr);
 
             that.invokeCallbackFn(result, callbackFnStr);
 
-		}, 0);
-	},
+        }, 0);
+    },
 
     //
     // The code for the data object has 

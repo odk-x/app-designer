@@ -1,6 +1,6 @@
-'use strict';
-// depends upon mockUtils and odkCommon
+/* global odkCommon */
 define(['mockUtils'],function(mockUtils) {
+'use strict';
 verifyLoad('mockSchema',
     ['mockUtils'],
     [mockUtils]);
@@ -193,7 +193,7 @@ addChangesDataTableStmt:function(tableDef, changes, rowId) {
         if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
             stmt += comma;
             comma = ', ';
-            var elementPath = defElement['elementPath'];
+            var elementPath = defElement.elementPath;
             // don't allow working with elementKey primitives if not manipulating metadata
             if (( elementPath === undefined || elementPath === null ) &&
                   defElement.elementSet === 'instanceMetadata') {
@@ -269,7 +269,7 @@ updateChangesDataTableStmt:function(tableDef, changes, rowId) {
             stmt += comma;
             stmt += f + " = ";
             comma = ', ';
-            var elementPath = defElement['elementPath'];
+            var elementPath = defElement.elementPath;
             // TODO: get kvElement for this elementPath
             elementPathPair = mockUtils.getElementPathPairFromChanges(changes, elementPath);
             if ( elementPathPair !== null && elementPathPair !== undefined ) {
@@ -343,7 +343,7 @@ insertCheckpointChangesDataTableStmt:function(tableDef, changes, rowId) {
         if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
             stmt += comma;
             comma = ', ';
-            var elementPath = defElement['elementPath'];
+            var elementPath = defElement.elementPath;
             // don't allow working with elementKey primitives if not manipulating metadata
             if (( elementPath === undefined || elementPath === null ) &&
                   defElement.elementSet === 'instanceMetadata') {

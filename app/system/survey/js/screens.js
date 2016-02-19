@@ -42,9 +42,6 @@ screenTypes.base = Backbone.View.extend({
     getScreenPath: function() {
         return this._section_name + '/' + this._op.operationIdx;
     },
-    getJqmScreen: function() {
-        return this.$el.find(".odk-screen");
-    },
     whenTemplateIsReady: function(ctxt){
         var that = this;
         if(this.template) {

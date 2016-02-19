@@ -1,8 +1,9 @@
+/* global odkCommon */
+define(['mockImpl', 'mockUtils', 'mockSchema', 'mockDbif', 'jquery'],function(mockImpl, mockUtils,  mockSchema, mockDbif, $) {
 'use strict';
-define(['mockImpl', 'mockUtils', 'mockSchema', 'mockDbif'],function(mockImpl, mockUtils,  mockSchema, mockDbif) {
 verifyLoad('mockImpl',
-    ['mockImpl', 'mockUtils', 'mockSchema', 'mockDbif'],
-    [mockImpl,    mockUtils,   mockSchema,   mockDbif]);
+    ['mockImpl', 'mockUtils', 'mockSchema', 'mockDbif', 'jquery'],
+    [mockImpl,    mockUtils,   mockSchema,   mockDbif,  $]);
 var odkDataIf = {
     _responseQueue: [],
 
@@ -470,7 +471,7 @@ var odkDataIf = {
 
         var ctxt = that.newStartContext(_callbackId);
 
-		throw new Error("Not implemented in app-designer");
+        throw new Error("Not implemented in app-designer");
     },
 
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
@@ -628,8 +629,8 @@ var odkDataIf = {
                             that._getMostRecentRow(ctxt, tableDef, rowId);
                         }
                     }), function(transaction) {
-						// the mocked API will delete everything. 
-						// The device API may return a _sync_state = 'deleted' row.
+                        // the mocked API will delete everything. 
+                        // The device API may return a _sync_state = 'deleted' row.
                         var sqlCommand = "DELETE FROM " + tableId + " WHERE _id=?";
                         ctxt.sqlStatement = {
                                 stmt : sqlCommand,

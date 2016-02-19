@@ -1,3 +1,4 @@
+/* global odkCommon */
 /**
  * The w3c WebSQL http://www.w3.org/TR/webdatabase/
  * database is the basis for the Chrome-based execution of ODK Survey
@@ -20,6 +21,7 @@
  *
  */
 define([], function() {
+'use strict';
 return {
   // private data
   _submissionDb:false,

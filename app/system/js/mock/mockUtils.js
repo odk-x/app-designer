@@ -1,10 +1,11 @@
-'use strict';
+/* global odkCommon */
 /**
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
  */
 define([],
 function() {
+'use strict';
 return {
     isUnitOfRetention: function(jsonDefn) {
         if (jsonDefn.notUnitOfRetention) {
@@ -34,11 +35,11 @@ return {
         }
 
         if ( jsonType.type === 'array' ) {
-			// the interface gets this back as a string
+            // the interface gets this back as a string
             return '' + value;
         } else if ( jsonType.type === 'object' ) {
-			// the interface gets this back as a string
-			return '' + value;
+            // the interface gets this back as a string
+            return '' + value;
         } else if ( jsonType.type === 'boolean' ) {
             return (value === undefined || value === null) ? null : (Number(value) !== 0); // '0' is false.
         } else if ( jsonType.type === 'integer' ) {
@@ -109,10 +110,6 @@ return {
     },
     toDatabaseFromOdkDataInterfaceElementType: function( jsonType, value ) {
         var that = this;
-        var refined;
-        var itemType;
-        var item;
-        var itemValue;
 
         if ( value === undefined || value === null ) {
             if ( jsonType.isNotNullable ) {
@@ -124,7 +121,7 @@ return {
         if ( jsonType.type === 'array' ) {
             // ensure that this came in as a String...
             if ( typeof value === 'string' || value instanceof String) {
-				return value;
+                return value;
             } else {
                 throw new Error("unexpected non-string for array value");
             }
@@ -132,13 +129,13 @@ return {
         } else if ( jsonType.type === 'object' ) {
             // ensure that this came in as a String...
             if ( typeof value === 'string' || value instanceof String) {
-				return value;
+                return value;
             } else {
                 throw new Error("unexpected non-string for object value");
             }
             return value;
         } else if ( jsonType.type === 'boolean' ) {
-			// booleans are persisted as numeric 0/1
+            // booleans are persisted as numeric 0/1
             return (value ? '1' : '0');
         } else if ( jsonType.type === 'integer' ) {
             value = '' + Math.round(value);
