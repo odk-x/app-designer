@@ -2303,6 +2303,8 @@ var XLSXConverter = {};
                 f = flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
                 listChildElementKeys.push(f.elementKey);
             }
+			// the children need to be in alphabetical order in order to be repeatably comparable.
+			listChildElementKeys.sort();
             jsonType.listChildElementKeys = listChildElementKeys;
         }
 
