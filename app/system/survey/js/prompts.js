@@ -1,13 +1,13 @@
-/*jslint eqeq: true, evil: true, plusplus: true, todo: true, vars: true, white: true, devel: true */
-'use strict';
+/* globals odkCommon */
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','translations','handlebarsHelpers','datetimepicker'],
-function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           translations,   _hh) {
+define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','translations','handlebarsHelpers','datetimepicker'],
+function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3, translations,   _hh) {
+'use strict';
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','translations', 'handlebarsHelpers','datetimepicker'],
-    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           translations,   _hh,           $.fn.datetimepicker] );
+    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','translations', 'handlebarsHelpers','datetimepicker'],
+    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,  translations,   _hh,           $.fn.datetimepicker] );
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -289,10 +289,10 @@ promptTypes.base = Backbone.View.extend({
     convertSelection: function(model) {
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-        if ( queryDefn.selection == null || queryDefn.selection.length === 0 ) {
+        if ( queryDefn.selection === null || queryDefn.selection === undefined || queryDefn.selection.length === 0 ) {
             return null;
         }
-        if ( that._cachedSelection != null ) {
+        if ( that._cachedSelection !== null && that._cachedSelection !== undefined ) {
             return that._cachedSelection;
         }
         that._cachedSelection = database.convertSelectionString(model, queryDefn.selection);
@@ -302,10 +302,10 @@ promptTypes.base = Backbone.View.extend({
     convertOrderBy: function(model) {
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-        if ( queryDefn.order_by == null || queryDefn.order_by.length === 0 ) {
+        if ( queryDefn.order_by === null || queryDefn.order_by === undefined || queryDefn.order_by.length === 0 ) {
             return null;
         }
-        if ( that._cachedOrderBy != null ) {
+        if ( that._cachedOrderBy !== null && that._cachedOrderBy !== undefined ) {
             return that._cachedOrderBy;
         }
         that._cachedOrderBy = database.convertOrderByString(model, queryDefn.order_by);
@@ -387,7 +387,7 @@ promptTypes.opening = promptTypes.base.extend({
         var ts = that.renderContext.last_save_date = odkCommon.toDateFromOdkTimeStamp(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
-        if ( displayElementName != null ) {
+        if ( displayElementName !== null && displayElementName !== undefined ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
         } else {
             // Now we are always going to display instance id
@@ -432,7 +432,7 @@ promptTypes.finalize = promptTypes.base.extend({
         var ts = odkCommon.toDateFromOdkTimeStamp(lastSave);
         
         var displayElementName = opendatakit.getSettingValue('instance_name');
-        if ( displayElementName != null ) {
+        if ( displayElementName !== null && displayElementName !== undefined ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
         } else {
             // Now we are always going to display instance id
@@ -471,7 +471,7 @@ promptTypes.json = promptTypes.base.extend({
     templatePath: "templates/json.handlebars",
     configureRenderContext: function(ctxt) {
         var that = this;
-        if ( JSON != null ) {
+        if ( JSON !== null && JSON !== undefined ) {
             that.renderContext.value = JSON.stringify(database.getAllDataValues(),null,2);
         } else {
             that.renderContext.value = "JSON Unavailable";
@@ -608,9 +608,9 @@ promptTypes._linked_type = promptTypes.base.extend({
     type: "_linked_type",
     getLinkedTableId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        if ( queryDefn != null )
+        if ( queryDefn !== null && queryDefn !== undefined )
         {
-            if ( queryDefn.linked_table_id == null ) {
+            if ( queryDefn.linked_table_id === null || queryDefn.linked_table_id === undefined ) {
                 return queryDefn.linked_form_id;
             } else {
                 return queryDefn.linked_table_id;
@@ -622,7 +622,7 @@ promptTypes._linked_type = promptTypes.base.extend({
     },
     getLinkedFormId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        if ( queryDefn != null )
+        if ( queryDefn !== null && queryDefn !== undefined )
         {
             return queryDefn.linked_form_id;
         } else {
@@ -649,7 +649,7 @@ promptTypes._linked_type = promptTypes.base.extend({
     },
     getlinkedModel: function(ctxt) {
         var that = this;
-        if ( that._linkedCachedModel != null ) {
+        if ( that._linkedCachedModel !== null && that._linkedCachedModel !== undefined ) {
             ctxt.success(that._linkedCachedModel);
             return;
         }
@@ -723,7 +723,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
-        that.renderContext.new_instance_text = ((that.display.new_instance_text != null) ? that.display.new_instance_text : "New");
+        that.renderContext.new_instance_text = ((that.display.new_instance_text !== null &&
+                that.display.new_instance_text !== undefined) ? that.display.new_instance_text : "New");
         that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
             var dbTableName = linkedModel.table_id;
             var selString = that.convertSelection(linkedModel);
@@ -740,18 +741,18 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                 // set the image icon
                 for (var i = 0; i < instanceList.length ; i++){
                     // sets the savepoint_type to incomplete if the formId doesn't match the current form
-                    if (instanceList[i]["form_id"] != that.getLinkedFormId()) {
+                    if (instanceList[i].form_id != that.getLinkedFormId()) {
                         instanceList[i].savepoint_type = opendatakit.savepoint_type_incomplete;
                     }
                     
-                    if (instanceList[i]["savepoint_type"] == "COMPLETE"){
-                        instanceList[i]["icon_class"] = "glyphicon-ok";
+                    if (instanceList[i].savepoint_type == "COMPLETE"){
+                        instanceList[i].icon_class = "glyphicon-ok";
                     }  
                     else{
-                        instanceList[i]["icon_class"] = "glyphicon-warning-sign";
+                        instanceList[i].icon_class = "glyphicon-warning-sign";
                     }
                     //make the date more readable
-                    instanceList[i]["savepoint_timestamp"] = opendatakit.getShortDateFormat(instanceList[i]["savepoint_timestamp"]);          
+                    instanceList[i].savepoint_timestamp = opendatakit.getShortDateFormat(instanceList[i].savepoint_timestamp);          
                 }
 
                 that.renderContext.instances = instanceList;
@@ -771,10 +772,10 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }}));
     },
     openInstance: function(evt) {
-        var instanceId = undefined;
+        var instanceId;
         var openButton = $(evt.target).closest(".openInstance");
 
-        if (openButton != undefined) {
+        if (openButton !== null && openButton !== undefined) {
             instanceId = openButton.attr("instance-id");
         }
         else {
@@ -804,11 +805,11 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     },
     confirmDeleteInstance: function(evt) {
         var that = this;
-        var instanceId = undefined;
-        var instanceName = undefined;
+        var instanceId;
+        var instanceName;
         var deleteButton = $(evt.target).closest(".deleteInstance");
         
-        if (deleteButton != undefined) {
+        if (deleteButton !== null && deleteButton !== undefined) {
             instanceId  = deleteButton.attr("instance-id"); 
             instanceName = deleteButton.attr("instance-name");
         }
@@ -828,10 +829,10 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             odkCommon.log('E',"In linked_table.handleConfirmation _cachedEvent is null"); 
             return ({message:"In linked_table.deleteInstance _cachedEvent is null"});
         }
-        var instanceId = undefined;
+        var instanceId;
         var deleteButton = $(that._cachedEvent.target).closest(".deleteInstance");
         
-        if (deleteButton != undefined) {
+        if (deleteButton !== null && deleteButton !== undefined) {
             instanceId  = deleteButton.attr("instance-id"); 
         }
         else {
@@ -841,7 +842,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
 
         var ctxt = that.controller.newContext(that._cachedEvent);
         var tableRow = $(that._cachedEvent.target).closest(".linkedTable tr");
-        if (tableRow != undefined)
+        if (tableRow !== null && tableRow !== undefined)
             tableRow.remove();
 
         that.disableButtons();
@@ -1005,9 +1006,9 @@ promptTypes.user_branch = promptTypes.base.extend({
         that.renderContext.passiveError = null;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
         var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
-        if(queryDefn != null) {
+        if(queryDefn !== null && queryDefn !== undefined) {
             that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
-        } else if (choiceListDefn != null) {
+        } else if (choiceListDefn !== null && choiceListDefn !== undefined) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
             that.renderContext.choices = _.map(choiceListDefn, _.clone);
@@ -1088,7 +1089,7 @@ promptTypes.select = promptTypes._linked_type.extend({
                 }
             });
             if(selectedValues && that.withOther) {
-                var otherValue = _find(selectedValues, function(value) {
+                var otherValue = _.find(selectedValues, function(value) {
                         return ('other' === value);
                     });
                 if (otherValue) {
@@ -1111,7 +1112,7 @@ promptTypes.select = promptTypes._linked_type.extend({
         var choiceList = [];
         var newChoice = null;
      
-        if (savedValue == null)
+        if (savedValue === null || savedValue === undefined)
             return choiceList;
 
         for (var i = 0; i < savedValue.length; i++)
@@ -1120,7 +1121,7 @@ promptTypes.select = promptTypes._linked_type.extend({
                 return (savedValue[i] === choiceObject.data_value);
             });
 
-            if ( matchedChoice != null ) {
+            if ( matchedChoice !== null && matchedChoice !== undefined ) {
                 newChoice = { "name": that.name, "value": savedValue[i] };
                 choiceList.push(newChoice);
             } else {
@@ -1221,9 +1222,9 @@ promptTypes.select = promptTypes._linked_type.extend({
         that.renderContext.passiveError = null;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
         var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
-        if(queryDefn != null) {
+        if(queryDefn !== null && queryDefn !== undefined) {
             populateChoicesViaQuery(queryDefn, newctxt);
-        } else if (choiceListDefn != null) {
+        } else if (choiceListDefn !== null && choiceListDefn !== undefined) {
             //Very important.
             //We need to clone the choices so their values are unique to the prompt.
             that.renderContext.choices = _.map(choiceListDefn, _.clone);
@@ -1540,7 +1541,7 @@ promptTypes.input_type = promptTypes.base.extend({
         var renderContext = that.renderContext;
         var value = that.getValue();
         renderContext.value = value;
-        if (ctxt.render == true) {
+        if (ctxt.render === true) {
             that.displayed = true;
         }
         ctxt.success();
@@ -1617,7 +1618,7 @@ promptTypes.integer = promptTypes.input_type.extend({
             renderContext.boxWidth = formulaFunctions.width(longestNum) + 20; // +20 for padding
         }            
         
-        if (ctxt.render == true) {
+        if (ctxt.render === true) {
             that.displayed = true;
         }
         ctxt.success();
@@ -1732,13 +1733,19 @@ promptTypes.datetime = promptTypes.input_type.extend({
     modification: function(evt) {
         var that = this;
         if ( !that.insideAfterRender ) {
-            var date_value = that.$('input').data('DateTimePicker').getDate()
+            var date_value = that.$('input').data('DateTimePicker').getDate();
             var value = (date_value === undefined || date_value === null) ? null : date_value.toDate();
             var formattedDateValue = moment(value).format(that.timeFormat);
             var ref = that.getValue();  
 
-            var rerender = ((ref == null || value == null) && (ref != value )) ||
-                (ref != null && value != null && !that.sameValue(ref, value));
+            var rerender = false;
+            if ( ref === null || ref === undefined ) {
+                rerender = ( value !== null && value !== undefined );
+            } else if ( value === null || value === undefined ) {
+                rerender = ( ref !== null && ref !== undefined );
+            } else {
+                rerender = that.sameValue(ref, value);
+            }
 
             var ctxt = that.controller.newContext(evt);
             ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
@@ -1901,9 +1908,9 @@ promptTypes.media = promptTypes.base.extend({
             if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
                 ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
-                var uriFragment = (jsonObject.result != null) ? jsonObject.result.uriFragment : null;
-                var contentType = (jsonObject.result != null) ? jsonObject.result.contentType : null;
-                if (uriFragment != null && contentType != null) {
+                var uriFragment = (jsonObject.result !== null && jsonObject.result !== undefined) ? jsonObject.result.uriFragment : null;
+                var contentType = (jsonObject.result !== null && jsonObject.result !== undefined) ? jsonObject.result.contentType : null;
+                if (uriFragment !== null && uriFragment !== undefined && contentType !== null && contentType !== undefined) {
                     var oldMediaStruct = that.getValue();
                     var newPath = opendatakit.getRowpathFromUriFragment(uriFragment);
                     // TODO: delete old??? Or leave until marked as finalized?
@@ -1930,9 +1937,11 @@ promptTypes.media = promptTypes.base.extend({
     baseUpdateRenderContext: function() {
         var that = this;
         var mediaUri = that.getValue();
-        var uriFragment = (mediaUri != null && mediaUri.uriFragment != null) ? mediaUri.uriFragment : null;
-        var uri = (uriFragment == null) ? null : opendatakit.getUriFromRowpath(uriFragment);
-        var contentType = (mediaUri != null && mediaUri.contentType != null) ? mediaUri.contentType : null;
+        var uriFragment = (mediaUri !== null && mediaUri !== undefined && 
+                    mediaUri.uriFragment !== null && mediaUri.uriFragment !== undefined) ? mediaUri.uriFragment : null;
+        var uri = (uriFragment === null || uriFragment === undefined) ? null : opendatakit.getUriFromRowpath(uriFragment);
+        var contentType = (mediaUri !== null && mediaUri !== undefined && 
+                    mediaUri.contentType !== null && mediaUri.contentType !== undefined) ? mediaUri.contentType : null;
         var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
         var platinfo = opendatakit.getPlatformInfo();
         if ( platinfo.container !== 'Android' ) {
@@ -1953,7 +1962,8 @@ promptTypes.media = promptTypes.base.extend({
             return '';
         } else {
             var displayObject = this.getValue();
-            if (displayObject != null && displayObject.uriFragment != null) {
+            if (displayObject !== null && displayObject !== undefined &&
+                displayObject.uriFragment !== null && displayObject.uriFragment !== undefined) {
                 return displayObject.uriFragment;
             }
             else {
@@ -2024,7 +2034,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
         //so this prompt's "address" is passed along with the intent.
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launch'});
         var outcome = odkCommon.doAction( dispatchString, that.intentString,
-            ((that.intentParameters == null) ? null : JSON.stringify(that.intentParameters)));
+            ((that.intentParameters === null || that.intentParameters === undefined) ? null : JSON.stringify(that.intentParameters)));
         ctxt.log('D',"prompts." + that.type + ".launch " + that.intentString, platInfo.container + " outcome is " + outcome);
         if (outcome && outcome === "OK") {
             ctxt.success();
@@ -2052,7 +2062,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                 ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK',
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                     internalPromptContext + " action: " + action);
-                if (jsonObject.result != null) {
+                if (jsonObject.result !== null && jsonObject.result !== undefined) {
                     that.setValueDeferredChange(that.extractDataValue(jsonObject));
                     that.renderContext.value = that.getValue();
                     that.reRender(ctxt);
@@ -2099,7 +2109,8 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
             if (displayObject === null || displayObject === undefined ) {
                 return null;
             }
-            if (displayObject.latitude != null && displayObject.longitude != null) {
+            if (displayObject.latitude !== null && displayObject.latitude !== undefined && 
+                displayObject.longitude !== null && displayObject.longitude !== undefined) {
                 return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
             }
             else {
@@ -2127,7 +2138,8 @@ promptTypes.geopointmap = promptTypes.launch_intent.extend({
             if (displayObject === null || displayObject === undefined ) {
                 return null;
             }
-            if (displayObject.latitude != null && displayObject.longitude != null) {
+            if (displayObject.latitude !== null && displayObject.latitude !== undefined && 
+                displayObject.longitude !== null && displayObject.longitude !== undefined) {
                 return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
             }
             else {
@@ -2154,25 +2166,25 @@ promptTypes.bargraph = promptTypes.base.extend({
     templatePath: "templates/graph.handlebars",
     scale_y_up: function(evt){
         var that = this;
-        that.vHeight = that.vHeight + (that.vHeight * .2);
+        that.vHeight = that.vHeight + (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_y_down: function(evt){
         var that = this;
-        that.vHeight = that.vHeight - (that.vHeight * .2);
+        that.vHeight = that.vHeight - (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_x_up: function(evt){
         var that = this;
-        that.vWidth = that.vWidth + (that.vWidth * .2);
+        that.vWidth = that.vWidth + (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_x_down: function(evt){
         var that = this;
-        that.vWidth = that.vWidth - (that.vWidth * .2);
+        that.vWidth = that.vWidth - (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt);    
         that.reRender(ctxt);
     },
@@ -2190,7 +2202,7 @@ promptTypes.bargraph = promptTypes.base.extend({
         that.renderContext.passiveError = null;
         that.renderContext.graphType = that.type;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-        if(queryDefn != null) {
+        if(queryDefn !== null && queryDefn !== undefined) {
             that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
         } else {
             newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
@@ -2204,7 +2216,7 @@ promptTypes.bargraph = promptTypes.base.extend({
         
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
-        if (that.renderContext.choices.length == 0)
+        if (that.renderContext.choices.length === 0)
         {
             odkCommon.log("E","prompts." + that.type + ".afterRender - no data to graph");
             return; 
@@ -2217,7 +2229,7 @@ promptTypes.bargraph = promptTypes.base.extend({
             width = paramWidth - margin.left - margin.right,
             height = paramHeight - margin.top - margin.bottom;
 
-        var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+        var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
 
         var y = d3.scale.linear().range([height, 0]);
 
@@ -2228,17 +2240,18 @@ promptTypes.bargraph = promptTypes.base.extend({
         var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left")
-        .tickSubdivide(true)
+        .tickSubdivide(true);
+        
         dataJ.forEach(function(d) {
                 d.y = +d.y;
             });
 
         x.domain(dataJ.map(function(d) { return d.x; }));
         y.domain([0, d3.max(dataJ, function(d) { return d.y; })]);
-        if (that.vWidth == 0) {
+        if (that.vWidth === 0) {
             that.vWidth = width;
         }
-        if (that.vHeight == 0) {
+        if (that.vHeight === 0) {
             that.vHeight = height;
         }
 
@@ -2253,7 +2266,7 @@ promptTypes.bargraph = promptTypes.base.extend({
         var tMarg = 0;
 
         var tempHeight = that.vHeight + 0;
-        x.rangeRoundBands([0, that.vWidth + 0], .2);
+        x.rangeRoundBands([0, that.vWidth + 0], 0.2);
         y.range([tempHeight, 0]);
         yAxis.ticks(tempHeight/30);
 
@@ -2327,25 +2340,25 @@ promptTypes.linegraph = promptTypes.base.extend({
     templatePath: "templates/graph.handlebars",
     scale_y_up: function(evt){
         var that = this;
-        that.vHeight = that.vHeight + (that.vHeight * .2);
+        that.vHeight = that.vHeight + (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_y_down: function(evt){
         var that = this;
-        that.vHeight = that.vHeight - (that.vHeight * .2);
+        that.vHeight = that.vHeight - (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_x_up: function(evt){
         var that = this;
-        that.vWidth = that.vWidth + (that.vWidth * .2);
+        that.vWidth = that.vWidth + (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_x_down: function(evt){
         var that = this;
-        that.vWidth = that.vWidth - (that.vWidth * .2);
+        that.vWidth = that.vWidth - (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt);    
         that.reRender(ctxt);
     },
@@ -2363,7 +2376,7 @@ promptTypes.linegraph = promptTypes.base.extend({
         that.renderContext.passiveError = null;
         that.renderContext.graphType = that.type;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-        if(queryDefn != null) {
+        if(queryDefn !== null && queryDefn !== undefined) {
             that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
         } else {
             newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
@@ -2373,14 +2386,14 @@ promptTypes.linegraph = promptTypes.base.extend({
         var that = this;
         var xString = "x-axis";
         var yString = "y-axis";
-        var legendString = "y-value"
+        var legendString = "y-value";
 
         var paramWidth = 450;
         var paramHeight = 400;
         
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
-        if (that.renderContext.choices.length == 0)
+        if (that.renderContext.choices.length === 0)
         {
             odkCommon.log("E","prompts." + that.type + ".afterRender - no data to graph");
             return; 
@@ -2448,10 +2461,10 @@ promptTypes.linegraph = promptTypes.base.extend({
         x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
         y.domain([d3.min(dataJ, function(d) { return d.y; }), d3.max(dataJ, function(d) { return d.y; })]);
 
-        if (that.vWidth == 0) {
+        if (that.vWidth === 0) {
             that.vWidth = width;
         }
-        if (that.vHeight == 0) {
+        if (that.vHeight === 0) {
             that.vHeight = height;
         }
 
@@ -2563,16 +2576,16 @@ promptTypes.piechart = promptTypes.base.extend({
     templatePath: "templates/graph.handlebars",
     scale_up: function(evt){
         var that = this;
-        that.vHeight = that.vHeight + (that.vHeight * .1);
-        that.vWidth = that.vWidth + (that.vWidth * .1);
+        that.vHeight = that.vHeight + (that.vHeight * 0.1);
+        that.vWidth = that.vWidth + (that.vWidth * 0.1);
         that.vRadius = that.vRadius * 1.1;
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_down: function(evt){
         var that = this;
-        that.vHeight = that.vHeight - (that.vHeight * .1);
-        that.vWidth = that.vWidth - (that.vWidth * .1);
+        that.vHeight = that.vHeight - (that.vHeight * 0.1);
+        that.vWidth = that.vWidth - (that.vWidth * 0.1);
         that.vRadius = that.vRadius * 0.9;
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
@@ -2591,7 +2604,7 @@ promptTypes.piechart = promptTypes.base.extend({
         that.renderContext.passiveError = null;
         that.renderContext.graphType = that.type;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-        if(queryDefn != null) {
+        if(queryDefn !== null && queryDefn !== undefined) {
             that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
         } else {
             newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
@@ -2610,7 +2623,7 @@ promptTypes.piechart = promptTypes.base.extend({
         
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
-        if (that.renderContext.choices.length == 0)
+        if (that.renderContext.choices.length === 0)
         {
             odkCommon.log("E","prompts." + that.type + ".afterRender - no data to graph");
             return; 
@@ -2619,13 +2632,13 @@ promptTypes.piechart = promptTypes.base.extend({
             return choice;
         });
 
-        if (that.vWidth == 0) {
+        if (that.vWidth === 0) {
             that.vWidth = width;
         }
-        if (that.vHeight == 0) {
+        if (that.vHeight === 0) {
             that.vHeight = height;
         }
-        if (that.vRadius == 0) {
+        if (that.vRadius === 0) {
             that.vRadius = radius;
         }
 
@@ -2660,21 +2673,21 @@ promptTypes.piechart = promptTypes.base.extend({
             .style("fill", function(d, i) {
                 // Switch to a case statement 
                 // Maybe these colors should be available in a library or something
-                if(i == 0) {
+                if(i === 0) {
                     return "green";
-                } else if(i == 1) {
+                } else if(i === 1) {
                     return "yellow";
-                } else if(i == 2){
+                } else if(i === 2){
                     return "blue";
-                } else if(i == 3){
+                } else if(i === 3){
                     return "red";
-                } else if(i == 4){
+                } else if(i === 4){
                     return "orange";
-                } else if(i == 5){
+                } else if(i === 5){
                     return "purple";
-                } else if(i == 6){
+                } else if(i === 6){
                     return "pink";
-                } else if(i == 7){
+                } else if(i === 7){
                     return "teal";
                 }
             });
@@ -2700,25 +2713,25 @@ promptTypes.scatterplot = promptTypes.base.extend({
     templatePath: "templates/graph.handlebars",
     scale_y_up: function(evt){
         var that = this;
-        that.vHeight = that.vHeight + (that.vHeight * .2);
+        that.vHeight = that.vHeight + (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_y_down: function(evt){
         var that = this;
-        that.vHeight = that.vHeight - (that.vHeight * .2);
+        that.vHeight = that.vHeight - (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_x_up: function(evt){
         var that = this;
-        that.vWidth = that.vWidth + (that.vWidth * .2);
+        that.vWidth = that.vWidth + (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt);
         that.reRender(ctxt);
     },
     scale_x_down: function(evt){
         var that = this;
-        that.vWidth = that.vWidth - (that.vWidth * .2);
+        that.vWidth = that.vWidth - (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt);    
         that.reRender(ctxt);
     },
@@ -2736,7 +2749,7 @@ promptTypes.scatterplot = promptTypes.base.extend({
         that.renderContext.passiveError = null;
         that.renderContext.graphType = that.type;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
-        if(queryDefn != null) {
+        if(queryDefn !== null && queryDefn !== undefined) {
             that.populateChoicesViaQueryUsingAjax(queryDefn, newctxt);
         } else {
             newctxt.failure({message: "Error fetching choices -- no ajax query or choices defined"});
@@ -2753,16 +2766,16 @@ promptTypes.scatterplot = promptTypes.base.extend({
             height = paramHeight - margin.top - margin.bottom,
             padding = 30;
 
-        if (that.vWidth == 0) {
+        if (that.vWidth === 0) {
             that.vWidth = width;
         }
-        if (that.vHeight == 0) {
+        if (that.vHeight === 0) {
             that.vHeight = height;
         }
         
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
-        if (that.renderContext.choices.length == 0)
+        if (that.renderContext.choices.length === 0)
         {
             odkCommon.log("E","prompts." + that.type + ".afterRender - no data to graph");
             return; 
@@ -2779,7 +2792,7 @@ promptTypes.scatterplot = promptTypes.base.extend({
         });
 
         var x = d3.scale.ordinal()
-            .rangeRoundBands([0, that.vWidth], .1);
+            .rangeRoundBands([0, that.vWidth], 0.1);
 
         var y = d3.scale.linear()
             .range([that.vHeight, 0]);
@@ -2825,7 +2838,7 @@ promptTypes.scatterplot = promptTypes.base.extend({
             .append("g")
             .attr("transform", "translate(" + (margin.left) + "," + (margin.top) + ")");
         
-        x.rangeRoundBands([0, that.vWidth], .1);
+        x.rangeRoundBands([0, that.vWidth], 0.1);
         y.range([that.vHeight, 0]);
         
         yScale.range([that.vHeight - padding, padding]);

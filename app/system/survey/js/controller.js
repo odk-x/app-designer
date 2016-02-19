@@ -1,3 +1,4 @@
+/* global odkCommon, odkSurvey */
 /**
  * Manages the execution state and screen history of the overall survey, 
  * including form validation, saving and marking the form as 'complete'.
@@ -10,12 +11,12 @@
  * screens and thereby to the prompts within those screens.
  *
  */
-define(['screenManager','opendatakit','database', 'parsequery', 'jquery' ],
-function(ScreenManager,  opendatakit,  database,   parsequery,  $ ) {
+define(['screenManager','opendatakit','database', 'parsequery', 'jquery','underscore' ],
+function(ScreenManager,  opendatakit,  database,   parsequery,  $,        _ ) {
 'use strict';
 verifyLoad('controller',
-    ['screenManager','opendatakit','database', 'parsequery', 'jquery' ],
-    [ScreenManager,  opendatakit,  database,    parsequery,  $]);
+    ['screenManager','opendatakit','database', 'parsequery', 'jquery','underscore' ],
+    [ScreenManager,  opendatakit,  database,    parsequery,  $,        _]);
 return {
     eventCount: 0,
     moveFailureMessage: { message: "Internal Error: Unable to determine next prompt." },
@@ -447,23 +448,7 @@ return {
                     var siformId = opendatakit.getSettingValue('form_id');
                     var simodel = opendatakit.getCurrentModel();
                     var siinstanceId = opendatakit.getCurrentInstanceId();
-                    database.save_all_changes($.extend({},ctxt,{success:function() {
-                            that.screenManager.hideSpinnerOverlay();
-                            odkSurvey.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), complete);
-                            // the odkSurvey should terminate the window... if not, at least leave the instance.
-                            that.leaveInstance(ctxt);
-                        },
-                        failure:function(m) {
-                            odkSurvey.saveAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
-                            // advance to next operation if we fail...
-                            path = that.getNextOperationPath(path);
-                            op = that.getOperation(path);
-                            if ( op !== undefined && op !== null ) {
-                                that._doActionAtLoop(ctxt, op, op._token_type );
-                            } else {
-                                ctxt.failure(that.moveFailureMessage);
-                            }
-                        }}), simodel, siformId, siinstanceId, complete);
+                    that._innerSaveAllChanges(ctxt, op, path, simodel, siformId, siinstanceId, complete);
                     return;
                 case "validate":
                     var validationTag = op._sweep_name;
@@ -475,104 +460,7 @@ return {
                         odkSurvey.pushSectionScreenState( opendatakit.getRefId());
                     }
                     
-                    database.applyDeferredChanges($.extend({},ctxt,{
-                        success:function() {
-                            var vctxt = $.extend({},ctxt,{
-                                success:function(operation, options, m) {
-                                    if ( operation === undefined || operation === null ) {
-                                        // validation is DONE: pop ourselves off return stack.
-                                        var refPath = odkSurvey.popScreenHistory( opendatakit.getRefId());
-                                        if ( refPath != op._section_name + "/" + op.operationIdx ) {
-                                            ctxt.log('E',"unexpected mis-match of screen history states");
-                                            ctxt.failure(that.moveFailureMessage);
-                                            return;
-                                        }
-                                        that._doActionAtLoop(ctxt, op, 'advance' );
-                                    } else {
-                                        ctxt.success(operation, options, m);
-                                    }
-                                }});
-                            /**
-                             * Upon exit:
-                             *   ctxt.success() -- for every prompt associated with this validationTag, 
-                             *                     if required() evaluates to true, then the field has a value
-                             *                     and if constraint() is defined, it also evaluates to true.
-                             *
-                             *   ctxt.failure(m) -- if there is a failed prompt, then:
-                             *                     setScreen(prompt, {popHistoryOnExit: true})
-                             *                      and always:
-                             *                     chainedCtxt to display showScreenPopup(m) after a 500ms delay.
-                             */
-                            var formDef = opendatakit.getCurrentFormDef();
-                            var section_names = formDef.specification.section_names;
-                            var i, j;
-                            var promptList = [];
-                            for ( i = 0 ; i < section_names.length ; ++i ) {
-                                var sectionName = section_names[i];
-                                var section = formDef.specification.sections[sectionName];
-                                var tagList = section.validation_tag_map[validationTag];
-                                if ( tagList !== undefined && tagList !== null ) {
-                                    for ( j = 0 ; j < tagList.length ; ++j ) {
-                                        promptList.push(sectionName + "/" + tagList[j]);
-                                    }
-                                }
-                            }
-                            if ( promptList.length === 0 ) {
-                                vctxt.log('D',"validateQuestionHelper.success.emptyValidationList");
-                                vctxt.success();
-                                return;
-                            }
-                            
-                            // start our work -- display the 'validating...' spinner
-                            that.screenManager.showSpinnerOverlay({text:"Validating..."});
-                          
-                            var buildRenderDoneCtxt = $.extend({render: false}, vctxt, {
-                                success: function() {
-                                    // all render contexts have been refreshed
-                                    var currPrompt;
-                                    var validateError;
-                                    for ( var i = 0; i < promptList.length; i++ ) {
-                                        currPrompt = that.getPrompt(promptList[i]);
-                                        validateError = currPrompt._isValid(true);
-                                        if ( validateError !== undefined && validateError !== null ) {
-                                            vctxt.log('I',"_validateQuestionHelper.validate.failure", "px: " + currPrompt.promptIdx);
-                                            var nextOp = that.getOperation(currPrompt._branch_label_enclosing_screen);
-                                            if ( nextOp === null ) {
-                                                vctxt.failure(that.moveFailureMessage);
-                                                return;
-                                            }
-                                            vctxt.success(nextOp, {popHistoryOnExit: true}, validateError);
-                                            return;
-                                        }
-                                    }
-                                    vctxt.log('D',"validateQuestionHelper.success.endOfValidationList");
-                                    vctxt.success();
-                                },
-                                failure: function(m) {
-                                    vctxt.failure(m);
-                                }
-                            });
-
-                            var buildRenderDoneOnceCtxt = $.extend({render: false}, buildRenderDoneCtxt, {
-                                success: _.after(promptList.length, function() {
-                                    buildRenderDoneCtxt.success();
-                                }),
-                                failure: _.once(function(m) {
-                                    buildRenderDoneCtxt.failure(m);
-                                })
-                            });
-
-                            if ( promptList.length === 0 ) {
-                                buildRenderDoneCtxt.success();
-                            } else {
-                                // refresh all render contexts (they may have constraint values
-                                // that could have changed -- e.g., filtered choice lists).
-                                $.each( promptList, function(idx, promptCandidatePath) {
-                                    var promptCandidate = that.getPrompt(promptCandidatePath);
-                                    promptCandidate.buildRenderContext(buildRenderDoneOnceCtxt);
-                                });
-                            }
-                        }}));
+                    that._innerValidate(ctxt, op, validationTag);
                     return;
                 case "begin_screen":
                     ctxt.success(op);
@@ -602,6 +490,134 @@ return {
                 return;
             }
         }
+    },
+    /** 
+     * Pulled out of loop to prevent looping variable issues (jsHint)
+     */
+    _innerSaveAllChanges: function(ctxt, op, path, simodel, siformId, siinstanceId, complete) {
+        var that = this;
+        database.save_all_changes($.extend({},ctxt,{success:function() {
+                that.screenManager.hideSpinnerOverlay();
+                odkSurvey.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), complete);
+                // the odkSurvey should terminate the window... if not, at least leave the instance.
+                that.leaveInstance(ctxt);
+            },
+            failure:function(m) {
+                odkSurvey.saveAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
+                // advance to next operation if we fail...
+                path = that.getNextOperationPath(path);
+                op = that.getOperation(path);
+                if ( op !== undefined && op !== null ) {
+                    that._doActionAtLoop(ctxt, op, op._token_type );
+                } else {
+                    ctxt.failure(that.moveFailureMessage);
+                }
+            }}), simodel, siformId, siinstanceId, complete);
+    },
+    /** 
+     * Pulled out of loop to prevent looping variable issues (jsHint)
+     */
+    _innerValidate:function(ctxt, op, validationTag) {
+        var that = this;
+        database.applyDeferredChanges($.extend({},ctxt,{
+        success:function() {
+            var vctxt = $.extend({},ctxt,{
+                success:function(operation, options, m) {
+                    if ( operation === undefined || operation === null ) {
+                        // validation is DONE: pop ourselves off return stack.
+                        var refPath = odkSurvey.popScreenHistory( opendatakit.getRefId());
+                        if ( refPath != op._section_name + "/" + op.operationIdx ) {
+                            ctxt.log('E',"unexpected mis-match of screen history states");
+                            ctxt.failure(that.moveFailureMessage);
+                            return;
+                        }
+                        that._doActionAtLoop(ctxt, op, 'advance' );
+                    } else {
+                        ctxt.success(operation, options, m);
+                    }
+                }});
+            /**
+             * Upon exit:
+             *   ctxt.success() -- for every prompt associated with this validationTag, 
+             *                     if required() evaluates to true, then the field has a value
+             *                     and if constraint() is defined, it also evaluates to true.
+             *
+             *   ctxt.failure(m) -- if there is a failed prompt, then:
+             *                     setScreen(prompt, {popHistoryOnExit: true})
+             *                      and always:
+             *                     chainedCtxt to display showScreenPopup(m) after a 500ms delay.
+             */
+            var formDef = opendatakit.getCurrentFormDef();
+            var section_names = formDef.specification.section_names;
+            var i, j;
+            var promptList = [];
+            for ( i = 0 ; i < section_names.length ; ++i ) {
+                var sectionName = section_names[i];
+                var section = formDef.specification.sections[sectionName];
+                var tagList = section.validation_tag_map[validationTag];
+                if ( tagList !== undefined && tagList !== null ) {
+                    for ( j = 0 ; j < tagList.length ; ++j ) {
+                        promptList.push(sectionName + "/" + tagList[j]);
+                    }
+                }
+            }
+            if ( promptList.length === 0 ) {
+                vctxt.log('D',"validateQuestionHelper.success.emptyValidationList");
+                vctxt.success();
+                return;
+            }
+            
+            // start our work -- display the 'validating...' spinner
+            that.screenManager.showSpinnerOverlay({text:"Validating..."});
+          
+            var buildRenderDoneCtxt = $.extend({render: false}, vctxt, {
+                success: function() {
+                    // all render contexts have been refreshed
+                    var currPrompt;
+                    var validateError;
+                    for ( var i = 0; i < promptList.length; i++ ) {
+                        currPrompt = that.getPrompt(promptList[i]);
+                        validateError = currPrompt._isValid(true);
+                        if ( validateError !== undefined && validateError !== null ) {
+                            vctxt.log('I',"_validateQuestionHelper.validate.failure", "px: " + currPrompt.promptIdx);
+                            var nextOp = that.getOperation(currPrompt._branch_label_enclosing_screen);
+                            if ( nextOp === null ) {
+                                vctxt.failure(that.moveFailureMessage);
+                                return;
+                            }
+                            vctxt.success(nextOp, {popHistoryOnExit: true}, validateError);
+                            return;
+                        }
+                    }
+                    vctxt.log('D',"validateQuestionHelper.success.endOfValidationList");
+                    vctxt.success();
+                },
+                failure: function(m) {
+                    vctxt.failure(m);
+                }
+            });
+
+            var buildRenderDoneOnceCtxt = $.extend({render: false}, buildRenderDoneCtxt, {
+                success: _.after(promptList.length, function() {
+                    buildRenderDoneCtxt.success();
+                }),
+                failure: _.once(function(m) {
+                    buildRenderDoneCtxt.failure(m);
+                })
+            });
+
+            if ( promptList.length === 0 ) {
+                buildRenderDoneCtxt.success();
+            } else {
+                // refresh all render contexts (they may have constraint values
+                // that could have changed -- e.g., filtered choice lists).
+                $.each( promptList, function(idx, promptCandidatePath) {
+                    var promptCandidate = that.getPrompt(promptCandidatePath);
+                    promptCandidate.buildRenderContext(buildRenderDoneOnceCtxt);
+                });
+            }
+        }}));
+
     },
     setScreenWithMessagePopup:function(ctxt, op, options, m) {
         var that = this;

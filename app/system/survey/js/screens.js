@@ -1,3 +1,4 @@
+/* global odkCommon */
 /**
 * circular dependency: 
 *

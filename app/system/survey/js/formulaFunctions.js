@@ -1,4 +1,4 @@
-//Dont use usestrict here or the evaluator will break
+/* global odkCommon */
 /**
  * Common functions accessible from the user's Javascript eval environment
  * (for use within their formulas).

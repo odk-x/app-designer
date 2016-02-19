@@ -1,4 +1,4 @@
-// TODO: Instance level: locale (used), at Table level: locales (available), formPath, 
+/* global odkCommon, odkData */
 define(['opendatakit','databaseUtils','jquery'], function(opendatakit,databaseUtils,$) {
 'use strict';
 verifyLoad('database',
@@ -44,11 +44,11 @@ return {
             var value;
             for ( entry in formDef.specification.properties ) {
                 kvsEntry = {};
-                kvsEntry.partition = entry['_partition'];
-                kvsEntry.aspect = entry['_aspect'];
-                kvsEntry.key = entry['_key'];
-                kvsEntry.type = entry['_type'];
-                value = entry['_value'];
+                kvsEntry.partition = entry._partition;
+                kvsEntry.aspect = entry._aspect;
+                kvsEntry.key = entry._key;
+                kvsEntry.type = entry._type;
+                value = entry._value;
                 kvsEntry.value = databaseUtils.fromKVStoreToElementType(kvsEntry.type, value);
                 tlo.metadata.keyValueStoreList.push(kvsEntry);
             }

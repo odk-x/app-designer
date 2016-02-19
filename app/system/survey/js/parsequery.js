@@ -1,3 +1,4 @@
+/* globals odkCommon, odkSurvey */
 /**
  circular dependency upon: controller, builder (set via initialize)
  

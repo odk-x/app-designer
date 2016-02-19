@@ -1,3 +1,4 @@
+/* global odkCommon */
 /**
  * The odkSurvey object is something we use to mock out some functionality for
  * testing in the browser. See the `window.odkSurvey` definition below for more

@@ -1,3 +1,4 @@
+/* global odkCommon */
 /**
  * Main entry point: buildSurvey
  * 

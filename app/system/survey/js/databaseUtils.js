@@ -1,3 +1,4 @@
+/* globals odkCommon */
 /**
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
@@ -815,7 +816,7 @@ return {
                         e[f] = term[f];
                     }
                 }
-                e['value'] = value;
+                e.value = value;
                 return {element: e, elementPath: pathChain};
             }
             // try again with underscore substitution
@@ -842,7 +843,7 @@ return {
                         e[f] = term[f];
                     }
                 }
-                e['value'] = value;
+                e.value = value;
                 return {element: e, elementPath: pathChain};
             }
         }
@@ -880,7 +881,7 @@ return {
                 var f;
                 for (f in linkedModel.dataTableModel) {
                     var defElement = linkedModel.dataTableModel[f];
-                    var elementPath = defElement['elementPath'];
+                    var elementPath = defElement.elementPath;
                     if ( elementPath === null || elementPath === undefined ) {
                         elementPath = f;
                     }
@@ -918,7 +919,7 @@ return {
                 var f;
                 for (f in linkedModel.dataTableModel) {
                     var defElement = linkedModel.dataTableModel[f];
-                    var elementPath = defElement['elementPath'];
+                    var elementPath = defElement.elementPath;
                     if ( elementPath === null || elementPath === undefined ) {
                         elementPath = f;
                     }
@@ -965,7 +966,7 @@ return {
         for (f in dataTableModel) {
             defElement = dataTableModel[f];
             if ( that.isUnitOfRetention(defElement) ) {
-                var elementPath = defElement['elementPath'];
+                var elementPath = defElement.elementPath;
                 // don't allow working with elementKey primitives if not manipulating metadata
                 if (( elementPath === undefined || elementPath === null ) && 
                       defElement.elementSet === 'instanceMetadata') {

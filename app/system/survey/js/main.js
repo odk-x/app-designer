@@ -1,3 +1,4 @@
+/* globals odkCommon */
 /**
  * Simple boilerplate for defining the requirejs settings, 
  * to initialize parsequery dependencies, and to invoke
@@ -114,6 +115,7 @@ requirejs.config({
  * re-draw of the current screen when returning from a linked table (sub-form).
  */
 function redrawHook() {
+    'use strict';
     require('controller').redrawHook();
 }
 
@@ -123,6 +125,7 @@ function redrawHook() {
  * place the following object into focus.
  */
 function odkLeaveField(theForm) {
+    'use strict';
     /* Tabbing advances through the fields
      * provided there are tabindex attributes on them.
      * But hitting Enter, Next or Go does not.
@@ -161,6 +164,7 @@ function odkLeaveField(theForm) {
  * be null. If so, log the error.
  */
 function verifyLoad( prefix, alist, args ) {
+    'use strict';
     var i;
     for ( i = 0 ; i < args.length ; ++i ) {
         if ( args[i] === undefined || args[i] === null ) {
@@ -171,6 +175,7 @@ function verifyLoad( prefix, alist, args ) {
 
 require(['jquery'], 
     function($) {
+        'use strict';
         verifyLoad('main.require.jquery',
             ['jquery'],
             [$]);

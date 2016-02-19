@@ -1,3 +1,4 @@
+/* globals odkCommon, odkSurvey */
 /**
  * This is a random collection of methods that don't quite belong anywhere.
  *
