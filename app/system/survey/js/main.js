@@ -173,12 +173,14 @@ function verifyLoad( prefix, alist, args ) {
     }
 }
 
-require(['jquery'], 
-    function($) {
+// Load XRegExp very early so that it is available when
+// the JS stub implementation of odkCommon needs it.
+require(['jquery','XRegExp'], 
+    function($, XRegExp) {
         'use strict';
         verifyLoad('main.require.jquery',
-            ['jquery'],
-            [$]);
+            ['jquery','XRegExp'],
+            [$, XRegExp]);
 
         odkCommon.log('I','main.require.jquery.loaded establish mobileinit action');
 

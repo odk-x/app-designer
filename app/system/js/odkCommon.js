@@ -600,6 +600,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
         _sessionVariables: {},
         _queuedActions: [],
         _logLevel: 'D',
+		_XRegExp: null,
         getPlatformInfo : function() {
             var that = this;
             // 9000 b/c that's what grunt is running on. Perhaps should configure
@@ -640,19 +641,30 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
 
             var result = null;
 
-            if ( !window.XRegExp ) {
+			if ( that._XRegExp === null ) {
+				that._XRegExp = require('XRegExp');
+			}
+			
+            if ( that._XRegExp === null  ) {
                 throw new Error('XRegExp has not been loaded prior to first call to getRowFileAsUrl()');
             }
             
             if ( that._forbiddenInstanceDirCharsPattern === null ||
                  that._forbiddenInstanceDirCharsPattern === undefined ) {
                 // defer loading this until we try to use it
-                that._forbiddenInstanceDirCharsPattern = window.XRegExp('(\\p{P}|\\p{Z})', 'A');
+                that._forbiddenInstanceDirCharsPattern = that._XRegExp('(\\p{P}|\\p{Z})', 'A');
             }
 
-            var iDirName = window.XRegExp.replace(rowId, 
+            var iDirName = that._XRegExp.replace(rowId, 
                             that._forbiddenInstanceDirCharsPattern, '_', 'all');
 
+			if ( relativePath.startsWith("system/") ) {
+				// hack for app-designer
+				that.log('D',"getRowFileAsUrl: hacked URL for app-designer");
+				result = baseUri + relativePath;
+				return result;
+			}
+			
             var prefix = 'tables/' + tableId + '/instances/' + iDirName + '/';
             if ( relativePath.length > prefix.length && relativePath.substring(0,prefix.length) === prefix ) {
                 console.error('getRowFileAsUrl - detected filepath in rowpath data');
