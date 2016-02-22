@@ -229,8 +229,14 @@ return Backbone.View.extend({
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
         var bcBase = that.controller.newCallbackContext();
+
+        bcBase.setTerminalContext(cleanupCtxt);
+
+        // In case there was a modal popup active before
+        // the drawing this screen get rid of the modal-backdrop
+        that.removeBootstrapModalBackdrop();
         
-        var buildCtxt = $.extend({render:true},bcBase,{success:function(){
+        screen.buildRenderContext($.extend({render:true},bcBase,{success:function(){
         
                 bcBase.log('D', "screenManager.commonDrawScreen.screen.buildRenderContext.success");
                 // patch up navigation settings for the screen...
@@ -250,7 +256,7 @@ return Backbone.View.extend({
 
                 // render screen
                 bcBase.log('D', "screenManager.commonDrawScreen.screen.before.render");
-                var screenRenderCtxt = $.extend({},bcBase,{success: function() {
+                screen.render($.extend({},bcBase,{success: function() {
                     
                     bcBase.log('D', "screenManager.commonDrawScreen.screen.render.success");
                     // find the previous screen...
@@ -268,17 +274,8 @@ return Backbone.View.extend({
                     }
 
                     bcBase.success();
-                }});
-                screen.render(screenRenderCtxt);
-            }});
-
-        // In case there was a modal popup active before
-        // the drawing this screen get rid of the modal-backdrop
-        that.removeBootstrapModalBackdrop();
-
-        buildCtxt.setTerminalContext(cleanupCtxt);
-        
-        screen.buildRenderContext(buildCtxt);
+                }}));
+            }}));
     },
     gotoNextScreen: function(evt) {
         var that = this;
