@@ -123,7 +123,7 @@ return {
         var value;
         var dbKey;
         
-        if ( reqData.getCount() === 0 ) {
+        if ( reqData === null || reqData === undefined || reqData.getCount() === 0 ) {
             
             // clear any row data, but retain session variable values.
 
@@ -453,6 +453,15 @@ return {
     save_all_changes:function(ctxt, model, formId, instanceId, asComplete) {
         var that = this;
         var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, that.pendingChanges, formId);
+		
+		// special case -- if this is the framework, then don't interact with
+		// odkData since there is no backing table.
+		if ( model.table_id === "framework" ) {
+			that._reconstructModelData(model, null);
+			ctxt.success();
+			return;
+		}
+
         if ( asComplete ) {
             odkData.saveCheckpointAsComplete(model.table_id, simpleMap, instanceId, 
                 function(reqData) { 
@@ -482,18 +491,25 @@ return {
         var that = this;
         // clear the pending changes, since we are ignoring changes
         that.pendingChanges = {};
+		
+		// special case -- if this is the framework, then don't interact with
+		// odkData since there is no backing table.
+		if ( model.table_id === "framework" ) {
+			that._reconstructModelData(model, null);
+			ctxt.success();
+			return;
+		}
+		
         odkData.deleteAllCheckpoints(model.table_id, instanceId, 
                 function(reqData) { 
                     // clear the pending changes, since we are ignoring changes
                     that.pendingChanges = {};
                     that._reconstructModelData(model, reqData);
-                    if (reqData.getCount() !== 1) {
-                        ctxt.failure({message: "unable to save pending changes!"});
-                    } else {
-                        ctxt.success();
-                    }
+					ctxt.success();
                 }, 
-                function(errorMsg) { ctxt.failure({message: errorMsg}); });
+                function(errorMsg) {
+					ctxt.failure({message: errorMsg}); 
+				});
     },
     
     delete_checkpoints_and_row:function(ctxt, model, instanceId) {
