@@ -1,13 +1,13 @@
 /* global odkCommon, odkSurvey */
 /**
- * Manages the execution state and screen history of the overall survey, 
+ * Manages the execution state and screen history of the overall survey,
  * including form validation, saving and marking the form as 'complete'.
  *
- * Delegates the display of individual screens to the screenManager. 
+ * Delegates the display of individual screens to the screenManager.
  * On page advance, asks the screen manager whether advancing off the
- * screen is allowed. 
+ * screen is allowed.
  *
- * Delegates the evaluation of individual constraints, etc. to the 
+ * Delegates the evaluation of individual constraints, etc. to the
  * screens and thereby to the prompts within those screens.
  *
  */
@@ -45,22 +45,22 @@ return {
             odkCommon.log('E',"controller.getCurrentContentsScreenPath: invalid currentScreenPath: " + currentPath);
             return null;
         }
- 
+
         return parts[0] + '/_contents';
     },
     getOperationPath: function(opPath) {
-        
+
         if ( opPath === undefined || opPath === null ) {
             odkCommon.log('E',"invalid opPath: null");
             return null;
         }
-        
+
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
             odkCommon.log('E',"controller.getOperationPath: invalid opPath: " + opPath);
             return null;
         }
-        
+
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
@@ -85,23 +85,23 @@ return {
             odkCommon.log('E',"controller.getOperationPath: invalid opPath (beyond end of operations array): " + opPath);
             return null;
         }
-        
+
         var newPath = parts[0] + '/' + intIndex;
         return newPath;
     },
     getNextOperationPath: function(opPath) {
-        
+
         if ( opPath === undefined || opPath === null ) {
             odkCommon.log('E',"invalid opPath: null");
             return null;
         }
-        
+
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
             odkCommon.log('E',"controller.getNextOperationPath: invalid opPath: " + opPath);
             return null;
         }
-        
+
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
@@ -126,7 +126,7 @@ return {
             odkCommon.log('E',"controller.getNextOperationPath: invalid opPath (beyond end of operations array): " + opPath);
             return null;
         }
-        
+
         intIndex++;
         var newPath = parts[0] + '/' + intIndex;
 
@@ -134,7 +134,7 @@ return {
             odkCommon.log('E',"controller.getNextOperationPath: advancing beyond end of operations array: " + newPath);
             return null;
         }
-        
+
         return newPath;
     },
     getOperation: function(opPath) {
@@ -142,13 +142,13 @@ return {
             odkCommon.log('E',"invalid opPath: null");
             return null;
         }
-        
+
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
             odkCommon.log('E',"controller.getOperation: invalid opPath: " + opPath);
             return null;
         }
-        
+
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
@@ -178,22 +178,22 @@ return {
     },
     getCurrentSectionPrompts: function() {
         var opPath = this.getCurrentScreenPath();
-        
+
         if ( opPath === null ) {
             return [];
         }
-        
+
         var parts = opPath.split("/");
         if ( parts.length < 2 ) {
             return [];
         }
-        
+
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
             return [];
         }
-        
+
         return section.parsed_prompts;
     },
     getPrompt: function(promptPath) {
@@ -201,13 +201,13 @@ return {
             odkCommon.log('E',"invalid promptPath: null");
             return null;
         }
-        
+
         var parts = promptPath.split("/");
         if ( parts.length < 2 ) {
             odkCommon.log('E',"controller.getPrompt: invalid promptPath: " + promptPath);
             return null;
         }
-        
+
         var formDef = opendatakit.getCurrentFormDef();
         var section = formDef.specification.sections[parts[0]];
         if ( section === undefined || section === null ) {
@@ -249,34 +249,34 @@ return {
             // popHistoryOnExit -- awkward
             // validateinProgress -- awkward
             //
-            // the later two are possible if a validation constraint 
-            // shared a screen with a user-directed branch and the 
+            // the later two are possible if a validation constraint
+            // shared a screen with a user-directed branch and the
             // user took the branch rather than fix the validation
             // failure.
-            // 
-            // It is safe to back over the popHistoryOnExit, as 
+            //
+            // It is safe to back over the popHistoryOnExit, as
             // that is the screen that failed validation.
-            // 
-            // It also makes sense to back over the validation 
+            //
+            // It also makes sense to back over the validation
             // command (which will always have validateInProgress
             // state), as it doesn't have any UI on success.
             //
-            if ( state === 'hideInBackHistory' || 
-                 state === 'validateInProgress' || 
+            if ( state === 'hideInBackHistory' ||
+                 state === 'validateInProgress' ||
                  state === 'popHistoryOnExit' ) {
                 // this is a hidden screen w.r.t. the back history
                 // skip over it.
                 continue;
             } else if ( state !== 'advanceOnReturn' ) {
-                // this is not a do section action. 
+                // this is not a do section action.
                 // show it.
                 break;
             } else {
                 // this IS a do section action.
-                // if we started in a different section than 
+                // if we started in a different section than
                 // the one we are in now, then we are backing out
                 // of a subsection. In that case, we should show
-                // the contents screen of the section we are 
+                // the contents screen of the section we are
                 // re-entering.
                 var newScreenPath = that.getCurrentScreenPath();
                 if ( oldScreenPath !== null &&  oldScreenPath !== undefined &&
@@ -285,16 +285,16 @@ return {
                     var newParts = newScreenPath.split("/");
                     if ( oldParts[0] != newParts[0] ) {
                         // we are popping up.
-                        // retain the do section clause in the 
+                        // retain the do section clause in the
                         // history record (since we are backing
                         // up, this will not be done on the screen
                         // transition, so we must do that here).
                         // and show the contents screen.
-                        // When we advance forward from 
+                        // When we advance forward from
                         // the contents screen we will resume
                         // at the statement after the do section.
                         // If we go backward, we will silently
-                        // clear this record out and move to the 
+                        // clear this record out and move to the
                         // screen before the do section.
                         odkSurvey.pushSectionScreenState(opendatakit.getRefId());
                         path = that.getCurrentContentsScreenPath();
@@ -306,7 +306,7 @@ return {
                 // Otherwise, we are in the same section.
                 // If isResume is true, then we want to stop
                 // at this point. Otherwise, we want to move
-                // back through to an earlier screen in this 
+                // back through to an earlier screen in this
                 // same section.
                 if ( isResume ) {
                     break;
@@ -350,7 +350,7 @@ return {
         database.applyDeferredChanges(ctxt);
     },
     /**
-     * Get 'op' at 'path'. If it is anything but a 'begin_screen', we 
+     * Get 'op' at 'path'. If it is anything but a 'begin_screen', we
      * step through and process it, until we land on a 'begin_screen'
      * operation.
      *
@@ -359,8 +359,8 @@ return {
     _doActionAtLoop: function(ctxt, inOp, inAction) {
         var that = this;
         // NOTE: copy arguments into local variables
-        // so that the Chrome debugger will show the 
-        // current values of these variables as the 
+        // so that the Chrome debugger will show the
+        // current values of these variables as the
         // loop below progresses.
         //
         var op = inOp;
@@ -379,9 +379,9 @@ return {
                 case "goto_label":
                     // jump to a label. This may be conditional...
                     // i.e., The 'condition' property is now a boolean predicate
-                    // (it is compiled into one during the builder's processing 
+                    // (it is compiled into one during the builder's processing
                     // of the form). If it evaluates to false, then skip to the
-                    // next question; if it evaluates to true or is not present, 
+                    // next question; if it evaluates to true or is not present,
                     // then execute the 'goto'
                     if('condition' in op && !op.condition()) {
                         path = that.getNextOperationPath(path);
@@ -452,14 +452,14 @@ return {
                     return;
                 case "validate":
                     var validationTag = op._sweep_name;
-                    
+
                     if ( odkSurvey.getScreenPath(opendatakit.getRefId()) !== path ||
                          odkSurvey.getControllerState(opendatakit.getRefId()) !== 'validateInProgress' ) {
                         // tag this op as a 'validateInProgress' node. Push onto stack.
                         odkSurvey.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
                         odkSurvey.pushSectionScreenState( opendatakit.getRefId());
                     }
-                    
+
                     that._innerValidate(ctxt, op, validationTag);
                     return;
                 case "begin_screen":
@@ -469,7 +469,7 @@ return {
                     ctxt.failure({message: "Unrecognized action in doAction loop: " + action });
                     return;
                 }
-                
+
                 //
                 // advance to the 'op' specified by the path.
                 if ( path !== null &&  path !== undefined ) {
@@ -480,7 +480,7 @@ return {
                     ctxt.failure(that.moveFailureMessage);
                     return;
                 }
-                
+
             } catch (e) {
                 odkCommon.log('E', "controller._doActionAtLoop.exception px: " +
                                 path + ' exception: ' + String(e));
@@ -491,7 +491,7 @@ return {
             }
         }
     },
-    /** 
+    /**
      * Pulled out of loop to prevent looping variable issues (jsHint)
      */
     _innerSaveAllChanges: function(ctxt, op, path, simodel, siformId, siinstanceId, complete) {
@@ -514,7 +514,7 @@ return {
                 }
             }}), simodel, siformId, siinstanceId, complete);
     },
-    /** 
+    /**
      * Pulled out of loop to prevent looping variable issues (jsHint)
      */
     _innerValidate:function(ctxt, op, validationTag) {
@@ -538,7 +538,7 @@ return {
                 }});
             /**
              * Upon exit:
-             *   ctxt.success() -- for every prompt associated with this validationTag, 
+             *   ctxt.success() -- for every prompt associated with this validationTag,
              *                     if required() evaluates to true, then the field has a value
              *                     and if constraint() is defined, it also evaluates to true.
              *
@@ -566,10 +566,10 @@ return {
                 vctxt.success();
                 return;
             }
-            
+
             // start our work -- display the 'validating...' spinner
             that.screenManager.showSpinnerOverlay({text:"Validating..."});
-          
+
             var buildRenderDoneCtxt = $.extend({render: false}, vctxt, {
                 success: function() {
                     // all render contexts have been refreshed
@@ -625,7 +625,7 @@ return {
         /**
          * If we immediately display the message pop-up, it might be cancelled during the page rendering.
          * Therefore, wait 500ms before attempting to show the message pop-up.
-         * 
+         *
          * Do this using a chained context...
          */
         var popupbasectxt = that.newCallbackContext();
@@ -670,7 +670,7 @@ return {
         if ( op === null ) {
             throw Error("controller._doActionAt.nullOp unexpected condition -- caller should handle this!");
         }
-        
+
         try {
             // any deferred database updates will be written via the setScreen call.
             var newctxt = $.extend({},ctxt,{
@@ -688,7 +688,7 @@ return {
                         odkSurvey.popScreenHistory(opendatakit.getRefId());
                     }
                     if ( that.getCurrentScreenPath() !== currentScreenPath ) {
-                        ctxt.log('W',"controller._doActionAt._doActionAtLoop.failure", "px: " + 
+                        ctxt.log('W',"controller._doActionAt._doActionAtLoop.failure", "px: " +
                             that.getCurrentScreenPath() + " does not match starting screen: " + currentScreenPath);
                     }
                     var op = that.getOperation(currentScreenPath);
@@ -728,21 +728,21 @@ return {
             ctxt.failure(that.moveFailureMessage);
             return;
         }
-        
+
         var stateString = null;
-        
+
         var oldPath = that.getCurrentScreenPath();
         if ( oldPath === newPath ) {
             // redrawing -- take whatever was already there...
             stateString = odkSurvey.getControllerState(opendatakit.getRefId());
         }
-        
+
         if ( options.popHistoryOnExit ) {
             stateString = 'popHistoryOnExit';
         } else if ( operation.screen && operation.screen.hideInBackHistory ) {
             stateString = 'hideInBackHistory';
         }
-        
+
         odkSurvey.setSectionScreenState( opendatakit.getRefId(), newPath, stateString);
         // Build a new Screen object so that jQuery Mobile is always happy...
         var formDef = opendatakit.getCurrentFormDef();
@@ -752,26 +752,26 @@ return {
         if (screen_attrs !== null && screen_attrs !== undefined && ('screen_type' in screen_attrs)) {
             screen_type = screen_attrs.screen_type;
         }
-        
+
         if (!(screen_type in formDef.specification.currentScreenTypes)) {
             ctxt.log('E','controller.setScreen.unrecognizedScreenType', screen_type);
             ctxt.failure({message: 'unknown screen_type'});
             return;
         }
-        
+
         ScreenType = formDef.specification.currentScreenTypes[screen_type];
         ExtendedScreenType = ScreenType.extend(screen_attrs);
         ScreenInstance = new ExtendedScreenType({ _section_name: operation._section_name, _operation: operation });
 
         that.screenManager.setScreen($.extend({},ctxt,{
             success: function() {
-                var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), 
+                var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(),
                             opendatakit.getCurrentInstanceId(), that.getCurrentScreenPath());
                 window.location.hash = qpl;
                 ctxt.success();
             }, failure: function(m) {
             /////////////////////
-            // TODO: reconcile this with _doActionAt failure -- 
+            // TODO: reconcile this with _doActionAt failure --
             // one or the other should pop the stack.
             // How does this flow?
                 // undo screen change on failure...
@@ -797,26 +797,26 @@ return {
     },
     /**
      * Move to the previous event in the screenHistory.
-     * This is generally the previous screen, but might 
-     * be an intermediate non-visible action node (e.g., 
-     * do_section or validate) in which case we go back 
+     * This is generally the previous screen, but might
+     * be an intermediate non-visible action node (e.g.,
+     * do_section or validate) in which case we go back
      * to that node and either advance forward from it
      * (do_section) or re-execute it (validate).
      *
      * Success: we have successfully advanced to a new
      *   screen.
-     * Failure: we were unable to advance. In general, 
+     * Failure: we were unable to advance. In general,
      *   this means we stay where we are.
      */
     gotoPreviousScreen: function(ctxt){
         var that = this;
         ctxt.log('D','controller.gotoPreviousScreen');
         var opPath = that.getCurrentScreenPath();
-        
+
         var failureObject = that.beforeMove(true, false);
         if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoPreviousScreen.beforeMove.failure", "px: " +  opPath);
-            that.screenManager.showScreenPopup(failureObject); 
+            that.screenManager.showScreenPopup(failureObject);
             ctxt.failure(failureObject);
             return;
         }
@@ -834,7 +834,7 @@ return {
      *
      * Success: we have successfully advanced to a new
      *   screen.
-     * Failure: we were unable to advance. In general, 
+     * Failure: we were unable to advance. In general,
      *   this means we stay where we are.
      */
     gotoNextScreen: function(ctxt){
@@ -845,7 +845,7 @@ return {
         var failureObject = that.beforeMove(true, true);
         if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoNextScreen.beforeMove.failure", "px: " +  opPath);
-            that.screenManager.showScreenPopup(failureObject); 
+            that.screenManager.showScreenPopup(failureObject);
             ctxt.failure(failureObject);
             return;
         }
@@ -868,9 +868,9 @@ return {
     /*
      * Display the contents screen.
      *
-     * Success: we have successfully navigated to the 
+     * Success: we have successfully navigated to the
      *   contents screen.
-     * Failure: we were unable to advance. In general, 
+     * Failure: we were unable to advance. In general,
      *   this means we stay where we are.
      */
     gotoContentsScreen: function(ctxt){
@@ -881,7 +881,7 @@ return {
         var failureObject = that.beforeMove(true, false);
         if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
-            that.screenManager.showScreenPopup(failureObject); 
+            that.screenManager.showScreenPopup(failureObject);
             ctxt.failure(failureObject);
             return;
         }
@@ -897,13 +897,13 @@ return {
     },
     /*
      * Begin the 'validate finalize' and 'save_and_terminate true'
-     * actions. 
+     * actions.
      *
      * Success: we have successfully navigated to either
      *   a screen where there is a validation failure
      *   or we have executed the save_and_terminate action.
      *
-     * Failure: we were unable to advance. In general, 
+     * Failure: we were unable to advance. In general,
      *   this means we stay where we are.
      */
     gotoFinalizeAndTerminateAction: function(ctxt){
@@ -914,7 +914,7 @@ return {
         var failureObject = that.beforeMove(true, false);
         if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoFinalizeAction.beforeMove.failure", "px: " +  opPath);
-            that.screenManager.showScreenPopup(failureObject); 
+            that.screenManager.showScreenPopup(failureObject);
             ctxt.failure(failureObject);
             return;
         }
@@ -932,10 +932,10 @@ return {
      * Execute instructions beginning at the specified path.
      *
      * Success: we have successfully navigated to a screen
-     *   displayed to the user or we have executed the 
+     *   displayed to the user or we have executed the
      *   save_and_terminate action.
      *
-     * Failure: we were unable to advance. In general, 
+     * Failure: we were unable to advance. In general,
      *   this means we stay where we are.
      */
     gotoScreenPath:function(ctxt, path, advancing) {
@@ -943,11 +943,11 @@ return {
         ctxt.log('D','controller.gotoScreenPath');
         var opPath = that.getCurrentScreenPath();
         var currentOp = that.getOperation(opPath);
-        
+
         var failureObject = that.beforeMove(true, advancing);
         if ( failureObject !== null && failureObject !== undefined ) {
             ctxt.log('I',"gotoContentsScreen.beforeMove.failure", "px: " +  opPath);
-            that.screenManager.showScreenPopup(failureObject); 
+            that.screenManager.showScreenPopup(failureObject);
             ctxt.failure(failureObject);
             return;
         }
@@ -956,7 +956,7 @@ return {
         var op = that.getOperation(path);
         if ( op === null ) {
             ctxt.failure(that.moveFailureMessage);
-            return;    
+            return;
         }
         // special case: jumping across sections
         //
@@ -964,7 +964,7 @@ return {
         // as all section jumps implicitly save where they came from.
         if ( currentOp !== null && currentOp !== undefined && op._section_name === currentOp._section_name && advancing ) {
             odkSurvey.pushSectionScreenState(opendatakit.getRefId());
-        }    
+        }
         that._doActionAt(ctxt, op, op._token_type, advancing);
     },
     /*
@@ -975,16 +975,16 @@ return {
      * Execute instructions beginning at the specified path.
      *
      * Success: we have successfully navigated to a screen
-     *   displayed to the user or we have executed the 
+     *   displayed to the user or we have executed the
      *   save_and_terminate action.
      *
-     * Failure: we were unable to advance. In general, 
+     * Failure: we were unable to advance. In general,
      *   this means we stay where we are.
      */
     startAtScreenPath:function(ctxt, path) {
         var that = this;
         ctxt.log('D','controller.startAtScreenPath');
-        
+
         if ( path === null || path === undefined ) {
             path = opendatakit.initialScreenPath;
         }
@@ -1026,7 +1026,7 @@ return {
      * Success: we have successfully saved-as-incomplete all checkpoint
      *   records for this instance the database.
      *
-     * NOTE: the odkSurvey.saveAllChangesCompleted() call may terminate 
+     * NOTE: the odkSurvey.saveAllChangesCompleted() call may terminate
      * the webkit before ctxt.success() is executed.
      *
      * Failure: we were unable to save-as-incomplete the records.
@@ -1056,9 +1056,9 @@ return {
         var internalPromptContext = dispatchObj.userAction;
         var screenPath = that.getCurrentScreenPath();
         ctxt.log('I','controller.actionCallback', ((screenPath !== null && screenPath !== undefined) ? ("px: " + screenPath) : "no current prompt"));
-        
+
         // promptPath is the path to the prompt issuing the doAction.
-        // prompts know their enclosing screen, so we don't need to 
+        // prompts know their enclosing screen, so we don't need to
         // worry about that...
         var prompt = that.getPrompt(promptPath);
         if ( prompt !== null && prompt !== undefined ) {
@@ -1068,13 +1068,13 @@ return {
                 if ( handler !== null && handler !== undefined ) {
                     handler( ctxt, internalPromptContext, action, jsonObject );
                 } else {
-                    ctxt.log('E','controller.actionCallback.noHandler: ERROR - NO HANDLER ON PROMPT!', 
+                    ctxt.log('E','controller.actionCallback.noHandler: ERROR - NO HANDLER ON PROMPT!',
                         promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                     ctxt.failure({message: "Internal error. No matching handler for callback."});
                     return;
                 }
             } catch (e) {
-                ctxt.log('E','controller.actionCallback.exception: EXCEPTION ON PROMPT!', 
+                ctxt.log('E','controller.actionCallback.exception: EXCEPTION ON PROMPT!',
                     promptPath,  + " internalPromptContext: " + internalPromptContext + " action: " +
                     action + " exception: " + e.message);
                 ctxt.failure({message: "Internal error. Exception while handling callback."});
@@ -1145,9 +1145,9 @@ return {
             this.insideQueue = false;
         }
     },
-    
+
     /**
-     * This notifies the Java layer that the framework has been loaded and 
+     * This notifies the Java layer that the framework has been loaded and
      * will register a listener for all of the queued actions, if any.
      */
     registerQueuedActionAvailableListener: function(ctxt, refId, m) {
@@ -1219,16 +1219,16 @@ return {
                         }
                     }
                 }
-                var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(), 
+                var qpl = opendatakit.getSameRefIdHashString(opendatakit.getCurrentFormPath(),
                             id, opendatakit.initialScreenPath);
-                
+
 
 
                 // this does not reset the RefId...
                 parsequery._prepAndSwitchUI( $.extend({},ctxt, {failure:function(m) {
                                 ctxt.setChainedContext(popupctxt);
                                 ctxt.failure(m);
-                            }}), qpl, 
+                            }}), qpl,
                             id, opendatakit.initialScreenPath,
                             opendatakit.getRefId(), false,
                             instanceMetadataKeyValueMap );
@@ -1264,7 +1264,7 @@ return {
     // Logging context
     baseContext : {
         loggingContextChain: [],
-        
+
         log : function( severity, method, detail ) {
             var now = new Date().getTime();
             var log_obj = {method: method, timestamp: now, detail: detail };
@@ -1278,7 +1278,7 @@ return {
             }
             var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail === null || detail === undefined) ? ")" : ") detail: " + detail);
             odkCommon.log(severity, dlog);
- 
+
         },
 
         success: function(){
@@ -1306,7 +1306,7 @@ return {
                     }, 10);
             }
         },
-        
+
         failure: function(m) {
             this.updateAndLogOutstandingContexts(this);
             this._log('E', 'failure! ' + (( m !== null && m !== undefined && m.message !== null && m.message !== undefined) ? m.message : ""));
@@ -1332,7 +1332,7 @@ return {
                     }, 10);
             }
         },
-        
+
         setChainedContext: function(ctxt) {
             // move our terminalCtxt to be the terminalCtxt of the ctxt being chained-to.
             if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
@@ -1345,7 +1345,7 @@ return {
             }
             cur.chainedCtxt.ctxt = ctxt;
         },
-        
+
         setTerminalContext: function(ctxt) {
             // find the termination of our chain...
             var cur = this;
@@ -1358,6 +1358,23 @@ return {
                 ctxt.setTerminalContext(cur.terminalCtxt.ctxt);
             }
             cur.terminalCtxt.ctxt = ctxt;
+        },
+
+        _logChains: function(depth) {
+            var str = '----';
+            var i;
+            for ( i = 0 ; i < depth ; ++i ) {
+                str += '--';
+            }
+            this._log('D',"_logChains " + str + " start chainedCtxt (" + depth + ")");
+            if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
+                this.chainedCtxt.ctxt._logChains(depth+1);
+            }
+            this._log('D',"_logChains " + str + " start terminalCtxt (" + depth + ")");
+            if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
+                this.terminalCtxt.ctxt._logChains(depth+1);
+            }
+            this._log('D',"_logChains " + str + " end level (" + depth + ")");
         },
 
         _log: function( severity, contextMsg ) {
@@ -1427,8 +1444,8 @@ return {
         that.outstandingContexts.push(count);
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, that.baseContext, 
-            { seq: count, 
+        var ctxt = $.extend({}, that.baseContext,
+            { seq: count,
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
@@ -1444,8 +1461,8 @@ return {
         that.outstandingContexts.push(count);
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, that.baseContext, 
-            { seq: count, 
+        var ctxt = $.extend({}, that.baseContext,
+            { seq: count,
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
@@ -1461,8 +1478,8 @@ return {
         that.outstandingContexts.push(count);
         var now = new Date().getTime();
         var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, that.baseContext, 
-            { seq: count, 
+        var ctxt = $.extend({}, that.baseContext,
+            { seq: count,
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
@@ -1498,7 +1515,7 @@ return {
                 detail += ' tgt: ';
                 evtActual = evt.target;
             }
-            
+
             if ( evtActual == window) {
                 detail += 'Window';
             } else {
@@ -1507,9 +1524,9 @@ return {
             }
             type = evt.type;
         }
-        
-        var ctxt = $.extend({}, that.baseContext, 
-            { seq: count, 
+
+        var ctxt = $.extend({}, that.baseContext,
+            { seq: count,
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
