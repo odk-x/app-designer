@@ -172,7 +172,7 @@
       },
       {
         "clause": "if",
-        "condition": "data('born') && data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()",
+        "condition": "data('born') && data('born').getDate() === now().getDate() && data('born').getMonth() === now().getMonth()",
         "_row_num": 27
       },
       {
@@ -1777,7 +1777,7 @@
           },
           {
             "clause": "if",
-            "condition": "data('born') && data('born').getDay() === now().getDay() && data('born').getMonth() === now().getMonth()",
+            "condition": "data('born') && data('born').getDate() === now().getDate() && data('born').getMonth() === now().getMonth()",
             "_row_num": 27,
             "__rowNum__": 26,
             "_token_type": "goto_label",
