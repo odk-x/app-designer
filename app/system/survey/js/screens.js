@@ -31,6 +31,11 @@ screenTypes.base = Backbone.View.extend({
     activePrompts: [],
     $focusPromptTest: null,
     focusScrollPos: null,
+    horizontalFocusScrollPos: null,
+	/**
+	 * DOM class for the pane holding horizonally-scrollable content
+	 */
+    screenOverflowClass: null,
     pendingCtxt: [],
     initialize: function(args) {
         var that = this;
@@ -89,11 +94,16 @@ screenTypes.base = Backbone.View.extend({
     debouncedReRender: _.debounce(function() {
         var that = this;
         that.focusScrollPos = null;
+        that.horizontalFocusScrollPos = null;
         that.$focusPromptTest = null;
         var ctxt = null;
 
         that.focusScrollPos = $(window).scrollTop();
+		if ( that.screenOverflowClass ) {
+			that.horizontalFocusScrollPos = $(that.screenOverflowClass).scrollLeft();
+		}
         odkCommon.log("D","screens.reRender.debouncedReRender: focusScrollPos = " + that.focusScrollPos);
+        odkCommon.log("D","screens.reRender.debouncedReRender: horizontalFocusScrollPos = " + that.horizontalFocusScrollPos);
 
         // Find the element in focus
         that.$focusPromptTest = $(':focus');
@@ -103,19 +113,28 @@ screenTypes.base = Backbone.View.extend({
 
         odkCommon.log("D","screens.reRender.debouncedReRender: pendingCtxtLength: " + that.pendingCtxt.length);
         if (that.pendingCtxt.length > 0) {
-            ctxt = that.pendingCtxt.pop();   
+			// we should at least have one on the queue.
+			// process the first queued action first
+            ctxt = that.pendingCtxt.shift();   
         } else {
-            odkCommon.log("W","screens.reRender.debouncedReRender: no pendingCtxts");
+            odkCommon.log("W","screens.reRender.debouncedReRender: no pendingCtxts!!!");
+			return;
         }
 
+		// and we want to then process all subsequent reRender requests that aren't the same as the one we already have...
+		var nextCtxt;
         while (that.pendingCtxt.length > 0) {
-            ctxt.setChainedContext(that.pendingCtxt.pop());
+			nextCtxt = that.pendingCtxt.shift();
+			if ( nextCtxt !== ctxt ) {
+				odkCommon.log("W","screens.reRender.debouncedReRender: chaining an extra pendingCtxt!!!");
+				ctxt.setChainedContext(nextCtxt);
+			}
         }
             
-        if (ctxt !== null) {
-            that._screenManager.refreshScreen(ctxt);
-        }
+		// and process the first reRender first...
+		that._screenManager.refreshScreen(ctxt);
     }, 500),
+	
    /**
      * Use the render context from the screenManager, but mix in 
      * any values explicitly defined for this screen.  Screen can
@@ -240,6 +259,10 @@ screenTypes.base = Backbone.View.extend({
             
         if (that.focusScrollPos !== null && that.focusScrollPos !== undefined) {
             $(window).scrollTop(that.focusScrollPos);
+        }
+            
+        if (that.screenOverflowClass && that.horizontalFocusScrollPos !== null && that.horizontalFocusScrollPos !== undefined) {
+            that.$(that.screenOverflowClass).scrollLeft(that.horizontalFocusScrollPos);
         }
     },
     recursiveUndelegateEvents: function() {
@@ -392,6 +415,14 @@ screenTypes.screen = screenTypes.base.extend({
             }
             $container.append(prompt.$el);
         });
+		
+		if ( that.screenOverflowClass ) {
+			var screenOverflow = that.$(that.screenOverflowClass);
+			if (screenOverflow.length > 0) {
+				screenOverflow.css("overflow-x", "scroll");
+			}
+		}
+
         ctxt.success();
     }
 });
@@ -445,6 +476,13 @@ screenTypes.columns_2 = screenTypes.base.extend({
         grid.append(col_a);
         grid.append(col_b);
         $container.append(grid);
+		
+		if ( that.screenOverflowClass ) {
+			var screenOverflow = that.$(that.screenOverflowClass);
+			if (screenOverflow.length > 0) {
+				screenOverflow.css("overflow-x", "scroll");
+			}
+		}
 
         ctxt.success();
     }
@@ -457,7 +495,6 @@ screenTypes.custom = screenTypes.base.extend({
     current: 0,
     step: 100,
     maximum: 0,
-    horizontalFocusScrollPos: null,
     render: function(ctxt) {
 
         var that = this;
@@ -511,39 +548,6 @@ screenTypes.custom = screenTypes.base.extend({
          
         ctxt.success();
     },
-    debouncedReRender: _.debounce(function() {
-        var that = this;
-        that.focusScrollPos = null;
-        that.horizontalFocusScrollPos = null;
-        that.$focusPromptTest = null;
-        var ctxt = null;
-
-        that.focusScrollPos = $(window).scrollTop();
-        that.horizontalFocusScrollPos = $(that.screenOverflowClass).scrollLeft();
-        odkCommon.log("D","screens.reRender.debouncedReRender: focusScrollPos = " + that.focusScrollPos);
-        odkCommon.log("D","screens.reRender.debouncedReRender: horizontalFocusScrollPos = " + that.horizontalFocusScrollPos);
-
-        // Find the element in focus
-        that.$focusPromptTest = $(':focus');
-        if (that.$focusPromptTest.length === 0) {
-            that.$focusPromptTest = null;
-        }
-
-        odkCommon.log("D","screens.reRender.debouncedReRender: pendingCtxtLength: " + that.pendingCtxt.length);
-        if (that.pendingCtxt.length > 0) {
-            ctxt = that.pendingCtxt.pop();   
-        } else {
-            odkCommon.log("W","screens.reRender.debouncedReRender: no pendingCtxts");
-        }
-
-        while (that.pendingCtxt.length > 0) {
-            ctxt.setChainedContext(that.pendingCtxt.pop());
-        }
-            
-        if (ctxt !== null) {
-            that._screenManager.refreshScreen(ctxt);
-        }
-    }, 500),
     afterRender: function() {
         var that = this;
         var setFocus = false;
