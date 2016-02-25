@@ -228,7 +228,7 @@ return Backbone.View.extend({
         // 
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
-        var bcBase = that.controller.newCallbackContext();
+        var bcBase = that.controller.newCallbackContext("screenManager:commonDrawScreen - buildRenderContext");
 
         bcBase.setTerminalContext(cleanupCtxt);
 
@@ -279,7 +279,7 @@ return Backbone.View.extend({
     },
     gotoNextScreen: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, "screenManager.gotoNextScreen");
         ctxt.log('D','screenManager.gotoNextScreen', 
             ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
@@ -313,7 +313,7 @@ return Backbone.View.extend({
     },
     gotoPreviousScreen: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, "screenManager.gotoPreviousScreen");
         ctxt.log('D','screenManager.gotoPreviousScreen', 
             ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
@@ -350,7 +350,7 @@ return Backbone.View.extend({
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, "screenManager.showContents");
         ctxt.log('D','screenManager.showContents', 
             ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
@@ -384,7 +384,7 @@ return Backbone.View.extend({
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, "screenManager.ignoreChanges");
         ctxt.log('D','screenManager.ignoreChanges', 
             ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
@@ -396,7 +396,7 @@ return Backbone.View.extend({
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, "screenManager.saveChanges");
         ctxt.log('D','screenManager.saveChanges', 
             ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.saveIncomplete($.extend({},ctxt,{success: function() {
@@ -408,7 +408,7 @@ return Backbone.View.extend({
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, "screenManager.finalizeChanges");
         ctxt.log('D','screenManager.finalizeChanges', 
             ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         that.controller.gotoFinalizeAndTerminateAction(ctxt);
@@ -448,7 +448,7 @@ return Backbone.View.extend({
     },
     setLanguage: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, "screenManager.setLanguage");
         ctxt.log('D','screenManager.setLanguage', 
             ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         //Closing popups is important,

@@ -135,7 +135,7 @@ verifyLoad('builder',
         'use strict';
         if (surveyJson === undefined || surveyJson === null) {
             ctxt.log('E','builder.buildSurvey', 'no formDef!');
-            ctxt.failure();
+            ctxt.failure({message: 'no formDef!'});
             return;
         }
         

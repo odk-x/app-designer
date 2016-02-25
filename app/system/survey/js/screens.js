@@ -127,7 +127,7 @@ screenTypes.base = Backbone.View.extend({
 			nextCtxt = that.pendingCtxt.shift();
 			if ( nextCtxt !== ctxt ) {
 				odkCommon.log("W","screens.reRender.debouncedReRender: chaining an extra pendingCtxt!!!");
-				ctxt.setChainedContext(nextCtxt);
+				ctxt.setTerminalContext(nextCtxt);
 			}
         }
             

@@ -163,8 +163,9 @@ promptTypes.base = Backbone.View.extend({
      * stopPropagation is used in the events map to disable swiping on various elements
      **/
     stopPropagation: function(evt){
-        var ctxt = this.controller.newContext(evt);
-        ctxt.log('D',"prompts." + this.type + ".stopPropagation", "px: " + this.promptIdx + " evt: " + evt);
+		var that = this;
+        var ctxt = that.controller.newContext(evt, that.type + ".stopPropagation");
+        ctxt.log('D',"prompts." + that.type + ".stopPropagation", "px: " + that.promptIdx + " evt: " + evt);
         evt.stopImmediatePropagation();
         ctxt.success();
     },
@@ -445,22 +446,22 @@ promptTypes.finalize = promptTypes.base.extend({
         ctxt.success();
     },
     saveIncomplete: function(evt) {
+        var that = this;
         evt.stopPropagation();
         evt.stopImmediatePropagation();
-        var that = this;
-        var ctxt = that.controller.newContext(evt);
-        ctxt.log('D',"prompts." + this.type + ".saveIncomplete", "px: " + this.promptIdx);
+        var ctxt = that.controller.newContext(evt, that.type + ".saveIncomplete");
+        ctxt.log('D',"prompts." + that.type + ".saveIncomplete", "px: " + that.promptIdx);
 
         that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
                 that.controller.leaveInstance(ctxt);
             }}));
     },
     saveFinal: function(evt) {
+        var that = this;
         evt.stopPropagation();
         evt.stopImmediatePropagation();
-        var that = this;
-        var ctxt = that.controller.newContext(evt);
-        ctxt.log('D',"prompts." + this.type + ".saveFinal", "px: " + this.promptIdx);
+        var ctxt = that.controller.newContext(evt, that.type + ".saveFinal");
+        ctxt.log('D',"prompts." + that.type + ".saveFinal", "px: " + that.promptIdx);
         that.controller.gotoFinalizeAndTerminateAction(ctxt);
     }
 });
@@ -548,22 +549,24 @@ promptTypes.instances = promptTypes.base.extend({
         }), model.table_id, selection, selectionArgs, displayElementName, orderBy);
     },
     createInstance: function(evt){
-      var ctxt = this.controller.newContext(evt);
-      evt.stopPropagation(true);
-      evt.stopImmediatePropagation();
-      ctxt.log('D',"prompts." + this.type + ".createInstance", "px: " + this.promptIdx);
-      this.controller.createInstance(ctxt);
+		var that = this;
+        var ctxt = that.controller.newContext(evt, that.type + ".createInstance");
+        evt.stopPropagation(true);
+        evt.stopImmediatePropagation();
+        ctxt.log('D',"prompts." + that.type + ".createInstance", "px: " + that.promptIdx);
+        that.controller.createInstance(ctxt);
     },
     openInstance: function(evt) {
-      var ctxt = this.controller.newContext(evt);
-      evt.stopPropagation(true);
-      evt.stopImmediatePropagation();
-      ctxt.log('D',"prompts." + this.type + ".openInstance", "px: " + this.promptIdx);
-      this.controller.openInstance(ctxt, $(evt.currentTarget).attr('id'));
+		var that = this;
+        var ctxt = that.controller.newContext(evt, that.type + ".openInstance");
+        evt.stopPropagation(true);
+        evt.stopImmediatePropagation();
+        ctxt.log('D',"prompts." + that.type + ".openInstance", "px: " + that.promptIdx);
+        that.controller.openInstance(ctxt, $(evt.currentTarget).attr('id'));
     },
     deleteInstance: function(evt){
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".deleteInstance");
         var model = opendatakit.getCurrentModel();
         ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
 
@@ -584,7 +587,7 @@ promptTypes.contents = promptTypes.base.extend({
     },
     selectContentsItem: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".selectContentsItem");
         ctxt.log('D',"prompts." + that.type + ".selectContentsItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.select-contents-item');
         $target.attr("label", function(index, oldPropertyValue){
@@ -784,7 +787,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }
 
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".openInstance");
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -840,7 +843,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             return null;
         }
 
-        var ctxt = that.controller.newContext(that._cachedEvent);
+        var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".handleConfirmation");
         var tableRow = $(that._cachedEvent.target).closest(".linkedTable tr");
         if (tableRow !== null && tableRow !== undefined)
             tableRow.remove();
@@ -860,10 +863,10 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         return null;
     },
     addInstance: function(evt) {
+        var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         var instanceId = opendatakit.genUUID();
-        var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".addInstance");
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -911,7 +914,7 @@ promptTypes.external_link = promptTypes.base.extend({
     },
     openLink: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".openLink");
         var fullUrl = that.url();
         var launchAction = that.launchAction;
         var expandedUrl;
@@ -976,7 +979,7 @@ promptTypes.user_branch = promptTypes.base.extend({
     },
     selectBranchItem: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".selectBranchItem");
         ctxt.log('D',"prompts." + that.type + ".selectBranchItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.branch-select-item');
         $target.attr("label", function(index, oldPropertyValue) {
@@ -1146,29 +1149,29 @@ promptTypes.select = promptTypes._linked_type.extend({
         return choiceList;
     },
     modification: function(evt) {
-        var ctxt = this.controller.newContext(evt);
-        ctxt.log('D',"prompts." + this.type + ".modification", "px: " + this.promptIdx + " val: " + $(evt.target).attr('value'));
-        var that = this;
-        if(this.withOther) {
+		var that = this;
+        var ctxt = that.controller.newContext(evt, that.type + ".modification");
+        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx + " val: " + $(evt.target).attr('value'));
+        if(that.withOther) {
             //This hack is needed to prevent rerendering
             //causing the other input to loose focus when clicked.
             if( $(evt.target).val() === 'other' &&
                 $(evt.target).prop('checked') &&
                 //The next two lines determine if the checkbox was already checked.
-                this.renderContext.other &&
-                this.renderContext.other.checked) {
-                ctxt.log('D',"prompts." + this.type + ".modification.withOther.hack", "px: " + this.promptIdx);
+                that.renderContext.other &&
+                that.renderContext.other.checked) {
+                ctxt.log('D',"prompts." + that.type + ".modification.withOther.hack", "px: " + that.promptIdx);
                 ctxt.success();
                 return;
             }
         }
-        if(this.appearance === 'grid') {
+        if(that.appearance === 'grid') {
             //Make selection more reponsive by providing visual feedback before
             //the template is re-rendered.
-            this.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
-            this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
+            that.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
+            that.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
         }
-        var formValue = (this.$('form').serializeArray());
+        var formValue = (that.$('form').serializeArray());
         that.setValueDeferredChange(that.generateSaveValue(formValue));
         that.updateRenderValue(formValue);
         that.reRender(ctxt);
@@ -1299,9 +1302,9 @@ promptTypes.select_one = promptTypes.select.extend({
 });
 promptTypes.select_one_integer = promptTypes.select_one.extend({
     modification: function(evt) {
-        var ctxt = this.controller.newContext(evt);
-        ctxt.log('D',"prompts." + this.type + ".modification", "px: " + this.promptIdx + " val: " + $(evt.target).attr('value'));
-        var that = this;
+		var that = this;
+        var ctxt = that.controller.newContext(evt, that.type + ".modification");
+        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx + " val: " + $(evt.target).attr('value'));
         if(this.withOther) {
             //This hack is needed to prevent rerendering
             //causing the other input to loose focus when clicked.
@@ -1512,7 +1515,7 @@ promptTypes.input_type = promptTypes.base.extend({
         odkCommon.log('D',"prompts." + that.type + ".focusout px: " + that.promptIdx);
                 
         if (that.modified === true) {
-            var ctxt = that.controller.newContext(evt);
+            var ctxt = that.controller.newContext(evt, that.type + ".loseFocus");
             that.reRender(ctxt);
         }
     },
@@ -1747,7 +1750,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 rerender = that.sameValue(ref, value);
             }
 
-            var ctxt = that.controller.newContext(evt);
+            var ctxt = that.controller.newContext(evt, that.type + ".modification");
             ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
 
             var renderContext = that.renderContext;
@@ -1854,7 +1857,7 @@ promptTypes.media = promptTypes.base.extend({
     },
     capture: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".capture");
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -1876,7 +1879,7 @@ promptTypes.media = promptTypes.base.extend({
     },
     choose: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".choose");
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -2025,7 +2028,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
     },
     launch: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".launch");
         var platInfo = opendatakit.getPlatformInfo();
         $('#block-ui').show().on('swipeleft swiperight click', function(evt) {
             evt.stopPropagation();
@@ -2167,25 +2170,25 @@ promptTypes.bargraph = promptTypes.base.extend({
     scale_y_up: function(evt){
         var that = this;
         that.vHeight = that.vHeight + (that.vHeight * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
         that.reRender(ctxt);
     },
     scale_y_down: function(evt){
         var that = this;
         that.vHeight = that.vHeight - (that.vHeight * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
         that.reRender(ctxt);
     },
     scale_x_up: function(evt){
         var that = this;
         that.vWidth = that.vWidth + (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
         that.reRender(ctxt);
     },
     scale_x_down: function(evt){
         var that = this;
         that.vWidth = that.vWidth - (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt);    
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");    
         that.reRender(ctxt);
     },
     configureRenderContext: function(ctxt) {
@@ -2341,25 +2344,25 @@ promptTypes.linegraph = promptTypes.base.extend({
     scale_y_up: function(evt){
         var that = this;
         that.vHeight = that.vHeight + (that.vHeight * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
         that.reRender(ctxt);
     },
     scale_y_down: function(evt){
         var that = this;
         that.vHeight = that.vHeight - (that.vHeight * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
         that.reRender(ctxt);
     },
     scale_x_up: function(evt){
         var that = this;
         that.vWidth = that.vWidth + (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
         that.reRender(ctxt);
     },
     scale_x_down: function(evt){
         var that = this;
         that.vWidth = that.vWidth - (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt);    
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");    
         that.reRender(ctxt);
     },
     configureRenderContext: function(ctxt) {
@@ -2579,7 +2582,7 @@ promptTypes.piechart = promptTypes.base.extend({
         that.vHeight = that.vHeight + (that.vHeight * 0.1);
         that.vWidth = that.vWidth + (that.vWidth * 0.1);
         that.vRadius = that.vRadius * 1.1;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_up");
         that.reRender(ctxt);
     },
     scale_down: function(evt){
@@ -2587,7 +2590,7 @@ promptTypes.piechart = promptTypes.base.extend({
         that.vHeight = that.vHeight - (that.vHeight * 0.1);
         that.vWidth = that.vWidth - (that.vWidth * 0.1);
         that.vRadius = that.vRadius * 0.9;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_down");
         that.reRender(ctxt);
     },
     configureRenderContext: function(ctxt) {
@@ -2714,25 +2717,25 @@ promptTypes.scatterplot = promptTypes.base.extend({
     scale_y_up: function(evt){
         var that = this;
         that.vHeight = that.vHeight + (that.vHeight * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
         that.reRender(ctxt);
     },
     scale_y_down: function(evt){
         var that = this;
         that.vHeight = that.vHeight - (that.vHeight * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
         that.reRender(ctxt);
     },
     scale_x_up: function(evt){
         var that = this;
         that.vWidth = that.vWidth + (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
         that.reRender(ctxt);
     },
     scale_x_down: function(evt){
         var that = this;
         that.vWidth = that.vWidth - (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt);    
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");    
         that.reRender(ctxt);
     },
     configureRenderContext: function(ctxt) {
@@ -2917,7 +2920,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
     acknLabel: translations.acknLabel,
     modification: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt);
+        var ctxt = that.controller.newContext(evt, that.type + ".modification");
         ctxt.log('D','acknowledge.modification', that.promptIdx);
         var oldValue = that.getValue();
         var acknowledged = (oldValue !== undefined && oldValue !== null) ? !oldValue : true;

@@ -619,16 +619,9 @@ return {
         }}));
 
     },
-    setScreenWithMessagePopup:function(ctxt, op, options, m) {
+    _synthesizePopupContext:function(opPath, m) {
         var that = this;
-        var opPath = op._section_name + "/" + op.operationIdx;
-        /**
-         * If we immediately display the message pop-up, it might be cancelled during the page rendering.
-         * Therefore, wait 500ms before attempting to show the message pop-up.
-         *
-         * Do this using a chained context...
-         */
-        var popupbasectxt = that.newCallbackContext();
+        var popupbasectxt = that.newCallbackContext("controller._synthesizePopupContext");
         var popupctxt = $.extend({}, popupbasectxt, {
             success: function() {
                 popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath);
@@ -636,8 +629,10 @@ return {
                     popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath + " message: " + m.message);
                     // schedule a timer to show the message after the page has rendered
                     that.screenManager.showScreenPopup(m);
+                    popupbasectxt.failure(m);
+                } else {
+                    popupbasectxt.success();
                 }
-                popupbasectxt.success();
             },
             failure: function(m2) {
                 popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup", "px: " + opPath);
@@ -649,20 +644,31 @@ return {
                 }
                 popupbasectxt.success();
         }});
-
-        ctxt.setChainedContext(popupctxt);
+        return popupctxt;
+    },
+    setScreenWithMessagePopup:function(ctxt, op, options, m) {
+        var that = this;
+        var opPath = op._section_name + "/" + op.operationIdx;
         /**
-         * And now display the requested screen.
+         * Display the requested screen.
          */
         that.setScreen( $.extend({}, ctxt, {
-                success: function() {
-                    that.screenManager.hideSpinnerOverlay();
-                    ctxt.success();
-                }, 
-                failure: function(m3) {
-                    that.screenManager.hideSpinnerOverlay();
-                    ctxt.failure(m3);
-                }}), op, options );
+            success: function() {
+                // add a terminal context to display the pop-up message
+                // -- this will be added after the afterRendering
+                // actions have been taken when the screen is rendered (since the 
+                // afterRendering step is invoking ctxt when it is complete.
+                ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+                ctxt.success();
+            },
+            failure: function(m2) {
+                // add a terminal context to display the pop-up message
+                // -- this will be added after the afterRendering
+                // actions have been taken when the screen is rendered (since the 
+                // afterRendering step is invoking ctxt when it is complete.
+                ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+                ctxt.failure(m2);
+        }}), op, options );
     },
     _doActionAt:function(ctxt, op, action, popStateOnFailure) {
         var that = this;
@@ -708,7 +714,7 @@ return {
      * used by Application Designer environment. see main.js redrawHook() function.
      */
     redrawHook: function() {
-        var ctxt = this.newCallbackContext();
+        var ctxt = this.newCallbackContext("controller.redrawHook");
         var path = this.getCurrentScreenPath();
         var operation = this.getOperation(path);
         this.setScreen(ctxt, operation);
@@ -735,6 +741,10 @@ return {
         if ( oldPath === newPath ) {
             // redrawing -- take whatever was already there...
             stateString = odkSurvey.getControllerState(opendatakit.getRefId());
+            if ( stateString === undefined ) {
+                ctxt.log('W',"undefined state returned from getControllerState!");
+                stateString = null;
+            }
         }
 
         if ( options.popHistoryOnExit ) {
@@ -1092,7 +1102,7 @@ return {
         parsequery.changeUrlHash(ctxt);
     },
     // dispatch actions coming from odkCommon (Java code).
-    delay: 400,
+    delay: 10,
     insideQueue: false,
     insideCallbackCtxt: false,
     queuedActionAvailableListener: function() {
@@ -1106,32 +1116,32 @@ return {
             }
             var action = JSON.parse(value);
             that.insideCallbackCtxt = true;
-            var baseCtxt = that.newCallbackContext();
+            var baseCtxt = that.newCallbackContext("controller.queuedActionAvailableListener-terminalRetrigger");
             var terminateCtxt = $.extend({},baseCtxt,{success: function() {
                     that.insideCallbackCtxt = false;
                     baseCtxt.success();
                     setTimeout(function() {
                         that.queuedActionAvailableListener();
                         }, that.delay);
-                }, failure: function() {
+                }, failure: function(m) {
                     that.insideCallbackCtxt = false;
-                    baseCtxt.failure();
+                    baseCtxt.failure(m);
                     setTimeout(function() {
                         that.queuedActionAvailableListener();
                         }, that.delay);
                 }});
 
-            var innerCtxt = that.newCallbackContext();
+            var innerCtxt = that.newCallbackContext("controller.queuedActionAvailableListener");
             var ctxt = $.extend({}, innerCtxt, {success: function() {
                 // TODO: do we want to do this on failure?
                 // on success or failure, remove the queued action
                 that.removeFirstQueuedAction();
                 innerCtxt.success();
-            }, failure: function() {
+            }, failure: function(m) {
                 // TODO: do we want to do pop up a toast on failure?
                 // on success or failure, remove the queued action
                 that.removeFirstQueuedAction();
-                innerCtxt.failure();
+                innerCtxt.failure(m);
             }});
             ctxt.setTerminalContext(terminateCtxt);
             if ( typeof action === 'string' || action instanceof String) {
@@ -1152,20 +1162,29 @@ return {
      */
     registerQueuedActionAvailableListener: function(ctxt, refId, m) {
         var that = this;
-        var baseCtxt = that.newCallbackContext();
+        // Declare a Terminal Context that:
+        // (1) registers the activity listener
+        //     (this will schedule one queuedActionAvailableListener() callback)
+        // (2) and signal the Java side that we are ready to process callbacks.
+        //     this can trigger any number of javascript:... callbacks.
+        //
+        // We invoke these as a terminal context to ensure that all chained
+        // actions have been handled before handling information and actions
+        // coming from the Java layer.
+        var baseCtxt = that.newCallbackContext("controller.registerQueuedActionAvailableListener");
         var terminateCtxt = $.extend({},baseCtxt,{success: function() {
                 odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
+                odkSurvey.frameworkHasLoaded(refId, true );
                 baseCtxt.success();
-            }, failure: function() {
+            }, failure: function(m) {
                 odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
-                baseCtxt.failure();
+                odkSurvey.frameworkHasLoaded(refId, false );
+                baseCtxt.failure(m);
             }});
         ctxt.setTerminalContext(terminateCtxt);
         if ( m === undefined || m === null ) {
-            odkSurvey.frameworkHasLoaded(refId, true );
             ctxt.success();
         } else {
-            odkSurvey.frameworkHasLoaded(refId, false );
             ctxt.failure(m);
         }
     },
@@ -1182,27 +1201,9 @@ return {
     },
     openInstance: function(ctxt, id, instanceMetadataKeyValueMap) {
         var that = this;
+        var opPath = that.getCurrentScreenPath();
 
         // NOTE: if the openInstance call failed, we should popup the error from that...
-        var popupbasectxt = that.newCallbackContext();
-        var popupctxt = $.extend({}, popupbasectxt, {
-            success: function() {
-                popupbasectxt.log('D',"Unexpected openInstance.popupSuccess");
-                popupbasectxt.success();
-            },
-            failure: function(m2) {
-                popupbasectxt.log('D',"openInstance.popupFailure");
-                if ( m2 && m2.message ) {
-                    popupbasectxt.log('D',"openInstance.popupFailure", " message: " + m2.message);
-                    // schedule a timer to show the mesage after the page has rendered
-                    setTimeout(function() {
-                        popupbasectxt.log('D',"openInstance.popupFailure.setTimeout");
-                        that.screenManager.showScreenPopup(m2);
-                    }, 500);
-                }
-                popupbasectxt.success();
-        }});
-
         database.applyDeferredChanges($.extend({},ctxt,{success:function() {
             that.reset($.extend({},ctxt,{success:function() {
                 if ( id === null || id === undefined ) {
@@ -1226,7 +1227,7 @@ return {
 
                 // this does not reset the RefId...
                 parsequery._prepAndSwitchUI( $.extend({},ctxt, {failure:function(m) {
-                                ctxt.setChainedContext(popupctxt);
+                                ctxt.setTerminalContext(that._synthesizePopupContext(opPath, null));
                                 ctxt.failure(m);
                             }}), qpl,
                             id, opendatakit.initialScreenPath,
@@ -1266,19 +1267,118 @@ return {
         loggingContextChain: [],
 
         log : function( severity, method, detail ) {
+            var that = this;
             var now = new Date().getTime();
             var log_obj = {method: method, timestamp: now, detail: detail };
-            if ( this.loggingContextChain.length === 0 ) {
-                this.loggingContextChain.push( log_obj );
+            if ( that.loggingContextChain.length === 0 ) {
+                that.loggingContextChain.push( log_obj );
             }
             // SpeedTracer Logging API
             var logger = window.console;
             if (logger && logger.timeStamp ) {
                 logger.timeStamp(method);
             }
-            var dlog =  method + " (seq: " + this.seq + " timestamp: " + now + ((detail === null || detail === undefined) ? ")" : ") detail: " + detail);
+            var dlog =  method + " (seq: " + that.seq + " [" + that.loggingLabel + "] timestamp: " + now + ((detail === null || detail === undefined) ? ")" : ") detail: " + detail);
             odkCommon.log(severity, dlog);
+        },
+        /**
+         * we have ended processing on 'this'. 
+         *
+         * Need to merge/resolve the chainedCtxt, terminalCtxt and inheritedTerminalCtxt chains.
+         *
+         * If we have no chainedCtxt, then:
+         *   - terminalCtxt adds to the end of inheritedTerminalCtxt
+         *   - move inheritedTerminalCtxt to chainedCtxt
+         *      
+         */
+        _spliceChains: function() {
+            var that = this;
 
+            var endOfInheritedTerminalCtxt;
+            var cur;
+            var next;
+            // move terminalCtxt chain onto end of inheritedTerminalCtxt
+            
+            // 1. find end of inheritedTerminalCtxt
+            endOfInheritedTerminalCtxt = that;
+            while ( endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== null &&
+                    endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== undefined ) {
+                endOfInheritedTerminalCtxt = endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt;
+            }
+            
+            // 2. chain down terminalCtxt, moving them one-at-a-time over to inheritedTerminalCtxt.
+            cur = that.terminalCtxt.ctxt;
+            while ( cur !== null && cur !== undefined ) {
+                next = cur.terminalCtxt.ctxt;
+                // add cur (terminalCtxt) to endOfInheritedTerminalCtxt
+                endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt = cur;
+                // clear its terminalCtxt value (the chain is being moved to inheritedTerminalCtxt)
+                cur.terminalCtxt.ctxt = null;
+                // advance down endOfInheritedTerminalCtxt until we are at the end
+                // (just in case cur had a chain of inheritedTerminalCtxt).
+                while ( endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== null &&
+                        endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== undefined ) {
+                    endOfInheritedTerminalCtxt = endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt;
+                }
+                // and move to the next terminalCtxt in the chain.
+                cur = next;
+            }
+			that.terminalCtxt.ctxt = null;
+            
+            /** 
+             * at this point:
+             *   terminalCtxt is empty
+             *   inheritedTerminalCtxt may have a chain of ctxts.
+             *   chainedCtxt may have a chain of ctxts.
+             */
+            var cctxt = that.chainedCtxt.ctxt;
+            if ( cctxt === null || cctxt === undefined ) {
+                /**
+                 * no chainedCtxt; the next ctxt to execute is the first
+                 * inheritedTerminalCtxt if it exists...
+                 */
+                that.chainedCtxt.ctxt = that.inheritedTerminalCtxt.ctxt;
+                that.inheritedTerminalCtxt.ctxt = null;
+                /**
+                 * at this point, 
+                 * the chain of terminalCtxt's are moved to the end of the inheritedTerminalCtxt chain.
+                 * (i.e., terminalCtxt chain is empty).
+                 * the first inheritedTerminalCtxt is moved to the chainedCtxt chain.
+                 * (i.e., inheritedTerminalCtxt chain is empty)
+                 * The chainedCtxt chain may or may not be empty. 
+                 * If it is empty, the execution chain is finished.
+                 * Otherwise, the caller should invoke success or failure on the chainedCtxt.
+                 */
+                return;
+            }
+            
+            // we have a chainedCtxt. 
+            
+            // prepend our inheritedTerminalCtxt chain onto the front of the
+            // chain under the first chainedCtxt.
+            
+            // 1. find end of inheritedTerminalCtxt
+            endOfInheritedTerminalCtxt = that;
+            while ( endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== null &&
+                    endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== undefined ) {
+                endOfInheritedTerminalCtxt = endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt;
+            }
+
+            // 2. prepend to first chainedCtxt's inheritedTerminalCtxt
+            endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt = cctxt.inheritedTerminalCtxt.ctxt;
+            cctxt.inheritedTerminalCtxt.ctxt = that.inheritedTerminalCtxt.ctxt;
+            that.inheritedTerminalCtxt.ctxt = null;
+
+            /**
+             * at this point, 
+             * the chain of terminalCtxt's were moved to the end of the inheritedTerminalCtxt chain.
+             * (i.e., terminalCtxt chain is empty).
+             * the inheritedTerminalCtxt chain is prepended to any inheritedTerminalCtxt of the 
+             * first ctxt in the chainedCtxt chain.
+             * (i.e., inheritedTerminalCtxt chain is empty)
+             * The chainedCtxt chain is not empty. 
+             * The caller should invoke success or failure on the chainedCtxt.
+             */
         },
 
         success: function(){
@@ -1294,13 +1394,13 @@ return {
                     this._log('T', e.stack);
                 }
             }
+            
+            this._logChains("success[before] ", 0);
+            this._spliceChains();
+            this._logChains("success[after-] ", 0);
+            
             if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
                 cctxt = this.chainedCtxt.ctxt;
-                setTimeout(function() {
-                    cctxt.success();
-                    }, 10);
-            } else if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
-                cctxt = this.terminalCtxt.ctxt;
                 setTimeout(function() {
                     cctxt.success();
                     }, 10);
@@ -1320,13 +1420,13 @@ return {
                     this._log('T', e.stack);
                 }
             }
+            
+            this._logChains("failure[before] ", 0);
+            this._spliceChains();
+            this._logChains("failure[after-] ", 0);
+            
             if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
                 cctxt = this.chainedCtxt.ctxt;
-                setTimeout(function() {
-                    cctxt.failure(m);
-                    }, 10);
-            } else if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
-                cctxt = this.terminalCtxt.ctxt;
                 setTimeout(function() {
                     cctxt.failure(m);
                     }, 10);
@@ -1334,11 +1434,7 @@ return {
         },
 
         setChainedContext: function(ctxt) {
-            // move our terminalCtxt to be the terminalCtxt of the ctxt being chained-to.
-            if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
-                ctxt.setTerminalContext(this.terminalCtxt.ctxt);
-                this.terminalCtxt.ctxt = null;
-            }
+            // append to our chainedCtxt chain.
             var cur = this;
             while ( cur.chainedCtxt.ctxt !== null && cur.chainedCtxt.ctxt !== undefined ) {
                 cur = cur.chainedCtxt.ctxt;
@@ -1347,15 +1443,10 @@ return {
         },
 
         setTerminalContext: function(ctxt) {
-            // find the termination of our chain...
+            // append to our terminalCtxt chain.
             var cur = this;
-            while ( cur.chainedCtxt.ctxt !== null && cur.chainedCtxt.ctxt !== undefined ) {
-                cur = cur.chainedCtxt.ctxt;
-            }
-            // if that already has a terminal context, insert this terminal
-            // context in front of it.
-            if ( cur.terminalCtxt.ctxt !== null && cur.terminalCtxt.ctxt !== undefined ) {
-                ctxt.setTerminalContext(cur.terminalCtxt.ctxt);
+            while ( cur.terminalCtxt.ctxt !== null && cur.terminalCtxt.ctxt !== undefined ) {
+                cur = cur.terminalCtxt.ctxt;
             }
             cur.terminalCtxt.ctxt = ctxt;
         },
@@ -1373,6 +1464,10 @@ return {
             this._log('D',"_logChains " + str + " start terminalCtxt (" + depth + ")");
             if ( this.terminalCtxt.ctxt !== null && this.terminalCtxt.ctxt !== undefined ) {
                 this.terminalCtxt.ctxt._logChains(depth+1);
+            }
+            this._log('D',"_logChains " + str + " start inheritedTerminalCtxt (" + depth + ")");
+            if ( this.inheritedTerminalCtxt.ctxt !== null && this.inheritedTerminalCtxt.ctxt !== undefined ) {
+                this.inheritedTerminalCtxt.ctxt._logChains(depth+1);
             }
             this._log('D',"_logChains " + str + " end level (" + depth + ")");
         },
@@ -1437,74 +1532,62 @@ return {
             }
         }
     },
-    newCallbackContext : function( actionHandlers ) {
+    newCallbackContext : function( loggingLabel ) {
         var that = this;
         that.eventCount = 1 + that.eventCount;
         var count = that.eventCount;
         that.outstandingContexts.push(count);
         var now = new Date().getTime();
-        var detail =  "seq: " + count + " timestamp: " + now;
         var ctxt = $.extend({}, that.baseContext,
             { seq: count,
+              loggingLabel: (loggingLabel ? loggingLabel : "callbackCtxt"),
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
               chainedCtxt: { ctxt: null },
-              terminalCtxt: { ctxt: null } }, actionHandlers );
+              terminalCtxt: { ctxt: null },
+              inheritedTerminalCtxt: { ctxt: null } });
+        var detail =  "seq: " + ctxt.seq + "[" + ctxt.loggingLabel + "] timestamp: " + now;
         ctxt.log('D','callback', detail);
         return ctxt;
     },
-    newFatalContext : function( actionHandlers ) {
+    newStartContext: function() {
         var that = this;
         that.eventCount = 1 + that.eventCount;
         var count = that.eventCount;
         that.outstandingContexts.push(count);
         var now = new Date().getTime();
-        var detail =  "seq: " + count + " timestamp: " + now;
         var ctxt = $.extend({}, that.baseContext,
             { seq: count,
+              loggingLabel: "controller.newStartContext",
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
               chainedCtxt: { ctxt: null },
-              terminalCtxt: { ctxt: null } }, actionHandlers );
-        ctxt.log('D','fatal_error', detail);
-        return ctxt;
-    },
-    newStartContext: function( actionHandlers ) {
-        var that = this;
-        that.eventCount = 1 + that.eventCount;
-        var count = that.eventCount;
-        that.outstandingContexts.push(count);
-        var now = new Date().getTime();
-        var detail =  "seq: " + count + " timestamp: " + now;
-        var ctxt = $.extend({}, that.baseContext,
-            { seq: count,
-              loggingContextChain: [],
-              getCurrentSeqNo:function() { return that.eventCount;},
-              updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
-              chainedCtxt: { ctxt: null },
-              terminalCtxt: { ctxt: null } }, actionHandlers );
+              terminalCtxt: { ctxt: null },
+              inheritedTerminalCtxt: { ctxt: null } } );
+        var detail =  "seq: " + ctxt.seq + "[" + ctxt.loggingLabel + "] timestamp: " + now;
         ctxt.log('D','startup', detail);
         return ctxt;
     },
-    newContext: function( evt, actionHandlers ) {
+    newContext: function( evt, loggingLabel ) {
         var that = this;
         that.eventCount = 1 + that.eventCount;
         var count = that.eventCount;
         that.outstandingContexts.push(count);
         var detail;
         var type;
+        loggingLabel = (loggingLabel ? loggingLabel : "callbackCtxt");
         if ( evt === null || evt === undefined ) {
             try {
                 throw new Error('dummy');
             } catch (e) {
                 odkCommon.log('E',"no event passed into newContext call: " + e.stack);
             }
-            detail =  "seq: " + count + " <no event>";
+            detail =  "seq: " + count + "[" + loggingLabel + "] <no event>";
             type = "<no event>";
         } else {
-            detail =  "seq: " + count + " timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid;
+            detail =  "seq: " + count + "[" + loggingLabel + "] timestamp: " + evt.timeStamp + " guid: " + evt.handleObj.guid;
 
             var evtActual;
             var evtTarget;
@@ -1527,11 +1610,13 @@ return {
 
         var ctxt = $.extend({}, that.baseContext,
             { seq: count,
+              loggingLabel: loggingLabel,
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
               chainedCtxt: { ctxt: null },
-              terminalCtxt: { ctxt: null } }, actionHandlers );
+              terminalCtxt: { ctxt: null },
+              inheritedTerminalCtxt: { ctxt: null } } );
         ctxt.log('D', type, detail);
         return ctxt;
     }
