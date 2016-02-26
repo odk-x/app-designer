@@ -1,5 +1,5 @@
 /**
-* circular dependency: 'controller' -- to avoid a circular dependency, 'controller' is passed 
+* circular dependency: 'controller' -- to avoid a circular dependency, 'controller' is passed
 * in during initialize() and stored in a member variable.
 *
 * Responsibilities:
@@ -9,7 +9,7 @@
 *    Displays the options dialog for changing languages and navigations.
 */
 define(['opendatakit','backbone','jquery', 'spinner', 'handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers', 'translations'], 
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers', 'translations'],
 function(opendatakit,  Backbone,  $,        spinner,   Handlebars,  screenTypes,  screenPopup, confirmationPopup,
      optionsPopup,                             languagePopup, _hh, translations) {
 'use strict';
@@ -71,9 +71,9 @@ return Backbone.View.extend({
 
         if (needToDelete) {
             for (var propName in that.events){
-                odkCommon.log('D',"screenManager.enableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);    
+                odkCommon.log('D',"screenManager.enableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);
             }
-            
+
             // Need to redelegate the swipe events here
             that.delegateEvents();
         }
@@ -88,15 +88,15 @@ return Backbone.View.extend({
         if (that.events.hasOwnProperty(swipeLeftEvent)) {
             delete that.events[swipeLeftEvent];
             needToDelete = true;
-        } 
-        
+        }
+
         if (that.events.hasOwnProperty(swipeRightEvent)) {
             delete that.events[swipeRightEvent];
             needToDelete = true;
-        } 
+        }
         if (needToDelete) {
             for (var propName in that.events){
-                odkCommon.log('D',"screenManager.disableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);    
+                odkCommon.log('D',"screenManager.disableSwipeNavigation - propName=" +  propName + " event value=" + that.events[propName]);
             }
             // Need to redelegate the swipe events here
             that.delegateEvents();
@@ -104,7 +104,7 @@ return Backbone.View.extend({
     },
     displayWaiting: function(ctxt){
         var that = this;
-        ctxt.log('D',"screenManager.displayWaiting", 
+        ctxt.log('D',"screenManager.displayWaiting",
             (that.activeScreen === null || that.activeScreen === undefined) ? "activeScreenIdx: null" : ("activeScreenIdx: " + that.activeScreen.promptIdx));
         var ScreenType = screenTypes['waiting'];
         var ExtendedScreenType = ScreenType.extend({});
@@ -133,7 +133,7 @@ return Backbone.View.extend({
      },
     setScreen: function(ctxt, screen, popScreenOnExit){
         var that = this;
-        
+
         // remember this parameter to support refreshScreen...
         that.popScreenOnExit = popScreenOnExit ? true : false;
 
@@ -148,8 +148,8 @@ return Backbone.View.extend({
             } else {
                 that.enableSwipeNavigation();
             }
-        } 
-        
+        }
+
         that.commonDrawScreen(ctxt, screen, transition);
     },
     commonDrawScreen: function(ctxt, screen, transition) {
@@ -182,14 +182,14 @@ return Backbone.View.extend({
             disableSwipeNavigation: (opendatakit.getSettingValue('disableSwipeNavigation') ? opendatakit.getSettingValue('disableSwipeNavigation') : false),
             hideNavigationButtonText: (opendatakit.getSettingValue('hideNavigationButtonText') ? opendatakit.getSettingValue('hideNavigationButtonText') : false)
         };
-        
+
         that.pageChangeActionLockout = true;
 
         // disable events on the outgoing screen
         if (that.activeScreen) {
             that.activeScreen.recursiveUndelegateEvents();
         }
-        
+
         //If the screen is slow to activate display a loading dialog.
         //This is going to be useful if the screen gets data from a remote source.
         var activateTimeout = window.setTimeout(function(){
@@ -203,7 +203,7 @@ return Backbone.View.extend({
                 ctxt.log('D', "screenManager.commonDrawScreen.ultimate.success (via terminalContext)");
                 if ( that.activeScreen ) {
                     // TODO: unclear what proper action should be for a failure
-                    // during afterRender(). For now, the display ends up in an 
+                    // during afterRender(). For now, the display ends up in an
                     // inconsistent state.
                     that.activeScreen.afterRender();
                     that.activeScreen.recursiveDelegateEvents();
@@ -220,12 +220,12 @@ return Backbone.View.extend({
                 ctxt.failure(m);
             }});
 
-        //A better way to do this might be to pass a controller interface object to 
+        //A better way to do this might be to pass a controller interface object to
         //buildRenderContext that can trigger screen refreshes, as well as goto other screens.
         //(We would not allow screens to access the controller directly).
         //When the screen changes, we could disconnect the interface to prevent the old
         //screens from messing with the current screen.
-        // 
+        //
         // pass in 'render': true to indicate that we will be rendering upon successful
         // completion.
         var bcBase = that.controller.newCallbackContext("screenManager:commonDrawScreen - buildRenderContext");
@@ -235,9 +235,9 @@ return Backbone.View.extend({
         // In case there was a modal popup active before
         // the drawing this screen get rid of the modal-backdrop
         that.removeBootstrapModalBackdrop();
-        
+
         screen.buildRenderContext($.extend({render:true},bcBase,{success:function(){
-        
+
                 bcBase.log('D', "screenManager.commonDrawScreen.screen.buildRenderContext.success");
                 // patch up navigation settings for the screen...
                 // if neither forward or backward navigation is enabled, disable all navigations.
@@ -246,7 +246,7 @@ return Backbone.View.extend({
                     screen._renderContext.enableForwardNavigation = false;
                     screen._renderContext.enableNavigation = false;
                 }
-                
+
                 if( !screen._renderContext.enableBackNavigation &&
                     !screen._renderContext.enableForwardNavigation ) {
                     //If we try to render a jqm nav without buttons we get an error
@@ -257,7 +257,7 @@ return Backbone.View.extend({
                 // render screen
                 bcBase.log('D', "screenManager.commonDrawScreen.screen.before.render");
                 screen.render($.extend({},bcBase,{success: function() {
-                    
+
                     bcBase.log('D', "screenManager.commonDrawScreen.screen.render.success");
                     // find the previous screen...
                     var oldCurrentEl = that.$el.find(".odk-page");
@@ -304,10 +304,10 @@ return Backbone.View.extend({
         }
         that.pageChangeActionLockout = true;
         that.controller.gotoNextScreen($.extend({},ctxt,{success:function(){
-                    that.pageChangeActionLockout = false; 
+                    that.pageChangeActionLockout = false;
                     ctxt.success();
                 },failure:function(m){
-                    that.pageChangeActionLockout = false; 
+                    that.pageChangeActionLockout = false;
                     ctxt.failure(m);
                 }}));
     },
@@ -337,11 +337,11 @@ return Backbone.View.extend({
             return;
         }
         that.pageChangeActionLockout = true;
-        that.controller.gotoPreviousScreen($.extend({},ctxt,{success:function(){ 
-                    that.pageChangeActionLockout = false; 
+        that.controller.gotoPreviousScreen($.extend({},ctxt,{success:function(){
+                    that.pageChangeActionLockout = false;
                     ctxt.success();
                 },failure:function(m){
-                    that.pageChangeActionLockout = false; 
+                    that.pageChangeActionLockout = false;
                     ctxt.failure(m);
                 }}));
     },
@@ -363,12 +363,14 @@ return Backbone.View.extend({
         }
         that.eventTimeStamp = evt.timeStamp;
         that.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
+
         if(that.pageChangeActionLockout) {
             ctxt.log('D','screenManager.showContents.ignoreDisabled');
             ctxt.success();
             evt.preventDefault();
             return;
         }
+
         that.pageChangeActionLockout = true;
         that.controller.gotoContentsScreen($.extend({},ctxt,{success:function(){
                     that.pageChangeActionLockout = false; 
@@ -442,7 +444,7 @@ return Backbone.View.extend({
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
         that.activeScreen.$el.append(that.languageTemplate(rc)).trigger('pagecreate');
-        //$('#languagePopup').enhanceWithin().popup(); 
+        //$('#languagePopup').enhanceWithin().popup();
         //$( "#languagePopup" ).popup( "open" );
         $( "#languagePopup" ).modal();
     },

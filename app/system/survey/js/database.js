@@ -19,17 +19,17 @@ return {
         // passing in the table definition. That definition
         // does not have any instance or session variable
         // data associated with it.
-        //     
+        //
         var that = this;
-                
+
         if ( table_id === 'framework' ) {
             var tlo = {data: {},      // dataTable instance data values
                 instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                 metadata: {},         // see definition in opendatakit.js
                 dataTableModel: formDef.specification.dataTableModel, // inverted and extended formDef.model for representing data store
-                formDef: formDef, 
-                formPath: formPath, 
-                instanceId: null, 
+                formDef: formDef,
+                formPath: formPath,
+                instanceId: null,
                 table_id: table_id
                 };
             tlo.metadata.tableId = table_id;
@@ -55,20 +55,20 @@ return {
             ctxt.success(tlo);
         } else {
             var impossibleRowId = opendatakit.genUUID();
-            odkData.getMostRecentRow(table_id, impossibleRowId, 
+            odkData.getMostRecentRow(table_id, impossibleRowId,
                 function(reqData) {
                     var tlo = {data: {},      // dataTable instance data values
                         instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                         metadata: {},         // see definition in opendatakit.js
                         dataTableModel: formDef.specification.dataTableModel, // inverted and extended formDef.model for representing data store
-                        formDef: formDef, 
-                        formPath: formPath, 
-                        instanceId: null, 
+                        formDef: formDef,
+                        formPath: formPath,
+                        instanceId: null,
                         table_id: table_id
                         };
                     tlo.metadata = reqData.metadata;
                     ctxt.success(tlo);
-                }, 
+                },
                 function (errorMsg) {
                     ctxt.failure({message: errorMsg});
                 });
@@ -81,14 +81,14 @@ return {
         var jsonType;
         var dbKey;
         var pendingChangeEntry;
-        
+
         // if requested, log a warning if not all pending changes have
         // been applied. This indicates that the UI is faster than the
         // db layer. It could potentially lead to loss of these updates.
         var keys = [];
 
         if ( ! $.isEmptyObject(that.pendingChanges)) {
-            
+
             // apply any remaining pendingChanges
             // these are already in the odkData interface format.
             // we need to parse them back into their representation formats.
@@ -108,7 +108,7 @@ return {
 
             if ( logWarning ) {
                 // log that we have a non-empty pendingChanges key-value set.
-                odkCommon.log('W','_reconstructModelData: pendingChanges is not empty! ' + 
+                odkCommon.log('W','_reconstructModelData: pendingChanges is not empty! ' +
                     model.table_id + ' _id: ' + instanceId + ' keys: ' + JSON.stringify(keys));
             }
         }
@@ -122,9 +122,9 @@ return {
         var jsValue;
         var value;
         var dbKey;
-        
+
         if ( reqData === null || reqData === undefined || reqData.getCount() === 0 ) {
-            
+
             // clear any row data, but retain session variable values.
 
             // clear the pendingChanges, since no row exists.
@@ -137,7 +137,7 @@ return {
                     elementPath = jsonType.elementPath;
                     if ( jsonType.isSessionVariable ) {
                         jsValue = odkCommon.getSessionVariable(elementPath );
-                        value = (jsValue === null || jsValue === undefined) ? null : 
+                        value = (jsValue === null || jsValue === undefined) ? null :
                                 databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
                         updates[dbKey] = { elementPath: elementPath, value: value };
                     }
@@ -148,17 +148,17 @@ return {
             model.data = {};
             model.instanceMetadata = {};
             databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
-            
-            odkCommon.log('W','_reconstructModelData: no row returned -- clearing cached values: ' + 
+
+            odkCommon.log('W','_reconstructModelData: no row returned -- clearing cached values: ' +
                             model.table_id);
             return;
         }
-        
+
         if ( reqData.getCount() > 1 ) {
             // this is a serious error -- stall the ODKSurvey webkit and throw an error when this happens.
             throw new Error("_reconstructModelData: multiple rows were returned -- cannot process");
         }
-        
+
         // otherwise, we have a record...
         // read data from the row and
         // read any session variables into model.data
@@ -168,7 +168,7 @@ return {
                 elementPath = jsonType.elementPath;
                 if ( jsonType.isSessionVariable ) {
                     jsValue = odkCommon.getSessionVariable(elementPath );
-                    value = (jsValue === null || jsValue === undefined) ? null : 
+                    value = (jsValue === null || jsValue === undefined) ? null :
                             databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
                 } else {
                     value = reqData.getData(0, dbKey);
@@ -178,7 +178,7 @@ return {
                 updates[dbKey] = { elementPath: elementPath, value: value };
             }
         }
-        
+
         // if the pendingChanges are reflected in the updates[].value, then remove them
         var pendingChangeEntry, currentEntry;
         var keysToRemove = [];
@@ -197,7 +197,7 @@ return {
                 }
             }
         }
-        
+
         // do the removal outside the loop so that the for() iterator cannot be affected.
         while ( keysToRemove.length > 0 ) {
             dbKey = keysToRemove.shift();
@@ -217,7 +217,7 @@ return {
      */
     _initializeInstanceWithPendingChanges:function(ctxt, model, formId, instanceId, accumulatedChanges ) {
         var that = this;
-        
+
         var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, accumulatedChanges, formId);
         odkData.addCheckpoint(model.table_id, simpleMap, instanceId,
             function(reqData) {
@@ -227,12 +227,12 @@ return {
                 } else {
                     ctxt.success();
                 }
-            }, 
+            },
             function(errorMsg) {
                 ctxt.failure({message: errorMsg});
             });
     },
-    
+
     initializeInstance:function(ctxt, model, formId, instanceId, sameInstance, instanceMetadataKeyValueMap) {
         var that = this;
 
@@ -244,11 +244,11 @@ return {
         ///////////////////////////////////////////////////////////////////////////////////////////
         // If instanceId is null:
         //
-        // If sameInstance is true, initialize all non-session variable values to null and reads 
+        // If sameInstance is true, initialize all non-session variable values to null and reads
         // the session values into the model. The instanceMetadataKeyValueMap is ignored.
         //
         // Otherwise, initialize all non-session variable values to null and all session variable
-        // values to their defaults then apply the instanceMetadataKeyValueMap for any session 
+        // values to their defaults then apply the instanceMetadataKeyValueMap for any session
         // variables to the data set (any settings for data table content are ignored).
         //
         if ( instanceId === null || instanceId === undefined || (model.table_id === "framework") ) {
@@ -293,24 +293,24 @@ return {
         //
         // If sameInstance is true:
         //
-        // Read the instance from the database. If the database does not contain an instance, 
+        // Read the instance from the database. If the database does not contain an instance,
         // then it is an error. Otherwise, it initializes the model with the content from the row and
         // the session values. The instanceMetadataKeyValueMap is ignored.
         //
         // If sameInstance is false:
         //
-        // If the row does not exist, construct the default values and apply the 
+        // If the row does not exist, construct the default values and apply the
         // updates from the instanceMetadataKeyValueMap then write a checkpoint row with that content.
         //
         // If the row exists, then read it in and apply the updates from the
-        // instanceMetadataKeyValueMap and write a checkpoint row with that revised content. 
+        // instanceMetadataKeyValueMap and write a checkpoint row with that revised content.
         // If there were no updates, then no checkpoint row is written.
         //
 
         //
-        // Otherwise, after reading in the row, the 
+        // Otherwise, after reading in the row, the
         // TODO: confirm semantics
-        // If this is always creating a new row, we can just call addRow() and rely on the user to never 
+        // If this is always creating a new row, we can just call addRow() and rely on the user to never
         // confound things by re-using an instanceId.
         //
         // Otherwise, we first try to read the entry:
@@ -319,16 +319,16 @@ return {
         //    UserTable t <= DataIf.addRow(modle.table_id, initialMetadataValueMap, instanceId, postprocessorcb);
         // }
         // In post-processor, update model with t.
-        // 
+        //
         // This returns the last checkpoint row for an instanceId, or the row itself if there is no checkpoint, or zero-length UserTable if the row does not exist.
-        odkData.getMostRecentRow(model.table_id, instanceId, 
+        odkData.getMostRecentRow(model.table_id, instanceId,
             function(reqData) {
-                
+
                 var elementPath;
                 var jsonType;
                 var value;
                 var accumulatedChanges = {};
-                
+
                 if ( reqData.getCount() > 1 ) {
                     ctxt.failure({message: "multiple rows!"});
                     return;
@@ -337,11 +337,11 @@ return {
                         ctxt.failure({message: "row not found!"});
                         return;
                     }
-                    
+
                     // we are initializing the instance -- discard all pending changes
                     // since those are presumably for some other instanceId.
                     that.pendingChanges = {};
-                    
+
                     // apply defaults
                     for ( elementPath in model.dataTableModel ) {
                         jsonType = model.dataTableModel[elementPath];
@@ -357,7 +357,7 @@ return {
                         value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
                         databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
                     }
-                    
+
                     if ( $.isEmptyObject(accumulatedChanges)) {
                         ctxt.success();
                     } else {
@@ -371,7 +371,7 @@ return {
                         // since those are presumably for some other instanceId.
                         that.pendingChanges = {};
                     }
-                    
+
                     that._reconstructModelData(model, reqData);
 
                     // and now apply any changes from the instanceMetadataKeyValueMap
@@ -385,7 +385,7 @@ return {
                         }
                         databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
                     }
-                    
+
                     if ( $.isEmptyObject(accumulatedChanges)) {
                         ctxt.success();
                     } else {
@@ -400,10 +400,10 @@ return {
     ///////////////////////////////////////////////////
     // Low-level APIs mapped to DataIf
     ///////////////////////////////////////////////////
-    
+
     get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displayElementName, orderBy) {
         var that = this;
-        // 
+        //
         // UserTable lt = DataIf.query( dbTableName, selection, selectionArgs, null, null, orderBy, "ASC", false, postprocessorcb
         //
         // And, on the postprocessorcb success callback:
@@ -427,9 +427,9 @@ return {
             ctxt.success([]);
             return;
         }
-        
+
         var ss = that._selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
-        odkData.arbitraryQuery(dbTableName, ss.stmt, ss.bind, 
+        odkData.arbitraryQuery(dbTableName, ss.stmt, ss.bind,
             function(reqData) {
                 var instanceList = [];
                 for (var rowCntr = 0; rowCntr < reqData.getCount(); rowCntr++) {
@@ -449,74 +449,74 @@ return {
                 ctxt.success(instanceList);
             }, function(errorMsg) { ctxt.failure({message: errorMsg}); });
     },
-    
+
     save_all_changes:function(ctxt, model, formId, instanceId, asComplete) {
         var that = this;
         var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, that.pendingChanges, formId);
-		
-		// special case -- if this is the framework, then don't interact with
-		// odkData since there is no backing table.
-		if ( model.table_id === "framework" ) {
-			that._reconstructModelData(model, null);
-			ctxt.success();
-			return;
-		}
+
+        // special case -- if this is the framework, then don't interact with
+        // odkData since there is no backing table.
+        if ( model.table_id === "framework" ) {
+            that._reconstructModelData(model, null);
+            ctxt.success();
+            return;
+        }
 
         if ( asComplete ) {
-            odkData.saveCheckpointAsComplete(model.table_id, simpleMap, instanceId, 
-                function(reqData) { 
+            odkData.saveCheckpointAsComplete(model.table_id, simpleMap, instanceId,
+                function(reqData) {
                     that._reconstructModelData(model, reqData);
                     if (reqData.getCount() !== 1) {
                         ctxt.failure({message: "unable to save pending changes!"});
                     } else {
                         ctxt.success();
                     }
-                }, 
+                },
                 function(errorMsg) { ctxt.failure({message: errorMsg}); });
         } else {
-            odkData.saveCheckpointAsIncomplete(model.table_id, simpleMap, instanceId, 
-                function(reqData) { 
+            odkData.saveCheckpointAsIncomplete(model.table_id, simpleMap, instanceId,
+                function(reqData) {
                     that._reconstructModelData(model, reqData);
                     if (reqData.getCount() !== 1) {
                         ctxt.failure({message: "unable to save pending changes!"});
                     } else {
                         ctxt.success();
                     }
-                }, 
+                },
                 function(errorMsg) { ctxt.failure({message: errorMsg}); });
         }
     },
-    
+
     ignore_all_changes:function(ctxt, model, formId, instanceId) {
         var that = this;
         // clear the pending changes, since we are ignoring changes
         that.pendingChanges = {};
-		
-		// special case -- if this is the framework, then don't interact with
-		// odkData since there is no backing table.
-		if ( model.table_id === "framework" ) {
-			that._reconstructModelData(model, null);
-			ctxt.success();
-			return;
-		}
-		
-        odkData.deleteAllCheckpoints(model.table_id, instanceId, 
-                function(reqData) { 
+
+        // special case -- if this is the framework, then don't interact with
+        // odkData since there is no backing table.
+        if ( model.table_id === "framework" ) {
+            that._reconstructModelData(model, null);
+            ctxt.success();
+            return;
+        }
+
+        odkData.deleteAllCheckpoints(model.table_id, instanceId,
+                function(reqData) {
                     // clear the pending changes, since we are ignoring changes
                     that.pendingChanges = {};
                     that._reconstructModelData(model, reqData);
-					ctxt.success();
-                }, 
+                    ctxt.success();
+                },
                 function(errorMsg) {
-					ctxt.failure({message: errorMsg}); 
-				});
+                    ctxt.failure({message: errorMsg});
+                });
     },
-    
+
     delete_checkpoints_and_row:function(ctxt, model, instanceId) {
         var that = this;
         // clear the pending changes, since we are discarding the row
         that.pendingChanges = {};
-        odkData.deleteRow( model.table_id, null, instanceId, 
+        odkData.deleteRow( model.table_id, null, instanceId,
                             function(reqData) {
                                 // clear the pending changes, since we are ignoring changes
                                 that.pendingChanges = {};
@@ -526,15 +526,15 @@ return {
                                 } else {
                                     ctxt.success();
                                 }
-                            }, 
+                            },
                             function(errorMsg) { ctxt.failure({message: errorMsg, rolledBack: true }); });
 
     },
-    
+
     // almost primitive...
     get_all_data:function(ctxt, model, instanceId) {
         var that = this;
-        odkData.getMostRecentRow(model.table_id, instanceId, 
+        odkData.getMostRecentRow(model.table_id, instanceId,
             function(reqData) {
                 that._reconstructModelData(model, reqData);
                 if ( reqData.getCount() != 1 ) {
@@ -545,7 +545,7 @@ return {
             },
             function(errorMsg) { ctxt.failure({message: errorMsg}); });
     },
-    
+
     /**
      * Not expected to be called expect internally
      *
@@ -554,7 +554,7 @@ return {
     _add_checkpoint: function(ctxt, model, formId, instanceId, changeMap) {
         var that = this;
         var simpleMap = that._createSimpleMapPendingChanges(model.dataTableModel, changeMap, formId);
-        odkData.addCheckpoint(model.table_id, simpleMap, instanceId, 
+        odkData.addCheckpoint(model.table_id, simpleMap, instanceId,
             function(reqData) {
                 that._reconstructModelData(model, reqData);
                 if ( reqData.getCount() != 1 ) {
@@ -562,7 +562,7 @@ return {
                 } else {
                     ctxt.success();
                 }
-            }, 
+            },
             function(errorMsg) {
                 ctxt.failure({message: errorMsg});
             });
@@ -570,9 +570,9 @@ return {
 
     /**
      * Implement pending changes at this layer
-     */  
+     */
     pendingChanges: {},
-    
+
     /**
      * used by odkData interface to pass the simple columnNameValueMap of fields to change
      *
@@ -597,7 +597,7 @@ return {
     /**
      * Requires opendatakit.getCurrentModel()
      *
-     * updates that model and records the field changes in the 
+     * updates that model and records the field changes in the
      * this.pendingChanges
      */
     setValueDeferredChange:function( name, value ) {
@@ -613,7 +613,7 @@ return {
     /**
      * Requires opendatakit.getCurrentModel()
      *
-     * updates the database with any accumulated changes in the 
+     * updates the database with any accumulated changes in the
      * this.pendingChanges object and resets that object.
      */
     applyDeferredChanges:function(ctxt) {
@@ -649,7 +649,7 @@ return {
      * Requires opendatakit.getCurrentModel()
      *
      * updates the database with the specified metadata change
-     * and applies any accumulated changes in the 
+     * and applies any accumulated changes in the
      * this.pendingChanges object and resets that object.
      */
     setInstanceMetaData:function(ctxt, name, value) {
@@ -661,7 +661,7 @@ return {
         var dbColumnName;
         var f;
         var defn;
-        
+
         for ( f in model.dataTableModel ) {
           defn = model.dataTableModel[f];
           if (  defn.elementSet === 'instanceMetadata' &&
@@ -703,7 +703,7 @@ return {
             model.instanceMetadata = tlo.instanceMetadata;
             model.data = tlo.data;
             // clear pendingChanges
-            // we are switching to a different table, so 
+            // we are switching to a different table, so
             // any queued up pending changes must be for
             // some other table.
             that.pendingChanges = {};
@@ -764,19 +764,19 @@ return {
         var args = ['deleted'];
         if ( selection === null || selection === undefined ) {
             return {
-                    stmt : 'select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
+                    stmt : 'select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' +
                         'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName +
                                '" as V where V._id=T._id)' +
                             ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
-                    bind : args  
+                    bind : args
                 };
         } else {
             if (selectionArgs !== null && selectionArgs !== undefined ) {
                 args = args.concat(selectionArgs);
             }
             return {
-                    stmt :  'select * from (select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' + 
-                        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + 
+                    stmt :  'select * from (select * from "' + dbTableName + '" as T where (T._sync_state is null or T._sync_state != ?) and ' +
+                        'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName +
                             '" as V where V._id=T._id)) where ' + selection +
                             ((orderBy === undefined || orderBy === null) ? '' : ' order by ' + orderBy),
                     bind : args

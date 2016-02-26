@@ -656,7 +656,7 @@ return {
             success: function() {
                 // add a terminal context to display the pop-up message
                 // -- this will be added after the afterRendering
-                // actions have been taken when the screen is rendered (since the 
+                // actions have been taken when the screen is rendered (since the
                 // afterRendering step is invoking ctxt when it is complete.
                 ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
                 ctxt.success();
@@ -664,7 +664,7 @@ return {
             failure: function(m2) {
                 // add a terminal context to display the pop-up message
                 // -- this will be added after the afterRendering
-                // actions have been taken when the screen is rendered (since the 
+                // actions have been taken when the screen is rendered (since the
                 // afterRendering step is invoking ctxt when it is complete.
                 ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
                 ctxt.failure(m2);
@@ -1102,7 +1102,7 @@ return {
         parsequery.changeUrlHash(ctxt);
     },
     // dispatch actions coming from odkCommon (Java code).
-    delay: 10,
+    delay: 5,
     insideQueue: false,
     insideCallbackCtxt: false,
     queuedActionAvailableListener: function() {
@@ -1282,14 +1282,14 @@ return {
             odkCommon.log(severity, dlog);
         },
         /**
-         * we have ended processing on 'this'. 
+         * we have ended processing on 'this'.
          *
          * Need to merge/resolve the chainedCtxt, terminalCtxt and inheritedTerminalCtxt chains.
          *
          * If we have no chainedCtxt, then:
          *   - terminalCtxt adds to the end of inheritedTerminalCtxt
          *   - move inheritedTerminalCtxt to chainedCtxt
-         *      
+         *
          */
         _spliceChains: function() {
             var that = this;
@@ -1298,14 +1298,14 @@ return {
             var cur;
             var next;
             // move terminalCtxt chain onto end of inheritedTerminalCtxt
-            
+
             // 1. find end of inheritedTerminalCtxt
             endOfInheritedTerminalCtxt = that;
             while ( endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== null &&
                     endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== undefined ) {
                 endOfInheritedTerminalCtxt = endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt;
             }
-            
+
             // 2. chain down terminalCtxt, moving them one-at-a-time over to inheritedTerminalCtxt.
             cur = that.terminalCtxt.ctxt;
             while ( cur !== null && cur !== undefined ) {
@@ -1323,9 +1323,9 @@ return {
                 // and move to the next terminalCtxt in the chain.
                 cur = next;
             }
-			that.terminalCtxt.ctxt = null;
-            
-            /** 
+            that.terminalCtxt.ctxt = null;
+
+            /**
              * at this point:
              *   terminalCtxt is empty
              *   inheritedTerminalCtxt may have a chain of ctxts.
@@ -1340,23 +1340,23 @@ return {
                 that.chainedCtxt.ctxt = that.inheritedTerminalCtxt.ctxt;
                 that.inheritedTerminalCtxt.ctxt = null;
                 /**
-                 * at this point, 
+                 * at this point,
                  * the chain of terminalCtxt's are moved to the end of the inheritedTerminalCtxt chain.
                  * (i.e., terminalCtxt chain is empty).
                  * the first inheritedTerminalCtxt is moved to the chainedCtxt chain.
                  * (i.e., inheritedTerminalCtxt chain is empty)
-                 * The chainedCtxt chain may or may not be empty. 
+                 * The chainedCtxt chain may or may not be empty.
                  * If it is empty, the execution chain is finished.
                  * Otherwise, the caller should invoke success or failure on the chainedCtxt.
                  */
                 return;
             }
-            
-            // we have a chainedCtxt. 
-            
+
+            // we have a chainedCtxt.
+
             // prepend our inheritedTerminalCtxt chain onto the front of the
             // chain under the first chainedCtxt.
-            
+
             // 1. find end of inheritedTerminalCtxt
             endOfInheritedTerminalCtxt = that;
             while ( endOfInheritedTerminalCtxt.inheritedTerminalCtxt.ctxt !== null &&
@@ -1370,13 +1370,13 @@ return {
             that.inheritedTerminalCtxt.ctxt = null;
 
             /**
-             * at this point, 
+             * at this point,
              * the chain of terminalCtxt's were moved to the end of the inheritedTerminalCtxt chain.
              * (i.e., terminalCtxt chain is empty).
-             * the inheritedTerminalCtxt chain is prepended to any inheritedTerminalCtxt of the 
+             * the inheritedTerminalCtxt chain is prepended to any inheritedTerminalCtxt of the
              * first ctxt in the chainedCtxt chain.
              * (i.e., inheritedTerminalCtxt chain is empty)
-             * The chainedCtxt chain is not empty. 
+             * The chainedCtxt chain is not empty.
              * The caller should invoke success or failure on the chainedCtxt.
              */
         },
@@ -1394,11 +1394,11 @@ return {
                     this._log('T', e.stack);
                 }
             }
-            
+
             this._logChains("success[before] ", 0);
             this._spliceChains();
             this._logChains("success[after-] ", 0);
-            
+
             if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
                 cctxt = this.chainedCtxt.ctxt;
                 setTimeout(function() {
@@ -1420,11 +1420,11 @@ return {
                     this._log('T', e.stack);
                 }
             }
-            
+
             this._logChains("failure[before] ", 0);
             this._spliceChains();
             this._logChains("failure[after-] ", 0);
-            
+
             if ( this.chainedCtxt.ctxt !== null && this.chainedCtxt.ctxt !== undefined ) {
                 cctxt = this.chainedCtxt.ctxt;
                 setTimeout(function() {

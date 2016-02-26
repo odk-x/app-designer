@@ -1,12 +1,12 @@
 /* globals odkCommon, odkSurvey */
 /**
  circular dependency upon: controller, builder (set via initialize)
- 
+
  2 public APIs:
- 
+
  initialize(controller, builder) -- initialize to avoid circular load dependency.
  changeUrlHash(ctxt) -- handle changes to the window.location.hash
- 
+
 */
 define(['opendatakit','database','jquery'],
 function(opendatakit,  database,  $) {
@@ -30,7 +30,7 @@ return {
     },
     /**
      * Insert or update a 'string'-valued key-value pair within the parameter list array.
-     * 
+     *
      * Immediate.
      */
     _parseQueryHelper:function(instanceMetadataKeyValueMap, key, value) {
@@ -56,7 +56,7 @@ return {
         var formId = opendatakit.getSettingValue('form_id');
         database.initializeInstance($.extend({},ctxt,{success:function() {
             // this will clear the auxillary key-value pairs in the URI.
-            // at this point, these initial values will have been applied to the 
+            // at this point, these initial values will have been applied to the
             // instance's initial values.
             odkSurvey.clearAuxillaryHash();
             // fire the controller to render the first page.
@@ -70,7 +70,7 @@ return {
             } else {
                 opendatakit.setCurrentInstanceId(instanceId);
             }
-            // if we are not starting fresh, we will have 
+            // if we are not starting fresh, we will have
             // something on the stack -- retain it, otherwise
             // reset the stack to the default content.
             if ( !odkSurvey.hasSectionStack(refId) ) {
@@ -83,38 +83,38 @@ return {
      * Saves all passed-in parameter values into the MetaData table.
      * The incoming formDef and instanceId may specify a different form and instance.
      * Updates therefore MUST be cross-site.
-     * 
-     * Invoked after passed-in parameters are saved in the 
-     * MetaData table. The returned continuation invokes _effectChange at the end of 
+     *
+     * Invoked after passed-in parameters are saved in the
+     * MetaData table. The returned continuation invokes _effectChange at the end of
      * its processing.
      *
      * If no instanceId is supplied, swap the in-process MetaData to the new form's core
      * MetaData and invoke _effectChange.
      *
-     * Otherwise, read the data row for this instanceId directly from the database. 
+     * Otherwise, read the data row for this instanceId directly from the database.
      *
      * Immediate: _effectChange
     */
     _parseQueryParameterContinuation:function(ctxt, formDef, formPath, instanceId, screenPath, refId, instanceMetadataKeyValueMap) {
         var that = this;
-        
+
         // IMPLEMENTATION NOTE: formDef is only used in the case where sameForm is false.
         // THIS IS AN ASSUMPTION OF THE CALLING FUNCTION!!!!
-        
+
         if ( formPath === null || formPath === undefined ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.nullFormPath");
             alert("Unexpected null formPath");
             ctxt.failure({message: "No form specified."});
             return;
         }
-        
+
         if ( formDef === null || formDef === undefined ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.nullFormDef");
             alert("Unexpected null formDef when changing forms");
             ctxt.failure({message: "Form definition is empty."});
             return;
         }
-        
+
         var fidObject = opendatakit.getSettingObject(formDef, 'form_id');
         if ( fidObject === null || fidObject === undefined || !('value' in fidObject) ) {
             ctxt.log('E',"parsequery._parseQueryParameterContinuation.missingFormId");
@@ -123,7 +123,7 @@ return {
             return;
         }
         var form_id = fidObject.value;
-        
+
         // defined by form definition's settings:
         var tidObject = opendatakit.getSettingObject(formDef, 'table_id');
         var table_id;
@@ -138,7 +138,7 @@ return {
 
         // Seems like we would only need to create the KV entries for table_id, and otherwise not need to do anything?
         // E.g., to support multiple forms used within one table.
-        
+
         // we cannot write the instanceMetadata or the metadata yet because the underlying tables may not yet exist.
 
         // on first starting, the database would not have any table_id, form_id or instanceId set...
@@ -202,7 +202,7 @@ return {
             // data table already exists (since table_id is unchanged)
             // form definitions already processed (since formPath and form_id unchanged)
             // same instance -- so just render the UI...
-            
+
             // TODO: change screenPath (presumably)
             that._prepAndSwitchUI( ctxt, qpl, instanceId, screenPath, refId, sameInstance, instanceMetadataKeyValueMap, formDef );
         }
@@ -213,12 +213,12 @@ return {
     _parseParameters:function(ctxt) {
         ctxt.log('D',"parsequery._parseParameters");
         var that = this;
-        
+
         var formPath = null;
         var instanceId = null;
         var screenPath = null;
         var refId = null;
-        
+
         var instanceMetadataKeyValueMap = {};
         if (window.location.hash) {
             // split up the query string and store in an associative array
@@ -240,7 +240,7 @@ return {
                     that._parseQueryHelper(instanceMetadataKeyValueMap, key, value);
                 }
             }
-            
+
             if ( formPath !== null &&  formPath !== undefined &&
                  formPath.length > 0 && formPath[formPath.length-1] !== '/' ) {
                 formPath[formPath.length] = '/';
@@ -253,12 +253,12 @@ return {
             instanceId = null;
             screenPath = null;
         }
-        
+
         if ( refId === null || refId === undefined ) {
             ctxt.log('I','parsequery._parseParameters.odkSurvey.refId is null -- generating unique value');
             refId = opendatakit.genUUID();
         }
-        
+
         // This may fail when embedded
         try {
             odkSurvey.refId = refId;
@@ -266,19 +266,19 @@ return {
             ctxt.log('W','parsequery._parseParameters.odkSurvey.refId assignment failed (ok if embedded)');
         }
         ctxt.log('D','parsequery._parseParameters.odkSurvey.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
-        
+
         if ( formPath === '../config/assets/framework/forms/framework/' ) {
             // instanceId is always specified and invariant on the framework form.
             instanceId = 'invariant:0';
             odkSurvey.setInstanceId(refId, instanceId);
         }
-        
+
         var formDef = opendatakit.getCurrentFormDef();
         var sameForm = (opendatakit.getCurrentFormPath() === formPath) && (formDef !== null) && (formDef !== undefined);
-        
+
         // fetch the form definition (defered processing)
         var filename = formPath + 'formDef.json';
-        
+
         if ( !sameForm ) {
             // force a 'Please wait...' to display before we try to read the formDef file...
             that.controller.reset($.extend({},ctxt, {success:function() {
@@ -286,7 +286,7 @@ return {
             }}), false );
         } else {
             try {
-                that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
+                that._parseQueryParameterContinuation(ctxt, formDef, formPath,
                                         instanceId, screenPath, refId, instanceMetadataKeyValueMap);
             } catch (ex) {
                 ctxt.log('E','parsequery._parseParameters.continuationException',  'unknown error: ' + ex.message);
@@ -294,24 +294,24 @@ return {
             }
         }
     },
-    
+
     /**
      * What actually reads in and loads the formDef file (and then parses the query parameters against it).
      */
     _parseFormDefFile: function(ctxt, formPath, instanceId, screenPath, refId, instanceMetadataKeyValueMap, filename) {
         var that = this;
         var newCtxt = $.extend({},ctxt, {success:function(formDef) {
-                that._parseQueryParameterContinuation(ctxt, formDef, formPath, 
+                that._parseQueryParameterContinuation(ctxt, formDef, formPath,
                     instanceId, screenPath, refId, instanceMetadataKeyValueMap);
             }});
         opendatakit.readFormDefFile(newCtxt, filename);
     },
     /**
      *
-     * window.location.hash is an ampersand-separated list of 
+     * window.location.hash is an ampersand-separated list of
      * key=value pairs. The key and value are encodeURIComponent()'d.
      * The main values are:
-     *    formPath=relative path from the default/index.html to 
+     *    formPath=relative path from the default/index.html to
      *             the form definition directory (formPath/formDef.json).
      *
      *    instanceId=unique id for this filled-in form instance. May be omitted.
@@ -335,7 +335,7 @@ return {
             ctxt.failure({message: "Internal error: invalid hash (restoring)"});
             return;
         }
-        
+
         var ctxtNext = $.extend({}, ctxt, {success: function() {
             // and flush any pending doAction callback
             that.controller.registerQueuedActionAvailableListener(ctxt, opendatakit.getRefId());

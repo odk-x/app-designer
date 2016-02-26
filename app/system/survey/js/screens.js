@@ -1,6 +1,6 @@
 /* global odkCommon */
 /**
-* circular dependency: 
+* circular dependency:
 *
 * Responsibilities:
 *    Performs the actions necessary to make a prompt visible on the screen (setScreen).
@@ -8,7 +8,7 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
-define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers', 'translations'], 
+define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers', 'translations'],
 function(screenTypes,  opendatakit,  controller,  Backbone,  $,       _,           Handlebars, _hh, translations) {
 'use strict';
 verifyLoad('screens',
@@ -32,9 +32,9 @@ screenTypes.base = Backbone.View.extend({
     $focusPromptTest: null,
     focusScrollPos: null,
     horizontalFocusScrollPos: null,
-	/**
-	 * DOM class for the pane holding horizonally-scrollable content
-	 */
+    /**
+     * DOM class for the pane holding horizonally-scrollable content
+     */
     screenOverflowClass: null,
     pendingCtxt: [],
     initialize: function(args) {
@@ -57,9 +57,9 @@ screenTypes.base = Backbone.View.extend({
                     try {
                         that.template = Handlebars.compile(source);
                         // ensure that require is unwound
-                        setTimeout(function() { 
+                        setTimeout(function() {
                             ctxt.log('I',"screens."+that.type+"._whenTemplateIsReady.success.setTimeout");
-                            ctxt.success(); 
+                            ctxt.success();
                         }, 0 );
                     } catch (e) {
                         ctxt.log('E',"screens."+that.type+
@@ -85,7 +85,7 @@ screenTypes.base = Backbone.View.extend({
         }
     },
     reRender: function(ctxt) {
-        var that = this; 
+        var that = this;
 
         that.pendingCtxt.push(ctxt);
         odkCommon.log("D","screens.reRender: called");
@@ -99,9 +99,9 @@ screenTypes.base = Backbone.View.extend({
         var ctxt = null;
 
         that.focusScrollPos = $(window).scrollTop();
-		if ( that.screenOverflowClass ) {
-			that.horizontalFocusScrollPos = $(that.screenOverflowClass).scrollLeft();
-		}
+        if ( that.screenOverflowClass ) {
+            that.horizontalFocusScrollPos = $(that.screenOverflowClass).scrollLeft();
+        }
         odkCommon.log("D","screens.reRender.debouncedReRender: focusScrollPos = " + that.focusScrollPos);
         odkCommon.log("D","screens.reRender.debouncedReRender: horizontalFocusScrollPos = " + that.horizontalFocusScrollPos);
 
@@ -113,32 +113,32 @@ screenTypes.base = Backbone.View.extend({
 
         odkCommon.log("D","screens.reRender.debouncedReRender: pendingCtxtLength: " + that.pendingCtxt.length);
         if (that.pendingCtxt.length > 0) {
-			// we should at least have one on the queue.
-			// process the first queued action first
-            ctxt = that.pendingCtxt.shift();   
+            // we should at least have one on the queue.
+            // process the first queued action first
+            ctxt = that.pendingCtxt.shift();
         } else {
             odkCommon.log("W","screens.reRender.debouncedReRender: no pendingCtxts!!!");
-			return;
+            return;
         }
 
-		// and we want to then process all subsequent reRender requests that aren't the same as the one we already have...
-		var nextCtxt;
+        // and we want to then process all subsequent reRender requests that aren't the same as the one we already have...
+        var nextCtxt;
         while (that.pendingCtxt.length > 0) {
-			nextCtxt = that.pendingCtxt.shift();
-			if ( nextCtxt !== ctxt ) {
-				odkCommon.log("W","screens.reRender.debouncedReRender: chaining an extra pendingCtxt!!!");
-				ctxt.setTerminalContext(nextCtxt);
-			}
+            nextCtxt = that.pendingCtxt.shift();
+            if ( nextCtxt !== ctxt ) {
+                odkCommon.log("W","screens.reRender.debouncedReRender: chaining an extra pendingCtxt!!!");
+                ctxt.setTerminalContext(nextCtxt);
+            }
         }
-            
-		// and process the first reRender first...
-		that._screenManager.refreshScreen(ctxt);
+
+        // and process the first reRender first...
+        that._screenManager.refreshScreen(ctxt);
     }, 500),
-	
+
    /**
-     * Use the render context from the screenManager, but mix in 
+     * Use the render context from the screenManager, but mix in
      * any values explicitly defined for this screen.  Screen can
-     * only enable or disable navigation, but cannot enable or 
+     * only enable or disable navigation, but cannot enable or
      * disable forward/backward functionality -- that is dictated
      * by the controller via the screenManager.
      */
@@ -188,7 +188,7 @@ screenTypes.base = Backbone.View.extend({
                     prompt.buildRenderContext(onceCtxt);
                 });
             } catch (ex) {
-                ctxt.log('E','screen.configureRenderContext.exception', 
+                ctxt.log('E','screen.configureRenderContext.exception',
                     "exception: " + ex.message + " stack: " + ex.stack );
                 ctxt.failure({message: "Exception while initializing screen: " + ex.message});
             }
@@ -220,7 +220,7 @@ screenTypes.base = Backbone.View.extend({
             }
             // we now know what we are going to render.
             // work with the controller to ensure that all
-            // intermediate state has been written to the 
+            // intermediate state has been written to the
             // database before commencing the rendering
             that.controller.commitChanges($.extend({},ctxt,{success:function() {
                 ctxt.log('D','buildRenderContext.commitChanges.success');
@@ -237,8 +237,8 @@ screenTypes.base = Backbone.View.extend({
             prompt.afterRender();
         });
 
-        if (that.$focusPromptTest !== null && that.$focusPromptTest !== undefined) 
-        {   
+        if (that.$focusPromptTest !== null && that.$focusPromptTest !== undefined)
+        {
             var focusElementAttr = {'id' : that.$focusPromptTest.attr('id'),
                                     'value' : that.$focusPromptTest.attr('value'),
                                     'name' : that.$focusPromptTest.attr('name')};
@@ -255,12 +255,12 @@ screenTypes.base = Backbone.View.extend({
                 odkCommon.log("D","screens.afterRender: focusElementString = " + focusElementString);
                 $(focusElementString).focus();
             }
-        }        
-            
+        }
+
         if (that.focusScrollPos !== null && that.focusScrollPos !== undefined) {
             $(window).scrollTop(that.focusScrollPos);
         }
-            
+
         if (that.screenOverflowClass && that.horizontalFocusScrollPos !== null && that.horizontalFocusScrollPos !== undefined) {
             that.$(that.screenOverflowClass).scrollLeft(that.horizontalFocusScrollPos);
         }
@@ -293,7 +293,7 @@ screenTypes.base = Backbone.View.extend({
     /**
      * Give the prompts a chance to save their state to the database.
      * Also, enable the screen to enforce its own criteria for when it
-     * is allowable to move off the screen. E.g., after saving or 
+     * is allowable to move off the screen. E.g., after saving or
      * rolling back all changes.
      */
     beforeMove: function(isStrict, advancing, validateValues) {
@@ -306,7 +306,7 @@ screenTypes.base = Backbone.View.extend({
                 return { message: allowed.message };
             }
         };
-        
+
         var i;
         var beforeMoveError;
         for ( i = 0; i < that.activePrompts.length; i ++)
@@ -316,7 +316,7 @@ screenTypes.base = Backbone.View.extend({
                 break;
             }
         }
-        
+
         if ( beforeMoveError === null || beforeMoveError === undefined )
         {
             if ( validateValues ) {
@@ -324,16 +324,16 @@ screenTypes.base = Backbone.View.extend({
                 for ( i = 0; i < that.activePrompts.length; i++ )
                 {
                     validateError = that.activePrompts[i]._isValid(isStrict);
-                    if ( validateError !== null && validateError !== undefined ) { 
-                        break; 
+                    if ( validateError !== null && validateError !== undefined ) {
+                        break;
                     }
                 }
-                if ( validateError === null || validateError === undefined ) { 
-                    return allowMoveHandler(advancing); 
+                if ( validateError === null || validateError === undefined ) {
+                    return allowMoveHandler(advancing);
                 } else {
                     return validateError;
                 }
-            } 
+            }
             else {
                 return allowMoveHandler(advancing);
             }
@@ -407,7 +407,7 @@ screenTypes.screen = screenTypes.base.extend({
         $.each(that.activePrompts, function(idx, prompt){
             prompt._render();
             if(!prompt.$el){
-                console.error("render px: " + that.promptIdx + 
+                console.error("render px: " + that.promptIdx +
                     " Prompts must have synchronous render functions. " +
                     "Don't debounce them or launch async calls before el is set.");
                 console.error(prompt);
@@ -415,13 +415,13 @@ screenTypes.screen = screenTypes.base.extend({
             }
             $container.append(prompt.$el);
         });
-		
-		if ( that.screenOverflowClass ) {
-			var screenOverflow = that.$(that.screenOverflowClass);
-			if (screenOverflow.length > 0) {
-				screenOverflow.css("overflow-x", "scroll");
-			}
-		}
+
+        if ( that.screenOverflowClass ) {
+            var screenOverflow = that.$(that.screenOverflowClass);
+            if (screenOverflow.length > 0) {
+                screenOverflow.css("overflow-x", "scroll");
+            }
+        }
 
         ctxt.success();
     }
@@ -457,7 +457,7 @@ screenTypes.columns_2 = screenTypes.base.extend({
         $.each(that.activePrompts, function(idx, prompt){
             prompt._render();
             if(!prompt.$el){
-                console.error("render px: " + that.promptIdx + 
+                console.error("render px: " + that.promptIdx +
                     " Prompts must have synchronous render functions. " +
                     "Don't debounce them or launch async calls before el is set.");
                 console.error(prompt);
@@ -467,22 +467,22 @@ screenTypes.columns_2 = screenTypes.base.extend({
             // Append element to appropriate column
             if (prompt.screen_column === 2) {
                 col_b.append(prompt.$el);
-            } 
+            }
             else {
                 col_a.append(prompt.$el);
             }
         });
-        
+
         grid.append(col_a);
         grid.append(col_b);
         $container.append(grid);
-		
-		if ( that.screenOverflowClass ) {
-			var screenOverflow = that.$(that.screenOverflowClass);
-			if (screenOverflow.length > 0) {
-				screenOverflow.css("overflow-x", "scroll");
-			}
-		}
+
+        if ( that.screenOverflowClass ) {
+            var screenOverflow = that.$(that.screenOverflowClass);
+            if (screenOverflow.length > 0) {
+                screenOverflow.css("overflow-x", "scroll");
+            }
+        }
 
         ctxt.success();
     }
@@ -516,7 +516,7 @@ screenTypes.custom = screenTypes.base.extend({
         $.each(that.activePrompts, function(idx, prompt){
             prompt._render();
             if(!prompt.$el){
-                console.error("render px: " + that.promptIdx + 
+                console.error("render px: " + that.promptIdx +
                     " Prompts must have synchronous render functions. " +
                     "Don't debounce them or launch async calls before el is set.");
                 console.error(prompt);
@@ -525,7 +525,7 @@ screenTypes.custom = screenTypes.base.extend({
 
         });
 
-        
+
         that.$('.odk-container').find("div").each(function() {
             var t = this;
             var text = $(t).attr('field-name');
@@ -538,14 +538,14 @@ screenTypes.custom = screenTypes.base.extend({
                     break;
                 }
             }
-            
+
          });
 
         var screenOverflow = that.$(that.screenOverflowClass);
         if (screenOverflow.length > 0) {
             screenOverflow.css("overflow-x", "scroll");
         }
-         
+
         ctxt.success();
     },
     afterRender: function() {
@@ -556,8 +556,8 @@ screenTypes.custom = screenTypes.base.extend({
             prompt.afterRender();
         });
 
-        if (that.$focusPromptTest !== null && that.$focusPromptTest !== undefined) 
-        {   
+        if (that.$focusPromptTest !== null && that.$focusPromptTest !== undefined)
+        {
             var focusElementAttr = {'id' : that.$focusPromptTest.attr('id'),
                                     'value' : that.$focusPromptTest.attr('value'),
                                     'name' : that.$focusPromptTest.attr('name')};
@@ -574,8 +574,8 @@ screenTypes.custom = screenTypes.base.extend({
                 odkCommon.log("D","screens.afterRender: focusElementString = " + focusElementString);
                 $(focusElementString).focus();
             }
-        }        
-            
+        }
+
         if (that.focusScrollPos !== null && that.focusScrollPos !== undefined) {
             $(window).scrollTop(that.focusScrollPos);
         }
@@ -608,7 +608,7 @@ screenTypes.custom = screenTypes.base.extend({
                 });
                 that._renderContext.prompts = that.activePrompts;
             } catch (ex) {
-                ctxt.log('E','screen.configureRenderContext.exception', 
+                ctxt.log('E','screen.configureRenderContext.exception',
                     "exception: " + ex.message + " stack: " + ex.stack );
                 ctxt.failure({message: "Exception while initializing screen: " + ex.message});
             }

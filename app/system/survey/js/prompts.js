@@ -22,7 +22,7 @@ promptTypes.base = Backbone.View.extend({
     //renderContext is a dynamic object to be passed into the render function.
     renderContext: {},
     /**
-     * User-overridable data and methods. These can be overridden in 
+     * User-overridable data and methods. These can be overridden in
      * the Excel worksheet.
      */
     constraint_message: "Constraint violated.",
@@ -32,14 +32,14 @@ promptTypes.base = Backbone.View.extend({
     templatePath: null,
     // inputAttributes are a user-specified object that overrides _baseInputAttributes.
     inputAttributes: {},
-    
+
     reRender: function(ctxt) {
         this._screen.reRender(ctxt);
     },
     /**
      * Generic methods -- probably should not be overridden
      */
-    
+
     /**
      * initialize
      * called via Backbone when a new instance of this
@@ -50,9 +50,9 @@ promptTypes.base = Backbone.View.extend({
     },
     /**
      * getPromptPath
-     * retrieve the path to this prompt. This is used ONLY in 
-     * constructing the dispatchString for the 
-     * odkCommon.doAction(...) method and the corresponding 
+     * retrieve the path to this prompt. This is used ONLY in
+     * constructing the dispatchString for the
+     * odkCommon.doAction(...) method and the corresponding
      * controller.actionCallback(...) method to ensure that
      * the results of an intent execution (doAction) are routed
      * back to the prompt that initiated that action.
@@ -70,16 +70,16 @@ promptTypes.base = Backbone.View.extend({
     buildRenderContext: function(ctxt) {
         var that = this;
         that._initializeRenderContext();
-        
+
         that._whenTemplateIsReady($.extend({}, ctxt, {success: function() {
             that.configureRenderContext(ctxt);
         }}));
     },
     /**
      * _whenTemplateIsReady
-     * Ensure that the template is loaded and compiled before 
+     * Ensure that the template is loaded and compiled before
      * proceeding (via ctxt.success()).
-     * 
+     *
      * Part of the preliminaries to rendering a page.
      */
     _whenTemplateIsReady: function(ctxt){
@@ -91,17 +91,17 @@ promptTypes.base = Backbone.View.extend({
                 require(['text!'+that.templatePath], function(source) {
                     try {
                         that.template = Handlebars.compile(source);
-                        ctxt.log('D',"prompts."+that.type+"._whenTemplateIsReady.success", 
+                        ctxt.log('D',"prompts."+that.type+"._whenTemplateIsReady.success",
                             " px: " + that.promptIdx);
                         // ensure that require is unwound
-                        setTimeout(function() { 
-                                ctxt.log('I',"prompts."+that.type+"._whenTemplateIsReady.success.setTimeout", 
+                        setTimeout(function() {
+                                ctxt.log('I',"prompts."+that.type+"._whenTemplateIsReady.success.setTimeout",
                                             " px: " + that.promptIdx);
-                                ctxt.success(); 
-                            }, 
+                                ctxt.success();
+                            },
                             0 );
                     } catch (e) {
-                        ctxt.log('E',"prompts."+that.type+"._whenTemplateIsReady.exception", 
+                        ctxt.log('E',"prompts."+that.type+"._whenTemplateIsReady.exception",
                             " px: " + that.promptIdx + " exception: " + e.message + " e: " + String(e));
                         ctxt.failure({message: "Error compiling handlebars template."});
                     }
@@ -111,7 +111,7 @@ promptTypes.base = Backbone.View.extend({
                     ctxt.failure({message: "Error loading handlebars template."});
                 });
             } catch (e) {
-                ctxt.log('E',"prompts."+that.type+"._whenTemplateIsReady.require.exception", 
+                ctxt.log('E',"prompts."+that.type+"._whenTemplateIsReady.require.exception",
                     " px: " + that.promptIdx + " exception: " + e.message + " e: " + String(e));
                 ctxt.failure({message: "Error reading handlebars template."});
             }
@@ -163,11 +163,9 @@ promptTypes.base = Backbone.View.extend({
      * stopPropagation is used in the events map to disable swiping on various elements
      **/
     stopPropagation: function(evt){
-		var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".stopPropagation");
-        ctxt.log('D',"prompts." + that.type + ".stopPropagation", "px: " + that.promptIdx + " evt: " + evt);
+        var that = this;
+        odkCommon.log('D',"prompts." + that.type + ".stopPropagation px: " + that.promptIdx + " evt: " + evt);
         evt.stopImmediatePropagation();
-        ctxt.success();
     },
     afterRender: function() {},
     _render: function() {
@@ -205,8 +203,8 @@ promptTypes.base = Backbone.View.extend({
         if ( !('name' in that) ) {
             // no data validation if no persistence...
             return null;
-        } 
-        
+        }
+
         // compute the field display name...
         var locale = database.getInstanceMetaDataValue('_locale');
         if ( locale === undefined || locale === null ) {
@@ -214,13 +212,13 @@ promptTypes.base = Backbone.View.extend({
         }
         var fieldDisplayName;
         if (that.renderContext.display) {
-            var textOrMap = (that.renderContext.display.title ? 
+            var textOrMap = (that.renderContext.display.title ?
                 that.renderContext.display.title : that.renderContext.display.text);
             fieldDisplayName = formulaFunctions.localize(textOrMap,locale);
         } else {
             fieldDisplayName = '';
         }
-        
+
         var value = that.getValue();
         if ( value === undefined || value === null || value === "" ) {
             if ( isRequired ) {
@@ -234,7 +232,7 @@ promptTypes.base = Backbone.View.extend({
                 var localizeInvalidValueMessage = formulaFunctions.localize(that.invalid_value_message,locale);
                 return { message: localizeInvalidValueMessage + " " + fieldDisplayName };
             }
-        } 
+        }
         if ( 'constraint' in that ) {
             var outcome = false;
             try {
@@ -334,7 +332,7 @@ promptTypes.base = Backbone.View.extend({
                 //This is a passive error because there could just be a problem
                 //with the content provider/network/remote service rather than with
                 //the form.
-                newctxt.log('W',"prompts." + this.type + ".configureRenderContext.error", 
+                newctxt.log('W',"prompts." + this.type + ".configureRenderContext.error",
                             "px: " + this.promptIdx + " Error fetching choices " + e);
                 that.renderContext.passiveError = "Error fetching choices.\n";
                 if(e.statusText) {
@@ -386,7 +384,7 @@ promptTypes.opening = promptTypes.base.extend({
         }
         var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
         var ts = that.renderContext.last_save_date = odkCommon.toDateFromOdkTimeStamp(lastSave);
-        
+
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName !== null && displayElementName !== undefined ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
@@ -431,7 +429,7 @@ promptTypes.finalize = promptTypes.base.extend({
         }
         var lastSave = database.getInstanceMetaDataValue('_savepoint_timestamp');
         var ts = odkCommon.toDateFromOdkTimeStamp(lastSave);
-        
+
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName !== null && displayElementName !== undefined ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
@@ -460,6 +458,7 @@ promptTypes.finalize = promptTypes.base.extend({
         var that = this;
         evt.stopPropagation();
         evt.stopImmediatePropagation();
+
         var ctxt = that.controller.newContext(evt, that.type + ".saveFinal");
         ctxt.log('D',"prompts." + that.type + ".saveFinal", "px: " + that.promptIdx);
         that.controller.gotoFinalizeAndTerminateAction(ctxt);
@@ -499,7 +498,7 @@ promptTypes.instances = promptTypes.base.extend({
     configureRenderContext: function(ctxt) {
         var that = this;
         ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
-        
+
         // see if we are supposed to apply a query filter to this...
         var model = opendatakit.getCurrentModel();
         var displayElementName = opendatakit.getSettingValue('instance_name');
@@ -512,7 +511,7 @@ promptTypes.instances = promptTypes.base.extend({
             if ( queryDefn === undefined || queryDefn === null ) {
                 ctxt.failure({message: "Error displaying instances: could not retrieve query definition"});
                 return;
-            } else 
+            } else
             if ( queryDefn.linked_table_id !== opendatakit.getCurrentTableId() ) {
                 ctxt.failure({message: "Error displaying instances: tableId of value_list query does not match current tableId"});
                 return;
@@ -535,7 +534,7 @@ promptTypes.instances = promptTypes.base.extend({
                     }
                     return term;
                 });
-                
+
                 $.extend(that.renderContext, {
                     headerImg: requirejs.toUrl('../config/assets/img/form_logo.png')
                 });
@@ -635,9 +634,9 @@ promptTypes._linked_type = promptTypes.base.extend({
     },
     getFormPath: function() {
         if ( this.getLinkedFormId() === "framework" ) {
-            return '../config/assets/framework/forms/framework/'; 
+            return '../config/assets/framework/forms/framework/';
         } else {
-            return '../config/tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
+            return '../config/tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/';
         }
     },
     getLinkedUri: function(platInfo) {
@@ -665,7 +664,7 @@ promptTypes._linked_type = promptTypes.base.extend({
                 that._linkedCachedInstanceName = null;
             }
             database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
-                ctxt.log('D',"prompts." + that.type + 
+                ctxt.log('D',"prompts." + that.type +
                     'getlinkedModel.readTableDefinition.success', "px: " + that.promptIdx );
                 that._linkedCachedModel = tlo;
                 ctxt.success(tlo);
@@ -687,8 +686,8 @@ promptTypes._linked_type = promptTypes.base.extend({
                 that.reRender(ctxt);
             }
             else {
-                ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent', 
-                    "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + 
+                ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent',
+                    "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                     internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
@@ -747,15 +746,15 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                     if (instanceList[i].form_id != that.getLinkedFormId()) {
                         instanceList[i].savepoint_type = opendatakit.savepoint_type_incomplete;
                     }
-                    
+
                     if (instanceList[i].savepoint_type == "COMPLETE"){
                         instanceList[i].icon_class = "glyphicon-ok";
-                    }  
+                    }
                     else{
                         instanceList[i].icon_class = "glyphicon-warning-sign";
                     }
                     //make the date more readable
-                    instanceList[i].savepoint_timestamp = opendatakit.getShortDateFormat(instanceList[i].savepoint_timestamp);          
+                    instanceList[i].savepoint_timestamp = opendatakit.getShortDateFormat(instanceList[i].savepoint_timestamp);
                 }
 
                 that.renderContext.instances = instanceList;
@@ -766,8 +765,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                     { title : "Finalized"},
                     { title : ""}
                 ];
-                    
-             
+
+
 
                 ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances.success", "px: " + that.promptIdx + " instanceList: " + instanceList.length);
                 ctxt.success();
@@ -787,23 +786,22 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }
 
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".openInstance");
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var uri = that.getLinkedUri(platInfo);
         var expandedUrl = platInfo.baseUri + 'system/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launchSurvey'});
-        var outcome = odkCommon.doAction(dispatchString, that.launchAction, 
+        odkCommon.log('D','linked_table.openInstance -- invoking doAction');
+        var outcome = odkCommon.doAction(dispatchString, that.launchAction,
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
                              extras: { url: expandedUrl }}));
-        ctxt.log('D','linked_table.openInstance', platInfo.container + " outcome is " + outcome);
+        odkCommon.log('D','linked_table.openInstance - doAction: ' +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            ctxt.log('W','linked_table.openInstance',"Should be OK got >" + outcome + "<");
+            odkCommon.log('W',"linked_table.openInstance - doAction cancelled -- Should be OK got >" + outcome + "<");
             that.enableButtons();
-            ctxt.failure({message: "Action canceled."});
         } else {
-            ctxt.success();
+            odkCommon.log('W',"linked_table.openInstance - doAction in play -- awaiting responseAvailable");
         }
     },
     confirmDeleteInstance: function(evt) {
@@ -811,35 +809,35 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var instanceId;
         var instanceName;
         var deleteButton = $(evt.target).closest(".deleteInstance");
-        
+
         if (deleteButton !== null && deleteButton !== undefined) {
-            instanceId  = deleteButton.attr("instance-id"); 
+            instanceId  = deleteButton.attr("instance-id");
             instanceName = deleteButton.attr("instance-name");
         }
         else {
-            odkCommon.log('E',"In linked_table.confirmDeleteInstance instanceId is undefined"); 
+            odkCommon.log('E',"In linked_table.confirmDeleteInstance instanceId is undefined");
             return;
         }
 
         that._cachedEvent = evt;
-        that._screen._screenManager.showConfirmationPopup({message:"Delete " + instanceName + "?", 
+        that._screen._screenManager.showConfirmationPopup({message:"Delete " + instanceName + "?",
                                                            promptIndex:that.promptIdx});
     },
     handleConfirmation: function() {
         var that = this;
 
         if (that._cachedEvent === null || that._cachedEvent === undefined ) {
-            odkCommon.log('E',"In linked_table.handleConfirmation _cachedEvent is null"); 
+            odkCommon.log('E',"In linked_table.handleConfirmation _cachedEvent is null");
             return ({message:"In linked_table.deleteInstance _cachedEvent is null"});
         }
         var instanceId;
         var deleteButton = $(that._cachedEvent.target).closest(".deleteInstance");
-        
+
         if (deleteButton !== null && deleteButton !== undefined) {
-            instanceId  = deleteButton.attr("instance-id"); 
+            instanceId  = deleteButton.attr("instance-id");
         }
         else {
-            odkCommon.log('W',"In linked_table.handleConfirmation instanceId is undefined"); 
+            odkCommon.log('W',"In linked_table.handleConfirmation instanceId is undefined");
             return null;
         }
 
@@ -866,7 +864,6 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
         var instanceId = opendatakit.genUUID();
-        var ctxt = that.controller.newContext(evt, that.type + ".addInstance");
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
@@ -880,16 +877,18 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launchSurvey'});
         var expandedUrl = platInfo.baseUri + 'system/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
-        var outcome = odkCommon.doAction( dispatchString, that.launchAction, 
+
+        odkCommon.log('D','linked_table.addInstance -- invoking doAction');
+        var outcome = odkCommon.doAction( dispatchString, that.launchAction,
             JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash,
                              extras: { url: expandedUrl }}));
-        ctxt.log('D','linked_table.addInstance', platInfo.container + " outcome is " + outcome);
+
+        odkCommon.log('D','linked_table.addInstance - doAction: ' +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            ctxt.log('W','linked_table.addInstance',"Should be OK got >" + outcome + "<");
+            odkCommon.log('W',"linked_table.addInstance - doAction cancelled -- Should be OK got >" + outcome + "<");
             that.enableButtons();
-            ctxt.failure({message: "Action canceled."});
         } else {
-            ctxt.success();
+            odkCommon.log('W',"linked_table.addInstance - doAction in play -- awaiting responseAvailable");
         }
     }
 });
@@ -914,7 +913,6 @@ promptTypes.external_link = promptTypes.base.extend({
     },
     openLink: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".openLink");
         var fullUrl = that.url();
         var launchAction = that.launchAction;
         var expandedUrl;
@@ -932,16 +930,18 @@ promptTypes.external_link = promptTypes.base.extend({
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'openLink'});
-        var outcome = odkCommon.doAction( dispatchString, launchAction, 
+
+        odkCommon.log('D',"prompts." + that.type + ".openLink -- invoking doAction");
+        var outcome = odkCommon.doAction( dispatchString, launchAction,
             JSON.stringify({ uri: fullUrl,
                 extras: { url: expandedUrl }}));
-        ctxt.log('D','external_link.openLink', platInfo.container + " outcome is " + outcome);
+
+        odkCommon.log('D',"prompts." + that.type + ".openLink - doAction: " +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            ctxt.log('W','external_link.openLink',"Should be OK got >" + outcome + "<");
+            odkCommon.log('W',"prompts." + that.type + ".openLink - doAction cancelled -- Should be OK got >" + outcome + "<");
             that.enableButtons();
-            ctxt.failure({message: "Action canceled."});
         } else {
-            ctxt.success();
+            odkCommon.log('W',"prompts." + that.type + ".openLink - doAction in play -- awaiting responseAvailable");
         }
     },
     getCallback: function(promptPath, byinternalPromptContext, byaction) {
@@ -960,7 +960,7 @@ promptTypes.external_link = promptTypes.base.extend({
             }
             else {
                 ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent:',
-                    "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " + 
+                    "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                     internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
@@ -1005,7 +1005,7 @@ promptTypes.user_branch = promptTypes.base.extend({
                         "px: " + that.promptIdx);
             ctxt.success();
         }});
-        
+
         that.renderContext.passiveError = null;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
         var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
@@ -1114,7 +1114,7 @@ promptTypes.select = promptTypes._linked_type.extend({
         var matchedChoice = null;
         var choiceList = [];
         var newChoice = null;
-     
+
         if (savedValue === null || savedValue === undefined)
             return choiceList;
 
@@ -1145,7 +1145,7 @@ promptTypes.select = promptTypes._linked_type.extend({
         } else if ( otherChoices.length > 0 ) {
             odkCommon.log('W',"prompts." + this.type + " px: " + this.promptIdx + " invalid choices are in choices list");
         }
-        
+
         return choiceList;
     },
     modification: function(evt) {
@@ -1221,7 +1221,7 @@ promptTypes.select = promptTypes._linked_type.extend({
                 newctxt.failure({message: "Error: undefined query type - a query in the queries sheet must have a query_type"});
             }
         };
-        
+
         that.renderContext.passiveError = null;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
         var choiceListDefn = opendatakit.getChoicesDefinition(that.values_list);
@@ -1513,7 +1513,7 @@ promptTypes.input_type = promptTypes.base.extend({
     loseFocus: function(evt) {
         var that = this;
         odkCommon.log('D',"prompts." + that.type + ".focusout px: " + that.promptIdx);
-                
+
         if (that.modified === true) {
             var ctxt = that.controller.newContext(evt, that.type + ".loseFocus");
             that.reRender(ctxt);
@@ -1619,8 +1619,8 @@ promptTypes.integer = promptTypes.input_type.extend({
         if (renderContext.isSlider) {
             var longestNum = that.inputAttributes.max.toString().length >= that.inputAttributes.min.toString().length ? that.inputAttributes.max : that.inputAttributes.min;
             renderContext.boxWidth = formulaFunctions.width(longestNum) + 20; // +20 for padding
-        }            
-        
+        }
+
         if (ctxt.render === true) {
             that.displayed = true;
         }
@@ -1667,7 +1667,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
     validateValue: function() {
         var value = this.getValue();
         if (value === null) {
-            // Null values are now respected 
+            // Null values are now respected
             return true;
         } else {
         return !isNaN(parseFloat(this.getValue()));
@@ -1676,7 +1676,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
 });
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
-    templatePath: "templates/datetimepicker.handlebars", 
+    templatePath: "templates/datetimepicker.handlebars",
     usePicker: true,
     insideAfterRender: false,
     timeFormat: "MM/DD/YYYY h:mm A",
@@ -1798,7 +1798,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
             }
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
-      
+
             that.insideAfterRender = false;
         }
     },
@@ -1857,46 +1857,48 @@ promptTypes.media = promptTypes.base.extend({
     },
     capture: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".capture");
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'capture'});
-        var outcome = odkCommon.doAction( dispatchString, that.captureAction, 
-            JSON.stringify({ extras: { 
-                appName: opendatakit.getPlatformInfo().appName, 
+
+        odkCommon.log('D',"prompts." + that.type + ".capture -- invoking doAction");
+        var outcome = odkCommon.doAction( dispatchString, that.captureAction,
+            JSON.stringify({ extras: {
+                appName: opendatakit.getPlatformInfo().appName,
                 tableId: opendatakit.getCurrentTableId(),
                 instanceId: opendatakit.getCurrentInstanceId(),
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
-        ctxt.log('D','media.capture', platInfo.container + " outcome is " + outcome);
+
+        odkCommon.log('D',"prompts." + that.type + ".capture - doAction: " +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            ctxt.log("W",'media.capture',platInfo.container + " Should be OK got >" + outcome + "<");
+            odkCommon.log('W',"prompts." + that.type + ".capture - doAction cancelled -- Should be OK got >" + outcome + "<");
             that.enableButtons();
-            ctxt.failure({message: "Action canceled."});
         } else {
-            ctxt.success();
+            odkCommon.log('W',"prompts." + that.type + ".capture - doAction in play -- awaiting responseAvailable");
         }
     },
     choose: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".choose");
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'choose'});
+
+        odkCommon.log('D',"prompts." + that.type + ".choose -- invoking doAction");
         var outcome = odkCommon.doAction( dispatchString, that.chooseAction,
-            JSON.stringify({ extras: { 
-                appName: opendatakit.getPlatformInfo().appName, 
+            JSON.stringify({ extras: {
+                appName: opendatakit.getPlatformInfo().appName,
                 tableId: opendatakit.getCurrentTableId(),
                 instanceId: opendatakit.getCurrentInstanceId(),
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
-        ctxt.log('D','media.capture', platInfo.container + " outcome is " + outcome);
+
+        odkCommon.log('D',"prompts." + that.type + ".choose - doAction: " +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
-            ctxt.log("W",'media.capture', platInfo.container + " Should be OK got >" + outcome + "<");
+            odkCommon.log('W',"prompts." + that.type + ".choose - doAction cancelled -- Should be OK got >" + outcome + "<");
             that.enableButtons();
-            ctxt.failure({message: "Action canceled."});
         } else {
-            ctxt.success();
+            odkCommon.log('W',"prompts." + that.type + ".choose - doAction in play -- awaiting responseAvailable");
         }
     },
     // TODO: support deletion of the media files??
@@ -1927,7 +1929,7 @@ promptTypes.media = promptTypes.base.extend({
             else {
                 ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
                     "px: " + that.promptIdx +
-                    " failure returned from intent" + 
+                    " failure returned from intent" +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.updateRenderContext();
@@ -1940,10 +1942,10 @@ promptTypes.media = promptTypes.base.extend({
     baseUpdateRenderContext: function() {
         var that = this;
         var mediaUri = that.getValue();
-        var uriFragment = (mediaUri !== null && mediaUri !== undefined && 
+        var uriFragment = (mediaUri !== null && mediaUri !== undefined &&
                     mediaUri.uriFragment !== null && mediaUri.uriFragment !== undefined) ? mediaUri.uriFragment : null;
         var uri = (uriFragment === null || uriFragment === undefined) ? null : opendatakit.getUriFromRowpath(uriFragment);
-        var contentType = (mediaUri !== null && mediaUri !== undefined && 
+        var contentType = (mediaUri !== null && mediaUri !== undefined &&
                     mediaUri.contentType !== null && mediaUri.contentType !== undefined) ? mediaUri.contentType : null;
         var safeIdentity = 'T'+opendatakit.genUUID().replace(/[-:]/gi,'');
         var platinfo = opendatakit.getPlatformInfo();
@@ -1971,7 +1973,7 @@ promptTypes.media = promptTypes.base.extend({
             }
             else {
                 return '';
-            }          
+            }
         }
     }
 });
@@ -2028,7 +2030,6 @@ promptTypes.launch_intent = promptTypes.base.extend({
     },
     launch: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".launch");
         var platInfo = opendatakit.getPlatformInfo();
         $('#block-ui').show().on('swipeleft swiperight click', function(evt) {
             evt.stopPropagation();
@@ -2036,15 +2037,17 @@ promptTypes.launch_intent = promptTypes.base.extend({
         //We assume that the webkit could go away when an intent is launched,
         //so this prompt's "address" is passed along with the intent.
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launch'});
+
+        odkCommon.log('D',"prompts." + that.type + ".launch -- invoking doAction");
         var outcome = odkCommon.doAction( dispatchString, that.intentString,
             ((that.intentParameters === null || that.intentParameters === undefined) ? null : JSON.stringify(that.intentParameters)));
-        ctxt.log('D',"prompts." + that.type + ".launch " + that.intentString, platInfo.container + " outcome is " + outcome);
-        if (outcome && outcome === "OK") {
-            ctxt.success();
-        } else {
-            ctxt.log("W","prompts." + that.type + " Should be OK got >" + outcome + "<");
+
+        odkCommon.log('D',"prompts." + that.type + ".launch - doAction: " +  platInfo.container + " outcome is " + outcome);
+        if (outcome === null || outcome !== "OK") {
+            odkCommon.log('W',"prompts." + that.type + ".launch - doAction cancelled -- Should be OK got >" + outcome + "<");
             $('#block-ui').hide().off();
-            ctxt.failure({message: "Action canceled."});
+        } else {
+            odkCommon.log('W',"prompts." + that.type + ".launch - doAction in play -- awaiting responseAvailable");
         }
     },
     /**
@@ -2058,7 +2061,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
         return function(ctxt, internalPromptContext, action, jsonObject) {
-            ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', 
+            ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn',
                 "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                 internalPromptContext + " action: " + action);
             if (jsonObject.status === -1 ) { // Activity.RESULT_OK
@@ -2071,7 +2074,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                     that.reRender(ctxt);
                 }
             } else {
-                ctxt.log('E',"prompts." + that.type + 'getCallback.actionFn.failureOutcome', 
+                ctxt.log('E',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                     internalPromptContext + " action: " + action);
                 ctxt.failure({message: "Action canceled."});
@@ -2112,7 +2115,7 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
             if (displayObject === null || displayObject === undefined ) {
                 return null;
             }
-            if (displayObject.latitude !== null && displayObject.latitude !== undefined && 
+            if (displayObject.latitude !== null && displayObject.latitude !== undefined &&
                 displayObject.longitude !== null && displayObject.longitude !== undefined) {
                 return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
             }
@@ -2141,7 +2144,7 @@ promptTypes.geopointmap = promptTypes.launch_intent.extend({
             if (displayObject === null || displayObject === undefined ) {
                 return null;
             }
-            if (displayObject.latitude !== null && displayObject.latitude !== undefined && 
+            if (displayObject.latitude !== null && displayObject.latitude !== undefined &&
                 displayObject.longitude !== null && displayObject.longitude !== undefined) {
                 return "lat: " + displayObject.latitude + " long: " + displayObject.longitude;
             }
@@ -2201,7 +2204,7 @@ promptTypes.bargraph = promptTypes.base.extend({
         failure:function(m) {
             ctxt.failure(m);
         }});
-        
+
         that.renderContext.passiveError = null;
         that.renderContext.graphType = that.type;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
@@ -2216,14 +2219,14 @@ promptTypes.bargraph = promptTypes.base.extend({
 
         var paramWidth = 400;
         var paramHeight = 450;
-        
+
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
         if (that.renderContext.choices.length === 0)
         {
             odkCommon.log("E","prompts." + that.type + ".afterRender - no data to graph");
-            return; 
-        } 
+            return;
+        }
         var dataJ = _.map(that.renderContext.choices, function(choice){
             return choice;
         });
@@ -2244,7 +2247,7 @@ promptTypes.bargraph = promptTypes.base.extend({
         .scale(y)
         .orient("left")
         .tickSubdivide(true);
-        
+
         dataJ.forEach(function(d) {
                 d.y = +d.y;
             });
@@ -2325,7 +2328,7 @@ promptTypes.bargraph = promptTypes.base.extend({
               .attr("x", function(d) { return x(d.x); })
               .attr("y", function(d) { return y(d.y); })
               .attr("height", function(d) { return tempHeight - y(d.y); });
- 
+
         return;
     }
 });
@@ -2375,7 +2378,7 @@ promptTypes.linegraph = promptTypes.base.extend({
         failure:function(m) {
             ctxt.failure(m);
         }});
-        
+
         that.renderContext.passiveError = null;
         that.renderContext.graphType = that.type;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
@@ -2393,14 +2396,14 @@ promptTypes.linegraph = promptTypes.base.extend({
 
         var paramWidth = 450;
         var paramHeight = 400;
-        
+
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
         if (that.renderContext.choices.length === 0)
         {
             odkCommon.log("E","prompts." + that.type + ".afterRender - no data to graph");
-            return; 
-        } 
+            return;
+        }
 
         if (that.x_axis_label) {
             xString = that.x_axis_label;
@@ -2446,21 +2449,21 @@ promptTypes.linegraph = promptTypes.base.extend({
             d.y = +d.y;
             d.x = +d.x;
         });
-    
+
         dataMax.forEach(function(d) {
             d.y = +d.y;
             d.x = +d.x;
         });
         */
 
-        
+
         var line = d3.svg.line()
             .x(function(d) { return x(d.x); })
             .y(function(d) { return y(d.y); });
 
         // Don't have a dataMax of dataMin yet
         // Also setting this to a fixed range and domain for now
-        // These will probably need to be settings 
+        // These will probably need to be settings
         x.domain([0, d3.max(dataJ, function(d) { return d.x; })]);
         y.domain([d3.min(dataJ, function(d) { return d.y; }), d3.max(dataJ, function(d) { return d.y; })]);
 
@@ -2529,12 +2532,12 @@ promptTypes.linegraph = promptTypes.base.extend({
             .attr("stroke", "blue")
             .attr("d", line);
 
-        // add legend   
+        // add legend
         var legend = svg.append("g")
             .attr("class", "legend")
             .attr("height", 50)
             .attr("width", 100);
-    
+
         legend
             .append("rect")
             .attr("x", -10 )
@@ -2542,7 +2545,7 @@ promptTypes.linegraph = promptTypes.base.extend({
             .attr("width", 10)
             .attr("height", 10)
             .style("fill", 'blue');
-      
+
         legend
         .append("text")
         .attr("x", 10)
@@ -2562,7 +2565,7 @@ promptTypes.linegraph = promptTypes.base.extend({
                 .attr("cy", function(d) { return y(y_val); });
     }
 
- 
+
         return;
     }
 });
@@ -2603,7 +2606,7 @@ promptTypes.piechart = promptTypes.base.extend({
         failure:function(m) {
             ctxt.failure(m);
         }});
-        
+
         that.renderContext.passiveError = null;
         that.renderContext.graphType = that.type;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
@@ -2623,14 +2626,14 @@ promptTypes.piechart = promptTypes.base.extend({
             width = paramWidth - margin.left - margin.right,
             height = paramHeight - margin.top - margin.bottom,
             radius = Math.min(width, height) / 2;
-        
+
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
         if (that.renderContext.choices.length === 0)
         {
             odkCommon.log("E","prompts." + that.type + ".afterRender - no data to graph");
-            return; 
-        } 
+            return;
+        }
         var dataJ = _.map(that.renderContext.choices, function(choice){
             return choice;
         });
@@ -2674,7 +2677,7 @@ promptTypes.piechart = promptTypes.base.extend({
         g.append("path")
             .attr("d", arc)
             .style("fill", function(d, i) {
-                // Switch to a case statement 
+                // Switch to a case statement
                 // Maybe these colors should be available in a library or something
                 if(i === 0) {
                     return "green";
@@ -2699,7 +2702,7 @@ promptTypes.piechart = promptTypes.base.extend({
             .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
             .attr("dy", "2em")
             .style("text-anchor", "middle")
-            .text(function(d, i) { return dataJ[i].x; });        
+            .text(function(d, i) { return dataJ[i].x; });
     }
 });
 
@@ -2748,7 +2751,7 @@ promptTypes.scatterplot = promptTypes.base.extend({
         failure:function(m) {
             ctxt.failure(m);
         }});
-        
+
         that.renderContext.passiveError = null;
         that.renderContext.graphType = that.type;
         var queryDefn = opendatakit.getQueriesDefinition(that.values_list);
@@ -2775,14 +2778,14 @@ promptTypes.scatterplot = promptTypes.base.extend({
         if (that.vHeight === 0) {
             that.vHeight = height;
         }
-        
+
         // In configureRenderContext getting data via the CSV
         // fetched data should now be in the renderContext.choices array
         if (that.renderContext.choices.length === 0)
         {
             odkCommon.log("E","prompts." + that.type + ".afterRender - no data to graph");
-            return; 
-        } 
+            return;
+        }
 
         var dataJ = _.map(that.renderContext.choices, function(choice){
             return choice;
@@ -2828,10 +2831,10 @@ promptTypes.scatterplot = promptTypes.base.extend({
             .orient("left")
             .ticks(5);
 
-    
+
         // Drawing
         d3.selectAll(".wholeBody").remove();
-        
+
         //    Create SVG element
         var svg = d3.select(that.$("#plot").get(0))
             .append("svg")
@@ -2840,10 +2843,10 @@ promptTypes.scatterplot = promptTypes.base.extend({
             .attr("height", that.vHeight + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + (margin.left) + "," + (margin.top) + ")");
-        
+
         x.rangeRoundBands([0, that.vWidth], 0.1);
         y.range([that.vHeight, 0]);
-        
+
         yScale.range([that.vHeight - padding, padding]);
         xScale.range([padding, that.vWidth - padding * 2]);
 
@@ -2859,7 +2862,7 @@ promptTypes.scatterplot = promptTypes.base.extend({
             var colors = ['blue','red','yellow','orange','green'];
             return colors[parseInt(len) % colors.length];
         };
-        
+
         //        Create circles
         svg.selectAll("circle")
             .data(dataJ)

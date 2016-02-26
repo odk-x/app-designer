@@ -1,8 +1,8 @@
 /* global odkCommon */
 /**
  * Main entry point: buildSurvey
- * 
- * Given a form definition (formDef.json), constructs the calculations and prompts lists that are then 
+ *
+ * Given a form definition (formDef.json), constructs the calculations and prompts lists that are then
  * injected into the controller.
  *
  * Major task is to construct function()s for the calculates, constraints and other equations.
@@ -16,9 +16,9 @@ verifyLoad('builder',
 
     /**
      * evalFn takes a 'function(...) {}' definition ('fn') and evaluates it in the
-     * FormulaFunctions context so that it has access to all other functions and 
+     * FormulaFunctions context so that it has access to all other functions and
      * does not otherwise pollute the global namespace.
-     * 
+     *
      * TODO: Link/copy formula documentation.
      * TODO: How do exceptions work?
      **/
@@ -46,7 +46,7 @@ verifyLoad('builder',
 
     //propertyParsers are functions for transforming property values into
     //useful formats.
-    //For example, transformings all the constraint/condition/etc. 
+    //For example, transformings all the constraint/condition/etc.
     //formula strings into JS functions.
     var propertyParsers = {
         'function': evalFn,
@@ -114,7 +114,7 @@ verifyLoad('builder',
             property = "function " + argList + "{\nreturn (" + property + ");\n}";
             evalAs = 'function';
         }
-        
+
         if (evalAs in propertyParsers) {
             var propertyParser = propertyParsers[evalAs];
             odkCommon.log("I",'Parsing: ' + property);
@@ -138,7 +138,7 @@ verifyLoad('builder',
             ctxt.failure({message: 'no formDef!'});
             return;
         }
-        
+
         var that = this;
 
         //currentPromptTypes set to a promptTypes subtype so user defined prompts
@@ -148,12 +148,12 @@ verifyLoad('builder',
         var currentScreenTypes = Object.create(screenTypes);
 
         ctxt.log('D','builder.buildSurvey: initializing');
-        
+
         var afterCustomPromptsLoadAttempt = function(){
             // save the current prompts and screens in the specification
             surveyJson.specification.currentPromptTypes = currentPromptTypes;
             surveyJson.specification.currentScreenTypes = currentScreenTypes;
-        
+
             // define the requirejs_path action on the property parser.
             propertyParsers.requirejs_path = function(content) {
                 return formPath + content;
@@ -183,7 +183,7 @@ verifyLoad('builder',
                 var rowObject = surveyJson.specification.settings[key];
                 _.each(_.keys(rowObject), function(k) {
                     if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-                        resolveOneField( rowObject[k], rowObject, k, 
+                        resolveOneField( rowObject[k], rowObject, k,
                             surveyJson.specification.column_types[k], 'settings', rowObject._row_num,
                             k, propertyParsers );
                     }
@@ -195,7 +195,7 @@ verifyLoad('builder',
                 var rowObject = surveyJson.specification.choices[key];
                 _.each(_.keys(rowObject), function(k) {
                     if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-                        resolveOneField( rowObject[k], rowObject, k, 
+                        resolveOneField( rowObject[k], rowObject, k,
                             surveyJson.specification.column_types[k], 'choices', rowObject._row_num,
                             k, propertyParsers );
                     }
@@ -207,7 +207,7 @@ verifyLoad('builder',
                 var rowObject = surveyJson.specification.queries[key];
                 _.each(_.keys(rowObject), function(k) {
                     if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-                        resolveOneField( rowObject[k], rowObject, k, 
+                        resolveOneField( rowObject[k], rowObject, k,
                             surveyJson.specification.column_types[k], 'queries', rowObject._row_num,
                             k, propertyParsers );
                     }
@@ -224,7 +224,7 @@ verifyLoad('builder',
                 for ( i = 0 ; i < sectionObject.prompts.length ; ++i ) {
                     rowObject = sectionObject.prompts[i];
                     var PromptType, ExtendedPromptType, PromptInstance;
-                    
+
                     // xlsxconverter should have defined an _type field in the prompt...
                     if (!('_type' in rowObject)) {
                         var msg = 'builder.initializePrompts: no _type specified for prompt in row ' +
@@ -232,7 +232,7 @@ verifyLoad('builder',
                         odkCommon.log('E',msg);
                         throw new Error(msg);
                     }
-                    
+
                     if (rowObject._type in currentPromptTypes) {
                         PromptType = currentPromptTypes[rowObject._type];
                     } else {
@@ -242,44 +242,44 @@ verifyLoad('builder',
                     }
                     // ensure that the section is saved...
                     rowObject._section_name = key;
-                    
+
                     // resolve column_types within the prompt fields coming from XLSX.
-                    // NOTE: we really should apply this to all of our code in 
+                    // NOTE: we really should apply this to all of our code in
                     // currentPromptTypes plus all of the fields in rowObject.
                     // HOWEVER, it is unclear how to do this using Backbone
                     // due to the way inheritance is implemented.
                     _.each(_.keys(rowObject), function(k) {
                         if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-                            resolveOneField( rowObject[k], rowObject, k, 
+                            resolveOneField( rowObject[k], rowObject, k,
                                 surveyJson.specification.column_types[k], key, rowObject._row_num,
                                 k, propertyParsers );
                         }
                     });
-                    
+
                     ExtendedPromptType = PromptType.extend(rowObject);
                     PromptInstance = new ExtendedPromptType();
 
                     sectionObject.parsed_prompts.push(PromptInstance);
                 }
-                
+
                 // process operations
                 for ( i = 0 ; i < sectionObject.operations.length ; ++i ) {
                     rowObject = sectionObject.operations[i];
                     rowObject._section_name = key;
                     _.each(_.keys(rowObject), function(k) {
                         if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
-                            resolveOneField( rowObject[k], rowObject, k, 
+                            resolveOneField( rowObject[k], rowObject, k,
                                 surveyJson.specification.column_types[k], key, rowObject._row_num,
                                 k, propertyParsers );
                         }
                     });
                 }
             });
-            
+
             //This resets the custom css styles to the customStyles.css file in the
             //current form's directory (or nothing if customStyles.css doesn't exist).
             $('#custom-styles').attr('href', formPath + 'customStyles.css');
-            
+
             //Do an ajax request to see if there is a custom theme packaged with the form:
             var customTheme = formPath + 'customTheme.css';
             $.ajax({
@@ -296,7 +296,7 @@ verifyLoad('builder',
                 error: function() {
                     odkCommon.log("W",'builder.buildSurvey: error loading ' +
                             formPath + 'customTheme.css');
-                    //Set the jQm theme to the defualt theme, or if there is a 
+                    //Set the jQm theme to the defualt theme, or if there is a
                     //predefined theme specified in the settings sheet, use that.
                     var url = null;
                     var theme = opendatakit.getSettingObject(surveyJson, "theme");
@@ -314,7 +314,7 @@ verifyLoad('builder',
                 }
             });
         };
-        
+
         var afterCustomScreensLoadAttempt = function(){
             //This tries to load any user defined prompt types provided in customPromptTypes.js.
             //TODO: The approach to getting the current form path might need to change.
@@ -345,7 +345,7 @@ verifyLoad('builder',
                 afterCustomPromptsLoadAttempt();
             });
         };
-        
+
         //This tries to load any user defined prompt types provided in customPromptTypes.js.
         //TODO: The approach to getting the current form path might need to change.
         require([formPath + 'customScreenTypes.js'], function (customScreenTypes) {

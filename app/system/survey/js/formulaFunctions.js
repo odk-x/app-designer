@@ -26,9 +26,9 @@ function(opendatakit,  database,   _) {
             } else if( 'default' in textOrLangMap ) {
                 return textOrLangMap['default'];
             } else {
-                odkCommon.log('E',"Could not localize object. Locale '" + locale + 
+                odkCommon.log('E',"Could not localize object. Locale '" + locale +
                     "' and 'default' missing from " + textOrLangMap);
-                throw new Error("Could not localize object. Locale '" + locale + 
+                throw new Error("Could not localize object. Locale '" + locale +
                     "' and 'default' missing from: " + textOrLangMap );
             }
         },
@@ -130,7 +130,7 @@ function(opendatakit,  database,   _) {
             testDiv = $('<div>' + string + '</div>')
             .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font': f})
             .appendTo($('body')),
-            
+
             width = testDiv.width();
             testDiv.remove();
             return width;

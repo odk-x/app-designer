@@ -7,7 +7,7 @@
 
 /*
 This odkSurvey  object is just a facade for browser testing.
-It defines the interface that ODK Survey or other container apps 
+It defines the interface that ODK Survey or other container apps
 must implement to work with the javascript library.
 It will be replaced by one injected by Android Java code.
 */
@@ -20,7 +20,7 @@ window.odkSurvey = window.odkSurvey || {
     },
     /**
      * The odkSurvey now remembers an entire history of refId values.
-     * 
+     *
      * The manipulators below access the values for their respective refId
      * via refIdMap[refId]. The values tracked per refId are:
      *   instanceId
@@ -53,7 +53,7 @@ window.odkSurvey = window.odkSurvey || {
             return;
         }
         // report the new instanceId to ODK Survey...
-        // needed so that callbacks, etc. can properly track the instanceId 
+        // needed so that callbacks, etc. can properly track the instanceId
         // currently being worked on.
         odkCommon.log("D","odkSurvey: DO: setInstanceId(" + refId + ", " + instanceId + ")");
         var settings = this.lookupRefIdData(refId);
@@ -65,7 +65,7 @@ window.odkSurvey = window.odkSurvey || {
             return null;
         }
         // report the new instanceId to ODK Survey...
-        // needed so that callbacks, etc. can properly track the instanceId 
+        // needed so that callbacks, etc. can properly track the instanceId
         // currently being worked on.
         odkCommon.log("D","odkSurvey: DO: getInstanceId(" + refId + ")");
         var settings = this.lookupRefIdData(refId);
@@ -107,7 +107,7 @@ window.odkSurvey = window.odkSurvey || {
         if ( settings.sectionStateScreenHistory.length === 0 ) {
             return;
         }
-        
+
         var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
         lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
     },
@@ -156,7 +156,7 @@ window.odkSurvey = window.odkSurvey || {
         }
         odkCommon.log("D","odkSurvey: DO: getControllerState(" + refId + ")");
         var settings = this.lookupRefIdData(refId);
-        
+
         if ( settings.sectionStateScreenHistory.length === 0 ) {
             odkCommon.log("D","odkSurvey: getControllerState: NULL!");
             return null;
@@ -172,7 +172,7 @@ window.odkSurvey = window.odkSurvey || {
         odkCommon.log("D","odkSurvey: DO: getScreenPath(" + refId + ")");
         var settings = this.lookupRefIdData(refId);
         this._dumpScreenStateHistory(settings);
-        
+
         if ( settings.sectionStateScreenHistory.length === 0 ) {
             odkCommon.log("D","odkSurvey: getScreenPath: NULL!");
             return null;
@@ -206,13 +206,13 @@ window.odkSurvey = window.odkSurvey || {
         }
         odkCommon.log("D","odkSurvey: DO: popScreenHistory(" + refId + ")");
         var settings = this.lookupRefIdData(refId);
-        
+
         if ( settings.sectionStateScreenHistory.length === 0 ) {
             return null;
         }
-        
+
         var lastSection;
-        
+
         lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
         if ( lastSection.history.length !== 0 ) {
             // pop history from within this section
@@ -227,7 +227,7 @@ window.odkSurvey = window.odkSurvey || {
         if ( settings.sectionStateScreenHistory.length === 0 ) {
             return null;
         }
-        
+
         // return the screen from that last section... (do not pop the history)
         lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
         return lastSection.screen;
@@ -254,7 +254,7 @@ window.odkSurvey = window.odkSurvey || {
         if ( settings.sectionStateScreenHistory.length !== 0 ) {
             settings.sectionStateScreenHistory.pop();
         }
-        
+
         if ( settings.sectionStateScreenHistory.length !== 0 ) {
             var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
             return lastSection.screen;

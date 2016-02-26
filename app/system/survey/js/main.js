@@ -1,24 +1,24 @@
 /* globals odkCommon */
 /**
- * Simple boilerplate for defining the requirejs settings, 
+ * Simple boilerplate for defining the requirejs settings,
  * to initialize parsequery dependencies, and to invoke
- * the parsequery.changeUrlHash to interpret the 
+ * the parsequery.changeUrlHash to interpret the
  * window.location.hash value.
  *
  * Also sets up a timer polling for the completion of the
  * jquery mobile platform. After it is initialized, the
- * timer then triggers the processing of the hash of the 
- * initial page load (which triggers the parsing and 
+ * timer then triggers the processing of the hash of the
+ * initial page load (which triggers the parsing and
  * interpretation of the formDef.json for the form).
  */
 requirejs.config({
     baseUrl: odkCommon.getBaseUrl(),
     waitSeconds: 45,
     paths: {
-        // third-party libraries we depend upon 
+        // third-party libraries we depend upon
         jquery : 'libs/jquery.1.10.2',
         bootstrap : 'libs/bootstrap-3.1.1-dist/js/bootstrap.min',
-        moment : 'libs/eonasdan/moment',     
+        moment : 'libs/eonasdan/moment',
         datetimepicker : 'libs/eonasdan/bootstrap-datetimepicker',
         spinner : 'libs/spinner/waitMe.min',
         backbone : 'libs/backbone.1.0.0',
@@ -67,11 +67,11 @@ requirejs.config({
         },
         // datetimepicker already uses requirejs if it
         // is available so it doesn't need to be shimmed
-        //'datetimepicker': {                      
+        //'datetimepicker': {
         //    deps: ['jquery', 'bootstrap', 'moment'],
         //    exports: '$.fn.datetimepicker'
         //},
-        'spinner': {                      
+        'spinner': {
             deps: ['jquery'],
             exports: '$.fn.waitMe'
         },
@@ -111,7 +111,7 @@ requirejs.config({
 });
 
 /**
- * This function is called by the Application Designer environment to trigger a 
+ * This function is called by the Application Designer environment to trigger a
  * re-draw of the current screen when returning from a linked table (sub-form).
  */
 function redrawHook() {
@@ -121,7 +121,7 @@ function redrawHook() {
 
 /**
  * This function is the action for form tags that wrap input fields.
- * It seeks to change focus off of the currently-in-focus element and 
+ * It seeks to change focus off of the currently-in-focus element and
  * place the following object into focus.
  */
 function odkLeaveField(theForm) {
@@ -146,7 +146,7 @@ function odkLeaveField(theForm) {
         }
         return true;
     });
-    
+
     var $next;
     if ( idxFound !== null ) {
         $next = $fields.eq(idxFound+1);
@@ -175,7 +175,7 @@ function verifyLoad( prefix, alist, args ) {
 
 // Load XRegExp very early so that it is available when
 // the JS stub implementation of odkCommon needs it.
-require(['jquery','XRegExp'], 
+require(['jquery','XRegExp'],
     function($, XRegExp) {
         'use strict';
         verifyLoad('main.require.jquery',
@@ -184,16 +184,16 @@ require(['jquery','XRegExp'],
 
         odkCommon.log('I','main.require.jquery.loaded establish mobileinit action');
 
-        require(['bootstrap','moment', 'odkDataIf'], 
+        require(['bootstrap','moment', 'odkDataIf'],
             function(bootstrap, moment, odkDataIf) {
                 verifyLoad('main.require.bootstrap.moment',
                     ['bootstrap','moment', 'odkDataIf'],
                     [bootstrap,   moment, odkDataIf]);
                 odkCommon.log('I','main.require.bootstrap.moment.loaded establish mobileinit action');
-                
+
             // and launch the framework...
             require([ 'spinner', 'opendatakit', 'database', 'parsequery',
-                            'builder', 'controller', 'd3', 'jqueryCsv', 'datetimepicker'], 
+                            'builder', 'controller', 'd3', 'jqueryCsv', 'datetimepicker'],
             function(spinner,   opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
@@ -202,11 +202,11 @@ require(['jquery','XRegExp'],
                     [ $.fn.datetimepicker,   spinner,   opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv]);
 
-                
+
                 // define a function that waits until jquery mobile is initialized
                 // then calls changeUrlHash() to trigger loading and processing of
                 // the requested form.
-                    
+
                 parsequery.initialize(controller,builder);
 
                 var ref = window.location.href;
@@ -241,7 +241,7 @@ require(['jquery','XRegExp'],
                             } else if ( hashIdx > 0 ) {
                                 newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
                             }
-                            ctxt.log('W',"main.clearNonEmptySearchTerm.reloadpage ref: " + ref + ' newRef: ' + newRef);
+                            odkCommon.log('W',"main.clearNonEmptySearchTerm.reloadpage ref: " + ref + ' newRef: ' + newRef);
                             window.location.assign(newRef);
                         } else {
                             ctxt.log('D','main.changeUrlHash ref: ' + ref);
@@ -272,4 +272,3 @@ require(['jquery','XRegExp'],
 }, function(err) {
     odkCommon.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
 });
-                         

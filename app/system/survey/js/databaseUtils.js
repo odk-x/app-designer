@@ -194,25 +194,25 @@ return {
      * objects used for date, datetime and time data types
      * These are converted into a type-appropriate string.
      *
-     * A secondary cleaned-up conversion is the clean-up of 
+     * A secondary cleaned-up conversion is the clean-up of
      * boolean, integer and numeric types, ensuring that those
      * values are represented as their primitive types.
      *
      * Arrays and objects are recursively traversed to ensure
      * that all needed object conversions are performed.
      *
-     * After all conversions are performed, the result is 
+     * After all conversions are performed, the result is
      * JSON.stringify()'d and returned.
      *
-     * Thus, on de-serialization, if the incoming value is 
+     * Thus, on de-serialization, if the incoming value is
      * null, we return undefined, as that is not a valid
      * JSON.stringify().
      *
      * De-serialization operates in reverse -- first calling
-     * JSON.parse() then traversing the data structure and 
+     * JSON.parse() then traversing the data structure and
      * restoring the Date() objects within it. The boolean,
      * integer and numeric fields are assumed to already be
-     * in their primitive data types (by virtue of the 
+     * in their primitive data types (by virtue of the
      * original serialization action).
      */
     /**
@@ -234,7 +234,7 @@ return {
             // and stringify it...
             return JSON.stringify(value);
         }
-        
+
         if ( value === undefined || value === null ) {
             if ( jsonType.isNotNullable ) {
                 throw new Error("unexpected null value for non-nullable field");
@@ -318,7 +318,7 @@ return {
             if ( value === undefined || value === null ) {
                 return undefined;
             }
-            
+
             // Do not allow empty strings.
             // Strings are either NULL or non-zero-length.
             //
@@ -409,39 +409,39 @@ return {
     ////////////////////////////////////////////////////////////////////////////////////////
     //   Conversion to/from odkData API representation
     /**
-     * The odkData API representation is a clean-up of our 
+     * The odkData API representation is a clean-up of our
      * ODK Survey data representation. The primary clean-up
-     * is the conversion of the complex hierarchical data 
-     * model into a set of disjoint unit-of-retention 
+     * is the conversion of the complex hierarchical data
+     * model into a set of disjoint unit-of-retention
      * storage values. That is done outside of these routines.
      *
      * These routines then process the storage value prior
-     * to passing it into the odkData API. 
+     * to passing it into the odkData API.
      *
-     * If the column does not allow null values, and a null is 
+     * If the column does not allow null values, and a null is
      * passed in, an Error is thrown (this is a bad situation).
      *
      * The primary cleaned-up conversion is the conversion of JS Date()
      * objects used for date, datetime and time data types
      * These are converted into a type-appropriate formatted strings.
      * Date() does not have a JSON serialization, so this conversion
-     * needs to be applied recursively throughout the value (when the 
+     * needs to be applied recursively throughout the value (when the
      * value is an array or object).
      *
-     * A secondary cleaned-up conversion is the clean-up of 
+     * A secondary cleaned-up conversion is the clean-up of
      * boolean, integer and numeric types, ensuring that those
      * values are represented as their primitive types. e.g.,
-     * that a boolean field that holds a numeric 1 has that value 
-     * properly converted to the Javascript true value (rather 
+     * that a boolean field that holds a numeric 1 has that value
+     * properly converted to the Javascript true value (rather
      * than being passed through as a numeric 1). Similarly, integers
-     * are forced to integer values, numeric values are converted 
+     * are forced to integer values, numeric values are converted
      * to Number type, and string values are forced to be strings.
      *
      * Arrays and objects are recursively traversed to ensure
      * that all needed object conversions are performed.
      *
-     * Because the traversal is driven by the jsonType 
-     * information, this clean-up enforces data types prior to 
+     * Because the traversal is driven by the jsonType
+     * information, this clean-up enforces data types prior to
      * invoking the odkData API.
      *
      * After all these clean-up conversions are performed:
@@ -456,7 +456,7 @@ return {
      *   return the value.
      *
      * De-serialization also relies on the data type of the data column
-     * to determine what action to take. When de-serializing, the 
+     * to determine what action to take. When de-serializing, the
      * date, dateTime and time datatypes are converted into Date() objects.
      *
      * Note that time is represented as local time, and date/dateTime is UTC.
@@ -472,14 +472,14 @@ return {
         var itemValue;
 
         if ( topLevel ) {
-            
+
             if ( value === undefined || value === null ) {
                 if ( jsonType.isNotNullable ) {
                     throw new Error("unexpected null value for non-nullable field");
                 }
                 return null;
             }
-            
+
             if ( jsonType.type === 'array' || jsonType.type === 'object' ) {
                 // parse it if it is a non-null array or object...
                 value = JSON.parse(value);
@@ -579,12 +579,12 @@ return {
         if ( topLevel ) {
             // convert it as if it were nested...
             value = that.toOdkDataInterfaceFromElementType(jsonType, value, false);
-            
+
             // null is always null...
             if ( value === null ) {
                 return value;
             }
-            
+
             if ( jsonType.type === 'array' || jsonType.type === 'object' ) {
                 // and stringify it if it is a non-null array or object...
                 return JSON.stringify(value);
@@ -606,7 +606,7 @@ return {
                 refined = [];
                 itemType = jsonType.items;
                 if (itemType === undefined || itemType === null ) {
-                    // unspecified array. 
+                    // unspecified array.
                     // This might screw up embedded datetimes, etc.
                     return value;
                 } else {
@@ -677,16 +677,16 @@ return {
     /**
      * This takes the '_type' column of the KVS entry and the '_value' column
      *
-     * It produces the converted value for the column. 
+     * It produces the converted value for the column.
      *
      * type:  one of array, object, string, boolean, number, integer, ...
      *
      * The incoming value is null or a string.
-     * 
-     * The conversion is parsing the strings. The only tricky one is 
+     *
+     * The conversion is parsing the strings. The only tricky one is
      * for boolean. That tests for either 'true' or a non-zero number
      * as true.
-     */  
+     */
     fromKVStoreToElementType: function( type, value ) {
         var that = this;
 
@@ -939,10 +939,10 @@ return {
         return remapped;
     },
     /**
-     * take a kvMap and either immediately effect the change if it is to a 
+     * take a kvMap and either immediately effect the change if it is to a
      * session variable or add it to the set of accumulated changes to be applied
-     * when the data record is next updated. 
-     * 
+     * when the data record is next updated.
+     *
      * This does not update the metadata fields of the record.
      *
      * kvMap : { 'fieldName' : { value: "foo name", isInstanceMetadata: false } ...}
@@ -955,20 +955,20 @@ return {
         var that = this;
         var dbTableName = model.table_id;
         var dataTableModel = model.dataTableModel;
-        
+
         // track the values we have assigned. Useful for catching typos in the elementKey (field) names.
         var processSet = {};
-        
+
         var f, defElement, elementPathPair, kvElement, v;
         var changeElement;
         var sessionVariableChanges = {};
-                            
+
         for (f in dataTableModel) {
             defElement = dataTableModel[f];
             if ( that.isUnitOfRetention(defElement) ) {
                 var elementPath = defElement.elementPath;
                 // don't allow working with elementKey primitives if not manipulating metadata
-                if (( elementPath === undefined || elementPath === null ) && 
+                if (( elementPath === undefined || elementPath === null ) &&
                       defElement.elementSet === 'instanceMetadata') {
                     elementPath = f;
                 }
@@ -1000,7 +1000,7 @@ return {
         }
         // apply the session variable changes immediately to the model.
         that.reconstructModelDataFromElementPathValueUpdates(model, sessionVariableChanges);
-        
+
         for ( f in kvMap ) {
             if ( processSet[f] !== true ) {
                 console.error("_accumulateUnitOfRetentionUpdates: kvMap contains unrecognized database column " + dbTableName + "." + f );
@@ -1010,7 +1010,7 @@ return {
     /**
      * Does not depend upon any global values.
      *
-     * updates the model and records the field changes in 
+     * updates the model and records the field changes in
      * this.pendingChanges
      */
     setModelDataValueDeferredChange:function( model, formId, instanceId, name, value, accumulatedChanges ) {

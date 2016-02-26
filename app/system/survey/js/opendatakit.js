@@ -18,7 +18,7 @@ return {
     savepoint_type_incomplete: 'INCOMPLETE',
     baseDir: '',
     /**
-     * Global object that is the container for 
+     * Global object that is the container for
      * - formDef
      * - model structure metadata
      * - instance metadata
@@ -26,12 +26,12 @@ return {
      *
      * The data is accessed via the database.js utilities.
      * Those utilities are responsible for write-through
-     * update of the database.  Data is cached here to 
+     * update of the database.  Data is cached here to
      * simplify Javascript user-defined expression coding.
-     * 
-     * The W3C SQLite database has an asynchronous 
+     *
+     * The W3C SQLite database has an asynchronous
      * interaction model.
-     * 
+     *
      */
     mdl: {  data: {},  // dataTable instance data values: (...)
             instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
@@ -61,10 +61,10 @@ return {
             //                   },
             //                 fieldElementNameB...
             //              }
-            //     keyValueStoreList: [ 
-            //                     // 
-            //                     // value is one of bool, integer, number or, for all other types (e.g., array, object), a string. 
-            //                     // 
+            //     keyValueStoreList: [
+            //                     //
+            //                     // value is one of bool, integer, number or, for all other types (e.g., array, object), a string.
+            //                     //
             //              { partition: xxx, aspect: xxx, key: xxx, type: xxx, value: xxx },
             //              ...
             //          ]
@@ -74,13 +74,13 @@ return {
             //
             metadata: {},
             dataTableModel: {},// inverted and extended formDef.model for representing data store
-            formDef: null, 
-            formPath: null, 
-            instanceId: null, 
+            formDef: null,
+            formPath: null,
+            instanceId: null,
             table_id: null
         },
     platformInfo: null,
-    
+
     logInitDone:function(pagename) {
         odkCommon.log("I","logInitDone: doneInit ms: " + (+new Date()) + " page: " + pagename);
     },
@@ -96,9 +96,9 @@ return {
         }
         return this.platformInfo;
     },
-    
+
     _forbiddenInstanceDirCharsPattern: XRegExp('(\\p{P}|\\p{Z})', 'A'),
-    
+
     /**
      * Matches the API of the same name under the control class
      *
@@ -106,7 +106,7 @@ return {
     getRowFileAsUrl:function(tableId, instanceId, rowpath) {
         return odkCommon.getRowFileAsUrl(tableId, instanceId, rowpath);
     },
-    
+
     /**
      * constructs a full URI to a specified rowpath attachment under
      * the current tableId and instanceId.
@@ -118,22 +118,22 @@ return {
     getUriFromRowpath:function(rowpath) {
         return this.getRowFileAsUrl(this.getCurrentTableId(), this.getCurrentInstanceId(), rowpath);
     },
-    
+
     /**
-     * Given a uriFragment underneath this appName, reduce it to 
+     * Given a uriFragment underneath this appName, reduce it to
      * a rowpath under the ...data/tables/tableId/instances/instanceId/
-     * directory path, or, if it cannot be reduced, return the 
+     * directory path, or, if it cannot be reduced, return the
      * full uriFragment.
      */
     getRowpathFromUriFragment:function(incomingFragment) {
         if ( incomingFragment === null || incomingFragment === undefined ) return null;
-        
+
         var uriFragment = incomingFragment;
         if ( incomingFragment.charAt(0) === '/' ) {
             uriFragment = incomingFragment.substring(1);
         }
-        
-        var prefix = 'data/tables/' + 
+
+        var prefix = 'data/tables/' +
             this.getCurrentTableId() + '/instances/' + this.getCurrentInstanceId() + '/';
 
         if ( prefix.length < uriFragment.length && uriFragment.substring(0,prefix.length) === prefix ) {
@@ -152,7 +152,7 @@ return {
     genUUID:function() {
         /*jshint bitwise: false*/
         // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
-        var id = "uuid:" + 
+        var id = "uuid:" +
         'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             // NOTE: the logical OR forces the number into an integer
             var r = Math.random()*16|0;
@@ -196,8 +196,8 @@ return {
         if ( !hashString.match(/^(\??#).*/) ) {
             throw new Error('parsing of hashString failed - not a relative path (does not begin with ?# or #');
         }
-        
-        // we expect it to start with ?# or # 
+
+        // we expect it to start with ?# or #
         if ( hashString.charAt(0) === '?' ) {
             hashString = hashString.substring(1);
         }
@@ -221,13 +221,13 @@ return {
             } else if ( key === 'instanceId' ) {
                 instanceId = parts[1];
             } else {
-                reconstitutedKeyValues = reconstitutedKeyValues + 
+                reconstitutedKeyValues = reconstitutedKeyValues +
                     "&" + keyValues[i];
             }
         }
         if ( instanceId !== null ) {
-            reconstitutedKeyValues = 
-                "&instanceId=" + encodeURIComponent(instanceId) + 
+            reconstitutedKeyValues =
+                "&instanceId=" + encodeURIComponent(instanceId) +
                 reconstitutedKeyValues;
         }
         if ( formPath === null ) {
@@ -236,12 +236,12 @@ return {
         parts = decodeURIComponent(formPath).split("/");
         // the formPath ends in a slash, so we want the entry before the last one...
         var formId = parts[parts.length-2];
-        
+
         var tableId = parts[parts.length-4];
-        
+
         var appName = that.getPlatformInfo().appName;
-        
-        var uri = "content://org.opendatakit.common.android.provider.forms/" + 
+
+        var uri = "content://org.opendatakit.common.android.provider.forms/" +
             appName + "/" + tableId + "/" + formId + "/#" +
             reconstitutedKeyValues.substring(1);
 
@@ -251,39 +251,39 @@ return {
     setCurrentFormDef:function(formDef) {
         this.mdl.formDef = formDef;
     },
-    
+
     getCurrentFormDef:function() {
         return this.mdl.formDef;
     },
-    
+
     getCurrentModel:function() {
         return this.mdl;
     },
-    
+
     getQueriesDefinition: function(query_name) {
         return this.mdl.formDef.specification.queries[query_name];
     },
-    
+
     getChoicesDefinition: function(choice_list_name) {
         return this.mdl.formDef.specification.choices[choice_list_name];
     },
-    
+
     setCurrentFormPath:function(formPath) {
         this.mdl.formPath = formPath;
     },
-    
+
     getCurrentFormPath:function() {
         return this.mdl.formPath;
     },
-    
+
     setRefId:function(refId) {
         this.mdl.ref_id = refId;
     },
-    
+
     getRefId:function() {
         return this.mdl.ref_id;
     },
-    
+
     clearLocalInfo:function(type) {
         // wipe the ref_id --
         // this prevents saves into odkSurvey from succeeding...
@@ -298,31 +298,31 @@ return {
           return;
         }
     },
-    
+
     clearCurrentInstanceId:function() {
         // Update container so that it can save media and auxillary data
         // under different directories...
         odkSurvey.clearInstanceId(this.getRefId());
     },
-    
+
     setCurrentInstanceId:function(instanceId) {
         // Update container so that it can save media and auxillary data
         // under different directories...
         odkSurvey.setInstanceId( this.getRefId(), instanceId);
     },
-    
+
     getCurrentInstanceId:function() {
         return odkSurvey.getInstanceId(this.getRefId());
     },
-    
+
     setCurrentTableId:function(table_id) {
         this.mdl.table_id = table_id;
     },
-    
+
     getCurrentTableId:function() {
         return this.mdl.table_id;
     },
-    
+
     getSectionTitle:function(formDef, sectionName) {
         var ref = this.getSettingObject(formDef, sectionName);
         if ( ref === null ) {
@@ -348,12 +348,12 @@ return {
         if ( sectionSettings === null ) {
             sectionSettings = this.getSettingObject(formDef, 'survey'); // fallback
         }
-        
+
         if ( sectionSettings === null ||
              !('showContents' in sectionSettings) ) {
             return true;
         }
-        
+
         return sectionSettings.showContents;
     },
     localize:function(textOrLangMap, locale) {
@@ -379,7 +379,7 @@ return {
      * undefined.
      * NOTE: in Survey XLSX syntax, the settings are row-by-row, like choices.
      * The returned object is therefore a map of keys to values for that row.
-     * 
+     *
      * Immediate.
       */
     getSettingObject:function(formDef, key) {
@@ -388,7 +388,7 @@ return {
         if ( obj === undefined ) return null;
         return obj;
     },
-    
+
     /**
      * use this if you know the formDef is valid within the mdl...
      */
@@ -400,14 +400,14 @@ return {
     /**
         The list of locales should have been constructed by the XLSXConverter.
         It will be saved under settings._locales.value as a list:
-        
+
         [ { name: "en_us", display: { text: { "en_us": "English", "fr": "Anglais"}}},
            { name: "fr", display: { text: {"en_us": "French", "fr": "Francais"}}} ]
     */
     getFormLocales:function(formDef) {
         if ( formDef !== null && formDef !== undefined ) {
             var locales = this.getSettingObject(formDef, '_locales' );
-            if ( locales !== null && locales !== undefined && 
+            if ( locales !== null && locales !== undefined &&
                  locales.value !== null && locales.value !== undefined ) {
                 return locales.value;
             }
@@ -416,17 +416,17 @@ return {
         }
         return [ { display: { text: 'default' }, name: 'default' } ];
     },
-    
+
     /**
-        The default locale is a synthesized value. It is specified by 
+        The default locale is a synthesized value. It is specified by
         the value of the '_default_locale' setting.
-        
+
         This is generally the first locale in the _locales list, above.
      */
     getDefaultFormLocale:function(formDef) {
         if ( formDef !== null &&  formDef !== undefined ) {
             var localeObject = this.getSettingObject(formDef, '_default_locale');
-            if ( localeObject !== null && localeObject !== undefined && 
+            if ( localeObject !== null && localeObject !== undefined &&
                  localeObject.value !== null && localeObject.value !== undefined ) {
                 return localeObject.value;
             }
@@ -441,21 +441,21 @@ return {
     getDefaultFormLocaleValue:function() {
         return this.getDefaultFormLocale(this.getCurrentFormDef());
     },
-    
+
     getFormLocalesValue:function() {
         return this.getFormLocales(this.getCurrentFormDef());
     },
-    
+
     /**
      * Lower-level function to access a formDef file and parse it.
      * Should not be called from renderers!
      *
-     * Read and JSON.parse() the specified filename. 
+     * Read and JSON.parse() the specified filename.
      * Then invoke ctxt.success(jsonObj).
      */
     readFormDefFile: function(ctxt, filename) {
         var that = this;
-        require(['text!' + filename], 
+        require(['text!' + filename],
             function(formDefTxt) {
                 if ( formDefTxt === undefined || formDefTxt === null || formDefTxt.length === 0 ) {
                     alert('Unable to find file: ' + filename);
@@ -473,7 +473,7 @@ return {
                         try {
                             ctxt.success(formDef);
                         } catch (ex) {
-                            ctxt.log('E','opendatakit.readFormDefFile.require.continuationException', 
+                            ctxt.log('E','opendatakit.readFormDefFile.require.continuationException',
                                         'formDef interpetation or database setup error: ' + ex.message);
                             ctxt.failure({message: "Exception while processing form definition."});
                         }
@@ -488,8 +488,8 @@ return {
     getShortDateFormat:function(date) {
         if (date === null || date === undefined || date.constructor.name !== 'Date')
             return null;
-        
-        var shortDate = (date.getMonth() + 1) + "/" + date.getDate()  + "/" + date.getFullYear();      
+
+        var shortDate = (date.getMonth() + 1) + "/" + date.getDate()  + "/" + date.getFullYear();
 
         return shortDate;
     }

@@ -1,6 +1,6 @@
 /* global odkCommonIf, odkCommon */
 /**
- * The odkCommonIf injected interface will be used in conjunction with this class to 
+ * The odkCommonIf injected interface will be used in conjunction with this class to
  * create closures for callback functions to be invoked once a response is available
  * from the Java side.
  */
@@ -15,23 +15,23 @@ window.odkCommon = {
      *
      *  (2) Java-initiated actions (as #-prefixed strings).
      *
-     * Because these can occur at any time, the JS code should 
-     * register a listener that will be invoked when an action is 
-     * available. i.e., the Java code can direct a change in 
+     * Because these can occur at any time, the JS code should
+     * register a listener that will be invoked when an action is
+     * available. i.e., the Java code can direct a change in
      * the JS code without it being initiated by the JS side.
      *
      * Actions are queued and resilient to failure.
-     * they are fetched via 
+     * they are fetched via
      *      odkCommon.viewFirstQueuedAction().
      * And they are removed from the queue via
      *      odkCommon.removeFirstQueuedAction();
      *
      *
-     * Users of odkCommon should register their own handler by 
+     * Users of odkCommon should register their own handler by
      * calling:
      *
      * odkCommon.registerListener(
-     *            function() { 
+     *            function() {
      *               var action = odkCommon.viewFirstQueuedAction();
      *               if ( action !== null ) {
      *                   // process action -- be idempotent!
@@ -91,9 +91,9 @@ window.odkCommon = {
    getRowFileAsUrl: function(tableId, rowId, rowPathUri) {
       return odkCommonIf.getRowFileAsUrl(tableId, rowId, rowPathUri);
    },
-   
+
     /**
-     * Convert an ODK Timestamp string to a Javascript Date() 
+     * Convert an ODK Timestamp string to a Javascript Date()
      * object. The ODK Timestamp string is used to represent
      * dateTime and date values. It is an iso8601-style UTC date
      * extended to nanosecond precision:
@@ -129,24 +129,24 @@ window.odkCommon = {
      * Time is 00-24hr nanosecond-extended iso8601-style representation:
      *
      *  HH:MM:SS.sssssssss
-     * 
-     * This conversion takes an incoming 'refJsDate' Date() object, 
+     *
+     * This conversion takes an incoming 'refJsDate' Date() object,
      * retrieves the LOCAL TIME ZONE year, month, day from that object,
      * then CONSTRUCTS A NEW DATE OBJECT beginning with that
      * LOCAL TIME ZONE year, month, day and applying the time
      * to that object and returns the adjusted Date() object.
-     * The time is added to the zero hour, so that changes in 
-     * daylight savings and standard time do not affect the 
+     * The time is added to the zero hour, so that changes in
+     * daylight savings and standard time do not affect the
      * calculations (HH can reach 24 hr during "fall back" days).
      *
      *
-     * NOTE: this discards the nano field value... 
+     * NOTE: this discards the nano field value...
      */
     toDateFromOdkTime:function(refJsDate, time) {
         if ( refJsDate === undefined || refJsDate === null ) {
             return null;
         }
-        // convert from a nanosecond-extended iso8601-style 
+        // convert from a nanosecond-extended iso8601-style
         // time HH:MM:SS.sssssssss
         // this does not preserve the nanosecond field...
         if ( time === undefined || time === null ) {
@@ -161,9 +161,9 @@ window.odkCommon = {
         min = Number(time.substr(idx+1,2));
         sec = Number(time.substr(idx+4,2));
         msec = Number(time.substr(idx+7,3));
-        
+
         var msecOffset = ((hh * 60 + min) * 60 + sec) *1000 + msec;
-        
+
         var yyyy,mm,dd;
         yyyy = refJsDate.getFullYear();
         mm = refJsDate.getMonth(); // months are 0-11
@@ -173,30 +173,30 @@ window.odkCommon = {
         var dateMilliseconds = baseJsDate.valueOf();
         dateMilliseconds += msecOffset;
         var newJsDate = new Date(dateMilliseconds);
-        
+
         return newJsDate;
     },
     /**
-     * Time intervals are padded with leading zeros and 
+     * Time intervals are padded with leading zeros and
      * are of the form:
-     * 
-     * 
+     *
+     *
      *  HHHHHHHH:MM:SS.sssssssss
      *  HHHHHHHH:MM:SS.sssssssss-
      *
-     * i.e., the negative sign, if present, is at the far right end. 
-     * 
-     * This conversion takes an incoming 'refJsDate' Date() object, 
+     * i.e., the negative sign, if present, is at the far right end.
+     *
+     * This conversion takes an incoming 'refJsDate' Date() object,
      * then CONSTRUCTS A NEW DATE OBJECT beginning with that
      * UTC date and applying the +/- time interval
      * to that object and returns the adjusted Date() object.
      *
      * If the 'revJsDate' and 00:00:00.0000 for the time portion,
      * if a timeInterval is positive, this produces a Date()
-     * with the time-of-day of the time interval.  I.e., 
+     * with the time-of-day of the time interval.  I.e.,
      * this works correctly for the 'time' data type.
      *
-     * The padded precision of the hour allows representation 
+     * The padded precision of the hour allows representation
      * of the full 9999 year AD calendar range of time intervals.
      */
     toDateFromOdkTimeInterval:function(refJsDate, timeInterval) {
@@ -215,27 +215,27 @@ window.odkCommon = {
         min = Number(timeInterval.substr(idx+1,2));
         sec = Number(timeInterval.substr(idx+4,2));
         msec = Number(timeInterval.substr(idx+7,3));
-        
+
         var msecOffset;
         msecOffset = ((hh * 60 + min) * 60 + sec) * 60 + msec;
         if ( sign === '-' ) {
             msecOffset = - msecOffset;
         }
-        
+
         var dateMilliseconds = refJsDate.valueOf();
         dateMilliseconds += msecOffset;
         var newJsDate = new Date(dateMilliseconds);
         return newJsDate;
     },
     /**
-     * pad the indicated integer value with 
-     * leading zeros so that the string 
+     * pad the indicated integer value with
+     * leading zeros so that the string
      * representation ends up with at least 'places'
-     * number of characters (more if the value has 
+     * number of characters (more if the value has
      * more significant digits than that).
      *
      * returns a string.
-     * e.g., 
+     * e.g.,
      * padWithLeadingZeros(45, 4) => '0045'
      * padWithLeadingZeros(-45, 4) => '-0045'
      */
@@ -248,7 +248,7 @@ window.odkCommon = {
             // but this is catastrophic...
             throw new Error("padWithLeadingZeros: places must be specified!");
         }
-        
+
         var digits = [];
         var d, i, s;
         var sign = (value >= 0);
@@ -270,16 +270,16 @@ window.odkCommon = {
         return (sign ? '' : '-') + s;
     },
     /**
-     * pad the indicated integer value with 
-     * leading spaces so that the string 
+     * pad the indicated integer value with
+     * leading spaces so that the string
      * representation ends up with at least 'places'
-     * number of characters (more if the value has 
+     * number of characters (more if the value has
      * more significant digits than that).
      *
      * Note the treatment of negative values!
      *
      * returns a string.
-     * e.g., 
+     * e.g.,
      * padWithLeadingSpaces(0, 4) => '   0'
      * padWithLeadingSpaces(45, 4) => '  45'
      * padWithLeadingSpaces(-45, 4) => '-  45'
@@ -290,7 +290,7 @@ window.odkCommon = {
         if ( zeroPad === undefined || zeroPad === null ) {
             return zeroPad;
         }
-        
+
         var isNegative = (zeroPad.charAt(0) === '-');
         if ( isNegative ) {
             zeroPad = zeroPad.substr(1);
@@ -305,23 +305,23 @@ window.odkCommon = {
                 return zeroPad;
             }
         }
-        
+
         var i;
         for ( i = 0 ; i < zeroPad.length - 1; ++i ) {
             if ( zeroPad.charAt(i) !== '0' ) {
                 break;
             }
         }
-        // i is now the position we want to replace 
+        // i is now the position we want to replace
         // all zeros to the left of with spaces.
         //
-        // If the zeroPad is all zeros, then 
+        // If the zeroPad is all zeros, then
         // i will be zeroPad.length-1 upon failing
-        // the loop predicate. So we will end up 
+        // the loop predicate. So we will end up
         // with '    0'.
         var firstPart = zeroPad.substring(0, i);
         var remainingPart = zeroPad.substr(i);
-        
+
         // reconstruct...
         zeroPad = firstPart.replace(/0/g, ' ') + remainingPart;
         if ( isNegative ) {
@@ -332,11 +332,11 @@ window.odkCommon = {
     },
     /**
      * Converts a Javascript Date to an ODK Timestamp.
-     * see toDateFromOdkTimeStamp() for the format of a 
+     * see toDateFromOdkTimeStamp() for the format of a
      * timestamp. This zero-fills to extend the accuracy
      * of the Javascript Date object to nanosecond accuracy.
      *
-     * The UTC values of the supplied Javascript dateTime 
+     * The UTC values of the supplied Javascript dateTime
      * object are used.
      *
      * This value is assumed to be UTC.
@@ -375,7 +375,7 @@ window.odkCommon = {
      * Extract the LOCAL TIME of a Javascript Date object.
      *
      * Times are padded with leading zeros and are 00-23hr form:
-     * 
+     *
      *  HH:MM:SS.sssssssss
      *
      * Time is extracted as the millisecond offset from the start
@@ -396,7 +396,7 @@ window.odkCommon = {
 
         var baseJsDate = new Date(yyyy,mm,dd,0,0,0,0);
         var diffMilliseconds = jsDate.valueOf() - baseJsDate.valueOf();
-        
+
         var hh,min,sec,msec;
 
         var diffSeconds = Math.floor(diffMilliseconds / 1000);
@@ -414,20 +414,20 @@ window.odkCommon = {
         return value;
     },
     /**
-     * Calculates the interval of time between two 
+     * Calculates the interval of time between two
      * Javascript Date objects and returns an OdkTimeInterval.
      *
-     * Time intervals are padded with leading zeros and 
+     * Time intervals are padded with leading zeros and
      * are of the form:
-     * 
+     *
      *  HHHHHHHH:MM:SS.sssssssss
      *  HHHHHHHH:MM:SS.sssssssss-
      *
-     * i.e., the negative sign, if present, is at the far right end. 
-     * 
+     * i.e., the negative sign, if present, is at the far right end.
+     *
      * This conversion computes (newJsDate - refJsDate).
      *
-     * The padded precision of the hour allows representation 
+     * The padded precision of the hour allows representation
      * of the full 9999 year AD calendar range of time intervals.
      */
     toOdkTimeIntervalFromDate:function(refJsDate, newJsDate) {
@@ -440,23 +440,23 @@ window.odkCommon = {
         }
         var refMilliseconds = refJsDate.valueOf();
         var newMilliseconds = newJsDate.valueOf();
-        
+
         var diffMilliseconds = newMilliseconds - refMilliseconds;
         var sign = '';
         if ( diffMilliseconds < 0 ) {
             sign = '-';
             diffMilliseconds = - diffMilliseconds;
         }
-        
+
         var hh,min,sec,msec;
-        
+
         var diffSeconds = Math.floor(diffMilliseconds / 1000);
         msec = diffMilliseconds - (diffSeconds * 1000);
         var diffMinutes = Math.floor(diffSeconds / 60);
         sec = diffSeconds - (diffMinutes * 60);
         hh = Math.floor(diffMinutes / 60);
         min = diffMinutes - (hh * 60);
-        
+
         var value;
         value = that.padWithLeadingSpaces(hh,8) + ':' +
                 that.padWithLeadingZeros(min,2) + ':' +
@@ -600,7 +600,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
         _sessionVariables: {},
         _queuedActions: [],
         _logLevel: 'D',
-		_XRegExp: null,
+        _XRegExp: null,
         getPlatformInfo : function() {
             var that = this;
             // 9000 b/c that's what grunt is running on. Perhaps should configure
@@ -641,30 +641,30 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
 
             var result = null;
 
-			if ( that._XRegExp === null ) {
-				that._XRegExp = require('XRegExp');
-			}
-			
+            if ( that._XRegExp === null ) {
+                that._XRegExp = require('XRegExp');
+            }
+
             if ( that._XRegExp === null  ) {
                 throw new Error('XRegExp has not been loaded prior to first call to getRowFileAsUrl()');
             }
-            
+
             if ( that._forbiddenInstanceDirCharsPattern === null ||
                  that._forbiddenInstanceDirCharsPattern === undefined ) {
                 // defer loading this until we try to use it
                 that._forbiddenInstanceDirCharsPattern = that._XRegExp('(\\p{P}|\\p{Z})', 'A');
             }
 
-            var iDirName = that._XRegExp.replace(rowId, 
+            var iDirName = that._XRegExp.replace(rowId,
                             that._forbiddenInstanceDirCharsPattern, '_', 'all');
 
-			if ( relativePath.startsWith("system/") ) {
-				// hack for app-designer
-				that.log('D',"getRowFileAsUrl: hacked URL for app-designer");
-				result = baseUri + relativePath;
-				return result;
-			}
-			
+            if ( relativePath.startsWith("system/") ) {
+                // hack for app-designer
+                that.log('D',"getRowFileAsUrl: hacked URL for app-designer");
+                result = baseUri + relativePath;
+                return result;
+            }
+
             var prefix = 'tables/' + tableId + '/instances/' + iDirName + '/';
             if ( relativePath.length > prefix.length && relativePath.substring(0,prefix.length) === prefix ) {
                 console.error('getRowFileAsUrl - detected filepath in rowpath data');
@@ -672,7 +672,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             } else {
                 result = baseUri + prefix + relativePath;
             }
-            
+
             return result;
         },
         log: function(severity, msg) {
@@ -721,7 +721,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             this.log('D','odkCommon: DO: getProperty(activeUser)');
             return 'active-user-property(mailto:eaddr or username:uname)';
         },
-        
+
         getProperty: function(propertyId) {
             this.log('D','odkCommon: DO: getProperty(' + propertyId + ')');
             return 'property-of(' + propertyId + ')';
@@ -770,8 +770,8 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             that.log("D","odkCommon: DO: doAction(" + dispatchString + ", " + action + ", ...)");
             if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
-                    jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg", 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                    jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg",
                                                        contentType: "image/jpg" } } }));
                 setTimeout(function() {
                     odkCommon.signalQueuedActionAvailable();
@@ -780,8 +780,8 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
-                    jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp", 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                    jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp",
                                                        contentType: "video/3gp" } } }));
                 setTimeout(function() {
                     odkCommon.signalQueuedActionAvailable();
@@ -790,7 +790,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/raven.wav",
                                                        contentType: "audio/wav" } } }));
                 setTimeout(function() {
@@ -800,7 +800,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.android.activities.MediaChooseImageActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg",
                                                        contentType: "image/jpg" } } }));
                 setTimeout(function() {
@@ -810,7 +810,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp",
                                                        contentType: "video/3gp" } } }));
                 setTimeout(function() {
@@ -820,7 +820,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/raven.wav",
                                                        contentType: "audio/wav" } } }));
                 setTimeout(function() {
@@ -831,7 +831,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             if ( action === 'org.opendatakit.sensors.PULSEOX' ) {
                 var oxValue = prompt("Enter ox:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { pulse: 100,
                                                        ox: oxValue } } }));
                 setTimeout(function() {
@@ -842,7 +842,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             if ( action === 'change.uw.android.BREATHCOUNT' ) {
                 var breathCount = prompt("Enter breath count:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: {  value: breathCount } } }));
                 setTimeout(function() {
                     odkCommon.signalQueuedActionAvailable();
@@ -852,7 +852,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             if ( action === 'com.google.zxing.client.android.SCAN' ) {
                 var barcode = prompt("Enter barcode:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: {  SCAN_RESULT: barcode } } }));
                 setTimeout(function() {
                     odkCommon.signalQueuedActionAvailable();
@@ -865,7 +865,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 alt = prompt("Enter altitude:");
                 acc = prompt("Enter accuracy:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { latitude: lat,
                                                        longitude: lng,
                                                        altitude: alt,
@@ -881,7 +881,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 alt = prompt("Enter altitude:");
                 acc = prompt("Enter accuracy:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { latitude: lat,
                                                        longitude: lng,
                                                        altitude: alt,
@@ -893,7 +893,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1 } }));
                 value = JSON.parse(jsonObj);
                 if ( window.parent === window ) {
@@ -911,7 +911,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.android.activities.SplashScreenActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1 } }));
                 value = JSON.parse(jsonObj);
                 if ( window.parent === window ) {
@@ -929,7 +929,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'android.content.Intent.ACTION_VIEW' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action, 
+                  JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1 } }));
                 value = JSON.parse(jsonObj);
                 if ( window.parent === window ) {
@@ -975,7 +975,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
           // pull the file location out of a stack trace.
           var error = new Error();
           var stack = error.stack;
-          
+
           // We expect the stack to look something like:
           // TypeError: undefined is not a function
           //     at Object.window.odkCommon.getPlatformInfo
@@ -993,7 +993,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
         /**
          * Compute and return the base URI for this machine. This will allow the code
          * to function independently of the host name.
-         * 
+         *
          * Returns a string representing the base uri in the format:
          * http://DOMAIN/DIRS/. Note the trailing slash.
          */
