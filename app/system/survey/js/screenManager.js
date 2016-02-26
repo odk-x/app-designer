@@ -279,19 +279,24 @@ return Backbone.View.extend({
     },
     gotoNextScreen: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, "screenManager.gotoNextScreen");
-        ctxt.log('D','screenManager.gotoNextScreen', 
-            ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
-            ctxt.log('I','screenManager.gotoNextScreen.duplicateEvent');
-            ctxt.success();
+            odkCommon.log('I','screenManager.gotoNextScreen.duplicateEvent');
             evt.preventDefault();
             return;
         }
         that.eventTimeStamp = evt.timeStamp;
-        that.gotoNextScreenAction(ctxt);
+        var ctxt = that.controller.newContext(evt, "screenManager.gotoNextScreen");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D','screenManager.gotoNextScreen',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            that.gotoNextScreenAction(ctxt);
+        }, failure: function(m) {
+            ctxt.log('D','screenManager.gotoNextScreen -- prior event terminated with an error -- aborting!',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ctxt.failure(m);
+        }}));
         evt.preventDefault();
     },
     gotoNextScreenAction: function(ctxt) {
@@ -313,19 +318,24 @@ return Backbone.View.extend({
     },
     gotoPreviousScreen: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, "screenManager.gotoPreviousScreen");
-        ctxt.log('D','screenManager.gotoPreviousScreen', 
-            ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
-            ctxt.log('I','screenManager.gotoPreviousScreen.duplicateEvent');
-            ctxt.success();
+            odkCommon.log('I','screenManager.gotoPreviousScreen.duplicateEvent');
             evt.preventDefault();
             return;
         }
         that.eventTimeStamp = evt.timeStamp;
-        that.gotoPreviousScreenAction(ctxt);
+        var ctxt = that.controller.newContext(evt, "screenManager.gotoPreviousScreen");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D','screenManager.gotoPreviousScreen',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            that.gotoPreviousScreenAction(ctxt);
+        }, failure: function(m) {
+            ctxt.log('D','screenManager.gotoPreviousScreen -- prior event terminated with an error -- aborting!',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ctxt.failure(m);
+        }}));
         evt.preventDefault();
     },
     gotoPreviousScreenAction: function(ctxt) {
@@ -350,14 +360,10 @@ return Backbone.View.extend({
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;
-        var ctxt = that.controller.newContext(evt, "screenManager.showContents");
-        ctxt.log('D','screenManager.showContents', 
-            ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         if (that.eventTimeStamp == evt.timeStamp) {
-            ctxt.log('I','screenManager.showContents.duplicateEvent');
-            ctxt.success();
+            odkCommon.log('I','screenManager.showContents.duplicateEvent');
             evt.preventDefault();
             return;
         }
@@ -365,20 +371,32 @@ return Backbone.View.extend({
         that.currentPageEl.css('opacity', '.5').fadeTo("fast", 1.0);
 
         if(that.pageChangeActionLockout) {
-            ctxt.log('D','screenManager.showContents.ignoreDisabled');
-            ctxt.success();
+            odkCommon.log('D','screenManager.showContents.pageChangeActionLockout active');
             evt.preventDefault();
             return;
         }
 
         that.pageChangeActionLockout = true;
-        that.controller.gotoContentsScreen($.extend({},ctxt,{success:function(){
-                    that.pageChangeActionLockout = false; 
-                    ctxt.success();
-                },failure:function(m){
-                    that.pageChangeActionLockout = false; 
-                    ctxt.failure(m);
-                }}));
+
+        var ctxt = that.controller.newContext(evt, "screenManager.showContents");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D','screenManager.showContents',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+
+            that.controller.gotoContentsScreen($.extend({},ctxt,{success:function(){
+                        that.pageChangeActionLockout = false;
+                        ctxt.success();
+                    },failure:function(m){
+                        that.pageChangeActionLockout = false;
+                        ctxt.failure(m);
+                    }}));
+        }, failure: function(m) {
+            ctxt.log('D','screenManager.showContents -- prior event terminated with an error -- aborting!',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+			that.pageChangeActionLockout = false;
+            ctxt.failure(m);
+        }}));
+
         evt.preventDefault();
     },
     ignoreChanges: function(evt) {
@@ -387,11 +405,17 @@ return Backbone.View.extend({
         evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt, "screenManager.ignoreChanges");
-        ctxt.log('D','screenManager.ignoreChanges', 
-            ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
-        that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
-                that.controller.leaveInstance(ctxt);
-            }}));
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D','screenManager.ignoreChanges',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            that.controller.ignoreAllChanges($.extend({},ctxt,{success: function() {
+                    that.controller.leaveInstance(ctxt);
+                }}));
+        }, failure: function(m) {
+            ctxt.log('D','screenManager.ignoreChanges -- prior event terminated with an error -- aborting!',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ctxt.failure(m);
+        }}));
     },
     saveChanges: function(evt) {
         $( "#optionsPopup" ).modal( "hide" );
@@ -399,11 +423,17 @@ return Backbone.View.extend({
         evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt, "screenManager.saveChanges");
-        ctxt.log('D','screenManager.saveChanges', 
-            ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
-        that.controller.saveIncomplete($.extend({},ctxt,{success: function() {
-                that.controller.leaveInstance(ctxt);
-            }}), false);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D','screenManager.saveChanges',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            that.controller.saveIncomplete($.extend({},ctxt,{success: function() {
+                    that.controller.leaveInstance(ctxt);
+                }}), false);
+        }, failure: function(m) {
+            ctxt.log('D','screenManager.saveChanges -- prior event terminated with an error -- aborting!',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ctxt.failure(m);
+        }}));
     },
     finalizeChanges: function(evt) {
         $( "#optionsPopup" ).modal( "hide" );
@@ -411,9 +441,15 @@ return Backbone.View.extend({
         evt.stopImmediatePropagation();
         var that = this;
         var ctxt = that.controller.newContext(evt, "screenManager.finalizeChanges");
-        ctxt.log('D','screenManager.finalizeChanges', 
-            ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
-        that.controller.gotoFinalizeAndTerminateAction(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D','screenManager.finalizeChanges',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            that.controller.gotoFinalizeAndTerminateAction(ctxt);
+        }, failure: function(m) {
+            ctxt.log('D','screenManager.finalizeChanges -- prior event terminated with an error -- aborting!',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ctxt.failure(m);
+        }}));
     },
     openOptions: function(evt) {
         var that = this;
@@ -450,13 +486,19 @@ return Backbone.View.extend({
     },
     setLanguage: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, "screenManager.setLanguage");
-        ctxt.log('D','screenManager.setLanguage', 
-            ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
         //Closing popups is important,
         //they will not open in the future if one is not closed.
         $( "#languagePopup" ).modal( "hide" );
-        this.controller.setLocale(ctxt, $(evt.target).attr("id"));
+        var ctxt = that.controller.newContext(evt, "screenManager.setLanguage");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D','screenManager.setLanguage',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            this.controller.setLocale(ctxt, $(evt.target).attr("id"));
+        }, failure: function(m) {
+            ctxt.log('D','screenManager.setLanguage -- prior event terminated with an error -- aborting!',
+                ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
+            ctxt.failure(m);
+        }}));
     },
     showScreenPopup: function(msg) {
         var that = this;

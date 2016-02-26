@@ -714,10 +714,14 @@ return {
      * used by Application Designer environment. see main.js redrawHook() function.
      */
     redrawHook: function() {
-        var ctxt = this.newCallbackContext("controller.redrawHook");
-        var path = this.getCurrentScreenPath();
-        var operation = this.getOperation(path);
-        this.setScreen(ctxt, operation);
+        var that = this;
+        var ctxt = that.newCallbackContext("controller.redrawHook");
+        var path = that.getCurrentScreenPath();
+        var operation = that.getOperation(path);
+
+        that.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                that.setScreen(ctxt, operation);
+        }}));
     },
     setScreen: function(ctxt, operation, inOptions){
         var that = this;
@@ -1144,13 +1148,17 @@ return {
                 innerCtxt.failure(m);
             }});
             ctxt.setTerminalContext(terminateCtxt);
-            if ( typeof action === 'string' || action instanceof String) {
-                ctxt.log('I', "controller.queuedActionAvailableListener.changeUrlHash (immediate)", action);
-                that.changeUrlHash(ctxt,action);
-            } else {
-                ctxt.log('I', "controller.queuedActionAvailableListener.actionCallback (immediate)", action.action);
-                that.actionCallback( ctxt, action.dispatchString, action.action, action.jsonValue );
-            }
+
+            that.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                if ( typeof action === 'string' || action instanceof String) {
+                    ctxt.log('I', "controller.queuedActionAvailableListener.changeUrlHash (immediate)", action);
+                    that.changeUrlHash(ctxt,action);
+                } else {
+                    ctxt.log('I', "controller.queuedActionAvailableListener.actionCallback (immediate)", action.action);
+                    that.actionCallback( ctxt, action.dispatchString, action.action, action.jsonValue );
+                }
+            }}));
+
         } finally {
             this.insideQueue = false;
         }
@@ -1403,7 +1411,9 @@ return {
                 cctxt = this.chainedCtxt.ctxt;
                 setTimeout(function() {
                     cctxt.success();
-                    }, 10);
+                    }, 5);
+            } else {
+                this.dequeueTriggeringContext(true, null);
             }
         },
 
@@ -1429,7 +1439,9 @@ return {
                 cctxt = this.chainedCtxt.ctxt;
                 setTimeout(function() {
                     cctxt.failure(m);
-                    }, 10);
+                    }, 5);
+            } else {
+                this.dequeueTriggeringContext(false, m);
             }
         },
 
@@ -1532,6 +1544,59 @@ return {
             }
         }
     },
+    outstandingTriggeringContexts: [],
+    enqueueTriggeringContext: function(ctxt) {
+        var that = this;
+        that.outstandingTriggeringContexts.push(ctxt);
+        if ( that.outstandingTriggeringContexts.length === 1 ) {
+            // start this context
+            setTimeout(function() {
+                ctxt.success();
+            }, that.delay);
+        }
+    },
+    dequeueTriggeringContext: function(propagateSuccessState, m) {
+        var that = this;
+        var lowest;
+        var lowestIdx;
+        var ctxt;
+        var i;
+        if (that.outstandingTriggeringContexts.length !== 0) {
+            lowest = -1;
+            lowestIdx = null;
+            for ( i = 0 ; i < that.outstandingTriggeringContexts.length ; ++i ) {
+                ctxt = that.outstandingTriggeringContexts[i];
+                if ( lowest === -1 || ctxt.seq < lowest ) {
+                    lowest = ctxt.seq;
+                    lowestIdx = i;
+                }
+            }
+            that.outstandingTriggeringContexts.splice(lowestIdx,1);
+        }
+
+        if (that.outstandingTriggeringContexts.length !== 0) {
+            lowest = -1;
+            lowestIdx = null;
+            for ( i = 0 ; i < that.outstandingTriggeringContexts.length ; ++i ) {
+                ctxt = that.outstandingTriggeringContexts[i];
+                if ( lowest === -1 || ctxt.seq < lowest ) {
+                    lowest = ctxt.seq;
+                    lowestIdx = i;
+                }
+            }
+            // fire the next context
+            ctxt = that.outstandingTriggeringContexts[lowestIdx];
+            if ( propagateSuccessState ) {
+                setTimeout(function() {
+                    ctxt.success();
+                }, that.delay);
+            } else {
+                setTimeout(function() {
+                    ctxt.failure(m);
+                }, that.delay);
+            }
+        }
+    },
     newCallbackContext : function( loggingLabel ) {
         var that = this;
         that.eventCount = 1 + that.eventCount;
@@ -1544,6 +1609,7 @@ return {
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
+              dequeueTriggeringContext: function(propagateSuccessState, m) { that.dequeueTriggeringContext(propagateSuccessState, m); },
               chainedCtxt: { ctxt: null },
               terminalCtxt: { ctxt: null },
               inheritedTerminalCtxt: { ctxt: null } });
@@ -1563,6 +1629,7 @@ return {
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
+              dequeueTriggeringContext: function(propagateSuccessState, m) { that.dequeueTriggeringContext(propagateSuccessState, m); },
               chainedCtxt: { ctxt: null },
               terminalCtxt: { ctxt: null },
               inheritedTerminalCtxt: { ctxt: null } } );
@@ -1614,6 +1681,7 @@ return {
               loggingContextChain: [],
               getCurrentSeqNo:function() { return that.eventCount;},
               updateAndLogOutstandingContexts:function() { that.removeAndLogOutstandingContexts(this); },
+              dequeueTriggeringContext: function(propagateSuccessState, m) { that.dequeueTriggeringContext(propagateSuccessState, m); },
               chainedCtxt: { ctxt: null },
               terminalCtxt: { ctxt: null },
               inheritedTerminalCtxt: { ctxt: null } } );

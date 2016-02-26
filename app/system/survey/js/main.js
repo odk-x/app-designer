@@ -215,11 +215,16 @@ require(['jquery','XRegExp'],
                 var search = window.location.search;
                 var newRef = ref;
 
-                var ctxt = controller.newStartContext();
-
                 var isAndroid = (opendatakit.getPlatformInfo().container === "Android");
                 var testAndroidParsing = false;
                 var remapUrl = !isAndroid;
+
+                var kickOffProcessing = function() {
+                    var ctxt = controller.newStartContext();
+                    controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                        parsequery.changeUrlHash(ctxt);
+                    }}));
+                };
                 // TODO: figure out why jqMobile+Chrome adds an empty '?' search
                 // string to window.location.href   Code deals with that here.
                 // The ? catastrophically breaks Android 2.x
@@ -244,8 +249,9 @@ require(['jquery','XRegExp'],
                             odkCommon.log('W',"main.clearNonEmptySearchTerm.reloadpage ref: " + ref + ' newRef: ' + newRef);
                             window.location.assign(newRef);
                         } else {
-                            ctxt.log('D','main.changeUrlHash ref: ' + ref);
-                            parsequery.changeUrlHash(ctxt);
+                            odkCommon.log('D','main.changeUrlHash ref: ' + ref);
+
+                            (kickOffProcessing)();
                         }
                     } else if ( searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx) ) {
                         // we have a '?' on the URL. Forcibly remove it.
@@ -255,13 +261,15 @@ require(['jquery','XRegExp'],
                         window.location.assign(newRef);
                     } else {
                         // no search term -- pass through
-                        ctxt.log('D','main.changeUrlHash ref: ' + ref);
-                        parsequery.changeUrlHash(ctxt);
+                        odkCommon.log('D','main.changeUrlHash ref: ' + ref);
+
+                        (kickOffProcessing)();
                     }
                 } else {
                     // don't care -- do whatever...
-                    ctxt.log('D','main.simple.changeUrlHash ref: ' + ref);
-                    parsequery.changeUrlHash(ctxt);
+                    odkCommon.log('D','main.simple.changeUrlHash ref: ' + ref);
+
+                    (kickOffProcessing)();
                 }
             }, function(err) {
                 odkCommon.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());

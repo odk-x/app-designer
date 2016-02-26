@@ -447,12 +447,17 @@ promptTypes.finalize = promptTypes.base.extend({
         var that = this;
         evt.stopPropagation();
         evt.stopImmediatePropagation();
-        var ctxt = that.controller.newContext(evt, that.type + ".saveIncomplete");
-        ctxt.log('D',"prompts." + that.type + ".saveIncomplete", "px: " + that.promptIdx);
 
-        that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
-                that.controller.leaveInstance(ctxt);
-            }}));
+        var ctxt = that.controller.newContext(evt, that.type + ".saveIncomplete");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".saveIncomplete", "px: " + that.promptIdx);
+            that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
+                    that.controller.leaveInstance(ctxt);
+                }}));
+        }, failure: function(m) {
+            ctxt.log('D',"prompts." + that.type + ".saveIncomplete -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     saveFinal: function(evt) {
         var that = this;
@@ -460,8 +465,13 @@ promptTypes.finalize = promptTypes.base.extend({
         evt.stopImmediatePropagation();
 
         var ctxt = that.controller.newContext(evt, that.type + ".saveFinal");
-        ctxt.log('D',"prompts." + that.type + ".saveFinal", "px: " + that.promptIdx);
-        that.controller.gotoFinalizeAndTerminateAction(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".saveFinal", "px: " + that.promptIdx);
+            that.controller.gotoFinalizeAndTerminateAction(ctxt);
+        }, failure: function(m) {
+            ctxt.log('D',"prompts." + that.type + ".saveFinal -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     }
 });
 promptTypes.json = promptTypes.base.extend({
@@ -548,32 +558,55 @@ promptTypes.instances = promptTypes.base.extend({
         }), model.table_id, selection, selectionArgs, displayElementName, orderBy);
     },
     createInstance: function(evt){
-		var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".createInstance");
+        var that = this;
         evt.stopPropagation(true);
         evt.stopImmediatePropagation();
-        ctxt.log('D',"prompts." + that.type + ".createInstance", "px: " + that.promptIdx);
-        that.controller.createInstance(ctxt);
+
+        var ctxt = that.controller.newContext(evt, that.type + ".createInstance");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".createInstance", "px: " + that.promptIdx);
+            that.controller.createInstance(ctxt);
+        }, failure: function(m) {
+            ctxt.log('D',"prompts." + that.type + ".createInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     openInstance: function(evt) {
-		var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".openInstance");
+        var that = this;
         evt.stopPropagation(true);
         evt.stopImmediatePropagation();
-        ctxt.log('D',"prompts." + that.type + ".openInstance", "px: " + that.promptIdx);
-        that.controller.openInstance(ctxt, $(evt.currentTarget).attr('id'));
+        var instanceIdToOpen = $(evt.currentTarget).attr('id');
+
+        if ( instanceIdToOpen !== null && instanceIdToOpen !== undefined ) {
+            var ctxt = that.controller.newContext(evt, that.type + ".openInstance");
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                ctxt.log('D',"prompts." + that.type + ".openInstance", "px: " + that.promptIdx);
+                that.controller.openInstance(ctxt, instanceIdToOpen);
+            }, failure: function(m) {
+                ctxt.log('D',"prompts." + that.type + ".createInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                ctxt.failure(m);
+            }}));
+        }
     },
     deleteInstance: function(evt){
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".deleteInstance");
-        var model = opendatakit.getCurrentModel();
-        ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
+        var instanceIdToDelete = $(evt.currentTarget).attr('id');
 
-        // in this case, we are our own 'linked' table.
-        database.delete_checkpoints_and_row($.extend({}, ctxt, {success: function() {
-                that.reRender(ctxt);
-            }}),
-        model, $(evt.currentTarget).attr('id'));
+        if ( instanceIdToDelete !== null && instanceIdToDelete !== undefined ) {
+            var ctxt = that.controller.newContext(evt, that.type + ".deleteInstance");
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
+                var model = opendatakit.getCurrentModel();
+                // in this case, we are our own 'linked' table.
+                database.delete_checkpoints_and_row($.extend({}, ctxt, {success: function() {
+                        that.reRender(ctxt);
+                    }}),
+                model, instanceIdToDelete);
+            }, failure: function(m) {
+                ctxt.log('D',"prompts." + that.type + ".deleteInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                ctxt.failure(m);
+            }}));
+        }
     }
 });
 promptTypes.contents = promptTypes.base.extend({
@@ -586,15 +619,27 @@ promptTypes.contents = promptTypes.base.extend({
     },
     selectContentsItem: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".selectContentsItem");
-        ctxt.log('D',"prompts." + that.type + ".selectContentsItem: click detected: " + evt.target);
+        var selectedScreenPath = null;
+        odkCommon.log('D',"prompts." + that.type + ".selectContentsItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.select-contents-item');
         $target.attr("label", function(index, oldPropertyValue){
             ctxt.log('D',"prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
                 "px: " + that.promptIdx);
-            // TODO: allow user to specify whether or not this is an 'advancing' operation
-            that.controller.gotoScreenPath(ctxt, oldPropertyValue, true);
+            selectedScreenPath = oldPropertyValue;
         });
+
+        if ( selectedScreenPath !== null ) {
+            var ctxt = that.controller.newContext(evt, that.type + ".selectContentsItem");
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                ctxt.log('D',"prompts." + that.type + ".selectContentsItem: gotoScreenPath: " + selectedScreenPath,
+                    "px: " + that.promptIdx);
+                // TODO: allow user to specify whether or not this is an 'advancing' operation
+                that.controller.gotoScreenPath(ctxt, selectedScreenPath, true);
+            }, failure: function(m) {
+                ctxt.log('D',"prompts." + that.type + ".selectContentsItem -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                ctxt.failure(m);
+            }}));
+        }
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -841,21 +886,35 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             return null;
         }
 
-        var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".handleConfirmation");
-        var tableRow = $(that._cachedEvent.target).closest(".linkedTable tr");
-        if (tableRow !== null && tableRow !== undefined)
-            tableRow.remove();
-
+        // TODO: should this be done here? Seems like it should wait for a reRender
+        // var tableRow = $(that._cachedEvent.target).closest(".linkedTable tr");
+        // if (tableRow !== null && tableRow !== undefined) {
+        //     tableRow.remove();
+        // }
         that.disableButtons();
-        that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
-            database.delete_checkpoints_and_row($.extend({},ctxt,{success:function() {
-                    that.enableButtons();
-                    that.reRender(ctxt);
-                },
-                failure:function(m) {
-                    that.enableButtons();
-                    ctxt.failure(m);
-                }}), linkedModel, instanceId);
+
+        var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".handleConfirmation");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".handleConfirmation", "px: " + that.promptIdx);
+            that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
+                database.delete_checkpoints_and_row($.extend({},ctxt,{success:function() {
+                        that.enableButtons();
+                        that.reRender(ctxt);
+                    },
+                    failure:function(m) {
+                        that.enableButtons();
+                        that.reRender($.extend({},ctxt,{success:function() {
+                                ctxt.failure(m);
+                            },
+                            failure:function(m2) {
+                                ctxt.failure(m2);
+                            }}));
+                    }}), linkedModel, instanceId);
+            }}));
+        }, failure: function(m) {
+            ctxt.log('D',"prompts." + that.type + ".handleConfirmation -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            that.enableButtons();
+            ctxt.failure(m);
         }}));
         that._cachedEvent = null;
         return null;
@@ -979,23 +1038,33 @@ promptTypes.user_branch = promptTypes.base.extend({
     },
     selectBranchItem: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".selectBranchItem");
-        ctxt.log('D',"prompts." + that.type + ".selectBranchItem: click detected: " + evt.target);
+        odkCommon.log('D',"prompts." + that.type + ".selectBranchItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.branch-select-item');
+
+        var currentPath = that.controller.getCurrentScreenPath();
+        var parts = currentPath.split("/");
+        if ( parts.length < 2 ) {
+            odkCommon.log('E',"prompts." + that.type + ".selectBranchItem: invalid currentPath: " + currentPath);
+            return;
+        }
+
+        var newPath = null;
         $target.attr("label", function(index, oldPropertyValue) {
-            ctxt.log('D',"prompts." + that.type + ".selectBranchItem: click near label: " + oldPropertyValue);
-            var currentPath = that.controller.getCurrentScreenPath();
-            var parts = currentPath.split("/");
-            if ( parts.length < 2 ) {
-                ctxt.log('E',"prompts." + that.type + ".selectBranchItem: invalid currentPath: " + currentPath);
-                ctxt.failure({message: "invalid currentPath: " + currentPath});
-                return;
-            }
-            var newPath = parts[0] + "/" + oldPropertyValue;
-            ctxt.log('D',"prompts." + that.type + ".click", "px: " + that.promptIdx);
-            // TODO: allow user to specify whether or not this is an 'advancing' operation
-            that.controller.gotoScreenPath(ctxt,newPath,true);
+            newPath = parts[0] + "/" + oldPropertyValue;
         });
+
+        if ( newPath !== null && newPath !== undefined ) {
+            var ctxt = that.controller.newContext(evt, that.type + ".selectBranchItem");
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                ctxt.log('D',"prompts." + that.type + ".selectBranchItem: click gotoScreenPath: " + newPath);
+                // TODO: allow user to specify whether or not this is an 'advancing' operation
+                that.controller.gotoScreenPath(ctxt,newPath,true);
+            },
+            failure:function(m) {
+                ctxt.log('D',"prompts." + that.type + ".selectBranchItem -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                ctxt.failure(m);
+            }}));
+        }
     },
     choice_filter: function(){ return true; },
     configureRenderContext: function(ctxt) {
@@ -1149,9 +1218,8 @@ promptTypes.select = promptTypes._linked_type.extend({
         return choiceList;
     },
     modification: function(evt) {
-		var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".modification");
-        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx + " val: " + $(evt.target).attr('value'));
+        var that = this;
+        odkCommon.log('D',"prompts." + that.type + ".modification - px: " + that.promptIdx + " val: " + $(evt.target).attr('value'));
         if(that.withOther) {
             //This hack is needed to prevent rerendering
             //causing the other input to loose focus when clicked.
@@ -1160,8 +1228,7 @@ promptTypes.select = promptTypes._linked_type.extend({
                 //The next two lines determine if the checkbox was already checked.
                 that.renderContext.other &&
                 that.renderContext.other.checked) {
-                ctxt.log('D',"prompts." + that.type + ".modification.withOther.hack", "px: " + that.promptIdx);
-                ctxt.success();
+                odkCommon.log('D',"prompts." + that.type + ".modification.withOther.hack -  px: " + that.promptIdx);
                 return;
             }
         }
@@ -1172,9 +1239,30 @@ promptTypes.select = promptTypes._linked_type.extend({
             that.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
         }
         var formValue = (that.$('form').serializeArray());
+
+        // set the value early...
+        // if an earlier event fails that's OK.
+        // The user intended to make this change, so it
+        // is fine to be out-of-order.
+        //
+        // If the change is applied with an earlier change
+        // then the value has been persisted. If it
+        // has not yet been persisted, it will be queued and
+        // applied when the user corrects whatever error
+        // they had that caused the earlier action to fail.
+        //
         that.setValueDeferredChange(that.generateSaveValue(formValue));
         that.updateRenderValue(formValue);
-        that.reRender(ctxt);
+
+        var ctxt = that.controller.newContext(evt, that.type + ".modification");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".modification -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -1302,9 +1390,8 @@ promptTypes.select_one = promptTypes.select.extend({
 });
 promptTypes.select_one_integer = promptTypes.select_one.extend({
     modification: function(evt) {
-		var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".modification");
-        ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx + " val: " + $(evt.target).attr('value'));
+        var that = this;
+        odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx + " val: " + $(evt.target).attr('value'));
         if(this.withOther) {
             //This hack is needed to prevent rerendering
             //causing the other input to loose focus when clicked.
@@ -1313,8 +1400,7 @@ promptTypes.select_one_integer = promptTypes.select_one.extend({
                 //The next two lines determine if the checkbox was already checked.
                 this.renderContext.other &&
                 this.renderContext.other.checked) {
-                ctxt.log('D',"prompts." + this.type + ".modification.withOther.hack", "px: " + this.promptIdx);
-                ctxt.success();
+                odkCommon.log('D',"prompts." + this.type + ".modification.withOther.hack px: " + this.promptIdx);
                 return;
             }
         }
@@ -1324,14 +1410,35 @@ promptTypes.select_one_integer = promptTypes.select_one.extend({
             this.$('.grid-select-item.ui-bar-e').removeClass('ui-bar-e').addClass('ui-bar-c');
             this.$('input:checked').closest('.grid-select-item').addClass('ui-bar-e');
         }
-        var formValue = (this.$('form').serializeArray()); 
+        var formValue = (this.$('form').serializeArray());
         // cast all values in formValue to ints
         for (var i = 0; i < formValue.length; i++) {
             formValue[i].value = parseInt(formValue[i].value);
         }
+
+        // set the value early...
+        // if an earlier event fails that's OK.
+        // The user intended to make this change, so it
+        // is fine to be out-of-order.
+        //
+        // If the change is applied with an earlier change
+        // then the value has been persisted. If it
+        // has not yet been persisted, it will be queued and
+        // applied when the user corrects whatever error
+        // they had that caused the earlier action to fail.
+        //
         that.setValueDeferredChange(that.generateSaveValue(formValue));
         that.updateRenderValue(formValue);
-        that.reRender(ctxt);
+
+        var ctxt = that.controller.newContext(evt, that.type + ".modification");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".modification -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     /**
      * Parse a saved string value into the format
@@ -1516,7 +1623,14 @@ promptTypes.input_type = promptTypes.base.extend({
 
         if (that.modified === true) {
             var ctxt = that.controller.newContext(evt, that.type + ".loseFocus");
-            that.reRender(ctxt);
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                ctxt.log('D',"prompts." + that.type + ".loseFocus: reRender", "px: " + that.promptIdx);
+                that.reRender(ctxt);
+            },
+            failure:function(m) {
+                ctxt.log('D',"prompts." + that.type + ".loseFocus -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                ctxt.failure(m);
+            }}));
         }
     },
     gainFocus: function(evt) {
@@ -1735,49 +1849,62 @@ promptTypes.datetime = promptTypes.input_type.extend({
     },
     modification: function(evt) {
         var that = this;
+        odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
             var date_value = that.$('input').data('DateTimePicker').getDate();
             var value = (date_value === undefined || date_value === null) ? null : date_value.toDate();
             var formattedDateValue = moment(value).format(that.timeFormat);
-            var ref = that.getValue();  
 
-            var rerender = false;
-            if ( ref === null || ref === undefined ) {
-                rerender = ( value !== null && value !== undefined );
-            } else if ( value === null || value === undefined ) {
-                rerender = ( ref !== null && ref !== undefined );
-            } else {
-                rerender = that.sameValue(ref, value);
-            }
+            //
+            // we are using a date pop-up.  If an earlier action fails, we should not
+            // attempt to apply the state changes of this pop-up. Tolerate the loss
+            // of whatever the user tried to pick. They shouldn't move so fast.
 
             var ctxt = that.controller.newContext(evt, that.type + ".modification");
-            ctxt.log('D',"prompts." + that.type + ".modification", "px: " + that.promptIdx);
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                ctxt.log('D',"prompts." + that.type + ".modification: determine if reRendering ", "px: " + that.promptIdx);
+                var ref = that.getValue();
 
-            var renderContext = that.renderContext;
-            if ( value === undefined || value === null ) {
-                renderContext.value = '';
-            } else {
-                renderContext.value = formattedDateValue; 
-            }
+                var rerender = false;
+                if ( ref === null || ref === undefined ) {
+                    rerender = ( value !== null && value !== undefined );
+                } else if ( value === null || value === undefined ) {
+                    rerender = ( ref !== null && ref !== undefined );
+                } else {
+                    rerender = that.sameValue(ref, value);
+                }
 
-            // track original value
-            var originalValue = that.getValue();
-            that.setValueDeferredChange(value);
-            renderContext.invalid = !that.validateValue();
-            if ( renderContext.invalid ) {
-                value = originalValue;
-                formattedDateValue = moment(value).format(that.timeFormat);
-                // restore it...
-                that.setValueDeferredChange(originalValue);
-                rerender = true;
-            }
- 
-           renderContext.value = formattedDateValue;
-            if ( rerender ) {
-                that.reRender(ctxt);
-            } else {
-                ctxt.success();
-            }
+                var renderContext = that.renderContext;
+                if ( value === undefined || value === null ) {
+                    renderContext.value = '';
+                } else {
+                    renderContext.value = formattedDateValue;
+                }
+
+                // track original value
+                var originalValue = that.getValue();
+                that.setValueDeferredChange(value);
+                renderContext.invalid = !that.validateValue();
+                if ( renderContext.invalid ) {
+                    value = originalValue;
+                    formattedDateValue = moment(value).format(that.timeFormat);
+                    // restore it...
+                    that.setValueDeferredChange(originalValue);
+                    rerender = true;
+                }
+
+                renderContext.value = formattedDateValue;
+                if ( rerender ) {
+                    ctxt.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+                    that.reRender(ctxt);
+                } else {
+                    ctxt.success();
+                }
+            },
+            failure:function(m) {
+                ctxt.log('D',"prompts." + that.type + ".modification -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                ctxt.failure(m);
+            }}));
         }
     },
     afterRender: function() {
@@ -1916,6 +2043,7 @@ promptTypes.media = promptTypes.base.extend({
                 var uriFragment = (jsonObject.result !== null && jsonObject.result !== undefined) ? jsonObject.result.uriFragment : null;
                 var contentType = (jsonObject.result !== null && jsonObject.result !== undefined) ? jsonObject.result.contentType : null;
                 if (uriFragment !== null && uriFragment !== undefined && contentType !== null && contentType !== undefined) {
+					// for debugging so we can see what we are replacing...
                     var oldMediaStruct = that.getValue();
                     var newPath = opendatakit.getRowpathFromUriFragment(uriFragment);
                     // TODO: delete old??? Or leave until marked as finalized?
@@ -2172,27 +2300,55 @@ promptTypes.bargraph = promptTypes.base.extend({
     templatePath: "templates/graph.handlebars",
     scale_y_up: function(evt){
         var that = this;
-        that.vHeight = that.vHeight + (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
+            that.vHeight = that.vHeight + (that.vHeight * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_y_down: function(evt){
         var that = this;
-        that.vHeight = that.vHeight - (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
+            that.vHeight = that.vHeight - (that.vHeight * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_x_up: function(evt){
         var that = this;
-        that.vWidth = that.vWidth + (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
+            that.vWidth = that.vWidth + (that.vWidth * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_x_down: function(evt){
         var that = this;
-        that.vWidth = that.vWidth - (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");    
-        that.reRender(ctxt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
+            that.vWidth = that.vWidth - (that.vWidth * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -2261,13 +2417,6 @@ promptTypes.bargraph = promptTypes.base.extend({
             that.vHeight = height;
         }
 
-        var downx = 0;
-        var downy = Math.NaN;
-        var isClicked = 0;
-        var downscalex;
-        var downscaley;
-        var clickX;
-        var clickY;
         var lMarg = 0;
         var tMarg = 0;
 
@@ -2346,27 +2495,55 @@ promptTypes.linegraph = promptTypes.base.extend({
     templatePath: "templates/graph.handlebars",
     scale_y_up: function(evt){
         var that = this;
-        that.vHeight = that.vHeight + (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
+            that.vHeight = that.vHeight + (that.vHeight * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_y_down: function(evt){
         var that = this;
-        that.vHeight = that.vHeight - (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
+            that.vHeight = that.vHeight - (that.vHeight * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_x_up: function(evt){
         var that = this;
-        that.vWidth = that.vWidth + (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
+            that.vWidth = that.vWidth + (that.vWidth * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_x_down: function(evt){
         var that = this;
-        that.vWidth = that.vWidth - (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");    
-        that.reRender(ctxt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
+            that.vWidth = that.vWidth - (that.vWidth * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -2474,13 +2651,6 @@ promptTypes.linegraph = promptTypes.base.extend({
             that.vHeight = height;
         }
 
-        var downx = 0;
-        var downy = Math.NaN;
-        var isClicked = 0;
-        var downscalex;
-        var downscaley;
-        var clickX;
-        var clickY;
         var lMarg = 0;
         var tMarg = 0;
 
@@ -2582,19 +2752,33 @@ promptTypes.piechart = promptTypes.base.extend({
     templatePath: "templates/graph.handlebars",
     scale_up: function(evt){
         var that = this;
-        that.vHeight = that.vHeight + (that.vHeight * 0.1);
-        that.vWidth = that.vWidth + (that.vWidth * 0.1);
-        that.vRadius = that.vRadius * 1.1;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_up");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_up: reRender", "px: " + that.promptIdx);
+            that.vHeight = that.vHeight + (that.vHeight * 0.1);
+            that.vWidth = that.vWidth + (that.vWidth * 0.1);
+            that.vRadius = that.vRadius * 1.1;
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_down: function(evt){
         var that = this;
-        that.vHeight = that.vHeight - (that.vHeight * 0.1);
-        that.vWidth = that.vWidth - (that.vWidth * 0.1);
-        that.vRadius = that.vRadius * 0.9;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_down");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_down: reRender", "px: " + that.promptIdx);
+            that.vHeight = that.vHeight - (that.vHeight * 0.1);
+            that.vWidth = that.vWidth - (that.vWidth * 0.1);
+            that.vRadius = that.vRadius * 0.9;
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -2719,27 +2903,55 @@ promptTypes.scatterplot = promptTypes.base.extend({
     templatePath: "templates/graph.handlebars",
     scale_y_up: function(evt){
         var that = this;
-        that.vHeight = that.vHeight + (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
+            that.vHeight = that.vHeight + (that.vHeight * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_y_down: function(evt){
         var that = this;
-        that.vHeight = that.vHeight - (that.vHeight * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
+            that.vHeight = that.vHeight - (that.vHeight * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_x_up: function(evt){
         var that = this;
-        that.vWidth = that.vWidth + (that.vWidth * 0.2);
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
-        that.reRender(ctxt);
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
+            that.vWidth = that.vWidth + (that.vWidth * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     scale_x_down: function(evt){
         var that = this;
-        that.vWidth = that.vWidth - (that.vWidth * 0.2);
-        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");    
-        that.reRender(ctxt);
+        var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
+            that.vWidth = that.vWidth - (that.vWidth * 0.2);
+            that.reRender(ctxt);
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -2923,21 +3135,43 @@ promptTypes.acknowledge = promptTypes.select.extend({
     acknLabel: translations.acknLabel,
     modification: function(evt) {
         var that = this;
-        var ctxt = that.controller.newContext(evt, that.type + ".modification");
-        ctxt.log('D','acknowledge.modification', that.promptIdx);
+        odkCommon.log('D','acknowledge.modification px: ' + that.promptIdx);
         var oldValue = that.getValue();
         var acknowledged = (oldValue !== undefined && oldValue !== null) ? !oldValue : true;
+
+        // set the value early...
+        // if an earlier event fails that's OK.
+        // The user intended to click this, so it
+        // is fine to be out-of-order.
+        //
+        // If the change is applied with an earlier change
+        // then the value has been persisted. If it
+        // has not yet been persisted, it will be queued and
+        // applied when the user corrects whatever error
+        // they had that caused the earlier action to fail.
+        //
         that.setValueDeferredChange(acknowledged);
-        that.renderContext.choices = [{
-            name: "acknowledge",
-            display: { text: that.acknLabel },
-            checked: acknowledged
-        }];
-        if (acknowledged && that.autoAdvance) {
-            that.controller.gotoNextScreen(ctxt);
-        } else {
-            that.reRender(ctxt);
-        }
+
+        var ctxt = that.controller.newContext(evt, that.type + ".modification");
+        that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+            ctxt.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+
+            that.renderContext.choices = [{
+                name: "acknowledge",
+                display: { text: that.acknLabel },
+                checked: acknowledged
+            }];
+
+            if (acknowledged && that.autoAdvance) {
+                that.controller.gotoNextScreen(ctxt);
+            } else {
+                that.reRender(ctxt);
+            }
+        },
+        failure:function(m) {
+            ctxt.log('D',"prompts." + that.type + ".modification -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            ctxt.failure(m);
+        }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
