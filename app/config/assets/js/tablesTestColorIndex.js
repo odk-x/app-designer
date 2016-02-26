@@ -79,7 +79,7 @@ function displayGroup(idxStart) {
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
-        chevron.attr('src', odkTables.getFileAsUrl('config/assets/img/little_arrow.png'));
+        chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
                 
