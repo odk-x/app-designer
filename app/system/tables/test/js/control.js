@@ -174,38 +174,6 @@ describe('control', function() {
 
     });
 
-    describe('addRowWithCollectDefault', function() {
-
-        it('#is function', function() {
-            assert.isFunction(control.addRowWithCollectDefault);
-        });
-
-    });
-
-    describe('addRowWithCollect', function() {
-
-        it('#is function', function() {
-            assert.isFunction(control.addRowWithCollect);
-        });
-
-    });
-
-    describe('editRowWithCollectDefault', function() {
-
-        it('#is function', function() {
-            assert.isFunction(control.editRowWithCollectDefault);
-        });
-
-    });
-
-    describe('editRowWithCollect', function() {
-
-        it('#is function', function() {
-            assert.isFunction(control.editRowWithCollect);
-        });
-
-    });
-
     describe('editRowWithSurveyDefault', function() {
 
         it('#is function', function() {

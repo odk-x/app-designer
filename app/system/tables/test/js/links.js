@@ -1,5 +1,5 @@
 /**
- * The control object has some functionality (launching Collect and Survey and
+ * The control object has some functionality (launching Survey and
  * launching tables) that we can't easily test in Mocha. This script should
  * append links that we then click through by hand to get it working.
  */
@@ -69,109 +69,6 @@ detailViewMismatch.click(function() {
         'system/tables/test/html/Tea_houses_list.html');
 });
 appendElement(detailViewMismatch);
-
-// These are the links that will test the functionality of the collect methods.
-
-var collectTitle = $('<h1>');
-collectTitle.text('Collect Methods');
-appendElement(collectTitle);
-
-var addCollectDefault = getAnchor();
-addCollectDefault.text('ADD ROW COLLECT DEFAULT: State = alpha');
-addCollectDefault.click(function() {
-    control.addRowWithCollectDefault('Tea_houses_editable');
-});
-appendElement(addCollectDefault);
-
-var addCollectCustom = getAnchor();
-addCollectCustom.text('ADD ROW COLLECT CUSTOM: State = beta');
-addCollectCustom.click(function() {
-    control.addRowWithCollect(
-        'Tea_houses_editable',
-        'Tea_houses_editable_form',
-        null,
-        null,
-        null);
-});
-appendElement(addCollectCustom);
-
-// Tests that we can add some prepopulated values.
-// With the default form.
-var addCollectValues = getAnchor();
-addCollectValues.text('ADD ROW COLLECT VALUES: save');
-addCollectValues.click(function() {
-    // The test is that Name = collectNameDefault and Customers = 987,
-    // so prepopulate those values.
-    var values = {};
-    values.Name = 'collectNameDefault';
-    values.Customers = '987';
-    var valuesStr = JSON.stringify(values);
-    control.addRowWithCollect(
-        'Tea_houses_editable',
-        null,
-        null,
-        null,
-        valuesStr);
-});
-appendElement(addCollectValues);
-
-// With a custom form.
-var addCollectValuesCustom = getAnchor();
-addCollectValuesCustom.text('ADD ROW CUSTOM COLLECT VALUES: save');
-addCollectValuesCustom.click(function() {
-    // The test is that Name = collectName and Customers = 333, so prepopulate
-    // those values.
-    var values = {};
-    values.Name = 'collectName';
-    values.Customers = '333';
-    var valuesStr = JSON.stringify(values);
-    control.addRowWithCollect(
-        'Tea_houses_editable',
-        'Tea_houses_editable_form',
-        null,
-        'Tea_houses_editable_form',
-        valuesStr);
-});
-appendElement(addCollectValuesCustom);
-
-var addCollectUnicode = getAnchor();
-addCollectUnicode.text('ADD ROW COLLECT UNICODE: save');
-addCollectUnicode.click(function() {
-    // the test is that:
-    // Testing Collect «ταБЬℓσ»: 1<2 & 4+1>3, now" 20% off!
-    // is saved in the Name column.
-    var values = {};
-    values.Name = 'Testing Collect «ταБЬℓσ»: 1<2 & 4+1>3, now" 20% off!';
-    var valuesStr = JSON.stringify(values);
-    control.addRowWithCollect(
-        'Tea_houses_editable',
-        'Tea_houses_editable_form',
-        null,
-        'Tea_houses_editable_form',
-        valuesStr);
-});
-appendElement(addCollectUnicode);
-
-var editCollectDefault = getAnchor();
-editCollectDefault.text('EDIT FIRST ROW COLLECT: State = gamma');
-editCollectDefault.click(function() {
-    var rowId = data.getRowId(0);
-    control.editRowWithCollectDefault('Tea_houses_editable', rowId);
-});
-appendElement(editCollectDefault);
-
-var editCollectCustom = getAnchor();
-editCollectCustom.text('EDIT SECOND ROW COLLECT CUSTOM State = delta');
-editCollectCustom.click(function() {
-    var rowId = data.getRowId(1);
-    control.editRowWithCollect(
-        'Tea_houses_editable',
-        rowId,
-        'Tea_houses_editable_form',
-        null,
-        'Tea_houses_editable_form');
-});
-appendElement(editCollectCustom);
 
 // These are the methods for Survey testing. We are going to test more of these
 // methods in depth, because these are not deprecated and we are hoping that

@@ -191,27 +191,6 @@ if (!window.odkTables) {
         window.location.href = relativePath;
     };
 
-    pub.addRowWithCollectDefault = function(tableId) {
-        if (!isString(tableId)) {
-            throw 'addRowWithCollectDefault()--tableId not a string';
-        }
-        pub.addRowWithCollect(tableId, null, null, null, null);
-    };
-
-    pub.addRowWithCollect = function(tableId, formId, formVersion,
-        formRootElement, jsonMap) {
-
-    };
-
-    pub.editRowWithCollectDefault = function(tableId, rowId) {
-        pub.editRowWithCollect(tableId, rowId, null, null, null);
-    };
-
-    pub.editRowWithCollect = function(tableId, rowId, formId, formVersion,
-            formRootElement) {
-
-    };
-
     pub.editRowWithSurveyDefault = function(tableId, rowId) {
         pub.editRowWithSurve(tableId, rowId, null, null);
     };
