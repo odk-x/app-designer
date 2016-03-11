@@ -590,6 +590,22 @@ window.odkData = {
             }
         };
 
+        pub.getMapIndex = function() {
+            if (resultObj === null || resultObj === undefined) {
+                return null;
+            }
+
+            if (resultObj.metadata === null || resultObj.metadata === undefined) {
+                return null;
+            }
+
+            if (resultObj.metadata.mapIndex === null || resultObj.metadata.mapIndex === undefined) {
+                return null;
+            }
+
+            return resultObj.metadata.mapIndex;
+        };
+
         // This is not available in the current API
         // pub.isGroupedBy = function() {
         // 

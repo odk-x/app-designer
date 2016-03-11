@@ -18,7 +18,9 @@
 //         }
 //     });
 // }
+var geoResult = {};
 var tableId = null;
+var clientId = null;
 function handleClick(rowId) {
     odkTables.openDetailView(
         tableId,
@@ -29,7 +31,6 @@ function handleClick(rowId) {
 function render(result) {
     // The client id should have been passed to us as the hash.
     var hash = window.location.hash;
-    var clientId = null;
     if (hash === '') {
         console.log('The hash containing the client id was not present!');
         console.log('Inferring from table');
@@ -40,77 +41,67 @@ function render(result) {
         console.log('client id is: ' + clientId);
     }
 
-    tableId = result.getTableId();
+    if (clientId === null || clientId === '' ||
+        clientId === undefined) {
+        return;
+    }
 
-    // Create item to launch map view display
-    //var mapView = document.createElement('p');
-    //mapView.setAttribute('class', 'launchForm');
-    //mapView.innerHTML = 'Map View';
-    //mapView.style.backgroundColor = '#66A3C2';
-    //mapView.onclick = function() {
-        //odkTables.openTableToMapView(
-                //'geopoints',
-                //'client_id = ?',
-                //[clientId],
-                //'config/tables/geopoints/html/geopoints_map_list.html#' + clientId);
-    //};
-    //document.getElementById('header').appendChild(mapView);
+    geoResult = result;
 
-    //// Create item to launch geo point form
-    //var waypoint = document.createElement('p');
-    //waypoint.setAttribute('class', 'launchForm');
-    //var jsonMap = {};
-    //// Prepopulate client id
-    //jsonMap._client_id = clientId;
-    //// Add step every time you launch waypoint form
-    //jsonMap._step = data.getCount() + 1;
-    //jsonMap = JSON.stringify(jsonMap);
+    tableId = geoResult.getTableId();
 
-    //waypoint.onclick = function() {
-        //data.addRowWithSurvey(
-                //'geopoints',
-                //'geopoints',
-                //null,
-                //jsonMap);
-    //};
-    //waypoint.innerHTML = 'Add Waypoint';
-    //document.getElementById('header').appendChild(waypoint);
-
-    for (var i = 0; i < result.getCount(); i++) {
-
-        // Make list entry only if client id exists
-        if(clientId !== null && clientId !== '') {
-            // Creating the item space
-            var item = document.createElement('li');
-            item.setAttribute('class', 'item_space');
-            item.setAttribute(
-                'onClick',
-                'handleClick("' + result.getRowId(i) + '")');
-            item.innerHTML = clientId;
-            document.getElementById('list').appendChild(item);
-
-            var chevron = document.createElement('img');
-            chevron.setAttribute(
-                'src',
-                odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
-            chevron.setAttribute('class', 'chevron');
-            item.appendChild(chevron);
-
-            // create sub-list in item space
-
-            var step = document.createElement('li');
-            step.setAttribute('class', 'detail');
-            step.innerHTML = 'Step: ' + result.getData(i, 'step');
-            item.appendChild(step);
-
-            var transportation = document.createElement('li');
-            transportation.setAttribute('class', 'detail');
-            transportation.innerHTML =
-                'Transportation: ' +
-                result.getData(i, 'transportation_mode');
-            item.appendChild(transportation);
+    // Ensure that this is the first displayed in the list
+    var mapIndex = geoResult.getMapIndex();
+    
+    // Make sure that it is valid
+    if (mapIndex !== null && mapIndex !== undefined) {
+        // Make sure that it is not invalid 
+        if (mapIndex !== -1) {
+            // Make this the first item in the list
+            addDataForRow(mapIndex);
         }
     }
+
+    for (var i = 0; i < geoResult.getCount(); i++) {
+        // Make sure not to repeat the selected item if one existed
+        if (i === mapIndex) {
+            continue;
+        }
+
+        addDataForRow(i);
+    }
+}
+
+function addDataForRow(rowNumber) {
+    // Creating the item space
+    var item = document.createElement('li');
+    item.setAttribute('class', 'item_space');
+    item.setAttribute(
+        'onClick',
+        'handleClick("' + geoResult.getRowId(rowNumber) + '")');
+    item.innerHTML = clientId;
+    document.getElementById('list').appendChild(item);
+
+    var chevron = document.createElement('img');
+    chevron.setAttribute(
+        'src',
+        odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
+    chevron.setAttribute('class', 'chevron');
+    item.appendChild(chevron);
+
+    // create sub-list in item space
+
+    var step = document.createElement('li');
+    step.setAttribute('class', 'detail');
+    step.innerHTML = 'Step: ' + geoResult.getData(rowNumber, 'step');
+    item.appendChild(step);
+
+    var transportation = document.createElement('li');
+    transportation.setAttribute('class', 'detail');
+    transportation.innerHTML =
+        'Transportation: ' +
+        geoResult.getData(rowNumber, 'transportation_mode');
+    item.appendChild(transportation);
 }
 
 function cbFailure(error) {

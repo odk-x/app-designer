@@ -117,46 +117,66 @@ var resumeFn = function(fidxStart) {
  * a detail view on the clicked row.
  */
 var displayGroup = function(idxStart) {
-    var gridster = $('.gridster ul').gridster().data('gridster');
+
 
     // Number of rows displayed per chunk
     var chunk = 50;
+
+    // Ensure that this is the first displayed in the list
+    var mapIndex = plotResultSet.getMapIndex();
+
+    // Make sure that it is valid
+    if (mapIndex !== null && mapIndex !== undefined) {
+        // Make sure that it is not invalid 
+        if (mapIndex !== -1) {
+            // Make this the first item in the list
+            addDataForRow(mapIndex);
+        }
+    }
 
     for (var i = idxStart; i < idxStart + chunk; i++) {
         if (i >= plotResultSet.getCount()) {
             break;
         }
 
-        // Creates the space for a single element in the list. We add rowId as
-        // an attribute so that the click handler set in resumeFn knows which
-        // row was clicked.
-        var item = $('<li>');
-
-        var containerDiv = $('<div>');
-        containerDiv.text(plotResultSet.getData(i, 'plot_name'));
-        containerDiv.addClass('content-holder');
-
-        item.attr('rowId', plotResultSet.getRowId(i));
-        item.attr('class', 'item_space');
-        item.addClass('grid-item');
-
-        item.append(containerDiv);
-                
-        /* Creates arrow icon (Nothing to edit here) */
-        //var chevron = $('<img>');
-        //chevron.attr('src', odkTables.getFileAsUrl('config/assets/img/little_arrow.png'));
-        //chevron.attr('class', 'chevron');
-        //item.append(chevron);
-
-        var idItem = $('<div>');
-        idItem.attr('class', 'detail');
-        idItem.text('Crop: ' + plotResultSet.getData(i, 'planting'));
-        containerDiv.append(idItem);
-
-        gridster.add_widget(item, 1, 1);
+        if (i === mapIndex) {
+            continue;
+        }
+        addDataForRow(i);
         
     }
     if (i < plotResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };
+
+function addDataForRow(rowNumber) {
+    var gridster = $('.gridster ul').gridster().data('gridster');
+    // Creates the space for a single element in the list. We add rowId as
+    // an attribute so that the click handler set in resumeFn knows which
+    // row was clicked.
+    var item = $('<li>');
+
+    var containerDiv = $('<div>');
+    containerDiv.text(plotResultSet.getData(rowNumber, 'plot_name'));
+    containerDiv.addClass('content-holder');
+
+    item.attr('rowId', plotResultSet.getRowId(rowNumber));
+    item.attr('class', 'item_space');
+    item.addClass('grid-item');
+
+    item.append(containerDiv);
+            
+    /* Creates arrow icon (Nothing to edit here) */
+    //var chevron = $('<img>');
+    //chevron.attr('src', odkTables.getFileAsUrl('config/assets/img/little_arrow.png'));
+    //chevron.attr('class', 'chevron');
+    //item.append(chevron);
+
+    var idItem = $('<div>');
+    idItem.attr('class', 'detail');
+    idItem.text('Crop: ' + plotResultSet.getData(rowNumber, 'planting'));
+    containerDiv.append(idItem);
+
+    gridster.add_widget(item, 1, 1);
+}

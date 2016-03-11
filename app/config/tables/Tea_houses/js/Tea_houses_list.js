@@ -103,6 +103,18 @@ var resumeFn = function(fIdxStart) {
  * expanded portion will take you to the more detailed view.
 */
 var displayGroup = function(idxStart) {
+    // Ensure that this is the first displayed in the list
+    var mapIndex = teaHouseResultSet.getMapIndex();
+    
+    // Make sure that it is valid
+    if (mapIndex !== null && mapIndex !== undefined) {
+        // Make sure that it is not invalid 
+        if (mapIndex !== -1) {
+            // Make this the first item in the list
+            addDataForRow(mapIndex);
+        }
+    }
+
     console.log('displayGroup called. idxStart: ' + idxStart);
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
@@ -110,50 +122,62 @@ var displayGroup = function(idxStart) {
         if (i >= teaHouseResultSet.getCount()) {
             break;
         }
-        /* Creates the item space */
-        // We're going to select the ul and then start adding things to it.
-        //var item = $('#list').append('<li>');
-        var item = $('<li>');
-        item.attr('id', teaHouseResultSet.getRowId(i));
-        item.attr('rowId', teaHouseResultSet.getRowId(i));
-        item.attr('class', 'item_space');
-        item.text(teaHouseResultSet.getData(i, 'Name'));
-                
-        /* Creates arrow icon (Nothing to edit here) */
-        var chevron = $('<img>');
-        chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
-        chevron.attr('class', 'chevron');
-        item.append(chevron);
-                
-        /**
-         * Adds other data/details in item space.
-         * Replace COLUMN_NAME with the column whose data you want to display
-         * as an extra detail etc. Duplicate the following block of code for
-         * different details you want to add. You may replace occurrences of
-         * 'field1' with new, specific label that are more meaningful to you
-         */
-        var field1 = $('<li>');
-        field1.attr('class', 'detail');
-        var specialtyId = teaHouseResultSet.getData(i, 'Specialty_Type_id');
-        var typeName = typeNameMap[specialtyId];
-        field1.text('Specialty: ' + typeName);
-        item.append(field1);
 
-        var field2 = $('<li>');
-        field2.attr('class', 'detail');
-        field2.text(teaHouseResultSet.getData(i, 'District') + ' ' +
-            teaHouseResultSet.getData(i, 'Neighborhood'));
-        item.append(field2);
+        // Make sure not to repeat the selected item if one existed
+        if (i === mapIndex) {
+            continue;
+        }
 
-        $('#list').append(item);
-
-        // don't append the last one to avoid the fencepost problem
-        var borderDiv = $('<div>');
-        borderDiv.addClass('divider');
-        $('#list').append(borderDiv);
+        addDataForRow(i);
 
     }
     if (i < teaHouseResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };
+
+function addDataForRow(rowNumber) {
+    /*    Creating the item space    */
+    /* Creates the item space */
+    // We're going to select the ul and then start adding things to it.
+    //var item = $('#list').append('<li>');
+    var item = $('<li>');
+    item.attr('id', teaHouseResultSet.getRowId(rowNumber));
+    item.attr('rowId', teaHouseResultSet.getRowId(rowNumber));
+    item.attr('class', 'item_space');
+    item.text(teaHouseResultSet.getData(rowNumber, 'Name'));
+            
+    /* Creates arrow icon (Nothing to edit here) */
+    var chevron = $('<img>');
+    chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
+    chevron.attr('class', 'chevron');
+    item.append(chevron);
+            
+    /**
+     * Adds other data/details in item space.
+     * Replace COLUMN_NAME with the column whose data you want to display
+     * as an extra detail etc. Duplicate the following block of code for
+     * different details you want to add. You may replace occurrences of
+     * 'field1' with new, specific label that are more meaningful to you
+     */
+    var field1 = $('<li>');
+    field1.attr('class', 'detail');
+    var specialtyId = teaHouseResultSet.getData(rowNumber, 'Specialty_Type_id');
+    var typeName = typeNameMap[specialtyId];
+    field1.text('Specialty: ' + typeName);
+    item.append(field1);
+
+    var field2 = $('<li>');
+    field2.attr('class', 'detail');
+    field2.text(teaHouseResultSet.getData(rowNumber, 'District') + ' ' +
+        teaHouseResultSet.getData(rowNumber, 'Neighborhood'));
+    item.append(field2);
+
+    $('#list').append(item);
+
+    // don't append the last one to avoid the fencepost problem
+    var borderDiv = $('<div>');
+    borderDiv.addClass('divider');
+    $('#list').append(borderDiv);
+}
+
