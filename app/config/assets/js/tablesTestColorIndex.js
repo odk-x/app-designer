@@ -21,8 +21,6 @@ var cbFn = function (result) {
 
     retObj = result;
 
-    console.log('Metadata for the result is ' + retObj.metadata);
-
     for (var i = 0; i < result.getCount(); i++) {
         dataMap[i] = result.getData(i, 'Description');
         //console.log("dataMap[" + i + "] = " + dataMap[i]);
@@ -104,8 +102,20 @@ function displayGroup(idxStart) {
         item.append(field2);
 
         // Set the color here if one is passed in
-        item.css({backgroundColor:retObj.getRowBackgroundColor(i)});
-        item.css({color:retObj.getRowForegroundColor(i)});
+        var rowBackgroundColor = retObj.getRowBackgroundColor(i);
+        var rowForegroundColor = retObj.getRowForegroundColor(i);
+
+        if (rowBackgroundColor === null || rowBackgroundColor === undefined) {
+            rowBackgroundColor = retObj.getColumnBackgroundColor(i, 'Location_latitude');
+            rowForegroundColor = retObj.getColumnForegroundColor(i, 'Location_latitude');
+
+            if (rowBackgroundColor === null || rowBackgroundColor === undefined) {
+                rowBackgroundColor = retObj.getStatusBackgroundColor(i);
+                rowForegroundColor = retObj.getStatusForegroundColor(i);
+            }
+        }
+        item.css({backgroundColor:rowBackgroundColor});
+        item.css({color:rowForegroundColor});
         $('#list').append(item);
 
         // don't append the last one to avoid the fencepost problem

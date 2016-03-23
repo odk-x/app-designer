@@ -18,8 +18,6 @@ window.odkData = {
 
     getViewData : function (successCallbackFn, failureCallbackFn) {
         var that = this;
-        
-        var transId = null;
 
         var req = that.queueRequest('getViewData', successCallbackFn, failureCallbackFn);
 
@@ -423,11 +421,14 @@ window.odkData = {
 
             var colorArray = resultObj.metadata.rowColors;
 
-            if (rowNumber >= 0 && rowNumber < colorArray.length) {
-                return colorArray[rowNumber].foregroundColor;
-            } else {
-                return null;
+            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
+                for (var i = 0; i < colorArray.length; i++) {
+                    if (colorArray[i].rowIndex === rowNumber) {
+                        return colorArray[i].foregroundColor;
+                    }
+                }
             }
+            return null;
         };
 
         pub.getRowBackgroundColor = function(rowNumber) {
@@ -453,11 +454,15 @@ window.odkData = {
 
             var colorArray = resultObj.metadata.rowColors;
 
-            if (rowNumber >= 0 && rowNumber < colorArray.length) {
-                return colorArray[rowNumber].backgroundColor;
-            } else {
-                return null;
+            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
+                for (var i = 0; i < colorArray.length; i++) {
+                    if (colorArray[i].rowIndex === rowNumber) {
+                        return colorArray[i].backgroundColor;
+                    }
+                }
             }
+            return null;
+
         };
 
         pub.getStatusForegroundColor = function(rowNumber) {
@@ -483,11 +488,14 @@ window.odkData = {
 
             var colorArray = resultObj.metadata.statusColors;
 
-            if (rowNumber >= 0 && rowNumber < colorArray.length) {
-                return colorArray[rowNumber].foregroundColor;
-            } else {
-                return null;
+            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
+                for (var i = 0; i < colorArray.length; i++) {
+                    if (colorArray[i].rowIndex === rowNumber) {
+                        return colorArray[i].foregroundColor;
+                    }
+                }
             }
+            return null;
         };
 
         pub.getStatusBackgroundColor = function(rowNumber) {
@@ -513,11 +521,15 @@ window.odkData = {
 
             var colorArray = resultObj.metadata.statusColors;
 
-            if (rowNumber >= 0 && rowNumber < colorArray.length) {
-                return colorArray[rowNumber].backgroundColor;
-            } else {
-                return null;
+            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
+                for (var i = 0; i < colorArray.length; i++) {
+                    if (colorArray[i].rowIndex === rowNumber) {
+                        return colorArray[i].backgroundColor;
+                    }
+                }
             }
+            return null;
+
         };
 
         pub.getColumnForegroundColor = function(rowNumber, elementKey) {
@@ -529,7 +541,7 @@ window.odkData = {
                 return null;
             }
 
-            if (resultObj.metadata.statusColors === null || resultObj.metadata.statusColors === undefined) {
+            if (resultObj.metadata.columnColors === null || resultObj.metadata.columnColors === undefined) {
                 return null;
             }
 
@@ -545,13 +557,20 @@ window.odkData = {
                 throw 'getColumnForegroundColor()--elementKey must be a string';
             }
 
-            var colorArray = resultObj.metadata.statusColors;
-
-            if (rowNumber >= 0 && rowNumber < colorArray.length) {
-                return colorArray[rowNumber].foregroundColor;
-            } else {
+            if (resultObj.metadata.columnColors[elementKey] === null || resultObj.metadata.columnColors[elementKey] === undefined) {
                 return null;
             }
+
+            var colorArray = resultObj.metadata.columnColors[elementKey];
+
+            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
+                for (var i = 0; i < colorArray.length; i++) {
+                    if (colorArray[i].rowIndex === rowNumber) {
+                        return colorArray[i].foregroundColor;
+                    }
+                }
+            }
+            return null;
         };
 
         pub.getColumnBackgroundColor = function(rowNumber, elementKey) {
@@ -579,13 +598,17 @@ window.odkData = {
                 throw 'getColumnBackgroundColor()--elementKey must be a string';
             }
 
+            if (resultObj.metadata.columnColors[elementKey] === null || resultObj.metadata.columnColors[elementKey] === undefined) {
+                return null;
+            }
+
             var colorArray = resultObj.metadata.columnColors[elementKey];
 
-            if (colorArray !== null && colorArray !== undefined) {
-                if (rowNumber >= 0 && rowNumber < colorArray.length) {
-                    return colorArray[rowNumber].backgroundColor;
-                } else {
-                    return null;
+            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
+                for (var i = 0; i < colorArray.length; i++) {
+                    if (colorArray[i].rowIndex === rowNumber) {
+                        return colorArray[i].backgroundColor;
+                    }
                 }
             }
         };
