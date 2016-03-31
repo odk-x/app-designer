@@ -7,11 +7,11 @@
  *
  */
 
-define(['underscore', 'XRegExp'],function(_,XRegExp) {
+define(['underscore', 'XRegExp', 'databaseUtils'],function(_,XRegExp,databaseUtils) {
 'use strict';
 verifyLoad('opendatakit',
-    ['underscore', 'XRegExp'],
-    [ _,            XRegExp]);
+    ['underscore', 'XRegExp', 'databaseUtils'],
+    [ _,            XRegExp , databaseUtils  ]);
 return {
     initialScreenPath: "initial/0",
     savepoint_type_complete: 'COMPLETE',
@@ -83,6 +83,44 @@ return {
 
     logInitDone:function(pagename) {
         odkCommon.log("I","logInitDone: doneInit ms: " + (+new Date()) + " page: " + pagename);
+    },
+
+    /**
+     * Encode the data element given the element key
+     */
+    encodeURIDataElement:function(elementKey) {
+        var elementKeyDef = null;
+        var dbKey;
+        var def;
+
+        // Get data table model info for the element_key specified
+        for (dbKey in this.mdl.dataTableModel) {
+            def = this.mdl.dataTableModel[dbKey];
+            if (def.elementKey === elementKey) {
+                elementKeyDef = def;
+                break;
+            }
+        }
+
+        if (elementKey === null) {
+            return null;
+        }
+
+        // Get the database value
+        var value = databaseUtils.getElementPathValue(this.mdl.data, elementKey)
+
+        // Call the toSerializeFunction
+        var finalValue = databaseUtils.toSerializationFromElementType(elementKeyDef, value, true);
+
+        // Encode the URI component
+        return encodeURIComponent(finalValue);
+    },
+
+    /**
+     * Encode the data value 
+     */
+    encodeURIValue:function(value) {
+        return encodeURIComponent(JSON.stringify(value));
     },
 
     /**

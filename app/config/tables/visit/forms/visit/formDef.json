@@ -295,7 +295,7 @@
         "linked_form_id": "plot",
         "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'plot_id>='+encodeURIComponent(0)",
+        "auxillaryHash": "'plot_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 2
       }
     ],
@@ -529,7 +529,7 @@
         "linked_form_id": "plot",
         "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'plot_id>='+encodeURIComponent(0)",
+        "auxillaryHash": "'plot_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 2
       }
     },

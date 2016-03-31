@@ -218,7 +218,7 @@ return {
     /**
      * Serialize to ODK Survey session variable string from ODK Survey representation value
      */
-    _toSerializationFromElementType: function( jsonType, value, topLevel ) {
+    toSerializationFromElementType: function( jsonType, value, topLevel ) {
         var that = this;
         var refined;
         var itemType;
@@ -230,7 +230,7 @@ return {
                 return null;
             }
             // otherwise, convert it as if it were nested...
-            value = that._toSerializationFromElementType(jsonType, value, false);
+            value = that.toSerializationFromElementType(jsonType, value, false);
             // and stringify it...
             return JSON.stringify(value);
         }
@@ -252,7 +252,7 @@ return {
                     return value;
                 } else {
                     for ( item = 0 ; item < value.length ; ++item ) {
-                        itemValue = that._toSerializationFromElementType( itemType, value[item], false );
+                        itemValue = that.toSerializationFromElementType( itemType, value[item], false );
                         refined.push(itemValue);
                     }
                     return refined;
@@ -272,7 +272,7 @@ return {
                 for ( item in jsonType.properties ) {
                     if ( value[item] !== null && value[item] !== undefined ) {
                         itemType = jsonType.properties[item];
-                        itemValue = that._toSerializationFromElementType( itemType, value[item], false );
+                        itemValue = that.toSerializationFromElementType( itemType, value[item], false );
                         refined[item] = itemValue;
                     }
                 }
@@ -991,7 +991,7 @@ return {
                             accumulatedChanges[f] = changeElement;
                         }
                     } else {
-                        v = that._toSerializationFromElementType(defElement, kvElement.value, true);
+                        v = that.toSerializationFromElementType(defElement, kvElement.value, true);
                         odkCommon.setSessionVariable(elementPath, v);
                         sessionVariableChanges[f] = changeElement;
                     }

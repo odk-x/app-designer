@@ -237,8 +237,7 @@ return {
                 } else if ( key === 'refId' ) {
                     refId = value;
                 } else {
-                    var jsonValue = JSON.stringify(value);
-                    that._parseQueryHelper(instanceMetadataKeyValueMap, key, jsonValue);
+                    that._parseQueryHelper(instanceMetadataKeyValueMap, key, value);
                 }
             }
 

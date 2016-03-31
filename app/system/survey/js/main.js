@@ -192,14 +192,14 @@ require(['jquery','XRegExp'],
                 odkCommon.log('I','main.require.bootstrap.moment.loaded establish mobileinit action');
 
             // and launch the framework...
-            require([ 'spinner', 'opendatakit', 'database', 'parsequery',
+            require([ 'spinner', 'databaseUtils', 'opendatakit', 'database', 'parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv', 'datetimepicker'],
-            function(spinner,   opendatakit,   database,  parsequery,
+            function(spinner,   databaseUtils, opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
-                    ['datetimepicker', 'spinner', 'opendatakit', 'database','parsequery',
+                    ['datetimepicker', 'spinner', 'databaseUtils', 'opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'],
-                    [ $.fn.datetimepicker,   spinner,   opendatakit,   database,  parsequery,
+                    [ $.fn.datetimepicker,   spinner,  databaseUtils,  opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv]);
 
 
