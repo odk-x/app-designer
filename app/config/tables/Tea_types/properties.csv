@@ -1,5 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Table,default,colOrder,string,"[""Type_id"",""Name"",""Caffeinated"",""Origin"",""Fermented""]"
-Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,config/tables/Tea_types/html/Tea_types_detail.html
-Table,default,listViewFileName,string,config/tables/Tea_types/html/Tea_types_list.html

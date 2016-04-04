@@ -12,11 +12,11 @@
             /*    Screen new client option that launches new client list view */
             var newClient = document.createElement("button");
             newClient.setAttribute("id", "button1");
-            newClient.innerHTML = "Registration";
+            newClient.innerHTML = "Screen Beneficiary";
             newClient.onclick = function() {
                 control.addRowWithSurvey(
                     'beneficiaries',
-                    'screening_form',
+                    'screening_form_envelope',
                     null,
                     null);
             }
@@ -26,7 +26,7 @@
             // 'femaleClients' table list view
             var followUp = document.createElement("button");
             followUp.setAttribute("id", "button2");
-            followUp.innerHTML = "Distribution";
+            followUp.innerHTML = "Distribute Card";
             followUp.onclick = function() {
                 control.addRowWithSurvey(
                     'check_barcode',
@@ -40,7 +40,7 @@
             // Collect
             var sendData = document.createElement("button");
             sendData.setAttribute("id", "button3");
-            sendData.innerHTML = "Beneficiary List";
+            sendData.innerHTML = "Beneficiaries";
             sendData.onclick = function() {
               // nothing for now
               control.launchHTML(
@@ -53,7 +53,9 @@
     </head>
 
     <body onload="display();">
-        <h1>CTP Pilot</h1>
+        <h1>Card Distribution</h1>
+        <h2>Scenario A:</h2>
+        <h2>Assign card and envelope at the same time.</h2>
         <div id="wrapper"></div>
     </body>
 </html>

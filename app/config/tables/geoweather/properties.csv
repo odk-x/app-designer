@@ -1,6 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Column,Weather,displayChoicesList,object,"[{""choice_list_name"":""conditions"",""data_value"":""clear"",""display"":{""text"":""Clear skies""},""_row_num"":2},{""choice_list_name"":""conditions"",""data_value"":""partly_clear"",""display"":{""text"":""Partly clear skies""},""_row_num"":3},{""choice_list_name"":""conditions"",""data_value"":""overcast"",""display"":{""text"":""Overcast (cloudy) skies""},""_row_num"":4},{""choice_list_name"":""conditions"",""data_value"":""foggy"",""display"":{""text"":""Foggy""},""_row_num"":5},{""choice_list_name"":""conditions"",""data_value"":""drizzle"",""display"":{""text"":""Light rain""},""_row_num"":6},{""choice_list_name"":""conditions"",""data_value"":""rain"",""display"":{""text"":""Raining""},""_row_num"":7},{""choice_list_name"":""conditions"",""data_value"":""thunderstorm"",""display"":{""text"":""Thunderstorms""},""_row_num"":8},{""choice_list_name"":""conditions"",""data_value"":""snow"",""display"":{""text"":""Snowing""},""_row_num"":9}]"
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,geoweather
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Simple Weather Survey"""

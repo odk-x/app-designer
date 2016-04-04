@@ -1,8 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,config/tables/Tea_houses/html/Tea_houses_detail.html
-Table,default,listViewFileName,string,config/tables/Tea_houses/html/Tea_houses_list.html
-Table,default,mapListViewFileName,string,config/tables/Tea_houses/html/Tea_houses_list.html
-TableMapFragment,default,keyColorRuleType,string,None
-TableMapFragment,default,keyMapLatCol,string,Location_latitude
-TableMapFragment,default,keyMapLongCol,string,Location_longitude
