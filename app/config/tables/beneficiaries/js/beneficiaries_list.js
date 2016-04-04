@@ -4,31 +4,47 @@
 /* global $, control */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/beneficiaries_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
+// if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
+//     console.log('Welcome to Tables debugging in Chrome!');
+//     $.ajax({
+//         url: control.getFileAsUrl('output/debug/beneficiaries_data.json'),
+//         async: false,  // do it first
+//         success: function(dataObj) {
+//             window.data.setBackingObject(dataObj);
+//         }
+//     });
+// }
  
-// This will map types of teas.
-var typeNameMap = {};
+var idxStart = -1;
+var beneficiariesResultSet = {};
 
-var data = control.query('beneficiaries', null, null);
+//var data = control.query('beneficiaries', null, null);
             
 /** 
  * Use chunked list view for larger tables: We want to chunk the displays so
  * that there is less load time.
  */
-            
+ 
+/**
+ * Called when page loads to display things (Nothing to edit here)
+ */
+var beneficiariesCBSuccess = function(result) {
+    var beneficiariesResultSet = result;
+
+    return (function() {
+        displayGroup(idxStart);
+    }());
+};
+
+var beneficiariesCBFailure = function(error) {
+
+    console.log('beneficiaries_list beneficiariesCBFailure: ' + error);
+};           
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
 var resumeFn = function(idxStart) {
+    
 
     console.log('resumeFn called. idxStart: ' + idxStart);
     // The first time through we're going to make a map of typeId to
@@ -37,7 +53,7 @@ var resumeFn = function(idxStart) {
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = data.getTableId();
+            var tableId = beneficiariesResultSet.getTableId();
             // We set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -53,7 +69,7 @@ var resumeFn = function(idxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                control.openDetailView(
+                odkTables.openDetailView(
                   tableId,
                   rowId,
                   'tables/beneficiaries/html/beneficiaries_detail.html');
@@ -78,22 +94,22 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-      if (i >= data.getCount()) {
+      if (i >= beneficiariesResultSet.getCount()) {
         break;
       }
       /* Creates the item space */
       // We're going to select the ul and then start adding things to it.
       //var item = $('#list').append('<li>');
       var item = $('<li>');
-      item.attr('rowId', data.getRowId(i));
+      item.attr('rowId', beneficiariesResultSet.getRowId(i));
       item.attr('class', 'item_space');
-      var first_name = data.getData(i, 'first_name');
-      var last_name = data.getData(i, 'last_name');
+      var first_name = beneficiariesResultSet.getData(i, 'first_name');
+      var last_name = beneficiariesResultSet.getData(i, 'last_name');
       item.text(first_name + ' ' + last_name);
               
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
-      chevron.attr('src', control.getFileAsUrl('assets/img/little_arrow.png'));
+      chevron.attr('src', odkCommon.getFileAsUrl('assets/img/little_arrow.png'));
       chevron.attr('class', 'chevron');
       item.append(chevron);
               
@@ -113,13 +129,13 @@ var displayGroup = function(idxStart) {
 
       var field2 = $('<li>');
       field2.attr('class', 'detail');
-      var beneficiary_code = data.getData(i, 'beneficiary_code');
+      var beneficiary_code = beneficiariesResultSet.getData(i, 'beneficiary_code');
       field2.text('Code: ' + beneficiary_code);
       item.append(field2);
 
       var field3 = $('<li>');
       field2.attr('class', 'detail');
-      var received_card = data.getData(i, 'received_card');
+      var received_card = beneficiariesResultSet.getData(i, 'received_card');
       if (received_card === '1') {
         field3.text('Received enevelope.');
       } else {
@@ -135,7 +151,7 @@ var displayGroup = function(idxStart) {
       $('#list').append(borderDiv);
 
     }
-    if (i < data.getCount()) {
+    if (i < beneficiariesResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };

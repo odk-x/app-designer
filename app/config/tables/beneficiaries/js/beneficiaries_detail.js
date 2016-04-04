@@ -5,26 +5,30 @@
 'use strict';
 
 // Handle the case where we are debugging in chrome.
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-  console.log('Welcome to Tables debugging in Chrome!');
-  $.ajax({
-      url: control.getFileAsUrl('output/debug/Tea_houses_data.json'),
-      async: false,  // do it first
-      success: function(dataObj) {
-          window.data.setBackingObject(dataObj);
-        }
-  });
-}
+// if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
+//   console.log('Welcome to Tables debugging in Chrome!');
+//   $.ajax({
+//       url: odkCommon.getFileAsUrl('output/debug/Tea_houses_data.json'),
+//       async: false,  // do it first
+//       success: function(dataObj) {
+//           window.data.setBackingObject(dataObj);
+//         }
+//   });
+// }
  
-function display() {
-  var first_name = data.get('first_name');
-  var last_name = data.get('last_name');
+var beneficiaryResultSet = {};
+
+function cbSuccess(result) {
+
+  beneficiaryResultSet = result;
+  var first_name = beneficiaryResultSet.get('first_name');
+  var last_name = beneficiaryResultSet.get('last_name');
   $('#TITLE').text(first_name + ' ' + last_name);
 
-  $('#FIELD_17').text(data.get('beneficiary_code'));
-  $('#FIELD_18').text(data.get('envelope_code'));
+  $('#FIELD_17').text(beneficiaryResultSet.get('beneficiary_code'));
+  $('#FIELD_18').text(beneficiaryResultSet.get('envelope_code'));
 
-  var received_card = data.get('received_card');
+  var received_card = beneficiaryResultSet.get('received_card');
   var card_label = 'NO';
   if (received_card === '1') {
     card_label = 'YES';
@@ -32,31 +36,37 @@ function display() {
   $('#FIELD_19').text(card_label);
 
 
-  $('#FIELD_4').text(data.get('address'));
+  $('#FIELD_4').text(beneficiaryResultSet.get('address'));
 
-  $('#FIELD_5').text(data.get('city'));
-  $('#FIELD_6').text(data.get('state'));
-  $('#FIELD_13').text(data.get('postcode'));
-  $('#FIELD_7').text(data.get('country'));
+  $('#FIELD_5').text(beneficiaryResultSet.get('city'));
+  $('#FIELD_6').text(beneficiaryResultSet.get('state'));
+  $('#FIELD_13').text(beneficiaryResultSet.get('postcode'));
+  $('#FIELD_7').text(beneficiaryResultSet.get('country'));
 
-  $('#FIELD_8').text(data.get('telephone'));
+  $('#FIELD_8').text(beneficiaryResultSet.get('telephone'));
 
-  $('#FIELD_9').text(data.get('date_screened'));
-  $('#FIELD_10').text(data.get('date_distributed'));
+  $('#FIELD_9').text(beneficiaryResultSet.get('date_screened'));
+  $('#FIELD_10').text(beneficiaryResultSet.get('date_distributed'));
 
   var enterEnvelope = $('#enter-envelope');
   enterEnvelope.on(
       'click',
       function() {
-        var rowId = data.getRowId(0);
-        control.editRowWithSurvey(
+        var rowId = beneficiaryResultSet.getRowId(0);
+        odkTables.editRowWithSurvey(
           'beneficiaries',
           rowId,
           'enter_envelope_form',
           null);
       }
     );
+}
 
+function cbFailure(error) {
+  console.log('beneficiaries_detail cbFailure: getViewData failed with message: ' + error);
+}
 
+function display() {
+  odkData.getViewData(cbSuccess, cbFailure);
 }
 
