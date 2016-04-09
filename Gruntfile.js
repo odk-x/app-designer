@@ -90,7 +90,7 @@ module.exports = function (grunt) {
         // also modify the other properties in this object that refer to 
         // app
         appDir: 'app',
-        appName: 'tables',
+        appName: 'default',
         // The mount point of the device. Should allow adb push/pull.
         deviceMount: '/sdcard/opendatakit',
         // The mount point of the device for odk collect forms.
@@ -244,7 +244,7 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpush',
         'Perform all the adbpush tasks',
-        ['adbpush-collect', 'adbpush-tables-app']);
+        ['adbpush-collect', 'adbpush-default-app']);
 
     grunt.registerTask(
         'adbpull-debug',
@@ -282,7 +282,7 @@ module.exports = function (grunt) {
 
 
     grunt.registerTask(
-        'adbpush-tables-app',
+        'adbpush-default-app',
         'Push everything in the app directory (except system) to the device',
         function() {
             // Do not push any system, data or output files.
