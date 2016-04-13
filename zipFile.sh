@@ -34,25 +34,25 @@ cp app/config/assets/img/play.png tempZipDir/surveyDir/config/assets/img/play.pn
 cp app/system/index.html tempZipDir/surveyDir/system/index.html
 
 # Survey system js files
-cp -r app/system/js/ tempZipDir/surveyDir/system/js
+cp -r app/system/js/* tempZipDir/surveyDir/system/js
 
 # Survey system libs files
-cp -r app/system/libs/ tempZipDir/surveyDir/system/libs
+cp -r app/system/libs/* tempZipDir/surveyDir/system/libs
 
 # Survey system survey files
-cp -r app/system/survey/js/ tempZipDir/surveyDir/system/survey/js
-cp -r app/system/survey/templates/ tempZipDir/surveyDir/system/survey/templates
+cp -r app/system/survey/js/* tempZipDir/surveyDir/system/survey/js
+cp -r app/system/survey/templates/* tempZipDir/surveyDir/system/survey/templates
 
-cd tempZipDir/surveyDir 
+cd tempZipDir/surveyDir
 zip -r config.zip config
 zip -r system.zip system
 
-cp config.zip configzip
-cp system.zip systemzip
+mv config.zip configzip
+mv system.zip systemzip
 
-if [ "$1" ]; then   
-    cp configzip "$1"      
-    cp systemzip "$1"       
+if [ "$1" ]; then
+    cp configzip "$1"
+    cp systemzip "$1"
 fi
 
 cd ../..
@@ -74,28 +74,28 @@ mkdir tempZipDir/tablesDir/system/tables
 cp app/config/assets/img/little_arrow.png tempZipDir/tablesDir/config/assets/img/little_arrow.png
 
 # Tables config libs files
-cp -r app/config/assets/libs/ tempZipDir/tablesDir/config/assets/libs
+cp -r app/config/assets/libs/* tempZipDir/tablesDir/config/assets/libs
 
 # Move all the necessary Tables system files over
 # Tables system js files
-cp -r app/system/js/ tempZipDir/tablesDir/system/js
+cp -r app/system/js/* tempZipDir/tablesDir/system/js
 
 # Tables system libs files
-cp -r app/system/libs/ tempZipDir/tablesDir/system/libs
+cp -r app/system/libs/* tempZipDir/tablesDir/system/libs
 
 # Tables system tables files
-cp -r app/system/tables/ tempZipDir/tablesDir/system/tables
+cp -r app/system/tables/* tempZipDir/tablesDir/system/tables
 
 cd tempZipDir/tablesDir
 zip -r config.zip config
 zip -r system.zip system
 
-cp config.zip configzip
-cp system.zip systemzip
+mv config.zip configzip
+mv system.zip systemzip
 
-if [ "$2" ]; then   
-    cp configzip "$2"      
-    cp systemzip "$2"            
+if [ "$2" ]; then
+    cp configzip "$2"
+    cp systemzip "$2"
 fi
 
 cd ../..
