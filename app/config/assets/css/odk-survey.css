@@ -11,6 +11,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-size:large;
 }
 
 @media all and (max-width: 25em) {
