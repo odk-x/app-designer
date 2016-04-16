@@ -10,14 +10,6 @@ util.dateKey = 'follow_date';
 util.timeKey = 'follow_time';
 util.focalChimpKey = 'focal_chimp';
 
-util.beginToEat = 'begin_eating';
-util.eatenFood = 'eaten_food';
-util.eatenFoodPart = 'eaten_foodPart';
-
-util.timeOfPresence = "time_presence";
-util.speciesName = "name_species";
-util.numOfSpecies = "num_of_species";
-
 /**
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy
  * implementation that will fail if the key string appears more than once, etc.
@@ -76,10 +68,6 @@ util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure
         null, null, null, null, true, cbSuccess, cbFailure);
 };
 
-util.updateCurrentChimps = function(date, time) {
-     
-}
-
 /**
  * Get a query for all the data at the given date and time for the specified
  * focal chimp. Together this specifies a unique time point in a follow.
@@ -117,41 +105,6 @@ util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, 
         null, null, null, null, true, cbSuccess, cbFailure);
 
 };
-util.getSpeciesDataForTimePoints = function(date, focalChimpId) {
-
-    var whereClause =
-        'OS_FOL_date = ? AND OS_FOL_B_focal_AnimID = ?';
-
-    var selectionArgs = [date, focalChimpId];
-
-    var result = control.query(
-            'other_species',
-            whereClause,
-            selectionArgs);
-
-    return result;
-
-};
-
-/**
- * Get a query for all the data at the given date and time for all
- * the chimps
- */
-util.getUpdateAboutAllChimps = function(date, time) {
-
-    var whereClause =
-        'FA_FOL_date = ? AND FA_time_start = ?';
-
-    var selectionArgs = [date, time];
-
-    var result = control.query(
-            'follow_arrival',
-            whereClause,
-            selectionArgs);
-
-    return result;
-
-};
 
 /**
  * Get a string to append to a url that will contain information the date and
@@ -172,66 +125,6 @@ util.getKeysToAppendToURL = function(date, time, focalChimp) {
         '=' +
         encodeURIComponent(focalChimp);
     return result;
-  
-};
-util.getKeysToAppendToURL2 = function(date, time, focalChimp, beginToEat, food, foodPart) {
-    var result =
-        '?' +
-        util.dateKey +
-        '=' +
-        encodeURIComponent(date) +
-        '&' +
-        util.timeKey +
-        '=' +
-        encodeURIComponent(time) +
-        '&' +
-        util.focalChimpKey +
-        '=' +
-        encodeURIComponent(focalChimp) +
-        '&' +
-        util.beginToEat +
-        '=' +
-        encodeURIComponent(beginToEat) +
-        '&' +
-        util.eatenFood +
-        '=' +
-        encodeURIComponent(food) +
-        '&' +
-        util.eatenFoodPart +
-        '=' +
-        encodeURIComponent(foodPart);
-    return result;
-  
-};
-
-util.getKeysToAppendToURL3 = function(date, time, focalChimp, timeOfPresence, speciesName, numOfSpecies) {
-    var result =
-        '?' +
-        util.dateKey +
-        '=' +
-        encodeURIComponent(date) +
-        '&' +
-        util.timeKey +
-        '=' +
-        encodeURIComponent(time) +
-        '&' +
-        util.focalChimpKey +
-        '=' +
-        encodeURIComponent(focalChimp) +
-        '&' +
-        util.timeOfPresence +
-        '=' +
-        encodeURIComponent(timeOfPresence) +
-        '&' +
-        util.speciesName +
-        '=' +
-        encodeURIComponent(speciesName) +
-        '&' +
-        util.numOfSpecies +
-        '=' +
-        encodeURIComponent(numOfSpecies);
-    return result;
-  
 };
 
 util.genUUID = function() {

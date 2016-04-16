@@ -1716,22 +1716,6 @@ promptTypes.text = promptTypes.input_type.extend({
         "type": "text"
     }
 });
-promptTypes.textarea = promptTypes.input_type.extend({
-    type: "textarea",
-    templatePath: "templates/textarea.handlebars",
-    renderContext: {
-        "type": "textarea"
-    },
-    beforeMove: function() {
-        var that = this;
-        var isInvalid = that.setValueAndValidate(this.$('textarea').val());
-        if ( isInvalid ) {
-            return { message: that.invalid_value_message };
-        } else {
-            return null;
-        }
-    }
-});
 promptTypes.integer = promptTypes.input_type.extend({
     type: "integer",
     templatePath: "templates/integer.handlebars",

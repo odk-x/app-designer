@@ -522,12 +522,9 @@ module.exports = function (grunt) {
                     '/' +
                     surveyConfig.appName +
                     '/' +
-                    tablesConfig.xlsxDir +
-                    '/' +
                     fileName;
                 grunt.log.writeln('adb push ' + src + ' ' + dest);
                 grunt.task.run('exec:adbpush:' + src + ':' + dest);
-
             });
 
         });
@@ -617,9 +614,8 @@ module.exports = function (grunt) {
 
         });
 
-    // Munjela task
     grunt.registerTask(
-        'adbpush-mun',
+        'adbpush-survey-demo-bmg10092014',
         'Push everything for survey demo to the device',
         function() {
             // In the demo we only want Survey. Do not push the system or 
@@ -631,6 +627,9 @@ module.exports = function (grunt) {
             // we get directory names adb will push everything in the directory
             // name, effectively pushing everything twice.  We also specify that we 
             // want everything returned to be relative to 'app' by using 'cwd'. 
+            //
+            // For this demo selects had to be modified due to select_one_with_other
+            // and the media player not working for video
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -665,7 +664,7 @@ module.exports = function (grunt) {
         });
 
     grunt.registerTask(
-        'adbpush-survey-demo-bmg10092014',
+        'adbpush-survey-demo-techCon2014',
         'Push everything for survey demo to the device',
         function() {
             // In the demo we only want Survey. Do not push the system or 

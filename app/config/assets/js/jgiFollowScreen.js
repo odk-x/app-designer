@@ -45,92 +45,8 @@ function cbAddRowFBFail(error) {
     console.log('jgiFollowScreen: cbAddRowFBFail with error: ' + error);
 }
 
-
-
-// start trying to update beginning
-
-
-
-    // var beginUpdateChimpInfo = function(){
-    //     // var chimpId = $(this).prop('id');
-    //     // console.log("in event handeler " + chimpId);
-    //     // // removing event handeler from all other chimps right now since we want the
-    //     // // user to be able update one chimp at a time.
-    //     // $('.chimp').unbind("click", updateChimpInfo);
-    //     // document.getElementById(chimpId).style.backgroundColor = "green";
-
-    //     var chimpList = util.getTableDataForTimePoint(
-    //     followDate, "01:00",
-    //     focalChimpId);
-
-    //     var rowId = null;
-    //     for(var i = 0; i < chimpList.getCount(); i++) {
-    //         var chimpId = chimpList.getData(i, 'FA_B_arr_AnimID').trim(); 
-    //         rowId = chimpList.getRowId(i);
-     
-          
-    //         if (rowId != null) {
-    //             var curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
-    //             var curCertain = chimpList.getData(rowId, 'FA_type_of_certainty').trim();
-    //             var curDist = chimpList.getData(rowId, 'FA_within_five_meters').trim();
-    //             var curS = chimpList.getData(rowId, 'FA_type_of_cycle').trim(); 
-    //             var curClose = chimpList.getData(rowId, 'FA_closest_to_focal').trim();
-    //             updateUI(false, chimpId, curTime, curCertain, curDist, curS, curClose); 
-    //         } else {
-    //              console.log("There is no Chimp with this name in the database!!!!");
-    //              return;
-    //         }
-    //     }
-       
-    //     // // getting the information from the div and saving it to the database and
-    //     // // updates the ui
-    //     // var time = null;
-    //     // var certain = null;
-    //     // var distance = null;
-    //     // var sex_state = null;
-    //     // var close = null;
-    //     // $('.save_bottom_div').on('click', function() {
-    //     //     time = $('input[name="time"]:checked').val();
-    //     //     certain = $('input[name="certain"]:checked').val();
-    //     //     distance = $('input[name="distance"]:checked').val();
-    //     //     sex_state = $('input[name="sex_state"]:checked').val();
-    //     //     close = $('input[name="close"]:checked').val();
-    //     //     updateUI(true, chimpId,
-    //     //     time,
-    //     //     certain,
-    //     //     distance,
-    //     //     sex_state,
-    //     //     close);
-
-    //     //     if (rowId != null) {
-    //     //         writeRowForChimp(
-    //     //             true,
-    //     //             rowId,
-    //     //             chimpId,
-    //     //             time,
-    //     //             certain,
-    //     //             distance,
-    //     //             sex_state,
-    //     //             close);
-    //     //     } else {
-    //     //         console.log("There is no Chimp with this name in the database!!!!");
-    //     //         return;
-    //     //     }
-
-    //         // we are done with updating the current chimp. so we can re bind the
-    //         // all the chimps to the event handeler
-    //     //     $('.chimp').bind("click", updateChimpInfo);
-    //     // }); 
-    // };  
-
-
-// end trying to update beginning
-
-
-
-
-
 function display() {
+
     // We're expecting the follow time to be present as a url parameter,
     // something along the lines of:
     // ?follow_time=07_15
@@ -139,88 +55,116 @@ function display() {
     var followDate = util.getQueryParameter(util.dateKey);
     var focalChimpId = util.getQueryParameter(util.focalChimpKey);
 
-    var oldTime = util.getQueryParameter(util.timeKey); 
+    // These flags correspond to the values of the FA_type_of_certainty column
+    // in the follow_arrival table. They don't have a type 2, while we do. This
+    // is going to mean "not present", as we're going to have a row per chimp
+    // per time point, even if they're not there, just to simplify the logic.
+    var flag_chimpPresent = 1;
+    var flag_chimpAbsent = 2;
 
-    console.log("new page, display is being called"); 
+    // These are the suffixes we'll use for the ids of the checkboxes. A whole
+    // id would thus consist of something along the lines of:
+    // chimpId + present_suffix
+    var presentSuffix = '_present';
+    var fiveMeterSuffix = '_5m';
+    var sexualStateSuffix = '_sexual-state';
 
+    var sexualStates = ['0', '0.25', '0.5', '0.75', '1.0', 'U'];
 
-    console.log("This is the current followTime: " + followTime + " which is true?: " + followTime == "1:15"); 
+    // This will hold the values for the numbers of species present;
+    var speciesCounts = {};
+    speciesCounts.chatu = 0;
+    speciesCounts.kenge = 0;
+    speciesCounts.kima = 0;
+    speciesCounts.nguruwe = 0;
+    speciesCounts.nkunge = 0;
+    speciesCounts.nyani = 0;
+    speciesCounts.nyoka = 0;
+    speciesCounts.pongo = 0;
+    speciesCounts.vyondi = 0;
+    speciesCounts.unknown = 0;
 
-    if (followTime == "1:15") {
-        var chimpList = util.getTableDataForTimePoint(
-        followDate, "01:00",
-        focalChimpId);
+    // This will hold whether or not food is present. This is just binary
+    // like this, or should we actually be tallying them as in the species
+    // case?
+    var foodPresent = {};
+    foodPresent.bananas = false;
+    foodPresent.berries = false;
+    foodPresent.flesh = false;
 
-        var rowId = null;
-        for(var i = 0; i < chimpList.getCount(); i++) {
-            var chimpId = chimpList.getData(i, 'FA_B_arr_AnimID').trim(); 
-            rowId = chimpList.getRowId(i);
-     
-          
-            if (rowId != null) {
-                var curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
-                var curCertain = chimpList.getData(rowId, 'FA_type_of_certainty').trim();
-                var curDist = chimpList.getData(rowId, 'FA_within_five_meters').trim();
-                var curS = chimpList.getData(rowId, 'FA_type_of_cycle').trim(); 
-                var curClose = chimpList.getData(rowId, 'FA_closest_to_focal').trim();
-                console.log("Curren time: " + curTime);
-                console.log("Curren certain: " + curCertain);
-                console.log("Curren dist: " + curDist);
-                console.log("Curren sex: " + curS);
-                console.log("Curren close: " + curClose);
-                updateUI(false, chimpId, curTime, curCertain, curDist, curS, curClose); 
-            } else {
-                 console.log("There is no Chimp with this name in the database!!!!");
-                 return;
-            }
-        }        
+    var followTimeUserFriendly;
+    if (followTime === null) {
+        // notify the user if we haven't specified a follow time. This will be
+        // only useful for debugging purposes.
+        alert('No follow time has been specified!');
+        followTimeUserFriendly = 'N/A';
+    } else {
+        followTimeUserFriendly = followTime.replace('_', ':');
     }
 
     /**
-     * Update the row for the given chimp. As we start persisting more data
-     * this function should grow.
-     *
-     * isUpdate is true if we are updating the database rather than writing a
-     * new row. If true, rowId cannot be null. If false, rowId is ignored.
-     *
-     * If isWithin5 is null, no update is performed.
+     * Return true if a valid species else false.
      */
-    var writeRowForChimp = function(isUpdate, rowId, chimpId, time, certain, distance, sState, closest_to_focal) {
-        var struct = {};
-        struct['FA_FOL_date'] = followDate;
-        struct['FA_FOL_B_focal_AnimID'] = focalChimpId;
-        struct['FA_B_arr_AnimID'] = chimpId;
-        struct['FA_time_start'] = followTime;
-
-        if (time != null || time != undefined) {
-            struct['FA_duration_of_obs'] = time;
-        }
-        if (sState !== null || sState != undefined) {
-            struct['FA_type_of_cycle'] = sState;
-        }
-        
-        if (certain !== null || certain != undefined) {
-            struct['FA_type_of_certainty'] = certain;
-        } 
-
-        if (distance !== null || distance != undefined) {
-            struct['FA_within_five_meters'] = distance;
-        } 
-
-        if (closest_to_focal !== null || closest_to_focal != undefined) {
-            struct['FA_closest_to_focal'] = closest_to_focal;
-        } 
-        
-        var stringified = JSON.stringify(struct);
-        if (isUpdate) {
-            var updateSuccessfully =
-                control.updateRow('follow_arrival', stringified, rowId);
-            //console.log('updateSuccessfully: ' + updateSuccessfully);
+    var isValidSpecies = function(species) {
+        // First make sure this is a valid key.
+        if (!(species in speciesCounts)) {
+            return false;
         } else {
-            var addedSuccessfully =
-                control.addRow('follow_arrival', stringified);
-            //console.log('added successfully: ' + addedSuccessfully);
+            return true;
         }
+    };
+
+    var isValidFood = function(food) {
+        // First make sure this is a valid key.
+        if (!(food in foodPresent)) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    /**
+     * Get the number present for a species.
+     */
+    var getNumberOfSpeciesPresent = function(species) {
+        // First make sure this is a valid key.
+        if (!isValidSpecies(species)) {
+            console.trace();
+            alert('get number unrecognized species: ' + species);
+            return;
+        }
+        var result = speciesCounts[species];
+        return result;
+    };
+
+    /**
+     * True if the food is present, else false
+     */
+    var foodIsPresent = function(food) {
+        // First make sure this is a valid key.
+        if (!isValidFood(food)) {
+            console.trace();
+            alert('unrecognized food: ' + food);
+            return;
+        }
+        var result = foodPresent[food];
+        return result;
+    };
+
+    var setFoodIsPresent = function(foodId, isPresent) {
+        if (!isValidFood(foodId)) {
+            alert('unrecognized food: ' + foodId);
+            return;
+        }
+        foodPresent[foodId] = isPresent;
+    };
+
+    var setNumberOfSpecies = function(speciesId, count) {
+        if (!isValidSpecies(speciesId)) {
+            alert('unrecognized species: ' + speciesId);
+            return;
+        }
+        speciesCounts[speciesId] = count;
     };
 
     var cbSuccessTimePoint = function (result) {
@@ -309,10 +253,10 @@ function display() {
             if (speciesCount !== '') {
                 speciesCount = parseInt(speciesCount);
             }
-            if (update) {
-                document.getElementById(chimpId+"_cer").style.backgroundColor = "#3399FF";
+            if (isValidSpecies(speciesId)) {
+                setNumberOfSpecies(speciesId, speciesCount);
             }
-            
+
         }
         console.log('species count after updating from db: ' + speciesData.getCount());
 
@@ -463,8 +407,14 @@ function display() {
         console.log('jgiFollowScreen: createIdCacheFailure failed with error: ' + error);
     };
 
-    /* Updates the bottom div when user selects any of the chimp. It updates the 
-     * div according to that's chimp.
+    // The way we interact with the database can lead to a bit of wonkiness
+    // here. Essentially, we want to be able to update rows, but to do that we
+    // need their row ids. We're going to do a query once to get all the data
+    // at this time point and build the row ids out of that to try and speed
+    // things up.
+    /**
+     * Create an object that serves as a cache for the row id for each chimp.
+     * Row ids will be stored keyed against the chimp id.
      */
     var createIdCache = function() {
         util.getTableDataForTimePoint(
@@ -617,9 +567,82 @@ function display() {
         node.parentNode.insertBefore(newNode, node.nextSibling);
     };
 
+    /**
+     * Add the requesite checkboxes for the male chimps.
+     */
+    var appendMaleCheckBoxes = function(chimpTDArray) {
+        // We're assuming that we have two checkboxes each, in the order:
+        // present, within five meters
+        for (var i = 0; i < chimpTDArray.length; i++) {
+            var chimpNode = chimpTDArray[i];
+            var chimpId = chimpNode.id;
+            
+            // make the td elements. I don't remember having to do [0] in the
+            // past, but apparently you usually do. Hmm.
+            var presentTD = $('<td>')[0];
+            var fiveMetersTD = $('<td>')[0];
+            
+            // The checkboxes that will go in each row.
+            var presentCB =
+            $('<input type="checkbox" class="present-checkbox">')[0];
+            var fiveMetersCB =
+            $('<input type="checkbox" class="five-checkbox">')[0];
+            
+            // Set the ids so we can retrieve and save the data later.
+            presentCB.id = chimpId + presentSuffix;
+            fiveMetersCB.id = chimpId + fiveMeterSuffix;
+            
+            // Add the checkboxes to the td elements.
+            presentTD.appendChild(presentCB);
+            fiveMetersTD.appendChild(fiveMetersCB);
+            
+            // And then add the td to the table.
+            insertAfter(fiveMetersTD, chimpNode);
+            insertAfter(presentTD, chimpNode);
+        }
+    };
+    
+    /**
+     * Add the requesite checkboxes for the female chimps.
+     */
+    var appendFemaleCheckBoxes = function(chimpTDArray) {
+        // We're assuming that we have three checkboxes each, in the order:
+        // present, within five meters, closest to primary chimp
+        for (var i = 0; i < chimpTDArray.length; i++) {
+            var chimpNode = chimpTDArray[i];
+            var chimpId = chimpNode.id;
 
-    /* It returns all the male chimps available.
-    */
+            // make the td elements. I don't remember having to do [0] in the
+            // past, but apparently you usually do. Hmm.
+            var presentTD = $('<td>')[0];
+            var fiveMetersTD = $('<td>')[0];
+            var sexualState = $('<td class="sexual-state">')[0];
+            // update the sexual state to be the first value, just so there's
+            // always something there.
+            $(sexualState).html(sexualStates[0]);
+
+            // The checkboxes that will go in each row.
+            var presentCB =
+                $('<input type="checkbox" class="present-checkbox">')[0];
+            var fiveMetersCB =
+                $('<input type="checkbox" class="five-checkbox">')[0];
+
+            // Set the ids so we can retrieve and save the data later.
+            presentCB.id = chimpId + presentSuffix;
+            fiveMetersCB.id = chimpId + fiveMeterSuffix;
+            sexualState.id = chimpId + sexualStateSuffix;
+
+            // Add the checkboxes to the td elements.
+            presentTD.appendChild(presentCB);
+            fiveMetersTD.appendChild(fiveMetersCB);
+
+            // And then add the td to the table.
+            insertAfter(sexualState, chimpNode);
+            insertAfter(fiveMetersTD, chimpNode);
+            insertAfter(presentTD, chimpNode);
+        }
+    };
+
     var getMaleChimps = function() {
         // We've defined the male chimps by giving them the
         // class 'male-chimp'. Selectors use '.class', so we'll find them and
@@ -628,30 +651,37 @@ function display() {
         return result;
     };
 
-    /* It returns all the female chimps available.
-    */
+    var getSpecies = function() {
+        var result = $('.species');
+        return result;
+    };
+
+    var getFoods = function() {
+        var result = $('.food');
+        return result;
+    };
+
     var getFemaleChimps = function() {
         var result = $('.female-chimp');
         return result;
     };
 
-    /* It updates the ui while page is loading. If this new time point, then it 
-    * updates the ui with default values, otherwise it retrieves the data from database and
-    * updates the ui according to that. It also writes a each row for each chimp for
-    * each new time point.
-    */
-    var chimpList = util.getTableDataForTimePoint(
-            followDate, followTime,
-            focalChimpId);
-    if (chimpList == null || chimpList.getCount() == 0) {
-        // all default values
-        var defTime = "0"; 
-        var defcer = "2";  
-        var defDistance = "0";
-        var def_sState = "0";
-        var defClose = "0";
+
+    /**
+     * Update the contents of the database based on the state of the UI.
+     * Creates rows, does not update rows.
+     */
+    var initDatabaseFromUI = function() {
+        // Update the database with the contents of the boxes that are
+        // checked. This is complicated slightly by the fact that the database
+        // structure we currently have doesn't match perfectly with the way
+        // we'd ideally be doing this. We'll make a best pass.
+
+        // First, get all the chimps. This means the male chimps and the female
+        // chimps.
         var maleChimps = getMaleChimps();
         var femaleChimps = getFemaleChimps();
+        
         var allChimps = maleChimps.toArray().concat(femaleChimps.toArray());
         var i = 0;
         for (i = 0; i < allChimps.length; i++) {
@@ -896,8 +926,14 @@ function display() {
                     cbAddRowFASuccess, cbAddRowFAFail);
             console.log('called added chimp: ' + chimpId);
         }
-    }
+    };
 
+
+    /**
+     * Increment the time for the next interval. time is expected to be of the
+     * format hh:mm. Returns the next time point, accounting for minute
+     * overflows. Does NOT consider hour overflows.
+     */
     var incrementTime = function(time) {
         var interval = 15;
         var parts = time.split(':');
@@ -922,6 +958,10 @@ function display() {
         return result;
     };
 
+    /**
+     * Take an integer and return a correctly formatted string--i.e. one with
+     * two zeros.
+     */
     var convertToStringWithTwoZeros = function(time) {
         var result;
         if (time < 10) {
@@ -930,7 +970,7 @@ function display() {
             result = time.toString();
         }
         return result;
-    };    
+    };
 
     /**
      * Get the time point for the interval before this one. Does NOT consider
@@ -1275,7 +1315,8 @@ function display() {
     });
 
     $('#next-button').on('click', function() {
-        console.log('clicked next');        
+        console.log('clicked next');
+
         //Check if we have a closest to focal checked
         var closestId = $('.closest-chimp').prop('id');
         var noClosestOk = false;
@@ -1305,31 +1346,8 @@ function display() {
             noneWithin5ok = confirm('No chimps within 5m. Are you sure?');
         }
 
-
-        // //Check if we have any chimps within 5m
-        // var maleChimps = getMaleChimps();
-        // var femaleChimps = getFemaleChimps();
-        // var allChimps = maleChimps.toArray().concat(femaleChimps.toArray());
-        
-        // var noneWithin5ok = false;
-
-        // for (var i = 0; i < allChimps.length; i++) {
-        //     var chimpId = allChimps[i].id;
-        //     var within5Checkbox = $('#' + chimpId + fiveMeterSuffix);
-        //     if (within5Checkbox.prop('checked') == true) {
-        //         noneWithin5ok = true;
-        //     }
-        // }
-        
-        // //If none within 5m of focal, give an alert. 
-        // if (noneWithin5ok == false) {
-        //     noneWithin5ok = confirm("No chimps within 5m. Are you sure?");
-        // }
-
         if ((noClosestOk == true) && (noneWithin5ok == true)) {
             // And now launch the next screen
-            document.getElementById("loading").style.visibility = 'visible'; // shows loading screen        
-            
             var nextTime = incrementTime(followTime);
 
             var queryString = util.getKeysToAppendToURL(
@@ -1343,214 +1361,28 @@ function display() {
         }
         
     });
-    
-    // It helps the user to update ui and save the new information to
-    // the database
-    var updateChimpInfo = function(){
-        var chimpId = $(this).prop('id');
-        console.log("in event handeler " + chimpId);
-        // removing event handeler from all other chimps right now since we want the
-        // user to be able update one chimp at a time.
-        $('.chimp').unbind("click", updateChimpInfo);
-        document.getElementById(chimpId).style.backgroundColor = "green";
 
-        var chimpList = util.getTableDataForTimePoint(
-        followDate, followTime,
-        focalChimpId);
-        var rowId = null;
-        for(var i = 0; i < chimpList.getCount(); i++) {
-            if (chimpList.getData(i, 'FA_B_arr_AnimID').trim() == chimpId.trim()) {
-                rowId = chimpList.getRowId(i);
-                break;
-            }
-        }
-        if (rowId != null) {
-            var curTime = chimpList.getData(rowId, 'FA_duration_of_obs').trim();
-            var curCertain = chimpList.getData(rowId, 'FA_type_of_certainty').trim();
-            var curDist = chimpList.getData(rowId, 'FA_within_five_meters').trim();
-            var curS = chimpList.getData(rowId, 'FA_type_of_cycle').trim(); 
-            var curClose = chimpList.getData(rowId, 'FA_closest_to_focal').trim();
-            updateBottomDiv(curTime, curCertain, curDist, curS, curClose);
-        } else {
-             console.log("There is no Chimp with this name in the database!!!!");
-             return;
-        }
-       
-        // getting the information from the div and saving it to the database and
-        // updates the ui
-        var time = null;
-        var certain = null;
-        var distance = null;
-        var sex_state = null;
-        var close = null;
-        $('.save_bottom_div').on('click', function() {
-            time = $('input[name="time"]:checked').val();
-            certain = $('input[name="certain"]:checked').val();
-            distance = $('input[name="distance"]:checked').val();
-            sex_state = $('input[name="sex_state"]:checked').val();
-            close = $('input[name="close"]:checked').val();
-            updateUI(true, chimpId,
-            time,
-            certain,
-            distance,
-            sex_state,
-            close);
-
-            if (rowId != null) {
-                writeRowForChimp(
-                    true,
-                    rowId,
-                    chimpId,
-                    time,
-                    certain,
-                    distance,
-                    sex_state,
-                    close);
-            } else {
-                console.log("There is no Chimp with this name in the database!!!!");
-                return;
-            }
-
-            // we are done with updating the current chimp. so we can re bind the
-            // all the chimps to the event handeler
-            $('.chimp').bind("click", updateChimpInfo);
-        }); 
-    };       
-   // binding event handler to all the chimps
-   $('.chimp').bind("click", updateChimpInfo);
-    
-    // Updates the follow page according to the current information regarding foods
-    var foodData = util.getFoodDataForDatePoint(
-            followDate, focalChimpId);
-
-    var tableLength = foodData.getCount();
-    var ul = document.createElement('ul');
-    ul.setAttribute('id','shown-food');
-    ul.className = 'foodList';
-    ul.className = 'list-group'; // for pretty purpose
-    document.getElementById('buttons').appendChild(ul);
-    var li = document.createElement('li');
-    li.innerHTML = "FOOD: "
-    ul.appendChild(li);
-
-    
-    for (var i = 0; i < tableLength; i++) {
-        var test = foodData.getData(i, 'FB_end_feed_time');
-        if (test == null  || test == undefined) {
-            var followArray = followTime.split(":");
-            var follow = new Date(99, 1, 1, parseInt(followArray[0]), parseInt(followArray[1]), 0, 0);
-            var beginTimeEat = foodData.getData(i, 'FB_begin_feed_time');
-            var beginTimeArray = beginTimeEat.split(":");
-            
-            var beginTime = new Date(99, 1, 1, parseInt(beginTimeArray[0]), parseInt(beginTimeArray[1]), 0, 0);
-            
-            if (follow <= beginTime){
-                var li_1 = document.createElement('li');
-                li_1.className = 'list-group-item';
-                ul.appendChild(li_1);
-                var a_tag = document.createElement('a');
-                a_tag.setAttribute('id', foodData.getData(i, 'FB_FL_local_food_name').trim() + " " +foodData.getData(i, 'FB_FPL_local_food_part').trim()
-                    + " " +foodData.getData(i, 'FB_begin_feed_time').trim());
-                a_tag.className = "food food-remove";
-                a_tag.setAttribute('href', "#"); // its not gonna go anywhere
-                a_tag.innerHTML = foodData.getData(i, 'FB_FL_local_food_name');
-                li_1.appendChild(a_tag);
-            } 
-        }
-    }
-    // by clicking on the food, user will go to the food page and iput the end time only and come
-    // back to the follow page which make the food disappeared from th efolow page.
-    $('.food-remove').on('click', function() {
-        var foodId = $(this).prop('id');
-        var foods = foodId.split(" ");
-        var foodName = foods[0];
-        var foodPartName = foods[1];
-        var foodStartTime = foods[2];
-        console.log("FoodName " + foodName);
-        console.log("FoodPartName " + foodPartName);
-        var queryString = util.getKeysToAppendToURL2(
-           followDate,
-           followTime,
-           focalChimpId, foodStartTime, foodName, foodPartName);
-        var url = control.getFileAsUrl(
-                'assets/foodPageForFocalChimp.html' + queryString);
-        window.location.href = url;
-
-    });
-
-    // Updates the follow page according to the current information regarding species
-    var sul = document.createElement('ul');
-    sul.setAttribute('id','shown-species');
-    sul.className = 'list-group';
-    var sli = document.createElement('li');
-    sul.appendChild(sli);
-    sli.innerHTML = "Species: "
-    document.getElementById('buttons').appendChild(sul);
-    var speciesData = util.getSpeciesDataForTimePoints(followDate, focalChimpId);
-    var sTableLength = speciesData.getCount();
-    console.log("table length right now: " + sTableLength);
-    for (var i = 0; i < sTableLength; i++) {
-        var test = speciesData.getData(i, 'OS_time_end');
-
-        if (test == null  || test == undefined) {
-            var sFollowArray = followTime.split(":");
-            var sFollow = new Date(99, 1, 1, parseInt(sFollowArray[0]), parseInt(sFollowArray[1]), 0, 0);
-            var sBeginTimeFollow = speciesData.getData(i, 'OS_time_begin');
-            var sBeginTimeArray = sBeginTimeFollow.split(":");
-            var sBeginTime = new Date(99, 1, 1, parseInt(sBeginTimeArray[0]), parseInt(sBeginTimeArray[1]), 0, 0);
-            
-            if (sFollow <= sBeginTime){
-                var sli_1 = document.createElement('li');
-                sli_1.className = 'list-group-item';
-                sul.appendChild(sli_1);
-                var sa_tag = document.createElement('a');
-                sa_tag.setAttribute('id', speciesData.getData(i, 'OS_time_begin').trim() + " " + speciesData.getData(i, 'OS_local_species_name_written').trim()
-                    + " " + speciesData.getData(i, 'OS_duration').trim());
-                sa_tag.className = "species species-remove";
-                sa_tag.setAttribute('href', "#"); // its not gonna go anywhere
-                sa_tag.innerHTML = speciesData.getData(i, 'OS_local_species_name_written')
-                sli_1.appendChild(sa_tag);
-            }
-        }
-    }
-    
-    // by clicking on the species, user will go to the species page and iput the end time only and come
-    // back to the follow page which make the species disappeared from th efolow page.
-    $('.species-remove').on('click', function() {
-        var removeId = $(this).prop('id');
-        var species = removeId.split(" ");
-        var timeOfPresence = species[0];
-        var speciesName = species[1];
-        var numOfSpecies = species[2];
+    $('.sexual-state').on('click', function() {
+        console.log('clicked sexual state');
+        // find the current sexual state, just as a sanity check.
+        var chimpId = this.id;
         
-        var queryString = util.getKeysToAppendToURL3(
-           followDate,
-           followTime,
-           focalChimpId, timeOfPresence, speciesName, numOfSpecies);
-        var url = control.getFileAsUrl(
-                'assets/speciesPageForFocalChimp.html' + queryString);
-        window.location.href = url;
+        var indexOfSuffix = this.id.indexOf(sexualStateSuffix);
+        var chimpName = this.id.substr(0, indexOfSuffix);
+        
+        var currentState = $(this).html();
+        console.log(
+            'sexual state for chimp ' + chimpName + ' is ' + currentState);
+        // now update it to be the next one.
+        var nextIndex =
+            (sexualStates.indexOf(currentState) + 1) % sexualStates.length;
+        var nextState = sexualStates[nextIndex];
+        $(this).html(nextState);
+        var rowId = rowIdCache[chimpName];
+        
+        writeRowForChimp(true, rowId, chimpName, null, null, null, nextState);
+        console.log('next sexual state for ' + chimpName + ' is: ' + nextState);
+                    
     });
 
-    // taking to the food page
-    $('#button-food').on('click', function() {
-        var queryString = util.getKeysToAppendToURL2(
-           followDate,
-           followTime,
-           focalChimpId, "", "", "");
-        var url = control.getFileAsUrl(
-                'assets/foodPageForFocalChimp.html' + queryString);
-        window.location.href = url;
-    });
-
-    // taking to the species page
-    $('#button-species').on('click', function() {
-        var queryString = util.getKeysToAppendToURL3(
-           followDate,
-           followTime,
-           focalChimpId, "", "", "");
-        var url = control.getFileAsUrl(
-                'assets/speciesPageForFocalChimp.html' + queryString);
-        window.location.href = url;
-    });
 }
