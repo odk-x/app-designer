@@ -1,0 +1,35 @@
+<div>
+    <div>
+        <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
+        <hr>
+    </div>
+
+    <div>
+        <center><p>ODK SURVEY</p></center>
+        <hr>
+    </div>
+
+    <div>
+        <p>Form Name: {{localize form_title}}</p>
+        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
+        <hr>
+    </div>
+
+    <div class="instanceClearDiv"></div>
+        <p>You are at the end of instance: 
+        <p>"{{display_field}}"</p>
+        <hr>
+        <center>
+            <fieldset>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="button" class="finalize btn btn-default btn-lg" tabindex="0">Finalize</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="incomplete btn btn-default btn-lg" tabindex="0">Incomplete</button>              
+                    </div>
+                </div>
+            </fieldset>
+        </center>
+    </div>
+</div>

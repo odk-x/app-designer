@@ -1,0 +1,12 @@
+<div>
+    {{> labelHint}}
+    {{#if value}}
+        <ul class="list-group">
+        <li class="list-group-item">Latitude : {{value.latitude}}</li>
+        <li class="list-group-item">Longitude : {{value.longitude}}</li>
+        <li class="list-group-item">Altitude : {{value.altitude}}</li>
+        <li class="list-group-item">Accuracy : {{value.accuracy}}</li>
+        </ul>
+    {{/if}}
+    <button type="button" class="launch btn btn-default btn-lg">{{localize buttonLabel}}</button>
+</div>

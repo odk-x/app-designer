@@ -1,0 +1,24 @@
+{{#if passiveError}}
+    <div>
+        {{passiveError}}
+    </div>
+{{/if}}
+
+{{> labelHint}}
+<div class="btn-group-vertical" style="display:block; padding:5px">
+    {{#each choices}}
+            <a href="#" class="branch-select-item launch btn btn-default" tabindex="0" label="{{data_value}}" style="padding:10px">
+            {{#if display.image}}
+                <center>
+                    <img style="max-width: 100%;max-height: 100%;" src="{{formDirectory}}{{localize display.image}}"></img>
+                </center>
+            {{/if}}
+            {{#if display.text}}
+                <h4 style="font-weight:bold;text-align:left">
+                    {{{localize display.text}}}
+                    <span class="glyphicon glyphicon-chevron-right" style="float:right"></span>
+                </h4>
+            {{/if}}
+            </a>
+    {{/each}}
+</div>

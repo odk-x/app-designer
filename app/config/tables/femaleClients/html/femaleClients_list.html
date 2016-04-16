@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<!--List View-->
+    <head>
+        <link href="../../../assets/css/clients_list.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+    </head>
+    <body onload="display();">
+        <script type="text/javascript" src="../js/femaleClients_list.js"></script>
+        <div id="searchBox">
+            <form id="form" onsubmit="getResults();">
+                <input id="search" type="text" name="query" size="10" placeholder="Enter Client ID..." />
+                <input id="submit" type="submit" value="Search" />
+            </form>
+        </div>
+        <div id="wrapper">
+            <ul id="list"></ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+{{#if passiveError}}
+    <div>
+        {{passiveError}}
+    </div>
+{{/if}}
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
+    {{> labelHint}}
+    <table class="table table-bordered">
+        <tbody>
+        {{#each choices}}
+            {{#if isFirstInRow}}
+                <tr>
+            {{/if}}  
+                    <td class="grid-select-item"
+                    {{#if checked}}
+                        style="background-color:black;"
+                    {{else}}
+                        style="background-color:white;"
+                    {{/if}}>
+                
+                        <input
+                            {{#if ../select_one}}
+                                type="radio"
+                            {{else}}
+                                type="checkbox"
+                            {{/if}}
+                            {{#if checked}}
+                                checked="checked"
+                            {{/if}}
+                                
+                            {{! the name attribute has to be the same for all the options}}
+                            name="{{../name}}"
+                            id="{{data_value}}"
+                            value="{{data_value}}"
+							tabindex="0"/>
+                        {{#if display.image}}
+                            <center>
+                                <img src="{{formDirectory}}{{localize display.image}}"></img>
+                            </center>
+                        {{/if}}
+                        {{#if display.text}}
+                            {{{localize display.text}}}
+                        {{/if}}
+                    </td>
+            {{#if isLastInRow}}
+                </tr><!-- row -->
+            {{/if}}
+        {{/each}}
+        </tbody>
+    </table><!-- container -->
+    {{#unless required}}
+        {{#if false}}
+        {{#if display.deselect}}
+            <a data-role="button" data-mini="true" class="deselect" tabindex="0">{{localize display.deselect}}</a>
+        {{/if}}
+        {{/if}}
+    {{/unless}}
+    <div style="clear:both;"></div>
+</form>

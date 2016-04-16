@@ -5,12 +5,12 @@
 // control.query method. So load that script here, synchronously so
 // it's available.
 $.ajax({
-    url: '../app/framework/tables/js/data.js',
+    url: '../app/system/tables/js/data.js',
     dataType: 'script',
     async: false,
 });
 
-$.getScript('../app/framework/tables/js/control.js',
+$.getScript('../app/system/tables/js/control.js',
     function() {
         // We'll explicitly alias the window object to control for
         // clarity.

@@ -1,0 +1,79 @@
+<div>
+    <div>
+        <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
+        <hr>
+    </div>
+
+    <div>
+        <center><p>ODK SURVEY</center>
+        <hr>
+    </div>
+
+    <div>
+        <p>Form Name: {{localize form_title}}</p>
+        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
+        <hr>
+    </div>
+
+    <div class="instanceClearDiv"></div>
+    <div>
+        <fieldset class="instanceNew">
+            <div class="row">
+                <div class="col-xs-8">
+                    Create new instance
+                </div>
+                <div class="col-xs-4">
+                    <button type="button" class="createInstance btn btn-default" tabindex="0">
+                        <span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"></span>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <hr>
+    </div>
+
+    <p>Previously created instances:</p>
+    <hr>
+    <div class="instanceList">
+        <ul class="list-group">
+            {{#each instances}}
+                {{#if dateDivider}}
+                    <li class="list-group-item">{{dateDivider}}</li>
+                {{/if}}
+                <li class="list-group-item">
+                    <fieldset class="instanceListGrid">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <p><strong>{{display_field}}</strong></p>
+                                <p><strong>Last Save Date:</strong></p>
+                                <p>{{savepoint_timestamp}}</p>
+                                {{#if savepoint_type}}
+                                    {{#ifEqual savepoint_type_text "Finalized"}}
+                                        <p><strong>{{savepoint_type_text}}</strong></p>
+                                    {{else}}
+                                        <p><strong>Incomplete</strong></p>
+                                    {{/ifEqual}}
+                                {{else}}
+                                    <p><strong>Incomplete</strong>
+                                    <span class="glyphicon glyphicon-warning-sign"></span></p>
+                                {{/if}}
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="instanceRowControl btn-group">
+                                    <button type="button" id="{{instance_id}}" class="odk openInstance btn btn-default" tabindex="0">
+                                        <span class="glyphicon glyphicon-pencil" style="font-size:20px;">
+                                    </button>
+                                    <button type="button" id="{{instance_id}}" class="odk deleteInstance btn btn-default" tabindex="0">
+                                        <span class="glyphicon glyphicon-remove-sign" style="font-size:20px;">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </li>
+            {{else}}
+                <li>No saved instances.</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

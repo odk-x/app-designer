@@ -1,6 +1,6 @@
 TEMPDEF="/definition.csv"
 TEMPPROP="/properties.csv"
-for f in app/tables/*/*.csv
+for f in app/config/tables/*/*.csv
 do
     x=$f
     P=${x%.csv}

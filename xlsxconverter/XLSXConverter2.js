@@ -21,6 +21,7 @@ var XLSXConverter = {};
 
     var reservedSheetNames = [
           "settings",
+          "properties",
           "choices",
           "queries",
           "calculates",
@@ -309,10 +310,12 @@ var XLSXConverter = {};
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "rowpath"
+					"type": "string",
+					"elementType": "rowpath"
                 },
                 "contentType": {
-                    "type": "string",
+					"type": "string",
+					"elementType": "mimeType",
                     "default": "image/*"
                 }
             }
@@ -322,10 +325,12 @@ var XLSXConverter = {};
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "rowpath"
+					"type": "string",
+					"elementType": "rowpath"
                 },
                 "contentType": {
-                    "type": "string",
+					"type": "string",
+					"elementType": "mimeType",
                     "default": "image/*"
                 }
             }
@@ -335,10 +340,12 @@ var XLSXConverter = {};
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "rowpath"
+					"type": "string",
+					"elementType": "rowpath"
                 },
                 "contentType": {
-                    "type": "string",
+					"type": "string",
+					"elementType": "mimeType",
                     "default": "audio/*"
                 }
             }
@@ -348,25 +355,30 @@ var XLSXConverter = {};
             "elementType": "mimeUri",
             "properties": {
                 "uriFragment": {
-                    "type": "rowpath"
+					"type": "string",
+					"elementType": "rowpath"
                 },
                 "contentType": {
-                    "type": "string",
+					"type": "string",
+					"elementType": "mimeType",
                     "default": "video/*"
                 }
             }
         },
         "date": {
-            "type": "object",
-            "elementType": "date"
+			// odk time stamp -- UTC timestamp string with 00:00:00.000 time.
+            "type": "string",
+			"elementType": "date"
         },
         "time": {
-            "type": "object",
-            "elementType": "time"
+			// odk time -- LOCAL TIME ZONE hh:mm:ss.sss string
+            "type": "string",
+			"elementType": "time"
         },
         "datetime": {
-            "type": "object",
-            "elementType": "dateTime"
+			// odk time stamp -- UTC timestamp string
+            "type": "string",
+			"elementType": "dateTime"
         }
     };
     var warnings = {
@@ -379,6 +391,26 @@ var XLSXConverter = {};
         },
         toArray: function(){
             return this.__warnings__;
+        }
+    };
+
+    /**
+     * Double quote strings if they contain 
+     * a quote, carriage return, or line feed
+     */
+    var doubleQuoteString = function(str) {
+        if (str !== null) {
+            if (str.length === 0 ||
+                str.indexOf("\r") !== -1 ||
+                str.indexOf("\n") !== -1 ||
+                str.indexOf("\"") !== -1 ) {
+                
+                str = str.replace(/"/g, "\"\"");
+                str = "\"" + str + "\"";
+                return str;
+            } else {
+                return str;
+            }
         }
     };
 
@@ -2191,6 +2223,225 @@ var XLSXConverter = {};
         });
     };
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Now, create the model from the json.
+    // this code is shared between survey and XLSXConverter
+    
+    /**
+     * Mark all of the session variables for XLSXConverter
+     */
+    var _setSessionVariableFlag = function( dbKeyMap, listChildElementKeys) {
+        //var that = this;
+        var i;
+        if ( listChildElementKeys != null ) {
+            for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
+                var f = listChildElementKeys[i];
+                var jsonType = dbKeyMap[f];
+                jsonType.isSessionVariable = true;
+                if ( jsonType.type === 'array' ) {
+                    _setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+                } else if ( jsonType.type === 'object' ) {
+                    _setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+                }
+            }
+        }
+    };
+
+    /**
+     * Invert a formDef.json for XLSXConverter
+     */
+    var flattenElementPath = function( dbKeyMap, elementPathPrefix, elementName, elementKeyPrefix, jsonType ) {
+        //var that = this;
+        var fullPath;
+        var elementKey;
+        var i = 0;
+
+        // remember the element name...
+        jsonType.elementName = elementName;
+        // and the set is 'data' because it comes from the data model...
+        jsonType.elementSet = 'data';
+        
+        // update element path prefix for recursive elements
+        elementPathPrefix = ( elementPathPrefix === undefined || elementPathPrefix === null ) ? elementName : (elementPathPrefix + '.' + elementName);
+        // and our own element path is exactly just this prefix
+        jsonType.elementPath = elementPathPrefix;
+
+        // use the user's elementKey if specified
+        elementKey = jsonType.elementKey;
+
+        if ( elementKey === undefined || elementKey === null ) {
+            throw new Error("elementKey is not defined for '" + jsonType.elementPath + "'.");
+        }
+
+        // simple error tests...
+        // throw an error if the elementkey is longer than 62 characters
+        // or if it is already being used and not by myself...
+        if ( elementKey.length > 62 ) {
+            throw new Error("supplied elementKey is longer than 62 characters");
+        }
+        if ( dbKeyMap[elementKey] !== undefined && dbKeyMap[elementKey] !== null && dbKeyMap[elementKey] != jsonType ) {
+            throw new Error("supplied elementKey is already used (autogenerated?) for another model element");
+        }
+        if ( elementKey.charAt(0) === '_' ) {
+            throw new Error("supplied elementKey starts with underscore");
+        }
+
+        // remember the elementKey we have chosen...
+        dbKeyMap[elementKey] = jsonType;
+
+        // handle the recursive structures...
+        if ( jsonType.type === 'array' ) {
+            // explode with subordinate elements
+            f = flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
+            jsonType.listChildElementKeys = [ f.elementKey ];
+        } else if ( jsonType.type === 'object' ) {
+            // object...
+            var e;
+            var f;
+            var listChildElementKeys = [];
+            for ( e in jsonType.properties ) {
+                f = flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
+                listChildElementKeys.push(f.elementKey);
+            }
+			// the children need to be in alphabetical order in order to be repeatably comparable.
+			listChildElementKeys.sort();
+            jsonType.listChildElementKeys = listChildElementKeys;
+        }
+
+        if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys != null)) {
+            // we have some sort of structure that is a sessionVariable
+            // Set the isSessionVariable tags on all its nested elements.
+            _setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
+        }
+        return jsonType;
+    };
+
+    /**
+     * Mark the elements of an inverted formDef.json
+     * that will be retained in the database for XLSXConverter
+     */
+    var markUnitOfRetention = function(dataTableModel) {
+        // for all arrays, mark all descendants of the array as not-retained
+        // because they are all folded up into the json representation of the array
+        var startKey;
+        var jsonDefn;
+        var elementType;
+        var key;
+        var jsonSubDefn;
+            
+        for ( startKey in dataTableModel ) {
+            jsonDefn = dataTableModel[startKey];
+            if ( jsonDefn.notUnitOfRetention ) {
+                // this has already been processed
+                continue;
+            }
+            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
+            if ( elementType === "array" ) {
+                var descendantsOfArray = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
+                var scratchArray = [];
+                while ( descendantsOfArray.length !== 0 ) {
+                    var i;
+                    for ( i = 0 ; i < descendantsOfArray.length ; ++i ) {
+                        key = descendantsOfArray[i];
+                        jsonSubDefn = dataTableModel[key];
+                        if ( jsonSubDefn !== null && jsonSubDefn !== undefined ) {
+                            if ( jsonSubDefn.notUnitOfRetention ) {
+                                // this has already been processed
+                                continue;
+                            }
+                            jsonSubDefn.notUnitOfRetention = true;
+                            var listChildren = ((jsonSubDefn.listChildElementKeys === undefined || jsonSubDefn.listChildElementKeys === null) ? [] : jsonSubDefn.listChildElementKeys);
+                            scratchArray = scratchArray.concat(listChildren);
+                        }
+                    }
+                    descendantsOfArray = scratchArray;
+                }
+            }
+        }
+        // and mark any non-arrays with multiple fields as not retained
+        for ( startKey in dataTableModel ) {
+            jsonDefn = dataTableModel[startKey];
+            if ( jsonDefn.notUnitOfRetention ) {
+                // this has already been processed
+                continue;
+            }
+            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
+            if ( elementType !== "array" ) {
+                if (jsonDefn.listChildElementKeys !== undefined &&
+                    jsonDefn.listChildElementKeys !== null &&
+                    jsonDefn.listChildElementKeys.length !== 0 ) {
+                    jsonDefn.notUnitOfRetention = true;
+                }
+            }
+        }
+    };
+
+    /**
+     * Invert the specification in the formDef.json for properties processing
+     */
+    var getDataTableModelFromSpecification = function(specification) {
+
+        // dataTableModel holds an inversion of the specification.model
+        //
+        // elementKey : jsonSchemaType
+        //
+        // with the addition of:
+        //    isSessionVariable : true if this is not retained across sessions
+        //    elementPath : pathToElement
+        //    elementSet : 'data' or 'instanceMetadata' for metadata columns
+        //    listChildElementKeys : ['key1', 'key2' ...]
+        //    notUnitOfRetention: true if this declares a complex type that 
+        //         does not get stored (either in session variables or in database columns)
+        //
+        // within the jsonSchemaType to be used to transform to/from
+        // the model contents and data table representation.
+        //    
+        
+        var dataTableModel = {};
+        
+        var f;
+        for ( f in specification.model ) {
+            dataTableModel[f] = deepCopyObject(specification.model[f]);
+        }
+        
+        // go through the supplied protoModel.formDef model
+        // and invert it into the dataTableModel
+        var jsonDefn;
+        for ( f in dataTableModel ) {
+            jsonDefn = flattenElementPath( dataTableModel, null, f, null, dataTableModel[f] );
+        }
+
+        // traverse the dataTableModel marking which elements are 
+        // not units of retention.
+        markUnitOfRetention(dataTableModel);
+
+        // the framework form has no metadata...        
+        if ( specification.settings.table_id.value !== "framework" ) {
+            // add in the metadata columns...
+            // the only ones of these that are settable outside of the data layer are
+            //    _form_id
+            //    _locale
+            // 
+            // the values for all other metadata are managed within the data layer.
+            //
+            dataTableModel._id = { type: 'string', isNotNullable: true, elementKey: "_id", elementName: "_id", elementSet: 'instanceMetadata', elementPath: "_id" };
+            dataTableModel._row_etag = { type: 'string', isNotNullable: false, elementKey: "_row_etag", elementName: "_row_etag", elementSet: 'instanceMetadata', elementPath: "_row_etag" };
+            dataTableModel._sync_state = { type: 'string', isNotNullable: true, elementKey: "_sync_state", elementName: "_sync_state", elementSet: 'instanceMetadata', elementPath: "_sync_state" };
+            dataTableModel._conflict_type = { type: 'integer', isNotNullable: false, elementKey: "_conflict_type", elementName: "_conflict_type", elementSet: 'instanceMetadata', elementPath: "_conflict_type" };
+            dataTableModel._filter_type = { type: 'string', isNotNullable: false, elementKey: "_filter_type", elementName: "_filter_type", elementSet: 'instanceMetadata', elementPath: "_filter_type" };
+            dataTableModel._filter_value = { type: 'string', isNotNullable: false, elementKey: "_filter_value", elementName: "_filter_value", elementSet: 'instanceMetadata', elementPath: "_filter_value" };
+            dataTableModel._form_id = { type: 'string', isNotNullable: false, elementKey: "_form_id", elementName: "_form_id", elementSet: 'instanceMetadata', elementPath: "_form_id" };
+            dataTableModel._locale = { type: 'string', isNotNullable: false, elementKey: "_locale", elementName: "_locale", elementSet: 'instanceMetadata', elementPath: "_locale" };
+            dataTableModel._savepoint_type = { type: 'string', isNotNullable: false, elementKey: "_savepoint_type", elementName: "_savepoint_type", elementSet: 'instanceMetadata', elementPath: "_savepoint_type" };
+            dataTableModel._savepoint_timestamp = { type: 'string', isNotNullable: true, elementKey: "_savepoint_timestamp", elementName: "_savepoint_timestamp", elementSet: 'instanceMetadata', elementPath: "_savepoint_timestamp" };
+            dataTableModel._savepoint_creator = { type: 'string', isNotNullable: false, elementKey: "_savepoint_creator", elementName: "_savepoint_creator", elementSet: 'instanceMetadata', elementPath: "_savepoint_creator" };
+        }
+
+        return dataTableModel;
+    };
+
+    ///////////////////////////////////////////////////////////////////////////
+    
     var processJSONWb = function(wbJson){
         warnings.clear();
 
@@ -2243,13 +2494,14 @@ var XLSXConverter = {};
                 }
             });
         }
-        if ( !('form_id' in processedSettings) ) {
-            throw Error("Please define a 'form_id' setting_name on the settings sheet and specify the unique form id for the form");
-        }
         if ( !('table_id' in processedSettings) ) {
-            var entry = _.extend({},processedSettings['form_id']);
-            entry.setting_name = "table_id";
-            processedSettings['table_id'] = entry;
+            throw Error("Please define a 'table_id' setting_name on the settings sheet and specify the unique table id");
+        }
+        // and form_id is just the table_id if it is missing
+        if ( !('form_id' in processedSettings) ) {
+            var entry = _.extend({},processedSettings['table_id']);
+            entry.setting_name = "form_id";
+            processedSettings['form_id'] = entry;
         }
 
         // restrict the table_id and form_id to be no more than 50 characters long.
@@ -2578,6 +2830,163 @@ var XLSXConverter = {};
         // TODO: deal with column_types
         // column types are applied to ALL sheets.
         specification.column_types
+
+        // DATA TABLE MODEL
+
+        // flatten the data model (removing the nested structures)
+        // This yields the raw content of the columnDefinitions table 
+        // plus all the session variables that are in use.
+        specification.dataTableModel = getDataTableModelFromSpecification(specification);
+
+        // PROPERTIES
+        if ( specification.settings.form_id.value !== specification.settings.table_id.value ) {
+            if ('properties' in wbJson) {
+                throw Error("The 'properties' sheet is only allowed in the worksheet of the '" + specification.settings.table_id.value + "' form_id.");
+            }
+        } else {
+            // process the properties sheet if we have it...
+            var processedProperties = [];
+            var foundTableDefaultViewType = false;
+            var foundTableFormTypeSpec = false;
+            var foundTableFormTypeSurveySpec = false;
+            
+            if ('properties' in wbJson) {
+                var cleanSet = wbJson['properties'];
+                cleanSet = omitRowsWithMissingField(cleanSet, 'partition');
+                cleanSet = omitRowsWithMissingField(cleanSet, 'aspect');
+                cleanSet = omitRowsWithMissingField(cleanSet, 'key');
+                cleanSet = omitRowsWithMissingField(cleanSet, 'type');
+                cleanSet = omitRowsWithMissingField(cleanSet, 'value');
+                _.each(cleanSet, function(row) {
+                    if ( !_.isString(row.partition) ) {
+                        throw Error("The 'partition' column on the 'properties' sheet must be a string. Error at row: " + row._row_num);
+                    }
+                    if ( !_.isString(row.aspect) ) {
+                        throw Error("The 'aspect' column on the 'properties' sheet must be a string. Error at row: " + row._row_num);
+                    }
+                    if ( !_.isString(row.key) ) {
+                        throw Error("The 'key' column on the 'properties' sheet must be a string. Error at row: " + row._row_num);
+                    }
+                    if ( !_.isString(row.type) ) {
+                        throw Error("The 'type' column on the 'properties' sheet must be a string. Error at row: " + row._row_num);
+                    }
+                    if ( !_.isString(row.value) ) {
+                        throw Error("The 'value' column on the 'properties' sheet must be a string. Error at row: " + row._row_num);
+                    }
+                    if ( row.partition === "Column" && row.key === "displayName" ) {
+                        throw Error("Column property 'displayName' cannot be specified on the 'properties' sheet. This is auto-generated from the model. Error at row: " + row._row_num);
+                    }
+                    if ( row.partition === "Column" && row.key === "displayFormat" ) {
+                        throw Error("Column property 'displayFormat' cannot be specified on the 'properties' sheet. This is auto-generated from the model. Error at row: " + row._row_num);
+                    }
+                    if ( row.partition === "Column" && row.key === "displayChoicesList" ) {
+                        throw Error("Column property 'displayChoicesList' cannot be specified on the 'properties' sheet. This is auto-generated from the model. Error at row: " + row._row_num);
+                    }
+                    
+                    if ( row.partition === "Table" && row.aspect === "default" && row.key === "displayName" ) {
+                        throw Error("Table property 'displayName' cannot be specified on the 'properties' sheet. This is auto-generated from the settings. Error at row: " + row._row_num);
+                    }
+                    
+                    if ( row.partition === "Table" && row.aspect === "default" && row.key === "defaultViewType" ) {
+                        foundTableDefaultViewType = true;
+                    }
+                            
+                    if ( row.partition === "FormType" && row.aspect === "default" && row.key === "FormType.formType" ) {
+                        foundTableFormTypeSpec = true;
+                    }
+                    
+                    if ( row.partition === "SurveyUtil" && row.aspect === "default" && row.key === "SurveyUtil.formId" ) {
+                        foundTableFormTypeSurveySpec = true;
+                    }
+
+                    processedProperties.push({
+                        _partition: row.partition,
+                        _aspect: row.aspect,
+                        _key: row.key,
+                        _type: row.type,
+                        _value: row.value
+                    });
+
+                });
+            }
+
+            // and now traverse the specification.dataTableModel making sure all the
+            // elementSet: 'data' values have columnDefinitions entries drawn
+            // from the model
+            for ( var dbColumnName in specification.dataTableModel ) {
+                // the XLSXconverter already handles expanding complex types
+                // such as geopoint into their underlying storage representation.
+                jsonDefn = specification.dataTableModel[dbColumnName];
+                
+                if ( jsonDefn.elementSet === 'data' && !jsonDefn.isSessionVariable ) {
+                    var surveyElementName = jsonDefn.elementName;
+                    
+                    if (jsonDefn.displayName !== undefined && jsonDefn.displayName !== null) {
+                        processedProperties.push( {
+                            _partition: "Column",
+                            _aspect: dbColumnName,
+                            _key: "displayName",
+                            _type: "object",
+                            _value: JSON.stringify(jsonDefn.displayName) // this is potentially an object...
+                        });
+                    }
+
+                    if ( jsonDefn.valuesList !== undefined && jsonDefn.valuesList !== null ) {
+                        var ref = specification.choices[jsonDefn.valuesList];
+                        if ( ref !== undefined && ref !== null ) {
+                            processedProperties.push( {
+                                _partition: "Column",
+                                _aspect: dbColumnName,
+                                _key: "displayChoicesList",
+                                _type: "object",
+                                _value: JSON.stringify(ref)
+                            });
+                        }
+                    }
+
+                    if (jsonDefn.displayFormat !== undefined && jsonDefn.displayFormat !== null) {
+                        processedProperties.push( {
+                            _partition: "Column",
+                            _aspect: dbColumnName,
+                            _key: "displayFormat",
+                            _type: "string",
+                            _value: jsonDefn.displayFormat
+                        });
+                    }
+                }
+            }
+
+            if ( !(foundTableFormTypeSpec || foundTableFormTypeSurveySpec) ) {
+                var formId = specification.settings.form_id.value;
+                // set this form as the default form to open when editting or adding a row...
+                processedProperties.push( {_partition: "FormType", _aspect: "default", _key: 'FormType.formType', _type: 'string', _value: 'SURVEY'});
+                processedProperties.push( {_partition: "SurveyUtil", _aspect: "default", _key: 'SurveyUtil.formId', _type: 'string', _value: formId } );
+            }
+            
+            if ( !foundTableDefaultViewType ) {
+                // set the spreadsheet view as the default view...
+                processedProperties.push( {_partition: "Table", _aspect: "default", _key: "defaultViewType", _type: "string", _value: "SPREADSHEET" } );
+            }
+
+            var formTitle = specification.settings.survey.display.title;
+            processedProperties.push( {_partition: "Table", _aspect: "default", _key: "displayName", _type: "object", 
+                              _value: JSON.stringify(formTitle)} );
+
+            // Now sort the _key_value_store_active
+            processedProperties = _.chain(processedProperties)
+            .sortBy(function(o) {
+                return o._key;
+            }).sortBy(function(p) {
+                return p._aspect;
+            }).sortBy(function(q) {
+                return q._partition;
+            }).value();
+
+            // These are all the properties that will be written into the properties.csv file.
+            
+            // TODO: remove these from this file.
+            specification.properties = processedProperties;
+        }
 
         /*
          * // INCOMING:

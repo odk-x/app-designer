@@ -1,0 +1,21 @@
+{{#if passiveError}}
+    <div>
+        {{passiveError}}
+    </div>
+{{/if}}
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
+    {{> labelHint}}
+    <select class="form-control" name="{{name}}" tabindex="0">        
+        {{#each choices}}
+            <option 
+                {{#if checked}}
+                    selected="selected"
+                {{/if}}
+                value="{{data_value}}">
+                {{#if display.text}}
+                    {{{localize display.text}}}
+                {{/if}}
+            </option>
+        {{/each}}
+    </select>
+</form>

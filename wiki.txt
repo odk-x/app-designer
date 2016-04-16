@@ -1,0 +1,123 @@
+#summary Instructions to host ODK on a remote server
+
+=Connecting to a Server=
+
+==UW student account==
+
+Homepage URL is found at 
+{{{
+http://students.washington.edu/<uw_netid>/
+}}}
+(Substitute {{{<uw_netid>}}} with your UW student id)
+
+====Activating your account====
+  * Go to http://myuw.washington.edu
+  * Click on "My Account" in the upper right corner
+  * Click on "Computing Services" on the left sidebar
+  * Check that "Dante Account" or "Student Web Publishing" are among the "Active Services"
+  * If not active, check them and click subscribe
+
+====Connect to the vergil server====
+  * Using an FTP client (e.g. Filezilla) 
+    * For a tutorial on how to use Filezilla, go to https://wiki.filezilla-project.org/FileZilla_Client_Tutorial_(en)
+    * Enter the following information:
+{{{
+    Hostname/Server: vergil.u.washington.edu
+    Port:22
+    Protocol: SFTP/SSH
+    Username: <uw_netid>
+    Password: <uw_netid password>
+    Directory: <Leave blank, or if required try "public_html">
+}}}
+    * Click connect
+    * In the {{{<uw_netid>}}}/ directory in the lower right panel of Filezilla, click on the public_html folder 
+    * Inside public_html/ you should find a single file, index.html; the rendered index.html file should be the webpage you first see when you go to your homepage in your browser
+  * Using SSH in a terminal
+    * Use the command:<br>`$ssh <uw_netid>@vergil.u.washington.edu`
+    * Enter your password when prompted
+    * Go to the public_html directory:<br>`$cd public_html/`
+  * For more information, visit http://www.washington.edu/itconnect/connect/web-publishing/shared-hosting/
+
+
+==CSE account==
+
+  * The url of your homepage is at 
+{{{
+http://homes.cs.washington.edu/~<cse_id>/
+}}}
+  * In the file system, the homepage is located at 
+{{{
+/cse/web/homes/<cse_id>
+}}}
+  * If you wish to have a simple index page, create a .htaccess file in the top level directory
+  * In .htaccess, add the line: `Options +Indexes`
+  * For more information, visit http://homes.cs.washington.edu/FAQ.html
+<br>
+
+=Making Changes to Files=
+
+The instructions in this section apply only to the server copy of {{{opendatakit.survey-js/}}} <br>
+You should not make these changes to your local copy
+
+===opendatakit.survey-js\app\framework\survey\js\shim.js===
+  * In shim.js, line 40, search for the function  `getPlatformInfo`
+  * Look for the key-value pair in the return statement:  
+{{{
+"baseUri":"http://localhost:8000/app/"
+}}}
+  * For UW accounts, change it to 
+{{{
+"baseUri":"http://students.washington.edu/<uw_netid>/ODK/opendatakit.survey-js/app/"
+}}}
+  * For CSE accounts, change it to 
+{{{
+"baseUri":"http://homes.cs.washington.edu/~<cse_netid>/ODK/opendatakit.survey-js/app/"
+}}}
+
+===opendatakit.survey-js\app\framework\tables\js\control.js===
+  * In control.js, line 92, search for the function  `getPlatformInfo`
+  * Look for the key-value pair in `var platformInfo`:  
+{{{
+baseUri:'http://localhost:8000/app/'
+}}}
+  * For UW accounts, change it to 
+{{{
+baseUri:'http://students.washington.edu/<uw_netid>/ODK/opendatakit.survey-js/app/'
+}}}
+  * For CSE accounts, change it to 
+{{{
+baseUri:'http://homes.cs.washington.edu/~<cse_netid>/ODK/opendatakit.survey-js/app/'
+}}}
+<br>
+=After connecting to the server=
+  * Create a new directory in your server called ODK/
+    * For UW accounts, it should be created inside the public_html directory
+    * For CSE accounts, in {{{/cse/web/homes/<cse_id>/}}}
+  * The entire opendatakit.survey-js/ folder will be placed in this newly made ODK/ directory
+
+==If pulling from the repository==
+  * After `ssh` into the server, go to the ODK/ directory:<br>`$cd ODK`
+  * Pull from hg:<br> `$hg clone https://code.google.com/p/opendatakit.survey-js/`
+  * Go to the opendatakit.survey-js/ directory:<br>`$cd opendatakit.survey-js/`
+  * Update to the development tip:<br>`$hg update development`
+  
+==If uploading files using Filezilla==
+  * Drag and drop the entire opendatakit.survey-js/ folder to the ODK/ directory in the server <br>Make sure that you copy over the edited files
+  
+==If uploading files using the terminal==
+  * Log out of your server by typing Control+D (Control and d at the same time)
+  * Go to the local directory where opendatakit.survey-js/ is located, using the `cd` command
+  * Copy over the opendatakit.survey-js/ directory: 
+    * For UW accounts:<br>`$scp -r opendatakit.survey-js <uw net_id>@vergil.u.washington.edu:public_html/ODK`
+    * For CSE accounts:<br>`$scp -r opendatakit.survey-js <cse_id>@attu.cs.washington.edu:/cse/web/homes/<cse_id>/ODK`
+  * Make sure that you copy over the edited files
+  
+==See ODK in Chrome==
+  * For UW accounts: 
+{{{
+http://students.washington.edu/<uw_netid>/ODK/opendatakit.survey-js/
+}}}
+  * For CSE accounts:
+{{{
+http://homes.cs.washington.edu/~<cse_id>/ODK/opendatakit.survey-js/
+}}}

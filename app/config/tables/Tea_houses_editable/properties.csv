@@ -1,0 +1,9 @@
+_partition,_aspect,_key,_type,_value
+Column,Hot,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""Yes"",""display"":{""text"":""Yes""},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""No"",""display"":{""text"":""No""},""_row_num"":3}]"
+Column,Iced,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""Yes"",""display"":{""text"":""Yes""},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""No"",""display"":{""text"":""No""},""_row_num"":3}]"
+Column,WiFi,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""Yes"",""display"":{""text"":""Yes""},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""No"",""display"":{""text"":""No""},""_row_num"":3}]"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,Tea_houses_editable
+Table,default,colOrder,array,"[""House_id"",""State"",""Region"",""District"",""Neighborhood"",""Specialty_Type_id"",""Name"",""Customers"",""Visits"",""Iced"",""Hot"",""WiFi"",""Location_latitude"",""Location_longitude"",""Location_altitude"",""Location_accuracy"",""Date_Opened"",""Owner"",""Phone_Number""]"
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"""Tea Houses Editable"""
