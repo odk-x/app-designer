@@ -553,14 +553,14 @@ return Backbone.View.extend({
             // text: msg.text,
             // textVisible: true
         // });
-        $('body').waitMe({
-            effect: 'roundBounce',
-            text: 'Loading ...',
-            bg: 'rgba(255,255,255,0.7)',
-            color:'#000',
-            sizeW:'',
-            sizeH:''
-        });
+//         $('body').waitMe({
+//             effect: 'roundBounce',
+//             text: 'Loading ...',
+//             bg: 'rgba(255,255,255,0.7)',
+//             color:'#000',
+//             sizeW:'',
+//             sizeH:''
+//         });
     },
     hideSpinnerOverlay: function() {
         //window.$.mobile.loading( 'hide' );
