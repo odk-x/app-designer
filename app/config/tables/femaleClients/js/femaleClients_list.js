@@ -33,6 +33,7 @@ function handleClick(index) {
 }
 
 function cbSRSuccess(searchData) {
+    console.log('cbSRSuccess data is' + searchData);
     if(searchData.getCount() > 0) {
         // open filtered list view if client found
         var clientId = searchData.get('client_id');
@@ -57,7 +58,7 @@ function cbSRFailure(error) {
 
 // filters list view by client id entered by user
 function getResults() {
-    searchText = document.getElementById('search').value;
+    var searchText = document.getElementById('search').value;
 
 //     var searchData = odkTables.query(
 //             'femaleClients',
