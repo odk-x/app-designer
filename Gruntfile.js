@@ -516,7 +516,14 @@ module.exports = function (grunt) {
 				'!system/**',
 				'!data/**',
 				'!output/**',
+				'!config/assets/**',
                 '!config/tables/**',
+				'config/assets/ratchet/**',
+				'config/assets/css/demo-chooser.css',
+				'config/assets/img/spaceNeedle_CCLicense_goCardUSA.jpg',
+				'config/assets/js/simpleDemo.js',
+				'config/assets/csv/geotagger.updated.csv',
+				'config/assets/csv/geotagger/**',
                 'config/tables/geotagger/**');
 
             // Now push these files to the phone.
@@ -533,6 +540,20 @@ module.exports = function (grunt) {
                 grunt.task.run('exec:adbpush:' + src + ':' + dest);
             });
 
+            // Now move the tables.init.simpledemo to tables.init on device
+            var simpleDemoSubdir = '/config/assets/';
+            var srcSimpleDemoIndex = 'tables.init.simpledemo';
+            var destSimpleDemoIndex = 'tables.init';
+            var src = tablesConfig.appDir + simpleDemoSubdir + srcSimpleDemoIndex;
+            var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    simpleDemoSubdir +
+                    destSimpleDemoIndex;
+            grunt.log.writeln('adb push ' + src + ' ' + dest);
+            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+
             // Now move the index.html.simpledemo to index.html on device
             var simpleDemoSubdir = '/config/assets/';
             var srcSimpleDemoIndex = 'index.html.simpledemo';
@@ -544,8 +565,8 @@ module.exports = function (grunt) {
                     tablesConfig.appName +
                     simpleDemoSubdir +
                     destSimpleDemoIndex;
-                grunt.log.writeln('adb push ' + src + ' ' + dest);
-                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            grunt.log.writeln('adb push ' + src + ' ' + dest);
+            grunt.task.run('exec:adbpush:' + src + ':' + dest);
         });
 
     grunt.registerTask(

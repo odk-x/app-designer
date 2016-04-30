@@ -13,14 +13,10 @@
     </head>
 
     <body id="main">
-        <nav class="bar bar-tab">
-            Geo
-        </nav>
-
         <table id="content-table">
           <tr>
             <td valign="top">
-              <div class="description-text" id="description">This is a description</div>
+              <div class="description-text" id="description">Geotagger</div>
             </td>
           </tr>
           <tr>
@@ -32,7 +28,7 @@
           </tr>
         </table>
         <script type="text/javascript">
-            $(display());
+            $(display);
         </script>
     </body>
 </html>
