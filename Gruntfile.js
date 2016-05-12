@@ -496,6 +496,80 @@ module.exports = function (grunt) {
         });
 
     grunt.registerTask(
+        'adbpush-tables-simpledemo',
+        'Push everything for tables opendatakit-simpledemo to the device',
+        function() {
+            // In the alpha demo we want Tables and Survey. For this demo,
+			// it had needed a push of the system files, but we won't do that
+			// here. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+				'!system/**',
+				'!data/**',
+				'!output/**',
+				'!config/assets/**',
+                '!config/tables/**',
+				'config/assets/ratchet/**',
+				'config/assets/css/demo-chooser.css',
+				'config/assets/img/spaceNeedle_CCLicense_goCardUSA.jpg',
+				'config/assets/js/simpleDemo.js',
+				'config/assets/csv/geotagger.updated.csv',
+				'config/assets/csv/geotagger/**',
+                'config/tables/geotagger/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+            // Now move the tables.init.simpledemo to tables.init on device
+            var simpleDemoSubdir = '/config/assets/';
+            var srcSimpleDemoIndex = 'tables.init.simpledemo';
+            var destSimpleDemoIndex = 'tables.init';
+            var src = tablesConfig.appDir + simpleDemoSubdir + srcSimpleDemoIndex;
+            var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    simpleDemoSubdir +
+                    destSimpleDemoIndex;
+            grunt.log.writeln('adb push ' + src + ' ' + dest);
+            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+
+            // Now move the index.html.simpledemo to index.html on device
+            var simpleDemoSubdir = '/config/assets/';
+            var srcSimpleDemoIndex = 'index.html.simpledemo';
+            var destSimpleDemoIndex = 'index.html';
+            var src = tablesConfig.appDir + simpleDemoSubdir + srcSimpleDemoIndex;
+            var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    simpleDemoSubdir +
+                    destSimpleDemoIndex;
+            grunt.log.writeln('adb push ' + src + ' ' + dest);
+            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+        });
+
+    grunt.registerTask(
         'adbpush-survey',
         'Push everything for survey to the device',
         function() {
