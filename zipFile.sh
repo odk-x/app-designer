@@ -12,6 +12,7 @@ mkdir tempZipDir/surveyDir/config/assets/img
 
 mkdir tempZipDir/surveyDir/system
 mkdir tempZipDir/surveyDir/system/js
+mkdir tempZipDir/surveyDir/system/libs
 mkdir tempZipDir/surveyDir/system/survey
 mkdir tempZipDir/surveyDir/system/survey/js
 mkdir tempZipDir/surveyDir/system/survey/templates
