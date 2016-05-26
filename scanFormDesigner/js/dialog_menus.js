@@ -89,6 +89,10 @@ $(document).ready(function() {
 		autoOpen: false,
 		modal: true
 	});
+	  $("#saveToFileSystem_dialog").dialog({
+		autoOpen: false,
+		modal: true
+	});
 	// just added for subform
 	$("#subform_dialog").dialog({
 		autoOpen: false,

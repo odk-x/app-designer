@@ -46,11 +46,13 @@
 		<!--used for xlsx file-->
 		<script src="http://yourjavascript.com/119112369/xlsx.js"></script>
 		
-	<!---->
 	    <script type="text/javascript" src="../xlsxconverter/js-xlsx/xlsx.js"></script>
 	    <script type="text/javascript" src="../xlsxconverter/XRegExp-All-3.0.0-pre-2014-12-24.js"></script>
 		<script type="text/javascript" src="../xlsxconverter/underscore.js"></script>
 		<script type="text/javascript" src="../xlsxconverter/XLSXConverter2.js"></script>
+
+        <!--used for saving files to filesystem-->
+        <script type="text/javascript" src="../devEnv/js/devenv.js"></script>
 	
 	<!-- ODK Scan scripts -->
 		<script src="js/globals.js"></script>
@@ -91,7 +93,8 @@
 						<li><a {{action 'openLoadDialog'}}>Load</a></li>	
 						<li><a {{action 'saveDoc'}}>Save</a></li>			
 						<li class="divider"></li>
-						<li><a {{action 'exportZIPinit'}}>Export zip</a></li>				
+						<li><a {{action 'exportZIPinit'}}>Export zip</a></li>		
+						<li><a {{action 'saveToFileSystemInit'}}>Save to File System</a></li>			
 					</ul>
 				</li>
 			  <li class="dropdown">
@@ -205,6 +208,7 @@
 		{{partial 'segNumDialog'}}
 		{{partial 'formNumDialog'}}
 		{{partial 'exportDialog'}}
+		{{partial 'saveToFileSystemDialog'}}
 		{{partial 'loadDialog'}}
 		{{partial 'saveDialog'}}
 		{{partial 'newDocumentDialog'}}
@@ -527,6 +531,16 @@
 			<hr class="horz_divider">
 			<button id="export_cancel" class="input_button" {{action "cancelExport"}}>Cancel</button>
 			<button id="export_zip" class="input_button" {{action "exportZIP"}}>Ok</button>
+		</div>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="_saveToFileSystemDialog">
+		<div id="saveToFileSystem_dialog" title="Save Form to File System">		
+			<label for="name">Filename</label>
+			<input type="text" id="file_name" class="ui-widget-content ui-corner-all long_text_input">		
+			<hr class="horz_divider">
+			<button id="export_cancel" class="input_button" {{action "cancelSaveToFileSystem"}}>Cancel</button>
+			<button id="export_zip" class="input_button" {{action "saveToFileSystem"}}>Ok</button>
 		</div>
 	</script>
 	

@@ -1183,16 +1183,22 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			$("#load_dialog").dialog("open");
 		},
 		/**
-		*	Cancles the document load dialog.
+		*	Cancels the document load dialog.
 		*/
 		cancelLoad: function() {
 			$("#load_dialog").dialog("close");
 		},
     	/**
-		*	Cancles the document export dialog.
+		*	Cancels the document export dialog.
 		*/
 		cancelExport: function() {
 			$("#export_dialog").dialog("close");
+		},
+    	/**
+		*	Cancels the document save dialog.
+		*/
+		cancelSaveToFileSystem: function() {
+			$("#saveToFileSystem_dialog").dialog("close");
 		},
 		/**
 		*	Loads images for a particular page into the document from
@@ -1605,6 +1611,21 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			$(".group_field").removeClass("group_field");
 		}, 
 
+        /**
+        *   Save to file system
+        *
+        */
+        saveToFileSystemInit: function() {
+            console.log("saveToFileSystemInit: called");
+			$("#saveToFileSystem_dialog").dialog("open");
+			// unselect any selected field (don't want it to be highlighted in the image output)
+			$(".selected_field").removeClass("selected_field");
+			// remove all highlighting
+			$(".unhighlighted_group").removeClass("unhighlighted_group");
+			$(".highlighted_group").removeClass("highlighted_group");
+			$(".group_field").removeClass("group_field");
+        },
+
 		/**
 		*	Instantiate and zip file and send it to the createExportZipFolder function 
 		*   to prepare all the documents to be in it and then export that zip file
@@ -1620,6 +1641,14 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		},
 
 		/**
+		*	Post the files to be saved to the system
+		*/
+		saveToFileSystem: function(){
+            console.log("saveToFileSystem: called");
+			$("#saveToFileSystem_dialog").dialog("close");
+		},
+
+		/**
 		*	Creates a new subdirectory in the export zip file for the
 		*	current page.
 		*	@param (pages) A list of JSON objects which contain page metadata.
@@ -1631,28 +1660,28 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		*/
 		createExportZipFolder: function(pages, curr_index, curr_directory, zip, xlsx_fields) {
 			// base case
-			// Callint createXLSX to make xlsx file
+			// Calling createXLSX to make xlsx file
 			if (curr_index == pages.length) {
 				var xlFile = this._actions.createXLSX(xlsx_fields);
 				var formDefJson = this._actions.createFormDefJSON(xlsx_fields);
-        var formDefString = JSON.stringify(formDefJson, 2, 2);
+                var formDefString = JSON.stringify(formDefJson, 2, 2);
 
-        // Create the definition.csv and properties.csv files from the formDef file
-        var dtm = formDefJson.specification.dataTableModel;
-        var defCsv = this._actions.createDefinitionCsvFromDataTableModel(this, dtm);
-        var propCsv = this._actions.createPropertiesCsvFromDataTableModel(this, dtm, formDefJson);
+                // Create the definition.csv and properties.csv files from the formDef file
+                var dtm = formDefJson.specification.dataTableModel;
+                var defCsv = this._actions.createDefinitionCsvFromDataTableModel(this, dtm);
+                var propCsv = this._actions.createPropertiesCsvFromDataTableModel(this, dtm, formDefJson);
 
-				// get the user given name. if user does not provide with any name, append "default" to
-				var name = $('#zip_name').val() || "download";
-        var fileName = name + ".zip";
-				zip.file("scan_" + name + "_main.xlsx", xlFile.base64, {base64: true});  // added xlFile to the zip
+		        // get the user given name. if user does not provide with any name, append "default" to
+		        var name = $('#zip_name').val() || "download";
+                var fileName = name + ".zip";
+			    zip.file("scan_" + name + "_main.xlsx", xlFile.base64, {base64: true});  // added xlFile to the zip
 
-				zip.file("scan_" + name + "_main_formDef.json",formDefString);
-        zip.file("definition.csv", defCsv);
-        zip.file("properties.csv", propCsv);
+			    zip.file("scan_" + name + "_main_formDef.json",formDefString);
+                zip.file("definition.csv", defCsv);
+                zip.file("properties.csv", propCsv);
 
-				var content = zip.generate({type:"blob"});
-        saveAs(content, fileName);
+			    var content = zip.generate({type:"blob"});
+                saveAs(content, fileName);
 
 				$("#export_dialog").dialog("close");
 				$(".field_group").addClass("unhighlighted_group");
@@ -1671,98 +1700,98 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			scanDoc.width = $page_div.width();
 			scanDoc.fields = [];
 
-      // Add the fields, in the order specified
-      var orderFields = function(fieldList) {
-        var item, index;
-        var orderedFields = [];
-        var unorderedFields = [];
-        var resultList = [];
+            // Add the fields, in the order specified
+            var orderFields = function(fieldList) {
+                var item, index;
+                var orderedFields = [];
+                var unorderedFields = [];
+                var resultList = [];
 
-        // Collect all fields into the order they are written
-        for (var i = 0; i < fieldList.length; i++) {
-          item = $(fieldList[i]).data('obj');
+                // Collect all fields into the order they are written
+                for (var i = 0; i < fieldList.length; i++) {
+                    item = $(fieldList[i]).data('obj');
 
-          if (item == null || item.field_type == 'text_box') {
-            continue;
-          }
-          index = Number(item.order);
+                    if (item == null || item.field_type == 'text_box') {
+                        continue;
+                    }
+                    index = Number(item.order);
 
-          // Any missing, invalid, or previously used orders are tacked
-          // on the back
-          if (item.order == "" || isNaN(index) || index < 0
-              || orderedFields[index]) {
-            unorderedFields.push(item.getFieldJSON());
-            continue;
-          }
+                    // Any missing, invalid, or previously used orders are tacked
+                    // on the back
+                    if (item.order == "" || isNaN(index) || index < 0
+                    || orderedFields[index]) {
+                        unorderedFields.push(item.getFieldJSON());
+                        continue;
+                    }
 
-          orderedFields[index] = item.getFieldJSON();
-        }
+                    orderedFields[index] = item.getFieldJSON();
+                }
 
-        // Remove any empty spaces
-        for (var i = 0; i < orderedFields.length; i++) {
-          if (orderedFields[i]) {
-            resultList.push(orderedFields[i]);
-          }
-        }
+                // Remove any empty spaces
+                for (var i = 0; i < orderedFields.length; i++) {
+                    if (orderedFields[i]) {
+                        resultList.push(orderedFields[i]);
+                    }
+                }
 
-        return resultList.concat(unorderedFields);
-      };
+                return resultList.concat(unorderedFields);
+            };
 
-      scanDoc.fields = orderFields($page_div.find('.field'));
-      xlsx_fields = orderFields($page_div.children('.field'));
+            scanDoc.fields = orderFields($page_div.find('.field'));
+            xlsx_fields = orderFields($page_div.children('.field'));
 
 			var groups = $page_div.children('.field_group');
 			var subform_name = $("#sub_form_name").val();
-      if(subform_name && groups.length>0){ // if there is a subform
-        var sub_form = {
-          name:subform_name,
-					groups:[],
-					fields:{}
-				}
+            if(subform_name && groups.length>0){ // if there is a subform
+                var sub_form = {
+                    name:subform_name,
+				    groups:[],
+				    fields:{}
+			    }
 
-				var original = $page_div.find('.field_group.original');
-				var original_fields = []; // store the order of original names
-				var controller = this;
-				// set sub_form.fields to orginial fields
-				original.find('.field').each(function(i,field){
-					var data = $(field).data('obj');
-					if (data.field_type != 'text_box') {
-						sub_form.fields[data.name] = controller._actions.toODKType(data.type);
-					}
-					original_fields.push(data);
-				});
+			    var original = $page_div.find('.field_group.original');
+			    var original_fields = []; // store the order of original names
+			    var controller = this;
+			    // set sub_form.fields to orginial fields
+			    original.find('.field').each(function(i,field){
+			        var data = $(field).data('obj');
+				    if (data.field_type != 'text_box') {
+					    sub_form.fields[data.name] = controller._actions.toODKType(data.type);
+				    }
+				    original_fields.push(data);
+			    });
 
                 // preparing group field of the subform  for json
-				groups.each(function(g,group){
-					var group_map = {};
-					$(group).children('.field').each(function(i,field){
-						var data = $(field).data('obj');
-						// checking data.field_type !=  text_box because at this index we did not push
-						// anything as we dont want to output text on the json
-						if (data.field_type != "text_box") {
-							group_map[original_fields[i].name] = data.name;
-						}
-					});
-					sub_form.groups.push(group_map);
-				});
+			    groups.each(function(g,group){
+			        var group_map = {};
+			        $(group).children('.field').each(function(i,field){
+				        var data = $(field).data('obj');
+				        // checking data.field_type !=  text_box because at this index we did not push
+				        // anything as we dont want to output text on the json
+				        if (data.field_type != "text_box") {
+					        group_map[original_fields[i].name] = data.name;
+				        }
+			        });
+			        sub_form.groups.push(group_map);
+			    });
 
-				scanDoc.sub_forms = [sub_form];
+			    scanDoc.sub_forms = [sub_form];
 
-				//add sub_form xlsx
-				var xlFile = this._actions.createXLSX(original_fields);
-				zip.file("scan_" + sub_form.name + ".xlsx", xlFile.base64, {base64: true});  // added xlFile to the zip
-				var formDefJson = this._actions.createFormDefJSON(original_fields);
-        var formDefString = JSON.stringify(formDefJson, 2, 2);
-				zip.file("scan_" + sub_form.name + "_formDef.json", formDefString);  // added xlFile to the zip
+			    //add sub_form xlsx
+			    var xlFile = this._actions.createXLSX(original_fields);
+			    zip.file("scan_" + sub_form.name + ".xlsx", xlFile.base64, {base64: true});  // added xlFile to the zip
+			    var formDefJson = this._actions.createFormDefJSON(original_fields);
+                var formDefString = JSON.stringify(formDefJson, 2, 2);
+			    zip.file("scan_" + sub_form.name + "_formDef.json", formDefString);  // added xlFile to the zip
 
-        // Create the definition.csv and properties.csv files from the formDef file
-        var dtm = formDefJson.specification.dataTableModel;
+                // Create the definition.csv and properties.csv files from the formDef file
+                var dtm = formDefJson.specification.dataTableModel;
 
-        var defCsv = this._actions.createDefinitionCsvFromDataTableModel(this, dtm);
-        var propCsv = this._actions.createPropertiesCsvFromDataTableModel(this, dtm, formDefJson);
+                var defCsv = this._actions.createDefinitionCsvFromDataTableModel(this, dtm);
+                var propCsv = this._actions.createPropertiesCsvFromDataTableModel(this, dtm, formDefJson);
 
-        zip.file("definition.csv", defCsv);
-        zip.file("properties.csv", propCsv);
+                zip.file("definition.csv", defCsv);
+                zip.file("properties.csv", propCsv);
 			}// end sub forms
 
 			var json_output = JSON.stringify(scanDoc, null, '\t');
@@ -1795,7 +1824,6 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		*   returns a json formatted stirng containing all the required properties of a
 		*   field required for json file
 		*/
-
 		createFormDefJSON: function(fields) {
 			var removeEmptyStrings = function (rObjArr){
 			    var outArr = [];
@@ -1828,7 +1856,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			        }
 			    });
 			var processedWorkbook = XLSXConverter.processJSONWorkbook(result);
-      return processedWorkbook;
+            return processedWorkbook;
 		},
 
     /**
@@ -1927,7 +1955,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		createXLSX: function(fields) {
 			// for servey sheet
 			// filling out the initial values
-           var survey = new Array();
+            var survey = new Array();
             survey[0] = new Array();
             survey[0][0] = "clause";
             survey[0][1] = "type";
@@ -1939,7 +1967,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			var model = new Array();
 			model[0] = new Array();
 			model[1] = new Array();
-      model[2] = new Array();
+            model[2] = new Array();
             // For the model, fill in the column names
             model[0][0] = "name";
             model[0][1] = "type";
@@ -2150,7 +2178,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
             }// end if fields
 
         }, //end createXLSX
-      /**
+        /**
 		*	@param (type) type of a specicfic filed
 		*   returns a required field type for xlsx file 
 		*/
