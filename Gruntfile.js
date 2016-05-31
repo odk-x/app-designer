@@ -29,6 +29,7 @@ var postHandler = function(req, res, next) {
 
         var mkdirp = require('mkdirp');
         var fs = require('fs');
+        var Buffer = require('buffer/').Buffer
 
         // We don't want the leading /, or else the file system will think
         // we're writing to root, which we don't have permission to. Should
@@ -45,19 +46,39 @@ var postHandler = function(req, res, next) {
             mkdirp.sync(directories);
         }
 
-        var file = fs.createWriteStream(path);
-        req.pipe(file);
+         if (req.headers['content-type'] === 'application/octet-stream') {
+            var base64 = require('base64-stream');
 
-        file.on('error', function(err) {
-            res.write('error uploading the file');
-            res.write(JSON.stringify(err));
-            res.statusCode = 500;
-        });
+            var file = fs.createWriteStream(path);
+            req.pipe(base64.decode()).pipe(file);
 
-        req.on('end', function() {
-            res.write('uploaded file!');
-            res.end();
-        });
+            file.on('error', function(err) {
+                res.write('error uploading the file');
+                res.write(JSON.stringify(err));
+                res.statusCode = 500;
+                console.log('POST error ' + JSON.stringify(err));
+            });
+
+            req.on('end', function() {
+                res.write('uploaded file!');
+                res.end();
+            });
+            
+        } else {
+            var file = fs.createWriteStream(path);
+            req.pipe(file);
+
+            file.on('error', function(err) {
+                res.write('error uploading the file');
+                res.write(JSON.stringify(err));
+                res.statusCode = 500;
+            });
+
+            req.on('end', function() {
+                res.write('uploaded file!');
+                res.end();
+            });
+        }
 
     } else {
         // We only want to hand this off to the other middleware if this

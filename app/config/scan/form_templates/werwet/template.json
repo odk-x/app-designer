@@ -1,0 +1,92 @@
+{
+	"height": 1100,
+	"width": 850,
+	"fields": [
+		{
+			"order": "",
+			"type": "string",
+			"name": "formattedNumber1",
+			"displayText": "",
+			"delim_type": "/",
+			"num_group": 2,
+			"element_each_group": [
+				9,
+				1
+			],
+			"verify": "Yes",
+			"classifier": {
+				"classifier_height": 28,
+				"classifier_width": 20,
+				"training_data_uri": "numbers",
+				"classification_map": {
+					"0": "0",
+					"1": "1",
+					"2": "2",
+					"3": "3",
+					"4": "4",
+					"5": "5",
+					"6": "6",
+					"7": "7",
+					"8": "8",
+					"9": "9"
+				},
+				"default_classification": true,
+				"advanced": {
+					"flip_training_data": false,
+					"eigenvalues": 13
+				}
+			},
+			"segments": [
+				{
+					"segment_x": 240,
+					"segment_y": 280,
+					"segment_width": 300,
+					"segment_height": 40,
+					"align_segment": false,
+					"items": [
+						{
+							"item_x": 11,
+							"item_y": 19
+						},
+						{
+							"item_x": 41,
+							"item_y": 19
+						},
+						{
+							"item_x": 71,
+							"item_y": 19
+						},
+						{
+							"item_x": 101,
+							"item_y": 19
+						},
+						{
+							"item_x": 131,
+							"item_y": 19
+						},
+						{
+							"item_x": 161,
+							"item_y": 19
+						},
+						{
+							"item_x": 191,
+							"item_y": 19
+						},
+						{
+							"item_x": 221,
+							"item_y": 19
+						},
+						{
+							"item_x": 251,
+							"item_y": 19
+						},
+						{
+							"item_x": 287,
+							"item_y": 19
+						}
+					]
+				}
+			]
+		}
+	]
+}

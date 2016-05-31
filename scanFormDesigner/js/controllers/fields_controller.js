@@ -1,3 +1,4 @@
+var devUtil = require('devenv-util');
 var count = 1;
 ODKScan.FieldsController = Ember.ArrayController.extend({
 	isImageEditing: false,	// toggles app between field editing and image editing mode
@@ -1634,18 +1635,328 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		exportZIP: function(){
 			//instantiates a zip file
 			var zip = new JSZip();
+
+            var formName = $('#zip_name').val();
+            var subformName = $("#sub_form_name").val();
+
             // calling createExportZipFolder to make all the documents such
             // such as template.json, user_given_name_main.xlsx and the image of
             // the form
-			this.send('createExportZipFolder', this.get('pages'), 0, "", zip);
+			this.send('createExportZipFolder', this.get('pages'), 0, "", zip, formName, subformName);
 		},
 
 		/**
 		*	Post the files to be saved to the system
+        *   call postToFileSystem to post all necessary file to the file system
 		*/
 		saveToFileSystem: function(){
             console.log("saveToFileSystem: called");
-			$("#saveToFileSystem_dialog").dialog("close");
+
+            var formName = $('#file_name').val();
+            var subformName = $("#sub_form_name").val();
+
+            // calling postToFileSystem to make all the documents such
+            // such as template.json, user_given_name_main.xlsx and the image of
+            // the form
+			this.send('postToFileSystem', this.get('pages'), 0, "", formName, subformName);
+        },
+
+        /**
+        *   Post the files to the file system
+        */
+        postToFileSystem: function(pages, curr_index, curr_directory, formName, subformName, xlsx_fields) {
+            // Case for writing out formDef.json and 
+			// base case
+			// Calling createXLSX to make xlsx file
+			if (curr_index == pages.length) {
+				var xlFile = this._actions.createXLSX(xlsx_fields, formName, subformName);
+				var formDefJson = this._actions.createFormDefJSON(xlsx_fields, formName, subformName);
+                var formDefString = JSON.stringify(formDefJson, 2, 2);
+
+                // Create the definition.csv and properties.csv files from the formDef file
+                var dtm = formDefJson.specification.dataTableModel;
+                var defCsv = devUtil.createDefinitionCsvFromDataTableModel(dtm);
+                var propCsv = devUtil.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
+
+		        // get the user given name. if user does not provide with any name, append "default" to
+		        var name = formName || "download";
+                var formId = "scan_" + name; 
+                var tableId = formId;
+                var xlsxFileName = "scan_" + name + "_main.xlsx";
+
+                xlPath =
+                  'app/config/tables/' +
+                  tableId +
+                  '/forms/' +
+                  formId +
+                  '/' + xlsxFileName;
+                console.log('going to write formDef to: ' + xlPath);
+
+                
+                devUtil.postBase64File(xlPath, xlFile.base64, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                        'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + xlPath);
+                    }
+                }, true);
+
+                var path =
+                  'app/config/tables/' + tableId + '/forms/' + formId +
+                  '/formDef.json';
+                console.log('going to write formDef to: ' + path);
+
+                devUtil.postFile(path, formDefString, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                        'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + path);
+                    }
+                });
+
+                // The formDef.json also has to be in the form_template directory
+                var formDefStringInTemplateDir = "scan_" + name + "_main_formDef.json";
+                var formTemplatePath =
+                  'app/config/scan/form_templates/' + formName + '/' + formDefStringInTemplateDir;
+                console.log('going to write formDef to: ' + path);
+
+                devUtil.postFile(formTemplatePath, formDefString, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                        'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + formTemplatePath);
+                    }
+                });
+
+                var defPath = 'app/config/tables/' + tableId + '/definition.csv';
+                var defCsv = devUtil.createDefinitionCsvFromDataTableModel(dtm);
+                devUtil.postFile(defPath, defCsv, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                          'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + defPath);
+                    }
+                });
+
+                var propPath = 'app/config/tables/' + tableId + '/properties.csv';
+                var propCsv = devUtil.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
+                devUtil.postFile(propPath, propCsv, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                          'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + propPath);
+                    }
+                });
+
+			    $("#saveToFileSystem_dialog").dialog("close");
+				$(".field_group").addClass("unhighlighted_group");
+
+				return;
+			}
+
+			// defining the fields argument
+			xlsx_fields = xlsx_fields || [];
+			var scanDoc = {};
+
+			// make page visible, set Scan doc properties
+			this.send('selectPageTab', pages[curr_index]);
+			var $page_div = Ember.get(pages[curr_index], 'pageDiv');
+			scanDoc.height = $page_div.height();
+			scanDoc.width = $page_div.width();
+			scanDoc.fields = [];
+
+            // Add the fields, in the order specified
+            var orderFields = function(fieldList) {
+                var item, index;
+                var orderedFields = [];
+                var unorderedFields = [];
+                var resultList = [];
+
+                // Collect all fields into the order they are written
+                for (var i = 0; i < fieldList.length; i++) {
+                    item = $(fieldList[i]).data('obj');
+
+                    if (item == null || item.field_type == 'text_box') {
+                        continue;
+                    }
+                    index = Number(item.order);
+
+                    // Any missing, invalid, or previously used orders are tacked
+                    // on the back
+                    if (item.order == "" || isNaN(index) || index < 0
+                    || orderedFields[index]) {
+                        unorderedFields.push(item.getFieldJSON());
+                        continue;
+                    }
+
+                    orderedFields[index] = item.getFieldJSON();
+                }
+
+                // Remove any empty spaces
+                for (var i = 0; i < orderedFields.length; i++) {
+                    if (orderedFields[i]) {
+                        resultList.push(orderedFields[i]);
+                    }
+                }
+
+                return resultList.concat(unorderedFields);
+            };
+
+            scanDoc.fields = orderFields($page_div.find('.field'));
+            xlsx_fields = orderFields($page_div.children('.field'));
+
+			var groups = $page_div.children('.field_group');
+			var subform_name = subformName;
+            if(subform_name && groups.length>0){ // if there is a subform
+                var sub_form = {
+                    name:subform_name,
+				    groups:[],
+				    fields:{}
+			    }
+
+			    var original = $page_div.find('.field_group.original');
+			    var original_fields = []; // store the order of original names
+			    var controller = this;
+			    // set sub_form.fields to orginial fields
+			    original.find('.field').each(function(i,field){
+			        var data = $(field).data('obj');
+				    if (data.field_type != 'text_box') {
+					    sub_form.fields[data.name] = controller._actions.toODKType(data.type);
+				    }
+				    original_fields.push(data);
+			    });
+
+                // preparing group field of the subform  for json
+			    groups.each(function(g,group){
+			        var group_map = {};
+			        $(group).children('.field').each(function(i,field){
+				        var data = $(field).data('obj');
+				        // checking data.field_type !=  text_box because at this index we did not push
+				        // anything as we dont want to output text on the json
+				        if (data.field_type != "text_box") {
+					        group_map[original_fields[i].name] = data.name;
+				        }
+			        });
+			        sub_form.groups.push(group_map);
+			    });
+
+			    scanDoc.sub_forms = [sub_form];
+
+			    //add sub_form xlsx
+			    var subXlFile = this._actions.createXLSX(original_fields, formName, subformName);
+                var subformId = "scan_" + sub_form.name;
+                var subformTableId = subformId;
+                var subFormXlFileName = "scan_" + sub_form.name + ".xlsx";               
+
+			    var subformDefJson = this._actions.createFormDefJSON(original_fields, formName, subformName);
+                var subformDefString = JSON.stringify(formDefJson, 2, 2);
+                //var subFormDefJson = "scan_" + sub_form.name + "_formDef.json";
+
+                // Create the definition.csv and properties.csv files from the formDef file
+                var sub_dtm = subformDefJson.specification.dataTableModel;
+
+                var subdefCsv = devUtil.createDefinitionCsvFromDataTableModel(sub_dtm);
+                var subpropCsv = devUtil.createPropertiesCsvFromDataTableModel(sub_dtm, subformDefJson);
+
+                var subXlPath =
+                  'app/config/tables/' + subformTableId + '/forms/' + subformId +
+                  '/' + subFormXlFileName;
+                console.log('going to write formDef to: ' + subXlPath);
+
+                
+                devUtil.postBase64File(subXlPath, subXlFile.base64, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                        'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + subXlPath);
+                    }
+                }, true);
+
+                var subformPath =
+                  'app/config/tables/' + subformTableId + '/forms/' + subformId +
+                  '/formDef.json';
+                console.log('going to write formDef to: ' + subformPath);
+
+                devUtil.postFile(subformPath, subformDefString, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                        'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + subformPath);
+                    }
+                });
+
+                // The formDef.json also has to be in the form_template directory
+                var subformDefStringInTemplateDir = subformId + "_formDef.json";
+                var subformTemplatePath =
+                  'app/config/scan/form_templates/' + formName + '/' + subformDefStringInTemplateDir;
+                console.log('going to write subform formDef to: ' + subformTemplatePath);
+
+                devUtil.postFile(subformTemplatePath, subformDefString, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                        'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + subformTemplatePath);
+                    }
+                });
+
+                var subpropPath = 'app/config/tables/' + subformTableId + '/properties.csv';
+                var subpropCsv = devUtil.createPropertiesCsvFromDataTableModel(sub_dtm, subformDefJson);
+                devUtil.postFile(subpropPath, subpropCsv, function(err, response, body) {
+                    if (err || response.statusCode !== 200) {
+                        alert(
+                          'Something went wrong! Please save the file manually.');
+                    } else {
+                        alert('Saved the file to: ' + subpropPath);
+                    }
+                });
+			}// end sub forms
+
+			var json_output = JSON.stringify(scanDoc, null, '\t');
+			var controller = this;
+			// scale up the html element sizes
+			$("html").css("font-size", "200%");
+			html2canvas($(".selected_page"), {
+				logging: true,
+				onrendered : function(canvas) {
+					var img_src = canvas.toDataURL("image/jpeg", 1);
+					$("html").css("font-size", "62.5%");
+
+					/* 	Need to extract the base64 from the image source.
+						img_src is in the form: data:image/jpeg;base64,...
+						Where '...' is the actual base64.
+					*/
+					var img_base64 = img_src.split(",")[1];
+                    
+                    var formImgPath = 'app/config/scan/form_templates/' + formName + '/form.jpg';
+                    devUtil.postBase64File(formImgPath, img_base64, function(err, response, body) {
+                        if (err || response.statusCode !== 200) {
+                            alert(
+                            'Something went wrong! Please save the file manually.');
+                        } else {
+                            alert('Saved the file to: ' + formImgPath);
+                        }
+                    }, true);
+
+                    var templatePath = 'app/config/scan/form_templates/' + formName + '/template.json';
+                    devUtil.postFile(templatePath, json_output, function(err, response, body) {
+                        if (err || response.statusCode !== 200) {
+                            alert(
+                            'Something went wrong! Please save the file manually.');
+                        } else {
+                            alert('Saved the file to: ' + templatePath);
+                        }
+                    });
+					controller.send('postToFileSystem', pages, curr_index + 1, curr_directory + "nextPage/", formName, subformName, xlsx_fields);
+				}
+			});
 		},
 
 		/**
@@ -1658,12 +1969,12 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		*	@param (zip) The zip file being exported to.
 		*   @param (xlsx_fields) array for recursivily storing JSON fields for XLSX output
 		*/
-		createExportZipFolder: function(pages, curr_index, curr_directory, zip, xlsx_fields) {
+		createExportZipFolder: function(pages, curr_index, curr_directory, zip, formName, subformName, xlsx_fields) {
 			// base case
 			// Calling createXLSX to make xlsx file
 			if (curr_index == pages.length) {
-				var xlFile = this._actions.createXLSX(xlsx_fields);
-				var formDefJson = this._actions.createFormDefJSON(xlsx_fields);
+				var xlFile = this._actions.createXLSX(xlsx_fields, formName, subformName);
+				var formDefJson = this._actions.createFormDefJSON(xlsx_fields, formName, subformName);
                 var formDefString = JSON.stringify(formDefJson, 2, 2);
 
                 // Create the definition.csv and properties.csv files from the formDef file
@@ -1778,9 +2089,9 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			    scanDoc.sub_forms = [sub_form];
 
 			    //add sub_form xlsx
-			    var xlFile = this._actions.createXLSX(original_fields);
+			    var xlFile = this._actions.createXLSX(original_fields, formName, subformName);
 			    zip.file("scan_" + sub_form.name + ".xlsx", xlFile.base64, {base64: true});  // added xlFile to the zip
-			    var formDefJson = this._actions.createFormDefJSON(original_fields);
+			    var formDefJson = this._actions.createFormDefJSON(original_fields, formName, subformName);
                 var formDefString = JSON.stringify(formDefJson, 2, 2);
 			    zip.file("scan_" + sub_form.name + "_formDef.json", formDefString);  // added xlFile to the zip
 
@@ -1813,7 +2124,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 					// add img and json to zip file
 					zip.file(curr_directory + "form.jpg", img_base64, {base64: true});
 					zip.file(curr_directory + "template.json", json_output);
-					controller.send('createExportZipFolder', pages, curr_index + 1, curr_directory + "nextPage/", zip,xlsx_fields);
+					controller.send('createExportZipFolder', pages, curr_index + 1, curr_directory + "nextPage/", zip, formName, subformName, xlsx_fields);
 				}
 			});
 		},
@@ -1824,7 +2135,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		*   returns a json formatted stirng containing all the required properties of a
 		*   field required for json file
 		*/
-		createFormDefJSON: function(fields) {
+		createFormDefJSON: function(fields, formName, subformName) {
 			var removeEmptyStrings = function (rObjArr){
 			    var outArr = [];
 			    _.each(rObjArr, function(row){
@@ -1845,7 +2156,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			    });
 			    return outArr;
 			}
-			var xlFile = ODKScan.runGlobal('createXLSX')(fields);
+			var xlFile = ODKScan.runGlobal('createXLSX')(fields, formName, subformName);
 			var workbook = XLSX.read(xlFile.base64,{type:'base64'});
 			var result = {};
 			    _.each(workbook.SheetNames, function(sheetName) {
@@ -1952,7 +2263,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		*	current page.
 		*	@param (fields) Array of JSON objects which contain page metadata.
 		*/
-		createXLSX: function(fields) {
+		createXLSX: function(fields, formName, subformName) {
 			// for servey sheet
 			// filling out the initial values
             var survey = new Array();
@@ -2022,10 +2333,10 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 
             var form_name;
 
-            if (fields.length == 0 || $("#sub_form_name").val() == "") {
-            	form_name = $('#zip_name').val() || "download";
+            if (fields.length == 0 || subformName == "") {
+            	form_name = formName || "download";
             } else {
-                form_name = $("#sub_form_name").val() || 'subform';
+                form_name = subformName || 'subform';
             }
 
 	        setting[1][1] = "scan_"+form_name;
