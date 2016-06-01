@@ -1,6 +1,5 @@
 #!/bin/bash
-TEMP="/formDef.json"
-rm -r tempZipDir
+rm -rf tempZipDir
 
 mkdir tempZipDir
 mkdir tempZipDir/surveyDir
