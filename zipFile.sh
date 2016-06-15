@@ -1,4 +1,26 @@
 #!/bin/bash
+
+# Parse arguments
+while getopts ':s:t:' opt; do
+  case $opt in
+    s)
+      surveyCopyPath=${OPTARG}
+      ;;
+    t)
+      tablesCopyPath=${OPTARG}
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+# Build temp file structure
 rm -rf tempZipDir
 
 mkdir tempZipDir
@@ -50,9 +72,9 @@ zip -r system.zip system
 mv config.zip configzip
 mv system.zip systemzip
 
-if [ "$1" ]; then
-    cp configzip "$1"
-    cp systemzip "$1"
+if [ $surveyCopyPath ]; then
+    cp configzip "$surveyCopyPath"
+    cp systemzip "$surveyCopyPath"
 fi
 
 cd ../..
@@ -93,9 +115,9 @@ zip -r system.zip system
 mv config.zip configzip
 mv system.zip systemzip
 
-if [ "$2" ]; then
-    cp configzip "$2"
-    cp systemzip "$2"
+if [ "$tablesCopyPath" ]; then
+    cp configzip "$tablesCopyPath"
+    cp systemzip "$tablesCopyPath"
 fi
 
 cd ../..
