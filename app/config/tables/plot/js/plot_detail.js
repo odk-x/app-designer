@@ -69,71 +69,91 @@ function display() {
 //         [plotId]);
 
     $('#visits').text(visitData.getCount());
-    var margin = {
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 40
-    };
-    var width = 300 - margin.left - margin.right;
-    var height = 500 - margin.top - margin.bottom;
-    // Set up the scales.
-    //var visitData = odkTables.query('visit', 'plot_id = ?', [plotId]);
-    var xValues = visitData.getColumnData('date');
+    var margin = {top: 20, right: 20, bottom: 100, left: 60},
+        width = 400 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
-    //xValues = [xValues[0], xValues[1], xValues[2]];
+    // Parse the date / time
+    var	parseDate = d3.time.format("%Y-%m-%d").parse;
 
-    // because d3 domain expects an array of ints, make a map.
-    var labelToValue = {};
-    for (i = 0; i < xValues.length; i++) {
-        labelToValue[xValues[i]] = i;
-    }
-    var x = d3.scale.ordinal().domain(d3.values(labelToValue)).rangePoints(
-        [0, width],
-        1);
-    var yValues = visitData.getColumnData('plant_height');
-    var newYs = [];
-    // Now parse to strings.
-    for (i = 0; i < yValues.length; i++) {
-        newYs.push(parseInt(yValues[i]));
-    }
-    yValues = newYs;
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
     var y = d3.scale.linear().range([height, 0]);
-    var yExtent = d3.extent(yValues);
-    y.domain(yExtent);
+
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient('bottom');
+        .orient("bottom")
+        .tickFormat(d3.time.format("%Y-%m-%d"));
+
     var yAxis = d3.svg.axis()
         .scale(y)
-        .orient('left');
-    var line = d3.svg.line()
-        .x(function(d) { return x(String(labelToValue[d.date])); })
-        .y(function(d) { return y(d.plant_height); });
-    var combinedData = [];
+        .orient("left")
+        .ticks(10);
+
+    var xValues = visitData.getColumnData('date');
+    var yValues = visitData.getColumnData('plant_height');
+
+
+    var data = [];
+    var i = 0;
     for (i = 0; i < xValues.length; i++) {
         var d = {};
-        d.date = xValues[i];
-        d.plant_height = yValues[i];
-        combinedData.push(d);
-    }
-    var svg = d3.select('#graph-div').append('svg')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
-    .append('g')
-        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
-    svg.append('g')
-        .attr('class', 'y axis')
-        .call(yAxis);
-    svg.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(xAxis);
-    svg.append('path')
-        .datum(combinedData)
-        .attr('class', 'line')
-        .attr('d', line);
+        var fullDateString = xValues[i];
+        var dateTimeSplit = fullDateString.split('T');
+        if (dateTimeSplit[0] === null || dateTimeSplit[0] === undefined) {
+            // Use default string
+            d.date = "0001-01-01";
+        } else {
+            d.date = dateTimeSplit[0];
+        }
 
+        d.value = yValues[i];
+        data.push(d);
+    }
+
+    data.forEach(function(d) {
+        d.date = parseDate(d.date);
+        d.value = +d.value;
+    });
+	
+    x.domain(data.map(function(d) { return d.date; }));
+    y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+    var svg = d3.select("#graph-div").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", "-.55em")
+        .attr("transform", "rotate(-90)" );
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -50)
+        .attr("x", -100)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Height");
+
+    svg.selectAll("bar")
+        .data(data)
+        .enter().append("rect")
+        .style("fill", "steelblue")
+        .attr("x", function(d) { return x(d.date); })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); });
 }
 
 function setup() {
