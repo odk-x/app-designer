@@ -22,7 +22,7 @@ mkdir tempZipDir/surveyDir/system/survey/templates
 cp app/config/assets/css/odk-survey.css tempZipDir/surveyDir/config/assets/css/odk-survey.css
 
 # Survey config frameowrk files
-cp -r app/config/assets/framework/ tempZipDir/surveyDir/config/assets/framework
+cp -r app/config/assets/framework/* tempZipDir/surveyDir/config/assets/framework
 
 # Survey config img files
 cp app/config/assets/img/advance.png tempZipDir/surveyDir/config/assets/img/advance.png
