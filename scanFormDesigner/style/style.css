@@ -1,0 +1,408 @@
+/*
+	The page background is set to grey by default.
+*/
+html, body {
+	background-color: lightgrey;
+}
+
+/* 	Makes dialog boxes appear above other elements, 
+	also makes the background inactive while a dialog
+	box is open. 
+*/
+.ui-dialog, .ui-front {
+	z-index: 10000 !important;
+}
+
+a {
+	cursor: pointer;
+}
+
+/* Removes the close button from dialog menus. */
+.ui-dialog-titlebar-close {
+	display: none;
+}
+
+/* Div that contains the application name. */
+#app_name {
+	text-align: center;
+}
+
+/* Application name text. */
+#app_name h2 {
+	font-weight: bold;
+}
+
+/* 	This element is hidden, this file-input button is invoked
+	when the 'Select Image' button is clicked.
+*/
+#image_select {
+	display: none;
+}
+
+/*	The page_body div contains:
+		- page list
+		- ODK Scan document
+		- Properties sidebar
+		- Loaded images
+*/
+#page_body {
+	margin-top: 65px; /* TODO: remove hard-coded value */
+}
+
+/* 	Sidebar which allows the user to add/modify/delete
+	properties belonging to form elements and images
+	that are added to the ODK Scan doc.
+*/
+#prop_sidebar {
+	width: 285px; /* TODO: remove hard-coded value */
+	background-color: white;
+	border: 1px solid black;
+	float: left;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-left: 10px;
+}
+
+/* Centers the properties sidebar title. */
+#prop_sidebar h3  {
+	text-align: center;
+}
+
+/* 	Roughly centers the update properties buttton. 
+	TODO: figure out to center it programmatically.
+*/
+#update_prop {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 80px;
+}
+
+/*	Contains the default text when a field
+	is not selected in the document.
+*/
+#default_prop_message {
+	background-color: lightgray;
+	height: 200px;
+	outline: 1px dashed;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 15px;
+	margin-right: 15px;
+	text-align: center;
+}
+
+#default_prop_message h4 {
+	margin-top: 55px; /* TODO: remove hard-coded value */
+}
+
+/* A div container for the ODK Scan doc. */
+.scan_page {
+	/*border-style: solid;
+	border-color: black;
+	border-width: 0.1rem;*/
+	border: none;
+	background-color: white;
+	float: left;
+	margin-left: 15px;
+	margin-right: 30px;
+	margin-bottom: 15px;
+	position: relative;
+	display: none;
+}
+
+.selected_page {
+	display: inline-block;
+}
+
+/* A div container for images that are added to the page_body. */
+#image_area {
+	position: absolute;
+	display: inline-block;
+	float: left;
+}
+
+/* 	Makes the area that surrounds the selected region darker
+	in order to highlight the selected image region. 
+*/
+.imgareaselect-outer {
+	background-color: black;
+	opacity: 0.5;
+}
+
+/* contains the link to the saved zip file */
+#zip_link {
+	display: none;
+}
+
+/* contains the link to the saved scan json */
+#scan_json_link {
+	display: none;
+}
+
+/* added to all integer input boxes */
+.int_input {
+	width: 40px;
+	float: right;
+}
+
+/* limits the margin on horizontal dividers */
+.horz_divider {
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+/* aligns dropdown buttons to the right of the page */
+select {
+	float: right;
+}
+
+/* aligns input boxes to the right of the page */
+input[type=text], input[type=number] {
+	float: right;
+	margin-left: 15px;
+}
+
+.short_text_input {
+	width: 90px;
+}
+
+.long_text_input {
+	width: 150px;
+}
+
+/* 	Sets the max height on the div containing the rows 
+	and columns before it starts to scroll. */
+.scrollable_values {
+	max-height: 120px;
+	overflow: auto;
+}
+
+#export_progress_dialog p {
+	text-align: center;
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
+
+#page_label_container {
+	margin-left: 140px;
+	margin-top: -20px;
+	margin-bottom: 15px;
+}
+
+.page_tab {
+	text-align: center;
+	border: 1px solid black;
+	background-color: white;
+	float: left;
+	padding: 2px;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-weight: bold;
+}
+
+.selected_tab {
+	background-color: rgba(7, 197, 223, 0.41) !important;
+}	
+
+.image_tab {
+	text-align: center;
+	border: 1px solid black;
+	background-color: white;
+	float: right;
+	padding: 2px;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-weight: bold;
+}
+
+#remove_image_tab {
+	margin-right: 100px;
+}
+
+#saved_images {
+	display: none;
+}
+
+#uploaded_zip {
+	width: 210px;
+}
+
+.input_button {
+	margin: 5px;
+	float: right;
+}
+
+/************************************************************
+*  Scan Document Sizes
+************************************************************/
+
+.letter_portrait {
+	width: 85rem;
+	height: 110rem;
+}
+
+.letter_landscape{
+	width: 110rem;
+	height: 85rem;
+}
+
+.a4_portrait{
+	width: 82.7rem;
+	height: 116.9rem;
+}
+
+.a4_landscape {
+	width: 116.9rem;
+	height: 82.7rem;
+}
+
+.legal_size {
+	width: 116.9rem;
+	height: 82.7rem;
+}
+
+.index_size {
+	width: 80rem;
+	height: 50rem;
+}
+
+/************************************************************
+*  Field Elements
+*
+*  NOTE: Border style, weight, and width are set separately 
+*  because there's a bug in the way that Chrome renders 
+*  an objects border with the  unit when setting the border
+*  using only the 'border' attribute.
+************************************************************/
+.field {
+	background-color: white;
+}
+
+.selected_field {
+	background-color: rgba(7, 197, 223, 1);
+}
+
+.highlighted_group {
+	outline-width: 2px;
+	outline-color: green;
+	outline-style: dashed;
+	background-color: rgba(0, 255, 0, 0.3);
+}
+
+.unhighlighted_group {
+	outline-width: 2px;
+	outline-color: grey;
+	outline-style: dashed;
+}
+
+.field_group {
+	position: absolute;
+}
+
+.group_field {
+	background-color: lightgreen;
+}
+
+.selected_field.img_div {
+	outline-width: 2px;
+	outline-color: black;
+	outline-style: dashed;
+}
+
+.group_field.img_div {
+	outline-width: 2px;
+	outline-color: lightgreen;
+	outline-style: dashed;
+}
+
+.img_div {
+	overflow: hidden;
+	position: absolute;
+}
+
+.img_div img {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.box {
+	position: absolute;
+	border-style: solid;
+	border-color: black;
+}
+
+.box p{
+	text-align: center;
+}
+
+.first_col {
+	clear: left;
+}
+
+.cb_div {
+	display: inline-block;
+	border-style: solid;
+	border-color: black;
+}
+
+.c_box {
+	border-style: solid;
+	border-color: black;
+	border-width: 0.1rem;
+	float: left;
+}
+
+.bubble_div {
+	display: inline-block;
+	border-style: solid;
+	border-color: black;
+}
+
+.bubble_small {
+	border-style: solid;
+	border-color: black;
+	border-width: 0.1rem;
+	float: left;
+	border-radius: .5rem;
+}
+
+.bubble_med {
+	border-style: solid;
+	border-color: black;
+	border-width: 0.1rem;
+	float: left;
+	border-radius: .8rem;
+}
+
+.bubble_large {
+	border-style: solid;
+	border-color: black;
+	border-width: 0.1rem;
+	float: left;
+	border-radius: 1.3rem;
+}
+
+.num_div{
+	display: inline-block;
+	border-style: solid;
+	border-color: black;
+	border-width: 0.2rem;
+}
+
+.num {	
+	border-style: solid;
+	border-color: black;
+	border-width: 0.1rem;
+	float: left;
+	position: relative;
+}
+
+.num_group {
+	float: left;
+}
+
+.dot {
+	position: absolute;
+	background-color: black;
+}

@@ -1,0 +1,10 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+secret.config.sh
+# Thumbnails
+._*
+
+node_modules
+coverage/coverage.html
