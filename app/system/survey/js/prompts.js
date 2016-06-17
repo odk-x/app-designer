@@ -623,7 +623,7 @@ promptTypes.contents = promptTypes.base.extend({
         odkCommon.log('D',"prompts." + that.type + ".selectContentsItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.select-contents-item');
         $target.attr("label", function(index, oldPropertyValue){
-            ctxt.log('D',"prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
+            odkCommon.log('D',"prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue +
                 "px: " + that.promptIdx);
             selectedScreenPath = oldPropertyValue;
         });
