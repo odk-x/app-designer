@@ -1,0 +1,660 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ODK Scan</title>
+	<!-- 
+	
+	Application Dependencies
+	
+	-->
+
+	<!-- CSS -->
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style/imgareaselect-animated.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="style/style.css">
+	<!---->
+
+	<!-- JavaScript libraries -->
+		<!-- jQuery libraries -->
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		
+		<!-- required for EmberJS (model-view-controller framework) -->
+		<script src="js/libs/handlebars-1.0.0.js"></script>
+		<script src="js/libs/ember.js"></script>
+			
+		<!-- used to implement image cropping/selection -->
+		<script src="js/libs/jquery.imgareaselect.pack.js"></script>
+		
+		<!-- used to implement dropdown UI tabs -->
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>		
+		
+		<!-- converts a DOM element to a canvas element -->
+		<script src="js/libs/html2canvas.js"></script>
+		
+		<!-- used to save Blobs to a file -->
+		<script src="js/libs/FileSaver.js"></script>
+		
+		<!-- used to save zip files of the Scan doc and JSON output -->
+		<script src="js/libs/jszip.js"></script>
+		
+		<!-- used to nudge the movement of fields -->
+		<script src="js/libs/jquery.hotkeys.js"></script>
+
+		<!--used for xlsx file-->
+		<script src="http://yourjavascript.com/119112369/xlsx.js"></script>
+		
+	    <script type="text/javascript" src="../xlsxconverter/js-xlsx/xlsx.js"></script>
+	    <script type="text/javascript" src="../xlsxconverter/XRegExp-All-3.0.0-pre-2014-12-24.js"></script>
+		<script type="text/javascript" src="../xlsxconverter/underscore.js"></script>
+		<script type="text/javascript" src="../xlsxconverter/XLSXConverter2.js"></script>
+
+        <!--used for saving files to filesystem-->
+        <script type="text/javascript" src="../devEnv/js/devenv.js"></script>
+	
+	<!-- ODK Scan scripts -->
+		<script src="js/globals.js"></script>
+		<script src="js/ember_setup.js"></script>
+		<script src="js/field_classes/grid_classes.js"></script>
+		<script src="js/field_classes/formatted_number_class.js"></script>
+		<script src="js/field_classes/box_classes.js"></script>
+		<script src="js/field_classes/field_group_class.js"></script>
+		<script src="js/dialog_menus.js"></script>
+		<script src="js/image_util.js"></script>
+		<script src="js/controllers/fields_controller.js"></script>
+		<script src="js/views/view_containers.js"></script> 
+		<!--NOTE: field_view.js must be loaded before all subsequent views-->
+		<script src="js/views/field_view.js"></script> 
+		<script src="js/views/grid_field_views.js"></script>
+		<script src="js/views/box_views.js"></script>
+		<script src="js/views/inner_views.js"></script>
+		<script src="js/views/form_num_view.js"></script>
+		<script src="js/views/default_prop_view.js"></script>
+	<!---->
+  </head>
+  <body>    
+	<!-- inner body content is wrapped in 'handlebars' -->
+	<script type="text/x-handlebars" data-template-name="fields">
+		<!-- this is where the application 'main' code resides -->
+		
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" >ODK Scan</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">File <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a {{action 'openNewDocDialog'}}>New</a></li>
+						<li><a {{action 'openPageStyleDialog'}}>Set page style</a></li>
+						<li class="divider"></li>
+						<li><a {{action 'openLoadDialog'}}>Load</a></li>	
+						<li><a {{action 'saveDoc'}}>Save</a></li>			
+						<li class="divider"></li>
+						<li><a {{action 'exportZIPinit'}}>Export zip</a></li>		
+						<li><a {{action 'saveToFileSystemInit'}}>Save to File System</a></li>			
+					</ul>
+				</li>
+			  <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown">Edit <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+				  <li><a {{action "enableImageEdit"}}>Images</a></li>
+				  <li><a {{action "enableFieldEdit"}}>Fields</a></li>				  
+				</ul>
+			  </li>
+			  <input id="image_select" {{action 'loadUserImage' on="change"}} type="file" accept="image/*"></input> <!--NOTE: this element is hidden. -->
+			{{#if isImageEditing}}				
+				<li><a id="image_button" {{action 'selectImage'}}>New Image</a></li>
+				<li><a id="add_sel" {{action 'addSelection'}}>Add Selection</a></li>
+			{{else}}
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">Add <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a {{action 'createBox'}}>Text Box</a></li>
+						<li><a {{action 'createCode'}}>QR Code</a></li>
+						<li><a {{action 'createText'}}>Text</a></li>
+						<li><a {{action 'createCheckbox'}}>Checkboxes</a></li>
+						<li><a {{action 'createBubbles'}}>Fill-in bubbles</a></li>
+						<li><a {{action 'createNumbers'}}>Number</a></li>
+						<li><a {{action 'createFormattedNumber'}}>Formatted Number</a></li>
+					</ul>
+				</li>	
+			{{/if}}
+			<li><a {{action 'copySelected'}}>Copy</a></li>
+			<li><a {{action 'deleteField'}}>Delete Field</a></li>
+			<li><a {{action 'undoDeleteField'}}>Undo Delete</a></li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown">Change Position <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a {{action 'sendBackward'}}>Send Backward</a></li>
+					<li><a {{action 'sendToBack'}}>Send To Back</a></li>
+					<li><a {{action 'sendForward'}}>Send Forward</a></li>
+					<li><a {{action 'sendToFront'}}>Send to Front</a></li>
+				</ul>
+			</li>	
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown">Align Field <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a {{action 'alignFieldLeft'}}>Left</a></li>
+					<li><a {{action 'alignFieldCenter'}}>Center</a></li>
+					<li><a {{action 'alignFieldRight'}}>Right</a></li>
+					<li class="divider"></li>
+					<li><a {{action 'alignFieldTop'}}>Top</a></li>
+					<li><a {{action 'alignFieldMiddle'}}>Middle</a></li>
+					<li><a {{action 'alignFieldBottom'}}>Bottom</a></li>
+				</ul>
+			</li>	
+			
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown">Group Options <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a {{action 'groupFields'}}>Group Fields</a></li>	
+					<li><a {{action 'ungroupFields'}}>Ungroup Fields</a></li>	
+				</ul>
+			</li>	
+			</ul>	
+			<ul class="nav navbar-nav navbar-right">
+				<!-- <li><a>Help</a></li> -->
+			</ul>			
+		</nav>	
+		<div id="page_label_container">
+      <!-- TODO: Add back the new page trigger when it is fully supported in Scan -->
+			<div id="page_list" style="display: none;">
+				{{#each pages}}
+					<div {{bind-attr class=":page_tab :scan_doc_page isActive:selected_tab"}} {{action 'selectPageTab' this}}>Page {{pageNum}}</div>
+				{{/each}}
+			</div>				
+      <div id="new_page" style="display: none;" class="page_tab" {{action 'newPage'}}>Add +</div>
+			<div id="remove_page" style="display: none;" class="page_tab" {{action 'openRemovePageDialog'}}>Remove -</div>
+		</div>
+		{{#if isImageEditing}}
+			<div id="image_tab_container">
+				{{#if imageList}}
+					<div id="remove_image_tab" class="image_tab" {{action 'openImageTabDialog'}}>Remove -</div>
+					<div id="image_list">
+						{{#each imageList}}
+							<div {{bind-attr class=":image_tab isActive:selected_tab"}} {{action 'selectImageTab' this}}>{{name}}</div>
+						{{/each}}
+					</div>								
+				{{/if}}
+			</div>
+		{{/if}}
+		
+		<div id="page_body">
+			<div id="prop_sidebar">
+				<h3 class="prop_sidebar_content">Form Properties</h3>	
+				<br>
+				{{#view ODKScan.FieldContainer}}			
+				{{/view}}
+				<button id="update_prop" class="prop_sidebar_content" {{action 'updateField'}}>Update Field</button>
+			</div>
+			<div id="page_container">
+			</div>
+			<div id="image_area">
+				<img id="loaded_image"></img>
+				<div id="saved_images"></div>
+				<div id="processed_images"></div>
+			</div>
+		</div>	
+		
+		<!-- the dialog menu html is separated and included below to keep the code more modular -->
+		{{partial 'emptyBoxDialog'}}
+		{{partial 'qrCodeDialog'}}
+		{{partial 'textBoxDialog'}}
+		{{partial 'cbDialog'}}
+		{{partial 'bubbleDialog'}}
+		{{partial 'segNumDialog'}}
+		{{partial 'formNumDialog'}}
+		{{partial 'exportDialog'}}
+		{{partial 'saveToFileSystemDialog'}}
+		{{partial 'loadDialog'}}
+		{{partial 'saveDialog'}}
+		{{partial 'newDocumentDialog'}}
+		{{partial 'pageStyleDialog'}}
+		{{partial 'removePageDialog'}}
+		{{partial 'saveCheckDialog'}}
+		{{partial 'imageTabRemoveDialog'}}
+		{{partial 'exportInProgressDialog'}}
+		{{partial 'pageStyleWarningDialog'}}
+		{{partial 'subformDialog'}}	
+        {{partial 'subNameDialog'}}
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="full-grid-size-view">
+		<label for="name">Number of columns</label>
+		<input type="number" id="num_col" value="1" class="int_input ui-widget-content ui-corner-all" min="1" {{action 'updateNumColumns' target="view.parentView"}}><br>
+		
+		<label for="name">Number of rows</label>
+		<input type="number" id="num_row" value="1" class="int_input ui-widget-content ui-corner-all" min="1" {{action 'updateNumRows' target="view.parentView"}}><br>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="col-grid-size-view">
+		<label for="name">Number of digits</label>
+		<input type="number" id="num_col" value="1" class="int_input ui-widget-content ui-corner-all" min="1" {{action 'updateNumColumns' target="view.parentView"}}><br>		
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="grid-values-view">
+		<div class="scrollable_values">
+			<label for="name">Grid values:</label><br>
+			{{#each row in view.parentView.gridElements}}
+				{{#each ele in row}}
+					&nbsp;&nbsp;<label for="name">Row: {{ele.rowIndex}}, Col: {{ele.colIndex}}</label>
+					<input type="text" {{bind-attr value=ele.ele_value}} class="ui-widget-content ui-corner-all grid_value short_text_input" {{action 'inputBoxPressed' ele.rowIndex ele.colIndex target="view.parentView" on="click"}}></input>
+					<br>
+				{{/each}}
+			{{/each}}
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="border-options-view">
+		<label for="name">Include Border?</label>
+		<label>
+			{{view Ember.RadioButton type="radio" viewName="borderYesView" name="borderOption" value="1"}} Yes					
+		</label>
+    
+		<label>
+			{{view Ember.RadioButton type="radio" viewName="borderNoView" name="borderOption" value="0"}} No
+		</label>
+		<br>
+		<div id="border_container">
+			<label for="name">Border</label>
+			<input type="number" id="border_width" value="1" class="ui-widget-content ui-corner-all" min="1" max="5">	
+		</div>
+	</script>
+	
+	<!--<script type="text/x-handlebars" data-template-name="priority-view">
+		<label>Field Priority</label>
+		<select id="field_priority">
+			<option value="low">Low</option>
+			<option value="medium" selected="selected">Medium</option>
+			<option value="high">High</option>			
+		</select>
+	</script>-->
+
+	<script type="text/x-handlebars" data-template-name="priority-view">
+		<label for="name">Verify Field?</label>
+			<label id="verified">
+				{{view Ember.RadioButton1 type="radio" viewName="fieldYesView" name="fieldOption" value="1"}} Yes	
+			</label>
+			<label id="verified">
+				{{view Ember.RadioButton1 type="radio" viewName="fieldNoView" name="fieldOption" value="0"}} No
+			</label>
+	</script>
+
+	<!-- added for order of priority-->
+	<script type="text/x-handlebars" data-template-name="priority-order-view">
+		<label for="name">Order Of Fields</label>
+
+		<input type="text" id="order" class="ui-widget-content ui-corner-all long_text_input"><br>
+			
+	</script>
+	<!-- added for order of priority-->
+	
+	<script type="text/x-handlebars" data-template-name="margin-options-view">
+		<label for="name">Top Margin</label>
+		<input type="number" id="margin_top" value="1" class="int_input ui-widget-content ui-corner-all" min="0"><br>
+		
+		<label for="name">Bottom Margin</label>
+		<input type="number" id="margin_bottom" value="1" class="int_input ui-widget-content ui-corner-all" min="0"><br>	
+		
+		<label for="name">Left Margin</label>
+		<input type="number" id="margin_left" value="1" class="int_input ui-widget-content ui-corner-all" min="0"><br>
+		
+		<label for="name">Right Margin</label>
+		<input type="number" id="margin_right" value="1" class="int_input ui-widget-content ui-corner-all" min="0"><br>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="field-attributes-view">
+		<label for="name">Name</label>
+		<input type="text" id="field_name" class="ui-widget-content ui-corner-all long_text_input"><br>
+		
+		<label for="name">Display Text</label>
+		<input type="text" id="field_display_text" class="ui-widget-content ui-corner-all long_text_input"><br>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="default-prop-view">
+		<div id="default_prop_message">
+			<h4>Select a field in the document to edit its properties.</h4>
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="grid-field-layout">
+		{{view AttributeOptions}}
+		<hr class="horz_divider">
+		{{yield}}
+		<hr class="horz_divider">		
+		{{view BorderOptions viewName='bdOptions'}}
+		{{view PriorityOptions viewName='verOptions'}}
+		{{view OrderOptions viewName='orderOptions'}}
+		<hr class="horz_divider">
+		{{view MarginOptions}}
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="empty-box-view">
+		{{view AttributeOptions}}
+		<hr class="horz_divider">
+		{{view BorderOptions viewName='bdOptions'}}
+		{{view PriorityOptions viewName='verOptions'}}
+		{{view OrderOptions viewName='orderOptions'}}
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="qr-code-view">
+		{{view AttributeOptions}}
+		<hr class="horz_divider">
+		{{view BorderOptions viewName='bdOptions'}}
+		{{view PriorityOptions viewName='verOptions'}}
+		{{view OrderOptions viewName='orderOptions'}}
+	</script>	
+	
+	<script type="text/x-handlebars" data-template-name="textbox-view">
+		{{view AttributeOptions}}
+		<hr class="horz_divider">
+		<label for="name">Text size</label>
+		<select id="text_size"> 
+			<option value="small">Small</option>
+			<option value="medium">Medium</option>
+			<option value="large">Large</option>				
+		</select><br>
+		<label for="name">Text</label>
+		<input type="text" id="text_input" class="ui-widget-content ui-corner-all long_text_input">		
+		<hr class="horz_divider">
+		{{view BorderOptions viewName='bdOptions'}}
+		{{view PriorityOptions viewName='verOptions'}}
+		{{view OrderOptions viewName='orderOptions'}}
+	</script>
+	
+	<!-- These views are loaded into the dialog menus and the properties sidebar. -->
+	<script type="text/x-handlebars" data-template-name="cb-view">
+		<label for="name">Checkbox size</label>
+		<select id="cb_size"> 
+			<option value="small">Small</option>
+			<option value="medium">Medium</option>
+			<option value="large">Large</option>				
+		</select><br>
+		
+		<label for="name">Checkbox type</label>
+		<select id="cb_type"> 
+			<option value="tally">Tally</option>
+			<option value="select1">Select One</option>										
+			<option value="select_many">Select Many</option>	
+		</select><br>
+		{{view FullGridSize viewName="gridSize"}} 
+		<hr class="horz_divider">
+		{{view GridValues viewName="gridValues"}}
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="bubbles-view">
+		<label for="name">Bubble size</label>
+		<select id="bubb_size"> 
+			<option value="small">Small</option>
+			<option value="medium">Medium</option>
+			<option value="large">Large</option>				
+		</select><br>
+		
+		<label for="name">Bubble type</label>
+		<select id="bubb_type"> 
+			<option value="tally">Tally</option>
+			<option value="select1">Select One</option>		
+			<option value="select_many">Select Many</option>		
+		</select><br>
+		{{view FullGridSize viewName="gridSize"}} 
+		<hr class="horz_divider">
+		{{view GridValues viewName="gridValues"}}
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="seg-num-view">
+		<label for="name">Number size</label>
+		<select id="seg_num_size"> 
+			<option value="small">Small</option>
+			<option value="medium">Medium</option>
+			<option value="large">Large</option>				
+		</select><br>
+		
+		<label for="name">Dot size</label>
+		<select id="dot_size"> 
+			<option value="small">Small</option>
+			<option value="medium">Medium</option>
+			<option value="large">Large</option>				
+		</select><br>
+		{{view ColGridSize viewName="gridSize"}} 
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="form-num-view">
+		{{view AttributeOptions}}
+		<hr class="horz_divider">
+		
+		<label for="name">Number size</label>
+		<select id="form_num_size"> 
+			<option value="small">Small</option>
+			<option value="medium">Medium</option>
+			<option value="large">Large</option>				
+		</select><br>
+		
+		<label for="name">Dot size</label>
+		<select id="form_num_dot_size"> 
+			<option value="small">Small</option>
+			<option value="medium">Medium</option>
+			<option value="large">Large</option>				
+		</select><br>
+		
+		<label for="name">Delimiter</label>
+		<select id="delim_type"> 
+			<option value="/">/</option>
+			<option value="-">-</option>
+			<option value=".">.</option>				
+		</select><br>
+		
+		{{view BorderOptions viewName="bdOptions"}}
+		{{view PriorityOptions viewName='verOptions'}}
+		{{view OrderOptions viewName='orderOptions'}}
+		<hr class="horz_divider">
+		
+		<label for="name">Number of groups</label>
+		<input type="number" id="num_col_form_num" value="2" class="int_input ui-widget-content ui-corner-all" min="2" {{action 'updateNumGroups' target="view"}}><br>
+		<div class="scrollable_values">
+			{{#each view.formNumGroups}}
+				&nbsp;&nbsp;&nbsp;&nbsp;<label for="name">Digits in group {{groupNum}}</label>
+				<input type="number" {{bind-attr value=size}} class="num_groups int_input ui-widget-content ui-corner-all" min="1"><br>
+			{{/each}}
+		</div>
+		<hr class="horz_divider">
+		
+		<label for="name">Digit spacing</label>
+		<!-- TODO: remove hardcoded min value -->
+		<input type="number" id="form_num_dx" value="10" class="int_input ui-widget-content ui-corner-all" min="0"><br>
+		
+		<label for="name">Group spacing</label>
+		<!-- TODO: remove hardcoded min value -->
+		<input type="number" id="form_num_group_dx" value="10" class="int_input ui-widget-content ui-corner-all" min="0"><br>
+		
+		<hr class="horz_divider">
+		{{view MarginOptions}}		
+	</script>
+	
+	<!-- Dialog menu html -->
+	<script type="text/x-handlebars" data-template-name="_emptyBoxDialog">
+		<div id="box_dialog" title="Create text box">	
+			{{#view ODKScan.EmptyBoxContainer}}		
+			{{/view}}
+		</div>
+	</script>
+	<script type="text/x-handlebars" data-template-name="_qrCodeDialog">
+		<div id="qrCode_dialog" title="Create qr Code field">		
+			{{#view ODKScan.QrCodeContainer}}		
+			{{/view}}	
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_textBoxDialog">
+		<div id="text_dialog" title="Create text field">		
+			{{#view ODKScan.TextBoxContainer}}		
+			{{/view}}	
+		</div>
+	</script>	
+		
+	
+	<script type="text/x-handlebars" data-template-name="_cbDialog">
+		<div id="checkbox_dialog" title="Create checkboxes">
+		{{#view ODKScan.CheckboxContainer}}		
+		{{/view}}
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_bubbleDialog">
+		<div id="bubble_dialog" title="Create fill-in bubbles">		
+			{{#view ODKScan.BubbleContainer}}		
+			{{/view}}
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_segNumDialog">
+		<div id="seg_num_dialog" title="Create simple number">		
+			{{#view ODKScan.SegNumContainer}}		
+			{{/view}}
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_formNumDialog">
+		<div id="form_num_dialog" title="Create formatted number">		
+			{{#view ODKScan.FormNumContainer}}		
+			{{/view}}
+		</div>
+	</script>	
+	
+	<script type="text/x-handlebars" data-template-name="_exportDialog">
+		<div id="export_dialog" title="Export Scan Form">		
+			<label for="name">Filename</label>
+			<input type="text" id="zip_name" class="ui-widget-content ui-corner-all long_text_input">		
+			<a id="zip_link" download="odk_scan_output"></a>
+			<hr class="horz_divider">
+			<button id="export_cancel" class="input_button" {{action "cancelExport"}}>Cancel</button>
+			<button id="export_zip" class="input_button" {{action "exportZIP"}}>Ok</button>
+		</div>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="_saveToFileSystemDialog">
+		<div id="saveToFileSystem_dialog" title="Save Form to File System">		
+			<label for="name">Filename</label>
+			<input type="text" id="file_name" class="ui-widget-content ui-corner-all long_text_input">		
+			<hr class="horz_divider">
+			<button id="export_cancel" class="input_button" {{action "cancelSaveToFileSystem"}}>Cancel</button>
+			<button id="export_zip" class="input_button" {{action "saveToFileSystem"}}>Ok</button>
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_loadDialog">
+		<div id="load_dialog" title="Load Scan Form">			
+			<label for="name">Zip File</label>
+			<input type="file" id="uploaded_zip" {{action "zipFileUploaded" on="change"}} class="ui-corner-all" accept="application/x-zip-compressed"><br>
+			<hr class="horz_divider">
+			<button id="load_cancel" class="input_button" {{action "cancelLoad"}}>Cancel</button>
+			<button id="load_zip" class="input_button" {{action "loadZip"}}>Ok</button>
+		</div>
+	</script>
+	<!-- Adding a dialog for subform-->
+	<script type="text/x-handlebars" data-template-name="_subformDialog">
+		<div id="subform_dialog" title="SubForm">		
+			<p>Do you want to make a subform?</p>	
+			<hr class="horz_divider">
+			<button id="yes_sub" class="subOk_button" {{action "makeSubform"}}>Yes</button>
+			<button class="subCancel_button" {{action "cancelSubform"}}>No</button>
+			
+		</div>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="_subNameDialog">
+		<div id="subname_dialog" title="SubForm Name">		
+			<label for="name">Form_name</label>
+			<input type="text" id="sub_form_name" class="ui-widget-content ui-corner-all long_text_input">
+			<button id="subname_cancel" class="input_button" {{action "saveSubFormName"}}> Save Name</button>	
+			
+				
+		</div>
+	</script>
+		<!-- Adding a dialog for subform-->
+	
+	<script type="text/x-handlebars" data-template-name="_saveDialog">
+		<div id="save_dialog" title="Save Scan Form">		
+			<label for="name">Filename</label>
+			<input type="text" id="saved_scan_name" class="ui-widget-content ui-corner-all long_text_input">	
+			<a id="scan_json_link" download=""></a>			
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_newDocumentDialog">
+		<div id="new_doc_dialog" title="Create New Document">		
+			<label for="name">Page Size</label>
+			<select id="doc_size"> 
+				<option value="letter_portrait">Letter (Portrait)</option>
+				<option value="letter_landscape">Letter (Landscape)</option>
+				<option value="a4_portrait">A4 (Portrait)</option>			
+				<option value="a4_landscape">A4 (Landscape)</option>
+				<option value="legal_size">Legal</option>		
+				<option value="index_size">Index</option>						
+			</select><br>		
+			<hr class="horz_divider">
+			<button class="input_button" {{action "closeNewDocDialog"}}>Cancel</button>
+			<button class="input_button" {{action "createNewDoc"}}>Ok</button>
+		</div>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="_pageStyleDialog">
+		<div id="page_style_dialog" title="Set Page Style">		
+			<label for="name">Page Size</label>
+			<select id="page_size"> 
+				<option value="letter_portrait">Letter (Portrait)</option>
+				<option value="letter_landscape">Letter (Landscape)</option>
+				<option value="a4_portrait">A4 (Portrait)</option>			
+				<option value="a4_landscape">A4 (Landscape)</option>
+				<option value="legal_size">Legal</option>		
+				<option value="index_size">Index</option>						
+			</select><br>		
+			<hr class="horz_divider">
+			<button class="input_button" {{action "cancelPageStyleDialog"}}>Cancel</button>
+			<button class="input_button" {{action "setPageStyle"}}>Ok</button>
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_removePageDialog">
+		<div id="remove_page_dialog" title="Remove Page">		
+			<p>Are you sure you want to remove this page?</p>	
+			<hr class="horz_divider">
+			<button class="input_button" {{action "cancelPageRemove"}}>Cancel</button>
+			<button class="input_button" {{action "removePage"}}>Ok</button>
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_saveCheckDialog">
+		<div id="save_check_dialog" title="ODK Scan">		
+			<label for="name">Do you want to save your changes?</label>
+			<hr class="horz_divider">
+			<button class="input_button" {{action "saveCheckDialogCancel"}}>Cancel</button>
+			<button class="input_button" {{action "saveCheckDialogNoSave"}}>Don't Save</button>
+			<button class="input_button" {{action "saveCheckDialogSave"}}>Save</button>
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_imageTabRemoveDialog">
+		<div id="itab_remove_dialog" title="Remove Image Tab">		
+			<input id="remove_itab_cb" type="checkbox" defaultChecked="false"> Remove all images associated with this image tab?
+			<hr class="horz_divider">
+			<button class="input_button" {{action "cancelImageTabRemove"}}>Cancel</button>
+			<button class="input_button" {{action "removeImageTab"}}>Ok</button>
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_exportInProgressDialog">
+		<div id="export_progress_dialog" title="ODK Scan">	
+			<p>Exporting Scan document...</p>
+		</div>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="_pageStyleWarningDialog">
+		<div id="page_style_warning_dialog" title="ODK Scan">	
+			<p>Warning, changing the page style will delete all fields.</p>
+		</div>
+	</script>
+  </body>
+</html>

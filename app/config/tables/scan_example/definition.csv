@@ -23,6 +23,9 @@ qrcode,qrcode,string,[]
 qrcode_image0,qrcode_image0,mimeUri,"[""qrcode_image0_contentType"",""qrcode_image0_uriFragment""]"
 qrcode_image0_contentType,contentType,mimeType,[]
 qrcode_image0_uriFragment,uriFragment,rowpath,[]
+raw,raw,mimeUri,"[""raw_contentType"",""raw_uriFragment""]"
+raw_contentType,contentType,mimeType,[]
+raw_uriFragment,uriFragment,rowpath,[]
 roomNum,roomNum,integer,[]
 roomNum_image0,roomNum_image0,mimeUri,"[""roomNum_image0_contentType"",""roomNum_image0_uriFragment""]"
 roomNum_image0_contentType,contentType,mimeType,[]
