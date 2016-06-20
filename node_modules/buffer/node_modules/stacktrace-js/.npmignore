@@ -1,8 +1,0 @@
-target/
-test/
-gradle/
-gradlew.*
-jshint.json
-stacktrace-bookmarklet.js
-build.gradle
-
