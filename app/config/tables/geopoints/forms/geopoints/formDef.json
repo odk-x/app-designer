@@ -30,13 +30,21 @@
         "_row_num": 4
       },
       {
+        "clause": "if",
+        "condition": "selected(data('transportation_mode)', 'Other'))",
+        "_row_num": 5
+      },
+      {
         "type": "text",
         "name": "transportation_mode_other",
         "display": {
           "text": "Specify other mode of transportation."
         },
-        "relevant": "selected(data('transportation_mode)', 'Other')",
-        "_row_num": 5
+        "_row_num": 6
+      },
+      {
+        "clause": "end if",
+        "_row_num": 7
       },
       {
         "type": "text",
@@ -44,7 +52,7 @@
         "display": {
           "text": "Description of waypoint:"
         },
-        "_row_num": 6
+        "_row_num": 8
       },
       {
         "type": "geopoint",
@@ -52,7 +60,7 @@
         "display": {
           "text": "Record your location:"
         },
-        "_row_num": 7
+        "_row_num": 9
       }
     ],
     "properties": [
@@ -335,7 +343,7 @@
       "transportation_mode_other": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -345,7 +353,7 @@
       "description": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -355,7 +363,7 @@
       "coordinates": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -441,12 +449,11 @@
             "display": {
               "text": "Specify other mode of transportation."
             },
-            "relevant": "selected(data('transportation_mode)', 'Other')",
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen5",
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 3
           },
           {
@@ -455,11 +462,11 @@
             "display": {
               "text": "Description of waypoint:"
             },
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 4
           },
           {
@@ -468,19 +475,19 @@
             "display": {
               "text": "Record your location:"
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 5
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 8,
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_row_num": 10,
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 6
           }
         ],
@@ -510,54 +517,80 @@
             "operationIdx": 2
           },
           {
+            "clause": "if",
+            "condition": "selected(data('transportation_mode)', 'Other'))",
             "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 4,
+            "_token_type": "goto_label",
+            "_branch_label": "_then5",
             "operationIdx": 3
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else7",
+            "_row_num": 7,
+            "operationIdx": 4
           },
           {
             "_row_num": 6,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 8,
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif7",
+            "_row_num": 7,
             "operationIdx": 6
           },
           {
             "_row_num": 8,
             "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 10,
+            "operationIdx": 9
+          },
+          {
+            "_row_num": 10,
+            "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 7
+            "operationIdx": 10
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 8,
-            "operationIdx": 8
+            "_row_num": 10,
+            "operationIdx": 11
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen3": 1,
           "_screen4": 2,
-          "_screen5": 3,
-          "_screen6": 4,
-          "_screen7": 5,
-          "_contents": 7,
-          "_screen8": 7
+          "_then5": 5,
+          "_screen6": 5,
+          "_else7": 7,
+          "_endif7": 7,
+          "_screen8": 7,
+          "_screen9": 8,
+          "_contents": 10,
+          "_screen10": 10
         }
       },
       "initial": {
@@ -780,7 +813,7 @@
       "transportation_mode_other": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -793,7 +826,7 @@
       "description": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -806,7 +839,7 @@
       "coordinates": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
