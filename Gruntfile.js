@@ -709,7 +709,11 @@ module.exports = function (grunt) {
 				'config/assets/csv/follow.updated.csv',
                 'config/tables/follow/**',
                 'config/tables/follow_arrival/**',
+                'config/tables/follow_map_position/**',
+                'config/tables/follow_map_time/**',
                 'config/tables/food_bout/**',
+                'config/tables/groom_bout/**',
+                'config/tables/mating_event/**',
                 'config/tables/other_species/**',
 
 				// geotagger example
