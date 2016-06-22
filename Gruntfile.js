@@ -630,6 +630,161 @@ module.exports = function (grunt) {
             grunt.task.run('exec:adbpush:' + src + ':' + dest);
         });
 
+
+    grunt.registerTask(
+        'adbpush-tables-tablesdemo',
+        'Push everything for tables opendatakit-simpledemo to the device',
+        function() {
+            // In the alpha demo we want Tables and Survey. For this demo,
+			// it had needed a push of the system files, but we won't do that
+			// here. We only want a subset of the app/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'. 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '.nomedia',
+                '**',
+				'!system/**',
+				'!data/**',
+				'!output/**',
+				'!config/assets/**',
+                '!config/tables/**',
+				'config/assets/libs/**',
+				'config/assets/ratchet/**',
+				'config/assets/fonts/**',
+				'config/assets/css/bootstrap.css',
+				'config/assets/js/bootstrap.js',
+				'config/assets/js/ratchet.js',
+				
+				// demo chooser index page...
+				'config/assets/index.html',
+				'config/assets/js/demoChooser.js',
+				'config/assets/css/demo-chooser.css',
+				'config/assets/img/teaBackground.jpg',
+				'config/assets/img/hopePic.JPG',
+				'config/assets/img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg',
+				'config/assets/img/spaceNeedle_CCLicense_goCardUSA.jpg',
+				'config/assets/img/chimp.png',
+				'config/assets/tables.init',
+				
+				// hope study example
+				'config/assets/css/hope-homescreen.css',
+				'config/assets/hope.html',
+				// referenced within table html files
+				'config/assets/css/clients_list.css',
+				// MISSING: 'config/assets/clients_not_found_list.html',
+				'config/assets/img/little_arrow.png',
+				'config/assets/css/geopoints_list.css',
+				'config/assets/css/clients_detail.css',
+				
+				'config/assets/csv/femaleClients.allfields.csv',
+                'config/tables/femaleClients/**',
+				'config/assets/csv/maleClients.allfields.csv',
+                'config/tables/maleClients/**',
+				'config/assets/csv/geopoints.allfields.csv',
+                'config/tables/geopoints/**',
+
+				// jgi example
+				// config/assets/ratchet/**
+				// config/assets/js/bootstrap.js
+				// config/assets/js/ratchet.js
+				'config/assets/jgiIndex.html',
+				'config/assets/js/jgiHomeScreen.js',
+				'config/assets/js/jgiFollowScreen.js',
+				'config/assets/css/gatesHomeScreen.css',
+				'config/assets/newFollow.html',
+				'config/assets/css/jgi-follow.css',
+				'config/assets/followScreen.html',
+				'config/assets/img/chimp.png',
+				'config/assets/img/little_arrow.png',
+				'config/assets/js/jgiNewFollow.js',
+				'config/assets/js/util.js',
+
+				'config/assets/csv/follow.updated.csv',
+                'config/tables/follow/**',
+                'config/tables/follow_arrival/**',
+                'config/tables/food_bout/**',
+                'config/tables/other_species/**',
+
+				// geotagger example
+				'config/assets/csv/geotagger.updated.csv',
+				'config/assets/csv/geotagger/**',
+                'config/tables/geotagger/**',
+
+				// plot example
+				// config/assets/ratchet/**
+				'config/assets/css/homeScreen.css',
+				'config/assets/css/plot-homescreen.css',
+				'config/assets/css/plot-list.css',
+				'config/assets/css/plot-detail.css',
+				'config/assets/css/plot-graph.css',
+				'config/assets/css/visit-list.css',
+				'config/assets/css/visit-detail.css',
+				'config/assets/js/jquery-2.1.1.min.js',
+				'config/assets/css/jquery.gridster.min.css',
+				'config/assets/js/jquery.gridster.js',
+				'config/assets/plotter.html',
+				'config/assets/js/plotter-home.js',
+				'config/assets/img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg',
+				'config/assets/csv/plot.example.csv',
+                'config/tables/plot/**',
+				'config/assets/csv/visit.example.csv',
+                'config/tables/visit/**',
+
+				// teatime example
+				// config/assets/ratchet/**
+				'config/assets/css/homeScreen.css',
+				'config/assets/css/detail.css',
+				'config/assets/css/list.css',
+				'config/assets/teatime.html',
+				'config/assets/js/teatime.js',
+				'config/assets/img/teaBackground.jpg',
+				'config/assets/csv/Tea_houses.updated.csv',
+                'config/tables/Tea_houses/**',
+				'config/assets/csv/Tea_inventory.updated.csv',
+                'config/tables/Tea_inventory/**',
+				'config/assets/csv/Tea_types.updated.csv',
+                'config/tables/Tea_types/**',
+				'config/assets/csv/Tea_houses_editable.updated.csv',
+                'config/tables/Tea_houses_editable/**'
+				);
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+			
+			// Now move the app.properties.tablesdemo to app.properties on device
+            var simpleDemoSubdir = '/config/assets/';
+            var srcSimpleDemoIndex = 'app.properties.tablesdemo';
+            var destSimpleDemoIndex = 'app.properties';
+            var src = tablesConfig.appDir + simpleDemoSubdir + srcSimpleDemoIndex;
+            var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    simpleDemoSubdir +
+                    destSimpleDemoIndex;
+            grunt.log.writeln('adb push ' + src + ' ' + dest);
+            grunt.task.run('exec:adbpush:' + src + ':' + dest);
+
+        });
+
     grunt.registerTask(
         'adbpush-survey',
         'Push everything for survey to the device',
