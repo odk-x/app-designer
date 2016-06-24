@@ -633,7 +633,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask(
         'adbpush-tables-tablesdemo',
-        'Push everything for tables opendatakit-simpledemo to the device',
+        'Push everything for tables opendatakit-tablesdemo to the device',
         function() {
             // In the alpha demo we want Tables and Survey. For this demo,
 			// it had needed a push of the system files, but we won't do that
