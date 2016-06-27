@@ -117,12 +117,21 @@
         "_row_num": 14
       },
       {
+        "clause": "if",
+        "condition": "selected(data('influences'),'a6')",
+        "_row_num": 15
+      },
+      {
         "type": "text",
         "name": "influences_other",
         "display": {
           "text": "Specify other influence."
         },
-        "_row_num": 15
+        "_row_num": 16
+      },
+      {
+        "clause": "end if",
+        "_row_num": 17
       },
       {
         "type": "note",
@@ -130,7 +139,7 @@
         "display": {
           "text": "Script 3: Now I would like to talk about your HIV test results."
         },
-        "_row_num": 16
+        "_row_num": 18
       },
       {
         "type": "select_one",
@@ -139,7 +148,7 @@
         "display": {
           "text": "What was the result of your most recent HIV test?"
         },
-        "_row_num": 17
+        "_row_num": 19
       },
       {
         "type": "select_one",
@@ -148,7 +157,7 @@
         "display": {
           "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
         },
-        "_row_num": 18
+        "_row_num": 20
       },
       {
         "type": "select_one",
@@ -157,7 +166,7 @@
         "display": {
           "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
         },
-        "_row_num": 19
+        "_row_num": 21
       },
       {
         "type": "select_one",
@@ -166,7 +175,7 @@
         "display": {
           "text": "Are you currently taking TMP-SMX?"
         },
-        "_row_num": 20
+        "_row_num": 22
       },
       {
         "type": "select_one",
@@ -175,7 +184,7 @@
         "display": {
           "text": "Have you been prescribed ART to manage your HIV infection?"
         },
-        "_row_num": 21
+        "_row_num": 23
       },
       {
         "type": "select_one",
@@ -184,7 +193,7 @@
         "display": {
           "text": "Are you currently taking the treatment you were prescribed?"
         },
-        "_row_num": 22
+        "_row_num": 24
       },
       {
         "type": "note",
@@ -192,7 +201,7 @@
         "display": {
           "text": "Script 4: Thank you for your time in answering these questions."
         },
-        "_row_num": 23
+        "_row_num": 25
       },
       {
         "type": "note",
@@ -201,7 +210,7 @@
           "text": "Now we will do the post-test counseling for the HIV test.",
           "hint": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
         },
-        "_row_num": 24
+        "_row_num": 26
       },
       {
         "type": "select_one",
@@ -210,7 +219,7 @@
         "display": {
           "text": "HIV – 1st Test Result (Rapid Test—Determine)"
         },
-        "_row_num": 25
+        "_row_num": 27
       },
       {
         "type": "select_one",
@@ -219,7 +228,13 @@
         "display": {
           "text": "Please advise client a second test is needed."
         },
-        "_row_num": 26
+        "required": true,
+        "_row_num": 28
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('advise_second'),'a1')",
+        "_row_num": 29
       },
       {
         "type": "select_one",
@@ -228,7 +243,17 @@
         "display": {
           "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
         },
-        "_row_num": 27
+        "_row_num": 30
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('unigold'), data('determine'))",
+        "_row_num": 31
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('unigold'),'a1')",
+        "_row_num": 32
       },
       {
         "type": "note",
@@ -236,7 +261,16 @@
         "display": {
           "text": "Client's HIV status is: HIV positive"
         },
-        "_row_num": 28
+        "_row_num": 33
+      },
+      {
+        "clause": "end if",
+        "_row_num": 34
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('unigold'),'a0')",
+        "_row_num": 35
       },
       {
         "type": "note",
@@ -244,7 +278,15 @@
         "display": {
           "text": "Client's HIV status is: HIV negative"
         },
-        "_row_num": 29
+        "_row_num": 36
+      },
+      {
+        "clause": "end if",
+        "_row_num": 37
+      },
+      {
+        "clause": "else",
+        "_row_num": 38
       },
       {
         "type": "note",
@@ -252,7 +294,7 @@
         "display": {
           "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
         },
-        "_row_num": 30
+        "_row_num": 39
       },
       {
         "type": "select_one",
@@ -262,7 +304,15 @@
           "text": "Was blood drawn from client for ELISA?",
           "hint": "If instructed to perform ELISA"
         },
-        "_row_num": 31
+        "_row_num": 40
+      },
+      {
+        "clause": "end if",
+        "_row_num": 41
+      },
+      {
+        "clause": "end if",
+        "_row_num": 42
       },
       {
         "type": "select_one",
@@ -271,7 +321,7 @@
         "display": {
           "text": "Is the couple discordant?"
         },
-        "_row_num": 32
+        "_row_num": 43
       },
       {
         "type": "select_one",
@@ -280,7 +330,7 @@
         "display": {
           "text": "Was a return visit scheduled for discordant re-testing?"
         },
-        "_row_num": 33
+        "_row_num": 44
       },
       {
         "type": "text",
@@ -288,7 +338,7 @@
         "display": {
           "text": "Interviewer comments:"
         },
-        "_row_num": 34
+        "_row_num": 45
       },
       {
         "type": "note",
@@ -296,7 +346,7 @@
         "display": {
           "text": "The screening is now complete, please go to the next page to finalize your responses."
         },
-        "_row_num": 35
+        "_row_num": 46
       }
     ],
     "choices": [
@@ -8128,7 +8178,7 @@
       "influences_other": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -8138,7 +8188,7 @@
       "test_result": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -8149,7 +8199,7 @@
       "ccc": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -8160,7 +8210,7 @@
       "prescr_tmp": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -8171,7 +8221,7 @@
       "curr_tmp": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -8182,7 +8232,7 @@
       "prescr_art": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -8193,7 +8243,7 @@
       "curr_taking_art": {
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -8204,7 +8254,7 @@
       "determine": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -8215,7 +8265,7 @@
       "advise_second": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 28,
             "section_name": "survey"
           }
         ],
@@ -8226,7 +8276,7 @@
       "unigold": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -8237,7 +8287,7 @@
       "elisa_blood_drawn": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -8248,7 +8298,7 @@
       "discordant": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 43,
             "section_name": "survey"
           }
         ],
@@ -8259,7 +8309,7 @@
       "return_disc_retest": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -8270,7 +8320,7 @@
       "comments": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 45,
             "section_name": "survey"
           }
         ],
@@ -8474,11 +8524,11 @@
             "display": {
               "text": "Specify other influence."
             },
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen15",
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 13
           },
           {
@@ -8487,11 +8537,11 @@
             "display": {
               "text": "Script 3: Now I would like to talk about your HIV test results."
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen16",
+            "_branch_label_enclosing_screen": "survey/_screen18",
             "promptIdx": 14
           },
           {
@@ -8501,11 +8551,11 @@
             "display": {
               "text": "What was the result of your most recent HIV test?"
             },
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen17",
+            "_branch_label_enclosing_screen": "survey/_screen19",
             "promptIdx": 15
           },
           {
@@ -8515,11 +8565,11 @@
             "display": {
               "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen18",
+            "_branch_label_enclosing_screen": "survey/_screen20",
             "promptIdx": 16
           },
           {
@@ -8529,11 +8579,11 @@
             "display": {
               "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen19",
+            "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 17
           },
           {
@@ -8543,11 +8593,11 @@
             "display": {
               "text": "Are you currently taking TMP-SMX?"
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen20",
+            "_branch_label_enclosing_screen": "survey/_screen22",
             "promptIdx": 18
           },
           {
@@ -8557,11 +8607,11 @@
             "display": {
               "text": "Have you been prescribed ART to manage your HIV infection?"
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen21",
+            "_branch_label_enclosing_screen": "survey/_screen23",
             "promptIdx": 19
           },
           {
@@ -8571,11 +8621,11 @@
             "display": {
               "text": "Are you currently taking the treatment you were prescribed?"
             },
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen22",
+            "_branch_label_enclosing_screen": "survey/_screen24",
             "promptIdx": 20
           },
           {
@@ -8584,11 +8634,11 @@
             "display": {
               "text": "Script 4: Thank you for your time in answering these questions."
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen25",
             "promptIdx": 21
           },
           {
@@ -8598,11 +8648,11 @@
               "text": "Now we will do the post-test counseling for the HIV test.",
               "hint": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen24",
+            "_branch_label_enclosing_screen": "survey/_screen26",
             "promptIdx": 22
           },
           {
@@ -8612,11 +8662,11 @@
             "display": {
               "text": "HIV – 1st Test Result (Rapid Test—Determine)"
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen25",
+            "_branch_label_enclosing_screen": "survey/_screen27",
             "promptIdx": 23
           },
           {
@@ -8626,11 +8676,12 @@
             "display": {
               "text": "Please advise client a second test is needed."
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "required": true,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
+            "_branch_label_enclosing_screen": "survey/_screen28",
             "promptIdx": 24
           },
           {
@@ -8640,11 +8691,11 @@
             "display": {
               "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
             },
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen27",
+            "_branch_label_enclosing_screen": "survey/_screen30",
             "promptIdx": 25
           },
           {
@@ -8653,11 +8704,11 @@
             "display": {
               "text": "Client's HIV status is: HIV positive"
             },
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen28",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 26
           },
           {
@@ -8666,11 +8717,11 @@
             "display": {
               "text": "Client's HIV status is: HIV negative"
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen29",
+            "_branch_label_enclosing_screen": "survey/_screen36",
             "promptIdx": 27
           },
           {
@@ -8679,11 +8730,11 @@
             "display": {
               "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
             },
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen39",
             "promptIdx": 28
           },
           {
@@ -8694,11 +8745,11 @@
               "text": "Was blood drawn from client for ELISA?",
               "hint": "If instructed to perform ELISA"
             },
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen40",
             "promptIdx": 29
           },
           {
@@ -8708,11 +8759,11 @@
             "display": {
               "text": "Is the couple discordant?"
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen32",
+            "_branch_label_enclosing_screen": "survey/_screen43",
             "promptIdx": 30
           },
           {
@@ -8722,11 +8773,11 @@
             "display": {
               "text": "Was a return visit scheduled for discordant re-testing?"
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen33",
+            "_branch_label_enclosing_screen": "survey/_screen44",
             "promptIdx": 31
           },
           {
@@ -8735,11 +8786,11 @@
             "display": {
               "text": "Interviewer comments:"
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 45,
+            "__rowNum__": 44,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen34",
+            "_branch_label_enclosing_screen": "survey/_screen45",
             "promptIdx": 32
           },
           {
@@ -8748,25 +8799,26 @@
             "display": {
               "text": "The screening is now complete, please go to the next page to finalize your responses."
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 46,
+            "__rowNum__": 45,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen35",
+            "_branch_label_enclosing_screen": "survey/_screen46",
             "promptIdx": 33
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 36,
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_row_num": 47,
+            "_branch_label_enclosing_screen": "survey/_screen47",
             "promptIdx": 34
           }
         ],
         "validation_tag_map": {
           "finalize": [
-            3
+            3,
+            24
           ]
         },
         "operations": [
@@ -8849,151 +8901,266 @@
             "operationIdx": 12
           },
           {
+            "clause": "if",
+            "condition": "selected(data('influences'),'a6')",
             "_row_num": 15,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 14,
+            "_token_type": "goto_label",
+            "_branch_label": "_then15",
             "operationIdx": 13
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else17",
+            "_row_num": 17,
+            "operationIdx": 14
           },
           {
             "_row_num": 16,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 14
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 15
           },
           {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif17",
             "_row_num": 17,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 15
+            "operationIdx": 16
           },
           {
             "_row_num": 18,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 16
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 17
           },
           {
             "_row_num": 19,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 17
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
           },
           {
             "_row_num": 20,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 18
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 19
           },
           {
             "_row_num": 21,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 19
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 20
           },
           {
             "_row_num": 22,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 20
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 21
           },
           {
             "_row_num": 23,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 21
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 22
           },
           {
             "_row_num": 24,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 22
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 23
           },
           {
             "_row_num": 25,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 23
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 24
           },
           {
             "_row_num": 26,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 24
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 25
           },
           {
             "_row_num": 27,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 25
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 26
           },
           {
             "_row_num": 28,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 26
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 27
           },
           {
+            "clause": "if",
+            "condition": "selected(data('advise_second'),'a1')",
             "_row_num": 29,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 27
+            "__rowNum__": 28,
+            "_token_type": "goto_label",
+            "_branch_label": "_then29",
+            "operationIdx": 28
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else42",
+            "_row_num": 42,
+            "operationIdx": 29
           },
           {
             "_row_num": 30,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 28
-          },
-          {
-            "_row_num": 31,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 29
-          },
-          {
-            "_row_num": 32,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 30
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('unigold'), data('determine'))",
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "goto_label",
+            "_branch_label": "_then31",
+            "operationIdx": 31
+          },
+          {
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else38",
+            "_row_num": 38,
+            "operationIdx": 32
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('unigold'),'a1')",
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "goto_label",
+            "_branch_label": "_then32",
+            "operationIdx": 33
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else34",
+            "_row_num": 34,
+            "operationIdx": 34
           },
           {
             "_row_num": 33,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 31
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 35
           },
           {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif34",
             "_row_num": 34,
+            "operationIdx": 36
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('unigold'),'a0')",
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "goto_label",
+            "_branch_label": "_then35",
+            "operationIdx": 37
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else37",
+            "_row_num": 37,
+            "operationIdx": 38
+          },
+          {
+            "_row_num": 36,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 39
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif37",
+            "_row_num": 37,
+            "operationIdx": 40
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif41",
+            "_row_num": 41,
+            "operationIdx": 41
+          },
+          {
+            "_row_num": 39,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 42
+          },
+          {
+            "_row_num": 40,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 43
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif42",
+            "_row_num": 42,
+            "operationIdx": 44
+          },
+          {
+            "_row_num": 43,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 45
+          },
+          {
+            "_row_num": 44,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 46
+          },
+          {
+            "_row_num": 45,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(32);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 32
+            "operationIdx": 47
           },
           {
-            "_row_num": 35,
+            "_row_num": 46,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(33);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 33
+            "operationIdx": 48
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 36,
-            "operationIdx": 34
+            "_row_num": 47,
+            "operationIdx": 49
           },
           {
-            "_row_num": 36,
+            "_row_num": 47,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(34);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 35
+            "operationIdx": 50
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 36,
-            "operationIdx": 36
+            "_row_num": 47,
+            "operationIdx": 51
           }
         ],
         "branch_label_map": {
@@ -9010,29 +9177,44 @@
           "_screen12": 10,
           "_screen13": 11,
           "_screen14": 12,
-          "_screen15": 13,
-          "_screen16": 14,
-          "_screen17": 15,
-          "_screen18": 16,
-          "_screen19": 17,
-          "_screen20": 18,
-          "_screen21": 19,
-          "_screen22": 20,
-          "_screen23": 21,
-          "_screen24": 22,
-          "_screen25": 23,
-          "_screen26": 24,
-          "_screen27": 25,
-          "_screen28": 26,
-          "_screen29": 27,
-          "_screen30": 28,
-          "_screen31": 29,
-          "_screen32": 30,
-          "_screen33": 31,
-          "_screen34": 32,
-          "_screen35": 33,
-          "_contents": 35,
-          "_screen36": 35
+          "_then15": 15,
+          "_screen16": 15,
+          "_else17": 17,
+          "_endif17": 17,
+          "_screen18": 17,
+          "_screen19": 18,
+          "_screen20": 19,
+          "_screen21": 20,
+          "_screen22": 21,
+          "_screen23": 22,
+          "_screen24": 23,
+          "_screen25": 24,
+          "_screen26": 25,
+          "_screen27": 26,
+          "_screen28": 27,
+          "_then29": 30,
+          "_screen30": 30,
+          "_then31": 33,
+          "_then32": 35,
+          "_screen33": 35,
+          "_else34": 37,
+          "_endif34": 37,
+          "_then35": 39,
+          "_screen36": 39,
+          "_else37": 41,
+          "_endif37": 41,
+          "_else38": 42,
+          "_screen39": 42,
+          "_screen40": 43,
+          "_endif41": 44,
+          "_else42": 45,
+          "_endif42": 45,
+          "_screen43": 45,
+          "_screen44": 46,
+          "_screen45": 47,
+          "_screen46": 48,
+          "_contents": 50,
+          "_screen47": 50
         }
       },
       "initial": {
@@ -9366,7 +9548,7 @@
       "influences_other": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -9379,7 +9561,7 @@
       "test_result": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -9393,7 +9575,7 @@
       "ccc": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -9407,7 +9589,7 @@
       "prescr_tmp": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -9421,7 +9603,7 @@
       "curr_tmp": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -9435,7 +9617,7 @@
       "prescr_art": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -9449,7 +9631,7 @@
       "curr_taking_art": {
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -9463,7 +9645,7 @@
       "determine": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -9477,7 +9659,7 @@
       "advise_second": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 28,
             "section_name": "survey"
           }
         ],
@@ -9491,7 +9673,7 @@
       "unigold": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -9505,7 +9687,7 @@
       "elisa_blood_drawn": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -9519,7 +9701,7 @@
       "discordant": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 43,
             "section_name": "survey"
           }
         ],
@@ -9533,7 +9715,7 @@
       "return_disc_retest": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -9547,7 +9729,7 @@
       "comments": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 45,
             "section_name": "survey"
           }
         ],
