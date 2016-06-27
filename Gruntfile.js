@@ -633,7 +633,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask(
         'adbpush-tables-tablesdemo',
-        'Push everything for tables opendatakit-simpledemo to the device',
+        'Push everything for tables opendatakit-tablesdemo to the device',
         function() {
             // In the alpha demo we want Tables and Survey. For this demo,
 			// it had needed a push of the system files, but we won't do that
@@ -1043,6 +1043,44 @@ module.exports = function (grunt) {
                     surveyConfig.deviceMount +
                     '/' +
                     surveyConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        });
+
+
+    grunt.registerTask(
+        'adbpush-default-opendatakit-2',
+        'Push everything for survey opendatakit-2 site to the device',
+        function() {
+            // This only pushes the definitions of the selected forms.
+			// everything else is taken from the survey APK prior to sync.
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                '**',
+                '!system/**',
+				'!data/**',
+                '!output/**',
+                '!config/assets/**',
+                '!config/tables/**',
+                'config/tables/exampleForm/**',
+                'config/tables/household/**',
+                'config/tables/household_member/**',
+                'config/tables/selects/**',
+                'config/tables/gridScreen/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
                     '/' +
                     fileName;
                 grunt.log.writeln('adb push ' + src + ' ' + dest);
