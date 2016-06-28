@@ -63,111 +63,6 @@ function render() {
     }
 }
 
-function displayYield() {
-    var paramWidth = 500;
-    var paramHeight = 500;
-
-    var margin = {top: 20, right: 20, bottom: 100, left: 60},
-        width = paramWidth - margin.left - margin.right,
-        height = paramHeight - margin.top - margin.bottom,
-        radius = Math.min(width, height) / 2;
-
-    var plot_id = null;
-    for (var i = 0; i < plotData.getCount(); i++) {
-        var name = plotData.getData(i, 'plot_name');
-        if (name === 'Palermo') {
-            plot_id = plotData.getRowId(i);
-            break;
-        }
-    }
-        
-    if (plot_id === null || plot_id === undefined) {
-        console.log('plot_id is null - cannot continue');
-        return;
-    }
-
-    // Parse the date / time
-    var	parseDate = d3.time.format("%Y-%m-%d").parse;
-
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-
-    var y = d3.scale.linear().range([height, 0]);
-
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom")
-        .tickFormat(d3.time.format("%Y-%m-%d"));
-
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .ticks(10);
-
-    var data = [];
-    for (var i = 0; i < visitData.getCount(); i++) {
-        var visit_plot_id = visitData.getData(i, 'plot_id');
-        if (visit_plot_id === plot_id) {
-            var visit = {};
-            var fullDateString = visitData.getData(i,'date');
-            var dateTimeSplit = fullDateString.split('T');
-            if (dateTimeSplit[0] === null || dateTimeSplit[0] === undefined) {
-                // Use default string
-                visit.date = "0001-01-01";
-            } else {
-                visit.date = dateTimeSplit[0];
-            }
-            //visit.x =  visitData.getData(i,'date');
-            visit.value = visitData.getData(i, 'plant_height');
-            data.push(visit);
-        }
-    }
-
-    var data = _.sortBy(data, 'date');
-    data.forEach(function(d) {
-        d.date = parseDate(d.date);
-        d.value = +d.value;
-    });
-	
-    x.domain(data.map(function(d) { return d.date; }));
-    y.domain([0, d3.max(data, function(d) { return d.value; })]);
-
-    var svg = d3.select("#graph-div-yield").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", 
-              "translate(" + margin.left + "," + margin.top + ")");
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis)
-        .selectAll("text")
-        .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", "-.55em")
-        .attr("transform", "rotate(-90)" );
-
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", -50)
-        .attr("x", -100)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Height");
-
-    svg.selectAll("bar")
-        .data(data)
-        .enter().append("rect")
-        .style("fill", "steelblue")
-        .attr("x", function(d) { return x(d.date); })
-        .attr("width", x.rangeBand())
-        .attr("y", function(d) { return y(d.value); })
-        .attr("height", function(d) { return height - y(d.value); })
-}
-
 function linegraphColAgainstDate(plotName, colName, divName, yAxisText) {
     var paramWidth = 500;
     var paramHeight = 500;
@@ -277,7 +172,7 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
     var paramWidth = 500;
     var paramHeight = 500;
 
-    var margin = {top: 20, right: 20, bottom: 100, left: 60},
+    var margin = {top: 20, right: 20, bottom: 100, left: 78},
         width = paramWidth - margin.left - margin.right,
         height = paramHeight - margin.top - margin.bottom;
 
@@ -353,7 +248,7 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
         .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
-        .attr("dy", "-.55em")
+        .attr("dy", "-.6em")
         .attr("transform", "rotate(-90)");
 
     svg.append("g")
@@ -363,7 +258,7 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
         .attr("transform", "rotate(-90)")
         .attr("y", -50)
         .attr("x", -100)
-        .attr("dy", ".71em")
+        .attr("dy", "-.6em")
         .style("text-anchor", "end")
         .text(yAxisText);
 
