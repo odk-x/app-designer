@@ -24,7 +24,7 @@
         "display": {
           "text": "What is the height of the plant in cm?"
         },
-        "constraint": "data('plant_height')  >  0 && data('plant_height') < 1100",
+        "constraint": "data('plant_height')  >=  0 && data('plant_height') < 1100",
         "constraint_message": "The height of a maize plant must be a positive value less than 1100 cm. Please enter a valid number.",
         "_row_num": 4
       },
@@ -197,7 +197,7 @@
         "display": {
           "text": "What is the current crop yield in kg per hectare?"
         },
-        "constraint": "data('crop_yield') > 0 && data('crop_yield')  <  8000",
+        "constraint": "data('crop_yield') >= 0 && data('crop_yield')  <  8000",
         "constraint_message": "The crop yield must be a positive value less than 8000 kg. Please enter a valid number.",
         "_row_num": 34
       },
@@ -688,7 +688,7 @@
             "display": {
               "text": "What is the height of the plant in cm?"
             },
-            "constraint": "data('plant_height')  >  0 && data('plant_height') < 1100",
+            "constraint": "data('plant_height')  >=  0 && data('plant_height') < 1100",
             "constraint_message": "The height of a maize plant must be a positive value less than 1100 cm. Please enter a valid number.",
             "_row_num": 4,
             "__rowNum__": 3,
@@ -842,7 +842,7 @@
             "display": {
               "text": "What is the current crop yield in kg per hectare?"
             },
-            "constraint": "data('crop_yield') > 0 && data('crop_yield')  <  8000",
+            "constraint": "data('crop_yield') >= 0 && data('crop_yield')  <  8000",
             "constraint_message": "The crop yield must be a positive value less than 8000 kg. Please enter a valid number.",
             "_row_num": 34,
             "__rowNum__": 33,
