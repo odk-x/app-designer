@@ -580,6 +580,13 @@ module.exports = function (grunt) {
 				'!config/assets/**',
                 '!config/tables/**',
 				'config/assets/framework/**',
+				'config/assets/css/odk-survey.css',
+				'config/assets/img/advance.png',
+				'config/assets/img/backup.png',
+				'config/assets/img/form_logo.png',
+				'config/assets/img/little_arrow.png',
+				'config/assets/img/play.png',
+				'config/assets/libs/**',
 				'config/assets/ratchet/**',
 				'config/assets/css/demo-chooser.css',
 				'config/assets/img/spaceNeedle_CCLicense_goCardUSA.jpg',
@@ -629,6 +636,20 @@ module.exports = function (grunt) {
                     destSimpleDemoIndex;
             grunt.log.writeln('adb push ' + src + ' ' + dest);
             grunt.task.run('exec:adbpush:' + src + ':' + dest);
+			
+			// Now move the app.properties.simpledemo to app.properties on device
+            var simpleDemoSubdir = '/config/assets/';
+            var srcSimpleDemoIndex = 'app.properties.simpledemo';
+            var destSimpleDemoIndex = 'app.properties';
+            var src = tablesConfig.appDir + simpleDemoSubdir + srcSimpleDemoIndex;
+            var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    simpleDemoSubdir +
+                    destSimpleDemoIndex;
+            grunt.log.writeln('adb push ' + src + ' ' + dest);
+            grunt.task.run('exec:adbpush:' + src + ':' + dest);
         });
 
 
@@ -657,6 +678,12 @@ module.exports = function (grunt) {
 				'!config/assets/**',
                 '!config/tables/**',
 				'config/assets/framework/**',
+				'config/assets/css/odk-survey.css',
+				'config/assets/img/advance.png',
+				'config/assets/img/backup.png',
+				'config/assets/img/form_logo.png',
+				'config/assets/img/little_arrow.png',
+				'config/assets/img/play.png',
 				'config/assets/libs/**',
 				'config/assets/ratchet/**',
 				'config/assets/fonts/**',
