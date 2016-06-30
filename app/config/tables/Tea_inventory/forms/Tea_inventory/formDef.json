@@ -15,7 +15,7 @@
         "values_list": "Tea_type_list",
         "name": "Type_id",
         "display": {
-          "text": "Choose the tea type ID number."
+          "text": "Choose the tea type."
         },
         "required": true,
         "_row_num": 3
@@ -425,7 +425,7 @@
             "values_list": "Tea_type_list",
             "name": "Type_id",
             "display": {
-              "text": "Choose the tea type ID number."
+              "text": "Choose the tea type."
             },
             "required": true,
             "_row_num": 3,
