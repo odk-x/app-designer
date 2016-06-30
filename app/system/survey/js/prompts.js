@@ -496,13 +496,14 @@ promptTypes.instances = promptTypes.base.extend({
     type:"instances",
     hideInContents: true,
     valid: true,
+    _cachedEvent: null,
     savepoint_type_finalized_text: 'Finalized',
     savepoint_type_incomplete_text: 'Incomplete',
     savepoint_type_checkpoint_text: 'Checkpoint',
     templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
-        "click .deleteInstance": "deleteInstance",
+        "click .deleteInstance": "confirmDeleteInstance",
         "click .createInstance": "createInstance"
     },
     configureRenderContext: function(ctxt) {
@@ -588,12 +589,24 @@ promptTypes.instances = promptTypes.base.extend({
             }}));
         }
     },
-    deleteInstance: function(evt){
+    confirmDeleteInstance: function(evt) {
+        var that  = this;
+        that._cachedEvent = evt;
+        var instanceDisplayValueToDelete = $(evt.currentTarget).attr('display_value');
+        that._screen._screenManager.showConfirmationPopup({message: "Delete " + instanceDisplayValueToDelete + " ?",
+                                                           promptIndex: that.promptIdx});
+    },
+    handleConfirmation: function(){
         var that = this;
-        var instanceIdToDelete = $(evt.currentTarget).attr('id');
+
+        if (that._cachedEvent === null || that._cachedEvent == undefined) {
+            return;
+        }
+
+        var instanceIdToDelete = $(that._cachedEvent.currentTarget).attr('id');
 
         if ( instanceIdToDelete !== null && instanceIdToDelete !== undefined ) {
-            var ctxt = that.controller.newContext(evt, that.type + ".deleteInstance");
+            var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".deleteInstance");
             that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
                 ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
                 var model = opendatakit.getCurrentModel();
