@@ -87,22 +87,26 @@ function display() {
 
     // Now do the pests.
     var bugs = visitDetailResultSet.get('pests');
-	var bugArray = (bugs !== null && bugs !== undefined) ? bugs : [];
-	for ( var i = 0 ; i < bugArray.length ; ++i ) {
-		var bug = bugArray[i];
-        if (bug===BUG_EARWORM) {
-            $('#bugs-earworm').attr('checked', true);
+    //if(bugs.startsWith("\"")) {
+        bugs = bugs.substring(1, bugs.length - 1);
+    	var bugArray = (bugs !== null && bugs !== undefined) ? bugs.split(",") : [];
+    	for ( var i = 0 ; i < bugArray.length ; ++i ) {
+            var bug = bugArray[i];
+            bug = bug.substring(1, bug.length - 1);
+            if (bug==BUG_EARWORM) {
+                $('#bugs-earworm').attr('checked', true);
+            }
+            if (bug==BUG_STINK) {
+                $('#bugs-stink').attr('checked', true);
+            }
+            if (bug==BUG_BEETLE) {
+                $('#bugs-beetle').attr('checked', true);
+            }
+            if (bug==BUG_CUTWORM) {
+                $('#bugs-cutworm').attr('checked', true);
+            }
         }
-        if (bug===BUG_STINK) {
-            $('#bugs-stink').attr('checked', true);
-        }
-        if (bug===BUG_BEETLE) {
-            $('#bugs-beetle').attr('checked', true);
-        }
-        if (bug===BUG_CUTWORM) {
-            $('#bugs-cutworm').attr('checked', true);
-        }
-    }
+    //}
 
     $('#observations').text(visitDetailResultSet.get('observations'));
 }
