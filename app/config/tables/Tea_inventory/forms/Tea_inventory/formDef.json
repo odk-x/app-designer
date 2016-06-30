@@ -5,16 +5,17 @@
         "type": "string",
         "name": "Name",
         "display": {
-          "text": "Enter the Tea Type Name"
+          "text": "Enter the name of the tea."
         },
         "required": true,
         "_row_num": 2
       },
       {
-        "type": "string",
-        "name": "Origin",
+        "type": "select_one",
+        "values_list": "Tea_type_list",
+        "name": "Type_id",
         "display": {
-          "text": "Enter the Origin"
+          "text": "Choose the tea type ID number."
         },
         "required": true,
         "_row_num": 3
@@ -22,9 +23,9 @@
       {
         "type": "select_one",
         "values_list": "yes_no",
-        "name": "Caffeinated",
+        "name": "Bags",
         "display": {
-          "text": "Is the Tea Caffeinated?"
+          "text": "Is {{data.Name}} served with bags?"
         },
         "required": true,
         "_row_num": 4
@@ -32,12 +33,136 @@
       {
         "type": "select_one",
         "values_list": "yes_no",
-        "name": "Fermented",
+        "name": "Cold",
         "display": {
-          "text": "Is the Tea Fermented?"
+          "text": "Is {{data.Name}} served cold?"
         },
         "required": true,
         "_row_num": 5
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "Hot",
+        "display": {
+          "text": "Is {{data.Name}} served hot?"
+        },
+        "required": true,
+        "_row_num": 6
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "Loose_Leaf",
+        "display": {
+          "text": "Is {{data.Name}} loose leaf?"
+        },
+        "required": true,
+        "_row_num": 7
+      },
+      {
+        "type": "decimal",
+        "name": "Price_8oz",
+        "display": {
+          "text": "What is the price of an 8 ounce {{data.Name}}?"
+        },
+        "required": true,
+        "_row_num": 8
+      },
+      {
+        "type": "decimal",
+        "name": "Price_12oz",
+        "display": {
+          "text": "What is the price of a 12 ounce {{data.Name}}?"
+        },
+        "required": true,
+        "_row_num": 9
+      },
+      {
+        "type": "decimal",
+        "name": "Price_16oz",
+        "display": {
+          "text": "What is the price of a 16 ounce {{data.Name}}?"
+        },
+        "required": true,
+        "_row_num": 10
+      },
+      {
+        "type": "select_one",
+        "values_list": "Tea_house_list",
+        "name": "House_id",
+        "display": {
+          "text": "Select the Tea house where this tea is served"
+        },
+        "required": true,
+        "_row_num": 11
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "Tea_inventory",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "table_id",
+        "value": "Tea_inventory",
+        "_row_num": 3
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": "Tea Inventory"
+        },
+        "_row_num": 4
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "Tea_type_list",
+        "query_type": "linked_table",
+        "linked_form_id": "Tea_types",
+        "linked_table_id": "Tea_types",
+        "selection": "_id >= ?",
+        "selectionArgs": "[ '0' ]",
+        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "_row_num": 2
+      },
+      {
+        "query_name": "Tea_house_list",
+        "query_type": "linked_table",
+        "linked_form_id": "Tea_houses",
+        "linked_table_id": "Tea_houses",
+        "selection": "_id >= ?",
+        "selectionArgs": "[ '0' ]",
+        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "_row_num": 3
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "string",
+        "value": "config/tables/Tea_inventory/html/Tea_inventory_detail.html",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "string",
+        "value": "config/tables/Tea_inventory/html/Tea_inventory_list.html",
+        "_row_num": 4
       }
     ],
     "choices": [
@@ -56,69 +181,6 @@
           "text": "No"
         },
         "_row_num": 3
-      }
-    ],
-    "settings": [
-      {
-        "setting_name": "form_id",
-        "value": "Tea_types",
-        "_row_num": 2
-      },
-      {
-        "setting_name": "survey",
-        "display": {
-          "title": "Tea Types"
-        },
-        "_row_num": 4
-      },
-      {
-        "setting_name": "table_id",
-        "value": "Tea_types",
-        "_row_num": 5
-      },
-      {
-        "setting_name": "disableSwipeNavigation",
-        "value": true,
-        "_row_num": 6
-      },
-      {
-        "setting_name": "instance_name",
-        "value": "Name",
-        "_row_num": 7
-      }
-    ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "colOrder",
-        "type": "string",
-        "value": "[\"Type_id\",\"Name\",\"Caffeinated\",\"Origin\",\"Fermented\"]",
-        "_row_num": 2
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "defaultViewType",
-        "type": "string",
-        "value": "LIST",
-        "_row_num": 3
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "detailViewFileName",
-        "type": "string",
-        "value": "config/tables/Tea_types/html/Tea_types_detail.html",
-        "_row_num": 4
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "listViewFileName",
-        "type": "string",
-        "value": "config/tables/Tea_types/html/Tea_types_list.html",
-        "_row_num": 5
       }
     ]
   },
@@ -143,30 +205,20 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "Tea_types",
+        "value": "Tea_inventory",
         "_row_num": 2
+      },
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "Tea_inventory",
+        "_row_num": 3
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Types"
+          "title": "Tea Inventory"
         },
         "_row_num": 4
-      },
-      "table_id": {
-        "setting_name": "table_id",
-        "value": "Tea_types",
-        "_row_num": 5
-      },
-      "disableSwipeNavigation": {
-        "setting_name": "disableSwipeNavigation",
-        "value": true,
-        "_row_num": 6
-      },
-      "instance_name": {
-        "setting_name": "instance_name",
-        "value": "Name",
-        "_row_num": 7
       },
       "_locales": {
         "setting_name": "_locales",
@@ -188,7 +240,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Types"
+          "title": "Tea Inventory"
         },
         "_row_num": 4
       }
@@ -213,7 +265,28 @@
         }
       ]
     },
-    "queries": {},
+    "queries": {
+      "Tea_type_list": {
+        "query_name": "Tea_type_list",
+        "query_type": "linked_table",
+        "linked_form_id": "Tea_types",
+        "linked_table_id": "Tea_types",
+        "selection": "_id >= ?",
+        "selectionArgs": "[ '0' ]",
+        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "_row_num": 2
+      },
+      "Tea_house_list": {
+        "query_name": "Tea_house_list",
+        "query_type": "linked_table",
+        "linked_form_id": "Tea_houses",
+        "linked_table_id": "Tea_houses",
+        "selection": "_id >= ?",
+        "selectionArgs": "[ '0' ]",
+        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "_row_num": 3
+      }
+    },
     "calculates": {},
     "model": {
       "Name": {
@@ -226,7 +299,7 @@
         "type": "string",
         "elementKey": "Name"
       },
-      "Origin": {
+      "Type_id": {
         "_defn": [
           {
             "_row_num": 3,
@@ -234,9 +307,10 @@
           }
         ],
         "type": "string",
-        "elementKey": "Origin"
+        "valuesList": "Tea_type_list",
+        "elementKey": "Type_id"
       },
-      "Caffeinated": {
+      "Bags": {
         "_defn": [
           {
             "_row_num": 4,
@@ -245,9 +319,9 @@
         ],
         "type": "string",
         "valuesList": "yes_no",
-        "elementKey": "Caffeinated"
+        "elementKey": "Bags"
       },
-      "Fermented": {
+      "Cold": {
         "_defn": [
           {
             "_row_num": 5,
@@ -256,7 +330,70 @@
         ],
         "type": "string",
         "valuesList": "yes_no",
-        "elementKey": "Fermented"
+        "elementKey": "Cold"
+      },
+      "Hot": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "Hot"
+      },
+      "Loose_Leaf": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "Loose_Leaf"
+      },
+      "Price_8oz": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "Price_8oz"
+      },
+      "Price_12oz": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "Price_12oz"
+      },
+      "Price_16oz": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "Price_16oz"
+      },
+      "House_id": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "Tea_house_list",
+        "elementKey": "House_id"
       }
     },
     "section_names": [
@@ -273,7 +410,7 @@
             "type": "string",
             "name": "Name",
             "display": {
-              "text": "Enter the Tea Type Name"
+              "text": "Enter the name of the tea."
             },
             "required": true,
             "_row_num": 2,
@@ -284,25 +421,26 @@
             "promptIdx": 0
           },
           {
-            "type": "string",
-            "name": "Origin",
+            "type": "select_one",
+            "values_list": "Tea_type_list",
+            "name": "Type_id",
             "display": {
-              "text": "Enter the Origin"
+              "text": "Choose the tea type ID number."
             },
             "required": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
-            "_type": "string",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 1
           },
           {
             "type": "select_one",
             "values_list": "yes_no",
-            "name": "Caffeinated",
+            "name": "Bags",
             "display": {
-              "text": "Is the Tea Caffeinated?"
+              "text": "Is {{data.Name}} served with bags?"
             },
             "required": true,
             "_row_num": 4,
@@ -315,9 +453,9 @@
           {
             "type": "select_one",
             "values_list": "yes_no",
-            "name": "Fermented",
+            "name": "Cold",
             "display": {
-              "text": "Is the Tea Fermented?"
+              "text": "Is {{data.Name}} served cold?"
             },
             "required": true,
             "_row_num": 5,
@@ -328,12 +466,99 @@
             "promptIdx": 3
           },
           {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "Hot",
+            "display": {
+              "text": "Is {{data.Name}} served hot?"
+            },
+            "required": true,
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 4
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "Loose_Leaf",
+            "display": {
+              "text": "Is {{data.Name}} loose leaf?"
+            },
+            "required": true,
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 5
+          },
+          {
+            "type": "decimal",
+            "name": "Price_8oz",
+            "display": {
+              "text": "What is the price of an 8 ounce {{data.Name}}?"
+            },
+            "required": true,
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 6
+          },
+          {
+            "type": "decimal",
+            "name": "Price_12oz",
+            "display": {
+              "text": "What is the price of a 12 ounce {{data.Name}}?"
+            },
+            "required": true,
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 7
+          },
+          {
+            "type": "decimal",
+            "name": "Price_16oz",
+            "display": {
+              "text": "What is the price of a 16 ounce {{data.Name}}?"
+            },
+            "required": true,
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 8
+          },
+          {
+            "type": "select_one",
+            "values_list": "Tea_house_list",
+            "name": "House_id",
+            "display": {
+              "text": "Select the Tea house where this tea is served"
+            },
+            "required": true,
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 9
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 6,
-            "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 4
+            "_row_num": 12,
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 10
           }
         ],
         "validation_tag_map": {
@@ -341,7 +566,13 @@
             0,
             1,
             2,
-            3
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
           ]
         },
         "operations": [
@@ -370,25 +601,61 @@
             "operationIdx": 3
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 6,
-            "operationIdx": 4
-          },
-          {
             "_row_num": 6,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 10,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "_row_num": 11,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 9
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 12,
+            "operationIdx": 10
+          },
+          {
+            "_row_num": 12,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 5
+            "operationIdx": 11
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 6,
-            "operationIdx": 6
+            "_row_num": 12,
+            "operationIdx": 12
           }
         ],
         "branch_label_map": {
@@ -396,8 +663,14 @@
           "_screen3": 1,
           "_screen4": 2,
           "_screen5": 3,
-          "_contents": 5,
-          "_screen6": 5
+          "_screen6": 4,
+          "_screen7": 5,
+          "_screen8": 6,
+          "_screen9": 7,
+          "_screen10": 8,
+          "_screen11": 9,
+          "_contents": 11,
+          "_screen12": 11
         }
       },
       "initial": {
@@ -428,7 +701,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Tea Types"
+              "title": "Tea Inventory"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -590,7 +863,7 @@
         "elementSet": "data",
         "elementPath": "Name"
       },
-      "Origin": {
+      "Type_id": {
         "_defn": [
           {
             "_row_num": 3,
@@ -598,12 +871,13 @@
           }
         ],
         "type": "string",
-        "elementKey": "Origin",
-        "elementName": "Origin",
+        "valuesList": "Tea_type_list",
+        "elementKey": "Type_id",
+        "elementName": "Type_id",
         "elementSet": "data",
-        "elementPath": "Origin"
+        "elementPath": "Type_id"
       },
-      "Caffeinated": {
+      "Bags": {
         "_defn": [
           {
             "_row_num": 4,
@@ -612,12 +886,12 @@
         ],
         "type": "string",
         "valuesList": "yes_no",
-        "elementKey": "Caffeinated",
-        "elementName": "Caffeinated",
+        "elementKey": "Bags",
+        "elementName": "Bags",
         "elementSet": "data",
-        "elementPath": "Caffeinated"
+        "elementPath": "Bags"
       },
-      "Fermented": {
+      "Cold": {
         "_defn": [
           {
             "_row_num": 5,
@@ -626,10 +900,91 @@
         ],
         "type": "string",
         "valuesList": "yes_no",
-        "elementKey": "Fermented",
-        "elementName": "Fermented",
+        "elementKey": "Cold",
+        "elementName": "Cold",
         "elementSet": "data",
-        "elementPath": "Fermented"
+        "elementPath": "Cold"
+      },
+      "Hot": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "Hot",
+        "elementName": "Hot",
+        "elementSet": "data",
+        "elementPath": "Hot"
+      },
+      "Loose_Leaf": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "Loose_Leaf",
+        "elementName": "Loose_Leaf",
+        "elementSet": "data",
+        "elementPath": "Loose_Leaf"
+      },
+      "Price_8oz": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "Price_8oz",
+        "elementName": "Price_8oz",
+        "elementSet": "data",
+        "elementPath": "Price_8oz"
+      },
+      "Price_12oz": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "Price_12oz",
+        "elementName": "Price_12oz",
+        "elementSet": "data",
+        "elementPath": "Price_12oz"
+      },
+      "Price_16oz": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "Price_16oz",
+        "elementName": "Price_16oz",
+        "elementSet": "data",
+        "elementPath": "Price_16oz"
+      },
+      "House_id": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "Tea_house_list",
+        "elementKey": "House_id",
+        "elementName": "House_id",
+        "elementSet": "data",
+        "elementPath": "House_id"
       },
       "_id": {
         "type": "string",
@@ -723,14 +1078,28 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "Caffeinated",
+        "_aspect": "Bags",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "Fermented",
+        "_aspect": "Cold",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Hot",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Loose_Leaf",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
@@ -747,14 +1116,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "Tea_types"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "colOrder",
-        "_type": "string",
-        "_value": "[\"Type_id\",\"Name\",\"Caffeinated\",\"Origin\",\"Fermented\"]"
+        "_value": "Tea_inventory"
       },
       {
         "_partition": "Table",
@@ -768,21 +1130,21 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_types/html/Tea_types_detail.html"
+        "_value": "config/tables/Tea_inventory/html/Tea_inventory_detail.html"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Tea Types\""
+        "_value": "\"Tea Inventory\""
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_types/html/Tea_types_list.html"
+        "_value": "config/tables/Tea_inventory/html/Tea_inventory_list.html"
       }
     ]
   }
