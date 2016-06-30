@@ -87,7 +87,6 @@ function display() {
 
     // Now do the pests.
     var bugs = visitDetailResultSet.get('pests');
-    //if(bugs.startsWith("\"")) {
         bugs = bugs.substring(1, bugs.length - 1);
     	var bugArray = (bugs !== null && bugs !== undefined) ? bugs.split(",") : [];
     	for ( var i = 0 ; i < bugArray.length ; ++i ) {
@@ -106,9 +105,10 @@ function display() {
                 $('#bugs-cutworm').attr('checked', true);
             }
         }
-    //}
-
-    $('#observations').text(visitDetailResultSet.get('observations'));
+    var observe = visitDetailResultSet.get('observations');
+    if (observe != null) {
+        $('#observations').text(observe);
+    }
 }
 
 function cbPlotSuccess(result) {

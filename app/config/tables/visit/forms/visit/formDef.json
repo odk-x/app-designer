@@ -192,7 +192,7 @@
         "_row_num": 33
       },
       {
-        "type": "number",
+        "type": "integer",
         "name": "crop_yield",
         "display": {
           "text": "What is the current crop yield in kg per hectare?"
@@ -631,7 +631,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "integer",
         "elementKey": "crop_yield"
       },
       "observations": {
@@ -837,7 +837,7 @@
             "promptIdx": 13
           },
           {
-            "type": "number",
+            "type": "integer",
             "name": "crop_yield",
             "display": {
               "text": "What is the current crop yield in kg per hectare?"
@@ -847,7 +847,7 @@
             "_row_num": 34,
             "__rowNum__": 33,
             "_token_type": "prompt",
-            "_type": "number",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen34",
             "promptIdx": 14
           },
@@ -1302,7 +1302,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "integer",
         "elementKey": "crop_yield",
         "elementName": "crop_yield",
         "elementSet": "data",
