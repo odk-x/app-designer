@@ -91,18 +91,10 @@
       {
         "partition": "Table",
         "aspect": "default",
-        "key": "colOrder",
-        "type": "string",
-        "value": "[\"Type_id\",\"Name\",\"Caffeinated\",\"Origin\",\"Fermented\"]",
-        "_row_num": 2
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
         "key": "defaultViewType",
         "type": "string",
         "value": "LIST",
-        "_row_num": 3
+        "_row_num": 2
       },
       {
         "partition": "Table",
@@ -110,7 +102,7 @@
         "key": "detailViewFileName",
         "type": "string",
         "value": "config/tables/Tea_types/html/Tea_types_detail.html",
-        "_row_num": 4
+        "_row_num": 3
       },
       {
         "partition": "Table",
@@ -118,7 +110,7 @@
         "key": "listViewFileName",
         "type": "string",
         "value": "config/tables/Tea_types/html/Tea_types_list.html",
-        "_row_num": 5
+        "_row_num": 4
       }
     ]
   },
@@ -748,13 +740,6 @@
         "_key": "SurveyUtil.formId",
         "_type": "string",
         "_value": "Tea_types"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "colOrder",
-        "_type": "string",
-        "_value": "[\"Type_id\",\"Name\",\"Caffeinated\",\"Origin\",\"Fermented\"]"
       },
       {
         "_partition": "Table",

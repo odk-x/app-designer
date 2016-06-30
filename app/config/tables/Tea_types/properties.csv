@@ -3,7 +3,6 @@ Column,Caffeinated,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",
 Column,Fermented,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""Yes"",""display"":{""text"":""Yes""},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":""No"",""display"":{""text"":""No""},""_row_num"":3}]"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,Tea_types
-Table,default,colOrder,string,"[""Type_id"",""Name"",""Caffeinated"",""Origin"",""Fermented""]"
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/tables/Tea_types/html/Tea_types_detail.html
 Table,default,displayName,object,"""Tea Types"""
