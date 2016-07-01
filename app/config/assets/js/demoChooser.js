@@ -60,29 +60,34 @@ function updateForTab(tab) {
         // Tea time in benin
         fileUri = odkCommon.getFileAsUrl('config/assets/img/teaBackground.jpg');
         descriptionDiv.text('Explore the hottest fictional tea houses in Benin.');
+        descriptionDiv.attr('class','description-text-white');
         tabItem = $('#teaTimeTab');
     } else if (tab === 1) {
         // Hope study
         fileUri = odkCommon.getFileAsUrl('config/assets/img/hopePic.JPG');
         descriptionDiv.text('View the app used by healthcare workers for over eight months to track subjects in a study on HIV discordant couples.');
+        descriptionDiv.attr('class','description-text-white');
         tabItem = $('#hopeTab');
     } else if (tab === 2) {
         // Plotter
         fileUri = odkCommon.getFileAsUrl(
                 'config/assets/img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg');
         descriptionDiv.text('Review records of plot visits and monitor their progress.');
+        descriptionDiv.attr('class','description-text-black');
         tabItem = $('#plotterTab');
     } else if (tab === 3) {
         // geotagger
         fileUri = odkCommon.getFileAsUrl(
                 'config/assets/img/spaceNeedle_CCLicense_goCardUSA.jpg');
         descriptionDiv.text('See sites around Seattle plotted using Google maps.');
+        descriptionDiv.attr('class','description-text-white');
         tabItem = $('#geotaggerTab');
     } else if (tab === 4) {
         // scan
         fileUri = odkCommon.getFileAsUrl(
                 'config/assets/img/chimp.png');
         descriptionDiv.text('Follow a troop of chimps through the jungle.');
+        descriptionDiv.attr('class','description-text-black');
         tabItem = $('#jgiTab');
     } else {
         console.log('unrecognized tab index: ' + tab);

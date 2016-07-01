@@ -27,7 +27,7 @@ function teaTypesCBSuccess(result) {
     typeData = result;
 
     for (var i = 0; i < typeData.getCount(); i++) {
-        typeNameMap[typeData.getData(i, 'Type_id')] =
+        typeNameMap[typeData.getRowId(i)] =
             typeData.getData(i, 'Name');
     }
 
@@ -49,8 +49,8 @@ function teaHousesCBSuccess(result) {
 
     for (var i = 0; i < houseData.getCount(); i++) {
         console.log('should be triggering line 30');
-        console.log('houseData.getData: ' + houseData.getData(i, 'House_id'));
-        houseNameMap[houseData.getData(i, 'House_id')] =
+        console.log('houseData.getData: ' + houseData.getRowId(i));
+        houseNameMap[houseData.getRowId(i)] =
             houseData.getData(i, 'Name');
     }
 

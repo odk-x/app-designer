@@ -87,24 +87,27 @@ function display() {
 
     // Now do the pests.
     var bugs = visitDetailResultSet.get('pests');
-	var bugArray = (bugs !== null && bugs !== undefined) ? bugs : [];
-	for ( var i = 0 ; i < bugArray.length ; ++i ) {
-		var bug = bugArray[i];
-        if (bug===BUG_EARWORM) {
+    var bugArray = JSON.parse(bugs);
+    for ( var i = 0 ; i < bugArray.length ; ++i ) {
+        var bug = bugArray[i];
+        if (bug==BUG_EARWORM) {
             $('#bugs-earworm').attr('checked', true);
         }
-        if (bug===BUG_STINK) {
+        if (bug==BUG_STINK) {
             $('#bugs-stink').attr('checked', true);
         }
-        if (bug===BUG_BEETLE) {
+        if (bug==BUG_BEETLE) {
             $('#bugs-beetle').attr('checked', true);
         }
-        if (bug===BUG_CUTWORM) {
+        if (bug==BUG_CUTWORM) {
             $('#bugs-cutworm').attr('checked', true);
         }
     }
 
-    $('#observations').text(visitDetailResultSet.get('observations'));
+    var observe = visitDetailResultSet.get('observations');
+    if (observe !== null || observe !== undefined) {
+        $('#observations').text(observe);
+    }
 }
 
 function cbPlotSuccess(result) {

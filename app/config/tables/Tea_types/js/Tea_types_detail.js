@@ -22,7 +22,6 @@ function cbSuccess(result) {
     teaTypeResultSet = result;
 
     $('#TITLE').text(teaTypeResultSet.get('Name'));
-    $('#FIELD_1').text(teaTypeResultSet.get('Type_id'));
     $('#FIELD_2').text(teaTypeResultSet.get('Origin'));
 
     if(teaTypeResultSet.get('Caffeinated') === 'Yes') {

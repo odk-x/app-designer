@@ -26,7 +26,7 @@ function onLinkClick() {
         odkTables.openTableToListView(
           'Tea_inventory',
           'House_id = ?',
-          [teaHouseResultSet.get('House_id')],
+          [teaHouseResultSet.getRowId(0)],
           'config/tables/Tea_inventory/html/Tea_inventory_list.html');
     }
 }
@@ -35,10 +35,11 @@ function cbSuccess(result) {
 
     teaHouseResultSet = result;
 
-    odkData.query('Tea_types', 'Type_id = ?', [teaHouseResultSet.get('Specialty_Type_id')], 
+    odkData.query('Tea_types', '_id = ?', [teaHouseResultSet.get('Specialty_Type_id')], 
         null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
 
-    odkData.query('Tea_inventory', 'House_id = ?', [teaHouseResultSet.get('House_id')], 
+    // CAL: I'm not positive that this is all we need to change to get this to work!!
+    odkData.query('Tea_inventory', 'House_id = ?', [teaHouseResultSet.getRowId(0)], 
         null, null, null, null, true, teaInvCBSuccess, teaInvCBFailure);
 }
 
@@ -83,7 +84,9 @@ function teaInvCBSuccess(invData) {
     var lon = teaHouseResultSet.get('Location.longitude');
     $('#FIELD_8').text(lat);
     $('#FIELD_9').text(lon);
-    $('#FIELD_17').text(teaHouseResultSet.get('House_id'));
+    // CAL: This is the same issue maybe ....
+    $('#FIELD_17').text(teaHouseResultSet.getRowId(0));
+
 
     if(teaHouseResultSet.get('Iced') === 'Yes') {
         $('#FIELD_10').attr('checked', true);

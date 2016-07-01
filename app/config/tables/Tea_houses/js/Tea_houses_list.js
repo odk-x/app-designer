@@ -31,7 +31,7 @@ var teaTypeCBSuccess = function(result) {
     var typeData = result;
 
     for (var typeCntr = 0; typeCntr < typeData.getCount(); typeCntr++) {
-        typeNameMap[typeData.getData(typeCntr, 'Type_id')] =
+        typeNameMap[typeData.getRowId(typeCntr)] =
             typeData.getData(typeCntr, 'Name');
     }
 
