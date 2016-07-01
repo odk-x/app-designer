@@ -1290,6 +1290,7 @@ module.exports = function (grunt) {
             var tableIdDirs = grunt.file.expand(tablesConfig.tablesDir + '/*');
             // Now we want just the table ids.
             var tableIds = [];
+            var COLLECT_FORMS = "collect-forms";
             tableIdDirs.forEach(function(element) {
                 tableIds.push(element.substr(element.lastIndexOf('/') + 1));
             });
@@ -1300,7 +1301,7 @@ module.exports = function (grunt) {
             tableIds.forEach(function(tableId) {
                 var files = grunt.file.expand(
                     tablesConfig.tablesDir + '/' + tableId +
-                    '/collect-forms/*');
+                    '/' + COLLECT_FORMS + '/*');
                 files.forEach(function(file) {
                     var src = file;
                     // We basically want to push all the contents under 
@@ -1314,7 +1315,10 @@ module.exports = function (grunt) {
 					//
                     // The names of the files will stay the same 
 				    // when we push them
-                    var dest = tablesConfig.formMount;
+                    var destPos = src.indexOf(COLLECT_FORMS);
+                    destPos = destPos + COLLECT_FORMS.length;
+                    var destPath = src.substr(destPos);
+                    var dest = tablesConfig.formMount + destPath;
                     grunt.log.writeln(
                         'adb push ' + src + ' ' + dest);
                     grunt.task.run('exec:adbpush: ' + src + ':' + dest);
