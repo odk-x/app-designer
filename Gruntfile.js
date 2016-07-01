@@ -904,45 +904,73 @@ module.exports = function (grunt) {
             dirs.forEach(suffixRenameCopier(".tablesdemo", ""));
         });
 
+	var opendatakit2DemoFiles = function(grunt) {
+		// This only pushes the definitions of the opendatakit-2.appspot.com forms.
+		var dirs = grunt.file.expand(
+			{filter: 'isFile',
+			 cwd: 'app' },
+			'.nomedia',
+			'**',
+			'!system/**',
+			'!data/**',
+			'!output/**',
+			'!config/assets/**',
+			'!config/tables/**',
+			'config/**/*.opendatakit-2',
+			'config/assets/framework/translations.js',
+			'config/assets/framework/forms/framework/*.opendatakit-2',
+			'config/assets/css/odk-survey.css',
+			'config/assets/img/advance.png',
+			'config/assets/img/backup.png',
+			'config/assets/img/form_logo.png',
+			'config/assets/img/little_arrow.png',
+			'config/assets/img/play.png',
+			'config/assets/libs/**',
+			'config/tables/exampleForm/**',
+			'config/tables/household/**',
+			'config/tables/household_member/**',
+			'config/tables/selects/**',
+			'config/tables/gridScreen/**');
+			
+		return dirs;
+	};
+
     grunt.registerTask(
-        'adbpush-default-opendatakit-2',
+        'adbpush-tables-opendatakit-2',
         'Push everything for survey opendatakit-2 site to the device',
         function() {
-            // This only pushes the definitions of the selected forms.
-			// everything else is taken from the survey APK prior to sync.
-			// I.e., the assets directory is taken as-is from what is packaged in the APK.
-            var dirs = grunt.file.expand(
-                {filter: 'isFile',
-                 cwd: 'app' },
-				'.nomedia',
-                '**',
-                '!system/**',
-				'!data/**',
-                '!output/**',
-                '!config/assets/**',
-                '!config/tables/**',
-                'config/tables/exampleForm/**',
-                'config/tables/household/**',
-                'config/tables/household_member/**',
-                'config/tables/selects/**',
-                'config/tables/gridScreen/**');
+            var dirs = opendatakit2DemoFiles(grunt);
 
-            // Now push these files to the phone.
-            dirs.forEach(function(fileName) {
-                //  Have to add app back into the file name for the adb push
-                var src = tablesConfig.appDir + '/' + fileName;
-                var dest =
-                    tablesConfig.deviceMount +
-                    '/' +
-                    tablesConfig.appName +
-                    '/' +
-                    fileName;
-                grunt.log.writeln('adb push ' + src + ' ' + dest);
-                grunt.task.run('exec:adbpush:' + src + ':' + dest);
-            });
-
+			dirs.forEach(suffixRenameAdbPusher(".opendatakit-2", tablesConfig.appDir));
         });
+	
+    grunt.registerTask(
+        'create-tables-opendatakit-2',
+        'create the opendatakit-2 application designer package under build/opendatakit-2/',
+        function() {
+            var dirs = opendatakit2DemoFiles(grunt);
+			
+			var buildDir = 'build/opendatakit-2';
+			
+			grunt.file.delete(buildDir + '/');
+			grunt.file.mkdir(buildDir);
+			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
+			
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameCopier(".opendatakit-2", tablesConfig.appDir));
+			
+			var dirs = grunt.file.expand(
+				{filter: 'isFile',
+				 cwd: '.' },
+				'**',
+				'!.git/**',
+				'!build/**',
+				'!app/**',
+				'app/system/**',
+				'app/output/**');
 
+            dirs.forEach(suffixRenameCopier(".opendatakit-2", ""));
+        });
 
     grunt.registerTask(
         'adbpush-survey',
