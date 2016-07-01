@@ -316,6 +316,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
 				'!data/**',
@@ -349,6 +350,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
 				'!data/**',
@@ -389,6 +391,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
                 'system/tables/js/**',
@@ -435,6 +438,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
 				'!system/**',
 				'!data/**',
@@ -487,6 +491,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
 				'!system/**',
 				'!data/**',
@@ -534,6 +539,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
 				'!system/**',
 				'!data/**',
@@ -573,8 +579,10 @@ module.exports = function (grunt) {
 			} else {
 				src = fileName;
 			}
+			var isSuffixed = false;
 			var destFileName = fileName;
 			if ( fileName.endsWith(demoSuffix) ) {
+				isSuffixed = true;
 				destFileName = fileName.substring(0,fileName.length-demoSuffix.length);
 			}
 			var buildDir = 'build' +
@@ -589,7 +597,18 @@ module.exports = function (grunt) {
 					offsetDir;
 			}
 				
-			var dest = baseDir +
+			var dest;
+			if ( isSuffixed ) {
+				// copy the original so that, e.g, grunt adbpush-tables-tablesdemo will work
+				dest = baseDir +
+					'/' +
+					fileName;
+				grunt.log.writeln('file copy ' + src + ' ' + dest);
+				grunt.file.copy(src, dest);
+			}
+			// and copy the renamed destination file so that 
+			// grunt adbpush will also work.
+			dest = baseDir +
 				'/' +
 				destFileName;
 			grunt.log.writeln('file copy ' + src + ' ' + dest);
@@ -895,6 +914,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
 				'!data/**',
@@ -937,6 +957,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
 				'!data/**',
@@ -974,6 +995,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
 				'!data/**',
@@ -1017,6 +1039,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
 				'!data/**',
@@ -1062,6 +1085,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
 				'!system/**',
 				'!data/**',
@@ -1111,6 +1135,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
 				'!data/**',
@@ -1158,6 +1183,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!system/**',
 				'!data/**',
@@ -1203,6 +1229,7 @@ module.exports = function (grunt) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
+				'.nomedia',
                 '**',
                 '!config/assets/**',
                 '!system/**',
