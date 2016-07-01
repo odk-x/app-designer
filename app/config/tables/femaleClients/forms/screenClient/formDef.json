@@ -44,13 +44,22 @@
         "_row_num": 6
       },
       {
+        "clause": "if // screening",
+        "condition": "selected(data('agree_screening'),'a0')",
+        "_row_num": 7
+      },
+      {
         "type": "note",
         "name": "refused_screening",
         "display": {
           "text": "Thank you for considering being screened for the study. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic.",
           "hint": "Continue to next page to submit responses."
         },
-        "_row_num": 7
+        "_row_num": 8
+      },
+      {
+        "clause": "else // screening",
+        "_row_num": 9
       },
       {
         "type": "integer",
@@ -59,8 +68,13 @@
           "text": "How old were you on your last birthday?",
           "hint": "If younger than 14 years old, client is ineligible. Screening will not continue."
         },
-        "required": true,
-        "_row_num": 8
+        "required": "selected(data('agree_screening'),'a1')",
+        "_row_num": 10
+      },
+      {
+        "clause": "goto ineligible",
+        "condition": "data('age') < 14",
+        "_row_num": 11
       },
       {
         "type": "select_one",
@@ -70,8 +84,13 @@
           "text": "Are you pregnant?",
           "hint": "If no, client is ineligible to be in the study. Screening will not continue."
         },
-        "required": true,
-        "_row_num": 9
+        "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14)",
+        "_row_num": 12
+      },
+      {
+        "clause": "goto ineligible",
+        "condition": "selected(data('pregnant'),'a0')",
+        "_row_num": 13
       },
       {
         "type": "integer",
@@ -79,11 +98,11 @@
         "display": {
           "text": "Using LMP (and pregnancy wheel tool) and/or client's fundal height, enter the client's estimated gestational age in weeks."
         },
-        "_row_num": 10
+        "_row_num": 14
       },
       {
         "clause": "begin screen",
-        "_row_num": 11
+        "_row_num": 15
       },
       {
         "type": "select_one",
@@ -92,7 +111,7 @@
         "display": {
           "text": "What is your ethnic group background? Choose one:"
         },
-        "_row_num": 12
+        "_row_num": 16
       },
       {
         "type": "text",
@@ -100,7 +119,7 @@
         "display": {
           "text": "Specify other ethnic background."
         },
-        "_row_num": 13
+        "_row_num": 17
       },
       {
         "type": "select_one",
@@ -109,7 +128,7 @@
         "display": {
           "text": "What is the highest level of education you attended? Choose one:"
         },
-        "_row_num": 14
+        "_row_num": 18
       },
       {
         "type": "select_one",
@@ -118,7 +137,7 @@
         "display": {
           "text": "What is your religious affiliation?"
         },
-        "_row_num": 15
+        "_row_num": 19
       },
       {
         "type": "text",
@@ -126,7 +145,7 @@
         "display": {
           "text": "Specify other religious affiliation."
         },
-        "_row_num": 16
+        "_row_num": 20
       },
       {
         "type": "select_multiple",
@@ -135,7 +154,7 @@
         "display": {
           "text": "How would you characterize your employment or occupation? Choose all that apply:"
         },
-        "_row_num": 17
+        "_row_num": 21
       },
       {
         "type": "text",
@@ -143,11 +162,11 @@
         "display": {
           "text": "Specify other employment."
         },
-        "_row_num": 18
+        "_row_num": 22
       },
       {
         "clause": "end screen",
-        "_row_num": 19
+        "_row_num": 23
       },
       {
         "type": "select_one",
@@ -157,8 +176,13 @@
           "text": "Are you currently in a relationship?",
           "hint": "If not currently in a relationship, client is ineligible but continue screening"
         },
-        "required": true,
-        "_row_num": 20
+        "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1')",
+        "_row_num": 24
+      },
+      {
+        "clause": "if // partner",
+        "condition": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && selected(data('curr_relationship'),'a1')",
+        "_row_num": 25
       },
       {
         "type": "integer",
@@ -167,16 +191,25 @@
           "text": "How old was your partner on their last birthday?",
           "hint": "If study partner is younger than 18 years old, client is ineligible to be in the study; however, continue screening to capture responses to all questions"
         },
-        "required": true,
-        "_row_num": 21
+        "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && selected(data('curr_relationship'),'a1')",
+        "_row_num": 26
+      },
+      {
+        "clause": "end if // partner",
+        "_row_num": 27
       },
       {
         "type": "integer",
         "name": "times_pregnant",
         "display": {
-          "text": "How many times have you been pregnant?"
+          "text": "How many times have you been pregnant before this time?"
         },
-        "_row_num": 22
+        "_row_num": 28
+      },
+      {
+        "clause": "if // prior_preg",
+        "condition": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && (data('times_pregnant') > 0)",
+        "_row_num": 29
       },
       {
         "type": "integer",
@@ -184,7 +217,12 @@
         "display": {
           "text": "How many living children do you have?"
         },
-        "_row_num": 23
+        "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && (data('times_pregnant') > 0)",
+        "_row_num": 30
+      },
+      {
+        "clause": "end if // prior_preg",
+        "_row_num": 31
       },
       {
         "type": "select_one",
@@ -194,8 +232,8 @@
           "text": "Do you plan to live within 20 kilometers of this clinic from now until 9 months after you deliver?",
           "hint": "If no, client is ineligible; however, continue screening to capture responses to all questions"
         },
-        "required": true,
-        "_row_num": 24
+        "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1')",
+        "_row_num": 32
       },
       {
         "type": "select_one",
@@ -204,7 +242,12 @@
         "display": {
           "text": "Have you been tested for HIV before?"
         },
-        "_row_num": 25
+        "_row_num": 33
+      },
+      {
+        "clause": "if // hiv_tested",
+        "condition": "selected(data('hiv_tested'),'a1')",
+        "_row_num": 34
       },
       {
         "type": "select_one",
@@ -213,15 +256,16 @@
         "display": {
           "text": "What was the result of your last HIV test?"
         },
-        "_row_num": 26
+        "_row_num": 35
       },
       {
-        "type": "note",
-        "name": "ineligible_statement",
-        "display": {
-          "text": "Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at this clinic. Can I answer any questions you may have?"
-        },
-        "_row_num": 27
+        "clause": "end if // hiv_tested",
+        "_row_num": 36
+      },
+      {
+        "clause": "goto ineligible",
+        "condition": "selected(data('agree_screening'),'a0') || (data('age') < 14) || selected(data('pregnant'),'a0') || selected(data('curr_relationship'),'a0') || (data('partner_age') < 18) || selected(data('clinic_proximity'),'a0')",
+        "_row_num": 37
       },
       {
         "type": "note",
@@ -230,7 +274,7 @@
           "text": "Client is ELIGIBLE",
           "hint": "If client is NOT eligible for study, review previous questions and responses."
         },
-        "_row_num": 28
+        "_row_num": 38
       },
       {
         "type": "select_one",
@@ -240,7 +284,12 @@
           "text": "Say: Thank you for your time in answering these questions. Based on the answers you gave, you are eligible to be a part of the study. Would you like to participate in the study?",
           "hint": "Read consent form with participant and go through written consent process."
         },
-        "_row_num": 29
+        "_row_num": 39
+      },
+      {
+        "clause": "goto refuse",
+        "condition": "selected(data('client_consent'),'a0')",
+        "_row_num": 40
       },
       {
         "type": "integer",
@@ -249,8 +298,8 @@
           "text": "Enter Client ID from randomization envelopes.",
           "hint": "5 Digit ID, cannot include 0. \nex: 12345"
         },
-        "required": true,
-        "_row_num": 30
+        "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && selected(data('curr_relationship'),'a1') && (data('partner_age') >= 18) && selected(data('clinic_proximity'),'a1') && selected(data('client_consent'),'a1')",
+        "_row_num": 41
       },
       {
         "type": "select_one",
@@ -259,17 +308,44 @@
         "display": {
           "text": "Open Randomization Envelope. What is the client’s randomization arm?"
         },
-        "required": true,
-        "_row_num": 31
+        "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && selected(data('curr_relationship'),'a1') && (data('partner_age') >= 18) && selected(data('clinic_proximity'),'a1') && selected(data('client_consent'),'a1')",
+        "_row_num": 42
       },
       {
+        "clause": "end if // screening",
+        "_row_num": 43
+      },
+      {
+        "clause": "goto ending",
+        "_row_num": 44
+      },
+      {
+        "branch_label": "ineligible",
+        "type": "note",
+        "name": "ineligible_statement",
+        "display": {
+          "text": "Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at this clinic. Can I answer any questions you may have?"
+        },
+        "_row_num": 45
+      },
+      {
+        "clause": "goto ending",
+        "_row_num": 46
+      },
+      {
+        "branch_label": "refuse",
         "type": "select_multiple",
         "values_list": "no_participation_reasons",
         "name": "refusal_reasons",
         "display": {
           "text": "I understand you do not want to participate in this study. Could you let me know why you would not like to participate? Check all that apply:"
         },
-        "_row_num": 32
+        "_row_num": 47
+      },
+      {
+        "clause": "if // ref_reason",
+        "condition": "selected(data('refusal_reasons'),'a9')",
+        "_row_num": 48
       },
       {
         "type": "text",
@@ -277,7 +353,11 @@
         "display": {
           "text": "Specify other reason."
         },
-        "_row_num": 33
+        "_row_num": 49
+      },
+      {
+        "clause": "end if // ref_reason",
+        "_row_num": 50
       },
       {
         "type": "note",
@@ -285,15 +365,20 @@
         "display": {
           "text": "Say: Thank you for letting me know why you do not want to participate. It is important for us to know why women may feel this way. This will in no way affect the care that you, your children, or your partner will receive at the clinic."
         },
-        "_row_num": 34
+        "_row_num": 51
       },
       {
+        "clause": "goto ending",
+        "_row_num": 52
+      },
+      {
+        "branch_label": "ending",
         "type": "note",
         "name": "survey_complete",
         "display": {
           "text": "The screening is now complete, please go to the next page to finalize your responses."
         },
-        "_row_num": 36
+        "_row_num": 53
       }
     ],
     "choices": [
@@ -2104,7 +2189,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 41,
             "section_name": "survey"
           },
           {
@@ -2118,7 +2203,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -2133,7 +2218,7 @@
         "valuesList": "randomization_arms",
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 42,
             "section_name": "survey"
           },
           {
@@ -2346,7 +2431,7 @@
         "valuesList": "yes_no_nr",
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 33,
             "section_name": "survey"
           },
           {
@@ -2385,7 +2470,7 @@
         "valuesList": "hiv_status",
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 35,
             "section_name": "survey"
           },
           {
@@ -2633,7 +2718,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -2647,7 +2732,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
@@ -2662,7 +2747,7 @@
         "valuesList": "ethnic_groups",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
@@ -2676,7 +2761,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 17,
             "section_name": "survey"
           },
           {
@@ -2691,7 +2776,7 @@
         "valuesList": "education_level_options",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -2706,7 +2791,7 @@
         "valuesList": "religion",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 19,
             "section_name": "survey"
           },
           {
@@ -2720,7 +2805,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 20,
             "section_name": "survey"
           },
           {
@@ -2739,7 +2824,7 @@
         "valuesList": "employment_options",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -2753,7 +2838,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -2768,7 +2853,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 24,
             "section_name": "survey"
           },
           {
@@ -2782,7 +2867,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 26,
             "section_name": "survey"
           },
           {
@@ -2796,7 +2881,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 28,
             "section_name": "survey"
           },
           {
@@ -2810,7 +2895,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 30,
             "section_name": "survey"
           },
           {
@@ -2825,7 +2910,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 32,
             "section_name": "survey"
           },
           {
@@ -2840,7 +2925,7 @@
         "valuesList": "study_participation",
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 39,
             "section_name": "survey"
           },
           {
@@ -2859,7 +2944,7 @@
         "valuesList": "no_participation_reasons",
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 47,
             "section_name": "survey"
           },
           {
@@ -2873,7 +2958,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 49,
             "section_name": "survey"
           },
           {
@@ -2968,11 +3053,11 @@
               "text": "Thank you for considering being screened for the study. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic.",
               "hint": "Continue to next page to submit responses."
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 5
           },
           {
@@ -2982,12 +3067,12 @@
               "text": "How old were you on your last birthday?",
               "hint": "If younger than 14 years old, client is ineligible. Screening will not continue."
             },
-            "required": true,
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "required": "selected(data('agree_screening'),'a1')",
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 6
           },
           {
@@ -2998,12 +3083,12 @@
               "text": "Are you pregnant?",
               "hint": "If no, client is ineligible to be in the study. Screening will not continue."
             },
-            "required": true,
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14)",
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen9",
+            "_branch_label_enclosing_screen": "survey/_screen12",
             "promptIdx": 7
           },
           {
@@ -3012,11 +3097,11 @@
             "display": {
               "text": "Using LMP (and pregnancy wheel tool) and/or client's fundal height, enter the client's estimated gestational age in weeks."
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 8
           },
           {
@@ -3026,11 +3111,11 @@
             "display": {
               "text": "What is your ethnic group background? Choose one:"
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 9
           },
           {
@@ -3039,11 +3124,11 @@
             "display": {
               "text": "Specify other ethnic background."
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 10
           },
           {
@@ -3053,11 +3138,11 @@
             "display": {
               "text": "What is the highest level of education you attended? Choose one:"
             },
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 11
           },
           {
@@ -3067,11 +3152,11 @@
             "display": {
               "text": "What is your religious affiliation?"
             },
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 12
           },
           {
@@ -3080,11 +3165,11 @@
             "display": {
               "text": "Specify other religious affiliation."
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 13
           },
           {
@@ -3094,11 +3179,11 @@
             "display": {
               "text": "How would you characterize your employment or occupation? Choose all that apply:"
             },
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 14
           },
           {
@@ -3107,11 +3192,11 @@
             "display": {
               "text": "Specify other employment."
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 15
           },
           {
@@ -3122,12 +3207,12 @@
               "text": "Are you currently in a relationship?",
               "hint": "If not currently in a relationship, client is ineligible but continue screening"
             },
-            "required": true,
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1')",
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen20",
+            "_branch_label_enclosing_screen": "survey/_screen24",
             "promptIdx": 16
           },
           {
@@ -3137,25 +3222,25 @@
               "text": "How old was your partner on their last birthday?",
               "hint": "If study partner is younger than 18 years old, client is ineligible to be in the study; however, continue screening to capture responses to all questions"
             },
-            "required": true,
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && selected(data('curr_relationship'),'a1')",
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen21",
+            "_branch_label_enclosing_screen": "survey/_screen26",
             "promptIdx": 17
           },
           {
             "type": "integer",
             "name": "times_pregnant",
             "display": {
-              "text": "How many times have you been pregnant?"
+              "text": "How many times have you been pregnant before this time?"
             },
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen22",
+            "_branch_label_enclosing_screen": "survey/_screen28",
             "promptIdx": 18
           },
           {
@@ -3164,11 +3249,12 @@
             "display": {
               "text": "How many living children do you have?"
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && (data('times_pregnant') > 0)",
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen30",
             "promptIdx": 19
           },
           {
@@ -3179,12 +3265,12 @@
               "text": "Do you plan to live within 20 kilometers of this clinic from now until 9 months after you deliver?",
               "hint": "If no, client is ineligible; however, continue screening to capture responses to all questions"
             },
-            "required": true,
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1')",
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen24",
+            "_branch_label_enclosing_screen": "survey/_screen32",
             "promptIdx": 20
           },
           {
@@ -3194,11 +3280,11 @@
             "display": {
               "text": "Have you been tested for HIV before?"
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen25",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 21
           },
           {
@@ -3208,25 +3294,12 @@
             "display": {
               "text": "What was the result of your last HIV test?"
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
+            "_branch_label_enclosing_screen": "survey/_screen35",
             "promptIdx": 22
-          },
-          {
-            "type": "note",
-            "name": "ineligible_statement",
-            "display": {
-              "text": "Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at this clinic. Can I answer any questions you may have?"
-            },
-            "_row_num": 27,
-            "__rowNum__": 26,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 23
           },
           {
             "type": "note",
@@ -3235,12 +3308,12 @@
               "text": "Client is ELIGIBLE",
               "hint": "If client is NOT eligible for study, review previous questions and responses."
             },
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 24
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 23
           },
           {
             "type": "select_one",
@@ -3250,12 +3323,12 @@
               "text": "Say: Thank you for your time in answering these questions. Based on the answers you gave, you are eligible to be a part of the study. Would you like to participate in the study?",
               "hint": "Read consent form with participant and go through written consent process."
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 25
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 24
           },
           {
             "type": "integer",
@@ -3264,13 +3337,13 @@
               "text": "Enter Client ID from randomization envelopes.",
               "hint": "5 Digit ID, cannot include 0. \nex: 12345"
             },
-            "required": true,
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && selected(data('curr_relationship'),'a1') && (data('partner_age') >= 18) && selected(data('clinic_proximity'),'a1') && selected(data('client_consent'),'a1')",
+            "_row_num": 41,
+            "__rowNum__": 40,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 26
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 25
           },
           {
             "type": "select_one",
@@ -3279,12 +3352,25 @@
             "display": {
               "text": "Open Randomization Envelope. What is the client’s randomization arm?"
             },
-            "required": true,
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "required": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && selected(data('curr_relationship'),'a1') && (data('partner_age') >= 18) && selected(data('clinic_proximity'),'a1') && selected(data('client_consent'),'a1')",
+            "_row_num": 42,
+            "__rowNum__": 41,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 26
+          },
+          {
+            "type": "note",
+            "name": "ineligible_statement",
+            "display": {
+              "text": "Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at this clinic. Can I answer any questions you may have?"
+            },
+            "_row_num": 45,
+            "__rowNum__": 44,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen45",
             "promptIdx": 27
           },
           {
@@ -3294,11 +3380,11 @@
             "display": {
               "text": "I understand you do not want to participate in this study. Could you let me know why you would not like to participate? Check all that apply:"
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 47,
+            "__rowNum__": 46,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen32",
+            "_branch_label_enclosing_screen": "survey/_screen47",
             "promptIdx": 28
           },
           {
@@ -3307,11 +3393,11 @@
             "display": {
               "text": "Specify other reason."
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 49,
+            "__rowNum__": 48,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen33",
+            "_branch_label_enclosing_screen": "survey/_screen49",
             "promptIdx": 29
           },
           {
@@ -3320,11 +3406,11 @@
             "display": {
               "text": "Say: Thank you for letting me know why you do not want to participate. It is important for us to know why women may feel this way. This will in no way affect the care that you, your children, or your partner will receive at the clinic."
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen34",
+            "_branch_label_enclosing_screen": "survey/_screen51",
             "promptIdx": 30
           },
           {
@@ -3333,19 +3419,19 @@
             "display": {
               "text": "The screening is now complete, please go to the next page to finalize your responses."
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 53,
+            "__rowNum__": 52,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen53",
             "promptIdx": 31
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 37,
-            "_branch_label_enclosing_screen": "survey/_screen37",
+            "_row_num": 54,
+            "_branch_label_enclosing_screen": "survey/_screen54",
             "promptIdx": 32
           }
         ],
@@ -3356,9 +3442,10 @@
             7,
             16,
             17,
+            19,
             20,
-            26,
-            27
+            25,
+            26
           ]
         },
         "operations": [
@@ -3393,159 +3480,339 @@
             "operationIdx": 4
           },
           {
+            "clause": "if // screening",
+            "condition": "selected(data('agree_screening'),'a0')",
             "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 6,
+            "_token_type": "goto_label",
+            "_tag_name": "screening",
+            "_branch_label": "_then7",
             "operationIdx": 5
+          },
+          {
+            "clause": "else // screening",
+            "_token_type": "goto_label",
+            "_branch_label": "_else9",
+            "_row_num": 9,
+            "operationIdx": 6
           },
           {
             "_row_num": 8,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
           },
           {
-            "_row_num": 9,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
+            "clause": "end if // screening",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif43",
+            "_row_num": 43,
+            "operationIdx": 8
           },
           {
             "_row_num": 10,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 11,
-            "__rowNum__": 10,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 19,
-              "__rowNum__": 18,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 9
           },
           {
-            "_row_num": 20,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "goto ineligible",
+            "condition": "data('age') < 14",
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "goto_label",
+            "_branch_label": "ineligible",
             "operationIdx": 10
           },
           {
-            "_row_num": 21,
+            "_row_num": 12,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 11
           },
           {
-            "_row_num": 22,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "goto ineligible",
+            "condition": "selected(data('pregnant'),'a0')",
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "goto_label",
+            "_branch_label": "ineligible",
             "operationIdx": 12
           },
           {
-            "_row_num": 23,
+            "_row_num": 14,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 13
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 23,
+              "__rowNum__": 22,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 14
           },
           {
             "_row_num": 24,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 14
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 15
           },
           {
+            "clause": "if // partner",
+            "condition": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && selected(data('curr_relationship'),'a1')",
             "_row_num": 25,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 15
+            "__rowNum__": 24,
+            "_token_type": "goto_label",
+            "_tag_name": "partner",
+            "_branch_label": "_then25",
+            "operationIdx": 16
+          },
+          {
+            "clause": "end if // partner",
+            "_token_type": "goto_label",
+            "_branch_label": "_else27",
+            "_row_num": 27,
+            "operationIdx": 17
           },
           {
             "_row_num": 26,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 16
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
           },
           {
+            "clause": "end if // partner",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif27",
             "_row_num": 27,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 17
+            "operationIdx": 19
           },
           {
             "_row_num": 28,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 18
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 20
           },
           {
+            "clause": "if // prior_preg",
+            "condition": "selected(data('agree_screening'),'a1') && (data('age') >= 14) && selected(data('pregnant'),'a1') && (data('times_pregnant') > 0)",
             "_row_num": 29,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 19
+            "__rowNum__": 28,
+            "_token_type": "goto_label",
+            "_tag_name": "prior_preg",
+            "_branch_label": "_then29",
+            "operationIdx": 21
+          },
+          {
+            "clause": "end if // prior_preg",
+            "_token_type": "goto_label",
+            "_branch_label": "_else31",
+            "_row_num": 31,
+            "operationIdx": 22
           },
           {
             "_row_num": 30,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 20
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 23
           },
           {
+            "clause": "end if // prior_preg",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif31",
             "_row_num": 31,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 21
+            "operationIdx": 24
           },
           {
             "_row_num": 32,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 22
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 25
           },
           {
             "_row_num": 33,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 23
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 26
           },
           {
+            "clause": "if // hiv_tested",
+            "condition": "selected(data('hiv_tested'),'a1')",
             "_row_num": 34,
+            "__rowNum__": 33,
+            "_token_type": "goto_label",
+            "_tag_name": "hiv_tested",
+            "_branch_label": "_then34",
+            "operationIdx": 27
+          },
+          {
+            "clause": "end if // hiv_tested",
+            "_token_type": "goto_label",
+            "_branch_label": "_else36",
+            "_row_num": 36,
+            "operationIdx": 28
+          },
+          {
+            "_row_num": 35,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 29
+          },
+          {
+            "clause": "end if // hiv_tested",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif36",
+            "_row_num": 36,
+            "operationIdx": 30
+          },
+          {
+            "clause": "goto ineligible",
+            "condition": "selected(data('agree_screening'),'a0') || (data('age') < 14) || selected(data('pregnant'),'a0') || selected(data('curr_relationship'),'a0') || (data('partner_age') < 18) || selected(data('clinic_proximity'),'a0')",
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "goto_label",
+            "_branch_label": "ineligible",
+            "operationIdx": 31
+          },
+          {
+            "_row_num": 38,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 32
+          },
+          {
+            "_row_num": 39,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 33
+          },
+          {
+            "clause": "goto refuse",
+            "condition": "selected(data('client_consent'),'a0')",
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "goto_label",
+            "_branch_label": "refuse",
+            "operationIdx": 34
+          },
+          {
+            "_row_num": 41,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 35
+          },
+          {
+            "_row_num": 42,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 36
+          },
+          {
+            "clause": "goto ending",
+            "_row_num": 44,
+            "__rowNum__": 43,
+            "_token_type": "goto_label",
+            "_branch_label": "ending",
+            "operationIdx": 37
+          },
+          {
+            "_row_num": 45,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 38
+          },
+          {
+            "clause": "goto ending",
+            "_row_num": 46,
+            "__rowNum__": 45,
+            "_token_type": "goto_label",
+            "_branch_label": "ending",
+            "operationIdx": 39
+          },
+          {
+            "_row_num": 47,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 40
+          },
+          {
+            "clause": "if // ref_reason",
+            "condition": "selected(data('refusal_reasons'),'a9')",
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "goto_label",
+            "_tag_name": "ref_reason",
+            "_branch_label": "_then48",
+            "operationIdx": 41
+          },
+          {
+            "clause": "end if // ref_reason",
+            "_token_type": "goto_label",
+            "_branch_label": "_else50",
+            "_row_num": 50,
+            "operationIdx": 42
+          },
+          {
+            "_row_num": 49,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 43
+          },
+          {
+            "clause": "end if // ref_reason",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif50",
+            "_row_num": 50,
+            "operationIdx": 44
+          },
+          {
+            "_row_num": 51,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 24
+            "operationIdx": 45
           },
           {
-            "_row_num": 36,
+            "clause": "goto ending",
+            "_row_num": 52,
+            "__rowNum__": 51,
+            "_token_type": "goto_label",
+            "_branch_label": "ending",
+            "operationIdx": 46
+          },
+          {
+            "_row_num": 53,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 25
+            "operationIdx": 47
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 37,
-            "operationIdx": 26
+            "_row_num": 54,
+            "operationIdx": 48
           },
           {
-            "_row_num": 37,
+            "_row_num": 54,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(32);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 27
+            "operationIdx": 49
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 37,
-            "operationIdx": 28
+            "_row_num": 54,
+            "operationIdx": 50
           }
         ],
         "branch_label_map": {
@@ -3554,29 +3821,47 @@
           "_screen4": 2,
           "_screen5": 3,
           "_screen6": 4,
-          "_screen7": 5,
-          "_screen8": 6,
-          "_screen9": 7,
-          "_screen10": 8,
-          "_screen11": 9,
-          "_screen20": 10,
-          "_screen21": 11,
-          "_screen22": 12,
-          "_screen23": 13,
-          "_screen24": 14,
-          "_screen25": 15,
-          "_screen26": 16,
-          "_screen27": 17,
-          "_screen28": 18,
-          "_screen29": 19,
-          "_screen30": 20,
-          "_screen31": 21,
-          "_screen32": 22,
-          "_screen33": 23,
-          "_screen34": 24,
-          "_screen36": 25,
-          "_contents": 27,
-          "_screen37": 27
+          "_then7": 7,
+          "_screen8": 7,
+          "_else9": 9,
+          "_screen10": 9,
+          "_screen12": 11,
+          "_screen14": 13,
+          "_screen15": 14,
+          "_screen24": 15,
+          "_then25": 18,
+          "_screen26": 18,
+          "_else27": 20,
+          "_endif27": 20,
+          "_screen28": 20,
+          "_then29": 23,
+          "_screen30": 23,
+          "_else31": 25,
+          "_endif31": 25,
+          "_screen32": 25,
+          "_screen33": 26,
+          "_then34": 29,
+          "_screen35": 29,
+          "_else36": 31,
+          "_endif36": 31,
+          "_screen38": 32,
+          "_screen39": 33,
+          "_screen41": 35,
+          "_screen42": 36,
+          "_endif43": 37,
+          "ineligible": 38,
+          "_screen45": 38,
+          "refuse": 40,
+          "_screen47": 40,
+          "_then48": 43,
+          "_screen49": 43,
+          "_else50": 45,
+          "_endif50": 45,
+          "_screen51": 45,
+          "ending": 47,
+          "_screen53": 47,
+          "_contents": 49,
+          "_screen54": 49
         }
       },
       "initial": {
@@ -3760,7 +4045,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 41,
             "section_name": "survey"
           },
           {
@@ -3777,7 +4062,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -3795,7 +4080,7 @@
         "valuesList": "randomization_arms",
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 42,
             "section_name": "survey"
           },
           {
@@ -4072,7 +4357,7 @@
         "valuesList": "yes_no_nr",
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 33,
             "section_name": "survey"
           },
           {
@@ -4127,7 +4412,7 @@
         "valuesList": "hiv_status",
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 35,
             "section_name": "survey"
           },
           {
@@ -4458,7 +4743,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -4475,7 +4760,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
@@ -4493,7 +4778,7 @@
         "valuesList": "ethnic_groups",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
@@ -4510,7 +4795,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 17,
             "section_name": "survey"
           },
           {
@@ -4528,7 +4813,7 @@
         "valuesList": "education_level_options",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -4546,7 +4831,7 @@
         "valuesList": "religion",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 19,
             "section_name": "survey"
           },
           {
@@ -4563,7 +4848,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 20,
             "section_name": "survey"
           },
           {
@@ -4589,7 +4874,7 @@
         "valuesList": "employment_options",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -4609,7 +4894,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -4627,7 +4912,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 24,
             "section_name": "survey"
           },
           {
@@ -4644,7 +4929,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 26,
             "section_name": "survey"
           },
           {
@@ -4661,7 +4946,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 28,
             "section_name": "survey"
           },
           {
@@ -4678,7 +4963,7 @@
         "type": "integer",
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 30,
             "section_name": "survey"
           },
           {
@@ -4696,7 +4981,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 32,
             "section_name": "survey"
           },
           {
@@ -4714,7 +4999,7 @@
         "valuesList": "study_participation",
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 39,
             "section_name": "survey"
           },
           {
@@ -4740,7 +5025,7 @@
         "valuesList": "no_participation_reasons",
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 47,
             "section_name": "survey"
           },
           {
@@ -4760,7 +5045,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 49,
             "section_name": "survey"
           },
           {

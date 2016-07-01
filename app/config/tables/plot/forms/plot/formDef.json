@@ -22,33 +22,41 @@
         "values_list": "plant_type",
         "name": "planting",
         "display": {
-          "text": "What type of plant is in this plot?"
+          "text": "What type of maize plant is in this plot?"
         },
         "_row_num": 4
+      },
+      {
+        "type": "number",
+        "name": "plot_size",
+        "display": {
+          "text": "How big is this plot in hectares?"
+        },
+        "_row_num": 5
       }
     ],
     "choices": [
       {
         "choice_list_name": "plant_type",
-        "data_value": "corn",
+        "data_value": "white",
         "display": {
-          "text": "Corn"
+          "text": "White"
         },
         "_row_num": 2
       },
       {
         "choice_list_name": "plant_type",
-        "data_value": "bean",
+        "data_value": "yellow",
         "display": {
-          "text": "Bean"
+          "text": "Yellow"
         },
         "_row_num": 3
       },
       {
         "choice_list_name": "plant_type",
-        "data_value": "cotton",
+        "data_value": "orange",
         "display": {
-          "text": "Cotton"
+          "text": "Orange"
         },
         "_row_num": 4
       }
@@ -93,7 +101,7 @@
         "aspect": "default",
         "key": "colOrder",
         "type": "array",
-        "value": "[\"plot_name\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"planting\"]",
+        "value": "[\"plot_name\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"planting\", \"plot_size\"]",
         "_row_num": 2
       },
       {
@@ -234,25 +242,25 @@
       "plant_type": [
         {
           "choice_list_name": "plant_type",
-          "data_value": "corn",
+          "data_value": "white",
           "display": {
-            "text": "Corn"
+            "text": "White"
           },
           "_row_num": 2
         },
         {
           "choice_list_name": "plant_type",
-          "data_value": "bean",
+          "data_value": "yellow",
           "display": {
-            "text": "Bean"
+            "text": "Yellow"
           },
           "_row_num": 3
         },
         {
           "choice_list_name": "plant_type",
-          "data_value": "cotton",
+          "data_value": "orange",
           "display": {
-            "text": "Cotton"
+            "text": "Orange"
           },
           "_row_num": 4
         }
@@ -310,6 +318,16 @@
         "type": "string",
         "valuesList": "plant_type",
         "elementKey": "planting"
+      },
+      "plot_size": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "plot_size"
       }
     },
     "section_names": [
@@ -353,7 +371,7 @@
             "values_list": "plant_type",
             "name": "planting",
             "display": {
-              "text": "What type of plant is in this plot?"
+              "text": "What type of maize plant is in this plot?"
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -363,12 +381,25 @@
             "promptIdx": 2
           },
           {
+            "type": "number",
+            "name": "plot_size",
+            "display": {
+              "text": "How big is this plot in hectares?"
+            },
+            "_row_num": 5,
+            "__rowNum__": 4,
+            "_token_type": "prompt",
+            "_type": "number",
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 3
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 5,
-            "_branch_label_enclosing_screen": "survey/_screen5",
-            "promptIdx": 3
+            "_row_num": 6,
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 4
           }
         ],
         "validation_tag_map": {
@@ -394,33 +425,40 @@
             "operationIdx": 2
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 5,
-            "operationIdx": 3
-          },
-          {
             "_row_num": 5,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 6,
+            "operationIdx": 4
+          },
+          {
+            "_row_num": 6,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 4
+            "operationIdx": 5
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 5,
-            "operationIdx": 5
+            "_row_num": 6,
+            "operationIdx": 6
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen3": 1,
           "_screen4": 2,
-          "_contents": 4,
-          "_screen5": 4
+          "_screen5": 3,
+          "_contents": 5,
+          "_screen6": 5
         }
       },
       "initial": {
@@ -678,6 +716,19 @@
         "elementSet": "data",
         "elementPath": "planting"
       },
+      "plot_size": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "plot_size",
+        "elementName": "plot_size",
+        "elementSet": "data",
+        "elementPath": "plot_size"
+      },
       "location_latitude": {
         "type": "number",
         "elementKey": "location_latitude",
@@ -801,7 +852,7 @@
         "_aspect": "planting",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"plant_type\",\"data_value\":\"corn\",\"display\":{\"text\":\"Corn\"},\"_row_num\":2},{\"choice_list_name\":\"plant_type\",\"data_value\":\"bean\",\"display\":{\"text\":\"Bean\"},\"_row_num\":3},{\"choice_list_name\":\"plant_type\",\"data_value\":\"cotton\",\"display\":{\"text\":\"Cotton\"},\"_row_num\":4}]"
+        "_value": "[{\"choice_list_name\":\"plant_type\",\"data_value\":\"white\",\"display\":{\"text\":\"White\"},\"_row_num\":2},{\"choice_list_name\":\"plant_type\",\"data_value\":\"yellow\",\"display\":{\"text\":\"Yellow\"},\"_row_num\":3},{\"choice_list_name\":\"plant_type\",\"data_value\":\"orange\",\"display\":{\"text\":\"Orange\"},\"_row_num\":4}]"
       },
       {
         "_partition": "FormType",
@@ -822,7 +873,7 @@
         "_aspect": "default",
         "_key": "colOrder",
         "_type": "array",
-        "_value": "[\"plot_name\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"planting\"]"
+        "_value": "[\"plot_name\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"planting\", \"plot_size\"]"
       },
       {
         "_partition": "Table",

@@ -14,16 +14,15 @@ function display() {
     viewPlotsButton.on(
         'click',
         function() {
-            odkTables.openTableToListView(
+            odkTables.openTable(
                 'plot',
                 null,
-                null,
-                'config/tables/plot/html/plot_list.html');
+                null);
         }
     );
 
-    var viewTeasButton = $('#view-visits');
-    viewTeasButton.on(
+    var viewVisitsButton = $('#view-visits');
+    viewVisitsButton.on(
         'click',
         function() {
             odkTables.openTableToListView(
@@ -31,6 +30,14 @@ function display() {
                 null,
                 null,
                 'config/tables/visit/html/visit_list.html');
+        }
+    );
+
+    var viewReportsButton = $('#view-reports');
+    viewReportsButton.on(
+        'click',
+        function() {
+            odkTables.launchHTML('config/assets/plotter-reports.html');
         }
     );
 
