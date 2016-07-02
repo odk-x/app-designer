@@ -8,6 +8,7 @@
         "display": {
           "text": "Which plot are you observing?"
         },
+        "required": true,
         "_row_num": 2
       },
       {
@@ -16,6 +17,7 @@
         "display": {
           "text": "Select the date and time of your visit."
         },
+        "required": true,
         "_row_num": 3
       },
       {
@@ -662,6 +664,7 @@
             "display": {
               "text": "Which plot are you observing?"
             },
+            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -675,6 +678,7 @@
             "display": {
               "text": "Select the date and time of your visit."
             },
+            "required": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -875,6 +879,8 @@
         ],
         "validation_tag_map": {
           "finalize": [
+            0,
+            1,
             2,
             14
           ]
