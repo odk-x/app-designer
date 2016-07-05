@@ -106,11 +106,11 @@ function displayPlotSize() {
             } else if(i === 2){
                 return "orchid";
             } else if(i === 3){
-                return "lightgray";
+                return "lightblue";
             } else if(i === 4){
                 return "steelblue";
             } else if(i === 5){
-                return "springgreen";
+                return "thistle";
             } else if(i === 6){
                 return "azure";
             } else if(i === 7){
@@ -187,7 +187,7 @@ function displaySoilType() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "tan";
+                return "darkseagreen";
             } else if(i === 1) {
                 return "greenyellow";
             } else if(i === 2){
@@ -273,11 +273,11 @@ function displayMaizeVar() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "ghostwhite";
-            } else if(i === 1) {
-                return "yellow";
-            } else if(i === 2){
                 return "orange";
+            } else if(i === 1) {
+                return "ghostwhite";
+            } else if(i === 2){
+                return "yellow";
             } else if(i === 3){
                 return "lightgray";
             } else if(i === 4){
