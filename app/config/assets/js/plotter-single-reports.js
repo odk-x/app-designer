@@ -54,6 +54,10 @@ function render() {
     for (var i = 0; i < plotData.getCount(); i++) {
         if (plotData.getRowId(i) === rowId) {
             plotName = plotData.getData(i, 'plot_name');
+            $('#NAME').text('Single Plot Data for ' + plotName);
+            
+            var maizeVariety = plotData.getData(i, 'planting');
+            $('#maize-variety').text('Crop: ' + maizeVariety);
         }
     }
     
@@ -265,7 +269,7 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
     svg.selectAll("bar")
         .data(data)
         .enter().append("rect")
-        .style("fill", "green")
+        .style("fill", "YellowGreen")
         .attr("x", function(d) { return x(d.date); })
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.value); })
