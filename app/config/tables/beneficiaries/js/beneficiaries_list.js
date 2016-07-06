@@ -29,7 +29,7 @@ var beneficiariesResultSet = {};
  * Called when page loads to display things (Nothing to edit here)
  */
 var beneficiariesCBSuccess = function(result) {
-    var beneficiariesResultSet = result;
+    beneficiariesResultSet = result;
 
     return (function() {
         displayGroup(idxStart);
@@ -43,9 +43,12 @@ var beneficiariesCBFailure = function(error) {
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
-var resumeFn = function(idxStart) {
-    
+var resumeFn = function(fIdxStart) {  
+    odkData.query('beneficiaries', null, null, null, null,
+            null, null, true, beneficiariesCBSuccess, 
+            beneficiariesCBFailure); 
 
+    idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
     // The first time through we're going to make a map of typeId to
     // typeName so that we can display the name of each shop's specialty.
@@ -72,14 +75,10 @@ var resumeFn = function(idxStart) {
                 odkTables.openDetailView(
                   tableId,
                   rowId,
-                  'tables/beneficiaries/html/beneficiaries_detail.html');
+                  'config/tables/beneficiaries/html/beneficiaries_detail.html');
             }
         });
     }
-    
-    return (function() {
-        displayGroup(idxStart);
-    }());
 };
             
 /**
@@ -109,7 +108,7 @@ var displayGroup = function(idxStart) {
               
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
-      chevron.attr('src', odkCommon.getFileAsUrl('assets/img/little_arrow.png'));
+      chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
       chevron.attr('class', 'chevron');
       item.append(chevron);
               
