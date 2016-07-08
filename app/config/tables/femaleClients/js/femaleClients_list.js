@@ -36,11 +36,11 @@ function cbSRSuccess(searchData) {
     console.log('cbSRSuccess data is' + searchData);
     if(searchData.getCount() > 0) {
         // open filtered list view if client found
-        var clientId = searchData.get('client_id');
+        var rowId = searchData.getRowId(0);
         odkTables.openTableToListView(
                 'femaleClients',
-                'client_id = ?',
-                [clientId],
+                '_id = ?',
+                [rowId],
                 'config/tables/FemaleClients/html/femaleClients_list.html');
     } else {
         // open 'client not found' page
