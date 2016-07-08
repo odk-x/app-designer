@@ -119,9 +119,16 @@ function displayPlotSize() {
         });
 
     g.append("text")
-        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", "2em")
+        .attr("transform", function(d) { 
+            var a = arc.centroid(d) + "";
+            var cent = a.split(",");
+            var temp = 0;
+            for (; temp < 2; temp++) {
+                cent[temp] = cent[temp] * 1.3;
+            }
+            return "translate(" + cent[0] + "," + cent[1] + ")"; })
         .style("text-anchor", "middle")
+        .style("alignment-baseline", "middle")
         .text(function(d, i) { return dataJ[i].x; });
 }
 
@@ -207,8 +214,8 @@ function displaySoilType() {
 
     g.append("text")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", "2em")
         .style("text-anchor", "middle")
+        .style("alignment-baseline", "middle")
         .text(function(d, i) { return dataJ[i].x; });
 }
 
@@ -291,9 +298,11 @@ function displayMaizeVar() {
             }
         });
 
+
+
     g.append("text")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", "2em")
         .style("text-anchor", "middle")
+        .style("alignment-baseline", "middle")
         .text(function(d, i) { return dataJ[i].x; });
 }
