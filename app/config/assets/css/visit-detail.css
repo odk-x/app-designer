@@ -1,6 +1,6 @@
 body {
-  background-color: beige;
-  background-image: linear-gradient(beige, white) no-repeat;
-  background: beige no-repeat;
-  background: linear-gradient(beige, white) no-repeat;
+  background-color: lightcyan;
+  background-image: linear-gradient(lightcyan, white) no-repeat;
+  background: lightcyan no-repeat;
+  background: linear-gradient(lightcyan, white) no-repeat;
 }

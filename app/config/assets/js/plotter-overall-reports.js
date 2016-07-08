@@ -100,17 +100,17 @@ function displayPlotSize() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "aqua";
+                return "orangered";
             } else if(i === 1) {
-                return "teal";
+                return "lightseagreen";
             } else if(i === 2){
-                return "orchid";
+                return "red";
             } else if(i === 3){
-                return "lightblue";
+                return "mediumspringgreen";
             } else if(i === 4){
-                return "steelblue";
+                return "gold";
             } else if(i === 5){
-                return "thistle";
+                return "mediumvioletred";
             } else if(i === 6){
                 return "azure";
             } else if(i === 7){
