@@ -9,55 +9,71 @@
 }
 
 body {
-    font-family: arial;
+    font-family: helvetica;
     margin: 0;
 }
 
-div { 
-    position: relative; 
-}
 
 button {
-    width: 90%%;
-    max-width: 500px;
-    height: 100px;
-    margin: 0 auto 35px;
+    width: 90vw;
+    float: none;
+    height: 15vh;
+    margin: auto;
     border-left: 15px solid;
     border-top: none;
     border-right: none;
     border-bottom: 1.5px solid;
     background-color: #F1F1F1;
-    font-size: 18pt;
+    font-size: 7vmin;
     display: block;
-    text-align: left;
-    padding: 15px;
     color: #5C5C5C;
 }
 
 button:active {
-    background-color: lightskyblue;
+    background-color: #FFC9C9;
 }
 
 #button1 {
-    border-color: #003D5C;
+    border-color: #EE3224;
+    margin-bottom: 6vh;
 }
 
 #button2 {
-    border-color: #006699;
+    border-color: #EE3224;
+    margin-bottom: 6vh;
 }
 
 #button3 {
-    border-color: #66A3C2;
+    border-color: #EE3224;
 }
 
 h1 {
-    font-size: 40pt;
-    margin: 50px 0;
+    font-size: 8.5vh;
+    height: 10vh;
+    margin-top: 4vh;
+    margin-bottom: 6vh;
     text-align: center;
     color: #5C5C5C;
 }
 
-h2 {
-  text-align: center;
-  color: #5C5C5C;
+p {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    height: 23vh;
+    width: 100vw;
+    text-align: center;
+}
+
+img {
+    max-height: 90%;
+    max-width: 100%;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: auto;
+    width: auto;
 }
