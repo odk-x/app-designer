@@ -1,6 +1,8 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
 crop_yield,crop_yield,integer,[]
 date,date,dateTime,[]
+max_height,max_height,number,[]
+max_yield,max_yield,number,[]
 observations,observations,string,[]
 pests,pests,array,"[""pests_items""]"
 pests_items,items,string,[]
