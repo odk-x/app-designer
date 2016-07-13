@@ -25,11 +25,10 @@ var idxStart = -1;
     
 function cbSuccess(result) {
     plotResultSet = result;
-
-    
-    return (function() {
-        displayGroup(idxStart);
-    }());
+  
+    // return (function() {
+    displayGroup(idxStart);
+    // }());
 }
 
 function cbFailure(error) {
@@ -45,36 +44,36 @@ var resumeFn = function(fidxStart) {
     odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fidxStart;
-    if (idxStart === 0) {
-        // We want to be able to drag and drop without the drop triggering a click.
-        // Idea for this taken from:
-        // http://stackoverflow.com/questions/14301026/how-do-i-avoid-a-click-event-firing-after-dragging-a-gridster-js-widget-with-cli
+    // if (idxStart === 0) {
+    //     // We want to be able to drag and drop without the drop triggering a click.
+    //     // Idea for this taken from:
+    //     // http://stackoverflow.com/questions/14301026/how-do-i-avoid-a-click-event-firing-after-dragging-a-gridster-js-widget-with-cli
 
-        var preventClick = function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-        };
+    //     var preventClick = function(e) {
+    //         e.stopPropagation();
+    //         e.preventDefault();
+    //     };
 
-        $('.gridster ul').gridster({
-            widget_margins: [10, 10],
-            widget_base_dimensions: [140, 140],
-            draggable: {
-                start: function(event, ui) {
-                    // stop propagating in the capture phase.
-                    ui.$player[0].addEventListener('click', preventClick, true);
-                },
-                stop: function(event, ui) {
-                    var player = ui.$player;
-                    setTimeout(function() {
-                        player[0].removeEventListener(
-                          'click',
-                          preventClick,
-                          true);
-                    });
-                }
-            }
-        });
-    }
+    //     $('.gridster ul').gridster({
+    //         widget_margins: [10, 10],
+    //         widget_base_dimensions: [140, 140],
+    //         draggable: {
+    //             start: function(event, ui) {
+    //                 // stop propagating in the capture phase.
+    //                 ui.$player[0].addEventListener('click', preventClick, true);
+    //             },
+    //             stop: function(event, ui) {
+    //                 var player = ui.$player;
+    //                 setTimeout(function() {
+    //                     player[0].removeEventListener(
+    //                       'click',
+    //                       preventClick,
+    //                       true);
+    //                 });
+    //             }
+    //         }
+    //     });
+    // }
 
     console.log('resumeFn called. idxStart: ' + idxStart);
     // The first time through construct any constants you need to refer to
@@ -99,10 +98,7 @@ var resumeFn = function(fidxStart) {
           // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView(
-                    tableId,
-                    rowId,
-                    'config/tables/plot/html/plot_detail.html');
+                odkTables.openDetailView(tableId, rowId, 'config/tables/plot/html/plot_detail.html');
             }
         });
     }
@@ -119,8 +115,8 @@ var resumeFn = function(fidxStart) {
 var displayGroup = function(idxStart) {
 
 
-    // Number of rows displayed per chunk
-    var chunk = 50;
+    // Number of rows displayed per chunk 
+    // var chunk = 50;
 
     // Ensure that this is the first displayed in the list
     var mapIndex = plotResultSet.getMapIndex();
@@ -134,49 +130,59 @@ var displayGroup = function(idxStart) {
         }
     }
 
-    for (var i = idxStart; i < idxStart + chunk; i++) {
-        if (i >= plotResultSet.getCount()) {
-            break;
-        }
+    for (var i = 0; i < plotResultSet.getCount(); i++) {
 
+        // Make sure not to repeat the selected item if one existed
         if (i === mapIndex) {
             continue;
         }
         addDataForRow(i);
         
     }
-    if (i < plotResultSet.getCount()) {
-        setTimeout(resumeFn, 0, i);
-    }
 };
 
 function addDataForRow(rowNumber) {
-    var gridster = $('.gridster ul').gridster().data('gridster');
+    // var gridster = $('.gridster ul').gridster().data('gridster');
+
     // Creates the space for a single element in the list. We add rowId as
     // an attribute so that the click handler set in resumeFn knows which
     // row was clicked.
     var item = $('<li>');
 
-    var containerDiv = $('<div>');
-    containerDiv.text(plotResultSet.getData(rowNumber, 'plot_name'));
-    containerDiv.addClass('content-holder');
+    // var containerDiv = $('<div>');
+    // containerDiv.text(plotResultSet.getData(rowNumber, 'plot_name'));
+    // containerDiv.addClass('content-holder');
 
     item.attr('rowId', plotResultSet.getRowId(rowNumber));
     item.attr('class', 'item_space');
-    item.addClass('grid-item');
+    // item.addClass('grid-item');
+    item.text(plotResultSet.getData(rowNumber, 'plot_name'));
 
-    item.append(containerDiv);
+    // item.append(containerDiv);
             
     /* Creates arrow icon (Nothing to edit here) */
-    //var chevron = $('<img>');
-    //chevron.attr('src', odkTables.getFileAsUrl('config/assets/img/little_arrow.png'));
-    //chevron.attr('class', 'chevron');
-    //item.append(chevron);
+    var chevron = $('<img>');
+    chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
+    chevron.attr('class', 'chevron');
+    item.append(chevron);
 
-    var idItem = $('<div>');
-    idItem.attr('class', 'detail');
-    idItem.text('Crop: ' + plotResultSet.getData(rowNumber, 'planting'));
-    containerDiv.append(idItem);
+    var field1 = $('<li>');
+    field1.attr('class', 'detail');
+    var cropType = plotResultSet.getData(rowNumber, 'planting');
+    field1.text('Crop: ' + cropType);
+    item.append(field1);
 
-    gridster.add_widget(item, 1, 1);
+    $('#list').append(item);
+
+    // don't append the last one to avoid the fencepost problem
+    var borderDiv = $('<div>');
+    borderDiv.addClass('divider');
+    $('#list').append(borderDiv);
+
+    // var idItem = $('<div>');
+    // idItem.attr('class', 'detail');
+    // idItem.text('Crop: ' + plotResultSet.getData(rowNumber, 'planting'));
+    // containerDiv.append(idItem);
+
+    // gridster.add_widget(item, 1, 1);
 }
