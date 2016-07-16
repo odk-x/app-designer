@@ -43,12 +43,8 @@ function cbSRSuccess(searchData) {
                 [rowId],
                 'config/tables/FemaleClients/html/femaleClients_list.html');
     } else {
-        // open 'client not found' page
-        odkTables.openTableToListView(
-                'femaleClients',
-                null,
-                null,
-                'config/assets/clients_not_found_list.html');
+        document.getElementById("search").value = "";
+        document.getElementsByName("query")[0].placeholder="Client not found";
     }
 }
 
