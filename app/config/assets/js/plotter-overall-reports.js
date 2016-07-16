@@ -100,11 +100,11 @@ function displayPlotSize() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "orangered";
-            } else if(i === 1) {
                 return "lightseagreen";
+            } else if(i === 1) {
+                return "orangered";
             } else if(i === 2){
-                return "red";
+                return "mediumslateblue";
             } else if(i === 3){
                 return "mediumspringgreen";
             } else if(i === 4){
@@ -280,11 +280,11 @@ function displayMaizeVar() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "orange";
-            } else if(i === 1) {
                 return "ghostwhite";
-            } else if(i === 2){
+            } else if(i === 1) {
                 return "yellow";
+            } else if(i === 2){
+                return "orange";
             } else if(i === 3){
                 return "lightgray";
             } else if(i === 4){

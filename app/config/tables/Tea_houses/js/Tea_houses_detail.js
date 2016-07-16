@@ -81,6 +81,15 @@ function teaInvCBSuccess(invData) {
     
     nullCaseHelper('Owner', '#FIELD_14');
     nullCaseHelper('Phone_Number', '#FIELD_15');
+
+    var teaQuantity = invData.getCount();
+    if (teaQuantity == 1) {
+        document.getElementById("tea_button").innerHTML="1 Tea";
+    } else if (teaQuantity > 1) {
+        document.getElementById("tea_button").innerHTML=teaQuantity + " Teas";
+
+    }
+
     
     if (typeData.getCount() > 0) {
         $('#FIELD_6').text(typeData.getData(0, 'Name'));
