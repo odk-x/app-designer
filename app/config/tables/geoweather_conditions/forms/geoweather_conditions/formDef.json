@@ -2,25 +2,27 @@
   "xlsx": {
     "survey": [
       {
-        "type": "assign",
-        "name": "Date_and_Time",
-        "model": {
-          "type": "object",
-          "elementType": "dateTime"
-        },
-        "calculation": "new Date()",
+        "clause": "begin screen",
         "_row_num": 2
       },
       {
-        "clause": "begin screen",
+        "type": "string",
+        "name": "Code",
+        "display": {
+          "text": "Weather Condition Code",
+          "hint": "The scoring code for this weather condition"
+        },
+        "required": true,
         "_row_num": 3
       },
       {
-        "type": "note",
+        "type": "string",
+        "name": "Language",
         "display": {
-          "text": "Current Date and Time<br> {{data.Date_and_Time}}",
-          "hint": "The date and time of this observation"
+          "text": "Language and Locale",
+          "hint": "The language and locale of the description text"
         },
+        "required": true,
         "_row_num": 4
       },
       {
@@ -28,53 +30,14 @@
         "name": "Description",
         "display": {
           "text": "Description",
-          "hint": "A brief description of this location"
+          "hint": "The description shown to the user"
         },
         "required": true,
         "_row_num": 5
       },
       {
-        "type": "select_one_dropdown",
-        "values_list": "select_geoweather_conditions",
-        "name": "Weather",
-        "display": {
-          "text": "Current Weather",
-          "hint": "Record the current conditions at this location"
-        },
-        "_row_num": 6
-      },
-      {
-        "type": "integer",
-        "name": "Temperature",
-        "display": {
-          "text": "Outdoor Temperature",
-          "hint": "Record the current outdoor temperature"
-        },
-        "_row_num": 7
-      },
-      {
-        "type": "geopoint",
-        "name": "Location",
-        "display": {
-          "text": "Location",
-          "hint": "Capture the GPS coordinates of this location"
-        },
-        "buttonLabel": "Record Location",
-        "_row_num": 8
-      },
-      {
         "clause": "end screen",
-        "_row_num": 9
-      },
-      {
-        "type": "assign",
-        "name": "Description_Date",
-        "model": {
-          "type": "string"
-        },
-        "calculation": "data('Description') + ' @ ' + data('Date_and_Time')",
-        "required": true,
-        "_row_num": 10
+        "_row_num": 6
       }
     ],
     "properties": [
@@ -103,111 +66,33 @@
         "_row_num": 4
       }
     ],
-    "queries": [
-      {
-        "query_name": "select_geoweather_conditions",
-        "query_type": "linked_table",
-        "linked_form_id": "geoweather_conditions",
-        "linked_table_id": "geoweather_conditions",
-        "selection": "Language = ?",
-        "selectionArgs": "[ 'en' ]",
-        "auxillaryHash": "''",
-        "_row_num": 2
-      }
-    ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "geoweather",
+        "value": "geoweather_conditions",
         "_row_num": 2
       },
       {
         "setting_name": "form_version",
-        "value": 20140814,
+        "value": 20160710,
         "_row_num": 3
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": "Weather Conditions for Geo-Weather Survey"
         },
         "_row_num": 4
       },
       {
         "setting_name": "table_id",
-        "value": "geoweather",
+        "value": "geoweather_conditions",
         "_row_num": 5
       },
       {
         "setting_name": "instance_name",
-        "value": "Description_Date",
+        "value": "Description",
         "_row_num": 6
-      }
-    ],
-    "choices": [
-      {
-        "choice_list_name": "conditions",
-        "data_value": "clear",
-        "display": {
-          "text": "Clear skies"
-        },
-        "_row_num": 2
-      },
-      {
-        "choice_list_name": "conditions",
-        "data_value": "partly_clear",
-        "display": {
-          "text": "Partly clear skies"
-        },
-        "_row_num": 3
-      },
-      {
-        "choice_list_name": "conditions",
-        "data_value": "overcast",
-        "display": {
-          "text": "Overcast (cloudy) skies"
-        },
-        "_row_num": 4
-      },
-      {
-        "choice_list_name": "conditions",
-        "data_value": "foggy",
-        "display": {
-          "text": "Foggy"
-        },
-        "_row_num": 5
-      },
-      {
-        "choice_list_name": "conditions",
-        "data_value": "drizzle",
-        "display": {
-          "text": "Light rain"
-        },
-        "_row_num": 6
-      },
-      {
-        "choice_list_name": "conditions",
-        "data_value": "rain",
-        "display": {
-          "text": "Raining"
-        },
-        "_row_num": 7
-      },
-      {
-        "choice_list_name": "conditions",
-        "data_value": "thunderstorm",
-        "display": {
-          "text": "Thunderstorms"
-        },
-        "_row_num": 8
-      },
-      {
-        "choice_list_name": "conditions",
-        "data_value": "snow",
-        "display": {
-          "text": "Snowing"
-        },
-        "_row_num": 9
       }
     ]
   },
@@ -232,29 +117,29 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "geoweather",
+        "value": "geoweather_conditions",
         "_row_num": 2
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20140814,
+        "value": 20160710,
         "_row_num": 3
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": "Weather Conditions for Geo-Weather Survey"
         },
         "_row_num": 4
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "geoweather",
+        "value": "geoweather_conditions",
         "_row_num": 5
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "Description_Date",
+        "value": "Description",
         "_row_num": 6
       },
       "_locales": {
@@ -277,93 +162,35 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": "Weather Conditions for Geo-Weather Survey"
         },
         "_row_num": 4
       }
     },
-    "choices": {
-      "conditions": [
-        {
-          "choice_list_name": "conditions",
-          "data_value": "clear",
-          "display": {
-            "text": "Clear skies"
-          },
-          "_row_num": 2
-        },
-        {
-          "choice_list_name": "conditions",
-          "data_value": "partly_clear",
-          "display": {
-            "text": "Partly clear skies"
-          },
-          "_row_num": 3
-        },
-        {
-          "choice_list_name": "conditions",
-          "data_value": "overcast",
-          "display": {
-            "text": "Overcast (cloudy) skies"
-          },
-          "_row_num": 4
-        },
-        {
-          "choice_list_name": "conditions",
-          "data_value": "foggy",
-          "display": {
-            "text": "Foggy"
-          },
-          "_row_num": 5
-        },
-        {
-          "choice_list_name": "conditions",
-          "data_value": "drizzle",
-          "display": {
-            "text": "Light rain"
-          },
-          "_row_num": 6
-        },
-        {
-          "choice_list_name": "conditions",
-          "data_value": "rain",
-          "display": {
-            "text": "Raining"
-          },
-          "_row_num": 7
-        },
-        {
-          "choice_list_name": "conditions",
-          "data_value": "thunderstorm",
-          "display": {
-            "text": "Thunderstorms"
-          },
-          "_row_num": 8
-        },
-        {
-          "choice_list_name": "conditions",
-          "data_value": "snow",
-          "display": {
-            "text": "Snowing"
-          },
-          "_row_num": 9
-        }
-      ]
-    },
-    "queries": {
-      "select_geoweather_conditions": {
-        "query_name": "select_geoweather_conditions",
-        "query_type": "linked_table",
-        "linked_form_id": "geoweather_conditions",
-        "linked_table_id": "geoweather_conditions",
-        "selection": "Language = ?",
-        "selectionArgs": "[ 'en' ]",
-        "auxillaryHash": "''",
-        "_row_num": 2
-      }
-    },
+    "choices": {},
+    "queries": {},
     "calculates": {},
     "model": {
+      "Code": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Code"
+      },
+      "Language": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Language"
+      },
       "Description": {
         "_defn": [
           {
@@ -373,77 +200,6 @@
         ],
         "type": "string",
         "elementKey": "Description"
-      },
-      "Weather": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "select_geoweather_conditions",
-        "elementKey": "Weather"
-      },
-      "Temperature": {
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "elementKey": "Temperature"
-      },
-      "Location": {
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "geopoint",
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "elementKey": "Location_latitude"
-          },
-          "longitude": {
-            "type": "number",
-            "elementKey": "Location_longitude"
-          },
-          "altitude": {
-            "type": "number",
-            "elementKey": "Location_altitude"
-          },
-          "accuracy": {
-            "type": "number",
-            "elementKey": "Location_accuracy"
-          }
-        },
-        "elementKey": "Location"
-      },
-      "Date_and_Time": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "dateTime",
-        "elementKey": "Date_and_Time"
-      },
-      "Description_Date": {
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "Description_Date"
       }
     },
     "section_names": [
@@ -457,158 +213,107 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "note",
+            "type": "string",
+            "name": "Code",
             "display": {
-              "text": "Current Date and Time<br> {{data.Date_and_Time}}",
-              "hint": "The date and time of this observation"
+              "text": "Weather Condition Code",
+              "hint": "The scoring code for this weather condition"
             },
+            "required": true,
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "string",
+            "name": "Language",
+            "display": {
+              "text": "Language and Locale",
+              "hint": "The language and locale of the description text"
+            },
+            "required": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 0
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 1
           },
           {
             "type": "string",
             "name": "Description",
             "display": {
               "text": "Description",
-              "hint": "A brief description of this location"
+              "hint": "The description shown to the user"
             },
             "required": true,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 1
-          },
-          {
-            "type": "select_one_dropdown",
-            "values_list": "select_geoweather_conditions",
-            "name": "Weather",
-            "display": {
-              "text": "Current Weather",
-              "hint": "Record the current conditions at this location"
-            },
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "prompt",
-            "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen3",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 2
-          },
-          {
-            "type": "integer",
-            "name": "Temperature",
-            "display": {
-              "text": "Outdoor Temperature",
-              "hint": "Record the current outdoor temperature"
-            },
-            "_row_num": 7,
-            "__rowNum__": 6,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 3
-          },
-          {
-            "type": "geopoint",
-            "name": "Location",
-            "display": {
-              "text": "Location",
-              "hint": "Capture the GPS coordinates of this location"
-            },
-            "buttonLabel": "Record Location",
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "prompt",
-            "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 4
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 11,
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 5
+            "_row_num": 7,
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 3
           }
         ],
         "validation_tag_map": {
           "finalize": [
-            1
+            0,
+            1,
+            2
           ]
         },
         "operations": [
           {
-            "type": "assign",
-            "name": "Date_and_Time",
-            "model": {
-              "type": "object",
-              "elementType": "dateTime"
-            },
-            "calculation": "new Date()",
+            "clause": "begin screen",
             "_row_num": 2,
             "__rowNum__": 1,
-            "_token_type": "assign",
-            "operationIdx": 0
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 3,
-            "__rowNum__": 2,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 9,
-              "__rowNum__": 8,
+              "_row_num": 6,
+              "__rowNum__": 5,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
-          },
-          {
-            "type": "assign",
-            "name": "Description_Date",
-            "model": {
-              "type": "string"
-            },
-            "calculation": "data('Description') + ' @ ' + data('Date_and_Time')",
-            "required": true,
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "assign",
-            "operationIdx": 2
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 11,
-            "operationIdx": 3
+            "_row_num": 7,
+            "operationIdx": 1
           },
           {
-            "_row_num": 11,
+            "_row_num": 7,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 4
+            "operationIdx": 2
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 11,
-            "operationIdx": 5
+            "_row_num": 7,
+            "operationIdx": 3
           }
         ],
         "branch_label_map": {
-          "_screen3": 1,
-          "_contents": 4,
-          "_screen11": 4
+          "_screen2": 0,
+          "_contents": 2,
+          "_screen7": 2
         }
       },
       "initial": {
@@ -639,7 +344,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Simple Weather Survey"
+              "title": "Weather Conditions for Geo-Weather Survey"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -788,6 +493,32 @@
       }
     },
     "dataTableModel": {
+      "Code": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Code",
+        "elementName": "Code",
+        "elementSet": "data",
+        "elementPath": "Code"
+      },
+      "Language": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "Language",
+        "elementName": "Language",
+        "elementSet": "data",
+        "elementPath": "Language"
+      },
       "Description": {
         "_defn": [
           {
@@ -800,140 +531,6 @@
         "elementName": "Description",
         "elementSet": "data",
         "elementPath": "Description"
-      },
-      "Weather": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "select_geoweather_conditions",
-        "elementKey": "Weather",
-        "elementName": "Weather",
-        "elementSet": "data",
-        "elementPath": "Weather"
-      },
-      "Temperature": {
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "elementKey": "Temperature",
-        "elementName": "Temperature",
-        "elementSet": "data",
-        "elementPath": "Temperature"
-      },
-      "Location": {
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "geopoint",
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "elementKey": "Location_latitude",
-            "elementName": "latitude",
-            "elementSet": "data",
-            "elementPath": "Location.latitude"
-          },
-          "longitude": {
-            "type": "number",
-            "elementKey": "Location_longitude",
-            "elementName": "longitude",
-            "elementSet": "data",
-            "elementPath": "Location.longitude"
-          },
-          "altitude": {
-            "type": "number",
-            "elementKey": "Location_altitude",
-            "elementName": "altitude",
-            "elementSet": "data",
-            "elementPath": "Location.altitude"
-          },
-          "accuracy": {
-            "type": "number",
-            "elementKey": "Location_accuracy",
-            "elementName": "accuracy",
-            "elementSet": "data",
-            "elementPath": "Location.accuracy"
-          }
-        },
-        "elementKey": "Location",
-        "elementName": "Location",
-        "elementSet": "data",
-        "elementPath": "Location",
-        "listChildElementKeys": [
-          "Location_accuracy",
-          "Location_altitude",
-          "Location_latitude",
-          "Location_longitude"
-        ],
-        "notUnitOfRetention": true
-      },
-      "Date_and_Time": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "dateTime",
-        "elementKey": "Date_and_Time",
-        "elementName": "Date_and_Time",
-        "elementSet": "data",
-        "elementPath": "Date_and_Time",
-        "listChildElementKeys": []
-      },
-      "Description_Date": {
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "Description_Date",
-        "elementName": "Description_Date",
-        "elementSet": "data",
-        "elementPath": "Description_Date"
-      },
-      "Location_latitude": {
-        "type": "number",
-        "elementKey": "Location_latitude",
-        "elementName": "latitude",
-        "elementSet": "data",
-        "elementPath": "Location.latitude"
-      },
-      "Location_longitude": {
-        "type": "number",
-        "elementKey": "Location_longitude",
-        "elementName": "longitude",
-        "elementSet": "data",
-        "elementPath": "Location.longitude"
-      },
-      "Location_altitude": {
-        "type": "number",
-        "elementKey": "Location_altitude",
-        "elementName": "altitude",
-        "elementSet": "data",
-        "elementPath": "Location.altitude"
-      },
-      "Location_accuracy": {
-        "type": "number",
-        "elementKey": "Location_accuracy",
-        "elementName": "accuracy",
-        "elementSet": "data",
-        "elementPath": "Location.accuracy"
       },
       "_id": {
         "type": "string",
@@ -1037,7 +634,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "geoweather"
+        "_value": "geoweather_conditions"
       },
       {
         "_partition": "Table",
@@ -1051,7 +648,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Simple Weather Survey\""
+        "_value": "\"Weather Conditions for Geo-Weather Survey\""
       },
       {
         "_partition": "Table",

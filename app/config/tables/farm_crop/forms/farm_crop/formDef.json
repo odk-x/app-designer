@@ -45,16 +45,6 @@
         "_row_num": 5
       }
     ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "colOrder",
-        "type": "object",
-        "value": "[\"farm_name\",\"farm_uuid\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"farm_num_employee\",\"farm_revenue\",\"field_name\",\"field_uuid\",\"crop_name\",\"num_crop\",\"crop_pesticides\",\"crop_fertilizer\",\"crop_harvest\"]",
-        "_row_num": 2
-      }
-    ],
     "model": [
       {
         "name": "farm_name",
@@ -1086,13 +1076,6 @@
         "_key": "SurveyUtil.formId",
         "_type": "string",
         "_value": "farm_crop"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "colOrder",
-        "_type": "object",
-        "_value": "[\"farm_name\",\"farm_uuid\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"farm_num_employee\",\"farm_revenue\",\"field_name\",\"field_uuid\",\"crop_name\",\"num_crop\",\"crop_pesticides\",\"crop_fertilizer\",\"crop_harvest\"]"
       },
       {
         "_partition": "Table",

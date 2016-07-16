@@ -728,7 +728,83 @@ module.exports = function (grunt) {
 
             dirs.forEach(suffixRenameCopier(".simpledemo", ""));
         });
+	
+	var rowLevelAccessDemoFiles = function(grunt) {
+		// The row level access demo is based upon the geoweather and
+		// geoweather_conditions table.
+		var dirs = grunt.file.expand(
+			{filter: 'isFile',
+			 cwd: 'app' },
+			'.nomedia',
+			'**',
+			'!system/**',
+			'!data/**',
+			'!output/**',
+			'!config/assets/**',
+			'!config/tables/**',
+			'config/**/*.rowlevelaccessdemo',
+			'config/assets/framework/translations.js',
+			'config/assets/framework/forms/framework/*.rowlevelaccessdemo',
+			'config/assets/css/odk-survey.css',
+			'config/assets/img/advance.png',
+			'config/assets/img/backup.png',
+			'config/assets/img/form_logo.png',
+			'config/assets/img/little_arrow.png',
+			'config/assets/img/play.png',
+			'config/assets/libs/**',
+			'config/assets/ratchet/**',
+			'config/assets/css/demo-chooser.css',
+			'config/assets/img/noaa_weather_nssl0010.jpg',
+			'config/assets/js/rowlevelaccessdemo.js',
+			'config/tables/geoweather_conditions/**',
+			'config/tables/geoweather/**',
+			'config/assets/csv/geoweather.updated.csv',
+			'config/assets/csv/geoweather_conditions.updated.csv');
 
+		return dirs;
+	};
+	
+    grunt.registerTask(
+        'adbpush-tables-rowlevelaccessdemo',
+        'Push everything for tables opendatakit-rowlevelaccessdemo to the device',
+        function() {
+            var dirs = rowLevelAccessDemoFiles(grunt);
+
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameAdbPusher(".rowlevelaccessdemo", tablesConfig.appDir));
+        });
+
+	
+    grunt.registerTask(
+        'create-tables-rowlevelaccessdemo',
+        'creat the rowlevelaccessdemo application designer package under build/rowaccessdemo/',
+        function() {
+            var dirs = rowLevelAccessDemoFiles(grunt);
+			
+			var buildDir = 'build/rowlevelaccessdemo';
+			
+			grunt.file.delete(buildDir + '/');
+			grunt.file.mkdir(buildDir);
+			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
+			
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameCopier(".rowlevelaccessdemo", tablesConfig.appDir));
+			
+			var dirs = grunt.file.expand(
+				{filter: 'isFile',
+				 cwd: '.' },
+				'**',
+				'!.git/**',
+				'!build/**',
+				'!app/**',
+				'app/system/**',
+				'app/data/tables/geoweather/**',
+				'app/data/tables/geoweather_conditions/**',
+				'app/output/**');
+
+            dirs.forEach(suffixRenameCopier(".rowlevelaccessdemo", ""));
+        });
+		
 	var tablesDemoFiles = function(grunt) {
 		// In the alpha demo we want Tables and Survey. For this demo,
 		// it had needed a push of the system files, but we won't do that
