@@ -55,12 +55,13 @@ function display() {
     
     var i;
     var plotId = plotDetailResultSet.getRowId(0);
+    var maizeType = plotDetailResultSet.get('planting');
 
     $('#NAME').text(plotDetailResultSet.get('plot_name'));
     $('#plot-id').text(plotId);
     $('#lat').text(plotDetailResultSet.get('location.latitude'));
     $('#long').text(plotDetailResultSet.get('location.longitude'));
-    $('#crop').text(plotDetailResultSet.get('planting'));
+    $('#crop').text(maizeType);
 
 // We want to get the count.
 //     var table = odkTables.query(
@@ -149,11 +150,31 @@ function display() {
     svg.selectAll("bar")
         .data(data)
         .enter().append("rect")
-        .style("fill", "steelblue")
+        .style("fill", "yellowgreen")
         .attr("x", function(d) { return x(d.date); })
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.value); })
         .attr("height", function(d) { return height - y(d.value); });
+
+    var jsonMap = {};
+    // Prepopulate plot id
+    jsonMap.plot_id = plotId;
+    // Prepopulate maize type
+    jsonMap.plant_type = maizeType;
+
+    jsonMap = JSON.stringify(jsonMap);
+
+    var newVisitButton = $('#new-visit');
+    newVisitButton.on(
+        'click',
+        function() {
+            odkTables.addRowWithSurvey(
+                'visit',
+                'visit',
+                null,
+                jsonMap);
+        }
+    );
 }
 
 function setup() {

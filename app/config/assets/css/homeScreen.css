@@ -42,6 +42,9 @@ div {
 .btn-launch {
    width: 80%;
    max-width: 500px;
+   height: 80px;
+   font-size: 16pt;
+   color: white;
    margin: 0 auto 35px;
 }
 

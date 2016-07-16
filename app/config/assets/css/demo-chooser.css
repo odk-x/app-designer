@@ -48,5 +48,7 @@ body {
 .btn-launch {
    width: 100%;
    max-width: 500px;
+   height: 80px;
+   font-size: 16pt;
    margin: 0 auto 35px;
 }
