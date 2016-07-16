@@ -12,5 +12,6 @@ plant_picture,plant_picture,mimeUri,"[""plant_picture_contentType"",""plant_pict
 plant_picture_contentType,contentType,mimeType,[]
 plant_picture_uriFragment,uriFragment,rowpath,[]
 plant_type,plant_type,string,[]
+plant_type_query_text,plant_type_query_text,string,[]
 plot_id,plot_id,string,[]
 soil,soil,string,[]

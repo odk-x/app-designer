@@ -159,8 +159,6 @@ function display() {
     var jsonMap = {};
     // Prepopulate plot id
     jsonMap.plot_id = plotId;
-    // Prepopulate maize type
-    jsonMap.plant_type = maizeType;
 
     jsonMap = JSON.stringify(jsonMap);
 

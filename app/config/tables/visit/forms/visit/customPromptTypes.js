@@ -10,7 +10,7 @@ var async_assign = promptTypes.base.extend({
     type: "async_assign",
     debug: false,
     valid: true,
-    templatePath: '../config/tables/agriculture/forms/agriculture/templates/async_assign.handlebars',
+    templatePath: '../config/tables/visit/forms/visit/templates/async_assign.handlebars',
     _cachedSelection: null,
     getLinkedTableId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
@@ -140,6 +140,10 @@ var async_assign = promptTypes.base.extend({
                         aggValue = sum;
                     } else if ( that.type === "async_assign_count" ) {
                         aggValue = valueList.length;
+                    } else if ( that.type === "async_assign_single_string") {
+                        if (valueList.length === 1) {
+                            aggValue = valueList[0];
+                        }
                     } else {
                         ctxt.log('E',"prompts." + that.type + ".configureRenderContext.unrecognizedPromptType", "px: " + that.promptIdx);
                         aggValue = null;
@@ -183,5 +187,9 @@ return {
 "async_assign_count" : async_assign.extend({
     type: "async_assign_count",
     datatype: "integer"
+}),
+"async_assign_single_string" : async_assign.extend({
+    type: "async_assign_single_string",
+    datatype: "string"
 })
 }});
