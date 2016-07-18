@@ -97,17 +97,10 @@ function graphPlot(plotId) {
     $('#graph-div').append(plotGraphHeader);
 
     var plotGraphDiv = $('<div>');
-    var plotNameID = 'plotName' + plotName;
-    var plotNameUUID = '#plotName' + plotName;
-    plotGraphDiv.attr('id', plotNameID);
-    plotGraphDiv.attr('plotName',plotName);
+    plotGraphDiv.attr('id', plotName);
     $('#graph-div').append(plotGraphDiv);
 
-    // Maybe add in more text html elements to plotGraphDiv after this works
-    //$('#NAME').text('Plot Data for ' + plotName);      
-    //var maizeVariety = plotData.getData(i, 'planting');
-    //$('#maize-variety').text('Crop: ' + maizeVariety);
-    bargraphColAgainstDate(plotId, 'plant_height', plotNameUUID, 'Height');
+    bargraphColAgainstDate(plotId, 'plant_height', '#'+plotName, 'Height');
     console.log('After bargraph');
 }
 
