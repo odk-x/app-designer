@@ -136,3 +136,12 @@ util.genUUID = function() {
     });
     return id;
 };
+
+// Formats variable names for display
+util.formatDisplayText = function(txt) {
+    var displayText = txt
+        .replace(/_/g, " ")
+        .replace(/\w\S*/g, function(str){return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();});
+
+    return displayText;
+}

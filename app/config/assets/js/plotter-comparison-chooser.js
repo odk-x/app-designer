@@ -37,9 +37,6 @@ var resumeFn = function(fidxStart) {
     idxStart = fidxStart;
     if (idxStart === 0) {
         // We want to be able to drag and drop without the drop triggering a click.
-        // Idea for this taken from:
-        // http://stackoverflow.com/questions/14301026/how-do-i-avoid-a-click-event-firing-after-dragging-a-gridster-js-widget-with-cli
-
         var preventClick = function(e) {
             e.stopPropagation();
             e.preventDefault();
@@ -106,10 +103,8 @@ var displayGroup = function() {
     console.log('Compare type chosen: '  + compareTypeFromChooser);
     // Create an array of values of the chosen type from the visit results
     for (i = 0; i < visitResultSet.getCount(); i++) {
-        compareTypeArray.push(visitResultSet.getData(i, compareTypeFromChooser)); 
+        compareTypeArray.push(visitResultSet.getData(i, compareTypeFromChooser));    
     }
-
-
 
     console.log(compareTypeFromChooser + " list: " + compareTypeArray);
 
@@ -126,6 +121,7 @@ var displayGroup = function() {
         
 };
 
+
 function addDataForCompareType(compareType) {
     var gridster = $('.gridster ul').gridster().data('gridster');
     // Creates the space for a single element in the list. We add rowId as
@@ -134,10 +130,10 @@ function addDataForCompareType(compareType) {
     var item = $('<li>');
 
     var containerDiv = $('<div>');
-    containerDiv.text(compareType);
+    containerDiv.text(util.formatDisplayText(compareType));
     containerDiv.addClass('content-holder');
 
-    item.attr(compareTypeValStr, compareType);
+    item.attr('compareTypeVal', compareType);
     item.attr('class', 'item_space');
     item.addClass('grid-item');
 
