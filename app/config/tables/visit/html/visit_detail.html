@@ -18,17 +18,16 @@
 
         <p>Plot name: <span id="plot-name"></span></p>
         <p>Plant height: <span id="plant-height"></span></p>
+        <p class="label">Plant Health:</p>
         <fieldset>
-            <legend>Plant Health:</legend>
             <form>
               <input type="radio" id="plant-health-good"/>Good</br>
               <input type="radio" id="plant-health-fair"/>Fair</br>
               <input type="radio" id="plant-health-bad"/>Bad</br>
             </form>
         </fieldset>
-
+        <p class="label">Soil:</p>
         <fieldset>
-          <legend>Soil:</legend>
           <form>
             <input type="radio" id="medium-sand"/>Medium Sand</br>
             <input type="radio" id="fine-sand"/>Fine Sand</br>
@@ -36,16 +35,15 @@
             <input type="radio" id="loam"/>Loam</br>
           </form>
         </fieldset>
-
+        <p class="label">Bugs:</p>
         <fieldset>
-          <legend>Bugs:</legend>
           <input type="checkbox" id="bugs-earworm"/>Earworm</br>
           <input type="checkbox" id="bugs-stink"/>Stink Bug</br>
           <input type="checkbox" id="bugs-beetle"/>Beetle</br>
           <input type="checkbox" id="bugs-cutworm"/>Cutworm</br>
         </fieldset>
 
-        <h2>Observations:</h2>
+        <h3>Observations:</h3>
         <p id="observations"></p>
         <script>
             $(setup);  // calls the detail display function when ready
