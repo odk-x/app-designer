@@ -50,11 +50,17 @@ function render() {
     }
 
     var compareType = util.getQueryParameter('compareType');
+    var compareTypeDisplay = util.formatDisplayText(compareType);
     var compareTypeVal = util.getQueryParameter('compareTypeVal');
-    console.log('Compare Type: ' + compareType);
-    console.log('Compare Type Val: '+ compareTypeVal);
+    var compareTypeValDisplay = util.formatDisplayText(compareTypeVal);
 
-    $('#NAME').text('Plots with ' + compareTypeVal + ' ' + compareType);
+    if (compareType === 'plant_type') {
+        compareTypeDisplay = 'Maize';
+    } else {
+        compareTypeDisplay = '';
+    }
+
+    $('#NAME').text('Plots with ' + compareTypeValDisplay + ' ' + compareTypeDisplay);
 
     var plotName = null;
     var plotId = null;
@@ -72,42 +78,33 @@ function render() {
     console.log('Plot Id array: ' + plotIdArray.toString());
     console.log('Uniq plot id array: ' + uniqPlotIdArray.toString());
 
-    // This should be changed to not be nested!
-    // Consider reversing the loops
-    for (var i = 0; i < plotData.getCount(); i++) {
-        for (var j = 0; j < uniqPlotIdArray.length; j++) {
-            if (plotData.getRowId(i) === uniqPlotIdArray[j]) {
-                plotName = plotData.getData(i, 'plot_name');
-                graphPlot(uniqPlotIdArray[j], plotName,j);
-                console.log('Found plot ' + plotName + ' with ' + compareType + ': ' + compareTypeVal);
-                break;
-            }
-        } 
+    for (var i = 0; i < uniqPlotIdArray.length; i++) {
+        graphPlot(uniqPlotIdArray[i]);
     }
 
 }
 
-function graphPlot(plotId, plotName, j) {
+function graphPlot(plotId) {
+    var plotName = null;
+    for (var i = 0; i < plotData.getCount(); i++) {
+        if (plotData.getRowId(i) === plotId) {
+            plotName = plotData.getData(i, 'plot_name');
+        }
+    }
+
     var plotGraphHeader = $('<h2>');
     plotGraphHeader.text(plotName + " Plot");
     $('#graph-div').append(plotGraphHeader);
 
     var plotGraphDiv = $('<div>');
-    var plotNameID = 'plotName' + plotName;
-    var plotNameUUID = '#plotName' + plotName;
-    plotGraphDiv.attr('id', plotNameID);
-    plotGraphDiv.attr('plotName',plotName);
+    plotGraphDiv.attr('id', plotName);
     $('#graph-div').append(plotGraphDiv);
 
-    // Maybe add in more text html elements to plotGraphDiv after this works
-    //$('#NAME').text('Plot Data for ' + plotName);      
-    //var maizeVariety = plotData.getData(i, 'planting');
-    //$('#maize-variety').text('Crop: ' + maizeVariety);
-    bargraphColAgainstDate(plotName, 'plant_height', plotNameUUID, 'Height');
+    bargraphColAgainstDate(plotId, 'plant_height', '#'+plotName, 'Height');
     console.log('After bargraph');
 }
 
-function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
+function bargraphColAgainstDate(plotId, colName, divName, yAxisText) {
     var paramWidth = 500;
     var paramHeight = 500;
 
@@ -115,17 +112,9 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
         width = paramWidth - margin.left - margin.right,
         height = paramHeight - margin.top - margin.bottom;
 
-    var plot_id = null;
-    for (var i = 0; i < plotData.getCount(); i++) {
-        var name = plotData.getData(i, 'plot_name');
-        if (name === plotName) {
-            plot_id = plotData.getRowId(i);
-            break;
-        }
-    }
         
-    if (plot_id === null || plot_id === undefined) {
-        console.log('plot_id is null - cannot continue');
+    if (plotId === null || plotId === undefined) {
+        console.log('plotId is null - cannot continue');
         return;
     }
 
@@ -149,7 +138,7 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
     var data = [];
     for (var i = 0; i < visitData.getCount(); i++) {
         var visit_plot_id = visitData.getData(i, 'plot_id');
-        if (visit_plot_id === plot_id) {
+        if (visit_plot_id === plotId) {
             var visit = {};
             var fullDateString = visitData.getData(i,'date');
             var dateTimeSplit = fullDateString.split('T');
