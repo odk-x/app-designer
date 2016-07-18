@@ -1,3 +1,13 @@
 body {
-  background: linear-gradient(lightcyan, white) no-repeat;
+	background-size: cover;
+	background: linear-gradient(lightcyan, white) no-repeat;
+}
+
+.highlightedPlot {
+	background-color: aquamarine;
+}
+
+.note {
+	color: red;
+	font-style: italic;
 }
