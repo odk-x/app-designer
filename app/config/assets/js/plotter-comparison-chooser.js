@@ -11,6 +11,7 @@ var idxStart = -1;
 var compareTypeValStr = 'compareTypeVal';
 var compareTypeStr = 'compareType';
 var compareTypeFromChooser = util.getQueryParameter('compareType');
+var originPlotId = util.getQueryParameter('plotId');
     
 function cbSuccess(result) {
     visitResultSet = result;
@@ -88,6 +89,10 @@ var resumeFn = function(fidxStart) {
                 var compareTypeQueryParam = '?' + compareTypeStr + '=' + encodeURIComponent(compareTypeFromChooser)
                     // Soil should be changed to compareType passed in via query parameter
                     + '&' + compareTypeValStr + '=' + encodeURIComponent(compareTypeVal);
+
+                if (originPlotId !== null) {
+                    compareTypeQueryParam += '&plotId=' + encodeURIComponent(originPlotId);
+                }
 
                 odkTables.launchHTML('config/assets/plotter-comparison-reports.html' + compareTypeQueryParam);
             }

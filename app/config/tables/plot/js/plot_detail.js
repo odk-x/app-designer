@@ -173,6 +173,15 @@ function display() {
                 jsonMap);
         }
     );
+
+    var comparePlotsButton = $('#compare-plots');
+    comparePlotsButton.on(
+        'click',
+        function() {
+            var plotIdQueryParam = '?plotId=' + encodeURIComponent(plotId);
+            odkTables.launchHTML('config/assets/plotter-compareType-chooser.html' + plotIdQueryParam);
+        }
+    );
 }
 
 function setup() {

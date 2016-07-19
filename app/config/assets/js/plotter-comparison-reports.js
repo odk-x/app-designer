@@ -5,6 +5,8 @@
 /* global odkTables */
 var visitData = {};
 var plotData = {};
+var compareTypeDisplay = '';
+var compareTypeValDisplay = '';
 
 function visitCBSuccess(result) {
 
@@ -50,10 +52,12 @@ function render() {
     }
 
     var compareType = util.getQueryParameter('compareType');
-    var compareTypeDisplay = util.formatDisplayText(compareType);
+    compareTypeDisplay = util.formatDisplayText(compareType);
     var compareTypeVal = util.getQueryParameter('compareTypeVal');
-    var compareTypeValDisplay = util.formatDisplayText(compareTypeVal);
+    compareTypeValDisplay = util.formatDisplayText(compareTypeVal);
 
+    var originPlotId = util.getQueryParameter('plotId');
+ 
     if (compareType === 'plant_type') {
         compareTypeDisplay = 'Maize';
     } else {
@@ -78,13 +82,33 @@ function render() {
     console.log('Plot Id array: ' + plotIdArray.toString());
     console.log('Uniq plot id array: ' + uniqPlotIdArray.toString());
 
+    var fromPlotDetail = false;
+    var belongsToComparison = false;
+    if (originPlotId !== null) {
+        fromPlotDetail = true;
+        var originPlotIndex = _.indexOf(uniqPlotIdArray, originPlotId, false);
+        // Removes the origin plot ID from the unique plot ID array if it is an element
+        if (originPlotIndex !== -1) {
+            uniqPlotIdArray.splice(originPlotIndex, 1);
+            belongsToComparison = true;
+        }
+        // Adds the origin plot ID to the front regardless of whether or not it belonged 
+        // to the array
+        uniqPlotIdArray.splice(0, 0, originPlotId);
+    }
+
     for (var i = 0; i < uniqPlotIdArray.length; i++) {
-        graphPlot(uniqPlotIdArray[i]);
+        var highlight = false
+        if (fromPlotDetail && i === 0) {
+            highlight = true;
+        }
+        graphPlot(uniqPlotIdArray[i], highlight, belongsToComparison);
+        belongsToComparison = true;
     }
 
 }
 
-function graphPlot(plotId) {
+function graphPlot(plotId, highlight, belongsToComparison) {
     var plotName = null;
     for (var i = 0; i < plotData.getCount(); i++) {
         if (plotData.getRowId(i) === plotId) {
@@ -94,7 +118,17 @@ function graphPlot(plotId) {
 
     var plotGraphHeader = $('<h2>');
     plotGraphHeader.text(plotName + " Plot");
+    if (highlight) {
+        plotGraphHeader.addClass('highlightedPlot');
+    }
     $('#graph-div').append(plotGraphHeader);
+
+    if (!belongsToComparison && highlight) {
+        var plotGraphNote = $('<h4>');
+        plotGraphNote.text('Note: This plot does not have ' + compareTypeValDisplay + ' ' + compareTypeDisplay);
+        plotGraphNote.addClass('note');
+        $('#graph-div').append(plotGraphNote);
+    }
 
     var plotGraphDiv = $('<div>');
     plotGraphDiv.attr('id', plotName);
