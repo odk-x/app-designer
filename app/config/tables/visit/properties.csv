@@ -5,7 +5,6 @@ Column,plant_type,displayChoicesList,object,"[{""choice_list_name"":""maize"",""
 Column,soil,displayChoicesList,object,"[{""choice_list_name"":""soil_texture"",""data_value"":""fine_sand"",""display"":{""text"":""Fine Sand""},""_row_num"":6},{""choice_list_name"":""soil_texture"",""data_value"":""sandy_loam"",""display"":{""text"":""Sandy Loam""},""_row_num"":7},{""choice_list_name"":""soil_texture"",""data_value"":""loam"",""display"":{""text"":""Loam""},""_row_num"":8}]"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,visit
-Table,default,colOrder,array,"[""plot_id"",""plant_type"",""crop_yield"",""date"",""plant_height"",""plant_health"",""plant_picture_uriFragment"",""pests"",""soil"",""observations""]"
 Table,default,defaultViewType,string,LIST
 Table,default,displayName,object,"""Plot Visits"""
 Table,default,listViewFileName,configpath,config/tables/visit/html/visit_list.html
