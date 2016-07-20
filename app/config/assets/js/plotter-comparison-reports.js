@@ -134,11 +134,11 @@ function graphPlot(plotId, highlight, belongsToComparison) {
     plotGraphDiv.attr('id', plotName);
     $('#graph-div').append(plotGraphDiv);
 
-    bargraphColAgainstDate(plotId, 'plant_height', '#'+plotName, 'Height');
+    bargraphColAgainstDate(plotId, 'plant_height', '#'+plotName, 'Height', highlight);
     console.log('After bargraph');
 }
 
-function bargraphColAgainstDate(plotId, colName, divName, yAxisText) {
+function bargraphColAgainstDate(plotId, colName, divName, yAxisText, highlight) {
     var paramWidth = 500;
     var paramHeight = 500;
 
@@ -227,7 +227,10 @@ function bargraphColAgainstDate(plotId, colName, divName, yAxisText) {
     svg.selectAll("bar")
         .data(data)
         .enter().append("rect")
-        .style("fill", "YellowGreen")
+        // .style("fill", "YellowGreen")
+        .style("fill", function(d) {
+            return highlight ? "turquoise":"yellowgreen";
+        })
         .attr("x", function(d) { return x(d.date); })
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.value); })
