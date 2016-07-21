@@ -88,7 +88,8 @@
         "type": "decimal",
         "name": "plant_height",
         "display": {
-          "text": "What is the height of the crop in cm?"
+          "text": "What is the height of the crop in cm?",
+          "image": "media/measure.jpg"
         },
         "required": true,
         "_row_num": 15
@@ -1206,7 +1207,8 @@
             "type": "decimal",
             "name": "plant_height",
             "display": {
-              "text": "What is the height of the crop in cm?"
+              "text": "What is the height of the crop in cm?",
+              "image": "media/measure.jpg"
             },
             "required": true,
             "_row_num": 15,
