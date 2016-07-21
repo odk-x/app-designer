@@ -327,17 +327,17 @@
       },
       {
         "type": "acknowledge",
-        "name": "ack_ok",
+        "name": "ack_ok_2",
         "display": {
-          "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
+          "text": "The yield you have entered is an outlier.  Are you certain of this measurement?",
           "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
         },
-        "constraint": "data('ack_ok') || calculates.below_max_yield()",
+        "constraint": "data('ack_ok_2') || calculates.below_max_yield()",
         "_row_num": 59
       },
       {
         "clause": "if // branch_fail",
-        "condition": "! data('ack_ok')",
+        "condition": "! data('ack_ok_2')",
         "_row_num": 60
       },
       {
@@ -568,34 +568,40 @@
         "_row_num": 2
       },
       {
-        "name": "max_height_disp",
-        "type": "number",
+        "name": "ack_ok_2",
+        "type": "boolean",
         "isSessionVariable": true,
         "_row_num": 3
       },
       {
-        "name": "max_yield_disp",
+        "name": "max_height_disp",
         "type": "number",
         "isSessionVariable": true,
         "_row_num": 4
       },
       {
-        "name": "max_height",
+        "name": "max_yield_disp",
         "type": "number",
         "isSessionVariable": true,
         "_row_num": 5
       },
       {
-        "name": "max_yield",
+        "name": "max_height",
         "type": "number",
         "isSessionVariable": true,
         "_row_num": 6
       },
       {
+        "name": "max_yield",
+        "type": "number",
+        "isSessionVariable": true,
+        "_row_num": 7
+      },
+      {
         "name": "plant_type_query_text",
         "type": "string",
         "isSessionVariable": true,
-        "_row_num": 7
+        "_row_num": 8
       }
     ],
     "settings": [
@@ -896,16 +902,27 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 59,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 2,
             "section_name": "model"
           }
         ],
         "isSessionVariable": true,
         "elementKey": "ack_ok"
+      },
+      "ack_ok_2": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "ack_ok_2"
       },
       "max_height_disp": {
         "type": "number",
@@ -915,7 +932,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -930,7 +947,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -951,7 +968,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -972,7 +989,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -989,7 +1006,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -1401,12 +1418,12 @@
           },
           {
             "type": "acknowledge",
-            "name": "ack_ok",
+            "name": "ack_ok_2",
             "display": {
-              "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
+              "text": "The yield you have entered is an outlier.  Are you certain of this measurement?",
               "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
             },
-            "constraint": "data('ack_ok') || calculates.below_max_yield()",
+            "constraint": "data('ack_ok_2') || calculates.below_max_yield()",
             "_row_num": 59,
             "__rowNum__": 58,
             "_token_type": "prompt",
@@ -1672,7 +1689,7 @@
           },
           {
             "clause": "if // branch_fail",
-            "condition": "! data('ack_ok')",
+            "condition": "! data('ack_ok_2')",
             "_row_num": 60,
             "__rowNum__": 59,
             "_token_type": "goto_label",
@@ -1952,10 +1969,6 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 59,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 2,
             "section_name": "model"
           }
@@ -1966,6 +1979,24 @@
         "elementSet": "data",
         "elementPath": "ack_ok"
       },
+      "ack_ok_2": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "ack_ok_2",
+        "elementName": "ack_ok_2",
+        "elementSet": "data",
+        "elementPath": "ack_ok_2"
+      },
       "max_height_disp": {
         "type": "number",
         "_defn": [
@@ -1974,7 +2005,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -1992,7 +2023,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -2016,7 +2047,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -2040,7 +2071,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -2060,7 +2091,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],

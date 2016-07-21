@@ -1,6 +1,6 @@
 body {
 	background-size: cover;
-	background: linear-gradient(lightcyan, white) no-repeat;
+	background: lightcyan !important;
 	text-align: center;
 }
 
